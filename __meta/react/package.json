@@ -4,9 +4,11 @@
   "scripts": {
     "start": "webpack-dev-server --open"
   },
-  "main": "src/index.less",
+  "main": "src/index.js",
   "license": "MIT",
   "devDependencies": {
     "webpack-dev-server": "^2.3.0"
+  },
+  "dependencies": {
   }
 }
