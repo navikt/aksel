@@ -17,6 +17,7 @@ const questions = [
         name: 'name',
         message: 'Navn?',
         validate: (val) => {
+            if (fs.existsSync(`./packages/${val}`.toLowerCase())) return "Pakken finnes allerede.";
             if (val === '-design') return "Må gi ett navn";
             return true;
         },
@@ -50,24 +51,33 @@ function handleAnswers(answers) {
     if (answers.confirmed) {
         return create(answers);
     } else {
-        return inquirer.prompt(questions).then(handleAnswers);
+        return prompt();
     }
 }
 
-inquirer.prompt(questions).then(handleAnswers);
+function prompt() {
+    return inquirer.prompt(questions).then(handleAnswers);
+}
+
 
 function create(answers) {
     const packageDist = `./packages/${answers.name}`;
     const packageDistGlob = `./packages/${answers.name}/**/*.*`;
     const packageSource = `./__meta/${answers.type.toLowerCase()}/**/*.*`;
 
-    copyfiles([packageSource, packageDist], 2, function(){
-        glob(packageDistGlob, (err, files) => {
-            files.forEach((file) => {
-                const template = fs.readFileSync(file, {encoding: 'UTF-8'});
-                const content = mustache.render(template, answers);
-                fs.writeFileSync(file, content, { encoding: 'UTF-8' });
-            })
+    if (fs.existsSync(packageDist)) {
+        return prompt();
+    } else {
+        copyfiles([packageSource, packageDist], 2, function(){
+            glob(packageDistGlob, (err, files) => {
+                files.forEach((file) => {
+                    const template = fs.readFileSync(file, {encoding: 'UTF-8'});
+                    const content = mustache.render(template, answers);
+                    fs.writeFileSync(file, content, { encoding: 'UTF-8' });
+                })
+            });
         });
-    });
+    }
 }
+
+prompt();
