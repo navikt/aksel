@@ -1,0 +1,20 @@
+{
+  "name": "nav-frontend-moduler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "lerna bootstrap --hoist",
+    "test": "lerna run test"
+  },
+  "author": "Name <mail@mail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^1.2.0",
+    "glob": "^7.1.1",
+    "inquirer": "^3.0.1",
+    "lerna": "2.0.0-beta.37",
+    "less": "^2.7.2",
+    "mustache": "^2.3.0"
+  }
+}

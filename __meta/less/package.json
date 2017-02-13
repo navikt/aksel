@@ -1,0 +1,9 @@
+{
+  "name": "{{name}}",
+  "version": "0.0.1",
+  "scripts": {
+  },
+  "license": "MIT",
+  "devDependencies": {
+  }
+}
