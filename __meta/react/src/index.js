@@ -1,5 +1,4 @@
 import React, { PropTypes as PT } from 'react';
-import 'test-design';
 
 function Test(props) {
     return (

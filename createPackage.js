@@ -68,7 +68,7 @@ function create(answers) {
     if (fs.existsSync(packageDist)) {
         return prompt();
     } else {
-        copyfiles([packageSource, packageDist], 2, function(){
+        copyfiles([packageSource, packageDist], { up: 2, all: true }, function(){
             glob(packageDistGlob, (err, files) => {
                 files.forEach((file) => {
                     const template = fs.readFileSync(file, {encoding: 'UTF-8'});
