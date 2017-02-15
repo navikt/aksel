@@ -1,3 +1,5 @@
-node_modules/
+/node_modules
 .idea/
-lerna-debug.log
+npm-debug.log
+dist/
+assets.json

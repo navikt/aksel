@@ -1,0 +1,11 @@
+{
+  "name": "<%name.original%>",
+  "version": "0.0.1",
+  "main": "src/index.less",
+  "license": "MIT",
+  "peerDependencies": {
+    "babel-polyfill": "*",
+    "babel-runtime": "*",
+    "react": "*"
+  }
+}
