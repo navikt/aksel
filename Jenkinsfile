@@ -23,9 +23,9 @@ node {
         sh "npm run build"
     }
 
-//    stage('Publish alpha') {
-//        sh "npm run CI:publish"
-//    }
+    stage('Publish alpha') {
+        sh "npm run CI:publish"
+    }
 }
 
 chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"

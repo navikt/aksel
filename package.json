@@ -6,7 +6,7 @@
   "scripts": {
     "changed": "node ./_scripts/changed.js",
     "lerna": "lerna",
-    "CI:publish": "node ./_scripts/injectGlobalVersions.js && lerna publish --exact --canary --yes",
+    "CI:publish": "node ./_scripts/injectGlobalVersions.js && lerna publish --exact --canary --yes --skip-git --skip-npm",
     "new": "node ./_scripts/scaffold.js",
     "test": "lerna run test",
     "build": "gulp",
