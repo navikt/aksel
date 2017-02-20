@@ -28,9 +28,9 @@ node {
     }
 
     stage('Publish') {
-        sh "npm run CI:publish"
+        sh "npm run CI:publish-alpha"
     }
 }
 
-chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
+chatmsg = "**[${moduleName}](${moduleUrl}) Alpha-bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg

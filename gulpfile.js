@@ -24,6 +24,9 @@ function mapToDest(path) {
     return path.replace(srcEx, libFragment)
 }
 
+function lint() { return; }
+function test() { return; }
+
 function build() {
     return gulp.src(scripts)
         .pipe(plumber({
@@ -43,5 +46,7 @@ function build() {
         .pipe(gulp.dest(dest));
 }
 
+gulp.task('lint', lint);
+gulp.task('test', test);
 gulp.task('build', build);
-gulp.task('default', ['build']);
+gulp.task('default', ['lint', 'test', 'build']);
