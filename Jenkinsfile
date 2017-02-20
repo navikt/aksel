@@ -8,7 +8,7 @@ node {
     }
 
     stage('Install') {
-        sh "npm install"
+        sh "npm run installAfterConfig"
     }
 
 //    stage('Lint') {
