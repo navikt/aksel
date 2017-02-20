@@ -4,3 +4,4 @@ npm-debug.log
 dist/
 assets.json
 lib/
+lerna-debug.log

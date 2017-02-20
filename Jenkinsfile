@@ -7,9 +7,13 @@ node {
         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default', submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://git@stash.devillo.no:7999/navfront/nav-frontend-moduler.git']]])
     }
 
-    stage('Lint') {
-        sh "npm run lint"
+    stage('Install') {
+        sh "npm install"
     }
+
+//    stage('Lint') {
+//        sh "npm run lint"
+//    }
 
     stage('Test') {
         sh "npm test"
