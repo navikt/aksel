@@ -34,7 +34,6 @@ function fixDependencies(_package, section) {
 
             return { key: depName, value: globalDeps[depName] };
         })
-        .map((entry) => { console.log('entry', entry, { [entry.key]: entry.value }); return entry; })
         .reduce((deps, entry) => extend(deps, { [entry.key]: entry.value }), {});
 
 }

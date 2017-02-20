@@ -23,7 +23,11 @@ node {
         sh "npm run build"
     }
 
-    stage('Publish alpha') {
+    stage('Prepare publish') {
+        sh "npm run CI:pre"
+    }
+
+    stage('Publish') {
         sh "npm run CI:publish"
     }
 }
