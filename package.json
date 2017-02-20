@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm config set @kadira:registry http://a34apvl062.devillo.no:8082/repository/npm-all/",
     "changed": "node ./_scripts/changed.js",
     "lerna": "lerna",
     "CI:publish": "node ./_scripts/injectGlobalVersions.js && lerna publish --exact --canary --yes --skip-git --skip-npm",
