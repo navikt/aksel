@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const typeQuestion = {
     type: 'list',
     name: 'type',
@@ -22,16 +24,21 @@ const nameQuestion = (type, filter, validate) => ({
 });
 const reactNameQuestion = nameQuestion(
     'react',
-    (val) => val,
-    (val) => val ? true : 'Must be defined'
+    (val) => {
+        if (val.startsWith('nav-frontend-')) return val;
+        return `nav-frontend-${val}`;
+    },
+    (val) => val !== 'nav-frontend-' ? true : 'Must be defined'
 );
 const lessNameQuestion = nameQuestion(
     'less',
     (val) => {
-        if (val.endsWith('-style')) return val;
-        return `${val}-style`
+        if (val.startsWith('nav-frontend-') && val.endsWith('-style')) return val;
+        if (val.startsWith('nav-frontend-')) return `${val}-style`;
+        if (val.endsWith('-style')) return `nav-frontend-${val}`;
+        return `nav-frontend-${val}-style`
     },
-    (val) => val !== '-style' ? true : 'Must be defined'
+    (val) => val !== 'nav-frontend--style' ? true : 'Must be defined'
 );
 const okQuestion = {
     type: 'confirm',
