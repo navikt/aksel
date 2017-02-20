@@ -48,8 +48,9 @@ function create(config) {
     renderdata.name.cssname = utils.kebabcase(config.name);
     renderdata.name.cssname = renderdata.name.cssname.split('-');
     renderdata.name.cssname.pop();
+    renderdata.name.cssname = renderdata.name.cssname.join('-');
 
-    copyfiles([sourceGlob, dest], { dest: 2, all: true}, () => {
+    copyfiles([sourceGlob, dest], { up: 2, all: true}, () => {
         glob(destGlob, { dot: true }, (err, files) => {
             files
                 .forEach((file) => {
