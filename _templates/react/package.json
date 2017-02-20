@@ -1,8 +1,10 @@
 {
   "name": "<%name.original%>",
   "version": "0.0.1",
-  "main": "src/index.less",
+  "main": "lib/index.js",
+  "jsnext:main": "src/index.js",
   "license": "MIT",
+  "files": ["/src", "/lib"],
   "peerDependencies": {
     "babel-polyfill": "*",
     "babel-runtime": "*",
