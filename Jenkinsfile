@@ -19,7 +19,7 @@ def notifyFailed(reason, error) {
 
 node {
     commonLib.setupTools("Maven 3.3.3", "java8")
-    env.PATH="${tool docker}:${env.PATH}"
+    env.PATH="/usr/bin:${env.PATH}"
 
     stage('Checkout') {
         git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
