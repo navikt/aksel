@@ -58,8 +58,8 @@ node('master') {
             sh "git push origin master"
             sh "git tag -a ${application}-${releaseVersion} -m ${application}-${releaseVersion}"
             sh "git push --tags"
-            sh "sudo docker build -t ${imageName} ."
-            sh "sudo docker push ${imageName}"
+            sh "docker build -t ${imageName} ."
+            sh "docker push ${imageName}"
             sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
         }
     }
