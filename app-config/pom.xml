@@ -3,7 +3,7 @@
     <groupId>no.nav.frontend</groupId>
     <artifactId>moduler</artifactId>
     <packaging>jar</packaging>
-    <version>43.0.0</version>
+    <version>44.0.0</version>
 
     <parent>
         <groupId>no.nav.aura.maven.poms</groupId>
