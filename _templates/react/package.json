@@ -9,5 +9,9 @@
     "babel-polyfill": "*",
     "babel-runtime": "*",
     "react": "*"
+  },
+  "devDependencies": {
+    "@kadira/storybook": "*",
+    "react": "*"
   }
 }

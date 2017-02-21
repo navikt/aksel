@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
-import "./src/index.less";
+import './src/index.less';
 
 storiesOf('<%name.capitalize%>', module)
     .add('Default', () => (

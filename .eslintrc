@@ -9,8 +9,10 @@
     "indent": [2, 4, { "SwitchCase": 1 }],
     "max-len": [2, 120, 4],
     "comma-dangle": [2, "never"],
-    "react/jsx-indent-props": [2, 4],
     "arrow-parens": [2, "always"],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }]
+    "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-indent-props": [2, 4],
+    "react/jsx-indent": [2, 4]
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const glob = require('glob');
 const fs = require('fs');
 const extend = require('extend');

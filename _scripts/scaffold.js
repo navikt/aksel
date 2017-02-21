@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const fs = require('fs');
 const inquirer = require('inquirer');
 const extend = require('extend');
