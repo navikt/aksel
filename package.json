@@ -7,7 +7,7 @@
     "installAfterConfig": "npm config set @kadira:registry http://a34apvl062.devillo.no:8082/repository/npm-all/ && npm install",
     "lerna": "lerna",
     "CI:pre": "node ./_scripts/injectGlobalVersions.js",
-    "CI:publish": "lerna publish --exact --version-strategy patch --yes",
+    "CI:publish": "lerna publish --exact --version-strategy patch --yes --skip-npm",
     "publishAlpha": "npm run CI:pre && lerna publish --exact --canary --yes",
     "create": "node ./_scripts/scaffold.js",
     "new": "node ./_scripts/scaffold.js",
