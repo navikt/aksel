@@ -21,7 +21,9 @@ node {
     commonLib.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
-        checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default', submoduleCfg: [], userRemoteConfigs: [[url: 'ssh://git@stash.devillo.no:7999/navfront/nav-frontend-moduler.git']]])
+        steps {
+            git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
+        }
     }
 
     stage('Install') {
