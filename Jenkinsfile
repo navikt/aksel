@@ -23,7 +23,7 @@ node {
 
     stage('Checkout') {
         git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
-        sh "git pull"
+        sh "git pull origin ${branch}"
     }
 
     stage('Install') {
