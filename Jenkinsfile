@@ -19,6 +19,7 @@ def notifyFailed(reason, error) {
 
 node {
     commonLib.setupTools("Maven 3.3.3", "java8")
+    env.PATH="${tool docker}:${env.PATH}"
 
     stage('Checkout') {
         git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
@@ -56,8 +57,8 @@ node {
             sh "git push origin master"
             sh "git tag -a ${application}-${releaseVersion} -m ${application}-${releaseVersion}"
             sh "git push --tags"
-            sh "${tool docker} build -t ${imageName} ."
-            sh "${tool docker} push ${imageName}"
+            sh "docker build -t ${imageName} ."
+            sh "docker push ${imageName}"
             sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
         }
     }
