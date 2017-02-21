@@ -1,1 +1,3 @@
 _templates/
+dist
+packages/node_modules/*/lib

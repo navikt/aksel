@@ -10,7 +10,6 @@ const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
-const extend = require('extend');
 
 const scripts = './packages/node_modules/*/src/**/*.js';
 const dest = 'packages/node_modules';
@@ -49,8 +48,9 @@ function build() {
         }))
         .pipe(babel())
         .pipe(through.obj((file, enc, callback) => {
-            const nFile = extend({}, file, { _path: file.path, path: mapToDest(file.path) });
-            callback(null, nFile);
+            file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
+            file.path = mapToDest(file.path); // eslint-disable-line no-param-reassign
+            callback(null, file);
         }))
         .pipe(gulp.dest(dest));
 }
