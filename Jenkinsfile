@@ -46,8 +46,12 @@ node('master') {
         sh "npm run CI:pre"
     }
 
-    stage('Publish') {
+    stage('Publish modules') {
         sh "npm run CI:publish"
+    }
+
+    stage('Build storybook') {
+        sh "npm run buildstorybook"
     }
 
     stage('Dockerify') {
