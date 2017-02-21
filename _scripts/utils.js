@@ -1,4 +1,7 @@
-"use strict";
+/* eslint-disable strict */
+
+'use strict';
+
 function capitalize(str) {
     return str && str[0].toUpperCase() + str.slice(1);
 }
@@ -13,21 +16,21 @@ function kebabcase(str) {
 }
 function entries(obj) {
     return Object.keys(obj)
-        .map((key) => ({ key: key, value: obj[key] }));
+        .map((key) => ({ key, value: obj[key] }));
 }
 function allCompleted(promises) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, _reject) => {
         let unresolvedPromises = promises.length;
         const result = new Array(promises.length);
         promises
             .forEach((promise, index) => promise
                 .then((res) => {
                     result[index] = res;
-                    unresolvedPromises--;
+                    unresolvedPromises -= 1;
                 })
                 .catch((res) => {
                     result[index] = res;
-                    unresolvedPromises--;
+                    unresolvedPromises -= 1;
                 })
                 .then(() => {
                     if (unresolvedPromises === 0) {

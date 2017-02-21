@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const fs = require('fs');
 const inquirer = require('inquirer');
 const extend = require('extend');
@@ -10,28 +11,8 @@ const rawQuestions = require('./questions.js');
 mustache.tags = ['<%', '%>'];
 
 function prompt(questions) {
+    // eslint-disable-next-line no-use-before-define
     return inquirer.prompt(questions).then(handleAnswers);
-}
-
-function handleAnswers(answers) {
-    if (!answers.ok) {
-        const defaultValues = utils.entries(answers)
-            .filter((entry) => entry.key !== 'ok')
-            .reduce((obj, entry) => extend(obj, { [entry.key]: entry.value }), {});
-
-        const newQuestions = rawQuestions
-            .map((question) => {
-                const name = question.name;
-                if (defaultValues[name]) {
-                    return extend({}, question, { "default": defaultValues[name] });
-                }
-                return question;
-            });
-
-        return prompt(newQuestions);
-    }
-
-    return create(answers);
 }
 
 function create(config) {
@@ -50,15 +31,36 @@ function create(config) {
     renderdata.name.cssname.pop();
     renderdata.name.cssname = renderdata.name.cssname.join('-');
 
-    copyfiles([sourceGlob, dest], { up: 2, all: true}, () => {
+    copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
         glob(destGlob, { dot: true }, (err, files) => {
             files
                 .forEach((file) => {
                     const content = fs.readFileSync(file, 'utf-8');
                     fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
                 });
-        })
-    })
+        });
+    });
+}
+
+function handleAnswers(answers) {
+    if (!answers.ok) {
+        const defaultValues = utils.entries(answers)
+            .filter((entry) => entry.key !== 'ok')
+            .reduce((obj, entry) => extend(obj, { [entry.key]: entry.value }), {});
+
+        const newQuestions = rawQuestions
+            .map((question) => {
+                const name = question.name;
+                if (defaultValues[name]) {
+                    return extend({}, question, { default: defaultValues[name] });
+                }
+                return question;
+            });
+
+        return prompt(newQuestions);
+    }
+
+    return create(answers);
 }
 
 prompt(rawQuestions);

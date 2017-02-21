@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const glob = require('glob');
 const fs = require('fs');
 const extend = require('extend');
@@ -19,12 +20,13 @@ function getModules() {
     });
 }
 
-function fixDependencies(_package, section) {
-    if (!_package[section]) {
+function fixDependencies(pkg, section) {
+    if (!pkg[section]) {
         return;
     }
 
-    _package[section] = utils.entries(_package[section])
+    // eslint-disable-next-line no-param-reassign
+    pkg[section] = utils.entries(pkg[section])
         .map((entry) => {
             const depName = entry.key;
 
@@ -35,31 +37,31 @@ function fixDependencies(_package, section) {
             return { key: depName, value: globalDeps[depName] };
         })
         .reduce((deps, entry) => extend(deps, { [entry.key]: entry.value }), {});
-
 }
-function injectGlobalDependencies(modules) {
-    return modules.map((module) => {
-        const _package = JSON.parse(fs.readFileSync(module, 'utf-8'));
 
-        fixDependencies(_package, 'dependencies');
-        fixDependencies(_package, 'devDependencies');
-        fixDependencies(_package, 'peerDependencies');
+function injectGlobalDependencies(files) {
+    return files.map((file) => {
+        const pkg = JSON.parse(fs.readFileSync(file, 'utf-8'));
+
+        fixDependencies(pkg, 'dependencies');
+        fixDependencies(pkg, 'devDependencies');
+        fixDependencies(pkg, 'peerDependencies');
 
         return {
-            _location: module,
-            _package: _package
+            location: file,
+            pkg
         };
-    })
+    });
 }
 
 function saveToDisk(modules) {
     modules.forEach((module) => {
-        const _location = module._location;
-        const _package = module._package;
+        const location = module.location;
+        const pkg = module.pkg;
 
-        const content = JSON.stringify(_package, null, 2);
+        const content = JSON.stringify(pkg, null, 2);
 
-        fs.writeFileSync(_location, content, 'utf-8');
+        fs.writeFileSync(location, content, 'utf-8');
     });
 }
 
@@ -67,5 +69,5 @@ getModules()
     .then(injectGlobalDependencies)
     .then(saveToDisk)
     .catch((error) => {
-        console.log('error', error);
+        console.log('error', error); // eslint-disable-line no-console
     });
