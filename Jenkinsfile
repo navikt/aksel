@@ -21,9 +21,7 @@ node {
     commonLib.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
-        steps {
-            git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
-        }
+        git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
     }
 
     stage('Install') {
