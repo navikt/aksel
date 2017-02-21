@@ -17,7 +17,7 @@ def notifyFailed(reason, error) {
     throw error
 }
 
-node {
+node('master') {
     commonLib.setupTools("Maven 3.3.3", "java8")
     env.PATH="/usr/bin:${env.PATH}"
 
