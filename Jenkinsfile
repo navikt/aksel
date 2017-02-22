@@ -60,6 +60,7 @@ node('master') {
         script {
             GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
             sh "git tag -a ${application}-${releaseVersion} -m ${application}-${releaseVersion}"
+            sh "git push origin master"
             sh "git push --tags"
 //            sh "docker build -t ${imageName} ."
 //            sh "docker push ${imageName}"
@@ -68,22 +69,22 @@ node('master') {
     }
 }
 
-stage("Deploy app") {
-    callback = "${env.BUILD_URL}input/Deploy/"
-    node {
-        def author = sh(returnStdout: true, script: 'git --no-pager show -s --format="%an <%ae>" HEAD').trim()
-        def deploy = commonLib.deployApp(application, releaseVersion, miljo, callback, author).key
-
-        try {
-            timeout(time: 15, unit: 'MINUTES') {
-                input id: 'deploy', message: "deployer ${deploy}, deploy OK?"
-            }
-        } catch(Exception e) {
-            msg = "Deploy feilet [" + deploy + "](https://jira.adeo.no/browse/" + deploy + ")"
-            notifyFailed(msg, e)
-        }
-    }
-}
+//stage("Deploy app") {
+//    callback = "${env.BUILD_URL}input/Deploy/"
+//    node {
+//        def author = sh(returnStdout: true, script: 'git --no-pager show -s --format="%an <%ae>" HEAD').trim()
+//        def deploy = commonLib.deployApp(application, releaseVersion, miljo, callback, author).key
+//
+//        try {
+//            timeout(time: 15, unit: 'MINUTES') {
+//                input id: 'deploy', message: "deployer ${deploy}, deploy OK?"
+//            }
+//        } catch(Exception e) {
+//            msg = "Deploy feilet [" + deploy + "](https://jira.adeo.no/browse/" + deploy + ")"
+//            notifyFailed(msg, e)
+//        }
+//    }
+//}
 
 chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
