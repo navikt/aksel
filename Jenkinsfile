@@ -44,6 +44,8 @@ node('master') {
 
     stage('Prepare publish') {
         sh "npm run CI:pre"
+        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+        sh "git add app-config/pom.xml"
     }
 
     stage('Publish modules') {
@@ -57,14 +59,11 @@ node('master') {
     stage('Dockerify') {
         script {
             GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
-            sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
-            sh "git commit -am \"set version to ${releaseVersion} (from Jenkins pipeline)\""
-            sh "git push origin master"
             sh "git tag -a ${application}-${releaseVersion} -m ${application}-${releaseVersion}"
             sh "git push --tags"
             sh "docker build -t ${imageName} ."
-            sh "docker push ${imageName}"
-            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
+//            sh "docker push ${imageName}"
+//            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
         }
     }
 }
