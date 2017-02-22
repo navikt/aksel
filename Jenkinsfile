@@ -61,7 +61,7 @@ node('master') {
             GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
             sh "git tag -a ${application}-${releaseVersion} -m ${application}-${releaseVersion}"
             sh "git push --tags"
-            sh "docker build -t ${imageName} ."
+//            sh "docker build -t ${imageName} ."
 //            sh "docker push ${imageName}"
 //            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
         }
