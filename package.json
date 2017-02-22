@@ -10,7 +10,7 @@
     "CI:publish": "lerna publish --exact --version-strategy patch --yes --skip-npm",
     "publishAlpha": "npm run CI:pre && lerna publish --exact --canary --yes",
     "create": "node ./_scripts/scaffold.js",
-    "new": "node ./_scripts/scaffold.js",
+    "new": "npm run create",
     "lint": "esw --color",
     "test": "gulp test",
     "build": "gulp build",
