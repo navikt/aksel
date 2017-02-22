@@ -48,7 +48,6 @@ function build() {
         }))
         .pipe(babel())
         .pipe(through.obj((file, enc, callback) => {
-            console.log('file.path', file.path, mapToDest(file.path));
             file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
             file.path = mapToDest(file.path); // eslint-disable-line no-param-reassign
 
