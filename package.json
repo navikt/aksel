@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "installAfterConfig": "npm config set @kadira:registry http://a34apvl062.devillo.no:8082/repository/npm-all/ && npm install",
+    "postinstall": "npm run build",
     "lerna": "lerna",
     "CI:pre": "node ./_scripts/injectGlobalVersions.js",
     "CI:publish": "lerna publish --exact --version-strategy patch --yes --skip-npm",
     "publishAlpha": "npm run CI:pre && lerna publish --exact --canary --yes",
     "create": "node ./_scripts/scaffold.js",
     "new": "npm run create",
-    "lint": "esw --color",
+    "js:lint": "esw --color",
+    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/",
     "test": "gulp test",
     "build": "gulp build",
     "buildstorybook": "build-storybook -o dist",
@@ -52,6 +54,8 @@
     "lerna-waiting-on-pull-607": "2.0.0-beta.38-waiting",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
+    "lesshint": "^3.1.0",
+    "lesshint-reporter-stylish": "^2.0.0",
     "mustache": "^2.3.0",
     "nav-frontend-core": "2.0.3",
     "raw-loader": "^0.5.1",
@@ -59,6 +63,7 @@
     "react-dom": "^15.4.2",
     "semver": "^5.3.0",
     "style-loader": "^0.13.1",
+    "text-table": "^0.2.0",
     "through2": "^2.0.3"
   }
 }

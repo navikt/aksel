@@ -1,0 +1,5 @@
+{
+  "fileExtensions": [".less", ".css"],
+  "zeroUnit": false,
+  "propertyOrdering": false
+}
