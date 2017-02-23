@@ -5,20 +5,20 @@ module.exports = {
         loaders: [
             {
                 test: /\.less$/,
-                loaders: ["style", "css", "less"],
+                loaders: ['style', 'css', 'less?{"globalVars":{"nodeModulesPath":"\'./../..\'", "coreModulePath":"\'./../../../../node_modules\'"}}'],
                 include: path.resolve(__dirname, '../')
             },
             {
                 test: /\.md$/,
-                loaders: "raw"
+                loaders: 'raw'
             },
             {
                 test: /\.json$/,
-                loaders: "json"
+                loaders: 'json'
             },
             {
                 test: /\.css$/,
-                loaders: "style!css"
+                loaders: 'style!css'
             }
         ]
     }
