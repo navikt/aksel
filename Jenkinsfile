@@ -65,7 +65,7 @@ node('master') {
             sh "git push --tags"
 //            sh "docker build -t ${imageName} ."
 //            sh "docker push ${imageName}"
-//            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
+            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
         }
     }
 }
