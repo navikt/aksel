@@ -5,7 +5,7 @@ moduleName = 'nav-frontend-moduler'
 moduleUrl = 'https://nav.no'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
-releaseVersion = "${currentBuild.number}.0.0"
+releaseVersion = "Unknown"
 miljo = "16557"
 
 def notifyFailed(reason, error) {
@@ -24,6 +24,9 @@ node('master') {
     stage('Checkout') {
         git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
         sh "git pull origin ${branch}"
+
+        pom = readMavenPom file: 'app-config/pom.xml'
+        releaseVersion = "${pom.version}.${currentBuild.number}"
     }
 
     stage('Install') {
@@ -47,7 +50,6 @@ node('master') {
         sh "npm run CI:npm:prepublish"
         sh "npm run CI:npm:publish"
         sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
-        sh "git add app-config/pom.xml"
     }
 
     stage('Build storybook') {
