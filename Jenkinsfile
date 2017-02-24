@@ -40,17 +40,14 @@ node('master') {
 
     stage('Build') {
         sh "npm run build"
-    }
 
-    stage('Prepare publish') {
-        sh "npm run CI:pre"
-        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
-        sh "git add app-config/pom.xml"
-    }
 
     stage('Publish modules') {
-        sh "npm run CI:publish"
-        sh "npm run CI:npmpublish"
+        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+        sh "git add app-config/pom.xml"
+        sh "npm run CI:lerna:publish"
+        sh "npm run CI:npm:prepublish"
+        sh "npm run CI:npm:publish"
     }
 
     stage('Build storybook') {
