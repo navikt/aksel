@@ -1,5 +1,5 @@
 {
-  "lerna": "2.0.0-beta.38-waiting.3",
+  "lerna": "2.0.0-beta.38-waiting.4",
   "packages": [
     "packages/node_modules/*"
   ],
