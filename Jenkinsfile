@@ -60,7 +60,7 @@ node('master') {
     stage('Dockerify') {
         script {
             GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
-            sh "git tag -a ${application}@${releaseVersion} -m ${application}@${releaseVersion}"
+//            sh "git tag -a ${application}@${releaseVersion} -m ${application}@${releaseVersion}"
             sh "git push origin master"
             sh "git push --tags"
 //            sh "docker build -t ${imageName} ."
