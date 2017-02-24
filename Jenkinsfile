@@ -40,7 +40,7 @@ node('master') {
 
     stage('Build') {
         sh "npm run build"
-
+    }
 
     stage('Publish modules') {
         sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
