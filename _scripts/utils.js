@@ -40,10 +40,20 @@ function allCompleted(promises) {
             );
     });
 }
+function parsetag(tagstring) {
+    const regex = /^(.+)[-@]((?:\d+\.?){3})$/;
+    const match = regex.exec(tagstring);
+    if (!match) {
+        throw new Error(`Tag did not conform to expected format: ${tagstring}`);
+    }
+
+    return { name: match[1], version: match[2] };
+}
 module.exports = {
     capitalize,
     camelcase,
     kebabcase,
     entries,
-    allCompleted
+    allCompleted,
+    parsetag
 };
