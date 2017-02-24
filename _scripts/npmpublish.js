@@ -83,10 +83,12 @@ function npmPublish(tags) {
     tags.forEach((tag) => {
         // Publish packageso
         const dir = `./packages/node_modules/${tag.name}`;
-        NpmUtilities.execInDir('publish', [`--registry=${npmPublishUrl}`], dir, (err) => {
+        console.log(`Exec: 'npm publish --registry=${npmPublishUrl}' in dir: ${dir}`);
+        NpmUtilities.execInDir('publish', [`--registry=${npmPublishUrl}`], dir, (err, result) => {
             if (err) {
                 throw new Error(err);
             } else {
+                console.log('result', result);
                 progressbar.tick(1);
             }
         });
