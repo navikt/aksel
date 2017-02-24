@@ -43,11 +43,11 @@ node('master') {
     }
 
     stage('Publish modules') {
-        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
-        sh "git add app-config/pom.xml"
         sh "npm run CI:lerna:publish"
         sh "npm run CI:npm:prepublish"
         sh "npm run CI:npm:publish"
+        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+        sh "git add app-config/pom.xml"
     }
 
     stage('Build storybook') {
