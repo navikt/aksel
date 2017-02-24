@@ -45,11 +45,22 @@ node('master') {
         sh "npm run build"
     }
 
+    hasPublished = true
     stage('Publish modules') {
-        sh "npm run CI:lerna:publish"
-        sh "npm run CI:npm:prepublish"
-        sh "npm run CI:npm:publish"
-        sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+        try {
+            sh "npm run CI:lerna:publish"
+            sh "npm run CI:npm:prepublish"
+            sh "npm run CI:npm:publish"
+            sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+        } catch (ignored) {
+            hasPublished = false
+        }
+    }
+
+    if (!hasPublished) {
+        echo "No need to continue as no modules were published..."
+        currentBuild.result = "SUCCESS"
+        return
     }
 
     stage('Build storybook') {
