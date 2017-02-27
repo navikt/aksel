@@ -6,7 +6,7 @@ moduleUrl = 'https://nav.no'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
 releaseVersion = "Unknown"
-miljo = "16557"
+isMasterBuild = (env.BRANCH_NAME == 'master');
 
 def notifyFailed(reason, error) {
     changelog = commonLib.getChangeString()
@@ -16,17 +16,27 @@ def notifyFailed(reason, error) {
     step([$class: 'StashNotifier'])
     throw error
 }
+def returnOk(message) {
+    echo "${message}"
+    currentBuild.result = "SUCCESS"
+    step([$class: 'StashNotifier'])
+}
 
 node('master') {
     commonLib.setupTools("Maven 3.3.3", "java8")
-    env.PATH="/usr/bin:${env.PATH}"
 
     stage('Checkout') {
-        git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
-        sh "git pull origin ${branch}"
+        checkout scm
+        step([$class: 'StashNotifier'])
 
         pom = readMavenPom file: 'app-config/pom.xml'
         releaseVersion = "${pom.version}.${currentBuild.number}"
+    }
+
+    if (!isMasterBuild) {
+        stage('Merge master') {
+            sh "git merge origin/master"
+        }
     }
 
     stage('Install') {
@@ -45,6 +55,11 @@ node('master') {
         sh "npm run build"
     }
 
+    if (!isMasterBuild) {
+        returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
+        return
+    }
+
     hasPublished = true
     stage('Publish modules') {
         try {
@@ -58,8 +73,7 @@ node('master') {
     }
 
     if (!hasPublished) {
-        echo "No need to continue as no modules were published..."
-        currentBuild.result = "SUCCESS"
+        returnOk("No need to continue as no modules were published...")
         return
     }
 
@@ -99,3 +113,8 @@ node('master') {
 
 chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
+
+node {
+    currentBuild.result = 'SUCCESS'
+    step([$class: 'StashNotifier'])
+}

@@ -1,0 +1,36 @@
+{
+  "name": "nav-frontend-example-legacy",
+  "version": "0.0.1",
+  "description": "Legacy setup for frontendprosjekter",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf out",
+    "build:less": "lessc src/index.less out/index.css",
+    "build:js": "browserify src/index.js -o out/index.js -p [ browserify-file-filter -p \"\\.(?:css|less|scss|sass)$\" ]",
+    "build:html": "copyfiles index.html out",
+    "build": "npm run clean && npm run build:less && npm run build:js && npm run build:html"
+  },
+  "author": "Name <mail@mail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "browserify": "^14.1.0",
+    "browserify-file-filter": "^1.0.0",
+    "copyfiles": "^1.2.0",
+    "less": "^2.7.2",
+    "rimraf": "^2.6.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "babel-runtime": "^6.23.0",
+    "classnames": "^2.2.5",
+    "nav-frontend-core": "^2.0.4",
+    "nav-frontend-etiketter": "0.0.2",
+    "nav-frontend-etiketter-style": "0.0.2",
+    "nav-frontend-paneler": "0.0.2",
+    "nav-frontend-paneler-style": "0.0.2",
+    "nav-frontend-typografi": "0.0.2",
+    "nav-frontend-typografi-style": "0.0.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  }
+}

@@ -5,4 +5,5 @@ dist/
 assets.json
 lib/
 lerna-debug.log
-nav-frontend-moduler.iml
+examples/legacy/node_modules
+examples/legacy/out
