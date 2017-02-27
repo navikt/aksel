@@ -37,7 +37,7 @@
     "classnames": "^2.2.5",
     "copyfiles": "^1.2.0",
     "css-loader": "^0.26.1",
-    "eslint": "^3.16.0",
+    "eslint": "^3.16.1",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",

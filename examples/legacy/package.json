@@ -16,7 +16,7 @@
     "browserify": "^14.1.0",
     "browserify-file-filter": "^1.0.0",
     "copyfiles": "^1.2.0",
-    "node-less": "^2.5.1",
+    "less": "^2.7.2",
     "rimraf": "^2.6.1"
   },
   "dependencies": {
