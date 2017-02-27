@@ -10,15 +10,15 @@ module.exports = {
             },
             {
                 test: /\.md$/,
-                loaders: 'raw'
+                loaders: ['raw']
             },
             {
                 test: /\.json$/,
-                loaders: 'json'
+                loaders: ['json']
             },
             {
                 test: /\.css$/,
-                loaders: 'style!css'
+                loaders: ['style', 'css']
             }
         ]
     }
