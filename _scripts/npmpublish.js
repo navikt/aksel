@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs');
 const utils = require('./utils');
 const GitUtilities = require('lerna-waiting-on-pull-607/lib/GitUtilities');
