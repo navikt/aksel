@@ -5,7 +5,7 @@
   "parser": "babel-eslint",
   "extends": "airbnb",
   "rules": {
-    "no-unused-vars": [2, { "argsIgnorePattern": "^_" }],
+    "no-unused-vars": [2, { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
     "indent": [2, 4, { "SwitchCase": 1 }],
     "max-len": [2, 120, 4],
     "comma-dangle": [2, "never"],

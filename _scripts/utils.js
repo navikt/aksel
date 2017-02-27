@@ -41,8 +41,6 @@ function allCompleted(promises) {
     });
 }
 function parsetag(tagstring) {
-    console.log('parsetag', tagstring);
-
     const regex = /^(.+)[-@]((?:\d+\.?){3})$/;
     const match = regex.exec(tagstring);
     if (!match) {

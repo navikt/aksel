@@ -1,5 +1,5 @@
 {
-  "name": "<%name.original%>",
+  "name": "nav-frontend-grid-style",
   "version": "0.0.1",
   "main": "src/index.less",
   "license": "MIT",
