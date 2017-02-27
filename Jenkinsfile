@@ -6,7 +6,7 @@ moduleUrl = 'https://nav.no'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
 releaseVersion = "Unknown"
-miljo = "16557"
+isMasterBuild = (env.BRANCH_NAME == 'master');
 
 def notifyFailed(reason, error) {
     changelog = commonLib.getChangeString()
@@ -19,14 +19,19 @@ def notifyFailed(reason, error) {
 
 node('master') {
     commonLib.setupTools("Maven 3.3.3", "java8")
-    env.PATH="/usr/bin:${env.PATH}"
 
     stage('Checkout') {
-        git url: "ssh://git@stash.devillo.no:7999/navfront/${application}.git"
-        sh "git pull origin ${branch}"
+        checkout scm
+        step([$class: 'StashNotifier'])
 
         pom = readMavenPom file: 'app-config/pom.xml'
         releaseVersion = "${pom.version}.${currentBuild.number}"
+    }
+
+    if (!isMasterBuild) {
+        stage('Merge master') {
+            sh "git merge origin/master"
+        }
     }
 
     stage('Install') {
@@ -43,6 +48,12 @@ node('master') {
 
     stage('Build') {
         sh "npm run build"
+    }
+
+    if (!isMasterBuild) {
+        echo "This is enough for now. I'm not releasing anything before it is on the master-branch...."
+        currentBuild.result = "SUCCESS"
+        return
     }
 
     hasPublished = true
