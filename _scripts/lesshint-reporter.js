@@ -1,3 +1,5 @@
+/* eslint-disable strict, no-param-reassign, object-shorthand, no-console */
+
 'use strict';
 
 const chalk = require('chalk');
@@ -29,17 +31,14 @@ function report(results) {
         const NOF_WARNINGS = group.results.filter((result) => result.severity === 'warning').length;
 
         console.log(`${filepath} (${chalk.red(NOF_ERRORS)}/${chalk.yellow(NOF_WARNINGS)})`);
-        const tableRows = group.results.map((result) => {
-            return [
-                result.severity === 'error' ? chalk.red(' X') : chalk.yellow(' O'),
-                chalk.gray(`${result.line}:${result.column}`),
-                result.message,
-                chalk.gray(result.linter)
-            ];
-        });
+        const tableRows = group.results.map((result) => [
+            result.severity === 'error' ? chalk.red(' X') : chalk.yellow(' O'),
+            chalk.gray(`${result.line}:${result.column}`),
+            result.message,
+            chalk.gray(result.linter)
+        ]);
         console.log(table(tableRows, tableConfig));
         console.log('');
-
     });
 }
 

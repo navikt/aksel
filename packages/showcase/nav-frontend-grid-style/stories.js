@@ -1,5 +1,5 @@
 import React from 'react';
-import {storiesOf} from '@kadira/storybook';
+import { storiesOf } from '@kadira/storybook';
 import './src/index.less';
 
 storiesOf('Grid', module)
@@ -11,7 +11,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-12</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-6">
                     <div className="col-inner">.col-xs-6</div>
@@ -20,7 +20,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-6</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-4">
                     <div className="col-inner">.col-xs-4</div>
@@ -32,7 +32,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-4</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-3">
                     <div className="col-inner">.col-xs-3</div>
@@ -47,7 +47,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-3</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-2">
                     <div className="col-inner">.col-xs-2</div>
@@ -68,7 +68,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-2</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-4">
                     <div className="col-inner">.col-xs-4</div>
@@ -77,7 +77,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-8</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-2">
                     <div className="col-inner">.col-xs-2</div>
@@ -99,7 +99,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-12</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-xs-12 col-md-6">
                     <div className="col-inner">.col-xs-12 .col-md-6</div>
@@ -108,7 +108,7 @@ storiesOf('Grid', module)
                     <div className="col-inner">.col-xs-12 .col-md-6</div>
                 </div>
             </div>
-            <br/>
+            <br />
             <div className="row">
                 <div className="col col-sm-6 col-lg-3">
                     <div className="col-inner">.col-sm-6 .col-lg-3</div>
@@ -125,4 +125,3 @@ storiesOf('Grid', module)
             </div>
         </div>
     ));
-;
