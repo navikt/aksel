@@ -16,6 +16,11 @@ def notifyFailed(reason, error) {
     step([$class: 'StashNotifier'])
     throw error
 }
+def returnOk(message) {
+    echo "${message}"
+    currentBuild.result = "SUCCESS"
+    step([$class: 'StashNotifier'])
+}
 
 node('master') {
     commonLib.setupTools("Maven 3.3.3", "java8")
@@ -51,8 +56,7 @@ node('master') {
     }
 
     if (!isMasterBuild) {
-        echo "This is enough for now. I'm not releasing anything before it is on the master-branch...."
-        currentBuild.result = "SUCCESS"
+        returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
         return
     }
 
@@ -69,8 +73,7 @@ node('master') {
     }
 
     if (!hasPublished) {
-        echo "No need to continue as no modules were published..."
-        currentBuild.result = "SUCCESS"
+        returnOk("No need to continue as no modules were published...")
         return
     }
 
@@ -110,3 +113,8 @@ node('master') {
 
 chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
+
+node {
+    currentBuild.result = 'SUCCESS'
+    step([$class: 'StashNotifier'])
+}
