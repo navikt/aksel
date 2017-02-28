@@ -5,7 +5,7 @@ import titleHoc from 'react-storybook-addon-sections/dist/components/title-hoc';
 import Inline from 'react-storybook-addon-sections/dist/components/groupings/inline';
 
 const renderers = {
-    Heading: ({ level, nodeKey, literal, ...props }) => {
+    Heading: ({ level, nodeKey, literal: _literal, ...props }) => {
         if (level === 1) {
             return null;
         }
