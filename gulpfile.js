@@ -10,7 +10,7 @@ const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
-const cssfont64 = require('gulp-cssfont64');
+const cssfont64 = require('gulp-cssfont64-formatter');
 
 const scripts = './packages/node_modules/*/src/**/*.js';
 const fonts = './packages/node_modules/*/assets/**/*.woff';
@@ -67,6 +67,14 @@ function build() {
         .pipe(gulp.dest(dest));
 }
 
+function cssFontfile(filename, mimetype, file64, format) {
+    const fontFamiliy = 'Source Sans Pro'; // all fonts at this point is Source sans pro
+    const fontWeight = filename.replace(/\D/g, '') || '400'; // 400 is called regular
+    const fontStyle = filename.indexOf('italic') >= 0 ? 'italic' : 'normal';
+
+    return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
+}
+
 function buildCssfonts() {
     return gulp.src(fonts)
         .pipe(plumber({
@@ -75,8 +83,9 @@ function buildCssfonts() {
         .pipe(newer({ map: mapFontsToDest }))
         .pipe(through.obj((file, enc, callback) => {
             gutil.log('Compiling font', `'${chalk.cyan(file.path)}'...`);
+            callback(null, file);
         }))
-        .pipe(cssfont64())
+        .pipe(cssfont64(cssFontfile))
         .pipe(through.obj((file, enc, callback) => {
             file._path = file.path;
             file.path = mapFontsToDest(file.path);
@@ -90,3 +99,4 @@ gulp.task('lint', lint);
 gulp.task('test', test);
 gulp.task('build', build);
 gulp.task('default', ['lint', 'test', 'build']);
+gulp.task('buildfonts', buildCssfonts);
