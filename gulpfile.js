@@ -72,6 +72,7 @@ function cssFontfile(filename, mimetype, file64, format) {
     const fontWeight = filename.replace(/\D/g, '') || '400'; // 400 is called regular
     const fontStyle = filename.indexOf('italic') >= 0 ? 'italic' : 'normal';
 
+    // eslint-disable-next-line max-len
     return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
 }
 
@@ -87,12 +88,12 @@ function buildCssfonts() {
         }))
         .pipe(cssfont64(cssFontfile))
         .pipe(through.obj((file, enc, callback) => {
-            file._path = file.path;
-            file.path = mapFontsToDest(file.path);
+            file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
+            file.path = mapFontsToDest(file.path); // eslint-disable-line no-param-reassign
 
             callback(null, file);
         }))
-        .pipe(gulp.dest(dest))
+        .pipe(gulp.dest(dest));
 }
 
 gulp.task('lint', lint);

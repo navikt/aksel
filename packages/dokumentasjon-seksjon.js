@@ -1,6 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import Collapsable from 'react-storybook-addon-sections/dist/components/groupings/collapsable';
 import titleHoc from 'react-storybook-addon-sections/dist/components/title-hoc';
 import Inline from 'react-storybook-addon-sections/dist/components/groupings/inline';
 
