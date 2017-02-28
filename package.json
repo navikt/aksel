@@ -15,7 +15,7 @@
     "new": "npm run create",
     "lint": "npm run js:lint && npm run less:lint",
     "js:lint": "esw --color",
-    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/",
+    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/ -e *.css",
     "test": "gulp test",
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
