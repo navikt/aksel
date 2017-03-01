@@ -19,7 +19,7 @@ const renderers = {
     }
 };
 function ReadmeViewComponent(src) {
-    return () => (<ReactMarkdown className="readme-section" renderers={renderers} source={src}/>);
+    return () => (<ReactMarkdown className="readme-section" renderers={renderers} source={src} />);
 }
 const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
 
@@ -29,7 +29,7 @@ function InnstallasjonComponent(pkg) {
 const Innstallasjon = (pkg) => titleHoc('Innstallasjon', InnstallasjonComponent(pkg));
 
 function HrComponent() {
-    return <div style={{ borderBottom: '1px solid rgb(238, 238, 238)' }}/>
+    return <div style={{ borderBottom: '1px solid rgb(238, 238, 238)' }} />;
 }
 
 function componentName(component) {
@@ -47,19 +47,19 @@ function ProptypesComponent(element) {
         </tr>
     );
 
-    const docgen = element.__docgenInfo;
+    const docgen = element.__docgenInfo; // eslint-disable-line no-underscore-dangle
     const description = docgen.description;
     const content = Object.keys(docgen.props)
         .sort()
-        .map((propName) => ({ propName, ... docgen.props[propName] }))
+        .map((propName) => ({ propName, ...docgen.props[propName] }))
         .map((prop) => (
             <tr key={prop.propName}>
                 <td>{prop.propName}</td>
                 <td>{prop.type.name}</td>
-                <td>{'' + prop.required}</td>
+                <td>{prop.required.toString()}</td>
                 <td>{prop.defaultValue.value}</td>
                 <td>
-                    <ReactMarkdown renderers={renderers} source={prop.description || '-'}/>
+                    <ReactMarkdown renderers={renderers} source={prop.description || '-'} />
                 </td>
             </tr>
         ));
@@ -67,13 +67,13 @@ function ProptypesComponent(element) {
     return () => (
         <div className="proptypes-section">
             <h3>Proptypes: {componentName(element)}</h3>
-            <p><ReactMarkdown renderers={renderers} source={description}/></p>
+            <p><ReactMarkdown renderers={renderers} source={description} /></p>
             <table>
                 <thead>
-                {header}
+                    {header}
                 </thead>
                 <tbody>
-                {content}
+                    {content}
                 </tbody>
             </table>
         </div>
@@ -89,3 +89,5 @@ export const JSDokumentasjon = (pkg, readme, element) => Group(
         ).withTitle('Dokumentasjon')),
     Tabbable(Group(ReactView, Proptypes(element)).withTitle('React'), HtmlView, CssView)
 );
+
+export const LESSDokumentasjon = () => Group(HtmlView);
