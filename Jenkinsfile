@@ -56,7 +56,9 @@ node('master') {
     }
 
     if (!isMasterBuild) {
-        sh "npm run CI:publishAlpha"
+        sh "npm run CI:lerna:publishAlpha"
+        sh "npm run CI:npm:prepublish"
+        sh "npm run CI:npm:publish"
         returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
         return
     }
