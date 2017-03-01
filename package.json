@@ -8,7 +8,7 @@
     "postinstall": "npm run build",
     "lerna": "lerna",
     "CI:lerna:publish": "lerna publish --exact --version-strategy patch --yes --skip-npm",
-    "CI:lerna:publishAlpha": "lerna publish --exact --canary --yes --skip-npm",
+    "CI:lerna:publishAlpha": "lerna publish --exact --canary --yes",
     "CI:npm:prepublish": "node ./_scripts/injectGlobalVersions.js",
     "CI:npm:publish": "node ./_scripts/npmpublish.js",
     "CI:npm:publishAlpha": "node ./_scripts/npmpublish.js --alpha",
