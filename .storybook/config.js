@@ -7,7 +7,7 @@ const moduleRequire = require.context('./../packages/node_modules', true, /stori
 
 setAddon(sectionsAddon);
 addDecorator((story) => (
-    <div style={{padding: '1rem'}}>{story()}</div>
+    <div style={{padding: '1rem 1.5rem'}}>{story()}</div>
 ));
 
 function loadStories() {
