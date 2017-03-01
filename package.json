@@ -11,6 +11,7 @@
     "CI:lerna:publishAlpha": "lerna publish --exact --canary --yes --skip-npm",
     "CI:npm:prepublish": "node ./_scripts/injectGlobalVersions.js",
     "CI:npm:publish": "node ./_scripts/npmpublish.js",
+    "CI:npm:publishAlpha": "node ./_scripts/npmpublish.js --alpha",
     "create": "node ./_scripts/scaffold.js",
     "new": "npm run create",
     "lint": "npm run js:lint && npm run less:lint",

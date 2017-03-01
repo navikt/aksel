@@ -11,7 +11,9 @@ const lastTaggedCommit = GitUtilities.getLastTaggedCommit();
 const currentSHA = GitUtilities.getCurrentSHA();
 const npmPublishUrl = 'http://maven.adeo.no/nexus/content/repositories/npm-internal/';
 
-if (lastTaggedCommit !== currentSHA) {
+const isAlpha = process.argv.length >= 3 && process.argv[2] === '--alpha';
+
+if (!isAlpha && (lastTaggedCommit !== currentSHA)) {
     throw new Error('There are untagged commits...');
 }
 
