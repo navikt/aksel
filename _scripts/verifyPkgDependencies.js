@@ -52,7 +52,5 @@ glob(pkgGlob, { dot: true }, (err, files) => {
         console.log('');
     });
 
-    hasError && process.exit(1);
+    hasError && process.exit(1); // eslint-disable-line no-unused-expressions
 });
-
-
