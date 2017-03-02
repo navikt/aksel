@@ -56,8 +56,6 @@ node('master') {
     }
 
     if (!isMasterBuild) {
-        // Uses detach state, which doesnt work in lerna. Creating branch with SHA-name
-        sh "git checkout origin/${env.BRANCH_NAME}"
         sh "npm run CI:lerna:publishAlpha"
         returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
         return
@@ -66,8 +64,6 @@ node('master') {
     hasPublished = true
     stage('Publish modules') {
         try {
-            // Uses detach state, which doesnt work in lerna. Creating branch with SHA-name
-            sh "git checkout origin/${env.BRANCH_NAME}"
             sh "npm run CI:lerna:publish"
             sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
         } catch (ignored) {
