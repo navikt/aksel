@@ -9,6 +9,8 @@ const rawQuestions = require('./questions.js');
 
 mustache.tags = ['<%', '%>'];
 
+const globalDependencies = utils.allDependencies(JSON.parse(fs.readFileSync('./package.json')));
+
 function prompt(questions) {
     // eslint-disable-next-line no-use-before-define
     return inquirer.prompt(questions).then(handleAnswers);
@@ -29,6 +31,12 @@ function create(config) {
     renderdata.name.cssname = renderdata.name.cssname.split('-');
     renderdata.name.cssname.pop();
     renderdata.name.cssname = renderdata.name.cssname.join('-');
+    renderdata.resolve = () => (text, render) => {
+        if (!globalDependencies[text]) {
+            throw new Error(`Could not find global dependency: ${text}`);
+        }
+        return render(globalDependencies[text]);
+    };
 
     copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
         glob(destGlob, { dot: true }, (err, files) => {

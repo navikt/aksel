@@ -58,7 +58,7 @@ function saveToDisk(modules) {
         const location = module.location;
         const pkg = module.pkg;
 
-        const content = JSON.stringify(pkg, null, 2);
+        const content = `${JSON.stringify(pkg, null, 2)}\n`;
 
         fs.writeFileSync(location, content, 'utf-8');
     });

@@ -56,6 +56,7 @@ node('master') {
     }
 
     if (!isMasterBuild) {
+        sh "npm run CI:lerna:publishAlpha"
         returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
         return
     }
@@ -64,8 +65,6 @@ node('master') {
     stage('Publish modules') {
         try {
             sh "npm run CI:lerna:publish"
-            sh "npm run CI:npm:prepublish"
-            sh "npm run CI:npm:publish"
             sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
         } catch (ignored) {
             hasPublished = false
@@ -84,7 +83,6 @@ node('master') {
     stage('Dockerify') {
         script {
             GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
-//            sh "git tag -a ${application}@${releaseVersion} -m ${application}@${releaseVersion}"
             sh "git push origin master"
             sh "git push --tags"
 //            sh "docker build -t ${imageName} ."
@@ -115,6 +113,5 @@ chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
 
 node {
-    currentBuild.result = 'SUCCESS'
-    step([$class: 'StashNotifier'])
+    returnOk('All good')
 }
