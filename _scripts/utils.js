@@ -2,6 +2,8 @@
 
 'use strict';
 
+const extend = require('extend');
+
 function capitalize(str) {
     return str && str[0].toUpperCase() + str.slice(1);
 }
@@ -49,11 +51,19 @@ function parsetag(tagstring) {
 
     return { name: match[1], version: match[2] };
 }
+function allDependencies(pkg) {
+    const dependencies = pkg.dependencies || {};
+    const peerDependencies = pkg.peerDependencies || {};
+    const devDependencies = pkg.devDependencies || {};
+
+    return extend({}, devDependencies, peerDependencies, dependencies);
+}
 module.exports = {
     capitalize,
     camelcase,
     kebabcase,
     entries,
     allCompleted,
-    parsetag
+    parsetag,
+    allDependencies
 };
