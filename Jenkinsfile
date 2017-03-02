@@ -30,7 +30,7 @@ node('master') {
         step([$class: 'StashNotifier'])
 
         // Uses detach state, which doesnt work in lerna. Creating branch with SHA-name
-        sh "git checkout -b \"\$(git rev-parse HEAD)\""
+        sh "git checkout origin/${env.BRANCH_NAME}"
 
         pom = readMavenPom file: 'app-config/pom.xml'
         releaseVersion = "${pom.version}.${currentBuild.number}"
