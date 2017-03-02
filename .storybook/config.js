@@ -1,11 +1,13 @@
 import React from 'react';
-import { configure, addDecorator } from '@kadira/storybook';
+import { configure, setAddon, addDecorator } from '@kadira/storybook';
+import sectionsAddon from 'react-storybook-addon-sections';
 
 const showcaseRequire = require.context('./../packages/showcase', true, /stories\.js$/);
 const moduleRequire = require.context('./../packages/node_modules', true, /stories\.js$/);
 
+setAddon(sectionsAddon);
 addDecorator((story) => (
-    <div style={{padding: '1rem'}}>{story()}</div>
+    <div style={{padding: '1rem 1.5rem'}}>{story()}</div>
 ));
 
 function loadStories() {
