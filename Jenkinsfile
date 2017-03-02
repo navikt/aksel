@@ -29,6 +29,9 @@ node('master') {
         checkout scm
         step([$class: 'StashNotifier'])
 
+        // Uses detach state, which doesnt work in lerna. Creating branch with SHA-name
+        sh "git checkout -b \"\$(git rev-parse HEAD)\""
+
         pom = readMavenPom file: 'app-config/pom.xml'
         releaseVersion = "${pom.version}.${currentBuild.number}"
     }
@@ -113,6 +116,5 @@ chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
 
 node {
-    currentBuild.result = 'SUCCESS'
-    step([$class: 'StashNotifier'])
+    returnOk('All good')
 }
