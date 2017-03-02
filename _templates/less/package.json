@@ -12,7 +12,7 @@
     "url": "git+http://stash.devillo.no/scm/navfront/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "@kadira/storybook": "*",
-    "react": "*"
+    "@kadira/storybook": "<%#resolve%>@kadira/storybook<%/resolve%>",
+    "react": "<%#resolve%>react<%/resolve%>"
   }
 }
