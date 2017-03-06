@@ -8,6 +8,7 @@ import Group from 'react-storybook-addon-sections/dist/components/groupings/grou
 import ReactView from 'react-storybook-addon-sections/dist/components/sections/reactview';
 import HtmlView from 'react-storybook-addon-sections/dist/components/sections/htmlview';
 import CssView from 'react-storybook-addon-sections/dist/components/sections/cssview';
+import RawView from 'react-storybook-addon-sections/dist/components/sections/rawview';
 import './dokumentasjon.less';
 
 const renderers = {
@@ -57,9 +58,9 @@ function ProptypesComponent(element) {
                 <td>{prop.propName}</td>
                 <td>{prop.type.name}</td>
                 <td>{prop.required.toString()}</td>
-                <td>{prop.defaultValue.value}</td>
+                <td>{(prop.defaultValue && prop.defaultValue.value) || '–'}</td>
                 <td>
-                    <ReactMarkdown renderers={renderers} source={prop.description || '-'} />
+                    <ReactMarkdown renderers={renderers} source={prop.description || '–'} />
                 </td>
             </tr>
         ));
@@ -82,12 +83,18 @@ function ProptypesComponent(element) {
 
 const Proptypes = (element) => titleHoc(`Proptypes: ${componentName(element)}`, ProptypesComponent(element));
 
-export const JSDokumentasjon = (pkg, readme, element) => Group(
-    Collapsable(
-        Group(
-            Innstallasjon(pkg), HrComponent, Readme(readme)
-        ).withTitle('Dokumentasjon')),
-    Tabbable(Group(ReactView, Proptypes(element)).withTitle('React'), HtmlView, CssView)
-);
+export const JSDokumentasjon = (pkg, readme, element, source) => {
+    const informasjon = Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon');
+    const reactvisning = source ? (
+            Group(Collapsable(RawView(source, 'javascript').withTitle('Kildekode')), Proptypes(element)).withTitle('React')
+        ) : (
+            Group(ReactView, Proptypes(element)).withTitle('React')
+        );
+
+    return Group(
+        Collapsable(informasjon),
+        Tabbable(reactvisning, HtmlView, CssView)
+    );
+};
 
 export const LESSDokumentasjon = () => Group(HtmlView);
