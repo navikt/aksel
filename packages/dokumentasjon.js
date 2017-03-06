@@ -86,7 +86,9 @@ const Proptypes = (element) => titleHoc(`Proptypes: ${componentName(element)}`, 
 export const JSDokumentasjon = (pkg, readme, element, source) => {
     const informasjon = Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon');
     const reactvisning = source ? (
-            Group(Collapsable(RawView(source, 'javascript').withTitle('Kildekode')), Proptypes(element)).withTitle('React')
+            Group(
+                Collapsable(RawView(source, 'javascript').withTitle('Kildekode')), Proptypes(element)
+            ).withTitle('React')
         ) : (
             Group(ReactView, Proptypes(element)).withTitle('React')
         );
