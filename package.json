@@ -8,7 +8,7 @@
     "postinstall": "npm run build",
     "lerna": "lerna",
     "CI:lerna:publish": "lerna publish --exact --cd-version patch --yes --skip-temp-tag",
-    "CI:lerna:publishAlpha": "lerna publish --exact --canary --yes --skip-temp-tag",
+    "publishAlpha": "lerna publish --exact --canary --yes --skip-temp-tag",
     "create": "node ./_scripts/scaffold.js",
     "checkversions": "node ./_scripts/verifyPkgDependencies.js",
     "new": "npm run create",

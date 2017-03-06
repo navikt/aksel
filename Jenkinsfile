@@ -48,6 +48,7 @@ node('master') {
     }
 
     stage('Test') {
+        sh "npm run checkversions"
         sh "npm test"
     }
 
@@ -56,7 +57,6 @@ node('master') {
     }
 
     if (!isMasterBuild) {
-        sh "npm run CI:lerna:publishAlpha"
         returnOk("This is enough for now. I'm not releasing anything before it is on the master-branch....")
         return
     }
