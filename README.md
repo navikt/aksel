@@ -40,7 +40,7 @@ For å merge en PR må bygget har kjørt ok, og minst en persjon godkjent PRen.
 
 For å verifisere at modulene vil fungere for andre er det satt opp to eksempel prosjekt i `examples`-mappen.
 Legacy-mappen er satt opp med `browserify` og `lessc`, webpack-mappen har to forskjellige webpack-bygg både med og uten `style-loader`.
-Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-rig ved forbedringer på systemet. 
+Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-rig ved forbedringer på systemet og for å komme igang med å bruke systemet på nye prosjekter. 
 
 **NB** her må man faktisk kjøre `npm install` i de to mappene.. :O
 
