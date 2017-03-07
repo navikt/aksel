@@ -4,7 +4,6 @@ import common
 
 def common = new common()
 
-moduleName = 'nav-frontend-moduler'
 moduleUrl = 'http://cisbl.devillo.no:8000'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
@@ -14,7 +13,7 @@ lastcommit = "Unknown"
 committerEmail = "Unknown"
 
 def notifyFailed(reason, error) {
-    chatmsg = "**[${application} ${version}](${moduleUrl}) ${reason} **\n\n${lastcommit} (${committerEmail})"
+    chatmsg = "**[${application} ${releaseVersion}](${moduleUrl}) ${reason} **\n\n${lastcommit} (${committerEmail})"
     mattermostSend channel: 'natthauk-ops', color: '#FF0000', message: chatmsg
     currentBuild.result = 'FAILED'
     step([$class: 'StashNotifier'])
@@ -143,7 +142,7 @@ node('master') {
 //    }
 //}
 
-chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**\n\n${lastcommit} (${committerEmail}"
+chatmsg = "**[${application}](${moduleUrl}) Bygg OK**\n\n${lastcommit} (${committerEmail}"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
 
 node {
