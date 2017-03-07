@@ -5,6 +5,9 @@ const extend = require('extend');
 
 module.exports = (config, configType) => {
     const mergedConfig = merge(config, customConfig);
+    mergedConfig.entry.manager.unshift('babel-polyfill');
+    mergedConfig.entry.preview.unshift('babel-polyfill');
+
     if (configType !== 'PRODUCTION') {
         return mergedConfig;
     } else {

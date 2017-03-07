@@ -1,7 +1,6 @@
 import React from 'react';
 import { configure, setAddon, addDecorator } from '@kadira/storybook';
 import sectionsAddon from 'react-storybook-addon-sections';
-import 'babel-polyfill';
 
 const showcaseRequire = require.context('./../packages/showcase', true, /stories\.js$/);
 const moduleRequire = require.context('./../packages/node_modules', true, /stories\.js$/);
