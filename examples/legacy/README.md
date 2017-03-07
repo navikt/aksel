@@ -28,3 +28,6 @@ For at `browserify` skal fungere må det derfor brukes en plugin:
 @nodeModulesPath: './../node_modules';
 @coreModulePath: './../node_modules';
 ```
+
+## Bilder og ikoner
+Ikonene ligger i pakken nav-frontend-ikoner-assets, for legacy løsninger fortsettes det med å kopiere over disse til lokal mappe. Dette bør da gjøres som en del av byggesteget.

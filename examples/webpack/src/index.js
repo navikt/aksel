@@ -5,6 +5,7 @@ const Typografi = require('nav-frontend-typografi');
 const Etiketter = require('nav-frontend-etiketter');
 const Paneler = require('nav-frontend-paneler');
 require('./index.less');
+const HakeIkon = require('file-loader!nav-frontend-ikoner-assets/assets/stegindikator__hake.svg');
 
 const createElement = React.createElement;
 const Sidetittel = Typografi.Sidetittel;
@@ -18,7 +19,8 @@ function Application() {
         ),
         createElement(Panel, {},
             createElement(AdvarselEtikett, {}, 'Oops')
-        )
+        ),
+        createElement('img', { src: HakeIkon, alt: ''})
     );
 }
 
