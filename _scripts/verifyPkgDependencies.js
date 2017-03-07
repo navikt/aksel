@@ -30,7 +30,7 @@ const interMismatch = (key, val1, val2) => `Found inter-dependency mismatch for 
 
 function analyzeDependenciesOf(pkg, depMap) {
     if (!depMap) {
-        depMap = {}; // eslint-disable-line no-param-verify
+        depMap = {}; // eslint-disable-line no-param-reassign
     }
     // Check that dependencies in pkg use same version in all dependency-sections
     const dependencies = pkg.dependencies || {};
