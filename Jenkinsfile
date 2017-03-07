@@ -14,8 +14,7 @@ lastcommit = "Unknown"
 committerEmail = "Unknown"
 
 def notifyFailed(reason, error) {
-    changelog = common.getChangeString()
-    chatmsg = "**[${application} ${version}](${moduleUrl}) ${reason} **\n\n${changelog}\n\n${lastcommit} (${committerEmail})"
+    chatmsg = "**[${application} ${version}](${moduleUrl}) ${reason} **\n\n${lastcommit} (${committerEmail})"
     mattermostSend channel: 'natthauk-ops', color: '#FF0000', message: chatmsg
     currentBuild.result = 'FAILED'
     step([$class: 'StashNotifier'])
