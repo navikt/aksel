@@ -7,6 +7,7 @@ const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
+const svgmin = require('gulp-svgmin');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
@@ -14,57 +15,63 @@ const cssfont64 = require('gulp-cssfont64-formatter');
 
 const scripts = './packages/node_modules/*/src/**/*.js';
 const fonts = './packages/node_modules/*/assets/**/*.woff';
+const icons = './packages/node_modules/*/assets/**/*.svg';
 const dest = 'packages/node_modules';
 
 let srcEx;
-let fontEx;
+let assetsEx;
 let libFragment;
-let fontFragment;
+let assetsFragment;
+let srcFragment;
 
 if (path.win32 === path) {
     srcEx = /(packages\\node_modules\\[^/]+)\\src\\/;
-    fontEx = /(packages\\node_modules\\[^/]+)\\assets\\/;
+    assetsEx = /(packages\\node_modules\\[^/]+)\\assets\\/;
     libFragment = '$1\\lib\\';
-    fontFragment = '$1\\src\\';
+    assetsFragment = '$1\\assets\\';
+    srcFragment = '$1\\src\\';
 } else {
     srcEx = new RegExp('(packages/node_modules/[^/]+)/src/');
-    fontEx = new RegExp('(packages/node_modules/[^/]+)/assets/');
+    assetsEx = new RegExp('(packages/node_modules/[^/]+)/assets/');
     libFragment = '$1/lib/';
-    fontFragment = '$1/src/';
+    assetsFragment = '$1/assets/';
+    srcFragment = '$1/src/';
 }
 
 function mapToDest(filepath) {
     return filepath.replace(srcEx, libFragment);
 }
-function mapFontsToDest(filepath) {
-    return filepath.replace(fontEx, fontFragment);
+function mapSrcToDest(filepath) {
+    return filepath.replace(assetsEx, srcFragment);
+}
+function mapAssetsToDest(filepath) {
+    return filepath.replace(assetsEx, assetsFragment);
 }
 
-function lint() {
-    return 0;
-}
-function test() {
-    return 0;
+function fixErrorHandling() {
+    return plumber({
+        errorHandler: (err) => gutil.log(err.stack)
+    });
 }
 
-function build() {
-    return gulp.src(scripts)
-        .pipe(plumber({
-            errorHandler: (err) => gutil.log(err.stack)
-        }))
-        .pipe(newer({ map: mapToDest }))
-        .pipe(through.obj((file, enc, callback) => {
-            gutil.log('Compiling', `'${chalk.cyan(file.path)}'...`);
-            callback(null, file);
-        }))
-        .pipe(babel())
-        .pipe(through.obj((file, enc, callback) => {
-            file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
-            file.path = mapToDest(file.path); // eslint-disable-line no-param-reassign
+function onlyNewFiles(map) {
+    return newer({ map });
+}
 
-            callback(null, file);
-        }))
-        .pipe(gulp.dest(dest));
+function logCompiling() {
+    return through.obj((file, enc, callback) => {
+        gutil.log('Compiling', `'${chalk.cyan(file.path)}'...`);
+        callback(null, file);
+    });
+}
+
+function renameUsingMapper(mapper) {
+    return through.obj((file, enc, callback) => {
+        file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
+        file.path = mapper(file.path); // eslint-disable-line no-param-reassign
+
+        callback(null, file);
+    });
 }
 
 function cssFontfile(filename, mimetype, file64, format) {
@@ -76,28 +83,48 @@ function cssFontfile(filename, mimetype, file64, format) {
     return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
 }
 
-function buildCssfonts() {
-    return gulp.src(fonts)
-        .pipe(plumber({
-            errorHandler: (err) => gutil.log(err.stack)
-        }))
-        .pipe(newer({ map: mapFontsToDest }))
-        .pipe(through.obj((file, enc, callback) => {
-            gutil.log('Compiling font', `'${chalk.cyan(file.path)}'...`);
-            callback(null, file);
-        }))
-        .pipe(cssfont64(cssFontfile))
-        .pipe(through.obj((file, enc, callback) => {
-            file._path = file.path; // eslint-disable-line no-underscore-dangle, no-param-reassign
-            file.path = mapFontsToDest(file.path); // eslint-disable-line no-param-reassign
+function test() {
+    return 0;
+}
 
-            callback(null, file);
-        }))
+function build() {
+    return gulp.src(scripts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapToDest))
+        .pipe(logCompiling())
+        .pipe(babel())
+        .pipe(renameUsingMapper(mapToDest))
         .pipe(gulp.dest(dest));
 }
 
-gulp.task('lint', lint);
+
+function buildCssfonts() {
+    return gulp.src(fonts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapSrcToDest))
+        .pipe(logCompiling())
+        .pipe(cssfont64(cssFontfile))
+        .pipe(renameUsingMapper(mapSrcToDest))
+        .pipe(gulp.dest(dest));
+}
+
+function buildIcons() {
+    return gulp.src(icons)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapAssetsToDest))
+        .pipe(logCompiling())
+        .pipe(svgmin({
+            plugins: [{
+                removeTitle: true
+            }]
+        }))
+        .pipe(renameUsingMapper(mapAssetsToDest))
+        .pipe(gulp.dest(dest));
+}
+
+
 gulp.task('test', test);
 gulp.task('build', build);
-gulp.task('default', ['lint', 'test', 'build']);
+gulp.task('default', ['test', 'build']);
 gulp.task('buildfonts', buildCssfonts);
+gulp.task('buildicons', buildIcons);
