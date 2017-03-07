@@ -7,8 +7,8 @@ moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
 releaseVersion = "Unknown"
 isMasterBuild = (env.BRANCH_NAME == 'master')
-lastcommit
-committerEmail
+lastcommit = "Unknown"
+committerEmail = "Unknown"
 
 def notifyFailed(reason, error) {
     changelog = commonLib.getChangeString()
