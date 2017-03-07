@@ -25,7 +25,15 @@ function ReadmeViewComponent(src) {
 const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
 
 function InnstallasjonComponent(pkg) {
-    return () => (<div><p>Her kommer innstall data for {pkg.name}</p></div>);
+    return () => {
+        const installDeps = [pkg.name].concat(Object.keys(pkg.peerDependencies || {})).join(' ');
+        return (
+            <div>
+                <p>Innstallering:</p>
+                <pre><code>{`npm install ${installDeps} --save`}</code></pre>
+            </div>
+        );
+    };
 }
 const Innstallasjon = (pkg) => titleHoc('Innstallasjon', InnstallasjonComponent(pkg));
 
