@@ -30,16 +30,16 @@ const interMismatch = (key, val1, val2) => `Found inter-dependency mismatch for 
 
 function analyzeDependenciesOf(pkg, depMap) {
     if (!depMap) {
-        depMap = {};
+        depMap = {}; // eslint-disable-line no-param-verify
     }
     // Check that dependencies in pkg use same version in all dependency-sections
     const dependencies = pkg.dependencies || {};
     const peerDependencies = pkg.peerDependencies || {};
     const devDependencies = pkg.devDependencies || {};
 
-    objectIntersection(dependencies, peerDependencies).forEach(verifySameValue(dependencies, peerDependencies, internalMismatch));
-    objectIntersection(dependencies, devDependencies).forEach(verifySameValue(dependencies, devDependencies, internalMismatch));
-    objectIntersection(peerDependencies, devDependencies).forEach(verifySameValue(peerDependencies, devDependencies, internalMismatch));
+    objectIntersection(dependencies, peerDependencies).forEach(verifySameValue(dependencies, peerDependencies, internalMismatch)); // eslint-disable-line max-len
+    objectIntersection(dependencies, devDependencies).forEach(verifySameValue(dependencies, devDependencies, internalMismatch)); // eslint-disable-line max-len
+    objectIntersection(peerDependencies, devDependencies).forEach(verifySameValue(peerDependencies, devDependencies, internalMismatch)); // eslint-disable-line max-len
 
     objectIntersection(dependencies, depMap).forEach(verifySameValue(dependencies, depMap, interMismatch));
     objectIntersection(devDependencies, depMap).forEach(verifySameValue(devDependencies, depMap, interMismatch));
@@ -57,8 +57,8 @@ const globalPkg = analyzeDependenciesOf(JSON.parse(fs.readFileSync('./package.js
 console.log('');
 
 glob(pkgGlob, { dot: true }, (err, files) => {
-    const pkgs = files.map((file) => ({ file: file, content: JSON.parse(fs.readFileSync(file, 'utf-8'))}));
-    const depMap = pkgs.reduce((map, data) => extend(map, {[data.content.name]: data.content.version}), {});
+    const pkgs = files.map((file) => ({ file, content: JSON.parse(fs.readFileSync(file, 'utf-8')) }));
+    const depMap = pkgs.reduce((map, data) => extend(map, { [data.content.name]: data.content.version }), {});
 
 
     pkgs.forEach((data) => {
