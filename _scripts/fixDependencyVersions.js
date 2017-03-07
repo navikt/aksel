@@ -6,7 +6,6 @@ const globalPackage = require('./../package.json');
 
 const globalDeps = extend({}, globalPackage.devDependencies, globalPackage.dependencies);
 
-
 function getModules() {
     return new Promise((resolve, reject) => {
         glob('./packages/node_modules/**/package.json', {}, (err, files) => {
@@ -38,6 +37,14 @@ function fixDependencies(pkg, section) {
         .reduce((deps, entry) => extend(deps, { [entry.key]: entry.value }), {});
 }
 
+function addModuleVersions(files) {
+    files.forEach((file) => {
+        const pkg = JSON.parse(fs.readFileSync(file, 'utf-8'));
+        globalDeps[pkg.name] = pkg.version;
+    });
+    return files;
+}
+
 function injectGlobalDependencies(files) {
     return files.map((file) => {
         const pkg = JSON.parse(fs.readFileSync(file, 'utf-8'));
@@ -65,6 +72,7 @@ function saveToDisk(modules) {
 }
 
 getModules()
+    .then(addModuleVersions)
     .then(injectGlobalDependencies)
     .then(saveToDisk)
     .catch((error) => {
