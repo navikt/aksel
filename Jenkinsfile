@@ -1,5 +1,8 @@
-@Library('common') import common
-def commonLib = new common()
+#!groovy
+@Library('common')
+import common
+
+def common = new common()
 
 moduleName = 'nav-frontend-moduler'
 moduleUrl = 'http://cisbl.devillo.no:8000'
@@ -11,7 +14,7 @@ lastcommit = "Unknown"
 committerEmail = "Unknown"
 
 def notifyFailed(reason, error) {
-    changelog = commonLib.getChangeString()
+    changelog = common.getChangeString()
     chatmsg = "**[${application} ${version}](${moduleUrl}) ${reason} **\n\n${changelog}\n\n${lastcommit} (${committerEmail})"
     mattermostSend channel: 'natthauk-ops', color: '#FF0000', message: chatmsg
     currentBuild.result = 'FAILED'
@@ -25,7 +28,7 @@ def returnOk(message) {
 }
 
 node('master') {
-    commonLib.setupTools("Maven 3.3.3", "java8")
+    common.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
         checkout scm
@@ -128,7 +131,7 @@ node('master') {
 //    callback = "${env.BUILD_URL}input/Deploy/"
 //    node {
 //        def author = sh(returnStdout: true, script: 'git --no-pager show -s --format="%an <%ae>" HEAD').trim()
-//        def deploy = commonLib.deployApp(application, releaseVersion, miljo, callback, author).key
+//        def deploy = common.deployApp(application, releaseVersion, miljo, callback, author).key
 //
 //        try {
 //            timeout(time: 15, unit: 'MINUTES') {
