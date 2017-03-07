@@ -2,7 +2,7 @@
 def commonLib = new common()
 
 moduleName = 'nav-frontend-moduler'
-moduleUrl = 'https://nav.no'
+moduleUrl = 'http://cisbl.devillo.no:8000'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
 releaseVersion = "Unknown"
@@ -40,20 +40,40 @@ node('master') {
     }
 
     stage('Install') {
-        sh "npm run installAfterConfig"
+        try {
+            sh "npm run installAfterConfig"
+        } catch(Exception e) {
+            notifyFailed("Bygg feilet ved npm-install", e)
+        }
     }
 
     stage('Lint') {
-        sh "npm run lint"
+        try {
+            sh "npm run lint"
+        } catch(Exception e) {
+            notifyFailed("Linting feilet", e)
+        }
     }
 
     stage('Test') {
-        sh "npm run checkversions"
-        sh "npm test"
+        try {
+            sh "npm run checkversions"
+        } catch(Exception e) {
+            notifyFailed("Versjonssjekker feilet", e)
+        }
+        try {
+            sh "npm test"
+        } catch(Exception e) {
+            notifyFailed("Tester feilet", e)
+        }
     }
 
     stage('Build') {
-        sh "npm run build"
+        try {
+            sh "npm run build"
+        } catch(Exception e) {
+            notifyFailed("Bygging av JS feilet", e)
+        }
     }
 
     if (!isMasterBuild) {
@@ -77,17 +97,25 @@ node('master') {
     }
 
     stage('Build storybook') {
-        sh "npm run buildstorybook"
+        try {
+            sh "npm run buildstorybook"
+        } catch(Exception e) {
+            notifyFailed("Bygging av storybook feilet", e)
+        }
     }
 
     stage('Dockerify') {
         script {
-            GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
-            sh "git push origin master"
-            sh "git push --tags"
-//            sh "docker build -t ${imageName} ."
-//            sh "docker push ${imageName}"
-            sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
+            try {
+                GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
+                sh "git push origin master"
+                sh "git push --tags"
+    //            sh "docker build -t ${imageName} ."
+    //            sh "docker push ${imageName}"
+                sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
+            } catch(Exception e) {
+                notifyFailed("Pushing til git og dockerify", e)
+            }
         }
     }
 }
