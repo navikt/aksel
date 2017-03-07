@@ -14,7 +14,7 @@ committerEmail = "Unknown"
 
 def notifyFailed(reason, error) {
     chatmsg = "**[${application} ${releaseVersion}](${moduleUrl}) ${reason} **\n\n${lastcommit} (${committerEmail})"
-    mattermostSend channel: 'natthauk-ops', color: '#FF0000', message: chatmsg
+    mattermostSend channel: moduleChannel, color: 'danger', message: chatmsg
     currentBuild.result = 'FAILED'
     step([$class: 'StashNotifier'])
     throw error
