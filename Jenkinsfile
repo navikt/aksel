@@ -6,11 +6,13 @@ moduleUrl = 'http://cisbl.devillo.no:8000'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
 releaseVersion = "Unknown"
-isMasterBuild = (env.BRANCH_NAME == 'master');
+isMasterBuild = (env.BRANCH_NAME == 'master')
+lastcommit
+committerEmail
 
 def notifyFailed(reason, error) {
     changelog = commonLib.getChangeString()
-    chatmsg = "**[${application} ${version}](https://modapp-t1.adeo.no/mia/) ${reason} **\n\n${changelog}"
+    chatmsg = "**[${application} ${version}](${moduleUrl}) ${reason} **\n\n${changelog}\n\n${lastcommit} (${committerEmail})"
     mattermostSend channel: 'natthauk-ops', color: '#FF0000', message: chatmsg
     currentBuild.result = 'FAILED'
     step([$class: 'StashNotifier'])
@@ -28,6 +30,8 @@ node('master') {
     stage('Checkout') {
         checkout scm
         step([$class: 'StashNotifier'])
+        committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()
+        lastcommit = sh(script: 'git log -1 --pretty=format:"%ae (%an) %h %s" --no-merges', returnStdout: true).trim()
 
         pom = readMavenPom file: 'app-config/pom.xml'
         releaseVersion = "${pom.version}.${currentBuild.number}"
@@ -137,7 +141,7 @@ node('master') {
 //    }
 //}
 
-chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**"
+chatmsg = "**[${moduleName}](${moduleUrl}) Bygg OK**\n\n${lastcommit} (${committerEmail}"
 mattermostSend channel: moduleChannel, color: 'good', message: chatmsg
 
 node {
