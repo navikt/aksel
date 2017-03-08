@@ -1,4 +1,9 @@
 #!groovy
+@Library('common')
+import common
+
+def common = new common()
+
 moduleUrl = 'http://cisbl.devillo.no:8000'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
@@ -21,6 +26,7 @@ def returnOk(message) {
 }
 
 node('master') {
+    common.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
         checkout scm
@@ -109,8 +115,8 @@ node('master') {
                 GString imageName =  "docker.adeo.no:5000/${application}:${releaseVersion}"
                 sh "git push origin master"
                 sh "git push --tags"
-    //            sh "docker build -t ${imageName} ."
-    //            sh "docker push ${imageName}"
+                sh "docker build -t ${imageName} ."
+                sh "docker push ${imageName}"
                 sh "mvn clean deploy -f app-config/pom.xml -DskipTests -B -e"
             } catch(Exception e) {
                 notifyFailed("Pushing til git og dockerify", e)
