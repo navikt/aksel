@@ -1,9 +1,4 @@
 #!groovy
-@Library('common')
-import common
-
-def common = new common()
-
 moduleUrl = 'http://cisbl.devillo.no:8000'
 moduleChannel = 'natthauk-ops'
 application = "nav-frontend-moduler"
@@ -26,7 +21,6 @@ def returnOk(message) {
 }
 
 node('master') {
-    common.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
         checkout scm
