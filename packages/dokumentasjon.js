@@ -58,6 +58,10 @@ function ProptypesComponent(element) {
     );
 
     const docgen = element.__docgenInfo; // eslint-disable-line no-underscore-dangle
+    if (!docgen) {
+        return () => null;
+    }
+
     const description = docgen.description;
     const content = Object.keys(docgen.props)
         .sort()

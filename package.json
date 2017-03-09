@@ -20,7 +20,7 @@
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp buildicons",
-    "buildstorybook": "build-storybook -o dist",
+    "buildstorybook": "build-storybook -o dist && node ./_scripts/storybook-ie-fix.js",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start"
@@ -36,6 +36,7 @@
     "babel-preset-stage-2": "^6.22.0",
     "babel-runtime": "^6.22.0",
     "chalk": "^1.1.3",
+    "cheerio": "^0.22.0",
     "classnames": "^2.2.5",
     "copyfiles": "^1.2.0",
     "css-loader": "^0.26.1",
