@@ -10,7 +10,7 @@ function <%name.camelcase%>({ children }) {
 }
 
 <%name.camelcase%>.propTypes = {
-    children: PT.node.isRequired
+    children: PT.node
 };
 
 export default <%name.camelcase%>;
