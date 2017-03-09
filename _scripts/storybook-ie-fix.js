@@ -8,7 +8,6 @@ function fix(content) {
     const $ = cheerio.load(content);
 
     $('head').append('    <meta http-equiv="X-UA-Compatible" content="IE=edge">\n');
-    console.log(`html`, $.html());
     return $.html();
 }
 function writeToFile(src) {
