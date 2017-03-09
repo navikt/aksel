@@ -1,9 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@kadira/storybook';
+import { Readme } from './../../dokumentasjon';
+import readme from './README.md';
 import './src/index.less';
 
 storiesOf('Grid', module)
-    .add('Layout eksempler', () => (
+    .addWithSections('Statisk grid', () => (
         <div className="container">
 
             <div className="row">
@@ -90,8 +92,8 @@ storiesOf('Grid', module)
                 </div>
             </div>
         </div>
-    ))
-    .add('Responsiv grid', () => (
+    ), Readme(readme))
+    .addWithSections('Responsivt grid', () => (
         <div className="container">
 
             <div className="row">
@@ -124,4 +126,4 @@ storiesOf('Grid', module)
                 </div>
             </div>
         </div>
-    ));
+    ), Readme(readme));

@@ -3,6 +3,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import titleHoc from 'react-storybook-addon-sections/dist/components/title-hoc';
 import Collapsable from 'react-storybook-addon-sections/dist/components/groupings/collapsable';
+import Inline from 'react-storybook-addon-sections/dist/components/groupings/inline';
 import Tabbable from 'react-storybook-addon-sections/dist/components/groupings/tabbable';
 import Group from 'react-storybook-addon-sections/dist/components/groupings/group';
 import ReactView from 'react-storybook-addon-sections/dist/components/sections/reactview';
@@ -20,9 +21,9 @@ const renderers = {
     }
 };
 function ReadmeViewComponent(src) {
-    return () => (<ReactMarkdown className="readme-section" renderers={renderers} source={src} />);
+    return () => (<ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />);
 }
-const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
+export const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
 
 function InnstallasjonComponent(pkg) {
     return () => {
@@ -107,4 +108,7 @@ export const JSDokumentasjon = (pkg, readme, element, source) => {
     );
 };
 
-export const LESSDokumentasjon = () => Group(HtmlView);
+export const LESSDokumentasjon = (pkg, readme) => Group(
+    Inline(Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon')),
+    Tabbable(HtmlView, CssView)
+);
