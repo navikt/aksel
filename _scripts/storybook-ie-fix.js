@@ -16,4 +16,4 @@ function writeToFile(src) {
 
 readFile('./dist/index.html')
     .then(fix)
-    .then(writeToFile('./dist/new.html'));
+    .then(writeToFile('./dist/index.html'));
