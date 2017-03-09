@@ -14,6 +14,6 @@ function writeToFile(src) {
     return (content) => Promise.resolve(fs.writeFileSync(src, content, 'utf-8'));
 }
 
-readFile('./../dist/index.html')
+readFile('./dist/index.html')
     .then(fix)
-    .then(writeToFile('./../dist/new.html'));
+    .then(writeToFile('./dist/new.html'));
