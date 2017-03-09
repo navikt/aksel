@@ -21,7 +21,9 @@ const renderers = {
     }
 };
 function ReadmeViewComponent(src) {
-    return () => (<ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />);
+    return () => (
+        <ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />
+    );
 }
 export const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
 
@@ -59,7 +61,7 @@ function ProptypesComponent(element) {
 
     const docgen = element.__docgenInfo; // eslint-disable-line no-underscore-dangle
     if (!docgen) {
-        console.error('found no docgeninfo', element);
+        console.error('found no docgeninfo', element); // eslint-disable-line no-console
         return () => null;
     }
 
