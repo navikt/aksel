@@ -1,5 +1,6 @@
 import React, { PropTypes as PT } from 'react';
 
+
 function <%name.camelcase%>({ children }) {
     return (
         <div className="<%name.kebabcase%>">

@@ -59,6 +59,7 @@ function ProptypesComponent(element) {
 
     const docgen = element.__docgenInfo; // eslint-disable-line no-underscore-dangle
     if (!docgen) {
+        console.error('found no docgeninfo', element);
         return () => null;
     }
 
