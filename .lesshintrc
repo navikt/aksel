@@ -1,5 +1,6 @@
 {
   "fileExtensions": [".less", ".css"],
   "zeroUnit": false,
-  "propertyOrdering": false
+  "propertyOrdering": false,
+  "maxCharPerLine": { "limit": 120 }
 }
