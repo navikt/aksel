@@ -63,6 +63,14 @@ glob(pkgGlob, { dot: true }, (err, files) => {
 
     pkgs.forEach((data) => {
         console.log(`Checking package: ${chalk.cyan(data.file)}`);
+
+        // Name check
+        const packageName = data.content.name;
+        if (file.indexOf(packageName) === -1) {
+            console.log(`${chalk.red('ERROR:')} Found name mismatch in ${file}. Packagename was: ${data.content.name}`);
+            hasError = true;
+        }
+
         const pkg = analyzeDependenciesOf(data.content, depMap);
         Object.keys(pkg.dependencies)
             .filter((key) => !key.startsWith('nav-frontend-') && key !== 'nav-frontend-core')
