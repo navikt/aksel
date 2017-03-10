@@ -1,16 +1,19 @@
-import React, { PropTypes as PT } from 'react';
+import React, { Component, PropTypes as PT } from 'react';
 
-function <%name.camelcase%>({ children }) {
-    return (
-        <div className="<%name.kebabcase%>">
-            <h2>Hello from <%name.original%></h2>
-            {children}
-        </div>
-    );
+class <%name.camelcase%> extends Component {
+    render() {
+        const { children } = this.props;
+        return (
+            <div className="<%name.kebabcase%>">
+                <h2>Hello from <%name.original%></h2>
+                {children}
+            </div>
+        );
+    }
 }
 
 <%name.camelcase%>.propTypes = {
-    children: PT.node.isRequired
+    children: PT.node
 };
 
 export default <%name.camelcase%>;
