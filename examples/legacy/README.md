@@ -18,7 +18,13 @@ For at `browserify` skal fungere må det derfor brukes en plugin:
 }
 ```
 
-`browserify-file-filter` godtar en regex som eneste parameter. Hvis filnavnet matcher vil filen bli endret til en tom-fil slik at `browserify` ikke ser noe mer på den.
+`browserify-file-filter` godtar en regex (som en string) som eneste parameter. Hvis filnavnet matcher vil filen bli endret til en tom-fil slik at `browserify` ikke ser noe mer på den.
+
+Om man bruker gulp kan det settes opp sånn;
+```javascript
+browserify('index.js', opts)
+  .plugin(require('browserify-file-filter'), { p: '\\.(?:css|less|scss|sass)$' })
+```
  
  ## Quirks 2
  For at less-filene skal kompilere må to globale variabler være definert: `nodeModulesPath` og `coreModulePath`.
