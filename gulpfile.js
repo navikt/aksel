@@ -20,20 +20,17 @@ const dest = 'packages/node_modules';
 let srcEx;
 let assetsEx;
 let libFragment;
-let assetsFragment;
 let srcFragment;
 
 if (path.win32 === path) {
     srcEx = /(packages\\node_modules\\[^/]+)\\src\\/;
     assetsEx = /(packages\\node_modules\\[^/]+)\\assets\\/;
     libFragment = '$1\\lib\\';
-    assetsFragment = '$1\\assets\\';
     srcFragment = '$1\\src\\';
 } else {
     srcEx = new RegExp('(packages/node_modules/[^/]+)/src/');
     assetsEx = new RegExp('(packages/node_modules/[^/]+)/assets/');
     libFragment = '$1/lib/';
-    assetsFragment = '$1/assets/';
     srcFragment = '$1/src/';
 }
 
