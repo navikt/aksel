@@ -20,7 +20,7 @@
     "test": "gulp test",
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
-    "buildicons": "gulp buildicons",
+    "buildicons": "gulp svg-icon",
     "buildstorybook": "build-storybook -o dist && node ./_scripts/storybook-ie-fix.js",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
