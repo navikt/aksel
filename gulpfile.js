@@ -7,7 +7,6 @@ const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
 const plumber = require('gulp-plumber');
-const svgmin = require('gulp-svgmin');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
@@ -16,7 +15,6 @@ const configureSvgIcon = require('react-svg-icon-generator').default;
 
 const scripts = './packages/node_modules/*/src/**/*.js';
 const fonts = './packages/node_modules/*/assets/**/*.woff';
-const icons = './packages/node_modules/*/assets/**/*.svg';
 const dest = 'packages/node_modules';
 
 let srcEx;
@@ -42,11 +40,9 @@ if (path.win32 === path) {
 function mapToDest(filepath) {
     return filepath.replace(srcEx, libFragment);
 }
+
 function mapSrcToDest(filepath) {
     return filepath.replace(assetsEx, srcFragment);
-}
-function mapAssetsToDest(filepath) {
-    return filepath.replace(assetsEx, assetsFragment);
 }
 
 function fixErrorHandling() {
