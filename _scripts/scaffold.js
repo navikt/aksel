@@ -24,6 +24,7 @@ function create(config) {
 
     const renderdata = extend({}, config);
     renderdata.name = { original: config.name };
+    renderdata.name.indexfile = config.name.replace('nav-frontend-', '');
     renderdata.name.capitalize = utils.capitalize(config.name);
     renderdata.name.camelcase = utils.camelcase(config.name);
     renderdata.name.kebabcase = utils.kebabcase(config.name);
@@ -31,6 +32,7 @@ function create(config) {
     renderdata.name.cssname = renderdata.name.cssname.split('-');
     renderdata.name.cssname.pop();
     renderdata.name.cssname = renderdata.name.cssname.join('-');
+
     renderdata.resolve = () => (text, render) => {
         if (!globalDependencies[text]) {
             throw new Error(`Could not find global dependency: ${text}`);
@@ -41,7 +43,7 @@ function create(config) {
     copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
         glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
             files.forEach((file) => {
-                fs.renameSync(file, file.replace(/nav-frontend-([^/\\]+)\/src\/index\.(.+)$/, (m, c1, c2) => `nav-frontend-${c1}/src/${c1}.${c2}`))
+                fs.renameSync(file, file.replace('index', renderdata.name.indexfile))
             });
 
             glob(destGlob, { dot: true }, (err, files) => {

@@ -1,7 +1,7 @@
 {
   "name": "<%name.original%>",
   "version": "0.0.1",
-  "main": "src/index.less",
+  "main": "src/<%name.indexfile%>.less",
   "license": "MIT",
   "files": ["/src"],
   "publishConfig": {
