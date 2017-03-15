@@ -39,12 +39,18 @@ function create(config) {
     };
 
     copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
-        glob(destGlob, { dot: true }, (err, files) => {
-            files
-                .forEach((file) => {
-                    const content = fs.readFileSync(file, 'utf-8');
-                    fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
-                });
+        glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
+            files.forEach((file) => {
+                fs.renameSync(file, file.replace(/nav-frontend-([^/\\]+)\/src\/index\.(.+)$/, (m, c1, c2) => `nav-frontend-${c1}/src/${c1}.${c2}`))
+            });
+
+            glob(destGlob, { dot: true }, (err, files) => {
+                files
+                    .forEach((file) => {
+                        const content = fs.readFileSync(file, 'utf-8');
+                        fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
+                    });
+            });
         });
     });
 }
