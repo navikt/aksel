@@ -8,4 +8,4 @@ import <%name.camelcase%> from './src/index';
 storiesOf('<%name.capitalize%>', module)
     .addWithSections('Default', () => (
         <<%name.camelcase%> />
-    ), JSDokumentasjon(pkg, readme, <%name.camelcase%>)));
+    ), JSDokumentasjon(pkg, readme, <%name.camelcase%>));
