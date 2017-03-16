@@ -103,7 +103,7 @@ function buildCssfonts() {
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapSrcToDest))
         .pipe(logCompiling())
-        .pipe(cssfont64(cssFontfile))
+        .pipe(cssfont64({ formatter: cssFontfile, extention: 'less' }))
         .pipe(renameUsingMapper(mapSrcToDest))
         .pipe(gulp.dest(dest));
 }
