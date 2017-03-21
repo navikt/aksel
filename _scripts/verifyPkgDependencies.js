@@ -6,6 +6,12 @@ const fs = require('fs');
 const glob = require('glob');
 const chalk = require('chalk');
 const extend = require('extend');
+const semver = require('semver');
+semver.clean = (version, loose) => {// Monkeypatch
+    // var s = semver.parse(version.trim().replace(/^[=v]+]/, ''), loose); // Originalkode
+    var s = semver.parse(version.trim().replace(/^[=v\^~]+/, ''), loose);
+    return s ? s.version : null;
+};
 
 let hasError = false;
 const pkgGlob = './packages/node_modules/**/package.json';
@@ -16,8 +22,7 @@ function objectIntersection(obj1, obj2) {
 
 function verifySameValue(obj1, obj2, errorMessage) {
     return (key) => {
-        if (obj1[key] !== obj2[key]) {
-            console.log(`${chalk.red('ERROR::')} Found internal mismatch for ${key}. ${obj1[key]} !== ${obj2[key]}`);
+        if (!semver.satisfies(semver.clean(obj1[key]), obj2[key])) {
             console.log(`${chalk.red('ERROR::')} ${errorMessage(key, obj1[key], obj2[key])}`);
             hasError = true;
         }
@@ -39,11 +44,11 @@ function analyzeDependenciesOf(pkg, depMap) {
 
     objectIntersection(dependencies, peerDependencies).forEach(verifySameValue(dependencies, peerDependencies, internalMismatch)); // eslint-disable-line max-len
     objectIntersection(dependencies, devDependencies).forEach(verifySameValue(dependencies, devDependencies, internalMismatch)); // eslint-disable-line max-len
-    objectIntersection(peerDependencies, devDependencies).forEach(verifySameValue(peerDependencies, devDependencies, internalMismatch)); // eslint-disable-line max-len
+    objectIntersection(devDependencies, peerDependencies).forEach(verifySameValue(devDependencies, peerDependencies, internalMismatch)); // eslint-disable-line max-len
 
     objectIntersection(dependencies, depMap).forEach(verifySameValue(dependencies, depMap, interMismatch));
     objectIntersection(devDependencies, depMap).forEach(verifySameValue(devDependencies, depMap, interMismatch));
-    objectIntersection(peerDependencies, depMap).forEach(verifySameValue(peerDependencies, depMap, interMismatch));
+    objectIntersection(depMap, peerDependencies).forEach(verifySameValue(depMap, peerDependencies, interMismatch));
 
     return {
         name: pkg.name,
