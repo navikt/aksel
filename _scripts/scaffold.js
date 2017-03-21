@@ -43,11 +43,11 @@ function create(config) {
     copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
         glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
             files.forEach((file) => {
-                fs.renameSync(file, file.replace('index', renderdata.name.indexfile))
+                fs.renameSync(file, file.replace('index', renderdata.name.indexfile));
             });
 
-            glob(destGlob, { dot: true }, (err, files) => {
-                files
+            glob(destGlob, { dot: true }, (globerr, globfiles) => {
+                globfiles
                     .forEach((file) => {
                         const content = fs.readFileSync(file, 'utf-8');
                         fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
