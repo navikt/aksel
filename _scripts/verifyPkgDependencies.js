@@ -7,9 +7,10 @@ const glob = require('glob');
 const chalk = require('chalk');
 const extend = require('extend');
 const semver = require('semver');
-semver.clean = (version, loose) => {// Monkeypatch
+
+semver.clean = (version, loose) => { // Monkeypatch
     // var s = semver.parse(version.trim().replace(/^[=v]+]/, ''), loose); // Originalkode
-    var s = semver.parse(version.trim().replace(/^[=v\^~]+/, ''), loose);
+    const s = semver.parse(version.trim().replace(/^[=v^~]+/, ''), loose);
     return s ? s.version : null;
 };
 
