@@ -3,7 +3,7 @@ import { storiesOf } from '@kadira/storybook';
 import { LESSDokumentasjon } from './../../dokumentasjon';
 import readme from './README.md';
 import pkg from './package.json';
-import './src/index.less';
+import './src/<%name.indexfile%>.less';
 
 storiesOf('<%name.capitalize%>', module)
     .addWithSections('Default', () => (

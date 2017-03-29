@@ -1,0 +1,33 @@
+.spinner-mixin(@name, @size, @animationDuration) {
+  &--@{name} {
+    height: @size;
+    width: @size;
+    background-size: @size @size;
+    animation-duration: @animationDuration;
+  }
+}
+
+.spinner {
+  display: inline-block;
+  position: relative;
+  animation: rotering 2s infinite linear;
+
+  .spinner-mixin(xxs, 16px, 0.8s);
+  .spinner-mixin(xs, 20px, 0.9s);
+  .spinner-mixin(s, 24px, 1s);
+  .spinner-mixin(m, 32px, 1.1s);
+  .spinner-mixin(l, 40px, 1.2s);
+  .spinner-mixin(xl, 64px, 1.6s);
+  .spinner-mixin(xxl, 128px, 2s);
+  .spinner-mixin(xxxl, 256px, 2.5s);
+}
+
+@keyframes rotering {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
