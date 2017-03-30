@@ -16,7 +16,7 @@
     "fixversions": "node ./_scripts/fixDependencyVersions.js",
     "bump": "node ./_scripts/bumpall.js",
     "lint": "npm run js:lint && npm run less:lint",
-    "js:lint": "esw --color --fix",
+    "js:lint": "esw --color",
     "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/ -e *Source-Sans*.less",
     "test": "gulp test",
     "build": "gulp build",
