@@ -3,6 +3,7 @@
 'use strict';
 
 const gulp = require('gulp');
+const fs = require('fs');
 const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
@@ -102,14 +103,27 @@ function buildCssfonts() {
         .pipe(gulp.dest(dest));
 }
 
+function fixIconFile() {
+    const iconsfile = path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'src', 'index.js');
+    const oldContent = fs.readFileSync(iconsfile, 'utf8');
+
+    const content = oldContent
+        .replace(/\(<svg height=\{height \|\| size}/g, '(<svg {...props} height={height || size}')
+        .replace('width} = this.props;', 'width, ...props} = this.props;');
+
+    fs.writeFileSync(iconsfile, content, 'utf8');
+}
+
 configureSvgIcon({
     destination: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'src', 'index.js'),
     svgDir: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'assets'),
     keepFillColor: true
 });
 
-
+gulp.task('fixicons', fixIconFile);
 gulp.task('test', test);
 gulp.task('build', build);
 gulp.task('default', ['test', 'build']);
+gulp.task('buildicons', ['svg-icon']);
+gulp.task('buildtest', fixIconFile);
 gulp.task('buildfonts', buildCssfonts);
