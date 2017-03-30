@@ -26,7 +26,9 @@ function getModules() {
 
 function bumpVersions(bump) {
     return (modules) => {
-        modules.forEach((module) => module.pkg.version = semver.inc(module.pkg.version, bump))
+        modules.forEach((module) => {
+            module.pkg.version = semver.inc(module.pkg.version, bump); // eslint-disable-line no-param-reassign
+        });
         return modules;
     };
 }
@@ -38,7 +40,7 @@ function saveToDisk(modules) {
 
         const content = `${JSON.stringify(pkg, null, 2)}\n`;
 
-        console.log('Bumped', pkg.name, pkg.version);
+        console.log('Bumped', pkg.name, pkg.version); // eslint-disable-line no-console
         fs.writeFileSync(location, content, 'utf-8');
     });
 }
