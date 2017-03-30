@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
     module: {
+        noParse: /less.dist.less\.js$/,
         loaders: [
             {
                 test: /\.less$/,
