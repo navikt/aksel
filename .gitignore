@@ -9,3 +9,5 @@ examples/legacy/node_modules
 examples/legacy/out
 examples/webpack/node_modules
 examples/webpack/out
+.gitattributes
+.iml
