@@ -90,9 +90,11 @@ node('master') {
     stage('Publish modules') {
         try {
             sh "npm run CI:lerna:publish"
-            sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
+            currentBuild.description = sh(script: 'git tag --points-at HEAD', returnStdout: true).trim() ?: ''
+//            sh "mvn versions:set -f app-config/pom.xml -DgenerateBackupPoms=false -B -DnewVersion=${releaseVersion}"
         } catch (ignored) {
             hasPublished = false
+            currentBuild.description = "Ingen nye moduler"
         }
     }
 
