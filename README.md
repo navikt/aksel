@@ -36,7 +36,7 @@ For å forsikre oss at koden ikke rotner på rot er det satt opp både `eslint` 
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har blitt avklart/diskutert i NAVs frontendforum.
 
 For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Dvs eneste måten å få inn endringer på er gjennom pull-requests. 
-For å merge en PR må bygget har kjørt ok, og minst en persjon godkjent PRen.
+For å merge en PR må bygget har kjørt ok, og minst en person godkjent PRen.
 
 For å verifisere at modulene vil fungere for andre er det satt opp to eksempel prosjekt i `examples`-mappen.
 Legacy-mappen er satt opp med `browserify` og `lessc`, webpack-mappen har to forskjellige webpack-bygg både med og uten `style-loader`.
