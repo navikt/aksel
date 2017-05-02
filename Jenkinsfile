@@ -29,6 +29,7 @@ node('master') {
     common.setupTools("Maven 3.3.3", "java8")
 
     stage('Checkout') {
+        deleteDir()
         checkout scm
         step([$class: 'StashNotifier'])
         committerEmail = sh(script: 'git log -1 --pretty=format:"%ae"', returnStdout: true).trim()

@@ -109,7 +109,11 @@ function fixIconFile() {
 
     const content = oldContent
         .replace(/\(<svg height=\{height \|\| size}/g, '(<svg {...props} height={height || size}')
-        .replace('width} = this.props;', 'width, ...props} = this.props;');
+        .replace('width} = this.props;', 'width, ...props} = this.props;')
+        .replace('height: React.PropTypes.number,',
+            'height: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),')
+        .replace('width: React.PropTypes.number,',
+            'width: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),');
 
     fs.writeFileSync(iconsfile, content, 'utf8');
 }
