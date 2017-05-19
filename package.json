@@ -27,8 +27,8 @@
     "dev": "npm start",
     "watch": "npm start"
   },
-  "author": "Name <mail@mail.com>",
-  "license": "ISC",
+  "author": "NAV",
+  "license": "MIT",
   "devDependencies": {
     "@kadira/storybook": "2.21.0",
     "@types/react": "15.0.23",
