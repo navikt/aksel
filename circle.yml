@@ -1,0 +1,12 @@
+machine:
+  timezone: Europe/Oslo
+
+dependencies:
+  override:
+    - npm run installAfterConfig
+
+compile:
+  override:
+    - npm run lint
+    - npm run checkversions
+    - npm run build
