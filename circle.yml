@@ -3,7 +3,7 @@ machine:
 
 dependencies:
   override:
-    - npm run installAfterConfig
+    - npm run install
 
 compile:
   override:
