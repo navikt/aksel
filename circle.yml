@@ -3,7 +3,7 @@ machine:
 
 dependencies:
   override:
-    - npm run install
+    - npm install
 
 compile:
   override:
