@@ -2,23 +2,31 @@ const path = require('path');
 
 module.exports = {
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.less$/,
-                loaders: ['style', 'css', 'less?{"globalVars":{"nodeModulesPath":"\'./../..\'", "coreModulePath":"\'./../../../../node_modules\'"}}'],
-                include: path.resolve(__dirname, '../')
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' },
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            globalVars: {
+                                nodeModulesPath: '\'./../..\'',
+                                coreModulePath: '\'./../../../../node_modules\''
+                            },
+                            include: path.resolve(__dirname, '../')
+                        }
+                    }
+                ]
             },
             {
                 test: /\.md$/,
-                loaders: ['raw']
-            },
-            {
-                test: /\.json$/,
-                loaders: ['json']
+                use: [{ loader: 'raw-loader' }]
             },
             {
                 test: /\.css$/,
-                loaders: ['style', 'css']
+                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
             }
         ]
     }
