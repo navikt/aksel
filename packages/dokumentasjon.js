@@ -84,7 +84,7 @@ function ProptypesComponent(element) {
     return () => (
         <div className="proptypes-section">
             <h3>Proptypes: {componentName(element)}</h3>
-            <p><ReactMarkdown renderers={renderers} source={description} /></p>
+            <ReactMarkdown renderers={renderers} source={description} />
             <table>
                 <thead>
                     {header}
