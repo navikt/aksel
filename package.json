@@ -26,10 +26,11 @@
     "dev": "npm start",
     "watch": "npm start"
   },
-  "author": "Name <mail@mail.com>",
-  "license": "ISC",
+  "author": "NAV",
+  "license": "MIT",
   "devDependencies": {
     "@storybook/react": "3.0.0",
+    "@types/react": "15.0.23",
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
@@ -73,6 +74,7 @@
     "mustache": "^2.3.0",
     "nav-frontend-core": "4.0.1",
     "progress": "^2.0.0",
+    "prop-types": "^15.5.10"
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",
     "react-collapse": "^4.0.2",
@@ -91,8 +93,5 @@
     "svgo": "^0.7.2",
     "text-table": "^0.2.0",
     "through2": "^2.0.3"
-  },
-  "dependencies": {
-    "prop-types": "^15.5.10"
   }
 }
