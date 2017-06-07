@@ -20,14 +20,21 @@ const renderers = {
         return React.createElement(`h${level + 1}`, { ...props, key: nodeKey });
     }
 };
-function ReadmeViewComponent(/*srcWithDisclaimer*/) {
-    // Todo:
-    //const src = srcWithDisclaimer.replace(/#+\s?Disclaimer(?:.|\s)*/, '');
+
+function ReadmeViewComponent(src) {
     return () => (
         <ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />
     );
 }
-export const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
+
+function removeDisclaimerFromMarkdown(markdown) {
+    return markdown.replace(/#+\s?Disclaimer(?:.|\s)*/, '');
+}
+
+export const Readme = (src) => {
+    const source = removeDisclaimerFromMarkdown(src);
+    return titleHoc('Readme', ReadmeViewComponent(source));
+}
 
 function InnstallasjonComponent(pkg) {
     return () => {
@@ -102,7 +109,7 @@ function ProptypesComponent(element) {
 const Proptypes = (element) => titleHoc(`Proptypes: ${componentName(element)}`, ProptypesComponent(element));
 
 export const JSDokumentasjon = (pkg, readme, element, source) => {
-    const informasjon = Group(Innstallasjon(pkg), HrComponent).withTitle('Dokumentasjon');
+    const informasjon = Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon');
     const reactvisning = source ? (
             Group(
                 Collapsable(RawView(source, 'javascript').withTitle('Kildekode')), Proptypes(element)
@@ -117,7 +124,7 @@ export const JSDokumentasjon = (pkg, readme, element, source) => {
     );
 };
 
-export const LESSDokumentasjon = (pkg) => Group(
-    Inline(Group(Innstallasjon(pkg), HrComponent).withTitle('Dokumentasjon')),
+export const LESSDokumentasjon = (pkg, readme) => Group(
+    Inline(Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon')),
     Tabbable(HtmlView, CssView)
 );
