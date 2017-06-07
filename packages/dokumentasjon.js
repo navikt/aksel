@@ -20,7 +20,9 @@ const renderers = {
         return React.createElement(`h${level + 1}`, { ...props, key: nodeKey });
     }
 };
-function ReadmeViewComponent(src) {
+function ReadmeViewComponent(/*srcWithDisclaimer*/) {
+    // Todo:
+    //const src = srcWithDisclaimer.replace(/#+\s?Disclaimer(?:.|\s)*/, '');
     return () => (
         <ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />
     );
