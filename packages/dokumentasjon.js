@@ -109,7 +109,9 @@ function ProptypesComponent(element) {
 const Proptypes = (element) => titleHoc(`Proptypes: ${componentName(element)}`, ProptypesComponent(element));
 
 export const JSDokumentasjon = (pkg, readme, element, source) => {
-    const informasjon = Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon');
+    // Installasjon temporarily commented out due to duplicate install instructions, replace line under when fixed:
+    // const informasjon = Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon');
+    const informasjon = Group(HrComponent, Readme(readme)).withTitle('Dokumentasjon');
     const reactvisning = source ? (
             Group(
                 Collapsable(RawView(source, 'javascript').withTitle('Kildekode')), Proptypes(element)
@@ -125,6 +127,8 @@ export const JSDokumentasjon = (pkg, readme, element, source) => {
 };
 
 export const LESSDokumentasjon = (pkg, readme) => Group(
-    Inline(Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon')),
+    // Installasjon temporarily commented out due to duplicate install instructions, replace line under when fixed:
+    // Inline(Group(Innstallasjon(pkg), HrComponent, Readme(readme)).withTitle('Dokumentasjon')),
+    Inline(Group(HrComponent, Readme(readme)).withTitle('Dokumentasjon')),
     Tabbable(HtmlView, CssView)
 );
