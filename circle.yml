@@ -16,10 +16,10 @@ compile:
     - npm run build
 
 deployment:
-  npm:
-    tag: /v[0-9]+(\.[0-9]+)*/
-      commands:
-        - npm run lernapublish
+  production:
+    branch: master
+    commands:
+      - npm run lernapublish
 
 general:
   branches:
