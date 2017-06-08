@@ -1,3 +1,9 @@
+general:
+  branches:
+    only:
+      - master
+      - build-in-circle-CI # todo: remove this when everything is good
+
 machine:
   timezone: Europe/Oslo
   node:
