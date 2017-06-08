@@ -34,7 +34,7 @@ function removeDisclaimerFromMarkdown(markdown) {
 export const Readme = (src) => {
     const source = removeDisclaimerFromMarkdown(src);
     return titleHoc('Readme', ReadmeViewComponent(source));
-}
+};
 
 function InnstallasjonComponent(pkg) {
     return () => {
@@ -47,6 +47,8 @@ function InnstallasjonComponent(pkg) {
         );
     };
 }
+
+// eslint-disable-next-line no-unused-vars
 const Innstallasjon = (pkg) => titleHoc('Innstallasjon', InnstallasjonComponent(pkg));
 
 function HrComponent() {
