@@ -20,12 +20,21 @@ const renderers = {
         return React.createElement(`h${level + 1}`, { ...props, key: nodeKey });
     }
 };
+
 function ReadmeViewComponent(src) {
     return () => (
         <ReactMarkdown className="readme-section storybook-addons-info__section" renderers={renderers} source={src} />
     );
 }
-export const Readme = (src) => titleHoc('Readme', ReadmeViewComponent(src));
+
+function removeDisclaimerFromMarkdown(markdown) {
+    return markdown.replace(/#+\s?Disclaimer(?:.|\s)*/, '');
+}
+
+export const Readme = (src) => {
+    const source = removeDisclaimerFromMarkdown(src);
+    return titleHoc('Readme', ReadmeViewComponent(source));
+}
 
 function InnstallasjonComponent(pkg) {
     return () => {
