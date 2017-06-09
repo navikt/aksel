@@ -27,4 +27,3 @@ general:
   branches:
     only:
       - master
-      - pre-publish # todo: remove this when everything is good
