@@ -22,6 +22,7 @@
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp buildicons && gulp fixicons",
     "buildstorybook": "build-storybook -o dist",
+    "deploystorybook": "npm run build-storybook && gh-pages -d dist",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start"
@@ -52,6 +53,7 @@
     "eslint-watch": "^3.0.0",
     "extend": "^3.0.0",
     "file-loader": "^0.11.1",
+    "gh-pages": "^1.0.0",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",

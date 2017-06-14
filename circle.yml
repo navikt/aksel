@@ -22,9 +22,9 @@ deployment:
       - git config --global user.email "erlend.edvardsen.vige@nav.no"
       - git config --global user.name "navikt"
       - npm run lernapublish
+      - npm run deploystorybook
 
 general:
   branches:
     ignore:
       - gh-pages
-      - gh-pages-setup
