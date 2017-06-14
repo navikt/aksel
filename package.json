@@ -22,7 +22,7 @@
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp buildicons && gulp fixicons",
     "buildstorybook": "build-storybook -o dist",
-    "deploystorybook": "npm run build-storybook && gh-pages -d dist",
+    "deploystorybook": "npm run buildstorybook && gh-pages -d dist",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start"
@@ -74,7 +74,6 @@
     "mustache": "^2.3.0",
     "nav-frontend-core": "4.0.2",
     "progress": "^2.0.0",
-    "prop-types": "^15.5.10",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
     "react": "^15.4.2",
