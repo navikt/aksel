@@ -23,6 +23,7 @@
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp buildicons && gulp fixicons",
     "buildstorybook": "build-storybook -o dist && node ./_scripts/storybook-ie-fix.js",
+    "deploystorybook": "npm run build-storybook && gh-pages -d dist",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start"
@@ -55,6 +56,7 @@
     "extend": "^3.0.0",
     "file-loader": "^0.10.1",
     "fs": "0.0.2",
+    "gh-pages": "^1.0.0",
     "glob": "^7.1.1",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
