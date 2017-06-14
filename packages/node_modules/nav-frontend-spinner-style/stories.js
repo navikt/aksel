@@ -1,5 +1,5 @@
 import React from 'react';
-import { storiesOf } from '@kadira/storybook';
+import { storiesOf } from '@storybook/react';
 import { LESSDokumentasjon } from './../../dokumentasjon';
 import readme from './README.md';
 import pkg from './package.json';
