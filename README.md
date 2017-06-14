@@ -3,7 +3,7 @@
 NAV-frontend-moduler er ett monorepo for alle NAVs felleskomponenter/fellesmoduler.
  
 ## Bruke moduler
-For å ta i bruk en modul sjekk dokumentasjon på [storybooken](http://cisbl.devillo.no:8000).
+For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler) (NÅR DEN KOMMER OPP).
 
 
 ## Bidra med nye komponenter
@@ -12,16 +12,12 @@ Det oppfordres til at alle blir med å bidrar med nye modul slik at mest mulig a
 ### Kom igang
 For å komme igang med å lage nye moduler: 
 ```
-git clone ssh://git@stash.devillo.no:7999/navfront/nav-frontend-moduler.git
+git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
-npm run installAfterConfig
+npm install
 npm start
 npm run new
 ```
-
-**NB!!** `npm install` vil per i dag ikke fungere pga gammel nexus versjon her på huset.
-`npm run installAfterConfig` setter opp `npm` slik at visse pakker blir hentet av nexus på test-servere. 
-Når nexus blir oppgradert til 3.x.x kan konfigurasjonen fjernes, og `npm install` vil fungere som forventet.
 
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen. 
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av, 
@@ -61,7 +57,7 @@ Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-
 
 
 ## Byggemiljø
-Det er satt opp ett multibranch-bygg for repoet: http://cisbl.devillo.no/job/nav-frontend-moduler/ som bruker pipelinen definert i `Jenkinsfile`.
+Det er satt opp ett multibranch-bygg for repoet: *TO BE ANNOUNCED* som bruker pipelinen definert i `Jenkinsfile`.
 Alle branches bygges derfor automatisk med en gang de pushes til stash.
 
 ### Byggesteg på `master`
