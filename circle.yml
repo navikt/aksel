@@ -1,0 +1,29 @@
+machine:
+  timezone: Europe/Oslo
+  node:
+    version: 5.1.1
+
+dependencies:
+  pre:
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+  override:
+    - npm install
+
+compile:
+  override:
+    - npm run lint
+    - npm run checkversions
+    - npm run build
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - git config --global user.email "erlend.edvardsen.vige@nav.no"
+      - git config --global user.name "navikt"
+      - npm run lernapublish
+
+general:
+  branches:
+    only:
+      - master
