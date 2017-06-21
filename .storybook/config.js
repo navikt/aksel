@@ -1,5 +1,5 @@
 import React from 'react';
-import { configure, setAddon, addDecorator } from '@kadira/storybook';
+import { configure, setAddon, addDecorator } from '@storybook/react';
 import sectionsAddon from 'react-storybook-addon-sections';
 
 const showcaseRequire = require.context('./../packages/showcase', true, /stories\.js$/);
