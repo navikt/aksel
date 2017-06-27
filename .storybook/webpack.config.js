@@ -12,8 +12,8 @@ module.exports = {
                         loader: 'less-loader',
                         options: {
                             globalVars: {
-                                nodeModulesPath: '\'./../..\'',
-                                coreModulePath: '\'./../../../../node_modules\''
+                                nodeModulesPath: '\'~\'',
+                                coreModulePath: '\'~\''
                             },
                             include: path.resolve(__dirname, '../')
                         }
