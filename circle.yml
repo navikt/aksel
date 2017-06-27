@@ -11,9 +11,10 @@ dependencies:
 
 compile:
   override:
-    - npm run lint
     - npm run checkversions
+    - npm run lint
     - npm run build
+    - npm run buildstorybook
 
 deployment:
   production:

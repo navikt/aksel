@@ -22,7 +22,7 @@
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp buildicons && gulp fixicons",
     "buildstorybook": "build-storybook -o dist",
-    "deploystorybook": "npm run buildstorybook && gh-pages -d dist",
+    "deploystorybook": "gh-pages -d dist",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start"
