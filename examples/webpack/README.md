@@ -15,7 +15,7 @@ For at less-filene skal kompilere må to globale variabler være definert: `node
 Med webpacks `style-loader` kan dette gjøres i `webpack.config.js` på følgende måte:
  
 ```
-{ test: /\.less$/, loader: ['style-loader', 'css-loader', 'less-loader?{"globalVars":{"nodeModulesPath":"\'./../../\'", "coreModulePath":"\'./../../\'"}}'] }
+{ test: /\.less$/, loader: ['style-loader', 'css-loader', 'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'] }
 ```
 
 **Uten style-loader**:
