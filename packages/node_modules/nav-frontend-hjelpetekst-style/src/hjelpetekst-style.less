@@ -1,0 +1,220 @@
+@import '@{coreModulePath}nav-frontend-core/less/_variabler';
+@import '@{nodeModulesPath}nav-frontend-lukknapp-style/src/lukknapp-style';
+@import '@{nodeModulesPath}nav-frontend-typografi-style/src/index';
+@import '@{nodeModulesPath}nav-frontend-lenker-style/src/lenker-mixins';
+
+@desktop: ~'only screen and (min-width: 480px)';
+
+.hjelpetekst {
+    position: relative;
+    padding-left: 1.25rem;
+    display: inline-block;
+}
+
+.hjelpetekst .lukknapp {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.hjelpetekst__tekst:before {
+    content: '';
+    display: block;
+    width: 4rem;
+    height: 3rem;
+    float: right;
+}
+
+.hjelpetekst__apneknapp {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    cursor: pointer;
+    background-color: transparent;
+
+    &:focus,
+    &:active,
+    &:hover {
+        outline: 0;
+        color: @white;
+    }
+
+    &:focus .hjelpetekst__anchor {
+        outline: 0;
+        box-shadow: 0 0 0 3px @orangeFocus;
+    }
+}
+
+.hjelpetekst__anchor {
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.hjelpetekst__container {
+    display: inline-block;
+    position: relative;
+}
+
+.hjelpetekst__tooltip {
+    position: fixed;
+    top: 0.5rem;
+    left: 0.5rem;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    z-index: 1000;
+    background-color: @navMorkGra;
+    color: @white;
+    padding: 1rem;
+
+    a {
+        .lenke-mixin();
+        color: @navLysBla;
+
+        &:hover {
+            border-bottom-color: @navLysBla;
+        }
+
+        a:active,
+        &:focus {
+            color: @navDypBla;
+            border-bottom-color: @navDypBla;
+        }
+    }
+
+    &:focus {
+      outline: 0;
+      box-shadow: 0 0 0 3px @orangeFocus;
+    }
+
+    @media @desktop {
+        position: absolute;
+        width: 24rem;
+        left: 0;
+        bottom: 3rem;
+        top: auto;
+        border-radius: 0.25rem;
+
+        &:before,
+        &:focus:after {
+            content: '';
+            height: sqrt(2.25rem / 2); // Pythagoras
+            width: sqrt(2.25rem / 2); // Pythagoras
+            background-color: @navMorkGra;
+            display: block;
+            position: absolute;
+            transform: rotate(-45deg);
+            transform-origin: 0 0;
+            z-index: 1;
+            border: 3px solid transparent;
+            box-sizing: border-box;
+        }
+
+        &:focus:after {
+            z-index: 0;
+            background-color: transparent;
+            transform: rotate(-45deg);
+            box-sizing: content-box;
+        }
+    }
+}
+
+@media @desktop {
+
+    .hjelpetekst__tooltip--over,
+    .hjelpetekst__tooltip--under {
+        left: 0;
+    }
+
+    .hjelpetekst__tooltip--over,
+    .hjelpetekst__tooltip--midtstilt {
+        &:before,
+        &:focus:after {
+            top: 100%;
+            bottom: 3rem;
+            left: 1.25rem;
+        }
+
+        &:focus:after {
+            left: 1rem;
+            border-left: 3px solid @orangeFocus;
+            border-bottom: 3px solid @orangeFocus;
+        }
+    }
+
+    .hjelpetekst__tooltip--midtstilt {
+        left: ~'calc(20px + 50%)';
+        transform: translateX(~'calc(-50% - 10px)');
+
+        &:before,
+        &:focus:after {
+            transform-origin: 50% 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            left: 50%;
+
+        }
+    }
+
+    .hjelpetekst__tooltip--under {
+        top: 3rem;
+        bottom: auto;
+
+        &:before,
+        &:focus:after {
+            top: 0;
+        }
+
+        &:focus:after {
+            left: 1rem;
+            border-top: 3px solid @orangeFocus;
+            border-right: 3px solid @orangeFocus;
+        }
+    }
+
+    .hjelpetekst__tooltip--hoyre {
+        left: 4rem;
+        top: -2rem;
+        bottom: auto;
+
+        &:before {
+            top: 2rem;
+        }
+
+        &:before,
+        &:focus:after {
+            left: 0;
+            transform: rotate(45deg);
+        }
+
+        &:focus:after {
+            top: 1.75rem;
+            left: 0;
+            border-left: 3px solid @orangeFocus;
+            border-bottom: 3px solid @orangeFocus;
+        }
+    }
+
+    .hjelpetekst__tooltip--venstre {
+        right: 3rem;
+        left: auto;
+        top: -2rem;
+        bottom: auto;
+
+        &:before {
+            top: 2rem;
+        }
+
+        &:before,
+        &:focus:after {
+            right: 0;
+            transform-origin: 100% 0;
+        }
+
+        &:focus:after {
+            top: 1.75rem;
+            right: 0;
+            border-right: 3px solid @orangeFocus;
+            border-bottom: 3px solid @orangeFocus;
+        }
+    }
+}
