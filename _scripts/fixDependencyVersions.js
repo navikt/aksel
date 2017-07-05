@@ -40,7 +40,7 @@ function fixDependencies(pkg, section) {
 function addModuleVersions(files) {
     files.forEach((file) => {
         const pkg = JSON.parse(fs.readFileSync(file, 'utf-8'));
-        globalDeps[pkg.name] = pkg.version;
+        globalDeps[pkg.name] = `^${pkg.version}`;
     });
     return files;
 }
