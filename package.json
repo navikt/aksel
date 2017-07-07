@@ -70,7 +70,7 @@
     "less-loader": "^4.0.4",
     "lesshint": "^3.1.0",
     "lesshint-reporter-stylish": "^2.0.0",
-    "lessvars": "0.0.3",
+    "lessvars": "0.0.5",
     "mustache": "^2.3.0",
     "nav-frontend-core": "^4.0.2",
     "progress": "^2.0.0",
