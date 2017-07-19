@@ -1,0 +1,36 @@
+.textSectionWithImage {
+  &__content {
+    display: flex;
+
+    &__paragraphs {
+      width: 50%;
+    }
+
+    img {
+      border: 4px solid #e7e9e9;
+      background-color: #005B82;
+      position: relative;
+      left: 16px;
+      width: 50%;
+      min-height: 100px;
+      padding: 16px;
+    }
+
+    &--inverted {
+      display: flex;
+
+      p {
+        left: 16px;
+        position: relative;
+      }
+
+      img {
+        border: 4px solid #e7e9e9;
+        background-color: #005B82;
+        width: 50%;
+        min-height: 100px;
+      }
+    }
+  }
+
+}

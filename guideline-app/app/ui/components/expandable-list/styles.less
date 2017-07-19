@@ -1,0 +1,27 @@
+.expandableList {
+
+  list-style: none;
+  padding: 0;
+
+  &__item, &__item--active {
+    padding: 4px;
+    font-weight: normal;
+
+    .link {
+      text-decoration: none;
+      border-bottom: 1px solid #c6c2bf;
+    }
+
+    ul {
+      margin-left: 4px;
+
+      li {
+        padding-top: 8px;
+      }
+    }
+  }
+
+  &__item--active {
+    font-weight: bold;
+  }
+}

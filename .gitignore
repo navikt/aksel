@@ -11,3 +11,5 @@ examples/webpack/node_modules
 examples/webpack/out
 .gitattributes
 .iml
+.DS_Store
+guideline-app/node_modules
