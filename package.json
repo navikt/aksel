@@ -26,7 +26,7 @@
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start",
-    "start-guideline-app": "webpack-dev-server --hot --inline --history-api-fallback --content-base guideline-app/",
+    "start-guideline-app": "webpack-dev-server --hot --inline --history-api-fallback --content-base guideline-app/ --config guideline-app/webpack.config.js",
     "build-guideline-app": "webpack -p --config guideline-app/webpack.config.js"
   },
   "author": "NAV",
