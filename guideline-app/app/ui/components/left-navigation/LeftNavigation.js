@@ -3,6 +3,8 @@ import React from 'react';
 import { ExpandableList } from './../expandable-list/ExpandableList';
 import { routeConfig } from './../../../utils/routing/routes.config';
 
+import logo from './../../../assets/images/logo/logo.png';
+
 import './styles.less';
 
 export const LeftNavigation = () => {
@@ -10,7 +12,7 @@ export const LeftNavigation = () => {
         <div className="leftNavigation">
             <img
                 className="leftNavigation__logo"
-                src="app/assets/images/logo/logo.png"
+                src={ logo }
                 alt=""
             />
 
