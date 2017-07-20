@@ -1,5 +1,5 @@
 import React from 'react';
-import Lukknapp from 'nav-frontend-lukknapp';
+import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
 
 const lukknapp = {
     children: '',

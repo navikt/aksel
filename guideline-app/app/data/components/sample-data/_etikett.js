@@ -3,7 +3,7 @@ import {
     EtikettFokus,
     EtikettInfo,
     EtikettAdvarsel
-} from 'nav-frontend-etiketter';
+} from './../../../../../packages/node_modules/nav-frontend-etiketter';
 
 const etikett = {
     children: 'Slik ser en etikett ut',

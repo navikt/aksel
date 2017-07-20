@@ -1,5 +1,5 @@
 import React from 'react';
-import 'nav-frontend-lenker-style';
+import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 const LenkeComp = (props) => {
     return (

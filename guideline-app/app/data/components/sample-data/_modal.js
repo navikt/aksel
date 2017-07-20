@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Modal from 'nav-frontend-modal';
-import { Knapp } from 'nav-frontend-knapper';
-import { Innholdstittel, Ingress, Normaltekst } from 'nav-frontend-typografi';
+import Modal from './../../../../../packages/node_modules/nav-frontend-modal';
+import { Knapp } from './../../../../../packages/node_modules/nav-frontend-knapper';
+import { Innholdstittel, Ingress, Normaltekst } from './../../../../../packages/node_modules/nav-frontend-typografi';
 
 export class ModalComp extends Component {
     componentWillMount() {

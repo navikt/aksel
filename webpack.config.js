@@ -3,7 +3,7 @@ var webpack = require('webpack'),
 
 module.exports = {
   entry: {
-    scripts: './app/ui/app.js'
+    scripts: './guideline-app/app/ui/app.js'
   },
 
   output: {
@@ -27,8 +27,7 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
-          plugins: [ 'transform-decorators-legacy' ],
-          presets: [ 'es2015', 'react' ]
+          presets: [ 'es2015', 'stage-0', 'react' ]
         }
       },
 
@@ -40,10 +39,11 @@ module.exports = {
           {
             loader: 'less-loader',
             options: {
-              globalVars: {
-                coreModulePath: '\'./../../\'',
-                nodeModulesPath: '\'./../../\''
-              }
+                globalVars: {
+                    nodeModulesPath: '\'~\'',
+                    coreModulePath: '\'~\''
+                },
+                include: path.resolve(__dirname, '../')
             }
           }
         ]

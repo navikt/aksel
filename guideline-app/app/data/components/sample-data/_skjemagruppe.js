@@ -1,5 +1,5 @@
 import React from 'react';
-import { SkjemaGruppe, Checkbox } from 'nav-frontend-skjema';
+import { SkjemaGruppe, Checkbox } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const SkjemaGruppeComp = (props) => {
     const errorMessage = { feilmelding:'Feil! Velg minst et valg' };

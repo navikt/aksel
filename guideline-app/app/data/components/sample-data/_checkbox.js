@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Checkbox
-} from 'nav-frontend-skjema';
+} from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const CheckboxComp = (props) => (<Checkbox { ... props } label='Checkboxfelt-label' />);
 

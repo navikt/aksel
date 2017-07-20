@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ingress } from 'nav-frontend-typografi';
+import { Ingress } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { Colors as c } from './../../../../data';
 import { ColorContrastSample } from './../../../components/color-contrast-sample/ColorContrastSample';

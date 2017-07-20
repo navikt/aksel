@@ -1,8 +1,8 @@
 import React from 'react';
 
 import { SectionTitle } from './../../components/section-title/SectionTitle';
-import {  Normaltekst, Ingress } from 'nav-frontend-typografi';
-import { Knapp } from 'nav-frontend-knapper';
+import {  Normaltekst, Ingress } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { Knapp } from './../../../../../packages/node_modules/nav-frontend-knapper';
 
 import './styles.less';
 

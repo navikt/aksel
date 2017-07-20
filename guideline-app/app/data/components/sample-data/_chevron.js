@@ -3,7 +3,7 @@ import {
     VenstreChevron,
     OppChevron,
     NedChevron
-} from 'nav-frontend-chevron';
+} from './../../../../../packages/node_modules/nav-frontend-chevron';
 
 const chevron = {
     children: '',

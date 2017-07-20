@@ -3,7 +3,7 @@ import {
     Systemtittel,
     Normaltekst,
     Undertittel
-} from 'nav-frontend-typografi';
+} from './../../../../../packages/node_modules/nav-frontend-typografi';
 
 import './styles.less';
 

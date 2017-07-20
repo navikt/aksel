@@ -4,7 +4,7 @@ import {
     Normaltekst,
     Undertittel,
     Ingress
-} from 'nav-frontend-typografi';
+} from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { Sample } from './sampling/Sample';
 

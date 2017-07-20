@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from 'nav-frontend-spinner';
+import Spinner from './../../../../../packages/node_modules/nav-frontend-spinner';
 
 const SpinnerComp = (props) => {
     return (

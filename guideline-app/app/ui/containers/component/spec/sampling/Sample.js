@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { EtikettLiten } from 'nav-frontend-typografi';
+import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SampleEditor } from './SampleEditor';
 import { sampleTypeChange } from '../../../../../redux/actions/sampleActions';

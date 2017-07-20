@@ -1,10 +1,10 @@
 import {
     AlertStripeSuksess,
-    AlertStripeAdvarsel,
-    AlertStripeInfo,
     AlertStripeSuksessSolid,
-    AlertStripeInfoSolid
-} from 'nav-frontend-alertstriper';
+    AlertStripeInfo,
+    AlertStripeInfoSolid,
+    AlertStripeAdvarsel
+} from './../../../../../packages/node_modules/nav-frontend-alertstriper';
 
 const alertstripe = {
     children: 'Slik ser en Alertstripe ut',

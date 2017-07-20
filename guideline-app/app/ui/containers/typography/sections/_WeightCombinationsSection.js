@@ -4,12 +4,12 @@ import {
     Normaltekst,
     Innholdstittel,
     Undertittel
-} from 'nav-frontend-typografi';
+} from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import {
     Row,
     Column
-} from 'nav-frontend-grid';
+} from './../../../../../../packages/node_modules/nav-frontend-grid';
 
 import { SectionTitle } from './../../../components/section-title/SectionTitle';
 

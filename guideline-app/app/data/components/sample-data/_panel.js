@@ -1,6 +1,6 @@
 import React from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Lenkepanel from 'nav-frontend-lenkepanel';
+import Ekspanderbartpanel from './../../../../../packages/node_modules/nav-frontend-ekspanderbartpanel';
+import Lenkepanel from './../../../../../packages/node_modules/nav-frontend-lenkepanel';
 
 const title = 'Slik ser et panel ut';
 

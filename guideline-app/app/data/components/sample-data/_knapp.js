@@ -2,7 +2,7 @@ import {
     Knapp,
     Hovedknapp,
     Fareknapp
-} from 'nav-frontend-knapper';
+} from './../../../../../packages/node_modules/nav-frontend-knapper';
 
 const knapp = {
     children: 'Slik ser en knapp ut',

@@ -7,7 +7,7 @@ import {
     Ingress,
     Element,
     EtikettLiten
-} from 'nav-frontend-typografi';
+} from './../../../../packages/node_modules/nav-frontend-typografi';
 
 export const informationHierarchyData = [
     { component: Sidetittel, content: 'Sidetittel' },

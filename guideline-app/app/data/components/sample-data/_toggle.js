@@ -3,7 +3,7 @@ import React from 'react';
 import {
     ToggleGruppe,
     ToggleKnapp
-} from 'nav-frontend-toggle';
+} from './../../../../../packages/node_modules/nav-frontend-toggle';
 
 const ToggleComp = (props) => {
     const dummy = new Array(props.numBtns).fill(0);

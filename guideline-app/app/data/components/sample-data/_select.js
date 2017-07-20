@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Select
-} from 'nav-frontend-skjema';
+} from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const SelectComp = (props) => (
     <Select { ... props } label='Hvilket land er best om sommeren?'>

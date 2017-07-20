@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Textarea
-} from 'nav-frontend-skjema';
+} from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const TextareaComp = (props) => {
     return (

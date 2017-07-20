@@ -5,7 +5,7 @@ import {
     HjelpetekstVenstre,
     HjelpetekstMidt,
     HjelpetekstAuto
-} from 'nav-frontend-hjelpetekst';
+} from './../../../../../packages/node_modules/nav-frontend-hjelpetekst';
 
 const hjelpetekst = {
     children: 'Slik ser en hjelpetekst ut',

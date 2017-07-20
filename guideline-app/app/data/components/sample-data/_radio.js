@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Radio
-} from 'nav-frontend-skjema';
+} from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const RadioComp = (props) => (<Radio { ... props } label='Radio-label' name='radio' />);
 

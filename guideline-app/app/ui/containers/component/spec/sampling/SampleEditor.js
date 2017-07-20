@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { EtikettLiten } from 'nav-frontend-typografi';
-import { Radio, Checkbox } from 'nav-frontend-skjema';
+import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
+import { Radio, Checkbox } from './../../../../../../../packages/node_modules/nav-frontend-skjema';
 
 import {
     sampleTypeChange,

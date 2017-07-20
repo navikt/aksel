@@ -3,9 +3,9 @@ import React from 'react';
 import {
     Row,
     Column
-} from 'nav-frontend-grid';
+} from './../../../../../../packages/node_modules/nav-frontend-grid';
 
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SourceSansProData as samples } from '../../../../data/index';
 import { SectionTitle } from './../../../components/section-title/SectionTitle';

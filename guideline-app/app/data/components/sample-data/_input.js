@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Input
-} from 'nav-frontend-skjema';
+} from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const InputComp = (props) => (<Input { ... props } label='Inputfelt-label' />);
 
