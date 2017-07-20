@@ -28,7 +28,7 @@
     "watch": "npm start",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
     "build-guideline-app": "webpack -p --config guideline-app/conf/webpack.production.js",
-    "deploy-guideline-app": "gh-pages -d guideline-app/dist"
+    "deploy-guideline-app": "npm run build-guideline-app && gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "MIT",
