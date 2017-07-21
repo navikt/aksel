@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
     Normaltekst,
     Undertittel
-} from './../../../../../../packages/node_modules/nav-frontend-typografi';
+} from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 export class GuidelineContentForDesigners extends Component {
 

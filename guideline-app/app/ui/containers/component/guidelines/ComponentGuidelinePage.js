@@ -5,11 +5,11 @@ import {
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
-import { Sample } from './sampling/Sample';
+import { Sample } from './common/Sample';
 import { Tabbar } from './../../../components/tabbar/Tabbar';
 
-import { GuidelineContentForDesigners } from './GuidelineContent.designers';
-import { GuidelineContentForDevelopers } from './GuidelineContent.developers';
+import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
+import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
 
 export class ComponentGuidelinePage extends React.Component {
 

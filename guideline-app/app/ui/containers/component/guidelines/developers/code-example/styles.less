@@ -1,14 +1,9 @@
-@import './../../../../../node_modules/highlight.js/styles/github.css';
+@import '../../../../../../../../node_modules/highlight.js/styles/github.css';
 
 .codeExample {
   padding: 12px;
   margin: 0px 24px 24px 12px;
   background-color: #e7e9e9;
-  opacity: 0.8;
-
-  &:hover {
-    opacity: 1;
-  }
 
   &__centeredText {
     cursor: pointer;
@@ -31,8 +26,14 @@
     justify-content: center;
 
     &__option {
+      cursor: pointer;
       flex: 1;
       font-size: 16px;
+
+      &--active {
+        font-size: 20px;
+        font-weight: bold;
+      }
     }
   }
 

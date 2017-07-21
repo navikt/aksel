@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Normaltekst, EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
-import { renderComponentWithModifiersAndChildren } from './../../../utils/dom/render.utils';
+import { Normaltekst, EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
+import { renderComponentWithModifiersAndChildren } from '../../../../../../utils/dom/render.utils';
 import { connect } from 'react-redux';
 import prettifyXml from 'prettify-xml';
 import Highlight from 'react-highlight';
@@ -31,8 +31,11 @@ export class CodeExample extends Component {
     renderCodeSelector() {
         return (
             <div className="codeSelector">
-                <EtikettLiten className="codeSelector__option">React</EtikettLiten>
-                <EtikettLiten className="codeSelector__option">HTML</EtikettLiten>
+                {
+                    this.props.showReactTab &&
+                    <EtikettLiten className="codeSelector__option">React</EtikettLiten>
+                }
+                <EtikettLiten className="codeSelector__option codeSelector__option--active">HTML</EtikettLiten>
                 <EtikettLiten className="codeSelector__option">CSS</EtikettLiten>
             </div>
         );
