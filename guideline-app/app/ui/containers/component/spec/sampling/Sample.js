@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SampleEditor } from './SampleEditor';
+import { CodeExample } from '../../../code-example/CodeExample';
 import { sampleTypeChange } from '../../../../../redux/actions/sampleActions';
 
 import './styles.less';
@@ -90,18 +91,22 @@ export class Sample extends Component {
 
     render () {
         return (
-            <div className="sampleWrapper">
-                <div className="sample">
-                    <EtikettLiten>Eksempel</EtikettLiten>
-                    <div className="componentSample">
-                        { this.renderComponent() }
+            <div>
+                <div className="sampleWrapper">
+                    <div className="sample">
+                        <EtikettLiten>Eksempel</EtikettLiten>
+                        <div className="componentSample">
+                            { this.renderComponent() }
+                        </div>
                     </div>
+
+                    {
+                        this.props.sampleData &&
+                        <SampleEditor sampleData={ this.props.sampleData } />
+                    }
                 </div>
 
-                {
-                    this.props.sampleData &&
-                    <SampleEditor sampleData={ this.props.sampleData } />
-                }
+                <CodeExample />
             </div>
         )
     }
