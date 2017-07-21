@@ -1,21 +1,72 @@
 import React, { Component } from 'react';
+import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import { shallow } from 'enzyme';
 import { connect } from 'react-redux';
 import prettifyXml from 'prettify-xml';
 import Highlight from 'react-highlight';
+import DOMPurify from 'dompurify';
+
 import './styles.less';
 
 export class CodeExample extends Component {
 
+    componentWillMount() {
+        this.state = {
+            displayCode: false
+        };
+    }
+
+    displayCode() {
+        this.setState({
+            displayCode: true
+        });
+    }
+
+    hideCode() {
+        this.setState({
+            displayCode: false
+        });
+    }
+
+    renderHighlightedCode(code, lang) {
+        return (
+            <Highlight className={ lang }>
+                { code }
+            </Highlight>
+        )
+    }
+
+    renderDisplayCodeTrigger() {
+        return (
+            <EtikettLiten className="codeExample__centeredText" onClick={ () => this.displayCode() }>
+                Se kode
+            </EtikettLiten>
+        );
+    }
+
+    renderHideCodeTrigger() {
+        return (
+            <EtikettLiten className="codeExample__centeredText" onClick={ () => this.hideCode() }>
+                Skjul kode
+            </EtikettLiten>
+        );
+    }
+
     render() {
         const shallowComponent = shallow(<this.props.activeComponent>SomeChild</this.props.activeComponent>);
-        const html = prettifyXml(shallowComponent.html());
+        let html = prettifyXml(shallowComponent.html());
+
+        // in case of any storage stuff later, make sure to sanitize the HTML
+        // due to usage of dangerouslySetInnerHTML in react-highlight dependency
+        const purifiedHTML = DOMPurify.sanitize(html);
 
         return (
             <div className="codeExample">
-                <Highlight className='html'>
-                    { html }
-                </Highlight>
+
+                { !this.state.displayCode && this.renderDisplayCodeTrigger() }
+                { this.state.displayCode && this.renderHighlightedCode(purifiedHTML, 'html') }
+                { this.state.displayCode && this.renderHideCodeTrigger() }
+
             </div>
         );
     }

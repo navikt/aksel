@@ -4,9 +4,19 @@
   padding: 12px;
   margin: 0px 24px 24px 12px;
   background-color: #e7e9e9;
-  word-wrap: break-word;
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__centeredText {
+    cursor: pointer;
+    text-align: center;
+  }
 
   pre {
+    cursor: default;
     white-space: pre-wrap;
   }
 }
