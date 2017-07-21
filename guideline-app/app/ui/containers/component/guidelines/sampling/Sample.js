@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SampleEditor } from './SampleEditor';
-import { CodeExample } from '../../../code-example/CodeExample';
 import { sampleTypeChange } from '../../../../../redux/actions/sampleActions';
+import { renderComponentWithModifiersAndChildren } from './../../../../../utils/dom/render.utils';
 
 import './styles.less';
 
@@ -74,21 +74,6 @@ export class Sample extends Component {
         this.props.dispatch(sampleTypeChange(component));
     }
 
-    renderComponent() {
-        if (this.props.activeComponent) {
-            let attributes = {};
-            this.props.activeMultipleChoiceModifiers.forEach((modif) => { attributes[modif.value] = true; });
-
-            return (
-                <this.props.activeComponent { ... attributes }>
-                    { this.props.sampleData.children || '' }
-                </this.props.activeComponent>
-            )
-
-            // TODO: Implement automatic handling of components with no children (such as radio, checkbox and input)
-        }
-    }
-
     render () {
         return (
             <div>
@@ -96,7 +81,13 @@ export class Sample extends Component {
                     <div className="sample">
                         <EtikettLiten>Eksempel</EtikettLiten>
                         <div className="componentSample">
-                            { this.renderComponent() }
+                            {
+                                renderComponentWithModifiersAndChildren(
+                                    this.props.activeComponent,
+                                    this.props.activeMultipleChoiceModifiers,
+                                    this.props.sampleData.children || ''
+                                )
+                            }
                         </div>
                     </div>
 

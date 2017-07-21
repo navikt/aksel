@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
-import { shallow } from 'enzyme';
+import { Normaltekst, EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { renderComponentWithModifiersAndChildren } from './../../../utils/dom/render.utils';
 import { connect } from 'react-redux';
 import prettifyXml from 'prettify-xml';
 import Highlight from 'react-highlight';
@@ -28,6 +28,16 @@ export class CodeExample extends Component {
         });
     }
 
+    renderCodeSelector() {
+        return (
+            <div className="codeSelector">
+                <EtikettLiten className="codeSelector__option">React</EtikettLiten>
+                <EtikettLiten className="codeSelector__option">HTML</EtikettLiten>
+                <EtikettLiten className="codeSelector__option">CSS</EtikettLiten>
+            </div>
+        );
+    }
+
     renderHighlightedCode(code, lang) {
         return (
             <Highlight className={ lang }>
@@ -36,56 +46,31 @@ export class CodeExample extends Component {
         )
     }
 
-    renderDisplayCodeTrigger() {
+    renderCodeExampleFooter() {
         return (
-            <EtikettLiten className="codeExample__centeredText" onClick={ () => this.displayCode() }>
-                Se kode
-            </EtikettLiten>
+            <Normaltekst className="footer">Trykk i for å koden for å kopiere til clipboard</Normaltekst>
         );
     }
 
-    renderHideCodeTrigger() {
-        return (
-            <div>
-                <EtikettLiten>REACT | HTML | CSS</EtikettLiten>
-                <EtikettLiten className="codeExample__centeredText" onClick={ () => this.hideCode() }>
-                    Skjul kode
-                </EtikettLiten>
-                <EtikettLiten>Copy to clipboard</EtikettLiten>
-            </div>
-        );
-    }
-
-    renderCodeTypeSelector() {
-        return (
-            <div>
-                <div className="codeTypeSelector">
-                    <EtikettLiten>React</EtikettLiten>
-                    <EtikettLiten>HTML</EtikettLiten>
-                    <EtikettLiten>CSS</EtikettLiten>
-                </div>
-
-                <EtikettLiten>Copy to clipboard</EtikettLiten>
-            </div>
-        )
-    }
 
     render() {
-        const shallowComponent = shallow(<this.props.activeComponent>SomeChild</this.props.activeComponent>);
-        let html = prettifyXml(shallowComponent.html());
+        const shallowComponent = renderComponentWithModifiersAndChildren(
+            this.props.activeComponent,
+            this.props.activeMultipleChoiceModifiers,
+            '',
+            true
+        );
 
+        let html = prettifyXml(shallowComponent.html());
         // in case of any storage stuff later, make sure to sanitize the HTML
         // due to usage of dangerouslySetInnerHTML in react-highlight dependency
         const purifiedHTML = DOMPurify.sanitize(html);
 
         return (
             <div className="codeExample">
-
-                { !this.state.displayCode && this.renderDisplayCodeTrigger() }
-                { this.state.displayCode && this.renderCodeTypeSelector() }
-                { this.state.displayCode && this.renderHighlightedCode(purifiedHTML, 'html') }
-                { this.state.displayCode && this.renderHideCodeTrigger() }
-
+                { this.renderCodeSelector() }
+                { this.renderHighlightedCode(purifiedHTML, 'html') }
+                { this.renderCodeExampleFooter() }
             </div>
         );
     }

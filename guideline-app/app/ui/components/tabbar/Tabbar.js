@@ -4,12 +4,17 @@ import { EtikettLiten } from './../../../../../packages/node_modules/nav-fronten
 
 import './styles.less';
 
+// todo: Probably needs a rewrite
 export class Tabbar extends Component {
 
     componentWillMount() {
         this.state = {
-            activeIndex: -1
+            activeIndex: this.props.activeIndex || -1
         };
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        nextState.activeIndex = nextState.activeIndex > -1 ? nextState.activeIndex : nextProps.activeIndex || -1;
     }
 
     changeActiveTabbarItemIndex(itemIndex) {
@@ -31,7 +36,12 @@ export class Tabbar extends Component {
                 index={ index }
                 key={ index }
                 active={ this.tabbarItemIsActive(item, index) }
-                tabbarItemClicked={ () => this.changeActiveTabbarItemIndex(index) }
+                tabbarItemClicked={
+                    () => {
+                        this.changeActiveTabbarItemIndex(item, index);
+                        this.props.activeItemChange(item);
+                    }
+                }
                 { ... item }
             />
         ));

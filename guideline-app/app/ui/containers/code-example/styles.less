@@ -16,11 +16,27 @@
   }
 
   pre {
-    cursor: default;
+    cursor: pointer;
     white-space: pre-wrap;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
   }
   
-  .codeTypeSelector {
+  .codeSelector {
     display: flex;
+    text-align: center;
+    justify-content: center;
+
+    &__option {
+      flex: 1;
+      font-size: 16px;
+    }
+  }
+
+  .footer {
+    text-align: center;
   }
 }

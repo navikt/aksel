@@ -2,14 +2,27 @@ import React from 'react';
 
 import {
     Normaltekst,
-    Undertittel,
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { Sample } from './sampling/Sample';
 import { Tabbar } from './../../../components/tabbar/Tabbar';
 
+import { GuidelineContentForDesigners } from './GuidelineContent.designers';
+import { GuidelineContentForDevelopers } from './GuidelineContent.developers';
+
 export class ComponentGuidelinePage extends React.Component {
+
+    componentWillMount() {
+        this.tabbarItems = [
+            { label: 'Retningslinjer for design', defaultActive: true, content: GuidelineContentForDesigners },
+            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers }
+        ];
+
+        this.state = {
+            activeContent: this.tabbarItems[0].content
+        };
+    }
 
     renderAboutSection() {
         return (
@@ -41,47 +54,21 @@ export class ComponentGuidelinePage extends React.Component {
         );
     }
 
-    renderHowToUseSection() {
-        return (
-            <div className="section">
-                <Undertittel>Hvordan bruker jeg { this.props.componentName }?</Undertittel>
-                <Normaltekst>
-                    { this.props.howToUse }
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
-                    si quid attuleris, quam te reprehenderim. Quae quo sunt excelsiores, eo dant clariora indicia
-                    naturae. Duo enim genera quae erant, fecit tria. Traditur, inquit, ab Epicuro ratio neglegendi
-                    doloris. Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint. Duo Reges: constructio
-                    interrete. Quoniam, si dis placet, ab Epicuro loqui discimus. Etiam beatissimum?
-                </Normaltekst>
-            </div>
-        );
-    }
-
-    renderAccessibilitySection() {
-        return (
-            <div className="section">
-                <Undertittel>{ this.props.componentName } og universell utforming</Undertittel>
-                <Normaltekst>
-                    { this.props.accessibility }
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
-                    si quid attuleris, quam te reprehenderim. Quae quo sunt excelsiores, eo dant clariora indicia
-                    naturae. Duo enim genera quae erant, fecit tria. Traditur, inquit, ab Epicuro ratio neglegendi
-                    doloris. Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint. Duo Reges: constructio
-                    interrete. Quoniam, si dis placet, ab Epicuro loqui discimus. Etiam beatissimum?
-                </Normaltekst>
-            </div>
-        );
+    updateActiveContent(index) {
+        this.setState({
+            activeContent: this.tabbarItems[index].content,
+            activeIndex: index
+        });
     }
 
     renderTabbar() {
-        const items = [
-            { label: 'Retningslinjer for design', defaultActive: true },
-            { label: 'Utviklerdokumentasjon' }
-        ];
-
         return (
             <div className="section">
-                <Tabbar items={ items } />
+                <Tabbar
+                    items={ this.tabbarItems }
+                    activeItemChange={ (item) => this.updateActiveContent(this.tabbarItems.indexOf(item)) }
+                    activeIndex={ this.state.activeIndex }
+                />
             </div>
         )
     }
@@ -91,8 +78,8 @@ export class ComponentGuidelinePage extends React.Component {
             <div className="componentSpecPage">
                 { this.renderAboutSection() }
                 { this.renderTabbar() }
-                { this.renderHowToUseSection() }
-                { this.renderAccessibilitySection() }
+
+                <this.state.activeContent { ... this.props } />
             </div>
         );
     }
