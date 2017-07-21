@@ -48,7 +48,7 @@ export class CodeExample extends Component {
 
     renderCodeExampleFooter() {
         return (
-            <Normaltekst className="footer">Trykk i for å koden for å kopiere til clipboard</Normaltekst>
+            <Normaltekst className="footer">Trykk i koden for å kopiere til clipboard</Normaltekst>
         );
     }
 
