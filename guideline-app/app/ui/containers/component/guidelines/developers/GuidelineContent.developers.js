@@ -8,7 +8,10 @@ export class GuidelineContentForDevelopers extends Component {
         const showReactTab = this.props.sampleData.react !== false;
         return (
             <div className="section">
-                <CodeExample showReactTab={ showReactTab } />
+                <CodeExample
+                    showReactTab={ showReactTab }
+                    { ... this.props }
+                />
             </div>
         )
     }

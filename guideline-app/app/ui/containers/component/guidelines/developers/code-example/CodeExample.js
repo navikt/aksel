@@ -55,11 +55,10 @@ export class CodeExample extends Component {
 
 
     render() {
-        const html = getHtmlCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers);
-        const react = getReactCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers);
+        const children = this.props.sampleData.children;
 
+        const html = getHtmlCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers, children);
 
-        console.log(react);
         return (
             <div className="codeExample">
                 { this.renderCodeSelector() }
