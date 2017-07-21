@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Normaltekst, EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
-import { renderComponentWithModifiersAndChildren } from '../../../../../../utils/dom/render.utils';
+import { getHtmlCodeForComponent, getReactCodeForComponent } from '../../../../../../utils/dom/code-sampling.utils';
 import { connect } from 'react-redux';
-import prettifyXml from 'prettify-xml';
 import Highlight from 'react-highlight';
-import DOMPurify from 'dompurify';
 
 import './styles.less';
 
@@ -57,22 +55,15 @@ export class CodeExample extends Component {
 
 
     render() {
-        const shallowComponent = renderComponentWithModifiersAndChildren(
-            this.props.activeComponent,
-            this.props.activeMultipleChoiceModifiers,
-            '',
-            true
-        );
+        const html = getHtmlCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers);
+        const react = getReactCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers);
 
-        let html = prettifyXml(shallowComponent.html());
-        // in case of any storage stuff later, make sure to sanitize the HTML
-        // due to usage of dangerouslySetInnerHTML in react-highlight dependency
-        const purifiedHTML = DOMPurify.sanitize(html);
 
+        console.log(react);
         return (
             <div className="codeExample">
                 { this.renderCodeSelector() }
-                { this.renderHighlightedCode(purifiedHTML, 'html') }
+                { this.renderHighlightedCode(html, 'html') }
                 { this.renderCodeExampleFooter() }
             </div>
         );
