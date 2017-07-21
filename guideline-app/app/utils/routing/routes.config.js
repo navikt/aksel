@@ -4,7 +4,7 @@ import { resolveComponentRoutes } from './routes.utils';
 
 import { ColorPage } from '../../ui/containers/color/ColorPage';
 import { HomePage } from '../../ui/containers/home/HomePage';
-import { ComponentPage } from '../../ui/containers/component/main/ComponentPage.main';
+import { ComponentMainPage } from '../../ui/containers/component/main/ComponentMainPage';
 import { LayoutPage } from '../../ui/containers/layout/LayoutPage';
 import { AccessibilityPage } from '../../ui/containers/accessibility/AccessibilityPage';
 import { TypographyPage } from '../../ui/containers/typography/TypographyPage';
@@ -18,7 +18,7 @@ export const routeConfig = [
     },
     {
         path: '/components',
-        component: ComponentPage,
+        component: ComponentMainPage,
         title: 'Komponenter',
         routes: resolveComponentRoutes('components')
     },

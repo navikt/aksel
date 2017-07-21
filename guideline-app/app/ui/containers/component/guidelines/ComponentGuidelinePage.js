@@ -7,8 +7,9 @@ import {
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { Sample } from './sampling/Sample';
+import { Tabbar } from './../../../components/tabbar/Tabbar';
 
-export class ComponentSpecPage extends React.Component {
+export class ComponentGuidelinePage extends React.Component {
 
     renderAboutSection() {
         return (
@@ -72,10 +73,24 @@ export class ComponentSpecPage extends React.Component {
         );
     }
 
+    renderTabbar() {
+        const items = [
+            { label: 'Retningslinjer for design', defaultActive: true },
+            { label: 'Utviklerdokumentasjon' }
+        ];
+
+        return (
+            <div className="section">
+                <Tabbar items={ items } />
+            </div>
+        )
+    }
+
     render () {
         return (
             <div className="componentSpecPage">
                 { this.renderAboutSection() }
+                { this.renderTabbar() }
                 { this.renderHowToUseSection() }
                 { this.renderAccessibilitySection() }
             </div>

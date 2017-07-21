@@ -46,10 +46,28 @@ export class CodeExample extends Component {
 
     renderHideCodeTrigger() {
         return (
-            <EtikettLiten className="codeExample__centeredText" onClick={ () => this.hideCode() }>
-                Skjul kode
-            </EtikettLiten>
+            <div>
+                <EtikettLiten>REACT | HTML | CSS</EtikettLiten>
+                <EtikettLiten className="codeExample__centeredText" onClick={ () => this.hideCode() }>
+                    Skjul kode
+                </EtikettLiten>
+                <EtikettLiten>Copy to clipboard</EtikettLiten>
+            </div>
         );
+    }
+
+    renderCodeTypeSelector() {
+        return (
+            <div>
+                <div className="codeTypeSelector">
+                    <EtikettLiten>React</EtikettLiten>
+                    <EtikettLiten>HTML</EtikettLiten>
+                    <EtikettLiten>CSS</EtikettLiten>
+                </div>
+
+                <EtikettLiten>Copy to clipboard</EtikettLiten>
+            </div>
+        )
     }
 
     render() {
@@ -64,6 +82,7 @@ export class CodeExample extends Component {
             <div className="codeExample">
 
                 { !this.state.displayCode && this.renderDisplayCodeTrigger() }
+                { this.state.displayCode && this.renderCodeTypeSelector() }
                 { this.state.displayCode && this.renderHighlightedCode(purifiedHTML, 'html') }
                 { this.state.displayCode && this.renderHideCodeTrigger() }
 

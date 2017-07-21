@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ComponentSpecPage } from '../../ui/containers/component/spec/ComponentPage.spec';
+import { ComponentGuidelinePage } from '../../ui/containers/component/guidelines/ComponentGuidelinePage';
 import { Components as components } from './../../data';
 
 export const resolveComponentRoutes = (routePrefix) => {
@@ -9,7 +9,7 @@ export const resolveComponentRoutes = (routePrefix) => {
             path: ('/' + routePrefix + '/' + (component.componentName)).toLowerCase(),
             component: () => {
                 return (
-                    <ComponentSpecPage { ... component } />
+                    <ComponentGuidelinePage { ... component } />
                 );
             },
             title: component.label

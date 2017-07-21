@@ -105,8 +105,6 @@ export class Sample extends Component {
                         <SampleEditor sampleData={ this.props.sampleData } />
                     }
                 </div>
-
-                <CodeExample />
             </div>
         )
     }
