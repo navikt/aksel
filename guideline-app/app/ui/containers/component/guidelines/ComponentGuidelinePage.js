@@ -11,6 +11,8 @@ import { Tabbar } from './../../../components/tabbar/Tabbar';
 import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
 import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
 
+import './styles.less';
+
 export class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
@@ -75,7 +77,7 @@ export class ComponentGuidelinePage extends React.Component {
 
     render () {
         return (
-            <div className="componentSpecPage">
+            <div className="componentGuidelinePage">
                 { this.renderAboutSection() }
                 { this.renderTabbar() }
 
