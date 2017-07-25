@@ -1,8 +1,6 @@
-import React from 'react';
 import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
 
 const lukknapp = {
-    children: '',
     types: [
         {
             component: Lukknapp,
@@ -10,11 +8,13 @@ const lukknapp = {
             _default: true
         },
         {
-            component: () => (<Lukknapp bla />),
+            component: Lukknapp,
+            attrs: { bla: true },
             label: 'Blå'
         },
         {
-            component: () => (<Lukknapp hvit />),
+            component: Lukknapp,
+            attrs: { hvit: true },
             label: 'Hvit'
         }
     ]

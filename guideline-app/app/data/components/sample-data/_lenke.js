@@ -28,7 +28,6 @@ const LenkeComp = (props) => {
 };
 
 const lenke = {
-    children: '',
     react: false,
     types: [
         {

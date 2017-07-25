@@ -6,19 +6,29 @@ const wrapComponentWithAttrs = (c, attrs, children) => {
         component: c
     };
 
+    if (!children) {
+        return (<wrapper.component { ... attrs } />);
+    }
+
     return (<wrapper.component { ... attrs }>{ children }</wrapper.component>);
 };
 
-export const renderComponentWithModifiersAndChildren = (component, modifiers, children, shallowRender = false) => {
+const mergeAttrs = (attrs1, attrs2) => (Object.assign({}, attrs1, attrs2));
+
+export const renderComponentWithModifiersAndChildren = (type, modifiers, children, shallowRender = false) => {
+    const component = type.component;
+
     if (component) {
-        let attributes = {};
-        modifiers.forEach((modif) => { attributes[modif.value] = true; });
+        const typeAttrs = type.attrs;
+
+        let modifierAttrs = {};
+        modifiers.forEach((modif) => { modifierAttrs[modif.value] = true; });
 
 
         if (shallowRender) {
-            return shallow(wrapComponentWithAttrs(component, attributes, children));
+            return shallow(wrapComponentWithAttrs(component, mergeAttrs(typeAttrs, modifierAttrs), children));
         }
 
-        return wrapComponentWithAttrs(component, attributes, children);
+        return wrapComponentWithAttrs(component, mergeAttrs(typeAttrs, modifierAttrs), children);
     }
 };

@@ -5,8 +5,9 @@ import {
     EtikettAdvarsel
 } from './../../../../../packages/node_modules/nav-frontend-etiketter';
 
+import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+
 const etikett = {
-    children: 'Slik ser en etikett ut',
     types: [
         { component: EtikettSuksess, label: 'Suksess', _default: true },
         { component: EtikettFokus, label: 'Fokus' },
@@ -14,5 +15,8 @@ const etikett = {
         { component: EtikettAdvarsel, label: 'Advarsel' }
     ]
 };
+
+const COMMON_VALUE = 'Slik ser en Etikett ut';
+etikett.types = fillTypesAndModifiersWithCommonValue(etikett.types, COMMON_VALUE);
 
 export default etikett;

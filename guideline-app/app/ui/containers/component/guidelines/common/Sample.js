@@ -10,19 +10,23 @@ import './styles.less';
 
 export class Sample extends Component {
     componentWillMount() {
-        if (!this.props.activeComponent || !this.activeComponenMatchesSampleDataDefaults()) {
+        const activeType = this.props.activeType;
+        const activeComponent = activeType ? activeType.component: null;
+
+        if (!activeComponent || !this.activeComponenMatchesSampleDataDefaults()) {
             this.setDefaultComponent();
         }
     }
 
     componentDidUpdate(previousProps) {
         const sampleData = this.props.sampleData;
+        const activeType = this.props.activeType;
 
         if (sampleData.modifiers && sampleData.modifiers.length > 0 && this.props.activeModifier) {
-            const componentMatch = this.getComponentMatchingCurrentActiveModifier();
-            if (componentMatch && componentMatch !== this.props.activeComponent) {
-                this.changeActiveComponent({
-                    component: componentMatch,
+            const typeMatch = this.getTypeMatchingCurrentActiveModifier();
+            if (typeMatch && typeMatch.component !== activeType.component) {
+                this.changeActiveType({
+                    type: typeMatch,
                     resetModifiers: previousProps.componentName !== this.props.componentName
                 });
             }
@@ -31,21 +35,21 @@ export class Sample extends Component {
 
     activeComponenMatchesSampleDataDefaults() {
         const sampleData = this.props.sampleData;
-        const activeComponent = this.props.activeComponent;
+        const activeComponent = this.props.activeType.component;
         return sampleData.types.some((type) => type._default && type.component === activeComponent);
     }
 
-    getComponentMatchingCurrentActiveModifier() {
+    getTypeMatchingCurrentActiveModifier() {
         const types = this.props.sampleData.types;
         const activeModifier = this.props.activeModifier;
-        const activeComponent = this.props.activeComponent;
+        const activeComponent = this.props.activeType.component;
         let match = null;
 
         types.forEach((type) => {
             if (type.modifiers && this.componentExistsInSampleDataSubTree(activeComponent, type)) {
                 type.modifiers.forEach((modifier) => {
                      if (modifier.value === activeModifier.value) {
-                         match = modifier.component;
+                         match = modifier;
                      }
                 });
             }
@@ -58,20 +62,20 @@ export class Sample extends Component {
         return subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component);
     }
 
-    getDefaultComponent() {
-        return this.props.sampleData.types.filter((el) => el._default)[0].component;
+    getDefaultType() {
+        return this.props.sampleData.types.filter((el) => el._default)[0];
     }
 
     setDefaultComponent() {
-        const defaultComponent = this.getDefaultComponent();
-        this.changeActiveComponent({
-            component: defaultComponent,
+        const defaultType = this.getDefaultType();
+        this.changeActiveType({
+            type: defaultType,
             resetModifiers: true
         });
     }
 
-    changeActiveComponent(component) {
-        this.props.dispatch(sampleTypeChange(component));
+    changeActiveType(type) {
+        this.props.dispatch(sampleTypeChange(type));
     }
 
     render () {
@@ -83,9 +87,9 @@ export class Sample extends Component {
                         <div className="componentSample">
                             {
                                 renderComponentWithModifiersAndChildren(
-                                    this.props.activeComponent,
+                                    this.props.activeType,
                                     this.props.activeMultipleChoiceModifiers,
-                                    this.props.sampleData.children || ''
+                                    this.props.activeType.children || ''
                                 )
                             }
                         </div>
@@ -102,7 +106,7 @@ export class Sample extends Component {
 }
 
 Sample = connect((state) => ({
-    activeComponent: state.sample.activeComponent,
+    activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
 }))(Sample);

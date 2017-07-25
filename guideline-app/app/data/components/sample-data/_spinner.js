@@ -1,30 +1,22 @@
-import React from 'react';
 import Spinner from './../../../../../packages/node_modules/nav-frontend-spinner';
-
-const SpinnerComp = (props) => {
-    return (
-        <Spinner
-            storrelse={ props.storrelse }
-            stroke={ props.stroke }
-            negativ={ props.negativ }
-        />
-    );
-};
 
 const spinner = {
     children: '',
     types: [
         {
-            component: (props) => (<SpinnerComp storrelse="xxs" { ... props } />),
-            label: 'X Ekstra Liten (xxs)'
+            component: Spinner,
+            label: 'X Ekstra Liten (xxs)',
+            attrs: { storrelse: 'xxs' }
         },
         {
-            component: (props) => (<SpinnerComp storrelse="xs" { ... props } />),
-            label: 'Ekstra Liten (xs)'
+            component: Spinner,
+            label: 'Ekstra Liten (xs)',
+            attrs: { storrelse: 'xs' }
         },
         {
-            component: (props) => (<SpinnerComp storrelse="s" { ... props } />),
-            label: 'Liten (s)'
+            component: Spinner,
+            label: 'Liten (s)',
+            attrs: { storrelse: 's' }
         },
         {
             component: Spinner,
@@ -32,20 +24,24 @@ const spinner = {
             _default: true
         },
         {
-            component: (props) => (<SpinnerComp storrelse="l" { ... props } />),
-            label: 'Stor (l)'
+            component: Spinner,
+            label: 'Stor (l)',
+            attrs: { storrelse: 'l' }
         },
         {
-            component: (props) => (<SpinnerComp storrelse="xl" { ... props } />),
-            label: 'Ekstra Stor (xl)'
+            component: Spinner,
+            label: 'Ekstra Stor (xl)',
+            attrs: { storrelse: 'xl' }
         },
         {
-            component: (props) => (<SpinnerComp storrelse="xxl" { ... props } />),
-            label: 'X Ekstra Stor (xxl)'
+            component: Spinner,
+            label: 'X Ekstra Stor (xxl)',
+            attrs: { storrelse: 'xxl' }
         },
         {
-            component: (props) => (<SpinnerComp storrelse="xxxl" { ... props } />),
-            label: 'XX Ekstra Stor (xxxl)'
+            component: Spinner,
+            label: 'XX Ekstra Stor (xxxl)',
+            attrs: { storrelse: 'xxxl' }
         }
     ],
     multipleChoiceModifiers: [

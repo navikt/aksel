@@ -44,7 +44,9 @@ export class ComponentGuidelinePage extends React.Component {
 
                 {
                     this.props.sampleData &&
-                    <Sample { ... this.props } />
+                    <Sample
+                        { ... this.props }
+                    />
                 }
                 <Normaltekst>
                     Duarum enim vitarum nobis erunt instituta capienda. Conferam avum tuum Drusum cum C. Atqui reperies,

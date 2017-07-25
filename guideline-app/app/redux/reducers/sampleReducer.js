@@ -2,7 +2,9 @@ import * as types from './../constants/ActionTypes';
 
 const initialState = {
     activeMultipleChoiceModifiers: [],
-    activeComponent: null
+    activeType: {
+        component: null
+    }
 };
 
 export function sample(state = initialState, action) {
@@ -13,7 +15,7 @@ export function sample(state = initialState, action) {
                 activeModifier: action.value
             });
 
-        case types.ACTIVE_COMPONENT_CHANGE:
+        case types.ACTIVE_TYPE_CHANGE:
             let multipleChoiceModifiers = state.activeMultipleChoiceModifiers;
             if (action.value.resetModifiers === true) {
                 multipleChoiceModifiers = [];
@@ -21,7 +23,7 @@ export function sample(state = initialState, action) {
 
             return Object.assign({}, {
                 ... state,
-                activeComponent: action.value.component,
+                activeType: action.value.type,
                 activeMultipleChoiceModifiers: multipleChoiceModifiers
             });
 

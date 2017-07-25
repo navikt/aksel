@@ -1,14 +1,15 @@
-import React from 'react';
-
 import {
     Checkbox
 } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
-const CheckboxComp = (props) => (<Checkbox { ... props } label='Checkboxfelt-label' />);
-
 const checkbox = {
     types: [
-        { component: (props) => (<CheckboxComp disabled={ props.disabled } />), label: 'Vanlig', _default: true }
+        {
+            component: Checkbox,
+            label: 'Vanlig',
+            attrs: { label: 'Checkboxfelt-label', disabled: false },
+            _default: true
+        }
     ],
     multipleChoiceModifiers: [
         { value: 'disabled', label: 'Disabled' }

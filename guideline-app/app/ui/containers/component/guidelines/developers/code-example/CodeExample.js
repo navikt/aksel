@@ -55,9 +55,10 @@ export class CodeExample extends Component {
 
 
     render() {
-        const children = this.props.sampleData.children;
+        const children = this.props.activeType.children;
 
-        const html = getHtmlCodeForComponent(this.props.activeComponent, this.props.activeMultipleChoiceModifiers, children);
+        const html = getHtmlCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
+        const jsx = getReactCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
 
         return (
             <div className="codeExample">
@@ -71,7 +72,7 @@ export class CodeExample extends Component {
 }
 
 CodeExample = connect((state) => ({
-    activeComponent: state.sample.activeComponent,
+    activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
 }))(CodeExample);

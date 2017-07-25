@@ -7,6 +7,8 @@ import {
     HjelpetekstAuto
 } from './../../../../../packages/node_modules/nav-frontend-hjelpetekst';
 
+import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+
 const hjelpetekst = {
     children: 'Slik ser en hjelpetekst ut',
     types: [
@@ -18,5 +20,8 @@ const hjelpetekst = {
         { component: HjelpetekstAuto, label: 'Automatisk' }
     ]
 };
+
+const COMMON_VALUE = 'Slik ser en hjelpetekst ut';
+hjelpetekst.types = fillTypesAndModifiersWithCommonValue(hjelpetekst.types, COMMON_VALUE);
 
 export default hjelpetekst;

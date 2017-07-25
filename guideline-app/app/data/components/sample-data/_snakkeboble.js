@@ -8,12 +8,22 @@ const snakkeboble = {
     children: '',
     types: [
         {
-            component: () => <Snakkeboble dato="14.07.2017 kl. 10:08">{chatText1}</Snakkeboble>,
+            component: Snakkeboble,
+            attrs: {
+                dato: '14.07.2017 kl. 10:08',
+                pilHoyre: false
+            },
+            children: chatText1,
             label: 'Venstreorientert',
             _default: true
         },
         {
-            component: () => <Snakkeboble dato="14.07.2017 kl. 10:12" pilHoyre>{chatText2}</Snakkeboble>,
+            component: Snakkeboble,
+            attrs: {
+                dato: '14.07.2017 kl. 10:12',
+                pilHoyre: true
+            },
+            children: chatText2,
             label: 'Høyreorientert',
             _default: true
         }

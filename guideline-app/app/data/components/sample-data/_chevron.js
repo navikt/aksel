@@ -6,7 +6,6 @@ import {
 } from './../../../../../packages/node_modules/nav-frontend-chevron';
 
 const chevron = {
-    children: '',
     types: [
         { component: HoyreChevron, label: 'Høyre', _default: true },
         { component: VenstreChevron, label: 'Venstre' },

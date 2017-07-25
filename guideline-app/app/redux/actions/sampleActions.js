@@ -9,6 +9,6 @@ export const sampleMultipleChoiceModifierChange = (value) => ({
     value
 });
 export const sampleTypeChange = (value) => ({
-    type: types.ACTIVE_COMPONENT_CHANGE,
+    type: types.ACTIVE_TYPE_CHANGE,
     value
 });

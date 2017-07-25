@@ -4,8 +4,9 @@ import {
     Fareknapp
 } from './../../../../../packages/node_modules/nav-frontend-knapper';
 
+import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+
 const knapp = {
-    children: 'Slik ser en knapp ut',
     types: [
         {
             component: Knapp,
@@ -27,5 +28,8 @@ const knapp = {
         { value: 'disabled', label: 'Disabled' }
     ]
 };
+
+const COMMON_VALUE = 'Slik ser en knapp ut';
+knapp.types = fillTypesAndModifiersWithCommonValue(knapp.types, COMMON_VALUE);
 
 export default knapp;

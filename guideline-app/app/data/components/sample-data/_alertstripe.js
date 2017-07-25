@@ -6,8 +6,9 @@ import {
     AlertStripeAdvarsel
 } from './../../../../../packages/node_modules/nav-frontend-alertstriper';
 
+import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+
 const alertstripe = {
-    children: 'Slik ser en Alertstripe ut',
     types: [
         {
             component: AlertStripeSuksess,
@@ -36,5 +37,8 @@ const alertstripe = {
         { value: 'solid', label: 'Solid' }
     ]
 };
+
+const COMMON_VALUE = 'Slik ser en Alertstripe ut';
+alertstripe.types = fillTypesAndModifiersWithCommonValue(alertstripe.types, COMMON_VALUE);
 
 export default alertstripe;

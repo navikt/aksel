@@ -24,8 +24,10 @@ export class SampleEditor extends Component {
         return this.hasSingleChoiceModifiers() || this.hasMultipleChoiceModifiers();
     }
 
-    dispatchActiveComponentTypeChanged(component) {
-        this.props.dispatch(sampleTypeChange({ component: component }));
+    dispatchActiveTypeChanged(type) {
+        this.props.dispatch(sampleTypeChange({
+            type: type
+        }));
     }
 
     dispatchModifierChanged(modifier) {
@@ -36,14 +38,16 @@ export class SampleEditor extends Component {
     }
 
     hasChangedModifier(sample) {
-        return sample.modifiers && sample.modifiers.some((modifier) => modifier.component === this.props.activeComponent);
+        const activeType = this.props.activeType;
+        return sample.modifiers && sample.modifiers.some((modifier) => modifier.component === activeType.component);
     }
 
     typeIsChecked(sample) {
-        if (!this.props.activeComponent && sample.component) {
+        const activeType = this.props.activeType;
+        if (!activeType.component && sample.component) {
             return sample._default;
         }
-        return this.props.activeComponent === sample.component || this.hasChangedModifier(sample);
+        return activeType === sample || this.hasChangedModifier(sample);
     }
 
     modifierIsChecked(modifier) {
@@ -123,13 +127,13 @@ const SampleType = (props) => {
             name="sampleTypeRadio"
             value={ sample.component.name }
             checked={ context.typeIsChecked(sample) || false }
-            onChange={ () => context.dispatchActiveComponentTypeChanged(sample.component) }
+            onChange={ () => context.dispatchActiveTypeChanged(sample) }
         />
     )
 };
 
 SampleEditor = connect((state) => ({
-    activeComponent: state.sample.activeComponent,
+    activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
 }))(SampleEditor);

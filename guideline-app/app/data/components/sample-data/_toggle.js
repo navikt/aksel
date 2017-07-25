@@ -14,7 +14,7 @@ const ToggleComp = (props) => {
                     dummy.map((v, i) => {
                         let opts = { key: i, value: 'knapp' + i };
                         if (props.defaultChecked === i) {
-                            opts.defaultChecked = 'true';
+                            opts.defaultChecked = true;
                         }
 
                         return(
