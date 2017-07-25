@@ -7,7 +7,6 @@ const input = {
         {
             component: Input,
             attrs: {
-                disabled: false,
                 label: 'Inputfelt-label'
             },
             label: 'Vanlig',

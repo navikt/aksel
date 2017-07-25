@@ -7,7 +7,6 @@ const textarea = {
         {
             component: Textarea,
             attrs: {
-                disabled: false,
                 label: 'Textarea-label',
                 onChange: () => {},
                 value: ''

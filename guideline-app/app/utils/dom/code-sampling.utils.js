@@ -25,5 +25,5 @@ export const getReactCodeForComponent = (component, activeModifiers, children) =
 
 export const getCSSCodeForComponent = (component, activeModifiers) => {
     // todo: get css for comp
-    return getHtmlCodeForComponent(component,activeModifiers);
+    return '.someClazz { background-color: white; }';
 };

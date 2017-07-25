@@ -1,42 +1,58 @@
 import React, { Component } from 'react';
 import { Normaltekst, EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
-import { getHtmlCodeForComponent, getReactCodeForComponent } from '../../../../../../utils/dom/code-sampling.utils';
+import {
+    getHtmlCodeForComponent,
+    getReactCodeForComponent,
+    getCSSCodeForComponent
+} from '../../../../../../utils/dom/code-sampling.utils';
 import { connect } from 'react-redux';
 import Highlight from 'react-highlight';
 
 import './styles.less';
 
 export class CodeExample extends Component {
+    static languages = [
+        { id: 'react', label: 'React' },
+        { id: 'html', label: 'HTML' },
+        { id: 'css', label: 'CSS' }
+    ];
 
     componentWillMount() {
         this.state = {
-            displayCode: false
+            activeTab: CodeExample.languages[1]
         };
-    }
-
-    displayCode() {
-        this.setState({
-            displayCode: true
-        });
-    }
-
-    hideCode() {
-        this.setState({
-            displayCode: false
-        });
     }
 
     renderCodeSelector() {
         return (
             <div className="codeSelector">
-                {
-                    this.props.showReactTab &&
-                    <EtikettLiten className="codeSelector__option">React</EtikettLiten>
-                }
-                <EtikettLiten className="codeSelector__option codeSelector__option--active">HTML</EtikettLiten>
-                <EtikettLiten className="codeSelector__option">CSS</EtikettLiten>
+
+                { this.props.showReactTab && this.renderCodeOption(CodeExample.languages[0]) }
+                { this.renderCodeOption(CodeExample.languages[1]) }
+                { this.renderCodeOption(CodeExample.languages[2]) }
             </div>
         );
+    }
+
+    renderCodeOption(codeOption) {
+        let clazzList = 'codeSelector__option';
+        if (this.state.activeTab.id === codeOption.id) {
+            clazzList += ' codeSelector__option--active';
+        }
+
+        return (
+            <EtikettLiten
+                className={ clazzList }
+                onClick={ () => this.changeActiveCodeOption(codeOption) }>
+                { codeOption.label }
+            </EtikettLiten>
+        )
+    }
+
+    changeActiveCodeOption(codeOption) {
+        this.setState({
+            activeTab: codeOption
+        })
     }
 
     renderHighlightedCode(code, lang) {
@@ -47,24 +63,33 @@ export class CodeExample extends Component {
         )
     }
 
-    renderCodeExampleFooter() {
-        return (
-            <Normaltekst className="footer">Trykk i koden for å kopiere til clipboard</Normaltekst>
-        );
-    }
-
-
     render() {
+        const activeTab = this.state.activeTab;
         const children = this.props.activeType.children;
+        let codeToDisplay = '';
 
         const html = getHtmlCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
         const jsx = getReactCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
+        const css = getCSSCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
+
+        switch (activeTab.id) {
+            case 'react':
+                codeToDisplay = jsx;
+                break;
+            case 'html':
+                codeToDisplay = html;
+                break;
+            case 'css':
+                codeToDisplay = css;
+                break;
+            default:
+                codeToDisplay = html;
+        }
 
         return (
             <div className="codeExample">
                 { this.renderCodeSelector() }
-                { this.renderHighlightedCode(html, 'html') }
-                { this.renderCodeExampleFooter() }
+                { this.renderHighlightedCode(codeToDisplay, activeTab.id) }
             </div>
         );
     }

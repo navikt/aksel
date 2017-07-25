@@ -7,7 +7,7 @@ const checkbox = {
         {
             component: Checkbox,
             label: 'Vanlig',
-            attrs: { label: 'Checkboxfelt-label', disabled: false },
+            attrs: { label: 'Checkboxfelt-label' },
             _default: true
         }
     ],

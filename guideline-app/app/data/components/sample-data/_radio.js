@@ -7,7 +7,6 @@ const radio = {
         {
             component: Radio,
             attrs: {
-                disabled: false,
                 label: 'Radio-label',
                 name: 'radio'
             },
