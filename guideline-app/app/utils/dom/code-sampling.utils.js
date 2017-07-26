@@ -19,8 +19,8 @@ export const getHtmlCodeForComponent = (component, activeModifiers, children) =>
 };
 
 export const getReactCodeForComponent = (component, activeModifiers, children) => {
-    const jsx =((renderComponentWithModifiersAndChildren(component, activeModifiers, children)));
-    return jsxToString(jsx);
+    const jsxMainComponent = renderComponentWithModifiersAndChildren(component, activeModifiers, children);
+    return jsxToString(jsxMainComponent);
 };
 
 export const getCSSCodeForComponent = (component, activeModifiers) => {

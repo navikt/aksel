@@ -57,7 +57,7 @@ export class CodeExample extends Component {
 
     renderHighlightedCode(code, lang) {
         return (
-            <Highlight className={ lang }>
+            <Highlight className='html'>
                 { code }
             </Highlight>
         )

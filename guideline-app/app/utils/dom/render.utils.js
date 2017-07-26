@@ -1,31 +1,66 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import jsxToString from 'jsx-to-string';
 
-const wrapComponentWithAttrs = (c, attrs, children) => {
-    const wrapper = {
+const renderComponentWithNoChildren = (componentData) => (
+    <componentData.component { ... componentData.attrs } />
+);
+
+const renderComponentWithSingleChild = (componentData) => (
+    <componentData.component { ... componentData.attrs }>
+        { componentData.children }
+    </componentData.component>
+);
+
+const renderComponentWithSingleComponentChild = (componentData) => (
+    <componentData.component { ... componentData.attrs }>
+        <componentData.child.component { ... componentData.child.attrs }>
+            { componentData.child.children }
+        </componentData.child.component>
+    </componentData.component>
+);
+
+const renderComponentWithSeveralComponentChildren = (componentData) => (
+    <componentData.component { ... componentData.attrs }>
+        {
+            componentData.children.map((currentChild, i) => (
+                <currentChild.component
+                    key={ currentChild.attrs.value }
+                    { ... currentChild.attrs }>
+                    { currentChild.children }
+                </currentChild.component>
+            ))
+        }
+    </componentData.component>
+);
+
+const renderComponent = (c, attrs, children) => {
+    const componentData = {
         component: c,
-        children: children
+        attrs: attrs
     };
 
     if (!children) {
-        return (<wrapper.component { ... attrs } />);
+        return renderComponentWithNoChildren(componentData);
     }
 
-    if (typeof children === 'object') {
-        const childAttrs = wrapper.children.attrs;
-        const children = (<wrapper.children.component { ... childAttrs }></wrapper.children.component>);
-
-        console.log(jsxToString(children));
-
-        return (
-            <wrapper.component { ... attrs } children={[{},{}]}>
-                <wrapper.children.component { ... childAttrs }></wrapper.children.component>
-            </wrapper.component>
-        );
+    if (children.component) {
+        return renderComponentWithSingleComponentChild({
+            child: children,
+            ... componentData
+        });
     }
 
-    return (<wrapper.component { ... attrs }>{ children }</wrapper.component>);
+    else if (Array.isArray(children)) {
+        return renderComponentWithSeveralComponentChildren({
+            children: children,
+            ... componentData
+        });
+    }
+
+    return renderComponentWithSingleChild({
+        children: children,
+        ... componentData
+    });
 };
 
 const mergeAttrs = (attrs1, attrs2) => (Object.assign({}, attrs1, attrs2));
@@ -41,9 +76,9 @@ export const renderComponentWithModifiersAndChildren = (type, modifiers, childre
 
 
         if (shallowRender) {
-            return shallow(wrapComponentWithAttrs(component, mergeAttrs(typeAttrs, modifierAttrs), children));
+            return shallow(renderComponent(component, mergeAttrs(typeAttrs, modifierAttrs), children));
         }
 
-        return wrapComponentWithAttrs(component, mergeAttrs(typeAttrs, modifierAttrs), children);
+        return renderComponent(component, mergeAttrs(typeAttrs, modifierAttrs), children);
     }
 };
