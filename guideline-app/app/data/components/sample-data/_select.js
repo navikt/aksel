@@ -4,17 +4,27 @@ import {
     Select
 } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
-const SelectComp = (props) => (
-    <Select { ... props } label='Hvilket land er best om sommeren?'>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
-    </Select>
+const options = [
+    { value: 'norge', label: 'Norge' },
+    { value: 'sverige', label: 'Sverige' },
+    { value: 'danmark', label: 'Danmark'}
+];
+
+const optionChildren = () => options.map((option) =>
+    (<option value={ option.value } key={ option.value }>{ option.label }</option>)
 );
 
 const select = {
     types: [
-        { component: SelectComp, label: 'Vanlig', _default: true }
+        {
+            component: Select,
+            attrs: {
+                label: 'Hvilket land er best om sommeren?'
+            },
+            children: optionChildren(),
+            label: 'Vanlig',
+            _default: true
+        }
     ],
     multipleChoiceModifiers: [
         { value: 'disabled', label: 'Disabled' }

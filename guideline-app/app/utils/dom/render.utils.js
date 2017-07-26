@@ -19,20 +19,6 @@ const renderComponentWithSingleComponentChild = (componentData) => (
     </componentData.component>
 );
 
-const renderComponentWithSeveralComponentChildren = (componentData) => (
-    <componentData.component { ... componentData.attrs }>
-        {
-            componentData.children.map((currentChild, i) => (
-                <currentChild.component
-                    key={ currentChild.attrs.value }
-                    { ... currentChild.attrs }>
-                    { currentChild.children }
-                </currentChild.component>
-            ))
-        }
-    </componentData.component>
-);
-
 const renderComponent = (c, attrs, children) => {
     const componentData = {
         component: c,
@@ -51,10 +37,29 @@ const renderComponent = (c, attrs, children) => {
     }
 
     else if (Array.isArray(children)) {
-        return renderComponentWithSeveralComponentChildren({
-            children: children,
-            ... componentData
+        const componentChildren = children.map((currentChild, key) => {
+            if (currentChild.component) {
+                return (renderComponent(
+                    currentChild.component,
+                    {
+                        key: key,
+                        ... currentChild.attrs
+                    },
+                    currentChild.children)
+                );
+            }
+            else {
+                return currentChild;
+            }
         });
+
+        const component = (
+            <componentData.component { ... componentData.attrs }>
+                { componentChildren }
+            </componentData.component>
+        );
+
+        return component;
     }
 
     return renderComponentWithSingleChild({
