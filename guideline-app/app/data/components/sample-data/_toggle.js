@@ -20,7 +20,7 @@ const toggle = {
     types: [
         {
             component: ToggleGruppe,
-            attrs: { commonAttrs },
+            attrs: commonAttrs,
             children: allChildren.slice(0, 2),
             label: '2 valg'
         },
