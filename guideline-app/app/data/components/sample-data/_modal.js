@@ -39,7 +39,7 @@ export class ModalComp extends Component {
 
 const modal = {
     types: [
-        { component: (props) => (<ModalComp />), label: 'Vanlig', _default: true }
+        { component: ModalComp, label: 'Vanlig', _default: true }
     ]
 };
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { SkjemaGruppe, Checkbox } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const options = [
