@@ -1,13 +1,28 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import jsxToString from 'jsx-to-string';
 
 const wrapComponentWithAttrs = (c, attrs, children) => {
     const wrapper = {
-        component: c
+        component: c,
+        children: children
     };
 
     if (!children) {
         return (<wrapper.component { ... attrs } />);
+    }
+
+    if (typeof children === 'object') {
+        const childAttrs = wrapper.children.attrs;
+        const children = (<wrapper.children.component { ... childAttrs }></wrapper.children.component>);
+
+        console.log(jsxToString(children));
+
+        return (
+            <wrapper.component { ... attrs } children={[{},{}]}>
+                <wrapper.children.component { ... childAttrs }></wrapper.children.component>
+            </wrapper.component>
+        );
     }
 
     return (<wrapper.component { ... attrs }>{ children }</wrapper.component>);

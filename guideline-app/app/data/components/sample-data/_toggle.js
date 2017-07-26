@@ -5,34 +5,52 @@ import {
     ToggleKnapp
 } from './../../../../../packages/node_modules/nav-frontend-toggle';
 
-const ToggleComp = (props) => {
-    const dummy = new Array(props.numBtns).fill(0);
+const commonChildren = () => (
+    <ToggleKnapp key="0" value="knapp" defaultChecked={ true }>Knapp</ToggleKnapp>
+);
 
-    return (
-            <ToggleGruppe onChange={()=>{}} name="gruppe">
-                {
-                    dummy.map((v, i) => {
-                        let opts = { key: i, value: 'knapp' + i };
-                        if (props.defaultChecked === i) {
-                            opts.defaultChecked = true;
-                        }
-
-                        return(
-                            <ToggleKnapp { ... opts }>Knapp { i + 1 }</ToggleKnapp>
-                        );
-                    })
-                }
-            </ToggleGruppe>
-    )
-};
+const commonAttrs = { onChange: () => {}, name: 'toggleGruppe' };
+const commonChildAttrs = { key: 0, value: 'knapp', defaultChecked: true, children: 'Knapp' };
 
 const toggle = {
-    children: '',
     types: [
-        { component: () => <ToggleComp numBtns={ 2 } defaultChecked={ 0 } />, label: '2 valg' },
-        { component: () => <ToggleComp numBtns={ 3 } defaultChecked={ 1 } />, label: '3 valg', _default: true },
-        { component: () => <ToggleComp numBtns={ 4 } defaultChecked={ 0 } />, label: '4 valg' },
-        { component: () => <ToggleComp numBtns={ 5 } defaultChecked={ 2 } />, label: '5 valg' }
+        {
+            component: ToggleGruppe,
+            attrs: commonAttrs,
+            children: {
+                component: ToggleKnapp,
+                attrs: commonChildAttrs
+            },
+            label: '2 valg'
+        },
+        {
+            component: ToggleGruppe,
+            attrs: commonAttrs,
+            children: {
+                component: ToggleKnapp,
+                attrs: commonChildAttrs
+            },
+            label: '3 valg',
+            _default: true
+        },
+        {
+            component: ToggleGruppe,
+            attrs: commonAttrs,
+            children: {
+                component: ToggleKnapp,
+                attrs: commonChildAttrs
+            },
+            label: '4 valg'
+        },
+        {
+            component: ToggleGruppe,
+            attrs: commonAttrs,
+            children: {
+                component: ToggleKnapp,
+                attrs: commonChildAttrs
+            },
+            label: '5 valg'
+        }
     ]
 };
 
