@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import DOMPurify from 'dompurify';
 import prettifyXml from 'prettify-xml';
 import { renderComponentWithModifiersAndChildren } from './render.utils';
@@ -24,7 +23,36 @@ export const getReactCodeForComponent = (component, activeModifiers, children) =
     return jsxToString(jsxMainComponent);
 };
 
+
+const getMatchingCSSRulesForElement = (el, css = el.ownerDocument.styleSheets) => {
+    const stylesheets = [ ... css ];
+    const rules = stylesheets
+        .map((stylesheet) =>
+            [ ... stylesheet.cssRules || [], ... stylesheet.rules || [] ]
+        )
+        .reduce((someRules, someOtherRules) =>
+            [ ... someRules, ... someOtherRules ]
+        );
+    return rules.filter(rule => rule && rule.selectorText && el.matches(rule.selectorText));
+};
+
+const getMatchingCSSRulesForElementWithChildren = (el) => {
+    const allElements = [ el, ... el.querySelectorAll('*') ];
+    const stylesheetRoot = el.styleSheets;
+
+    return allElements
+        .map((element) => ([ ... getMatchingCSSRulesForElement(element, stylesheetRoot) ]))
+        .filter((element) => (element))
+        .reduce((rules, otherRules) => [ ... rules, ... otherRules ]);
+};
+
 export const getCSSCodeForComponent = (domRef) => {
-    console.log('Got domRef', domRef);
-    return '.someClazz { background-color: white; }';
+    const rules = getMatchingCSSRulesForElementWithChildren(domRef);
+    let cssTexts = [];
+    rules.forEach((rule) => {
+        if (cssTexts.indexOf(rule.cssText) <= -1) {
+            cssTexts.push(rule.cssText);
+        }
+    });
+    return cssTexts.join(' ');
 };

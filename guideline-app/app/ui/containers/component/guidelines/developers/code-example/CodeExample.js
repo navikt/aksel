@@ -57,7 +57,7 @@ export class CodeExample extends Component {
 
     renderHighlightedCode(code, lang) {
         return (
-            <Highlight className='html'>
+            <Highlight className={ lang }>
                 { code }
             </Highlight>
         )
@@ -73,6 +73,7 @@ export class CodeExample extends Component {
         const html = getHtmlCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
         const jsx = getReactCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
         const css = getCSSCodeForComponent(activeRef);
+
 
         switch (activeTab.id) {
             case 'react':

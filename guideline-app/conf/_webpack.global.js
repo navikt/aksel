@@ -16,9 +16,12 @@ var GlobalWebpackConfig = {
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
-                exclude: /node_modules/,
+                include: [
+                    path.resolve(__dirname, './../app')
+                ],
                 query: {
-                    presets: [ 'es2015', 'stage-0', 'react' ]
+                    presets: [ 'es2015', 'stage-2', 'react' ],
+                    plugins: ['transform-object-rest-spread']
                 }
             },
 

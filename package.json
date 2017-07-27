@@ -69,6 +69,7 @@
     "gulp-plumber": "^1.1.0",
     "gulp-svgmin": "^1.2.3",
     "gulp-util": "^3.0.8",
+    "highlight.js": "^9.12.0",
     "html-loader": "^0.4.5",
     "html-webpack-plugin": "^2.29.0",
     "inquirer": "^3.0.1",
@@ -82,6 +83,7 @@
     "lessvars": "0.0.5",
     "mustache": "^2.3.0",
     "nav-frontend-core": "^4.0.2",
+    "prettify-xml": "^1.2.0",
     "progress": "^2.0.0",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",
@@ -98,6 +100,7 @@
     "react-router-dom": "^4.1.1",
     "react-storybook-addon-sections": "0.0.12",
     "react-svg-icon-generator": "^0.3.4",
+    "react-test-renderer": "^15.6.1",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "sanitize-html": "^1.13.0",
@@ -108,10 +111,7 @@
     "text-table": "^0.2.0",
     "through2": "^2.0.3",
     "webpack": "^2.6.1",
-    "webpack-dev-server": "^2.4.5",
-    "highlight.js": "^9.12.0",
-    "prettify-xml": "^1.2.0",
-    "react-test-renderer": "^15.6.1"
+    "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
     "dompurify": "^0.9.0",
