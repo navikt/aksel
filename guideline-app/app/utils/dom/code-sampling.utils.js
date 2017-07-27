@@ -3,6 +3,8 @@ import DOMPurify from 'dompurify';
 import prettifyXml from 'prettify-xml';
 import { renderComponentWithModifiersAndChildren } from './render.utils';
 import jsxToString from 'jsx-to-string';
+const beautify_css = require('js-beautify').css;
+
 
 export const sanitizeHtml = (html) => {
     return DOMPurify.sanitize(html);
@@ -54,5 +56,7 @@ export const getCSSCodeForComponent = (domRef) => {
             cssTexts.push(rule.cssText);
         }
     });
-    return cssTexts.join(' ');
+
+    const cssText = cssTexts.join(' ');
+    return (beautify_css(cssText));
 };
