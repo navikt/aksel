@@ -4,7 +4,8 @@ const initialState = {
     activeMultipleChoiceModifiers: [],
     activeType: {
         component: null
-    }
+    },
+    activeRef: null
 };
 
 export function sample(state = initialState, action) {
@@ -39,6 +40,11 @@ export function sample(state = initialState, action) {
 
             return Object.assign({}, state, {
                 activeMultipleChoiceModifiers: state.activeMultipleChoiceModifiers.concat([ action.value ])
+            });
+
+        case types.ACTIVE_REF_CHANGE:
+            return Object.assign({}, { ... state}, {
+                activeRef: action.value
             });
 
         default:

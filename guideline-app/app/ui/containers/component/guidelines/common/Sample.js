@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SampleEditor } from './SampleEditor';
-import { sampleTypeChange } from '../../../../../redux/actions/sampleActions';
+import { sampleTypeChange, activeRefChange } from '../../../../../redux/actions/sampleActions';
 import { renderComponentWithModifiersAndChildren } from './../../../../../utils/dom/render.utils';
 
 import './styles.less';
@@ -78,20 +78,29 @@ export class Sample extends Component {
         this.props.dispatch(sampleTypeChange(type));
     }
 
+    changeActiveRef(wrapperRef) {
+        if (wrapperRef) {
+            const ref = wrapperRef.children[0];
+            if (this.props.activeRef !== ref) {
+                this.props.dispatch(activeRefChange(ref));
+            }
+        }
+    }
+
     render () {
+        const component = renderComponentWithModifiersAndChildren(
+            this.props.activeType,
+            this.props.activeMultipleChoiceModifiers,
+            this.props.activeType.children || ''
+        );
+
         return (
             <div>
                 <div className="sampleWrapper">
                     <div className="sample">
                         <EtikettLiten>Eksempel</EtikettLiten>
-                        <div className="componentSample">
-                            {
-                                renderComponentWithModifiersAndChildren(
-                                    this.props.activeType,
-                                    this.props.activeMultipleChoiceModifiers,
-                                    this.props.activeType.children || ''
-                                )
-                            }
+                        <div className="componentSample" ref={(wrapper) => this.changeActiveRef(wrapper)}>
+                            { component }
                         </div>
                     </div>
 
@@ -108,5 +117,6 @@ export class Sample extends Component {
 Sample = connect((state) => ({
     activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
-    activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
+    activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
+    activeRef: state.sample.activeRef
 }))(Sample);

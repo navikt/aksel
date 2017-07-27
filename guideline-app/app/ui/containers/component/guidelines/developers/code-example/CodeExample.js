@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Normaltekst, EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
+import { EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
 import {
     getHtmlCodeForComponent,
     getReactCodeForComponent,
@@ -66,11 +66,13 @@ export class CodeExample extends Component {
     render() {
         const activeTab = this.state.activeTab;
         const children = this.props.activeType.children;
+        const activeRef = this.props.activeRef;
+
         let codeToDisplay = '';
 
         const html = getHtmlCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
         const jsx = getReactCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
-        const css = getCSSCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
+        const css = getCSSCodeForComponent(activeRef);
 
         switch (activeTab.id) {
             case 'react':
@@ -99,5 +101,6 @@ export class CodeExample extends Component {
 CodeExample = connect((state) => ({
     activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
-    activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
+    activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
+    activeRef: state.sample.activeRef
 }))(CodeExample);

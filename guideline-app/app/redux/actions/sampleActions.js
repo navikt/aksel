@@ -12,3 +12,7 @@ export const sampleTypeChange = (value) => ({
     type: types.ACTIVE_TYPE_CHANGE,
     value
 });
+export const activeRefChange = (value) => ({
+    type: types.ACTIVE_REF_CHANGE,
+    value
+});

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import DOMPurify from 'dompurify';
 import prettifyXml from 'prettify-xml';
 import { renderComponentWithModifiersAndChildren } from './render.utils';
@@ -23,7 +24,7 @@ export const getReactCodeForComponent = (component, activeModifiers, children) =
     return jsxToString(jsxMainComponent);
 };
 
-export const getCSSCodeForComponent = (component, activeModifiers) => {
-    // todo: get css for comp
+export const getCSSCodeForComponent = (domRef) => {
+    console.log('Got domRef', domRef);
     return '.someClazz { background-color: white; }';
 };
