@@ -5,9 +5,10 @@ var webpack = require('webpack'),
 
 WebpackProductionConfig.plugins = [
     new HtmlWebpackPlugin({
-        template: './guideline-app/index.html',
+        template: './guideline-app/index.production.ejs',
         filename: 'index.html',
-        inject: 'body'
+        inject: 'body',
+        minimize: false
     })
 ];
 
