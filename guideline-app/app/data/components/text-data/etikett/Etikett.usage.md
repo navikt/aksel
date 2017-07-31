@@ -1,0 +1,1 @@
+Etiketter-komponenten brukes til å 

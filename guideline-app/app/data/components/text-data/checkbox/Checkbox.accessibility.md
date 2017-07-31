@@ -1,0 +1,1 @@
+For å tilfredsstille krav til universell utforming må Checkbox

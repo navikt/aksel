@@ -1,0 +1,1 @@
+Hjelpetekst er en komponent som 

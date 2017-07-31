@@ -1,0 +1,1 @@
+Alertstripe-komponenten brukes til å

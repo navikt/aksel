@@ -1,0 +1,1 @@
+Input er en komponent som 

@@ -1,0 +1,1 @@
+Hjelpetekst-komponenten brukes til å 

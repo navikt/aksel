@@ -1,0 +1,1 @@
+Chevron-komponenten brukes til å 

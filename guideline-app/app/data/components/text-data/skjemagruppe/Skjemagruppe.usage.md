@@ -1,0 +1,1 @@
+Input-komponenten brukes til å 

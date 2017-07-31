@@ -1,0 +1,1 @@
+Checkbox er en komponent som benyttes i skjemaer for å gi brukeren muligheten til å avgi flere svar på et spørsmål som blir stilt.

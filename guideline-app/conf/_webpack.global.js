@@ -24,7 +24,6 @@ var GlobalWebpackConfig = {
                     plugins: ['transform-object-rest-spread']
                 }
             },
-
             {
                 test: /\.less$/,
                 use: [
@@ -42,6 +41,13 @@ var GlobalWebpackConfig = {
                     }
                 ]
             },
+            {
+                test: /\.md$/,
+                use: [
+                    { loader: 'html-loader' },
+                    { loader: 'markdown-loader' }
+                ]
+            }
         ]
     },
     externals: {

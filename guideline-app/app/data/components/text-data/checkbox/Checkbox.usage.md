@@ -1,0 +1,1 @@
+Checkbox-komponenten brukes til å 

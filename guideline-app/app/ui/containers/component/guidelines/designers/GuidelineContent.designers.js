@@ -10,9 +10,9 @@ export class GuidelineContentForDesigners extends Component {
     renderHowToUseSection() {
         return (
             <div className="section">
-                <Undertittel>Hvordan bruker jeg { this.props.componentName }?</Undertittel>
+                <Undertittel>Hvordan bruker jeg { this.props.label }?</Undertittel>
                 <Normaltekst>
-                    { this.props.howToUse }
+                    { this.props.usage }
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
                     si quid attuleris, quam te reprehenderim. Quae quo sunt excelsiores, eo dant clariora indicia
                     naturae. Duo enim genera quae erant, fecit tria. Traditur, inquit, ab Epicuro ratio neglegendi
@@ -26,7 +26,7 @@ export class GuidelineContentForDesigners extends Component {
     renderAccessibilitySection() {
         return (
             <div className="section">
-                <Undertittel>{ this.props.componentName } og universell utforming</Undertittel>
+                <Undertittel>{ this.props.label } og universell utforming</Undertittel>
                 <Normaltekst>
                     { this.props.accessibility }
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
