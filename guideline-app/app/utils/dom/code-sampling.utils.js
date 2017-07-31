@@ -6,8 +6,8 @@ import jsxToString from 'jsx-to-string';
 const beautify_css = require('js-beautify').css;
 
 
-export const sanitizeHtml = (html) => {
-    return DOMPurify.sanitize(html);
+export const sanitizeHtml = (html, options = {}) => {
+    return DOMPurify.sanitize(html, options);
 };
 
 export const getShallowComponent = (component, modifiers, children) => (renderComponentWithModifiersAndChildren(component, modifiers, children, true));

@@ -11,6 +11,8 @@ import { Tabbar } from './../../../components/tabbar/Tabbar';
 import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
 import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
 
+import { sanitizeHtml } from './../../../../utils/dom/code-sampling.utils';
+
 import './styles.less';
 
 export class ComponentGuidelinePage extends React.Component {
@@ -26,18 +28,14 @@ export class ComponentGuidelinePage extends React.Component {
         };
     }
 
-    createIngress() {
-        return { __html: this.props.ingress };
-    }
-
-    createGeneralText() {
-        return { __html: this.props.general }
+    getSanitizedMdFileContent(mdFileContent) {
+        return sanitizeHtml(mdFileContent, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
     }
 
     renderAboutSection() {
         return (
             <div className="section">
-                <Ingress>{this.props.ingress}</Ingress>
+                <Ingress>{ this.getSanitizedMdFileContent(this.props.ingress) }</Ingress>
 
                 {
                     this.props.sampleData &&
@@ -45,7 +43,7 @@ export class ComponentGuidelinePage extends React.Component {
                         { ... this.props }
                     />
                 }
-                <Normaltekst dangerouslySetInnerHTML={ this.createGeneralText() } />
+                <Normaltekst>{ this.getSanitizedMdFileContent(this.props.general) }</Normaltekst>
             </div>
         );
     }

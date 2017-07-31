@@ -5,19 +5,20 @@ import {
     Undertittel
 } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
+import { sanitizeHtml } from './../../../../../utils/dom/code-sampling.utils';
+
 export class GuidelineContentForDesigners extends Component {
+
+    getSanitizedMdFileContent(mdFileContent) {
+        return sanitizeHtml(mdFileContent, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
+    }
 
     renderHowToUseSection() {
         return (
             <div className="section">
                 <Undertittel>Hvordan bruker jeg { this.props.label }?</Undertittel>
                 <Normaltekst>
-                    { this.props.usage }
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
-                    si quid attuleris, quam te reprehenderim. Quae quo sunt excelsiores, eo dant clariora indicia
-                    naturae. Duo enim genera quae erant, fecit tria. Traditur, inquit, ab Epicuro ratio neglegendi
-                    doloris. Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint. Duo Reges: constructio
-                    interrete. Quoniam, si dis placet, ab Epicuro loqui discimus. Etiam beatissimum?
+                    { this.getSanitizedMdFileContent(this.props.usage) }
                 </Normaltekst>
             </div>
         );
@@ -28,12 +29,7 @@ export class GuidelineContentForDesigners extends Component {
             <div className="section">
                 <Undertittel>{ this.props.label } og universell utforming</Undertittel>
                 <Normaltekst>
-                    { this.props.accessibility }
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ego quoque, inquit, didicerim libentius
-                    si quid attuleris, quam te reprehenderim. Quae quo sunt excelsiores, eo dant clariora indicia
-                    naturae. Duo enim genera quae erant, fecit tria. Traditur, inquit, ab Epicuro ratio neglegendi
-                    doloris. Parvi enim primo ortu sic iacent, tamquam omnino sine animo sint. Duo Reges: constructio
-                    interrete. Quoniam, si dis placet, ab Epicuro loqui discimus. Etiam beatissimum?
+                    { this.getSanitizedMdFileContent(this.props.accessibility) }
                 </Normaltekst>
             </div>
         );
