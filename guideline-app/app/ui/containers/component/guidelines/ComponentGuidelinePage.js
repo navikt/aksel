@@ -28,14 +28,20 @@ export class ComponentGuidelinePage extends React.Component {
         };
     }
 
-    getSanitizedMdFileContent(mdFileContent) {
-        return sanitizeHtml(mdFileContent, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
-    }
-
     renderAboutSection() {
+        const ingress = sanitizeHtml(this.props.ingress, { ALLOWED_TAGS: [] });
+        const general = sanitizeHtml(this.props.general, { ALLOWED_TAGS: [] });
+
+        let ingressParagraphs = (ingress.split(/\n/g)).filter((paragraph) => (paragraph && paragraph.length > 0));
+        let generalParagraphs = (general.split(/\n/g)).filter((paragraph) => (paragraph && paragraph.length > 0));
+
         return (
             <div className="section">
-                <Ingress>{ this.getSanitizedMdFileContent(this.props.ingress) }</Ingress>
+                {
+                    ingressParagraphs.map((ingressParagraph, idx) =>
+                        (<Ingress key={ idx }>{ ingressParagraph }</Ingress>)
+                    )
+                }
 
                 {
                     this.props.sampleData &&
@@ -43,7 +49,12 @@ export class ComponentGuidelinePage extends React.Component {
                         { ... this.props }
                     />
                 }
-                <Normaltekst>{ this.getSanitizedMdFileContent(this.props.general) }</Normaltekst>
+
+                {
+                    generalParagraphs.map((generalParagraph, idx) =>
+                        (<Normaltekst key={ idx }>{ generalParagraph }</Normaltekst>)
+                    )
+                }
             </div>
         );
     }
