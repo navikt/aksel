@@ -5,21 +5,15 @@ import {
     Undertittel
 } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
-import { sanitizeHtml } from './../../../../../utils/dom/code-sampling.utils';
+import { MdContent } from './../../../../components/md-content/MdContent';
 
 export class GuidelineContentForDesigners extends Component {
-
-    getSanitizedMdFileContent(mdFileContent) {
-        return sanitizeHtml(mdFileContent, { ALLOWED_TAGS: [], KEEP_CONTENT: true });
-    }
 
     renderHowToUseSection() {
         return (
             <div className="section">
                 <Undertittel>Hvordan bruker jeg { this.props.label }?</Undertittel>
-                <Normaltekst>
-                    { this.getSanitizedMdFileContent(this.props.usage) }
-                </Normaltekst>
+                <MdContent content={ this.props.usage } component={ Normaltekst } />
             </div>
         );
     }
@@ -28,9 +22,7 @@ export class GuidelineContentForDesigners extends Component {
         return (
             <div className="section">
                 <Undertittel>{ this.props.label } og universell utforming</Undertittel>
-                <Normaltekst>
-                    { this.getSanitizedMdFileContent(this.props.accessibility) }
-                </Normaltekst>
+                <MdContent content={ this.props.accessibility } component={ Normaltekst } />
             </div>
         );
     }

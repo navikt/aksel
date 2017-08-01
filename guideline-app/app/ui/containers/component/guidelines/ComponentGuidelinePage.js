@@ -11,7 +11,7 @@ import { Tabbar } from './../../../components/tabbar/Tabbar';
 import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
 import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
 
-import { sanitizeHtml } from './../../../../utils/dom/code-sampling.utils';
+import { MdContent } from './../../../components/md-content/MdContent';
 
 import './styles.less';
 
@@ -29,32 +29,16 @@ export class ComponentGuidelinePage extends React.Component {
     }
 
     renderAboutSection() {
-        const ingress = sanitizeHtml(this.props.ingress, { ALLOWED_TAGS: [] });
-        const general = sanitizeHtml(this.props.general, { ALLOWED_TAGS: [] });
-
-        let ingressParagraphs = (ingress.split(/\n/g)).filter((paragraph) => (paragraph && paragraph.length > 0));
-        let generalParagraphs = (general.split(/\n/g)).filter((paragraph) => (paragraph && paragraph.length > 0));
-
         return (
             <div className="section">
-                {
-                    ingressParagraphs.map((ingressParagraph, idx) =>
-                        (<Ingress key={ idx }>{ ingressParagraph }</Ingress>)
-                    )
-                }
+                <MdContent content={ this.props.ingress } component={ Ingress } />
 
                 {
                     this.props.sampleData &&
-                    <Sample
-                        { ... this.props }
-                    />
+                    <Sample { ... this.props } />
                 }
 
-                {
-                    generalParagraphs.map((generalParagraph, idx) =>
-                        (<Normaltekst key={ idx }>{ generalParagraph }</Normaltekst>)
-                    )
-                }
+                <MdContent content={ this.props.general } component={ Normaltekst } />
             </div>
         );
     }
