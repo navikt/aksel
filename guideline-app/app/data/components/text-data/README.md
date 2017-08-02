@@ -1,6 +1,6 @@
 ## Om endring av tekstdata
 
-Dette området er tiltenkt**designere**(foreløpig kun de som er en del av designsystem-teamet)
+Dette området er tiltenkt **designere** (foreløpig kun de som er en del av designsystem-teamet)
 som skal ha rettigheter til å opprette nye eller redigere eksisterende designretningslinjer 
 på enkeltkomponent-nivå. 
 
