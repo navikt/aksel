@@ -24,7 +24,7 @@ som attributter for komponenttypene ```Knapp```, ```Hovedknapp``` og ```Fareknap
 
 For eksempler, se på de ulike ```_[komponentnavn].js``` filene som allerede ligger i ```sample-data/```. 
 
-#### Fullstendig datastruktur:
+### Fullstendig datastruktur:
 
 ```
 {
@@ -55,7 +55,7 @@ For eksempler, se på de ulike ```_[komponentnavn].js``` filene som allerede lig
 
 ```
 
-##### Type
+#### Type
 | Attributt                | Type     | Beskrivelse                                                                      | Required |
 | ------------------------ | -------- | ---------------------------------------------------------------------------------| -------- |
 | component                | function | React-komponenten som skal brukes for typen                                      | true     |
@@ -66,7 +66,7 @@ For eksempler, se på de ulike ```_[komponentnavn].js``` filene som allerede lig
 | modifiers                | array    | Modifier-value (string mappet til modifiers på rot) med komponent som skal vises | false    |
 | multipleChoiceModifiers  | array    | Multiple-choice modifikatorer for typen (=checkbox)                              | false    |
 
-##### Modifiers
+#### Modifiers
 | Attributt                | Type     | Beskrivelse                                                           | Required |
 | ------------------------ | -------- | --------------------------------------------------------------------- | -------- |
 | value                    | string   | Navn på modifier (mappes til type.modifiers hvis gjeldende for typen) | true     |
@@ -74,7 +74,7 @@ For eksempler, se på de ulike ```_[komponentnavn].js``` filene som allerede lig
 | _default                 | boolean  | Radio.knapp for modifikatoren er default huket av                     | false    |
 
 
-##### MultipleChoiceModifiers
+#### MultipleChoiceModifiers
 | Attributt                | Type     | Beskrivelse                                                 | Required |
 | ------------------------ | -------- | ----------------------------------------------------------- | -------- |
 | value                    | string   | Navn på modifier (blir til til value=true på komponenten)   | true     |
