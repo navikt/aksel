@@ -12,13 +12,13 @@ Informasjonen man kan si noe om er for eksempel:
 - Krav og retningslinjer til universell utforming 
 
 Alle endringer som blir gjort i filene i disse undermappene, vil sørge for at neste versjon som
-legges ut av[Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler)får med seg de
+legges ut av [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) får med seg de
 oppdateringene som har blitt lagt inn.
 
 
 ### Filstandard
 
-På[Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler)har hver enkelt komponent
+På [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) har hver enkelt komponent
 (under menyvalget "Komponenter"), fått en egen artikkel, som består av:
 1. En ingress som sier noe overordnet og generelt om komponenten
 2. En generell tekst som sier noe generelt om komponenten, evt. supplerer noe informasjon til live-eksemplet
@@ -46,23 +46,23 @@ Eksempel-filnavn for Alertstripe-komponenten:
 og trykk "Commit changes".
 
 **OBS!** For at du skal kunne endre på filer må opprette en bruker på GitHub, være logget inn, og ha fått tilgang av en administrator
-av koderepository-et. [@erlendev](https://github.com/erlendev/)kan kontaktes for å få hjelp til dette.
+av koderepository-et. [@erlendev](https://github.com/erlendev/) kan kontaktes for å få hjelp til dette.
 
 ### Redigering av .md-filer
 
-.MD er en forkortelse for[Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
+.MD er en forkortelse for [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
 som er en type tekstfil som vil bli forstått av Guidelines-siden som HTML uten at man selv må skrive HTML-tags.
 
 Dette gjøres automatisk ved at man benytter seg av reglene som står beskrevet i 
 [Markdown sitt cheat-sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
-men i Guidelines-løsningen er det**kun**mulig å bruke reglene for å lage
+men i Guidelines-løsningen er det**kun**mulig å bruke reglene for å lage 
 [lenker](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links). Dette er fordi
 vi ønsker at informasjonshierarkiet og utformingen av alle artikkel-sidene for alle komponentene skal
 være like. 
 
 Så den eneste regelen man trenger å forholde seg til med tanke på å lage .md-filer forskjellig
 fra vanlige tekstfiler, er at man må følge 
-instruksjonene[her](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links)dersom 
+instruksjonene [her](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links) dersom 
 man ønsker å lage en link.
 
 
