@@ -22,6 +22,8 @@ og ```AlertStripeInfoSolid```. For tilfeller med flere aktive modifikatorer på 
 tre modifikatorer, ```mini```, ```spinner``` og ```disabled```, setter man istedet dette opp
 som attributter for komponenttypene ```Knapp```, ```Hovedknapp``` og ```Fareknapp```. 
 
+For eksempler, se på de ulike ```_[komponentnavn].js``` filene som allerede ligger i ```sample-data/```. 
+
 #### Fullstendig datastruktur:
 
 ```
@@ -36,27 +38,44 @@ som attributter for komponenttypene ```Knapp```, ```Hovedknapp``` og ```Fareknap
             label,
             _default,
             modifiers: [
-                { value, label, component, _default },
-                ...
-            ],
-            multipleChoiceModifiers: [
-                { value, label },
+                { value, component },
                 ...
             ]
-        }
+       }
+    ],
+    modifiers: [
+        { value, label, _default },
+        ...
+    ],
+    multipleChoiceModifiers: [
+        { value, label },
+        ...
     ]
 }
 
 ```
 
-#### Type
+##### Type
+| Attributt                | Type     | Beskrivelse                                                                      | Required |
+| ------------------------ | -------- | ---------------------------------------------------------------------------------| -------- |
+| component                | function | React-komponenten som skal brukes for typen                                      | true     |
+| attrs                    | object   | (k,v)-par av attributter som skal settes på komponenten                          | false    |
+| children                 | function | React-komponent som skal vises som child i eksemplet                             | false    |
+| label                    | string   | Label til radio-knapp for typen i live-eksemplet                                 | true     |
+| _default                 | boolean  | Radio-knapp for typen er default huket av                                        | false    |
+| modifiers                | array    | Modifier-value (string mappet til modifiers på rot) med komponent som skal vises | false    |
+| multipleChoiceModifiers  | array    | Multiple-choice modifikatorer for typen (=checkbox)                              | false    |
 
-| Attributt                | Type     | Beskrivelse                                             | Required |
-| ------------------------ | -------- | ------------------------------------------------------- | -------- |
-| component                | function | React-komponenten som skal brukes                       | true     |
-| attrs                    | object   | (k,v)-par av attributter som skal settes på komponenten | false    |
-| children                 | function | React-komponent som skal vises som child i eksemplet    | false    |
-| label                    | string   | Label til radio-knapp for typen i live-eksemplet        | true     |
-| _default                 | boolean  | Radio-knapp for typen er default huket av               | false    |
-| modifiers                | array    | Single-choice modifikatorer for typen (=radio)          | false    |
-| multipleChoiceModifiers  | array    | Multiple-choice modifikatorer for typen (=checkbox)     | false    |
+##### Modifiers
+| Attributt                | Type     | Beskrivelse                                                           | Required |
+| ------------------------ | -------- | --------------------------------------------------------------------- | -------- |
+| value                    | string   | Navn på modifier (mappes til type.modifiers hvis gjeldende for typen) | true     |
+| label                    | string   | Label til radio-knapp for modifikatoren i live-eksemplet              | true     |
+| _default                 | boolean  | Radio.knapp for modifikatoren er default huket av                     | false    |
+
+
+##### MultipleChoiceModifiers
+| Attributt                | Type     | Beskrivelse                                                 | Required |
+| ------------------------ | -------- | ----------------------------------------------------------- | -------- |
+| value                    | string   | Navn på modifier (blir til til value=true på komponenten)   | true     |
+| label                    | string   | Label til checkbox-knapp for modifikatoren i live-eksemplet | true     |
