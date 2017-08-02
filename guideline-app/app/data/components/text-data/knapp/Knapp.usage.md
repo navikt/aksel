@@ -1,1 +1,3 @@
-Knapp-komponenten brukes til å Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  
+Hovedknapp skal kun brukes til primærhandlinger, og som hovedregel bør det helst ikke være mer enn en Hovedknapp per side eller operasjon.
+
+Fareknapp skal kun brukes til handlinger der man potensielt kan miste data, eller kan føre til andre negative konsekvenser når brukeren klikker på knappen. Det kan eksempelvis være en handling som Slett Søknad.

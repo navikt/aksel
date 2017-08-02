@@ -1,1 +1,3 @@
-Duarum enim vitarum nobis erunt instituta capienda. Conferam avum tuum Drusum cum C. Atqui reperies, inquit, in hoc quidem pertinacem; Universa enim illorum ratione cum tota vestra confligendum . Sed haec nihil sane ad rem; Nam quibus rebus efficiuntur voluptates, eae non sunt in potestate sapientis. Gloriosa ostentatio in constituendo summo bono. Eadem nunc mea adversum te oratio est.
+Det er hovedsaklig tre forskjellige typer knapper; Standardknapp, Hovedknapp og Fareknapp. 
+
+Noen ganger er det mer hensiktsmessig å bruke en større eller mindre knapp enn vanlig, og knapper kan endres til å være mindre (mini) eller større. Knapp med Spinner brukes dersom det er sannsynlig at det vil bli litt ventetid for bruker etter å ha klikket på knappen. Du skal bare kunne klikke på knappen en gang, og spinnere skal ikke vises før knappen er blitt klikket på.
