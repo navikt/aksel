@@ -55,7 +55,7 @@ som er en type tekstfil som vil bli forstått av Guidelines-siden som HTML uten 
 
 Dette gjøres automatisk ved at man benytter seg av reglene som står beskrevet i 
 [Markdown sitt cheat-sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
-men i Guidelines-løsningen er det**kun**mulig å bruke reglene for å lage 
+men i Guidelines-løsningen er det **kun** mulig å bruke reglene for å lage 
 [lenker](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links). Dette er fordi
 vi ønsker at informasjonshierarkiet og utformingen av alle artikkel-sidene for alle komponentene skal
 være like. 
