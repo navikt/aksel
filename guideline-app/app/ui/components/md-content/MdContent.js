@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
 
@@ -15,10 +16,12 @@ export const MdContent = (props) => {
         <div>
             {
                 paragraphs.map((paragraph, i) => {
-                    const sanitizedHtml = sanitizeHtml(
+                    let sanitizedHtml = sanitizeHtml(
                         paragraph,
                         { ALLOWED_TAGS: ['a'] }
                     );
+
+                    sanitizedHtml = sanitizedHtml.replace(/<a/g, '<a class="lenke" ');
 
                     return (
                         <props.component
