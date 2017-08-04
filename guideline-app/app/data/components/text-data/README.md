@@ -26,7 +26,7 @@ På [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) har hve
 
 Alle disse tekstene er mulig å endre på for hver enkelt komponent, og hver av disse tekstene
 har sin egen .md-fil (en slags tekstfil) i mappen for den komponenten det gjelder. Alle 
-filene er navngitt på formatet _KomponentNavn.ingress/general/usage/accessibility.md_. 
+filene er navngitt på formatet _KomponentNavn.ingress/usage/accessibility.md_. 
 
 Eksempel-filnavn for Alertstripe-komponenten:
 1. Alertstripe.ingress.md
