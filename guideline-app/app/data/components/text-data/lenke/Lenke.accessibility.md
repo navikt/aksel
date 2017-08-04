@@ -1,1 +1,5 @@
-For å tilfredsstille krav til universell utforming må Lenke Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Relevante krav og lenker:
+- [1.3.1 Informasjon og relasjoner, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)
+- [2.4.9 Formål med lenke (bare lenke, nivå AAA)](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/ikke-lovpalagte-krav/249-formal-med-lenke-bare-lenke-niva-aaa)
+- [1.4.1 Bruk av farge, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/141-bruk-av-farge-niva)
+- [Tekst om lenker på uu.difi.no](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/lenker)
