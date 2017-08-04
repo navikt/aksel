@@ -6,7 +6,6 @@ import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
 
 const navFrontendifyHtml = (html) => (
     html
-        .replace(/<p/g, '<p class="typo-normal" ')
         .replace(/<a/g, '<a class="lenke" ')
         .replace(/<h4/g, '<p class="typo-element" ')
         .replace(/<\/h4/g, '<\/p')
