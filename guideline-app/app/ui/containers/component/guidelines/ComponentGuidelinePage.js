@@ -37,8 +37,6 @@ export class ComponentGuidelinePage extends React.Component {
                     this.props.sampleData &&
                     <Sample { ... this.props } />
                 }
-
-                <MdContent content={ this.props.general } component={ Normaltekst } />
             </div>
         );
     }
@@ -52,13 +50,11 @@ export class ComponentGuidelinePage extends React.Component {
 
     renderTabbar() {
         return (
-            <div className="section">
-                <Tabbar
-                    items={ this.tabbarItems }
-                    activeItemChange={ (item) => this.updateActiveContent(this.tabbarItems.indexOf(item)) }
-                    activeIndex={ this.state.activeIndex }
-                />
-            </div>
+            <Tabbar
+                items={ this.tabbarItems }
+                activeItemChange={ (item) => this.updateActiveContent(this.tabbarItems.indexOf(item)) }
+                activeIndex={ this.state.activeIndex }
+            />
         )
     }
 

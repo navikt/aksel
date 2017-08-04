@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 
 import {
-    Normaltekst,
-    Undertittel
+    Undertittel,
+    Normaltekst
 } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { MdContent } from './../../../../components/md-content/MdContent';
 
 export class GuidelineContentForDesigners extends Component {
 
+    ALLOWED_TAGS = ['a', 'ul', 'li', 'ol', 'h4'];
+
     renderHowToUseSection() {
         return (
             <div className="section">
                 <Undertittel>Hvordan bruker jeg { this.props.label }?</Undertittel>
-                <MdContent content={ this.props.usage } component={ Normaltekst } />
+                <MdContent
+                    content={ this.props.usage }
+                    allowedTags={ this.ALLOWED_TAGS }
+                    component={ Normaltekst }
+                />
             </div>
         );
     }
@@ -22,14 +28,18 @@ export class GuidelineContentForDesigners extends Component {
         return (
             <div className="section">
                 <Undertittel>{ this.props.label } og universell utforming</Undertittel>
-                <MdContent content={ this.props.accessibility } component={ Normaltekst } />
+                <MdContent
+                    content={ this.props.accessibility }
+                    allowedTags={ this.ALLOWED_TAGS }
+                    component={ Normaltekst }
+                />
             </div>
         );
     }
 
     render() {
         return (
-            <div>
+            <div className="designerGuidelineSection">
                 { this.renderHowToUseSection() }
                 { this.renderAccessibilitySection() }
             </div>
