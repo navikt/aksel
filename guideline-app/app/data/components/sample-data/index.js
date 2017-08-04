@@ -16,3 +16,4 @@ export { default as checkbox } from './_checkbox';
 export { default as radio } from './_radio';
 export { default as select } from './_select';
 export { default as modal } from './_modal';
+export { default as innganger } from './_innganger';
