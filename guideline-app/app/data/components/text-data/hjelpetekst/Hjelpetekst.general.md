@@ -1,1 +1,1 @@
-Duarum enim vitarum nobis erunt instituta capienda. Conferam avum tuum Drusum cum C. Atqui reperies, inquit, in hoc quidem pertinacem; Universa enim illorum ratione cum tota vestra confligendum . Sed haec nihil sane ad rem; Nam quibus rebus efficiuntur voluptates, eae non sunt in potestate sapientis. Gloriosa ostentatio in constituendo summo bono. Eadem nunc mea adversum te oratio est. 
+Hjelpetekster brukes i situasjoner der brukeren kan trenge mer informasjon, men hvor det ikke er naturlig å bruke plass på det i grensesnittet
