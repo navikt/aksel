@@ -1,3 +1,0 @@
-Det er hovedsaklig tre forskjellige typer knapper; Standardknapp, Hovedknapp og Fareknapp. 
-
-Noen ganger er det mer hensiktsmessig å bruke en større eller mindre knapp enn vanlig, og knapper kan endres til å være mindre (mini) eller større. Knapp med Spinner brukes dersom det er sannsynlig at det vil bli litt ventetid for bruker etter å ha klikket på knappen. Du skal bare kunne klikke på knappen en gang, og spinnere skal ikke vises før knappen er blitt klikket på.

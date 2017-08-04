@@ -1,6 +1,6 @@
 import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
 
-const mdReq = require.context("./", true, /([A-Z]|[a-z])+\.(accessibility|general|ingress|usage)\.(md)$/m);
+const mdReq = require.context("./", true, /([A-Z]|[a-z])+\.(accessibility|ingress|usage)\.(md)$/m);
 let textDataRaw = {}, textDataInCategories = {};
 
 mdReq.keys().forEach(function(key){

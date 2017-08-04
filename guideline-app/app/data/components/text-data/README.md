@@ -21,7 +21,6 @@ oppdateringene som har blitt lagt inn.
 På [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) har hver enkelt komponent
 (under menyvalget "Komponenter"), fått en egen artikkel, som består av:
 1. En ingress som sier noe overordnet og generelt om komponenten
-2. En generell tekst som sier noe generelt om komponenten, evt. supplerer noe informasjon til live-eksemplet
 3. En tekst som beskriver hvordan komponenten er tenkt å tas i bruk
 4. En tekst som beskriver retningslinjer og krav til universell utforming ved bruk av komponenten
 
@@ -31,7 +30,6 @@ filene er navngitt på formatet _KomponentNavn.ingress/general/usage/accessibili
 
 Eksempel-filnavn for Alertstripe-komponenten:
 1. Alertstripe.ingress.md
-2. Alertstripe.general.md
 3. Alertstripe.usage.md
 4. Alertstripe.accessibility.md
 
@@ -56,14 +54,17 @@ som er en type tekstfil som vil bli forstått av Guidelines-siden som HTML uten 
 Dette gjøres automatisk ved at man benytter seg av reglene som står beskrevet i 
 [Markdown sitt cheat-sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
 men i Guidelines-løsningen er det **kun** mulig å bruke reglene for å lage 
-[lenker](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links). Dette er fordi
-vi ønsker at informasjonshierarkiet og utformingen av alle artikkel-sidene for alle komponentene skal
+[lenker](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links), 
+[header-elementer av typen h4 (dvs 4 * #)](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#headers) 
+og [lister](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lists). 
+Dette er fordi vi ønsker at informasjonshierarkiet og utformingen av alle artikkel-sidene for alle komponentene skal
 være like. 
 
 Så den eneste regelen man trenger å forholde seg til med tanke på å lage .md-filer forskjellig
 fra vanlige tekstfiler, er at man må følge 
-instruksjonene [her](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links) dersom 
-man ønsker å lage en link.
+instruksjonene i lenkene overfor for å lage hhv. lenker, h4-headere og lister.
 
 
-Vanlig tekst, linjeskift og nye avsnitt er fullt mulig og angis på helt vanlig måte som i en normal tekstfil.
+Vanlig tekst og nye avsnitt er fullt mulig og angis på helt vanlig måte som i en normal tekstfil. 
+
+**OBS! Enkle linjeskift er ikke mulig. Kun avsnitt, som angis med dobbel linjeskift**
