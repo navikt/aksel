@@ -1,1 +1,3 @@
-Checkbox-komponenten brukes til å Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Checkbox brukes når du har en liste med alternativer, og brukeren kan velge så mange valgmuligheter han eller hun ønsker. Det kan være null, en, eller flere. Med andre ord, er hver avkrysning uavhengig av alle andre boksene på listen.
+
+En frittstående checkbox brukes for et enkelt alternativ som brukeren kan slå på eller av.
