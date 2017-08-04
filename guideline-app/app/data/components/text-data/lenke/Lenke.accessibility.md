@@ -1,4 +1,6 @@
-Lenkene skal ikke bare være ting som "her" eller "les mer". De bør gi mening hvis man bare ser dem - for eksempel "digitaliseringsstrategi 2015" eller noe linkende. Hvis de ikke fungerer helt frittstående, må de i hvert fall gjøre det i kontekst med det som står rundt. 
+Lenkene skal ikke bare være utformes som "her" eller "les mer". De bør gi mening hvis man bare ser dem uten å lese teksten - for eksempel "digitaliseringsstrategi 2015" eller noe lingende. Hvis de ikke er beskrivende når de står helt alene, må de i hvert fall være det i kontekst med det som står rundt. 
+
+Dette hjelper for eksempel brukerne som skumleser og bruker lenkene for å orientere seg på siden. Det er også svært viktig for skjermleserbrukere, som ofte får opp en liste over lenker for å komme seg videre. Den listen viser bare selve lenketeksten, og skjermleserbrukere har ikke noe sjans å skjønne hvor lenkene går hvis de ikke er beskrivende.
 
 Eksempler fra uu.difi.no: /legg inn bilde/
 
