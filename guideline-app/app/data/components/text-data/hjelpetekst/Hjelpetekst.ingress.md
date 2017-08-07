@@ -1,1 +1,3 @@
-Hjelpetekst er en komponent som Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Hjelpetekster brukes i situasjoner der brukeren kan trenge mer informasjon, men hvor det ikke er naturlig å bruke plass på det i grensesnittet, for eksempel når det brukes vanskelige begreper eller for å opplyse om bakgrunnen for et regelverk.
+
+Det som skal vises for skjermleser skal legges inn som nøkkel i Enonic. Nøkkelen heter hjelpetekst.tekst.skjult (innhold: "? Hjelpetekst"). Merk at det må være en ID-kobling mellom <div role="tooltip" ... /> og <button />.
