@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import { CodeExample } from './code-example/CodeExample';
-import { PropTypeList } from './../../../../components/prop-type-list/PropTypeList';
+import { PropTypeTable } from './../../../../components/prop-type-table/PropTypeTable';
 
 import './styles.less';
 
@@ -17,26 +18,28 @@ export class GuidelineContentForDevelopers extends Component {
                 <Normaltekst>
                     { doc.description }
                 </Normaltekst>
-                <PropTypeList docgenInfo={ this.props.componentData.__docgenInfo } />
+                <PropTypeTable
+                    docgenInfo={ doc }
+                />
             </div>
         );
     }
 
     render() {
         const isImplementedInReact = this.props.componentData.react !== false;
-        const docgenInfo = this.props.componentData.__docgenInfo;
+        const docgenInfo =
+            this.props.componentData.__docgenInfo ||
+            this.props.activeType.component.__docgenInfo;
 
         return (
             <div className="section">
-
-
                 <CodeExample
                     showReactTab={ isImplementedInReact }
                     { ... this.props }
                 />
 
                 {
-                    docgenInfo !== null &&
+                    docgenInfo &&
                     isImplementedInReact &&
                     this.renderReactSpecificDoc(docgenInfo)
                 }
@@ -45,3 +48,10 @@ export class GuidelineContentForDevelopers extends Component {
     }
 
 }
+
+GuidelineContentForDevelopers = connect((state) => ({
+    activeType: state.sample.activeType,
+    activeModifier: state.sample.activeModifier,
+    activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
+    activeRef: state.sample.activeRef
+}))(GuidelineContentForDevelopers);
