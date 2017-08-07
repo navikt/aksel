@@ -13,8 +13,8 @@ Det må legges til formatering som gjør at brukere på mobil får opp native-da
 #### Telefon
 Bruk alltid input med type="tel" for felt for telefonnummer. Da får brukeren opp tastatur på mobil.
 
-### Tegnteller:
+#### Tegnteller:
 For tekstområder der bruker kan legge til et begrenset antall tegn, skal tegntelleren brukes.
 
-### Textsarea:
+#### Textsarea:
 Antall tillatte tegn bestemmes av feltets maxLength attributt. Dette forhindrer også at man får skrevet flere tegn enn maxLength.
