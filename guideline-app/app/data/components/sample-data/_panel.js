@@ -2,6 +2,7 @@ import Ekspanderbartpanel from './../../../../../packages/node_modules/nav-front
 import Lenkepanel from './../../../../../packages/node_modules/nav-frontend-lenkepanel';
 
 const panel = {
+
     types: [
         {
             component: Ekspanderbartpanel,

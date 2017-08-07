@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    Normaltekst,
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
@@ -34,7 +33,7 @@ export class ComponentGuidelinePage extends React.Component {
                 <MdContent content={ this.props.ingress } component={ Ingress } />
 
                 {
-                    this.props.sampleData &&
+                    this.props.componentData &&
                     <Sample { ... this.props } />
                 }
             </div>

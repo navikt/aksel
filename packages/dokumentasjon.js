@@ -59,7 +59,7 @@ function componentName(component) {
     return component.name || component.displayName || 'Unknown';
 }
 
-function ProptypesComponent(element) {
+export function ProptypesComponent(element) {
     const header = (
         <tr>
             <th>property</th>

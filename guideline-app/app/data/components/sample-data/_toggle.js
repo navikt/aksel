@@ -15,6 +15,7 @@ const allChildren = [
 ];
 
 const toggle = {
+    base: ToggleGruppe,
     types: [
         {
             component: ToggleGruppe,

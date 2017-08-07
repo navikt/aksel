@@ -1,4 +1,6 @@
-import {
+import React from 'react';
+import KnappBase,
+{
     Knapp,
     Hovedknapp,
     Fareknapp
@@ -7,6 +9,7 @@ import {
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 
 const knapp = {
+    base: KnappBase,
     types: [
         {
             component: Knapp,

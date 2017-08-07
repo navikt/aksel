@@ -1,4 +1,4 @@
-import {
+import Chevron, {
     HoyreChevron,
     VenstreChevron,
     OppChevron,
@@ -6,6 +6,7 @@ import {
 } from './../../../../../packages/node_modules/nav-frontend-chevron';
 
 const chevron = {
+    base: Chevron,
     types: [
         { component: HoyreChevron, label: 'Høyre', _default: true },
         { component: VenstreChevron, label: 'Venstre' },

@@ -1,4 +1,4 @@
-import {
+import Hjelpetekst, {
     HjelpetekstOver,
     HjelpetekstUnder,
     HjelpetekstHoyre,
@@ -10,6 +10,7 @@ import {
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 
 const hjelpetekst = {
+    base: Hjelpetekst,
     children: 'Slik ser en hjelpetekst ut',
     types: [
         { component: HjelpetekstOver, label: 'Over', _default: true },

@@ -5,6 +5,7 @@ const chatText1 = 'Hei! Jeg lurer på en ting...';
 const chatText2 = 'Spør i vei.';
 
 const snakkeboble = {
+    base: Snakkeboble,
     children: '',
     types: [
         {

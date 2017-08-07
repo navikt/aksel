@@ -1,6 +1,7 @@
 import Spinner from './../../../../../packages/node_modules/nav-frontend-spinner';
 
 const spinner = {
+    base: Spinner,
     children: '',
     types: [
         {

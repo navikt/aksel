@@ -1,4 +1,4 @@
-import {
+import Etikett, {
     EtikettSuksess,
     EtikettFokus,
     EtikettInfo,
@@ -8,6 +8,7 @@ import {
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 
 const etikett = {
+    base: Etikett,
     types: [
         { component: EtikettSuksess, label: 'Suksess', _default: true },
         { component: EtikettFokus, label: 'Fokus' },

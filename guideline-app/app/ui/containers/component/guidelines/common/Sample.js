@@ -13,16 +13,16 @@ export class Sample extends Component {
         const activeType = this.props.activeType;
         const activeComponent = activeType ? activeType.component: null;
 
-        if (!activeComponent || !this.activeComponenMatchesSampleDataDefaults()) {
+        if (!activeComponent || !this.activeComponenMatchescomponentDataDefaults()) {
             this.setDefaultComponent();
         }
     }
 
     componentDidUpdate(previousProps) {
-        const sampleData = this.props.sampleData;
+        const componentData = this.props.componentData;
         const activeType = this.props.activeType;
 
-        if (sampleData.modifiers && sampleData.modifiers.length > 0 && this.props.activeModifier) {
+        if (componentData.modifiers && componentData.modifiers.length > 0 && this.props.activeModifier) {
             const typeMatch = this.getTypeMatchingCurrentActiveModifier();
             if (typeMatch && typeMatch.component !== activeType.component) {
                 this.changeActiveType({
@@ -33,20 +33,20 @@ export class Sample extends Component {
         }
     }
 
-    activeComponenMatchesSampleDataDefaults() {
-        const sampleData = this.props.sampleData;
+    activeComponenMatchescomponentDataDefaults() {
+        const componentData = this.props.componentData;
         const activeComponent = this.props.activeType.component;
-        return sampleData.types.some((type) => type._default && type.component === activeComponent);
+        return componentData.types.some((type) => type._default && type.component === activeComponent);
     }
 
     getTypeMatchingCurrentActiveModifier() {
-        const types = this.props.sampleData.types;
+        const types = this.props.componentData.types;
         const activeModifier = this.props.activeModifier;
         const activeComponent = this.props.activeType.component;
         let match = null;
 
         types.forEach((type) => {
-            if (type.modifiers && this.componentExistsInSampleDataSubTree(activeComponent, type)) {
+            if (type.modifiers && this.componentExistsIncomponentDataSubTree(activeComponent, type)) {
                 type.modifiers.forEach((modifier) => {
                      if (modifier.value === activeModifier.value) {
                          match = modifier;
@@ -58,12 +58,12 @@ export class Sample extends Component {
         return match;
     }
 
-    componentExistsInSampleDataSubTree(component, subtree) {
+    componentExistsIncomponentDataSubTree(component, subtree) {
         return subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component);
     }
 
     getDefaultType() {
-        return this.props.sampleData.types.filter((el) => el._default)[0];
+        return this.props.componentData.types.filter((el) => el._default)[0];
     }
 
     setDefaultComponent() {
@@ -105,8 +105,8 @@ export class Sample extends Component {
                     </div>
 
                     {
-                        this.props.sampleData &&
-                        <SampleEditor sampleData={ this.props.sampleData } />
+                        this.props.componentData &&
+                        <SampleEditor componentData={ this.props.componentData } />
                     }
                 </div>
             </div>

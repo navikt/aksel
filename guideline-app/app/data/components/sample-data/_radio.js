@@ -3,6 +3,7 @@ import {
 } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const radio = {
+    base: Radio,
     types: [
         {
             component: Radio,

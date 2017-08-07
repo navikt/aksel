@@ -14,6 +14,7 @@ const checkboxChildren = (
 );
 
 const skjemagruppe = {
+    base: SkjemaGruppe,
     children: '',
     types: [
         {

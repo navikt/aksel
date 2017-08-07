@@ -13,11 +13,11 @@ import {
 export class SampleEditor extends Component {
 
     hasSingleChoiceModifiers() {
-        return this.props.sampleData.modifiers;
+        return this.props.componentData.modifiers;
     }
 
     hasMultipleChoiceModifiers() {
-        return this.props.sampleData.multipleChoiceModifiers;
+        return this.props.componentData.multipleChoiceModifiers;
     }
 
     hasModifiers() {
@@ -64,7 +64,7 @@ export class SampleEditor extends Component {
         return (
             <div className="types">
                 {
-                    this.props.sampleData.types.map((sample, index) =>
+                    this.props.componentData.types.map((sample, index) =>
                         (<SampleType sample={ sample } context={ this } key={ index } />)
                     )
                 }
@@ -75,7 +75,7 @@ export class SampleEditor extends Component {
     renderModifiers() {
         const isMultipleChoice = this.hasMultipleChoiceModifiers();
         const Component = isMultipleChoice ? Checkbox : Radio;
-        const modifierSource = isMultipleChoice ? this.props.sampleData.multipleChoiceModifiers : this.props.sampleData.modifiers;
+        const modifierSource = isMultipleChoice ? this.props.componentData.multipleChoiceModifiers : this.props.componentData.modifiers;
 
         return (
             <div className="modifiers">

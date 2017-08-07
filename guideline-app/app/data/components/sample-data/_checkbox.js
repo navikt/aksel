@@ -3,6 +3,7 @@ import {
 } from './../../../../../packages/node_modules/nav-frontend-skjema';
 
 const checkbox = {
+    base: Checkbox,
     types: [
         {
             component: Checkbox,

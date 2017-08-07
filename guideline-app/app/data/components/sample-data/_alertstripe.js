@@ -1,4 +1,4 @@
-import {
+import AlertStripe, {
     AlertStripeSuksess,
     AlertStripeSuksessSolid,
     AlertStripeInfo,
@@ -9,6 +9,7 @@ import {
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 
 const alertstripe = {
+    base: AlertStripe,
     types: [
         {
             component: AlertStripeSuksess,

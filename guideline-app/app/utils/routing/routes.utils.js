@@ -6,13 +6,13 @@ import { Components as components } from './../../data';
 export const resolveComponentRoutes = (routePrefix) => {
     return components.map((component) => {
         return {
-            path: ('/' + routePrefix + '/' + (component.componentName)).toLowerCase(),
+            path: ('/' + routePrefix + '/' + (component.componentData.componentName)).toLowerCase(),
             component: () => {
                 return (
                     <ComponentGuidelinePage { ... component } />
                 );
             },
-            title: component.label
+            title: component.componentData.label
         }
     });
 };

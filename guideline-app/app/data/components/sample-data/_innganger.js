@@ -39,7 +39,8 @@ const innganger = {
             component: NormalVertikalInngang,
             attrs: {
                 tittel: 'Her er en tittel',
-                tekst: 'Og her har du en tekst'
+                tekst: 'Og her har du en tekst',
+                lesMerHref: '/#/components/innganger/lenkeeksempel/'
             },
             label: 'Normal vertikal inngang'
         },

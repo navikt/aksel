@@ -15,6 +15,7 @@ const optionChildren = () => options.map((option) =>
 );
 
 const select = {
+    base: Select,
     types: [
         {
             component: Select,

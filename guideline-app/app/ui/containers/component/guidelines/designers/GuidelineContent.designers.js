@@ -14,7 +14,7 @@ export class GuidelineContentForDesigners extends Component {
     renderHowToUseSection() {
         return (
             <div className="section">
-                <Undertittel>Hvordan bruker jeg { this.props.label }?</Undertittel>
+                <Undertittel>Hvordan bruker jeg { this.props.componentData.label }?</Undertittel>
                 <MdContent
                     content={ this.props.usage }
                     allowedTags={ this.ALLOWED_TAGS }
@@ -27,7 +27,7 @@ export class GuidelineContentForDesigners extends Component {
     renderAccessibilitySection() {
         return (
             <div className="section">
-                <Undertittel>{ this.props.label } og universell utforming</Undertittel>
+                <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
                 <MdContent
                     content={ this.props.accessibility }
                     allowedTags={ this.ALLOWED_TAGS }

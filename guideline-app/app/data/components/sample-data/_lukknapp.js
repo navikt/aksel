@@ -1,6 +1,7 @@
 import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
 
 const lukknapp = {
+    base: Lukknapp,
     types: [
         {
             component: Lukknapp,
