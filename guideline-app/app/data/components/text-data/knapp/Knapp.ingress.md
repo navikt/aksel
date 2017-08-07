@@ -1,1 +1,1 @@
-Knapper brukes naturligvis svært bredt og i utallige sammenhenger, men alltid i forbindelse med en handling fra brukerens ståsted. Designsystemet består av mange forskjellige knapper og variasjoner, alle med sine muligheter og sine begrensninger.
+Knapper brukes naturligvis i forbindelse med en handling fra brukerens ståsted. 
