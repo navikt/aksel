@@ -8,7 +8,7 @@ Vi skal bare spørre etter informasjon som vi må ha, altså påkrevd eller obli
 Bruk alltid input med type="email" for epostfelt. Da får brukeren opp tastatur med @ på mobil.
 
 #### Dato
-Det må legges til formatering som gjør at brukere på mobil får opp native-datovelger.
+Det må legges til formatering som gjør at brukere på mobil får opp native-datovelger når denne er nyttig å bruke. Unntak da dette ikke er nyttig er når man skal oppgi fødselsdato og liknende der man ikke har nytte av å se kaleanderen.
 
 #### Telefon
 Bruk alltid input med type="tel" for felt for telefonnummer. Da får brukeren opp tastatur på mobil.
