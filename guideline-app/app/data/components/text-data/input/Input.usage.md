@@ -1,3 +1,4 @@
+#### Lengden på inputfelter
 Lengden på inputfelt skal tilpasses det antallet tegn bruker skal fylle inn. For å holde skjemaene ryddige og oversiktlige, samt for å lette utviklingen er det satt et sett med faste bredder. Velg den bredden som passer best til dataene bruker skal fylle inn.
 
 #### Obligatoriske og valgfrie felter
