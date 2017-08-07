@@ -1,8 +1,13 @@
-Input-komponenten brukes til å Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Lengden på inputfelt skal tilpasses det antallet tegn bruker skal fylle inn. For å holde skjemaene ryddige og oversiktlige, samt for å lette utviklingen er det satt et sett med faste bredder. Velg den bredden som passer best til dataene bruker skal fylle inn.
 
+#### Obligatoriske og valgfrie felter
+Vi skal bare spørre etter informasjon som vi må ha, altså påkrevd eller obligatorisk informasjon. Dersom det er absolutt nødvendig kan vi legge til valgfrie felter. Dette medfører at de fleste felter i skjemaene våre er obligatoriske. Vi har valgt å ikke markere dem som det grunnet mye gjentakelse. Når vi unntaksvis har et og annet valgfritt felt, så skal "(valgfri)" legges til i ledeteksten, f.eks. "Alder (valgfri)".
 
 #### E-post
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Bruk alltid input med type="email" for epostfelt. Da får brukeren opp tastatur med @ på mobil.
+
+#### Dato
+Det må legges til formatering som gjør at brukere på mobil får opp native-datovelger.
 
 #### Telefon
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Bruk alltid input med type="tel" for felt for telefonnummer. Da får brukeren opp tastatur på mobil.
