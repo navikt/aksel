@@ -1,1 +1,1 @@
-Modals brukes for å vise innhold i et lag over applikasjonen.
+Modalvidu er et panel som duker opp over en side.
