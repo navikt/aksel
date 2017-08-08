@@ -1,14 +1,14 @@
 #### Hovedknapp
 Hovedknapp skal kun brukes til primærhandlinger, og det bør ikke være mer enn en én slik per side eller operasjon.
 
-#### Sekundær knapp: 
-Dette er en gjennomsiktig knapp som man kan bruke for knapper som er en del av layout. De blander godt med bakgrunnen og dermed påvirker lite visuell harmonien. Pass på alltid å sjekke at kontrast er i følge WCAG sine krav. 
+#### Sekundær knapp
+Sekundær knapp er en gjennomsiktig knapp som man kan bruke for knapper som er en del av layout. De blander godt med bakgrunnen og dermed påvirker i liten grad den visuelle harmonien. Pass på å alltid sjekke at kontrast er i følge WCAG sine krav. 
 
-#### Flat knapper:
-De er subtil knapp variant som man kan bruke når man ikke ønsker å tiltrekke unødvendig fokus, eller forstyrre visuel harmonien i layouten. 
+#### Flat knapp
+Flat knapp er en subtil variant som man kan bruke når man ikke ønsker å tiltrekke unødvendig fokus eller forstyrre visuell harmonien i layouten. 
 
-#### Flatt-knapper og ikoner: 
-Ikoner kan tilsettes til flat knapper. Dette bidrar at knappenes klikkbarhet og bedrer forståelse for knappens funksjon. Ikonene skal tilsettes før teksten
+#### Flat knapp med ikon
+En flat knapp kan ha et ikon. Dette framhever knappenes klikkbarhet og øker forståelse for knappens funksjon. Ikonet skal plasseres før teksten.
 
 #### Knapp med spinner
 Knapp med spinner bruker du dersom det er sannsynlig at det vil bli litt ventetid for bruker etter å klikket på knappen. Du skal bare kunne klikke på knappen en gang. Merk at spinner skal først dukke opp etter du har trykket ned knappen. Du kan legge på en spinner på alle typer knapper i normal størrelse.
