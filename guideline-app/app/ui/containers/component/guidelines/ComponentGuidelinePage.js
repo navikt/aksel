@@ -22,47 +22,74 @@ export class ComponentGuidelinePage extends React.Component {
             { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers }
         ];
 
-        this.state = {
-            activeContent: this.tabbarItems[0].content
-        };
+        if (this.hasDeveloperGuidelinesOnly()) {
+            this.state = { activeContent: this.tabbarItems[1].content };
+        }
+        else {
+            this.state = { activeContent: this.tabbarItems[0].content };
+        }
     }
 
-    renderAboutSection() {
-        return (
-            <div className="section">
-                <MdContent content={ this.props.ingress } component={ Ingress } />
+    hasDeveloperGuidelinesOnly() {
+        return !this.props.textData;
+    }
 
-                {
-                    this.props.componentData &&
-                    <Sample { ... this.props } />
-                }
-            </div>
-        );
+    renderIngress() {
+        return (<MdContent content={ this.props.textData.ingress } component={ Ingress } />);
     }
 
     updateActiveContent(item) {
         this.setState({ activeContent: item.content });
     }
 
-    renderTabbar() {
+    renderGuidelinePageWithDesignGuidelines() {
         return (
-            <Tabbar
-                items={ this.tabbarItems }
-                onActiveItemChange={ (item) => this.updateActiveContent(item) }
-            />
+            <div>
+                <div className="section">
+                    { this.renderIngress() }
+                    <Sample { ... this.props } />
+                </div>
+
+                <div className="componentGuidelinePage__tabbarContainer">
+                    <Tabbar
+                        items={ this.tabbarItems }
+                        onActiveItemChange={ (item) => this.updateActiveContent(item) }
+                    />
+                </div>
+
+                <div className="section">
+                    <this.state.activeContent { ... this.props } />
+                </div>
+            </div>
         )
     }
 
+    renderGuidelinePageWithDeveloperGuidelinesOnly() {
+        return (
+            <div>
+                <Ingress>
+                    Det er ikke skrevet noen designretningslinjer for denne komponenten, så her
+                    er det kun utviklerdokumentasjon foreløpig.
+                </Ingress>
+                <Sample { ... this.props } />
+                <this.state.activeContent { ... this.props } />
+            </div>
+        );
+    }
+
     render () {
+        let content;
+
+        if (this.hasDeveloperGuidelinesOnly()) {
+            content = this.renderGuidelinePageWithDeveloperGuidelinesOnly()
+        }
+        else {
+            content = this.renderGuidelinePageWithDesignGuidelines();
+        }
+
         return (
             <div className="componentGuidelinePage">
-                { this.renderAboutSection() }
-
-                <div className="componentGuidelinePage__tabbarContainer">
-                    { this.renderTabbar() }
-                </div>
-
-                <this.state.activeContent { ... this.props } />
+                { content }
             </div>
         );
     }

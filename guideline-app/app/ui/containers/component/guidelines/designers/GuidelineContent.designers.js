@@ -16,7 +16,7 @@ export class GuidelineContentForDesigners extends Component {
             <div className="section">
                 <Undertittel>Hvordan bruker jeg { this.props.componentData.label }?</Undertittel>
                 <MdContent
-                    content={ this.props.usage }
+                    content={ this.props.textData.usage }
                     allowedTags={ this.ALLOWED_TAGS }
                     component={ Normaltekst }
                 />
@@ -29,7 +29,7 @@ export class GuidelineContentForDesigners extends Component {
             <div className="section">
                 <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
                 <MdContent
-                    content={ this.props.accessibility }
+                    content={ this.props.textData.accessibility }
                     allowedTags={ this.ALLOWED_TAGS }
                     component={ Normaltekst }
                 />

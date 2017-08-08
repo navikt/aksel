@@ -32,7 +32,7 @@ export class GuidelineContentForDevelopers extends Component {
             this.props.activeType.component.__docgenInfo;
 
         return (
-            <div className="section">
+            <div>
                 <CodeExample
                     showReactTab={ isImplementedInReact }
                     { ... this.props }

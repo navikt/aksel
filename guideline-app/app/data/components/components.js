@@ -2,8 +2,8 @@ import * as componentData from './sample-data';
 import TextData from './text-data';
 
 export const components = (
-    Object.keys(TextData).map((td) => ({
-        ... TextData[td],
+    Object.keys(componentData).map((td) => ({
+        textData: TextData[td],
         componentData: {
             ... componentData[td],
             componentName: td,
