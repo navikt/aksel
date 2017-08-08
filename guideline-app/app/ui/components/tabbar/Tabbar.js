@@ -1,47 +1,41 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 
 import './styles.less';
 
-// todo: Probably needs a rewrite
 export class Tabbar extends Component {
 
     componentWillMount() {
         this.state = {
-            activeIndex: this.props.activeIndex || -1
+            activeItem: this.getDefaultActiveItem()
         };
     }
 
-    componentWillUpdate(nextProps, nextState) {
-        nextState.activeIndex = nextState.activeIndex > -1 ? nextState.activeIndex : nextProps.activeIndex || -1;
+    getDefaultActiveItem() {
+        return this.props.items.find((element) => (element.defaultActive));
     }
 
-    changeActiveTabbarItemIndex(itemIndex) {
-        this.setState({
-            activeIndex: itemIndex
-        });
+    itemIsActive(item) {
+        return this.state.activeItem === item;
     }
 
-    tabbarItemIsActive(item, index) {
-        if (this.state.activeIndex > -1) {
-            return index === this.state.activeIndex;
-        }
-        return item.defaultActive;
+    changeActiveItem(item) {
+        this.setState({ activeItem: item });
+    }
+
+    onActiveItemChange(item) {
+        this.changeActiveItem(item);
+        this.props.onActiveItemChange(item);
     }
 
     renderTabbarItems() {
         return this.props.items.map((item, index) => (
             <TabbarItem
-                index={ index }
                 key={ index }
-                active={ this.tabbarItemIsActive(item, index) }
-                tabbarItemClicked={
-                    () => {
-                        this.changeActiveTabbarItemIndex(item, index);
-                        this.props.activeItemChange(item);
-                    }
-                }
+                active={ this.itemIsActive(item) }
+                tabbarItemClicked={ () => this.onActiveItemChange(item) }
                 { ... item }
             />
         ));
@@ -57,15 +51,15 @@ export class Tabbar extends Component {
 
 }
 
+Tabbar.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onActiveItemChange: PropTypes.func.isRequired
+};
+
 const TabbarItem = (props) => {
     const classList = () => {
-        let clazzes = 'tabbar__item';
-
-        if (props.active) {
-            return clazzes + ' tabbar__item--active';
-        }
-
-        return clazzes;
+        let clazz = 'tabbar__item';
+        return props.active ? clazz + ' tabbar__item--active' : clazz;
     };
 
     return (
@@ -73,4 +67,8 @@ const TabbarItem = (props) => {
             <EtikettLiten>{ props.label }</EtikettLiten>
         </div>
     )
+};
+
+TabbarItem.propTypes = {
+    label: PropTypes.string.isRequired
 };

@@ -18,8 +18,9 @@ export class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
         this.tabbarItems = [
-            { label: 'Retningslinjer for design', defaultActive: true, content: GuidelineContentForDesigners },
-            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers }
+            { label: 'Retningslinjer for design', content: GuidelineContentForDesigners },
+            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers },
+            { label: 'Universell utforming', content: GuidelineContentForDevelopers }
         ];
 
         this.state = {
@@ -40,19 +41,15 @@ export class ComponentGuidelinePage extends React.Component {
         );
     }
 
-    updateActiveContent(index) {
-        this.setState({
-            activeContent: this.tabbarItems[index].content,
-            activeIndex: index
-        });
+    updateActiveContent(item) {
+        this.setState({ activeContent: item.content });
     }
 
     renderTabbar() {
         return (
             <Tabbar
                 items={ this.tabbarItems }
-                activeItemChange={ (item) => this.updateActiveContent(this.tabbarItems.indexOf(item)) }
-                activeIndex={ this.state.activeIndex }
+                onActiveItemChange={ (item) => this.updateActiveContent(item) }
             />
         )
     }
