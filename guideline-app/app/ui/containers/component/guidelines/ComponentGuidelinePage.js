@@ -18,7 +18,7 @@ export class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
         this.tabbarItems = [
-            { label: 'Retningslinjer for design', content: GuidelineContentForDesigners },
+            { label: 'Retningslinjer for design', content: GuidelineContentForDesigners, defaultActive: true },
             { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers },
             { label: 'Universell utforming', content: GuidelineContentForDevelopers }
         ];
