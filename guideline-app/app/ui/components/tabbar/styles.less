@@ -2,26 +2,9 @@
   display: flex;
 
   &__item {
-    background-color: #0067C5;
-    border: 1px solid white;
-    border-radius: 4px;
-    color: white;
     flex: 1;
     padding: 8px;
     cursor: pointer;
     text-align: center;
-    opacity: 0.5;
-
-    &--active  {
-      opacity: 1;
-    }
-
-    &:hover:not(.tabbar__item--active) {
-      opacity: 0.6;
-    }
-  }
-
-  &__item:nth-child(even), &__item:nth-child(odd):not(:first-child) {
-    border-left: none;
   }
 }

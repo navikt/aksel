@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { EtikettLiten } from '../../../../../../../../packages/node_modules/nav-frontend-typografi';
+import { Tabbar } from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
     getReactCodeForComponent,
@@ -11,48 +11,64 @@ import Highlight from 'react-highlight';
 import './styles.less';
 
 export class CodeExample extends Component {
-    static languages = [
-        { id: 'react', label: 'React' },
-        { id: 'html', label: 'HTML' },
-        { id: 'css', label: 'CSS' }
-    ];
 
     componentWillMount() {
+        this.tabbarItems = this.getTabbarItems();
+
         this.state = {
-            activeTab: CodeExample.languages[1]
-        };
+            activeTabbarItem: this.tabbarItems.find((item) => item.defaultActive)
+        }
     }
 
-    renderCodeSelector() {
-        return (
-            <div className="codeSelector">
+    getTabbarItems() {
+        const tabbarItems = this.getTabbarItemsAlwaysPresent();
 
-                { this.props.showReactTab && this.renderCodeOption(CodeExample.languages[0]) }
-                { this.renderCodeOption(CodeExample.languages[1]) }
-                { this.renderCodeOption(CodeExample.languages[2]) }
-            </div>
-        );
-    }
-
-    renderCodeOption(codeOption) {
-        let clazzList = 'codeSelector__option';
-        if (this.state.activeTab.id === codeOption.id) {
-            clazzList += ' codeSelector__option--active';
+        if (this.props.showReactTab) {
+            const reactTabbarItem = {
+                label: 'React',
+                codeToDisplay: (type, modifiers, children) =>
+                    (getReactCodeForComponent(type, modifiers, children)),
+                hljs: 'html'
+            };
+            return [ reactTabbarItem, ... tabbarItems ];
         }
 
-        return (
-            <EtikettLiten
-                className={ clazzList }
-                onClick={ () => this.changeActiveCodeOption(codeOption) }>
-                { codeOption.label }
-            </EtikettLiten>
-        )
+        return tabbarItems;
     }
 
-    changeActiveCodeOption(codeOption) {
+    getTabbarItemsAlwaysPresent() {
+        return [
+            {
+                label: 'HTML',
+                codeToDisplay: (type, modif, children) => (getHtmlCodeForComponent(type, modif, children)),
+                defaultActive: true,
+                hljs: 'html'
+            },
+            {
+                label: 'CSS',
+                codeToDisplay: (ref) => (getCSSCodeForComponent(ref)),
+                hljs: 'css'
+            }
+        ];
+    }
+
+    changeActiveCodeOption(activeTabbarItem) {
         this.setState({
-            activeTab: codeOption
+            activeTabbarItem: activeTabbarItem
         })
+    }
+
+    getCodeToDisplay() {
+        const type = this.props.activeType;
+        const modifiers = this.props.activeMultipleChoiceModifiers;
+        const children = type.children;
+        const domRef = this.props.activeRef;
+        const activeTabbarItem = this.state.activeTabbarItem;
+
+        if (activeTabbarItem.label === 'CSS') {
+            return activeTabbarItem.codeToDisplay(domRef);
+        }
+        return activeTabbarItem.codeToDisplay(type, modifiers, children);
     }
 
     renderHighlightedCode(code, lang) {
@@ -64,39 +80,23 @@ export class CodeExample extends Component {
     }
 
     render() {
-        const activeTab = this.state.activeTab;
-        const children = this.props.activeType.children;
-        const activeRef = this.props.activeRef;
-
-        let codeToDisplay = '';
-
-        const html = getHtmlCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
-        const jsx = getReactCodeForComponent(this.props.activeType, this.props.activeMultipleChoiceModifiers, children);
-        const css = getCSSCodeForComponent(activeRef);
-
-
-        switch (activeTab.id) {
-            case 'react':
-                codeToDisplay = jsx;
-                break;
-            case 'html':
-                codeToDisplay = html;
-                break;
-            case 'css':
-                codeToDisplay = css;
-                break;
-            default:
-                codeToDisplay = html;
-        }
+        const activeTabbarItem = this.state.activeTabbarItem;
+        const highlightedCode = this.renderHighlightedCode(
+            this.getCodeToDisplay(),
+            activeTabbarItem.hljs
+        );
 
         return (
             <div className="codeExample">
-                { this.renderCodeSelector() }
-                { this.renderHighlightedCode(codeToDisplay, activeTab.id) }
+                <Tabbar
+                    items={ this.tabbarItems }
+                    onActiveItemChange={ (item) => this.changeActiveCodeOption(item) }
+                />
+
+                { highlightedCode }
             </div>
         );
     }
-
 }
 
 CodeExample = connect((state) => ({

@@ -20,19 +20,21 @@
     }
   }
   
-  .codeSelector {
+  .tabbar {
     display: flex;
     text-align: center;
     justify-content: center;
 
-    &__option {
+    &__item {
       cursor: pointer;
       flex: 1;
       font-size: 16px;
 
       &--active {
-        font-size: 20px;
-        font-weight: bold;
+        .typo-etikett-liten {
+          font-size: 20px;
+          font-weight: bold;
+        }
       }
     }
   }

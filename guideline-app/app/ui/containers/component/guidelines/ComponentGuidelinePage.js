@@ -19,8 +19,7 @@ export class ComponentGuidelinePage extends React.Component {
     componentWillMount() {
         this.tabbarItems = [
             { label: 'Retningslinjer for design', content: GuidelineContentForDesigners, defaultActive: true },
-            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers },
-            { label: 'Universell utforming', content: GuidelineContentForDevelopers }
+            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers }
         ];
 
         this.state = {
@@ -58,7 +57,10 @@ export class ComponentGuidelinePage extends React.Component {
         return (
             <div className="componentGuidelinePage">
                 { this.renderAboutSection() }
-                { this.renderTabbar() }
+
+                <div className="componentGuidelinePage__tabbarContainer">
+                    { this.renderTabbar() }
+                </div>
 
                 <this.state.activeContent { ... this.props } />
             </div>
