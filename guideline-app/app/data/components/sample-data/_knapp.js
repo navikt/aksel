@@ -13,7 +13,7 @@ const knapp = {
     types: [
         {
             component: Knapp,
-            label: 'Standard',
+            label: 'Sekundærknapp',
             _default: true
         },
         {
@@ -23,7 +23,8 @@ const knapp = {
         {
             component: Fareknapp,
             label: 'Fareknapp',
-        }
+        },
+
     ],
     multipleChoiceModifiers: [
         { value: 'mini', label: 'Mini' },

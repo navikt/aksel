@@ -10,6 +10,16 @@ const checkbox = {
             label: 'Vanlig',
             attrs: { label: 'Checkboxfelt-label' },
             _default: true
+        },
+        {
+            component: Checkbox,
+            label: 'Med feilmelding',
+            attrs: {
+                label: 'Checkboxfelt-label',
+                feil: {
+                    feilmelding: 'Feil!'
+                }
+            }
         }
     ],
     multipleChoiceModifiers: [

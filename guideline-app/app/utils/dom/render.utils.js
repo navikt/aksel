@@ -68,6 +68,25 @@ const renderComponent = (c, attrs, children) => {
     });
 };
 
+const getAttributesFromModifiers = (modifiers) => {
+    let modifierAttrs = {};
+    modifiers.forEach(
+        (modif) => {
+            const value = modif.value;
+            if (typeof value !== 'object') {
+                modifierAttrs[value] = true;
+            }
+            else {
+                const keys = Object.keys(modif.value);
+                keys.forEach((key) => {
+                    modifierAttrs[key] = value[key];
+                });
+            }
+        }
+    );
+    return modifierAttrs;
+};
+
 const mergeAttrs = (attrs1, attrs2) => (Object.assign({}, attrs1, attrs2));
 
 export const renderComponentWithModifiersAndChildren = (type, modifiers, children, shallowRender = false) => {
@@ -75,10 +94,7 @@ export const renderComponentWithModifiersAndChildren = (type, modifiers, childre
 
     if (component) {
         const typeAttrs = type.attrs;
-
-        let modifierAttrs = {};
-        modifiers.forEach((modif) => { modifierAttrs[modif.value] = true; });
-
+        const modifierAttrs = getAttributesFromModifiers(modifiers);
 
         if (shallowRender) {
             return shallow(renderComponent(component, mergeAttrs(typeAttrs, modifierAttrs), children));

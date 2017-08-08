@@ -17,7 +17,15 @@ const textarea = {
         }
     ],
     multipleChoiceModifiers: [
-        { value: 'disabled', label: 'Disabled' }
+        { value: 'disabled', label: 'Disabled' },
+        {
+            value: {
+                feil: {
+                    feilmelding: 'Her ble det feil!'
+                }
+            },
+            label: 'Med feil'
+        }
     ]
 };
 
