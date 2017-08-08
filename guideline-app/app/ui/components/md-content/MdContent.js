@@ -4,6 +4,8 @@ import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
 
+import './styles.less'
+
 const navFrontendifyHtml = (html) => (
     html
         .replace(/<a/g, '<a class="lenke" ')
@@ -28,7 +30,7 @@ export const MdContent = (props) => {
     );
 
     const renderMdContent = () => (
-        <div>
+        <div className="mdContent">
             {
                 paragraphs.map((paragraph, i) => {
                     let sanitizedHtml = sanitizeHtml(
