@@ -11,7 +11,7 @@ Flat knapp er en subtil variant som man kan bruke når man ikke ønsker å tiltr
 Flat knapp kan ha et ikon. Dette framhever knappenes klikkbarhet og øker forståelse for knappens funksjon. Ikonet skal plasseres før teksten.
 
 #### Knapp med spinner
-Knapp med spinner bruker du dersom det er sannsynlig at det vil bli litt ventetid etter at brukeren har klikket på knappen. Bruker skal bare kunne klikke på knappen en gang. Merk at spinner skal først dukke opp etter du har trykket ned knappen. Du kan legge på en spinner på alle typer knapper i normal størrelse.
+Knapp med spinner bruker du dersom det er sannsynlig at det vil bli litt ventetid etter at brukeren har klikket på knappen. Bruker skal bare kunne klikke på knappen en gang. Merk at spinner skal først dukke opp etter du har trykket ned knappen, og den skal stå etter teksten på knappen. Du kan legge på en spinner på alle typer knapper i normal størrelse.
 
 #### Mini knapp
 Mini knapp har samme høyde som standard skjema elementer. Brukes f.eks ved siden av input felter, select bokser osv.
