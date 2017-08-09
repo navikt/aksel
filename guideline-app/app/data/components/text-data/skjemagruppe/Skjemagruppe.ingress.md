@@ -1,1 +1,1 @@
-Snakkeboble brukes til å vise direkte melding eller informasjon fra en konkret avsender.
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
