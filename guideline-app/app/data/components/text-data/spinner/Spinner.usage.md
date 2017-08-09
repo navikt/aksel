@@ -1,1 +1,2 @@
-Spinner-komponenten brukes til å Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Prøv alltid å velge størrelse på spinneren slik at den tar oppmerksomhet, men ikke forstyrrer layout på sidene. 
+Spinnere kan også brukes etter teksten på en knapp. Les mer om [knapp med spinner](https://erlendev.github.io/nav-frontend-moduler/#/components/knapp).
