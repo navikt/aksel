@@ -9,7 +9,6 @@ import { LayoutPage } from '../../ui/containers/layout/LayoutPage';
 import { AccessibilityPage } from '../../ui/containers/accessibility/AccessibilityPage';
 import { TypographyPage } from '../../ui/containers/typography/TypographyPage';
 import { GettingStartedDesigner } from "../../ui/containers/gettingstarted/GettingStartedDesigner";
-import { GettingStartedDeveloper } from "../../ui/containers/gettingstarted/GettingStartedDeveloper";
 
 export const routeConfig = [
     {
@@ -22,11 +21,6 @@ export const routeConfig = [
         path: '/gettingstarted-designer',
         component: GettingStartedDesigner,
         title: 'Kom igang / Design'
-    },
-    {
-        path: '/gettingstarted-developer',
-        component: GettingStartedDeveloper,
-        title: 'Kom igang med Utvikling'
     },
     {
         path: '/components',
