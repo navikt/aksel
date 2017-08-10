@@ -11,6 +11,20 @@ var htmlRule = {
 };
 
 WebpackDevConfig.module.rules.push(htmlRule);
+
+let babelRule = WebpackDevConfig.module.rules.find(
+    (rule) => (rule.loader === 'babel-loader')
+);
+
+if (babelRule) {
+    if (babelRule.include) {
+        babelRule.include.push(path.resolve(__dirname, './../../packages/node_modules'));
+    }
+    else {
+        babelRule.include([path.resolve(__dirname, './../../packages/node_modules')]);
+    }
+}
+
 WebpackDevConfig.devServer = {
     historyApiFallback: true,
     contentBase: [path.join(__dirname, './../'), path.join(__dirname, "./../../packages/")],

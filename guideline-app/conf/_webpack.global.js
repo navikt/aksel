@@ -17,8 +17,7 @@ var GlobalWebpackConfig = {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [
-                    path.resolve(__dirname, './../app'),
-                    path.resolve(__dirname, './../../packages/node_modules')
+                    path.resolve(__dirname, './../app')
                 ],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
