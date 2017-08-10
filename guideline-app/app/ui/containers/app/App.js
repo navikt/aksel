@@ -19,7 +19,7 @@ export class App extends React.Component {
                         <div>
                             <LeftNavigation />
                         </div>
-                        <div style={{left:'168px',position:'relative',marginRight:'200px',width:'100%'}}>
+                        <div style={{left:'188px',position:'relative',marginRight:'200px',width:'100%'}}>
                             <div className="contentWrapper">
                                 { routes() }
                             </div>
