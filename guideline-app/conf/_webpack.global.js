@@ -17,10 +17,11 @@ var GlobalWebpackConfig = {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [
-                    path.resolve(__dirname, './../app')
+                    path.resolve(__dirname, './../app'),
+                    path.resolve(__dirname, './../../packages/node_modules')
                 ],
                 query: {
-                    presets: [ 'es2015', 'stage-2', 'react' ],
+                    presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['transform-object-rest-spread']
                 }
             },
@@ -50,12 +51,22 @@ var GlobalWebpackConfig = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules')
+        }
+    },
     externals: {
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
         'react-addons-test-utils': 'react-dom',
     },
+    plugins: [
+        new webpack.ProvidePlugin({
+            'React': 'react'
+        })
+    ]
 };
 
 module.exports = GlobalWebpackConfig;

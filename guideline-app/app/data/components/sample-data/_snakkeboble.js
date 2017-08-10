@@ -1,5 +1,5 @@
 import React from 'react';
-import Snakkeboble from './../../../../../packages/node_modules/nav-frontend-snakkeboble';
+import Snakkeboble from 'NavFrontendModules/nav-frontend-snakkeboble';
 
 const chatText1 = 'Hei! Jeg lurer på en ting...';
 const chatText2 = 'Spør i vei.';

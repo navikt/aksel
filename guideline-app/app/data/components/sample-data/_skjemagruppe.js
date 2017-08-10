@@ -1,4 +1,4 @@
-import { SkjemaGruppe, Checkbox } from './../../../../../packages/node_modules/nav-frontend-skjema';
+import { SkjemaGruppe, Checkbox } from 'NavFrontendModules/nav-frontend-skjema';
 
 const options = [
     { label: 'Bakerst', value: 'bakerst', id: 'bakerst-checkbox', name: 'bakerst' },

@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
     Select
-} from './../../../../../packages/node_modules/nav-frontend-skjema';
+} from 'NavFrontendModules/nav-frontend-skjema';
 
 const options = [
     { value: 'norge', label: 'Norge' },

@@ -1,7 +1,7 @@
 import {
     ToggleGruppe,
     ToggleKnapp
-} from './../../../../../packages/node_modules/nav-frontend-toggle';
+} from 'NavFrontendModules/nav-frontend-toggle';
 
 const commonAttrs = { onChange: () => {}, name: 'toggleGruppe' };
 const commonChildAttrs = (id, checked) => ({ value: 'knapp' + id, defaultChecked: checked || false });

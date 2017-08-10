@@ -5,7 +5,7 @@ import Hjelpetekst, {
     HjelpetekstVenstre,
     HjelpetekstMidt,
     HjelpetekstAuto
-} from './../../../../../packages/node_modules/nav-frontend-hjelpetekst';
+} from 'NavFrontendModules/nav-frontend-hjelpetekst';
 
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 

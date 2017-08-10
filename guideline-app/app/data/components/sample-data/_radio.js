@@ -1,6 +1,6 @@
 import {
     Radio
-} from './../../../../../packages/node_modules/nav-frontend-skjema';
+} from 'NavFrontendModules/nav-frontend-skjema';
 
 const radio = {
     base: Radio,

@@ -1,4 +1,4 @@
-import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
+import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
 
 const lukknapp = {
     base: Lukknapp,

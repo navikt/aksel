@@ -4,7 +4,7 @@ import AlertStripe, {
     AlertStripeInfo,
     AlertStripeInfoSolid,
     AlertStripeAdvarsel
-} from './../../../../../packages/node_modules/nav-frontend-alertstriper';
+} from 'NavFrontendModules/nav-frontend-alertstriper';
 
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 

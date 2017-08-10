@@ -1,4 +1,4 @@
-import Spinner from './../../../../../packages/node_modules/nav-frontend-spinner';
+import Spinner from 'NavFrontendModules/nav-frontend-spinner';
 
 const spinner = {
     base: Spinner,

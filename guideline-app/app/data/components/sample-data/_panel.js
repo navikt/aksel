@@ -1,5 +1,5 @@
-import Ekspanderbartpanel from './../../../../../packages/node_modules/nav-frontend-ekspanderbartpanel';
-import Lenkepanel from './../../../../../packages/node_modules/nav-frontend-lenkepanel';
+import Ekspanderbartpanel from 'NavFrontendModules/nav-frontend-ekspanderbartpanel';
+import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 const panel = {
 

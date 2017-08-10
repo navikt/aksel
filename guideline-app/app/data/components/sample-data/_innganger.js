@@ -4,7 +4,7 @@ import {
     EnkelIngressInngang,
     NormalVertikalInngang,
     StorVertikalInngang
-} from './../../../../../packages/node_modules/nav-frontend-inngang';
+} from 'NavFrontendModules/nav-frontend-inngang';
 
 const innganger = {
     types: [

@@ -3,7 +3,7 @@ import Etikett, {
     EtikettFokus,
     EtikettInfo,
     EtikettAdvarsel
-} from './../../../../../packages/node_modules/nav-frontend-etiketter';
+} from 'NavFrontendModules/nav-frontend-etiketter';
 
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 

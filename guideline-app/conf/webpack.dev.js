@@ -1,5 +1,6 @@
 var path = require('path'),
-    WebpackDevConfig = require('./_webpack.global');
+    WebpackDevConfig = require('./_webpack.global'),
+    DirectoryNamedWebpackPlugin = require("directory-named-webpack-plugin");
 
 var htmlRule = {
     test: /\.html$/,
@@ -12,12 +13,18 @@ var htmlRule = {
 WebpackDevConfig.module.rules.push(htmlRule);
 WebpackDevConfig.devServer = {
     historyApiFallback: true,
-    contentBase: path.join(__dirname, './../')
+    contentBase: [path.join(__dirname, './../'), path.join(__dirname, "./../../packages/")],
+    watchContentBase: true
 };
 WebpackDevConfig.output = {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
     filename: '[name].js',
 };
+WebpackDevConfig.resolve.plugins = [
+    new DirectoryNamedWebpackPlugin({
+        honorPackage: ['jsnext:main']
+    })
+];
 
 module.exports = WebpackDevConfig;

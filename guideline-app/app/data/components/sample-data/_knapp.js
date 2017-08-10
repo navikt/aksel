@@ -4,7 +4,7 @@ import KnappBase,
     Knapp,
     Hovedknapp,
     Fareknapp
-} from './../../../../../packages/node_modules/nav-frontend-knapper';
+} from 'NavFrontendModules/nav-frontend-knapper';
 
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
 
