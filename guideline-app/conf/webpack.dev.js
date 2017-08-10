@@ -21,7 +21,7 @@ if (babelRule) {
         babelRule.include.push(path.resolve(__dirname, './../../packages/node_modules'));
     }
     else {
-        babelRule.include([path.resolve(__dirname, './../../packages/node_modules')]);
+        babelRule.include = [path.resolve(__dirname, './../../packages/node_modules')];
     }
 }
 
