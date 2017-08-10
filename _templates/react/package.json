@@ -2,7 +2,7 @@
   "name": "<%name.original%>",
   "version": "0.0.1",
   "main": "lib/<%name.indexfile%>.js",
-  "jsnext:main": "src/<%name.indexfile%>.js",
+  "module": "src/<%name.indexfile%>.js",
   "license": "MIT",
   "files": ["/src", "/lib"],
   "publishConfig": {
