@@ -1,9 +1,19 @@
 var webpack = require('webpack'),
     path = require('path');
 
+var vendors = [
+    'react',
+    'react-dom',
+    'react-router-dom',
+    'react-redux',
+    'redux',
+    'redux-logger'
+];
+
 var GlobalWebpackConfig = {
     entry: {
-        scripts: './guideline-app/app/ui/app.js'
+        scripts: './guideline-app/app/ui/app.js',
+        vendors: vendors
     },
     module: {
         rules: [
@@ -64,6 +74,9 @@ var GlobalWebpackConfig = {
     plugins: [
         new webpack.ProvidePlugin({
             'React': 'react'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendors'
         })
     ]
 };

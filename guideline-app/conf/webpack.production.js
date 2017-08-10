@@ -1,5 +1,4 @@
-var webpack = require('webpack'),
-    path = require('path'),
+var path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
     WebpackProductionConfig = require('./_webpack.global');
 
