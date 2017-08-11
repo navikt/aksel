@@ -15,11 +15,11 @@ export class App extends React.Component {
             <Router>
                 <div className="app">
                     <Header />
-                    <div style={{display:'inline-flex',width:'100%',position:'relative'}}>
+                    <div style={{position:'relative'}}>
                         <div>
                             <LeftNavigation />
                         </div>
-                        <div style={{left:'188px',position:'relative',marginRight:'200px',width:'100%'}}>
+                        <div style={{left:'160px',position:'relative',marginRight:'200px'}}>
                             <div className="contentWrapper">
                                 { routes() }
                             </div>
