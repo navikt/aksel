@@ -9,7 +9,15 @@ export const createSampleData = (allTypes, base) => {
                 value: modifier.value,
                 component: modifier.component,
                 children: 'Slik ser en Alertstripe ut'
-            }))
+            }));
+
+            if (modifiers.length > 0) {
+                modifiers.unshift({
+                    value: 'normal',
+                    component: type.component,
+                    children: 'Slik ser en Alertstripe ut'
+                });
+            }
         }
 
         return {
@@ -24,9 +32,12 @@ export const createSampleData = (allTypes, base) => {
     let modifiers = [];
     allTypes.forEach((type) => {
         if (type.modifiers && Array.isArray(type.modifiers)) {
-            type.modifiers.forEach((modifier, index) => {
+            if (type.modifiers.length > 0) {
+                modifiers = [{ _default: true, value: 'normal', label: 'Normal' }];
+            }
+
+            type.modifiers.forEach((modifier) => {
                 modifiers.push({
-                    _default: index === 0,
                     value: modifier.value,
                     label: modifier.label
                 })
