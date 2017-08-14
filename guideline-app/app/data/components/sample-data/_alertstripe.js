@@ -7,7 +7,7 @@ import AlertStripe, {
 } from 'NavFrontendModules/nav-frontend-alertstriper';
 
 import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
-
+import { createSampleData, addType, addModifier } from './../sampleDataHelper';
 const alertstripe = {
     base: AlertStripe,
     types: [
@@ -38,6 +38,21 @@ const alertstripe = {
         { value: 'solid', label: 'Solid' }
     ]
 };
+
+
+const test =
+    createSampleData([
+        addType(AlertStripeSuksess, 'Suksess', [
+            addModifier(AlertStripeSuksessSolid, 'solid')
+        ]),
+        addType(AlertStripeInfo, 'Info', [
+            addModifier(AlertStripeInfoSolid, 'solid')
+        ]),
+        addType(AlertStripeAdvarsel, 'Advarsel')
+    ], AlertStripe);
+
+console.log(test);
+
 
 const COMMON_VALUE = 'Slik ser en Alertstripe ut';
 alertstripe.types = fillTypesAndModifiersWithCommonValue(alertstripe.types, COMMON_VALUE);
