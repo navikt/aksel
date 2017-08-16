@@ -6,18 +6,21 @@ import AlertStripe, {
     AlertStripeAdvarsel
 } from 'NavFrontendModules/nav-frontend-alertstriper';
 
-import { createSampleData, addType, addModifier } from './../sampleDataHelper';
+import { createSampleData, newType, newModifier } from './../sampleDataHelper';
 
-const data =
-    createSampleData([
-        addType(AlertStripeSuksess, 'Suksess', [
-            addModifier(AlertStripeSuksessSolid, 'solid')
-        ]),
-        addType(AlertStripeInfo, 'Info', [
-            addModifier(AlertStripeInfoSolid, 'solid')
-        ]),
-        addType(AlertStripeAdvarsel, 'Advarsel')
-    ], AlertStripe);
+const commonChild = 'Slik ser en Alertstripe ut';
+
+const types = [
+    newType(AlertStripeSuksess, 'Suksess', [
+        newModifier(AlertStripeSuksessSolid, 'solid')
+    ], commonChild),
+    newType(AlertStripeInfo, 'Info', [
+        newModifier(AlertStripeInfoSolid, 'solid')
+    ], commonChild),
+    newType(AlertStripeAdvarsel, 'Advarsel', [], commonChild)
+];
+
+const data = createSampleData(types, [], AlertStripe);
 
 console.log(data);
 

@@ -1,66 +1,82 @@
 const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
-export const createSampleData = (allTypes, base) => {
-    const types = allTypes.map((type, tIndex) => {
-        let modifiers;
+const isArrayWithContents = (arr) => (arr && Array.isArray(arr) && arr.length > 0);
 
-        if (type.modifiers && Array.isArray(type.modifiers)) {
-            modifiers = type.modifiers.map((modifier) => ({
-                value: modifier.value,
-                component: modifier.component,
-                children: 'Slik ser en Alertstripe ut'
-            }));
+function duplicateModifiers (modifier1, index, array) {
+    return index === array.findIndex(
+        (modifier2) =>
+            (modifier1.value === modifier2.value || modifier1.label === modifier2.label)
+    );
+}
 
-            if (modifiers.length > 0) {
-                modifiers.unshift({
-                    value: 'normal',
-                    component: type.component,
-                    children: 'Slik ser en Alertstripe ut'
-                });
-            }
-        }
+const createModifierArrayFromTypesWithModifiers = (types) => {
+    let modifierArray = [{ _default: true, value: 'normal', label: 'Normal' }];
+    types.forEach((type) => {
+        type.modifiers.forEach((modifier) => (modifierArray.push(modifier)));
+    });
+
+    return modifierArray.map((modifier) => {
+        return modifier;
+    }).filter(duplicateModifiers);
+};
+
+const createTypesWithModifiers = (types) => (
+    types.map((type) => {
+        let typeModifiers = type.modifiers;
+        typeModifiers.push({
+            component: type.component,
+            children: type.children,
+            value: 'normal'
+        });
 
         return {
             component: type.component,
-            children: 'Slik ser en Alertstripe ut',
             label: type.label,
-            _default: tIndex === 0,
-            modifiers: modifiers
+            children: type.children,
+            modifiers: typeModifiers
         }
-    });
+    })
+);
 
-    let modifiers = [];
-    allTypes.forEach((type) => {
-        if (type.modifiers && Array.isArray(type.modifiers)) {
-            if (type.modifiers.length > 0) {
-                modifiers = [{ _default: true, value: 'normal', label: 'Normal' }];
-            }
+const createSampleDataFromTypes = (allTypes, base) => {
+    let types, globalModifiers;
+    const hasTypesWithModifiers = allTypes.some((type) => (isArrayWithContents(type.modifiers)));
 
-            type.modifiers.forEach((modifier) => {
-                modifiers.push({
-                    value: modifier.value,
-                    label: modifier.label
-                })
-            });
-        }
-    });
+    if (hasTypesWithModifiers) {
+        globalModifiers = createModifierArrayFromTypesWithModifiers(allTypes);
+        types = createTypesWithModifiers(allTypes);
+    }
 
+    types[0]._default = true;
     return {
         types: types,
-        modifiers: modifiers,
+        modifiers: globalModifiers,
         base: base
     }
 };
 
-export const addType = (component, label, modifs) => {
-    return {
-        component: component,
-        label: toFirstUpper(label),
-        modifiers: modifs
+export const createSampleData = (allTypes, allModifiers, baseType, children) => {
+    let sampleData = baseType ? { base: baseType } : {};
+    const hasModifiersOnRoot = isArrayWithContents(allModifiers);
+
+    if (!hasModifiersOnRoot) {
+        return {
+            ... sampleData,
+            ... createSampleDataFromTypes(allTypes, baseType, children)
+        };
     }
 };
 
-export const addModifier = (component, value) => {
+export const newType = (component, label, modifs, children) => {
+    return {
+        component: component,
+        children: children,
+        label: toFirstUpper(label),
+        modifiers: modifs.map((modif) => ({ ... modif, children: children }))
+    }
+};
+
+export const newModifier = (component, value) => {
     return {
         component: component,
         label: toFirstUpper(value),
