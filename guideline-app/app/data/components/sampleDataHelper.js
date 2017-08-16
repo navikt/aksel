@@ -14,10 +14,7 @@ const createModifierArrayFromTypesWithModifiers = (types) => {
     types.forEach((type) => {
         type.modifiers.forEach((modifier) => (modifierArray.push(modifier)));
     });
-
-    return modifierArray.map((modifier) => {
-        return modifier;
-    }).filter(duplicateModifiers);
+    return modifierArray.filter(duplicateModifiers);
 };
 
 const createTypesWithModifiers = (types) => (
@@ -47,9 +44,9 @@ const createSampleDataFromTypes = (allTypes, base) => {
         types = createTypesWithModifiers(allTypes);
     }
 
-    types[0]._default = true;
+    (types || allTypes)[0]._default = true;
     return {
-        types: types,
+        types: types || allTypes,
         modifiers: globalModifiers,
         base: base
     }
@@ -72,14 +69,21 @@ export const newType = (component, label, modifs, children) => {
         component: component,
         children: children,
         label: toFirstUpper(label),
-        modifiers: modifs.map((modif) => ({ ... modif, children: children }))
+        modifiers: (modifs||[]).map((modif) => ({ ... modif, children: children }))
     }
 };
 
-export const newModifier = (component, value) => {
+export const newSingleChoiceModifier = (component, value) => {
     return {
         component: component,
         label: toFirstUpper(value),
+        value: value
+    }
+};
+
+export const newMultipleChoiceModifier = (value, label) => {
+    return {
+        label: label,
         value: value
     }
 };
