@@ -1,3 +1,5 @@
+import { createSampleData, newType } from './../sampleDataHelper';
+
 import {
     ToggleGruppe,
     ToggleKnapp
@@ -14,35 +16,8 @@ const allChildren = [
     { component: ToggleKnapp, children: 'Knapp 5', attrs: commonChildAttrs(5) }
 ];
 
-const toggle = {
-    base: ToggleGruppe,
-    types: [
-        {
-            component: ToggleGruppe,
-            attrs: commonAttrs,
-            children: allChildren.slice(0, 2),
-            label: '2 valg'
-        },
-        {
-            component: ToggleGruppe,
-            attrs: commonAttrs,
-            children: allChildren.slice(0, 3),
-            label: '3 valg',
-            _default: true
-        },
-        {
-            component: ToggleGruppe,
-            attrs: commonAttrs,
-            children: allChildren.slice(0, 4),
-            label: '4 valg'
-        },
-        {
-            component: ToggleGruppe,
-            attrs: commonAttrs,
-            children: allChildren,
-            label: '5 valg'
-        }
-    ]
-};
+const types = [2,3,4,5].map((numToggles) => (
+    newType(ToggleGruppe, numToggles + ' valg', allChildren.slice(0, numToggles), commonAttrs)
+));
 
-export default toggle;
+export default createSampleData(types);

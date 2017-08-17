@@ -1,32 +1,17 @@
+import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
+
 import {
     Textarea
 } from 'NavFrontendModules/nav-frontend-skjema';
 
-const textarea = {
-    base: Textarea,
-    types: [
-        {
-            component: Textarea,
-            attrs: {
-                label: 'Textarea-label',
-                onChange: () => {},
-                value: ''
-            },
-            label: 'Vanlig',
-            _default: true
+const types = [ newType(Textarea, 'Vanlig', null, { label: 'Textarea-label', onChange: () => {}, value: '' })];
+const modifiers = [
+    newMultipleChoiceModifier('disabled', 'Disabled'),
+    newMultipleChoiceModifier({
+        feil: {
+            feilmelding: 'Her ble det feil'
         }
-    ],
-    multipleChoiceModifiers: [
-        { value: 'disabled', label: 'Disabled' },
-        {
-            value: {
-                feil: {
-                    feilmelding: 'Her ble det feil!'
-                }
-            },
-            label: 'Med feil'
-        }
-    ]
-};
+    }, 'Med feil')
+];
 
-export default textarea;
+export default createSampleData(types, modifiers);
