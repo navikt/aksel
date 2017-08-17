@@ -10,13 +10,13 @@ import { createSampleData, newType, newSingleChoiceModifier } from './../sampleD
 const commonChild = 'Slik ser en Alertstripe ut';
 
 const types = [
-    newType(AlertStripeSuksess, 'Suksess', [
+    newType(AlertStripeSuksess, 'Suksess', commonChild, {}, [
         newSingleChoiceModifier(AlertStripeSuksessSolid, 'solid')
-    ], commonChild),
-    newType(AlertStripeInfo, 'Info', [
+    ]),
+    newType(AlertStripeInfo, 'Info', commonChild, {}, [
         newSingleChoiceModifier(AlertStripeInfoSolid, 'solid')
-    ], commonChild),
-    newType(AlertStripeAdvarsel, 'Advarsel', [], commonChild)
+    ]),
+    newType(AlertStripeAdvarsel, 'Advarsel', commonChild)
 ];
 
 export default createSampleData(types, [], AlertStripe);

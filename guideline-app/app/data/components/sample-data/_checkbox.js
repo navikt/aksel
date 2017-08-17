@@ -10,8 +10,8 @@ import {
 
 const feilAttrs = { feil: { feilmelding: 'Feil!' } };
 const types = [
-    newType(Checkbox, 'Vanlig', null, null, { label: 'Checkboxfelt-label' }),
-    newType(Checkbox, 'Med feilmelding', null, null, { label: 'Checkboxfelt-label', ... feilAttrs })
+    newType(Checkbox, 'Vanlig', null, { label: 'Checkboxfelt-label' }),
+    newType(Checkbox, 'Med feilmelding', null, { label: 'Checkboxfelt-label', ... feilAttrs })
 ];
 const modifiers = [ newMultipleChoiceModifier('disabled', 'Disabled') ];
 

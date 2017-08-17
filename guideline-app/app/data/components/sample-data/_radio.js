@@ -1,23 +1,14 @@
 import {
     Radio
 } from 'NavFrontendModules/nav-frontend-skjema';
+import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
 
-const radio = {
-    base: Radio,
-    types: [
-        {
-            component: Radio,
-            attrs: {
-                label: 'Radio-label',
-                name: 'radio'
-            },
-            label: 'Vanlig',
-            _default: true
-        }
-    ],
-    multipleChoiceModifiers: [
-        { value: 'disabled', label: 'Disabled' }
-    ]
-};
+const types = [
+    newType(Radio, 'Vanlig', null, { label: 'Radio-label', name: 'radio' })
+];
 
-export default radio;
+const modifiers = [
+    newMultipleChoiceModifier('disabled', 'Disabled')
+];
+
+export default createSampleData(types, modifiers);

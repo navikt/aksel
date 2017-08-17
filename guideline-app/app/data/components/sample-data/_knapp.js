@@ -13,9 +13,9 @@ import {
 
 const commonChild = 'Slik ser en knapp ut';
 const types = [
-    newType(Knapp, 'Sekundærknapp', null, commonChild),
-    newType(Hovedknapp, 'Hovedknapp', null, commonChild),
-    newType(Fareknapp, 'Fareknapp', null, commonChild)
+    newType(Knapp, 'Sekundærknapp', commonChild),
+    newType(Hovedknapp, 'Hovedknapp', commonChild),
+    newType(Fareknapp, 'Fareknapp', commonChild)
 ];
 const modifiers = [
     newMultipleChoiceModifier('mini', 'Mini'),

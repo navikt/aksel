@@ -9,9 +9,9 @@ import { createSampleData, newType } from './../sampleDataHelper';
 
 const commonChild = 'Slik ser en Etikett ut';
 const types = [
-    newType(EtikettSuksess, 'Suksess', null, commonChild),
-    newType(EtikettFokus, 'Fokus', null, commonChild),
-    newType(EtikettInfo, 'Info', null, commonChild),
-    newType(EtikettAdvarsel, 'Advarsel', null, commonChild)
+    newType(EtikettSuksess, 'Suksess', commonChild),
+    newType(EtikettFokus, 'Fokus', commonChild),
+    newType(EtikettInfo, 'Info', commonChild),
+    newType(EtikettAdvarsel, 'Advarsel', commonChild)
 ];
 export default createSampleData(types, null, Etikett);

@@ -11,11 +11,11 @@ import { createSampleData, newType } from './../sampleDataHelper';
 
 const commonChild = 'Slik ser en hjelptekst ut';
 const types = [
-    newType(HjelpetekstUnder, 'Under', null, commonChild),
-    newType(HjelpetekstHoyre, 'Høyre', null, commonChild),
-    newType(HjelpetekstVenstre, 'Venstre', null, commonChild),
-    newType(HjelpetekstMidt, 'Sentrert', null, commonChild),
-    newType(HjelpetekstAuto, 'Automatisk', null, commonChild)
+    newType(HjelpetekstUnder, 'Under', commonChild),
+    newType(HjelpetekstHoyre, 'Høyre', commonChild),
+    newType(HjelpetekstVenstre, 'Venstre', commonChild),
+    newType(HjelpetekstMidt, 'Sentrert', commonChild),
+    newType(HjelpetekstAuto, 'Automatisk', commonChild)
 ];
 
 export default createSampleData(types, null, Hjelpetekst);

@@ -60,7 +60,7 @@ export const createSampleData = (allTypes, allModifiers, baseType) => {
     return { ... sampleData, multipleChoiceModifiers: allModifiers };
 };
 
-export const newType = (component, label, modifs, children, attrs = {}) => {
+export const newType = (component, label, children, attrs = {}, modifs) => {
     return {
         attrs: attrs,
         children: children,

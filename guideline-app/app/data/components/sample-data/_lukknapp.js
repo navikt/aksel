@@ -4,8 +4,8 @@ import { createSampleData, newType } from './../sampleDataHelper';
 
 const types = [
     newType(Lukknapp, 'Vanlig'),
-    newType(Lukknapp, 'Blå', null, null, { bla: true }),
-    newType(Lukknapp, 'Hvit', null, null, { hvit: true })
+    newType(Lukknapp, 'Blå', null, { bla: true }),
+    newType(Lukknapp, 'Hvit', null, { hvit: true })
 ];
 
 export default createSampleData(types);

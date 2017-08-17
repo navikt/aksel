@@ -11,7 +11,7 @@ import {
 const inputSizes = ['fullbredde', 'XXS', 'XS', 'S', 'L', 'XL', 'XXL'];
 const types = inputSizes.map((inputSize) => (
     newType(
-        Input, inputSize, null, null,  { label: 'Inputfelt-label', bredde: inputSize.toLowerCase() }
+        Input, inputSize, null, { label: 'Inputfelt-label', bredde: inputSize.toLowerCase() }
     )
 ));
 const modifiers = [
