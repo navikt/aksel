@@ -31,7 +31,7 @@ var GlobalWebpackConfig = {
                 ],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
-                    plugins: ['transform-object-rest-spread']
+                    plugins: ['react-docgen', 'transform-object-rest-spread']
                 }
             },
             {
