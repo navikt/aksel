@@ -1,24 +1,11 @@
 import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
 
-const lukknapp = {
-    base: Lukknapp,
-    types: [
-        {
-            component: Lukknapp,
-            label: 'Vanlig',
-            _default: true
-        },
-        {
-            component: Lukknapp,
-            attrs: { bla: true },
-            label: 'Blå'
-        },
-        {
-            component: Lukknapp,
-            attrs: { hvit: true },
-            label: 'Hvit'
-        }
-    ]
-};
+import { createSampleData, newType } from './../sampleDataHelper';
 
-export default lukknapp;
+const types = [
+    newType(Lukknapp, 'Vanlig'),
+    newType(Lukknapp, 'Blå', null, null, { bla: true }),
+    newType(Lukknapp, 'Hvit', null, null, { hvit: true })
+];
+
+export default createSampleData(types);
