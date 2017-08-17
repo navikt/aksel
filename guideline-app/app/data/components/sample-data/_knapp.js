@@ -1,4 +1,3 @@
-import React from 'react';
 import KnappBase,
 {
     Knapp,
@@ -6,34 +5,22 @@ import KnappBase,
     Fareknapp
 } from 'NavFrontendModules/nav-frontend-knapper';
 
-import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+import {
+    createSampleData,
+    newType,
+    newMultipleChoiceModifier
+} from './../sampleDataHelper';
 
-const knapp = {
-    base: KnappBase,
-    types: [
-        {
-            component: Knapp,
-            label: 'Sekundærknapp',
-            _default: true
-        },
-        {
-            component: Hovedknapp,
-            label: 'Hovedknapp',
-        },
-        {
-            component: Fareknapp,
-            label: 'Fareknapp',
-        },
+const commonChild = 'Slik ser en knapp ut';
+const types = [
+    newType(Knapp, 'Sekundærknapp', null, commonChild),
+    newType(Hovedknapp, 'Hovedknapp', null, commonChild),
+    newType(Fareknapp, 'Fareknapp', null, commonChild)
+];
+const modifiers = [
+    newMultipleChoiceModifier('mini', 'Mini'),
+    newMultipleChoiceModifier('spinner', 'Spinner'),
+    newMultipleChoiceModifier('disabled', 'Disabled')
+];
 
-    ],
-    multipleChoiceModifiers: [
-        { value: 'mini', label: 'Mini' },
-        { value: 'spinner', label: 'Spinner', },
-        { value: 'disabled', label: 'Disabled' }
-    ]
-};
-
-const COMMON_VALUE = 'Slik ser en knapp ut';
-knapp.types = fillTypesAndModifiersWithCommonValue(knapp.types, COMMON_VALUE);
-
-export default knapp;
+export default createSampleData(types, modifiers, KnappBase);

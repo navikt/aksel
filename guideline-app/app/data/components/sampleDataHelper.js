@@ -52,16 +52,19 @@ const createSampleDataFromTypes = (allTypes, base) => {
     }
 };
 
-export const createSampleData = (allTypes, allModifiers, baseType, children) => {
-    let sampleData = baseType ? { base: baseType } : {};
+export const createSampleData = (allTypes, allModifiers, baseType) => {
     const hasModifiersOnRoot = isArrayWithContents(allModifiers);
+    const base = baseType ? { base: baseType } : {};
+    const sampleData = {
+        ... base,
+        ... createSampleDataFromTypes(allTypes, baseType)
+    };
 
     if (!hasModifiersOnRoot) {
-        return {
-            ... sampleData,
-            ... createSampleDataFromTypes(allTypes, baseType, children)
-        };
+        return sampleData;
     }
+
+    return { ... sampleData, multipleChoiceModifiers: allModifiers };
 };
 
 export const newType = (component, label, modifs, children) => {

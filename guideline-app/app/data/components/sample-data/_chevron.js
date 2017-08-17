@@ -5,17 +5,20 @@ import Chevron, {
     NedChevron
 } from 'NavFrontendModules/nav-frontend-chevron';
 
-const chevron = {
-    base: Chevron,
-    types: [
-        { component: HoyreChevron, label: 'Høyre', _default: true },
-        { component: VenstreChevron, label: 'Venstre' },
-        { component: OppChevron, label: 'Opp' },
-        { component: NedChevron, label: 'Ned' }
-    ],
-    multipleChoiceModifiers: [
-        { value: 'stor', label: 'Stor' }
-    ]
-};
+import {
+    createSampleData,
+    newType,
+    newMultipleChoiceModifier
+} from './../sampleDataHelper';
 
-export default chevron;
+const types = [
+    newType(HoyreChevron, 'Høyre'),
+    newType(VenstreChevron, 'Venstre'),
+    newType(OppChevron, 'Opp'),
+    newType(NedChevron, 'Ned')
+];
+const modifiers = [
+    newMultipleChoiceModifier('stor', 'Stor')
+];
+
+export default createSampleData(types, modifiers, Chevron);

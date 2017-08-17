@@ -7,29 +7,15 @@ import Hjelpetekst, {
     HjelpetekstAuto
 } from 'NavFrontendModules/nav-frontend-hjelpetekst';
 
-import { fillTypesAndModifiersWithCommonValue } from './../../../utils/data/data.utils';
+import { createSampleData, newType } from './../sampleDataHelper';
 
-const hjelpetekst = {
-    base: Hjelpetekst,
-    children: 'Slik ser en hjelpetekst ut',
-    types: [
-        {
-            component: HjelpetekstOver,
-            label: 'Over',
-            _default: true,
-            attrs: {
-                tittel: 'Test'
-            }
-        },
-        { component: HjelpetekstUnder, label: 'Under' },
-        { component: HjelpetekstHoyre, label: 'Høyre' },
-        { component: HjelpetekstVenstre, label: 'Venstre' },
-        { component: HjelpetekstMidt, label: 'Sentrert' },
-        { component: HjelpetekstAuto, label: 'Automatisk' }
-    ]
-};
+const commonChild = 'Slik ser en hjelptekst ut';
+const types = [
+    newType(HjelpetekstUnder, 'Under', null, commonChild),
+    newType(HjelpetekstHoyre, 'Høyre', null, commonChild),
+    newType(HjelpetekstVenstre, 'Venstre', null, commonChild),
+    newType(HjelpetekstMidt, 'Sentrert', null, commonChild),
+    newType(HjelpetekstAuto, 'Automatisk', null, commonChild)
+];
 
-const COMMON_VALUE = 'Slik ser en hjelpetekst ut    ';
-hjelpetekst.types = fillTypesAndModifiersWithCommonValue(hjelpetekst.types, COMMON_VALUE);
-
-export default hjelpetekst;
+export default createSampleData(types, null, Hjelpetekst);
