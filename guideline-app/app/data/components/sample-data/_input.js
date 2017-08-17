@@ -2,76 +2,25 @@ import {
     Input
 } from 'NavFrontendModules/nav-frontend-skjema';
 
-const input = {
-    types: [
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 'xxs'
-            },
-            label: 'XXS'
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 'xs'
-            },
-            label: 'XS'
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 's'
-            },
-            label: 'Liten'
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label'
-            },
-            label: 'Fullbredde',
-            _default: true
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 'l'
-            },
-            label: 'Stor'
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 'xl'
-            },
-            label: 'XL'
-        },
-        {
-            component: Input,
-            attrs: {
-                label: 'Inputfelt-label',
-                bredde: 'xxl'
-            },
-            label: 'XXL'
-        }
-    ],
-    multipleChoiceModifiers: [
-        { value: 'disabled', label: 'Disabled' },
-        {
-            value: {
-                feil: {
-                    feilmelding: 'Her ble det feil gitt'
-                }
-            },
-            label: 'Med feil'
-        }
-    ]
-};
+import {
+    createSampleData,
+    newType,
+    newMultipleChoiceModifier
+} from './../sampleDataHelper';
 
-export default input;
+const inputSizes = ['fullbredde', 'XXS', 'XS', 'S', 'L', 'XL', 'XXL'];
+const types = inputSizes.map((inputSize) => (
+    newType(
+        Input, inputSize, null, null,  { label: 'Inputfelt-label', bredde: inputSize.toLowerCase() }
+    )
+));
+const modifiers = [
+    newMultipleChoiceModifier('disabled', 'Disabled'),
+    newMultipleChoiceModifier({
+        feil: {
+            feilmelding: 'Her ble det feil gitt'
+        }
+    }, 'Med feil')
+];
+
+export default createSampleData(types, modifiers);

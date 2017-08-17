@@ -2,32 +2,17 @@ import {
     Checkbox
 } from 'NavFrontendModules/nav-frontend-skjema';
 
-const checkbox = {
-    base: Checkbox,
-    types: [
-        {
-            component: Checkbox,
-            label: 'Vanlig',
-            attrs: { label: 'Checkboxfelt-label' },
-            _default: true
-        },
-        {
-            component: Checkbox,
-            label: 'Med feilmelding',
-            attrs: {
-                label: 'Checkboxfelt-label',
-                feil: {
-                    feilmelding: 'Feil!'
-                }
-            }
-        }
-    ],
-    multipleChoiceModifiers: [
-        { value: 'disabled', label: 'Disabled' }
-    ]
-};
+import {
+    createSampleData,
+    newType,
+    newMultipleChoiceModifier
+} from './../sampleDataHelper';
 
+const feilAttrs = { feil: { feilmelding: 'Feil!' } };
+const types = [
+    newType(Checkbox, 'Vanlig', null, null, { label: 'Checkboxfelt-label' }),
+    newType(Checkbox, 'Med feilmelding', null, null, { label: 'Checkboxfelt-label', ... feilAttrs })
+];
+const modifiers = [ newMultipleChoiceModifier('disabled', 'Disabled') ];
 
-
-export default checkbox;
-
+export default createSampleData(types, modifiers);
