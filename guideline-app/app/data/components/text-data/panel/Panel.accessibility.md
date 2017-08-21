@@ -1,1 +1,4 @@
-For å tilfredsstille krav til universell utforming må Panel Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  
+Hvis du bruker den her koden, får skjermleserbrukere med seg om et ekspanderbart panel er åpent eller lukket. Her brukes det en aria-label (aria-expanded="true"/"false").
+
+Relevante krav:
+- [4.1.2 Navn, rolle, verdi (Nivå A)](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/412-navn-rolle-verdi-niva)
