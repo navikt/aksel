@@ -107,3 +107,6 @@ For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden br
     "react": "<%#resolve%>react<%/resolve%>"
 }
 ```
+
+## Icon License
+This project uses [Streamline Icons](http://www.streamlineicons.com/). If you use nav-frontend-moduler in your project please adhere to the Streamline Icons [license agreement](http://www.streamlineicons.com/license.html).
