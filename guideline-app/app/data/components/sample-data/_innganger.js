@@ -29,7 +29,16 @@ const types = [
         tekst: 'Og her har du en tekst',
         lesMerHref: '/#/components/innganger/lenkeeksempel/'
     }),
-    newType(StorVertikalInngang, 'Inngang 5', null, {
+    newType(NormalVertikalInngang, 'Inngang 5', null, {
+        tittel: 'Her er en tittel',
+        tekst: 'Og her har du en tekst'
+    }),
+    newType(NormalVertikalInngang, 'Inngang 6', null, {
+        tittel: 'Her er en tittel',
+        tekst: 'Og her har du en tekst',
+        ikon: 'info-sirkel'
+    }),
+    newType(StorVertikalInngang, 'Inngang 7', null, {
         tittel: 'Her er en tittel',
         ingress: 'Og her har du en ingress',
         ikon: 'info-sirkel'
