@@ -118,7 +118,7 @@ The Source Sans Pro font files in packages/node_modules/nav-frontend-typografi-s
 
 ### Icon License
 
-This project uses Streamline Icons. If you use nav-frontend-moduler in your project please adhere to the Streamline Icons license agreement.
+This project uses Streamline Icons. If you use nav-frontend-moduler in your project please adhere to the Streamline Icons license agreement found here: http://www.streamlineicons.com/license.html
 
 ### The rest of the codebase (excluding 3rd party dependencies)
 
