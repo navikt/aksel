@@ -110,11 +110,34 @@ For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden br
 
 ## Licenses and attribution
 
+_For updated information, always see LICENSE first!_
+
 ### Font License
-The Source Sans Pro font files in `packages/node_modules/nav-frontend-typografi-style/assets` are a subset of
-[Source Sans Pro](https://github.com/adobe-fonts/source-sans-pro), licensed under the [SIL Open Font License](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL), and copyright [Adobe Systems Incorporated](http://www.adobe.com/),
-with Reserved Font Name 'Source'. All Rights Reserved.
-Source is a trademark of Adobe Systems Incorporated in the United States and/or other countries.
+
+The Source Sans Pro font files in packages/node_modules/nav-frontend-typografi-style/assets are a subset of Source Sans Pro, licensed under the SIL Open Font License, and copyright Adobe Systems Incorporated, with Reserved Font Name 'Source'. All Rights Reserved. Source is a trademark of Adobe Systems Incorporated in the United States and/or other countries.
 
 ### Icon License
-This project uses [Streamline Icons](http://www.streamlineicons.com/). If you use nav-frontend-moduler in your project please adhere to the Streamline Icons [license agreement](http://www.streamlineicons.com/license.html).
+
+This project uses Streamline Icons. If you use nav-frontend-moduler in your project please adhere to the Streamline Icons license agreement.
+
+### The rest of the codebase (excluding 3rd party dependencies)
+
+Copyright (c) 2017 NAV
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
