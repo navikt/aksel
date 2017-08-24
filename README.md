@@ -28,7 +28,7 @@ så innstaller denne i rot-mappen og legg til avhengigheten som en `peerDependen
 * `npm run new` - Kjører scaffolding-script
 
 ## Kodekvalitet
-For å forsikre oss at koden ikke rotner på rot er det satt opp både `eslint` og `lesshint` som begge blir kjørt ved byggetid.
+For å forsikre oss at koden ikke råtner på rot er det satt opp både `eslint` og `lesshint` som begge blir kjørt ved byggetid.
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har blitt avklart/diskutert i NAVs frontendforum.
 
 For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Dvs eneste måten å få inn endringer på er gjennom pull-requests. 
