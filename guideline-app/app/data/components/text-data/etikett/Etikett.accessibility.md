@@ -1,6 +1,3 @@
-Under arbeid.
-
-
 Unngå å bruke fargen på etikett til å formidle noe utover selve navnet på etiketten. Det vil si at for eksempel alle røde etikettene skal ha samme tekst på.
 
 
