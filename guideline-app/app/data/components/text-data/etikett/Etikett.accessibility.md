@@ -8,5 +8,4 @@ Dette for å forhindre at personer som ikke kan se fargene bra, har dårlige skj
 
 
 Relevante krav:
-Relevante krav:
 - [1.4.1 Bruk av farge](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/141-bruk-av-farge-niva)
