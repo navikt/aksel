@@ -3,7 +3,7 @@
 NAV-frontend-moduler er ett monorepo for alle NAVs felleskomponenter/fellesmoduler.
  
 ## Bruke moduler
-For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler) (NÅR DEN KOMMER OPP).
+For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler).
 
 
 ## Bidra med nye komponenter
