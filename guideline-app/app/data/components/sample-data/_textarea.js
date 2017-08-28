@@ -1,10 +1,14 @@
 import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
 
 import {
-    Textarea
+    Textarea,
+    TextareaControlled
 } from 'NavFrontendModules/nav-frontend-skjema';
 
-const types = [ newType(Textarea, 'Vanlig', null, { label: 'Textarea-label', onChange: () => {}, value: '' })];
+const types = [
+    newType(TextareaControlled, 'Vanlig', null, { label: 'Textarea-label', maxLength: 20 })
+];
+
 const modifiers = [
     newMultipleChoiceModifier('disabled', 'Disabled'),
     newMultipleChoiceModifier({
@@ -14,4 +18,4 @@ const modifiers = [
     }, 'Med feil')
 ];
 
-export default createSampleData(types, modifiers);
+export default createSampleData(types, modifiers, Textarea);
