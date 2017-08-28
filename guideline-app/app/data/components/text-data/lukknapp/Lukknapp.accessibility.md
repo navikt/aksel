@@ -1,6 +1,14 @@
+Accessibility på lukk-knapp er under arbeid.
+
+
 Vær obs på at lukk-knappen kodes som knapp (WCAG-suksesskriterium 1.3.1).
 
-Fokusrekkefølge: Knappen vises til vanlig oppe i høyre hjørne. Pass på fokusrekkefølgen, den skal følge den visuelle rekkefølgen. Veldig ofte blir det dermed lukk-knappen som er det første elementet som får fokus i for eksempel et modalvindu. (legg til bilde?)
+
+Lukk-knappen skal leses som "lukk" for skjermleser.
+
+
+Fokusrekkefølge: Knappen vises til vanlig oppe i høyre hjørne. Pass på fokusrekkefølgen, den skal følge den visuelle rekkefølgen. Veldig ofte blir det dermed lukk-knappen som er det første elementet som får fokus i for eksempel et modalvindu. 
+
 
 Relevante krav og lenker:
 - [1.3.1 Informasjon og relasjoner, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)
