@@ -12,3 +12,4 @@ examples/webpack/out
 .gitattributes
 .iml
 .DS_Store
+packages/node_modules/stories.js
