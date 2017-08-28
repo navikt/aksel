@@ -50,7 +50,7 @@ export class ComponentGuidelinePage extends React.Component {
                     <Sample { ... this.props } />
                 </div>
 
-                <div className="componentGuidelinePage__tabbarContainer">
+                <div className="section componentGuidelinePage__tabbarContainer">
                     <Tabbar
                         items={ this.tabbarItems }
                         onActiveItemChange={ (item) => this.updateActiveContent(item) }

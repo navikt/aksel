@@ -1,12 +1,11 @@
 .sampleWrapper {
-  display: flex;
-  align-items: baseline;
+  max-width: 640px;
 
   .sample {
     background-color: #e7e9e9;
     padding: 4px 16px 16px 16px;
     border-radius: 4px;
-    width: 60%;
+    min-width: 40%;
     margin: 24px 24px 24px 12px;
 
     .hjelpetekst__tekst {
@@ -21,11 +20,11 @@
   }
 
   .sampleEditor {
-    background-color: #e7e9e9;
+    border: 1px solid #e7e9e9;
     padding: 4px 16px 16px 16px;
     border-radius: 4px;
-    margin: 24px;
-    width: 40%;
+    margin: 12px 24px 12px 12px;
+    min-width: 28%;
 
     &__form {
       display: flex;
