@@ -9,6 +9,7 @@ import { LayoutPage } from '../../ui/containers/layout/LayoutPage';
 import { AccessibilityPage } from '../../ui/containers/accessibility/AccessibilityPage';
 import { TypographyPage } from '../../ui/containers/typography/TypographyPage';
 import { GettingStartedDesigner } from "../../ui/containers/gettingstarted/GettingStartedDesigner";
+import { IconPage } from "../../ui/containers/icon/IconPage";
 
 export const routeConfig = [
     {
@@ -47,5 +48,10 @@ export const routeConfig = [
         path: '/farger',
         component: ColorPage,
         title: 'Farger'
+    },
+    {
+        path: '/ikoner',
+        component: IconPage,
+        title: 'Ikoner'
     }
 ];
