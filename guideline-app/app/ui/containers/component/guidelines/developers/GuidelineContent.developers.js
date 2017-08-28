@@ -39,7 +39,7 @@ export class GuidelineContentForDevelopers extends Component {
                 />
 
                 {
-                    docgenInfo && 
+                    docgenInfo &&
                     docgenInfo.props &&
                     isImplementedInReact &&
                     this.renderReactSpecificDoc(docgenInfo)
