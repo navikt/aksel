@@ -1,1 +1,8 @@
-For å tilfredsstille krav til universell utforming må Spinner Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  
+Accessibility på Spinner er under arbeid.
+
+
+Når innhold lastes og spinneren vises, får skjermleserbrukere ikke med seg hva som skjer. Spinneren trenger derfor en aria-label="Laster" for å formidle samme informasjon.
+
+
+Relevante krav:
+- [WCAG-kriterium 4.1.2 - Navn, rolle, verdi](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/412-navn-rolle-verdi-niva)
