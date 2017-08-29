@@ -1,5 +1,12 @@
-For å tilfredsstille krav til universell utforming må Inngang Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+Accessibility på Innganger er under arbeid.
 
-blabla
-- Testliste unummerert
-1. Testliste nummerert
+
+Hvis det brukes meningsbærende ikoner, trenger ikonene enten en beskrivende alt-tekst eller en beskrivende aria-label.
+
+Komponenten skal ha en tydelig hover, og fokusmarkering som er i tråd med Designsystemet ("gul ramme").
+
+
+Relevante krav:
+
+- [WCAG-kriterium 1.1.1 Ikke-tekstlig innhold, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/111-ikke-tekstlig-innhold-niva)
+- [WCAG-kriterium 2.4.7 Synlig fokus, nivå AA](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/247-synlig-fokus-niva-aa)
