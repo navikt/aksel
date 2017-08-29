@@ -1,1 +1,12 @@
-For å tilfredsstille krav til universell utforming må Toggle Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Accessibility på Toggle er under arbeid.
+
+
+Per i dag brukes det en radioknappgruppe som blir fremstilt som knapper, som ikke er i tråd med WCAG.
+
+Det evalueres å kode komponenten som knapperad istedenfor.
+
+
+
+Relevante krav:
+- [WCAG-kriterium 1.3.1 Informasjon og relasjoner, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)
+- [W3C Schools - How To Create Tabs](https://www.w3schools.com/howto/howto_js_tabs.asp)
