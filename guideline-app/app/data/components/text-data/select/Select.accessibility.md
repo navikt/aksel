@@ -4,6 +4,9 @@ Accessibility på Select er under arbeid. Den trenger et nøytralt (eller "annet
 Bruker du koden her, så er select-boksene kodet riktig (er kodet som det man ser) og har korrekt kodet label.
 
 
+Se komponent Skjemagruppe for informasjon om feilmeldinger.
+
+
 Relevante krav:
 
 - [WCAG-kriterium 1.3.1 Informasjon og relasjoner, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)
