@@ -1,0 +1,33 @@
+{
+  "name": "cra",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "nav-frontend-core": "^4.0.5",
+    "nav-frontend-js-utils": "^0.2.5",
+    "nav-frontend-knapper": "^0.2.7",
+    "nav-frontend-knapper-style": "^0.3.1",
+    "nav-frontend-skjema": "^0.1.6",
+    "nav-frontend-skjema-style": "^0.3.1",
+    "nav-frontend-typografi": "^1.0.4",
+    "nav-frontend-typografi-style": "^1.0.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.11"
+  },
+  "scripts": {
+    "start:js": "react-scripts start",
+    "build:js": "react-scripts build",
+    "start:css": "autoless src",
+    "build:css": "autoless --no-watch src",
+    "start": "npm-run-all -p start:*",
+    "build": "npm run build:css && npm run build:js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "autoless": "^0.1.7",
+    "npm-run-all": "^4.0.2"
+  }
+}
