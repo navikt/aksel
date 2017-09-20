@@ -55,57 +55,75 @@ export class AccessibilityPage extends React.Component {
 
                 <div className="section">
                     <Systemtittel>Top tips for designere</Systemtittel>
-                    <ul>
+                    <ol>
                         <li>Brukertest hyppig, også med personer som bruker hjelpemidler eller har kognitive utfordringer</li>
                         <li>Design en meningsfullt rekkefølge – hvordan presenteres ting når man slår av CSSen eller skjermene er mindre?</li>
                         <li>Husk at ikke alle kan bruke alle sanser</li>
+                        <ul>
                         <li>Ha tekstalternativer til bilder, grafer, kart, video,… Hvis det bli lengre tekster, ikke skjul dem i koden, men la dem være synlig for alle</li>
                         <li>Fargeblinde kan misforstå hvis informasjon bare baserer seg på farge, som streker i grafer o.l.</li>
                         <li>Unngå formuleringer som forutsetter at du kan se oppsettet på skjermen – som «bildet til høyre» e.l.</li>
                         <li>Ikke bruk bilde av tekst</li>
+                        </ul>
                         <li>Vær obs på navigasjon</li>
+                        <ul>
                         <li>Sørg for at brukeren kan navigere på flere måter (meny, søk, a-å-lenker, lenker mellom alle sider på nettstedet)</li>
                         <li>Ha beskrivende sidetitler (på nav.no: «hovedinnhold – www.nav.no»)</li>
                         <li>Ha en klikkbar brødsmulesti</li>
                         <li>Ha en klikkbar framdriftsindikator i skjemaer</li>
+                        </ul>
                         <li>Vær tydelig</li>
+                        <ul>
                         <li>Beskrivende overskrifter og ledetekster</li>
                         <li>Lenker som sier tydelig hvor de lenker til</li>
                         <li>Ha hjelpetekster der det er hensiktsmessig</li>
                         <li>Vis tydelig hva som er klikkbar</li>
+                        </ul>
                         <li>Vær konsekvent. Bruk de samme designelementene for å oppnå samme på på tvers av sider og løsninger.</li>
                         <li>Husk å lage gode feilmeldinger. De skal være enkle å forstå og ikke bare være en teknisk beskrivelse av hva som har gått galt. Design og kode skal følge Designsystemet.</li>
-                    </ul>
+                    </ol>
                 </div>
 
                 <div className="section">
                     <Systemtittel>Top tips for utviklere</Systemtittel>
+                    <p>
+                    Mye bør fungere hvis du følger Designsystemet. Følgende liste er ikke uttømmende, men viser de viktigste tingene som er lurt å sjekke hyppig.</p>
+                    <ol>    
+                    <li>Fungerer alt med tastatur?</li>
                     <ul>
-                        <li>Mye bør fungere hvis du følger Designsystemet. Følgende liste er ikke uttømmende, men viser de viktigste tingene som er lurt å sjekke hyppig.</li>
-                        <li>Fungerer alt med tastatur?</li>
                         <li>Du kan nå og betjene alle interaktive elementer kun med tastatur (knapper, lenker, radiobokser,…)</li>
                         <li>Siden har hoppe-over-blokker ("hopp til hovedmeny" og "hopp til hovedinnhold"). Disse blir synlige når man tab-er gjennom siden.</li>
                         <li>Man ser tydelig hvor man er når man bruker tastatur for å navigere. Fokusmarkeringen er en gul ramme (se //lenke til siden//)</li>
                         <li>Siden er kodet i en logisk rekkefølge, og tab-rekkefølgen følger den visuelle rekkefølgen.</li>
                         <li>Hjelpemidler får med seg når elementer er åpent eller lukket (for eksempel lameller) og lukker man et element, så er man på samme sted som man var da man åpnet elementet</li>
                         <li>Ting endrer seg ikke bare fordi de får fokus</li>
-                        <li>Semantisk kode - ting er kodet som det de ser ut som og koden er godt strukturert</li>
-                        <li>Overskrifter er kodet som overskrifter og er på riktig nivå</li>
+        </ul>                
+        
+        <li>Semantisk kode - ting er kodet som det de ser ut som og koden er godt strukturert</li>
+        <ul>     
+        <li>Overskrifter er kodet som overskrifter og er på riktig nivå</li>
                         <li>Unngå å style lenker som knapper og omvendt. //lenke til riktig side i Designsystemet//</li>
                         <li>Tabeller er kodet som tabeller, th har scope //når vi har tabeller inne i Designsystemet lenke til selve siden//</li>
                         <li>Lister er kodet som lister</li>
                         <li>Bruk sections/articles der det er hensiktsmessig</li>
-                        <li>Skjemaelementer</li>
+        </ul>               
+        
+        <li>Skjemaelementer</li>
+        <ul>
                         <li>Labels er riktig knyttet til skjemaelementet</li>
                         <li>Elementene har tydelige ledetekster</li>
                         <li>Nedtrekkslister har et nøytralt valg</li>
                         <li>Skjemaer har en navigerbar stegoversikt</li>
-                        <li>Feilhåndtering</li>
+        </ul>                
+        <li>Feilhåndtering</li>
+        <ul>
                         <li>Sider som kan ha maks én feil får inline-feilvalidering. Valideringen får aria-varsel.</li>
                         <li>Sider/bolker der det kan oppstå flere feil skal ha en feiloppsummeringsboks. Boksen skal få fokus og aria-varsel.</li>
                         <li>Brukeren får forslag til hvordan feilen kan rettes</li>
-                        <li>Har du testet med skjermleser?</li>
-                        <li>
+        </ul>              
+        <li>Har du testet med skjermleser?</li>
+        <ul>               
+        <li>
                             Alle MAC og iPhone har en innebygd skjermleser, VoiceOver
                             <a href="https://www.paciellogroup.com/blog/2013/05/testing-and-debugging-ios-accessibility-for-voiceover/">
                                 , Testing and debugging iOS Accessibility for voiceover
@@ -117,6 +135,7 @@ export class AccessibilityPage extends React.Component {
                         </li>
                         <li>For eksperttesting kontakt team Brukeropplevelse (brukeropplevelse@nav.no).</li>
                     </ul>
+        </ol>
                 </div>
 
                 <div className="section">
