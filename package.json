@@ -94,5 +94,8 @@
     "text-table": "^0.2.0",
     "through2": "^2.0.3",
     "webpack": "^2.7.0"
+  },
+  "dependencies": {
+    "lodash.throttle": "^4.1.1"
   }
 }
