@@ -5,8 +5,10 @@ import AlertStripe, {
     AlertStripeInfoSolid,
     AlertStripeAdvarsel
 } from 'NavFrontendModules/nav-frontend-alertstriper';
+import pkg from 'NavFrontendModules/nav-frontend-alertstriper/package.json';
 import { createSampleData, newType, newSingleChoiceModifier } from './../sampleDataHelper';
 
+//const installDeps = [pkg.name].concat(Object.keys(pkg.peerDependencies || {})).join(' ');
 const commonChild = 'Slik ser en Alertstripe ut';
 
 const types = [
@@ -20,3 +22,4 @@ const types = [
 ];
 
 export default createSampleData(types, [], AlertStripe);
+

@@ -3,7 +3,7 @@
 NAV-frontend-moduler er ett monorepo for alle NAVs felleskomponenter/fellesmoduler.
  
 ## Bruke moduler
-For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler) (NÅR DEN KOMMER OPP).
+For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler).
 
 
 ## Bidra med nye komponenter
@@ -28,7 +28,7 @@ så innstaller denne i rot-mappen og legg til avhengigheten som en `peerDependen
 * `npm run new` - Kjører scaffolding-script
 
 ## Kodekvalitet
-For å forsikre oss at koden ikke rotner på rot er det satt opp både `eslint` og `lesshint` som begge blir kjørt ved byggetid.
+For å forsikre oss at koden ikke råtner på rot er det satt opp både `eslint` og `lesshint` som begge blir kjørt ved byggetid.
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har blitt avklart/diskutert i NAVs frontendforum.
 
 For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Dvs eneste måten å få inn endringer på er gjennom pull-requests. 
@@ -110,11 +110,35 @@ For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden br
 
 ## Licenses and attribution
 
+_For updated information, always see LICENSE first!_
+
 ### Font License
+
 The Source Sans Pro font files in `packages/node_modules/nav-frontend-typografi-style/assets` are a subset of
-[Source Sans Pro](https://github.com/adobe-fonts/source-sans-pro), licensed under the [SIL Open Font License](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL), and copyright [Adobe Systems Incorporated](http://www.adobe.com/),
-with Reserved Font Name 'Source'. All Rights Reserved.
-Source is a trademark of Adobe Systems Incorporated in the United States and/or other countries.
+[Source Sans Pro](https://github.com/adobe-fonts/source-sans-pro), licensed under the [SIL Open Font License](http://scripts.sil.org/cms/scripts/page.php?item_id=OFL), and copyright [Adobe Systems Incorporated](http://www.adobe.com/).
 
 ### Icon License
-This project uses [Streamline Icons](http://www.streamlineicons.com/). If you use nav-frontend-moduler in your project please adhere to the Streamline Icons [license agreement](http://www.streamlineicons.com/license.html).
+
+This project uses [Streamline Icons](http://www.streamlineicons.com/). If you use nav-frontend-moduler in your project please adhere to the [Streamline Icons license agreement](http://www.streamlineicons.com/license.html).
+
+### The rest of the codebase (excluding 3rd party dependencies)
+
+Copyright (c) 2017 NAV
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
