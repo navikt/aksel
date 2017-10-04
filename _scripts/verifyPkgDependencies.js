@@ -34,6 +34,16 @@ const internalMismatch = (key, val1, val2) => `Found internal mismatch for ${key
 const globalMismatch = (key, val1, val2) => `Found global mismatch for ${key}. ${val1} !== ${val2}`;
 const interMismatch = (key, val1, val2) => `Found inter-dependency mismatch for ${key}. ${val1} !== ${val2}`;
 
+function verifyRelaxedVersions(dependencies) {
+    return Object.entries(dependencies)
+        .forEach(([dependency, version]) => {
+            if (version[0] !== '^') {
+                console.log(`${chalk.red('ERROR::')} Found non-relaxed version-range for ${dependency}:${version}`);
+                hasError = true;
+            }
+        });
+}
+
 function analyzeDependenciesOf(pkg, depMap) {
     if (!depMap) {
         depMap = {}; // eslint-disable-line no-param-reassign
@@ -50,6 +60,8 @@ function analyzeDependenciesOf(pkg, depMap) {
     objectIntersection(dependencies, depMap).forEach(verifySameValue(dependencies, depMap, interMismatch));
     objectIntersection(devDependencies, depMap).forEach(verifySameValue(devDependencies, depMap, interMismatch));
     objectIntersection(depMap, peerDependencies).forEach(verifySameValue(depMap, peerDependencies, interMismatch));
+
+    verifyRelaxedVersions(peerDependencies);
 
     return {
         name: pkg.name,
