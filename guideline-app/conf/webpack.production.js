@@ -1,6 +1,6 @@
-var path = require('path'),
-    HtmlWebpackPlugin = require('html-webpack-plugin'),
-    WebpackProductionConfig = require('./_webpack.global');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const WebpackProductionConfig = require('./_webpack.global');
 
 WebpackProductionConfig.plugins = [
     new HtmlWebpackPlugin({

@@ -1,4 +1,4 @@
-import { SkjemaGruppe, Checkbox } from 'NavFrontendModules/nav-frontend-skjema';
+import { SkjemaGruppe, Checkbox } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 
 import { createSampleData, newType } from './../sampleDataHelper';
 

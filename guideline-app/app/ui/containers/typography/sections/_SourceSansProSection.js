@@ -8,7 +8,7 @@ import {
 import { Normaltekst } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { SourceSansProData as samples } from '../../../../data/index';
-import { SectionTitle } from './../../../components/section-title/SectionTitle';
+import SectionTitle from './../../../components/section-title/SectionTitle';
 
 export const _SourceSansProSection = (props) => {
     const renderSamples = () => {

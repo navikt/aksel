@@ -1,4 +1,4 @@
-import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
+import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp'; // eslint-disable-line import/extensions, import/no-unresolved, import/no-extraneous-dependencies
 
 import { createSampleData, newType } from './../sampleDataHelper';
 

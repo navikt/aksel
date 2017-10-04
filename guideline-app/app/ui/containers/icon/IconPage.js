@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { IconSquare } from './../../components/icon-square/IconSquare';
-import { SectionTitle } from './../../components/section-title/SectionTitle';
+import IconSquare from './../../components/icon-square/IconSquare';
+import SectionTitle from './../../components/section-title/SectionTitle';
 import {
     EtikettLiten,
     Systemtittel,

@@ -1,17 +1,15 @@
-import React from 'react';
+import resolveComponentRoutes from './routes.utils';
 
-import { resolveComponentRoutes } from './routes.utils';
+import ColorPage from '../../ui/containers/color/ColorPage';
+import AboutPage from '../../ui/containers/about/AboutPage';
+import ComponentMainPage from '../../ui/containers/component/main/ComponentMainPage';
+import LayoutPage from '../../ui/containers/layout/LayoutPage';
+import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
+import TypographyPage from '../../ui/containers/typography/TypographyPage';
+import GettingStartedDesigner from '../../ui/containers/gettingstarted/GettingStartedDesigner';
+import IconPage from '../../ui/containers/icon/IconPage';
 
-import { ColorPage } from '../../ui/containers/color/ColorPage';
-import { AboutPage } from '../../ui/containers/about/AboutPage';
-import { ComponentMainPage } from '../../ui/containers/component/main/ComponentMainPage';
-import { LayoutPage } from '../../ui/containers/layout/LayoutPage';
-import { AccessibilityPage } from '../../ui/containers/accessibility/AccessibilityPage';
-import { TypographyPage } from '../../ui/containers/typography/TypographyPage';
-import { GettingStartedDesigner } from "../../ui/containers/gettingstarted/GettingStartedDesigner";
-import { IconPage } from "../../ui/containers/icon/IconPage";
-
-export const routeConfig = [
+const routeConfig = [
     {
         path: '/',
         component: AboutPage,
@@ -55,3 +53,5 @@ export const routeConfig = [
         title: 'Ikoner'
     }
 ];
+
+export default routeConfig;

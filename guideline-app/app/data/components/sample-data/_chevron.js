@@ -1,9 +1,9 @@
-import Chevron, {
+import Chevron, { // eslint-disable-line import/no-extraneous-dependencies
     HoyreChevron,
     VenstreChevron,
     OppChevron,
     NedChevron
-} from 'NavFrontendModules/nav-frontend-chevron';
+} from 'NavFrontendModules/nav-frontend-chevron'; // eslint-disable-line import/extensions, import/no-unresolved
 
 import {
     createSampleData,

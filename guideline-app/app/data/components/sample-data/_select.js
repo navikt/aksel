@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {
+import { // eslint-disable-line import/no-extraneous-dependencies
     Select
-} from 'NavFrontendModules/nav-frontend-skjema';
+} from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
 
 import {
     createSampleData,
@@ -13,11 +13,11 @@ import {
 const options = [
     { value: 'norge', label: 'Norge' },
     { value: 'sverige', label: 'Sverige' },
-    { value: 'danmark', label: 'Danmark'}
+    { value: 'danmark', label: 'Danmark' }
 ];
 
 const optionChildren = () => options.map((option) =>
-    (<option value={ option.value } key={ option.value }>{ option.label }</option>)
+    (<option value={option.value} key={option.value}>{ option.label }</option>)
 );
 
 const selectSizes = ['fullbredde', 'XS', 'S', 'L', 'XL', 'XXL'];

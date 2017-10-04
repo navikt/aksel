@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { RouteWithSubRoutes } from '../../../../utils/routing/routes.component';
-import { TitleByRoute } from '../../../components/title-by-route/TitleByRoute';
+import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 import './styles.less';
 
 export class ComponentMainPage extends React.Component {
 
     renderTitle() {
         if (window.location.hash !== '#/components') {
-            return (<TitleByRoute routes={ this.props.routes } />);
+            return (<TitleByRoute routes={this.props.routes} />);
         }
         else {
             return (<h2>Components</h2>);

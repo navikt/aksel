@@ -1,5 +1,5 @@
+import Snakkeboble from 'NavFrontendModules/nav-frontend-snakkeboble'; // eslint-disable-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 import { createSampleData, newType } from './../sampleDataHelper';
-import Snakkeboble from 'NavFrontendModules/nav-frontend-snakkeboble';
 
 const chatText1 = 'Hei! Jeg lurer på en ting...';
 const chatText2 = 'Spør i vei.';

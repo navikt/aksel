@@ -4,11 +4,11 @@ import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-f
 
 import { SampleEditor } from './SampleEditor';
 import { sampleTypeChange, activeRefChange } from '../../../../../redux/actions/sampleActions';
-import { renderComponentWithModifiersAndChildren } from './../../../../../utils/dom/render.utils';
+import renderComponentWithModifiersAndChildren from './../../../../../utils/dom/render.utils';
 
 import './styles.less';
 
-export class Sample extends Component {
+class Sample extends Component {
     componentWillMount() {
         const activeType = this.props.activeType;
         const activeComponent = activeType ? activeType.component: null;
@@ -58,11 +58,12 @@ export class Sample extends Component {
         return match;
     }
 
-    componentExistsIncomponentDataSubTree(component, subtree) {
-        return subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component);
-    }
+    componentExistsIncomponentDataSubTree = (component, subtree) =>
+        (subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component)
+    );
 
     getDefaultType() {
+        // eslint-disable-next-line no-underscore-dangle
         return this.props.componentData.types.filter((el) => el._default)[0];
     }
 
@@ -87,7 +88,7 @@ export class Sample extends Component {
         }
     }
 
-    render () {
+    render() {
         const component = renderComponentWithModifiersAndChildren(
             this.props.activeType,
             this.props.activeMultipleChoiceModifiers,
@@ -106,17 +107,20 @@ export class Sample extends Component {
 
                     {
                         this.props.componentData &&
-                        <SampleEditor componentData={ this.props.componentData } />
+                        <SampleEditor componentData={this.props.componentData} />
                     }
                 </div>
             </div>
-        )
+        );
     }
 }
 
+// eslint-disable-next-line no-class-assign
 Sample = connect((state) => ({
     activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
     activeRef: state.sample.activeRef
 }))(Sample);
+
+export default Sample;

@@ -1,15 +1,14 @@
 import React from 'react';
-
+import PT from 'prop-types';
 import { Normaltekst, EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
-
 import './styles.less';
 
-export const PropTypeTable = (props) => {
+const PropTypeTable = (props) => {
     const propTypes = props.docgenInfo.props;
     const keys = Object.keys(propTypes).sort();
     const propTypeDocs = keys.map((key) => ({
         propName: key,
-        ... propTypes[key]
+        ...propTypes[key]
     }));
 
     const headers = ['Property', 'Type', 'Required', 'Description', 'Default'];
@@ -21,24 +20,22 @@ export const PropTypeTable = (props) => {
                     <tr>
                         {
                             headers.map((header, index) => (
-                                <PropTypeTableHeader val={ header } index={ index } key={ index } />
+                                <PropTypeTableHeader val={header} index={index} key={index} /> // eslint-disable-line max-len, react/no-array-index-key
                             ))
                         }
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        propTypeDocs.map((propTypeDoc, key) => {
-                            return (
-                                <PropTypeTableRow
-                                    val={ {
-                                        ... propTypeDoc,
-                                        defaultValue: propTypeDoc.defaultValue ? propTypeDoc.defaultValue : '-'
-                                    } }
-                                    key={ key }
-                                />
-                            );
-                        })
+                        propTypeDocs.map((propTypeDoc, key) => (
+                            <PropTypeTableRow
+                                val={{
+                                    ...propTypeDoc,
+                                    defaultValue: propTypeDoc.defaultValue ? propTypeDoc.defaultValue : '-'
+                                }}
+                                key={key} // eslint-disable-line react/no-array-index-key
+                            />
+                        ))
                     }
                 </tbody>
             </table>
@@ -46,11 +43,30 @@ export const PropTypeTable = (props) => {
     );
 };
 
+PropTypeTable.propTypes = {
+    docgenInfo: PT.shape({
+        props: PT.shape
+    })
+};
+
+PropTypeTable.defaultProps = {
+    docgenInfo: {
+        props: {}
+    }
+};
+
+export default PropTypeTable;
+
 const PropTypeTableHeader = (props) => (
-    <th key={ props.index }>
-        <EtikettLiten>{ props.val }</EtikettLiten>
+    <th key={props.index}>
+        <EtikettLiten>{props.val}</EtikettLiten>
     </th>
 );
+
+PropTypeTableHeader.propTypes = {
+    index: PT.number.isRequired,
+    val: PT.string.isRequired
+};
 
 const PropTypeTableRow = (props) => {
     const keys = Object.keys(props.val);
@@ -60,13 +76,17 @@ const PropTypeTableRow = (props) => {
             {
                 keys.map((key, index) => (
                     <PropTypeTableCell
-                        val={ props.val[key] }
-                        key={ index }
+                        val={props.val[key]}
+                        key={index} // eslint-disable-line react/no-array-index-key
                     />
                 ))
             }
         </tr>
     );
+};
+
+PropTypeTableRow.propTypes = {
+    val: PT.shape.isRequired
 };
 
 const PropTypeTableCell = (props) => {
@@ -84,4 +104,12 @@ const PropTypeTableCell = (props) => {
             <Normaltekst>{ val.toString() }</Normaltekst>
         </td>
     );
+};
+
+PropTypeTableCell.propTypes = {
+    val: PT.string
+};
+
+PropTypeTableCell.defaultProps = {
+    val: undefined
 };

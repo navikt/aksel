@@ -2,18 +2,18 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 const renderComponentWithNoChildren = (componentData) => (
-    <componentData.component { ... componentData.attrs } />
+    <componentData.component {... componentData.attrs} />
 );
 
 const renderComponentWithSingleChild = (componentData) => (
-    <componentData.component { ... componentData.attrs }>
+    <componentData.component {... componentData.attrs}>
         { componentData.children }
     </componentData.component>
 );
 
 const renderComponentWithSingleComponentChild = (componentData) => (
-    <componentData.component { ... componentData.attrs }>
-        <componentData.child.component { ... componentData.child.attrs }>
+    <componentData.component {... componentData.attrs}>
+        <componentData.child.component {... componentData.child.attrs}>
             { componentData.child.children }
         </componentData.child.component>
     </componentData.component>
@@ -22,7 +22,7 @@ const renderComponentWithSingleComponentChild = (componentData) => (
 const renderComponent = (c, attrs, children) => {
     const componentData = {
         component: c,
-        attrs: attrs
+        attrs
     };
 
     if (!children) {
@@ -32,29 +32,25 @@ const renderComponent = (c, attrs, children) => {
     if (children.component) {
         return renderComponentWithSingleComponentChild({
             child: children,
-            ... componentData
+            ...componentData
         });
-    }
-
-    else if (Array.isArray(children)) {
+    } else if (Array.isArray(children)) {
         const componentChildren = children.map((currentChild, key) => {
             if (currentChild.component) {
                 return (renderComponent(
                     currentChild.component,
                     {
-                        key: key,
-                        ... currentChild.attrs
+                        key,
+                        ...currentChild.attrs
                     },
                     currentChild.children)
                 );
             }
-            else {
-                return currentChild;
-            }
+            return currentChild;
         });
 
         const component = (
-            <componentData.component { ... componentData.attrs }>
+            <componentData.component {...componentData.attrs}>
                 { componentChildren }
             </componentData.component>
         );
@@ -62,21 +58,17 @@ const renderComponent = (c, attrs, children) => {
         return component;
     }
 
-    return renderComponentWithSingleChild({
-        children: children,
-        ... componentData
-    });
+    return renderComponentWithSingleChild({ children, ...componentData });
 };
 
 const getAttributesFromModifiers = (modifiers) => {
-    let modifierAttrs = {};
+    const modifierAttrs = {};
     modifiers.forEach(
         (modif) => {
             const value = modif.value;
             if (typeof value !== 'object') {
                 modifierAttrs[value] = true;
-            }
-            else {
+            } else {
                 const keys = Object.keys(modif.value);
                 keys.forEach((key) => {
                     modifierAttrs[key] = value[key];
@@ -89,7 +81,7 @@ const getAttributesFromModifiers = (modifiers) => {
 
 const mergeAttrs = (attrs1, attrs2) => (Object.assign({}, attrs1, attrs2));
 
-export const renderComponentWithModifiersAndChildren = (type, modifiers, children, shallowRender = false) => {
+const renderComponentWithModifiersAndChildren = (type, modifiers, children, shallowRender = false) => {
     const component = type.component;
 
     if (component) {
@@ -102,4 +94,8 @@ export const renderComponentWithModifiersAndChildren = (type, modifiers, childre
 
         return renderComponent(component, mergeAttrs(typeAttrs, modifierAttrs), children);
     }
+
+    return null;
 };
+
+export default renderComponentWithModifiersAndChildren;

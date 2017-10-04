@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tabbar } from './../../../../../components/tabbar/Tabbar';
+import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
     getReactCodeForComponent,

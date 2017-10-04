@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PT from 'prop-types';
 import {
     Systemtittel,
     Normaltekst,
@@ -7,13 +8,13 @@ import {
 
 import './styles.less';
 
-export class ColorContrastSample extends Component {
+export default class ColorContrastSample extends Component {
     createStyle() {
         const bgColor = this.props.contrast.hex;
         const style = {
             color: this.props.color.hex,
             backgroundColor: bgColor,
-            border: bgColor === '#fff' ? '1px solid #c6c2bf' : '1px solid ' + bgColor
+            border: bgColor === '#fff' ? '1px solid #c6c2bf' : `1px solid ${bgColor}`
         };
         return style;
     }
@@ -23,7 +24,7 @@ export class ColorContrastSample extends Component {
         const contrast = this.props.contrast;
 
         return (
-            <div className="colorContrastSample" style={ this.createStyle() }>
+            <div className="colorContrastSample" style={this.createStyle()}>
                 <Systemtittel>{ contrast.label }</Systemtittel>
                 <Normaltekst>{ color.hex }</Normaltekst>
 
@@ -34,3 +35,16 @@ export class ColorContrastSample extends Component {
         );
     }
 }
+
+ColorContrastSample.propTypes = {
+    color: PT.shape({
+        hex: PT.string.isRequired
+    }).isRequired,
+    contrast: PT.shape({
+        hex: PT.string.isRequired
+    })
+};
+
+ColorContrastSample.defaultProps = {
+    contrast: null
+};

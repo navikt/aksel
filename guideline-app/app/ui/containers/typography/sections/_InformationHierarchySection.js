@@ -6,7 +6,7 @@ import {
 } from './../../../../../../packages/node_modules/nav-frontend-grid';
 
 import { InformationHierarchyData as samples } from '../../../../data/index';
-import { SectionTitle } from './../../../components/section-title/SectionTitle';
+import SectionTitle from './../../../components/section-title/SectionTitle';
 
 export const _InformationHierarchySection = (props) => {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SectionTitle } from './../../components/section-title/SectionTitle';
+import SectionTitle from './../../components/section-title/SectionTitle';
 import {
     ColorPaletteSection,
     ColorContrastSection
@@ -8,22 +8,18 @@ import {
 
 import './styles.less';
 
-export class ColorPage extends React.Component {
+const ColorPage = () => (
+    <div className="colorPage">
+        <div className="section">
+            <SectionTitle title="Fargepaletten" />
+            <ColorPaletteSection />
+        </div>
 
-    render () {
-        return (
-            <div className="colorPage">
-                <div className="section">
-                    <SectionTitle title="Fargepaletten" />
-                    <ColorPaletteSection />
-                </div>
+        <div className="section">
+            <SectionTitle title="Fargekontrast mellom tekst og bakgrunn" />
+            <ColorContrastSection />
+        </div>
+    </div>
+);
 
-                <div className="section">
-                    <SectionTitle title="Fargekontrast mellom tekst og bakgrunn" />
-                    <ColorContrastSection />
-                </div>
-            </div>
-        );
-    }
-
-}
+export default ColorPage;

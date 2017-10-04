@@ -11,7 +11,7 @@ import {
     Column
 } from './../../../../../../packages/node_modules/nav-frontend-grid';
 
-import { SectionTitle } from './../../../components/section-title/SectionTitle';
+import SectionTitle from './../../../components/section-title/SectionTitle';
 
 export const _WeightCombinationsSection = (props) => {
     return (

@@ -1,11 +1,10 @@
-import Hjelpetekst, {
-    HjelpetekstOver,
+import Hjelpetekst, { // eslint-disable-line import/no-extraneous-dependencies
     HjelpetekstUnder,
     HjelpetekstHoyre,
     HjelpetekstVenstre,
     HjelpetekstMidt,
     HjelpetekstAuto
-} from 'NavFrontendModules/nav-frontend-hjelpetekst';
+} from 'NavFrontendModules/nav-frontend-hjelpetekst'; // eslint-disable-line import/extensions, import/no-unresolved
 
 import { createSampleData, newType } from './../sampleDataHelper';
 

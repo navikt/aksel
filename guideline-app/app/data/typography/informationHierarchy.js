@@ -9,7 +9,7 @@ import {
     EtikettLiten
 } from './../../../../packages/node_modules/nav-frontend-typografi';
 
-export const informationHierarchyData = [
+const informationHierarchyData = [
     { component: Sidetittel, content: 'Sidetittel' },
     {
         component: Ingress,
@@ -47,3 +47,5 @@ export const informationHierarchyData = [
     { component: EtikettLiten, content: 'Etikett Liten' },
     { component: Normaltekst, content: 'Normal. Da nå skrubben hadde ett opp hesten' }
 ];
+
+export default informationHierarchyData;

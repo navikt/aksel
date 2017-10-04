@@ -1,7 +1,7 @@
-var webpack = require('webpack'),
-    path = require('path');
+const webpack = require('webpack');
+const path = require('path');
 
-var vendors = [
+const vendors = [
     'react',
     'react-dom',
     'react-router-dom',
@@ -10,10 +10,10 @@ var vendors = [
     'redux-logger'
 ];
 
-var GlobalWebpackConfig = {
+const GlobalWebpackConfig = {
     entry: {
         scripts: './guideline-app/app/ui/app.js',
-        vendors: vendors
+        vendors
     },
     module: {
         rules: [
@@ -73,7 +73,7 @@ var GlobalWebpackConfig = {
     },
     plugins: [
         new webpack.ProvidePlugin({
-            'React': 'react'
+            'React': 'react' // eslint-disable-line quote-props
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors'

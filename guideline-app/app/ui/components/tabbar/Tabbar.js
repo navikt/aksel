@@ -5,7 +5,7 @@ import { EtikettLiten } from './../../../../../packages/node_modules/nav-fronten
 
 import './styles.less';
 
-export class Tabbar extends Component {
+class Tabbar extends Component {
 
     componentWillMount() {
         this.state = {
@@ -13,30 +13,30 @@ export class Tabbar extends Component {
         };
     }
 
-    getDefaultActiveItem() {
-        return this.props.items.find((element) => (element.defaultActive));
+    onActiveItemChange(item) {
+        this.changeActiveItem(item);
+        this.props.onActiveItemChange(item);
     }
 
-    itemIsActive(item) {
-        return this.state.activeItem === item;
+    getDefaultActiveItem() {
+        return this.props.items.find((element) => (element.defaultActive));
     }
 
     changeActiveItem(item) {
         this.setState({ activeItem: item });
     }
 
-    onActiveItemChange(item) {
-        this.changeActiveItem(item);
-        this.props.onActiveItemChange(item);
+    itemIsActive(item) {
+        return this.state.activeItem === item;
     }
 
     renderTabbarItems() {
         return this.props.items.map((item, index) => (
             <TabbarItem
-                key={ index }
-                active={ this.itemIsActive(item) }
-                tabbarItemClicked={ () => this.onActiveItemChange(item) }
-                { ... item }
+                key={index} // eslint-disable-line react/no-array-index-key
+                active={this.itemIsActive(item)}
+                tabbarItemClicked={() => this.onActiveItemChange(item)}
+                {... item}
             />
         ));
     }
@@ -46,7 +46,7 @@ export class Tabbar extends Component {
             <div className="tabbar">
                 { this.renderTabbarItems() }
             </div>
-        )
+        );
     }
 
 }
@@ -56,19 +56,28 @@ Tabbar.propTypes = {
     onActiveItemChange: PropTypes.func.isRequired
 };
 
+export default Tabbar;
+
 const TabbarItem = (props) => {
     const classList = () => {
-        let clazz = 'tabbar__item';
-        return props.active ? clazz + ' tabbar__item--active' : clazz;
+        const clazz = 'tabbar__item';
+        return props.active ? `${clazz} tabbar__item--active` : clazz;
     };
 
     return (
-        <div className={ classList() } onClick={ () => { props.tabbarItemClicked()} }>
+        <div
+            className={classList()}
+            onClick={() => { props.tabbarItemClicked(); }}
+            role="button"
+            tabIndex={0}
+        >
             <EtikettLiten>{ props.label }</EtikettLiten>
         </div>
-    )
+    );
 };
 
 TabbarItem.propTypes = {
-    label: PropTypes.string.isRequired
+    label: PropTypes.string.isRequired,
+    tabbarItemClicked: PropTypes.func.isRequired,
+    active: PropTypes.bool.isRequired
 };

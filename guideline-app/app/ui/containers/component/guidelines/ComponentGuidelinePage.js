@@ -4,13 +4,13 @@ import {
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
-import { Sample } from './common/Sample';
-import { Tabbar } from './../../../components/tabbar/Tabbar';
+import Sample from './common/Sample';
+import Tabbar from './../../../components/tabbar/Tabbar';
 
 import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
 import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
 
-import { MdContent } from './../../../components/md-content/MdContent';
+import MdContent from './../../../components/md-content/MdContent';
 
 import './styles.less';
 

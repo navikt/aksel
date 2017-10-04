@@ -1,9 +1,9 @@
-import KnappBase,
+import KnappBase, // eslint-disable-line import/no-extraneous-dependencies
 {
     Knapp,
     Hovedknapp,
     Fareknapp
-} from 'NavFrontendModules/nav-frontend-knapper';
+} from 'NavFrontendModules/nav-frontend-knapper'; // eslint-disable-line import/extensions, import/no-unresolved
 
 import {
     createSampleData,

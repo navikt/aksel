@@ -2,5 +2,4 @@ _templates/
 dist
 packages/node_modules/*/lib
 examples/
-guideline-app/
 webpack.config.js

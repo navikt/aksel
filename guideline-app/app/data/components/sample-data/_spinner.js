@@ -1,7 +1,7 @@
+import Spinner from 'NavFrontendModules/nav-frontend-spinner'; // eslint-disable-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
-import Spinner from 'NavFrontendModules/nav-frontend-spinner';
 
-const spinnerSizes = [ 'M', 'XXS', 'XS', 'S', 'L', 'XL', 'XXL', 'XXXL' ];
+const spinnerSizes = ['M', 'XXS', 'XS', 'S', 'L', 'XL', 'XXL', 'XXXL'];
 const types = spinnerSizes.map((spinnerSize) => (
     newType(Spinner, spinnerSize, null, { storrelse: spinnerSize.toLowerCase() })
 ));

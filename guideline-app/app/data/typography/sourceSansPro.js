@@ -1,4 +1,4 @@
-export const sourceSansProData = [
+const sourceSansProData = [
     { label: 'Black', type: 'bolder' },
     { label: 'Bold', type: 'bold' },
     { label: 'Semibold', type: 'semibold' },
@@ -6,3 +6,5 @@ export const sourceSansProData = [
     { label: 'Light', type: 'light' },
     { label: 'Lighter', type: 'lighter' }
 ];
+
+export default sourceSansProData;

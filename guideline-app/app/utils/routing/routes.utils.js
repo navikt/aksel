@@ -3,16 +3,16 @@ import React from 'react';
 import { ComponentGuidelinePage } from '../../ui/containers/component/guidelines/ComponentGuidelinePage';
 import { Components as components } from './../../data';
 
-export const resolveComponentRoutes = (routePrefix) => {
+const resolveComponentRoutes = (routePrefix) => {
     return components.map((component) => {
+        const path = `/${routePrefix}/${component.componentData.componentName}`;
+
         return {
-            path: ('/' + routePrefix + '/' + (component.componentData.componentName)).toLowerCase(),
-            component: () => {
-                return (
-                    <ComponentGuidelinePage { ... component } />
-                );
-            },
+            path: path.toLowerCase(),
+            component: () => (<ComponentGuidelinePage {...component} />),
             title: component.componentData.label
-        }
+        };
     });
 };
+
+export default resolveComponentRoutes;

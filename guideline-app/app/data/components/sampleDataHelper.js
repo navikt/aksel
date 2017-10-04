@@ -2,7 +2,7 @@ const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
 const isArrayWithContents = (arr) => (arr && Array.isArray(arr) && arr.length > 0);
 
-function duplicateModifiers (modifier1, index, array) {
+function duplicateModifiers(modifier1, index, array) {
     return index === array.findIndex(
         (modifier2) =>
             (modifier1.value === modifier2.value || modifier1.label === modifier2.label)
@@ -10,7 +10,7 @@ function duplicateModifiers (modifier1, index, array) {
 }
 
 const createModifierArrayFromTypesWithModifiers = (types) => {
-    let modifierArray = [{ _default: true, value: 'normal', label: 'Normal' }];
+    const modifierArray = [{ _default: true, value: 'normal', label: 'Normal' }];
     types.forEach((type) => {
         type.modifiers.forEach((modifier) => (modifierArray.push(modifier)));
     });
@@ -29,7 +29,8 @@ const addDefaultModifierToTypes = (types) => (
 );
 
 const createSampleDataFromTypes = (allTypes, base) => {
-    let types, globalModifiers;
+    let types;
+    let globalModifiers;
     const hasTypesWithModifiers = allTypes.some((type) => (isArrayWithContents(type.modifiers)));
 
     if (hasTypesWithModifiers) {
@@ -37,50 +38,36 @@ const createSampleDataFromTypes = (allTypes, base) => {
         types = addDefaultModifierToTypes(allTypes);
     }
 
-    (types || allTypes)[0]._default = true;
+    (types || allTypes)[0]._default = true; // eslint-disable-line no-underscore-dangle, no-param-reassign
     return {
-        base: base,
+        base,
         types: types || allTypes,
-        modifiers: globalModifiers,
-    }
+        modifiers: globalModifiers
+    };
 };
 
 export const createSampleData = (allTypes, allModifiers, baseType) => {
     const hasModifiersOnRoot = isArrayWithContents(allModifiers);
     const base = baseType ? { base: baseType } : {};
     const sampleData = {
-        ... base,
-        ... createSampleDataFromTypes(allTypes, baseType)
+        ...base,
+        ...createSampleDataFromTypes(allTypes, baseType)
     };
 
     if (!hasModifiersOnRoot) {
         return sampleData;
     }
 
-    return { ... sampleData, multipleChoiceModifiers: allModifiers };
+    return { ...sampleData, multipleChoiceModifiers: allModifiers };
 };
 
-export const newType = (component, label, children, attrs = {}, modifs) => {
-    return {
-        attrs: attrs,
-        children: children,
-        component: component,
-        label: toFirstUpper(label),
-        modifiers: (modifs||[]).map((modif) => ({ ... modif, children: children }))
-    }
-};
+export const newType = (component, label, children, attrs = {}, modifs) => ({
+    attrs,
+    children,
+    component,
+    label: toFirstUpper(label),
+    modifiers: (modifs || []).map((modif) => ({ ...modif, children }))
+});
 
-export const newSingleChoiceModifier = (component, value) => {
-    return {
-        component: component,
-        label: toFirstUpper(value),
-        value: value
-    }
-};
-
-export const newMultipleChoiceModifier = (value, label) => {
-    return {
-        label: label,
-        value: value
-    }
-};
+export const newSingleChoiceModifier = (component, value) => ({ component, value, label: toFirstUpper(value) });
+export const newMultipleChoiceModifier = (value, label) => ({ label, value });

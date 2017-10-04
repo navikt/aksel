@@ -1,12 +1,13 @@
 import React from 'react';
+import PT from 'prop-types';
 
 import './styles.less';
 
-export const ColorSample = (props) => {
+const ColorSample = (props) => {
     const color = props.color;
 
     const tooLight = (hex) => {
-        const tooLightColors = [ '#E9E7E7' ];
+        const tooLightColors = ['#E9E7E7'];
 
         return tooLightColors.indexOf(hex) >= 0;
     };
@@ -19,29 +20,25 @@ export const ColorSample = (props) => {
         return { color: 'white' };
     };
 
-    const getBackgroundColor = () => {
-        return {
-            backgroundColor: color.hex
-        }
-    };
+    const getBackgroundColor = () => ({ backgroundColor: color.hex });
 
     return (
         <div
             className="colorSample"
-            style={ getBackgroundColor() }>
-
+            style={getBackgroundColor()}
+        >
             <div className="colorSample__colorInfo">
-                <h4 className="colorSample__colorInfo__header" style={ getTextColor() }>
+                <h4 className="colorSample__colorInfo__header" style={getTextColor()}>
                     { color.label }
                 </h4>
 
-                <p className="colorSample__colorInfo__subtext" style={ getTextColor() }>
+                <p className="colorSample__colorInfo__subtext" style={getTextColor()}>
                     { color.hex }
                 </p>
             </div>
 
             <div className="colorSample__accessibilityInfo">
-                <p className="colorSample__accessibilityInfo__text" style={ getTextColor() }>
+                <p className="colorSample__accessibilityInfo__text" style={getTextColor()}>
                     { color.wcag }
                 </p>
             </div>
@@ -49,3 +46,13 @@ export const ColorSample = (props) => {
         </div>
     );
 };
+
+ColorSample.propTypes = {
+    color: PT.shape({
+        label: PT.string.isRequired,
+        hex: PT.string.isRequired,
+        wcag: PT.string
+    }).isRequired
+};
+
+export default ColorSample;

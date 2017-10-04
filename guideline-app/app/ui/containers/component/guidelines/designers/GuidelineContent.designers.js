@@ -5,7 +5,7 @@ import {
     Normaltekst
 } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
-import { MdContent } from './../../../../components/md-content/MdContent';
+import MdContent from './../../../../components/md-content/MdContent';
 
 export class GuidelineContentForDesigners extends Component {
 

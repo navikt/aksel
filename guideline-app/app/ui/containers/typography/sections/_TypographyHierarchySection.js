@@ -11,7 +11,7 @@ import {
 } from './../../../../../../packages/node_modules/nav-frontend-grid';
 
 import { TypographyHierarchyData as samples } from '../../../../data/index';
-import { SectionTitle } from './../../../components/section-title/SectionTitle';
+import SectionTitle from './../../../components/section-title/SectionTitle';
 
 export const _TypographyHierarchySection = (props) => {
 

@@ -10,7 +10,7 @@ import {
     Undertekst
 } from './../../../../packages/node_modules/nav-frontend-typografi';
 
-export const typographyHierarchyData = {
+const typographyHierarchyData = {
     desktop: [
         { component: Sidetittel, label: 'Sidetittel', subtext: 'Bold - 40/44px (2 rem)' },
         { component: Innholdstittel, label: 'Innholdstittel', subtext: 'Bold - 32/36px (2 rem)' },
@@ -36,3 +36,5 @@ export const typographyHierarchyData = {
         { component: Undertekst, label: 'Undertekst', subtext: 'Bold - 14/20px (0.875 rem)' }
     ]
 };
+
+export default typographyHierarchyData;

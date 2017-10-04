@@ -1,6 +1,6 @@
-import {
+import { // eslint-disable-line import/no-extraneous-dependencies
     Radio
-} from 'NavFrontendModules/nav-frontend-skjema';
+} from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
 import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
 
 const types = [

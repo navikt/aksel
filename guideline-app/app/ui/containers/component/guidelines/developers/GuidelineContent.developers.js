@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import { CodeExample } from './code-example/CodeExample';
-import { PropTypeTable } from './../../../../components/prop-type-table/PropTypeTable';
+import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
 
 import './styles.less';
 
