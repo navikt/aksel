@@ -6,7 +6,7 @@ import {
     createSampleData,
     newType,
     newMultipleChoiceModifier
-} from './../sampleDataHelper';
+} from '../../../utils/sampling/sampleDataHelper';
 
 const inputSizes = ['fullbredde', 'XXS', 'XS', 'S', 'L', 'XL', 'XXL'];
 const types = inputSizes.map((inputSize) => (

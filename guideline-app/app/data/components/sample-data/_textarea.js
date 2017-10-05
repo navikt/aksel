@@ -3,7 +3,7 @@ import { // eslint-disable-line import/no-extraneous-dependencies
     TextareaControlled
 } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
 
-import { createSampleData, newType, newMultipleChoiceModifier } from './../sampleDataHelper';
+import { createSampleData, newType, newMultipleChoiceModifier } from '../../../utils/sampling/sampleDataHelper';
 
 const types = [
     newType(TextareaControlled, 'Vanlig', null, { label: 'Textarea-label', maxLength: 20 })

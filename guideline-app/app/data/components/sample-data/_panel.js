@@ -1,6 +1,6 @@
 import Ekspanderbartpanel from 'NavFrontendModules/nav-frontend-ekspanderbartpanel'; // eslint-disable-line import/extensions, import/no-unresolved, import/no-extraneous-dependencies
 import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel'; // eslint-disable-line import/extensions, import/no-unresolved, import/no-extraneous-dependencies
-import { createSampleData, newType } from './../sampleDataHelper';
+import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
 
 const types = [
     newType(

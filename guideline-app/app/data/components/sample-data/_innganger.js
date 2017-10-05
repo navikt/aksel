@@ -9,7 +9,7 @@ import { // eslint-disable-line import/no-extraneous-dependencies
 import {
     createSampleData,
     newType
-} from './../sampleDataHelper';
+} from '../../../utils/sampling/sampleDataHelper';
 
 const href = { href: '/#/components/innganger' };
 

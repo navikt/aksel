@@ -1,6 +1,6 @@
 import { SkjemaGruppe, Checkbox } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 
-import { createSampleData, newType } from './../sampleDataHelper';
+import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
 
 const options = [
     { label: 'Bakerst', value: 'bakerst', id: 'bakerst-checkbox', name: 'bakerst' },

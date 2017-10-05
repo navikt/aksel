@@ -9,7 +9,7 @@ import {
     createSampleData,
     newType,
     newMultipleChoiceModifier
-} from './../sampleDataHelper';
+} from '../../../utils/sampling/sampleDataHelper';
 
 const commonChild = 'Slik ser en knapp ut';
 const types = [

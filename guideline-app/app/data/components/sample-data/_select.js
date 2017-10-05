@@ -8,7 +8,7 @@ import {
     createSampleData,
     newType,
     newMultipleChoiceModifier
-} from './../sampleDataHelper';
+} from '../../../utils/sampling/sampleDataHelper';
 
 const options = [
     { value: 'norge', label: 'Norge' },

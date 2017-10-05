@@ -2,7 +2,7 @@ import { // eslint-disable-line import/no-extraneous-dependencies
     ToggleGruppe,
     ToggleKnapp
 } from 'NavFrontendModules/nav-frontend-toggle';  // eslint-disable-line import/extensions, import/no-unresolved
-import { createSampleData, newType } from './../sampleDataHelper';
+import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
 
 const commonAttrs = { onChange: () => {}, name: 'toggleGruppe' };
 const commonChildAttrs = (id, checked) => ({ value: `knapp${id}`, defaultChecked: checked || false });

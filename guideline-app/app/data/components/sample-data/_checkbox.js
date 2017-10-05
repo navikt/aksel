@@ -6,7 +6,7 @@ import {
     createSampleData,
     newType,
     newMultipleChoiceModifier
-} from './../sampleDataHelper';
+} from '../../../utils/sampling/sampleDataHelper';
 
 const feilAttrs = { feil: { feilmelding: 'Feil!' } };
 const types = [
