@@ -20,7 +20,8 @@ const PropTypeTable = (props) => {
                     <tr>
                         {
                             headers.map((header, index) => (
-                                <PropTypeTableHeader val={header} index={index} key={index} /> // eslint-disable-line max-len, react/no-array-index-key
+                                // eslint-disable-next-line react/no-array-index-key
+                                <PropTypeTableHeader val={header} index={index} key={index} />
                             ))
                         }
                     </tr>

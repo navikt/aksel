@@ -7,7 +7,8 @@ const components = (
         componentData: {
             ...componentData[td],
             componentName: td,
-            __docgenInfo: componentData[td].base ? componentData[td].base.__docgenInfo : null, // eslint-disable-line no-underscore-dangle, max-len
+            // eslint-disable-next-line no-underscore-dangle
+            __docgenInfo: componentData[td].base ? componentData[td].base.__docgenInfo : null,
             label: td.charAt(0).toUpperCase() + td.slice(1)
         }
     }))
