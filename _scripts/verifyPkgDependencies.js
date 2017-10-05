@@ -35,7 +35,8 @@ const globalMismatch = (key, val1, val2) => `Found global mismatch for ${key}. $
 const interMismatch = (key, val1, val2) => `Found inter-dependency mismatch for ${key}. ${val1} !== ${val2}`;
 
 function verifyRelaxedVersions(dependencies) {
-    return Object.entries(dependencies)
+    return Object.keys(dependencies)
+        .map((dependency) => [dependency, dependencies[dependency]])
         .forEach((dependency) => {
             const name = dependency[0];
             const version = dependency[1];
