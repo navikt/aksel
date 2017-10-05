@@ -109,9 +109,15 @@ SampleEditor.propTypes = {
         component: PT.func.isRequired,
         children: PT.oneOfType([PT.array, PT.node])
     }).isRequired,
-    activeModifier: PT.shape({}),
+    activeModifier: PT.shape({
+        value: PT.oneOfType([PT.string, PT.shape({})])
+    }),
     activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
-    componentData: PT.shape({}).isRequired
+    componentData: PT.shape({
+        types: PT.arrayOf(PT.shape({})),
+        modifiers: PT.arrayOf(PT.oneOfType([PT.shape({}), PT.string])),
+        multipleChoiceModifiers: PT.arrayOf(PT.oneOfType([PT.shape({}), PT.string]))
+    }).isRequired
 };
 
 SampleEditor.defaultProps = {

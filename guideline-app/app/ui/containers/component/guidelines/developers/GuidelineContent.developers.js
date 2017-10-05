@@ -50,7 +50,10 @@ GuidelineContentForDevelopers = connect((state) => ({
 }))(GuidelineContentForDevelopers);
 
 GuidelineContentForDevelopers.propTypes = {
-    componentData: PT.shape({}).isRequired,
+    componentData: PT.shape({
+        __docgenInfo: PT.shape({}),
+        react: PT.bool
+    }).isRequired,
     activeType: PT.shape({
         component: PT.shape({
             __docgenInfo: PT.shape

@@ -129,7 +129,9 @@ Sample.propTypes = {
     activeModifier: PT.string,
     activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
     activeRef: PT.node,
-    componentData: PT.shape({}).isRequired,
+    componentData: PT.shape({
+        types: PT.arrayOf(PT.shape({}))
+    }).isRequired,
     componentName: PT.string
 };
 

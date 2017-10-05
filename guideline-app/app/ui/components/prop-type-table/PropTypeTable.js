@@ -44,7 +44,9 @@ const PropTypeTable = (props) => {
 };
 
 PropTypeTable.propTypes = {
-    docgenInfo: PT.shape({})
+    docgenInfo: PT.shape({
+        props: PT.shape({})
+    })
 };
 
 PropTypeTable.defaultProps = {

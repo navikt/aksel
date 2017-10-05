@@ -50,8 +50,13 @@ class GuidelineContentForDesigners extends Component {
 }
 
 GuidelineContentForDesigners.propTypes = {
-    componentData: PT.shape({}).isRequired,
-    textData: PT.shape({}).isRequired
+    componentData: PT.shape({
+        label: PT.string
+    }).isRequired,
+    textData: PT.shape({
+        usage: PT.string,
+        accessibility: PT.string
+    }).isRequired
 };
 
 
