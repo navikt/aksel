@@ -30,12 +30,7 @@ class ColorPalette extends React.Component {
 }
 
 ColorPalette.propTypes = {
-    colors: PT.arrayOf({
-        description: PT.string,
-        hex: PT.string,
-        label: PT.string,
-        wcag: PT.string
-    }).isRequired
+    colors: PT.arrayOf(PT.shape({})).isRequired
 };
 
 export default ColorPalette;

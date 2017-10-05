@@ -96,9 +96,11 @@ class CodeExample extends Component {
 }
 
 CodeExample.propTypes = {
-    activeType: PT.element.isRequired,
-    activeRef: PT.node.isRequired,
-    activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
+    activeType: PT.shape({
+        component: PT.func
+    }).isRequired,
+    activeRef: PT.shape({}).isRequired,
+    activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
     showReactTab: PT.bool
 };
 

@@ -100,6 +100,6 @@ ExpandableList.propTypes = {
 
 
 ExpandableListItem.propTypes = {
-    item: PropTypes.shape.isRequired,
+    item: PropTypes.shape({}).isRequired,
     onItemClicked: PropTypes.func.isRequired
 };

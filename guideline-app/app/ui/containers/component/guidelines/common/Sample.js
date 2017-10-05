@@ -125,18 +125,20 @@ Sample = connect((state) => ({
 }))(Sample);
 
 Sample.propTypes = {
-    activeType: PT.shape({ component: PT.element, children: PT.element }).isRequired,
+    activeType: PT.shape({ component: PT.element, children: PT.element }),
     activeModifier: PT.string,
     activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
     activeRef: PT.node,
-    componentData: PT.shape.isRequired,
-    componentName: PT.string.isRequired
+    componentData: PT.shape({}).isRequired,
+    componentName: PT.string
 };
 
 Sample.defaultProps = {
+    activeType: { component: null },
     activeModifier: null,
     activeMultipleChoiceModifiers: [],
-    activeRef: null
+    activeRef: null,
+    componentName: undefined
 };
 
 export default Sample;

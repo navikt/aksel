@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
-
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import CodeExample from './code-example/CodeExample';
 import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
-
 import './styles.less';
 
 class GuidelineContentForDevelopers extends Component {
@@ -43,15 +41,6 @@ class GuidelineContentForDevelopers extends Component {
     }
 }
 
-GuidelineContentForDevelopers.propTypes = {
-    componentData: PT.shape.isRequired,
-    activeType: PT.shape({
-        component: PT.shape({
-            __docgenInfo: PT.shape
-        }).isRequired
-    }).isRequired
-};
-
 // eslint-disable-next-line no-class-assign
 GuidelineContentForDevelopers = connect((state) => ({
     activeType: state.sample.activeType,
@@ -59,5 +48,20 @@ GuidelineContentForDevelopers = connect((state) => ({
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
     activeRef: state.sample.activeRef
 }))(GuidelineContentForDevelopers);
+
+GuidelineContentForDevelopers.propTypes = {
+    componentData: PT.shape({}).isRequired,
+    activeType: PT.shape({
+        component: PT.shape({
+            __docgenInfo: PT.shape
+        })
+    })
+};
+
+GuidelineContentForDevelopers.defaultProps = {
+    activeType: {
+        component: null
+    }
+};
 
 export default GuidelineContentForDevelopers;

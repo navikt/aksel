@@ -105,10 +105,13 @@ class SampleEditor extends Component {
     }
 }
 SampleEditor.propTypes = {
-    activeType: PT.shape({ component: PT.element, children: PT.element }).isRequired,
-    activeModifier: PT.string,
-    activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
-    componentData: PT.shape.isRequired
+    activeType: PT.shape({
+        component: PT.func.isRequired,
+        children: PT.oneOfType([PT.array, PT.node])
+    }).isRequired,
+    activeModifier: PT.shape({}),
+    activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
+    componentData: PT.shape({}).isRequired
 };
 
 SampleEditor.defaultProps = {
@@ -132,8 +135,13 @@ const SampleModifier = (props) => {
         />
     );
 };
-// eslint-disable-next-line react/forbid-prop-types
-SampleModifier.propTypes = { modifier: PT.string.isRequired, context: PT.object.isRequired };
+SampleModifier.propTypes = {
+    modifier: PT.shape({
+        label: PT.string.isRequired,
+        value: PT.oneOfType([PT.string, PT.shape({})])
+    }).isRequired,
+    context: PT.shape({}).isRequired
+};
 
 
 const SampleType = (props) => {
@@ -150,8 +158,13 @@ const SampleType = (props) => {
         />
     );
 };
-// eslint-disable-next-line react/forbid-prop-types
-SampleType.propTypes = { sample: PT.string.isRequired, context: PT.object.isRequired };
+SampleType.propTypes = {
+    sample: PT.shape({
+        label: PT.string.isRequired,
+        component: PT.func.isRequired
+    }).isRequired,
+    context: PT.shape({}).isRequired
+};
 
 // eslint-disable-next-line no-class-assign
 SampleEditor = connect((state) => ({

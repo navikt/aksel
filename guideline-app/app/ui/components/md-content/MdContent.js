@@ -57,7 +57,7 @@ class MdContent extends React.Component {
 MdContent.propTypes = {
     allowedTags: PropTypes.arrayOf(PropTypes.string),
     content: PropTypes.string.isRequired,
-    component: PropTypes.element
+    component: PropTypes.func
 };
 
 MdContent.defaultProps = {

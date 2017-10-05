@@ -44,9 +44,7 @@ const PropTypeTable = (props) => {
 };
 
 PropTypeTable.propTypes = {
-    docgenInfo: PT.shape({
-        props: PT.shape
-    })
+    docgenInfo: PT.shape({})
 };
 
 PropTypeTable.defaultProps = {
@@ -86,7 +84,7 @@ const PropTypeTableRow = (props) => {
 };
 
 PropTypeTableRow.propTypes = {
-    val: PT.shape.isRequired
+    val: PT.shape({}).isRequired
 };
 
 const PropTypeTableCell = (props) => {
@@ -107,7 +105,7 @@ const PropTypeTableCell = (props) => {
 };
 
 PropTypeTableCell.propTypes = {
-    val: PT.string
+    val: PT.oneOfType([PT.string, PT.bool, PT.shape({}), PT.number])
 };
 
 PropTypeTableCell.defaultProps = {
