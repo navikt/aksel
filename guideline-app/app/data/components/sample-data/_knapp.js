@@ -1,26 +1,5 @@
-import KnappBase, // eslint-disable-line import/no-extraneous-dependencies
-{
-    Knapp,
-    Hovedknapp,
-    Fareknapp
-} from 'NavFrontendModules/nav-frontend-knapper'; // eslint-disable-line import/extensions, import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
+import KnappBase from 'NavFrontendModules/nav-frontend-knapper';
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-import {
-    createSampleData,
-    newType,
-    newMultipleChoiceModifier
-} from '../../../utils/sampling/sampleDataHelper';
-
-const commonChild = 'Slik ser en knapp ut';
-const types = [
-    newType(Knapp, 'Sekundærknapp', commonChild),
-    newType(Hovedknapp, 'Hovedknapp', commonChild),
-    newType(Fareknapp, 'Fareknapp', commonChild)
-];
-const modifiers = [
-    newMultipleChoiceModifier('mini', 'Mini'),
-    newMultipleChoiceModifier('spinner', 'Spinner'),
-    newMultipleChoiceModifier('disabled', 'Disabled')
-];
-
-export default createSampleData(types, modifiers, KnappBase);
+export default generateSample(null, KnappBase, 'Slik ser en Knapp ut');

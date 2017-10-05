@@ -7,7 +7,7 @@ const validModifierNames = metadata.modifierNames;
 const isEnum = (propType) => (propType.name === 'enum');
 const isBool = (propType) => (propType.name === 'bool');
 const removeSpecialCharacters = (str) => (str.replace(/['"]/g, ''));
-const toFirstUpper = (str) => (str.charAt(0) + str.slice(1));
+const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
 const getTypeNamesOfComponent = (component) => {
     // eslint-disable-next-line no-underscore-dangle
@@ -39,12 +39,12 @@ const sampleScript = (subTypes, baseType, children) => {
                 newType(baseType, toFirstUpper(typeName), children, { [typeAttributeName]: typeName })
             );
 
+            // eslint-disable-next-line array-callback-return, consistent-return
             const sampleModifiers = modifiersOfComponent.map((modifier) => {
                 const propType = modifier.value;
                 if (isBool(propType.type)) {
                     return newMultipleChoiceModifier(modifier.name, toFirstUpper(modifier.name));
                 }
-                return null;
             });
 
             return createSampleData(sampleTypes, sampleModifiers, baseType);
