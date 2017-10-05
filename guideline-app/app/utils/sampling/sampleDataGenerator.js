@@ -19,7 +19,7 @@ const getTypeNamesOfComponent = (component) => {
             return enumObjects.map((enumObject) => (removeSpecialCharacters(enumObject.value)));
         }
     }
-    return null;
+    return [component.name];
 };
 
 const getModifiersOfComponent = (component) => {
@@ -29,15 +29,16 @@ const getModifiersOfComponent = (component) => {
     return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] }));
 };
 
-const sampleScript = (subTypes, baseType, children) => {
+const sampleScript = (subTypes, baseType, attrs, children) => {
     if (!subTypes && baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
         const modifiersOfComponent = getModifiersOfComponent(baseType);
 
         if (typeNamesOfComponent) {
-            const sampleTypes = typeNamesOfComponent.map((typeName) =>
-                newType(baseType, toFirstUpper(typeName), children, { [typeAttributeName]: typeName })
-            );
+            const sampleTypes = typeNamesOfComponent.map((typeName) => {
+                const newAttrs = typeNamesOfComponent.length > 1 ? { [typeAttributeName]: typeName, ...attrs } : attrs;
+                return newType(baseType, toFirstUpper(typeName), children, newAttrs);
+            });
 
             // eslint-disable-next-line array-callback-return, consistent-return
             const sampleModifiers = modifiersOfComponent.map((modifier) => {
@@ -45,6 +46,7 @@ const sampleScript = (subTypes, baseType, children) => {
                 if (isBool(propType.type)) {
                     return newMultipleChoiceModifier(modifier.name, toFirstUpper(modifier.name));
                 }
+                return newMultipleChoiceModifier(metadata.defaultValues[modifier.name], toFirstUpper((modifier.name)));
             });
 
             return createSampleData(sampleTypes, sampleModifiers, baseType);

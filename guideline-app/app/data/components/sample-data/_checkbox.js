@@ -1,18 +1,7 @@
 import { // eslint-disable-line import/no-extraneous-dependencies
     Checkbox
 } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-import {
-    createSampleData,
-    newType,
-    newMultipleChoiceModifier
-} from '../../../utils/sampling/sampleDataHelper';
-
-const feilAttrs = { feil: { feilmelding: 'Feil!' } };
-const types = [
-    newType(Checkbox, 'Vanlig', null, { label: 'Checkboxfelt-label' }),
-    newType(Checkbox, 'Med feilmelding', null, { label: 'Checkboxfelt-label', ...feilAttrs })
-];
-const modifiers = [newMultipleChoiceModifier('disabled', 'Disabled')];
-
-export default createSampleData(types, modifiers);
+export default generateSample(null, Checkbox, { label: 'Checkboks' });
