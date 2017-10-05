@@ -69,7 +69,7 @@ const GlobalWebpackConfig = {
         'react/addons': true,
         'react/lib/ExecutionEnvironment': true,
         'react/lib/ReactContext': true,
-        'react-addons-test-utils': 'react-dom',
+        'react-addons-test-utils': 'react-dom'
     },
     plugins: [
         new webpack.ProvidePlugin({

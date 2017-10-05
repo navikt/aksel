@@ -13,39 +13,42 @@ import {
 
 import SectionTitle from './../../../components/section-title/SectionTitle';
 
-export const _WeightCombinationsSection = (props) => {
-    return (
-        <div className="weightCombinationsSection" { ... props }>
-            <SectionTitle title="Vektkombinasjoner" />
+const WeightCombinationsSection = (props) => (
+    <div className="weightCombinationsSection" {... props}>
+        <SectionTitle title="Vektkombinasjoner" />
 
-            <Row className="weightCombinationsSection__example">
-                <Column xs="12">
-                    <Normaltekst>Norske Folkeeventyr</Normaltekst>
-                </Column>
-                <Column xs="12">
-                    <Innholdstittel>En gammeldags juleaften</Innholdstittel>
-                </Column>
-            </Row>
+        <Row className="weightCombinationsSection__example">
+            <Column xs="12">
+                <Normaltekst>Norske Folkeeventyr</Normaltekst>
+            </Column>
+            <Column xs="12">
+                <Innholdstittel>En gammeldags juleaften</Innholdstittel>
+            </Column>
+        </Row>
 
-            <Row className="weightCombinationsSection__example">
-                <Column xs="12">
-                    <Normaltekst>
-                        01.09.16 /
-                        <b style={{ fontSize: '14px' }}> Viktig informasjon</b>
-                    </Normaltekst>
-                </Column>
-                <Column xs="12">
-                    <Undertittel>En gammeldags juleaften</Undertittel>
-                    <Normaltekst>Veggene var prydet med oljemalerier, portretter av stive damer med pudrede koafyrer, av Oldenborgere og andre berømmelige personer i panser og plate eller røde kjoler.</Normaltekst>
-                </Column>
-            </Row>
+        <Row className="weightCombinationsSection__example">
+            <Column xs="12">
+                <Normaltekst>
+                    01.09.16 /
+                    <b style={{ fontSize: '14px' }}> Viktig informasjon</b>
+                </Normaltekst>
+            </Column>
+            <Column xs="12">
+                <Undertittel>En gammeldags juleaften</Undertittel>
+                <Normaltekst>
+                    Veggene var prydet med oljemalerier, portretter av stive damer med pudrede koafyrer, av
+                    Oldenborgere og andre berømmelige personer i panser og plate eller røde kjoler.
+                </Normaltekst>
+            </Column>
+        </Row>
 
-            <Row className="weightCombinationsSection__example">
-                <Column xs="12">
-                    <Undertittel>En gammeldags juleaften</Undertittel>
-                    <Normaltekst>(1841-1844) – Peter Christen Asbjørnsen</Normaltekst>
-                </Column>
-            </Row>
-        </div>
-    )
-};
+        <Row className="weightCombinationsSection__example">
+            <Column xs="12">
+                <Undertittel>En gammeldags juleaften</Undertittel>
+                <Normaltekst>(1841-1844) – Peter Christen Asbjørnsen</Normaltekst>
+            </Column>
+        </Row>
+    </div>
+);
+
+export default WeightCombinationsSection;

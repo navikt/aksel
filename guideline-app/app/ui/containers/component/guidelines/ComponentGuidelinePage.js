@@ -1,20 +1,16 @@
 import React from 'react';
-
+import PT from 'prop-types';
 import {
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
-
 import Sample from './common/Sample';
 import Tabbar from './../../../components/tabbar/Tabbar';
-
-import { GuidelineContentForDesigners } from './designers/GuidelineContent.designers';
-import { GuidelineContentForDevelopers } from './developers/GuidelineContent.developers';
-
+import GuidelineContentForDesigners from './designers/GuidelineContent.designers';
+import GuidelineContentForDevelopers from './developers/GuidelineContent.developers';
 import MdContent from './../../../components/md-content/MdContent';
-
 import './styles.less';
 
-export class ComponentGuidelinePage extends React.Component {
+class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
         this.tabbarItems = [
@@ -24,8 +20,7 @@ export class ComponentGuidelinePage extends React.Component {
 
         if (this.hasDeveloperGuidelinesOnly()) {
             this.state = { activeContent: this.tabbarItems[1].content };
-        }
-        else {
+        } else {
             this.state = { activeContent: this.tabbarItems[0].content };
         }
     }
@@ -34,12 +29,12 @@ export class ComponentGuidelinePage extends React.Component {
         return !this.props.textData;
     }
 
-    renderIngress() {
-        return (<MdContent content={ this.props.textData.ingress } component={ Ingress } />);
-    }
-
     updateActiveContent(item) {
         this.setState({ activeContent: item.content });
+    }
+
+    renderIngress() {
+        return (<MdContent content={this.props.textData.ingress} component={Ingress} />);
     }
 
     renderGuidelinePageWithDesignGuidelines() {
@@ -47,21 +42,21 @@ export class ComponentGuidelinePage extends React.Component {
             <div>
                 <div className="section">
                     { this.renderIngress() }
-                    <Sample { ... this.props } />
+                    <Sample {... this.props} />
                 </div>
 
                 <div className="section componentGuidelinePage__tabbarContainer">
                     <Tabbar
-                        items={ this.tabbarItems }
-                        onActiveItemChange={ (item) => this.updateActiveContent(item) }
+                        items={this.tabbarItems}
+                        onActiveItemChange={(item) => this.updateActiveContent(item)}
                     />
                 </div>
 
                 <div className="section">
-                    <this.state.activeContent { ... this.props } />
+                    <this.state.activeContent {... this.props} />
                 </div>
             </div>
-        )
+        );
     }
 
     renderGuidelinePageWithDeveloperGuidelinesOnly() {
@@ -71,19 +66,18 @@ export class ComponentGuidelinePage extends React.Component {
                     Det er ikke skrevet noen designretningslinjer for denne komponenten, så her
                     er det kun utviklerdokumentasjon foreløpig.
                 </Ingress>
-                <Sample { ... this.props } />
-                <this.state.activeContent { ... this.props } />
+                <Sample {... this.props} />
+                <this.state.activeContent {... this.props} />
             </div>
         );
     }
 
-    render () {
+    render() {
         let content;
 
         if (this.hasDeveloperGuidelinesOnly()) {
-            content = this.renderGuidelinePageWithDeveloperGuidelinesOnly()
-        }
-        else {
+            content = this.renderGuidelinePageWithDeveloperGuidelinesOnly();
+        } else {
             content = this.renderGuidelinePageWithDesignGuidelines();
         }
 
@@ -94,3 +88,11 @@ export class ComponentGuidelinePage extends React.Component {
         );
     }
 }
+
+ComponentGuidelinePage.propTypes = {
+    textData: PT.shape({
+        ingress: PT.string.isRequired
+    }).isRequired
+};
+
+export default ComponentGuidelinePage;

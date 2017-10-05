@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
+import PT from 'prop-types';
 import { connect } from 'react-redux';
 import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
-
-import { SampleEditor } from './SampleEditor';
+import SampleEditor from './SampleEditor';
 import { sampleTypeChange, activeRefChange } from '../../../../../redux/actions/sampleActions';
 import renderComponentWithModifiersAndChildren from './../../../../../utils/dom/render.utils';
-
 import './styles.less';
 
 class Sample extends Component {
     componentWillMount() {
         const activeType = this.props.activeType;
-        const activeComponent = activeType ? activeType.component: null;
+        const activeComponent = activeType ? activeType.component : null;
 
         if (!activeComponent || !this.activeComponenMatchescomponentDataDefaults()) {
             this.setDefaultComponent();
@@ -33,12 +32,6 @@ class Sample extends Component {
         }
     }
 
-    activeComponenMatchescomponentDataDefaults() {
-        const componentData = this.props.componentData;
-        const activeComponent = this.props.activeType.component;
-        return componentData.types.some((type) => type._default && type.component === activeComponent);
-    }
-
     getTypeMatchingCurrentActiveModifier() {
         const types = this.props.componentData.types;
         const activeModifier = this.props.activeModifier;
@@ -48,9 +41,9 @@ class Sample extends Component {
         types.forEach((type) => {
             if (type.modifiers && this.componentExistsIncomponentDataSubTree(activeComponent, type)) {
                 type.modifiers.forEach((modifier) => {
-                     if (modifier.value === activeModifier.value) {
-                         match = modifier;
-                     }
+                    if (modifier.value === activeModifier.value) {
+                        match = modifier;
+                    }
                 });
             }
         });
@@ -58,12 +51,8 @@ class Sample extends Component {
         return match;
     }
 
-    componentExistsIncomponentDataSubTree = (component, subtree) =>
-        (subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component)
-    );
-
     getDefaultType() {
-        // eslint-disable-next-line no-underscore-dangle
+        // eslint-disable-next-line no-underscore-dangle,react/prop-types
         return this.props.componentData.types.filter((el) => el._default)[0];
     }
 
@@ -75,7 +64,19 @@ class Sample extends Component {
         });
     }
 
+    componentExistsIncomponentDataSubTree = (component, subtree) =>
+        (subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component));
+
+
+    activeComponenMatchescomponentDataDefaults() {
+        const componentData = this.props.componentData;
+        const activeComponent = this.props.activeType.component;
+        // eslint-disable-next-line no-underscore-dangle
+        return componentData.types.some((type) => type._default && type.component === activeComponent);
+    }
+
     changeActiveType(type) {
+        // eslint-disable-next-line react/prop-types
         this.props.dispatch(sampleTypeChange(type));
     }
 
@@ -122,5 +123,20 @@ Sample = connect((state) => ({
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
     activeRef: state.sample.activeRef
 }))(Sample);
+
+Sample.propTypes = {
+    activeType: PT.shape({ component: PT.element, children: PT.element }).isRequired,
+    activeModifier: PT.string,
+    activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
+    activeRef: PT.node,
+    componentData: PT.shape.isRequired,
+    componentName: PT.string.isRequired
+};
+
+Sample.defaultProps = {
+    activeModifier: null,
+    activeMultipleChoiceModifiers: [],
+    activeRef: null
+};
 
 export default Sample;

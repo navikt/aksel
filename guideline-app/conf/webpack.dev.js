@@ -17,8 +17,7 @@ const babelRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 
 if (babelRule) {
     if (babelRule.include) {
         babelRule.include.push(path.resolve(__dirname, './../../packages/node_modules'));
-    }
-    else {
+    } else {
         babelRule.include = [path.resolve(__dirname, './../../packages/node_modules')];
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import PT from 'prop-types';
 import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import { Radio, Checkbox } from './../../../../../../../packages/node_modules/nav-frontend-skjema';
 
@@ -10,7 +10,7 @@ import {
     sampleModifierChange
 } from '../../../../../redux/actions/sampleActions';
 
-export class SampleEditor extends Component {
+class SampleEditor extends Component {
 
     hasSingleChoiceModifiers() {
         return this.props.componentData.modifiers;
@@ -25,14 +25,13 @@ export class SampleEditor extends Component {
     }
 
     dispatchActiveTypeChanged(type) {
-        this.props.dispatch(sampleTypeChange({
-            type: type
-        }));
+        // eslint-disable-next-line react/prop-types
+        this.props.dispatch(sampleTypeChange({ type }));
     }
 
     dispatchModifierChanged(modifier) {
         if (this.hasMultipleChoiceModifiers()) {
-            return this.props.dispatch(sampleMultipleChoiceModifierChange(modifier))
+            return this.props.dispatch(sampleMultipleChoiceModifierChange(modifier));
         }
         return this.props.dispatch(sampleModifierChange(modifier));
     }
@@ -45,6 +44,7 @@ export class SampleEditor extends Component {
     typeIsChecked(sample) {
         const activeType = this.props.activeType;
         if (!activeType.component && sample.component) {
+            // eslint-disable-next-line no-underscore-dangle
             return sample._default;
         }
         return activeType === sample || this.hasChangedModifier(sample);
@@ -53,8 +53,8 @@ export class SampleEditor extends Component {
     modifierIsChecked(modifier) {
         if (this.hasMultipleChoiceModifiers()) {
             return this.props.activeMultipleChoiceModifiers.indexOf(modifier) > -1;
-        }
-        else if (!this.props.activeModifier && modifier.value) {
+        } else if (!this.props.activeModifier && modifier.value) {
+            // eslint-disable-next-line no-underscore-dangle
             return modifier._default;
         }
         return this.props.activeModifier.value === modifier.value;
@@ -65,27 +65,30 @@ export class SampleEditor extends Component {
             <div className="types">
                 {
                     this.props.componentData.types.map((sample, index) =>
-                        (<SampleType sample={ sample } context={ this } key={ index } />)
+                        // eslint-disable-next-line react/no-array-index-key
+                        (<SampleType sample={sample} context={this} key={index} />)
                     )
                 }
             </div>
-        )
+        );
     }
 
     renderModifiers() {
         const isMultipleChoice = this.hasMultipleChoiceModifiers();
-        const Component = isMultipleChoice ? Checkbox : Radio;
-        const modifierSource = isMultipleChoice ? this.props.componentData.multipleChoiceModifiers : this.props.componentData.modifiers;
+        const component = isMultipleChoice ? Checkbox : Radio;
+        const modifierSource = isMultipleChoice ?
+            this.props.componentData.multipleChoiceModifiers : this.props.componentData.modifiers;
 
         return (
             <div className="modifiers">
                 {
                     modifierSource.map((modifier, index) =>
-                        (<SampleModifier component={ Component } modifier={ modifier } context={ this } key={ index } />)
+                        // eslint-disable-next-line react/no-array-index-key
+                        (<SampleModifier component={component} modifier={modifier} context={this} key={index} />)
                     )
                 }
             </div>
-        )
+        );
     }
 
     render() {
@@ -98,9 +101,22 @@ export class SampleEditor extends Component {
                     { this.hasModifiers() && this.renderModifiers() }
                 </div>
             </div>
-        )
+        );
     }
 }
+SampleEditor.propTypes = {
+    activeType: PT.shape({ component: PT.element, children: PT.element }).isRequired,
+    activeModifier: PT.string,
+    activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
+    componentData: PT.shape.isRequired
+};
+
+SampleEditor.defaultProps = {
+    activeModifier: null,
+    activeMultipleChoiceModifiers: [],
+    activeRef: null
+};
+
 
 const SampleModifier = (props) => {
     const modifier = props.modifier;
@@ -108,14 +124,17 @@ const SampleModifier = (props) => {
 
     return (
         <props.component
-            label={ modifier.label }
-            name={ modifier.label }
-            value={ modifier.value }
-            checked={ context.modifierIsChecked(modifier) || false }
-            onChange={ () => context.dispatchModifierChanged(modifier) }
+            label={modifier.label}
+            name={modifier.label}
+            value={modifier.value}
+            checked={context.modifierIsChecked(modifier) || false}
+            onChange={() => context.dispatchModifierChanged(modifier)}
         />
-    )
+    );
 };
+// eslint-disable-next-line react/forbid-prop-types
+SampleModifier.propTypes = { modifier: PT.string.isRequired, context: PT.object.isRequired };
+
 
 const SampleType = (props) => {
     const sample = props.sample;
@@ -123,17 +142,22 @@ const SampleType = (props) => {
 
     return (
         <Radio
-            label={ sample.label }
+            label={sample.label}
             name="sampleTypeRadio"
-            value={ sample.component.name }
-            checked={ context.typeIsChecked(sample) || false }
-            onChange={ () => context.dispatchActiveTypeChanged(sample) }
+            value={sample.component.name}
+            checked={context.typeIsChecked(sample) || false}
+            onChange={() => context.dispatchActiveTypeChanged(sample)}
         />
-    )
+    );
 };
+// eslint-disable-next-line react/forbid-prop-types
+SampleType.propTypes = { sample: PT.string.isRequired, context: PT.object.isRequired };
 
+// eslint-disable-next-line no-class-assign
 SampleEditor = connect((state) => ({
     activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
 }))(SampleEditor);
+
+export default SampleEditor;

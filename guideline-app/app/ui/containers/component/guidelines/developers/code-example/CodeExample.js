@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
+import PT from 'prop-types';
+import { connect } from 'react-redux';
+import Highlight from 'react-highlight';
 import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
     getReactCodeForComponent,
     getCSSCodeForComponent
 } from '../../../../../../utils/dom/code-sampling.utils';
-import { connect } from 'react-redux';
-import Highlight from 'react-highlight';
-
 import './styles.less';
 
-export class CodeExample extends Component {
+class CodeExample extends Component {
 
     componentWillMount() {
         this.tabbarItems = this.getTabbarItems();
 
         this.state = {
             activeTabbarItem: this.tabbarItems.find((item) => item.defaultActive)
-        }
+        };
     }
 
     getTabbarItems() {
@@ -30,14 +30,14 @@ export class CodeExample extends Component {
                     (getReactCodeForComponent(type, modifiers, children)),
                 hljs: 'html'
             };
-            return [ reactTabbarItem, ... tabbarItems ];
+            return [reactTabbarItem, ...tabbarItems];
         }
 
         return tabbarItems;
     }
 
-    getTabbarItemsAlwaysPresent() {
-        return [
+    getTabbarItemsAlwaysPresent = () => (
+        [
             {
                 label: 'HTML',
                 codeToDisplay: (type, modif, children) => (getHtmlCodeForComponent(type, modif, children)),
@@ -49,14 +49,8 @@ export class CodeExample extends Component {
                 codeToDisplay: (ref) => (getCSSCodeForComponent(ref)),
                 hljs: 'css'
             }
-        ];
-    }
-
-    changeActiveCodeOption(activeTabbarItem) {
-        this.setState({
-            activeTabbarItem: activeTabbarItem
-        })
-    }
+        ]
+    );
 
     getCodeToDisplay() {
         const type = this.props.activeType;
@@ -71,13 +65,15 @@ export class CodeExample extends Component {
         return activeTabbarItem.codeToDisplay(type, modifiers, children);
     }
 
-    renderHighlightedCode(code, lang) {
-        return (
-            <Highlight className={ lang }>
-                { code }
-            </Highlight>
-        )
+    changeActiveCodeOption(activeTabbarItem) {
+        this.setState({ activeTabbarItem });
     }
+
+    renderHighlightedCode = (code, lang) => (
+        <Highlight className={lang}>
+            { code }
+        </Highlight>
+    );
 
     render() {
         const activeTabbarItem = this.state.activeTabbarItem;
@@ -89,8 +85,8 @@ export class CodeExample extends Component {
         return (
             <div className="codeExample">
                 <Tabbar
-                    items={ this.tabbarItems }
-                    onActiveItemChange={ (item) => this.changeActiveCodeOption(item) }
+                    items={this.tabbarItems}
+                    onActiveItemChange={(item) => this.changeActiveCodeOption(item)}
                 />
 
                 { highlightedCode }
@@ -99,9 +95,24 @@ export class CodeExample extends Component {
     }
 }
 
+CodeExample.propTypes = {
+    activeType: PT.element.isRequired,
+    activeRef: PT.node.isRequired,
+    activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
+    showReactTab: PT.bool
+};
+
+CodeExample.defaultProps = {
+    activeMultipleChoiceModifiers: [],
+    showReactTab: true
+};
+
+// eslint-disable-next-line no-class-assign
 CodeExample = connect((state) => ({
     activeType: state.sample.activeType,
     activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
     activeRef: state.sample.activeRef
 }))(CodeExample);
+
+export default CodeExample;

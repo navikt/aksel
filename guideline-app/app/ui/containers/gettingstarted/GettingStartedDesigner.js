@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class GettingStartedDesigner extends Component {
-    render() {
-        return (
-            <div>
-                Getting
-                started guide for designers
-            </div>
-        );
-    }
-};
+const GettingStartedDesigner = () => (
+    <div>
+        Getting
+        started guide for designers
+    </div>
+);
+
+export default GettingStartedDesigner;

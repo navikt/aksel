@@ -1,9 +1,10 @@
 import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
 
-const mdReq = require.context("./", true, /([A-Z]|[a-z])+\.(accessibility|ingress|usage)\.(md)$/m);
-let textDataRaw = {}, textDataInCategories = {};
+const mdReq = require.context('./', true, /([A-Z]|[a-z])+\.(accessibility|ingress|usage)\.(md)$/m);
+const textDataRaw = {};
+const textDataInCategories = {};
 
-mdReq.keys().forEach(function(key){
+mdReq.keys().forEach((key) => {
     textDataRaw[key] = mdReq(key);
 });
 
@@ -15,7 +16,7 @@ Object.keys(textDataRaw).forEach((textDataKey) => {
     const textCategory = fileNameSegments[1];
 
     textDataInCategories[dirName] = {
-        ... textDataInCategories[dirName],
+        ...textDataInCategories[dirName],
         [textCategory]: sanitizeHtml(textDataRaw[textDataKey])
     };
 });

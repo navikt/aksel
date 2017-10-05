@@ -19,3 +19,5 @@ SectionTitle.propTypes = {
 SectionTitle.defaultProps = {
     noHr: false
 };
+
+export default SectionTitle;
