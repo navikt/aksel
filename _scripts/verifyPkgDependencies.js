@@ -37,8 +37,9 @@ const interMismatch = (key, val1, val2) => `Found inter-dependency mismatch for 
 function verifyRelaxedVersions(dependencies) {
     return Object.entries(dependencies)
         .forEach((dependency) => {
-            const name = dependency.dependency;
-            const version = dependency.version;
+            const name = dependency[0];
+            const version = dependency[1];
+
             if (version[0] !== '^') {
                 console.log(`${chalk.red('ERROR::')} Found non-relaxed version-range for ${name}:${version}`);
                 hasError = true;
