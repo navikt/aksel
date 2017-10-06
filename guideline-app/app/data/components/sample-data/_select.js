@@ -1,14 +1,8 @@
 import React from 'react';
-
 import { // eslint-disable-line import/no-extraneous-dependencies
     Select
 } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
-
-import {
-    createSampleData,
-    newType,
-    newMultipleChoiceModifier
-} from '../../../utils/sampling/sampleDataHelper';
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
 const options = [
     { value: 'norge', label: 'Norge' },
@@ -20,19 +14,4 @@ const optionChildren = () => options.map((option) =>
     (<option value={option.value} key={option.value}>{ option.label }</option>)
 );
 
-const selectSizes = ['fullbredde', 'XS', 'S', 'L', 'XL', 'XXL'];
-
-const types = selectSizes.map((selectSize) => {
-    const attrs = { label: 'Hvilket land er best om sommeren?', bredde: selectSize.toLowerCase() };
-    return newType(Select, selectSize, optionChildren(), attrs);
-});
-const modifiers = [
-    newMultipleChoiceModifier('disabled', 'Disabled'),
-    newMultipleChoiceModifier({
-        feil: {
-            feilmelding: 'Her ble det feil altså.'
-        }
-    }, 'Med feil')
-];
-
-export default createSampleData(types, modifiers);
+export default generateSample(null, Select, { label: 'Hvilken land er best om sommeren?' }, optionChildren());
