@@ -2,6 +2,7 @@ import metadata from './propTypes.metadata';
 import { newType, newMultipleChoiceModifier, createSampleData } from './sampleDataHelper';
 
 const typeAttributeName = metadata.typeAttributeName;
+const inputTypeAttributeName = metadata.inputTypeAttributeName;
 const validModifierNames = metadata.modifierNames;
 
 const isEnum = (propType) => (propType.name === 'enum');
@@ -9,14 +10,26 @@ const isBool = (propType) => (propType.name === 'bool');
 const removeSpecialCharacters = (str) => (str.replace(/['"]/g, ''));
 const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
-const getTypeNamesOfComponent = (component) => {
+const getTypeNameToUseForComponent = (component) => {
     // eslint-disable-next-line no-underscore-dangle
     const props = component.__docgenInfo.props;
-    const propType = props[typeAttributeName];
+    if (props[typeAttributeName]) {
+        return typeAttributeName;
+    }
+    return inputTypeAttributeName;
+};
+
+const getEnumValuesFromPropType = (propType) => {
+    const enumObjects = propType.type.value;
+    return enumObjects.map((enumObject) => (removeSpecialCharacters(enumObject.value)));
+};
+
+const getTypeNamesOfComponent = (component) => {
+    // eslint-disable-next-line no-underscore-dangle
+    const propType = component.__docgenInfo.props[getTypeNameToUseForComponent(component)];
     if (propType) {
         if (isEnum(propType.type)) {
-            const enumObjects = propType.type.value;
-            return enumObjects.map((enumObject) => (removeSpecialCharacters(enumObject.value)));
+            return getEnumValuesFromPropType(propType);
         }
     }
     return [component.name];
@@ -36,8 +49,11 @@ const sampleScript = (subTypes, baseType, attrs, children) => {
 
         if (typeNamesOfComponent) {
             const sampleTypes = typeNamesOfComponent.map((typeName) => {
-                const newAttrs = typeNamesOfComponent.length > 1 ? { [typeAttributeName]: typeName, ...attrs } : attrs;
-                return newType(baseType, toFirstUpper(typeName), children, newAttrs);
+                const newAttrs = {};
+                if (typeNamesOfComponent.length > 1) {
+                    newAttrs[getTypeNameToUseForComponent(baseType)] = typeName;
+                }
+                return newType(baseType, toFirstUpper(typeName), children, Object.assign(newAttrs, attrs));
             });
 
             // eslint-disable-next-line array-callback-return, consistent-return

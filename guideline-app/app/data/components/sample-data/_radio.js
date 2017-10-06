@@ -1,14 +1,7 @@
 import { // eslint-disable-line import/no-extraneous-dependencies
     Radio
 } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/extensions, import/no-unresolved
-import { createSampleData, newType, newMultipleChoiceModifier } from '../../../utils/sampling/sampleDataHelper';
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-const types = [
-    newType(Radio, 'Vanlig', null, { label: 'Radio-label', name: 'radio' })
-];
-
-const modifiers = [
-    newMultipleChoiceModifier('disabled', 'Disabled')
-];
-
-export default createSampleData(types, modifiers);
+export default generateSample(null, Radio, { label: 'Radio-label' });
