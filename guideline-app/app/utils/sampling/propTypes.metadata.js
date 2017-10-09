@@ -1,7 +1,7 @@
 const metadata = {
     typeAttributeName: 'type',
     inputTypeAttributeName: 'bredde',
-    modifierNames: ['solid', 'disabled', 'mini', 'spinner', 'stor', 'feil'],
+    modifierNames: ['solid', 'disabled', 'mini', 'spinner', 'stor', 'feil', 'negativ', 'stroke'],
     defaultValues: {
         feil: {
             feil: {
