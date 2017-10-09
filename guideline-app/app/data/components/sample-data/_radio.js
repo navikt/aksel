@@ -4,4 +4,4 @@ import { // eslint-disable-line import/no-extraneous-dependencies
 // eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-export default generateSample(null, Radio, { label: 'Radio-label' });
+export default generateSample(null, Radio, { label: 'Radio-label', name: 'someRadioBtn' });

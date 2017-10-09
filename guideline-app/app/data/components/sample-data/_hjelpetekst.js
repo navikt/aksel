@@ -1,19 +1,6 @@
-import Hjelpetekst, { // eslint-disable-line import/no-extraneous-dependencies
-    HjelpetekstUnder,
-    HjelpetekstHoyre,
-    HjelpetekstVenstre,
-    HjelpetekstMidt,
-    HjelpetekstAuto
-} from 'NavFrontendModules/nav-frontend-hjelpetekst'; // eslint-disable-line import/extensions, import/no-unresolved
-import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
+import Hjelpetekst from 'NavFrontendModules/nav-frontend-hjelpetekst';
+// eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-const commonChild = 'Slik ser en hjelptekst ut';
-const types = [
-    newType(HjelpetekstUnder, 'Under', commonChild),
-    newType(HjelpetekstHoyre, 'Høyre', commonChild),
-    newType(HjelpetekstVenstre, 'Venstre', commonChild),
-    newType(HjelpetekstMidt, 'Sentrert', commonChild),
-    newType(HjelpetekstAuto, 'Automatisk', commonChild)
-];
-
-export default createSampleData(types, null, Hjelpetekst);
+export default generateSample(null, Hjelpetekst, {}, 'Her har du et eksempel på en Hjelpetekst');
