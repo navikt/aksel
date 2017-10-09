@@ -1,6 +1,5 @@
 import { SkjemaGruppe, Checkbox } from 'NavFrontendModules/nav-frontend-skjema'; // eslint-disable-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
-
-import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
+import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
 const options = [
     { label: 'Bakerst', value: 'bakerst', id: 'bakerst-checkbox', name: 'bakerst' },
@@ -15,12 +14,4 @@ const checkboxChildren = (
     }))
 );
 
-const types = [
-    newType(SkjemaGruppe, 'Vanlig', checkboxChildren, { title: 'Hvor vil du sitte?' }),
-    newType(SkjemaGruppe, 'Med feilmelding', checkboxChildren, {
-        title: 'Hvor vil du sitte?',
-        feil: { feilmelding: 'Feil! Velg minst et valg' }
-    })
-];
-
-export default createSampleData(types);
+export default generateSample(null, SkjemaGruppe, { title: 'Hvor vil du sitte?' }, checkboxChildren);

@@ -5,7 +5,6 @@ import Hjelpetekst, { // eslint-disable-line import/no-extraneous-dependencies
     HjelpetekstMidt,
     HjelpetekstAuto
 } from 'NavFrontendModules/nav-frontend-hjelpetekst'; // eslint-disable-line import/extensions, import/no-unresolved
-import generateSample from './../../../utils/sampling/sampleDataGenerator';
 import { createSampleData, newType } from '../../../utils/sampling/sampleDataHelper';
 
 const commonChild = 'Slik ser en hjelptekst ut';

@@ -35,15 +35,21 @@ const getTypeNamesOfComponent = (component) => {
     return [component.name];
 };
 
-const getModifiersOfComponent = (component) => {
+const getModifiersOfComponent = (baseComponent, subComponent) => {
     // eslint-disable-next-line no-underscore-dangle
-    const props = component.__docgenInfo.props;
+    let props = baseComponent.__docgenInfo.props;
+    // eslint-disable-next-line no-underscore-dangle
+    if (subComponent && subComponent.__docgenInfo) {
+        // eslint-disable-next-line no-underscore-dangle
+        props = { ...props, ...subComponent.__docgenInfo.props };
+    }
+    // eslint-disable-next-line no-underscore-dangle
     const modifierNames = Object.keys(props).filter((propName) => (validModifierNames.indexOf(propName) >= 0));
     return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] }));
 };
 
-const sampleScript = (subTypes, baseType, attrs, children) => {
-    if (!subTypes && baseType) {
+const sampleScript = (subType, baseType, attrs, children) => {
+    if (baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
         const modifiersOfComponent = getModifiersOfComponent(baseType);
 
@@ -53,7 +59,8 @@ const sampleScript = (subTypes, baseType, attrs, children) => {
                 if (typeNamesOfComponent.length > 1) {
                     newAttrs[getTypeNameToUseForComponent(baseType)] = typeName;
                 }
-                return newType(baseType, toFirstUpper(typeName), children, Object.assign(newAttrs, attrs));
+                const typeToRender = subType || baseType;
+                return newType(typeToRender, toFirstUpper(typeName), children, Object.assign(newAttrs, attrs));
             });
 
             // eslint-disable-next-line array-callback-return, consistent-return
