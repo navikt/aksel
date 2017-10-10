@@ -8,7 +8,7 @@ import './styles.less';
 const IconSquare = (props) => (
     <div className="iconSquareWrapper">
         <div className="iconSquare">
-            <Ikon kind="spinner" />
+            <Ikon kind={props.kind} />
         </div>
 
         <div className="textSection">
@@ -19,7 +19,8 @@ const IconSquare = (props) => (
 );
 
 IconSquare.propTypes = {
-    name: PT.string.isRequired
+    name: PT.string.isRequired,
+    kind: PT.string.isRequired
 };
 
 export default IconSquare;

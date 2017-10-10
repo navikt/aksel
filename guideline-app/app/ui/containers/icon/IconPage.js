@@ -54,69 +54,26 @@ const IconPage = () => (
             </div>
 
             <div className="icons">
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
+                <IconSquare name="Advarselsirkel" kind="advarsel-sirkel" />
+                <IconSquare name="Advarseltrekant" kind="advarsel-trekant" />
+                <IconSquare name="Alarm" kind="alarm" />
+                <IconSquare name="Alarm - Ny" kind="alarm-ny" />
+                <IconSquare name="Feilsirkel" kind="feil-sirkel-fylt" />
+                <IconSquare name="Hjelpsirkel" kind="help-circle" />
+                <IconSquare name="Hjelpsirkel Hover" kind="help-circle_hover" />
 
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
+                <IconSquare name="Infosirkel" kind="info-sirkel" />
+                <IconSquare name="Infosirkel Fylt" kind="info-sirkel-fylt" />
+                <IconSquare name="Infosirkel Oransje" kind="info-sirkel-orange" />
+                <IconSquare name="OK Sirkel" kind="ok-sirkel" />
+                <IconSquare name="OK Sirkel Fylt" kind="ok-sirkel-fylt" />
+                <IconSquare name="Spinner" kind="spinner" />
+                <IconSquare name="Spinner Negativ" kind="spinner-negativ" />
 
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-
-                <IconSquare name="Slett" />
-                <IconSquare name="Oppfyll" />
-                <IconSquare name="Print" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
-                <IconSquare name="Søk" />
-                <IconSquare name="Neste" />
+                <IconSquare name="Spinner Stroke" kind="spinner-stroke" />
+                <IconSquare name="Spinner S+N" kind="spinner-stroke-negativ" />
+                <IconSquare name="Spørsmålsirkel" kind="sporsmal-sirkel" />
+                <IconSquare name="Stegindikatorhake" kind="stegindikator__hake" />
             </div>
         </div>
     </div>
