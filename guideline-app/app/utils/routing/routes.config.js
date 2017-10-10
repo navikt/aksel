@@ -6,7 +6,6 @@ import ComponentMainPage from '../../ui/containers/component/main/ComponentMainP
 import LayoutPage from '../../ui/containers/layout/LayoutPage';
 import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
-import GettingStartedDesigner from '../../ui/containers/gettingstarted/GettingStartedDesigner';
 import IconPage from '../../ui/containers/icon/IconPage';
 
 const routeConfig = [
@@ -15,11 +14,6 @@ const routeConfig = [
         component: AboutPage,
         title: 'Om Designsystemet',
         exact: true
-    },
-    {
-        path: '/gettingstarted-designer',
-        component: GettingStartedDesigner,
-        title: 'Kom igang / Design'
     },
     {
         path: '/components',
