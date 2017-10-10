@@ -86,7 +86,7 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
                 >
                     { item.title }
                 </Link>
-
+                <hr className="expandableList__item__line" />
                 { this.renderChildren() }
             </li>
         );
