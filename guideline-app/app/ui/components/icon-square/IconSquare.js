@@ -13,7 +13,7 @@ const IconSquare = (props) => (
 
         <div className="textSection">
             <UndertekstBold>{props.name}</UndertekstBold>
-            <Undertekst>Ikonkode</Undertekst>
+            <Undertekst>{props.kind}</Undertekst>
         </div>
     </div>
 );

@@ -2,18 +2,37 @@
   background-color: white;
   border-right: 3px solid #e7e9e9;
   height: 100%;
-  top: 0px;
-  width: 160px;
+  top: 0;
+  width: 304px;
   position: fixed;
   overflow-x: hidden;
+  padding: 24px 12px 24px 12px;
 
-  &__logo {
-    max-width: 100px;
-    margin-top: 38px;
-    height: auto;
-    left: 20px;
+  &__logoSection {
     position: relative;
-    z-index: 1;
+
+    &__logo {
+      align-content: center;
+      max-width: 148px;
+      display: block;
+      margin: 0 auto;
+      height: auto;
+      z-index: 1;
+    }
+    
+    .typo-normal {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .line {
+      background-color: #e7e7e9;
+      border: 0;
+      top: 8px;
+      height: 3px;
+      position: relative;
+      width: 40px;
+    }
   }
 
   &__expandableListWrapper {
