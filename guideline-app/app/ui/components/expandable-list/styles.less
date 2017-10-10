@@ -3,25 +3,37 @@
   padding: 0;
 
   &__item, &__item--active {
-    padding: 4px;
+    padding: 8px 4px 8px 4px;
     font-weight: normal;
 
     .link {
+      display: block;
       text-decoration: none;
+
+      .nav-frontend-chevron {
+        float: right;
+        top: 8px;
+        right: 4px;
+      }
     }
 
     ul {
       margin-left: 12px;
+    }
 
-      li {
-        padding-top: 4px;
-      }
+    ul li:last-child {
+      padding-bottom: 0;
+    }
+
+    ul li:first-child {
+      padding-top: 16px;
     }
 
     &__line {
       background-color: #e7e7e9;
       height: 2px;
       border: 0;
+      margin-bottom: 0;
     }
   }
 

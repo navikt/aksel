@@ -12,6 +12,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import Chevron from './../../../../../packages/node_modules/nav-frontend-chevron';
 import './styles.less';
 
 export default class ExpandableList extends Component {
@@ -20,9 +21,14 @@ export default class ExpandableList extends Component {
     }
 
     expandableListItemClicked(item) {
-        this.setState({
-            activeChildIndex: this.props.items.indexOf(item)
-        });
+        if (this.props.items) {
+            let indexOfClicked = this.props.items.indexOf(item);
+            if (indexOfClicked === this.state.activeChildIndex) {
+                indexOfClicked = -1;
+            }
+
+            this.setState({ activeChildIndex: indexOfClicked });
+        }
     }
 
     renderList() {
@@ -74,9 +80,18 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
         return undefined;
     }
 
+    renderChevron() {
+        if (this.hasChildren()) {
+            if (this.item.active === true) {
+                return (<Chevron type="opp" stor />);
+            }
+            return (<Chevron type="ned" stor />);
+        }
+        return null;
+    }
+
     render() {
         const item = this.item;
-
         return (
             <li className={this.getClassList()} key={item.title}>
                 <Link
@@ -85,6 +100,7 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
                     onClick={() => { this.props.onItemClicked(item); }}
                 >
                     { item.title }
+                    { this.renderChevron() }
                 </Link>
                 <hr className="expandableList__item__line" />
                 { this.renderChildren() }

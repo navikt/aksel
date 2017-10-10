@@ -17,7 +17,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
                         <div>
                             <LeftNavigation />
                         </div>
-                        <div style={{ left: '304px', position: 'relative', marginRight: '200px' }}>
+                        <div style={{ marginLeft: '304px' }}>
                             <div className="contentWrapper">
                                 { routes() }
                             </div>
