@@ -14,4 +14,4 @@ const checkboxChildren = (
     }))
 );
 
-export default generateSample(SkjemaGruppe, ['disabled', 'feil'], { title: 'Hvor vil du sitte?' }, checkboxChildren);
+export default generateSample(SkjemaGruppe, ['feil'], { title: 'Hvor vil du sitte?' }, checkboxChildren);
