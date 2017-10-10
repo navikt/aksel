@@ -61,16 +61,19 @@ class SampleEditor extends Component {
     }
 
     renderTypes() {
-        return (
-            <div className="types">
-                {
-                    this.props.componentData.types.map((sample, index) =>
-                        // eslint-disable-next-line react/no-array-index-key
-                        (<SampleType sample={sample} context={this} key={index} />)
-                    )
-                }
-            </div>
-        );
+        if (this.props.componentData.types.length > 1) {
+            return (
+                <div className="types">
+                    {
+                        this.props.componentData.types.map((sample, index) =>
+                            // eslint-disable-next-line react/no-array-index-key
+                            (<SampleType sample={sample} context={this} key={index} />)
+                        )
+                    }
+                </div>
+            );
+        }
+        return null;
     }
 
     renderModifiers() {

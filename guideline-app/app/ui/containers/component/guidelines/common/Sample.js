@@ -89,6 +89,14 @@ class Sample extends Component {
         }
     }
 
+    componentDataHasParametersForLiveUpdating() {
+        const componentData = this.props.componentData;
+        return componentData && (
+            (componentData.types.length > 1) ||
+            (componentData.types.length === 1 &&
+                (componentData.modifiers || componentData.multipleChoiceModifiers)));
+    }
+
     render() {
         const component = renderComponentWithModifiersAndChildren(
             this.props.activeType,
@@ -107,7 +115,7 @@ class Sample extends Component {
                     </div>
 
                     {
-                        this.props.componentData &&
+                        this.componentDataHasParametersForLiveUpdating() &&
                         <SampleEditor componentData={this.props.componentData} />
                     }
                 </div>
@@ -130,7 +138,9 @@ Sample.propTypes = {
     activeMultipleChoiceModifiers: PT.arrayOf(PT.string),
     activeRef: PT.node,
     componentData: PT.shape({
-        types: PT.arrayOf(PT.shape({}))
+        types: PT.arrayOf(PT.shape({})),
+        modifiers: PT.arrayOf(PT.shape({})),
+        multipleChoiceModifiers: PT.arrayOf(PT.shape({}))
     }).isRequired,
     componentName: PT.string
 };
