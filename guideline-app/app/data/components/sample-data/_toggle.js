@@ -11,4 +11,4 @@ const allChildren = [
     { component: ToggleKnapp, children: 'Knapp 3', attrs: commonChildAttrs(3) }
 ];
 
-export default generateSample(null, ToggleGruppe, { onChange: () => {}, name: 'toggleGruppe' }, allChildren);
+export default generateSample(ToggleGruppe, [], { onChange: () => {}, name: 'toggleGruppe' }, allChildren);

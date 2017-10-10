@@ -2,4 +2,4 @@
 import Etikett from 'NavFrontendModules/nav-frontend-etiketter';
 import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-export default generateSample(null, Etikett, {}, 'Slik ser en etikett ut');
+export default generateSample(Etikett, [], {}, 'Slik ser en etikett ut');

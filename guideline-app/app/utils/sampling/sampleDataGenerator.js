@@ -3,7 +3,6 @@ import { newType, newMultipleChoiceModifier, createSampleData } from './sampleDa
 
 const typeAttributeName = metadata.typeAttributeName;
 const inputTypeAttributeName = metadata.inputTypeAttributeName;
-const validModifierNames = metadata.modifierNames;
 
 const isEnum = (propType) => (propType.name === 'enum');
 const isBool = (propType) => (propType.name === 'bool');
@@ -35,23 +34,16 @@ const getTypeNamesOfComponent = (component) => {
     return [component.name];
 };
 
-const getModifiersOfComponent = (baseComponent, subComponent) => {
+const getModifiersOfComponent = (baseComponent, modifierNames) => {
     // eslint-disable-next-line no-underscore-dangle
-    let props = baseComponent.__docgenInfo.props;
-    // eslint-disable-next-line no-underscore-dangle
-    if (subComponent && subComponent.__docgenInfo) {
-        // eslint-disable-next-line no-underscore-dangle
-        props = { ...props, ...subComponent.__docgenInfo.props };
-    }
-    // eslint-disable-next-line no-underscore-dangle
-    const modifierNames = Object.keys(props).filter((propName) => (validModifierNames.indexOf(propName) >= 0));
-    return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] }));
+    const props = baseComponent.__docgenInfo.props;
+    return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] || null }));
 };
 
-const sampleScript = (subType, baseType, attrs, children) => {
+const sampleScript = (baseType, modifierNames, attrs, children, subType) => {
     if (baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
-        const modifiersOfComponent = getModifiersOfComponent(baseType);
+        const modifiersOfComponent = getModifiersOfComponent(baseType, modifierNames);
 
         if (typeNamesOfComponent) {
             const sampleTypes = typeNamesOfComponent.map((typeName) => {
@@ -66,7 +58,7 @@ const sampleScript = (subType, baseType, attrs, children) => {
             // eslint-disable-next-line array-callback-return, consistent-return
             const sampleModifiers = modifiersOfComponent.map((modifier) => {
                 const propType = modifier.value;
-                if (isBool(propType.type)) {
+                if (!propType || isBool(propType.type)) {
                     return newMultipleChoiceModifier(modifier.name, toFirstUpper(modifier.name));
                 }
                 return newMultipleChoiceModifier(metadata.defaultValues[modifier.name], toFirstUpper((modifier.name)));

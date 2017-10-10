@@ -14,4 +14,4 @@ const optionChildren = () => options.map((option) =>
     (<option value={option.value} key={option.value}>{ option.label }</option>)
 );
 
-export default generateSample(null, Select, { label: 'Hvilken land er best om sommeren?' }, optionChildren());
+export default generateSample(Select, ['disabled', 'feil'], { label: 'Hvilken land er best om sommeren?' }, optionChildren());

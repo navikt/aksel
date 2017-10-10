@@ -2,4 +2,4 @@
 import Chevron from 'NavFrontendModules/nav-frontend-chevron';
 import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-export default generateSample(null, Chevron);
+export default generateSample(Chevron, ['stor']);

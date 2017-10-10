@@ -2,4 +2,4 @@ import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp'; // eslint-disab
 // eslint-disable-next-line import/no-extraneous-dependencies, import/extensions, import/no-unresolved
 import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-export default generateSample(null, Lukknapp);
+export default generateSample(Lukknapp, ['bla', 'hvit']);

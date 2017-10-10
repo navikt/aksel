@@ -2,4 +2,4 @@
 import KnappBase from 'NavFrontendModules/nav-frontend-knapper';
 import generateSample from './../../../utils/sampling/sampleDataGenerator';
 
-export default generateSample(null, KnappBase, {}, 'Slik ser en Knapp ut');
+export default generateSample(KnappBase, ['mini', 'spinner', 'disabled'], {}, 'Slik ser en Knapp ut');
