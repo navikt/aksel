@@ -6,7 +6,6 @@ import { Components as components } from './../../data';
 const resolveComponentRoutes = (routePrefix) => (
     components.map((component) => {
         const path = `/${routePrefix}/${component.componentData.componentName}`;
-
         return {
             path: path.toLowerCase(),
             component: () => (<ComponentGuidelinePage {...component} />),
