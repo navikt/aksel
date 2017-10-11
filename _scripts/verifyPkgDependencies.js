@@ -23,7 +23,7 @@ function objectIntersection(obj1, obj2) {
 
 function verifySameValue(obj1, obj2, errorMessage) {
     return (key) => {
-        if (!semver.satisfies(semver.clean(obj1[key]), obj2[key])) {
+        if (obj1[key] !== obj2[key] && !semver.satisfies(semver.clean(obj1[key]), obj2[key])) {
             console.log(`${chalk.red('ERROR::')} ${errorMessage(key, obj1[key], obj2[key])}`);
             hasError = true;
         }
