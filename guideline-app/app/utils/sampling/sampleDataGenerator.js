@@ -15,7 +15,7 @@ const getTypeNameToUseForComponent = (component) => {
     if (props[typeAttributeName]) {
         return typeAttributeName;
     }
-    return inputTypeAttributeName;''
+    return inputTypeAttributeName;
 };
 
 const getEnumValuesFromPropType = (propType) => {

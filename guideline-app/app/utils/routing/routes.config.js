@@ -8,6 +8,8 @@ import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPa
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
 
+const componentRoutes = resolveComponentRoutes('components');
+
 const routeConfig = [
     {
         path: '/',
@@ -19,7 +21,7 @@ const routeConfig = [
         path: '/components',
         component: ComponentMainPage,
         title: 'Komponenter',
-        routes: resolveComponentRoutes('components')
+        routes: componentRoutes
     },
     {
         path: '/layout',

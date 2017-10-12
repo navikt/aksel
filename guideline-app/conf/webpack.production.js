@@ -11,6 +11,16 @@ WebpackProductionConfig.plugins = [
     })
 ];
 
+const babelRule = WebpackProductionConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
+
+if (babelRule) {
+    if (babelRule.include) {
+        babelRule.include.push(/_([a-z]|[A-Z])+\.sample\.js/);
+    } else {
+        babelRule.include = [/_([a-z]|[A-Z])+\.sample\.js/];
+    }
+}
+
 WebpackProductionConfig.output = {
     path: path.join(__dirname, '../', 'dist'),
     publicPath: './',
