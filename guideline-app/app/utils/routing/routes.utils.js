@@ -11,7 +11,7 @@ const parents = {
     Paneler: {
         path: '/components/paneler',
         component: () => (<h2>Paneler</h2>),
-        childComponents: ['panel']
+        childComponents: ['ekspanderbartpanel', 'lenkepanel']
     }
 };
 
