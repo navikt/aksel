@@ -23,6 +23,15 @@ npm run new
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av, 
 så innstaller denne i rot-mappen og legg til avhengigheten som en `peerDependency` i din modul.
 
+#### På NAV-nettet
+Om du skal starte prosjektet inne på NAV-nettet så brukes nexus som proxy for npmjs.org. 
+Det er derfor nødvendig med litt ekstra config: 
+```
+npm config set @hypnosphi:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
+npm config set @types:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
+npm config set @storybook:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
+```
+
 #### Kommandoer:
 * `npm start` - Starter storybook for utvikling
 * `npm run new` - Kjører scaffolding-script
