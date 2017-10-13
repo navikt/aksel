@@ -40,7 +40,7 @@ const getModifiersOfComponent = (baseComponent, modifierNames) => {
     return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] || null }));
 };
 
-const sampleScript = (baseType, modifierNames, attrs, children, subType) => {
+const sampleScript = (baseType, modifierNames, attrs, children, subType, isReact = true) => {
     if (baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
         const modifiersOfComponent = getModifiersOfComponent(baseType, modifierNames);
@@ -64,7 +64,10 @@ const sampleScript = (baseType, modifierNames, attrs, children, subType) => {
                 return newMultipleChoiceModifier(metadata.defaultValues[modifier.name], toFirstUpper((modifier.name)));
             });
 
-            return createSampleData(sampleTypes, sampleModifiers, baseType);
+            return {
+                react: isReact,
+                ...createSampleData(sampleTypes, sampleModifiers, baseType)
+            };
         }
     }
     return null;
