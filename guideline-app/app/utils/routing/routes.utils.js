@@ -2,18 +2,19 @@ import React from 'react';
 import ComponentGuidelinePage from '../../ui/containers/component/guidelines/ComponentGuidelinePage';
 import { Components as components } from './../../data';
 
-const parents = {
-    Skjemaelementer: {
-        path: '/components/skjemaelementer',
-        component: () => (<h2>Skjemaelementer</h2>),
-        childComponents: ['checkbox', 'input', 'textarea', 'radio', 'select', 'skjemagruppe']
-    },
-    Paneler: {
-        path: '/components/paneler',
-        component: () => (<h2>Paneler</h2>),
-        childComponents: ['ekspanderbartpanel', 'lenkepanel']
-    }
-};
+const parents = {};
+// const parents = {
+//     Skjemaelementer: {
+//         path: '/components/skjemaelementer',
+//         component: () => (<h2>Skjemaelementer</h2>),
+//         childComponents: ['checkbox', 'input', 'textarea', 'radio', 'select', 'skjemagruppe']
+//     },
+//     Paneler: {
+//         path: '/components/paneler',
+//         component: () => (<h2>Paneler</h2>),
+//         childComponents: ['ekspanderbartpanel', 'lenkepanel']
+//     }
+// };
 
 const getNestedComponents = () => (
     components.filter((component) => {
