@@ -12,15 +12,25 @@ const htmlRule = {
 
 WebpackDevConfig.module.rules.push(htmlRule);
 
-const babelRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
-
-if (babelRule) {
-    if (babelRule.include) {
-        babelRule.include.push(path.resolve(__dirname, './../../packages/node_modules'));
+const addModuleIncludePaths = (rule, subdir) => {
+    const changedRule = rule;
+    if (rule.include) {
+        changedRule.include.push(path.resolve(__dirname, subdir));
     } else {
-        babelRule.include = [path.resolve(__dirname, './../../packages/node_modules')];
+        // eslint-disable-next-line no-param-reassign
+        changedRule.include = [path.resolve(__dirname, subdir)];
     }
-}
+    return changedRule;
+};
+
+// eslint-disable-next-line no-unused-vars
+let babelRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
+// eslint-disable-next-line no-unused-vars
+let rawRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
+const pathToModules = './../../packages/node_modules';
+
+babelRule = addModuleIncludePaths(babelRule, pathToModules);
+rawRule = addModuleIncludePaths(rawRule, pathToModules);
 
 WebpackDevConfig.devServer = {
     historyApiFallback: true,

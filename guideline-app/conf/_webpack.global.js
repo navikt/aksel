@@ -24,6 +24,10 @@ const GlobalWebpackConfig = {
                 ]
             },
             {
+                test: /\.example\.txt?$/,
+                loader: 'raw-loader'
+            },
+            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [

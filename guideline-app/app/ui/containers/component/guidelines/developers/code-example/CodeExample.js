@@ -39,7 +39,7 @@ class CodeExample extends Component {
     getTabbarItemsAlwaysPresent = () => (
         [
             {
-                label: 'HTML',
+                label: 'HTML/Example',
                 codeToDisplay: (type, modif, children) => (getHtmlCodeForComponent(type, modif, children)),
                 defaultActive: true,
                 hljs: 'html'
@@ -62,6 +62,9 @@ class CodeExample extends Component {
         if (activeTabbarItem.label === 'CSS') {
             return activeTabbarItem.codeToDisplay(domRef);
         }
+        if (activeTabbarItem.label === 'HTML/Example' && this.props.componentData.code) {
+            return this.props.componentData.code;
+        }
         return activeTabbarItem.codeToDisplay(type, modifiers, children);
     }
 
@@ -77,10 +80,7 @@ class CodeExample extends Component {
 
     render() {
         const activeTabbarItem = this.state.activeTabbarItem;
-        const highlightedCode = this.renderHighlightedCode(
-            this.getCodeToDisplay(),
-            activeTabbarItem.hljs
-        );
+        const highlightedCode = this.renderHighlightedCode(this.getCodeToDisplay(), activeTabbarItem.hljs);
 
         return (
             <div className="codeExample">

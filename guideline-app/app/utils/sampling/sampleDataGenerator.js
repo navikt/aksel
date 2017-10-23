@@ -25,10 +25,13 @@ const getEnumValuesFromPropType = (propType) => {
 
 const getTypeNamesOfComponent = (component) => {
     // eslint-disable-next-line no-underscore-dangle
-    const propType = component.__docgenInfo.props[getTypeNameToUseForComponent(component)];
-    if (propType) {
-        if (isEnum(propType.type)) {
-            return getEnumValuesFromPropType(propType);
+    if (component.__docgenInfo) {
+        // eslint-disable-next-line no-underscore-dangle
+        const propType = component.__docgenInfo.props[getTypeNameToUseForComponent(component)];
+        if (propType) {
+            if (isEnum(propType.type)) {
+                return getEnumValuesFromPropType(propType);
+            }
         }
     }
     return [component.name];
@@ -36,11 +39,15 @@ const getTypeNamesOfComponent = (component) => {
 
 const getModifiersOfComponent = (baseComponent, modifierNames) => {
     // eslint-disable-next-line no-underscore-dangle
-    const props = baseComponent.__docgenInfo.props;
-    return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] || null }));
+    if (baseComponent.__docgenInfo) {
+        // eslint-disable-next-line no-underscore-dangle
+        const props = baseComponent.__docgenInfo.props;
+        return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] || null }));
+    }
+    return [];
 };
 
-const sampleScript = (baseType, modifierNames, attrs, children, subType, isReact = true) => {
+const sampleScript = (baseType, modifierNames, attrs, children, subType, react = true, code) => {
     if (baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
         const modifiersOfComponent = getModifiersOfComponent(baseType, modifierNames);
@@ -64,10 +71,7 @@ const sampleScript = (baseType, modifierNames, attrs, children, subType, isReact
                 return newMultipleChoiceModifier(metadata.defaultValues[modifier.name], toFirstUpper((modifier.name)));
             });
 
-            return {
-                react: isReact,
-                ...createSampleData(sampleTypes, sampleModifiers, baseType)
-            };
+            return { react, code, ...createSampleData(sampleTypes, sampleModifiers, baseType) };
         }
     }
     return null;
