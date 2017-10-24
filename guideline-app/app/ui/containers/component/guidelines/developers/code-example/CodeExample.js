@@ -64,7 +64,7 @@ class CodeExample extends Component {
     }
 
     getTabbarItems() {
-        const tabOptions = deepmerge(defaultTabOptions, this.props.componentData.tabOptions);
+        const tabOptions = deepmerge(defaultTabOptions, this.props.componentData.tabOptions || {});
         const namesOfAllPossibleTabOptions = Object.keys(tabOptions);
         const options = namesOfAllPossibleTabOptions
             .filter((tabName) => (tabOptions[tabName].show === true))

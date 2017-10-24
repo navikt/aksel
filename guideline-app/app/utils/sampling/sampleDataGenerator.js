@@ -25,7 +25,7 @@ const getEnumValuesFromPropType = (propType) => {
 
 const getTypeNamesOfComponent = (component) => {
     // eslint-disable-next-line no-underscore-dangle
-    if (component.__docgenInfo) {
+    if (component.__docgenInfo && component.__docgenInfo.props) {
         // eslint-disable-next-line no-underscore-dangle
         const propType = component.__docgenInfo.props[getTypeNameToUseForComponent(component)];
         if (propType) {
@@ -39,7 +39,7 @@ const getTypeNamesOfComponent = (component) => {
 
 const getModifiersOfComponent = (baseComponent, modifierNames) => {
     // eslint-disable-next-line no-underscore-dangle
-    if (baseComponent.__docgenInfo) {
+    if (baseComponent.__docgenInfo && baseComponent.__docgenInfo.props) {
         // eslint-disable-next-line no-underscore-dangle
         const props = baseComponent.__docgenInfo.props;
         return modifierNames.map((modifierName) => ({ name: modifierName, value: props[modifierName] || null }));
