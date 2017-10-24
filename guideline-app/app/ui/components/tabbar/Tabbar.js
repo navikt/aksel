@@ -19,7 +19,7 @@ class Tabbar extends Component {
     }
 
     getDefaultActiveItem() {
-        return this.props.items.find((element) => (element.defaultActive));
+        return this.props.items.find((element) => (element.defaultActive)) || this.props.items[0];
     }
 
     changeActiveItem(item) {

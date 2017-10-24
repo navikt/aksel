@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
 import Highlight from 'react-highlight';
+import deepmerge from 'deepmerge';
 import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
@@ -10,47 +11,69 @@ import {
 } from '../../../../../../utils/dom/code-sampling.utils';
 import './styles.less';
 
+const defaultTabOptions = {
+    react: {
+        show: true,
+        label: 'React',
+        hljs: 'html'
+    },
+    html: {
+        show: true,
+        defaultActive: true,
+        label: 'HTML',
+        hljs: 'html'
+    },
+    css: {
+        show: true,
+        label: 'CSS',
+        hljs: 'css'
+    },
+    js: {
+        show: false,
+        label: 'JavaScript',
+        hljs: 'js',
+        code: ''
+    }
+};
+
 class CodeExample extends Component {
 
     componentWillMount() {
         this.tabbarItems = this.getTabbarItems();
-
         this.state = {
-            activeTabbarItem: this.tabbarItems.find((item) => item.defaultActive)
+            activeTabbarItem:
+                this.tabbarItems.find((item) => item.defaultActive) ||
+                this.tabbarItems.find((item) => item.show === true)
         };
     }
 
-    getTabbarItems() {
-        const tabbarItems = this.getTabbarItemsAlwaysPresent();
-
-        if (this.props.showReactTab) {
-            const reactTabbarItem = {
-                label: 'React',
-                codeToDisplay: (type, modifiers, children) =>
-                    (getReactCodeForComponent(type, modifiers, children)),
-                hljs: 'html'
-            };
-            return [reactTabbarItem, ...tabbarItems];
+    getCodeToDisplayForTabFn(tabName) {
+        switch (tabName) {
+            case 'react':
+                return (type, modifiers, children) => (getReactCodeForComponent(type, modifiers, children));
+            case 'html':
+                return (type, modif, children) => (getHtmlCodeForComponent(type, modif, children));
+            case 'css':
+                return (ref) => (getCSSCodeForComponent(ref));
+            case 'js':
+                // eslint-disable-next-line react/prop-types
+                return () => (this.props.componentData.tabOptions.js.code);
+            default:
+                return () => {};
         }
-
-        return tabbarItems;
     }
 
-    getTabbarItemsAlwaysPresent = () => (
-        [
-            {
-                label: 'HTML/Example',
-                codeToDisplay: (type, modif, children) => (getHtmlCodeForComponent(type, modif, children)),
-                defaultActive: true,
-                hljs: 'html'
-            },
-            {
-                label: 'CSS',
-                codeToDisplay: (ref) => (getCSSCodeForComponent(ref)),
-                hljs: 'css'
-            }
-        ]
-    );
+    getTabbarItems() {
+        const tabOptions = deepmerge(defaultTabOptions, this.props.componentData.tabOptions);
+        const namesOfAllPossibleTabOptions = Object.keys(tabOptions);
+        const options = namesOfAllPossibleTabOptions
+            .filter((tabName) => (tabOptions[tabName].show === true))
+            .map((tabName) => ({
+                codeToDisplay: this.getCodeToDisplayForTabFn(tabName),
+                ...tabOptions[tabName]
+            }));
+        return options;
+    }
 
     getCodeToDisplay() {
         const type = this.props.activeType;
@@ -61,9 +84,6 @@ class CodeExample extends Component {
 
         if (activeTabbarItem.label === 'CSS') {
             return activeTabbarItem.codeToDisplay(domRef);
-        }
-        if (activeTabbarItem.label === 'HTML/Example' && this.props.componentData.code) {
-            return this.props.componentData.code;
         }
         return activeTabbarItem.codeToDisplay(type, modifiers, children);
     }
@@ -101,12 +121,11 @@ CodeExample.propTypes = {
     }).isRequired,
     activeRef: PT.shape({}).isRequired,
     activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
-    showReactTab: PT.bool
+    componentData: PT.shape({}).isRequired
 };
 
 CodeExample.defaultProps = {
-    activeMultipleChoiceModifiers: [],
-    showReactTab: true
+    activeMultipleChoiceModifiers: []
 };
 
 // eslint-disable-next-line no-class-assign

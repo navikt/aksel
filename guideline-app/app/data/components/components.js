@@ -65,7 +65,6 @@ const getComponentData = () => {
 
 const componentData = getComponentData();
 const textDataInCategories = getTextData();
-
 const components = (
     Object.keys(componentData).map((td) => ({
         textData: textDataInCategories[td],
