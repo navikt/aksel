@@ -41,7 +41,7 @@ Eksempel-filnavn for Alertstripe-komponenten:
 Går deretter inn i mappen med navnet `md`. 
 3. Velg riktig .md-fil i forhold til hvilket innhold i artikkelen du ønsker å endre på.
 4. Trykk på blyanten i menyen rett over teksten for å begynne å redigere.
-5. Gjør endringene i .md-filen, trykk evt. på "Preview changes" for å sjekk at det blir riktig.
+5. Gjør endringene i .md-filen, trykk evt. på "Preview changes" for å sjekke at det blir riktig.
 6. Scroll ned til bunnen av siden, legg inn teksten "Text changes" i beskrivelsesfeltet, og trykk "Commit changes".
 
 **OBS!** For at du skal kunne endre på filer må opprette en bruker på GitHub, være logget inn, og ha fått tilgang av en administrator
