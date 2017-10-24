@@ -25,12 +25,8 @@ const addModuleIncludePaths = (rule, subdir) => {
 
 // eslint-disable-next-line no-unused-vars
 let babelRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
-// eslint-disable-next-line no-unused-vars
-let rawRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
 const pathToModules = './../../packages/node_modules';
-
 babelRule = addModuleIncludePaths(babelRule, pathToModules);
-rawRule = addModuleIncludePaths(rawRule, pathToModules);
 
 WebpackDevConfig.devServer = {
     historyApiFallback: true,

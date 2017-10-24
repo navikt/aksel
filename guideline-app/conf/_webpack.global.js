@@ -24,16 +24,12 @@ const GlobalWebpackConfig = {
                 ]
             },
             {
-                test: /\.example\.txt?$/,
-                loader: 'raw-loader'
-            },
-            {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [
                     path.resolve(__dirname, './../app')
                 ],
-                exclude: [/\.example\.jsx?$/],
+                exclude: [/\.nobabel\.jsx?$/],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['react-docgen', 'transform-object-rest-spread']
