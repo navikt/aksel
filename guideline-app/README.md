@@ -1,19 +1,15 @@
-# NAV Design Guidelines
+### NAV Designsystemet - Guideline-appen
 
-This is still a **work in progress.**
+Her ligger kodebasen for NAV Designsystemet sin [Guideline-app](https://erlendev.github.io/nav-frontend-moduler).
 
-To run the design guideline app, navigate back to root of project
+[Guideline-appen](https://erlendev.github.io/nav-frontend-moduler) er NAV Designsystemets dokumentasjonsverktøy,
+laget for utviklere, designere og andre som på en eller annen måte har et forhold til designsystemet. 
 
-```cd ../```
+Her finner man utviklerdokumentasjon, informasjon om designmønster og retningslinjer i forhold til 
+enkeltkomponenter, sammensetningen av disse, farger, kontraster, og så videre.  
 
-Get dependencies:
 
-```npm install```
+##### Hvordan kan jeg bidra med innhold eller funksjonalitet til Guideline-siden
 
-And finally, run the app (in development):
-
-```npm run start-guideline-app```
-
-Build (for production):
-
-```npm run build-guideline-app```
+* ... når jeg er [designer?](https://erlendev.github.io/nav-frontend-moduler/guideline-app/README.design.md)
+* ... når jeg er [utvikler?](https://erlendev.github.io/nav-frontend-moduler/guideline-app/README.developer.md)
