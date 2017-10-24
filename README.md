@@ -57,17 +57,17 @@ Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-
 * `npm run checkversions` - sjekker at avhengighetene til modulene er de samme som er definert i rot-mappen
 
 ## Andre kommandoer
-* `npm run publishAlpha` - Publisering av alpha-versjoner av alle moduler. **NB!!** Husk å lage en commit før denne kjøres
 * `npm run create` - Samme som `npm run new`
 * `npm run build` - Bygger alle JS-filer
 * `npm run buildfonts` - Bygger alle font-filer (Lager css-filer med base64 inlinet fonter)
+* `npm run buildicons` - Bygger opp react-komponenten utifra svg'ene i ikon-pakken
 * `npm run dev` - Samme som `npm start`
 * `npm run watch` - Samme som `npm start`
 
 
 ## Byggemiljø
-Det er satt opp ett multibranch-bygg for repoet: *TO BE ANNOUNCED* som bruker pipelinen definert i `Jenkinsfile`.
-Alle branches bygges derfor automatisk med en gang de pushes til stash.
+Det er satt opp ett CircleCI-bygg for repoet.
+Pull-Requests bygges derfor automatisk med en gang de pushes til remote.
 
 ### Byggesteg på `master`
 1. git checkout
@@ -93,6 +93,7 @@ Hvis det oppdages at ingen moduler er endret (steg 5) vil byggejobben stoppe der
 ## Scripts
 Det ligger flere hjelpe-scripts i mappen `_scripts`. 
 
+* `bumpall.js` - Utility script for å bumpe versjons-nummer på alle pakkene manuelt. 
 * `verifyPkgDependencies.js` - sjekker at avhengighetene til modulene er de samme som er definert i rot-mappen. Blir kjørt av `npm run checkversions`
 * `fixDependencyVersions.js` - forsøker etter beste evne å fikse feilene rapportert av `verifyPkgDependencies.js`
 * `scaffold.js` - scaffolding-script for å lage nye moduler
