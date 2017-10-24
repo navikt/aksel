@@ -15,9 +15,11 @@ const babelRule = WebpackProductionConfig.module.rules.find((rule) => (rule.load
 
 if (babelRule) {
     if (babelRule.include) {
+        babelRule.include.push(/_([a-z]|[A-Z])+\.example\.js/);
         babelRule.include.push(/_([a-z]|[A-Z])+\.sample\.js/);
     } else {
         babelRule.include = [/_([a-z]|[A-Z])+\.sample\.js/];
+        babelRule.include.push(/_([a-z]|[A-Z])+\.example\.js/);
     }
 }
 
