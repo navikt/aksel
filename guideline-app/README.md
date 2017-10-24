@@ -11,5 +11,5 @@ enkeltkomponenter, sammensetningen av disse, farger, kontraster, og så videre.
 
 ##### Hvordan kan jeg bidra med innhold eller funksjonalitet til Guideline-siden
 
-* ... når jeg er [designer?](https://erlendev.github.io/nav-frontend-moduler/guideline-app/README.design.md)
-* ... når jeg er [utvikler?](https://erlendev.github.io/nav-frontend-moduler/guideline-app/README.developer.md)
+* ... når jeg er [designer?](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.design.md)
+* ... når jeg er [utvikler?](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.developer.md)
