@@ -47,7 +47,7 @@ const getModifiersOfComponent = (baseComponent, modifierNames) => {
     return [];
 };
 
-const sampleScript = (baseType, modifierNames, attrs, children, subType, tabOptions) => {
+const sampleScript = (baseType, modifierNames = [], attrs, children, subType, tabOptions) => {
     if (baseType) {
         const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
         const modifiersOfComponent = getModifiersOfComponent(baseType, modifierNames);
