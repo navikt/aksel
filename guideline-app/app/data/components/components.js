@@ -35,28 +35,48 @@ const getTextData = () => {
     return textDataInCategories;
 };
 
-const getComponentData = () => {
-    const getNameOfModule = (moduleRef) => {
-        const regx = /\/_[a-z]+\./;
-        const match = moduleRef.match(regx);
-        if (match.index > -1) {
-            // slices off /_ at the beginning and . at the end
-            return match[0].slice(2, match[0].length - 1);
+const getInstallInstructions = (moduleRef, pkgs) => {
+    let installInstructions = '';
+    const modulePathMatch = (moduleRef.match(/\.\/nav-frontend-([A-Z]|[a-z]|-)+\//));
+    if (modulePathMatch.index > -1) {
+        const foundPackage = (pkgs[`${modulePathMatch[0]}package.json`]);
+        if (foundPackage) {
+            installInstructions =
+                `npm install ${
+                    [foundPackage.name]
+                        .concat(
+                            Object.keys(foundPackage.peerDependencies || {})
+                        ).join(' ')} --save`;
         }
-        return null;
-    };
+    }
+    return installInstructions;
+};
 
-    const context = require.context(
-        '../../../../packages/node_modules/',
-        true,
-        /_[a-z]+\.sample\.js/
-    );
-    const modules = getModulesFromContext(context);
+const getNameOfModule = (moduleRef) => {
+    const regx = /\/_[a-z]+\./;
+    const match = moduleRef.match(regx);
+    if (match.index > -1) {
+        // slices off /_ at the beginning and . at the end
+        return match[0].slice(2, match[0].length - 1);
+    }
+    return null;
+};
+
+const getComponentData = () => {
+    const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
+    const sampleModules = getModulesFromContext(sampleContext);
+    const sampleRefs = Object.keys(sampleModules);
+    const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
+    const pkgs = getModulesFromContext(pkgContext);
+
     const componentData = {};
-    Object.keys(modules).forEach((moduleRef) => {
+    sampleRefs.forEach((moduleRef) => {
         const moduleName = getNameOfModule(moduleRef);
         if (moduleName) {
-            componentData[moduleName] = modules[moduleRef].default;
+            componentData[moduleName] = {
+                installInstructions: getInstallInstructions(moduleRef, pkgs),
+                ...sampleModules[moduleRef].default
+            };
         }
     });
 

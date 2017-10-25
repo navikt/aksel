@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
+import Highlight from 'react-highlight';
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import CodeExample from './code-example/CodeExample';
 import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
 import './styles.less';
 
 class GuidelineContentForDevelopers extends Component {
+    renderInstallInstructions = () => (
+        <div className="install-doc">
+            <Systemtittel>
+                Installering
+            </Systemtittel>
+            <Highlight className="javascript">
+                { this.props.componentData.installInstructions }
+            </Highlight>
+        </div>
+    );
+
     renderReactSpecificDoc = (doc) => (
         <div className="react-doc">
-            <Systemtittel>
-                PropTypes
-            </Systemtittel>
-            <Normaltekst>
-                { doc.description }
-            </Normaltekst>
-            <PropTypeTable
-                docgenInfo={doc}
-            />
+            <Systemtittel>PropTypes</Systemtittel>
+            <Normaltekst>{ doc.description }</Normaltekst>
+            <PropTypeTable docgenInfo={doc} />
         </div>
     );
 
@@ -37,6 +43,7 @@ class GuidelineContentForDevelopers extends Component {
                     isImplementedInReact &&
                     this.renderReactSpecificDoc(docgenInfo)
                 }
+                { this.renderInstallInstructions() }
             </div>
         );
     }
