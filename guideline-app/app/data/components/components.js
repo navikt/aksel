@@ -119,8 +119,6 @@ const assignDisplayNamesToComponents = (componentData) => {
 const componentData = assignDisplayNamesToComponents(getComponentData());
 const textDataInCategories = getTextData();
 
-console.log(componentData);
-
 const components = (
     Object.keys(componentData).map((td) => ({
         textData: textDataInCategories[td],
