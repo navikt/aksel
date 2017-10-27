@@ -83,19 +83,53 @@ const getComponentData = () => {
     return componentData;
 };
 
-const componentData = getComponentData();
+/* eslint-disable no-underscore-dangle, max-len */
+const assignDisplayName = (componentData) => {
+    const componentDataWithDisplayName = componentData;
+    if (componentData.base && componentData.base.__docgenInfo) {
+        componentDataWithDisplayName.base.displayName = componentDataWithDisplayName.base.__docgenInfo.displayName;
+    } else if (componentData.component && componentData.component.__docgenInfo) {
+        componentDataWithDisplayName.component.displayName = componentData.component.__docgenInfo.displayName;
+    }
+
+    if (componentData.types) {
+        componentDataWithDisplayName.types = componentDataWithDisplayName.types.map((currentType) => {
+            const updatedType = currentType;
+            const children = currentType.children;
+            if (currentType.component && currentType.component.__docgenInfo) {
+                updatedType.displayName = currentType.component.__docgenInfo.displayName;
+            }
+            if (children && Array.isArray(children)) {
+                updatedType.children = children.map((child) => (assignDisplayName(child)));
+            }
+            return updatedType;
+        });
+    }
+    return componentDataWithDisplayName;
+};
+
+const assignDisplayNamesToComponents = (componentData) => {
+    const componentDataWithDisplayNames = componentData;
+    Object.keys(componentData).forEach((componentName) => {
+        componentDataWithDisplayNames[componentName] = assignDisplayName(componentData[componentName]);
+    });
+    return componentDataWithDisplayNames;
+};
+
+const componentData = assignDisplayNamesToComponents(getComponentData());
 const textDataInCategories = getTextData();
+
 const components = (
     Object.keys(componentData).map((td) => ({
         textData: textDataInCategories[td],
         componentData: {
             ...componentData[td],
             componentName: td,
-            // eslint-disable-next-line no-underscore-dangle
             __docgenInfo: componentData[td].base ? componentData[td].base.__docgenInfo : null,
             label: td.charAt(0).toUpperCase() + td.slice(1)
         }
     }))
 );
+/* eslint-enable no-underscore-dangle */
 
 export default components;

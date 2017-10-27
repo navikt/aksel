@@ -7,7 +7,12 @@ WebpackProductionConfig.plugins = [
         template: './guideline-app/index.production.ejs',
         filename: 'index.html',
         inject: 'body',
-        minimize: false
+        minimize: {
+            minimizeJS: {
+                mangle: false,
+                compress: false
+            }
+        }
     })
 ];
 

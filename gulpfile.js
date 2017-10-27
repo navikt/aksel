@@ -86,7 +86,7 @@ function build() {
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
-        .pipe(babel())
+        .pipe(babel({plugins: ['transform-react-display-name']}))
         .pipe(renameUsingMapper(mapToDest))
         .pipe(gulp.dest(dest));
 }
