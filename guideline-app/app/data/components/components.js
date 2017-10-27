@@ -83,8 +83,8 @@ const getComponentData = () => {
     return componentData;
 };
 
-/* eslint-disable no-underscore-dangle, max-len */
-const assignDisplayName = (componentData) => {
+/* eslint-disable no-underscore-dangle */
+const assignDisplayNameToComponentData = (componentData) => {
     const componentDataWithDisplayName = componentData;
     if (componentData.base && componentData.base.__docgenInfo) {
         componentDataWithDisplayName.base.displayName = componentDataWithDisplayName.base.__docgenInfo.displayName;
@@ -97,10 +97,10 @@ const assignDisplayName = (componentData) => {
             const updatedType = currentType;
             const children = currentType.children;
             if (currentType.component && currentType.component.__docgenInfo) {
-                updatedType.displayName = currentType.component.__docgenInfo.displayName;
+                updatedType.component.displayName = currentType.component.__docgenInfo.displayName;
             }
             if (children && Array.isArray(children)) {
-                updatedType.children = children.map((child) => (assignDisplayName(child)));
+                updatedType.children = children.map((child) => (assignDisplayNameToComponentData(child)));
             }
             return updatedType;
         });
@@ -111,13 +111,15 @@ const assignDisplayName = (componentData) => {
 const assignDisplayNamesToComponents = (componentData) => {
     const componentDataWithDisplayNames = componentData;
     Object.keys(componentData).forEach((componentName) => {
-        componentDataWithDisplayNames[componentName] = assignDisplayName(componentData[componentName]);
+        componentDataWithDisplayNames[componentName] = assignDisplayNameToComponentData(componentData[componentName]);
     });
     return componentDataWithDisplayNames;
 };
 
 const componentData = assignDisplayNamesToComponents(getComponentData());
 const textDataInCategories = getTextData();
+
+console.log(componentData);
 
 const components = (
     Object.keys(componentData).map((td) => ({

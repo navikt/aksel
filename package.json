@@ -115,7 +115,6 @@
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
-    "babel-plugin-transform-es2015-function-name": "^6.24.1",
     "babel-plugin-transform-react-display-name": "^6.25.0",
     "deepmerge": "^2.0.0",
     "directory-named-webpack-plugin": "^2.2.3",
