@@ -54,7 +54,8 @@ som er en type tekstfil som vil bli forstått av Guidelines-siden som HTML uten 
 
 Dette gjøres automatisk ved at man benytter seg av reglene som står beskrevet i 
 [Markdown sitt cheat-sheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet),
-men i Guidelines-løsningen er det **kun** mulig å bruke reglene for å lage 
+men i Guidelines-løsningen er det **kun** mulig å bruke reglene for å legge inn
+[images](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images),
 [lenker](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#links), 
 [header-elementer av typen h4 (dvs 4 * #)](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#headers) 
 og [lister](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#lists). 
@@ -63,8 +64,7 @@ være like.
 
 Så den eneste regelen man trenger å forholde seg til med tanke på å lage .md-filer forskjellig
 fra vanlige tekstfiler, er at man må følge 
-instruksjonene i lenkene overfor for å lage hhv. lenker, h4-headere og lister.
-
+instruksjonene i lenkene overfor for å legge inn hhv. images, lenker, h4-headere og lister.
 
 Vanlig tekst og nye avsnitt er fullt mulig og angis på helt vanlig måte som i en normal tekstfil. 
 
