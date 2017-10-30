@@ -1,55 +1,64 @@
 import React from 'react';
 
 import {
+    Ingress,
     Normaltekst,
-    Innholdstittel
+    Sidetittel,
+    Undertittel
 } from './../../../../../packages/node_modules/nav-frontend-typografi';
-
-import teamworkImg from './../../../assets/images/about/teamwork.png';
-import processImg from './../../../assets/images/about/process.png';
 
 import './styles.less';
 
 const AboutPage = () => (
     <div className="aboutPage">
-        <div className="section">
-            <Innholdstittel>
-                Hva er designsystemet?
-            </Innholdstittel>
+        <div className="aboutPage__header" />
+        <div className="aboutPage__content">
+            <Sidetittel>NAV Designsystemet</Sidetittel>
+            <div className="section">
+                <Ingress>
+                    NAV Designsystemet er en samling av verktøy og metodikker som gir muligheten til å kommunisere og
+                    løse utfordringer på en konsistent og enhetlig måte, gjennom gjenbruk av design, kode og felles
+                    prinsipper for brukeropplevelse.
 
-            <Normaltekst>
-                Designsystemet er et økosystem som tilrettelegger for effektiv samhandling,
-                og beskriver hvordan man tar i bruk
-                verktøy og metodikk for å utvikle tjenester og produkter i NAV.
-                Systemet beskriver også detaljer
-                om visuell utforming, interaksjon og prinsipper for brukeropplevelse.
-            </Normaltekst>
+                    Designsystemet er basert på 4 essensielle områder: Identiteten til NAV, verktøy, metodikk og
+                    samhandling
+                </Ingress>
+            </div>
 
-            <img src={teamworkImg} alt="Samarbeidet" />
-        </div>
+            <div className="section">
+                <Undertittel>Identiteten til NAV</Undertittel>
+                <Normaltekst>
+                    Verktøykasse med visuelle elementer for å kommunisere med NAV som avsender.
+                    Her kan man finne fargepaletten, layout, typografi, ikonene  og illustrasjon.
+                </Normaltekst>
+            </div>
 
-        <div className="section">
-            <Innholdstittel>
-                Prosess og samarbeid
-            </Innholdstittel>
+            <div className="section">
+                <Undertittel>Verktøy</Undertittel>
+                <Normaltekst>
+                    NAV has sitt eget frontend-rammeverk (nav-frontend).&nbsp;
+                    <a className="lenke" href="/#/components">
+                        Her er oversikten på komponentene som finnes der.
+                    </a>
+                </Normaltekst>
 
-            <img src={processImg} alt="Prosessen" />
+            </div>
 
-            <Normaltekst>
-                Hovedtyngden av samhandlingen foregår mellom interaksjonsdesignere, grafiske designere og front
-                end-utviklere i leveranseteam og oss. Denne samhandlingen har vi erfaring med, og det er
-                etablert en prosess, noen møtepunkter og noen samarbeidsverktøy (Zeplin, Craft m.m.) vi vil
-                fortsette å iterere over.
-            </Normaltekst>
-            <br />
-            <Normaltekst>
-                Designere og utviklere i leveranseteam har et ansvar for å være samstemt med fag og forretning i
-                designvalg. Vi bistår med designvalg i tidlig fase og sørger for god dokumentasjon av valg som
-                allerede er tatt.
-                Vi ønsker å bidra til at NAV blir smidigere, og legger derfor opp til en samhandlingsmetode som
-                er tuftet på det smidige manifest og en open source-metodikk som har vist seg levedyktig andre
-                steder.
-            </Normaltekst>
+            <div className="section">
+                <Undertittel>Metodikk</Undertittel>
+                <Normaltekst>
+                    En viktig del av hvordan vi oppnår enhetlige brukeropplevesler, er at vi tar utgangspunkt i de samme
+                    prinsippene for design, klarspråk og tilgjengelighet.
+                </Normaltekst>
+            </div>
+
+            <div className="section">
+                <Undertittel>Samhandling</Undertittel>
+                <Normaltekst>
+                    Hovedaktørene i designsystemet består av de menneksene som arbeider for å løse utfordringer sammen.
+                    Ta gjerne kontakt med designsystem-teamet for mer informasjon om hvordan vi starter samarbeidet.
+                </Normaltekst>
+            </div>
         </div>
     </div>
 );

@@ -1,10 +1,7 @@
-.aboutPage {
-  width: 50%;
+@import './../../../../../packages/node_modules/nav-frontend-lenker-style/src/lenker-style';
 
-  @media(max-width: 900px) {
-    width: 100%;
-    margin: 0;
-  }
+.aboutPage {
+  width: 100%;
 
   .section--withButton {
     text-align: center;
@@ -16,5 +13,27 @@
 
   .typo-innholdstittel {
     margin-bottom: 20px;
+  }
+
+  &__header {
+    position: relative;
+    margin-top: -160px;
+    left: -16px;
+    z-index: 999;
+    min-height: 408px;
+    width: 110%;
+    background-color: #f1d8d4;
+    border-bottom: 16px solid #c86151;
+  }
+
+  &__content {
+    padding-top: 80px;
+    padding-left: 304px;
+    padding-right: 304px;
+
+    @media(max-width: 1100px) {
+      padding-left: 16px;
+      padding-right: 16px;
+    }
   }
 }

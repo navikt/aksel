@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { UndertekstBold, Normaltekst, Ingress } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { Undertittel, Normaltekst, Ingress } from './../../../../../packages/node_modules/nav-frontend-typografi';
 // eslint-disable-next-line import/extensions
 import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
@@ -19,7 +19,7 @@ const AccessibilityPage = () => (
         </div>
 
         <div className="section">
-            <UndertekstBold>Få en bra start ut av boksen</UndertekstBold>
+            <Undertittel>Få en bra start ut av boksen</Undertittel>
             <Normaltekst>
                 Målet er å få innebygd tilgjengelighet og universell utforming i modulene, slik at designere og
                 utviklere kan konsentrere seg om brukerne, designet og koden. Det er likevel viktig at de fører
@@ -28,7 +28,7 @@ const AccessibilityPage = () => (
         </div>
 
         <div className="section">
-            <UndertekstBold>Hva har vi gjort?</UndertekstBold>
+            <Undertittel>Hva har vi gjort?</Undertittel>
             <Normaltekst>
                 Vi har tatt hensyn til krav til universell utforming når vi utformet og testet modulene (kravene i WCAG
                 2.0, level AA). Dette gjelder for eksempel fargekontrast: Bruk de fargekombinasjonene du finner her,
@@ -49,7 +49,7 @@ const AccessibilityPage = () => (
         </div>
 
         <div className="section">
-            <UndertekstBold>Ressurser</UndertekstBold>
+            <Undertittel>Ressurser</Undertittel>
             <ul>
                 <li>
                     <a className="lenke" href="http://uu.difi.no">
