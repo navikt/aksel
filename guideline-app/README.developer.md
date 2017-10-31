@@ -1,4 +1,4 @@
-## Guideline-siden - utviklerdokumentasjon
+# Guideline-siden - utviklerdokumentasjon
 
 Komponenter-menyvalget på Guideline-siden lister opp alle modulene som er implementert i nav-frontend. Logikken for
 oppbygningen av alle Komponenter-undersidene er like, og alt det ligger i `guideline-app`-delen av 
@@ -12,7 +12,7 @@ Det som er viktig at utviklerne selv tar ansvar for er at live-demoer av kompone
 Utviklerdokumentasjon, fungerer som det skal til enhver tid.
 
 
-### Kort om live-demo, kodeeksempler og menypunkter
+## Kort om live-demo, kodeeksempler og menypunkter
 De fleste av React-modulene i nav-frontend har nå sin egen fil på formatet `_<komponentnavn>.sample.js` som ligger i 
 rotmappa for den gjeldende modulen. 
 
@@ -24,7 +24,7 @@ for denne komponenten.
 fungerer som det skal (basert på det som blir default-eksportert ut fra `_<komponentnavn>.sample.js`).
  
 
-### Vedlikehold av live-demoer og kodeeksempler
+## Vedlikehold av live-demoer og kodeeksempler
 Alle live-demoene og kodeeksemplene fungerer utifra det som blir default-eksportert ut fra den gjeldende 
 `_<komponentnavn>.sample.js`-fila som ligger i rotmappa for modulene.
 
@@ -33,7 +33,7 @@ ligger bak for at man skal slippe å dykke langt ned i kodebasen om man kun er o
 eksisterende eller nye komponenter til kodebiblioteket.
 
 
-### API-et
+## API-et
 API-et består av en funksjon som blir default-eksportert ut fra 
 [denne modulen](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/app/utils/sampling/sampleDataGenerator.js).
 
@@ -47,7 +47,7 @@ API-et består av en funksjon som blir default-eksportert ut fra
 | tabOptions    | object          | false    | { ... se under } |
 
 
-#### baseType
+### baseType
 React-komponenten som komponent-siden lager live-demoen utifra (basert på `__docgenInfo`/`prop-types`).
 Om det er flere varianter av typen, må de angis i `type`-propTypen på komponenten.
 
@@ -67,7 +67,7 @@ bli forsøkt benyttet istedet. Om komponenten ikke har noen forskjellige typer v
 **OBS!!** For at det skal være mulig å hente ut __docgenInfo for komponenten må den bli default-eksportert ut av modulen. 
 
 
-#### modifierNames
+### modifierNames
 Eventuelle navn på bool-propTyper på komponenten som skal kunne toggles av og på, uavhengig av typen. 
 Resulterer i en gruppe checkbokser som kan toggles av og på. 
 Live-demo og kodeeksempel oppdateres av seg selv når checkboksene brukes.
@@ -77,7 +77,7 @@ Eksempel:
 export default generateSample(KnappBase, ['mini', 'spinner', 'disabled']);
 ```
 
-#### attrs
+### attrs
 Et objekt med (key,value)-par som til enhver tid skal brukes som attributter på komponenten som vises.
 
 Eksempel:
@@ -85,7 +85,7 @@ Eksempel:
 export default generateSample(Input, ['disabled', 'feil'], { label: 'Inputfelt-label' });
 ```
 
-#### children
+### children
 Må være en gyldig ReactNode. Brukes som children til enhver tid på komponenten som vises.
 
 Eksempel 1:
@@ -105,7 +105,7 @@ const children = [1, 2, 3].map((value) => (
 export default generateSample(ToggleGruppe, [], { onChange: () => {}, name: 'toggleGruppe' }, children);
 ```
 
-#### subType
+### subType
 En React-komponent som renderes istedetfor `baseType`, som trengs dersom man f.eks. trenger å ta
 utgangspunkt i propTypene til en `baseType`, men ønsker å rendere `subType` som live-demoen. 
 
@@ -121,7 +121,7 @@ export default generateSample(
 ```
 
 
-#### tabOptions
+### tabOptions
 Konfigurasjon av tabbene som vises for kodeeksemplet under Utviklerdokumentasjon.
 
 Det meste her skal være selvforklarende. Merk at `js`-objektet tar inn en string som er koden som skal vises. 
