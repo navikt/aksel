@@ -29,7 +29,7 @@ const GlobalWebpackConfig = {
                 include: [
                     path.resolve(__dirname, './../app')
                 ],
-                exclude: [/\.nobabel\.jsx?$/],
+                exclude: [/\.no-transpilation\.jsx?$/],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['react-docgen', 'transform-object-rest-spread']
