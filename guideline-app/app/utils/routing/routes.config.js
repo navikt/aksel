@@ -1,3 +1,4 @@
+import React from 'react';
 import resolveComponentRoutes from './routes.utils';
 
 import ColorPage from '../../ui/containers/color/ColorPage';
@@ -7,6 +8,9 @@ import LayoutPage from '../../ui/containers/layout/LayoutPage';
 import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
+import ToneOfVoicePage from '../../ui/containers/toneofvoice/ToneOfVoicePage';
+import OurValuesPage from '../../ui/containers/our-values/OurValuesPage';
+import StyleMainPage from '../../ui/containers/style/StyleMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
 
@@ -24,29 +28,46 @@ const routeConfig = [
         routes: componentRoutes
     },
     {
-        path: '/layout',
-        component: LayoutPage,
-        title: 'Layout'
+        path: '/styling',
+        component: StyleMainPage,
+        title: 'Styling',
+        routes: [
+            {
+                path: '/styling/layout',
+                component: LayoutPage,
+                title: 'Layout'
+            },
+            {
+                path: '/styling/typography',
+                component: TypographyPage,
+                title: 'Typografi'
+            },
+            {
+                path: '/styling/farger',
+                component: ColorPage,
+                title: 'Farger'
+            },
+            {
+                path: '/styling/ikoner',
+                component: IconPage,
+                title: 'Ikoner'
+            }
+        ]
+    },
+    {
+        path: '/toneofvoice',
+        component: ToneOfVoicePage,
+        title: 'Klarspråk'
+    },
+    {
+        path: '/values',
+        component: OurValuesPage,
+        title: 'Våre verdier'
     },
     {
         path: '/accessibility',
         component: AccessibilityPage,
         title: 'Tilgjengelighet'
-    },
-    {
-        path: '/typography',
-        component: TypographyPage,
-        title: 'Typografi'
-    },
-    {
-        path: '/farger',
-        component: ColorPage,
-        title: 'Farger'
-    },
-    {
-        path: '/ikoner',
-        component: IconPage,
-        title: 'Ikoner'
     }
 ];
 
