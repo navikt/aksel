@@ -57,7 +57,7 @@ const routeConfig = [
     {
         path: '/toneofvoice',
         component: ToneOfVoicePage,
-        title: 'Klarspråk'
+        title: 'Slik skriver vi'
     },
     {
         path: '/values',
