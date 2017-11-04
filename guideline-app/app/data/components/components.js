@@ -1,4 +1,5 @@
 import { sanitizeHtml } from './../../utils/dom/code-sampling.utils';
+import dfs from 'depth-first';
 
 const getModulesFromContext = (context) => {
     const modules = {};
@@ -35,21 +36,12 @@ const getTextData = () => {
     return textDataInCategories;
 };
 
-const getInstallInstructions = (moduleRef, pkgs) => {
-    let installInstructions = '';
-    const modulePathMatch = (moduleRef.match(/\.\/nav-frontend-([A-Z]|[a-z]|-)+\//));
-    if (modulePathMatch.index > -1) {
-        const foundPackage = (pkgs[`${modulePathMatch[0]}package.json`]);
-        if (foundPackage) {
-            installInstructions =
-                `npm install ${
-                    [foundPackage.name]
-                        .concat(
-                            Object.keys(foundPackage.peerDependencies || {})
-                        ).join(' ')} --save`;
-        }
-    }
-    return installInstructions;
+const getInstallInstructions = (moduleRef, edges) => {
+    const modulePathMatch = (moduleRef.match(/\.\/(nav-frontend-([A-Z]|[a-z]|-)+)\//));
+    const pkgName = modulePathMatch[1];
+
+    const dependencies = dfs(edges, pkgName).join(' ');
+    return `npm install ${dependencies} --save`;
 };
 
 const getNameOfModule = (moduleRef) => {
@@ -69,12 +61,18 @@ const getComponentData = () => {
     const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
 
+    const edges = Object.values(pkgs)
+        .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
+        .reduce((arr, [pkgName, pkgDependencies]) => {
+            return [ ...arr, ...pkgDependencies.map((dependency) => [ pkgName, dependency ])]
+        }, []);
+
     const componentData = {};
     sampleRefs.forEach((moduleRef) => {
         const moduleName = getNameOfModule(moduleRef);
         if (moduleName) {
             componentData[moduleName] = {
-                installInstructions: getInstallInstructions(moduleRef, pkgs),
+                installInstructions: getInstallInstructions(moduleRef, edges),
                 ...sampleModules[moduleRef].default
             };
         }
