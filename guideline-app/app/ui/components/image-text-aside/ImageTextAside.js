@@ -27,4 +27,8 @@ ImageTextAside.propTypes = {
     image: PT.shape({})
 };
 
+ImageTextAside.defaultProps = {
+    image: logoPng
+};
+
 export default ImageTextAside;

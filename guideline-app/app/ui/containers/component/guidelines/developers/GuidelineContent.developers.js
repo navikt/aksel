@@ -60,7 +60,8 @@ GuidelineContentForDevelopers = connect((state) => ({
 GuidelineContentForDevelopers.propTypes = {
     componentData: PT.shape({
         __docgenInfo: PT.shape({}),
-        react: PT.bool
+        react: PT.bool,
+        installInstructions: PT.string
     }).isRequired,
     activeType: PT.shape({
         component: PT.shape({

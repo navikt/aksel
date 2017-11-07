@@ -1,4 +1,3 @@
-import React from 'react';
 import resolveComponentRoutes from './routes.utils';
 
 import ColorPage from '../../ui/containers/color/ColorPage';
