@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
 import Highlight from 'react-highlight';
-import deepmerge from 'deepmerge';
 import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
@@ -10,31 +9,6 @@ import {
     getCSSCodeForComponent
 } from '../../../../../../utils/dom/code-sampling.utils';
 import './styles.less';
-
-const defaultTabOptions = {
-    react: {
-        show: true,
-        label: 'React',
-        hljs: 'html'
-    },
-    html: {
-        show: true,
-        defaultActive: true,
-        label: 'HTML',
-        hljs: 'html'
-    },
-    css: {
-        show: true,
-        label: 'CSS',
-        hljs: 'css'
-    },
-    js: {
-        show: false,
-        label: 'JavaScript',
-        hljs: 'js',
-        code: ''
-    }
-};
 
 class CodeExample extends Component {
 
@@ -64,7 +38,7 @@ class CodeExample extends Component {
     }
 
     getTabbarItems() {
-        const tabOptions = deepmerge(defaultTabOptions, this.props.componentData.tabOptions || {});
+        const tabOptions = this.props.componentData.tabOptions;
         const namesOfAllPossibleTabOptions = Object.keys(tabOptions);
         const options = namesOfAllPossibleTabOptions
             .filter((tabName) => (tabOptions[tabName].show === true))
