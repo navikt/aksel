@@ -15,49 +15,81 @@ const AboutPage = () => (
         </div>
         <div className="aboutPage__content">
             <Sidetittel>NAV Designsystemet</Sidetittel>
-            <div className="section">
+            <div className="smallSection">
                 <Ingress>
-                    NAV Designsystemet er en samling av verktøy og metodikker som gir muligheten til å kommunisere og
-                    løse utfordringer på en konsistent og enhetlig måte, gjennom gjenbruk av design, kode og felles
-                    prinsipper for brukeropplevelse.
-
-                    Designsystemet er basert på 4 essensielle områder: Identiteten til NAV, verktøy, metodikk og
+                    NAV skal være enhetlig og tydelig i det vi kommuniserer. Profil og design er en stor del av vår
+                    identitet, og derfor har vi samlet verktøy og metodikk på ett sted for å gjøre det litt enklere for
+                    oss som jobber i NAV.
+                </Ingress>
+                <Ingress className="smallSection">
+                    For å jobbe mer effektivt, og skape en gjenkjennbarhet, ønsker vi en stor grad av gjenbruk av
+                    design, kode og prinsipper for brukeropplevelse.
+                </Ingress>
+                <Ingress className="smallSection">
+                    Designsystemet vårt baserer seg på fire viktige områder: NAVs profil, verktøy, metodikk og
                     samhandling
                 </Ingress>
             </div>
 
             <div className="section">
-                <Undertittel>Identiteten til NAV</Undertittel>
+                <Undertittel>NAVs profil</Undertittel>
                 <Normaltekst>
-                    Verktøykasse med visuelle elementer for å kommunisere med NAV som avsender.
-                    Her kan man finne fargepaletten, layout, typografi, ikonene  og illustrasjon.
+                    Verktøykassen vår består av visuelle elementer som bidrar til å kommunisere at NAV er avsender.
+                    Her kan man finne fargepaletten, hvordan vi bygger opp layoutene våre på nett, typografi,
+                    ikon- og illustrasjonsbibliotek.
                 </Normaltekst>
             </div>
 
             <div className="section">
                 <Undertittel>Verktøy</Undertittel>
                 <Normaltekst>
-                    NAV has sitt eget frontend-rammeverk (nav-frontend).&nbsp;
-                    <a className="lenke" href="/#/components">
-                        Her er oversikten på komponentene som finnes der.
-                    </a>
+                    NAV har sitt eget frontend-rammeverk som vi kaller for NAV Frontend. Her er oversikten på
+                    komponentene som finnes der, perfekt for et utgangspunkt i design og gjenbruk av CSS.
                 </Normaltekst>
-
             </div>
 
             <div className="section">
                 <Undertittel>Metodikk</Undertittel>
                 <Normaltekst>
-                    En viktig del av hvordan vi oppnår enhetlige brukeropplevesler, er at vi tar utgangspunkt i de samme
-                    prinsippene for design, klarspråk og tilgjengelighet.
+                    En viktig del av det å skape en helhetlig brukeropplevelse, er å starte fra de samme prinsippene.
+                    Dette gjelder designprinsippene våre, den praksisen vi har for å skrive klart og tydelig, og
+                    ikke minst prinsipper for tilgjengelighet.
                 </Normaltekst>
             </div>
 
             <div className="section">
                 <Undertittel>Samhandling</Undertittel>
                 <Normaltekst>
-                    Hovedaktørene i designsystemet består av de menneksene som arbeider for å løse utfordringer sammen.
-                    Ta gjerne kontakt med designsystem-teamet for mer informasjon om hvordan vi starter samarbeidet.
+                    Systemet skal bidra til samhandling, og er laget for de menneskene som jobber sammen i NAV for å
+                    løse utfordringene vi møter på. Ta gjerne kontakt med oss for mer informasjon om hvordan vi kan
+                    starte dette samarbeidet.
+                </Normaltekst>
+            </div>
+
+            <div className="section">
+                <Undertittel>
+                    Designsystem-teamet
+                </Undertittel>
+
+                <Normaltekst>
+                    Designsystemet vårt har sin hovedstyrke i tverrfaglig samarbeid med de prosjektene og personene
+                    som lager produkter og tjenester i NAV.
+                </Normaltekst>
+
+                <Normaltekst>
+                    Teamet som er ansvarlig for designsystemet består av:
+                </Normaltekst>
+
+                <ul>
+                    <li>Universell utforming - Karina Ludwig</li>
+                    <li>Interaksjonsdesign - Thea Steen Hellebust</li>
+                    <li>Kommunikasjon - Mathilde Skjelbostad</li>
+                    <li>Frontend - Erlend Vige</li>
+                    <li>Visuelt design - Sergio Haisch.</li>
+                </ul>
+
+                <Normaltekst>
+                    Har du noen spørsmål eller kommentarer, ta gjerne kontakt.
                 </Normaltekst>
             </div>
         </div>

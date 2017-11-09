@@ -13,7 +13,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             <Router>
                 <div className="app">
                     <Header />
-                    <div style={{ position: 'relative' }}>
+                    <div style={{ position: 'relative', marginBottom: '80px' }}>
                         <div>
                             <LeftNavigation />
                         </div>
