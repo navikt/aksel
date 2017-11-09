@@ -1,17 +1,18 @@
 import React from 'react';
-
 import {
     Ingress,
     Normaltekst,
     Sidetittel,
     Undertittel
 } from './../../../../../packages/node_modules/nav-frontend-typografi';
-
+import designUtviklingPng from './../../../assets/images/about/designutvikling.png';
 import './styles.less';
 
 const AboutPage = () => (
     <div className="aboutPage">
-        <div className="aboutPage__header" />
+        <div className="aboutPage__header">
+            <img src={designUtviklingPng} alt="" />
+        </div>
         <div className="aboutPage__content">
             <Sidetittel>NAV Designsystemet</Sidetittel>
             <div className="section">

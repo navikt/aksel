@@ -26,7 +26,7 @@ const NAVLogo = () => (
     <svg
         xmlns="http://www.w3.org/2000/svg"
         className="leftNavigation__logoSection__logo"
-        width="148"
+        width="90"
         viewBox="0 0 269 169"
     >
         <defs>
