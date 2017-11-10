@@ -1,10 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import { sanitizeHtml } from './../../../utils/dom/code-sampling.utils';
-
-// eslint-disable-next-line import/extensions
-import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 import './styles.less';
 
 const navFrontendifyHtml = (html) => (
