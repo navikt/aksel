@@ -16,8 +16,9 @@ const navFrontendifyHtml = (html) => (
 
 class MdContent extends React.Component {
     componentWillMount() {
+        this.combinedParagraphs = '';
         this.paragraphs = this.props.content
-            .split(/\n\n/g)
+            .split(/\n/g)
             .filter(
                 (paragraph) =>
                     (paragraph && paragraph.length > 0)
@@ -34,12 +35,17 @@ class MdContent extends React.Component {
         <div className="mdContent">
             {
                 this.paragraphs.map((paragraph, i) => {
-                    let sanitizedHtml = sanitizeHtml(
-                        paragraph,
-                        { ALLOWED_TAGS: this.props.allowedTags }
-                    );
+                    if (!paragraph.startsWith('<p') && !paragraph.startsWith('<h4')) {
+                        this.combinedParagraphs += paragraph;
+                        if (this.paragraphs[i + 1] &&
+                            (this.paragraphs[i + 1].startsWith('<p') || this.paragraphs[i + 1].startsWith('<h4'))) {
+                            const content = this.renderMdContentWrappedInDiv(this.combinedParagraphs, i);
+                            this.combinedParagraphs = '';
+                            return content;
+                        }
+                    }
+                    let sanitizedHtml = sanitizeHtml(paragraph, { ALLOWED_TAGS: this.props.allowedTags });
                     sanitizedHtml = navFrontendifyHtml(sanitizedHtml);
-
                     if (this.props.component) {
                         return this.renderMdContentWrappedInComponent(sanitizedHtml, i);
                     }
