@@ -28,7 +28,7 @@ const getTextData = () => {
 
         textDataInCategories[componentName] = {
             ...textDataInCategories[componentName],
-            [textCategory]: sanitizeHtml(textDataRaw[textDataKey])
+            [textCategory]: textDataRaw[textDataKey]
         };
     });
 
