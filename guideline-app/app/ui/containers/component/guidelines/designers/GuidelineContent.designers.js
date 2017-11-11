@@ -7,8 +7,6 @@ import MdContent from './../../../../components/md-content/MdContent';
 
 class GuidelineContentForDesigners extends Component {
 
-    ALLOWED_TAGS = ['a', 'ul', 'li', 'ol', 'h4', 'img', 'br'];
-
     renderHowToUseSection() {
         return (
             <div className="section">
