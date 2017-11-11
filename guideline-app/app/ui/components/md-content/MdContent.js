@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
-
-// eslint-disable-next-line import/extensions
 import './styles.less';
 
 class MdContent extends React.Component {

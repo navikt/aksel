@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 
-import {
-    Undertittel,
-    Normaltekst
-} from './../../../../../../../packages/node_modules/nav-frontend-typografi';
+import { Undertittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import MdContent from './../../../../components/md-content/MdContent';
 

@@ -5,6 +5,7 @@ import AboutPage from '../../ui/containers/about/AboutPage';
 import ComponentMainPage from '../../ui/containers/component/main/ComponentMainPage';
 import LayoutPage from '../../ui/containers/layout/LayoutPage';
 import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
+import AccessibilityGuidelinePage from '../../ui/containers/accessibility/content-pages/AccessibilityGuidelinePage';
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
 import ToneOfVoicePage from '../../ui/containers/toneofvoice/ToneOfVoicePage';
@@ -66,7 +67,14 @@ const routeConfig = [
     {
         path: '/accessibility',
         component: AccessibilityPage,
-        title: 'Tilgjengelighet'
+        title: 'Tilgjengelighet',
+        routes: [
+            {
+                path: '/accessibility/guidelines',
+                component: AccessibilityGuidelinePage,
+                title: 'Retningslinjer'
+            }
+        ]
     }
 ];
 

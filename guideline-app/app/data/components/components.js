@@ -1,5 +1,3 @@
-import { sanitizeHtml } from './../../utils/dom/code-sampling.utils';
-
 const getModulesFromContext = (context) => {
     const modules = {};
     context.keys().forEach((moduleRef) => {

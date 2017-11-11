@@ -4,6 +4,8 @@ import { HashRouter as Router } from 'react-router-dom';
 import { routes } from './../../../utils/routing/routes.component';
 import Header from './../../components/header/Header';
 import LeftNavigation from './../../components/left-navigation/LeftNavigation';
+// eslint-disable-next-line import/extensions
+import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 import './styles.less';
 
