@@ -120,7 +120,6 @@
     "directory-named-webpack-plugin": "^2.2.3",
     "dompurify": "^0.9.0",
     "js-beautify": "^1.6.14",
-    "jsx-to-string": "^1.1.0",
-    "markdown-loader": "^2.0.1"
+    "jsx-to-string": "^1.1.0"
   }
 }
