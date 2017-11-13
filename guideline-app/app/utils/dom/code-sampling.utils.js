@@ -5,7 +5,7 @@ import renderComponentWithModifiersAndChildren from './render.utils';
 
 const beautifyCss = require('js-beautify').css;
 
-export const sanitizeHtml = (html, options = {}) => (DOMPurify.sanitize(html, options));
+export const sanitizeHtml = (html) => (DOMPurify.sanitize(html));
 
 export const getShallowComponent = (component, modifiers, children) =>
     (renderComponentWithModifiersAndChildren(component, modifiers, children, true));

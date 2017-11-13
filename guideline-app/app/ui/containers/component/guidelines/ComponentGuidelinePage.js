@@ -34,7 +34,7 @@ class ComponentGuidelinePage extends React.Component {
     }
 
     renderIngress() {
-        return (<MdContent content={this.props.textData.ingress} component={Ingress} />);
+        return (<MdContent content={this.props.textData.ingress} typography="ingress" />);
     }
 
     renderGuidelinePageWithDesignGuidelines() {

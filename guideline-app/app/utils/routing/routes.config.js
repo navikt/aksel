@@ -1,4 +1,3 @@
-import React from 'react';
 import resolveComponentRoutes from './routes.utils';
 
 import ColorPage from '../../ui/containers/color/ColorPage';
@@ -6,9 +5,9 @@ import AboutPage from '../../ui/containers/about/AboutPage';
 import ComponentMainPage from '../../ui/containers/component/main/ComponentMainPage';
 import LayoutPage from '../../ui/containers/layout/LayoutPage';
 import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
+import AccessibilityGuidelinePage from '../../ui/containers/accessibility/content-pages/AccessibilityGuidelinePage';
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
-import ToneOfVoicePage from '../../ui/containers/toneofvoice/ToneOfVoicePage';
 import OurValuesPage from '../../ui/containers/our-values/OurValuesPage';
 import StyleMainPage from '../../ui/containers/style/StyleMainPage';
 
@@ -55,11 +54,6 @@ const routeConfig = [
         ]
     },
     {
-        path: '/toneofvoice',
-        component: ToneOfVoicePage,
-        title: 'Slik skriver vi'
-    },
-    {
         path: '/values',
         component: OurValuesPage,
         title: 'Våre verdier'
@@ -67,7 +61,14 @@ const routeConfig = [
     {
         path: '/accessibility',
         component: AccessibilityPage,
-        title: 'Tilgjengelighet'
+        title: 'Tilgjengelighet',
+        routes: [
+            {
+                path: '/accessibility/guidelines',
+                component: AccessibilityGuidelinePage,
+                title: 'Retningslinjer'
+            }
+        ]
     }
 ];
 

@@ -14,8 +14,10 @@ const colors = {
         hex: lessvars['@navMorkGra'],
         label: 'NAV Mørk grå',
         wcag: 'AAA 11.55',
-        description: 'NAV Mørk grå er vår tekstfarge og en variasjon av grå som ikke oppfattes så skarp på en ' +
-        'lys bakgrunn. Hvit eller NAV Lys grå, er mer behagelig å se på og øker lesbarheten',
+        description: `
+            NAV Mørk grå er vår tekstfarge og en variasjon av grå som ikke oppfattes så skarp på en 
+            lys bakgrunn. Hvit eller NAV Lys grå, er mer behagelig å se på og øker lesbarheten
+        `,
         contrastColors: {
             hvit: { hex: '#fff', wcag: 'AAA 11.55', label: 'mørk grå / hvit' },
             navLysGra: { hex: lessvars['@navLysGra'], wcag: 'AAA 10.05', label: 'mørk grå / lys grå' },

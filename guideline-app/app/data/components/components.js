@@ -1,4 +1,3 @@
-import { sanitizeHtml } from './../../utils/dom/code-sampling.utils';
 import dfs from 'depth-first';
 
 const getModulesFromContext = (context) => {
@@ -29,7 +28,7 @@ const getTextData = () => {
 
         textDataInCategories[componentName] = {
             ...textDataInCategories[componentName],
-            [textCategory]: sanitizeHtml(textDataRaw[textDataKey])
+            [textCategory]: textDataRaw[textDataKey]
         };
     });
 
@@ -63,9 +62,9 @@ const getComponentData = () => {
 
     const edges = Object.values(pkgs)
         .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
-        .reduce((arr, [pkgName, pkgDependencies]) => {
-            return [ ...arr, ...pkgDependencies.map((dependency) => [ pkgName, dependency ])]
-        }, []);
+        .reduce((arr, [pkgName, pkgDependencies]) => (
+            [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
+        ), []);
 
     const componentData = {};
     sampleRefs.forEach((moduleRef) => {

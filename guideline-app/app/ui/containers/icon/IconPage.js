@@ -1,6 +1,5 @@
 import React from 'react';
 import { // eslint-disable-line import/no-extraneous-dependencies
-    EtikettLiten,
     Undertittel,
     Normaltekst,
     Ingress

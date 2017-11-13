@@ -37,13 +37,16 @@ eksisterende eller nye komponenter til kodebiblioteket.
 API-et består av en funksjon som blir default-eksportert ut fra 
 [denne modulen](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/app/utils/sampling/sampleDataGenerator.js).
 
-| Parameter     | Type            | Required | Default          |
+Denne funksjonen tar et objekt med attributtene som er beskrevet i tabellen under. Det objektet som blir angitt  
+blir merget sammen med defaultverdiene og overrider kun der det er eksplisitt sagt hva verdien skal være. 
+
+| Attributtnavn | Type            | Required | Default          |
 | ------------- | --------------  |:--------:| ---------------- | 
 | baseType      | function        | true     | undefined        |
 | modifierNames | array (string)  | false    | []               |
-| attrs         | object          | false    | undefined        |
-| children      | node            | false    | undefined        |
-| subType       | function        | false    | undefined        |
+| attrs         | object          | false    | {}               |
+| children      | node            | false    | null             |
+| subType       | function        | false    | null             |
 | tabOptions    | object          | false    | { ... se under } |
 
 
@@ -74,7 +77,11 @@ Live-demo og kodeeksempel oppdateres av seg selv når checkboksene brukes.
 
 Eksempel:
 ```js
-export default generateSample(KnappBase, ['mini', 'spinner', 'disabled']);
+export default generateSample({
+    baseType: KnappBase,
+    modifierNames: ['mini', 'spinner', 'disabled'],
+    children: 'Slik ser en Knapp ut'
+});
 ```
 
 ### attrs
@@ -82,7 +89,11 @@ Et objekt med (key,value)-par som til enhver tid skal brukes som attributter på
 
 Eksempel:
 ```js
-export default generateSample(Input, ['disabled', 'feil'], { label: 'Inputfelt-label' });
+export default generateSample({
+    baseType: Input,
+    modifierNames: ['disabled', 'feil'],
+    attrs: { label: 'Inputfelt-label' }
+});
 ```
 
 ### children
@@ -90,7 +101,11 @@ Må være en gyldig ReactNode. Brukes som children til enhver tid på komponente
 
 Eksempel 1:
 ```js
-export default generateSample(Lenkepanel, [], { href: '/# ' }, 'Slik ser et lenkepanel ut');
+export default generateSample({
+    baseType: Lenkepanel,
+    attrs: { href: '/# ' },
+    children: 'Slik ser et lenkepanel ut'
+});
 ```
 
 Eksempel 2:
@@ -102,7 +117,13 @@ const children = [1, 2, 3].map((value) => (
     )
 );
 
-export default generateSample(ToggleGruppe, [], { onChange: () => {}, name: 'toggleGruppe' }, children);
+export default generateSample({
+    baseType: ToggleGruppe,
+    attrs: {
+        onChange: () => {}, name: 'toggleGruppe'
+    },
+    children
+});
 ```
 
 ### subType
@@ -111,13 +132,12 @@ utgangspunkt i propTypene til en `baseType`, men ønsker å rendere `subType` so
 
 `Textarea` vs. `TextareaControlled` er et eksempel på dette:
 ```js
-export default generateSample(
-    Textarea,
-    ['feil', 'disabled'],
-    { label: 'Textarea-label', maxLength: 20 },
-    null,
-    TextareaControlled
-);
+export default generateSample({
+    baseType: Textarea,
+    subType: TextareaControlled,
+    modifierNames: ['feil', 'disabled'],
+    attrs: { label: 'Textarea-label', maxLength: 20 }
+});
 ```
 
 
@@ -130,7 +150,7 @@ Eksempel på bruk av `js` ligger i `nav-frontend-modal/_modal.sample.js`.
 
 Default-verdi:
 ```js
-{
+tabOptions: {
     react: {
         show: true,
         label: 'React'

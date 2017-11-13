@@ -1,13 +1,33 @@
+@import '../../../../../packages/node_modules/nav-frontend-typografi-style/src/index.less';
+@import './../../../../../packages/node_modules/nav-frontend-lenker-style/src/lenker-style.less';
+
 .mdContent {
-  .typo-element {
-    // This needs to be done to make sure #### headings are in line with paragraphs.
-    // TODO: Find a way to avoid this
-    padding: 8px 8px 8px 0px !important;
+  max-width: 640px;
+
+  &--normal {
+    p {
+      .typo-normal-mixin();
+      margin: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      .typo-element-mixin();
+      padding: 8px 8px 0px 8px !important;
+      margin: 0;
+    }
+
+    a {
+      .lenke-mixin();
+    }
+
+    ul {
+      margin: 0;
+    }
   }
 
-  .typo-normal {
-    img {
-      max-width: 640px;
+  &--ingress {
+    p {
+      .typo-ingress-mixin();
     }
   }
 }

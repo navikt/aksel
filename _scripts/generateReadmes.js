@@ -35,15 +35,16 @@ glob('./packages/node_modules/**/package.json', { dot: true }, (err, files) => {
 
     const edges = pkgs
         .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
-        .reduce((arr, [pkgName, pkgDependencies]) => {
-            return [ ...arr, ...pkgDependencies.map((dependency) => [ pkgName, dependency ])]
-        }, []);
+        .reduce((arr, [pkgName, pkgDependencies]) => (
+            [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
+        ), []);
 
     pkgs.forEach((pkg) => {
         const pkgName = pkg.name;
         const config = createConfig(pkgName, edges);
         const MD = path.join(__dirname, '..', 'packages', 'node_modules', pkgName, 'README.md');
-        markdownMagic(MD, config, (err) => err && console.log('err',err));
+        // eslint-disable-next-line no-console
+        markdownMagic(MD, config, (error) => error && console.log('err', error));
     });
 });
 
