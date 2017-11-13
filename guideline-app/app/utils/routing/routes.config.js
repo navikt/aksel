@@ -8,7 +8,6 @@ import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPa
 import AccessibilityGuidelinePage from '../../ui/containers/accessibility/content-pages/AccessibilityGuidelinePage';
 import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
-import ToneOfVoicePage from '../../ui/containers/toneofvoice/ToneOfVoicePage';
 import OurValuesPage from '../../ui/containers/our-values/OurValuesPage';
 import StyleMainPage from '../../ui/containers/style/StyleMainPage';
 
@@ -53,11 +52,6 @@ const routeConfig = [
                 title: 'Ikoner'
             }
         ]
-    },
-    {
-        path: '/toneofvoice',
-        component: ToneOfVoicePage,
-        title: 'Slik skriver vi'
     },
     {
         path: '/values',
