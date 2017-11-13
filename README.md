@@ -29,7 +29,7 @@ Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra fø
 installer denne i rot-mappen og legg til avhengigheten som en `peerDependency` i din modul.
 
 #### Kommandoer:
-* `npm start` - Starter storybook for utvikling
+* `npm start` - Starter sandbox-appen under `development/app` for utvikling
 * `npm run new` - Kjører scaffolding-script
 
 ## Kodekvalitet
@@ -69,26 +69,15 @@ samme som er definert i rot-mappen
 Det er satt opp ett CircleCI-bygg for repoet.
 Pull-requests bygges derfor automatisk med en gang de pushes til remote.
 
-### Byggesteg på `master`
-1. git checkout
-2. innstaller avhengigheter
-3. kodekvalitet og tester
-4. bygg JS-filer
-5. publiser moduler
-6. sett app-config versjon
-7. bygg storybook
-8. push git-tags og app-config artifakt
-9. bygg docker-image
-10. bestill deploy
-
-Hvis det oppdages at ingen moduler er endret (steg 5) vil byggejobben stoppe der.
-
-### Byggesteg på andre branches
-1. git checkout
-2. merge med master
-3. innstaller avhengigheter
-4. kodekvalitet og tester
-5. bygg JS-filer
+### Byggesteg
+1. Installering av dependencies
+2. Versjonssjekking - et script for å sjekke av dependencies er konsekvente på tvers
+av moduler
+3. Linting av LESS og JS
+4. Bygg av moduler
+5. Bygg av Guideline-appen
+6. Publisering av pakker til npmjs
+7. Deployment av Guideline-appen til GitHub Pages
 
 ## Scripts
 Det ligger flere hjelpe-scripts i mappen `_scripts`. 
