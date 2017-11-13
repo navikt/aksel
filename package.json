@@ -21,8 +21,6 @@
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp svg-icon",
-    "buildstorybook": "build-storybook -o dist",
-    "deploystorybook": "gh-pages -d dist",
     "start": "start-storybook -p 6006",
     "dev": "npm start",
     "watch": "npm start",

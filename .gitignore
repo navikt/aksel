@@ -12,4 +12,4 @@ examples/webpack/out
 .gitattributes
 .iml
 .DS_Store
-stories.js
+development-sandbox.js
