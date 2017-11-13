@@ -21,7 +21,7 @@
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp svg-icon",
-    "start": "webpack-dev-server --hot --inline --config development/conf/webpack.dev.js",
+    "start": "webpack-dev-server --hot --inline --config development/conf/webpack.config.js",
     "dev": "npm start",
     "watch": "npm start",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",

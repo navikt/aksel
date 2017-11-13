@@ -1,16 +1,21 @@
 const webpack = require('webpack');
 const path = require('path');
+const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
 const vendors = [
     'react',
-    'react-dom',
-    'react-router-dom',
-    'react-redux',
-    'redux',
-    'redux-logger'
+    'react-dom'
 ];
 
 const GlobalWebpackConfig = {
+    devServer: {
+        historyApiFallback: true,
+        contentBase: [
+            path.join(__dirname, './../app'),
+            path.join(__dirname, './../../packages/')
+        ],
+        watchContentBase: true
+    },
     entry: {
         scripts: './development/app/bootstrap.js',
         vendors
@@ -18,18 +23,19 @@ const GlobalWebpackConfig = {
     module: {
         rules: [
             {
-                test: /\.png$/,
+                test: /\.html$/,
                 use: [
-                    { loader: 'file-loader?name=[name].[ext]' }
+                    { loader: 'html-loader' },
+                    { loader: 'file-loader' }
                 ]
             },
             {
                 test: /\.jsx?$/,
                 loader: 'babel-loader',
                 include: [
-                    path.resolve(__dirname, './../app')
+                    path.resolve(__dirname, './../app'),
+                    path.resolve(__dirname, './../../packages')
                 ],
-                exclude: [/\.no-transpilation\.jsx?$/],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['react-docgen', 'transform-object-rest-spread']
@@ -51,30 +57,22 @@ const GlobalWebpackConfig = {
                         }
                     }
                 ]
-            },
-            {
-                test: /\.md$/,
-                use: [
-                    { loader: 'raw-loader' }
-                ]
             }
         ]
     },
-    resolve: {
-        alias: {
-            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules')
-        }
+    output: {
+        path: path.join(__dirname, 'dist'),
+        publicPath: '/dist/',
+        filename: '[name].js'
     },
-    externals: {
-        'react/addons': true,
-        'react/lib/ExecutionEnvironment': true,
-        'react/lib/ReactContext': true,
-        'react-addons-test-utils': 'react-dom'
+    resolve: {
+        plugins: [
+            new DirectoryNamedWebpackPlugin({
+                honorPackage: ['jsnext:main']
+            })
+        ]
     },
     plugins: [
-        new webpack.ProvidePlugin({
-            'React': 'react' // eslint-disable-line quote-props
-        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors'
         })
