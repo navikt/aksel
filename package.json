@@ -21,7 +21,7 @@
     "build": "gulp build",
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp svg-icon",
-    "start": "start-storybook -p 6006",
+    "start": "webpack-dev-server --hot --inline --config development/conf/webpack.dev.js",
     "dev": "npm start",
     "watch": "npm start",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
