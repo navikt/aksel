@@ -1,7 +1,7 @@
 machine:
   timezone: Europe/Oslo
   node:
-    version: 5.1.1
+    version: 8.2.1
 
 dependencies:
   pre:
