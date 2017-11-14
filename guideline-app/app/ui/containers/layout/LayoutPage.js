@@ -12,12 +12,12 @@ const LayoutPage = () => (
         <p className="layoutPage__lead">
             Vår grid er oppbygd av 12 responsive kolonner med fast 16 px gutter og 32px margins
         </p>
-        <img className="gridImage" src={gridPng} alt="" />
+        <img className="gridImage" src={gridPng} alt="Grid med 12 kolonner med margins" />
 
 
         <div className="layoutPage__section">
             <h1>Layout-eksempler</h1>
-            <img className="gridImage" src={layoutExamplesPng} alt="" />
+            <img className="gridImage" src={layoutExamplesPng} alt="eksempler på hvordan elementer kan plasseres i NAVs grid" />
         </div>
 
     </div>
