@@ -64,7 +64,7 @@ satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systeme
 * `npm run checkversions` - sjekker at avhengighetene til modulene er de 
 samme som er definert i rot-mappen
 
-## Andre kommandoer
+### Andre kommandoer
 * `npm run start-guideline-app` - Starter opp utviklingsmiljø for utvikling av Guideline-appen`
 * `npm run build-guideline-app` - Bygger Guideline-appen til `/guideline-app/dist`
 * `npm run build` - Bygger alle JS-filer
