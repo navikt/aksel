@@ -1,13 +1,3 @@
-# react-module: nav-frontend-etiketter
-
-<!-- AUTO-GENERATED-CONTENT:START (INSTALL) -->
-### Installering:
-```
-npm install nav-frontend-etiketter babel-polyfill babel-runtime classnames nav-frontend-core nav-frontend-etiketter-style nav-frontend-typografi nav-frontend-typografi-style prop-types react --save
-```
-<!-- AUTO-GENERATED-CONTENT:END *-->
-
-<!-- AUTO-GENERATED-CONTENT:START (DISCLAIMER) -->
 ### Disclaimer:
 NPM-pakken(e) publisert av NAV IT er midlertidig unscoped'e, 
 men vil bli prefikset og scopet med @navikt i fremtiden. Vi 
@@ -22,5 +12,4 @@ NAV IT tar ikke ansvar for eventuell bruk av annen programvare som
 fremstilles som om de skulle vært publisert av NAV.
 
 Vi refererer ellers til MIT-lisensen som ligger vedlagt i repository:
-https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules/nav-frontend-etiketter
-<!-- AUTO-GENERATED-CONTENT:END *-->
+https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules/<%name%>
