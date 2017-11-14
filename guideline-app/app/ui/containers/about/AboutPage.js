@@ -11,7 +11,7 @@ import './styles.less';
 const AboutPage = () => (
     <div className="aboutPage">
         <div className="aboutPage__header">
-            <img src={designUtviklingPng} alt="" />
+            <img src={designUtviklingPng} alt="design-samarbeid" />
         </div>
         <div className="aboutPage__content">
             <Sidetittel>NAV Designsystemet</Sidetittel>
