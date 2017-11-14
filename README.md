@@ -1,38 +1,46 @@
 # NAV-frontend-moduler
-Dette er et monorepo for alle NAVs felleskomponenter/fellesmoduler, samt implementasjonen av en webapp (under ```/guideline-app```) 
-som sitter på dokumentasjon om bruken og implementasjonen av disse. 
+Dette er et monorepo for alle NAVs felleskomponenter/fellesmoduler, samt implementasjonen av en webapp som sitter på 
+dokumentasjon om bruken og implementasjonen av disse. 
 
 Alle komponentene i nav-frontend publiseres som npm-pakker på npmjs.com. 
 En fullstendig liste over disse ligger [her](https://www.npmjs.com/org/navikt).
 Hver enkelt pakke har sine egne installasjonsinstruksjoner som også ligger publisert der.
- 
-## Bruke moduler
-For å ta i bruk en modul, sjekk dokumentasjon under Komponenter-menyvalget i 
-[Guideline-appen](https://navikt.github.io/nav-frontend-moduler).
 
-## Bidra med nye komponenter
-Det oppfordres til at alle blir med og bidrar med nye moduler slik at mest mulig av 
-fremtidige moduler er å finne her.
+Kildekoden til Guideline-appen (som ligger publisert [her](https://navikt.github.io/nav-frontend-moduler)) ligger adskilt
+fra komponentene, og er lagt under ```guideline-app/``` på rot av prosjektet. Guideline-appen er i relativt stor grad
+avhengig av komponentene som ligger under ```packages/node_modules```, men denne avhengigheten går bare en vei (dvs.
+at komponentene er ikke på noen som helst måte avhengig av appen).
 
-### Kom igang
-For å komme igang med å lage nye moduler: 
-```
-git clone git@github.com:navikt/nav-frontend-moduler.git
-cd nav-frontend-moduler
-npm install
-npm start
-npm run new
-```
+Guideline-appen har sine egen README-filer som ligger her:
+* [Egen README spisset mot designere](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.design.md)
+* [Egen README spisset mot utviklere](https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.developer.md)
+
+For å komme igang med å bruke komponentene, benytt deg av [Guideline-appen](https://navikt.github.io/nav-frontend-moduler)
+for dokumentasjon, [npmjs](https://www.npmjs.com/org/navikt) for npm-pakker, og ta en titt på de forskjellige 
+eksemplene under ```examples/``` for å se forskjellige eksempler på oppsett.
+
+## Bidra med utvikling av nye og eksisterende komponenter
+Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksisterende moduler vedlike, 
+slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
+
+### Oppstart av utviklingsmiljø
+Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
+som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server. 
+
+Se kommentarene i `/development/app/components/App.js` for mer info.
+
+### Utvikling av nye komponenter
+For å raskt komme igang med å lage nye moduler, er det laget et scaffolding-script som kan kjøres for å få
+en fiks ferdig struktur som er konsistent med hvordan eksisterende modulene er bygd opp fra før, slik at du
+kan fokusere på kodingen av komponenten du skal lage.
+
+Dette scaffolding-scriptet kjøres opp med ```npm run new```.
 
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen. 
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av, 
 installer denne i rot-mappen og legg til avhengigheten som en `peerDependency` i din modul.
 
-#### Kommandoer:
-* `npm start` - Starter sandbox-appen under `development/app` for utvikling
-* `npm run new` - Kjører scaffolding-script
-
-## Kodekvalitet
+### Kodekvalitet
 For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har 
 blitt avklart/diskutert i NAVs frontendforum.
@@ -47,7 +55,7 @@ to forskjellige webpack-bygg både med og uten `style-loader`. Nye moduler blir 
 satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systemet og for 
 å komme igang med å bruke biblioteket. 
 
-**NB** her må man faktisk kjøre `npm install` i de to mappene.
+**NB!** I `examples/`-eksemplene må man kjøre `npm install` dersom man tenker å kjøre opp appene lokalt.
 
 ### Kommandoer:
 * `npm run lint` - kjører linting av JS og LESS
@@ -57,13 +65,14 @@ satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systeme
 samme som er definert i rot-mappen
 
 ## Andre kommandoer
-* `npm run create` - Samme som `npm run new`
+* `npm run start-guideline-app` - Starter opp utviklingsmiljø for utvikling av Guideline-appen`
+* `npm run build-guideline-app` - Bygger Guideline-appen til `/guideline-app/dist`
 * `npm run build` - Bygger alle JS-filer
 * `npm run buildfonts` - Bygger alle font-filer (Lager css-filer med base64 inlinet fonter)
 * `npm run buildicons` - Bygger opp react-komponenten utifra svg'ene i ikon-pakken
+* `npm run create` - Samme som `npm run new`
 * `npm run dev` - Samme som `npm start`
 * `npm run watch` - Samme som `npm start`
-
 
 ## Byggemiljø
 Det er satt opp ett CircleCI-bygg for repoet.
