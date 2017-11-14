@@ -13,7 +13,7 @@ class ComponentMainPage extends React.Component {
         return (
             <div className="componentMainPage">
                 <div className="componentMainPage__content">
-                    <img src={componentsImg} alt="" />
+                    <img src={componentsImg} alt="Sammspill av kode, CSS, Github og kaffe" />
                     <div className="componentMainPage__content__text">
                         <Sidetittel>Komponenter</Sidetittel>
                         <Ingress>
