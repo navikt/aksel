@@ -48,7 +48,7 @@ export default function AccessibilityMainPage() {
                 width="640"
                 height="480"
                 frameBorder="0"
-                title="Informasjonsvideo om universell utforming av IKT (from Difi on Vimeo)"
+                title="Informasjonsvideo om universell utforming av IKT (fra Difi på Vimeo)"
                 allowFullScreen
             />
 
@@ -121,6 +121,10 @@ export default function AccessibilityMainPage() {
                         </a>
                     </li>
                 </ul>
+            </div>
+            
+            <div className="section">
+            * <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">
             </div>
         </div>
     );
