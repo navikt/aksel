@@ -57,7 +57,7 @@ satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systeme
 
 **NB!** I `examples/`-eksemplene må man kjøre `npm install` dersom man tenker å kjøre opp appene lokalt.
 
-### Kommandoer:
+### Kommandoer
 * `npm run lint` - kjører linting av JS og LESS
 * `npm run js:lint` - kjører linting av JS
 * `npm run less:lint` - kjører linting av LESS
