@@ -1,0 +1,48 @@
+@import './../../../assets/styles/base';
+
+.colorSample {
+  color: white;
+  height: 200px;
+  width: 188px;
+  padding: @GL_BASE_UNIT * 2;
+  opacity: 0.9;
+  cursor: pointer;
+  border-radius: 2px;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &__colorInfo {
+    vertical-align: middle;
+
+    &__header {
+      font-size: 16px;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+      position: relative;
+      top: 60px;
+    }
+
+    &__subtext {
+      font-size: 14px;
+      margin: 0;
+      position: relative;
+      top: 70px;
+      text-transform: lowercase;
+    }
+  }
+
+  &__accessibilityInfo {
+    bottom: 0;
+    position: relative;
+
+    &__text {
+      font-size: 14px;
+      position: relative;
+      top: 120px;
+    }
+  }
+
+}

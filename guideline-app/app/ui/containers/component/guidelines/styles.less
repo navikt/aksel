@@ -1,0 +1,36 @@
+.componentGuidelinePage {
+  &__tabbarContainer {
+    max-width: 640px;
+
+    .tabbar {
+      margin-left: 16px;
+      margin-right: 16px;
+
+      &__item {
+        background-color: #0067C5;
+        border: 1px solid white;
+        border-radius: 4px;
+        color: white;
+        opacity: 0.5;
+
+        &--active {
+          opacity: 1;
+        }
+
+        &:hover:not(.tabbar__item--active) {
+          opacity: 0.6;
+        }
+      }
+
+      &__item:nth-child(even), &__item:nth-child(odd):not(:first-child) {
+        border-left: none;
+      }
+    }
+
+    .designerGuidelineSection {
+      .typo-element {
+        padding: 12px 0px 0px 0px;
+      }
+    }
+  }
+}
