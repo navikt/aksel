@@ -1,0 +1,24 @@
+.propTypeTableWrapper {
+  padding: 8px;
+
+  table {
+    border: 1px solid #e7e7e9;
+    border-radius: 4px;
+    min-width: 50%;
+    text-align: left;
+
+    th {
+      border-bottom: 1px solid #e7e9e9;
+    }
+
+    tr:nth-child(even):not(:first-child) {
+      background-color: #e7e9e9;
+    }
+
+    tr {
+      &:hover {
+        background-color: #f8f8f8 !important;
+      }
+    }
+  }
+}

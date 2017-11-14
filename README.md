@@ -1,13 +1,18 @@
 # NAV-frontend-moduler
+Dette er et monorepo for alle NAVs felleskomponenter/fellesmoduler, samt implementasjonen av en webapp (under ```/guideline-app```) 
+som sitter på dokumentasjon om bruken og implementasjonen av disse. 
 
-NAV-frontend-moduler er et monorepo for alle NAVs felleskomponenter/fellesmoduler.
+Alle komponentene i nav-frontend publiseres som npm-pakker på npmjs.com. 
+En fullstendig liste over disse ligger [her](https://www.npmjs.com/org/navikt).
+Hver enkelt pakke har sine egne installasjonsinstruksjoner som også ligger publisert der.
  
 ## Bruke moduler
-For å ta i bruk en modul sjekk dokumentasjon på [storybooken](https://navikt.github.io/nav-frontend-moduler).
-
+For å ta i bruk en modul, sjekk dokumentasjon under Komponenter-menyvalget i 
+[Guideline-appen](https://navikt.github.io/nav-frontend-moduler).
 
 ## Bidra med nye komponenter
-Det oppfordres til at alle blir med og bidrar med nye moduler slik at mest mulig av fremtidige moduler er å finne her.
+Det oppfordres til at alle blir med og bidrar med nye moduler slik at mest mulig av 
+fremtidige moduler er å finne her.
 
 ### Kom igang
 For å komme igang med å lage nye moduler: 
@@ -21,40 +26,35 @@ npm run new
 
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen. 
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av, 
-så innstaller denne i rot-mappen og legg til avhengigheten som en `peerDependency` i din modul.
-
-#### På NAV-nettet
-Om du skal starte prosjektet inne på NAV-nettet så brukes nexus som proxy for npmjs.org. 
-Det er derfor nødvendig med litt ekstra config: 
-```
-npm config set @hypnosphi:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
-npm config set @types:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
-npm config set @storybook:registry http://a34apvl062.devillo.no:8082/repository/npm-all/
-```
+installer denne i rot-mappen og legg til avhengigheten som en `peerDependency` i din modul.
 
 #### Kommandoer:
-* `npm start` - Starter storybook for utvikling
+* `npm start` - Starter sandbox-appen under `development/app` for utvikling
 * `npm run new` - Kjører scaffolding-script
 
 ## Kodekvalitet
-For å forsikre oss at koden ikke råtner på rot er det satt opp både `eslint` og `lesshint` som begge blir kjørt ved byggetid.
-Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har blitt avklart/diskutert i NAVs frontendforum.
+For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.
+Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har 
+blitt avklart/diskutert i NAVs frontendforum.
 
-For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Dvs eneste måten å få inn endringer på er gjennom pull-requests. 
-For å merge en PR må bygget har kjørt ok, og minst en person godkjent PRen.
+For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Det vil si at den 
+eneste måten man får inn endringer på er gjennom pull-requests. For å merge en PR må bygget 
+har kjørt ok, og minst en person må ha godkjent PRen.
 
-For å verifisere at modulene vil fungere for andre er det satt opp to eksempel prosjekt i `examples`-mappen.
-Legacy-mappen er satt opp med `browserify` og `lessc`, webpack-mappen har to forskjellige webpack-bygg både med og uten `style-loader`.
-Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-rig ved forbedringer på systemet og for å komme igang med å bruke systemet på nye prosjekter. 
+For å verifisere at modulene vil fungere for andre er det satt opp to eksempel-prosjekter 
+i `/examples`. Legacy-mappen er satt opp med `browserify` og `lessc`, webpack-mappen har 
+to forskjellige webpack-bygg både med og uten `style-loader`. Nye moduler blir ikke automatisk 
+satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systemet og for 
+å komme igang med å bruke biblioteket. 
 
-**NB** her må man faktisk kjøre `npm install` i de to mappene.. :O
+**NB** her må man faktisk kjøre `npm install` i de to mappene.
 
 ### Kommandoer:
 * `npm run lint` - kjører linting av JS og LESS
 * `npm run js:lint` - kjører linting av JS
 * `npm run less:lint` - kjører linting av LESS
-* `npm test` - kjører tester
-* `npm run checkversions` - sjekker at avhengighetene til modulene er de samme som er definert i rot-mappen
+* `npm run checkversions` - sjekker at avhengighetene til modulene er de 
+samme som er definert i rot-mappen
 
 ## Andre kommandoer
 * `npm run create` - Samme som `npm run new`
@@ -67,28 +67,17 @@ Nye moduler blir ikke automatisk satt opp her, men dette kan brukes som en test-
 
 ## Byggemiljø
 Det er satt opp ett CircleCI-bygg for repoet.
-Pull-Requests bygges derfor automatisk med en gang de pushes til remote.
+Pull-requests bygges derfor automatisk med en gang de pushes til remote.
 
-### Byggesteg på `master`
-1. git checkout
-2. innstaller avhengigheter
-3. kodekvalitet og tester
-4. bygg JS-filer
-5. publiser moduler
-6. sett app-config versjon
-7. bygg storybook
-8. push git-tags og app-config artifakt
-9. bygg docker-image
-10. bestill deploy
-
-Hvis det oppdages at ingen moduler er endret (steg 5) vil byggejobben stoppe der.
-
-### Byggesteg på andre branches
-1. git checkout
-2. merge med master
-3. innstaller avhengigheter
-4. kodekvalitet og tester
-5. bygg JS-filer
+### Byggesteg
+1. Installering av dependencies
+2. Versjonssjekking - et script for å sjekke av dependencies er konsekvente på tvers
+av moduler
+3. Linting av LESS og JS
+4. Bygg av moduler
+5. Bygg av Guideline-appen
+6. Publisering av pakker til npmjs
+7. Deployment av Guideline-appen til GitHub Pages
 
 ## Scripts
 Det ligger flere hjelpe-scripts i mappen `_scripts`. 
@@ -98,11 +87,15 @@ Det ligger flere hjelpe-scripts i mappen `_scripts`.
 * `fixDependencyVersions.js` - forsøker etter beste evne å fikse feilene rapportert av `verifyPkgDependencies.js`
 * `scaffold.js` - scaffolding-script for å lage nye moduler
 * `lesshint-reporter.js` - custom reporter for lesshint slik at feil derifra også ser pene ut
+* `generateReadmes.js` - genererer README.md-filer for hver modul basert på template i DISCLAIMER.md samt modulens 
+peerDependencies
 
 ## Scaffolding
-Scaffolding kjørt via `npm run new` bruker `_scripts/scaffold.js` og templatene finnes i `_templates`.
+Scaffolding kjørt via `npm run new` bruker `_scripts/scaffold.js` og templatene 
+finnes i `_templates`.
 
-Det er satt opp `mustache` som templateing-engine. Denne er konfigurert opp til å bruke `'<%'` og `'%>'` som delimiters slik at det ikke blir problemer med annen kode.
+Det er satt opp `mustache` som templateing-engine. Denne er konfigurert opp til å 
+bruke `'<%'` og `'%>'` som delimiters slik at det ikke blir problemer med annen kode.
 
 Scaffolding-scriptet kommer med ett sett av predefinerte variabler basert på modul-navnet.
 * `name.original`
@@ -111,7 +104,8 @@ Scaffolding-scriptet kommer med ett sett av predefinerte variabler basert på mo
 * `name.kebabcase`
 * `name.cssname`
 
-For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden brukes, denne henter da ut versjonen sånn som den er satt i rot-mappen.
+For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden brukes, 
+denne henter da ut versjonen sånn som den er satt i rot-mappen.
 ```
 "dependencies": {
     "react": "<%#resolve%>react<%/resolve%>"
