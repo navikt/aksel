@@ -87,6 +87,8 @@ Det ligger flere hjelpe-scripts i mappen `_scripts`.
 * `fixDependencyVersions.js` - forsøker etter beste evne å fikse feilene rapportert av `verifyPkgDependencies.js`
 * `scaffold.js` - scaffolding-script for å lage nye moduler
 * `lesshint-reporter.js` - custom reporter for lesshint slik at feil derifra også ser pene ut
+* `generateReadmes.js` - genererer README.md-filer for hver modul basert på template i DISCLAIMER.md samt modulens 
+peerDependencies
 
 ## Scaffolding
 Scaffolding kjørt via `npm run new` bruker `_scripts/scaffold.js` og templatene 
