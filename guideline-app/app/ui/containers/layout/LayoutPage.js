@@ -17,7 +17,11 @@ const LayoutPage = () => (
 
         <div className="layoutPage__section">
             <h1>Layout-eksempler</h1>
-            <img className="gridImage" src={layoutExamplesPng} alt="eksempler på hvordan elementer kan plasseres i NAVs grid" />
+            <img
+                className="gridImage"
+                src={layoutExamplesPng}
+                alt="eksempler på hvordan elementer kan plasseres i NAVs grid"
+            />
         </div>
 
     </div>

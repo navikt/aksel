@@ -56,7 +56,11 @@ const IconPage = () => (
             </Normaltekst>
         </div>
         <div className="smallSection">
-            <img className="interaksjonImg" src={ikoninteraksjonImg} alt="tannhjul-ikon i states normal, hover, aktiv, og med fokusmarkering" />
+            <img
+                className="interaksjonImg"
+                src={ikoninteraksjonImg}
+                alt="tannhjul-ikon i states normal, hover, aktiv, og med fokusmarkering"
+            />
         </div>
 
         <div className="section">
@@ -78,7 +82,11 @@ const IconPage = () => (
             </Normaltekst>
         </div>
         <div className="smallSection">
-            <img className="stotteikonerImg" src={stotteikonerImg} alt="Diverse støtteikoner, som advarsel, låst eller favoritt" />
+            <img
+                className="stotteikonerImg"
+                src={stotteikonerImg}
+                alt="Diverse støtteikoner, som advarsel, låst eller favoritt"
+            />
         </div>
 
         <div className="section">
@@ -94,15 +102,30 @@ const IconPage = () => (
             <Normaltekst>Eksempel:</Normaltekst>
         </div>
         <div className="smallSection">
-            <img className="stotteikonerImg" src={basisikonerImg} alt="Konvolutt som basisikon for melding, med støtteikoner som et hengelås for en låst melding eller forstørringsglas for søk melding" />
+            <img
+                className="stotteikonerImg"
+                src={basisikonerImg}
+                alt="
+                    Konvolutt som basisikon for melding, med støtteikoner som et hengelås for en låst melding eller
+                    forstørringsglas for søk melding
+                "
+            />
         </div>
 
         <div className="section">
-            <img className="iconsImg" src={editionImg} alt="Ikoner fra kategori edition. For eksempel slett, låst, rediger, vedlegg" />
+            <img
+                className="iconsImg"
+                src={editionImg}
+                alt="Ikoner fra kategori edition. For eksempel slett, låst, rediger, vedlegg"
+            />
         </div>
 
         <div className="section">
-            <img className="iconsImg" src={commentAndChatImg} alt="Ikoner fra kategori comment & chat, som kommentar eller dialog" />
+            <img
+                className="iconsImg"
+                src={commentAndChatImg}
+                alt="Ikoner fra kategori comment & chat, som kommentar eller dialog"
+            />
         </div>
     </div>
 );

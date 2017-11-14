@@ -17,7 +17,6 @@ export default function AccessibilityMainPage() {
 
             <div className="smallSection">
                 <Ingress>
-                    Mellom 15 og 20 prosent av Norges befolkning har en nedsatt funksjonsevne*.
                     Å leve med nedsatt funksjonsevne fører ofte med seg utfordringer i dagliglivet,
                     deriblant ved bruk av teknologi. Hvis vi i NAV lager løsninger som er tilgjengelig for alle,
                     bidrar vi til at de aller fleste kan klare seg selv.
@@ -26,8 +25,9 @@ export default function AccessibilityMainPage() {
 
             <div className="section">
                 <Normaltekst>
-                    Og dette handler ikke «bare» om å lage noe som er tilgjenglig for personer med nedsatt
-                    funksjonsevne.
+                    Mellom 15 og 20 prosent av Norges befolkning har en nedsatt funksjonsevne*.
+                    Å gjøre løsningene tilgjengelige handler ikke «bare» om å lage noe som er
+                    tilgjenglig for personer med nedsatt funksjonsevne.
                     Å lage en tilgjengelig løsning handler også om å lage noe som er enkelt å bruke, uansett hvor du
                     befinner deg. Tenk deg hvordan det er å bruke siden med en musearm, på mobilen ute i sollyset, i
                     støyete
@@ -122,9 +122,12 @@ export default function AccessibilityMainPage() {
                     </li>
                 </ul>
             </div>
-            
+
             <div className="section">
-            * <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">
+                * Kilde:&nbsp;
+                <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">
+                    https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/
+                </a>
             </div>
         </div>
     );
