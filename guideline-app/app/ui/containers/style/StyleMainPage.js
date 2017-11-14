@@ -11,7 +11,7 @@ export default class StyleMainPage extends Component {
         return (
             <div className="styleMainPage">
                 <div className="styleMainPage__content">
-                    <img src={stylingImg} alt="" />
+                    <img src={stylingImg} alt="Samspill av fonter, farger og designprogrammvare" />
                     <div className="styleMainPage__content__text">
                         <Sidetittel>Styling</Sidetittel>
                         <Ingress>
