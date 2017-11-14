@@ -1,26 +1,17 @@
 import React from 'react';
 import PT from 'prop-types';
-
 import './styles.less';
 
-const ColorSample = (props) => {
+function ColorSample(props) {
     const color = props.color;
 
-    const tooLight = (hex) => {
-        const tooLightColors = ['#E9E7E7'];
+    function getTextColor() {
+        return { color: color.textColor };
+    }
 
-        return tooLightColors.indexOf(hex) >= 0;
-    };
-
-    const getTextColor = () => {
-        if (tooLight(color.hex)) {
-            return { };
-        }
-
-        return { color: 'white' };
-    };
-
-    const getBackgroundColor = () => ({ backgroundColor: color.hex });
+    function getBackgroundColor() {
+        return { backgroundColor: color.hex };
+    }
 
     return (
         <div
@@ -45,14 +36,21 @@ const ColorSample = (props) => {
 
         </div>
     );
-};
+}
 
 ColorSample.propTypes = {
     color: PT.shape({
         label: PT.string.isRequired,
         hex: PT.string.isRequired,
-        wcag: PT.string
+        wcag: PT.string,
+        textColor: PT.string
     }).isRequired
+};
+
+ColorSample.defaultProps = {
+    color: {
+        textColor: 'white'
+    }
 };
 
 export default ColorSample;

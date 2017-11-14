@@ -1,5 +1,5 @@
-import _ColorPaletteSection from './_ColorPaletteSection';
-import _ColorContrastSection from './_ColorContrastSection';
+import Palette from './PaletteSection';
+import Contrast from './ContrastSection';
 
-export const ColorContrastSection = _ColorContrastSection;
-export const ColorPaletteSection = _ColorPaletteSection;
+export const ColorContrastSection = Contrast;
+export const ColorPaletteSection = Palette;

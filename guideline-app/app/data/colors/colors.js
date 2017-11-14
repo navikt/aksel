@@ -30,7 +30,8 @@ const colors = {
         hex: lessvars['@navLysGra'],
         label: 'NAV Lys grå',
         wcag: 'AA 6.53',
-        description: 'Bakgrunn skal hovedsakelig være lys og luftig, med mye bruk av hvit og NAV lys grå.'
+        description: 'Bakgrunn skal hovedsakelig være lys og luftig, med mye bruk av hvit og NAV lys grå.',
+        textColor: lessvars['@navMorkGra']
     },
     navGra80: {
         hex: lessvars['@navGra80'],
@@ -112,7 +113,8 @@ const colors = {
         hex: lessvars['@pinkErrorBg'],
         label: 'NAV Rosa',
         wcag: 'AA 4.54',
-        description: 'NAV Rosa er en støtte farge til Murstein Rød, og kan brukes som bakgrunn til feilmeldinger.'
+        description: 'NAV Rosa er en støtte farge til Murstein Rød, og kan brukes som bakgrunn til feilmeldinger.',
+        textColor: lessvars['@redError']
     },
     navGronn: {
         hex: lessvars['@navGronn'],
@@ -126,7 +128,8 @@ const colors = {
         hex: lessvars['@navOransje'],
         label: 'NAV Oransje',
         wcag: 'AA 5.12',
-        description: 'NAV Oransje skal brukes for å fremheve viktig innhold eller informasjon'
+        description: 'NAV Oransje skal brukes for å fremheve viktig innhold eller informasjon',
+        textColor: lessvars['@navMorkGra']
     },
     orangeFocus: {
         hex: lessvars['@orangeFocus'],
@@ -138,13 +141,15 @@ const colors = {
             ' som krever brukernes fokus. Påpeke hvor brukeren befinner seg, og øke brukervennlighet.',
         contrastColors: {
             navMorkGra: { hex: lessvars['@navMorkGra'], wcag: 'AA 7.0', label: 'fokus oransje / mørk grå' }
-        }
+        },
+        textColor: lessvars['@navMorkGra']
     },
     navLimeGronn: {
         hex: lessvars['@navLimeGronn'],
         label: 'NAV Limegrønn',
         wcag: 'AA 4.68',
-        description: ''
+        description: '',
+        textColor: lessvars['@navMorkGra']
     },
     navLysBla: {
         hex: lessvars['@navLysBla'],
@@ -153,7 +158,8 @@ const colors = {
         description: '',
         contrastColors: {
             navMorkGra: { hex: lessvars['@navMorkGra'], wcag: 'AA 6.23', label: 'lys blå / mørk grå' }
-        }
+        },
+        textColor: lessvars['@navMorkGra']
     },
     navLysBla20: {
         hex: '#5EAEC7',
