@@ -1,6 +1,4 @@
 const metadata = {
-    typeAttributeName: 'type',
-    inputTypeAttributeName: 'bredde',
     defaultValues: {
         feil: {
             feil: {

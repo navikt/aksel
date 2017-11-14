@@ -40,19 +40,32 @@ API-et består av en funksjon som blir default-eksportert ut fra
 Denne funksjonen tar et objekt med attributtene som er beskrevet i tabellen under. Det objektet som blir angitt  
 blir merget sammen med defaultverdiene og overrider kun der det er eksplisitt sagt hva verdien skal være. 
 
-| Attributtnavn | Type            | Required | Default          |
-| ------------- | --------------  |:--------:| ---------------- | 
-| baseType      | function        | true     | undefined        |
-| modifierNames | array (string)  | false    | []               |
-| attrs         | object          | false    | {}               |
-| children      | node            | false    | null             |
-| subType       | function        | false    | null             |
-| tabOptions    | object          | false    | { ... se under } |
+| Attributtnavn               | Type            | Required | Default          |
+| -------------               | --------------  |:--------:| ---------------- | 
+| attrs                       | object          | false    | {}               |
+| children                    | node            | false    | null             |
+| baseType                    | function        | true     | undefined        |
+| docgenInfoTypeIdentifier    | string          | false    | type             |
+| modifierNames               | array (string)  | false    | []               |
+| subType                     | function        | false    | null             |
+| tabOptions                  | object          | false    | { ... se under } |
 
 
+### attrs
+Et objekt med (key,value)-par som til enhver tid skal brukes som attributter på komponenten som vises.
+
+Eksempel:
+```js
+export default generateSample({
+    baseType: Input,
+    modifierNames: ['disabled', 'feil'],
+    attrs: { label: 'Inputfelt-label' }
+});
+```
 ### baseType
 React-komponenten som komponent-siden lager live-demoen utifra (basert på `__docgenInfo`/`prop-types`).
-Om det er flere varianter av typen, må de angis i `type`-propTypen på komponenten.
+Om det er flere varianter av typen, må de angis i `type`-propTypen på komponenten (merk at attributtnavnet som
+brukes her kan endres ved å spesifisere docgenInfoTypeIdentifier, men `'type'` er default).
 
 Eksempel:
 ```js
@@ -64,11 +77,33 @@ Alertstripe.propTypes = {
 Dette resulterer i en radiogruppe med en radioknapp per type.
 Live-demo og kodeeksempel oppdateres av seg selv for denne komponenten når radioknappene brukes.
 
-**OBS!** Dersom `type`-propTypen ikke fins, vil propTypen `bredde`, av hensyn til `<input type="" />`, 
-bli forsøkt benyttet istedet. Om komponenten ikke har noen forskjellige typer vil ingen radioknapper bli renderet.
+**OBS!** For at det skal være mulig å hente ut __docgenInfo for komponenten må den bli default-eksportert ut av modulen. 
 
-**OBS!!** For at det skal være mulig å hente ut __docgenInfo for komponenten må den bli default-eksportert ut av modulen. 
+### children
+Må være en gyldig ReactNode. Brukes som children til enhver tid på komponenten som vises.
 
+Eksempel 1:
+```js
+export default generateSample({
+    baseType: Lenkepanel,
+    attrs: { href: '/# ' },
+    children: 'Slik ser et lenkepanel ut'
+});
+```
+
+### docgenInfoTypeIdentifier
+Custom attributtnavn som brukes for å gjøre oppslag etter de forskjellige variantene (fra propTypes/docgenInfo) 
+til komponenten i live-demoen (legger grunnlaget for radioknappene i live-demoene). Default er `'type'`.
+
+Eksempel:
+```js
+export default generateSample({
+    baseType: Input,
+    modifierNames: ['disabled', 'feil'],
+    attrs: { label: 'Inputfelt-label' },
+    docgenInfoTypeIdentifier: 'bredde'
+});
+```
 
 ### modifierNames
 Eventuelle navn på bool-propTyper på komponenten som skal kunne toggles av og på, uavhengig av typen. 
@@ -84,29 +119,6 @@ export default generateSample({
 });
 ```
 
-### attrs
-Et objekt med (key,value)-par som til enhver tid skal brukes som attributter på komponenten som vises.
-
-Eksempel:
-```js
-export default generateSample({
-    baseType: Input,
-    modifierNames: ['disabled', 'feil'],
-    attrs: { label: 'Inputfelt-label' }
-});
-```
-
-### children
-Må være en gyldig ReactNode. Brukes som children til enhver tid på komponenten som vises.
-
-Eksempel 1:
-```js
-export default generateSample({
-    baseType: Lenkepanel,
-    attrs: { href: '/# ' },
-    children: 'Slik ser et lenkepanel ut'
-});
-```
 
 Eksempel 2:
 ```js

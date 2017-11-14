@@ -2,9 +2,6 @@ import deepmerge from 'deepmerge';
 import metadata from './propTypes.metadata';
 import { newType, newMultipleChoiceModifier, createSampleData } from './sampleDataHelper';
 
-const typeAttributeName = metadata.typeAttributeName;
-const inputTypeAttributeName = metadata.inputTypeAttributeName;
-
 const isEnum = (propType) => (propType.name === 'enum');
 const isBool = (propType) => (propType.name === 'bool');
 const removeSpecialCharacters = (str) => (str.replace(/['"]/g, ''));
@@ -39,7 +36,8 @@ const defaultOptions = {
             hljs: 'js',
             code: ''
         }
-    }
+    },
+    docgenInfoTypeIdentifier: 'type'
 };
 
 const getEnumValuesFromPropType = (propType) => {
@@ -48,17 +46,9 @@ const getEnumValuesFromPropType = (propType) => {
 };
 
 /* eslint-disable no-underscore-dangle */
-const getTypeNameToUseForComponent = (component) => {
-    const props = component.__docgenInfo.props;
-    if (props[typeAttributeName]) {
-        return typeAttributeName;
-    }
-    return inputTypeAttributeName;
-};
-
-const getTypeNamesOfComponent = (component) => {
+const getTypeNamesOfComponent = (component, docgenInfoTypeIdentifier) => {
     if (component.__docgenInfo && component.__docgenInfo.props) {
-        const propType = component.__docgenInfo.props[getTypeNameToUseForComponent(component)];
+        const propType = component.__docgenInfo.props[docgenInfoTypeIdentifier];
         if (propType) {
             if (isEnum(propType.type)) {
                 return getEnumValuesFromPropType(propType);
@@ -86,15 +76,16 @@ const sampleScript = (providedOpts) => {
         const children = opts.children;
         const attrs = opts.attrs;
         const tabOptions = opts.tabOptions;
+        const docgenInfoTypeIdentifier = opts.docgenInfoTypeIdentifier;
 
-        const typeNamesOfComponent = getTypeNamesOfComponent(baseType);
+        const typeNamesOfComponent = getTypeNamesOfComponent(baseType, docgenInfoTypeIdentifier);
         const modifiersOfComponent = getModifiersOfComponent(baseType, modifierNames);
 
         if (typeNamesOfComponent) {
             const sampleTypes = typeNamesOfComponent.map((typeName) => {
                 const newAttrs = {};
                 if (typeNamesOfComponent.length > 1) {
-                    newAttrs[getTypeNameToUseForComponent(baseType)] = typeName;
+                    newAttrs[docgenInfoTypeIdentifier] = typeName;
                 }
                 const typeToRender = subType || baseType;
                 return newType(typeToRender, toFirstUpper(typeName), children, Object.assign(newAttrs, attrs));
