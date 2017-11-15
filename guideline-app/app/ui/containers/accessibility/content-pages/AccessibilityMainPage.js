@@ -25,7 +25,6 @@ export default function AccessibilityMainPage() {
 
             <div className="section">
                 <Normaltekst>
-                    Mellom 15 og 20 prosent av Norges befolkning har en nedsatt funksjonsevne*.
                     Å gjøre løsningene tilgjengelige handler ikke «bare» om å lage noe som er
                     tilgjenglig for personer med nedsatt funksjonsevne.
                     Å lage en tilgjengelig løsning handler også om å lage noe som er enkelt å bruke, uansett hvor du
@@ -39,7 +38,11 @@ export default function AccessibilityMainPage() {
 
             <div className="smallSection">
                 <Normaltekst>
-                    Når vi utvikler løsningene våre, skal vi alltid ha disse tingene i bakhodet.
+                    Når vi utvikler løsningene våre, skal vi alltid ha disse tingene i bakhodet. På denne måten gjør vi løsningene
+                    ikke bare bedre for de circa 
+                    <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">15 til 20 
+                    prosent av Norges befolkning, som har en nedsatt funksjonsevne
+                    </a>. Men for alle.
                 </Normaltekst>
             </div>
 
@@ -121,13 +124,6 @@ export default function AccessibilityMainPage() {
                         </a>
                     </li>
                 </ul>
-            </div>
-
-            <div className="section">
-                * Kilde:&nbsp;
-                <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">
-                    https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/
-                </a>
             </div>
         </div>
     );
