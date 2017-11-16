@@ -7,7 +7,8 @@ const vendors = [
     'react-router-dom',
     'react-redux',
     'redux',
-    'redux-logger'
+    'redux-logger',
+    'babel-polyfill'
 ];
 
 const GlobalWebpackConfig = {
