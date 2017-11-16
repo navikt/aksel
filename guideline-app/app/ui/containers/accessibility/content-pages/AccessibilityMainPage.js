@@ -37,10 +37,13 @@ export default function AccessibilityMainPage() {
 
             <div className="smallSection">
                 <Normaltekst>
-                    Når vi utvikler løsningene våre, skal vi alltid ha disse tingene i bakhodet. På denne måten gjør vi løsningene
-                    ikke bare bedre for de circa 
-                    <a href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/" className="lenke">15 til 20 
-                    prosent av Norges befolkning, som har en nedsatt funksjonsevne
+                    Når vi utvikler løsningene våre, skal vi alltid ha disse tingene i bakhodet.
+                    På denne måten gjør vi løsningene ikke bare bedre for de circa
+                    <a
+                        href="https://www.bufdir.no/Statistikk_og_analyse/Nedsatt_funksjonsevne/Antall/"
+                        className="lenke"
+                    >
+                        15 til 20 prosent av Norges befolkning, som har en nedsatt funksjonsevne
                     </a>. Men for alle.
                 </Normaltekst>
             </div>

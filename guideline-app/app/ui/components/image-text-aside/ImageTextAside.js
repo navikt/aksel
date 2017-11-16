@@ -3,7 +3,6 @@ import PT from 'prop-types';
 import { Undertittel, Normaltekst } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';
 
-
 function ImageTextAside(props) {
     return (
         <div className="imageTextAside">
@@ -21,7 +20,7 @@ function ImageTextAside(props) {
 
 ImageTextAside.propTypes = {
     title: PT.string.isRequired,
-    text: PT.string.isRequired,
+    text: PT.string.isRequired
 };
 
 export default ImageTextAside;
