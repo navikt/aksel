@@ -6,7 +6,6 @@ import {
     Normaltekst,
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
-import './../styles.less';
 
 export default function AccessibilityMainPage() {
     return (

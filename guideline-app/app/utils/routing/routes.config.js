@@ -10,6 +10,7 @@ import TypographyPage from '../../ui/containers/typography/TypographyPage';
 import IconPage from '../../ui/containers/icon/IconPage';
 import OurValuesPage from '../../ui/containers/our-values/OurValuesPage';
 import StyleMainPage from '../../ui/containers/style/StyleMainPage';
+import HowWeWrite from '../../ui/containers/how-we-write/HowWeWrite';
 
 const componentRoutes = resolveComponentRoutes('components');
 
@@ -52,6 +53,11 @@ const routeConfig = [
                 title: 'Ikoner'
             }
         ]
+    },
+    {
+        path: '/how-we-write',
+        component: HowWeWrite,
+        title: 'Slik skriver vi'
     },
     {
         path: '/values',
