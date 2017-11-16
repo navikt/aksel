@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
-
 import './styles.less';
 
 class Tabbar extends Component {

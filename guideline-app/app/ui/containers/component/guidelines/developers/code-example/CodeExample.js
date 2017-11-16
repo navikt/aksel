@@ -55,11 +55,16 @@ class CodeExample extends Component {
         const children = type.children;
         const domRef = this.props.activeRef;
         const activeTabbarItem = this.state.activeTabbarItem;
+        const hljsLangKey = this.state.activeTabbarItem.hljs;
 
+        let codeToDisplay = '';
         if (activeTabbarItem.label === 'CSS') {
-            return activeTabbarItem.codeToDisplay(domRef);
+            codeToDisplay = activeTabbarItem.codeToDisplay(domRef);
+        } else {
+            codeToDisplay = activeTabbarItem.codeToDisplay(type, modifiers, children);
         }
-        return activeTabbarItem.codeToDisplay(type, modifiers, children);
+
+        return hljs.highlight(hljsLangKey, codeToDisplay).value;
     }
 
 
@@ -67,33 +72,20 @@ class CodeExample extends Component {
         this.setState({ activeTabbarItem });
     }
 
-    // eslint-disable-next-line class-methods-use-this
-    highlightCode() {
-        return hljs.highlight(this.state.activeTabbarItem.hljs, this.refs.highlightedCode);
-    }
-
     render() {
-        const activeTabbarItem = this.state.activeTabbarItem;
-        //const hlcode = this.highlightCode().value;
-        const hlCode = hljs.highlight(this.state.activeTabbarItem.hljs, this.getCodeToDisplay()).value;
         return (
             <div className="codeExample">
                 <Tabbar
                     items={this.tabbarItems}
                     onActiveItemChange={(item) => this.changeActiveCodeOption(item)}
                 />
-                <CodeSample code={hlCode} lang={activeTabbarItem.hljs} ref="highlightedCode" />
+                <pre>
+                    <code
+                        className="hljs"
+                        dangerouslySetInnerHTML={{ __html: this.getCodeToDisplay() }}
+                    />
+                </pre>
             </div>
-        );
-    }
-}
-
-class CodeSample extends React.Component {
-    render() {
-        return (
-            <pre id="highlightedCode">
-                <code className={this.props.lang} dangerouslySetInnerHTML={{__html:this.props.code}} />
-            </pre>
         );
     }
 }
