@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
+import hljs from 'highlight.js';
 import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
@@ -15,8 +16,8 @@ class CodeExample extends Component {
         this.tabbarItems = this.getTabbarItems();
         this.setState({
             activeTabbarItem:
-                this.tabbarItems.find((item) => item.defaultActive) ||
-                this.tabbarItems.find((item) => item.show === true)
+            this.tabbarItems.find((item) => item.defaultActive) ||
+            this.tabbarItems.find((item) => item.show === true)
         });
     }
 
@@ -61,28 +62,38 @@ class CodeExample extends Component {
         return activeTabbarItem.codeToDisplay(type, modifiers, children);
     }
 
+
     changeActiveCodeOption(activeTabbarItem) {
         this.setState({ activeTabbarItem });
     }
 
-    renderHighlightedCode = (code, lang) => (
-        <pre>
-            <code className={lang}>{ code }</code>
-        </pre>
-    );
+    // eslint-disable-next-line class-methods-use-this
+    highlightCode() {
+        return hljs.highlight(this.state.activeTabbarItem.hljs, this.refs.highlightedCode);
+    }
 
     render() {
         const activeTabbarItem = this.state.activeTabbarItem;
-        const highlightedCode = this.renderHighlightedCode(this.getCodeToDisplay(), activeTabbarItem.hljs);
-
+        //const hlcode = this.highlightCode().value;
+        const hlCode = hljs.highlight(this.state.activeTabbarItem.hljs, this.getCodeToDisplay()).value;
         return (
             <div className="codeExample">
                 <Tabbar
                     items={this.tabbarItems}
                     onActiveItemChange={(item) => this.changeActiveCodeOption(item)}
                 />
-                { highlightedCode }
+                <CodeSample code={hlCode} lang={activeTabbarItem.hljs} ref="highlightedCode" />
             </div>
+        );
+    }
+}
+
+class CodeSample extends React.Component {
+    render() {
+        return (
+            <pre id="highlightedCode">
+                <code className={this.props.lang} dangerouslySetInnerHTML={{__html:this.props.code}} />
+            </pre>
         );
     }
 }
