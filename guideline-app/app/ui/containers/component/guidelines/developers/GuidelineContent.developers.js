@@ -20,7 +20,7 @@ class GuidelineContentForDevelopers extends Component {
             <Systemtittel>
                 Installering
             </Systemtittel>
-            <pre id="installInstructions">
+            <pre>
                 <code className="hljs">
                     { this.props.componentData.installInstructions }
                 </code>
