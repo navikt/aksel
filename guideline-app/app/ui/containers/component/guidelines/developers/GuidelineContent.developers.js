@@ -1,23 +1,12 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
-import hljs from 'highlight.js';
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import CodeExample from './code-example/CodeExample';
 import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
 import './styles.less';
 
 class GuidelineContentForDevelopers extends Component {
-    componentDidMount() {
-        this.highlightInstallationInstructions();
-    }
-
-    // eslint-disable-next-line class-methods-use-this
-    highlightInstallationInstructions() {
-        const block = (document.getElementById('installInstructions'));
-        hljs.highlightBlock(block);
-    }
-
     renderReactSpecificDoc = (doc) => (
         <div className="react-doc">
             <Systemtittel>PropTypes</Systemtittel>
@@ -32,7 +21,7 @@ class GuidelineContentForDevelopers extends Component {
                 Installering
             </Systemtittel>
             <pre id="installInstructions">
-                <code className="xml">
+                <code className="hljs">
                     { this.props.componentData.installInstructions }
                 </code>
             </pre>
