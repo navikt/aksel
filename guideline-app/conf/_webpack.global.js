@@ -1,21 +1,17 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const vendors = [
-    'react',
-    'react-dom',
-    'react-router-dom',
-    'react-redux',
-    'redux',
-    'redux-logger',
-    'babel-polyfill'
-];
-
 const GlobalWebpackConfig = {
-    entry: {
-        scripts: './guideline-app/app/ui/app.js',
-        vendors
-    },
+    entry: [
+        'react',
+        'react-dom',
+        'react-router-dom',
+        'react-redux',
+        'redux',
+        'redux-logger',
+        'babel-polyfill',
+        './guideline-app/app/ui/app.js'
+    ],
     module: {
         rules: [
             {
