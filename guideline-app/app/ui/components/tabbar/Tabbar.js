@@ -8,9 +8,9 @@ import './styles.less';
 class Tabbar extends Component {
 
     componentWillMount() {
-        this.state = {
+        this.setState({
             activeItem: this.getDefaultActiveItem()
-        };
+        });
     }
 
     onActiveItemChange(item) {

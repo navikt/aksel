@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
-import Highlight from 'react-highlight';
 import Tabbar from './../../../../../components/tabbar/Tabbar';
 import {
     getHtmlCodeForComponent,
@@ -14,11 +13,11 @@ class CodeExample extends Component {
 
     componentWillMount() {
         this.tabbarItems = this.getTabbarItems();
-        this.state = {
+        this.setState({
             activeTabbarItem:
                 this.tabbarItems.find((item) => item.defaultActive) ||
                 this.tabbarItems.find((item) => item.show === true)
-        };
+        });
     }
 
     getCodeToDisplayForTabFn(tabName) {
@@ -67,9 +66,9 @@ class CodeExample extends Component {
     }
 
     renderHighlightedCode = (code, lang) => (
-        <Highlight className={lang}>
-            { code }
-        </Highlight>
+        <pre>
+            <code className={lang}>{ code }</code>
+        </pre>
     );
 
     render() {
@@ -82,7 +81,6 @@ class CodeExample extends Component {
                     items={this.tabbarItems}
                     onActiveItemChange={(item) => this.changeActiveCodeOption(item)}
                 />
-
                 { highlightedCode }
             </div>
         );

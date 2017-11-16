@@ -19,9 +19,9 @@ class ComponentGuidelinePage extends React.Component {
         ];
 
         if (this.hasDeveloperGuidelinesOnly()) {
-            this.state = { activeContent: this.tabbarItems[1].content };
+            this.setState({ activeContent: this.tabbarItems[1].content });
         } else {
-            this.state = { activeContent: this.tabbarItems[0].content };
+            this.setState({ activeContent: this.tabbarItems[0].content });
         }
     }
 

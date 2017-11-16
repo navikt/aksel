@@ -17,7 +17,7 @@ import './styles.less';
 
 export default class ExpandableList extends Component {
     componentWillMount() {
-        this.state = { activeChildIndex: -1 };
+        this.setState({ activeChildIndex: -1 });
     }
 
     expandableListItemClicked(item) {

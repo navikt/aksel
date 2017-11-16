@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
-import Highlight from 'react-highlight';
 import { Normaltekst, Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 import CodeExample from './code-example/CodeExample';
 import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
@@ -13,9 +12,11 @@ class GuidelineContentForDevelopers extends Component {
             <Systemtittel>
                 Installering
             </Systemtittel>
-            <Highlight className="javascript">
-                { this.props.componentData.installInstructions }
-            </Highlight>
+            <pre>
+                <code className="javascript">
+                    { this.props.componentData.installInstructions }
+                </code>
+            </pre>
         </div>
     );
 
