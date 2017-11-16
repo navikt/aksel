@@ -19,11 +19,13 @@ export default function HowWeWrite() {
                 <Ingress>
                     NAVs tekster leses av alle lag av befolkningen i alle mulige slags situasjoner.
                     Derfor må tekstene våre være utformet slik at de er lett å forstå.
-                    På Navet finner du retningslinjene
+                    På Navet finner du retningslinjene&nbsp;
                     <a
                         className="lenke"
-                        href="https://navet.adeo.no/ansatt/Etatstjenester/Stottefunksjoner
-                        /Kommunikasjon/Sprak/Retningslinjer/spr%C3%A5klige-retningslinjer-for-nav"
+                        // eslint-disable-next-line
+                        href="https://navet.adeo.no/ansatt/Etatstjenester/Stottefunksjoner/Kommunikasjon/Sprak/Retningslinjer/spr%C3%A5klige-retningslinjer-for-nav"
+                        rel="noopener noreferrer"
+                        target="_blank"
                     >
                         Slik skriver vi i NAV.
                     </a>
