@@ -12,13 +12,13 @@ Informasjonen man kan si noe om er:
 - Krav og retningslinjer til universell utforming 
 
 Alle endringer som blir gjort i filene i disse undermappene, vil sørge for at neste versjon som
-legges ut av [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) får med seg de
+legges ut av [Guidelines-siden](https://navikt.github.com/nav-frontend-moduler) får med seg de
 oppdateringene som har blitt lagt inn.
 
 
 ### Filstandard
 
-På [Guidelines-siden](https://erlendev.github.com/nav-frontend-moduler) har hver enkelt komponent
+På [Guidelines-siden](https://navikt.github.com/nav-frontend-moduler) har hver enkelt komponent
 (under menyvalget "Komponenter"), fått en egen artikkel, som består av:
 1. En ingress som sier noe overordnet og generelt om komponenten
 3. En tekst som beskriver hvordan komponenten er tenkt å tas i bruk
@@ -36,7 +36,7 @@ Eksempel-filnavn for Alertstripe-komponenten:
 
 ### Hvordan endre på en fil
 
-1. Gå inn [her](https://github.com/erlendev/nav-frontend-moduler/tree/master/packages/node_modules)
+1. Gå inn [her](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules)
 2. Trykk deg inn på mappen til den komponenten du ønsker å endre på innholdet til (ikke `'-style'`, med mindre ikke annet finnes). 
 Går deretter inn i mappen med navnet `md`. 
 3. Velg riktig .md-fil i forhold til hvilket innhold i artikkelen du ønsker å endre på.
