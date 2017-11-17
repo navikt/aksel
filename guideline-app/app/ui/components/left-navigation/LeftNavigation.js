@@ -8,7 +8,7 @@ import './styles.less';
 
 const LeftNavigation = () => (
     <div className="leftNavigation">
-        <a className="leftNavigation__logoSection" href="/">
+        <a className="leftNavigation__logoSection" href="/nav-frontend-moduler">
             <NAVLogo />
             <Normaltekst>NAV Designsystem</Normaltekst>
             <hr className="line" />
