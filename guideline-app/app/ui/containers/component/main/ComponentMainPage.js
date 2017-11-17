@@ -17,9 +17,8 @@ class ComponentMainPage extends React.Component {
                     <div className="componentMainPage__content__text">
                         <Sidetittel>Komponenter</Sidetittel>
                         <Ingress>
-                            Under styling kan man finne hvordan man bruke farger, ikoner, typografi og tekst til å
-                            skape tydelig kommunikasjon og bidra en konsisten NAV identitet som oppstår enhetlig,
-                            pålitelig og profesjonell.
+                            Under komponenter finner man retningslinjer om bruken av og dokumentasjon på implementasjon
+                            av de ulike UI-komponentene som nav-frontend består av.
                         </Ingress>
                     </div>
                 </div>
