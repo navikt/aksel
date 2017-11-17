@@ -6,7 +6,11 @@ WebpackProductionConfig.plugins = [
     new HtmlWebpackPlugin({
         template: './guideline-app/index.production.ejs',
         filename: 'index.html',
-        inject: 'body'
+        inject: 'body',
+        chunksSortMode: (a, b) => {
+            const order = ['polyfill', 'vendors', 'scripts'];
+            return order.indexOf(a.names[0]) - order.indexOf(b.names[0]);
+        }
     })
 ];
 

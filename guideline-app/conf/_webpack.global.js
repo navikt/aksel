@@ -7,14 +7,14 @@ const vendors = [
     'react-router-dom',
     'react-redux',
     'redux',
-    'redux-logger',
-    'babel-polyfill'
+    'redux-logger'
 ];
 
 const GlobalWebpackConfig = {
     entry: {
-        scripts: './guideline-app/app/ui/app.js',
-        vendors
+        vendors,
+        polyfill: 'babel-polyfill',
+        scripts: './guideline-app/app/ui/app.js'
     },
     module: {
         rules: [
@@ -77,7 +77,7 @@ const GlobalWebpackConfig = {
             'React': 'react' // eslint-disable-line quote-props
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors'
+            names: ['polyfill', 'vendors', 'scripts']
         })
     ]
 };
