@@ -1,0 +1,20 @@
+@import './../../../assets/styles/base';
+
+.colorPalette {
+  display: flex;
+  padding-top: @GL_BASE_UNIT * 4;
+  padding-bottom: @GL_BASE_UNIT * 4;
+
+  .colorSampleWrapper {
+    .description {
+      margin: @GL_BASE_UNIT 0px 0px 0px;
+      font-size: @GL_BASE_UNIT * 3.5;
+      padding: 4px;
+      max-width: 180px;
+    }
+
+    &:not(:first-child) {
+      margin-left: @GL_BASE_UNIT * 2;
+    }
+  }
+}

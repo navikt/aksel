@@ -1,7 +1,7 @@
 machine:
   timezone: Europe/Oslo
   node:
-    version: 5.1.1
+    version: 8.2.1
 
 dependencies:
   pre:
@@ -14,7 +14,7 @@ compile:
     - npm run checkversions
     - npm run lint
     - npm run build
-    - npm run buildstorybook
+    - npm run build-guideline-app
 
 deployment:
   production:
@@ -23,7 +23,7 @@ deployment:
       - git config --global user.email "erlend.edvardsen.vige@nav.no"
       - git config --global user.name "navikt"
       - npm run lernapublish
-      - npm run deploystorybook
+      - npm run deploy-guideline-app
 
 general:
   branches:

@@ -1,0 +1,45 @@
+@import '../../../../../../../../node_modules/highlight.js/styles/github.css';
+
+.codeExample {
+  padding: 12px;
+  margin: 12px;
+
+  &__centeredText {
+    cursor: pointer;
+    text-align: center;
+  }
+
+  pre {
+    cursor: pointer;
+    white-space: pre-wrap;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  
+  .tabbar {
+    display: flex;
+    max-width: 180px;
+    text-align: center;
+    justify-content: center;
+
+    &__item {
+      cursor: pointer;
+      flex: 1;
+      font-size: 16px;
+
+      &--active {
+        .typo-etikett-liten {
+          font-weight: bold;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+  }
+}
