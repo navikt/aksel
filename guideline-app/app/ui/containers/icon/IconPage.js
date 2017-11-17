@@ -9,7 +9,6 @@ import ikoninteraksjonImg from './../../../assets/images/icon/ikon-interaksjon.p
 import stotteikonerImg from './../../../assets/images/icon/stotteikoner.png';
 import basisikonerImg from './../../../assets/images/icon/basisikoner.png';
 import editionImg from './../../../assets/images/icon/edition.png';
-import commentAndChatImg from './../../../assets/images/icon/comment-chat.png';
 import './styles.less';
 
 const IconPage = () => (
@@ -116,15 +115,7 @@ const IconPage = () => (
             <img
                 className="iconsImg"
                 src={editionImg}
-                alt="Ikoner fra kategori edition. For eksempel slett, låst, rediger, vedlegg"
-            />
-        </div>
-
-        <div className="section">
-            <img
-                className="iconsImg"
-                src={commentAndChatImg}
-                alt="Ikoner fra kategori comment & chat, som kommentar eller dialog"
+                alt="Ikoner med beskrivelser"
             />
         </div>
     </div>
