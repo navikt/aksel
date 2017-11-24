@@ -16,7 +16,6 @@
     "react": "<%#resolve%>react<%/resolve%>"
   },
   "devDependencies": {
-    "@storybook/react": "<%#resolve%>@storybook/react<%/resolve%>",
     "react": "<%#resolve%>react<%/resolve%>"
   }
 }
