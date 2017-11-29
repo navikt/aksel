@@ -32,6 +32,7 @@
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
@@ -67,6 +68,7 @@
     "gulp-newer": "^1.3.0",
     "gulp-plumber": "^1.1.0",
     "gulp-svgmin": "^1.2.3",
+    "gulp-typescript": "^3.2.3",
     "gulp-util": "^3.0.8",
     "highlight.js": "^9.12.0",
     "html-loader": "^0.4.5",
@@ -82,6 +84,7 @@
     "lessvars": "0.0.5",
     "lodash.throttle": "^4.1.1",
     "markdown-magic": "^0.1.19",
+    "merge2": "^1.2.0",
     "mustache": "^2.3.0",
     "nav-frontend-core": "^4.0.2",
     "prettify-xml": "^1.2.0",
@@ -109,6 +112,7 @@
     "svgo": "^0.7.2",
     "text-table": "^0.2.0",
     "through2": "^2.0.3",
+    "typescript": "^2.6.1",
     "webpack": "^2.7.0",
     "webpack-dev-server": "^2.4.5"
   },
