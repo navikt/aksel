@@ -286,7 +286,7 @@ export default function HowWeWrite() {
                     </ul>
 
                     <AlertStripeSuksess>
-                        NAV har innvilget søknaden din om foreldrepenger.
+                        NAV har innvilget søknaden din om foreldrepenger
                     </AlertStripeSuksess>
                     <AlertStripeAdvarsel>
                         Foreldrepenger ved fødsel – melding om vedtak
