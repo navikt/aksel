@@ -89,7 +89,10 @@ const AboutPage = () => (
                 </ul>
 
                 <Normaltekst>
-                    Har du noen spørsmål eller kommentarer, ta gjerne kontakt.
+                    Har du noen spørsmål eller kommentarer,&nbsp;
+                    <a className="lenke" href="mailto:designsystemet@nav.no">
+                        ta gjerne kontakt.
+                    </a>
                 </Normaltekst>
             </div>
         </div>
