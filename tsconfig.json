@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "es2015",
+    "module": "commonjs",
     "target": "esnext",
     "moduleResolution": "node",
     "allowJs": false,
@@ -18,6 +18,9 @@
       "es2017"
     ]
   },
+  "include": [
+    "packages/node_modules/**/src/*"
+  ],
   "exclude": [
     "node_modules",
     "**/*-spec.js",
