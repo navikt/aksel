@@ -30,10 +30,6 @@ class Sample extends Component {
         });
     }
 
-    componentExistsIncomponentDataSubTree = (component, subtree) =>
-        (subtree.component === component || subtree.modifiers.some((modifier) => modifier.component === component));
-
-
     activeComponenMatchescomponentDataDefaults() {
         const componentData = this.props.componentData;
         const activeComponent = this.props.activeType.component;
