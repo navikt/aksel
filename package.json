@@ -109,7 +109,7 @@
     "svgo": "^0.7.2",
     "text-table": "^0.2.0",
     "through2": "^2.0.3",
-    "webpack": "^2.7.0",
+    "webpack": "3.10.0",
     "webpack-dev-server": "^2.4.5"
   },
   "dependencies": {
