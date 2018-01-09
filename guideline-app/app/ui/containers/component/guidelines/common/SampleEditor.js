@@ -53,11 +53,8 @@ class SampleEditor extends Component {
     modifierIsChecked(modifier) {
         if (this.hasMultipleChoiceModifiers()) {
             return this.props.activeMultipleChoiceModifiers.indexOf(modifier) > -1;
-        } else if (!this.props.activeModifier && modifier.value) {
-            // eslint-disable-next-line no-underscore-dangle
-            return modifier._default;
         }
-        return this.props.activeModifier.value === modifier.value;
+        return false;
     }
 
     renderTypes() {
@@ -112,9 +109,6 @@ SampleEditor.propTypes = {
         component: PT.func.isRequired,
         children: PT.oneOfType([PT.array, PT.node])
     }).isRequired,
-    activeModifier: PT.shape({
-        value: PT.oneOfType([PT.string, PT.shape({})])
-    }),
     activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
     componentData: PT.shape({
         types: PT.arrayOf(PT.shape({})),
@@ -124,7 +118,6 @@ SampleEditor.propTypes = {
 };
 
 SampleEditor.defaultProps = {
-    activeModifier: null,
     activeMultipleChoiceModifiers: [],
     activeRef: null
 };
@@ -178,7 +171,6 @@ SampleType.propTypes = {
 // eslint-disable-next-line no-class-assign
 SampleEditor = connect((state) => ({
     activeType: state.sample.activeType,
-    activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers
 }))(SampleEditor);
 

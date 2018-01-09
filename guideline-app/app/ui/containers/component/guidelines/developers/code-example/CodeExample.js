@@ -107,7 +107,6 @@ CodeExample.defaultProps = {
 // eslint-disable-next-line no-class-assign
 CodeExample = connect((state) => ({
     activeType: state.sample.activeType,
-    activeModifier: state.sample.activeModifier,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
     activeRef: state.sample.activeRef
 }))(CodeExample);
