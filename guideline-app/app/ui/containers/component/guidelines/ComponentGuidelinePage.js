@@ -95,4 +95,12 @@ ComponentGuidelinePage.propTypes = {
     })
 };
 
+ComponentGuidelinePage.defaultProps = {
+    textData: {
+        ingress: '',
+        accessibility: '',
+        usage: ''
+    }
+};
+
 export default ComponentGuidelinePage;
