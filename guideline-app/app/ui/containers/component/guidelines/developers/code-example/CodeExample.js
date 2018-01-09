@@ -94,13 +94,14 @@ CodeExample.propTypes = {
     activeType: PT.shape({
         component: PT.func
     }).isRequired,
-    activeRef: PT.shape({}).isRequired,
+    activeRef: PT.shape({}),
     activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
     componentData: PT.shape({}).isRequired
 };
 
 CodeExample.defaultProps = {
-    activeMultipleChoiceModifiers: []
+    activeMultipleChoiceModifiers: [],
+    activeRef: {}
 };
 
 // eslint-disable-next-line no-class-assign
