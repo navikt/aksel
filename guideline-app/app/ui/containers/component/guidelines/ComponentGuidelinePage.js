@@ -14,8 +14,8 @@ class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
         this.tabbarItems = [
-            { label: 'Retningslinjer for design', content: GuidelineContentForDesigners, defaultActive: true },
-            { label: 'Utviklerdokumentasjon', content: GuidelineContentForDevelopers }
+            { label: 'Retnings&shy;linjer for design', content: GuidelineContentForDesigners, defaultActive: true },
+            { label: 'Utvikler&shy;dokumentasjon', content: GuidelineContentForDevelopers }
         ];
 
         if (this.hasDeveloperGuidelinesOnly()) {
