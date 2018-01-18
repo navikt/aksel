@@ -48,6 +48,7 @@ const getEnumValuesFromPropType = (propType) => {
 /* eslint-disable no-underscore-dangle */
 const getTypeNamesOfComponent = (component, docgenInfoTypeIdentifier) => {
     if (component.__docgenInfo && component.__docgenInfo.props) {
+        console.log('__docgenInfo', component.__docgenInfo);
         const propType = component.__docgenInfo.props[docgenInfoTypeIdentifier];
         if (propType) {
             if (isEnum(propType.type)) {

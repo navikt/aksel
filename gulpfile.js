@@ -21,6 +21,12 @@ const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
 const tsProject = ts.createProject('tsconfig.json');
 
+const rdt = require('react-docgen-typescript');
+const glob = require('glob');
+const inject = require('gulp-inject-string');
+const insert = require('gulp-insert');
+const fs = require('fs');
+
 let srcEx;
 let assetsEx;
 let libFragment;
@@ -95,7 +101,12 @@ function buildJs() {
         .pipe(gulp.dest(dest));
 }
 
+function parseTsDocinfo(file) {
+    
+}
+
 function buildTs() {
+
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
@@ -105,6 +116,26 @@ function buildTs() {
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
+        .pipe(insert.transform(function(contents, file){
+
+            let tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+
+            let docInfo;
+            let docInfoString;
+
+            if (fs.existsSync(tsPath)) {
+                docInfo = rdt.parse(tsPath)[0];
+                docInfoString = JSON.stringify(docInfo);
+
+                if (docInfo.displayName === 'StatelessComponent') {
+                    return contents;
+                }
+
+                return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
+            } else {
+                return contents;
+            }
+        }))
         .pipe(gulp.dest(dest));
 
     const dtsPipe = tsResult.dts
