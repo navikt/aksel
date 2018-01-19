@@ -42,18 +42,14 @@ const defaultOptions = {
 
 const getEnumValuesFromPropType = (propType) => {
     const enumObjects = propType.type.value;
-    console.log(enumObjects);
-    enumObjects.map((enumObject) => console.log(enumObject));
     return enumObjects.map((enumObject) => (removeSpecialCharacters(enumObject.value)));
 };
 
 /* eslint-disable no-underscore-dangle */
 const getTypeNamesOfComponent = (component, docgenInfoTypeIdentifier) => {
     if (component.__docgenInfo && component.__docgenInfo.props) {
-        console.log('__docgenInfo', component.__docgenInfo);
         const propType = component.__docgenInfo.props[docgenInfoTypeIdentifier];
         if (propType) {
-            console.log(propType);
             if (isEnum(propType.type)) {
                 return getEnumValuesFromPropType(propType);
             }
@@ -96,7 +92,6 @@ const sampleScript = (providedOpts) => {
             });
 
             // eslint-disable-next-line array-callback-return, consistent-return
-            console.log(modifiersOfComponent);
             const sampleModifiers = modifiersOfComponent.map((modifier) => {
                 const propType = modifier.value;
                 if (!propType || isBool(propType.type)) {
