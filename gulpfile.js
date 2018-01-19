@@ -21,9 +21,7 @@ const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
 const tsProject = ts.createProject('tsconfig.json');
 
-const rdt = require('react-docgen-typescript');
-const glob = require('glob');
-const inject = require('gulp-inject-string');
+const tsDocgen = require('react-docgen-typescript');
 const insert = require('gulp-insert');
 const fs = require('fs');
 
@@ -101,8 +99,39 @@ function buildJs() {
         .pipe(gulp.dest(dest));
 }
 
-function parseTsDocinfo(file) {
-    
+function parseTsAndAppendDocInfo(contents, file){
+    let tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+
+    let docInfo;
+    let docInfoString;
+
+    if (fs.existsSync(tsPath)) {
+        docInfo = tsDocgen.parse(tsPath)[0];
+
+        if (docInfo.displayName === 'StatelessComponent') {
+            return contents;
+        }
+
+        if (
+            docInfo.props.type &&
+            docInfo.props.type.type &&
+            docInfo.props.type.type.name && 
+            docInfo.props.type.type.name.indexOf('|') !== -1
+        ) {
+            docInfo.props.type.type.value = docInfo.props.type.type.name
+                .split('|')
+                .map((strValue) => 
+                    ({ value: strValue.trim() })
+                );
+            docInfo.props.type.type.name = 'enum';
+        }
+
+        docInfoString = JSON.stringify(docInfo);
+
+        return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
+    } else {
+        return contents;
+    }
 }
 
 function buildTs() {
@@ -116,26 +145,7 @@ function buildTs() {
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
-        .pipe(insert.transform(function(contents, file){
-
-            let tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
-
-            let docInfo;
-            let docInfoString;
-
-            if (fs.existsSync(tsPath)) {
-                docInfo = rdt.parse(tsPath)[0];
-                docInfoString = JSON.stringify(docInfo);
-
-                if (docInfo.displayName === 'StatelessComponent') {
-                    return contents;
-                }
-
-                return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
-            } else {
-                return contents;
-            }
-        }))
+        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
         .pipe(gulp.dest(dest));
 
     const dtsPipe = tsResult.dts

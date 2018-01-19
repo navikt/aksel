@@ -3,7 +3,7 @@ import metadata from './propTypes.metadata';
 import { newType, newMultipleChoiceModifier, createSampleData } from './sampleDataHelper';
 
 const isEnum = (propType) => (propType.name === 'enum');
-const isBool = (propType) => (propType.name === 'bool');
+const isBool = (propType) => (propType.name === 'boolean' || propType.name === 'bool');
 const removeSpecialCharacters = (str) => (str.replace(/['"]/g, ''));
 const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
@@ -42,6 +42,8 @@ const defaultOptions = {
 
 const getEnumValuesFromPropType = (propType) => {
     const enumObjects = propType.type.value;
+    console.log(enumObjects);
+    enumObjects.map((enumObject) => console.log(enumObject));
     return enumObjects.map((enumObject) => (removeSpecialCharacters(enumObject.value)));
 };
 
@@ -51,6 +53,7 @@ const getTypeNamesOfComponent = (component, docgenInfoTypeIdentifier) => {
         console.log('__docgenInfo', component.__docgenInfo);
         const propType = component.__docgenInfo.props[docgenInfoTypeIdentifier];
         if (propType) {
+            console.log(propType);
             if (isEnum(propType.type)) {
                 return getEnumValuesFromPropType(propType);
             }
@@ -93,6 +96,7 @@ const sampleScript = (providedOpts) => {
             });
 
             // eslint-disable-next-line array-callback-return, consistent-return
+            console.log(modifiersOfComponent);
             const sampleModifiers = modifiersOfComponent.map((modifier) => {
                 const propType = modifier.value;
                 if (!propType || isBool(propType.type)) {
