@@ -99,8 +99,8 @@ function buildJs() {
         .pipe(gulp.dest(dest));
 }
 
-function parseTsAndAppendDocInfo(contents, file){
-    let tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+function parseTsAndAppendDocInfo(contents, file) {
+    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
 
     let docInfo;
     let docInfoString;
@@ -115,12 +115,12 @@ function parseTsAndAppendDocInfo(contents, file){
         if (
             docInfo.props.type &&
             docInfo.props.type.type &&
-            docInfo.props.type.type.name && 
+            docInfo.props.type.type.name &&
             docInfo.props.type.type.name.indexOf('|') !== -1
         ) {
             docInfo.props.type.type.value = docInfo.props.type.type.name
                 .split('|')
-                .map((strValue) => 
+                .map((strValue) =>
                     ({ value: strValue.trim() })
                 );
             docInfo.props.type.type.name = 'enum';
@@ -128,14 +128,14 @@ function parseTsAndAppendDocInfo(contents, file){
 
         docInfoString = JSON.stringify(docInfo);
 
+        // eslint-disable-next-line prefer-template
         return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
-    } else {
-        return contents;
     }
+
+    return contents;
 }
 
 function buildTs() {
-
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
