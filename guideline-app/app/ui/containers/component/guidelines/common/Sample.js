@@ -91,6 +91,7 @@ class Sample extends Component {
 
     componentDataHasParametersForLiveUpdating() {
         const componentData = this.props.componentData;
+
         return componentData && (
             (componentData.types.length > 1) ||
             (componentData.types.length === 1 &&
