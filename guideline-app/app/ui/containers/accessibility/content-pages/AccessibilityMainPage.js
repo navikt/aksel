@@ -6,6 +6,7 @@ import {
     Normaltekst,
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
+import './styles.less';
 
 export default function AccessibilityMainPage() {
     return (
@@ -48,14 +49,16 @@ export default function AccessibilityMainPage() {
                 </Normaltekst>
             </div>
 
-            <iframe
-                src="https://player.vimeo.com/video/119526302?title=0&byline=0&portrait=0"
-                width="640"
-                height="480"
-                frameBorder="0"
-                title="Informasjonsvideo om universell utforming av IKT (fra Difi på Vimeo)"
-                allowFullScreen
-            />
+            <div className="videoWrapper">
+                <iframe
+                    src="https://player.vimeo.com/video/119526302?title=0&byline=0&portrait=0"
+                    width="640"
+                    height="480"
+                    frameBorder="0"
+                    title="Informasjonsvideo om universell utforming av IKT (fra Difi på Vimeo)"
+                    allowFullScreen
+                />
+            </div>
 
 
             <div className="section">
