@@ -6,13 +6,17 @@
   height: 100%;
   position: fixed;
   overflow-x: hidden;
-  padding: 24px 12px 24px 12px;
+  padding: 64px 12px 24px 12px;
+
+  .lukknapp {
+    display:none;
+  }
 
   &__logoSection {
     position: relative;
     text-decoration: none;
 
-    &__logo {
+    .navLogo {
       align-content: center;
       display: block;
       margin: 0 auto;
@@ -44,5 +48,57 @@
     top: 76px;
     position: relative;
   }
+
+  @media screen and (max-width: 1000px) {
+    display:block;
+    position:fixed;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    z-index:999;
+    border-right:0px;
+    border-left:1px solid #ddd;
+    box-shadow:0px 0px 20px rgba(0,0,0,0.1);
+    right:-304px;
+    animation: slideOut 150ms linear;
+
+    .lukknapp {
+      display:block;
+      position:absolute;
+      top:15px;
+      right:15px;
+    }
+
+    &__logoSection {
+      display:none;
+    }
+
+    &__expandableListWrapper {
+      top:0px;
+    }
+
+    &--show {
+      display:block;
+      right:0px;
+      animation: slideIn 200ms ease-out;
+    }
+  }
 }
 
+@keyframes slideIn {
+  0% {
+    right:-304px;
+  }
+  100% {
+    right:0px;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    right:0px;
+  }
+  100% {
+    right:-304px;
+  }
+}
