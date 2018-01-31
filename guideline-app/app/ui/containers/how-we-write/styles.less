@@ -19,16 +19,29 @@
   }
 
   .dosAndDontsAside {
-    display: flex;
+    display: flex; 
 
     .alertstripe--advarsel {
       min-width: 160px;
+      max-width: 50%;
       margin-right: 8px;
     }
 
     .alertstripe--suksess {
-      min-width: 424px;
+      width:100%;
       margin-left: 8px;
+    }
+
+    @media screen and (max-width: 480px){
+      display:block;
+
+      .alertstripe--advarsel {
+        width:100%;
+        max-width:100%;
+      }
+      .alertstripe--suksess{
+        margin-left:0;
+      }
     }
   }
 

@@ -69,7 +69,7 @@ const TabbarItem = (props) => {
             role="button"
             tabIndex={0}
         >
-            <EtikettLiten>{ props.label }</EtikettLiten>
+            <EtikettLiten><span dangerouslySetInnerHTML={{ __html: props.label }} /></EtikettLiten>
         </div>
     );
 };
