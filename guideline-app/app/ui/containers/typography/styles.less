@@ -7,7 +7,7 @@
   .italic { font-style: italic; }
 
   .description {
-    max-width: 60%;
+    // max-width: 60%;
     padding: 24px 0px 0px 0px;
 
     .typo-normal {
@@ -24,6 +24,10 @@
 
     &--extra {
       margin-top: 140px !important;
+
+      @media screen and (max-width: 600px) {
+        margin-top: 80px !important;
+      }
     }
   }
 }

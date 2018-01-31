@@ -9,5 +9,14 @@
     .colorSection {
       padding-top: @GL_BASE_UNIT * 8;
     }
+
+    &__contrastSamples {
+      display: flex;
+      flex-wrap: wrap;
+
+      @media screen and (max-width: 900px) {
+        justify-content: space-between;
+      }
+    }
   }
 }
