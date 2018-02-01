@@ -45,6 +45,10 @@ function mapSrcToDest(filepath) {
     return filepath.replace(assetsEx, srcFragment);
 }
 
+function mapIconFontnames(filepath) {
+    return filepath.replace(/nav-ikoner.*\.less/, 'font.less');
+}
+
 function fixErrorHandling() {
     return plumber({
         errorHandler: (err) => gutil.log(err.stack)
@@ -77,20 +81,24 @@ function typoCssFontfile(filename, mimetype, file64, format) {
     const fontStyle = filename.indexOf('italic') >= 0 ? 'italic' : 'normal';
 
     // eslint-disable-next-line max-len
-    return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
+    return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}  // lesshint-disable-line`;
 }
 
 function iconCssFontfile(filename, mimetype, file64, format) {
     const fontFamily = filename;
-    
-    let filenameParts = filename.split('nav-ikoner-');
-    let rest = filenameParts[1].split('-');
-    let styleModifier = rest.shift();
-    let iconGroup = rest.join('-');
-    let baseSelector = ['nav-ikoner', styleModifier, iconGroup].join('.');
+
+    const filenameParts = filename.split('nav-ikoner-');
+    const rest = filenameParts[1].split('-');
+    const styleModifier = rest.shift();
+    const iconGroup = rest.join('-');
+    const baseSelector = ['nav-ikoner', styleModifier, iconGroup].join('.');
 
     // eslint-disable-next-line max-len
-    return `@font-face { font-family: '${fontFamily}'; font-weight: normal; font-style: normal; src: url(data:${mimetype};base64,${file64}) format("${format}");} .${baseSelector} { font-family: '${fontFamily}'; font-size:24px; letter-spacing:normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; line-height: 1; -webkit-font-feature-settings: "liga", "dlig"; -moz-font-feature-settings: "liga=1, dlig=1"; -moz-font-feature-settings: "liga", "dlig"; -ms-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }`;
+    return `@font-face { font-family: '${fontFamily}'; font-weight: normal; font-style: normal; src: url(data:${mimetype};base64,${file64}) format("${format}");} .${baseSelector} { font-family: '${fontFamily}'; font-size: 24px; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; line-height: 1; -webkit-font-feature-settings: "liga", "dlig"; -moz-font-feature-settings: "liga=1, dlig=1"; -moz-font-feature-settings: "liga", "dlig"; -ms-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; } // lesshint-disable-line`;
+}
+
+function test() {
+    return 0;
 }
 
 function buildJs() {
@@ -119,6 +127,7 @@ function buildIconsCssFonts() {
         .pipe(onlyNewFiles(mapSrcToDest))
         .pipe(logCompiling())
         .pipe(cssfont64({ formatter: iconCssFontfile, extention: 'less' }))
+        .pipe(renameUsingMapper(mapIconFontnames))
         .pipe(renameUsingMapper(mapSrcToDest))
         .pipe(gulp.dest(iconFontsDest));
 }
