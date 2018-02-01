@@ -1,5 +1,9 @@
 {
   "fileExtensions": [".less", ".css"],
+  "excludedFiles": [
+    "packages/node_modules/nav-frontend-typografi-style/**/*.less",
+    "packages/node_modules/nav-frontend-ikoner-webfont-style/**/*.less"
+  ],
   "zeroUnit": false,
   "propertyOrdering": false,
   "maxCharPerLine": { "limit": 120 },
