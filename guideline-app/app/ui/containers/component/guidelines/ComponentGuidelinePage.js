@@ -92,7 +92,15 @@ class ComponentGuidelinePage extends React.Component {
 ComponentGuidelinePage.propTypes = {
     textData: PT.shape({
         ingress: PT.string.isRequired
-    }).isRequired
+    })
+};
+
+ComponentGuidelinePage.defaultProps = {
+    textData: {
+        ingress: '',
+        accessibility: '',
+        usage: ''
+    }
 };
 
 export default ComponentGuidelinePage;
