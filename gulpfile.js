@@ -6,16 +6,27 @@ const gulp = require('gulp');
 const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
+const ts = require('gulp-typescript');
 const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
 const cssfont64 = require('gulp-cssfont64-formatter');
+const merge = require('merge2');
 const configureSvgIcon = require('react-svg-icon-generator-fork').default;
 
-const scripts = './packages/node_modules/*/src/**/*.js';
-const fonts = './packages/node_modules/*/assets/**/*.woff';
+const jsScripts = './packages/node_modules/*/src/**/*.js';
+const tsScripts = './packages/node_modules/*/src/**/*.ts*';
+const typoFonts = './packages/node_modules/nav-frontend-typografi-style/assets/**/*.woff';
+const typoFontsDest = './packages/node_modules/nav-frontend-typografi-style/src/';
+const iconFonts = './packages/node_modules/nav-frontend-ikoner-webfont-style/assets/**/*.woff';
+const iconFontsDest = './packages/node_modules/nav-frontend-ikoner-webfont-style/src/';
 const dest = 'packages/node_modules';
+const tsProject = ts.createProject('tsconfig.json');
+
+const tsDocgen = require('react-docgen-typescript');
+const insert = require('gulp-insert');
+const fs = require('fs');
 
 let srcEx;
 let assetsEx;
@@ -68,7 +79,7 @@ function renameUsingMapper(mapper) {
     });
 }
 
-function cssFontfile(filename, mimetype, file64, format) {
+function typoCssFontfile(filename, mimetype, file64, format) {
     const fontFamiliy = 'Source Sans Pro'; // all fonts at this point is Source sans pro
     const fontWeight = filename.replace(/\D/g, '') || '400'; // 400 is called regular
     const fontStyle = filename.indexOf('italic') >= 0 ? 'italic' : 'normal';
@@ -77,12 +88,25 @@ function cssFontfile(filename, mimetype, file64, format) {
     return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
 }
 
+function iconCssFontfile(filename, mimetype, file64, format) {
+    const fontFamily = filename;
+    
+    let filenameParts = filename.split('nav-ikoner-');
+    let rest = filenameParts[1].split('-');
+    let styleModifier = rest.shift();
+    let iconGroup = rest.join('-');
+    let baseSelector = ['nav-ikoner', styleModifier, iconGroup].join('.');
+
+    // eslint-disable-next-line max-len
+    return `@font-face { font-family: '${fontFamily}'; font-weight: normal; font-style: normal; src: url(data:${mimetype};base64,${file64}) format("${format}");} .${baseSelector} { font-family: '${fontFamily}'; font-size:24px; letter-spacing:normal; text-transform: none; display: inline-block; white-space: nowrap; word-wrap: normal; direction: ltr; line-height: 1; -webkit-font-feature-settings: "liga", "dlig"; -moz-font-feature-settings: "liga=1, dlig=1"; -moz-font-feature-settings: "liga", "dlig"; -ms-font-feature-settings: "liga", "dlig"; -o-font-feature-settings: "liga", "dlig"; font-feature-settings: "liga", "dlig"; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }`;
+}
+
 function test() {
     return 0;
 }
 
-function build() {
-    return gulp.src(scripts)
+function buildJs() {
+    return gulp.src(jsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
@@ -91,15 +115,81 @@ function build() {
         .pipe(gulp.dest(dest));
 }
 
+function parseTsAndAppendDocInfo(contents, file) {
+    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
 
-function buildCssfonts() {
-    return gulp.src(fonts)
+    let docInfo;
+    let docInfoString;
+
+    if (fs.existsSync(tsPath)) {
+        docInfo = tsDocgen.parse(tsPath)[0];
+
+        if (docInfo.displayName === 'StatelessComponent') {
+            return contents;
+        }
+
+        if (
+            docInfo.props.type &&
+            docInfo.props.type.type &&
+            docInfo.props.type.type.name &&
+            docInfo.props.type.type.name.indexOf('|') !== -1
+        ) {
+            docInfo.props.type.type.value = docInfo.props.type.type.name
+                .split('|')
+                .map((strValue) =>
+                    ({ value: strValue.trim() })
+                );
+            docInfo.props.type.type.name = 'enum';
+        }
+
+        docInfoString = JSON.stringify(docInfo);
+
+        // eslint-disable-next-line prefer-template
+        return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
+    }
+
+    return contents;
+}
+
+function buildTs() {
+    const tsResult = gulp.src(tsScripts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapToDest))
+        .pipe(logCompiling())
+        .pipe(tsProject());
+
+    const tsPipe = tsResult.js
+        .pipe(babel({ plugins: ['transform-react-display-name'] }))
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
+        .pipe(gulp.dest(dest));
+
+    const dtsPipe = tsResult.dts
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(gulp.dest(dest));
+
+    return merge([tsPipe, dtsPipe]);
+}
+
+
+function buildTypoCssFonts() {
+    return gulp.src(typoFonts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapSrcToDest))
         .pipe(logCompiling())
-        .pipe(cssfont64({ formatter: cssFontfile, extention: 'less' }))
+        .pipe(cssfont64({ formatter: typoCssFontfile, extention: 'less' }))
         .pipe(renameUsingMapper(mapSrcToDest))
-        .pipe(gulp.dest(dest));
+        .pipe(gulp.dest(typoFontsDest));
+}
+
+function buildIconsCssFonts() {
+    return gulp.src(iconFonts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapSrcToDest))
+        .pipe(logCompiling())
+        .pipe(cssfont64({ formatter: iconCssFontfile, extention: 'less' }))
+        .pipe(renameUsingMapper(mapSrcToDest))
+        .pipe(gulp.dest(iconFontsDest));
 }
 
 configureSvgIcon({
@@ -109,7 +199,11 @@ configureSvgIcon({
 });
 
 gulp.task('test', test);
-gulp.task('build', build);
+gulp.task('buildJs', buildJs);
+gulp.task('buildTs', buildTs);
+gulp.task('build', ['buildJs', 'buildTs']);
 gulp.task('default', ['test', 'build']);
 gulp.task('buildicons', ['svg-icon']);
-gulp.task('buildfonts', buildCssfonts);
+gulp.task('buildTypoCssFonts', buildTypoCssFonts);
+gulp.task('buildIconsCssFonts', buildIconsCssFonts);
+gulp.task('buildfonts', ['buildTypoCssFonts', 'buildIconsCssFonts']);
