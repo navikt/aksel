@@ -3,7 +3,7 @@ import metadata from './propTypes.metadata';
 import { newType, newMultipleChoiceModifier, createSampleData } from './sampleDataHelper';
 
 const isEnum = (propType) => (propType.name === 'enum');
-const isBool = (propType) => (propType.name === 'bool');
+const isBool = (propType) => (propType.name === 'boolean' || propType.name === 'bool');
 const removeSpecialCharacters = (str) => (str.replace(/['"]/g, ''));
 const toFirstUpper = (str) => (str.charAt(0).toUpperCase() + str.slice(1));
 
