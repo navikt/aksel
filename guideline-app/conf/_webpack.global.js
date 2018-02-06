@@ -11,6 +11,7 @@ const vendors = [
 ];
 
 const GlobalWebpackConfig = {
+    devtool: 'inline-source-map',
     entry: {
         vendors,
         polyfill: 'babel-polyfill',

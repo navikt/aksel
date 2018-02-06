@@ -6,16 +6,24 @@ const gulp = require('gulp');
 const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
+const ts = require('gulp-typescript');
 const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
 const cssfont64 = require('gulp-cssfont64-formatter');
+const merge = require('merge2');
 const configureSvgIcon = require('react-svg-icon-generator-fork').default;
 
-const scripts = './packages/node_modules/*/src/**/*.js';
+const jsScripts = './packages/node_modules/*/src/**/*.js';
+const tsScripts = './packages/node_modules/*/src/**/*.ts*';
 const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
+const tsProject = ts.createProject('tsconfig.json');
+
+const tsDocgen = require('react-docgen-typescript');
+const insert = require('gulp-insert');
+const fs = require('fs');
 
 let srcEx;
 let assetsEx;
@@ -81,14 +89,70 @@ function test() {
     return 0;
 }
 
-function build() {
-    return gulp.src(scripts)
+function buildJs() {
+    return gulp.src(jsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
         .pipe(gulp.dest(dest));
+}
+
+function parseTsAndAppendDocInfo(contents, file) {
+    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+
+    let docInfo;
+    let docInfoString;
+
+    if (fs.existsSync(tsPath)) {
+        docInfo = tsDocgen.parse(tsPath)[0];
+
+        if (docInfo.displayName === 'StatelessComponent') {
+            return contents;
+        }
+
+        if (
+            docInfo.props.type &&
+            docInfo.props.type.type &&
+            docInfo.props.type.type.name &&
+            docInfo.props.type.type.name.indexOf('|') !== -1
+        ) {
+            docInfo.props.type.type.value = docInfo.props.type.type.name
+                .split('|')
+                .map((strValue) =>
+                    ({ value: strValue.trim() })
+                );
+            docInfo.props.type.type.name = 'enum';
+        }
+
+        docInfoString = JSON.stringify(docInfo);
+
+        // eslint-disable-next-line prefer-template
+        return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
+    }
+
+    return contents;
+}
+
+function buildTs() {
+    const tsResult = gulp.src(tsScripts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapToDest))
+        .pipe(logCompiling())
+        .pipe(tsProject());
+
+    const tsPipe = tsResult.js
+        .pipe(babel({ plugins: ['transform-react-display-name'] }))
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
+        .pipe(gulp.dest(dest));
+
+    const dtsPipe = tsResult.dts
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(gulp.dest(dest));
+
+    return merge([tsPipe, dtsPipe]);
 }
 
 
@@ -109,7 +173,9 @@ configureSvgIcon({
 });
 
 gulp.task('test', test);
-gulp.task('build', build);
+gulp.task('buildJs', buildJs);
+gulp.task('buildTs', buildTs);
+gulp.task('build', ['buildJs', 'buildTs']);
 gulp.task('default', ['test', 'build']);
 gulp.task('buildicons', ['svg-icon']);
 gulp.task('buildfonts', buildCssfonts);
