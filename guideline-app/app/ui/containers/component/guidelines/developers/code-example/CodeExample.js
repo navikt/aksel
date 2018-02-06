@@ -82,6 +82,7 @@ class CodeExample extends Component {
                 <pre>
                     <code
                         className="hljs"
+                        // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={{ __html: this.getCodeToDisplay() }}
                     />
                 </pre>

@@ -108,7 +108,6 @@
     "react-test-renderer": "^15.4.2 || ^16.0.0",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
-    "sanitize-html": "^1.13.0",
     "semver": "^5.4.1",
     "specificity": "^0.3.1",
     "style-loader": "^0.18.1",
