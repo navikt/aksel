@@ -2,16 +2,13 @@
 
 .header {
   background-color: @GL_WRAPPER_BACKGROUND_COLOR;
-  display: flex;
-  padding: 48px 32px 32px 32px;
-
-  &__logo {
-    max-width: 64px;
-    max-height: 40px;
-  }
+  padding: 48px 64px 32px 64px;
+  margin-left:-64px;
+  margin-right:-32px;
+  margin-bottom:40px;
 
   &__content {
-    margin-left: 216px;
+    position:relative;
 
     &__line {
       border: 1px solid #3e3832;
@@ -20,15 +17,13 @@
       position: absolute;
     }
 
-
     &__textSection {
       .smallHeader {
         font-size: 14px;
         font-weight: 500;
-        letter-spacing: 0.4px;
-        margin: 0 0;
+        letter-spacing:0.05em;
+        margin: 0;
         text-transform: uppercase;
-        top: -12px;
         position: relative;
       }
 
@@ -36,6 +31,70 @@
         font-size: 40px;
         font-weight: bold;
         margin: 0 0;
+      }
+
+      .navLogo {
+        display:none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    padding:18px 24px;
+    margin-right:-64px;
+
+    &__content {
+      &__textSection {
+        .smallHeader {
+          margin: 0 0 0 100px;
+        }
+        .sectionTitle {
+          margin-left:100px;
+          .typo-sidetittel {
+            font-size:30px;
+            line-height:30px;
+          }
+        }
+
+        .navLogo {
+          display:block;
+          position:absolute;
+          top:-3px;
+          left:0px;
+          width:80px;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin:0 -40px 40px -40px;
+  }
+
+  @media screen and (max-width: 480px) {
+    margin:0 -20px 15px -20px;
+
+  }
+
+  @media screen and (max-width: 430px) {
+    &__content {
+      &__textSection {
+        .smallHeader {
+          margin: 0 0 0 70px;
+          font-size:12px;
+        }
+        .sectionTitle {
+          margin-left:70px;
+          .typo-sidetittel {
+            font-size:25px;
+            line-height:25px;
+          }
+        }
+
+        .navLogo {
+          top:0px;
+          width:60px;
+        }
       }
     }
   }

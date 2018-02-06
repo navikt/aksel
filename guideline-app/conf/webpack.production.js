@@ -1,5 +1,7 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJSWebpackPlugin = require('uglifyjs-webpack-plugin');
 const WebpackProductionConfig = require('./_webpack.global');
 
 WebpackProductionConfig.plugins = [
@@ -11,6 +13,14 @@ WebpackProductionConfig.plugins = [
             const order = ['polyfill', 'vendors', 'scripts'];
             return order.indexOf(a.names[0]) - order.indexOf(b.names[0]);
         }
+    }),
+    new UglifyJSWebpackPlugin({
+        uglifyOptions: {
+            mangle: false
+        }
+    }),
+    new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify('production')
     })
 ];
 

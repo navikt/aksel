@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {
-    InformationHierarchySection,
     SourceSansProSection,
     TypographyHierarchySection,
     WeightCombinationsSection
@@ -14,7 +13,6 @@ const TypographyPage = () => (
 
         <SourceSansProSection />
         <TypographyHierarchySection className="wrapper wrapper--extra" />
-        <InformationHierarchySection className="wrapper" />
         <WeightCombinationsSection className="wrapper" />
 
     </div>

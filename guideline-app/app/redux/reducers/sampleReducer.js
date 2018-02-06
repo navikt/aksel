@@ -10,13 +10,6 @@ const initialState = {
 
 function sample(state = initialState, action) {
     switch (action.type) {
-        case types.ACTIVE_MODIFIER_CHANGE: {
-            return Object.assign({}, {
-                ...state,
-                activeModifier: action.value
-            });
-        }
-
         case types.ACTIVE_TYPE_CHANGE: {
             let multipleChoiceModifiers = state.activeMultipleChoiceModifiers;
             if (action.value.resetModifiers === true) {
