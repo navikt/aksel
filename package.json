@@ -26,13 +26,15 @@
     "watch": "npm start",
     "generateMDs": "node ./_scripts/generateReadmes.js",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
-    "build-guideline-app": "webpack -p --config guideline-app/conf/webpack.production.js",
+    "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js",
     "deploy-guideline-app": "npm run build-guideline-app && gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
+    "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
+    "@types/sanitize-html": "^1.13.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
@@ -44,6 +46,7 @@
     "babel-runtime": "^6.22.0",
     "chalk": "^1.1.3",
     "classnames": "^2.2.5",
+    "coffeescript": "^2.1.1",
     "color-convert": "^1.9.0",
     "color-name": "^1.1.3",
     "copyfiles": "^1.2.0",
@@ -64,9 +67,11 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-cssfont64-formatter": "0.0.2",
+    "gulp-insert": "^0.5.0",
     "gulp-newer": "^1.3.0",
     "gulp-plumber": "^1.1.0",
     "gulp-svgmin": "^1.2.3",
+    "gulp-typescript": "^3.2.3",
     "gulp-util": "^3.0.8",
     "highlight.js": "^9.12.0",
     "html-loader": "^0.4.5",
@@ -82,6 +87,7 @@
     "lessvars": "0.0.5",
     "lodash.throttle": "^4.1.1",
     "markdown-magic": "^0.1.19",
+    "merge2": "^1.2.0",
     "mustache": "^2.3.0",
     "nav-frontend-core": "^4.0.2",
     "prettify-xml": "^1.2.0",
@@ -108,6 +114,8 @@
     "svgo": "^0.7.2",
     "text-table": "^0.2.0",
     "through2": "^2.0.3",
+    "typescript": "^2.6.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "3.10.0",
     "webpack-dev-server": "^2.4.5"
   },
@@ -119,6 +127,7 @@
     "dompurify": "^0.9.0",
     "js-beautify": "^1.6.14",
     "jsx-to-string": "^1.1.0",
-    "react-docgen": "^2.20.0"
+    "react-docgen": "^2.20.0",
+    "react-docgen-typescript": "^1.2.1"
   }
 }

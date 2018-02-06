@@ -6,19 +6,28 @@ const gulp = require('gulp');
 const through = require('through2');
 const newer = require('gulp-newer');
 const babel = require('gulp-babel');
+const ts = require('gulp-typescript');
 const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
 const path = require('path');
 const chalk = require('chalk');
 const cssfont64 = require('gulp-cssfont64-formatter');
+const merge = require('merge2');
 const configureSvgIcon = require('react-svg-icon-generator-fork').default;
 
 const jsScripts = './packages/node_modules/*/src/**/*.js';
+const tsScripts = './packages/node_modules/*/src/**/*.ts*';
 const typoFonts = './packages/node_modules/nav-frontend-typografi-style/assets/**/*.woff';
 const typoFontsDest = './packages/node_modules/nav-frontend-typografi-style/src/';
 const iconFonts = './packages/node_modules/nav-frontend-ikoner-webfont-style/assets/**/*.woff';
 const iconFontsDest = './packages/node_modules/nav-frontend-ikoner-webfont-style/src/';
+
 const dest = 'packages/node_modules';
+const tsProject = ts.createProject('tsconfig.json');
+
+const tsDocgen = require('react-docgen-typescript');
+const insert = require('gulp-insert');
+const fs = require('fs');
 
 let srcEx;
 let assetsEx;
@@ -101,6 +110,42 @@ function test() {
     return 0;
 }
 
+function parseTsAndAppendDocInfo(contents, file) {
+    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+
+    let docInfo;
+    let docInfoString;
+
+    if (fs.existsSync(tsPath)) {
+        docInfo = tsDocgen.parse(tsPath)[0];
+
+        if (docInfo.displayName === 'StatelessComponent') {
+            return contents;
+        }
+
+        if (
+            docInfo.props.type &&
+            docInfo.props.type.type &&
+            docInfo.props.type.type.name &&
+            docInfo.props.type.type.name.indexOf('|') !== -1
+        ) {
+            docInfo.props.type.type.value = docInfo.props.type.type.name
+                .split('|')
+                .map((strValue) =>
+                    ({ value: strValue.trim() })
+                );
+            docInfo.props.type.type.name = 'enum';
+        }
+
+        docInfoString = JSON.stringify(docInfo);
+
+        // eslint-disable-next-line prefer-template
+        return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
+    }
+
+    return contents;
+}
+
 function buildJs() {
     return gulp.src(jsScripts)
         .pipe(fixErrorHandling())
@@ -111,14 +156,24 @@ function buildJs() {
         .pipe(gulp.dest(dest));
 }
 
-function buildTypoCssFonts() {
-    return gulp.src(typoFonts)
+function buildTs() {
+    const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
-        .pipe(onlyNewFiles(mapSrcToDest))
+        .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
-        .pipe(cssfont64({ formatter: typoCssFontfile, extention: 'less' }))
-        .pipe(renameUsingMapper(mapSrcToDest))
-        .pipe(gulp.dest(typoFontsDest));
+        .pipe(tsProject());
+
+    const tsPipe = tsResult.js
+        .pipe(babel({ plugins: ['transform-react-display-name'] }))
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
+        .pipe(gulp.dest(dest));
+
+    const dtsPipe = tsResult.dts
+        .pipe(renameUsingMapper(mapToDest))
+        .pipe(gulp.dest(dest));
+
+    return merge([tsPipe, dtsPipe]);
 }
 
 function buildIconsCssFonts() {
@@ -132,6 +187,16 @@ function buildIconsCssFonts() {
         .pipe(gulp.dest(iconFontsDest));
 }
 
+function buildTypoCssFonts() {
+    return gulp.src(typoFonts)
+        .pipe(fixErrorHandling())
+        .pipe(onlyNewFiles(mapSrcToDest))
+        .pipe(logCompiling())
+        .pipe(cssfont64({ formatter: typoCssFontfile, extention: 'less' }))
+        .pipe(renameUsingMapper(mapSrcToDest))
+        .pipe(gulp.dest(typoFontsDest));
+}
+
 configureSvgIcon({
     destination: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'src', 'index.js'),
     svgDir: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'assets'),
@@ -140,7 +205,8 @@ configureSvgIcon({
 
 gulp.task('test', test);
 gulp.task('buildJs', buildJs);
-gulp.task('build', ['buildJs']);
+gulp.task('buildTs', buildTs);
+gulp.task('build', ['buildJs', 'buildTs']);
 gulp.task('default', ['test', 'build']);
 gulp.task('buildicons', ['svg-icon']);
 gulp.task('buildTypoCssFonts', buildTypoCssFonts);
