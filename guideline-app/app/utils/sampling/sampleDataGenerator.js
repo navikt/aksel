@@ -50,7 +50,6 @@ const getTypeNamesOfComponent = (component, docgenInfoTypeIdentifier) => {
     if (component.__docgenInfo && component.__docgenInfo.props) {
         const propType = component.__docgenInfo.props[docgenInfoTypeIdentifier];
         if (propType) {
-            console.log(propType);
             if (isEnum(propType.type)) {
                 return getEnumValuesFromPropType(propType);
             }
