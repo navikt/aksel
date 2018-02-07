@@ -108,7 +108,9 @@ function parseTsAndAppendDocInfo(contents, file) {
     if (fs.existsSync(tsPath)) {
         docInfo = tsDocgen.parse(tsPath)[0];
 
-        if (docInfo.displayName === 'StatelessComponent') {
+        const exceptions = ['StatelessComponent', 'EventThrottler'];
+
+        if (exceptions.indexOf(docInfo.displayName) !== -1) {
             return contents;
         }
 
