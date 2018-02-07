@@ -112,6 +112,12 @@ function parseTsAndAppendDocInfo(contents, file) {
             return contents;
         }
 
+        const examine = ['HjelpetekstBase', 'NavFrontendChevron']
+
+        if (examine.indexOf(docInfo.displayName) !== -1) {
+            console.log(JSON.stringify(docInfo, null, 2));
+        }
+
         if (
             docInfo.props.type &&
             docInfo.props.type.type &&
