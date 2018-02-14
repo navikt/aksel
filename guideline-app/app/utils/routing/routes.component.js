@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import routeConfig from './routes.config';
+import DocumentTitle from 'react-document-title';
 
 export const RouteWithSubRoutes = (route) => (
     <Route
@@ -8,10 +9,12 @@ export const RouteWithSubRoutes = (route) => (
         path={route.path}
         render={
             (props) => (
-                <route.component
-                    routes={route.routes}
-                    {...props}
-                />
+                <DocumentTitle title={`${route.title} - NAV Designsystem`}>
+                    <route.component
+                        routes={route.routes}
+                        {...props}
+                    />
+                </DocumentTitle>
             )
         }
     />
