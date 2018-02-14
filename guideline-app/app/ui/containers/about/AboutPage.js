@@ -14,7 +14,7 @@ const AboutPage = () => (
             <img src={designUtviklingPng} alt="design-samarbeid" />
         </div>
         <div className="aboutPage__content">
-            <Sidetittel>NAV Designsystemet</Sidetittel>
+            <Sidetittel>NAV Designsystem</Sidetittel>
             <div className="smallSection">
                 <Ingress>
                     NAV skal være enhetlig og tydelig i det vi kommuniserer. Profil og design er en stor del av vår
@@ -84,7 +84,7 @@ const AboutPage = () => (
                     <li>Universell utforming - Karina Ludwig</li>
                     <li>Interaksjonsdesign - Thea Steen Hellebust</li>
                     <li>Kommunikasjon - Mathilde Skjelbostad</li>
-                    <li>Frontend - Erlend Vige</li>
+                    <li>Utvikling - Erlend Vige, Eirik Lillebo</li>
                     <li>Visuelt design - Sergio Haisch.</li>
                 </ul>
 
