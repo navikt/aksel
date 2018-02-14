@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-import routeConfig from './routes.config';
 import DocumentTitle from 'react-document-title';
+import routeConfig from './routes.config';
 
 export const RouteWithSubRoutes = (route) => (
     <Route
