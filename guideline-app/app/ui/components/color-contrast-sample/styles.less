@@ -1,6 +1,5 @@
 .colorContrastSample {
   width: 48%;
-  height: 88px;
   padding: 20px;
   display: inline-block;
   margin-top: 8px;
@@ -13,5 +12,16 @@
 
   &:nth-child(even) {
     margin-left: 12px;
+  }
+
+  @media screen and (max-width: 900px) {
+    .uuText {
+      float:none;
+      bottom:0;
+    }
+
+    &:nth-child(even) {
+      margin-left:0;
+    }
   }
 }
