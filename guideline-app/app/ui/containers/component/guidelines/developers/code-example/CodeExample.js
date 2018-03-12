@@ -82,6 +82,7 @@ class CodeExample extends Component {
                 <pre>
                     <code
                         className="hljs"
+                        // eslint-disable-next-line react/no-danger
                         dangerouslySetInnerHTML={{ __html: this.getCodeToDisplay() }}
                     />
                 </pre>
@@ -94,13 +95,14 @@ CodeExample.propTypes = {
     activeType: PT.shape({
         component: PT.func
     }).isRequired,
-    activeRef: PT.shape({}).isRequired,
+    activeRef: PT.shape({}),
     activeMultipleChoiceModifiers: PT.arrayOf(PT.shape({})),
     componentData: PT.shape({}).isRequired
 };
 
 CodeExample.defaultProps = {
-    activeMultipleChoiceModifiers: []
+    activeMultipleChoiceModifiers: [],
+    activeRef: {}
 };
 
 // eslint-disable-next-line no-class-assign

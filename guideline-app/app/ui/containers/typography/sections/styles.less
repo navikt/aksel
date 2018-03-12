@@ -1,10 +1,33 @@
 .sourceSansProSection {
-  &__bigLetters {
-    font-size: 270px;
-    font-weight: bold;
-    line-height: 0;
+
+  &__intro {
+    display:flex;
+
+    .typo-ingress {
+      margin-top:25px;
+      max-width:450px;
+    }
+
+    @media screen and (max-width: 550px) {
+      display:block;
+
+      .typo-ingress {
+        max-width:100%;
+      }
+    }
   }
 
+  &__bigLetters {
+    font-size: 150px;
+    font-weight: bold;
+    line-height: 0;
+    margin:0.5em 0.25em 0 0;
+
+    @media screen and (max-width: 550px) {
+      margin:0;
+      line-height:150px;
+    }
+  }
 
   &__samplesWrapper {
     top: 100px;
@@ -23,19 +46,12 @@
 }
 
 .typographyHierarchySection {
-  &__hierarchySamples {
-    padding: 16px 8px 16px 8px;
-    margin-top: 8px;
-
-    &--framed {
-      border: solid 1px #979797;
-    }
-
-    *:not(:first-child) {
-      padding-top: 38px;
-    }
+  &__hierarchySamples {}
+  &__sample {
+    margin-top:30px;
 
     span {
+      display:block;
       color: #78706a;
       font-size: 14px;
     }

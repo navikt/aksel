@@ -2,4 +2,5 @@ _templates/
 dist
 packages/node_modules/*/lib
 examples/
+development/
 webpack.config.js
