@@ -12,3 +12,6 @@ examples/webpack/out
 .gitattributes
 .iml
 .DS_Store
+
+*.d.ts
+!*nav-frontend-ikoner-assets/src/index.d.ts
