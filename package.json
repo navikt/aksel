@@ -7,7 +7,8 @@
     "postinstall": "npm run build",
     "lerna": "lerna",
     "gulp": "gulp",
-    "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
+    "lernapublish":
+      "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
     "create": "node ./_scripts/scaffold.js",
     "new": "npm run create",
     "checkversions": "node ./_scripts/verifyPkgDependencies.js",
@@ -16,18 +17,23 @@
     "lint": "npm run js:lint && npm run less:lint",
     "js:lint": "esw --color",
     "js:lint:fix": "esw --color --fix",
-    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/ -e *Source-Sans*.less",
+    "less:lint":
+      "lesshint --reporter ./_scripts/lesshint-reporter.js packages/ -e *Source-Sans*.less",
     "test": "gulp test",
     "build": "gulp build && npm run generateMDs",
     "buildfonts": "gulp buildfonts",
     "buildicons": "gulp svg-icon",
-    "start": "webpack-dev-server --hot --inline --config development/conf/webpack.config.js",
+    "start":
+      "webpack-dev-server --hot --inline --config development/conf/webpack.config.js",
     "dev": "npm start",
     "watch": "npm start",
     "generateMDs": "node ./_scripts/generateReadmes.js",
-    "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
-    "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js",
-    "deploy-guideline-app": "npm run build-guideline-app && gh-pages -d guideline-app/dist"
+    "start-guideline-app":
+      "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
+    "build-guideline-app":
+      "webpack --config guideline-app/conf/webpack.production.js",
+    "deploy-guideline-app":
+      "npm run build-guideline-app && gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
@@ -36,6 +42,7 @@
     "@types/react": "15.0.23 || ^16.0.0",
     "@types/sanitize-html": "^1.13.0",
     "@types/react-collapse": "^4.0.1",
+    "@types/react-modal": "^3.1.2",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
