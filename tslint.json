@@ -1,6 +1,7 @@
 {
     "extends": "tslint-config-airbnb",
     "rules": {
+        "ter-arrow-parens": [true, "always"],
         "import-name": false,
         "max-line-length": [true, 120],
         "no-duplicate-imports": false,
