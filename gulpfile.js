@@ -21,10 +21,6 @@ const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
 const tsProject = ts.createProject('tsconfig.json');
 
-const tsDocgen = require('react-docgen-typescript');
-const insert = require('gulp-insert');
-const fs = require('fs');
-
 let srcEx;
 let assetsEx;
 let libFragment;
@@ -99,55 +95,17 @@ function buildJs() {
         .pipe(gulp.dest(dest));
 }
 
-function parseTsAndAppendDocInfo(contents, file) {
-    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
-
-    let docInfo;
-    let docInfoString;
-
-    if (fs.existsSync(tsPath)) {
-        docInfo = tsDocgen.parse(tsPath)[0];
-
-        const exceptions = ['StatelessComponent', 'EventThrottler', 'Container'];
-
-        if (exceptions.indexOf(docInfo.displayName) !== -1) {
-            return contents;
-        }
-
-        if (
-            docInfo.props.type &&
-            docInfo.props.type.type &&
-            docInfo.props.type.type.name &&
-            docInfo.props.type.type.name.indexOf('|') !== -1
-        ) {
-            docInfo.props.type.type.value = docInfo.props.type.type.name
-                .split('|')
-                .map((strValue) =>
-                    ({ value: strValue.trim() })
-                );
-            docInfo.props.type.type.name = 'enum';
-        }
-
-        docInfoString = JSON.stringify(docInfo);
-
-        // eslint-disable-next-line prefer-template
-        return contents + '\n' + docInfo.displayName + '.__docgenInfo = ' + docInfoString;
-    }
-
-    return contents;
-}
-
 function buildTs() {
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
-        .pipe(tsProject());
+        .pipe(tsProject())
+        .on('error', () => process.exit(1));
 
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
-        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
         .pipe(gulp.dest(dest));
 
     const dtsPipe = tsResult.dts
