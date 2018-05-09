@@ -19,7 +19,9 @@ const jsScripts = './packages/node_modules/*/src/**/*.js';
 const tsScripts = './packages/node_modules/*/src/**/*.ts*';
 const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
-const tsProject = ts.createProject('tsconfig.json');
+const tsProject = ts.createProject('tsconfig.json', {
+    moduleResolution: 'node'
+});
 
 const tsDocgen = require('react-docgen-typescript');
 const insert = require('gulp-insert');
