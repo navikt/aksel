@@ -145,7 +145,7 @@ function buildTs() {
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
         .pipe(tsProject())
-        .on('error', () => { if (ignoreErrors) process.exit(1); });
+        .on('error', () => { if (!ignoreErrors) process.exit(1); });
 
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
