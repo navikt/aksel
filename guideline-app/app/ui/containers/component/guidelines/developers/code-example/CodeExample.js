@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PT from 'prop-types';
 import { connect } from 'react-redux';
 import hljs from 'highlight.js';
-import Tabbar from './../../../../../components/tabbar/Tabbar';
+import Tabs from './../../../../../../../../packages/node_modules/nav-frontend-tabs';
 import {
     getHtmlCodeForComponent,
     getReactCodeForComponent,
@@ -68,17 +68,20 @@ class CodeExample extends Component {
     }
 
 
-    changeActiveCodeOption(activeTabbarItem) {
-        this.setState({ activeTabbarItem });
+    changeActiveContent = (e, index) => {
+        this.setState({ activeTabbarItem: this.tabbarItems[index] });
     }
 
     render() {
         return (
             <div className="codeExample">
-                <Tabbar
-                    items={this.tabbarItems}
-                    onActiveItemChange={(item) => this.changeActiveCodeOption(item)}
-                />
+                <Tabs 
+                    onChange={this.changeActiveContent}
+                    defaultAktiv={this.tabbarItems.findIndex((item) => item.defaultActive)}
+                    kompakt
+                >
+                    {this.tabbarItems.map((item) => <Tabs.Tab key={item.label}>{item.label}</Tabs.Tab>)}
+                </Tabs>
                 <pre>
                     <code
                         className="hljs"

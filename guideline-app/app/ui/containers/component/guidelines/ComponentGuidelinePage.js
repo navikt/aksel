@@ -4,7 +4,7 @@ import {
     Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 import Sample from './common/Sample';
-import Tabbar from './../../../components/tabbar/Tabbar';
+import Tabs from './../../../../../../packages/node_modules/nav-frontend-tabs';
 import GuidelineContentForDesigners from './designers/GuidelineContent.designers';
 import GuidelineContentForDevelopers from './developers/GuidelineContent.developers';
 import MdContent from './../../../components/md-content/MdContent';
@@ -13,15 +13,15 @@ import './styles.less';
 class ComponentGuidelinePage extends React.Component {
 
     componentWillMount() {
-        this.tabbarItems = [
-            { label: 'Retnings&shy;linjer for design', content: GuidelineContentForDesigners, defaultActive: true },
-            { label: 'Utvikler&shy;dokumentasjon', content: GuidelineContentForDevelopers }
+        this.tabContent = [
+            GuidelineContentForDesigners,
+            GuidelineContentForDevelopers
         ];
 
         if (this.hasDeveloperGuidelinesOnly()) {
-            this.setState({ activeContent: this.tabbarItems[1].content });
+            this.setState({ activeContent: this.tabContent[1] });
         } else {
-            this.setState({ activeContent: this.tabbarItems[0].content });
+            this.setState({ activeContent: this.tabContent[0] });
         }
     }
 
@@ -29,8 +29,8 @@ class ComponentGuidelinePage extends React.Component {
         return !this.props.textData;
     }
 
-    updateActiveContent(item) {
-        this.setState({ activeContent: item.content });
+    updateActiveContent = (e, index) => {
+        this.setState({ activeContent: this.tabContent[index] });
     }
 
     renderIngress() {
@@ -46,10 +46,10 @@ class ComponentGuidelinePage extends React.Component {
                 </div>
 
                 <div className="section componentGuidelinePage__tabbarContainer">
-                    <Tabbar
-                        items={this.tabbarItems}
-                        onActiveItemChange={(item) => this.updateActiveContent(item)}
-                    />
+                    <Tabs onChange={this.updateActiveContent}>
+                        { !this.hasDeveloperGuidelinesOnly() && <Tabs.Tab>Retnings&shy;linjer for design</Tabs.Tab> }
+                        <Tabs.Tab>Utvikler&shy;dokumentasjon</Tabs.Tab>
+                    </Tabs>
                 </div>
 
                 <div className="section">
