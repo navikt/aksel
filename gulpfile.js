@@ -138,11 +138,14 @@ function parseTsAndAppendDocInfo(contents, file) {
 }
 
 function buildTs() {
+    const ignoreErrors = process.argv.indexOf('--ignoreErrors') !== -1;
+
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
-        .pipe(tsProject());
+        .pipe(tsProject())
+        .on('error', () => { if (!ignoreErrors) process.exit(1); });
 
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
