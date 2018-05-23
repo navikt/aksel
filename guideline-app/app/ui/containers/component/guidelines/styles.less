@@ -1,14 +1,28 @@
 .componentGuidelinePage {
   &__tabbarContainer {
-    margin:32px -32px 0px -64px;
+    margin:32px -64px;
 
     .nav-frontend-tabs {
-      padding-left:64px;
+      padding:0px 64px;
+
+      .typo-undertittel {
+        padding:0;
+      }
     }
 
-    .designerGuidelineSection {
-      .typo-element {
-        padding: 12px 0px 0px 0px;
+    @media screen and (max-width: 600px) {
+      margin: 32px -40px;
+
+      .nav-frontend-tabs {
+        padding:0px 40px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      margin: 32px -20px;
+
+      .nav-frontend-tabs {
+        padding:0px 20px;
       }
     }
   }

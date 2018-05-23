@@ -2,7 +2,8 @@ import React from 'react';
 import PT from 'prop-types';
 
 import {
-    Normaltekst
+    Normaltekst,
+    Innholdstittel
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { TypographyHierarchyData as samples } from '../../../../data/index';
@@ -37,7 +38,8 @@ const TypographyHierarchySection = (props) => {
 
     return (
         <div {... props} className="typographyHierarchySection wrapper">
-            <SectionTitle title="Typografisk Hierarki" />
+            <Innholdstittel>Typografisk Hierarki</Innholdstittel>
+            <hr/>
 
             { renderDescription() }
 

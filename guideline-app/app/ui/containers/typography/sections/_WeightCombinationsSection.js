@@ -15,7 +15,8 @@ import SectionTitle from './../../../components/section-title/SectionTitle';
 
 const WeightCombinationsSection = (props) => (
     <div className="weightCombinationsSection" {... props}>
-        <SectionTitle title="Vektkombinasjoner" />
+        <Innholdstittel>Vektkombinasjoner</Innholdstittel>
+        <hr/>
 
         <Row className="weightCombinationsSection__example">
             <Column xs="12">

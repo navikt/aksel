@@ -7,7 +7,6 @@ import './styles.less';
 const SectionTitle = (props) => (
     <div className="sectionTitle">
         <Sidetittel>{ props.title }</Sidetittel>
-        { !props.noHr && <hr /> }
     </div>
 );
 

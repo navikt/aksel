@@ -4,6 +4,7 @@ import PT from 'prop-types';
 import { Undertittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import MdContent from './../../../../components/md-content/MdContent';
+import './styles.less';
 
 class GuidelineContentForDesigners extends Component {
 

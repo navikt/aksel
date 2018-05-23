@@ -14,6 +14,7 @@ class CodeExample extends Component {
 
     componentWillMount() {
         this.tabbarItems = this.getTabbarItems();
+        console.log(this.tabbarItems);
         this.setState({
             activeTabbarItem:
             this.tabbarItems.find((item) => item.defaultActive) ||
@@ -77,7 +78,7 @@ class CodeExample extends Component {
             <div className="codeExample">
                 <Tabs 
                     onChange={this.changeActiveContent}
-                    defaultAktiv={this.tabbarItems.findIndex((item) => item.defaultActive)}
+                    defaultAktiv={Math.max(0, this.tabbarItems.findIndex((item) => item.defaultActive))}
                     kompakt
                 >
                     {this.tabbarItems.map((item) => <Tabs.Tab key={item.label}>{item.label}</Tabs.Tab>)}
