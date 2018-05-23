@@ -35,8 +35,8 @@ body {
     .mobileMenuToggleButton {
       display:none;
       position:fixed;
-      bottom:32px;
-      right:32px;
+      top:20px;
+      right:20px;
       border:none;
       background:white;
       padding:10px;
@@ -67,7 +67,7 @@ body {
         background:@navBla;
         cursor:pointer;
 
-        &__hamburger-icon {
+        .mobileMenuToggleButton__hamburger-icon {
           &::before {
             border-top:12px double white;
             border-bottom:4px solid white; 
@@ -77,6 +77,11 @@ body {
 
       @media screen and (max-width: 1000px) {
         display:block;
+      }
+
+      @media screen and (max-width: 430px) {
+        top:16px;
+        right:16px;
       }
     }
   }
