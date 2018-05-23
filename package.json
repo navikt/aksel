@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm run build",
+    "postinstall": "gulp build --ignoreErrors && npm run generateMDs",
     "lerna": "lerna",
     "gulp": "gulp",
     "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
@@ -35,9 +35,9 @@
   "devDependencies": {
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
-    "@types/sanitize-html": "^1.13.0",
     "@types/react-collapse": "^4.0.1",
     "@types/react-modal": "^3.1.2",
+    "@types/sanitize-html": "^1.13.0",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.0.0",
