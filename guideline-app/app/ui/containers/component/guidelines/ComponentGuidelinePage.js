@@ -1,8 +1,7 @@
 import React from 'react';
 import PT from 'prop-types';
 import {
-    Ingress,
-    Undertittel
+    Ingress
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 import Sample from './common/Sample';
 import Tabs from './../../../../../../packages/node_modules/nav-frontend-tabs';

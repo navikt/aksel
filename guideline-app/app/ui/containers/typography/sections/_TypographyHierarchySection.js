@@ -7,7 +7,6 @@ import {
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { TypographyHierarchyData as samples } from '../../../../data/index';
-import SectionTitle from './../../../components/section-title/SectionTitle';
 
 const TypographyHierarchySection = (props) => {
     const renderDescription = () => (
@@ -39,7 +38,7 @@ const TypographyHierarchySection = (props) => {
     return (
         <div {... props} className="typographyHierarchySection wrapper">
             <Innholdstittel>Typografisk Hierarki</Innholdstittel>
-            <hr/>
+            <hr />
 
             { renderDescription() }
 

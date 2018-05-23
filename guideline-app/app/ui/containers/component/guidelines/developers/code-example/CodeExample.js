@@ -76,7 +76,7 @@ class CodeExample extends Component {
     render() {
         return (
             <div className="codeExample">
-                <Tabs 
+                <Tabs
                     onChange={this.changeActiveContent}
                     defaultAktiv={Math.max(0, this.tabbarItems.findIndex((item) => item.defaultActive))}
                     kompakt

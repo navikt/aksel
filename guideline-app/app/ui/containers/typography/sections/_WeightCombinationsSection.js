@@ -11,12 +11,10 @@ import {
     Column
 } from './../../../../../../packages/node_modules/nav-frontend-grid';
 
-import SectionTitle from './../../../components/section-title/SectionTitle';
-
 const WeightCombinationsSection = (props) => (
     <div className="weightCombinationsSection" {... props}>
         <Innholdstittel>Vektkombinasjoner</Innholdstittel>
-        <hr/>
+        <hr />
 
         <Row className="weightCombinationsSection__example">
             <Column xs="12">

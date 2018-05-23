@@ -11,12 +11,7 @@ const SectionTitle = (props) => (
 );
 
 SectionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
-    noHr: PropTypes.bool
-};
-
-SectionTitle.defaultProps = {
-    noHr: false
+    title: PropTypes.string.isRequired
 };
 
 export default SectionTitle;
