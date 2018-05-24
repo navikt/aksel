@@ -1,35 +1,28 @@
 .componentGuidelinePage {
   &__tabbarContainer {
-    max-width: 640px;
+    margin:32px -64px;
 
-    .tabbar {
-      margin-left: 16px;
-      margin-right: 16px;
+    .nav-frontend-tabs {
+      padding:0px 64px;
 
-      &__item {
-        background-color: #0067C5;
-        border: 1px solid white;
-        border-radius: 4px;
-        color: white;
-        opacity: 0.5;
-
-        &--active {
-          opacity: 1;
-        }
-
-        &:hover:not(.tabbar__item--active) {
-          opacity: 0.6;
-        }
-      }
-
-      &__item:nth-child(even), &__item:nth-child(odd):not(:first-child) {
-        border-left: none;
+      .typo-undertittel {
+        padding:0;
       }
     }
 
-    .designerGuidelineSection {
-      .typo-element {
-        padding: 12px 0px 0px 0px;
+    @media screen and (max-width: 600px) {
+      margin: 32px -40px;
+
+      .nav-frontend-tabs {
+        padding:0px 40px;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      margin: 32px -20px;
+
+      .nav-frontend-tabs {
+        padding:0px 20px;
       }
     }
   }

@@ -1,12 +1,13 @@
+@import '../../../../../assets/styles/main';
+
 .sampleWrapper {
   max-width: 640px;
 
   .sample {
     background-color: #e7e9e9;
-    padding: 4px 16px 16px 16px;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
     min-width: 40%;
-    margin: 24px 24px 24px 12px;
 
     .hjelpetekst__tekst {
       .typo-normal {
@@ -17,17 +18,13 @@
     .componentSample {
       margin: 16px;
     }
-
-    @media screen and (max-width: 1000px) {
-      margin:12px;
-    }
   }
 
   .sampleEditor {
     border: 1px solid #e7e9e9;
-    padding: 4px 16px 16px 16px;
+    padding: 0.5rem 1rem;
     border-radius: 4px;
-    margin: 12px 24px 12px 12px;
+    margin-top:12px;
     min-width: 28%;
 
     &__form {
@@ -41,10 +38,6 @@
       .modifiers {
         width: 50%;
       }
-    }
-
-    @media screen and (max-width: 1000px) {
-      margin:12px;
     }
   }
 }
