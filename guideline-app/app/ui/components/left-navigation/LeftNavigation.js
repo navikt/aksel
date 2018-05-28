@@ -43,7 +43,6 @@ class LeftNavigation extends React.Component {
                 <a className="leftNavigation__logoSection" href="https://navikt.github.io/nav-frontend-moduler/#/">
                     <NAVLogo />
                     <Normaltekst>NAV Designsystem</Normaltekst>
-                    <hr className="line" />
                 </a>
                 <div className="leftNavigation__expandableListWrapper">
                     <ExpandableList items={routeConfig} />

@@ -2,6 +2,8 @@ import React from 'react';
 import PT from 'prop-types';
 import './styles.less';
 
+import createContrastString from './../../../utils/ColorContrast';
+
 function ColorSample(props) {
     const color = props.color;
 
@@ -30,7 +32,7 @@ function ColorSample(props) {
 
             <div className="colorSample__accessibilityInfo">
                 <p className="colorSample__accessibilityInfo__text" style={getTextColor()}>
-                    { color.wcag }
+                    { createContrastString(color.textColor || '#ffffff', color.hex) }
                 </p>
             </div>
 

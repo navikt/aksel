@@ -1,19 +1,32 @@
+@import '../../../assets/styles/main';
+
 .expandableList {
   list-style: none;
   padding: 0;
 
   &__item, &__item--active {
-    padding: 8px 4px 8px 4px;
     font-weight: normal;
+    border-bottom:1px solid #C6C2BF;
 
     .link {
       display: block;
       text-decoration: none;
+      padding: 12px 4px 12px 4px;
 
       .nav-frontend-chevron {
         float: right;
         top: 8px;
         right: 4px;
+      }
+    }
+
+    .expandableListWrapper {
+      border-top:1px solid #C6C2BF;
+
+      .expandableList__item, .expandableList__item--active {
+        &:last-child {
+          border:0;
+        }
       }
     }
 
@@ -23,10 +36,6 @@
 
     ul li:last-child {
       padding-bottom: 0;
-    }
-
-    ul li:first-child {
-      padding-top: 16px;
     }
 
     &__line {

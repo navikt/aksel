@@ -8,11 +8,14 @@ body {
     min-height: 100%;
     overflow: hidden;
 
+    hr {
+      border:0;
+      border-bottom:1px solid #C6C2BF;
+    }
+
     .contentWrapper {
       background-color: @GL_CONTENT_BACKGROUND_COLOR;
-      padding-left: 64px;
-      padding-right: 32px;
-      padding-bottom: 32px;
+      padding: 0px 64px;
       margin-left: 304px;
 
       @media screen and (max-width: 1000px) {
@@ -32,8 +35,8 @@ body {
     .mobileMenuToggleButton {
       display:none;
       position:fixed;
-      bottom:32px;
-      right:32px;
+      top:20px;
+      right:20px;
       border:none;
       background:white;
       padding:10px;
@@ -64,7 +67,7 @@ body {
         background:@navBla;
         cursor:pointer;
 
-        &__hamburger-icon {
+        .mobileMenuToggleButton__hamburger-icon {
           &::before {
             border-top:12px double white;
             border-bottom:4px solid white; 
@@ -74,6 +77,11 @@ body {
 
       @media screen and (max-width: 1000px) {
         display:block;
+      }
+
+      @media screen and (max-width: 430px) {
+        top:16px;
+        right:16px;
       }
     }
   }

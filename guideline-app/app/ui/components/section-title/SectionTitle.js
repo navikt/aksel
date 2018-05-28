@@ -7,17 +7,11 @@ import './styles.less';
 const SectionTitle = (props) => (
     <div className="sectionTitle">
         <Sidetittel>{ props.title }</Sidetittel>
-        { !props.noHr && <hr /> }
     </div>
 );
 
 SectionTitle.propTypes = {
-    title: PropTypes.string.isRequired,
-    noHr: PropTypes.bool
-};
-
-SectionTitle.defaultProps = {
-    noHr: false
+    title: PropTypes.string.isRequired
 };
 
 export default SectionTitle;

@@ -21,7 +21,10 @@ const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
 const tsProject = ts.createProject('tsconfig.json');
 
-const tsDocgen = require('react-docgen-typescript');
+const tsDocgen = require('react-docgen-typescript').withDefaultConfig({
+    propFilter: { skipPropsWithoutDoc: true }
+});
+
 const insert = require('gulp-insert');
 const fs = require('fs');
 
@@ -138,11 +141,14 @@ function parseTsAndAppendDocInfo(contents, file) {
 }
 
 function buildTs() {
+    const ignoreErrors = process.argv.indexOf('--ignoreErrors') !== -1;
+
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
         .pipe(onlyNewFiles(mapToDest))
         .pipe(logCompiling())
-        .pipe(tsProject());
+        .pipe(tsProject())
+        .on('error', () => { if (!ignoreErrors) process.exit(1); });
 
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
