@@ -49,8 +49,6 @@ class PropTypeTable extends React.Component {
             ...propTypes[key]
         }));
 
-        console.log(propTypeDocs);
-
         const headers = ['Property', 'Type', 'Required', 'Description', 'Default'];
         const cls = () => cn('propTypeTableWrapperOuter', {
             'propTypeTableWrapperOuter--overflowLeft': this.state.overflowLeft,
