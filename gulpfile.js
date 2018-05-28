@@ -21,7 +21,10 @@ const fonts = './packages/node_modules/*/assets/**/*.woff';
 const dest = 'packages/node_modules';
 const tsProject = ts.createProject('tsconfig.json');
 
-const tsDocgen = require('react-docgen-typescript');
+const tsDocgen = require('react-docgen-typescript').withDefaultConfig({
+    propFilter: { skipPropsWithoutDoc: true }
+});
+
 const insert = require('gulp-insert');
 const fs = require('fs');
 
