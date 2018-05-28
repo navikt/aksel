@@ -14,7 +14,6 @@ class CodeExample extends Component {
 
     componentWillMount() {
         this.tabbarItems = this.getTabbarItems();
-        console.log(this.tabbarItems);
         this.setState({
             activeTabbarItem:
             this.tabbarItems.find((item) => item.defaultActive) ||

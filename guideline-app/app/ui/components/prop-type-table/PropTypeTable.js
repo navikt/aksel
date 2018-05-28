@@ -1,6 +1,7 @@
 import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
+import { omit } from './../../../../../packages/node_modules/nav-frontend-js-utils';
 import { Normaltekst, EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';
 
@@ -76,7 +77,7 @@ class PropTypeTable extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                propTypeDocs.map((propTypeDoc, key) => (
+                                propTypeDocs.filter((item) => item.name.indexOf('aria-') !== 0).map((propTypeDoc, key) => (
                                     <PropTypeTableRow
                                         val={{
                                             ...propTypeDoc,
@@ -120,18 +121,13 @@ PropTypeTableHeader.propTypes = {
 };
 
 const PropTypeTableRow = (props) => {
-    const keys = Object.keys(props.val);
-
     return (
         <tr>
-            {
-                keys.map((key, index) => (
-                    <PropTypeTableCell
-                        val={props.val[key]}
-                        key={index} // eslint-disable-line react/no-array-index-key
-                    />
-                ))
-            }
+            <td><strong>{parsePropValue(props.val['name'])}</strong></td>
+            <td>{parsePropValue(props.val['type'])}</td>
+            <td>{parsePropValue(props.val['required'])}</td>
+            <td>{parsePropValue(props.val['description'])}</td>
+            <td>{parsePropValue(props.val['defaultValue'])}</td>
         </tr>
     );
 };
@@ -140,27 +136,16 @@ PropTypeTableRow.propTypes = {
     val: PT.shape({}).isRequired
 };
 
-const PropTypeTableCell = (props) => {
-    let val = props.val;
-
+const parsePropValue = (val) => {
     if (val && typeof val === 'object') {
-        val = val.name || val.value;
+        if (val.name === 'enum') {
+            val = val.value.map((x) => x.value).join(' | ');
+        } else {
+           val = val.name || val.value; 
+       }
     }
-    if (!val || val.length <= 0) {
+    if (val === null || typeof val === 'undefined' || val.length <= 0) {
         val = '-';
     }
-
-    return (
-        <td>
-            <Normaltekst>{ val.toString() }</Normaltekst>
-        </td>
-    );
-};
-
-PropTypeTableCell.propTypes = {
-    val: PT.oneOfType([PT.string, PT.bool, PT.shape({}), PT.number])
-};
-
-PropTypeTableCell.defaultProps = {
-    val: undefined
+    return val.toString();
 };
