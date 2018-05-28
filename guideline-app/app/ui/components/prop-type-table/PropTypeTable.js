@@ -1,8 +1,7 @@
 import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
-import { omit } from './../../../../../packages/node_modules/nav-frontend-js-utils';
-import { Normaltekst, EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';
 
 class PropTypeTable extends React.Component {
@@ -50,6 +49,8 @@ class PropTypeTable extends React.Component {
             ...propTypes[key]
         }));
 
+        console.log(propTypeDocs);
+
         const headers = ['Property', 'Type', 'Required', 'Description', 'Default'];
         const cls = () => cn('propTypeTableWrapperOuter', {
             'propTypeTableWrapperOuter--overflowLeft': this.state.overflowLeft,
@@ -77,7 +78,9 @@ class PropTypeTable extends React.Component {
                         </thead>
                         <tbody>
                             {
-                                propTypeDocs.filter((item) => item.name.indexOf('aria-') !== 0).map((propTypeDoc, key) => (
+                                propTypeDocs.filter((item) =>
+                                    item.name.indexOf('aria-') !== 0
+                                ).map((propTypeDoc, key) => (
                                     <PropTypeTableRow
                                         val={{
                                             ...propTypeDoc,
@@ -120,32 +123,36 @@ PropTypeTableHeader.propTypes = {
     val: PT.string.isRequired
 };
 
-const PropTypeTableRow = (props) => {
-    return (
-        <tr>
-            <td><strong>{parsePropValue(props.val['name'])}</strong></td>
-            <td>{parsePropValue(props.val['type'])}</td>
-            <td>{parsePropValue(props.val['required'])}</td>
-            <td>{parsePropValue(props.val['description'])}</td>
-            <td>{parsePropValue(props.val['defaultValue'])}</td>
-        </tr>
-    );
-};
-
-PropTypeTableRow.propTypes = {
-    val: PT.shape({}).isRequired
-};
-
 const parsePropValue = (val) => {
     if (val && typeof val === 'object') {
         if (val.name === 'enum') {
-            val = val.value.map((x) => x.value).join(' | ');
-        } else {
-           val = val.name || val.value; 
-       }
+            return val.value.map((x) => x.value).join(' | ');
+        }
+        val = val.name || val.value; // eslint-disable-line no-param-reassign
     }
     if (val === null || typeof val === 'undefined' || val.length <= 0) {
-        val = '-';
+        return '-';
     }
     return val.toString();
+};
+
+const PropTypeTableRow = (props) => (
+    <tr>
+        <td><strong>{parsePropValue(props.val.name)}</strong></td>
+        <td>{parsePropValue(props.val.type)}</td>
+        <td>{parsePropValue(props.val.required)}</td>
+        <td>{parsePropValue(props.val.description)}</td>
+        <td>{parsePropValue(props.val.defaultValue)}</td>
+    </tr>
+);
+
+PropTypeTableRow.propTypes = {
+    val: PT.shape({
+        defaultValue: PT.any,
+        description: PT.string,
+        name: PT.string,
+        propName: PT.string,
+        required: PT.boolean,
+        type: PT.any
+    }).isRequired
 };
