@@ -38,7 +38,6 @@ export default function ColorContrastSection() {
                 <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.navLysGra} />
                 <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.orangeFocus} />
                 <ColorContrastSample color={c.navGra80} contrast={c.navGra80.contrastColors.navLysGra} />
-                <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.orangeFocus} />
                 <ColorContrastSample color={c.navGra60} contrast={c.navGra60.contrastColors.navLysGra} />
                 <ColorContrastSample color={c.hvit} contrast={c.hvit.contrastColors.redError} />
                 <ColorContrastSample color={c.redError} contrast={c.redError.contrastColors.navLysGra} />

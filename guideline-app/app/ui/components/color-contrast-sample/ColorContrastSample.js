@@ -6,6 +6,8 @@ import {
     Undertittel
 } from './../../../../../packages/node_modules/nav-frontend-typografi';
 
+import createContrastString from './../../../utils/ColorContrast';
+
 import './styles.less';
 
 export default class ColorContrastSample extends Component {
@@ -29,7 +31,7 @@ export default class ColorContrastSample extends Component {
                 <Normaltekst>{ color.hex }</Normaltekst>
 
                 <div className="uuText">
-                    <Undertittel>{ contrast.wcag }</Undertittel>
+                    <Undertittel>{ createContrastString(this.props.color.hex, this.props.contrast.hex) }</Undertittel>
                 </div>
             </div>
         );
