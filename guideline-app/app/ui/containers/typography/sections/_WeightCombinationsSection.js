@@ -3,6 +3,7 @@ import React from 'react';
 import {
     Normaltekst,
     Innholdstittel,
+    Systemtittel,
     Undertittel
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
@@ -13,7 +14,7 @@ import {
 
 const WeightCombinationsSection = (props) => (
     <div className="weightCombinationsSection" {... props}>
-        <Innholdstittel>Vektkombinasjoner</Innholdstittel>
+        <Systemtittel>Vektkombinasjoner</Systemtittel>
         <hr />
 
         <Row className="weightCombinationsSection__example">
