@@ -15,7 +15,7 @@ class MdContent extends React.Component {
     );
 
     render() {
-        const helpUrl = 'https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.design.md';
+        const helpUrl = 'https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/README.design.md';
         const placeholderText = (
             <div className="mdContent mdContent--normal">
                 <AlertStripeInfo>
