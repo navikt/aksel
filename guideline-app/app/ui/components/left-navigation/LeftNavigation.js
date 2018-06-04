@@ -2,7 +2,6 @@ import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { omit } from './../../../../../packages/node_modules/nav-frontend-js-utils';
 import { Normaltekst } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
 import ExpandableList from './../expandable-list/ExpandableList';
@@ -24,7 +23,7 @@ class LeftNavigation extends React.Component {
         window.addEventListener('click', (e) => this.handleClick(e));
     }
 
-    componentWillUpdate(nextProps){
+    componentWillReceiveProps(nextProps) {
         if (!nextProps.show && !this.timer) {
             this.timer = window.setTimeout(() => this.setState({ hide: true }), 200);
         } else if (this.state.hide) {
@@ -49,7 +48,7 @@ class LeftNavigation extends React.Component {
 
     render() {
         return (
-            <div 
+            <div
                 className={cls(this.props, this.state)}
                 ref={(node) => { this.container = node; }}
                 id={this.props.id}

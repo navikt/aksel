@@ -94,10 +94,10 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
 
     render() {
         const item = this.item;
-        let ariaExpanded = undefined;
-        
+        let ariaExpanded;
+
         if (this.hasChildren()) {
-            ariaExpanded = (item.active) ? 'true' : 'false' ;
+            ariaExpanded = (item.active) ? 'true' : 'false';
         }
 
         return (
@@ -121,7 +121,7 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
 
 ExpandableList.propTypes = {
     items: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
-    role: PropTypes.string,
+    role: PropTypes.string
 };
 
 ExpandableList.defaultProps = {
