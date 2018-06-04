@@ -10,16 +10,26 @@ import NAVLogo from '../nav-logo/nav-logo';
 
 import './styles.less';
 
-const cls = (props) => cn({
+const cls = (props, state) => cn({
     leftNavigation: true,
     'leftNavigation--show': props.show,
-    'leftNavigation--hide': !props.show
+    'leftNavigation--hide': state.hide
 });
 
 class LeftNavigation extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { hide: false };
         window.addEventListener('click', (e) => this.handleClick(e));
+    }
+
+    componentWillUpdate(nextProps){
+        if (!nextProps.show && !this.timer) {
+            this.timer = window.setTimeout(() => this.setState({ hide: true }), 200);
+        } else if (this.state.hide) {
+            this.timer = undefined;
+            this.setState({ hide: false });
+        }
     }
 
     handleClick = (e) => {
@@ -38,7 +48,10 @@ class LeftNavigation extends React.Component {
 
     render() {
         return (
-            <div className={cls(this.props)} ref={(node) => { this.container = node; }}>
+            <div 
+                className={cls(this.props, this.state)}
+                ref={(node) => { this.container = node; }}
+            >
                 <Lukknapp onClick={this.props.toggle} />
                 <a className="leftNavigation__logoSection" href="https://navikt.github.io/nav-frontend-moduler/#/">
                     <NAVLogo />
