@@ -44,7 +44,6 @@ ColorSample.propTypes = {
     color: PT.shape({
         label: PT.string.isRequired,
         hex: PT.string.isRequired,
-        wcag: PT.string,
         textColor: PT.string
     }).isRequired
 };
