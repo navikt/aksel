@@ -34,10 +34,11 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
                                 id="mobileMenuToggleButton"
                                 className="mobileMenuToggleButton"
                                 onClick={this.toggleMenu}
+                                aria-controls={'#main-navigation'}
                             >
                                 <span className="mobileMenuToggleButton__hamburger-icon">Åpne meny</span>
                             </button>
-                            <LeftNavigation show={this.state.showMenu} toggle={this.toggleMenu} />
+                            <LeftNavigation id="main-navigation" show={this.state.showMenu} toggle={this.toggleMenu} />
                         </nav>
                         <div className="contentWrapper">
                             <Header />

@@ -2,6 +2,7 @@ import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
 // eslint-disable-next-line import/no-unresolved, import/extensions
+import { omit } from './../../../../../packages/node_modules/nav-frontend-js-utils';
 import { Normaltekst } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import Lukknapp from './../../../../../packages/node_modules/nav-frontend-lukknapp';
 import ExpandableList from './../expandable-list/ExpandableList';
@@ -51,8 +52,10 @@ class LeftNavigation extends React.Component {
             <div 
                 className={cls(this.props, this.state)}
                 ref={(node) => { this.container = node; }}
+                id={this.props.id}
+                aria-label={'Hovedmeny'}
             >
-                <Lukknapp onClick={this.props.toggle} />
+                <Lukknapp onClick={this.props.toggle} aria-controls={this.props.id} />
                 <a className="leftNavigation__logoSection" href="https://navikt.github.io/nav-frontend-moduler/#/">
                     <NAVLogo />
                     <Normaltekst>NAV Designsystem</Normaltekst>
@@ -67,7 +70,8 @@ class LeftNavigation extends React.Component {
 
 LeftNavigation.propTypes = {
     show: PT.bool,
-    toggle: PT.func.isRequired
+    toggle: PT.func.isRequired,
+    id: PT.string.isRequired
 };
 
 LeftNavigation.defaultProps = {

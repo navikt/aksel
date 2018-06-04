@@ -28,6 +28,7 @@ export default class ExpandableList extends Component {
             }
 
             this.setState({ activeChildIndex: indexOfClicked });
+            if (!item.routes) document.getElementById('app').click();
         }
     }
 
@@ -43,7 +44,7 @@ export default class ExpandableList extends Component {
             );
         });
 
-        return (<ul className="expandableList">{ items }</ul>);
+        return (<ul className="expandableList" role={this.props.role}>{ items }</ul>);
     }
 
     render() {
@@ -74,6 +75,7 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
             return (
                 <ExpandableList
                     items={this.item.routes}
+                    role={'group'}
                 />
             );
         }
@@ -92,12 +94,20 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
 
     render() {
         const item = this.item;
+        let ariaExpanded = undefined;
+        
+        if (this.hasChildren()) {
+            ariaExpanded = (item.active) ? 'true' : 'false' ;
+        }
+
         return (
             <li className={this.getClassList()} key={item.title}>
                 <Link
                     className="link"
                     to={item.path || '#'}
                     onClick={() => { this.props.onItemClicked(item); }}
+                    role="treeitem"
+                    aria-expanded={ariaExpanded}
                 >
                     { item.title }
                     { this.renderChevron() }
@@ -110,7 +120,12 @@ class ExpandableListItem extends Component { // eslint-disable-line react/no-mul
 }
 
 ExpandableList.propTypes = {
-    items: PropTypes.array.isRequired // eslint-disable-line react/forbid-prop-types
+    items: PropTypes.array.isRequired, // eslint-disable-line react/forbid-prop-types
+    role: PropTypes.string,
+};
+
+ExpandableList.defaultProps = {
+    role: 'tree'
 };
 
 
