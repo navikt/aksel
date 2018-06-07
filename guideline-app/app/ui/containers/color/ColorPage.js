@@ -12,7 +12,7 @@ import './styles.less';
 const ColorPage = () => (
     <div className="colorPage">
         <div className="section">
-            <SectionTitle title="Fargepaletten" />
+            <SectionTitle title="Farger" />
             <div className="section">
                 <ColorPaletteSection />
             </div>

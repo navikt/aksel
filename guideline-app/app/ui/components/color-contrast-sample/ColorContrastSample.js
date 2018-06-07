@@ -27,11 +27,11 @@ export default class ColorContrastSample extends Component {
 
         return (
             <div className="colorContrastSample" style={this.createStyle()}>
-                <Systemtittel>{ contrast.label }</Systemtittel>
-                <Normaltekst>{ color.hex }</Normaltekst>
+                <h4>{ contrast.label }</h4>
+                <div className="hex">{ color.hex }</div>
 
                 <div className="uuText">
-                    <Undertittel>{ createContrastString(this.props.color.hex, this.props.contrast.hex) }</Undertittel>
+                    { createContrastString(this.props.color.hex, this.props.contrast.hex) }
                 </div>
             </div>
         );

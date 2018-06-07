@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ingress } from './../../../../../../packages/node_modules/nav-frontend-typografi';
+import { Ingress, Systemtittel, Undertittel } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 import { Colors as c } from './../../../../data';
 import ColorPalette from './../../color-palette/ColorPalette';
 
@@ -11,26 +11,29 @@ export default function PaletteSection() {
                 være gjennomtenkt i forhold til visuell kommunikasjon og NAV sine designprinsipper.
             </Ingress>
 
-            <div className="colorSection">
-                <ColorPalette colors={[c.navRod, c.navMorkGra, c.navLysGra]} />
-            </div>
+            <div className="section">
+                <Systemtittel>Fargepalett</Systemtittel>
+                <hr />
 
-            <div className="colorSection">
-                <b>Interaksjonsfarger</b>
+                <div className="colorSection">
+                    <h3>Hovedfarger</h3>
+                    <ColorPalette colors={[c.navRod, c.navMorkGra, c.navLysGra]} />
+                </div>
 
-                <ColorPalette colors={[c.navBla, c.navDypBla, c.navLilla]} />
-            </div>
+                <div className="colorSection">
+                    <h3>Interaksjonsfarger</h3>
+                    <ColorPalette colors={[c.navBla, c.navDypBla, c.navLilla]} />
+                </div>
 
-            <div className="colorSection">
-                <b>Feedbackfarger</b>
+                <div className="colorSection">
+                    <h3>Feedbackfarger</h3>
+                    <ColorPalette colors={[c.redError, c.pinkErrorBg, c.navGronn, c.navOransje, c.orangeFocus]} />
+                </div>
 
-                <ColorPalette colors={[c.redError, c.pinkErrorBg, c.navGronn, c.navOransje, c.orangeFocus]} />
-            </div>
-
-            <div className="colorSection">
-                <b>Tilleggsfarger</b>
-
-                <ColorPalette colors={[c.navLimeGronn, c.navLysBla]} />
+                <div className="colorSection">
+                    <h3>Tilleggsfarger</h3>
+                    <ColorPalette colors={[c.navLimeGronn, c.navLysBla]} />
+                </div>
             </div>
         </div>
     );
