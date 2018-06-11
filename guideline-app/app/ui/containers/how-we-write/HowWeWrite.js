@@ -71,7 +71,7 @@ export default function HowWeWrite() {
 
             <div className="section">
                 <Undertittel>2. Vi inkluderer leseren</Undertittel>
-                <h3>2.1 Bruk aktive setninger</h3>
+                <Element tag="h3">2.1 Bruk aktive setninger</Element>
                 <Normaltekst>
                     I en aktiv setning er det ikke tvil om hvem som gjør hva eller
                     hvem som har ansvaret.
@@ -87,7 +87,7 @@ export default function HowWeWrite() {
                 </AlertStripeAdvarsel>
 
                 <div className="section">
-                    <h3>2.2 Bruk ord folk forstår</h3>
+                    <Element tag="h3">2.2 Bruk ord folk forstår</Element>
                     <Normaltekst>
                         Unngå å bruke ord du ikke ville brukt muntlig.
                     </Normaltekst>
@@ -101,7 +101,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.3 Forklar faguttrykk</h3>
+                    <Element tag="h3">2.3 Forklar faguttrykk</Element>
                     <Normaltekst>
                         Hvis det er nødvendig å bruke et faguttrykk,
                         bruker du ord fra allmennspråket til å forklare hva det betyr.
@@ -116,7 +116,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.4 Unngå stammespråk</h3>
+                    <Element tag="h3">2.4 Unngå stammespråk</Element>
                     <Normaltekst>
                         Interne ord og begreper er vanskelig å forstå for utenforstående.
                         Erstatt dem med ord folk kjenner.
@@ -131,7 +131,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.5 Unngå forkortelser</h3>
+                    <Element tag="h3">2.5 Unngå forkortelser</Element>
                     <Normaltekst>
                         Skriv ordene helt ut.
                     </Normaltekst>
@@ -165,7 +165,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.6 Skriv du og dere til brukerne</h3>
+                    <Element tag="h3">2.6 Skriv du og dere til brukerne</Element>
                     <Normaltekst>
                         Henvend deg direkte til leseren. Unngå å omtale han
                         eller henne i tredjeperson.
@@ -180,7 +180,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.7 Skriv dere til bedrifter og virksomheter</h3>
+                    <Element tag="h3">2.7 Skriv dere til bedrifter og virksomheter</Element>
                     <Normaltekst>
                         Når du skriver til bedrifter, virksomheter og andre institusjoner
                         bruker du &quot;dere&quot;. Det er også greit å variere med navnet på
@@ -204,7 +204,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.8 Vi skriver navnet på brukeren og varierer med han og hun i notater om brukeren</h3>
+                    <Element tag="h3">2.8 Vi skriver navnet på brukeren og varierer med han og hun i notater om brukeren</Element>
                     <Normaltekst>
                         Notater og meldinger i fagsystemene blir synlige for brukerne på nav.no. Ved å være
                         bevisst på å bruke navn, vil brukerne kjenne seg bedre igjen i tekstene.
@@ -218,7 +218,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>2.9 Vi skriver jeg og vi i notater og meldinger</h3>
+                    <Element tag="h3">2.9 Vi skriver jeg og vi i notater og meldinger</Element>
                     <AlertStripeSuksess>
                         Jeg har oppdaget i etterkant at «navn» har tre barn. Det betyr at vi har oversett
                         barnetillegg for det tredje barnet.
@@ -230,8 +230,8 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
+                    <Element tag="h3">2.10  Varier mellom vi og NAV</Element>
                     <Normaltekst>
-                        <b>2.10  Varier mellom vi og NAV -</b>
                         Det skal være enkelt for leseren å se at NAV er avsender av teksten.
                         Derfor bruker vi navnet NAV tidlig i teksten,
                         og varierer deretter mellom vi og NAV.
@@ -243,7 +243,7 @@ export default function HowWeWrite() {
                 <Undertittel>3. Tekstens struktur</Undertittel>
 
                 <div className="section">
-                    <h3>3.1 Skriv det viktigste allerede i innledningen</h3>
+                    <Element tag="h3">3.1 Skriv det viktigste allerede i innledningen</Element>
                     <AlertStripeSuksess>
                         Stønaden din til barnetilsyn blir økt fra 1 540 kroner til 2 030 kroner per måned fra 1. mai 2012.
                         Dette har Stortinget vedtatt.
@@ -255,7 +255,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>3.2 Hva kan vi unnlate å si, og når må vi forklare og utdype?</h3>
+                    <Element tag="h3">3.2 Hva kan vi unnlate å si, og når må vi forklare og utdype?</Element>
                     <Normaltekst>
                         Du skal aldri skrive mer enn det leseren trenger å vite. Når det er nødvendig må du forklare
                         og utdype, selv om det betyr at teksten blir lengre. Ofte er det bare noen ekstra ord som skal
@@ -271,7 +271,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>3.3 Overskrifter</h3>
+                    <Element tag="h3">3.3 Overskrifter</Element>
                     <Normaltekst>
                         En overskrift skal være informativ og beskrive innholdet
                         så konkret som mulig.
@@ -294,7 +294,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>3.4 Mellomtitler</h3>
+                    <Element tag="h3">3.4 Mellomtitler</Element>
                     <Normaltekst>
                         Mellomtitler gjør det lettere for den som skriver teksten å sortere innholdet,
                         og gjør det lettere for leseren å orientere seg i teksten. All tekst over en
@@ -313,7 +313,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>3.5 Del teksten inn i avsnitt</h3>
+                    <Element tag="h3">3.5 Del teksten inn i avsnitt</Element>
                     <Normaltekst>
                         Når teksten er delt inn i avsnitt er et lettere å se hvilke argumenter og
                         opplysninger som hører sammen. Når teksten deles opp i avsnitt,
@@ -323,7 +323,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h3>3.6 Punktlister skaper god oversikt</h3>
+                    <Element tag="h3">3.6 Punktlister skaper god oversikt</Element>
                     <Normaltekst>
                         Bruk punktlister ved oppramsing og oversikt over ulike alternativer.
                         Sett dem opp slik:
@@ -348,7 +348,7 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <h4>Eksempler:</h4>
+                    <Element tag="h4">Eksempler:</Element>
                     <Normaltekst>
                         Fra arbeidsfeltet nevner vi
                     </Normaltekst>

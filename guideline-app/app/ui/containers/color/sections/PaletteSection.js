@@ -16,22 +16,22 @@ export default function PaletteSection() {
                 <hr />
 
                 <div className="colorSection">
-                    <h3>Hovedfarger</h3>
+                    <Undertittel tag="h3">Hovedfarger</Undertittel>
                     <ColorPalette colors={[c.navRod, c.navMorkGra, c.navLysGra]} />
                 </div>
 
                 <div className="colorSection">
-                    <h3>Interaksjonsfarger</h3>
+                    <Undertittel tag="h3">Interaksjonsfarger</Undertittel>
                     <ColorPalette colors={[c.navBla, c.navDypBla, c.navLilla]} />
                 </div>
 
                 <div className="colorSection">
-                    <h3>Feedbackfarger</h3>
+                    <Undertittel tag="h3">Feedbackfarger</Undertittel>
                     <ColorPalette colors={[c.redError, c.pinkErrorBg, c.navGronn, c.navOransje, c.orangeFocus]} />
                 </div>
 
                 <div className="colorSection">
-                    <h3>Tilleggsfarger</h3>
+                    <Undertittel tag="h3">Tilleggsfarger</Undertittel>
                     <ColorPalette colors={[c.navLimeGronn, c.navLysBla]} />
                 </div>
             </div>
