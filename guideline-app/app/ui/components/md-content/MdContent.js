@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
-import { AlertStripeInfo } from './../../../../../packages/node_modules/nav-frontend-alertstriper';
 import './styles.less';
 
 class MdContent extends React.Component {
@@ -18,10 +17,8 @@ class MdContent extends React.Component {
         const helpUrl = 'https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/README.design.md';
         const placeholderText = (
             <div className="mdContent mdContent--normal">
-                <AlertStripeInfo>
-                    Tekst mangler. Se <a href={helpUrl}>denne oppskriften</a> for informasjon om hvordan du kan
-                    hjelpe oss og bidra med tekster.
-                </AlertStripeInfo>
+                Tekst mangler. Se <a href={helpUrl}>denne oppskriften</a> for informasjon om hvordan du kan
+                hjelpe oss og bidra med tekster.
             </div>
         );
 
