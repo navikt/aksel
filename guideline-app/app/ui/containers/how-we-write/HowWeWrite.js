@@ -204,7 +204,9 @@ export default function HowWeWrite() {
                 </div>
 
                 <div className="section">
-                    <Element tag="h3">2.8 Vi skriver navnet på brukeren og varierer med han og hun i notater om brukeren</Element>
+                    <Element tag="h3">
+                        2.8 Vi skriver navnet på brukeren og varierer med han og hun i notater om brukeren
+                    </Element>
                     <Normaltekst>
                         Notater og meldinger i fagsystemene blir synlige for brukerne på nav.no. Ved å være
                         bevisst på å bruke navn, vil brukerne kjenne seg bedre igjen i tekstene.
@@ -245,12 +247,12 @@ export default function HowWeWrite() {
                 <div className="section">
                     <Element tag="h3">3.1 Skriv det viktigste allerede i innledningen</Element>
                     <AlertStripeSuksess>
-                        Stønaden din til barnetilsyn blir økt fra 1 540 kroner til 2 030 kroner per måned fra 1. mai 2012.
-                        Dette har Stortinget vedtatt.
+                        Stønaden din til barnetilsyn blir økt fra 1 540 kroner til 2 030 kroner per måned fra 1. mai
+                        2012. Dette har Stortinget vedtatt.
                     </AlertStripeSuksess>
                     <AlertStripeAdvarsel>
-                        Stortinget har vedtatt nye regler om stønad til barnetilsyn. Reglene trer i kraft fra 1. mai 2012.
-                        Dette fører til at stønaden blir endret.
+                        Stortinget har vedtatt nye regler om stønad til barnetilsyn. Reglene trer i kraft fra 1. mai
+                        2012. Dette fører til at stønaden blir endret.
                     </AlertStripeAdvarsel>
                 </div>
 
