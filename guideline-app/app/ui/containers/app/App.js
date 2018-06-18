@@ -29,20 +29,21 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             <Router>
                 <div className="app">
                     <div style={{ position: 'relative', marginBottom: '80px' }}>
-                        <div>
-                            <LeftNavigation show={this.state.showMenu} toggle={this.toggleMenu} />
-                        </div>
+                        <nav>
+                            <button
+                                id="mobileMenuToggleButton"
+                                className="mobileMenuToggleButton"
+                                onClick={this.toggleMenu}
+                                aria-controls={'#main-navigation'}
+                            >
+                                <span className="mobileMenuToggleButton__hamburger-icon">Åpne meny</span>
+                            </button>
+                            <LeftNavigation id="main-navigation" show={this.state.showMenu} toggle={this.toggleMenu} />
+                        </nav>
                         <div className="contentWrapper">
                             <Header />
                             { routes() }
                         </div>
-                        <button
-                            id="mobileMenuToggleButton"
-                            className="mobileMenuToggleButton"
-                            onClick={this.toggleMenu}
-                        >
-                            <span className="mobileMenuToggleButton__hamburger-icon">Åpne meny</span>
-                        </button>
                     </div>
                 </div>
             </Router>

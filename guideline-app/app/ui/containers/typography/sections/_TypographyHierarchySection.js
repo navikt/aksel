@@ -3,7 +3,7 @@ import PT from 'prop-types';
 
 import {
     Normaltekst,
-    Innholdstittel
+    Systemtittel
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import { TypographyHierarchyData as samples } from '../../../../data/index';
@@ -37,7 +37,7 @@ const TypographyHierarchySection = (props) => {
 
     return (
         <div {... props} className="typographyHierarchySection wrapper">
-            <Innholdstittel>Typografisk Hierarki</Innholdstittel>
+            <Systemtittel>Typografisk Hierarki</Systemtittel>
             <hr />
 
             { renderDescription() }
