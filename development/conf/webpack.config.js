@@ -46,16 +46,7 @@ const GlobalWebpackConfig = {
                 use: [
                     { loader: 'style-loader' },
                     { loader: 'css-loader' },
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            globalVars: {
-                                nodeModulesPath: '\'~\'',
-                                coreModulePath: '\'~\''
-                            },
-                            include: path.resolve(__dirname, '../')
-                        }
-                    }
+                    { loader: 'less-loader' }
                 ]
             }
         ]
