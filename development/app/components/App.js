@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { AlertStripeSuksess } from './../../../packages/node_modules/nav-frontend-alertstriper';
-import { Hovedknapp, Fareknapp } from './../../../packages/node_modules/nav-frontend-knapper';
-import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
+import LesMer from './../../../packages/node_modules/nav-frontend-lesmerpanel';
+
 
 /*
  * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
@@ -24,11 +23,47 @@ import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
 export default class App extends Component {
     render() {
         return (
-            <div>
-                <AlertStripeSuksess>Heisann Hoppsann!</AlertStripeSuksess>
-                <Hovedknapp>Hovedknapp</Hovedknapp>
-                <Fareknapp>Fareknapp</Fareknapp>
-                <Chevron />
+            <div style={{ marginTop: '20rem' }}>
+                <LesMer
+                    intro="Intro"
+                    id="ida"
+                    lukkTekst="Lukk tekst"
+                    apneTekst="Apne tekst"
+                >
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                    <p style={{ marginBottom: '3rem' }}>"Noe mer"</p>
+                </LesMer>
             </div>
         );
     }
