@@ -28,9 +28,10 @@ deploy:
     on:
       branch: master
     keep-history: true
+    local-dir: "guideline-app/dist"
   - provider: script
     skip-cleanup: true
     on:
       branch: master
     script:
-      - npm run lernapublish
+      - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
