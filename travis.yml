@@ -1,0 +1,33 @@
+language: node_js
+node_js: 
+  - "8.2.1"
+
+before_install: 
+  - export TZ=Europe/Oslo
+
+install:
+  - npm install
+
+before_script:
+  - npm run checkversions
+  - npm run lint
+  - npm run postinstall
+
+script:
+  - npm run build
+  - npm run build-guideline-app
+
+deploy:
+  provider: npm
+  email: "eirik@archivedworks.com"
+  api_key: $NPM_TOKEN
+  on: 
+    branch: master
+  # Hindre at Travis fjerner *.ts and *.d.ts filer fra publiserte pakker
+  skip_cleanup: true
+
+after_success: 
+  - git config --global user.email "eirik@archivedworks.com"
+  - git config --global user.name "navikt"
+  - npm run lernapublish
+  - npm run deploy-guideline-app
