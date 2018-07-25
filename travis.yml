@@ -20,7 +20,7 @@ script:
 deploy:
   provider: npm
   email: "eirik@archivedworks.com"
-  api_key: ${NPM_TOKEN}
+  api_key: $NPM_TOKEN
   on: 
     branch: master
   # Hindre at Travis fjerner *.ts and *.d.ts filer fra publiserte pakker
