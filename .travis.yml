@@ -17,21 +17,26 @@ script:
   - npm run build
   - npm run build-guideline-app
 
+before_deploy:
+  - git config --global user.email "eirik@archivedworks.com"
+  - git config --global user.name "navikt"
+
 deploy:
   - provider: npm
     email: "eirik@archivedworks.com"
     api_key: $NPM_TOKEN
     on: 
       branch: master
-    # Hindre at Travis fjerner *.ts and *.d.ts filer fra publiserte pakker
+    # Hindre at Travis fjerner *.ts og *.d.ts filer fra publiserte pakker
     skip_cleanup: true
   - provider: pages
     skip-cleanup: true
     github-token: $GITHUB_TOKEN
     on:
       branch: master
-
-after_success: 
-  - git config --global user.email "eirik@archivedworks.com"
-  - git config --global user.name "navikt"
-  - npm run lernapublish
+  - provider: script
+    skip-cleanup: true
+    on:
+      branch: master
+    script:
+      - npm run lernapublish
