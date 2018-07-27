@@ -34,4 +34,4 @@ deploy:
     on:
       branch: master
     script:
-      - git checkout master && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
+      - git checkout master && git remote set-url origin https://Lillebo:$GITHUB_TOKEN@github.com/navikt/nav-frontend-moduler.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
