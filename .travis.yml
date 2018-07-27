@@ -34,4 +34,4 @@ deploy:
     on:
       branch: master
     script:
-      - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
+      - git checkout master && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
