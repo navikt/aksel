@@ -28,7 +28,7 @@
     "generateMDs": "node ./_scripts/generateReadmes.js",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
     "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js",
-    "deploy-guideline-app": "npm run build-guideline-app && gh-pages -d guideline-app/dist"
+    "deploy-guideline-app": "gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
