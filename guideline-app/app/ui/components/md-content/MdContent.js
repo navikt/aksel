@@ -9,7 +9,7 @@ class MdContent extends React.Component {
             source={this.props.content}
             className={`mdContent mdContent--${this.props.typography}`}
             containerTagName="div"
-            allowedTypes={['paragraph', 'heading', 'image', 'list', 'listItem', 'link', 'inlineCode', 'code']}
+            allowedTypes={['paragraph', 'emphasis', 'strong', 'heading', 'image', 'list', 'listItem', 'link', 'inlineCode', 'code']}
         />
     );
 
