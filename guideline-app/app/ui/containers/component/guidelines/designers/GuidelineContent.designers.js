@@ -18,14 +18,12 @@ class GuidelineContentForDesigners extends Component {
     }
 
     renderAccessibilitySection() {
-        if (this.props.textData.accessibility) {
-            return (
-                <div className="section">
-                    <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
-                    <MdContent content={this.props.textData.accessibility} warn />
-                </div>
-            );
-        }
+        return this.props.textData.accessibility && (
+            <div className="section">
+                <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
+                <MdContent content={this.props.textData.accessibility} warn />
+            </div>
+        );
     }
 
     render() {
