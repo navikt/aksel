@@ -85,7 +85,7 @@ const AboutPage = () => (
                     <li>Interaksjonsdesign - Thea Steen Hellebust</li>
                     <li>Kommunikasjon - Mathilde Skjelbostad</li>
                     <li>Utvikling - Erlend Vige, Eirik Lillebo</li>
-                    <li>Visuelt design - Sergio Haisch.</li>
+                    <li>Visuelt design - Sergio Haisch, Chris Arnesen</li>
                 </ul>
 
                 <Normaltekst>

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import SectionTitle from './../../components/section-title/SectionTitle';
+import { Systemtittel } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import {
     ColorPaletteSection,
     ColorContrastSection
@@ -11,13 +12,18 @@ import './styles.less';
 const ColorPage = () => (
     <div className="colorPage">
         <div className="section">
-            <SectionTitle title="Fargepaletten" />
-            <ColorPaletteSection />
+            <SectionTitle title="Farger" />
+            <div className="section">
+                <ColorPaletteSection />
+            </div>
         </div>
 
         <div className="section">
-            <SectionTitle title="Fargekontrast mellom tekst og bakgrunn" />
-            <ColorContrastSection />
+            <Systemtittel>Fargekontrast mellom tekst og bakgrunn</Systemtittel>
+            <hr />
+            <div className="section">
+                <ColorContrastSection />
+            </div>
         </div>
     </div>
 );

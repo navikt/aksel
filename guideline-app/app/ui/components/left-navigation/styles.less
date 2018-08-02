@@ -13,8 +13,17 @@
   }
 
   &__logoSection {
+    display:block;
     position: relative;
     text-decoration: none;
+    padding:10px;
+    width:200px;
+    margin:auto;
+
+    &:focus {
+      box-shadow: 0 0 0 3px #FFBD66;
+      outline:none;
+    }
 
     .navLogo {
       align-content: center;
@@ -65,8 +74,10 @@
     .lukknapp {
       display:block;
       position:absolute;
-      top:15px;
-      right:15px;
+      top:20px;
+      right:20px;
+      width:45px;
+      height:40px;
     }
 
     &__logoSection {
@@ -81,6 +92,10 @@
       display:block;
       right:0px;
       animation: slideIn 200ms ease-out;
+    }
+
+    &--hide {
+      display: none;
     }
   }
 }

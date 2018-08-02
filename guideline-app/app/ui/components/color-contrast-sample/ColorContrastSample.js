@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
-import {
-    Systemtittel,
-    Normaltekst,
-    Undertittel
-} from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { Undertittel } from './../../../../../packages/node_modules/nav-frontend-typografi';
+
+import createContrastString from './../../../utils/ColorContrast';
 
 import './styles.less';
 
@@ -25,11 +23,11 @@ export default class ColorContrastSample extends Component {
 
         return (
             <div className="colorContrastSample" style={this.createStyle()}>
-                <Systemtittel>{ contrast.label }</Systemtittel>
-                <Normaltekst>{ color.hex }</Normaltekst>
+                <Undertittel tag="h4">{ contrast.label }</Undertittel>
+                <div className="hex">{ color.hex }</div>
 
                 <div className="uuText">
-                    <Undertittel>{ contrast.wcag }</Undertittel>
+                    { createContrastString(this.props.color.hex, this.props.contrast.hex) }
                 </div>
             </div>
         );

@@ -3,6 +3,7 @@ import React from 'react';
 import {
     Normaltekst,
     Innholdstittel,
+    Systemtittel,
     Undertittel
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 
@@ -11,11 +12,10 @@ import {
     Column
 } from './../../../../../../packages/node_modules/nav-frontend-grid';
 
-import SectionTitle from './../../../components/section-title/SectionTitle';
-
 const WeightCombinationsSection = (props) => (
     <div className="weightCombinationsSection" {... props}>
-        <SectionTitle title="Vektkombinasjoner" />
+        <Systemtittel>Vektkombinasjoner</Systemtittel>
+        <hr />
 
         <Row className="weightCombinationsSection__example">
             <Column xs="12">

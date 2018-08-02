@@ -4,6 +4,7 @@ import PT from 'prop-types';
 import { Undertittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import MdContent from './../../../../components/md-content/MdContent';
+import './styles.less';
 
 class GuidelineContentForDesigners extends Component {
 
@@ -11,7 +12,7 @@ class GuidelineContentForDesigners extends Component {
         return (
             <div className="section">
                 <Undertittel>Hvordan bruker jeg {this.props.componentData.label}?</Undertittel>
-                <MdContent content={this.props.textData.usage} />
+                <MdContent content={this.props.textData.usage} warn />
             </div>
         );
     }
@@ -20,7 +21,7 @@ class GuidelineContentForDesigners extends Component {
         return (
             <div className="section">
                 <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
-                <MdContent content={this.props.textData.accessibility} />
+                <MdContent content={this.props.textData.accessibility} warn />
             </div>
         );
     }

@@ -14,20 +14,22 @@
     "nav-frontend-typografi-style": "^1.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.11"
+    "react-scripts": "1.1.1"
   },
   "scripts": {
     "start:js": "react-scripts start",
     "build:js": "react-scripts build",
-    "start:css": "autoless src",
-    "build:css": "autoless --no-watch src",
+    "start:css": "less-watch-compiler --config less.json",
+    "build:css": "less-watch-compiler --run-once --config less.json",
     "start": "npm-run-all -p start:*",
     "build": "npm run build:css && npm run build:js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "autoless": "^0.1.7",
+    "less": "^3.5.2",
+    "less-plugin-npm-import": "^2.1.0",
+    "less-watch-compiler": "^1.11.3",
     "npm-run-all": "^4.0.2"
   }
 }

@@ -14,7 +14,7 @@ export default function ColorContrastSection() {
             <br />
             <Ingress>Fargene som skal brukes er vist under:</Ingress>
 
-            <div className="colorPage__content__contrastSamples" style={{ width: '100%' }}>
+            <div className="section colorPage__content__contrastSamples" style={{ width: '100%' }}>
                 <ColorContrastSample color={c.navMorkGra} contrast={c.navMorkGra.contrastColors.hvit} />
                 <ColorContrastSample color={c.hvit} contrast={c.hvit.contrastColors.navMorkGra} />
                 <ColorContrastSample color={c.navBla} contrast={c.navBla.contrastColors.hvit} />
@@ -38,7 +38,6 @@ export default function ColorContrastSection() {
                 <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.navLysGra} />
                 <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.orangeFocus} />
                 <ColorContrastSample color={c.navGra80} contrast={c.navGra80.contrastColors.navLysGra} />
-                <ColorContrastSample color={c.navLilla} contrast={c.navLilla.contrastColors.orangeFocus} />
                 <ColorContrastSample color={c.navGra60} contrast={c.navGra60.contrastColors.navLysGra} />
                 <ColorContrastSample color={c.hvit} contrast={c.hvit.contrastColors.redError} />
                 <ColorContrastSample color={c.redError} contrast={c.redError.contrastColors.navLysGra} />
