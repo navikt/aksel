@@ -35,6 +35,6 @@
     "nav-frontend-typografi": "0.0.2",
     "nav-frontend-typografi-style": "0.0.2",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^16.0.1"
   }
 }
