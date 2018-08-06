@@ -7,7 +7,7 @@ module.exports = {
         filename: 'bundle.nostyles.js'
     },
     module: {
-        loaders: [
+        rules: [
             { test: /\.less$/, loader: 'ignore-loader' }
         ]
     }
