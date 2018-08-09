@@ -18,7 +18,7 @@ class GuidelineContentForDesigners extends Component {
     }
 
     renderAccessibilitySection() {
-        return (
+        return this.props.textData.accessibility && (
             <div className="section">
                 <Undertittel>{ this.props.componentData.label } og universell utforming</Undertittel>
                 <MdContent content={this.props.textData.accessibility} warn />
