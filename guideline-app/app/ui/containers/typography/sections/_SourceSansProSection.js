@@ -14,7 +14,7 @@ const SourceSansProSection = () => {
                 <div className="sourceSansProSection__bigLetters">Aa</div>
                 <Ingress>
                     Source® Sans Pro, Adobe sin første open source font-familie, ble designet
-                    av <a href={authorLink} target="_blank">Paul D. Hunt</a>.
+                    av <a href={authorLink} target="_blank" rel="noopener noreferrer">Paul D. Hunt</a>.
                     Det er en sans serif font som er ment å fungere spesielt bra på digitale brukergrensesnitt.
                     <br /><br />
                     <a href={downloadLink}>Last ned hele font-familien fra Google Fonts</a>
