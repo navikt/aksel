@@ -109,9 +109,6 @@ function parseTsAndAppendDocInfo(contents, file) {
     let docInfoString;
 
     if (fs.existsSync(tsPath)) {
-
-        if (!docInfo) return contents; 
-
         docInfo = tsDocgen.parse(tsPath)[0];
 
         const exceptions = ['StatelessComponent', 'EventThrottler', 'Container'];
