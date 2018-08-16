@@ -1,7 +1,7 @@
 {
-  "name": "nav-frontend-example-legacy",
+  "name": "nav-frontend-example-webpack",
   "version": "0.0.1",
-  "description": "Legacy setup for frontendprosjekter",
+  "description": "Webpack setup for frontendprosjekter",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf out",
@@ -12,29 +12,30 @@
   "author": "Name <mail@mail.com>",
   "license": "MIT",
   "devDependencies": {
-    "copyfiles": "^1.2.0",
-    "css-loader": "^0.26.2",
+    "copyfiles": "^2.0.0",
+    "css-loader": "^1.0.0",
     "ignore-loader": "^0.1.2",
-    "less": "^2.7.2",
-    "less-loader": "^2.2.3",
+    "less": "^3.8.0",
+    "less-loader": "^4.1.0",
     "rimraf": "^2.6.1",
-    "style-loader": "^0.13.2",
-    "webpack": "^2.2.1"
+    "style-loader": "^0.21.0",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0"
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
     "babel-runtime": "^6.23.0",
     "classnames": "^2.2.5",
-    "file-loader": "^0.10.1",
-    "nav-frontend-core": "^2.0.6",
-    "nav-frontend-etiketter": "0.0.2",
-    "nav-frontend-etiketter-style": "0.0.2",
-    "nav-frontend-ikoner-assets": "0.0.3",
-    "nav-frontend-paneler": "0.0.2",
-    "nav-frontend-paneler-style": "0.0.2",
-    "nav-frontend-typografi": "0.0.2",
-    "nav-frontend-typografi-style": "0.0.2",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "file-loader": "^1.1.11",
+    "nav-frontend-core": "^4.0.5",
+    "nav-frontend-etiketter": "^1.0.12",
+    "nav-frontend-etiketter-style": "^0.3.10",
+    "nav-frontend-ikoner-assets": "^0.2.27",
+    "nav-frontend-paneler": "^1.0.8",
+    "nav-frontend-paneler-style": "^0.3.10",
+    "nav-frontend-typografi": "^2.0.6",
+    "nav-frontend-typografi-style": "^1.0.10",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
   }
 }
