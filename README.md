@@ -73,6 +73,7 @@ samme som er definert i rot-mappen
 * `npm run create` - Samme som `npm run new`
 * `npm run dev` - Samme som `npm start`
 * `npm run watch` - Samme som `npm start`
+* `npm run start:typescript` - Automatisk refresh i nettleser når man utvikler moduler i typescript
 
 ## Byggemiljø
 Det er satt opp ett CircleCI-bygg for repoet.
