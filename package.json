@@ -32,7 +32,7 @@
     "tsc": "tsc --jsx react",
     "tsc:watch": "tsc --jsx react --watch",
     "src2lib": "node ./_scripts/src2lib.js",
-    "typescript:watch": "npm-run-all -p tsc:watch src2lib"
+    "typescript:watch": "npm-run-all -p tsc:watch src2lib",
     "start:typescript": "npm-run-all -p start tsc:watch src2lib"
   },
   "author": "NAV",
