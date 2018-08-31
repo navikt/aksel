@@ -11,11 +11,19 @@ var log = console.log.bind(console);
 log("*** Bakgrunnsjobb som kopierer javascript filer fra src/*.js til lib/*.js ***");
 
 watcher.on('change', path => {
-	var matches = path.match(/(.*)[\\\/]src[\\\/](.*)/);
+	var matches = path.match(/^(.*[\\\/]src)?(?:$|(.+?)(?:(\.[^.]*$)|$))/);
 	if (matches && matches.length > 2) {
-		var src = path;
-		var dest = matches[ 1 ] + "/lib/" + matches[ 2 ];
-		log(`Kopierer ${src} til => ${dest}`);
-		fs.createReadStream(src).pipe(fs.createWriteStream(dest));
+		var srcPath = matches[ 1 ];
+		var basename = matches[ 2 ];
+		var extension = matches[ 3 ];
+		if (srcPath && srcPath.length > 0 && extension === '.js') {
+			if (fs.existsSync(srcPath + basename + ".tsx") || fs.existsSync(srcPath + basename + ".ts")) {
+				var src = srcPath + basename + extension;
+				var dest = srcPath.replace(/src$/, "lib") + basename + extension;
+				log(`==> Kopierer ${src} => ${dest}`);
+				fs.createReadStream(src).pipe(fs.createWriteStream(dest));
+			}
+		}
 	}
+
 });
