@@ -8,7 +8,9 @@ var watcher = chokidar.watch('packages/node_modules/**/*.js', {
 
 var log = console.log.bind(console);
 
-log("*** Bakgrunnsjobb som kopierer javascript filer fra src/*.js til lib/*.js ***");
+log(" ");
+log("Starter bakgrunnsjobb som kopierer javascript filer fra src/*.js til lib/*.js...");
+log(" ");
 
 watcher.on('change', path => {
 	var matches = path.match(/^(.*[\\\/]src)?(?:$|(.+?)(?:(\.[^.]*$)|$))/);
@@ -19,7 +21,8 @@ watcher.on('change', path => {
 		if (srcPath && srcPath.length > 0 && extension === '.js') {
 			if (fs.existsSync(srcPath + basename + ".tsx") || fs.existsSync(srcPath + basename + ".ts")) {
 				var src = srcPath + basename + extension;
-				var dest = srcPath.replace(/src$/, "lib") + basename + extension;
+				var destPath = srcPath.replace(/src$/, "lib");
+				var dest = destPath + basename + extension;
 				log(`==> Kopierer ${src} => ${dest}`);
 				fs.createReadStream(src).pipe(fs.createWriteStream(dest));
 			}
@@ -27,3 +30,4 @@ watcher.on('change', path => {
 	}
 
 });
+
