@@ -28,7 +28,7 @@
     "generateMDs": "node ./_scripts/generateReadmes.js",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
     "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js",
-    "deploy-guideline-app": "npm run build-guideline-app && gh-pages -d guideline-app/dist"
+    "deploy-guideline-app": "gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
@@ -102,7 +102,7 @@
     "react-collapse": "^4.0.3",
     "react-dom": "^15.4.2 || ^16.0.0",
     "react-height": "^3.0.0",
-    "react-markdown": "^2.5.1",
+    "react-markdown": "^3.3.4",
     "react-modal": "^2.2.4 || ^3.3.1",
     "react-motion": "^0.5.0",
     "react-redux": "^5.0.5",

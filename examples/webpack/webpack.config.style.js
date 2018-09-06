@@ -7,8 +7,8 @@ module.exports = {
         filename: 'bundle.styles.js'
     },
     module: {
-        loaders: [
-            { test: /\.less$/, loader: ['style-loader', 'css-loader', 'less-loader?{"globalVars":{"nodeModulesPath":"\'~\'", "coreModulePath":"\'~\'"}}'] }
+        rules: [
+            { test: /\.less$/, loader: ['style-loader', 'css-loader', 'less-loader'] }
         ]
     }
 };
