@@ -62,6 +62,7 @@ const TabbarItem = (props) => {
         return props.active ? `${clazz} tabbar__item--active` : clazz;
     };
 
+    /* eslint-disable react/no-danger */
     return (
         <div
             className={classList()}
