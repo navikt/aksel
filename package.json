@@ -30,10 +30,7 @@
     "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js",
     "deploy-guideline-app": "gh-pages -d guideline-app/dist",
     "tsc": "tsc --jsx react",
-    "tsc:watch": "tsc --jsx react --watch",
-    "src2lib": "node ./_scripts/src2lib.js",
-    "typescript:watch": "npm-run-all -p tsc:watch src2lib",
-    "start:typescript": "npm-run-all -p start tsc:watch src2lib"
+    "tsc:watch": "tsc --jsx react --watch"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
