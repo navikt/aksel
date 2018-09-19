@@ -20,15 +20,9 @@ export const RouteWithSubRoutes = (route) => (
     />
 );
 
-export const routes = () => (
-    <div>
-        {
-            routeConfig.map((route, i) =>
-                (<RouteWithSubRoutes
-                    key={i} // eslint-disable-line react/no-array-index-key
-                    {...route}
-                />)
-            )
-        }
-    </div>
-);
+export const routes = () => routeConfig.map((route, i) => (
+    <RouteWithSubRoutes
+        key={i} // eslint-disable-line react/no-array-index-key
+        {...route}
+    />
+));

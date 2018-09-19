@@ -1,97 +1,37 @@
-@import '../../../assets/styles/colors.less';
+@import (reference) '~nav-frontend-core/less/_variabler';
+@import (reference) './../../../assets/styles/mixins';
 
 .header {
-  background-color: @GL_WRAPPER_BACKGROUND_COLOR;
-  padding: 48px 64px 32px 64px;
-  margin:0px -64px 40px -64px;
+  background: white;
+  line-height: auto;
 
   &__content {
-    position:relative;
+    padding: 1.5rem 2rem 1rem;
 
-    &__line {
-      border: 1px solid #3e3832;
-      height: 64px;
-      top: 38px;
-      position: absolute;
-    }
+    .header__logo {
+      display: inline-block;
+      position: relative;
+      text-decoration: none;
+      color: @navMorkGra;
 
-    &__textSection {
-      .smallHeader {
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing:0.05em;
+      svg {
+        position:absolute;
+        top:0px;
+        left:0px;
+      }
+
+      .header__title {
+        font-size: 1.5rem;
+        padding-top: 1rem;
+        padding-left: 7rem;
+        padding-bottom: 1rem;
         margin: 0;
-        text-transform: uppercase;
-        position: relative;
       }
 
-      h2 {
-        font-size: 40px;
-        font-weight: bold;
-        margin: 0 0;
-      }
-
-      .navLogo {
-        display:none;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1000px) {
-    padding:18px 24px;
-    margin-right:-64px;
-
-    &__content {
-      &__textSection {
-        .smallHeader {
-          margin: 0 0 0 100px;
-        }
-        .sectionTitle {
-          margin-left:100px;
-          .typo-sidetittel {
-            font-size:30px;
-            line-height:30px;
-          }
-        }
-
-        .navLogo {
-          display:block;
-          position:absolute;
-          top:-3px;
-          left:0px;
-          width:80px;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    margin:0 -40px 40px -40px;
-  }
-
-  @media screen and (max-width: 480px) {
-    margin:0 -20px 15px -20px;
-
-  }
-
-  @media screen and (max-width: 430px) {
-    &__content {
-      &__textSection {
-        .smallHeader {
-          margin: 0 0 0 70px;
-          font-size:12px;
-        }
-        .sectionTitle {
-          margin-left:70px;
-          .typo-sidetittel {
-            font-size:25px;
-            line-height:25px;
-          }
-        }
-
-        .navLogo {
-          top:0px;
-          width:60px;
+      &:hover {
+        .header__title {
+          text-decoration: underline;
+          color: @navBla;
         }
       }
     }

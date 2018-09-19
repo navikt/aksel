@@ -5,7 +5,8 @@ const initialState = {
     activeType: {
         component: null
     },
-    activeRef: null
+    activeRef: null,
+    bgColor: false
 };
 
 function sample(state = initialState, action) {
@@ -41,6 +42,12 @@ function sample(state = initialState, action) {
         case types.ACTIVE_REF_CHANGE: {
             return Object.assign({}, { ...state }, {
                 activeRef: action.value
+            });
+        }
+
+        case types.BG_COLOR_CHANGE: {
+            return Object.assign({}, { ...state }, {
+                bgColor: action.value
             });
         }
 

@@ -12,7 +12,7 @@ const getTextData = () => {
     const context = require.context(
         '../../../../packages/node_modules/',
         true,
-        /([A-Z]|[a-z])+\.(accessibility|ingress|usage)\.(md)/
+        /([A-Z]|[a-z])+\.(accessibility|ingress|usage|overview)\.(md)/
     );
     const textDataRaw = getModulesFromContext(context);
     const textDataInCategories = {};
@@ -56,6 +56,15 @@ const getNameOfModule = (moduleRef) => {
 const getComponentData = () => {
     const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
     const sampleModules = getModulesFromContext(sampleContext);
+    
+    console.log('sampleContext', sampleContext);
+    console.log('sampleModules', sampleModules);
+
+    const overviewContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.overview\.js/);
+    const overviewModules = getModulesFromContext(overviewContext);
+
+    console.log('overviewModules', overviewModules);
+
     const sampleRefs = Object.keys(sampleModules);
     const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);

@@ -1,11 +1,12 @@
 import React from 'react';
 import { HashRouter as Router } from 'react-router-dom';
-
 import { routes } from './../../../utils/routing/routes.component';
+
 import Header from './../../components/header/Header';
+import MainNav from './../../components/main-nav/MainNav';
 import LeftNavigation from './../../components/left-navigation/LeftNavigation';
+
 // eslint-disable-next-line import/extensions
-import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 import './styles.less';
 
@@ -27,23 +28,11 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
     render() {
         return (
             <Router>
-                <div className="app">
-                    <div style={{ position: 'relative', marginBottom: '80px' }}>
-                        <nav>
-                            <button
-                                id="mobileMenuToggleButton"
-                                className="mobileMenuToggleButton"
-                                onClick={this.toggleMenu}
-                                aria-controls={'#main-navigation'}
-                            >
-                                <span className="mobileMenuToggleButton__hamburger-icon">Åpne meny</span>
-                            </button>
-                            <LeftNavigation id="main-navigation" show={this.state.showMenu} toggle={this.toggleMenu} />
-                        </nav>
-                        <div className="contentWrapper">
-                            <Header />
-                            { routes() }
-                        </div>
+                <div className="mainWrapper">
+                    <Header />
+                    <MainNav />
+                    <div className="contentWrapper">
+                        { routes() }
                     </div>
                 </div>
             </Router>

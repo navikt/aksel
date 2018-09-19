@@ -1,29 +1,26 @@
 .componentGuidelinePage {
   &__tabbarContainer {
-    margin:32px -64px;
+    margin:2rem -3rem;
 
     .nav-frontend-tabs {
-      padding:0px 64px;
+      padding:0 3rem;
 
       .typo-undertittel {
         padding:0;
       }
     }
+  }
 
-    @media screen and (max-width: 600px) {
-      margin: 32px -40px;
+  .sample {
+    margin: 3rem 0;
 
-      .nav-frontend-tabs {
-        padding:0px 40px;
-      }
-    }
-
-    @media screen and (max-width: 480px) {
-      margin: 32px -20px;
-
-      .nav-frontend-tabs {
-        padding:0px 20px;
-      }
+    &:last-child {
+      // margin-bottom: 0px;
     }
   }
+}
+
+:focus {
+  box-shadow: 0 0 0 3px #FFBD65;
+  outline: none;
 }

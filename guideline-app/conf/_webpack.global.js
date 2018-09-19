@@ -46,9 +46,9 @@ const GlobalWebpackConfig = {
                 ]
             },
             {
-                test: /\.md$/,
+                test: /\.mdx?$/,
                 use: [
-                    { loader: 'raw-loader' }
+                    { loader: 'babel-loader', '@mdx-js/loader' }
                 ]
             }
         ]

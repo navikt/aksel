@@ -5,8 +5,9 @@ import {
     Sidetittel,
     Undertittel
 } from './../../../../../packages/node_modules/nav-frontend-typografi';
-import designUtviklingPng from './../../../assets/images/about/designutvikling.png';
-import './styles.less';
+
+// import designUtviklingPng from './../../../assets/images/about/designutvikling.png';
+// import './styles.less';
 
 const AboutPage = () => (
     <div className="aboutPage">

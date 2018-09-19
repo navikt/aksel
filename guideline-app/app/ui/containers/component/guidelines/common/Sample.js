@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
+import cn from 'classnames';
 import { connect } from 'react-redux';
-import { EtikettLiten } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
+
+import Panel from './../../../../../../../packages/node_modules/nav-frontend-paneler';
+import { Checkbox } from './../../../../../../../packages/node_modules/nav-frontend-skjema';
+
 import SampleEditor from './SampleEditor';
-import { sampleTypeChange, activeRefChange } from '../../../../../redux/actions/sampleActions';
+import { sampleTypeChange, activeRefChange, bgColorChange } from '../../../../../redux/actions/sampleActions';
 import renderComponentWithModifiersAndChildren from './../../../../../utils/dom/render.utils';
+
 import './styles.less';
+
+const cls = (bgColor) => cn('componentSample', {
+    'componentSample--greyBg': bgColor
+});
 
 class Sample extends Component {
     componentWillMount() {
@@ -51,6 +60,10 @@ class Sample extends Component {
         }
     }
 
+    changeBgColor(event) {
+        this.props.dispatch(bgColorChange(event.target.checked));
+    }
+
     componentDataHasParametersForLiveUpdating() {
         const componentData = this.props.componentData;
 
@@ -70,11 +83,9 @@ class Sample extends Component {
         return (
             <div>
                 <div className="sampleWrapper">
-                    <div className="sample">
-                        <EtikettLiten>Eksempel</EtikettLiten>
-                        <div className="componentSample" ref={(wrapper) => this.changeActiveRef(wrapper)}>
-                            { component }
-                        </div>
+                    <div className={cls(this.props.bgColor)} ref={(wrapper) => this.changeActiveRef(wrapper)}>
+                        <div id="sample-bg-toggle"><Checkbox label="Grå bakgrunn" checked={this.props.bgColor} onChange={(e) => this.changeBgColor(e)} /></div>
+                        { component }
                     </div>
 
                     {
@@ -91,7 +102,8 @@ class Sample extends Component {
 Sample = connect((state) => ({
     activeType: state.sample.activeType,
     activeMultipleChoiceModifiers: state.sample.activeMultipleChoiceModifiers,
-    activeRef: state.sample.activeRef
+    activeRef: state.sample.activeRef,
+    bgColor: state.sample.bgColor
 }))(Sample);
 
 Sample.propTypes = {

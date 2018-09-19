@@ -5,85 +5,60 @@ import {
 } from './../../../../../../packages/node_modules/nav-frontend-typografi';
 import Sample from './common/Sample';
 import Tabs from './../../../../../../packages/node_modules/nav-frontend-tabs';
-import GuidelineContentForDesigners from './designers/GuidelineContent.designers';
-import GuidelineContentForDevelopers from './developers/GuidelineContent.developers';
+// import GuidelineContentForDesigners from './designers/GuidelineContent.designers';
+// import GuidelineContentForDevelopers from './developers/GuidelineContent.developers';
+
+import Overview from './tabs/Overview';
+
 import MdContent from './../../../components/md-content/MdContent';
 import './styles.less';
 
 class ComponentGuidelinePage extends React.Component {
-
     componentWillMount() {
-        this.tabContent = [
-            GuidelineContentForDesigners,
-            GuidelineContentForDevelopers
+        console.log('ComponentGuidelinePage props', this.props);
+        this.tabs = [
+            { 
+                label: 'Oversikt', 
+                content: Overview
+            },
+            { 
+                label: 'Teknisk', 
+                content: (<div>Teknisk</div>)
+            },
+            { 
+                label: 'Tilgjengelighet', 
+                content: (<div>Tilgjengelighet</div>)
+            },
+            { 
+                label: 'Diskusjon', 
+                content: (<div>Diskusjon</div>)
+            }
         ];
 
-        if (this.hasDeveloperGuidelinesOnly()) {
-            this.setState({ activeContent: this.tabContent[1] });
-        } else {
-            this.setState({ activeContent: this.tabContent[0] });
-        }
-    }
-
-    hasDeveloperGuidelinesOnly() {
-        return !this.props.textData;
-    }
-
-    updateActiveContent = (e, index) => {
-        this.setState({ activeContent: this.tabContent[index] });
+        this.state = {
+            activeContent: this.tabs[0].content
+        };
     }
 
     renderIngress() {
         return (<MdContent content={this.props.textData.ingress} typography="ingress" />);
     }
 
-    renderGuidelinePageWithDesignGuidelines() {
-        return (
-            <div>
-                <div className="section">
-                    { this.renderIngress() }
-                    <Sample {... this.props} />
-                </div>
-
-                <div className="section componentGuidelinePage__tabbarContainer">
-                    <Tabs onChange={this.updateActiveContent}>
-                        { !this.hasDeveloperGuidelinesOnly() && <Tabs.Tab>Retnings&shy;linjer for design</Tabs.Tab> }
-                        <Tabs.Tab>Utvikler&shy;dokumentasjon</Tabs.Tab>
-                    </Tabs>
-                </div>
-
-                <div className="section">
-                    <this.state.activeContent {... this.props} />
-                </div>
-            </div>
-        );
-    }
-
-    renderGuidelinePageWithDeveloperGuidelinesOnly() {
-        return (
-            <div>
-                <Ingress>
-                    Det er ikke skrevet noen designretningslinjer for denne komponenten, så her
-                    er det kun utviklerdokumentasjon foreløpig.
-                </Ingress>
-                <Sample {... this.props} />
-                <this.state.activeContent {... this.props} />
-            </div>
-        );
-    }
-
     render() {
-        let content;
-
-        if (this.hasDeveloperGuidelinesOnly()) {
-            content = this.renderGuidelinePageWithDeveloperGuidelinesOnly();
-        } else {
-            content = this.renderGuidelinePageWithDesignGuidelines();
-        }
-
         return (
             <div className="componentGuidelinePage">
-                { content }
+                <div>
+                    <div className="section">
+                        { this.renderIngress() }
+
+                        <div className="section componentGuidelinePage__tabbarContainer">
+                            <Tabs onChange={this.updateActiveContent} tabs={this.tabs} />
+                        </div>
+                    </div>
+                    <div className="section">
+                        <this.state.activeContent {... this.props} />
+                    </div>
+                </div>
             </div>
         );
     }

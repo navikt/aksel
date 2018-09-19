@@ -1,0 +1,47 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+@import (reference) './../../../assets/styles/mixins';
+
+.mainNav {
+  background: white;
+  border-bottom: 4px solid @navLysGra;
+
+  &__wrapper {
+    display:flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    // max-width: 1200px;
+    // margin: auto;
+
+    ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+
+      li {
+        a {
+          display:block;
+          font-size: 1.1rem;
+          color: @navBla;
+          padding: 0.75rem 1.25rem;
+          text-decoration: none;
+          border-bottom: 4px solid @navLysGra;
+          position: relative;
+          top: 4px;
+
+          &:hover {
+            background: #f8f8f8;
+            border-bottom: 4px solid @navBla;
+          }
+
+          &.active {
+            background: white;
+            font-weight: bold;
+            border-bottom: 4px solid @navBla;
+            color: @navMorkGra;
+          }
+        }
+      }
+    }
+  }
+}

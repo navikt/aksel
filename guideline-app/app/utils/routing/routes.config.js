@@ -1,7 +1,7 @@
 import resolveComponentRoutes from './routes.utils';
 
 import ColorPage from '../../ui/containers/color/ColorPage';
-import AboutPage from '../../ui/containers/about/AboutPage';
+import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentMainPage from '../../ui/containers/component/main/ComponentMainPage';
 import LayoutPage from '../../ui/containers/layout/LayoutPage';
 import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
@@ -14,11 +14,13 @@ import HowWeWrite from '../../ui/containers/how-we-write/HowWeWrite';
 
 const componentRoutes = resolveComponentRoutes('components');
 
+console.log('componentRoutes', componentRoutes);
+
 const routeConfig = [
     {
         path: '/',
-        component: AboutPage,
-        title: 'Om Designsystemet',
+        component: GetStartedPage,
+        title: 'Kom i gang',
         exact: true
     },
     {
@@ -28,53 +30,63 @@ const routeConfig = [
         routes: componentRoutes
     },
     {
-        path: '/styling',
+        path: '/graphics',
+        component: ComponentMainPage,
+        title: 'Grafikk'
+    },
+    {
+        path: '/guides',
         component: StyleMainPage,
-        title: 'Styling',
+        title: 'Veiledning',
         routes: [
             {
-                path: '/styling/layout',
+                path: '/guides/layout',
                 component: LayoutPage,
                 title: 'Layout'
             },
             {
-                path: '/styling/typography',
+                path: '/guides/typography',
                 component: TypographyPage,
                 title: 'Typografi'
             },
             {
-                path: '/styling/farger',
+                path: '/guides/farger',
                 component: ColorPage,
                 title: 'Farger'
             },
             {
-                path: '/styling/ikoner',
+                path: '/guides/ikoner',
                 component: IconPage,
                 title: 'Ikoner'
-            }
-        ]
-    },
-    {
-        path: '/how-we-write',
-        component: HowWeWrite,
-        title: 'Slik skriver vi'
-    },
-    {
-        path: '/values',
-        component: OurValuesPage,
-        title: 'Våre verdier'
-    },
-    {
-        path: '/accessibility',
-        component: AccessibilityPage,
-        title: 'Tilgjengelighet',
-        routes: [
+            },
             {
-                path: '/accessibility/guidelines',
-                component: AccessibilityGuidelinePage,
-                title: 'Retningslinjer'
+                path: '/how-we-write',
+                component: HowWeWrite,
+                title: 'Slik skriver vi'
+            },
+            {
+                path: '/values',
+                component: OurValuesPage,
+                title: 'Våre verdier'
+            },
+            {
+                path: '/accessibility',
+                component: AccessibilityPage,
+                title: 'Tilgjengelighet',
+                routes: [
+                    {
+                        path: '/accessibility/guidelines',
+                        component: AccessibilityGuidelinePage,
+                        title: 'Retningslinjer'
+                    }
+                ]
             }
         ]
+    },
+    {
+        path: '/community',
+        component: ComponentMainPage,
+        title: 'Diskusjon'
     }
 ];
 

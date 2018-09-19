@@ -16,3 +16,7 @@ export const activeRefChange = (value) => ({
     type: types.ACTIVE_REF_CHANGE,
     value
 });
+export const bgColorChange = (value) => ({
+    type: types.BG_COLOR_CHANGE,
+    value
+});
