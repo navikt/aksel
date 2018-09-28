@@ -1,5 +1,5 @@
 import React from 'react';
-import ComponentGuidelinePage from '../../ui/containers/component/guidelines/ComponentGuidelinePage';
+import ComponentGuidelinePage from '../../ui/containers/components/component/ComponentGuidelinePage';
 import { Components as components } from './../../data';
 
 const getTopLevelComponentRoutes = (routePrefix) => (
@@ -8,7 +8,8 @@ const getTopLevelComponentRoutes = (routePrefix) => (
             return {
                 path: path.toLowerCase(),
                 component: () => (<ComponentGuidelinePage {...component} />),
-                title: component.componentData.label
+                title: component.componentData.label,
+                data: component.componentData
             };
         }));
 

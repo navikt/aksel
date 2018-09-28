@@ -12,7 +12,7 @@ const getTextData = () => {
     const context = require.context(
         '../../../../packages/node_modules/',
         true,
-        /([A-Z]|[a-z])+\.(accessibility|ingress|usage|overview)\.(md)/
+        /(\w+)\.(\w+)\.(mdx?)/
     );
     const textDataRaw = getModulesFromContext(context);
     const textDataInCategories = {};
@@ -56,18 +56,15 @@ const getNameOfModule = (moduleRef) => {
 const getComponentData = () => {
     const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
     const sampleModules = getModulesFromContext(sampleContext);
-    
-    console.log('sampleContext', sampleContext);
-    console.log('sampleModules', sampleModules);
 
     const overviewContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.overview\.js/);
     const overviewModules = getModulesFromContext(overviewContext);
 
-    console.log('overviewModules', overviewModules);
-
     const sampleRefs = Object.keys(sampleModules);
     const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
+
+    // console.log(pkgs);
 
     const edges = Object.values(pkgs)
         .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
@@ -75,7 +72,7 @@ const getComponentData = () => {
             [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
         ), []);
 
-    const componentData = {};
+    let componentData = {};
     sampleRefs.forEach((moduleRef) => {
         const moduleName = getNameOfModule(moduleRef);
         if (moduleName) {
@@ -84,6 +81,13 @@ const getComponentData = () => {
                 ...sampleModules[moduleRef].default
             };
         }
+    });
+
+    Object.keys(componentData).forEach((component) => {
+        const packageName = componentData[component].installInstructions.match(/(npm install )((nav-frontend-)([a-z-]+))/)[2];
+        const pkgsKey = Object.keys(pkgs).find((pkg) => pkgs[pkg].name === packageName);
+        const manifest = pkgs[pkgsKey];
+        componentData[component].pkg = manifest;
     });
 
     return componentData;

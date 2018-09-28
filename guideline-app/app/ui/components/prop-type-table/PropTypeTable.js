@@ -110,11 +110,7 @@ PropTypeTable.defaultProps = {
 
 export default PropTypeTable;
 
-const PropTypeTableHeader = (props) => (
-    <th key={props.index}>
-        <EtikettLiten>{props.val}</EtikettLiten>
-    </th>
-);
+const PropTypeTableHeader = (props) => (<th key={props.index}>{props.val}</th>);
 
 PropTypeTableHeader.propTypes = {
     index: PT.number.isRequired,

@@ -31,7 +31,7 @@ const GlobalWebpackConfig = {
                 include: [
                     path.resolve(__dirname, './../app')
                 ],
-                exclude: [/\.no-transpilation\.jsx?$/],
+                // exclude: [/\.no-transpilation\.jsx?$/],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['react-docgen', 'transform-object-rest-spread']
@@ -48,7 +48,8 @@ const GlobalWebpackConfig = {
             {
                 test: /\.mdx?$/,
                 use: [
-                    { loader: 'babel-loader', '@mdx-js/loader' }
+                    { loader: 'babel-loader' },
+                    { loader: '@mdx-js/loader' }
                 ]
             }
         ]

@@ -2,7 +2,11 @@ import React from 'react';
 import PT from 'prop-types';
 import { Route } from 'react-router-dom';
 
+import { Innholdstittel } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { EtikettInfo } from './../../../../../packages/node_modules/nav-frontend-etiketter';
 import SectionTitle from './../section-title/SectionTitle';
+
+// <SectionTitle title={route.title} {... props} />
 
 const TitleByRoute = (props) => {
     const renderTitleByRoute = () => (
@@ -13,7 +17,9 @@ const TitleByRoute = (props) => {
                 path={route.path}
                 component={
                     () => (
-                        <SectionTitle title={route.title} {... props} />
+                        <header>
+                            <Innholdstittel>{route.title}</Innholdstittel>
+                        </header>
                     )
                 }
             />

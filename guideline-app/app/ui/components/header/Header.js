@@ -1,11 +1,12 @@
 import React from 'react';
-// import routeConfig from './../../../utils/routing/routes.config';
+
 import NAVLogo from '../nav-logo/nav-logo';
+import MainNav from '../main-nav/MainNav';
 
 import './styles.less';
 
 const Header = () => (
-    <div className="header">
+    <header className="header">
         <div className="header__content">
             <a href="#" className="header__logo">
                 <NAVLogo />
@@ -13,8 +14,9 @@ const Header = () => (
                     Designsystemet
                 </h1>
             </a>
+            <MainNav />
         </div>
-    </div>
+    </header>
 );
 
 export default Header;

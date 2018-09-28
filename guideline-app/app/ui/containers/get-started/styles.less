@@ -1,0 +1,70 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.getStartedWrapper {
+  flex: 1;
+  background:#f4f4f4;
+  // padding: 0 !important;
+}
+
+.aboutWrapper {
+  background: white;
+  text-align: center;
+  border-bottom: 1px solid #E9E7E7;
+  display:none;
+}
+
+.actionsWrapper {
+  
+}
+
+.actionsWrapper, .aboutWrapper {
+  flex: 1;
+  padding: 3rem 0;
+  overflow-y: scroll;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: auto;
+
+  .lenkepanel {
+    padding: 2rem 3rem 2rem 2rem;
+    flex-basis: calc(50% - 0.7rem);
+
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    p {
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__indikator {
+      position: absolute;
+      right: 1rem;
+      left: auto;
+      top: 50%;
+      margin-top: -1px;
+      transition: right 250ms;
+    }
+
+    &:hover,
+    &--hover {
+      h1, h2 {
+        color: @navBla;
+        text-decoration: underline;
+      }
+
+      .lenkepanel__indikator {
+        left: auto;
+        right: 0.75rem;
+      }
+    }
+  }
+}

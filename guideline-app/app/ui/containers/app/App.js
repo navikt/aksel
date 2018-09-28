@@ -30,7 +30,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             <Router>
                 <div className="mainWrapper">
                     <Header />
-                    <MainNav />
                     <div className="contentWrapper">
                         { routes() }
                     </div>

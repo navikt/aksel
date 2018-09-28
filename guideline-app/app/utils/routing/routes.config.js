@@ -1,20 +1,19 @@
 import resolveComponentRoutes from './routes.utils';
 
-import ColorPage from '../../ui/containers/color/ColorPage';
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
-import ComponentMainPage from '../../ui/containers/component/main/ComponentMainPage';
-import LayoutPage from '../../ui/containers/layout/LayoutPage';
-import AccessibilityPage from '../../ui/containers/accessibility/AccessibilityPage';
-import AccessibilityGuidelinePage from '../../ui/containers/accessibility/content-pages/AccessibilityGuidelinePage';
-import TypographyPage from '../../ui/containers/typography/TypographyPage';
-import IconPage from '../../ui/containers/icon/IconPage';
-import OurValuesPage from '../../ui/containers/our-values/OurValuesPage';
-import StyleMainPage from '../../ui/containers/style/StyleMainPage';
-import HowWeWrite from '../../ui/containers/how-we-write/HowWeWrite';
+import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
+
+import ResoucesMainPage from '../../ui/containers/resources/ResourcesMainPage';
+import ColorPage from '../../ui/containers/resources/color/ColorPage';
+import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
+import TypographyPage from '../../ui/containers/resources/typography/TypographyPage';
+import IconPage from '../../ui/containers/resources/icon/IconPage';
+import HowWeWrite from '../../ui/containers/resources/how-we-write/HowWeWrite';
+
+import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
+import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
-
-console.log('componentRoutes', componentRoutes);
 
 const routeConfig = [
     {
@@ -25,67 +24,60 @@ const routeConfig = [
     },
     {
         path: '/components',
-        component: ComponentMainPage,
+        component: ComponentsMainPage,
         title: 'Komponenter',
         routes: componentRoutes
     },
     {
-        path: '/graphics',
-        component: ComponentMainPage,
-        title: 'Grafikk'
-    },
-    {
-        path: '/guides',
-        component: StyleMainPage,
-        title: 'Veiledning',
+        path: '/resources',
+        component: ComponentsMainPage,
+        title: 'Ressurser',
         routes: [
             {
-                path: '/guides/layout',
-                component: LayoutPage,
-                title: 'Layout'
+                path: '/resources/profile',
+                component: TypographyPage,
+                title: 'NAV logo'
             },
             {
-                path: '/guides/typography',
+                path: '/resources/colors',
+                component: TypographyPage,
+                title: 'Farger'
+            },
+            {
+                path: '/resources/illustrations',
+                component: TypographyPage,
+                title: 'Illustrasjoner'
+            },
+            {
+                path: '/resources/icons',
+                component: TypographyPage,
+                title: 'Ikoner'
+            },
+            {
+                path: '/resources/typography',
                 component: TypographyPage,
                 title: 'Typografi'
             },
             {
-                path: '/guides/farger',
-                component: ColorPage,
-                title: 'Farger'
+                path: '/resources/accessibility',
+                component: HowWeWrite,
+                title: 'Tilgjengelighet'
             },
             {
-                path: '/guides/ikoner',
-                component: IconPage,
-                title: 'Ikoner'
-            },
-            {
-                path: '/how-we-write',
+                path: '/resources/how-we-write',
                 component: HowWeWrite,
                 title: 'Slik skriver vi'
-            },
-            {
-                path: '/values',
-                component: OurValuesPage,
-                title: 'Våre verdier'
-            },
-            {
-                path: '/accessibility',
-                component: AccessibilityPage,
-                title: 'Tilgjengelighet',
-                routes: [
-                    {
-                        path: '/accessibility/guidelines',
-                        component: AccessibilityGuidelinePage,
-                        title: 'Retningslinjer'
-                    }
-                ]
             }
         ]
     },
     {
+        path: '/templates',
+        component: TemplatesMainPage,
+        title: 'Maler',
+    },
+    {
         path: '/community',
-        component: ComponentMainPage,
+        component: CommunityMainPage,
         title: 'Diskusjon'
     }
 ];

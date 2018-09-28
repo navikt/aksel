@@ -1,0 +1,47 @@
+.componentGuidelinePage {
+  line-height: 1.5rem;
+
+  .typo-ingress {
+    max-width: 700px;
+  }
+
+  &__tabbarContainer {
+    margin:2rem -3rem 3rem;
+
+    .nav-frontend-tabs {
+      padding:0 3rem;
+
+      .typo-undertittel {
+        padding:0;
+      }
+    }
+  }
+
+  &__content {
+    > .section {
+      max-width: 700px;
+      > div {
+        > h2, > h3 {
+          margin-top: 3rem;
+        }
+        > .alertstripe {
+          margin-top: 2rem;
+        }
+      }
+    }
+
+    .install-doc {
+      pre {
+        white-space: pre-wrap;
+        background: #333;
+        color: white;
+        padding: 0.5rem;
+      }
+    }
+  }
+}
+
+:focus {
+  box-shadow: 0 0 0 3px #FFBD65;
+  outline: none;
+}

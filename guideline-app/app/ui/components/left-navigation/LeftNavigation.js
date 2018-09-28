@@ -12,7 +12,6 @@ import { Normaltekst } from './../../../../../packages/node_modules/nav-frontend
 import './styles.less';
 
 class LeftNavigation extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -23,11 +22,10 @@ class LeftNavigation extends React.Component {
     componentWillMount() {
         const hash = window.location.hash;
         const hashParts = hash.split('/');
-        
+
         this.route = routeConfig.find((route, index) => route.path.indexOf(hashParts[1]) > -1);
 
-        this.setState();
-        console.log(routeConfig[1].routes);
+        console.log(this.route);
     }
 
     render() {
@@ -36,7 +34,7 @@ class LeftNavigation extends React.Component {
                 <h2>{this.route.title}</h2>
                 <ul>
                     { 
-                        routeConfig[1].routes.map((item, index) => 
+                        this.route.routes.map((item, index) => 
                             (
                                 <li key={index}>
                                     <Link
