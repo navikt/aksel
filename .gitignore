@@ -14,4 +14,3 @@ examples/webpack/out
 .DS_Store
 
 *.d.ts
-!*nav-frontend-ikoner-assets/src/index.d.ts
