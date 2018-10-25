@@ -1,11 +1,16 @@
 import React from 'react';
 
+import { Innholdstittel } from 'NavFrontendModules/nav-frontend-typografi';
+
 import './styles.less';
 
 const ColorPage = () => (
-    <article className="mainContent">
-        Hello
-    </article>
+    <React.Fragment>
+        <Innholdstittel>Farger</Innholdstittel>
+        <section className="section">
+            Hello
+        </section>
+    </React.Fragment>
 );
 
 export default ColorPage;

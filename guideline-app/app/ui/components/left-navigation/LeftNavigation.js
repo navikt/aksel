@@ -3,11 +3,11 @@ import PT from 'prop-types';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
-import ExpandableList from './../expandable-list/ExpandableList';
+// import ExpandableList from './../expandable-list/ExpandableList';
 import routeConfig from './../../../utils/routing/routes.config';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { Normaltekst } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import './styles.less';
 
@@ -31,7 +31,7 @@ class LeftNavigation extends React.Component {
     render() {
         return (
             <aside className="leftNavigation">
-                <h2>{this.route.title}</h2>
+                <Systemtittel>{this.route.title}</Systemtittel>
                 <ul>
                     { 
                         this.route.routes.map((item, index) => 

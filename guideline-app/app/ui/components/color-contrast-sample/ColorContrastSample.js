@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PT from 'prop-types';
-import { Undertittel } from './../../../../../packages/node_modules/nav-frontend-typografi';
+import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import createContrastString from './../../../utils/ColorContrast';
 

@@ -1,19 +1,21 @@
 import React from 'react';
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import github from 'react-syntax-highlighter/styles/hljs/github';
-import './styles.less';
+import Prism from 'prismjs';
 
-export const Code = (props) => {
-    const lang = props.className.split('-')[1];
-    return (
-        <SyntaxHighlighter
-            language={lang}
-            style={github}
-            customStyle={{padding: '1rem', background: '#f4f4f4'}}
-        >
-            {props.children}
-        </SyntaxHighlighter>
-    );
-};
+import './styles.less';
+import 'prismjs/themes/prism-coy.css';
+
+class Code extends React.Component {
+    render() {
+        const lang = this.props.className.split('-')[1];
+        const highlighted = Prism.highlight(this.props.children, Prism.languages.jsx);
+        return (
+            <pre className="language-jsx">
+                <code className="language-jsx" dangerouslySetInnerHTML={{__html: highlighted}} />
+            </pre>
+        );
+    }
+}
 
 export const Inline = (props) => (<code className="inline">{props.children}</code>);
+
+export default Code;

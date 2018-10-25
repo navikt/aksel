@@ -6,15 +6,28 @@ pre {
   code {
     font-size: 0.9rem;
   }
+
+  &[class*="language-"]:not([disabled]) {
+    margin: 0;
+
+    > code[class*="language-"] {
+      border-left: 0;
+      box-shadow: none;
+      background-image: none;
+      background: #f4f4f4;
+      padding: 1rem;
+
+      .token {
+        background: none;
+      }
+    }
+  }
 }
 
 code {
   &.inline {
     font-size: 0.9rem;
     display: inline-block;
-    // padding: 0 0.4rem;
-    // line-height: 1.4rem;
-    // background: rgb(244, 244, 244);
     color: @navRod;
   }
 }

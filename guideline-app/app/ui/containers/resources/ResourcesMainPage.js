@@ -1,13 +1,39 @@
 import React from 'react';
+import SubRoutesWrapper from '../../../utils/routing/subroutesWrapper.component';
 
-// import { LenkepanelBase } from './../../../../../packages/node_modules/nav-frontend-lenkepanel';
+import LeftNavigation from '../../components/left-navigation/LeftNavigation';
 
 // import './styles.less';
 
-const ResoucesMainPage = () => (
-    <article className="mainContent">
-        Hello
-    </article>
-);
+class ResoucesMainPage extends React.Component {
+    renderMainContent = () => {
+        return (
+            <article className="mainContent">
+                Ressurser
+            </article>
+        );
+    }
+
+    renderSubRoute = () => {
+        return (
+            <article className="mainContent">
+                <SubRoutesWrapper routes={this.props.routes} />
+            </article>
+        );
+    }
+
+    render(){
+        return (
+            <React.Fragment>
+                <LeftNavigation />
+                {
+                    (window.location.hash !== '#/components') ? 
+                    this.renderSubRoute() : 
+                    this.renderMainContent()
+                }
+            </React.Fragment>
+        );
+    }
+}
 
 export default ResoucesMainPage;
