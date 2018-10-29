@@ -10,8 +10,6 @@ import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 import componentsImg from './../../../../assets/images/components/komponenter.png';
 
-import './styles.less';
-
 class ComponentMainPage extends React.Component {
 
     static renderComponentMainContent() {
@@ -24,7 +22,7 @@ class ComponentMainPage extends React.Component {
 
     renderComponentSubRouteContent() {
         return (
-            <article className="mainContent componentMainPage">
+            <article className="mainContent">
                 <TitleByRoute routes={this.props.routes} />
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>

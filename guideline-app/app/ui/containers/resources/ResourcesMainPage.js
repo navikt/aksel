@@ -8,7 +8,7 @@ import LeftNavigation from '../../components/left-navigation/LeftNavigation';
 class ResoucesMainPage extends React.Component {
     renderMainContent = () => {
         return (
-            <article className="mainContent">
+            <article className="mainContent article">
                 Ressurser
             </article>
         );
@@ -16,7 +16,7 @@ class ResoucesMainPage extends React.Component {
 
     renderSubRoute = () => {
         return (
-            <article className="mainContent">
+            <article className="mainContent article">
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>
         );

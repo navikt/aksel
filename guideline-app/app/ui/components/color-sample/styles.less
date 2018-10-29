@@ -1,45 +1,33 @@
-// @import './../../../assets/styles/base';
+@import (reference) '~nav-frontend-core/less/_variabler';
 
-.colorSample {
-  color: white;
-  height: 200px;
-  width: 188px;
-  // padding: @GL_BASE_UNIT * 2;
-  border-radius: 2px;
+.color-sample {
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  transition: all linear 50ms;
 
-  &__colorInfo {
-    vertical-align: middle;
+  span {
+    color: white;
 
-    &__header {
-      font-size: 16px;
-      font-weight: bold;
-      margin: 0;
-      padding: 0;
-      position: relative;
-      top: 60px;
-    }
-
-    &__subtext {
-      font-size: 14px;
-      margin: 0;
-      position: relative;
-      top: 70px;
-      text-transform: lowercase;
+    &:last-child {
+      text-transform: uppercase;
     }
   }
 
-  &__accessibilityInfo {
-    bottom: 0;
-    position: relative;
-
-    &__text {
-      font-size: 14px;
-      position: relative;
-      top: 120px;
+  &.light {
+    span {
+      color: @navMorkGra;
     }
   }
 
-  @media screen and (max-width: 700px) {
-    width:100%;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.03);
+
+    span {
+      display: inline;
+    }
   }
 }

@@ -20,6 +20,36 @@
         flex: 1;
         padding: 3rem;
         overflow-y: scroll;
+
+        &.article {
+          .section {
+            margin-top: 3rem;
+            max-width: 640px;
+
+            .typo-systemtittel {
+              margin: 1rem 0;
+            }
+
+            p, .typo-normaltekst {
+              margin: 1rem 0 1rem;
+              max-width: 640px;
+            }
+
+            &.full {
+              max-width: none;
+            }
+          }
+        }
+
+        .tabsContainer { 
+          &--fullWidth {
+            margin:2rem -3rem 3rem;
+    
+            .nav-frontend-tabs {
+              padding:0 3rem;
+            }
+          }
+        }
       }
     }
   }

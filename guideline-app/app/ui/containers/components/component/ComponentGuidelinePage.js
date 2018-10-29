@@ -56,7 +56,7 @@ class ComponentGuidelinePage extends React.Component {
                     <div>
                         { this.renderIngress() }
 
-                        <div className="section componentGuidelinePage__tabbarContainer">
+                        <div className="tabsContainer tabsContainer--fullWidth">
                             <Tabs
                                 onChange={(e, i) => this.setState({ activeContent: this.tabs[i].content })}
                                 tabs={this.tabs.map((tab) => ({ label: tab.label }))}

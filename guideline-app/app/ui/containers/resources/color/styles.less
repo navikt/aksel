@@ -1,25 +1,20 @@
-// @import './../../../assets/styles/base';
+@import (reference) '~nav-frontend-core/less/_variabler';
 
-.colorPage {
-  &__lead {
-    font-size: 20px;
-  }
+.color-group {
+  margin: 2rem 0;
 
-  &__content {
-    .colorSection {
-      // margin-top: @GL_BASE_UNIT * 8;
+  .color-description {
+    background: #f4f4f4;
+    padding: 1rem;
 
-      .typo-undertittel {
-        margin-bottom: 1rem;
+    p, .typo-element {
+      line-height:1.5rem;
+
+      &:first-child {
+        margin-top: 0 !important;
       }
-    }
-
-    &__contrastSamples {
-      display: flex;
-      flex-wrap: wrap;
-
-      @media screen and (max-width: 900px) {
-        justify-content: space-between;
+      &:last-child {
+        margin-bottom: 0 !important;
       }
     }
   }
