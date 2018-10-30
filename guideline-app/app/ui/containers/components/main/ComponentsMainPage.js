@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import routeConfig from './../../../../utils/routing/routes.config';
 
-import { Sidetittel, Ingress } from './../../../../../../packages/node_modules/nav-frontend-typografi';
+import { Innholdstittel, Sidetittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
 import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
@@ -23,7 +23,9 @@ class ComponentMainPage extends React.Component {
     renderComponentSubRouteContent() {
         return (
             <article className="mainContent">
-                <TitleByRoute routes={this.props.routes} />
+                <Innholdstittel>
+                    <TitleByRoute routes={this.props.routes} />
+                </Innholdstittel>
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>
         );
@@ -32,7 +34,7 @@ class ComponentMainPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <LeftNavigation />
+                <LeftNavigation routes={this.props.routes} />
                 {
                     (window.location.hash !== '#/components') ? 
                     this.renderComponentSubRouteContent() : 

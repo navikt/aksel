@@ -25,7 +25,7 @@ class ResoucesMainPage extends React.Component {
     render(){
         return (
             <React.Fragment>
-                <LeftNavigation />
+                <LeftNavigation routes={this.props.routes} />
                 {
                     (window.location.hash !== '#/components') ? 
                     this.renderSubRoute() : 
