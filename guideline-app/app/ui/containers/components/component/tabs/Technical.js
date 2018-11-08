@@ -4,8 +4,6 @@ import Lenkepanel from './../../../../../../../packages/node_modules/nav-fronten
 import { Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
-// import Sample from './../common/Sample';
-// import CodeExample from '../developers/code-example/CodeExample';
 
 class Technical extends React.Component {
 
@@ -31,9 +29,7 @@ class Technical extends React.Component {
     render() {
         console.log(this.props);
         // eslint-disable-next-line no-underscore-dangle
-        const docgenInfo = this.props.componentData.__docgenInfo || this.props.activeType.component.__docgenInfo;
-        // eslint-disable-next-line react/prop-types, max-len
-        const isImplementedInReact = !this.props.componentData.tabOptions || !this.props.componentData.tabOptions.react || this.props.componentData.tabOptions.react.show !== false;
+        const docgenInfo = this.props.componentData.__docgenInfo;
 
         return (
             <React.Fragment>
@@ -63,7 +59,6 @@ class Technical extends React.Component {
                     {
                         docgenInfo &&
                         docgenInfo.props &&
-                        isImplementedInReact &&
                         this.renderReactSpecificDoc(docgenInfo)
                     }
                 </section>
