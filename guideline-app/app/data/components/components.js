@@ -15,11 +15,11 @@ const getTextData = () => {
         /(\w+)\.(\w+)\.(mdx?)/
     );
 
-    console.log('textData context', context);
+    // console.log('textData context', context);
 
     const textDataRaw = getModulesFromContext(context);
 
-    console.log('textData raw ', textDataRaw);
+    // console.log('textData raw ', textDataRaw);
 
     const textDataInCategories = {};
 
@@ -67,8 +67,14 @@ const getComponentData = () => {
     const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
 
+    const overviewContext = require.context('NavFrontendModules', true, /\w+\.overview\.mdx/);
+    const overviewModules = getModulesFromContext(overviewContext);
+
+    console.log(overviewModules);
+
     const allModulesContext = require.context('NavFrontendModules', true, /lib\/[a-z]+\.js/);
     const allModules = getModulesFromContext(allModulesContext);
+    
     console.log(allModules);
 
     // console.log(pkgs);
