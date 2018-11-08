@@ -10,7 +10,7 @@ const getModulesFromContext = (context) => {
 
 const getTextData = () => {
     const context = require.context(
-        '../../../../packages/node_modules/',
+        'NavFrontendModules',
         true,
         /(\w+)\.(\w+)\.(mdx?)/
     );
@@ -60,11 +60,11 @@ const getNameOfModule = (moduleRef) => {
 };
 
 const getComponentData = () => {
-    const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
+    const sampleContext = require.context('NavFrontendModules', true, /_[a-z]+\.sample\.js/);
     const sampleModules = getModulesFromContext(sampleContext);
 
     const sampleRefs = Object.keys(sampleModules);
-    const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
+    const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
 
     // console.log(pkgs);
