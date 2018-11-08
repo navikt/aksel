@@ -8,12 +8,20 @@ const cls = (col) => {
 }
 
 const ColorSample = (props) => {
-    const color = Color(props.color);
+    const { color, onClick, ...rest } = props;
+    const col = Color(props.color);
+
     return (
-        <div className={cls(color)} style={{background: color.hex()}} {...props}>
+        <button 
+            className={cls(col)}
+            style={{background: col.hex()}} 
+            role={(typeof props.onClick === 'function') ? 'button' : undefined}
+            onClick={(typeof props.onClick === 'function') ? () => props.onClick({name: props.name, col}) : undefined }
+            {...props}
+        >
             <span>{props.name}</span>
-            <span>{color.hex()}</span>
-        </div>
+            <span>{col.hex()}</span>
+        </button>
     );
 };
 

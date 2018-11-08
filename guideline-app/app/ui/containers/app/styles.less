@@ -21,23 +21,31 @@
         padding: 3rem;
         overflow-y: scroll;
 
-        &.article {
-          .section {
-            margin-top: 3rem;
-            max-width: 640px;
+        .typo-ingress {
+          &.intro {
+            margin: 1rem 0;
+            max-width: 700px;
 
-            .typo-systemtittel {
-              margin: 1rem 0;
+            p {
+              margin: 0;
             }
+          }
+        }
 
-            p, .typo-normaltekst {
-              margin: 1rem 0 1rem;
-              max-width: 640px;
-            }
+        .section {
+          margin-top: 3rem;
+          max-width: 700px;
 
-            &.full {
-              max-width: none;
-            }
+          h2, .typo-systemtittel {
+            margin: 3rem 0 1rem;
+          }
+
+          p, .typo-normaltekst {
+            margin: 1rem 0 1rem;
+          }
+
+          &.full {
+            max-width: none;
           }
         }
 

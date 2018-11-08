@@ -7,6 +7,7 @@ import routeConfig from './../../../../utils/routing/routes.config';
 import { Innholdstittel, Sidetittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
 import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
+
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 import componentsImg from './../../../../assets/images/components/komponenter.png';
 
@@ -37,7 +38,7 @@ class ComponentMainPage extends React.Component {
                 <LeftNavigation routes={this.props.routes} />
                 {
                     (window.location.hash !== '#/components') ? 
-                    this.renderComponentSubRouteContent() : 
+                    this.renderComponentSubRouteContent() :
                     ComponentMainPage.renderComponentMainContent()
                 }
             </React.Fragment>

@@ -14,7 +14,13 @@ const getTextData = () => {
         true,
         /(\w+)\.(\w+)\.(mdx?)/
     );
+
+    console.log('textData context', context);
+
     const textDataRaw = getModulesFromContext(context);
+
+    console.log('textData raw ', textDataRaw);
+
     const textDataInCategories = {};
 
     Object.keys(textDataRaw).forEach((textDataKey) => {
@@ -56,9 +62,6 @@ const getNameOfModule = (moduleRef) => {
 const getComponentData = () => {
     const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
     const sampleModules = getModulesFromContext(sampleContext);
-
-    const overviewContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.overview\.js/);
-    const overviewModules = getModulesFromContext(overviewContext);
 
     const sampleRefs = Object.keys(sampleModules);
     const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);

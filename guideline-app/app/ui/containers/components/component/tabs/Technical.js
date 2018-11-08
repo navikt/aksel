@@ -29,49 +29,45 @@ class Technical extends React.Component {
     );
 
     render() {
+        console.log(this.props);
         // eslint-disable-next-line no-underscore-dangle
         const docgenInfo = this.props.componentData.__docgenInfo || this.props.activeType.component.__docgenInfo;
         // eslint-disable-next-line react/prop-types, max-len
         const isImplementedInReact = !this.props.componentData.tabOptions || !this.props.componentData.tabOptions.react || this.props.componentData.tabOptions.react.show !== false;
 
         return (
-            <section className="section">
-                {/*
-                <h2>Live demo</h2>
-
-                <section className="section">
-                    <Sample {... this.props} />
-                    <CodeExample {... this.props} />
+            <React.Fragment>
+                <section className="section full">
+                    <h2>Detaljer</h2>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Pakkenavn:</th>
+                                <td>{this.props.componentData.pkg.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Versjon:</th>
+                                <td>{this.props.componentData.pkg.version}</td>
+                            </tr>
+                            <tr>
+                                <th>Peer&nbsp;dependencies:</th>
+                                <td>{Object.keys(this.props.componentData.pkg.peerDependencies).map((dep, i) => [<a key={i} href="#">{dep}</a>, ' '])}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
-                */}
-
-                <h2>Detaljer</h2>
-
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Pakkenavn:</th>
-                            <td>{this.props.componentData.pkg.name}</td>
-                        </tr>
-                        <tr>
-                            <th>Versjon:</th>
-                            <td>{this.props.componentData.pkg.version}</td>
-                        </tr>
-                        <tr>
-                            <th>Peer&nbsp;dependencies:</th>
-                            <td>{Object.keys(this.props.componentData.pkg.peerDependencies).map((dep) => [<a href="#">{dep}</a>, ' '])}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                { this.renderInstallInstructions() }
-                {
-                    docgenInfo &&
-                    docgenInfo.props &&
-                    isImplementedInReact &&
-                    this.renderReactSpecificDoc(docgenInfo)
-                }
-            </section>
+                <section className="section full">
+                    { this.renderInstallInstructions() }
+                </section>
+                <section className="section full">
+                    {
+                        docgenInfo &&
+                        docgenInfo.props &&
+                        isImplementedInReact &&
+                        this.renderReactSpecificDoc(docgenInfo)
+                    }
+                </section>
+            </React.Fragment>
         );
     }
 }

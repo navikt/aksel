@@ -4,12 +4,11 @@ import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
 
 import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
-import ColorPage from '../../ui/containers/resources/color/ColorPage';
+import ColorPageMainPage from '../../ui/containers/resources/color/ColorPageMainPage';
 import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import TypographyPage from '../../ui/containers/resources/typography/TypographyPage';
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import HowWeWrite from '../../ui/containers/resources/how-we-write/HowWeWrite';
-// import LogoPage from '../../ui/containers/resources/logo/LogoPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
@@ -36,7 +35,7 @@ const routeConfig = [
         routes: [
             {
                 path: '/resources/colors',
-                component: ColorPage,
+                component: ColorPageMainPage,
                 title: 'Farger'
             },
             {

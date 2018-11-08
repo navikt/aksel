@@ -23,7 +23,7 @@ const colorName = (base, i) => {
     return (i < 4) ? base + `Darken${80 - (i * 20)}` : base + `Lighten${(i * 20) - 80}` ;
 };
 
-const ColorPalette = () => (
+const ColorPalette = (props) => (
     <div className="color-palette">
         {
             Object.keys(palette).map(colorVar => {
@@ -38,7 +38,15 @@ const ColorPalette = () => (
                     <div className="color-group">
                         {
                             group.map((col, i) => {
-                                return (<ColorSample name={colorName(colorVar, i)} color={col.hex()} />);
+                                const name = colorName(colorVar, i);
+                                return (
+                                    <ColorSample 
+                                        key={name} 
+                                        name={name} 
+                                        color={col.hex()} 
+                                        onClick={() => props.onClick({ name, color: col })}
+                                    />
+                                );
                             })
                         }
                     </div>
