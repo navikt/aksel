@@ -12,6 +12,8 @@ import ColorSample from '../../../../components/color-sample/ColorSample';
 import ColorPalette from '../../../../components/color-palette/ColorPalette';
 import ContrastSample from '../../../../components/contrast-sample/ContrastSample';
 
+Modal.setAppElement('#app');
+
 class Palette extends React.Component {
 
     constructor(props) {
@@ -22,10 +24,8 @@ class Palette extends React.Component {
     }
 
     renderModalContent = () => {
-        const isDark = this.state.activeColor.color.isDark();
         return (
             <div id="color-modal">
-                {/*<Lukknapp className="lukknapp--overstHjorne" hvit={isDark} bla={!isDark} />*/}
                 <Systemtittel>{ this.state.activeColor.name }</Systemtittel>
                 <div className="color-banner" style={{background: this.state.activeColor.color.hex()}} />
                 <section className="section">

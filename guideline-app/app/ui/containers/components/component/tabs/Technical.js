@@ -27,7 +27,7 @@ class Technical extends React.Component {
     );
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
 
         // eslint-disable-next-line no-underscore-dangle
         const docgenInfo = this.props.componentData.__docgenInfo;

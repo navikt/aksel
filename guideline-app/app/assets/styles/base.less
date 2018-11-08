@@ -37,11 +37,11 @@ table {
     text-align:left;
   }
 
-  thead {
-    th {
-      border-bottom:1px solid @navGra20;
-    }
-  }
+  // thead {
+  //   th {
+      
+  //   }
+  // }
 
   tbody {
     td, th {
@@ -51,6 +51,12 @@ table {
     tr:nth-child(2n+1){
       td, th {
         background:#fafafa;
+      }
+
+      &:first-child {
+        td, th {
+          border-top:1px solid @navGra20;
+        }
       }
     }
   }

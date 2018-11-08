@@ -8,19 +8,16 @@ const cls = (col) => {
 }
 
 const ColorSample = (props) => {
-    const { color, onClick, ...rest } = props;
-    const col = Color(props.color);
-
+    const color = Color(props.color);
     return (
         <button 
-            className={cls(col)}
-            style={{background: col.hex()}} 
-            role={(typeof props.onClick === 'function') ? 'button' : undefined}
-            onClick={(typeof props.onClick === 'function') ? () => props.onClick({name: props.name, col}) : undefined }
-            {...props}
+            className={cls(color)}
+            style={{background: color.hex()}} 
+            role={(props.onClick === 'function') ? 'button' : undefined}
+            onClick={(typeof props.onClick === 'function') ? () => props.onClick({ name: props.name, color }) : undefined}
         >
             <span>{props.name}</span>
-            <span>{col.hex()}</span>
+            <span>{color.hex()}</span>
         </button>
     );
 };
