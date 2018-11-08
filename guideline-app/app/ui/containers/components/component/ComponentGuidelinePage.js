@@ -1,12 +1,6 @@
 import React from 'react';
 
-import {
-    Ingress,
-    Innholdstittel
-} from 'NavFrontendModules/nav-frontend-typografi';
-
-import Sample from './common/Sample';
-import Etikett from './../../../../../../packages/node_modules/nav-frontend-etiketter';
+import { Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 
 import Overview from './tabs/Overview';
 import Technical from './tabs/Technical';
@@ -14,7 +8,6 @@ import Accessibility from './tabs/Accessibility';
 import Discussion from './tabs/Discussion';
 
 import TabbedContainer from './../../tabbed-container/TabbedContainer';
-import MdContent from './../../../components/md-content/MdContent';
 
 import './styles.less';
 

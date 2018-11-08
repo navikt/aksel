@@ -67,6 +67,10 @@ const getComponentData = () => {
     const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
 
+    const allModulesContext = require.context('NavFrontendModules', true, /lib\/[a-z]+\.js/);
+    const allModules = getModulesFromContext(allModulesContext);
+    console.log(allModules);
+
     // console.log(pkgs);
 
     const edges = Object.values(pkgs)
