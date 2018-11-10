@@ -4,11 +4,11 @@ import { Components as components } from './../../data';
 
 const getTopLevelComponentRoutes = (routePrefix) => (
     components.map((component) => {
-            const path = `/${routePrefix}/${component.componentData.componentName}`;
+            const path = `/${routePrefix}/${component.componentData.name}`;
             return {
                 path: path.toLowerCase(),
                 component: () => (<ComponentGuidelinePage {...component} />),
-                title: component.componentData.label,
+                title: component.componentData.name,
                 data: component.componentData
             };
         }));

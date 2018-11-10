@@ -7,6 +7,15 @@ import PropTypeTable from './../../../../components/prop-type-table/PropTypeTabl
 
 class Technical extends React.Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            activeModule: props.componentData.mainModule
+        };
+
+        console.log(props);
+    }
+
     renderReactSpecificDoc = (doc) => (
         <div className="react-doc">
             <h2>React props</h2>
@@ -30,31 +39,28 @@ class Technical extends React.Component {
         // console.log(this.props);
 
         // eslint-disable-next-line no-underscore-dangle
-        const docgenInfo = this.props.componentData.__docgenInfo;
+        const docgenInfo = this.props.componentData.mainModule.__docgenInfo;
 
         return (
             <React.Fragment>
                 <section className="section full">
-                    <h2>Detaljer</h2>
+                    <h2>NPM-pakke</h2>
                     <table>
                         <tbody>
                             <tr>
                                 <th>Pakkenavn:</th>
-                                <td>{this.props.componentData.pkg.name}</td>
+                                <td>{this.props.componentData.manifest.name}</td>
                             </tr>
                             <tr>
-                                <th>Versjon:</th>
-                                <td>{this.props.componentData.pkg.version}</td>
+                                <th>Siste versjon:</th>
+                                <td>{this.props.componentData.manifest.version}</td>
                             </tr>
                             <tr>
                                 <th>Peer&nbsp;dependencies:</th>
-                                <td>{Object.keys(this.props.componentData.pkg.peerDependencies).map((dep, i) => [<a key={i} href="#">{dep}</a>, ' '])}</td>
+                                <td>{Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => [<a key={i} href="#">{dep}</a>, ' '])}</td>
                             </tr>
                         </tbody>
                     </table>
-                </section>
-                <section className="section full">
-                    { this.renderInstallInstructions() }
                 </section>
                 <section className="section full">
                     {
@@ -62,6 +68,9 @@ class Technical extends React.Component {
                         docgenInfo.props &&
                         this.renderReactSpecificDoc(docgenInfo)
                     }
+                </section>
+                <section className="section full">
+                    { this.renderInstallInstructions() }
                 </section>
             </React.Fragment>
         );

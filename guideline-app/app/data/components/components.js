@@ -69,14 +69,6 @@ const getOverviewModulesByPackageName = (packageName, overviewModules) => {
     });
 };
 
-const getModulesByPackageName = (packageName, allModules) => {
-    // return Object.keys(allModules).filter();
-};
-
-const getComponentModules = () => {
-
-};
-
 const getOverviewModuleNameByPath = (path) => {
     const parts = path.split('/');
     const filename = parts[parts.length - 1];
@@ -84,44 +76,24 @@ const getOverviewModuleNameByPath = (path) => {
 }
 
 const getComponentData = () => {
-
-    // TODO: remove
-
-    const sampleContext = require.context('NavFrontendModules', true, /_[a-z]+\.sample\.js/);
-    const sampleModules = getModulesFromContext(sampleContext);
-    const sampleRefs = Object.keys(sampleModules);
-
-    // console.log('sampleModules', sampleModules);
-
-    // Find all package.json files under 'NavFrontendModules'
+    // Require all the files we need to cross reference
 
     const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
-
-    // console.log('packages', pkgs);
-
-    // Find all modules that have an associated *.overview.mdx file
-
+    
     const overviewContext = require.context('NavFrontendModules', true, /\w+\.overview\.mdx/);
     const overviewModules = getModulesFromContext(overviewContext);
-
-    // console.log('overviewModules', overviewModules);
-
-    // Find all modules
 
     const allModulesContext = require.context('NavFrontendModules', true, /lib\/[a-z-]+.js/);
     const allModules = getModulesFromContext(allModulesContext);
 
-    // console.log('all modules', allModules);
-
-    // Find dependencies
+    // Find all package dependencies
 
     const edges = getDependencyEdgesFromPackages(pkgs);
 
     // Combine componentData
 
     let componentData = {};
-    let componentDataAlt = {};
 
     Object.keys(overviewModules).forEach((overviewKey) => {
         const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
@@ -130,10 +102,11 @@ const getComponentData = () => {
         const pkg = pkgs[`./${pkgName}/package.json`];
         const pkgMainModulePath = pkg['main'];
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
+        
+        let mainModule;
         let mainModuleKey = `./${pkgName}/${pkgMainModulePath}`;
         const pkgModules = allModules[mainModuleKey];
 
-        let mainModule;
         if (pkgOverviewModules.length > 1) {
             // If package has multiple overview modules (i.e. 'nav-frontend-skjema'), 
             // use overview module name to find main module
@@ -144,7 +117,7 @@ const getComponentData = () => {
             mainModule = allModules[mainModuleKey].default;
         }
 
-        componentDataAlt[overviewModuleName] = {
+        componentData[overviewModuleName] = {
             name: overviewModuleName,
             mainModule,
             packageModules: pkgModules,
@@ -153,47 +126,17 @@ const getComponentData = () => {
         };
     });
 
-    // TODO: remove
-    
-    sampleRefs.forEach((moduleRef) => {
-        const moduleName = getNameOfModule(moduleRef);
-        if (moduleName) {
-            componentData[moduleName] = {
-                installInstructions: getInstallInstructions(moduleRef, edges),
-                ...sampleModules[moduleRef].default
-            };
-        }
-    });
-
-    Object.keys(componentData).forEach((component) => {
-        const packageName = componentData[component].installInstructions.match(/(npm install )((nav-frontend-)([a-z-]+))/)[2];
-        const pkgsKey = Object.keys(pkgs).find((pkg) => pkgs[pkg].name === packageName);
-        const manifest = pkgs[pkgsKey];
-        componentData[component].pkg = manifest;
-    });
-
-    console.log(componentDataAlt);
-    console.log(componentData);
-
     return componentData;
 };
-
-/* eslint-disable no-underscore-dangle */
 
 const componentData = getComponentData();
 const textDataInCategories = getTextData();
 
 const components = (
-    Object.keys(componentData).map((td) => ({
-        textData: textDataInCategories[td],
-        componentData: {
-            ...componentData[td],
-            componentName: td,
-            __docgenInfo: componentData[td].base ? componentData[td].base.__docgenInfo : null,
-            label: td.charAt(0).toUpperCase() + td.slice(1)
-        }
+    Object.keys(componentData).map((componentName) => ({
+        textData: textDataInCategories[componentName.toLowerCase()],
+        componentData: { ...componentData[componentName] }
     }))
 );
-/* eslint-enable no-underscore-dangle */
 
 export default components;
