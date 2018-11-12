@@ -15,23 +15,25 @@ class LeftNavigation extends React.Component {
     render() {
         return (
             <aside className="leftNavigation">
-                <Systemtittel><TitleByRoute routes={routeConfig} /></Systemtittel>
-                <ul>
-                    { 
-                        this.props.routes.map((item, index) => 
-                            (
-                                <li key={index}>
-                                    <NavLink
-                                        activeClassName="active"
-                                        to={item.path}
-                                    >
-                                        { item.title }
-                                    </NavLink>
-                                </li>
+                <nav>
+                    <Systemtittel><TitleByRoute routes={routeConfig} /></Systemtittel>
+                    <ul className="nav-list">
+                        { 
+                            this.props.routes.map((item, index) => 
+                                (
+                                    <li key={index}>
+                                        <NavLink
+                                            activeClassName="active"
+                                            to={item.path}
+                                        >
+                                            { item.title }
+                                        </NavLink>
+                                    </li>
+                                )
                             )
-                        )
-                    }
-                </ul>
+                        }
+                    </ul>
+                </nav>
             </aside>
         );
     }

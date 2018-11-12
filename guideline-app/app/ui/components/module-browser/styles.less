@@ -1,0 +1,31 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.module-browser {
+  margin-top: 3rem;
+
+  &__wrapper {
+    display:flex;
+
+    nav {
+      padding-right: 2rem;
+      margin-right: 2rem;
+      border-right: 1px solid @navLysGra;
+    }
+
+    h2 {
+      &:first-child {
+        margin-top: 0 !important;
+      }
+    }
+  }
+
+  .panel {
+    padding: 2rem;
+
+    .nav-list {
+      a:not(.active):hover {
+        background: #f4f4f4 !important;
+      }
+    }
+  }
+}

@@ -1,28 +1,21 @@
 import React from 'react';
+import classnames from 'classnames';
 
 import Lenkepanel from './../../../../../../../packages/node_modules/nav-frontend-lenkepanel';
 import { Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
-import PropTypeTable from './../../../../components/prop-type-table/PropTypeTable';
+import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
 
 class Technical extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
-            activeModule: props.componentData.mainModule
+            activeModule: 0
         };
 
         console.log(props);
     }
-
-    renderReactSpecificDoc = (doc) => (
-        <div className="react-doc">
-            <h2>React props</h2>
-            <p>{ doc.description }</p>
-            <PropTypeTable docgenInfo={doc} />
-        </div>
-    );
 
     renderInstallInstructions = () => (
         <div className="install-doc">
@@ -36,8 +29,6 @@ class Technical extends React.Component {
     );
 
     render() {
-        // console.log(this.props);
-
         // eslint-disable-next-line no-underscore-dangle
         const docgenInfo = this.props.componentData.mainModule.__docgenInfo;
 
@@ -48,29 +39,39 @@ class Technical extends React.Component {
                     <table>
                         <tbody>
                             <tr>
-                                <th>Pakkenavn:</th>
-                                <td>{this.props.componentData.manifest.name}</td>
+                                <th>Navn:</th>
+                                <td>
+                                    <a href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}`}>
+                                        {this.props.componentData.manifest.name}
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Siste versjon:</th>
-                                <td>{this.props.componentData.manifest.version}</td>
+                                <td>
+                                    <a href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}?activeTab=versions`}>
+                                        {this.props.componentData.manifest.version}
+                                    </a>
+                                </td>
                             </tr>
                             <tr>
                                 <th>Peer&nbsp;dependencies:</th>
-                                <td>{Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => [<a key={i} href="#">{dep}</a>, ' '])}</td>
+                                <td className="dependencies">
+                                    {
+                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => {
+                                            return [<a key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</a>, ' '];
+                                        })
+                                    }
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </section>
                 <section className="section full">
-                    {
-                        docgenInfo &&
-                        docgenInfo.props &&
-                        this.renderReactSpecificDoc(docgenInfo)
-                    }
+                    { this.renderInstallInstructions() }
                 </section>
                 <section className="section full">
-                    { this.renderInstallInstructions() }
+                    <ModuleBrowser data={this.props.componentData} package={this.props.componentData.manifest} />
                 </section>
             </React.Fragment>
         );

@@ -6,7 +6,7 @@ import 'prismjs/themes/prism-coy.css';
 
 class Code extends React.Component {
     render() {
-        const lang = this.props.className.split('-')[1];
+        // const lang = this.props.className.split('-')[1];
         const highlighted = Prism.highlight(this.props.children, Prism.languages.jsx);
         return (
             <pre className="language-jsx">

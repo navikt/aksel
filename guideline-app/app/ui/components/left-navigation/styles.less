@@ -9,36 +9,37 @@
   .typo-systemtittel {
     margin-bottom: 1rem;
   }
+}
 
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
-    li {
-      a {
-        display: block;
-        padding: 0.75rem 1.25rem;
-        color: @navBla;
-        text-decoration: none;
-        border-left: 2px solid transparent;
-        position: relative;
+  li {
+    a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: @navBla;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      position: relative;
+      line-height: 1.15rem;
 
-        &:hover {
-          background: white;
-          border-left:2px solid @navBla;
-        }
+      &:hover {
+        background: white;
+        border-left:2px solid @navBla;
+      }
 
-        &.active {
-          background: white;
-          color: @navMorkGra;
-          background: @navBla;
-          color: white;
-        }
+      &.active {
+        background: white;
+        color: @navMorkGra;
+        background: @navBla;
+        color: white;
+      }
 
-        &:focus {
-          z-index: 10;
-        }
+      &:focus {
+        z-index: 10;
       }
     }
   }

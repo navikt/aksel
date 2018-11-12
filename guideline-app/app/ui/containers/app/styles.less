@@ -36,12 +36,17 @@
           margin-top: 3rem;
           max-width: 700px;
 
-          h2, .typo-systemtittel {
-            margin: 3rem 0 1rem;
+          p, .typo-normal {
+            &:first-child {
+              margin-top: 0;
+            }
+            &:last-child {
+              margin-bottom: 0;
+            }
           }
 
-          p, .typo-normaltekst {
-            margin: 1rem 0 1rem;
+          h2, .typo-systemtittel {
+            margin: 3rem 0 1rem;
           }
 
           &.full {
