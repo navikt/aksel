@@ -5,11 +5,13 @@
 
   &__wrapper {
     display:flex;
+    justify-content: space-between;
 
     nav {
       padding-right: 2rem;
       margin-right: 2rem;
       border-right: 1px solid @navLysGra;
+      flex: 1 1 auto;
     }
 
     h2 {
@@ -17,6 +19,11 @@
         margin-top: 0 !important;
       }
     }
+  }
+
+  &__content {
+    flex: 1 1 auto;
+    overflow: hidden;
   }
 
   .panel {

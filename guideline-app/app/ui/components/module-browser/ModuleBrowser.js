@@ -55,7 +55,7 @@ class ModuleBrowser extends React.Component {
                             }
                         </ul>
                     </nav>
-                    <div>
+                    <div className="module-browser__content">
                         <Undertittel>Import</Undertittel>
                         <Code>{this.generateImportStatement(this.state.activeModule)}</Code>
                         <Undertittel>React props</Undertittel>

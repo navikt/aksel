@@ -12,7 +12,7 @@ const ColorSample = (props) => {
     return (
         <button 
             className={cls(color)}
-            style={{background: color.hex()}} 
+            style={{background: color.hex(), borderColor: color.hex()}} 
             role={(props.onClick === 'function') ? 'button' : undefined}
             onClick={(typeof props.onClick === 'function') ? () => props.onClick({ name: props.name, color }) : undefined}
         >

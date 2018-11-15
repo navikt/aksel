@@ -130,15 +130,26 @@ const parsePropValue = (val) => {
     return val.toString();
 };
 
-const PropTypeTableRow = (props) => (
-    <tr>
-        <td><strong>{parsePropValue(props.val.name)}</strong></td>
-        <td>{parsePropValue(props.val.type)}</td>
-        <td>{parsePropValue(props.val.required)}</td>
-        <td>{parsePropValue(props.val.description)}</td>
-        <td>{parsePropValue(props.val.defaultValue)}</td>
-    </tr>
-);
+const parseDescription = (desc) => {
+    const found = desc.match(/^@deprecated/);
+    if (found) {
+        return (<span><strong>{found[0]}</strong>{desc.substr(11, desc.length)}</span>);
+    }
+    return desc;
+}
+
+const PropTypeTableRow = (props) => {
+    const desc = parseDescription(parsePropValue(props.val.description))
+    return (
+        <tr className={cn({'deprecated': typeof desc === 'object'})}>
+            <td><strong>{parsePropValue(props.val.name)}</strong></td>
+            <td>{parsePropValue(props.val.type)}</td>
+            <td>{parsePropValue(props.val.required)}</td>
+            <td>{desc}</td>
+            <td>{parsePropValue(props.val.defaultValue)}</td>
+        </tr>
+    );
+};
 
 PropTypeTableRow.propTypes = {
     val: PT.shape({
