@@ -12,6 +12,7 @@ class PropTypeTable extends React.Component {
             overflowLeft: false
         };
         window.addEventListener('resize', this.checkOverflow);
+        console.log(props);
     }
 
     componentDidMount() {
@@ -77,7 +78,7 @@ class PropTypeTable extends React.Component {
                         <tbody>
                             {
                                 propTypeDocs.filter((item) =>
-                                    item.name.indexOf('aria-') !== 0
+                                    item.propName.indexOf('aria-') !== 0
                                 ).map((propTypeDoc, key) => (
                                     <PropTypeTableRow
                                         val={{
@@ -136,7 +137,7 @@ const parsePropValue = (val) => {
 
 const PropTypeTableRow = (props) => (
     <tr>
-        <td><strong>{parsePropValue(props.val.name)}</strong></td>
+        <td><strong>{parsePropValue(props.val.name || props.val.propName)}</strong></td>
         <td>{parsePropValue(props.val.type)}</td>
         <td>{parsePropValue(props.val.required)}</td>
         <td>{parsePropValue(props.val.description)}</td>
