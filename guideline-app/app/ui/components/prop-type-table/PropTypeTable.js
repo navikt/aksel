@@ -12,7 +12,6 @@ class PropTypeTable extends React.Component {
             overflowLeft: false
         };
         window.addEventListener('resize', this.checkOverflow);
-        console.log(props);
     }
 
     componentDidMount() {
