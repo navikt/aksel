@@ -15,8 +15,22 @@ class ModuleBrowser extends React.Component {
         this.modules = Object.keys(this.props.data.packageModules).sort().map(key => this.props.data.packageModules[key]);
         this.modules = this.props.data.packageModules;
         this.state = {
-            activeModule: Object.keys(this.modules).find((module, i) => i === 0)
+            activeModule: this.getInitialActiveModule()
         }
+
+        console.log(this.modules);
+    }
+
+    getInitialActiveModule = () => {
+        const urlComponentName = window.location.pathname.split('/')[2];
+        const componentIndex = Object.keys(this.modules).findIndex((key) => key.toLowerCase() === urlComponentName);
+        const defaultIndex = Object.keys(this.modules).findIndex((key) => key === 'default');
+        
+        let index = (defaultIndex !== -1) ? defaultIndex : componentIndex ;
+
+        console.log(defaultIndex, urlComponentName, componentIndex, window.location);
+
+        return Object.keys(this.modules).find((module, i) => i === index);
     }
 
     generateImportStatement = (moduleName) => {
@@ -33,7 +47,7 @@ class ModuleBrowser extends React.Component {
                     <nav>
                         <ul className="nav-list">
                             {
-                                Object.keys(this.modules).map((moduleName, i) => {
+                                Object.keys(this.modules).sort().map((moduleName, i) => {
                                     const module = this.modules[moduleName];
 
                                     if (!module['__docgenInfo']) return;
