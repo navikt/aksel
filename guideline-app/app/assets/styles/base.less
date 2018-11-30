@@ -1,6 +1,7 @@
 @import '~nav-frontend-core/less/core';
 @import (reference) '~nav-frontend-core/less/_variabler';
 @import (reference) './../../../../packages/node_modules/nav-frontend-typografi-style/src/index';
+@import '../../ui/components/table/styles.less';
 
 html {
   font-size: 16px;
@@ -20,38 +21,5 @@ a {
 
   &:hover {
     text-decoration: none;
-  }
-}
-
-table {
-  width:100%;
-  border-spacing: 0;
-  border-collapse: collapse;
-
-  th, td {
-    padding:8px;
-    vertical-align: top;
-  }
-
-  th {
-    text-align:left;
-  }
-
-  tbody {
-    td, th {
-      border-bottom:1px solid #eee;
-    }
-
-    tr:nth-child(2n+1){
-      td, th {
-        background:#fafafa;
-      }
-
-      &:first-child {
-        td, th {
-          border-top:1px solid @navGra20;
-        }
-      }
-    }
   }
 }

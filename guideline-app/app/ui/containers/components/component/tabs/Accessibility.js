@@ -5,9 +5,7 @@ class Accessibility extends React.Component {
     render() {
         if (this.props.textData['accessibility']) {
             return (
-                <section className="section">
-                    <MdxContent>{this.props.textData.accessibility.default}</MdxContent>
-                </section>
+                <MdxContent>{this.props.textData.accessibility.default}</MdxContent>
             )
         } 
 

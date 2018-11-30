@@ -4,7 +4,7 @@ import { Innholdstittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import Palette from './tabs/Palette';
 import Accessibility from './tabs/Accessibility.mdx';
-import Technical from './tabs/Technical';
+import Technical from './tabs/Technical.mdx';
 
 import MdxContent from './../../../components/mdx-content/MdxContent';
 import TabbedContainer from './../../tabbed-container/TabbedContainer';
@@ -24,12 +24,12 @@ class ColorPageMainPage extends React.Component {
             {
                 id: 'accessibility',
                 label: 'Tilgjengelighet',
-                content: MdxContent
+                content: () => (<MdxContent>{Accessibility}</MdxContent>)
             },
             {
                 id: 'technical',
                 label: 'Teknisk',
-                content: Technical
+                content: () => (<MdxContent>{Technical}</MdxContent>)
             }
         ];
     }

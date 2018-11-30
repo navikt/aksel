@@ -1,28 +1,80 @@
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
+import { Undertittel, Ingress, Element } from 'NavFrontendModules/nav-frontend-typografi';
+import { TypoIcon, ButtonIcon, VeilederIcon } from './../../../../../assets/images/svg';
 
-## Kontrast
+## Generell bruk av farge
 
-Alle IKT-løsninger i Norge, både offentlige og private, er bl.a. pålagt å følge kontrastkravene
-som er gitt gjennom W3C sin [WCAG 2.0-spesifikasjon](https://www.w3.org/TR/WCAG20/):
+Ved bruk av farger gjelder det et generelt krav om at fargene ikke er det eneste virkemiddel for å
+formidle informasjon.
 
-<Panel border>
-    Den visuelle presentasjonen av bilder og tekst har et kontrastforhold på minst 4.5:1,
-    unntatt følgende tilfeller:
+<Panel className="panel--grey">
+    <Undertittel>Eksempler:</Undertittel>
+    <ul>
+        <li>Lenker kan ikke bare skille seg fra vanlig tekst ved å bruke en annen farge, men bør også ha understrek eller andre effekter i tillegg</li>
+        <li>En knapp kan ikke bare skifte farge ved hover/klikk, men bør også endre form eller posisjon</li>
+        <li>En notifikasjon om noe positivt/negativt kan ikke bare være farget grønn eller rød, men bør også ha et støttende ikon med unik form.</li>
+    </ul>
+</Panel>
+
+## Krav til kontrast
+
+Kravene til fargekontrast varierer avhengig av hvilket element det er snakk om:
+
+<table className="tabell" id="color-accessibility__contrast-table">
+    <thead>
+        <tr>
+            <th>Element</th>
+            <th className="align-right">Kontrastkrav</th>
+        </tr>
+    </thead>
+    <tbody> 
+        <tr>
+            <td>
+                <div className="table-element-type">
+                    <i id="color-accessibility__typo-icon"><TypoIcon/></i>
+                    Tekst og bilder av tekst
+                </div>
+            </td>
+            <td className="align-right">
+                Minst <strong>4.5:1</strong>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div className="table-element-type">
+                    <i id="color-accessibility__button-icon"><ButtonIcon/></i>
+                    Interaktive komponenter
+                </div>
+            </td>
+            <td className="align-right">Minst <strong>3:1</strong> *</td>
+        </tr>
+        <tr>
+            <td>
+                <div className="table-element-type">
+                    <i id="color-accessibility__graphics-icon"><VeilederIcon/></i>
+                    Illustrasjoner og informativ grafikk
+                </div>
+            </td>
+            <td className="align-right">Minst <strong>3:1</strong></td>
+        </tr>
+    </tbody>
+    <caption>
+        * WCAGs suksesskriterium 1.4.11 gir egentlig unntak for interaktive elementer som er <i>disabled</i>, men det er
+        en <a href="https://github.com/w3c/wcag21/issues/805">pågående diskusjon</a> om dette er hensiktsmessig eller
+        ikke - som ikke har resultert i noe tydelig konsensus enda. Vi synes mange av argumentene mot dette unntaket er 
+        fornuftige og har derfor valgt å etterleve kontrastkravene også for disabled elementer.
+    </caption>
+</table>
+
+<Panel className="panel--grey">
+    <Undertittel>Mer informasjon:</Undertittel>
     <ul>
         <li>
-            Stor tekst: Stor skriftstørrelse og bilder av stor skriftstørrelse har et
-            kontrastforhold på minst 3:1
+            <a href="https://www.w3.org/TR/WCAG21/#contrast-minimum">WCAG 2.1, SC 1.4.3: Contrast (minimum)</a>
         </li>
         <li>
-            Uvesentlig: Tekst eller bilder av tekst som utgjør en del av en inaktiv 
-            brukergrensesnittkomponent, som er ren dekorasjon, som ikke er synlig(e) for noen,
-            eller som utgjør en del av et bilde som inneholder annet vesentlig visuelt innhold,
-            er ikke underlagt kontrastkrav.
-        </li>
-        <li>
-            Logoer: Tekst som utgjør en del av en logo eller et varemerkenavn, er ikke underlagt
-            kontrastkrav.
+            <a href="https://www.w3.org/TR/WCAG21/#non-text-contrast">WCAG 2.1, SC 1.4.11: Non-text contrast</a>
         </li>
     </ul>
 </Panel>

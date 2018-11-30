@@ -5,10 +5,6 @@ import { // eslint-disable-line import/no-extraneous-dependencies
     Ingress
 } from 'NavFrontendModules/nav-frontend-typografi'; // eslint-disable-line import/extensions, import/no-unresolved
 import SectionTitle from './../../../components/section-title/SectionTitle';
-import ikoninteraksjonImg from './../../../../assets/images/icon/ikon-interaksjon.png';
-import stotteikonerImg from './../../../../assets/images/icon/stotteikoner.png';
-import basisikonerImg from './../../../../assets/images/icon/basisikoner.png';
-import editionImg from './../../../../assets/images/icon/edition.png';
 import './styles.less';
 
 const IconPage = () => (

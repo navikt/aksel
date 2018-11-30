@@ -63,7 +63,7 @@ class PropTypeTable extends React.Component {
                     onScroll={this.checkOverflow}
                 >
 
-                    <table ref={(node) => { this.table = node; }}>
+                    <table className="tabell tabell--stripet" ref={(node) => { this.table = node; }}>
                         <thead>
                             <tr>
                                 {
@@ -143,7 +143,7 @@ const PropTypeTableRow = (props) => {
     return (
         <tr className={cn({'deprecated': typeof desc === 'object'})}>
             <td><strong>{parsePropValue(props.val.name)}</strong></td>
-            <td>{parsePropValue(props.val.type)}</td>
+            <td><code className="inline">{parsePropValue(props.val.type)}</code></td>
             <td>{parsePropValue(props.val.required)}</td>
             <td>{desc}</td>
             <td>{parsePropValue(props.val.defaultValue)}</td>

@@ -1,11 +1,17 @@
 import React from 'react';
 import Code, { Inline } from './../code/Code';
+import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 const MdxContent = (props) => (
-    <props.children components={{
-        code: Code,
-        inlineCode: Inline
-    }} />
+    <section className="section">
+        <props.children
+            components={{
+                h2: Systemtittel,
+                code: Code,
+                inlineCode: Inline
+            }}
+        />
+    </section>
 );
 
 export default MdxContent;

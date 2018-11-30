@@ -9,7 +9,6 @@ import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.compone
 import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
-import componentsImg from './../../../../assets/images/components/komponenter.png';
 
 class ComponentMainPage extends React.Component {
 

@@ -36,7 +36,15 @@
           margin-top: 3rem;
           max-width: 700px;
 
+          ul {
+            li {
+              margin-bottom:0.75rem;
+            }
+          }
+
           p, .typo-normal {
+            line-height: 1.375rem;
+
             &:first-child {
               margin-top: 0;
             }
@@ -45,14 +53,35 @@
             }
           }
 
-          h2, .typo-systemtittel {
+          .typo-systemtittel, .typo-undertittel {
             margin: 3rem 0 1rem;
+
+            &:first-child {
+              margin-top: 0;
+            }
+          }
+
+          .typo-ingress {
+            margin: 2rem 0 1rem;
+
+            &:first-child {
+              margin-top:0;
+            }
+          }
+
+          .panel {
+            margin: 2rem 0;
+
+            &--grey {
+              background:#f4f4f4;
+              padding: 1.5rem 2rem;
+            }
           }
 
           .example {
-            h2, .typo-systemtittel {
+            h2, .typo-systemtittel, .typo-undertittel, .panel {
               margin: 0;
-            }            
+            }
           }
 
           &.full {
