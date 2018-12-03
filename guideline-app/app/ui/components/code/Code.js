@@ -18,4 +18,6 @@ class Code extends React.Component {
 
 export const Inline = (props) => (<code className="inline">{props.children}</code>);
 
+export const Bash = (props) => (<code className="bash">{props.children}</code>);
+
 export default Code;

@@ -5,6 +5,7 @@ import Lenkepanel from './../../../../../../../packages/node_modules/nav-fronten
 import { Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
 
 import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
+import { Bash } from './../../../../components/code/Code';
 
 class Technical extends React.Component {
 
@@ -20,11 +21,9 @@ class Technical extends React.Component {
     renderInstallInstructions = () => (
         <div className="install-doc">
             <Systemtittel>Installering</Systemtittel>
-            <pre>
-                <code className="hljs">
-                    { this.props.componentData.installInstructions }
-                </code>
-            </pre>
+            <Bash>
+                { this.props.componentData.installInstructions }
+            </Bash>
         </div>
     );
 
