@@ -1,0 +1,34 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.breadcrumbs {
+  display:none;
+  background: #f4f4f4;
+  padding: 1rem 2rem;
+
+  ul {
+    list-style: none;
+    padding:0;
+    margin:0;
+
+    li {
+      display:inline;
+
+      &:after {
+        content: '/';
+        display: inline-block;
+        margin: 0 0.5rem;
+        opacity: 0.25;
+      }
+
+      &:last-child {
+        &:after {
+          display:none;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1094px) {
+    display:block;
+  }
+}

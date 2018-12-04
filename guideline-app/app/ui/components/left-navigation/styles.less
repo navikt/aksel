@@ -10,37 +10,3 @@
     margin-bottom: 1rem;
   }
 }
-
-.nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  li {
-    a {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: @navBla;
-      text-decoration: none;
-      border-left: 2px solid transparent;
-      position: relative;
-      line-height: 1.15rem;
-
-      &:hover {
-        background: white;
-        border-left:2px solid @navBla;
-      }
-
-      &.active {
-        background: white;
-        color: @navMorkGra;
-        background: @navBla;
-        color: white;
-      }
-
-      &:focus {
-        z-index: 10;
-      }
-    }
-  }
-}

@@ -1,0 +1,51 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.mobile-nav {
+  display:none;
+  background:rgba(0,0,0,0.5);
+  position:fixed;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  z-index:999;
+  
+  &__drawer {
+    position:absolute;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    background:#f4f4f4;
+    width:300px;
+    box-shadow:0 0 30px 0px rgba(0,0,0,0.25);
+    padding:0rem;
+    padding-top:4rem;
+
+    .nav-list {
+      > li {
+        position:relative;
+
+        > a {
+          font-size:1.1rem;
+          padding: 1rem;
+          // margin-right:2rem;
+        }
+      }
+
+      a {
+        border-left: 4px solid transparent;
+
+        &:hover {
+          border-left: 4px solid @navBla;
+        }
+      }
+    }
+  }
+
+  &__close-btn {
+    position:absolute;
+    top:1rem;
+    right:1rem;
+  }
+
+}
