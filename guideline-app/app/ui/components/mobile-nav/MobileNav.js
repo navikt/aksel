@@ -1,5 +1,7 @@
 import React from 'react';
+import { NavLink, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
+import routeConfig from '../../../utils/routing/routes.config';
 
 import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
 
@@ -43,6 +45,27 @@ class MobileNav extends React.Component {
         }
     }
 
+    renderRoute = (route, index) => {
+        const open = (this.props.history.location.pathname.indexOf(route.path) !== -1) && route['routes'];
+        return (
+            <li className={classnames({'open': open})}>
+                <NavLink
+                    exact={true}
+                    to={route.path}
+                >
+                    {route.title}
+                </NavLink>
+                { 
+                    route['routes'] && (
+                        <ul>
+                            { route.routes.map((route, index) => this.renderRoute(route, index)) }
+                        </ul>
+                    ) 
+                }
+            </li>
+        );
+    };
+
     render(){
         return (
             <div
@@ -59,19 +82,7 @@ class MobileNav extends React.Component {
                         Lukk meny
                     </Lukknapp>
                     <ul className="nav-list">
-                        <li><a href="#">Kom i gang</a></li>
-                        <li><a href="#">Komponenter</a></li>
-                        <li className="open">
-                            <a href="#">Ressurser</a>
-                            <ul>
-                                <li><a href="#">Farger</a></li>
-                                <li><a href="#" className="active">Ikoner</a></li>
-                                <li><a href="#">Illustrasjoner</a></li>
-                                <li><a href="#">Tilgjengelighet</a></li>
-                                <li><a href="#">Slik skriver vi</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Maler</a></li>
+                        {routeConfig.map((route, index) => this.renderRoute(route, index))}
                     </ul>
                 </nav>
             </div>
@@ -79,4 +90,4 @@ class MobileNav extends React.Component {
     }
 }
 
-export default MobileNav;
+export default withRouter(MobileNav);

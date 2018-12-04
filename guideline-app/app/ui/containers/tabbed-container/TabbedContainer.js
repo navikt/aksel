@@ -16,7 +16,9 @@ class TabbedContainer extends React.Component {
     }
 
     changeTab = (index) => {
-        window.location.hash = this.props.tabs[index]['id'] || '';
+        const hash = this.props.tabs[index]['id'] || '';
+        window.history.pushState(null, null, `#${hash}`);
+
         this.setState({
             activeContent: this.props.tabs[index].content
         });

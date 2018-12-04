@@ -6,17 +6,15 @@ import './styles.less';
 class MobileNavToggle extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             shadow: false
         };
-    }
 
-    componentDidMount() {
         window.addEventListener('scroll', () => this.checkScroll());
     }
 
     checkScroll = () => {
-        console.log(window.scrollY);
         if (window.scrollY > 60) {
             this.setState({
                 shadow: true

@@ -14,8 +14,6 @@ class Technical extends React.Component {
         this.state = {
             activeModule: 0
         };
-
-        console.log(props);
     }
 
     renderInstallInstructions = () => (

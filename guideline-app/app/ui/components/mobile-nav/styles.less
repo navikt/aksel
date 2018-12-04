@@ -22,8 +22,10 @@
     padding:0rem;
     padding-top:5.5rem;
     transition:right ease-out 200ms;
+    overflow:scroll;
 
     .nav-list {
+
       > li {
         position:relative;
 
@@ -34,8 +36,18 @@
           // margin-right:2rem;
         }
 
-        > ul > li > a {
-          padding-left:4rem !important;
+        > ul {
+          display:none;
+
+          > li > a {
+            padding-left:4rem !important;
+          }
+        }
+
+        &.open {
+          > ul {
+            display:block;
+          }
         }
       }
 

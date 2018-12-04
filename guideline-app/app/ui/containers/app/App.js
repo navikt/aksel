@@ -25,6 +25,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             if (window.location.href.indexOf('#') === -1) {
                 const contentPane = document.getElementsByClassName('mainContent')[0];
                 contentPane.scrollTop = 0;
+                window.scrollTo(0,0);
             }
         });
     }

@@ -17,8 +17,6 @@ class ModuleBrowser extends React.Component {
         this.state = {
             activeModule: this.getInitialActiveModule()
         }
-
-        console.log(this.modules);
     }
 
     getInitialActiveModule = () => {
@@ -28,8 +26,6 @@ class ModuleBrowser extends React.Component {
         
         let index = (defaultIndex !== -1) ? defaultIndex : componentIndex ;
 
-        console.log(defaultIndex, urlComponentName, componentIndex, window.location);
-
         return Object.keys(this.modules).find((module, i) => i === index);
     }
 
@@ -37,6 +33,11 @@ class ModuleBrowser extends React.Component {
         const module = this.modules[moduleName];
         const format = (moduleName === 'default') ? module['__docgenInfo']['displayName'] : `{ ${moduleName} }`;
         return `import ${format} from '${this.props.package.name}';`;
+    }
+
+    setActiveModule = (e, moduleName) => {
+        e.preventDefault();
+        this.setState({ activeModule: moduleName });
     }
 
     render(){
@@ -57,7 +58,7 @@ class ModuleBrowser extends React.Component {
                                             <a 
                                                 href="#" 
                                                 className={classnames({'active': this.state.activeModule === moduleName})}
-                                                onClick={() => this.setState({ activeModule: moduleName })}
+                                                onClick={(e) => this.setActiveModule(e, moduleName)}
                                             >
                                                 { module['__docgenInfo'].displayName }
                                                 &nbsp;
