@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NAVLogo from '../nav-logo/nav-logo';
+import { NAVLogo } from '../../../assets/images/svg';
 import MainNav from '../main-nav/MainNav';
 import MobileNav from '../mobile-nav/MobileNav';
 import MobileNavToggle from '../mobile-nav-toggle/MobileNavToggle';
@@ -15,6 +15,12 @@ class Header extends React.Component {
         };
     }
 
+    toggleMobileNav = () => {
+        this.setState({
+            mobileNavOpen: !this.state.mobileNavOpen
+        });
+    }
+
     render() {
         return (
             <header className="header">
@@ -25,9 +31,9 @@ class Header extends React.Component {
                             Designsystemet
                         </h1>
                     </a>
-                    <MobileNavToggle onClick={() => this.setState({mobileNavOpen: !this.state.mobileNavOpen})} />
+                    <MobileNavToggle onClick={() => this.toggleMobileNav()} />
                     <MainNav />
-                    <MobileNav open={this.state.mobileNavOpen} />
+                    <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
                 </div>
             </header>
         );

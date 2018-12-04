@@ -1,25 +1,27 @@
 @import (reference) '~nav-frontend-core/less/_variabler';
 
 .mobile-nav {
-  display:none;
-  background:rgba(0,0,0,0.5);
+  // display:none;
+  background:rgba(0,0,0,0);
   position:fixed;
   top:0px;
   left:0px;
   right:0px;
   bottom:0px;
   z-index:999;
+  transition:background linear 200ms;
   
   &__drawer {
     position:absolute;
     top:0px;
-    right:0px;
+    right:-300px;
     bottom:0px;
     background:#f4f4f4;
     width:300px;
     box-shadow:0 0 30px 0px rgba(0,0,0,0.25);
     padding:0rem;
-    padding-top:4rem;
+    padding-top:5.5rem;
+    transition:right ease-out 200ms;
 
     .nav-list {
       > li {
@@ -28,7 +30,12 @@
         > a {
           font-size:1.1rem;
           padding: 1rem;
+          padding-left:2rem;
           // margin-right:2rem;
+        }
+
+        > ul > li > a {
+          padding-left:4rem !important;
         }
       }
 
@@ -44,8 +51,22 @@
 
   &__close-btn {
     position:absolute;
-    top:1rem;
-    right:1rem;
+    top:1.75rem;
+    right:1.75rem;
+    padding:1.3rem 1.5rem;
+    border:none;
   }
 
+  &--open {
+    z-index:999;
+    background:rgba(0,0,0,0.5);
+
+    .mobile-nav__drawer {
+      right:0px;
+    }
+  }
+
+  &--hidden {
+    z-index:-1;
+  }
 }
