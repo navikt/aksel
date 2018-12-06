@@ -1,52 +1,71 @@
 import React from 'react';
-import PT from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 import routeConfig from './../../../../utils/routing/routes.config';
 
-import { Innholdstittel, Sidetittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+import { Innholdstittel, Sidetittel, Systemtittel, Undertittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
+import { Knapp } from 'NavFrontendModules/nav-frontend-knapper';
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
 import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
+/*
+                            <LenkepanelBase
+                                linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                                href={route.path}
+                            >
+                                {route.title}
+                            </LenkepanelBase>
+*/
+
 class ComponentMainPage extends React.Component {
 
-    static renderComponentMainContent() {
+    renderComponentMainContent = () => {
         return (
-            <article className="mainContent">
-                Her kommer det et lenke-galleri med små previews av alle komponentene etter hverandre.
+            <article className="mainContent mainContent--grey">
+                <div className="catalog">
+                    {
+                        this.props.routes.map((route) => (
+                            <LenkepanelBase
+                                linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                                href={route.path}
+                            >
+                                <Undertittel className="lenkepanel__heading">{route.title}</Undertittel>
+                            </LenkepanelBase>
+                        ))
+                    }
+                </div>
             </article>
         );
     }
 
-    renderComponentSubRouteContent() {
-        return (
+    renderComponentSubRouteContent = () => {
+        return [
             <article className="mainContent">
                 <Innholdstittel>
                     <TitleByRoute routes={this.props.routes} />
                 </Innholdstittel>
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>
-        );
+        ];
     }
 
     render() {
+        console.log(this.props);
+
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
                 {
-                    (window.location.hash !== '#/components') ? 
+                    (this.props.history.location.pathname !== '/components') ? 
                     this.renderComponentSubRouteContent() :
-                    ComponentMainPage.renderComponentMainContent()
+                    this.renderComponentMainContent()
                 }
             </React.Fragment>
         );
     }
 }
 
-ComponentMainPage.propTypes = {
-    routes: PT.arrayOf(PT.shape).isRequired
-};
-
-export default ComponentMainPage;
+export default withRouter(ComponentMainPage);

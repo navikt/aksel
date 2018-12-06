@@ -33,7 +33,12 @@
           font-size:1.1rem;
           padding: 1rem;
           padding-left:2rem;
-          // margin-right:2rem;
+          
+          &.active + .mobile-nav__submenu-toggle-btn {
+            &:before, &:after {
+              background:white;
+            }
+          }
         }
 
         > ul {
@@ -47,6 +52,41 @@
         &.open {
           > ul {
             display:block;
+          }
+        }
+
+        .mobile-nav__submenu-toggle-btn {
+          position:absolute;
+          top:0px;
+          right:0;
+          font-size:0;
+          height:3.15rem;
+          width:4.5rem;
+          border:0;
+          padding:0;
+          margin:0;
+          background:none;
+          line-height:0;
+          z-index:999;
+
+          &:before, &:after {
+            content:'';
+            display:block;
+            width:0.75rem;
+            height:2px;
+            background:@navMorkGra;
+            position:absolute;
+            top:calc(50%-2px);
+            left:calc(50%-8px);
+          }
+          &:before {
+            transform:rotate(90deg);
+          }
+
+          &--open {
+            &:before {
+              display:none;
+            }
           }
         }
       }

@@ -1,7 +1,9 @@
 import React from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import routeConfig from '../../../utils/routing/routes.config';
+
+import MobileNavMenuItem from './MobileNavMenuItem';
 
 import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
 
@@ -48,21 +50,14 @@ class MobileNav extends React.Component {
     renderRoute = (route, index) => {
         const open = (this.props.history.location.pathname.indexOf(route.path) !== -1) && route['routes'];
         return (
-            <li className={classnames({'open': open})}>
-                <NavLink
-                    exact={true}
-                    to={route.path}
-                >
-                    {route.title}
-                </NavLink>
-                { 
-                    route['routes'] && (
-                        <ul>
-                            { route.routes.map((route, index) => this.renderRoute(route, index)) }
-                        </ul>
-                    ) 
+            <MobileNavMenuItem open={open} route={route} index={index}>
+                {
+                    route['routes'] && 
+                    <ul>
+                        { route.routes.map((route, index) => this.renderRoute(route, index)) }
+                    </ul>
                 }
-            </li>
+            </MobileNavMenuItem>
         );
     };
 

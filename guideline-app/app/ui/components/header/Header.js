@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { NAVLogo } from '../../../assets/images/svg';
 import MainNav from '../main-nav/MainNav';
@@ -25,12 +26,12 @@ class Header extends React.Component {
         return (
             <header className="header">
                 <div className="header__content">
-                    <a href="#" className="header__logo">
+                    <NavLink to="/" className="header__logo">
                         <NAVLogo />
                         <h1 className="header__title">
                             Designsystemet
                         </h1>
-                    </a>
+                    </NavLink>
                     <MobileNavToggle onClick={() => this.toggleMobileNav()} />
                     <MainNav />
                     <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />

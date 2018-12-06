@@ -5,7 +5,7 @@ import Panel from './../../../../../packages/node_modules/nav-frontend-paneler';
 import './styles.less';
 
 const TemplatesMainPage = () => (
-    <article className="mainContent templatesWrapper">
+    <article className="mainContent mainContent--grey templatesWrapper">
         <section className="content">
             <Panel border>
                 <h2>Maler kommer</h2>

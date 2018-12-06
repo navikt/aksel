@@ -52,30 +52,24 @@ class Palette extends React.Component {
                 <section className="section">
                     <Undertittel>Kontrast</Undertittel>
                     <ContrastSample
-                        label="Som bakgrunn med sort tekst:"
+                        label="Mot svart:"
                         foreground={'#3E3832'}
                         background={this.state.activeColor.color.hex()}
                     />
                     <ContrastSample
-                        label="Som bakgrunn med hvit tekst:"
+                        label="Mot hvit:"
                         foreground={'#ffffff'}
                         background={this.state.activeColor.color.hex()}
                     />
                     <ContrastSample
-                        label="Som tekstfarge på hvit bakgrunn:"
-                        foreground={this.state.activeColor.color.hex()}
-                        background={'#ffffff'}
-                        border
+                        label="Mot lys grå:"
+                        foreground={'#E9E7E7'}
+                        background={this.state.activeColor.color.hex()}
                     />
                     <ContrastSample
-                        label="Som tekstfarge på lys grå bakgrunn:"
-                        foreground={this.state.activeColor.color.hex()}
-                        background={'#E9E7E7'}
-                    />
-                    <ContrastSample
-                        label="Som tekstfarge på sort bakgrunn:"
-                        foreground={this.state.activeColor.color.hex()}
-                        background={'#3E3832'}
+                        label="Mot NAV blå:"
+                        foreground={'#0067C5'}
+                        background={this.state.activeColor.color.hex()}
                     />
                 </section>
             </div>

@@ -20,15 +20,20 @@ const ContrastSample = (props) => {
     const foreground = Color(props.foreground);
     const contrast = Math.round(foreground.contrast(background) * 100) / 100;
 
+    /* {background: background.hex(), color: foreground.hex()} */
+
     return (
         <React.Fragment>
             <Etikett>
                 {props.label}
-                <span className={contrastCls(contrast)}>WCAG: {contrast}:1</span>
+                <span className={contrastCls(contrast)}>Kontrast: <strong>{contrast}:1</strong>, WCAG AA: </span>
             </Etikett>
-            <div className={sampleCls(props)} style={{background: background.hex(), color: foreground.hex()}}>
-                Lorem ipsum dolor sit amet
-            </div>
+            <div
+                className={sampleCls(props)}
+                style={
+                    {background: `repeating-linear-gradient(90deg, ${background}, ${background} 2%, ${foreground} 2%, ${foreground} 4%)`}
+                }
+            />
         </React.Fragment>
     );
 }

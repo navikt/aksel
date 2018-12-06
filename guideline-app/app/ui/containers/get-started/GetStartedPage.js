@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { LenkepanelBase } from './../../../../../packages/node_modules/nav-frontend-lenkepanel';
+import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 import './styles.less';
 
 const GetStartedPage = () => (
-    <article className="mainContent getStartedWrapper">
+    <article className="mainContent mainContent--grey getStartedWrapper">
         <section className="aboutWrapper">
             Hello
         </section>

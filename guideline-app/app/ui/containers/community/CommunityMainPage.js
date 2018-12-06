@@ -5,7 +5,7 @@ import Panel from './../../../../../packages/node_modules/nav-frontend-paneler';
 import '../templates/styles.less';
 
 const CommunityMainPage = () => (
-    <article className="mainContent templatesWrapper">
+    <article className="mainContent mainContent--grey templatesWrapper">
         <section className="content">
             <Panel border>
                 <h2>Diskusjonsforum kommer</h2>
