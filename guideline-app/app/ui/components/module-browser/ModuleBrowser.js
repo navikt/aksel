@@ -5,6 +5,7 @@ import Code from './../code/Code';
 import PropTypeTable from './../prop-type-table/PropTypeTable';
 
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
+import { Select } from 'NavFrontendModules/nav-frontend-skjema';
 import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import './styles.less';
@@ -36,7 +37,7 @@ class ModuleBrowser extends React.Component {
     }
 
     setActiveModule = (e, moduleName) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         this.setState({ activeModule: moduleName });
     }
 
@@ -50,19 +51,16 @@ class ModuleBrowser extends React.Component {
                             {
                                 Object.keys(this.modules).sort().map((moduleName, i) => {
                                     const module = this.modules[moduleName];
-
                                     if (!module['__docgenInfo']) return;
-
                                     return (
                                         <li key={i}>
-                                            <a 
-                                                href="#" 
+                                            <a
+                                                href="#"
                                                 className={classnames({'active': this.state.activeModule === moduleName})}
                                                 onClick={(e) => this.setActiveModule(e, moduleName)}
                                             >
                                                 { module['__docgenInfo'].displayName }
-                                                &nbsp;
-                                                { moduleName === 'default' && `(${moduleName})` }
+                                                { moduleName === 'default' && <span>&nbsp;{`(${moduleName})`}</span> }
                                             </a>
                                         </li>
                                     )
@@ -71,7 +69,25 @@ class ModuleBrowser extends React.Component {
                         </ul>
                     </nav>
                     <div className="module-browser__content">
-                        <Undertittel>Import</Undertittel>
+                        <Select
+                            label="Velg modul"
+                            onChange={(e) => this.setActiveModule(null, e.target.value)}
+                            value={this.state.activeModule}
+                        >
+                            {
+                                Object.keys(this.modules).sort().map((moduleName, i) => {
+                                    const module = this.modules[moduleName];
+                                    if (!module['__docgenInfo']) return;
+                                    return (
+                                        <option key={i} value={moduleName}>
+                                            { module['__docgenInfo'].displayName }
+                                            { moduleName === 'default' && ` (${moduleName})` }
+                                        </option>
+                                    )
+                                })
+                            }
+                        </Select>
+                        <Undertittel className="first">Import</Undertittel>
                         <Code>{this.generateImportStatement(this.state.activeModule)}</Code>
                         <Undertittel>React props</Undertittel>
                         <PropTypeTable docgenInfo={this.modules[this.state.activeModule].__docgenInfo} />

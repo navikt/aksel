@@ -12,10 +12,14 @@
       margin-right: 2rem;
       border-right: 1px solid @navLysGra;
       flex: 1 1 auto;
+
+      @media (max-width: 830px) {
+        display:none;
+      }
     }
 
     h2 {
-      &:first-child {
+      &.first {
         margin-top: 0 !important;
       }
     }
@@ -24,6 +28,19 @@
   &__content {
     flex: 1 1 auto;
     overflow: hidden;
+
+    > .skjemaelement {
+      display:none;
+
+      .skjemaelement__label {
+        display:none;
+      }
+
+      @media (max-width: 830px) {
+        display:block;
+        margin-bottom:3rem;
+      }
+    }
   }
 
   .panel {

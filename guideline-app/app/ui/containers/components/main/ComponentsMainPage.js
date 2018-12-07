@@ -11,15 +11,6 @@ import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
-/*
-                            <LenkepanelBase
-                                linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
-                                href={route.path}
-                            >
-                                {route.title}
-                            </LenkepanelBase>
-*/
-
 class ComponentMainPage extends React.Component {
 
     renderComponentMainContent = () => {
@@ -27,8 +18,9 @@ class ComponentMainPage extends React.Component {
             <article className="mainContent mainContent--grey">
                 <div className="catalog">
                     {
-                        this.props.routes.map((route) => (
+                        this.props.routes.map((route, index) => (
                             <LenkepanelBase
+                                key={index}
                                 linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
                                 href={route.path}
                             >
@@ -42,19 +34,17 @@ class ComponentMainPage extends React.Component {
     }
 
     renderComponentSubRouteContent = () => {
-        return [
+        return (
             <article className="mainContent">
                 <Innholdstittel>
                     <TitleByRoute routes={this.props.routes} />
                 </Innholdstittel>
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>
-        ];
+        );
     }
 
     render() {
-        console.log(this.props);
-
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />

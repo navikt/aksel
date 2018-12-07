@@ -17,17 +17,6 @@ class MobileNavMenuItem extends React.Component {
         });
     }
 
-    /*
-    <button
-        className={classnames('mobile-nav__submenu-toggle-btn', {
-            'mobile-nav__submenu-toggle-btn--open': this.state.open
-        })}
-        onClick={this.toggle}
-    >
-        Åpne undermeny
-    </button>,
-    */
-
     render() {
         return (
             <li className={classnames({'open': this.props.open})}>

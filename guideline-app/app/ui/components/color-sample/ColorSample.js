@@ -10,7 +10,7 @@ const cls = (col) => {
 const ColorSample = (props) => {
     const color = Color(props.color);
     return (
-        <button 
+        <div
             className={cls(color)}
             style={{background: color.hex(), borderColor: color.hex()}} 
             role={(props.onClick === 'function') ? 'button' : undefined}
@@ -18,7 +18,7 @@ const ColorSample = (props) => {
         >
             <span>{props.name}</span>
             <span>{color.hex()}</span>
-        </button>
+        </div>
     );
 };
 

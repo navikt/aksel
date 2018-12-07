@@ -50,7 +50,7 @@ class MobileNav extends React.Component {
     renderRoute = (route, index) => {
         const open = (this.props.history.location.pathname.indexOf(route.path) !== -1) && route['routes'];
         return (
-            <MobileNavMenuItem open={open} route={route} index={index}>
+            <MobileNavMenuItem open={open} route={route} index={index} key={index}>
                 {
                     route['routes'] && 
                     <ul>
