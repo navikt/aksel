@@ -46,11 +46,11 @@ class ResoucesMainPage extends React.Component {
     }
 
     renderSubRoute = () => {
-        return [
+        return (
             <article className="mainContent">
                 <SubRoutesWrapper routes={this.props.routes} />
             </article>
-        ];
+        );
     }
 
     render(){

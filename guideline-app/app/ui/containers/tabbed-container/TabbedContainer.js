@@ -28,11 +28,13 @@ class TabbedContainer extends React.Component {
         return (
             <React.Fragment>
                 <div className="tabsContainer tabsContainer--fullWidth">
-                    <Tabs
-                        defaultAktiv={this.defaultAktiv}
-                        onChange={(e, i) => this.changeTab(i)}
-                        tabs={this.props.tabs.map((tab) => ({ label: tab.label }))}
-                    />
+                    <div className="tabsContainer__inner">
+                        <Tabs
+                            defaultAktiv={this.defaultAktiv}
+                            onChange={(e, i) => this.changeTab(i)}
+                            tabs={this.props.tabs.map((tab) => ({ label: tab.label }))}
+                        />
+                    </div>
                 </div>
                 <this.state.activeContent { ...this.props } />
             </React.Fragment>
