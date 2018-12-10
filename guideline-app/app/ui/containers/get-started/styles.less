@@ -15,19 +15,24 @@
   flex: 1;
   padding: 3rem 0;
   overflow-y: scroll;
+
+  @media (max-width:750px) {
+    padding:0;
+  }
 }
 
 .grid {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1rem;
+  row-gap: 1rem;
   max-width: 1100px;
   margin: auto;
 
   .lenkepanel {
     padding: 2rem 3rem 2rem 2rem;
     flex-basis: calc(50% - 0.7rem);
+    margin:0;
 
     h1, h2 {
       margin-top: 0;
@@ -60,5 +65,9 @@
         right: 0.75rem;
       }
     }
+  }
+
+  @media (max-width:750px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

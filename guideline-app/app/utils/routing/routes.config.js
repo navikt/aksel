@@ -5,10 +5,7 @@ import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMa
 
 import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
 import ColorPageMainPage from '../../ui/containers/resources/color/ColorPageMainPage';
-import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
-import TypographyPage from '../../ui/containers/resources/typography/TypographyPage';
-import IconPage from '../../ui/containers/resources/icon/IconPage';
-import HowWeWrite from '../../ui/containers/resources/how-we-write/HowWeWrite';
+import TempPage from '../../ui/containers/temp/TempPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
@@ -40,27 +37,27 @@ const routeConfig = [
             },
             {
                 path: '/resources/illustrations',
-                component: TypographyPage,
+                component: TempPage,
                 title: 'Illustrasjoner'
             },
             {
                 path: '/resources/icons',
-                component: TypographyPage,
+                component: TempPage,
                 title: 'Ikoner'
             },
             {
                 path: '/resources/typography',
-                component: TypographyPage,
+                component: TempPage,
                 title: 'Typografi'
             },
             {
                 path: '/resources/accessibility',
-                component: HowWeWrite,
+                component: TempPage,
                 title: 'Tilgjengelighet'
             },
             {
                 path: '/resources/how-we-write',
-                component: HowWeWrite,
+                component: TempPage,
                 title: 'Slik skriver vi'
             }
         ]
