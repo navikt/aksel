@@ -51,15 +51,13 @@
   }
 
   .color-values {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -1rem;
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
 
     .color-value-pair {
-      width: 50%;
       line-height: 1.5rem;
-      padding: 0 1rem;
-      margin-bottom: 1rem;
 
       span {
         display: block;
@@ -68,6 +66,20 @@
         background: #f4f4f4;
       }
     }
+
+    @media (max-width:550px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    width:auto;
+  }
+}
+
+.color-modal-outer {
+  @media (max-width:550px) {
+    width:100%;
   }
 }
 

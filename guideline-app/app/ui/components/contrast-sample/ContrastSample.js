@@ -26,7 +26,7 @@ const ContrastSample = (props) => {
         <React.Fragment>
             <Etikett>
                 {props.label}
-                <span className={contrastCls(contrast)}>Kontrast: <strong>{contrast}:1</strong>, WCAG AA: </span>
+                <span className={contrastCls(contrast)}><span className="contrast-ratio__label">Kontrast:</span> <strong>{contrast}:1</strong>, WCAG AA: </span>
             </Etikett>
             <div
                 className={sampleCls(props)}

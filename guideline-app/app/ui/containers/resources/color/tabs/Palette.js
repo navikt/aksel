@@ -80,6 +80,7 @@ class Palette extends React.Component {
         return (
             <React.Fragment>
                 <Modal 
+                    className="color-modal-outer"
                     isOpen={this.state.activeColor !== undefined}
                     onRequestClose={() => this.setState({activeColor: undefined})}
                     closeButton={true}
