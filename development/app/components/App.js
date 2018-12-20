@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AlertStripeSuksess } from './../../../packages/node_modules/nav-frontend-alertstriper';
 import { Hovedknapp, Fareknapp } from './../../../packages/node_modules/nav-frontend-knapper';
 import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
+import { Autocomplete } from './../../../packages/node_modules/nav-frontend-skjema';
 
 /*
  * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
@@ -29,6 +30,8 @@ export default class App extends Component {
                 <Hovedknapp>Hovedknapp</Hovedknapp>
                 <Fareknapp>Fareknapp</Fareknapp>
                 <Chevron />
+                <h3>Test</h3>
+                <Autocomplete/>
             </div>
         );
     }
