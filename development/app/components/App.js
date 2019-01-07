@@ -30,9 +30,6 @@ export default class App extends Component {
                 <Hovedknapp>Hovedknapp</Hovedknapp>
                 <Fareknapp>Fareknapp</Fareknapp>
                 <Chevron />
-                <h3>Test</h3>
-                <Autocomplete/>
-                <Input />
             </div>
         );
     }
