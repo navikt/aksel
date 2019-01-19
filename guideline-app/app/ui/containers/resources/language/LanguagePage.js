@@ -39,7 +39,6 @@ class LanguagePage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Innholdstittel>Språk på NAV.no</Innholdstittel>
                 <MdxContent>{Language}</MdxContent>
             </React.Fragment>
         );
