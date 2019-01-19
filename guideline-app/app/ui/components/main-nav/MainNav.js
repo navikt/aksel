@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import routeConfig from './../../../utils/routing/routes.config';
+import { GithubLogo } from './../../../assets/images/svg';
 
 import './styles.less';
 
@@ -27,7 +28,7 @@ const MainNav = () => (
                 }
             </ul>
             <ul>
-                <li><a href="#">Github</a></li>
+                <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
             </ul>
         </div>
     </nav>

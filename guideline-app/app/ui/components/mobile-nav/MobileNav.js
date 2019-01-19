@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 import routeConfig from '../../../utils/routing/routes.config';
+import { GithubLogo } from '../../../assets/images/svg';
 
 import MobileNavMenuItem from './MobileNavMenuItem';
 
@@ -78,6 +79,7 @@ class MobileNav extends React.Component {
                     </Lukknapp>
                     <ul className="nav-list">
                         {routeConfig.map((route, index) => this.renderRoute(route, index))}
+                        <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
                     </ul>
                 </nav>
             </div>

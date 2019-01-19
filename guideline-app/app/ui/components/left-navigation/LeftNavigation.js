@@ -7,12 +7,14 @@ import TitleByRoute from '../title-by-route/TitleByRoute';
 import routeConfig from './../../../utils/routing/routes.config';
 
 // eslint-disable-next-line import/no-unresolved, import/extensions
-import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
+import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
+import { Systemtittel, Undertittel, Normaltekst } from 'NavFrontendModules/nav-frontend-typografi';
 
 import './styles.less';
 
 class LeftNavigation extends React.Component {
     render() {
+        console.log(this.props.routes, this.props.routes[0].path.indexOf('/components'));
         return (
             <aside className="leftNavigation">
                 <nav>
@@ -33,6 +35,16 @@ class LeftNavigation extends React.Component {
                             )
                         }
                     </ul>
+                    {
+                        this.props.routes[0].path.indexOf('/components') === 0 &&
+                        <div className="contribute-promo">
+                            <Undertittel>Noe du savner?</Undertittel>
+                            <br/>
+                            <LenkepanelBase href="#" border>
+                                <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
+                            </LenkepanelBase>
+                        </div>
+                    }
                 </nav>
             </aside>
         );

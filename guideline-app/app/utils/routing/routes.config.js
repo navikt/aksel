@@ -4,7 +4,8 @@ import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
 
 import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
-import ColorPageMainPage from '../../ui/containers/resources/color/ColorPageMainPage';
+import ColorPage from '../../ui/containers/resources/color/ColorPage';
+import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
 import TempPage from '../../ui/containers/temp/TempPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
@@ -32,7 +33,7 @@ const routeConfig = [
         routes: [
             {
                 path: '/resources/colors',
-                component: ColorPageMainPage,
+                component: ColorPage,
                 title: 'Farger'
             },
             {
@@ -46,18 +47,13 @@ const routeConfig = [
                 title: 'Ikoner'
             },
             {
-                path: '/resources/typography',
-                component: TempPage,
-                title: 'Typografi'
-            },
-            {
                 path: '/resources/accessibility',
                 component: TempPage,
                 title: 'Tilgjengelighet'
             },
             {
                 path: '/resources/how-we-write',
-                component: TempPage,
+                component: LanguagePage,
                 title: 'Slik skriver vi'
             }
         ]

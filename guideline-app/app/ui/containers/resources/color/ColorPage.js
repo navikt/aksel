@@ -11,7 +11,7 @@ import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
 import './styles.less';
 
-class ColorPageMainPage extends React.Component {
+class ColorPage extends React.Component {
 
     constructor(props) {
         super(props);
@@ -44,4 +44,4 @@ class ColorPageMainPage extends React.Component {
     }
 }
 
-export default ColorPageMainPage;
+export default ColorPage;
