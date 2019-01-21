@@ -43,6 +43,13 @@ glob('./packages/node_modules/**/package.json', { dot: true }, (err, files) => {
         const pkgName = pkg.name;
         const config = createConfig(pkgName, edges);
         const MD = path.join(__dirname, '..', 'packages', 'node_modules', pkgName, 'README.md');
+
+        // Create file if missing
+        fs.writeFile(MD, '', { flag: 'wx' }, (error) => {
+            // eslint-disable-next-line no-console
+            if (error && error.code !== 'EEXIST') console.log(error);
+        });
+
         // eslint-disable-next-line no-console
         markdownMagic(MD, config, (error) => error && console.log('err', error));
     });
