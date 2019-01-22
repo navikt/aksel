@@ -6,6 +6,7 @@ import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMa
 import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
+import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import TempPage from '../../ui/containers/temp/TempPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
@@ -48,11 +49,11 @@ const routeConfig = [
             },
             {
                 path: '/resources/accessibility',
-                component: TempPage,
+                component: AccessibilityPage,
                 title: 'Tilgjengelighet'
             },
             {
-                path: '/resources/how-we-write',
+                path: '/resources/language',
                 component: LanguagePage,
                 title: 'Slik skriver vi'
             }

@@ -14,7 +14,6 @@ import './styles.less';
 
 class LeftNavigation extends React.Component {
     render() {
-        console.log(this.props.routes, this.props.routes[0].path.indexOf('/components'));
         return (
             <aside className="leftNavigation">
                 <nav>

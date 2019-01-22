@@ -31,10 +31,10 @@ class ResoucesMainPage extends React.Component {
                     <CatalogItem to="/resources/colors">
                         <Undertittel className="lenkepanel__heading">Ikoner</Undertittel>
                     </CatalogItem>
-                    <CatalogItem to="/resources/colors">
+                    <CatalogItem to="/resources/accessibility">
                         <Undertittel className="lenkepanel__heading">Tilgjengelighet</Undertittel>
                     </CatalogItem>
-                    <CatalogItem to="/resources/colors">
+                    <CatalogItem to="/resources/language">
                         <Undertittel className="lenkepanel__heading">Slik skriver vi</Undertittel>
                     </CatalogItem>
                 </div>
