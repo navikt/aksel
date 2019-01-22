@@ -74,6 +74,18 @@ samme som er definert i rot-mappen
 * `npm run dev` - Samme som `npm start`
 * `npm run watch` - Samme som `npm start`
 
+### Bruk av TypeScript
+
+Når man kjører guidelineappen eller eksempelappen, så blir ikke filer skrevet i 
+TypeScript (.ts og .tsx filer) kompilert automatisk. Det anbefales å kjøre en 
+typescriptkompiler i et separat konsoll. Hvis man for eksempel jobber med 
+filen `bekreft-checkboks-panel.tsx`, så kan man kjøre disse kommandoene for 
+å få automatisk filene transpilert til javascript.  
+
+* `npm install typescript -g`
+* `cd nav-frontend-moduler\packages\node_modules\nav-frontend-skjema`
+* `tsc --watch src/bekreft-checkboks-panel.tsx --jsx react --outDir lib`
+
 ## Byggemiljø
 Det er satt opp ett CircleCI-bygg for repoet.
 Pull-requests bygges derfor automatisk med en gang de pushes til remote.
