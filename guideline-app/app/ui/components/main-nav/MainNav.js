@@ -12,7 +12,7 @@ const MainNav = () => (
         <div className="mainNav__wrapper">
             <ul>
                 {
-                    routeConfig.map((item, index) => 
+                    routeConfig.filter((item) => item['path']).map((item, index) => 
                         (
                             <li key={index}>
                                 <NavLink

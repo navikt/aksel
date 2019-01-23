@@ -1,0 +1,26 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.table-of-contents {
+  position:absolute;
+  top:0px;
+  right: -464px;
+  width: 400px;
+
+  ol {
+    list-style-type:none;
+    padding-left: 1.5rem;
+
+    li {
+      a {
+        display:inline-block;
+        padding:0.5rem 0.25rem;
+        // text-decoration:none;
+        // border-bottom:1px solid @navLysGra;
+      }
+    }
+  }
+
+  > ol {
+    padding: 0;
+  }
+}

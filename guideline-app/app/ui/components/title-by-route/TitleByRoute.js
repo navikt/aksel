@@ -3,7 +3,7 @@ import PT from 'prop-types';
 import { Route } from 'react-router-dom';
 
 const TitleByRoute = (props) => {
-    return props.routes.map((route, index) => (
+    return props.routes.filter(route => route['path']).map((route, index) => (
         <Route
             key={index} // eslint-disable-line react/no-array-index-key
             exact={route.exact}

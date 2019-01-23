@@ -78,7 +78,7 @@ class MobileNav extends React.Component {
                         Lukk meny
                     </Lukknapp>
                     <ul className="nav-list">
-                        {routeConfig.map((route, index) => this.renderRoute(route, index))}
+                        {routeConfig.filter(route => route['path']).map((route, index) => this.renderRoute(route, index))}
                         <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
                     </ul>
                 </nav>

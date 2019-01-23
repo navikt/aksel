@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, withRouter, Switch } from 'react-router-dom';
 import { routes } from './../../../utils/routing/routes.component';
 
 import Header from './../../components/header/Header';
@@ -42,7 +42,9 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
                 <Header />
                 <Breadcrumbs />
                 <div className="contentWrapper">
-                    { routes() }
+                    <Switch>
+                        { routes() }
+                    </Switch>
                 </div>
             </div>
         );

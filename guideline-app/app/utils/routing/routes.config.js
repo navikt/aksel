@@ -8,6 +8,7 @@ import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
 import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import TempPage from '../../ui/containers/temp/TempPage';
+import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
@@ -68,6 +69,10 @@ const routeConfig = [
         path: '/community',
         component: CommunityMainPage,
         title: 'Diskusjon'
+    },
+    {
+        component: NotFoundPage,
+        title: 'Siden finnes ikke'
     }
 ];
 

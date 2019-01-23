@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
+import './styles.less';
+
 class TableOfContents extends React.Component {
     constructor(props) {
         super(props);
