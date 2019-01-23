@@ -77,7 +77,7 @@ class PropTypeTable extends React.Component {
                         <tbody>
                             {
                                 propTypeDocs.filter((item) =>
-                                    item.name.indexOf('aria-') !== 0
+                                    item.propName.indexOf('aria-') !== 0
                                 ).map((propTypeDoc, key) => (
                                     <PropTypeTableRow
                                         val={{
