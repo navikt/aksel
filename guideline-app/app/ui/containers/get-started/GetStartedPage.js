@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 import './styles.less';
@@ -7,7 +7,7 @@ import './styles.less';
 class GetStartedPage extends React.Component {
     render() {
         console.log(this.props.history);
-        
+
         return (
             <article className="mainContent mainContent--grey getStartedWrapper">
                 <section className="aboutWrapper">
@@ -15,7 +15,7 @@ class GetStartedPage extends React.Component {
                 </section>
                 <section className="actionsWrapper">
                     <section className="grid">
-                        <LenkepanelBase border>
+                        <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples" border>
                             <section>
                                 <h2>Start et nytt prosjekt</h2>
                                 <p>
@@ -23,7 +23,11 @@ class GetStartedPage extends React.Component {
                                 </p>
                             </section>
                         </LenkepanelBase>
-                        <LenkepanelBase border>
+                        <LenkepanelBase
+                            linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                            href="/components"
+                            border
+                        >
                             <section>
                                 <h2>Utforsk komponenter</h2>
                                 <p>
@@ -31,7 +35,7 @@ class GetStartedPage extends React.Component {
                                 </p>
                             </section>
                         </LenkepanelBase>
-                        <LenkepanelBase border>
+                        <LenkepanelBase href="https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.developer.md" border>
                             <section>
                                 <h2>Bidra med kode</h2>
                                 <p>
@@ -39,7 +43,11 @@ class GetStartedPage extends React.Component {
                                 </p>
                             </section>
                         </LenkepanelBase>
-                        <LenkepanelBase border>
+                        <LenkepanelBase
+                            linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                            href="/community"
+                            border
+                        >
                             <section>
                                 <h2>Bli med i diskusjonen</h2>
                                 <p>
