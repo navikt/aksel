@@ -3,8 +3,8 @@
 .table-of-contents {
   position:absolute;
   top:0px;
-  right: -464px;
-  width: 400px;
+  right: -452px;
+  width: 388px;
 
   ol {
     list-style-type:none;
@@ -14,13 +14,16 @@
       a {
         display:inline-block;
         padding:0.5rem 0.25rem;
-        // text-decoration:none;
-        // border-bottom:1px solid @navLysGra;
       }
     }
   }
 
   > ol {
     padding: 0;
+  }
+
+  @media (max-width: 1500px) {
+    position:static;
+    display:none;
   }
 }

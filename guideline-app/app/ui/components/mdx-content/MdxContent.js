@@ -40,6 +40,7 @@ class MdxContent extends React.Component {
     render() {
         return (
             <div className="mdx-content">
+                { this.state.ready && <TableOfContents headlines={this.headlines} /> }
                 <section className="section">
                     <this.props.children
                         components={{
@@ -60,7 +61,6 @@ class MdxContent extends React.Component {
                         }}
                     />
                 </section>
-                { this.state.ready && <TableOfContents headlines={this.headlines} /> }
             </div>
         );
     }
