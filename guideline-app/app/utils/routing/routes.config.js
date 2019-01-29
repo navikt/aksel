@@ -7,6 +7,7 @@ import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
 import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
+import NewProjectPage from '../../ui/containers/resources/new-project/NewProjectPage';
 import TempPage from '../../ui/containers/temp/TempPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 
@@ -33,6 +34,11 @@ const routeConfig = [
         component: ResourcesMainPage,
         title: 'Ressurser',
         routes: [
+            {
+                path: '/resources/new-project',
+                component: NewProjectPage,
+                title: 'Start nytt prosjekt'
+            },
             {
                 path: '/resources/colors',
                 component: ColorPage,

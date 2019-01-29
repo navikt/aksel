@@ -102,3 +102,38 @@ export const ErrorIcon = () => (
         </g>
     </svg>
 );
+
+export const SketchLogo = () => (
+    <svg viewBox="0 0 494 447" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+            <g transform="translate(-9.000000, -28.000000)">
+                <g transform="translate(9.000000, 28.000000)">
+                    <g fill="#FFAE00">
+                        <polygon transform="translate(247.000000, 223.500000) rotate(-180.000000) translate(-247.000000, -223.500000) " points="247 5.68434189e-14 494 287 387 432 247 447 107 432 -2.84217094e-13 287"></polygon>
+                    </g>
+                    <g transform="translate(0.000000, 160.000000)" fill="#EC6C00">
+                        <polygon transform="translate(247.000000, 143.500000) rotate(-180.000000) translate(-247.000000, -143.500000) " points="247 1.13686838e-13 494 287 -5.68434189e-14 287"></polygon>
+                    </g>
+                    <g transform="translate(100.000000, 160.000000)" fill="#FFAE00">
+                        <polygon transform="translate(147.000000, 143.500000) rotate(-180.000000) translate(-147.000000, -143.500000) " points="147 0 294 287 2.84217094e-13 287"></polygon>
+                    </g>
+                    <g transform="translate(100.000000, 0.000000)" fill="#FFEFB4">
+                        <polygon transform="translate(147.000000, 80.000000) rotate(-180.000000) translate(-147.000000, -80.000000) " points="147 160 294 2.70983236e-12 5.68434189e-14 -5.68434189e-14"></polygon>
+                    </g>
+                    <g transform="translate(0.000000, 15.000000)" fill="#FFAE00">
+                        <polygon transform="translate(53.500000, 72.500000) rotate(-180.000000) translate(-53.500000, -72.500000) " points="-2.27373675e-13 145 55 72 107 2.72848411e-12 6 5.68434189e-14"></polygon>
+                    </g>
+                    <g transform="translate(440.500000, 87.500000) scale(-1, 1) translate(-440.500000, -87.500000) translate(387.000000, 15.000000)" fill="#FFAE00">
+                        <polygon transform="translate(53.500000, 72.500000) rotate(-180.000000) translate(-53.500000, -72.500000) " points="-2.27373675e-13 145 55 72 107 2.72848411e-12 6 5.68434189e-14"></polygon>
+                    </g>
+                    <g transform="translate(100.000000, 0.000000)" fill="#FED305">
+                        <polygon transform="translate(73.500000, 80.000000) rotate(-180.000000) translate(-73.500000, -80.000000) " points="140 145 147 2.95585778e-12 2.27373675e-13 160"></polygon>
+                    </g>
+                    <g transform="translate(247.000000, 0.000000)" fill="#FED305">
+                        <polygon transform="translate(73.500000, 80.000000) scale(-1, 1) rotate(-180.000000) translate(-73.500000, -80.000000) " points="140 145 147 0 -1.42108547e-14 160"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </svg>
+);

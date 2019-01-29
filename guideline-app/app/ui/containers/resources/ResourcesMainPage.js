@@ -22,21 +22,17 @@ class ResoucesMainPage extends React.Component {
         return (
             <article className="mainContent mainContent--grey">
                 <div className="catalog">
-                    <CatalogItem to="/resources/colors">
-                        <Undertittel className="lenkepanel__heading">Farger</Undertittel>
-                    </CatalogItem>
-                    <CatalogItem to="/resources/colors">
-                        <Undertittel className="lenkepanel__heading">Illustrasjoner</Undertittel>
-                    </CatalogItem>
-                    <CatalogItem to="/resources/colors">
-                        <Undertittel className="lenkepanel__heading">Ikoner</Undertittel>
-                    </CatalogItem>
-                    <CatalogItem to="/resources/accessibility">
-                        <Undertittel className="lenkepanel__heading">Tilgjengelighet</Undertittel>
-                    </CatalogItem>
-                    <CatalogItem to="/resources/language">
-                        <Undertittel className="lenkepanel__heading">Slik skriver vi</Undertittel>
-                    </CatalogItem>
+                    {
+                        this.props.routes.map((route, index) => (
+                            <LenkepanelBase
+                                key={index}
+                                linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                                href={route.path}
+                            >
+                                <Undertittel className="lenkepanel__heading">{route.title}</Undertittel>
+                            </LenkepanelBase>
+                        ))
+                    }
                 </div>
             </article>
         );

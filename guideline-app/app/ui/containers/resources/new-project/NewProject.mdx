@@ -1,0 +1,53 @@
+import { Ingress, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
+import Lenkepanel, { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
+import Panel from 'NavFrontendModules/nav-frontend-paneler';
+import { SketchLogo, GithubLogo } from '../../../../assets/images/svg';
+import './styles.less';
+
+# Start nytt prosjekt
+
+<Ingress>
+    Denne siden er ment å være til hjelp for de som trenger litt veiledning til å komme i gang med nye prosjekter i NAV.
+</Ingress>
+
+## For designere
+
+Her er lenker til noen sentrale ressurser dere trenger.
+
+<Lenkepanel className="resource-link" href="#" border>
+    <SketchLogo />
+    UI bibliotek
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://sketch.cloud/s/mb53w" border>
+    <SketchLogo />
+    Illustrasjons&shy;bibliotek
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://sketch.cloud/s/G9QxO" border>
+    <SketchLogo />
+    Ikon&shy;bibliotek
+</Lenkepanel>
+
+## For utviklere
+
+Her er noen eksempler på forskjellige oppsett med frontend-rammeverket.
+
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/cra" border>
+    <GithubLogo />
+    Create React App
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/parcel" border>
+    <GithubLogo />
+    Parcel
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/webpack" border>
+    <GithubLogo />
+    Webpack
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/legacy" border>
+    <GithubLogo />
+    Browserify
+</Lenkepanel>
+
+Du finner også en mengde [åpne frontend-prosjekter under NAVIKT-gruppen på Github](https://github.com/navikt?utf8=✓&q=frontend&type=&language=).

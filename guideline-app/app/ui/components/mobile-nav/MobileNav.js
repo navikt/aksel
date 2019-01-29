@@ -55,7 +55,7 @@ class MobileNav extends React.Component {
                 {
                     route['routes'] && 
                     <ul>
-                        { route.routes.map((route, index) => this.renderRoute(route, index)) }
+                        { route.routes.filter(route => route.path !== '/new-project').map((route, index) => this.renderRoute(route, index)) }
                     </ul>
                 }
             </MobileNavMenuItem>

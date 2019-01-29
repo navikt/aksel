@@ -115,6 +115,7 @@
     "react-svg-icon-generator-fork": "^1.0.2",
     "react-syntax-highlighter": "^9.0.0",
     "react-test-renderer": "^15.4.2 || ^16.0.0",
+    "react-transition-group": "^2.5.3",
     "redux": "^3.7.1",
     "redux-logger": "^3.0.6",
     "semver": "^5.4.1",
