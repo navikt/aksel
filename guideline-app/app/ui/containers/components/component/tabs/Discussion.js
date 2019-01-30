@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Alertstripe from './../../../../../../../packages/node_modules/nav-frontend-alertstriper';
-import { LenkepanelBase } from './../../../../../../../packages/node_modules/nav-frontend-lenkepanel';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
+import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 class Discussion extends React.Component {
     render() {
@@ -11,7 +12,7 @@ class Discussion extends React.Component {
                 <Alertstripe type="info">
                     Vi jobber med å lage et forum hvor man kan diskutere og komme med innspill 
                     til designsystemet. Før dette er på plass kan 
-                    dere gjerne <a href="https://github.com/navikt/nav-frontend-moduler/issues">bruke Github</a> til
+                    dere gjerne <Lenke href="https://github.com/navikt/nav-frontend-moduler/issues">bruke Github</Lenke> til
                     å opprette saker og diskutere der.
                 </Alertstripe>
             </section>

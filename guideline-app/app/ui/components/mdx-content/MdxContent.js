@@ -2,6 +2,7 @@ import React from 'react';
 import Code, { Inline } from './../code/Code';
 import TableOfContents from './../table-of-contents/TableOfContents';
 import { Innholdstittel, Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 
 import './styles.less';
 
@@ -55,6 +56,7 @@ class MdxContent extends React.Component {
                                 const id = this.registerHeadline('h3', props);
                                 return <Undertittel id={id} {...props} tag="h3" />;
                             },
+                            a: (props) => <Lenke {...props} />,
                             code: Code,
                             inlineCode: Inline
                         }}

@@ -1,11 +1,12 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Lenkepanel from './../../../../../../../packages/node_modules/nav-frontend-lenkepanel';
-import { Systemtittel } from './../../../../../../../packages/node_modules/nav-frontend-typografi';
-
 import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
 import { Bash } from './../../../../components/code/Code';
+
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel';
+import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 class Technical extends React.Component {
 
@@ -38,17 +39,17 @@ class Technical extends React.Component {
                             <tr>
                                 <th>Navn:</th>
                                 <td>
-                                    <a href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}`}>
+                                    <Lenke href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}`}>
                                         {this.props.componentData.manifest.name}
-                                    </a>
+                                    </Lenke>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Siste versjon:</th>
                                 <td>
-                                    <a href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}?activeTab=versions`}>
+                                    <Lenke href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}?activeTab=versions`}>
                                         {this.props.componentData.manifest.version}
-                                    </a>
+                                    </Lenke>
                                 </td>
                             </tr>
                             <tr>
@@ -56,7 +57,7 @@ class Technical extends React.Component {
                                 <td className="dependencies">
                                     {
                                         Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => {
-                                            return [<a key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</a>, ' '];
+                                            return [<Lenke key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</Lenke>, ' '];
                                         })
                                     }
                                 </td>

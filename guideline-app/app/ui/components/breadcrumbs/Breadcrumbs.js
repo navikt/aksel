@@ -33,7 +33,7 @@ const Breadcrumbs = (props) => {
                 {
                     breadcrumbs.map((breadcrumb, index) => {
                         if (index < (breadcrumbs.length - 1)) {
-                            return (<li key={index}><NavLink to={breadcrumb.path}>{breadcrumb.title}</NavLink></li>);
+                            return (<li key={index}><NavLink className="lenke" to={breadcrumb.path}>{breadcrumb.title}</NavLink></li>);
                         }
                         return (<li key={index}>{breadcrumb.title}</li>);
                     })

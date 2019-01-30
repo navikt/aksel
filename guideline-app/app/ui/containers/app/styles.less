@@ -93,56 +93,8 @@
             }
           }
 
-          // .example {
-          //   h2, .typo-systemtittel, .typo-undertittel, .panel {
-          //     margin: 0;
-          //   }
-          //   ul, li {
-          //     margin-top:0;
-          //     margin-bottom:0;
-          //   }
-          // }
-
           &.full {
             max-width: none;
-          }
-        }
-
-        .tabsContainer { 
-          &--fullWidth {
-            position:relative;
-            margin:2rem -3rem 3rem;
-
-            &:after {
-              content:'';
-              display:block;
-              position:absolute;
-              bottom:9px;
-              left:0px;
-              right:0px;
-              height:1px;
-              background:@navGra40;
-            }
-
-            .tabsContainer__inner {
-              overflow-x:scroll;
-              overflow-y:hidden;
-              padding:2px 3rem 10px;
-            }
-    
-            .nav-frontend-tabs {
-              border:none;
-              position:relative;
-              z-index:1;
-            }
-          }
-
-          @media (max-width: 550px) {
-            margin: 2rem -1.5rem 3rem;
-
-            .tabsContainer__inner {
-              padding:2px 1.5rem 10px;
-            }
           }
         }
 

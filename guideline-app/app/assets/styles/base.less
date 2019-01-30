@@ -58,6 +58,12 @@ a {
         border-left:2px solid @navBla;
       }
 
+      &:focus {
+        outline:none;
+        box-shadow:0 0 0 3px #FFBD66;
+        z-index:1;
+      }
+
       &.active {
         background: white;
         color: @navMorkGra;
@@ -72,16 +78,13 @@ a {
     }
 
     &.open {
-      // border-left: 2px solid @navBla;
       background:white;
 
       > a {
         font-weight:bold;
         color:@navMorkGra;
-        // pointer-events:none;
       }
       > ul {
-        // background:white;
         > li {
           > a {
             padding-left:3rem;
@@ -121,5 +124,43 @@ a {
 
   @media (max-width: 640px) {
     grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.tabsContainer { 
+  &--fullWidth {
+    position:relative;
+    margin:2rem -3rem 3rem;
+
+    &:after {
+      content:'';
+      display:block;
+      position:absolute;
+      bottom:9px;
+      left:0px;
+      right:0px;
+      height:1px;
+      background:@navGra40;
+    }
+
+    .tabsContainer__inner {
+      overflow-x:scroll;
+      overflow-y:hidden;
+      padding:2px 3rem 10px;
+    }
+
+    .nav-frontend-tabs {
+      border:none;
+      position:relative;
+      z-index:1;
+    }
+  }
+
+  @media (max-width: 550px) {
+    margin: 2rem -1.5rem 3rem;
+
+    .tabsContainer__inner {
+      padding:2px 1.5rem 10px;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import Panel from './../../../../../packages/node_modules/nav-frontend-paneler';
+import Panel from 'NavFrontendModules/nav-frontend-paneler';
+import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import './styles.less';
 
@@ -8,7 +9,7 @@ const TemplatesMainPage = () => (
     <article className="mainContent mainContent--grey templatesWrapper">
         <section className="content">
             <Panel border>
-                <h2>Maler kommer</h2>
+                <Systemtittel>Maler kommer</Systemtittel>
                 <p>
                     Vi jobber med å lage flere større eksempler som skal vise hvordan man kan bruke og kombinere 
                     komponenter i en større sammenheng. Samtidig pågår det et arbeid med å lage maler for mer 

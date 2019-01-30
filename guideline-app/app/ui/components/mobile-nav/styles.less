@@ -1,7 +1,7 @@
 @import (reference) '~nav-frontend-core/less/_variabler';
 
 .mobile-nav {
-  // display:none;
+  display:block;
   background:rgba(0,0,0,0);
   position:fixed;
   top:0px;
@@ -133,5 +133,9 @@
 
   &--hidden {
     z-index:-1;
+  }
+
+  @media (min-width: 1094px) {
+    display:none;
   }
 }
