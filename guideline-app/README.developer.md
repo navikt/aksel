@@ -11,7 +11,6 @@ modul.
 Det som er viktig at utviklerne selv tar ansvar for er at live-demoer av komponenter, og kodeeksemplene under
 Utviklerdokumentasjon, fungerer som det skal til enhver tid.
 
-
 ## Kort om live-demo, kodeeksempler og menypunkter
 De fleste av React-modulene i nav-frontend har nå sin egen fil på formatet `_<komponentnavn>.sample.js` som ligger i 
 rotmappa for den gjeldende modulen. 
@@ -22,7 +21,6 @@ Hver og en av de filene sørger for at:
 for denne komponenten.
 * Alt rundt live-demo av komponenten, inkludert rendering, toggling av checkbokser, radioknapper og live-kodeeksempler,
 fungerer som det skal (basert på det som blir default-eksportert ut fra `_<komponentnavn>.sample.js`).
- 
 
 ## Vedlikehold av live-demoer og kodeeksempler
 Alle live-demoene og kodeeksemplene fungerer utifra det som blir default-eksportert ut fra den gjeldende 
@@ -31,7 +29,6 @@ Alle live-demoene og kodeeksemplene fungerer utifra det som blir default-eksport
 Til vedlikehold av live-demoer og kodeeksempler er det lagd et API som abstraherer vekk mye av kompleksiteten som 
 ligger bak for at man skal slippe å dykke langt ned i kodebasen om man kun er opptatt av å bidra med utvikling av 
 eksisterende eller nye komponenter til kodebiblioteket.
-
 
 ## API-et
 API-et består av en funksjon som blir default-eksportert ut fra 
