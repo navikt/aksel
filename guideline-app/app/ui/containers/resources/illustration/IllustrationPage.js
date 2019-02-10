@@ -23,13 +23,15 @@ class IllustrationPage extends React.Component {
                 id: 'guidelines',
                 label: 'Retningslinjer',
                 content: () => (<MdxContent>{Guidelines}</MdxContent>)
-            },
+            }
+        ];
+        /*
             {
                 id: 'accessibility',
                 label: 'Tilgjengelighet',
                 content: () => (<MdxContent>{Accessibility}</MdxContent>)
             }
-        ];
+        */
     }
 
     render() {

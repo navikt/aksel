@@ -6,7 +6,6 @@ import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 class Discussion extends React.Component {
     render() {
-        console.log('Discussion', this.props);
         return (
             <section className="section">
                 <Alertstripe type="info">
