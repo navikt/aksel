@@ -19,7 +19,7 @@ class Technical extends React.Component {
 
     renderInstallInstructions = () => (
         <div className="install-doc">
-            <Systemtittel>Installering</Systemtittel>
+            <Systemtittel id="installering">Installering</Systemtittel>
             <Bash>
                 { this.props.componentData.installInstructions }
             </Bash>
@@ -33,7 +33,7 @@ class Technical extends React.Component {
         return (
             <React.Fragment>
                 <section className="section full">
-                    <Systemtittel>NPM-pakke</Systemtittel>
+                    <Systemtittel id="npm-pakke">NPM-pakke</Systemtittel>
                     <table className="tabell">
                         <tbody>
                             <tr>

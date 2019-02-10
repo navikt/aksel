@@ -41,7 +41,7 @@ class GetStartedPage extends React.Component {
                                 </p>
                             </div>
                         </LenkepanelBase>
-                        <LenkepanelBase href="https://github.com/erlendev/nav-frontend-moduler/blob/master/guideline-app/README.developer.md" border>
+                        <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler/blob/master/README.md" border>
                             <div>
                                 <Systemtittel>Bidra med kode</Systemtittel>
                                 <p>

@@ -44,7 +44,7 @@ class ModuleBrowser extends React.Component {
     render(){
         return (
             <div className="module-browser">
-                <Systemtittel>Moduler</Systemtittel>
+                <Systemtittel id="moduler">Moduler</Systemtittel>
                 <Panel border className="module-browser__wrapper">
                     <nav>
                         <ul className="nav-list">

@@ -89,7 +89,7 @@ class Palette extends React.Component {
                 </Modal>
 
                 <section className="section">
-                    <Systemtittel>Hovedfarger</Systemtittel>
+                    <Systemtittel id="hovedfarger">Hovedfarger</Systemtittel>
                     <Normaltekst>
                         NAV har en fargepalett der rødt og grått er de førende fargene.
                     </Normaltekst>
@@ -109,7 +109,7 @@ class Palette extends React.Component {
                 </section>
 
                 <section className="section">
-                    <Systemtittel>Systemfarger</Systemtittel>
+                    <Systemtittel id="systemfarger">Systemfarger</Systemtittel>
                     <Alertstripe type="info">
                         Dette er farger som hovedsakelig er reservert for spesifikke funksjoner i systemet.
                         Man bør unngå å bruke akkurat disse fargene til dekor eller pynt.
@@ -171,7 +171,7 @@ class Palette extends React.Component {
                 </section>
 
                 <section className="section full">
-                    <Systemtittel>Hele paletten</Systemtittel>
+                    <Systemtittel id="hele-paletten">Hele paletten</Systemtittel>
                     <ColorPalette onClick={(color) => this.setState({activeColor: color})} />
                 </section>
             </React.Fragment>

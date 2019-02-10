@@ -14,8 +14,10 @@ class TabbedContainer extends React.Component {
 
         if (currentPath !== this.basePath) {
             const lastCurrentPathFragment = currentPath.split('/').slice(-1).pop();
-            this.defaultActive = this.props.tabs.findIndex(tab => tab['id'] === lastCurrentPathFragment) || 0;
+            this.defaultActive = this.props.tabs.findIndex(tab => tab['id'] === lastCurrentPathFragment);
         }
+
+        if (this.defaultActive < 0) this.defaultActive = 0;
 
         this.state = {
             activeContent: this.props.tabs[this.defaultActive].content
