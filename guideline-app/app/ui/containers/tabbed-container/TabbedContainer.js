@@ -1,7 +1,5 @@
 import React from 'react';
 import { withRouter, Router } from 'react-router';
-
-// import routeConfig, { flattenedPaths } from './../../../utils/routing/routes.config';
 import { getFlattenedPaths } from './../../../utils/routing/routes.utils';
 
 import Tabs from 'NavFrontendModules/nav-frontend-tabs';
@@ -10,68 +8,44 @@ class TabbedContainer extends React.Component {
     constructor(props){
         super(props);
 
-        console.log(getFlattenedPaths());
-
         const currentPath = this.props.history.location.pathname;
         this.basePath = getFlattenedPaths().reverse().find(path => currentPath.indexOf(path) !== -1);
+        this.defaultActive = 0;
 
-        if (currentPath === this.basePath) {
-            this.state = {
-                activeTab: 0
-            };
-        } else {
+        if (currentPath !== this.basePath) {
             const lastCurrentPathFragment = currentPath.split('/').slice(-1).pop();
-            const matchingTabIndex = this.props.tabs.findIndex(tab => tab['id'] === lastCurrentPathFragment);
-
-            console.log(matchingTabIndex);
-
-            this.state = {
-                activeTab: matchingTabIndex || 0
-            };
+            this.defaultActive = this.props.tabs.findIndex(tab => tab['id'] === lastCurrentPathFragment) || 0;
         }
 
-        // console.log(lastCurrentPathFragment, basePath, currentPath);
-
-        // let hash = (window.location.hash) ? window.location.hash.split('?')[1] : undefined ;
-        //     // hash = (hash.indexOf('#'))
-
-        // const hashTabIndex = this.props.tabs.findIndex(tab => tab['id'] === hash);
-
-        // this.defaultAktiv = (hashTabIndex !== -1) ? hashTabIndex : 0;
-        // this.state = {
-        //     activeContent: this.props.tabs[this.defaultAktiv].content
-        // };
+        this.state = {
+            activeContent: this.props.tabs[this.defaultActive].content
+        };
     }
 
     changeTab = (index) => {
         const tabId = this.props.tabs[index]['id'] || '';
+        const newPath = this.basePath.split('/').concat([tabId]).join('/');
 
-        // let newPath = this.basePath.split('/').push()
-
-        // window.history.pushState(null, null, `?${tabId}`);
+        this.props.history.push(newPath);
 
         this.setState({
-            activeTab: index
+            activeContent: this.props.tabs[index].content
         });
     }
 
     render(){
-        const content = this.props.tabs[this.state.activeTab].content;
-
-        console.log(this.props.tabs);
-        
         return (
             <React.Fragment>
                 <div className="tabsContainer tabsContainer--fullWidth">
                     <div className="tabsContainer__inner">
                         <Tabs
-                            defaultAktiv={this.state.activeTab}
+                            defaultAktiv={this.defaultActive}
                             onChange={(e, i) => this.changeTab(i)}
                             tabs={this.props.tabs.map((tab) => ({ label: tab.label }))}
                         />
                     </div>
                 </div>
-                <content />
+                <this.state.activeContent { ...this.props } />
             </React.Fragment>
         );
     }
