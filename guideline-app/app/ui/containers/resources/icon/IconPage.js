@@ -3,7 +3,7 @@ import Icons from './Icons.mdx'
 import MdxContent from './../../../components/mdx-content/MdxContent';
 import './styles.less';
 
-class IconsPage extends React.Component {
+class IconPage extends React.Component {
     render() {
         return (
             <React.Fragment>
@@ -13,4 +13,4 @@ class IconsPage extends React.Component {
     }
 }
 
-export default IconsPage;
+export default IconPage;

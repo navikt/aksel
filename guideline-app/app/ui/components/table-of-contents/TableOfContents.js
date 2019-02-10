@@ -7,7 +7,6 @@ import './styles.less';
 class TableOfContents extends React.Component {
     constructor(props) {
         super(props);
-        console.log(props.headlines);
         this.tree = [];
         this.buildTree();
     }
@@ -64,6 +63,7 @@ class TableOfContents extends React.Component {
 
     render() {
         const rootItems = this.findHeadlineChildren(undefined);
+        if (!this.tree.length || this.tree.length < 2) return null;
         return (
             <nav className="table-of-contents">
                 <Undertittel>Innhold:</Undertittel>

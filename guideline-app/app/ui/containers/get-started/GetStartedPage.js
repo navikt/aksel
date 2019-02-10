@@ -57,7 +57,7 @@ class GetStartedPage extends React.Component {
                             <div>
                                 <Systemtittel>Bli med i diskusjonen</Systemtittel>
                                 <p>
-                                    Har du forslag til forbedringer, eller bare noen spørsmål? Diskutèr med oss her.
+                                    Har du forslag til forbedringer, eller bare noen spørsmål? Diskuter med oss her.
                                 </p>
                             </div>
                         </LenkepanelBase>
