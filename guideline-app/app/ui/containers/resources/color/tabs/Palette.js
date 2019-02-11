@@ -1,10 +1,14 @@
 import React from 'react';
 
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
-import Panel from 'NavFrontendModules/nav-frontend-paneler';
-import Tabs from 'NavFrontendModules/nav-frontend-tabs';
-import { Innholdstittel, Systemtittel, Undertittel, Ingress, Element, EtikettLiten as Etikett, Normaltekst } from 'NavFrontendModules/nav-frontend-typografi';
-import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
+import {
+    Systemtittel,
+    Undertittel,
+    Ingress,
+    EtikettLiten as Etikett,
+    Normaltekst
+} from 'NavFrontendModules/nav-frontend-typografi';
+
 import Modal from 'NavFrontendModules/nav-frontend-modal';
 
 import ColorSample from '../../../../components/color-sample/ColorSample';
@@ -92,16 +96,44 @@ class Palette extends React.Component {
                     </Normaltekst>
 
                     <div className="color-group">
-                        <ColorSample name="@navRod" color="#c30000" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navRod"
+                            color="#c30000"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                     </div>
 
                     <div className="color-group">
-                        <ColorSample name="@navMorkGra" color="#3E3832" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navGra80" color="#59514B" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navGra60" color="#78706A" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navGra40" color="#B7B1A9" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navGra20" color="#C6C2BF" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navLysGra" color="#E9E7E7" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navMorkGra"
+                            color="#3E3832"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navGra80"
+                            color="#59514B"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navGra60"
+                            color="#78706A"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navGra40"
+                            color="#B7B1A9"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navGra20"
+                            color="#C6C2BF"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navLysGra"
+                            color="#E9E7E7"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                     </div>
                 </section>
 
@@ -113,7 +145,11 @@ class Palette extends React.Component {
                     </Alertstripe>
                     <div className="color-group">
                         <Ingress>Interaksjonsfarge</Ingress>
-                        <ColorSample name="@navBla" color="#0067c5" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navBla"
+                            color="#0067c5"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å indikere interaktivitet. Den brukes
@@ -124,7 +160,11 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Fokusfarge</Ingress>
-                        <ColorSample name="@navOransjeFokus" color="#ffbd66" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navOransjeFokus"
+                            color="#ffbd66"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å indikere fokus. Interaktive elementer
@@ -134,8 +174,16 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: suksess</Ingress>
-                        <ColorSample name="@navGronn" color="#06893A" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navGronnLighten60" color="#9BD0B0" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navGronn"
+                            color="#06893A"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navGronnLighten60"
+                            color="#9BD0B0"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                         <div className="color-description">
                             <p>
                                 Disse fargene er reservert av systemet for å indikere positiv feedback, f.eks. som
@@ -145,8 +193,16 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: feilmelding</Ingress>
-                        <ColorSample name="@redError" color="#BA3A26" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@pinkErrorBg" color="#F3E3E3" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@redError"
+                            color="#BA3A26"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@pinkErrorBg"
+                            color="#F3E3E3"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                         <div className="color-description">
                             <p>
                                 Disse fargene er reservert av systemet for å indikere negativ feedback, f.eks. som
@@ -156,8 +212,16 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: advarsel</Ingress>
-                        <ColorSample name="@navOransje" color="#FF9100" onClick={(color) => this.setState({ activeColor: color })} />
-                        <ColorSample name="@navOransjeLighten60" color="#FFD399" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample
+                            name="@navOransje"
+                            color="#FF9100"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
+                        <ColorSample
+                            name="@navOransjeLighten60"
+                            color="#FFD399"
+                            onClick={(color) => this.setState({ activeColor: color })}
+                        />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å gi forberedende feedback, f.eks. som

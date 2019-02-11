@@ -26,7 +26,7 @@ const colorName = (base, i) => {
 const ColorPalette = (props) => (
     <div className="color-palette">
         {
-            Object.keys(palette).map((colorVar, i) => {
+            Object.keys(palette).map((colorVar) => {
                 const color = Color(palette[colorVar]);
                 const lightVersions = variations(color, white);
                 lightVersions.push(color);
@@ -34,7 +34,7 @@ const ColorPalette = (props) => (
                 const group = lightVersions.concat(darkVersions.reverse()).reverse();
 
                 return (
-                    <div className="color-group" key={i}>
+                    <div className="color-group" key={colorVar}>
                         {
                             group.map((col, ii) => {
                                 const name = colorName(colorVar, ii);

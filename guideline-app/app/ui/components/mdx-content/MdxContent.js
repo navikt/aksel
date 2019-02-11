@@ -1,8 +1,10 @@
 import React from 'react';
-import Code, { Inline } from './../code/Code';
-import TableOfContents from './../table-of-contents/TableOfContents';
+
 import { Innholdstittel, Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+
+import Code, { Inline } from './../code/Code';
+import TableOfContents from './../table-of-contents/TableOfContents';
 
 import './styles.less';
 
@@ -27,7 +29,7 @@ class MdxContent extends React.Component {
         this.headlines.push({
             id,
             parent: undefined,
-            type: parseInt(type.substring(2, 1)),
+            type: parseInt(type.substring(2, 1), 10),
             title: title.children
         });
 

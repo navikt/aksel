@@ -7,25 +7,24 @@ import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import SubRoutesWrapper from '../../../utils/routing/subroutesWrapper.component';
 import LeftNavigation from '../../components/left-navigation/LeftNavigation';
 
-// import './styles.less';
-
-const CatalogItem = (props) => (
-    <LenkepanelBase
-        linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
-        href={props.to}
-        children={props.children}
-    />
-);
-
 class ResoucesMainPage extends React.Component {
     renderMainContent = () => (
         <article className="mainContent mainContent--grey">
             <div className="catalog">
                 {
-                        this.props.routes.map((route, index) => (
+                        this.props.routes.map((route) => (
                             <LenkepanelBase
-                                key={index}
-                                linkCreator={(props) => <NavLink className="lenkepanel lenkepanel--border" to={props.href}>{props.children}</NavLink>}
+                                key={route.title}
+                                linkCreator={
+                                    (props) => (
+                                        <NavLink
+                                            className="lenkepanel lenkepanel--border"
+                                            to={props.href}
+                                        >
+                                            {props.children}
+                                        </NavLink>
+                                    )
+                                }
                                 href={route.path}
                             >
                                 <Undertittel className="lenkepanel__heading">{route.title}</Undertittel>

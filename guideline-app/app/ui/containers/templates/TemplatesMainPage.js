@@ -1,5 +1,6 @@
 import React from 'react';
 
+/* eslint-disable import/extensions */
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 

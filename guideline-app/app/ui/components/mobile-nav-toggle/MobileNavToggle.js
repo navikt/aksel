@@ -28,7 +28,10 @@ class MobileNavToggle extends React.Component {
 
     render() {
         return (
-            <button className={classnames('mobile-nav-toggle', { 'mobile-nav-toggle--with-shadow': this.state.shadow })} {...this.props}>
+            <button
+                className={classnames('mobile-nav-toggle', { 'mobile-nav-toggle--with-shadow': this.state.shadow })}
+                {...this.props}
+            >
                 <span className="mobile-nav-toggle__hamburger-icon">
                     Åpne meny
                 </span>

@@ -4,6 +4,8 @@ import classnames from 'classnames';
 
 import { EtikettLiten as Etikett } from 'NavFrontendModules/nav-frontend-typografi';
 
+import { CheckIcon, CrossIcon } from './../../../assets/images/svg';
+
 import './styles.less';
 
 const sampleCls = (props) => classnames('contrast-sample', {
@@ -25,13 +27,23 @@ const ContrastSample = (props) => {
         <React.Fragment>
             <Etikett>
                 {props.label}
-                <span className={contrastCls(contrast)}><span className="contrast-ratio__label">Kontrast:</span> <strong>{contrast}:1</strong>, WCAG AA: </span>
+                <span className={contrastCls(contrast)}>
+                    <span className="contrast-ratio__label">Kontrast: </span>
+                    <strong>{contrast}:1</strong>, WCAG AA:
+                    { contrast > 4.5 && <CheckIcon title="Godkjent" /> }
+                    { contrast < 4.5 && <CrossIcon title="Ikke godkjent" /> }
+                </span>
             </Etikett>
             <div
                 className={sampleCls(props)}
-                style={
-                    { background: `repeating-linear-gradient(90deg, ${background}, ${background} 2%, ${foreground} 2%, ${foreground} 4%)` }
-                }
+                style={{
+                    background:
+                        `repeating-linear-gradient(90deg,
+                        ${background},
+                        ${background} 2%,
+                        ${foreground} 2%,
+                        ${foreground} 4%)`
+                }}
             />
         </React.Fragment>
     );

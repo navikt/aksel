@@ -3,14 +3,10 @@ import NewProject from './NewProject.mdx';
 import MdxContent from './../../../components/mdx-content/MdxContent';
 import './styles.less';
 
-class NewProjectPage extends React.Component {
-    render() {
-        return (
-            <div className="new-project-page">
-                <MdxContent>{NewProject}</MdxContent>
-            </div>
-        );
-    }
-}
+const NewProjectPage = () => (
+    <div className="new-project-page">
+        <MdxContent>{NewProject}</MdxContent>
+    </div>
+);
 
 export default NewProjectPage;

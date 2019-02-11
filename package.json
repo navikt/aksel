@@ -99,6 +99,7 @@
     "mustache": "^2.3.0",
     "nav-frontend-core": "^4.0.6",
     "prettify-xml": "^1.2.0",
+    "prismjs": "^1.15.0",
     "progress": "^2.0.0",
     "prop-types": "^15.5.10",
     "raw-loader": "^0.5.1",

@@ -32,27 +32,9 @@ const getTextData = () => {
     return textDataInCategories;
 };
 
-const getInstallInstructions = (moduleRef, edges) => {
-    const modulePathMatch = (moduleRef.match(/\.\/(nav-frontend-([A-Z]|[a-z]|-)+)\//));
-    const pkgName = modulePathMatch[1];
-
+const getInstallInstructions = (pkgName, edges) => {
     const dependencies = dfs(edges, pkgName).join(' ');
     return `npm install ${dependencies} --save`;
-};
-
-const getInstallInstructionsAlt = (pkgName, edges) => {
-    const dependencies = dfs(edges, pkgName).join(' ');
-    return `npm install ${dependencies} --save`;
-};
-
-const getNameOfModule = (moduleRef) => {
-    const regx = /\/_[a-z]+\./;
-    const match = moduleRef.match(regx);
-    if (match.index > -1) {
-        // slices off /_ at the beginning and . at the end
-        return match[0].slice(2, match[0].length - 1);
-    }
-    return null;
 };
 
 const getDependencyEdgesFromPackages = (pkgs) => Object.values(pkgs)
@@ -61,7 +43,8 @@ const getDependencyEdgesFromPackages = (pkgs) => Object.values(pkgs)
             [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
         ), []);
 
-const getOverviewModulesByPackageName = (packageName, overviewModules) => Object.keys(overviewModules).filter((overviewKey) => overviewKey.indexOf(`./${packageName}/`) !== -1);
+const getOverviewModulesByPackageName = (packageName, overviewModules) =>
+    Object.keys(overviewModules).filter((overviewKey) => overviewKey.indexOf(`./${packageName}/`) !== -1);
 
 const getOverviewModuleNameByPath = (path) => {
     const parts = path.split('/');
@@ -91,7 +74,6 @@ const getComponentData = () => {
 
     Object.keys(overviewModules).forEach((overviewKey) => {
         const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
-        const overviewModule = overviewModules[overviewKey];
         const pkgName = overviewKey.split('/')[1];
         const pkg = pkgs[`./${pkgName}/package.json`];
         const pkgMainModulePath = pkg.main;
@@ -104,7 +86,9 @@ const getComponentData = () => {
         if (pkgOverviewModules.length > 1) {
             // If package has multiple overview modules (i.e. 'nav-frontend-skjema'),
             // use overview module name to find main module
-            mainModuleKey = Object.keys(pkgModules).find((moduleKey) => moduleKey.toLowerCase() === overviewModuleName.toLowerCase());
+            mainModuleKey = Object.keys(pkgModules).find((moduleKey) =>
+                moduleKey.toLowerCase() === overviewModuleName.toLowerCase());
+
             mainModule = pkgModules[mainModuleKey];
         } else {
             // All others
@@ -116,7 +100,7 @@ const getComponentData = () => {
             mainModule,
             packageModules: pkgModules,
             manifest: pkg,
-            installInstructions: getInstallInstructionsAlt(pkgName, edges)
+            installInstructions: getInstallInstructions(pkgName, edges)
         };
     });
 

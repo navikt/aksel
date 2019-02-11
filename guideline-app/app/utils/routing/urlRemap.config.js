@@ -1,4 +1,4 @@
-export const urlRemapConfig = {
+const urlRemapConfig = {
     '#/components': 'components',
     '#/styling/typography': 'components/typografi',
     '#/styling/farger': 'resources/colors',
@@ -7,3 +7,5 @@ export const urlRemapConfig = {
     '#/how-we-write': 'resources/language',
     '#/accessibility': 'resources/accessibility'
 };
+
+export default urlRemapConfig;

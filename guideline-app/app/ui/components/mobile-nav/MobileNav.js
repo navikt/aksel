@@ -1,12 +1,13 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
+
+import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
+
 import routeConfig from '../../../utils/routing/routes.config';
 import { GithubLogo } from '../../../assets/images/svg';
 
 import MobileNavMenuItem from './MobileNavMenuItem';
-
-import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
 
 import './styles.less';
 
@@ -22,6 +23,7 @@ class MobileNav extends React.Component {
             hidden: true
         };
         window.addEventListener('keydown', this.handleKeyPress);
+        window.addEventListener('click', this.handleClick);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,7 +45,7 @@ class MobileNav extends React.Component {
     }
 
     handleClick = (e) => {
-        if (e.target === this.bg && !this.timer) {
+        if (!this.state.hidden && e.target === this.bg && !this.timer) {
             this.props.toggle();
         }
     }
@@ -55,7 +57,11 @@ class MobileNav extends React.Component {
                 {
                     route.routes &&
                     <ul>
-                        { route.routes.filter((route) => route.path !== '/new-project').map((route, index) => this.renderRoute(route, index)) }
+                        {
+                            route.routes.filter((subRoute) => subRoute.path !== '/new-project').map(
+                                (filteredRoute, i) => this.renderRoute(filteredRoute, i)
+                            )
+                        }
                     </ul>
                 }
             </MobileNavMenuItem>
@@ -65,9 +71,8 @@ class MobileNav extends React.Component {
     render() {
         return (
             <div
-                ref={(node) => this.bg = node}
+                ref={(node) => { this.bg = node; }}
                 className={cls(this.props, this.state)}
-                onClick={this.handleClick}
                 aria-hidden={this.state.hidden}
             >
                 <nav className="mobile-nav__drawer">
@@ -78,8 +83,20 @@ class MobileNav extends React.Component {
                         Lukk meny
                     </Lukknapp>
                     <ul className="nav-list">
-                        {routeConfig.filter((route) => route.path).map((route, index) => this.renderRoute(route, index))}
-                        <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
+                        {
+                            routeConfig.filter((route) => route.path).map((route, index) =>
+                                this.renderRoute(route, index)
+                            )
+                        }
+                        <li>
+                            <a
+                                href="https://github.com/navikt/nav-frontend-moduler"
+                                className="github"
+                            >
+                                <GithubLogo />
+                                Github
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>

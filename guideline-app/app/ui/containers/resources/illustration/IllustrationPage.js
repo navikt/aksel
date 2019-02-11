@@ -4,7 +4,7 @@ import { Innholdstittel, Ingress } from 'NavFrontendModules/nav-frontend-typogra
 
 import Resources from './tabs/Resources.mdx';
 import Guidelines from './tabs/Guidelines.mdx';
-import Accessibility from './tabs/Accessibility.mdx';
+// import Accessibility from './tabs/Accessibility.mdx';
 
 import MdxContent from './../../../components/mdx-content/MdxContent';
 import TabbedContainer from './../../tabbed-container/TabbedContainer';
@@ -39,8 +39,8 @@ class IllustrationPage extends React.Component {
             <React.Fragment>
                 <Innholdstittel>Illustrasjoner</Innholdstittel>
                 <Ingress className="intro">
-                    Det er utviklet et eget illustrasjonsbibliotek for NAV, som er mulig å bruke for alle ansatte i etaten. Her kan du
-                    laste ned hele biblioteket og se hvilke retningslinjer som gjelder for bruk.
+                    Det er utviklet et eget illustrasjonsbibliotek for NAV, som er mulig å bruke for alle ansatte i
+                    etaten. Her kan du laste ned hele biblioteket og se hvilke retningslinjer som gjelder for bruk.
                 </Ingress>
                 <TabbedContainer tabs={this.tabs} {...this.props} />
             </React.Fragment>

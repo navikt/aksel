@@ -1,6 +1,5 @@
 import React from 'react';
 import MdxContent from './../../../../components/mdx-content/MdxContent';
-import TableOfContents from './../../../../components/table-of-contents/TableOfContents';
 
 class Overview extends React.Component {
     render() {

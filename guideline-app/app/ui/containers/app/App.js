@@ -1,8 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, withRouter, Switch } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router-dom';
 
 import { routes } from './../../../utils/routing/routes.component';
-import { urlRemapConfig } from './../../../utils/routing/urlRemap.config';
+import urlRemapConfig from './../../../utils/routing/urlRemap.config';
 
 import Header from './../../components/header/Header';
 import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
@@ -23,22 +23,16 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             Redirect old hash based URLs
         */
         if (props.location.hash.length) {
-            const key = Object.keys(urlRemapConfig).find((key) => props.location.hash.indexOf(key) !== -1);
+            const key = Object.keys(urlRemapConfig).find((k) => props.location.hash.indexOf(k) !== -1);
             if (key) {
                 props.history.push(props.location.hash.replace(key, urlRemapConfig[key]));
             }
         }
 
-        props.history.listen((location) => {
-            /*
-                Must use `window.location` instead of `location` here because empty hash from
-                tab navigation is not present on `location` object.
-            */
-            if (window.location.href.indexOf('#') === -1) {
-                const contentPane = document.getElementsByClassName('mainContent')[0];
-                contentPane.scrollTop = 0;
-                window.scrollTo(0, 0);
-            }
+        props.history.listen(() => {
+            const contentPane = document.getElementsByClassName('mainContent')[0];
+            contentPane.scrollTop = 0;
+            window.scrollTo(0, 0);
         });
     }
 

@@ -10,7 +10,6 @@ import AccessibilityPage from '../../ui/containers/resources/accessibility/Acces
 import NewProjectPage from '../../ui/containers/resources/new-project/NewProjectPage';
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
-import TempPage from '../../ui/containers/temp/TempPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';

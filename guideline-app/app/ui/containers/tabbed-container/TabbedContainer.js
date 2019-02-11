@@ -1,8 +1,9 @@
 import React from 'react';
-import { withRouter, Router } from 'react-router';
-import { getFlattenedPaths } from './../../../utils/routing/routes.utils';
+import { withRouter } from 'react-router-dom';
 
 import Tabs from 'NavFrontendModules/nav-frontend-tabs';
+
+import { getFlattenedPaths } from './../../../utils/routing/routes.utils';
 
 class TabbedContainer extends React.Component {
     constructor(props) {

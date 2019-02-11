@@ -1,20 +1,27 @@
 import React from 'react';
 import classnames from 'classnames';
 
-import Code from './../code/Code';
-import PropTypeTable from './../prop-type-table/PropTypeTable';
-
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import { Select } from 'NavFrontendModules/nav-frontend-skjema';
 import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
+import Code from './../code/Code';
+import PropTypeTable from './../prop-type-table/PropTypeTable';
+
 import './styles.less';
+
+/* eslint-disable no-underscore-dangle */
 
 class ModuleBrowser extends React.Component {
     constructor(props) {
         super(props);
-        this.modules = Object.keys(this.props.data.packageModules).sort().map((key) => this.props.data.packageModules[key]);
+
+        this.modules = Object.keys(this.props.data.packageModules).sort().map((key) =>
+            this.props.data.packageModules[key]
+        );
+
         this.modules = this.props.data.packageModules;
+
         this.state = {
             activeModule: this.getInitialActiveModule()
         };
@@ -30,15 +37,15 @@ class ModuleBrowser extends React.Component {
         return Object.keys(this.modules).find((module, i) => i === index);
     }
 
+    setActiveModule = (e, moduleName) => {
+        if (e) e.preventDefault();
+        this.setState({ activeModule: moduleName });
+    }
+
     generateImportStatement = (moduleName) => {
         const module = this.modules[moduleName];
         const format = (moduleName === 'default') ? module.__docgenInfo.displayName : `{ ${moduleName} }`;
         return `import ${format} from '${this.props.package.name}';`;
-    }
-
-    setActiveModule = (e, moduleName) => {
-        if (e) e.preventDefault();
-        this.setState({ activeModule: moduleName });
     }
 
     render() {
@@ -49,14 +56,16 @@ class ModuleBrowser extends React.Component {
                     <nav>
                         <ul className="nav-list">
                             {
-                                Object.keys(this.modules).sort().map((moduleName, i) => {
+                                Object.keys(this.modules).sort().map((moduleName) => {
                                     const module = this.modules[moduleName];
-                                    if (!module.__docgenInfo) return;
+                                    if (!module.__docgenInfo) return null;
                                     return (
-                                        <li key={i}>
+                                        <li key={module.__docgenInfo.displayName}>
                                             <a
-                                                href="#"
-                                                className={classnames({ active: this.state.activeModule === moduleName })}
+                                                href={`#${module.__docgenInfo.displayName}`}
+                                                className={classnames({
+                                                    active: this.state.activeModule === moduleName
+                                                })}
                                                 onClick={(e) => this.setActiveModule(e, moduleName)}
                                             >
                                                 { module.__docgenInfo.displayName }
@@ -75,11 +84,11 @@ class ModuleBrowser extends React.Component {
                             value={this.state.activeModule}
                         >
                             {
-                                Object.keys(this.modules).sort().map((moduleName, i) => {
+                                Object.keys(this.modules).sort().map((moduleName) => {
                                     const module = this.modules[moduleName];
-                                    if (!module.__docgenInfo) return;
+                                    if (!module.__docgenInfo) return null;
                                     return (
-                                        <option key={i} value={moduleName}>
+                                        <option key={module.__docgenInfo.displayName} value={moduleName}>
                                             { module.__docgenInfo.displayName }
                                             { moduleName === 'default' && ` (${moduleName})` }
                                         </option>

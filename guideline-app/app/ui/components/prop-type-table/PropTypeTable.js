@@ -1,7 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
-import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';
 
 class PropTypeTable extends React.Component {

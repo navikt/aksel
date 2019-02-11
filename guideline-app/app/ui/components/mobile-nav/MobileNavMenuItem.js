@@ -10,8 +10,7 @@ class MobileNavMenuItem extends React.Component {
         };
     }
 
-    toggle = (e, flag) => {
-        // if (flag && this.state.open) return;
+    toggle = () => {
         this.setState({
             open: !this.state.open
         });

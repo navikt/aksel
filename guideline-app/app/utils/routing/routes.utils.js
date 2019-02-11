@@ -31,7 +31,7 @@ const resolveComponentRoutes = (routePrefix) => {
 const getRoutePaths = (paths, route) => {
     paths.push(route.path);
     if (route.routes) {
-        route.routes.forEach((route) => getRoutePaths(paths, route));
+        route.routes.forEach((subRoute) => getRoutePaths(paths, subRoute));
     }
 };
 

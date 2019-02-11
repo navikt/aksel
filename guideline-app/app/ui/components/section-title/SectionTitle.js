@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import { Innholdstittel } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';

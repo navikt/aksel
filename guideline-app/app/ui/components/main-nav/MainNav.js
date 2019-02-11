@@ -1,5 +1,4 @@
 import React from 'react';
-import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import routeConfig from './../../../utils/routing/routes.config';
@@ -14,7 +13,7 @@ const MainNav = () => (
                 {
                     routeConfig.filter((item) => item.path && item.path !== '/new-project').map((item, index) =>
                         (
-                            <li key={index}>
+                            <li key={item.title}>
                                 <NavLink
                                     exact={index === 0}
                                     activeClassName="active"
@@ -28,7 +27,15 @@ const MainNav = () => (
                 }
             </ul>
             <ul>
-                <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
+                <li>
+                    <a
+                        href="https://github.com/navikt/nav-frontend-moduler"
+                        className="github"
+                    >
+                        <GithubLogo />
+                        Github
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>

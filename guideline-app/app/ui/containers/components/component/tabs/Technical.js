@@ -1,12 +1,10 @@
 import React from 'react';
-import classnames from 'classnames';
+
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
 import { Bash } from './../../../../components/code/Code';
-
-import Lenke from 'NavFrontendModules/nav-frontend-lenker';
-import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel';
-import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 class Technical extends React.Component {
 
@@ -27,8 +25,7 @@ class Technical extends React.Component {
     );
 
     render() {
-        // eslint-disable-next-line no-underscore-dangle
-        const docgenInfo = this.props.componentData.mainModule.__docgenInfo;
+        const { name, version } = this.props.componentData.manifest;
 
         return (
             <React.Fragment>
@@ -39,16 +36,16 @@ class Technical extends React.Component {
                             <tr>
                                 <th>Navn:</th>
                                 <td>
-                                    <Lenke href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}`}>
-                                        {this.props.componentData.manifest.name}
+                                    <Lenke href={`https://www.npmjs.com/package/${name}`}>
+                                        {name}
                                     </Lenke>
                                 </td>
                             </tr>
                             <tr>
                                 <th>Siste versjon:</th>
                                 <td>
-                                    <Lenke href={`https://www.npmjs.com/package/${this.props.componentData.manifest.name}?activeTab=versions`}>
-                                        {this.props.componentData.manifest.version}
+                                    <Lenke href={`https://www.npmjs.com/package/${name}?activeTab=versions`}>
+                                        {version}
                                     </Lenke>
                                 </td>
                             </tr>
@@ -56,7 +53,17 @@ class Technical extends React.Component {
                                 <th>Peer&nbsp;dependencies:</th>
                                 <td className="dependencies">
                                     {
-                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => [<Lenke key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</Lenke>, ' '])
+                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep) =>
+                                            [
+                                                <Lenke
+                                                    key={dep}
+                                                    href={`https://www.npmjs.com/package/${dep}`}
+                                                >
+                                                    {dep}
+                                                </Lenke>,
+                                                ' '
+                                            ]
+                                        )
                                     }
                                 </td>
                             </tr>

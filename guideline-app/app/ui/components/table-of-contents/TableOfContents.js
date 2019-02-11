@@ -14,27 +14,32 @@ class TableOfContents extends React.Component {
     buildTree = () => {
         let prevHeadline;
 
-        this.props.headlines.forEach((headline, index) => {
+        this.props.headlines.forEach((headline) => {
+            const nextHeadline = headline;
             if (prevHeadline) {
-                if (headline.type > prevHeadline.type) {
-                    headline.parent = prevHeadline;
-                } else if (headline.type === prevHeadline.type) {
-                    headline.parent = prevHeadline.parent;
+                if (nextHeadline.type > prevHeadline.type) {
+                    nextHeadline.parent = prevHeadline;
+                } else if (nextHeadline.type === prevHeadline.type) {
+                    nextHeadline.parent = prevHeadline.parent;
                 } else {
-                    while (prevHeadline.parent && prevHeadline.parent.type && prevHeadline.parent.type >= headline.type) {
+                    while (
+                        prevHeadline.parent &&
+                        prevHeadline.parent.type &&
+                        prevHeadline.parent.type >= nextHeadline.type
+                    ) {
                         prevHeadline = prevHeadline.parent;
                     }
-                    headline.parent = prevHeadline.parent;
+                    nextHeadline.parent = prevHeadline.parent;
                 }
             }
 
-            prevHeadline = headline;
+            prevHeadline = nextHeadline;
 
-            this.tree.push(headline);
+            this.tree.push(nextHeadline);
         });
     }
 
-    findHeadlineChildren = (headline) => this.props.headlines.filter((hl, index) => hl.parent === headline)
+    findHeadlineChildren = (headline) => this.props.headlines.filter((hl) => hl.parent === headline)
 
     renderTOCList = (headlines) => (
         <ol>

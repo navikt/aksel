@@ -1,6 +1,7 @@
 import React from 'react';
-import routeConfig from '../../../utils/routing/routes.config';
 import { withRouter, NavLink } from 'react-router-dom';
+
+import routeConfig from '../../../utils/routing/routes.config';
 
 import './styles.less';
 
@@ -10,8 +11,8 @@ const getBreadcrumbs = (path) => {
     pathParts.shift();
 
     const recursiveTraverse = (routeArray, pathIndex) => {
-        const path = `/${[].concat(pathParts.slice(0, pathIndex + 1)).join('/')}`;
-        const route = routeArray.find((route) => route.path === path);
+        const currentPath = `/${[].concat(pathParts.slice(0, pathIndex + 1)).join('/')}`;
+        const route = routeArray.find((subRoute) => subRoute.path === currentPath);
 
         if (route) {
             breadcrumbs.push(route);
@@ -33,9 +34,15 @@ const Breadcrumbs = (props) => {
                 {
                     breadcrumbs.map((breadcrumb, index) => {
                         if (index < (breadcrumbs.length - 1)) {
-                            return (<li key={index}><NavLink className="lenke" to={breadcrumb.path}>{breadcrumb.title}</NavLink></li>);
+                            return (
+                                <li key={breadcrumb.title}>
+                                    <NavLink className="lenke" to={breadcrumb.path}>
+                                        {breadcrumb.title}
+                                    </NavLink>
+                                </li>
+                            );
                         }
-                        return (<li key={index}>{breadcrumb.title}</li>);
+                        return (<li key={breadcrumb.title}>{breadcrumb.title}</li>);
                     })
                 }
             </ul>
