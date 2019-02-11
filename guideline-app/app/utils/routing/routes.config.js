@@ -6,7 +6,7 @@ import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMa
 import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
-import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
+// import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import NewProjectPage from '../../ui/containers/resources/new-project/NewProjectPage';
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
@@ -16,6 +16,14 @@ import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
+
+/*
+{
+    path: '/resources/accessibility',
+    component: AccessibilityPage,
+    title: 'Tilgjengelighet'
+},
+*/
 
 const routeConfig = [
     {
@@ -54,11 +62,6 @@ const routeConfig = [
                 path: '/resources/icons',
                 component: IconPage,
                 title: 'Ikoner'
-            },
-            {
-                path: '/resources/accessibility',
-                component: AccessibilityPage,
-                title: 'Tilgjengelighet'
             },
             {
                 path: '/resources/language',
