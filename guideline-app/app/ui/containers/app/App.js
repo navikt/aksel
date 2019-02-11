@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, withRouter, Switch } from 'react-router-dom';
+
 import { routes } from './../../../utils/routing/routes.component';
 import { urlRemapConfig } from './../../../utils/routing/urlRemap.config';
 
@@ -22,9 +23,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             Redirect old hash based URLs
         */
         if (props.location.hash.length) {
-            const key = Object.keys(urlRemapConfig).find((key) => {
-                return props.location.hash.indexOf(key) !== -1;
-            });
+            const key = Object.keys(urlRemapConfig).find((key) => props.location.hash.indexOf(key) !== -1);
             if (key) {
                 props.history.push(props.location.hash.replace(key, urlRemapConfig[key]));
             }
@@ -38,7 +37,7 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             if (window.location.href.indexOf('#') === -1) {
                 const contentPane = document.getElementsByClassName('mainContent')[0];
                 contentPane.scrollTop = 0;
-                window.scrollTo(0,0);
+                window.scrollTo(0, 0);
             }
         });
     }

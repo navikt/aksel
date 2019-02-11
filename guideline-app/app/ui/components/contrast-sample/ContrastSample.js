@@ -15,7 +15,6 @@ const contrastCls = (contrast) => classnames('contrast-ratio', {
 });
 
 const ContrastSample = (props) => {
-
     const background = Color(props.background);
     const foreground = Color(props.foreground);
     const contrast = Math.round(foreground.contrast(background) * 100) / 100;
@@ -31,11 +30,11 @@ const ContrastSample = (props) => {
             <div
                 className={sampleCls(props)}
                 style={
-                    {background: `repeating-linear-gradient(90deg, ${background}, ${background} 2%, ${foreground} 2%, ${foreground} 4%)`}
+                    { background: `repeating-linear-gradient(90deg, ${background}, ${background} 2%, ${foreground} 2%, ${foreground} 4%)` }
                 }
             />
         </React.Fragment>
     );
-}
+};
 
 export default ContrastSample;

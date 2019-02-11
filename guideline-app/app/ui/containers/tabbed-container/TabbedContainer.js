@@ -5,16 +5,16 @@ import { getFlattenedPaths } from './../../../utils/routing/routes.utils';
 import Tabs from 'NavFrontendModules/nav-frontend-tabs';
 
 class TabbedContainer extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         const currentPath = this.props.history.location.pathname;
-        this.basePath = getFlattenedPaths().reverse().find(path => currentPath.indexOf(path) !== -1);
+        this.basePath = getFlattenedPaths().reverse().find((path) => currentPath.indexOf(path) !== -1);
         this.defaultActive = 0;
 
         if (currentPath !== this.basePath) {
             const lastCurrentPathFragment = currentPath.split('/').slice(-1).pop();
-            this.defaultActive = this.props.tabs.findIndex(tab => tab['id'] === lastCurrentPathFragment);
+            this.defaultActive = this.props.tabs.findIndex((tab) => tab.id === lastCurrentPathFragment);
         }
 
         if (this.defaultActive < 0) this.defaultActive = 0;
@@ -25,7 +25,7 @@ class TabbedContainer extends React.Component {
     }
 
     changeTab = (index) => {
-        const tabId = this.props.tabs[index]['id'] || '';
+        const tabId = this.props.tabs[index].id || '';
         const newPath = this.basePath.split('/').concat([tabId]).join('/');
 
         this.props.history.push(newPath);
@@ -35,7 +35,7 @@ class TabbedContainer extends React.Component {
         });
     }
 
-    render(){
+    render() {
         return (
             <React.Fragment>
                 <div className="tabsContainer tabsContainer--fullWidth">
@@ -47,7 +47,7 @@ class TabbedContainer extends React.Component {
                         />
                     </div>
                 </div>
-                <this.state.activeContent { ...this.props } />
+                <this.state.activeContent {...this.props} />
             </React.Fragment>
         );
     }

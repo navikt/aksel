@@ -55,32 +55,26 @@ const getNameOfModule = (moduleRef) => {
     return null;
 };
 
-const getDependencyEdgesFromPackages = (pkgs) => {
-    return Object.values(pkgs)
+const getDependencyEdgesFromPackages = (pkgs) => Object.values(pkgs)
         .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
         .reduce((arr, [pkgName, pkgDependencies]) => (
             [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
         ), []);
-};
 
-const getOverviewModulesByPackageName = (packageName, overviewModules) => {
-    return Object.keys(overviewModules).filter((overviewKey) => {
-        return overviewKey.indexOf(`./${packageName}/`) !== -1
-    });
-};
+const getOverviewModulesByPackageName = (packageName, overviewModules) => Object.keys(overviewModules).filter((overviewKey) => overviewKey.indexOf(`./${packageName}/`) !== -1);
 
 const getOverviewModuleNameByPath = (path) => {
     const parts = path.split('/');
     const filename = parts[parts.length - 1];
     return filename.substr(0, filename.length - 13); // minus length of '.overview.mdx'
-}
+};
 
 const getComponentData = () => {
     // Require all the files we need to cross reference
 
     const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
     const pkgs = getModulesFromContext(pkgContext);
-    
+
     const overviewContext = require.context('NavFrontendModules', true, /\w+\.overview\.mdx/);
     const overviewModules = getModulesFromContext(overviewContext);
 
@@ -93,24 +87,24 @@ const getComponentData = () => {
 
     // Combine componentData
 
-    let componentData = {};
+    const componentData = {};
 
     Object.keys(overviewModules).forEach((overviewKey) => {
         const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
         const overviewModule = overviewModules[overviewKey];
         const pkgName = overviewKey.split('/')[1];
         const pkg = pkgs[`./${pkgName}/package.json`];
-        const pkgMainModulePath = pkg['main'];
+        const pkgMainModulePath = pkg.main;
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
-        
+
         let mainModule;
         let mainModuleKey = `./${pkgName}/${pkgMainModulePath}`;
         const pkgModules = allModules[mainModuleKey];
 
         if (pkgOverviewModules.length > 1) {
-            // If package has multiple overview modules (i.e. 'nav-frontend-skjema'), 
+            // If package has multiple overview modules (i.e. 'nav-frontend-skjema'),
             // use overview module name to find main module
-            mainModuleKey = Object.keys(pkgModules).find(moduleKey => moduleKey.toLowerCase() === overviewModuleName.toLowerCase());
+            mainModuleKey = Object.keys(pkgModules).find((moduleKey) => moduleKey.toLowerCase() === overviewModuleName.toLowerCase());
             mainModule = pkgModules[mainModuleKey];
         } else {
             // All others

@@ -9,7 +9,7 @@ import MobileNavToggle from '../mobile-nav-toggle/MobileNavToggle';
 import './styles.less';
 
 class Header extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             mobileNavOpen: false

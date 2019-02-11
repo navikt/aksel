@@ -16,27 +16,25 @@ class MdxContent extends React.Component {
     }
 
     componentDidMount = () => {
-        this.setState({ready: true});
+        this.setState({ ready: true });
     }
 
     registerHeadline = (type, title) => {
         const id = this.generateHeadlineID(title.children);
 
         if (this.state.ready) return id;
-        
+
         this.headlines.push({
             id,
             parent: undefined,
-            type: parseInt(type.substring(2,1)),
+            type: parseInt(type.substring(2, 1)),
             title: title.children
         });
 
         return id;
     }
 
-    generateHeadlineID = (content) => {
-        return content.toLowerCase().split(' ').join('-');
-    }
+    generateHeadlineID = (content) => content.toLowerCase().split(' ').join('-')
 
     render() {
         return (

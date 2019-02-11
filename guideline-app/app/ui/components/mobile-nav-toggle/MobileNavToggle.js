@@ -6,7 +6,7 @@ import './styles.less';
 class MobileNavToggle extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             shadow: false
         };
@@ -23,12 +23,12 @@ class MobileNavToggle extends React.Component {
             this.setState({
                 shadow: false
             });
-        } 
+        }
     }
 
     render() {
         return (
-            <button className={classnames('mobile-nav-toggle', {'mobile-nav-toggle--with-shadow': this.state.shadow})} {...this.props}>
+            <button className={classnames('mobile-nav-toggle', { 'mobile-nav-toggle--with-shadow': this.state.shadow })} {...this.props}>
                 <span className="mobile-nav-toggle__hamburger-icon">
                     Åpne meny
                 </span>

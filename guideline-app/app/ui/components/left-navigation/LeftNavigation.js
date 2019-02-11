@@ -19,8 +19,8 @@ class LeftNavigation extends React.Component {
                 <nav>
                     <Systemtittel><TitleByRoute routes={routeConfig} /></Systemtittel>
                     <ul className="nav-list">
-                        { 
-                            this.props.routes.map((item, index) => 
+                        {
+                            this.props.routes.map((item, index) =>
                                 (
                                     <li key={index}>
                                         <NavLink
@@ -38,7 +38,7 @@ class LeftNavigation extends React.Component {
                         this.props.routes[0].path.indexOf('/components') === 0 &&
                         <div className="contribute-promo">
                             <Undertittel>Noe du savner?</Undertittel>
-                            <br/>
+                            <br />
                             <LenkepanelBase href="#" border>
                                 <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
                             </LenkepanelBase>

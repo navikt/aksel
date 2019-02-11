@@ -3,11 +3,11 @@ import { NavLink } from 'react-router-dom';
 import classnames from 'classnames';
 
 class MobileNavMenuItem extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             open: props.open
-        }
+        };
     }
 
     toggle = (e, flag) => {
@@ -19,15 +19,15 @@ class MobileNavMenuItem extends React.Component {
 
     render() {
         return (
-            <li className={classnames({'open': this.props.open})}>
+            <li className={classnames({ open: this.props.open })}>
                 <NavLink
-                    exact={true}
+                    exact
                     to={this.props.route.path}
                 >
                     {this.props.route.title}
                 </NavLink>
-                { 
-                    this.props.route['routes'] && [
+                {
+                    this.props.route.routes && [
                         this.props.children
                     ]
                 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 class OverflowDetector extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -38,7 +38,7 @@ class OverflowDetector extends React.Component {
         });
     }
 
-    render(){
+    render() {
         return (
             <div>
                 {this.props.children}

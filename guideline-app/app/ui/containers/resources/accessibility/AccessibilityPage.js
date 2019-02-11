@@ -1,5 +1,5 @@
 import React from 'react';
-import Accessibility from './Accessibility.mdx'
+import Accessibility from './Accessibility.mdx';
 import MdxContent from './../../../components/mdx-content/MdxContent';
 // import './styles.less';
 

@@ -11,8 +11,8 @@ const TemplatesMainPage = () => (
             <Panel border>
                 <Systemtittel>Maler kommer</Systemtittel>
                 <p>
-                    Vi jobber med å lage flere større eksempler som skal vise hvordan man kan bruke og kombinere 
-                    komponenter i en større sammenheng. Samtidig pågår det et arbeid med å lage maler for mer 
+                    Vi jobber med å lage flere større eksempler som skal vise hvordan man kan bruke og kombinere
+                    komponenter i en større sammenheng. Samtidig pågår det et arbeid med å lage maler for mer
                     kjente side-typer.
                 </p>
                 <p>

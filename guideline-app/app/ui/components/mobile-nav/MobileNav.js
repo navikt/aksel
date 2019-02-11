@@ -16,7 +16,7 @@ const cls = (props, state) => classnames('mobile-nav', {
 });
 
 class MobileNav extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             hidden: true
@@ -32,7 +32,7 @@ class MobileNav extends React.Component {
             });
             this.timer = null;
         } else {
-            this.timer = window.setTimeout(() => this.setState({hidden: true}), 200);
+            this.timer = window.setTimeout(() => this.setState({ hidden: true }), 200);
         }
     }
 
@@ -49,20 +49,20 @@ class MobileNav extends React.Component {
     }
 
     renderRoute = (route, index) => {
-        const open = (this.props.history.location.pathname.indexOf(route.path) !== -1) && route['routes'];
+        const open = (this.props.history.location.pathname.indexOf(route.path) !== -1) && route.routes;
         return (
             <MobileNavMenuItem open={open} route={route} index={index} key={index}>
                 {
-                    route['routes'] && 
+                    route.routes &&
                     <ul>
-                        { route.routes.filter(route => route.path !== '/new-project').map((route, index) => this.renderRoute(route, index)) }
+                        { route.routes.filter((route) => route.path !== '/new-project').map((route, index) => this.renderRoute(route, index)) }
                     </ul>
                 }
             </MobileNavMenuItem>
         );
     };
 
-    render(){
+    render() {
         return (
             <div
                 ref={(node) => this.bg = node}
@@ -71,14 +71,14 @@ class MobileNav extends React.Component {
                 aria-hidden={this.state.hidden}
             >
                 <nav className="mobile-nav__drawer">
-                    <Lukknapp 
+                    <Lukknapp
                         className="mobile-nav__close-btn"
                         onClick={this.props.toggle}
                     >
                         Lukk meny
                     </Lukknapp>
                     <ul className="nav-list">
-                        {routeConfig.filter(route => route['path']).map((route, index) => this.renderRoute(route, index))}
+                        {routeConfig.filter((route) => route.path).map((route, index) => this.renderRoute(route, index))}
                         <li><a href="https://github.com/navikt/nav-frontend-moduler" target="_blank" className="github"><GithubLogo />Github</a></li>
                     </ul>
                 </nav>

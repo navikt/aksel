@@ -1,5 +1,4 @@
 import React from 'react';
-import Color from 'color';
 
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
@@ -23,67 +22,65 @@ class Palette extends React.Component {
         };
     }
 
-    renderModalContent = () => {
-        return (
-            <div id="color-modal">
-                <Systemtittel>{ this.state.activeColor.name }</Systemtittel>
-                <div className="color-banner" style={{background: this.state.activeColor.color.hex()}} />
-                <section className="section">
-                    <Undertittel>Fargeverdier</Undertittel>
-                    <div className="color-values">
-                        <div className="color-value-pair">
-                            <Etikett>Hex:</Etikett>
-                            <span>{this.state.activeColor.color.hex()}</span>
-                        </div>
-                        <div className="color-value-pair">
-                            <Etikett>RGB:</Etikett>
-                            <span>{`${this.state.activeColor.color.rgb().round().array().join(', ')}`}</span>
-                        </div>
-                        <div className="color-value-pair">
-                            <Etikett>CMYK:</Etikett>
-                            <span>{`${this.state.activeColor.color.cmyk().round().array().join(', ')}`}</span>
-                        </div>
-                        <div className="color-value-pair">
-                            <Etikett>HSL:</Etikett>
-                            <span>{`${this.state.activeColor.color.hsl().round().array().join(', ')}`}</span>
-                        </div>
+    renderModalContent = () => (
+        <div id="color-modal">
+            <Systemtittel>{ this.state.activeColor.name }</Systemtittel>
+            <div className="color-banner" style={{ background: this.state.activeColor.color.hex() }} />
+            <section className="section">
+                <Undertittel>Fargeverdier</Undertittel>
+                <div className="color-values">
+                    <div className="color-value-pair">
+                        <Etikett>Hex:</Etikett>
+                        <span>{this.state.activeColor.color.hex()}</span>
                     </div>
-                </section>
-                <section className="section">
-                    <Undertittel>Kontrast</Undertittel>
-                    <ContrastSample
-                        label="Mot svart:"
-                        foreground={'#3E3832'}
-                        background={this.state.activeColor.color.hex()}
-                    />
-                    <ContrastSample
-                        label="Mot hvit:"
-                        foreground={'#ffffff'}
-                        background={this.state.activeColor.color.hex()}
-                    />
-                    <ContrastSample
-                        label="Mot lys grå:"
-                        foreground={'#E9E7E7'}
-                        background={this.state.activeColor.color.hex()}
-                    />
-                    <ContrastSample
-                        label="Mot NAV blå:"
-                        foreground={'#0067C5'}
-                        background={this.state.activeColor.color.hex()}
-                    />
-                </section>
-            </div>
-        );
-    }
+                    <div className="color-value-pair">
+                        <Etikett>RGB:</Etikett>
+                        <span>{`${this.state.activeColor.color.rgb().round().array().join(', ')}`}</span>
+                    </div>
+                    <div className="color-value-pair">
+                        <Etikett>CMYK:</Etikett>
+                        <span>{`${this.state.activeColor.color.cmyk().round().array().join(', ')}`}</span>
+                    </div>
+                    <div className="color-value-pair">
+                        <Etikett>HSL:</Etikett>
+                        <span>{`${this.state.activeColor.color.hsl().round().array().join(', ')}`}</span>
+                    </div>
+                </div>
+            </section>
+            <section className="section">
+                <Undertittel>Kontrast</Undertittel>
+                <ContrastSample
+                    label="Mot svart:"
+                    foreground={'#3E3832'}
+                    background={this.state.activeColor.color.hex()}
+                />
+                <ContrastSample
+                    label="Mot hvit:"
+                    foreground={'#ffffff'}
+                    background={this.state.activeColor.color.hex()}
+                />
+                <ContrastSample
+                    label="Mot lys grå:"
+                    foreground={'#E9E7E7'}
+                    background={this.state.activeColor.color.hex()}
+                />
+                <ContrastSample
+                    label="Mot NAV blå:"
+                    foreground={'#0067C5'}
+                    background={this.state.activeColor.color.hex()}
+                />
+            </section>
+        </div>
+        )
 
     render() {
         return (
             <React.Fragment>
-                <Modal 
+                <Modal
                     className="color-modal-outer"
                     isOpen={this.state.activeColor !== undefined}
-                    onRequestClose={() => this.setState({activeColor: undefined})}
-                    closeButton={true}
+                    onRequestClose={() => this.setState({ activeColor: undefined })}
+                    closeButton
                 >
                     { this.state.activeColor && this.renderModalContent() }
                 </Modal>
@@ -95,16 +92,16 @@ class Palette extends React.Component {
                     </Normaltekst>
 
                     <div className="color-group">
-                        <ColorSample name="@navRod" color="#c30000" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navRod" color="#c30000" onClick={(color) => this.setState({ activeColor: color })} />
                     </div>
 
                     <div className="color-group">
-                        <ColorSample name="@navMorkGra" color="#3E3832" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navGra80" color="#59514B" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navGra60" color="#78706A" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navGra40" color="#B7B1A9" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navGra20" color="#C6C2BF" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navLysGra" color="#E9E7E7" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navMorkGra" color="#3E3832" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navGra80" color="#59514B" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navGra60" color="#78706A" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navGra40" color="#B7B1A9" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navGra20" color="#C6C2BF" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navLysGra" color="#E9E7E7" onClick={(color) => this.setState({ activeColor: color })} />
                     </div>
                 </section>
 
@@ -116,7 +113,7 @@ class Palette extends React.Component {
                     </Alertstripe>
                     <div className="color-group">
                         <Ingress>Interaksjonsfarge</Ingress>
-                        <ColorSample name="@navBla" color="#0067c5" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navBla" color="#0067c5" onClick={(color) => this.setState({ activeColor: color })} />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å indikere interaktivitet. Den brukes
@@ -127,7 +124,7 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Fokusfarge</Ingress>
-                        <ColorSample name="@navOransjeFokus" color="#ffbd66" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navOransjeFokus" color="#ffbd66" onClick={(color) => this.setState({ activeColor: color })} />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å indikere fokus. Interaktive elementer
@@ -137,8 +134,8 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: suksess</Ingress>
-                        <ColorSample name="@navGronn" color="#06893A" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navGronnLighten60" color="#9BD0B0" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navGronn" color="#06893A" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navGronnLighten60" color="#9BD0B0" onClick={(color) => this.setState({ activeColor: color })} />
                         <div className="color-description">
                             <p>
                                 Disse fargene er reservert av systemet for å indikere positiv feedback, f.eks. som
@@ -148,8 +145,8 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: feilmelding</Ingress>
-                        <ColorSample name="@redError" color="#BA3A26" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@pinkErrorBg" color="#F3E3E3" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@redError" color="#BA3A26" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@pinkErrorBg" color="#F3E3E3" onClick={(color) => this.setState({ activeColor: color })} />
                         <div className="color-description">
                             <p>
                                 Disse fargene er reservert av systemet for å indikere negativ feedback, f.eks. som
@@ -159,8 +156,8 @@ class Palette extends React.Component {
                     </div>
                     <div className="color-group">
                         <Ingress>Feedback: advarsel</Ingress>
-                        <ColorSample name="@navOransje" color="#FF9100" onClick={(color) => this.setState({activeColor: color})} />
-                        <ColorSample name="@navOransjeLighten60" color="#FFD399" onClick={(color) => this.setState({activeColor: color})} />
+                        <ColorSample name="@navOransje" color="#FF9100" onClick={(color) => this.setState({ activeColor: color })} />
+                        <ColorSample name="@navOransjeLighten60" color="#FFD399" onClick={(color) => this.setState({ activeColor: color })} />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å gi forberedende feedback, f.eks. som
@@ -172,7 +169,7 @@ class Palette extends React.Component {
 
                 <section className="section full">
                     <Systemtittel id="hele-paletten">Hele paletten</Systemtittel>
-                    <ColorPalette onClick={(color) => this.setState({activeColor: color})} />
+                    <ColorPalette onClick={(color) => this.setState({ activeColor: color })} />
                 </section>
             </React.Fragment>
         );

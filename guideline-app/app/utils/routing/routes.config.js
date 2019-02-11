@@ -71,7 +71,7 @@ const routeConfig = [
     {
         path: '/templates',
         component: TemplatesMainPage,
-        title: 'Maler',
+        title: 'Maler'
     },
     {
         path: '/community',

@@ -18,11 +18,10 @@ const CatalogItem = (props) => (
 );
 
 class ResoucesMainPage extends React.Component {
-    renderMainContent = () => {
-        return (
-            <article className="mainContent mainContent--grey">
-                <div className="catalog">
-                    {
+    renderMainContent = () => (
+        <article className="mainContent mainContent--grey">
+            <div className="catalog">
+                {
                         this.props.routes.map((route, index) => (
                             <LenkepanelBase
                                 key={index}
@@ -33,26 +32,23 @@ class ResoucesMainPage extends React.Component {
                             </LenkepanelBase>
                         ))
                     }
-                </div>
-            </article>
-        );
-    }
+            </div>
+        </article>
+        )
 
-    renderSubRoute = () => {
-        return (
-            <article className="mainContent">
-                <SubRoutesWrapper routes={this.props.routes} />
-            </article>
-        );
-    }
+    renderSubRoute = () => (
+        <article className="mainContent">
+            <SubRoutesWrapper routes={this.props.routes} />
+        </article>
+        )
 
-    render(){
+    render() {
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
                 {
-                    (this.props.history.location.pathname !== '/resources') ? 
-                    this.renderSubRoute() : 
+                    (this.props.history.location.pathname !== '/resources') ?
+                    this.renderSubRoute() :
                     this.renderMainContent()
                 }
             </React.Fragment>

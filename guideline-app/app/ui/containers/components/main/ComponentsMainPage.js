@@ -13,11 +13,10 @@ import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
 class ComponentMainPage extends React.Component {
 
-    renderComponentMainContent = () => {
-        return (
-            <article className="mainContent mainContent--grey">
-                <div className="catalog">
-                    {
+    renderComponentMainContent = () => (
+        <article className="mainContent mainContent--grey">
+            <div className="catalog">
+                {
                         this.props.routes.map((route, index) => (
                             <LenkepanelBase
                                 key={index}
@@ -28,28 +27,25 @@ class ComponentMainPage extends React.Component {
                             </LenkepanelBase>
                         ))
                     }
-                </div>
-            </article>
-        );
-    }
+            </div>
+        </article>
+        )
 
-    renderComponentSubRouteContent = () => {
-        return (
-            <article className="mainContent">
-                <Innholdstittel>
-                    <TitleByRoute routes={this.props.routes} />
-                </Innholdstittel>
-                <SubRoutesWrapper routes={this.props.routes} />
-            </article>
-        );
-    }
+    renderComponentSubRouteContent = () => (
+        <article className="mainContent">
+            <Innholdstittel>
+                <TitleByRoute routes={this.props.routes} />
+            </Innholdstittel>
+            <SubRoutesWrapper routes={this.props.routes} />
+        </article>
+        )
 
     render() {
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
                 {
-                    (this.props.history.location.pathname !== '/components') ? 
+                    (this.props.history.location.pathname !== '/components') ?
                     this.renderComponentSubRouteContent() :
                     this.renderComponentMainContent()
                 }

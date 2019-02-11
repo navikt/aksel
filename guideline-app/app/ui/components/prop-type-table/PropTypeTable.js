@@ -136,12 +136,12 @@ const parseDescription = (desc) => {
         return (<span><strong>{found[0]}</strong>{desc.substr(11, desc.length)}</span>);
     }
     return desc;
-}
+};
 
 const PropTypeTableRow = (props) => {
-    const desc = parseDescription(parsePropValue(props.val.description))
+    const desc = parseDescription(parsePropValue(props.val.description));
     return (
-        <tr className={cn({'deprecated': typeof desc === 'object'})}>
+        <tr className={cn({ deprecated: typeof desc === 'object' })}>
             <td><strong>{parsePropValue(props.val.name)}</strong></td>
             <td><code className="inline">{parsePropValue(props.val.type)}</code></td>
             <td>{parsePropValue(props.val.required)}</td>

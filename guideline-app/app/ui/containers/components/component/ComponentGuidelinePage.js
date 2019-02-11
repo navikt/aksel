@@ -42,8 +42,8 @@ class ComponentGuidelinePage extends React.Component {
         return (
             <div className="componentGuidelinePage">
                 {
-                    this.props.textData['ingress'] &&
-                    <Ingress tag="div" className="intro"><this.props.textData.ingress.default /></Ingress> 
+                    this.props.textData.ingress &&
+                    <Ingress tag="div" className="intro"><this.props.textData.ingress.default /></Ingress>
                 }
                 <TabbedContainer tabs={this.tabs} {...this.props} />
             </div>

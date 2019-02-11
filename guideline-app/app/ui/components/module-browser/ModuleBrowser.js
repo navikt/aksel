@@ -11,28 +11,28 @@ import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typog
 import './styles.less';
 
 class ModuleBrowser extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.modules = Object.keys(this.props.data.packageModules).sort().map(key => this.props.data.packageModules[key]);
+        this.modules = Object.keys(this.props.data.packageModules).sort().map((key) => this.props.data.packageModules[key]);
         this.modules = this.props.data.packageModules;
         this.state = {
             activeModule: this.getInitialActiveModule()
-        }
+        };
     }
 
     getInitialActiveModule = () => {
         const urlComponentName = window.location.pathname.split('/')[2];
         const componentIndex = Object.keys(this.modules).findIndex((key) => key.toLowerCase() === urlComponentName);
         const defaultIndex = Object.keys(this.modules).findIndex((key) => key === 'default');
-        
-        let index = (defaultIndex !== -1) ? defaultIndex : componentIndex ;
+
+        const index = (defaultIndex !== -1) ? defaultIndex : componentIndex;
 
         return Object.keys(this.modules).find((module, i) => i === index);
     }
 
     generateImportStatement = (moduleName) => {
         const module = this.modules[moduleName];
-        const format = (moduleName === 'default') ? module['__docgenInfo']['displayName'] : `{ ${moduleName} }`;
+        const format = (moduleName === 'default') ? module.__docgenInfo.displayName : `{ ${moduleName} }`;
         return `import ${format} from '${this.props.package.name}';`;
     }
 
@@ -41,7 +41,7 @@ class ModuleBrowser extends React.Component {
         this.setState({ activeModule: moduleName });
     }
 
-    render(){
+    render() {
         return (
             <div className="module-browser">
                 <Systemtittel id="moduler">Moduler</Systemtittel>
@@ -51,19 +51,19 @@ class ModuleBrowser extends React.Component {
                             {
                                 Object.keys(this.modules).sort().map((moduleName, i) => {
                                     const module = this.modules[moduleName];
-                                    if (!module['__docgenInfo']) return;
+                                    if (!module.__docgenInfo) return;
                                     return (
                                         <li key={i}>
                                             <a
                                                 href="#"
-                                                className={classnames({'active': this.state.activeModule === moduleName})}
+                                                className={classnames({ active: this.state.activeModule === moduleName })}
                                                 onClick={(e) => this.setActiveModule(e, moduleName)}
                                             >
-                                                { module['__docgenInfo'].displayName }
+                                                { module.__docgenInfo.displayName }
                                                 { moduleName === 'default' && <span>&nbsp;{`(${moduleName})`}</span> }
                                             </a>
                                         </li>
-                                    )
+                                    );
                                 })
                             }
                         </ul>
@@ -77,13 +77,13 @@ class ModuleBrowser extends React.Component {
                             {
                                 Object.keys(this.modules).sort().map((moduleName, i) => {
                                     const module = this.modules[moduleName];
-                                    if (!module['__docgenInfo']) return;
+                                    if (!module.__docgenInfo) return;
                                     return (
                                         <option key={i} value={moduleName}>
-                                            { module['__docgenInfo'].displayName }
+                                            { module.__docgenInfo.displayName }
                                             { moduleName === 'default' && ` (${moduleName})` }
                                         </option>
-                                    )
+                                    );
                                 })
                             }
                         </Select>

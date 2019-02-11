@@ -1,5 +1,5 @@
 import React from 'react';
-import Language from './Language.mdx'
+import Language from './Language.mdx';
 import MdxContent from './../../../components/mdx-content/MdxContent';
 import './styles.less';
 

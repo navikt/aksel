@@ -9,8 +9,8 @@ class Discussion extends React.Component {
         return (
             <section className="section">
                 <Alertstripe type="info">
-                    Vi jobber med å lage et forum hvor man kan diskutere og komme med innspill 
-                    til designsystemet. Før dette er på plass kan 
+                    Vi jobber med å lage et forum hvor man kan diskutere og komme med innspill
+                    til designsystemet. Før dette er på plass kan
                     dere gjerne <Lenke href="https://github.com/navikt/nav-frontend-moduler/issues">bruke Github</Lenke> til
                     å opprette saker og diskutere der.
                 </Alertstripe>

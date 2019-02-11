@@ -4,11 +4,11 @@ import TableOfContents from './../../../../components/table-of-contents/TableOfC
 
 class Overview extends React.Component {
     render() {
-        if (this.props.textData['overview']) {
+        if (this.props.textData.overview) {
             return (
                 <MdxContent overview>{this.props.textData.overview.default}</MdxContent>
-            )
-        } 
+            );
+        }
 
         return 'Ingen informasjon.';
     }

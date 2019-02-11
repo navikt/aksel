@@ -10,7 +10,7 @@ import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 class Technical extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             activeModule: 0
@@ -56,9 +56,7 @@ class Technical extends React.Component {
                                 <th>Peer&nbsp;dependencies:</th>
                                 <td className="dependencies">
                                     {
-                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => {
-                                            return [<Lenke key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</Lenke>, ' '];
-                                        })
+                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep, i) => [<Lenke key={i} href={`https://www.npmjs.com/package/${dep}`}>{dep}</Lenke>, ' '])
                                     }
                                 </td>
                             </tr>

@@ -12,7 +12,7 @@ class TableOfContents extends React.Component {
     }
 
     buildTree = () => {
-        let prevHeadline = undefined;
+        let prevHeadline;
 
         this.props.headlines.forEach((headline, index) => {
             if (prevHeadline) {
@@ -34,19 +34,13 @@ class TableOfContents extends React.Component {
         });
     }
 
-    findHeadlineChildren = (headline) => {
-        return this.props.headlines.filter((hl, index) => {
-            return hl.parent === headline;
-        });
-    }
+    findHeadlineChildren = (headline) => this.props.headlines.filter((hl, index) => hl.parent === headline)
 
-    renderTOCList = (headlines) => {
-        return (
-            <ol>
-                {headlines.map((headline) => this.renderTOCItem(headline))}
-            </ol>
-        );
-    }
+    renderTOCList = (headlines) => (
+        <ol>
+            {headlines.map((headline) => this.renderTOCItem(headline))}
+        </ol>
+        )
 
     renderTOCItem = (headline) => {
         const children = this.findHeadlineChildren(headline);
@@ -54,7 +48,7 @@ class TableOfContents extends React.Component {
             <li key={headline.id}>
                 <a href={`#${headline.id}`}>{headline.title}</a>
                 {
-                    children && 
+                    children &&
                     this.renderTOCList(children)
                 }
             </li>

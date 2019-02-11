@@ -12,7 +12,7 @@ const MainNav = () => (
         <div className="mainNav__wrapper">
             <ul>
                 {
-                    routeConfig.filter((item) => item['path'] && item['path'] !== '/new-project').map((item, index) => 
+                    routeConfig.filter((item) => item.path && item.path !== '/new-project').map((item, index) =>
                         (
                             <li key={index}>
                                 <NavLink

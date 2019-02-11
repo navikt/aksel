@@ -10,7 +10,7 @@ class Code extends React.Component {
         const highlighted = Prism.highlight(this.props.children, Prism.languages.jsx);
         return (
             <pre className="language-jsx">
-                <code className="language-jsx" dangerouslySetInnerHTML={{__html: highlighted}} />
+                <code className="language-jsx" dangerouslySetInnerHTML={{ __html: highlighted }} />
             </pre>
         );
     }

@@ -10,14 +10,14 @@ const getBreadcrumbs = (path) => {
     pathParts.shift();
 
     const recursiveTraverse = (routeArray, pathIndex) => {
-        const path = '/' + [].concat(pathParts.slice(0, pathIndex + 1)).join('/');
+        const path = `/${[].concat(pathParts.slice(0, pathIndex + 1)).join('/')}`;
         const route = routeArray.find((route) => route.path === path);
 
         if (route) {
             breadcrumbs.push(route);
-            if (route['routes']) recursiveTraverse(route.routes, pathIndex + 1);
+            if (route.routes) recursiveTraverse(route.routes, pathIndex + 1);
         }
-    }
+    };
 
     recursiveTraverse(routeConfig, 0);
 
@@ -41,6 +41,6 @@ const Breadcrumbs = (props) => {
             </ul>
         </nav>
     );
-}
+};
 
 export default withRouter(Breadcrumbs);
