@@ -1,57 +1,31 @@
 import React from 'react';
-import PT from 'prop-types';
+import classnames from 'classnames';
+import Color from 'color';
+
 import './styles.less';
 
-import createContrastString from './../../../utils/ColorContrast';
+const cls = (col) => classnames({
+    'color-sample': true,
+    light: col.isLight()
+});
 
-function ColorSample(props) {
-    const color = props.color;
-
-    function getTextColor() {
-        return { color: color.textColor };
-    }
-
-    function getBackgroundColor() {
-        return { backgroundColor: color.hex };
-    }
-
+const ColorSample = (props) => {
+    const color = Color(props.color);
     return (
         <div
-            className="colorSample"
-            style={getBackgroundColor()}
+            className={cls(color)}
+            style={{ background: color.hex(), borderColor: color.hex() }}
+            role={(props.onClick === 'function') ? 'button' : undefined}
+            onClick={
+                (typeof props.onClick === 'function') ?
+                    () => props.onClick({ name: props.name, color }) :
+                    undefined
+                }
         >
-            <div className="colorSample__colorInfo">
-                <h4 className="colorSample__colorInfo__header" style={getTextColor()}>
-                    { color.label }
-                </h4>
-
-                <p className="colorSample__colorInfo__subtext" style={getTextColor()}>
-                    { color.hex }
-                </p>
-            </div>
-
-            <div className="colorSample__accessibilityInfo">
-                <p className="colorSample__accessibilityInfo__text" style={getTextColor()}>
-                    { createContrastString(color.textColor || '#ffffff', color.hex) }
-                </p>
-            </div>
-
+            <span>{props.name}</span>
+            <span>{color.hex()}</span>
         </div>
     );
-}
-
-ColorSample.propTypes = {
-    color: PT.shape({
-        label: PT.string.isRequired,
-        hex: PT.string.isRequired,
-        textColor: PT.string
-    }).isRequired
-};
-
-ColorSample.defaultProps = {
-    color: {
-        textColor: 'white'
-    }
 };
 
 export default ColorSample;

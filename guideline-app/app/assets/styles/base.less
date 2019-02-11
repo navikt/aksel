@@ -1,1 +1,217 @@
-@GL_BASE_UNIT: 4px;
+@import '~nav-frontend-core/less/core';
+@import (reference) '~nav-frontend-core/less/_variabler';
+@import (reference) './../../../../packages/node_modules/nav-frontend-typografi-style/src/index';
+@import '../../ui/components/table/styles.less';
+
+html {
+  font-size: 16px;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  color: @navMorkGra;
+  font-family: @font-family;
+  height: 100%;
+}
+
+a {
+  color: @navBla;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+p, .typo-normal {
+  line-height: 1.375rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.typo-systemtittel {
+  margin: 3rem 0 1.5rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.typo-undertittel {
+  margin: 2.5rem 0 1.5rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.typo-ingress {
+  margin: 2rem 0 1rem;
+  line-height: 1.75rem;
+
+  &.intro {
+    max-width: 700px;
+
+    p {
+      margin-top: 1rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  &:first-child {
+    margin-top:0;
+  }
+}
+
+.lenkepanel {
+  .typo-undertittel {
+    margin: 0;
+  }
+}
+
+.columns {
+  display:flex;
+
+  .column {
+    flex: 1 1 auto;
+  }
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  ul {
+    list-style: none;
+    margin:0;
+    padding:0px;
+  }
+
+  li {
+    a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: @navBla;
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      position: relative;
+      line-height: 1.15rem;
+
+      &:hover {
+        background: white;
+        border-left:2px solid @navBla;
+      }
+
+      &:focus {
+        outline:none;
+        box-shadow:0 0 0 3px #FFBD66;
+        z-index:1;
+      }
+
+      &.active {
+        background: white;
+        color: @navMorkGra;
+        background: @navBla;
+        color: white !important;
+        font-weight:normal !important;
+      }
+
+      &:focus {
+        z-index: 10;
+      }
+    }
+
+    &.open {
+      background:white;
+
+      > a {
+        font-weight:bold;
+        color:@navMorkGra;
+      }
+      > ul {
+        > li {
+          > a {
+            padding-left:3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+.catalog {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  // grid-auto-rows: minmax(75px, auto);
+  column-gap: 1rem;
+  row-gap: 1rem;
+
+  .lenkepanel {
+    margin:0;
+  }
+
+  @media (max-width: 1500px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 1220px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 1094px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: 930px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.tabsContainer { 
+  &--fullWidth {
+    position:relative;
+    margin:2rem -3rem 3rem;
+
+    &:after {
+      content:'';
+      display:block;
+      position:absolute;
+      bottom:9px;
+      left:0px;
+      right:0px;
+      height:1px;
+      background:@navGra40;
+    }
+
+    .tabsContainer__inner {
+      overflow-y:hidden;
+      padding:2px 3rem 10px;
+    }
+
+    .nav-frontend-tabs {
+      border:none;
+      position:relative;
+      z-index:1;
+    }
+  }
+
+  @media (max-width: 550px) {
+    margin: 2rem -1.5rem 3rem;
+
+    .tabsContainer__inner {
+      padding:2px 1.5rem 10px;
+      overflow-x:scroll;
+    }
+  }
+}

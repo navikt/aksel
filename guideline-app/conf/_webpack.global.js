@@ -31,14 +31,13 @@ const GlobalWebpackConfig = {
                 include: [
                     path.resolve(__dirname, './../app')
                 ],
-                exclude: [/\.no-transpilation\.jsx?$/],
                 query: {
                     presets: ['es2015', 'stage-2', 'react'],
                     plugins: ['react-docgen', 'transform-object-rest-spread']
                 }
             },
             {
-                test: /\.less$/,
+                test: /\.(less|css)$/,
                 use: [
                     { loader: 'style-loader' },
                     { loader: 'css-loader' },
@@ -46,9 +45,10 @@ const GlobalWebpackConfig = {
                 ]
             },
             {
-                test: /\.md$/,
+                test: /\.mdx?$/,
                 use: [
-                    { loader: 'raw-loader' }
+                    { loader: 'babel-loader' },
+                    { loader: '@mdx-js/loader' }
                 ]
             }
         ]

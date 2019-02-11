@@ -1,18 +1,8 @@
 import * as types from './../constants/ActionTypes';
 
-export const sampleModifierChange = (value) => ({
-    type: types.ACTIVE_MODIFIER_CHANGE,
-    value
-});
-export const sampleMultipleChoiceModifierChange = (value) => ({
-    type: types.ACTIVE_MULTIPLE_CHOICE_MODIFIER_CHANGE,
-    value
-});
-export const sampleTypeChange = (value) => ({
-    type: types.ACTIVE_TYPE_CHANGE,
-    value
-});
-export const activeRefChange = (value) => ({
-    type: types.ACTIVE_REF_CHANGE,
+/* eslint-disable import/prefer-default-export */
+
+export const bgColorChange = (value) => ({
+    type: types.BG_COLOR_CHANGE,
     value
 });

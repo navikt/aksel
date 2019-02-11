@@ -1,0 +1,38 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+.example {
+  border: 4px solid #f4f4f4;
+  margin-top: 2rem;
+
+  &__inner {
+    padding: 3rem;
+  }
+
+  p {
+    &:first-child {
+      margin-top: 0px;
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+
+  h2, .typo-systemtittel, .typo-undertittel, .panel {
+    margin: 0 !important;
+  }
+
+  ul, li {
+    margin-top:0 !important;
+    margin-bottom:0 !important;
+  }
+
+  &--greyBg {
+    background: @navGra60;
+  }
+
+  @media (max-width: 550px) {
+    .example__inner {
+      padding: 1.5rem;
+    }
+  }
+}

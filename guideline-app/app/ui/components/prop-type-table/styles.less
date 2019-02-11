@@ -1,4 +1,4 @@
-@import '../../../assets/styles/core.less';
+@import (reference) '~nav-frontend-core/less/_variabler';
 
 .propTypeTableWrapperOuter {
   position:relative;
@@ -34,26 +34,10 @@
   overflow:scroll;
 
   table {
-    width:100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-
-    th, td {
-      padding:8px;
-    }
-
-    th {
-      text-align:left;
-      border-bottom:1px solid @navGra20;
-    }
-
-    td {
-      border-bottom:1px solid #eee;
-    }
-
-    tr:nth-child(2n+1){
+    .deprecated {
       td {
-        background:#fafafa;
+        color: @redError;
+        background: @pinkErrorBg;
       }
     }
   }

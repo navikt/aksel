@@ -1,68 +1,18 @@
 import React from 'react';
-import ComponentGuidelinePage from '../../ui/containers/component/guidelines/ComponentGuidelinePage';
+import ComponentGuidelinePage from '../../ui/containers/components/component/ComponentGuidelinePage';
 import { Components as components } from './../../data';
+import routeConfig from './routes.config';
 
-const parents = {};
-// const parents = {
-//     Skjemaelementer: {
-//         path: '/components/skjemaelementer',
-//         component: () => (<h2>Skjemaelementer</h2>),
-//         childComponents: ['checkbox', 'input', 'textarea', 'radio', 'select', 'skjemagruppe']
-//     },
-//     Paneler: {
-//         path: '/components/paneler',
-//         component: () => (<h2>Paneler</h2>),
-//         childComponents: ['ekspanderbartpanel', 'lenkepanel']
-//     }
-// };
-
-const getNestedComponents = () => (
-    components.filter((component) => {
-        const componentName = component.componentData.componentName;
-        return Object.keys(parents).some((nestingName) =>
-            (parents[nestingName].childComponents.indexOf(componentName) >= 0)
-        );
-    })
-);
-
-const getTopLevelComponentRoutes = (routePrefix, componentsToExclude) => (
-    components
-        .filter((component) => componentsToExclude.indexOf(component) < 0)
-        .map((component) => {
-            const path = `/${routePrefix}/${component.componentData.componentName}`;
-            return {
-                path: path.toLowerCase(),
-                component: () => (<ComponentGuidelinePage {...component} />),
-                title: component.componentData.label
-            };
-        }));
-
-const getNestedComponentRoutes = (nestedComponents) => {
-    const parentKeys = Object.keys(parents);
-    return parentKeys.map((parentKey) => {
-        const parent = parents[parentKey];
-        const children = nestedComponents.filter((component) => {
-            const componentName = component.componentData.componentName;
-            return parent.childComponents.indexOf(componentName) >= 0;
-        });
-
-        const subRoutes = children.map((child) => {
-            const path = `${parent.path}/${child.componentData.componentName}`;
-            return {
-                path: path.toLowerCase(),
-                component: () => (<ComponentGuidelinePage {...child} />),
-                title: child.componentData.label
-            };
-        });
-
+const getTopLevelComponentRoutes = (routePrefix) => (
+    components.map((component) => {
+        const path = `/${routePrefix}/${component.componentData.name}`;
         return {
-            path: parent.path,
-            component: parent.component,
-            title: parentKey,
-            routes: subRoutes
+            path: path.toLowerCase(),
+            component: () => (<ComponentGuidelinePage {...component} />),
+            title: component.componentData.name,
+            data: component.componentData
         };
-    });
-};
+    }));
 
 const sortRoutesAlphabetically = (route1, route2) => {
     if (route1.path > route2.path) {
@@ -74,10 +24,21 @@ const sortRoutesAlphabetically = (route1, route2) => {
 };
 
 const resolveComponentRoutes = (routePrefix) => {
-    const nestedComponents = getNestedComponents();
-    const topLevelComponentRoutes = getTopLevelComponentRoutes(routePrefix, nestedComponents);
-    const nestedComponentRoutes = getNestedComponentRoutes(nestedComponents);
-    return [...topLevelComponentRoutes, ...nestedComponentRoutes].sort(sortRoutesAlphabetically);
+    const componentRoutes = getTopLevelComponentRoutes(routePrefix);
+    return componentRoutes.sort(sortRoutesAlphabetically);
+};
+
+const getRoutePaths = (paths, route) => {
+    paths.push(route.path);
+    if (route.routes) {
+        route.routes.forEach((subRoute) => getRoutePaths(paths, subRoute));
+    }
+};
+
+export const getFlattenedPaths = () => {
+    const paths = [];
+    routeConfig.forEach((route) => getRoutePaths(paths, route));
+    return paths;
 };
 
 export default resolveComponentRoutes;

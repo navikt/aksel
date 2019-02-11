@@ -1,119 +1,18 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
 .leftNavigation {
-  background-color: white;
-  border-right: 3px solid #e7e9e9;
-  top: 0;
-  width: 304px;
-  height: 100%;
-  position: fixed;
-  overflow-x: hidden;
-  padding: 64px 12px 24px 12px;
+  background: #f4f4f4;
+  overflow-y: scroll;
+  width: 300px;
+  padding: 3rem 2rem;
 
-  .lukknapp {
-    display:none;
+  .typo-systemtittel {
+    margin-bottom: 1rem;
   }
 
-  &__logoSection {
-    display:block;
-    position: relative;
-    text-decoration: none;
-    padding:10px;
-    width:200px;
-    margin:auto;
-
-    &:focus {
-      box-shadow: 0 0 0 3px #FFBD66;
-      outline:none;
-    }
-
-    .navLogo {
-      align-content: center;
-      display: block;
-      margin: 0 auto;
-      z-index: 1;
-      height: 56px;
-    }
-    
-    .typo-normal {
-      margin-top: 12px;
-      font-size: 20px;
-      text-align: center;
-    }
-
-    .line {
-      cursor: default;
-      background-color: #e7e7e9;
-      border: 0;
-      top: 16px;
-      height: 3px;
-      position: relative;
-      width: 40px;
-    }
-  }
-
-  &__expandableListWrapper {
-    padding: 12px;
-    letter-spacing: 0.4px;
-    font-size: 18px;
-    top: 76px;
-    position: relative;
-  }
-
-  @media screen and (max-width: 1000px) {
-    display:block;
-    position:fixed;
-    top:0px;
-    right:0px;
-    bottom:0px;
-    z-index:999;
-    border-right:0px;
-    border-left:1px solid #ddd;
-    box-shadow:0px 0px 20px rgba(0,0,0,0.1);
-    right:-304px;
-    animation: slideOut 150ms linear;
-
-    .lukknapp {
-      display:block;
-      position:absolute;
-      top:20px;
-      right:20px;
-      width:45px;
-      height:40px;
-    }
-
-    &__logoSection {
-      display:none;
-    }
-
-    &__expandableListWrapper {
-      top:0px;
-    }
-
-    &--show {
-      display:block;
-      right:0px;
-      animation: slideIn 200ms ease-out;
-    }
-
-    &--hide {
-      display: none;
-    }
-  }
-}
-
-@keyframes slideIn {
-  0% {
-    right:-304px;
-  }
-  100% {
-    right:0px;
-  }
-}
-
-@keyframes slideOut {
-  0% {
-    right:0px;
-  }
-  100% {
-    right:-304px;
+  .contribute-promo {
+    padding: 2rem 2rem 2rem 2rem;
+    margin: 2rem -2rem -3rem -2rem;
+    border-top: 1px solid @navGra20;
   }
 }

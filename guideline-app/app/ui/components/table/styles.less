@@ -1,0 +1,189 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+@arrow-up: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIzLjg3OCAxNy40NkwxMi4zNzYgNC4xNzNjLS4xODktLjIxOS0uNTY2LS4yMTktLjc1NiAwTC4xMjIgMTcuNDZjLS4wODcuMTAxLS4xMy4yMzEtLjEyMS4zNjRzLjA3Mi4yNTYuMTczLjM0M2wyLjU4MiAyLjIxM2MuMDkxLjA3OC4yMDYuMTIuMzI1LjEyLjAxMyAwIC4wMjYtLjAwMS4wNC0uMDAyLjEzMi0uMDEuMjU1LS4wNzMuMzQyLS4xNzVsOC41MzUtMTAuMDUxIDguNTQgMTAuMDUxYy4wODYuMTAyLjIwOS4xNjUuMzQxLjE3NS4xMzQuMDA3LjI2NC0uMDMxLjM2NS0uMTE4bDIuNTgyLTIuMjEzYy4xMDEtLjA4Ny4xNjQtLjIxLjE3My0uMzQzcy0uMDMzLS4yNjMtLjEyMS0uMzY0eiIvPjwvc3ZnPg==);
+
+.tabell {
+  display: table;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+
+  &:last-child {
+    margin-bottom:0;
+  }
+
+  caption, .tabell-caption {
+    text-align: right;
+    // text-align: left;
+    font-style: italic;
+    caption-side: bottom;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    color: @navGra60;
+    // background: #f4f4f4;
+    line-height: 1.25rem;
+  }
+
+  td, .tabell-td,
+  th, .tabell-th {
+    padding: 1rem;
+
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+    }
+
+    .skjemaelement {
+      margin-bottom:0px;
+    }
+
+    .skjemaelement__input {
+      &.checkboks + .skjemaelement__label {
+        padding-left: 24px;
+        position: relative;
+        top: -0.75rem;
+      }
+    }
+
+    &.align-right {
+      text-align: right;
+    }
+  }
+
+  thead, .tabell-thead {
+    td, .tabell-td,
+    th, .tabell-th {
+      // border-bottom: 2px solid rgba(0,0,0,0.55);
+      border-bottom: 1px solid rgba(0,0,0,0.55);
+      // border-bottom: 2px solid rgba(0,0,0,0.15);
+    }
+
+    th, .tabell-th {
+      a, .lenke {
+        margin: -1rem;
+        padding: 1rem;
+        display: block;
+        border: none;
+        position: relative;
+        text-decoration: none;
+        color: @navBla;
+        padding-right:2.5rem;
+
+        &:after, &:before {
+          content: '';
+          display: block;
+          background-size: contain;
+          width: 0.5rem;
+          height: 0.5rem;
+          position: absolute;
+          right: 1rem;
+          top: 50%;
+          opacity: 0.5;
+          background: @arrow-up;
+          margin-top: -0.5rem;
+        }
+
+        &:after {
+          transform: rotate(180deg);
+          margin-top: 0rem;
+        }
+
+        &:hover {
+          text-decoration: underline;
+
+          &:after, &:before {
+            opacity: 0.9;
+          }
+        }
+      }
+
+      &.sorted-asc, &.sorted-desc {
+        a, .lenke {
+          &:after, &:before {
+            width: 0.75rem;
+            height: 0.75rem;
+            margin-top: -0.3rem;
+            opacity: 0.5;
+          }
+
+          &:hover {
+            &:after, &:before {
+              opacity: 0.9;
+            }
+          }
+        }
+      }
+      
+      &.sorted-asc {
+        a, .lenke {
+          &:before {
+            display:none;
+          }
+        }
+      }
+
+      &.sorted-desc {
+        a, .lenke {
+          &:after {
+            display:none;
+          }
+        }
+      }
+    }
+  }
+
+  tbody, .tabell-tbody {
+    td, th {
+      // border-bottom: 1px solid rgba(0,0,0,0.55);
+      border-bottom: 1px solid rgba(0,0,0,0.15);
+    }
+
+    td.sorted {
+      background: rgba(0,0,0,0.025);
+    }
+
+    tr {
+      &.selected {
+        td, th {
+          background: #fff07f;
+        }
+      }
+      &:nth-child(1)&:hover {
+        td, th {
+          background:rgba(0,0,0,0.05);
+        }
+      }
+    }
+
+    &:first-child {
+      tr:first-child {
+        td, th {
+          border-top: 1px solid rgba(0,0,0,0.15) !important;
+        }
+      }
+    }
+  }
+
+  &--stripet {
+    tbody {
+      tr:nth-child(2n+1):not(.selected) {
+        td, th {
+          background: rgba(0,0,0,0.03);
+          // background:#f4f4f4;
+        }
+        td.sorted {
+          background: rgba(0,0,0,0.05);
+        }
+      }
+    }
+  }
+
+  &--border {
+    thead, tbody, tfoot {
+      td, th {
+        // border: 1px solid @navGra40;
+        border: 1px solid rgba(0,0,0,0.55);
+      }
+    }
+  }
+}
