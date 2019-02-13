@@ -20,7 +20,7 @@ const GlobalWebpackConfig = {
     module: {
         rules: [
             {
-                test: /\.png$/,
+                test: /\.(png|webp)$/,
                 use: [
                     { loader: 'file-loader?name=[name].[ext]' }
                 ]
