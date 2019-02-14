@@ -34,7 +34,7 @@ const LeftNavigation = (props) => (
                 <div className="contribute-promo">
                     <Undertittel>Noe du savner?</Undertittel>
                     <br />
-                    <LenkepanelBase href="#" border>
+                    <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
                         <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
                     </LenkepanelBase>
                 </div>
