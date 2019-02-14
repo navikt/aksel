@@ -28,8 +28,7 @@
     "generateMDs": "node ./_scripts/generateReadmes.js",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
     "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js && cp -rf guideline-app/conf/CNAME guideline-app/dist/CNAME && cp -rf guideline-app/dist/index.html guideline-app/dist/404.html",
-    "deploy-guideline-app": "gh-pages -d guideline-app/dist",
-    "start-site": "webpack-dev-server --hot --inline --config site/conf/webpack.global.js"
+    "deploy-guideline-app": "gh-pages -d guideline-app/dist"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
