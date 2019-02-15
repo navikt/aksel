@@ -19,10 +19,6 @@ const CommunityMainPage = () => (
                     på plass kan dere gjerne <Lenke href={issueUrl}>bruke Github</Lenke> til å opprette saker og
                     diskutere der.
                 </p>
-                <p>
-                    Vi kommer mest sannsynlig til å bruke <Lenke href="https://www.discourse.org/">Discourse</Lenke> som
-                    forum-plattform.
-                </p>
             </Panel>
         </section>
     </article>
