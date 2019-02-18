@@ -1,1 +1,1 @@
-Denne filen kan fjernes hvis den ikke har noen spesielle retningslinjer for tilgjengelighet.
+Denne filen kan fjernes hvis komponenten ikke trenger noen spesielle retningslinjer for tilgjengelighet.
