@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { AlertStripeSuksess } from './../../../packages/node_modules/nav-frontend-alertstriper';
 import { Hovedknapp, Fareknapp } from './../../../packages/node_modules/nav-frontend-knapper';
 import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
-import { Container, Column, Row } from './../../../packages/node_modules/nav-frontend-grid';
 
 /*
  * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
@@ -22,10 +21,10 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Container fluid>
-                    <Column xs="6">Hei</Column>
-                    <Column xs="6">Hei</Column>
-                </Container>
+                <AlertStripeSuksess>Heisann Hoppsann!</AlertStripeSuksess>
+                <Hovedknapp>Hovedknapp</Hovedknapp>
+                <Fareknapp>Fareknapp</Fareknapp>
+                <Chevron />
             </div>
         );
     }
