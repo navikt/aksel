@@ -1,11 +1,13 @@
 import React from 'react';
-import { HashRouter as Router } from 'react-router-dom';
+import { withRouter, Switch } from 'react-router-dom';
 
 import { routes } from './../../../utils/routing/routes.component';
+import urlRemapConfig from './../../../utils/routing/urlRemap.config';
+
 import Header from './../../components/header/Header';
-import LeftNavigation from './../../components/left-navigation/LeftNavigation';
+import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
+
 // eslint-disable-next-line import/extensions
-import './../../../../../packages/node_modules/nav-frontend-lenker-style';
 
 import './styles.less';
 
@@ -16,6 +18,22 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
         this.state = {
             showMenu: false
         };
+
+        /*
+            Redirect old hash based URLs
+        */
+        if (props.location.hash.length) {
+            const key = Object.keys(urlRemapConfig).find((k) => props.location.hash.indexOf(k) !== -1);
+            if (key) {
+                props.history.push(props.location.hash.replace(key, urlRemapConfig[key]));
+            }
+        }
+
+        props.history.listen(() => {
+            const contentPane = document.getElementsByClassName('mainContent')[0];
+            contentPane.scrollTop = 0;
+            window.scrollTo(0, 0);
+        });
     }
 
     toggleMenu = () => {
@@ -26,29 +44,17 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
 
     render() {
         return (
-            <Router>
-                <div className="app">
-                    <div style={{ position: 'relative', marginBottom: '80px' }}>
-                        <nav>
-                            <button
-                                id="mobileMenuToggleButton"
-                                className="mobileMenuToggleButton"
-                                onClick={this.toggleMenu}
-                                aria-controls={'#main-navigation'}
-                            >
-                                <span className="mobileMenuToggleButton__hamburger-icon">Åpne meny</span>
-                            </button>
-                            <LeftNavigation id="main-navigation" show={this.state.showMenu} toggle={this.toggleMenu} />
-                        </nav>
-                        <div className="contentWrapper">
-                            <Header />
-                            { routes() }
-                        </div>
-                    </div>
+            <div className="mainWrapper">
+                <Header />
+                <Breadcrumbs />
+                <div className="contentWrapper">
+                    <Switch>
+                        { routes() }
+                    </Switch>
                 </div>
-            </Router>
+            </div>
         );
     }
 }
 
-export default App;
+export default withRouter(App);

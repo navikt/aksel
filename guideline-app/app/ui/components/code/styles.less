@@ -1,0 +1,45 @@
+@import (reference) '~nav-frontend-core/less/_variabler';
+
+pre {
+  margin:0;
+
+  code {
+    font-size: 0.9rem;
+  }
+
+  &[class*="language-"]:not([disabled]) {
+    margin: 0;
+
+    > code[class*="language-"] {
+      border-left: 0;
+      box-shadow: none;
+      background-image: none;
+      background: #f4f4f4;
+      padding: 1rem;
+
+      .token {
+        background: none;
+      }
+    }
+
+    &:after, &:before {
+      display:none;
+    }
+  }
+}
+
+code {
+  &.inline {
+    font-size: 0.9rem;
+    display: inline-block;
+    color: @navRod;
+  }
+
+  &.bash {
+    display: block;
+    padding: 0.5rem;
+    color: white;
+    background: @navMorkGra;
+    white-space: pre-wrap;
+  }
+}

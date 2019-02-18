@@ -1,0 +1,36 @@
+.panel {
+  margin: 0;
+}
+
+.resource-link {
+  .lenkepanel__heading {
+    display:flex;
+    align-items:center;
+    margin:0;
+  }
+
+  svg {
+    width: 2rem;
+    margin-right:1rem;
+  }
+
+  .etikett {
+    margin-left:1rem;
+  }
+}
+
+.panel {
+  &.resource-link {
+    display:flex;
+    align-items: center;
+    margin-bottom:1rem !important;
+
+    svg {
+      opacity:0.5;
+    }
+
+    .lenkepanel__heading {
+      opacity:0.75;
+    }
+  }
+}

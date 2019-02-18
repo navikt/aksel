@@ -1,23 +1,44 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import TitleByRoute from './../../components/title-by-route/TitleByRoute';
-import routeConfig from './../../../utils/routing/routes.config';
-import NAVLogo from '../nav-logo/nav-logo';
+import { NAVLogo } from '../../../assets/images/svg';
+import MainNav from '../main-nav/MainNav';
+import MobileNav from '../mobile-nav/MobileNav';
+import MobileNavToggle from '../mobile-nav-toggle/MobileNavToggle';
 
 import './styles.less';
 
-const Header = () => (
-    <div className="header">
-        <div className="header__content">
-            <div className="header__content__textSection">
-                <NAVLogo />
-                <h1 className="smallHeader">
-                    Designsystemet
-                </h1>
-                <TitleByRoute routes={routeConfig} noHr />
-            </div>
-        </div>
-    </div>
-);
+class Header extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mobileNavOpen: false
+        };
+    }
+
+    toggleMobileNav = () => {
+        this.setState({
+            mobileNavOpen: !this.state.mobileNavOpen
+        });
+    }
+
+    render() {
+        return (
+            <header className="header">
+                <div className="header__content">
+                    <NavLink to="/" className="header__logo">
+                        <NAVLogo />
+                        <h1 className="header__title">
+                            Designsystemet
+                        </h1>
+                    </NavLink>
+                    <MobileNavToggle onClick={() => this.toggleMobileNav()} />
+                    <MainNav />
+                    <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
+                </div>
+            </header>
+        );
+    }
+}
 
 export default Header;

@@ -1,7 +1,6 @@
 import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
-import { EtikettLiten } from './../../../../../packages/node_modules/nav-frontend-typografi';
 import './styles.less';
 
 class PropTypeTable extends React.Component {
@@ -63,7 +62,7 @@ class PropTypeTable extends React.Component {
                     onScroll={this.checkOverflow}
                 >
 
-                    <table ref={(node) => { this.table = node; }}>
+                    <table className="tabell tabell--stripet" ref={(node) => { this.table = node; }}>
                         <thead>
                             <tr>
                                 {
@@ -110,11 +109,7 @@ PropTypeTable.defaultProps = {
 
 export default PropTypeTable;
 
-const PropTypeTableHeader = (props) => (
-    <th key={props.index}>
-        <EtikettLiten>{props.val}</EtikettLiten>
-    </th>
-);
+const PropTypeTableHeader = (props) => (<th key={props.index}>{props.val}</th>);
 
 PropTypeTableHeader.propTypes = {
     index: PT.number.isRequired,
@@ -134,15 +129,26 @@ const parsePropValue = (val) => {
     return val.toString();
 };
 
-const PropTypeTableRow = (props) => (
-    <tr>
-        <td><strong>{parsePropValue(props.val.name || props.val.propName)}</strong></td>
-        <td>{parsePropValue(props.val.type)}</td>
-        <td>{parsePropValue(props.val.required)}</td>
-        <td>{parsePropValue(props.val.description)}</td>
-        <td>{parsePropValue(props.val.defaultValue)}</td>
-    </tr>
-);
+const parseDescription = (desc) => {
+    const found = desc.match(/^@deprecated/);
+    if (found) {
+        return (<span><strong>{found[0]}</strong>{desc.substr(11, desc.length)}</span>);
+    }
+    return desc;
+};
+
+const PropTypeTableRow = (props) => {
+    const desc = parseDescription(parsePropValue(props.val.description));
+    return (
+        <tr className={cn({ deprecated: typeof desc === 'object' })}>
+            <td><strong>{parsePropValue(props.val.name)}</strong></td>
+            <td><code className="inline">{parsePropValue(props.val.type)}</code></td>
+            <td>{parsePropValue(props.val.required)}</td>
+            <td>{desc}</td>
+            <td>{parsePropValue(props.val.defaultValue)}</td>
+        </tr>
+    );
+};
 
 PropTypeTableRow.propTypes = {
     val: PT.shape({

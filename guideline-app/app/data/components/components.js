@@ -9,12 +9,9 @@ const getModulesFromContext = (context) => {
 };
 
 const getTextData = () => {
-    const context = require.context(
-        '../../../../packages/node_modules/',
-        true,
-        /([A-Z]|[a-z])+\.(accessibility|ingress|usage)\.(md)/
-    );
-    const textDataRaw = getModulesFromContext(context);
+    const textDataContext = require.context('NavFrontendModules', true, /(\w+)\.(\w+)\.(mdx?)/);
+    const textDataRaw = getModulesFromContext(textDataContext);
+
     const textDataInCategories = {};
 
     Object.keys(textDataRaw).forEach((textDataKey) => {
@@ -35,67 +32,89 @@ const getTextData = () => {
     return textDataInCategories;
 };
 
-const getInstallInstructions = (moduleRef, edges) => {
-    const modulePathMatch = (moduleRef.match(/\.\/(nav-frontend-([A-Z]|[a-z]|-)+)\//));
-    const pkgName = modulePathMatch[1];
-
+const getInstallInstructions = (pkgName, edges) => {
     const dependencies = dfs(edges, pkgName).join(' ');
     return `npm install ${dependencies} --save`;
 };
 
-const getNameOfModule = (moduleRef) => {
-    const regx = /\/_[a-z]+\./;
-    const match = moduleRef.match(regx);
-    if (match.index > -1) {
-        // slices off /_ at the beginning and . at the end
-        return match[0].slice(2, match[0].length - 1);
-    }
-    return null;
-};
-
-const getComponentData = () => {
-    const sampleContext = require.context('../../../../packages/node_modules/', true, /_[a-z]+\.sample\.js/);
-    const sampleModules = getModulesFromContext(sampleContext);
-    const sampleRefs = Object.keys(sampleModules);
-    const pkgContext = require.context('../../../../packages/node_modules/', true, /package\.json/);
-    const pkgs = getModulesFromContext(pkgContext);
-
-    const edges = Object.values(pkgs)
+const getDependencyEdgesFromPackages = (pkgs) => Object.values(pkgs)
         .map((pkg) => [pkg.name, Object.keys(pkg.peerDependencies || {})])
         .reduce((arr, [pkgName, pkgDependencies]) => (
             [...arr, ...pkgDependencies.map((dependency) => [pkgName, dependency])]
         ), []);
 
+const getOverviewModulesByPackageName = (packageName, overviewModules) =>
+    Object.keys(overviewModules).filter((overviewKey) => overviewKey.indexOf(`./${packageName}/`) !== -1);
+
+const getOverviewModuleNameByPath = (path) => {
+    const parts = path.split('/');
+    const filename = parts[parts.length - 1];
+    return filename.substr(0, filename.length - 13); // minus length of '.overview.mdx'
+};
+
+const getComponentData = () => {
+    // Require all the files we need to cross reference
+
+    const pkgContext = require.context('NavFrontendModules', true, /package\.json/);
+    const pkgs = getModulesFromContext(pkgContext);
+
+    const overviewContext = require.context('NavFrontendModules', true, /\w+\.overview\.mdx/);
+    const overviewModules = getModulesFromContext(overviewContext);
+
+    const allModulesContext = require.context('NavFrontendModules', true, /lib\/[a-z-]+.js/);
+    const allModules = getModulesFromContext(allModulesContext);
+
+    // Find all package dependencies
+
+    const edges = getDependencyEdgesFromPackages(pkgs);
+
+    // Combine componentData
+
     const componentData = {};
-    sampleRefs.forEach((moduleRef) => {
-        const moduleName = getNameOfModule(moduleRef);
-        if (moduleName) {
-            componentData[moduleName] = {
-                installInstructions: getInstallInstructions(moduleRef, edges),
-                ...sampleModules[moduleRef].default
-            };
+
+    Object.keys(overviewModules).forEach((overviewKey) => {
+        const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
+        const pkgName = overviewKey.split('/')[1];
+        const pkg = pkgs[`./${pkgName}/package.json`];
+        const pkgMainModulePath = pkg.main;
+        const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
+
+        let mainModule;
+        let mainModuleKey = `./${pkgName}/${pkgMainModulePath}`;
+        const pkgModules = allModules[mainModuleKey];
+
+        if (pkgOverviewModules.length > 1) {
+            // If package has multiple overview modules (i.e. 'nav-frontend-skjema'),
+            // use overview module name to find main module
+            mainModuleKey = Object.keys(pkgModules).find((moduleKey) =>
+                moduleKey.toLowerCase() === overviewModuleName.toLowerCase());
+
+            mainModule = pkgModules[mainModuleKey];
+        } else {
+            // All others
+            mainModule = allModules[mainModuleKey].default;
         }
+
+        componentData[overviewModuleName] = {
+            name: overviewModuleName,
+            mainModule,
+            packageModules: pkgModules,
+            manifest: pkg,
+            installInstructions: getInstallInstructions(pkgName, edges)
+        };
     });
 
     return componentData;
 };
 
-/* eslint-disable no-underscore-dangle */
-
 const componentData = getComponentData();
 const textDataInCategories = getTextData();
 
 const components = (
-    Object.keys(componentData).map((td) => ({
-        textData: textDataInCategories[td],
-        componentData: {
-            ...componentData[td],
-            componentName: td,
-            __docgenInfo: componentData[td].base ? componentData[td].base.__docgenInfo : null,
-            label: td.charAt(0).toUpperCase() + td.slice(1)
-        }
+    Object.keys(componentData).map((componentName) => ({
+        textData: textDataInCategories[componentName.toLowerCase()],
+        componentData: { ...componentData[componentName] }
     }))
 );
-/* eslint-enable no-underscore-dangle */
 
 export default components;

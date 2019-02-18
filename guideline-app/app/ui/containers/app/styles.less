@@ -1,101 +1,74 @@
-@import '../../../assets/styles/main';
+@import (reference) '~nav-frontend-core/less/_variabler';
+@import (reference) './../../../assets/styles/mixins';
+@import (reference) './../../../../../packages/node_modules/nav-frontend-paneler-style/src/mixins';
+@import './../../../assets/styles/base';
 
-body {
-  margin: 0;
+#app {
+  height: 100%;
 
-  .app {
-    font-family: @GL_FONT_FAMILY;
-    min-height: 100%;
-    overflow: hidden;
-
-    hr {
-      border:0;
-      border-bottom:1px solid #C6C2BF;
-    }
+  .mainWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 
     .contentWrapper {
-      background-color: @GL_CONTENT_BACKGROUND_COLOR;
-      padding: 0px 64px;
-      margin-left: 304px;
-
-      @media screen and (max-width: 1000px) {
-        margin-left:0px;
-        padding-right:64px;
-      }
-
-      @media screen and (max-width: 600px) {
-        padding:0 40px;
-      }
-
-      @media screen and (max-width: 480px) {
-        padding:0 20px;
-      }
-    }
-
-    .mobileMenuToggleButton {
-      display:none;
-      position:fixed;
-      top:20px;
-      right:20px;
-      border:none;
+      display:flex;
+      flex: 1;
       background:white;
-      padding:10px;
-      border:1px solid #ddd;
-      box-shadow:0px 0px 10px rgba(0,0,0,0.1);
-      z-index:10;
 
-      &__hamburger-icon {
-        display:block;
-        font-size:0;
-        width:25px;
-        height:20px;
-        position:relative;
+      .mainContent {
+        flex: 1;
+        padding: 3rem;
+        overflow-y: scroll;
 
-        &::before {
-          content:'';
-          display:block;
-          position:absolute;
-          top:0px;
-          left:0px;
-          right:0px;
-          bottom:0px;
-          border-top:12px double #444;
-          border-bottom:4px solid #444;
-        }
-      }
+        .section {
+          margin-top: 3rem;
+          max-width: 700px;
 
-      &:hover, &:active, &:focus {
-        background:@navBla;
-        cursor:pointer;
+          &:first-child {
+            margin-top: 0px;
+          }
 
-        .mobileMenuToggleButton__hamburger-icon {
-          &::before {
-            border-top:12px double white;
-            border-bottom:4px solid white; 
+          ul {
+            li {
+              margin-bottom:0.75rem;
+            }
+          }
+
+          img {
+            max-width: 100%;
+          }
+
+          .panel {
+            margin: 2rem 0;
+
+            &--grey {
+              background:#f4f4f4;
+              padding: 1.5rem 2rem;
+
+              @media (max-width: 550px) {
+                padding: 1.5rem;
+              }
+            }
+          }
+
+          &.full {
+            max-width: none;
           }
         }
+
+        @media (max-width: 550px) {
+          padding: 1.5rem;
+        }
       }
 
-      @media screen and (max-width: 1000px) {
+      @media (max-width: 1094px) {
         display:block;
-      }
 
-      @media screen and (max-width: 430px) {
-        top:16px;
-        right:16px;
+        .leftNavigation {
+          display:none;
+        }
       }
     }
-  }
-
-  .section {
-    margin-top: 32px;
-  }
-
-  .smallSection {
-    margin-top: 20px;
-  }
-
-  .section:first-child {
-    margin-top: 24px;
   }
 }

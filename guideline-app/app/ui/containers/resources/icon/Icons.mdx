@@ -1,0 +1,43 @@
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
+import { Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+
+import { NAVLogoCircle, SketchLogo, GithubLogo } from '../../../../assets/images/svg';
+
+# Ikoner
+
+<Ingress className="intro">
+    NAV bruker Streamline Icons v.2.5.
+</Ingress>
+
+<br/>
+
+<Alertstripe type="info" solid>
+    På grunn av lisensvilkårene for Streamline-pakken er disse ressursene er kun tilgjengelige for NAV-ansatte. Ta kontakt med <Lenke href="mailto:designsystemet@nav.no">designsystemet@nav.no</Lenke> hvis du ikke kommer inn.
+</Alertstripe>
+
+## Sketch ressurser
+
+<Lenkepanel className="resource-link" href="https://sketch.cloud/s/G9QxO" border>
+    <SketchLogo />
+    Ikon&shy;bibliotek
+</Lenkepanel>
+
+## Github repo
+
+Alle våre ikoner ligger i et lukket Github-repo her:
+
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-ikoner-backend/tree/master/src/main/resources/static/api/icons" border>
+    <GithubLogo />
+    Streamline-ikoner
+</Lenkepanel>
+
+## Intern ikon app
+
+Det er også laget en frontend med forhåndsvisninger av alle ikonene, en søkemotor og nedlastingsmulighet. Denne er kun tilgjengelig bak vår brannmur (utviklerimage/tynnklient):
+
+<Lenkepanel className="resource-link" href="https://app-q6.adeo.no/nav-frontend-ikoner/" border>
+    <NAVLogoCircle />
+    Ikon&shy;bibliotek
+</Lenkepanel>

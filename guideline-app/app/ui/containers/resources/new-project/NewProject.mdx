@@ -1,0 +1,87 @@
+import { Ingress, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
+import Lenkepanel, { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import Panel from 'NavFrontendModules/nav-frontend-paneler';
+import { NAVLogoCircle, SketchLogo, ZeplinLogo, GithubLogo } from '../../../../assets/images/svg';
+import './styles.less';
+
+# Start nytt prosjekt
+
+<Ingress>
+    Denne siden er ment å være til hjelp for de som trenger litt veiledning til å komme i gang med nye prosjekter i NAV.
+</Ingress>
+
+## For designere
+
+### Sketch-ressurser
+
+<Panel className="resource-link" href="#" border>
+    <SketchLogo />
+    <Undertittel className="lenkepanel__heading">UI-bibliotek</Undertittel>
+    <EtikettFokus>Under arbeid</EtikettFokus>
+</Panel>
+<Lenkepanel className="resource-link" href="https://sketch.cloud/s/mb53w" border>
+    <SketchLogo />
+    Illustrasjons&shy;bibliotek
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://sketch.cloud/s/G9QxO" border>
+    <SketchLogo />
+    Ikon&shy;bibliotek
+</Lenkepanel>
+
+### Prosjektoversikt på Zeplin
+
+Alle prosjektene i NAV forsøker å dele skisser med hverandre gjennom Zeplin.
+
+<Lenkepanel className="resource-link" href="https://app.zeplin.io/organization/5afae195e8ce9ec304d84adf/projects" border>
+    <ZeplinLogo />
+    Prosjektoversikt
+</Lenkepanel>
+
+<Alertstripe type="info" solid>
+    Noen av disse ressursene er kun tilgjengelig for NAV-ansatte. Ta kontakt 
+    med <Lenke href="mailto:designsystemet@nav.no">designsystemet@nav.no</Lenke> hvis du ikke kommer inn.
+</Alertstripe>
+
+## For utviklere
+
+### Eksempel-applikasjoner
+
+Her er noen eksempler på forskjellige oppsett med frontend-rammeverket.
+
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/cra" border>
+    <GithubLogo />
+    Create React App
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/parcel" border>
+    <GithubLogo />
+    Parcel
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/webpack" border>
+    <GithubLogo />
+    Webpack
+</Lenkepanel>
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/legacy" border>
+    <GithubLogo />
+    Browserify
+</Lenkepanel>
+
+Du finner også en mengde [åpne frontend-prosjekter under NAVIKT-gruppen på Github](https://github.com/navikt?utf8=✓&q=frontend&type=&language=).
+
+### Ikoner
+
+Alle våre ikoner ligger i et lukket Github-repo her:
+
+<Lenkepanel className="resource-link" href="https://github.com/navikt/nav-frontend-ikoner-backend/tree/master/src/main/resources/static/api/icons" border>
+    <GithubLogo />
+    Streamline-ikoner
+</Lenkepanel>
+
+Det er også laget en frontend med forhåndsvisninger av alle ikonene, en søkemotor og nedlastingsmulighet. Denne er kun tilgjengelig bak vår brannmur (utviklerimage/tynnklient):
+
+<Lenkepanel className="resource-link" href="https://app-q6.adeo.no/nav-frontend-ikoner/" border>
+    <NAVLogoCircle />
+    Ikon&shy;bibliotek
+</Lenkepanel>
