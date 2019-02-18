@@ -1,15 +1,13 @@
-### NAV Designsystemet - Guideline-appen
+# Guideline-appen (design.nav.no)
 
-Her ligger kodebasen for NAV Designsystemet sin [Guideline-app](https://navikt.github.io/nav-frontend-moduler).
+Her ligger kodebasen for [https://design.nav.no](https://design.nav.no).
 
-[Guideline-appen](https://navikt.github.io/nav-frontend-moduler) er NAV Designsystemets dokumentasjonsverktøy,
-laget for utviklere, designere og andre som på en eller annen måte har et forhold til designsystemet. 
+Denne nettsiden utgjør dokumentasjonen for NAVs designsystem, og er laget med tanke på utviklere, 
+designere og andre som jobber med systemet i sin arbeidshverdag.
 
-Her finner man utviklerdokumentasjon, informasjon om designmønster og retningslinjer i forhold til 
-enkeltkomponenter, sammensetningen av disse, farger, kontraster, og så videre.  
+Her finner man utviklerdokumentasjon, informasjon om designmønster og retningslinjer for 
+enkeltkomponenter, sammensetningen av disse, farger, kontraster, og så videre.
 
+## Bidra
 
-##### Hvordan kan jeg bidra med innhold eller funksjonalitet til Guideline-siden
-
-* ... når jeg er [designer?](https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/README.design.md)
-* ... når jeg er [utvikler?](https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/README.developer.md)
+Se [egne retningslinjer](https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/CONTRIBUTING.md).

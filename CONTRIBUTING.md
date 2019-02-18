@@ -4,11 +4,14 @@ Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksiste
 slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
 
 ## TL;DR
-- `git clone git@github.com:navikt/nav-frontend-moduler.git`
-- `cd nav-frontend-moduler`
-- `npm install`
-- `npm start`
-- [http://localhost:8080](http://localhost:8080)
+```bash
+git clone git@github.com:navikt/nav-frontend-moduler.git
+cd nav-frontend-moduler
+npm install
+npm start
+```
+
+[http://localhost:8080](http://localhost:8080) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
 
 ## Utviklingsmiljø
 Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
@@ -45,7 +48,7 @@ Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildi
 Når du har laget eller endret på en komponent er det fint om du også dokumenterer dette. Komponentene dokumenteres på to måter: 
 
 - Som kommentarer på interface i TypeScript-koden. Dette må være på plass for at tabellen over props skal genereres på komponent-siden på design.nav.no.
-- Som `<komponent>.overview.mdx`-filer under `md`-katalogen i pakken. Disse filene brukes for å lage Oversikt-sidene på design.nav.no. MDX er et markdown-format som tillater JSX-kode, som gjør at man kan importere React-komponenten og vise frem alle dens variasjoner i disse filene. Det anbefales å ta en titt på eksisterende `overview.mdx`-filer som allerede ligger i andre komponent-pakker for å få en idè om hvordan disse kan struktureres.
+- Som `.md(x)`-filer i pakken. Les mer om [hvordan disse funker her](https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/CONTRIBUTING.md).
 
 Det kan også være lurt å kjøre `npm run start-guideline-app` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
 
