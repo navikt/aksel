@@ -33,4 +33,4 @@ Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/ma
 
 ## Lisens
 
-Gå til [LICENSE.md](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENSE.md)
+Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENSE)
