@@ -46,9 +46,10 @@ function create(config) {
                 fs.renameSync(file, file.replace('src/index', `src/${renderdata.name.indexfile}`));
             });
 
-            glob(`${dest}/**/md/**.*`, { dot: true }, (err, files) => {
-                files.forEach((file) => {
-                    const newName = renderdata.name.indexfile.charAt(0).toUpperCase() + renderdata.name.indexfile.slice(1) + '.$&';
+            glob(`${dest}/**/md/**.*`, { dot: true }, (mdErr, mdFiles) => {
+                mdFiles.forEach((file) => {
+                    // eslint-disable-next-line max-len
+                    const newName = `${renderdata.name.indexfile.charAt(0).toUpperCase()}${renderdata.name.indexfile.slice(1)}.$&`;
                     fs.renameSync(file, file.replace(/\w+\.md/g, newName));
                 });
 
