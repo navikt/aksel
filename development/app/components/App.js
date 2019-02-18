@@ -8,13 +8,9 @@ import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
  * Appen blir kjørt opp fra npm start-scriptet i package.json på rot, og tar utgangspunkt i
  * webpack-configen som ligger under /development/conf/webpack.config.js.
  *
- * Når du endrer på filene under /src i den aktuelle nav-frontend modulen du sitter og utvikler på, vil dette bli
- * kompilert og reloades av seg selv i browseren, gitt at komponenten blir brukt her inne (hvis ikke
- * vil Webpack la være å gjøre dette pga. sin tree-shaking).
- *
  * Det er i utgangspunktet ikke ønskelig å sjekke inn endringer som gjøres her til repository, ettersom det er tenkt
  * som et rent utviklingsmiljø og ikke trenger å versjonskontrolleres. Om det er nødvendig å endre på ting her,
- * forklar hvorfor i en PR, eller ta det opp i frontend-forum.
+ * forklar hvorfor i en PR.
  *
  * Enjoy!
  */

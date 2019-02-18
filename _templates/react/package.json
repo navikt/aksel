@@ -2,15 +2,12 @@
   "name": "<%name.original%>",
   "version": "0.0.1",
   "main": "lib/<%name.indexfile%>.js",
-  "jsnext:main": "src/<%name.indexfile%>.js",
+  "types": "lib/<%name.indexfile%>.d.ts",
   "license": "MIT",
   "files": ["/src", "/lib"],
-  "publishConfig": {
-    "registry": "http://maven.adeo.no/nexus/content/repositories/npm-internal/"
-  },
   "repository": {
     "type": "git",
-    "url": "git+http://stash.devillo.no/scm/navfront/nav-frontend-moduler.git"
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "peerDependencies": {
     "react": "<%#resolve%>react<%/resolve%>"

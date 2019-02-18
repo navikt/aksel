@@ -43,15 +43,23 @@ function create(config) {
     copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
         glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
             files.forEach((file) => {
-                fs.renameSync(file, file.replace('index', renderdata.name.indexfile));
+                fs.renameSync(file, file.replace('src/index', `src/${renderdata.name.indexfile}`));
             });
 
-            glob(destGlob, { dot: true }, (globerr, globfiles) => {
-                globfiles
-                    .forEach((file) => {
-                        const content = fs.readFileSync(file, 'utf-8');
-                        fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
-                    });
+            glob(`${dest}/**/md/**.*`, { dot: true }, (mdErr, mdFiles) => {
+                mdFiles.forEach((file) => {
+                    // eslint-disable-next-line max-len
+                    const newName = `${renderdata.name.indexfile.charAt(0).toUpperCase()}${renderdata.name.indexfile.slice(1)}.$&`;
+                    fs.renameSync(file, file.replace(/\w+\.md/g, newName));
+                });
+
+                glob(destGlob, { dot: true }, (globerr, globfiles) => {
+                    globfiles
+                        .forEach((file) => {
+                            const content = fs.readFileSync(file, 'utf-8');
+                            fs.writeFileSync(file, mustache.render(content, renderdata), 'utf-8');
+                        });
+                });
             });
         });
     });
