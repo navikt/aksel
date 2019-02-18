@@ -5,7 +5,7 @@ slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de be
 
 ## Oppstart av utviklingsmiljø
 Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
-som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server. 
+som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.
 
 Se kommentarene i `/development/app/components/App.js` for mer info.
 
@@ -33,6 +33,10 @@ Komponenten kan da f.eks. brukes internt i andre komponenter slik:
 ```
 
 Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildicons` etterpå for å re-generere `index.js`-filen i `nav-frontend-ikoner-assets` slik at nøklene blir oppdatert.
+
+## Dokumentasjon
+
+Når du har laget eller endret på en komponent er det fint om du samtidig lager eller oppdaterer dokumentasjons-filen for komponenten. Alle komponentene skal ha en tilhørende `<komponent>.overview.mdx`-fil i sin katalog (vanligvis under `nav-frontend-<min-komponent>/md/<min-komponent>.overview.mdx`)
 
 ## Kodekvalitet
 For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.

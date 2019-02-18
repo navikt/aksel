@@ -4,12 +4,9 @@
   "main": "src/<%name.indexfile%>.less",
   "license": "MIT",
   "files": ["/src"],
-  "publishConfig": {
-    "registry": "http://maven.adeo.no/nexus/content/repositories/npm-internal/"
-  },
   "repository": {
     "type": "git",
-    "url": "git+http://stash.devillo.no/scm/navfront/nav-frontend-moduler.git"
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
     "react": "<%#resolve%>react<%/resolve%>"
