@@ -3,7 +3,14 @@
 Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksisterende moduler vedlike, 
 slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
 
-## Oppstart av utviklingsmiljø
+## TL;DR
+- `git clone git@github.com:navikt/nav-frontend-moduler.git`
+- `cd nav-frontend-moduler`
+- `npm install`
+- `npm start`
+- [http://localhost:8080](http://localhost:8080)
+
+## Utviklingsmiljø
 Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
 som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.
 
@@ -35,29 +42,25 @@ Komponenten kan da f.eks. brukes internt i andre komponenter slik:
 Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildicons` etterpå for å re-generere `index.js`-filen i `nav-frontend-ikoner-assets` slik at nøklene blir oppdatert.
 
 ## Dokumentasjon
+Når du har laget eller endret på en komponent er det fint om du også dokumenterer dette. Komponentene dokumenteres på to måter: 
 
-Når du har laget eller endret på en komponent er det fint om du samtidig lager eller oppdaterer dokumentasjons-filen for komponenten. Alle komponentene skal ha en tilhørende `<komponent>.overview.mdx`-fil i sin katalog (vanligvis under `nav-frontend-<min-komponent>/md/<min-komponent>.overview.mdx`)
+- Som kommentarer på interface i TypeScript-koden. Dette må være på plass for at tabellen over props skal genereres på komponent-siden på design.nav.no.
+- Som `<komponent>.overview.mdx`-filer under `md`-katalogen i pakken. Disse filene brukes for å lage Oversikt-sidene på design.nav.no. MDX er et markdown-format som tillater JSX-kode, som gjør at man kan importere React-komponenten og vise frem alle dens variasjoner i disse filene. Det anbefales å ta en titt på eksisterende `overview.mdx`-filer som allerede ligger i andre komponent-pakker for å få en idè om hvordan disse kan struktureres.
+
+Det kan også være lurt å kjøre `npm run start-guideline-app` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
 
 ## Kodekvalitet
-For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.
+For å sikre kodekvalitet er det satt opp både `tslint` og `lesshint` som blir kjørt ved byggetid.
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har 
 blitt avklart/diskutert i NAVs frontendforum.
 
 For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Det vil si at den 
 eneste måten man får inn endringer på er gjennom pull-requests. For å merge en PR må bygget 
-har kjørt ok, og minst en person må ha godkjent PRen.
-
-For å verifisere at modulene vil fungere for andre er det satt opp to eksempel-prosjekter 
-i `/examples`. Legacy-mappen er satt opp med `browserify` og `lessc`, webpack-mappen har 
-to forskjellige webpack-bygg både med og uten `style-loader`. Nye moduler blir ikke automatisk 
-satt opp her, men dette kan brukes som en test-rigg ved forbedringer på systemet og for 
-å komme igang med å bruke biblioteket. 
-
-**NB!** I `examples/`-eksemplene må man kjøre `npm install` dersom man tenker å kjøre opp appene lokalt.
+har kjørt ok, og minst èn fra [CODEOWNERS](https://github.com/navikt/nav-frontend-moduler/blob/master/CODEOWNERS) må ha godkjent PRen.
 
 ## Kommandoer
-* `npm run lint` - kjører linting av JS og LESS
-* `npm run js:lint` - kjører linting av JS
+* `npm run lint` - kjører linting av TypeScript og LESS
+* `npm run ts:lint` - kjører linting av TypeScript
 * `npm run less:lint` - kjører linting av LESS
 * `npm run checkversions` - sjekker at avhengighetene til modulene er de 
 samme som er definert i rot-mappen
@@ -85,18 +88,11 @@ filen `bekreft-checkboks-panel.tsx`, så kan man kjøre disse kommandoene for
 * `tsc --watch src/bekreft-checkboks-panel.tsx --jsx react --outDir lib`
 
 ## Byggemiljø
-Det er satt opp ett CircleCI-bygg for repoet.
+Det er satt opp et [Travis-bygg](https://travis-ci.org/navikt/nav-frontend-moduler) for repoet.
 Pull-requests bygges derfor automatisk med en gang de pushes til remote.
 
 ### Byggesteg
-1. Installering av dependencies
-2. Versjonssjekking - et script for å sjekke av dependencies er konsekvente på tvers
-av moduler
-3. Linting av LESS og JS
-4. Bygg av moduler
-5. Bygg av Guideline-appen
-6. Publisering av pakker til npmjs
-7. Deployment av Guideline-appen til GitHub Pages
+Se [.travis.yml](https://github.com/navikt/nav-frontend-moduler/blob/master/.travis.yml).
 
 ## Scripts
 Det ligger flere hjelpe-scripts i mappen `_scripts`. 
