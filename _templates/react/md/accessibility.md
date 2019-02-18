@@ -1,0 +1,1 @@
+Denne filen kan fjernes hvis den ikke har noen spesielle retningslinjer for tilgjengelighet.
