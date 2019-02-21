@@ -19,3 +19,16 @@ Ved utvikling startes to npm-scripts i parallell:
     
 Endringer i LESS-filer vil derfor bygges om til CSS forløpende, og default-oppsettet til CRA plukker så disse opp.
 
+## Obs obs, Nedetid
+
+Vær obs på at filnavnene CRA lager er av typen main.[hash].[js|css](eks: main.23fe21.js). Dette betyr at hvis disse filene blir sendt fra en server kjørende på nais klusteret, hvor ikke også den gamle versjonen av frontend appen også ligger klar på i samme nais app, så vil appen ha nedetid. 
+
+Grunnen til dette er fordi nais tar først ned en app, så opp en ny en så ned de andre, så opp de nye. Hvis en bruker prøver å åpne appen din mens en deploy skjer:
+   - Bruker prøver å åpne appen. Får index.html med en referanse til main.v1.js
+   - Nais tar ned den gamle appen. Her ligger index.html med en referanse til main.v2.js
+   - Bruker prøver nå å hente main.v1.js, men denne finnes ikke på den nye versjonen av appen
+   - Bruker får 404
+
+For å løse dette så må filene bytte navn til å være statiske. Som f.eks -> main.js og main.css
+
+Eller så kan du bruke oppsettet du finner her: https://github.com/navikt/create-react-app-craco-template
