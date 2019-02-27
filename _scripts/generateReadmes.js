@@ -16,7 +16,7 @@ function createConfig(moduleName, edges) {
                 return mustache.render(disclaimerMD, renderdata);
             },
             INSTALL() {
-                const dependencies = dfs(edges, moduleName).join(' ');
+                const dependencies = dfs(edges, moduleName).sort().join(' ');
                 return [
                     '### Installering:',
                     '```',
