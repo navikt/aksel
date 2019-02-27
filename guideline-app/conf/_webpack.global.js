@@ -55,7 +55,8 @@ const GlobalWebpackConfig = {
     },
     resolve: {
         alias: {
-            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules')
+            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules'),
+            NavFrontendCore: path.resolve(__dirname, './../../packages/node_modules/nav-frontend-core')
         }
     },
     externals: {
