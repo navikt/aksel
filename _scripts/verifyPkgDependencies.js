@@ -96,7 +96,7 @@ glob(pkgGlob, { dot: true }, (err, files) => {
         const pkg = analyzeDependenciesOf(data.content, depMap);
 
         Object.keys(pkg.dependencies)
-            .filter((key) => !key.startsWith('nav-frontend-') || key === 'nav-frontend-core')
+            .filter((key) => !key.startsWith('nav-frontend-'))
             .forEach(verifySameValue(pkg.dependencies, globalPkg.dependencies, globalMismatch));
 
         console.log('');
