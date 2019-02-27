@@ -17,7 +17,7 @@
     "js:lint": "esw --color",
     "js:lint:fix": "esw --color --fix",
     "ts:lint": "tslint -p . -t stylish",
-    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/ -e *Source-Sans*.less",
+    "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/",
     "test": "gulp test",
     "build": "gulp build && npm run generateMDs",
     "buildfonts": "gulp buildfonts",
