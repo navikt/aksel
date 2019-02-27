@@ -61,7 +61,11 @@ const GlobalWebpackConfig = {
             new DirectoryNamedWebpackPlugin({
                 honorPackage: ['jsnext:main']
             })
-        ]
+        ],
+        alias: {
+            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules'),
+            NavFrontendCore: path.resolve(__dirname, './../../packages/node_modules/nav-frontend-core')
+        }
     },
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({

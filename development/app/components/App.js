@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { AlertStripeSuksess } from './../../../packages/node_modules/nav-frontend-alertstriper';
-import { Hovedknapp, Fareknapp } from './../../../packages/node_modules/nav-frontend-knapper';
-import Chevron from './../../../packages/node_modules/nav-frontend-chevron';
+import { AlertStripeSuksess } from 'NavFrontendModules/nav-frontend-alertstriper';
+import { Hovedknapp, Fareknapp } from 'NavFrontendModules/nav-frontend-knapper';
+import Chevron from 'NavFrontendModules/nav-frontend-chevron';
+
+import './styles.less';
 
 /*
  * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
