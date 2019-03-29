@@ -33,7 +33,6 @@ const LeftNavigation = (props) => (
                 props.routes[0].path.indexOf('/components') === 0 &&
                 <div className="contribute-promo">
                     <Undertittel>Noe du savner?</Undertittel>
-                    <br />
                     <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
                         <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
                     </LenkepanelBase>
