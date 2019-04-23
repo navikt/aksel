@@ -25,7 +25,7 @@ class ColorSample extends React.Component {
                 style={{ background: this.color.hex(), borderColor: this.color.hex() }}
                 role={(this.props.onClick === 'function') ? 'button' : undefined}
                 tabIndex="0"
-                onKeyDown={(e) => { console.log(e, e.keyCode); if (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space) this.click(); }}
+                onKeyDown={(e) => { if (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space) this.click(); }}
                 onClick={this.click}
                     
             >
