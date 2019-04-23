@@ -16,6 +16,7 @@ const ColorSample = (props) => {
             className={cls(color)}
             style={{ background: color.hex(), borderColor: color.hex() }}
             role={(props.onClick === 'function') ? 'button' : undefined}
+            tabindex="0"
             onClick={
                 (typeof props.onClick === 'function') ?
                     () => props.onClick({ name: props.name, color }) :
