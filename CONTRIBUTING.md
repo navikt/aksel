@@ -84,11 +84,11 @@ Når man kjører guidelineappen eller eksempelappen, så blir ikke filer skrevet
 TypeScript (.ts og .tsx filer) kompilert automatisk. Det anbefales å kjøre en 
 typescriptkompiler i et separat konsoll. Hvis man for eksempel jobber med 
 filen `bekreft-checkboks-panel.tsx`, så kan man kjøre disse kommandoene for 
-å få automatisk filene transpilert til javascript.  
+å få automatisk filene transpilert til javascript.
 
 * `npm install typescript -g`
 * `cd nav-frontend-moduler\packages\node_modules\nav-frontend-skjema`
-* `tsc --watch src/bekreft-checkboks-panel.tsx --jsx react --outDir lib`
+* `tsc -w -d src/bekreft-checkboks-panel.tsx --jsx react --outDir lib`
 
 ## Byggemiljø
 Det er satt opp et [Travis-bygg](https://travis-ci.org/navikt/nav-frontend-moduler) for repoet.
