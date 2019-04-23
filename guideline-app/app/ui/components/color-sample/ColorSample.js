@@ -1,6 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import Color from 'color';
+import { keyCodes } from 'NavFrontendModules/nav-frontend-js-utils';
 
 import './styles.less';
 
@@ -9,24 +10,29 @@ const cls = (col) => classnames({
     light: col.isLight()
 });
 
-const ColorSample = (props) => {
-    const color = Color(props.color);
-    return (
-        <div
-            className={cls(color)}
-            style={{ background: color.hex(), borderColor: color.hex() }}
-            role={(props.onClick === 'function') ? 'button' : undefined}
-            tabindex="0"
-            onClick={
-                (typeof props.onClick === 'function') ?
-                    () => props.onClick({ name: props.name, color }) :
-                    undefined
-                }
-        >
-            <span>{props.name}</span>
-            <span>{color.hex()}</span>
-        </div>
-    );
+class ColorSample extends React.Component {
+    click = () => {
+        if (typeof this.props.onClick === 'function') {
+            this.props.onClick({ name: this.props.name, color: this.color });
+        }
+    }
+
+    render(){
+        this.color = Color(this.props.color);
+        return (
+            <div
+                className={cls(this.color)}
+                style={{ background: this.color.hex(), borderColor: this.color.hex() }}
+                role={(this.props.onClick === 'function') ? 'button' : undefined}
+                tabIndex="0"
+                onKeyDown={(e) => { console.log(e, e.keyCode); if (e.keyCode === keyCodes.enter || e.keyCode === keyCodes.space) this.click(); }}
+                onClick={this.click}
+                    
+            >
+                <span>{this.props.name}</span>
+                <span>{this.color.hex()}</span>
+            </div>
+        );}
 };
 
 export default ColorSample;
