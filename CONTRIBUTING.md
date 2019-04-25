@@ -42,7 +42,7 @@ Komponenten kan da f.eks. brukes internt i andre komponenter slik:
 <Ikon kind="feil-sirkel-fyll" />
 ```
 
-Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildicons` etterpå for å re-generere `index.js`-filen i `nav-frontend-ikoner-assets` slik at nøklene blir oppdatert.
+Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildicons` og deretter `gulp buildJs` etterpå for å re-generere `index.js`-filen i `nav-frontend-ikoner-assets` slik at nøklene blir oppdatert.
 
 ## Dokumentasjon
 Når du har laget eller endret på en komponent er det fint om du også dokumenterer dette. Komponentene dokumenteres på to måter: 
