@@ -161,14 +161,14 @@ class Palette extends React.Component {
                     <div className="color-group">
                         <Ingress>Fokusfarge</Ingress>
                         <ColorSample
-                            name="@navOransjeFokus"
-                            color="#ffbd66"
+                            name="@fokusFarge"
+                            color="#254B6D"
                             onClick={(color) => this.setState({ activeColor: color })}
                         />
                         <div className="color-description">
                             <p>
                                 Denne fargen er reservert av systemet for å indikere fokus. Interaktive elementer
-                                som får fokus blir vanligvis markert med en 2px tykk outline med denne fargen.
+                                som får fokus blir vanligvis markert med en 3px tykk outline med denne fargen.
                             </p>
                         </div>
                     </div>
