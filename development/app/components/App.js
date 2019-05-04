@@ -1,32 +1,47 @@
-import React, { Component } from 'react';
-import { AlertStripeSuksess } from 'NavFrontendModules/nav-frontend-alertstriper';
-import { Hovedknapp, Fareknapp } from 'NavFrontendModules/nav-frontend-knapper';
-import Chevron from 'NavFrontendModules/nav-frontend-chevron';
+import React from 'react';
+
+import Popover from 'NavFrontendModules/nav-frontend-popover';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+
+import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
 import './styles.less';
 
-/*
- * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
- * Appen blir kjørt opp fra npm start-scriptet i package.json på rot, og tar utgangspunkt i
- * webpack-configen som ligger under /development/conf/webpack.config.js.
- *
- * Det er i utgangspunktet ikke ønskelig å sjekke inn endringer som gjøres her til repository, ettersom det er tenkt
- * som et rent utviklingsmiljø og ikke trenger å versjonskontrolleres. Om det er nødvendig å endre på ting her,
- * forklar hvorfor i en PR.
- *
- * Enjoy!
- */
+export default class App extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            anker1: undefined
+        };
+    }
 
+    togglePopover = (popover, anker) => {
+        const newState = Object.assign({}, this.state);
+        newState[popover] = (newState[popover]) ? undefined : anker;
+        this.setState(newState);
+    }
 
-// eslint-disable-next-line react/prefer-stateless-function
-export default class App extends Component {
-    render() {
+    render(){
         return (
-            <div>
-                <AlertStripeSuksess>Heisann Hoppsann!</AlertStripeSuksess>
-                <Hovedknapp>Hovedknapp</Hovedknapp>
-                <Fareknapp>Fareknapp</Fareknapp>
-                <Chevron />
+            <div className="centered-example">
+                <p style={{maxWidth: 700, lineHeight: '1.5rem'}}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sollicitudin molestie tristique. Vestibulum 
+                    at mi lobortis, pretium felis eu, tincidunt velit. Aliquam ac dui id nisl suscipit euismod non nec felis. 
+                    Donec suscipit mi ut metus interdum <Lenke onMouseLeave={() => this.setState({anker1: undefined})} onMouseEnter={(e) => this.togglePopover('anker1', e.currentTarget)}>tincidunt eget eu orci</Lenke>. Aliquam vitae risus mollis, ullamcorper arcu 
+                    vitae, semper magna. Praesent tincidunt maximus nulla, ut vehicula velit consequat a. Quisque pulvinar 
+                    sem nibh, in aliquam enim gravida a.
+                </p>
+                <Popover
+                    ankerEl={this.state.anker1}
+                    apen={this.state.anker1 !== undefined}
+                    onClose={() => this.setState({anker1: undefined})}
+                    orientering="over"
+                    width={200}
+                >
+                    <p align="center">
+                        Dette er en popover
+                    </p>
+                </Popover>
             </div>
         );
     }
