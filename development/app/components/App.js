@@ -46,6 +46,7 @@ export default class App extends React.Component {
                     ankerEl={this.state.anker1}
                     apen={this.state.anker1 !== undefined}
                     onClose={() => this.setState({anker1: undefined})}
+                    orientering="over-høyre"
                 >
                     <p align="center">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
