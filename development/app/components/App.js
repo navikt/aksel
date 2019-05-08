@@ -44,7 +44,6 @@ export default class App extends React.Component {
                 </div>
                 <Popover
                     ankerEl={this.state.anker1}
-                    apen={this.state.anker1 !== undefined}
                     onClose={() => this.setState({anker1: undefined})}
                     orientering="over-høyre"
                 >
