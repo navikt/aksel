@@ -23,7 +23,7 @@ class Header extends React.Component {
     }
 
     render() {
-        return (
+        return [
             <header className="header">
                 <div className="header__content">
                     <NavLink to="/" className="header__logo">
@@ -34,10 +34,10 @@ class Header extends React.Component {
                     </NavLink>
                     <MobileNavToggle onClick={() => this.toggleMobileNav()} />
                     <MainNav />
-                    <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
                 </div>
-            </header>
-        );
+            </header>,
+            <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
+        ];
     }
 }
 
