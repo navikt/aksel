@@ -4,6 +4,7 @@ Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksiste
 slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
 
 ## TL;DR
+Støter **IKKE** siste verson av node, bruk node LTS verson 10.
 ```bash
 git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
@@ -15,7 +16,8 @@ npm start
 
 ## Utviklingsmiljø
 Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
-som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.
+som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.  
+Dette bygger **ikke** automatisk endringene på typskript komponentene.
 
 Se kommentarene i `/development/app/components/App.js` for mer info.
 
