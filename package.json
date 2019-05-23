@@ -71,7 +71,7 @@
     "file-loader": "^0.11.1",
     "gh-pages": "^1.0.0",
     "glob": "^7.1.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-babel": "^6.1.2",
     "gulp-cssfont64-formatter": "0.0.2",
     "gulp-insert": "^0.5.0",
