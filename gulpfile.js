@@ -180,10 +180,10 @@ configureSvgIcon({
     keepFillColor: true
 });
 
-gulp.task('test', test);
-gulp.task('buildJs', buildJs);
-gulp.task('buildTs', buildTs);
-gulp.task('build', ['buildJs', 'buildTs']);
-gulp.task('default', ['test', 'build']);
-gulp.task('buildicons', ['svg-icon']);
-gulp.task('buildfonts', buildCssfonts);
+gulp.task('test', gulp.series(test));
+gulp.task('buildJs', gulp.series(buildJs));
+gulp.task('buildTs', gulp.series(buildTs));
+gulp.task('build', gulp.series('buildJs', 'buildTs'));
+gulp.task('default', gulp.series('test', 'build'));
+gulp.task('buildicons', gulp.series('svg-icon'));
+gulp.task('buildfonts', gulp.series(buildCssfonts));
