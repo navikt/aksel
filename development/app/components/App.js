@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AlertStripeSuksess } from 'NavFrontendModules/nav-frontend-alertstriper';
 import { Hovedknapp, Fareknapp } from 'NavFrontendModules/nav-frontend-knapper';
 import Chevron from 'NavFrontendModules/nav-frontend-chevron';
+import Hjelpetekst from 'NavFrontendModules/nav-frontend-hjelpetekst';
 
 import './styles.less';
 
@@ -22,11 +23,10 @@ import './styles.less';
 export default class App extends Component {
     render() {
         return (
-            <div>
-                <AlertStripeSuksess>Heisann Hoppsann!</AlertStripeSuksess>
-                <Hovedknapp>Hovedknapp</Hovedknapp>
-                <Fareknapp>Fareknapp</Fareknapp>
-                <Chevron />
+            <div style={{paddingLeft:'100px', paddingTop:'15px'}}>
+                <Hjelpetekst>
+                    Hello this is a test for testing on the testers
+                </Hjelpetekst>
             </div>
         );
     }
