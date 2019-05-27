@@ -4,7 +4,6 @@ Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksiste
 slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
 
 ## TL;DR
-Støter **IKKE** siste verson av node, bruk node LTS verson 10.
 ```bash
 git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
