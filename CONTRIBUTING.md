@@ -15,8 +15,7 @@ npm start
 
 ## Utviklingsmiljø
 Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
-som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.  
-Dette bygger **ikke** automatisk endringene på typskript komponentene.
+som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.
 
 Se kommentarene i `/development/app/components/App.js` for mer info.
 
