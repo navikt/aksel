@@ -3,7 +3,7 @@ import resolveComponentRoutes from './routes.utils';
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
 
-import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
+import GenericSectionStart from '../../ui/containers/GenericSectionStart';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
 // import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
@@ -40,7 +40,7 @@ const routeConfig = [
     },
     {
         path: '/resources',
-        component: ResourcesMainPage,
+        component: GenericSectionStart,
         title: 'Ressurser',
         routes: [
             {
