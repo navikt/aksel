@@ -1,0 +1,37 @@
+.overflow-shadow() {
+    content: '';
+    position:absolute;
+    top:0px;
+    bottom:0px;
+    width:20px;
+    opacity:0.1;
+}
+
+.overflow-detector {
+	position: relative;
+
+	&__scroller {
+		overflow-x: scroll;
+	}
+
+	&__inner {
+		display: inline-block;
+		min-width: 100%;
+	}
+
+	&--shadow-left {
+		&:before {
+			.overflow-shadow();
+			left: 0px;
+      		background: linear-gradient(to right, rgba(0,0,0,1), transparent);
+		}
+	}
+
+	&--shadow-right {
+		&:after {
+			.overflow-shadow();
+			right: 0px;
+      		background: linear-gradient(to left, rgba(0,0,0,1), transparent);
+		}
+	}
+}

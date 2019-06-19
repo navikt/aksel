@@ -5,6 +5,8 @@ import Lenkepanel from 'NavFrontendModules/nav-frontend-lenkepanel';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 
+import OverflowDetector from '../../../components/overflow-detector/OverflowDetector';
+
 <!-- import './ui'; -->
 import './styles.less';
 
@@ -32,42 +34,44 @@ I følge Verdens helseorganisasjon lever omtrent [15 prosent av verdens befolkni
 
 ### Eksempler på funksjonshemninger
 
-<table className="tabell">
-	<thead>
-		<tr>
-			<th></th>
-			<th>Permanent</th>
-			<th>Midlertidig</th>
-			<th>Situasjonsbetinget</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th>Bevegelse</th>
-			<td>Én arm</td>
-			<td>Brukket arm</td>
-			<td>Nybakt forelder</td>
-		</tr>
-		<tr>
-			<th>Syn</th>
-			<td>Blind</td>
-			<td>Glemt briller</td>
-			<td>Uoppmerksom sjåfør</td>
-		</tr>
-		<tr>
-			<th>Hørsel</th>
-			<td>Døv</td>
-			<td>Øreinfeksjon</td>
-			<td>Bartender</td>
-		</tr>
-		<tr>
-			<th>Tale</th>
-			<td>Ikke-verbal</td>
-			<td>Laryngitt</td>
-			<td>Sterk aksent</td>
-		</tr>
-	</tbody>
-</table>
+<OverflowDetector>
+	<table className="tabell">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Permanent</th>
+				<th>Midlertidig</th>
+				<th>Situasjonsbetinget</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Bevegelse</th>
+				<td>Én arm</td>
+				<td>Brukket arm</td>
+				<td>Nybakt forelder</td>
+			</tr>
+			<tr>
+				<th>Syn</th>
+				<td>Blind</td>
+				<td>Glemt briller</td>
+				<td>Uoppmerksom sjåfør</td>
+			</tr>
+			<tr>
+				<th>Hørsel</th>
+				<td>Døv</td>
+				<td>Øreinfeksjon</td>
+				<td>Bartender</td>
+			</tr>
+			<tr>
+				<th>Tale</th>
+				<td>Ikke-verbal</td>
+				<td>Laryngitt</td>
+				<td>Sterk aksent</td>
+			</tr>
+		</tbody>
+	</table>
+</OverflowDetector>
 
 ## Lovkrav
 

@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import resolveComponentRoutes from './routes.utils';
 
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
@@ -6,17 +7,32 @@ import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMa
 import GenericSectionStart from '../../ui/containers/GenericSectionStart';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
-import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import NewProjectPage from '../../ui/containers/resources/new-project/NewProjectPage';
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
 import SubdomainsPage from '../../ui/containers/brand/subdomains/SubdomainsPage';
+import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
+
+/*
+    {
+        path: '/patterns',
+        component: GenericSectionStart,
+        title: 'Mønster',
+        routes: [
+            {
+                path: '/patterns/application',
+                component: NotFoundPage,
+                title: 'Søknad'
+            }
+        ]
+    },
+*/
 
 const routeConfig = [
     {
@@ -30,18 +46,6 @@ const routeConfig = [
         component: ComponentsMainPage,
         title: 'Komponenter',
         routes: componentRoutes
-    },
-    {
-        path: '/patterns',
-        component: GenericSectionStart,
-        title: 'Mønster',
-        routes: [
-            {
-                path: '/patterns/application',
-                component: NotFoundPage,
-                title: 'Søknad'
-            }
-        ]
     },
     {
         path: '/resources',
@@ -81,8 +85,8 @@ const routeConfig = [
         title: 'Tilgjengelighet',
         routes: [
             {
-                path: '/accessibility/intro',
-                component: AccessibilityPage,
+                path: '/accessibility/overview',
+                component: AccessibilityOverviewPage,
                 title: 'Tilgjengelighet i NAV'
             }
         ]
