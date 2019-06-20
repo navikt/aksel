@@ -107,10 +107,39 @@ Vi oppfordrer alle til å gjøre seg kjent med og bruke følgende ressurser akti
 
 ## Bruk designsystemet
 
-Ved å bruke Designsystemet får du mye gratis hjelp, og en bra start i både design- og utviklingsprosessen. Vi har lagt ned mye tid og arbeid for å sikre at alle komponentene og retningslinjene i Designsystemet er utformet i henhold til offentlige krav til universell utforming.
+Ved å bruke Designsystemet får du mye gratis hjelp, og en bra start i både design- og utviklingsprosessen. Vi har lagt ned mye tid og arbeid for å sikre at komponentene og retningslinjene i Designsystemet er utformet i henhold til offentlige krav til universell utforming. Besøk tilgjengelighets-fanen på de forskjellige [komponent-sidene](/components) for å lese mer om hvilke hensyn du bør være klar over for den enkelte komponent.
 
-Likevel er det mange ting vi
+Samtidig er det mange hensyn som ikke blir løst av designsystemet alene, og alle på teamet har et felles ansvar for å sikre at løsningene dere lager blir universelt utformet.
 
-## Rutiner
+## Tips for å unngå vanlige feil
 
 Dette er noen av de viktigste tingene du bør huske på for å unngå de vanligste feilene. Vær likevel bevisst på at disse punktene ikke er komplett.
+
+### For designere
+
+1.  Bruk aktuell versjon av [NAVs komponent- og illustrasjonsbibliotek i Sketch](/resources/new-project#for-designere) når du designer.
+2.  Design for grupper med spesielle behov («ytterkantene»). Spør deg selv: Hadde bestemoren min klart å bruke tjenesten? [Om inklusiv design (University of Cambridge)](http://www.inclusivedesigntoolkit.com/whatis/whatis.html)
+3.  Husk [god kontrast](/resources/colors/accessibility#krav-til-kontrast), både på tekst, interaktive elementer, grafer og illustrasjoner.
+4.  Husk [beskrivende alt-tekster](/accessibility/alt-text) på bilder, illustrasjoner og grafer.
+5.  Når [farge](/resources/colors/accessibility) benyttes for å gjøre informasjon tydeligere, skal du alltid bruke noe i tillegg til farge som formidler samme informasjon. Da vil innholdet også fungere for personer som ikke kan oppfatte farge, og man kan skrive ut i svart-hvitt uten at fremhevet informasjon blir borte.
+6.  Video: Husk å ha en tekstversjon som har samme innhold som videoen på siden, samt tekste video og bruk nyeste versjon av QBrick. Snart kommer en lovendring om at videoer også må være synstolket. Det betyr at man skal tilby en audiobeskrivelse av det som vises i videoen som ikke blir tydelig av selve lydsporet.
+7.  Språk og begreper: Skriv så forståelig som mulig og test teksten på reelle brukere. Bruk beskrivende overskrifter, deloverskrifter og punktlister der det er hensiktsmessig. Husk å ha en hovedoverskrift som beskriver hovedinnholdet på siden. Les mer om [tekst og struktur (Difi)]([https://uu.difi.no/krav-og-regelverk/losningsforslag-web/tekst-og-struktur) og våre [retningslinjer for språk](https://design.nav.no/resources/language)
+8.  Lenker: Skriv lenketekster slik at det er tydelig hvor lenken går. Ikke åpne lenker i ny fane/vindu. Se [retningslinjer for gode lenker](https://design.nav.no/components/lenke/accessibility).
+9.  Lag gode og [beskrivende feilmeldinger (Difi)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/feilhandtering)  og pass på at meldingene er i tråd med Designsystemet.
+10.  Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Sannergata (rom 5006).
+
+### For utviklere
+
+1.  Bruk [komponentene våre](/components).
+2.  Sjekk at koderekkefølgen gjenspeiler den visuelle rekkefølgen.
+3.  Test at alt kan betjenes med tastatur og at fokusmarkering flyttes i forventet rekkefølge.
+4.  Bruk de [semantiske egenskapene i HTML (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Semantics).
+5.  Sjekk at du har med [hopp-lenkene (W3)](https://www.w3.org/TR/WCAG21/#bypass-blocks) og at de fungerer.
+6.  Sjekk at du har med [riktig &lt;title&gt; (W3)](https://www.w3.org/TR/WCAG21/#page-titled). Formen skal være `[hovedinnhold/overskrift på siden] -  www.nav.no`
+7.  Pass på riktig [overskriftshierarki (Difi)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/tekst-og-struktur)
+8.  Sjekk at HTMLen din [validerer (W3)](https://validator.w3.org).
+9.  Bruk [WAI-Aria (W3)](https://www.w3.org/WAI/standards-guidelines/aria) der standard HTML ikke er tilstrekkelig, for eksempel på [feilmeldinger](https://www.w3.org/TR/WCAG21/#status-messages)
+10.  Bruk [automatiserte testverktøy](/accessibility/tools) aktivt og ofte.
+11.  Test med skjermleser på egen hånd. Med for eksempel [ChromeVox](https://www.chromevox.com), [VoiceOver på Mac](https://webaim.org/articles/voiceover/), eller [TalkBack på Android](https://support.google.com/accessibility/android/answer/6283677?hl=en) er dette enklere enn du tror.
+12.  Hvis mulig, bruk [NAV-ally](https://www.npmjs.com/package/nav-ally) i utviklingsprosessen.
+13.  Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Sannergata (rom 5006).
