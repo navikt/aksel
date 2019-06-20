@@ -12,6 +12,7 @@ import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
 import SubdomainsPage from '../../ui/containers/brand/subdomains/SubdomainsPage';
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
+import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 
 import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
@@ -88,6 +89,11 @@ const routeConfig = [
                 path: '/accessibility/overview',
                 component: AccessibilityOverviewPage,
                 title: 'Tilgjengelighet i NAV'
+            },
+            {
+                path: '/accessibility/alt-text',
+                component: AccessibilityAltTextPage,
+                title: 'Alt-tekster'
             }
         ]
     },
