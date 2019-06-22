@@ -1,0 +1,41 @@
+@import (reference) '~NavFrontendCore/less/_variabler';
+
+.dodont {
+	display:grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 0.5rem;
+
+	.dodont__label {
+		padding:0.25rem 0.5rem 0.5rem;
+	}
+
+	.example {
+		margin: 0;
+
+		&__inner {
+			padding: 1rem;
+		}
+	}
+
+	.dodont__do {
+		.example {
+			border: 4px solid @navGronnLighten20;
+		}
+
+		.dodont__label {
+			background: @navGronnLighten20;
+			color: white;
+		}
+	}
+
+	.dodont__dont {
+		.example {
+			border: 4px solid @navRod;
+		}
+
+		.dodont__label {
+			background: @navRod;
+			color: white;
+		}
+	}
+}

@@ -6,6 +6,7 @@ import { NAVLogo, W3CLogo } from '../../../../assets/images/svg';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import AltDecisionTree from '../../../../assets/images/alt-decision-tree.png';
 import Example from '../../../components/example/Example';
+import { DoDont, Do, Dont } from '../../../components/do-dont/DoDont';
 
 import './styles.less';
 
@@ -33,9 +34,23 @@ En alt-tekst (kort for alternativ tekst) er en tekst som vises eller leses opp n
 
 Bilder som ikke er meningsbærende (for eksempel bare til pynt eller overflødig) skal ikke ha noe alt-text, men <strong>husk</strong> å gi dem et tomt alt-attributt:
 
-```jsx
-<img src="pynt.jpg" alt="" />
-```
+<DoDont>
+	<Do>
+		<pre class="language-jsx">
+			<code class=" language-jsx">
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pynt.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+			</code>
+		</pre>
+	</Do>
+	<Dont>
+		<pre class="language-jsx">
+			<code class=" language-jsx">
+				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pynt.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
+			</code>
+		</pre>
+	</Dont>
+</DoDont>
+
 <br/>
 <Alertstripe type="advarsel">
 	Skjermlesere trenger et tomt alt-attributt for å vite at de skal ignorere bildet. For bilder uten alt-attributt er det fare for at skjermlesere leser opp kilde-attributtet i stedet.
