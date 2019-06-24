@@ -80,15 +80,15 @@ samme som er definert i rot-mappen
 
 ## Bruk av TypeScript
 
-Når man kjører guidelineappen eller eksempelappen, så blir ikke filer skrevet i 
-TypeScript (.ts og .tsx filer) kompilert automatisk. Det anbefales å kjøre en 
-typescriptkompiler i et separat konsoll. Hvis man for eksempel jobber med 
-filen `bekreft-checkboks-panel.tsx`, så kan man kjøre disse kommandoene for 
-å få automatisk filene transpilert til javascript.
+Ettersom Typescript-kompilatoren ikke støtter Lerna-baserte prosjekt-strukturer (se [issue #230](https://github.com/navikt/nav-frontend-moduler/issues/230)) er det dessverre ikke noe auto-transpilering av Typescript-filer ut-av-boksen når man kjører utviklingsmiljøet eller guideline-appen. Inntil videre er man nødt til å ordne dette selv ved å kjøre Typescript-kompilatoren manuelt på de filene man jobber på.
+
+Hvis man for eksempel jobber med filen `bekreft-checkboks-panel.tsx` kan man sette opp "watching" og automatisk transpilering til javascript på denne måten:
 
 * `npm install typescript -g`
 * `cd nav-frontend-moduler\packages\node_modules\nav-frontend-skjema`
-* `tsc -w -d src/bekreft-checkboks-panel.tsx --jsx react --outDir lib`
+* `tsc -w -d src/bekreft-checkboks-panel.tsx --jsx react --outDir lib --lib DOM,ES2015,ES2016,ES2017`
+
+Forklaringer på argumentene til Typescript-kompilatoren i dette eksempelet kan du finne [her](https://www.typescriptlang.org/docs/handbook/compiler-options.html). Argumentene bak `--lib` på slutten speiler [prosjektet sin tsconfig](https://github.com/navikt/nav-frontend-moduler/blob/master/tsconfig.json#L14), og sørger for at du får samme validering som ved ordinært bygg.
 
 ## Byggemiljø
 Det er satt opp et [Travis-bygg](https://travis-ci.org/navikt/nav-frontend-moduler) for repoet.
