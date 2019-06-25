@@ -1,5 +1,6 @@
 import React from 'react';
 import Example from '../example/Example';
+import { SuccessIcon, ErrorIcon } from '../../../assets/images/svg';
 
 import './styles.less';
 
@@ -11,22 +12,18 @@ export const DoDont = (props) => (
 
 export const Do = (props) => (
 	<div className="dodont__do">
-		<Example>
-			{props.children}
-		</Example>
+		{props.children}
 		<div className="dodont__label">
-			Gjør dette
+			<SuccessIcon /> Gjør dette
 		</div>
 	</div>
 );
 
 export const Dont = (props) => (
 	<div className="dodont__dont">
-		<Example>
-			{props.children}
-		</Example>
+		{props.children}
 		<div className="dodont__label">
-			Ikke gjør dette
+			<ErrorIcon /> Ikke gjør dette
 		</div>
 	</div>
 );

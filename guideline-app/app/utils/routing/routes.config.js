@@ -77,6 +77,11 @@ const routeConfig = [
                 path: '/resources/language',
                 component: LanguagePage,
                 title: 'Slik skriver vi'
+            },
+            {
+                path: '/resources/subdomains',
+                component: SubdomainsPage,
+                title: 'Subdomener'
             }
         ]
     },
@@ -94,18 +99,6 @@ const routeConfig = [
                 path: '/accessibility/alt-text',
                 component: AccessibilityAltTextPage,
                 title: 'Alt-tekster'
-            }
-        ]
-    },
-    {
-        path: '/brand',
-        component: GenericSectionStart,
-        title: 'Merkevare',
-        routes: [
-            {
-                path: '/brand/subdomains',
-                component: SubdomainsPage,
-                title: 'Subdomener'
             }
         ]
     },

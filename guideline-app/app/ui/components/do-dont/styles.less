@@ -6,36 +6,47 @@
 	column-gap: 0.5rem;
 
 	.dodont__label {
-		padding:0.25rem 0.5rem 0.5rem;
-	}
+		padding:0.5rem;
+		display:flex;
+		align-items:center;
 
-	.example {
-		margin: 0;
-
-		&__inner {
-			padding: 1rem;
+		svg {
+			width:1.5rem;
+			height:1.5rem;
+			margin-right:0.5rem;
 		}
 	}
+
+	// .example {
+	// 	margin: 0;
+
+	// 	&__inner {
+	// 		padding: 1rem;
+	// 	}
+	// }
 
 	.dodont__do {
-		.example {
-			border: 4px solid @navGronnLighten20;
-		}
+		// .example {
+		// 	border: 4px solid #1C6937;
+		// }
 
 		.dodont__label {
-			background: @navGronnLighten20;
-			color: white;
+			border-top: 4px solid #1C6937;
+			// margin-top: 0.5rem;
+			// padding-top:0.5rem;
+
 		}
 	}
 
 	.dodont__dont {
-		.example {
-			border: 4px solid @navRod;
-		}
+		// .example {
+		// 	border: 4px solid #A13A28;
+		// }
 
 		.dodont__label {
-			background: @navRod;
-			color: white;
+			border-top: 4px solid #A13A28;
+			// margin-top: 0.5rem;
+			// padding-top:0.5rem;
 		}
 	}
 }
