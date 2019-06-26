@@ -12,6 +12,9 @@ class OverflowDetector extends React.Component {
     constructor(props) {
         super(props);
 
+        this.scroller = React.createRef();
+        this.inner = React.createRef();
+
         this.state = {
             overflowLeft: false,
             overflowRight: false
@@ -53,11 +56,11 @@ class OverflowDetector extends React.Component {
                 <div
                     className="overflow-detector__scroller"
                     onScroll={this.checkOverflow}
-                    ref={(scroller) => this.scroller = scroller}
+                    ref={this.scroller}
                 >
                     <div
                         className="overflow-detector__inner"
-                        ref={(inner) => this.inner = inner}
+                        ref={this.inner}
                     >
                         {this.props.children}
                     </div>

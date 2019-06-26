@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router-dom';
 import resolveComponentRoutes from './routes.utils';
 
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
@@ -14,26 +13,9 @@ import SubdomainsPage from '../../ui/containers/brand/subdomains/SubdomainsPage'
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
-
-import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
-
-/*
-    {
-        path: '/patterns',
-        component: GenericSectionStart,
-        title: 'Mønster',
-        routes: [
-            {
-                path: '/patterns/application',
-                component: NotFoundPage,
-                title: 'Søknad'
-            }
-        ]
-    },
-*/
 
 const routeConfig = [
     {
