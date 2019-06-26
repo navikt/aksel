@@ -23,6 +23,37 @@ a {
   }
 }
 
+blockquote {
+  background: #f4f4f4;
+  font-style: italic;
+  margin: 1.5rem 0;
+  padding: 1.5rem 3.5rem;
+  position:relative;
+
+  &:before, &:after {
+    position:absolute;
+    font-size:3rem;
+    line-height:1rem;
+  }
+
+  &:before {
+    content:'“';
+    top:2rem;
+    left:1.5rem;
+  }
+
+  &:after {
+    content:'”';
+    bottom:1rem;
+    right:1.5rem;
+  }
+  
+  cite {
+    display:block;
+    margin-top:1rem;
+  }
+}
+
 p, .typo-normal {
   line-height: 1.375rem;
 
