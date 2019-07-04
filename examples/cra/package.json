@@ -15,7 +15,8 @@
     "nav-frontend-typografi-style": "^1.0.10",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
-    "react-scripts": "^3.0.0"
+    "react-scripts": "^3.0.0",
+    "snyk": "^1.189.0"
   },
   "scripts": {
     "start:js": "react-scripts start",
@@ -25,7 +26,9 @@
     "start": "npm-run-all -p start:*",
     "build": "npm run build:css && npm run build:js",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "devDependencies": {
     "less": "^3.5.2",
@@ -38,5 +41,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "snyk": true
 }
