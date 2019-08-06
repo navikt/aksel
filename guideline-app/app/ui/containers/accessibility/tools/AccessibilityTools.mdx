@@ -19,157 +19,40 @@ import A11yWave from '../../../../assets/images/a11y-wave.png';
 	<strong>VIKTIG!</strong> Før du tar i bruk noen av verktøyene nedenfor, må du huske at sikkerhet og personvern SKAL ivaretas. Sørg derfor for at du tester på testmiljøer og lignende som har fiktiv testdata. En av grunnene til dette er at noen av utvidelsene til nettlesere KAN sende data til servere utenfor NAV.
 </Alertstripe>
 
-## Testing med skjermleser
+## Manuell testing med skjermleser
 
 Det finnes flere forskjellige skjermlesere. Vi anbefaler at du tester med en eller flere skjermlesere, og at du i tillegg brukertester med noen som bruker skjermleser til daglig.
 
-### Voice over
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/5R-6WvAihms" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
-<br/>
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/bCHpdjvxBws" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
+- [**Voice over**](https://webaim.org/articles/voiceover/) - Gratis innebygd skjermleser på Mac og iPhone.
+- [**JAWS**](https://webaim.org/articles/jaws/) - Den mest populære skjermleseren til Windows. Kan være kostbar. Standard-skjermleser til våre interne ansatte på jobb.
+- [**NVDA**](https://webaim.org/articles/nvda/) - Populær og gratis skjermleser til Windows.
+-  [**TalkBack**](https://support.google.com/accessibility/android/answer/6283677?hl=en) - Gratis skjermleser til Android.
 
--   [Using VoiceOver to Evaluate Web Accessibility](https://webaim.org/articles/voiceover/)
--   Innebygd (gratis) skjermleser i Mac / iPhone
+## Automatisk analyse
 
-### NVDA
-
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/Jao3s_CwdRU" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
-
--   [Using NVDA to Evaluate Web Accessibility](https://webaim.org/articles/nvda/)
--   [Download NVDA](https://www.nvaccess.org/)
-
-### JAWS
--   Mye brukt. Standard-skjermleser til våre interne ansatte på jobb.
--   [Using JAWS to Evaluate Web Accessibility](https://webaim.org/articles/jaws/)
-
-### TalkBack
-
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/0Zpzl4EKCco" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
-
--   Gratis skjermleser på android-telefoner
-
-## Validering av kode mot W3C-standarder
-
-### Chrome DevTools (F12)
-
-<img src={A11yDevtools} alt="Chrome DevTools på nav.no" />
-
--   Chrome DevTools er et sett med webutviklerverktøy som ligger integrert i Google Chrome-nettleseren.
--   DevTools kan hjelpe deg med å redigere/manipulere en hvilken som helst nettside/tjeneste og raskt diagnostisere problemer.
--   Kan bygges ut med diverse andre utvidelser.
--   Gratis
-
-### Audits/Lighthouse (aXe)
-
-<img src={A11yLighthouse1} alt="Lighthouse på nav.no" />
-<img src={A11yLighthouse2} alt="Lighthouse resultatdashboard" />
-
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/b0Q5Zp_yKaU" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
-
--   Lighthouse er åpen kildekode og et automatisert verktøy for å forbedre kvaliteten på nettsidene, både åpen og bak innlogging. Du kan kjøre verktøyet mot en hvilken som helst nettside. Den har evalueringsmuligheter for ytelse, tilgjengelighet/uu, progressive webapps, beste praksis, søkemotoroptimalisering for både mobile enheter og desktop.
--   Du kan kjøre Lighthouse i Chrome DevTools, fra kommandolinjen, eller som en nodemodul. Du gir Lighthouse en URL for å revidere, den kjører en del sjekker mot siden, og så genererer den en rapport som inneholder hvor godt siden gjorde det. Derfra bruker du de revisjonene som indikatorer på hvordan du kan forbedre siden. Hvert revisjon har en referansedokument som forklarer hvorfor revisjonen er viktig, samt hvordan det skal løses.
--   Gratis
--   [Download Lighthouse (axe, for chrome)](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk)
-
-### Web Developer Toolbar
--   Toolbar med et hav av muligheter til å manipulere og konfigurere løsningen.
--   Gratis
--   [Download Web Developer Toolbar (for chrome)](https://chrome.google.com/webstore/detail/web-developer-toolbar/deeboegbjcnfgidliakhpoapnpomphji)
-
-### ARC Toolkit
-
-<img src={A11yArc1} alt="ARC Toolkit på foreldrepengersiden" />
-<img src={A11yArc2} alt="ARC viser overskriftsstruktur på foreldrepengersiden" />
-
--   Gir både oversikt og man kan gå i dybden
--   Mulighet for å teste reflow og text spacing (WCAG 2.1)
--   Gratis
--   [Download ARC Toolkit (for chrome)](https://chrome.google.com/webstore/detail/arc-toolkit/chdkkkccnlfncngelccgbgfmjebmkmce)
-
-### Visual Aria
-
-<img src={A11yVisualaria} alt="Visual Aria på nav.no" />
-
--   Viser ARIA som brukes i webteknologi, inkludert live region og widget roles, riktig nesting og fokushåndtering.
--   Gratis
--   [Download Visual Aria (for chrome)](https://chrome.google.com/webstore/detail/visual-aria/lhbmajchkkmakajkjenkchhnhbadmhmk)
-
-### WAVE
-
-<img src={A11yWave} alt="WAVE på nav.no" />
-
--   Evaluerer tilgjengelighet direkte i en nettside
--   Veldig visuell
--   Gratis
--   [Download WAVE](https://wave.webaim.org/)
-
-### AXE Coconut
-
-<div className="video-container">
-	<iframe className="video" src="https://www.youtube.com/embed/1uyQdC3LqLo" frameBorder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
-</div>
-
--   fra Deque, kjøpt opp av Google
--   Tilgjengelighetstesting i Chrome Developer Tools
--   Gratis
--   Kan også teste shadow dom
--   [Download Axe Coconut (for chrome)](https://chrome.google.com/webstore/detail/axe-coconut/iobddmbdndbbbfjopjdgadphaoihpojp)
-
-### SortSite
-
-<img src={A11ySortsite} alt="SortSite på nav.no" />
-
--   Godt verktøy for validering av grensesnittkode opp mot W3C-standarder som WCAG 2.0/2.1, HTML5, CSS3, etc. Gir en god oversikt sammen med en god beskrivelse av hva som er feil, hvor feilen er og hvordan den kan fikses.
--   Pris ca NOK 8000,- per lisens
-
-### SiteImprove
--   Godt verktøy som gir deg en lettfattelig og god oversikt over problemer og forbedringsområder. Som f.eks. dårlig kodekvalitet og kvalitetsfeil som brutte lenker og stavefeil, kontrastforhold som er for dårlig, m.m. Verktøy tester opp mot W3Cs standarder som f.eks. HTML5 og WCAG 2.0/2.1 og man kan filtrere funnene på roller (utvikler, redaktør, etc). God beskrivelse for hva som er feil og hvordan det kan fikses.
--   Ikke gratis
-
-### SiteImprove Accessibility Checker
-
-<img src={A11ySiteimprove} alt="SiteImprove på nav.no" />
-
-- Bra verktøy for å vurdere en nettside opp mot WCAG.
--   Gratis
--   [Download Siteimprove Accessibility Checker (for chrome)](https://chrome.google.com/webstore/detail/siteimprove-accessibility/efcfolpjihicnikpmhnmphjhhpiclljc)
-
-### Total Validator Pro
-
-<img src={A11yTotalvalidator1} alt="Total Validator rapport" />
-<img src={A11yTotalvalidator2} alt="Innstillinger Total Validator Pro" />
-
--   Har vært ett av de bedre verktøyet til validering av kildekode og støtte for universell utforming.
--   [Download Total Validator](http://www.totalvalidator.com/)
--   Pro-versjonen til kr 250,- (NAV har 30 lisenser)
-
-### HTML Validator for Mozilla Firefox
--   Verktøylinje (toolbar) for Mozilla Firefox som legger til HTML validering i Vis kildekode i nettleseren. Valideringen gjøres av Tidy fra W3C.
--   [Download HTML Validator for Firefox](https://addons.mozilla.org/en-US/firefox/addon/249)
-
-### Adobe Acrobat DC (PDF)
--   Validering av PDF-skjema opp mot W3C standarder som WCAG 2.0/2.1 (Verktøy>Tilgjengelighet>Tilgjengelighetskontroll eller Full kontroll. NAV har lisenser på dette. [Mer info om tilgjengelighetskontroll Adobe Acrobat DC](https://helpx.adobe.com/no/acrobat/user-guide.html?topic=/no/no/acrobat/morehelp/accessibility_tags_and_reflow.ug.js)
+- [**Chrome DevTools**](https://developers.google.com/web/tools/chrome-devtools/) - gratis sett med webutviklerverktøy som ligger integrert i Google Chrome-nettleseren. Kan hjelpe deg med å redigere/manipulere en hvilken som helst nettside/tjeneste og raskt diagnostisere problemer. 
+- [**Lighthouse**](https://developers.google.com/web/tools/lighthouse/) (del av Chrome DevTools) - gir rask og detaljert analyse av nettsider med kriterier for ytelse, tilgjengelighet, progressive webapps, beste praksis, søkemotoroptimalisering for både mobile og desktop. Kan kjøres rett i Chrome DevTools, fra kommandolinjen, eller som en nodemodul
+- **Web Developer Toolbar** ([Chrome](https://chrome.google.com/webstore/detail/web-developer-toolbar/deeboegbjcnfgidliakhpoapnpomphji)/[Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-developer/)) - gratis utvidelse med et hav av muligheter til å manipulere og validere nettsider.
+- [**ARC Toolkit**](https://chrome.google.com/webstore/detail/arc-toolkit/chdkkkccnlfncngelccgbgfmjebmkmce) - gratis utvidelse til Chrome med rike verktøy for å teste opp mot WCAG 2.0, WCAG 2.1, EN 301 549, Section 508.
+- [**Visual Aria**](https://chrome.google.com/webstore/detail/visual-aria/lhbmajchkkmakajkjenkchhnhbadmhmk) - gratis utvidelse til Chrome som gir en visuell oversikt over ARIA-attributter som brukes på en nettside, inkludert live regioner, roller, nøsting og fokushåndtering.
+- [**WAVE**](https://wave.webaim.org/) - gratis utvidelse til Chrome og Firefox som evaluerer tilgjengeligheten på nettsider og gir en veldig visuell tilbakemelding.
+- [**AXE Coconut**](https://chrome.google.com/webstore/detail/axe-coconut/iobddmbdndbbbfjopjdgadphaoihpojp) - gratis utvidelse for Chrome
+- [**SortSite**](https://www.powermapper.com/products/sortsite/) - godt verktøy for validering av grensesnittkode opp mot W3C-standarder som WCAG 2.0/2.1, HTML5, CSS3, etc. Gir en god oversikt sammen med en god beskrivelse av hva som er feil, hvor feilen er og hvordan den kan fikses. Pris ca NOK 8000,- per lisens.
+- [**SiteImprove**](https://siteimprove.com/nb-no/) - godt verktøy som gir deg en lettfattelig og god oversikt over problemer og forbedringsområder. Som f.eks. dårlig kodekvalitet og kvalitetsfeil som brutte lenker og stavefeil, kontrastforhold som er for dårlig, m.m. Verktøy tester opp mot W3Cs standarder som f.eks. HTML5 og WCAG 2.0/2.1 og man kan filtrere funnene på roller (utvikler, redaktør, etc). God beskrivelse for hva som er feil og hvordan det kan fikses.
+- [**Total Validator Pro**](http://www.totalvalidator.com/) - et av de bedre verktøyene til validering av kildekode og støtte for universell utforming. Pro-versjonen til kr 250,- (NAV har 30 lisenser).
+- [**Adobe Acrobat DC (PDF)**](https://helpx.adobe.com/no/acrobat/user-guide.html?topic=/no/no/acrobat/morehelp/accessibility_tags_and_reflow.ug.js) - validering av PDF-skjema opp mot W3C standarder som WCAG 2.0/2.1 (Verktøy>Tilgjengelighet>Tilgjengelighetskontroll eller Full kontroll. NAV har lisenser på dette.
 
 ## Lese- og skrivevansker
--   Dyslexia Formatter, gjør det enklere å tilegne seg informasjon og bruke nettbaserte tjenester for folk med dysleksi
--   Gratis
--   [Download Dyslexia Formatter (for chrome)](https://chrome.google.com/webstore/detail/dyslexia-formatter/kggkghfhlppjclojgphbploiaipgogoc)
+
+- [**Dyslexia Formatter**](https://chrome.google.com/webstore/detail/dyslexia-formatter/kggkghfhlppjclojgphbploiaipgogoc) - gratis utvidelse til Chrome som gjør det enklere å tilegne seg informasjon og bruke nettbaserte tjenester for folk med dysleksi
 
 ## Kontrastforhold
--   [http://contrastchecker.com/](http://contrastchecker.com/)  - her kan du legge inn fargekodene dine og få et konkret svar om kontrastforholdet er i tråd med WCAG-kravene. Du kan også se gråtoner som fargeblind (arkfaner øverst til høyre). Gratis
--   [https://webaim.org/resources/contrastchecker/](https://webaim.org/resources/contrastchecker/). Gratis
--   [http://accessible-colors.com/](http://accessible-colors.com/). Gratis
+
+-   [**http://contrastchecker.com/**](http://contrastchecker.com/)  - her kan du legge inn fargekodene dine og få et konkret svar om kontrastforholdet er i tråd med WCAG-kravene. Du kan også se gråtoner som fargeblind (arkfaner øverst til høyre)
+-   [**https://webaim.org/resources/contrastchecker/**](https://webaim.org/resources/contrastchecker/)
+-   [**http://accessible-colors.com/**](http://accessible-colors.com/)
 
 ## Mobil- og nettleserkompatibilitet
--   BrowserStack - Instant access to 1200+ real mobile devices and browsers. Ship mobile apps and websites that work for everyone, every time… Lisenser kjøpt inn. Ikke gratis
--   Sauce Labs - tester om løsningen fungerer på kjente nettlesere, operativsystem og enheter. Lisenser på gang. Ikke gratis
+
+-   [**BrowserStack**](https://www.browserstack.com) - Instant access to 1200+ real mobile devices and browsers. Ship mobile apps and websites that work for everyone, every time… Lisenser kjøpt inn. Ikke gratis
+-   [**Sauce Labs**](https://saucelabs.com) - tester om løsningen fungerer på kjente nettlesere, operativsystem og enheter. Lisenser på gang. Ikke gratis
