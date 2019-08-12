@@ -10,6 +10,7 @@ import NewProjectPage from '../../ui/containers/resources/new-project/NewProject
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
 import SubdomainsPage from '../../ui/containers/resources/subdomains/SubdomainsPage';
+import InternalUXPrinciplesPage from '../../ui/containers/resources/internal-ux-principles/InternalUXPrinciplesPage';
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
@@ -64,6 +65,11 @@ const routeConfig = [
                 path: '/resources/subdomains',
                 component: SubdomainsPage,
                 title: 'Subdomener'
+            },
+            {
+                path: '/resources/internal-ux-principles',
+                component: InternalUXPrinciplesPage,
+                title: 'Prinsipper for brukeropplevelse på interne flater'
             }
         ]
     },
