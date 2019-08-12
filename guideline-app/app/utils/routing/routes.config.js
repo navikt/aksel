@@ -58,7 +58,7 @@ const routeConfig = [
             {
                 path: '/resources/language',
                 component: LanguagePage,
-                title: 'Slik skriver vi'
+                title: 'Språk'
             },
             {
                 path: '/resources/subdomains',
