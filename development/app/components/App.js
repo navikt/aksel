@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AlertStripeSuksess } from 'NavFrontendModules/nav-frontend-alertstriper';
 import KnappBase, { Knapp, Hovedknapp, Fareknapp, Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 import Chevron from 'NavFrontendModules/nav-frontend-chevron';
+import { Hamburgerknapp, Menyknapp } from 'NavFrontendModules/nav-frontend-ikonknapper';
 
 import './styles.less';
 
@@ -25,6 +26,9 @@ export default class App extends Component {
     render() {
         return (
             <div>
+                <Hamburgerknapp />
+                <Menyknapp />
+                <br/><br/>
                 <AlertStripeSuksess>Heisann Hoppsann!</AlertStripeSuksess>
                 <Hovedknapp>Hovedknapp</Hovedknapp>
                 <Fareknapp>Fareknapp</Fareknapp>
