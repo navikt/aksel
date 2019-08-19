@@ -93,7 +93,7 @@
         "lesshint": "^3.1.0",
         "lesshint-reporter-stylish": "^2.0.1",
         "lessvars": "0.0.5",
-        "lodash.throttle": "^4.1.1",
+        "lodash": "^4.1.1",
         "markdown-magic": "^0.1.19",
         "merge2": "^1.2.0",
         "mustache": "^2.3.0",
