@@ -2,10 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
 
-const vendors = [
-    'react',
-    'react-dom'
-];
+const vendors = ['react', 'react-dom'];
 
 const GlobalWebpackConfig = {
     devServer: {
@@ -24,10 +21,7 @@ const GlobalWebpackConfig = {
         rules: [
             {
                 test: /\.html$/,
-                use: [
-                    { loader: 'html-loader' },
-                    { loader: 'file-loader' }
-                ]
+                use: [{ loader: 'html-loader' }, { loader: 'file-loader' }]
             },
             {
                 test: /\.jsx?$/,
@@ -48,6 +42,19 @@ const GlobalWebpackConfig = {
                     { loader: 'css-loader' },
                     { loader: 'less-loader' }
                 ]
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i,
+                use: [
+                    'file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true // webpack@2.x and newer
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -63,8 +70,14 @@ const GlobalWebpackConfig = {
             })
         ],
         alias: {
-            NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules'),
-            NavFrontendCore: path.resolve(__dirname, './../../packages/node_modules/nav-frontend-core')
+            NavFrontendModules: path.resolve(
+                __dirname,
+                './../../packages/node_modules'
+            ),
+            NavFrontendCore: path.resolve(
+                __dirname,
+                './../../packages/node_modules/nav-frontend-core'
+            )
         }
     },
     plugins: [
