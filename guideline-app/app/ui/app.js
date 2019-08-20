@@ -5,11 +5,9 @@ import { Provider } from 'react-redux';
 import store from './../redux';
 import App from './containers/app/App';
 
-const basename = (window.location.hostname === 'localhost') ? undefined : 'dev/nav/ikonknapp';
-
 render(
     <Provider store={store}>
-        <Router basename={basename}>
+        <Router>
             <App />
         </Router>
     </Provider>,
