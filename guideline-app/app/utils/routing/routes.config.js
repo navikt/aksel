@@ -13,6 +13,7 @@ import SubdomainsPage from '../../ui/containers/resources/subdomains/SubdomainsP
 import InternalUXPrinciplesPage from '../../ui/containers/resources/internal-ux-principles/InternalUXPrinciplesPage';
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
+import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
@@ -87,6 +88,11 @@ const routeConfig = [
                 path: '/accessibility/alt-text',
                 component: AccessibilityAltTextPage,
                 title: 'Alt-tekster'
+            },
+            {
+                path: '/accessibility/tools',
+                component: AccessibilityToolsPage,
+                title: 'Verktøy for UU-testing'
             }
         ]
     },
