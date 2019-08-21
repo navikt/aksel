@@ -3,6 +3,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 import { Innholdstittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
+import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
 
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
 import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
@@ -40,11 +41,13 @@ class ComponentMainPage extends React.Component {
             <Innholdstittel>
                 <TitleByRoute routes={this.props.routes} />
             </Innholdstittel>
+            <EtikettFokus>Beta</EtikettFokus>
             <SubRoutesWrapper routes={this.props.routes} />
         </article>
         )
 
     render() {
+        console.log(this.props);
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
