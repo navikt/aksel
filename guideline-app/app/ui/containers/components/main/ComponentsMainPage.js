@@ -34,20 +34,15 @@ class ComponentMainPage extends React.Component {
                     }
             </div>
         </article>
-        )
+    );
 
     renderComponentSubRouteContent = () => (
         <article className="mainContent">
-            <Innholdstittel>
-                <TitleByRoute routes={this.props.routes} />
-            </Innholdstittel>
-            <EtikettFokus>Beta</EtikettFokus>
             <SubRoutesWrapper routes={this.props.routes} />
         </article>
-        )
+    );
 
     render() {
-        console.log(this.props);
         return (
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />

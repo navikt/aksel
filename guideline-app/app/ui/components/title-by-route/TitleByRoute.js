@@ -11,7 +11,7 @@ const TitleByRoute = (props) => props.routes.filter((route) => route.path).map((
                 () => route.title
             }
     />
-    ));
+));
 
 TitleByRoute.propTypes = {
     routes: PT.arrayOf(PT.shape).isRequired
