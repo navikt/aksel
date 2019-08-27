@@ -1,7 +1,22 @@
+@import (reference) '~NavFrontendCore/less/_variabler';
+
 .componentGuidelinePage {
+  > .alertstripe {
+    border-radius: 0;
+    position:absolute;
+    top: 0;
+    left: 300px;
+    right: 0;
+    z-index: 2;
+  }
+
   .componentTitle {
     display: flex;
     align-items: center;
+    
+    &--beta {
+      margin-top: 2.5rem;
+    }
 
     .etikett {
       margin-left: 1rem;

@@ -2,8 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
-import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
-import { Systemtittel, Undertittel, Normaltekst } from 'NavFrontendModules/nav-frontend-typografi';
+import { EtikettFokus, EtikettInfo } from 'NavFrontendModules/nav-frontend-etiketter';
+import { Systemtittel, Undertittel, Normaltekst, Undertekst } from 'NavFrontendModules/nav-frontend-typografi';
 
 import TitleByRoute from '../title-by-route/TitleByRoute';
 import routeConfig from './../../../utils/routing/routes.config';
@@ -11,6 +11,14 @@ import routeConfig from './../../../utils/routing/routes.config';
 import './styles.less';
 
 /* <EtikettFokus>Beta</EtikettFokus> */
+/* <EtikettInfo>Beta</EtikettInfo> */
+/* <span className="dot dot-warn">Beta</span> */
+
+const betaLabel = (item) => {
+    if (!item['data']) return;
+    if (item.data.manifest.version.indexOf('beta') === -1) return;
+    return (<EtikettInfo><Undertekst>Beta</Undertekst></EtikettInfo>);
+};
 
 const LeftNavigation = (props) => (
     <aside className="leftNavigation">
@@ -26,10 +34,7 @@ const LeftNavigation = (props) => (
                                     to={item.path}
                                 >
                                     { item.title }
-                                    { 
-                                        (item.data.manifest.version.indexOf('beta') !== -1) &&
-                                        <span className="dot dot-warn">Beta</span>
-                                    }
+                                    { betaLabel(item) }
                                 </NavLink>
                             </li>
                         )
