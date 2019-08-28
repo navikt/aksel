@@ -23,14 +23,12 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <Alertstripe type="suksess">
-                        <Undertittel>Utviklingsmiljø kjører!</Undertittel>
-                    </Alertstripe>
-                    <br/>
-                    <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
-                    <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
-                </div>
+                <Alertstripe type="suksess">
+                    <Undertittel>Utviklingsmiljø kjører!</Undertittel>
+                </Alertstripe>
+                <br/>
+                <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
+                <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
             </div>
         );
     }
