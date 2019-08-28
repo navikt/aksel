@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
-import Ikon from 'NavFrontendModules/nav-frontend-ikoner-assets';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
