@@ -10,7 +10,7 @@ import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
 import './styles.less';
 
-class IllustrationPage extends React.Component {
+class IconPage extends React.Component {
     constructor(props) {
         super(props);
         this.tabs = [
@@ -39,4 +39,4 @@ class IllustrationPage extends React.Component {
     }
 }
 
-export default IllustrationPage;
+export default IconPage;
