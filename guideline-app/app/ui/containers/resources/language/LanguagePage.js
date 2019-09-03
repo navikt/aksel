@@ -43,7 +43,8 @@ class LanguagePage extends React.Component {
             <React.Fragment>
                 <Innholdstittel>Språk</Innholdstittel>
                 <Ingress className="intro">
-                    Her finner du generelle tips og råd som er viktige for at flest mulig skal kunne finne og forstå teksten din.
+                    Her finner du generelle tips og råd som er viktige for at flest mulig skal kunne finne og
+                    forstå teksten din.
                 </Ingress>
                 <TabbedContainer tabs={this.tabs} {...this.props} />
             </React.Fragment>
