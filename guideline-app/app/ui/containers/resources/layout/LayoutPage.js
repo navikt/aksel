@@ -1,14 +1,12 @@
 import React from 'react';
 
-import { Innholdstittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+// import { Innholdstittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 
 import Grid from './tabs/Grid.mdx';
 import Spacing from './tabs/Spacing.mdx';
 
 import MdxContent from './../../../components/mdx-content/MdxContent';
-import TabbedContainer from './../../tabbed-container/TabbedContainer';
-
-// import './styles.less';
+// import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
 class LayoutPage extends React.Component {
     constructor(props) {
@@ -29,8 +27,9 @@ class LayoutPage extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Innholdstittel>Layout</Innholdstittel>
-                <TabbedContainer tabs={this.tabs} {...this.props} />
+                {/* <Innholdstittel>Layout</Innholdstittel> */}
+                <MdxContent>{Grid}</MdxContent>
+                {/* <TabbedContainer tabs={this.tabs} {...this.props} /> */}
             </React.Fragment>
         );
     }
