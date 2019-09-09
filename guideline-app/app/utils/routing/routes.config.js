@@ -11,6 +11,8 @@ import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
 import SubdomainsPage from '../../ui/containers/resources/subdomains/SubdomainsPage';
 import InternalUXPrinciplesPage from '../../ui/containers/resources/internal-ux-principles/InternalUXPrinciplesPage';
+import LayoutPage from '../../ui/containers/resources/layout/LayoutPage';
+import TypographyPage from '../../ui/containers/resources/typography/TypographyPage';
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
@@ -71,6 +73,16 @@ const routeConfig = [
                 path: '/resources/internal-ux-principles',
                 component: InternalUXPrinciplesPage,
                 title: 'Prinsipper for brukeropplevelse på interne flater'
+            },
+            {
+                path: '/resources/layout',
+                component: LayoutPage,
+                title: 'Layout'
+            },
+            {
+                path: '/resources/typography',
+                component: TypographyPage,
+                title: 'Typografi'
             }
         ]
     },
