@@ -74,7 +74,10 @@ class Technical extends React.Component {
                     { this.renderInstallInstructions() }
                 </section>
                 <section className="section full">
-                    <ModuleBrowser data={this.props.componentData} package={this.props.componentData.manifest} />
+                    {
+                        this.props.componentData.packageModules &&
+                        <ModuleBrowser data={this.props.componentData} package={this.props.componentData.manifest} />
+                    }
                 </section>
             </React.Fragment>
         );

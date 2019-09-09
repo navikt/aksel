@@ -79,9 +79,6 @@ const getComponentData = () => {
         const pkgMainModulePath = pkg.main;
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
 
-        console.log(overviewModuleName);
-        console.log(pkgName);
-
         let mainModule;
         let mainModuleKey = `./${pkgName}/${pkgMainModulePath}`;
         const pkgModules = allModules[mainModuleKey];
@@ -95,7 +92,7 @@ const getComponentData = () => {
             mainModule = pkgModules[mainModuleKey];
         } else {
             // All others
-            mainModule = allModules[mainModuleKey].default;
+            mainModule = (pkgModules) ? allModules[mainModuleKey]['default'] : undefined;
         }
 
         componentData[overviewModuleName] = {
@@ -105,6 +102,8 @@ const getComponentData = () => {
             manifest: pkg,
             installInstructions: getInstallInstructions(pkgName, edges)
         };
+
+        if (overviewModuleName === 'Tabell') console.log(componentData['Tabell']);
     });
 
     return componentData;
