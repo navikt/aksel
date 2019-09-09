@@ -79,6 +79,9 @@ const getComponentData = () => {
         const pkgMainModulePath = pkg.main;
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
 
+        console.log(overviewModuleName);
+        console.log(pkgName);
+
         let mainModule;
         let mainModuleKey = `./${pkgName}/${pkgMainModulePath}`;
         const pkgModules = allModules[mainModuleKey];
