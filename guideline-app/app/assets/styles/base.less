@@ -154,9 +154,12 @@ p, .typo-normal {
         font-weight:normal !important;
 
         .etikett {
-          // background: @navBlaLighten80;
-          background: @navOransjeLighten60;
-          // color: @navBla;
+          &--info {
+            background: @navBlaLighten80;
+          }
+          &--fokus {
+            background: @navOransjeLighten60;
+          }
         }
       }
 
@@ -165,21 +168,20 @@ p, .typo-normal {
       }
 
       .etikett {
-        margin: -5px 0 -5px 1rem;
+        margin: -5px 0.25rem;
         color: @navMorkGra;
-        // transform: scale(0.9);
-        background: @navGra60;
         background: #ddd;
-        // color: white;
+
+        &:first-child {
+          margin-left: 1rem;
+        }
       }
 
       .dot {
         text-indent: -999px;
         width:0.6rem;
         height:0.6rem;
-        // border: 1px solid @navOransje;
         background-color: @navOransje;
-        // background-color: @navOransjeLighten60;
         border-radius:50%;
         margin-left:1rem;
       }

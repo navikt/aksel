@@ -15,10 +15,20 @@ import './styles.less';
 /* <span className="dot dot-warn">Beta</span> */
 
 const betaLabel = (item) => {
+    console.log(item);
     if (!item['data']) return;
     if (item.data.manifest.version.indexOf('beta') === -1) return;
-    return (<EtikettInfo><Undertekst>Beta</Undertekst></EtikettInfo>);
+    return [
+        <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>,
+        <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
+    ];
 };
+
+const styleLabel = (item) => {
+    if (!item['data']) return;
+    if (item.data.manifest.name.indexOf('-style') === -1) return;
+    return (<EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>);
+}
 
 const LeftNavigation = (props) => (
     <aside className="leftNavigation">
@@ -35,6 +45,7 @@ const LeftNavigation = (props) => (
                                 >
                                     { item.title }
                                     { betaLabel(item) }
+                                    { styleLabel(item) }
                                 </NavLink>
                             </li>
                         )
