@@ -4,6 +4,8 @@ import cn from 'classnames';
 
 import OverflowDetector from './../overflow-detector/OverflowDetector';
 
+import 'NavFrontendModules/nav-frontend-tabell-style';
+
 import './styles.less';
 
 class PropTypeTable extends React.Component {
