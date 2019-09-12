@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
 import { Innholdstittel, Systemtittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
-import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import Modal from 'NavFrontendModules/nav-frontend-modal';
@@ -25,8 +24,6 @@ class ComponentGuidelinePage extends React.Component {
         this.state = {
             modal: false
         };
-
-        this.closeModalBtn;
 
         this.tabs = [
             {
@@ -74,30 +71,35 @@ class ComponentGuidelinePage extends React.Component {
                     <div id="beta-component-modal">
                         <Systemtittel>Beta betyr uferdig/ustabil</Systemtittel>
                         <p>
-                            Beta-komponenter kan inneholde mange bugs, og mangle sentrale funksjoner og 
-                            dokumentasjon. Det er også fare for at disse komponentene og deres API vil 
+                            Beta-komponenter kan inneholde mange bugs, og mangle sentrale funksjoner og
+                            dokumentasjon. Det er også fare for at disse komponentene og deres API vil
                             forandre seg mye mellom hver oppdatering.
-                        </p><br/>
+                        </p><br />
                         <Knapp
                             onClick={this.toggleModal}
-                            ref={(node) => this.closeModalBtn = node}
+                            ref={(node) => { this.closeModalBtn = node; }}
                         >
                             Jeg forstår
                         </Knapp>
-                        <br/><br/>
-                        <div><Lenke href="https://github.com/navikt/nav-frontend-moduler/issues">Meld fra om feil</Lenke></div>
+                        <br /><br />
+                        <div>
+                            <Lenke href="https://github.com/navikt/nav-frontend-moduler/issues">
+                                Meld fra om feil
+                            </Lenke>
+                        </div>
                     </div>
                 </Modal>
                 <div className="componentGuidelinePage">
                     {
                         beta &&
                         <Alertstripe type="advarsel">
-                            Dette er en beta-komponent. <Lenke href="#" onClick={this.toggleModal}>Hva betyr det?</Lenke>
+                            Dette er en beta-komponent.&nbsp;
+                            <Lenke href="#" onClick={this.toggleModal}>Hva betyr det?</Lenke>
                         </Alertstripe>
                     }
                     <div className={classnames('componentTitle', { 'componentTitle--beta': beta })}>
-                        <Innholdstittel className={classnames({'beta': beta})}>
-                            {this.props.componentData.name}
+                        <Innholdstittel className={classnames({ beta })}>
+                            { this.props.componentData.name }
                         </Innholdstittel>
                     </div>
                     {
@@ -112,9 +114,3 @@ class ComponentGuidelinePage extends React.Component {
 }
 
 export default ComponentGuidelinePage;
-
-
-/*
-
-
-*/

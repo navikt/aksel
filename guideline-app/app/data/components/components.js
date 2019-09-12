@@ -1,3 +1,4 @@
+/* eslint-disable */
 import dfs from 'depth-first';
 
 const getModulesFromContext = (context) => {
@@ -102,8 +103,6 @@ const getComponentData = () => {
             manifest: pkg,
             installInstructions: getInstallInstructions(pkgName, edges)
         };
-
-        if (overviewModuleName === 'Tabell') console.log(componentData['Tabell']);
     });
 
     return componentData;

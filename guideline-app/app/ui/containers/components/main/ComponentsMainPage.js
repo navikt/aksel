@@ -1,12 +1,10 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
-import { Innholdstittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
-import { EtikettFokus } from 'NavFrontendModules/nav-frontend-etiketter';
 
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
-import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
 class ComponentMainPage extends React.Component {

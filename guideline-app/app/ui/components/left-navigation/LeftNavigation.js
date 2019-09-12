@@ -14,21 +14,17 @@ import './styles.less';
 /* <EtikettInfo>Beta</EtikettInfo> */
 /* <span className="dot dot-warn">Beta</span> */
 
-const betaLabel = (item) => {
-    console.log(item);
-    if (!item['data']) return;
-    if (item.data.manifest.version.indexOf('beta') === -1) return;
-    return [
-        <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>,
-        <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
-    ];
+const isBeta = (item) => {
+    if (!item.data) return false;
+    if (item.data.manifest.version.indexOf('beta') === -1) return false;
+    return true;
 };
 
-const styleLabel = (item) => {
-    if (!item['data']) return;
-    if (item.data.manifest.name.indexOf('-style') === -1) return;
-    return (<EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>);
-}
+const isStyle = (item) => {
+    if (!item.data) return false;
+    if (item.data.manifest.name.indexOf('-style') === -1) return false;
+    return true;
+};
 
 const LeftNavigation = (props) => (
     <aside className="leftNavigation">
@@ -44,8 +40,14 @@ const LeftNavigation = (props) => (
                                     to={item.path}
                                 >
                                     { item.title }
-                                    { betaLabel(item) }
-                                    { styleLabel(item) }
+                                    {
+                                        isBeta(item) &&
+                                        <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
+                                    }
+                                    {
+                                        isStyle(item) &&
+                                        <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
+                                    }
                                 </NavLink>
                             </li>
                         )

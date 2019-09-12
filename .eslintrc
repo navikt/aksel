@@ -16,6 +16,7 @@
     "react/prop-types": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/jsx-indent-props": ["error", 4],
-    "react/jsx-indent": ["error", 4]
+    "react/jsx-indent": ["error", 4],
+    "react/no-find-dom-node": "warn"
   }
 }
