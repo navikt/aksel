@@ -7,6 +7,7 @@ import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import Modal from 'NavFrontendModules/nav-frontend-modal';
 import Knapp from 'NavFrontendModules/nav-frontend-knapper';
+import { EtikettInfo } from 'NavFrontendModules/nav-frontend-etiketter';
 
 import Overview from './tabs/Overview';
 import Technical from './tabs/Technical';
@@ -16,6 +17,12 @@ import Discussion from './tabs/Discussion';
 import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
 import './styles.less';
+
+
+const componentTitleCls = (beta, style) => classnames('componentTitle', {
+    'componentTitle--beta': beta,
+    'componentTitle--style': style
+});
 
 class ComponentGuidelinePage extends React.Component {
     constructor(props) {
@@ -56,9 +63,8 @@ class ComponentGuidelinePage extends React.Component {
     }
 
     render() {
-        console.log(this.props);
-
         const beta = (this.props.componentData.manifest.version.indexOf('beta') !== -1);
+        const style = (this.props.componentData.manifest.name.indexOf('-style') !== -1);
 
         return (
             <React.Fragment>
@@ -97,10 +103,11 @@ class ComponentGuidelinePage extends React.Component {
                             <Lenke href="#" onClick={this.toggleModal}>Hva betyr det?</Lenke>
                         </Alertstripe>
                     }
-                    <div className={classnames('componentTitle', { 'componentTitle--beta': beta })}>
-                        <Innholdstittel className={classnames({ beta })}>
+                    <div className={componentTitleCls(beta, style)}>
+                        <Innholdstittel>
                             { this.props.componentData.name }
                         </Innholdstittel>
+                        { style && <EtikettInfo>CSS</EtikettInfo> }
                     </div>
                     {
                         this.props.textData.ingress &&
