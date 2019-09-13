@@ -33,9 +33,8 @@ const getTextData = () => {
     return textDataInCategories;
 };
 
-const getInstallInstructions = (pkgName, edges) => {
-    const dependencies = dfs(edges, pkgName).join(' ');
-    return `npm install ${dependencies} --save`;
+const getDependencies = (pkgName, edges) => {
+    return dfs(edges, pkgName);
 };
 
 const getDependencyEdgesFromPackages = (pkgs) => Object.values(pkgs)
@@ -101,7 +100,7 @@ const getComponentData = () => {
             mainModule,
             packageModules: pkgModules,
             manifest: pkg,
-            installInstructions: getInstallInstructions(pkgName, edges)
+            dependencies: getDependencies(pkgName, edges)
         };
     });
 
