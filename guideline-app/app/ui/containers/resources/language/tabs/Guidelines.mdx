@@ -1,15 +1,11 @@
 import { Undertittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
-import { SuccessIcon, ErrorIcon } from '../../../../assets/images/svg';
+import { SuccessIcon, ErrorIcon } from '../../../../../assets/images/svg';
 
-import '../../../components/table/styles.less';
-import './styles.less';
+import '../../../../components/table/styles.less';
+import '../styles.less';
 
-# Slik skriver vi
-
-<Ingress>For brukerne våre kan konsekvensen av å gjøre feil i prosessen med NAV være stor. Derfor er det svært viktig at vi bruker et tydelig og enkelt språk.</Ingress>
-
-## 1. Det viktigste først
+## 1. Begynn med det som er viktigst for brukeren
 
 <Panel className="panel--grey">
     <ul>
@@ -21,7 +17,9 @@ import './styles.less';
 
 Vis tydelig hvilke steg brukeren må gjøre for å utføre oppgaven. Gi også informasjon om hvilke oppgaver NAV har ansvar for. Da vet brukeren når hun skal gjøre noe og når hun må vente på NAV. 
 
-Lag nummererte lister når du skal forklare brukerne stegene i en prosess.
+Lag gjerne nummererte lister eller visualiser på andre måter når du skal forklare brukerne stegene i en prosess.
+
+<Undertittel tag="h3">Hva er nødvendig informasjon?</Undertittel>
 
 Forklar nok til at leserne forstår og kan gjøre det de skal på riktig måte. Informasjon som ikke er relevant skal ikke være med.
 
@@ -36,34 +34,33 @@ Forklar nok til at leserne forstår og kan gjøre det de skal på riktig måte. 
         <li>Når må jeg sende inn meldekortet?</li>
     </ul>
     <p>
-        Øvrig informasjon som
-    </p>
-    <ul>
-        <li>hva et meldekort er</li>
-        <li>hvorfor NAV krever at brukere sender inn meldekort</li>
-    </ul>
-    <p>
-        hører ikke hjemme i denne teksten hvis vi ønsker at flest mulig skal forstå hvordan de sender inn meldekort på riktig måte.
+        Øvrig informasjon om hvorfor NAV krever at brukerne sender inn meldekort og hvilke forpliktelser brukeren har, hører ikke hjemme i denne teksten hvis vi ønsker at flest mulig skal forstå hvordan de sender inn meldekort på riktig måte.
     </p>
 </Panel>
 
 ## 2. Gjør teksten leservennlig for alle
 
-### 2.1 Skriv så lite som mulig
+### 2.1 Skriv kort
 
 For å sikre at leserne forstår informasjonen og klarer å bruke den til å gjøre det de skal, er det et poeng i seg selv at teksten er kort. Gjør teksten så tydelig som mulig ved å kutte overflødige ord og setninger. Unngå setninger som er tvetydige og skaper tvil.
 
-Det er ikke alltid mulig å gjøre teksten kort. Ett viktig prinsipp uansett om teksten er kort eller lang er å begynne med det som er viktigst for leseren.
-
 ### 2.2 Skriv korte og enkle setninger
+ 
+Korte og enkle setninger gjør teksten din mer leservennlig og forståelig. Ha ett poeng i hver setning og sett punktum ofte. 
 
-Korte og enkle setninger gjør teksten din mer leservennlig og forståelig for flere. Ha ett poeng i hver setning og sett punktum ofte. 
+Det er ikke alltid mulig å gjøre teksten kort. Et viktig prinsipp uansett om teksten er kort eller lang, er å begynne med det som er viktigst for leseren. 
 
+<Undertittel tag="h3">Eksempler på korte og enkle setninger</Undertittel>
+
+Har du fått en sykmelding? Logg deg inn på Ditt NAV og gå til Ditt sykefravær. Her finner du informasjon om hva som skjer underveis i sykefraværet ditt. 
+
+Du må søke om engangsstønad. Far kan ikke søke for mor, hun må sende egen søknad.
+ 
 ### 2.3 Velg korte og enkle ord
 
 Velg ord som brukes muntlig. Hvis et ord ikke brukes muntlig, bør du heller ikke bruke det skriftlig. Faguttrykk er ord som er vanskelig å forstå for brukerne og skal helst ikke brukes i tekster på nav.no. Hvis du må ha en referanse kan du lenke til kilden, eller skrive den i parentes.
 
-Brukerne søker etter ord de allerede kjenner. Når vi bruker fremmedord risikerer vi at de ikke finner innholdet.
+Når en bruker søker etter informasjon i søkefeltet eller leter etter informasjon i en oversikt, ser de etter ord de allerede kjenner. Når vi bruker fremmedord risikerer vi at de ikke finner innholdet de leter etter. 
 
 <table className="tabell tabell--stripet tabell--dos-donts">
     <thead>
@@ -126,7 +123,7 @@ Brukerne søker etter ord de allerede kjenner. Når vi bruker fremmedord risiker
     </tbody>
 </table>
 
-### 2.4 Bruk hele setninger
+### 2.4 Skriv hele setninger
 
 Setningene blir vanskelig å forstå om du starter med leddsetninger. Snu heller setningen på hodet. 
 
@@ -216,11 +213,11 @@ I en aktiv setning er subjektet og verbet plassert langt fram i setningen.
     </tbody>
 </table>
 
-### 3.1 Henvend deg direkte til leseren - skriv du, dere og vi
+### 3.1 Skriv direkte til leseren - skriv du, dere og vi
 
 Vi skaper avstand når vi omtaler mottakeren i tredjeperson (vedkommende, mottakeren, søkeren, brukeren) eller ved hjelp av ubestemt pronomen (man, en). Det er lettere for leserne å forstå informasjonen og oppleve den som relevant når du skriver direkte til dem. Tenk på teksten som en samtale mellom deg og brukerne.  
 
-Det skal også være lett å se at det er NAV som er avsender. Derfor skal du introdusere NAV tidlig i teksten. Videre skriver du «vi», eller varierer mellom «vi» og «NAV» der det passer seg.
+Det skal også være lett å se at det er NAV som er avsender. Derfor skal du introdusere NAV tidlig i teksten. Varierer mellom «vi» og «NAV» der det passer seg.
 
 <table className="tabell tabell--stripet tabell--dos-donts">
     <thead>
@@ -406,8 +403,12 @@ Bruke genitiv-s når du skriver om eierforhold.
 
 ## 4. Gjør det enkelt for leseren å finne frem i teksten din
 
+### 4.1 Legg til rette for hurtiglesning 
+
+Samlet sett skal overskrifter, mellomtitler og eventuelle uthevinger gi en hel beskrivelse av hva teksten handler om. 
+
 <Panel className="panel--grey">
-    <Undertittel tag="h3">En oversiktlig tekst har:</Undertittel>
+    <Undertittel tag="h3">En oversiktlig tekst har</Undertittel>
     <ul>
         <li>informative overskrifter og mellomtitler</li>
         <li>en kort innledning på 2-3 setninger </li>
@@ -416,9 +417,13 @@ Bruke genitiv-s når du skriver om eierforhold.
     </ul>
 </Panel>
 
-### 4.1 Lag korte og informative overskrifter og mellomtitler
+### 4.2 Informative overskrifter og mellomtitler
 
-Skriv korte og presise overskrifter og mellomtitler slik at leserne får med seg hovedpoengene i teksten. Overskrifter og mellomtitler som består av stikkord gir lite informasjon og kan bli for generelle og upresise. 
+Presise overskrifter og mellomtitler gjør at leserne kan få med seg hovedpoengene i teksten. Titler som består av stikkord gir lite informasjon og kan bli for generelle og upresise.
+
+Velg enkle ord og begreper som leserne bruker til vanlig når du skriver overskrifter og mellomtitler. Da blir det enkelt for leseren å finne innholdet når de leter etter informasjon.
+
+Overskrifter og mellomtitler er også viktig for de som bruker hjelpemiddelteknologi som talesyntese, forstørrelsesprogramvare eller skjermleser. Disse brukerne navigerer ofte ved hjelp av overskrifthierarkiet. 
 
 <table className="tabell tabell--stripet tabell--dos-donts">
     <thead>
@@ -494,44 +499,9 @@ En god måte å avgrense teksten på er å skrive overskrifter som inneholder ve
     </tbody>
 </table>
 
-Husk også på at overskrifter og mellomtitler er viktig for de med hjelpemiddelteknologi som talesyntese, forstørrelsesprogramvare eller skjermleser da de ofte navigerer ved hjelp av overskrifthierarkiet. 
-
-<Panel className="panel--grey">
-    <Undertittel tag="h3">Overskrifter og mellomtitler må gi selvstendig mening</Undertittel>
-    <p>
-        Overskrifter og mellomtitler vil dukke opp i søkelister og må derfor gi selvstendig mening uavhengig av teksten for øvrig. Husk å bruke enkle ord og begreper som leserne kan søke og navigere etter for å finne innholdet ditt.
-    </p>
-</Panel>
-
-### 4.2 Bruk fet eller halvfet når du skal utheve ord og setninger
-
-Bruk fet eller halvfet når du vil utheve ord og setninger, men bruk det med omhu og vei det opp mot mellomtitlene. Skrift som er fet eller halvfet er vanskeligere å lese enn normal skrift. Bruk fet eller halvfet når du vil utheve ord og setninger, men bruk det med omhu og vei det opp mot mellomtitlene. Skrift som er fet eller halvfet er vanskeligere å lese enn normal skrift. 
-
-<Panel className="panel--grey">
-    <Undertittel tag="h3">Ikke bruk understreking, kursiv eller store bokstaver</Undertittel>
-    <ul>
-        <li>
-            <strong>Ikke bruk kursiv</strong><br/>
-            Kursiv er vanskelig å lese på skjerm
-        </li>
-        <li>
-            <strong>Understreking er forbeholdt lenker</strong><br/>
-            Understreking kan forveksles med lenker, og gjør teksten din uoversiktlig.
-        </li>
-        <li>
-            <strong>Ikke bruk STORE BOKSTAVER</strong><br/>
-            Store bokstaver er vanskeligere å lese fordi bokstavene ser likere ut på skjerm enn små bokstaver. På skjerm oppfattes også store bokstaver som å rope høyt.
-        </li>
-    </ul>
-</Panel>
-
-### 4.3 Legg til rette for hurtiglesning 
-
-Samlet sett skal overskrifter, mellomtitler og eventuelle uthevinger gi en hel beskrivelse av saken. 
-
 ### 4.4 Skriv en kort innledning
 
-Gi en kort oppsummering av det viktigste i teksten. Gjerne bare en setning, og ikke mer enn 2 setninger eller 30 ord. Innledningen vil som overskriften dukke opp i søkelister og må derfor gi selvstendig mening uavhengig av teksten for øvrig. 
+Gi en kort oppsummering av det viktigste i teksten. Gjerne bare én setning, og ikke mer enn 2 setninger eller 30 ord. Innledningen vil på samme måte som overskriften dukke opp i søkelister og må derfor gi selvstendig mening. 
 
 ### 4.5 Del teksten inn i avsnitt
 
@@ -539,15 +509,18 @@ Hvert avsnitt skal ha ett budskap og ikke inneholde mer enn 2 - 3 setninger. Tek
 
 ### 4.6 Bruk punktlister
 
-Bruk punktlister når du skal ramse opp informasjon eller ulike alternativer. For leserne er det lettere å få med seg informasjon i en liste enn mye informasjon i løpende tekst. Punktlisten skal helst være kort – maks 7–9 punkter. 
+Bruk punktlister når du skal ramse opp informasjon eller ulike alternativer. For leserne er det lettere å få med seg informasjon i en liste enn mye informasjon i løpende tekst. 
 
-Punktene kan være både hele setninger, deler av setninger, enkeltord eller uttrykk. Det viktigste er at alle punktene i én liste henger sammen, både innholdsmessig og språklig. 
+Start alltid listen med det viktigste punktet først, og unngå å bruke samme ord i starten av hvert punkt. Det gjør teksten enklere å lese. 
 
-Det er likevel viktig at vi ikke bruke samme ord i starten av hvert punkt. Det gjør teksten vanskeligere å lese. Listen blir enklere å lese om vi begynner med det viktigste først. 
+#### Noen nyttige punkter om punktlister:
 
-Når punktene er fullstendige setninger skal det være stor forbokstav i det første ordet og punktum til slutt. Innledningsteksten skal avsluttes med kolon.
-
-Når punktene er en fortsettelse av en innledende setning, skal de ha liten forbokstav og ikke punktum til slutt. Den innledende setningen skal ikke avsluttes med kolon.
+<ul>
+    <li>Punktlisten skal helst være kort – maks 7–9 punkter.</li>
+    <li>Punktene kan være både hele setninger, deler av setninger eller enkeltord. Det viktigste er at alle punktene i én liste henger sammen, både innholdsmessig og språklig.</li> 
+    <li>Bruker du fullstendige setninger skal det være stor forbokstav i det første ordet og punktum til slutt. Innledningsteksten skal avsluttes med kolon.</li> 
+    <li>Hvis punktlisten er en fortsettelse på en innledende setning, skal de ha liten forbokstav og ikke punktum til slutt. Den innledende setningen skal ikke avsluttes med kolon.</li>
+</ul>
 
 <table className="tabell tabell--stripet tabell--dos-donts">
     <thead>
@@ -579,9 +552,9 @@ Når punktene er en fortsettelse av en innledende setning, skal de ha liten forb
     </tbody>
 </table>
 
-### 4.7 Når du bruker lenker
+### 4.6 Når du bruker lenker
 
-For mange brukere er det vanskelig å se sammenhengen mellom ulike sider på nav.no. Vi bør derfor unngå å lenke til relatert innhold på andre sider hvis vi kan unngå det. 
+For mange brukere er det vanskelig å se sammenhengen mellom ulike sider på nav.no. Vi bør derfor unngå å lenke til relatert innhold på andre sider, så langt det er mulig. 
 
 Må du bruke lenker så vær tydelig på om det er nødvendig å lese teksten som du lenker til for at brukerne skal få gjort det de skal. Brukerne skal slippe å føle at det hele tiden er noe mer de skulle trykket på eller lest for å ivareta saken sin. 
 
@@ -590,17 +563,42 @@ Husk også at brukere med hjelpemiddelteknologi som talesyntese, forstørrelsesp
 <Panel className="panel--grey">
     <Undertittel tag="h3">Skriv informative og selvforklarende lenketitler</Undertittel>
     <p>
-        Fortell hva som ligger bak lenken. «Klikk her» eller «les mer» gir lite informasjon om hva som skjuler seg bak lenken. Skriv heller <a href="#">Les mer om hvilke tiltaksplasser som finnes i Oslo</a> eller <a href="#">Les mer om dagpenger og utdanning</a>.
+        Fortell hva som ligger bak lenken. Lenketeksten bør være det samme som i tittelen/overskriften på siden på lenker til. «Klikk her» eller «les mer» gir lite informasjon om hva som skjuler seg bak lenken. Skriv heller <a href="#">Les mer om hvilke tiltaksplasser som finnes i Oslo</a> eller <a href="#">Les mer om dagpenger og utdanning</a>.
     </p>
     <p>
-        Det er viktig at du bruker den samme teksten i lenketittelen som i tittelen på siden lenken fører til. På den måten kan brukeren være helt sikker på at hun har kommet til riktig sted. Hvis lenken heter «Jobbsøkerkurs», holder det ikke at tittelen på siden lenken fører til inneholder ordet «kurs». Den må inneholde ordet «jobbsøkerkurs».
+        Hvis lenken heter «Jobbsøkerkurs», holder det ikke at tittelen på siden lenken fører til inneholder ordet «kurs». Den må inneholde ordet «jobbsøkerkurs».
     </p>
+</Panel>
+
+### 4.7 Bruk fet eller halvfet når du skal utheve ord og setninger
+
+Bruk fet eller halvfet når du vil utheve ord og setninger, men bruk det med omhu og vei det opp mot mellomtitlene. Skrift som er fet eller halvfet er vanskeligere å lese enn normal skrift. 
+
+<Panel className="panel--grey">
+    <Undertittel tag="h3">Ikke bruk understreking, kursiv eller store bokstaver</Undertittel>
+    <ul>
+        <li>
+            <strong>Ikke bruk kursiv</strong><br/>
+            Kursiv er vanskelig å lese på skjerm
+        </li>
+        <li>
+            <strong>Understreking er forbeholdt lenker</strong><br/>
+            Understreking kan forveksles med lenker, og gjør teksten din uoversiktlig.
+        </li>
+        <li>
+            <strong>Ikke bruk STORE BOKSTAVER</strong><br/>
+            Store bokstaver er vanskeligere å lese fordi bokstavene ser likere ut på skjerm enn små bokstaver. På skjerm oppfattes også store bokstaver som å rope høyt.
+        </li>
+    </ul>
 </Panel>
 
 ### 4.8 Ikke bruk nedlastbare filer som word, ppt, pdf etc.
 
 Det er tungvint for brukerne å måtte bla i ppt- og pdf-presentasjoner og mange kan miste kontroll over hvor de er. Mange brukere kan også mangle den nødvendige programvaren for å åpne slike filer. Må du bruke nedlastbare filer så skal vi i det offentlige bruke åpne formater, som PDF-, HTML- og XML- filer som kan lastes ned av alle. 
 
+## 4.9 Unngå «ofte stilte spørsmål»
+Det er bedre å ta seg tid til å skrive en forståelig og god tekst som er enkel å finne fram i.   
+
 ## 5. Bruk ordbok
 
-Språkrådet har gratis ordbøker på nett: [https://www.sprakradet.no/sprakhjelp/Skriverad/Ordlister/Ord-og-nett/](https://www.sprakradet.no/sprakhjelp/Skriverad/Ordlister/Ord-og-nett/)
+Språkrådet har gratis ordbøker på nett: [https://ordbok.uib.no/](https://ordbok.uib.no/)

@@ -16,7 +16,7 @@ WebpackProductionConfig.plugins = [
     }),
     new UglifyJSWebpackPlugin({
         uglifyOptions: {
-            mangle: false
+            mangle: true
         }
     }),
     new webpack.DefinePlugin({

@@ -4,10 +4,10 @@ import { NavLink, withRouter } from 'react-router-dom';
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 
-import SubRoutesWrapper from '../../../utils/routing/subroutesWrapper.component';
-import LeftNavigation from '../../components/left-navigation/LeftNavigation';
+import SubRoutesWrapper from '../../utils/routing/subroutesWrapper.component';
+import LeftNavigation from '../components/left-navigation/LeftNavigation';
 
-class ResoucesMainPage extends React.Component {
+class GenericSectionStart extends React.Component {
     renderMainContent = () => (
         <article className="mainContent mainContent--grey">
             <div className="catalog">
@@ -46,7 +46,7 @@ class ResoucesMainPage extends React.Component {
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
                 {
-                    (this.props.history.location.pathname !== '/resources') ?
+                    (this.props.history.location.pathname !== this.props.path) ?
                     this.renderSubRoute() :
                     this.renderMainContent()
                 }
@@ -55,4 +55,4 @@ class ResoucesMainPage extends React.Component {
     }
 }
 
-export default withRouter(ResoucesMainPage);
+export default withRouter(GenericSectionStart);

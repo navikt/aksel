@@ -1,0 +1,31 @@
+@import (reference) '~NavFrontendCore/less/_variabler';
+
+.dodont {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 0.5rem;
+
+    .dodont__label {
+        padding: 0.5rem;
+        display: flex;
+        align-items: center;
+
+        svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .dodont__do {
+        .dodont__label {
+            border-top: 4px solid #1C6937;
+        }
+    }
+
+    .dodont__dont {
+        .dodont__label {
+            border-top: 4px solid #A13A28;
+        }
+    }
+}

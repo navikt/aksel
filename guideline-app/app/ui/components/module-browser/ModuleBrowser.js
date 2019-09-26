@@ -32,7 +32,7 @@ class ModuleBrowser extends React.Component {
         const componentIndex = Object.keys(this.modules).findIndex((key) => key.toLowerCase() === urlComponentName);
         const defaultIndex = Object.keys(this.modules).findIndex((key) => key === 'default');
 
-        const index = (defaultIndex !== -1) ? defaultIndex : componentIndex;
+        const index = Math.max(0, defaultIndex, componentIndex);
 
         return Object.keys(this.modules).find((module, i) => i === index);
     }

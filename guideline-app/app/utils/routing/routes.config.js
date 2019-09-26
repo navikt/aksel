@@ -3,27 +3,23 @@ import resolveComponentRoutes from './routes.utils';
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
 
-import ResourcesMainPage from '../../ui/containers/resources/ResourcesMainPage';
+import GenericSectionStart from '../../ui/containers/GenericSectionStart';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
 import LanguagePage from '../../ui/containers/resources/language/LanguagePage';
-// import AccessibilityPage from '../../ui/containers/resources/accessibility/AccessibilityPage';
 import NewProjectPage from '../../ui/containers/resources/new-project/NewProjectPage';
 import IconPage from '../../ui/containers/resources/icon/IconPage';
 import IllustrationPage from '../../ui/containers/resources/illustration/IllustrationPage';
+import SubdomainsPage from '../../ui/containers/resources/subdomains/SubdomainsPage';
+import InternalUXPrinciplesPage from '../../ui/containers/resources/internal-ux-principles/InternalUXPrinciplesPage';
+import LayoutPage from '../../ui/containers/resources/layout/LayoutPage';
+import TypographyPage from '../../ui/containers/resources/typography/TypographyPage';
+import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
+import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
+import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
-
-import TemplatesMainPage from '../../ui/containers/templates/TemplatesMainPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
-
-/*
-{
-    path: '/resources/accessibility',
-    component: AccessibilityPage,
-    title: 'Tilgjengelighet'
-},
-*/
 
 const routeConfig = [
     {
@@ -40,7 +36,7 @@ const routeConfig = [
     },
     {
         path: '/resources',
-        component: ResourcesMainPage,
+        component: GenericSectionStart,
         title: 'Ressurser',
         routes: [
             {
@@ -66,14 +62,51 @@ const routeConfig = [
             {
                 path: '/resources/language',
                 component: LanguagePage,
-                title: 'Slik skriver vi'
+                title: 'Språk'
+            },
+            {
+                path: '/resources/subdomains',
+                component: SubdomainsPage,
+                title: 'Subdomener'
+            },
+            {
+                path: '/resources/internal-ux-principles',
+                component: InternalUXPrinciplesPage,
+                title: 'Prinsipper for brukeropplevelse på interne flater'
+            },
+            {
+                path: '/resources/layout',
+                component: LayoutPage,
+                title: 'Layout'
+            },
+            {
+                path: '/resources/typography',
+                component: TypographyPage,
+                title: 'Typografi'
             }
         ]
     },
     {
-        path: '/templates',
-        component: TemplatesMainPage,
-        title: 'Maler'
+        path: '/accessibility',
+        component: GenericSectionStart,
+        title: 'Tilgjengelighet',
+        routes: [
+            {
+                path: '/accessibility/overview',
+                component: AccessibilityOverviewPage,
+                title: 'Tilgjengelighet i NAV'
+            },
+            {
+                path: '/accessibility/alt-text',
+                component: AccessibilityAltTextPage,
+                title: 'Alt-tekster'
+            },
+            {
+                path: '/accessibility/tools',
+                component: AccessibilityToolsPage,
+                title: 'Verktøy for UU-testing'
+            }
+        ]
     },
     {
         path: '/community',

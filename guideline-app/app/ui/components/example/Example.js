@@ -3,12 +3,12 @@ import cn from 'classnames';
 
 import './styles.less';
 
-const cls = (greyBg) => cn('example', {
-    'example--greyBg': greyBg
+const cls = (props) => cn('example', props.className, {
+    'example--greyBg': props.greyBg
 });
 
 const Example = (props) => (
-    <div className={cls(props.greyBg)}>
+    <div className={cls(props)}>
         <div className="example__inner">
             {props.children}
         </div>

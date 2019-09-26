@@ -8,12 +8,9 @@ export const RouteWithSubRoutes = (route) => (
         exact={route.exact}
         path={route.path}
         render={
-            (props) => (
+            () => (
                 <DocumentTitle title={`${route.title} - NAV Designsystem`}>
-                    <route.component
-                        routes={route.routes}
-                        {...props}
-                    />
+                    <route.component {...route} />
                 </DocumentTitle>
             )
         }

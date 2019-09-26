@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AlertStripeSuksess } from 'NavFrontendModules/nav-frontend-alertstriper';
-import { Hovedknapp, Fareknapp } from 'NavFrontendModules/nav-frontend-knapper';
-import Chevron from 'NavFrontendModules/nav-frontend-chevron';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
+import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Hjelpetekst from 'NavFrontendModules/nav-frontend-hjelpetekst';
 
 import './styles.less';
@@ -23,7 +23,13 @@ import './styles.less';
 export default class App extends Component {
     render() {
         return (
-            <div style={{paddingLeft:'100px', paddingTop:'15px'}}>
+            <div>
+                <Alertstripe type="suksess">
+                    <Undertittel>Utviklingsmiljø kjører!</Undertittel>
+                </Alertstripe>
+                <br/>
+                <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
+                <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
                 <Hjelpetekst>
                     Hello this is a test for testing on the testers
                 </Hjelpetekst>

@@ -1,13 +1,25 @@
 import React from 'react';
+import classnames from 'classnames';
+
+import './styles.less';
+
+const overflowCls = (state) => classnames('overflow-detector', {
+    'overflow-detector--shadow-left': state.overflowLeft,
+    'overflow-detector--shadow-right': state.overflowRight
+});
 
 class OverflowDetector extends React.Component {
     constructor(props) {
         super(props);
 
+        this.scroller = React.createRef();
+        this.inner = React.createRef();
+
         this.state = {
             overflowLeft: false,
             overflowRight: false
         };
+
         window.addEventListener('resize', this.checkOverflow);
     }
 
@@ -23,11 +35,11 @@ class OverflowDetector extends React.Component {
         let overflowLeft = false;
         let overflowRight = false;
 
-        if (this.wrapper.offsetWidth < this.table.offsetWidth) {
-            if (this.wrapper.scrollLeft !== 0) {
+        if (this.scroller.offsetWidth < this.inner.offsetWidth) {
+            if (this.scroller.scrollLeft !== 0) {
                 overflowLeft = true;
             }
-            if ((this.wrapper.scrollLeft + this.wrapper.offsetWidth) < this.table.offsetWidth) {
+            if ((this.scroller.scrollLeft + this.scroller.offsetWidth) < this.inner.offsetWidth) {
                 overflowRight = true;
             }
         }
@@ -35,13 +47,24 @@ class OverflowDetector extends React.Component {
         this.setState({
             overflowLeft,
             overflowRight
-        });
+        }, () => console.log('check scroll', this.state));
     }
 
     render() {
         return (
-            <div>
-                {this.props.children}
+            <div className={overflowCls(this.state)}>
+                <div
+                    className="overflow-detector__scroller"
+                    onScroll={this.checkOverflow}
+                    ref={this.scroller}
+                >
+                    <div
+                        className="overflow-detector__inner"
+                        ref={this.inner}
+                    >
+                        {this.props.children}
+                    </div>
+                </div>
             </div>
         );
     }
