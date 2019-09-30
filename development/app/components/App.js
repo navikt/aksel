@@ -30,9 +30,16 @@ export default class App extends Component {
                 <br/>
                 <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
                 <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
-                <Hjelpetekst>
-                    Hello this is a test for testing on the testers
-                </Hjelpetekst>
+
+
+                <div style={{overflow:'scroll', width: 400, height: 400}}>
+                    <div style={{width: 2000, height: 2000, textAlign: 'right'}}>
+                        <Hjelpetekst>
+                            Hello this is a test for testing on the testers
+                        </Hjelpetekst>
+                    </div>
+                </div>
+                <div style={{height: 3000}} />
             </div>
         );
     }
