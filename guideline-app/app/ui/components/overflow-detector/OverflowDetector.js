@@ -47,7 +47,7 @@ class OverflowDetector extends React.Component {
         this.setState({
             overflowLeft,
             overflowRight
-        }, () => console.log('check scroll', this.state));
+        });
     }
 
     render() {
