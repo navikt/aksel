@@ -1,3 +1,5 @@
+@import (reference) '~NavFrontendCore/less/_variabler';
+
 .overflow-shadow() {
     content: '';
     position:absolute;
@@ -13,6 +15,11 @@
 	&__scroller {
 		overflow: auto;
 		overflow-y: hidden;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px @fokusFarge;
+    }
 	}
 
 	&__inner {

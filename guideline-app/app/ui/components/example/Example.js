@@ -1,6 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 
+import OverflowDetector from '../overflow-detector/OverflowDetector';
+
 import './styles.less';
 
 const cls = (props) => cn('example', props.className, {
@@ -9,9 +11,11 @@ const cls = (props) => cn('example', props.className, {
 
 const Example = (props) => (
     <div className={cls(props)}>
-        <div className="example__inner">
-            {props.children}
-        </div>
+        {
+            (props.noscroll)
+            ? <div className="example__inner">{props.children}</div>
+            : <OverflowDetector><div className="example__inner">{props.children}</div></OverflowDetector>
+        }
     </div>
 );
 
