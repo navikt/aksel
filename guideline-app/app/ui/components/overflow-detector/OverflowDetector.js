@@ -59,7 +59,7 @@ class OverflowDetector extends React.Component {
                     className="overflow-detector__scroller"
                     onScroll={this.checkOverflow}
                     ref={this.scroller}
-                    tabindex="0"
+                    tabIndex="0"
                     role="region"
                 >
                     <div
