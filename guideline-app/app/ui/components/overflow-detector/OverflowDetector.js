@@ -53,14 +53,20 @@ class OverflowDetector extends React.Component {
     }
 
     render() {
+        const scrollAttr = (this.state.overflowRight || this.state.overflowLeft)
+            ? {
+                tabIndex: '0',
+                role: 'region'
+            }
+            : undefined;
+
         return (
             <div className={overflowCls(this.state)}>
                 <div
                     className="overflow-detector__scroller"
                     onScroll={this.checkOverflow}
                     ref={this.scroller}
-                    tabIndex="0"
-                    role="region"
+                    {...scrollAttr}
                 >
                     <div
                         className="overflow-detector__inner"
