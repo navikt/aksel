@@ -2,6 +2,8 @@ import React from 'react';
 import PT from 'prop-types';
 import cn from 'classnames';
 
+import 'NavFrontendModules/nav-frontend-tabell-style';
+
 import OverflowDetector from './../overflow-detector/OverflowDetector';
 
 import './styles.less';

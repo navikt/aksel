@@ -32,14 +32,16 @@ class OverflowDetector extends React.Component {
     }
 
     checkOverflow = () => {
+        const scroller = this.scroller.current;
+        const inner = this.inner.current;
         let overflowLeft = false;
         let overflowRight = false;
 
-        if (this.scroller.offsetWidth < this.inner.offsetWidth) {
-            if (this.scroller.scrollLeft !== 0) {
+        if (scroller.offsetWidth < inner.offsetWidth) {
+            if (scroller.scrollLeft !== 0) {
                 overflowLeft = true;
             }
-            if ((this.scroller.scrollLeft + this.scroller.offsetWidth) < this.inner.offsetWidth) {
+            if ((scroller.scrollLeft + scroller.offsetWidth) < inner.offsetWidth) {
                 overflowRight = true;
             }
         }
@@ -47,7 +49,7 @@ class OverflowDetector extends React.Component {
         this.setState({
             overflowLeft,
             overflowRight
-        }, () => console.log('check scroll', this.state));
+        });
     }
 
     render() {
@@ -57,6 +59,8 @@ class OverflowDetector extends React.Component {
                     className="overflow-detector__scroller"
                     onScroll={this.checkOverflow}
                     ref={this.scroller}
+                    tabIndex="0"
+                    role="region"
                 >
                     <div
                         className="overflow-detector__inner"
