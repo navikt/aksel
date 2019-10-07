@@ -56,7 +56,8 @@ class OverflowDetector extends React.Component {
         const scrollAttr = (this.state.overflowRight || this.state.overflowLeft)
             ? {
                 tabIndex: '0',
-                role: 'region'
+                role: 'region',
+                'aria-label': 'Eksempel'
             }
             : undefined;
 
