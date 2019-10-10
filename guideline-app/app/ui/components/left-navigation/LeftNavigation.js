@@ -2,12 +2,29 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
-import { Systemtittel, Undertittel, Normaltekst } from 'NavFrontendModules/nav-frontend-typografi';
+import { EtikettFokus, EtikettInfo } from 'NavFrontendModules/nav-frontend-etiketter';
+import { Systemtittel, Undertittel, Normaltekst, Undertekst } from 'NavFrontendModules/nav-frontend-typografi';
 
 import TitleByRoute from '../title-by-route/TitleByRoute';
 import routeConfig from './../../../utils/routing/routes.config';
 
 import './styles.less';
+
+/* <EtikettFokus>Beta</EtikettFokus> */
+/* <EtikettInfo>Beta</EtikettInfo> */
+/* <span className="dot dot-warn">Beta</span> */
+
+const isBeta = (item) => {
+    if (!item.data) return false;
+    if (item.data.manifest.version.indexOf('beta') === -1) return false;
+    return true;
+};
+
+const isStyle = (item) => {
+    if (!item.data) return false;
+    if (item.data.manifest.name.indexOf('-style') === -1) return false;
+    return true;
+};
 
 const LeftNavigation = (props) => (
     <aside className="leftNavigation">
@@ -23,6 +40,14 @@ const LeftNavigation = (props) => (
                                     to={item.path}
                                 >
                                     { item.title }
+                                    {
+                                        isBeta(item) &&
+                                        <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
+                                    }
+                                    {
+                                        isStyle(item) &&
+                                        <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
+                                    }
                                 </NavLink>
                             </li>
                         )
