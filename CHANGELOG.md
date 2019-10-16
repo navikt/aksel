@@ -1,5 +1,7 @@
 # Endringslogg
 
+> **Obs!** Denne endringsloggen blir manuelt og uregelmessig oppdatert, og er hovedsakelig ment som en grov retrospektiv oppsummering for både tekniske og ikke-tekniske lesere. Det kan dermed ta en stund før publiserte endringer blir loggført her. For å se de siste faktiske endringene kan du ta en titt på [commit-historikken](https://github.com/navikt/nav-frontend-moduler/commits/master), [PR-historikken](https://github.com/navikt/nav-frontend-moduler/pulls?q=is%3Apr+is%3Aclosed) og/eller [release-oversikten](https://github.com/navikt/nav-frontend-moduler/releases) for NPM-pakkene våre.
+
 ## 15. oktober 2019
 
 ### Nye komponenter
