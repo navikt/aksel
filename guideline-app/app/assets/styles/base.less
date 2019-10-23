@@ -1,6 +1,5 @@
 @import '~NavFrontendCore/less/core';
 @import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/index';
-@import '../../ui/components/table/styles.less';
 
 html {
   font-size: 16px;
@@ -126,7 +125,8 @@ p, .typo-normal {
 
   li {
     a {
-      display: block;
+      display: flex;
+      align-items: center;
       padding: 0.75rem 1rem;
       color: @navBla;
       text-decoration: none;
@@ -151,10 +151,38 @@ p, .typo-normal {
         background: @navBla;
         color: white !important;
         font-weight:normal !important;
+
+        .etikett {
+          &--info {
+            background: @navBlaLighten80;
+          }
+          &--fokus {
+            background: @navOransjeLighten60;
+          }
+        }
       }
 
       &:focus {
         z-index: 10;
+      }
+
+      .etikett {
+        margin: -5px 0.25rem;
+        color: @navMorkGra;
+        background: #ddd;
+
+        &:first-child {
+          margin-left: 1rem;
+        }
+      }
+
+      .dot {
+        text-indent: -999px;
+        width:0.6rem;
+        height:0.6rem;
+        background-color: @navOransje;
+        border-radius:50%;
+        margin-left:1rem;
       }
     }
 

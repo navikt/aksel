@@ -17,6 +17,7 @@
       background: white;
       height: calc(100vh - 151px);
       min-height: 0;
+      position: relative;
 
       .mainContent {
         flex: 1;
@@ -34,12 +35,14 @@
 
           ul,
           ol {
-            li {
-              margin-bottom: 0.75rem;
-              line-height: 1.375rem;
-
-              p {
+            &:not([class]) {
+              li {
                 margin-bottom: 0.75rem;
+                line-height: 1.375rem;
+
+                p {
+                  margin-bottom: 0.75rem;
+                }
               }
             }
           }

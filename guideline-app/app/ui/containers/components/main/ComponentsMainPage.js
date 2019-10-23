@@ -1,11 +1,10 @@
 import React from 'react';
 import { NavLink, withRouter } from 'react-router-dom';
 
-import { Innholdstittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 
 import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.component';
-import TitleByRoute from '../../../components/title-by-route/TitleByRoute';
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
 class ComponentMainPage extends React.Component {
@@ -33,16 +32,13 @@ class ComponentMainPage extends React.Component {
                     }
             </div>
         </article>
-        )
+    );
 
     renderComponentSubRouteContent = () => (
         <article className="mainContent">
-            <Innholdstittel>
-                <TitleByRoute routes={this.props.routes} />
-            </Innholdstittel>
             <SubRoutesWrapper routes={this.props.routes} />
         </article>
-        )
+    );
 
     render() {
         return (
