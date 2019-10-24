@@ -218,7 +218,13 @@ p, .typo-normal {
     padding: 1rem;
     text-decoration: none;
 
-    &:hover, &:focus {
+    &:focus {
+      background: none;
+      color: @navBla;
+      box-shadow: 0 0 0 3px @fokusFarge;
+    }
+
+    &:hover {
       background: @navBla;
       color: white;
     }
