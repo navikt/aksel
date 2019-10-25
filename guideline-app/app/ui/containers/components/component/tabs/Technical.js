@@ -4,7 +4,7 @@ import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Hjelpetekst from 'NavFrontendModules/nav-frontend-hjelpetekst';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
-import Tabs from 'NavFrontendModules/nav-frontend-tabs';
+import Tabs, { Tab } from 'NavFrontendModules/nav-frontend-tabs';
 
 import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
 import { Bash } from './../../../../components/code/Code';
@@ -31,10 +31,10 @@ class Technical extends React.Component {
     }
 
     getTabs = () => {
-        if (this.isStyle) return [{ label: 'Kun Less' }];
+        if (this.isStyle) return ['Kun Less'];
         return [
-            { label: 'React + Less' },
-            { label: 'Kun Less' }
+            'React + Less',
+            'Kun Less' 
         ];
     }
 
@@ -56,9 +56,9 @@ class Technical extends React.Component {
                 </Hjelpetekst>
             </Systemtittel>
             <Tabs
-                tabs={this.tabs}
-                onChange={this.toggleInstallInstructions}
-            />
+                onChange={this.toggleInstallInstructions}>
+                {this.getTabs().map((tab) => <Tab key={tab} label={tab} />)}
+            </Tabs>
             <Panel border>
                 <Bash>{ this.installInstructions[this.state.activeTab] }</Bash>
             </Panel>

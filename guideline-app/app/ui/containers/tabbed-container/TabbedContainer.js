@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Tabs from 'NavFrontendModules/nav-frontend-tabs';
+import Tabs, { Tab } from 'NavFrontendModules/nav-frontend-tabs';
 
 import { getFlattenedPaths } from './../../../utils/routing/routes.utils';
 
@@ -44,8 +44,10 @@ class TabbedContainer extends React.Component {
                         <Tabs
                             defaultAktiv={this.defaultActive}
                             onChange={(e, i) => this.changeTab(i)}
-                            tabs={this.props.tabs.map((tab) => ({ label: tab.label }))}
-                        />
+                            >
+
+                            {this.props.tabs.map((tab) => (<Tab key={tab.label} label={tab.label} />))}
+                        </Tabs>
                     </div>
                 </div>
                 <this.state.activeContent {...this.props} />
