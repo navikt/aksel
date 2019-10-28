@@ -34,7 +34,7 @@ class Technical extends React.Component {
         if (this.isStyle) return ['Kun Less'];
         return [
             'React + Less',
-            'Kun Less' 
+            'Kun Less'
         ];
     }
 
@@ -56,7 +56,8 @@ class Technical extends React.Component {
                 </Hjelpetekst>
             </Systemtittel>
             <Tabs
-                onChange={this.toggleInstallInstructions}>
+                onChange={this.toggleInstallInstructions}
+            >
                 {this.getTabs().map((tab) => <Tab key={tab} label={tab} />)}
             </Tabs>
             <Panel border>

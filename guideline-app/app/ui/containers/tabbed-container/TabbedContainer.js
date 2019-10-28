@@ -44,7 +44,7 @@ class TabbedContainer extends React.Component {
                         <Tabs
                             defaultAktiv={this.defaultActive}
                             onChange={(e, i) => this.changeTab(i)}
-                            >
+                        >
 
                             {this.props.tabs.map((tab) => (<Tab key={tab.label} label={tab.label} />))}
                         </Tabs>
