@@ -204,6 +204,33 @@ p, .typo-normal {
   }
 }
 
+.menu {
+  margin: 0;
+  padding: 0;
+  list-style:none;
+
+  li:not(:last-child) {
+    border-bottom: 1px solid @navLysGra;
+  }
+
+  .lenke {
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+
+    &:focus {
+      background: none;
+      color: @navBla;
+      box-shadow: 0 0 0 3px @fokusFarge;
+    }
+
+    &:hover {
+      background: @navBla;
+      color: white;
+    }
+  }
+}
+
 .catalog {
   display:grid;
   grid-template-columns: repeat(4, 1fr);
