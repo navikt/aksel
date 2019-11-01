@@ -1,4 +1,6 @@
 @import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/fontimports';
+@import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/mixins';
 
 .componentGuidelinePage {
   > .alertstripe {
@@ -42,8 +44,14 @@
     .typo-systemtittel {
       display: flex;
       align-items: center;
+
       .hjelpetekst {
+        margin-left: 1rem;
         height: 1.5rem;
+
+        .popover {
+          max-width: 450px;
+        }
       }
     }
 
