@@ -24,19 +24,21 @@ class Header extends React.Component {
 
     render() {
         return (
-            <header className="header">
-                <div className="header__content">
-                    <NavLink to="/" className="header__logo">
-                        <NAVLogo />
-                        <h1 className="header__title">
-                            Designsystemet
-                        </h1>
-                    </NavLink>
-                    <MobileNavToggle onClick={() => this.toggleMobileNav()} />
-                    <MainNav />
-                    <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
-                </div>
-            </header>
+            <React.Fragment>
+                <header className="header">
+                    <div className="header__content">
+                        <NavLink to="/" className="header__logo">
+                            <NAVLogo />
+                            <h1 className="header__title">
+                                Designsystemet
+                            </h1>
+                        </NavLink>
+                        <MobileNavToggle onClick={() => this.toggleMobileNav()} />
+                        <MainNav />
+                    </div>
+                </header>
+                <MobileNav open={this.state.mobileNavOpen} toggle={this.toggleMobileNav} />
+            </React.Fragment>
         );
     }
 }
