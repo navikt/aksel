@@ -7,7 +7,7 @@ import {
     TextareaControlled,
     CheckboksPanelGruppe,
     Fieldset,
-    Feiloppsummering
+    FancyFeiloppsummering
 } from 'NavFrontendModules/nav-frontend-skjema';
 import Knapp, { Hovedknapp, Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
@@ -164,7 +164,7 @@ class FormValidationExampleC extends React.Component {
         if (invalid) {
             this.setState({
                 submitAttempt: true
-            }, () => this.feiloppsummering.current.focus());
+            }, () => { if (this.feiloppsummering) this.feiloppsummering.current.focus() });
         } else {
             this.setState({
                 submitAttempt: false,
@@ -206,11 +206,13 @@ class FormValidationExampleC extends React.Component {
             fields = Object.assign(fields, {
                 [key]: {
                     value,
-                    errorMsg: (invalid) ? invalid.failText : this.state.fields[name].errorMsg,
+                    errorMsg: (invalid) ? invalid.failText : this.state.fields[key].errorMsg,
                     valid: !invalid
                 }
             });
         });
+
+        console.log(fields);
 
         this.setState({
             fields
@@ -227,10 +229,27 @@ class FormValidationExampleC extends React.Component {
                 <CheckboksPanelGruppe
                     legend={'Hva vil du ha levert?'}
                     checkboxes={[
-                        { label: 'Eplejuice', value: 'juice1', id: 'c-choices' },
-                        { label: 'Appelsinjuice', value: 'juice2' },
-                        { label: 'Melk', value: 'melk' },
-                        { label: 'Ananasjuice', value: 'juice3' }
+                        {
+                            label: 'Eplejuice',
+                            value: 'juice1',
+                            checked: (this.state.fields.choices.value.indexOf('juice1') !== -1),
+                            id: 'c-choices'
+                        },
+                        {
+                            label: 'Appelsinjuice',
+                            value: 'juice2',
+                            checked: (this.state.fields.choices.value.indexOf('juice2') !== -1)
+                        },
+                        {
+                            label: 'Melk',
+                            value: 'melk',
+                            checked: (this.state.fields.choices.value.indexOf('melk') !== -1)
+                        },
+                        {
+                            label: 'Ananasjuice',
+                            value: 'juice3',
+                            checked: (this.state.fields.choices.value.indexOf('juice3') !== -1)
+                        }
                     ]}
                     onChange={(e, value) => this.handleChange(value, 'choices')}
                     feil={(!this.state.fields.choices.valid) ? { feilmelding: this.state.fields.choices.errorMsg } : undefined }
@@ -289,30 +308,32 @@ class FormValidationExampleC extends React.Component {
     }
 
     render(){
+
+        const visFeiloppsummering = !!Object.keys(this.state.fields).filter(
+            (key) => this.state.fields[key].errorMsg.length
+        ).length && this.state.submitAttempt;
+
+        const feil = Object.keys(this.state.fields).filter((key) => this.state.fields[key].errorMsg.length).map((key) => ({
+            feilmelding: this.state.fields[key].errorMsg,
+            valid: this.state.fields[key].valid,
+            key: `c-${key}`
+        }));
+
+        console.log(feil);
+
         return (
             <div className="form-validation-pattern">
                 <Systemtittel>Mitt skjema</Systemtittel>
                 <br/>
                 <br/>
                 {
-                    !!Object.keys(this.state.fields).filter((key) => this.state.fields[key].errorMsg.length).length &&
-                    this.state.submitAttempt &&
-                    <Feiloppsummering innerRef={this.feiloppsummering}>
+                    visFeiloppsummering &&
+                    <FancyFeiloppsummering
+                        innerRef={this.feiloppsummering}
+                        feil={feil}
+                    >
                         <Undertittel>For å gå videre må du rette opp følgende:</Undertittel>
-                        <ul>
-                            {
-                                Object.keys(this.state.fields).filter((key) => this.state.fields[key].errorMsg.length).map((key) => (
-                                    <li key={key}>
-                                        <Lenke href={`#c-${key}`}>
-                                            {(this.state.fields[key].valid) ? '✓' : 'x'}
-                                            &nbsp;
-                                            {this.state.fields[key].errorMsg}
-                                        </Lenke>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </Feiloppsummering>
+                    </FancyFeiloppsummering>
                 }
                 {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
                 {

@@ -198,10 +198,27 @@ class FormValidationExampleB extends React.Component {
                 <CheckboksPanelGruppe
                     legend={'Hva vil du ha levert?'}
                     checkboxes={[
-                        { label: 'Eplejuice', value: 'juice1', id: 'b-choices' },
-                        { label: 'Appelsinjuice', value: 'juice2' },
-                        { label: 'Melk', value: 'melk' },
-                        { label: 'Ananasjuice', value: 'juice3' }
+                        {
+                            label: 'Eplejuice',
+                            value: 'juice1',
+                            checked: (this.state.fieldValues['choices'].indexOf('juice1') !== -1),
+                            id: 'b-choices',
+                        },
+                        {
+                            label: 'Appelsinjuice',
+                            value: 'juice2',
+                            checked: (this.state.fieldValues['choices'].indexOf('juice2') !== -1)
+                        },
+                        {
+                            label: 'Melk',
+                            value: 'melk',
+                            checked: (this.state.fieldValues['choices'].indexOf('melk') !== -1)
+                        },
+                        {
+                            label: 'Ananasjuice',
+                            value: 'juice3',
+                            checked: (this.state.fieldValues['choices'].indexOf('juice3') !== -1)
+                        }
                     ]}
                     onChange={(e, value) => this.handleChange(value, 'choices')}
                     feil={(this.state.errors.choices) ? { feilmelding: this.state.errors.choices } : undefined }
