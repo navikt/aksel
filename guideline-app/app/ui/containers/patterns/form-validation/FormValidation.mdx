@@ -3,59 +3,20 @@ import Example from '../../../components/example/Example';
 import FormValidationExampleA from './examples/FormValidationExampleA';
 import FormValidationExampleB from './examples/FormValidationExampleB';
 import FormValidationExampleC from './examples/FormValidationExampleC';
+import FormValidationExampleD from './examples/FormValidationExampleD';
 
 # Skjemavalidering
 
 <Ingress>Dette mønsteret skal demonstrere reglene for skjema-validering.</Ingress>
 
-## Eksempel A
-
-<Example>
-    <FormValidationExampleA />
-</Example>
-
-### Regler
-
-- Validering per felt skjer ved `blur` og `change`
-- Feiloppsummeringsboks vises ved `submit`
-- Feil i feiloppsummeringsboks forsvinner etterhvert som de blir utbedret
-- Hvis alle feil i feiloppsummeringsboks blir utbedret, og nye feil blir introdusert vil feiloppsummeringsboksen igjen vises før nytt `submit` forsøk
-
-## Eksempel B
-
-<Example>
-    <FormValidationExampleB />
-</Example>
-
-### Regler
-
-- Validering per felt skjer ved `change`
-- Feiloppsummeringsboks vises ved `submit`
-- Feil i feiloppsummeringsboks forsvinner ettehvert som de blir utbedret
-- Hvis alle feil i feiloppsummeringsboks blir utbedret, og nye feil blir introdusert vil **ikke** feiloppsummeringsboksen igjen vises før nytt `submit` forsøk
-
-## Eksempel C
-
-For å unngå "hopping" i skjema.
-
-<Example>
-    <FormValidationExampleC />
-</Example>
-
-### Regler
-
-- Validering per felt skjer ved `change`
-- Feiloppsummeringsboks vises ved `submit`
-- Feil i feiloppsummeringsboks blir markert som **fikset** etterhvert som de blir utbedret
-
-## Eksempel D
-
-<Example>
-    <FormValidationExampleA />
-</Example>
-
-### Regler
+## Retningslinjer
 
 - Validering per felt skjer ikke før etter første `submit` forsøk,  deretter på `change`
 - Feiloppsummeringsboks vises ved `submit`
 - Feil i feiloppsummeringsboks blir markert som **fikset** etterhvert som de blir utbedret
+
+## Live eksempel
+
+<Example>
+    <FormValidationExampleD />
+</Example>
