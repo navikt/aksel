@@ -298,10 +298,6 @@ class FormValidationExampleD extends React.Component {
                 </div>
                 <br/>
                 <br/>
-                <div style={{display:'flex'}}>
-                    <Hovedknapp onClick={this.submit}>Fullfør</Hovedknapp>
-                    <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
-                </div>
             </form>
         );
     }
@@ -328,7 +324,7 @@ class FormValidationExampleD extends React.Component {
         const feil = Object.keys(this.state.fields).filter((key) => this.state.fields[key].errorMsg.length).map((key) => ({
             feilmelding: this.state.fields[key].errorMsg,
             valid: this.state.fields[key].valid,
-            key: `c-${key}`
+            key: `d-${key}`
         }));
 
         console.log(feil);
@@ -339,6 +335,10 @@ class FormValidationExampleD extends React.Component {
                 <br/>
                 <br/>
                 {
+                    (!this.state.submitSuccess && !this.state.submitting) &&
+                    this.getForm()
+                }
+                {
                     visFeiloppsummering &&
                     <FancyFeiloppsummering
                         innerRef={this.feiloppsummering}
@@ -347,7 +347,15 @@ class FormValidationExampleD extends React.Component {
                         <Undertittel>For å gå videre må du rette opp følgende:</Undertittel>
                     </FancyFeiloppsummering>
                 }
-                {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
+                {
+                    (!this.state.submitSuccess && !this.state.submitting) &&
+                    <div>
+                        <div style={{display:'flex'}}>
+                            <Hovedknapp onClick={this.submit}>Fullfør</Hovedknapp>
+                            <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
+                        </div>
+                    </div>
+                }
                 {
                     this.state.submitting && 
                     <div className="spinner-container">
