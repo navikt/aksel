@@ -256,44 +256,31 @@ class FormValidationExampleD extends React.Component {
                     feil={(!this.state.fields.choices.valid) ? { feilmelding: this.state.fields.choices.errorMsg } : undefined }
                 />
                 <Ingress>Leveringsadresse</Ingress>
-                <SkjemaGruppe
+                <Input
+                    id="d-address"
+                    label="Adresse"
+                    value={this.state.fields.address.value}
+                    onChange={(e) => this.handleChange(e.currentTarget.value, 'address')}
                     feil={(!this.state.fields.address.valid) ? { feilmelding: this.state.fields.address.errorMsg } : undefined }
-                >
-                    <Input
-                        id="d-address"
-                        label="Adresse"
-                        value={this.state.fields.address.value}
-                        onChange={(e) => this.handleChange(e.currentTarget.value, 'address')}
-                    />
-                </SkjemaGruppe>
-                <SkjemaGruppe
-                    feil={(!this.state.fields.zip.valid) ? { feilmelding: this.state.fields.zip.errorMsg } : undefined }
-                >
-                    <Input
-                        id="d-zip"
-                        label="Postnummer"
-                        value={this.state.fields.zip.value}
-                        onChange={(e) => this.handleChange(e.currentTarget.value, 'zip')}
-                        bredde="XS"
-                        style={{ 'marginRight': '2rem' }}
-                    />
-                </SkjemaGruppe>
-                <SkjemaGruppe
-                    feil={(!this.state.fields.city.valid) ? { feilmelding: this.state.fields.city.errorMsg } : undefined }
-                >
-                    <Input
-                        id="d-city"
-                        label="Poststed"
-                        value={this.state.fields.city.value}
-                        onChange={(e) => this.handleChange(e.currentTarget.value, 'city')}
-                    />
-                </SkjemaGruppe>
+                />
                 <div className="fields postnr-sted">
                     <div className="postnr-sted__postnr">
-                        
+                        <Input
+                            id="d-zip"
+                            label="Postnummer"
+                            value={this.state.fields.zip.value}
+                            onChange={(e) => this.handleChange(e.currentTarget.value, 'zip')}
+                            feil={(!this.state.fields.zip.valid) ? { feilmelding: this.state.fields.zip.errorMsg } : undefined }
+                        />
                     </div>
                     <div className="postnr-sted__poststed">
-                        
+                        <Input
+                            id="d-city"
+                            label="Poststed"
+                            value={this.state.fields.city.value}
+                            onChange={(e) => this.handleChange(e.currentTarget.value, 'city')}
+                            feil={(!this.state.fields.city.valid) ? { feilmelding: this.state.fields.city.errorMsg } : undefined }
+                        />
                     </div>
                 </div>
                 <br/>
