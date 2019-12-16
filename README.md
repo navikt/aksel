@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img src="https://www.nav.no/_public/beta.nav.no/images/logo.png" />
+    <img src="https://www.nav.no/_/asset/no.nav.navno:1575554845/img/navno/logo.svg" />
     <br/>nav-frontend-moduler
 </h1>
 
