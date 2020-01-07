@@ -35,6 +35,7 @@
   "devDependencies": {
     "@mdx-js/loader": "^0.15.4",
     "@mdx-js/mdx": "^0.15.4",
+    "@navikt/fnrvalidator": "^1.1.0",
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "@types/react-collapse": "^4.0.1",
