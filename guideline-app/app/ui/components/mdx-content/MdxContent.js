@@ -61,7 +61,7 @@ class MdxContent extends React.Component {
         return (
             <div className="mdx-content">
                 <section className="section">
-                    <MDXProvider components={componentsMap}>
+                    <MDXProvider components={{...componentsMap}}>
                         <this.props.children />
                     </MDXProvider>
                 </section>
