@@ -21,7 +21,7 @@ const isNumeric = (value) => {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-class FormValidationExampleB extends React.Component {
+class FormValidationExampleG extends React.Component {
     constructor(props){
         super(props);
 
@@ -100,14 +100,21 @@ class FormValidationExampleB extends React.Component {
         });
 
         const invalid = this.validateField(name);
-        const newErrors = Object.assign(this.state.errors, {
-            [name]: (invalid) ? invalid.failText : undefined
-        });
 
-        this.setState({
-            fieldValues: newValues,
-            errors: newErrors
-        });
+        if (this.state.submitAttempt) {
+            const newErrors = Object.assign(this.state.errors, {
+                [name]: (invalid) ? invalid.failText : undefined
+            });
+
+            this.setState({
+                fieldValues: newValues,
+                errors: newErrors
+            });
+        } else {
+            this.setState({
+                fieldValues: newValues
+            });
+        }
 
         const hasErrors = this.validateAll();
         if (this.state.submitAttempt && !hasErrors) {
@@ -253,12 +260,6 @@ class FormValidationExampleB extends React.Component {
                         </div>
                     </div>
                 </SkjemaGruppe>
-                <br/>
-                <br/>
-                <div style={{display:'flex'}}>
-                    <Hovedknapp onClick={this.submit}>Fullfør</Hovedknapp>
-                    <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
-                </div>
             </form>
         );
     }
@@ -282,6 +283,7 @@ class FormValidationExampleB extends React.Component {
                 <Systemtittel>Mitt skjema</Systemtittel>
                 <br/>
                 <br/>
+                {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
                 {
                     (Object.keys(this.state.errors).some(key => !!this.state.errors[key]) && this.state.submitAttempt) &&
                     <Feiloppsummering innerRef={this.feiloppsummering}>
@@ -299,7 +301,15 @@ class FormValidationExampleB extends React.Component {
                         </ul>
                     </Feiloppsummering>
                 }
-                {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
+                {
+                    (!this.state.submitSuccess && !this.state.submitting) &&
+                    <div>
+                        <div className="form-buttons" style={{display:'flex'}}>
+                            <Hovedknapp onClick={this.submit}>Fullfør</Hovedknapp>
+                            <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
+                        </div>
+                    </div>
+                }
                 {
                     this.state.submitting && 
                     <div className="spinner-container">
@@ -314,4 +324,4 @@ class FormValidationExampleB extends React.Component {
     }
 }
 
-export default FormValidationExampleB;
+export default FormValidationExampleG;

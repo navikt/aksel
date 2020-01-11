@@ -1,22 +1,32 @@
 import { Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Example from '../../../components/example/Example';
 import FormValidationExampleA from './examples/FormValidationExampleA';
 import FormValidationExampleB from './examples/FormValidationExampleB';
 import FormValidationExampleC from './examples/FormValidationExampleC';
 import FormValidationExampleD from './examples/FormValidationExampleD';
+import FormValidationExampleG from './examples/FormValidationExampleG';
 
 # Skjemavalidering
 
 <Ingress>Dette mønsteret skal demonstrere reglene for skjema-validering.</Ingress>
 
-## Retningslinjer
+## Regler
 
-- Validering per felt skjer ikke før etter første `submit` forsøk,  deretter på `change`
-- Feiloppsummeringsboks vises ved `submit`
-- Feil i feiloppsummeringsboks blir markert som **fikset** etterhvert som de blir utbedret
+- Validering per felt skal ikke skje før etter første `submit`-forsøk, deretter på `change`
+- Hvis skjemaet har feil ved `submit` skal [feiloppsummeringsboks](/components/feiloppsummering) med liste over alle feil vises nederst i skjemaet, men over submit-knappen
+- Feil i feiloppsummeringsboks skal være [lenker](/components/lenke) til det feltet feilen gjelder
+- Feil i feiloppsummeringsboks forsvinner etterhvert som de blir utbedret
+- Etter at alle feil er blitt utbedret, må det et nytt `submit`-forsøk til for at nye feil igjen skal vises i feiloppsummeringen
+
+<br/>
+
+<Alertstripe type="info">
+    Skjema som bare har ett skjemafelt (f.eks. søkefelt eller skjema fordelt over flere sider/steg) er unntatt disse reglene.
+</Alertstripe>
 
 ## Live eksempel
 
 <Example>
-    <FormValidationExampleD />
+    <FormValidationExampleG />
 </Example>
