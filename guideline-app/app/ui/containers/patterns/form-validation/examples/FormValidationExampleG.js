@@ -278,6 +278,13 @@ class FormValidationExampleG extends React.Component {
     }
 
     render(){
+        const feil = Object.keys(this.state.errors).filter((key) => this.state.errors[key]).map((key) => 
+            ({
+                skjemaelementId: `#b-${key}`,
+                feilmelding: this.state.errors[key]
+            })
+        );
+
         return (
             <div className="form-validation-pattern">
                 <Systemtittel>Mitt skjema</Systemtittel>
@@ -285,21 +292,12 @@ class FormValidationExampleG extends React.Component {
                 <br/>
                 {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
                 {
-                    (Object.keys(this.state.errors).some(key => !!this.state.errors[key]) && this.state.submitAttempt) &&
-                    <Feiloppsummering innerRef={this.feiloppsummering}>
-                        <Undertittel>For å gå videre må du rette opp følgende:</Undertittel>
-                        <ul>
-                            {
-                                Object.keys(this.state.errors).filter((key) => this.state.errors[key]).map((key) => (
-                                    <li key={key}>
-                                        <Lenke href={`#b-${key}`}>
-                                            {this.state.errors[key]}
-                                        </Lenke>
-                                    </li>
-                                ))
-                            }
-                        </ul>
-                    </Feiloppsummering>
+                    (feil && !!feil.length) &&
+                    <Feiloppsummering
+                        innerRef={this.feiloppsummering}
+                        tittel={<Ingress>asdasløkdmald</Ingress>}
+                        feil={feil}
+                    />
                 }
                 {
                     (!this.state.submitSuccess && !this.state.submitting) &&
