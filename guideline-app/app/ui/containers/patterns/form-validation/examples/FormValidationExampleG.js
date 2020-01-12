@@ -55,7 +55,7 @@ class FormValidationExampleG extends React.Component {
             city: [
                 {
                     test: (v) => v && v.length,
-                    failText: 'Du må oppgi en gateadresse'
+                    failText: 'Du må oppgi et poststed'
                 }
             ]
         };
@@ -228,7 +228,7 @@ class FormValidationExampleG extends React.Component {
                         }
                     ]}
                     onChange={(e, value) => this.handleChange(value, 'choices')}
-                    feil={(this.state.errors.choices) ? { feilmelding: this.state.errors.choices } : undefined }
+                    feil={(this.state.errors.choices) ? this.state.errors.choices : undefined }
                 />
                 <br/><br/>
                 <SkjemaGruppe legend={<Ingress>Leveringsadresse</Ingress>}>
@@ -237,7 +237,7 @@ class FormValidationExampleG extends React.Component {
                         label="Adresse"
                         value={this.state.fieldValues.address}
                         onChange={(e) => this.handleChange(e.currentTarget.value, 'address')}
-                        feil={(this.state.errors.address) ? { feilmelding: this.state.errors.address } : undefined }
+                        feil={(this.state.errors.address) ? this.state.errors.address : undefined }
                     />
                     <div className="fields postnr-sted">
                         <div className="postnr-sted__postnr">
@@ -246,7 +246,7 @@ class FormValidationExampleG extends React.Component {
                                 label="Postnummer"
                                 value={this.state.fieldValues.zip}
                                 onChange={(e) => this.handleChange(e.currentTarget.value, 'zip')}
-                                feil={(this.state.errors.zip) ? { feilmelding: this.state.errors.zip } : undefined }
+                                feil={(this.state.errors.zip) ? this.state.errors.zip : undefined }
                             />
                         </div>
                         <div className="postnr-sted__poststed">
@@ -255,7 +255,7 @@ class FormValidationExampleG extends React.Component {
                                 label="Poststed"
                                 value={this.state.fieldValues.city}
                                 onChange={(e) => this.handleChange(e.currentTarget.value, 'city')}
-                                feil={(this.state.errors.city) ? { feilmelding: this.state.errors.city } : undefined }
+                                feil={(this.state.errors.city) ? this.state.errors.city : undefined }
                             />
                         </div>
                     </div>
