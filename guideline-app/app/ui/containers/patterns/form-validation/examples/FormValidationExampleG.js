@@ -280,7 +280,7 @@ class FormValidationExampleG extends React.Component {
     render(){
         const feil = Object.keys(this.state.errors).filter((key) => this.state.errors[key]).map((key) => 
             ({
-                skjemaelementId: `#b-${key}`,
+                skjemaelementId: `b-${key}`,
                 feilmelding: this.state.errors[key]
             })
         );
@@ -295,7 +295,7 @@ class FormValidationExampleG extends React.Component {
                     (feil && !!feil.length) &&
                     <Feiloppsummering
                         innerRef={this.feiloppsummering}
-                        tittel={<Ingress>asdasløkdmald</Ingress>}
+                        tittel={<Ingress>For å gå videre må du rette opp følgende:</Ingress>}
                         feil={feil}
                     />
                 }
