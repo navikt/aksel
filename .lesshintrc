@@ -1,6 +1,6 @@
 {
   "fileExtensions": [".less", ".css"],
-  "excludedFiles": ["*Source-Sans*.less", "packages/node_modules/nav-frontend-core"],
+  "excludedFiles": ["*Source-Sans*.less", "packages/node_modules/nav-frontend-core", "packages/node_modules/nav-frontend-skjema-style/src/assets/symbols.less"],
   "zeroUnit": false,
   "propertyOrdering": false,
   "maxCharPerLine": { "limit": 120 },

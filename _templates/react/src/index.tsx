@@ -9,11 +9,11 @@ export interface <%name.camelcase%>Props {
     className?: string;
 }
 
-class <%name.camelcase%> extends React.Component<%name.camelcase%>Props> {
+class <%name.camelcase%> extends React.Component<<%name.camelcase%>Props> {
     render() {
         const { children, className } = this.props;
         return (
-            <div className={classnames(<%name.kebabcase%>, className)}>
+            <div className={classnames('<%name.kebabcase%>', className)}>
                 <h2>Hello from <%name.original%></h2>
                 {children}
             </div>

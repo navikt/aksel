@@ -1,38 +1,10 @@
 @import (reference) '~NavFrontendCore/less/_variabler';
 
 .propTypeTableWrapperOuter {
-  position:relative;
   margin:1rem 0;
-
-  &--overflowLeft {
-    &:before {
-      .overflow-shadow();
-      left:0px;
-      background:linear-gradient(to right, rgba(0,0,0,1), transparent);
-    }
-  }
-
-  &--overflowRight {
-    &:after {
-      .overflow-shadow();
-      right:0px;
-      background:linear-gradient(to left, rgba(0,0,0,1), transparent);
-    }
-  }
-
-  .overflow-shadow() {
-    content: '';
-    position:absolute;
-    top:0px;
-    bottom:0px;
-    width:20px;
-    opacity:0.1;
-  }
 }
 
 .propTypeTableWrapper {
-  overflow:scroll;
-
   table {
     .deprecated {
       td {

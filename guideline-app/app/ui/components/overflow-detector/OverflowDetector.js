@@ -1,13 +1,25 @@
 import React from 'react';
+import classnames from 'classnames';
+
+import './styles.less';
+
+const overflowCls = (state) => classnames('overflow-detector', {
+    'overflow-detector--shadow-left': state.overflowLeft,
+    'overflow-detector--shadow-right': state.overflowRight
+});
 
 class OverflowDetector extends React.Component {
     constructor(props) {
         super(props);
 
+        this.scroller = React.createRef();
+        this.inner = React.createRef();
+
         this.state = {
             overflowLeft: false,
             overflowRight: false
         };
+
         window.addEventListener('resize', this.checkOverflow);
     }
 
@@ -20,14 +32,16 @@ class OverflowDetector extends React.Component {
     }
 
     checkOverflow = () => {
+        const scroller = this.scroller.current;
+        const inner = this.inner.current;
         let overflowLeft = false;
         let overflowRight = false;
 
-        if (this.wrapper.offsetWidth < this.table.offsetWidth) {
-            if (this.wrapper.scrollLeft !== 0) {
+        if (scroller.offsetWidth < inner.offsetWidth) {
+            if (scroller.scrollLeft !== 0) {
                 overflowLeft = true;
             }
-            if ((this.wrapper.scrollLeft + this.wrapper.offsetWidth) < this.table.offsetWidth) {
+            if ((scroller.scrollLeft + scroller.offsetWidth) < inner.offsetWidth) {
                 overflowRight = true;
             }
         }
@@ -39,9 +53,29 @@ class OverflowDetector extends React.Component {
     }
 
     render() {
+        const scrollAttr = (this.state.overflowRight || this.state.overflowLeft)
+            ? {
+                tabIndex: '0',
+                role: 'region',
+                'aria-label': 'Eksempel'
+            }
+            : undefined;
+
         return (
-            <div>
-                {this.props.children}
+            <div className={overflowCls(this.state)}>
+                <div
+                    className="overflow-detector__scroller"
+                    onScroll={this.checkOverflow}
+                    ref={this.scroller}
+                    {...scrollAttr}
+                >
+                    <div
+                        className="overflow-detector__inner"
+                        ref={this.inner}
+                    >
+                        {this.props.children}
+                    </div>
+                </div>
             </div>
         );
     }
