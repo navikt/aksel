@@ -28,7 +28,7 @@ export default class App extends Component {
                     <Undertittel>Utviklingsmiljø kjører!</Undertittel>
                 </Alertstripe>
                 <div style={{border: "1px dotted red", width: "600px", height: "200px"}}>
-                    <Lastestriper lines={3}/>
+                    <Lastestrip linjer={5}/>
                     Laststriper demo
                 </div>
                 <br/>
