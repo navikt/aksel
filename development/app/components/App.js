@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+// import { Lastestriper} from 'NavFrontendModules/nav-frontend-lastestriper';
 
 import './styles.less';
 
@@ -26,6 +27,10 @@ export default class App extends Component {
                 <Alertstripe type="suksess">
                     <Undertittel>Utviklingsmiljø kjører!</Undertittel>
                 </Alertstripe>
+                <div style={{border: "1px dotted red", width: "600px", height: "200px"}}>
+                    <Lastestriper lines={3}/>
+                    Laststriper demo
+                </div>
                 <br/>
                 <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
                 <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
