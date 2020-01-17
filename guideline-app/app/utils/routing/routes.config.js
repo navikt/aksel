@@ -2,6 +2,7 @@ import resolveComponentRoutes from './routes.utils';
 
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
+import OtherComponentsPage from '../../ui/containers/components/other/OtherComponentsPage';
 
 import GenericSectionStart from '../../ui/containers/GenericSectionStart';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
@@ -20,6 +21,12 @@ import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
 
 const componentRoutes = resolveComponentRoutes('components');
+
+componentRoutes.push({
+    path: '/components/other',
+    component: OtherComponentsPage,
+    title: '+ Andre komponenter'
+});
 
 const routeConfig = [
     {
