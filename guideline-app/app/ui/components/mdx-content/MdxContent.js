@@ -19,7 +19,7 @@ class MdxContent extends React.Component {
     }
 
     componentDidMount = () => {
-        this.setState({ ready: true });
+        this.setState({ ready: true }); // eslint-disable-line react/no-did-mount-set-state
     }
 
     registerHeadline = (type, title) => {
@@ -61,7 +61,7 @@ class MdxContent extends React.Component {
         return (
             <div className="mdx-content">
                 <section className="section">
-                    <MDXProvider components={{...componentsMap}}>
+                    <MDXProvider components={{ ...componentsMap }}>
                         <this.props.children />
                     </MDXProvider>
                 </section>

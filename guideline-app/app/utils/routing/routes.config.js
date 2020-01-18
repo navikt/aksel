@@ -17,8 +17,7 @@ import AccessibilityOverviewPage from '../../ui/containers/accessibility/overvie
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
-import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
-import FormValidationPage from '../../ui/containers/patterns/form-validation/FormValidationPage'
+import FormValidationPage from '../../ui/containers/patterns/form-validation/FormValidationPage';
 
 const componentRoutes = resolveComponentRoutes('components');
 
