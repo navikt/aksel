@@ -35,7 +35,10 @@ const LeftNavigation = (props) => (
                 {
                     props.routes && props.routes.map((item) =>
                         (
-                            <li key={item.title} className={classnames({'divider': item.path === '/components/other'})}>
+                            <li
+                                key={item.title}
+                                className={classnames({ divider: item.path === '/components/other' })}
+                            >
                                 <NavLink
                                     activeClassName="active"
                                     to={item.path}
@@ -61,7 +64,9 @@ const LeftNavigation = (props) => (
                     <div className="contribute-promo">
                         <Undertittel>Noe du savner?</Undertittel>
                         <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
-                            <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
+                            <Normaltekst className="lenkepanel__heading">
+                                Bidra med nye komponenter på Github
+                            </Normaltekst>
                         </LenkepanelBase>
                     </div>
                 </React.Fragment>
