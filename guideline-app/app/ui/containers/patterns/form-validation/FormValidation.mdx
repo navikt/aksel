@@ -1,11 +1,7 @@
 import { Ingress } from 'NavFrontendModules/nav-frontend-typografi';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Example from '../../../components/example/Example';
-import FormValidationExampleA from './examples/FormValidationExampleA';
-import FormValidationExampleB from './examples/FormValidationExampleB';
-import FormValidationExampleC from './examples/FormValidationExampleC';
-import FormValidationExampleD from './examples/FormValidationExampleD';
-import FormValidationExampleG from './examples/FormValidationExampleG';
+import FormValidationExample from './FormValidationExample';
 
 # Skjemavalidering
 
@@ -13,8 +9,10 @@ import FormValidationExampleG from './examples/FormValidationExampleG';
 
 ## Regler
 
+- Kravene for å fylle ut skjemaet riktig skal tydelig fremgå av skjemaet uten at brukeren trenger å få noen feilmeldinger fra valideringen for å forstå dette (retningslinjer for dette er [under arbeid](https://github.com/navikt/Designsystemet/issues/135))
 - Validering per felt skal ikke skje før etter første `submit`-forsøk, deretter på `change`
 - Hvis skjemaet har feil ved `submit` skal [feiloppsummeringsboks](/components/feiloppsummering) med liste over alle feil vises nederst i skjemaet, men over submit-knappen
+- Feiloppsummeringsboks skal automatisk få `fokus` når den vises
 - Feil i feiloppsummeringsboks skal være [lenker](/components/lenke) til det feltet feilen gjelder
 - Feil i feiloppsummeringsboks forsvinner etterhvert som de blir utbedret
 - Etter at alle feil er blitt utbedret, må det et nytt `submit`-forsøk til for at nye feil igjen skal vises i feiloppsummeringen
@@ -28,5 +26,5 @@ import FormValidationExampleG from './examples/FormValidationExampleG';
 ## Live eksempel
 
 <Example>
-    <FormValidationExampleG />
+    <FormValidationExample />
 </Example>

@@ -21,7 +21,7 @@ const isNumeric = (value) => {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
-class FormValidationExampleG extends React.Component {
+class FormValidationExample extends React.Component {
     constructor(props){
         super(props);
 
@@ -171,15 +171,17 @@ class FormValidationExampleG extends React.Component {
                     submitSuccess: true
                 });
 
-                this.timer = window.setInterval(() => {
-                    if (this.state.resetCounter > 1) {
-                        this.setState({
-                            resetCounter: this.state.resetCounter - 1
-                        });
-                    } else {
-                        this.reset();
-                    }
-                }, 1000);
+                window.setTimeout(() => {
+                    this.timer = window.setInterval(() => {
+                        if (this.state.resetCounter > 1) {
+                            this.setState({
+                                resetCounter: this.state.resetCounter - 1
+                            });
+                        } else {
+                            this.reset();
+                        }
+                    }, 1000);
+                }, 3000);
             });
         }
     }
@@ -199,9 +201,9 @@ class FormValidationExampleG extends React.Component {
         return Object.keys(errors).length ? errors : false ;
     }
 
-    getForm = () => {
+    getForm = (feil) => {
         return (
-            <form>
+            <form onSubmit={this.submit}>
                 <CheckboksPanelGruppe
                     legend={'Hva vil du ha levert?'}
                     checkboxes={[
@@ -243,7 +245,7 @@ class FormValidationExampleG extends React.Component {
                         <div className="postnr-sted__postnr">
                             <Input
                                 id="b-zip"
-                                label="Postnummer"
+                                label="Postnummer (4 siffer)"
                                 value={this.state.fieldValues.zip}
                                 onChange={(e) => this.handleChange(e.currentTarget.value, 'zip')}
                                 feil={(this.state.errors.zip) ? this.state.errors.zip : undefined }
@@ -260,6 +262,20 @@ class FormValidationExampleG extends React.Component {
                         </div>
                     </div>
                 </SkjemaGruppe>
+                {
+                    (feil && !!feil.length) &&
+                    <Feiloppsummering
+                        innerRef={this.feiloppsummering}
+                        tittel={<Ingress>For å gå videre må du rette opp følgende:</Ingress>}
+                        feil={feil}
+                    />
+                }
+                <div>
+                    <div className="form-buttons" style={{display:'flex'}}>
+                        <Hovedknapp type="submit">Fullfør</Hovedknapp>
+                        <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
+                    </div>
+                </div>
             </form>
         );
     }
@@ -290,36 +306,21 @@ class FormValidationExampleG extends React.Component {
                 <Systemtittel>Mitt skjema</Systemtittel>
                 <br/>
                 <br/>
-                {(!this.state.submitSuccess && !this.state.submitting) && this.getForm()}
-                {
-                    (feil && !!feil.length) &&
-                    <Feiloppsummering
-                        innerRef={this.feiloppsummering}
-                        tittel={<Ingress>For å gå videre må du rette opp følgende:</Ingress>}
-                        feil={feil}
-                    />
-                }
-                {
-                    (!this.state.submitSuccess && !this.state.submitting) &&
-                    <div>
-                        <div className="form-buttons" style={{display:'flex'}}>
-                            <Hovedknapp onClick={this.submit}>Fullfør</Hovedknapp>
-                            <Flatknapp onClick={this.reset}>Nullstill</Flatknapp>
+                <div aria-live="assertive">
+                    {(!this.state.submitSuccess && !this.state.submitting) && this.getForm(feil)}
+                    {
+                        this.state.submitting && 
+                        <div className="spinner-container">
+                            <div align="center">
+                                <Spinner transparent /><br/><br/>Sender inn...
+                            </div>
                         </div>
-                    </div>
-                }
-                {
-                    this.state.submitting && 
-                    <div className="spinner-container">
-                        <div align="center">
-                            <Spinner transparent /><br/><br/>Sender inn...
-                        </div>
-                    </div>
-                }
-                {this.state.submitSuccess && this.getReceipt()}
+                    }
+                    {this.state.submitSuccess && this.getReceipt()}
+                </div>
             </div>
         );
     }
 }
 
-export default FormValidationExampleG;
+export default FormValidationExample;
