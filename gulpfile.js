@@ -113,10 +113,6 @@ function parseTsAndAppendDocInfo(contents, file) {
 
         const exceptions = ['StatelessComponent', 'EventThrottler', 'Container'];
 
-        if (!docInfo) {
-            console.log(tsPath);
-        }
-
         if (exceptions.indexOf(docInfo.displayName) !== -1) {
             return contents;
         }
