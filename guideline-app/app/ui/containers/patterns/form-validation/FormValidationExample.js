@@ -107,7 +107,7 @@ class FormValidationExample extends React.Component {
                 feil={(this.state.errors.choices) ? this.state.errors.choices : undefined}
             />
             <br /><br />
-            <SkjemaGruppe legend={<Ingress>Leveringsadresse</Ingress>}>
+            <SkjemaGruppe legend="Leveringsadresse">
                 <Input
                     id="b-address"
                     label="Adresse"
@@ -140,7 +140,7 @@ class FormValidationExample extends React.Component {
                 (feil && !!feil.length) &&
                 <Feiloppsummering
                     innerRef={this.feiloppsummering}
-                    tittel={<Ingress>For å gå videre må du rette opp følgende:</Ingress>}
+                    tittel="For å gå videre må du rette opp følgende:"
                     feil={feil}
                 />
             }
