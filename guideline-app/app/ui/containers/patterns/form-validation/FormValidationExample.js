@@ -1,5 +1,5 @@
 import React from 'react';
-import { Systemtittel, Undertittel, Ingress } from 'NavFrontendModules/nav-frontend-typografi';
+import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import {
     Input,
     CheckboksPanelGruppe,
