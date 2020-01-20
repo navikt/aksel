@@ -5,7 +5,7 @@ import 'prismjs/themes/prism-coy.css';
 
 import './styles.less';
 
-const Code = (props) => {
+const Codeblock = (props) => {
     // const lang = this.props.className.split('-')[1];
     const highlighted = Prism.highlight(props.children, Prism.languages.jsx);
     return (
@@ -15,8 +15,8 @@ const Code = (props) => {
     );
 };
 
-export const Inline = (props) => (<code className="inline">{props.children}</code>);
+export const InlineCode = (props) => (<code className="inline">{props.children}</code>);
 
 export const Bash = (props) => (<code className="bash">{props.children}</code>);
 
-export default Code;
+export default Codeblock;
