@@ -35,7 +35,7 @@ Promise.all([
     getGlobFiles('./packages/node_modules/**/lib', { dot: true }),
     getGlobFiles('./packages/node_modules/**/src/*.d.ts', { dit: true })
 ])
-    .then(([ folders, files ]) => {
+    .then(([folders, files]) => {
         files.forEach((file) => {
             console.log(`Deleting ${file}`);
             fs.unlinkSync(file);
