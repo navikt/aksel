@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "gulp build --ignoreErrors && npm run generateMDs",
+    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --ignoreErrors && npm run generateMDs",
     "lerna": "lerna",
     "gulp": "gulp",
     "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
@@ -37,6 +37,7 @@
     "@mdx-js/mdx": "^1.5.1",
     "@mdx-js/react": "^1.5.1",
     "@navikt/fnrvalidator": "^1.1.0",
+    "@navikt/textparser": "^2.0.0",
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "@types/react-collapse": "^4.0.1",
