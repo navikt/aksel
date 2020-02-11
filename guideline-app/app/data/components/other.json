@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Datovelger",
+    "description": "Enkel React datovelger",
+    "repository": "https://github.com/navikt/datovelger",
+    "demo_url": ""
+  },
+  {
+    "name": "Typeahead",
+    "description": "Typeahead / Autocomplete komponent med WAI-ARIA støtte",
+    "repository": "https://github.com/navikt/sosialhjelp-veiviser/tree/master/web/frontend/src/components/kommunesok/typeahead",
+    "demo_url": ""
+  },
+  {
+    "name": "Internarbeidsflatedecorator",
+    "description": "Gammel dekoratør for interne arbeidsflater",
+    "repository": "https://github.com/navikt/internarbeidsflatedecorator/",
+    "demo_url": "https://navikt.github.io/internarbeidsflatedecorator/"
+  },
+  {
+    "name": "Internheader",
+    "description": "Ny dekoratør/header for interne arbeidsflater",
+    "repository": "https://github.com/navikt/not-a-platform/tree/master/packages/%40navikt/header",
+    "demo_url": ""
+  },
+  {
+    "name": "Dekoratør for nav.no",
+    "description": "Ny dekoratør for nav.no",
+    "repository": "https://github.com/navikt/nav-dekoratoren",
+    "demo_url": "https://www-q1.nav.no/dekoratoren"
+  }
+]
