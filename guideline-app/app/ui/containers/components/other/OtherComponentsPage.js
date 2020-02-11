@@ -1,7 +1,7 @@
+/* eslint react/jsx-indent: 0 */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Innholdstittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
-import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import 'NavFrontendModules/nav-frontend-tabell-style';
 
