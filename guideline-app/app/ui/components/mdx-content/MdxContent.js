@@ -1,9 +1,10 @@
 import React from 'react';
+import { MDXProvider } from '@mdx-js/react';
 
 import { Innholdstittel, Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 
-import Code, { Inline } from './../code/Code';
+import Codeblock, { InlineCode } from './../code/Code';
 import TableOfContents from './../table-of-contents/TableOfContents';
 
 import './styles.less';
@@ -18,8 +19,7 @@ class MdxContent extends React.Component {
     }
 
     componentDidMount = () => {
-        // eslint-disable-next-line react/no-did-mount-set-state
-        this.setState({ ready: true });
+        this.setState({ ready: true }); // eslint-disable-line react/no-did-mount-set-state
     }
 
     registerHeadline = (type, title) => {
@@ -40,28 +40,30 @@ class MdxContent extends React.Component {
     generateHeadlineID = (content) => content.toLowerCase().split(' ').join('-')
 
     render() {
+        const componentsMap = {
+            h1: (props) => {
+                const id = this.generateHeadlineID(props.children);
+                return <Innholdstittel id={id} {...props} />;
+            },
+            h2: (props) => {
+                const id = this.registerHeadline('h2', props);
+                return <Systemtittel id={id} {...props} />;
+            },
+            h3: (props) => {
+                const id = this.registerHeadline('h3', props);
+                return <Undertittel id={id} {...props} tag="h3" />;
+            },
+            a: (props) => <Lenke {...props} />,
+            code: Codeblock,
+            inlineCode: InlineCode
+        };
+
         return (
             <div className="mdx-content">
                 <section className="section">
-                    <this.props.children
-                        components={{
-                            h1: (props) => {
-                                const id = this.generateHeadlineID(props.children);
-                                return <Innholdstittel id={id} {...props} />;
-                            },
-                            h2: (props) => {
-                                const id = this.registerHeadline('h2', props);
-                                return <Systemtittel id={id} {...props} />;
-                            },
-                            h3: (props) => {
-                                const id = this.registerHeadline('h3', props);
-                                return <Undertittel id={id} {...props} tag="h3" />;
-                            },
-                            a: (props) => <Lenke {...props} />,
-                            code: Code,
-                            inlineCode: Inline
-                        }}
-                    />
+                    <MDXProvider components={{ ...componentsMap }}>
+                        <this.props.children />
+                    </MDXProvider>
                 </section>
                 { this.state.ready && <TableOfContents headlines={this.headlines} /> }
             </div>

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "gulp build --ignoreErrors && npm run generateMDs",
+    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --ignoreErrors && npm run generateMDs",
     "lerna": "lerna",
     "gulp": "gulp",
     "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
@@ -33,8 +33,11 @@
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
   "devDependencies": {
-    "@mdx-js/loader": "^0.15.4",
-    "@mdx-js/mdx": "^0.15.4",
+    "@mdx-js/loader": "^1.5.1",
+    "@mdx-js/mdx": "^1.5.1",
+    "@mdx-js/react": "^1.5.1",
+    "@navikt/fnrvalidator": "^1.1.0",
+    "@navikt/textparser": "^2.0.0",
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "@types/react-collapse": "^4.0.1",
@@ -124,7 +127,7 @@
     "through2": "^2.0.3",
     "tslint": "^5.9.1",
     "tslint-config-airbnb": "^5.8.0",
-    "typescript": "^2.6.1",
+    "typescript": "^3.7.3",
     "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "3.10.0",
     "webpack-dev-server": "^2.4.5"
