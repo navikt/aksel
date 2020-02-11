@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Innholdstittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import 'NavFrontendModules/nav-frontend-tabell-style';
 
@@ -21,13 +22,26 @@ class OtherComponentsPage extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="page-header">
+                <div className="section" id="disclaimer">
+                    <Undertittel>Disclaimer</Undertittel>
+                    <p>
+                        Dette er en liste over komponenter som lages og forvaltes i NAV IT, men utenfor Designsystemet.
+                        Vi gir ingen support, og utfører ingen kvalitetskontroll på komponentene i denne listen.
+                        Eventuelle henvendelser angående disse komponentene må tas via komponentenes repositories da
+                        disse eies og forvaltes av andre enn Designsystem-teamet.
+                    </p>
+                    <p>
+                        Vi gir ingen garanti for at disse komponentene er hverken kompatible med hverandre eller de
+                        andre komponentene i Designsystemet. <strong>Det eneste kravet som stilles til komponenter i
+                        denne listen er at de ikke dupliserer komponenter som allerede finnes i
+                        Designsystemet.</strong>
+                    </p>
+                </div>
+                <div className="tabell-header">
                     <Innholdstittel>Andre komponenter</Innholdstittel>
-                    <div className="page-header__toolbar">
-                        <a className="knapp" href={editUrl}>
-                            Rediger tabell
-                        </a>
-                    </div>
+                    <a className="knapp" href={editUrl}>
+                        Rediger tabell
+                    </a>
                 </div>
                 <OverflowDetector>
                     <table className="tabell tabell--stripet">
@@ -51,21 +65,6 @@ class OtherComponentsPage extends React.Component {
                         </tbody>
                     </table>
                 </OverflowDetector>
-                <div className="section">
-                    <Undertittel>Disclaimer</Undertittel>
-                    <p>
-                        Dette er en liste over komponenter som lages og forvaltes i NAV IT, men utenfor Designsystemet.
-                        Vi gir ingen support, og utfører ingen kvalitetskontroll på komponentene i denne listen.
-                        Eventuelle henvendelser angående disse komponentene må tas via komponentenes repositories da
-                        disse eies og forvaltes av andre enn Designsystem-teamet.
-                    </p>
-                    <p>
-                        Vi gir ingen garanti for at disse komponentene er hverken kompatible med hverandre eller de
-                        andre komponentene i Designsystemet. <strong>Det eneste kravet som stilles til komponenter i
-                        denne listen er at de ikke dupliserer komponenter som allerede finnes i
-                        Designsystemet.</strong>
-                    </p>
-                </div>
             </React.Fragment>
         );
     }
