@@ -2,6 +2,7 @@ import resolveComponentRoutes from './routes.utils';
 
 import GetStartedPage from '../../ui/containers/get-started/GetStartedPage';
 import ComponentsMainPage from '../../ui/containers/components/main/ComponentsMainPage';
+import OtherComponentsPage from '../../ui/containers/components/other/OtherComponentsPage';
 
 import GenericSectionStart from '../../ui/containers/GenericSectionStart';
 import ColorPage from '../../ui/containers/resources/color/ColorPage';
@@ -17,9 +18,15 @@ import AccessibilityOverviewPage from '../../ui/containers/accessibility/overvie
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
-import CommunityMainPage from '../../ui/containers/community/CommunityMainPage';
+import FormValidationPage from '../../ui/containers/patterns/form-validation/FormValidationPage';
 
 const componentRoutes = resolveComponentRoutes('components');
+
+componentRoutes.push({
+    path: '/components/other',
+    component: OtherComponentsPage,
+    title: '+ Andre komponenter'
+});
 
 const routeConfig = [
     {
@@ -33,6 +40,18 @@ const routeConfig = [
         component: ComponentsMainPage,
         title: 'Komponenter',
         routes: componentRoutes
+    },
+    {
+        path: '/patterns',
+        component: GenericSectionStart,
+        title: 'Mønster',
+        routes: [
+            {
+                path: '/patterns/form-validation',
+                component: FormValidationPage,
+                title: 'Skjemavalidering'
+            }
+        ]
     },
     {
         path: '/resources',
@@ -107,11 +126,6 @@ const routeConfig = [
                 title: 'Verktøy for UU-testing'
             }
         ]
-    },
-    {
-        path: '/community',
-        component: CommunityMainPage,
-        title: 'Diskusjon'
     },
     {
         component: NotFoundPage,

@@ -32,17 +32,23 @@ let srcEx;
 let assetsEx;
 let libFragment;
 let srcFragment;
+let tsDocLib;
+let tsDocSrc;
 
 if (path.win32 === path) {
     srcEx = /(packages\\node_modules\\[^/]+)\\src\\/;
     assetsEx = /(packages\\node_modules\\[^/]+)\\assets\\/;
     libFragment = '$1\\lib\\';
     srcFragment = '$1\\src\\';
+    tsDocLib = /\\lib\\/g;
+    tsDocSrc = '\\src\\';
 } else {
     srcEx = new RegExp('(packages/node_modules/[^/]+)/src/');
     assetsEx = new RegExp('(packages/node_modules/[^/]+)/assets/');
     libFragment = '$1/lib/';
     srcFragment = '$1/src/';
+    tsDocLib = /\/lib\//g;
+    tsDocSrc = '/src/';
 }
 
 function mapToDest(filepath) {
@@ -103,13 +109,19 @@ function buildJs() {
 }
 
 function parseTsAndAppendDocInfo(contents, file) {
-    const tsPath = file.path.replace(/\/lib\//g, '/src/').replace(/.js$/g, '.tsx');
+    const tsPath = file.path.replace(tsDocLib, tsDocSrc).replace(/.js$/g, '.tsx');
 
     let docInfo;
     let docInfoString;
 
     if (fs.existsSync(tsPath)) {
-        docInfo = tsDocgen.parse(tsPath)[0];
+        const docs = tsDocgen.parse(tsPath);
+        docInfo = docs[0];
+
+        // Yeah, superhack. Men react-docgen-typescript velger alltid feil export fra tekstomrade filen
+        if (docInfo.displayName === 'createDynamicHighlightingRule') {
+            docInfo = docs[1];
+        }
 
         const exceptions = ['StatelessComponent', 'EventThrottler', 'Container'];
 
