@@ -7,7 +7,7 @@ import { GithubLogo } from './../../../assets/images/svg';
 import './styles.less';
 
 const MainNav = () => (
-    <nav className="mainNav">
+    <nav className="mainNav" aria-label="Hoved">
         <div className="mainNav__wrapper">
             <ul>
                 {
@@ -25,8 +25,7 @@ const MainNav = () => (
                         )
                     )
                 }
-            </ul>
-            <ul>
+                <div style={{'flexGrow': 1}} />
                 <li>
                     <a
                         href="https://github.com/navikt/nav-frontend-moduler"

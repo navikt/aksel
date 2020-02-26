@@ -75,7 +75,7 @@ class MobileNav extends React.Component {
                 className={cls(this.props, this.state)}
                 aria-hidden={this.state.hidden}
             >
-                <nav className="mobile-nav__drawer">
+                <nav className="mobile-nav__drawer" aria-label="main mobile">
                     <Lukknapp
                         className="mobile-nav__close-btn"
                         onClick={this.props.toggle}

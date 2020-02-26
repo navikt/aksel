@@ -54,7 +54,7 @@ class MdxContent extends React.Component {
                 return <Undertittel id={id} {...props} tag="h3" />;
             },
             a: (props) => <Lenke {...props} />,
-            code: Codeblock,
+            code: (props) => <Codeblock {...props} />,
             inlineCode: InlineCode
         };
 

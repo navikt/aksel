@@ -2,15 +2,17 @@ import React from 'react';
 import Prism from 'prismjs';
 
 import 'prismjs/themes/prism-coy.css';
+// import 'prismjs/themes/prism-okaidia.css';
 
 import './styles.less';
 
-const Codeblock = (props) => {
+const Codeblock = ({ children, className, ...rest }) => {
     // const lang = this.props.className.split('-')[1];
-    const highlighted = Prism.highlight(props.children, Prism.languages.jsx);
+    const highlighted = Prism.highlight(children, Prism.languages.jsx);
+    const language = className.split('-')[1];
     return (
-        <pre className="language-jsx">
-            <code className="language-jsx" dangerouslySetInnerHTML={{ __html: highlighted }} />
+        <pre className={className} aria-label={`Eksempel med ${language}-kode`} {...rest}>
+            <code className={className} dangerouslySetInnerHTML={{ __html: highlighted }} />
         </pre>
     );
 };

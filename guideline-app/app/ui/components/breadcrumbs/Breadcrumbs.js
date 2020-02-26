@@ -29,7 +29,7 @@ const Breadcrumbs = (props) => {
     const breadcrumbs = getBreadcrumbs(props.history.location.pathname);
 
     return (
-        <nav className="breadcrumbs">
+        <nav className="breadcrumbs" aria-label="breadcrumbs">
             <ul>
                 {
                     breadcrumbs.map((breadcrumb, index) => {
