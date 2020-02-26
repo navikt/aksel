@@ -1,4 +1,5 @@
 import React from 'react';
+import classnames from 'classnames';
 import { NavLink } from 'react-router-dom';
 
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
@@ -32,9 +33,12 @@ const LeftNavigation = (props) => (
             <Systemtittel><TitleByRoute routes={routeConfig} /></Systemtittel>
             <ul className="nav-list">
                 {
-                    props.routes.map((item) =>
+                    props.routes && props.routes.map((item) =>
                         (
-                            <li key={item.title}>
+                            <li
+                                key={item.title}
+                                className={classnames({ divider: item.path === '/components/other' })}
+                            >
                                 <NavLink
                                     activeClassName="active"
                                     to={item.path}
@@ -55,13 +59,17 @@ const LeftNavigation = (props) => (
                 }
             </ul>
             {
-                props.routes[0].path.indexOf('/components') === 0 &&
-                <div className="contribute-promo">
-                    <Undertittel>Noe du savner?</Undertittel>
-                    <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
-                        <Normaltekst className="lenkepanel__heading">Bidra med nye komponenter på Github</Normaltekst>
-                    </LenkepanelBase>
-                </div>
+                props.routes && props.routes[0].path.indexOf('/components') === 0 &&
+                <React.Fragment>
+                    <div className="contribute-promo">
+                        <Undertittel>Noe du savner?</Undertittel>
+                        <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
+                            <Normaltekst className="lenkepanel__heading">
+                                Bidra med nye komponenter på Github
+                            </Normaltekst>
+                        </LenkepanelBase>
+                    </div>
+                </React.Fragment>
             }
         </nav>
     </aside>

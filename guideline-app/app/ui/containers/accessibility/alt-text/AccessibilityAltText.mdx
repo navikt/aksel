@@ -7,6 +7,7 @@ import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import AltDecisionTree from '../../../../assets/images/alt-decision-tree.png';
 import Example from '../../../components/example/Example';
 import { DoDont, Do, Dont } from '../../../components/do-dont/DoDont';
+import Code from '../../../components/code/Code';
 
 import './styles.less';
 
@@ -36,14 +37,10 @@ Bilder som ikke er meningsbærende (for eksempel bare til pynt eller overflødig
 
 <DoDont>
 	<Do>
-		<pre class="language-jsx">
-			<code class=" language-jsx">
-				<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pynt.jpg<span class="token punctuation">"</span></span> <span class="token attr-name">alt</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span>
-			</code>
-		</pre>
+		<Code>{`<img src="pynt.jpg" alt="" />`}</Code>
 	</Do>
 	<Dont>
-		<pre class=" language-jsx"><code class=" language-jsx"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>pynt.jpg<span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span></code></pre>
+		<Code>{`<img src="pynt.jpg" />`}</Code>
 	</Dont>
 </DoDont>
 
