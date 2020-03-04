@@ -25,7 +25,7 @@ const MainNav = () => (
                         )
                     )
                 }
-                <div style={{'flexGrow': 1}} />
+                <div style={{ flexGrow: 1 }} />
                 <li>
                     <a
                         href="https://github.com/navikt/nav-frontend-moduler"

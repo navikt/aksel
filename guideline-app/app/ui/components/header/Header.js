@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
+import { getViewportDimensions } from 'NavFrontendModules/nav-frontend-js-utils';
 
 import { NAVLogo } from '../../../assets/images/svg';
 import MainNav from '../main-nav/MainNav';
 import MobileNav from '../mobile-nav/MobileNav';
 import MobileNavToggle from '../mobile-nav-toggle/MobileNavToggle';
-import { getViewportDimensions } from 'NavFrontendModules/nav-frontend-js-utils';
 
 import './styles.less';
 
@@ -24,7 +24,6 @@ class Header extends React.Component {
 
     componentDidMount() {
         this.checkViewport();
-        console.log(this.toggleBtn);
     }
 
     checkViewport = () => {
@@ -38,7 +37,7 @@ class Header extends React.Component {
 
     toggleMobileNav = () => {
         this.setState({
-            mobileNavOpen: !!!this.state.mobileNavOpen
+            mobileNavOpen: !this.state.mobileNavOpen
         }, () => {
             if (!this.state.mobileNavOpen) {
                 ReactDOM.findDOMNode(this.toggleBtn).focus();
@@ -47,7 +46,7 @@ class Header extends React.Component {
     }
 
     render() {
-        const ariaHidden = (this.state.mobile) ? { 'aria-hidden': !!this.state.mobileNavOpen } : undefined ;
+        const ariaHidden = (this.state.mobile) ? { 'aria-hidden': !!this.state.mobileNavOpen } : undefined;
         return (
             <React.Fragment>
                 <header className="header">
@@ -60,8 +59,9 @@ class Header extends React.Component {
                             </div>
                         </NavLink>
                         <MobileNavToggle
-                            innerRef={(node) => this.toggleBtn = node}
-                            onClick={() => this.toggleMobileNav()} {...ariaHidden}
+                            innerRef={(node) => { this.toggleBtn = node; }}
+                            onClick={() => this.toggleMobileNav()}
+                            {...ariaHidden}
                         />
                         <MainNav />
                     </div>
