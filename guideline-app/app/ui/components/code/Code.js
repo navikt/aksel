@@ -7,11 +7,9 @@ import 'prismjs/themes/prism-coy.css';
 import './styles.less';
 
 const Codeblock = ({ children, className, ...rest }) => {
-    // const lang = this.props.className.split('-')[1];
     const highlighted = Prism.highlight(children, Prism.languages.jsx);
-    const language = className.split('-')[1];
     return (
-        <pre className={className} aria-label={`Eksempel med ${language}-kode`} {...rest}>
+        <pre className={className} aria-label="Kode-eksempel" {...rest}>
             <code className={className} dangerouslySetInnerHTML={{ __html: highlighted }} />
         </pre>
     );
