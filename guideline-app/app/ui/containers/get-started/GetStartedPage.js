@@ -7,7 +7,7 @@ import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 import './styles.less';
 
 const GetStartedPage = () => (
-    <article className="mainContent mainContent--grey">
+    <main className="mainContent mainContent--grey" id="hovedinnhold">
         <section className="actionsWrapper">
             <div className="grid">
                 <LenkepanelBase
@@ -74,7 +74,7 @@ const GetStartedPage = () => (
                 </LenkepanelBase>
             </div>
         </section>
-    </article>
+    </main>
 );
 
 export default withRouter(GetStartedPage);
