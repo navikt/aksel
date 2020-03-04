@@ -1,8 +1,9 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import Lukknapp from 'NavFrontendModules/nav-frontend-lukknapp';
+import { Lukknapp } from 'NavFrontendModules/nav-frontend-ikonknapper';
 
 import routeConfig from '../../../utils/routing/routes.config';
 import { GithubLogo } from '../../../assets/images/svg';
@@ -29,10 +30,14 @@ class MobileNav extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.open) {
             window.clearInterval(this.timer);
+
             this.setState({
                 hidden: false
             });
+
             this.timer = null;
+
+            ReactDOM.findDOMNode(this.lukkBtn).focus();
         } else {
             this.timer = window.setTimeout(() => this.setState({ hidden: true }), 200);
         }
@@ -75,12 +80,13 @@ class MobileNav extends React.Component {
                 className={cls(this.props, this.state)}
                 aria-hidden={this.state.hidden}
             >
-                <nav className="mobile-nav__drawer">
+                <nav className="mobile-nav__drawer" aria-label="main mobile">
                     <Lukknapp
                         className="mobile-nav__close-btn"
                         onClick={this.props.toggle}
+                        ref={(node) => { this.lukkBtn = node; }}
                     >
-                        Lukk meny
+                        <span className="sr-only">Lukk meny</span>
                     </Lukknapp>
                     <ul className="nav-list">
                         {

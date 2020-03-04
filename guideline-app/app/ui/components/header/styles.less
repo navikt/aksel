@@ -1,4 +1,5 @@
 @import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) '~NavFrontendCore/less/_mixins';
 @import (reference) './../../../assets/styles/mixins';
 
 .header {
@@ -24,6 +25,7 @@
 
       .header__title {
         font-size: 1.5rem;
+        font-weight:bold;
         padding-top: 1rem;
         padding-left: 7rem;
         padding-bottom: 1rem;
@@ -81,5 +83,21 @@
         font-size:1.25rem;
       }
     }
+  }
+}
+
+#skip-link {
+  padding: 1rem;
+  border: 2px solid @navBla;
+  background:white;
+
+  &:not(:focus){
+    .sr-only();
+  }
+
+  &:focus {
+    position:absolute;
+    top:0px;
+    z-index:1;
   }
 }

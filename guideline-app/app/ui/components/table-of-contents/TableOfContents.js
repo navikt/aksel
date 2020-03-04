@@ -64,7 +64,7 @@ class TableOfContents extends React.Component {
         const rootItems = this.findHeadlineChildren(undefined);
         if (!this.tree.length || this.tree.length < 2) return null;
         return (
-            <nav className="table-of-contents">
+            <nav className="table-of-contents" aria-label="Innholdsfortegnelse">
                 <Undertittel>Innhold:</Undertittel>
                 {
                     this.renderTOCList(rootItems)

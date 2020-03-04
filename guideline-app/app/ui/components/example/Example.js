@@ -5,16 +5,16 @@ import OverflowDetector from '../overflow-detector/OverflowDetector';
 
 import './styles.less';
 
-const cls = (props) => cn('example', props.className, {
-    'example--greyBg': props.greyBg
+const cls = (className, greyBg) => cn('example', className, {
+    'example--greyBg': greyBg
 });
 
-const Example = (props) => (
-    <div className={cls(props)}>
+const Example = ({ children, className, noscroll, greyBg, ...rest }) => (
+    <div className={cls(className, greyBg)} aria-label="Eksempel" {...rest}>
         {
-            (props.noscroll)
-            ? <div className="example__inner">{props.children}</div>
-            : <OverflowDetector><div className="example__inner">{props.children}</div></OverflowDetector>
+            (noscroll)
+            ? <div className="example__inner">{children}</div>
+            : <OverflowDetector><div className="example__inner">{children}</div></OverflowDetector>
         }
     </div>
 );
