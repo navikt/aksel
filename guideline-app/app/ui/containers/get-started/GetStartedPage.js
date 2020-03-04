@@ -50,14 +50,13 @@ const GetStartedPage = () => (
                     </div>
                 </LenkepanelBase>
                 <LenkepanelBase
-                    href="https://github.com/navikt/nav-frontend-moduler/blob/master/README.md"
+                    href="https://github.com/navikt/nav-frontend-moduler/"
                     border
                 >
                     <div>
                         <Systemtittel>Bidra med kode</Systemtittel>
                         <p>
-                            Her finner du veiledning for hvordan du kan bidra til den åpne kodebasen vår på
-                            Github.
+                            Designsystemet er 100% open source på Github og vi setter alltid pris på hjelp og bidrag utenfra.
                         </p>
                     </div>
                 </LenkepanelBase>
@@ -70,7 +69,7 @@ const GetStartedPage = () => (
                             {props.children}
                         </NavLink>
                     )}
-                    href="/community"
+                    href="https://github.com/navikt/designsystemet/issues"
                     border
                 >
                     <div>
