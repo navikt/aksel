@@ -46,11 +46,6 @@ class ComponentGuidelinePage extends React.Component {
                 id: 'accessibility',
                 label: 'Tilgjengelighet',
                 content: Accessibility
-            },
-            {
-                id: 'discussion',
-                label: 'Diskusjon',
-                content: Discussion
             }
         ];
     }
