@@ -62,14 +62,6 @@ const GetStartedPage = () => (
                     </div>
                 </LenkepanelBase>
                 <LenkepanelBase
-                    linkCreator={(props) => (
-                        <NavLink
-                            className="lenkepanel lenkepanel--border"
-                            to={props.href}
-                        >
-                            {props.children}
-                        </NavLink>
-                    )}
                     href="https://github.com/navikt/designsystemet/issues"
                     border
                 >
