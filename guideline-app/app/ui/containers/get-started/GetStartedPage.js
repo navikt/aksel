@@ -56,7 +56,8 @@ const GetStartedPage = () => (
                     <div>
                         <Systemtittel>Bidra med kode</Systemtittel>
                         <p>
-                            Designsystemet er 100% open source på Github og vi setter alltid pris på hjelp og bidrag utenfra.
+                            Designsystemet er 100% open source på Github og vi setter alltid pris
+                            på hjelp og bidrag utenfra.
                         </p>
                     </div>
                 </LenkepanelBase>
