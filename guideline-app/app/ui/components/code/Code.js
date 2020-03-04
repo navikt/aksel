@@ -9,7 +9,7 @@ import './styles.less';
 const Codeblock = ({ children, className, ...rest }) => {
     const highlighted = Prism.highlight(children, Prism.languages.jsx);
     return (
-        <pre className={className} aria-label={`Kode-eksempel`} {...rest}>
+        <pre className={className} aria-label="Kode-eksempel" {...rest}>
             <code className={className} dangerouslySetInnerHTML={{ __html: highlighted }} />
         </pre>
     );
