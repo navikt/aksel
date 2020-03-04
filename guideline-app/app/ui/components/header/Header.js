@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { NavLink } from 'react-router-dom';
 
 import { NAVLogo } from '../../../assets/images/svg';
@@ -40,7 +41,7 @@ class Header extends React.Component {
             mobileNavOpen: !!!this.state.mobileNavOpen
         }, () => {
             if (!this.state.mobileNavOpen) {
-                this.toggleBtn.focus();
+                ReactDOM.findDOMNode(this.toggleBtn).focus();
             }
         });
     }
