@@ -12,6 +12,9 @@ const vendors = [
 
 const GlobalWebpackConfig = {
     devtool: 'inline-source-map',
+    node: {
+        fs: 'empty'
+    },
     entry: {
         vendors,
         polyfill: 'babel-polyfill',
@@ -50,6 +53,13 @@ const GlobalWebpackConfig = {
                     { loader: 'babel-loader' },
                     { loader: '@mdx-js/loader' }
                 ]
+            },
+            {
+                test: /\.js?$/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015', 'stage-2', 'react']
+                }
             }
         ]
     },

@@ -3,6 +3,10 @@
     "plugins": [
         "react-docgen",
         "transform-object-rest-spread", 
+        ["transform-runtime", {
+            "helpers": false,
+            "polyfill": false,
+            "regenerator": true }],
         ["prismjs", {
             "languages": ["javascript", "css", "markup", "jsx"]
         }]

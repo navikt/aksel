@@ -3,7 +3,9 @@ import classnames from 'classnames';
 
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import { Select } from 'NavFrontendModules/nav-frontend-skjema';
+import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import MDX from '@mdx-js/runtime';
 
 import Code from './../code/Code';
 import PropTypeTable from './../prop-type-table/PropTypeTable';
@@ -24,6 +26,9 @@ class ModuleBrowser extends React.Component {
 
         this.state = {
             activeModule: this.getInitialActiveModule()
+        };
+        this.components = {
+            a: (prps) => <Lenke {...prps} />
         };
     }
 
@@ -96,7 +101,12 @@ class ModuleBrowser extends React.Component {
                                 })
                             }
                         </Select>
-                        <Undertittel className="first">Import</Undertittel>
+
+                        <Undertittel className="first">Beskrivelse</Undertittel>
+                        <MDX components={this.components}>
+                            {this.modules[this.state.activeModule].__docgenInfo.description}
+                        </MDX>
+                        <Undertittel>Import</Undertittel>
                         <Code>{this.generateImportStatement(this.state.activeModule)}</Code>
                         <Undertittel>React props</Undertittel>
                         <PropTypeTable docgenInfo={this.modules[this.state.activeModule].__docgenInfo} />
