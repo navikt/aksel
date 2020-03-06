@@ -28,9 +28,9 @@ const isStyle = (item) => {
 };
 
 const LeftNavigation = (props) => (
-    <aside className="leftNavigation">
-        <nav>
-            <Systemtittel><TitleByRoute routes={routeConfig} /></Systemtittel>
+    <div className="leftNavigation">
+        <nav aria-labelledby="left-navigation-title">
+            <Systemtittel id="left-navigation-title"><TitleByRoute routes={routeConfig} /></Systemtittel>
             <ul className="nav-list">
                 {
                     props.routes && props.routes.map((item) =>
@@ -72,7 +72,7 @@ const LeftNavigation = (props) => (
                 </React.Fragment>
             }
         </nav>
-    </aside>
+    </div>
 );
 
 export default LeftNavigation;

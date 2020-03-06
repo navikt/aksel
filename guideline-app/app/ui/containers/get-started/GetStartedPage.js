@@ -7,7 +7,7 @@ import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 import './styles.less';
 
 const GetStartedPage = () => (
-    <article className="mainContent mainContent--grey">
+    <main className="mainContent mainContent--grey" id="hovedinnhold">
         <section className="actionsWrapper">
             <div className="grid">
                 <LenkepanelBase
@@ -50,27 +50,19 @@ const GetStartedPage = () => (
                     </div>
                 </LenkepanelBase>
                 <LenkepanelBase
-                    href="https://github.com/navikt/nav-frontend-moduler/blob/master/README.md"
+                    href="https://github.com/navikt/nav-frontend-moduler/"
                     border
                 >
                     <div>
                         <Systemtittel>Bidra med kode</Systemtittel>
                         <p>
-                            Her finner du veiledning for hvordan du kan bidra til den åpne kodebasen vår på
-                            Github.
+                            Designsystemet er 100% open source på Github og vi setter alltid pris
+                            på hjelp og bidrag utenfra.
                         </p>
                     </div>
                 </LenkepanelBase>
                 <LenkepanelBase
-                    linkCreator={(props) => (
-                        <NavLink
-                            className="lenkepanel lenkepanel--border"
-                            to={props.href}
-                        >
-                            {props.children}
-                        </NavLink>
-                    )}
-                    href="/community"
+                    href="https://github.com/navikt/designsystemet/issues"
                     border
                 >
                     <div>
@@ -82,7 +74,7 @@ const GetStartedPage = () => (
                 </LenkepanelBase>
             </div>
         </section>
-    </article>
+    </main>
 );
 
 export default withRouter(GetStartedPage);

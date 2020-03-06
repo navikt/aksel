@@ -10,8 +10,8 @@ import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 class ComponentMainPage extends React.Component {
 
     renderComponentMainContent = () => (
-        <article className="mainContent mainContent--grey">
-            <div className="catalog">
+        <main className="mainContent mainContent--grey" id="hovedinnhold">
+            <nav className="catalog" aria-labelledby="left-navigation-title">
                 {
                         this.props.routes.map((route) => (
                             <LenkepanelBase
@@ -30,14 +30,16 @@ class ComponentMainPage extends React.Component {
                             </LenkepanelBase>
                         ))
                     }
-            </div>
-        </article>
+            </nav>
+        </main>
     );
 
     renderComponentSubRouteContent = () => (
-        <article className="mainContent">
-            <SubRoutesWrapper routes={this.props.routes} />
-        </article>
+        <main className="mainContent" id="hovedinnhold">
+            <article>
+                <SubRoutesWrapper routes={this.props.routes} />
+            </article>
+        </main>
     );
 
     render() {

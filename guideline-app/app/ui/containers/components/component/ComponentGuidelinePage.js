@@ -12,7 +12,6 @@ import { EtikettInfo } from 'NavFrontendModules/nav-frontend-etiketter';
 import Overview from './tabs/Overview';
 import Technical from './tabs/Technical';
 import Accessibility from './tabs/Accessibility';
-import Discussion from './tabs/Discussion';
 
 import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
@@ -46,11 +45,6 @@ class ComponentGuidelinePage extends React.Component {
                 id: 'accessibility',
                 label: 'Tilgjengelighet',
                 content: Accessibility
-            },
-            {
-                id: 'discussion',
-                label: 'Diskusjon',
-                content: Discussion
             }
         ];
     }

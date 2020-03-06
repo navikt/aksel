@@ -1,6 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
 
+import { Hamburgerknapp } from 'NavFrontendModules/nav-frontend-ikonknapper';
+
 import './styles.less';
 
 class MobileNavToggle extends React.Component {
@@ -27,15 +29,15 @@ class MobileNavToggle extends React.Component {
     }
 
     render() {
+        const { innerRef, ...rest } = this.props;
         return (
-            <button
+            <Hamburgerknapp
                 className={classnames('mobile-nav-toggle', { 'mobile-nav-toggle--with-shadow': this.state.shadow })}
-                {...this.props}
+                ref={innerRef}
+                {...rest}
             >
-                <span className="mobile-nav-toggle__hamburger-icon">
-                    Åpne meny
-                </span>
-            </button>
+                <span className="sr-only">Åpne meny</span>
+            </Hamburgerknapp>
         );
     }
 }

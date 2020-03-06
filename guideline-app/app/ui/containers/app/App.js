@@ -15,9 +15,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
 
     constructor(props) {
         super(props);
-        this.state = {
-            showMenu: false
-        };
 
         /*
             Redirect old hash based URLs
@@ -33,12 +30,6 @@ class App extends React.Component { // eslint-disable-line react/prefer-stateles
             const contentPane = document.getElementsByClassName('mainContent')[0];
             contentPane.scrollTop = 0;
             window.scrollTo(0, 0);
-        });
-    }
-
-    toggleMenu = () => {
-        this.setState({
-            showMenu: !this.state.showMenu
         });
     }
 
