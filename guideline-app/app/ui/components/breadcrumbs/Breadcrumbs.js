@@ -39,6 +39,7 @@ const Breadcrumbs = (props) => {
                                     <NavLink className="lenke" to={breadcrumb.path}>
                                         {breadcrumb.title}
                                     </NavLink>
+                                    <span className="breadcrumbs__divider" aria-hidden="true">/</span>
                                 </li>
                             );
                         }

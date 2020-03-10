@@ -10,7 +10,7 @@ const cls = (className, greyBg) => cn('example', className, {
 });
 
 const Example = ({ children, className, noscroll, greyBg, ...rest }) => (
-    <div className={cls(className, greyBg)} aria-label="Eksempel" {...rest}>
+    <div className={cls(className, greyBg)} role="region" aria-label="Eksempel" {...rest}>
         {
             (noscroll)
             ? <div className="example__inner">{children}</div>
