@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { Lukknapp } from 'NavFrontendModules/nav-frontend-ikonknapper';
+import { Xknapp } from 'NavFrontendModules/nav-frontend-ikonknapper';
 
 import routeConfig from '../../../utils/routing/routes.config';
 import { GithubLogo } from '../../../assets/images/svg';
@@ -81,13 +81,13 @@ class MobileNav extends React.Component {
                 aria-hidden={this.state.hidden}
             >
                 <nav className="mobile-nav__drawer" aria-label="main mobile">
-                    <Lukknapp
+                    <Xknapp
                         className="mobile-nav__close-btn"
                         onClick={this.props.toggle}
                         ref={(node) => { this.lukkBtn = node; }}
                     >
                         <span className="sr-only">Lukk meny</span>
-                    </Lukknapp>
+                    </Xknapp>
                     <ul className="nav-list">
                         {
                             routeConfig.filter((route) => route.path).map((route, index) =>
