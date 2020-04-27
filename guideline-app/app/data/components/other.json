@@ -3,7 +3,7 @@
     "name": "Datovelger",
     "description": "Enkel React datovelger",
     "repository": "https://github.com/navikt/datovelger",
-    "demo_url": ""
+    "demo_url": "https://navikt.github.io/datovelger/"
   },
   {
     "name": "Typeahead",
