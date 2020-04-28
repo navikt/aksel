@@ -1,10 +1,13 @@
 import React from 'react';
+import classnames from 'classnames';
 import { SuccessIcon, ErrorIcon } from '../../../assets/images/svg';
 
 import './styles.less';
 
+const clsDodont = (props) => classnames('dodont', props.className);
+
 export const DoDont = (props) => (
-    <div className="dodont">
+    <div className={clsDodont(props)}>
         {props.children}
     </div>
 );
