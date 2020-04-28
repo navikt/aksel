@@ -17,6 +17,8 @@ import TypographyPage from '../../ui/containers/resources/typography/TypographyP
 import AccessibilityOverviewPage from '../../ui/containers/accessibility/overview/AccessibilityOverviewPage';
 import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text/AccessibilityAltTextPage';
 import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
+// eslint-disable-next-line max-len
+import AccessibilityPlaceholdersPage from '../../ui/containers/accessibility/placeholders/AccessibilityPlaceholdersPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 import FormValidationPage from '../../ui/containers/patterns/form-validation/FormValidationPage';
 
@@ -119,6 +121,11 @@ const routeConfig = [
                 path: '/accessibility/alt-text',
                 component: AccessibilityAltTextPage,
                 title: 'Alt-tekster'
+            },
+            {
+                path: '/accessibility/placeholders',
+                component: AccessibilityPlaceholdersPage,
+                title: 'Placeholders'
             },
             {
                 path: '/accessibility/tools',
