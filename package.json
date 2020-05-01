@@ -28,7 +28,9 @@
     "generateMDs": "node ./_scripts/generateReadmes.js",
     "start-guideline-app": "webpack-dev-server --hot --inline --config guideline-app/conf/webpack.dev.js",
     "build-guideline-app": "webpack --config guideline-app/conf/webpack.production.js && cp -rf guideline-app/conf/CNAME guideline-app/dist/CNAME && cp -rf guideline-app/dist/index.html guideline-app/dist/404.html && cp -rf guideline-app/app/assets/images/favicon.png guideline-app/dist/favicon.png",
-    "deploy-guideline-app": "gh-pages -d guideline-app/dist"
+    "deploy-guideline-app": "gh-pages -d guideline-app/dist",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "NAV",
   "license": "SEE LICENSE IN LICENSE",
@@ -143,6 +145,8 @@
     "react-collapse": "^5.0.0",
     "react-docgen": "^2.20.0",
     "react-docgen-typescript": "^1.2.1",
-    "react-document-title": "^2.0.3"
-  }
+    "react-document-title": "^2.0.3",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
