@@ -22,6 +22,11 @@
     "description": "Ny dekoratør/header for interne arbeidsflater",
     "repository": "https://github.com/navikt/not-a-platform/tree/master/packages/%40navikt/header",
     "demo_url": ""
+  }, {
+    "name": "Filopplasting",
+    "description": "Filopplasting med drag & drop, maks antall filer og størrelse, og forhåndsvisning av fil",
+    "repository": "https://navikt.github.io/eessi-pensjon-ui",
+    "demo_url": "https://navikt.github.io/eessi-pensjon-ui/build/#/fileUpload"
   },
   {
     "name": "Dekoratør for nav.no",
