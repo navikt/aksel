@@ -17,12 +17,6 @@
         display:none;
       }
     }
-
-    h2 {
-      &.first {
-        margin-top: 0 !important;
-      }
-    }
   }
 
   &__content {
@@ -41,6 +35,21 @@
         margin-bottom:3rem;
       }
     }
+  }
+
+  h2 {
+    &.first {
+      margin: unset !important;
+    }
+  }
+  &__popover {
+    padding: 0.7rem;
+  }
+  
+  &--innline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;    
   }
 
   .panel {
