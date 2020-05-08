@@ -12,6 +12,7 @@ import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser
 import { Bash } from './../../../../components/code/Code';
 
 import { CopyIcon } from '../../../../../assets/images/svg';
+import '../styles.less';
 
 class Technical extends React.Component {
 
@@ -76,7 +77,8 @@ class Technical extends React.Component {
                     eller hvis du av andre grunner ønsker å håndtere HTML og Javascript selv.
                 </Hjelpetekst>
                 <Flatknapp
-                    aria-label="Copy import-statement to clipboard"
+                    className="technical__copyknapp"
+                    aria-label="Kopier npm install til utklippstavle"
                     // eslint-disable-next-line max-len
                     onClick={(e) => this.copyContent(e, this.installInstructions[this.state.activeTab])}
                     kompakt
@@ -96,7 +98,7 @@ class Technical extends React.Component {
                 ankerEl={this.state.popoverAnchor}
                 onRequestClose={() => this.setState({ popoverAnchor: undefined })}
             >
-                <p className="componentGuidelinePage__popover"> Copied to clipboard! </p>
+                <p className="technical__popover"> Kopiert! </p>
             </Popover>
         </div>
     );

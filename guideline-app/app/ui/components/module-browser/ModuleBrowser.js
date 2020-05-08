@@ -120,7 +120,8 @@ class ModuleBrowser extends React.Component {
                         <div className="module-browser--innline">
                             <Undertittel className="first">Import</Undertittel>
                             <Flatknapp
-                                aria-label="Copy import-statement to clipboard"
+                                className="module-browser__copyknapp"
+                                aria-label="Kopier import til utklippstavle"
                                 // eslint-disable-next-line max-len
                                 onClick={(e) => this.copyContent(e, this.generateImportStatement(this.state.activeModule))}
                                 kompakt
@@ -136,7 +137,7 @@ class ModuleBrowser extends React.Component {
                             ankerEl={this.state.popoverAnchor}
                             onRequestClose={() => this.setState({ popoverAnchor: undefined })}
                         >
-                            <p className="module-browser__popover"> Copied to clipboard! </p>
+                            <p className="module-browser__popover"> Kopiert! </p>
                         </Popover>
                         <Undertittel>React props</Undertittel>
                         <PropTypeTable docgenInfo={this.modules[this.state.activeModule].__docgenInfo} />
