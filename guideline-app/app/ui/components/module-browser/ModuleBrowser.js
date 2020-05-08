@@ -4,9 +4,12 @@ import classnames from 'classnames';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import { Select } from 'NavFrontendModules/nav-frontend-skjema';
 import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import Popover from 'NavFrontendModules/nav-frontend-popover';
+import { Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 
 import Code from './../code/Code';
 import PropTypeTable from './../prop-type-table/PropTypeTable';
+import { CopyIcon } from '../../../assets/images/svg';
 
 import './styles.less';
 
@@ -23,7 +26,8 @@ class ModuleBrowser extends React.Component {
         this.modules = this.props.data.packageModules;
 
         this.state = {
-            activeModule: this.getInitialActiveModule()
+            activeModule: this.getInitialActiveModule(),
+            popoverAnchor: undefined
         };
     }
 
@@ -42,11 +46,28 @@ class ModuleBrowser extends React.Component {
         this.setState({ activeModule: moduleName });
     }
 
+    togglePopover = (anchor) => {
+        this.setState({
+            popoverAnchor: this.state.popoverAnchor ? undefined : anchor
+        });
+    }
+
+    copyContent = (e, content) => {
+        this.togglePopover(e.currentTarget);
+        const textArea = document.createElement('textarea');
+        textArea.value = content;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('Copy');
+        textArea.remove();
+    }
+
     generateImportStatement = (moduleName) => {
         const module = this.modules[moduleName];
         const format = (moduleName === 'default') ? module.__docgenInfo.displayName : `{ ${moduleName} }`;
         return `import ${format} from '${this.props.package.name}';`;
     }
+
 
     render() {
         return (
@@ -96,8 +117,28 @@ class ModuleBrowser extends React.Component {
                                 })
                             }
                         </Select>
-                        <Undertittel className="first">Import</Undertittel>
-                        <Code>{this.generateImportStatement(this.state.activeModule)}</Code>
+                        <div className="module-browser--innline">
+                            <Undertittel className="first">Import</Undertittel>
+                            <Flatknapp
+                                className="module-browser__copyknapp"
+                                aria-label="Kopier import til utklippstavle"
+                                // eslint-disable-next-line max-len
+                                onClick={(e) => this.copyContent(e, this.generateImportStatement(this.state.activeModule))}
+                                kompakt
+                            >
+                                <CopyIcon />
+                            </Flatknapp>
+                        </div>
+                        <Code>
+                            {this.generateImportStatement(this.state.activeModule)}
+                        </Code>
+                        <Popover
+                            orientering="over"
+                            ankerEl={this.state.popoverAnchor}
+                            onRequestClose={() => this.setState({ popoverAnchor: undefined })}
+                        >
+                            <p className="module-browser__popover"> Kopiert! </p>
+                        </Popover>
                         <Undertittel>React props</Undertittel>
                         <PropTypeTable docgenInfo={this.modules[this.state.activeModule].__docgenInfo} />
                     </div>

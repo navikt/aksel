@@ -5,9 +5,14 @@ import { Systemtittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Hjelpetekst from 'NavFrontendModules/nav-frontend-hjelpetekst';
 import Panel from 'NavFrontendModules/nav-frontend-paneler';
 import Tabs from 'NavFrontendModules/nav-frontend-tabs';
+import Popover from 'NavFrontendModules/nav-frontend-popover';
+import { Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 
 import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
 import { Bash } from './../../../../components/code/Code';
+
+import { CopyIcon } from '../../../../../assets/images/svg';
+import '../styles.less';
 
 class Technical extends React.Component {
 
@@ -15,7 +20,8 @@ class Technical extends React.Component {
         super(props);
 
         this.state = {
-            activeTab: 0
+            activeTab: 0,
+            popoverAnchor: undefined
         };
 
         this.isStyle = (this.props.componentData.manifest.name.indexOf('-style') !== -1);
@@ -44,6 +50,22 @@ class Technical extends React.Component {
         });
     }
 
+    togglePopover = (anchor) => {
+        this.setState({
+            popoverAnchor: this.state.popoverAnchor ? undefined : anchor
+        });
+    }
+
+    copyContent = (e, content) => {
+        this.togglePopover(e.currentTarget);
+        const textArea = document.createElement('textarea');
+        textArea.value = content;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('Copy');
+        textArea.remove();
+    }
+
     renderInstallInstructions = () => (
         <div className="install-doc">
             <Systemtittel id="install">
@@ -54,14 +76,30 @@ class Technical extends React.Component {
                     Less-pakkene hvis du f.eks. vil bruke et Javascript-rammeverk som er inkompatibelt med React -
                     eller hvis du av andre grunner ønsker å håndtere HTML og Javascript selv.
                 </Hjelpetekst>
+                <Flatknapp
+                    className="technical__copyknapp"
+                    aria-label="Kopier npm install til utklippstavle"
+                    // eslint-disable-next-line max-len
+                    onClick={(e) => this.copyContent(e, this.installInstructions[this.state.activeTab])}
+                    kompakt
+                >
+                    <CopyIcon />
+                </Flatknapp>
             </Systemtittel>
             <Tabs
                 tabs={this.tabs}
                 onChange={this.toggleInstallInstructions}
             />
             <Panel border>
-                <Bash>{ this.installInstructions[this.state.activeTab] }</Bash>
+                <Bash>{ this.installInstructions[this.state.activeTab] } </Bash>
             </Panel>
+            <Popover
+                orientering="over"
+                ankerEl={this.state.popoverAnchor}
+                onRequestClose={() => this.setState({ popoverAnchor: undefined })}
+            >
+                <p className="technical__popover"> Kopiert! </p>
+            </Popover>
         </div>
     );
 
