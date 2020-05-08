@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import Etikett from 'NavFrontendModules/nav-frontend-etiketter';
+
 
 import './styles.less';
 
@@ -23,12 +25,19 @@ export default class App extends Component {
     render() {
         return (
             <div>
-                <Alertstripe type="suksess">
-                    <Undertittel>Utviklingsmiljø kjører!</Undertittel>
-                </Alertstripe>
+                <div>
+                    <Etikett type="info">Dette er en etikett</Etikett>
+                    <Etikett type="suksess">Dette er en etikett</Etikett>
+                    <Etikett type="advarsel">Dette er en etikett</Etikett>
+                    <Etikett type="fokus">Dette er en etikett</Etikett>
+                </div>
                 <br/>
-                <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
-                <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
+                <div>
+                    <Etikett type="info" mini>Dette er en etikett</Etikett>
+                    <Etikett type="suksess" mini>Dette er en etikett</Etikett>
+                    <Etikett type="advarsel" mini>Dette er en etikett</Etikett>
+                    <Etikett type="fokus" mini>Dette er en etikett</Etikett>
+                </div>
             </div>
         );
     }
