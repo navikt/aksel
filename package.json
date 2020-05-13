@@ -142,7 +142,7 @@
     "jsx-to-string": "^1.1.0",
     "react-collapse": "^5.0.0",
     "react-docgen": "^2.20.0",
-    "react-docgen-typescript": "^1.2.1",
+    "react-docgen-typescript": "^1.16.3",
     "react-document-title": "^2.0.3"
   }
 }
