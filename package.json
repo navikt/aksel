@@ -138,7 +138,7 @@
     "deepmerge": "^2.0.0",
     "directory-named-webpack-plugin": "^2.2.3",
     "dompurify": "^0.9.0",
-    "js-beautify": "^1.6.14",
+    "js-beautify": "^1.11.0",
     "jsx-to-string": "^1.1.0",
     "react-collapse": "^5.0.0",
     "react-docgen": "^2.20.0",
