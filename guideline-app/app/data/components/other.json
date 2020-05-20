@@ -23,10 +23,15 @@
     "repository": "https://github.com/navikt/not-a-platform/tree/master/packages/%40navikt/header",
     "demo_url": ""
   }, {
+    "name": "Forhandsvisningsfil",
+    "description": "Forhandsvisningsfil av PDF og bilder",
+    "repository": "https://github.com/navikt/forhandsvisningsfil",
+    "demo_url": "https://navikt.github.io/forhandsvisningsfil/build/"
+  }, {
     "name": "Filopplasting",
     "description": "Filopplasting med drag & drop, maks antall filer og størrelse, og forhåndsvisning av fil",
-    "repository": "https://github.com/navikt/eessi-pensjon-ui",
-    "demo_url": "https://navikt.github.io/eessi-pensjon-ui/build/#/fileUpload"
+    "repository": "https://github.com/navikt/filopplasting",
+    "demo_url": "https://navikt.github.io/filopplasting/build/"
   },
   {
     "name": "Dekoratør for nav.no",
