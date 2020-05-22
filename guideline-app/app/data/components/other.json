@@ -26,12 +26,12 @@
     "name": "Forhandsvisningsfil",
     "description": "Forhandsvisningsfil av PDF og bilder",
     "repository": "https://github.com/navikt/forhandsvisningsfil",
-    "demo_url": "https://navikt.github.io/forhandsvisningsfil/build/"
+    "demo_url": "https://navikt.github.io/forhandsvisningsfil-doc/build/"
   }, {
     "name": "Filopplasting",
     "description": "Filopplasting med drag & drop, maks antall filer og størrelse, og forhåndsvisning av fil",
     "repository": "https://github.com/navikt/filopplasting",
-    "demo_url": "https://navikt.github.io/filopplasting/build/"
+    "demo_url": "https://navikt.github.io/filopplasting-doc/build/"
   },
   {
     "name": "Dekoratør for nav.no",
