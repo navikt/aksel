@@ -14,6 +14,7 @@ const chalk = require('chalk');
 const cssfont64 = require('gulp-cssfont64-formatter');
 const merge = require('merge2');
 const configureSvgIcon = require('react-svg-icon-generator-fork').default;
+const addVariablesExportPlugin = require('./_scripts/gulp-export-less-variables');
 
 const jsScripts = './packages/node_modules/*/src/**/*.js';
 const tsScripts = './packages/node_modules/*/src/**/*.ts*';
@@ -186,6 +187,13 @@ function buildCssfonts() {
         .pipe(gulp.dest(dest));
 }
 
+function exportLessVariables() {
+    const file = './packages/node_modules/nav-frontend-core/less';
+    return gulp.src(`${file}/_variabler.less`)
+        .pipe(addVariablesExportPlugin())
+        .pipe(gulp.dest(file));
+}
+
 configureSvgIcon({
     destination: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'src', 'index.js'),
     svgDir: path.join(__dirname, 'packages', 'node_modules', 'nav-frontend-ikoner-assets', 'assets'),
@@ -193,9 +201,10 @@ configureSvgIcon({
 });
 
 gulp.task('test', gulp.series(test));
+gulp.task('buildLess', gulp.series(exportLessVariables));
 gulp.task('buildJs', gulp.series(buildJs));
 gulp.task('buildTs', gulp.series(buildTs));
-gulp.task('build', gulp.series('buildJs', 'buildTs'));
+gulp.task('build', gulp.series('buildLess', 'buildJs', 'buildTs'));
 gulp.task('default', gulp.series('test', 'build'));
 gulp.task('buildicons', gulp.series('svg-icon'));
 gulp.task('buildfonts', gulp.series(buildCssfonts));
