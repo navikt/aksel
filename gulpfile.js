@@ -122,6 +122,11 @@ function parseTsAndAppendDocInfo(contents, file) {
         // Yeah, superhack. Men react-docgen-typescript velger alltid feil export fra tekstomrade filen
         if (docInfo.displayName === 'createDynamicHighlightingRule') {
             docInfo = docs[1];
+        } else if (docInfo.displayName === 'ForwardRefExoticComponent') {
+            // Erstatter displaynavn med filnavn. Nødvendig siden react-docgen ikke takler forwardRef komponenter.
+            let fileName = tsPath.split('/');
+            fileName = fileName[fileName.length - 1].replace('.tsx', '');
+            docInfo.displayName = fileName;
         }
 
         const exceptions = ['StatelessComponent', 'EventThrottler', 'Container'];
