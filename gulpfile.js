@@ -15,6 +15,7 @@ const cssfont64 = require('gulp-cssfont64-formatter');
 const merge = require('merge2');
 const configureSvgIcon = require('react-svg-icon-generator-fork').default;
 const addVariablesExportPlugin = require('./_scripts/gulp-export-less-variables');
+const camelcase = require('lodash.camelcase');
 
 const jsScripts = './packages/node_modules/*/src/**/*.js';
 const tsScripts = './packages/node_modules/*/src/**/*.ts*';
@@ -190,7 +191,7 @@ function buildCssfonts() {
 function exportLessVariables() {
     const file = './packages/node_modules/nav-frontend-core/less';
     return gulp.src(`${file}/_variabler.less`)
-        .pipe(addVariablesExportPlugin())
+        .pipe(addVariablesExportPlugin({ exportNames: camelcase }))
         .pipe(gulp.dest(file));
 }
 

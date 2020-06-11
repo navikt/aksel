@@ -11,17 +11,17 @@ const disclaimer = `
 // -----------------------------------------
 `.trim();
 
-function createLessExports(variables) {
+function createLessExports(variables, options) {
     const exportContent = Object.keys(variables)
-        .map((variable) => `  ${variable}: @${variable};`)
+        .map((variable) => `  ${options.exportNames(variable)}: @${variable};`)
         .join('\n');
 
     return `${disclaimer}\n:export {\n${exportContent}\n}`;
 }
 
-function createDTSExports(variables) {
+function createDTSExports(variables, options) {
     const variablesDefinition = Object.keys(variables)
-        .map((variable) => `        '${variable}': string;`)
+        .map((variable) => `        '${options.exportNames(variable)}': string;`)
         .join('\n');
     const variablesConst = `    const variables: {\n${variablesDefinition}\n    };`;
     return `${disclaimer}\ndeclare module 'nav-frontend-core' {\n${variablesConst}\n    export default variables;\n}`;
@@ -35,7 +35,7 @@ function createFile(dir, filename, content) {
     });
 }
 
-function plugin(file, env, callback) {
+function plugin(file, env, callback, options) {
     if (file.isNull()) {
         this.push(file);
         // do nothing if no contents
@@ -54,19 +54,29 @@ function plugin(file, env, callback) {
             .trim();
 
         const variables = lessToJs(content, { stripPrefix: true });
-        const lessExport = createLessExports(variables);
-        const dtsExport = createDTSExports(variables);
+        const lessExport = createLessExports(variables, options);
         const lessExportFile = createFile(pathinfo.dir, `${pathinfo.name}-exports.less`, lessExport);
-        const dtsExportFile = createFile(pathinfo.dir, `${pathinfo.name}.d.ts`, dtsExport);
-
         this.push(lessExportFile);
-        this.push(dtsExportFile);
+
+        if (options.generateDTS) {
+            const dtsExport = createDTSExports(variables, options);
+            const dtsExportFile = createFile(pathinfo.dir, `${pathinfo.name}.d.ts`, dtsExport);
+            this.push(dtsExportFile);
+        }
+
         return callback();
     }
 
     throw new Error(`Unhandled filetype: ${file.path}`);
 }
 
-module.exports = function addVariablesExport() {
-    return through.obj(plugin);
+const defaultOpts = {
+    generateDTS: true,
+    exportNames: (name) => name
+};
+module.exports = function addVariablesExport(opts) {
+    const options = { ...defaultOpts, ...(opts || {}) };
+    return through.obj(function withOptions(file, env, callback) {
+        return plugin.call(this, file, env, callback, options);
+    });
 };
