@@ -23,6 +23,11 @@
     "repository": "https://github.com/navikt/not-a-platform/tree/master/packages/%40navikt/header",
     "demo_url": ""
   }, {
+    "name": "Dekoratør for nav.no",
+    "description": "Ny dekoratør for nav.no",
+    "repository": "https://github.com/navikt/nav-dekoratoren",
+    "demo_url": "https://www-q1.nav.no/dekoratoren"
+  }, {
     "name": "Forhandsvisningsfil",
     "description": "Forhandsvisningsfil av PDF og bilder",
     "repository": "https://github.com/navikt/forhandsvisningsfil",
@@ -32,11 +37,30 @@
     "description": "Filopplasting med drag & drop, maks antall filer og størrelse, og forhåndsvisning av fil",
     "repository": "https://github.com/navikt/filopplasting",
     "demo_url": "https://navikt.github.io/filopplasting-doc/build/"
-  },
-  {
-    "name": "Dekoratør for nav.no",
-    "description": "Ny dekoratør for nav.no",
-    "repository": "https://github.com/navikt/nav-dekoratoren",
-    "demo_url": "https://www-q1.nav.no/dekoratoren"
+  }, {
+    "name": "Land verktøy",
+    "description": "Land verktøy",
+    "repository": "https://github.com/navikt/land-verktoy",
+    "demo_url": "https://navikt.github.io/land-verktoy-doc/build/"
+  }, {
+    "name": "Flagg ikoner",
+    "description": "Flagg ikoner",
+    "repository": "https://github.com/navikt/flagg-ikoner",
+    "demo_url": "https://navikt.github.io/flagg-ikoner-doc/build/"
+  }, {
+    "name": "Landvelger",
+    "description": "Nedtrekkesliste av land eller valuta",
+    "repository": "https://github.com/navikt/landvelger",
+    "demo_url": "https://navikt.github.io/landvelger-doc/build/"
+  }, {
+    "name": "Paginering",
+    "description": "Paginering knapp",
+    "repository": "https://github.com/navikt/paginering",
+    "demo_url": "https://navikt.github.io/paginering-doc/build/"
+  }, {
+    "name": "Tabell",
+    "description": "Tabell med sortering, søk, rad velg, kompakt, osv",
+    "repository": "https://github.com/navikt/tabell",
+    "demo_url": "https://navikt.github.io/tabell-doc/build/"
   }
 ]
