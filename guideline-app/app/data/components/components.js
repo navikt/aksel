@@ -76,6 +76,7 @@ const getComponentData = () => {
         const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
         const pkgName = overviewKey.split('/')[1];
         const pkg = pkgs[`./${pkgName}/package.json`];
+        // Makes sure we read the modules from /doc and not /lib like asserted in package.json
         const pkgMainModulePath = pkg.main.replace('lib', 'doc');
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
 
