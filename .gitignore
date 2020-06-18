@@ -4,7 +4,6 @@ npm-debug.log
 dist/
 assets.json
 lib/
-doc/
 lerna-debug.log
 examples/legacy/node_modules
 examples/legacy/out

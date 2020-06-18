@@ -1,7 +1,6 @@
 _templates/
 dist
 packages/node_modules/*/lib
-packages/node_modules/*/doc
 examples/
 development/
 webpack.config.js

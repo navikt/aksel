@@ -36,7 +36,6 @@ let libFragment;
 let srcFragment;
 let tsDocLib;
 let tsDocSrc;
-let tsDocs;
 
 if (path.win32 === path) {
     srcEx = /(packages\\node_modules\\[^/]+)\\src\\/;
@@ -45,7 +44,6 @@ if (path.win32 === path) {
     srcFragment = '$1\\src\\';
     tsDocLib = /\\lib\\/g;
     tsDocSrc = '\\src\\';
-    tsDocs = '/doc/';
 } else {
     srcEx = new RegExp('(packages/node_modules/[^/]+)/src/');
     assetsEx = new RegExp('(packages/node_modules/[^/]+)/assets/');
@@ -53,11 +51,6 @@ if (path.win32 === path) {
     srcFragment = '$1/src/';
     tsDocLib = /\/lib\//g;
     tsDocSrc = '/src/';
-    tsDocs = '/doc/';
-}
-
-function mapDocs(filepath) {
-    return filepath.replace(tsDocLib, tsDocs);
 }
 
 function mapToDest(filepath) {
@@ -174,15 +167,11 @@ function buildTs() {
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
-        .pipe(gulp.dest(dest))
         .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
-        .pipe(renameUsingMapper(mapDocs))
         .pipe(gulp.dest(dest));
 
     const dtsPipe = tsResult.dts
         .pipe(renameUsingMapper(mapToDest))
-        .pipe(gulp.dest(dest))
-        .pipe(renameUsingMapper(mapDocs))
         .pipe(gulp.dest(dest));
 
     return merge([tsPipe, dtsPipe]);
