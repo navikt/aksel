@@ -61,7 +61,7 @@ const getComponentData = () => {
     const overviewContext = require.context('NavFrontendModules', true, /\w+\.overview\.mdx/);
     const overviewModules = getModulesFromContext(overviewContext);
 
-    const allModulesContext = require.context('NavFrontendModules', true, /lib\/[a-z-]+.js/);
+    const allModulesContext = require.context('NavFrontendModules', true, /doc\/[a-z-]+.js/);
     const allModules = getModulesFromContext(allModulesContext);
 
     // Find all package dependencies
@@ -76,7 +76,8 @@ const getComponentData = () => {
         const overviewModuleName = getOverviewModuleNameByPath(overviewKey);
         const pkgName = overviewKey.split('/')[1];
         const pkg = pkgs[`./${pkgName}/package.json`];
-        const pkgMainModulePath = pkg.main;
+        // Makes sure we read the modules from /doc and not /lib like asserted in package.json
+        const pkgMainModulePath = pkg.main.replace('lib', 'doc');
         const pkgOverviewModules = getOverviewModulesByPackageName(pkgName, overviewModules);
 
         let mainModule;
