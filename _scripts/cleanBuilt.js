@@ -33,6 +33,7 @@ function getGlobFiles(globPattern, options) {
 
 Promise.all([
     getGlobFiles('./packages/node_modules/**/lib', { dot: true }),
+    getGlobFiles('./packages/node_modules/**/doc', { dot: true }),
     getGlobFiles('./packages/node_modules/**/src/*.d.ts', { dit: true })
 ])
     .then(([folders, files]) => {
