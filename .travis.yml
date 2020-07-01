@@ -22,12 +22,6 @@ before_deploy:
   - git config --global user.name "navikt"
 
 deploy:
-  - provider: script
-    skip-cleanup: true
-    on:
-      branch: master
-    script:
-      - git checkout master && git remote set-url origin https://Lillebo:$GITHUB_TOKEN@github.com/navikt/nav-frontend-moduler.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
   - provider: pages
     skip-cleanup: true
     github-token: $GITHUB_TOKEN
@@ -35,3 +29,9 @@ deploy:
       branch: master
     keep-history: true
     local-dir: "guideline-app/dist"
+  - provider: script
+    skip-cleanup: true
+    on:
+      branch: master
+    script:
+      - npm run build:nodocs && git checkout master && git remote set-url origin https://Lillebo:$GITHUB_TOKEN@github.com/navikt/nav-frontend-moduler.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish

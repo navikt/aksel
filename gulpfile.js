@@ -9,6 +9,7 @@ const babel = require('gulp-babel');
 const ts = require('gulp-typescript');
 const plumber = require('gulp-plumber');
 const gutil = require('gulp-util');
+const gulpif = require('gulp-if');
 const path = require('path');
 const chalk = require('chalk');
 const cssfont64 = require('gulp-cssfont64-formatter');
@@ -156,6 +157,7 @@ function parseTsAndAppendDocInfo(contents, file) {
 
 function buildTs() {
     const ignoreErrors = process.argv.indexOf('--ignoreErrors') !== -1;
+    const withDocs = process.argv.indexOf('--docs') !== -1;
 
     const tsResult = gulp.src(tsScripts)
         .pipe(fixErrorHandling())
@@ -167,7 +169,7 @@ function buildTs() {
     const tsPipe = tsResult.js
         .pipe(babel({ plugins: ['transform-react-display-name'] }))
         .pipe(renameUsingMapper(mapToDest))
-        .pipe(insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file)))
+        .pipe(gulpif(withDocs, insert.transform((contents, file) => parseTsAndAppendDocInfo(contents, file))))
         .pipe(gulp.dest(dest));
 
     const dtsPipe = tsResult.dts
