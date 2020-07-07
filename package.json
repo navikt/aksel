@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --ignoreErrors && npm run generateMDs",
+    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --docs --ignoreErrors && npm run generateMDs",
     "lerna": "lerna",
     "gulp": "gulp",
     "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",

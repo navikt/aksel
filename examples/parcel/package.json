@@ -22,7 +22,7 @@
     "nav-frontend-core": "^4.0.5",
     "nav-frontend-js-utils": "^1.0.6",
     "nav-frontend-knapper": "^1.0.11",
-    "nav-frontend-knapper-style": "^0.3.10",
+    "nav-frontend-knapper-style": "^1.0.0",
     "nav-frontend-typografi": "^2.0.6",
     "nav-frontend-typografi-style": "^1.0.10",
     "prop-types": "^15.6.2",
