@@ -126,7 +126,7 @@ const routeConfig = [
             {
                 path: '/accessibility/placeholders',
                 component: AccessibilityPlaceholdersPage,
-                title: 'Placeholders'
+                title: 'Html: Placeholders'
             },
             {
                 path: '/accessibility/disabled',
