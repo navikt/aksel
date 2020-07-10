@@ -11,7 +11,6 @@ const vendors = [
 ];
 
 const GlobalWebpackConfig = {
-    devtool: 'inline-source-map',
     entry: {
         vendors,
         polyfill: 'babel-polyfill',
@@ -71,12 +70,7 @@ const GlobalWebpackConfig = {
         new webpack.ProvidePlugin({
             'React': 'react' // eslint-disable-line quote-props
         })
-    ],
-    optimization: {
-        splitChunks: {
-            chunks: 'all'
-        }
-    }
+    ]
 };
 
 module.exports = GlobalWebpackConfig;
