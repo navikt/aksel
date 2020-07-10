@@ -19,6 +19,7 @@ import AccessibilityAltTextPage from '../../ui/containers/accessibility/alt-text
 import AccessibilityToolsPage from '../../ui/containers/accessibility/tools/AccessibilityToolsPage';
 // eslint-disable-next-line max-len
 import AccessibilityPlaceholdersPage from '../../ui/containers/accessibility/placeholders/AccessibilityPlaceholdersPage';
+import AccessibilityDisabledPage from '../../ui/containers/accessibility/disabled/AccessibilityDisabledPage';
 import NotFoundPage from '../../ui/containers/404/NotFoundPage';
 import FormValidationPage from '../../ui/containers/patterns/form-validation/FormValidationPage';
 
@@ -126,6 +127,11 @@ const routeConfig = [
                 path: '/accessibility/placeholders',
                 component: AccessibilityPlaceholdersPage,
                 title: 'Placeholders'
+            },
+            {
+                path: '/accessibility/disabled',
+                component: AccessibilityDisabledPage,
+                title: 'Html: Disabled'
             },
             {
                 path: '/accessibility/tools',
