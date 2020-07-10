@@ -22,7 +22,9 @@ const GlobalWebpackConfig = {
             {
                 test: /\.(png|mp4)$/,
                 use: [
-                    { loader: 'file-loader?name=[name].[ext]' }
+                    {
+                        loader: 'file-loader'
+                    }
                 ]
             },
             {
@@ -68,11 +70,13 @@ const GlobalWebpackConfig = {
     plugins: [
         new webpack.ProvidePlugin({
             'React': 'react' // eslint-disable-line quote-props
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['polyfill', 'vendors', 'scripts']
         })
-    ]
+    ],
+    optimization: {
+        splitChunks: {
+            chunks: 'all'
+        }
+    }
 };
 
 module.exports = GlobalWebpackConfig;
