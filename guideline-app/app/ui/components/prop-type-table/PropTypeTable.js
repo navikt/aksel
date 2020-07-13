@@ -4,7 +4,7 @@ import cn from 'classnames';
 
 import 'NavFrontendModules/nav-frontend-tabell-style';
 
-import OverflowDetector from './../overflow-detector/OverflowDetector';
+import OverflowDetector from '../overflow-detector/OverflowDetector';
 
 import './styles.less';
 
@@ -34,9 +34,8 @@ class PropTypeTable extends React.Component {
                     </thead>
                     <tbody>
                         {
-                            propTypeDocs.filter((item) =>
-                                item.propName.indexOf('aria-') !== 0
-                            ).map((propTypeDoc, key) => (
+                            // eslint-disable-next-line max-len
+                            propTypeDocs.filter((item) => item.propName.indexOf('aria-') !== 0).map((propTypeDoc, key) => (
                                 <PropTypeTableRow
                                     val={{
                                         ...propTypeDoc,
@@ -90,7 +89,12 @@ const parsePropValue = (val) => {
 const parseDescription = (desc) => {
     const found = desc.match(/^@deprecated/);
     if (found) {
-        return (<span><strong>{found[0]}</strong>{desc.substr(11, desc.length)}</span>);
+        return (
+            <span>
+                <strong>{found[0]}</strong>
+                {desc.substr(11, desc.length)}
+            </span>
+        );
     }
     return desc;
 };
@@ -110,11 +114,13 @@ const PropTypeTableRow = (props) => {
 
 PropTypeTableRow.propTypes = {
     val: PT.shape({
+        // eslint-disable-next-line react/forbid-prop-types
         defaultValue: PT.any,
         description: PT.string,
         name: PT.string,
         propName: PT.string,
-        required: PT.boolean,
+        required: PT.bool,
+        // eslint-disable-next-line react/forbid-prop-types
         type: PT.any
     }).isRequired
 };

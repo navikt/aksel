@@ -154,8 +154,8 @@ class Technical extends React.Component {
                 </section>
                 <section className="section full">
                     {
-                        this.props.componentData.packageModules &&
-                        <ModuleBrowser data={this.props.componentData} package={this.props.componentData.manifest} />
+                        this.props.componentData.packageModules
+                        && <ModuleBrowser data={this.props.componentData} package={this.props.componentData.manifest} />
                     }
                 </section>
             </React.Fragment>

@@ -23,9 +23,9 @@ class TableOfContents extends React.Component {
                     nextHeadline.parent = prevHeadline.parent;
                 } else {
                     while (
-                        prevHeadline.parent &&
-                        prevHeadline.parent.type &&
-                        prevHeadline.parent.type >= nextHeadline.type
+                        prevHeadline.parent
+                        && prevHeadline.parent.type
+                        && prevHeadline.parent.type >= nextHeadline.type
                     ) {
                         prevHeadline = prevHeadline.parent;
                     }
@@ -45,7 +45,7 @@ class TableOfContents extends React.Component {
         <ol>
             {headlines.map((headline) => this.renderTOCItem(headline))}
         </ol>
-        )
+    )
 
     renderTOCItem = (headline) => {
         const children = this.findHeadlineChildren(headline);
@@ -53,8 +53,8 @@ class TableOfContents extends React.Component {
             <li key={headline.id}>
                 <a href={`#${headline.id}`}>{headline.title}</a>
                 {
-                    children &&
-                    this.renderTOCList(children)
+                    children
+                    && this.renderTOCList(children)
                 }
             </li>
         );

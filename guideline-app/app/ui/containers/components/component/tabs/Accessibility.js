@@ -1,5 +1,5 @@
 import React from 'react';
-import MdxContent from './../../../../components/mdx-content/MdxContent';
+import MdxContent from '../../../../components/mdx-content/MdxContent';
 
 class Accessibility extends React.Component {
     render() {

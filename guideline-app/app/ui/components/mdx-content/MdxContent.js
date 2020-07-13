@@ -4,8 +4,8 @@ import { MDXProvider } from '@mdx-js/react';
 import { Innholdstittel, Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
 import Lenke from 'NavFrontendModules/nav-frontend-lenker';
 
-import Codeblock, { InlineCode } from './../code/Code';
-import TableOfContents from './../table-of-contents/TableOfContents';
+import Codeblock, { InlineCode } from '../code/Code';
+import TableOfContents from '../table-of-contents/TableOfContents';
 
 import './styles.less';
 

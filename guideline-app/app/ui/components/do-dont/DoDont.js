@@ -16,7 +16,8 @@ export const Do = (props) => (
     <div className="dodont__do">
         {props.children}
         <div className="dodont__label">
-            <SuccessIcon /> Gjør dette
+            <SuccessIcon />&nbsp;
+            Gjør dette
         </div>
     </div>
 );
@@ -25,7 +26,8 @@ export const Dont = (props) => (
     <div className="dodont__dont">
         {props.children}
         <div className="dodont__label">
-            <ErrorIcon /> Ikke gjør dette
+            <ErrorIcon />&nbsp;
+            Ikke gjør dette
         </div>
     </div>
 );

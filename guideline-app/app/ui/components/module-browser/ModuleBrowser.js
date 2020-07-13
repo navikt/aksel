@@ -7,8 +7,8 @@ import { Systemtittel, Undertittel } from 'NavFrontendModules/nav-frontend-typog
 import Popover from 'NavFrontendModules/nav-frontend-popover';
 import { Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 
-import Code from './../code/Code';
-import PropTypeTable from './../prop-type-table/PropTypeTable';
+import Code from '../code/Code';
+import PropTypeTable from '../prop-type-table/PropTypeTable';
 import { CopyIcon } from '../../../assets/images/svg';
 
 import './styles.less';
@@ -19,9 +19,9 @@ class ModuleBrowser extends React.Component {
     constructor(props) {
         super(props);
 
-        this.modules = Object.keys(this.props.data.packageModules).sort().map((key) =>
+        this.modules = Object.keys(this.props.data.packageModules).sort().map((key) => (
             this.props.data.packageModules[key]
-        );
+        ));
 
         this.modules = this.props.data.packageModules;
 
@@ -68,7 +68,6 @@ class ModuleBrowser extends React.Component {
         return `import ${format} from '${this.props.package.name}';`;
     }
 
-
     render() {
         return (
             <div className="module-browser">
@@ -90,7 +89,12 @@ class ModuleBrowser extends React.Component {
                                                 onClick={(e) => this.setActiveModule(e, moduleName)}
                                             >
                                                 { module.__docgenInfo.displayName }
-                                                { moduleName === 'default' && <span>&nbsp;{`(${moduleName})`}</span> }
+                                                { moduleName === 'default'
+                                                    && (
+                                                        <span>&nbsp;
+                                                            {`(${moduleName})`}
+                                                        </span>
+                                                    ) }
                                             </a>
                                         </li>
                                     );

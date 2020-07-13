@@ -4,10 +4,15 @@ import { NavLink } from 'react-router-dom';
 
 import { LenkepanelBase } from 'NavFrontendModules/nav-frontend-lenkepanel';
 import { EtikettFokus, EtikettInfo } from 'NavFrontendModules/nav-frontend-etiketter';
-import { Systemtittel, Undertittel, Normaltekst, Undertekst } from 'NavFrontendModules/nav-frontend-typografi';
+import {
+    Systemtittel,
+    Undertittel,
+    Normaltekst,
+    Undertekst
+} from 'NavFrontendModules/nav-frontend-typografi';
 
 import TitleByRoute from '../title-by-route/TitleByRoute';
-import routeConfig from './../../../utils/routing/routes.config';
+import routeConfig from '../../../utils/routing/routes.config';
 
 import './styles.less';
 
@@ -45,31 +50,32 @@ const LeftNavigation = (props) => (
                                 >
                                     { item.title }
                                     {
-                                        isBeta(item) &&
-                                        <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
+                                        isBeta(item)
+                                        && <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
                                     }
                                     {
-                                        isStyle(item) &&
-                                        <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
+                                        isStyle(item)
+                                        && <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
                                     }
                                 </NavLink>
                             </li>
-                        )
-                    )
+                        ))
                 }
             </ul>
             {
-                props.routes && props.routes[0].path.indexOf('/components') === 0 &&
-                <React.Fragment>
-                    <div className="contribute-promo">
-                        <Undertittel>Noe du savner?</Undertittel>
-                        <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
-                            <Normaltekst className="lenkepanel__heading">
-                                Bidra med nye komponenter på Github
-                            </Normaltekst>
-                        </LenkepanelBase>
-                    </div>
-                </React.Fragment>
+                props.routes && props.routes[0].path.indexOf('/components') === 0
+                && (
+                    <React.Fragment>
+                        <div className="contribute-promo">
+                            <Undertittel>Noe du savner?</Undertittel>
+                            <LenkepanelBase href="https://github.com/navikt/nav-frontend-moduler" border>
+                                <Normaltekst className="lenkepanel__heading">
+                                    Bidra med nye komponenter på Github
+                                </Normaltekst>
+                            </LenkepanelBase>
+                        </div>
+                    </React.Fragment>
+                )
             }
         </nav>
     </div>

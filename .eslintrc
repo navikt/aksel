@@ -11,7 +11,7 @@
     "comma-dangle": [2, "never"],
     "arrow-parens": [2, "always"],
     "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }],
-    "import/no-unresolved": "warn",
+    "import/no-unresolved": ["warn", { "ignore": ["NavFrontendModules/"] }],
     "import/extensions": "warn",
     "import/no-cycle": "off",
     "react/prop-types": "off",
