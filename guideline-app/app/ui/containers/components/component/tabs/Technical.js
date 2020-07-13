@@ -8,14 +8,13 @@ import Tabs from 'NavFrontendModules/nav-frontend-tabs';
 import Popover from 'NavFrontendModules/nav-frontend-popover';
 import { Flatknapp } from 'NavFrontendModules/nav-frontend-knapper';
 
-import ModuleBrowser from './../../../../components/module-browser/ModuleBrowser';
-import { Bash } from './../../../../components/code/Code';
+import ModuleBrowser from '../../../../components/module-browser/ModuleBrowser';
+import { Bash } from '../../../../components/code/Code';
 
 import { CopyIcon } from '../../../../../assets/images/svg';
 import '../styles.less';
 
 class Technical extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -91,7 +90,10 @@ class Technical extends React.Component {
                 onChange={this.toggleInstallInstructions}
             />
             <Panel border>
-                <Bash>{ this.installInstructions[this.state.activeTab] } </Bash>
+                <Bash>
+                    { this.installInstructions[this.state.activeTab] }
+                    {' '}
+                </Bash>
             </Panel>
             <Popover
                 orientering="over"
@@ -132,17 +134,15 @@ class Technical extends React.Component {
                                 <th>Peer&nbsp;dependencies:</th>
                                 <td className="dependencies">
                                     {
-                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep) =>
-                                            [
-                                                <Lenke
-                                                    key={dep}
-                                                    href={`https://www.npmjs.com/package/${dep}`}
-                                                >
-                                                    {dep}
-                                                </Lenke>,
-                                                ' '
-                                            ]
-                                        )
+                                        Object.keys(this.props.componentData.manifest.peerDependencies).map((dep) => ([
+                                            <Lenke
+                                                key={dep}
+                                                href={`https://www.npmjs.com/package/${dep}`}
+                                            >
+                                                {dep}
+                                            </Lenke>,
+                                            ' '
+                                        ]))
                                     }
                                 </td>
                             </tr>

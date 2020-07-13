@@ -79,7 +79,7 @@ class FormValidationExample extends React.Component {
     getForm = (feil) => (
         <form onSubmit={this.submit}>
             <CheckboksPanelGruppe
-                legend={'Hva vil du ha levert?'}
+                legend="Hva vil du ha levert?"
                 checkboxes={[
                     {
                         label: 'Eplejuice',
@@ -106,7 +106,8 @@ class FormValidationExample extends React.Component {
                 onChange={(e, value) => this.handleChange(value, 'choices')}
                 feil={(this.state.errors.choices) ? this.state.errors.choices : undefined}
             />
-            <br /><br />
+            <br />
+            <br />
             <SkjemaGruppe legend="Leveringsadresse">
                 <Input
                     id="b-address"
@@ -137,12 +138,14 @@ class FormValidationExample extends React.Component {
                 </div>
             </SkjemaGruppe>
             {
-                (feil && !!feil.length) &&
-                <Feiloppsummering
-                    innerRef={this.feiloppsummering}
-                    tittel="For å gå videre må du rette opp følgende:"
-                    feil={feil}
-                />
+                (feil && !!feil.length)
+                && (
+                    <Feiloppsummering
+                        innerRef={this.feiloppsummering}
+                        tittel="For å gå videre må du rette opp følgende:"
+                        feil={feil}
+                    />
+                )
             }
             <div>
                 <div className="form-buttons" style={{ display: 'flex' }}>
@@ -157,7 +160,9 @@ class FormValidationExample extends React.Component {
         <div className="receipt">
             <Undertittel>Skjema sendt!</Undertittel>
             <p>
-                Skjema tilbakestilles om {this.state.resetCounter} sekunder...
+                Skjema tilbakestilles om&nbsp;
+                {this.state.resetCounter}&nbsp;
+                sekunder...
             </p>
             <br />
             <Knapp onClick={this.reset}>Tilbake</Knapp>
@@ -286,12 +291,10 @@ class FormValidationExample extends React.Component {
     }
 
     render() {
-        const feil = Object.keys(this.state.errors).filter((key) => this.state.errors[key]).map((key) =>
-            ({
-                skjemaelementId: `b-${key}`,
-                feilmelding: this.state.errors[key]
-            })
-        );
+        const feil = Object.keys(this.state.errors).filter((key) => this.state.errors[key]).map((key) => ({
+            skjemaelementId: `b-${key}`,
+            feilmelding: this.state.errors[key]
+        }));
 
         return (
             <div className="form-validation-pattern">
@@ -301,12 +304,17 @@ class FormValidationExample extends React.Component {
                 <div aria-live="assertive">
                     {(!this.state.submitSuccess && !this.state.submitting) && this.getForm(feil)}
                     {
-                        this.state.submitting &&
-                        <div className="spinner-container">
-                            <div align="center">
-                                <Spinner transparent /><br /><br />Sender inn...
+                        this.state.submitting
+                        && (
+                            <div className="spinner-container">
+                                <div align="center">
+                                    <Spinner transparent />
+                                    <br />
+                                    <br />
+                                    Sender inn...
+                                </div>
                             </div>
-                        </div>
+                        )
                     }
                     {this.state.submitSuccess && this.getReceipt()}
                 </div>
