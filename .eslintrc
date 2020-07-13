@@ -18,6 +18,7 @@
     "react/jsx-indent-props": ["error", 4],
     "react/jsx-indent": ["error", 4],
     "react/no-find-dom-node": "warn",
+    "no-undef": "warn",
     "jsx-a11y/no-noninteractive-tabindex": "warn"
   }
 }

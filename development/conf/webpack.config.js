@@ -66,12 +66,7 @@ const GlobalWebpackConfig = {
             NavFrontendModules: path.resolve(__dirname, './../../packages/node_modules'),
             NavFrontendCore: path.resolve(__dirname, './../../packages/node_modules/nav-frontend-core')
         }
-    },
-    plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendors'
-        })
-    ]
+    }
 };
 
 module.exports = GlobalWebpackConfig;

@@ -43,5 +43,6 @@ WebpackDevConfig.resolve.plugins = [
         honorPackage: ['jsnext:main']
     })
 ];
+WebpackDevConfig.devtool = 'inline-source-map';
 
 module.exports = WebpackDevConfig;
