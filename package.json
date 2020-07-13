@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --docs --ignoreErrors && npm run generateMDs",
+    "postinstall": "node ./_scripts/cleanBuilt.js && gulp build --ignoreErrors && npm run generateMDs",
     "lerna": "lerna",
     "gulp": "gulp",
     "lernapublish": "(lerna updated && lerna publish --cd-version patch --yes -m \"publish [ci skip]\") || echo \"Ingen endringer avslutter OK\"",
@@ -41,7 +41,7 @@
     "@navikt/textparser": "^2.0.0",
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
-    "@types/react-collapse": "^4.0.1",
+    "@types/react-collapse": "^5.0.0",
     "@types/react-modal": "^3.1.2",
     "@types/sanitize-html": "^1.13.0",
     "babel-core": "^6.24.1",
@@ -145,7 +145,6 @@
     "gulp-if": "^3.0.0",
     "js-beautify": "^1.11.0",
     "jsx-to-string": "^1.1.0",
-    "react-collapse": "^5.0.0",
     "react-docgen": "^2.20.0",
     "react-docgen-typescript": "^1.18.0",
     "react-document-title": "^2.0.3"
