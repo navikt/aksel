@@ -1,6 +1,6 @@
 import React from 'react';
 import ComponentGuidelinePage from '../../ui/containers/components/component/ComponentGuidelinePage';
-import { Components as components } from './../../data';
+import { Components as components } from '../../data';
 import routeConfig from './routes.config';
 
 const getTopLevelComponentRoutes = (routePrefix) => (

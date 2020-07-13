@@ -7,8 +7,8 @@ import Guidelines from './tabs/Guidelines.mdx';
 import Checklist from './tabs/Checklist.mdx';
 import Units from './tabs/Units.mdx';
 
-import MdxContent from './../../../components/mdx-content/MdxContent';
-import TabbedContainer from './../../tabbed-container/TabbedContainer';
+import MdxContent from '../../../components/mdx-content/MdxContent';
+import TabbedContainer from '../../tabbed-container/TabbedContainer';
 
 import './styles.less';
 

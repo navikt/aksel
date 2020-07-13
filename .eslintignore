@@ -1,6 +1,8 @@
 _templates/
+_scripts/
 dist
 packages/node_modules/*/lib
 examples/
 development/
 webpack.config.js
+gulpfile.js

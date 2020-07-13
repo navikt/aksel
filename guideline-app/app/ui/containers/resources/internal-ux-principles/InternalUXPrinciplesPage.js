@@ -1,7 +1,7 @@
 import React from 'react';
 
 import InternalUXPrinciples from './InternalUXPrinciples.mdx';
-import MdxContent from './../../../components/mdx-content/MdxContent';
+import MdxContent from '../../../components/mdx-content/MdxContent';
 
 // import './styles.less';
 

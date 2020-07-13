@@ -7,8 +7,9 @@ const beautifyCss = require('js-beautify').css;
 
 export const sanitizeHtml = (html) => (DOMPurify.sanitize(html));
 
-export const getShallowComponent = (component, modifiers, children) =>
-    (renderComponentWithModifiersAndChildren(component, modifiers, children, true));
+export const getShallowComponent = (component, modifiers, children) => {
+    renderComponentWithModifiersAndChildren(component, modifiers, children, true);
+};
 
 export const getHtmlCodeForComponent = (component, activeModifiers, children) => {
     const shallowComponent = getShallowComponent(component, activeModifiers, children);
@@ -26,12 +27,8 @@ export const getReactCodeForComponent = (component, activeModifiers, children) =
 const getMatchingCSSRulesForElement = (el, css = el.ownerDocument.styleSheets) => {
     const stylesheets = [...css];
     const rules = stylesheets
-        .map((stylesheet) =>
-            [...stylesheet.cssRules || [], ...stylesheet.rules || []]
-        )
-        .reduce((someRules, someOtherRules) =>
-            [...someRules, ...someOtherRules]
-        );
+        .map((stylesheet) => [...stylesheet.cssRules || [], ...stylesheet.rules || []])
+        .reduce((someRules, someOtherRules) => [...someRules, ...someOtherRules]);
     return rules.filter((rule) => rule && rule.selectorText && el.matches(rule.selectorText));
 };
 

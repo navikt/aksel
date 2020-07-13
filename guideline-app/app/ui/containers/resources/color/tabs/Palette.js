@@ -18,7 +18,6 @@ import ContrastSample from '../../../../components/contrast-sample/ContrastSampl
 Modal.setAppElement('#app');
 
 class Palette extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -55,27 +54,27 @@ class Palette extends React.Component {
                 <Undertittel>Kontrast</Undertittel>
                 <ContrastSample
                     label="Mot svart:"
-                    foreground={'#3E3832'}
+                    foreground="#3E3832"
                     background={this.state.activeColor.color.hex()}
                 />
                 <ContrastSample
                     label="Mot hvit:"
-                    foreground={'#ffffff'}
+                    foreground="#ffffff"
                     background={this.state.activeColor.color.hex()}
                 />
                 <ContrastSample
                     label="Mot lys grå:"
-                    foreground={'#E9E7E7'}
+                    foreground="#E9E7E7"
                     background={this.state.activeColor.color.hex()}
                 />
                 <ContrastSample
                     label="Mot NAV blå:"
-                    foreground={'#0067C5'}
+                    foreground="#0067C5"
                     background={this.state.activeColor.color.hex()}
                 />
             </section>
         </div>
-        )
+    )
 
     render() {
         return (

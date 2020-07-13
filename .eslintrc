@@ -13,12 +13,19 @@
     "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }],
     "import/no-unresolved": "warn",
     "import/extensions": "warn",
+    "import/no-cycle": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
     "react/jsx-indent-props": ["error", 4],
     "react/jsx-indent": ["error", 4],
     "react/no-find-dom-node": "warn",
+    "react/no-unused-state": "warn",
+    "react/destructuring-assignment": "off",
+    "react/jsx-fragments": "off",
+    "react/jsx-props-no-spreading": "off",
     "no-undef": "warn",
-    "jsx-a11y/no-noninteractive-tabindex": "warn"
+    "jsx-a11y/no-noninteractive-tabindex": "warn",
+    "no-else-return": "off"
+    
   }
 }
