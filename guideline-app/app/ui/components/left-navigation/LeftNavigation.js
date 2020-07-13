@@ -38,28 +38,27 @@ const LeftNavigation = (props) => (
             <Systemtittel id="left-navigation-title"><TitleByRoute routes={routeConfig} /></Systemtittel>
             <ul className="nav-list">
                 {
-                    props.routes && props.routes.map((item) =>
-                        (
-                            <li
-                                key={item.title}
-                                className={classnames({ divider: item.path === '/components/other' })}
+                    props.routes && props.routes.map((item) => (
+                        <li
+                            key={item.title}
+                            className={classnames({ divider: item.path === '/components/other' })}
+                        >
+                            <NavLink
+                                activeClassName="active"
+                                to={item.path}
                             >
-                                <NavLink
-                                    activeClassName="active"
-                                    to={item.path}
-                                >
-                                    { item.title }
-                                    {
-                                        isBeta(item)
-                                        && <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
-                                    }
-                                    {
-                                        isStyle(item)
-                                        && <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
-                                    }
-                                </NavLink>
-                            </li>
-                        ))
+                                { item.title }
+                                {
+                                    isBeta(item)
+                                    && <EtikettFokus><Undertekst>Beta</Undertekst></EtikettFokus>
+                                }
+                                {
+                                    isStyle(item)
+                                    && <EtikettInfo><Undertekst>CSS</Undertekst></EtikettInfo>
+                                }
+                            </NavLink>
+                        </li>
+                    ))
                 }
             </ul>
             {
