@@ -75,7 +75,12 @@ module.exports = {
             "react/jsx-indent-props": "off",
             "react/static-property-placement": "warn",
             "react/no-access-state-in-setstate": "warn",
+            "react/forbid-prop-types": "warn",
+            "react/button-has-type": "off",
+            "no-return-assign": "warn",
+            "no-unused-expressions": "off",
             "no-unused-vars": "warn",
+            "no-param-reassign": "off",
             "react/destructuring-assignment": "off",
             "import/no-unresolved": [2, { caseSensitive: false }],
             'import/extensions': ['error', 'ignorePackages', {
@@ -84,8 +89,8 @@ module.exports = {
                 ts: 'never',
                 tsx: 'never'
               }],
-              "no-unused-vars": ["warn",{ "varsIgnorePattern": "[pP]rops" }],
-
-
+            "no-unused-vars": ["warn",{ "varsIgnorePattern": "[pP]rops" }],
+            "jsx-a11y/label-has-for": "warn",
+            
         }}]
 }
