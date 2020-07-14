@@ -29,7 +29,8 @@ module.exports = {
     "no-undef": "warn",
     "no-restricted-globals": "off",
     "jsx-a11y/no-noninteractive-tabindex": "warn",
-    "no-else-return": "off"
+    "no-else-return": "off",
+    "react/no-deprecated": "warn",
     },
 
     // TYpescript
@@ -77,6 +78,10 @@ module.exports = {
             "react/no-access-state-in-setstate": "warn",
             "react/forbid-prop-types": "warn",
             "react/button-has-type": "off",
+            "react/jsx-fragments": "off",
+            "react/no-find-dom-node": "warn",
+            "react/no-did-update-set-state": "warn",
+            "react/no-deprecated": "warn",
             "no-return-assign": "warn",
             "no-unused-expressions": "off",
             "no-unused-vars": "warn",
@@ -91,6 +96,13 @@ module.exports = {
               }],
             "no-unused-vars": ["warn",{ "varsIgnorePattern": "[pP]rops" }],
             "jsx-a11y/label-has-for": "warn",
-            
+            "jsx-a11y/role-supports-aria-props": "warn",
+            "jsx-a11y/label-has-associated-control": "warn",
+            "jsx-a11y/no-noninteractive-tabindex": "warn",
+            "jsx-a11y/click-events-have-key-events": "warn",
+            "jsx-a11y/anchor-is-valid": "warn",
+            "jsx-a11y/anchor-has-content": "warn",
+            "max-classes-per-file": "warn",
+
         }}]
 }
