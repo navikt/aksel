@@ -53,7 +53,7 @@ Når du har laget eller endret på en komponent er det fint om du også dokument
 Det kan også være lurt å kjøre `npm run start-guideline-app` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
 
 ## Kodekvalitet
-For å sikre kodekvalitet er det satt opp både `tslint` og `lesshint` som blir kjørt ved byggetid.
+For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.
 Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har 
 blitt avklart/diskutert i NAVs frontendforum.
 

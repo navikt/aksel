@@ -16,7 +16,6 @@
     "lint": "npm run jsts:lint && npm run less:lint",
     "jsts:lint": "npx eslint packages guideline-app --ext .js,.ts,.tsx,.jsx --color",
     "js:lint:fix": "esw --color --fix",
-    "ts:lint": "tslint -p . -t stylish",
     "less:lint": "lesshint --reporter ./_scripts/lesshint-reporter.js packages/",
     "test": "gulp test",
     "build": "gulp build --docs && npm run generateMDs",
@@ -149,6 +148,5 @@
     "react-docgen": "^2.20.0",
     "react-docgen-typescript": "^1.18.0",
     "react-document-title": "^2.0.3",
-    "tslint": "^6.1.2"
   }
 }
