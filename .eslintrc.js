@@ -52,6 +52,11 @@ module.exports = {
             react: {
                 version: 'detect',
             },
+            'import/resolver': {
+                node: {
+                  extensions: ['.js','.jsx', '.ts', '.tsx']
+                }
+            },
         },
         rules: {
             "camelcase": "error",
@@ -62,6 +67,25 @@ module.exports = {
             "no-duplicate-imports": "off",
             "no-underscore-dangle": "error",
             "arrow-parens": [2, "always"],
-            "indent": [2, 4, {"SwitchCase": 1}]
+            "indent": ["error", 4, {"SwitchCase": 1}],
+            "react/prefer-stateless-function": "off",
+            "react/jsx-filename-extension": "off",
+            "react/jsx-props-no-spreading": "off",
+            "react/jsx-indent": "off",
+            "react/jsx-indent-props": "off",
+            "react/static-property-placement": "warn",
+            "react/no-access-state-in-setstate": "warn",
+            "no-unused-vars": "warn",
+            "react/destructuring-assignment": "off",
+            "import/no-unresolved": [2, { caseSensitive: false }],
+            'import/extensions': ['error', 'ignorePackages', {
+                js: 'never',
+                jsx: 'never',
+                ts: 'never',
+                tsx: 'never'
+              }],
+              "no-unused-vars": ["warn",{ "varsIgnorePattern": "[pP]rops" }],
+
+
         }}]
 }
