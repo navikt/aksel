@@ -1,8 +1,10 @@
 _templates/
 _scripts/
 dist
-packages/node_modules/*/lib
 examples/
 development/
 webpack.config.js
 gulpfile.js
+.eslintrc.js
+!packages/node_modules/**
+packages/node_modules/*/lib
