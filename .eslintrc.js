@@ -61,7 +61,7 @@ module.exports = {
         },
         rules: {
             "camelcase": "error",
-            "comma-dangle": [0, "never"],
+            "comma-dangle": ["error", "never"],
             "id-blacklist": "error",
             "id-match": "error",
             "max-len": ["error", { "code": 120 }],
