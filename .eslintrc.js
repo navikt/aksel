@@ -10,7 +10,7 @@ module.exports = {
         "no-unused-vars": [2, { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
     "indent": [2, 4, { "SwitchCase": 1 }],
     "max-len": [2, 120, 4],
-    "comma-dangle": [2, "never"],
+    "comma-dangle": [0, "never"],
     "arrow-parens": [2, "always"],
     "import/no-extraneous-dependencies": ["error", { "peerDependencies": true }],
     "import/no-unresolved": ["warn", { "ignore": ["NavFrontendModules/"] }],
@@ -61,7 +61,7 @@ module.exports = {
         },
         rules: {
             "camelcase": "error",
-            "comma-dangle": "error",
+            "comma-dangle": [0, "never"],
             "id-blacklist": "error",
             "id-match": "error",
             "max-len": ["error", { "code": 120 }],
