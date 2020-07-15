@@ -7,9 +7,7 @@ const TitleByRoute = (props) => props.routes.filter((route) => route.path).map((
         key={index} // eslint-disable-line react/no-array-index-key
         exact={route.exact}
         path={route.path}
-        component={
-                () => route.title
-            }
+        component={() => route.title}
     />
 ));
 

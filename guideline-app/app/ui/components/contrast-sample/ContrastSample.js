@@ -4,7 +4,7 @@ import classnames from 'classnames';
 
 import { EtikettLiten as Etikett } from 'NavFrontendModules/nav-frontend-typografi';
 
-import { CheckIcon, CrossIcon } from './../../../assets/images/svg';
+import { CheckIcon, CrossIcon } from '../../../assets/images/svg';
 
 import './styles.less';
 
@@ -29,7 +29,11 @@ const ContrastSample = (props) => {
                 {props.label}
                 <span className={contrastCls(contrast)}>
                     <span className="contrast-ratio__label">Kontrast: </span>
-                    <strong>{contrast}:1</strong>, WCAG AA:
+                    <strong>
+                        {contrast}
+                        :1
+                    </strong>&nbsp;
+                    , WCAG AA:
                     { contrast > 4.5 && <CheckIcon title="Godkjent" /> }
                     { contrast < 4.5 && <CrossIcon title="Ikke godkjent" /> }
                 </span>

@@ -13,10 +13,9 @@ import Overview from './tabs/Overview';
 import Technical from './tabs/Technical';
 import Accessibility from './tabs/Accessibility';
 
-import TabbedContainer from './../../tabbed-container/TabbedContainer';
+import TabbedContainer from '../../tabbed-container/TabbedContainer';
 
 import './styles.less';
-
 
 const componentTitleCls = (beta, style) => classnames('componentTitle', {
     'componentTitle--beta': beta,
@@ -74,14 +73,16 @@ class ComponentGuidelinePage extends React.Component {
                             Beta-komponenter kan inneholde mange bugs, og mangle sentrale funksjoner og
                             dokumentasjon. Det er også fare for at disse komponentene og deres API vil
                             forandre seg mye mellom hver oppdatering.
-                        </p><br />
+                        </p>
+                        <br />
                         <Knapp
                             onClick={this.toggleModal}
                             ref={(node) => { this.closeModalBtn = node; }}
                         >
                             Jeg forstår
                         </Knapp>
-                        <br /><br />
+                        <br />
+                        <br />
                         <div>
                             <Lenke href="https://github.com/navikt/nav-frontend-moduler/issues">
                                 Meld fra om feil
@@ -91,11 +92,13 @@ class ComponentGuidelinePage extends React.Component {
                 </Modal>
                 <div className="componentGuidelinePage">
                     {
-                        beta &&
-                        <Alertstripe type="advarsel">
-                            Dette er en beta-komponent.&nbsp;
-                            <Lenke href="#" onClick={this.toggleModal}>Hva betyr det?</Lenke>
-                        </Alertstripe>
+                        beta
+                        && (
+                            <Alertstripe type="advarsel">
+                                Dette er en beta-komponent.&nbsp;
+                                <Lenke href="#" onClick={this.toggleModal}>Hva betyr det?</Lenke>
+                            </Alertstripe>
+                        )
                     }
                     <div className={componentTitleCls(beta, style)}>
                         <Innholdstittel>
@@ -104,8 +107,8 @@ class ComponentGuidelinePage extends React.Component {
                         { style && <EtikettInfo>CSS</EtikettInfo> }
                     </div>
                     {
-                        this.props.textData.ingress &&
-                        <Ingress tag="div" className="intro"><this.props.textData.ingress.default /></Ingress>
+                        this.props.textData.ingress
+                        && <Ingress tag="div" className="intro"><this.props.textData.ingress.default /></Ingress>
                     }
                     <TabbedContainer tabs={this.tabs} {...this.props} />
                 </div>

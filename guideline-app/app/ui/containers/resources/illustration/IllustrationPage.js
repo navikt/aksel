@@ -6,8 +6,8 @@ import Resources from './tabs/Resources.mdx';
 import Guidelines from './tabs/Guidelines.mdx';
 // import Accessibility from './tabs/Accessibility.mdx';
 
-import MdxContent from './../../../components/mdx-content/MdxContent';
-import TabbedContainer from './../../tabbed-container/TabbedContainer';
+import MdxContent from '../../../components/mdx-content/MdxContent';
+import TabbedContainer from '../../tabbed-container/TabbedContainer';
 
 import './styles.less';
 

@@ -1,6 +1,6 @@
 const path = require('path');
-const WebpackDevConfig = require('./_webpack.global');
 const DirectoryNamedWebpackPlugin = require('directory-named-webpack-plugin');
+const WebpackDevConfig = require('./_webpack.global');
 
 const htmlRule = {
     test: /\.html$/,
@@ -23,9 +23,9 @@ const addModuleIncludePaths = (rule, subdir) => {
     return changedRule;
 };
 
-// eslint-disable-next-line no-unused-vars
 let babelRule = WebpackDevConfig.module.rules.find((rule) => (rule.loader === 'babel-loader'));
 const pathToModules = './../../packages/node_modules';
+// eslint-disable-next-line no-unused-vars
 babelRule = addModuleIncludePaths(babelRule, pathToModules);
 
 WebpackDevConfig.devServer = {

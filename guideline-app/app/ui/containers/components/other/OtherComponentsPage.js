@@ -32,9 +32,12 @@ class OtherComponentsPage extends React.Component {
                     </p>
                     <p>
                         Vi gir ingen garanti for at disse komponentene er hverken kompatible med hverandre eller de
-                        andre komponentene i Designsystemet. <strong>Det eneste kravet som stilles til komponenter i
-                        denne listen er at de ikke dupliserer komponenter som allerede finnes i
-                        Designsystemet.</strong>
+                        andre komponentene i Designsystemet.&nbsp;
+                        <strong>
+                            Det eneste kravet som stilles til komponenter i
+                            denne listen er at de ikke dupliserer komponenter som allerede finnes i
+                            Designsystemet.
+                        </strong>
                     </p>
                 </div>
                 <div className="tabell-header">

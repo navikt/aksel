@@ -27,7 +27,8 @@ class MobileNav extends React.Component {
         window.addEventListener('click', this.handleClick);
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (nextProps.open) {
             window.clearInterval(this.timer);
 
@@ -60,14 +61,16 @@ class MobileNav extends React.Component {
         return (
             <MobileNavMenuItem open={open} route={route} index={index} key={index}>
                 {
-                    route.routes &&
-                    <ul>
-                        {
-                            route.routes.filter((subRoute) => subRoute.path !== '/new-project').map(
-                                (filteredRoute, i) => this.renderRoute(filteredRoute, i)
-                            )
-                        }
-                    </ul>
+                    route.routes
+                    && (
+                        <ul>
+                            {
+                                route.routes.filter((subRoute) => subRoute.path !== '/new-project').map(
+                                    (filteredRoute, i) => this.renderRoute(filteredRoute, i)
+                                )
+                            }
+                        </ul>
+                    )
                 }
             </MobileNavMenuItem>
         );
@@ -90,9 +93,8 @@ class MobileNav extends React.Component {
                     </Xknapp>
                     <ul className="nav-list">
                         {
-                            routeConfig.filter((route) => route.path).map((route, index) =>
-                                this.renderRoute(route, index)
-                            )
+                            routeConfig.filter((route) => route.path).map((route, index) => (
+                                this.renderRoute(route, index)))
                         }
                         <li>
                             <a

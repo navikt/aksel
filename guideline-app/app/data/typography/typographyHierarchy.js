@@ -8,7 +8,7 @@ import {
     Element,
     EtikettLiten,
     Undertekst
-} from './../../../../packages/node_modules/nav-frontend-typografi';
+} from '../../../../packages/node_modules/nav-frontend-typografi';
 
 const typographyHierarchyData = [
     {

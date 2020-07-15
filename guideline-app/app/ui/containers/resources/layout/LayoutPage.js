@@ -5,7 +5,7 @@ import React from 'react';
 import Grid from './tabs/Grid.mdx';
 import Spacing from './tabs/Spacing.mdx';
 
-import MdxContent from './../../../components/mdx-content/MdxContent';
+import MdxContent from '../../../components/mdx-content/MdxContent';
 // import TabbedContainer from './../../tabbed-container/TabbedContainer';
 
 class LayoutPage extends React.Component {

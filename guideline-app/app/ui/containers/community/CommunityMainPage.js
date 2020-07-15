@@ -16,8 +16,9 @@ const CommunityMainPage = () => (
                 <p>
                     Vi jobber med å sette opp et forum på disse sidene hvor man kan stille spørsmål og få svar, foreslå
                     endringer eller bare snakke løst om designsystemet på en ordnet og oversiktlig måte. Før dette er
-                    på plass kan dere gjerne <Lenke href={issueUrl}>bruke Github</Lenke> til å opprette saker og
-                    diskutere der.
+                    på plass kan dere gjerne&nbsp;
+                    <Lenke href={issueUrl}>bruke Github</Lenke>&nbsp;
+                    til å opprette saker og diskutere der.
                 </p>
             </Panel>
         </section>

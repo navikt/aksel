@@ -6,13 +6,12 @@ import Palette from './tabs/Palette';
 import Accessibility from './tabs/Accessibility.mdx';
 import Technical from './tabs/Technical.mdx';
 
-import MdxContent from './../../../components/mdx-content/MdxContent';
-import TabbedContainer from './../../tabbed-container/TabbedContainer';
+import MdxContent from '../../../components/mdx-content/MdxContent';
+import TabbedContainer from '../../tabbed-container/TabbedContainer';
 
 import './styles.less';
 
 class ColorPage extends React.Component {
-
     constructor(props) {
         super(props);
 

@@ -1,18 +1,17 @@
 import React from 'react';
 import { withRouter, Switch } from 'react-router-dom';
 
-import { routes } from './../../../utils/routing/routes.component';
-import urlRemapConfig from './../../../utils/routing/urlRemap.config';
+import { routes } from '../../../utils/routing/routes.component';
+import urlRemapConfig from '../../../utils/routing/urlRemap.config';
 
-import Header from './../../components/header/Header';
-import Breadcrumbs from './../../components/breadcrumbs/Breadcrumbs';
+import Header from '../../components/header/Header';
+import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 
 // eslint-disable-next-line import/extensions
 
 import './styles.less';
 
 class App extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
     constructor(props) {
         super(props);
 

@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import routeConfig from './../../../utils/routing/routes.config';
-import { GithubLogo } from './../../../assets/images/svg';
+import routeConfig from '../../../utils/routing/routes.config';
+import { GithubLogo } from '../../../assets/images/svg';
 
 import './styles.less';
 
@@ -11,7 +11,7 @@ const MainNav = () => (
         <div className="mainNav__wrapper">
             <ul>
                 {
-                    routeConfig.filter((item) => item.path && item.path !== '/new-project').map((item, index) =>
+                    routeConfig.filter((item) => item.path && item.path !== '/new-project').map((item, index) => (
                         (
                             <li key={item.title}>
                                 <NavLink
@@ -23,7 +23,7 @@ const MainNav = () => (
                                 </NavLink>
                             </li>
                         )
-                    )
+                    ))
                 }
                 <div style={{ flexGrow: 1 }} />
                 <li>

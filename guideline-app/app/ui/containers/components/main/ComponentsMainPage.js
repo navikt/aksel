@@ -8,28 +8,27 @@ import SubRoutesWrapper from '../../../../utils/routing/subroutesWrapper.compone
 import LeftNavigation from '../../../components/left-navigation/LeftNavigation';
 
 class ComponentMainPage extends React.Component {
-
     renderComponentMainContent = () => (
         <main className="mainContent mainContent--grey" id="hovedinnhold">
             <nav className="catalog" aria-labelledby="left-navigation-title">
                 {
-                        this.props.routes.map((route) => (
-                            <LenkepanelBase
-                                key={route.title}
-                                linkCreator={(props) => (
-                                    <NavLink
-                                        className="lenkepanel lenkepanel--border"
-                                        to={props.href}
-                                    >
-                                        {props.children}
-                                    </NavLink>
-                                )}
-                                href={route.path}
-                            >
-                                <Undertittel className="lenkepanel__heading">{route.title}</Undertittel>
-                            </LenkepanelBase>
-                        ))
-                    }
+                    this.props.routes.map((route) => (
+                        <LenkepanelBase
+                            key={route.title}
+                            linkCreator={(props) => (
+                                <NavLink
+                                    className="lenkepanel lenkepanel--border"
+                                    to={props.href}
+                                >
+                                    {props.children}
+                                </NavLink>
+                            )}
+                            href={route.path}
+                        >
+                            <Undertittel className="lenkepanel__heading">{route.title}</Undertittel>
+                        </LenkepanelBase>
+                    ))
+                }
             </nav>
         </main>
     );
@@ -47,9 +46,9 @@ class ComponentMainPage extends React.Component {
             <React.Fragment>
                 <LeftNavigation routes={this.props.routes} />
                 {
-                    (this.props.history.location.pathname !== '/components') ?
-                    this.renderComponentSubRouteContent() :
-                    this.renderComponentMainContent()
+                    (this.props.history.location.pathname !== '/components')
+                        ? this.renderComponentSubRouteContent()
+                        : this.renderComponentMainContent()
                 }
             </React.Fragment>
         );

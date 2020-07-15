@@ -51,8 +51,8 @@ const colors = {
     navBla: {
         hex: lessvars['@navBla'],
         label: 'NAV Blå',
-        description: 'NAV Blå skal indikere mulighet for interaksjon med et visuelt element. Eks. ' +
-        'Lenker, knapper, ikoner.',
+        description: 'NAV Blå skal indikere mulighet for interaksjon med et visuelt element. Eks. '
+        + 'Lenker, knapper, ikoner.',
         contrastColors: {
             hvit: { hex: '#fff', label: 'blå / hvit' },
             navLysGra: { hex: lessvars['@navLysGra'], label: 'blå / lys grå' }
@@ -61,8 +61,8 @@ const colors = {
     navDypBla: {
         hex: lessvars['@navDypBla'],
         label: 'NAV Dyp Blå',
-        description: 'NAV Dyp Blå benyttes som støtte farge til NAV blå for å indikere forandring i status. ' +
-        'Fra interaksjon til aktivt',
+        description: 'NAV Dyp Blå benyttes som støtte farge til NAV blå for å indikere forandring i status. '
+        + 'Fra interaksjon til aktivt',
         contrastColors: {
             hvit: { hex: '#fff', label: 'dyp blå / hvit' },
             navLysGra: { hex: lessvars['@navLysGra'], label: 'dyp blå / lys grå' },
@@ -72,8 +72,8 @@ const colors = {
     navLilla: {
         hex: lessvars['@navLilla'],
         label: 'NAV Lilla',
-        description: 'NAV Lilla benyttes som støtte farge til NAV dyp blå for å indikere en tredje status ' +
-        'forskjell. Fra aktivt til “besøkt”',
+        description: 'NAV Lilla benyttes som støtte farge til NAV dyp blå for å indikere en tredje status '
+        + 'forskjell. Fra aktivt til “besøkt”',
         contrastColors: {
             hvit: { hex: '#fff', label: 'lilla / hvit' },
             navLysGra: { hex: lessvars['@navLysGra'], label: 'lilla / lys grå' },
@@ -91,8 +91,8 @@ const colors = {
     redError: {
         hex: lessvars['@redError'],
         label: 'NAV Murstein Rød',
-        description: 'NAV Murstein Rød indikerer feil eller mangel av informasjon. Kan også indikere at en handling ' +
-        'fra bruker kan medføre tap av data eller avbryte en pågående prosess.',
+        description: 'NAV Murstein Rød indikerer feil eller mangel av informasjon. Kan også indikere at en handling '
+        + 'fra bruker kan medføre tap av data eller avbryte en pågående prosess.',
         contrastColors: {
             hvit: { hex: '#fff', label: 'murstein rød / hvit' },
             navLysGra: { hex: lessvars['@navLysGra'], label: 'murstein rød / lys grå' },
@@ -108,8 +108,8 @@ const colors = {
     navGronn: {
         hex: lessvars['@navGronn'],
         label: 'NAV Grønn',
-        description: 'NAV Grønn indikerer at en handling har blitt gjennomført og vellykket, skal sikre at bruker ' +
-        'ikke sitter igjen med uløst forventinger eller lurer på om en oppgave er utfylt. '
+        description: 'NAV Grønn indikerer at en handling har blitt gjennomført og vellykket, skal sikre at bruker '
+        + 'ikke sitter igjen med uløst forventinger eller lurer på om en oppgave er utfylt. '
 
     },
     navOransje: {
@@ -122,9 +122,9 @@ const colors = {
         hex: lessvars['@orangeFocus'],
         label: 'NAV Fokus Oransje',
         description:
-            'NAV Fokus Oransje skal brukes som fokus farge ved tabbing. ' +
-            'Skal også kunne brukes for å fremheve elementer' +
-            ' som krever brukernes fokus. Påpeke hvor brukeren befinner seg, og øke brukervennlighet.',
+            'NAV Fokus Oransje skal brukes som fokus farge ved tabbing. '
+            + 'Skal også kunne brukes for å fremheve elementer'
+            + ' som krever brukernes fokus. Påpeke hvor brukeren befinner seg, og øke brukervennlighet.',
         contrastColors: {
             navMorkGra: { hex: lessvars['@navMorkGra'], label: 'fokus oransje / mørk grå' }
         },
