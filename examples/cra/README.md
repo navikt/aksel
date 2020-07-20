@@ -1,21 +1,27 @@
-# Eksempel oppsett med create-react-app
+# Create-React-App eksempel prosjekt
 
-Denne mappen inneholder ett eksempel prosjekt laget med create-react-app.
+Bruker pakken `Craco` https://www.npmjs.com/package/@craco/craco for å kunne extende Webpack-features uten å ta i bruk `eject`.
 
-Hoved endringene som er gjort finnes i [package.json](package.json), hvor `autoless` og `npm-run-all` blir brukt for å sette opp less bygget.
-I tillegg håndteres import av nav-frontend-moduler sine styling-moduler i [index.less](src/index.less) siden CRA ikke støtter LESS-imports.
-
-
-## NB
-Man må alltid laste inn css-filene fra react-komponentene, siden CRA ikke støtter LESS. Se [App.js](src/App.js)
+Satt opp for å støtte lasting av `less` filer ved hjelp av `craco-less` https://github.com/DocSpring/craco-less#readme.
 
 
-## Hvordan fungerer det?
+Development og linting:
+```
+npm install
+npm run lint
+npm start
+```
 
-Ved utvikling startes to npm-scripts i parallell:
 
-    * `start:js` lytter etter endringer i JS/CSS og lager ny bundle
-    * `start:css` lytter etter endringer i LESS, og lager CSS-filer
-    
-Endringer i LESS-filer vil derfor bygges om til CSS forløpende, og default-oppsettet til CRA plukker så disse opp.
+Bygging for produksjon:
+```
+npm install
+npm run build
+```
 
+For å kjøre build lokalt kan `serve` brukes:
+https://www.npmjs.com/package/serve
+```
+npm install -g serve
+serve build
+```

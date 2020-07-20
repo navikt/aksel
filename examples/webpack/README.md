@@ -2,9 +2,10 @@
 
 Satt opp for å støtte lasting av `.less`, samt `png|jpeg|gif|svg`.
 
-Development med hot-reloading:
+Development med hot-reloading og linting:
 ```
 npm install
+npm run lint
 npm start
 ```
 
@@ -24,4 +25,5 @@ For å kjøre build lokalt kan `serve` brukes:
 https://www.npmjs.com/package/serve
 ```
 npm install -g serve
+serve dist
 ```

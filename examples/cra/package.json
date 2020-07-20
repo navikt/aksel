@@ -2,45 +2,56 @@
   "name": "cra",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "classnames": "^2.2.5",
-    "nav-frontend-core": "^4.0.5",
-    "nav-frontend-js-utils": "^1.0.6",
-    "nav-frontend-knapper": "^1.0.15",
-    "nav-frontend-knapper-style": "^1.0.0",
-    "nav-frontend-paneler-style": "^0.3.11",
-    "nav-frontend-skjema": "^1.0.25",
-    "nav-frontend-skjema-style": "^1.0.10",
-    "nav-frontend-typografi": "^2.0.6",
-    "nav-frontend-typografi-style": "^1.0.10",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "^3.0.0",
-    "snyk": "^1.231.0"
-  },
   "scripts": {
-    "start:js": "react-scripts start",
-    "build:js": "react-scripts build",
-    "start:css": "less-watch-compiler --config less.json",
-    "build:css": "less-watch-compiler --run-once --config less.json",
-    "start": "npm-run-all -p start:*",
-    "build": "npm run build:css && npm run build:js",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "lint": "npx eslint src --ext .js,.jsx --color"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.1"
   },
   "devDependencies": {
-    "less": "^3.5.2",
-    "less-plugin-npm-import": "^2.1.0",
-    "less-watch-compiler": "^1.11.3",
-    "npm-run-all": "^4.0.2"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "snyk": true
+    "@craco/craco": "^5.6.4",
+    "classnames": "^2.2.6",
+    "craco-less": "^1.17.0",
+    "nav-frontend-alertstriper": "^3.0.22",
+    "nav-frontend-alertstriper-style": "^2.0.17",
+    "nav-frontend-core": "^5.0.1",
+    "nav-frontend-ikoner-assets": "^2.0.3",
+    "nav-frontend-paneler-style": "^0.3.21",
+    "nav-frontend-typografi": "^2.0.25",
+    "nav-frontend-typografi-style": "^1.0.22",
+    "nav-frontend-lenker": "^1.0.41",
+    "nav-frontend-lenker-style": "^0.2.29",
+    "nav-frontend-paneler": "^2.0.9",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "babel-eslint": "10.1.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1"
+  }
 }
