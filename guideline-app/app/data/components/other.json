@@ -62,5 +62,15 @@
     "description": "Tabell med sortering, søk, rad velg, kompakt, osv",
     "repository": "https://github.com/navikt/tabell",
     "demo_url": "https://navikt.github.io/tabell-doc/build/"
+  }, {
+    "name": "Dashboard",
+    "description": "Dashboard/widget rammeverk",
+    "repository": "https://github.com/navikt/nav-dashboard",
+    "demo_url": "https://navikt.github.io/nav-dashboard-doc/build/"
+  }, {
+    "name": "Fremdriftslinje",
+    "description": "Fremdriftslinje",
+    "repository": "https://github.com/navikt/fremdriftslinje",
+    "demo_url": "https://navikt.github.io/fremdriftslinje-doc/build/"
   }
 ]
