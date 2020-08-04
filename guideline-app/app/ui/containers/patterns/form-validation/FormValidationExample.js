@@ -24,7 +24,7 @@ class FormValidationExample extends React.Component {
             choices: [
                 {
                     test: (v) => v && v.length,
-                    failText: 'Du må velge minst èn ting'
+                    failText: 'Du må velge minst én ting'
                 }
             ],
             address: [
