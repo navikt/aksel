@@ -18,13 +18,13 @@ script:
 
 before_deploy:
   - npm run build-guideline-app
-  - git config --global user.email "eirik@archivedworks.com"
+  - git config --global user.email "ken.aleksander.johansen@nav.no"
   - git config --global user.name "navikt"
 
 deploy:
   - provider: pages
     skip-cleanup: true
-    github-token: $GITHUB_TOKEN
+    github-token: $NAV_DS_TOKEN
     on:
       branch: master
     keep-history: true
@@ -34,4 +34,4 @@ deploy:
     on:
       branch: master
     script:
-      - npm run build:nodocs && git checkout master && git remote set-url origin https://Lillebo:$GITHUB_TOKEN@github.com/navikt/nav-frontend-moduler.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
+      - npm run build:nodocs && git checkout master && git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/navikt/nav-frontend-moduler.git && echo "//registry.npmjs.org/:_authToken=$NAV_DS_NPM_TOKEN" >> ~/.npmrc && npm run lernapublish
