@@ -9,7 +9,7 @@
     "name": "Språkvelger",
     "description": "Felles språkvelger for apper på nav.no",
     "repository": "https://github.com/navikt/nav-dekoratoren/#eksempler",
-    "demo_url": "https://www.nav.no/dekoratoren/?availableLanguages=[{%22locale%22:%22nb%22,%22url%22:%22http://localhost:8088/dekoratoren/nb/%22,%22handleInApp%22:true},{%22locale%22:%22en%22,%22url%22:%22http://localhost:8088/dekoratoren/en/%22,%22handleInApp%22:true}]"
+    "demo_url": "https://www.nav.no/dekoratoren/?availableLanguages=[{%22locale%22:%22nb%22,%22url%22:%22https://www.nav.no/dekoratoren/nb/%22,%22handleInApp%22:true},{%22locale%22:%22en%22,%22url%22:%22https://www.nav.no/dekoratoren/en/%22,%22handleInApp%22:true}]"
   },
   {
     "name": "Datovelger",
