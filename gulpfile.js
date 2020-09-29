@@ -18,10 +18,16 @@ const configureSvgIcon = require("react-svg-icon-generator-fork").default;
 const addVariablesExportPlugin = require("./_scripts/gulp-export-less-variables");
 const camelcase = require("lodash.camelcase");
 const less = require("gulp-less");
+const postcss = require("gulp-postcss");
+const cssnano = require("cssnano");
+const autoprefixer = require("autoprefixer");
+const rename = require("gulp-rename");
+const sourcemaps = require("gulp-sourcemaps");
 
 const jsScripts = "./packages/node_modules/*/src/**/*.js";
 const tsScripts = "./packages/node_modules/*/src/**/*.ts*";
 const lessFiles = "./packages/node_modules/*/src/**/index.less";
+const cssFiles = "./packages/node_modules/*/css/**/index.css";
 const fonts = "./packages/node_modules/*/assets/**/*.woff";
 const dest = "packages/node_modules";
 const tsProject = ts.createProject("tsconfig.json");

@@ -41,7 +41,7 @@ Promise.all([
     fs.unlinkSync(file);
   });
 
-  folders.concat(css).forEach((folder) => {
+  [...folders, ...css].forEach((folder) => {
     console.log(`Deleting ${folder}`);
     deleteFolder(folder);
   });
