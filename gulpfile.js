@@ -17,10 +17,11 @@ const merge = require("merge2");
 const configureSvgIcon = require("react-svg-icon-generator-fork").default;
 const addVariablesExportPlugin = require("./_scripts/gulp-export-less-variables");
 const camelcase = require("lodash.camelcase");
-const lessComp = require("gulp-less");
+const less = require("gulp-less");
 
 const jsScripts = "./packages/node_modules/*/src/**/*.js";
 const tsScripts = "./packages/node_modules/*/src/**/*.ts*";
+const lessFiles = "./packages/node_modules/*/src/**/index.less";
 const fonts = "./packages/node_modules/*/assets/**/*.woff";
 const dest = "packages/node_modules";
 const tsProject = ts.createProject("tsconfig.json");
@@ -38,11 +39,13 @@ let libFragment;
 let srcFragment;
 let tsDocLib;
 let tsDocSrc;
+let cssFragment;
 
 if (path.win32 === path) {
   srcEx = /(packages\\node_modules\\[^/]+)\\src\\/;
   assetsEx = /(packages\\node_modules\\[^/]+)\\assets\\/;
   libFragment = "$1\\lib\\";
+  cssFragment = "$1\\css\\";
   srcFragment = "$1\\src\\";
   tsDocLib = /\\lib\\/g;
   tsDocSrc = "\\src\\";
@@ -50,11 +53,15 @@ if (path.win32 === path) {
   srcEx = new RegExp("(packages/node_modules/[^/]+)/src/");
   assetsEx = new RegExp("(packages/node_modules/[^/]+)/assets/");
   libFragment = "$1/lib/";
+  cssFragment = "$1/css/";
   srcFragment = "$1/src/";
   tsDocLib = /\/lib\//g;
   tsDocSrc = "/src/";
 }
 
+function mapToDestCss(filepath) {
+  return filepath.replace(srcEx, cssFragment);
+}
 function mapToDest(filepath) {
   return filepath.replace(srcEx, libFragment);
 }
@@ -210,15 +217,16 @@ function exportLessVariables() {
     .pipe(gulp.dest(file));
 }
 
-function compileLess() {
+function LessToCss() {
   return gulp
-    .src("./less/**/*.less")
+    .src(lessFiles)
     .pipe(
       less({
-        paths: [path.join(__dirname, "less", "includes")],
+        paths: [path.join(__dirname, "packages", "node_modules")],
       })
     )
-    .pipe(gulp.dest("./public/css"));
+    .pipe(renameUsingMapper(mapToDestCss))
+    .pipe(gulp.dest(dest));
 }
 
 configureSvgIcon({
@@ -244,8 +252,8 @@ gulp.task("test", gulp.series(test));
 gulp.task("buildLess", gulp.series(exportLessVariables));
 gulp.task("buildJs", gulp.series(buildJs));
 gulp.task("buildTs", gulp.series(buildTs));
-gulp.task("build", gulp.series("buildLess", "buildJs", "buildTs"));
+gulp.task("LessToCss", gulp.series(LessToCss));
+gulp.task("build", gulp.series("buildLess", "LessToCss", "buildJs", "buildTs"));
 gulp.task("default", gulp.series("test", "build"));
 gulp.task("buildicons", gulp.series("svg-icon"));
 gulp.task("buildfonts", gulp.series(buildCssfonts));
-gulp.task("compileLess", gulp.series(compileLess));

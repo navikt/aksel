@@ -1,22 +1,20 @@
-import { Code, Bash } from './../../../../components/code/Code';
+import { Code, Bash } from "./../../../../components/code/Code";
 
 ## Installering
 
-Alle fargene våre er [definert](https://github.com/navikt/nav-frontend-core/blob/master/less/_variabler.less) i 
+Alle fargene våre er [definert](https://github.com/navikt/nav-frontend-core/blob/master/less/_variabler.less) i
 pakken `nav-frontend-core`, og kan installeres slik:
 
-<Bash>
-    npm install nav-frontend-core --save
-</Bash>
+<Bash>npm install nav-frontend-core --save</Bash>
 
 ## Bruk med Less
 
 Hvis du bruker Less kan du bruke disse variablene ved å importere en referanse til `_variabler`-fila i cora-pakken i stilarket ditt:
 
 ```less
-@import (reference) '~nav-frontend-core/less/_variabler';
+@import (reference) "nav-frontend-core/less/_variabler";
 
 .minDiv {
-    background: @navRod;
+  background: @navRod;
 }
 ```
