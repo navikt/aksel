@@ -103,6 +103,7 @@
     "markdown-magic": "^0.1.19",
     "merge2": "^1.2.0",
     "mustache": "^2.3.0",
+    "prettier": "2.1.2",
     "prettify-xml": "^1.2.0",
     "prismjs": "^1.15.0",
     "progress": "^2.0.0",
