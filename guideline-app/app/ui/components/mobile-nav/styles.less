@@ -4,22 +4,22 @@
   display: block;
   background: rgba(0, 0, 0, 0);
   position: fixed;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  bottom: 0px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 999;
   transition: background linear 200ms;
 
   &__drawer {
     position: absolute;
-    top: 0px;
+    top: 0;
     right: -300px;
-    bottom: 0px;
+    bottom: 0;
     background: #f4f4f4;
     width: 300px;
-    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.25);
-    padding: 0rem;
+    box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.25);
+    padding: 0;
     padding-top: 5.5rem;
     transition: right ease-out 200ms;
     overflow: scroll;
@@ -34,8 +34,8 @@
           padding-left: 2rem;
 
           &.active + .mobile-nav__submenu-toggle-btn {
-            &:before,
-            &:after {
+            &::before,
+            &::after {
               background: white;
             }
           }
@@ -57,7 +57,7 @@
 
         .mobile-nav__submenu-toggle-btn {
           position: absolute;
-          top: 0px;
+          top: 0;
           right: 0;
           font-size: 0;
           height: 3.15rem;
@@ -69,8 +69,8 @@
           line-height: 0;
           z-index: 999;
 
-          &:before,
-          &:after {
+          &::before,
+          &::after {
             content: "";
             display: block;
             width: 0.75rem;
@@ -80,12 +80,13 @@
             top: calc(50%-2px);
             left: calc(50%-8px);
           }
-          &:before {
+
+          &::before {
             transform: rotate(90deg);
           }
 
           &--open {
-            &:before {
+            &::before {
               display: none;
             }
           }
@@ -127,7 +128,7 @@
     background: rgba(0, 0, 0, 0.5);
 
     .mobile-nav__drawer {
-      right: 0px;
+      right: 0;
     }
   }
 

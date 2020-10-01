@@ -29,20 +29,20 @@ blockquote {
   padding: 1.5rem 3.5rem;
   position: relative;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     position: absolute;
     font-size: 3rem;
     line-height: 1rem;
   }
 
-  &:before {
+  &::before {
     content: "“";
     top: 2rem;
     left: 1.5rem;
   }
 
-  &:after {
+  &::after {
     content: "”";
     bottom: 1rem;
     right: 1.5rem;
@@ -61,6 +61,7 @@ p,
   &:first-child {
     margin-top: 0;
   }
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -122,7 +123,7 @@ p,
   ul {
     list-style: none;
     margin: 0;
-    padding: 0px;
+    padding: 0;
   }
 
   li {
@@ -158,6 +159,7 @@ p,
           &--info {
             background: @navBlaLighten80;
           }
+
           &--fokus {
             background: @navOransjeLighten60;
           }
@@ -195,6 +197,7 @@ p,
         font-weight: bold;
         color: @navMorkGra;
       }
+
       > ul {
         > li {
           > a {
@@ -269,13 +272,13 @@ p,
     position: relative;
     margin: 2rem -3rem 3rem;
 
-    &:after {
+    &::after {
       content: "";
       display: block;
       position: absolute;
       bottom: 9px;
-      left: 0px;
-      right: 0px;
+      left: 0;
+      right: 0;
       height: 1px;
       background: @navGra40;
     }

@@ -3,8 +3,8 @@
 .overflow-shadow() {
   content: "";
   position: absolute;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
   width: 20px;
   opacity: 0.1;
 }
@@ -28,17 +28,19 @@
   }
 
   &--shadow-left {
-    &:before {
+    &::before {
       .overflow-shadow();
-      left: 0px;
+
+      left: 0;
       background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
     }
   }
 
   &--shadow-right {
-    &:after {
+    &::after {
       .overflow-shadow();
-      right: 0px;
+
+      right: 0;
       background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
     }
   }
