@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
-import Lenke from 'NavFrontendModules/nav-frontend-lenker';
-import { Undertittel } from 'NavFrontendModules/nav-frontend-typografi';
+import React, { Component } from "react";
+import Alertstripe from "NavFrontendModules/nav-frontend-alertstriper";
+import Lenke from "NavFrontendModules/nav-frontend-lenker";
+import { Undertittel } from "NavFrontendModules/nav-frontend-typografi";
 
-import './styles.less';
+import "./styles.less";
 
 /*
  * Her er komponenten som benyttes til utvikling av eksisterende og nye moduler til nav-frontend.
@@ -17,19 +17,27 @@ import './styles.less';
  * Enjoy!
  */
 
-
 // eslint-disable-next-line react/prefer-stateless-function
 export default class App extends Component {
-    render() {
-        return (
-            <div>
-                <Alertstripe type="suksess">
-                    <Undertittel>Utviklingsmiljø kjører!</Undertittel>
-                </Alertstripe>
-                <br/>
-                <p>Gå til <code>/development/app/components/App.js</code> for å begynne utviklingen.</p>
-                <p>Du finner <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">dokumentasjon og veiledning</Lenke> her.</p>
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div>
+        <Alertstripe type="suksess">
+          <Undertittel>Utviklingsmiljø kjører!</Undertittel>
+        </Alertstripe>
+        <br />
+        <p>
+          Gå til <code>/development/app/components/App.js</code> for å begynne
+          utviklingen.
+        </p>
+        <p>
+          Du finner{" "}
+          <Lenke href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">
+            dokumentasjon og veiledning
+          </Lenke>{" "}
+          her.
+        </p>
+      </div>
+    );
+  }
 }

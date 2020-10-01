@@ -1,54 +1,56 @@
-import React from 'react';
-import { withRouter, NavLink } from 'react-router-dom';
+import React from "react";
+import { withRouter, NavLink } from "react-router-dom";
 
-import routeConfig from '../../../utils/routing/routes.config';
+import routeConfig from "../../../utils/routing/routes.config";
 
-import './styles.less';
+import "./styles.less";
 
 const getBreadcrumbs = (path) => {
-    const breadcrumbs = [];
-    const pathParts = path.split('/');
-    pathParts.shift();
+  const breadcrumbs = [];
+  const pathParts = path.split("/");
+  pathParts.shift();
 
-    const recursiveTraverse = (routeArray, pathIndex) => {
-        const currentPath = `/${[].concat(pathParts.slice(0, pathIndex + 1)).join('/')}`;
-        const route = routeArray.find((subRoute) => subRoute.path === currentPath);
+  const recursiveTraverse = (routeArray, pathIndex) => {
+    const currentPath = `/${[]
+      .concat(pathParts.slice(0, pathIndex + 1))
+      .join("/")}`;
+    const route = routeArray.find((subRoute) => subRoute.path === currentPath);
 
-        if (route) {
-            breadcrumbs.push(route);
-            if (route.routes) recursiveTraverse(route.routes, pathIndex + 1);
-        }
-    };
+    if (route) {
+      breadcrumbs.push(route);
+      if (route.routes) recursiveTraverse(route.routes, pathIndex + 1);
+    }
+  };
 
-    recursiveTraverse(routeConfig, 0);
+  recursiveTraverse(routeConfig, 0);
 
-    return breadcrumbs;
+  return breadcrumbs;
 };
 
 const Breadcrumbs = (props) => {
-    const breadcrumbs = getBreadcrumbs(props.history.location.pathname);
+  const breadcrumbs = getBreadcrumbs(props.history.location.pathname);
 
-    return (
-        <nav className="breadcrumbs" aria-label="breadcrumbs">
-            <ul>
-                {
-                    breadcrumbs.map((breadcrumb, index) => {
-                        if (index < (breadcrumbs.length - 1)) {
-                            return (
-                                <li key={breadcrumb.title}>
-                                    <NavLink className="lenke" to={breadcrumb.path}>
-                                        {breadcrumb.title}
-                                    </NavLink>
-                                    <span className="breadcrumbs__divider" aria-hidden="true">/</span>
-                                </li>
-                            );
-                        }
-                        return (<li key={breadcrumb.title}>{breadcrumb.title}</li>);
-                    })
-                }
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className="breadcrumbs" aria-label="breadcrumbs">
+      <ul>
+        {breadcrumbs.map((breadcrumb, index) => {
+          if (index < breadcrumbs.length - 1) {
+            return (
+              <li key={breadcrumb.title}>
+                <NavLink className="lenke" to={breadcrumb.path}>
+                  {breadcrumb.title}
+                </NavLink>
+                <span className="breadcrumbs__divider" aria-hidden="true">
+                  /
+                </span>
+              </li>
+            );
+          }
+          return <li key={breadcrumb.title}>{breadcrumb.title}</li>;
+        })}
+      </ul>
+    </nav>
+  );
 };
 
 export default withRouter(Breadcrumbs);

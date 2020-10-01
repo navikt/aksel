@@ -11,16 +11,9 @@
     "preserveConstEnums": true,
     "sourceMap": true,
     "jsx": "react",
-    "lib": [
-      "DOM",
-      "es2015",
-      "es2016",
-      "es2017"
-    ]
+    "lib": ["DOM", "es2015", "es2016", "es2017"]
   },
-  "include": [
-    "packages/node_modules/**/src/*"
-  ],
+  "include": ["packages/node_modules/**/src/*"],
   "exclude": [
     "node_modules",
     "**/*-spec.js",

@@ -1,91 +1,92 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) "~NavFrontendCore/less/_variabler";
 
 .mobile-nav {
-  display:block;
-  background:rgba(0,0,0,0);
-  position:fixed;
-  top:0px;
-  left:0px;
-  right:0px;
-  bottom:0px;
-  z-index:999;
-  transition:background linear 200ms;
-  
+  display: block;
+  background: rgba(0, 0, 0, 0);
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  z-index: 999;
+  transition: background linear 200ms;
+
   &__drawer {
-    position:absolute;
-    top:0px;
-    right:-300px;
-    bottom:0px;
-    background:#f4f4f4;
-    width:300px;
-    box-shadow:0 0 30px 0px rgba(0,0,0,0.25);
-    padding:0rem;
-    padding-top:5.5rem;
-    transition:right ease-out 200ms;
-    overflow:scroll;
+    position: absolute;
+    top: 0px;
+    right: -300px;
+    bottom: 0px;
+    background: #f4f4f4;
+    width: 300px;
+    box-shadow: 0 0 30px 0px rgba(0, 0, 0, 0.25);
+    padding: 0rem;
+    padding-top: 5.5rem;
+    transition: right ease-out 200ms;
+    overflow: scroll;
 
     .nav-list {
-
       > li {
-        position:relative;
+        position: relative;
 
         > a {
-          font-size:1.1rem;
+          font-size: 1.1rem;
           padding: 1rem;
-          padding-left:2rem;
-          
+          padding-left: 2rem;
+
           &.active + .mobile-nav__submenu-toggle-btn {
-            &:before, &:after {
-              background:white;
+            &:before,
+            &:after {
+              background: white;
             }
           }
         }
 
         > ul {
-          display:none;
+          display: none;
 
           > li > a {
-            padding-left:4rem !important;
+            padding-left: 4rem !important;
           }
         }
 
         &.open {
           > ul {
-            display:block;
+            display: block;
           }
         }
 
         .mobile-nav__submenu-toggle-btn {
-          position:absolute;
-          top:0px;
-          right:0;
-          font-size:0;
-          height:3.15rem;
-          width:4.5rem;
-          border:0;
-          padding:0;
-          margin:0;
-          background:none;
-          line-height:0;
-          z-index:999;
+          position: absolute;
+          top: 0px;
+          right: 0;
+          font-size: 0;
+          height: 3.15rem;
+          width: 4.5rem;
+          border: 0;
+          padding: 0;
+          margin: 0;
+          background: none;
+          line-height: 0;
+          z-index: 999;
 
-          &:before, &:after {
-            content:'';
-            display:block;
-            width:0.75rem;
-            height:2px;
-            background:@navMorkGra;
-            position:absolute;
-            top:calc(50%-2px);
-            left:calc(50%-8px);
+          &:before,
+          &:after {
+            content: "";
+            display: block;
+            width: 0.75rem;
+            height: 2px;
+            background: @navMorkGra;
+            position: absolute;
+            top: calc(50%-2px);
+            left: calc(50%-8px);
           }
           &:before {
-            transform:rotate(90deg);
+            transform: rotate(90deg);
           }
 
           &--open {
             &:before {
-              display:none;
+              display: none;
             }
           }
         }
@@ -105,8 +106,8 @@
             width: 1.25rem;
             margin-right: 0.25rem;
             position: absolute;
-            top:0.9rem;
-            left:2rem;
+            top: 0.9rem;
+            left: 2rem;
             fill: @navBla;
           }
         }
@@ -115,26 +116,26 @@
   }
 
   &__close-btn {
-    position:absolute;
-    top:1.75rem;
-    right:1.75rem;
-    text-transform:none;
+    position: absolute;
+    top: 1.75rem;
+    right: 1.75rem;
+    text-transform: none;
   }
 
   &--open {
-    z-index:999;
-    background:rgba(0,0,0,0.5);
+    z-index: 999;
+    background: rgba(0, 0, 0, 0.5);
 
     .mobile-nav__drawer {
-      right:0px;
+      right: 0px;
     }
   }
 
   &--hidden {
-    z-index:-1;
+    z-index: -1;
   }
 
   @media (min-width: 1094px) {
-    display:none;
+    display: none;
   }
 }

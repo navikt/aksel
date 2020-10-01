@@ -1,8 +1,8 @@
-const gutil = require('gulp-util');
-const through = require('through2');
-const lessToJs = require('less-vars-to-js');
-const File = require('vinyl');
-const path = require('path');
+const gutil = require("gulp-util");
+const through = require("through2");
+const lessToJs = require("less-vars-to-js");
+const File = require("vinyl");
+const path = require("path");
 
 const disclaimer = `
 // -----------------------------------------
@@ -12,71 +12,80 @@ const disclaimer = `
 `.trim();
 
 function createLessExports(variables, options) {
-    const exportContent = Object.keys(variables)
-        .map((variable) => `  ${options.exportNames(variable)}: @${variable};`)
-        .join('\n');
+  const exportContent = Object.keys(variables)
+    .map((variable) => `  ${options.exportNames(variable)}: @${variable};`)
+    .join("\n");
 
-    return `${disclaimer}\n:export {\n${exportContent}\n}`;
+  return `${disclaimer}\n:export {\n${exportContent}\n}`;
 }
 
 function createDTSExports(variables, options) {
-    const variablesDefinition = Object.keys(variables)
-        .map((variable) => `        '${options.exportNames(variable)}': string;`)
-        .join('\n');
-    const variablesConst = `    const variables: {\n${variablesDefinition}\n    };`;
-    return `${disclaimer}\ndeclare module 'nav-frontend-core' {\n${variablesConst}\n    export default variables;\n}`;
+  const variablesDefinition = Object.keys(variables)
+    .map((variable) => `        '${options.exportNames(variable)}': string;`)
+    .join("\n");
+  const variablesConst = `    const variables: {\n${variablesDefinition}\n    };`;
+  return `${disclaimer}\ndeclare module 'nav-frontend-core' {\n${variablesConst}\n    export default variables;\n}`;
 }
 
 function createFile(dir, filename, content) {
-    return new File({
-        base: dir,
-        path: path.join(dir, filename),
-        contents: Buffer.from(content)
-    });
+  return new File({
+    base: dir,
+    path: path.join(dir, filename),
+    contents: Buffer.from(content),
+  });
 }
 
 function plugin(file, env, callback, options) {
-    if (file.isNull()) {
-        this.push(file);
-        // do nothing if no contents
-        return callback();
+  if (file.isNull()) {
+    this.push(file);
+    // do nothing if no contents
+    return callback();
+  }
+
+  if (file.isStream()) {
+    this.emit(
+      "error",
+      new gutil.PluginError("addVariablesExport", "Streaming not supported")
+    );
+    return callback();
+  }
+
+  if (file.isBuffer()) {
+    const pathinfo = path.parse(file.path);
+    const content = Buffer.from(file.contents).toString().trim();
+
+    const variables = lessToJs(content, { stripPrefix: true });
+    const lessExport = createLessExports(variables, options);
+    const lessExportFile = createFile(
+      pathinfo.dir,
+      `${pathinfo.name}-exports.less`,
+      lessExport
+    );
+    this.push(lessExportFile);
+
+    if (options.generateDTS) {
+      const dtsExport = createDTSExports(variables, options);
+      const dtsExportFile = createFile(
+        pathinfo.dir,
+        `${pathinfo.name}.d.ts`,
+        dtsExport
+      );
+      this.push(dtsExportFile);
     }
 
-    if (file.isStream()) {
-        this.emit('error', new gutil.PluginError('addVariablesExport', 'Streaming not supported'));
-        return callback();
-    }
+    return callback();
+  }
 
-    if (file.isBuffer()) {
-        const pathinfo = path.parse(file.path);
-        const content = Buffer.from(file.contents)
-            .toString()
-            .trim();
-
-        const variables = lessToJs(content, { stripPrefix: true });
-        const lessExport = createLessExports(variables, options);
-        const lessExportFile = createFile(pathinfo.dir, `${pathinfo.name}-exports.less`, lessExport);
-        this.push(lessExportFile);
-
-        if (options.generateDTS) {
-            const dtsExport = createDTSExports(variables, options);
-            const dtsExportFile = createFile(pathinfo.dir, `${pathinfo.name}.d.ts`, dtsExport);
-            this.push(dtsExportFile);
-        }
-
-        return callback();
-    }
-
-    throw new Error(`Unhandled filetype: ${file.path}`);
+  throw new Error(`Unhandled filetype: ${file.path}`);
 }
 
 const defaultOpts = {
-    generateDTS: true,
-    exportNames: (name) => name
+  generateDTS: true,
+  exportNames: (name) => name,
 };
 module.exports = function addVariablesExport(opts) {
-    const options = { ...defaultOpts, ...(opts || {}) };
-    return through.obj(function withOptions(file, env, callback) {
-        return plugin.call(this, file, env, callback, options);
-    });
+  const options = { ...defaultOpts, ...(opts || {}) };
+  return through.obj(function withOptions(file, env, callback) {
+    return plugin.call(this, file, env, callback, options);
+  });
 };

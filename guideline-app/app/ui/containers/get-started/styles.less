@@ -1,4 +1,4 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) "~NavFrontendCore/less/_variabler";
 
 .grid {
   display: grid;
@@ -13,7 +13,8 @@
     padding: 2rem 3rem 2rem 2rem;
     flex-basis: calc(50% - 0.7rem);
 
-    h1, h2 {
+    h1,
+    h2 {
       margin-top: 0;
       margin-bottom: 1rem;
     }
@@ -35,7 +36,8 @@
 
     &:hover,
     &--hover {
-      h1, h2 {
+      h1,
+      h2 {
         color: @navBla;
         text-decoration: underline;
       }
@@ -49,6 +51,6 @@
 
   @media (max-width: 930px) {
     grid-template-columns: repeat(1, 1fr);
-    margin:0;
+    margin: 0;
   }
 }

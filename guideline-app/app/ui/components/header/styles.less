@@ -1,6 +1,6 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
-@import (reference) '~NavFrontendCore/less/_mixins';
-@import (reference) './../../../assets/styles/mixins';
+@import (reference) "~NavFrontendCore/less/_variabler";
+@import (reference) "~NavFrontendCore/less/_mixins";
+@import (reference) "./../../../assets/styles/mixins";
 
 .header {
   background: white;
@@ -18,14 +18,14 @@
       color: @navMorkGra;
 
       svg {
-        position:absolute;
-        top:0px;
-        left:0px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
       }
 
       .header__title {
         font-size: 1.5rem;
-        font-weight:bold;
+        font-weight: bold;
         padding-top: 1rem;
         padding-left: 7rem;
         padding-bottom: 1rem;
@@ -40,9 +40,9 @@
       }
 
       &:focus {
-        outline:none;
-        box-shadow:0 0 0 3px @fokusFarge;
-        z-index:1;
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
+        z-index: 1;
       }
     }
   }
@@ -58,8 +58,8 @@
       padding: 1rem 1.5rem;
 
       svg {
-        top:0.33rem;
-        width:75px;
+        top: 0.33rem;
+        width: 75px;
       }
 
       .header__title {
@@ -74,13 +74,13 @@
 
       svg {
         // top:0.33rem;
-        width:60px;
+        width: 60px;
       }
 
       .header__title {
         padding: 0.75rem;
         padding-left: 4.5rem;
-        font-size:1.25rem;
+        font-size: 1.25rem;
       }
     }
   }
@@ -89,15 +89,15 @@
 #skip-link {
   padding: 1rem;
   border: 2px solid @navBla;
-  background:white;
+  background: white;
 
-  &:not(:focus){
+  &:not(:focus) {
     .sr-only();
   }
 
   &:focus {
-    position:absolute;
-    top:0px;
-    z-index:1;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
   }
 }

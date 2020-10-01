@@ -1,69 +1,65 @@
 /* eslint-disable strict */
 
-'use strict';
+"use strict";
 
-const extend = require('extend');
+const extend = require("extend");
 
 function capitalize(str) {
-    return str && str[0].toUpperCase() + str.slice(1);
+  return str && str[0].toUpperCase() + str.slice(1);
 }
 function camelcase(str) {
-    return str && str.split(/\W/)
-            .map(capitalize)
-            .join('');
+  return str && str.split(/\W/).map(capitalize).join("");
 }
 function kebabcase(str) {
-    return str && str.split(/\W/)
-            .join('-');
+  return str && str.split(/\W/).join("-");
 }
 function entries(obj) {
-    return Object.keys(obj)
-        .map((key) => ({ key, value: obj[key] }));
+  return Object.keys(obj).map((key) => ({ key, value: obj[key] }));
 }
 function allCompleted(promises) {
-    return new Promise((resolve, _reject) => {
-        let unresolvedPromises = promises.length;
-        const result = new Array(promises.length);
-        promises
-            .forEach((promise, index) => promise
-                .then((res) => {
-                    result[index] = res;
-                    unresolvedPromises -= 1;
-                })
-                .catch((res) => {
-                    result[index] = res;
-                    unresolvedPromises -= 1;
-                })
-                .then(() => {
-                    if (unresolvedPromises === 0) {
-                        resolve(result);
-                    }
-                })
-            );
-    });
+  return new Promise((resolve, _reject) => {
+    let unresolvedPromises = promises.length;
+    const result = new Array(promises.length);
+    promises.forEach((promise, index) =>
+      promise
+        .then((res) => {
+          result[index] = res;
+          unresolvedPromises -= 1;
+        })
+        .catch((res) => {
+          result[index] = res;
+          unresolvedPromises -= 1;
+        })
+        .then(() => {
+          if (unresolvedPromises === 0) {
+            resolve(result);
+          }
+        })
+    );
+  });
 }
 function parsetag(tagstring) {
-    const regex = /^(.+)[-@]((?:\d+\.?){3})$/;
-    const match = regex.exec(tagstring);
-    if (!match) {
-        throw new Error(`Tag did not conform to expected format: ${tagstring}`);
-    }
+  const regex = /^(.+)[-@]((?:\d+\.?){3})$/;
+  const match = regex.exec(tagstring);
+  if (!match) {
+    throw new Error(`Tag did not conform to expected format: ${tagstring}`);
+  }
 
-    return { name: match[1], version: match[2] };
+  return { name: match[1], version: match[2] };
 }
 function allDependencies(pkg) {
-    const dependencies = pkg.dependencies || {};
-    const peerDependencies = pkg.peerDependencies || {};
-    const devDependencies = pkg.devDependencies || {};
+  const dependencies = pkg.dependencies || {};
+  const peerDependencies = pkg.peerDependencies || {};
+  const devDependencies = pkg.devDependencies || {};
 
-    return extend({}, devDependencies, peerDependencies, dependencies);
+  return extend({}, devDependencies, peerDependencies, dependencies);
 }
 module.exports = {
-    capitalize,
-    camelcase,
-    kebabcase,
-    entries,
-    allCompleted,
-    parsetag,
-    allDependencies
+  capitalize,
+  camelcase,
+  kebabcase,
+  entries,
+  allCompleted,
+  parsetag,
+  allDependencies,
 };
