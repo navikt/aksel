@@ -11,8 +11,6 @@ import Guidelines from "./tabs/Guidelines.mdx";
 import MdxContent from "../../../components/mdx-content/MdxContent";
 import TabbedContainer from "../../tabbed-container/TabbedContainer";
 
-import "./styles.less";
-
 class IconPage extends React.Component {
   constructor(props) {
     super(props);

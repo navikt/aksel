@@ -25,8 +25,62 @@
     overflow: scroll;
 
     .nav-list {
+      a {
+        border-left: 4px solid transparent;
+
+        &.github {
+          padding-left: 3.75rem;
+
+          svg {
+            width: 1.25rem;
+            margin-right: 0.25rem;
+            position: absolute;
+            top: 0.9rem;
+            left: 2rem;
+            fill: @navBla;
+          }
+        }
+      }
+
       > li {
         position: relative;
+
+        .mobile-nav__submenu-toggle-btn {
+          position: absolute;
+          top: 0;
+          right: 0;
+          font-size: 0;
+          height: 3.15rem;
+          width: 4.5rem;
+          border: 0;
+          padding: 0;
+          margin: 0;
+          background: none;
+          line-height: 0;
+          z-index: 999;
+
+          &::before,
+          &::after {
+            content: "";
+            display: block;
+            width: 0.75rem;
+            height: 2px;
+            background: @navMorkGra;
+            position: absolute;
+            top: calc(50% - 2px);
+            left: calc(50% - 8px);
+          }
+
+          &::before {
+            transform: rotate(90deg);
+          }
+
+          &--open {
+            &::before {
+              display: none;
+            }
+          }
+        }
 
         > a {
           font-size: 1.1rem;
@@ -54,64 +108,10 @@
             display: block;
           }
         }
-
-        .mobile-nav__submenu-toggle-btn {
-          position: absolute;
-          top: 0;
-          right: 0;
-          font-size: 0;
-          height: 3.15rem;
-          width: 4.5rem;
-          border: 0;
-          padding: 0;
-          margin: 0;
-          background: none;
-          line-height: 0;
-          z-index: 999;
-
-          &::before,
-          &::after {
-            content: "";
-            display: block;
-            width: 0.75rem;
-            height: 2px;
-            background: @navMorkGra;
-            position: absolute;
-            top: calc(50%-2px);
-            left: calc(50%-8px);
-          }
-
-          &::before {
-            transform: rotate(90deg);
-          }
-
-          &--open {
-            &::before {
-              display: none;
-            }
-          }
-        }
       }
 
-      a {
-        border-left: 4px solid transparent;
-
-        &:hover {
-          border-left: 4px solid @navBla;
-        }
-
-        &.github {
-          padding-left: 3.75rem;
-
-          svg {
-            width: 1.25rem;
-            margin-right: 0.25rem;
-            position: absolute;
-            top: 0.9rem;
-            left: 2rem;
-            fill: @navBla;
-          }
-        }
+      a:hover {
+        border-left: 4px solid @navBla;
       }
     }
   }

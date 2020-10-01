@@ -145,12 +145,10 @@ p,
       &:focus {
         outline: none;
         box-shadow: 0 0 0 3px @fokusFarge;
-        z-index: 1;
+        z-index: 10;
       }
 
       &.active {
-        background: white;
-        color: @navMorkGra;
         background: @navBla;
         color: white !important;
         font-weight: normal !important;
@@ -163,20 +161,6 @@ p,
           &--fokus {
             background: @navOransjeLighten60;
           }
-        }
-      }
-
-      &:focus {
-        z-index: 10;
-      }
-
-      .etikett {
-        margin: -5px 0.25rem;
-        color: @navMorkGra;
-        background: #ddd;
-
-        &:first-child {
-          margin-left: 1rem;
         }
       }
 
@@ -198,12 +182,8 @@ p,
         color: @navMorkGra;
       }
 
-      > ul {
-        > li {
-          > a {
-            padding-left: 3rem;
-          }
-        }
+      > ul > li > a {
+        padding-left: 3rem;
       }
     }
   }
