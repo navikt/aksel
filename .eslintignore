@@ -1,11 +1,4 @@
 _templates/
-_scripts/
 dist
-examples/
-development/
-webpack.config.js
-gulpfile.js
-.eslintrc.js
 !packages/node_modules/**
 packages/node_modules/*/lib
-packages/node_modules/nav-frontend-core/less/**
