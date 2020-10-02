@@ -1,3 +1,4 @@
 _templates
 /node_modules
 packages/node_modules/**/vendor
+packages/node_modules/nav-frontend-core/less/_variabler-exports.less
