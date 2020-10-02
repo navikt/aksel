@@ -1,2 +1,3 @@
 _templates
 /node_modules
+packages/node_modules/**/vendor
