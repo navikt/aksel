@@ -15,7 +15,7 @@
     "bump": "node ./_scripts/bumpall.js",
     "lint": "npm run jsts:lint && npm run less:lint",
     "jsts:lint": "npx eslint .",
-    "less:lint": "npx stylelint --syntax less **/*.less",
+    "less:lint": "npx stylelint --syntax less --disable-default-ignores **/*.less",
     "test": "gulp test",
     "build": "gulp build --docs && npm run generateMDs",
     "build:nodocs": "gulp build && npm run generateMDs",
