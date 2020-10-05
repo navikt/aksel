@@ -2,8 +2,10 @@
 @import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/index';
 
 html {
-  font-size: 115%; // fallback
-  font-size: calc(107% + 0.25vmin);
+  font-size: 115%;
+  @media (min-width: 768px) {
+    font-size: 125%;
+  }
   height: 100%;
 }
 
