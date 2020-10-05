@@ -1,8 +1,6 @@
 {
   "lerna": "2.0.0-rc.5",
-  "packages": [
-    "packages/node_modules/*"
-  ],
+  "packages": ["packages/node_modules/*"],
   "version": "independent",
   "commands": {
     "bootstrap": {

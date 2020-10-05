@@ -1,7 +1,7 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
-@import (reference) './../../../assets/styles/mixins';
-@import (reference) '~NavFrontendModules/nav-frontend-paneler-style/src/mixins';
-@import './../../../assets/styles/base';
+@import (reference) "~NavFrontendCore/less/_variabler";
+@import (reference) "./../../../assets/styles/mixins";
+@import (reference) "~NavFrontendModules/nav-frontend-paneler-style/src/mixins";
+@import "./../../../assets/styles/base";
 
 #app {
   height: 100%;
@@ -30,7 +30,7 @@
           max-width: 700px;
 
           &:first-child {
-            margin-top: 0px;
+            margin-top: 0;
           }
 
           ul,
@@ -55,7 +55,7 @@
             margin: 2rem 0;
 
             &--grey {
-              background:#f4f4f4;
+              background: #f4f4f4;
               padding: 1.5rem 2rem;
 
               @media (max-width: 550px) {
@@ -75,10 +75,10 @@
       }
 
       @media (max-width: 1094px) {
-        display:block;
+        display: block;
 
         .leftNavigation {
-          display:none;
+          display: none;
         }
       }
     }

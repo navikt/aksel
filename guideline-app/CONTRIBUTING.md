@@ -31,7 +31,7 @@ Denne filen benytter markdown-formatet [MDX](https://github.com/mdx-js/mdx) som 
 
 Her er et eksempel på hvordan en slik fil kan struktureres:
 
-```jsx
+````jsx
 // Importer 'Example'-modulen fra Guideline-appen. Denne brukes til å ramme inn live-eksempel av komponenten din
 
 import Example from './../../../../guideline-app/app/ui/components/example/Example';
@@ -63,7 +63,7 @@ Normal variant av MinKomponent kan benyttes hvis brukeren trenger å gjøre...
 ```jsx
 <MinKomponent>Dette er innholdet til MinKomponent</MinKomponent>
 ``` `
-```
+````
 
 ## Øvrige sider
 

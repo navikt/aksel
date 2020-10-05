@@ -1,11 +1,13 @@
-import { Ingress } from 'NavFrontendModules/nav-frontend-typografi';
-import Alertstripe from 'NavFrontendModules/nav-frontend-alertstriper';
-import Example from '../../../components/example/Example';
-import FormValidationExample from './FormValidationExample';
+import { Ingress } from "NavFrontendModules/nav-frontend-typografi";
+import Alertstripe from "NavFrontendModules/nav-frontend-alertstriper";
+import Example from "../../../components/example/Example";
+import FormValidationExample from "./FormValidationExample";
 
 # Skjemavalidering
 
-<Ingress>Dette mønsteret skal demonstrere reglene for skjema-validering.</Ingress>
+<Ingress>
+  Dette mønsteret skal demonstrere reglene for skjema-validering.
+</Ingress>
 
 ## Regler
 
@@ -17,14 +19,15 @@ import FormValidationExample from './FormValidationExample';
 - Feil i feiloppsummeringsboks forsvinner etterhvert som de blir utbedret
 - Etter at alle feil er blitt utbedret, må det et nytt `submit`-forsøk til for at nye feil igjen skal vises i feiloppsummeringen
 
-<br/>
+<br />
 
 <Alertstripe type="info">
-    Skjema som bare har ett skjemafelt (f.eks. søkefelt eller skjema fordelt over flere sider/steg) er unntatt disse reglene.
+  Skjema som bare har ett skjemafelt (f.eks. søkefelt eller skjema fordelt over
+  flere sider/steg) er unntatt disse reglene.
 </Alertstripe>
 
 ## Live eksempel
 
 <Example>
-    <FormValidationExample />
+  <FormValidationExample />
 </Example>

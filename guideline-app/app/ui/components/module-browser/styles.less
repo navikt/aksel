@@ -1,10 +1,10 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) "~NavFrontendCore/less/_variabler";
 
 .module-browser {
   margin-top: 3rem;
 
   &__wrapper {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 
     nav {
@@ -14,7 +14,7 @@
       flex: 1 1 auto;
 
       @media (max-width: 830px) {
-        display:none;
+        display: none;
       }
     }
   }
@@ -24,15 +24,15 @@
     overflow: hidden;
 
     > .skjemaelement {
-      display:none;
+      display: none;
 
       .skjemaelement__label {
-        display:none;
+        display: none;
       }
 
       @media (max-width: 830px) {
-        display:block;
-        margin-bottom:3rem;
+        display: block;
+        margin-bottom: 3rem;
       }
     }
   }
@@ -42,19 +42,20 @@
       margin: unset !important;
     }
   }
+
   &__popover {
     padding: 0.7rem;
   }
-  
+
   &__copyknapp {
     margin-left: 0.2em;
   }
-  
+
   &--innline {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 3em;    
+    height: 3em;
   }
 
   .panel {
@@ -62,17 +63,18 @@
 
     .nav-list {
       li {
-        margin-bottom:0 !important;
+        margin-bottom: 0 !important;
       }
+
       a:not(.active):hover {
         background: #f4f4f4 !important;
       }
     }
   }
 
-  @media (max-width:550px) {
+  @media (max-width: 550px) {
     .panel {
-      padding:1.5rem;
+      padding: 1.5rem;
     }
   }
 }

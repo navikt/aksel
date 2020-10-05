@@ -1,5 +1,5 @@
-@import '~NavFrontendCore/less/core';
-@import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/index';
+@import "~NavFrontendCore/less/core";
+@import (reference) "~NavFrontendModules/nav-frontend-typografi-style/src/index";
 
 html {
   font-size: 16px;
@@ -29,36 +29,39 @@ blockquote {
   padding: 1.5rem 3.5rem;
   position: relative;
 
-  &:before, &:after {
-    position:absolute;
-    font-size:3rem;
-    line-height:1rem;
+  &::before,
+  &::after {
+    position: absolute;
+    font-size: 3rem;
+    line-height: 1rem;
   }
 
-  &:before {
-    content:'“';
-    top:2rem;
-    left:1.5rem;
+  &::before {
+    content: "“";
+    top: 2rem;
+    left: 1.5rem;
   }
 
-  &:after {
-    content:'”';
-    bottom:1rem;
-    right:1.5rem;
+  &::after {
+    content: "”";
+    bottom: 1rem;
+    right: 1.5rem;
   }
-  
+
   cite {
-    display:block;
-    margin-top:1rem;
+    display: block;
+    margin-top: 1rem;
   }
 }
 
-p, .typo-normal {
+p,
+.typo-normal {
   line-height: 1.375rem;
 
   &:first-child {
     margin-top: 0;
   }
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -94,7 +97,7 @@ p, .typo-normal {
   }
 
   &:first-child {
-    margin-top:0;
+    margin-top: 0;
   }
 }
 
@@ -105,7 +108,7 @@ p, .typo-normal {
 }
 
 .columns {
-  display:flex;
+  display: flex;
 
   .column {
     flex: 1 1 auto;
@@ -119,8 +122,8 @@ p, .typo-normal {
 
   ul {
     list-style: none;
-    margin:0;
-    padding:0px;
+    margin: 0;
+    padding: 0;
   }
 
   li {
@@ -136,34 +139,29 @@ p, .typo-normal {
 
       &:hover {
         background: white;
-        border-left:2px solid @navBla;
+        border-left: 2px solid @navBla;
       }
 
       &:focus {
-        outline:none;
-        box-shadow:0 0 0 3px @fokusFarge;
-        z-index:1;
+        outline: none;
+        box-shadow: 0 0 0 3px @fokusFarge;
+        z-index: 10;
       }
 
       &.active {
-        background: white;
-        color: @navMorkGra;
         background: @navBla;
         color: white !important;
-        font-weight:normal !important;
+        font-weight: normal !important;
 
         .etikett {
           &--info {
             background: @navBlaLighten80;
           }
+
           &--fokus {
             background: @navOransjeLighten60;
           }
         }
-      }
-
-      &:focus {
-        z-index: 10;
       }
 
       .etikett {
@@ -178,27 +176,24 @@ p, .typo-normal {
 
       .dot {
         text-indent: -999px;
-        width:0.6rem;
-        height:0.6rem;
+        width: 0.6rem;
+        height: 0.6rem;
         background-color: @navOransje;
-        border-radius:50%;
-        margin-left:1rem;
+        border-radius: 50%;
+        margin-left: 1rem;
       }
     }
 
     &.open {
-      background:white;
+      background: white;
 
       > a {
-        font-weight:bold;
-        color:@navMorkGra;
+        font-weight: bold;
+        color: @navMorkGra;
       }
-      > ul {
-        > li {
-          > a {
-            padding-left:3rem;
-          }
-        }
+
+      > ul > li > a {
+        padding-left: 3rem;
       }
     }
   }
@@ -207,7 +202,7 @@ p, .typo-normal {
 .menu {
   margin: 0;
   padding: 0;
-  list-style:none;
+  list-style: none;
 
   li:not(:last-child) {
     border-bottom: 1px solid @navLysGra;
@@ -232,13 +227,13 @@ p, .typo-normal {
 }
 
 .catalog {
-  display:grid;
+  display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 1rem;
   row-gap: 1rem;
 
   .lenkepanel {
-    margin:0;
+    margin: 0;
   }
 
   @media (max-width: 1500px) {
@@ -262,31 +257,31 @@ p, .typo-normal {
   }
 }
 
-.tabsContainer { 
+.tabsContainer {
   &--fullWidth {
-    position:relative;
-    margin:2rem -3rem 3rem;
+    position: relative;
+    margin: 2rem -3rem 3rem;
 
-    &:after {
-      content:'';
-      display:block;
-      position:absolute;
-      bottom:9px;
-      left:0px;
-      right:0px;
-      height:1px;
-      background:@navGra40;
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 9px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: @navGra40;
     }
 
     .tabsContainer__inner {
-      overflow-y:hidden;
-      padding:2px 3rem 10px;
+      overflow-y: hidden;
+      padding: 2px 3rem 10px;
     }
 
     .nav-frontend-tabs {
-      border:none;
-      position:relative;
-      z-index:1;
+      border: none;
+      position: relative;
+      z-index: 1;
     }
   }
 
@@ -294,8 +289,8 @@ p, .typo-normal {
     margin: 2rem -1.5rem 3rem;
 
     .tabsContainer__inner {
-      padding:2px 1.5rem 10px;
-      overflow-x:scroll;
+      padding: 2px 1.5rem 10px;
+      overflow-x: scroll;
     }
   }
 }

@@ -1,8 +1,8 @@
 language: node_js
-node_js: 
+node_js:
   - "10.13.0"
 
-before_install: 
+before_install:
   - export TZ=Europe/Oslo
 
 install:

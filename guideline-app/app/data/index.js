@@ -1,8 +1,8 @@
-import colors from './colors/colors';
-import components from './components/components';
+import colors from "./colors/colors";
+import components from "./components/components";
 
-import informationHierarchyData from './typography/informationHierarchy';
-import typographyHierarchyData from './typography/typographyHierarchy';
+import informationHierarchyData from "./typography/informationHierarchy";
+import typographyHierarchyData from "./typography/typographyHierarchy";
 
 export const Colors = colors;
 export const Components = components;

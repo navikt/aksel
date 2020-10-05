@@ -1,45 +1,47 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) "~NavFrontendCore/less/_variabler";
 
 .overflow-shadow() {
-    content: '';
-    position:absolute;
-    top:0px;
-    bottom:0px;
-    width:20px;
-    opacity:0.1;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 20px;
+  opacity: 0.1;
 }
 
 .overflow-detector {
-	position: relative;
+  position: relative;
 
-	&__scroller {
-		overflow: auto;
-		overflow-y: hidden;
+  &__scroller {
+    overflow: auto;
+    overflow-y: hidden;
 
     &:focus {
       outline: none;
       box-shadow: 0 0 0 3px @fokusFarge;
     }
-	}
+  }
 
-	&__inner {
-		display: inline-block;
-		min-width: 100%;
-	}
+  &__inner {
+    display: inline-block;
+    min-width: 100%;
+  }
 
-	&--shadow-left {
-		&:before {
-			.overflow-shadow();
-			left: 0px;
-      		background: linear-gradient(to right, rgba(0,0,0,1), transparent);
-		}
-	}
+  &--shadow-left {
+    &::before {
+      .overflow-shadow();
 
-	&--shadow-right {
-		&:after {
-			.overflow-shadow();
-			right: 0px;
-      		background: linear-gradient(to left, rgba(0,0,0,1), transparent);
-		}
-	}
+      left: 0;
+      background: linear-gradient(to right, rgba(0, 0, 0, 1), transparent);
+    }
+  }
+
+  &--shadow-right {
+    &::after {
+      .overflow-shadow();
+
+      right: 0;
+      background: linear-gradient(to left, rgba(0, 0, 0, 1), transparent);
+    }
+  }
 }

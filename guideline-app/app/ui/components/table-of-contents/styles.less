@@ -1,25 +1,25 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
+@import (reference) "~NavFrontendCore/less/_variabler";
 
 .table-of-contents {
-  position:absolute;
-  top:0px;
+  position: absolute;
+  top: 0;
   right: -452px;
   width: 388px;
 
   ol {
-    list-style-type:none;
+    list-style-type: none;
     padding-left: 1.5rem;
 
     li {
       a {
-        display:inline-block;
-        padding:0.5rem 0.25rem;
+        display: inline-block;
+        padding: 0.5rem 0.25rem;
 
         &:focus {
-          outline:none;
-          background:@fokusFarge;
-          color:white;
-          text-decoration:none;
+          outline: none;
+          background: @fokusFarge;
+          color: white;
+          text-decoration: none;
         }
       }
     }
@@ -30,7 +30,7 @@
   }
 
   @media (max-width: 1500px) {
-    position:static;
-    display:none;
+    position: static;
+    display: none;
   }
 }

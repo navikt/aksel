@@ -1,11 +1,13 @@
-@import (reference) '~NavFrontendCore/less/_variabler';
-@import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/fontimports';
-@import (reference) '~NavFrontendModules/nav-frontend-typografi-style/src/mixins';
+@import (reference) "~NavFrontendCore/less/_variabler";
+@import (reference)
+  "~NavFrontendModules/nav-frontend-typografi-style/src/fontimports";
+@import (reference)
+  "~NavFrontendModules/nav-frontend-typografi-style/src/mixins";
 
 .componentGuidelinePage {
   > .alertstripe {
     border-radius: 0;
-    position:absolute;
+    position: absolute;
     top: 0;
     left: 300px;
     right: 0;
@@ -14,7 +16,7 @@
 
   .typo-ingress.intro {
     code {
-      font-size:0.9em;
+      font-size: 0.9em;
       display: inline-block;
       color: @navRod;
       padding: 0 0.125rem;
@@ -24,7 +26,7 @@
   .componentTitle {
     display: flex;
     align-items: center;
-    
+
     &--beta {
       margin-top: 2.5rem;
     }
@@ -39,11 +41,11 @@
       margin-left: 1rem;
     }
   }
-  
+
   table {
     .dependencies {
       a {
-        display:inline-block;
+        display: inline-block;
         margin-right: 0.5rem;
       }
     }
@@ -85,6 +87,7 @@
   &__popover {
     padding: 0.7rem;
   }
+
   &__copyknapp {
     margin-left: 0.2em;
   }
