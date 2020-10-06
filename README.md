@@ -22,9 +22,9 @@
 
 Dette repoet inneholder følgende:
 
-- [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules) i NAVs frontend-rammeverk
-- [Et eget utviklingsmiljø](https://github.com/navikt/nav-frontend-moduler/tree/master/development) for videreutvikling av komponenter
-- [Kildekoden](https://github.com/navikt/nav-frontend-moduler/tree/master/guideline-app) til vår nettside; [design.nav.no](https://design.nav.no) som tilbyr dokumentasjon for komponentene og NAVs designsystem generelt
+- [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk
+- Storybook for videreutvikling av komponenter
+- [Kildekoden](https://github.com/navikt/nav-frontend-moduler/tree/master/website/guideline-app) til vår nettside; [design.nav.no](https://design.nav.no) som tilbyr dokumentasjon for komponentene og NAVs designsystem generelt
 - [Eksempler på forskjellige frontend-oppsett](https://github.com/navikt/nav-frontend-moduler/tree/master/examples) til applikasjoner som skal bruke komponentene
 
 ## Bidra
