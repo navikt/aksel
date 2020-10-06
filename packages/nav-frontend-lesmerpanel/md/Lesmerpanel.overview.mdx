@@ -1,0 +1,50 @@
+import Example from "../../../website/guideline-app/app/ui/components/example/Example";
+import Lesmerpanel from "./../";
+
+## Normal
+
+<Example>
+  <Lesmerpanel
+    intro={
+      <span>
+        Introduksjonstekst her som <a href="#">kan være HTML</a>
+      </span>
+    }
+    border
+  >
+    <div>
+      <p style={{ marginTop: 0 }}>
+        Du bestemmer selv om du vil bruke sykmeldingen eller avbryte den. Du kan
+        også jobbe i kombinasjon med sykmelding. Det kommer an på hva sykdommen
+        din tillater og hva det er praktisk mulig å få til på arbeidsplassen.
+      </p>
+      <p>
+        Greit å vite: Arbeidsgiveren har plikt til å legge til rette for at du
+        kan jobbe helt eller delvis selv om du er syk.
+      </p>
+    </div>
+  </Lesmerpanel>
+</Example>
+
+```jsx
+<Lesmerpanel
+  intro={
+    <span>
+      Introduksjonstekst her som <a href="#">kan være HTML</a>
+    </span>
+  }
+  border
+>
+  <div>
+    <p style={{ marginTop: 0 }}>
+      Du bestemmer selv om du vil bruke sykmeldingen eller avbryte den. Du kan
+      også jobbe i kombinasjon med sykmelding. Det kommer an på hva sykdommen
+      din tillater og hva det er praktisk mulig å få til på arbeidsplassen.
+    </p>
+    <p>
+      Greit å vite: Arbeidsgiveren har plikt til å legge til rette for at du kan
+      jobbe helt eller delvis selv om du er syk.
+    </p>
+  </div>
+</Lesmerpanel>
+```

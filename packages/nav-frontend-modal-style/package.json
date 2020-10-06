@@ -1,0 +1,24 @@
+{
+  "name": "nav-frontend-modal-style",
+  "version": "0.3.36",
+  "main": "src/index.less",
+  "license": "MIT",
+  "files": [
+    "/src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "peerDependencies": {
+    "nav-frontend-core": "^5.0.3",
+    "nav-frontend-lukknapp-style": "^0.2.25",
+    "nav-frontend-paneler-style": "^0.3.22"
+  },
+  "devDependencies": {
+    "nav-frontend-core": "^5.0.3",
+    "nav-frontend-lukknapp-style": "^0.2.25",
+    "nav-frontend-paneler-style": "^0.3.22",
+    "react": "^15.4.2 || ^16.0.0"
+  }
+}

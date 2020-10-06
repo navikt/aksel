@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES3",
+    "allowJs": false,
+    "jsx": "react",
+    "noEmit": false,
+    "strictNullChecks": true,
+    "sourceMap": false,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "noImplicitAny": false,
+    "declaration": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "lib": ["DOM", "es2015", "es2016", "es2017"]
+  }
+}

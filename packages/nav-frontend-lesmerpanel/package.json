@@ -1,0 +1,34 @@
+{
+  "name": "nav-frontend-lesmerpanel",
+  "version": "0.0.43",
+  "main": "lib/lesmerpanel.js",
+  "types": "lib/lesmerpanel.d.ts",
+  "license": "MIT",
+  "files": [
+    "src",
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "peerDependencies": {
+    "classnames": "^2.2.5",
+    "nav-frontend-chevron": "^1.0.15",
+    "nav-frontend-js-utils": "^1.0.11",
+    "nav-frontend-lesmerpanel-style": "^0.0.32",
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2 || ^16.0.0",
+    "react-collapse": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react-collapse": "^4.0.1",
+    "classnames": "^2.2.5",
+    "nav-frontend-chevron": "^1.0.15",
+    "nav-frontend-js-utils": "^1.0.11",
+    "nav-frontend-lesmerpanel-style": "^0.0.32",
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2 || ^16.0.0",
+    "react-collapse": "^5.0.0"
+  }
+}

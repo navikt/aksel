@@ -1,0 +1,25 @@
+{
+  "name": "nav-frontend-toggle",
+  "version": "0.0.44",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "files": [
+    "/src",
+    "/lib"
+  ],
+  "peerDependencies": {
+    "classnames": "^2.2.5",
+    "nav-frontend-js-utils": "^1.0.11",
+    "nav-frontend-toggle-style": "^0.0.36",
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2 || ^16.0.0"
+  },
+  "devDependencies": {
+    "classnames": "^2.2.5",
+    "nav-frontend-js-utils": "^1.0.11",
+    "nav-frontend-toggle-style": "^0.0.36",
+    "prop-types": "^15.5.10",
+    "react": "^15.4.2 || ^16.0.0"
+  }
+}

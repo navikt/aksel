@@ -1,0 +1,18 @@
+{
+  "name": "nav-frontend-stegindikator-style",
+  "version": "1.0.32",
+  "main": "src/index.less",
+  "license": "MIT",
+  "files": [
+    "/src"
+  ],
+  "peerDependencies": {
+    "nav-frontend-core": "^5.0.3",
+    "nav-frontend-typografi-style": "^1.0.23"
+  },
+  "devDependencies": {
+    "nav-frontend-core": "^5.0.3",
+    "nav-frontend-typografi-style": "^1.0.23",
+    "react": "^15.4.2 || ^16.0.0"
+  }
+}

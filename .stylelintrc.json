@@ -1,8 +1,0 @@
-{
-  "extends": "stylelint-config-standard",
-  "rules": {
-    "value-list-comma-newline-after": null,
-    "declaration-colon-newline-after": null,
-    "no-descending-specificity": null
-  }
-}
