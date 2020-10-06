@@ -147,7 +147,7 @@
     "js-beautify": "^1.11.0",
     "jsx-to-string": "^1.1.0",
     "react-docgen": "^2.20.0",
-    "react-docgen-typescript": "^1.18.0",
+    "react-docgen-typescript": "^1.20.4",
     "react-document-title": "^2.0.3"
   }
 }
