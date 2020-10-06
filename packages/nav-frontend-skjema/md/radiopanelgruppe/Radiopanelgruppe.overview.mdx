@@ -1,0 +1,46 @@
+import Example from "../../../../website/guideline-app/app/ui/components/example/Example";
+import RadioPanelGruppeExample from "./../../sample/_radiopanelgruppe.example.js";
+import { RadioPanelGruppe } from "./../../";
+
+## Normal
+
+<Example>
+  <RadioPanelGruppeExample name="example-1" />
+</Example>
+
+```jsx
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+/>
+```
+
+## Feilmelding
+
+<Example>
+  <RadioPanelGruppeExample name="example-2" feil={true} />
+</Example>
+
+```jsx
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Her er det en feil." }}
+/>
+```

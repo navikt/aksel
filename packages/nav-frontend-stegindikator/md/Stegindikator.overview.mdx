@@ -1,0 +1,145 @@
+import Example from "../../../website/guideline-app/app/ui/components/example/Example";
+import Stegindikator from "./../";
+
+## Normal
+
+<Example>
+  <Stegindikator
+    steg={[
+      { label: "Dette steget først" },
+      { label: "Og så dette steget", aktiv: true },
+      { label: "Deretter må du gjøre dette" },
+      { label: "Konklusjonen", disabled: true },
+    ]}
+    onChange={() => {}}
+  />
+</Example>
+
+```jsx
+<Stegindikator
+  steg={[
+    { label: "Dette steget først" },
+    { label: "Og så dette steget", aktiv: true },
+    { label: "Deretter må du gjøre dette" },
+    { label: "Konklusjonen", disabled: true },
+  ]}
+  onChange={() => {}}
+/>
+```
+
+## Med label
+
+<Example>
+  <Stegindikator
+    steg={[
+      { label: "Dette steget først" },
+      { label: "Og så dette steget", aktiv: true },
+      { label: "Deretter må du gjøre dette" },
+      { label: "Konklusjonen", disabled: true },
+    ]}
+    onChange={() => {}}
+    visLabel
+  />
+</Example>
+
+```jsx
+<Stegindikator
+  steg={[
+    { label: "Dette steget først" },
+    { label: "Og så dette steget", aktiv: true },
+    { label: "Deretter må du gjøre dette" },
+    { label: "Konklusjonen", disabled: true },
+  ]}
+  onChange={() => {}}
+  visLabel
+/>
+```
+
+## Kompakt
+
+<Example>
+  <Stegindikator
+    steg={[
+      { label: "Dette steget først" },
+      { label: "Og så dette steget", aktiv: true },
+      { label: "Deretter må du gjøre dette" },
+      { label: "Konklusjonen", disabled: true },
+    ]}
+    onChange={() => {}}
+    kompakt
+  />
+</Example>
+
+```jsx
+<Stegindikator
+  steg={[
+    { label: "Dette steget først" },
+    { label: "Og så dette steget", aktiv: true },
+    { label: "Deretter må du gjøre dette" },
+    { label: "Konklusjonen", disabled: true },
+  ]}
+  onChange={() => {}}
+  kompakt
+/>
+```
+
+## Kompakt med label
+
+<Example>
+  <Stegindikator
+    steg={[
+      { label: "Dette steget først" },
+      { label: "Og så dette steget", aktiv: true },
+      { label: "Deretter må du gjøre dette" },
+      { label: "Konklusjonen", disabled: true },
+    ]}
+    onChange={() => {}}
+    kompakt
+    visLabel
+  />
+</Example>
+
+```jsx
+<Stegindikator
+  steg={[
+    { label: "Dette steget først" },
+    { label: "Og så dette steget", aktiv: true },
+    { label: "Deretter må du gjøre dette" },
+    { label: "Konklusjonen", disabled: true },
+  ]}
+  onChange={() => {}}
+  kompakt
+  visLabel
+/>
+```
+
+## Autoresponsiv
+
+Denne versjonen vil kontinuerlig overvåke tilgjenglig konteiner-plass og automatisk
+bytte visningsmodus for å tilpasse seg bredden.
+
+<Example noscroll>
+  <Stegindikator
+    steg={[
+      { label: "Dette steget først" },
+      { label: "Og så dette steget", aktiv: true },
+      { label: "Deretter må du gjøre dette" },
+    ]}
+    onChange={() => {}}
+    visLabel
+    autoResponsiv
+  />
+</Example>
+
+```jsx
+<Stegindikator
+  steg={[
+    { label: "Dette steget først" },
+    { label: "Og så dette steget", aktiv: true },
+    { label: "Deretter må du gjøre dette" },
+  ]}
+  onChange={() => {}}
+  visLabel
+  autoResponsiv
+/>
+```

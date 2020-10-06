@@ -1,10 +1,16 @@
 {
-  "lerna": "2.0.0-rc.5",
-  "packages": ["packages/node_modules/*"],
+  "npmClient": "yarn",
   "version": "independent",
-  "commands": {
+  "command": {
+    "publish": {
+      "npmClient": "npm",
+      "ignoreChanges": ["*.md", "*.mdx", "*.story.tsx'"],
+      "message": "Lerna versionbump [ci skip]"
+    },
     "bootstrap": {
       "ignore": "*"
     }
-  }
+  },
+  "useWorkspaces": "true",
+  "packages": ["packages/*"]
 }
