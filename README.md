@@ -8,9 +8,6 @@
         Monorepo for alle felleskomponenter i NAVs frontend-rammeverk.
     </p>
     <p>
-      <a href="https://travis-ci.org/navikt/nav-frontend-moduler">
-          <img src="https://travis-ci.org/navikt/nav-frontend-moduler.svg?branch=master" />
-      </a>
       <a href="https://github.com/navikt/nav-frontend-moduler/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
       </a>
