@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst",
-  "version": "2.0.34",
+  "version": "2.0.35",
   "main": "lib/hjelpetekst.js",
   "types": "lib/hjelpetekst.d.ts",
   "license": "MIT",
@@ -25,10 +25,10 @@
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-hjelpetekst-style": "^2.0.27",
-    "nav-frontend-ikoner-assets": "^2.0.5",
-    "nav-frontend-js-utils": "^1.0.11",
-    "nav-frontend-popover": "^0.0.29",
+    "nav-frontend-hjelpetekst-style": "^2.0.28",
+    "nav-frontend-ikoner-assets": "^2.0.6",
+    "nav-frontend-js-utils": "^1.0.12",
+    "nav-frontend-popover": "^0.0.30",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   }
