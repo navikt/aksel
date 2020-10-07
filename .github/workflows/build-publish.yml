@@ -32,7 +32,7 @@ jobs:
           token: ${{secrets.GIT_REPO}}
       - uses: actions/setup-node@v1
         with:
-          registry-url: https://registry.npmjs.org
+          registry-url: http://registry.npmjs.org
           node-version: 13 
         env:
             NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
