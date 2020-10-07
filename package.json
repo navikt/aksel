@@ -69,7 +69,7 @@
     "clean": "yarn workspace portal clean",
     "build:gatsby": "yarn workspace portal build:gatsby",
     "serve": "yarn workspace portal serve",
-    "storybook": "yarn install && start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lerna:watch": "yarn run lerna run watch --parallel",
     "lerna:build": "yarn run lerna run build",
