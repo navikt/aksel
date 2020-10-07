@@ -3,7 +3,7 @@
   "version": "independent",
   "command": {
     "publish": {
-      "registry": "https://registry.npmjs.org/",
+      "registry": "http://registry.npmjs.org/",
       "npmClient": "npm",
       "ignoreChanges": ["*.md", "*.mdx", "*.story.tsx'"],
       "message": "Lerna versionbump [ci skip]"
