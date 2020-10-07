@@ -34,6 +34,11 @@ jobs:
         with:
           registry-url: http://registry.npmjs.org
           node-version: 13 
+      - name: Setup NPM
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN
+          npm config list
+          npm whoami
         env:
             NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - run: yarn install --frozen-lockfile
@@ -43,7 +48,6 @@ jobs:
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-      - run: npm whoami
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
       - run: yarn lerna publish from-package --yes
 
