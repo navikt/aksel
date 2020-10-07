@@ -1,0 +1,83 @@
+import Example from "../../../../website/guideline-app/app/ui/components/example/Example";
+import { Checkbox, CheckboxGruppe } from "./../../";
+import Alertstripe from "./../../../nav-frontend-alertstriper";
+import Lenke from "./../../../nav-frontend-lenker";
+
+## Normal
+
+<Example>
+  <Checkbox label={"Checkbox"} />
+</Example>
+
+```jsx
+<Checkbox label={"Checkbox"} />
+```
+
+## Disabled
+
+<Alertstripe type="advarsel">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Lenke href="/accessibility/disabled">siden vår om `disabled`</Lenke>.
+</Alertstripe>
+
+<Example>
+  <Checkbox label={"Checkbox"} disabled />
+</Example>
+
+```jsx
+<Checkbox label={"Checkbox"} disabled />
+```
+
+## Feilmelding
+
+<Example>
+  <Checkbox label={"Checkbox"} feil="Her er det noe feil" />
+</Example>
+
+```jsx
+<Checkbox label={"Checkbox"} feil="Her er det noe feil" />
+```
+
+## CheckboxGruppe
+
+Denne komponenten inkluderer også en `CheckboxGruppe`-komponent som kan brukes til å gruppere flere checkboxer:
+
+<Example>
+  <CheckboxGruppe legend="Hvor vil du sitte?">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Example>
+
+```jsx
+import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
+
+<CheckboxGruppe legend="Hvor vil du sitte?">
+  <Checkbox label={"Bakerst"} />
+  <Checkbox label={"Midten"} />
+  <Checkbox label={"Fremst"} />
+</CheckboxGruppe>;
+```
+
+### Felles feilmelding
+
+<Example>
+  <CheckboxGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Example>
+
+```jsx
+import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
+
+<CheckboxGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+  <Checkbox label={"Bakerst"} />
+  <Checkbox label={"Midten"} />
+  <Checkbox label={"Fremst"} />
+</CheckboxGruppe>;
+```

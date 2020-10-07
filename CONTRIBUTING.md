@@ -1,5 +1,9 @@
 # Bidra med utvikling av nye og eksisterende komponenter
 
+VIKTIG: Fra 07.10.20 vil oppsettet i dette repoet bli endret, noe som vil gjøre mye av informasjonen her utdatert. Er det noe du ønsker å bidra med eller gjøre i mellomtiden kan man ta kontakt med designsystemet på slack.
+
+#
+
 Det oppfordres til at alle blir med og bidrar med nye moduler, og holder eksisterende moduler vedlike,
 slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de behov som man har i det enkelte prosjekt.
 
@@ -8,8 +12,8 @@ slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de be
 ```bash
 git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
-npm install
-npm start
+yarn boot
+yarn storybook
 ```
 
 [http://localhost:8080](http://localhost:8080) (port auto-incrementeres hvis den allerede er i bruk av en annen server)

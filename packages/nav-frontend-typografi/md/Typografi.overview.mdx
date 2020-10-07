@@ -1,0 +1,131 @@
+import Example from "../../../website/guideline-app/app/ui/components/example/Example";
+import {
+  Sidetittel,
+  Innholdstittel,
+  Systemtittel,
+  Undertittel,
+  Ingress,
+  Normaltekst,
+  EtikettLiten,
+  Element,
+  Feilmelding,
+  Undertekst,
+} from "./../";
+
+## Bruk av Typografi i prosjekter
+
+For å sikre at prosjektet ditt får riktig typografi bruker typografi-komponenten vår denne CSS-klassen fra `nav-frontend-typografi-style`.
+
+```less
+.app {
+  .typo-normal-mixin();
+  color: @navMorkGra;
+  font-family: @font-family;
+  line-height: @line-height-base;
+}
+```
+
+Det antas da at prosjektet er pakket inn under CSS-klassen `.app` å disse blir da lagt til der. Hvis dette ikke er tilfellet i prosjektet ditt,
+kan det være greit å legge til manuelt da man sikrer at hele prosjektet får riktig typografi.
+Dette kan gjøres ved å legge til
+
+```less
+@import (reference) "~nav-frontend-typografi-style/src/index.less";
+```
+
+i ønsket less fil og da legge til klassen `app` på elementet som pakker in prosjektet ditt.
+
+## Alle vekter
+
+<Example>
+  <Sidetittel>Sidetittel</Sidetittel>
+</Example>
+
+```jsx
+<Sidetittel>Sidetittel</Sidetittel>
+```
+
+<Example>
+  <Innholdstittel>Innholdstittel</Innholdstittel>
+</Example>
+
+```jsx
+<Innholdstittel>Innholdstittel</Innholdstittel>
+```
+
+<Example>
+  <Systemtittel>Systemtittel</Systemtittel>
+</Example>
+
+```jsx
+<Systemtittel>Systemtittel</Systemtittel>
+```
+
+<Example>
+  <Undertittel>Undertittel</Undertittel>
+</Example>
+
+```jsx
+<Undertittel>Undertittel</Undertittel>
+```
+
+<Example>
+  <Ingress>Ingress</Ingress>
+</Example>
+
+```jsx
+<Ingress>Ingress</Ingress>
+```
+
+<Example>
+  <Element>Element</Element>
+</Example>
+
+```jsx
+<Element>Element</Element>
+```
+
+<Example>
+  <Feilmelding>Feilmelding</Feilmelding>
+</Example>
+
+```jsx
+<Feilmelding>Feilmelding</Feilmelding>
+```
+
+<Example>
+  <Normaltekst>Normaltekst</Normaltekst>
+</Example>
+
+```jsx
+<Normaltekst>Normaltekst</Normaltekst>
+```
+
+<Example>
+  <EtikettLiten>EtikettLiten</EtikettLiten>
+</Example>
+
+```jsx
+<EtikettLiten>EtikettLiten</EtikettLiten>
+```
+
+<Example>
+  <Undertekst>Undertekst</Undertekst>
+</Example>
+
+```jsx
+<Undertekst>Undertekst</Undertekst>
+```
+
+## Selvbestemt HTML-tag
+
+Du kan selv bestemme hvilken HTML-tag de forskjellige typografi-vektene skal bruke. For eksempel kan du overstyre `h1`-defaulten for
+`Sidetittel` med `h4` slik:
+
+<Example>
+  <Sidetittel tag="h4">Sidetittel</Sidetittel>
+</Example>
+
+```jsx
+<Sidetittel tag="h4">Sidetittel</Sidetittel>
+```
