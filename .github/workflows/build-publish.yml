@@ -32,7 +32,10 @@ jobs:
           token: ${{secrets.GIT_REPO}}
       - uses: actions/setup-node@v1
         with:
-          node-version: 13
+          registry-url: https://registry.npmjs.org
+          node-version: 13 
+        env:
+            NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - run: yarn install --frozen-lockfile
       - run: yarn gulp:build-nodocs
       - run: git config --global user.email "ken.aleksander.johansen@nav.no"
@@ -40,9 +43,6 @@ jobs:
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-        env:
-          NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - run: npm whoami
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
       - run: yarn lerna publish from-package --yes
