@@ -52,6 +52,9 @@ jobs:
     if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+          token: ${{secrets.GIT_REPO}}
       - uses: actions/setup-node@v1
         with:
           node-version: 13
