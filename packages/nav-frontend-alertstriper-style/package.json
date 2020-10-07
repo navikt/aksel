@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-alertstriper-style",
-  "version": "2.0.19",
+  "version": "2.0.20",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -11,10 +11,10 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.3",
-    "nav-frontend-ikoner-assets": "^2.0.5",
-    "nav-frontend-paneler-style": "^0.3.22",
-    "nav-frontend-typografi-style": "^1.0.23",
+    "nav-frontend-core": "^5.0.4",
+    "nav-frontend-ikoner-assets": "^2.0.6",
+    "nav-frontend-paneler-style": "^0.3.23",
+    "nav-frontend-typografi-style": "^1.0.24",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel-style",
-  "version": "0.3.32",
+  "version": "0.3.33",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -16,9 +16,9 @@
     "nav-frontend-paneler-style": "^0.3.22"
   },
   "devDependencies": {
-    "nav-frontend-chevron-style": "^0.3.7",
-    "nav-frontend-core": "^5.0.3",
-    "nav-frontend-paneler-style": "^0.3.22",
+    "nav-frontend-chevron-style": "^0.3.8",
+    "nav-frontend-core": "^5.0.4",
+    "nav-frontend-paneler-style": "^0.3.23",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

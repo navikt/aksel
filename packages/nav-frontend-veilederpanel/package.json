@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-veilederpanel",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "main": "lib/veilederpanel.js",
   "types": "lib/veilederpanel.d.ts",
   "license": "MIT",
@@ -17,8 +17,8 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-veileder": "^2.0.22",
-    "nav-frontend-veilederpanel-style": "^0.0.30",
+    "nav-frontend-veileder": "^2.0.23",
+    "nav-frontend-veilederpanel-style": "^0.0.31",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   }
