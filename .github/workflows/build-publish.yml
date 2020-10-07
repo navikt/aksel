@@ -37,14 +37,15 @@ jobs:
       - run: yarn gulp:build-nodocs
       - run: git config --global user.email "ken.aleksander.johansen@nav.no"
       - run: git config --global user.name "navikt"
-      - run: |
-          git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          yarn lerna version patch --include-merged-tags --no-private --yes
-          yarn lerna publish from-package --yes
+      - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
+        env:
+          NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
         env:
           NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
-          NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
+      - run: npm whoami
+      - run: yarn lerna version patch --include-merged-tags --no-private --yes
+      - run: yarn lerna publish from-package --yes
 
   publish-pages:
     needs: publish-npm
