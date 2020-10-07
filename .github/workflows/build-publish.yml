@@ -40,7 +40,7 @@ jobs:
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
         env:
           NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - run: npm whoami
