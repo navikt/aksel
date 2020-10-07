@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-js-utils",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",

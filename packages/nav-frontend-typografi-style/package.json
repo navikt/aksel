@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-typografi-style",
-  "version": "1.0.24",
+  "version": "1.0.25",
   "main": "src/index.less",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
-    "nav-frontend-core": "^5.0.4"
+    "nav-frontend-core": "^5.0.5"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.3",
