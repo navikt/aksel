@@ -33,11 +33,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           registry-url: http://registry.npmjs.org
-          node-version: 13 
-      - name: Setup NPM
-        run: npm whoami
-        env:
-            NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
+          node-version: 13
       - run: yarn install --frozen-lockfile
       - run: yarn gulp:build-nodocs
       - run: git config --global user.email "ken.aleksander.johansen@nav.no"
