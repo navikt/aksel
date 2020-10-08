@@ -10,7 +10,5 @@ exports.onCreatePage = async ({ page, actions }) => {
     deletePage(page);
   };
 
-  if (frontmatterPath) {
-    makePage(frontmatterPath);
-  }
+  makePage(page.path);
 };

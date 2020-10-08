@@ -4,7 +4,7 @@ import { default as cl } from "classnames";
 
 import { Sidetittel } from "nav-frontend-typografi";
 import "./header.less";
-import { NAVLogo } from "../assets/svg";
+import { NAVLogo } from "../assets/images/svg";
 
 import { routingPaths } from "../util/routing";
 
