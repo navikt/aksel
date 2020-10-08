@@ -15,7 +15,23 @@ export const routingPaths = () => {
     }
   `);
 
-  const menuPaths = allSitePage.edges.map((edge) => edge.node.path);
+  const menuPaths = allSitePage.edges
+    .map((edge) => edge.node.path)
+    .filter((path) =>
+      ["", "components", "patterns", "resources", "accessibility"].includes(
+        path.replaceAll("/", "")
+      )
+    );
 
-  return { menuPaths };
+  const resourcePath = allSitePage.edges
+    .map((edge) => edge.node.path)
+    .filter((path) => path.startsWith("/resources/") && path !== "/resources/");
+
+  const languagePath = resourcePath.filter(
+    (path) =>
+      path.startsWith("/resources/language/") && path !== "/resources/language/"
+  );
+
+  console.log(resourcePath);
+  return { menuPaths, resourcePath, languagePath };
 };

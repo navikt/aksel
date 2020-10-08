@@ -15,6 +15,7 @@ import Sidebar from "../sidebar/Sidebar";
 import Main from "../main/Main";
 import Footer from "../footer/Footer";
 import "./layout.less";
+import LayoutPicker from "./layoutPicker";
 
 const Layout = ({ children, path }) => {
   const data = useStaticQuery(graphql`
@@ -46,7 +47,7 @@ const Layout = ({ children, path }) => {
           "dsportal--fullwidth": home,
         })}
       >
-        {children}
+        <LayoutPicker>{children}</LayoutPicker>
       </Main>
       {home ? null : <Sidebar className="dsportal__sidebar" />}
       <Footer className="dsportal__footer" />

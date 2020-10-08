@@ -9,6 +9,4 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(newPage);
     deletePage(page);
   };
-
-  makePage(page.path);
 };
