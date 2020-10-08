@@ -32,6 +32,5 @@ export const routingPaths = () => {
       path.startsWith("/resources/language/") && path !== "/resources/language/"
   );
 
-  console.log(resourcePath);
   return { menuPaths, resourcePath, languagePath };
 };

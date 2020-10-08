@@ -6,10 +6,7 @@ import { Sidetittel } from "nav-frontend-typografi";
 import "./header.less";
 import { NAVLogo } from "../assets/images/svg";
 
-import { routingPaths } from "../util/routing";
-
 const Header = ({ siteTitle, className = "" }) => {
-  console.log(JSON.stringify(routingPaths().menuPaths, null, 4));
   return (
     <header className={cl("header", className)}>
       <a href="#hovedinnhold" id="skip-link">

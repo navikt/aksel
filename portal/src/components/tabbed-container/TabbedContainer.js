@@ -1,5 +1,6 @@
 import React from "react";
 import Tabs from "nav-frontend-tabs";
+import { navigate } from "gatsby";
 
 class TabbedContainer extends React.Component {
   constructor(props) {
@@ -14,7 +15,9 @@ class TabbedContainer extends React.Component {
           <div className="tabsContainer__inner">
             <Tabs
               defaultAktiv={this.defaultActive}
-              onChange={(e, i) => this.changeTab(i)}
+              onChange={(e, i) =>
+                navigate(this.props.tabs[i].path, { replace: true })
+              }
               tabs={this.props.tabs.map((tab) => ({
                 label: tab.label,
                 key: tab.label,
@@ -22,7 +25,6 @@ class TabbedContainer extends React.Component {
             />
           </div>
         </div>
-        <this.state.activeContent {...this.props} />
       </React.Fragment>
     );
   }
