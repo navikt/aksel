@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { Link } from 'gatsby';
 import useKeypress from 'react-use-keypress';
 
 import classnames from "classnames";
 
-import { useMainMenuItems } from "../../useMenuItems";
+import Test, { useMainMenuItems } from "../../useMenuItems";
 import { Xknapp } from "nav-frontend-ikonknapper";
 
 import { GithubLogo } from "../assets/images/svg";
 
-import MobileNavMenuItem from "./MobileNavMenuItem";
 
 import "./styles.less";
 
@@ -19,6 +19,14 @@ const cls = (props, hidden) =>
     "mobile-nav--hidden": hidden,
   });
 
+const MobileNavMenuItem = ({ ...props }) => {
+  return (
+    <li className={classnames({ open: props.open })}>
+      <Link to={props.route.link}>{props.route.title}</Link>
+      {props.route.routes && [props.children]}
+    </li>
+  )
+}
 const MobileNav = ({ ...props }) => {
   const [hidden, setHidden] = useState(true);
   const lukkBtn = useRef();
@@ -35,7 +43,7 @@ const MobileNav = ({ ...props }) => {
   }, [props.open]);
 
   const handleKeyPress = (e) => {
-    
+
   };
 
   useKeypress('Escape', () => {
