@@ -24,25 +24,10 @@ const MobileNav = ({ ...props }) => {
   const bg = useRef();
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
-    window.addEventListener("click", handleClick);
-    return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-      window.removeEventListener("click", handleClick);
-    };
-  }, []);
-
-  useEffect(() => {
     if (props.open) {
-      window.clearInterval(timer.current);
-
       setHidden(false);
 
-      timer.current = null;
-
       ReactDOM.findDOMNode(lukkBtn.current).focus();
-    } else {
-      timer.current = window.setTimeout(() => setHidden(true), 200);
     }
   }, [props.open]);
 
@@ -62,7 +47,7 @@ const MobileNav = ({ ...props }) => {
     // const open =
     //   props.location.pathname.indexOf(route.path) !== -1 && route.routes;
     return (
-      <MobileNavMenuItem open={open} route={route} index={index} key={index}>
+      <MobileNavMenuItem open={false} route={route} index={index} key={index}>
         {route.routes && (
           <ul>
             {/* {route.routes

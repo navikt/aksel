@@ -12,21 +12,7 @@ class MobileNavToggle extends React.Component {
     this.state = {
       shadow: false,
     };
-
-    window.addEventListener("scroll", () => this.checkScroll());
   }
-
-  checkScroll = () => {
-    if (window.scrollY > 60) {
-      this.setState({
-        shadow: true,
-      });
-    } else {
-      this.setState({
-        shadow: false,
-      });
-    }
-  };
 
   render() {
     const { innerRef, ...rest } = this.props;
