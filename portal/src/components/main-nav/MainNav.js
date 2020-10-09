@@ -15,11 +15,7 @@ const MainNav = () => {
             .filter((item) => item.path && item.path !== "/new-project")
             .map((item, index) => (
               <li key={item.title}>
-                <Link
-                  exact={index === 0}
-                  activeClassName="active"
-                  to={item.path}
-                >
+                <Link activeClassName="active" to={item.path}>
                   {item.title}
                 </Link>
               </li>

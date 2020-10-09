@@ -5,10 +5,15 @@ module.exports = {
     author: `@navikt`,
   },
   plugins: [
-    `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
     `gatsby-plugin-transition-link`,
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        rehypePlugins: [require("rehype-toc")],
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
