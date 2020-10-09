@@ -18,7 +18,7 @@ import "./layout.less";
 import LayoutPicker from "./layoutPicker";
 import MdxWrapper from "./Mdxprovider";
 
-const Layout = ({ children, path, location, ...props }) => {
+const Layout = ({ children, path, location, pageResources, ...props }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -45,11 +45,14 @@ const Layout = ({ children, path, location, ...props }) => {
           "dsportal--fullwidth": home,
         })}
       >
-        <LayoutPicker location={location} {...props}>
-          <MdxWrapper element={children}></MdxWrapper>
-        </LayoutPicker>
+        {pageResources.component.isMDXComponent ? (
+          <LayoutPicker location={location} {...props}>
+            <MdxWrapper element={children}></MdxWrapper>
+          </LayoutPicker>
+        ) : (
+          <div>{children}</div>
+        )}
       </Main>
-      {home ? null : <Sidebar className="dsportal__sidebar" />}
     </div>
   );
 };
