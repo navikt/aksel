@@ -60,7 +60,6 @@ class TableOfContents extends React.Component {
   render() {
     const rootItems = this.findHeadlineChildren(undefined);
     if (!this.tree.length || this.tree.length < 2) return null;
-    console.log(this.props);
     return (
       <nav className="table-of-contents" aria-label="Innholdsfortegnelse">
         <Undertittel>Innhold:</Undertittel>
