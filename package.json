@@ -27,6 +27,7 @@
     "@typescript-eslint/parser": "^4.3.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "chromatic": "^5.2.0",
     "eslint": "^7.10.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -82,7 +83,8 @@
     "gulp:build": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --docs --ignoreErrors",
     "gulp:build-nodocs": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --ignoreErrors",
     "clean:lib": "node utilities/scripts/clean.js",
-    "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile"
+    "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile",
+    "chromatic": "npx chromatic --project-token x3xqdfgkujg"
   },
   "workspaces": [
     "website",
