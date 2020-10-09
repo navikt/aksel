@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PT from "prop-types";
 import { Feilmelding } from "nav-frontend-typografi";
 
 class SkjemaelementFeilmelding extends React.Component<

@@ -63,7 +63,6 @@ export class Checkbox extends React.Component<CheckboxProps, {}> {
   render() {
     const { className, label, id, feil, checkboxRef, ...other } = this.props;
     const inputId = id || guid();
-    const feilmeldingId = guid();
     // tslint:disable:react-a11y-role-has-required-aria-props
     return (
       <SkjemaGruppeFeilContext.Consumer>

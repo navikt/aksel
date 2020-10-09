@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import * as React from "react";
-import * as PT from "prop-types";
 import * as classnames from "classnames";
 
 import "nav-frontend-popover-style";
