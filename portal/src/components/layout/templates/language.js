@@ -3,8 +3,6 @@ import { Innholdstittel, Ingress } from "nav-frontend-typografi";
 
 import TabbedContainer from "../../tabbed-container/TabbedContainer";
 
-// import "./language/styles.less";
-
 const LanguagePage = ({ children, ...props }) => {
   // TODO: Better handling of redirect
   // useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import TableOfContents from "../table-of-contents/TableOfContents";
 // import { preToCodeBlock } from 'mdx-utils';
@@ -11,75 +11,71 @@ import {
 import Lenke from "nav-frontend-lenker";
 
 import "./layout.less";
+import { graphql, useStaticQuery } from "gatsby";
 
 const MdxWrapper = ({ element, ...props }) => {
-  let headlines = [];
-
+  const { allMdx } = useStaticQuery(graphql`
+    query mdxQuery {
+      allMdx {
+        nodes {
+          slug
+          headings {
+            value
+            depth
+          }
+        }
+      }
+    }
+  `);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [ready, setReady] = useState(false);
-  const [headline, setHeadline] = useState([]);
-
-  const ref = useRef([]);
+  const [headlines, setHeadlines] = useState([]);
   // const [headlines, setHeadlines] = useState([]);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     setReady(true);
+    setHeadlines(getContent());
   }, []);
 
-  useEffect(() => {
-    console.log(ref.current);
-  });
+  const genId = (content) => content.toLowerCase().split(" ").join("");
 
-  const generateHeadlineID = (content) =>
-    content.toLowerCase().split(" ").join("-");
-
-  const registerHeadline = (type, title) => {
-    const id = generateHeadlineID(title.children);
-
-    if (ready) return id;
-    headlines.push({
-      id,
-      parent: undefined,
-      type: parseInt(type.substring(2, 1), 10),
-      title: title.children,
-    });
-
-    ref.current = [
-      ...ref.current,
-      {
-        id,
+  const getContent = () => {
+    const path = element.props.path.replace(/^\/+|\/+$/g, "");
+    const headings = allMdx.nodes.filter((node) => node.slug === path);
+    return headings[0].headings.map((head) => {
+      return {
+        id: genId(head.value),
         parent: undefined,
-        type: parseInt(type.substring(2, 1), 10),
-        title: title.children,
-      },
-    ];
-
-    return id;
+        type: head.depth,
+        title: head.value,
+      };
+    });
   };
 
   const components = {
     h1: (props) => {
-      const id = generateHeadlineID(props.children);
+      const id = genId(props.children);
       return <Innholdstittel id={id} {...props} />;
     },
     h2: (props) => {
-      const id = registerHeadline("h2", props);
+      const id = genId(props.children);
       return <Systemtittel id={id} {...props} />;
     },
     h3: (props) => {
-      const id = registerHeadline("h3", props);
+      const id = genId(props.children);
       return <Undertittel id={id} {...props} tag="h3" />;
     },
     a: Lenke,
   };
+  getContent();
   return (
     <div className="mdx-content">
       <section className="section">
-        <MDXProvider components={components}>{element}</MDXProvider>
+        <MDXProvider components={{ ...components }}>{element}</MDXProvider>
       </section>
       {ready && (
         <div id={element.props.path}>
-          <TableOfContents headlines={ref.current} />
+          <TableOfContents headlines={headlines} />
         </div>
       )}
     </div>

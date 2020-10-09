@@ -48,6 +48,7 @@ class TableOfContents extends React.Component {
 
   renderTOCItem = (headline) => {
     const children = this.findHeadlineChildren(headline);
+
     return (
       <li key={headline.id}>
         <a href={`#${headline.id}`}>{headline.title}</a>
@@ -59,6 +60,7 @@ class TableOfContents extends React.Component {
   render() {
     const rootItems = this.findHeadlineChildren(undefined);
     if (!this.tree.length || this.tree.length < 2) return null;
+    console.log(this.props);
     return (
       <nav className="table-of-contents" aria-label="Innholdsfortegnelse">
         <Undertittel>Innhold:</Undertittel>

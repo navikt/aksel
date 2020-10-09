@@ -5,6 +5,7 @@ module.exports = {
     author: `@navikt`,
   },
   plugins: [
+    `gatsby-plugin-mdx`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
     `gatsby-plugin-transition-link`,
@@ -29,6 +30,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `src/pages`,
+      },
+    },
+    {
       resolve: "gatsby-plugin-page-creator",
       options: {
         name: `komponenter`,
@@ -45,12 +52,6 @@ module.exports = {
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve(`./src/components/layout/layout.tsx`),
-      },
-    },
-    {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        extensions: [`.mdx`, `.md`],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
