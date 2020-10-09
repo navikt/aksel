@@ -2,14 +2,14 @@ import React from "react";
 import { Link } from "gatsby";
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Undertittel } from "nav-frontend-typografi/lib";
-import useMenuItems from "../useMenuItems";
+import { usePageMenu } from "../useSiteStructure";
 
 const NavPage = ({ location }) => {
-  const menuItems = useMenuItems(location);
+  const menu = usePageMenu(location);
 
   return (
     <nav className="catalog" aria-labelledby="left-navigation-title">
-      {menuItems.map(({ link, title }, index) => (
+      {menu.map(({ link, title }, index) => (
         <LenkepanelBase
           key={index}
           linkCreator={(props) => (

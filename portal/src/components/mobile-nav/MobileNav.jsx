@@ -1,15 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Link } from 'gatsby';
-import useKeypress from 'react-use-keypress';
+import { Link } from "gatsby";
+import useKeypress from "react-use-keypress";
 
 import classnames from "classnames";
 
-import Test, { useMainMenuItems } from "../../useMenuItems";
+import { useMainMenu } from "../../useSiteStructure";
 import { Xknapp } from "nav-frontend-ikonknapper";
 
 import { GithubLogo } from "../assets/images/svg";
-
 
 import "./styles.less";
 
@@ -25,15 +24,14 @@ const MobileNavMenuItem = ({ ...props }) => {
       <Link to={props.route.link}>{props.route.title}</Link>
       {props.route.routes && [props.children]}
     </li>
-  )
-}
+  );
+};
 
 const MobileNav = ({ ...props }) => {
   const [hidden, setHidden] = useState(true);
   const lukkBtn = useRef();
   const bg = useRef();
   const timer = useRef();
-
 
   // Timer is needed here to wait for transition animation to finish
   useEffect(() => {
@@ -50,7 +48,7 @@ const MobileNav = ({ ...props }) => {
     }
   }, [props.open]);
 
-  useKeypress('Escape', () => {
+  useKeypress("Escape", () => {
     props.open && props.toggle();
   });
 
@@ -76,18 +74,21 @@ const MobileNav = ({ ...props }) => {
     );
   };
 
-  const menuItems = useMainMenuItems();
+  const menu = useMainMenu();
 
   return (
     <div
-
       className={cls(props, hidden)}
       aria-hidden={hidden}
       onClick={(e) => handleClick(e)}
     >
-      <nav className="mobile-nav__drawer" aria-label="main mobile" ref={(node) => {
-        bg.current = node;
-      }}>
+      <nav
+        className="mobile-nav__drawer"
+        aria-label="main mobile"
+        ref={(node) => {
+          bg.current = node;
+        }}
+      >
         <Xknapp
           className="mobile-nav__close-btn"
           onClick={props.toggle}
@@ -98,7 +99,7 @@ const MobileNav = ({ ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
-          {menuItems.map((route, index) => renderRoute(route, index))}
+          {menu.map((route, index) => renderRoute(route, index))}
           <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"

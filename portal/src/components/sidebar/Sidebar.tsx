@@ -1,10 +1,10 @@
 import { Link } from "gatsby";
 import React from "react";
-import useMenuItems from "../../useMenuItems";
+import { usePageMenu } from "../../useSiteStructure";
 import "./styles.less";
 
 const Sidebar = ({ location, className = "" }) => {
-  const menuItems = useMenuItems(location);
+  const menu = usePageMenu(location);
 
   return (
     <div className={className}>
@@ -13,7 +13,7 @@ const Sidebar = ({ location, className = "" }) => {
           Ressurser
         </h2>
         <ul className="nav-list">
-          {menuItems.map(({ link, title }, index) => (
+          {menu.map(({ link, title }, index) => (
             <li key={index}>
               <Link to={link} partiallyActive activeClassName="active">
                 {title}

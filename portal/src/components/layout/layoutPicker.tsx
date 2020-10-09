@@ -33,7 +33,11 @@ const LayoutPicker = ({ location, ...props }) => {
     default:
       break;
   }
-  return Component ? <Component {...props} /> : props.children;
+  return Component ? (
+    <Component location={location} {...props} />
+  ) : (
+    props.children
+  );
 };
 
 export default LayoutPicker;

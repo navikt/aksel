@@ -1,18 +1,18 @@
 import React from "react";
 import { Link } from "gatsby";
 import { GithubLogo } from "../assets/images/svg";
-import { useMainMenuItems } from "../../useMenuItems";
+import { useMainMenu } from "../../useSiteStructure";
 
 import "./styles.less";
 
 const MainNav = () => {
-  const menuItems = useMainMenuItems();
+  const menu = useMainMenu();
 
   return (
     <nav className="mainNav" aria-label="Hoved">
       <div className="mainNav__wrapper">
         <ul>
-          {menuItems.map(({ link, title }, index) => (
+          {menu.map(({ link, title }, index) => (
             <li key={title}>
               <Link
                 partiallyActive={link !== "/"}
