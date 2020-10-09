@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as PT from "prop-types";
 import * as classnames from "classnames";
 import { guid, keyCodes } from "nav-frontend-js-utils";
 import Ikon from "nav-frontend-ikoner-assets";

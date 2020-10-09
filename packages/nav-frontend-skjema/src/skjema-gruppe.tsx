@@ -3,7 +3,6 @@ import * as React from "react";
 import * as classNames from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import SkjemaelementFeilmelding from "./skjemaelement-feilmelding";
-import { Input } from ".";
 import "nav-frontend-skjema-style";
 
 const cls = (className) => classNames("skjemagruppe", className);

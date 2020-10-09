@@ -5,11 +5,9 @@ import { Knapp } from "nav-frontend-knapper";
 import Modal from "./";
 
 export default class ModalEksempel extends Component {
-  componentWillMount() {
-    this.state = {
-      modalIsOpen: false,
-    };
-  }
+  state = {
+    modalIsOpen: false,
+  };
 
   openModal() {
     this.setState({ modalIsOpen: true });
