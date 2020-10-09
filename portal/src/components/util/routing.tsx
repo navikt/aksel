@@ -15,13 +15,20 @@ export const routingPaths = () => {
     }
   `);
 
-  const menuPaths = allSitePage.edges
-    .map((edge) => edge.node.path)
-    .filter((path) =>
-      ["", "components", "patterns", "resources", "accessibility"].includes(
-        path.replaceAll("/", "")
-      )
-    );
+  // const menuPaths = allSitePage.edges
+  //   .map((edge) => edge.node.path)
+  //   .filter((path) =>
+  //     ["", "components", "patterns", "resources", "accessibility"].includes(
+  //       path.replaceAll("/", "")
+  //     )
+  //   );
+  const menuPaths = [
+    { path: "/", title: "Kom i gang" },
+    { path: "/components/", title: "Komponenter" },
+    { path: "/patterns/", title: "Mønster" },
+    { path: "/resources/", title: "Ressurser" },
+    { path: "/accessibility/", title: "Tilgjengelighet" },
+  ];
 
   const resourcePath = allSitePage.edges
     .map((edge) => edge.node.path)

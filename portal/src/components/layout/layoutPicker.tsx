@@ -1,6 +1,5 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { routingPaths } from "../util/routing";
-import path from "path";
 import LanguagePage from "./templates/language";
 
 const fixPath = (path) => (path.endsWith("/") ? path : path + "/");

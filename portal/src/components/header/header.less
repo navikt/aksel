@@ -1,21 +1,35 @@
 @import (reference) "nav-frontend-core/less/_variabler";
 @import (reference) "nav-frontend-core/less/_mixins";
+@import (reference) "../assets/styles/mixins";
 
 .header {
+  background: white;
+  line-height: auto;
+  border-bottom: 4px solid @navLysGra;
   z-index: 200;
 
   &__content {
-    padding: 0 0 0 2rem;
+    padding: 1.5rem 2rem 0;
 
     .header__logo {
-      display: flex;
-      align-items: center;
+      display: inline-block;
+      position: relative;
       text-decoration: none;
       color: @navMorkGra;
 
+      svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
       .header__title {
-        font-size: 2rem;
-        padding-left: 1.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        padding-top: 1rem;
+        padding-left: 7rem;
+        padding-bottom: 1rem;
+        margin: 0;
       }
 
       &:hover {

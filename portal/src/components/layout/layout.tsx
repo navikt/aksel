@@ -38,11 +38,8 @@ const Layout = ({ children, path, location, ...props }) => {
   }, [path]);
 
   return (
-    <div className="app dsportal">
-      <Header
-        className="dsportal__header"
-        siteTitle={data.site.siteMetadata?.title || `Title`}
-      />
+    <div className="app">
+      <Header />
       <Main
         className={cl("dsportal__main", {
           "dsportal--fullwidth": home,
