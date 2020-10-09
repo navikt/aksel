@@ -15,7 +15,9 @@ const Sidebar = ({ location, className = "" }) => {
         <ul className="nav-list">
           {menuItems.map(({ link, title }, index) => (
             <li key={index}>
-              <Link to={link}>{title}</Link>
+              <Link to={link} partiallyActive activeClassName="active">
+                {title}
+              </Link>
             </li>
           ))}
         </ul>
