@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
+import useKeypress from 'react-use-keypress';
+
 import classnames from "classnames";
 
 import { useMainMenuItems } from "../../useMenuItems";
@@ -19,7 +21,6 @@ const cls = (props, hidden) =>
 
 const MobileNav = ({ ...props }) => {
   const [hidden, setHidden] = useState(true);
-  const timer = useRef(null);
   const lukkBtn = useRef();
   const bg = useRef();
 
@@ -28,17 +29,21 @@ const MobileNav = ({ ...props }) => {
       setHidden(false);
 
       ReactDOM.findDOMNode(lukkBtn.current).focus();
+    } else {
+      setHidden(true);
     }
   }, [props.open]);
 
   const handleKeyPress = (e) => {
-    if (e.keyCode === 27 && props.open && !timer.current) {
-      props.toggle();
-    }
+    
   };
 
+  useKeypress('Escape', () => {
+    props.open && props.toggle();
+  });
+
   const handleClick = (e) => {
-    if (!hidden && e.target === bg.current && !timer.current) {
+    if (!hidden && e.target !== bg.current) {
       props.toggle();
     }
   };
@@ -63,13 +68,14 @@ const MobileNav = ({ ...props }) => {
 
   return (
     <div
-      ref={(node) => {
-        bg.current = node;
-      }}
+
       className={cls(props, hidden)}
       aria-hidden={hidden}
+      onClick={(e) => handleClick(e)}
     >
-      <nav className="mobile-nav__drawer" aria-label="main mobile">
+      <nav className="mobile-nav__drawer" aria-label="main mobile" ref={(node) => {
+        bg.current = node;
+      }}>
         <Xknapp
           className="mobile-nav__close-btn"
           onClick={props.toggle}

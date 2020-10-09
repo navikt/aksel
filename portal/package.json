@@ -33,6 +33,7 @@
     "react-helmet": "^6.1.0",
     "react-media": "^1.10.0",
     "react-responsive": "^8.1.0",
+    "react-use-keypress": "^1.0.1",
     "rehype-toc": "^3.0.2"
   },
   "devDependencies": {
