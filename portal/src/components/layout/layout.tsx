@@ -1,64 +1,38 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useStaticQuery, graphql } from "gatsby";
+import React from "react";
 import { default as cl } from "classnames";
 
 import Header from "../header/header";
 import Sidebar from "../sidebar/Sidebar";
 import Main from "../main/Main";
-import Footer from "../footer/Footer";
-import "./layout.less";
 import LayoutPicker from "./layoutPicker";
 import MdxWrapper from "./Mdxprovider";
 
-const Layout = ({ children, path, location, pageResources, ...props }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
+import "./layout.less";
 
-  // TODO: How to handle initial load? cant assume that user will enter from homepage
-  // ! Seems like layout is re-rendered for each page?
-  const [home, setHome] = useState(true);
-
-  useEffect(() => {
-    setHome(path === "/");
-  }, [path]);
-
-  return (
-    <div className="app">
+const Layout = ({ children, path, location, pageResources, ...props }) => (
+  <div id="app">
+    <div className="mainWrapper">
       <Header />
-      <Main
-        className={cl("dsportal__main", {
-          "dsportal--fullwidth": home,
-        })}
-      >
-        {pageResources.component.isMDXComponent ? (
-          <LayoutPicker location={location} {...props}>
-            <MdxWrapper element={children}></MdxWrapper>
-          </LayoutPicker>
-        ) : (
-          <div>{children}</div>
+      <div className="contentWrapper">
+        {path !== "/" && (
+          <Sidebar className="leftNavigation" location={location} />
         )}
-      </Main>
+        <Main
+          className={cl("mainContent", {
+            "dsportal--fullwidth": path === "/",
+          })}
+        >
+          {pageResources.component.isMDXComponent ? (
+            <LayoutPicker location={location} {...props}>
+              <MdxWrapper element={children}></MdxWrapper>
+            </LayoutPicker>
+          ) : (
+            <div>{children}</div>
+          )}
+        </Main>
+      </div>
     </div>
-  );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  </div>
+);
 
 export default Layout;
