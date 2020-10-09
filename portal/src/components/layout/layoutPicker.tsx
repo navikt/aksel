@@ -3,18 +3,19 @@ import { routingPaths } from "../util/routing";
 import path from "path";
 import LanguagePage from "./templates/language";
 
+const fixPath = (path) => (path.endsWith("/") ? path : path + "/");
+
 const LayoutPicker = ({ location, ...props }) => {
   const { languagePath } = routingPaths();
   let Component;
   switch (true) {
-    case languagePath.includes(path.normalize(location.pathname)):
+    case languagePath.includes(fixPath(location.pathname)):
       Component = LanguagePage;
       break;
     default:
-      Component = Fragment;
       break;
   }
-  return <Component {...props} />;
+  return Component ? <Component {...props} /> : props.children;
 };
 
 export default LayoutPicker;
