@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { routingPaths } from "../util/routing";
 
-import LanguagePage from "../../pages/resources/language";
+import LanguagePage from "./templates/language";
 
 const LayoutPicker = ({ location, ...props }) => {
   const { languagePath } = routingPaths();
@@ -14,7 +14,6 @@ const LayoutPicker = ({ location, ...props }) => {
       Component = Fragment;
       break;
   }
-
   return <Component {...props} />;
 };
 

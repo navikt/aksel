@@ -16,6 +16,7 @@ import Main from "../main/Main";
 import Footer from "../footer/Footer";
 import "./layout.less";
 import LayoutPicker from "./layoutPicker";
+import MdxWrapper from "./Mdxprovider";
 
 const Layout = ({ children, path, location, ...props }) => {
   const data = useStaticQuery(graphql`
@@ -48,7 +49,7 @@ const Layout = ({ children, path, location, ...props }) => {
         })}
       >
         <LayoutPicker location={location} {...props}>
-          {children}
+          <MdxWrapper element={children}></MdxWrapper>
         </LayoutPicker>
       </Main>
       {home ? null : <Sidebar className="dsportal__sidebar" />}

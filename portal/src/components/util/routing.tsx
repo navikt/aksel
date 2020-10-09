@@ -25,11 +25,10 @@ export const routingPaths = () => {
 
   const resourcePath = allSitePage.edges
     .map((edge) => edge.node.path)
-    .filter((path) => path.startsWith("/resources/") && path !== "/resources/");
+    .filter((path) => path.startsWith("/resources/"));
 
-  const languagePath = resourcePath.filter(
-    (path) =>
-      path.startsWith("/resources/language/") && path !== "/resources/language/"
+  const languagePath = resourcePath.filter((path) =>
+    path.startsWith("/resources/language/")
   );
 
   return { menuPaths, resourcePath, languagePath };

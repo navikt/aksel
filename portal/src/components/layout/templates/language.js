@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-import { navigate } from "gatsby";
+import React from "react";
 import { Innholdstittel, Ingress } from "nav-frontend-typografi";
 
-import TabbedContainer from "../../components/tabbed-container/TabbedContainer";
+import TabbedContainer from "../../tabbed-container/TabbedContainer";
 
-import "./language/styles.less";
+// import "./language/styles.less";
 
 const LanguagePage = ({ children, ...props }) => {
   // TODO: Better handling of redirect
@@ -15,7 +14,7 @@ const LanguagePage = ({ children, ...props }) => {
   const tabs = [
     {
       label: "Prinsipper",
-      path: "/resources/language/principles/",
+      path: "/resources/language/",
     },
     {
       label: "Skriveråd",
