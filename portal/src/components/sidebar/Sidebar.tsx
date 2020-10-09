@@ -1,34 +1,10 @@
-import { graphql, Link, useStaticQuery } from "gatsby";
+import { Link } from "gatsby";
 import React from "react";
-
+import useMenuItems from "../../useMenuItems";
 import "./styles.less";
 
 const Sidebar = ({ location, className = "" }) => {
-  const sites = useStaticQuery(graphql`
-    query AllMdx {
-      allMdx {
-        edges {
-          node {
-            slug
-            frontmatter {
-              title
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  const menu = sites.allMdx.edges
-    .filter(
-      (edge) =>
-        edge.node.slug.split("/").length === 2 &&
-        edge.node.slug.split("/")[0].startsWith(location.pathname.split("/")[1])
-    )
-    .map((edge) => ({
-      link: `/${edge.node.slug}`,
-      title: edge.node.frontmatter.title,
-    }));
+  const menuItems = useMenuItems(location);
 
   return (
     <div className={className}>
@@ -37,9 +13,11 @@ const Sidebar = ({ location, className = "" }) => {
           Ressurser
         </h2>
         <ul className="nav-list">
-          {menu.map(({ link, title }) => (
-            <li>
-              <Link to={link}>{title}</Link>
+          {menuItems.map(({ link, title }, index) => (
+            <li key={index}>
+              <Link to={link} partiallyActive activeClassName="active">
+                {title}
+              </Link>
             </li>
           ))}
         </ul>
