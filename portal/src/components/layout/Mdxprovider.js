@@ -43,6 +43,8 @@ const MdxWrapper = ({ element, ...props }) => {
   const getContent = () => {
     const path = element.props.path.replace(/^\/+|\/+$/g, "");
     const headings = allMdx.nodes.filter((node) => node.slug === path);
+    if (headings.length === 0) return undefined;
+
     return headings[0].headings.map((head) => {
       return {
         id: genId(head.value),
@@ -74,7 +76,7 @@ const MdxWrapper = ({ element, ...props }) => {
       <section className="section">
         <MDXProvider components={{ ...components }}>{element}</MDXProvider>
       </section>
-      {ready && (
+      {ready && headlines && (
         <div id={element.props.path}>
           <TableOfContents headlines={headlines} />
         </div>
