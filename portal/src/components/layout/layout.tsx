@@ -22,7 +22,7 @@ const Layout = ({ children, path, location, pageResources, ...props }) => (
             "dsportal--fullwidth": path === "/",
           })}
         >
-          {pageResources.component.isMDXComponent ? (
+          {pageResources?.component?.isMDXComponent ? (
             <LayoutPicker location={location} {...props}>
               <MdxWrapper element={children}></MdxWrapper>
             </LayoutPicker>
