@@ -1,11 +1,30 @@
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import { routingPaths } from "../util/routing";
 import LanguagePage from "./templates/language";
 
 const fixPath = (path) => (path.endsWith("/") ? path : path + "/");
 
 const LayoutPicker = ({ location, ...props }) => {
-  const { languagePath } = routingPaths();
+  const { allSitePage } = useStaticQuery(graphql`
+    query MyQuery {
+      allSitePage {
+        edges {
+          node {
+            path
+            componentPath
+          }
+        }
+      }
+    }
+  `);
+  const resourcePath = allSitePage.edges
+    .map((edge) => edge.node.path)
+    .filter((path) => path.startsWith("/resources/"));
+
+  const languagePath = resourcePath.filter((path) =>
+    path.startsWith("/resources/language/")
+  );
+
   let Component;
   switch (true) {
     case languagePath.includes(fixPath(location.pathname)):
