@@ -35,6 +35,7 @@ const MdxWrapper = ({ element, ...props }) => {
   useEffect(() => {
     setReady(true);
     setHeadlines(getContent());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const genId = (content) => content.toLowerCase().split(" ").join("");
