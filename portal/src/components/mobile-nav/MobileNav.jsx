@@ -27,24 +27,28 @@ const MobileNavMenuItem = ({ ...props }) => {
     </li>
   )
 }
+
 const MobileNav = ({ ...props }) => {
   const [hidden, setHidden] = useState(true);
   const lukkBtn = useRef();
   const bg = useRef();
+  const timer = useRef();
 
+
+  // Timer is needed here to wait for transition animation to finish
   useEffect(() => {
     if (props.open) {
+      clearTimeout(timer.current);
+      timer.current = null;
       setHidden(false);
 
       ReactDOM.findDOMNode(lukkBtn.current).focus();
     } else {
-      setHidden(true);
+      timer.current = setTimeout(() => {
+        setHidden(true);
+      }, 200);
     }
   }, [props.open]);
-
-  const handleKeyPress = (e) => {
-
-  };
 
   useKeypress('Escape', () => {
     props.open && props.toggle();
