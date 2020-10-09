@@ -19,7 +19,7 @@ class MobileNavMenuItem extends React.Component {
   render() {
     return (
       <li className={classnames({ open: this.props.open })}>
-        <Link to={this.props.route.path}>{this.props.route.title}</Link>
+        <Link to={this.props.route.link}>{this.props.route.title}</Link>
         {this.props.route.routes && [this.props.children]}
       </li>
     );

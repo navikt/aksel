@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import classnames from "classnames";
 
-import { routingPaths } from "../util/routing";
+import { useMainMenuItems } from "../../useMenuItems";
 import { Xknapp } from "nav-frontend-ikonknapper";
 
 import { GithubLogo } from "../assets/images/svg";
@@ -47,7 +47,7 @@ const MobileNav = ({ ...props }) => {
     // const open =
     //   props.location.pathname.indexOf(route.path) !== -1 && route.routes;
     return (
-      <MobileNavMenuItem open={false} route={route} index={index} key={index}>
+      <MobileNavMenuItem route={route} index={index} key={index}>
         {route.routes && (
           <ul>
             {/* {route.routes
@@ -59,7 +59,7 @@ const MobileNav = ({ ...props }) => {
     );
   };
 
-  const { menuPaths } = routingPaths();
+  const menuItems = useMainMenuItems();
 
   return (
     <div
@@ -80,9 +80,7 @@ const MobileNav = ({ ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
-          {menuPaths
-            .filter((route) => route.path)
-            .map((route, index) => renderRoute(route, index))}
+          {menuItems.map((route, index) => renderRoute(route, index))}
           <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"

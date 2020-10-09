@@ -1,29 +1,28 @@
 import React from "react";
 import { Link } from "gatsby";
-import { routingPaths } from "../util/routing";
 import { GithubLogo } from "../assets/images/svg";
+import { useMainMenuItems } from "../../useMenuItems";
 
 import "./styles.less";
 
 const MainNav = () => {
-  const { menuPaths } = routingPaths();
+  const menuItems = useMainMenuItems();
+
   return (
     <nav className="mainNav" aria-label="Hoved">
       <div className="mainNav__wrapper">
         <ul>
-          {menuPaths
-            .filter((item) => item.path && item.path !== "/new-project")
-            .map((item, index) => (
-              <li key={item.title}>
-                <Link
-                  partiallyActive={item.path !== "/"}
-                  activeClassName="active"
-                  to={item.path}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
+          {menuItems.map(({ link, title }, index) => (
+            <li key={title}>
+              <Link
+                partiallyActive={link !== "/"}
+                activeClassName="active"
+                to={link}
+              >
+                {title}
+              </Link>
+            </li>
+          ))}
           <div style={{ flexGrow: 1 }} />
           <li>
             <a
