@@ -50,7 +50,6 @@ const Layout = ({ children, path, location, ...props }) => {
         </LayoutPicker>
       </Main>
       {home ? null : <Sidebar className="dsportal__sidebar" />}
-      <Footer className="dsportal__footer" />
     </div>
   );
 };
