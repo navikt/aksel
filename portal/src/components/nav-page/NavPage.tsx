@@ -1,17 +1,14 @@
 import React from "react";
 import { Link } from "gatsby";
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
-import { Sidetittel, Undertittel } from "nav-frontend-typografi";
-import { usePageMenu, usePageTitle } from "../../useSiteStructure";
-import "./styles.less";
+import { Undertittel } from "nav-frontend-typografi";
+import { usePageMenu } from "../../useSiteStructure";
 
 const NavPage = ({ location }) => {
-  const title = usePageTitle(location);
   const menu = usePageMenu(location);
 
   return (
     <>
-      <Sidetittel>{title}</Sidetittel>
       <nav className="catalog" aria-labelledby="left-navigation-title">
         {menu.map(({ link, title }, index) => (
           <LenkepanelBase

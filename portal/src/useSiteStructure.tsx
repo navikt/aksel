@@ -22,6 +22,18 @@ const usePages = () =>
     link: `/${edge.node.slug}`,
   }));
 
+export const useBreadcrumb = (location) => {
+  const pages = usePages();
+
+  return location.pathname
+    .replace(/^\//, "")
+    .replace(/\/$/, "")
+    .split("/")
+    .slice(0, 2)
+    .map((_, i, a) => a.slice(0, i + 1).join("/"))
+    .map((slug) => pages.find((page) => page.slug === slug));
+};
+
 export const useMainMenu = () =>
   usePages().filter(
     ({ rank, slug }) => rank !== null && slug.split("/").length === 1
@@ -34,10 +46,13 @@ export const usePageMenu = (location) =>
       slug.split("/")[0] === location.pathname.split("/")[1]
   );
 
-export const usePageTitle = (location) =>
+export const useNavigationPage = (location) =>
   usePages().find(
-    ({ link }) => link === location.pathname || `${link}/` === location.pathname
-  )?.title;
+    ({ slug, link }) =>
+      slug !== "" &&
+      slug.split("/").length === 1 &&
+      location.pathname.startsWith(link)
+  );
 
 export const useContentPage = (location) => {
   const pages = usePages();

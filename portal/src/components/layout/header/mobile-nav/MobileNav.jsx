@@ -76,9 +76,8 @@ const MobileNav = ({ ...props }) => {
         </Xknapp>
         <ul className="nav-list">
           {menu.map((route) => (
-            <li>
+            <li key={route.title}>
               <Link
-                key={route.title}
                 tabIndex={hidden ? -1 : 0}
                 activeClassName="active"
                 to={route.link}

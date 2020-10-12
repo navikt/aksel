@@ -333,3 +333,33 @@ p,
     display: none;
   }
 }
+
+.breadcrumbs {
+  display: none;
+  background: #f4f4f4;
+  padding: 1rem 3rem;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      display: inline;
+
+      .breadcrumbs__divider {
+        display: inline-block;
+        margin: 0 0.5rem;
+        opacity: 0.25;
+      }
+    }
+  }
+
+  @media (max-width: 1094px) {
+    display: block;
+  }
+
+  @media (max-width: 550px) {
+    padding: 1rem 1.5rem;
+  }
+}
