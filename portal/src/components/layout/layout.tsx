@@ -1,9 +1,9 @@
 import React from "react";
 import { default as cl } from "classnames";
 
-import Header from "../header/header";
-import Sidebar from "../sidebar/Sidebar";
-import Main from "../main/Main";
+import Header from "./header/header";
+import Sidebar from "./sidebar/Sidebar";
+import Main from "./main/Main";
 import LayoutPicker from "./layoutPicker";
 import MdxWrapper from "./Mdxprovider";
 

@@ -5,10 +5,10 @@ import useKeypress from "react-use-keypress";
 
 import classnames from "classnames";
 
-import { useMainMenu } from "../../useSiteStructure";
+import { useMainMenu } from "../../../../useSiteStructure";
 import { Xknapp } from "nav-frontend-ikonknapper";
 
-import { GithubLogo } from "../assets/images/svg";
+import { GithubLogo } from "../../../assets/images/svg";
 
 import "./styles.less";
 
@@ -21,7 +21,13 @@ const cls = (props, hidden) =>
 const MobileNavMenuItem = ({ ...props }) => {
   return (
     <li className={classnames({ open: props.open })}>
-      <Link tabIndex={props.hidden ? -1 : 0} activeClassName="active" to={props.route.link}>{props.route.title}</Link>
+      <Link
+        tabIndex={props.hidden ? -1 : 0}
+        activeClassName="active"
+        to={props.route.link}
+      >
+        {props.route.title}
+      </Link>
       {props.route.routes && [props.children]}
     </li>
   );
@@ -62,7 +68,12 @@ const MobileNav = ({ ...props }) => {
     // const open =
     //   props.location.pathname.indexOf(route.path) !== -1 && route.routes;
     return (
-      <MobileNavMenuItem hidden={hidden} route={route} index={index} key={index}>
+      <MobileNavMenuItem
+        hidden={hidden}
+        route={route}
+        index={index}
+        key={index}
+      >
         {route.routes && (
           <ul>
             {/* {route.routes

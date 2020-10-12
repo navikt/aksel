@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
-import { GithubLogo } from "../assets/images/svg";
-import { useMainMenu } from "../../useSiteStructure";
+import { GithubLogo } from "../../../assets/images/svg";
+import { useMainMenu } from "../../../../useSiteStructure";
 
 import "./styles.less";
 

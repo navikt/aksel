@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import React from "react";
-import { usePageMenu } from "../../useSiteStructure";
+import { usePageMenu } from "../../../useSiteStructure";
 import "./styles.less";
 
 const Sidebar = ({ location, className = "" }) => {
