@@ -3,10 +3,8 @@ import { Innholdstittel, Ingress } from "nav-frontend-typografi";
 import TabbedContainer from "./TabbedContainer";
 import { useContentPage } from "../../useSiteStructure";
 
-const fixPath = (path) => (path.endsWith("/") ? path : path + "/");
-
 const LayoutPicker = (props) => {
-  const page = useContentPage(location);
+  const page = useContentPage(props.location);
 
   if (page === undefined) {
     return props.children;
