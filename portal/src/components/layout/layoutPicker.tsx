@@ -1,6 +1,7 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import LanguagePage from "./templates/language";
+import ColorsPage from "./templates/colors";
 
 const fixPath = (path) => (path.endsWith("/") ? path : path + "/");
 
@@ -24,11 +25,17 @@ const LayoutPicker = ({ location, ...props }) => {
   const languagePath = resourcePath.filter((path) =>
     path.startsWith("/resources/language/")
   );
+  const colorsPath = resourcePath.filter((path) =>
+    path.startsWith("/resources/colors/")
+  );
 
   let Component;
   switch (true) {
     case languagePath.includes(fixPath(location.pathname)):
       Component = LanguagePage;
+      break;
+    case colorsPath.includes(fixPath(location.pathname)):
+      Component = ColorsPage;
       break;
     default:
       break;

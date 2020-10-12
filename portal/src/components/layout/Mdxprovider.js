@@ -1,5 +1,6 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
+import Codeblock, { InlineCode } from "../code/Code";
 // import { preToCodeBlock } from 'mdx-utils';
 
 import {
@@ -29,6 +30,10 @@ const MdxWrapper = ({ element, ...props }) => {
       return <Undertittel id={id} {...props} tag="h3" />;
     },
     a: Lenke,
+    code: (props) => {
+      return <Codeblock {...props} />;
+    },
+    inlineCode: InlineCode,
   };
 
   return (
