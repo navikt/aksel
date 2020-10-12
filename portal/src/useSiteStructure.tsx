@@ -34,6 +34,11 @@ export const usePageMenu = (location) =>
       slug.split("/")[0] === location.pathname.split("/")[1]
   );
 
+export const usePageTitle = (location) =>
+  usePages().find(
+    ({ link }) => link === location.pathname || `${link}/` === location.pathname
+  )?.title;
+
 export const useContentPage = (location) => {
   const pages = usePages();
 
