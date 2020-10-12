@@ -21,7 +21,7 @@ const cls = (props, hidden) =>
 const MobileNavMenuItem = ({ ...props }) => {
   return (
     <li className={classnames({ open: props.open })}>
-      <Link to={props.route.link}>{props.route.title}</Link>
+      <Link tabIndex={props.hidden ? -1 : 0} activeClassName="active" to={props.route.link}>{props.route.title}</Link>
       {props.route.routes && [props.children]}
     </li>
   );
@@ -62,7 +62,7 @@ const MobileNav = ({ ...props }) => {
     // const open =
     //   props.location.pathname.indexOf(route.path) !== -1 && route.routes;
     return (
-      <MobileNavMenuItem route={route} index={index} key={index}>
+      <MobileNavMenuItem hidden={hidden} route={route} index={index} key={index}>
         {route.routes && (
           <ul>
             {/* {route.routes
@@ -90,6 +90,7 @@ const MobileNav = ({ ...props }) => {
         }}
       >
         <Xknapp
+          tabIndex={hidden ? -1 : 0}
           className="mobile-nav__close-btn"
           onClick={props.toggle}
           ref={(node) => {
@@ -102,6 +103,7 @@ const MobileNav = ({ ...props }) => {
           {menu.map((route, index) => renderRoute(route, index))}
           <li>
             <a
+              tabIndex={hidden ? -1 : 0}
               href="https://github.com/navikt/nav-frontend-moduler"
               className="github"
             >
