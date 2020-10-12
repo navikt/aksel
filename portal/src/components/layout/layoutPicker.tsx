@@ -11,9 +11,11 @@ const LayoutPicker = (props) => {
   }
 
   if (page.children.length === 0) {
-    <div className="mdx-content">
-      <section className="section">{props.children}</section>
-    </div>;
+    return (
+      <div className="mdx-content">
+        <section className="section">{props.children}</section>
+      </div>
+    );
   }
 
   return (
