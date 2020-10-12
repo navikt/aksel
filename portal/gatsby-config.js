@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Designsystemet NAV`,
-    description: `Dette er beskrivelsen av designsystemet`,
+    description: ``,
     author: `@navikt`,
   },
   plugins: [

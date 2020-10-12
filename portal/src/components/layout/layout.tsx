@@ -1,5 +1,6 @@
 import React from "react";
 import { default as cl } from "classnames";
+import { Helmet } from "react-helmet";
 
 import Header from "./header/header";
 import Breadcrumb from "./Breadcrumb";
@@ -11,6 +12,18 @@ import "./layout.less";
 
 const Layout = (props) => (
   <div id="app">
+    <Helmet
+      title={props.pageContext?.frontmatter?.title}
+      titleTemplate="%s - NAV Designsystem"
+    >
+      <html lang="no" />
+      {props.pageContext?.frontmatter?.ingress && (
+        <meta
+          name="description"
+          content={props.pageContext?.frontmatter?.ingress}
+        />
+      )}
+    </Helmet>
     <div className="mainWrapper">
       <Header />
       <Breadcrumb location={props.location} />
