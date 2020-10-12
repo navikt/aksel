@@ -7,7 +7,7 @@ import { Systemtittel } from "nav-frontend-typografi";
 import "./styles.less";
 
 const GetStartedPage = ({ ...props }) => (
-  <main className="mainContent mainContent--grey" id="hovedinnhold">
+  <main className="mainContent--grey" id="hovedinnhold">
     <section className="actionsWrapper">
       <div className="grid">
         <LenkepanelBase
