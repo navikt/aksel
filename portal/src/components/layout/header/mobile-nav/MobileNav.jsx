@@ -18,21 +18,6 @@ const cls = (props, hidden) =>
     "mobile-nav--hidden": hidden,
   });
 
-const MobileNavMenuItem = ({ ...props }) => {
-  return (
-    <li className={classnames({ open: props.open })}>
-      <Link
-        tabIndex={props.hidden ? -1 : 0}
-        activeClassName="active"
-        to={props.route.link}
-      >
-        {props.route.title}
-      </Link>
-      {props.route.routes && [props.children]}
-    </li>
-  );
-};
-
 const MobileNav = ({ ...props }) => {
   const [hidden, setHidden] = useState(true);
   const lukkBtn = useRef();
@@ -64,27 +49,6 @@ const MobileNav = ({ ...props }) => {
     }
   };
 
-  const renderRoute = (route, index) => {
-    // const open =
-    //   props.location.pathname.indexOf(route.path) !== -1 && route.routes;
-    return (
-      <MobileNavMenuItem
-        hidden={hidden}
-        route={route}
-        index={index}
-        key={index}
-      >
-        {route.routes && (
-          <ul>
-            {/* {route.routes
-              .filter((subRoute) => subRoute.path !== "/new-project")
-              .map((filteredRoute, i) => renderRoute(filteredRoute, i))} */}
-          </ul>
-        )}
-      </MobileNavMenuItem>
-    );
-  };
-
   const menu = useMainMenu();
 
   return (
@@ -111,7 +75,18 @@ const MobileNav = ({ ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
-          {menu.map((route, index) => renderRoute(route, index))}
+          {menu.map((route) => (
+            <li>
+              <Link
+                key={route.title}
+                tabIndex={hidden ? -1 : 0}
+                activeClassName="active"
+                to={route.link}
+              >
+                {route.title}
+              </Link>
+            </li>
+          ))}
           <li>
             <a
               tabIndex={hidden ? -1 : 0}
