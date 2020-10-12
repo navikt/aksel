@@ -28,10 +28,10 @@ const Layout = (props) => (
       <Header />
       <Breadcrumb location={props.location} />
       <div className="contentWrapper">
-        {!["/", "/404.html"].includes(props.pageResources?.page?.path) ||
-          (props.location.pathname === "/404.html" && (
-            <Sidebar className="leftNavigation" location={props.location} />
-          ))}
+        {!(
+          ["/", "/404.html"].includes(props.pageResources?.page?.path) ||
+          props.location.pathname === "/404.html"
+        ) && <Sidebar className="leftNavigation" location={props.location} />}
         <main
           className={cl("mainContent", {
             "dsportal--fullwidth": props.path === "/",
