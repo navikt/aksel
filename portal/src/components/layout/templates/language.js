@@ -1,7 +1,7 @@
 import React from "react";
 import { Innholdstittel, Ingress } from "nav-frontend-typografi";
 
-import TabbedContainer from "../../tabbed-container/TabbedContainer";
+import TabbedContainer from "./TabbedContainer";
 import { useContentPage } from "../../../useSiteStructure";
 
 const LanguagePage = ({ location, children, ...props }) => {

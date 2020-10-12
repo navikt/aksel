@@ -1,14 +1,13 @@
-import React, {useState, useRef} from "react";
+import React, { useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "gatsby";
-import { useMediaQuery } from 'react-responsive'
+import { useMediaQuery } from "react-responsive";
 
+import { NAVLogo } from "../../assets/images/svg";
 
-import { NAVLogo } from "../assets/images/svg";
-
-import MainNav from "../main-nav/MainNav";
-import MobileNav from "../mobile-nav/MobileNav";
-import MobileNavToggle from "../mobile-nav-toggle/MobileNavToggle";
+import MainNav from "./main-nav/MainNav";
+import MobileNav from "./mobile-nav/MobileNav";
+import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
 import "./header.less";
 
 const Header = ({ ...props }) => {
@@ -17,7 +16,7 @@ const Header = ({ ...props }) => {
   const toggleBtn = useRef();
 
   const small = useMediaQuery({
-    query: '(max-width: 1094px)'
+    query: "(max-width: 1094px)",
   });
 
   const checkViewport = () => {
@@ -35,9 +34,7 @@ const Header = ({ ...props }) => {
     }
   };
 
-  const ariaHidden = mobile
-    ? { "aria-hidden": !!mobileNavOpen }
-    : undefined;
+  const ariaHidden = mobile ? { "aria-hidden": !!mobileNavOpen } : undefined;
 
   checkViewport();
   return (

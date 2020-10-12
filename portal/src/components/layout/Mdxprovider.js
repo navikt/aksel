@@ -11,7 +11,6 @@ import {
 import Lenke from "nav-frontend-lenker";
 
 import "./layout.less";
-import { graphql, useStaticQuery } from "gatsby";
 
 const MdxWrapper = ({ element, ...props }) => {
   const genId = (content) => content.toLowerCase().split(" ").join("");

@@ -1,9 +1,8 @@
 import React from "react";
 import { default as cl } from "classnames";
 
-import Header from "../header/header";
-import Sidebar from "../sidebar/Sidebar";
-import Main from "../main/Main";
+import Header from "./header/header";
+import Sidebar from "./sidebar/Sidebar";
 import LayoutPicker from "./layoutPicker";
 import MdxWrapper from "./Mdxprovider";
 
@@ -18,7 +17,7 @@ const Layout = ({ children, path, location, pageResources, ...props }) => {
           {path !== "/" && (
             <Sidebar className="leftNavigation" location={location} />
           )}
-          <Main
+          <main
             className={cl("mainContent", {
               "dsportal--fullwidth": path === "/",
             })}
@@ -30,7 +29,7 @@ const Layout = ({ children, path, location, pageResources, ...props }) => {
                 <MdxWrapper element={children}></MdxWrapper>
               </LayoutPicker>
             )}
-          </Main>
+          </main>
         </div>
       </div>
     </div>
