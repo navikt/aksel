@@ -69,6 +69,16 @@ module.exports = {
         component: require.resolve(`./src/components/layout/layout.tsx`),
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `packages`,
+        // Location of your React components
+        path: `${__dirname}/../packages`,
+        ignore: ["**/*.mdx", "**/*.md"],
+      },
+    },
+    `gatsby-transformer-react-docgen`,
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
