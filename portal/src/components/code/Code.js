@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Prism from "prismjs";
-
-import "prismjs/themes/prism-coy.css";
+import classnames from "classnames";
 // import 'prismjs/themes/prism-okaidia.css';
 
 import "./styles.less";
 
 const Codeblock = ({ children, className, ...rest }) => {
-  const highlighted = Prism.highlight(children, Prism.languages.jsx);
+  useEffect(() => {
+    Prism.highlightAll();
+  }, []);
+
   return (
     <figure role="figure" aria-label="Kode-eksempel">
-      <pre className={className} {...rest}>
-        <code
-          className={className}
-          dangerouslySetInnerHTML={{ __html: highlighted }}
-        />
+      <pre className={classnames(className, "language-")} {...rest}>
+        <code className="language-">{children}</code>
       </pre>
     </figure>
   );
