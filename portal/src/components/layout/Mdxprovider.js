@@ -1,6 +1,5 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-// import { preToCodeBlock } from 'mdx-utils';
 
 import {
   Innholdstittel,
@@ -10,7 +9,6 @@ import {
 import Lenke from "nav-frontend-lenker";
 
 import "./layout.less";
-import { graphql, useStaticQuery } from "gatsby";
 
 const MdxWrapper = ({ element, ...props }) => {
   const genId = (content) => content.toLowerCase().split(" ").join("");
