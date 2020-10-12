@@ -12,36 +12,25 @@ import Lenke from "nav-frontend-lenker";
 
 import "./layout.less";
 
-const MdxWrapper = ({ element, ...props }) => {
-  const genId = (content) => content.toLowerCase().split(" ").join("");
-
-  const components = {
-    h1: (props) => {
-      const id = genId(props.children);
-      return <Innholdstittel id={id} {...props} />;
-    },
-    h2: (props) => {
-      const id = genId(props.children);
-      return <Systemtittel id={id} {...props} />;
-    },
-    h3: (props) => {
-      const id = genId(props.children);
-      return <Undertittel id={id} {...props} tag="h3" />;
-    },
-    a: Lenke,
-    code: (props) => {
-      return <Codeblock {...props} />;
-    },
-    inlineCode: InlineCode,
-  };
-
-  return (
-    <div className="mdx-content">
-      <section className="section">
-        <MDXProvider components={{ ...components }}>{element}</MDXProvider>
-      </section>
-    </div>
-  );
-};
+const MdxWrapper = ({ element }) => (
+  <div className="mdx-content">
+    <section className="section">
+      <MDXProvider
+        components={{
+          h1: Innholdstittel,
+          h2: Systemtittel,
+          h3: Undertittel,
+          a: Lenke,
+          code: (props) => {
+            return <Codeblock {...props} />;
+          },
+          inlineCode: InlineCode,
+        }}
+      >
+        {element}
+      </MDXProvider>
+    </section>
+  </div>
+);
 
 export default MdxWrapper;

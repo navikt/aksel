@@ -10,7 +10,18 @@ module.exports = {
     {
       resolve: "gatsby-plugin-mdx",
       options: {
-        rehypePlugins: [require("rehype-toc")],
+        rehypePlugins: [
+          require("rehype-slug"),
+          [
+            require("rehype-toc"),
+            {
+              headings: ["h2", "h3"],
+              cssClasses: {
+                toc: "table-of-contents",
+              },
+            },
+          ],
+        ],
       },
     },
     {
