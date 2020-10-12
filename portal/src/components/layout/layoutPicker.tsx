@@ -18,16 +18,12 @@ const LayoutPicker = (props) => {
     );
   }
 
-  console.log(props.location.pathname);
-  console.log(page.children[0].slug);
-
   const currentTab = props.location.pathname.split("/").slice(-1).pop();
   let defaultActive = page.children.findIndex(
     (tab) => tab.slug.split("/").slice(-1).pop() === currentTab
   );
   defaultActive = defaultActive === -1 ? 0 : defaultActive;
 
-  console.log(defaultActive);
   return (
     <>
       <Innholdstittel>{page.title}</Innholdstittel>
