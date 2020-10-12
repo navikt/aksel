@@ -1,7 +1,7 @@
 import React from "react";
 import { Innholdstittel } from "nav-frontend-typografi";
 
-import TabbedContainer from "../../tabbed-container/TabbedContainer";
+import TabbedContainer from "./TabbedContainer";
 import { useContentPage } from "../../../useSiteStructure";
 
 const ColorsPage = ({ location, children, ...props }) => {
