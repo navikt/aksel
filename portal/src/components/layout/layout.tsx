@@ -8,32 +8,26 @@ import MdxWrapper from "./Mdxprovider";
 
 import "./layout.less";
 
-const Layout = ({ children, path, location, pageResources, ...props }) => {
-  return (
-    <div id="app">
-      <div className="mainWrapper">
-        <Header />
-        <div className="contentWrapper">
-          {path !== "/" && (
-            <Sidebar className="leftNavigation" location={location} />
-          )}
-          <main
-            className={cl("mainContent", {
-              "dsportal--fullwidth": path === "/",
-            })}
-          >
-            {!pageResources?.json?.pageContext?.frontmatter?.content ? (
-              <div>{children}</div>
-            ) : (
-              <LayoutPicker location={location} {...props}>
-                <MdxWrapper element={children}></MdxWrapper>
-              </LayoutPicker>
-            )}
-          </main>
-        </div>
+const Layout = (props) => (
+  <div id="app">
+    <div className="mainWrapper">
+      <Header />
+      <div className="contentWrapper">
+        {props.path !== "/" && (
+          <Sidebar className="leftNavigation" location={props.location} />
+        )}
+        <main
+          className={cl("mainContent", {
+            "dsportal--fullwidth": props.path === "/",
+          })}
+        >
+          <LayoutPicker {...props}>
+            <MdxWrapper>{props.children}</MdxWrapper>
+          </LayoutPicker>
+        </main>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
 export default Layout;

@@ -1,49 +1,38 @@
-import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import LanguagePage from "./templates/language";
-import ColorsPage from "./templates/colors";
+import { Innholdstittel, Ingress } from "nav-frontend-typografi";
+import TabbedContainer from "./TabbedContainer";
+import { useContentPage } from "../../useSiteStructure";
 
 const fixPath = (path) => (path.endsWith("/") ? path : path + "/");
 
-const LayoutPicker = ({ location, ...props }) => {
-  const { allSitePage } = useStaticQuery(graphql`
-    query MyQuery {
-      allSitePage {
-        edges {
-          node {
-            path
-            componentPath
-          }
-        }
-      }
-    }
-  `);
-  const resourcePath = allSitePage.edges
-    .map((edge) => edge.node.path)
-    .filter((path) => path.startsWith("/resources/"));
+const LayoutPicker = (props) => {
+  const page = useContentPage(location);
 
-  const languagePath = resourcePath.filter((path) =>
-    path.startsWith("/resources/language/")
-  );
-  const colorsPath = resourcePath.filter((path) =>
-    path.startsWith("/resources/colors/")
-  );
-
-  let Component;
-  switch (true) {
-    case languagePath.includes(fixPath(location.pathname)):
-      Component = LanguagePage;
-      break;
-    case colorsPath.includes(fixPath(location.pathname)):
-      Component = ColorsPage;
-      break;
-    default:
-      break;
+  if (page === undefined) {
+    return props.children;
   }
-  return Component ? (
-    <Component location={location} {...props} />
-  ) : (
-    props.children
+
+  if (page.children.length === 0) {
+    <div className="mdx-content">
+      <section className="section">{props.children}</section>
+    </div>;
+  }
+
+  return (
+    <>
+      <Innholdstittel>{page.title}</Innholdstittel>
+      {page.ingress && <Ingress className="intro">{page.ingress}</Ingress>}
+      <TabbedContainer
+        tabs={page.children.map(({ link, title }) => ({
+          label: title,
+          path: link,
+        }))}
+        {...props}
+      />
+      <div className="mdx-content">
+        <section className="section">{props.children}</section>
+      </div>
+    </>
   );
 };
 
