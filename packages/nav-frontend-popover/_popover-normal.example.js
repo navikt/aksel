@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Knapp } from "NavFrontendModules/nav-frontend-knapper";
-import { guid } from "NavFrontendModules/nav-frontend-js-utils";
+import { Knapp } from "nav-frontend-knapper";
+import { guid } from "nav-frontend-js-utils";
 // eslint-disable-next-line
 import Popover from "./";
 

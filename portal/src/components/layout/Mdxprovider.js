@@ -9,6 +9,9 @@ import {
 } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
 
+import { FileIcon, Cog } from "../assets/images/svg";
+import Example from "../example/Example";
+
 const MdxWrapper = (props) => (
   <MDXProvider
     components={{
@@ -20,6 +23,9 @@ const MdxWrapper = (props) => (
         return <Codeblock {...props} />;
       },
       inlineCode: InlineCode,
+      FileIcon,
+      Cog,
+      Example,
     }}
     {...props}
   />
