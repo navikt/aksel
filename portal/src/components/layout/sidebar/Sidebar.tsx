@@ -11,7 +11,7 @@ const Sidebar = ({ location, className = "" }) => {
     <div className={className}>
       <nav aria-labelledby="left-navigation-title">
         <h2 id="left-navigation-title" className="typo-systemtittel">
-          {page.title}
+          {page?.title}
         </h2>
         <ul className="nav-list">
           {menu.map(({ link, title }, index) => (

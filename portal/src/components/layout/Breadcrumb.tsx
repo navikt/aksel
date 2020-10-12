@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
 import { useBreadcrumb } from "../../useSiteStructure";
-import { last } from "cypress/types/lodash";
 
 const Breadcrumb = (props) => {
   const breadcrumb = useBreadcrumb(props.location);
@@ -20,7 +19,7 @@ const Breadcrumb = (props) => {
             </span>
           </li>
         ))}
-        <li aria-current="page">{current.title}</li>
+        <li aria-current="page">{current?.title}</li>
       </ul>
     </nav>
   );
