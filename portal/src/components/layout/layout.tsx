@@ -10,8 +10,6 @@ import MdxWrapper from "./Mdxprovider";
 import "./layout.less";
 
 const Layout = ({ children, path, location, pageResources, ...props }) => {
-  console.log(pageResources);
-
   return (
     <div id="app">
       <div className="mainWrapper">
