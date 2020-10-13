@@ -1,1 +1,0 @@
-Veileder er en illustrasjon av en NAV-veileder som snakker til brukeren. Komponenten skal brukes som et personlig støtteelement som gir råd, tips og tilbakemelding underveis i søknader og andre komplekse prosesser.

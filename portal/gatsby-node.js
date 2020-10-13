@@ -1,9 +1,10 @@
-let i = 0;
-let components = [];
+exports.onCreateNode = ({ node, actions, getNode }) => {
+  // console.log(node["component"]);
+};
 
 exports.onCreatePage = ({ page, actions }) => {
   //console.log(page.path);
-  const { createPage, deletePage } = actions;
+  const { createPage, deletePage, createRedirect, setPageData } = actions;
   const TechnicalTemp = require.resolve(
     `./src/components/layout/templates/technical.jsx`
   );
@@ -14,14 +15,18 @@ exports.onCreatePage = ({ page, actions }) => {
   const compAcce = page.path.match(
     /^\/nav-frontend-.*\/md\/(.*\/)?(.*).accessibility\/$/
   );
+  const compIngress = page.path.match(
+    /^\/nav-frontend-.*\/md\/(.*\/)?(.*).ingress\/$/
+  );
 
-  const makePage = (path, compName) => {
+  const makePage = (path, compName, rank) => {
     const newPage = {
       ...page,
       path,
-      context: { frontmatter: { title: compName, rank: i } },
+      context: {
+        frontmatter: { ...page.context.frontmatter, title: compName, rank },
+      },
     };
-    i++;
     createPage(newPage);
     deletePage(page);
   };
@@ -29,22 +34,45 @@ exports.onCreatePage = ({ page, actions }) => {
   // console.log(page);
   if (compOverview !== null) {
     makePage(`/components/${compOverview[2].toLowerCase()}`, compOverview[2]);
+    // createRedirect({
+    //   fromPath: `/components/${compOverview[2].toLowerCase()}`,
+    //   toPath: `/components/${compOverview[2].toLowerCase()}/overview`,
+    //   isPermanent: true,
+    //   redirectInBrowser: true,
+    // });
     makePage(
       `/components/${compOverview[2].toLowerCase()}/overview`,
-      compOverview[2]
+      "Oversikt",
+      0
     );
-    if (!components.includes(compOverview[2])) {
-      components.push(compOverview[2]);
-      createPage({
-        path: `/components/${compOverview[2].toLowerCase()}/technical`,
-        component: TechnicalTemp,
-      });
-    }
+    createPage({
+      path: `/components/${compOverview[2].toLowerCase()}/technical`,
+      context: { frontmatter: { title: "Teknisk", rank: 1 } },
+      component: TechnicalTemp,
+    });
   }
   if (compAcce !== null) {
     makePage(
       `/components/${compAcce[2].toLowerCase()}/accessibility`,
-      compAcce[2]
+      "Tilgjengelighet",
+      2
+    );
+  }
+
+  if (compIngress !== null) {
+    // console.log(page);
+    setPageData(page.path.replace("/ingress", "/overview"), page);
+    setPageData(page.path.replace("/ingress", "/accessibility"), page);
+    setPageData(page.path.replace("/ingress", ""), page);
+    setPageData(
+      `/components/${compIngress[2].toLowerCase()}/accessibility`,
+      page
+    );
+    setPageData(`/components/${compIngress[2].toLowerCase()}/overview`, page);
+    makePage(
+      `/components/${compIngress[2].toLowerCase()}/ingress`,
+      "Ingress",
+      3
     );
   }
 };

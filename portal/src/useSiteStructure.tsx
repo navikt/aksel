@@ -20,8 +20,8 @@ const usePages = () =>
     }
   `).allSitePage.edges.map((edge) => ({
     ...(edge.node.context.frontmatter || {}),
-    slug: edge.node.path.slice(1, -1),
-    link: edge.node.path.slice(0, -1),
+    slug: edge.node.path.replace(/^\/|\/$/g, ""),
+    link: edge.node.path.replace(/\/$/, ""),
   }));
 
 export const useBreadcrumb = (location) => {
@@ -58,11 +58,11 @@ export const useNavigationPage = (location) =>
 
 export const useContentPage = (location) => {
   const pages = usePages();
-  console.log(pages);
-  const page = pages.find(
-    ({ slug, link }) =>
-      slug.split("/").length === 2 && location.pathname.startsWith(link)
-  );
+
+  console.log(location.pathname);
+  const page = pages.find(({ slug, link }) => {
+    return slug.split("/").length === 2 && location.pathname.startsWith(link);
+  });
 
   return page
     ? {

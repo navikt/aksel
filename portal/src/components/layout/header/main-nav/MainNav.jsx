@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import { GithubLogo } from "../../../assets/images/svg";
 import { useMainMenu } from "../../../../useSiteStructure";
+import {guid} from 'nav-frontend-js-utils';
 
 import "./styles.less";
 
@@ -13,11 +14,11 @@ const MainNav = () => {
       <div className="mainNav__wrapper">
         <ul>
           {menu.map(({ link, title }, index) => (
-            <li key={title}>
+            <li key={guid()}>
               <Link
-                partiallyActive={link !== "/"}
+                partiallyActive={link ? true : false}
                 activeClassName="active"
-                to={link}
+                to={link ? link : "/"}
               >
                 {title}
               </Link>

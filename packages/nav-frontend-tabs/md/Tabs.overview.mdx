@@ -1,3 +1,7 @@
+---
+ingress: Tabs er en meny som gir brukeren mulighet til å bytte mellom lagvis inndelt innhold.
+---
+
 import Tabs from "./../";
 import Panel from "nav-frontend-paneler";
 import Alertstripe from "nav-frontend-alertstriper";
@@ -26,11 +30,11 @@ utenfor og langs øverste kant av panelet.
 <Alertstripe type="info">
   Inntil videre må du manuelt håndtere visning av riktig panel-innhold når aktiv
   tab endres. Du må også skru av
-  <code className="inline">border</code> og <code className="inline">
+  <InlineCode className="inline">border</InlineCode> og <InlineCode className="inline">
     border-radius
-  </code> langs toppen av panelet. Vi jobber med å lage en mer avansert <code className="inline">
+  </InlineCode> langs toppen av panelet. Vi jobber med å lage en mer avansert <InlineCode className="inline">
     TabPanel
-  </code> komponent som er tenkt å både fikse disse stilene for deg, og håndtere
+  </InlineCode> komponent som er tenkt å både fikse disse stilene for deg, og håndtere
   automatisk visning av riktig panel-innhold avhengig av aktiv tab.
 </Alertstripe>
 

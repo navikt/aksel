@@ -4,7 +4,7 @@
     [
       "prismjs",
       {
-        "languages": ["javascript", "css", "markup", "less"],
+        "languages": ["javascript", "css", "markup", "less", "jsx", "tsx"],
         "plugins": ["show-language"],
         "theme": "coy",
         "css": true

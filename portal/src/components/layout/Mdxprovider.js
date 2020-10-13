@@ -22,7 +22,7 @@ const MdxWrapper = (props) => (
       code: (props) => {
         return <Codeblock {...props} />;
       },
-      inlineCode: InlineCode,
+      InlineCode,
       FileIcon,
       Cog,
       Example,

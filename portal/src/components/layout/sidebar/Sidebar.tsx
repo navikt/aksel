@@ -14,13 +14,15 @@ const Sidebar = ({ location, className = "" }) => {
           {page?.title}
         </h2>
         <ul className="nav-list">
-          {menu.map(({ link, title }, index) => (
-            <li key={index}>
-              <Link to={link} partiallyActive activeClassName="active">
-                {title}
-              </Link>
-            </li>
-          ))}
+          {menu.map(({ link, title }, index) => {
+            return (
+              <li key={index}>
+                <Link to={link} activeClassName="active">
+                  {title}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </div>

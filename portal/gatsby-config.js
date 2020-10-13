@@ -56,7 +56,6 @@ module.exports = {
         name: `komponenter`,
         path: `${__dirname}/../packages`,
         ignore: [
-          `**/*.ingress.mdx`,
           `**/*.usage.mdx`,
           `**/*.js`,
           `**/*.jsx`,

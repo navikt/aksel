@@ -75,17 +75,17 @@ const MobileNav = ({ ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
-          {menu.map((route) => (
-            <li key={route.title}>
+          {menu.map((route) => {
+            return (<li key={route.link}>
               <Link
                 tabIndex={hidden ? -1 : 0}
                 activeClassName="active"
-                to={route.link}
+                to={route.link ? route.link : "/"}
               >
                 {route.title}
               </Link>
-            </li>
-          ))}
+            </li>)
+          })}
           <li>
             <a
               tabIndex={hidden ? -1 : 0}
