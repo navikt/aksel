@@ -2,24 +2,26 @@ import { graphql, useStaticQuery } from "gatsby";
 
 const usePages = () =>
   useStaticQuery(graphql`
-    query AllMdx {
-      allMdx(sort: { fields: frontmatter___rank }) {
+    query AllSitePage {
+      allSitePage(sort: { fields: context___frontmatter___rank }) {
         edges {
           node {
-            slug
-            frontmatter {
-              title
-              rank
-              ingress
+            context {
+              frontmatter {
+                title
+                rank
+                ingress
+              }
             }
+            path
           }
         }
       }
     }
-  `).allMdx.edges.map((edge) => ({
-    ...edge.node.frontmatter,
-    slug: edge.node.slug,
-    link: `/${edge.node.slug}`,
+  `).allSitePage.edges.map((edge) => ({
+    ...(edge.node.context.frontmatter || {}),
+    slug: edge.node.path.slice(1, -1),
+    link: edge.node.path.slice(0, -1),
   }));
 
 export const useBreadcrumb = (location) => {
