@@ -56,7 +56,7 @@ export const useNavigationPage = (location) =>
 
 export const useContentPage = (location) => {
   const pages = usePages();
-
+  console.log(pages);
   const page = pages.find(
     ({ slug, link }) =>
       slug.split("/").length === 2 && location.pathname.startsWith(link)
