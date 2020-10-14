@@ -45,11 +45,19 @@ exports.onCreatePage = ({ page, actions }) => {
       "Oversikt",
       0
     );
+
+    const source = page.path.match(/\/nav-frontend-(.*)\/md/)[1];
+    const pkgjson = require(`nav-frontend-${source}/package.json`);
+
     createPage({
       path: `/components/${compOverview[2].toLowerCase()}/technical`,
       context: {
         frontmatter: { title: "Teknisk", rank: 1 },
         source: page.path,
+        name: pkgjson.name,
+        peerDep: pkgjson.peerDependencies,
+        main: pkgjson.main,
+        version: pkgjson.version,
       },
       component: TechnicalTemp,
     });

@@ -27,7 +27,7 @@ function skalVareDisabled(props) {
 
 export interface KnappBaseProps extends CustomHTMLButtonAttributes {
   /**
-   * Verdi for <button>-attributtet 'type', angir knappens default funksjon
+   * Verdi for <button/>-attributtet 'type', angir knappens default funksjon
    */
   htmlType?: "submit" | "button" | "reset";
   /**

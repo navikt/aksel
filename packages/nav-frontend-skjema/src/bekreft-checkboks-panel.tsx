@@ -24,7 +24,7 @@ export interface BekreftCheckboksPanelProps {
    */
   children?: React.ReactNode | React.ReactChildren;
   /**
-   * Øvrige custom props til <input>-elementet som ligger i bunn
+   * Øvrige custom props til <input/>-elementet som ligger i bunn
    */
   inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
   /**

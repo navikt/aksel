@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "ES3",
+    "target": "ES6",
     "allowJs": false,
     "jsx": "react",
     "noEmit": false,
