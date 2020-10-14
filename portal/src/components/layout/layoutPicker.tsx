@@ -5,7 +5,7 @@ import { useContentPage } from "../../useSiteStructure";
 
 const LayoutPicker = (props) => {
   const page = useContentPage(props.location);
-  console.log(page);
+
   if (page === undefined) {
     return props.children;
   }

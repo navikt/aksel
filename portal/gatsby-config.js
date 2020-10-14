@@ -75,6 +75,7 @@ module.exports = {
         name: `docgen`,
         path: `${__dirname}/../packages`,
         ignore: [
+          `**/*.js`,
           `**/*.mdx`,
           `**/*.d.*`,
           `**/lib/**`,

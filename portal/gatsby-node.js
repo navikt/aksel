@@ -47,7 +47,10 @@ exports.onCreatePage = ({ page, actions }) => {
     );
     createPage({
       path: `/components/${compOverview[2].toLowerCase()}/technical`,
-      context: { frontmatter: { title: "Teknisk", rank: 1 } },
+      context: {
+        frontmatter: { title: "Teknisk", rank: 1 },
+        source: page.path,
+      },
       component: TechnicalTemp,
     });
   }
@@ -61,14 +64,6 @@ exports.onCreatePage = ({ page, actions }) => {
 
   if (compIngress !== null) {
     // console.log(page);
-    setPageData(page.path.replace("/ingress", "/overview"), page);
-    setPageData(page.path.replace("/ingress", "/accessibility"), page);
-    setPageData(page.path.replace("/ingress", ""), page);
-    setPageData(
-      `/components/${compIngress[2].toLowerCase()}/accessibility`,
-      page
-    );
-    setPageData(`/components/${compIngress[2].toLowerCase()}/overview`, page);
     makePage(
       `/components/${compIngress[2].toLowerCase()}/ingress`,
       "Ingress",
