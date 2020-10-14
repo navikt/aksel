@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "classnames";
 
-// import OverflowDetector from "../overflow-detector/OverflowDetector";
+import OverflowDetector from "../overflow-detector/OverflowDetector";
 
 import "./styles.less";
 
@@ -21,7 +21,9 @@ const Example = ({ children, className, noscroll, greyBg, ...rest }) => (
     {noscroll ? (
       <div className="example__inner">{children}</div>
     ) : (
-      <div className="example__inner">{children}</div>
+      <OverflowDetector>
+        <div className="example__inner">{children}</div>
+      </OverflowDetector>
     )}
   </div>
 );

@@ -70,12 +70,27 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `docgen`,
+        path: `${__dirname}/../packages`,
+        ignore: [
+          `**/*.mdx`,
+          `**/*.d.*`,
+          `**/lib/**`,
+          "../website/**",
+          "website",
+          "guideline-app",
+        ],
+      },
+    },
+    {
       resolve: `gatsby-plugin-layout`,
       options: {
         component: require.resolve(`./src/components/layout/layout.tsx`),
       },
     },
-    //`gatsby-transformer-react-docgen`,
+    `gatsby-transformer-react-docgen`,
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
