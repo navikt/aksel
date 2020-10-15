@@ -17,10 +17,6 @@ const PropTable = ({ context, ...props }) => {
   const [defaultModule, setDefaultModule] = useState();
   // activeModule: this.getInitialActiveModule(),
 
-  const test = async () => {
-    const Component = loadComponent(context.name);
-  };
-
   // getInitialActiveModule = () => {
   //   const urlComponentName = window.location.pathname.split("/")[2];
   //   const componentIndex = Object.keys(this.modules).findIndex(
