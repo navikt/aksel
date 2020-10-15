@@ -3,23 +3,21 @@ import { graphql, useStaticQuery } from "gatsby";
 const useAllProps = () =>
   useStaticQuery(graphql`
     query propsQuery {
-      allComponentMetadata {
+      allComponentMetadata(sort: { order: ASC, fields: name }) {
         nodes {
+          name
+          relativePath
           props {
-            name
-            required
-            tsType
             defaultValue {
               value
-              computed
+            }
+            description
+            name
+            required
+            type {
+              name
             }
           }
-          parent {
-            ... on File {
-              relativePath
-            }
-          }
-          displayName
         }
       }
     }
@@ -30,9 +28,7 @@ export const useProps = (path) => {
   const props = useAllProps();
 
   return props.filter((prop) => {
-    const propPath = prop.parent.relativePath.match(
-      /nav-frontend-(.*)\/src\//
-    )[1];
+    const propPath = prop.relativePath.match(/nav-frontend-(.*)\/src\//)[1];
     return propPath === pathComp;
   });
 };

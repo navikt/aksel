@@ -2,6 +2,7 @@ import React from "react";
 import { Innholdstittel, Ingress } from "nav-frontend-typografi";
 import TabbedContainer from "./TabbedContainer";
 import { useContentPage } from "../../useSiteStructure";
+import classnames from "classnames";
 
 const LayoutPicker = (props) => {
   const page = useContentPage(props.location);
@@ -13,7 +14,13 @@ const LayoutPicker = (props) => {
   if (page.children.length === 0) {
     return (
       <div className="mdx-content">
-        <section className="section">{props.children}</section>
+        <section
+          className={classnames("section", {
+            full: !!props.location.pathname.match(/technical\/?$/),
+          })}
+        >
+          {props.children}
+        </section>
       </div>
     );
   }
@@ -40,9 +47,14 @@ const LayoutPicker = (props) => {
         }))}
         {...props}
       />
-      <div className="mdx-content">
-        <section className="section">{props.children}</section>
-      </div>
+
+      <section
+        className={classnames("section", {
+          full: !!props.location.pathname.match(/technical\/?$/),
+        })}
+      >
+        {props.children}
+      </section>
     </>
   );
 };

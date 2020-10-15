@@ -9,7 +9,8 @@ import {Flatknapp} from 'nav-frontend-knapper';
 import Hjelpetekst from 'nav-frontend-hjelpetekst';
 
 import {Bash } from '../../code/Code';
-import {useProps} from '../../../useProps';
+
+import PropTable from '../../proptable/PropTable';
 
 import { CopyIcon } from "../../assets/images/svg";
 
@@ -20,8 +21,7 @@ const Technical = ({pageContext,...props}) => {
     const [activeToggle, setActiveToggle] = useState(0)
     const [anchor, setAnchor] = useState(undefined)
 
-    const {source,version, main, name, peerDep} = pageContext;
-    //const allProps = useProps(source);
+    const { version, name, peerDep} = pageContext;
     
     const deps = Object.keys(peerDep)
     
@@ -65,7 +65,6 @@ const Technical = ({pageContext,...props}) => {
             <Flatknapp
               className="technical__copyknapp"
               aria-label="Kopier npm install til utklippstavle"
-              // eslint-disable-next-line max-len
               onClick={(e) =>
                 copyContent(e, installInstructions[activeToggle])
               }
@@ -74,7 +73,7 @@ const Technical = ({pageContext,...props}) => {
               <CopyIcon />
             </Flatknapp>
           </Systemtittel>
-          <Tabs tabs={tabs} onChange={() => setActiveToggle(activeToggle ? 0 : 1)} />
+          <Tabs tabs={tabs} onChange={(i, x) => setActiveToggle(x)} />
             <Panel border>
                 <Bash>{installInstructions[activeToggle]}</Bash>
             </Panel>
@@ -89,7 +88,7 @@ const Technical = ({pageContext,...props}) => {
       );
 
     return  (
-        <>
+        <div className="componentGuidelinePage">
             <section className="section full">
             <Systemtittel id="npm-pakke">NPM-pakke</Systemtittel>
             <table className="tabell">
@@ -134,8 +133,11 @@ const Technical = ({pageContext,...props}) => {
             <section className="section full">
                 {renderInstallInstructions()}
             </section>
+            <section className="section full">
+                <PropTable context={pageContext} {...props} />
+            </section>
             
-        </>
+        </div>
     );
 }
 

@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   siteMetadata: {
     title: `Designsystemet NAV`,
@@ -94,7 +96,13 @@ module.exports = {
         component: require.resolve(`./src/components/layout/layout.tsx`),
       },
     },
-    `gatsby-transformer-react-docgen`,
+    `gatsby-transformer-react-docgen-typescript-custom`,
+    // {
+    //   resolve: "gatsby-transformer-react-docgen",
+    //   options: {
+    //     resolver: require(`../utilities/build/props-resolver/tsProps.js`),
+    //   },
+    // },
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline

@@ -79,3 +79,8 @@ exports.onCreatePage = ({ page, actions }) => {
     );
   }
 };
+
+// exports.onCreateNode = async ({ ...props }) => {
+//   //const resolver = require(`../utilities/build/props-resolver`);
+//   // resolver.onCreateNode({ ...props });
+// };

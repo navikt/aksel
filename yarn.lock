@@ -5034,6 +5034,11 @@ ast-types@0.13.2:
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.13.2.tgz#df39b677a911a83f3a049644fb74fdded23cea48"
   integrity sha512-uWMHxJxtfj/1oZClOxDEV1sQ1HCDkA4MG8Gr69KKeBjEVH0R84WlejZ0y2DcwyBlpAEMltmVYkVgqfLFb2oyiA==
 
+ast-types@0.8.18:
+  version "0.8.18"
+  resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.18.tgz#c8b98574898e8914e9d8de74b947564a9fe929af"
+  integrity sha1-yLmFdImOiRTp2N50uUdWSp/pKa8=
+
 ast-types@0.9.6:
   version "0.9.6"
   resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.9.6.tgz#102c9e9e9005d3e7e3829bf0c4fa24ee862ee9b9"
@@ -10521,7 +10526,7 @@ esprima-fb@^15001.1.0-dev-harmony-fb:
   resolved "https://registry.yarnpkg.com/esprima-fb/-/esprima-fb-15001.1.0-dev-harmony-fb.tgz#30a947303c6b8d5e955bee2b99b1d233206a6901"
   integrity sha1-MKlHMDxrjV6VW+4rmbHSMyBqaQE=
 
-esprima@^2.6.0:
+esprima@^2.6.0, esprima@~2.7.1:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/esprima/-/esprima-2.7.3.tgz#96e3b70d5779f6ad49cd032673d1c312767ba581"
   integrity sha1-luO3DVd59q1JzQMmc9HDEnZ7pYE=
@@ -20356,6 +20361,13 @@ react-dev-utils@^4.2.3:
   dependencies:
     ast-types "0.13.2"
 
+react-docgen-exports-handler@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-docgen-exports-handler/-/react-docgen-exports-handler-1.0.0.tgz#fbfbdb04ae5802dba4eebe52bf6fc93f961f6559"
+  integrity sha1-+/vbBK5YAtuk7r5Sv2/JP5YfZVk=
+  dependencies:
+    recast "0.11.11"
+
 react-docgen-typescript-loader@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript-loader/-/react-docgen-typescript-loader-3.7.2.tgz#45cb2305652c0602767242a8700ad1ebd66bbbbd"
@@ -20377,7 +20389,7 @@ react-docgen-typescript-plugin@^0.5.2:
     react-docgen-typescript-loader "^3.7.2"
     tslib "^2.0.0"
 
-react-docgen-typescript@^1.15.0, react-docgen-typescript@^1.18.0, react-docgen-typescript@^1.20.1:
+react-docgen-typescript@1.20.5, react-docgen-typescript@^1.15.0, react-docgen-typescript@^1.18.0, react-docgen-typescript@^1.20.1:
   version "1.20.5"
   resolved "https://registry.yarnpkg.com/react-docgen-typescript/-/react-docgen-typescript-1.20.5.tgz#fb8d78a707243498436c2952bd3f6f488a68d4f3"
   integrity sha512-AbLGMtn76bn7SYBJSSaKJrZ0lgNRRR3qL60PucM5M4v/AXyC8221cKBXW5Pyt9TfDRfe+LDnPNlg7TibxX0ovA==
@@ -21043,6 +21055,16 @@ readdirp@~3.4.0:
   integrity sha512-0xe001vZBnJEK+uKcj8qOhyAKPzIT+gStxWr3LCB0DwcXR5NZJ3IaC+yGnHCYzB/S7ov3m3EEbZI2zeNvX+hGQ==
   dependencies:
     picomatch "^2.2.1"
+
+recast@0.11.11:
+  version "0.11.11"
+  resolved "https://registry.yarnpkg.com/recast/-/recast-0.11.11.tgz#7c4a097387b8865ff3a1122057726874be4b3101"
+  integrity sha1-fEoJc4e4hl/zoRIgV3JodL5LMQE=
+  dependencies:
+    ast-types "0.8.18"
+    esprima "~2.7.1"
+    private "~0.1.5"
+    source-map "~0.5.0"
 
 recast@^0.11.17, recast@~0.11.12:
   version "0.11.23"
