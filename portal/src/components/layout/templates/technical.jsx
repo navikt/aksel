@@ -10,7 +10,7 @@ import Hjelpetekst from 'nav-frontend-hjelpetekst';
 
 import {Bash } from '../../code/Code';
 
-import PropTable from '../../proptable/PropTable';
+import ModuleBrowser from '../../proptable/ModuleBrowser';
 
 import { CopyIcon } from "../../assets/images/svg";
 
@@ -134,7 +134,7 @@ const Technical = ({pageContext,...props}) => {
                 {renderInstallInstructions()}
             </section>
             <section className="section full">
-                <PropTable context={pageContext} {...props} />
+                <ModuleBrowser context={pageContext} {...props} />
             </section>
             
         </div>

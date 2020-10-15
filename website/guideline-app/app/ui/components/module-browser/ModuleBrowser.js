@@ -151,7 +151,9 @@ class ModuleBrowser extends React.Component {
                 <CopyIcon />
               </Flatknapp>
             </div>
-            <Code>{this.generateImportStatement(this.state.activeModule)}</Code>
+            <Code className="language-html">
+              {this.generateImportStatement(this.state.activeModule)}
+            </Code>
             <Popover
               orientering="over"
               ankerEl={this.state.popoverAnchor}

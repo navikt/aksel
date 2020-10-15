@@ -5,7 +5,7 @@ import classnames from "classnames";
 
 import "./styles.less";
 
-const Codeblock = ({ children, className, ...rest }) => {
+const Codeblock = ({ children, className = "", ...rest }) => {
   useEffect(() => {
     Prism.highlightAll();
   }, []);
@@ -13,7 +13,7 @@ const Codeblock = ({ children, className, ...rest }) => {
   return (
     <figure role="figure" aria-label="Kode-eksempel">
       <pre className={classnames(className, "language-")} {...rest}>
-        <code className="language-">{children}</code>
+        <code className={classnames(className, "language-")}>{children}</code>
       </pre>
     </figure>
   );
