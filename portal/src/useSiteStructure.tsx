@@ -77,7 +77,9 @@ export const useContentPage = (location) => {
         children: pages.filter(
           ({ slug }) =>
             slug.split("/").length === 3 &&
-            slug.startsWith(location.pathname.split("/").slice(1, 3).join("/"))
+            `${slug}/`.startsWith(
+              `${location.pathname.split("/").slice(1, 3).join("/")}/`
+            )
         ),
       }
     : undefined;
