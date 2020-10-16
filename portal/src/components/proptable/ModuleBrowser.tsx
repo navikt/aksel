@@ -17,33 +17,34 @@ import PropTable from "./PropTable";
 const ModuleBrowser = ({ context, ...props }) => {
   const modules = useProps(context.source);
 
-  console.log(modules);
   const [activeModule, setActiveModule] = useState<number>(0);
   const [anchor, setAnchor] = useState(undefined);
   const [defaultModule, setDefaultModule] = useState();
 
-  // getInitialActiveModule = () => {
-  //   const urlComponentName = window.location.pathname.split("/")[2];
-  //   const componentIndex = Object.keys(this.modules).findIndex(
-  //     (key) => key.toLowerCase() === urlComponentName
-  //   );
-  //   const defaultIndex = Object.keys(this.modules).findIndex(
-  //     (key) => key === "default"
-  //   );
+  useEffect(() => {
+    setActiveModule(getInitialActiveModule());
+  }, []);
 
-  //   const index = Math.max(0, defaultIndex, componentIndex);
+  const getInitialActiveModule = () => {
+    const urlComponentName = window.location.pathname.split("/")[2];
+    const componentIndex = modules.findIndex(
+      (module) => module.name.toLowerCase() === urlComponentName.toLowerCase()
+    );
+    const defaultIndex = modules.findIndex(
+      (module) => module.name === context.defaultExport
+    );
 
-  //   return Object.keys(this.modules).find((module, i) => i === index);
-  // };
-
-  // console.log(props.location.pathname);
-  const initialModule = () => {
-    setActiveModule(0);
+    return Math.max(0, defaultIndex, componentIndex);
   };
 
   const generateImportStatement = () => {
-    return `import { ${modules[activeModule].name} } from '${context.name}';`;
+    const format =
+      modules[activeModule].name === context.defaultExport
+        ? modules[activeModule].name
+        : `{ ${modules[activeModule].name} }`;
+    return `import ${format} from '${context.name}';`;
   };
+
   const copyContent = (e, content) => {
     setAnchor(anchor ? undefined : e.currentTarget);
     const textArea = document.createElement("textarea");
@@ -72,12 +73,9 @@ const ModuleBrowser = ({ context, ...props }) => {
                     onClick={(e) => setActiveModule(i)}
                   >
                     {module.name}
-                    {/* {moduleName === "default" && (
-                      <span>
-                        &nbsp;
-                        {`(${moduleName})`}
-                      </span>
-                    )} */}
+                    {module.name === context.defaultExport && (
+                      <span>&nbsp;(default)</span>
+                    )}
                   </a>
                 </li>
               );

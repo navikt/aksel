@@ -91,6 +91,7 @@ exports.onCreatePage = ({ page, actions }) => {
         peerDep: pkgjson.peerDependencies,
         main: pkgjson.main,
         version: pkgjson.version,
+        defaultExport: "defaultExport" in pkgjson && pkgjson.defaultExport,
       },
       component: TechnicalTemp,
     });

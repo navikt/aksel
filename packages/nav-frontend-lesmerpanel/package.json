@@ -30,5 +30,6 @@
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0",
     "react-collapse": "^5.0.0"
-  }
+  },
+  "defaultExport": "Lesmerpanel"
 }

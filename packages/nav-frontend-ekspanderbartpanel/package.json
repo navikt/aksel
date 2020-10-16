@@ -29,5 +29,6 @@
     "nav-frontend-js-utils": "^1.0.13",
     "react": "^15.4.2 || ^16.0.0",
     "react-collapse": "^5.0.0"
-  }
+  },
+  "defaultExport": "Ekspanderbartpanel"
 }
