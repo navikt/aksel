@@ -56,74 +56,77 @@ const ModuleBrowser = ({ context, ...props }) => {
   };
 
   return (
-    <div className="module-browser">
-      <Systemtittel id="moduler">Moduler</Systemtittel>
-      <Panel border className="module-browser__wrapper">
-        <nav>
-          <ul className="nav-list">
-            {modules.map((module, i) => {
-              if (module.name === undefined) return null;
-              return (
-                <li key={module.name}>
-                  <a
-                    href={`#${module.name}`}
-                    className={classnames({
-                      active: activeModule === i,
-                    })}
-                    onClick={(e) => setActiveModule(i)}
-                  >
-                    {module.name}
-                    {module.name === context.defaultExport && (
-                      <span>&nbsp;(default)</span>
-                    )}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-        <div className="module-browser__content">
-          <Select
-            label="Velg modul"
-            onChange={(e) => setActiveModule(Number(e.target.value))}
-            value={activeModule}
-          >
-            {modules.map((module, i) => {
-              if (module.name === undefined) return null;
-              return (
-                <option key={module.name} value={i}>
-                  {module.name}
-                  {/* {moduleName === "default" && ` (${moduleName})`} */}
-                </option>
-              );
-            })}
-          </Select>
-
-          <div className="module-browser--innline">
-            <Undertittel className="first">Import</Undertittel>
-            <Flatknapp
-              className="module-browser__copyknapp"
-              aria-label="Kopier import til utklippstavle"
-              // eslint-disable-next-line max-len
-              onClick={(e) => copyContent(e, generateImportStatement())}
-              kompakt
+    modules.length !== 0 && (
+      <div className="module-browser">
+        <Systemtittel id="moduler">Moduler</Systemtittel>
+        <Panel border className="module-browser__wrapper">
+          <nav>
+            <ul className="nav-list">
+              {modules.map((module, i) => {
+                if (module.name === undefined) return null;
+                return (
+                  <li key={module.name}>
+                    <a
+                      href={`#${module.name}`}
+                      className={classnames({
+                        active: activeModule === i,
+                      })}
+                      onClick={(e) => setActiveModule(i)}
+                    >
+                      {module.name}
+                      {module.name === context.defaultExport && (
+                        <span>&nbsp;(default)</span>
+                      )}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+          <div className="module-browser__content">
+            <Select
+              label="Velg modul"
+              onChange={(e) => setActiveModule(Number(e.target.value))}
+              value={activeModule}
             >
-              <CopyIcon />
-            </Flatknapp>
+              {modules.map((module, i) => {
+                if (module.name === undefined) return null;
+                return (
+                  <option key={module.name} value={i}>
+                    {module.name}
+                    {/* {moduleName === "default" && ` (${moduleName})`} */}
+                  </option>
+                );
+              })}
+            </Select>
+
+            <div className="module-browser--innline">
+              <Undertittel className="first">Import</Undertittel>
+              <Flatknapp
+                className="module-browser__copyknapp"
+                aria-label="Kopier import til utklippstavle"
+                // eslint-disable-next-line max-len
+                onClick={(e) => copyContent(e, generateImportStatement())}
+                kompakt
+              >
+                <CopyIcon />
+              </Flatknapp>
+            </div>
+            <Code className="language-jsx">{generateImportStatement()}</Code>
+            <Popover
+              orientering="over"
+              ankerEl={anchor}
+              onRequestClose={() => setAnchor(undefined)}
+            >
+              <p className="module-browser__popover"> Kopiert! </p>
+            </Popover>
+            <Undertittel>React props</Undertittel>
+
+            <PropTable moduleProps={modules[activeModule]} />
           </div>
-          <Code className="language-jsx">{generateImportStatement()}</Code>
-          <Popover
-            orientering="over"
-            ankerEl={anchor}
-            onRequestClose={() => setAnchor(undefined)}
-          >
-            <p className="module-browser__popover"> Kopiert! </p>
-          </Popover>
-          <Undertittel>React props</Undertittel>
-          <PropTable moduleProps={modules[activeModule]} />
-        </div>
-      </Panel>
-    </div>
+        </Panel>
+      </div>
+    )
   );
 };
 

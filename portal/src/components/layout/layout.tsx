@@ -10,7 +10,7 @@ import MdxWrapper from "./Mdxprovider";
 import { globalHistory } from "@reach/router";
 import "./layout.less";
 
-const Layout = (props) => {
+const Layout = ({ ...props }) => {
   useEffect(() => {
     return globalHistory.listen(() => {
       const contentPane = document.getElementsByClassName("mainContent")[0];

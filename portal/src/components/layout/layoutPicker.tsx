@@ -1,11 +1,26 @@
 import React from "react";
-import { Innholdstittel, Ingress } from "nav-frontend-typografi";
+import { Innholdstittel, Ingress, Undertekst } from "nav-frontend-typografi";
 import TabbedContainer from "./TabbedContainer";
 import { useContentPage } from "../../useSiteStructure";
 import classnames from "classnames";
+import { EtikettFokus, EtikettInfo } from "nav-frontend-etiketter";
+
+import "./layout.less";
+
+const componentTitleCls = (style) =>
+  classnames("componentTitle", {
+    "componentTitle--style": style,
+  });
 
 const LayoutPicker = (props) => {
   const page = useContentPage(props.location);
+
+  const isStyle = (item) => {
+    const style = item.match(/packages\/nav-frontend-(.*)\/md/);
+    if (!!!style || style.length < 2) return false;
+    if (style[1].indexOf("style") === -1) return false;
+    return true;
+  };
 
   if (page === undefined) {
     return props.children;
@@ -16,7 +31,7 @@ const LayoutPicker = (props) => {
       <div className="mdx-content">
         <section
           className={classnames("section", {
-            full: !!props.location.pathname.match(/technical\/?$/),
+            full: !!props.location.pathname.match(/other|technical\/?$/),
           })}
         >
           {props.children}
@@ -31,9 +46,13 @@ const LayoutPicker = (props) => {
   );
   defaultActive = defaultActive === -1 ? 0 : defaultActive;
 
+  const style = isStyle(page.componentPath);
   return (
     <>
-      <Innholdstittel>{page.title}</Innholdstittel>
+      <div className={componentTitleCls(style)}>
+        <Innholdstittel>{page.title}</Innholdstittel>
+        {style && <EtikettInfo>CSS</EtikettInfo>}
+      </div>
       {page.ingress && (
         <Ingress className="intro">
           <span dangerouslySetInnerHTML={{ __html: page.ingress }}></span>
@@ -50,7 +69,7 @@ const LayoutPicker = (props) => {
 
       <section
         className={classnames("section", {
-          full: !!props.location.pathname.match(/technical\/?$/),
+          full: !!props.location.pathname.match(/other|technical\/?$/),
         })}
       >
         {props.children}

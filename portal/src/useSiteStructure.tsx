@@ -14,6 +14,7 @@ const usePages = () =>
               }
             }
             path
+            componentPath
           }
         }
       }
@@ -22,6 +23,7 @@ const usePages = () =>
     ...(edge.node.context.frontmatter || {}),
     slug: edge.node.path.replace(/^\/|\/$/g, ""),
     link: edge.node.path.replace(/\/$/, ""),
+    componentPath: edge.node?.componentPath || "",
   }));
 
 export const useBreadcrumb = (location) => {
@@ -42,11 +44,17 @@ export const useMainMenu = () =>
   );
 
 export const usePageMenu = (location) =>
-  usePages().filter(
-    ({ slug }) =>
-      slug.split("/").length === 2 &&
-      slug.split("/")[0] === location.pathname.split("/")[1]
-  );
+  usePages()
+    .filter(
+      ({ slug }) =>
+        slug.split("/").length === 2 &&
+        slug.split("/")[0] === location.pathname.split("/")[1]
+    )
+    .sort((a, b) => {
+      if (!/^[a-zA-Z\s]+$/.test(a.title)) return 1;
+      if (!/^[a-zA-Z\s]+$/.test(b.title)) return -1;
+      return a.title.localeCompare(b.title);
+    });
 
 export const useNavigationPage = (location) =>
   usePages().find(
