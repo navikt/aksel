@@ -21,9 +21,9 @@ const Technical = ({pageContext,...props}) => {
     const [activeToggle, setActiveToggle] = useState(0)
     const [anchor, setAnchor] = useState(undefined)
 
-    const { version, name, peerDep} = pageContext;
+    const { version, name, peerDep, allDep} = pageContext;
     
-    const deps = Object.keys(peerDep)
+    const deps = allDep;
     
     const installInstructions = [
         `npm install ${deps.join(" ")} --save`,
@@ -114,9 +114,7 @@ const Technical = ({pageContext,...props}) => {
                 <tr>
                     <th>Peer&nbsp;dependencies:</th>
                     <td className="dependencies">
-                    {Object.keys(
-                        peerDep
-                    ).map((dep) => [
+                    {Object.keys(peerDep).map((dep) => [
                         <Lenke
                         key={dep}
                         href={`https://www.npmjs.com/package/${dep}`}
