@@ -10,15 +10,15 @@ const Sidebar = ({ location, className = "" }) => {
   const page = useNavigationPage(location);
   const menu = usePageMenu(location);
 
-  const isBeta = (item) => {
-    const style = item.match(/packages\/nav-frontend-(.*)\/md/);
+  const isBeta = (path) => {
+    const style = path.match(/packages\/nav-frontend-(.*)\/md/);
     if (!!!style || style.length < 2) return false;
     if (style[1].indexOf("beta") === -1) return false;
     return true;
   };
 
-  const isStyle = (item) => {
-    const style = item.match(/packages\/nav-frontend-(.*)\/md/);
+  const isStyle = (path) => {
+    const style = path.match(/packages\/nav-frontend-(.*)\/md/);
     if (!!!style || style.length < 2) return false;
     if (style[1].indexOf("style") === -1) return false;
     return true;
