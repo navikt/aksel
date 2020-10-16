@@ -34,7 +34,16 @@ const Sidebar = ({ location, className = "" }) => {
           {menu.map(({ link, title, componentPath }, index) => {
             return (
               <li key={index}>
-                <Link to={link} activeClassName="active">
+                <Link
+                  to={link}
+                  className={
+                    link
+                      .split("/")
+                      .every((s, i) => location.pathname.split("/")[i] === s)
+                      ? "active"
+                      : ""
+                  }
+                >
                   {title}
                   {isBeta(componentPath) && (
                     <EtikettFokus>
