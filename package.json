@@ -89,7 +89,8 @@
     "gulp:build": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --docs --ignoreErrors",
     "gulp:build-nodocs": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --ignoreErrors",
     "clean:lib": "node utilities/scripts/clean.js",
-    "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile"
+    "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile",
+    "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
   },
   "workspaces": [
     "website",

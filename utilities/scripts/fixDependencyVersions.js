@@ -12,7 +12,7 @@ const globalDeps = extend(
 
 function getModules() {
   return new Promise((resolve, reject) => {
-    glob("./packages/node_modules/**/package.json", {}, (err, files) => {
+    glob("../../packages/**/package.json", {}, (err, files) => {
       if (err) {
         reject(err);
       } else {
