@@ -14,8 +14,8 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-core": "^5.0.3",
-    "nav-frontend-grid-style": "^0.2.22",
+    "nav-frontend-core": "^5.0.5",
+    "nav-frontend-grid-style": "^0.2.24",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },

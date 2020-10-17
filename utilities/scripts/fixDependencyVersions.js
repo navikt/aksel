@@ -2,7 +2,7 @@ const glob = require("glob");
 const fs = require("fs");
 const extend = require("extend");
 const utils = require("./utils");
-const globalPackage = require("./../package.json");
+const globalPackage = require("../../package.json");
 
 const globalDeps = extend(
   {},
@@ -12,10 +12,11 @@ const globalDeps = extend(
 
 function getModules() {
   return new Promise((resolve, reject) => {
-    glob("../../packages/**/package.json", {}, (err, files) => {
+    glob("./packages/**/package.json", {}, (err, files) => {
       if (err) {
         reject(err);
       } else {
+        console.log(files);
         resolve(files);
       }
     });
