@@ -16,7 +16,6 @@ function getModules() {
       if (err) {
         reject(err);
       } else {
-        console.log(files);
         resolve(files);
       }
     });

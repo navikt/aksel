@@ -20,6 +20,8 @@ jobs:
           node-version: 13
       - run: yarn install --frozen-lockfile
       - run: yarn lint
+      - run: yarn boot
+      - run: yarn chromatic --ci
 
   publish-npm:
     needs: build
@@ -44,7 +46,7 @@ jobs:
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
       - run: yarn lerna publish from-package --yes
         env:
-            NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
 
   publish-pages:
     needs: publish-npm

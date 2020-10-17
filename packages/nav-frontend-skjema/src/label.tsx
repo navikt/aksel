@@ -1,4 +1,3 @@
-import * as PT from "prop-types";
 import * as React from "react";
 import { HTMLAttributes } from "react";
 import * as classnames from "classnames";

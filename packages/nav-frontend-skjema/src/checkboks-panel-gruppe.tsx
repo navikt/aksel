@@ -9,7 +9,6 @@ import {
   SkjemaGruppeFeilContext,
   SkjemaGruppeFeilContextProps,
 } from ".";
-import SkjemaelementFeilmelding from "./skjemaelement-feilmelding";
 
 export interface CheckboksPanelProps
   extends React.InputHTMLAttributes<HTMLInputElement> {

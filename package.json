@@ -31,6 +31,7 @@
     "@typescript-eslint/parser": "^4.3.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
+    "chromatic": "^5.2.0",
     "eslint": "^7.10.0",
     "eslint-config-react-app": "^5.2.1",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -76,7 +77,7 @@
     "clean": "yarn workspace portal clean",
     "build:gatsby": "yarn workspace portal build:gatsby",
     "serve": "yarn workspace portal serve",
-    "storybook": "yarn install && start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "lerna:watch": "yarn run lerna run watch --parallel",
     "lerna:build": "yarn run lerna run build",
@@ -90,7 +91,8 @@
     "gulp:build-nodocs": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --ignoreErrors",
     "clean:lib": "node utilities/scripts/clean.js",
     "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile",
-    "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
+    "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
+    "chromatic": "npx chromatic --project-token x3xqdfgkujg"
   },
   "workspaces": [
     "website",

@@ -79,7 +79,6 @@ class Select extends React.Component<SelectProps> {
       ...other
     } = this.props;
     const inputId = id || guid();
-    const errorId = guid();
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => {

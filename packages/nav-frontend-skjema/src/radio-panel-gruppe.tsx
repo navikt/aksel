@@ -7,7 +7,6 @@ import {
   SkjemaGruppe,
   SkjemaGruppeFeilContext,
   SkjemaGruppeFeilContextProps,
-  SkjemaelementFeilmelding,
 } from ".";
 import "nav-frontend-skjema-style";
 
