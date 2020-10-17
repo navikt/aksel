@@ -1,28 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { Systemtittel } from "nav-frontend-typografi";
-import Panel from "nav-frontend-paneler";
-import { Select } from "nav-frontend-skjema";
-import { useProps } from "../../useProps";
-import OverflowDetector from "../overflow-detector/OverflowDetector";
-import "./styles.less";
-import { Undertittel } from "nav-frontend-typografi";
 import classnames from "classnames";
 import { Flatknapp } from "nav-frontend-knapper";
+import Panel from "nav-frontend-paneler";
+import Popover from "nav-frontend-popover";
+import { Select } from "nav-frontend-skjema";
+import { Systemtittel, Undertittel } from "nav-frontend-typografi";
+import React, { useEffect, useState } from "react";
+import { useProps } from "../../useProps";
 import { CopyIcon } from "../assets/images/svg";
 import Code from "../code/Code";
-import Popover from "nav-frontend-popover";
-
 import PropTable from "./PropTable";
+import "./styles.less";
+
 // import Alertstriper from "nav-frontend-alertstriper";
 const ModuleBrowser = ({ context, ...props }) => {
   const modules = useProps(context.source);
 
   const [activeModule, setActiveModule] = useState<number>(0);
   const [anchor, setAnchor] = useState(undefined);
-  const [defaultModule, setDefaultModule] = useState();
 
   useEffect(() => {
     setActiveModule(getInitialActiveModule());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getInitialActiveModule = () => {

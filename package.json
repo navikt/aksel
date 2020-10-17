@@ -50,7 +50,9 @@
   },
   "prettier": {},
   "eslintConfig": {
-    "extends": "react-app",
+    "extends": [
+      "react-app"
+    ],
     "ignorePatterns": [
       "node_modules",
       "lib"

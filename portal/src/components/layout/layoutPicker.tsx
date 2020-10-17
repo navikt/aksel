@@ -1,11 +1,10 @@
-import React from "react";
-import { Innholdstittel, Ingress, Undertekst } from "nav-frontend-typografi";
-import TabbedContainer from "./TabbedContainer";
-import { useContentPage } from "../../useSiteStructure";
 import classnames from "classnames";
-import { EtikettFokus, EtikettInfo } from "nav-frontend-etiketter";
-
+import { EtikettInfo } from "nav-frontend-etiketter";
+import { Ingress, Innholdstittel } from "nav-frontend-typografi";
+import React from "react";
+import { useContentPage } from "../../useSiteStructure";
 import "./layout.less";
+import TabbedContainer from "./TabbedContainer";
 
 const componentTitleCls = (style) =>
   classnames("componentTitle", {

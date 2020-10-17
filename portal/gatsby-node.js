@@ -30,7 +30,7 @@ const scan = (key) => {
 
 exports.onCreatePage = ({ page, actions }) => {
   //console.log(page.path);
-  const { createPage, deletePage, createRedirect, setPageData } = actions;
+  const { createPage, deletePage } = actions;
   const TechnicalTemp = require.resolve(
     `./src/components/layout/templates/technical.jsx`
   );
