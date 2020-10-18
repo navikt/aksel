@@ -7,6 +7,7 @@ function isSource(node) {
     !node ||
     node.relativePath.indexOf("/example") !== -1 ||
     node.relativePath.indexOf(".docs") !== -1 ||
+    node.relativePath.indexOf("/stories") !== -1 ||
     node.relativePath.indexOf(".md") !== -1
   )
     return false;

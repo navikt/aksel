@@ -74,9 +74,10 @@ yarn-error.log
 **/public
 
 # Transpiled package files
-packages/**/lib 
+packages/**/lib
 *.d.ts
 
+.vscode
 # File created on build in nav-frontend-core
 *-exports.less
 

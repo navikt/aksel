@@ -20,7 +20,7 @@ const usePages = () =>
       }
     }
   `).allSitePage.edges.map((edge) => ({
-    ...(edge.node.context.frontmatter || {}),
+    ...(edge.node?.context?.frontmatter || {}),
     slug: edge.node.path.replace(/^\/|\/$/g, ""),
     link: edge.node.path.replace(/\/$/, ""),
     componentPath: edge.node?.componentPath || "",

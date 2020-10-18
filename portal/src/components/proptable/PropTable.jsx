@@ -9,7 +9,6 @@ import OverflowDetector from "../overflow-detector/OverflowDetector";
 import "./styles.less";
 
 const PropTable = ({ moduleProps, ...props }) => {
-  console.log(moduleProps);
   const propTypes = moduleProps.props;
   const keys = Object.keys(propTypes).sort();
   const propTypeDocs = keys.map((key) => ({

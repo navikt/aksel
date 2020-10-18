@@ -76,6 +76,7 @@ module.exports = {
         path: `${__dirname}/../packages`,
         ignore: [
           `**/*.js`,
+          `**/stories/**`,
           `**/*eksempel.js`,
           `**/sample/*.js`,
           `**/*.example.js`,

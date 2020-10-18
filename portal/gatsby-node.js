@@ -29,7 +29,6 @@ const scan = (key) => {
 };
 
 exports.onCreatePage = ({ page, actions }) => {
-  //console.log(page.path);
   const { createPage, deletePage } = actions;
   const TechnicalTemp = require.resolve(
     `./src/components/layout/templates/technical.jsx`
@@ -56,8 +55,6 @@ exports.onCreatePage = ({ page, actions }) => {
     createPage(newPage);
     deletePage(page);
   };
-
-  // console.log(page);
   if (compOverview !== null) {
     makePage(`/components/${compOverview[2].toLowerCase()}`, compOverview[2]);
     // createRedirect({
@@ -105,7 +102,6 @@ exports.onCreatePage = ({ page, actions }) => {
   }
 
   if (compIngress !== null) {
-    // console.log(page);
     makePage(
       `/components/${compIngress[2].toLowerCase()}/ingress`,
       "Ingress",

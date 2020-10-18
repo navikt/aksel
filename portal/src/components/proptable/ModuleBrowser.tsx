@@ -1,7 +1,7 @@
 import classnames from "classnames";
 import { Flatknapp } from "nav-frontend-knapper";
 import Panel from "nav-frontend-paneler";
-import Popover from "nav-frontend-popover";
+import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Select } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
@@ -112,7 +112,7 @@ const ModuleBrowser = ({ context, ...props }) => {
             </div>
             <Code className="language-jsx">{generateImportStatement()}</Code>
             <Popover
-              orientering="over"
+              orientering={PopoverOrientering.Over}
               ankerEl={anchor}
               onRequestClose={() => setAnchor(undefined)}
             >
