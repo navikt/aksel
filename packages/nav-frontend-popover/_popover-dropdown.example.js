@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
-import { Menyknapp } from "NavFrontendModules/nav-frontend-ikonknapper";
-import { guid } from "NavFrontendModules/nav-frontend-js-utils";
+import { Menyknapp } from "nav-frontend-ikonknapper";
+import { guid } from "nav-frontend-js-utils";
 // eslint-disable-next-line
 import Popover from "./";
 

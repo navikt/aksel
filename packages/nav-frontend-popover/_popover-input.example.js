@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Input } from "NavFrontendModules/nav-frontend-skjema";
-import { guid } from "NavFrontendModules/nav-frontend-js-utils";
+import { Input } from "nav-frontend-skjema";
+import { guid } from "nav-frontend-js-utils";
 // eslint-disable-next-line
 import Popover from "./";
 

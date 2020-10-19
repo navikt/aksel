@@ -52,7 +52,9 @@ class Hjelpetekst extends React.Component<HjelpetekstProps, State> {
     };
 
     this.popoverId = guid();
+  }
 
+  componentDidMount() {
     window.addEventListener("keydown", this.handleKeydown);
   }
 

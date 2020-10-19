@@ -10,8 +10,8 @@
   ],
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-js-utils": "^1.0.11",
-    "nav-frontend-veileder-style": "^2.0.16",
+    "nav-frontend-js-utils": "^1.0.13",
+    "nav-frontend-veileder-style": "^2.0.18",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
@@ -21,5 +21,6 @@
     "nav-frontend-veileder-style": "^2.0.18",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
-  }
+  },
+  "defaultExport": "Veileder"
 }

@@ -82,14 +82,11 @@ class Stegindikator extends React.Component<
       visLabel: props.visLabel,
       kompakt: props.kompakt,
     };
-
-    if (props.autoResponsiv) {
-      window.addEventListener("resize", this.adjustSize);
-    }
   }
 
   componentDidMount() {
     if (this.props.autoResponsiv) {
+      window.addEventListener("resize", this.adjustSize);
       this.adjustSize();
     }
   }

@@ -1,0 +1,72 @@
+@import (reference) "~nav-frontend-core/less/_variabler";
+
+body {
+  margin: 0;
+}
+
+.dsportal {
+  display: grid;
+  grid-template:
+    "header header" 150px
+    "sidebar main" minmax(calc(100vh - 100px), auto)
+    "footer footer" auto / 20rem 1fr;
+
+  &__header {
+    grid-area: header;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 3rem 0 3rem;
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+    background-color: #eee;
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  &__main {
+    grid-area: main;
+    background-color: #fff;
+    padding: 1rem 2rem 0 2rem;
+  }
+
+  &--fullwidth {
+    grid-column: sidebar/main;
+  }
+
+  &__footer {
+    grid-area: footer;
+    height: 150px;
+    background-color: #749;
+  }
+}
+
+.mdx-content {
+  position: relative;
+  max-width: 700px;
+}
+
+.componentTitle {
+  display: flex;
+  align-items: center;
+
+  &--beta {
+    margin-top: 2.5rem;
+  }
+
+  &--style {
+    .etikett {
+      background: @navBlaLighten80;
+    }
+  }
+
+  .etikett {
+    margin-left: 1rem;
+  }
+}
+
+// .full {
+//   //max-width: none;
+// }

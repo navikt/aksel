@@ -1,1 +1,0 @@
-Snakkebobler brukes for å vise en direkte melding eller informasjon fra en konkret avsender. Snakkebobler bør brukes som del av en logg over beskjeder sendt frem og tilbake mellom to eller flere deltagere.

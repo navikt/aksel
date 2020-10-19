@@ -16,7 +16,7 @@
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {
-    "nav-frontend-core": "^5.0.3",
-    "nav-frontend-paneler-style": "^0.3.22"
+    "nav-frontend-core": "^5.0.5",
+    "nav-frontend-paneler-style": "^0.3.24"
   }
 }

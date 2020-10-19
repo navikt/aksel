@@ -28,6 +28,9 @@ const tsDocgen = require("react-docgen-typescript").withDefaultConfig({
   propFilter: { skipPropsWithoutDoc: true },
 });
 
+// const handler = tsDocgen.handlers.concat(exportsHandler);
+// const resolver = tsDocgen.resolver.findExportedComponentDefinition;
+
 const babelPreset = {
   presets: ["es2015", "react", "stage-2"],
   plugins: [
@@ -130,7 +133,6 @@ function buildJs() {
 
 function parseTsAndAppendDocInfo(contents, file) {
   const tsPath = file.path.replace(tsDocLib, tsDocSrc).replace(/.js$/g, ".tsx");
-
   let docInfo;
   let docInfoString;
 

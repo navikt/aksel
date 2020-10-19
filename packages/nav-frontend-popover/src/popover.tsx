@@ -69,12 +69,11 @@ class Popover extends React.Component<PopoverProps, PopoverState> {
     this.state = {
       apen: this.props.ankerEl !== undefined,
     };
-
-    window.addEventListener("click", this.handleClick);
-    window.addEventListener("keydown", this.handleKeydown);
   }
 
   componentDidMount() {
+    window.addEventListener("click", this.handleClick);
+    window.addEventListener("keydown", this.handleKeydown);
     this.popoverEl = this.popoverRef.current;
     this.scrollParents = getScrollParents(this.popoverEl);
     this.scrollParents.forEach((scrollParent) =>

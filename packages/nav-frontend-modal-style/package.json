@@ -11,9 +11,9 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "peerDependencies": {
-    "nav-frontend-core": "^5.0.3",
-    "nav-frontend-lukknapp-style": "^0.2.25",
-    "nav-frontend-paneler-style": "^0.3.22"
+    "nav-frontend-core": "^5.0.5",
+    "nav-frontend-lukknapp-style": "^0.2.27",
+    "nav-frontend-paneler-style": "^0.3.24"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.5",

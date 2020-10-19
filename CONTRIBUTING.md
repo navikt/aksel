@@ -57,7 +57,6 @@ Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildi
 Når du har laget eller endret på en komponent er det fint om du også dokumenterer dette. Komponentene dokumenteres på to måter:
 
 - Som kommentarer på interface i TypeScript-koden. Dette må være på plass for at tabellen over props skal genereres på komponent-siden på design.nav.no.
-- Som `.md(x)`-filer i pakken. Les mer om [hvordan disse funker her](https://github.com/navikt/nav-frontend-moduler/blob/master/guideline-app/CONTRIBUTING.md).
 
 Det kan også være lurt å kjøre `npm run start-guideline-app` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
 
