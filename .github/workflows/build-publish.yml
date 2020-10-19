@@ -54,7 +54,7 @@ jobs:
           registry-url: http://registry.npmjs.org
           node-version: 13
       - run: yarn install --frozen-lockfile
-      - run: yarn gulp:build-nodocs
+      - run: yarn gulp:build
       - run: git config --global user.email "ken.aleksander.johansen@nav.no"
       - run: git config --global user.name "navikt"
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
