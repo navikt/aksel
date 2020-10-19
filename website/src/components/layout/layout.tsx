@@ -11,7 +11,7 @@ import MdxWrapper from "./Mdxprovider";
 import { globalHistory } from "@reach/router";
 import "./layout.less";
 
-const initAmplitude = () => {
+const initAmplitude = () =>
   amplitude.getInstance().init("default", "", {
     apiEndpoint: "amplitude.nav.no/collect-auto",
     saveEvents: false,
@@ -19,10 +19,21 @@ const initAmplitude = () => {
     includeReferrer: true,
     platform: window.location.toString(),
   });
+
+const trackPage = () =>
   amplitude.getInstance().logEvent("sidevisning", {
     app: "desginsystemet",
     team: "desginsystem",
   });
+
+const useAnalytics = (path) => {
+  useEffect(() => {
+    initAmplitude();
+  }, []);
+
+  useEffect(() => {
+    trackPage();
+  }, [path]);
 };
 
 const Layout = (props) => {
@@ -34,9 +45,7 @@ const Layout = (props) => {
     });
   }, []);
 
-  useEffect(() => {
-    initAmplitude();
-  }, [props.path]);
+  useAnalytics(props.path);
 
   return (
     <div id="app">
