@@ -24,10 +24,9 @@ const LayoutPicker = (props) => {
   if (page === undefined) {
     return props.children;
   }
-
   if (page.children.length === 0) {
     return (
-      <div className="mdx-content">
+      <div>
         <section
           className={classnames("section", {
             full: !!props.location.pathname.match(/other|technical\/?$/),
@@ -46,6 +45,7 @@ const LayoutPicker = (props) => {
   defaultActive = defaultActive === -1 ? 0 : defaultActive;
 
   const style = isStyle(page.componentPath);
+
   return (
     <>
       <div className={componentTitleCls(style)}>

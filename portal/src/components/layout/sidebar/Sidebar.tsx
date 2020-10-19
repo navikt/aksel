@@ -1,10 +1,18 @@
 import React from "react";
 import { Link } from "gatsby";
+import classnames from "classnames";
 import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { EtikettFokus, EtikettInfo } from "nav-frontend-etiketter";
 import { useNavigationPage, usePageMenu } from "../../../useSiteStructure";
 import "./styles.less";
+
+const cls = (link: string, location) =>
+  classnames({
+    active: link
+      .split("/")
+      .every((s, i) => location.pathname.split("/")[i] === s),
+  });
 
 const Sidebar = ({ location, className = "" }) => {
   const page = useNavigationPage(location);
@@ -30,20 +38,16 @@ const Sidebar = ({ location, className = "" }) => {
         <h2 id="left-navigation-title" className="typo-systemtittel">
           {page?.title}
         </h2>
-        <ul className="nav-list">
+        <ul
+          className={classnames("nav-list", {
+            "leftNavigation--components":
+              location.pathname.indexOf("components") !== -1,
+          })}
+        >
           {menu.map(({ link, title, componentPath }, index) => {
             return (
               <li key={index}>
-                <Link
-                  to={link}
-                  className={
-                    link
-                      .split("/")
-                      .every((s, i) => location.pathname.split("/")[i] === s)
-                      ? "active"
-                      : ""
-                  }
-                >
+                <Link to={link} className={cls(link, location)}>
                   {title}
                   {isBeta(componentPath) && (
                     <EtikettFokus>

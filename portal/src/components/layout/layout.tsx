@@ -41,6 +41,7 @@ const Layout = ({ ...props }) => {
             props.location.pathname === "/404.html"
           ) && <Sidebar className="leftNavigation" location={props.location} />}
           <main
+            id="hovedinnhold"
             className={cl("mainContent", {
               "dsportal--fullwidth": props.path === "/",
             })}

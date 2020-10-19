@@ -15,8 +15,6 @@ import ColorSample from "../components/color-sample/ColorSample";
 import ColorPalette from "../components/color-palette/ColorPalette";
 import ContrastSample from "../components/contrast-sample/ContrastSample";
 
-// Modal.setAppElement(".mainWrapper");
-
 class Palette extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +23,9 @@ class Palette extends React.Component {
     };
   }
 
+  componentDidMount() {
+    Modal.setAppElement(".mainWrapper");
+  }
   renderModalContent = () => (
     <div id="color-modal">
       <Systemtittel>{this.state.activeColor.name}</Systemtittel>
