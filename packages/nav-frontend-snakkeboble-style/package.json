@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-snakkeboble-style",
-  "version": "0.2.31",
+  "version": "0.2.32",
   "main": "src/snakkeboble-style.less",
   "license": "MIT",
   "files": [
@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.5",
-    "nav-frontend-typografi-style": "^1.0.25",
+    "nav-frontend-typografi-style": "^1.0.26",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {

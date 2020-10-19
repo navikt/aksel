@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-typografi-style",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "main": "src/index.less",
   "license": "SEE LICENSE IN LICENSE",
   "files": [

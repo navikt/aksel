@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tabs-style",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "main": "src/tabs-style.less",
   "license": "MIT",
   "files": [
@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.5",
-    "nav-frontend-typografi-style": "^1.0.25",
+    "nav-frontend-typografi-style": "^1.0.26",
     "react": "^15.4.2 || ^16.0.0"
   }
 }
