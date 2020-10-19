@@ -21,10 +21,26 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn lint
       - run: yarn boot
-      - run: yarn chromatic --ci
+
+  chromatic:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Required to retrieve git history
+    - uses: actions/setup-node@v1
+      with:
+          node-version: 13
+    - run: yarn boot
+    - uses: chromaui/action@v1
+      with:
+        token: ${{ secrets.GIT_REPO }}
+        projectToken: ${{ secrets.CHROMATIC }}
+
 
   publish-npm:
-    needs: build
+    needs: chromatic
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
