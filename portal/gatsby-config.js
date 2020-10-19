@@ -3,10 +3,12 @@ module.exports = {
     title: `Designsystemet NAV`,
     description: ``,
     author: `@navikt`,
+    siteUrl: "https://design.nav.no/",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
+    "gatsby-plugin-cname",
     {
       resolve: "gatsby-plugin-mdx",
       options: {

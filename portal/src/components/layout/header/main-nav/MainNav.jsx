@@ -8,7 +8,6 @@ import "./styles.less";
 
 const MainNav = () => {
   const menu = useMainMenu();
-
   return (
     <nav className="mainNav" aria-label="Hoved">
       <div className="mainNav__wrapper">

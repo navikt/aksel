@@ -22,6 +22,7 @@ const MdxWrapper = (props) => (
       code: (props) => {
         return <Codeblock {...props} />;
       },
+      Undertittel,
       InlineCode,
       FileIcon,
       Cog,

@@ -1,4 +1,3 @@
-// TODO: Do dfs of every package loaded from package.json, "storing" every found package so we dont have to look it up next run
 let packages = {};
 
 const getDependencyEdgesFromPackages = () =>
@@ -30,6 +29,11 @@ const scan = (key) => {
 
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
+
+  if (page.path.indexOf("dev-404-page") !== -1) {
+    deletePage(page);
+    return;
+  }
   const TechnicalTemp = require.resolve(
     `./src/components/layout/templates/technical.jsx`
   );
@@ -57,12 +61,7 @@ exports.onCreatePage = ({ page, actions }) => {
   };
   if (compOverview !== null) {
     makePage(`/components/${compOverview[2].toLowerCase()}`, compOverview[2]);
-    // createRedirect({
-    //   fromPath: `/components/${compOverview[2].toLowerCase()}`,
-    //   toPath: `/components/${compOverview[2].toLowerCase()}/overview`,
-    //   isPermanent: true,
-    //   redirectInBrowser: true,
-    // });
+
     makePage(
       `/components/${compOverview[2].toLowerCase()}/overview`,
       "Oversikt",
@@ -109,8 +108,3 @@ exports.onCreatePage = ({ page, actions }) => {
     );
   }
 };
-
-// exports.onCreateNode = async ({ ...props }) => {
-//   //const resolver = require(`../utilities/build/props-resolver`);
-//   // resolver.onCreateNode({ ...props });
-// };

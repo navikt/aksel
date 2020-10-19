@@ -8,7 +8,7 @@ import "./styles.less";
 const Codeblock = ({ children, className = "", ...rest }) => {
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
+  }, [children]);
 
   return (
     <figure role="figure" aria-label="Kode-eksempel">
