@@ -69,6 +69,6 @@ jobs:
         with:
           GITHUB_TOKEN: $NAV_DS_TOKEN
           BRANCH: gh-pages
-          FOLDER: portal/public
+          FOLDER: website/public
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
