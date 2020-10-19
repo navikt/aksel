@@ -12,6 +12,10 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc --watch -p tsconfig.json"
+  },
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-alertstriper-style": "^2.0.21",
