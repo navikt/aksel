@@ -64,18 +64,21 @@ const ModuleBrowser = ({ context, ...props }) => {
                 if (module.name === undefined) return null;
                 return (
                   <li key={module.name}>
-                    <a
-                      href={`#${module.name}`}
-                      className={classnames({
-                        active: activeModule === i,
-                      })}
+                    <button
+                      className={classnames(
+                        "module-browser--reset-button",
+                        "module-browser__button",
+                        {
+                          active: activeModule === i,
+                        }
+                      )}
                       onClick={(e) => setActiveModule(i)}
                     >
                       {module.name}
                       {module.name === context.defaultExport && (
                         <span>&nbsp;(default)</span>
                       )}
-                    </a>
+                    </button>
                   </li>
                 );
               })}
