@@ -7,7 +7,6 @@
     border: none;
     margin: 0;
     padding: 0;
-    width: 100%;
     overflow: visible;
     background: transparent;
     color: inherit;
@@ -22,15 +21,11 @@
   }
 
   &__button {
-    display: flex;
-    align-items: center;
+    width: 100%;
     padding: 0.75rem 1rem;
     color: @navBla;
-    text-decoration: none;
     border-left: 2px solid transparent;
-    position: relative;
     line-height: 1.15rem;
-    box-sizing: border-box;
 
     &:hover {
       background: #f8f8f8;
@@ -46,17 +41,6 @@
     &.active {
       background: @navBla;
       color: white !important;
-      font-weight: normal !important;
-
-      .etikett {
-        &--info {
-          background: @navBlaLighten80;
-        }
-
-        &--fokus {
-          background: @navOransjeLighten60;
-        }
-      }
     }
   }
 
