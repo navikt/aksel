@@ -20,16 +20,15 @@ export const Bash = ({ children, className, ...props }: CodeProps) => (
 );
 
 const Code = ({ children, className, ...props }: CodeProps) => {
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [children]);
-
+  const highlighted = Prism.highlight(children, Prism.languages.jsx);
   return (
     <figure role="figure" aria-label="Kode-eksempel">
-      <pre>
-        <code className={classnames(className, "language-")} {...props}>
-          {children}
-        </code>
+      <pre className="language-">
+        <code
+          className={classnames(className)}
+          {...props}
+          dangerouslySetInnerHTML={{ __html: highlighted }}
+        ></code>
       </pre>
     </figure>
   );
