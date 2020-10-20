@@ -18,10 +18,21 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 13
-      - run: yarn install --frozen-lockfile
-      - run: yarn lint
-      - run: yarn boot
-      - run: yarn build:gatsby
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install deps
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      - name: Gulp-build
+        run: yarn boot
+      - name: Eslint and Stylelint
+        run: yarn lint
+      - name: Test gatsby-build
+        run: yarn build:gatsby
+
 
   chromatic:
     needs: build
@@ -33,12 +44,21 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 13
-      - run: yarn boot
-      - uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GIT_REPO }}
-          projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: false
+
+    - uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+    - name: Install deps
+      if: steps.yarn-cache.outputs.cache-hit != 'true'
+      run: yarn install --frozen-lockfile
+    - name: Gulp-build
+      run: yarn boot
+    - uses: chromaui/action@v1
+      with:
+        token: ${{ secrets.GIT_REPO }}
+        projectToken: ${{ secrets.CHROMATIC }}
+        exitZeroOnChanges: false
 
   publish-npm:
     needs: chromatic
@@ -53,8 +73,15 @@ jobs:
         with:
           registry-url: http://registry.npmjs.org
           node-version: 13
-      - run: yarn install --frozen-lockfile
-      - run: yarn gulp:build
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install deps
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      - name: Gulp-build
+        run: yarn boot
       - run: git config --global user.email "ken.aleksander.johansen@nav.no"
       - run: git config --global user.name "navikt"
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
@@ -77,9 +104,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 13
-      - run: yarn install --frozen-lockfile
-      - run: yarn boot
-      - run: yarn build:gatsby
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install deps
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      - name: Gulp-build
+        run: yarn boot
+      - name: Building Gatsby
+        run: yarn build:gatsby
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
