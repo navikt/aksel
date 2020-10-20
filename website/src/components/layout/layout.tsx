@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { default as cl } from "classnames";
 import { Helmet } from "react-helmet";
+import amplitude from "amplitude-js";
 
 import Header from "./header/header";
 import Breadcrumb from "./Breadcrumb";
@@ -10,7 +11,32 @@ import MdxWrapper from "./Mdxprovider";
 import { globalHistory } from "@reach/router";
 import "./layout.less";
 
-const Layout = ({ ...props }) => {
+const initAmplitude = () =>
+  amplitude.getInstance().init("default", "", {
+    apiEndpoint: "amplitude.nav.no/collect-auto",
+    saveEvents: false,
+    includeUtm: true,
+    includeReferrer: true,
+    platform: window.location.toString(),
+  });
+
+const trackPage = () =>
+  amplitude.getInstance().logEvent("sidevisning", {
+    app: "desginsystemet",
+    team: "desginsystem",
+  });
+
+const useAnalytics = (path) => {
+  useEffect(() => {
+    initAmplitude();
+  }, []);
+
+  useEffect(() => {
+    trackPage();
+  }, [path]);
+};
+
+const Layout = (props) => {
   useEffect(() => {
     return globalHistory.listen(() => {
       const contentPane = document.getElementsByClassName("mainContent")[0];
@@ -18,6 +44,9 @@ const Layout = ({ ...props }) => {
       window.scrollTo(0, 0);
     });
   }, []);
+
+  useAnalytics(props.path);
+
   return (
     <div id="app">
       <Helmet

@@ -6,6 +6,7 @@
     "@mdx-js/mdx": "^1.6.18",
     "@mdx-js/react": "^1.6.18",
     "@types/classnames": "^2.2.10",
+    "amplitude-js": "^7.3.0",
     "babel-plugin-prismjs": "^2.0.1",
     "babel-preset-gatsby": "^0.5.13",
     "classnames": "^2.2.6",
