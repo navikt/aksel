@@ -18,6 +18,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 13
+
       - uses: actions/cache@v2
         with:
           path: '**/node_modules'
@@ -29,6 +30,9 @@ jobs:
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
+      - name: Test gatsby-build
+        run: yarn build:gatsby
+
 
   chromatic:
     needs: build
@@ -39,7 +43,7 @@ jobs:
         fetch-depth: 0 # Required to retrieve git history
     - uses: actions/setup-node@v1
       with:
-          node-version: 13
+        node-version: 13
     - uses: actions/cache@v2
       with:
         path: '**/node_modules'
@@ -54,7 +58,6 @@ jobs:
         token: ${{ secrets.GIT_REPO }}
         projectToken: ${{ secrets.CHROMATIC }}
         exitZeroOnChanges: false
-
 
   publish-npm:
     needs: chromatic
