@@ -11,9 +11,9 @@ import {
 
 import Modal from "nav-frontend-modal";
 
-import ColorSample from "../components/color-sample/ColorSample";
-import ColorPalette from "../components/color-palette/ColorPalette";
-import ContrastSample from "../components/contrast-sample/ContrastSample";
+import ColorSample from "../components/colors/ColorSample";
+import ColorPalette from "../components/colors/ColorPalette";
+import ContrastSample from "../components/colors/ContrastSample";
 
 class Palette extends React.Component {
   constructor(props) {

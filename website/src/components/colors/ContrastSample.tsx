@@ -8,29 +8,28 @@ import { CheckIcon, CrossIcon } from "../assets/images/svg";
 
 import "./styles.less";
 
-const sampleCls = (props) =>
-  classnames("contrast-sample", {
-    border: props.border,
-  });
-
 const contrastCls = (contrast) =>
-  classnames("contrast-ratio", {
+  classnames("contrast__ratio", {
     pass: contrast > 4.5,
   });
 
-const ContrastSample = (props) => {
-  const background = Color(props.background);
-  const foreground = Color(props.foreground);
-  const contrast = Math.round(foreground.contrast(background) * 100) / 100;
-
-  /* {background: background.hex(), color: foreground.hex()} */
+interface ContrastProps {
+  label: string;
+  foreground: string;
+  background: string;
+}
+const ContrastSample = ({ label, foreground, background }: ContrastProps) => {
+  const backgroundColor = Color(background);
+  const foregroundColor = Color(foreground);
+  const contrast =
+    Math.round(foregroundColor.contrast(backgroundColor) * 100) / 100;
 
   return (
-    <React.Fragment>
+    <>
       <Etikett>
-        {props.label}
+        {label}
         <span className={contrastCls(contrast)}>
-          <span className="contrast-ratio__label">Kontrast: </span>
+          <span className="contrast__ratio--label">Kontrast: </span>
           <strong>
             {contrast}
             :1
@@ -41,16 +40,16 @@ const ContrastSample = (props) => {
         </span>
       </Etikett>
       <div
-        className={sampleCls(props)}
+        className="contrast__sample"
         style={{
           background: `repeating-linear-gradient(90deg,
-                        ${background},
-                        ${background} 2%,
-                        ${foreground} 2%,
-                        ${foreground} 4%)`,
+                        ${backgroundColor},
+                        ${backgroundColor} 2%,
+                        ${foregroundColor} 2%,
+                        ${foregroundColor} 4%)`,
         }}
       />
-    </React.Fragment>
+    </>
   );
 };
 
