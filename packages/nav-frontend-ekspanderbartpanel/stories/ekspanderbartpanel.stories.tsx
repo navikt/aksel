@@ -36,6 +36,15 @@ export const Main = () => (
         Panelet vil da ekspandere og vise innholdet.
       </Ekspanderbartpanel>
     </div>
+    <div>
+      <h2>Nøstede ekspanderbartpanel</h2>
+      <Ekspanderbartpanel tittel="Klikk her for å åpne/lukke panelet">
+        Panelet vil da ekspandere og vise innholdet.
+        <Ekspanderbartpanel tittel="Klikk her for å åpne/lukke panelet">
+          Panelet vil da ekspandere og vise innholdet.
+        </Ekspanderbartpanel>
+      </Ekspanderbartpanel>
+    </div>
   </>
 );
 
