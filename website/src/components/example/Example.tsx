@@ -5,20 +5,29 @@ import OverflowDetector from "../overflow-detector/OverflowDetector";
 
 import "./styles.less";
 
-const cls = (className, greyBg) =>
-  cn("example", className, {
-    "example--greyBg": greyBg,
-  });
+interface ExampleProps {
+  children: React.ReactNode;
+  className?: string;
+  noScroll?: boolean;
+  greyBg?: boolean;
+}
 
-// eslint-disable-next-line object-curly-newline
-const Example = ({ children, className, noscroll, greyBg, ...rest }) => (
+const Example = ({
+  children,
+  className = "",
+  noScroll = false,
+  greyBg = false,
+  ...props
+}: ExampleProps) => (
   <div
-    className={cls(className, greyBg)}
+    className={cn("example", className, {
+      "example--greyBg": greyBg,
+    })}
     role="region"
     aria-label="Eksempel"
-    {...rest}
+    {...props}
   >
-    {noscroll ? (
+    {noScroll ? (
       <div className="example__inner">{children}</div>
     ) : (
       <OverflowDetector>
