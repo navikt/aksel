@@ -4,15 +4,18 @@ import { SuccessIcon, ErrorIcon } from "../assets/images/svg";
 
 import "./styles.less";
 
-const clsDodont = (props) => classnames("dodont", props.className);
+export interface DoDontProps {
+  children: React.ReactNode;
+  className?: string;
+}
 
-export const DoDont = (props) => (
-  <div className={clsDodont(props)}>{props.children}</div>
+export const DoDont = ({ children, className = "" }: DoDontProps) => (
+  <div className={classnames("dodont", className)}>{children}</div>
 );
 
-export const Do = (props) => (
+export const Do = ({ children }: DoDontProps) => (
   <div className="dodont__do">
-    {props.children}
+    {children}
     <div className="dodont__label">
       <SuccessIcon />
       &nbsp; Gjør dette
@@ -20,9 +23,9 @@ export const Do = (props) => (
   </div>
 );
 
-export const Dont = (props) => (
+export const Dont = ({ children }: DoDontProps) => (
   <div className="dodont__dont">
-    {props.children}
+    {children}
     <div className="dodont__label">
       <ErrorIcon />
       &nbsp; Ikke gjør dette
