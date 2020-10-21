@@ -26,10 +26,13 @@ const name = (name: string, i: number) => {
       return "";
   }
 };
-const colorTest = (base: string) => {
-  const colors = [];
+const colorSearch = (base: string) => {
+  const colors: { color: Color; name: string }[] = [];
   for (let i = 80; i >= -80; i -= 20) {
-    colors.push(Color(vars[name(base, i).replace("@", "")]));
+    colors.push({
+      color: Color(vars[name(base, i).replace("@", "")]),
+      name: name(base, i),
+    });
   }
   return colors;
 };
@@ -40,14 +43,13 @@ const ColorPalette = ({ onClick }: PaletteProps) => {
       {Object.keys(palette).map((colorVar) => {
         return (
           <div className="color__palette--group" key={colorVar}>
-            {colorTest(colorVar).map((col, ii) => {
-              const name = colorName(colorVar, ii);
+            {colorSearch(colorVar).map((col, ii) => {
               return (
                 <ColorSample
-                  key={name}
-                  name={name}
-                  color={col.hex()}
-                  onClick={() => onClick({ name, color: col })}
+                  key={col.name}
+                  name={col.name}
+                  color={col.color.hex()}
+                  onClick={() => onClick({ name: col.name, color: col.color })}
                 />
               );
             })}
