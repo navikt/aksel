@@ -6,10 +6,10 @@ import "./styles.less";
 
 export interface DoDontProps {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }
 
-export const DoDont = ({ children, className }: DoDontProps) => (
+export const DoDont = ({ children, className = "" }: DoDontProps) => (
   <div className={classnames("dodont", className)}>{children}</div>
 );
 
