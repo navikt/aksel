@@ -10,15 +10,27 @@ const cls = (className, greyBg) =>
     "example--greyBg": greyBg,
   });
 
-// eslint-disable-next-line object-curly-newline
-const Example = ({ children, className, noscroll, greyBg, ...rest }) => (
+interface ExampleProps {
+  children: React.ReactNode;
+  className?: string;
+  noScroll?: boolean;
+  greyBg?: boolean;
+}
+
+const Example = ({
+  children,
+  className = "",
+  noScroll = false,
+  greyBg = false,
+  ...props
+}: ExampleProps) => (
   <div
     className={cls(className, greyBg)}
     role="region"
     aria-label="Eksempel"
-    {...rest}
+    {...props}
   >
-    {noscroll ? (
+    {noScroll ? (
       <div className="example__inner">{children}</div>
     ) : (
       <OverflowDetector>
