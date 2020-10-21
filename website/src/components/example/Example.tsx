@@ -5,11 +5,6 @@ import OverflowDetector from "../overflow-detector/OverflowDetector";
 
 import "./styles.less";
 
-const cls = (className, greyBg) =>
-  cn("example", className, {
-    "example--greyBg": greyBg,
-  });
-
 interface ExampleProps {
   children: React.ReactNode;
   className?: string;
@@ -25,7 +20,9 @@ const Example = ({
   ...props
 }: ExampleProps) => (
   <div
-    className={cls(className, greyBg)}
+    className={cn("example", className, {
+      "example--greyBg": greyBg,
+    })}
     role="region"
     aria-label="Eksempel"
     {...props}
