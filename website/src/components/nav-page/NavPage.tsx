@@ -18,7 +18,7 @@ const NavPage = ({ location }) => {
                 {props.children}
               </Link>
             )}
-            href="wat"
+            href="#"
           >
             <Undertittel className="lenkepanel__heading">{title}</Undertittel>
           </LenkepanelBase>
