@@ -1,7 +1,6 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Codeblock, { InlineCode } from "../code/Code";
-import classnames from "classnames";
 
 import {
   Innholdstittel,
