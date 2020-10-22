@@ -8,10 +8,11 @@ Den enkleste måten å gjøre tabeller responsive samtidig som man sørger for a
 
 <Alertstripe type="info">
   Tastaturvennlig horisontal scrolling krever at man setter{" "}
-  <code className="inline">tabindex="0"</code> og{" "}
-  <code className="inline">role="region"</code> på konteineren som skal scrolle.
-  Dette kan utløse advarsler fra lintere om at bare <em>interaktive</em>{" "}
-  elementer skal ha <code className="inline">tabindex</code>-attributtet. Disse
+  <InlineCode className="inline">tabindex="0"</InlineCode> og{" "}
+  <InlineCode className="inline">role="region"</InlineCode> på konteineren som
+  skal scrolle. Dette kan utløse advarsler fra lintere om at bare{" "}
+  <em>interaktive</em> elementer skal ha{" "}
+  <InlineCode className="inline">tabindex</InlineCode>-attributtet. Disse
   advarslene kan trygt ignoreres da scrolling teller som interaktivitet, men
   blir ofte ikke oppfattet av lintere.
 </Alertstripe>
