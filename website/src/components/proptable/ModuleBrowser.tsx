@@ -1,13 +1,11 @@
 import classnames from "classnames";
-import { Flatknapp } from "nav-frontend-knapper";
 import Panel from "nav-frontend-paneler";
-import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Select } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { useProps } from "../../useProps";
-import { CopyIcon } from "../assets/images/svg";
 import Code from "../code/Code";
+import Copy from "../copy/Copy";
 import PropTable from "./PropTable";
 import "./styles.less";
 
@@ -16,7 +14,6 @@ const ModuleBrowser = ({ context, ...props }) => {
   const modules = useProps(context.source);
 
   const [activeModule, setActiveModule] = useState<number>(0);
-  const [anchor, setAnchor] = useState(undefined);
 
   useEffect(() => {
     setActiveModule(getInitialActiveModule());
@@ -43,16 +40,6 @@ const ModuleBrowser = ({ context, ...props }) => {
     return `import ${format} from '${context.name}';`;
   };
 
-  const copyContent = (e, content) => {
-    setAnchor(anchor ? undefined : e.currentTarget);
-    const textArea = document.createElement("textarea");
-    textArea.value = content;
-    document.body.appendChild(textArea);
-    textArea.select();
-    document.execCommand("Copy");
-    textArea.remove();
-  };
-
   return (
     modules.length !== 0 && (
       <div className="module-browser">
@@ -64,18 +51,21 @@ const ModuleBrowser = ({ context, ...props }) => {
                 if (module.name === undefined) return null;
                 return (
                   <li key={module.name}>
-                    <a
-                      href={`#${module.name}`}
-                      className={classnames({
-                        active: activeModule === i,
-                      })}
+                    <button
+                      className={classnames(
+                        "module-browser--reset-button",
+                        "module-browser__button",
+                        {
+                          active: activeModule === i,
+                        }
+                      )}
                       onClick={(e) => setActiveModule(i)}
                     >
                       {module.name}
                       {module.name === context.defaultExport && (
                         <span>&nbsp;(default)</span>
                       )}
-                    </a>
+                    </button>
                   </li>
                 );
               })}
@@ -100,24 +90,10 @@ const ModuleBrowser = ({ context, ...props }) => {
 
             <div className="module-browser--innline">
               <Undertittel className="first">Import</Undertittel>
-              <Flatknapp
-                className="module-browser__copyknapp"
-                aria-label="Kopier import til utklippstavle"
-                // eslint-disable-next-line max-len
-                onClick={(e) => copyContent(e, generateImportStatement())}
-                kompakt
-              >
-                <CopyIcon />
-              </Flatknapp>
+              <Copy copyText={generateImportStatement()} />
             </div>
             <Code className="language-jsx">{generateImportStatement()}</Code>
-            <Popover
-              orientering={PopoverOrientering.Over}
-              ankerEl={anchor}
-              onRequestClose={() => setAnchor(undefined)}
-            >
-              <p className="module-browser__popover"> Kopiert! </p>
-            </Popover>
+
             <Undertittel>React props</Undertittel>
 
             <PropTable moduleProps={modules[activeModule]} />

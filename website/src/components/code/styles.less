@@ -19,10 +19,6 @@ code {
 pre {
   margin: 0;
 
-  code {
-    font-size: 0.9rem;
-  }
-
   &[class*="language-"]:not([disabled]) {
     margin: 0;
 
@@ -33,12 +29,9 @@ pre {
       background-color: #f4f4f4;
       padding: 1rem;
       color: @navMorkGra;
-
-      .token {
-        background: none;
-      }
     }
 
+    // Avoids having these tags wrapped around <code>
     &::after,
     &::before {
       display: none;

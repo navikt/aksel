@@ -17,7 +17,7 @@
     "lint:less": "npx stylelint --syntax less **/*.less",
     "gulp:build": "yarn run gulp --gulpfile utilities/build/gulpfile.js build --ignoreErrors",
     "clean:lib": "node utilities/scripts/clean.js",
-    "boot": "yarn install && yarn clean:lib && yarn gulp:build && yarn install --frozen-lockfile",
+    "boot": "yarn clean:lib && yarn gulp:build",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg"
   },
@@ -26,6 +26,12 @@
     "packages/*",
     "./utilities/build/props-resolver"
   ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "yarn lint"
+    }
+  },
   "prettier": {},
   "eslintConfig": {
     "extends": [
@@ -55,39 +61,41 @@
     "url": "https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
+    "babel-plugin-react-docgen": "^1.8.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-plugin-transform-react-display-name": "6.25.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "babel-preset-stage-2": "^6.22.0",
+    "chalk": "^1.1.3",
     "css-loader": "^4.3.0",
     "cypress": "^5.3.0",
     "depth-first": "^4.0.0",
     "gatsby-transformer-react-docgen-typescript-custom": "0.1.0",
     "gh-pages": "^3.1.0",
     "gulp": "^4.0.2",
+    "gulp-babel": "^6.1.2",
+    "gulp-cssfont64-formatter": "0.0.2",
+    "gulp-if": "^3.0.0",
+    "gulp-newer": "^1.3.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-typescript": "^3.2.3",
     "gulp-util": "^3.0.8",
+    "husky": "^4.3.0",
     "lerna": "^3.22.1",
     "less": "3.12.2",
     "less-loader": "^7.0.1",
     "less-vars-to-js": "^1.3.0",
     "lodash.camelcase": "^4.3.0",
+    "merge2": "^1.2.0",
+    "pretty-quick": "^3.1.0",
     "react-docgen": "^5.3.0",
     "react-docgen-exports-handler": "^1.0.0",
+    "react-svg-icon-generator-fork": "^1.0.2",
     "start-server-and-test": "^1.11.4",
     "style-loader": "^1.2.1",
     "through2": "^2.0.3",
-    "vinyl": "^2.2.1",
-    "gulp-newer": "^1.3.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-typescript": "^3.2.3",
-    "gulp-plumber": "^1.1.0",
-    "gulp-if": "^3.0.0",
-    "chalk": "^1.1.3",
-    "gulp-cssfont64-formatter": "0.0.2",
-    "merge2": "^1.2.0",
-    "react-svg-icon-generator-fork": "^1.0.2",
-    "babel-plugin-transform-react-display-name": "6.25.0",
-    "babel-plugin-react-docgen": "^1.8.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.22.0",
-    "babel-preset-stage-2": "^6.22.0"
+    "vinyl": "^2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

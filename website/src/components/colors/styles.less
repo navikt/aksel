@@ -1,6 +1,35 @@
 @import (reference) "nav-frontend-core/less/_variabler";
 
-.color-sample {
+.contrast {
+  &__sample {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__ratio {
+    svg {
+      height: 0.9rem;
+      position: relative;
+      top: 2px;
+      margin-left: 0.25rem;
+    }
+
+    &--label {
+      @media (max-width: 400px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.color__sample {
   height: 4rem;
   display: flex;
   justify-content: space-between;
@@ -20,7 +49,7 @@
     }
   }
 
-  &.light {
+  &--light {
     span {
       color: @navMorkGra;
     }
@@ -31,7 +60,7 @@
     background: none !important;
 
     span {
-      color: @navMorkGra !important;
+      color: @navMorkGra;
     }
   }
 

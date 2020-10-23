@@ -27,15 +27,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `NAV Designsystem`,
@@ -93,6 +84,23 @@ module.exports = {
     },
 
     `gatsby-transformer-react-docgen-typescript-custom`,
+    {
+      resolve: `gatsby-plugin-amplitude-analytics`,
+      options: {
+        apiKey: "default",
+        respectDNT: true,
+        eventTypes: {
+          pageView: "sidevisning",
+        },
+        amplitudeConfig: {
+          apiEndpoint: "amplitude.nav.no/collect-auto",
+          saveEvents: false,
+          includeUtm: true,
+          includeReferrer: true,
+          platform: "https://design.nav.no/",
+        },
+      },
+    },
 
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
