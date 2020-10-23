@@ -1,10 +1,8 @@
-import classnames from "classnames";
+import React, { useState } from "react";
 import { Flatknapp } from "nav-frontend-knapper";
 import Panel from "nav-frontend-paneler";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
-import { Select } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
-import React, { useState } from "react";
 import { useProps } from "../../useProps";
 import { CopyIcon } from "../assets/images/svg";
 import Code from "../code/Code";
