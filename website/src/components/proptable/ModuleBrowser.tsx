@@ -12,6 +12,7 @@ import "./styles.less";
 
 const ModuleBrowser = ({ context }) => {
   const modules = useProps(context.source);
+  console.log(context);
 
   const useExportName = (name: string) => {
     const [exportName, setExport] = useState<string>(
@@ -25,7 +26,10 @@ const ModuleBrowser = ({ context }) => {
 
   const initialState = (): { index: number; name: string } => {
     let name: string, index: number;
-    const urlComponentName = window.location.pathname.split("/")[2];
+    const urlComponentName = context.source
+      .match(/\/.*\/(.*)\.overview/)[1]
+      .toLowerCase();
+
     const cIndex = modules.findIndex(
       (module) => module.name.toLowerCase() === urlComponentName.toLowerCase()
     );
@@ -33,7 +37,11 @@ const ModuleBrowser = ({ context }) => {
       (module) => module.name === context.defaultExport
     );
     index = Math.max(0, dIndex, cIndex);
-    name = dIndex === -1 && cIndex === -1 ? urlComponentName : modules[index];
+    // In cases where a components have multiple exports from file and no default export (eks checkbox, radio)
+    name =
+      dIndex === -1 && cIndex === -1 && context.name === "nav-frontend-skjema"
+        ? urlComponentName
+        : modules[index].name;
     return { index, name };
   };
 
