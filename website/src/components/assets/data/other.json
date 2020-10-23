@@ -30,12 +30,6 @@
     "demo_url": "https://navikt.github.io/internarbeidsflatedecorator/"
   },
   {
-    "name": "Internheader",
-    "description": "Ny dekoratør/header for interne arbeidsflater",
-    "repository": "https://github.com/navikt/not-a-platform/tree/master/packages/%40navikt/header",
-    "demo_url": ""
-  },
-  {
     "name": "Dekoratør for nav.no",
     "description": "Ny dekoratør for nav.no",
     "repository": "https://github.com/navikt/nav-dekoratoren",
