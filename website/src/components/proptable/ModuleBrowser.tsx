@@ -12,7 +12,6 @@ import "./styles.less";
 
 const ModuleBrowser = ({ context }) => {
   const modules = useProps(context.source);
-  console.log(context);
 
   const useExportName = (name: string) => {
     const [exportName, setExport] = useState<string>(
@@ -41,7 +40,7 @@ const ModuleBrowser = ({ context }) => {
     name =
       dIndex === -1 && cIndex === -1 && context.name === "nav-frontend-skjema"
         ? urlComponentName
-        : modules[index].name;
+        : modules[index]?.name || "";
     return { index, name };
   };
 
