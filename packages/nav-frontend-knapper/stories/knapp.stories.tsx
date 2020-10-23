@@ -12,7 +12,7 @@ export default {
   title: "Knapper",
   component: Knapp,
   parameters: {
-    chromatic: { disable: false, viewports: [320, 768, 1280] },
+    chromatic: { disable: false },
   },
 } as Meta;
 

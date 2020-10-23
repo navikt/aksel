@@ -11,7 +11,7 @@ export default {
   title: "Alertstripe",
   component: Alertstripe,
   parameters: {
-    chromatic: { disable: false, viewports: [320, 768, 1280] },
+    chromatic: { disable: false },
   },
 } as Meta;
 
