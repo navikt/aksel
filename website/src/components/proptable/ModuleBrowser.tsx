@@ -4,10 +4,11 @@ import Panel from "nav-frontend-paneler";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Select } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useProps } from "../../useProps";
 import { CopyIcon } from "../assets/images/svg";
 import Code from "../code/Code";
+import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
 import PropTable from "./PropTable";
 import "./styles.less";
 
@@ -70,48 +71,19 @@ const ModuleBrowser = ({ context }) => {
       <div className="module-browser">
         <Systemtittel id="moduler">Moduler</Systemtittel>
         <Panel border className="module-browser__wrapper">
-          <nav>
-            <ul className="nav-list">
-              {modules.map((module, i) => {
-                if (module.name === undefined) return null;
-                return (
-                  <li key={module.name}>
-                    <button
-                      className={classnames(
-                        "module-browser--reset-button",
-                        "module-browser__button",
-                        {
-                          active: activeModule === i,
-                        }
-                      )}
-                      onClick={() => handlePropChange(i)}
-                    >
-                      {module.name}
-                      {module.name === context.defaultExport && (
-                        <span>&nbsp;(default)</span>
-                      )}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+          <ModuleBrowserNav
+            context={context}
+            modules={modules}
+            onClick={handlePropChange}
+            activeModule={activeModule}
+          />
           <div className="module-browser__content">
-            <Select
-              label="Velg modul"
-              onChange={(e) => handlePropChange(Number(e.target.value))}
-              value={activeModule}
-            >
-              {modules.map((module, i) => {
-                if (module.name === undefined) return null;
-                return (
-                  <option key={module.name} value={i}>
-                    {module.name}
-                  </option>
-                );
-              })}
-            </Select>
-
+            <ModuleBrowserMobileNav
+              context={context}
+              modules={modules}
+              onClick={handlePropChange}
+              activeModule={activeModule}
+            />
             <div className="module-browser--innline">
               <Undertittel className="first">Import</Undertittel>
               <Flatknapp
