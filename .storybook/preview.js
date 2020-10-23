@@ -1,6 +1,7 @@
 import "nav-frontend-core";
 
 export const parameters = {
+  chromatic: { disable: true },
   actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
     storySort: (a, b) => {

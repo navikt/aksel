@@ -10,9 +10,6 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Alertstripe",
   component: Alertstripe,
-  parameters: {
-    chromatic: { disable: true, viewports: [320, 768, 1280] },
-  },
 } as Meta;
 
 export const Info = () => (

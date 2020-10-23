@@ -2,8 +2,17 @@ import React from "react";
 import Ekspanderbartpanel from "../src/index";
 import { Normaltekst, Undertittel } from "nav-frontend-typografi";
 import Etikett from "nav-frontend-etiketter";
+import { Meta } from "@storybook/react/types-6-0";
 
-export const Main = () => (
+export default {
+  title: "Ekspanderbartpanel",
+  component: Ekspanderbartpanel,
+  parameters: {
+    chromatic: { disable: false, viewports: [320, 768, 1280] },
+  },
+} as Meta;
+
+export const All = () => (
   <>
     <h1>Ekspanderbartpanel</h1>
     <div>
@@ -47,8 +56,3 @@ export const Main = () => (
     </div>
   </>
 );
-
-export default {
-  title: "Ekspanderbartpanel",
-  component: Ekspanderbartpanel,
-};
