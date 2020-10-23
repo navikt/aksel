@@ -3,15 +3,9 @@ import classnames from "classnames";
 
 import "./styles.less";
 
-const overflowCls = (left, right) =>
-  classnames("overflow-detector", {
-    "overflow-detector--shadow-left": left,
-    "overflow-detector--shadow-right": right,
-  });
-
 const OverflowDetector = ({ ...props }) => {
-  const scroller = useRef();
-  const inner = useRef();
+  const scroller = useRef<HTMLDivElement>();
+  const inner = useRef<HTMLDivElement>();
 
   const [overflowLeft, setOverflowLeft] = useState(false);
   const [overflowRight, setOverflowRight] = useState(false);
@@ -28,12 +22,14 @@ const OverflowDetector = ({ ...props }) => {
     const scr = scroller.current;
     const inn = inner.current;
 
-    if (scr.offsetWidth < inn.offsetWidth) {
-      if (scr.scrollLeft !== 0) {
-        setOverflowLeft(true);
-      }
-      if (scr.scrollLeft + scr.offsetWidth < inn.offsetWidth) {
-        setOverflowRight(true);
+    if (scr && inn) {
+      if (scr.offsetWidth < inn.offsetWidth) {
+        if (scr.scrollLeft !== 0) {
+          setOverflowLeft(true);
+        }
+        if (scr.scrollLeft + scr.offsetWidth < inn.offsetWidth) {
+          setOverflowRight(true);
+        }
       }
     }
   };
@@ -41,14 +37,19 @@ const OverflowDetector = ({ ...props }) => {
   const scrollAttr =
     overflowRight || overflowLeft
       ? {
-          tabIndex: "0",
+          tabIndex: 0,
           role: "region",
           "aria-label": "Eksempel",
         }
       : undefined;
 
   return (
-    <div className={overflowCls(overflowLeft, overflowRight)}>
+    <div
+      className={classnames("overflow-detector", {
+        "overflow-detector--shadow-left": overflowLeft,
+        "overflow-detector--shadow-right": overflowRight,
+      })}
+    >
       <div
         className="overflow-detector__scroller"
         onScroll={checkOverflow}
