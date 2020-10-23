@@ -54,6 +54,6 @@ export const All = () => (
     <Alertstripe
       type="info"
       size="3em"
-    >{`<Alertstripe type="info">`}</Alertstripe>
+    >{`<Alertstripe type="info" size="3em">`}</Alertstripe>
   </>
 );
