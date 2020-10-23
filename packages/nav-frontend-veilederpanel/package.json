@@ -8,6 +8,10 @@
     "/src",
     "/lib"
   ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc --watch -p tsconfig.json"
+  },
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-veileder": "^2.0.24",
