@@ -26,9 +26,11 @@ export {
 export {
   default as CheckboksPanelGruppe,
   CheckboksPanelGruppeProps,
-  CheckboksPanel,
-  CheckboksPanelProps,
 } from "./checkboks-panel-gruppe";
+export {
+  default as CheckboksPanel,
+  CheckboksPanelProps,
+} from "./checkboks-panel";
 export {
   default as BekreftCheckboksPanel,
   BekreftCheckboksPanelProps,
