@@ -5,7 +5,8 @@ export {
   default as TextareaControlled,
   TextareaControlledProps,
 } from "./textarea-controlled";
-export { default as Checkbox, CheckboxProps, CheckboxGruppe } from "./checkbox";
+export { default as Checkbox, CheckboxProps } from "./checkbox";
+export { default as CheckboxGruppe } from "./checkbox-gruppe";
 export { default as Radio, RadioProps } from "./radio";
 export { default as RadioGruppe } from "./radio-gruppe";
 export { default as Select, SelectProps } from "./select";
@@ -20,9 +21,8 @@ export { default as ToggleKnapp, ToggleKnappProps } from "./toggle-knapp";
 export {
   default as RadioPanelGruppe,
   RadioPanelGruppeProps,
-  RadioPanel,
-  RadioPanelProps,
 } from "./radio-panel-gruppe";
+export { default as RadioPanel, RadioPanelProps } from "./radio-panel";
 export {
   default as CheckboksPanelGruppe,
   CheckboksPanelGruppeProps,

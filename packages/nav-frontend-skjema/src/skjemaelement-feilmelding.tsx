@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Feilmelding } from "nav-frontend-typografi";
+import "nav-frontend-skjema-style";
 
 class SkjemaelementFeilmelding extends React.Component<
   React.HTMLAttributes<HTMLDivElement>
