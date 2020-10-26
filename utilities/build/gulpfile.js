@@ -5,77 +5,27 @@
 const gulp = require("gulp");
 const through = require("through2");
 const newer = require("gulp-newer");
-const babel = require("gulp-babel");
-const ts = require("gulp-typescript");
 const plumber = require("gulp-plumber");
 const gutil = require("gulp-util");
-const gulpif = require("gulp-if");
 const path = require("path");
 const chalk = require("chalk");
 const cssfont64 = require("gulp-cssfont64-formatter");
-const merge = require("merge2");
 const configureSvgIcon = require("react-svg-icon-generator-fork").default;
 const addVariablesExportPlugin = require("../scripts/gulp-export-less-variables");
 const camelcase = require("lodash.camelcase");
 
-const jsScripts = "../../packages/*/src/**/*.js";
-const tsScripts = "../../packages/*/src/**/*.ts*";
 const fonts = "./packages/node_modules/*/assets/**/*.woff";
 const dest = "../../packages";
-const tsProject = ts.createProject("../build/tsconfig.old.json");
 
-const tsDocgen = require("react-docgen-typescript").withDefaultConfig({
-  propFilter: { skipPropsWithoutDoc: true },
-});
-
-// const handler = tsDocgen.handlers.concat(exportsHandler);
-// const resolver = tsDocgen.resolver.findExportedComponentDefinition;
-
-const babelPreset = {
-  presets: ["es2015", "react", "stage-2"],
-  plugins: [
-    "transform-react-display-name",
-    "react-docgen",
-    "transform-object-rest-spread",
-    [
-      "prismjs",
-      {
-        languages: ["javascript", "css", "markup", "jsx"],
-      },
-    ],
-  ],
-};
-
-// TODO: Legge til dependencies i package.json
-
-const insert = require("gulp-insert");
-const fs = require("fs");
-
-let srcEx;
 let assetsEx;
-let libFragment;
 let srcFragment;
-let tsDocLib;
-let tsDocSrc;
 
 if (path.win32 === path) {
-  srcEx = /(packages\\[^/]+)\\src\\/;
   assetsEx = /(packages\\[^/]+)\\assets\\/;
-  libFragment = "$1\\lib\\";
   srcFragment = "$1\\src\\";
-  tsDocLib = /\\lib\\/g;
-  tsDocSrc = "\\src\\";
 } else {
-  srcEx = new RegExp("(packages/[^/]+)/src/");
   assetsEx = new RegExp("(packages/[^/]+)/assets/");
-  libFragment = "$1/lib/";
   srcFragment = "$1/src/";
-  tsDocLib = /\/lib\//g;
-  tsDocSrc = "/src/";
-}
-
-function mapToDest(filepath) {
-  return filepath.replace(srcEx, libFragment);
 }
 
 function mapSrcToDest(filepath) {
@@ -117,97 +67,6 @@ function cssFontfile(filename, mimetype, file64, format) {
   return `@font-face { font-family: '${fontFamiliy}'; font-weight: ${fontWeight}; font-style: ${fontStyle}; src: url(data:${mimetype};base64,${file64}) format("${format}");}`;
 }
 
-function test() {
-  return 0;
-}
-function buildJs() {
-  return gulp
-    .src(jsScripts)
-    .pipe(fixErrorHandling())
-    .pipe(onlyNewFiles(mapToDest))
-    .pipe(logCompiling())
-    .pipe(babel(babelPreset))
-    .pipe(renameUsingMapper(mapToDest))
-    .pipe(gulp.dest(dest));
-}
-
-function parseTsAndAppendDocInfo(contents, file) {
-  const tsPath = file.path.replace(tsDocLib, tsDocSrc).replace(/.js$/g, ".tsx");
-  let docInfo;
-  let docInfoString;
-
-  if (fs.existsSync(tsPath)) {
-    const docs = tsDocgen.parse(tsPath);
-    docInfo = docs[0];
-
-    // Yeah, superhack. Men react-docgen-typescript velger alltid feil export fra tekstomrade filen
-    if (docInfo.displayName === "createDynamicHighlightingRule") {
-      docInfo = docs[1];
-    }
-
-    const exceptions = ["StatelessComponent", "EventThrottler", "Container"];
-
-    if (exceptions.indexOf(docInfo.displayName) !== -1) {
-      return contents;
-    }
-
-    if (
-      docInfo.props.type &&
-      docInfo.props.type.type &&
-      docInfo.props.type.type.name &&
-      docInfo.props.type.type.name.indexOf("|") !== -1
-    ) {
-      docInfo.props.type.type.value = docInfo.props.type.type.name
-        .split("|")
-        .map((strValue) => ({ value: strValue.trim() }));
-      docInfo.props.type.type.name = "enum";
-    }
-
-    docInfoString = JSON.stringify(docInfo);
-
-    // eslint-disable-next-line prefer-template
-    return (
-      contents + "\n" + docInfo.displayName + ".__docgenInfo = " + docInfoString
-    );
-  }
-
-  return contents;
-}
-
-function buildTs() {
-  const ignoreErrors = process.argv.indexOf("--ignoreErrors") !== -1;
-  const withDocs = process.argv.indexOf("--docs") !== -1;
-
-  const tsResult = gulp
-    .src(tsScripts)
-    .pipe(fixErrorHandling())
-    .pipe(onlyNewFiles(mapToDest))
-    .pipe(logCompiling())
-    .pipe(tsProject())
-    .on("error", () => {
-      if (!ignoreErrors) process.exit(1);
-    });
-
-  const tsPipe = tsResult.js
-    .pipe(babel(babelPreset))
-    .pipe(renameUsingMapper(mapToDest))
-    .pipe(
-      gulpif(
-        withDocs,
-        insert.transform((contents, file) =>
-          parseTsAndAppendDocInfo(contents, file)
-        )
-      )
-    )
-    .pipe(gulp.dest(dest));
-
-  const dtsPipe = tsResult.dts
-    .pipe(renameUsingMapper(mapToDest))
-    .pipe(gulp.dest(dest));
-
-  return merge([tsPipe, dtsPipe]);
-}
-
 function buildCssfonts() {
   return gulp
     .src(fonts)
@@ -246,11 +105,8 @@ configureSvgIcon({
   keepFillColor: true,
 });
 
-gulp.task("test", gulp.series(test));
 gulp.task("buildLess", gulp.series(exportLessVariables));
-gulp.task("buildJs", gulp.series(buildJs));
-gulp.task("buildTs", gulp.series(buildTs));
-gulp.task("build", gulp.series("buildLess", "buildJs", "buildTs"));
-gulp.task("default", gulp.series("test", "build"));
+gulp.task("build", gulp.series("buildLess"));
+gulp.task("default", gulp.series("build"));
 gulp.task("buildicons", gulp.series("svg-icon"));
 gulp.task("buildfonts", gulp.series(buildCssfonts));

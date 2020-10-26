@@ -2,7 +2,7 @@
   "name": "nav-frontend-lenkepanel",
   "version": "1.0.51",
   "main": "lib/index.js",
-  "type": "lib/index.d.ts",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "files": [
     "/src",
@@ -11,6 +11,10 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc --watch -p tsconfig.json"
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
