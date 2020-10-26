@@ -11,9 +11,6 @@ const Cog = () => (
 export default {
   title: "Knapper",
   component: Knapp,
-  parameters: {
-    chromatic: { disable: false },
-  },
 } as Meta;
 
 export const All = () => (

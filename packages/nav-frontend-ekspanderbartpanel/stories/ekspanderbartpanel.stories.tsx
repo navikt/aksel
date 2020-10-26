@@ -7,9 +7,6 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Ekspanderbartpanel",
   component: Ekspanderbartpanel,
-  parameters: {
-    chromatic: { disable: false },
-  },
 } as Meta;
 
 export const All = () => (
