@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenker",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "main": "lib/lenke.js",
   "types": "lib/lenke.d.ts",
   "license": "MIT",
