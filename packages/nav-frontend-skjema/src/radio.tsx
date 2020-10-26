@@ -1,27 +1,9 @@
-/* eslint-disable indent */
-/* eslint-disable max-classes-per-file */
 import * as PT from "prop-types";
 import * as React from "react";
 import * as classNames from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import "nav-frontend-skjema-style";
-import {
-  SkjemaGruppe,
-  SkjemaGruppeProps,
-  SkjemaGruppeFeilContext,
-  SkjemaGruppeFeilContextProps,
-} from ".";
-
-export class RadioGruppe extends React.Component<SkjemaGruppeProps> {
-  render() {
-    const { children, className, ...other } = this.props;
-    return (
-      <SkjemaGruppe className={classNames("radiogruppe", className)} {...other}>
-        {children}
-      </SkjemaGruppe>
-    );
-  }
-}
+import { SkjemaGruppeFeilContext, SkjemaGruppeFeilContextProps } from ".";
 
 const cls = (className) => classNames("skjemaelement", className);
 

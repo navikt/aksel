@@ -2,6 +2,7 @@ import * as React from "react";
 import * as PT from "prop-types";
 import { omit } from "nav-frontend-js-utils";
 import Textarea from "./textarea";
+import "nav-frontend-skjema-style";
 
 export interface TextareaControlledProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {

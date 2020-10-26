@@ -1,30 +1,10 @@
-/* eslint-disable max-classes-per-file */
 import * as PT from "prop-types";
 import * as React from "react";
 import * as classNames from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import SkjemaelementFeilmelding from "./skjemaelement-feilmelding";
-import {
-  SkjemaGruppe,
-  SkjemaGruppeProps,
-  SkjemaGruppeFeilContext,
-  SkjemaGruppeFeilContextProps,
-} from ".";
+import { SkjemaGruppeFeilContext, SkjemaGruppeFeilContextProps } from ".";
 import "nav-frontend-skjema-style";
-
-export class CheckboxGruppe extends React.Component<SkjemaGruppeProps> {
-  render() {
-    const { children, className, ...other } = this.props;
-    return (
-      <SkjemaGruppe
-        className={classNames("checkboxgruppe", className)}
-        {...other}
-      >
-        {children}
-      </SkjemaGruppe>
-    );
-  }
-}
 
 const cls = (className) => classNames("skjemaelement", className);
 const inputCls = (harFeil) =>
