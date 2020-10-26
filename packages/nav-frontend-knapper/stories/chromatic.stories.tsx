@@ -9,110 +9,169 @@ const Cog = () => (
 );
 
 export default {
-  title: "Knapper",
+  title: "Knapper/All",
   component: Knapp,
 } as Meta;
 
 export const All = () => (
   <>
-    <h1>Knapp</h1>
     <div>
-      <h2>Alle knapper side om side</h2>
       <Knapp>Normal</Knapp>
+      {"  "}
       <Hovedknapp>Hoved</Hovedknapp>
+      {"  "}
       <Fareknapp>Fare</Fareknapp>
+      {"  "}
       <Flatknapp>Flat</Flatknapp>
+      {"  "}
       <Knapp disabled>Disabled</Knapp>
     </div>
+    <br />
     <div>
-      <h2>Med spinner</h2>
-      <Knapp spinner>Normal</Knapp>
-      <Hovedknapp spinner>Hoved</Hovedknapp>
-      <Fareknapp spinner>Fare</Fareknapp>
-      <Flatknapp spinner>Flat</Flatknapp>
+      <Knapp spinner>spinner</Knapp>
+      {"  "}
+      <Hovedknapp spinner>spinner</Hovedknapp>
+      {"  "}
+      <Fareknapp spinner>spinner</Fareknapp>
+      {"  "}
+      <Flatknapp spinner>spinner</Flatknapp>
+      {"  "}
       <Knapp disabled spinner>
-        Disabled
+        Disabled spinner
       </Knapp>
     </div>
+    <br />
     <div>
-      <h2>Som lenke</h2>
       <a href="#som-lenke" className="knapp">
-        Normal
+        som-lenke
       </a>
+      {"  "}
       <a href="#som-lenke" className="knapp knapp--hoved">
-        Hoved
+        som-lenke
       </a>
+      {"  "}
       <a href="#som-lenke" className="knapp knapp--fare">
-        Fare
+        som-lenke
       </a>
+      {"  "}
       <a href="#som-lenke" className="knapp knapp--flat">
-        Flat
+        som-lenke
       </a>
+      {"  "}
       <a href="#som-lenke" className="knapp knapp--disabled">
-        Disabled
+        som-lenke
       </a>
     </div>
+    <br />
     <div>
-      <h2>Mini</h2>
-      <Knapp mini>Normal</Knapp>
-      <Hovedknapp mini>Hoved</Hovedknapp>
-      <Fareknapp mini>Fare</Fareknapp>
-      <Flatknapp mini>Flat</Flatknapp>
+      <Knapp mini>mini</Knapp>
+      {"  "}
+      <Hovedknapp mini>mini</Hovedknapp>
+      {"  "}
+      <Fareknapp mini>mini</Fareknapp>
+      {"  "}
+      <Flatknapp mini>mini</Flatknapp>
+      {"  "}
       <Knapp disabled mini>
-        Disabled
+        mini
       </Knapp>
     </div>
+    <br />
     <div>
-      <h2>Med ikon</h2>
+      <Knapp kompakt>kompakt</Knapp>
+      {"  "}
+      <Hovedknapp kompakt>kompakt</Hovedknapp>
+      {"  "}
+      <Fareknapp kompakt>kompakt</Fareknapp>
+      {"  "}
+      <Flatknapp kompakt>kompakt</Flatknapp>
+      {"  "}
+      <Knapp disabled kompakt>
+        kompakt
+      </Knapp>
+    </div>
+    <br />
+    <div>
+      <Knapp kompakt mini>
+        kompakt mini
+      </Knapp>
+      {"  "}
+      <Hovedknapp kompakt mini>
+        kompakt mini
+      </Hovedknapp>
+      {"  "}
+      <Fareknapp kompakt mini>
+        kompakt mini
+      </Fareknapp>
+      {"  "}
+      <Flatknapp kompakt mini>
+        kompakt mini
+      </Flatknapp>
+      {"  "}
+      <Knapp disabled kompakt mini>
+        kompakt mini
+      </Knapp>
+    </div>
+    <br />
+
+    <div>
       <Knapp>
         <Cog />
-        <span>Normal</span>
+        <span>Ikon</span>
       </Knapp>
+      {"  "}
       <Hovedknapp>
         <Cog />
-        <span>Hoved</span>
+        <span>Ikon</span>
       </Hovedknapp>
+      {"  "}
       <Fareknapp>
         <Cog />
-        <span>Fare</span>
+        <span>Ikon</span>
       </Fareknapp>
+      {"  "}
       <Flatknapp>
         <Cog />
-        <span>Flat</span>
+        <span>Ikon</span>
       </Flatknapp>
+      {"  "}
       <Knapp disabled>
         <Cog />
-        <span>Disabled</span>
+        <span>Ikon</span>
       </Knapp>
+      {"  "}
     </div>
+    <br />
     <div>
-      <h2>Plassering av ikon</h2>
       <Knapp>
         <Cog />
-        <span>Knapp</span>
+        <span>Ikon left</span>
       </Knapp>
+      {"  "}
 
       <Knapp>
-        <span>Knapp</span>
+        <span>Ikon right</span>
         <Cog />
       </Knapp>
+      {"  "}
 
       <Knapp>
         <Cog />
-        <span>Knapp</span>
+        <span>Ikon both</span>
         <Cog />
       </Knapp>
+      {"  "}
     </div>
+    <br />
     <div>
-      <h2>Kompakt</h2>
       <Knapp kompakt>
         <Cog />
-        <span>Knapp</span>
+        <span>kompakt</span>
       </Knapp>
-
+      {"  "}
       <Knapp kompakt>
         <Cog />
-        <span className="sr-only">Knapp</span>
+        <span className="sr-only">kompakt</span>
       </Knapp>
     </div>
   </>
