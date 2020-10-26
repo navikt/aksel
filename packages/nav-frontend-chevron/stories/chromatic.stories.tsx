@@ -10,9 +10,6 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Chevron/All",
   component: NavFrontendChevron,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
 export const All = () => (

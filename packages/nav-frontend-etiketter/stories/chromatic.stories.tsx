@@ -10,9 +10,6 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Etiketter/All",
   component: EtikettBase,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
 export const All = () => (
