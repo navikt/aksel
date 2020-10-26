@@ -6,7 +6,8 @@ export {
   TextareaControlledProps,
 } from "./textarea-controlled";
 export { default as Checkbox, CheckboxProps, CheckboxGruppe } from "./checkbox";
-export { default as Radio, RadioProps, RadioGruppe } from "./radio";
+export { default as Radio, RadioProps } from "./radio";
+export { default as RadioGruppe } from "./radio-gruppe";
 export { default as Select, SelectProps } from "./select";
 export {
   default as SkjemaGruppe,
