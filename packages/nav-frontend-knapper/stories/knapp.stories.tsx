@@ -1,5 +1,6 @@
 import React from "react";
 import { Fareknapp, Flatknapp, Hovedknapp, Knapp } from "../src/index";
+import { Meta } from "@storybook/react/types-6-0";
 
 const Cog = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -7,7 +8,12 @@ const Cog = () => (
   </svg>
 );
 
-export const Main = () => (
+export default {
+  title: "Knapper",
+  component: Knapp,
+} as Meta;
+
+export const All = () => (
   <>
     <h1>Knapp</h1>
     <div>
@@ -111,8 +117,3 @@ export const Main = () => (
     </div>
   </>
 );
-
-export default {
-  title: "Knapp",
-  component: Knapp,
-};
