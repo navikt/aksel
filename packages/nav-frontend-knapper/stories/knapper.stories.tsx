@@ -1,5 +1,5 @@
 import React from "react";
-import { Fareknapp, Flatknapp, Hovedknapp, Knapp } from "../src/index";
+import { Knapp } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 const Cog = () => (
