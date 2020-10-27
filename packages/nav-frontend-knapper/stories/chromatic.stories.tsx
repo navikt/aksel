@@ -19,7 +19,7 @@ export const All = () => (
       display: "grid",
       gridAutoRows: "auto",
       rowGap: "2rem",
-      gridAutoColumns: "max-content",
+      gridAutoColumns: "fit-content",
     }}
   >
     <div

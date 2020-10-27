@@ -31,17 +31,17 @@ export const All = () => (
       }}
     >
       <Hamburgerknapp />
-      {"  "}
+
       <Menyknapp />
-      {"  "}
+
       <Nesteknapp />
-      {"  "}
+
       <Systemerknapp />
-      {"  "}
+
       <Søkeknapp />
-      {"  "}
+
       <Tilbakeknapp />
-      {"  "}
+
       <Xknapp />
     </div>
 
@@ -52,17 +52,17 @@ export const All = () => (
       }}
     >
       <Hamburgerknapp mini />
-      {"  "}
+
       <Menyknapp mini />
-      {"  "}
+
       <Nesteknapp mini />
-      {"  "}
+
       <Systemerknapp mini />
-      {"  "}
+
       <Søkeknapp mini />
-      {"  "}
+
       <Tilbakeknapp mini />
-      {"  "}
+
       <Xknapp mini />
     </div>
 
@@ -73,17 +73,17 @@ export const All = () => (
       }}
     >
       <Hamburgerknapp kompakt />
-      {"  "}
+
       <Menyknapp kompakt />
-      {"  "}
+
       <Nesteknapp kompakt />
-      {"  "}
+
       <Systemerknapp kompakt />
-      {"  "}
+
       <Søkeknapp kompakt />
-      {"  "}
+
       <Tilbakeknapp kompakt />
-      {"  "}
+
       <Xknapp kompakt />
     </div>
 
@@ -94,18 +94,17 @@ export const All = () => (
       }}
     >
       <Hamburgerknapp mini kompakt />
-      {"  "}
+
       <Menyknapp mini kompakt />
-      {"  "}
+
       <Nesteknapp mini kompakt />
-      {"  "}
+
       <Systemerknapp mini kompakt />
-      {"  "}
+
       <Søkeknapp mini kompakt />
 
-      {"  "}
       <Tilbakeknapp mini kompakt />
-      {"  "}
+
       <Xknapp mini kompakt />
     </div>
   </div>
