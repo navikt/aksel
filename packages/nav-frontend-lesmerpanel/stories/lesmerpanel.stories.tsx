@@ -11,7 +11,7 @@ export default {
 } as Meta;
 
 const Template = ({ intro, border, children, ...args }) => (
-  <Lesmerpanel intro={intro} border={border}>
+  <Lesmerpanel intro={intro} border={border} {...args}>
     {children}
   </Lesmerpanel>
 );
