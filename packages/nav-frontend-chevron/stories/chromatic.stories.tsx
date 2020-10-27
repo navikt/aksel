@@ -13,24 +13,31 @@ export default {
 } as Meta;
 
 export const All = () => (
-  <>
-    <HoyreChevron />
-    {"  "}
-    <VenstreChevron />
-    {"  "}
-    <OppChevron />
-    {"  "}
-    <NedChevron />
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+    }}
+  >
+    <div>
+      <HoyreChevron />
 
-    <br />
-    <br />
+      <VenstreChevron />
 
-    <HoyreChevron stor />
-    {"  "}
-    <VenstreChevron stor />
-    {"  "}
-    <OppChevron stor />
-    {"  "}
-    <NedChevron stor />
-  </>
+      <OppChevron />
+
+      <NedChevron />
+    </div>
+    <div>
+      <HoyreChevron stor />
+
+      <VenstreChevron stor />
+
+      <OppChevron stor />
+
+      <NedChevron stor />
+    </div>
+  </div>
 );

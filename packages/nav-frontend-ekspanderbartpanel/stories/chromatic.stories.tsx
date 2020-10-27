@@ -10,11 +10,18 @@ export default {
 } as Meta;
 
 export const All = () => (
-  <>
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+    }}
+  >
     <Ekspanderbartpanel tittel="Default, klikk her for å åpne/lukke panelet">
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       tittel={
         <Normaltekst>
@@ -24,7 +31,7 @@ export const All = () => (
     >
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       tittel={
         <div>
@@ -40,21 +47,21 @@ export const All = () => (
     >
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel tittel="Nøstede ekspanderbartpaneler, klikk her for å åpne/lukke panelet">
       Panelet vil da ekspandere og vise innholdet.
       <Ekspanderbartpanel tittel="Klikk her for å åpne/lukke panelet">
         Panelet vil da ekspandere og vise innholdet.
       </Ekspanderbartpanel>
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       apen
       tittel="Default apen, klikk her for å åpne/lukke panelet"
     >
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       apen
       tittel="Nøstede ekspanderbartpaneler apen, klikk her for å åpne/lukke panelet"
@@ -64,14 +71,14 @@ export const All = () => (
         Panelet vil da ekspandere og vise innholdet.
       </Ekspanderbartpanel>
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       border={false}
       tittel="Uten border, klikk her for å åpne/lukke panelet"
     >
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-    <br />
+
     <Ekspanderbartpanel
       border={false}
       apen
@@ -79,5 +86,5 @@ export const All = () => (
     >
       Panelet vil da ekspandere og vise innholdet.
     </Ekspanderbartpanel>
-  </>
+  </div>
 );

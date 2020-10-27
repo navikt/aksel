@@ -16,70 +16,97 @@ export default {
 } as Meta;
 
 export const All = () => (
-  <>
-    <Hamburgerknapp />
-    {"  "}
-    <Menyknapp />
-    {"  "}
-    <Nesteknapp />
-    {"  "}
-    <Systemerknapp />
-    {"  "}
-    <Søkeknapp />
-    {"  "}
-    <Tilbakeknapp />
-    {"  "}
-    <Xknapp />
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "max-content",
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Hamburgerknapp />
+      {"  "}
+      <Menyknapp />
+      {"  "}
+      <Nesteknapp />
+      {"  "}
+      <Systemerknapp />
+      {"  "}
+      <Søkeknapp />
+      {"  "}
+      <Tilbakeknapp />
+      {"  "}
+      <Xknapp />
+    </div>
 
-    <br />
-    <br />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Hamburgerknapp mini />
+      {"  "}
+      <Menyknapp mini />
+      {"  "}
+      <Nesteknapp mini />
+      {"  "}
+      <Systemerknapp mini />
+      {"  "}
+      <Søkeknapp mini />
+      {"  "}
+      <Tilbakeknapp mini />
+      {"  "}
+      <Xknapp mini />
+    </div>
 
-    <Hamburgerknapp mini />
-    {"  "}
-    <Menyknapp mini />
-    {"  "}
-    <Nesteknapp mini />
-    {"  "}
-    <Systemerknapp mini />
-    {"  "}
-    <Søkeknapp mini />
-    {"  "}
-    <Tilbakeknapp mini />
-    {"  "}
-    <Xknapp mini />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Hamburgerknapp kompakt />
+      {"  "}
+      <Menyknapp kompakt />
+      {"  "}
+      <Nesteknapp kompakt />
+      {"  "}
+      <Systemerknapp kompakt />
+      {"  "}
+      <Søkeknapp kompakt />
+      {"  "}
+      <Tilbakeknapp kompakt />
+      {"  "}
+      <Xknapp kompakt />
+    </div>
 
-    <br />
-    <br />
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Hamburgerknapp mini kompakt />
+      {"  "}
+      <Menyknapp mini kompakt />
+      {"  "}
+      <Nesteknapp mini kompakt />
+      {"  "}
+      <Systemerknapp mini kompakt />
+      {"  "}
+      <Søkeknapp mini kompakt />
 
-    <Hamburgerknapp kompakt />
-    {"  "}
-    <Menyknapp kompakt />
-    {"  "}
-    <Nesteknapp kompakt />
-    {"  "}
-    <Systemerknapp kompakt />
-    {"  "}
-    <Søkeknapp kompakt />
-    {"  "}
-    <Tilbakeknapp kompakt />
-    {"  "}
-    <Xknapp kompakt />
-
-    <br />
-    <br />
-
-    <Hamburgerknapp mini kompakt />
-    {"  "}
-    <Menyknapp mini kompakt />
-    {"  "}
-    <Nesteknapp mini kompakt />
-    {"  "}
-    <Systemerknapp mini kompakt />
-    {"  "}
-    <Søkeknapp mini kompakt />
-    {"  "}
-    <Tilbakeknapp mini kompakt />
-    {"  "}
-    <Xknapp mini kompakt />
-  </>
+      {"  "}
+      <Tilbakeknapp mini kompakt />
+      {"  "}
+      <Xknapp mini kompakt />
+    </div>
+  </div>
 );

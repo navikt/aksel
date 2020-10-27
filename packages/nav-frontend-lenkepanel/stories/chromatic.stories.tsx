@@ -8,7 +8,14 @@ export default {
 } as Meta;
 
 export const All = () => (
-  <>
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+    }}
+  >
     <Lenkepanel href="#" border tittelProps="undertittel">
       Voluptate sunt nisi consequat ea sunt laboris consectetur. Consequat
       aliquip laborum sint veniam eu incididunt commodo laborum sint laborum. Ut
@@ -18,7 +25,6 @@ export const All = () => (
       voluptate mollit proident deserunt eu proident proident do cupidatat duis.
       Ut est in cupidatat exercitation velit aliqua pariatur laboris.
     </Lenkepanel>
-    <br />
     <Lenkepanel href="#" border tittelProps="normaltekst">
       Voluptate sunt nisi consequat ea sunt laboris consectetur. Consequat
       aliquip laborum sint veniam eu incididunt commodo laborum sint laborum. Ut
@@ -28,5 +34,5 @@ export const All = () => (
       voluptate mollit proident deserunt eu proident proident do cupidatat duis.
       Ut est in cupidatat exercitation velit aliqua pariatur laboris.
     </Lenkepanel>
-  </>
+  </div>
 );
