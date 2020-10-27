@@ -6,12 +6,9 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Popover",
   component: Popover,
-  parameters: {
-    chromatic: { disabled: true },
-  },
 } as Meta;
 
-const Template = ({ ...args }) => {
+const Template = ({ ...props }) => {
   const [anchor, setAnchor] = useState(undefined);
   const popoverRef = useRef<any>();
   useEffect(() => {
@@ -22,18 +19,30 @@ const Template = ({ ...args }) => {
       <button
         ref={popoverRef}
         onClick={(e) => setAnchor(e.currentTarget)}
-        style={{
-          marginTop: "7rem",
-          marginLeft: "7rem",
-        }}
+        style={{ width: "50px" }}
       >
         open
       </button>
-      <Popover ankerEl={anchor} onRequestClose={() => null} {...args}>
+      <Popover ankerEl={anchor} {...props}>
         <p>Dette er en popover.</p>
       </Popover>
     </>
   );
 };
 
-export const Example = Template.bind({});
+export const All = () => {
+  return (
+    <div
+      style={{
+        display: "grid",
+        gridAutoColumns: "100%",
+        gridAutoRows: "30px",
+        rowGap: "4rem",
+        margin: "4rem",
+      }}
+    >
+      <Template />
+      <Template utenPil />
+    </div>
+  );
+};

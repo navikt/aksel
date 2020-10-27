@@ -1,5 +1,5 @@
 import React from "react";
-import { Knapp } from "../src/index";
+import { Fareknapp, Flatknapp, Hovedknapp, Knapp } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 const Cog = () => (
@@ -11,28 +11,215 @@ const Cog = () => (
 export default {
   title: "Knapper",
   component: Knapp,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
-const Template = ({ children, type, icon, ...args }) => (
-  <Knapp type={type} {...args}>
-    {!icon && children}
-    {icon && (
-      <>
-        <span>{children}</span>
-        <Cog />
-      </>
-    )}
-  </Knapp>
-);
+export const All = () => (
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp>Normal</Knapp>
 
-export const Knapper = Template.bind({});
-Knapper.args = {
-  type: "standard",
-  children: "Knappetekst",
-  kompakt: false,
-  mini: false,
-  icon: false,
-};
+      <Hovedknapp>Hoved</Hovedknapp>
+
+      <Fareknapp>Fare</Fareknapp>
+
+      <Flatknapp>Flat</Flatknapp>
+
+      <Knapp disabled>Disabled</Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp spinner>spinner</Knapp>
+
+      <Hovedknapp spinner>spinner</Hovedknapp>
+
+      <Fareknapp spinner>spinner</Fareknapp>
+
+      <Flatknapp spinner>spinner</Flatknapp>
+
+      <Knapp disabled spinner>
+        Disabled spinner
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <a href="#som-lenke" className="knapp">
+        som-lenke
+      </a>
+
+      <a href="#som-lenke" className="knapp knapp--hoved">
+        som-lenke
+      </a>
+
+      <a href="#som-lenke" className="knapp knapp--fare">
+        som-lenke
+      </a>
+
+      <a href="#som-lenke" className="knapp knapp--flat">
+        som-lenke
+      </a>
+
+      <a href="#som-lenke" className="knapp knapp--disabled">
+        som-lenke
+      </a>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp mini>mini</Knapp>
+
+      <Hovedknapp mini>mini</Hovedknapp>
+
+      <Fareknapp mini>mini</Fareknapp>
+
+      <Flatknapp mini>mini</Flatknapp>
+
+      <Knapp disabled mini>
+        mini
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp kompakt>kompakt</Knapp>
+
+      <Hovedknapp kompakt>kompakt</Hovedknapp>
+
+      <Fareknapp kompakt>kompakt</Fareknapp>
+
+      <Flatknapp kompakt>kompakt</Flatknapp>
+
+      <Knapp disabled kompakt>
+        kompakt
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp kompakt mini>
+        kompakt mini
+      </Knapp>
+
+      <Hovedknapp kompakt mini>
+        kompakt mini
+      </Hovedknapp>
+
+      <Fareknapp kompakt mini>
+        kompakt mini
+      </Fareknapp>
+
+      <Flatknapp kompakt mini>
+        kompakt mini
+      </Flatknapp>
+
+      <Knapp disabled kompakt mini>
+        kompakt mini
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp>
+        <Cog />
+        <span>Ikon</span>
+      </Knapp>
+
+      <Hovedknapp>
+        <Cog />
+        <span>Ikon</span>
+      </Hovedknapp>
+
+      <Fareknapp>
+        <Cog />
+        <span>Ikon</span>
+      </Fareknapp>
+
+      <Flatknapp>
+        <Cog />
+        <span>Ikon</span>
+      </Flatknapp>
+
+      <Knapp disabled>
+        <Cog />
+        <span>Ikon</span>
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp>
+        <Cog />
+        <span>Ikon left</span>
+      </Knapp>
+
+      <Knapp>
+        <span>Ikon right</span>
+        <Cog />
+      </Knapp>
+
+      <Knapp>
+        <Cog />
+        <span>Ikon both</span>
+        <Cog />
+      </Knapp>
+    </div>
+
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <Knapp kompakt>
+        <Cog />
+        <span>kompakt</span>
+      </Knapp>
+
+      <Knapp kompakt>
+        <Cog />
+        <span className="sr-only">kompakt</span>
+      </Knapp>
+    </div>
+  </div>
+);

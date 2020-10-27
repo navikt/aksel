@@ -33,8 +33,8 @@ const Template = ({
   </Modal>
 );
 
-export const Example = Template.bind({});
-Example.args = {
+export const All = Template.bind({});
+All.args = {
   closeButton: true,
   isOpen: true,
 };

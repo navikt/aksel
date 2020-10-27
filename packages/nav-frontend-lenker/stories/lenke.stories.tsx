@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import * as ReactDOM from "react-dom";
 import Lenke from "../src/lenke";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
   title: "Lenke",
   component: Lenke,
-  parameters: {
-    chroamtic: { disabled: true },
-  },
 } as Meta;
 
-const Template = ({ children, ...args }) => {
+export const All = () => {
+  const lenkeref = useRef<any>();
+  useEffect(() => {
+    ReactDOM.findDOMNode(lenkeref.current).focus();
+  });
   return (
-    <Lenke href="#" {...args}>
-      {children}
-    </Lenke>
+    <div
+      style={{
+        display: "grid",
+        gridAutoRows: "auto",
+        rowGap: "2rem",
+        gridAutoColumns: "max-content",
+      }}
+    >
+      <Lenke href="#">Lenketekst default</Lenke>
+      <Lenke href="#" ref={lenkeref}>
+        Lenketekst fokusert
+      </Lenke>
+    </div>
   );
-};
-
-export const Example = Template.bind({});
-Example.args = {
-  children: "Lenketekst",
 };
