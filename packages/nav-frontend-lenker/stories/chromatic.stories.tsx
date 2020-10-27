@@ -14,13 +14,18 @@ export const All = () => {
     ReactDOM.findDOMNode(lenkeref.current).focus();
   });
   return (
-    <>
+    <div
+      style={{
+        display: "grid",
+        gridAutoRows: "auto",
+        rowGap: "2rem",
+        gridAutoColumns: "max-content",
+      }}
+    >
       <Lenke href="#">Lenketekst default</Lenke>
-      <br />
-      <br />
       <Lenke href="#" ref={lenkeref}>
         Lenketekst fokusert
       </Lenke>
-    </>
+    </div>
   );
 };

@@ -29,7 +29,7 @@ const Template = ({ ...args }) => {
       >
         open
       </button>
-      <Popover ankerEl={anchor} {...args}>
+      <Popover ankerEl={anchor} onRequestClose={() => null} {...args}>
         <p>Dette er en popover.</p>
       </Popover>
     </>

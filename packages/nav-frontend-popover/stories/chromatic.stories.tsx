@@ -19,10 +19,7 @@ const Template = ({ ...props }) => {
       <button
         ref={popoverRef}
         onClick={(e) => setAnchor(e.currentTarget)}
-        style={{
-          marginTop: "7rem",
-          marginLeft: "7rem",
-        }}
+        style={{ width: "50px" }}
       >
         open
       </button>
@@ -37,10 +34,11 @@ export const All = () => {
   return (
     <div
       style={{
-        display: "flex",
-        justifyContent: "space-around",
-        flexWrap: "wrap",
-        width: "80%",
+        display: "grid",
+        gridAutoColumns: "100%",
+        gridAutoRows: "30px",
+        rowGap: "4rem",
+        margin: "4rem",
       }}
     >
       <Template />

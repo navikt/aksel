@@ -9,7 +9,7 @@ export default {
 
 export const All = () => {
   return (
-    <>
+    <div style={{ display: "grid", gridAutoRows: "auto", rowGap: "2rem" }}>
       <Lesmerpanel
         intro={"Default, Tekst eller elementer som vises før panelet er åpnet"}
         border={true}
@@ -21,7 +21,6 @@ export const All = () => {
           ad excepteur voluptate labore consectetur Lorem ipsum irure commodo.
         </div>
       </Lesmerpanel>
-      <br />
       <Lesmerpanel
         intro={
           "border=false, Tekst eller elementer som vises før panelet er åpnet"
@@ -35,7 +34,6 @@ export const All = () => {
           ad excepteur voluptate labore consectetur Lorem ipsum irure commodo.
         </div>
       </Lesmerpanel>
-      <br />
       <Lesmerpanel
         intro={
           "defaultApen=true, Tekst eller elementer som vises før panelet er åpnet"
@@ -56,6 +54,6 @@ export const All = () => {
           cillum adipisicing.
         </div>
       </Lesmerpanel>
-    </>
+    </div>
   );
 };

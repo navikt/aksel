@@ -9,7 +9,7 @@ export default {
 
 export const All = () => {
   return (
-    <>
+    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "4rem" }}>
       <Panel border>
         Deserunt ad ullamco qui cupidatat eu fugiat incididunt ex ea culpa sit
         consequat. Amet incididunt commodo incididunt voluptate do esse do
@@ -20,8 +20,6 @@ export const All = () => {
         voluptate et irure cupidatat ex velit mollit est cillum. Excepteur dolor
         sint deserunt in nulla fugiat cillum irure consectetur.
       </Panel>
-      <br />
-      <br />
       <Panel>
         Deserunt ad ullamco qui cupidatat eu fugiat incididunt ex ea culpa sit
         consequat. Amet incididunt commodo incididunt voluptate do esse do
@@ -32,6 +30,6 @@ export const All = () => {
         voluptate et irure cupidatat ex velit mollit est cillum. Excepteur dolor
         sint deserunt in nulla fugiat cillum irure consectetur.
       </Panel>
-    </>
+    </div>
   );
 };
