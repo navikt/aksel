@@ -5,9 +5,6 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Lenke",
   component: Lenke,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
 const Template = ({ children, ...args }) => (
