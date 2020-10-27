@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import * as ReactDOM from "react-dom";
+import React from "react";
 import Lenke from "../src/lenke";
 import { Meta } from "@storybook/react/types-6-0";
 
