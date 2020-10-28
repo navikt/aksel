@@ -16,22 +16,14 @@ yarn boot
 yarn storybook
 ```
 
-[http://localhost:8080](http://localhost:8080) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
+[http://localhost:6006](http://localhost:6006) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
 
 ## Utviklingsmiljø
 
-Det er opprettet et eget utviklingsmiljø under `/development` på prosjektrot, som er en helt enkel React-app
-som kjøres opp med `npm start`. Appen blir kjørt opp med webpack-dev-server.
-
-Se kommentarene i `/development/app/components/App.js` for mer info.
+Vi tar nå i bruk storybook [https://storybook.js.org/](https://storybook.js.org/) som utviklermiljø.
+`yarn storybook` vil starte opp dette miljøet og kan da skrive `stories` for elementene man vil teste [hvordan skrive storybook stories](https://storybook.js.org/docs/react/writing-stories/introduction)
 
 ## Utvikling av nye komponenter
-
-For å raskt komme igang med å lage nye moduler, er det laget et scaffolding-script som kan kjøres for å få
-en fiks ferdig struktur som er konsistent med hvordan eksisterende modulene er bygd opp fra før, slik at du
-kan fokusere på kodingen av komponenten du skal lage.
-
-Dette scaffolding-scriptet kjøres opp med `npm run new`.
 
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen.
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av,
@@ -39,9 +31,9 @@ installer denne i rot-mappen og legg til avhengigheten som en `peerDependency` i
 
 ### Bruk av ikoner
 
-Det er laget en egen modul som heter [`nav-frontend-ikoner-assets`](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules/nav-frontend-ikoner-assets) som
+Det er laget en egen modul som heter [`nav-frontend-ikoner-assets`](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/nav-frontend-ikoner-assets) som
 er ment å brukes internt i frontend-rammeverket av komponenter som trenger ikoner. De forskjellige ikonene som
-er tilgjengelige ligger inne som .svg-filer [her](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/node_modules/nav-frontend-ikoner-assets/assets). Nøkler
+er tilgjengelige ligger inne som .svg-filer [her](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/nav-frontend-ikoner-assets/assets). Nøkler
 til Ikon-komponenten tilsvarer navnene på disse .svg-filene, som kommer fram av kildekoden til `index.js`-filen i `nav-frontend-ikoner-assets`-modulen.
 
 Komponenten kan da f.eks. brukes internt i andre komponenter slik:
@@ -50,7 +42,7 @@ Komponenten kan da f.eks. brukes internt i andre komponenter slik:
 <Ikon kind="feil-sirkel-fyll" />
 ```
 
-Nye ikoner legges til som SVG-filer i samme mappe. Husk å kjør `npm run buildicons` og deretter `gulp buildJs` etterpå for å re-generere `index.js`-filen i `nav-frontend-ikoner-assets` slik at nøklene blir oppdatert.
+Videre har vi planer om å publisere en egen ikonpakke med ikoner vi eier [nav-frontend-icons repo](https://github.com/navikt/nav-frontend-icons)
 
 ## Dokumentasjon
 
@@ -58,91 +50,33 @@ Når du har laget eller endret på en komponent er det fint om du også dokument
 
 - Som kommentarer på interface i TypeScript-koden. Dette må være på plass for at tabellen over props skal genereres på komponent-siden på design.nav.no.
 
-Det kan også være lurt å kjøre `npm run start-guideline-app` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
+Det kan også være lurt å kjøre `yarn start` for å kjøre opp design.nav.no-appen lokalt slik at du kan se hvordan komponenten blir vist fram på nettsiden.
 
 ## Kodekvalitet
 
-For å sikre kodekvalitet er det satt opp både `eslint` og `lesshint` som blir kjørt ved byggetid.
-Så langt det lar seg gjøre skal det ikke være endringer på regelsettene til disse uten at det har
-blitt avklart/diskutert i NAVs frontendforum.
-
-For at dette skal bli håndhevet er `master`-branchen i repoet lukket. Det vil si at den
-eneste måten man får inn endringer på er gjennom pull-requests. For å merge en PR må bygget
-har kjørt ok, og minst èn fra [CODEOWNERS](https://github.com/navikt/nav-frontend-moduler/blob/master/CODEOWNERS) må ha godkjent PRen.
+For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver commit, samt linter som kjører hvert push
 
 ## Kommandoer
 
-- `npm run lint` - kjører linting av TypeScript og LESS
-- `npm run ts:lint` - kjører linting av TypeScript
-- `npm run less:lint` - kjører linting av LESS
-- `npm run checkversions` - sjekker at avhengighetene til modulene er de
-  samme som er definert i rot-mappen
+### Komponenter
 
-## Andre kommandoer
+- `yarn install` - installerer alle dependencies og konfigurerer yarn workspaces riktig
+- `yarn boot` - bygger alle komponentene
+- `yarn lerna:watch` - watcher alle komponenten for hot-reloading av endringer
+- `yarn lint` - Kjører diverse lintere på kode og styling
+- `yarn storybook` - starter opp utviklingsmiljø for storybook
 
-- `npm run start-guideline-app` - Starter opp utviklingsmiljø for utvikling av Guideline-appen`
-- `npm run build-guideline-app` - Bygger Guideline-appen til `/guideline-app/dist`
-- `npm run build` - Bygger alle JS-filer
-- `npm run buildfonts` - Bygger alle font-filer (Lager css-filer med base64 inlinet fonter)
-- `npm run buildicons` - Bygger opp react-komponenten utifra svg'ene i ikon-pakken
-- `npm run create` - Samme som `npm run new`
-- `npm run dev` - Samme som `npm start`
-- `npm run watch` - Samme som `npm start`
+### Nettside
 
-## Bruk av TypeScript
-
-Ettersom Typescript-kompilatoren ikke støtter Lerna-baserte prosjekt-strukturer (se [issue #230](https://github.com/navikt/nav-frontend-moduler/issues/230)) er det dessverre ikke noe auto-transpilering av Typescript-filer ut-av-boksen når man kjører utviklingsmiljøet eller guideline-appen. Inntil videre er man nødt til å ordne dette selv ved å kjøre Typescript-kompilatoren manuelt på de filene man jobber på.
-
-Hvis man for eksempel jobber med filen `bekreft-checkboks-panel.tsx` kan man sette opp "watching" og automatisk transpilering til javascript på denne måten:
-
-- `npm install typescript -g`
-- `cd nav-frontend-moduler\packages\node_modules\nav-frontend-skjema`
-- `tsc -w -d src/bekreft-checkboks-panel.tsx --jsx react --outDir lib --lib DOM,ES2015,ES2016,ES2017`
-
-Forklaringer på argumentene til Typescript-kompilatoren i dette eksempelet kan du finne [her](https://www.typescriptlang.org/docs/handbook/compiler-options.html). Argumentene bak `--lib` på slutten speiler [prosjektet sin tsconfig](https://github.com/navikt/nav-frontend-moduler/blob/master/tsconfig.json#L14), og sørger for at du får samme validering som ved ordinært bygg.
+- `yarn start` - starter opp gatsby nettsiden lokalt
+- `yarn build:gatsby` - bygger gatsby nettsiden lokalt
+- `yarn serve` - server bygd gatsby nettside på localhost:9000
 
 ## Byggemiljø
 
-Det er satt opp et [Travis-bygg](https://travis-ci.org/navikt/nav-frontend-moduler) for repoet.
+Det er satt opp [Github actions](https://github.com/navikt/nav-frontend-moduler/actions) for repoet.
 Pull-requests bygges derfor automatisk med en gang de pushes til remote.
 
 ### Byggesteg
 
-Se [.travis.yml](https://github.com/navikt/nav-frontend-moduler/blob/master/.travis.yml).
-
-## Scripts
-
-Det ligger flere hjelpe-scripts i mappen `_scripts`.
-
-- `bumpall.js` - Utility script for å bumpe versjons-nummer på alle pakkene manuelt.
-- `verifyPkgDependencies.js` - sjekker at avhengighetene til modulene er de samme som er definert i rot-mappen. Blir kjørt av `npm run checkversions`
-- `fixDependencyVersions.js` - forsøker etter beste evne å fikse feilene rapportert av `verifyPkgDependencies.js`
-- `scaffold.js` - scaffolding-script for å lage nye moduler
-- `lesshint-reporter.js` - custom reporter for lesshint slik at feil derifra også ser pene ut
-- `generateReadmes.js` - genererer README.md-filer for hver modul basert på template i DISCLAIMER.md samt modulens
-  peerDependencies
-
-## Scaffolding
-
-Scaffolding kjørt via `npm run new` bruker `_scripts/scaffold.js` og templatene
-finnes i `_templates`.
-
-Det er satt opp `mustache` som templateing-engine. Denne er konfigurert opp til å
-bruke `'<%'` og `'%>'` som delimiters slik at det ikke blir problemer med annen kode.
-
-Scaffolding-scriptet kommer med ett sett av predefinerte variabler basert på modul-navnet.
-
-- `name.original`
-- `name.capitalize`
-- `name.camelcase`
-- `name.kebabcase`
-- `name.cssname`
-
-For å automatisk sette riktig versjon på dependencies kan `resolve`-metoden brukes,
-denne henter da ut versjonen sånn som den er satt i rot-mappen.
-
-```
-"dependencies": {
-    "react": "<%#resolve%>react<%/resolve%>"
-}
-```
+Se [build-publish.yml](https://github.com/navikt/nav-frontend-moduler/blob/master/.github/workflows/build-publish.yml).
