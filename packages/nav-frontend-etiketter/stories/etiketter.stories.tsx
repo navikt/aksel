@@ -1,23 +1,54 @@
 import React from "react";
-import EtikettBase from "../src/index";
+import EtikettBase, {
+  EtikettInfo,
+  EtikettAdvarsel,
+  EtikettFokus,
+  EtikettSuksess,
+} from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
   title: "Etiketter",
   component: EtikettBase,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
-const Template = ({ children, mini, type, ...args }) => (
-  <EtikettBase type={type} mini={mini} {...args}>
-    {children}
-  </EtikettBase>
-);
+export const All = () => (
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+      maxWidth: "50vw",
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <EtikettInfo> Info</EtikettInfo>
 
-export const Example = Template.bind({});
-Example.args = {
-  type: "info",
-  children: "Innhold",
-};
+      <EtikettSuksess>Suksess</EtikettSuksess>
+
+      <EtikettFokus>Fokus</EtikettFokus>
+
+      <EtikettAdvarsel>Advarsel</EtikettAdvarsel>
+    </div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-evenly",
+      }}
+    >
+      <EtikettInfo mini> Info</EtikettInfo>
+
+      <EtikettSuksess mini>Suksess</EtikettSuksess>
+
+      <EtikettFokus mini>Fokus</EtikettFokus>
+
+      <EtikettAdvarsel mini>Advarsel</EtikettAdvarsel>
+    </div>
+  </div>
+);

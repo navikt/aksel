@@ -7,14 +7,8 @@ export default {
   component: Hjelpetekst,
 } as Meta;
 
-const Template = ({ children, mini, type, ...args }) => (
-  <Hjelpetekst style={{ margin: "6rem 0 0 6rem" }} type={type} {...args}>
-    {children}
+export const All = () => (
+  <Hjelpetekst style={{ margin: "6rem 0 0 6rem" }} type={"under" as any}>
+    Innhold
   </Hjelpetekst>
 );
-
-export const Example = Template.bind({});
-Example.args = {
-  type: "under",
-  children: "Innhold",
-};

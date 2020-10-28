@@ -5,22 +5,34 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Lenkepanel",
   component: Lenkepanel,
-  parameters: {
-    chromatic: { disable: true },
-  },
 } as Meta;
 
-const Template = ({ children = " ", border, tittelProps, ...args }) => (
-  <Lenkepanel href="#" border={border} tittelProps={tittelProps} {...args}>
-    {children}
-  </Lenkepanel>
+export const All = () => (
+  <div
+    style={{
+      display: "grid",
+      gridAutoRows: "auto",
+      rowGap: "2rem",
+      gridAutoColumns: "fit-content",
+    }}
+  >
+    <Lenkepanel href="#" border tittelProps="undertittel">
+      Voluptate sunt nisi consequat ea sunt laboris consectetur. Consequat
+      aliquip laborum sint veniam eu incididunt commodo laborum sint laborum. Ut
+      deserunt amet sunt aliquip. Minim consequat nulla occaecat ex deserunt
+      consectetur ad voluptate officia. Id cillum dolore culpa sunt duis
+      pariatur amet consequat deserunt enim et sint et esse. Aliquip aliquip
+      voluptate mollit proident deserunt eu proident proident do cupidatat duis.
+      Ut est in cupidatat exercitation velit aliqua pariatur laboris.
+    </Lenkepanel>
+    <Lenkepanel href="#" border tittelProps="normaltekst">
+      Voluptate sunt nisi consequat ea sunt laboris consectetur. Consequat
+      aliquip laborum sint veniam eu incididunt commodo laborum sint laborum. Ut
+      deserunt amet sunt aliquip. Minim consequat nulla occaecat ex deserunt
+      consectetur ad voluptate officia. Id cillum dolore culpa sunt duis
+      pariatur amet consequat deserunt enim et sint et esse. Aliquip aliquip
+      voluptate mollit proident deserunt eu proident proident do cupidatat duis.
+      Ut est in cupidatat exercitation velit aliqua pariatur laboris.
+    </Lenkepanel>
+  </div>
 );
-
-export const Example = Template.bind({});
-Example.args = {
-  children:
-    "Eu laborum do laborum eu proident commodo aliquip sit sint ullamco nostrud do eiusmod duis. Deserunt non qui sit ad dolore. Sunt nostrud do laborum dolor veniam anim laboris sunt veniam sit amet cupidatat laborum ut. In tempor sit ut sint enim mollit Lorem aute do exercitation est commodo proident. Aliquip dolor consequat ipsum aliquip qui in esse exercitation.",
-  border: true,
-  tittelProps: "undertittel",
-  linkCreator: undefined,
-};

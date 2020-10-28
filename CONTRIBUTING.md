@@ -19,11 +19,11 @@ yarn storybook
 [http://localhost:6006](http://localhost:6006) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
 
 ## Utviklingsmiljø
+
 Vi tar nå i bruk storybook [https://storybook.js.org/](https://storybook.js.org/) som utviklermiljø.
 `yarn storybook` vil starte opp dette miljøet og kan da skrive `stories` for elementene man vil teste [hvordan skrive storybook stories](https://storybook.js.org/docs/react/writing-stories/introduction)
 
 ## Utvikling av nye komponenter
-
 
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen.
 Om en modul du lager har behov for en npm-pakke som ikke finnes i repoet fra før av,
@@ -58,23 +58,19 @@ For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver 
 
 ## Kommandoer
 
-
 ### Komponenter
 
 - `yarn install` - installerer alle dependencies og konfigurerer yarn workspaces riktig
-- `yarn boot` - bygger alle komponentene 
+- `yarn boot` - bygger alle komponentene
 - `yarn lerna:watch` - watcher alle komponenten for hot-reloading av endringer
 - `yarn lint` - Kjører diverse lintere på kode og styling
 - `yarn storybook` - starter opp utviklingsmiljø for storybook
 
-
-
 ### Nettside
+
 - `yarn start` - starter opp gatsby nettsiden lokalt
 - `yarn build:gatsby` - bygger gatsby nettsiden lokalt
 - `yarn serve` - server bygd gatsby nettside på localhost:9000
-
-
 
 ## Byggemiljø
 
