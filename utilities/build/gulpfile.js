@@ -11,8 +11,6 @@ const path = require("path");
 const chalk = require("chalk");
 const cssfont64 = require("gulp-cssfont64-formatter");
 const configureSvgIcon = require("react-svg-icon-generator-fork").default;
-const addVariablesExportPlugin = require("../scripts/gulp-export-less-variables");
-const camelcase = require("lodash.camelcase");
 
 const fonts = "./packages/node_modules/*/assets/**/*.woff";
 const dest = "../../packages";
@@ -78,14 +76,6 @@ function buildCssfonts() {
     .pipe(gulp.dest(dest));
 }
 
-function exportLessVariables() {
-  const file = "../../packages/nav-frontend-core/less";
-  return gulp
-    .src(`${file}/_variabler.less`)
-    .pipe(addVariablesExportPlugin({ exportNames: camelcase }))
-    .pipe(gulp.dest(file));
-}
-
 configureSvgIcon({
   destination: path.join(
     __dirname,
@@ -105,8 +95,6 @@ configureSvgIcon({
   keepFillColor: true,
 });
 
-gulp.task("buildLess", gulp.series(exportLessVariables));
-gulp.task("build", gulp.series("buildLess"));
 gulp.task("default", gulp.series("build"));
 gulp.task("buildicons", gulp.series("svg-icon"));
 gulp.task("buildfonts", gulp.series(buildCssfonts));
