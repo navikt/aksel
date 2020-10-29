@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-paneler-style",
-  "version": "0.3.25",
+  "version": "0.3.26",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -14,7 +14,7 @@
     "nav-frontend-core": "^5.0.5"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.5",
+    "nav-frontend-core": "^5.0.6",
     "react": "^15.4.2 || ^16.0.0"
   }
 }
