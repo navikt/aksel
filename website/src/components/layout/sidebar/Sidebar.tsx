@@ -1,25 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "gatsby";
 import classnames from "classnames";
-import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
+import {
+  Normaltekst,
+  Systemtittel,
+  Undertekst,
+  Undertittel,
+} from "nav-frontend-typografi";
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Input } from "nav-frontend-skjema";
 import { EtikettFokus, EtikettInfo } from "nav-frontend-etiketter";
 import { useNavigationPage, usePageMenu } from "../../../useSiteStructure";
 import "./styles.less";
 
-const isBeta = (path) => {
+const isBeta = (path: string) => {
   const style = path.match(/packages\/nav-frontend-(.*)\/md/);
-  if (!!!style || style.length < 2) return false;
-  if (style[1].indexOf("beta") === -1) return false;
-  return true;
+  if (!style || style.length < 2) return false;
+  return style[1].includes("beta");
 };
 
-const isStyle = (path) => {
+const isStyle = (path: string) => {
   const style = path.match(/packages\/nav-frontend-(.*)\/md/);
-  if (!!!style || style.length < 2) return false;
-  if (style[1].indexOf("style") === -1) return false;
-  return true;
+  if (!style || style.length < 2) return false;
+  return style[1].includes("style");
 };
 
 const cls = (link: string, location) =>
@@ -58,9 +61,13 @@ const Sidebar = ({ location, className = "" }) => {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <h2 id="left-navigation-title" className="typo-systemtittel">
+        <Systemtittel
+          id="left-navigation-title"
+          className="leftNavigation__title"
+        >
           {page?.title}
-        </h2>
+        </Systemtittel>
+
         <ul className="nav-list">
           {result.length > 0 &&
             result.map(({ link, title, componentPath }, index) => {
@@ -82,7 +89,11 @@ const Sidebar = ({ location, className = "" }) => {
                 </li>
               );
             })}
-          {result.length === 0 && <Normaltekst>Ingen treff...</Normaltekst>}
+          {result.length === 0 && (
+            <li>
+              <Normaltekst>Ingen treff...</Normaltekst>
+            </li>
+          )}
         </ul>
         {location.pathname.indexOf("/components") === 0 && (
           <div className="contribute-promo">
