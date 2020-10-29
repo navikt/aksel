@@ -9,6 +9,9 @@
   "files": [
     "/less"
   ],
+  "scripts": {
+    "build": "yarn gulp --gulpfile build/gulpfile.js buildLess --ignoreErrors"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
