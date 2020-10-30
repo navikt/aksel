@@ -4,7 +4,7 @@ import { guid } from "nav-frontend-js-utils";
 import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Undertittel } from "nav-frontend-typografi";
 import { usePageMenu } from "../../useSiteStructure";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import "./styles.less";
 
 const NavPage = ({ location }) => {
