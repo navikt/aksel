@@ -85,3 +85,12 @@ export const useContentPage = (location) => {
       }
     : undefined;
 };
+
+export const useComponentPath = (location) => {
+  const pages = usePages();
+
+  const page = pages.find(({ link }) => {
+    return link === location.pathname;
+  });
+  return page;
+};
