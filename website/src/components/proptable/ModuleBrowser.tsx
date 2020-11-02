@@ -6,7 +6,6 @@ import Code from "../code/Code";
 import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
 import Copy from "../copy/Copy";
 import PropTable from "./PropTable";
-import "./styles.less";
 
 const ModuleBrowser = ({ context }) => {
   const modules = useProps(context.source);
