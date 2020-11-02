@@ -10,9 +10,6 @@
     "/less",
     "/css"
   ],
-  "dependencies": {
-    "normalize.css": "^8.0.1"
-  },
   "devDependencies": {
     "lessc": "^1.0.2"
   },
