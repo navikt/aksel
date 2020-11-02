@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-knapper-style",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -11,8 +11,8 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.7",
-    "nav-frontend-typografi-style": "^1.0.28",
+    "nav-frontend-core": "^5.0.8",
+    "nav-frontend-typografi-style": "^1.0.29",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {

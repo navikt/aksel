@@ -1,15 +1,15 @@
 {
   "name": "nav-frontend-veilederpanel-style",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
     "/src"
   ],
   "devDependencies": {
-    "nav-frontend-core": "^5.0.7",
-    "nav-frontend-paneler-style": "^0.3.27",
-    "nav-frontend-typografi-style": "^1.0.28",
+    "nav-frontend-core": "^5.0.8",
+    "nav-frontend-paneler-style": "^0.3.28",
+    "nav-frontend-typografi-style": "^1.0.29",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {
