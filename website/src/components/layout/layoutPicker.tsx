@@ -1,24 +1,51 @@
+import React from "react";
 import classnames from "classnames";
 import { EtikettInfo } from "nav-frontend-etiketter";
-import { Ingress, Innholdstittel } from "nav-frontend-typografi";
-import React from "react";
-import { useContentPage } from "../../useSiteStructure";
+import { Ingress, Innholdstittel, Normaltekst } from "nav-frontend-typografi";
+import { useComponentPath, useContentPage } from "../../useSiteStructure";
 import "./layout.less";
 import TabbedContainer from "./TabbedContainer";
+import { Knapp } from "nav-frontend-knapper";
+import { GithubLogo } from "../assets/images/svg";
+import Lenke from "nav-frontend-lenker";
 
 const componentTitleCls = (style) =>
   classnames("componentTitle", {
     "componentTitle--style": style,
   });
 
+const isStyle = (item) => {
+  const style = item.match(/packages\/nav-frontend-(.*)\/md/);
+  if (!style || style.length < 2) return false;
+  if (style[1].includes("style") === -1) return false;
+  return true;
+};
+
 const LayoutPicker = (props) => {
   const page = useContentPage(props.location);
+  const componentLink = useComponentPath(props.location);
 
-  const isStyle = (item) => {
-    const style = item.match(/packages\/nav-frontend-(.*)\/md/);
-    if (!!!style || style.length < 2) return false;
-    if (style[1].indexOf("style") === -1) return false;
-    return true;
+  const linkToEdit = () => {
+    let link = "";
+    if (componentLink.componentPath.match(/(?<=packages)(.*)$/)) {
+      link =
+        "packages" + componentLink.componentPath.match(/(?<=packages)(.*)$/)[1];
+    } else if (componentLink.componentPath.match(/(?<=website)(.*)$/)) {
+      link =
+        "website" + componentLink.componentPath.match(/(?<=website)(.*)$/)[1];
+    } else {
+      return null;
+    }
+    if (props.location.pathname.endsWith("technical")) return null;
+    return (
+      <Normaltekst className="gitLink">
+        <Lenke
+          href={`https://github.com/navikt/nav-frontend-moduler/edit/master/${link}`}
+        >
+          <GithubLogo /> Rediger siden på Github
+        </Lenke>
+      </Normaltekst>
+    );
   };
 
   if (page === undefined) {
@@ -34,6 +61,7 @@ const LayoutPicker = (props) => {
         >
           {props.children}
         </section>
+        {linkToEdit()}
       </div>
     );
   }
@@ -73,6 +101,7 @@ const LayoutPicker = (props) => {
       >
         {props.children}
       </section>
+      {linkToEdit()}
     </>
   );
 };
