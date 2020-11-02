@@ -2,36 +2,43 @@
 ingress: Denne komponenten bør brukes hvis det er nødvendig å innhente samtykke fra brukeren før de går videre i prosessen. Komponenten skal gi brukeren tydelig beskjed om hvorfor de må samtykke og hva de samtykker til.
 ---
 
-import { BekreftCheckboksPanel } from "./../../";
-import Alertstripe from "./../../../nav-frontend-alertstriper";
-import BekreftCheckboksPanelExample from "./../../sample/_bekreftcheckbokspanel.example.js";
+import Normal from "./Normal";
+import Feilmelding from "./Feilmelding";
 
 ## Normal
 
 <Example>
-  <BekreftCheckboksPanelExample />
+  <Normal />
 </Example>
 
-```html
+```jsx
 <BekreftCheckboksPanel
   label="Ja, jeg samtykker"
-  checked="{this.state.checked}"
-  onChange="{this.toggleChecked}"
+  checked={isChecked}
+  onChange={(e) => setIsChecked(e.target.checked)}
 >
-  For å gå videre må du samtykke til at vi får lov til å innhente og behandle
-  persondata om deg. Les mer om hvilke data vi henter og hvordan vi behandler
-  disse dataene i <a>vilkårene for denne tjenesten</a>.
+  For å komme videre må du gi oss lov til å hente inn og bruke opplysninger om
+  deg.{" "}
+  <Lenke href="#">
+    Les om hvilke opplysninger vi henter og hvordan vi bruker dem.
+  </Lenke>
 </BekreftCheckboksPanel>
 ```
 
 ## Feilmelding
 
 <Example>
-  <BekreftCheckboksPanelExample feil />
+  <Feilmelding />
 </Example>
 
-```html
-<BekreftCheckboksPanel label="Ja, jeg samtykker" checked={this.state.checked} onChange={this.toggleChecked} feil={{feilmelding: 'Du må bekrefte før søknaden kan sendes inn.'}}>
-    For å gå videre må du samtykke til at vi får lov til å innhente og behandle persondata om deg. Les mer om hvilke data vi henter og hvordan vi behandler disse dataene i <a>vilkårene for denne tjenesten</a>.
+```jsx
+<BekreftCheckboksPanel
+  label="Jeg bekrefter at opplysningene jeg har gitt, er riktige og fullstendige"
+  checked={isChecked}
+  onChange={(e) => setIsChecked(e.target.checked)}
+  feil="Du må bekrefte dette før du kan sende inn søknaden."
+>
+  Jeg vet at jeg kan miste retten til sykepenger hvis opplysningene jeg gir,
+  ikke er riktige eller fullstendige.
 </BekreftCheckboksPanel>
 ```

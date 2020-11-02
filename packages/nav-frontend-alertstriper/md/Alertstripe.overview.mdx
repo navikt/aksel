@@ -2,35 +2,37 @@
 ingress: Alertstripen er en komponent som benyttes for å gi brukeren varsler av ymse slag, og komponenten støtter forskjellige visninger basert på hvilken type varsel som formidles til brukeren.
 ---
 
-import Lenke from "./../../nav-frontend-lenker";
-import Alertstripe from "./..";
+import Lenke from "../../nav-frontend-lenker";
+import Alertstripe from "..";
 
 ## Default striper
 
 <Example>
-  <Alertstripe type="info">Søknaden din er klar for innsending.</Alertstripe>
+  <Alertstripe type="info">Nå kan du sende inn søknaden.</Alertstripe>
   <br />
-  <Alertstripe type="suksess">Søknaden ble sendt!</Alertstripe>
+  <Alertstripe type="suksess">Du har sendt søknaden.</Alertstripe>
   <br />
   <Alertstripe type="advarsel">
-    Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
   </Alertstripe>
   <br />
   <Alertstripe type="feil">
-    Innsending av søknad er nede, vennligst prøv igjen senere. Se{" "}
-    <Lenke href="#">driftsmeldinger</Lenke> for mer informasjon.
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Lenke href="#">følge med på hvordan det går</Lenke>.
   </Alertstripe>
 </Example>
 
 ```html
-<Alertstripe type="info">Søknaden din er klar for innsending.</Alertstripe>
-<Alertstripe type="suksess">Søknaden ble sendt!</Alertstripe>
+<Alertstripe type="info">Nå kan du sende inn søknaden.</Alertstripe>
+<Alertstripe type="suksess">Du har sendt søknaden.</Alertstripe>
 <Alertstripe type="advarsel">
-  Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
+  Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden din
+  kommer fram.
 </Alertstripe>
 <Alertstripe type="feil">
-  Innsending av søknad er nede, vennligst prøv igjen senere. Se
-  <a>driftsmeldinger</a> for mer informasjon.
+  Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere. Du
+  er velkommen til å <Lenke href="#">følge med på hvordan det går</Lenke>.
 </Alertstripe>
 ```
 
@@ -38,36 +40,38 @@ import Alertstripe from "./..";
 
 <Example>
   <Alertstripe type="info" form="inline">
-    Søknaden din er klar for innsending.
+    Nå kan du sende inn søknaden.
   </Alertstripe>
   <br />
   <Alertstripe type="suksess" form="inline">
-    Søknaden ble sendt!
+    Du har sendt søknaden.
   </Alertstripe>
   <br />
   <Alertstripe type="advarsel" form="inline">
-    Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
   </Alertstripe>
   <br />
   <Alertstripe type="feil" form="inline">
-    Innsending av søknad er nede, vennligst prøv igjen senere. Se{" "}
-    <Lenke href="#">driftsmeldinger</Lenke> for mer informasjon.
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Lenke href="#">følge med på hvordan det går</Lenke>.
   </Alertstripe>
 </Example>
 
 ```html
 <Alertstripe type="info" form="inline">
-  Søknaden din er klar for innsending.
+  Nå kan du sende inn søknaden.
 </Alertstripe>
 <br />
-<Alertstripe type="suksess" form="inline">Søknaden ble sendt!</Alertstripe>
+<Alertstripe type="suksess" form="inline">Du har sendt søknaden.</Alertstripe>
 <br />
 <Alertstripe type="advarsel" form="inline">
-  Vi opplever stor pågang! Innsendingen kan ta noe lengre tid.
+  Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden din
+  kommer fram.
 </Alertstripe>
 <br />
 <Alertstripe type="feil" form="inline">
-  Innsending av søknad er nede, vennligst prøv igjen senere. Se
-  <Lenke href="#">driftsmeldinger</Lenke> for mer informasjon.
+  Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere. Du
+  er velkommen til å <Lenke href="#">følge med på hvordan det går</Lenke>.
 </Alertstripe>
 ```
