@@ -5,7 +5,6 @@ import { Ingress, Innholdstittel, Normaltekst } from "nav-frontend-typografi";
 import { useComponentPath, useContentPage } from "../../useSiteStructure";
 import "./layout.less";
 import TabbedContainer from "./TabbedContainer";
-import { Knapp } from "nav-frontend-knapper";
 import { GithubLogo } from "../assets/images/svg";
 import Lenke from "nav-frontend-lenker";
 
@@ -29,6 +28,7 @@ const LayoutPicker = (props) => {
     let link = "";
     if (!(componentLink && componentLink.componentPath)) return null;
     const compPath = componentLink.componentPath;
+
     if (compPath.match(/(?<=packages)(.*)$/)) {
       link = "packages" + compPath.match(/(?<=packages)(.*)$/)[1];
     } else if (compPath.match(/(?<=website)(.*)$/)) {
