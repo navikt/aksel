@@ -27,12 +27,11 @@ const LayoutPicker = (props) => {
 
   const linkToEdit = () => {
     let link = "";
-    if (componentLink.componentPath.match(/(?<=packages)(.*)$/)) {
-      link =
-        "packages" + componentLink.componentPath.match(/(?<=packages)(.*)$/)[1];
-    } else if (componentLink.componentPath.match(/(?<=website)(.*)$/)) {
-      link =
-        "website" + componentLink.componentPath.match(/(?<=website)(.*)$/)[1];
+    const compPath = componentLink.componentPath;
+    if (compPath.match(/(?<=packages)(.*)$/)) {
+      link = "packages" + compPath.match(/(?<=packages)(.*)$/)[1];
+    } else if (compPath.match(/(?<=website)(.*)$/)) {
+      link = "website" + compPath.match(/(?<=website)(.*)$/)[1];
     } else {
       return null;
     }
