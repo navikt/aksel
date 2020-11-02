@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst-style",
-  "version": "2.0.31",
+  "version": "2.0.32",
   "main": "src/hjelpetekst-style.less",
   "license": "MIT",
   "files": [
@@ -11,8 +11,8 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.6",
-    "nav-frontend-typografi-style": "^1.0.27"
+    "nav-frontend-core": "^5.0.7",
+    "nav-frontend-typografi-style": "^1.0.28"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.5",
