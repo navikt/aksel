@@ -109,10 +109,10 @@
     "gatsby-transformer-react-docgen-typescript-custom": "0.1.0",
     "lerna-changelog": "^1.0.1",
     "prettier": "2.1.2",
+    "prop-types": "15.7.2",
     "react-is": "^16.13.1",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
-    "typescript": "^3.7.3",
-    "prop-types": "15.7.2"
+    "typescript": "^3.7.3"
   }
 }

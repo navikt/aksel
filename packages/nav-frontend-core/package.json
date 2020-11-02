@@ -7,10 +7,18 @@
   "license": "MIT",
   "types": "less/_variabler.d.ts",
   "files": [
-    "/less"
+    "/less",
+    "/css"
   ],
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "lessc": "^1.0.2"
+  },
   "scripts": {
-    "build": "yarn gulp --gulpfile build/gulpfile.js buildLess --ignoreErrors"
+    "less": "lessc less/core.less css/core.css",
+    "build": "yarn gulp --gulpfile build/gulpfile.js buildLess --ignoreErrors && yarn less"
   },
   "repository": {
     "type": "git",
