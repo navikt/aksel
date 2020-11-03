@@ -13,11 +13,10 @@ const componentTitleCls = (style) =>
     "componentTitle--style": style,
   });
 
-const isStyle = (item) => {
-  const style = item.match(/packages\/nav-frontend-(.*)\/md/);
+const isStyle = (path: string) => {
+  const style = path.match(/packages\/nav-frontend-(.*)\/md/);
   if (!style || style.length < 2) return false;
-  if (style[1].includes("style") === -1) return false;
-  return true;
+  return style[1].includes("style");
 };
 
 const LayoutPicker = (props) => {
