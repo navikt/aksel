@@ -83,7 +83,6 @@ const onCreateNode = (
 
 exports.onCreateNode = onCreateNode;
 
-// Add types fetched in `mdx.js` query in case no files are passed to infer from
 exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type TypeType @noInfer {
