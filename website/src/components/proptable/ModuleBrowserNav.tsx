@@ -2,8 +2,6 @@ import React from "react";
 import classnames from "classnames";
 import { Select } from "nav-frontend-skjema";
 
-import "./styles.less";
-
 export const ModuleBrowserNav = ({
   context,
   modules,
