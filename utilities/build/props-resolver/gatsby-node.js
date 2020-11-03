@@ -2,29 +2,6 @@ const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
   propFilter: { skipPropsWithoutDoc: true },
 });
 
-const annotations = [
-  {
-    regex: /@deprecated/,
-    name: "deprecated",
-    type: "Boolean",
-  },
-  {
-    regex: /@hide/,
-    name: "hide",
-    type: "Boolean",
-  },
-  {
-    regex: /@beta/,
-    name: "beta",
-    type: "Boolean",
-  },
-  {
-    regex: /@propType (\w+|['"](.+)['"])\s*/,
-    name: "annotatedType",
-    type: "String",
-  },
-];
-
 const isSource = (node, options) => {
   if (!node || !(options && options.ignore)) return false;
   for (const str in options.ignore) {
@@ -67,20 +44,6 @@ const flattenProps = (props) => {
   return res;
 };
 
-const addAnnotations = (prop) => {
-  if (prop.description) {
-    annotations.forEach(({ regex, name }) => {
-      const match = prop.description.match(regex);
-      if (match) {
-        prop.description = prop.description.replace(regex, "").trim();
-        prop[name] = match[2] || match[1] || true;
-      }
-    });
-  }
-
-  return prop;
-};
-
 const onCreateNode = (
   { node, actions, createNodeId, createContentDigest },
   options
@@ -99,7 +62,7 @@ const onCreateNode = (
       name: parsed.displayName,
       relativePath: node.relativePath,
       description: parsed.description,
-      props: flattenProps(parsed.props).map(addAnnotations),
+      props: flattenProps(parsed.props),
       path: node.relativePath,
       basePath: node.relativePath.split("/")[0],
       id: createNodeId(`${node.id}react-docgen${node.relativePath}`),
@@ -141,7 +104,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       type: TypeType
       tsType: TsType
       defaultValue: defaultValue
-      ${annotations.map(({ name, type }) => `${name}: ${type}`).join("\n")}
     }
     type ComponentMetadata implements Node @noInfer {
       name: String!
