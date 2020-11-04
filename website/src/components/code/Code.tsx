@@ -103,7 +103,6 @@ const Code = ({ children, className, noCopy, ...props }: CodeProps) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (noCopy) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setAnchor(anchor ? undefined : e.currentTarget);
@@ -111,7 +110,6 @@ const Code = ({ children, className, noCopy, ...props }: CodeProps) => {
     }
   };
   const handleClick = (e: React.MouseEvent) => {
-    if (noCopy) return;
     e.preventDefault();
     setAnchor(anchor ? undefined : e.currentTarget);
     copyCode(children);
