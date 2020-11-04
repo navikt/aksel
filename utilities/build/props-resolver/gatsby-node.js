@@ -2,7 +2,7 @@ const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
   propFilter: { skipPropsWithoutDoc: true },
 });
 
-const isSource = (node, options) => {
+const isIgnored = (node, options) => {
   if (!node || !(options && options.ignore)) return false;
   for (const str in options.ignore) {
     if (node.relativePath.indexOf(str) !== -1) return false;
@@ -10,26 +10,17 @@ const isSource = (node, options) => {
   return true;
 };
 
-const isTSX = (node) => {
-  return (
-    node.internal.mediaType === `application/typescript` ||
-    node.internal.mediaType === `text/tsx` ||
-    node.extension === "tsx"
-  );
-};
+const isTSX = (node) =>
+  node.internal.mediaType === `application/typescript` ||
+  node.internal.mediaType === `text/tsx` ||
+  node.extension === "tsx";
 
-const isJSX = (node) => {
-  return (
-    node.internal.mediaType === `application/javascript` ||
-    node.internal.mediaType === `text/jsx`
-  );
-};
+const isJSX = (node) =>
+  node.internal.mediaType === `application/javascript` ||
+  node.internal.mediaType === `text/jsx`;
 
-const canParse = (node, options) => {
-  return (
-    node && options && isTSX(node) && isSource(node, options) && !isJSX(node)
-  );
-};
+const canParse = (node, options) =>
+  node && options && isTSX(node) && !isJSX(node) && isIgnored(node, options);
 
 const flattenProps = (props) => {
   const res = [];
@@ -40,7 +31,6 @@ const flattenProps = (props) => {
       res.push(value);
     });
   }
-
   return res;
 };
 
