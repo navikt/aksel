@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 
 import Panel from "nav-frontend-paneler";
 import Tabs from "nav-frontend-tabs";
