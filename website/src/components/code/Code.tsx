@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import Prism from "prismjs";
+import copy from "copy-to-clipboard";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Normaltekst } from "nav-frontend-typografi";
 import { CopyIcon } from "../assets/images/svg";
+import "./styles.less";
 
-export const copyString = (e, content) => {
-  e.preventDefault();
-  const currentActive = document.activeElement;
-  const textArea = document.createElement("textarea");
-  textArea.value = content;
-  document.body.appendChild(textArea);
-  textArea.select();
-  document.execCommand("Copy");
-  textArea.remove();
-  if (currentActive instanceof HTMLElement) {
-    currentActive.focus();
+export const copyImport = (e, content: string) => {
+  copy(content, {
+    format: "text/plain",
+  });
+};
+
+export const copyCode = (content) => {
+  if (typeof content === "string") {
+    copy(content, {
+      format: "text/plain",
+    });
   }
 };
 
@@ -23,6 +25,7 @@ export interface CodeProps {
   children: React.ReactNode;
   className?: string;
   onClick?: (event: React.SyntheticEvent) => void;
+  noCopy?: boolean;
 }
 
 export const InlineCode = ({ children, className, ...props }: CodeProps) => (
@@ -33,6 +36,16 @@ export const InlineCode = ({ children, className, ...props }: CodeProps) => (
 
 export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
   const [anchor, setAnchor] = useState(undefined);
+
+  const getNewProps = () => {
+    if (onClick) {
+      return {
+        onClick: (e) => handleClick(e),
+        onKeyDown: (e) => handleKeyPress(e),
+        tabIndex: 0,
+      };
+    }
+  };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (onClick && (e.key === "Enter" || e.key === " ")) {
@@ -51,10 +64,8 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
       <code
         aria-label={onClick ? "Kopier tekst til utklippstavle" : undefined}
         role={onClick && "button"}
-        tabIndex={onClick ? 0 : -1}
-        onClick={(e) => handleClick(e)}
-        onKeyDown={(e) => handleKeyPress(e)}
         className={classnames(className, "bash", { "bash--copy": onClick })}
+        {...getNewProps()}
         {...props}
       >
         {children}
@@ -77,18 +88,61 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
   );
 };
 
-const Code = ({ children, className, ...props }: CodeProps) => {
+const Code = ({ children, className, noCopy, ...props }: CodeProps) => {
+  const [anchor, setAnchor] = useState(undefined);
   const highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
+
+  const getNewProps = () => {
+    if (!noCopy) {
+      return {
+        onClick: (e) => handleClick(e),
+        onKeyDown: (e) => handleKeyPress(e),
+        tabIndex: 0,
+      };
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (noCopy) return;
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setAnchor(anchor ? undefined : e.currentTarget);
+      copyCode(children);
+    }
+  };
+  const handleClick = (e: React.MouseEvent) => {
+    if (noCopy) return;
+    e.preventDefault();
+    setAnchor(anchor ? undefined : e.currentTarget);
+    copyCode(children);
+  };
+
   return (
-    <figure role="figure" aria-label="Kode-eksempel">
-      <pre className="language-">
-        <code
-          className={classnames(className)}
-          {...props}
-          dangerouslySetInnerHTML={{ __html: highlighted }}
-        ></code>
-      </pre>
-    </figure>
+    <>
+      <figure
+        className={classnames({ "code-example": !noCopy })}
+        role={noCopy ? "figure" : "button"}
+        aria-label={noCopy ? "Kode-eksempel" : "Kopier kode-eksempel"}
+        {...getNewProps()}
+      >
+        <pre className="language-">
+          <code
+            className={className}
+            {...props}
+            dangerouslySetInnerHTML={{ __html: highlighted }}
+          ></code>
+        </pre>
+      </figure>
+      <Popover
+        orientering={PopoverOrientering.OverHoyre}
+        ankerEl={anchor}
+        onRequestClose={() => setAnchor(undefined)}
+        autoFokus={false}
+        utenPil
+      >
+        <Normaltekst style={{ padding: "0.5rem" }}> Kopiert! </Normaltekst>
+      </Popover>
+    </>
   );
 };
 

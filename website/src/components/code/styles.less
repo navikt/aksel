@@ -47,7 +47,6 @@ code {
 
 pre {
   margin: 0;
-
   &[class*="language-"]:not([disabled]) {
     margin: 0;
 
@@ -65,5 +64,23 @@ pre {
     &::before {
       display: none;
     }
+  }
+}
+
+.code-example {
+  outline-style: none;
+  border-left: 0.2rem solid #f4f4f4;
+  border-bottom: 0.2rem solid #f4f4f4;
+  &:hover,
+  &:focus {
+    border-left: 0.2rem solid @fokusFarge;
+    border-bottom: 0.2rem solid @fokusFarge;
+  }
+
+  &:active,
+  &:active:hover,
+  &:active:focus {
+    border-left: 0.2rem solid @fokusFarge;
+    border-bottom: 0.2rem solid @fokusFarge;
   }
 }

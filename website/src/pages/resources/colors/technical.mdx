@@ -3,7 +3,7 @@ title: Teknisk
 rank: 2
 ---
 
-import { Bash, copyString } from "../../../components/code/Code";
+import { Bash, copyImport } from "../../../components/code/Code";
 import "../../../components/code/styles.less";
 
 ## Installering
@@ -11,11 +11,11 @@ import "../../../components/code/styles.less";
 Alle fargene våre er [definert](https://github.com/navikt/nav-frontend-core/blob/master/less/_variabler.less) i
 pakken `nav-frontend-core`, og kan installeres slik:
 
-<Bash onClick={(e) => copyString(e, "npm install nav-frontend-core --save")}>
+<Bash onClick={(e) => copyImport(e, "npm install nav-frontend-core --save")}>
   npm install nav-frontend-core --save
 </Bash>
 <br />
-<Bash onClick={(e) => copyString(e, "yarn add nav-frontend-core")}>
+<Bash onClick={(e) => copyImport(e, "yarn add nav-frontend-core")}>
   yarn add nav-frontend-core
 </Bash>
 

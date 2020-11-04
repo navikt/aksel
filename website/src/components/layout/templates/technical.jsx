@@ -6,7 +6,7 @@ import Lenke from "nav-frontend-lenker";
 import { Systemtittel } from "nav-frontend-typografi";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 
-import { Bash, copyString } from "../../code/Code";
+import { Bash, copyImport } from "../../code/Code";
 
 import ModuleBrowser from "../../proptable/ModuleBrowser";
 
@@ -56,12 +56,12 @@ const Technical = ({ pageContext, ...props }) => {
       </Systemtittel>
       <Tabs tabs={tabs} onChange={(i, x) => setActiveToggle(x)} />
       <Panel border>
-        <Bash onClick={(e) => copyString(e, installInstructions[activeToggle])}>
+        <Bash onClick={(e) => copyImport(e, installInstructions[activeToggle])}>
           {installInstructions[activeToggle]}
         </Bash>
         <br />
         <Bash
-          onClick={(e) => copyString(e, installInstructions[activeToggle + 2])}
+          onClick={(e) => copyImport(e, installInstructions[activeToggle + 2])}
         >
           {installInstructions[activeToggle + 2]}
         </Bash>
