@@ -1,5 +1,5 @@
 @import (reference) "nav-frontend-core/less/_variabler";
-
+@import (reference) "nav-frontend-knapper-style";
 code {
   &.inline {
     display: inline-block;
@@ -13,6 +13,26 @@ code {
     color: white;
     background: @navMorkGra;
     white-space: pre-wrap;
+    outline-style: none;
+
+    &--copy {
+      .knapptaktil-mixin();
+      border: 2px solid @navMorkGra;
+
+      &:hover,
+      &:focus {
+        background-color: lighten(@navMorkGra, 10%);
+        border: 2px solid @navMorkGra;
+      }
+
+      &:active,
+      &:active:hover,
+      &:active:focus {
+        background-color: darken(@navMorkGra, 10%);
+        border: 2px solid transparent;
+        color: @white;
+      }
+    }
   }
 }
 

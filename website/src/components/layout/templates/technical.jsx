@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 
 import Panel from "nav-frontend-paneler";
 import Tabs from "nav-frontend-tabs";
@@ -6,9 +6,8 @@ import Lenke from "nav-frontend-lenker";
 import { Systemtittel } from "nav-frontend-typografi";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
 
-import { Bash } from "../../code/Code";
+import { Bash, copyString } from "../../code/Code";
 
-import Copy from "../../copy/Copy";
 import ModuleBrowser from "../../proptable/ModuleBrowser";
 
 import "./styles.less";
@@ -27,6 +26,12 @@ const Technical = ({ pageContext, ...props }) => {
         (dep) => dep.indexOf("-style") !== -1 || dep.indexOf("-core") !== -1
       )
       .join(" ")} --save`,
+    `yarn add ${deps.join(" ")}`,
+    `yarn add ${deps
+      .filter(
+        (dep) => dep.indexOf("-style") !== -1 || dep.indexOf("-core") !== -1
+      )
+      .join(" ")}`,
   ];
 
   const getTabs = () => {
@@ -48,11 +53,18 @@ const Technical = ({ pageContext, ...props }) => {
           React - eller hvis du av andre grunner ønsker å håndtere HTML og
           Javascript selv.
         </Hjelpetekst>
-        <Copy copyText={installInstructions[activeToggle]} />
       </Systemtittel>
       <Tabs tabs={tabs} onChange={(i, x) => setActiveToggle(x)} />
       <Panel border>
-        <Bash>{installInstructions[activeToggle]}</Bash>
+        <Bash onClick={(e) => copyString(e, installInstructions[activeToggle])}>
+          {installInstructions[activeToggle]}
+        </Bash>
+        <br />
+        <Bash
+          onClick={(e) => copyString(e, installInstructions[activeToggle + 2])}
+        >
+          {installInstructions[activeToggle + 2]}
+        </Bash>
       </Panel>
     </div>
   );
