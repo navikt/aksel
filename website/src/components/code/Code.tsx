@@ -3,6 +3,7 @@ import classnames from "classnames";
 import Prism from "prismjs";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Normaltekst } from "nav-frontend-typografi";
+import { CopyIcon } from "../assets/images/svg";
 
 export const copyString = (e, content) => {
   e.preventDefault();
@@ -57,6 +58,11 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
         {...props}
       >
         {children}
+        {onClick && (
+          <span className="copyIcon">
+            <CopyIcon color="#fff" />
+          </span>
+        )}
       </code>
       <Popover
         orientering={PopoverOrientering.OverHoyre}
