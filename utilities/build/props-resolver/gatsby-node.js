@@ -1,5 +1,10 @@
 const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
-  propFilter: { skipPropsWithoutDoc: true },
+  propFilter(prop) {
+    if (prop.parent) {
+      return !prop.parent.fileName.includes("node_modules");
+    }
+    return true;
+  },
 });
 
 const isIgnored = (node, options) => {
