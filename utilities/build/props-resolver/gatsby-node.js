@@ -7,37 +7,31 @@ const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
   },
 });
 
-const isIgnored = (node, options) => {
+const notIgnored = (node, options) => {
   if (!node || !(options && options.ignore)) return false;
-  for (const str in options.ignore) {
-    if (node.relativePath.indexOf(str) !== -1) return false;
-  }
-  return true;
+  return Object.keys(options.ignore).every(
+    (key) => !node.relativePath.includes(key)
+  );
 };
 
 const isTSX = (node) =>
-  node.internal.mediaType === `application/typescript` ||
-  node.internal.mediaType === `text/tsx` ||
+  ["application/typescript", "text/tsx"].includes(node.internal.mediaType) ||
   node.extension === "tsx";
 
 const isJSX = (node) =>
-  node.internal.mediaType === `application/javascript` ||
-  node.internal.mediaType === `text/jsx`;
+  ["application/javascript", "text/jsx"].includes(node.internal.mediaType);
 
 const canParse = (node, options) =>
-  node && options && isTSX(node) && !isJSX(node) && isIgnored(node, options);
+  node && options && isTSX(node) && !isJSX(node) && notIgnored(node, options);
 
-const flattenProps = (props) => {
-  const res = [];
-  if (props) {
-    Object.entries(props).forEach(([key, value]) => {
-      value.name = key;
-      value.defaultValue = JSON.stringify(value.defaultValue);
-      res.push(value);
-    });
-  }
-  return res;
-};
+const flattenProps = (props) =>
+  props
+    ? Object.entries(props).map(([key, value]) => ({
+        ...value,
+        name: key,
+        defaultValue: JSON.stringify(value.defaultValue),
+      }))
+    : [];
 
 const onCreateNode = (
   { node, actions, createNodeId, createContentDigest },
@@ -45,34 +39,34 @@ const onCreateNode = (
 ) => {
   if (!canParse(node, options)) return;
 
-  let parsed = null;
   try {
+    let parsed = null;
     parsed = reactDocgen.parse(node.absolutePath)[0];
+
+    if (parsed && parsed.displayName) {
+      const metadataNode = {
+        name: parsed.displayName,
+        relativePath: node.relativePath,
+        description: parsed.description,
+        props: flattenProps(parsed.props),
+        path: node.relativePath,
+        basePath: node.relativePath.split("/")[0],
+        id: createNodeId(`${node.id}react-docgen${node.relativePath}`),
+        children: [],
+        parent: node.id,
+        internal: {
+          contentDigest: createContentDigest(node),
+          type: `ComponentMetadata`,
+        },
+      };
+
+      actions.createNode(metadataNode);
+      actions.createParentChildLink({ parent: node, child: metadataNode });
+    } else {
+      console.warn("No displayname " + node.absolutePath);
+    }
   } catch (err) {
-    console.warn("No component found in", node.absolutePath);
-  }
-
-  if (parsed && parsed.displayName) {
-    const metadataNode = {
-      name: parsed.displayName,
-      relativePath: node.relativePath,
-      description: parsed.description,
-      props: flattenProps(parsed.props),
-      path: node.relativePath,
-      basePath: node.relativePath.split("/")[0],
-      id: createNodeId(`${node.id}react-docgen${node.relativePath}`),
-      children: [],
-      parent: node.id,
-      internal: {
-        contentDigest: createContentDigest(node),
-        type: `ComponentMetadata`,
-      },
-    };
-
-    actions.createNode(metadataNode);
-    actions.createParentChildLink({ parent: node, child: metadataNode });
-  } else {
-    console.warn("No displayname " + node.absolutePath);
+    console.warn("Could not generate props for: ", node.absolutePath);
   }
 };
 
