@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { useMediaQuery } from "react-responsive";
 
 import { NAVLogo } from "../../assets/images/svg";
-
+import { Systemtittel } from "nav-frontend-typografi";
 import MainNav from "./main-nav/MainNav";
 import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
@@ -46,7 +46,9 @@ const Header = ({ ...props }) => {
         <div className="header__content">
           <Link to="/" className="header__logo">
             <NAVLogo />
-            <div className="header__title">Designsystemet</div>
+            <Systemtittel className="header__title" tag="h1">
+              Designsystemet
+            </Systemtittel>
           </Link>
           <MobileNavToggle
             innerRef={(node) => {
