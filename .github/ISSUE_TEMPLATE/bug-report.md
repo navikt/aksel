@@ -7,18 +7,6 @@ assignees: ''
 
 ---
 
-<!-- Fjern gjerne seksjoner som ikke er relevante
-
-## Tittel template: [BUG]: Kort forklaring
-
--->
-
-<!-- Fjern gjerne seksjoner som ikke er relevante
-
-## Tittel template: [BUG]: Kort forklaring
-
--->
-
 ## Hvilken av tjenestene våre gjelder det?
 
 <!--
