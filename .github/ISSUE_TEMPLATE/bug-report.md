@@ -32,14 +32,17 @@ assignees: ''
 (skriv her.)
 
 ## Steg for å reprodusere problemet
+
 <!--
 1. Steg en
 2. Steg to
 3. ....
 -->
+
 (skriv her.)
 
 ## Eksempel/Tilleggsinformasjon
+
 <!--
 Screenshots eller kodesnippets
 Legg gjerne ved ekstrainfo som nettleser, desktop/mobil etc
