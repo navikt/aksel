@@ -1,152 +1,77 @@
 const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
-  propFilter: { skipPropsWithoutDoc: true },
+  propFilter(prop) {
+    if (prop.parent) {
+      return !prop.parent.fileName.includes("node_modules");
+    }
+    return true;
+  },
 });
 
-function isSource(node) {
-  if (
-    !node ||
-    node.relativePath.indexOf("/example") !== -1 ||
-    node.relativePath.indexOf(".docs") !== -1 ||
-    node.relativePath.indexOf("/stories") !== -1 ||
-    node.relativePath.indexOf(".md") !== -1
-  )
-    return false;
-
-  return true;
-}
-
-function canParse(node) {
-  return node && isTSX(node) && isSource(node) && !isJSX(node);
-}
-
-function isTSX(node) {
-  return (
-    node.internal.mediaType === `application/typescript` ||
-    node.internal.mediaType === `text/tsx` ||
-    node.extension === "tsx"
+const notIgnored = (node, options) => {
+  if (!node || !(options && options.ignore)) return false;
+  return Object.keys(options.ignore).every(
+    (key) => !node.relativePath.includes(key)
   );
-}
+};
 
-function isJSX(node) {
-  return (
-    node.internal.mediaType === `application/javascript` ||
-    node.internal.mediaType === `text/jsx`
-  );
-}
+const isTSX = (node) =>
+  ["application/typescript", "text/tsx"].includes(node.internal.mediaType) ||
+  node.extension === "tsx";
 
-function flattenProps(props) {
-  const res = [];
-  if (props) {
-    Object.entries(props).forEach(([key, value]) => {
-      value.name = key;
-      res.push(value);
-    });
-  }
+const isJSX = (node) =>
+  ["application/javascript", "text/jsx"].includes(node.internal.mediaType);
 
-  return res;
-}
+const canParse = (node, options) =>
+  node && options && isTSX(node) && !isJSX(node) && notIgnored(node, options);
 
-const annotations = [
-  {
-    regex: /@deprecated/,
-    name: "deprecated",
-    type: "Boolean",
-  },
-  {
-    regex: /@hide/,
-    name: "hide",
-    type: "Boolean",
-  },
-  {
-    regex: /@beta/,
-    name: "beta",
-    type: "Boolean",
-  },
-  {
-    regex: /@propType (\w+|['"](.+)['"])\s*/,
-    name: "annotatedType",
-    type: "String",
-  },
-];
+const flattenProps = (props) =>
+  props
+    ? Object.entries(props).map(([key, value]) => ({
+        ...value,
+        name: key,
+        defaultValue: JSON.stringify(value.defaultValue),
+      }))
+    : [];
 
-function addAnnotations(prop) {
-  // Prop looks like this: {
-  //   "beta": null,
-  //   "required": false,
-  //   "name": "className",
-  //   "description": "Additional css classes",
-  //   "defaultValue": {
-  //     "value": "''"
-  //   },
-  //   "tsType": {
-  //     "name": "string",
-  //     "raw": null
-  //   },
-  //   "type": null
-  // },
-  if (prop.description) {
-    annotations.forEach(({ regex, name }) => {
-      const match = prop.description.match(regex);
-      if (match) {
-        //console.log(prop.description.replace(regex, ""));
-        prop.description = prop.description.replace(regex, "").trim();
-        prop[name] = match[2] || match[1] || true;
-      }
-    });
-  }
+const onCreateNode = (
+  { node, actions, createNodeId, createContentDigest },
+  options
+) => {
+  if (!canParse(node, options)) return;
 
-  return prop;
-}
-
-// Docs https://www.gatsbyjs.org/docs/actions/#createNode
-function onCreateNode({
-  node,
-  actions,
-  loadNodeContent,
-  createNodeId,
-  createContentDigest,
-}) {
-  if (!canParse(node)) return;
-
-  // const sourceText = await loadNodeContent(node);
-  let parsed = null;
   try {
+    let parsed = null;
     parsed = reactDocgen.parse(node.absolutePath)[0];
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    // console.warn('No component found in', node.absolutePath);
-  }
 
-  //console.log(node.absolutePath);
-  // TabContent.tsx is being a pain so check for parsed.displayName
-  if (parsed && parsed.displayName) {
-    const metadataNode = {
-      name: parsed.displayName,
-      relativePath: node.relativePath,
-      description: parsed.description,
-      props: flattenProps(parsed.props).map(addAnnotations),
-      path: node.relativePath,
-      basePath: node.relativePath.split("/")[0],
-      id: createNodeId(`${node.id}react-docgen${node.relativePath}`),
-      children: [],
-      parent: node.id,
-      internal: {
-        contentDigest: createContentDigest(node),
-        type: `ComponentMetadata`,
-      },
-    };
-    actions.createNode(metadataNode);
-    actions.createParentChildLink({ parent: node, child: metadataNode });
-  } else {
-    console.log("NOT OK: " + node.absolutePath);
-    console.log("- " + parsed.displayName);
-    // console.log(parsed);
+    if (parsed && parsed.displayName) {
+      const metadataNode = {
+        name: parsed.displayName,
+        relativePath: node.relativePath,
+        description: parsed.description,
+        props: flattenProps(parsed.props),
+        path: node.relativePath,
+        basePath: node.relativePath.split("/")[0],
+        id: createNodeId(`${node.id}react-docgen${node.relativePath}`),
+        children: [],
+        parent: node.id,
+        internal: {
+          contentDigest: createContentDigest(node),
+          type: `ComponentMetadata`,
+        },
+      };
+
+      actions.createNode(metadataNode);
+      actions.createParentChildLink({ parent: node, child: metadataNode });
+    } else {
+      console.warn("No displayname " + node.absolutePath);
+    }
+  } catch (err) {
+    console.warn("Could not generate props for: ", node.absolutePath);
   }
-}
+};
 
 exports.onCreateNode = onCreateNode;
 
-// Add types fetched in `mdx.js` query in case no files are passed to infer from
 exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
     type TypeType @noInfer {
@@ -167,7 +92,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       type: TypeType
       tsType: TsType
       defaultValue: defaultValue
-      ${annotations.map(({ name, type }) => `${name}: ${type}`).join("\n")}
     }
     type ComponentMetadata implements Node @noInfer {
       name: String!
