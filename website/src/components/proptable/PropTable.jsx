@@ -1,4 +1,4 @@
-import React, {useRef} from "react";
+import React, { useRef } from "react";
 import PT from "prop-types";
 import cn from "classnames";
 
@@ -16,8 +16,8 @@ const PropTable = ({ moduleProps, ...props }) => {
     ...propTypes[key],
   }));
 
-  const table = useRef()
-  const headers = ["Property", "Type", "Required", "Description", "Default"];
+  const table = useRef();
+  const headers = ["Property", "Type", "Default", "Required", "Description"];
 
   return (
     <OverflowDetector>
@@ -97,16 +97,28 @@ const parseDescription = (desc) => {
 const PropTypeTableRow = (props) => {
   const desc = parseDescription(parsePropValue(props.val.description));
   return (
-    <tr className={cn({ deprecated: typeof desc === "object" })}>
+    <tr
+      className={cn("proptable__tr", { deprecated: typeof desc === "object" })}
+    >
       <td>
-        <strong>{parsePropValue(props.val.name)}</strong>
+        <div>
+          <strong>{parsePropValue(props.val.name)}</strong>
+        </div>
       </td>
       <td>
-        <code className="inline">{parsePropValue(props.val.type)}</code>
+        <div>
+          <code className="inline">{parsePropValue(props.val.type)}</code>
+        </div>
       </td>
-      <td>{parsePropValue(props.val.required)}</td>
-      <td>{desc}</td>
-      <td>{parsePropValue(props.val.defaultValue)}</td>
+      <td>
+        <div>{parsePropValue(props.val.defaultValue)}</div>
+      </td>
+      <td>
+        <div>{props.val.required ? "✅" : "❌"}</div>
+      </td>
+      <td>
+        <div>{desc}</div>
+      </td>
     </tr>
   );
 };
