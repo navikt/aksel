@@ -23,7 +23,6 @@ const MainNav = () => {
               </Link>
             </li>
           ))}
-          <div />
           <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"
