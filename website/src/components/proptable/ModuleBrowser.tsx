@@ -4,7 +4,6 @@ import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import { useProps } from "../../useProps";
 import Code from "../code/Code";
 import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
-import Copy from "../copy/Copy";
 import PropTable from "./PropTable";
 
 const ModuleBrowser = ({ context }) => {
@@ -77,7 +76,6 @@ const ModuleBrowser = ({ context }) => {
             />
             <div className="module-browser--innline">
               <Undertittel className="first">Import</Undertittel>
-              <Copy copyText={generateImportStatement()} />
             </div>
             <Code className="language-jsx">{generateImportStatement()}</Code>
             <Undertittel>React props</Undertittel>

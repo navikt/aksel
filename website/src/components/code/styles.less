@@ -1,4 +1,5 @@
 @import (reference) "nav-frontend-core/less/_variabler";
+@import (reference) "nav-frontend-knapper-style";
 
 code {
   &.inline {
@@ -13,7 +14,35 @@ code {
     color: white;
     background: @navMorkGra;
     white-space: pre-wrap;
+    outline-style: none;
+    min-width: 200px;
+
+    &--copy {
+      .knapptaktil-mixin();
+
+      border: 2px solid @navMorkGra;
+
+      &:hover,
+      &:focus {
+        background-color: lighten(@navMorkGra, 10%);
+        border: 2px solid @navMorkGra;
+      }
+
+      &:active,
+      &:active:hover,
+      &:active:focus {
+        background-color: darken(@navMorkGra, 10%);
+        border: 2px solid transparent;
+        color: @white;
+      }
+    }
   }
+}
+
+.copyIcon {
+  position: fixed;
+  bottom: 0;
+  right: 0;
 }
 
 pre {
@@ -36,5 +65,24 @@ pre {
     &::before {
       display: none;
     }
+  }
+}
+
+.code-example {
+  outline-style: none;
+  border-left: 0.2rem solid #f4f4f4;
+  border-bottom: 0.2rem solid #f4f4f4;
+
+  &:hover,
+  &:focus {
+    border-left: 0.2rem solid @fokusFarge;
+    border-bottom: 0.2rem solid @fokusFarge;
+  }
+
+  &:active,
+  &:active:hover,
+  &:active:focus {
+    border-left: 0.2rem solid @fokusFarge;
+    border-bottom: 0.2rem solid @fokusFarge;
   }
 }

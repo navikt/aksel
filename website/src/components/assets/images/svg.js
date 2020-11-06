@@ -463,14 +463,14 @@ export const FileIcon = () => (
   </svg>
 );
 
-export const CopyIcon = () => (
+export const CopyIcon = ({ color }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
     viewBox="0 0 24 24"
   >
-    <g stroke="#000" fill="none">
+    <g stroke={color ? color : "#000"} fill="none">
       <path d="M20.5 20.5h-14v-20h8l6 6zM14.5.5v6h6M17.5 20.5v3h-14v-20h3" />
     </g>
   </svg>
