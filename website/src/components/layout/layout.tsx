@@ -20,7 +20,7 @@ const Layout = (props) => {
   }, []);
 
   return (
-    <div id="app">
+    <>
       <Helmet
         title={props.pageContext?.frontmatter?.title}
         titleTemplate="%s - NAV Designsystem"
@@ -53,7 +53,7 @@ const Layout = (props) => {
           </main>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Layout;
