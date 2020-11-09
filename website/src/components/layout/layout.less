@@ -2,84 +2,86 @@
 @import (reference) "nav-frontend-typografi-style/src/index";
 @import (reference) "nav-frontend-paneler-style/src/mixins";
 
-#app {
-  height: 100%;
+body {
+  color: @navMorkGra;
+  font-family: @font-family;
+  min-width: 320px;
+}
 
-  .mainWrapper {
-    height: 100%;
-    flex-direction: column;
+.mainWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
-    .contentWrapper {
-      display: flex;
-      flex: 1;
-      background: white;
-      height: calc(100vh - 6.875rem);
-      min-height: 0;
+.contentWrapper {
+  display: flex;
+  flex: 1;
+  background: white;
+  min-height: 0;
+  position: relative;
+
+  .mainContent {
+    flex: 1;
+    padding: 3rem;
+    overflow-y: auto;
+    background: white;
+
+    .section {
+      margin-top: 3rem;
+      max-width: 700px;
       position: relative;
 
-      .mainContent {
-        flex: 1;
-        padding: 3rem;
-        overflow-y: auto;
-        background: white;
+      &:first-child {
+        margin-top: 0;
+      }
 
-        .section {
-          margin-top: 3rem;
-          max-width: 700px;
-          position: relative;
+      ul,
+      ol {
+        &:not([class]) {
+          li {
+            margin-bottom: 0.75rem;
+            line-height: 1.375rem;
 
-          &:first-child {
-            margin-top: 0;
-          }
-
-          ul,
-          ol {
-            &:not([class]) {
-              li {
-                margin-bottom: 0.75rem;
-                line-height: 1.375rem;
-
-                p {
-                  margin-bottom: 0.75rem;
-                }
-              }
+            p {
+              margin-bottom: 0.75rem;
             }
           }
-
-          img {
-            max-width: 100%;
-          }
-
-          .panel {
-            margin: 2rem 0;
-
-            &--grey {
-              background: #f4f4f4;
-              padding: 1.5rem 2rem;
-
-              @media (max-width: 550px) {
-                padding: 1.5rem;
-              }
-            }
-          }
-
-          &.full {
-            max-width: none;
-          }
-        }
-
-        @media (max-width: 550px) {
-          padding: 1.5rem;
         }
       }
 
-      @media (max-width: 1094px) {
-        display: block;
+      img {
+        max-width: 100%;
+      }
 
-        .leftNavigation {
-          display: none;
+      .panel {
+        margin: 2rem 0;
+
+        &--grey {
+          background: #f4f4f4;
+          padding: 1.5rem 2rem;
+
+          @media (max-width: 550px) {
+            padding: 1.5rem;
+          }
         }
       }
+
+      &.full {
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 550px) {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (max-width: 1094px) {
+    display: block;
+
+    .leftNavigation {
+      display: none;
     }
   }
 }
@@ -410,15 +412,6 @@
     padding-bottom: 30px;
   }
 }
-
-body {
-  margin: 0;
-  color: @navMorkGra;
-  font-family: @font-family;
-  height: 100%;
-  min-width: 320px;
-}
-
 a {
   color: @navBla;
   text-decoration: underline;
