@@ -57,6 +57,7 @@ const Header = ({ ...props }) => {
             onClick={() => toggleMobileNav()}
             {...ariaHidden}
           />
+          <div style={{ flexGrow: 1 }} />
           <MainNav />
         </div>
       </header>

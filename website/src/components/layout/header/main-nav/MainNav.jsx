@@ -23,14 +23,12 @@ const MainNav = () => {
               </Link>
             </li>
           ))}
-          <div style={{ flexGrow: 1 }} />
           <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"
               className="github"
             >
               <GithubLogo />
-              Github
             </a>
           </li>
         </ul>

@@ -1,48 +1,69 @@
 @import (reference) "nav-frontend-core/less/_variabler";
 
 .mainNav {
-  margin-top: 1rem;
   background: white;
+  margin-bottom: -1.3rem;
 
   &__wrapper {
     display: flex;
     justify-content: space-between;
+    height: 100%;
 
     ul {
       list-style: none;
       display: flex;
       margin: 0;
-      padding: 0;
       width: 100%;
+      flex-wrap: wrap;
 
       li {
         a {
+          height: 100%;
           white-space: nowrap;
           display: block;
-          font-size: 1.1rem;
-          color: @navBla;
+          font-size: 1.2rem;
+          color: @navMorkGra;
           padding: 0.75rem 1.25rem;
+          padding-bottom: 1.3rem;
           text-decoration: none;
           border-bottom: 4px solid transparent;
           position: relative;
           top: 4px;
+          padding-top: 1.4rem;
 
           &:hover {
-            background: #f8f8f8;
+            color: @navBla;
             border-bottom: 4px solid @navBla;
+            z-index: 1;
           }
 
           &:focus {
             outline: none;
-            box-shadow: 0 0 0 3px @fokusFarge;
+            color: @navBla;
+            border-bottom: 4px solid @navBla;
+            z-index: 1;
+          }
+
+          &:active {
+            outline: none;
+            color: @fokusFarge;
+            border-bottom: 4px solid @fokusFarge;
+            z-index: 1;
+          }
+
+          &.active:focus {
+            outline: none;
+            border-bottom: 4px solid @navBla;
+            color: @navBla;
             z-index: 1;
           }
 
           &.active {
             background: white;
             font-weight: bold;
-            border-bottom: 4px solid @navBla;
+            border-bottom: 4px solid @fokusFarge;
             color: @navMorkGra;
+            z-index: 1;
           }
 
           &.github {
