@@ -28,6 +28,7 @@ const MainNav = () => {
               href="https://github.com/navikt/nav-frontend-moduler"
               className="github"
             >
+              Github
               <GithubLogo />
             </a>
           </li>
