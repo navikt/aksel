@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-grid",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "main": "lib/grid.js",
   "types": "lib/grid.d.ts",
   "license": "MIT",
@@ -25,8 +25,8 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-core": "^5.0.8",
-    "nav-frontend-grid-style": "^0.2.24",
+    "nav-frontend-core": "^5.0.9",
+    "nav-frontend-grid-style": "^0.2.25",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   }

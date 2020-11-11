@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel-style",
-  "version": "0.0.38",
+  "version": "0.0.39",
   "main": "src/lesmerpanel-style.less",
   "license": "MIT",
   "files": [
@@ -15,8 +15,8 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.8",
-    "nav-frontend-paneler-style": "^0.3.28",
+    "nav-frontend-core": "^5.0.9",
+    "nav-frontend-paneler-style": "^0.3.29",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {

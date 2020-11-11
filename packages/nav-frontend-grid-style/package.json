@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-grid-style",
-  "version": "0.2.24",
+  "version": "0.2.25",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
