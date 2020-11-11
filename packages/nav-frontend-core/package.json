@@ -14,7 +14,7 @@
     "lessc": "^1.0.2"
   },
   "scripts": {
-    "less": "lessc less/core.less css/core.css",
+    "less": "lessc less/core.less dist/main.css",
     "build": "yarn gulp --gulpfile build/gulpfile.js buildLess --ignoreErrors && yarn less"
   },
   "repository": {

@@ -4,8 +4,12 @@
   "main": "src/index.less",
   "license": "MIT",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.5",
     "nav-frontend-typografi-style": "^1.0.25"
