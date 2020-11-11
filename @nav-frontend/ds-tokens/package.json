@@ -1,7 +1,7 @@
 {
-  "name": "@nav-frontend/popover-style",
+  "name": "@nav-frontend/ds-tokens",
   "version": "0.1.0",
-  "main": "src/popover-style.css",
+  "main": "src/index.css",
   "license": "MIT",
   "files": [
     "/src"
@@ -9,8 +9,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
-  },
-  "devDependencies": {
-    "nav-frontend-core": "^5.0.8"
   }
 }

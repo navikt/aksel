@@ -1,0 +1,30 @@
+:root {
+  --shadow-1: 0 2px 0 rgba(0, 0, 0, 0.23);
+
+  /* Taktil :hover */
+  --shadow-2: 0 3px 0 rgba(0, 0, 0, 0.125);
+
+  /* Opphevet */
+  --shadow-10: 0 2px 1px 0 rgba(0, 0, 0, 0.32);
+
+  /* Popover */
+  --shadow-100: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
+
+  /* Popover pil */
+  --shadow-101: 0 0 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
+
+  /* Skuff */
+  --shadow-300: 0 -0px 8px 4px rgba(0, 0, 0, 0.08);
+
+  /* Sticky */
+  --shadow-500: 0 0.125rem 0.5rem 0.125rem rgba(0, 0, 0, 0.15);
+
+  /* Popover i Sticky */
+  --shadow-510: 0 0.125rem 0.75rem 0.125rem rgba(0, 0, 0, 0.15);
+
+  /* Skuff m/ backdrop */
+  --shadow-900: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.15);
+
+  /* Modal */
+  --shadow-1000: 0 0 1rem 0.25rem rgba(0, 0, 0, 0.15);
+}

@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import * as ReactDOM from "react-dom";
-import Popover from "../src/popover";
+import React, { useRef, useState } from "react";
+import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
@@ -9,11 +8,9 @@ export default {
 } as Meta;
 
 const Template = ({ ...props }) => {
-  const [anchor, setAnchor] = useState(undefined);
+  const [anchor, setAnchor] = useState(null);
   const popoverRef = useRef<any>();
-  useEffect(() => {
-    ReactDOM.findDOMNode(popoverRef.current).click();
-  });
+
   return (
     <>
       <button
@@ -23,7 +20,7 @@ const Template = ({ ...props }) => {
       >
         open
       </button>
-      <Popover ankerEl={anchor} {...props}>
+      <Popover anchor={anchor}>
         <p>Dette er en popover.</p>
       </Popover>
     </>

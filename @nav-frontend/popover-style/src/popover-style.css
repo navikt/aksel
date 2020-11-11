@@ -1,0 +1,12 @@
+.popover {
+  position: relative;
+  z-index: 100;
+  min-width: 1rem;
+  min-height: 1rem;
+  background: white;
+  box-shadow: var(--shadow-100);
+  border: 1px solid var(--navGra20);
+  border-radius: 2px;
+  display: block;
+  will-change: transform;
+}

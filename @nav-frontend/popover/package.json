@@ -16,6 +16,10 @@
     "build": "tsc -p tsconfig.json",
     "watch": "tsc --watch -p tsconfig.json"
   },
+  "dependencies": {
+    "@popperjs/core": "^2.5.4",
+    "react-popper": "^2.2.4"
+  },
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.13",

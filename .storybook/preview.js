@@ -1,5 +1,5 @@
 import "nav-frontend-core";
-
+import "@nav-frontend/ds-tokens";
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
