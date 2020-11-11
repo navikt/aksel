@@ -23,6 +23,7 @@
   "workspaces": [
     "website",
     "packages/*",
+    "@nav-frontend/*",
     "./utilities/build/props-resolver"
   ],
   "husky": {
