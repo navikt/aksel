@@ -4,8 +4,12 @@
   "main": "src/toggle-style.less",
   "license": "MIT",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.5",
     "nav-frontend-knapper-style": "^1.0.4",

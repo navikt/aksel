@@ -33,15 +33,18 @@ function getGlobFiles(globPattern, options) {
 
 Promise.all([
   getGlobFiles("./packages/**/lib", { dot: true }),
+  getGlobFiles("./packages/**/dist", { dot: true }),
   getGlobFiles("./packages/**/src/*.d.ts", { dit: true }),
-]).then(([folders, files]) => {
+]).then(([lib, dist, files]) => {
   files.forEach((file) => {
-    console.log(`Deleting ${file}`);
+    console.log(`Deleting file ${file}`);
     fs.unlinkSync(file);
   });
 
+  const folders = [...lib, ...dist];
+
   folders.forEach((folder) => {
-    console.log(`Deleting ${folder}`);
+    console.log(`Deleting folder ${folder}`);
     deleteFolder(folder);
   });
 
