@@ -1,9 +1,13 @@
 .popover {
-  z-index: 100;
+  --popover-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
+  --popover-border-radius: 2px;
+  --popover-z-index: 100;
+
+  z-index: var(--popover-z-index);
   background: white;
-  box-shadow: var(--shadow-100);
-  border: 1px solid var(--navGra20);
-  border-radius: 2px;
+  box-shadow: var(--popover-shadow);
+  border: var(--border-default);
+  border-radius: var(--popover-border-radius);
   padding: 1rem;
 }
 
@@ -12,21 +16,21 @@
 }
 
 .popover__arrow {
-  --size: 1rem;
+  --popover__arrow-size: 1rem;
 }
 
 .popover__arrow:before {
   content: "";
   display: block;
-  width: var(--size);
-  height: var(--size);
+  width: var(--popover__arrow-size);
+  height: var(--popover__arrow-size);
   transform: rotate(45deg);
   background: white;
-  border: 1px solid var(--navGra20);
+  border: var(--border-default);
 }
 
 .popover[data-popper-placement^="top"] > .popover__arrow {
-  bottom: calc(var(--size) / -2);
+  bottom: calc(var(--popover__arrow-size) / -2);
 }
 
 .popover[data-popper-placement^="top"] > .popover__arrow:before {
@@ -35,7 +39,7 @@
 }
 
 .popover[data-popper-placement^="bottom"] > .popover__arrow {
-  top: calc(var(--size) / -2);
+  top: calc(var(--popover__arrow-size) / -2);
 }
 
 .popover[data-popper-placement^="bottom"] > .popover__arrow:before {
@@ -44,7 +48,7 @@
 }
 
 .popover[data-popper-placement^="left"] > .popover__arrow {
-  right: calc(var(--size) / -2);
+  right: calc(var(--popover__arrow-size) / -2);
 }
 
 .popover[data-popper-placement^="left"] > .popover__arrow:before {
@@ -53,7 +57,7 @@
 }
 
 .popover[data-popper-placement^="right"] > .popover__arrow {
-  left: calc(var(--size) / -2);
+  left: calc(var(--popover__arrow-size) / -2);
 }
 
 .popover[data-popper-placement^="right"] > .popover__arrow:before {
