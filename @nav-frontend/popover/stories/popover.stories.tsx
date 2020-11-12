@@ -13,15 +13,11 @@ const Template = ({ ...props }) => {
 
   return (
     <>
-      <button
-        ref={popoverRef}
-        onClick={(e) => setAnchor(e.currentTarget)}
-        style={{ width: "50px" }}
-      >
-        open
+      <button ref={popoverRef} onClick={(e) => setAnchor(e.currentTarget)}>
+        Dette er en stor knapp
       </button>
       <Popover anchor={anchor} onRequestClose={() => setAnchor(null)}>
-        <p>Dette er en popover.</p>
+        Dette er en popover
       </Popover>
     </>
   );

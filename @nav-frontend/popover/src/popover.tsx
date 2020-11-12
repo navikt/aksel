@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import cl from "classnames";
 import "@nav-frontend/popover-style";
-import { keyCodes } from "nav-frontend-js-utils";
 
 export type PopoverOrientation =
   | "auto"
@@ -36,11 +35,6 @@ interface PopoverProps {
    * children
    */
   children: React.ReactNode;
-  /**
-   * Popover arrow toggle
-   * @default true
-   */
-  arrow?: boolean;
   /**
    * Orientation for popover
    * @default 'auto'
@@ -89,14 +83,12 @@ interface PopoverProps {
 const Popover = ({
   anchor,
   children,
-  arrow = true,
   orientation = "auto",
   className = "",
   offset,
   onRequestClose,
   ...props
 }: PopoverProps) => {
-  const firstRun = useRef(true);
   const popperElement = useRef<HTMLDivElement | null>(null);
   const arrowElement = useRef<HTMLDivElement | null>(null);
   const [open, setOpen] = useState<boolean>(!!anchor);
@@ -105,53 +97,48 @@ const Popover = ({
   useEffect(() => {
     !!anchor !== open && setOpen(!open);
 
+    console.log(anchor);
+
     if (open) {
       popperElement.current?.focus();
     }
   }, [anchor, open]);
 
   useEffect(() => {
-    if (offset) {
-      setAnchorOffset(offset);
-    } else {
-      arrow ? setAnchorOffset(16) : setAnchorOffset(0);
-    }
-  }, [arrow, offset]);
+    offset ? setAnchorOffset(offset) : setAnchorOffset(16);
+  }, [offset]);
+
+  const handleKeys = (e: KeyboardEvent) => {
+    console.log(e.key);
+    if (!open) return;
+    if (e.key === "Escape") onRequestClose();
+    if (e.key === "Tab") checkFocus();
+  };
 
   useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false;
-      const handleKeys = (e: KeyboardEvent) => {
-        console.log(e.key);
-        console.log("called");
-        if (!open) return;
-        if (e.key === "esc") onRequestClose();
-        if (e.key === "tab") checkFocus();
-      };
-      const checkFocus = () => {
-        const focusElement = document.activeElement;
-        if (
-          focusElement === popperElement.current ||
-          focusElement === anchor ||
-          (popperElement.current?.contains &&
-            popperElement.current.contains(focusElement))
-        ) {
-          return;
-        }
-        onRequestClose();
-      };
+    document.addEventListener("keydown", handleKeys);
+    return () => {
+      document.removeEventListener("keydown", handleKeys);
+    };
+  }, [handleKeys]);
 
-      window.addEventListener("keydown", handleKeys);
-      return () => {
-        window.removeEventListener("keydown", handleKeys);
-      };
+  const checkFocus = () => {
+    const focusElement = document.activeElement;
+    if (
+      focusElement === popperElement.current ||
+      focusElement === anchor ||
+      (popperElement.current?.contains &&
+        popperElement.current.contains(focusElement))
+    ) {
+      return;
     }
-  }, [anchor, onRequestClose, open]);
+    onRequestClose();
+  };
 
   const { styles, attributes } = usePopper(anchor, popperElement.current, {
     placement: orientation,
     modifiers: [
-      { name: "arrow", options: { element: arrowElement.current } },
+      { name: "arrow", options: { padding: 4, element: arrowElement.current } },
       {
         name: "offset",
         options: {
@@ -162,25 +149,17 @@ const Popover = ({
   });
 
   return (
-    <>
-      <div
-        className={cl("popover", className, { popover__hidden: !open })}
-        onClick={(e) => e.stopPropagation()}
-        ref={popperElement}
-        style={styles.popper}
-        tabIndex={0}
-        {...attributes.popper}
-      >
-        <div className="popover__content-inner">{children}</div>
-        {arrow && (
-          <div
-            ref={arrowElement}
-            style={styles.arrow}
-            className="popover__arrow"
-          />
-        )}
-      </div>
-    </>
+    <div
+      className={cl("popover", className, { popover__hidden: !open })}
+      onClick={(e) => e.stopPropagation()}
+      ref={popperElement}
+      style={styles.popper}
+      tabIndex={0}
+      {...attributes.popper}
+    >
+      {children}
+      <div ref={arrowElement} style={styles.arrow} className="popover__arrow" />
+    </div>
   );
 };
 
