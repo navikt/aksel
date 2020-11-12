@@ -36,6 +36,7 @@ const Template = ({ ...props }) => {
       >
         <Knapp type="fare">Dette er en kna0p</Knapp>
       </Popover>
+      <Knapp type="fare">Dette er en kna0p</Knapp>
     </>
   );
 };

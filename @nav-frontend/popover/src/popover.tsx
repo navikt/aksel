@@ -1,5 +1,6 @@
 import React, {
   forwardRef,
+  SyntheticEvent,
   useCallback,
   useEffect,
   useRef,
@@ -55,34 +56,38 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     const popperElement = mergeRefs([defaultRef, ref]);
     const arrowElement = useRef<HTMLDivElement | null>(null);
 
-    const checkFocus = useCallback(() => {
-      const focusElement = document.activeElement;
-      if (
-        focusElement === defaultRef.current ||
-        focusElement === anchorEl ||
-        (defaultRef &&
-          defaultRef.current &&
-          defaultRef.current.contains &&
-          defaultRef.current.contains(focusElement))
-      ) {
-        return;
-      }
-      onClose();
-    }, [anchorEl, onClose]);
+    const checkFocus = useCallback(
+      (e: FocusEvent) => {
+        const focusElement = e.target;
+        if (
+          focusElement === defaultRef.current ||
+          focusElement === anchorEl ||
+          (defaultRef && defaultRef?.current?.contains(focusElement as Node))
+        ) {
+          return;
+        }
+        onClose();
+      },
+      [anchorEl, onClose]
+    );
 
-    const handleKeys = useCallback(
+    const handleEsc = useCallback(
       (e: KeyboardEvent) => {
         if (!open) return;
         if (e.key === "Escape") onClose();
-        if (e.key === "Tab") checkFocus();
       },
-      [open, onClose, checkFocus]
+      [open, onClose]
+    );
+    const handleFocus = useCallback(
+      (e: FocusEvent) => {
+        if (!open) return;
+        checkFocus(e);
+      },
+      [open, checkFocus]
     );
 
     const handleClick = useCallback(
       (e: MouseEvent) => {
-        console.log(e.detail);
-
         if (
           open &&
           e.target instanceof Node &&
@@ -96,12 +101,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     useEffect(() => {
       document.addEventListener("click", handleClick);
-      document.addEventListener("keydown", handleKeys);
+      document.addEventListener("keydown", handleEsc);
+      document.addEventListener("focusin", handleFocus);
       return () => {
         document.removeEventListener("click", handleClick);
-        document.removeEventListener("keydown", handleKeys);
+        document.removeEventListener("keydown", handleEsc);
+        document.removeEventListener("focusin", handleFocus);
       };
-    }, [handleClick, handleKeys]);
+    }, [handleClick, handleEsc, handleFocus]);
 
     const { styles, attributes, update } = usePopper(
       anchorEl,
