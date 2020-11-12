@@ -20,7 +20,7 @@ const Template = ({ ...props }) => {
       >
         open
       </button>
-      <Popover anchor={anchor}>
+      <Popover anchor={anchor} onRequestClose={() => setAnchor(null)}>
         <p>Dette er en popover.</p>
       </Popover>
     </>
@@ -31,14 +31,24 @@ export const All = () => {
   return (
     <div
       style={{
-        display: "grid",
-        gridAutoColumns: "100%",
-        gridAutoRows: "30px",
-        rowGap: "4rem",
-        margin: "4rem",
+        width: "450px",
+        height: "250px",
+        overflowY: "scroll",
+        resize: "both",
+        position: "relative",
       }}
     >
-      <Template />
+      <div
+        style={{
+          width: "100px",
+          height: "600px",
+          margin: "auto",
+          marginTop: "70%",
+          overscrollBehavior: "contain",
+        }}
+      >
+        <Template />
+      </div>
     </div>
   );
 };
