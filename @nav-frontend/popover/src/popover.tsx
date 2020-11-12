@@ -88,8 +88,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           e.target instanceof Node &&
           !defaultRef?.current?.contains(e.target)
         ) {
-          console.log("click");
-
           onClose();
         }
       },
@@ -105,24 +103,34 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       };
     }, [handleClick, handleKeys]);
 
-    const { styles, attributes } = usePopper(anchorEl, defaultRef.current, {
-      placement,
-      modifiers: [
-        {
-          name: "arrow",
-          options: {
-            padding: 4,
-            element: arrowElement.current,
+    const { styles, attributes, update } = usePopper(
+      anchorEl,
+      defaultRef.current,
+      {
+        placement,
+        modifiers: [
+          {
+            name: "arrow",
+            options: {
+              padding: 4,
+              element: arrowElement.current,
+            },
           },
-        },
-        {
-          name: "offset",
-          options: {
-            offset: [0, 16],
+          {
+            name: "offset",
+            options: {
+              offset: [0, 16],
+            },
           },
-        },
-      ],
-    });
+        ],
+      }
+    );
+
+    useEffect(() => {
+      if (open && update) {
+        update();
+      }
+    }, [open, update]);
 
     return (
       <div
