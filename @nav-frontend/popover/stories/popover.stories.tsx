@@ -1,23 +1,40 @@
-import React, { useRef, useState } from "react";
+import React, {
+  createRef,
+  MutableRefObject,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
-
+import Knapp from "nav-frontend-knapper";
 export default {
   title: "@nav-frontend/popover",
   component: Popover,
 } as Meta;
 
 const Template = ({ ...props }) => {
-  const [anchor, setAnchor] = useState(null);
-  const popoverRef = useRef<any>();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef();
+  const testRef = useRef(null);
+
+  const onClose = useCallback(() => setOpen(false), []);
 
   return (
     <>
-      <button ref={popoverRef} onClick={(e) => setAnchor(e.currentTarget)}>
+      <button onClick={() => testRef.current.focus()}>
+        Denne knappen setter fokus
+      </button>
+      <button ref={anchorRef} onClick={() => setOpen(true)}>
         Dette er en stor knapp
       </button>
-      <Popover anchor={anchor} onRequestClose={() => setAnchor(null)}>
-        Dette er en popover
+      <Popover
+        ref={testRef}
+        open={open}
+        anchorEl={anchorRef.current}
+        onClose={onClose}
+      >
+        <Knapp type="fare">Dette er en kna0p</Knapp>
       </Popover>
     </>
   );

@@ -1,24 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import ReactDOM from "react-dom";
 import { usePopper } from "react-popper";
+import { Placement } from "@popperjs/core";
+import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import "@nav-frontend/popover-style";
-
-export type PopoverOrientation =
-  | "auto"
-  | "auto-start"
-  | "auto-end"
-  | "top"
-  | "top-start"
-  | "top-end"
-  | "bottom"
-  | "bottom-start"
-  | "bottom-end"
-  | "right"
-  | "right-start"
-  | "right-end"
-  | "left"
-  | "left-start"
-  | "left-end";
 
 export interface PopoverPosisjonShape {
   left?: number;
@@ -30,7 +22,15 @@ interface PopoverProps {
   /**
    * Element that popover will anchor to
    */
-  anchor: HTMLElement | null;
+  anchorEl: HTMLElement | null;
+  /**
+   * Open state for popover
+   */
+  open: boolean;
+  /**
+   * Callback for when popover to closes
+   */
+  onClose: () => void;
   /**
    * children
    */
@@ -39,128 +39,108 @@ interface PopoverProps {
    * Orientation for popover
    * @default 'auto'
    */
-  orientation?: PopoverOrientation;
+  placement?: Placement;
   /**
-   * Offset to anchor
-   * @default 16px with arrow, 0px without arrow
-   */
-  offset?: number;
-  /**
-   * Callback for when popover requests to close
-   */
-  onRequestClose: () => void;
-
-  // OLD FROM HERE
-  /**
-   * Callback når popover åpnes.
-   */
-  onOpen?: () => void;
-
-  /**
-   * Avstand til anker element i pixler. Default er `16px` (`1rem`) med pil, eller `0` uten pil.
-   */
-  avstandTilAnker?: number;
-  /**
-   * Bestemmer om Popover automatisk skal få fokus når den vises.
-   */
-  autoFokus?: boolean;
-
-  /**
-   * Egendefinert klassenavn.
+   * User defined classname
    */
   className?: string;
-  /**
-   * CSS-stiler for absolutt posisjonering av popover vindu og pil. Brukes av Popover for dynamisk
-   * justering av posisjon ved resize og scroll.
-   */
-  posisjon?: PopoverPosisjonShape;
-  /**
-   * React-referanse til intern `<div>`
-   */
-  innerRef?: React.RefObject<HTMLDivElement>;
 }
 
-const Popover = ({
-  anchor,
-  children,
-  orientation = "auto",
-  className = "",
-  offset,
-  onRequestClose,
-  ...props
-}: PopoverProps) => {
-  const popperElement = useRef<HTMLDivElement | null>(null);
-  const arrowElement = useRef<HTMLDivElement | null>(null);
-  const [open, setOpen] = useState<boolean>(!!anchor);
-  const [anchorOffset, setAnchorOffset] = useState<number>(16);
+const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+  (
+    { anchorEl, open, onClose, children, placement = "auto", className = "" },
+    ref
+  ) => {
+    const defaultRef = useRef<HTMLDivElement | null>(null);
+    const popperElement = mergeRefs([defaultRef, ref]);
+    const arrowElement = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
-    !!anchor !== open && setOpen(!open);
+    const checkFocus = useCallback(() => {
+      const focusElement = document.activeElement;
+      if (
+        focusElement === defaultRef.current ||
+        focusElement === anchorEl ||
+        (defaultRef &&
+          defaultRef.current &&
+          defaultRef.current.contains &&
+          defaultRef.current.contains(focusElement))
+      ) {
+        return;
+      }
+      onClose();
+    }, [anchorEl, onClose]);
 
-    console.log(anchor);
-
-    if (open) {
-      popperElement.current?.focus();
-    }
-  }, [anchor, open]);
-
-  useEffect(() => {
-    offset ? setAnchorOffset(offset) : setAnchorOffset(16);
-  }, [offset]);
-
-  const handleKeys = (e: KeyboardEvent) => {
-    console.log(e.key);
-    if (!open) return;
-    if (e.key === "Escape") onRequestClose();
-    if (e.key === "Tab") checkFocus();
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeys);
-    return () => {
-      document.removeEventListener("keydown", handleKeys);
-    };
-  }, [handleKeys]);
-
-  const checkFocus = () => {
-    const focusElement = document.activeElement;
-    if (
-      focusElement === popperElement.current ||
-      focusElement === anchor ||
-      (popperElement.current?.contains &&
-        popperElement.current.contains(focusElement))
-    ) {
-      return;
-    }
-    onRequestClose();
-  };
-
-  const { styles, attributes } = usePopper(anchor, popperElement.current, {
-    placement: orientation,
-    modifiers: [
-      { name: "arrow", options: { padding: 4, element: arrowElement.current } },
-      {
-        name: "offset",
-        options: {
-          offset: [0, anchorOffset],
-        },
+    const handleKeys = useCallback(
+      (e: KeyboardEvent) => {
+        if (!open) return;
+        if (e.key === "Escape") onClose();
+        if (e.key === "Tab") checkFocus();
       },
-    ],
-  });
+      [open, onClose, checkFocus]
+    );
 
-  return (
-    <div
-      className={cl("popover", className, { popover__hidden: !open })}
-      onClick={(e) => e.stopPropagation()}
-      ref={popperElement}
-      style={styles.popper}
-      tabIndex={0}
-      {...attributes.popper}
-    >
-      {children}
-      <div ref={arrowElement} style={styles.arrow} className="popover__arrow" />
-    </div>
-  );
-};
+    const handleClick = useCallback(
+      (e: MouseEvent) => {
+        console.log(e.detail);
+
+        if (
+          open &&
+          e.target instanceof Node &&
+          !defaultRef?.current?.contains(e.target)
+        ) {
+          console.log("click");
+
+          onClose();
+        }
+      },
+      [open, onClose]
+    );
+
+    useEffect(() => {
+      document.addEventListener("click", handleClick);
+      document.addEventListener("keydown", handleKeys);
+      return () => {
+        document.removeEventListener("click", handleClick);
+        document.removeEventListener("keydown", handleKeys);
+      };
+    }, [handleClick, handleKeys]);
+
+    const { styles, attributes } = usePopper(anchorEl, defaultRef.current, {
+      placement,
+      modifiers: [
+        {
+          name: "arrow",
+          options: {
+            padding: 4,
+            element: arrowElement.current,
+          },
+        },
+        {
+          name: "offset",
+          options: {
+            offset: [0, 16],
+          },
+        },
+      ],
+    });
+
+    return (
+      <div
+        ref={popperElement}
+        className={cl("popover", className, { popover__hidden: !open })}
+        onClick={(e) => e.stopPropagation()}
+        style={styles.popper}
+        {...attributes.popper}
+      >
+        {children}
+        <div
+          ref={arrowElement}
+          style={styles.arrow}
+          className="popover__arrow"
+        />
+      </div>
+    );
+  }
+);
 
 export default Popover;
