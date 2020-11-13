@@ -8,8 +8,8 @@
     "typescript",
     "javascript"
   ],
-  "main": "lib/Popover.js",
-  "types": "lib/Popover.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
