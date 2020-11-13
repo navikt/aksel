@@ -1,6 +1,6 @@
 {
   "name": "@nav-frontend/popover-style",
-  "version": "0.1.0",
+  "version": "0.1.0.beta.1",
   "main": "src/popover-style.css",
   "license": "MIT",
   "files": [
