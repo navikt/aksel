@@ -1,6 +1,6 @@
 {
   "name": "@nav-frontend/popover",
-  "version": "0.1.0.beta.1",
+  "version": "0.1.0-beta.1",
   "description": "Popover component implemented in React",
   "author": "NAV Designsystem team",
   "keywords": [
@@ -27,7 +27,7 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "@nav-fronted/popover-styles": "^0.1.0.beta",
+    "@nav-frontend/popover-styles": "0.1.0-beta.1",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-popper": "^2.2.4",

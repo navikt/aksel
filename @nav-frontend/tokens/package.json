@@ -1,6 +1,6 @@
 {
   "name": "@nav-frontend/tokens",
-  "version": "0.1.0.beta.1",
+  "version": "0.1.0-beta.1",
   "description": "Auto-generated design-tokens for NAV design-systems framework",
   "author": "NAV Designsystem team",
   "keywords": [
