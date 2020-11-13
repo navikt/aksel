@@ -1,7 +1,7 @@
-import React, { useRef, useState, useCallback } from "react";
+import React, { useRef, useState } from "react";
 import Popover from "../src/Index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Placement, placements } from "@popperjs/core";
+import { placements } from "@popperjs/core";
 export default {
   title: "@nav-frontend/popover",
   component: Popover,
