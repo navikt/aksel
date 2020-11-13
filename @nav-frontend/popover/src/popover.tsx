@@ -33,6 +33,14 @@ interface PopoverProps {
   className?: string;
 }
 
+const useEventLister = (event, callback) =>
+  useEffect(() => {
+    document.addEventListener(event, callback);
+    return () => {
+      document.removeEventListener(event, callback);
+    };
+  }, [event, callback]);
+
 const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
@@ -46,67 +54,45 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     },
     ref
   ) => {
-    const defaultRef = useRef<HTMLDivElement | null>(null);
-    const popperElement = mergeRefs([defaultRef, ref]);
-    const arrowElement = useRef<HTMLDivElement | null>(null);
+    const popoverRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = mergeRefs([popoverRef, ref]);
+    const arrowRef = useRef<HTMLDivElement | null>(null);
 
-    const checkFocus = useCallback(
-      (e: FocusEvent) => {
-        const focusElement = e.target;
-        if (
-          focusElement === defaultRef.current ||
-          focusElement === anchorEl ||
-          (defaultRef && defaultRef?.current?.contains(focusElement as Node))
-        ) {
-          return;
-        }
-        onClose();
-      },
-      [anchorEl, onClose]
+    const close = useCallback(() => open && onClose(), [open, onClose]);
+
+    useEventLister(
+      "click",
+      useCallback(
+        (e: MouseEvent) =>
+          !popoverRef.current?.contains(e.target as Node) && close(),
+        [close]
+      )
     );
 
-    const handleEsc = useCallback(
-      (e: KeyboardEvent) => {
-        if (!open) return;
-        if (e.key === "Escape") onClose();
-      },
-      [open, onClose]
-    );
-    const handleFocus = useCallback(
-      (e: FocusEvent) => {
-        if (!open) return;
-        checkFocus(e);
-      },
-      [open, checkFocus]
+    useEventLister(
+      "keydown",
+      useCallback((e: KeyboardEvent) => e.key === "Escape" && close(), [close])
     );
 
-    const handleClick = useCallback(
-      (e: MouseEvent) => {
-        if (
-          open &&
-          e.target instanceof Node &&
-          !defaultRef?.current?.contains(e.target)
-        ) {
-          onClose();
-        }
-      },
-      [open, onClose]
+    useEventLister(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![anchorEl, popoverRef.current].some((element) =>
+              element?.contains(e.target as Node)
+            )
+          ) {
+            close();
+          }
+        },
+        [anchorEl, close]
+      )
     );
-
-    useEffect(() => {
-      document.addEventListener("click", handleClick);
-      document.addEventListener("keydown", handleEsc);
-      document.addEventListener("focusin", handleFocus);
-      return () => {
-        document.removeEventListener("click", handleClick);
-        document.removeEventListener("keydown", handleEsc);
-        document.removeEventListener("focusin", handleFocus);
-      };
-    }, [handleClick, handleEsc, handleFocus]);
 
     const { styles, attributes, update } = usePopper(
       anchorEl,
-      defaultRef.current,
+      popoverRef.current,
       {
         placement,
         modifiers: [
@@ -114,7 +100,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             name: "arrow",
             options: {
               padding: 4,
-              element: arrowElement.current,
+              element: arrowRef.current,
             },
           },
           {
@@ -135,21 +121,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     return (
       <div
-        ref={popperElement}
+        ref={mergedRef}
         className={cl("popover", className, { popover__hidden: !open })}
-        onClick={(e) => e.stopPropagation()}
-        style={styles.popper}
         aria-live="polite"
         aria-hidden={!open}
+        tabIndex={-1}
         {...attributes.popper}
         {...rest}
+        style={styles.popper}
       >
         {children}
-        <div
-          ref={arrowElement}
-          style={styles.arrow}
-          className="popover__arrow"
-        />
+        <div ref={arrowRef} style={styles.arrow} className="popover__arrow" />
       </div>
     );
   }

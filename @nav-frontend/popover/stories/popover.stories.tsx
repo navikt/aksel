@@ -1,7 +1,6 @@
 import React, { useRef, useState, useCallback } from "react";
 import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
-import Knapp from "nav-frontend-knapper";
 export default {
   title: "@nav-frontend/popover",
   component: Popover,
@@ -16,9 +15,13 @@ const Template = ({ ...props }) => {
 
   return (
     <>
-      <button ref={anchorRef} onClick={() => setOpen(true)}>
-        Dette er en stor knapp
-      </button>
+      <button onClick={() => testRef.current.focus()}>Test</button>
+      <div ref={anchorRef}>
+        anchor div
+        <a href="example.com">a href</a>
+        <button onClick={() => setOpen(true)}>Dette er en stor knapp</button>
+        anchor div
+      </div>
       <Popover
         ref={testRef}
         open={open}
@@ -26,7 +29,9 @@ const Template = ({ ...props }) => {
         onClose={onClose}
       >
         Dette er popover innhold
+        <button>Test</button>
       </Popover>
+      <button>Test</button>
     </>
   );
 };
