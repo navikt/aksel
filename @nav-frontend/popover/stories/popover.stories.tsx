@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Popover from "../src/Index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
