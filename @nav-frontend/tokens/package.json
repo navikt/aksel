@@ -15,6 +15,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "style-dictionary": "^2.10.2"
+    "style-dictionary": "^2.10.2",
+    "color": "^3.1.3"
   }
 }

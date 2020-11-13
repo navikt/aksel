@@ -114,6 +114,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
 
     useEffect(() => {
+      console.log(open && update);
       open && update && update();
     }, [open, update]);
 
