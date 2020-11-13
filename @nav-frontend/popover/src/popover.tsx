@@ -120,7 +120,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <div
         ref={mergedRef}
-        className={cl("popover", className, {
+        className={cl("navds-popover", className, {
           popover__hidden: !open || !anchorEl,
         })}
         aria-live="polite"
@@ -131,7 +131,11 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         style={styles.popper}
       >
         {children}
-        <div ref={arrowRef} style={styles.arrow} className="popover__arrow" />
+        <div
+          ref={arrowRef}
+          style={styles.arrow}
+          className="navds-popover__arrow"
+        />
       </div>
     );
   }
