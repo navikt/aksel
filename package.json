@@ -53,7 +53,8 @@
     "ignoreFiles": [
       "packages/nav-frontend-core/less/vendor/_normalize.less",
       "packages/nav-frontend-core/less/_variabler-exports.less",
-      "packages/nav-frontend-core/less/hide-text.less"
+      "packages/nav-frontend-core/less/hide-text.less",
+      "@nav-frontend/tokens/dist/tokens.less"
     ]
   },
   "repository": {
