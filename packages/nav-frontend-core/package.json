@@ -8,7 +8,7 @@
   "types": "less/_variabler.d.ts",
   "files": [
     "/less",
-    "/css"
+    "/dist/main.css"
   ],
   "devDependencies": {
     "lessc": "^1.0.2"
