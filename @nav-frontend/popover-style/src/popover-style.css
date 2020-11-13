@@ -7,11 +7,6 @@
   padding: 1rem;
 }
 
-.popover:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px var(--fokusFarge);
-}
-
 .popover__hidden {
   display: none;
 }
