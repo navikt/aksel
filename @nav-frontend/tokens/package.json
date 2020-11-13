@@ -1,9 +1,10 @@
 {
   "name": "@nav-frontend/tokens",
   "version": "0.1.0",
-  "main": "src/index.css",
+  "main": "dist/tokens.css",
   "license": "MIT",
   "files": [
+    "/dist",
     "/src"
   ],
   "scripts": {
@@ -14,6 +15,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "style-dictionary": "^2.10.2"
+    "style-dictionary": "^2.10.2",
+    "color": "^3.1.3"
   }
 }
