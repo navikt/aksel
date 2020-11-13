@@ -27,7 +27,7 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "@nav-fronted/popover-style": "^0.1.0.beta",
+    "@nav-fronted/popover-styles": "^0.1.0.beta",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-popper": "^2.2.4",
