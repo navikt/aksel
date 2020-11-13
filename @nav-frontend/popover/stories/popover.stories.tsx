@@ -1,10 +1,4 @@
-import React, {
-  createRef,
-  MutableRefObject,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
+import React, { useRef, useState, useCallback } from "react";
 import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 import Knapp from "nav-frontend-knapper";

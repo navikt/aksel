@@ -1,23 +1,9 @@
-import React, {
-  forwardRef,
-  SyntheticEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import ReactDOM from "react-dom";
+import React, { forwardRef, useCallback, useEffect, useRef } from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import "@nav-frontend/popover-style";
-
-export interface PopoverPosisjonShape {
-  left?: number;
-  top?: number;
-  pilLeft?: number;
-}
 
 interface PopoverProps {
   /**
@@ -49,7 +35,7 @@ interface PopoverProps {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
-    { anchorEl, open, onClose, children, placement = "auto", className = "" },
+    { anchorEl, open, onClose, children, placement = "auto", className },
     ref
   ) => {
     const defaultRef = useRef<HTMLDivElement | null>(null);
