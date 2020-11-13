@@ -1,18 +1,22 @@
 {
   "name": "nav-frontend-stegindikator-style",
-  "version": "1.0.38",
+  "version": "1.0.40",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.5",
     "nav-frontend-typografi-style": "^1.0.25"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.8",
-    "nav-frontend-typografi-style": "^1.0.29",
+    "nav-frontend-core": "^5.0.10",
+    "nav-frontend-typografi-style": "^1.0.31",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

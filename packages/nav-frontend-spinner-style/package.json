@@ -1,11 +1,15 @@
 {
   "name": "nav-frontend-spinner-style",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "main": "src/spinner-style.less",
   "license": "MIT",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"

@@ -1,11 +1,15 @@
 {
   "name": "nav-frontend-ekspanderbartpanel-style",
-  "version": "1.0.27",
+  "version": "1.0.29",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
@@ -17,10 +21,10 @@
     "nav-frontend-typografi-style": "^1.0.25"
   },
   "devDependencies": {
-    "nav-frontend-chevron-style": "^0.3.9",
-    "nav-frontend-core": "^5.0.8",
-    "nav-frontend-paneler-style": "^0.3.28",
-    "nav-frontend-typografi-style": "^1.0.29",
+    "nav-frontend-chevron-style": "^0.3.10",
+    "nav-frontend-core": "^5.0.10",
+    "nav-frontend-paneler-style": "^0.3.30",
+    "nav-frontend-typografi-style": "^1.0.31",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

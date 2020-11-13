@@ -1,20 +1,23 @@
 {
   "name": "nav-frontend-typografi-style",
-  "version": "1.0.29",
+  "version": "1.0.31",
   "main": "src/index.less",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
-    "/src"
+    "/src",
+    "/dist/main.css"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
+  "scripts": {
+    "build": "webpack"
+  },
   "dependencies": {
-    "nav-frontend-core": "^5.0.8"
+    "nav-frontend-core": "^5.0.10"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.5",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

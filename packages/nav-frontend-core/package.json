@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-core",
-  "version": "5.0.8",
+  "version": "5.0.10",
   "description": "",
   "main": "less/core.less",
   "author": "NAV",
@@ -8,13 +8,13 @@
   "types": "less/_variabler.d.ts",
   "files": [
     "/less",
-    "/css"
+    "/dist/main.css"
   ],
   "devDependencies": {
     "lessc": "^1.0.2"
   },
   "scripts": {
-    "less": "lessc less/core.less css/core.css",
+    "less": "lessc less/core.less dist/main.css",
     "build": "yarn gulp --gulpfile build/gulpfile.js buildLess --ignoreErrors && yarn less"
   },
   "repository": {
