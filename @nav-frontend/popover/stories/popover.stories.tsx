@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Popover from "../src/Index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
@@ -8,24 +8,28 @@ export default {
 } as Meta;
 
 const Template = ({ type, placement, ...props }) => {
-  const anchorRef = useRef(null);
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+
   return (
     <>
       <div
-        style={{ background: "grey", textAlign: "center" }}
-        onClick={() => setOpen(!open)}
-        ref={anchorRef}
+        style={{
+          background: "#eee",
+          border: "1px solid blue",
+          textAlign: "center",
+          width: "150px",
+        }}
+        ref={(el) => setAnchorEl(el)}
       >
         {type}
       </div>
       <Popover
-        anchorEl={anchorRef.current}
+        anchorEl={anchorEl}
         onClose={() => {}}
         placement={placement}
-        open={open}
+        open
       >
-        Popover contents
+        Contents
       </Popover>
     </>
   );
@@ -33,13 +37,19 @@ const Template = ({ type, placement, ...props }) => {
 
 export const All = () => {
   return (
-    <div style={{ padding: "4rem" }}>
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "4rem 8rem 4rem 8rem",
+      }}
+    >
       {placements.map((type) => (
         <div
           style={{
-            width: "100px",
+            width: "20%",
             height: "100px",
-            margin: "auto",
+            margin: "4rem",
           }}
         >
           <Template type={type} placement={type} />

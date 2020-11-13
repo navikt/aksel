@@ -19,7 +19,7 @@ interface PopoverProps {
    */
   onClose: () => void;
   /**
-   * children
+   * Content rendered inside popover
    */
   children: React.ReactNode;
   /**
@@ -33,7 +33,7 @@ interface PopoverProps {
   className?: string;
 }
 
-const useEventLister = (event, callback) =>
+const useEventLister = (event: string, callback) =>
   useEffect(() => {
     document.addEventListener(event, callback);
     return () => {
@@ -114,16 +114,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
 
     useEffect(() => {
-      console.log(open && update);
       open && update && update();
     }, [open, update]);
 
     return (
       <div
         ref={mergedRef}
-        className={cl("popover", className, { popover__hidden: !open })}
+        className={cl("popover", className, {
+          popover__hidden: !open || !anchorEl,
+        })}
         aria-live="polite"
-        aria-hidden={!open}
+        aria-hidden={!open || !anchorEl}
         tabIndex={-1}
         {...attributes.popper}
         {...rest}
