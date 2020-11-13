@@ -1,8 +1,15 @@
 {
   "name": "@nav-frontend/popover",
   "version": "0.1.0.beta.1",
-  "main": "lib/popover.js",
-  "types": "lib/popover.d.ts",
+  "description": "Popover component implemented in React",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "main": "lib/Popover.js",
+  "types": "lib/Popover.d.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
