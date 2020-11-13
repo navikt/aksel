@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Popover from "../src/Index";
+import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
 export default {
