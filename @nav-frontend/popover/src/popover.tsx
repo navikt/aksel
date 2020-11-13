@@ -35,7 +35,15 @@ interface PopoverProps {
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
-    { anchorEl, open, onClose, children, placement = "auto", className },
+    {
+      anchorEl,
+      open,
+      onClose,
+      children,
+      placement = "auto",
+      className,
+      ...rest
+    },
     ref
   ) => {
     const defaultRef = useRef<HTMLDivElement | null>(null);
@@ -131,7 +139,10 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         className={cl("popover", className, { popover__hidden: !open })}
         onClick={(e) => e.stopPropagation()}
         style={styles.popper}
+        aria-live="polite"
+        aria-hidden={!open}
         {...attributes.popper}
+        {...rest}
       >
         {children}
         <div

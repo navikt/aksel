@@ -7,7 +7,8 @@
     "/src"
   ],
   "scripts": {
-    "build": "style-dictionary build"
+    "build": "style-dictionary build",
+    "watch": "nodemon --watch src/index.js --exec \"yarn build\""
   },
   "repository": {
     "type": "git",

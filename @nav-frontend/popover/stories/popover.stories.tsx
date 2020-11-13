@@ -16,9 +16,6 @@ const Template = ({ ...props }) => {
 
   return (
     <>
-      <button onClick={() => testRef.current.focus()}>
-        Denne knappen setter fokus
-      </button>
       <button ref={anchorRef} onClick={() => setOpen(true)}>
         Dette er en stor knapp
       </button>
@@ -28,9 +25,8 @@ const Template = ({ ...props }) => {
         anchorEl={anchorRef.current}
         onClose={onClose}
       >
-        <Knapp type="fare">Dette er en kna0p</Knapp>
+        Dette er popover innhold
       </Popover>
-      <Knapp type="fare">Dette er en kna0p</Knapp>
     </>
   );
 };
