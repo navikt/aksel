@@ -48,7 +48,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       open,
       onClose,
       children,
-      placement = "auto",
+      placement = "right",
       className,
       ...rest
     },
@@ -99,7 +99,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {
             name: "arrow",
             options: {
-              padding: 4,
+              padding: 8,
               element: arrowRef.current,
             },
           },
@@ -114,9 +114,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
 
     useEffect(() => {
-      if (open && update) {
-        update();
-      }
+      open && update && update();
     }, [open, update]);
 
     return (

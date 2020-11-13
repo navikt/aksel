@@ -4,6 +4,7 @@ module.exports = {
     gray: {
       40: { value: "#b7b1a9" },
     },
+    fokusFarge: { value: "#254B6D" },
     border: {
       default: { value: "{color.gray.40.value}" },
     },
