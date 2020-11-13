@@ -1,0 +1,63 @@
+.navds-button {
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 7px 21.5px;
+  width: auto;
+  overflow: visible;
+  line-height: normal;
+}
+
+.navds-button:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-button--primary {
+  border: 2px solid var(--navds-color-blue-50);
+  border-radius: 2px;
+  color: var(--navds-color-blue-50);
+  background-color: var(--navds-color-background-default);
+}
+
+.navds-button--primary:hover {
+  color: var(--navds-color-white);
+  background-color: var(--navds-color-blue-50);
+}
+
+.navds-button--primary:active,
+.navds-button--action:active {
+  color: var(--navds-color-white);
+  background-color: var(--navds-color-deepblue-50);
+}
+
+.navds-button--secondary {
+  color: var(--navds-color-blue-50);
+}
+
+.navds-button--secondary:hover,
+.navds-button--secondary:active,
+.navds-button--secondary:focus {
+  border: 2px solid var(--navds-color-blue-50);
+  border-radius: 2px;
+  color: var(--navds-color-blue-50);
+  background-color: var(--navds-color-background-default);
+}
+
+.navds-button--action {
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.25);
+  filter: drop-shadow(0px 2px 0px rgba(0, 0, 0, 0.25));
+
+  border-radius: 2px;
+  color: var(--navds-color-background-default);
+  background-color: var(--navds-color-blue-50);
+}
+
+.navds-button--danger {
+  border-radius: 2px;
+  color: var(--navds-color-white);
+  background-color: var(--navds-color-error);
+}

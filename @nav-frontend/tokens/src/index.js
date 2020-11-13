@@ -1,6 +1,8 @@
 const Color = require("color");
 
 const blue = "#0067c5";
+const deepblue = "#005B82";
+const red = "#BA3A26";
 const darkgray = "#3e3832";
 
 const mix = (a, b, percentage) =>
@@ -29,6 +31,29 @@ module.exports = {
         20: { value: lighten(blue, 60) },
         10: { value: lighten(blue, 80) },
       },
+      deepblue: {
+        90: { value: darken(deepblue, 80) },
+        80: { value: darken(deepblue, 60) },
+        70: { value: darken(deepblue, 40) },
+        60: { value: darken(deepblue, 20) },
+        50: { value: deepblue },
+        40: { value: lighten(deepblue, 20) },
+        30: { value: lighten(deepblue, 40) },
+        20: { value: lighten(deepblue, 60) },
+        10: { value: lighten(deepblue, 80) },
+      },
+      red: {
+        90: { value: darken(red, 80) },
+        80: { value: darken(red, 60) },
+        70: { value: darken(red, 40) },
+        60: { value: darken(red, 20) },
+        50: { value: red },
+        40: { value: lighten(red, 20) },
+        30: { value: lighten(red, 40) },
+        20: { value: lighten(red, 60) },
+        10: { value: lighten(red, 80) },
+      },
+      error: { value: "{navds.color.red.50.value}" },
       focus: { value: "{navds.color.blue.80.value}" },
       border: {
         default: { value: "{navds.color.gray.40.value}" },
