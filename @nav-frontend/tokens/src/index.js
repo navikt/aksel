@@ -53,8 +53,6 @@ module.exports = {
         20: { value: lighten(red, 60) },
         10: { value: lighten(red, 80) },
       },
-      error: { value: "{navds.color.red.50.value}" },
-      focus: { value: "{navds.color.blue.80.value}" },
       border: {
         default: { value: "{navds.color.gray.40.value}" },
       },
@@ -77,7 +75,7 @@ module.exports = {
       default: { value: "1px solid {navds.color.border.default.value}" },
     },
     shadow: {
-      focus: { value: "0 0 0 3px {navds.color.focus.value}" },
+      focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },
   },
 };
