@@ -60,6 +60,16 @@ module.exports = {
       },
       background: {
         default: { value: "{navds.color.white.value}" },
+        action: {
+          default: { value: "{navds.color.blue.50}" },
+          hover: { value: lighten(blue, 5) },
+          active: { value: "{navds.color.deepblue.50.value}" },
+        },
+        danger: {
+          default: { value: "{navds.color.red.50}" },
+          hover: { value: lighten(red, 5) },
+          active: { value: "{navds.color.red.70.value}" },
+        },
       },
     },
     border: {

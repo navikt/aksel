@@ -27,6 +27,7 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "@nav-frontend/button-styles": "0.1.0-beta.1"
   },
   "devDependencies": {
