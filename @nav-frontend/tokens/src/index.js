@@ -58,19 +58,19 @@ module.exports = {
       border: {
         default: { value: "{navds.color.gray.40.value}" },
       },
+      disabled: { value: "{navds.color.gray.40.value}" },
+      action: {
+        default: { value: "{navds.color.blue.50.value}" },
+        hover: { value: lighten(blue, 5) },
+        active: { value: "{navds.color.deepblue.50.value}" },
+      },
+      danger: {
+        default: { value: "{navds.color.red.50.value}" },
+        hover: { value: lighten(red, 5) },
+        active: { value: "{navds.color.red.70.value}" },
+      },
       background: {
         default: { value: "{navds.color.white.value}" },
-        disabled: { value: "{navds.color.gray.40.value}" },
-        action: {
-          default: { value: "{navds.color.blue.50.value}" },
-          hover: { value: lighten(blue, 5) },
-          active: { value: "{navds.color.deepblue.50.value}" },
-        },
-        danger: {
-          default: { value: "{navds.color.red.50}" },
-          hover: { value: lighten(red, 5) },
-          active: { value: "{navds.color.red.70.value}" },
-        },
       },
     },
     border: {
