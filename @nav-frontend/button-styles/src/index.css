@@ -9,6 +9,7 @@
   font: inherit;
   margin: 0;
   line-height: 1;
+  text-align: center;
   border: var(--border-width) solid var(--navds-color-action-default);
   padding: calc(0.75em - var(--border-width)) calc(1.5em - var(--border-width));
   border-radius: var(--button-border-radius);
