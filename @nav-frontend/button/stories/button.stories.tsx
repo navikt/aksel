@@ -1,11 +1,10 @@
 import React from "react";
 import Button from "../src/index";
-import { Meta } from "@storybook/react/types-6-0";
 
 export default {
   title: "@nav-frontend/button",
   component: Button,
-} as Meta;
+};
 
 export const All = () => {
   return (

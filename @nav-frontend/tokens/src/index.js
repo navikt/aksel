@@ -60,8 +60,9 @@ module.exports = {
       },
       background: {
         default: { value: "{navds.color.white.value}" },
+        disabled: { value: "{navds.color.gray.40.value}" },
         action: {
-          default: { value: "{navds.color.blue.50}" },
+          default: { value: "{navds.color.blue.50.value}" },
           hover: { value: lighten(blue, 5) },
           active: { value: "{navds.color.deepblue.50.value}" },
         },
