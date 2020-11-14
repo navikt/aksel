@@ -1,4 +1,5 @@
 .navds-button {
+  display: inline-block;
   cursor: pointer;
   border: none;
   background: transparent;

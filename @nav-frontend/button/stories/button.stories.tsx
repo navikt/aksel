@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import Button from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
@@ -46,9 +46,13 @@ export const All = () => {
       >
         {["primary", "secondary", "action", "danger"].map(
           (variant: "primary" | "secondary" | "action" | "danger") => (
-            <Button key={variant} as="a" variant={variant} href="#">
+            <a
+              key={variant}
+              className={`navds-button navds-button--${variant}`}
+              href="the-link"
+            >
               {variant}
-            </Button>
+            </a>
           )
         )}
       </div>
