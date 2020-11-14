@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../src/index";
 
 export default {
-  title: "@nav-frontend/button",
+  title: "@nav-frontend/react-button",
   component: Button,
 };
 
