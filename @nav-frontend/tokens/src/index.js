@@ -2,6 +2,9 @@ const Color = require("color");
 
 const blue = "#0067c5";
 const deepblue = "#005B82";
+const lightblue = "#66CBEC";
+const orange = "#FF9100";
+const green = "#06893A";
 const red = "#BA3A26";
 const darkgray = "#3e3832";
 
@@ -52,6 +55,39 @@ module.exports = {
         30: { value: lighten(red, 40) },
         20: { value: lighten(red, 60) },
         10: { value: lighten(red, 80) },
+      },
+      lightblue: {
+        90: { value: darken(lightblue, 80) },
+        80: { value: darken(lightblue, 60) },
+        70: { value: darken(lightblue, 40) },
+        60: { value: darken(lightblue, 20) },
+        50: { value: lightblue },
+        40: { value: lighten(lightblue, 20) },
+        30: { value: lighten(lightblue, 40) },
+        20: { value: lighten(lightblue, 60) },
+        10: { value: lighten(lightblue, 80) },
+      },
+      orange: {
+        90: { value: darken(orange, 80) },
+        80: { value: darken(orange, 60) },
+        70: { value: darken(orange, 40) },
+        60: { value: darken(orange, 20) },
+        50: { value: orange },
+        40: { value: lighten(orange, 20) },
+        30: { value: lighten(orange, 40) },
+        20: { value: lighten(orange, 60) },
+        10: { value: lighten(orange, 80) },
+      },
+      green: {
+        90: { value: darken(green, 80) },
+        80: { value: darken(green, 60) },
+        70: { value: darken(green, 40) },
+        60: { value: darken(green, 20) },
+        50: { value: green },
+        40: { value: lighten(green, 20) },
+        30: { value: lighten(green, 40) },
+        20: { value: lighten(green, 60) },
+        10: { value: lighten(green, 80) },
       },
       border: {
         default: { value: "{navds.color.gray.40.value}" },

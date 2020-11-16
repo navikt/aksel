@@ -1,0 +1,56 @@
+.navds-alert {
+  padding: 1.25rem 1rem;
+  border: var(--navds-border-default);
+  border-style: solid;
+  border-radius: 4px;
+  display: grid;
+  grid-auto-flow: column;
+  gap: 0.75rem;
+  justify-content: start;
+}
+
+.navds-alert > svg {
+  font-size: 1.5rem;
+}
+
+.navds-alert > span {
+  font-size: 1rem;
+  line-height: 1.375;
+  margin-top: 1px;
+}
+
+.navds-alert-error {
+  border-color: var(--navds-color-red-50);
+  background-color: var(--navds-color-red-10);
+}
+
+.navds-alert-error > svg {
+  color: var(--navds-color-red-50);
+}
+
+.navds-alert-warning {
+  border-color: var(--navds-color-orange-60);
+  background-color: var(--navds-color-orange-10);
+}
+
+.navds-alert-warning > svg {
+  color: var(--navds-color-orange-60);
+}
+
+.navds-alert-info {
+  border-color: var(--navds-color-lightblue-70);
+  background-color: var(--navds-color-lightblue-10);
+}
+
+.navds-alert-info > svg {
+  color: var(--navds-color-lightblue-70);
+}
+
+.navds-alert-success {
+  border-color: var(--navds-color-green-50);
+  background-color: var(--navds-color-green-10);
+}
+
+.navds-alert-success > svg {
+  color: var(--navds-color-green-50);
+}
