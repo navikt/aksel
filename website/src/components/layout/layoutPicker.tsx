@@ -28,10 +28,10 @@ const LayoutPicker = (props) => {
     if (!(componentLink && componentLink.componentPath)) return null;
     const compPath = componentLink.componentPath;
 
-    if (compPath.match(/(?<=packages)(.*)$/)) {
-      link = "packages" + compPath.match(/(?<=packages)(.*)$/)[1];
-    } else if (compPath.match(/(?<=website)(.*)$/)) {
-      link = "website" + compPath.match(/(?<=website)(.*)$/)[1];
+    if (compPath.match(/(packages.*)$/)) {
+      link = compPath.match(/(packages.*)$/)[1];
+    } else if (compPath.match(/(website.*)$/)) {
+      link = compPath.match(/(website.*)$/)[1];
     } else {
       return null;
     }
