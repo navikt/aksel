@@ -22,6 +22,7 @@
     "gatsby-plugin-offline": "^3.2.29",
     "gatsby-plugin-page-creator": "^2.3.28",
     "gatsby-plugin-react-helmet": "^3.3.12",
+    "gatsby-plugin-robots-txt": "^1.5.3",
     "gatsby-plugin-sharp": "^2.6.37",
     "gatsby-remark-autolink-headers": "^2.3.15",
     "gatsby-remark-prismjs": "^3.5.16",
