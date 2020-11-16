@@ -53,7 +53,7 @@ export const All = () => {
           <a
             key={variant}
             className={`navds-button navds-button--${variant}`}
-            href="the-link"
+            href="#0"
           >
             {variant}
           </a>
