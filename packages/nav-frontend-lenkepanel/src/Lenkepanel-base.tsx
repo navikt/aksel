@@ -43,7 +43,7 @@ class LenkepanelBase extends React.Component<LenkepanelBaseProps> {
     const {
       className,
       children,
-      linkCreator = (props) => <a {...props} />,
+      linkCreator = (props) => <a {...props}>{props.children}</a>,
       border,
       ...renderProps
     } = this.props;
@@ -84,7 +84,7 @@ class LenkepanelBase extends React.Component<LenkepanelBaseProps> {
 
 (LenkepanelBase as React.ComponentClass).defaultProps = {
   className: undefined,
-  linkCreator: (props) => <a {...props} />,
+  linkCreator: (props) => <a {...props}>{props.children}</a>,
   border: false,
 };
 
