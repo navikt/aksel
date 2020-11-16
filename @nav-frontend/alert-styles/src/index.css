@@ -1,5 +1,7 @@
 .navds-alert {
-  border-radius: 4px;
+  --alert-border-radius: 4px;
+
+  border-radius: var(--alert-border-radius);
   padding: 1.25rem 1rem;
   border: var(--navds-border-default);
   border-style: solid;
@@ -31,7 +33,7 @@
 }
 
 .navds-alert-error > svg {
-  color: var(--navds-color-red-50);
+  color: var(--navds-color-red-60);
 }
 
 .navds-alert-warning {
@@ -40,7 +42,7 @@
 }
 
 .navds-alert-warning > svg {
-  color: var(--navds-color-orange-60);
+  color: var(--navds-color-orange-40);
   --background-color: var(--navds-color-darkgray-50);
 }
 
@@ -59,5 +61,5 @@
 }
 
 .navds-alert-success > svg {
-  color: var(--navds-color-green-50);
+  color: var(--navds-color-green-70);
 }
