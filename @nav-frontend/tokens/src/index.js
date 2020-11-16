@@ -89,6 +89,17 @@ module.exports = {
         20: { value: lighten(green, 60) },
         10: { value: lighten(green, 80) },
       },
+      darkgray: {
+        90: { value: darken(darkgray, 80) },
+        80: { value: darken(darkgray, 60) },
+        70: { value: darken(darkgray, 40) },
+        60: { value: darken(darkgray, 20) },
+        50: { value: darkgray },
+        40: { value: lighten(darkgray, 20) },
+        30: { value: lighten(darkgray, 40) },
+        20: { value: lighten(darkgray, 60) },
+        10: { value: lighten(darkgray, 80) },
+      },
       border: {
         default: { value: "{navds.color.gray.40.value}" },
       },

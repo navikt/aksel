@@ -1,6 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { Error, Warning, Information, Success } from "@nav-frontend/icons";
+import {
+  ErrorFilled,
+  WarningFilled,
+  InformationFilled,
+  SuccessFilled,
+} from "@nav-frontend/icons";
 import "@nav-frontend/alert-styles";
 
 interface AlertProps {
@@ -12,13 +17,13 @@ interface AlertProps {
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <Error />;
+      return <ErrorFilled />;
     case "warning":
-      return <Warning />;
+      return <WarningFilled />;
     case "info":
-      return <Information />;
+      return <InformationFilled />;
     case "success":
-      return <Success />;
+      return <SuccessFilled />;
     default:
       return null;
   }

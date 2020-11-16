@@ -1,8 +1,8 @@
 .navds-alert {
+  border-radius: 4px;
   padding: 1.25rem 1rem;
   border: var(--navds-border-default);
   border-style: solid;
-  border-radius: 4px;
   display: grid;
   grid-auto-flow: column;
   gap: 0.75rem;
@@ -11,11 +11,17 @@
 
 .navds-alert > svg {
   font-size: 1.5rem;
+  --background-color: var(--navds-color-background-default);
+  background: radial-gradient(
+    circle,
+    var(--background-color) 50%,
+    0,
+    transparent
+  );
 }
 
 .navds-alert > span {
-  font-size: 1rem;
-  line-height: 1.375;
+  line-height: 22px;
   margin-top: 1px;
 }
 
@@ -35,6 +41,7 @@
 
 .navds-alert-warning > svg {
   color: var(--navds-color-orange-60);
+  --background-color: var(--navds-color-darkgray-50);
 }
 
 .navds-alert-info {
