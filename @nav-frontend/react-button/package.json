@@ -1,0 +1,41 @@
+{
+  "name": "@nav-frontend/react-button",
+  "version": "0.1.0-beta.1",
+  "description": "Button component implemented in React",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/src",
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc --watch -p tsconfig.json"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "@nav-frontend/button-styles": "0.1.0-beta.1"
+  },
+  "devDependencies": {
+    "@types/react": "15.0.23 || ^16.0.0"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
+  },
+  "defaultExport": "Button"
+}
