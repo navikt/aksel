@@ -3,7 +3,7 @@ import Popover from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
 export default {
-  title: "@nav-frontend/popover",
+  title: "@nav-frontend/react-popover",
   component: Popover,
 } as Meta;
 

@@ -1,5 +1,5 @@
 {
-  "name": "@nav-frontend/popover",
+  "name": "@nav-frontend/react-popover",
   "version": "0.1.0-beta.1",
   "description": "Popover component implemented in React",
   "author": "NAV Designsystem team",
