@@ -91,6 +91,7 @@ jobs:
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
+      - run: yarn fix:versions
       - run: yarn lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
