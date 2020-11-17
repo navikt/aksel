@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-spinner",
-  "version": "2.0.11",
+  "version": "2.0.12",
   "main": "lib/spinner.js",
   "types": "lib/spinner.d.ts",
   "license": "MIT",

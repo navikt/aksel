@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel-style",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "main": "src/lesmerpanel-style.less",
   "license": "MIT",
   "files": [
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.10",
-    "nav-frontend-paneler-style": "^0.3.30",
+    "nav-frontend-paneler-style": "^0.3.31",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {
