@@ -91,6 +91,7 @@ jobs:
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
+      - run: git pull
       - run: yarn fix:versions
       - run: git commit -a --amend -m "Lerna versionbump [ci skip]"
       - run: git push
