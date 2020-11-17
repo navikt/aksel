@@ -19,7 +19,7 @@
   "peerDependencies": {
     "nav-frontend-lenker": "^1.0.51",
     "nav-frontend-typografi": "^2.0.36",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "dependencies": {
@@ -28,7 +28,7 @@
   "devDependencies": {
     "nav-frontend-lenker": "^1.0.51",
     "nav-frontend-typografi": "^2.0.36",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "defaultExport": "Tekstomrade"

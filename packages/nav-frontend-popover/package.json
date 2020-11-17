@@ -20,7 +20,7 @@
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-popover-style": "^0.0.13",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0",
     "react-dom": "^15.4.2 || ^16.0.0"
   },
@@ -30,7 +30,7 @@
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-popover-style": "^0.0.13",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0",
     "react-dom": "^15.4.2 || ^16.0.0"
   },

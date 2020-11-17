@@ -21,7 +21,7 @@
     "nav-frontend-alertstriper-style": "^2.0.28",
     "nav-frontend-ikoner-assets": "^2.0.8",
     "nav-frontend-typografi": "^2.0.36",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {

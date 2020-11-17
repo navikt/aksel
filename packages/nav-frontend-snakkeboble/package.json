@@ -22,7 +22,7 @@
     "nav-frontend-paneler-style": "^0.3.30",
     "nav-frontend-snakkeboble-style": "^0.2.37",
     "nav-frontend-typografi": "^2.0.36",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {

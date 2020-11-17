@@ -20,14 +20,14 @@
     "classnames": "^2.2.5",
     "nav-frontend-core": "^5.0.10",
     "nav-frontend-grid-style": "^0.2.25",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-core": "^5.0.10",
     "nav-frontend-grid-style": "^0.2.25",
-    "prop-types": "15.7.2",
+    "prop-types": "15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   }
 }
