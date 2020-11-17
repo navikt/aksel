@@ -17,7 +17,7 @@
   "peerDependencies": {
     "nav-frontend-chevron-style": "^0.3.10",
     "nav-frontend-core": "^5.0.10",
-    "nav-frontend-paneler-style": "^0.3.30",
+    "nav-frontend-paneler-style": "^0.3.31",
     "nav-frontend-typografi-style": "^1.0.31"
   },
   "devDependencies": {

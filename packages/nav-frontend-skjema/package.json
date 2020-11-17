@@ -20,9 +20,9 @@
     "@navikt/fnrvalidator": "^1.1.0",
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-lenker": "^1.0.51",
-    "nav-frontend-skjema-style": "^2.0.21",
-    "nav-frontend-typografi": "^2.0.36",
+    "nav-frontend-lenker": "^1.0.52",
+    "nav-frontend-skjema-style": "^2.0.22",
+    "nav-frontend-typografi": "^2.0.37",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
