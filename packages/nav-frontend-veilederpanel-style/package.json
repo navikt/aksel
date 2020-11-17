@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-veilederpanel-style",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "main": "src/index.less",
   "license": "MIT",
   "files": [

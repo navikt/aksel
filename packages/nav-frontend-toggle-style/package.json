@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-toggle-style",
-  "version": "0.0.45",
+  "version": "0.0.46",
   "main": "src/toggle-style.less",
   "license": "MIT",
   "files": [
