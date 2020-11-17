@@ -18,12 +18,12 @@
   },
   "peerDependencies": {
     "lodash.throttle": "^4.1.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "15.7.2",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "lodash.throttle": "^4.1.1",
-    "prop-types": "^15.5.10",
+    "prop-types": "15.7.2",
     "react": "^15.4.2 || ^16.0.0"
   },
   "dependencies": {

@@ -18,14 +18,14 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-lukknapp-style": "^0.2.27",
-    "prop-types": "^15.5.10",
+    "nav-frontend-lukknapp-style": "^0.2.33",
+    "prop-types": "15.7.2",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-lukknapp-style": "^0.2.33",
-    "prop-types": "^15.5.10",
+    "prop-types": "15.7.2",
     "react": "^15.4.2 || ^16.0.0"
   },
   "defaultExport": "Lukknapp"
