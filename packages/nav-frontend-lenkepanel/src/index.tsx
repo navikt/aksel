@@ -60,7 +60,7 @@ class Lenkepanel extends React.PureComponent<LenkepanelProps> {
 (Lenkepanel as React.ComponentClass).defaultProps = {
   className: undefined,
   tittelProps: "undertittel",
-  linkCreator: (props) => <a {...props} />,
+  linkCreator: (props) => <a {...props}>{props.children}</a>,
 };
 
 export default Lenkepanel;
