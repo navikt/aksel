@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema",
-  "version": "3.0.34",
+  "version": "3.0.38",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -19,10 +19,10 @@
   "peerDependencies": {
     "@navikt/fnrvalidator": "^1.1.0",
     "classnames": "^2.2.5",
-    "nav-frontend-js-utils": "^1.0.13",
-    "nav-frontend-lenker": "^1.0.44",
-    "nav-frontend-skjema-style": "^2.0.15",
-    "nav-frontend-typografi": "^2.0.29",
+    "nav-frontend-js-utils": "^1.0.15",
+    "nav-frontend-lenker": "^1.0.53",
+    "nav-frontend-skjema-style": "^2.0.23",
+    "nav-frontend-typografi": "^2.0.37",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
@@ -30,9 +30,9 @@
     "@navikt/fnrvalidator": "^1.1.0",
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-lenker": "^1.0.51",
-    "nav-frontend-skjema-style": "^2.0.21",
-    "nav-frontend-typografi": "^2.0.36",
+    "nav-frontend-lenker": "^1.0.53",
+    "nav-frontend-skjema-style": "^2.0.23",
+    "nav-frontend-typografi": "^2.0.37",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   }

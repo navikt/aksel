@@ -1,6 +1,11 @@
 import * as React from "react";
 import * as classnames from "classnames";
-import { UnmountClosed, Collapse, CollapseProps } from "react-collapse";
+import {
+  UnmountClosed,
+  Collapse,
+  CollapseProps,
+  CollapseCallbackArgs,
+} from "react-collapse";
 import "nav-frontend-ekspanderbartpanel-style";
 import { guid, keyCodes } from "nav-frontend-js-utils";
 
@@ -69,12 +74,12 @@ class EkspanderbartpanelBase extends React.PureComponent<
     }
   }
 
-  onRestProxy = () => {
+  onRestProxy = (args: CollapseCallbackArgs) => {
     this.isCloseAnimation = false;
 
     const { collapseProps } = this.props;
     if (collapseProps && collapseProps.onRest) {
-      collapseProps.onRest();
+      collapseProps.onRest(args);
     }
   };
 

@@ -6,6 +6,7 @@ module.exports = {
     siteUrl: "https://design.nav.no/",
   },
   plugins: [
+    "gatsby-plugin-robots-txt",
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
