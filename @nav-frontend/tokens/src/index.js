@@ -45,33 +45,35 @@ module.exports = {
       ),
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
-        default: { value: "{navds.color.blue.50.value}" },
+        value: "{navds.color.blue.50.value}",
         hover: { value: lighten(baseColors.blue, 5) },
         active: { value: "{navds.color.deepblue.50.value}" },
       },
       danger: {
-        default: { value: "{navds.color.red.50.value}" },
+        value: "{navds.color.red.50.value}",
         hover: { value: lighten(baseColors.red, 5) },
         active: { value: "{navds.color.red.70.value}" },
       },
-      border: {
-        default: { value: "{navds.color.gray.40.value}" },
-        error: { value: "{navds.color.red.50.value}" },
-        warning: { value: "{navds.color.orange.60.value}" },
-        info: { value: "{navds.color.lightblue.70.value}" },
-        success: { value: "{navds.color.green.50.value}" },
+      error: {
+        border: { value: "{navds.color.red.50.value}" },
+        background: { value: "{navds.color.red.10.value}" },
       },
-      background: {
-        default: { value: "{navds.color.white.value}" },
-        error: { value: "{navds.color.red.10.value}" },
-        warning: { value: "{navds.color.orange.10.value}" },
-        info: { value: "{navds.color.lightblue.10.value}" },
-        success: { value: "{navds.color.green.10.value}" },
+      warning: {
+        border: { value: "{navds.color.orange.60.value}" },
+        background: { value: "{navds.color.orange.10.value}" },
       },
+      info: {
+        border: { value: "{navds.color.lightblue.70.value}" },
+        background: { value: "{navds.color.lightblue.10.value}" },
+      },
+      success: {
+        border: { value: "{navds.color.green.50.value}" },
+        background: { value: "{navds.color.green.10.value}" },
+      },
+      border: { value: "{navds.color.gray.40.value}" },
+      background: { value: "{navds.color.white.value}" },
     },
-    border: {
-      default: { value: "1px solid {navds.color.border.default.value}" },
-    },
+    border: { value: "1px solid {navds.color.border.value}" },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },

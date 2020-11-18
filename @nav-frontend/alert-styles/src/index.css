@@ -3,7 +3,7 @@
 
   border-radius: var(--alert-border-radius);
   padding: 1.25rem 1rem;
-  border: var(--navds-border-default);
+  border: var(--navds-border);
   border-style: solid;
   display: grid;
   grid-auto-flow: column;
@@ -13,7 +13,7 @@
 
 .navds-alert > svg {
   font-size: 1.5rem;
-  --background-color: var(--navds-color-background-default);
+  --background-color: var(--navds-color-background);
   background: radial-gradient(
     circle,
     var(--background-color) 50%,
@@ -28,8 +28,8 @@
 }
 
 .navds-alert-error {
-  border-color: var(--navds-color-border-error);
-  background-color: var(--navds-color-background-error);
+  border-color: var(--navds-color-error-border);
+  background-color: var(--navds-color-error-background);
 }
 
 .navds-alert-error > svg {
@@ -37,8 +37,8 @@
 }
 
 .navds-alert-warning {
-  border-color: var(--navds-color-border-warning);
-  background-color: var(--navds-color-background-warning);
+  border-color: var(--navds-color-warning-border);
+  background-color: var(--navds-color-warning-background);
 }
 
 .navds-alert-warning > svg {
@@ -47,8 +47,8 @@
 }
 
 .navds-alert-info {
-  border-color: var(--navds-color-border-info);
-  background-color: var(--navds-color-background-info);
+  border-color: var(--navds-color-info-border);
+  background-color: var(--navds-color-info-background);
 }
 
 .navds-alert-info > svg {
@@ -56,8 +56,8 @@
 }
 
 .navds-alert-success {
-  border-color: var(--navds-color-border-success);
-  background-color: var(--navds-color-background-success);
+  border-color: var(--navds-color-success-border);
+  background-color: var(--navds-color-success-background);
 }
 
 .navds-alert-success > svg {

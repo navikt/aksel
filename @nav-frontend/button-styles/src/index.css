@@ -4,13 +4,13 @@
 
   display: inline-block;
   cursor: pointer;
-  background-color: var(--navds-color-background-default);
-  color: var(--navds-color-action-default);
+  background-color: var(--navds-color-background);
+  color: var(--navds-color-action);
   font: inherit;
   margin: 0;
   line-height: 1;
   text-align: center;
-  border: var(--border-width) solid var(--navds-color-action-default);
+  border: var(--border-width) solid var(--navds-color-action);
   padding: calc(0.75em - var(--border-width)) calc(1.5em - var(--border-width));
   border-radius: var(--button-border-radius);
   text-decoration: none;
@@ -41,19 +41,19 @@
 .navds-button--secondary:focus,
 .navds-button--secondary:hover,
 .navds-button--secondary:active {
-  border-color: var(--navds-color-active-default);
+  border-color: var(--navds-color-active);
 }
 
 .navds-button--action {
   --border-width: 0px;
   color: var(--navds-color-white);
-  background-color: var(--navds-color-action-default);
+  background-color: var(--navds-color-action);
 }
 
 .navds-button--action:focus:not(:hover) {
   --border-width: 2px;
-  color: var(--navds-color-action-default);
-  background-color: var(--navds-color-background-default);
+  color: var(--navds-color-action);
+  background-color: var(--navds-color-background);
 }
 
 .navds-button--action:hover {
