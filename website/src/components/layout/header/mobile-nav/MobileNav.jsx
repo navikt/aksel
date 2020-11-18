@@ -59,7 +59,7 @@ const MobileNav = ({ ...props }) => {
     >
       <nav
         className="mobile-nav__drawer"
-        aria-label="main mobile"
+        aria-label="Hovedmeny mobil"
         ref={(node) => {
           bg.current = node;
         }}
@@ -76,15 +76,17 @@ const MobileNav = ({ ...props }) => {
         </Xknapp>
         <ul className="nav-list">
           {menu.map((route) => {
-            return (<li key={route.link}>
-              <Link
-                tabIndex={hidden ? -1 : 0}
-                activeClassName="active"
-                to={route.link ? route.link : "/"}
-              >
-                {route.title}
-              </Link>
-            </li>)
+            return (
+              <li key={route.link}>
+                <Link
+                  tabIndex={hidden ? -1 : 0}
+                  activeClassName="active"
+                  to={route.link ? route.link : "/"}
+                >
+                  {route.title}
+                </Link>
+              </li>
+            );
           })}
           <li>
             <a

@@ -38,7 +38,7 @@ class Radio extends React.Component<RadioProps> {
   render() {
     const { className, name, label, id, radioRef, ...other } = this.props;
     const inputId = id || guid();
-    // tslint:disable:react-a11y-role-has-required-aria-props
+    /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => (

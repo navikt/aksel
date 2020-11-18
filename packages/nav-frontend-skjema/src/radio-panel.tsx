@@ -37,6 +37,7 @@ export class RadioPanel extends React.Component<
       "inputPanel--disabled": disabled === true,
     });
 
+    /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => (

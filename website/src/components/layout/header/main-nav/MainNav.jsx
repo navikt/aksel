@@ -9,7 +9,7 @@ import "./styles.less";
 const MainNav = () => {
   const menu = useMainMenu();
   return (
-    <nav className="mainNav" aria-label="Hoved">
+    <nav className="mainNav" aria-label="Hovedmeny">
       <div className="mainNav__wrapper">
         <ul>
           {menu.map(({ link, title }, index) => (
