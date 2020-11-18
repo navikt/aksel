@@ -26,7 +26,7 @@ Dette repoet inneholder følgende:
 
 ## Bidra
 
-Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md).
+Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md)
 
 ## Lisens
 

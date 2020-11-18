@@ -45,12 +45,12 @@ module.exports = {
       ),
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
-        value: "{navds.color.blue.50.value}",
+        default: { value: "{navds.color.blue.50.value}" },
         hover: { value: lighten(baseColors.blue, 5) },
         active: { value: "{navds.color.deepblue.50.value}" },
       },
       danger: {
-        value: "{navds.color.red.50.value}",
+        default: { value: "{navds.color.red.50.value}" },
         hover: { value: lighten(baseColors.red, 5) },
         active: { value: "{navds.color.red.70.value}" },
       },

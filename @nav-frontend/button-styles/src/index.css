@@ -5,12 +5,12 @@
   display: inline-block;
   cursor: pointer;
   background-color: var(--navds-color-background);
-  color: var(--navds-color-action);
+  color: var(--navds-color-action-default);
   font: inherit;
   margin: 0;
   line-height: 1;
   text-align: center;
-  border: var(--border-width) solid var(--navds-color-action);
+  border: var(--border-width) solid var(--navds-color-action-default);
   padding: calc(0.75em - var(--border-width)) calc(1.5em - var(--border-width));
   border-radius: var(--button-border-radius);
   text-decoration: none;
@@ -47,12 +47,12 @@
 .navds-button--action {
   --border-width: 0px;
   color: var(--navds-color-white);
-  background-color: var(--navds-color-action);
+  background-color: var(--navds-color-action-default);
 }
 
 .navds-button--action:focus:not(:hover) {
   --border-width: 2px;
-  color: var(--navds-color-action);
+  color: var(--navds-color-action-default);
   background-color: var(--navds-color-background);
 }
 
@@ -75,7 +75,7 @@
   --border-width: 2px;
   border-color: var(--navds-color-danger-default);
   color: var(--navds-color-danger-default);
-  background-color: var(--navds-color-background-default);
+  background-color: var(--navds-color-background);
 }
 
 .navds-button--danger:hover {

@@ -9,8 +9,7 @@
 
   &__content {
     top: 4px;
-    padding: 1.3rem 2rem 0;
-    padding-bottom: 1.3rem;
+    padding: 0.5rem 2rem 0.5rem 2rem;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -24,14 +23,15 @@
       color: @navMorkGra;
 
       svg {
-        width: 5.6rem;
+        height: 5.625rem;
+        width: 5.625rem;
       }
 
       .header__title {
         padding-left: 1rem;
         padding-right: 1rem;
         margin: 0;
-        margin-top: 1.4rem;
+        margin-top: 2.2rem;
       }
 
       &:hover {
@@ -51,23 +51,24 @@
 
   @media (max-width: 1094px) {
     .header__content {
-      padding-bottom: 1.3rem;
+      padding-bottom: 0.5rem;
     }
   }
 
   @media (max-width: 550px) {
     .header__content {
-      padding: 1rem 1.5rem 1rem;
+      padding: 0.5rem 1.5rem 0.5rem 1rem;
 
-      svg {
+      .navLogo {
         width: 4.7rem;
+        height: 5.625rem;
       }
 
       .header__title {
         font-size: 1.375rem;
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        margin-top: 1.65rem;
+        margin-top: 2.2rem;
       }
     }
   }
@@ -75,17 +76,18 @@
   // Em since typografi component has auto adjustment at max-width 30em
   @media (max-width: 30em) {
     .header__content {
-      padding: 1rem 1.5rem 1rem;
+      padding: 0.5rem 1.5rem 0.5rem 1rem;
 
-      svg {
+      .navLogo {
         width: 3.75rem;
+        height: 5.625rem;
       }
 
       .header__title {
         font-size: 1.25rem;
         padding-left: 0.5rem;
         padding-right: 0.5rem;
-        margin-top: 1.55rem;
+        margin-top: 2.2rem;
       }
     }
   }
