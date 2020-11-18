@@ -50,6 +50,7 @@ export const NAVLogo = () => (
     xmlns="http://www.w3.org/2000/svg"
     className="navLogo"
     width="90"
+    height="57"
     viewBox="0 0 269 169"
   >
     <defs>
