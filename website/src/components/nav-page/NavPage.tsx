@@ -23,6 +23,7 @@ const NavPage = ({ location }) => {
         exit={{ x: 10, opacity: 0, transition: { duration: 0.2 } }}
         className="navPage"
         aria-labelledby="left-navigation-title"
+        aria-label="Meny"
       >
         {menu.map(({ link, title }, index) => (
           <LenkepanelBase
