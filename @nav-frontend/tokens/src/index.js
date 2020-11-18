@@ -43,9 +43,6 @@ module.exports = {
         }),
         {}
       ),
-      border: {
-        default: { value: "{navds.color.gray.40.value}" },
-      },
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
         default: { value: "{navds.color.blue.50.value}" },
@@ -57,8 +54,19 @@ module.exports = {
         hover: { value: lighten(baseColors.red, 5) },
         active: { value: "{navds.color.red.70.value}" },
       },
+      border: {
+        default: { value: "{navds.color.gray.40.value}" },
+        error: { value: "{navds.color.red.50.value}" },
+        warning: { value: "{navds.color.orange.60.value}" },
+        info: { value: "{navds.color.lightblue.70.value}" },
+        success: { value: "{navds.color.green.50.value}" },
+      },
       background: {
         default: { value: "{navds.color.white.value}" },
+        error: { value: "{navds.color.red.10.value}" },
+        warning: { value: "{navds.color.orange.10.value}" },
+        info: { value: "{navds.color.lightblue.10.value}" },
+        success: { value: "{navds.color.green.10.value}" },
       },
     },
     border: {

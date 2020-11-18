@@ -28,8 +28,8 @@
 }
 
 .navds-alert-error {
-  border-color: var(--navds-color-red-50);
-  background-color: var(--navds-color-red-10);
+  border-color: var(--navds-color-border-error);
+  background-color: var(--navds-color-background-error);
 }
 
 .navds-alert-error > svg {
@@ -37,8 +37,8 @@
 }
 
 .navds-alert-warning {
-  border-color: var(--navds-color-orange-60);
-  background-color: var(--navds-color-orange-10);
+  border-color: var(--navds-color-border-warning);
+  background-color: var(--navds-color-background-warning);
 }
 
 .navds-alert-warning > svg {
@@ -47,8 +47,8 @@
 }
 
 .navds-alert-info {
-  border-color: var(--navds-color-lightblue-70);
-  background-color: var(--navds-color-lightblue-10);
+  border-color: var(--navds-color-border-info);
+  background-color: var(--navds-color-background-info);
 }
 
 .navds-alert-info > svg {
@@ -56,8 +56,8 @@
 }
 
 .navds-alert-success {
-  border-color: var(--navds-color-green-50);
-  background-color: var(--navds-color-green-10);
+  border-color: var(--navds-color-border-success);
+  background-color: var(--navds-color-background-success);
 }
 
 .navds-alert-success > svg {
