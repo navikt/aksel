@@ -24,7 +24,7 @@ const Example = ({
       "example--greyBg": greyBg,
     })}
     role="region"
-    aria-label="Eksempel"
+    aria-label="Kode-eksempel"
     {...props}
   >
     {noScroll ? (

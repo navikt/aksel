@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classnames from "classnames";
 import { EtikettInfo } from "nav-frontend-etiketter";
 import { Ingress, Innholdstittel, Normaltekst } from "nav-frontend-typografi";
@@ -22,6 +22,13 @@ const isStyle = (path: string) => {
 const LayoutPicker = (props) => {
   const page = useContentPage(props.location);
   const componentLink = useComponentPath(props.location);
+
+  useEffect(() => {
+    const toc = document.getElementsByClassName("table-of-contents");
+    if (toc.length) {
+      toc[0].setAttribute("aria-label", "table of contents");
+    }
+  }, []);
 
   const linkToEdit = () => {
     let link = "";
