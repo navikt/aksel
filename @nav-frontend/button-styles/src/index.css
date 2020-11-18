@@ -41,7 +41,7 @@
 .navds-button--secondary:focus,
 .navds-button--secondary:hover,
 .navds-button--secondary:active {
-  border-color: var(--navds-color-active);
+  border-color: var(--navds-color-action-default);
 }
 
 .navds-button--action {
