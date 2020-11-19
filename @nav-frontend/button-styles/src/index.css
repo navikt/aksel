@@ -88,21 +88,21 @@
 
 .navds-button--action,
 .navds-button--danger {
-  --lift: 2px;
+  --elevation: 2px;
   box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.25),
-    0px var(--lift) 0px rgba(0, 0, 0, 0.25);
-  transform: translateY(calc(-1 * var(--lift)));
+    0px var(--elevation) 0px rgba(0, 0, 0, 0.25);
+  transform: translateY(calc(-1 * var(--elevation)));
   position: relative;
 }
 
 .navds-button--action:hover,
 .navds-button--danger:hover {
-  --lift: 3px;
+  --elevation: 3px;
 }
 
 .navds-button--action:active,
 .navds-button--danger:active {
-  --lift: 0;
+  --elevation: 0;
 }
 
 .navds-button--action:before,
@@ -112,8 +112,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: calc(-1 * var(--lift));
-  height: var(--lift);
+  bottom: calc(-1 * var(--elevation));
+  height: var(--elevation);
 }
 
 .navds-button:disabled {
