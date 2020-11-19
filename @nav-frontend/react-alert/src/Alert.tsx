@@ -12,6 +12,7 @@ interface AlertProps {
   variant: "error" | "warning" | "info" | "success";
   children: React.ReactNode;
   className?: string;
+  compact?: boolean;
 }
 
 const Icon = ({ variant }) => {
@@ -30,10 +31,12 @@ const Icon = ({ variant }) => {
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className }, ref) => (
+  ({ variant, children, className, compact = false }, ref) => (
     <div
       ref={ref}
-      className={cl(className, "navds-alert", `navds-alert-${variant}`)}
+      className={cl(className, "navds-alert", `navds-alert-${variant}`, {
+        "navds-compact": compact,
+      })}
     >
       <Icon variant={variant} />
       <span>{children}</span>

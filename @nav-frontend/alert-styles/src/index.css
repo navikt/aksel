@@ -11,6 +11,12 @@
   justify-content: start;
 }
 
+.navds-compact .navds-alert,
+.navds-compact.navds-alert {
+  --alert-border-radius: 0;
+  padding: 0.5rem 1rem;
+}
+
 .navds-alert > svg {
   font-size: 1.5rem;
   --background-color: var(--navds-color-background);

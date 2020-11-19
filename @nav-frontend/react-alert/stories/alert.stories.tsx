@@ -22,6 +22,14 @@ export const All = () => {
           {Array(8).fill(`${variant} content`).join(" ")}
         </Alert>
       ))}
+      <h2>Compact</h2>
+      <div className="navds-compact">
+        {variants.map((variant) => (
+          <Alert key={variant} variant={variant}>
+            {Array(8).fill(`${variant} content`).join(" ")}
+          </Alert>
+        ))}
+      </div>
     </>
   );
 };

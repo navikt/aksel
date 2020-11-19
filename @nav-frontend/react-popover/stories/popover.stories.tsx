@@ -58,3 +58,28 @@ export const All = () => {
     </div>
   );
 };
+
+export const Compact = () => {
+  return (
+    <div
+      className="navds-compact"
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "4rem 8rem 4rem 8rem",
+      }}
+    >
+      {placements.map((type) => (
+        <div
+          style={{
+            width: "20%",
+            height: "100px",
+            margin: "4rem",
+          }}
+        >
+          <Template type={type} placement={type} />
+        </div>
+      ))}
+    </div>
+  );
+};

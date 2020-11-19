@@ -31,6 +31,10 @@ interface PopoverProps {
    * User defined classname
    */
   className?: string;
+  /**
+   * Compact component
+   */
+  compact?: boolean;
 }
 
 const useEventLister = (event: string, callback) =>
@@ -50,6 +54,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       children,
       placement = "right",
       className,
+      compact = false,
       ...rest
     },
     ref
@@ -120,9 +125,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <div
         ref={mergedRef}
-        className={cl("navds-popover", className, {
-          popover__hidden: !open || !anchorEl,
-        })}
+        className={cl(
+          "navds-popover",
+          className,
+          { popover__hidden: !open || !anchorEl },
+          { "navds-compact": compact }
+        )}
         aria-live="polite"
         aria-hidden={!open || !anchorEl}
         tabIndex={-1}

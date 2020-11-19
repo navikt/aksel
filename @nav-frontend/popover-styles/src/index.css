@@ -2,6 +2,7 @@
   --popover-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
   --popover-border-radius: 2px;
   --popover-z-index: 100;
+  --popover__arrow-size: 1rem;
 
   z-index: var(--popover-z-index);
   background-color: var(--navds-color-background);
@@ -11,6 +12,12 @@
   padding: 1rem;
 }
 
+.navds-compact .navds-popover,
+.navds-compact.navds-popover {
+  padding: 0.5rem;
+  --popover__arrow-size: 0.67rem;
+}
+
 .navds-popover__hidden {
   display: none;
 }
@@ -18,10 +25,6 @@
 .navds-popover:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
-}
-
-.navds-popover__arrow {
-  --popover__arrow-size: 1rem;
 }
 
 .navds-popover__arrow:before {
