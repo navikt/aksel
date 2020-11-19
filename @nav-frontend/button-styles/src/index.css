@@ -4,7 +4,7 @@
 
   display: inline-block;
   cursor: pointer;
-  background-color: var(--navds-color-background-default);
+  background-color: var(--navds-color-background);
   color: var(--navds-color-action-default);
   font: inherit;
   margin: 0;
@@ -41,7 +41,7 @@
 .navds-button--secondary:focus,
 .navds-button--secondary:hover,
 .navds-button--secondary:active {
-  border-color: var(--navds-color-active-default);
+  border-color: var(--navds-color-action-default);
 }
 
 .navds-button--action {
@@ -53,7 +53,7 @@
 .navds-button--action:focus:not(:hover) {
   --border-width: 2px;
   color: var(--navds-color-action-default);
-  background-color: var(--navds-color-background-default);
+  background-color: var(--navds-color-background);
 }
 
 .navds-button--action:hover {
@@ -75,7 +75,7 @@
   --border-width: 2px;
   border-color: var(--navds-color-danger-default);
   color: var(--navds-color-danger-default);
-  background-color: var(--navds-color-background-default);
+  background-color: var(--navds-color-background);
 }
 
 .navds-button--danger:hover {
