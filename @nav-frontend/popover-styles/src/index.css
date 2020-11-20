@@ -12,8 +12,7 @@
   padding: 1rem;
 }
 
-.navds-compact .navds-popover,
-.navds-compact.navds-popover {
+.navds-popover--small {
   padding: 0.5rem;
   --popover__arrow-size: 0.67rem;
 }

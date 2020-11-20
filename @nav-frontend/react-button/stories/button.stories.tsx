@@ -6,9 +6,8 @@ export default {
   component: Button,
 };
 
-const Section = ({ className, children }) => (
+const Section = ({ children }) => (
   <div
-    className={className}
     style={{
       display: "grid",
       gap: 16,
@@ -60,16 +59,12 @@ export const All = () => {
           </a>
         ))}
       </Section>
-      <h2>Compact</h2>
-      <Section className="navds-compact">
+      <h2>Small</h2>
+      <Section>
         {variants.map((variant) => (
-          <a
-            key={variant}
-            className={`navds-button navds-button--${variant}`}
-            href="the-link"
-          >
+          <Button key={variant} variant={variant} size="small">
             {variant}
-          </a>
+          </Button>
         ))}
       </Section>
     </>
