@@ -7,24 +7,26 @@ const baseColors = {
   orange: "#FF9100",
   green: "#06893A",
   red: "#BA3A26",
-  darkgray: "#3e3832",
 };
+const white = "#ffffff";
+const darkgray = "#3e3832";
 
 const mix = (a, b, percentage) =>
   Color(a)
     .mix(Color(b), percentage / 100)
     .hex();
 
-const darken = (color, percentage) =>
-  mix(color, baseColors.darkgray, percentage);
-const lighten = (color, percentage) => mix(color, "white", percentage);
+const darken = (color, percentage) => mix(color, darkgray, percentage);
+const lighten = (color, percentage) => mix(color, white, percentage);
 
 module.exports = {
   navds: {
     color: {
-      white: { value: "#ffffff" },
+      white: { value: white },
+      darkgray: { value: darkgray },
       gray: {
         40: { value: "#b7b1a9" },
+        60: { value: "#78706a" },
       },
       ...Object.entries(baseColors).reduce(
         (colors, [name, color]) => ({
@@ -72,6 +74,13 @@ module.exports = {
       },
       border: { value: "{navds.color.gray.40.value}" },
       background: { value: "{navds.color.white.value}" },
+      text: {
+        primary: { value: "{navds.color.darkgray.value}" },
+        inverse: { value: "{navds.color.white.value}" },
+        disabled: { value: "{navds.color.gray.60.value}" },
+        link: { value: "{navds.color.blue.50.value}" },
+        error: { value: "{navds.color.red.50.value}" },
+      },
     },
     border: { value: "1px solid {navds.color.border.value}" },
     shadow: {

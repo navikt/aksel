@@ -48,7 +48,7 @@
 
 .navds-alert--warning > svg {
   color: var(--navds-color-orange-40);
-  --background-color: var(--navds-color-darkgray-50);
+  --background-color: var(--navds-color-darkgray);
 }
 
 .navds-alert--info {
