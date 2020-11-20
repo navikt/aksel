@@ -27,13 +27,13 @@
 
 .navds-button--primary:hover {
   --border-width: 0px;
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-hover);
 }
 
 .navds-button--primary:active {
   --border-width: 0px;
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-active);
 }
 
@@ -50,7 +50,7 @@
 
 .navds-button--action {
   --border-width: 0px;
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-default);
 }
 
@@ -65,13 +65,13 @@
 }
 
 .navds-button--action:active {
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-active);
 }
 
 .navds-button--danger {
   --border-width: 0px;
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-danger-default);
 }
 
@@ -123,7 +123,7 @@
 .navds-button:disabled {
   --border-width: 0px;
   background-color: var(--navds-color-disabled);
-  color: var(--navds-color-white);
+  color: var(--navds-color-text-inverse);
   box-shadow: none;
   transform: none;
   cursor: not-allowed;
