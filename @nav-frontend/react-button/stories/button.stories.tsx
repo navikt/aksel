@@ -59,6 +59,14 @@ export const All = () => {
           </a>
         ))}
       </Section>
+      <h2>Small</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} size="small">
+            {variant}
+          </Button>
+        ))}
+      </Section>
     </>
   );
 };

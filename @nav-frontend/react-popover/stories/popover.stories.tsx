@@ -7,7 +7,7 @@ export default {
   component: Popover,
 } as Meta;
 
-const Template = ({ type, placement, ...props }) => {
+const Template = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   return (
@@ -21,14 +21,9 @@ const Template = ({ type, placement, ...props }) => {
         }}
         ref={(el) => setAnchorEl(el)}
       >
-        {type}
+        {props.placement}
       </div>
-      <Popover
-        anchorEl={anchorEl}
-        onClose={() => {}}
-        placement={placement}
-        open
-      >
+      <Popover {...props} anchorEl={anchorEl} onClose={() => {}} open>
         Contents
       </Popover>
     </>
@@ -44,7 +39,7 @@ export const All = () => {
         margin: "4rem 8rem 4rem 8rem",
       }}
     >
-      {placements.map((type) => (
+      {placements.map((placement) => (
         <div
           style={{
             width: "20%",
@@ -52,7 +47,31 @@ export const All = () => {
             margin: "4rem",
           }}
         >
-          <Template type={type} placement={type} />
+          <Template placement={placement} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export const Small = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        margin: "4rem 8rem 4rem 8rem",
+      }}
+    >
+      {placements.map((placement) => (
+        <div
+          style={{
+            width: "20%",
+            height: "100px",
+            margin: "4rem",
+          }}
+        >
+          <Template placement={placement} size="small" />
         </div>
       ))}
     </div>

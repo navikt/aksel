@@ -31,6 +31,7 @@ interface PopoverProps {
    * User defined classname
    */
   className?: string;
+  size?: "medium" | "small";
 }
 
 const useEventLister = (event: string, callback) =>
@@ -50,6 +51,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       children,
       placement = "right",
       className,
+      size = "medium",
       ...rest
     },
     ref
@@ -120,7 +122,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <div
         ref={mergedRef}
-        className={cl("navds-popover", className, {
+        className={cl("navds-popover", `navds-popover--${size}`, className, {
           popover__hidden: !open || !anchorEl,
         })}
         aria-live="polite"

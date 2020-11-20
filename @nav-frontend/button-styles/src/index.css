@@ -16,6 +16,10 @@
   text-decoration: none;
 }
 
+.navds-button--small {
+  padding: calc(0.5em - var(--border-width)) calc(1em - var(--border-width));
+}
+
 .navds-button:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
