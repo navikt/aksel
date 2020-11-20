@@ -17,7 +17,7 @@
   --popover__arrow-size: 0.67rem;
 }
 
-.navds-popover__hidden {
+.navds-popover--hidden {
   display: none;
 }
 
