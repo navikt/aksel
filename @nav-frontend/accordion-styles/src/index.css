@@ -57,10 +57,13 @@
   border: var(--navds-panel-hover);
 }
 
-.navds-accordion--open .navds-accordion__content,
-.navds-accordion--open > .navds-accordion__button {
+.navds-accordion--open .navds-accordion__content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+.navds-accordion--open > .navds-accordion__button {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .navds-accordion:hover.navds-accordion--open,
 .navds-accordion:hover.navds-accordion--open .navds-accordion__button {
