@@ -1,52 +1,44 @@
 .ReactCollapse--collapse {
-  transition: height 400ms ease-out;
+  transition: height 200ms ease-out;
 }
 .navds-accordion {
   position: relative;
-  background: white;
+  background: var(--navds-color-background);
   border-radius: 0.25rem;
 }
-.navds-accordion:hover,
-.navds-accordion--hover {
-  box-shadow: #b7b1a9 0 2px 1px 0;
+.navds-accordion:hover {
+  box-shadow: var(--navds-shadow-hover);
 }
 .navds-accordion:focus,
-.navds-accordion--focus {
-  box-shadow: 0 0 0 3px #254b6d;
+.navds-accordion__button:focus {
+  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 .navds-accordion__button {
-  background-color: #fff;
+  background-color: var(--navds-color-background);
   display: block;
-  padding: 1rem 1rem 1rem 1rem;
-  border-radius: 4px;
+  padding: 1rem;
+  border-radius: 0.25rem;
   background: transparent;
   border: 0;
   text-align: left;
   width: 100%;
   margin-bottom: 0;
 }
-.navds-accordion__button .navds-accordion__tittel {
-  font-family: "Source Sans Pro", Arial, sans-serif;
+.navds-accordion__button .navds-accordion__title {
   font-size: 1.25rem;
   line-height: 1.5625rem;
   font-weight: 600;
-  color: #3e3832;
+  color: var(--navds-color-text-primary);
 }
-.navds-accordion__button:hover,
-.navds-accordion__button--hover {
+.navds-accordion__button:hover {
   cursor: pointer;
 }
-.navds-accordion__button:hover .navds-accordion__tittel,
-.navds-accordion__button--hover .navds-accordion__tittel {
+.navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
-  color: #0067c5;
+  color: var(--navds-color-text-link);
 }
-.navds-accordion__button:focus,
-.navds-accordion__button--focus {
-  box-shadow: 0 0 0 3px #254b6d;
-  outline: none;
-}
+
 .navds-accordion__flex-wrapper {
   display: flex;
   align-items: center;
@@ -56,119 +48,21 @@
   padding: 1rem;
   padding-top: 0.5rem;
 }
-.navds-accordion--closed .navds-accordion__indikator {
-  display: inline-block;
-  flex-shrink: 0;
-  height: 2px;
-  line-height: 2px;
-  width: 20px;
-  position: relative;
-  text-align: center;
-  transition: 200ms transform;
-  vertical-align: middle;
-}
-.navds-accordion--closed .navds-accordion__indikator::before,
-.navds-accordion--closed .navds-accordion__indikator::after {
-  transition: 200ms transform;
-  border-radius: 10px;
-}
-.navds-accordion--closed .navds-accordion__indikator::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  background: currentColor;
-}
-.navds-accordion--closed .navds-accordion__indikator::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 50%;
-  background: currentColor;
-}
-.navds-accordion--closed .navds-accordion__indikator::before {
-  transform: translateX(2px) rotate(45deg);
-}
-.navds-accordion--closed .navds-accordion__indikator::after {
-  transform: translateX(-2px) rotate(-45deg);
-}
-.navds-accordion--border {
-  border: 1px solid #78706a;
-}
-.navds-accordion--border:hover,
-.navds-accordion--border.panel-interaktiv-mixin--hover {
-  border: 1px solid #0067c5;
-}
+
+.navds-accordion--border,
 .navds-accordion--border.navds-accordion--open {
-  border: 1px solid #78706a;
+  border: var(--navds-border);
 }
+.navds-accordion--border:hover {
+  border: var(--navds-panel-hover);
+}
+
+.navds-accordion--open .navds-accordion__content,
 .navds-accordion--open > .navds-accordion__button {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.navds-accordion--open .navds-accordion__content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.navds-accordion--open > .navds-accordion__button .navds-accordion__indikator {
-  display: inline-block;
-  flex-shrink: 0;
-  height: 2px;
-  line-height: 2px;
-  width: 20px;
-  position: relative;
-  text-align: center;
-  transition: 200ms transform;
-  vertical-align: middle;
-}
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::before,
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::after {
-  transition: 200ms transform;
-  border-radius: 10px;
-}
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 50%;
-  background: currentColor;
-}
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 50%;
-  background: currentColor;
-}
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::before {
-  transform: translateX(2px) rotate(-45deg);
-}
-.navds-accordion--open
-  > .navds-accordion__button
-  .navds-accordion__indikator::after {
-  transform: translateX(-2px) rotate(45deg);
-}
-.navds-accordion:hover.navds-accordion--open {
-  box-shadow: none;
-}
+.navds-accordion:hover.navds-accordion--open,
 .navds-accordion:hover.navds-accordion--open .navds-accordion__button {
   box-shadow: none;
 }

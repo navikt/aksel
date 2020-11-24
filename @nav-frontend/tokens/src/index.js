@@ -81,10 +81,17 @@ module.exports = {
         link: { value: "{navds.color.blue.50.value}" },
         error: { value: "{navds.color.red.50.value}" },
       },
+      hover: { value: "{navds.color.gray.40.value}" },
     },
-    border: { value: "1px solid {navds.color.border.value}" },
+    border: {
+      value: "1px solid {navds.color.border.value}",
+    },
+    panel: {
+      hover: { value: "1px solid {navds.color.blue.50.value}" },
+    },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
+      hover: { value: "{navds.color.hover.value} 0 2px 1px 0" },
     },
   },
 };
