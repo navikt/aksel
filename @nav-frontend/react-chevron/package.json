@@ -1,7 +1,7 @@
 {
-  "name": "@nav-frontend/react-accordion",
+  "name": "@nav-frontend/react-chevron",
   "version": "0.1.0-beta.1",
-  "description": "Accordion component implemented in React",
+  "description": "Chevron component implemented in React",
   "author": "NAV Designsystem team",
   "keywords": [
     "react",
@@ -28,8 +28,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "@nav-frontend/accordion-styles": "0.1.0-beta.1",
-    "@nav-frontend/react-chevron": "0.1.0-beta.1"
+    "@nav-frontend/chevron-styles": "0.1.0-beta.1"
   },
   "devDependencies": {
     "@types/react": "^17.0.0"
@@ -38,5 +37,5 @@
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"
   },
-  "defaultExport": "Accordion"
+  "defaultExport": "Chevron"
 }

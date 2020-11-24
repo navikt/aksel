@@ -6,14 +6,16 @@ import {
   CollapseProps,
   CollapseCallbackArgs,
 } from "react-collapse";
+import Chevron from "@nav-frontend/react-chevron";
 import "@nav-frontend/accordion-styles";
-import { guid, keyCodes } from "nav-frontend-js-utils";
+import { guid } from "nav-frontend-js-utils";
 import { forwardRef, useEffect, useRef, useState } from "react";
 
 interface AccordionProps {
+  children: React.ReactNode;
+  title: React.ReactNode;
   open?: boolean;
   onClick?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
-  children: React.ReactNode;
   className?: string;
   renderContentWhenClosed?: boolean;
   collapseProps?: Partial<CollapseProps>;
@@ -25,6 +27,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
+      title,
       open = false,
       collapseProps,
       className,
@@ -77,8 +80,8 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           {...rest}
         >
           <div className="navds-accordion__flex-wrapper">
-            <span className="navds-accordion__title">Tittel</span>
-            <span className="navds-accordion__chevron" />
+            <span className="navds-accordion__title">{title}</span>
+            <Chevron variant={internalOpen ? "up" : "down"} />
           </div>
         </button>
         <div id={contentId.current} role="region" aria-labelledby={buttonId}>
