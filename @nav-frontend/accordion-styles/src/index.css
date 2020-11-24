@@ -1,70 +1,65 @@
+.ReactCollapse--collapse {
+  transition: height 200ms ease-out;
+}
+
 .navds-accordion {
-  --alert-border-radius: 4px;
+  background-color: white;
+  border-radius: 0.25rem;
 
-  border-radius: var(--alert-border-radius);
-  padding: 1.25rem 1rem;
-  border: var(--navds-border);
-  border-style: solid;
-  display: grid;
-  grid-auto-flow: column;
-  gap: 0.75rem;
-  justify-content: start;
+  position: relative;
+}
+.navds-accordion:hover {
+  box-shadow: var(--navds-color-border) 0 2px 1px 0;
+}
+.navds-accordion:focus {
+  box-shadow: 0 0 0 3px var(--navds-shadow-focus);
+  outline: none;
 }
 
-.navds-alert--small {
-  --alert-border-radius: 0;
-  padding: 0.5rem 1rem;
+.navds-accordion__content {
+  padding: 1rem;
+  padding-top: 0.5rem;
 }
 
-.navds-alert > svg {
-  font-size: 1.5rem;
-  --background-color: var(--navds-color-background);
-  background: radial-gradient(
-    circle,
-    var(--background-color) 50%,
-    0,
-    transparent
-  );
+.navds-accordion__button {
+  --border-radius: 4px;
+  background: transparent;
+  border: 0;
+  text-align: left;
+  width: 100%;
+  margin-bottom: 0;
+
+  background-color: var(--navds-color-white);
+  display: block;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: var(--border-radius);
 }
 
-.navds-alert > span {
-  line-height: 22px;
-  margin-top: 1px;
+.navds-accordion__button:hover {
+  cursor: pointer;
+}
+.navds-accordion__button:focus {
+  /* box-shadow: 0 0 0 3px @fokusFarge; */
+  outline: none;
 }
 
-.navds-alert--error {
-  border-color: var(--navds-color-error-border);
-  background-color: var(--navds-color-error-background);
+.navds-accordion__button__flex-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navds-accordion__button__title {
+}
+.navds-accordion__button__chevron {
 }
 
-.navds-alert--error > svg {
-  color: var(--navds-color-red-60);
+.navds-accordion--open {
 }
-
-.navds-alert--warning {
-  border-color: var(--navds-color-warning-border);
-  background-color: var(--navds-color-warning-background);
+.navds-accordion--closed {
 }
-
-.navds-alert--warning > svg {
-  color: var(--navds-color-orange-40);
-  --background-color: var(--navds-color-darkgray);
+.navds-accordion--border {
+  border: 1px solid var(--navds-color-border);
 }
-
-.navds-alert--info {
-  border-color: var(--navds-color-info-border);
-  background-color: var(--navds-color-info-background);
-}
-
-.navds-alert--info > svg {
-  color: var(--navds-color-lightblue-70);
-}
-
-.navds-alert--success {
-  border-color: var(--navds-color-success-border);
-  background-color: var(--navds-color-success-background);
-}
-
-.navds-alert--success > svg {
-  color: var(--navds-color-green-70);
+.navds-accordion--border:hover {
+  border: 1px solid var(--navds-color-action-hover);
 }
