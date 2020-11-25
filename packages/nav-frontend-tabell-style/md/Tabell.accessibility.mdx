@@ -1,5 +1,12 @@
 import Alertstripe from "nav-frontend-alertstriper";
 
+## Tabell header, scope
+
+I noen tilfeller kan det hende at elementer som eksempelvis `ID` er unikt for en rad.
+I disse tilfeller bør rad-elementene settes med `th` istedenfor `td`. Da ender man også gjerne opp med å ha en header både på
+column og rad. Bruk da data-attributtet `scope="col"` eller `scope="row"` for å gjøre det lettere for assisterende teknologi å skjønne hvilken context headeren skal ha.
+[WCAG om bruk av scope](https://www.w3.org/TR/WCAG20-TECHS/H63.html). Se kode-eksemplene for tabell for å se dette implementert.
+
 ## Responsivitet
 
 Det finnes [mange måter](https://medium.com/appnroll-publication/5-practical-solutions-to-make-responsive-data-tables-ff031c48b122) å gjøre tabeller responsive på, men flere av disse teknikkene innebærer ofte [store fallgruver](https://developer.paciellogroup.com/blog/2018/03/short-note-on-what-css-display-properties-do-to-table-semantics/) for tilgjengelighet.
