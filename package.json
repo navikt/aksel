@@ -33,11 +33,7 @@
       "pre-push": "yarn lint"
     }
   },
-  "prettier": {
-    "ignore": [
-      "utilities/_templates/**"
-    ]
-  },
+  "prettier": {},
   "eslintConfig": {
     "extends": [
       "react-app"
