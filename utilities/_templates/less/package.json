@@ -1,0 +1,21 @@
+{
+  "name": "<%name.original%>",
+  "version": "0.1.0-beta.1",
+  "description": "Css styling for @nav-frontend/react-<%name.original%> package",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "css"
+  ],
+  "main": "src/index.css",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  }
+}

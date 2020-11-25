@@ -20,13 +20,14 @@ function prompt(questions) {
 
 function create(config) {
   const source = `./_templates/${config.type}`;
-  const dest = `./packages/node_modules/${config.name}`;
+  const dest = `../@nav-frontend/${config.name}`;
   const sourceGlob = `${source}/**/*.*`;
   const destGlob = `${dest}/**/*.*`;
 
   const renderdata = extend({}, config);
   renderdata.name = { original: config.name };
-  renderdata.name.indexfile = config.name.replace("nav-frontend-", "");
+  renderdata.name.stripped = config.name.replace("react-", "");
+  renderdata.name.indexfile = config.name.replace("react-", "");
   renderdata.name.capitalize = utils.capitalize(config.name);
   renderdata.name.camelcase = utils.camelcase(config.name);
   renderdata.name.kebabcase = utils.kebabcase(config.name);
@@ -44,12 +45,12 @@ function create(config) {
 
   copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
     glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
-      files.forEach((file) => {
-        fs.renameSync(
-          file,
-          file.replace("src/index", `src/${renderdata.name.indexfile}`)
-        );
-      });
+      // files.forEach((file) => {
+      //   fs.renameSync(
+      //     file,
+      //     file.replace("src/index", `src/${renderdata.name.indexfile}`)
+      //   );
+      // });
 
       glob(`${dest}/**/md/**.*`, { dot: true }, (mdErr, mdFiles) => {
         mdFiles.forEach((file) => {
