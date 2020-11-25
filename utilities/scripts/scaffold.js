@@ -46,8 +46,8 @@ function create(config) {
     return render(globalDependencies[text]);
   };
 
-  copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
-    glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
+  copyfiles([sourceGlob, dest], { up: 3, all: true }, () => {
+    glob(`${dest}/**/default.*`, { dot: true }, (err, files) => {
       files.forEach((file) => {
         fs.renameSync(
           file,
