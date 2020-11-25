@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from 'classnames';
-import '@nav-fronted/<%name.stripped%>-styles';
+import '@nav-fronted/<%name.indexfileL%>-styles';
 
 export interface <%name.stripped%>Props {
     /**
@@ -12,7 +12,7 @@ export interface <%name.stripped%>Props {
 const <%name.stripped%> = forwardRef<HTMLDivElement, <%name.stripped%>Props>(
     ({ children, className }, ref) => {
         return (
-            <div ref={ref} className={cl('navds-<%name.indexfile%>', className)}>
+            <div ref={ref} className={cl('navds-<%name.indexfileL%>', className)}>
                 <h2>Hello from <%name.original%></h2>
                 {children}
             </div>

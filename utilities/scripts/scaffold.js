@@ -30,6 +30,7 @@ function create(config) {
   renderdata.name.indexfile = utils.camelcase(
     config.name.replace("react-", "")
   );
+  renderdata.name.indexfileL = config.name.replace("react-", "");
   renderdata.name.capitalize = utils.capitalize(config.name);
   renderdata.name.camelcase = utils.camelcase(config.name);
   renderdata.name.kebabcase = utils.kebabcase(config.name);
