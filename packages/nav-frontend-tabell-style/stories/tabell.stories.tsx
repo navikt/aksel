@@ -14,27 +14,27 @@ export const All = () => {
       <table className="tabell">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Fornavn</th>
-            <th>Etternavn</th>
-            <th>Rolle</th>
+            <th scope="col">ID</th>
+            <th scope="col">Fornavn</th>
+            <th scope="col">Etternavn</th>
+            <th scope="col">Rolle</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>1</td>
+            <th scope="row">1</th>
             <td>Jean-Luc</td>
             <td>Picard</td>
             <td>Kaptein</td>
           </tr>
           <tr>
-            <td>2</td>
+            <th scope="row">2</th>
             <td>William</td>
             <td>Riker</td>
             <td>Kommandør</td>
           </tr>
           <tr>
-            <td>3</td>
+            <th scope="row">3</th>
             <td>Geordi</td>
             <td>La Forge</td>
             <td>Sjefsingeniør</td>
