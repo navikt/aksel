@@ -51,7 +51,7 @@ function create(config) {
       //     file.replace("src/index", `src/${renderdata.name.indexfile}`)
       //   );
       // });
-
+      console.log("here");
       glob(`${dest}/**/md/**.*`, { dot: true }, (mdErr, mdFiles) => {
         mdFiles.forEach((file) => {
           // eslint-disable-next-line max-len
