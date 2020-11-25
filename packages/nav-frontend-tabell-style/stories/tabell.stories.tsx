@@ -1,5 +1,7 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
+
+import Lenke from "nav-frontend-lenker";
 import "../src/index.less";
 
 export default {
@@ -98,6 +100,49 @@ export const All = () => {
             <td>Geordi</td>
             <td>La Forge</td>
             <td>Sjefsingeniør</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className="tabell">
+        <thead>
+          <tr>
+            <th role="columnheader" aria-sort="none">
+              <Lenke href="#">ID</Lenke>
+            </th>
+            <th
+              role="columnheader"
+              aria-sort="descending"
+              className="tabell__th--sortert-desc"
+            >
+              <Lenke href="#">Fornavn</Lenke>
+            </th>
+            <th role="columnheader" aria-sort="none">
+              <Lenke href="#">Etternavn</Lenke>
+            </th>
+            <th role="columnheader" aria-sort="none">
+              <Lenke href="#">Rolle</Lenke>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>3</td>
+            <td className="tabell__td--sortert">Geordi</td>
+            <td>La Forge</td>
+            <td>Sjefsingeniør</td>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td className="tabell__td--sortert">Jean-Luc</td>
+            <td>Picard</td>
+            <td>Kaptein</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td className="tabell__td--sortert">William</td>
+            <td>Riker</td>
+            <td>Kommandør</td>
           </tr>
         </tbody>
       </table>
