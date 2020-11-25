@@ -9,10 +9,10 @@ export interface <%name.stripped%>Props {
     className?: string;
 }
 
-const Alert = forwardRef<HTMLDivElement, <%name.stripped%>Props>(
+const <%name.stripped%> = forwardRef<HTMLDivElement, <%name.stripped%>Props>(
     ({ children, className }, ref) => {
         return (
-            <div ref={ref} className={cl('navds-<%name.kebabcase%>', className)}>
+            <div ref={ref} className={cl('navds-<%name.indexfile%>', className)}>
                 <h2>Hello from <%name.original%></h2>
                 {children}
             </div>
