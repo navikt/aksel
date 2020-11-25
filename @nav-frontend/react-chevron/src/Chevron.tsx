@@ -10,7 +10,7 @@ export interface ChevronProps {
 
 const Chevron = forwardRef<HTMLElement, ChevronProps>(
   ({ className, variant = "right", ...rest }, ref) => (
-    <i
+    <span
       className={cls(className, `navds-chevron--${variant}`)}
       ref={ref}
       {...rest}
