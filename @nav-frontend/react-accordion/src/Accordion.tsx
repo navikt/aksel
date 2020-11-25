@@ -40,10 +40,10 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     ref
   ) => {
     const contentId = useRef(guid());
-    const [internalOpen, setOpenInternalOpen] = useState<boolean>(open);
+    const [internalOpen, setInternalOpen] = useState<boolean>(open);
 
     useEffect(() => {
-      setOpenInternalOpen(open);
+      setInternalOpen(open);
     }, [open]);
 
     const CollapseComponent = renderContentWhenClosed
@@ -54,8 +54,11 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       e.preventDefault();
       if (onClick) {
         onClick(e);
+      } else {
+        setInternalOpen(!internalOpen);
       }
     };
+
     const onRest = (args: CollapseCallbackArgs) => {
       if (collapseProps && collapseProps.onRest) {
         collapseProps.onRest(args);
