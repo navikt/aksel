@@ -1,5 +1,5 @@
 {
-  "name": "<%name.original%>",
+  "name": "@nav-frontend/<%name.original%>",
   "version": "0.1.0-beta.1",
   "description": "<%name.stripped%> component implemented in React",
   "author": "NAV Designsystem team",
