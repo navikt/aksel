@@ -20,7 +20,7 @@ function prompt(questions) {
 
 function create(config) {
   const source = `./_templates/${config.type}`;
-  const dest = `../@nav-frontend/${config.name}`;
+  const dest = `./@nav-frontend/${config.name}`;
   const sourceGlob = `${source}/**/*.*`;
   const destGlob = `${dest}/**/*.*`;
 
