@@ -51,7 +51,7 @@ function create(config) {
       files.forEach((file) => {
         fs.renameSync(
           file,
-          file.replace("src/index", `src/${renderdata.name.indexfile}`)
+          file.replace("src/default", `src/${renderdata.name.indexfile}`)
         );
       });
 
