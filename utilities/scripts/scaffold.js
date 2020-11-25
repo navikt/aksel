@@ -19,10 +19,13 @@ function prompt(questions) {
 }
 
 function create(config) {
-  const source = `./_templates/${config.type}`;
-  const dest = `./@nav-frontend/${config.name}`;
+  const source = `../_templates/${config.type}`;
+  const dest = `../../@nav-frontend/${config.name}`;
   const sourceGlob = `${source}/**/*.*`;
   const destGlob = `${dest}/**/*.*`;
+
+  console.log(source);
+  console.log(dest);
 
   const renderdata = extend({}, config);
   renderdata.name = { original: config.name };
