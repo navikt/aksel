@@ -30,15 +30,11 @@ function create(config) {
   renderdata.name.indexfile = utils.camelcase(
     config.name.replace("react-", "")
   );
-  renderdata.name.indexfileL = config.name.replace("react-", "");
+  renderdata.name.indexfileUncapped = config.name.replace("react-", "");
   renderdata.name.indexfileCss = config.name.replace("-styles", "");
   renderdata.name.capitalize = utils.capitalize(config.name);
   renderdata.name.camelcase = utils.camelcase(config.name);
   renderdata.name.kebabcase = utils.kebabcase(config.name);
-  renderdata.name.cssname = utils.kebabcase(config.name);
-  renderdata.name.cssname = renderdata.name.cssname.split("-");
-  renderdata.name.cssname.pop();
-  renderdata.name.cssname = renderdata.name.cssname.join("-");
 
   renderdata.resolve = () => (text, render) => {
     if (!globalDependencies[text]) {
