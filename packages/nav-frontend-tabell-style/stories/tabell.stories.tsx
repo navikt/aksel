@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import Lenke from "nav-frontend-lenker";
+import button from "nav-frontend-lenker";
 import "../src/index.less";
 
 export default {
@@ -113,36 +113,36 @@ export const All = () => {
         <thead>
           <tr>
             <th role="columnheader" aria-sort="none">
-              <Lenke href="#" role="button" onClick={(e) => e.preventDefault()}>
+              <button>
                 ID
                 <span />
-              </Lenke>
+              </button>
             </th>
             <th
               role="columnheader"
               aria-sort="descending"
               className="tabell__th--sortert-desc"
             >
-              <Lenke href="#" role="button" onClick={(e) => e.preventDefault()}>
+              <button>
                 Fornavn
                 <span />
-              </Lenke>
+              </button>
             </th>
             <th
               role="columnheader"
               aria-sort="none"
               className={`tabell__th--sortert-${sort}`}
             >
-              <Lenke href="#" role="button" onClick={(e) => handleClick(e)}>
+              <button onClick={(e) => handleClick(e)}>
                 Etternavn
                 <span />
-              </Lenke>
+              </button>
             </th>
             <th role="columnheader" aria-sort="none">
-              <Lenke href="#" role="button" onClick={(e) => e.preventDefault()}>
+              <button>
                 Rolle
                 <span />
-              </Lenke>
+              </button>
             </th>
           </tr>
         </thead>

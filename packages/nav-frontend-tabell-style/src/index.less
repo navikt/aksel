@@ -1,6 +1,7 @@
 @import (reference) "~nav-frontend-core/less/_variabler";
 @import (reference) "~nav-frontend-core/less/_mixins";
 @import (reference) "~nav-frontend-typografi-style/src/index";
+@import (reference) "~nav-frontend-knapper-style";
 
 .tabell {
   border-collapse: collapse;
@@ -80,13 +81,17 @@
 
     th,
     .tabell__th {
-      a,
-      .lenke {
-        margin: -1rem;
-        padding: 1rem;
-        position: relative;
+      button {
+        .knappbase-mixin(@font-family);
+        .knappflat-mixin(@navBla, @navBla, transparent);
+        text-transform: none;
+        padding: ~"calc(.475rem - 1px) 2.5rem calc(.525rem - 1px) 1rem";
+        margin: -1rem -1rem -1rem -1rem;
+        width: calc(100% + 2rem);
+        justify-content: start;
         display: flex;
         text-decoration: none;
+        border-radius: 0;
 
         span {
           margin-left: 0.6rem;
@@ -110,28 +115,10 @@
             transform: rotate(-135deg) scale(1.1);
           }
         }
-
-        &:hover {
-          border: 2px solid @navBla;
-          padding: calc(1rem - 2px);
-          z-index: 98;
-        }
-
-        &:focus {
-          border: 2px solid @navBla;
-          padding: calc(1rem - 2px);
-          box-shadow: 0 0 0 3px @fokusFarge;
-          outline: none;
-          color: @navBla;
-          text-decoration: none;
-          background-color: transparent;
-          z-index: 99;
-        }
       }
 
       &--sortert-asc {
-        a,
-        .lenke {
+        button {
           span {
             &::before {
               border-top: 2px solid @navBla;
@@ -147,8 +134,7 @@
       }
 
       &--sortert-desc {
-        a,
-        .lenke {
+        button {
           span {
             &::before {
               border-top: 2px solid @navGra20;
