@@ -82,64 +82,61 @@
     .tabell__th {
       a,
       .lenke {
-        display: block;
         margin: -1rem;
         padding: 1rem;
         position: relative;
-        padding-right: 2rem;
-
-        &::after,
-        &::before {
-          content: "";
-          display: block;
-          width: 0.45rem;
-          height: 0.45rem;
-          margin-top: -0.455rem;
-          position: absolute;
-          right: 1rem;
-          top: 50%;
-          border-top: 2px solid @navGra60;
-          border-left: 2px solid @navGra60;
-          transform: rotate(45deg) scale(1.5);
-        }
-
-        &::after {
-          margin-top: 0.125rem;
-          transform: rotate(-135deg) scale(1.5);
-        }
-
-        &:focus {
-          box-shadow: none;
-
+        display: flex;
+        text-decoration: none;
+        span {
+          margin-left: 0.6rem;
           &::after,
           &::before {
-            border-top: 2px solid white;
-            border-left: 2px solid white;
+            content: "";
+            display: block;
+            width: 0.45rem;
+            height: 0.45rem;
+            border-top: 2px solid @navBla;
+            border-left: 2px solid @navBla;
+            transform: rotate(45deg) scale(1.1);
+          }
+
+          &::before {
+            margin-top: 50%;
+          }
+          &::after {
+            transform: rotate(-135deg) scale(1.1);
           }
         }
 
         &:hover {
-          &:not(:focus) {
-            box-shadow: 0 0 0 3px @fokusFarge;
-            &::after,
-            &::before {
-              border-top: 2px solid @navBla;
-              border-left: 2px solid @navBla;
-            }
-          }
+          border: 2px solid @navBla;
+          padding: calc(1rem - 2px);
+          z-index: 98;
+        }
+        &:focus {
+          border: 2px solid @navBla;
+          padding: calc(1rem - 2px);
+          box-shadow: 0 0 0 3px @fokusFarge;
+          outline: none;
+          color: @navBla;
+          text-decoration: none;
+          background-color: transparent;
+          z-index: 99;
         }
       }
 
       &--sortert-asc {
         a,
         .lenke {
-          &::before {
-            margin-top: -0.1rem;
-            transform: rotate(45deg) scale(1.25);
-          }
-
-          &::after {
-            display: none;
+          span {
+            &::before {
+              border-top: 2px solid @navBla;
+              border-left: 2px solid @navBla;
+            }
+            &::after {
+              border-top: 2px solid @navGra20;
+              border-left: 2px solid @navGra20;
+            }
           }
         }
       }
@@ -147,40 +144,15 @@
       &--sortert-desc {
         a,
         .lenke {
-          &:hover:not(:focus) {
+          span {
             &::before {
               border-top: 2px solid @navGra20;
               border-left: 2px solid @navGra20;
             }
-          }
-          &:focus {
-            &::before {
-              border-top: 2px solid @navBlaDarken20;
-              border-left: 2px solid @navBlaDarken20;
+            &::after {
+              border-top: 2px solid @navBla;
+              border-left: 2px solid @navBla;
             }
-          }
-          &::before {
-            //transform: rotate(-135deg) scale(1.25);
-            border-top: 2px solid @navGra20;
-            border-left: 2px solid @navGra20;
-          }
-
-          &::after {
-            //display: none;
-            border-top: 2px solid @navMorkGra;
-            border-left: 2px solid @navMorkGra;
-          }
-        }
-      }
-
-      &--sortert-desc,
-      &--sortert-asc {
-        a,
-        .lenke {
-          &::before,
-          &::after {
-            // border-top: 2px solid @navMorkGra;
-            // border-left: 2px solid @navMorkGra;
           }
         }
       }
