@@ -87,8 +87,10 @@
         position: relative;
         display: flex;
         text-decoration: none;
+
         span {
           margin-left: 0.6rem;
+
           &::after,
           &::before {
             content: "";
@@ -103,6 +105,7 @@
           &::before {
             margin-top: 50%;
           }
+
           &::after {
             transform: rotate(-135deg) scale(1.1);
           }
@@ -113,6 +116,7 @@
           padding: calc(1rem - 2px);
           z-index: 98;
         }
+
         &:focus {
           border: 2px solid @navBla;
           padding: calc(1rem - 2px);
