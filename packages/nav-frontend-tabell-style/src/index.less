@@ -86,11 +86,12 @@
         .knappflat-mixin(@navBla, @navBla, transparent);
 
         text-transform: none;
-        padding: ~"calc(.475rem - 1px) 2.5rem calc(.525rem - 1px) 1rem";
-        margin: -1rem -1rem -1rem -1rem;
+        padding: calc(0.475rem - 1px) 2.5rem calc(0.525rem - 1px)
+          calc(1rem - 1px);
+        margin: -1rem;
         width: calc(100% + 2rem);
-        justify-content: start;
         display: flex;
+        justify-content: start;
         text-decoration: none;
         border-radius: 0;
 
