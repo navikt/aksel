@@ -243,7 +243,7 @@ Husk også å legge til en `<span/>` i lenken for å få rendret chevrons!
     <thead>
       <tr>
         <th role="columnheader" aria-sort="none">
-          <button aria-label="Sorter column">
+          <button title="Sorter ID stigende">
             ID
             <span />
           </button>
@@ -253,19 +253,19 @@ Husk også å legge til en `<span/>` i lenken for å få rendret chevrons!
           aria-sort="descending"
           className="tabell__th--sortert-desc"
         >
-          <button aria-label="Sorter column">
+          <button title="Sorter Fornavn synkende">
             Fornavn
             <span />
           </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <button aria-label="Sorter column">
+          <button title="Sorter Etternavn stigende">
             Etternavn
             <span />
           </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <button aria-label="Sorter column">
+          <button title="Sorter Rolle stigende">
             Rolle
             <span />
           </button>
@@ -297,33 +297,39 @@ Husk også å legge til en `<span/>` i lenken for å få rendret chevrons!
 
 ```jsx
 import "nav-frontend-tabell-style";
-
 <table className="tabell">
+  <caption role="alert" aria-live="polite">
+    Table consisting of x - not sorted
+  </caption>
   <thead>
     <tr>
       <th role="columnheader" aria-sort="none">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
-          ID <span />
-        </Lenke>
+        <button title="Sorter ID stigende">
+          ID
+          <span />
+        </button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
-          Fornavn <span />
-        </Lenke>
+        <button title="Sorter Fornavn synkende">
+          Fornavn
+          <span />
+        </button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
-          Etternavn <span />
-        </Lenke>
+        <button title="Sorter Etternavn stigende">
+          Etternavn
+          <span />
+        </button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
-          Rolle <span />
-        </Lenke>
+        <button title="Sorter Rolle stigende">
+          Rolle
+          <span />
+        </button>
       </th>
     </tr>
   </thead>
@@ -367,26 +373,26 @@ import "nav-frontend-tabell-style";
           <Checkbox label="Velg alle" />
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Fornavn stigende">
             Fornavn
             <span />
-          </Lenke>
+          </button>
         </th>
         <th
           role="columnheader"
           aria-sort="descending"
           className="tabell__th--sortert-desc"
         >
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Etternavn stigende">
             Etternavn
             <span />
-          </Lenke>
+          </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Rolle stigende">
             Rolle
             <span />
-          </Lenke>
+          </button>
         </th>
       </tr>
     </thead>
@@ -429,26 +435,26 @@ import "nav-frontend-tabell-style";
         <Checkbox label="Velg alle" />
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Fornavn stigende">
           Fornavn
           <span />
-        </Lenke>
+        </button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Etternavn stigende">
           Etternavn
           <span />
-        </Lenke>
+        </button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Rolle stigende">
           Rolle
           <span />
-        </Lenke>
+        </button>
       </th>
     </tr>
   </thead>
@@ -488,22 +494,22 @@ import "nav-frontend-tabell-style";
     <thead>
       <tr>
         <th id="header-fornavn">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Fornavn stigende">
             Fornavn
             <span />
-          </Lenke>
+          </button>
         </th>
         <th id="header-etternavn">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Etternavn stigende">
             Etternavn
             <span />
-          </Lenke>
+          </button>
         </th>
         <th id="header-rolle">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+          <button title="Sorter Rolle stigende">
             Rolle
             <span />
-          </Lenke>
+          </button>
         </th>
       </tr>
     </thead>
@@ -540,22 +546,22 @@ import "nav-frontend-tabell-style";
   <thead>
     <tr>
       <th id="header-fornavn">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Fornavn stigende">
           Fornavn
           <span />
-        </Lenke>
+        </button>
       </th>
       <th id="header-etternavn">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Etternavn stigende">
           Etternavn
           <span />
-        </Lenke>
+        </button>
       </th>
       <th id="header-rolle">
-        <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>
+        <button title="Sorter Rolle stigende">
           Rolle
           <span />
-        </Lenke>
+        </button>
       </th>
     </tr>
   </thead>
