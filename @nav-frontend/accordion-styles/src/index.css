@@ -18,7 +18,7 @@
 }
 
 [class^="navds-accordion__chevron--"] {
-  --chevron-rotation: 180deg;
+  --chevron-rotation: 0deg;
   width: 1.25em;
   height: 1.25em;
   transition: 100ms transform;

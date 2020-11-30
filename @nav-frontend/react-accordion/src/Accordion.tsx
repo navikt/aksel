@@ -7,7 +7,7 @@ import {
   CollapseCallbackArgs,
 } from "react-collapse";
 
-import { Expand, Collapse as CollapseIcon } from "@nav-frontend/icons";
+import { Expand } from "@nav-frontend/icons";
 import "@nav-frontend/accordion-styles";
 import { guid } from "nav-frontend-js-utils";
 import { forwardRef, useEffect, useRef, useState } from "react";
@@ -85,7 +85,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         >
           <div className="navds-accordion__flex-wrapper">
             <span className="navds-accordion__title">{title}</span>
-
             <Expand
               className={`navds-accordion__chevron--${
                 internalOpen ? "up" : "down"
