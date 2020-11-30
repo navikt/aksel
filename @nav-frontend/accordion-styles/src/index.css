@@ -6,14 +6,31 @@
   background: var(--navds-color-background);
   border-radius: 0.25rem;
 }
+
 .navds-accordion:hover {
   box-shadow: var(--navds-shadow-hover);
 }
+
 .navds-accordion:focus,
 .navds-accordion__button:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
+
+[class^="navds-accordion__chevron--"] {
+  --chevron-rotation: 180deg;
+  width: 1.25em;
+  height: 1.25em;
+  transition: 100ms transform;
+  transform: rotateX(var(--chevron-rotation));
+}
+.navds-accordion__chevron--up {
+  --chevron-rotation: 180deg;
+}
+.navds-accordion__chevron--down {
+  --chevron-rotation: 0deg;
+}
+
 .navds-accordion__button {
   background-color: var(--navds-color-background);
   display: block;

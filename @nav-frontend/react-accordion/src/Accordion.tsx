@@ -6,7 +6,8 @@ import {
   CollapseProps,
   CollapseCallbackArgs,
 } from "react-collapse";
-import Chevron from "@nav-frontend/react-chevron";
+
+import { Expand, Collapse as CollapseIcon } from "@nav-frontend/icons";
 import "@nav-frontend/accordion-styles";
 import { guid } from "nav-frontend-js-utils";
 import { forwardRef, useEffect, useRef, useState } from "react";
@@ -84,7 +85,12 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
         >
           <div className="navds-accordion__flex-wrapper">
             <span className="navds-accordion__title">{title}</span>
-            <Chevron variant={internalOpen ? "up" : "down"} />
+
+            <Expand
+              className={`navds-accordion__chevron--${
+                internalOpen ? "up" : "down"
+              }`}
+            />
           </div>
         </button>
         <div id={contentId.current} role="region" aria-labelledby={buttonId}>
