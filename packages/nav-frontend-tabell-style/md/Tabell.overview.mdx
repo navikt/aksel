@@ -242,49 +242,58 @@ Husk også å legge til en `<span/>` i lenken for å få rendret chevrons!
   <table className="tabell">
     <thead>
       <tr>
-        <th  role="columnheader" aria-sort="none">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>ID <span/></Lenke>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter column">
+            ID
+            <span />
+          </button>
         </th>
         <th
           role="columnheader"
           aria-sort="descending"
           className="tabell__th--sortert-desc"
         >
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>Fornavn <span/></Lenke>
+          <button aria-label="Sorter column">
+            Fornavn
+            <span />
+          </button>
         </th>
-        <th  role="columnheader" aria-sort="none">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>Etternavn <span/></Lenke>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter column">
+            Etternavn
+            <span />
+          </button>
         </th>
-        <th  role="columnheader" aria-sort="none">
-          <Lenke role="button" href="#" onClick={(e) => e.preventDefault()}>Rolle <span/></Lenke>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter column">
+            Rolle
+            <span />
+          </button>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th >3</th>
+        <th>3</th>
         <td className="tabell__td--sortert">Geordi</td>
         <td>La Forge</td>
         <td>Sjefsingeniør</td>
       </tr>
       <tr>
-        <th >1</th>
+        <th>1</th>
         <td className="tabell__td--sortert">Jean-Luc</td>
         <td>Picard</td>
         <td>Kaptein</td>
       </tr>
       <tr>
-        <th >2</th>
+        <th>2</th>
         <td className="tabell__td--sortert">William</td>
         <td>Riker</td>
         <td>Kommandør</td>
       </tr>
     </tbody>
-
-
   </table>
 </Example>
-
 
 ```jsx
 import "nav-frontend-tabell-style";
