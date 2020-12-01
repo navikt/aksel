@@ -4,7 +4,7 @@ const typeQuestion = {
   type: "list",
   name: "type",
   message: "Template: ",
-  choices: ["react", "less"],
+  choices: ["react", "css"],
   validate: (val) => (val ? true : "Must be defined"), // eslint-disable-line no-confusing-arrow
 };
 const nameQuestion = (type, filter, validate) => ({
@@ -14,7 +14,7 @@ const nameQuestion = (type, filter, validate) => ({
   when: (ans) => ans.type === type,
   filter: (val) => filter(val).toLowerCase(),
   validate: (val) => {
-    if (fs.existsSync(`./packages/node_modules/${val}`.toLowerCase())) {
+    if (fs.existsSync(`../@nav-frontend/${val}`.toLowerCase())) {
       return "Package already exists.";
     }
     return validate(val);
@@ -23,20 +23,18 @@ const nameQuestion = (type, filter, validate) => ({
 const reactNameQuestion = nameQuestion(
   "react",
   (val) => {
-    if (val.startsWith("nav-frontend-")) return val;
-    return `nav-frontend-${val}`;
+    if (val.startsWith("react-")) return val;
+    return `react-${val}`;
   },
-  (val) => (val !== "nav-frontend-" ? true : "Must be defined") // eslint-disable-line no-confusing-arrow
+  (val) => (val !== "react-" ? true : "Must be defined") // eslint-disable-line no-confusing-arrow
 );
-const lessNameQuestion = nameQuestion(
-  "less",
+const cssNameQuestion = nameQuestion(
+  "css",
   (val) => {
-    if (val.startsWith("nav-frontend-") && val.endsWith("-style")) return val;
-    if (val.startsWith("nav-frontend-")) return `${val}-style`;
-    if (val.endsWith("-style")) return `nav-frontend-${val}`;
-    return `nav-frontend-${val}-style`;
+    if (val.endsWith("-styles")) return val;
+    return `${val}-styles`;
   },
-  (val) => (val !== "nav-frontend--style" ? true : "Must be defined") // eslint-disable-line no-confusing-arrow
+  (val) => (val !== "-styles" ? true : "Must be defined") // eslint-disable-line no-confusing-arrow
 );
 const okQuestion = {
   type: "confirm",
@@ -44,9 +42,4 @@ const okQuestion = {
   message: "OK? ",
 };
 
-module.exports = [
-  typeQuestion,
-  reactNameQuestion,
-  lessNameQuestion,
-  okQuestion,
-];
+module.exports = [typeQuestion, reactNameQuestion, cssNameQuestion, okQuestion];

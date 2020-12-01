@@ -19,21 +19,22 @@ function prompt(questions) {
 }
 
 function create(config) {
-  const source = `./_templates/${config.type}`;
-  const dest = `./packages/node_modules/${config.name}`;
+  const source = `./utilities/_templates/${config.type}`;
+  const dest = `./@nav-frontend/${config.name}`;
   const sourceGlob = `${source}/**/*.*`;
   const destGlob = `${dest}/**/*.*`;
 
   const renderdata = extend({}, config);
   renderdata.name = { original: config.name };
-  renderdata.name.indexfile = config.name.replace("nav-frontend-", "");
+  renderdata.name.stripped = utils.camelcase(config.name.replace("react-", ""));
+  renderdata.name.indexfile = utils.camelcase(
+    config.name.replace("react-", "")
+  );
+  renderdata.name.indexfileUncapped = config.name.replace("react-", "");
+  renderdata.name.indexfileCss = config.name.replace("-styles", "");
   renderdata.name.capitalize = utils.capitalize(config.name);
   renderdata.name.camelcase = utils.camelcase(config.name);
   renderdata.name.kebabcase = utils.kebabcase(config.name);
-  renderdata.name.cssname = utils.kebabcase(config.name);
-  renderdata.name.cssname = renderdata.name.cssname.split("-");
-  renderdata.name.cssname.pop();
-  renderdata.name.cssname = renderdata.name.cssname.join("-");
 
   renderdata.resolve = () => (text, render) => {
     if (!globalDependencies[text]) {
@@ -42,12 +43,12 @@ function create(config) {
     return render(globalDependencies[text]);
   };
 
-  copyfiles([sourceGlob, dest], { up: 2, all: true }, () => {
-    glob(`${dest}/**/index.*`, { dot: true }, (err, files) => {
+  copyfiles([sourceGlob, dest], { up: 3, all: true }, () => {
+    glob(`${dest}/**/default.*`, { dot: true }, (err, files) => {
       files.forEach((file) => {
         fs.renameSync(
           file,
-          file.replace("src/index", `src/${renderdata.name.indexfile}`)
+          file.replace("src/default", `src/${renderdata.name.indexfile}`)
         );
       });
 
