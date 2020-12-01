@@ -3,18 +3,28 @@ import cl from "classnames";
 import "@nav-fronted/tag-styles";
 
 export interface TagProps {
+  variant: "focus" | "warning" | "info" | "success";
+  children: React.ReactNode;
   /**
    * User defined classname
    */
   className?: string;
+  size?: "medium" | "small";
 }
 
 const Tag = forwardRef<HTMLDivElement, TagProps>(
-  ({ children, className }, ref) => {
+  ({ children, className, variant, size = "medium" }, ref) => {
     return (
-      <div ref={ref} className={cl("navds-tag", className)}>
-        <h2>Hello from react-tag</h2>
-        {children}
+      <div
+        ref={ref}
+        className={cl(
+          "navds-tag",
+          className,
+          `navds-tag--${variant}`,
+          `navds-tag--${size}`
+        )}
+      >
+        <span>{children}</span>
       </div>
     );
   }
