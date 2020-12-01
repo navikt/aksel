@@ -7,7 +7,7 @@ export interface TagProps {
   /**
    * Changes background-color and border-color
    */
-  variant: "focus" | "warning" | "info" | "success";
+  variant: "warning" | "error" | "info" | "success";
   /**
    * User defined classname
    */

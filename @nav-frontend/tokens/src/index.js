@@ -72,10 +72,6 @@ module.exports = {
         border: { value: "{navds.color.green.50.value}" },
         background: { value: "{navds.color.green.10.value}" },
       },
-      focus: {
-        border: { value: "{navds.color.orange.60.value}" },
-        background: { value: "{navds.color.orange.20.value}" },
-      },
       border: { value: "{navds.color.gray.40.value}" },
       background: { value: "{navds.color.white.value}" },
       text: {
@@ -84,6 +80,24 @@ module.exports = {
         disabled: { value: "{navds.color.gray.60.value}" },
         link: { value: "{navds.color.blue.50.value}" },
         error: { value: "{navds.color.red.50.value}" },
+      },
+      tag: {
+        error: {
+          border: { value: "{navds.color.red.50.value}" },
+          background: { value: "{navds.color.red.20.value}" },
+        },
+        warning: {
+          border: { value: "{navds.color.orange.60.value}" },
+          background: { value: "{navds.color.orange.20.value}" },
+        },
+        info: {
+          border: { value: "{navds.color.lightblue.70.value}" },
+          background: { value: "{navds.color.lightblue.20.value}" },
+        },
+        success: {
+          border: { value: "{navds.color.green.50.value}" },
+          background: { value: "{navds.color.green.20.value}" },
+        },
       },
     },
     border: { value: "1px solid {navds.color.border.value}" },
