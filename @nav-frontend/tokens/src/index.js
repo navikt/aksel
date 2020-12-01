@@ -72,7 +72,7 @@ module.exports = {
         border: { value: "{navds.color.green.50.value}" },
         background: { value: "{navds.color.green.10.value}" },
       },
-      fovus: {
+      focus: {
         border: { value: "{navds.color.orange.60.value}" },
         background: { value: "{navds.color.orange.20.value}" },
       },

@@ -8,8 +8,8 @@
   border-color: var(--navds-tag-border-color);
 }
 .navds-tag--warning {
-  --navds-tag-bg: var(--navds-color-warning-background);
-  --navds-tag-border-color: var(--navds-color-warning-border);
+  --navds-tag-bg: var(--navds-color-error-background);
+  --navds-tag-border-color: var(--navds-color-error-border);
 }
 .navds-tag--success {
   --navds-tag-bg: var(--navds-color-success-background);
