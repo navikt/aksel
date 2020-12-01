@@ -148,6 +148,25 @@ const Palette = () => {
           />
         </div>
       </section>
+      <section className="section">
+        <Systemtittel id="hovedfarger">Bakgrunnsfarger</Systemtittel>
+        <Normaltekst>
+          Nav sine bakgrunnsfarger (Fortelle om bruk her?)
+        </Normaltekst>
+
+        <div className="color-group color-group--dark">
+          <ColorSample
+            name="@navBakgrunn"
+            color={vars.navBakgrunn}
+            onClick={(color) => setActiveColor(color)}
+          />
+          <ColorSample
+            name="@navGraBakgrunn"
+            color={vars.navGraBakgrunn}
+            onClick={(color) => setActiveColor(color)}
+          />
+        </div>
+      </section>
 
       <section className="section">
         <Systemtittel id="systemfarger">Systemfarger</Systemtittel>
