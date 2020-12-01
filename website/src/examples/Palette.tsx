@@ -149,7 +149,7 @@ const Palette = () => {
         </div>
       </section>
       <section className="section">
-        <Systemtittel id="hovedfarger">Bakgrunnsfarger</Systemtittel>
+        <Systemtittel id="bakgrunnsFarger">Bakgrunnsfarger</Systemtittel>
         <Normaltekst>
           Nav sine bakgrunnsfarger (Fortelle om bruk her?)
         </Normaltekst>
