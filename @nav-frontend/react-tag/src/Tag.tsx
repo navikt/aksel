@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@nav-fronted/tag-styles";
+import "@nav-frontend/tag-styles";
 
 export interface TagProps {
   variant: "focus" | "warning" | "info" | "success";
