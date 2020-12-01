@@ -3,12 +3,19 @@ import cl from "classnames";
 import "@nav-frontend/tag-styles";
 
 export interface TagProps {
-  variant: "focus" | "warning" | "info" | "success";
   children: React.ReactNode;
+  /**
+   * Changes background-color and border-color
+   */
+  variant: "focus" | "warning" | "info" | "success";
   /**
    * User defined classname
    */
   className?: string;
+  /**
+   * Internal padding
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 
