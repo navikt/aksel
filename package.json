@@ -20,7 +20,7 @@
     "lint:less": "npx stylelint --syntax less **/*.less",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
-    "scaffold": "node utilities/scripts/scaffold.js"
+    "scaffold-new-component": "node utilities/scripts/scaffold.js"
   },
   "workspaces": [
     "website",
