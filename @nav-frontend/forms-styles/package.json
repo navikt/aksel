@@ -1,7 +1,7 @@
 {
-  "name": "@nav-frontend/formgroup-styles",
+  "name": "@nav-frontend/forms-styles",
   "version": "0.1.0-beta.1",
-  "description": "Css styling for @nav-frontend/react-formgroup package",
+  "description": "Css styling for @nav-frontend/react-forms package",
   "author": "NAV Designsystem team",
   "keywords": [
     "css"

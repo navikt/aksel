@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@nav-frontend/formgroup-styles";
+import "@nav-frontend/forms-styles";
 
 export interface FormgroupProps {
   /**

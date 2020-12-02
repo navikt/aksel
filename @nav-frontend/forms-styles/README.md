@@ -1,4 +1,4 @@
-# css-module: formgroup-styles
+# css-module: forms-styles
 
 <!-- AUTO-GENERATED-CONTENT:START (INSTALL) -->
 

@@ -104,5 +104,8 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },
+    error: {
+      margin: { top: { value: "0.5rem" } },
+    },
   },
 };
