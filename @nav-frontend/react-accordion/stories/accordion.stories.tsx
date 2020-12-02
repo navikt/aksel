@@ -32,13 +32,12 @@ export const All = () => {
         esse aliqua amet magna pariatur incididunt ea excepteur. Aliquip magna
         ut ipsum veniam eu laborum id commodo.
       </Accordion>
-
-      <h1>Accordion no Border</h1>
+      <h1>Open</h1>
       <Accordion
         title="tittel"
         collapseProps={{ onRest }}
-        open={open}
-        onClick={(e) => setOpen(!open)}
+        open={true}
+        onClick={(e) => null}
       >
         Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
         Culpa fugiat irure deserunt irure enim adipisicing qui id. Pariatur
