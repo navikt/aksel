@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Accordion from "../src/index";
+import "./bordertest.css";
 
 export default {
   title: "@nav-frontend/react-accordion",
@@ -39,7 +40,7 @@ export const All = () => {
         collapseProps={{ onRest }}
         open={open}
         onClick={(e) => setOpen(!open)}
-        border={false}
+        className="border--none"
       >
         Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
         Culpa fugiat irure deserunt irure enim adipisicing qui id. Pariatur

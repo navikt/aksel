@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cls from "classnames";
 import {
   UnmountClosed,
@@ -10,7 +10,6 @@ import {
 import { Expand } from "@nav-frontend/icons";
 import "@nav-frontend/accordion-styles";
 import { guid } from "nav-frontend-js-utils";
-import { forwardRef, useEffect, useRef, useState } from "react";
 
 interface AccordionProps {
   children: React.ReactNode;
@@ -21,7 +20,6 @@ interface AccordionProps {
   renderContentWhenClosed?: boolean;
   collapseProps?: Partial<CollapseProps>;
   buttonId?: string;
-  border?: boolean;
 }
 
 const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
@@ -35,7 +33,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       renderContentWhenClosed = false,
       onClick,
       buttonId = guid(),
-      border = true,
       ...rest
     },
     ref
@@ -70,7 +67,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       <div
         ref={ref}
         className={cls("navds-accordion", className, {
-          "navds-accordion--border": border,
           "navds-accordion--open": internalOpen,
           "navds-accordion--closed": !internalOpen,
         })}
