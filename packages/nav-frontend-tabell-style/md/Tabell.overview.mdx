@@ -223,7 +223,7 @@ import "nav-frontend-tabell-style";
 
 ## Sorterbar tabell
 
-Lenker som er barn av `th`-elementene blir stylet til å være helt utfyllende og `span` som barn av lenker får to små chevrons som peker opp og ned for å indikere at kolonnen kan sorteres i vilkårlig rekkefølge. Bruk klassene `tabell__th--sortert-desc` og `tabell__th--sortert-asc` for at lenkene skal indikere hvilken retning kolonnen er sortert. Bruk klassen `tabell__td--sortert` på cellene i den sorterte kolonnen for å gi disse en svak grå bakgrunn.
+Knapper som er barn av `th`-elementene blir stylet til å være helt utfyllende får et :after-element med to små chevrons som peker opp og ned for å indikere at kolonnen kan sorteres i vilkårlig rekkefølge. Bruk klassene `tabell__th--sortert-desc` og `tabell__th--sortert-asc` for at lenkene skal indikere hvilken retning kolonnen er sortert. Bruk klassen `tabell__td--sortert` på cellene i den sorterte kolonnen for å gi disse en svak grå bakgrunn.
 
 <Alertstripe type="advarsel">
   Husk at du må legge til både <InlineCode>aria-sort</InlineCode> og{" "}
@@ -231,12 +231,7 @@ Lenker som er barn av `th`-elementene blir stylet til å være helt utfyllende o
   sorteres. Bruk <InlineCode>none</InlineCode>/
   <InlineCode>descending</InlineCode>/<InlineCode>ascending</InlineCode> som
   verdier til <InlineCode>aria-sort</InlineCode> alt ettersom.
-
-
-Husk også å legge til en `<span/>` i lenken for å få rendret chevrons!
-
 </Alertstripe>
-
 
 <Example>
   <table className="tabell">
