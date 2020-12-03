@@ -12,7 +12,8 @@ export const All = () => {
   const [sort, setSort] = useState("asc");
   const handleClick = (e) => {
     e.preventDefault();
-    sort === "asc" ? setSort("desc") : setSort("asc");
+    const states = ["desc", "asc", "none"];
+    setSort((sort) => states[(states.indexOf(sort) + 1) % states.length]);
   };
   return (
     <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "8rem" }}>
@@ -113,36 +114,24 @@ export const All = () => {
         <thead>
           <tr>
             <th role="columnheader" aria-sort="none">
-              <button>
-                ID
-                <span />
-              </button>
+              <button>ID</button>
             </th>
             <th
               role="columnheader"
               aria-sort="descending"
               className="tabell__th--sortert-desc"
             >
-              <button>
-                Fornavn
-                <span />
-              </button>
+              <button>Fornavn</button>
             </th>
             <th
               role="columnheader"
               aria-sort="none"
               className={`tabell__th--sortert-${sort}`}
             >
-              <button onClick={(e) => handleClick(e)}>
-                Etternavn
-                <span />
-              </button>
+              <button onClick={(e) => handleClick(e)}>Etternavn</button>
             </th>
             <th role="columnheader" aria-sort="none">
-              <button>
-                Rolle
-                <span />
-              </button>
+              <button>Rolle</button>
             </th>
           </tr>
         </thead>
