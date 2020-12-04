@@ -18,7 +18,7 @@ interface ExpansionpanelProps {
   onClick?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
   className?: string;
   renderContentWhenClosed?: boolean;
-  collapseProps?: Partial<CollapseProps>;
+  onRest?: (args: CollapseCallbackArgs) => void;
 }
 
 const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
@@ -27,7 +27,7 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
       children,
       title,
       open = false,
-      collapseProps,
+      onRest = (args) => null,
       className,
       renderContentWhenClosed = false,
       onClick,
@@ -52,12 +52,6 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
         onClick(e);
       } else {
         setInternalOpen(!internalOpen);
-      }
-    };
-
-    const onRest = (args: CollapseCallbackArgs) => {
-      if (collapseProps && collapseProps.onRest) {
-        collapseProps.onRest(args);
       }
     };
 
@@ -92,7 +86,6 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
           aria-labelledby={buttonId.current}
         >
           <CollapseComponent
-            {...collapseProps}
             isOpened={internalOpen}
             onRest={(args: CollapseCallbackArgs) => onRest(args)}
           >
