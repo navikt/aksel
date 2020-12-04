@@ -3,6 +3,7 @@ import cl from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import "@nav-frontend/forms-styles";
 
+// TODO: Move context out of this file. where?
 export type FormGroupErrorContextProps = {
   error?: React.ReactNode | boolean;
   errorId?: string;
