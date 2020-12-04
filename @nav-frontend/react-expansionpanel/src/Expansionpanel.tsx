@@ -1,11 +1,6 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cls from "classnames";
-import {
-  UnmountClosed,
-  Collapse,
-  CollapseProps,
-  CollapseCallbackArgs,
-} from "react-collapse";
+import { UnmountClosed, Collapse, CollapseCallbackArgs } from "react-collapse";
 
 import { Expand } from "@nav-frontend/icons";
 import "@nav-frontend/expansionpanel-styles";

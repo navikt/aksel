@@ -9,15 +9,11 @@ export default {
 export const All = () => {
   const [open, setOpen] = useState(false);
 
-  const onRest = (e) => {
-    console.log("storyonrest");
-  };
   return (
     <>
       <h1>Expansionpanel</h1>
       <Expansionpanel
         title="tittel"
-        collapseProps={{ onRest }}
         open={open}
         onClick={(e) => setOpen(!open)}
       >
@@ -33,12 +29,7 @@ export const All = () => {
         ut ipsum veniam eu laborum id commodo.
       </Expansionpanel>
       <h1>Open</h1>
-      <Expansionpanel
-        title="tittel"
-        collapseProps={{ onRest }}
-        open={true}
-        onClick={(e) => null}
-      >
+      <Expansionpanel title="tittel" open={true} onClick={(e) => null}>
         Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
         Culpa fugiat irure deserunt irure enim adipisicing qui id. Pariatur
         commodo dolore consequat nulla cupidatat commodo nisi sunt. Ad proident
