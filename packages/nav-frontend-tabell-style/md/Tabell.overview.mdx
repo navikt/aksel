@@ -21,19 +21,19 @@ Legg til stilarket fra pakken og sett CSS-klassen `tabell` på HTML-tabellen din
     </thead>
     <tbody>
       <tr>
-        <th>1</th>
+        <td>1</td>
         <td>Jean-Luc</td>
         <td>Picard</td>
         <td>Kaptein</td>
       </tr>
       <tr>
-        <th>2</th>
+        <td>2</td>
         <td>William</td>
         <td>Riker</td>
         <td>Kommandør</td>
       </tr>
       <tr>
-        <th>3</th>
+        <td>3</td>
         <td>Geordi</td>
         <td>La Forge</td>
         <td>Sjefsingeniør</td>
@@ -56,19 +56,19 @@ import "nav-frontend-tabell-style";
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>Jean-Luc</td>
       <td>Picard</td>
       <td>Kaptein</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>2</td>
       <td>William</td>
       <td>Riker</td>
       <td>Kommandør</td>
     </tr>
     <tr>
-      <th>3</th>
+      <td>3</td>
       <td>Geordi</td>
       <td>La Forge</td>
       <td>Sjefsingeniør</td>
@@ -93,19 +93,19 @@ Bruk modifikatoren `tabell--stripet` for å gjøre annenhver tabellrad grå.
     </thead>
     <tbody>
       <tr>
-        <th>1</th>
+        <td>1</td>
         <td>Jean-Luc</td>
         <td>Picard</td>
         <td>Kaptein</td>
       </tr>
       <tr>
-        <th>2</th>
+        <td>2</td>
         <td>William</td>
         <td>Riker</td>
         <td>Kommandør</td>
       </tr>
       <tr>
-        <th>3</th>
+        <td>3</td>
         <td>Geordi</td>
         <td>La Forge</td>
         <td>Sjefsingeniør</td>
@@ -128,19 +128,19 @@ import "nav-frontend-tabell-style";
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>Jean-Luc</td>
       <td>Picard</td>
       <td>Kaptein</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>2</td>
       <td>William</td>
       <td>Riker</td>
       <td>Kommandør</td>
     </tr>
     <tr>
-      <th>3</th>
+      <td>3</td>
       <td>Geordi</td>
       <td>La Forge</td>
       <td>Sjefsingeniør</td>
@@ -165,19 +165,19 @@ Bruk modifikatoren `tabell--border` for å gi alle cellene en tydelig border på
     </thead>
     <tbody>
       <tr>
-        <th>1</th>
+        <td>1</td>
         <td>Jean-Luc</td>
         <td>Picard</td>
         <td>Kaptein</td>
       </tr>
       <tr>
-        <th>2</th>
+        <td>2</td>
         <td>William</td>
         <td>Riker</td>
         <td>Kommandør</td>
       </tr>
       <tr>
-        <th>3</th>
+        <td>3</td>
         <td>Geordi</td>
         <td>La Forge</td>
         <td>Sjefsingeniør</td>
@@ -200,19 +200,19 @@ import "nav-frontend-tabell-style";
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td>Jean-Luc</td>
       <td>Picard</td>
       <td>Kaptein</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>2</td>
       <td>William</td>
       <td>Riker</td>
       <td>Kommandør</td>
     </tr>
     <tr>
-      <th>3</th>
+      <td>3</td>
       <td>Geordi</td>
       <td>La Forge</td>
       <td>Sjefsingeniør</td>
@@ -240,7 +240,8 @@ Knapper som er barn av `th`-elementene blir stylet til å være helt utfyllende 
         <th role="columnheader" aria-sort="none">
           <button aria-label="Sorter ID stigende">
             ID
-            <span />
+
+
           </button>
         </th>
         <th
@@ -250,45 +251,47 @@ Knapper som er barn av `th`-elementene blir stylet til å være helt utfyllende 
         >
           <button aria-label="Sorter Fornavn synkende">
             Fornavn
-            <span />
+
           </button>
         </th>
         <th role="columnheader" aria-sort="none">
           <button aria-label="Sorter Etternavn stigende">
             Etternavn
-            <span />
+
           </button>
         </th>
         <th role="columnheader" aria-sort="none">
           <button aria-label="Sorter Rolle stigende">
             Rolle
-            <span />
+
           </button>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th>3</th>
+        <td>3</td>
         <td className="tabell__td--sortert">Geordi</td>
         <td>La Forge</td>
         <td>Sjefsingeniør</td>
       </tr>
       <tr>
-        <th>1</th>
+        <td>1</td>
         <td className="tabell__td--sortert">Jean-Luc</td>
         <td>Picard</td>
         <td>Kaptein</td>
       </tr>
       <tr>
-        <th>2</th>
+        <td>2</td>
         <td className="tabell__td--sortert">William</td>
         <td>Riker</td>
         <td>Kommandør</td>
       </tr>
     </tbody>
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
@@ -300,50 +303,38 @@ import "nav-frontend-tabell-style";
   <thead>
     <tr>
       <th role="columnheader" aria-sort="none">
-        <button aria-label="Sorter ID stigende">
-          ID
-          <span />
-        </button>
+        <button aria-label="Sorter ID stigende">ID</button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <button aria-label="Sorter Fornavn synkende">
-          Fornavn
-          <span />
-        </button>
+        <button aria-label="Sorter Fornavn synkende">Fornavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <button aria-label="Sorter Etternavn stigende">
-          Etternavn
-          <span />
-        </button>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <button aria-label="Sorter Rolle stigende">
-          Rolle
-          <span />
-        </button>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>3</th>
+      <td>3</td>
       <td className="tabell__td--sortert">Geordi</td>
       <td>La Forge</td>
       <td>Sjefsingeniør</td>
     </tr>
     <tr>
-      <th>1</th>
+      <td>1</td>
       <td className="tabell__td--sortert">Jean-Luc</td>
       <td>Picard</td>
       <td>Kaptein</td>
     </tr>
     <tr>
-      <th>2</th>
+      <td>2</td>
       <td className="tabell__td--sortert">William</td>
       <td>Riker</td>
       <td>Kommandør</td>
@@ -371,7 +362,8 @@ import "nav-frontend-tabell-style";
         <th role="columnheader" aria-sort="none">
           <button aria-label="Sorter Fornavn stigende">
             Fornavn
-            <span />
+
+
           </button>
         </th>
         <th
@@ -381,13 +373,13 @@ import "nav-frontend-tabell-style";
         >
           <button aria-label="Sorter Etternavn stigende">
             Etternavn
-            <span />
+
           </button>
         </th>
         <th role="columnheader" aria-sort="none">
           <button aria-label="Sorter Rolle stigende">
             Rolle
-            <span />
+
           </button>
         </th>
       </tr>
@@ -418,8 +410,10 @@ import "nav-frontend-tabell-style";
         <td>Kommandør</td>
       </tr>
     </tbody>
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
@@ -431,26 +425,17 @@ import "nav-frontend-tabell-style";
         <Checkbox label="Velg alle" />
       </th>
       <th role="columnheader" aria-sort="none">
-        <button aria-label="Sorter Fornavn stigende">
-          Fornavn
-          <span />
-        </button>
+        <button aria-label="Sorter Fornavn stigende">Fornavn</button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <button aria-label="Sorter Etternavn stigende">
-          Etternavn
-          <span />
-        </button>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <button aria-label="Sorter Rolle stigende">
-          Rolle
-          <span />
-        </button>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
@@ -492,19 +477,20 @@ import "nav-frontend-tabell-style";
         <th id="header-fornavn">
           <button aria-label="Sorter Fornavn stigende">
             Fornavn
-            <span />
+
+
           </button>
         </th>
         <th id="header-etternavn">
           <button aria-label="Sorter Etternavn stigende">
             Etternavn
-            <span />
+
           </button>
         </th>
         <th id="header-rolle">
           <button aria-label="Sorter Rolle stigende">
             Rolle
-            <span />
+
           </button>
         </th>
       </tr>
@@ -532,8 +518,10 @@ import "nav-frontend-tabell-style";
         <td>Kommandør</td>
       </tr>
     </tbody>
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
@@ -542,22 +530,13 @@ import "nav-frontend-tabell-style";
   <thead>
     <tr>
       <th id="header-fornavn">
-        <button aria-label="Sorter Fornavn stigende">
-          Fornavn
-          <span />
-        </button>
+        <button aria-label="Sorter Fornavn stigende">Fornavn</button>
       </th>
       <th id="header-etternavn">
-        <button aria-label="Sorter Etternavn stigende">
-          Etternavn
-          <span />
-        </button>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th id="header-rolle">
-        <button aria-label="Sorter Rolle stigende">
-          Rolle
-          <span />
-        </button>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
@@ -601,19 +580,19 @@ import "nav-frontend-tabell-style";
     </thead>
     <tbody>
       <tr>
-        <th>Kaptein</th>
+        <td>Kaptein</td>
         <td>1</td>
         <td>Jean-Luc</td>
         <td>Picard</td>
       </tr>
       <tr>
-        <th>Kommandør</th>
+        <td>Kommandør</td>
         <td>2</td>
         <td>William</td>
         <td>Riker</td>
       </tr>
       <tr>
-        <th>Sjefsingeniør</th>
+        <td>Sjefsingeniør</td>
         <td>3</td>
         <td>Geordi</td>
         <td>La Forge</td>
@@ -644,19 +623,19 @@ import "nav-frontend-tabell-style";
   </thead>
   <tbody>
     <tr>
-      <th>Kaptein</th>
+      <td>Kaptein</td>
       <td>1</td>
       <td>Jean-Luc</td>
       <td>Picard</td>
     </tr>
     <tr>
-      <th>Kommandør</th>
+      <td>Kommandør</td>
       <td>2</td>
       <td>William</td>
       <td>Riker</td>
     </tr>
     <tr>
-      <th>Sjefsingeniør</th>
+      <td>Sjefsingeniør</td>
       <td>3</td>
       <td>Geordi</td>
       <td>La Forge</td>
