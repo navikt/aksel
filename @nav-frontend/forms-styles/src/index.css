@@ -1,2 +1,23 @@
 .navds-forms {
 }
+
+.navds-forms__formgroup {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.navds-forms__legend {
+  /* add ingress mixin here */
+  margin-bottom: 1rem;
+}
+.navds-forms__description {
+  /* add typo normal here */
+  margin-bottom: 1rem;
+}
+
+.navds-forms__errormsg {
+  margin-top: 0.5rem;
+}
+.navds-forms__errormsg {
+  margin: 0;
+}
