@@ -8,10 +8,10 @@ import {
 } from "react-collapse";
 
 import { Expand } from "@nav-frontend/icons";
-import "@nav-frontend/accordion-styles";
+import "@nav-frontend/expansionpanel-styles";
 import { guid } from "nav-frontend-js-utils";
 
-interface AccordionProps {
+interface ExpansionpanelProps {
   children: React.ReactNode;
   title: React.ReactNode;
   open?: boolean;
@@ -19,10 +19,9 @@ interface AccordionProps {
   className?: string;
   renderContentWhenClosed?: boolean;
   collapseProps?: Partial<CollapseProps>;
-  buttonId?: string;
 }
 
-const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
   (
     {
       children,
@@ -32,12 +31,12 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       className,
       renderContentWhenClosed = false,
       onClick,
-      buttonId = guid(),
       ...rest
     },
     ref
   ) => {
     const contentId = useRef(guid());
+    const buttonId = useRef(guid());
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
 
     useEffect(() => {
@@ -49,7 +48,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       : UnmountClosed;
 
     const handleClick = (e) => {
-      e.preventDefault();
       if (onClick) {
         onClick(e);
       } else {
@@ -66,35 +64,39 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     return (
       <div
         ref={ref}
-        className={cls("navds-accordion", className, {
-          "navds-accordion--open": internalOpen,
-          "navds-accordion--closed": !internalOpen,
+        className={cls("navds-expansionpanel", className, {
+          "navds-expansionpanel--open": internalOpen,
+          "navds-expansionpanel--closed": !internalOpen,
         })}
       >
         <button
-          id={buttonId}
-          className="navds-accordion__button"
+          id={buttonId.current}
+          className="navds-expansionpanel__button"
           aria-expanded={open}
           aria-controls={contentId.current}
           onClick={(e) => handleClick(e)}
           {...rest}
         >
-          <div className="navds-accordion__flex-wrapper">
-            <span className="navds-accordion__title">{title}</span>
+          <div className="navds-expansionpanel__flex-wrapper">
+            <span className="navds-expansionpanel__title">{title}</span>
             <Expand
-              className={`navds-accordion__chevron--${
+              className={`navds-expansionpanel__chevron--${
                 internalOpen ? "up" : "down"
               }`}
             />
           </div>
         </button>
-        <div id={contentId.current} role="region" aria-labelledby={buttonId}>
+        <div
+          id={contentId.current}
+          role="region"
+          aria-labelledby={buttonId.current}
+        >
           <CollapseComponent
             {...collapseProps}
             isOpened={internalOpen}
             onRest={(args: CollapseCallbackArgs) => onRest(args)}
           >
-            <div className="navds-accordion__content">{children}</div>
+            <div className="navds-expansionpanel__content">{children}</div>
           </CollapseComponent>
         </div>
       </div>
@@ -102,4 +104,4 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   }
 );
 
-export default Accordion;
+export default Expansionpanel;

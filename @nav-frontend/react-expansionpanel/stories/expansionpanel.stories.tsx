@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Accordion from "../src/index";
+import Expansionpanel from "../src/index";
 
 export default {
-  title: "@nav-frontend/react-accordion",
-  component: Accordion,
+  title: "@nav-frontend/react-expansionpanel",
+  component: Expansionpanel,
 };
 
 export const All = () => {
@@ -14,8 +14,8 @@ export const All = () => {
   };
   return (
     <>
-      <h1>Accordion</h1>
-      <Accordion
+      <h1>Expansionpanel</h1>
+      <Expansionpanel
         title="tittel"
         collapseProps={{ onRest }}
         open={open}
@@ -31,9 +31,9 @@ export const All = () => {
         occaecat reprehenderit qui anim dolore. Ea voluptate dolore proident
         esse aliqua amet magna pariatur incididunt ea excepteur. Aliquip magna
         ut ipsum veniam eu laborum id commodo.
-      </Accordion>
+      </Expansionpanel>
       <h1>Open</h1>
-      <Accordion
+      <Expansionpanel
         title="tittel"
         collapseProps={{ onRest }}
         open={true}
@@ -49,7 +49,7 @@ export const All = () => {
         occaecat reprehenderit qui anim dolore. Ea voluptate dolore proident
         esse aliqua amet magna pariatur incididunt ea excepteur. Aliquip magna
         ut ipsum veniam eu laborum id commodo.
-      </Accordion>
+      </Expansionpanel>
     </>
   );
 };
