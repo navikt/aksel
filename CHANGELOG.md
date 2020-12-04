@@ -16,3 +16,4 @@ Hvordan ta i bruk oppdateringen:
 - Oppdater `nav-frontend-tabell-styles` til v1.0.0
 - Legge til pakken `nav-frontend-knapper-style` som nå er en dependency.
 - Endre all bruk av `<Lenke>` i sortert tabell til `<button>`. Kan være lurt å lese de nye punktene her [tabell-UU](https://design.nav.no/components/tabell/accessibility) også da.
+- Sikre at prosjektet ditt kan håndtere SVG, da chevrons nå er svg og ikke css. Create-react-app gjør dette selv. Om du bruker webpack er dette den mest vanlige løsningen: [npmjs @svgr/webpack](https://www.npmjs.com/package/@svgr/webpack). Om du bruker VUE er dette en potensiell løsning [npmjs vue-svg-loader](https://www.npmjs.com/package/vue-svg-loader)
