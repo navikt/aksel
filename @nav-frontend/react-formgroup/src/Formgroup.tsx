@@ -3,6 +3,15 @@ import cl from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import "@nav-frontend/forms-styles";
 
+export type FormGroupErrorContextProps = {
+  error?: React.ReactNode | boolean;
+  errorId?: string;
+};
+
+export const FormGroupErrorContext = React.createContext<
+  Partial<FormGroupErrorContextProps>
+>({});
+
 export interface FormgroupProps {
   /**
    * Form elements
@@ -21,22 +30,41 @@ export interface FormgroupProps {
    */
   description?: string;
   /**
-   * String or Element to render an errormessage
+   * Boolean or Element to rdisplay error
    */
-  error?: React.ReactNode;
+  error?: React.ReactNode | boolean;
   /**
    * Custom id for Errormessage for more control
    * @defaul guid()
    */
   errorId?: string;
+  /**
+   * Propegates errors to children of not false
+   * @default true
+   */
+  propagateError?: boolean;
 }
 
 const Formgroup = forwardRef<HTMLFieldSetElement, FormgroupProps>(
   (
-    { children, className, title, description, error, errorId = guid() },
+    {
+      children,
+      className,
+      title,
+      description,
+      error,
+      errorId = guid(),
+      propagateError = true,
+    },
     ref
   ) => {
     const descriptionId = description ? guid() : undefined;
+
+    const childrenWithContext = (
+      <FormGroupErrorContext.Provider value={{ error, errorId }}>
+        {children}
+      </FormGroupErrorContext.Provider>
+    );
 
     return (
       <fieldset
@@ -52,8 +80,8 @@ const Formgroup = forwardRef<HTMLFieldSetElement, FormgroupProps>(
             {description}
           </div>
         )}
-        {children}
-        {error && (
+        {propagateError ? childrenWithContext : children}
+        {error && typeof error !== "boolean" && (
           <div aria-live="polite" className="navds-forms__errormsg">
             {error}
           </div>
