@@ -4,14 +4,30 @@ import { guid } from "nav-frontend-js-utils";
 import "@nav-frontend/forms-styles";
 
 export interface FormgroupProps {
+  /**
+   * Form elements
+   */
   children: React.ReactNode;
   /**
    * User defined classname
    */
   className?: string;
+  /**
+   * Legend rendered at beginning of fieldset
+   */
   title?: string;
+  /**
+   * Description rendered under lenged
+   */
   description?: string;
+  /**
+   * String or Element to render an errormessage
+   */
   error?: React.ReactNode;
+  /**
+   * Custom id for Errormessage for more control
+   * @defaul guid()
+   */
   errorId?: string;
 }
 
