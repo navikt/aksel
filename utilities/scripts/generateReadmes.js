@@ -47,7 +47,7 @@ glob("./packages/**/package.json", { dot: true }, (err, files) => {
   pkgs.forEach((pkg) => {
     const pkgName = pkg.name;
     const config = createConfig(pkgName, edges);
-    const MD = path.join(__dirname, "..", "packages", pkgName, "README.md");
+    const MD = path.join(__dirname, "../..", "packages", pkgName, "README.md");
     // eslint-disable-next-line no-console
     markdownMagic(MD, config, (error) => error && console.log("err", error));
   });
