@@ -1,42 +1,39 @@
 .ReactCollapse--collapse {
   transition: height 200ms ease-out;
 }
-.navds-accordion {
+.navds-expansionpanel {
   position: relative;
   background: var(--navds-color-background);
   border-radius: 0.25rem;
+  border: var(--navds-border);
 }
 
-.navds-accordion:hover {
+.navds-expansionpanel:hover {
   box-shadow: var(--navds-shadow-hover);
   border: var(--navds-panel-hover);
 }
 
-.navds-accordion {
-  border: var(--navds-border);
-}
-
-.navds-accordion:focus,
-.navds-accordion__button:focus {
+.navds-expansionpanel:focus,
+.navds-expansionpanel__button:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
-[class^="navds-accordion__chevron--"] {
+[class^="navds-expansionpanel__chevron--"] {
   --chevron-rotation: 0deg;
   width: 1.25em;
   height: 1.25em;
   transition: 200ms transform;
   transform: rotateZ(var(--chevron-rotation));
 }
-.navds-accordion__chevron--up {
+.navds-expansionpanel__chevron--up {
   --chevron-rotation: -180deg;
 }
-.navds-accordion__chevron--down {
+.navds-expansionpanel__chevron--down {
   --chevron-rotation: 0deg;
 }
 
-.navds-accordion__button {
+.navds-expansionpanel__button {
   background-color: var(--navds-color-background);
   display: block;
   padding: 1rem;
@@ -47,35 +44,35 @@
   width: 100%;
   margin-bottom: 0;
 }
-.navds-accordion__button .navds-accordion__title {
+.navds-expansionpanel__button .navds-expansionpanel__title {
   font-size: 1.25rem;
   line-height: 1.5625rem;
   font-weight: 600;
   color: var(--navds-color-text-primary);
 }
-.navds-accordion__button:hover {
+.navds-expansionpanel__button:hover {
   cursor: pointer;
 }
-.navds-accordion__button:hover .navds-accordion__title {
+.navds-expansionpanel__button:hover .navds-expansionpanel__title {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
 
-.navds-accordion__flex-wrapper {
+.navds-expansionpanel__flex-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.navds-accordion__content {
+.navds-expansionpanel__content {
   padding: 1rem;
   padding-top: 0.5rem;
 }
 
-.navds-accordion--open .navds-accordion__content {
+.navds-expansionpanel--open .navds-expansionpanel__content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.navds-accordion--open > .navds-accordion__button {
+.navds-expansionpanel--open > .navds-expansionpanel__button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
