@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from 'classnames';
-import '@nav-fronted/<%name.indexfileUncapped%>-styles';
+import '@nav-frontend/<%name.indexfileUncapped%>-styles';
 
 export interface <%name.stripped%>Props {
     /**

@@ -81,6 +81,24 @@ module.exports = {
         link: { value: "{navds.color.blue.50.value}" },
         error: { value: "{navds.color.red.50.value}" },
       },
+      tag: {
+        error: {
+          border: { value: "{navds.color.red.50.value}" },
+          background: { value: "{navds.color.red.20.value}" },
+        },
+        warning: {
+          border: { value: "{navds.color.orange.60.value}" },
+          background: { value: "{navds.color.orange.20.value}" },
+        },
+        info: {
+          border: { value: "{navds.color.lightblue.70.value}" },
+          background: { value: "{navds.color.lightblue.20.value}" },
+        },
+        success: {
+          border: { value: "{navds.color.green.50.value}" },
+          background: { value: "{navds.color.green.20.value}" },
+        },
+      },
     },
     border: { value: "1px solid {navds.color.border.value}" },
     shadow: {
