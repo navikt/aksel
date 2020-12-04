@@ -5,7 +5,7 @@
 ### Installering:
 
 ```
-npm install nav-frontend-core nav-frontend-tabell-style --save
+npm install nav-frontend-core nav-frontend-knapper-style nav-frontend-tabell-style nav-frontend-typografi-style --save
 ```
 
 <!-- AUTO-GENERATED-CONTENT:END *-->
