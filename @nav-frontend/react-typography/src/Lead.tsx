@@ -5,7 +5,7 @@ const Lead = forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...rest }, ref) => (
-  <p {...rest} ref={ref} className={cl(className, "navds-lead")} />
+  <p {...rest} ref={ref} className={cl(className, "navds-article__lead")} />
 ));
 
 export default Lead;

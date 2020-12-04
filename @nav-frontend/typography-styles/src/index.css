@@ -8,23 +8,23 @@
 }
 
 .navds-heading--xxl {
-  font-size: 2.5rem;
+  font-size: var(--navds-font-size-heading-xxl);
 }
 
 .navds-heading--xl {
-  font-size: 2rem;
+  font-size: var(--navds-font-size-heading-xl);
 }
 
 .navds-heading--large {
-  font-size: 1.5rem;
+  font-size: var(--navds-font-size-heading-large);
 }
 
 .navds-heading--medium {
-  font-size: 1.25rem;
+  font-size: var(--navds-font-size-heading-medium);
 }
 
 .navds-heading--small {
-  font-size: 1.125rem;
+  font-size: var(--navds-font-size-heading-small);
 }
 
 /*
@@ -35,19 +35,19 @@
 }
 
 .navds-text--large {
-  font-size: 1.25rem;
+  font-size: var(--navds-font-size-large);
 }
 
 .navds-text--medium {
-  font-size: 1.125rem;
+  font-size: var(--navds-font-size-medium);
 }
 
 .navds-text--small {
-  font-size: 1rem;
+  font-size: var(--navds-font-size-small);
 }
 
 .navds-text--xs {
-  font-size: 0.875rem;
+  font-size: var(--navds-font-size-xs);
 }
 
 /*
@@ -55,9 +55,13 @@
  */
 
 .navds-article__lead {
-  font-size: 1.25rem;
+  font-size: var(--navds-font-size-article-lead);
 }
 
 .navds-article__paragraph {
-  font-size: 1.125rem;
+  font-size: var(--navds-font-size-article-paragraph);
+}
+
+.navds-article__list {
+  font-size: var(--navds-font-size-article-paragraph);
 }
