@@ -1,0 +1,12 @@
+@import "~normalize.css";
+@import "~@nav-frontend/tokens/dist/tokens.css";
+
+body {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  line-height: 1.375;
+  color: var(--navds-color-text-primary);
+}
+
+a {
+  color: var(--navds-color-text-link);
+}
