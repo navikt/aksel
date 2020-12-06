@@ -1,34 +1,31 @@
 .navds-link {
-  color: #0067c5;
+  color: var(--navds-color-text-link);
   background: none;
   text-decoration: underline;
   cursor: pointer;
 }
-.navds-link:hover,
-.navds-link--hover {
+.navds-link:hover {
   text-decoration: none;
 }
-.navds-link:focus,
-.navds-link--focus {
+.navds-link:focus {
   outline: none;
-  color: white;
+  color: var(--navds-color-text-inverse);
   text-decoration: none;
-  background-color: #254b6d;
-  box-shadow: 0 0 0 2px #254b6d;
+  background-color: var(--navds-text-focus);
+  box-shadow: var(--navds-text-shadow);
 }
-.navds-link:active,
-.navds-link--active {
+.navds-link:active {
   outline: none;
-  color: white;
+  color: var(--navds-color-text-inverse);
   text-decoration: none;
-  background-color: #254b6d;
-  box-shadow: 0 0 0 2px #254b6d;
+  background-color: var(--navds-text-focus);
+  box-shadow: var(--navds-text-shadow);
 }
 .navds-link svg {
   width: 1em;
   height: 1em;
-  fill: #0067c5;
-  stroke: #0067c5;
+  fill: var(--navds-color-text-link);
+  stroke: var(--navds-color-text-link);
   vertical-align: middle;
   position: relative;
   top: -0.125em;
@@ -38,6 +35,6 @@
   margin-left: 0.25em;
 }
 .navds-link:focus svg {
-  fill: white;
-  stroke: white;
+  color: var(--navds-color-text-inverse);
+  color: var(--navds-color-text-inverse);
 }

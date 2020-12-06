@@ -104,5 +104,9 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },
+    text: {
+      focus: { value: "{navds.color.blue.80.value}" },
+      shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
+    },
   },
 };
