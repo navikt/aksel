@@ -1,2 +1,43 @@
 .navds-link {
+  color: #0067c5;
+  background: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.navds-link:hover,
+.navds-link--hover {
+  text-decoration: none;
+}
+.navds-link:focus,
+.navds-link--focus {
+  outline: none;
+  color: white;
+  text-decoration: none;
+  background-color: #254b6d;
+  box-shadow: 0 0 0 2px #254b6d;
+}
+.navds-link:active,
+.navds-link--active {
+  outline: none;
+  color: white;
+  text-decoration: none;
+  background-color: #254b6d;
+  box-shadow: 0 0 0 2px #254b6d;
+}
+.navds-link svg {
+  width: 1em;
+  height: 1em;
+  fill: #0067c5;
+  stroke: #0067c5;
+  vertical-align: middle;
+  position: relative;
+  top: -0.125em;
+}
+.navds-link svg + span:not(.sr-only),
+.navds-link span:not(.sr-only) + svg {
+  margin-left: 0.25em;
+}
+.navds-link:focus svg {
+  fill: white;
+  stroke: white;
 }
