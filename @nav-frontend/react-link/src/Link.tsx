@@ -17,7 +17,12 @@ export interface LinkProps
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
   ({ children, className, href, ...rest }, ref) => {
     return (
-      <a ref={ref} className={cl("navds-link", className)} {...rest}>
+      <a
+        ref={ref}
+        href={href}
+        className={cl("navds-link", className)}
+        {...rest}
+      >
         {children}
       </a>
     );
