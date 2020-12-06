@@ -10,9 +10,7 @@ export const All = () => {
   return (
     <>
       <h1>Link</h1>
-      <Link href="#" onClick={(e) => e.preventDefault()}>
-        Dette er en tekstlenke
-      </Link>
+      <Link href="#">Dette er en tekstlenke</Link>
     </>
   );
 };
