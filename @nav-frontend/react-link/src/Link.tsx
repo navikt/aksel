@@ -2,20 +2,20 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import "@nav-frontend/link-styles";
 
-export interface LinkProps {
+export interface LinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * User defined classname
    */
   className?: string;
 }
 
-const Link = forwardRef<HTMLDivElement, LinkProps>(
-  ({ children, className }, ref) => {
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(
+  ({ children, className, ...rest }, ref) => {
     return (
-      <div ref={ref} className={cl("navds-link", className)}>
-        <h2>Hello from react-link</h2>
+      <a ref={ref} className={cl("navds-link", className)} {...rest}>
         {children}
-      </div>
+      </a>
     );
   }
 );
