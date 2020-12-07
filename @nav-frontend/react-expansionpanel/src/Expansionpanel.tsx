@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cls from "classnames";
-import { UnmountClosed, Collapse, CollapseCallbackArgs } from "react-collapse";
+import { UnmountClosed, Collapse } from "react-collapse";
 
 import { Expand } from "@nav-frontend/icons";
 import "@nav-frontend/expansionpanel-styles";
@@ -13,7 +13,6 @@ interface ExpansionpanelProps {
   onClick?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
   className?: string;
   renderContentWhenClosed?: boolean;
-  onRest?: (args: CollapseCallbackArgs) => void;
 }
 
 const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
@@ -22,7 +21,6 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
       children,
       title,
       open = false,
-      onRest = (args) => null,
       className,
       renderContentWhenClosed = false,
       onClick,
@@ -80,10 +78,7 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
           role="region"
           aria-labelledby={buttonId.current}
         >
-          <CollapseComponent
-            isOpened={internalOpen}
-            onRest={(args: CollapseCallbackArgs) => onRest(args)}
-          >
+          <CollapseComponent isOpened={internalOpen}>
             <div className="navds-expansionpanel__content">{children}</div>
           </CollapseComponent>
         </div>
