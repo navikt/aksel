@@ -2,13 +2,19 @@ import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
 import ReactModal, { Props as ReactModalProps } from "react-modal";
 import mergeRefs from "react-merge-refs";
+import Button from "@nav-frontend/react-button";
+import { Close } from "@nav-frontend/icons";
 import "@nav-frontend/modal-styles";
 
-export interface ModalProps {
+export interface ModalProps extends ReactModalProps {
   /**
    * Content of modal
    */
   children: React.ReactNode;
+  /**
+   * Called when modal wants to close
+   */
+  onRequestClose: () => void;
   /**
    * Adds a button in the top right corner
    * @default true
@@ -35,16 +41,45 @@ export interface ModalProps {
 //   setAppElement: (element: any) => void;
 // };
 
-const Modal = forwardRef<HTMLDivElement, ModalProps>(
-  ({ children, className }, ref) => {
-    const modalRef = useRef<HTMLDivElement | null>(null);
+const Modal = forwardRef<ReactModal, ModalProps>(
+  (
+    {
+      children,
+      className,
+      shouldCloseOnOverlayClick = true,
+      contentClassName = "",
+      onRequestClose,
+      ...rest
+    },
+    ref
+  ) => {
+    const modalRef = useRef<ReactModal | null>(null);
     const mergedRef = mergeRefs([modalRef, ref]);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+
+    const onModalCloseRequest = (e) => {};
 
     return (
-      <div ref={mergedRef} className={cl("navds-modal", className)}>
-        <h2>Hello from react-modal</h2>
-        {children}
-      </div>
+      <ReactModal
+        {...rest}
+        ref={mergedRef}
+        className={cl("navds-modal", className)}
+        overlayClassName="navds-modal__overlay"
+        shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
+        onRequestClose={(e) => onModalCloseRequest(e)}
+      >
+        <section className={contentClassName}>{children}</section>
+        <Button
+          className="navds-modal__button"
+          size="small"
+          variant="secondary"
+          ref={buttonRef}
+          aria-label="lukk modalvindu"
+          onClick={onRequestClose}
+        >
+          <Close />
+        </Button>
+      </ReactModal>
     );
   }
 );

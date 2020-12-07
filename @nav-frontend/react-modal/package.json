@@ -29,6 +29,8 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "@nav-frontend/modal-styles": "0.1.0-beta.1",
+    "@nav-frontend/react-button": "0.1.0-beta.1",
+    "@nav-frontend/icons": "0.1.0-beta.1",
     "@types/react-modal": "^3.10.6",
     "react-modal": "3.11.2",
     "react-merge-refs": "^1.1.0"
