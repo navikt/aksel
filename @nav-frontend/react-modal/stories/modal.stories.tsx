@@ -10,7 +10,7 @@ export default {
 ReactModal.setAppElement("#root");
 
 export const All = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
 
   return (
