@@ -1,23 +1,22 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
-import ReactModal, { Props } from "react-modal";
+import ReactModal, { Props as ReactModalProps } from "react-modal";
+import mergeRefs from "react-merge-refs";
 import "@nav-frontend/modal-styles";
 
 export interface ModalProps {
-  /**
-   * Modal open/visible state
-   */
-  open: boolean;
   /**
    * Content of modal
    */
   children: React.ReactNode;
   /**
    * Adds a button in the top right corner
+   * @default true
    */
   closeButton?: boolean;
   /**
    * If modal should close on overlay click
+   * @default true
    */
   shouldCloseOnOverlayClick?: boolean;
   /**
@@ -30,15 +29,26 @@ export interface ModalProps {
   contentClassName?: string;
 }
 
+// type ModalType = React.ForwardRefExoticComponent<
+//   ModalProps & React.RefAttributes<HTMLDivElement>
+// > & {
+//   setAppElement: (element: any) => void;
+// };
+
 const Modal = forwardRef<HTMLDivElement, ModalProps>(
   ({ children, className }, ref) => {
+    const modalRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = mergeRefs([modalRef, ref]);
+
     return (
-      <div ref={ref} className={cl("navds-modal", className)}>
+      <div ref={mergedRef} className={cl("navds-modal", className)}>
         <h2>Hello from react-modal</h2>
         {children}
       </div>
     );
   }
 );
+
+// Modal.setAppElement = (element) => ReactModal.setAppElement(element);
 
 export default Modal;
