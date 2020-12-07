@@ -57,7 +57,13 @@ const Modal = forwardRef<ReactModal, ModalProps>(
     const mergedRef = mergeRefs([modalRef, ref]);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
-    const onModalCloseRequest = (e) => {};
+    const onModalCloseRequest = (e) => {
+      if (shouldCloseOnOverlayClick || e.type === "keydown") {
+        onRequestClose();
+      } else if (buttonRef.current) {
+        buttonRef.current.focus();
+      }
+    };
 
     return (
       <ReactModal
@@ -70,7 +76,9 @@ const Modal = forwardRef<ReactModal, ModalProps>(
       >
         <section className={contentClassName}>{children}</section>
         <Button
-          className="navds-modal__button"
+          className={cl("navds-modal__button", {
+            "navds-modal__button--shake": shouldCloseOnOverlayClick,
+          })}
           size="small"
           variant="secondary"
           ref={buttonRef}
