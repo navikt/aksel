@@ -6,6 +6,9 @@ import Button from "@nav-frontend/react-button";
 import { Close } from "@nav-frontend/icons";
 import "@nav-frontend/modal-styles";
 
+// TODO: Has to be documented well that the user has to import react-modal and call
+// ReactModal.setAppElement("#root")
+
 export interface ModalProps extends ReactModalProps {
   /**
    * Content of modal
