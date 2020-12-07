@@ -88,6 +88,24 @@ module.exports = {
     },
     panel: {
       hover: { value: "1px solid {navds.color.blue.50.value}" },
+      tag: {
+        error: {
+          border: { value: "{navds.color.red.50.value}" },
+          background: { value: "{navds.color.red.20.value}" },
+        },
+        warning: {
+          border: { value: "{navds.color.orange.60.value}" },
+          background: { value: "{navds.color.orange.20.value}" },
+        },
+        info: {
+          border: { value: "{navds.color.lightblue.70.value}" },
+          background: { value: "{navds.color.lightblue.20.value}" },
+        },
+        success: {
+          border: { value: "{navds.color.green.50.value}" },
+          background: { value: "{navds.color.green.20.value}" },
+        },
+      },
     },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
