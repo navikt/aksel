@@ -35,20 +35,14 @@ export interface ModalProps extends ReactModalProps {
   contentClassName?: string;
 }
 
-// type ModalType = React.ForwardRefExoticComponent<
-//   ModalProps & React.RefAttributes<HTMLDivElement>
-// > & {
-//   setAppElement: (element: any) => void;
-// };
-
 const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
       className,
+      onRequestClose,
       shouldCloseOnOverlayClick = true,
       contentClassName = "",
-      onRequestClose,
       ...rest
     },
     ref
@@ -91,7 +85,5 @@ const Modal = forwardRef<ReactModal, ModalProps>(
     );
   }
 );
-
-// Modal.setAppElement = (element) => ReactModal.setAppElement(element);
 
 export default Modal;
