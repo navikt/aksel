@@ -3,7 +3,7 @@
   --navds-tag-border-color: var(--navds-color-tag-info-border);
   display: inline-block;
   border-radius: 4px;
-  border: var(--navds-border);
+  border: var(--navds-border-on-light);
   background-color: var(--navds-tag-bg);
   border-color: var(--navds-tag-border-color);
 }

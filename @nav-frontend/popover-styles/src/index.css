@@ -7,7 +7,7 @@
   z-index: var(--popover-z-index);
   background-color: var(--navds-color-background);
   box-shadow: var(--popover-shadow);
-  border: var(--navds-border);
+  border: var(--navds-border-on-light);
   border-radius: var(--popover-border-radius);
   padding: 1rem;
 }
@@ -33,7 +33,7 @@
   height: var(--popover__arrow-size);
   transform: rotate(45deg);
   background-color: var(--navds-color-background);
-  border: var(--navds-border);
+  border: var(--navds-border-on-light);
 }
 
 .navds-popover[data-popper-placement^="top"] > .navds-popover__arrow {

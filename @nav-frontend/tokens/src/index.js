@@ -99,8 +99,20 @@ module.exports = {
           background: { value: "{navds.color.green.20.value}" },
         },
       },
+      modal: {
+        overlay: {
+          value: "rgba(61, 56, 49, 0.7)",
+        },
+      },
     },
-    border: { value: "1px solid {navds.color.border.value}" },
+    border: {
+      on: {
+        light: {
+          value: "1px solid {navds.color.border.value}",
+        },
+      },
+      radius: { value: "4px" },
+    },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },
