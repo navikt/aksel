@@ -40,14 +40,6 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
       ? Collapse
       : UnmountClosed;
 
-    const handleClick = (e) => {
-      if (onClick) {
-        onClick(e);
-      } else {
-        setInternalOpen(!internalOpen);
-      }
-    };
-
     return (
       <div
         ref={ref}
@@ -61,7 +53,7 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
           className="navds-expansionpanel__button"
           aria-expanded={open}
           aria-controls={contentId.current}
-          onClick={(e) => handleClick(e)}
+          onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
           <span className="navds-expansionpanel__title">{title}</span>
