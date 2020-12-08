@@ -86,7 +86,7 @@ const Modal = forwardRef<ReactModal, ModalProps>(
           variant="secondary"
           ref={buttonRef}
           aria-label="lukk modalvindu"
-          onClick={onRequestClose}
+          onClick={onClose}
         >
           <Close />
         </Button>
