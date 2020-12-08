@@ -104,5 +104,13 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
     },
+    z: {
+      index: {
+        modal: {
+          content: { value: "1010" },
+          overlay: { value: "1000" },
+        },
+      },
+    },
   },
 };

@@ -11,7 +11,7 @@
   overflow: auto;
   max-height: 100%;
   margin-bottom: 0;
-  z-index: 1010;
+  z-index: var(--navds-z-index-modal-content);
 }
 .navds-modal:focus,
 .navds-modal--focus {
@@ -20,7 +20,7 @@
 }
 .navds-modal__overlay {
   position: fixed;
-  z-index: 1000;
+  z-index: var(--navds-z-index-modal-overlay);
   top: 0;
   bottom: 0;
   left: 0;
