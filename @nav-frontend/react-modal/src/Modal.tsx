@@ -23,11 +23,6 @@ export interface ModalProps {
    */
   onClose: () => void;
   /**
-   * Adds a button in the top right corner
-   * @default true
-   */
-  closeButton?: boolean;
-  /**
    * If modal should close on overlay click
    * @default true
    */
