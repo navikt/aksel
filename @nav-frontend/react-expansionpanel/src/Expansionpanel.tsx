@@ -64,14 +64,12 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
           onClick={(e) => handleClick(e)}
           {...rest}
         >
-          <div className="navds-expansionpanel__flex-wrapper">
-            <span className="navds-expansionpanel__title">{title}</span>
-            <Expand
-              className={`navds-expansionpanel__chevron--${
-                internalOpen ? "up" : "down"
-              }`}
-            />
-          </div>
+          <span className="navds-expansionpanel__title">{title}</span>
+          <Expand
+            className={`navds-expansionpanel__chevron--${
+              internalOpen ? "up" : "down"
+            }`}
+          />
         </button>
         <div
           id={contentId.current}
