@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
-import ReactModal, { Props as ReactModalProps } from "react-modal";
+import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import Button from "@nav-frontend/react-button";
 import { Close } from "@nav-frontend/icons";
@@ -9,15 +9,19 @@ import "@nav-frontend/modal-styles";
 // TODO: Has to be documented well that the user has to import react-modal and call
 // ReactModal.setAppElement("#root")
 
-export interface ModalProps extends ReactModalProps {
+export interface ModalProps {
   /**
    * Content of modal
    */
   children: React.ReactNode;
   /**
+   * Open state for modal
+   */
+  open: boolean;
+  /**
    * Called when modal wants to close
    */
-  onRequestClose: () => void;
+  onClose: () => void;
   /**
    * Adds a button in the top right corner
    * @default true
@@ -42,8 +46,9 @@ const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
+      open,
       className,
-      onRequestClose,
+      onClose,
       shouldCloseOnOverlayClick = true,
       contentClassName = "",
       ...rest
@@ -56,7 +61,7 @@ const Modal = forwardRef<ReactModal, ModalProps>(
 
     const onModalCloseRequest = (e) => {
       if (shouldCloseOnOverlayClick || e.type === "keydown") {
-        onRequestClose();
+        onClose();
       } else if (buttonRef.current) {
         buttonRef.current.focus();
       }
@@ -65,6 +70,7 @@ const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
+        isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
         overlayClassName="navds-modal__overlay"

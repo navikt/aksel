@@ -16,7 +16,7 @@ export const All = () => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open modal</button>
-      <Modal isOpen={open} onRequestClose={() => setOpen(false)}>
+      <Modal open={open} onRequestClose={() => setOpen(false)}>
         <h1>Header</h1>
         <h2>subheader</h2>
         <p>
@@ -35,7 +35,7 @@ export const All = () => {
       </button>
       <Modal
         shouldCloseOnOverlayClick={false}
-        isOpen={openTwo}
+        open={openTwo}
         onRequestClose={() => setOpenTwo(false)}
       >
         <h1>Header</h1>
