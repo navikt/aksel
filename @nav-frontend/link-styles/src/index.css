@@ -1,8 +1,6 @@
 .navds-link {
   color: var(--navds-color-text-link);
-  background: none;
   text-decoration: underline;
-  cursor: pointer;
 }
 .navds-link:hover {
   text-decoration: none;
