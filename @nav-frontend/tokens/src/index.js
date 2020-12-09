@@ -119,6 +119,11 @@ module.exports = {
           paragraph: { value: "1.125rem" },
         },
       },
+      line: {
+        height: {
+          xs: { value: "1.25rem" },
+        },
+      },
     },
     border: { value: "1px solid {navds.color.border.value}" },
     shadow: {
