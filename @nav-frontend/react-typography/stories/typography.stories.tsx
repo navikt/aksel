@@ -79,7 +79,7 @@ export const article = () => {
         For å ha rett til å få uføretrygd må du som hovedregel oppfylle disse
         vilkårene:
       </Paragraph>
-      <ul className="navds-article__list">
+      <ul>
         <li>Du må være mellom 18 og 67 år.</li>
         <li>
           Du må ha vært medlem av folketrygden i de siste tre årene før du ble

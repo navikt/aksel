@@ -58,7 +58,3 @@
 .navds-article__paragraph {
   font-size: var(--navds-font-size-article-paragraph);
 }
-
-.navds-article__list {
-  font-size: var(--navds-font-size-article-paragraph);
-}
