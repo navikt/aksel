@@ -1,5 +1,6 @@
 import "nav-frontend-core";
-import "@nav-frontend/tokens/dist/tokens.css";
+import "@nav-frontend/baseline-styles";
+
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   options: {

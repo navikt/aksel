@@ -104,6 +104,34 @@ module.exports = {
     panel: {
       hover: { value: "1px solid {navds.color.blue.50.value}" },
     },
+    font: {
+      family: { value: '"Source Sans Pro", Arial, sans-serif' },
+      size: {
+        heading: {
+          xxl: { value: "2.5rem" },
+          xl: { value: "2rem" },
+          large: { value: "1.5rem" },
+          medium: { value: "1.25rem" },
+          small: { value: "1.125rem" },
+        },
+        large: { value: "1.25rem" },
+        medium: { value: "1.125rem" },
+        small: { value: "1rem" },
+        xs: { value: "0.875rem" },
+        article: {
+          lead: { value: "1.25rem" },
+          paragraph: { value: "1.125rem" },
+        },
+      },
+      line: {
+        height: {
+          large: { value: "1.625rem" },
+          medium: { value: "1.5rem" },
+          small: { value: "1.375rem" },
+          xs: { value: "1.25rem" },
+        },
+      },
+    },
     border: { value: "1px solid {navds.color.border.value}" },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
