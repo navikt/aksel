@@ -33,18 +33,22 @@
 
 .navds-text--large {
   font-size: var(--navds-font-size-large);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-text--medium {
   font-size: var(--navds-font-size-medium);
+  line-height: var(--navds-font-line-height-medium);
 }
 
 .navds-text--small {
   font-size: var(--navds-font-size-small);
+  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-text--xs {
   font-size: var(--navds-font-size-xs);
+  line-height: var(--navds-font-line-height-xs);
 }
 
 /*
@@ -53,8 +57,10 @@
 
 .navds-article__lead {
   font-size: var(--navds-font-size-article-lead);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-article__paragraph {
   font-size: var(--navds-font-size-article-paragraph);
+  line-height: var(--navds-font-line-height-medium);
 }
