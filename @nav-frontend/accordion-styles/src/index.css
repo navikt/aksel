@@ -5,7 +5,7 @@
   position: relative;
   background: var(--navds-color-background);
   border-radius: 0.25rem;
-  border: var(--navds-border);
+  border: var(--navds-border-default);
 }
 
 .navds-accordion:hover {
