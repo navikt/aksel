@@ -1,7 +1,8 @@
 .navds-link {
   color: var(--navds-color-text-link);
   text-decoration: underline;
-  display: inline-flex;
+  display: inline-grid;
+  grid-auto-flow: column;
   align-items: center;
   gap: 0.25rem;
 }
