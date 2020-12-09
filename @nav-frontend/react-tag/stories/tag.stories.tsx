@@ -13,9 +13,7 @@ export const All = () => {
       <Tag variant="info"> Info tag</Tag>
       <Tag variant="warning"> Warning tag</Tag>
       <Tag variant="success"> Success tag</Tag>
-      <Tag variant="error">
-        Error tag <br /> Error tag2
-      </Tag>
+      <Tag variant="error">Error tag</Tag>
     </div>
   );
 };
