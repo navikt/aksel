@@ -58,6 +58,20 @@ export const article = () => {
         uføretrygd, er avhengig av inntektsevnen din. Har du mulighet til å
         jobbe for eksempel 40 prosent, kan du ha rett til 60 prosent uføretrygd.{" "}
       </Paragraph>
+      <p>
+        Anim duis aliqua ad culpa amet ad. Anim deserunt veniam laborum commodo
+        in excepteur reprehenderit. Sunt occaecat velit fugiat qui Lorem officia
+        reprehenderit elit cillum occaecat. Lorem laborum adipisicing non qui
+        consectetur do minim nostrud adipisicing qui. Sint et dolore commodo
+        cillum elit magna reprehenderit labore consequat reprehenderit magna
+        consequat qui. Ullamco eu sunt cupidatat laborum. Velit eu ex culpa
+        voluptate proident tempor deserunt. Do pariatur consequat incididunt ad
+        ut velit. Ea nisi eiusmod aliquip laboris nulla in ipsum amet sunt
+        magna. Laboris pariatur nisi in culpa adipisicing sit esse esse. Ullamco
+        dolore mollit minim dolor reprehenderit. Velit ipsum proident nostrud
+        laborum non. Sunt consequat aute quis minim reprehenderit ipsum sunt
+        ipsum.
+      </p>
       <Heading level={2} size="xl">
         Hvem kan få uføretrygd?
       </Heading>
