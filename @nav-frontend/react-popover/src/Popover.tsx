@@ -15,7 +15,7 @@ interface PopoverProps {
    */
   open: boolean;
   /**
-   * Callback for when popover to closes
+   * Callback for when popover closes
    */
   onClose: () => void;
   /**
