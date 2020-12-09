@@ -137,5 +137,9 @@ module.exports = {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
       hover: { value: "{navds.color.hover.value} 0 2px 1px 0" },
     },
+    text: {
+      focus: { value: "{navds.color.blue.80.value}" },
+      shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
+    },
   },
 };
