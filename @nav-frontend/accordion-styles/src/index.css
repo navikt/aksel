@@ -1,39 +1,39 @@
 .ReactCollapse--collapse {
   transition: height 200ms ease-out;
 }
-.navds-expansionpanel {
+.navds-accordion {
   position: relative;
   background: var(--navds-color-background);
   border-radius: 0.25rem;
   border: var(--navds-border);
 }
 
-.navds-expansionpanel:hover {
+.navds-accordion:hover {
   box-shadow: var(--navds-shadow-hover);
   border: var(--navds-panel-hover);
 }
 
-.navds-expansionpanel:focus,
-.navds-expansionpanel__button:focus {
+.navds-accordion:focus,
+.navds-accordion__button:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
-[class^="navds-expansionpanel__chevron--"] {
+[class^="navds-accordion__chevron--"] {
   --chevron-rotation: 0deg;
   width: 1.25em;
   height: 1.25em;
   transition: 200ms transform;
   transform: rotateZ(var(--chevron-rotation));
 }
-.navds-expansionpanel__chevron--up {
+.navds-accordion__chevron--up {
   --chevron-rotation: -180deg;
 }
-.navds-expansionpanel__chevron--down {
+.navds-accordion__chevron--down {
   --chevron-rotation: 0deg;
 }
 
-.navds-expansionpanel__button {
+.navds-accordion__button {
   background-color: var(--navds-color-background);
   display: block;
   padding: 1rem;
@@ -49,26 +49,26 @@
   align-items: center;
   justify-content: space-between;
 }
-.navds-expansionpanel__button .navds-expansionpanel__title {
+.navds-accordion__button .navds-accordion__title {
   font-size: 1.25rem;
   line-height: 1.25;
   font-weight: 600;
   color: var(--navds-color-text-primary);
 }
-.navds-expansionpanel__button:hover .navds-expansionpanel__title {
+.navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
 
-.navds-expansionpanel__content {
+.navds-accordion__content {
   padding: 0.5rem 1rem 1rem;
 }
 
-.navds-expansionpanel--open .navds-expansionpanel__content {
+.navds-accordion--open .navds-accordion__content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
-.navds-expansionpanel--open > .navds-expansionpanel__button {
+.navds-accordion--open > .navds-accordion__button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "@nav-frontend/react-expansionpanel",
+  "name": "@nav-frontend/react-accordion",
   "version": "0.1.0-beta.1",
-  "description": "Expansionpanel component implemented in React",
+  "description": "Accordion component implemented in React",
   "author": "NAV Designsystem team",
   "keywords": [
     "react",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "@nav-frontend/expansionpanel-styles": "0.1.0-beta.1",
+    "@nav-frontend/accordion-styles": "0.1.0-beta.1",
     "@nav-frontend/icons": "0.1.0-beta.1"
   },
   "devDependencies": {
@@ -38,5 +38,5 @@
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"
   },
-  "defaultExport": "Expansionpanel"
+  "defaultExport": "Accordion"
 }

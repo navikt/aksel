@@ -3,10 +3,10 @@ import cls from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 
 import { Expand } from "@nav-frontend/icons";
-import "@nav-frontend/expansionpanel-styles";
+import "@nav-frontend/accordion-styles";
 import { guid } from "nav-frontend-js-utils";
 
-interface ExpansionpanelProps {
+interface AccordionProps {
   children: React.ReactNode;
   title: React.ReactNode;
   open?: boolean;
@@ -15,7 +15,7 @@ interface ExpansionpanelProps {
   renderContentWhenClosed?: boolean;
 }
 
-const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
+const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
@@ -43,22 +43,22 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
     return (
       <div
         ref={ref}
-        className={cls("navds-expansionpanel", className, {
-          "navds-expansionpanel--open": internalOpen,
-          "navds-expansionpanel--closed": !internalOpen,
+        className={cls("navds-accordion", className, {
+          "navds-accordion--open": internalOpen,
+          "navds-accordion--closed": !internalOpen,
         })}
       >
         <button
           id={buttonId.current}
-          className="navds-expansionpanel__button"
+          className="navds-accordion__button"
           aria-expanded={open}
           aria-controls={contentId.current}
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
-          <span className="navds-expansionpanel__title">{title}</span>
+          <span className="navds-accordion__title">{title}</span>
           <Expand
-            className={`navds-expansionpanel__chevron--${
+            className={`navds-accordion__chevron--${
               internalOpen ? "up" : "down"
             }`}
           />
@@ -69,7 +69,7 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
           aria-labelledby={buttonId.current}
         >
           <CollapseComponent isOpened={internalOpen}>
-            <div className="navds-expansionpanel__content">{children}</div>
+            <div className="navds-accordion__content">{children}</div>
           </CollapseComponent>
         </div>
       </div>
@@ -77,4 +77,4 @@ const Expansionpanel = forwardRef<HTMLDivElement, ExpansionpanelProps>(
   }
 );
 
-export default Expansionpanel;
+export default Accordion;
