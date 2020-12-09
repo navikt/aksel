@@ -1,0 +1,16 @@
+@import "~normalize.css";
+@import "~@nav-frontend/tokens/dist/tokens.css";
+@import "Source-Sans-Pro-regular.css";
+@import "Source-Sans-Pro-italic.css";
+@import "Source-Sans-Pro-600.css";
+
+body {
+  font-family: var(--navds-font-family);
+  line-height: 1.375;
+  color: var(--navds-color-text-primary);
+  font-size: 1.125rem;
+}
+
+a {
+  color: var(--navds-color-text-link);
+}
