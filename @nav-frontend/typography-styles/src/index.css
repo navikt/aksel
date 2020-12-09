@@ -30,9 +30,6 @@
 /*
  * Text
  */
-.navds-text {
-  line-height: 1;
-}
 
 .navds-text--large {
   font-size: var(--navds-font-size-large);
