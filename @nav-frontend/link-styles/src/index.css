@@ -22,8 +22,7 @@
 .navds-link svg {
   width: 1em;
   height: 1em;
-  fill: var(--navds-color-text-link);
-  stroke: var(--navds-color-text-link);
+  color: var(--navds-color-text-link);
   vertical-align: middle;
   position: relative;
   top: -0.125em;
@@ -33,6 +32,5 @@
   margin-left: 0.25em;
 }
 .navds-link:focus svg {
-  color: var(--navds-color-text-inverse);
   color: var(--navds-color-text-inverse);
 }
