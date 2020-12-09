@@ -19,7 +19,7 @@
 }
 
 .navds-alert > svg {
-  font-size: var(--navds-font-line-height-small);
+  font-size: 1.5rem;
   --background-color: var(--navds-color-background);
   background: radial-gradient(
     circle,
@@ -30,6 +30,7 @@
 }
 
 .navds-alert > span {
+  margin-top: 1px;
 }
 
 .navds-alert--error {
