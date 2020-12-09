@@ -15,9 +15,10 @@
     "lerna:watch": "yarn run lerna run watch --parallel",
     "lerna:build": "yarn run lerna run build",
     "lerna:token": "yarn run lerna run token",
-    "lint": "yarn lint:jsts && yarn lint:less",
+    "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
     "lint:jsts": "npx eslint .",
     "lint:less": "npx stylelint --syntax less **/*.less",
+    "lint:css": "npx stylelint --syntax less @nav-frontend/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "scaffold-new-component": "node utilities/scripts/scaffold.js"
@@ -57,8 +58,9 @@
       "packages/nav-frontend-core/less/vendor/_normalize.less",
       "packages/nav-frontend-core/less/_variabler-exports.less",
       "packages/nav-frontend-core/less/hide-text.less",
-      "@nav-frontend/tokens/dist/tokens.less",
-      "utilities/_templates/**"
+      "utilities/_templates/**",
+      "**/dist/**",
+      "@nav-frontend/**/*.css"
     ]
   },
   "repository": {

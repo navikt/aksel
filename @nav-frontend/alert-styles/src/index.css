@@ -1,19 +1,22 @@
 .navds-alert {
   --alert-border-radius: 4px;
-
+  /* TODO: change */
   border-radius: var(--alert-border-radius);
-  padding: 1.25rem 1rem;
-  border: var(--navds-border-on-light);
+  border: var(--navds-border-default);
+  padding: 1.1875em 1em;
+
   border-style: solid;
   display: grid;
   grid-auto-flow: column;
   gap: 0.75rem;
   justify-content: start;
+  font-size: var(--navds-font-size-small);
+  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-alert--small {
   --alert-border-radius: 0;
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
 }
 
 .navds-alert > svg {
@@ -28,7 +31,6 @@
 }
 
 .navds-alert > span {
-  line-height: 22px;
   margin-top: 1px;
 }
 

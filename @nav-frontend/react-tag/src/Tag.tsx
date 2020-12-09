@@ -12,27 +12,17 @@ export interface TagProps {
    * User defined classname
    */
   className?: string;
-  /**
-   * Internal padding
-   * @default "medium"
-   */
-  size?: "medium" | "small";
 }
 
-const Tag = forwardRef<HTMLDivElement, TagProps>(
-  ({ children, className, variant, size = "medium" }, ref) => {
+const Tag = forwardRef<HTMLSpanElement, TagProps>(
+  ({ children, className, variant }, ref) => {
     return (
-      <div
+      <span
         ref={ref}
-        className={cl(
-          "navds-tag",
-          className,
-          `navds-tag--${variant}`,
-          `navds-tag--${size}`
-        )}
+        className={cl("navds-tag", className, `navds-tag--${variant}`)}
       >
-        <span>{children}</span>
-      </div>
+        {children}
+      </span>
     );
   }
 );
