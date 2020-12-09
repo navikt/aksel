@@ -81,6 +81,7 @@ module.exports = {
         link: { value: "{navds.color.blue.50.value}" },
         error: { value: "{navds.color.red.50.value}" },
       },
+      hover: { value: "{navds.color.gray.40.value}" },
       tag: {
         error: {
           border: { value: "{navds.color.red.50.value}" },
@@ -99,6 +100,9 @@ module.exports = {
           background: { value: "{navds.color.green.20.value}" },
         },
       },
+    },
+    panel: {
+      hover: { value: "1px solid {navds.color.blue.50.value}" },
     },
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
@@ -131,6 +135,7 @@ module.exports = {
     border: { value: "1px solid {navds.color.border.value}" },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
+      hover: { value: "{navds.color.hover.value} 0 2px 1px 0" },
     },
   },
 };
