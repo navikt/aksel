@@ -90,4 +90,8 @@ const Modal = forwardRef<ReactModal, ModalProps>(
   }
 );
 
+export const setAppElement = (element) => {
+  ReactModal.setAppElement(element);
+};
+
 export default Modal;
