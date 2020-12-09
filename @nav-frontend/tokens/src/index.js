@@ -121,6 +121,9 @@ module.exports = {
       },
       line: {
         height: {
+          large: { value: "1.625rem" },
+          medium: { value: "1.5rem" },
+          small: { value: "1.375rem" },
           xs: { value: "1.25rem" },
         },
       },
