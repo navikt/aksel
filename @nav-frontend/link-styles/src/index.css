@@ -1,6 +1,9 @@
 .navds-link {
   color: var(--navds-color-text-link);
   text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 .navds-link:hover {
   text-decoration: none;
@@ -20,16 +23,7 @@
   box-shadow: var(--navds-text-shadow);
 }
 .navds-link svg {
-  width: 1em;
-  height: 1em;
   color: var(--navds-color-text-link);
-  vertical-align: middle;
-  position: relative;
-  top: -0.125em;
-}
-.navds-link svg + span:not(.sr-only),
-.navds-link span:not(.sr-only) + svg {
-  margin-left: 0.25em;
 }
 .navds-link:focus svg {
   color: var(--navds-color-text-inverse);
