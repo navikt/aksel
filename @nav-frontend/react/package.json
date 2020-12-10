@@ -28,6 +28,8 @@
   "dependencies": {
     "@popperjs/core": "^2.5.4",
     "@types/react-modal": "^3.10.6",
+    "@nav-frontend/icons": "0.1.0-beta.1",
+    "@nav-frontend/css": "0.1.0-beta.1",
     "classnames": "^2.2.6",
     "react-popper": "^2.2.4",
     "react-collapse": "^5.1.0",
