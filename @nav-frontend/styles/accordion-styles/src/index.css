@@ -2,9 +2,10 @@
   transition: height 300ms ease-out;
 }
 .navds-accordion {
+  --alert-border-radius: 4px;
   position: relative;
   background: var(--navds-color-background);
-  border-radius: 4px;
+  border-radius: var(--alert-border-radius);
   border: var(--navds-border-default);
 }
 
@@ -37,7 +38,7 @@
   background-color: var(--navds-color-background);
   display: block;
   padding: 1rem;
-  border-radius: 4px;
+  border-radius: var(--alert-border-radius);
   background: transparent;
   border: 0;
   text-align: left;

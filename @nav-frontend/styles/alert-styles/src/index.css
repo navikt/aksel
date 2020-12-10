@@ -1,11 +1,9 @@
 .navds-alert {
   --alert-border-radius: 4px;
-  /* TODO: change */
   border-radius: var(--alert-border-radius);
   border: var(--navds-border-default);
+  /* Padding calculated based on 16px font for 64px tall alert */
   padding: 1.1875em 1em;
-
-  border-style: solid;
   display: grid;
   grid-auto-flow: column;
   gap: 0.75rem;
