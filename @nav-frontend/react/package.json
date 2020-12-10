@@ -1,7 +1,7 @@
 {
-  "name": "@nav-frontend/react-typography",
+  "name": "@nav-frontend/react",
   "version": "0.1.0-beta.1",
-  "description": "Typography implemented in React",
+  "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
   "keywords": [
     "react",
@@ -15,7 +15,6 @@
     "access": "public"
   },
   "files": [
-    "/src",
     "/lib"
   ],
   "repository": {
@@ -27,11 +26,13 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
+    "@types/react-modal": "^3.10.6",
     "classnames": "^2.2.6",
-    "@nav-frontend/typography-styles": "0.1.0-beta.1"
-  },
-  "devDependencies": {
-    "@types/react": "15.0.23 || ^16.0.0"
+    "react-popper": "^2.2.4",
+    "react-collapse": "^5.1.0",
+    "react-modal": "3.11.2",
+    "react-merge-refs": "^1.1.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",

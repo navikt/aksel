@@ -5,7 +5,7 @@ import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import "@nav-frontend/popover-styles";
 
-interface PopoverProps {
+export interface PopoverProps {
   /**
    * Element that popover will anchor to
    */

@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface TextProps extends React.HTMLAttributes<HTMLSpanElement> {
   size: "large" | "medium" | "small" | "xs";
   children: React.ReactNode;
 }

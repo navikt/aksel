@@ -6,7 +6,7 @@ import { Expand } from "@nav-frontend/icons";
 import "@nav-frontend/accordion-styles";
 import { guid } from "nav-frontend-js-utils";
 
-interface AccordionProps {
+export interface AccordionProps {
   children: React.ReactNode;
   title: React.ReactNode;
   open?: boolean;
