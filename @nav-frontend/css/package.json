@@ -13,5 +13,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
   }
 }
