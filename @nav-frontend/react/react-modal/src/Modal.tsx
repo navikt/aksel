@@ -3,7 +3,7 @@ import cl from "classnames";
 import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@nav-frontend/icons";
-import "@nav-frontend/modal-styles";
+import "@nav-frontend/css/modal/index.css";
 import Button from "../../react-button/src/index";
 
 // TODO: Has to be documented well that the user has to import react-modal and call

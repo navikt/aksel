@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@nav-frontend/link-styles";
+import "@nav-frontend/css/link/index.css";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

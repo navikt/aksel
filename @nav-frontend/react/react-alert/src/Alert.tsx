@@ -6,7 +6,7 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@nav-frontend/icons";
-import "@nav-frontend/alert-styles";
+import "@nav-frontend/css/alert/index.css";
 
 export interface AlertProps {
   variant: "error" | "warning" | "info" | "success";

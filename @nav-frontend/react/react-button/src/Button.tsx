@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@nav-frontend/button-styles";
+import "@nav-frontend/css/button/index.css";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

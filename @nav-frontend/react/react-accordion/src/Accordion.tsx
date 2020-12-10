@@ -3,7 +3,7 @@ import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 
 import { Expand } from "@nav-frontend/icons";
-import "@nav-frontend/accordion-styles";
+import "@nav-frontend/css/accordion/index.css";
 import { guid } from "nav-frontend-js-utils";
 
 export interface AccordionProps {

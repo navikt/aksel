@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@nav-frontend/tag-styles";
+import "@nav-frontend/css/tag/index.css";
 
 export interface TagProps {
   children: React.ReactNode;
