@@ -8,7 +8,7 @@ import {
 } from "@nav-frontend/icons";
 import "@nav-frontend/alert-styles";
 
-interface AlertProps {
+export interface AlertProps {
   variant: "error" | "warning" | "info" | "success";
   children: React.ReactNode;
   className?: string;

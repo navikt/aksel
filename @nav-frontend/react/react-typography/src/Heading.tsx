@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   level: 1 | 2 | 3 | 4 | 5 | 6;
   size: "xxl" | "xl" | "large" | "medium" | "small";
   children: React.ReactNode;
