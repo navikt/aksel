@@ -134,6 +134,10 @@ module.exports = {
           paragraph: { value: "1.125rem" },
         },
       },
+      weight: {
+        bold: { value: "600" },
+        regular: { value: "400" },
+      },
       line: {
         height: {
           large: { value: "1.625rem" },
