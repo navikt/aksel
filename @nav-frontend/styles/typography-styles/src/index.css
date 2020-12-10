@@ -53,7 +53,6 @@
 /*
  * Article typography
  */
-
 .navds-article__lead {
   font-size: var(--navds-font-size-article-lead);
   line-height: var(--navds-font-line-height-large);
