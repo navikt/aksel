@@ -3,7 +3,7 @@
  */
 .navds-heading {
   margin: 0;
-  font-weight: 600;
+  font-weight: var(--navds-font-weight-bold);
   line-height: calc(1em + 0.25rem);
 }
 
@@ -30,7 +30,6 @@
 /*
  * Text
  */
-
 .navds-text--large {
   font-size: var(--navds-font-size-large);
   line-height: var(--navds-font-line-height-large);
