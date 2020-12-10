@@ -26,7 +26,10 @@
   "workspaces": [
     "website",
     "packages/*",
-    "@nav-frontend/*",
+    "@nav-frontend/styles/*",
+    "@nav-frontend/react/*",
+    "@nav-frontend/icons",
+    "@nav-frontend/tokens",
     "./utilities/build/props-resolver"
   ],
   "husky": {
