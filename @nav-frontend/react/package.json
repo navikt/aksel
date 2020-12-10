@@ -26,7 +26,13 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "classnames": "^2.2.6"
+    "@popperjs/core": "^2.5.4",
+    "@types/react-modal": "^3.10.6",
+    "classnames": "^2.2.6",
+    "react-popper": "^2.2.4",
+    "react-collapse": "^5.1.0",
+    "react-modal": "3.11.2",
+    "react-merge-refs": "^1.1.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0"
