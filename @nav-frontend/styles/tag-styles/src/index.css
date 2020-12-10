@@ -1,13 +1,16 @@
 .navds-tag {
   --navds-tag-bg: var(--navds-color-tag-info-background);
   --navds-tag-border-color: var(--navds-color-tag-info-border);
-  border-radius: 4px;
+  --tag-border-radius: 4px;
+
+  border-radius: var(--tag-border-radius);
   border: var(--navds-border-default);
   background-color: var(--navds-tag-bg);
   border-color: var(--navds-tag-border-color);
   font-size: var(--navds-font-size-xs);
   line-height: var(--navds-font-line-height-xs);
   display: inline-block;
+  /* Padding calculated based on 16px font for 24px tall tag */
   padding: 0.0625rem 0.5rem;
 }
 .navds-tag--error {
