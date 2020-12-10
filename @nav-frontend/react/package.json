@@ -34,9 +34,6 @@
     "react-modal": "3.11.2",
     "react-merge-refs": "^1.1.0"
   },
-  "devDependencies": {
-    "@types/react": "^17.0.0"
-  },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0"

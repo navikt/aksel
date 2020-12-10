@@ -6,5 +6,5 @@
     "esModuleInterop": true,
     "sourceMap": true
   },
-  "include": ["./*/src"]
+  "include": ["./*"]
 }
