@@ -16,6 +16,8 @@
 
 .content {
   padding: 1rem;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .sidebar__logo {
