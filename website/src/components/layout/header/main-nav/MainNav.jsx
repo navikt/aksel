@@ -24,6 +24,9 @@ const MainNav = () => {
             </li>
           ))}
           <li>
+            <a href="/beta">Beta</a>
+          </li>
+          <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"
               className="github"
