@@ -1,5 +1,4 @@
 import { graphql, useStaticQuery } from "gatsby";
-import slug from "rehype-slug";
 
 const usePages = () =>
   useStaticQuery(graphql`
