@@ -3,8 +3,13 @@ import cl from "classnames";
 import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@nav-frontend/icons";
+<<<<<<< HEAD:@nav-frontend/react/modal/src/Modal.tsx
 import "@nav-frontend/css/modal/index.css";
 import Button from "../../button/src/index";
+=======
+import "@nav-frontend/modal-styles";
+import Button from "../../react-button/src/index";
+>>>>>>> vnext:@nav-frontend/react/react-modal/src/Modal.tsx
 
 // TODO: Has to be documented well that the user has to import react-modal and call
 // ReactModal.setAppElement("#root")
