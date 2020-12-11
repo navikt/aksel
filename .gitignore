@@ -99,4 +99,5 @@ examples/webpack/out
 
 *.d.ts
 *-exports.less
-**/css/
+packages/**/css
+utilities/**/css
