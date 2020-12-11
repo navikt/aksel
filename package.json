@@ -18,7 +18,7 @@
     "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
     "lint:jsts": "npx eslint .",
     "lint:less": "npx stylelint --syntax less **/*.less",
-    "lint:css": "npx stylelint --syntax less @nav-frontend/**/*.css",
+    "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "scaffold-new-component": "node utilities/scripts/scaffold.js"
@@ -26,10 +26,10 @@
   "workspaces": [
     "website",
     "packages/*",
-    "@nav-frontend/css",
-    "@nav-frontend/react",
-    "@nav-frontend/icons",
-    "@nav-frontend/tokens",
+    "@navikt/ds-css",
+    "@navikt/ds-react",
+    "@navikt/ds-icons",
+    "@navikt/ds-tokens",
     "./utilities/build/props-resolver"
   ],
   "husky": {
@@ -63,7 +63,7 @@
       "packages/nav-frontend-core/less/hide-text.less",
       "utilities/_templates/**",
       "**/dist/**",
-      "@nav-frontend/**/*.css"
+      "@navikt/**/*.css"
     ]
   },
   "repository": {
