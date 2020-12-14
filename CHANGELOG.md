@@ -9,7 +9,7 @@
 [Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/916)
 
 - Endret implementasjon til å bruke `<span>` over `<i>` da dette var sett på som dårlig praksis.
-- Bumpet Chevron komponent til v1 da ingen større endringer vil treffe denne komponenten fremmover.
+- Bumpet Chevron stilpakke til v1 da ingen større endringer vil treffe denne fremmover.
 
 ## 18. januar 2020
 
