@@ -1,3 +1,5 @@
+@import "~@navikt/ds-css/baseline/index.css";
+
 .page-wrapper {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -14,6 +16,8 @@
 
 .content {
   padding: 1rem;
+  overflow-y: auto;
+  max-height: 100vh;
 }
 
 .sidebar__logo {
