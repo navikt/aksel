@@ -46,7 +46,7 @@ const Header = ({ ...props }) => {
         <div className="header__content">
           <Link to="/" className="header__logo">
             <NAVLogo />
-            <Systemtittel className="header__title" tag="h1">
+            <Systemtittel className="header__title" tag="h2">
               Designsystemet
             </Systemtittel>
           </Link>
