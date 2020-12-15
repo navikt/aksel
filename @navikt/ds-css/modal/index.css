@@ -9,7 +9,6 @@
   padding: 1rem;
   border-radius: var(--modal-border-radius);
   position: relative;
-  flex-grow: 0;
   overflow: auto;
   max-height: 100%;
   margin-bottom: 0;
