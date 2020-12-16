@@ -1,6 +1,16 @@
 {
   "source": ["src/index.js"],
   "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "dist/",
+      "files": [
+        {
+          "destination": "tokens.scss",
+          "format": "scss/variables"
+        }
+      ]
+    },
     "less": {
       "transformGroup": "less",
       "buildPath": "dist/",
