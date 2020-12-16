@@ -3,6 +3,7 @@
 @import "Source-Sans-Pro-regular.css";
 @import "Source-Sans-Pro-italic.css";
 @import "Source-Sans-Pro-600.css";
+@import "print.css";
 
 body {
   font-family: var(--navds-font-family);
