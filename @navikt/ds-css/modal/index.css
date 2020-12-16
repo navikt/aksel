@@ -9,7 +9,6 @@
   padding: 1rem;
   border-radius: var(--modal-border-radius);
   position: relative;
-  flex-grow: 0;
   overflow: auto;
   max-height: 100%;
   margin-bottom: 0;
@@ -50,7 +49,7 @@
   right: 1rem;
 }
 .navds-modal__button svg {
-  /* TODO: Set to 1rem when close icon is fixed to 16x16px */
-  height: 1.33rem;
-  width: 1.33rem;
+  /* 24x24px */
+  height: 1.5rem;
+  width: 1.5rem;
 }

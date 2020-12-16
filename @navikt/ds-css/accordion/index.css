@@ -1,5 +1,5 @@
 .ReactCollapse--collapse {
-  transition: height 300ms ease-out;
+  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .navds-accordion {
   --accordion-border-radius: 4px;
@@ -52,9 +52,8 @@
 }
 .navds-accordion__button .navds-accordion__title {
   font-size: var(--navds-font-size-large);
-  line-height: var(--navds-font-line-height-xs);
+  line-height: 1;
   font-weight: var(--navds-font-weight-bold);
-  color: var(--navds-color-text-primary);
 }
 .navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
