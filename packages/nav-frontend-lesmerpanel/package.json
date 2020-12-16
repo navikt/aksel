@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel",
-  "version": "0.0.58",
+  "version": "0.0.59",
   "main": "lib/lesmerpanel.js",
   "types": "lib/lesmerpanel.d.ts",
   "license": "MIT",
@@ -28,7 +28,7 @@
   "devDependencies": {
     "@types/react-collapse": "^5.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-chevron": "^1.0.23",
+    "nav-frontend-chevron": "^1.0.24",
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-lesmerpanel-style": "^0.0.42",
     "prop-types": "^15.5.10",
