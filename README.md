@@ -20,7 +20,7 @@
 
 Dette repoet inneholder følgende:
 
-- [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk
+- [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk forvaltet av designsystemet
 - [Kildekoden](https://github.com/navikt/nav-frontend-moduler/tree/master/website) til vår nettside; [design.nav.no](https://design.nav.no) som tilbyr dokumentasjon for komponentene og NAVs designsystem generelt
 - [Eksempler på forskjellige frontend-oppsett](https://github.com/navikt/nav-frontend-moduler/tree/master/examples) til applikasjoner som skal bruke komponentene
 
