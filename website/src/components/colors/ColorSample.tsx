@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import Color from "color";
 
@@ -11,17 +11,23 @@ interface SampleProps {
 }
 
 const ColorSample = ({ name, color, onClick }: SampleProps) => {
+  const [buttonColor, setButtonColor] = useState("#fff");
+
+  useEffect(() => {
+    setButtonColor(Color(color).hex());
+  }, [color]);
+
   return (
     <button
       className={classnames("color__sample", {
-        "color__sample--light": Color(color).isLight() || false,
+        "color__sample--light": Color(buttonColor).isLight() || false,
       })}
       style={{
-        background: color,
-        borderColor: color,
+        background: buttonColor,
+        borderColor: buttonColor,
       }}
       type="button"
-      onClick={() => onClick({ name, color: Color(color) })}
+      onClick={() => onClick({ name, color: Color(buttonColor) })}
     >
       <span>{name}</span>
       <span>{color}</span>
