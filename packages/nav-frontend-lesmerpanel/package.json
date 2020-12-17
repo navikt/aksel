@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel",
-  "version": "0.0.59",
+  "version": "0.0.60",
   "main": "lib/lesmerpanel.js",
   "types": "lib/lesmerpanel.d.ts",
   "license": "MIT",
