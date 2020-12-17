@@ -1,0 +1,15 @@
+{
+  "name": "@navikt/ds-css-accordion",
+  "author": "NAV Designsystem team",
+  "license": "MIT",
+  "scripts": {
+    "build": "node-sass index.scss index2.css",
+    "watch": "node-sass -w index.scss index2.css"
+  },
+  "dependencies": {
+    "@navikt/ds-tokens": "0.1.0-beta.1"
+  },
+  "devDependencies": {
+    "sass": "^1.30.0"
+  }
+}
