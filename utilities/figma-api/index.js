@@ -15,7 +15,8 @@ const main = async () => {
     fs.mkdirSync(iconFolder);
   }
 
-  iconNodesArr.forEach(async (iconNode) => {
+  await iconNodesArr.reduce(async (promise, iconNode) => {
+    await promise;
     const url = await api.getSvgImageUrl(iconNode.id).catch((e) => {
       misses.push(iconNode.name);
       return;
@@ -33,7 +34,7 @@ const main = async () => {
         encoding: "utf8",
       }
     );
-  });
+  }, Promise.resolve());
 
   if (misses.length > 0) {
     fs.writeFileSync(path.resolve("./", `misses.txt`), misses, {
