@@ -2,48 +2,64 @@ require("dotenv").config();
 const api = require("./api");
 const fs = require("fs");
 const path = require("path");
+const pLimit = require("p-limit");
 
 const main = async () => {
   const iconFolder = "./icons";
   const misses = [];
+  const limit = pLimit(20);
 
-  const iconNodesArr = await api.getNodeChildren(
-    process.env.FRAME_WITH_ICONS_ID
-  );
+  const iconNodesArr = await api
+    .getNodeChildren(process.env.FRAME_WITH_ICONS_ID)
+    .catch((e) => {
+      throw e;
+    });
+
+  const ids = iconNodesArr.map((node) => node.node_id).join(",");
+  const images = await api.getSvgImageUrls(ids);
 
   if (!fs.existsSync(iconFolder)) {
     fs.mkdirSync(iconFolder);
   }
+  console.log("Total icons: " + iconNodesArr.length);
 
-  await iconNodesArr.reduce(async (promise, iconNode) => {
-    await promise;
-    const url = await api.getSvgImageUrl(iconNode.id).catch((e) => {
-      misses.push(iconNode.name);
-      return;
-    });
+  await Promise.all(
+    images.map((url, x) =>
+      limit(() =>
+        api
+          .getIconContent(url)
+          .then(({ data }) => {
+            fs.writeFileSync(
+              path.resolve(iconFolder, `${iconNodesArr[x].name}.svg`),
+              data,
+              {
+                encoding: "utf8",
+              }
+            );
+          })
+          .catch((e) => {
+            misses.push({ name: iconNodesArr[x].name, error: e.message });
+          })
+      )
+    )
+  );
 
-    const { data: iconcontent } = await api.getIconContent(url).catch((e) => {
-      misses.push(iconNode.name);
-      return;
-    });
-
+  if (misses.length > 0) {
     fs.writeFileSync(
-      path.resolve(iconFolder, `${iconNode.name}.svg`),
-      iconcontent,
+      path.resolve("./", `misses.txt`),
+      JSON.stringify(misses, null, 4),
       {
         encoding: "utf8",
       }
     );
-  }, Promise.resolve());
-
-  if (misses.length > 0) {
-    fs.writeFileSync(path.resolve("./", `misses.txt`), misses, {
-      encoding: "utf8",
-    });
     console.log(`\nCould not download ${misses.length} icons\n`);
   } else {
-    console.log("\nDonwloaded all icons from Figma successfully!\n");
+    console.log("\nDownloaded all icons from Figma successfully!\n");
   }
 };
 
-main();
+try {
+  main();
+} catch (e) {
+  console.error(e);
+}
