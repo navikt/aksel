@@ -5,17 +5,26 @@ const path = require("path");
 
 const main = async () => {
   const iconFolder = "./icons";
+  const misses = [];
+
   const iconNodesArr = await api.getNodeChildren(
     process.env.FRAME_WITH_ICONS_ID
   );
 
-  iconNodesArr.forEach(async (iconNode) => {
-    const url = await api.getSvgImageUrl(iconNode.id);
-    const { data: iconcontent } = await api.getIconContent(url);
+  if (!fs.existsSync(iconFolder)) {
+    fs.mkdirSync(iconFolder);
+  }
 
-    if (!fs.existsSync(iconFolder)) {
-      fs.mkdirSync(iconFolder);
-    }
+  iconNodesArr.forEach(async (iconNode) => {
+    const url = await api.getSvgImageUrl(iconNode.id).catch((e) => {
+      misses.push(iconNode.name);
+      return;
+    });
+
+    const { data: iconcontent } = await api.getIconContent(url).catch((e) => {
+      misses.push(iconNode.name);
+      return;
+    });
 
     fs.writeFileSync(
       path.resolve(iconFolder, `${iconNode.name}.svg`),
@@ -25,6 +34,15 @@ const main = async () => {
       }
     );
   });
+
+  if (misses.length > 0) {
+    fs.writeFileSync(path.resolve("./", `misses.txt`), misses, {
+      encoding: "utf8",
+    });
+    console.log(`\nCould not download ${misses.length} icons\n`);
+  } else {
+    console.log("\nDonwloaded all icons from Figma successfully!\n");
+  }
 };
 
 main();
