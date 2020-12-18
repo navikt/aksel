@@ -101,3 +101,5 @@ examples/webpack/out
 *-exports.less
 **/css/
 */figma-api/icons
+packages/**/css
+utilities/**/css

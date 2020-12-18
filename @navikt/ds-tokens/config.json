@@ -1,0 +1,35 @@
+{
+  "source": ["src/index.js"],
+  "platforms": {
+    "less": {
+      "transformGroup": "less",
+      "buildPath": "dist/",
+      "files": [
+        {
+          "destination": "tokens.less",
+          "format": "less/variables"
+        }
+      ]
+    },
+    "css": {
+      "transformGroup": "css",
+      "buildPath": "dist/",
+      "files": [
+        {
+          "destination": "tokens.css",
+          "format": "css/variables"
+        }
+      ]
+    },
+    "js": {
+      "transformGroup": "js",
+      "buildPath": "dist/",
+      "files": [
+        {
+          "destination": "tokens.js",
+          "format": "javascript/es6"
+        }
+      ]
+    }
+  }
+}

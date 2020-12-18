@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import cn from "classnames";
 
 import OverflowDetector from "../overflow-detector/OverflowDetector";
@@ -6,6 +6,7 @@ import OverflowDetector from "../overflow-detector/OverflowDetector";
 import "./styles.less";
 
 interface ExampleProps {
+  style?: CSSProperties;
   children: React.ReactNode;
   className?: string;
   noScroll?: boolean;
@@ -13,6 +14,7 @@ interface ExampleProps {
 }
 
 const Example = ({
+  style,
   children,
   className = "",
   noScroll = false,
@@ -28,10 +30,14 @@ const Example = ({
     {...props}
   >
     {noScroll ? (
-      <div className="example__inner">{children}</div>
+      <div style={style} className="example__inner">
+        {children}
+      </div>
     ) : (
       <OverflowDetector>
-        <div className="example__inner">{children}</div>
+        <div style={style} className="example__inner">
+          {children}
+        </div>
       </OverflowDetector>
     )}
   </div>

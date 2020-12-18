@@ -6,6 +6,9 @@
   "files": [
     "/src"
   ],
+  "scripts": {
+    "build": "webpack"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"

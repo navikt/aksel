@@ -1,0 +1,73 @@
+.navds-popover {
+  --popover-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
+  --popover-border-radius: 2px;
+  --popover-z-index: 100;
+  --popover__arrow-size: 1rem;
+
+  z-index: var(--popover-z-index);
+  background-color: var(--navds-color-background);
+  box-shadow: var(--popover-shadow);
+  border: var(--navds-border-default);
+  border-radius: var(--popover-border-radius);
+  padding: 1rem;
+}
+
+.navds-popover--small {
+  padding: 0.5rem;
+  --popover__arrow-size: 0.67rem;
+}
+
+.navds-popover--hidden {
+  display: none;
+}
+
+.navds-popover:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-popover__arrow:before {
+  content: "";
+  display: block;
+  width: var(--popover__arrow-size);
+  height: var(--popover__arrow-size);
+  transform: rotate(45deg);
+  background-color: var(--navds-color-background);
+  border: var(--navds-border-default);
+}
+
+.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow {
+  bottom: calc(var(--popover__arrow-size) / -2);
+}
+
+.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow:before {
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+
+.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow {
+  top: calc(var(--popover__arrow-size) / -2);
+}
+
+.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow:before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+
+.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow {
+  right: calc(var(--popover__arrow-size) / -2);
+}
+
+.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow:before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow {
+  left: calc(var(--popover__arrow-size) / -2);
+}
+
+.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow:before {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
