@@ -46,6 +46,7 @@ const Layout = (props) => {
             className={cl("mainContent", {
               "dsportal--fullwidth": props.path === "/",
             })}
+            tabIndex={-1}
           >
             <LayoutPicker {...props}>
               <MdxWrapper>{props.children}</MdxWrapper>
