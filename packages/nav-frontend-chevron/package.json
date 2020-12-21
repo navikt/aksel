@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-chevron",
-  "version": "1.0.21",
+  "version": "1.0.24",
   "main": "lib/chevron.js",
   "types": "lib/chevron.d.ts",
   "license": "MIT",
