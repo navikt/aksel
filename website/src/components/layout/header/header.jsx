@@ -10,7 +10,7 @@ import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
 import "./header.less";
 
-const Header = ({ location, ...props }) => {
+const Header = ({ location }) => {
   const [mobile, setMobile] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const toggleBtn = useRef();
