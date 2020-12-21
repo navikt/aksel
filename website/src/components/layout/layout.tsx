@@ -34,7 +34,7 @@ const Layout = (props) => {
         )}
       </Helmet>
       <div className="mainWrapper">
-        <Header />
+        <Header location={props.location} />
         <Breadcrumb location={props.location} />
         <div className="contentWrapper">
           {!(
