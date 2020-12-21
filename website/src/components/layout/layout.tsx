@@ -34,7 +34,7 @@ const Layout = (props) => {
         )}
       </Helmet>
       <div className="mainWrapper">
-        <Header />
+        <Header location={props.location} />
         <Breadcrumb location={props.location} />
         <div className="contentWrapper">
           {!(
@@ -46,6 +46,7 @@ const Layout = (props) => {
             className={cl("mainContent", {
               "dsportal--fullwidth": props.path === "/",
             })}
+            tabIndex={-1}
           >
             <LayoutPicker {...props}>
               <MdxWrapper>{props.children}</MdxWrapper>

@@ -10,6 +10,7 @@ export const CheckIcon = (props) => {
       fill={fill}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
+      focusable="false"
       {...rest}
     >
       {rest.title && <title>{rest.title}</title>}
@@ -52,6 +53,7 @@ export const NAVLogo = () => (
     width="90"
     height="57"
     viewBox="0 0 269 169"
+    focusable="false"
   >
     <defs>
       <path d="M22.407 43.417V.687H.564v42.73h21.843z" />
@@ -77,6 +79,7 @@ export const NAVLogoCircle = () => (
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 168.9 168.9"
+    focusable="false"
   >
     <path
       fill="#C30000"
@@ -179,7 +182,7 @@ export const ButtonIcon = (props) => (
 );
 
 export const VeilederIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93" focusable="false">
     <path
       fill="#e7e5e2"
       d="M14 50.7C15 52.3 17.9 81 26.5 81S39 51.8 39 50.3c-13.2-7.6-25 .4-25 .4z"
@@ -245,13 +248,17 @@ export const VeilederIcon = () => (
 );
 
 export const GithubLogo = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.58 31.77">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 32.58 31.77"
+    focusable="false"
+  >
     <path d="M16.29,0a16.29,16.29,0,0,0-5.15,31.75c.82.15,1.11-.36,1.11-.79s0-1.41,0-2.77C7.7,29.18,6.74,26,6.74,26a4.36,4.36,0,0,0-1.81-2.39c-1.47-1,.12-1,.12-1a3.43,3.43,0,0,1,2.49,1.68,3.48,3.48,0,0,0,4.74,1.36,3.46,3.46,0,0,1,1-2.18c-3.62-.41-7.42-1.81-7.42-8a6.3,6.3,0,0,1,1.67-4.37,5.94,5.94,0,0,1,.16-4.31s1.37-.44,4.48,1.67a15.41,15.41,0,0,1,8.16,0c3.11-2.11,4.47-1.67,4.47-1.67A5.91,5.91,0,0,1,25,11.07a6.3,6.3,0,0,1,1.67,4.37c0,6.26-3.81,7.63-7.44,8a3.85,3.85,0,0,1,1.11,3c0,2.18,0,3.94,0,4.47s.29.94,1.12.78A16.29,16.29,0,0,0,16.29,0Z" />
   </svg>
 );
 
 export const SuccessIcon = () => (
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-16.000000, -20.000000)">
         <g transform="translate(16.000000, 20.000000)">
@@ -274,7 +281,7 @@ export const SuccessIcon = () => (
 );
 
 export const ErrorIcon = () => (
-  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false">
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-16.000000, -20.000000)">
         <g transform="translate(16.000000, 20.000000)">
@@ -296,7 +303,12 @@ export const ErrorIcon = () => (
 );
 
 export const SketchLogo = () => (
-  <svg viewBox="0 0 494 447" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    viewBox="0 0 494 447"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    focusable="false"
+  >
     <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g transform="translate(-9.000000, -28.000000)">
         <g transform="translate(9.000000, 28.000000)">
@@ -358,7 +370,12 @@ export const SketchLogo = () => (
 );
 
 export const ZeplinLogo = () => (
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41.6 32.7">
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 41.6 32.7"
+    focusable="false"
+  >
     <g transform="translate(0.64018885)">
       <g transform="matrix(1.2117164,0,0,1.2117164,-46.63877,7.1317533)">
         <path fill="#F89920" d="M41.5,13.3l-3.6-4l11-4l1.7,4.7L41.5,13.3z" />
@@ -402,7 +419,12 @@ export const ZeplinLogo = () => (
 );
 
 export const W3CLogo = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 154 103">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    viewBox="0 0 154 103"
+    focusable="false"
+  >
     <rect x="0" y="0" width="154" height="103" fill="#1a5e9a" />
     <g transform="translate(0 12.5)">
       <g>
@@ -432,13 +454,18 @@ export const W3CLogo = () => (
 );
 
 export const Cog = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false">
     <path d="M23.5 10h-2.854c-.2-.79-.454-1.667-.778-2.332L21.9 5.636a.498.498 0 0 0 0-.708l-2.83-2.826a.499.499 0 0 0-.707 0l-2.032 2.031c-.665-.324-1.542-.578-2.331-.777V.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v2.856c-.789.199-1.666.453-2.331.777L5.637 2.102a.499.499 0 0 0-.707 0L2.101 4.929a.5.5 0 0 0 0 .707l2.033 2.033c-.323.662-.578 1.54-.779 2.331H.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h2.855c.2.791.455 1.668.778 2.331L2.1 18.364a.5.5 0 0 0 0 .708L4.93 21.9c.188.188.52.188.707 0l2.032-2.032c.663.322 1.54.577 2.331.778V23.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-2.854c.791-.201 1.668-.456 2.331-.778l2.034 2.032a.5.5 0 0 0 .707 0l2.827-2.828a.499.499 0 0 0 0-.707l-2.032-2.033c.323-.663.578-1.54.778-2.331H23.5a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.501zM12 16c-2.205 0-4-1.795-4-4s1.795-4 4-4c2.206 0 4 1.795 4 4s-1.794 4-4 4z" />
   </svg>
 );
 
 export const LinkIcon = () => (
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    focusable="false"
+  >
     <g>
       <path
         d="M6.5,22.8c-0.9,0-1.8-0.4-2.5-1L2.3,20c-1.4-1.4-1.4-3.6,0-5l4-4c0.9-0.9,2.6-0.9,3.5,0l0.1,0.1l-0.7,0.7l-0.1-0.1
@@ -453,7 +480,12 @@ export const LinkIcon = () => (
 );
 
 export const FileIcon = () => (
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    focusable="false"
+  >
     <g>
       <path
         d="M20.5,24h-17C3.2,24,3,23.8,3,23.5v-23C3,0.2,3.2,0,3.5,0h11c0,0,0,0,0,0c0.1,0,0.3,0.1,0.4,0.1l6,6
@@ -470,6 +502,7 @@ export const CopyIcon = ({ color }) => (
     width="24"
     height="24"
     viewBox="0 0 24 24"
+    focusable="false"
   >
     <g stroke={color ? color : "#000"} fill="none">
       <path d="M20.5 20.5h-14v-20h8l6 6zM14.5.5v6h6M17.5 20.5v3h-14v-20h3" />
@@ -478,7 +511,7 @@ export const CopyIcon = ({ color }) => (
 );
 
 export const FigmaIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" focusable="false">
     <g>
       <path
         fill="#1abcfe"
@@ -509,6 +542,7 @@ export const Edit = (props) => {
         clipRule="evenodd"
         d="M22.835 1.165a3.976 3.976 0 010 5.623L8.073 21.549.682 24 0 23.318l2.45-7.392L17.21 1.165a3.977 3.977 0 015.624 0zm-4.218 7.029l-2.811-2.812L4.188 17l-1.393 4.205 4.207-1.395L18.618 8.194zM21.43 2.57a1.989 1.989 0 00-2.703-.1l-.108.1-1.406 1.406 2.811 2.812 1.406-1.406a1.988 1.988 0 00.101-2.703l-.1-.109z"
         fill="#3E3832"
+        focusable="false"
       />
     </svg>
   );
