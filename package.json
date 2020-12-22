@@ -40,7 +40,8 @@
     "ignorePatterns": [
       "node_modules",
       "lib",
-      "public"
+      "public",
+      "examples"
     ]
   },
   "stylelint": {
