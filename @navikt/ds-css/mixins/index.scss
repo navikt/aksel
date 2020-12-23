@@ -1,0 +1,4 @@
+@mixin var($property, $varName, $varValue) {
+  #{$property}: #{$varValue};
+  #{$property}: var(--#{$varName});
+}
