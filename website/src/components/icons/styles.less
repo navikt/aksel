@@ -1,0 +1,30 @@
+@import (reference) "nav-frontend-core";
+
+.iconpage {
+}
+.iconpage__icons {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.iconbox {
+  height: 8rem;
+  width: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 1rem 1rem 0rem;
+  //font-size: 3rem;
+  box-shadow: @navGra40 0 1px 2px 0;
+
+  &:hover {
+    background-color: @navGra60;
+    box-shadow: @navGra60 0 2px 2px 0;
+    color: @white;
+  }
+}

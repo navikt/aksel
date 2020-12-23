@@ -52,11 +52,16 @@ const GetStartedPage = ({ ...props }) => (
       </div>
     </LenkepanelBase>
     <LenkepanelBase
-      href="https://github.com/navikt/designsystemet/issues"
+      linkCreator={(props) => (
+        <Link className="lenkepanel lenkepanel--border" to={props.href}>
+          {props.children}
+        </Link>
+      )}
+      href="/resources/icons"
       border
     >
       <div>
-        <Systemtittel>Bli med i diskusjonen</Systemtittel>
+        <Systemtittel>Ikonsøk</Systemtittel>
         <p>
           Har du forslag til forbedringer, eller bare noen spørsmål? Diskuter
           med oss her.
