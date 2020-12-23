@@ -5,24 +5,19 @@
 .navds-accordion {
   position: relative;
   background: #ffffff;
-  background: var(--navds-color-background);
   border: 1px solid #b7b1a9;
-  border: var(--navds-border-default);
   border-radius: 4px;
 }
 
 .navds-accordion:hover {
-  box-shadow: #b7b1a9 0 2px 1px 0;
-  box-shadow: var(--navds-shadow-hover);
+  box-shadow: #b7b1a9;
   border: 1px solid #0067c5;
-  border: var(--navds-panel-hover);
   color: black;
 }
 
 .navds-accordion:focus,
 .navds-accordion__button:focus {
   box-shadow: 0 0 0 3px #254b6d;
-  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
@@ -43,7 +38,6 @@
 
 .navds-accordion__button {
   background-color: #ffffff;
-  background-color: var(--navds-color-background);
   display: block;
   padding: 1rem;
   border-radius: 4px;
@@ -60,16 +54,13 @@
 
 .navds-accordion__button .navds-accordion__title {
   font-size: 1.25rem;
-  font-size: var(--navds-font-size-large);
   font-weight: 600;
-  font-weight: var(--navds-font-weight-bold);
   line-height: 1;
 }
 
 .navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
   color: #0067c5;
-  color: var(--navds-color-text-link);
 }
 
 .navds-accordion__content {
