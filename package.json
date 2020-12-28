@@ -80,7 +80,7 @@
     "react-docgen": "^5.3.0",
     "react-docgen-exports-handler": "^1.0.0",
     "react-svg-icon-generator-fork": "^1.0.2",
-    "start-server-and-test": "^1.11.4",
+    "start-server-and-test": "^1.11.7",
     "style-loader": "^1.2.1",
     "through2": "^2.0.3",
     "vinyl": "^2.2.1"
