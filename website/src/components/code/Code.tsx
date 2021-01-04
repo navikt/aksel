@@ -26,6 +26,7 @@ export interface CodeProps {
   className?: string;
   onClick?: (event: React.SyntheticEvent) => void;
   noCopy?: boolean;
+  popupUnder?: boolean;
 }
 
 export const InlineCode = ({ children, className, ...props }: CodeProps) => (
@@ -88,7 +89,13 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
   );
 };
 
-const Code = ({ children, className, noCopy, ...props }: CodeProps) => {
+const Code = ({
+  children,
+  className,
+  noCopy,
+  popupUnder = false,
+  ...props
+}: CodeProps) => {
   const [anchor, setAnchor] = useState(undefined);
   const highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
 
@@ -132,7 +139,11 @@ const Code = ({ children, className, noCopy, ...props }: CodeProps) => {
         </pre>
       </figure>
       <Popover
-        orientering={PopoverOrientering.OverHoyre}
+        orientering={
+          popupUnder
+            ? PopoverOrientering.UnderHoyre
+            : PopoverOrientering.OverHoyre
+        }
         ankerEl={anchor}
         onRequestClose={() => setAnchor(undefined)}
         autoFokus={false}

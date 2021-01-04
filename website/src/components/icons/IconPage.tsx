@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as cls from "classnames";
 import * as Icons from "@navikt/ds-icons";
 import { Input } from "nav-frontend-skjema";
 import Modal from "nav-frontend-modal";
@@ -59,7 +58,10 @@ const IconPage = () => {
         >
           <div>
             <Systemtittel>{modalIcon}</Systemtittel>
-            <Code className="language-jsx">{`import { ${modalIcon} } from '@navikt/ds-icons'`}</Code>
+            <Code
+              popupUnder
+              className="language-jsx"
+            >{`import { ${modalIcon} } from '@navikt/ds-icons'`}</Code>
             <div className="iconpage__modalIcons">
               <Icon className="iconpage__modalIcons--light" />
               <Icon className="iconpage__modalIcons--dark" />
