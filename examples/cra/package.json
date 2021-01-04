@@ -2,14 +2,61 @@
   "name": "cra",
   "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.0.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-dom": "^16.9.8",
+    "classnames": "^2.2.6",
+    "craco": "^0.0.3",
+    "craco-less": "^1.17.1",
+    "nav-frontend-core": "^5.0.10",
+    "nav-frontend-typografi": "^2.0.37",
+    "nav-frontend-typografi-style": "^1.0.31",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^16.8.0",
+    "react-scripts": "4.0.1",
+    "typescript": "^4.0.3",
+    "web-vitals": "^0.2.4"
+  },
+  "devDependencies": {
+    "husky": "^4.3.6",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0"
+  },
   "scripts": {
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "lint": "npx eslint src --ext .js,.jsx,.ts,.tsx --color"
+    "eject": "craco eject",
+    "lint": "yarn lint:jsts && yarn lint:less",
+    "lint:jsts": "npx eslint .",
+    "lint:less": "npx stylelint --syntax less **/*.less"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "yarn lint"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {},
+    "ignoreFiles": []
+  },
+  "prettier": {},
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -22,38 +69,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "react-dom": "^16.13.1",
-    "react-scripts": "3.4.4"
-  },
-  "devDependencies": {
-    "@craco/craco": "^5.6.4",
-    "@typescript-eslint/eslint-plugin": "^3.9.0",
-    "@typescript-eslint/parser": "^3.9.0",
-    "classnames": "^2.2.6",
-    "craco-less": "^1.17.0",
-    "nav-frontend-alertstriper": "^3.0.22",
-    "nav-frontend-alertstriper-style": "^2.0.17",
-    "nav-frontend-core": "^5.0.1",
-    "nav-frontend-ikoner-assets": "^2.0.3",
-    "nav-frontend-paneler-style": "^0.3.21",
-    "nav-frontend-typografi": "^2.0.25",
-    "nav-frontend-typografi-style": "^1.0.22",
-    "nav-frontend-lenker": "^1.0.41",
-    "nav-frontend-lenker-style": "^0.2.29",
-    "nav-frontend-paneler": "^2.0.9",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "babel-eslint": "10.1.0",
-    "eslint": "^6.6.0",
-    "eslint-plugin-import": "^2.22.0",
-    "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "eslint-plugin-jsx-a11y": "^6.3.1",
-    "typescript": "^3.9.7"
   }
 }
