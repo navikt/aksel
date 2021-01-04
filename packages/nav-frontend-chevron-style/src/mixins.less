@@ -61,18 +61,14 @@
     transform: translateX(~"-@{offset}px") rotate(-45deg);
   }
 }
-
-.chevron-orientasjon-mixin(@orientasjon, @size: 20)
-  when
-  (@orientasjon = hoyre) {
+// prettier-ignore
+.chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = hoyre) {
   .chevron-orientasjon-mixin(ned, @size);
 
   transform: rotate(-90deg);
 }
-
-.chevron-orientasjon-mixin(@orientasjon, @size: 20)
-  when
-  (@orientasjon = venstre) {
+// prettier-ignore
+.chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = venstre) {
   .chevron-orientasjon-mixin(opp, @size);
 
   transform: rotate(-90deg);
