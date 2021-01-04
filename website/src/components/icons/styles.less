@@ -9,19 +9,61 @@
   flex-wrap: wrap;
 }
 
+.iconpage__input {
+  margin-bottom: 1rem;
+}
+
 .iconbox {
+  position: relative;
   height: 8rem;
   width: 8rem;
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   margin: 1rem 1rem 1rem 0;
   box-shadow: @navGra40 0 1px 2px 0;
+  border-radius: 2px;
+  font-size: 1.5rem;
 
   &:hover {
-    background-color: @navGra60;
-    box-shadow: @navGra60 0 2px 2px 0;
-    color: @white;
+    border: var(--navds-panel-hover);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: var(--navds-shadow-focus);
+  }
+
+  &__name {
+    position: absolute;
+    bottom: 1rem;
+    transition: bottom 250ms;
+  }
+  &:hover > &__name,
+  &:focus > &__name {
+    bottom: 1.5rem;
+  }
+}
+
+.iconpage__modal {
+  max-width: 500px;
+  font-size: 1rem;
+
+  &Icons {
+    font-size: 128px;
+    display: flex;
+    padding-top: 2rem;
+
+    &--light {
+      padding: 1rem 0 1rem 0;
+      width: 50%;
+      align-self: center;
+    }
+    &--dark {
+      padding: 1rem 0 1rem 0;
+      width: 50%;
+      background-color: @navMorkGra;
+      color: white;
+    }
   }
 }
