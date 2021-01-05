@@ -5,9 +5,15 @@ import { Input } from "nav-frontend-skjema";
 import Modal from "nav-frontend-modal";
 import "./styles.less";
 import IconBox from "./IconBox";
-import Code from "../code/Code";
-import { Systemtittel, Undertittel } from "nav-frontend-typografi";
+import Code, { Bash, copyImport } from "../code/Code";
+import {
+  Element,
+  Normaltekst,
+  Systemtittel,
+  Undertittel,
+} from "nav-frontend-typografi";
 import Knapp from "nav-frontend-knapper";
+
 const beautify_html = require("js-beautify").html;
 const JSZip = require("jszip");
 
@@ -54,7 +60,7 @@ const IconPage = () => {
       zip.folder("Ikonpakke").file(`${name}.svg`, renderToString(<IconComp />));
     }
     const file = await zip.generateAsync({ type: "blob" });
-
+    console.log(file.size);
     element.href = URL.createObjectURL(file);
     element.download = `NAV-ikonpakke.zip`;
     document.body.appendChild(element);
@@ -70,9 +76,14 @@ const IconPage = () => {
         description={filteredIcons.length + " ikoner matcher søket"}
         onChange={(e) => setFilter(e.target.value)}
       />
-      <Knapp kompakt onClick={() => downloadAllSvg()}>
+      <Knapp
+        className="iconpage__dlButton"
+        kompakt
+        onClick={() => downloadAllSvg()}
+      >
         Last ned ikonpakke (SVG)
       </Knapp>
+
       <div className="iconpage__icons">
         {filteredIcons.map((name) => (
           <IconBox
