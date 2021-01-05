@@ -2,15 +2,20 @@
 
 .iconpage__icons {
   height: 100%;
-  width: 100%;
+  width: fit-content;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 1rem;
 }
 
 .iconpage__input {
   margin-bottom: 1rem;
+  width: 17rem;
+}
+.iconpage__headlines.typo-undertittel {
+  margin-bottom: 0.5rem;
 }
 
 .iconbox {
@@ -21,10 +26,10 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  margin: 1rem 1rem 1rem 0;
+  margin: 1rem 0 1rem 0;
   box-shadow: @navGra40 0 1px 2px 0;
   border-radius: 2px;
-  font-size: 1.5rem;
+  font-size: 2rem;
 
   &:hover {
     border: var(--navds-panel-hover);
@@ -49,6 +54,9 @@
   max-width: 500px;
   font-size: 1rem;
 
+  &Svg {
+    margin: 0;
+  }
   &Icons {
     font-size: 128px;
     display: flex;
