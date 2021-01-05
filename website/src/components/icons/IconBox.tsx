@@ -14,7 +14,7 @@ const IconBox = ({ name, onClick, ...props }) => {
       className="iconbox"
       onClick={() => onClick(name)}
     >
-      <Icon className="iconbox__icon" />
+      <Icon focusable={false} className="iconbox__icon" />
       <Undertekst className="iconbox__name">{name}</Undertekst>
     </div>
   );

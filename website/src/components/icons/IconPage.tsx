@@ -5,13 +5,10 @@ import { Input } from "nav-frontend-skjema";
 import Modal from "nav-frontend-modal";
 import "./styles.less";
 import IconBox from "./IconBox";
-import Code, { Bash, copyImport } from "../code/Code";
-import {
-  Element,
-  Normaltekst,
-  Systemtittel,
-  Undertittel,
-} from "nav-frontend-typografi";
+import Code from "../code/Code";
+import Lenkepanel from "nav-frontend-lenkepanel";
+import { Systemtittel, Undertittel } from "nav-frontend-typografi";
+import { FigmaIcon } from "../../components/assets/images/svg";
 import Knapp from "nav-frontend-knapper";
 
 const beautify_html = require("js-beautify").html;
@@ -75,14 +72,26 @@ const IconPage = () => {
         label="Filter"
         description={filteredIcons.length + " ikoner matcher søket"}
         onChange={(e) => setFilter(e.target.value)}
+        autoComplete="on"
       />
-      <Knapp
-        className="iconpage__dlButton"
-        kompakt
+      <Lenkepanel
+        className="resource-link iconpage__figma"
+        href="https://www.figma.com/file/3AjAxeQP4uMFgqSazKXxOh/NAV-Ikonbiblioteket-Streamline"
+        border
+        tittelProps="undertittel"
+      >
+        <FigmaIcon focusable={false} />
+        Ikon&shy;bibliotek i Figma
+      </Lenkepanel>
+      <Lenkepanel
+        className="resource-link iconpage__figma"
         onClick={() => downloadAllSvg()}
+        href="#"
+        border
+        tittelProps="undertittel"
       >
         Last ned ikonpakke (SVG)
-      </Knapp>
+      </Lenkepanel>
 
       <div className="iconpage__icons">
         {filteredIcons.map((name) => (
