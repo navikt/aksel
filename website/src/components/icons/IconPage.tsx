@@ -76,7 +76,7 @@ const IconPage = () => {
       />
       <Lenkepanel
         className="resource-link iconpage__figma"
-        href="https://www.figma.com/file/3AjAxeQP4uMFgqSazKXxOh/NAV-Ikonbiblioteket-Streamline"
+        href="https://www.figma.com/proto/UmEVH3pZ71uJPsSz9ilP3Y/NAV-ikoner-2.1-Figma-i-test?node-id=241%3A696&scaling=min-zoom"
         border
         tittelProps="undertittel"
       >

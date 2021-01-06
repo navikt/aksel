@@ -17,12 +17,21 @@ const IconPage = () => {
         anbefaler derfor å wrappe ikonene eller sette font-size: 1.5rem/24px
         inline for å oppnå dette.
       </Ingress>
+      <Ingress>
+        React komponenten tar imot props og setter dem direkte på SVG elementet
+      </Ingress>
       <Undertittel className="iconpage__headlines">Installering</Undertittel>
       <Bash
         className="iconpage__installBash"
         onClick={(e) => copyImport(e, "yarn add @navikt/ds-icons")}
       >
         yarn add @navikt/ds-icons
+      </Bash>
+      <Bash
+        className="iconpage__installBash"
+        onClick={(e) => copyImport(e, "npm i @navikt/ds-icons")}
+      >
+        npm i @navikt/ds-icons
       </Bash>
       <Undertittel className="iconpage__headlines">React</Undertittel>
       <Code popupUnder className="language-jsx">
