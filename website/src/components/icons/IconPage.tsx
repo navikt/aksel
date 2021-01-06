@@ -33,6 +33,7 @@ const IconPage = () => {
     setOpenModal(true);
     setModalIcon(name);
   };
+
   const handleModalClose = () => {
     setOpenModal(false);
     setModalIcon("");
