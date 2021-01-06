@@ -57,6 +57,7 @@ const IconPage = () => {
       const IconComp = Icons[name];
       zip.folder("Ikonpakke").file(`${name}.svg`, renderToString(<IconComp />));
     }
+
     const file = await zip.generateAsync({ type: "blob" });
     console.log(file.size);
     element.href = URL.createObjectURL(file);
