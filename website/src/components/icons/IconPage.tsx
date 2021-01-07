@@ -1,18 +1,16 @@
+import * as Icons from "@navikt/ds-icons";
+import Knapp from "nav-frontend-knapper";
+import Modal from "nav-frontend-modal";
+import { Input } from "nav-frontend-skjema";
+import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
-import * as Icons from "@navikt/ds-icons";
-import { Input } from "nav-frontend-skjema";
-import Modal from "nav-frontend-modal";
-import "./styles.less";
-import IconBox from "./IconBox";
 import Code from "../code/Code";
-import Lenkepanel from "nav-frontend-lenkepanel";
-import { Systemtittel, Undertittel } from "nav-frontend-typografi";
-import { FigmaIcon } from "../../components/assets/images/svg";
-import Knapp from "nav-frontend-knapper";
+import IconBox from "./IconBox";
+import IconSidebar from "./IconSidebar";
+import "./styles.less";
 
 const beautify_html = require("js-beautify").html;
-const JSZip = require("jszip");
 
 const IconPage = () => {
   useEffect(() => {
@@ -49,26 +47,9 @@ const IconPage = () => {
     document.body.removeChild(element);
   };
 
-  const downloadAllSvg = async () => {
-    const element = document.createElement("a");
-    var zip = new JSZip();
-
-    for (const name in Icons) {
-      const IconComp = Icons[name];
-      zip.folder("Ikonpakke").file(`${name}.svg`, renderToString(<IconComp />));
-    }
-
-    const file = await zip.generateAsync({ type: "blob" });
-    console.log(file.size);
-    element.href = URL.createObjectURL(file);
-    element.download = `NAV-ikonpakke.zip`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
-
   return (
     <div className="iconpage">
+      <IconSidebar />
       <Input
         className="iconpage__input"
         label="Filter"
@@ -76,24 +57,6 @@ const IconPage = () => {
         onChange={(e) => setFilter(e.target.value)}
         autoComplete="on"
       />
-      <Lenkepanel
-        className="resource-link iconpage__figma"
-        href="https://www.figma.com/proto/UmEVH3pZ71uJPsSz9ilP3Y/NAV-ikoner-2.1-Figma-i-test?node-id=241%3A696&scaling=min-zoom"
-        border
-        tittelProps="undertittel"
-      >
-        <FigmaIcon focusable={false} />
-        Ikon&shy;bibliotek i Figma
-      </Lenkepanel>
-      <Lenkepanel
-        className="resource-link iconpage__figma"
-        onClick={() => downloadAllSvg()}
-        href="#"
-        border
-        tittelProps="undertittel"
-      >
-        Last ned ikonpakke (SVG)
-      </Lenkepanel>
 
       <div className="iconpage__icons">
         {filteredIcons.map((name) => (

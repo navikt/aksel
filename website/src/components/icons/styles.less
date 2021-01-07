@@ -11,6 +11,11 @@
     column-gap: 0.5rem;
   }
 
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &__input {
     margin-bottom: 1rem;
     width: 17rem;
@@ -32,8 +37,15 @@
     margin-bottom: 2rem;
   }
 
-  &__figma {
-    max-width: 400px;
+  &__linkPanels {
+    width: 300px;
+
+    margin-right: 1rem;
+  }
+  &__linkHeadlines {
+    @media (max-width: 1439px) {
+      display: none;
+    }
   }
 
   &__modal {
@@ -96,5 +108,13 @@
   &:hover > &__name,
   &:focus > &__name {
     bottom: 1.5rem;
+  }
+}
+
+.iconsidebar {
+  &__save {
+    position: absolute;
+    right: 0rem;
+    font-size: 1.8rem;
   }
 }
