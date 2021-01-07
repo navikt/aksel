@@ -53,26 +53,17 @@ const IconSidebar = () => {
         Nedlastning
       </Undertittel>
 
-      <a
+      <button
+        style={{ cursor: "pointer" }}
         className="lenkepanel lenkepanel--border resource-link iconpage__linkPanels"
         onClick={() => downloadAllSvg()}
-        href="#"
-        id="testid"
+        aria-label="Last ned alle ikoner"
       >
         <Undertittel>NAV-ikonpakke.zip</Undertittel>
         <span className="iconsidebar__save">
           <Save2 />
         </span>
-      </a>
-      {/* <Lenkepanel
-        className="resource-link iconpage__linkPanels"
-        onClick={() => downloadAllSvg()}
-        href="#"
-        border
-        tittelProps="undertittel"
-      >
-        NAV-ikonpakke.zip
-      </Lenkepanel> */}
+      </button>
       <Undertittel className="iconpage__headlines iconpage__linkHeadlines">
         Ressurser
       </Undertittel>
