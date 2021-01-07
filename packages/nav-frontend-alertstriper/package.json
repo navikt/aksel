@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-alertstriper",
-  "version": "3.0.38",
+  "version": "3.0.39",
   "main": "lib/alertstripe.js",
   "types": "lib/alertstripe.d.ts",
   "license": "MIT",

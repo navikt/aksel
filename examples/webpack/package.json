@@ -1,7 +1,6 @@
 {
-  "name": "nav-frontend-example-webpack",
+  "name": "webpack",
   "version": "0.0.1",
-  "description": "Webpack setup for frontendprosjekter",
   "main": "index.tsx",
   "scripts": {
     "clean": "rimraf dist",
@@ -10,7 +9,26 @@
     "build": "npm run clean && npm run build:js && npm run build:html",
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "test": "echo \"No test specified\" && exit 0",
-    "lint": "npx eslint src --ext .js,.jsx --color"
+    "lint": "yarn lint:jsts && yarn lint:less",
+    "lint:jsts": "npx eslint .",
+    "lint:less": "npx stylelint --syntax less **/*.less"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "yarn lint"
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {},
+    "ignoreFiles": []
+  },
+  "prettier": {},
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
   },
   "author": "Name <mail@mail.com>",
   "license": "MIT",
@@ -20,21 +38,28 @@
     "@babel/preset-react": "^7.10.4",
     "@types/react": "^16.9.46",
     "@types/react-dom": "^16.9.8",
-    "@typescript-eslint/eslint-plugin": "^3.9.0",
-    "@typescript-eslint/parser": "^3.9.0",
-    "babel-eslint": "^10.1.0",
+    "@typescript-eslint/eslint-plugin": "^4.0.0",
+    "@typescript-eslint/parser": "^4.0.0",
+    "babel-eslint": "^10.0.0",
     "babel-loader": "^8.1.0",
     "copyfiles": "^2.3.0",
     "css-loader": "^3.6.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.5.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.3",
-    "eslint-plugin-react-hooks": "^4.0.0",
+    "eslint-plugin-react-hooks": "^4.0.8",
     "file-loader": "^6.0.0",
+    "husky": "^4.3.6",
     "less-loader": "^6.2.0",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
     "react-hot-loader": "^4.12.21",
     "style-loader": "^1.2.1",
+    "stylelint": "^13.8.0",
+    "stylelint-config-standard": "^20.0.0",
     "ts-loader": "^8.0.2",
     "typescript": "^3.9.7",
     "webpack": "^4.43.0",
@@ -43,14 +68,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
-    "nav-frontend-alertstriper": "^3.0.20",
-    "nav-frontend-alertstriper-style": "^2.0.17",
     "nav-frontend-core": "^5.0.1",
-    "nav-frontend-ikoner-assets": "^2.0.3",
-    "nav-frontend-lenker": "^1.0.40",
-    "nav-frontend-lenker-style": "^0.2.29",
-    "nav-frontend-paneler": "^2.0.7",
-    "nav-frontend-paneler-style": "^0.3.21",
     "nav-frontend-typografi": "^2.0.23",
     "nav-frontend-typografi-style": "^1.0.22",
     "prop-types": "^15.7.2",

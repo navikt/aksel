@@ -43,7 +43,7 @@ export interface NavFrontendChevronProps {
 class NavFrontendChevron extends React.Component<NavFrontendChevronProps> {
   render() {
     const { type, stor, className, ...props } = this.props;
-    return <i className={cls(type, stor, className)} {...props} />;
+    return <span className={cls(type, stor, className)} {...props} />;
   }
 }
 

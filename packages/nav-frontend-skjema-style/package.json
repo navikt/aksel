@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema-style",
-  "version": "2.0.23",
+  "version": "2.0.24",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
