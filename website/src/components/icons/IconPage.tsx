@@ -1,7 +1,7 @@
 import * as Icons from "@navikt/ds-icons";
 import Knapp from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
-import { Input } from "nav-frontend-skjema";
+import { Input, Checkbox } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
@@ -20,12 +20,22 @@ const IconPage = () => {
   const [filter, setFilter] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [modalIcon, setModalIcon] = useState("");
+  const [checkedBox, setCheckedBox] = useState(0);
 
   const Icon = modalIcon && Icons[modalIcon];
 
-  const filteredIcons = Object.keys(Icons).filter(
-    (name) => name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
-  );
+  const filteredIcons = Object.keys(Icons)
+    .filter((name) => name.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
+    .filter((name) => {
+      switch (checkedBox) {
+        case 1:
+          return !name.endsWith("Fill");
+        case 2:
+          return name.endsWith("Fill");
+        default:
+          return true;
+      }
+    });
 
   const handleModal = (name) => {
     setOpenModal(true);
@@ -47,16 +57,54 @@ const IconPage = () => {
     document.body.removeChild(element);
   };
 
+  const headline =
+    filteredIcons.length === Object.keys(Icons).length
+      ? `${Object.keys(Icons).length} ikoner`
+      : filteredIcons.length !== 0
+      ? `${filteredIcons.length} treff`
+      : "Ingen ikoner funnet";
+
   return (
     <div className="iconpage">
+      <label htmlFor="ikonsidefilter">
+        <Systemtittel id="ikonsidetittel">
+          Søk på NAV sine nye ikoner
+        </Systemtittel>
+      </label>
+      <Undertittel className="iconpage__headlines iconpage__headlines--sidebar">
+        Ressurser
+      </Undertittel>
       <IconSidebar />
       <Input
+        id="ikonsidefilter"
+        aria-labelledby="ikonsidetittel"
         className="iconpage__input"
-        label="Filter"
-        description={filteredIcons.length + " ikoner matcher søket"}
         onChange={(e) => setFilter(e.target.value)}
         autoComplete="on"
+        placeholder={`Søk etter ${Object.keys(Icons).length} ikoner...`}
       />
+      <div className="iconpage__checkboxWrapper">
+        <Checkbox
+          checked={checkedBox === 0}
+          onClick={() => setCheckedBox(0)}
+          label="All"
+        />
+        <Checkbox
+          checked={checkedBox === 1}
+          onClick={() => {
+            checkedBox === 1 ? setCheckedBox(0) : setCheckedBox(1);
+          }}
+          label="Regular"
+        />
+        <Checkbox
+          checked={checkedBox === 2}
+          onClick={() => {
+            checkedBox === 2 ? setCheckedBox(0) : setCheckedBox(2);
+          }}
+          label="Filled"
+        />
+      </div>
+      <Undertittel className="iconpage__headlines">{headline}</Undertittel>
 
       <div className="iconpage__icons">
         {filteredIcons.map((name) => (
@@ -89,8 +137,16 @@ const IconPage = () => {
               {`${beautify_html(renderToString(<Icon />))}`}
             </Code>
             <div className="iconpage__modalIcons">
-              <Icon className="iconpage__modalIcons--light" />
-              <Icon className="iconpage__modalIcons--dark" />
+              <Icon
+                className="iconpage__modalIcons--light"
+                aria-label={`${modalIcon}-ikon mørk`}
+                role="img"
+              />
+              <Icon
+                className="iconpage__modalIcons--dark"
+                aria-label={`${modalIcon}-ikon mørk`}
+                role="img"
+              />
             </div>
           </div>
         </Modal>

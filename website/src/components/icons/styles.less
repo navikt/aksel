@@ -3,12 +3,10 @@
 .iconpage {
   &__icons {
     height: 100%;
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    column-gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 8rem);
+    column-gap: 0.9rem;
+    border-top: 4px solid @navLysGra;
   }
 
   &__links {
@@ -20,7 +18,21 @@
     margin-bottom: 1rem;
     width: 17rem;
   }
+  &__checkboxWrapper {
+    display: flex;
+    align-content: center;
+    column-gap: 2rem;
+    flex-wrap: wrap;
+  }
 
+  &__headlines {
+    &--sidebar {
+      display: none;
+      @media (max-width: 1439px) {
+        display: block;
+      }
+    }
+  }
   &__headlines.typo-undertittel {
     margin-bottom: 0.5rem;
   }
