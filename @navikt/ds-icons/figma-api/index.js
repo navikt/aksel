@@ -21,6 +21,8 @@ const main = async () => {
 
   if (!fs.existsSync(iconFolder)) {
     fs.mkdirSync(iconFolder);
+  } else {
+    fs.rmdirSync(iconFolder);
   }
   console.log("Total icons: " + iconNodesArr.length);
 

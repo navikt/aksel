@@ -39,7 +39,7 @@ const getSvgImageUrls = async (nodeIds) => {
   const {
     data: { images },
   } = await instanceImages.get(`/?ids=${nodeIds}&format=svg`);
-  return Object.keys(images).map((key) => images[key]);
+  return Object.values(images);
 };
 
 /**
