@@ -3,9 +3,25 @@ const fs = require("fs");
 const path = require("path");
 const pLimit = require("p-limit");
 const kebab = require("lodash.kebabcase");
+const rimraf = require("rimraf");
+
+const generateMetadata = (iconNodesArr) => {
+  return iconNodesArr.map(
+    ({ name, description, created_at, updated_at, containing_frame }) => {
+      return {
+        name,
+        description,
+        created_at,
+        updated_at,
+        pageName: containing_frame.pageName,
+      };
+    }
+  );
+};
 
 const main = async () => {
   const iconFolder = "./svg";
+  const metadataFileName = "./figma-api/metadata.json";
   const misses = [];
 
   // Limiting to ~20 concurrent downloads seems to lead to fewer erros
@@ -15,12 +31,23 @@ const main = async () => {
     throw e;
   });
 
+  if (fs.existsSync(metadataFileName)) {
+    fs.unlinkSync(metadataFileName);
+  }
+  fs.writeFileSync(
+    metadataFileName,
+    JSON.stringify(generateMetadata(iconNodesArr), null, 4),
+    {
+      encoding: "utf8",
+    }
+  );
+
   const iconUrls = await api.getSvgImageUrls(
     iconNodesArr.map((node) => node.node_id).join(",")
   );
 
   if (fs.existsSync(iconFolder)) {
-    fs.rmdirSync(iconFolder);
+    rimraf.sync(iconFolder);
   }
   fs.mkdirSync(iconFolder);
 
