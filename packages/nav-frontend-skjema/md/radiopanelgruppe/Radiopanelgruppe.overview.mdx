@@ -51,7 +51,7 @@ import { RadioPanelGruppe } from "./../../";
 </Example>
 
 ```jsx
-const panelRef = useRef(null);
+const juice1Ref = useRef(null);
 
 <RadioPanelGruppe
   name="samplename"
@@ -61,7 +61,7 @@ const panelRef = useRef(null);
       label: "Eplejuice",
       value: "juice1",
       id: "juice1id",
-      radioRef: (ref) => (panelRef.current = ref),
+      radioRef: (ref) => (juice1Ref.current = ref),
     },
     { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
     { label: "Melk", value: "melk", disabled: true, id: "melkid" },
