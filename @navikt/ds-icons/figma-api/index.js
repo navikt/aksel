@@ -19,11 +19,11 @@ const main = async () => {
     iconNodesArr.map((node) => node.node_id).join(",")
   );
 
-  if (!fs.existsSync(iconFolder)) {
-    fs.mkdirSync(iconFolder);
-  } else {
+  if (fs.existsSync(iconFolder)) {
     fs.rmdirSync(iconFolder);
   }
+  fs.mkdirSync(iconFolder);
+
   console.log("Total icons: " + iconNodesArr.length);
 
   await Promise.all(
