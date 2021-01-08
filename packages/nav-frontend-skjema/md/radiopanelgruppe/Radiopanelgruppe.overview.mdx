@@ -1,5 +1,6 @@
 import RadioPanelGruppeExample from "./../../sample/_radiopanelgruppe.example.js";
 import { RadioPanelGruppe } from "./../../";
+import Knapp from "nav-frontend-knapper";
 
 ## Normal
 
@@ -42,4 +43,33 @@ import { RadioPanelGruppe } from "./../../";
   onChange={this.onChange}
   feil={{ feilmelding: "Her er det en feil." }}
 />
+```
+
+## Bruk av radioRef
+
+<Example>
+  <RadioPanelGruppeExample button name="example-3" />
+</Example>
+
+```jsx
+const panelRef = useRef(null);
+
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    {
+      label: "Eplejuice",
+      value: "juice1",
+      id: "juice1id",
+      radioRef: (ref) => (panelRef.current = ref),
+    },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Her er det en feil." }}
+/>;
 ```

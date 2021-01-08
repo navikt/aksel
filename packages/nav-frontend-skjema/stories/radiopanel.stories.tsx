@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createRef, useRef } from "react";
 import { RadioPanel, RadioPanelGruppe } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
@@ -27,7 +27,11 @@ export const radioPanel = () => {
             id: "juice1id",
             checked: true,
           },
-          { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+          {
+            label: "Appelsinjuice",
+            value: "juice2",
+            id: "juice2id",
+          },
           { label: "Melk", value: "melk", disabled: true, id: "melkid" },
           { label: "Ananasjuice", value: "juice3", id: "juice4id" },
         ]}
