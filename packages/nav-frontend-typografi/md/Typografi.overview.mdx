@@ -13,13 +13,14 @@ import {
   Element,
   Feilmelding,
   Undertekst,
+  UndertekstBold,
 } from "./../";
 
 ## Bruk av Typografi i prosjekter
 
 For å sikre at prosjektet ditt får riktig typografi bruker typografi-komponenten vår denne CSS-klassen fra `nav-frontend-typografi-style`.
 
-```less
+```css
 .app {
   .typo-normal-mixin();
   color: @navMorkGra;
@@ -46,6 +47,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Sidetittel>Sidetittel</Sidetittel>
+<h1 className="typo-sidetittel">Sidetittel</h1>
 ```
 
 <Example>
@@ -54,6 +56,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Innholdstittel>Innholdstittel</Innholdstittel>
+<h1 className="typo-innholdstittel">Innholdstittel</h1>
 ```
 
 <Example>
@@ -62,6 +65,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Systemtittel>Systemtittel</Systemtittel>
+<h2 className="typo-systemtittel">Systemtittel</h2>
 ```
 
 <Example>
@@ -70,6 +74,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Undertittel>Undertittel</Undertittel>
+<h2 className="typo-undertittel">Undertittel</h2>
 ```
 
 <Example>
@@ -78,6 +83,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Ingress>Ingress</Ingress>
+<p className="typo-ingress">Ingress</p>
 ```
 
 <Example>
@@ -86,6 +92,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Element>Element</Element>
+<p className="typo-element">Element</p>
 ```
 
 <Example>
@@ -94,6 +101,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Feilmelding>Feilmelding</Feilmelding>
+<p className="typo-feilmelding">Feilmelding</p>
 ```
 
 <Example>
@@ -102,6 +110,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Normaltekst>Normaltekst</Normaltekst>
+<p className="typo-normal">Normaltekst</p>
 ```
 
 <Example>
@@ -110,6 +119,7 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <EtikettLiten>EtikettLiten</EtikettLiten>
+<p className="typo-etikett-liten">EtikettLiten</p>
 ```
 
 <Example>
@@ -118,6 +128,16 @@ i ønsket less fil og da legge til klassen `app` på elementet som pakker in pro
 
 ```jsx
 <Undertekst>Undertekst</Undertekst>
+<p className="typo-undertekst">Undertekst</p>
+```
+
+<Example>
+  <UndertekstBold>UndertekstBold</UndertekstBold>
+</Example>
+
+```jsx
+<UndertekstBold>UndertekstBold</UndertekstBold>
+<p className="typo-undertekst-bold">UndertekstBold</p>
 ```
 
 ## Selvbestemt HTML-tag

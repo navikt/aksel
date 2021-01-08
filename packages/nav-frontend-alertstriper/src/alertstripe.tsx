@@ -66,7 +66,12 @@ class AlertStripe extends React.Component<Props> {
       <div className={cls(type, form, className)} {...props}>
         <span className="alertstripe__ikon">
           <span className="sr-only">{type}</span>
-          <Ikon kind={ikonKind(type)} size={size} />
+          <Ikon
+            role="img"
+            aria-label={`${type}-ikon`}
+            kind={ikonKind(type)}
+            size={size}
+          />
         </span>
         <Normaltekst className="alertstripe__tekst" tag="div">
           {children}

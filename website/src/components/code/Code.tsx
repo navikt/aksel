@@ -6,6 +6,7 @@ import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Normaltekst } from "nav-frontend-typografi";
 import { CopyIcon } from "../assets/images/svg";
 import "./styles.less";
+import "./theme.css";
 
 export const copyImport = (e, content: string) => {
   copy(content, {

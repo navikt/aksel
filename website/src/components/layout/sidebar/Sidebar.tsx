@@ -67,6 +67,7 @@ const Sidebar = ({ location, className = "" }) => {
           label="Filter"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
+          autoComplete="on"
         />
         <Systemtittel
           id="left-navigation-title"
