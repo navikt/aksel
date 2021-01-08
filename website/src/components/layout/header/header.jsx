@@ -10,7 +10,7 @@ import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
 import "./header.less";
 
-const Header = ({ ...props }) => {
+const Header = ({ location }) => {
   const [mobile, setMobile] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const toggleBtn = useRef();
@@ -35,6 +35,7 @@ const Header = ({ ...props }) => {
   };
 
   const ariaHidden = mobile ? { "aria-hidden": !!mobileNavOpen } : undefined;
+  const headlineTag = !!location.pathname.match(/\/.*?\/\S/) ? "h2" : "h1";
 
   checkViewport();
   return (
@@ -46,7 +47,7 @@ const Header = ({ ...props }) => {
         <div className="header__content">
           <Link to="/" className="header__logo">
             <NAVLogo />
-            <Systemtittel className="header__title" tag="h1">
+            <Systemtittel className="header__title" tag={headlineTag}>
               Designsystemet
             </Systemtittel>
           </Link>
