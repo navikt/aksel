@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import {
-  ErrorFilled,
-  WarningFilled,
-  InformationFilled,
-  SuccessFilled,
+  ErrorSolid,
+  WarningSolid,
+  InformationSolid,
+  SuccessSolid,
 } from "@navikt/ds-icons";
 import "@navikt/ds-css/alert/index.css";
 
@@ -18,13 +18,13 @@ export interface AlertProps {
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled />;
+      return <ErrorSolid />;
     case "warning":
-      return <WarningFilled />;
+      return <WarningSolid />;
     case "info":
-      return <InformationFilled />;
+      return <InformationSolid />;
     case "success":
-      return <SuccessFilled />;
+      return <SuccessSolid />;
     default:
       return null;
   }

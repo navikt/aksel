@@ -1,10 +1,9 @@
 import * as Icons from "@navikt/ds-icons";
-import { guid } from "nav-frontend-js-utils";
 import Knapp from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
 import { Input, Checkbox } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
 import Code from "../code/Code";
 import IconBox from "./IconBox";
@@ -44,6 +43,7 @@ const IconPage = () => {
   const Icon = selectedIcon && Icons[selectedIcon.name];
 
   useEffect(() => {
+    metadata.sort((a: MetaType, b: MetaType) => a.name.localeCompare(b.name));
     for (const icon of metadata) {
       icon.visible = true;
       icon.name = startCase(icon.name).replace(/\s/g, "");

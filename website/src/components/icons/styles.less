@@ -1,6 +1,8 @@
 @import (reference) "nav-frontend-core";
 
 .iconpage {
+  min-height: 50vh;
+
   &__icons {
     height: 100%;
     display: grid;
@@ -18,6 +20,7 @@
     margin-bottom: 1rem;
     width: 17rem;
   }
+
   &__checkboxWrapper {
     display: flex;
     align-content: center;
@@ -28,11 +31,13 @@
   &__headlines {
     &--sidebar {
       display: none;
+
       @media (max-width: 1439px) {
         display: block;
       }
     }
   }
+
   &__headlines.typo-undertittel {
     margin-bottom: 0.5rem;
   }
@@ -51,9 +56,9 @@
 
   &__linkPanels {
     width: 300px;
-
     margin-right: 1rem;
   }
+
   &__linkHeadlines {
     @media (max-width: 1439px) {
       display: none;
@@ -126,7 +131,7 @@
 .iconsidebar {
   &__save {
     position: absolute;
-    right: 0rem;
+    right: 0;
     font-size: 1.8rem;
   }
 }
