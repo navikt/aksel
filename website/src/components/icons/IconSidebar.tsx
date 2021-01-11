@@ -5,7 +5,7 @@ import { Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
 import { FigmaIcon, GithubLogo } from "../../components/assets/images/svg";
-import { Save2 } from "@navikt/ds-icons";
+import { Download } from "@navikt/ds-icons";
 import "./styles.less";
 
 const JSZip = require("jszip");
@@ -61,7 +61,7 @@ const IconSidebar = () => {
       >
         <Undertittel>NAV-ikonpakke.zip</Undertittel>
         <span className="iconsidebar__save">
-          <Save2 />
+          <Download />
         </span>
       </button>
       <Undertittel className="iconpage__headlines iconpage__linkHeadlines">

@@ -24,18 +24,28 @@ const IconPage = () => {
 
   const Icon = modalIcon && Icons[modalIcon];
 
-  const filteredIcons = Object.keys(Icons)
-    .filter((name) => name.toLowerCase().indexOf(filter.toLowerCase()) !== -1)
-    .filter((name) => {
-      switch (checkedBox) {
-        case 1:
-          return !name.endsWith("Fill");
-        case 2:
-          return name.endsWith("Fill");
-        default:
-          return true;
-      }
-    });
+  const [filteredIcons, setFilteredIcons] = useState([]);
+
+  useEffect(() => {
+    setFilteredIcons(
+      Object.keys(Icons)
+        .filter(
+          (name) => name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
+        )
+        .filter((name) => {
+          switch (checkedBox) {
+            case 1:
+              return !(name.includes("Filled") || name.includes("Solid"));
+            case 2:
+              return name.endsWith("Filled");
+            case 3:
+              return name.endsWith("Solid");
+            default:
+              return true;
+          }
+        })
+    );
+  }, [checkedBox, filter]);
 
   const handleModal = (name) => {
     setOpenModal(true);
@@ -86,22 +96,29 @@ const IconPage = () => {
       <div className="iconpage__checkboxWrapper">
         <Checkbox
           checked={checkedBox === 0}
-          onClick={() => setCheckedBox(0)}
+          onChange={() => setCheckedBox(0)}
           label="All"
         />
         <Checkbox
           checked={checkedBox === 1}
-          onClick={() => {
+          onChange={() => {
             checkedBox === 1 ? setCheckedBox(0) : setCheckedBox(1);
           }}
           label="Regular"
         />
         <Checkbox
           checked={checkedBox === 2}
-          onClick={() => {
+          onChange={() => {
             checkedBox === 2 ? setCheckedBox(0) : setCheckedBox(2);
           }}
           label="Filled"
+        />
+        <Checkbox
+          checked={checkedBox === 3}
+          onChange={() => {
+            checkedBox === 3 ? setCheckedBox(0) : setCheckedBox(3);
+          }}
+          label="Solid"
         />
       </div>
       <Undertittel className="iconpage__headlines">{headline}</Undertittel>
