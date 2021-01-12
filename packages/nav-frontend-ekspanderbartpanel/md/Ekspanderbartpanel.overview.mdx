@@ -3,6 +3,7 @@ ingress: Ekspanderbartpanel er et panel som kan ekspandere eller kollapse innhol
 ---
 
 import Ekspanderbartpanel, { EkspanderbartpanelBase } from "./../";
+import EkspanderbartpanelEksempel from "../_ekspanderbartpanel-base.example.js";
 import Etikett from "nav-frontend-etiketter";
 import { Normaltekst, Undertittel } from "nav-frontend-typografi";
 
@@ -75,4 +76,24 @@ Komponentens `tittel`-prop støtter rikt HTML-innhold.
 >
   Panelet vil da ekspandere og vise innholdet.
 </Ekspanderbartpanel>
+```
+
+## Kontroller komponenten selv
+
+Styr komponent fra ekstern state (controlled components).
+
+<Example>
+  <EkspanderbartpanelEksempel />
+</Example>
+
+```jsx
+<Knapp onClick={() => this.open()}>Åpne</Knapp>
+<Knapp onClick={() => this.close()}>Lukke</Knapp>
+<EkspanderbartpanelBase
+    tittel="Kan også klikke her"
+    apen={this.state.apen}
+    onClick={() => this.toggle()}
+>
+    Alt innholdet ditt
+</EkspanderbartpanelBase>
 ```
