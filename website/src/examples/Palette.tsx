@@ -152,7 +152,7 @@ const Palette = () => {
         <Systemtittel id="bakgrunnsFarger">Bakgrunnsfarger</Systemtittel>
         <Alertstripe type="info">
           Vi ønsker at alle sider skal forholde seg til disse bakgrunnsfargene
-          da dette fører til mer helhetlig design for NAV sine løsninger.
+          da dette fører til et mer helhetlig design for NAV sine løsninger.
         </Alertstripe>
         <div className="color-group color-group--dark">
           <ColorSample
