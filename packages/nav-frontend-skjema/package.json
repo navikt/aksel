@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema",
-  "version": "3.0.40",
+  "version": "3.0.41",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
