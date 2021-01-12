@@ -3,9 +3,9 @@ import { Ingress, Undertittel } from "nav-frontend-typografi";
 import Code, { Bash, copyImport, InlineCode } from "../code/Code";
 import "./styles.less";
 
-const IconPage = () => {
+const IconInstall = () => {
   return (
-    <div className="iconpage__install">
+    <div className="iconPage__install">
       <Ingress>
         Ikonene er tilgjengelige som både React komponent og SVG. Husk å sjekke
         at prosjektet støtter SVG med riktige loaders eks{" "}
@@ -20,24 +20,24 @@ const IconPage = () => {
       <Ingress>
         React komponenten tar imot props og setter dem direkte på SVG elementet
       </Ingress>
-      <Undertittel className="iconpage__headlines">Installering</Undertittel>
+      <Undertittel className="iconPage__headlines">Installering</Undertittel>
       <Bash
-        className="iconpage__installBash"
+        className="iconPage__installBash"
         onClick={(e) => copyImport(e, "yarn add @navikt/ds-icons")}
       >
         yarn add @navikt/ds-icons
       </Bash>
       <Bash
-        className="iconpage__installBash"
+        className="iconPage__installBash"
         onClick={(e) => copyImport(e, "npm i @navikt/ds-icons")}
       >
         npm i @navikt/ds-icons
       </Bash>
-      <Undertittel className="iconpage__headlines">React</Undertittel>
+      <Undertittel className="iconPage__headlines">React</Undertittel>
       <Code popupUnder className="language-jsx">
         {`import { Ikonnavn } from '@navikt/ds-icons'`}
       </Code>
-      <Undertittel className="iconpage__headlines">SVG</Undertittel>
+      <Undertittel className="iconPage__headlines">SVG</Undertittel>
       <Code popupUnder className="language-jsx">
         {`import Ikon from '@navikt/ds-icons/svg/ikonnavn.svg';`}
       </Code>
@@ -45,4 +45,4 @@ const IconPage = () => {
   );
 };
 
-export default IconPage;
+export default IconInstall;
