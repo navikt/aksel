@@ -41,7 +41,7 @@ export interface EkspanderbartpanelBaseProps
   /**
    * Props til intern instans av react-collapse
    */
-  collapseProps?: Partial<CollapseProps>;
+  collapseProps?: Omit<CollapseProps, "children" | "isOpened">;
   /**
    * Dersom innholdet skal rendres men ikke vises, når panelet er lukket
    */
