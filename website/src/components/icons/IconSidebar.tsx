@@ -11,13 +11,14 @@ import "./styles.less";
 const JSZip = require("jszip");
 
 const IconSidebar = () => {
-  const [sidebar, setSidebar] = useState(window.innerWidth > 1439);
+  const [sidebar, setSidebar] = useState(true);
 
   const handleResize = () => {
     setSidebar(window.innerWidth > 1439);
   };
 
   useEffect(() => {
+    setSidebar(window.innerWidth > 1439);
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);

@@ -1,4 +1,5 @@
 import * as Icons from "@navikt/ds-icons";
+import { List, System } from "@navikt/ds-icons";
 import Knapp from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
 import { Input, Checkbox } from "nav-frontend-skjema";
@@ -37,6 +38,7 @@ const IconPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [checkedBox, setCheckedBox] = useState(0);
   const [selectedIcon, setSelectedIcon] = useState<MetaType>(null);
+  const [listView, setListView] = useState(0);
 
   const [meta, setMeta] = useState([]);
 
@@ -137,6 +139,47 @@ const IconPage = () => {
     }
   };
 
+  const generateList = () => {
+    return !listView ? (
+      generateCategories().map((category) => {
+        return (
+          checkIfVisible(category) && (
+            <div key={`${category.category}`}>
+              <Undertittel className="iconpage__headlines">
+                {category.category}
+              </Undertittel>
+              <div className="iconpage__icons">
+                {category.icons.map(
+                  (icon) =>
+                    icon.visible && (
+                      <IconBox
+                        key={`${icon.name}${icon.created_at}`}
+                        iconObj={icon}
+                        onClick={(icon: MetaType) => handleModal(icon)}
+                      />
+                    )
+                )}
+              </div>
+            </div>
+          )
+        );
+      })
+    ) : (
+      <div className="iconpage__icons">
+        {meta.map(
+          (icon) =>
+            icon.visible && (
+              <IconBox
+                key={`${icon.name}${icon.created_at}`}
+                iconObj={icon}
+                onClick={(icon: MetaType) => handleModal(icon)}
+              />
+            )
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="iconpage">
       <label htmlFor="ikonsidefilter">
@@ -156,12 +199,8 @@ const IconPage = () => {
         autoComplete="on"
         placeholder={`Søk etter ${Object.keys(Icons).length} ikoner...`}
       />
+
       <div className="iconpage__checkboxWrapper">
-        <Checkbox
-          checked={checkedBox === 0}
-          onChange={() => setCheckedBox(0)}
-          label="All"
-        />
         <Checkbox
           checked={checkedBox === 1}
           onChange={() => {
@@ -184,31 +223,29 @@ const IconPage = () => {
           label="Solid"
         />
       </div>
-      <Undertittel className="iconpage__headlines">{headline()}</Undertittel>
+      <span className="iconpage__listview">
+        <Undertittel className="iconpage__headlines">{headline()}</Undertittel>
+        <span>
+          <Knapp
+            kompakt
+            mini
+            onClick={() => setListView(0)}
+            type={listView ? "flat" : "standard"}
+          >
+            <List />
+          </Knapp>
+          <Knapp
+            kompakt
+            mini
+            onClick={() => setListView(1)}
+            type={listView ? "standard" : "flat"}
+          >
+            <System />
+          </Knapp>
+        </span>
+      </span>
 
-      {generateCategories().map((category) => {
-        return (
-          checkIfVisible(category) && (
-            <div key={`${category.category}`}>
-              <Undertittel className="iconpage__headlines">
-                {category.category}
-              </Undertittel>
-              <div className="iconpage__icons">
-                {category.icons.map(
-                  (icon) =>
-                    icon.visible && (
-                      <IconBox
-                        key={`${icon.name}${icon.created_at}`}
-                        iconObj={icon}
-                        onClick={(icon: MetaType) => handleModal(icon)}
-                      />
-                    )
-                )}
-              </div>
-            </div>
-          )
-        );
-      })}
+      {generateList()}
       {selectedIcon && (
         <Modal
           className="iconpage__modal"
