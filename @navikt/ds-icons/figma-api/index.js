@@ -6,8 +6,8 @@ const kebab = require("lodash.kebabcase");
 const rimraf = require("rimraf");
 
 const generateMetadata = (iconNodesArr) => {
-  return iconNodesArr.map(
-    ({ name, description, created_at, updated_at, containing_frame }) => {
+  return iconNodesArr
+    .map(({ name, description, created_at, updated_at, containing_frame }) => {
       return {
         name,
         description,
@@ -15,8 +15,8 @@ const generateMetadata = (iconNodesArr) => {
         updated_at,
         pageName: containing_frame.pageName,
       };
-    }
-  );
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
 };
 
 const main = async () => {

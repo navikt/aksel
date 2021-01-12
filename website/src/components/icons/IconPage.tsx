@@ -34,18 +34,15 @@ const IconPage = () => {
     Modal.setAppElement(".mainWrapper");
   }, []);
 
-  const [filter, setFilter] = useState("");
   const [openModal, setOpenModal] = useState(false);
-  const [checkedBox, setCheckedBox] = useState(0);
   const [selectedIcon, setSelectedIcon] = useState<MetaType>(null);
+  const [filter, setFilter] = useState("");
+  const [checkedBox, setCheckedBox] = useState(0);
   const [listView, setListView] = useState(0);
 
   const [meta, setMeta] = useState([]);
 
-  const Icon = selectedIcon && Icons[selectedIcon.name];
-
   useEffect(() => {
-    metadata.sort((a: MetaType, b: MetaType) => a.name.localeCompare(b.name));
     for (const icon of metadata) {
       icon.visible = true;
       icon.name = startCase(icon.name).replace(/\s/g, "");
@@ -145,10 +142,10 @@ const IconPage = () => {
         return (
           checkIfVisible(category) && (
             <div key={`${category.category}`}>
-              <Undertittel className="iconpage__headlines">
+              <Undertittel className="iconPage__headlines">
                 {category.category}
               </Undertittel>
-              <div className="iconpage__icons">
+              <div className="iconPage__icons">
                 {category.icons.map(
                   (icon) =>
                     icon.visible && (
@@ -165,7 +162,7 @@ const IconPage = () => {
         );
       })
     ) : (
-      <div className="iconpage__icons">
+      <div className="iconPage__icons">
         {meta.map(
           (icon) =>
             icon.visible && (
@@ -180,33 +177,36 @@ const IconPage = () => {
     );
   };
 
+  const Icon = selectedIcon && Icons[selectedIcon.name];
+
   return (
-    <div className="iconpage">
+    <div className="iconPage">
       <label htmlFor="ikonsidefilter">
-        <Systemtittel id="ikonsidetittel">
-          Søk på NAV sine nye ikoner
-        </Systemtittel>
+        <Systemtittel id="ikonsidetittel">Søk på NAV ikoner</Systemtittel>
       </label>
-      <Undertittel className="iconpage__headlines iconpage__headlines--sidebar">
+      <Undertittel className="iconPage__headlines iconPage__headlines--sidebar">
         Ressurser
       </Undertittel>
       <IconSidebar />
+
       <Input
         id="ikonsidefilter"
         aria-labelledby="ikonsidetittel"
-        className="iconpage__input"
         onChange={(e) => setFilter(e.target.value)}
-        autoComplete="on"
+        autoComplete="off"
         placeholder={`Søk etter ${Object.keys(Icons).length} ikoner...`}
       />
 
-      <div className="iconpage__checkboxWrapper">
+      <span className="iconPage__checkboxes">
         <Checkbox
           checked={checkedBox === 1}
           onChange={() => {
             checkedBox === 1 ? setCheckedBox(0) : setCheckedBox(1);
           }}
           label="Outline"
+          aria-label={
+            checkedBox === 1 ? "Vis alle ikoner" : "Vis bare outline ikoner"
+          }
         />
         <Checkbox
           checked={checkedBox === 2}
@@ -214,6 +214,9 @@ const IconPage = () => {
             checkedBox === 2 ? setCheckedBox(0) : setCheckedBox(2);
           }}
           label="Filled"
+          aria-label={
+            checkedBox === 2 ? "Vis alle ikoner" : "Vis bare filled ikoner"
+          }
         />
         <Checkbox
           checked={checkedBox === 3}
@@ -221,16 +224,20 @@ const IconPage = () => {
             checkedBox === 3 ? setCheckedBox(0) : setCheckedBox(3);
           }}
           label="Solid"
+          aria-label={
+            checkedBox === 3 ? "Vis alle ikoner" : "Vis bare solid ikoner"
+          }
         />
-      </div>
-      <span className="iconpage__listview">
-        <Undertittel className="iconpage__headlines">{headline()}</Undertittel>
+      </span>
+      <span className="iconPage__viewSelect">
+        <Undertittel className="iconPage__headlines">{headline()}</Undertittel>
         <span>
           <Knapp
             kompakt
             mini
             onClick={() => setListView(0)}
             type={listView ? "flat" : "standard"}
+            aria-label="Vis ikoner med kategorier"
           >
             <List />
           </Knapp>
@@ -239,6 +246,7 @@ const IconPage = () => {
             mini
             onClick={() => setListView(1)}
             type={listView ? "standard" : "flat"}
+            aria-label="Vis ikoner uten kategorier"
           >
             <System />
           </Knapp>
@@ -246,39 +254,40 @@ const IconPage = () => {
       </span>
 
       {generateList()}
+
       {selectedIcon && (
         <Modal
-          className="iconpage__modal"
+          className="iconPage__modal"
           isOpen={openModal}
           closeButton={true}
           onRequestClose={() => handleModalClose()}
-          contentLabel="Modal for icon-visning"
+          contentLabel="Modal for ikon-visning"
         >
           <div>
             <Systemtittel>{selectedIcon.name}</Systemtittel>
             <Knapp kompakt onClick={() => downloadSvg()}>
               Last ned SVG
             </Knapp>
-            <Undertittel className="iconpage__headlines">React</Undertittel>
+            <Undertittel className="iconPage__headlines">React</Undertittel>
             <Code popupUnder className="language-jsx">
               {`import { ${selectedIcon.name} } from '@navikt/ds-icons'`}
             </Code>
-            <Undertittel className="iconpage__headlines">SVG</Undertittel>
-            <Code popupUnder className="language-jsx iconpage__modalSvg">
+            <Undertittel className="iconPage__headlines">SVG</Undertittel>
+            <Code popupUnder className="language-jsx iconPage__modalSvg">
               {`${beautify_html(renderToString(<Icon />))}`}
             </Code>
-            <div className="iconpage__modalIcons">
+            <span className="iconPage__modalIcons">
               <Icon
-                className="iconpage__modalIcons--light"
+                className="iconPage__modalIcons--light"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
               />
               <Icon
-                className="iconpage__modalIcons--dark"
+                className="iconPage__modalIcons--dark"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
               />
-            </div>
+            </span>
           </div>
         </Modal>
       )}

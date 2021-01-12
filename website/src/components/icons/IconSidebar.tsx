@@ -7,7 +7,6 @@ import { renderToString } from "react-dom/server";
 import { FigmaIcon, GithubLogo } from "../../components/assets/images/svg";
 import { Download } from "@navikt/ds-icons";
 import "./styles.less";
-
 const JSZip = require("jszip");
 
 const IconSidebar = () => {
@@ -25,6 +24,7 @@ const IconSidebar = () => {
     };
   }, []);
 
+  // Zips all icons and downloads them
   const downloadAllSvg = async () => {
     const element = document.createElement("a");
     var zip = new JSZip();
@@ -47,29 +47,29 @@ const IconSidebar = () => {
     <div
       className={cls({
         "table-of-contents": sidebar,
-        iconpage__links: !sidebar,
+        iconSidebar__links: !sidebar,
       })}
     >
-      <Undertittel className="iconpage__headlines iconpage__linkHeadlines">
+      <Undertittel className="iconPage__headlines iconPage__linkHeadlines">
         Nedlastning
       </Undertittel>
 
       <button
         style={{ cursor: "pointer" }}
-        className="lenkepanel lenkepanel--border resource-link iconpage__linkPanels"
+        className="lenkepanel lenkepanel--border resource-link iconSidebar__linkPanels"
         onClick={() => downloadAllSvg()}
         aria-label="Last ned alle ikoner"
       >
         <Undertittel>NAV-ikonpakke.zip</Undertittel>
-        <span className="iconsidebar__save">
+        <span className="iconSidebar__save">
           <Download />
         </span>
       </button>
-      <Undertittel className="iconpage__headlines iconpage__linkHeadlines">
+      <Undertittel className="iconPage__headlines iconPage__linkHeadlines">
         Ressurser
       </Undertittel>
       <Lenkepanel
-        className="resource-link iconpage__linkPanels"
+        className="resource-link iconSidebar__linkPanels"
         href="https://www.figma.com/proto/UmEVH3pZ71uJPsSz9ilP3Y/NAV-ikoner-2.1-Figma-i-test?node-id=241%3A696&scaling=min-zoom"
         border
         tittelProps="undertittel"
@@ -79,7 +79,7 @@ const IconSidebar = () => {
       </Lenkepanel>
 
       <Lenkepanel
-        className="resource-link iconpage__linkPanels"
+        className="resource-link iconSidebar__linkPanels"
         href="https://www.figma.com/file/3AjAxeQP4uMFgqSazKXxOh/NAV-Ikonbiblioteket-Streamline"
         border
         tittelProps="undertittel"
@@ -89,7 +89,7 @@ const IconSidebar = () => {
       </Lenkepanel>
 
       <Lenkepanel
-        className="resource-link iconpage__linkPanels"
+        className="resource-link iconSidebar__linkPanels"
         href="https://github.com/navikt/nav-frontend-ikoner-backend/tree/master/src/main/resources/static/api/icons"
         border
         tittelProps="undertittel"
