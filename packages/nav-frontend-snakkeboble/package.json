@@ -18,10 +18,10 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-paneler": "^2.0.23",
-    "nav-frontend-paneler-style": "^0.3.32",
-    "nav-frontend-snakkeboble-style": "^0.2.39",
-    "nav-frontend-typografi": "^2.0.38",
+    "nav-frontend-paneler": "^2.0.24",
+    "nav-frontend-paneler-style": "^0.3.33",
+    "nav-frontend-snakkeboble-style": "^0.2.40",
+    "nav-frontend-typografi": "^2.0.39",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },

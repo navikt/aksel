@@ -19,7 +19,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-knapper-style": "^1.0.12",
+    "nav-frontend-knapper-style": "^1.0.13",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
