@@ -38,8 +38,8 @@
     "name": "baby changing room",
     "description": "",
     "created_at": "2020-12-16T14:08:52.216Z",
-    "updated_at": "2020-12-16T14:08:52.216Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.590Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "baby-filled",
@@ -80,8 +80,8 @@
     "name": "Baggage",
     "description": "",
     "created_at": "2020-07-31T13:09:33.330Z",
-    "updated_at": "2020-07-31T13:09:33.330Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.692Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "bandage",
@@ -93,15 +93,15 @@
   {
     "name": "bandage-filled",
     "description": "",
-    "created_at": "2021-01-11T13:37:55.665Z",
-    "updated_at": "2021-01-11T13:37:55.665Z",
+    "created_at": "2021-01-11T13:37:55.671Z",
+    "updated_at": "2021-01-12T13:29:09.181Z",
     "pageName": "🧩Health"
   },
   {
     "name": "bandage-solid",
     "description": "",
-    "created_at": "2021-01-11T13:37:55.671Z",
-    "updated_at": "2021-01-11T13:37:55.671Z",
+    "created_at": "2021-01-11T13:37:55.665Z",
+    "updated_at": "2021-01-12T13:29:09.156Z",
     "pageName": "🧩Health"
   },
   {
@@ -122,29 +122,29 @@
     "name": "bike",
     "description": "",
     "created_at": "2020-07-31T13:09:33.312Z",
-    "updated_at": "2020-07-31T13:09:33.312Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.663Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
-    "name": "Bookmark",
+    "name": "bookmark",
     "description": "",
     "created_at": "2020-07-01T10:37:42.877Z",
-    "updated_at": "2020-11-24T11:28:05.344Z",
+    "updated_at": "2021-01-12T13:29:09.268Z",
     "pageName": "🧩File"
   },
   {
-    "name": "Bookmark-solid",
+    "name": "bookmark-solid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.585Z",
-    "updated_at": "2021-01-11T13:37:55.585Z",
+    "updated_at": "2021-01-12T13:29:09.150Z",
     "pageName": "🧩File"
   },
   {
     "name": "Bowl",
     "description": "",
     "created_at": "2020-07-20T10:32:39.038Z",
-    "updated_at": "2020-07-20T10:32:39.038Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.616Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "boy",
@@ -161,31 +161,31 @@
     "pageName": "🧩People"
   },
   {
-    "name": "Braille",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.951Z",
-    "updated_at": "2020-12-14T10:09:01.744Z",
-    "pageName": "🧩Handicap"
-  },
-  {
-    "name": "Braille-2",
+    "name": "braille",
     "description": "",
     "created_at": "2020-07-01T10:37:42.881Z",
-    "updated_at": "2021-01-11T13:37:55.876Z",
+    "updated_at": "2021-01-12T13:29:09.302Z",
     "pageName": "🧩Handicap"
   },
   {
-    "name": "Braille-2-solid",
+    "name": "braille-hand",
     "description": "",
-    "created_at": "2021-01-11T13:37:55.306Z",
-    "updated_at": "2021-01-11T13:37:55.306Z",
+    "created_at": "2020-07-01T10:37:42.951Z",
+    "updated_at": "2021-01-12T13:29:09.237Z",
     "pageName": "🧩Handicap"
   },
   {
-    "name": "Braille-filled",
+    "name": "braille-hand-filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.301Z",
-    "updated_at": "2021-01-11T13:37:55.301Z",
+    "updated_at": "2021-01-12T13:29:09.242Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "braille-solid",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.306Z",
+    "updated_at": "2021-01-13T11:29:02.281Z",
     "pageName": "🧩Handicap"
   },
   {
@@ -248,22 +248,22 @@
     "name": "Cantine 1",
     "description": "",
     "created_at": "2020-07-31T13:09:33.321Z",
-    "updated_at": "2020-07-31T13:09:33.321Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.704Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Cantine 2",
     "description": "",
     "created_at": "2020-07-31T13:09:33.317Z",
-    "updated_at": "2020-07-31T13:09:33.317Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.684Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "car",
     "description": "",
     "created_at": "2020-07-31T13:09:33.334Z",
-    "updated_at": "2020-07-31T13:09:33.334Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.630Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "clock",
@@ -297,8 +297,8 @@
     "name": "cognition outline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.212Z",
-    "updated_at": "2020-12-16T14:08:52.212Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.611Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "collapse",
@@ -318,15 +318,15 @@
     "name": "Combifridge 1",
     "description": "",
     "created_at": "2020-07-20T10:32:39.051Z",
-    "updated_at": "2020-07-20T10:37:25.542Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.602Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Combifridge 2",
     "description": "",
     "created_at": "2020-07-20T10:32:39.061Z",
-    "updated_at": "2020-07-20T10:39:14.498Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.624Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "coronavirus",
@@ -346,8 +346,8 @@
     "name": "cup",
     "description": "",
     "created_at": "2020-07-20T10:32:39.056Z",
-    "updated_at": "2020-07-20T10:32:39.056Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.733Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "customer service",
@@ -364,17 +364,17 @@
     "pageName": "🧩Communication"
   },
   {
-    "name": "Data",
+    "name": "data",
     "description": "",
     "created_at": "2020-07-20T10:32:39.033Z",
-    "updated_at": "2020-11-24T12:39:02.870Z",
+    "updated_at": "2021-01-12T13:29:09.221Z",
     "pageName": "🧩File"
   },
   {
-    "name": "Data-solid",
+    "name": "data-solid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.599Z",
-    "updated_at": "2021-01-11T13:37:55.599Z",
+    "updated_at": "2021-01-12T13:29:09.309Z",
     "pageName": "🧩File"
   },
   {
@@ -417,20 +417,6 @@
     "description": "",
     "created_at": "2021-01-11T13:37:55.678Z",
     "updated_at": "2021-01-11T13:37:55.678Z",
-    "pageName": "🧩Communication"
-  },
-  {
-    "name": "dialog-empty",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.429Z",
-    "updated_at": "2021-01-11T13:37:55.429Z",
-    "pageName": "🧩Communication"
-  },
-  {
-    "name": "dialog-empty-solid",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.435Z",
-    "updated_at": "2021-01-11T13:37:55.435Z",
     "pageName": "🧩Communication"
   },
   {
@@ -479,15 +465,15 @@
     "name": "Dish",
     "description": "",
     "created_at": "2020-07-20T10:32:39.026Z",
-    "updated_at": "2020-07-20T10:32:39.026Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.606Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Dishwasher",
     "description": "",
     "created_at": "2020-07-20T10:32:39.029Z",
-    "updated_at": "2020-07-20T10:32:39.029Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.724Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "down",
@@ -535,8 +521,8 @@
     "name": "elevator",
     "description": "",
     "created_at": "2020-12-16T14:08:52.225Z",
-    "updated_at": "2021-01-09T14:38:56.275Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.710Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "email",
@@ -595,10 +581,10 @@
     "pageName": "🧩Chevron"
   },
   {
-    "name": "external link",
+    "name": "external-link",
     "description": "",
     "created_at": "2020-07-01T10:37:42.636Z",
-    "updated_at": "2020-07-01T10:37:42.636Z",
+    "updated_at": "2021-01-12T13:29:09.282Z",
     "pageName": "🧩Interface"
   },
   {
@@ -616,17 +602,17 @@
     "pageName": "🧩Privacy"
   },
   {
-    "name": "eye screened",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.956Z",
-    "updated_at": "2020-07-01T10:37:42.956Z",
-    "pageName": "🧩Privacy"
-  },
-  {
     "name": "eye-filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.321Z",
     "updated_at": "2021-01-11T13:37:55.321Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "eye-screened",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.956Z",
+    "updated_at": "2021-01-12T13:29:09.186Z",
     "pageName": "🧩Privacy"
   },
   {
@@ -651,10 +637,10 @@
     "pageName": "🧩Family"
   },
   {
-    "name": "feeding bottle",
+    "name": "feeding-bottle",
     "description": "",
     "created_at": "2020-07-01T10:37:42.927Z",
-    "updated_at": "2020-07-01T10:37:42.927Z",
+    "updated_at": "2021-01-12T13:29:09.161Z",
     "pageName": "🧩Family"
   },
   {
@@ -686,10 +672,10 @@
     "pageName": "🧩File"
   },
   {
-    "name": "file content",
+    "name": "file-content",
     "description": "",
     "created_at": "2020-07-01T10:37:42.944Z",
-    "updated_at": "2020-07-01T10:37:42.944Z",
+    "updated_at": "2021-01-12T13:29:09.170Z",
     "pageName": "🧩File"
   },
   {
@@ -721,10 +707,10 @@
     "pageName": "🧩File"
   },
   {
-    "name": "fill forms",
+    "name": "fill-forms",
     "description": "",
     "created_at": "2020-07-01T10:37:43.158Z",
-    "updated_at": "2020-07-01T10:37:43.158Z",
+    "updated_at": "2021-01-12T13:29:09.263Z",
     "pageName": "🧩Interface"
   },
   {
@@ -766,15 +752,15 @@
     "name": "fork--spoon--knife",
     "description": "",
     "created_at": "2020-07-20T10:32:39.048Z",
-    "updated_at": "2020-07-20T10:32:39.048Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.653Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Freezer",
     "description": "",
     "created_at": "2020-07-20T10:32:39.018Z",
-    "updated_at": "2020-07-20T10:32:39.018Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.578Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "girl",
@@ -794,8 +780,8 @@
     "name": "glass",
     "description": "",
     "created_at": "2020-07-20T10:32:39.043Z",
-    "updated_at": "2020-07-20T10:32:39.043Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.658Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "globe",
@@ -805,24 +791,24 @@
     "pageName": "🧩International"
   },
   {
-    "name": "globe-filled",
+    "name": "globe-solid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.388Z",
-    "updated_at": "2021-01-11T13:37:55.388Z",
+    "updated_at": "2021-01-12T13:29:09.247Z",
     "pageName": "🧩International"
   },
   {
-    "name": "Guide dog",
+    "name": "guide-dog",
     "description": "",
     "created_at": "2020-07-01T10:37:42.922Z",
-    "updated_at": "2020-12-14T10:09:08.217Z",
+    "updated_at": "2021-01-12T13:29:09.278Z",
     "pageName": "🧩Handicap"
   },
   {
-    "name": "Guide-dog-solid",
+    "name": "guide-dog-solid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.295Z",
-    "updated_at": "2021-01-11T13:37:55.295Z",
+    "updated_at": "2021-01-12T13:29:09.258Z",
     "pageName": "🧩Handicap"
   },
   {
@@ -849,36 +835,36 @@
   {
     "name": "hand-bandage-filled",
     "description": "",
-    "created_at": "2021-01-11T13:37:55.471Z",
-    "updated_at": "2021-01-11T13:37:55.471Z",
+    "created_at": "2021-01-11T13:37:55.466Z",
+    "updated_at": "2021-01-12T13:29:09.211Z",
     "pageName": "🧩Health"
   },
   {
     "name": "hand-bandage-solid",
     "description": "",
-    "created_at": "2021-01-11T13:37:55.466Z",
-    "updated_at": "2021-01-11T13:37:55.466Z",
+    "created_at": "2021-01-11T13:37:55.471Z",
+    "updated_at": "2021-01-12T13:29:09.191Z",
     "pageName": "🧩Health"
   },
   {
-    "name": "Hanger",
+    "name": "hanger",
     "description": "",
     "created_at": "2020-07-01T10:37:43.096Z",
-    "updated_at": "2020-07-01T10:37:43.096Z",
+    "updated_at": "2021-01-12T13:29:09.273Z",
     "pageName": "🧩Family"
   },
   {
-    "name": "Hanger-filled",
+    "name": "hanger-filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.218Z",
-    "updated_at": "2021-01-11T13:37:55.218Z",
+    "updated_at": "2021-01-12T13:29:09.288Z",
     "pageName": "🧩Family"
   },
   {
-    "name": "health case",
+    "name": "health-case",
     "description": "",
     "created_at": "2020-07-01T10:37:43.036Z",
-    "updated_at": "2020-11-26T08:43:47.368Z",
+    "updated_at": "2021-01-12T13:29:09.206Z",
     "pageName": "🧩Health"
   },
   {
@@ -892,8 +878,8 @@
     "name": "hearing outline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.232Z",
-    "updated_at": "2020-12-16T14:08:52.232Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.714Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "heart",
@@ -1050,17 +1036,17 @@
     "pageName": "🧩Social media"
   },
   {
-    "name": "List",
+    "name": "list",
     "description": "",
     "created_at": "2020-07-01T10:37:42.836Z",
-    "updated_at": "2020-12-08T10:01:58.502Z",
+    "updated_at": "2021-01-12T13:29:09.195Z",
     "pageName": "🧩File"
   },
   {
-    "name": "List-solid",
+    "name": "list-solid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.486Z",
-    "updated_at": "2021-01-11T13:37:55.486Z",
+    "updated_at": "2021-01-12T13:29:09.252Z",
     "pageName": "🧩File"
   },
   {
@@ -1193,15 +1179,15 @@
     "name": "motorcycle",
     "description": "",
     "created_at": "2020-07-31T13:09:33.308Z",
-    "updated_at": "2020-11-25T10:09:53.450Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.634Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Mute 3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.549Z",
-    "updated_at": "2020-12-11T18:54:49.592Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.669Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "neutral",
@@ -1235,8 +1221,8 @@
     "name": "No smoking",
     "description": "",
     "created_at": "2020-07-20T10:32:39.013Z",
-    "updated_at": "2020-07-20T10:32:39.013Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.698Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "office-1",
@@ -1270,8 +1256,8 @@
     "name": "Parking",
     "description": "",
     "created_at": "2020-07-31T13:09:33.304Z",
-    "updated_at": "2020-11-26T10:18:42.770Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.753Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "passport",
@@ -1295,10 +1281,17 @@
     "pageName": "🧩Pension"
   },
   {
-    "name": "pension saving 2",
+    "name": "pension-bag",
     "description": "",
-    "created_at": "2020-07-01T10:37:42.967Z",
-    "updated_at": "2020-12-07T13:55:28.968Z",
+    "created_at": "2020-07-01T10:37:42.962Z",
+    "updated_at": "2021-01-12T13:29:09.295Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "pension-bag-filled",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.518Z",
+    "updated_at": "2021-01-12T13:29:09.146Z",
     "pageName": "🧩Pension"
   },
   {
@@ -1309,24 +1302,17 @@
     "pageName": "🧩Pension"
   },
   {
-    "name": "pension-saving",
+    "name": "pension-flower",
     "description": "",
-    "created_at": "2020-07-01T10:37:42.962Z",
-    "updated_at": "2021-01-11T13:37:55.870Z",
+    "created_at": "2020-07-01T10:37:42.967Z",
+    "updated_at": "2021-01-12T13:29:09.165Z",
     "pageName": "🧩Pension"
   },
   {
-    "name": "pension-saving-3-filled",
+    "name": "pension-flower-filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.686Z",
-    "updated_at": "2021-01-11T13:37:55.686Z",
-    "pageName": "🧩Pension"
-  },
-  {
-    "name": "pension-saving-filled",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.518Z",
-    "updated_at": "2021-01-11T13:37:55.518Z",
+    "updated_at": "2021-01-12T13:29:09.232Z",
     "pageName": "🧩Pension"
   },
   {
@@ -1414,6 +1400,13 @@
     "pageName": "🧩People"
   },
   {
+    "name": "profile-filled",
+    "description": "",
+    "created_at": "2021-01-12T13:29:09.125Z",
+    "updated_at": "2021-01-12T13:29:09.125Z",
+    "pageName": "🧩People"
+  },
+  {
     "name": "receipt",
     "description": "",
     "created_at": "2020-07-01T10:37:42.904Z",
@@ -1431,15 +1424,15 @@
     "name": "Recycle1",
     "description": "",
     "created_at": "2020-07-01T10:37:42.859Z",
-    "updated_at": "2020-11-23T16:49:12.609Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.743Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Recycle2",
     "description": "",
     "created_at": "2020-07-01T10:37:42.597Z",
-    "updated_at": "2020-11-23T16:49:12.603Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.738Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "refresh",
@@ -1459,8 +1452,8 @@
     "name": "refrigerator",
     "description": "",
     "created_at": "2020-07-20T10:32:39.022Z",
-    "updated_at": "2020-07-20T10:32:39.022Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.639Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "right",
@@ -1498,24 +1491,24 @@
     "pageName": "🧩Interface"
   },
   {
+    "name": "save-file",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.779Z",
+    "updated_at": "2021-01-12T13:29:09.140Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "save-file-filled",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.356Z",
+    "updated_at": "2021-01-12T13:29:09.227Z",
+    "pageName": "🧩Interface"
+  },
+  {
     "name": "save-filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.709Z",
     "updated_at": "2021-01-11T13:37:55.709Z",
-    "pageName": "🧩Interface"
-  },
-  {
-    "name": "save2",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.779Z",
-    "updated_at": "2020-12-09T08:57:16.960Z",
-    "pageName": "🧩Interface"
-  },
-  {
-    "name": "save2-filled",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.356Z",
-    "updated_at": "2021-01-11T13:37:55.356Z",
     "pageName": "🧩Interface"
   },
   {
@@ -1606,28 +1599,28 @@
     "name": "shower",
     "description": "",
     "created_at": "2020-12-16T14:08:52.221Z",
-    "updated_at": "2020-12-16T14:08:52.221Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.643Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "shredding",
     "description": "",
     "created_at": "2020-07-31T13:09:33.339Z",
-    "updated_at": "2020-07-31T13:09:33.339Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.747Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "sight outline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.208Z",
-    "updated_at": "2020-12-16T14:08:52.208Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.719Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
-    "name": "sign language",
+    "name": "sign-language",
     "description": "",
     "created_at": "2020-07-01T10:37:42.697Z",
-    "updated_at": "2020-12-14T10:09:10.924Z",
+    "updated_at": "2021-01-12T13:29:09.216Z",
     "pageName": "🧩Handicap"
   },
   {
@@ -1652,17 +1645,31 @@
     "pageName": "🧩Social service"
   },
   {
+    "name": "speech-bubble",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.429Z",
+    "updated_at": "2021-01-12T13:29:09.176Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "speech-bubble-solid",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.435Z",
+    "updated_at": "2021-01-12T13:29:09.201Z",
+    "pageName": "🧩Communication"
+  },
+  {
     "name": "stairs",
     "description": "",
     "created_at": "2020-12-16T14:08:52.229Z",
-    "updated_at": "2020-12-16T14:08:52.229Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.620Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "star",
     "description": "",
     "created_at": "2020-07-01T10:37:42.655Z",
-    "updated_at": "2020-07-01T10:37:42.655Z",
+    "updated_at": "2021-01-12T12:49:59.666Z",
     "pageName": "🧩Social media"
   },
   {
@@ -1746,8 +1753,8 @@
     "name": "traning",
     "description": "",
     "created_at": "2020-07-31T13:09:33.299Z",
-    "updated_at": "2020-07-31T13:09:33.299Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.674Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "unlocked",
@@ -1809,22 +1816,22 @@
     "name": "Video-room",
     "description": "",
     "created_at": "2020-07-31T13:09:33.343Z",
-    "updated_at": "2020-07-31T13:09:33.343Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.648Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Volume down 3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.544Z",
-    "updated_at": "2020-11-23T16:49:12.544Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.597Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "Volume up 3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.553Z",
-    "updated_at": "2020-11-23T16:49:12.553Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.678Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "warning",
@@ -1844,8 +1851,8 @@
     "name": "Washing",
     "description": "",
     "created_at": "2020-07-31T13:09:33.325Z",
-    "updated_at": "2020-07-31T13:09:33.325Z",
-    "pageName": "🧩Fystikkallen"
+    "updated_at": "2021-01-12T13:07:17.728Z",
+    "pageName": "🧩Fyrstikkalleen"
   },
   {
     "name": "woman",

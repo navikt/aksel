@@ -21,7 +21,7 @@ const IconBox = ({ iconObj, onClick, ...props }) => {
       onClick={() => onClick(iconObj)}
       onKeyDown={(e) => handleKeys(e)}
     >
-      <Icon focusable={false} className="iconBox__icon" />
+      <Icon focusable={false} />
       <Undertekst className="iconBox__iconName">{iconObj.name}</Undertekst>
     </div>
   );

@@ -142,7 +142,7 @@ const IconPage = () => {
         return (
           checkIfVisible(category) && (
             <div key={`${category.category}`}>
-              <Undertittel className="iconPage__headlines">
+              <Undertittel className="iconPage__headlines iconPage__headlines--fadein">
                 {category.category}
               </Undertittel>
               <div className="iconPage__icons">
@@ -265,8 +265,12 @@ const IconPage = () => {
         >
           <div>
             <Systemtittel>{selectedIcon.name}</Systemtittel>
-            <Knapp kompakt onClick={() => downloadSvg()}>
-              Last ned SVG
+            <Knapp
+              kompakt
+              onClick={() => downloadSvg()}
+              style={{ textTransform: "none" }}
+            >
+              {`Last ned ${selectedIcon.name}.svg`}
             </Knapp>
             <Undertittel className="iconPage__headlines">React</Undertittel>
             <Code popupUnder className="language-jsx">
