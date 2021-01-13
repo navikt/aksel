@@ -11,7 +11,6 @@ import IconBox from "./IconBox";
 import IconSidebar from "./IconSidebar";
 import "./styles.less";
 
-const startCase = require("lodash.startcase");
 const metadata = require("@navikt/ds-icons/figma-api/metadata.json");
 const beautify_html = require("js-beautify").html;
 

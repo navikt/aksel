@@ -2,7 +2,6 @@ const api = require("./api");
 const fs = require("fs");
 const path = require("path");
 const pLimit = require("p-limit");
-const kebab = require("lodash.kebabcase");
 const rimraf = require("rimraf");
 const startCase = require("lodash.startcase");
 
