@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-grid",
-  "version": "1.0.45",
+  "version": "1.0.46",
   "main": "lib/grid.js",
   "types": "lib/grid.d.ts",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-modal-style",
-  "version": "0.3.47",
+  "version": "0.3.48",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -21,8 +21,8 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-lukknapp-style": "^0.2.35",
-    "nav-frontend-paneler-style": "^0.3.32",
+    "nav-frontend-lukknapp-style": "^0.2.36",
+    "nav-frontend-paneler-style": "^0.3.33",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

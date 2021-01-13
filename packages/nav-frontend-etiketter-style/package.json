@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-etiketter-style",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
