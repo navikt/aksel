@@ -4,16 +4,29 @@ const path = require("path");
 const pLimit = require("p-limit");
 const kebab = require("lodash.kebabcase");
 const rimraf = require("rimraf");
+const startCase = require("lodash.startcase");
+
+const manipulateSvg = (svgString) => {
+  let changed = svgString.replace(`width="24"`, `width="1em"`);
+  changed = changed.replace(`height="24"`, `height="1em"`);
+  changed = changed.replace(new RegExp("#3E3832", "g"), `currentColor`);
+  return changed;
+};
 
 const generateMetadata = (iconNodesArr) => {
   return iconNodesArr
     .map(({ name, description, created_at, updated_at, containing_frame }) => {
       return {
-        name,
+        name: startCase(name).replace(/\s/g, ""),
         description,
         created_at,
         updated_at,
-        pageName: containing_frame.pageName,
+        //strip emojis
+        pageName: containing_frame.pageName.replace(
+          /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+          ""
+        ),
+        visible: true,
       };
     })
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -58,9 +71,13 @@ const main = async () => {
       limit(() =>
         api
           .getIconContent(url)
-          .then(({ data }) => {
+          .then(({ data }) => manipulateSvg(data))
+          .then((data) => {
             fs.writeFileSync(
-              path.resolve(iconFolder, `${kebab(iconNodesArr[x].name)}.svg`),
+              path.resolve(
+                iconFolder,
+                `${startCase(iconNodesArr[x].name).replace(/\s/g, "")}.svg`
+              ),
               data,
               {
                 encoding: "utf8",

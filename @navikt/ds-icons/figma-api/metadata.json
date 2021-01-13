@@ -1,1871 +1,2138 @@
 [
   {
-    "name": "add",
+    "name": "Add",
     "description": "",
     "created_at": "2020-07-01T10:37:42.784Z",
     "updated_at": "2021-01-07T19:42:42.162Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "add-solid",
+    "name": "AddSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.342Z",
     "updated_at": "2021-01-11T13:37:55.342Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "attachment",
+    "name": "Attachment",
     "description": "",
     "created_at": "2020-07-01T10:37:43.111Z",
     "updated_at": "2020-11-19T11:32:20.264Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "attachment-solid",
+    "name": "AttachmentSolid",
     "description": "",
     "created_at": "2021-01-11T13:48:27.872Z",
     "updated_at": "2021-01-11T13:48:27.872Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "baby",
+    "name": "Baby",
     "description": "",
     "created_at": "2020-07-01T10:37:42.678Z",
     "updated_at": "2020-07-01T10:37:42.678Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "baby changing room",
+    "name": "BabyChangingRoom",
     "description": "",
     "created_at": "2020-12-16T14:08:52.216Z",
     "updated_at": "2021-01-12T13:07:17.590Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "baby-filled",
+    "name": "BabyFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.197Z",
     "updated_at": "2021-01-11T13:37:55.197Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "back",
+    "name": "Back",
     "description": "",
     "created_at": "2020-07-01T10:37:42.840Z",
     "updated_at": "2021-01-11T13:37:55.850Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "back-solid",
+    "name": "BackSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.448Z",
     "updated_at": "2021-01-11T13:37:55.448Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "bag",
+    "name": "Bag",
     "description": "",
     "created_at": "2020-07-01T10:37:42.673Z",
     "updated_at": "2020-11-23T16:49:12.596Z",
-    "pageName": "🧩Jobs"
+    "pageName": "Jobs",
+    "visible": true
   },
   {
-    "name": "bag-filled",
+    "name": "BagFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.239Z",
     "updated_at": "2021-01-11T13:37:55.239Z",
-    "pageName": "🧩Jobs"
+    "pageName": "Jobs",
+    "visible": true
   },
   {
     "name": "Baggage",
     "description": "",
     "created_at": "2020-07-31T13:09:33.330Z",
     "updated_at": "2021-01-12T13:07:17.692Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "bandage",
+    "name": "Bandage",
     "description": "",
     "created_at": "2020-07-01T10:37:42.628Z",
     "updated_at": "2020-07-01T10:37:42.628Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "bandage-filled",
+    "name": "BandageFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.671Z",
     "updated_at": "2021-01-12T13:29:09.181Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "bandage-solid",
+    "name": "BandageSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.665Z",
     "updated_at": "2021-01-12T13:29:09.156Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "bell",
+    "name": "Bell",
     "description": "",
     "created_at": "2020-07-01T10:37:42.756Z",
     "updated_at": "2020-12-15T13:19:01.037Z",
-    "pageName": "🧩Reminder"
+    "pageName": "Reminder",
+    "visible": true
   },
   {
-    "name": "bell-solid",
+    "name": "BellSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.514Z",
     "updated_at": "2021-01-11T13:37:55.514Z",
-    "pageName": "🧩Reminder"
+    "pageName": "Reminder",
+    "visible": true
   },
   {
-    "name": "bike",
+    "name": "Bike",
     "description": "",
     "created_at": "2020-07-31T13:09:33.312Z",
     "updated_at": "2021-01-12T13:07:17.663Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "bookmark",
+    "name": "Bookmark",
     "description": "",
     "created_at": "2020-07-01T10:37:42.877Z",
     "updated_at": "2021-01-12T13:29:09.268Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "bookmark-solid",
+    "name": "BookmarkSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.585Z",
     "updated_at": "2021-01-12T13:29:09.150Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
     "name": "Bowl",
     "description": "",
     "created_at": "2020-07-20T10:32:39.038Z",
     "updated_at": "2021-01-12T13:07:17.616Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "boy",
+    "name": "Boy",
     "description": "",
     "created_at": "2020-07-01T10:37:43.107Z",
     "updated_at": "2020-11-23T12:29:29.139Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "boy-filled",
+    "name": "BoyFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.193Z",
     "updated_at": "2021-01-11T13:37:55.193Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "braille",
+    "name": "Braille",
     "description": "",
     "created_at": "2020-07-01T10:37:42.881Z",
     "updated_at": "2021-01-12T13:29:09.302Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "braille-hand",
+    "name": "BrailleHand",
     "description": "",
     "created_at": "2020-07-01T10:37:42.951Z",
     "updated_at": "2021-01-12T13:29:09.237Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "braille-hand-filled",
+    "name": "BrailleHandFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.301Z",
     "updated_at": "2021-01-12T13:29:09.242Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "braille-solid",
+    "name": "BrailleSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.306Z",
     "updated_at": "2021-01-13T11:29:02.281Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "calculator",
+    "name": "Calculator",
     "description": "",
     "created_at": "2020-07-01T10:37:42.917Z",
     "updated_at": "2020-12-07T13:55:22.321Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "calculator-solid",
+    "name": "CalculatorSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.768Z",
     "updated_at": "2021-01-11T13:37:55.768Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "calender",
+    "name": "Calender",
     "description": "",
     "created_at": "2020-07-01T10:37:42.760Z",
     "updated_at": "2020-11-26T08:42:59.879Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "calender-filled",
+    "name": "CalenderFilled",
     "description": "",
     "created_at": "2021-01-09T14:38:56.256Z",
     "updated_at": "2021-01-11T13:37:55.809Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "camera",
+    "name": "Camera",
     "description": "",
     "created_at": "2020-07-01T10:37:42.913Z",
     "updated_at": "2020-12-02T12:50:37.169Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "camera-filled",
+    "name": "CameraFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.368Z",
     "updated_at": "2021-01-11T13:37:55.368Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "cancel",
+    "name": "Cancel",
     "description": "",
     "created_at": "2020-07-01T10:37:42.990Z",
     "updated_at": "2020-07-01T10:37:42.990Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "cancel-filled",
+    "name": "CancelFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.351Z",
     "updated_at": "2021-01-11T13:37:55.351Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "Cantine 1",
+    "name": "Cantine1",
     "description": "",
     "created_at": "2020-07-31T13:09:33.321Z",
     "updated_at": "2021-01-12T13:07:17.704Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "Cantine 2",
+    "name": "Cantine2",
     "description": "",
     "created_at": "2020-07-31T13:09:33.317Z",
     "updated_at": "2021-01-12T13:07:17.684Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "car",
+    "name": "Car",
     "description": "",
     "created_at": "2020-07-31T13:09:33.334Z",
     "updated_at": "2021-01-12T13:07:17.630Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "clock",
+    "name": "Clock",
     "description": "",
     "created_at": "2020-07-01T10:37:42.647Z",
     "updated_at": "2020-11-25T09:46:58.990Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "clock-solid",
+    "name": "ClockSolid",
     "description": "",
     "created_at": "2021-01-09T14:38:56.260Z",
     "updated_at": "2021-01-11T13:37:55.785Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "close",
+    "name": "Close",
     "description": "",
     "created_at": "2020-07-01T10:37:42.827Z",
     "updated_at": "2020-11-20T09:53:40.852Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "close-solid",
+    "name": "CloseSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.364Z",
     "updated_at": "2021-01-11T13:37:55.364Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "cognition outline",
+    "name": "CognitionOutline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.212Z",
     "updated_at": "2021-01-12T13:07:17.611Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "collapse",
+    "name": "Collapse",
     "description": "",
     "created_at": "2020-07-01T10:37:42.615Z",
     "updated_at": "2021-01-11T13:37:55.884Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "collapse-solid",
+    "name": "CollapseSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.566Z",
     "updated_at": "2021-01-11T13:37:55.566Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "Combifridge 1",
+    "name": "Combifridge1",
     "description": "",
     "created_at": "2020-07-20T10:32:39.051Z",
     "updated_at": "2021-01-12T13:07:17.602Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "Combifridge 2",
+    "name": "Combifridge2",
     "description": "",
     "created_at": "2020-07-20T10:32:39.061Z",
     "updated_at": "2021-01-12T13:07:17.624Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "coronavirus",
+    "name": "Coronavirus",
     "description": "",
     "created_at": "2020-07-01T10:37:42.972Z",
     "updated_at": "2020-12-15T21:46:32.067Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "coronavirus-filled",
+    "name": "CoronavirusFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.474Z",
     "updated_at": "2021-01-11T13:37:55.474Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "cup",
+    "name": "Cup",
     "description": "",
     "created_at": "2020-07-20T10:32:39.056Z",
     "updated_at": "2021-01-12T13:07:17.733Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "customer service",
+    "name": "CustomerService",
     "description": "",
     "created_at": "2020-07-01T10:37:42.707Z",
     "updated_at": "2020-11-27T13:32:20.969Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "customer-service-filled",
+    "name": "CustomerServiceFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.409Z",
     "updated_at": "2021-01-11T13:37:55.409Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "data",
+    "name": "Data",
     "description": "",
     "created_at": "2020-07-20T10:32:39.033Z",
     "updated_at": "2021-01-12T13:29:09.221Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "data-solid",
+    "name": "DataSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.599Z",
     "updated_at": "2021-01-12T13:29:09.309Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "delete",
+    "name": "Delete",
     "description": "",
     "created_at": "2020-07-01T10:37:43.000Z",
     "updated_at": "2020-11-27T17:29:34.765Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "delete-solid",
+    "name": "DeleteSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.360Z",
     "updated_at": "2021-01-11T13:37:55.360Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "dialog",
+    "name": "Dialog",
     "description": "",
     "created_at": "2020-07-01T10:37:43.122Z",
     "updated_at": "2021-01-07T19:43:39.998Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog warning",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.845Z",
-    "updated_at": "2020-12-08T15:23:13.628Z",
-    "pageName": "🧩Communication"
-  },
-  {
-    "name": "dialog-dots",
+    "name": "DialogDots",
     "description": "",
     "created_at": "2020-07-01T10:37:43.133Z",
     "updated_at": "2021-01-11T13:37:55.822Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog-dots-solid",
+    "name": "DialogDotsSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.678Z",
     "updated_at": "2021-01-11T13:37:55.678Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog-filled",
+    "name": "DialogFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.613Z",
     "updated_at": "2021-01-11T13:37:55.613Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog-success",
+    "name": "DialogSuccess",
     "description": "",
     "created_at": "2020-07-01T10:37:42.936Z",
     "updated_at": "2021-01-11T13:37:55.843Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog-success-solid",
+    "name": "DialogSuccessSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.440Z",
     "updated_at": "2021-01-11T13:37:55.440Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "dialog-warning-solid",
+    "name": "DialogWarning",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.845Z",
+    "updated_at": "2020-12-08T15:23:13.628Z",
+    "pageName": "Communication",
+    "visible": true
+  },
+  {
+    "name": "DialogWarningSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.444Z",
     "updated_at": "2021-01-11T13:37:55.444Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "disability",
+    "name": "Disability",
     "description": "",
     "created_at": "2020-07-01T10:37:42.669Z",
     "updated_at": "2020-12-14T10:09:06.452Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "disability-filled",
+    "name": "DisabilityFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.314Z",
     "updated_at": "2021-01-11T13:37:55.314Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
     "name": "Dish",
     "description": "",
     "created_at": "2020-07-20T10:32:39.026Z",
     "updated_at": "2021-01-12T13:07:17.606Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
     "name": "Dishwasher",
     "description": "",
     "created_at": "2020-07-20T10:32:39.029Z",
     "updated_at": "2021-01-12T13:07:17.724Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "down",
+    "name": "Down",
     "description": "",
     "created_at": "2020-07-01T10:37:42.746Z",
     "updated_at": "2020-12-17T12:26:18.740Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "down-solid",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.338Z",
-    "updated_at": "2021-01-11T13:37:55.338Z",
-    "pageName": "🧩Arrow"
-  },
-  {
-    "name": "download",
+    "name": "Download",
     "description": "",
     "created_at": "2020-07-01T10:37:43.031Z",
     "updated_at": "2021-01-09T14:38:56.267Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "download-solid",
+    "name": "DownloadSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.376Z",
     "updated_at": "2021-01-11T13:37:55.376Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "edit",
+    "name": "DownSolid",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.338Z",
+    "updated_at": "2021-01-11T13:37:55.338Z",
+    "pageName": "Arrow",
+    "visible": true
+  },
+  {
+    "name": "Edit",
     "description": "",
     "created_at": "2020-07-01T10:37:42.751Z",
     "updated_at": "2021-01-08T14:04:05.534Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "edit-solid",
+    "name": "EditSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.506Z",
     "updated_at": "2021-01-11T13:37:55.506Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "elevator",
+    "name": "Elevator",
     "description": "",
     "created_at": "2020-12-16T14:08:52.225Z",
     "updated_at": "2021-01-12T13:07:17.710Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "email",
+    "name": "Email",
     "description": "",
     "created_at": "2020-07-01T10:37:43.128Z",
     "updated_at": "2020-07-01T10:37:43.128Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "email-filled",
+    "name": "EmailFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.424Z",
     "updated_at": "2021-01-11T13:37:55.424Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "email-open",
+    "name": "EmailOpen",
     "description": "",
     "created_at": "2020-07-01T10:37:42.632Z",
     "updated_at": "2021-01-11T13:37:55.836Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "email-open-filled",
+    "name": "EmailOpenFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.419Z",
     "updated_at": "2021-01-11T13:37:55.419Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "error",
+    "name": "Error",
     "description": "",
     "created_at": "2020-07-01T10:37:43.021Z",
     "updated_at": "2020-07-01T10:37:43.021Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "error-solid",
+    "name": "ErrorSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.499Z",
     "updated_at": "2021-01-11T13:37:55.499Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "expand",
+    "name": "Expand",
     "description": "",
     "created_at": "2020-07-01T10:37:42.726Z",
     "updated_at": "2021-01-11T13:37:55.856Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "expand-solid",
+    "name": "ExpandSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.453Z",
     "updated_at": "2021-01-11T13:37:55.453Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "external-link",
+    "name": "ExternalLink",
     "description": "",
     "created_at": "2020-07-01T10:37:42.636Z",
     "updated_at": "2021-01-12T13:29:09.282Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "external-link-filled",
+    "name": "ExternalLinkFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.539Z",
     "updated_at": "2021-01-11T13:37:55.539Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "eye",
+    "name": "Eye",
     "description": "",
     "created_at": "2020-07-01T10:37:42.895Z",
     "updated_at": "2020-11-20T11:59:55.926Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "eye-filled",
+    "name": "EyeFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.321Z",
     "updated_at": "2021-01-11T13:37:55.321Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "eye-screened",
+    "name": "EyeScreened",
     "description": "",
     "created_at": "2020-07-01T10:37:42.956Z",
     "updated_at": "2021-01-12T13:29:09.186Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "eye-screened-filled",
+    "name": "EyeScreenedFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.578Z",
     "updated_at": "2021-01-11T13:37:55.578Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "family",
+    "name": "Family",
     "description": "",
     "created_at": "2020-07-01T10:37:42.651Z",
     "updated_at": "2020-07-01T10:37:42.651Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "family-filled",
+    "name": "FamilyFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.222Z",
     "updated_at": "2021-01-11T13:37:55.222Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "feeding-bottle",
+    "name": "FeedingBottle",
     "description": "",
     "created_at": "2020-07-01T10:37:42.927Z",
     "updated_at": "2021-01-12T13:29:09.161Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "feeding-bottle-filled",
+    "name": "FeedingBottleFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.214Z",
     "updated_at": "2021-01-11T13:37:55.214Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "female",
+    "name": "Female",
     "description": "",
     "created_at": "2020-07-01T10:37:42.855Z",
     "updated_at": "2020-11-24T11:50:38.560Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "female-solid",
+    "name": "FemaleSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.227Z",
     "updated_at": "2021-01-11T13:37:55.227Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "file",
+    "name": "File",
     "description": "",
     "created_at": "2020-07-01T10:37:43.073Z",
     "updated_at": "2020-07-01T10:37:43.073Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "file-content",
+    "name": "FileContent",
     "description": "",
     "created_at": "2020-07-01T10:37:42.944Z",
     "updated_at": "2021-01-12T13:29:09.170Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "file-content-solid",
+    "name": "FileContentSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.491Z",
     "updated_at": "2021-01-11T13:37:55.491Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "file-solid",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.645Z",
-    "updated_at": "2021-01-11T13:37:55.645Z",
-    "pageName": "🧩File"
-  },
-  {
-    "name": "files",
+    "name": "Files",
     "description": "",
     "created_at": "2020-07-01T10:37:42.619Z",
     "updated_at": "2020-07-01T10:37:42.619Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "files-solid",
+    "name": "FileSolid",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.645Z",
+    "updated_at": "2021-01-11T13:37:55.645Z",
+    "pageName": "File",
+    "visible": true
+  },
+  {
+    "name": "FilesSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.595Z",
     "updated_at": "2021-01-11T13:37:55.595Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "fill-forms",
+    "name": "FillForms",
     "description": "",
     "created_at": "2020-07-01T10:37:43.158Z",
     "updated_at": "2021-01-12T13:29:09.263Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "fill-forms-filled",
+    "name": "FillFormsFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.503Z",
     "updated_at": "2021-01-11T13:37:55.503Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "filter",
+    "name": "Filter",
     "description": "",
     "created_at": "2020-07-01T10:37:42.891Z",
     "updated_at": "2020-12-08T09:58:27.629Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "filter-solid",
+    "name": "FilterSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.605Z",
     "updated_at": "2021-01-11T13:37:55.605Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "folder",
+    "name": "Folder",
     "description": "",
     "created_at": "2020-07-01T10:37:42.682Z",
     "updated_at": "2020-07-01T10:37:42.682Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "folder-solid",
+    "name": "FolderSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.630Z",
     "updated_at": "2021-01-11T13:37:55.630Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "fork--spoon--knife",
+    "name": "ForkSpoonKnife",
     "description": "",
     "created_at": "2020-07-20T10:32:39.048Z",
     "updated_at": "2021-01-12T13:07:17.653Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
     "name": "Freezer",
     "description": "",
     "created_at": "2020-07-20T10:32:39.018Z",
     "updated_at": "2021-01-12T13:07:17.578Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "girl",
+    "name": "Girl",
     "description": "",
     "created_at": "2020-07-01T10:37:42.864Z",
     "updated_at": "2020-07-01T10:37:42.864Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "girl-filled",
+    "name": "GirlFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.717Z",
     "updated_at": "2021-01-11T13:37:55.717Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "glass",
+    "name": "Glass",
     "description": "",
     "created_at": "2020-07-20T10:32:39.043Z",
     "updated_at": "2021-01-12T13:07:17.658Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "globe",
+    "name": "Globe",
     "description": "",
     "created_at": "2020-07-01T10:37:43.082Z",
     "updated_at": "2020-12-15T21:51:58.943Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "globe-solid",
+    "name": "GlobeSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.388Z",
     "updated_at": "2021-01-12T13:29:09.247Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "guide-dog",
+    "name": "GuideDog",
     "description": "",
     "created_at": "2020-07-01T10:37:42.922Z",
     "updated_at": "2021-01-12T13:29:09.278Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "guide-dog-solid",
+    "name": "GuideDogSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.295Z",
     "updated_at": "2021-01-12T13:29:09.258Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "hamburger",
+    "name": "Hamburger",
     "description": "",
     "created_at": "2020-07-01T10:37:42.624Z",
     "updated_at": "2020-11-20T09:53:25.979Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "hamburger-solid",
+    "name": "HamburgerSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.574Z",
     "updated_at": "2021-01-11T13:37:55.574Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "hand-bandage",
+    "name": "HandBandage",
     "description": "",
     "created_at": "2020-07-01T10:37:42.711Z",
     "updated_at": "2021-01-11T13:37:55.793Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "hand-bandage-filled",
+    "name": "HandBandageFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.466Z",
     "updated_at": "2021-01-12T13:29:09.211Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "hand-bandage-solid",
+    "name": "HandBandageSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.471Z",
     "updated_at": "2021-01-12T13:29:09.191Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "hanger",
+    "name": "Hanger",
     "description": "",
     "created_at": "2020-07-01T10:37:43.096Z",
     "updated_at": "2021-01-12T13:29:09.273Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "hanger-filled",
+    "name": "HangerFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.218Z",
     "updated_at": "2021-01-12T13:29:09.288Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "health-case",
+    "name": "HealthCase",
     "description": "",
     "created_at": "2020-07-01T10:37:43.036Z",
     "updated_at": "2021-01-12T13:29:09.206Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "health-case-solid",
+    "name": "HealthCaseSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.480Z",
     "updated_at": "2021-01-11T13:37:55.480Z",
-    "pageName": "🧩Health"
+    "pageName": "Health",
+    "visible": true
   },
   {
-    "name": "hearing outline",
+    "name": "HearingOutline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.232Z",
     "updated_at": "2021-01-12T13:07:17.714Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "heart",
+    "name": "Heart",
     "description": "",
     "created_at": "2020-07-01T10:37:42.732Z",
     "updated_at": "2020-12-09T14:10:52.787Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "heart-solid",
+    "name": "HeartSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.245Z",
     "updated_at": "2021-01-11T13:37:55.245Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "helmet",
+    "name": "Helmet",
     "description": "",
     "created_at": "2020-07-01T10:37:42.793Z",
     "updated_at": "2020-07-01T10:37:42.793Z",
-    "pageName": "🧩Jobs"
+    "pageName": "Jobs",
+    "visible": true
   },
   {
-    "name": "helmet-filled",
+    "name": "HelmetFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.651Z",
     "updated_at": "2021-01-11T13:37:55.651Z",
-    "pageName": "🧩Jobs"
+    "pageName": "Jobs",
+    "visible": true
   },
   {
-    "name": "helptext",
+    "name": "Helptext",
     "description": "",
     "created_at": "2020-07-01T10:37:42.715Z",
     "updated_at": "2020-07-01T10:37:42.715Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "helptext-solid",
+    "name": "HelptextSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.692Z",
     "updated_at": "2021-01-11T13:37:55.692Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "home",
+    "name": "Home",
     "description": "",
     "created_at": "2020-07-01T10:37:42.687Z",
     "updated_at": "2020-12-18T09:24:41.724Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
-    "name": "home-solid",
+    "name": "HomeSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.401Z",
     "updated_at": "2021-01-11T13:37:55.401Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
-    "name": "infants",
+    "name": "Infants",
     "description": "",
     "created_at": "2020-07-01T10:37:43.056Z",
     "updated_at": "2020-07-01T10:37:43.056Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "infants-filled",
+    "name": "InfantsFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.201Z",
     "updated_at": "2021-01-11T13:37:55.201Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "information",
+    "name": "Information",
     "description": "",
     "created_at": "2020-07-01T10:37:43.005Z",
     "updated_at": "2020-12-03T14:53:38.932Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "information-solid",
+    "name": "InformationSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.736Z",
     "updated_at": "2021-01-11T13:37:55.736Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "laptop",
+    "name": "Laptop",
     "description": "",
     "created_at": "2020-07-01T10:37:42.660Z",
     "updated_at": "2020-07-01T10:37:42.660Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "laptop-filled",
+    "name": "LaptopFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.288Z",
     "updated_at": "2021-01-11T13:37:55.288Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "law",
+    "name": "Law",
     "description": "",
     "created_at": "2020-07-01T10:37:42.819Z",
     "updated_at": "2020-12-03T13:55:50.717Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "law-filled",
+    "name": "LawFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.330Z",
     "updated_at": "2021-01-11T13:37:55.330Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "left",
+    "name": "Left",
     "description": "",
     "created_at": "2020-07-01T10:37:42.797Z",
     "updated_at": "2020-12-07T10:23:10.387Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "left-solid",
+    "name": "LeftSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.334Z",
     "updated_at": "2021-01-11T13:37:55.334Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "light-bulb",
+    "name": "LightBulb",
     "description": "",
     "created_at": "2020-07-01T10:37:43.067Z",
     "updated_at": "2021-01-11T13:37:55.898Z",
-    "pageName": "🧩Reminder"
+    "pageName": "Reminder",
+    "visible": true
   },
   {
-    "name": "light-bulb-solid",
+    "name": "LightBulbSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.623Z",
     "updated_at": "2021-01-11T13:37:55.623Z",
-    "pageName": "🧩Reminder"
+    "pageName": "Reminder",
+    "visible": true
   },
   {
-    "name": "like",
+    "name": "Like",
     "description": "",
     "created_at": "2020-07-01T10:37:42.788Z",
     "updated_at": "2020-07-01T10:37:42.788Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "like-filled",
+    "name": "LikeFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.250Z",
     "updated_at": "2021-01-11T13:37:55.250Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "list",
+    "name": "List",
     "description": "",
     "created_at": "2020-07-01T10:37:42.836Z",
     "updated_at": "2021-01-12T13:29:09.195Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "list-solid",
+    "name": "ListSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.486Z",
     "updated_at": "2021-01-12T13:29:09.252Z",
-    "pageName": "🧩File"
+    "pageName": "File",
+    "visible": true
   },
   {
-    "name": "locked",
+    "name": "Locked",
     "description": "",
     "created_at": "2020-07-01T10:37:43.027Z",
     "updated_at": "2020-11-25T09:47:50.086Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "locked-solid",
+    "name": "LockedSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.325Z",
     "updated_at": "2021-01-11T13:37:55.325Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "login",
+    "name": "Login",
     "description": "",
     "created_at": "2020-07-01T10:37:43.087Z",
     "updated_at": "2020-12-08T11:08:02.408Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "login-filled",
+    "name": "LoginFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.531Z",
     "updated_at": "2021-01-11T13:37:55.531Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "logout",
+    "name": "Logout",
     "description": "",
     "created_at": "2020-07-01T10:37:42.931Z",
     "updated_at": "2020-07-01T10:37:42.931Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "logout-filled",
+    "name": "LogoutFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.609Z",
     "updated_at": "2021-01-11T13:37:55.609Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "male",
+    "name": "Male",
     "description": "",
     "created_at": "2020-07-01T10:37:42.702Z",
     "updated_at": "2020-12-01T13:40:30.232Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "male-solid",
+    "name": "MaleSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.743Z",
     "updated_at": "2021-01-11T13:37:55.743Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "man",
+    "name": "Man",
     "description": "",
     "created_at": "2020-07-01T10:37:43.041Z",
     "updated_at": "2020-11-23T12:31:21.495Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "man-filled",
+    "name": "ManFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.730Z",
     "updated_at": "2021-01-11T13:37:55.730Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "minus",
+    "name": "Minus",
     "description": "",
     "created_at": "2020-07-01T10:37:42.814Z",
     "updated_at": "2020-07-01T10:37:42.814Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "minus-solid",
+    "name": "MinusSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.721Z",
     "updated_at": "2021-01-11T13:37:55.721Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "mobile",
+    "name": "Mobile",
     "description": "",
     "created_at": "2020-07-01T10:37:43.010Z",
     "updated_at": "2020-07-01T10:37:43.010Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "mobile-filled",
+    "name": "MobileFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.280Z",
     "updated_at": "2021-01-11T13:37:55.280Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "money",
+    "name": "Money",
     "description": "",
     "created_at": "2020-07-01T10:37:42.741Z",
     "updated_at": "2020-11-19T11:39:07.561Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "money-filled",
+    "name": "MoneyFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.510Z",
     "updated_at": "2021-01-11T13:37:55.510Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "monitor",
+    "name": "Monitor",
     "description": "",
     "created_at": "2020-07-01T10:37:42.802Z",
     "updated_at": "2020-12-02T07:35:40.081Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "monitor-filled",
+    "name": "MonitorFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.526Z",
     "updated_at": "2021-01-11T13:37:55.526Z",
-    "pageName": "🧩Device"
+    "pageName": "Device",
+    "visible": true
   },
   {
-    "name": "motorcycle",
+    "name": "Motorcycle",
     "description": "",
     "created_at": "2020-07-31T13:09:33.308Z",
     "updated_at": "2021-01-12T13:07:17.634Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "Mute 3",
+    "name": "Mute3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.549Z",
     "updated_at": "2021-01-12T13:07:17.669Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "neutral",
+    "name": "Neutral",
     "description": "",
     "created_at": "2020-07-01T10:37:42.832Z",
     "updated_at": "2020-11-24T11:50:38.568Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "neutral-filled",
+    "name": "NeutralFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.231Z",
     "updated_at": "2021-01-11T13:37:55.231Z",
-    "pageName": "🧩Gender"
+    "pageName": "Gender",
+    "visible": true
   },
   {
-    "name": "next",
+    "name": "Next",
     "description": "",
     "created_at": "2020-07-01T10:37:42.664Z",
     "updated_at": "2021-01-11T13:37:55.863Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "next-solid",
+    "name": "NextSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.543Z",
     "updated_at": "2021-01-11T13:37:55.543Z",
-    "pageName": "🧩Chevron"
+    "pageName": "Chevron",
+    "visible": true
   },
   {
-    "name": "No smoking",
+    "name": "NoSmoking",
     "description": "",
     "created_at": "2020-07-20T10:32:39.013Z",
     "updated_at": "2021-01-12T13:07:17.698Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "office-1",
+    "name": "Office1",
     "description": "",
     "created_at": "2020-07-01T10:37:42.720Z",
     "updated_at": "2021-01-11T13:37:55.801Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
-    "name": "office-1-filled",
+    "name": "Office1Filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.397Z",
     "updated_at": "2021-01-11T13:37:55.397Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
-    "name": "office-2",
+    "name": "Office2",
     "description": "",
     "created_at": "2020-07-01T10:37:42.806Z",
     "updated_at": "2021-01-11T13:37:55.829Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
-    "name": "office-2-filled",
+    "name": "Office2Filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.393Z",
     "updated_at": "2021-01-11T13:37:55.393Z",
-    "pageName": "🧩Buildning"
+    "pageName": "Buildning",
+    "visible": true
   },
   {
     "name": "Parking",
     "description": "",
     "created_at": "2020-07-31T13:09:33.304Z",
     "updated_at": "2021-01-12T13:07:17.753Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "passport",
+    "name": "Passport",
     "description": "",
     "created_at": "2020-07-01T10:37:43.078Z",
     "updated_at": "2020-07-01T10:37:43.078Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "passport-filled",
+    "name": "PassportFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.757Z",
     "updated_at": "2021-01-11T13:37:55.757Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "pension",
+    "name": "Pension",
     "description": "",
     "created_at": "2020-07-01T10:37:42.610Z",
     "updated_at": "2020-12-07T13:56:05.766Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "pension-bag",
+    "name": "PensionBag",
     "description": "",
     "created_at": "2020-07-01T10:37:42.962Z",
     "updated_at": "2021-01-12T13:29:09.295Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "pension-bag-filled",
+    "name": "PensionBagFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.518Z",
     "updated_at": "2021-01-12T13:29:09.146Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "pension-fillid",
+    "name": "PensionFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.617Z",
-    "updated_at": "2021-01-11T13:37:55.617Z",
-    "pageName": "🧩Pension"
+    "updated_at": "2021-01-13T12:40:14.889Z",
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "pension-flower",
+    "name": "PensionFlower",
     "description": "",
     "created_at": "2020-07-01T10:37:42.967Z",
     "updated_at": "2021-01-12T13:29:09.165Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "pension-flower-filled",
+    "name": "PensionFlowerFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.686Z",
     "updated_at": "2021-01-12T13:29:09.232Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "picture",
+    "name": "Picture",
     "description": "",
     "created_at": "2020-07-01T10:37:42.886Z",
     "updated_at": "2020-12-02T12:51:43.177Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "picture-filled",
+    "name": "PictureFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.753Z",
     "updated_at": "2021-01-11T13:37:55.753Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "place",
+    "name": "Place",
     "description": "",
     "created_at": "2020-07-01T10:37:42.873Z",
     "updated_at": "2020-12-10T11:50:59.809Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "place-filled",
+    "name": "PlaceFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.384Z",
     "updated_at": "2021-01-11T13:37:55.384Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "plane",
+    "name": "Plane",
     "description": "",
     "created_at": "2020-07-01T10:37:43.153Z",
     "updated_at": "2020-07-01T10:37:43.153Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "plane-filled",
+    "name": "PlaneFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.762Z",
     "updated_at": "2021-01-11T13:37:55.762Z",
-    "pageName": "🧩International"
+    "pageName": "International",
+    "visible": true
   },
   {
-    "name": "pregnant",
+    "name": "Pregnant",
     "description": "",
     "created_at": "2020-07-01T10:37:42.995Z",
     "updated_at": "2020-07-01T10:37:42.995Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "pregnant-solid",
+    "name": "PregnantSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.210Z",
     "updated_at": "2021-01-11T13:37:55.210Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "print",
+    "name": "Print",
     "description": "",
     "created_at": "2020-07-01T10:37:43.050Z",
     "updated_at": "2020-07-01T10:37:43.050Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "print-filled",
+    "name": "PrintFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.570Z",
     "updated_at": "2021-01-11T13:37:55.570Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "print-solid",
+    "name": "PrintSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.562Z",
     "updated_at": "2021-01-11T13:37:55.562Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "profile",
+    "name": "Profile",
     "description": "",
     "created_at": "2020-07-01T10:37:42.850Z",
     "updated_at": "2020-11-25T09:49:36.414Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "profile-filled",
+    "name": "ProfileFilled",
     "description": "",
     "created_at": "2021-01-12T13:29:09.125Z",
     "updated_at": "2021-01-12T13:29:09.125Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "receipt",
+    "name": "Receipt",
     "description": "",
     "created_at": "2020-07-01T10:37:42.904Z",
     "updated_at": "2020-07-01T10:37:42.904Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "receipt-solid",
+    "name": "ReceiptSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.460Z",
     "updated_at": "2021-01-11T13:37:55.460Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
     "name": "Recycle1",
     "description": "",
     "created_at": "2020-07-01T10:37:42.859Z",
     "updated_at": "2021-01-12T13:07:17.743Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
     "name": "Recycle2",
     "description": "",
     "created_at": "2020-07-01T10:37:42.597Z",
     "updated_at": "2021-01-12T13:07:17.738Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "refresh",
+    "name": "Refresh",
     "description": "",
     "created_at": "2020-07-01T10:37:42.908Z",
     "updated_at": "2020-12-02T12:52:34.738Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "refresh-solid",
+    "name": "RefreshSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.372Z",
     "updated_at": "2021-01-11T13:37:55.372Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "refrigerator",
+    "name": "Refrigerator",
     "description": "",
     "created_at": "2020-07-20T10:32:39.022Z",
     "updated_at": "2021-01-12T13:07:17.639Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "right",
+    "name": "Right",
     "description": "",
     "created_at": "2020-07-01T10:37:42.642Z",
     "updated_at": "2020-11-19T11:22:16.649Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "right-solid",
+    "name": "RightSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.658Z",
     "updated_at": "2021-01-11T13:37:55.658Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "sandglass",
+    "name": "Sandglass",
     "description": "",
     "created_at": "2020-07-01T10:37:43.117Z",
     "updated_at": "2020-12-16T07:50:32.507Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "sandglass-filled",
+    "name": "SandglassFilled",
     "description": "",
     "created_at": "2021-01-09T14:38:56.250Z",
     "updated_at": "2021-01-11T13:37:55.815Z",
-    "pageName": "🧩Time"
+    "pageName": "Time",
+    "visible": true
   },
   {
-    "name": "save",
+    "name": "Save",
     "description": "",
     "created_at": "2020-07-01T10:37:42.602Z",
     "updated_at": "2020-12-09T08:57:31.211Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "save-file",
+    "name": "SaveFile",
     "description": "",
     "created_at": "2020-07-01T10:37:42.779Z",
     "updated_at": "2021-01-12T13:29:09.140Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "save-file-filled",
+    "name": "SaveFileFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.356Z",
     "updated_at": "2021-01-12T13:29:09.227Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "save-filled",
+    "name": "SaveFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.709Z",
     "updated_at": "2021-01-11T13:37:55.709Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "saving",
+    "name": "Saving",
     "description": "",
     "created_at": "2020-07-01T10:37:42.770Z",
     "updated_at": "2020-11-19T11:31:40.152Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "saving-solid",
+    "name": "SavingSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.726Z",
     "updated_at": "2021-01-11T13:37:55.726Z",
-    "pageName": "🧩Money"
+    "pageName": "Money",
+    "visible": true
   },
   {
-    "name": "search",
+    "name": "Search",
     "description": "",
     "created_at": "2020-07-01T10:37:42.983Z",
     "updated_at": "2020-12-03T13:08:18.206Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "search-filled",
+    "name": "SearchFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.346Z",
     "updated_at": "2021-01-11T13:37:55.346Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "selection",
+    "name": "Selection",
     "description": "",
     "created_at": "2020-07-01T10:37:42.810Z",
     "updated_at": "2020-07-01T10:37:42.810Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "selection-filled",
+    "name": "SelectionFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.582Z",
     "updated_at": "2021-01-11T13:37:55.582Z",
-    "pageName": "🧩Interface"
+    "pageName": "Interface",
+    "visible": true
   },
   {
-    "name": "send",
+    "name": "Send",
     "description": "",
     "created_at": "2020-07-01T10:37:43.101Z",
     "updated_at": "2020-11-26T14:02:16.785Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "send-solid",
+    "name": "SendSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.696Z",
     "updated_at": "2021-01-11T13:37:55.696Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "settings",
+    "name": "Settings",
     "description": "",
     "created_at": "2020-07-01T10:37:43.062Z",
     "updated_at": "2020-07-01T10:37:43.062Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "settings-solid",
+    "name": "SettingsSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.275Z",
     "updated_at": "2021-01-11T13:37:55.275Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "shake hands",
+    "name": "ShakeHands",
     "description": "",
     "created_at": "2020-07-01T10:37:42.900Z",
     "updated_at": "2020-11-19T09:52:06.726Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "shake-hands-filled",
+    "name": "ShakeHandsFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.413Z",
     "updated_at": "2021-01-11T13:37:55.413Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "shower",
+    "name": "Shower",
     "description": "",
     "created_at": "2020-12-16T14:08:52.221Z",
     "updated_at": "2021-01-12T13:07:17.643Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "shredding",
+    "name": "Shredding",
     "description": "",
     "created_at": "2020-07-31T13:09:33.339Z",
     "updated_at": "2021-01-12T13:07:17.747Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "sight outline",
+    "name": "SightOutline",
     "description": "",
     "created_at": "2020-12-16T14:08:52.208Z",
     "updated_at": "2021-01-12T13:07:17.719Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "sign-language",
+    "name": "SignLanguage",
     "description": "",
     "created_at": "2020-07-01T10:37:42.697Z",
     "updated_at": "2021-01-12T13:29:09.216Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "sign-language-filled",
+    "name": "SignLanguageFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.310Z",
     "updated_at": "2021-01-11T13:37:55.310Z",
-    "pageName": "🧩Handicap"
+    "pageName": "Handicap",
+    "visible": true
   },
   {
-    "name": "social-aid",
+    "name": "SocialAid",
     "description": "",
     "created_at": "2020-07-01T10:37:42.775Z",
     "updated_at": "2021-01-11T13:37:55.775Z",
-    "pageName": "🧩Social service"
+    "pageName": "Social service",
+    "visible": true
   },
   {
-    "name": "social-aid-filled",
+    "name": "SocialAidFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.235Z",
     "updated_at": "2021-01-11T13:37:55.235Z",
-    "pageName": "🧩Social service"
+    "pageName": "Social service",
+    "visible": true
   },
   {
-    "name": "speech-bubble",
+    "name": "SpeechBubble",
     "description": "",
     "created_at": "2021-01-11T13:37:55.429Z",
     "updated_at": "2021-01-12T13:29:09.176Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "speech-bubble-solid",
+    "name": "SpeechBubbleSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.435Z",
     "updated_at": "2021-01-12T13:29:09.201Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "stairs",
+    "name": "Stairs",
     "description": "",
     "created_at": "2020-12-16T14:08:52.229Z",
     "updated_at": "2021-01-12T13:07:17.620Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "star",
+    "name": "Star",
     "description": "",
     "created_at": "2020-07-01T10:37:42.655Z",
     "updated_at": "2021-01-12T12:49:59.666Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "star-solid",
+    "name": "StarSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.271Z",
     "updated_at": "2021-01-11T13:37:55.271Z",
-    "pageName": "🧩Social media"
+    "pageName": "Social media",
+    "visible": true
   },
   {
-    "name": "stick",
+    "name": "Stick",
     "description": "",
     "created_at": "2020-07-01T10:37:42.606Z",
     "updated_at": "2020-12-07T13:56:02.382Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "stick-filled",
+    "name": "StickFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.380Z",
     "updated_at": "2021-01-11T13:37:55.380Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "stroller",
+    "name": "Stroller",
     "description": "",
     "created_at": "2020-07-01T10:37:43.016Z",
     "updated_at": "2020-12-16T08:38:54.485Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "stroller-filled",
+    "name": "StrollerFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.205Z",
     "updated_at": "2021-01-11T13:37:55.205Z",
-    "pageName": "🧩Family"
+    "pageName": "Family",
+    "visible": true
   },
   {
-    "name": "success",
+    "name": "Success",
     "description": "",
     "created_at": "2020-07-01T10:37:42.940Z",
     "updated_at": "2020-07-01T10:37:42.940Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "success-solid",
+    "name": "SuccessSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.495Z",
     "updated_at": "2021-01-11T13:37:55.495Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "system",
+    "name": "System",
     "description": "",
     "created_at": "2020-07-01T10:37:42.766Z",
     "updated_at": "2020-07-01T10:37:42.766Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "system-solid",
+    "name": "SystemSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.639Z",
     "updated_at": "2021-01-11T13:37:55.639Z",
-    "pageName": "🧩Settings"
+    "pageName": "Settings",
+    "visible": true
   },
   {
-    "name": "telephone",
+    "name": "Telephone",
     "description": "",
     "created_at": "2020-07-01T10:37:43.091Z",
     "updated_at": "2020-07-01T10:37:43.091Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "telephone-solid",
+    "name": "TelephoneSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.405Z",
     "updated_at": "2021-01-11T13:37:55.405Z",
-    "pageName": "🧩Communication"
+    "pageName": "Communication",
+    "visible": true
   },
   {
-    "name": "traning",
+    "name": "Traning",
     "description": "",
     "created_at": "2020-07-31T13:09:33.299Z",
     "updated_at": "2021-01-12T13:07:17.674Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "unlocked",
+    "name": "Unlocked",
     "description": "",
     "created_at": "2020-07-01T10:37:42.823Z",
     "updated_at": "2020-11-26T09:49:26.299Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "unlocked-solid",
+    "name": "UnlockedSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.317Z",
     "updated_at": "2021-01-11T13:37:55.317Z",
-    "pageName": "🧩Privacy"
+    "pageName": "Privacy",
+    "visible": true
   },
   {
-    "name": "up",
+    "name": "Up",
     "description": "Norsk--Til toppen, Alt English-- Scroll up",
     "created_at": "2020-07-01T10:37:42.692Z",
     "updated_at": "2020-12-17T12:26:23.684Z",
-    "pageName": "🧩Arrow"
+    "pageName": "Arrow",
+    "visible": true
   },
   {
-    "name": "up-solid",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.748Z",
-    "updated_at": "2021-01-11T13:37:55.748Z",
-    "pageName": "🧩Arrow"
-  },
-  {
-    "name": "upload",
+    "name": "Upload",
     "description": "",
     "created_at": "2020-07-01T10:37:43.046Z",
     "updated_at": "2020-07-01T10:37:43.046Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "upload-solid",
+    "name": "UploadSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.704Z",
     "updated_at": "2021-01-11T13:37:55.704Z",
-    "pageName": "🧩Attachment"
+    "pageName": "Attachment",
+    "visible": true
   },
   {
-    "name": "vacation",
+    "name": "UpSolid",
+    "description": "",
+    "created_at": "2021-01-11T13:37:55.748Z",
+    "updated_at": "2021-01-11T13:37:55.748Z",
+    "pageName": "Arrow",
+    "visible": true
+  },
+  {
+    "name": "Vacation",
     "description": "",
     "created_at": "2020-07-01T10:37:42.978Z",
     "updated_at": "2020-11-26T08:50:12.870Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "vacation-solid",
+    "name": "VacationSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.700Z",
     "updated_at": "2021-01-11T13:37:55.700Z",
-    "pageName": "🧩Pension"
+    "pageName": "Pension",
+    "visible": true
   },
   {
-    "name": "Video-room",
+    "name": "VideoRoom",
     "description": "",
     "created_at": "2020-07-31T13:09:33.343Z",
     "updated_at": "2021-01-12T13:07:17.648Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "Volume down 3",
+    "name": "VolumeDown3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.544Z",
     "updated_at": "2021-01-12T13:07:17.597Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "Volume up 3",
+    "name": "VolumeUp3",
     "description": "",
     "created_at": "2020-11-23T16:49:12.553Z",
     "updated_at": "2021-01-12T13:07:17.678Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "warning",
+    "name": "Warning",
     "description": "",
     "created_at": "2020-07-01T10:37:42.737Z",
     "updated_at": "2020-12-01T11:40:12.348Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
-    "name": "warning-solid",
+    "name": "WarningSolid",
     "description": "",
     "created_at": "2021-01-11T13:37:55.590Z",
     "updated_at": "2021-01-11T13:37:55.590Z",
-    "pageName": "🧩Status"
+    "pageName": "Status",
+    "visible": true
   },
   {
     "name": "Washing",
     "description": "",
     "created_at": "2020-07-31T13:09:33.325Z",
     "updated_at": "2021-01-12T13:07:17.728Z",
-    "pageName": "🧩Fyrstikkalleen"
+    "pageName": "Fyrstikkalleen",
+    "visible": true
   },
   {
-    "name": "woman",
+    "name": "Woman",
     "description": "",
     "created_at": "2020-07-01T10:37:42.868Z",
     "updated_at": "2020-07-01T10:37:42.868Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   },
   {
-    "name": "woman-filled",
+    "name": "WomanFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.187Z",
     "updated_at": "2021-01-11T13:37:55.187Z",
-    "pageName": "🧩People"
+    "pageName": "People",
+    "visible": true
   }
 ]

@@ -65,14 +65,6 @@ const IconInstall = () => {
         {`<System style={{"fontSize": "24px"}} aria-label="System ikon" role="img"/>`}
       </Code>
       <Undertittel className="iconPage__headlines">SVG</Undertittel>
-      <Normaltekst>
-        SVG versjonen av ikonene har height og width satt til{" "}
-        <InlineCode>24</InlineCode> og path har{" "}
-        <InlineCode>fill="#3E3832"</InlineCode>. Dette fører til litt
-        komplikasjoner for styling og vi anbefaler å heller laste ned ikonet for
-        seg selv hvis man ikke bruker react versjonen og da tilpasser selve SVG
-        en.
-      </Normaltekst>
       <Code popupUnder className="language-jsx">
         {`import System from '@navikt/ds-icons/svg/system.svg';`}
       </Code>
