@@ -19,7 +19,7 @@
   "peerDependencies": {
     "nav-frontend-chevron": "^1.0.24",
     "nav-frontend-ikoner-assets": "^2.0.8",
-    "nav-frontend-knapper": "^2.0.24",
+    "nav-frontend-knapper": "^2.0.25",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {

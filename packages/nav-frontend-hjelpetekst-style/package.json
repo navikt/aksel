@@ -19,7 +19,7 @@
     "nav-frontend-typografi-style": "^1.0.32"
   },
   "peerDependencies": {
-    "nav-frontend-core": "^5.0.10",
-    "nav-frontend-typografi-style": "^1.0.31"
+    "nav-frontend-core": "^5.0.11",
+    "nav-frontend-typografi-style": "^1.0.32"
   }
 }

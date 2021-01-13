@@ -15,7 +15,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-stegindikator-style": "^1.0.41",
+    "nav-frontend-stegindikator-style": "^1.0.42",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
