@@ -15,12 +15,12 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "peerDependencies": {
-    "nav-frontend-chevron-style": "^0.3.10",
+    "nav-frontend-chevron-style": "^1.0.2",
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-paneler-style": "^0.3.33"
   },
   "devDependencies": {
-    "nav-frontend-chevron-style": "^0.3.10",
+    "nav-frontend-chevron-style": "^1.0.2",
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-paneler-style": "^0.3.33",
     "react": "^15.4.2 || ^16.0.0"

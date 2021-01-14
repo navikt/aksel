@@ -1,0 +1,40 @@
+@import "~@navikt/ds-css/baseline/index.css";
+
+.page-wrapper {
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+
+.sidebar {
+  min-height: 100vh;
+  background-color: #f1f1f1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.content {
+  padding: 1rem;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.sidebar__logo {
+  text-decoration: none;
+  color: #3e3832;
+  font-size: 1.5rem;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar__menu-item.active {
+  font-weight: bold;
+}

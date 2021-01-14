@@ -1,0 +1,43 @@
+{
+  "name": "@navikt/ds-react",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "NAV designsystem react components",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc --watch -p tsconfig.json"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.5.4",
+    "@navikt/ds-css": "0.1.0-beta.1",
+    "@navikt/ds-icons": "0.1.0-beta.1",
+    "classnames": "^2.2.6",
+    "react-collapse": "^5.1.0",
+    "react-merge-refs": "^1.1.0",
+    "react-modal": "3.11.2",
+    "react-popper": "^2.2.4"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0"
+  }
+}

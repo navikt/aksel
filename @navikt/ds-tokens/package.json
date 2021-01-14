@@ -1,0 +1,33 @@
+{
+  "name": "@navikt/ds-tokens",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "Auto-generated design-tokens for NAV design-systems framework",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "css",
+    "less",
+    "javascript",
+    "design-tokens"
+  ],
+  "main": "dist/tokens.css",
+  "license": "MIT",
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "scripts": {
+    "build": "style-dictionary build",
+    "watch": "nodemon --watch src/index.js --exec \"yarn build\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git",
+    "directory": "@navikt/ds-tokens"
+  },
+  "devDependencies": {
+    "style-dictionary": "^2.10.2",
+    "color": "^3.1.3",
+    "nodemon": "^2.0.6"
+  }
+}

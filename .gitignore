@@ -100,3 +100,6 @@ examples/webpack/out
 *.d.ts
 *-exports.less
 **/css/
+*/figma-api/icons
+packages/**/css
+utilities/**/css

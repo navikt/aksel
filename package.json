@@ -14,16 +14,25 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg",
     "lerna:watch": "yarn run lerna run watch --parallel",
+    "lerna:watch-css": "yarn run lerna run watch-css --parallel",
     "lerna:build": "yarn run lerna run build",
-    "lint": "yarn lint:jsts && yarn lint:less",
+    "lerna:token": "yarn run lerna run token",
+    "lerna:icons": "yarn run lerna run dl-icons",
+    "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
     "lint:jsts": "npx eslint .",
     "lint:less": "npx stylelint --syntax less **/*.less",
+    "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
   },
   "workspaces": [
     "website",
     "packages/*",
+    "@navikt/ds-css",
+    "@navikt/ds-css/*",
+    "@navikt/ds-react",
+    "@navikt/ds-icons",
+    "@navikt/ds-tokens",
     "./utilities/build/props-resolver"
   ],
   "prettier": {},
@@ -48,7 +57,9 @@
     "ignoreFiles": [
       "packages/nav-frontend-core/less/vendor/_normalize.less",
       "packages/nav-frontend-core/less/_variabler-exports.less",
-      "packages/nav-frontend-core/less/hide-text.less"
+      "packages/nav-frontend-core/less/hide-text.less",
+      "**/dist/**",
+      "@navikt/**/*.css"
     ]
   },
   "repository": {
@@ -56,13 +67,17 @@
     "url": "https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "babel-plugin-react-docgen": "^1.8.1",
     "chalk": "^1.1.3",
+    "copyfiles": "^2.4.0",
     "color": "^3.1.3",
-    "cypress": "^5.3.0",
     "depth-first": "^4.0.0",
+    "@popperjs/core": "^2.5.4",
+    "extend": "^3.0.2",
     "gatsby-transformer-react-docgen-typescript-custom": "0.1.0",
     "gh-pages": "^3.1.0",
+    "glob": "^7.1.6",
     "gulp": "^4.0.2",
     "gulp-cssfont64-formatter": "0.0.2",
     "gulp-newer": "^1.3.0",
@@ -72,9 +87,14 @@
     "lerna": "^3.22.1",
     "less-vars-to-js": "^1.3.0",
     "lodash.camelcase": "^4.3.0",
+    "p-limit": "^3.1.0",
+    "mustache": "^4.0.1",
+    "node-sass": "4.14.1",
     "pretty-quick": "^3.1.0",
     "react-docgen": "^5.3.0",
     "react-docgen-exports-handler": "^1.0.0",
+    "react-merge-refs": "^1.1.0",
+    "react-popper": "^2.2.4",
     "react-svg-icon-generator-fork": "^1.0.2",
     "style-loader": "^1.2.1",
     "through2": "^2.0.3",
