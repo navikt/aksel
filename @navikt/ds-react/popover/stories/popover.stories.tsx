@@ -5,6 +5,9 @@ import { placements } from "@popperjs/core";
 export default {
   title: "@navikt/popover",
   component: Popover,
+  parameters: {
+    chromatic: { delay: 500 },
+  },
 } as Meta;
 
 const Template = (props) => {
