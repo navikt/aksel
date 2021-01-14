@@ -23,8 +23,7 @@
     "lint:less": "npx stylelint --syntax less **/*.less",
     "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
-    "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
-    "scaffold-new-component": "node utilities/scripts/scaffold.js"
+    "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
   },
   "workspaces": [
     "website",
