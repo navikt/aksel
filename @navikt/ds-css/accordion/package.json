@@ -1,0 +1,17 @@
+{
+  "name": "@navikt/ds-css-accordion",
+  "author": "NAV Designsystem team",
+  "license": "MIT",
+  "private": "true",
+  "scripts": {
+    "build": "node-sass --quiet index.scss index.css",
+    "watch-css": "yarn build && node-sass --quiet --watch index.scss index.css",
+    "watch": "yarn watch-css"
+  },
+  "dependencies": {
+    "@navikt/ds-tokens": "0.1.0-beta.1"
+  },
+  "devDependencies": {
+    "sass": "^1.30.0"
+  }
+}
