@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel-style",
-  "version": "0.3.44",
+  "version": "0.3.46",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -16,13 +16,13 @@
   },
   "peerDependencies": {
     "nav-frontend-chevron-style": "^0.3.10",
-    "nav-frontend-core": "^5.0.10",
-    "nav-frontend-paneler-style": "^0.3.31"
+    "nav-frontend-core": "^5.0.11",
+    "nav-frontend-paneler-style": "^0.3.33"
   },
   "devDependencies": {
     "nav-frontend-chevron-style": "^0.3.10",
-    "nav-frontend-core": "^5.0.10",
-    "nav-frontend-paneler-style": "^0.3.31",
+    "nav-frontend-core": "^5.0.11",
+    "nav-frontend-paneler-style": "^0.3.33",
     "react": "^15.4.2 || ^16.0.0"
   }
 }

@@ -148,6 +148,32 @@ const Palette = () => {
           />
         </div>
       </section>
+      <section className="section">
+        <Systemtittel id="bakgrunnsFarger">Bakgrunnsfarger</Systemtittel>
+        <Alertstripe type="info">
+          Vi ønsker at alle sider skal forholde seg til disse bakgrunnsfargene
+          da dette fører til et mer helhetlig design for NAV sine løsninger.
+        </Alertstripe>
+        <div className="color-group color-group--dark">
+          <ColorSample
+            name="@navGraBakgrunn"
+            color={vars.navGraBakgrunn}
+            onClick={(color) => setActiveColor(color)}
+          />
+          <ColorSample
+            name="@navBakgrunn"
+            color={vars.navBakgrunn}
+            onClick={(color) => setActiveColor(color)}
+          />
+          <div className="color-description">
+            <p>
+              @navGraBakgrunn er ment til bruk på søknadssider.
+              <br />
+              @navBakgrunn er ment til bruk på informasjonssider.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="section">
         <Systemtittel id="systemfarger">Systemfarger</Systemtittel>
