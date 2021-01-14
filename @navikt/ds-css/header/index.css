@@ -1,0 +1,33 @@
+.navds-header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100vw;
+  min-width: min-content;
+  height: 50px;
+  padding: 0 1.5rem;
+  background: #3e3832;
+}
+.navds-header__row {
+  display: flex;
+  align-items: center;
+}
+.navds-header__title {
+  color: #ffffff;
+}
+.navds-header__title > a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+.navds-header__divider {
+  width: 1px;
+  height: 100%;
+  margin: 0 1rem 0 1rem;
+  background: #ffffff;
+}
+.navds-header__user {
+  color: #ffffff;
+}
+.navds-header--gap > *:not(:last-child) {
+  margin-right: 1rem;
+}

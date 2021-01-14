@@ -1,0 +1,42 @@
+@import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
+
+.navds-header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100vw;
+  min-width: min-content;
+  height: 50px;
+  padding: 0 1.5rem;
+  background: $navds-color-darkgray;
+
+  &__row {
+    display: flex;
+    align-items: center;
+  }
+
+  &__title {
+    color: $navds-color-text-inverse;
+    > a {
+      text-decoration: none;
+      color: inherit;
+      font-size: inherit;
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 100%;
+    margin: 0 1rem 0 1rem;
+    background: $navds-color-text-inverse;
+  }
+
+  &__user {
+    color: $navds-color-text-inverse;
+  }
+
+  &--gap {
+    > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}

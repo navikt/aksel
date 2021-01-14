@@ -105,6 +105,10 @@ module.exports = {
           value: "rgba(61, 56, 49, 0.7)",
         },
       },
+      header: {
+        internal: { value: "{navds.color.darkgray}" },
+        external: { value: "{navds.color.white}" },
+      },
     },
     border: {
       default: {
