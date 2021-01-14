@@ -1,5 +1,5 @@
 .chevron-mixin(@size: 20) {
-  @height: floor(@size / 10);
+  @height: floor((@size / 10));
 
   display: inline-block;
   flex-shrink: 0;
@@ -39,7 +39,7 @@
 }
 
 .chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = opp) {
-  @offset: floor(@size / 16) + 1;
+  @offset: floor((@size / 16)) + 1;
 
   &::before {
     transform: translateX(~"@{offset}px") rotate(-45deg);
@@ -51,7 +51,7 @@
 }
 
 .chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = ned) {
-  @offset: floor(@size / 16) + 1;
+  @offset: floor((@size / 16)) + 1;
 
   &::before {
     transform: translateX(~"@{offset}px") rotate(45deg);
@@ -61,18 +61,14 @@
     transform: translateX(~"-@{offset}px") rotate(-45deg);
   }
 }
-
-.chevron-orientasjon-mixin(@orientasjon, @size: 20)
-when
-(@orientasjon = hoyre) {
+// prettier-ignore
+.chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = hoyre) {
   .chevron-orientasjon-mixin(ned, @size);
 
   transform: rotate(-90deg);
 }
-
-.chevron-orientasjon-mixin(@orientasjon, @size: 20)
-when
-(@orientasjon = venstre) {
+// prettier-ignore
+.chevron-orientasjon-mixin(@orientasjon, @size: 20) when (@orientasjon = venstre) {
   .chevron-orientasjon-mixin(opp, @size);
 
   transform: rotate(-90deg);

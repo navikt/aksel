@@ -1,0 +1,1038 @@
+[
+  {
+    "name": "building 2",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.806Z",
+    "updated_at": "2020-12-18T09:24:39.805Z",
+    "pageName": "🧩Buildning"
+  },
+  {
+    "name": "hearing outline",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.232Z",
+    "updated_at": "2020-12-16T14:08:52.232Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "stairs",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.229Z",
+    "updated_at": "2020-12-16T14:08:52.229Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "elevator",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.225Z",
+    "updated_at": "2020-12-16T14:08:52.225Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "shower",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.221Z",
+    "updated_at": "2020-12-16T14:08:52.221Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "baby changing room",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.216Z",
+    "updated_at": "2020-12-16T14:08:52.216Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "cognition outline",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.212Z",
+    "updated_at": "2020-12-16T14:08:52.212Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "sight outline",
+    "description": "",
+    "created_at": "2020-12-16T14:08:52.208Z",
+    "updated_at": "2020-12-16T14:08:52.208Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "stroller",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.016Z",
+    "updated_at": "2020-12-16T08:38:54.485Z",
+    "pageName": "🧩Family"
+  },
+  {
+    "name": "globe",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.082Z",
+    "updated_at": "2020-12-15T21:51:58.943Z",
+    "pageName": "🧩International"
+  },
+  {
+    "name": "bell",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.756Z",
+    "updated_at": "2020-12-15T13:19:01.037Z",
+    "pageName": "🧩Reminder"
+  },
+  {
+    "name": "sign language",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.697Z",
+    "updated_at": "2020-12-14T10:09:10.924Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "Guide dog",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.922Z",
+    "updated_at": "2020-12-14T10:09:08.217Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "disability",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.669Z",
+    "updated_at": "2020-12-14T10:09:06.452Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "Braille 2",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.881Z",
+    "updated_at": "2020-12-14T10:09:03.614Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "Braille",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.951Z",
+    "updated_at": "2020-12-14T10:09:01.744Z",
+    "pageName": "🧩Handicap"
+  },
+  {
+    "name": "save2",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.779Z",
+    "updated_at": "2020-12-09T08:57:16.960Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "down",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.726Z",
+    "updated_at": "2020-12-08T16:21:19.933Z",
+    "pageName": "🧩Chevron"
+  },
+  {
+    "name": "pension",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.610Z",
+    "updated_at": "2020-12-07T13:56:05.766Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "pension saving",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.962Z",
+    "updated_at": "2020-12-07T13:55:33.549Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "information",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.005Z",
+    "updated_at": "2020-12-03T14:53:38.932Z",
+    "pageName": "🧩Status"
+  },
+  {
+    "name": "search",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.983Z",
+    "updated_at": "2020-12-03T13:08:18.206Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "up",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.615Z",
+    "updated_at": "2020-12-03T09:47:20.260Z",
+    "pageName": "🧩Chevron"
+  },
+  {
+    "name": "refresh",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.908Z",
+    "updated_at": "2020-12-02T12:52:34.738Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "camera",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.913Z",
+    "updated_at": "2020-12-02T12:50:37.169Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "monitor",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.802Z",
+    "updated_at": "2020-12-02T07:35:40.081Z",
+    "pageName": "🧩Device"
+  },
+  {
+    "name": "warning",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.737Z",
+    "updated_at": "2020-12-01T11:40:12.348Z",
+    "pageName": "🧩Status"
+  },
+  {
+    "name": "Parking",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.304Z",
+    "updated_at": "2020-11-26T10:18:42.770Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "vacation",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.978Z",
+    "updated_at": "2020-11-26T08:50:12.870Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "motorcycle",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.308Z",
+    "updated_at": "2020-11-25T10:09:53.450Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Data",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.033Z",
+    "updated_at": "2020-11-24T12:39:02.870Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "neutral",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.832Z",
+    "updated_at": "2020-11-24T11:50:38.568Z",
+    "pageName": "🧩Gender"
+  },
+  {
+    "name": "Recycle1",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.859Z",
+    "updated_at": "2020-11-23T16:49:12.609Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "bag",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.673Z",
+    "updated_at": "2020-11-23T16:49:12.596Z",
+    "pageName": "🧩Jobs"
+  },
+  {
+    "name": "male",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.702Z",
+    "updated_at": "2020-12-01T13:40:30.232Z",
+    "pageName": "🧩Gender"
+  },
+  {
+    "name": "Volume up 3",
+    "description": "",
+    "created_at": "2020-11-23T16:49:12.553Z",
+    "updated_at": "2020-11-23T16:49:12.553Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Mute 3",
+    "description": "",
+    "created_at": "2020-11-23T16:49:12.549Z",
+    "updated_at": "2020-12-11T18:54:49.592Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Volume down 3",
+    "description": "",
+    "created_at": "2020-11-23T16:49:12.544Z",
+    "updated_at": "2020-11-23T16:49:12.544Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "man",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.041Z",
+    "updated_at": "2020-11-23T12:31:21.495Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "close",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.827Z",
+    "updated_at": "2020-11-20T09:53:40.852Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "attachment",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.111Z",
+    "updated_at": "2020-11-19T11:32:20.264Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "saving",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.770Z",
+    "updated_at": "2020-11-19T11:31:40.152Z",
+    "pageName": "🧩Money"
+  },
+  {
+    "name": "right",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.642Z",
+    "updated_at": "2020-11-19T11:22:16.649Z",
+    "pageName": "🧩Arrow"
+  },
+  {
+    "name": "building 1",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.720Z",
+    "updated_at": "2020-11-19T11:21:45.832Z",
+    "pageName": "🧩Buildning"
+  },
+  {
+    "name": "shake hands",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.900Z",
+    "updated_at": "2020-11-19T09:52:06.726Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "Video-room",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.343Z",
+    "updated_at": "2020-07-31T13:09:33.343Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "shredding",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.339Z",
+    "updated_at": "2020-07-31T13:09:33.339Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "car",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.334Z",
+    "updated_at": "2020-07-31T13:09:33.334Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Baggage",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.330Z",
+    "updated_at": "2020-07-31T13:09:33.330Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Washing",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.325Z",
+    "updated_at": "2020-07-31T13:09:33.325Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Cantine 1",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.321Z",
+    "updated_at": "2020-07-31T13:09:33.321Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Cantine 2",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.317Z",
+    "updated_at": "2020-07-31T13:09:33.317Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "bike",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.312Z",
+    "updated_at": "2020-07-31T13:09:33.312Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "traning",
+    "description": "",
+    "created_at": "2020-07-31T13:09:33.299Z",
+    "updated_at": "2020-07-31T13:09:33.299Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Combifridge 2",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.061Z",
+    "updated_at": "2020-07-20T10:39:14.498Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "cup",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.056Z",
+    "updated_at": "2020-07-20T10:32:39.056Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Combifridge 1",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.051Z",
+    "updated_at": "2020-07-20T10:37:25.542Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "fork--spoon--knife",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.048Z",
+    "updated_at": "2020-07-20T10:32:39.048Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "glass",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.043Z",
+    "updated_at": "2020-07-20T10:32:39.043Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Bowl",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.038Z",
+    "updated_at": "2020-07-20T10:32:39.038Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Dishwasher",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.029Z",
+    "updated_at": "2020-07-20T10:32:39.029Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Dish",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.026Z",
+    "updated_at": "2020-07-20T10:32:39.026Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "refrigerator",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.022Z",
+    "updated_at": "2020-07-20T10:32:39.022Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "Freezer",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.018Z",
+    "updated_at": "2020-07-20T10:32:39.018Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "No smoking",
+    "description": "",
+    "created_at": "2020-07-20T10:32:39.013Z",
+    "updated_at": "2020-07-20T10:32:39.013Z",
+    "pageName": "🧩Fystikkallen"
+  },
+  {
+    "name": "fill forms",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.158Z",
+    "updated_at": "2020-07-01T10:37:43.158Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "plane",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.153Z",
+    "updated_at": "2020-07-01T10:37:43.153Z",
+    "pageName": "🧩International"
+  },
+  {
+    "name": "dialog dots",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.133Z",
+    "updated_at": "2020-12-08T08:55:26.039Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "email",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.128Z",
+    "updated_at": "2020-07-01T10:37:43.128Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "dialog",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.122Z",
+    "updated_at": "2021-01-07T19:43:39.998Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "sandglass",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.117Z",
+    "updated_at": "2020-12-16T07:50:32.507Z",
+    "pageName": "🧩Time"
+  },
+  {
+    "name": "boy",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.107Z",
+    "updated_at": "2020-11-23T12:29:29.139Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "send",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.101Z",
+    "updated_at": "2020-11-26T14:02:16.785Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "Hanger",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.096Z",
+    "updated_at": "2020-07-01T10:37:43.096Z",
+    "pageName": "🧩Family"
+  },
+  {
+    "name": "telephone",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.091Z",
+    "updated_at": "2020-07-01T10:37:43.091Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "login",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.087Z",
+    "updated_at": "2020-12-08T11:08:02.408Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "passport",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.078Z",
+    "updated_at": "2020-07-01T10:37:43.078Z",
+    "pageName": "🧩International"
+  },
+  {
+    "name": "file",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.073Z",
+    "updated_at": "2020-07-01T10:37:43.073Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "light bulb",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.067Z",
+    "updated_at": "2020-07-01T10:37:43.067Z",
+    "pageName": "🧩Reminder"
+  },
+  {
+    "name": "settings",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.062Z",
+    "updated_at": "2020-07-01T10:37:43.062Z",
+    "pageName": "🧩Settings"
+  },
+  {
+    "name": "infants",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.056Z",
+    "updated_at": "2020-07-01T10:37:43.056Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "print",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.050Z",
+    "updated_at": "2020-07-01T10:37:43.050Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "upload",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.046Z",
+    "updated_at": "2020-07-01T10:37:43.046Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "health case",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.036Z",
+    "updated_at": "2020-11-26T08:43:47.368Z",
+    "pageName": "🧩Health"
+  },
+  {
+    "name": "download",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.031Z",
+    "updated_at": "2020-12-02T12:51:14.762Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "locked",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.027Z",
+    "updated_at": "2020-11-25T09:47:50.086Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "error",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.021Z",
+    "updated_at": "2020-07-01T10:37:43.021Z",
+    "pageName": "🧩Status"
+  },
+  {
+    "name": "mobile",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.010Z",
+    "updated_at": "2020-07-01T10:37:43.010Z",
+    "pageName": "🧩Device"
+  },
+  {
+    "name": "delete",
+    "description": "",
+    "created_at": "2020-07-01T10:37:43.000Z",
+    "updated_at": "2020-11-27T17:29:34.765Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "pregnant",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.995Z",
+    "updated_at": "2020-07-01T10:37:42.995Z",
+    "pageName": "🧩Family"
+  },
+  {
+    "name": "cancel",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.990Z",
+    "updated_at": "2020-07-01T10:37:42.990Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "coronavirus",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.972Z",
+    "updated_at": "2020-12-15T21:46:32.067Z",
+    "pageName": "🧩Health"
+  },
+  {
+    "name": "pension saving 2",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.967Z",
+    "updated_at": "2020-12-07T13:55:28.968Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "eye screened",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.956Z",
+    "updated_at": "2020-07-01T10:37:42.956Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "file content",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.944Z",
+    "updated_at": "2020-07-01T10:37:42.944Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "success",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.940Z",
+    "updated_at": "2020-07-01T10:37:42.940Z",
+    "pageName": "🧩Status"
+  },
+  {
+    "name": "dialog success",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.936Z",
+    "updated_at": "2020-07-01T10:37:42.936Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "logout",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.931Z",
+    "updated_at": "2020-07-01T10:37:42.931Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "feeding bottle",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.927Z",
+    "updated_at": "2020-07-01T10:37:42.927Z",
+    "pageName": "🧩Family"
+  },
+  {
+    "name": "calculator",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.917Z",
+    "updated_at": "2020-12-07T13:55:22.321Z",
+    "pageName": "🧩Money"
+  },
+  {
+    "name": "receipt",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.904Z",
+    "updated_at": "2020-07-01T10:37:42.904Z",
+    "pageName": "🧩Money"
+  },
+  {
+    "name": "eye",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.895Z",
+    "updated_at": "2020-11-20T11:59:55.926Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "filter",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.891Z",
+    "updated_at": "2020-12-08T09:58:27.629Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "picture",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.886Z",
+    "updated_at": "2020-12-02T12:51:43.177Z",
+    "pageName": "🧩Attachment"
+  },
+  {
+    "name": "Bookmark",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.877Z",
+    "updated_at": "2020-11-24T11:28:05.344Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "place",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.873Z",
+    "updated_at": "2020-12-10T11:50:59.809Z",
+    "pageName": "🧩International"
+  },
+  {
+    "name": "woman",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.868Z",
+    "updated_at": "2020-07-01T10:37:42.868Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "girl",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.864Z",
+    "updated_at": "2020-07-01T10:37:42.864Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "female",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.855Z",
+    "updated_at": "2020-11-24T11:50:38.560Z",
+    "pageName": "🧩Gender"
+  },
+  {
+    "name": "profile",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.850Z",
+    "updated_at": "2020-11-25T09:49:36.414Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "dialog warning",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.845Z",
+    "updated_at": "2020-12-08T15:23:13.628Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "left",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.840Z",
+    "updated_at": "2020-11-25T08:07:39.130Z",
+    "pageName": "🧩Chevron"
+  },
+  {
+    "name": "List",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.836Z",
+    "updated_at": "2020-12-08T10:01:58.502Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "unlocked",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.823Z",
+    "updated_at": "2020-11-26T09:49:26.299Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "law",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.819Z",
+    "updated_at": "2020-12-03T13:55:50.717Z",
+    "pageName": "🧩Privacy"
+  },
+  {
+    "name": "minus",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.814Z",
+    "updated_at": "2020-07-01T10:37:42.814Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "selection",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.810Z",
+    "updated_at": "2020-07-01T10:37:42.810Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "left",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.797Z",
+    "updated_at": "2020-12-07T10:23:10.387Z",
+    "pageName": "🧩Arrow"
+  },
+  {
+    "name": "helmet",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.793Z",
+    "updated_at": "2020-07-01T10:37:42.793Z",
+    "pageName": "🧩Jobs"
+  },
+  {
+    "name": "like",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.788Z",
+    "updated_at": "2020-07-01T10:37:42.788Z",
+    "pageName": "🧩Social media"
+  },
+  {
+    "name": "add",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.784Z",
+    "updated_at": "2021-01-07T19:42:42.162Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "social aid",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.775Z",
+    "updated_at": "2020-07-01T10:37:42.775Z",
+    "pageName": "🧩Social service"
+  },
+  {
+    "name": "system",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.766Z",
+    "updated_at": "2020-07-01T10:37:42.766Z",
+    "pageName": "🧩Settings"
+  },
+  {
+    "name": "calender",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.760Z",
+    "updated_at": "2020-11-26T08:42:59.879Z",
+    "pageName": "🧩Time"
+  },
+  {
+    "name": "edit",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.751Z",
+    "updated_at": "2020-07-01T10:37:42.751Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "down",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.746Z",
+    "updated_at": "2020-12-17T12:26:18.740Z",
+    "pageName": "🧩Arrow"
+  },
+  {
+    "name": "money",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.741Z",
+    "updated_at": "2020-11-19T11:39:07.561Z",
+    "pageName": "🧩Money"
+  },
+  {
+    "name": "heart",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.732Z",
+    "updated_at": "2020-12-09T14:10:52.787Z",
+    "pageName": "🧩Social media"
+  },
+  {
+    "name": "helptext",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.715Z",
+    "updated_at": "2020-07-01T10:37:42.715Z",
+    "pageName": "🧩Status"
+  },
+  {
+    "name": "hand bandage",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.711Z",
+    "updated_at": "2020-12-15T21:45:01.118Z",
+    "pageName": "🧩Health"
+  },
+  {
+    "name": "customer service",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.707Z",
+    "updated_at": "2020-11-27T13:32:20.969Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "up",
+    "description": "Norsk--Til toppen, Alt English-- Scroll up",
+    "created_at": "2020-07-01T10:37:42.692Z",
+    "updated_at": "2020-12-17T12:26:23.684Z",
+    "pageName": "🧩Arrow"
+  },
+  {
+    "name": "home",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.687Z",
+    "updated_at": "2020-12-18T09:24:41.724Z",
+    "pageName": "🧩Buildning"
+  },
+  {
+    "name": "folder",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.682Z",
+    "updated_at": "2020-07-01T10:37:42.682Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "baby",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.678Z",
+    "updated_at": "2020-07-01T10:37:42.678Z",
+    "pageName": "🧩People"
+  },
+  {
+    "name": "right",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.664Z",
+    "updated_at": "2020-11-26T14:27:42.897Z",
+    "pageName": "🧩Chevron"
+  },
+  {
+    "name": "laptop",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.660Z",
+    "updated_at": "2020-07-01T10:37:42.660Z",
+    "pageName": "🧩Device"
+  },
+  {
+    "name": "star",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.655Z",
+    "updated_at": "2020-07-01T10:37:42.655Z",
+    "pageName": "🧩Social media"
+  },
+  {
+    "name": "family",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.651Z",
+    "updated_at": "2020-07-01T10:37:42.651Z",
+    "pageName": "🧩Family"
+  },
+  {
+    "name": "clock",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.647Z",
+    "updated_at": "2020-11-25T09:46:58.990Z",
+    "pageName": "🧩Time"
+  },
+  {
+    "name": "external link",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.636Z",
+    "updated_at": "2020-07-01T10:37:42.636Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "email open",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.632Z",
+    "updated_at": "2020-07-01T10:37:42.632Z",
+    "pageName": "🧩Communication"
+  },
+  {
+    "name": "bandage",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.628Z",
+    "updated_at": "2020-07-01T10:37:42.628Z",
+    "pageName": "🧩Health"
+  },
+  {
+    "name": "hamburger",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.624Z",
+    "updated_at": "2020-11-20T09:53:25.979Z",
+    "pageName": "🧩Settings"
+  },
+  {
+    "name": "files",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.619Z",
+    "updated_at": "2020-07-01T10:37:42.619Z",
+    "pageName": "🧩File"
+  },
+  {
+    "name": "stick",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.606Z",
+    "updated_at": "2020-12-07T13:56:02.382Z",
+    "pageName": "🧩Pension"
+  },
+  {
+    "name": "save",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.602Z",
+    "updated_at": "2020-12-09T08:57:31.211Z",
+    "pageName": "🧩Interface"
+  },
+  {
+    "name": "Recycle2",
+    "description": "",
+    "created_at": "2020-07-01T10:37:42.597Z",
+    "updated_at": "2020-11-23T16:49:12.603Z",
+    "pageName": "🧩Fystikkallen"
+  }
+]
