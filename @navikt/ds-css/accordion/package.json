@@ -1,5 +1,6 @@
 {
   "name": "@navikt/ds-css-accordion",
+  "version": "0.1.0-beta.1",
   "author": "NAV Designsystem team",
   "license": "MIT",
   "private": "true",
