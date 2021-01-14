@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tabs",
-  "version": "0.0.57",
+  "version": "0.0.59",
   "main": "lib/tabs.js",
   "types": "lib/tabs.d.ts",
   "license": "MIT",
@@ -15,13 +15,13 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-tabs-style": "^0.0.37",
+    "nav-frontend-tabs-style": "^0.0.39",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-tabs-style": "^0.0.37",
+    "nav-frontend-tabs-style": "^0.0.39",
     "react": "^15.4.2 || ^16.0.0"
   },
   "defaultExport": "Tabs"

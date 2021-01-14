@@ -1,6 +1,7 @@
 import * as React from "react";
 import { fnr } from "@navikt/fnrvalidator";
 import Input, { InputProps } from "./input";
+import { omit } from "nav-frontend-js-utils";
 import "nav-frontend-skjema-style";
 
 export interface FnrInputProps extends InputProps {
@@ -24,9 +25,11 @@ class FnrInput extends React.Component<FnrInputProps> {
   }
 
   render() {
+    const domProps = omit({ ...this.props }, "onValidate");
+
     return (
       <Input
-        {...this.props}
+        {...domProps}
         type="text"
         inputMode="numeric"
         pattern="[0-9]*"

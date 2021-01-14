@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "../src/index";
-import { Add, Add1 } from "@navikt/ds-icons";
+import { Add } from "@navikt/ds-icons";
 export default {
   title: "@navikt/link",
   component: Link,
@@ -18,7 +18,7 @@ export const All = () => {
       </Link>
       <h1>Icon before</h1>
       <Link href="#">
-        <Add1 />
+        <Add />
         <span>Dette er en tekstlenke </span>
       </Link>
     </>

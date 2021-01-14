@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-etiketter-style",
-  "version": "1.0.14",
+  "version": "1.0.16",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -14,10 +14,10 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.10",
+    "nav-frontend-core": "^5.0.11",
     "react": "^15.4.2 || ^16.0.0"
   },
   "peerDependencies": {
-    "nav-frontend-core": "^5.0.10"
+    "nav-frontend-core": "^5.0.11"
   }
 }

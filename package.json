@@ -14,6 +14,7 @@
     "build-storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg",
     "lerna:watch": "yarn run lerna run watch --parallel",
+    "lerna:watch-css": "yarn run lerna run watch-css --parallel",
     "lerna:build": "yarn run lerna run build",
     "lerna:token": "yarn run lerna run token",
     "lerna:icons": "yarn run lerna run dl-icons",
@@ -29,6 +30,7 @@
     "website",
     "packages/*",
     "@navikt/ds-css",
+    "@navikt/ds-css/*",
     "@navikt/ds-react",
     "@navikt/ds-icons",
     "@navikt/ds-tokens",
@@ -43,7 +45,6 @@
       "node_modules",
       "lib",
       "public",
-      "_templates",
       "examples"
     ]
   },
@@ -58,7 +59,6 @@
       "packages/nav-frontend-core/less/vendor/_normalize.less",
       "packages/nav-frontend-core/less/_variabler-exports.less",
       "packages/nav-frontend-core/less/hide-text.less",
-      "utilities/_templates/**",
       "**/dist/**",
       "@navikt/**/*.css"
     ]
@@ -94,6 +94,7 @@
     "lodash.startcase": "^4.4.0",
     "mustache": "^4.0.1",
     "p-limit": "^3.1.0",
+    "node-sass": "4.14.1",
     "pretty-quick": "^3.1.0",
     "react-docgen": "^5.3.0",
     "react-docgen-exports-handler": "^1.0.0",
