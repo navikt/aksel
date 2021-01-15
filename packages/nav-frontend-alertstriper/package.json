@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-alertstriper-style": "^2.0.32",
+    "nav-frontend-alertstriper-style": "^2.0.33",
     "nav-frontend-ikoner-assets": "^2.0.8",
     "nav-frontend-typografi": "^2.0.39",
     "prop-types": "^15.5.10",
