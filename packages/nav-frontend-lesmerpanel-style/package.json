@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel-style",
-  "version": "0.0.44",
+  "version": "0.0.45",
   "main": "src/lesmerpanel-style.less",
   "license": "MIT",
   "files": [

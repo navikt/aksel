@@ -28,6 +28,7 @@
     "@svgr/cli": "^5.4.0",
     "dotenv": "^8.2.0",
     "lodash.kebabcase": "^4.1.1",
-    "rimraf": "3.0.2"
+    "rimraf": "3.0.2",
+    "lodash.startcase": "4.4.0"
   }
 }
