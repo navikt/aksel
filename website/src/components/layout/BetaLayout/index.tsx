@@ -32,7 +32,6 @@ const SubMenu = (props) => (
 const Menu = () => {
   const menu = useBetaMenu();
 
-  console.log(menu);
   return (
     <ul className="sidebar__menu">
       {menu.map((props) => (
