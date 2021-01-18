@@ -1,32 +1,32 @@
+@import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
+
 .ReactModal__Body--open {
   overflow: hidden;
 }
 .navds-modal {
-  --modal-border-radius: 4px;
-
-  background-color: var(--navds-color-white);
+  background-color: $navds-color-background;
   display: block;
   padding: 1rem;
-  border-radius: var(--modal-border-radius);
+  border-radius: 4px;
   position: relative;
   overflow: auto;
   max-height: 100%;
   margin-bottom: 0;
-  z-index: var(--navds-z-index-modal-content);
+  z-index: $navds-z-index-modal-content;
 }
 .navds-modal:focus,
 .navds-modal--focus {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: $navds-shadow-focus;
   outline: none;
 }
 .navds-modal__overlay {
   position: fixed;
-  z-index: var(--navds-z-index-modal-overlay);
+  z-index: $navds-z-index-modal-overlay;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--navds-color-modal-overlay);
+  background-color: $navds-color-modal-overlay;
   display: flex;
   justify-content: center;
   align-items: center;
