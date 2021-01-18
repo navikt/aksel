@@ -1,5 +1,7 @@
+@import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
+
 .navds-link {
-  color: var(--navds-color-text-link);
+  color: $navds-color-text-link;
   text-decoration: underline;
   display: inline-grid;
   grid-auto-flow: column;
@@ -11,21 +13,21 @@
 }
 .navds-link:focus {
   outline: none;
-  color: var(--navds-color-text-inverse);
+  color: $navds-color-text-inverse;
   text-decoration: none;
-  background-color: var(--navds-text-focus);
-  box-shadow: var(--navds-text-shadow);
+  background-color: $navds-text-focus;
+  box-shadow: $navds-text-shadow;
 }
 .navds-link:active {
   outline: none;
-  color: var(--navds-color-text-inverse);
+  color: $navds-color-text-inverse;
   text-decoration: none;
-  background-color: var(--navds-text-focus);
-  box-shadow: var(--navds-text-shadow);
+  background-color: $navds-text-focus;
+  box-shadow: $navds-text-shadow;
 }
 .navds-link svg {
-  color: var(--navds-color-text-link);
+  color: $navds-color-text-link;
 }
 .navds-link:focus svg {
-  color: var(--navds-color-text-inverse);
+  color: $navds-color-text-inverse;
 }
