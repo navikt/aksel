@@ -3,6 +3,7 @@
 .ReactCollapse--collapse {
   transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .navds-accordion {
   position: relative;
   background: $navds-color-background;
@@ -28,16 +29,16 @@
   transition: 300ms transform;
   transform: rotateZ(0deg);
 }
+
 .navds-accordion__chevron--up {
   transform: rotateZ(-180deg);
 }
+
 .navds-accordion__chevron--down {
   transform: rotateZ(0deg);
 }
 
 .navds-accordion__button {
-  background-color: $navds-color-background;
-  display: block;
   padding: 1rem;
   border-radius: 4px;
   background: transparent;
@@ -46,16 +47,17 @@
   width: 100%;
   margin-bottom: 0;
   cursor: pointer;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .navds-accordion__button .navds-accordion__title {
   font-size: $navds-font-size-large;
   font-weight: $navds-font-weight-bold;
   line-height: 1;
 }
+
 .navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
   color: $navds-color-text-link;
@@ -69,6 +71,7 @@
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
 .navds-accordion--open > .navds-accordion__button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;

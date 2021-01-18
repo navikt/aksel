@@ -8,9 +8,11 @@
   align-items: center;
   gap: 0.25rem;
 }
+
 .navds-link:hover {
   text-decoration: none;
 }
+
 .navds-link:focus {
   outline: none;
   color: $navds-color-text-inverse;
@@ -18,6 +20,7 @@
   background-color: $navds-text-focus;
   box-shadow: $navds-text-shadow;
 }
+
 .navds-link:active {
   outline: none;
   color: $navds-color-text-inverse;
@@ -25,9 +28,11 @@
   background-color: $navds-text-focus;
   box-shadow: $navds-text-shadow;
 }
+
 .navds-link svg {
   color: $navds-color-text-link;
 }
+
 .navds-link:focus svg {
   color: $navds-color-text-inverse;
 }

@@ -3,6 +3,7 @@
 .navds-alert {
   border-radius: 4px;
   border: $navds-border-default;
+
   /* Padding calculated based on 16px font for 64px tall alert */
   padding: 1.1875em 1em;
   display: grid;

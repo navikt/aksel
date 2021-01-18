@@ -21,11 +21,12 @@
   outline: none;
   box-shadow: $navds-shadow-focus;
 }
+
 .navds-popover__arrow {
   z-index: -1;
 }
 
-.navds-popover__arrow:before {
+.navds-popover__arrow::before {
   content: "";
   display: block;
   width: $navds-size-popover-default;
@@ -44,7 +45,7 @@
   bottom: calc(#{$navds-size-popover-default} / -2);
 }
 
-.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow:before {
+.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow::before {
   border-left-color: transparent;
   border-top-color: transparent;
 }
@@ -53,7 +54,8 @@
   top: calc(#{$navds-size-popover-default} / -2);
 }
 
-.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow:before {
+// prettier-ignore
+.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow::before {
   border-bottom-color: transparent;
   border-right-color: transparent;
 }
@@ -62,7 +64,7 @@
   right: calc(#{$navds-size-popover-default} / -2);
 }
 
-.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow:before {
+.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow::before {
   border-left-color: transparent;
   border-bottom-color: transparent;
 }
@@ -71,7 +73,7 @@
   left: calc(#{$navds-size-popover-default} / -2);
 }
 
-.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow:before {
+.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow::before {
   border-right-color: transparent;
   border-top-color: transparent;
 }

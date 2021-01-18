@@ -18,10 +18,10 @@
     "lerna:build": "yarn run lerna run build",
     "lerna:token": "yarn run lerna run token",
     "lerna:icons": "yarn run lerna run dl-icons",
-    "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
+    "lint": "yarn lint:jsts && yarn lint:less && yarn lint:scss",
     "lint:jsts": "npx eslint .",
     "lint:less": "npx stylelint --syntax less **/*.less",
-    "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
+    "lint:scss": "npx stylelint --syntax scss @navikt/**/*.scss",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
   },
