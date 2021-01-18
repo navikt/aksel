@@ -1,3 +1,4 @@
+@import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
 @import "~normalize.css";
 @import "~@navikt/ds-tokens/dist/tokens.css";
 @import "Source-Sans-Pro-regular.css";
@@ -7,12 +8,12 @@
 @import "utility.css";
 
 body {
-  font-family: var(--navds-font-family);
+  font-family: $navds-font-family;
   line-height: 1.375;
-  color: var(--navds-color-text-primary);
+  color: $navds-color-text-primary;
   font-size: 1.125rem;
 }
 
 a {
-  color: var(--navds-color-text-link);
+  color: $navds-color-text-link;
 }
