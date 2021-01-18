@@ -1,31 +1,29 @@
-.navds-tag {
-  --navds-tag-bg: var(--navds-color-tag-info-background);
-  --navds-tag-border-color: var(--navds-color-tag-info-border);
-  --tag-border-radius: 4px;
+@import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
 
-  border-radius: var(--tag-border-radius);
-  border: var(--navds-border-default);
-  background-color: var(--navds-tag-bg);
-  border-color: var(--navds-tag-border-color);
-  font-size: var(--navds-font-size-xs);
-  line-height: var(--navds-font-line-height-xs);
+.navds-tag {
+  border-radius: 4px;
+  border: $navds-border-default;
+  background-color: $navds-color-tag-info-background;
+  border-color: $navds-color-tag-info-border;
+  font-size: $navds-font-size-xs;
+  line-height: $navds-font-line-height-xs;
   display: inline-block;
   /* Padding calculated based on 16px font for 24px tall tag */
   padding: 0.0625rem 0.5rem;
 }
 .navds-tag--error {
-  --navds-tag-bg: var(--navds-color-tag-error-background);
-  --navds-tag-border-color: var(--navds-color-tag-error-border);
+  background-color: $navds-color-tag-error-background;
+  border-color: $navds-color-tag-error-border;
 }
 .navds-tag--success {
-  --navds-tag-bg: var(--navds-color-tag-success-background);
-  --navds-tag-border-color: var(--navds-color-tag-success-border);
+  background-color: $navds-color-tag-success-background;
+  border-color: $navds-color-tag-success-border;
 }
 .navds-tag--warning {
-  --navds-tag-bg: var(--navds-color-tag-warning-background);
-  --navds-tag-border-color: var(--navds-color-tag-warning-border);
+  background-color: $navds-color-tag-warning-background;
+  border-color: $navds-color-tag-warning-border;
 }
 .navds-tag--info {
-  --navds-tag-bg: var(--navds-color-tag-info-background);
-  --navds-tag-border-color: var(--navds-color-tag-info-border);
+  background-color: $navds-color-tag-info-background;
+  border-color: $navds-color-tag-info-border;
 }
