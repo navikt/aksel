@@ -163,5 +163,11 @@ module.exports = {
         },
       },
     },
+    size: {
+      popover: {
+        default: { value: "1rem" },
+        small: { value: "0.67rem" },
+      },
+    },
   },
 };
