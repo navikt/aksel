@@ -1,7 +1,7 @@
 @import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
 
 .navds-popover {
-  z-index: 100;
+  z-index: 2000;
   background-color: $navds-color-background;
   box-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
   border: $navds-border-default;
@@ -21,6 +21,9 @@
   outline: none;
   box-shadow: $navds-shadow-focus;
 }
+.navds-popover__arrow {
+  z-index: -1;
+}
 
 .navds-popover__arrow:before {
   content: "";
@@ -37,16 +40,8 @@
   }
 }
 
-.navds-popover[data-popper-placement^="top"] {
-  & > .navds-popover__arrow {
-    bottom: calc(#{$navds-size-popover-default} / -2);
-  }
-
-  &.navds-popover--small {
-    & > .navds-popover__arrow {
-      bottom: calc(#{$navds-size-popover-small} / -2);
-    }
-  }
+.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow {
+  bottom: calc(#{$navds-size-popover-default} / -2);
 }
 
 .navds-popover[data-popper-placement^="top"] > .navds-popover__arrow:before {
@@ -54,16 +49,8 @@
   border-top-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="bottom"] {
-  & > .navds-popover__arrow {
-    top: calc(#{$navds-size-popover-default} / -2);
-  }
-
-  &.navds-popover--small {
-    & > .navds-popover__arrow {
-      top: calc(#{$navds-size-popover-small} / -2);
-    }
-  }
+.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow {
+  top: calc(#{$navds-size-popover-default} / -2);
 }
 
 .navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow:before {
@@ -71,16 +58,8 @@
   border-right-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="left"] {
-  & > .navds-popover__arrow {
-    right: calc(#{$navds-size-popover-default} / -2);
-  }
-
-  &.navds-popover--small {
-    & > .navds-popover__arrow {
-      right: calc(#{$navds-size-popover-small} / -2);
-    }
-  }
+.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow {
+  right: calc(#{$navds-size-popover-default} / -2);
 }
 
 .navds-popover[data-popper-placement^="left"] > .navds-popover__arrow:before {
@@ -88,16 +67,8 @@
   border-bottom-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="right"] {
-  & > .navds-popover__arrow {
-    left: calc(#{$navds-size-popover-default} / -2);
-  }
-
-  &.navds-popover--small {
-    & > .navds-popover__arrow {
-      left: calc(#{$navds-size-popover-small} / -2);
-    }
-  }
+.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow {
+  left: calc(#{$navds-size-popover-default} / -2);
 }
 
 .navds-popover[data-popper-placement^="right"] > .navds-popover__arrow:before {
