@@ -58,7 +58,8 @@
     "rules": {
       "value-list-comma-newline-after": null,
       "declaration-colon-newline-after": null,
-      "no-descending-specificity": null
+      "no-descending-specificity": null,
+      "length-zero-no-unit": null
     },
     "ignoreFiles": [
       "packages/nav-frontend-core/less/vendor/_normalize.less",

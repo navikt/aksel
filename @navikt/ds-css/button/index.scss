@@ -1,125 +1,15 @@
 @import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
 
-.navds-button {
-  display: inline-block;
-  cursor: pointer;
-  background-color: $navds-color-background;
-  color: $navds-color-action-default;
-  font: inherit;
-  margin: 0;
-  text-align: center;
-  border: 2px solid $navds-color-action-default;
+@mixin button-border-width($border-width: 2px) {
+  border-width: $border-width;
 
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
-  border-radius: 2px;
-  text-decoration: none;
-  font-size: $navds-font-size-small;
-  line-height: $navds-font-line-height-small;
-}
-
-.navds-button--small {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 2px) calc(1.11em - 2px);
-}
-
-.navds-button:focus {
-  outline: none;
-  box-shadow: $navds-shadow-focus;
-}
-
-.navds-button--primary:hover {
-  color: $navds-color-text-inverse;
-  background-color: $navds-color-action-hover;
-  padding: 0.5625em 2em;
-  border: none;
+  padding: calc(0.5625em - #{$border-width}) calc(2em - #{$border-width});
 
   &.navds-button--small {
-    padding: 0.3125em 1.11em;
+    /* Padding calculated based on 16px font for 32px tall button */
+    padding: calc(0.3125em - #{$border-width}) calc(1.11em - #{$border-width});
   }
-}
-
-.navds-button--primary:active {
-  color: $navds-color-text-inverse;
-  background-color: $navds-color-action-active;
-  padding: 0.5625em 2em;
-  border: none;
-
-  &.navds-button--small {
-    padding: 0.3125em 1.11em;
-  }
-}
-
-.navds-button--secondary {
-  border-color: transparent;
-  background-color: transparent;
-}
-
-.navds-button--secondary:focus,
-.navds-button--secondary:hover,
-.navds-button--secondary:active {
-  border-color: $navds-color-action-default;
-}
-
-.navds-button--action {
-  color: $navds-color-text-inverse;
-  background-color: $navds-color-action-default;
-  padding: 0.5625em 2em;
-  border: none;
-
-  &.navds-button--small {
-    padding: 0.3125em 1.11em;
-  }
-}
-
-.navds-button--action:focus:not(:hover) {
-  border: 2px solid $navds-color-action-default;
-  color: $navds-color-action-default;
-  background-color: $navds-color-background;
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
-
-  &.navds-button--small {
-    padding: calc(0.3125em - 2px) calc(1.11em - 2px);
-  }
-}
-
-.navds-button--action:hover {
-  background-color: $navds-color-action-hover;
-}
-
-.navds-button--action:active {
-  color: $navds-color-text-inverse;
-  background-color: $navds-color-action-active;
-}
-
-.navds-button--danger {
-  color: $navds-color-text-inverse;
-  background-color: $navds-color-danger-default;
-  padding: 0.5625em 2em;
-  border: none;
-
-  &.navds-button--small {
-    padding: 0.3125em 1.11em;
-  }
-}
-
-.navds-button--danger:focus:not(:hover) {
-  border: 2px solid $navds-color-danger-default;
-  color: $navds-color-danger-default;
-  background-color: $navds-color-background;
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
-
-  &.navds-button--small {
-    padding: calc(0.3125em - 2px) calc(1.11em - 2px);
-  }
-}
-
-.navds-button--danger:hover {
-  background-color: $navds-color-danger-hover;
-}
-
-.navds-button--danger:active {
-  background-color: $navds-color-danger-active;
 }
 
 @mixin button_elevation($elevation: 0px) {
@@ -142,29 +32,123 @@
   }
 }
 
-.navds-button--action,
-.navds-button--danger {
+@mixin elevated-button($default-color, $hover-color, $active-color) {
   &:not(:disabled) {
+    color: $navds-color-text-inverse;
+    background-color: $default-color;
+    border-color: $default-color;
+    @include button-border-width(0px);
     @include button_elevation(2px);
 
     &:hover {
+      background-color: $hover-color;
       @include button_elevation(3px);
     }
 
-    &:focus {
-      @include button_elevation(2px);
+    &:active {
+      background-color: $active-color;
+      @include button_elevation(0px);
     }
 
-    &:active {
+    &:focus {
+      color: $default-color;
+      background-color: $navds-color-background;
+      @include button_elevation(2px);
+      @include button-border-width(2px);
+    }
+
+    &:hover:focus {
+      background-color: $hover-color;
+      color: $navds-color-text-inverse;
+      @include button-border-width(0px);
+    }
+
+    &:active:focus {
+      color: $active-color;
+      background-color: $navds-color-background;
       @include button_elevation(0px);
+      border-color: $active-color;
+      @include button-border-width(2px);
+    }
+
+    &:hover:focus:active {
+      color: $navds-color-text-inverse;
+      background-color: $active-color;
     }
   }
 }
 
-.navds-button:disabled {
-  border: none;
-  background-color: $navds-color-disabled;
-  color: $navds-color-text-inverse;
-  cursor: not-allowed;
-  padding: 0.5625em 2em;
+.navds-button {
+  display: inline-block;
+  cursor: pointer;
+
+  @include var(background-color, "navds-color-action-default");
+
+  background-color: $navds-color-background;
+  color: $navds-color-action-default;
+  background-color: var(--navds-color-background);
+  color: var(--navds-color-action-default);
+
+  font: inherit;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  font-size: $navds-font-size-small;
+  line-height: $navds-font-line-height-small;
+  border-color: $navds-color-action-default;
+  border-radius: 2px;
+  border-style: solid;
+  @include button-border-width(2px);
+
+  &:focus {
+    outline: none;
+    box-shadow: $navds-shadow-focus;
+  }
+
+  &--primary {
+    &:hover,
+    &:active {
+      color: $navds-color-text-inverse;
+      background-color: $navds-color-action-hover;
+      @include button-border-width(0px);
+    }
+
+    &:active {
+      background-color: $navds-color-action-active;
+    }
+  }
+
+  &--secondary {
+    border-color: transparent;
+    background-color: transparent;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border-color: $navds-color-action-default;
+    }
+  }
+
+  &--action {
+    @include elevated-button(
+      $navds-color-action-default,
+      $navds-color-action-hover,
+      $navds-color-action-active
+    );
+  }
+
+  &--danger {
+    @include elevated-button(
+      $navds-color-danger-default,
+      $navds-color-danger-hover,
+      $navds-color-danger-active
+    );
+  }
+
+  &:disabled {
+    background-color: $navds-color-disabled;
+    color: $navds-color-text-inverse;
+    cursor: not-allowed;
+    @include button-border-width(0px);
+  }
 }
