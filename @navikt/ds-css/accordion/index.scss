@@ -47,15 +47,16 @@
   width: 100%;
   margin-bottom: 0;
   cursor: pointer;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 1rem;
   align-items: center;
-  justify-content: space-between;
 }
 
 .navds-accordion__button .navds-accordion__title {
   font-size: $navds-font-size-large;
   font-weight: $navds-font-weight-bold;
-  line-height: 1;
+  line-height: $navds-font-line-height-large;
 }
 
 .navds-accordion__button:hover .navds-accordion__title {
