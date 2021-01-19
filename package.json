@@ -48,7 +48,13 @@
     ]
   },
   "stylelint": {
-    "extends": "stylelint-config-standard",
+    "plugins": [
+      "stylelint-scss"
+    ],
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-recommended-scss"
+    ],
     "rules": {
       "value-list-comma-newline-after": null,
       "declaration-colon-newline-after": null,
@@ -67,13 +73,13 @@
     "url": "https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
+    "@popperjs/core": "^2.5.4",
     "axios": "^0.21.0",
     "babel-plugin-react-docgen": "^1.8.1",
     "chalk": "^1.1.3",
-    "copyfiles": "^2.4.0",
     "color": "^3.1.3",
+    "copyfiles": "^2.4.0",
     "depth-first": "^4.0.0",
-    "@popperjs/core": "^2.5.4",
     "extend": "^3.0.2",
     "gatsby-transformer-react-docgen-typescript-custom": "0.1.0",
     "gh-pages": "^3.1.0",
@@ -87,9 +93,9 @@
     "lerna": "^3.22.1",
     "less-vars-to-js": "^1.3.0",
     "lodash.camelcase": "^4.3.0",
-    "p-limit": "^3.1.0",
     "mustache": "^4.0.1",
     "node-sass": "4.14.1",
+    "p-limit": "^3.1.0",
     "pretty-quick": "^3.1.0",
     "react-docgen": "^5.3.0",
     "react-docgen-exports-handler": "^1.0.0",
@@ -97,6 +103,8 @@
     "react-popper": "^2.2.4",
     "react-svg-icon-generator-fork": "^1.0.2",
     "style-loader": "^1.2.1",
+    "stylelint-config-recommended-scss": "^4.2.0",
+    "stylelint-scss": "^3.18.0",
     "through2": "^2.0.3",
     "vinyl": "^2.2.1"
   },
