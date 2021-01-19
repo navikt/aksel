@@ -36,8 +36,8 @@
   padding: 1rem;
 }
 
-// prettier-ignore
-.navds-modal__overlay:active.navds-modal:not(:active).navds-modal__button--shake {
+//prettier-ignore
+.navds-modal__overlay:active .navds-modal:not(:active) .navds-modal__button--shake {
   transform: rotate(10deg);
   transition: transform 100ms cubic-bezier(0.82, -2, 1, 0.3);
 }

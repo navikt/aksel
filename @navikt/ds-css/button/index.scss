@@ -37,22 +37,26 @@
     color: $navds-color-text-inverse;
     background-color: $default-color;
     border-color: $default-color;
+
     @include button-border-width(0px);
     @include button_elevation(2px);
 
     &:hover {
       background-color: $hover-color;
+
       @include button_elevation(3px);
     }
 
     &:active {
       background-color: $active-color;
+
       @include button_elevation(0px);
     }
 
     &:focus {
       color: $default-color;
       background-color: $navds-color-background;
+
       @include button_elevation(2px);
       @include button-border-width(2px);
     }
@@ -60,15 +64,18 @@
     &:hover:focus {
       background-color: $hover-color;
       color: $navds-color-text-inverse;
+
       @include button-border-width(0px);
     }
 
     &:active:focus {
       color: $active-color;
       background-color: $navds-color-background;
+
       @include button_elevation(0px);
-      border-color: $active-color;
       @include button-border-width(2px);
+
+      border-color: $active-color;
     }
 
     &:hover:focus:active {
@@ -86,9 +93,6 @@
 
   background-color: $navds-color-background;
   color: $navds-color-action-default;
-  background-color: var(--navds-color-background);
-  color: var(--navds-color-action-default);
-
   font: inherit;
   margin: 0;
   text-align: center;
@@ -98,6 +102,7 @@
   border-color: $navds-color-action-default;
   border-radius: 2px;
   border-style: solid;
+
   @include button-border-width(2px);
 
   &:focus {
@@ -110,6 +115,7 @@
     &:active {
       color: $navds-color-text-inverse;
       background-color: $navds-color-action-hover;
+
       @include button-border-width(0px);
     }
 
@@ -149,6 +155,7 @@
     background-color: $navds-color-disabled;
     color: $navds-color-text-inverse;
     cursor: not-allowed;
+
     @include button-border-width(0px);
   }
 }
