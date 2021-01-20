@@ -53,8 +53,8 @@
 }
 .navds-button--action {
   color: var(--navds-color-text-inverse);
-  background-color: #0067c5;
-  border-color: #0067c5;
+  background-color: var(--navds-color-action-default);
+  border-color: var(--navds-color-action-default);
   border-width: 0px;
 
   /* Padding calculated based on 16px font for 40px tall button */
@@ -79,7 +79,7 @@
   right: 0;
 }
 .navds-button--action:hover {
-  background-color: #0d6fc8;
+  background-color: var(--navds-color-action-hover);
   transform: translateY(calc(-1 * 3px));
   position: relative;
 }
@@ -96,7 +96,7 @@
   right: 0;
 }
 .navds-button--action:active {
-  background-color: #005b82;
+  background-color: var(--navds-color-action-active);
   transform: translateY(calc(-1 * 0px));
   position: relative;
 }
@@ -113,7 +113,7 @@
   right: 0;
 }
 .navds-button--action:focus {
-  color: #0067c5;
+  color: var(--navds-color-action-default);
   background-color: var(--navds-color-background);
   transform: translateY(calc(-1 * 2px));
   position: relative;
@@ -138,7 +138,7 @@
   padding: calc(0.3125em - 2px) calc(1.11em - 2px);
 }
 .navds-button--action:hover:focus {
-  background-color: #0d6fc8;
+  background-color: var(--navds-color-action-hover);
   color: var(--navds-color-text-inverse);
   border-width: 0px;
 
@@ -150,7 +150,7 @@
   padding: calc(0.3125em - 0px) calc(1.11em - 0px);
 }
 .navds-button--action:active:focus {
-  color: #005b82;
+  color: var(--navds-color-action-active);
   background-color: var(--navds-color-background);
   transform: translateY(calc(-1 * 0px));
   position: relative;
@@ -158,7 +158,7 @@
 
   /* Padding calculated based on 16px font for 40px tall button */
   padding: calc(0.5625em - 2px) calc(2em - 2px);
-  border-color: #005b82;
+  border-color: var(--navds-color-action-active);
 }
 .navds-button--action:active:focus:not(:focus) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0px 0 rgba(0, 0, 0, 0.25);
@@ -178,12 +178,12 @@
 }
 .navds-button--action:hover:focus:active {
   color: var(--navds-color-text-inverse);
-  background-color: #005b82;
+  background-color: var(--navds-color-action-active);
 }
 .navds-button--danger {
   color: var(--navds-color-text-inverse);
-  background-color: #ba3a26;
-  border-color: #ba3a26;
+  background-color: var(--navds-color-danger-default);
+  border-color: var(--navds-color-danger-default);
   border-width: 0px;
 
   /* Padding calculated based on 16px font for 40px tall button */
@@ -208,7 +208,7 @@
   right: 0;
 }
 .navds-button--danger:hover {
-  background-color: #bd4431;
+  background-color: var(--navds-color-danger-hover);
   transform: translateY(calc(-1 * 3px));
   position: relative;
 }
@@ -225,7 +225,7 @@
   right: 0;
 }
 .navds-button--danger:active {
-  background-color: #88392b;
+  background-color: var(--navds-color-danger-active);
   transform: translateY(calc(-1 * 0px));
   position: relative;
 }
@@ -242,7 +242,7 @@
   right: 0;
 }
 .navds-button--danger:focus {
-  color: #ba3a26;
+  color: var(--navds-color-danger-default);
   background-color: var(--navds-color-background);
   transform: translateY(calc(-1 * 2px));
   position: relative;
@@ -268,7 +268,7 @@
   padding: calc(0.3125em - 2px) calc(1.11em - 2px);
 }
 .navds-button--danger:hover:focus {
-  background-color: #bd4431;
+  background-color: var(--navds-color-danger-hover);
   color: var(--navds-color-text-inverse);
   border-width: 0px;
 
@@ -280,7 +280,7 @@
   padding: calc(0.3125em - 0px) calc(1.11em - 0px);
 }
 .navds-button--danger:active:focus {
-  color: #88392b;
+  color: var(--navds-color-danger-active);
   background-color: var(--navds-color-background);
   transform: translateY(calc(-1 * 0px));
   position: relative;
@@ -288,7 +288,7 @@
 
   /* Padding calculated based on 16px font for 40px tall button */
   padding: calc(0.5625em - 2px) calc(2em - 2px);
-  border-color: #88392b;
+  border-color: var(--navds-color-danger-active);
 }
 .navds-button--danger:active:focus:not(:focus) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0px 0 rgba(0, 0, 0, 0.25);
@@ -308,9 +308,9 @@
 }
 .navds-button--danger:hover:focus:active {
   color: var(--navds-color-text-inverse);
-  background-color: #88392b;
+  background-color: var(--navds-color-danger-active);
 }
-.navds-button--danger:disabled {
+.navds-button:disabled:disabled {
   background-color: var(--navds-color-disabled);
   color: var(--navds-color-text-inverse);
   cursor: not-allowed;
@@ -319,8 +319,9 @@
   /* Padding calculated based on 16px font for 40px tall button */
   padding: calc(0.5625em - 0px) calc(2em - 0px);
   box-shadow: none;
+  transform: none;
 }
-.navds-button--danger:disabled.navds-button--small {
+.navds-button:disabled:disabled.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125em - 0px) calc(1.11em - 0px);
 }
