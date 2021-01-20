@@ -1,5 +1,5 @@
 .navds-link {
-  color: #0067c5;
+  color: var(navds-color-text-link);
   text-decoration: underline;
   display: inline-grid;
   grid-auto-flow: column;
@@ -13,24 +13,24 @@
 
 .navds-link:focus {
   outline: none;
-  color: #ffffff;
+  color: var(navds-color-text-inverse);
   text-decoration: none;
-  background-color: #254b6d;
-  box-shadow: 0 0 0 2px #254b6d;
+  background-color: var(navds-text-focus);
+  box-shadow: var(navds-text-shadow);
 }
 
 .navds-link:active {
   outline: none;
-  color: #ffffff;
+  color: var(navds-color-text-inverse);
   text-decoration: none;
-  background-color: #254b6d;
-  box-shadow: 0 0 0 2px #254b6d;
+  background-color: var(navds-text-focus);
+  box-shadow: var(navds-text-shadow);
 }
 
 .navds-link svg {
-  color: #0067c5;
+  color: var(navds-color-text-link);
 }
 
 .navds-link:focus svg {
-  color: #ffffff;
+  color: var(navds-color-text-inverse);
 }
