@@ -8,12 +8,12 @@
 @import "utility.css";
 
 body {
-  font-family: $navds-font-family;
+  font-family: var(--navds-font-family);
   line-height: 1.375;
-  color: $navds-color-text-primary;
+  color: var(--navds-color-text-primary);
   font-size: 1.125rem;
 }
 
 a {
-  color: $navds-color-text-link;
+  color: var(--navds-color-text-link);
 }
