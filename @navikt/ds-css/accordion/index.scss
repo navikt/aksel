@@ -6,20 +6,20 @@
 
 .navds-accordion {
   position: relative;
-  background: $navds-color-background;
-  border: $navds-border-default;
+  background: var(--navds-color-background);
+  border: var(--navds-border-default);
   border-radius: 4px;
 }
 
 .navds-accordion:hover {
-  box-shadow: $navds-color-hover;
-  border: $navds-panel-hover;
+  box-shadow: var(--navds-color-hover);
+  border: var(--navds-panel-hover);
   color: black;
 }
 
 .navds-accordion:focus,
 .navds-accordion__button:focus {
-  box-shadow: $navds-shadow-focus;
+  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
@@ -54,14 +54,14 @@
 }
 
 .navds-accordion__button .navds-accordion__title {
-  font-size: $navds-font-size-large;
-  font-weight: $navds-font-weight-bold;
-  line-height: $navds-font-line-height-large;
+  font-size: var(--navds-font-size-large);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
-  color: $navds-color-text-link;
+  color: var(--navds-color-text-link);
 }
 
 .navds-accordion__content {
