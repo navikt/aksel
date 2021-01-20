@@ -2,7 +2,7 @@
 
 .navds-alert {
   border-radius: 4px;
-  border: $navds-border-default;
+  border: var(--navds-border-default);
 
   /* Padding calculated based on 16px font for 64px tall alert */
   padding: 1.1875em 1em;
@@ -10,8 +10,8 @@
   grid-auto-flow: column;
   gap: 0.75rem;
   justify-content: start;
-  font-size: $navds-font-size-small;
-  line-height: $navds-font-line-height-small;
+  font-size: var(--navds-font-size-small);
+  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-alert--small {
@@ -23,7 +23,7 @@
   font-size: 1.5rem;
   background: radial-gradient(
     circle,
-    $navds-color-background 50%,
+    var(--navds-color-background) 50%,
     0,
     transparent
   );
@@ -34,43 +34,43 @@
 }
 
 .navds-alert--error {
-  border-color: $navds-color-error-border;
-  background-color: $navds-color-error-background;
+  border-color: var(--navds-color-error-border);
+  background-color: var(--navds-color-error-background);
 }
 
 .navds-alert--error > svg {
-  color: $navds-color-red-60;
+  color: var(--navds-color-red-60);
 }
 
 .navds-alert--warning {
-  border-color: $navds-color-warning-border;
-  background-color: $navds-color-warning-background;
+  border-color: var(--navds-color-warning-border);
+  background-color: var(--navds-color-warning-background);
 }
 
 .navds-alert--warning > svg {
-  color: $navds-color-orange-40;
+  color: var(--navds-color-orange-40);
   background: radial-gradient(
     circle,
-    $navds-color-darkgray 50%,
+    var(--navds-color-darkgray) 50%,
     0,
     transparent
   );
 }
 
 .navds-alert--info {
-  border-color: $navds-color-info-border;
-  background-color: $navds-color-info-background;
+  border-color: var(--navds-color-info-border);
+  background-color: var(--navds-color-info-background);
 }
 
 .navds-alert--info > svg {
-  color: $navds-color-lightblue-70;
+  color: var(--navds-color-lightblue-70);
 }
 
 .navds-alert--success {
-  border-color: $navds-color-success-border;
-  background-color: $navds-color-success-background;
+  border-color: var(--navds-color-success-border);
+  background-color: var(--navds-color-success-background);
 }
 
 .navds-alert--success > svg {
-  color: $navds-color-green-70;
+  color: var(--navds-color-green-70);
 }
