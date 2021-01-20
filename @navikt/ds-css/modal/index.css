@@ -1,0 +1,58 @@
+.ReactModal__Body--open {
+  overflow: hidden;
+}
+
+.navds-modal {
+  background-color: #ffffff;
+  display: block;
+  position: relative;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow: auto;
+  max-height: 100%;
+  z-index: 1010;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navds-modal:focus,
+.navds-modal--focus {
+  box-shadow: 0 0 0 3px #254b6d;
+  outline: none;
+}
+
+.navds-modal__overlay {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(61, 56, 49, 0.7);
+  padding: 1rem;
+}
+
+.navds-modal__button--shake {
+  transform: rotate(0deg);
+  transition: transform 100ms cubic-bezier(0.82, 2, 1, 0.3);
+}
+
+.navds-modal__overlay:active
+  .navds-modal:not(:active)
+  .navds-modal__button--shake {
+  transform: rotate(10deg);
+  transition: transform 100ms cubic-bezier(0.82, -2, 1, 0.3);
+}
+
+.navds-modal__button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+}
+
+.navds-modal__button svg {
+  /* 24x24px */
+  height: 1.5rem;
+  width: 1.5rem;
+}

@@ -1,0 +1,36 @@
+.navds-link {
+  color: #0067c5;
+  text-decoration: underline;
+  display: inline-grid;
+  grid-auto-flow: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.navds-link:hover {
+  text-decoration: none;
+}
+
+.navds-link:focus {
+  outline: none;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #254b6d;
+  box-shadow: 0 0 0 2px #254b6d;
+}
+
+.navds-link:active {
+  outline: none;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #254b6d;
+  box-shadow: 0 0 0 2px #254b6d;
+}
+
+.navds-link svg {
+  color: #0067c5;
+}
+
+.navds-link:focus svg {
+  color: #ffffff;
+}

@@ -1,0 +1,64 @@
+/*
+ * Heading
+ */
+.navds-heading {
+  margin: 0;
+  font-weight: 600;
+  line-height: calc(1em + 0.25rem);
+}
+
+.navds-heading--xxl {
+  font-size: 2.5rem;
+}
+
+.navds-heading--xl {
+  font-size: 2rem;
+}
+
+.navds-heading--large {
+  font-size: 1.5rem;
+}
+
+.navds-heading--medium {
+  font-size: 1.25rem;
+}
+
+.navds-heading--small {
+  font-size: 1.125rem;
+}
+
+/*
+ * Text
+ */
+.navds-text--large {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+}
+
+.navds-text--medium {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
+
+.navds-text--small {
+  font-size: 1rem;
+  line-height: 1.375rem;
+}
+
+.navds-text--xs {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+/*
+ * Article typography
+ */
+.navds-article__lead {
+  font-size: 1.25rem;
+  line-height: 1.625rem;
+}
+
+.navds-article__paragraph {
+  font-size: 1.125rem;
+  line-height: 1.5rem;
+}
