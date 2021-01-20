@@ -33,6 +33,7 @@
   background-color: var(--navds-color-background);
   border: var(--navds-border-default);
 }
+
 .navds-popover__arrow::before .navds-popover--small {
   width: 0.67rem;
   height: 0.67rem;
@@ -51,8 +52,8 @@
   top: calc(1rem / -2);
 }
 
-.navds-popover[data-popper-placement^="bottom"]
-  > .navds-popover__arrow::before {
+/* prettier-ignore */
+.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow::before {
   border-bottom-color: transparent;
   border-right-color: transparent;
 }
