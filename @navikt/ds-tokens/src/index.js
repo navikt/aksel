@@ -161,12 +161,10 @@ module.exports = {
           content: { value: "1010" },
           overlay: { value: "1000" },
         },
-      },
-    },
-    size: {
-      popover: {
-        default: { value: "1rem" },
-        small: { value: "0.67rem" },
+        popover: {
+          default: { value: "2000" },
+          arrow: { value: "-1" },
+        },
       },
     },
   },

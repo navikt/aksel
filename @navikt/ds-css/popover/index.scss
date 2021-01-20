@@ -1,7 +1,7 @@
 @import "../../../node_modules/@navikt/ds-tokens/dist/tokens.scss";
 
 .navds-popover {
-  z-index: 2000;
+  z-index: $navds-z-index-popover-default;
   background-color: $navds-color-background;
   box-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
   border: $navds-border-default;
@@ -23,26 +23,26 @@
 }
 
 .navds-popover__arrow {
-  z-index: -1;
+  z-index: $navds-z-index-popover-arrow;
 }
 
 .navds-popover__arrow::before {
   content: "";
   display: block;
-  width: $navds-size-popover-default;
-  height: $navds-size-popover-default;
+  width: 1rem;
+  height: 1rem;
   transform: rotate(45deg);
   background-color: $navds-color-background;
   border: $navds-border-default;
 
   .navds-popover--small {
-    width: $navds-size-popover-small;
-    height: $navds-size-popover-small;
+    width: 0.67rem;
+    height: 0.67rem;
   }
 }
 
 .navds-popover[data-popper-placement^="top"] > .navds-popover__arrow {
-  bottom: calc(#{$navds-size-popover-default} / -2);
+  bottom: calc(1rem / -2);
 }
 
 .navds-popover[data-popper-placement^="top"] > .navds-popover__arrow::before {
@@ -51,7 +51,7 @@
 }
 
 .navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow {
-  top: calc(#{$navds-size-popover-default} / -2);
+  top: calc(1rem / -2);
 }
 
 // prettier-ignore
@@ -61,7 +61,7 @@
 }
 
 .navds-popover[data-popper-placement^="left"] > .navds-popover__arrow {
-  right: calc(#{$navds-size-popover-default} / -2);
+  right: calc(1rem / -2);
 }
 
 .navds-popover[data-popper-placement^="left"] > .navds-popover__arrow::before {
@@ -70,7 +70,7 @@
 }
 
 .navds-popover[data-popper-placement^="right"] > .navds-popover__arrow {
-  left: calc(#{$navds-size-popover-default} / -2);
+  left: calc(1rem / -2);
 }
 
 .navds-popover[data-popper-placement^="right"] > .navds-popover__arrow::before {

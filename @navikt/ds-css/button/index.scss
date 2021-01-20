@@ -88,9 +88,6 @@
 .navds-button {
   display: inline-block;
   cursor: pointer;
-
-  @include var(background-color, "navds-color-action-default");
-
   background-color: $navds-color-background;
   color: $navds-color-action-default;
   font: inherit;
