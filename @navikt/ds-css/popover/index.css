@@ -1,8 +1,8 @@
 .navds-popover {
-  z-index: 2000;
-  background-color: #ffffff;
+  z-index: var(navds-z-index-popover-default);
+  background-color: var(navds-color-background);
   box-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
-  border: 1px solid #b7b1a9;
+  border: var(navds-border-default);
   border-radius: 2px;
   padding: 1rem;
 }
@@ -17,11 +17,11 @@
 
 .navds-popover:focus {
   outline: none;
-  box-shadow: 0 0 0 3px #254b6d;
+  box-shadow: var(navds-shadow-focus);
 }
 
 .navds-popover__arrow {
-  z-index: -1;
+  z-index: var(navds-z-index-popover-arrow);
 }
 
 .navds-popover__arrow::before {
@@ -30,8 +30,8 @@
   width: 1rem;
   height: 1rem;
   transform: rotate(45deg);
-  background-color: #ffffff;
-  border: 1px solid #b7b1a9;
+  background-color: var(navds-color-background);
+  border: var(navds-border-default);
 }
 .navds-popover__arrow::before .navds-popover--small {
   width: 0.67rem;
