@@ -3,62 +3,62 @@
  */
 .navds-heading {
   margin: 0;
-  font-weight: var(navds-font-weight-bold);
+  font-weight: var(--navds-font-weight-bold);
   line-height: calc(1em + 0.25rem);
 }
 
 .navds-heading--xxl {
-  font-size: var(navds-font-size-heading-xxl);
+  font-size: var(--navds-font-size-heading-xxl);
 }
 
 .navds-heading--xl {
-  font-size: var(navds-font-size-heading-xl);
+  font-size: var(--navds-font-size-heading-xl);
 }
 
 .navds-heading--large {
-  font-size: var(navds-font-size-heading-large);
+  font-size: var(--navds-font-size-heading-large);
 }
 
 .navds-heading--medium {
-  font-size: var(navds-font-size-heading-medium);
+  font-size: var(--navds-font-size-heading-medium);
 }
 
 .navds-heading--small {
-  font-size: var(navds-font-size-heading-small);
+  font-size: var(--navds-font-size-heading-small);
 }
 
 /*
  * Text
  */
 .navds-text--large {
-  font-size: var(navds-font-size-large);
-  line-height: var(navds-font-line-height-large);
+  font-size: var(--navds-font-size-large);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-text--medium {
-  font-size: var(navds-font-size-medium);
-  line-height: var(navds-font-line-height-medium);
+  font-size: var(--navds-font-size-medium);
+  line-height: var(--navds-font-line-height-medium);
 }
 
 .navds-text--small {
-  font-size: var(navds-font-size-small);
-  line-height: var(navds-font-line-height-small);
+  font-size: var(--navds-font-size-small);
+  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-text--xs {
-  font-size: var(navds-font-size-xs);
-  line-height: var(navds-font-line-height-xs);
+  font-size: var(--navds-font-size-xs);
+  line-height: var(--navds-font-line-height-xs);
 }
 
 /*
  * Article typography
  */
 .navds-article__lead {
-  font-size: var(navds-font-size-article-lead);
-  line-height: var(navds-font-line-height-large);
+  font-size: var(--navds-font-size-article-lead);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-article__paragraph {
-  font-size: var(navds-font-size-article-paragraph);
-  line-height: var(navds-font-line-height-medium);
+  font-size: var(--navds-font-size-article-paragraph);
+  line-height: var(--navds-font-line-height-medium);
 }
