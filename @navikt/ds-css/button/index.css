@@ -130,7 +130,7 @@
 
 .navds-button--action:active,
 .navds-button--danger:active {
-  transform: translateY(0px);
+  transform: translateY(0);
   position: relative;
 }
 
@@ -226,7 +226,7 @@
 .navds-button--danger:active:focus {
   /* Padding calculated based on 16px font for 40px tall button */
   padding: calc(0.5625em - 2px) calc(2em - 2px);
-  transform: translateY(0px);
+  transform: translateY(0);
   position: relative;
   border-width: 2px;
   background-color: var(--navds-color-background);
