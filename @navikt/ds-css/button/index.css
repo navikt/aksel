@@ -35,13 +35,13 @@
   border-width: 0;
 
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
+  padding: 0.5625em 2em;
 }
 
 .navds-button--primary:hover.navds-button--small,
 .navds-button--primary:active.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
+  padding: 0.3125em 1.11em;
 }
 
 .navds-button--primary:active {
@@ -60,47 +60,57 @@
 }
 
 .navds-button--action {
-  color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-default);
   border-color: var(--navds-color-action-default);
-  border-width: 0;
+}
 
+.navds-button--danger {
+  background-color: var(--navds-color-danger-default);
+  border-color: var(--navds-color-danger-default);
+}
+
+.navds-button--action,
+.navds-button--danger {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
+  padding: 0.5625em 2em;
+  border-width: 0;
   transform: translateY(calc(-1 * 2px));
   position: relative;
+  color: var(--navds-color-text-inverse);
 }
 
-.navds-button--action.navds-button--small {
+.navds-button--action.navds-button--small,
+.navds-button--danger.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
+  padding: 0.3125em 1.11em;
 }
 
-.navds-button--action:not(:focus) {
+.navds-button--action:not(:focus),
+.navds-button--danger:not(:focus) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 2px 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--action::before {
-  bottom: calc(-1 * 2px);
-  height: 2px;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
 }
 
 .navds-button--action:hover {
   background-color: var(--navds-color-action-hover);
+}
+
+.navds-button--danger:hover {
+  background-color: var(--navds-color-danger-hover);
+}
+
+.navds-button--danger:hover,
+.navds-button--action:hover {
   transform: translateY(calc(-1 * 3px));
   position: relative;
 }
 
-.navds-button--action:hover:not(:focus) {
+.navds-button--action:hover:not(:focus),
+.navds-button--danger:hover:not(:focus) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 3px 0 rgba(0, 0, 0, 0.25);
 }
 
-.navds-button--action:hover::before {
+.navds-button--action:hover::before,
+.navds-button--danger:hover::before {
   bottom: calc(-1 * 3px);
   height: 3px;
   content: "";
@@ -112,16 +122,28 @@
 
 .navds-button--action:active {
   background-color: var(--navds-color-action-active);
-  transform: translateY(calc(-1 * 0px));
+}
+
+.navds-button--danger:active {
+  background-color: var(--navds-color-danger-active);
+}
+
+.navds-button--action:active,
+.navds-button--danger:active {
+  transform: translateY(0px);
   position: relative;
 }
 
-.navds-button--action:active:not(:focus) {
+.navds-button--action:active:not(:focus),
+.navds-button--danger:active:not(:focus) {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.25);
 }
 
-.navds-button--action:active::before {
-  bottom: calc(-1 * 0px);
+.navds-button--action:active::before,
+.navds-button--danger:active::before,
+.navds-button--action:active:focus::before,
+.navds-button--danger:active:focus::before {
+  bottom: 0;
   height: 0;
   content: "";
   display: block;
@@ -133,104 +155,25 @@
 .navds-button--action:focus {
   color: var(--navds-color-action-default);
   background-color: var(--navds-color-background);
-  transform: translateY(calc(-1 * 2px));
-  position: relative;
-  border-width: 2px;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
 }
 
-.navds-button--action:focus:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 2px 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--action:focus::before {
-  bottom: calc(-1 * 2px);
-  height: 2px;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.navds-button--action:focus.navds-button--small {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 2px) calc(1.11em - 2px);
-}
-
-.navds-button--action:hover:focus {
-  background-color: var(--navds-color-action-hover);
-  color: var(--navds-color-text-inverse);
-  border-width: 0;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
-}
-
-.navds-button--action:hover:focus.navds-button--small {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
-}
-
-.navds-button--action:active:focus {
-  color: var(--navds-color-action-active);
+.navds-button--danger:focus {
+  color: var(--navds-color-danger-default);
   background-color: var(--navds-color-background);
-  transform: translateY(calc(-1 * 0px));
-  position: relative;
-  border-width: 2px;
+}
 
+.navds-button--danger:focus,
+.navds-button--action:focus {
   /* Padding calculated based on 16px font for 40px tall button */
   padding: calc(0.5625em - 2px) calc(2em - 2px);
-  border-color: var(--navds-color-action-active);
-}
-
-.navds-button--action:active:focus:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--action:active:focus::before {
-  bottom: calc(-1 * 0px);
-  height: 0;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.navds-button--action:active:focus.navds-button--small {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 2px) calc(1.11em - 2px);
-}
-
-.navds-button--action:hover:focus:active {
-  color: var(--navds-color-text-inverse);
-  background-color: var(--navds-color-action-active);
-}
-
-.navds-button--danger {
-  color: var(--navds-color-text-inverse);
-  background-color: var(--navds-color-danger-default);
-  border-color: var(--navds-color-danger-default);
-  border-width: 0;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
   transform: translateY(calc(-1 * 2px));
   position: relative;
+  border-width: 2px;
 }
 
-.navds-button--danger.navds-button--small {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
-}
-
-.navds-button--danger:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 2px 0 rgba(0, 0, 0, 0.25);
-}
-
+.navds-button--action:focus::before,
+.navds-button--danger:focus::before,
+.navds-button--action::before,
 .navds-button--danger::before {
   bottom: calc(-1 * 2px);
   height: 2px;
@@ -241,119 +184,63 @@
   right: 0;
 }
 
-.navds-button--danger:hover {
-  background-color: var(--navds-color-danger-hover);
-  transform: translateY(calc(-1 * 3px));
-  position: relative;
-}
-
-.navds-button--danger:hover:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 3px 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--danger:hover::before {
-  bottom: calc(-1 * 3px);
-  height: 3px;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.navds-button--danger:active {
-  background-color: var(--navds-color-danger-active);
-  transform: translateY(calc(-1 * 0px));
-  position: relative;
-}
-
-.navds-button--danger:active:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--danger:active::before {
-  bottom: calc(-1 * 0px);
-  height: 0;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-.navds-button--danger:focus {
-  color: var(--navds-color-danger-default);
-  background-color: var(--navds-color-background);
-  transform: translateY(calc(-1 * 2px));
-  position: relative;
-  border-width: 2px;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
-}
-
-.navds-button--danger:focus:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 2px 0 rgba(0, 0, 0, 0.25);
-}
-
-.navds-button--danger:focus::before {
-  bottom: calc(-1 * 2px);
-  height: 2px;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
+.navds-button--action:focus.navds-button--small,
 .navds-button--danger:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125em - 2px) calc(1.11em - 2px);
 }
 
-.navds-button--danger:hover:focus {
-  background-color: var(--navds-color-danger-hover);
-  color: var(--navds-color-text-inverse);
-  border-width: 0;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
+.navds-button--action:hover:focus {
+  background-color: var(--navds-color-action-hover);
 }
 
+.navds-button--danger:hover:focus {
+  background-color: var(--navds-color-danger-hover);
+}
+
+.navds-button--action:hover:focus,
+.navds-button--danger:hover:focus {
+  /* Padding calculated based on 16px font for 40px tall button */
+  padding: 0.5625em 2em;
+  border-width: 0;
+  color: var(--navds-color-text-inverse);
+}
+
+.navds-button--action:hover:focus.navds-button--small,
 .navds-button--danger:hover:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
+  padding: 0.3125em 1.11em;
+}
+
+.navds-button--action:active:focus {
+  color: var(--navds-color-action-active);
+  border-color: var(--navds-color-action-active);
 }
 
 .navds-button--danger:active:focus {
   color: var(--navds-color-danger-active);
-  background-color: var(--navds-color-background);
-  transform: translateY(calc(-1 * 0px));
-  position: relative;
-  border-width: 2px;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 2px) calc(2em - 2px);
   border-color: var(--navds-color-danger-active);
 }
 
-.navds-button--danger:active:focus:not(:focus) {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.25), 0 0 0 rgba(0, 0, 0, 0.25);
+.navds-button--action:active:focus,
+.navds-button--danger:active:focus {
+  /* Padding calculated based on 16px font for 40px tall button */
+  padding: calc(0.5625em - 2px) calc(2em - 2px);
+  transform: translateY(0px);
+  position: relative;
+  border-width: 2px;
+  background-color: var(--navds-color-background);
 }
 
-.navds-button--danger:active:focus::before {
-  bottom: calc(-1 * 0px);
-  height: 0;
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
+.navds-button--action:active:focus.navds-button--small,
 .navds-button--danger:active:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125em - 2px) calc(1.11em - 2px);
+}
+
+.navds-button--action:hover:focus:active {
+  color: var(--navds-color-text-inverse);
+  background-color: var(--navds-color-action-active);
 }
 
 .navds-button--danger:hover:focus:active {
@@ -362,18 +249,17 @@
 }
 
 .navds-button:disabled:disabled {
+  /* Padding calculated based on 16px font for 40px tall button */
+  padding: 0.5625em 2em;
   background-color: var(--navds-color-disabled);
   color: var(--navds-color-text-inverse);
   cursor: not-allowed;
   border-width: 0;
-
-  /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625em - 0px) calc(2em - 0px);
   box-shadow: none;
   transform: none;
 }
 
 .navds-button:disabled:disabled.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125em - 0px) calc(1.11em - 0px);
+  padding: 0.3125em 1.11em;
 }
