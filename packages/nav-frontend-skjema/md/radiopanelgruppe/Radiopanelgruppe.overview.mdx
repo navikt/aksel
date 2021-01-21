@@ -43,3 +43,32 @@ import { RadioPanelGruppe } from "./../../";
   feil={{ feilmelding: "Her er det en feil." }}
 />
 ```
+
+## Bruk av radioRef
+
+<Example>
+  <RadioPanelGruppeExample button name="example-3" />
+</Example>
+
+```jsx
+const juice1Ref = useRef(null);
+
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    {
+      label: "Eplejuice",
+      value: "juice1",
+      id: "juice1id",
+      radioRef: (ref) => (juice1Ref.current = ref),
+    },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Her er det en feil." }}
+/>;
+```

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-stegindikator",
-  "version": "0.0.65",
+  "version": "0.0.68",
   "main": "lib/stegindikator.js",
   "types": "lib/stegindikator.d.js",
   "license": "MIT",
@@ -15,12 +15,12 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-stegindikator-style": "^1.0.41",
+    "nav-frontend-stegindikator-style": "^1.0.43",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-stegindikator-style": "^1.0.41",
+    "nav-frontend-stegindikator-style": "^1.0.43",
     "react": "^15.4.2 || ^16.0.0"
   },
   "defaultExport": "Stegindikator"

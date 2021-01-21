@@ -1,0 +1,34 @@
+{
+  "name": "@navikt/ds-icons",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "license": "MIT",
+  "author": "NAV",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "/lib",
+    "/src",
+    "/svg"
+  ],
+  "scripts": {
+    "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
+    "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref",
+    "build": "rm -rf src && rm -rf lib && npm run create-icons && tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-icons.git"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0"
+  },
+  "devDependencies": {
+    "react": "^16.8.0 || ^17.0.0",
+    "@svgr/cli": "^5.4.0",
+    "dotenv": "^8.2.0",
+    "lodash.kebabcase": "^4.1.1",
+    "rimraf": "3.0.2",
+    "lodash.startcase": "4.4.0"
+  }
+}

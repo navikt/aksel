@@ -6,7 +6,7 @@ import { FileIcon } from "../../../website/src/components/assets/images/svg";
 
 ## Normal
 
-Tekstlenker skal ha tekstfarge [@navBla](/resources/colors) (#0067C5) med normal underlinje som forsvinner ved hover.
+Tekstlenker skal ha fargen [@navBla](/resources/colors) (#0067C5) med normal underlinje som forsvinner ved hover.
 Ved fokus skal lenken få hvit tekstfarge uten underlinje og bakgrunnsfarge [@fokusFarge](/resources/colors) (#254B6D).
 
 <Example>
@@ -15,6 +15,22 @@ Ved fokus skal lenken få hvit tekstfarge uten underlinje og bakgrunnsfarge [@fo
 
 ```jsx
 Dette er en <Lenke href="#">tekstlenke</Lenke> i en setning.
+```
+
+## På farget bakgrunn
+
+På en bakgrunn der @navBla ikke har tilstrekkelig kontrast (minimum 4.5:1) anbefaler vi å bruke @navMorkGra.
+
+<Example>
+  <Alertstripe type="suksess">
+    Dette er en <Lenke href="#">tekstlenke</Lenke> på farget bakgrunn.
+  </Alertstripe>
+</Example>
+
+```jsx
+<Alertstripe type="suksess">
+  Dette er en <Lenke href="#">tekstlenke</Lenke> på farget bakgrunn.
+</Alertstripe>
 ```
 
 ## Med ikon

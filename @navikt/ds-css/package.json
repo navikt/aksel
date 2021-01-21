@@ -1,0 +1,22 @@
+{
+  "name": "@navikt/ds-css",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "Css for NAV Designsystem components",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "css"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1",
+    "@navikt/ds-tokens": "0.1.0-beta.1"
+  }
+}

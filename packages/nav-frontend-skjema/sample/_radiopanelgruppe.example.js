@@ -1,17 +1,18 @@
-import React from "react";
-
+import React, { createRef } from "react";
+import Knapp from "nav-frontend-knapper";
 import { RadioPanelGruppe } from "..";
 
 class RadioPanelGruppeExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = { checked: "juice1" };
-
+    this.ref = createRef();
     this.radios = [
       {
         label: "Eplejuice",
         value: "juice1",
         id: `juice1id-${this.props.name}`,
+        radioRef: (ref) => (this.ref.current = ref),
       },
       {
         label: "Appelsinjuice",
@@ -38,14 +39,24 @@ class RadioPanelGruppeExample extends React.Component {
 
   render() {
     return (
-      <RadioPanelGruppe
-        name={this.props.name}
-        legend="Hvilken drikke er best?"
-        radios={this.radios}
-        checked={this.state.checked}
-        onChange={this.onChange}
-        feil={this.props.feil ? "Her er det en feil." : undefined}
-      />
+      <div>
+        <RadioPanelGruppe
+          name={this.props.name}
+          legend="Hvilken drikke er best?"
+          radios={this.radios}
+          checked={this.state.checked}
+          onChange={this.onChange}
+          feil={this.props.feil ? "Her er det en feil." : undefined}
+        />
+        {this.props.button && (
+          <Knapp
+            style={{ marginTop: "1rem" }}
+            onClick={() => this.ref.current.focus()}
+          >
+            Fokus radiopanel
+          </Knapp>
+        )}
+      </div>
     );
   }
 }

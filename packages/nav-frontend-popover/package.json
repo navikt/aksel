@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover",
-  "version": "0.0.41",
+  "version": "0.0.43",
   "main": "lib/popover.js",
   "types": "lib/popover.d.ts",
   "license": "MIT",
@@ -19,7 +19,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-popover-style": "^0.0.13",
+    "nav-frontend-popover-style": "^0.0.14",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0",
     "react-dom": "^15.4.2 || ^16.0.0"
@@ -29,7 +29,7 @@
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-popover-style": "^0.0.13",
+    "nav-frontend-popover-style": "^0.0.14",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0",
     "react-dom": "^15.4.2 || ^16.0.0"

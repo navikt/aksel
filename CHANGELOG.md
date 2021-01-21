@@ -18,6 +18,61 @@ Hvordan ta i bruk oppdateringen:
 - Endre all bruk av `<Lenke>` i sortert tabell til `<button>`. Kan være lurt å lese de nye punktene her [tabell-UU](https://design.nav.no/components/tabell/accessibility) også da.
 - Sikre at prosjektet ditt kan håndtere SVG, da chevrons nå er svg og ikke css. Create-react-app gjør dette selv. Om du bruker webpack er dette den mest vanlige løsningen: [npmjs @svgr/webpack](https://www.npmjs.com/package/@svgr/webpack). Om du bruker VUE er dette en potensiell løsning [npmjs vue-svg-loader](https://www.npmjs.com/package/vue-svg-loader)
 
+## 08. Januar 2021
+
+### Oppdatert RadioPanel med prop radioRef
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/943)
+
+Kan nå sette ref på RadioPanel
+[Dokumentasjon](http://localhost:8000/components/radiopanelgruppe/#bruk-av-radioref)
+
+## 04. Januar 2021
+
+### Oppdaterte Alertstripe komponent for bedre UU
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/940)
+
+SVG-ikonene Alertstripe brukte har nå `role="img"` og `aria-label` for å fikse
+[WCAG 2.1 SC 1.1.1](https://www.w3.org/WAI/WCAG21/Understanding/non-text-content.html)
+
+### Fikset Math kalkulering for LESS v4
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/937)
+
+- Chevron mixin kalkulerte `Floor` uten parentes rundt intern kalkulering, noe LESS v4 ikke taklet.
+
+### Oppdatert eksempel-prosjekt for CRA og Webpack
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/931)
+
+- Oppdatert til nyeste CRA
+- Oppdatert til enklere eslint config
+- Satt opp prettier, pretty-quick og stylelint
+- Satt opp husky for commit og push (v4)
+- Begge bruker nå nav-frontend-core for scaffolding by default
+
+## 21. Desember 2020
+
+### Fikset mixins for LESS v4
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/930)
+
+- LESS v4 krever at alle mixins må bli brukt med parentes.
+
+`.skjemaelement__input;` ❌
+
+`.skjemaelement__input();` ✅
+
+## 14. Desember 2020
+
+### Endringer Chevron
+
+[Pull-request](https://github.com/navikt/nav-frontend-moduler/pull/916)
+
+- Endret implementasjon til å bruke `<span>` over `<i>` da dette var sett på som dårlig praksis.
+- Bumpet Chevron stilpakke til v1 da ingen større endringer vil treffe denne fremmover.
+
 ## 18. januar 2020
 
 ### [Den Store Skjema-oppdateringen™](https://gist.github.com/Lillebo/7394a6e491d479795a6418d93bff638c)

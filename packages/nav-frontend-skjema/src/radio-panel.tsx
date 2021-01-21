@@ -7,6 +7,10 @@ import "nav-frontend-skjema-style";
 export interface RadioPanelProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
+  /**
+   * Referanse til selve radioknappen. Brukes for eksempel til å sette fokus
+   */
+  radioRef?: (element: HTMLInputElement | null) => any;
 }
 
 export interface RadioPanelState {
@@ -27,7 +31,7 @@ export class RadioPanel extends React.Component<
   }
 
   render() {
-    const { id, label, checked, disabled, ...other } = this.props;
+    const { id, label, checked, disabled, radioRef, ...other } = this.props;
     const { hasFocus } = this.state;
     const inputId = id || guid();
 
@@ -51,6 +55,7 @@ export class RadioPanel extends React.Component<
               disabled={disabled}
               aria-invalid={!!context.feil}
               aria-errormessage={context.feilmeldingId}
+              ref={radioRef}
               {...other}
               onFocus={() => this.toggleOutline()}
               onBlur={() => this.toggleOutline()}

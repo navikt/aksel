@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-veileder",
-  "version": "2.0.34",
+  "version": "2.0.37",
   "main": "lib/veileder.js",
   "types": "lib/veileder.d.ts",
   "license": "MIT",
@@ -15,14 +15,14 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-veileder-style": "^2.0.25",
+    "nav-frontend-veileder-style": "^2.0.27",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-veileder-style": "^2.0.25",
+    "nav-frontend-veileder-style": "^2.0.27",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },

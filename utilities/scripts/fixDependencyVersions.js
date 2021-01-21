@@ -16,7 +16,7 @@ function getModules() {
       if (err) {
         reject(err);
       } else {
-        resolve(files);
+        resolve(files.filter((file) => file.indexOf("node_modules") === -1));
       }
     });
   });
