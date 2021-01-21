@@ -1,5 +1,22 @@
 import Alertstripe from "nav-frontend-alertstriper";
 
+## Riktig struktur
+
+Når man setter opp en tabell er det viktig at man tar i bruk riktige HTML-tags for å beskrive innholdet, slik at nettleseren bedre kan forstå hva som foregår.
+Hvis man følger eksemplene under oversikt og bruker `<table>` over `<div>`så er man allerede godt på vei!
+Men et punkt som er lurt å følge litt ekstra med på er bruken av `<th>`, table-header. Denne brukes ofte for å beskrive overskriften for en column,
+men kan også bli brukt i tilfeller der en verdi i rekken er unikt identifiserbar. Dette er et bevist valg man kan gjøre for å tabellen lettere å navigere for alle,
+men i de aller fleste tilfeller klarer nettleseren selv å tolke hvordan en tabell skal best navigeres.
+
+## Sorterbar tabell
+
+For å skape en god brukeropplevelse for alle er det viktig at man `aria-sort` på table-headers,
+samt bruker aria-label på `button` som utfører sorteringen `onClick`. Labelen skal da fortelle hva den neste handlingen blir å utføre.
+
+```jsx
+<button aria-label="Sorter ID stigende">ID</button>
+```
+
 ## Responsivitet
 
 Det finnes [mange måter](https://medium.com/appnroll-publication/5-practical-solutions-to-make-responsive-data-tables-ff031c48b122) å gjøre tabeller responsive på, men flere av disse teknikkene innebærer ofte [store fallgruver](https://developer.paciellogroup.com/blog/2018/03/short-note-on-what-css-display-properties-do-to-table-semantics/) for tilgjengelighet.

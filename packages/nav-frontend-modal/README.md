@@ -5,7 +5,7 @@
 ### Installering:
 
 ```
-npm install classnames nav-frontend-core nav-frontend-lukknapp nav-frontend-lukknapp-style nav-frontend-modal nav-frontend-modal-style nav-frontend-paneler-style prop-types react react-modal --save
+npm install @types/react-modal classnames nav-frontend-core nav-frontend-lukknapp nav-frontend-lukknapp-style nav-frontend-modal nav-frontend-modal-style nav-frontend-paneler-style prop-types react react-modal --save
 ```
 
 <!-- AUTO-GENERATED-CONTENT:END *-->

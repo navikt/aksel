@@ -9,6 +9,13 @@ module.exports = {
         test: /\.less$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "less-loader"],
       },
+      {
+        test: /\.svg/,
+        use: {
+          loader: "svg-url-loader",
+          options: { iesafe: true },
+        },
+      },
     ],
   },
 };
