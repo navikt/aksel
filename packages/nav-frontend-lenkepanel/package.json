@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel",
-  "version": "1.0.67",
+  "version": "1.0.68",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",

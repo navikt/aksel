@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-snakkeboble",
-  "version": "2.0.26",
+  "version": "2.0.27",
   "main": "lib/snakkeboble.js",
   "types": "lib/snakkeboble.d.ts",
   "license": "MIT",

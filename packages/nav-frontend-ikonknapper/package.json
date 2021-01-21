@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ikonknapper",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
