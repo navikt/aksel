@@ -223,7 +223,7 @@ import "nav-frontend-tabell-style";
 
 ## Sorterbar tabell
 
-Lenker som er barn av `th`-elementene blir stylet til å være helt utfyllende og får 2 små chevrons som peker opp og ned for å indikere at kolonnen kan sorteres i vilkårlig rekkefølge. Bruk klassene `tabell__th--sortert-desc` og `tabell__th--sortert-asc` for at lenkene i stedet skal vise en enkelt chevron i den retningen kolonnen er sortert. Bruk klassen `tabell__td--sortert` på cellene i den sorterte kolonnen for å gi disse en svak grå bakgrunn.
+Knapper som er barn av `th`-elementene blir stylet til å være helt utfyllende og får et :after-element med to små chevrons som peker opp og ned for å indikere at kolonnen kan sorteres i vilkårlig rekkefølge. Bruk klassene `tabell__th--sortert-desc` og `tabell__th--sortert-asc` for at lenkene skal indikere hvilken retning kolonnen er sortert. Bruk klassen `tabell__td--sortert` på cellene i den sorterte kolonnen for å gi disse en svak grå bakgrunn.
 
 <Alertstripe type="advarsel">
   Husk at du må legge til både <InlineCode>aria-sort</InlineCode> og{" "}
@@ -238,20 +238,28 @@ Lenker som er barn av `th`-elementene blir stylet til å være helt utfyllende o
     <thead>
       <tr>
         <th role="columnheader" aria-sort="none">
-          <Lenke href="#">ID</Lenke>
+          <button aria-label="Sorter ID stigende">
+            ID
+          </button>
         </th>
         <th
           role="columnheader"
           aria-sort="descending"
           className="tabell__th--sortert-desc"
         >
-          <Lenke href="#">Fornavn</Lenke>
+          <button aria-label="Sorter Fornavn synkende">
+            Fornavn
+          </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke href="#">Etternavn</Lenke>
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke href="#">Rolle</Lenke>
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
         </th>
       </tr>
     </thead>
@@ -275,30 +283,36 @@ Lenker som er barn av `th`-elementene blir stylet til å være helt utfyllende o
         <td>Kommandør</td>
       </tr>
     </tbody>
+
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
 
 <table className="tabell">
+  <caption role="alert" aria-live="polite">
+    Table consisting of x - not sorted
+  </caption>
   <thead>
     <tr>
       <th role="columnheader" aria-sort="none">
-        <Lenke href="#">ID</Lenke>
+        <button aria-label="Sorter ID stigende">ID</button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <Lenke href="#">Fornavn</Lenke>
+        <button aria-label="Sorter Fornavn synkende">Fornavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke href="#">Etternavn</Lenke>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke href="#">Rolle</Lenke>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
@@ -342,17 +356,23 @@ import "nav-frontend-tabell-style";
           <Checkbox label="Velg alle" />
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke href="#">Fornavn</Lenke>
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
         </th>
         <th
           role="columnheader"
           aria-sort="descending"
           className="tabell__th--sortert-desc"
         >
-          <Lenke href="#">Etternavn</Lenke>
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
         </th>
         <th role="columnheader" aria-sort="none">
-          <Lenke href="#">Rolle</Lenke>
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
         </th>
       </tr>
     </thead>
@@ -382,8 +402,11 @@ import "nav-frontend-tabell-style";
         <td>Kommandør</td>
       </tr>
     </tbody>
+
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
@@ -395,17 +418,17 @@ import "nav-frontend-tabell-style";
         <Checkbox label="Velg alle" />
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke href="#">Fornavn</Lenke>
+        <button aria-label="Sorter Fornavn stigende">Fornavn</button>
       </th>
       <th
         role="columnheader"
         aria-sort="descending"
         className="tabell__th--sortert-desc"
       >
-        <Lenke href="#">Etternavn</Lenke>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th role="columnheader" aria-sort="none">
-        <Lenke href="#">Rolle</Lenke>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
@@ -445,13 +468,19 @@ import "nav-frontend-tabell-style";
     <thead>
       <tr>
         <th id="header-fornavn">
-          <Lenke href="#">Fornavn</Lenke>
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
         </th>
         <th id="header-etternavn">
-          <Lenke href="#">Etternavn</Lenke>
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
         </th>
         <th id="header-rolle">
-          <Lenke href="#">Rolle</Lenke>
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
         </th>
       </tr>
     </thead>
@@ -478,8 +507,11 @@ import "nav-frontend-tabell-style";
         <td>Kommandør</td>
       </tr>
     </tbody>
+
+
   </table>
 </Example>
+
 
 ```jsx
 import "nav-frontend-tabell-style";
@@ -488,13 +520,13 @@ import "nav-frontend-tabell-style";
   <thead>
     <tr>
       <th id="header-fornavn">
-        <Lenke href="#">Fornavn</Lenke>
+        <button aria-label="Sorter Fornavn stigende">Fornavn</button>
       </th>
       <th id="header-etternavn">
-        <Lenke href="#">Etternavn</Lenke>
+        <button aria-label="Sorter Etternavn stigende">Etternavn</button>
       </th>
       <th id="header-rolle">
-        <Lenke href="#">Rolle</Lenke>
+        <button aria-label="Sorter Rolle stigende">Rolle</button>
       </th>
     </tr>
   </thead>
@@ -538,19 +570,19 @@ import "nav-frontend-tabell-style";
     </thead>
     <tbody>
       <tr>
-        <th>Kaptein</th>
+        <td>Kaptein</td>
         <td>1</td>
         <td>Jean-Luc</td>
         <td>Picard</td>
       </tr>
       <tr>
-        <th>Kommandør</th>
+        <td>Kommandør</td>
         <td>2</td>
         <td>William</td>
         <td>Riker</td>
       </tr>
       <tr>
-        <th>Sjefsingeniør</th>
+        <td>Sjefsingeniør</td>
         <td>3</td>
         <td>Geordi</td>
         <td>La Forge</td>
@@ -581,19 +613,19 @@ import "nav-frontend-tabell-style";
   </thead>
   <tbody>
     <tr>
-      <th>Kaptein</th>
+      <td>Kaptein</td>
       <td>1</td>
       <td>Jean-Luc</td>
       <td>Picard</td>
     </tr>
     <tr>
-      <th>Kommandør</th>
+      <td>Kommandør</td>
       <td>2</td>
       <td>William</td>
       <td>Riker</td>
     </tr>
     <tr>
-      <th>Sjefsingeniør</th>
+      <td>Sjefsingeniør</td>
       <td>3</td>
       <td>Geordi</td>
       <td>La Forge</td>
@@ -620,7 +652,9 @@ import "nav-frontend-tabell-style";
     riktige
   </Lenke>{" "}
   <InlineCode>role</InlineCode>-attributter og <InlineCode>display</InlineCode>
-  -stiler for å bevare den semantiske verdien i tabellene.
+  -stiler for å bevare den semantiske verdien i tabellene. Vi anbefaler fortsatt
+  å ikke ta i bruk denne metoden hvis mulig, da nettleseren ikke kan tolke tabellen
+  like bra uten riktig markup.
 </Alertstripe>
 
 <Example>
@@ -677,6 +711,8 @@ import "nav-frontend-tabell-style";
 </Example>
 
 ```jsx
+import "nav-frontend-tabell-style";
+
 <div className="tabell" role="table">
   <div className="tabell__thead" role="row-group">
     <div className="tabell__tr" role="row">
@@ -726,5 +762,5 @@ import "nav-frontend-tabell-style";
       </div>
     </div>
   </div>
-</div>
+</div>;
 ```

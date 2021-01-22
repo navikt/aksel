@@ -5,7 +5,7 @@
 ### Installering:
 
 ```
-npm install classnames lodash.throttle nav-frontend-chevron-style nav-frontend-core nav-frontend-ekspanderbartpanel nav-frontend-ekspanderbartpanel-style nav-frontend-js-utils nav-frontend-paneler-style nav-frontend-typografi-style prop-types react react-collapse --save
+npm install @types/react-collapse classnames lodash.throttle nav-frontend-chevron-style nav-frontend-core nav-frontend-ekspanderbartpanel nav-frontend-ekspanderbartpanel-style nav-frontend-js-utils nav-frontend-paneler-style nav-frontend-typografi-style prop-types react react-collapse --save
 ```
 
 <!-- AUTO-GENERATED-CONTENT:END *-->

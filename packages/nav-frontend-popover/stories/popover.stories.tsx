@@ -6,6 +6,9 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "Popover",
   component: Popover,
+  parameters: {
+    chromatic: { disable: true },
+  },
 } as Meta;
 
 const Template = ({ ...props }) => {

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel-style",
-  "version": "0.3.46",
+  "version": "0.3.47",
   "main": "src/index.less",
   "license": "MIT",
   "files": [

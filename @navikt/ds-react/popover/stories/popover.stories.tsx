@@ -6,7 +6,7 @@ export default {
   title: "@navikt/popover",
   component: Popover,
   parameters: {
-    chromatic: { delay: 500 },
+    chromatic: { disable: true },
   },
 } as Meta;
 

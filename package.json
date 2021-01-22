@@ -23,7 +23,8 @@
     "lint:less": "npx stylelint --syntax less **/*.less",
     "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
-    "fix:versions": "node utilities/scripts/fixDependencyVersions.js"
+    "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
+    "gen:docs": "node utilities/scripts/generateReadmes.js"
   },
   "workspaces": [
     "website",
@@ -130,6 +131,7 @@
     "react-is": "^16.13.1",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
+    "svg-url-loader": "^7.1.1",
     "typescript": "^3.7.3",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0"
