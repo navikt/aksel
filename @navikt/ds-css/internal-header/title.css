@@ -5,17 +5,19 @@
   align-self: stretch;
   align-items: center;
   text-decoration: none;
-}
-
-.navds-header__title:focus {
-  box-shadow: inset var(--navds-shadow-focus-on-dark);
-  outline: none;
-}
-
-.navds-header__title > h1 {
-  color: var(--navds-color-text-inverse);
   margin: 0;
+  color: var(--navds-color-text-inverse);
   font-size: var(--navds-font-size-medium);
   font-weight: var(--navds-font-weight-bold);
   line-height: var(--navds-font-line-height-medium);
+}
+
+.navds-header__title > span > a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navds-header__title > span > a:focus {
+  box-shadow: var(--navds-shadow-focus-on-dark);
+  outline: none;
 }

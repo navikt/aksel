@@ -26,19 +26,23 @@ export const All = () => (
       <InternalHeaderTitle>Tittel</InternalHeaderTitle>
     </InternalHeader>
 
+    <h1>Title but not heading</h1>
+    <InternalHeader>
+      <InternalHeaderTitle element="span">Tittel</InternalHeaderTitle>
+    </InternalHeader>
+
     <h1>Title with link</h1>
     <InternalHeader>
-      <InternalHeaderTitle href="/#">Tittel med lenke</InternalHeaderTitle>
+      <InternalHeaderTitle>
+        <a href="/#">Tittel med lenke</a>
+      </InternalHeaderTitle>
     </InternalHeader>
 
     <h1>Title with react-router link</h1>
     <Router>
       <InternalHeader>
-        <InternalHeaderTitle element={Link} to="/">
-          <span style={{ display: "flex", gap: 4 }}>
-            <img src="https://www.nav.no/dekoratoren/media/nav-logo-red.svg" />
-            <h1>Tittel med lenke</h1>
-          </span>
+        <InternalHeaderTitle>
+          <Link to="/">Tittel med lenke</Link>
         </InternalHeaderTitle>
       </InternalHeader>
     </Router>

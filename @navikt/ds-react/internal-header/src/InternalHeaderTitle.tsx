@@ -1,41 +1,22 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes, createElement } from "react";
 import cl from "classnames";
-import Link, { LinkProps } from "./Link";
 import "@navikt/ds-css/internal-header/index.css";
 import "@navikt/ds-css/typography/index.css";
 
-export interface InternalHeaderTitleProps
-  extends HTMLAttributes<HTMLElement>,
-    LinkProps {
+export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   className?: string;
-  href?: string;
+  element?: keyof React.ReactHTML;
 }
 
 const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
-  (props, ref) =>
-    props.element || props.href ? (
-      <Link
-        {...props}
-        className={cl("navds-header__title", props.className)}
-        ref={ref}
-        element={props.element}
-      >
-        <h1>
-          <span>{props.children}</span>
-        </h1>
-      </Link>
-    ) : (
-      <span
-        {...props}
-        ref={ref}
-        className={cl("navds-header__title", props.className)}
-      >
-        <h1>
-          <span>{props.children}</span>
-        </h1>
-      </span>
-    )
+  ({ element = "h1", children, className, ...rest }, ref) =>
+    createElement(element, {
+      ...rest,
+      ref,
+      className: cl("navds-header__title", className),
+      children: <span>{children}</span>,
+    })
 );
 
 export default InternalHeaderTitle;
