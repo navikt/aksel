@@ -14,7 +14,6 @@
 .navds-header__title > span > a {
   text-decoration: none;
   color: inherit;
-  height: 100%;
 }
 
 .navds-header__title > span > a:focus {
