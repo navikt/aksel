@@ -166,6 +166,10 @@ module.exports = {
           content: { value: "1010" },
           overlay: { value: "1000" },
         },
+        popover: {
+          default: { value: "2000" },
+          arrow: { value: "-1" },
+        },
       },
     },
   },

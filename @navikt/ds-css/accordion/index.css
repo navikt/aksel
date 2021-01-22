@@ -4,20 +4,20 @@
 
 .navds-accordion {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #b7b1a9;
+  background: var(--navds-color-background);
+  border: var(--navds-border-default);
   border-radius: 4px;
 }
 
 .navds-accordion:hover {
-  box-shadow: #b7b1a9;
-  border: 1px solid #0067c5;
+  box-shadow: var(--navds-color-hover);
+  border: var(--navds-panel-hover);
   color: black;
 }
 
 .navds-accordion:focus,
 .navds-accordion__button:focus {
-  box-shadow: 0 0 0 3px #254b6d;
+  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
@@ -26,6 +26,8 @@
   height: 1.25em;
   transition: 300ms transform;
   transform: rotateZ(0deg);
+  flex-shrink: 0;
+  margin-left: 1rem;
 }
 
 .navds-accordion__chevron--up {
@@ -37,8 +39,6 @@
 }
 
 .navds-accordion__button {
-  background-color: #ffffff;
-  display: block;
   padding: 1rem;
   border-radius: 4px;
   background: transparent;
@@ -48,19 +48,19 @@
   margin-bottom: 0;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navds-accordion__button .navds-accordion__title {
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1;
+  font-size: var(--navds-font-size-large);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-large);
 }
 
 .navds-accordion__button:hover .navds-accordion__title {
   text-decoration: underline;
-  color: #0067c5;
+  color: var(--navds-color-text-link);
 }
 
 .navds-accordion__content {

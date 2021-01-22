@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 
-import { Down } from "@navikt/ds-icons";
+import { Expand } from "@navikt/ds-icons";
 import "@navikt/ds-css/accordion/index.css";
 import { guid } from "nav-frontend-js-utils";
 
@@ -57,7 +57,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           {...rest}
         >
           <span className="navds-accordion__title">{title}</span>
-          <Down
+          <Expand
             className={cl(
               "navds-accordion__chevron",
               `navds-accordion__chevron--${internalOpen ? "up" : "down"}`

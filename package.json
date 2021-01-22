@@ -21,7 +21,7 @@
     "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
     "lint:jsts": "npx eslint .",
     "lint:less": "npx stylelint --syntax less **/*.less",
-    "lint:css": "npx stylelint --syntax less @navikt/**/*.css",
+    "lint:css": "npx stylelint --syntax css @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "gen:docs": "node utilities/scripts/generateReadmes.js"
@@ -59,8 +59,7 @@
       "packages/nav-frontend-core/less/vendor/_normalize.less",
       "packages/nav-frontend-core/less/_variabler-exports.less",
       "packages/nav-frontend-core/less/hide-text.less",
-      "**/dist/**",
-      "@navikt/**/*.css"
+      "**/dist/**"
     ]
   },
   "repository": {
@@ -69,7 +68,6 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "add": "^2.0.6",
     "axios": "^0.21.0",
     "babel-plugin-react-docgen": "^1.8.1",
     "chalk": "^1.1.3",
