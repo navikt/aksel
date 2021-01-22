@@ -1,0 +1,23 @@
+.navds-header__title {
+  color: var(--navds-color-text-inverse);
+  padding: 0 1.5rem 0 1.5rem;
+  margin: 0;
+  font-size: var(--navds-font-size-medium);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-medium);
+  border-right: 1px solid var(--navds-color-gray-40);
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+}
+
+.navds-header__title > span > a {
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.navds-header__title > span > a:focus {
+  box-shadow: var(--navds-shadow-focus-on-dark);
+  outline: none;
+}
