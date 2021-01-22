@@ -5,14 +5,14 @@ import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {
-  classname?: string;
+  className?: string;
   name: string;
   ident: string;
 }
 
 const InternalHeaderUser = forwardRef<HTMLDivElement, InternalHeaderUserProps>(
-  ({ classname, name, ident, ...rest }, ref) => (
-    <div ref={ref} className={cl("navds-header__user", classname)} {...rest}>
+  ({ className, name, ident, ...rest }, ref) => (
+    <div ref={ref} className={cl("navds-header__user", className)} {...rest}>
       <span className="navds-header__name">{name}</span>
       <span className="navds-header__ident">{ident}</span>
     </div>

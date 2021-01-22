@@ -1,4 +1,5 @@
 import React from "react";
+import { HashRouter as Router, Link } from "react-router-dom";
 import {
   InternalHeader,
   InternalHeaderTitle,
@@ -27,10 +28,20 @@ export const All = () => (
 
     <h1>Title with link</h1>
     <InternalHeader>
-      <InternalHeaderTitle>
-        <a href="/#">Tittel med lenke</a>
-      </InternalHeaderTitle>
+      <InternalHeaderTitle href="/#">Tittel med lenke</InternalHeaderTitle>
     </InternalHeader>
+
+    <h1>Title with react-router link</h1>
+    <Router>
+      <InternalHeader>
+        <InternalHeaderTitle element={Link} to="/">
+          <span style={{ display: "flex", gap: 4 }}>
+            <img src="https://www.nav.no/dekoratoren/media/nav-logo-red.svg" />
+            <h1>Tittel med lenke</h1>
+          </span>
+        </InternalHeaderTitle>
+      </InternalHeader>
+    </Router>
 
     <h1>Title + User</h1>
     <InternalHeader>

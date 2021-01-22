@@ -5,12 +5,12 @@ import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
-  classname?: string;
+  className?: string;
 }
 
 const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(
-  ({ children, classname, ...rest }, ref) => (
-    <header ref={ref} className={cl("navds-header", classname)} {...rest}>
+  ({ children, className, ...rest }, ref) => (
+    <header ref={ref} className={cl("navds-header", className)} {...rest}>
       {children}
     </header>
   )
