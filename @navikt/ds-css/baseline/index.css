@@ -1,10 +1,10 @@
-@import "~normalize.css";
-@import "~@navikt/ds-tokens/dist/tokens.css";
-@import "Source-Sans-Pro-regular.css";
-@import "Source-Sans-Pro-italic.css";
-@import "Source-Sans-Pro-600.css";
-@import "print.css";
-@import "utility.css";
+@import url(~normalize.css);
+@import url(~@navikt/ds-tokens/dist/tokens.css);
+@import url(Source-Sans-Pro-regular.css);
+@import url(Source-Sans-Pro-italic.css);
+@import url(Source-Sans-Pro-600.css);
+@import url(print.css);
+@import url(utility.css);
 
 body {
   font-family: var(--navds-font-family);
