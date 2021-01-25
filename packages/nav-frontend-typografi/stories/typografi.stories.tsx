@@ -9,7 +9,6 @@ import {
   Element,
   Feilmelding,
   Normaltekst,
-  EtikettLiten,
   UndertekstBold,
 } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
@@ -30,7 +29,6 @@ export const All = () => {
       <Element>Element</Element>
       <Feilmelding>Feilmelding</Feilmelding>
       <Normaltekst>Normaltekst</Normaltekst>
-      <EtikettLiten>EtikettLiten</EtikettLiten>
       <Undertekst>Undertekst</Undertekst>
       <UndertekstBold>UndertekstBold</UndertekstBold>
     </div>

@@ -5,7 +5,7 @@ import {
   Systemtittel,
   Undertittel,
   Ingress,
-  EtikettLiten as Etikett,
+  Undertekst,
   Normaltekst,
 } from "nav-frontend-typografi";
 
@@ -37,11 +37,11 @@ class Palette extends React.Component {
         <Undertittel>Fargeverdier</Undertittel>
         <div className="color-values">
           <div className="color-value-pair">
-            <Etikett>Hex:</Etikett>
+            <Undertekst>Hex:</Undertekst>
             <span>{this.state.activeColor.color.hex()}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>RGB:</Etikett>
+            <Undertekst>RGB:</Undertekst>
             <span>{`${this.state.activeColor.color
               .rgb()
               .round()
@@ -49,7 +49,7 @@ class Palette extends React.Component {
               .join(", ")}`}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>CMYK:</Etikett>
+            <Undertekst>CMYK:</Undertekst>
             <span>{`${this.state.activeColor.color
               .cmyk()
               .round()
@@ -57,7 +57,7 @@ class Palette extends React.Component {
               .join(", ")}`}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>HSL:</Etikett>
+            <Undertekst>HSL:</Undertekst>
             <span>{`${this.state.activeColor.color
               .hsl()
               .round()

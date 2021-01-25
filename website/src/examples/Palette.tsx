@@ -5,7 +5,7 @@ import {
   Systemtittel,
   Undertittel,
   Ingress,
-  EtikettLiten as Etikett,
+  Undertekst,
   Normaltekst,
 } from "nav-frontend-typografi";
 
@@ -34,11 +34,11 @@ const Palette = () => {
         <Undertittel>Fargeverdier</Undertittel>
         <div className="color-values">
           <div className="color-value-pair">
-            <Etikett>Hex:</Etikett>
+            <Undertekst>Hex:</Undertekst>
             <span>{activeColor.color.hex()}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>RGB:</Etikett>
+            <Undertekst>RGB:</Undertekst>
             <span>{`${activeColor.color
               .rgb()
               .round()
@@ -46,7 +46,7 @@ const Palette = () => {
               .join(", ")}`}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>CMYK:</Etikett>
+            <Undertekst>CMYK:</Undertekst>
             <span>{`${activeColor.color
               .cmyk()
               .round()
@@ -54,7 +54,7 @@ const Palette = () => {
               .join(", ")}`}</span>
           </div>
           <div className="color-value-pair">
-            <Etikett>HSL:</Etikett>
+            <Undertekst>HSL:</Undertekst>
             <span>{`${activeColor.color
               .hsl()
               .round()
