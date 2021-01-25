@@ -15,7 +15,7 @@
     "craco": "^0.0.3",
     "craco-less": "^1.17.1",
     "nav-frontend-core": "^5.0.10",
-    "nav-frontend-typografi": "^2.0.37",
+    "nav-frontend-typografi": "^3.0.0-beta.1",
     "nav-frontend-typografi-style": "^1.0.31",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
