@@ -1,6 +1,13 @@
 # Endringslogg
 
-## 04. desember 2020
+## 25. Januar 2021
+
+### Fjernet komponenten EtikettLiten
+
+[#956](https://github.com/navikt/nav-frontend-moduler/pull/956)
+
+- `Undertekst` kan brukes som erstatning da begge har samme styling.
+- Dette fører til en major bump fra v2 -> v3 for `nav-frontend-typografi`
 
 ### Element for sortering av tabell endres
 
