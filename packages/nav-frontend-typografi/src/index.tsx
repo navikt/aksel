@@ -36,10 +36,6 @@ export const typeConfigMap = {
     defaultTag: "p",
     cls: (...args) => classNames("typo-normal", ...args),
   },
-  etikettLiten: {
-    defaultTag: "p",
-    cls: (...args) => classNames("typo-etikett-liten", ...args),
-  },
   undertekstBold: {
     defaultTag: "p",
     cls: (...args) => classNames("typo-undertekst-bold", ...args),
@@ -119,6 +115,5 @@ export { default as Ingress } from "./ingress";
 export { default as Element } from "./element";
 export { default as Feilmelding } from "./feilmelding";
 export { default as Normaltekst } from "./normaltekst";
-export { default as EtikettLiten } from "./etikett-liten";
 export { default as Undertekst } from "./undertekst";
 export { default as UndertekstBold } from "./undertekst-bold";

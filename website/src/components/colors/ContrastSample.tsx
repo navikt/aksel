@@ -2,7 +2,7 @@ import React from "react";
 import Color from "color";
 import classnames from "classnames";
 
-import { EtikettLiten as Etikett } from "nav-frontend-typografi";
+import { Undertekst } from "nav-frontend-typografi";
 
 import { CheckIcon, CrossIcon } from "../assets/images/svg";
 
@@ -26,7 +26,7 @@ const ContrastSample = ({ label, foreground, background }: ContrastProps) => {
 
   return (
     <>
-      <Etikett>
+      <Undertekst>
         {label}
         <span className={contrastCls(contrast)}>
           <span className="contrast__ratio--label">Kontrast: </span>
@@ -38,7 +38,7 @@ const ContrastSample = ({ label, foreground, background }: ContrastProps) => {
           {contrast > 4.5 && <CheckIcon title="Godkjent" />}
           {contrast < 4.5 && <CrossIcon title="Ikke godkjent" />}
         </span>
-      </Etikett>
+      </Undertekst>
       <div
         className="contrast__sample"
         style={{

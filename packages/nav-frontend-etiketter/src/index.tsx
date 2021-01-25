@@ -37,7 +37,7 @@ export interface EtikettBaseProps extends EtikettProps {
 class EtikettBase extends React.Component<EtikettBaseProps> {
   render() {
     const { type, className, typo, children, mini, ...props } = this.props;
-    let typografi = mini ? "etikettLiten" : "normaltekst";
+    let typografi = mini ? "undertekst" : "normaltekst";
     typografi = typo || typografi;
     return (
       <div className={cls(type, mini, className)} {...props}>
