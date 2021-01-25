@@ -18,7 +18,8 @@
   ],
   "scripts": {
     "build": "style-dictionary build",
-    "watch": "nodemon --watch src/index.js --exec \"yarn build\""
+    "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
+    "token": "style-dictionary build"
   },
   "repository": {
     "type": "git",

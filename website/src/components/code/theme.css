@@ -54,7 +54,7 @@
 .language-css .token.string,
 .style .token.string {
   color: #806245;
-  background: #ffffff;
+  background: #f4f4f4;
 }
 .token.atrule,
 .token.attr-value,
