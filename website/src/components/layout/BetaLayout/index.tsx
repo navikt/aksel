@@ -129,7 +129,7 @@ const BetaLayout = (props) => {
     >
       <Header onClick={() => setDarkmode(!darkmode)} />
       <Sidebar />
-      <div className="ds-content">
+      <main className="ds-content">
         <MDXProvider
           components={{
             code: (props) => <Codeblock {...props} />,
@@ -145,7 +145,7 @@ const BetaLayout = (props) => {
         >
           {props.children}
         </MDXProvider>
-      </div>
+      </main>
     </div>
   );
 };

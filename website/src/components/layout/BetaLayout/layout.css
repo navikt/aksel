@@ -16,6 +16,10 @@
   display: flex;
   justify-content: space-between;
   background-color: var(--header-color);
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  height: 4rem;
 }
 
 .ds-header__title {
@@ -66,22 +70,27 @@
 
 .ds-content {
   padding: 1rem;
+  padding-left: calc(250px + 1rem);
   overflow-y: auto;
   grid-area: main;
   background-color: var(--background-color);
   color: var(--text-color);
+  margin-top: 4rem;
+  min-height: calc(100vh - 4rem);
 }
 
 .ds-sidebar {
   grid-area: side;
   min-height: 100vh;
   background-color: var(--sidebar-color);
-  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   row-gap: 3rem;
-  width: 250px;
   color: var(--text-color);
+  position: fixed;
+  width: 250px;
+  top: 4rem;
+  overflow-y: auto;
 }
 
 .ds-sidebar * > li {
