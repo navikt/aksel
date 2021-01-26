@@ -1,108 +1,33 @@
-import React, { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
-import { Link } from "gatsby";
-import cl from "classnames";
-import { NAVLogoWhite, GithubLogoEm } from "../../assets/images/svg";
-import { useBetaMenu } from "../../../useSiteStructure";
-import Example from "../../example/Example";
-import Codeblock, { InlineCode } from "../../code/Code";
-import { Heading, InternalHeader, Paragraph } from "@navikt/ds-react";
-import { Expand, Hamburger, Close } from "@navikt/ds-icons";
-
-import "./layout.css";
-import "./theme.css";
 import "@navikt/ds-css/accordion/index.css";
+import { Close, Hamburger } from "@navikt/ds-icons";
+import { Heading, InternalHeader, Paragraph } from "@navikt/ds-react";
+import cl from "classnames";
+import { Link } from "gatsby";
+import React, { useEffect, useState } from "react";
+import { GithubLogoEm, NAVLogoWhite } from "../../assets/images/svg";
+import Codeblock, { InlineCode } from "../../code/Code";
+import Example from "../../example/Example";
+import "./layout.css";
+import { Sidebar } from "./Sidebar";
+import "./theme.css";
 
-const SubMenu = (props) => {
-  const [expanded, setExpanded] = useState(false);
-  return (
-    <>
-      <button
-        className="ds-sidebar__button"
-        onClick={() => setExpanded(!expanded)}
-        aria-expanded={expanded}
-      >
-        {props.title}
-        <Expand
-          className={cl(
-            "navds-accordion__chevron",
-            `navds-accordion__chevron--${expanded ? "up" : "down"}`,
-            "ds-sidebar__chevron"
-          )}
-        />
-      </button>
-      <ul
-        className={cl("ds-sidebar__submenu", {
-          "ds-sidebar__submenu--hidden": !expanded,
-        })}
-      >
-        {props.children.map((props) => (
-          <li key={props.title}>
-            {
-              <Link
-                to={props.link}
-                className="ds-sidebar__submenu--item"
-                activeClassName="active"
-              >
-                {props.title}
-              </Link>
-            }
-          </li>
-        ))}
-      </ul>
-    </>
-  );
-};
-
-const Menu = () => {
-  const menu = useBetaMenu();
-
-  return (
-    <nav>
-      <ul className="ds-sidebar__menu">
-        {menu.map((props) => (
-          <li key={props.title}>
-            {props.children ? (
-              <SubMenu {...props} />
-            ) : (
-              <Link
-                to={props.link}
-                className="ds-sidebar__button"
-                activeClassName="active"
-              >
-                {props.title}
-                <Expand
-                  className={cl(
-                    "navds-accordion__chevron",
-                    "ds-sidebar__chevron",
-                    "ds-sidebar__chevron--right"
-                  )}
-                />
-              </Link>
-            )}
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
-const Sidebar = () => (
-  <div className="ds-sidebar">
-    <Menu />
-  </div>
-);
-
-const Header = ({ onClick }) => {
+const Header = ({ onClick, open, onOpenSidebar }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const handleClick = () => {
+    onOpenSidebar(!sidebarOpen);
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  useEffect(() => {
+    setSidebarOpen(open);
+  }, [open]);
 
   return (
     <InternalHeader className="ds-header">
       <div className="ds-header__title--wrapper">
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="ds-header__hamburger"
-        >
+        <button onClick={() => handleClick()} className="ds-header__hamburger">
           {sidebarOpen ? <Close /> : <Hamburger />}
         </button>
         <Link to="/beta/" className="ds-header__title">
@@ -140,6 +65,7 @@ const BlockHeading = ({ children, ...props }) => {
 
 const BetaLayout = (props) => {
   const [darkmode, setDarkmode] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
     <div
@@ -148,8 +74,12 @@ const BetaLayout = (props) => {
         "ds-darkmode": darkmode,
       })}
     >
-      <Header onClick={() => setDarkmode(!darkmode)} />
-      <Sidebar />
+      <Header
+        onOpenSidebar={(e) => setSidebarOpen(e)}
+        open={sidebarOpen}
+        onClick={() => setDarkmode(!darkmode)}
+      />
+      <Sidebar open={sidebarOpen} onOpenChange={(e) => setSidebarOpen(e)} />
       <main className="ds-content">
         <MDXProvider
           components={{
