@@ -43,14 +43,14 @@
   fill: white;
   padding: 0 1rem 0 1rem;
   font-size: 2rem;
-  transition: background-color 150ms;
+  transition: background-color 100ms;
   display: flex;
   align-items: center;
 }
 
 .ds-header__title:hover,
 .ds-header__link:hover {
-  background-color: var(--navds-color-gray-60);
+  background-color: var(--header-background-active);
 }
 
 .ds-header__title:focus,
@@ -79,6 +79,19 @@
   min-height: calc(100vh - 4rem);
 }
 
+.ds-content--heading {
+  background-color: var(--heading-block-background);
+  color: var(--text-color-inverse);
+  width: 100%;
+  height: 10rem;
+  outline: 1rem solid var(--heading-block-background);
+  margin-bottom: 4rem;
+  text-align: bottom;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 .ds-sidebar {
   grid-area: side;
   min-height: 100vh;
@@ -91,6 +104,7 @@
   width: 250px;
   top: 4rem;
   overflow-y: auto;
+  border-right: var(--sidebar-divider);
 }
 
 .ds-sidebar * > li {
@@ -110,7 +124,8 @@
 .ds-sidebar__menu {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: 2rem 0 0 0;
+  margin: 0;
 }
 
 .ds-sidebar__menu-item.active {
@@ -163,6 +178,16 @@
 
 .ds-sidebar__chevron--right {
   transform: rotateZ(-90deg);
+}
+
+.ds-sidebar__button,
+.ds-sidebar__submenu--item {
+  background-color: transparent;
+  outline-width: 0px;
+  outline-offset: 0px;
+  transition: background-color 100ms;
+  transition: outline-width 100ms;
+  transition: outline-offset 100ms;
 }
 
 .ds-sidebar__button:hover,

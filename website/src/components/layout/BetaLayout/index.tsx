@@ -117,6 +117,16 @@ const Header = ({ onClick }) => (
   </InternalHeader>
 );
 
+const BlockHeading = ({ children, ...props }) => {
+  return (
+    <div className="ds-content--heading">
+      <Heading {...props} level={1} size="xxl">
+        {children}
+      </Heading>
+    </div>
+  );
+};
+
 const BetaLayout = (props) => {
   const [darkmode, setDarkmode] = useState(false);
 
@@ -135,7 +145,7 @@ const BetaLayout = (props) => {
             code: (props) => <Codeblock {...props} />,
             inlineCode: (props) => <InlineCode {...props} />,
             Example,
-            h1: (props) => <Heading {...props} level={1} size="xxl" />,
+            h1: (props) => <BlockHeading {...props} />,
             h2: (props) => <Heading {...props} level={2} size="xl" />,
             h3: (props) => <Heading {...props} level={3} size="large" />,
             h4: (props) => <Heading {...props} level={4} size="medium" />,
