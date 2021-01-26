@@ -1,0 +1,16 @@
+.ds-darkmode {
+  --background-color: rgb(77, 77, 78);
+  --header-color: rgb(55, 54, 58);
+  --sidebar-color: rgb(55, 54, 58);
+  --text-color: var(--navds-color-text-inverse);
+  --menu-background-active: rgb(105, 105, 105);
+  --focus-outline: 2px solid #fff;
+}
+.ds-lightmode {
+  --background-color: #fff;
+  --sidebar-color: #f1f1f1;
+  --header-color: rgb(55, 54, 58);
+  --text-color: var(--navds-color-text-primary);
+  --menu-background-active: #dddddd;
+  --focus-outline: 2px solid var(--navds-color-action-default);
+}

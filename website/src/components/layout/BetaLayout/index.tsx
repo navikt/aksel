@@ -1,89 +1,153 @@
-import React from "react";
+import React, { useState } from "react";
 import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
-import { NAVLogo } from "../../assets/images/svg";
+import cl from "classnames";
+import { NAVLogoWhite, GithubLogoEm } from "../../assets/images/svg";
 import { useBetaMenu } from "../../../useSiteStructure";
 import Example from "../../example/Example";
 import Codeblock, { InlineCode } from "../../code/Code";
-import { Heading, Paragraph } from "@navikt/ds-react";
-import "./layout.css";
+import { Heading, InternalHeader, Paragraph } from "@navikt/ds-react";
+import { Expand } from "@navikt/ds-icons";
 
-const SubMenu = (props) => (
-  <>
-    <div>{props.title}</div>
-    <ul>
-      {props.children.map((props) => (
-        <li key={props.title}>
-          {
-            <Link
-              to={props.link}
-              className="sidebar__menu-item"
-              activeClassName="active"
-            >
-              {props.title}
-            </Link>
-          }
-        </li>
-      ))}
-    </ul>
-  </>
-);
+import "./layout.css";
+import "./theme.css";
+import "@navikt/ds-css/accordion/index.css";
+
+const SubMenu = (props) => {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <>
+      <button
+        className="ds-sidebar__button"
+        onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
+      >
+        {props.title}
+        <Expand
+          className={cl(
+            "navds-accordion__chevron",
+            `navds-accordion__chevron--${expanded ? "up" : "down"}`,
+            "ds-sidebar__chevron"
+          )}
+        />
+      </button>
+      <ul
+        className={cl("ds-sidebar__submenu", {
+          "ds-sidebar__submenu--hidden": !expanded,
+        })}
+      >
+        {props.children.map((props) => (
+          <li key={props.title}>
+            {
+              <Link
+                to={props.link}
+                className="ds-sidebar__submenu--item"
+                activeClassName="active"
+              >
+                {props.title}
+              </Link>
+            }
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
 const Menu = () => {
   const menu = useBetaMenu();
 
+  console.log(menu);
   return (
-    <ul className="sidebar__menu">
-      {menu.map((props) => (
-        <li key={props.title}>
-          {props.children ? (
-            <SubMenu {...props} />
-          ) : (
-            <Link
-              to={props.link}
-              className="sidebar__menu-item"
-              activeClassName="active"
-            >
-              {props.title}
-            </Link>
-          )}
-        </li>
-      ))}
-    </ul>
+    <nav>
+      <ul className="ds-sidebar__menu">
+        {menu.map((props) => (
+          <li key={props.title}>
+            {props.children ? (
+              <SubMenu {...props} />
+            ) : (
+              <Link
+                to={props.link}
+                className="ds-sidebar__button"
+                activeClassName="active"
+              >
+                {props.title}
+                <Expand
+                  className={cl(
+                    "navds-accordion__chevron",
+                    "ds-sidebar__chevron",
+                    "ds-sidebar__chevron--right"
+                  )}
+                />
+              </Link>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
 const Sidebar = () => (
-  <div className="sidebar">
-    <Link to="/beta" className="sidebar__logo">
-      <NAVLogo />
-      <span>Designsystemet (beta)</span>
-    </Link>
+  <div className="ds-sidebar">
     <Menu />
   </div>
 );
 
-const BetaLayout = (props) => (
-  <div className="page-wrapper">
-    <Sidebar />
-    <div className="content">
-      <MDXProvider
-        components={{
-          code: (props) => <Codeblock {...props} />,
-          inlineCode: (props) => <InlineCode {...props} />,
-          Example,
-          h1: (props) => <Heading {...props} level={1} size="xxl" />,
-          h2: (props) => <Heading {...props} level={2} size="xl" />,
-          h3: (props) => <Heading {...props} level={3} size="large" />,
-          h4: (props) => <Heading {...props} level={4} size="medium" />,
-          h5: (props) => <Heading {...props} level={5} size="small" />,
-          p: (props) => <Paragraph {...props} />,
-        }}
+const Header = ({ onClick }) => (
+  <InternalHeader className="ds-header">
+    <Link to="/beta/" className="ds-header__title">
+      <NAVLogoWhite />
+      <span>NAV Design System (beta)</span>
+    </Link>
+    <div className="ds-header--right">
+      <input
+        onChange={() => onClick()}
+        className="ds-header-darkswitch"
+        type="checkbox"
+      />
+      <a
+        href="https://github.com/navikt/nav-frontend-moduler"
+        className="ds-header__link ds-header__link--right"
+        aria-label="Github lenke"
       >
-        {props.children}
-      </MDXProvider>
+        <GithubLogoEm />
+      </a>
     </div>
-  </div>
+  </InternalHeader>
 );
+
+const BetaLayout = (props) => {
+  const [darkmode, setDarkmode] = useState(false);
+
+  return (
+    <div
+      className={cl("ds-page-wrapper", {
+        "ds-lightmode": !darkmode,
+        "ds-darkmode": darkmode,
+      })}
+    >
+      <Header onClick={() => setDarkmode(!darkmode)} />
+      <Sidebar />
+      <div className="ds-content">
+        <MDXProvider
+          components={{
+            code: (props) => <Codeblock {...props} />,
+            inlineCode: (props) => <InlineCode {...props} />,
+            Example,
+            h1: (props) => <Heading {...props} level={1} size="xxl" />,
+            h2: (props) => <Heading {...props} level={2} size="xl" />,
+            h3: (props) => <Heading {...props} level={3} size="large" />,
+            h4: (props) => <Heading {...props} level={4} size="medium" />,
+            h5: (props) => <Heading {...props} level={5} size="small" />,
+            p: (props) => <Paragraph {...props} />,
+          }}
+        >
+          {props.children}
+        </MDXProvider>
+      </div>
+    </div>
+  );
+};
 
 export default BetaLayout;
