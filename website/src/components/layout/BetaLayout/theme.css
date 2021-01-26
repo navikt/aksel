@@ -9,6 +9,7 @@
   --header-background-active: #3c4b58;
   --focus-outline: 2px solid #fff;
   --sidebar-divider: 2px solid #3c4b58;
+  --header-divider: 1px solid #3c4b58;
 }
 .ds-lightmode {
   --background-color: #fff;
@@ -21,4 +22,5 @@
   --menu-background-active: #e6e6e6;
   --focus-outline: 2px solid #1a2026;
   --sidebar-divider: 1px solid #3c4b58;
+  --header-divider: 1px solid #3c4b58;
 }

@@ -7,7 +7,7 @@ import { useBetaMenu } from "../../../useSiteStructure";
 import Example from "../../example/Example";
 import Codeblock, { InlineCode } from "../../code/Code";
 import { Heading, InternalHeader, Paragraph } from "@navikt/ds-react";
-import { Expand } from "@navikt/ds-icons";
+import { Expand, Hamburger, Close } from "@navikt/ds-icons";
 
 import "./layout.css";
 import "./theme.css";
@@ -57,7 +57,6 @@ const SubMenu = (props) => {
 const Menu = () => {
   const menu = useBetaMenu();
 
-  console.log(menu);
   return (
     <nav>
       <ul className="ds-sidebar__menu">
@@ -94,28 +93,40 @@ const Sidebar = () => (
   </div>
 );
 
-const Header = ({ onClick }) => (
-  <InternalHeader className="ds-header">
-    <Link to="/beta/" className="ds-header__title">
-      <NAVLogoWhite />
-      <span>NAV Design System (beta)</span>
-    </Link>
-    <div className="ds-header--right">
-      <input
-        onChange={() => onClick()}
-        className="ds-header-darkswitch"
-        type="checkbox"
-      />
-      <a
-        href="https://github.com/navikt/nav-frontend-moduler"
-        className="ds-header__link ds-header__link--right"
-        aria-label="Github lenke"
-      >
-        <GithubLogoEm />
-      </a>
-    </div>
-  </InternalHeader>
-);
+const Header = ({ onClick }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  return (
+    <InternalHeader className="ds-header">
+      <div className="ds-header__title--wrapper">
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="ds-header__hamburger"
+        >
+          {sidebarOpen ? <Close /> : <Hamburger />}
+        </button>
+        <Link to="/beta/" className="ds-header__title">
+          <NAVLogoWhite />
+          <span>NAV Design System (beta)</span>
+        </Link>
+      </div>
+      <div className="ds-header--right">
+        <input
+          onChange={() => onClick()}
+          className="ds-header-darkswitch"
+          type="checkbox"
+        />
+        <a
+          href="https://github.com/navikt/nav-frontend-moduler"
+          className="ds-header__link ds-header__link--right"
+          aria-label="Github lenke"
+        >
+          <GithubLogoEm />
+        </a>
+      </div>
+    </InternalHeader>
+  );
+};
 
 const BlockHeading = ({ children, ...props }) => {
   return (
