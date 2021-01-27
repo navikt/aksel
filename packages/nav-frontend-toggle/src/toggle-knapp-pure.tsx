@@ -12,7 +12,8 @@ const knappCls = (props) =>
     "toggleKnapp--kompakt": props.kompakt,
   });
 
-export interface ToggleKnappPureProps {
+export interface ToggleKnappPureProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Content
    */

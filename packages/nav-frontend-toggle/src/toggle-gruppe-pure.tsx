@@ -10,7 +10,8 @@ import ToggleKnappPure, {
 
 import "nav-frontend-toggle-style";
 
-export interface ToggleGruppePureProps {
+export interface ToggleGruppePureProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Array av toggle knapper, se `toggle-knapp-pure.tsx`
    */
