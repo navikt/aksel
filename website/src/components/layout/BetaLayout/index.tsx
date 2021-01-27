@@ -31,10 +31,13 @@ const Header = ({ onClick, open, onOpenSidebar }) => {
           {sidebarOpen ? <Close /> : <Hamburger />}
         </button>
         <Link to="/beta/" className="ds-header__title">
-          <NAVLogoWhite />
-          <span>NAV Design System (beta)</span>
+          {/* <NAVLogoWhite /> */}
+          <span>NAV Design System v2</span>
         </Link>
       </div>
+      <span className="ds-header__logo">
+        <NAVLogoWhite />
+      </span>
       <div className="ds-header--right">
         <input
           onChange={() => onClick()}
