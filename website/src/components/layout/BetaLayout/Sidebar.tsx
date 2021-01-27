@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import cl from "classnames";
 import { useMediaQuery } from "react-responsive";
 import "./layout.css";
@@ -9,6 +9,8 @@ import "@navikt/ds-css/accordion/index.css";
 
 export const Sidebar = ({ open, onOpenChange }) => {
   const [mobile, setMobile] = useState(false);
+  const overlayRef = useRef(null);
+  const sidebarRef = useRef(null);
 
   const small = useMediaQuery({
     query: "(max-width: 960px)",
@@ -23,19 +25,34 @@ export const Sidebar = ({ open, onOpenChange }) => {
     }
   };
 
-  const ariaHidden = mobile ? { "aria-hidden": !!open } : undefined;
+  const handleClick = (e) => {
+    if (
+      open &&
+      e.target !== sidebarRef.current &&
+      !sidebarRef.current.contains(e.target)
+    ) {
+      onOpenChange(false);
+    }
+  };
+
+  const hidden = mobile && !open;
 
   checkViewport();
   return (
-    <div className={cl({ "ds-sidebar--overlay": open })}>
+    <div
+      onClick={(e) => handleClick(e)}
+      ref={overlayRef}
+      className={cl({ "ds-sidebar--overlay": open })}
+    >
       <div
+        ref={sidebarRef}
         className={cl({
           "ds-sidebar": !open && !mobile,
           "ds-sidebar__mobile": mobile,
           "ds-sidebar__mobile--open": open,
         })}
       >
-        <Menu />
+        <Menu hidden={hidden} />
       </div>
     </div>
   );

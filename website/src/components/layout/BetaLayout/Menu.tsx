@@ -7,7 +7,7 @@ import { useBetaMenu } from "../../../useSiteStructure";
 import "./layout.css";
 import "./theme.css";
 
-export const SubMenu = (props) => {
+export const SubMenu = ({ hidden, ...props }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <>
@@ -15,6 +15,8 @@ export const SubMenu = (props) => {
         className="ds-sidebar__button"
         onClick={() => setExpanded(!expanded)}
         aria-expanded={expanded}
+        tabIndex={hidden ? -1 : 0}
+        aria-label={props.title}
       >
         {props.title}
         <Expand
@@ -23,6 +25,7 @@ export const SubMenu = (props) => {
             `navds-accordion__chevron--${expanded ? "up" : "down"}`,
             "ds-sidebar__chevron"
           )}
+          focusable="false"
         />
       </button>
       <ul
@@ -37,6 +40,7 @@ export const SubMenu = (props) => {
                 to={props.link}
                 className="ds-sidebar__submenu--item"
                 activeClassName="active"
+                tabIndex={hidden ? -1 : 0}
               >
                 {props.title}
               </Link>
@@ -48,8 +52,8 @@ export const SubMenu = (props) => {
   );
 };
 
-export const Menu = forwardRef<HTMLElement, {}>(
-  ({ children, ...rest }, ref) => {
+export const Menu = forwardRef<HTMLElement, { hidden: boolean }>(
+  ({ children, hidden, ...rest }, ref) => {
     const menu = useBetaMenu();
 
     return (
@@ -58,12 +62,14 @@ export const Menu = forwardRef<HTMLElement, {}>(
           {menu.map((props) => (
             <li key={props.title}>
               {props.children ? (
-                <SubMenu {...props} />
+                <SubMenu {...props} hidden={hidden} />
               ) : (
                 <Link
                   to={props.link}
                   className="ds-sidebar__button"
                   activeClassName="active"
+                  tabIndex={hidden ? -1 : 0}
+                  aria-label={props.title}
                 >
                   {props.title}
                   <Expand
@@ -72,6 +78,7 @@ export const Menu = forwardRef<HTMLElement, {}>(
                       "ds-sidebar__chevron",
                       "ds-sidebar__chevron--right"
                     )}
+                    focusable="false"
                   />
                 </Link>
               )}
