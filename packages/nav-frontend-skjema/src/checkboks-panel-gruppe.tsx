@@ -4,7 +4,9 @@ import { CheckboksPanel, CheckboksPanelProps, SkjemaGruppe } from ".";
 import "nav-frontend-skjema-style";
 import { guid } from "nav-frontend-js-utils";
 import classNames from "classnames";
-export interface CheckboksPanelGruppeProps {
+
+export interface CheckboksPanelGruppeProps
+  extends React.HTMLAttributes<HTMLElement> {
   /**
    * Array av checkbokser
    */
