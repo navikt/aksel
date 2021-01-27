@@ -1,11 +1,17 @@
-import React, { forwardRef, useCallback, useEffect, useRef } from "react";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+} from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import "@navikt/ds-css/popover/index.css";
 
-export interface PopoverProps {
+export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Element that popover will anchor to
    */
