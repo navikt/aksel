@@ -6,11 +6,11 @@ import { Expand } from "@navikt/ds-icons";
 import "@navikt/ds-css/accordion/index.css";
 import { guid } from "nav-frontend-js-utils";
 
-export interface AccordionProps {
+export interface AccordionProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  title: React.ReactNode;
+  headline: React.ReactNode;
   open?: boolean;
-  onClick?: (event: React.SyntheticEvent<HTMLButtonElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   className?: string;
   renderContentWhenClosed?: boolean;
 }
@@ -19,7 +19,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
-      title,
+      headline,
       open = false,
       className,
       renderContentWhenClosed = false,
@@ -56,7 +56,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
-          <span className="navds-accordion__title">{title}</span>
+          <span className="navds-accordion__title">{headline}</span>
           <Expand
             className={cl(
               "navds-accordion__chevron",
