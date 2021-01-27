@@ -1,8 +1,8 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import "@navikt/ds-css/tag/index.css";
 
-export interface TagProps {
+export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   /**
    * Changes background-color and border-color
