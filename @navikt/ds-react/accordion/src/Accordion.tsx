@@ -6,7 +6,8 @@ import { Expand } from "@navikt/ds-icons";
 import "@navikt/ds-css/accordion/index.css";
 import { guid } from "nav-frontend-js-utils";
 
-export interface AccordionProps extends React.HTMLAttributes<HTMLElement> {
+export interface AccordionProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   headline: React.ReactNode;
   open?: boolean;
