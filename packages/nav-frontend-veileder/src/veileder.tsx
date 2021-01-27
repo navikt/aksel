@@ -51,7 +51,7 @@ const snakkebobleCls = (props) =>
     "nav-veileder__snakkeboble--venstre": props.posisjon === "venstre",
   });
 
-export interface VeilederProps {
+export interface VeilederProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Custom SVG-element som illustrerer en figur, f.eks. en av disse:
    * https://app.zeplin.io/project/59831e455850985791bdeb4d/screen/5a7c1fcc36781f9423ab6a0e
