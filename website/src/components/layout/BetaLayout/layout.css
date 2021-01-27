@@ -111,6 +111,7 @@
   margin-top: 3rem;
   min-height: calc(100vh - 3rem);
 }
+
 .ds-content {
   outline: none;
 }
@@ -187,6 +188,7 @@
   display: block;
   padding: 0;
 }
+
 .ds-sidebar__submenu--hidden {
   visibility: hidden;
   max-height: 0px;
@@ -243,6 +245,7 @@
 .ds-sidebar__submenu--item:hover {
   background-color: var(--menu-background-active);
 }
+
 .ds-sidebar__button:focus,
 .ds-sidebar__submenu--item:focus {
   background-color: var(--menu-background-active);
