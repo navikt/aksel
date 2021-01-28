@@ -33,7 +33,7 @@
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
-    "react-modal": "3.11.2",
+    "react-modal": "3.12.1",
     "react-popper": "^2.2.4"
   },
   "peerDependencies": {

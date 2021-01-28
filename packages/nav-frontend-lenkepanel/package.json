@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel",
-  "version": "1.0.67",
+  "version": "1.0.69",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -19,7 +19,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-lenkepanel-style": "^0.3.47",
-    "nav-frontend-typografi": "^2.0.39",
+    "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
@@ -28,7 +28,7 @@
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
     "nav-frontend-lenkepanel-style": "^0.3.47",
-    "nav-frontend-typografi": "^2.0.39",
+    "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },

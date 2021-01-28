@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tekstomrade",
-  "version": "2.0.68",
+  "version": "2.0.70",
   "main": "lib/tekstomrade.js",
   "types": "lib/tekstomrade.d.ts",
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "nav-frontend-lenker": "^1.0.56",
-    "nav-frontend-typografi": "^2.0.39",
+    "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "nav-frontend-lenker": "^1.0.56",
-    "nav-frontend-typografi": "^2.0.39",
+    "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.2 || ^16.0.0"
   },

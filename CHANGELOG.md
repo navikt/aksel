@@ -1,6 +1,29 @@
 # Endringslogg
 
-> **Obs!** Denne endringsloggen blir manuelt og uregelmessig oppdatert, og er hovedsakelig ment som en grov retrospektiv oppsummering for både tekniske og ikke-tekniske lesere. Det kan dermed ta en stund før publiserte endringer blir loggført her. For å se de siste faktiske endringene kan du ta en titt på [commit-historikken](https://github.com/navikt/nav-frontend-moduler/commits/master), [PR-historikken](https://github.com/navikt/nav-frontend-moduler/pulls?q=is%3Apr+is%3Aclosed) og/eller [release-oversikten](https://github.com/navikt/nav-frontend-moduler/releases) for NPM-pakkene våre.
+## 25. Januar 2021
+
+### Fjernet komponenten EtikettLiten
+
+[#956](https://github.com/navikt/nav-frontend-moduler/pull/956)
+
+- `Undertekst` kan brukes som erstatning da begge har samme styling.
+- Dette fører til en major bump fra v2 -> v3 for `nav-frontend-typografi`
+
+### Element for sortering av tabell endres
+
+[#893](https://github.com/navikt/nav-frontend-moduler/pull/893)
+
+- ✅ `<button aria-label="Sorter column synkende">`
+- ❌ `<Lenke href="#">`
+
+- Hover og fokusmarkering for element er endret, samt plassering av chevron [Eksempel](https://design.nav.no/components/tabell#sorterbar-tabell)
+
+Hvordan ta i bruk oppdateringen:
+
+- Oppdater `nav-frontend-tabell-styles` til v1.0.0
+- Legge til pakken `nav-frontend-knapper-style` som nå er en dependency.
+- Endre all bruk av `<Lenke>` i sortert tabell til `<button>`. Kan være lurt å lese de nye punktene her [tabell-UU](https://design.nav.no/components/tabell/accessibility) også da.
+- Sikre at prosjektet ditt kan håndtere SVG, da chevrons nå er svg og ikke css. Create-react-app gjør dette selv. Om du bruker webpack er dette den mest vanlige løsningen: [npmjs @svgr/webpack](https://www.npmjs.com/package/@svgr/webpack). Om du bruker VUE er dette en potensiell løsning [npmjs vue-svg-loader](https://www.npmjs.com/package/vue-svg-loader)
 
 ## 08. Januar 2021
 

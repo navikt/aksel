@@ -6,9 +6,11 @@
   align-items: center;
   gap: 0.25rem;
 }
+
 .navds-link:hover {
   text-decoration: none;
 }
+
 .navds-link:focus {
   outline: none;
   color: var(--navds-color-text-inverse);
@@ -16,6 +18,7 @@
   background-color: var(--navds-text-focus);
   box-shadow: var(--navds-text-shadow);
 }
+
 .navds-link:active {
   outline: none;
   color: var(--navds-color-text-inverse);
@@ -23,9 +26,11 @@
   background-color: var(--navds-text-focus);
   box-shadow: var(--navds-text-shadow);
 }
+
 .navds-link svg {
   color: var(--navds-color-text-link);
 }
+
 .navds-link:focus svg {
   color: var(--navds-color-text-inverse);
 }

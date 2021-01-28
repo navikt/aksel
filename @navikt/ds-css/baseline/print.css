@@ -10,6 +10,7 @@
   *::after {
     background: #fff !important;
     color: #000 !important;
+
     /* Black prints faster */
     box-shadow: none !important;
     text-shadow: none !important;

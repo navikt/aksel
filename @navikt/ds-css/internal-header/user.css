@@ -1,0 +1,22 @@
+.navds-header__user {
+  color: var(--navds-color-text-inverse);
+  padding: 0 1.5rem 0 1.5rem;
+  margin-left: auto;
+  border-left: 1px solid var(--navds-color-gray-40);
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+}
+
+.navds-header__name {
+  margin-right: 1rem;
+  font-size: var(--navds-font-size-small);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-small);
+}
+
+.navds-header__ident {
+  font-size: var(--navds-font-size-xs);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-xs);
+}

@@ -31,7 +31,7 @@ function createConfig(moduleName, edges) {
   };
 }
 
-glob("./packages/node_modules/**/package.json", { dot: true }, (err, files) => {
+glob("./packages/**/package.json", { dot: true }, (err, files) => {
   const pkgs = files.map((file) => JSON.parse(fs.readFileSync(file, "utf-8")));
 
   const edges = pkgs
@@ -47,14 +47,7 @@ glob("./packages/node_modules/**/package.json", { dot: true }, (err, files) => {
   pkgs.forEach((pkg) => {
     const pkgName = pkg.name;
     const config = createConfig(pkgName, edges);
-    const MD = path.join(
-      __dirname,
-      "..",
-      "packages",
-      "node_modules",
-      pkgName,
-      "README.md"
-    );
+    const MD = path.join(__dirname, "../..", "packages", pkgName, "README.md");
     // eslint-disable-next-line no-console
     markdownMagic(MD, config, (error) => error && console.log("err", error));
   });

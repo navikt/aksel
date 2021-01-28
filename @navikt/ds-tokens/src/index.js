@@ -149,6 +149,7 @@ module.exports = {
     },
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
+      "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
       hover: { value: "{navds.color.hover.value} 0 2px 1px 0" },
     },
     text: {
@@ -160,6 +161,10 @@ module.exports = {
         modal: {
           content: { value: "1010" },
           overlay: { value: "1000" },
+        },
+        popover: {
+          default: { value: "2000" },
+          arrow: { value: "-1" },
         },
       },
     },
