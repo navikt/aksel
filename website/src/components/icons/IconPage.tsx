@@ -52,15 +52,10 @@ const IconPage = () => {
           case 0:
             break;
           case 1:
-            icon.visible = !(
-              icon.name.endsWith("Filled") || icon.name.endsWith("Solid")
-            );
+            icon.visible = !icon.name.endsWith("Filled");
             break;
           case 2:
             icon.visible = icon.name.endsWith("Filled");
-            break;
-          case 3:
-            icon.visible = icon.name.endsWith("Solid");
             break;
           default:
             break;
@@ -202,16 +197,6 @@ const IconPage = () => {
           label="Filled"
           aria-label={
             checkedBox === 2 ? "Vis alle ikoner" : "Vis bare filled ikoner"
-          }
-        />
-        <Checkbox
-          checked={checkedBox === 3}
-          onChange={() => {
-            checkedBox === 3 ? setCheckedBox(0) : setCheckedBox(3);
-          }}
-          label="Solid"
-          aria-label={
-            checkedBox === 3 ? "Vis alle ikoner" : "Vis bare solid ikoner"
           }
         />
       </span>
