@@ -25,7 +25,7 @@ export const Header = ({ onClick, open, onOpenSidebar }) => {
 
   useEffect(() => {
     if (prevOpen.current && !open) {
-      buttonRef.current.focus();
+      //buttonRef.current.focus();
     }
     prevOpen.current = open;
   }, [open]);

@@ -3,7 +3,7 @@ import "@navikt/ds-css/accordion/index.css";
 import "@navikt/ds-css/baseline/utility.css";
 import { Heading, Paragraph } from "@navikt/ds-react";
 import cl from "classnames";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Codeblock, { InlineCode } from "../../code/Code";
 import Example from "../../example/Example";
@@ -15,6 +15,10 @@ import "./theme.css";
 const BetaLayout = (props) => {
   const [darkmode, setDarkmode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    document.getElementById("gatsby-focus-wrapper").focus();
+  }, [sidebarOpen]);
 
   return (
     <>
