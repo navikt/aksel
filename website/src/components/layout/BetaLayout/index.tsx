@@ -12,16 +12,6 @@ import "./layout.css";
 import { Sidebar } from "./Sidebar";
 import "./theme.css";
 
-const BlockHeading = ({ children, ...props }) => {
-  return (
-    <div className="ds-content--heading">
-      <Heading {...props} level={1} size="xxl">
-        {children}
-      </Heading>
-    </div>
-  );
-};
-
 const BetaLayout = (props) => {
   const [darkmode, setDarkmode] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -40,6 +30,7 @@ const BetaLayout = (props) => {
           />
         )}
       </Helmet>
+
       <div
         className={cl("ds-page-wrapper", {
           "ds-lightmode": !darkmode,
@@ -51,14 +42,17 @@ const BetaLayout = (props) => {
           open={sidebarOpen}
           onClick={() => setDarkmode(!darkmode)}
         />
-        <Sidebar open={sidebarOpen} onOpenChange={(e) => setSidebarOpen(e)} />
-        <main tabIndex={-1} className="ds-content" id="hovedinnhold">
+        <Sidebar
+          open={sidebarOpen}
+          closeSidebar={() => setSidebarOpen(false)}
+        />
+        <main className="ds-content" id="hovedinnhold">
           <MDXProvider
             components={{
               code: (props) => <Codeblock {...props} />,
               inlineCode: (props) => <InlineCode {...props} />,
               Example,
-              h1: (props) => <BlockHeading {...props} />,
+              h1: (props) => <Heading {...props} level={1} size="xxl" />,
               h2: (props) => <Heading {...props} level={2} size="xl" />,
               h3: (props) => <Heading {...props} level={3} size="large" />,
               h4: (props) => <Heading {...props} level={4} size="medium" />,

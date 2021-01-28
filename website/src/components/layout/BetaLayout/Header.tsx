@@ -1,9 +1,9 @@
+import React, { useEffect, useState, useRef } from "react";
 import "@navikt/ds-css/accordion/index.css";
 import "@navikt/ds-css/baseline/utility.css";
 import { Close, Hamburger } from "@navikt/ds-icons";
 import { InternalHeader } from "@navikt/ds-react";
 import { Link } from "gatsby";
-import React, { useEffect, useState } from "react";
 import { GithubLogoEm, NAVLogoWhite } from "../../assets/images/svg";
 import "./layout.css";
 import "./theme.css";
@@ -20,6 +20,16 @@ export const Header = ({ onClick, open, onOpenSidebar }) => {
     setSidebarOpen(open);
   }, [open]);
 
+  const buttonRef = useRef(null);
+  const prevOpen = useRef(open);
+
+  useEffect(() => {
+    if (prevOpen.current && !open) {
+      buttonRef.current.focus();
+    }
+    prevOpen.current = open;
+  }, [open]);
+
   return (
     <>
       <a href="#hovedinnhold" id="skip-link-v2" className="sr-only">
@@ -28,17 +38,12 @@ export const Header = ({ onClick, open, onOpenSidebar }) => {
       <InternalHeader className="ds-header">
         <div className="ds-header__title--wrapper">
           <button
-            aria-label={
-              sidebarOpen ? "Lukk sidenavigasjon" : "Åpne sidenavigasjon"
-            }
+            aria-label="Åpne sidenavigasjon"
             onClick={() => handleClick()}
-            className="ds-header__hamburger"
+            className="ds-header__icon ds-header__icon--slideIn"
+            ref={buttonRef}
           >
-            {sidebarOpen ? (
-              <Close focusable="false" aria-label="Lukk ikon" />
-            ) : (
-              <Hamburger focusable="false" aria-label="Hamburger ikon" />
-            )}
+            <Hamburger focusable="false" aria-label="Hamburger ikon" />
           </button>
           <Link to="/beta/" className="ds-header__title">
             {/* <NAVLogoWhite /> */}

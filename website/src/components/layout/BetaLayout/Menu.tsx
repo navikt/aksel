@@ -72,14 +72,6 @@ export const Menu = forwardRef<HTMLElement, { hidden: boolean }>(
                   aria-label={props.title}
                 >
                   {props.title}
-                  <Expand
-                    className={cl(
-                      "navds-accordion__chevron",
-                      "ds-sidebar__chevron",
-                      "ds-sidebar__chevron--right"
-                    )}
-                    focusable="false"
-                  />
                 </Link>
               )}
             </li>

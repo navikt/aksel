@@ -1,59 +1,62 @@
-import React, { useRef, useState } from "react";
+import "@navikt/ds-css/accordion/index.css";
+import "@navikt/ds-css/baseline/utility.css";
+import { Close } from "@navikt/ds-icons";
 import cl from "classnames";
+import { default as React, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
+import useKeypress from "react-use-keypress";
 import "./layout.css";
 import { Menu } from "./Menu";
-
 import "./theme.css";
-import "@navikt/ds-css/accordion/index.css";
 
-export const Sidebar = ({ open, onOpenChange }) => {
-  const [mobile, setMobile] = useState(false);
-  const overlayRef = useRef(null);
-  const sidebarRef = useRef(null);
-
+export const Sidebar = ({ open, closeSidebar }) => {
+  const [openButton, setOpenButton] = useState(open);
   const small = useMediaQuery({
     query: "(max-width: 960px)",
   });
 
-  const checkViewport = () => {
-    if (small && !mobile) {
-      setMobile(true);
-    } else if (!small && mobile) {
-      setMobile(false);
-      onOpenChange(false);
+  useKeypress("Escape", () => {
+    closeSidebar();
+  });
+
+  useEffect(() => {
+    if (!open) {
+      setTimeout(() => {
+        setOpenButton(false);
+      }, 150);
+    } else {
+      setOpenButton(true);
     }
-  };
+  }, [open]);
 
-  const handleClick = (e) => {
-    if (
-      open &&
-      e.target !== sidebarRef.current &&
-      !sidebarRef.current.contains(e.target)
-    ) {
-      onOpenChange(false);
-    }
-  };
-
-  const hidden = mobile && !open;
-
-  checkViewport();
   return (
-    <div
-      onClick={(e) => handleClick(e)}
-      ref={overlayRef}
-      className={cl({ "ds-sidebar--overlay": open })}
-    >
+    <>
+      {openButton && small && (
+        <div
+          onClick={closeSidebar}
+          className={cl("ds-sidebar--overlay", {
+            "ds-sidebar--overlay--fade": open,
+          })}
+        />
+      )}
       <div
-        ref={sidebarRef}
-        className={cl({
-          "ds-sidebar": !open && !mobile,
-          "ds-sidebar__mobile": mobile,
-          "ds-sidebar__mobile--open": open,
+        className={cl("ds-sidebar", {
+          "ds-sidebar__mobile": small,
+          "ds-sidebar__mobile--open": small && open,
         })}
       >
-        <Menu hidden={hidden} />
+        {small && openButton && (
+          <button
+            aria-label="Lukk sidenavigasjon"
+            onClick={closeSidebar}
+            className="ds-header__icon ds-header__icon--onSidebar"
+            autoFocus
+          >
+            <Close focusable="false" aria-label="Lukk ikon" />
+          </button>
+        )}
+        <Menu hidden={small && !open} />
       </div>
-    </div>
+    </>
   );
 };
