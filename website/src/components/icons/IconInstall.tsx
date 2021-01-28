@@ -48,21 +48,21 @@ const IconInstall = () => {
       </Ingress>
 
       <Systemtittel className="iconPage__headlines">Bruk</Systemtittel>
-      <Undertittel className="iconPage__headlines">React</Undertittel>
       <Normaltekst>
-        React implementasjonen av ikonene har height og width satt til{" "}
+        SVG til ikonene har height og width satt til{" "}
         <InlineCode>1em</InlineCode>. Dette betyr at man må sette font-size på
         ikonet/parent for å endre størrelse eller endre width og height med
         props.
       </Normaltekst>
+      <Undertittel className="iconPage__headlines">React</Undertittel>
       <Code popupUnder className="language-jsx">
         {`import { System } from '@navikt/ds-icons';`}
       </Code>
       <Code popupUnder className="language-jsx">
-        {`<System aria-label="System ikon" role="img"/>`}
+        {`<System aria-label="System ikon" role="img" focusable="false"/>`}
       </Code>
       <Code popupUnder className="language-jsx">
-        {`<System style={{"fontSize": "24px"}} aria-label="System ikon" role="img"/>`}
+        {`<System style={{"fontSize": "24px"}} aria-label="System ikon" role="img" focusable="false"/>`}
       </Code>
       <Undertittel className="iconPage__headlines">SVG</Undertittel>
       <Code popupUnder className="language-jsx">

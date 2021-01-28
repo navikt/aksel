@@ -11,6 +11,7 @@ const IconBox = ({ iconObj, onClick, ...props }) => {
   };
 
   const Icon = Icons[iconObj.name];
+  const name = iconObj.name.replace("Filled", " Filled");
 
   return (
     <div
@@ -22,7 +23,7 @@ const IconBox = ({ iconObj, onClick, ...props }) => {
       onKeyDown={(e) => handleKeys(e)}
     >
       <Icon focusable={false} />
-      <Undertekst className="iconBox__iconName">{iconObj.name}</Undertekst>
+      <Undertekst className="iconBox__iconName">{name}</Undertekst>
     </div>
   );
 };
