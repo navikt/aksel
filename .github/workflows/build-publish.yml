@@ -59,7 +59,7 @@ jobs:
         with:
           token: ${{ secrets.GIT_REPO }}
           projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: false
+          exitZeroOnChanges: true
 
   publish-npm:
     needs: chromatic
