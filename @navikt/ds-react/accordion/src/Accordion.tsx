@@ -9,7 +9,7 @@ import { guid } from "nav-frontend-js-utils";
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  headline: React.ReactNode;
+  heading: React.ReactNode;
   open?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   className?: string;
@@ -20,7 +20,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
-      headline,
+      heading,
       open = false,
       className,
       renderContentWhenClosed = false,
@@ -57,7 +57,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
-          <span className="navds-accordion__title">{headline}</span>
+          <span className="navds-accordion__heading">{heading}</span>
           <Expand
             className={cl(
               "navds-accordion__chevron",

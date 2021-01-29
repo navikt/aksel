@@ -52,13 +52,13 @@
   align-items: center;
 }
 
-.navds-accordion__button .navds-accordion__title {
+.navds-accordion__button .navds-accordion__heading {
   font-size: var(--navds-font-size-large);
   font-weight: var(--navds-font-weight-bold);
   line-height: var(--navds-font-line-height-large);
 }
 
-.navds-accordion__button:hover .navds-accordion__title {
+.navds-accordion__button:hover .navds-accordion__heading {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
