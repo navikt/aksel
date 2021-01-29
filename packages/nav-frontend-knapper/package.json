@@ -21,7 +21,7 @@
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-knapper-style": "^1.0.13",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -30,7 +30,7 @@
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-knapper-style": "^1.0.13",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "defaultExport": "KnappBase"
 }

@@ -1,5 +1,15 @@
 # Endringslogg
 
+## 29. Januar 2021
+
+### Publisering av ikonpakke og ikonsøk
+
+[#945](https://github.com/navikt/nav-frontend-moduler/pull/945)
+
+- `@navikt/ds-icons` er publisert som version 0.1.0
+- Ikonsøket på design.nav.no er nå i bruk
+
+
 ## 25. Januar 2021
 
 ### Fjernet komponenten EtikettLiten

@@ -18,6 +18,6 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   }
 }

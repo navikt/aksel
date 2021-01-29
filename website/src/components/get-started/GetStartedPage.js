@@ -14,6 +14,34 @@ const GetStartedPage = ({ ...props }) => (
           {props.children}
         </Link>
       )}
+      href="/components"
+      border
+    >
+      <div>
+        <Systemtittel>Komponenter</Systemtittel>
+        <p>Se forhåndsvisninger og kode-eksempler for alle våre komponenter.</p>
+      </div>
+    </LenkepanelBase>
+    <LenkepanelBase
+      linkCreator={(props) => (
+        <Link className="lenkepanel lenkepanel--border" to={props.href}>
+          {props.children}
+        </Link>
+      )}
+      href="/resources/icons"
+      border
+    >
+      <div>
+        <Systemtittel>Ikoner</Systemtittel>
+        <p>NAV sine egne ikoner tilgjengelig i SVG og React.</p>
+      </div>
+    </LenkepanelBase>
+    <LenkepanelBase
+      linkCreator={(props) => (
+        <Link className="lenkepanel lenkepanel--border" to={props.href}>
+          {props.children}
+        </Link>
+      )}
       href="/resources/new-project"
       border
     >
@@ -26,20 +54,6 @@ const GetStartedPage = ({ ...props }) => (
       </div>
     </LenkepanelBase>
     <LenkepanelBase
-      linkCreator={(props) => (
-        <Link className="lenkepanel lenkepanel--border" to={props.href}>
-          {props.children}
-        </Link>
-      )}
-      href="/components"
-      border
-    >
-      <div>
-        <Systemtittel>Utforsk komponenter</Systemtittel>
-        <p>Se forhåndsvisninger og kode-eksempler for alle våre komponenter.</p>
-      </div>
-    </LenkepanelBase>
-    <LenkepanelBase
       href="https://github.com/navikt/nav-frontend-moduler/"
       border
     >
@@ -48,18 +62,6 @@ const GetStartedPage = ({ ...props }) => (
         <p>
           Designsystemet er 100% open source på Github og vi setter alltid pris
           på hjelp og bidrag utenfra.
-        </p>
-      </div>
-    </LenkepanelBase>
-    <LenkepanelBase
-      href="https://github.com/navikt/designsystemet/issues"
-      border
-    >
-      <div>
-        <Systemtittel>Bli med i diskusjonen</Systemtittel>
-        <p>
-          Har du forslag til forbedringer, eller bare noen spørsmål? Diskuter
-          med oss her.
         </p>
       </div>
     </LenkepanelBase>

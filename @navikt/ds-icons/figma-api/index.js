@@ -6,8 +6,8 @@ const rimraf = require("rimraf");
 const startCase = require("lodash.startcase");
 
 const manipulateSvg = (svgString) => {
-  let changed = svgString.replace(`width="24"`, `width="1em"`);
-  changed = changed.replace(`height="24"`, `height="1em"`);
+  let changed = svgString.replace(/width="[^"]*"/, `width="1em"`);
+  changed = changed.replace(/height="[^"]*"/, `height="1em"`);
   changed = changed.replace(new RegExp("#3E3832", "g"), `currentColor`);
   return changed;
 };
