@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "@navikt/ds-css/accordion/index.css";
 import "@navikt/ds-css/baseline/utility.css";
-import { Close, Hamburger } from "@navikt/ds-icons";
+import { Hamburger } from "@navikt/ds-icons";
 import { InternalHeader } from "@navikt/ds-react";
 import { Link } from "gatsby";
 import { GithubLogoEm, NAVLogoWhite } from "../../assets/images/svg";

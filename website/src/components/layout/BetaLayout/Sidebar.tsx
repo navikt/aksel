@@ -2,7 +2,7 @@ import "@navikt/ds-css/accordion/index.css";
 import "@navikt/ds-css/baseline/utility.css";
 import { Close } from "@navikt/ds-icons";
 import cl from "classnames";
-import { default as React, useEffect, useRef, useState } from "react";
+import { default as React, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import "./layout.css";
