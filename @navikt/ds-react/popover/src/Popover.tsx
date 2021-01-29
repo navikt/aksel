@@ -33,10 +33,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default 'auto'
    */
   placement?: Placement;
-  /**
-   * User defined classname
-   */
-  className?: string;
   size?: "medium" | "small";
 }
 

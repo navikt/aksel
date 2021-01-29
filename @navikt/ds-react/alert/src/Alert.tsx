@@ -11,7 +11,6 @@ import "@navikt/ds-css/alert/index.css";
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "error" | "warning" | "info" | "success";
   children: React.ReactNode;
-  className?: string;
   size?: "medium" | "small";
 }
 

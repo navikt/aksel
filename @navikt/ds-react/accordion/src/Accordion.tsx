@@ -12,7 +12,6 @@ export interface AccordionProps
   heading: React.ReactNode;
   open?: boolean;
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  className?: string;
   renderContentWhenClosed?: boolean;
 }
 

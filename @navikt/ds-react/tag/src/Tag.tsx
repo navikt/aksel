@@ -8,10 +8,6 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    * Changes background-color and border-color
    */
   variant: "warning" | "error" | "info" | "success";
-  /**
-   * User defined classname
-   */
-  className?: string;
 }
 
 const Tag = forwardRef<HTMLSpanElement, TagProps>(
