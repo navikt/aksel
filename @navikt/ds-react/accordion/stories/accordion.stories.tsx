@@ -12,7 +12,7 @@ export const All = () => {
   return (
     <>
       <h1>Accordion</h1>
-      <Accordion headline="tittel" open={open} onClick={(e) => setOpen(!open)}>
+      <Accordion heading="tittel" open={open} onClick={(e) => setOpen(!open)}>
         Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
         Culpa fugiat irure deserunt irure enim adipisicing qui id. Pariatur
         commodo dolore consequat nulla cupidatat commodo nisi sunt. Ad proident
@@ -25,7 +25,7 @@ export const All = () => {
         ut ipsum veniam eu laborum id commodo.
       </Accordion>
       <h1>Open</h1>
-      <Accordion headline="tittel" open={true} onClick={(e) => null}>
+      <Accordion heading="tittel" open={true} onClick={(e) => null}>
         Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
         Culpa fugiat irure deserunt irure enim adipisicing qui id. Pariatur
         commodo dolore consequat nulla cupidatat commodo nisi sunt. Ad proident
@@ -37,9 +37,9 @@ export const All = () => {
         esse aliqua amet magna pariatur incididunt ea excepteur. Aliquip magna
         ut ipsum veniam eu laborum id commodo.
       </Accordion>
-      <h1>Long headline</h1>
+      <h1>Long heading</h1>
       <Accordion
-        headline="Consequat incididunt aliquip aliquip fugiat anim cupidatat eu do ipsum pariatur."
+        heading="Consequat incididunt aliquip aliquip fugiat anim cupidatat eu do ipsum pariatur."
         open={open}
         onClick={(e) => setOpen(!open)}
       >
