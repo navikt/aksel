@@ -1,0 +1,17 @@
+.navds-grid {
+  display: grid;
+  grid-gap: var(--navds-grid-gutter);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (min-width: var(--navds-grid-breakpoints-medium)) {
+  .navds-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: var(--navds-grid-breakpoints-large)) {
+  .navds-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}

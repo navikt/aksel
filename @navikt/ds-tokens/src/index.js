@@ -156,6 +156,15 @@ module.exports = {
       focus: { value: "{navds.color.blue.80.value}" },
       shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
     },
+    grid: {
+      breakpoints: {
+        medium: { value: "448px" },
+        large: { value: "800px" },
+      },
+      gutter: {
+        value: "24px",
+      },
+    },
     z: {
       index: {
         modal: {
