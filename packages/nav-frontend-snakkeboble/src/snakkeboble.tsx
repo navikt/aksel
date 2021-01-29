@@ -11,7 +11,7 @@ const snakkebobleCls = (hoyre, className) =>
     "snakkeboble--venstre": !hoyre,
   });
 
-export interface SnakkebobleProps {
+export interface SnakkebobleProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @Deprecated Dato for melding, bruk `topp`
    */
@@ -43,11 +43,19 @@ export interface SnakkebobleProps {
  */
 class Snakkeboble extends React.Component<SnakkebobleProps> {
   render() {
-    const { dato, topp, children, pilHoyre, ikonClass, className } = this.props;
+    const {
+      dato,
+      topp,
+      children,
+      pilHoyre,
+      ikonClass,
+      className,
+      ...rest
+    } = this.props;
     const toppTekst = topp || dato;
 
     return (
-      <div className={snakkebobleCls(pilHoyre, className)}>
+      <div className={snakkebobleCls(pilHoyre, className)} {...rest}>
         <i className={ikonClass} />
         <div className="snakkeboble__snakkeboble-pil-container">
           <i className="snakkeboble__snakkebole-pil" />

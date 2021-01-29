@@ -17,7 +17,8 @@ const innerCls = (props) =>
       typeof props.onClick === "function" && !props.aktiv,
   });
 
-export interface StegindikatorStegProps {
+export interface StegindikatorStegProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   label: string;
   index: number;
   visLabel?: boolean;

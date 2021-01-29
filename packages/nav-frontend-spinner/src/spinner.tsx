@@ -9,7 +9,8 @@ const cls = (className, storrelse) =>
     [`spinner--${storrelse.toLowerCase()}`]: !!storrelse,
   });
 
-export interface NavFrontendSpinnerProps {
+export interface NavFrontendSpinnerProps
+  extends React.HTMLAttributes<HTMLOrSVGElement> {
   /**
    * Gjennomsiktig bakgrunn
    */
