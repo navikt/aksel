@@ -64,7 +64,7 @@
   border: none;
   height: 3rem;
   width: 3rem;
-  background-color: var(--heading-block-background);
+  background-color: var(--header-color);
   color: white;
 }
 
