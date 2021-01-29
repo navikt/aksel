@@ -17,8 +17,8 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "peerDependencies": {
-    "nav-frontend-lenker": "^1.0.57",
-    "nav-frontend-typografi": "^3.0.1",
+    "nav-frontend-lenker": "^1.0.58",
+    "nav-frontend-typografi": "^3.0.2",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },

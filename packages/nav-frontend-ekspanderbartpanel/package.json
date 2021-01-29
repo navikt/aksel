@@ -19,7 +19,7 @@
   "peerDependencies": {
     "@types/react-collapse": "^5.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-ekspanderbartpanel-style": "^1.0.37",
+    "nav-frontend-ekspanderbartpanel-style": "^1.0.38",
     "nav-frontend-js-utils": "^1.0.16",
     "react": "^16.8.0",
     "react-collapse": "^5.0.0"

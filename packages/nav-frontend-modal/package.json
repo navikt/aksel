@@ -19,8 +19,8 @@
   "peerDependencies": {
     "@types/react-modal": "^3.1.2",
     "classnames": "^2.2.5",
-    "nav-frontend-lukknapp": "^1.0.47",
-    "nav-frontend-modal-style": "^0.3.50",
+    "nav-frontend-lukknapp": "^1.0.48",
+    "nav-frontend-modal-style": "^0.3.51",
     "prop-types": "^15.5.10",
     "react": "^16.8.0",
     "react-modal": "^2.2.4 || ^3.3.1"
