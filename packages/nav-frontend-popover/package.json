@@ -21,7 +21,7 @@
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-popover-style": "^0.0.14",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0",
+    "react": "^16.8.0",
     "react-dom": "^15.4.2 || ^16.0.0"
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
     "nav-frontend-js-utils": "^1.0.15",
     "nav-frontend-popover-style": "^0.0.14",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0",
+    "react": "^16.8.0",
     "react-dom": "^15.4.2 || ^16.0.0"
   },
   "defaultExport": "Popover"

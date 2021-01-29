@@ -14,12 +14,12 @@
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-knapper-style": "^1.0.13",
     "nav-frontend-typografi-style": "^1.0.32",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-knapper-style": "^1.0.13",
     "nav-frontend-typografi-style": "^1.0.32",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   }
 }

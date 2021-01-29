@@ -22,7 +22,7 @@
     "nav-frontend-typografi": "^3.0.0",
     "nav-frontend-typografi-style": "^1.0.32",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
@@ -30,7 +30,7 @@
     "nav-frontend-typografi": "^3.0.0",
     "nav-frontend-typografi-style": "^1.0.32",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "defaultExport": "Panel"
 }

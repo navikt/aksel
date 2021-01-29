@@ -21,7 +21,7 @@
     "nav-frontend-lenkepanel-style": "^0.3.47",
     "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -30,7 +30,7 @@
     "nav-frontend-lenkepanel-style": "^0.3.47",
     "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "defaultExport": "Lenkepanel"
 }

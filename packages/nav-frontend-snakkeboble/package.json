@@ -23,14 +23,14 @@
     "nav-frontend-snakkeboble-style": "^0.2.40",
     "nav-frontend-typografi": "^3.0.0",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "devDependencies": {
     "nav-frontend-paneler": "^2.0.27",
     "nav-frontend-paneler-style": "^0.3.33",
     "nav-frontend-snakkeboble-style": "^0.2.40",
     "nav-frontend-typografi": "^3.0.0",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0"
   },
   "defaultExport": "Snakkeboble"
 }
