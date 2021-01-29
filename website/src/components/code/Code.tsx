@@ -1,10 +1,16 @@
 import React, { useState } from "react";
+import cl from "classnames";
 import classnames from "classnames";
 import Prism from "prismjs";
 import copy from "copy-to-clipboard";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Normaltekst } from "nav-frontend-typografi";
 import { CopyIcon } from "../assets/images/svg";
+import { Expand } from "@navikt/ds-icons";
+import { Collapse } from "react-collapse";
+import "@navikt/ds-css/accordion/index.css";
+/* import { Accordion } from "@navikt/ds-react"; */
+
 import "./styles.less";
 import "./theme.css";
 
@@ -28,6 +34,7 @@ export interface CodeProps {
   onClick?: (event: React.SyntheticEvent) => void;
   noCopy?: boolean;
   popupUnder?: boolean;
+  type?: string;
 }
 
 export const InlineCode = ({ children, className, ...props }: CodeProps) => (
@@ -90,6 +97,59 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
   );
 };
 
+const DropDownCode = ({ children, type, ...props }) => {
+  const [open, setOpen] = useState(false);
+
+  const highlighted =
+    type === "html"
+      ? Prism.highlight(children, Prism.languages.jsx, "html")
+      : type === "css"
+      ? Prism.highlight(children, Prism.languages.css, "css")
+      : Prism.highlight(children, Prism.languages.jsx, "jsx");
+
+  return (
+    <>
+      <button
+        aria-expanded={open}
+        onClick={() => setOpen(!open)}
+        className="code__dropdown"
+      >
+        <Expand
+          className={cl(
+            "navds-accordion__chevron",
+            `navds-accordion__chevron--${open ? "up" : "down"}`,
+            "code__dropdownChevron"
+          )}
+          focusable="false"
+        />
+        <span className="code__dropdownHeading">{type}</span>
+      </button>
+
+      <Collapse isOpened={open} theme={{ collapse: "code__dropdownCode" }}>
+        <div
+          className={cl("code__dropdownCode--wrapper", {
+            "code__dropdownCode--open": open,
+          })}
+        >
+          <figure
+            /* className="code-example" */
+            role="figure"
+            aria-label="Kode-eksempel"
+          >
+            <pre className="code__dropdownCode--pre">
+              <code
+                className="code__dropdownCode--code"
+                {...props}
+                dangerouslySetInnerHTML={{ __html: highlighted }}
+              ></code>
+            </pre>
+          </figure>
+        </div>
+      </Collapse>
+    </>
+  );
+};
+
 const Code = ({
   children,
   className,
@@ -122,6 +182,10 @@ const Code = ({
     setAnchor(anchor ? undefined : e.currentTarget);
     copyCode(children);
   };
+
+  if (props.type && ["html", "react"].includes(props.type.toLowerCase())) {
+    return <DropDownCode type={props.type} children={children} />;
+  }
 
   return (
     <>

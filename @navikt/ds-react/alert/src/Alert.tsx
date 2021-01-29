@@ -41,7 +41,8 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         `navds-alert--${size}`
       )}
     >
-      <Icon variant={variant} />
+      <title id="svgtitle1">Settings</title>
+      <Icon aria-labelledby="svgtitle1" variant={variant} />
       <span>{children}</span>
     </div>
   )
