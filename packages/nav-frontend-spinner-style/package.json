@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-spinner-style",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "main": "src/spinner-style.less",
   "license": "MIT",
   "files": [
