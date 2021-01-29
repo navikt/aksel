@@ -18,10 +18,10 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-hjelpetekst-style": "^2.0.38",
-    "nav-frontend-ikoner-assets": "^2.0.8",
-    "nav-frontend-js-utils": "^1.0.15",
-    "nav-frontend-popover": "^0.0.43",
+    "nav-frontend-hjelpetekst-style": "^2.0.39",
+    "nav-frontend-ikoner-assets": "^2.0.9",
+    "nav-frontend-js-utils": "^1.0.16",
+    "nav-frontend-popover": "^0.0.44",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },

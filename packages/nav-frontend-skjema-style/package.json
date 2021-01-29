@@ -22,7 +22,7 @@
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.33",
-    "nav-frontend-typografi-style": "^1.0.32"
+    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-typografi-style": "^1.0.33"
   }
 }

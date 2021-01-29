@@ -16,8 +16,8 @@
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-lukknapp-style": "^0.2.36",
-    "nav-frontend-paneler-style": "^0.3.33"
+    "nav-frontend-lukknapp-style": "^0.2.37",
+    "nav-frontend-paneler-style": "^0.3.34"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",

@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-chevron-style": "^1.0.2",
+    "nav-frontend-chevron-style": "^1.0.3",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },

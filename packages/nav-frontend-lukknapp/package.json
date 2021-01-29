@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-lukknapp-style": "^0.2.36",
+    "nav-frontend-lukknapp-style": "^0.2.37",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },
