@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lukknapp",
-  "version": "1.0.47",
+  "version": "1.0.48",
   "main": "lib/lukknapp.js",
   "types": "lib/lukknapp.d.ts",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tabs-style",
-  "version": "0.0.40",
+  "version": "0.0.41",
   "main": "src/tabs-style.less",
   "license": "MIT",
   "files": [

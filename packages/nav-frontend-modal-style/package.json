@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-modal-style",
-  "version": "0.3.50",
+  "version": "0.3.51",
   "main": "src/index.less",
   "license": "MIT",
   "files": [

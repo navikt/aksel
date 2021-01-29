@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenkepanel",
-  "version": "1.0.71",
+  "version": "1.0.72",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -27,8 +27,8 @@
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-lenkepanel-style": "^0.3.48",
-    "nav-frontend-typografi": "^3.0.1",
+    "nav-frontend-lenkepanel-style": "^0.3.49",
+    "nav-frontend-typografi": "^3.0.2",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },
