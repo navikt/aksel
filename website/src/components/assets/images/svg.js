@@ -510,8 +510,13 @@ export const CopyIcon = ({ color }) => (
   </svg>
 );
 
-export const FigmaIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 57" focusable="false">
+export const FigmaIcon = ({ ...props }) => (
+  <svg
+    {...props}
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 38 57"
+    focusable="false"
+  >
     <g>
       <path
         fill="#1abcfe"
