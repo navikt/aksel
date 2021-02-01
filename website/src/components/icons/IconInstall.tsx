@@ -9,6 +9,7 @@ import Lenke from "nav-frontend-lenker";
 import Code, { Bash, copyImport, InlineCode } from "../code/Code";
 import "./styles.less";
 
+const tab = "&nbsp;&nbsp;&nbsp;&nbsp;";
 const IconInstall = () => {
   return (
     <div className="iconPage__install">
@@ -58,11 +59,14 @@ const IconInstall = () => {
       <Code popupUnder className="language-jsx">
         {`import { System } from '@navikt/ds-icons';`}
       </Code>
+
+      <Ingress>Med wrapper (16px font-size)</Ingress>
       <Code popupUnder className="language-jsx">
-        {`<System aria-label="System ikon" role="img" focusable="false"/>`}
+        {`<span style={{"fontSize": "1.5rem"}}>\n\t<System \n\t\taria-label="System ikon" \n\t\trole="img" \n\t\tfocusable="false"\n\t/>\n</span>`}
       </Code>
+      <Ingress>Uten wrapper (16px font-size)</Ingress>
       <Code popupUnder className="language-jsx">
-        {`<System style={{"fontSize": "24px"}} aria-label="System ikon" role="img" focusable="false"/>`}
+        {`<System \n\tstyle={{"fontSize": "1.5rem"}} \n\taria-label="System ikon" \n\trole="img" \n\tfocusable="false"\n/>`}
       </Code>
       <Undertittel className="iconPage__headlines">SVG</Undertittel>
       <Code popupUnder className="language-jsx">
