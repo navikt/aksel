@@ -16,13 +16,13 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.0",
     "nav-frontend-typografi-style": "^1.0.33",
     "react": "^16.8.0"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.0",
     "nav-frontend-typografi-style": "^1.0.33"
   }
 }
