@@ -6,6 +6,7 @@ const convertToPng = () => {
   const inputDir = "./svg/";
   const outDir = "./png/";
   const sizes = [16, 24, 128, 256];
+  console.log("Converting icons to .png format");
 
   if (fs.existsSync(outDir)) {
     rimraf.sync(outDir);

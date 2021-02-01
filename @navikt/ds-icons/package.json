@@ -21,7 +21,8 @@
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref",
     "convert-icons": "node figma-api/pngConverter.js",
-    "build": "rm -rf src && rm -rf lib && npm run create-icons && tsc"
+    "clean": "rm -rf src && rm -rf lib && rm -rf png",
+    "build": "npm run create-icons && tsc && npm run convert-icons"
   },
   "repository": {
     "type": "git",
