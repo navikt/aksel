@@ -36,5 +36,6 @@
     "lodash.startcase": "4.4.0",
     "react": "^16.8.0 || ^17.0.0",
     "rimraf": "3.0.2"
-  }
+  },
+  "sideEffects": false
 }
