@@ -8,7 +8,6 @@ import {
 import Lenke from "nav-frontend-lenker";
 import Code, { Bash, copyImport, InlineCode } from "../code/Code";
 import "./styles.less";
-const System = require("@navikt/ds-icons/svg/System.svg");
 
 const IconInstall = () => {
   return (
