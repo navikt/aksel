@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-fullbreddeknapp-style",
-  "version": "0.3.10",
+  "version": "1.0.0",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
