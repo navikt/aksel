@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.0",
     "nav-frontend-typografi": "^3.0.2",
     "nav-frontend-typografi-style": "^1.0.33",
     "prop-types": "^15.5.10",
@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.0",
     "nav-frontend-typografi": "^3.0.2",
     "nav-frontend-typografi-style": "^1.0.33",
     "prop-types": "^15.5.10",

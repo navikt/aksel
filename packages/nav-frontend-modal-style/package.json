@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-modal-style",
-  "version": "0.3.51",
+  "version": "1.0.0",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -16,13 +16,13 @@
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-lukknapp-style": "^0.2.37",
-    "nav-frontend-paneler-style": "^0.3.34"
+    "nav-frontend-lukknapp-style": "^1.0.0",
+    "nav-frontend-paneler-style": "^1.0.0"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-lukknapp-style": "^0.2.37",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-lukknapp-style": "^1.0.0",
+    "nav-frontend-paneler-style": "^1.0.0",
     "react": "^16.8.0"
   }
 }
