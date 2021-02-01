@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-modal",
-  "version": "1.0.61",
+  "version": "1.0.62",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",

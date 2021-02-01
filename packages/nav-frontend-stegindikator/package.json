@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-stegindikator",
-  "version": "0.0.70",
+  "version": "0.0.71",
   "main": "lib/stegindikator.js",
   "types": "lib/stegindikator.d.js",
   "license": "MIT",

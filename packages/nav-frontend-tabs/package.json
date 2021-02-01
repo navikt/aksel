@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tabs",
-  "version": "0.0.62",
+  "version": "0.0.63",
   "main": "lib/tabs.js",
   "types": "lib/tabs.d.ts",
   "license": "MIT",

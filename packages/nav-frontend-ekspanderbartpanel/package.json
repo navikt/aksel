@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ekspanderbartpanel",
-  "version": "3.0.52",
+  "version": "3.0.53",
   "main": "lib/index.js",
   "license": "MIT",
   "types": "lib/index.d.ts",

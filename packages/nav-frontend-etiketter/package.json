@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-etiketter",
-  "version": "2.0.29",
+  "version": "2.0.30",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",

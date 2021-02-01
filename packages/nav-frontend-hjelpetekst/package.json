@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst",
-  "version": "2.0.52",
+  "version": "2.0.53",
   "main": "lib/hjelpetekst.js",
   "types": "lib/hjelpetekst.d.ts",
   "license": "MIT",
