@@ -101,5 +101,6 @@ examples/webpack/out
 *-exports.less
 **/css/
 */figma-api/icons
+*/ds-icons/png
 packages/**/css
 utilities/**/css
