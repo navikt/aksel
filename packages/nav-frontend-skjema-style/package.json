@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema-style",
-  "version": "2.0.29",
+  "version": "2.0.30",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^1.0.0",
+    "nav-frontend-paneler-style": "^1.0.1",
     "nav-frontend-typografi-style": "^1.0.33",
     "react": "^16.8.0"
   },

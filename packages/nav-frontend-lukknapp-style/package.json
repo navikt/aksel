@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lukknapp-style",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/lukknapp-style.less",
   "license": "MIT",
   "files": [

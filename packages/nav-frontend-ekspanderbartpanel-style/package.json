@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ekspanderbartpanel-style",
-  "version": "1.0.38",
+  "version": "1.0.39",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -23,7 +23,7 @@
   "devDependencies": {
     "nav-frontend-chevron-style": "^1.0.3",
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^1.0.0",
+    "nav-frontend-paneler-style": "^1.0.1",
     "nav-frontend-typografi-style": "^1.0.33",
     "react": "^16.8.0"
   }

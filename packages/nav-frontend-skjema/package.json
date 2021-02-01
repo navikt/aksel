@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema",
-  "version": "3.0.49",
+  "version": "3.0.50",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -30,8 +30,8 @@
     "@navikt/fnrvalidator": "^1.1.0",
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.16",
-    "nav-frontend-lenker": "^1.0.58",
-    "nav-frontend-skjema-style": "^2.0.29",
+    "nav-frontend-lenker": "^1.0.59",
+    "nav-frontend-skjema-style": "^2.0.30",
     "nav-frontend-typografi": "^3.0.2",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
