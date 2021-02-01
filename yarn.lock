@@ -16248,6 +16248,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+nav-frontend-paneler-style@^0.3.34:
+  version "0.3.34"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.34.tgz#48bc6a4331262658490644976c65258d6b3cbcec"
+  integrity sha512-ufqCAPGofVHrof7yh7TGdby9hMHI6HPr4x4KegeTSXg83jPsW5ElynznkBtfMpsGWTD8MoxBxIJkSOlqEvzbvg==
+
 needle@^2.5.2:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.6.0.tgz#24dbb55f2509e2324b4a99d61f413982013ccdbe"

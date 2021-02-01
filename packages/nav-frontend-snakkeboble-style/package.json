@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-snakkeboble-style",
-  "version": "0.2.42",
+  "version": "1.0.0",
   "main": "src/snakkeboble-style.less",
   "license": "MIT",
   "files": [

@@ -18,13 +18,13 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-lenker-style": "^0.2.42",
+    "nav-frontend-lenker-style": "^1.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-lenker-style": "^0.2.42",
+    "nav-frontend-lenker-style": "^1.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0"
   },
