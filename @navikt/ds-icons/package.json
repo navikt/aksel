@@ -21,8 +21,8 @@
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref",
     "convert-icons": "node figma-api/pngConverter.js",
-    "clean": "rm -rf src && rm -rf lib && rm -rf png",
-    "build": "npm run create-icons && tsc && npm run convert-icons"
+    "clean": "rm -rf src && rm -rf lib && rm -rf png && rm NAV-ikonpakke-png.zip",
+    "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons"
   },
   "repository": {
     "type": "git",
@@ -39,6 +39,6 @@
     "react": "^16.8.0 || ^17.0.0",
     "rimraf": "3.0.2",
     "sharp": "0.27.1",
-    "zip-local": "^0.3.4"
+    "zip-dir": "^2.0.0"
   }
 }
