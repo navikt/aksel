@@ -106,4 +106,4 @@ packages/**/css
 utilities/**/css
 
 */static/*.zip
-*/**/NAV-ikonpakke-png.zip
+@navikt/ds-icons/NAV-ikonpakke-png.zip
