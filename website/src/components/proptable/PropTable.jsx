@@ -19,7 +19,6 @@ const PropTable = ({ moduleProps, ...props }) => {
   const table = useRef();
   const headers = ["Property", "Type", "Default", "Required", "Description"];
 
-  console.log(propTypeDocs);
   return (
     <OverflowDetector>
       <table

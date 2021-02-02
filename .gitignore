@@ -104,3 +104,5 @@ examples/webpack/out
 */ds-icons/png
 packages/**/css
 utilities/**/css
+
+*/static/*.zip

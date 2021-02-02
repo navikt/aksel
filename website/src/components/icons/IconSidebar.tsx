@@ -1,13 +1,10 @@
-import * as Icons from "@navikt/ds-icons";
 import * as cls from "classnames";
 import Lenkepanel from "nav-frontend-lenkepanel";
 import { Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
-import { renderToString } from "react-dom/server";
 import { FigmaIcon, GithubLogo } from "../../components/assets/images/svg";
 import { Download } from "@navikt/ds-icons";
 import "./styles.less";
-const JSZip = require("jszip");
 
 const IconSidebar = () => {
   const [sidebar, setSidebar] = useState(true);
@@ -24,25 +21,6 @@ const IconSidebar = () => {
     };
   }, []);
 
-  // Zips all icons and downloads them
-  const downloadAllSvg = async () => {
-    const element = document.createElement("a");
-    var zip = new JSZip();
-
-    for (const name in Icons) {
-      const IconComp = Icons[name];
-      zip.folder("Ikonpakke").file(`${name}.svg`, renderToString(<IconComp />));
-    }
-
-    const file = await zip.generateAsync({ type: "blob" });
-    console.log(file.size);
-    element.href = URL.createObjectURL(file);
-    element.download = `NAV-ikonpakke.zip`;
-    document.body.appendChild(element);
-    element.click();
-    document.body.removeChild(element);
-  };
-
   return (
     <div
       className={cls({
@@ -53,18 +31,28 @@ const IconSidebar = () => {
       <Undertittel className="iconPage__headlines iconPage__linkHeadlines">
         Nedlastning
       </Undertittel>
-
-      <button
+      <a
         style={{ cursor: "pointer" }}
         className="lenkepanel lenkepanel--border resource-link iconSidebar__linkPanels"
-        onClick={() => downloadAllSvg()}
-        aria-label="Last ned alle ikoner"
+        href="/NAV-ikonpakke-png.zip"
+        aria-label="Last ned alle ikoner i png format"
       >
-        <Undertittel>NAV-ikonpakke.zip</Undertittel>
+        <Undertittel>NAV-ikonpakke-png</Undertittel>
         <span className="iconSidebar__save">
           <Download />
         </span>
-      </button>
+      </a>
+      <a
+        style={{ cursor: "pointer" }}
+        className="lenkepanel lenkepanel--border resource-link iconSidebar__linkPanels"
+        href="/NAV-ikonpakke-svg.zip"
+        aria-label="Last ned alle ikoner i png format"
+      >
+        <Undertittel>NAV-ikonpakke-svg</Undertittel>
+        <span className="iconSidebar__save">
+          <Download />
+        </span>
+      </a>
       <Undertittel className="iconPage__headlines iconPage__linkHeadlines">
         Ressurser
       </Undertittel>
