@@ -1,6 +1,6 @@
 import * as cls from "classnames";
 import Lenkepanel from "nav-frontend-lenkepanel";
-import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
+import { Normaltekst, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { FigmaIcon, GithubLogo } from "../../components/assets/images/svg";
 import { Download } from "@navikt/ds-icons";
