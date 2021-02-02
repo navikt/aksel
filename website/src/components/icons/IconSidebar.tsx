@@ -1,6 +1,6 @@
 import * as cls from "classnames";
 import Lenkepanel from "nav-frontend-lenkepanel";
-import { Undertittel } from "nav-frontend-typografi";
+import { Normaltekst, Undertekst, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { FigmaIcon, GithubLogo } from "../../components/assets/images/svg";
 import { Download } from "@navikt/ds-icons";
@@ -37,7 +37,12 @@ const IconSidebar = () => {
         href="/NAV-ikonpakke-png.zip"
         aria-label="Last ned alle ikoner i png format"
       >
-        <Undertittel>NAV-ikonpakke-png</Undertittel>
+        <Undertittel>
+          NAV-ikonpakke-png{" "}
+          <Normaltekst>
+            128px og 256px er ment for digitale presentasjoner
+          </Normaltekst>
+        </Undertittel>
         <span className="iconSidebar__save">
           <Download />
         </span>
