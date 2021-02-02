@@ -27,7 +27,6 @@ Vi tar nå i bruk storybook [https://storybook.js.org/](https://storybook.js.org
 **NB!!** Det er aldri behov for å kjøre `npm install` i noen annen mappe enn rot-mappen.
 Om en modul du lager har behov for en npm-pakke så kan du legge den til i devDep/dep i pakken for så å kjøre `yarn install` i root. Yarn workspaces fikser da dependency treet selv.
 
-
 ## Dokumentasjon
 
 Dokumentasjon kan skrives ved å legge til mdx filer under `website/src/pages`. Nye komponenter under `@navikt/` dokumenteres ved å skrive mdx filer under `website/src/pages/beta/components`. Eldre komponenter dokumenteres ved å endre mdx filer under `md`-mappen lokalt i pakken under `packages`.
@@ -55,6 +54,7 @@ For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver 
 ## Ikoner
 
 > Krever at man har lagt til en .env fil under `@navikt/ds-icons/figma-api` med en Figma auth-token i format FIGMA_TOKEN="[TOKEN]"
+
 - `yarn lerna:icons` - Oppdaterer ikonpakken med de nyeste ikonene fra Figma-biblioteket
 
 ## Byggemiljø
