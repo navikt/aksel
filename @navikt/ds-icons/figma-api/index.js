@@ -4,6 +4,7 @@ const path = require("path");
 const pLimit = require("p-limit");
 const rimraf = require("rimraf");
 const startCase = require("lodash.startcase");
+const zipper = require("zip-local");
 
 const manipulateSvg = (svgString) => {
   let changed = svgString.replace(/width="[^"]*"/, `width="1em"`);
@@ -104,6 +105,7 @@ const main = async () => {
     console.log(`\nCould not download ${misses.length} icons\n`);
   } else {
     console.log("\nDownloaded all icons from Figma successfully!\n");
+    zipper.sync.zip("./svg/").compress().save("NAV-ikonpakke-svg.zip");
   }
 };
 

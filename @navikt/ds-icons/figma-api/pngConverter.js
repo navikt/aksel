@@ -1,6 +1,11 @@
 const fs = require("fs");
 const sharp = require("sharp");
 const rimraf = require("rimraf");
+const zipper = require("zip-local");
+
+const zipPng = () => {
+  zipper.sync.zip("./png/").compress().save("NAV-ikonpakke-png.zip");
+};
 
 const convertToPng = () => {
   const inputDir = "./svg/";
@@ -28,6 +33,7 @@ const convertToPng = () => {
 
 try {
   convertToPng();
+  zipPng();
 } catch (e) {
   console.error(e);
 }
