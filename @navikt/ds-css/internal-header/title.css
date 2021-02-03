@@ -1,11 +1,11 @@
 .navds-header__title {
-  padding: 0 1.5rem 0 1.5rem;
   border-right: 1px solid var(--navds-color-gray-40);
   display: flex;
   align-self: stretch;
   align-items: center;
   text-decoration: none;
   margin: 0;
+  padding: 0 1.5rem;
   color: var(--navds-color-text-inverse);
   font-size: var(--navds-font-size-medium);
   font-weight: var(--navds-font-weight-bold);
