@@ -16,6 +16,12 @@
     display: flex;
     justify-content: space-between;
   }
+  &__viewSelectButton.navds-button {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1.2rem;
+    margin-left: 0.5rem;
+  }
 
   &__checkboxes {
     display: inline-flex;
@@ -64,8 +70,35 @@
     max-width: 500px;
     font-size: 1rem;
 
+    &--wrapper {
+      display: flex;
+      background-color: #f1f1f1;
+      padding: 0.5rem 1rem;
+      margin: 0 -1rem 0 -1rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+    &Button.navds-button {
+      text-transform: none;
+      column-gap: 0.5rem;
+      display: inline-flex;
+      margin-left: 0.2rem;
+      margin-top: 0.2rem;
+    }
+
+    &Button.navds-button:last-child {
+      margin-left: 0.5rem;
+    }
+
     &Svg {
       margin: 0;
+    }
+
+    &Title {
+      margin: 0 0 0 0.2rem;
+      font-size: var(--navds-font-size-heading-small);
+      line-height: var(--navds-font-line-height-small);
+      font-weight: var(--navds-font-weight-bold);
     }
 
     &Icons {

@@ -1,6 +1,5 @@
 import * as Icons from "@navikt/ds-icons";
 import { List, System } from "@navikt/ds-icons";
-import Knapp from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
 import { Input, Checkbox } from "nav-frontend-skjema";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
@@ -9,6 +8,8 @@ import { renderToString } from "react-dom/server";
 import Code from "../code/Code";
 import IconBox from "./IconBox";
 import IconSidebar from "./IconSidebar";
+import ColorSwitch from "../color-switch/ColorSwitch";
+import { Button } from "@navikt/ds-react";
 import "./styles.less";
 
 const metadata = require("@navikt/ds-icons/figma-api/metadata.json");
@@ -203,24 +204,24 @@ const IconPage = () => {
       <span className="iconPage__viewSelect">
         <Undertittel className="iconPage__headlines">{headline()}</Undertittel>
         <span>
-          <Knapp
-            kompakt
-            mini
+          <Button
             onClick={() => setListView(0)}
-            type={listView ? "flat" : "standard"}
+            variant={!listView ? "primary" : "secondary"}
             aria-label="Vis ikoner med kategorier"
+            size="small"
+            className="iconPage__viewSelectButton"
           >
             <List />
-          </Knapp>
-          <Knapp
-            kompakt
-            mini
+          </Button>
+          <Button
             onClick={() => setListView(1)}
-            type={listView ? "standard" : "flat"}
+            variant={!listView ? "secondary" : "primary"}
             aria-label="Vis ikoner uten kategorier"
+            size="small"
+            className="iconPage__viewSelectButton"
           >
             <System />
-          </Knapp>
+          </Button>
         </span>
       </span>
 
@@ -236,13 +237,33 @@ const IconPage = () => {
         >
           <div>
             <Systemtittel>{selectedIcon.name}</Systemtittel>
-            <Knapp
-              kompakt
-              onClick={() => downloadSvg()}
-              style={{ textTransform: "none" }}
-            >
-              {`Last ned ${selectedIcon.name}.svg`}
-            </Knapp>
+            <div className="iconPage__modal--wrapper">
+              <div>
+                <p className="iconPage__modalTitle">Fargevelger</p>
+                <ColorSwitch onChange={(c) => console.log(c)} />
+              </div>
+              <div>
+                <p className="iconPage__modalTitle">Last ned</p>
+                <Button
+                  size="small"
+                  variant="action"
+                  onClick={() => downloadSvg()}
+                  className="iconPage__modalButton"
+                >
+                  <Icons.Download />
+                  SVG
+                </Button>
+                <Button
+                  size="small"
+                  variant="action"
+                  onClick={() => downloadSvg()}
+                  className="iconPage__modalButton"
+                >
+                  <Icons.Download />
+                  PNG
+                </Button>
+              </div>
+            </div>
             <Undertittel className="iconPage__headlines">React</Undertittel>
             <Code popupUnder className="language-jsx">
               {`import { ${selectedIcon.name} } from '@navikt/ds-icons'`}
