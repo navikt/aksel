@@ -18,7 +18,7 @@ interface StepperComponent
 
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
   ({ children, className, ...rest }, ref) => {
-    return <div>stepper</div>;
+    return <div>{children}</div>;
   }
 ) as StepperComponent;
 

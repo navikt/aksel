@@ -8,7 +8,7 @@ export interface StepProps extends React.HTMLAttributes<HTMLButtonElement> {
 
 const Step = forwardRef<HTMLDivElement, StepProps>(
   ({ children, className, ...rest }, ref) => {
-    return <div>step</div>;
+    return <div>{children}</div>;
   }
 );
 
