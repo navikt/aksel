@@ -6,9 +6,6 @@ const rimraf = require("rimraf");
 const startCase = require("lodash.startcase");
 const zipdir = require("zip-dir");
 
-const manipulateSvg = (svgString) =>
-  svgString.replace(new RegExp("#3E3832", "g"), `currentColor`);
-
 const generateMetadata = (iconNodesArr) => {
   return iconNodesArr
     .map(({ name, description, created_at, updated_at, containing_frame }) => {
@@ -67,8 +64,7 @@ const main = async () => {
       limit(() =>
         api
           .getIconContent(url)
-          .then(({ data }) => manipulateSvg(data))
-          .then((data) => {
+          .then(({ data }) => {
             fs.writeFileSync(
               path.resolve(
                 iconFolder,
