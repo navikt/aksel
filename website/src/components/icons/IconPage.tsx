@@ -2,7 +2,7 @@ import * as Icons from "@navikt/ds-icons";
 import { List, System } from "@navikt/ds-icons";
 import Modal from "nav-frontend-modal";
 import { Input, Checkbox } from "nav-frontend-skjema";
-import { Systemtittel, Undertittel } from "nav-frontend-typografi";
+import { Normaltekst, Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
 import Code from "../code/Code";
@@ -259,28 +259,30 @@ const IconPage = () => {
                 <p className="iconPage__modalTitle">Fargevelger</p>
                 <ColorSwitch onChange={(c) => setColor(c)} />
               </div>
-              <div>
+              <div style={{ marginLeft: "2rem" }}>
                 <p className="iconPage__modalTitle">Last ned</p>
-                <Button
-                  size="small"
-                  variant="action"
-                  onClick={() => downloadSvg()}
-                  className="iconPage__modalButton"
-                  aria-label="last ned ikon som svg"
-                >
-                  <Icons.Download />
-                  SVG
-                </Button>
-                <Button
-                  size="small"
-                  variant="action"
-                  onClick={() => downloadPng()}
-                  className="iconPage__modalButton"
-                  aria-label="last ned ikon som png"
-                >
-                  <Icons.Download />
-                  PNG
-                </Button>
+                <div className="iconPage__modalButton--wrapper">
+                  <Button
+                    size="small"
+                    variant="action"
+                    onClick={() => downloadSvg()}
+                    className="iconPage__modalButton"
+                    aria-label="last ned ikon som svg"
+                  >
+                    <Icons.Download />
+                    SVG
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="action"
+                    onClick={() => downloadPng()}
+                    className="iconPage__modalButton"
+                    aria-label="last ned ikon som png"
+                  >
+                    <Icons.Download />
+                    PNG
+                  </Button>
+                </div>
               </div>
             </div>
             <Undertittel className="iconPage__headlines">React</Undertittel>
@@ -291,7 +293,9 @@ const IconPage = () => {
             >
               {`import { ${selectedIcon.name} } from '@navikt/ds-icons'`}
             </Code>
-            <Undertittel className="iconPage__headlines">SVG</Undertittel>
+            <Undertittel className="iconPage__headlines iconPage__headlines--inline">
+              {`SVG`} <Normaltekst>{`fill="${color}"`}</Normaltekst>
+            </Undertittel>
             <Code
               arialabel="kode-eksempel for ikon svg"
               popupUnder

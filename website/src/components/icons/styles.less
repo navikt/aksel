@@ -32,6 +32,11 @@
   }
 
   &__headlines {
+    &--inline {
+      display: flex;
+      column-gap: 0.5rem;
+      align-items: flex-end;
+    }
     &--sidebar {
       display: none;
 
@@ -88,8 +93,11 @@
       margin-top: 0.2rem;
     }
 
-    &Button.navds-button:last-child {
-      margin-left: 0.5rem;
+    &Button--wrapper {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      column-gap: 0.5rem;
     }
 
     &Svg {
