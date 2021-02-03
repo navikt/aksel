@@ -53,10 +53,11 @@
     "prettier": "2.2.1"
   },
   "scripts": {
-    "build:gatsby": "gatsby build",
+    "build:gatsby": "npm run copy:static && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npx copyfiles -E -f ../@navikt/ds-icons/*.zip ./static && npm run develop",
+    "copy:static": "npx copyfiles -E -f ../@navikt/ds-icons/*.zip ./static",
+    "start": "npm run copy:static && npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
