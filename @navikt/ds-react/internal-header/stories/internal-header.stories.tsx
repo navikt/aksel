@@ -1,10 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import {
-  InternalHeader,
-  InternalHeaderTitle,
-  InternalHeaderUser,
-} from "../src/index";
+import { InternalHeader } from "../src/index";
 
 export default {
   title: "@navikt/internal-header",
@@ -14,8 +10,8 @@ export default {
 export const All = () => (
   <div>
     <InternalHeader>
-      <InternalHeaderTitle>NAV Sykepenger</InternalHeaderTitle>
-      <InternalHeaderUser name="Kong Harald" ident="D123456" />
+      <InternalHeader.Title>NAV Sykepenger</InternalHeader.Title>
+      <InternalHeader.User name="Kong Harald" ident="D123456" />
     </InternalHeader>
 
     <h1>Uten innhold</h1>
@@ -23,34 +19,34 @@ export const All = () => (
 
     <h1>Title</h1>
     <InternalHeader>
-      <InternalHeaderTitle>Tittel</InternalHeaderTitle>
+      <InternalHeader.Title>Tittel</InternalHeader.Title>
     </InternalHeader>
 
     <h1>Title but not heading</h1>
     <InternalHeader>
-      <InternalHeaderTitle element="span">Tittel</InternalHeaderTitle>
+      <InternalHeader.Title element="span">Tittel</InternalHeader.Title>
     </InternalHeader>
 
     <h1>Title with link</h1>
     <InternalHeader>
-      <InternalHeaderTitle>
+      <InternalHeader.Title>
         <a href="/#">Tittel med lenke</a>
-      </InternalHeaderTitle>
+      </InternalHeader.Title>
     </InternalHeader>
 
     <h1>Title with react-router link</h1>
     <Router>
       <InternalHeader>
-        <InternalHeaderTitle>
+        <InternalHeader.Title>
           <Link to="/">Tittel med lenke</Link>
-        </InternalHeaderTitle>
+        </InternalHeader.Title>
       </InternalHeader>
     </Router>
 
     <h1>Title + User</h1>
     <InternalHeader>
-      <InternalHeaderTitle>NAV Sykepenger</InternalHeaderTitle>
-      <InternalHeaderUser name="Kong Harald" ident="D123456" />
+      <InternalHeader.Title>NAV Sykepenger</InternalHeader.Title>
+      <InternalHeader.User name="Kong Harald" ident="D123456" />
     </InternalHeader>
   </div>
 );
