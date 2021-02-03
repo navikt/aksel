@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
-    "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref --icon",
+    "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref --icon --title",
     "convert-icons": "node figma-api/pngConverter.js",
     "clean": "rm -rf src && rm -rf lib && rm -rf png && rm NAV-ikonpakke-png.zip",
     "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons"
