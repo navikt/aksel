@@ -108,3 +108,4 @@ utilities/**/css
 */static/*.zip
 */static/png
 @navikt/ds-icons/NAV-ikonpakke-png.zip
+*/**/NAV-ikonpakke-png.zip
