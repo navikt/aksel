@@ -67,6 +67,10 @@ const IconPage = () => {
     setMeta([...data]);
   }, [checkedBox, filter]);
 
+  useEffect(() => {
+    setColor("currentColor");
+  }, [selectedIcon]);
+
   const generateCategories = () => {
     const categories: CategoryType[] = [];
 
