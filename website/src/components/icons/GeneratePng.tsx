@@ -23,7 +23,7 @@ export const generatePngZip = async (svgstring: string, name: string) => {
 
     zip
       .folder(`${name}-png`)
-      .file(`${name}-${size}.png`, data, { base64: true });
+      .file(`${name}-${size}px.png`, data, { base64: true });
   });
 
   return await zip.generateAsync({ type: "blob" });
