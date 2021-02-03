@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cl from "classnames";
-import { Close, Success, SuccessFilled } from "@navikt/ds-icons";
+import { Close } from "@navikt/ds-icons";
 import "./index.css";
 import "@navikt/ds-css/button/index.css";
 
@@ -28,14 +28,17 @@ const ColorSwitch = ({ onChange, ...props }: ColorSwtichProps) => {
       <button
         className={cls(selectedColor === "currentColor", true)}
         onClick={() => onColorChange("currentColor")}
+        aria-label="Sett farge til currentColor"
       >
         <Close className="colorswitch__closeicon" />
       </button>
       {colors.map((c) => (
         <button
+          key={c}
           className={cls(selectedColor === c)}
           style={{ backgroundColor: c }}
           onClick={() => onColorChange(c)}
+          aria-label={`Sett farge til hex ${c}`}
         ></button>
       ))}
     </div>

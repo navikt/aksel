@@ -34,7 +34,7 @@ const convertToPng = async () => {
     fs.readdirSync(inputDir).map((file) => {
       return limit(() =>
         sizes.forEach((size) => {
-          const density = (72 * size) / 16;
+          const density = (100 * size) / 16;
           sharp(inputDir + file, { density })
             .resize(size)
             .png()

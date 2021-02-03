@@ -11,7 +11,7 @@ import IconSidebar from "./IconSidebar";
 import ColorSwitch from "../color-switch/ColorSwitch";
 import { Button } from "@navikt/ds-react";
 import "./styles.less";
-
+import { generatePngZip } from "./GeneratePng";
 const metadata = require("@navikt/ds-icons/figma-api/metadata.json");
 const beautify_html = require("js-beautify").html;
 
@@ -39,6 +39,7 @@ const IconPage = () => {
   const [filter, setFilter] = useState("");
   const [checkedBox, setCheckedBox] = useState(0);
   const [listView, setListView] = useState(0);
+  const [color, setColor] = useState("currentColor");
 
   const [meta, setMeta] = useState([...metadata]);
 
@@ -92,9 +93,25 @@ const IconPage = () => {
 
   const downloadSvg = () => {
     const element = document.createElement("a");
-    const file = new Blob([renderToString(<Icon />)], { type: "text/plain" });
+    const file = new Blob(
+      [renderToString(<Icon />).replace("currentColor", color)],
+      { type: "text/plain" }
+    );
     element.href = URL.createObjectURL(file);
     element.download = `${selectedIcon.name}.svg`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  const downloadPng = async () => {
+    const element = document.createElement("a");
+    const file = await generatePngZip(
+      renderToString(<Icon />).replace("currentColor", color),
+      selectedIcon.name
+    );
+    element.href = URL.createObjectURL(file);
+    element.download = `${selectedIcon.name}-png.zip`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -240,7 +257,7 @@ const IconPage = () => {
             <div className="iconPage__modal--wrapper">
               <div>
                 <p className="iconPage__modalTitle">Fargevelger</p>
-                <ColorSwitch onChange={(c) => console.log(c)} />
+                <ColorSwitch onChange={(c) => setColor(c)} />
               </div>
               <div>
                 <p className="iconPage__modalTitle">Last ned</p>
@@ -256,7 +273,7 @@ const IconPage = () => {
                 <Button
                   size="small"
                   variant="action"
-                  onClick={() => downloadSvg()}
+                  onClick={() => downloadPng()}
                   className="iconPage__modalButton"
                 >
                   <Icons.Download />
@@ -270,18 +287,22 @@ const IconPage = () => {
             </Code>
             <Undertittel className="iconPage__headlines">SVG</Undertittel>
             <Code popupUnder className="language-jsx iconPage__modalSvg">
-              {`${beautify_html(renderToString(<Icon />))}`}
+              {`${beautify_html(
+                renderToString(<Icon />).replace("currentColor", color)
+              )}`}
             </Code>
             <span className="iconPage__modalIcons">
               <Icon
                 className="iconPage__modalIcons--light"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
+                style={{ color: color === "#0067C5" ? "#0067C5" : "" }}
               />
               <Icon
                 className="iconPage__modalIcons--dark"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
+                style={{ color: color === "#0067C5" ? "#0067C5" : "" }}
               />
             </span>
           </div>
