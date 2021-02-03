@@ -266,6 +266,7 @@ const IconPage = () => {
                   variant="action"
                   onClick={() => downloadSvg()}
                   className="iconPage__modalButton"
+                  aria-label="last ned ikon som svg"
                 >
                   <Icons.Download />
                   SVG
@@ -275,6 +276,7 @@ const IconPage = () => {
                   variant="action"
                   onClick={() => downloadPng()}
                   className="iconPage__modalButton"
+                  aria-label="last ned ikon som png"
                 >
                   <Icons.Download />
                   PNG
@@ -282,11 +284,19 @@ const IconPage = () => {
               </div>
             </div>
             <Undertittel className="iconPage__headlines">React</Undertittel>
-            <Code popupUnder className="language-jsx">
+            <Code
+              arialabel="kode-eksempel for ikon import"
+              popupUnder
+              className="language-jsx"
+            >
               {`import { ${selectedIcon.name} } from '@navikt/ds-icons'`}
             </Code>
             <Undertittel className="iconPage__headlines">SVG</Undertittel>
-            <Code popupUnder className="language-jsx iconPage__modalSvg">
+            <Code
+              arialabel="kode-eksempel for ikon svg"
+              popupUnder
+              className="language-jsx iconPage__modalSvg"
+            >
               {`${beautify_html(
                 renderToString(<Icon />).replace("currentColor", color)
               )}`}

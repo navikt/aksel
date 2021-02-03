@@ -29,6 +29,7 @@ const ColorSwitch = ({ onChange, ...props }: ColorSwtichProps) => {
         className={cls(selectedColor === "currentColor", true)}
         onClick={() => onColorChange("currentColor")}
         aria-label="Sett farge til currentColor"
+        aria-pressed={selectedColor === "currentColor"}
       >
         <Close className="colorswitch__closeicon" />
       </button>
@@ -39,7 +40,8 @@ const ColorSwitch = ({ onChange, ...props }: ColorSwtichProps) => {
           style={{ backgroundColor: c }}
           onClick={() => onColorChange(c)}
           aria-label={`Sett farge til hex ${c}`}
-        ></button>
+          aria-pressed={selectedColor === c}
+        />
       ))}
     </div>
   );
