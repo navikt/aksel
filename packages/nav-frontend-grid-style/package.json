@@ -13,8 +13,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
-  },
-  "devDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
   }
 }

@@ -16,8 +16,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^1.0.1",
-    "react": "^16.8.0 || ^17.0.0"
+    "nav-frontend-paneler-style": "^1.0.1"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
