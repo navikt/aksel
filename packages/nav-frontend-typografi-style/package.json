@@ -12,7 +12,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "dependencies": {
     "nav-frontend-core": "^5.0.11"
