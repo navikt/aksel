@@ -1,20 +1,7 @@
 const fs = require("fs");
 const sharp = require("sharp");
 const rimraf = require("rimraf");
-const zipdir = require("zip-dir");
 const pLimit = require("p-limit");
-
-const zipPng = async () => {
-  await zipdir(
-    "./png/",
-    { saveTo: "NAV-ikonpakke-png.zip" },
-    function (err, buffer) {
-      if (err) {
-        console.error(err);
-      }
-    }
-  );
-};
 
 const convertToPng = async () => {
   const inputDir = "./svg/";
@@ -44,8 +31,6 @@ const convertToPng = async () => {
       );
     })
   );
-
-  await zipPng();
   console.log("Finished converting icons to .png format");
 };
 
