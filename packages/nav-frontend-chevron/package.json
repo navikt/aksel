@@ -20,7 +20,7 @@
     "classnames": "^2.2.5",
     "nav-frontend-chevron-style": "^1.0.3",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -28,7 +28,7 @@
     "classnames": "^2.2.5",
     "nav-frontend-chevron-style": "^1.0.3",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "NavFrontendChevron"
 }

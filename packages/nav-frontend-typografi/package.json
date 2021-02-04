@@ -21,13 +21,13 @@
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-typografi-style": "^1.0.33",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-typografi-style": "^1.0.33",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "TypografiBase"
 }

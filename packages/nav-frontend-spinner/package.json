@@ -21,7 +21,7 @@
     "nav-frontend-ikoner-assets": "^2.0.9",
     "nav-frontend-spinner-style": "^1.0.0",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -29,7 +29,7 @@
     "nav-frontend-ikoner-assets": "^2.0.9",
     "nav-frontend-spinner-style": "^1.0.1",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "NavFrontendSpinner"
 }
