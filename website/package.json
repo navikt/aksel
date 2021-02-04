@@ -39,7 +39,7 @@
     "prism-react-renderer": "^1.1.1",
     "prismjs": "1.23.0",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
+    "react": "^17.0.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-media": "^1.10.0",
