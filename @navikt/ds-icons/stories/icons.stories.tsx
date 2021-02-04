@@ -10,7 +10,7 @@ const iconsStories = storiesOf("@navikt/icons", module);
 Object.entries(Icons).forEach(([name, Icon]) => {
   iconsStories.add(name, () => (
     <div>
-      <Icon />
+      <Icon title="hello, world" />
       <Icon style={{ height: "2em", width: "2em" }} />
       <Icon style={{ height: "4em", width: "4em" }} />
       <Icon style={{ height: "4em", width: "4em", color: "white" }} />
