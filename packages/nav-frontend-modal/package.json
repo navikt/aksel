@@ -22,7 +22,7 @@
     "nav-frontend-lukknapp": "^1.0.48",
     "nav-frontend-modal-style": "^1.0.0",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-modal": "^2.2.4 || ^3.3.1"
   },
   "devDependencies": {
@@ -31,7 +31,7 @@
     "nav-frontend-lukknapp": "^1.0.49",
     "nav-frontend-modal-style": "^1.0.1",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-modal": "^2.2.4 || ^3.3.1"
   },
   "defaultExport": "ModalWrapper"

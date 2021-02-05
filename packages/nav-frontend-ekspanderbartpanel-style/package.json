@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,6 @@
     "nav-frontend-chevron-style": "^1.0.3",
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-paneler-style": "^1.0.1",
-    "nav-frontend-typografi-style": "^1.0.33",
-    "react": "^16.8.0"
+    "nav-frontend-typografi-style": "^1.0.33"
   }
 }

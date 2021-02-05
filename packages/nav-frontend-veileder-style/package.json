@@ -8,11 +8,10 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.11",
-    "react": "^16.8.0"
+    "nav-frontend-core": "^5.0.11"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11"

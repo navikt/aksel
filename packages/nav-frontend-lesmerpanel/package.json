@@ -22,7 +22,7 @@
     "nav-frontend-js-utils": "^1.0.16",
     "nav-frontend-lesmerpanel-style": "^1.0.0",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-collapse": "^5.0.0"
   },
   "devDependencies": {
@@ -32,7 +32,7 @@
     "nav-frontend-js-utils": "^1.0.16",
     "nav-frontend-lesmerpanel-style": "^1.0.1",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-collapse": "^5.0.0"
   },
   "defaultExport": "Lesmerpanel"

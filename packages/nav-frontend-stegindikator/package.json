@@ -16,12 +16,12 @@
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.16",
     "nav-frontend-stegindikator-style": "^1.0.45",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "nav-frontend-js-utils": "^1.0.16",
     "nav-frontend-stegindikator-style": "^1.0.45",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "Stegindikator"
 }
