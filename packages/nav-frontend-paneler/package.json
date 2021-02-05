@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-paneler",
-  "version": "2.0.30",
+  "version": "2.0.31",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -26,9 +26,9 @@
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-paneler-style": "^1.0.1",
-    "nav-frontend-typografi": "^3.0.2",
-    "nav-frontend-typografi-style": "^1.0.33",
+    "nav-frontend-paneler-style": "^1.0.2",
+    "nav-frontend-typografi": "^3.0.3",
+    "nav-frontend-typografi-style": "^1.0.34",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },
