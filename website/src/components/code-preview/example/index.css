@@ -1,0 +1,39 @@
+.codeexample {
+  border: 1px solid var(--navds-color-gray-60);
+  margin-top: 2rem;
+}
+
+.codeexample__inner {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+}
+
+.codeexample__inner:first-child {
+  margin-top: 0;
+}
+
+.codeexample__inner:last-child {
+  margin-bottom: 0;
+}
+.codeexample__options {
+  border-top: 1px solid var(--navds-color-gray-60);
+  padding: 1rem 2rem;
+}
+
+.codeexample h2,
+.typo-systemtittel,
+.typo-undertittel,
+.panel {
+  margin: 0 !important;
+}
+.codeexample--greyBg {
+  background: var(--navds-color-gray-60);
+}
+
+@media (max-width: 550px) {
+  .codeexample__inner {
+    padding: 1.5rem;
+  }
+}

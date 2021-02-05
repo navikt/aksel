@@ -3,7 +3,7 @@ import { MDXProvider } from "@mdx-js/react";
 import { Link } from "gatsby";
 import { NAVLogo } from "../../assets/images/svg";
 import { useBetaMenu } from "../../../useSiteStructure";
-import Example from "../../example/Example";
+import Example from "../../code-preview/example/CodeExample";
 import Codeblock, { InlineCode } from "../../code/Code";
 import { Heading, Paragraph } from "@navikt/ds-react";
 import "./layout.css";
@@ -71,7 +71,7 @@ const BetaLayout = (props) => (
         components={{
           code: (props) => <Codeblock {...props} />,
           inlineCode: (props) => <InlineCode {...props} />,
-          Example,
+          Example: (props) => <Example {...props} />,
           h1: (props) => <Heading {...props} level={1} size="xxl" />,
           h2: (props) => <Heading {...props} level={2} size="xl" />,
           h3: (props) => <Heading {...props} level={3} size="large" />,

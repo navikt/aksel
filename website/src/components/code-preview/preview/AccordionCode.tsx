@@ -4,7 +4,7 @@ import Prism from "prismjs";
 import React, { useState } from "react";
 import { Collapse } from "react-collapse";
 import "@navikt/ds-css/accordion/index.css";
-import "./theme.css";
+import "../../code/theme.css";
 import "./index.css";
 
 export const AccordionCode = ({ children, type, ...props }) => {

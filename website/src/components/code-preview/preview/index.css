@@ -38,6 +38,11 @@
   transition: height 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955),
     padding 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
   padding: 0 1rem;
+  border-left: 1px solid var(--navds-color-gray-60);
+  border-right: 1px solid var(--navds-color-gray-60);
+}
+
+.code__dropdownCode[aria-hidden="false"] {
   border: 1px solid var(--navds-color-gray-60);
   border-top: none;
 }

@@ -6,7 +6,7 @@ import { Normaltekst } from "nav-frontend-typografi";
 import Prism from "prismjs";
 import React, { useState } from "react";
 import { CopyIcon } from "../assets/images/svg";
-import { AccordionCode } from "./AccordionCode";
+import { AccordionCode } from "../code-preview/preview/AccordionCode";
 import "./styles.less";
 import "./theme.css";
 
