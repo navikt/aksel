@@ -8,7 +8,6 @@
 
 - Alle react komponenter har nå devDep og peerDep `^16.8.0 || ^17.0.0`
 - React er fjernet som devDep for stilpakker
-- Selv om minstekrav for react er satt til `16.8.0`, fungerer alle komponenter med react `^16.0.0`.
 
 ## 05. Februar 2021
 
