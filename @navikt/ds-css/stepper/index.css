@@ -1,2 +1,35 @@
+/* Stepper */
 .navds-stepper {
+  align-items: center;
+}
+
+.navds-stepper--horizontal {
+  flex-direction: row;
+}
+
+.navds-stepper--vertical {
+  flex-direction: column;
+}
+
+/* Step */
+.navds-stepper__step--horizontal {
+  flex: 1;
+  position: relative;
+}
+
+.navds-stepper__step--vertical {
+  flex: 1;
+  position: relative;
+}
+
+.navds-stepper__stepInner--horizontal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.navds-stepper__stepInner--vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
