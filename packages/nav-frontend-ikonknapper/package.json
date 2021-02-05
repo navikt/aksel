@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ikonknapper",
-  "version": "1.0.33",
+  "version": "1.0.37",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -17,15 +17,15 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "peerDependencies": {
-    "nav-frontend-chevron": "^1.0.25",
-    "nav-frontend-ikoner-assets": "^2.0.8",
-    "nav-frontend-knapper": "^2.0.27",
-    "react": "^16.8.0"
+    "nav-frontend-chevron": "^1.0.27",
+    "nav-frontend-ikoner-assets": "^2.0.9",
+    "nav-frontend-knapper": "^2.0.29",
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "nav-frontend-chevron": "^1.0.25",
-    "nav-frontend-ikoner-assets": "^2.0.8",
-    "nav-frontend-knapper": "^2.0.27",
-    "react": "^16.8.0"
+    "nav-frontend-chevron": "^1.0.28",
+    "nav-frontend-ikoner-assets": "^2.0.10",
+    "nav-frontend-knapper": "^2.0.31",
+    "react": "^16.8.0 || ^17.0.0"
   }
 }

@@ -1,7 +1,13 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "private": false,
+  "description": "NAVs egne ikoner i SVG og React format",
+  "keywords": [
+    "NAV",
+    "designsystem",
+    "react"
+  ],
   "license": "MIT",
   "author": "NAV",
   "main": "lib/index.js",
@@ -13,12 +19,14 @@
   ],
   "scripts": {
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
-    "create-icons": "svgr --template template/reactTemplate.js -d src svg --typescript --ref",
-    "build": "rm -rf src && rm -rf lib && npm run create-icons && tsc"
+    "create-icons": "svgr --silent --typescript --ref --icon --title-prop --replace-attr-values \"#3E3832=currentColor\" -d src svg",
+    "convert-icons": "node figma-api/pngConverter.js",
+    "clean": "rm -rf src && rm -rf lib && rm -rf png && rm -rf NAV-ikonpakke-png.zip && rm -rf NAV-ikonpakke-svg.zip",
+    "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons && node figma-api/zipIcons.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-icons.git"
+    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-icons"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
@@ -29,6 +37,9 @@
     "lodash.kebabcase": "^4.1.1",
     "lodash.startcase": "4.4.0",
     "react": "^16.8.0 || ^17.0.0",
-    "rimraf": "3.0.2"
-  }
+    "rimraf": "3.0.2",
+    "sharp": "0.27.1",
+    "zip-dir": "^2.0.0"
+  },
+  "sideEffects": false
 }

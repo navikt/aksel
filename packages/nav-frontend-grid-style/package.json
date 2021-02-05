@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-grid-style",
-  "version": "0.2.25",
+  "version": "1.0.2",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -8,13 +8,10 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
-  },
-  "devDependencies": {
-    "react": "^16.8.0"
   }
 }

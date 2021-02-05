@@ -8,10 +8,9 @@ import {
 } from "@navikt/ds-icons";
 import "@navikt/ds-css/alert/index.css";
 
-export interface AlertProps {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "error" | "warning" | "info" | "success";
   children: React.ReactNode;
-  className?: string;
   size?: "medium" | "small";
 }
 
@@ -31,7 +30,7 @@ const Icon = ({ variant }) => {
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "medium" }, ref) => (
+  ({ variant, children, className, size = "medium", ...rest }, ref) => (
     <div
       ref={ref}
       className={cl(
@@ -40,6 +39,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         `navds-alert--${variant}`,
         `navds-alert--${size}`
       )}
+      {...rest}
     >
       <title id="svgtitle1">Settings</title>
       <Icon aria-labelledby="svgtitle1" variant={variant} />

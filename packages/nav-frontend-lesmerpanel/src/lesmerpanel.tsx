@@ -6,7 +6,8 @@ import { guid, omit } from "nav-frontend-js-utils";
 import * as classNames from "classnames";
 import LesmerpanelToggle from "./lesmerpanelToggle";
 
-export interface LesMerPanelBaseProps {
+export interface LesMerPanelBaseProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Hvorvidt panelet initielt er åpent
    */

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-modal",
-  "version": "1.0.59",
+  "version": "1.0.63",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -19,19 +19,19 @@
   "peerDependencies": {
     "@types/react-modal": "^3.1.2",
     "classnames": "^2.2.5",
-    "nav-frontend-lukknapp": "^1.0.46",
-    "nav-frontend-modal-style": "^0.3.49",
+    "nav-frontend-lukknapp": "^1.0.48",
+    "nav-frontend-modal-style": "^1.0.0",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-modal": "^2.2.4 || ^3.3.1"
   },
   "devDependencies": {
     "@types/react-modal": "^3.1.2",
     "classnames": "^2.2.5",
-    "nav-frontend-lukknapp": "^1.0.46",
-    "nav-frontend-modal-style": "^0.3.49",
+    "nav-frontend-lukknapp": "^1.0.50",
+    "nav-frontend-modal-style": "^1.0.2",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0",
+    "react": "^16.8.0 || ^17.0.0",
     "react-modal": "^2.2.4 || ^3.3.1"
   },
   "defaultExport": "ModalWrapper"

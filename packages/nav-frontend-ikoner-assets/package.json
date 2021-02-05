@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ikoner-assets",
-  "version": "2.0.8",
+  "version": "2.0.10",
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "/src",
@@ -18,6 +18,6 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   }
 }

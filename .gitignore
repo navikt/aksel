@@ -101,5 +101,13 @@ examples/webpack/out
 *-exports.less
 **/css/
 */figma-api/icons
+*/ds-icons/png
 packages/**/css
 utilities/**/css
+
+*/static/*.zip
+*/static/png
+@navikt/ds-icons/NAV-ikonpakke-png.zip
+@navikt/ds-icons/NAV-ikonpakke-svg.zip
+*/**/NAV-ikonpakke-png.zip
+*/**/NAV-ikonpakke-svg.zip

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ekspanderbartpanel",
-  "version": "3.0.50",
+  "version": "3.0.54",
   "main": "lib/index.js",
   "license": "MIT",
   "types": "lib/index.d.ts",
@@ -19,9 +19,9 @@
   "peerDependencies": {
     "@types/react-collapse": "^5.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-ekspanderbartpanel-style": "^1.0.36",
-    "nav-frontend-js-utils": "^1.0.15",
-    "react": "^16.8.0",
+    "nav-frontend-ekspanderbartpanel-style": "^1.0.38",
+    "nav-frontend-js-utils": "^1.0.16",
+    "react": "^16.8.0 || ^17.0.0",
     "react-collapse": "^5.0.0"
   },
   "devDependencies": {
@@ -29,9 +29,9 @@
     "@types/react": "15.0.23 || ^16.0.0",
     "@types/react-collapse": "^5.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-ekspanderbartpanel-style": "^1.0.36",
-    "nav-frontend-js-utils": "^1.0.15",
-    "react": "^16.8.0",
+    "nav-frontend-ekspanderbartpanel-style": "^1.0.40",
+    "nav-frontend-js-utils": "^1.0.17",
+    "react": "^16.8.0 || ^17.0.0",
     "react-collapse": "^5.0.0"
   },
   "defaultExport": "Ekspanderbartpanel"

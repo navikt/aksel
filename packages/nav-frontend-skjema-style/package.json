@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-skjema-style",
-  "version": "2.0.27",
+  "version": "2.0.31",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -16,13 +16,12 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.33",
-    "nav-frontend-typografi-style": "^1.0.32",
-    "react": "^16.8.0"
+    "nav-frontend-paneler-style": "^1.0.2",
+    "nav-frontend-typografi-style": "^1.0.34"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.33",
-    "nav-frontend-typografi-style": "^1.0.32"
+    "nav-frontend-paneler-style": "^1.0.0",
+    "nav-frontend-typografi-style": "^1.0.33"
   }
 }

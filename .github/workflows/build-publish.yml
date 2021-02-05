@@ -59,7 +59,7 @@ jobs:
         with:
           token: ${{ secrets.GIT_REPO }}
           projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: false
+          exitZeroOnChanges: true
 
   publish-npm:
     needs: chromatic
@@ -90,10 +90,7 @@ jobs:
       - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-      - run: yarn lerna version patch --include-merged-tags --no-private --no-push --yes
-      - run: yarn fix:versions
-      - run: git commit -a -m "Lerna versionbump [ci skip]" || true
-      - run: git push && git push --tags
+      - run: yarn lerna version patch --include-merged-tags --no-private --yes
       - run: yarn lerna publish from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}

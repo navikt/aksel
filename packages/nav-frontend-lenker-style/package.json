@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenker-style",
-  "version": "0.2.41",
+  "version": "1.0.2",
   "main": "src/lenker-style.less",
   "license": "MIT",
   "files": [
@@ -8,15 +8,14 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.11",
-    "react": "^16.8.0"
+    "nav-frontend-core": "^5.0.11"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11"

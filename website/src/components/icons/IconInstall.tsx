@@ -25,7 +25,6 @@ const IconInstall = () => {
       >
         npm i @navikt/ds-icons
       </Bash>
-
       <Ingress>
         Ikonene er tilgjengeliggjort for React og SVG.
         <Ingress>
@@ -46,7 +45,6 @@ const IconInstall = () => {
         <InlineCode>`role`</InlineCode>, <InlineCode>`focusable`</InlineCode>{" "}
         propsene for en tilgjengelig brukeropplevelse.
       </Ingress>
-
       <Systemtittel className="iconPage__headlines">Bruk</Systemtittel>
       <Normaltekst>
         SVG til ikonene har height og width satt til{" "}
@@ -58,21 +56,29 @@ const IconInstall = () => {
       <Code popupUnder className="language-jsx">
         {`import { System } from '@navikt/ds-icons';`}
       </Code>
+      <Ingress>Med wrapper (16px font-size)</Ingress>
       <Code popupUnder className="language-jsx">
-        {`<System aria-label="System ikon" role="img" focusable="false"/>`}
+        {`<span style={{"fontSize": "1.5rem"}}>\n\t<System \n\t\taria-label="System ikon" \n\t\trole="img" \n\t\tfocusable="false"\n\t/>\n</span>`}
       </Code>
+      <Ingress>Uten wrapper (16px font-size)</Ingress>
       <Code popupUnder className="language-jsx">
-        {`<System style={{"fontSize": "24px"}} aria-label="System ikon" role="img" focusable="false"/>`}
+        {`<System \n\tstyle={{"fontSize": "1.5rem"}} \n\taria-label="System ikon" \n\trole="img" \n\tfocusable="false"\n/>`}
       </Code>
       <Undertittel className="iconPage__headlines">SVG</Undertittel>
       <Code popupUnder className="language-jsx">
-        {`import System from '@navikt/ds-icons/svg/system.svg';`}
+        {`const System = require('@navikt/ds-icons/svg/System.svg');`}
       </Code>
+      <Ingress>
+        Med <InlineCode>img</InlineCode> (16px font-size)
+      </Ingress>
       <Code popupUnder className="language-jsx">
-        {`<img src={System} alt="System ikon" />`}
+        {`<img \n\tsrc={System} \n\tstyle={{ height: "1.5rem" }} \n\talt="System ikon" \n/>`}
+      </Code>
+      <Ingress>Med CSS</Ingress>
+      <Code popupUnder className="language-jsx">
+        {`.cssClass::after { \n\tcontent: url("~@navikt/ds-icons/svg/System.svg");\n}`}
       </Code>
     </div>
   );
 };
-
 export default IconInstall;

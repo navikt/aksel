@@ -5,13 +5,6 @@ const pLimit = require("p-limit");
 const rimraf = require("rimraf");
 const startCase = require("lodash.startcase");
 
-const manipulateSvg = (svgString) => {
-  let changed = svgString.replace(/width="[^"]*"/, `width="1em"`);
-  changed = changed.replace(/height="[^"]*"/, `height="1em"`);
-  changed = changed.replace(new RegExp("#3E3832", "g"), `currentColor`);
-  return changed;
-};
-
 const generateMetadata = (iconNodesArr) => {
   return iconNodesArr
     .map(({ name, description, created_at, updated_at, containing_frame }) => {
@@ -70,8 +63,7 @@ const main = async () => {
       limit(() =>
         api
           .getIconContent(url)
-          .then(({ data }) => manipulateSvg(data))
-          .then((data) => {
+          .then(({ data }) => {
             fs.writeFileSync(
               path.resolve(
                 iconFolder,

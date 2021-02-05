@@ -8,10 +8,6 @@ export interface LinkProps
    * Link anchor should direct to
    */
   href: string;
-  /**
-   * User defined classname
-   */
-  className?: string;
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(

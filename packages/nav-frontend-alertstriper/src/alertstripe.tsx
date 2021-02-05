@@ -31,7 +31,7 @@ const ikonKind = (type: AlertStripeType) => {
   }
 };
 
-export interface AlertStripeProps {
+export interface AlertStripeProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * -
    */
@@ -57,9 +57,7 @@ export interface AlertStripeBaseProps extends AlertStripeProps {
   form?: AlertStripeForm;
 }
 
-type Props = AlertStripeBaseProps & React.HTMLAttributes<HTMLDivElement>;
-
-class AlertStripe extends React.Component<Props> {
+class AlertStripe extends React.Component<AlertStripeBaseProps> {
   render() {
     const { type, form, size, className, children, ...props } = this.props;
     return (
