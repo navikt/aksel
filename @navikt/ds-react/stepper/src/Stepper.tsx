@@ -12,6 +12,7 @@ import "@navikt/ds-css/stepper/index.css";
 export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   orientation?: "horizontal" | "vertical";
+  activeStep?: number;
 }
 
 interface StepperComponent
