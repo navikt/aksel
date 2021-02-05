@@ -28,6 +28,7 @@ export interface CodeProps {
   onClick?: (event: React.SyntheticEvent) => void;
   noCopy?: boolean;
   popupUnder?: boolean;
+  arialabel?: string;
 }
 
 export const InlineCode = ({ children, className, ...props }: CodeProps) => (
@@ -95,6 +96,7 @@ const Code = ({
   className,
   noCopy,
   popupUnder = false,
+  arialabel,
   ...props
 }: CodeProps) => {
   const [anchor, setAnchor] = useState(undefined);
@@ -128,7 +130,13 @@ const Code = ({
       <figure
         className={classnames({ "code-example": !noCopy })}
         role={noCopy ? "figure" : "button"}
-        aria-label={noCopy ? "Kode-eksempel" : "Kopier kode-eksempel"}
+        aria-label={
+          arialabel
+            ? arialabel
+            : noCopy
+            ? "Kode-eksempel"
+            : "Kopier kode-eksempel"
+        }
         {...getNewProps()}
       >
         <pre className="language-">

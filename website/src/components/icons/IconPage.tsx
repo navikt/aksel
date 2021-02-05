@@ -1,16 +1,17 @@
 import * as Icons from "@navikt/ds-icons";
 import { List, System } from "@navikt/ds-icons";
-import Knapp from "nav-frontend-knapper";
 import Modal from "nav-frontend-modal";
 import { Input, Checkbox } from "nav-frontend-skjema";
-import { Systemtittel, Undertittel } from "nav-frontend-typografi";
+import { Normaltekst, Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
 import Code from "../code/Code";
 import IconBox from "./IconBox";
 import IconSidebar from "./IconSidebar";
+import ColorSwitch from "../color-switch/ColorSwitch";
+import { Button } from "@navikt/ds-react";
 import "./styles.less";
-
+import { generatePngZip } from "./GeneratePng";
 const metadata = require("@navikt/ds-icons/figma-api/metadata.json");
 const beautify_html = require("js-beautify").html;
 
@@ -38,6 +39,7 @@ const IconPage = () => {
   const [filter, setFilter] = useState("");
   const [checkedBox, setCheckedBox] = useState(0);
   const [listView, setListView] = useState(0);
+  const [color, setColor] = useState("currentColor");
 
   const [meta, setMeta] = useState([...metadata]);
 
@@ -65,6 +67,10 @@ const IconPage = () => {
     setMeta([...data]);
   }, [checkedBox, filter]);
 
+  useEffect(() => {
+    setColor("currentColor");
+  }, [selectedIcon]);
+
   const generateCategories = () => {
     const categories: CategoryType[] = [];
 
@@ -91,9 +97,25 @@ const IconPage = () => {
 
   const downloadSvg = () => {
     const element = document.createElement("a");
-    const file = new Blob([renderToString(<Icon />)], { type: "text/plain" });
+    const file = new Blob(
+      [renderToString(<Icon />).replace("currentColor", color)],
+      { type: "text/plain" }
+    );
     element.href = URL.createObjectURL(file);
     element.download = `${selectedIcon.name}.svg`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  const downloadPng = async () => {
+    const element = document.createElement("a");
+    const file = await generatePngZip(
+      renderToString(<Icon />).replace("currentColor", color),
+      selectedIcon.name
+    );
+    element.href = URL.createObjectURL(file);
+    element.download = `${selectedIcon.name}-png.zip`;
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
@@ -203,24 +225,24 @@ const IconPage = () => {
       <span className="iconPage__viewSelect">
         <Undertittel className="iconPage__headlines">{headline()}</Undertittel>
         <span>
-          <Knapp
-            kompakt
-            mini
+          <Button
             onClick={() => setListView(0)}
-            type={listView ? "flat" : "standard"}
+            variant={!listView ? "primary" : "secondary"}
             aria-label="Vis ikoner med kategorier"
+            size="small"
+            className="iconPage__viewSelectButton"
           >
             <List />
-          </Knapp>
-          <Knapp
-            kompakt
-            mini
+          </Button>
+          <Button
             onClick={() => setListView(1)}
-            type={listView ? "standard" : "flat"}
+            variant={!listView ? "secondary" : "primary"}
             aria-label="Vis ikoner uten kategorier"
+            size="small"
+            className="iconPage__viewSelectButton"
           >
             <System />
-          </Knapp>
+          </Button>
         </span>
       </span>
 
@@ -236,31 +258,69 @@ const IconPage = () => {
         >
           <div>
             <Systemtittel>{selectedIcon.name}</Systemtittel>
-            <Knapp
-              kompakt
-              onClick={() => downloadSvg()}
-              style={{ textTransform: "none" }}
-            >
-              {`Last ned ${selectedIcon.name}.svg`}
-            </Knapp>
+            <div className="iconPage__modal--wrapper">
+              <div>
+                <p className="iconPage__modalTitle">Fargevelger</p>
+                <ColorSwitch onChange={(c) => setColor(c)} />
+              </div>
+              <div style={{ marginLeft: "2rem" }}>
+                <p className="iconPage__modalTitle">Last ned</p>
+                <div className="iconPage__modalButton--wrapper">
+                  <Button
+                    size="small"
+                    variant="action"
+                    onClick={() => downloadSvg()}
+                    className="iconPage__modalButton"
+                    aria-label="last ned ikon som svg"
+                  >
+                    <Icons.Download />
+                    SVG
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="action"
+                    onClick={() => downloadPng()}
+                    className="iconPage__modalButton"
+                    aria-label="last ned ikon som png"
+                  >
+                    <Icons.Download />
+                    PNG
+                  </Button>
+                </div>
+              </div>
+            </div>
             <Undertittel className="iconPage__headlines">React</Undertittel>
-            <Code popupUnder className="language-jsx">
+            <Code
+              arialabel="kode-eksempel for ikon import"
+              popupUnder
+              className="language-jsx"
+            >
               {`import { ${selectedIcon.name} } from '@navikt/ds-icons'`}
             </Code>
-            <Undertittel className="iconPage__headlines">SVG</Undertittel>
-            <Code popupUnder className="language-jsx iconPage__modalSvg">
-              {`${beautify_html(renderToString(<Icon />))}`}
+            <Undertittel className="iconPage__headlines iconPage__headlines--inline">
+              {`SVG`} <Normaltekst>{`fill="${color}"`}</Normaltekst>
+            </Undertittel>
+            <Code
+              arialabel="kode-eksempel for ikon svg"
+              popupUnder
+              className="language-jsx iconPage__modalSvg"
+            >
+              {`${beautify_html(
+                renderToString(<Icon />).replace("currentColor", color)
+              )}`}
             </Code>
             <span className="iconPage__modalIcons">
               <Icon
                 className="iconPage__modalIcons--light"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
+                style={{ color: color === "#0067C5" ? "#0067C5" : "" }}
               />
               <Icon
                 className="iconPage__modalIcons--dark"
                 aria-label={`${selectedIcon.name}-ikon mørk`}
                 role="img"
+                style={{ color: color === "#0067C5" ? "#0067C5" : "" }}
               />
             </span>
           </div>

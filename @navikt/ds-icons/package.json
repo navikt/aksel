@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
   "keywords": [
@@ -21,8 +21,8 @@
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --silent --typescript --ref --icon --title-prop --replace-attr-values \"#3E3832=currentColor\" -d src svg",
     "convert-icons": "node figma-api/pngConverter.js",
-    "clean": "rm -rf src && rm -rf lib && rm -rf png && rm -rf NAV-ikonpakke-png.zip",
-    "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons"
+    "clean": "rm -rf src && rm -rf lib && rm -rf png && rm -rf NAV-ikonpakke-png.zip && rm -rf NAV-ikonpakke-svg.zip",
+    "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons && node figma-api/zipIcons.js"
   },
   "repository": {
     "type": "git",
