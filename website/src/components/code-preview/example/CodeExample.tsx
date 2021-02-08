@@ -1,5 +1,5 @@
 import cn from "classnames";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import OverflowDetector from "../../overflow-detector/OverflowDetector";
 import ColorSwitch from "../../color-switch/ColorSwitch";
 import "./index.css";
@@ -17,6 +17,8 @@ const Example = ({
   ...props
 }: ExampleProps) => {
   const [color, setColor] = useState("#ffffff");
+  const backgroundColors = useRef(["#f1f1f1", "#ffffff"]);
+
   return (
     <div className={cn("codeexample", className)} role="region" {...props}>
       <OverflowDetector>
@@ -24,9 +26,15 @@ const Example = ({
           {children}
         </div>
         {colorPicker && (
-          <div className="codeexample__options">
-            Bakgrunnsfarge
-            <ColorSwitch onChange={(c) => setColor(c)} />
+          <div
+            className="codeexample__options"
+            style={{ backgroundColor: color }}
+          >
+            Bakgrunnsfarge {color}
+            <ColorSwitch
+              colors={backgroundColors.current}
+              onChange={(c) => setColor(c)}
+            />
           </div>
         )}
       </OverflowDetector>

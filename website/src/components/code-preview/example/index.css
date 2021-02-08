@@ -1,6 +1,7 @@
 .codeexample {
-  border: 1px solid var(--navds-color-gray-60);
+  border: 4px solid #f1f1f1;
   margin-top: 2rem;
+  border-bottom: 1px solid var(--navds-color-gray-40);
 }
 
 .codeexample__inner {
@@ -17,8 +18,8 @@
 .codeexample__inner:last-child {
   margin-bottom: 0;
 }
+
 .codeexample__options {
-  border-top: 1px solid var(--navds-color-gray-60);
   padding: 1rem 2rem;
 }
 

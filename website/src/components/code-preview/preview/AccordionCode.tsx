@@ -41,12 +41,9 @@ export const AccordionCode = ({ children, type, ...props }) => {
             "code__dropdownCode--open": open,
           })}
         >
-          <figure
-            /* className="code-example" */
-            role="figure"
-            aria-label="Kode-eksempel"
-          >
-            <pre className="code__dropdownCode--pre">
+          <figure role="figure" aria-label="Kode-eksempel">
+            <pre className="code__dropdownCode--pre" tabIndex={open ? 0 : -1}>
+              <span className="code__dropdownCode--copy">copy</span>
               <code
                 className="code__dropdownCode--code"
                 {...props}

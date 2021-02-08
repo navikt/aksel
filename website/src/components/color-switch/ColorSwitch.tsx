@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cl from "classnames";
 import { Close } from "@navikt/ds-icons";
 import "./index.css";
@@ -11,29 +11,38 @@ const cls = (selected, none = false) => {
   });
 };
 
-interface ColorSwtichProps {
+interface ColorSwtichProps extends React.HTMLAttributes<HTMLDivElement> {
   onChange: (color) => void;
+  colors?: string[];
 }
 
-const ColorSwitch = ({ onChange, ...props }: ColorSwtichProps) => {
-  const colors = ["#FFFFFF", "#000000", "#0067C5"];
+const ColorSwitch = ({ onChange, colors, ...props }: ColorSwtichProps) => {
+  const defaultColors = ["#FFFFFF", "#000000", "#0067C5"];
   const [selectedColor, setSelectedColor] = useState("currentColor");
 
   const onColorChange = (color) => {
     setSelectedColor(color);
     onChange(color);
   };
+
+  useEffect(() => {
+    colors && setSelectedColor(colors[0]);
+  }, [colors]);
+
+  const avaliableColors = colors ? colors : defaultColors;
   return (
-    <div className="colorswitch">
-      <button
-        className={cls(selectedColor === "currentColor", true)}
-        onClick={() => onColorChange("currentColor")}
-        aria-label="Sett farge til currentColor"
-        aria-pressed={selectedColor === "currentColor"}
-      >
-        <Close className="colorswitch__closeicon" />
-      </button>
-      {colors.map((c) => (
+    <div className="colorswitch" {...props}>
+      {!colors && (
+        <button
+          className={cls(selectedColor === "currentColor", true)}
+          onClick={() => onColorChange("currentColor")}
+          aria-label="Sett farge til currentColor"
+          aria-pressed={selectedColor === "currentColor"}
+        >
+          <Close className="colorswitch__closeicon" />
+        </button>
+      )}
+      {avaliableColors.map((c) => (
         <button
           key={c}
           className={cls(selectedColor === c)}
