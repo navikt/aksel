@@ -2,8 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import "@navikt/ds-css/button/index.css";
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "action" | "danger";
   size?: "medium" | "small";
 }
@@ -11,7 +10,6 @@ export interface ButtonProps
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = "primary", className, size = "medium", ...rest }, ref) => (
     <button
-      {...rest}
       ref={ref}
       className={cl(
         className,
@@ -19,6 +17,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         `navds-button--${variant}`,
         `navds-button--${size}`
       )}
+      {...rest}
     />
   )
 );

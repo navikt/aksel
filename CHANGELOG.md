@@ -1,5 +1,32 @@
 # Endringslogg
 
+## 05. Februar 2021
+
+### Komponenter støtter nå React v17
+
+[#979](https://github.com/navikt/nav-frontend-moduler/pull/979)
+
+- Alle react komponenter har nå devDep og peerDep `^16.8.0 || ^17.0.0`
+- React er fjernet som devDep for stilpakker
+
+## 05. Februar 2021
+
+### Ikon-nedlastning i PNG format
+
+[#973](https://github.com/navikt/nav-frontend-moduler/pull/973)
+
+- Ikonsiden tilbyr nå både nedlastning av ikoner i SVG og PNG format
+- Fargevelger for ikon er laget for å kunne laste ned ikonene med forskjellige farger.
+
+## 29. Januar 2021
+
+### Publisering av ikonpakke og ikonsøk
+
+[#945](https://github.com/navikt/nav-frontend-moduler/pull/945)
+
+- `@navikt/ds-icons` er publisert som version 0.1.0
+- Ikonsøket på design.nav.no er nå i bruk
+
 ## 25. Januar 2021
 
 ### Fjernet komponenten EtikettLiten

@@ -1,6 +1,9 @@
 const reactDocgen = require("react-docgen-typescript").withDefaultConfig({
   propFilter(prop) {
     if (prop.parent) {
+      if (prop.name === "className") {
+        return true;
+      }
       return !prop.parent.fileName.includes("node_modules");
     }
     return true;

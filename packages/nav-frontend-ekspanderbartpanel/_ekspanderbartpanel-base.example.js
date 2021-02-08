@@ -4,9 +4,12 @@ import { EkspanderbartpanelBase } from "./";
 
 const btnStyle = { marginRight: "0.5rem", marginBottom: "1rem" };
 export default class EkspanderbartpanelEksempel extends Component {
-  state = {
-    apen: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      apen: false,
+    };
+  }
 
   open() {
     this.setState({ apen: true });

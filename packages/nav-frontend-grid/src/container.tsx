@@ -9,7 +9,7 @@ const cls = (fluid, className) =>
     "container-fluid": fluid === true,
   });
 
-export interface ContainerProps {
+export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   fluid?: boolean;
 }

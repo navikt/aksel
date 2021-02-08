@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lesmerpanel-style",
-  "version": "0.0.45",
+  "version": "1.0.2",
   "main": "src/lesmerpanel-style.less",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -16,11 +16,10 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.33",
-    "react": "^15.4.2 || ^16.0.0"
+    "nav-frontend-paneler-style": "^1.0.2"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^0.3.33"
+    "nav-frontend-paneler-style": "^1.0.0"
   }
 }

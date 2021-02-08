@@ -5,7 +5,7 @@ import "nav-frontend-grid-style";
 
 const cls = (className) => classNames("row", className, {});
 
-export interface RowProps {
+export interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 

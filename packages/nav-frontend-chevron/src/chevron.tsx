@@ -26,7 +26,8 @@ const cls = (type?, stor?: boolean, className?: string) =>
  * HoyreChevron, VenstreChevron, OppChevron, VenstreChevron.
  */
 
-export interface NavFrontendChevronProps {
+export interface NavFrontendChevronProps
+  extends React.HTMLAttributes<HTMLSpanElement> {
   /**
    * Bestemmer hvilken vei Chevron skal peke
    */

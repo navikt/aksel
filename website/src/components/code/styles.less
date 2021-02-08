@@ -69,20 +69,16 @@ pre {
 }
 
 .code-example {
-  outline-style: none;
-  border-left: 0.2rem solid #f4f4f4;
-  border-bottom: 0.2rem solid #f4f4f4;
+  border: 3px solid #f4f4f4;
+  border-top: none;
 
-  &:hover,
-  &:focus {
-    border-left: 0.2rem solid @fokusFarge;
-    border-bottom: 0.2rem solid @fokusFarge;
+  &:hover {
+    box-shadow: var(--navds-shadow-hover);
   }
 
-  &:active,
-  &:active:hover,
-  &:active:focus {
-    border-left: 0.2rem solid @fokusFarge;
-    border-bottom: 0.2rem solid @fokusFarge;
+  &:focus {
+    outline: none;
+    border: 3px solid #254b6d;
+    border-top: none;
   }
 }

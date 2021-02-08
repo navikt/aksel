@@ -1,37 +1,36 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import {
-  ErrorSolid,
-  WarningSolid,
-  InformationSolid,
-  SuccessSolid,
+  ErrorFilled,
+  WarningFilled,
+  InformationFilled,
+  SuccessFilled,
 } from "@navikt/ds-icons";
 import "@navikt/ds-css/alert/index.css";
 
-export interface AlertProps {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "error" | "warning" | "info" | "success";
   children: React.ReactNode;
-  className?: string;
   size?: "medium" | "small";
 }
 
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <ErrorSolid />;
+      return <ErrorFilled />;
     case "warning":
-      return <WarningSolid />;
+      return <WarningFilled />;
     case "info":
-      return <InformationSolid />;
+      return <InformationFilled />;
     case "success":
-      return <SuccessSolid />;
+      return <SuccessFilled />;
     default:
       return null;
   }
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "medium" }, ref) => (
+  ({ variant, children, className, size = "medium", ...rest }, ref) => (
     <div
       ref={ref}
       className={cl(
@@ -40,6 +39,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         `navds-alert--${variant}`,
         `navds-alert--${size}`
       )}
+      {...rest}
     >
       <Icon variant={variant} />
       <span>{children}</span>

@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-js-utils",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -19,12 +19,12 @@
   "peerDependencies": {
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.5.10",
-    "react": "^15.4.2 || ^16.0.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "dependencies": {
     "lodash.throttle": "^4.1.1"

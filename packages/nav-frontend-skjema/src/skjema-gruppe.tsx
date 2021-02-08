@@ -16,7 +16,7 @@ export const SkjemaGruppeFeilContext = React.createContext<
   Partial<SkjemaGruppeFeilContextProps>
 >({});
 
-export interface SkjemaGruppeProps {
+export interface SkjemaGruppeProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * En eller flere children, oftest en eller flere .skjemaelement
    */

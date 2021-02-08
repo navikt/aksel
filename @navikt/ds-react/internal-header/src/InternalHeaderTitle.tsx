@@ -5,7 +5,6 @@ import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
-  className?: string;
   element?: keyof React.ReactHTML;
 }
 

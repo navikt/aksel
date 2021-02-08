@@ -5,7 +5,6 @@ import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {
-  className?: string;
   name: string;
   ident: string;
 }
