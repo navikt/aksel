@@ -162,7 +162,12 @@ module.exports = {
         large: { value: "800px" },
       },
       gutter: {
-        value: "24px",
+        small: {
+          value: "16px",
+        },
+        mediumAndLarger: {
+          value: "24px",
+        },
       },
     },
     z: {
