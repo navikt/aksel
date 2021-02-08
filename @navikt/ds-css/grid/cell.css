@@ -39,7 +39,7 @@
   grid-column-end: span 12;
 }
 
-@media (min-width: var(--navds-grid-breakpoints-medium)) {
+@media (min-width: 448px) {
   .navds-grid-cell-md-1 {
     grid-column-end: span 1;
   }
@@ -78,7 +78,7 @@
   }
 }
 
-@media (min-width: var(--navds-grid-breakpoints-large)) {
+@media (min-width: 648px) {
   .navds-grid-cell-lg-1 {
     grid-column-end: span 1;
   }
