@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/internal-header/index.css";
 import "@navikt/ds-css/grid/index.css";
 
 export interface CellProps extends HTMLAttributes<HTMLDivElement> {

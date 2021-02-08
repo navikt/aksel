@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/typography/index.css";
 import "@navikt/ds-css/grid/index.css";
 
 export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
@@ -8,7 +7,7 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
 }
 
-const ContainerProps = forwardRef<HTMLDivElement, ContainerProps>(
+const Container = forwardRef<HTMLDivElement, ContainerProps>(
   ({ children, className, ...rest }, ref) => (
     <div ref={ref} className={cl("navds-grid-container", className)} {...rest}>
       {children}
@@ -16,4 +15,4 @@ const ContainerProps = forwardRef<HTMLDivElement, ContainerProps>(
   )
 );
 
-export default ContainerProps;
+export default Container;
