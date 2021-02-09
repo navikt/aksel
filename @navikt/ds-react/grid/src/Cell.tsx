@@ -2,13 +2,14 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import "@navikt/ds-css/grid/index.css";
 
+type Column = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export interface CellProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   className?: string;
-  sm: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  md?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  lg?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
-  xl?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+  sm: Column;
+  md?: Column;
+  lg?: Column;
+  xl?: Column;
 }
 
 const Cell = forwardRef<HTMLDivElement, CellProps>(
