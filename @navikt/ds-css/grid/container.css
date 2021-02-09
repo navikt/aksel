@@ -1,13 +1,13 @@
 .navds-grid-container {
-  padding: var(--navds-grid-gutter-small);
   margin-left: auto;
   margin-right: auto;
   max-width: var(--navds-container-max-width);
+  padding: calc(var(--navds-grid-gutter-small) / 2);
   background: rgba(0, 0, 0, 0.2);
 }
 
 @media (min-width: 448px) {
   .navds-grid-container {
-    padding: var(--navds-grid-gutter-medium-and-larger);
+    padding: calc(var(--navds-grid-gutter-medium-and-larger) / 2);
   }
 }

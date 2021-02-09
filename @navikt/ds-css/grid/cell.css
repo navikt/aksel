@@ -1,5 +1,18 @@
 .navds-grid-cell {
   background: rgba(0, 0, 0, 0.2);
+  margin: calc(var(--navds-grid-gutter-small) / 2);
+}
+
+@media (min-width: 448px) {
+  .navds-grid-cell {
+    margin: calc(var(--navds-grid-gutter-medium-and-larger) / 2);
+  }
+}
+
+@media (min-width: 648px) {
+  .navds-grid-cell {
+    margin: calc(var(--navds-grid-gutter-medium-and-larger) / 2);
+  }
 }
 
 .navds-grid-cell-sm-1 {

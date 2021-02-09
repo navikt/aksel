@@ -1,17 +1,4 @@
 .navds-grid {
   display: grid;
-  grid-gap: var(--navds-grid-gutter-small);
-  grid-template-columns: repeat(12, auto);
-}
-
-@media (min-width: 448px) {
-  .navds-grid {
-    grid-gap: var(--navds-grid-gutter-medium-and-larger);
-  }
-}
-
-@media (min-width: 648px) {
-  .navds-grid {
-    grid-gap: var(--navds-grid-gutter-medium-and-larger);
-  }
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 }

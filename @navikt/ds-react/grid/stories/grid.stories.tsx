@@ -10,13 +10,13 @@ export const All = () => (
   <div>
     <Container>
       <Grid>
-        <Cell sm={6} md={8}>
+        <Cell sm={12} xl={4}>
           Kolonne
         </Cell>
-        <Cell sm={6} md={4}>
+        <Cell sm={12} xl={4}>
           Kolonne
         </Cell>
-        <Cell sm={12} md={12}>
+        <Cell sm={12} xl={4}>
           Kolonne
         </Cell>
       </Grid>
