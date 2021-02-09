@@ -4,9 +4,10 @@ import { Link } from "gatsby";
 import { NAVLogo } from "../../assets/images/svg";
 import { useBetaMenu } from "../../../useSiteStructure";
 import Example from "../../code-preview/example/CodeExample";
-import Codeblock, { InlineCode } from "../../code/Code";
+import { InlineCode } from "../../code/Code";
 import { Heading, Paragraph } from "@navikt/ds-react";
 import "./layout.css";
+import { Code } from "../../code-preview/preview/Code";
 
 const SubMenu = (props) => (
   <>
@@ -69,15 +70,16 @@ const BetaLayout = (props) => (
     <div className="content">
       <MDXProvider
         components={{
-          code: (props) => <Codeblock {...props} />,
+          code: (props) => <Code accordion {...props} />,
           inlineCode: (props) => <InlineCode {...props} />,
-          Example: (props) => <Example {...props} />,
           h1: (props) => <Heading {...props} level={1} size="xxl" />,
           h2: (props) => <Heading {...props} level={2} size="xl" />,
           h3: (props) => <Heading {...props} level={3} size="large" />,
           h4: (props) => <Heading {...props} level={4} size="medium" />,
           h5: (props) => <Heading {...props} level={5} size="small" />,
           p: (props) => <Paragraph {...props} />,
+          Example: (props) => <Example {...props} />,
+          Code: (props) => <Code accordion {...props} />,
         }}
       >
         {props.children}

@@ -1,6 +1,6 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
-import Codeblock, { InlineCode } from "../code/Code";
+import { InlineCode } from "../code/Code";
 import { Code } from "../code-preview/preview/Code";
 import {
   Innholdstittel,

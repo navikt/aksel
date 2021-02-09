@@ -16,14 +16,6 @@ export const copyImport = (e, content: string) => {
   });
 };
 
-export const copyCode = (content) => {
-  if (typeof content === "string") {
-    copy(content, {
-      format: "text/plain",
-    });
-  }
-};
-
 export interface CodeProps {
   children: React.ReactNode;
   className?: string;
@@ -93,78 +85,3 @@ export const Bash = ({ children, className, onClick, ...props }: CodeProps) => {
     </>
   );
 };
-
-const Code = ({
-  children,
-  className,
-  noCopy,
-  popupUnder = false,
-  arialabel,
-  ...props
-}: CodeProps) => {
-  const [anchor, setAnchor] = useState(undefined);
-  const highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
-
-  const getNewProps = () => {
-    if (!noCopy) {
-      return {
-        onClick: (e) => handleClick(e),
-        onKeyDown: (e) => handleKeyPress(e),
-        tabIndex: 0,
-      };
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      setAnchor(anchor ? undefined : e.currentTarget);
-      copyCode(children);
-    }
-  };
-  const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    setAnchor(anchor ? undefined : e.currentTarget);
-    copyCode(children);
-  };
-
-  return (
-    <>
-      <figure
-        className={classnames({ "code-example": !noCopy })}
-        role={noCopy ? "figure" : "button"}
-        aria-label={
-          arialabel
-            ? arialabel
-            : noCopy
-            ? "Kode-eksempel"
-            : "Kopier kode-eksempel"
-        }
-        {...getNewProps()}
-      >
-        <pre className="language-">
-          <code
-            className={className}
-            {...props}
-            dangerouslySetInnerHTML={{ __html: highlighted }}
-          ></code>
-        </pre>
-      </figure>
-      <Popover
-        orientering={
-          popupUnder
-            ? PopoverOrientering.UnderHoyre
-            : PopoverOrientering.OverHoyre
-        }
-        ankerEl={anchor}
-        onRequestClose={() => setAnchor(undefined)}
-        autoFokus={false}
-        utenPil
-      >
-        <Normaltekst style={{ padding: "0.5rem" }}> Kopiert! </Normaltekst>
-      </Popover>
-    </>
-  );
-};
-
-export default Code;
