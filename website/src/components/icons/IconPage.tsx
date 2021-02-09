@@ -5,7 +5,7 @@ import { Input, Checkbox } from "nav-frontend-skjema";
 import { Normaltekst, Systemtittel, Undertittel } from "nav-frontend-typografi";
 import React, { useEffect, useState } from "react";
 import { renderToString } from "react-dom/server";
-import Code from "../code/Code";
+import { Code } from "../code-preview/preview/Code";
 import IconBox from "./IconBox";
 import IconSidebar from "./IconSidebar";
 import ColorSwitch from "../color-switch/ColorSwitch";

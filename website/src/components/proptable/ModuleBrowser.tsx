@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Panel from "nav-frontend-paneler";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
 import { useProps } from "../../useProps";
-import Code from "../code/Code";
+import { Code } from "../code-preview/preview/Code";
 import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
 import PropTable from "./PropTable";
 

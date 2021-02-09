@@ -1,7 +1,7 @@
 import React from "react";
 import { MDXProvider } from "@mdx-js/react";
 import Codeblock, { InlineCode } from "../code/Code";
-
+import { Code } from "../code-preview/preview/Code";
 import {
   Innholdstittel,
   Systemtittel,
@@ -10,7 +10,7 @@ import {
 import Lenke from "nav-frontend-lenker";
 
 import { FileIcon, Cog } from "../assets/images/svg";
-import Example from "../example/Example";
+import Example from "../code-preview/example/CodeExample";
 
 const MdxWrapper = (props) => (
   <MDXProvider
@@ -19,7 +19,8 @@ const MdxWrapper = (props) => (
       h2: Systemtittel,
       h3: Undertittel,
       a: Lenke,
-      code: (props) => <Codeblock {...props} />,
+      code: (props) => <Code accordion {...props} />,
+      Code: (props) => <Code {...props} />,
       inlineCode: (props) => <InlineCode {...props} />,
       Undertittel,
       InlineCode,

@@ -6,7 +6,8 @@ import {
   Normaltekst,
 } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
-import Code, { Bash, copyImport, InlineCode } from "../code/Code";
+import { Bash, copyImport, InlineCode } from "../code/Code";
+import { Code } from "../code-preview/preview/Code";
 import "./styles.less";
 
 const IconInstall = () => {
