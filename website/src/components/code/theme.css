@@ -12,7 +12,7 @@
   padding: 0.1em 0.3em;
   border-radius: 0.3em;
   color: #c30000;
-  background: #f4f4f4;
+  background: var(--background-color);
 }
 /*********************************************************
 * Tokens
@@ -54,7 +54,7 @@
 .language-css .token.string,
 .style .token.string {
   color: #806245;
-  background: #f4f4f4;
+  background: var(--background-color);
 }
 .token.atrule,
 .token.attr-value,

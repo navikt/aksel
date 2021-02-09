@@ -128,15 +128,6 @@ const Code = ({
     copyCode(children);
   };
 
-  if (props.type && ["html", "react"].includes(props.type.toLowerCase())) {
-    return (
-      <AccordionCode
-        type={props.type ? props.type : "react"}
-        children={children}
-      />
-    );
-  }
-
   return (
     <>
       <figure

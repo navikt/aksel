@@ -49,6 +49,10 @@
   transform: translate3d(0px, 2px, 0);
 }
 
+figure[role="figure"] > pre[class*="code__dropdownCode--pre"] {
+  transform: none;
+}
+
 pre[class*="code__dropdownCode--pre"]:not([disabled])
   > code[class*="language-"] {
   border-left: 0;

@@ -5,6 +5,15 @@ import "../../code/theme.css";
 import "./index.css";
 import { Accordion } from "../accordion/Accordion";
 import cl from "classnames";
+import copy from "copy-to-clipboard";
+
+const copyCode = (content) => {
+  if (typeof content === "string") {
+    copy(content, {
+      format: "text/plain",
+    });
+  }
+};
 
 export const Code = ({
   children,
@@ -18,7 +27,6 @@ export const Code = ({
   const accordionMetastring =
     props?.metastring && props.metastring.includes("accordion=false");
 
-  console.log(accordionMetastring);
   const highlighted =
     type === "html"
       ? Prism.highlight(children, Prism.languages.jsx, "html")
@@ -26,8 +34,24 @@ export const Code = ({
       ? Prism.highlight(children, Prism.languages.css, "css")
       : Prism.highlight(children, Prism.languages.jsx, "jsx");
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      copyCode(children);
+    }
+  };
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    copyCode(children);
+  };
+
   const Content = () => (
-    <figure role="button" aria-label="Kode-eksempel">
+    <figure
+      onClick={(e) => handleClick(e)}
+      onKeyDown={(e) => handleKeyPress(e)}
+      role={noCopy ? "figure" : "button"}
+      aria-label="Kode-eksempel"
+    >
       <pre
         className={cl("code__dropdownCode--pre", {
           "code__dropdownCode--accordion": accordion && !accordionMetastring,
