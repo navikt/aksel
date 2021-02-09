@@ -8,7 +8,7 @@
 }
 
 .codeexample__inner > * {
-  margin: 1rem 0;
+  margin: 1rem 0.5rem;
 }
 
 .codeexample__inner:first-child {

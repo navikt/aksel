@@ -84,17 +84,13 @@ Alle knappene våre har støtte for å vise en spinner.
 
 <Example>
   <Knapp spinner>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp spinner>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp spinner>Fare</Fareknapp>
-  <br />
-  <br />
-  <Flatknapp spinner>Flat</Flatknapp>
-  <br />
-  <br />
+
+<Hovedknapp spinner>Hoved</Hovedknapp>
+
+<Fareknapp spinner>Fare</Fareknapp>
+
+<Flatknapp spinner>Flat</Flatknapp>
+
   <Knapp disabled spinner>
     Disabled
   </Knapp>
@@ -121,14 +117,11 @@ Alle knappene har støtte for disabled stil.
 
 <Example>
   <Knapp disabled>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp disabled>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp disabled>Fare</Fareknapp>
-  <br />
-  <br />
+
+<Hovedknapp disabled>Hoved</Hovedknapp>
+
+<Fareknapp disabled>Fare</Fareknapp>
+
   <Flatknapp disabled>Flat</Flatknapp>
 </Example>
 
@@ -153,23 +146,19 @@ Du kan også velge å implementere knappene våre som lenker. I så fall trenger
   <a href="#som-lenke" className="knapp">
     Normal
   </a>
-  <br />
-  <br />
-  <a href="#som-lenke" className="knapp knapp--hoved">
-    Hoved
-  </a>
-  <br />
-  <br />
-  <a href="#som-lenke" className="knapp knapp--fare">
-    Fare
-  </a>
-  <br />
-  <br />
-  <a href="#som-lenke" className="knapp knapp--flat">
-    Flat
-  </a>
-  <br />
-  <br />
+
+<a href="#som-lenke" className="knapp knapp--hoved">
+  Hoved
+</a>
+
+<a href="#som-lenke" className="knapp knapp--fare">
+  Fare
+</a>
+
+<a href="#som-lenke" className="knapp knapp--flat">
+  Flat
+</a>
+
   <a className="knapp knapp--disabled">Disabled</a>
 </Example>
 
@@ -193,17 +182,13 @@ Alle knappene kan rendres i en mindre `32px` versjon.
 
 <Example>
   <Knapp mini>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp mini>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp mini>Fare</Fareknapp>
-  <br />
-  <br />
-  <Flatknapp mini>Flat</Flatknapp>
-  <br />
-  <br />
+
+<Hovedknapp mini>Hoved</Hovedknapp>
+
+<Fareknapp mini>Fare</Fareknapp>
+
+<Flatknapp mini>Flat</Flatknapp>
+
   <Knapp disabled mini>
     Disabled
   </Knapp>
@@ -220,9 +205,8 @@ Alle knappene kan rendres i en mindre `32px` versjon.
 ## Med ikon
 
 <Alertstripe type="info">
-  Når du bruker ikoner er det viktig at du pakker inn teksten med{" "}
-  <InlineCode>&lt;span&gt;</InlineCode>-elementer for å påse riktig avstand til
-  ikonet.
+  Når du bruker ikoner er det viktig at du pakker inn teksten med
+  <InlineCode>&lt;span&gt;</InlineCode>-elementer for å påse riktig avstand til ikonet.
 </Alertstripe>
 
 <Example>
@@ -230,26 +214,22 @@ Alle knappene kan rendres i en mindre `32px` versjon.
     <Cog />
     <span>Normal</span>
   </Knapp>
-  <br />
-  <br />
-  <Hovedknapp>
-    <Cog />
-    <span>Hoved</span>
-  </Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp>
-    <Cog />
-    <span>Fare</span>
-  </Fareknapp>
-  <br />
-  <br />
-  <Flatknapp>
-    <Cog />
-    <span>Flat</span>
-  </Flatknapp>
-  <br />
-  <br />
+
+<Hovedknapp>
+  <Cog />
+  <span>Hoved</span>
+</Hovedknapp>
+
+<Fareknapp>
+  <Cog />
+  <span>Fare</span>
+</Fareknapp>
+
+<Flatknapp>
+  <Cog />
+  <span>Flat</span>
+</Flatknapp>
+
   <Knapp disabled>
     <Cog />
     <span>Disabled</span>
@@ -273,14 +253,12 @@ const Cog = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><
     <Cog />
     <span>Knapp</span>
   </Knapp>
-  <br />
-  <br />
-  <Knapp>
-    <span>Knapp</span>
-    <Cog />
-  </Knapp>
-  <br />
-  <br />
+
+<Knapp>
+  <span>Knapp</span>
+  <Cog />
+</Knapp>
+
   <Knapp>
     <Cog />
     <span>Knapp</span>
@@ -326,8 +304,7 @@ Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
     <Cog />
     <span>Knapp</span>
   </Knapp>
-  <br />
-  <br />
+
   <Knapp kompakt>
     <Cog />
     <span className="sr-only">Knapp</span>

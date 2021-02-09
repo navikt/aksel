@@ -3,10 +3,8 @@ import classnames from "classnames";
 import copy from "copy-to-clipboard";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
 import { Normaltekst } from "nav-frontend-typografi";
-import Prism from "prismjs";
 import React, { useState } from "react";
 import { CopyIcon } from "../assets/images/svg";
-import { Code as AccordionCode } from "../code-preview/preview/Code";
 import "./styles.less";
 import "./theme.css";
 
