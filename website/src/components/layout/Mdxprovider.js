@@ -17,7 +17,7 @@ const MdxWrapper = (props) => (
     components={{
       h1: Innholdstittel,
       h2: Systemtittel,
-      h3: Undertittel,
+      h3: (props) => <Undertittel {...props} tag="h3" />,
       a: Lenke,
       code: (props) => <Codeblock {...props} />,
       inlineCode: (props) => <InlineCode {...props} />,
