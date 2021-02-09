@@ -156,17 +156,18 @@ module.exports = {
       focus: { value: "{navds.color.blue.80.value}" },
       shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
     },
-    grid: {
-      breakpoints: {
-        medium: { value: "448px" },
-        large: { value: "800px" },
+    container: {
+      maxWidth: {
+        value: "79.5rem",
       },
+    },
+    grid: {
       gutter: {
         small: {
-          value: "16px",
+          value: "1rem",
         },
         mediumAndLarger: {
-          value: "24px",
+          value: "1.5rem",
         },
       },
     },
