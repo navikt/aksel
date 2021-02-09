@@ -157,18 +157,12 @@ module.exports = {
       shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
     },
     container: {
-      maxWidth: {
-        value: "79.5rem",
-      },
+      maxWidth: { value: "79.5rem" },
     },
     grid: {
       gutter: {
-        small: {
-          value: "1rem",
-        },
-        mediumAndLarger: {
-          value: "1.5rem",
-        },
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "1.5rem" },
       },
     },
     z: {
