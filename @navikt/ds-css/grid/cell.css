@@ -1,5 +1,4 @@
 .navds-grid-cell {
-  background: rgba(0, 0, 0, 0.2);
   margin: calc(var(--navds-grid-gutter-small) / 2);
 }
 

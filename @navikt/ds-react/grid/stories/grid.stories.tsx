@@ -6,20 +6,27 @@ export default {
   component: { Container, Grid, Cell },
 };
 
-export const All = () => (
-  <div>
-    <Container>
-      <Grid>
-        <Cell sm={6} xl={4}>
-          Kolonne
-        </Cell>
-        <Cell sm={6} xl={4}>
-          Kolonne
-        </Cell>
-        <Cell sm={12} xl={4}>
-          Kolonne
-        </Cell>
-      </Grid>
-    </Container>
-  </div>
-);
+export const All = () => {
+  return (
+    <div>
+      <Container style={styles.container}>
+        <Grid>
+          <Cell style={styles.cell} sm={6} xl={4}>
+            Kolonne
+          </Cell>
+          <Cell style={styles.cell} sm={6} xl={4}>
+            Kolonne
+          </Cell>
+          <Cell style={styles.cell} sm={12} xl={4}>
+            Kolonne
+          </Cell>
+        </Grid>
+      </Container>
+    </div>
+  );
+};
+
+const styles = {
+  container: { background: "rgba(0, 0, 0, 0.2)" },
+  cell: { background: "rgba(0, 0, 0, 0.2)" },
+};
