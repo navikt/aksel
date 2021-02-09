@@ -17,7 +17,7 @@ const Example = ({
   ...props
 }: ExampleProps) => {
   const [color, setColor] = useState("#ffffff");
-  const backgroundColors = useRef(["#f1f1f1", "#ffffff"]);
+  const backgroundColors = useRef(["#ffffff", "#f1f1f1"]);
 
   return (
     <div className={cn("codeexample", className)} role="region" {...props}>
@@ -30,7 +30,6 @@ const Example = ({
             className="codeexample__options"
             style={{ backgroundColor: color }}
           >
-            Bakgrunnsfarge {color}
             <ColorSwitch
               colors={backgroundColors.current}
               onChange={(c) => setColor(c)}

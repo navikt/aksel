@@ -1,7 +1,7 @@
 .codeexample {
   border: 4px solid #f1f1f1;
   margin-top: 2rem;
-  border-bottom: 1px solid var(--navds-color-gray-40);
+  /* border-bottom: 1px solid var(--navds-color-gray-40); */
 }
 
 .codeexample__inner {
@@ -24,9 +24,9 @@
 }
 
 .codeexample h2,
-.typo-systemtittel,
-.typo-undertittel,
-.panel {
+.codeexample .typo-systemtittel,
+.codeexample .typo-undertittel,
+.codeexample .panel {
   margin: 0 !important;
 }
 .codeexample--greyBg {

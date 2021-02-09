@@ -6,7 +6,7 @@ import { Normaltekst } from "nav-frontend-typografi";
 import Prism from "prismjs";
 import React, { useState } from "react";
 import { CopyIcon } from "../assets/images/svg";
-import { AccordionCode } from "../code-preview/preview/AccordionCode";
+import { Code as AccordionCode } from "../code-preview/preview/Code";
 import "./styles.less";
 import "./theme.css";
 
@@ -128,11 +128,13 @@ const Code = ({
     copyCode(children);
   };
 
-  if (
-    (props.type && ["html", "react"].includes(props.type.toLowerCase())) ||
-    !noCopy
-  ) {
-    return <AccordionCode type={props.type} children={children} />;
+  if (props.type && ["html", "react"].includes(props.type.toLowerCase())) {
+    return (
+      <AccordionCode
+        type={props.type ? props.type : "react"}
+        children={children}
+      />
+    );
   }
 
   return (
