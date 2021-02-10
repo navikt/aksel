@@ -6,20 +6,18 @@ import "@navikt/ds-css/layout/index.css";
 export interface ArticleLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   className?: string;
-  columns: 1 | 2 | 3;
-  leftContent: React.Node;
+  leftContent?: React.Node;
   leftContentProps?: HTMLAttributes<HTMLDivElement>;
   mainContent: React.Node;
   mainContentProps?: HTMLAttributes<HTMLDivElement>;
-  rightContent: React.Node;
+  rightContent?: React.Node;
   rightContentProps?: HTMLAttributes<HTMLDivElement>;
 }
 
-const ArticleLayout = forwardRef<HTMLDivElement, ArticleLayout>(
+const ArticleLayout = forwardRef<HTMLDivElement, ArticleLayoutProps>(
   (
     {
       children,
-      columns,
       className,
       leftContent,
       leftContentProps,
