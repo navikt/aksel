@@ -6,8 +6,6 @@ export default {
   component: Alert,
 };
 
-import InformationFilled from "@navikt/ds-icons/svg/InformationFilled.svg";
-
 const variants: Array<"error" | "warning" | "info" | "success"> = [
   "error",
   "warning",
