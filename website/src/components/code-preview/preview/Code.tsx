@@ -20,6 +20,7 @@ export const Code = ({
   type = "react",
   accordion = false,
   noCopy = false,
+  arialabel = undefined,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -50,7 +51,13 @@ export const Code = ({
       onClick={(e) => handleClick(e)}
       onKeyDown={(e) => handleKeyPress(e)}
       role={noCopy ? "figure" : "button"}
-      aria-label="Kode-eksempel"
+      aria-label={
+        arialabel
+          ? arialabel
+          : noCopy
+          ? "Kode eksempel"
+          : "Klikk for å kopiere kode"
+      }
     >
       <pre
         className={cl("code__dropdownCode--pre", {
