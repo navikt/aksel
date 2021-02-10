@@ -8,21 +8,19 @@ export default {
 
 export const All = () => {
   return (
-    <div>
-      <Container style={styles.container}>
-        <Grid>
-          <Cell style={styles.cell} sm={6} xl={4}>
-            Kolonne
-          </Cell>
-          <Cell style={styles.cell} sm={6} xl={4}>
-            Kolonne
-          </Cell>
-          <Cell style={styles.cell} sm={12} xl={4}>
-            Kolonne
-          </Cell>
-        </Grid>
-      </Container>
-    </div>
+    <Container style={styles.container}>
+      <Grid>
+        <Cell style={styles.cell} sm={6} xl={4}>
+          Kolonne
+        </Cell>
+        <Cell style={styles.cell} sm={6} xl={4}>
+          Kolonne
+        </Cell>
+        <Cell style={styles.cell} sm={12} xl={4}>
+          Kolonne
+        </Cell>
+      </Grid>
+    </Container>
   );
 };
 
