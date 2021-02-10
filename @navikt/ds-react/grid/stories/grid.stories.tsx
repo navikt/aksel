@@ -4,10 +4,26 @@ import { Container, Grid, Cell } from "../src/index";
 export default {
   title: "@navikt/grid",
   component: { Container, Grid, Cell },
+  parameters: {
+    layout: "fullscreen",
+    backgrounds: {
+      default: "white",
+      values: [
+        {
+          name: "white",
+          value: "#ffffff",
+        },
+        {
+          name: "nav gray",
+          value: "#f1f1f1",
+        },
+      ],
+    },
+  },
 };
 
 export const All = () => (
-  <Container style={styles.container}>
+  <Container>
     <Grid>
       <Cell sm={4} md={8} lg={3}>
         Kolonne
@@ -21,7 +37,3 @@ export const All = () => (
     </Grid>
   </Container>
 );
-
-const styles = {
-  container: { background: "#f1f1f1" },
-};
