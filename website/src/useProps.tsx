@@ -30,9 +30,6 @@ export const useProps = (path) => {
   return props.filter((prop) => {
     const match = prop.relativePath.match(/nav-frontend-(.*)\/src\//);
     const propPath = match && match.length >= 2 ? match[1] : "";
-    if (propPath === pathComp) {
-      console.log(JSON.stringify(props, null, 4));
-    }
     return propPath === pathComp;
   });
 };
