@@ -29,12 +29,9 @@
 .codeexample .panel {
   margin: 0 !important;
 }
-.codeexample--greyBg {
-  background: var(--navds-color-gray-60);
-}
 
 @media (max-width: 550px) {
   .codeexample__inner {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 }
