@@ -32,7 +32,10 @@ const flattenProps = (props) =>
     ? Object.entries(props).map(([key, value]) => ({
         ...value,
         name: key,
-        defaultValue: value.defaultValue?.value,
+        defaultValue:
+          value.defaultValue && value.defaultValue.value
+            ? { value: JSON.stringify(value.defaultValue.value) }
+            : null,
       }))
     : [];
 
@@ -45,9 +48,6 @@ const onCreateNode = (
   try {
     let parsed = null;
     parsed = reactDocgen.parse(node.absolutePath)[0];
-    /* if (!node.absolutePath.includes("nav-frontend")) {
-      console.log(JSON.stringify(flattenProps(parsed.props), null, 4));
-    } */
 
     if (parsed && parsed.displayName) {
       const metadataNode = {
@@ -87,14 +87,30 @@ exports.createSchemaCustomization = ({ actions }) => {
       name: String
       raw: String
     }
-    type PropsType @noInfer {
+    union DefaultValues = intType | floatType | stringType | boolType
+    type intType {
+      value: Int
+    }
+    type floatType {
+      value: Float
+    }
+    type stringType {
+      value: String
+    }
+    type boolType {
+      value: Boolean
+    }
+    type DefaultValue @noInfer {
+      value: String
+    }
+    type PropsType @dontInfer {
       beta: Boolean
       name: String!
       description: String
       required: Boolean
       type: TypeType
       tsType: TsType
-      defaultValue: String
+      defaultValue: DefaultValue
     }
     type ComponentMetadata implements Node @noInfer {
       name: String!

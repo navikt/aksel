@@ -8,7 +8,9 @@ const useAllProps = () =>
           name
           relativePath
           props {
-            defaultValue
+            defaultValue {
+              value
+            }
             description
             name
             required
@@ -26,9 +28,11 @@ export const useProps = (path) => {
   const props = useAllProps();
 
   return props.filter((prop) => {
-    const propPath = prop.relativePath.match(/nav-frontend-(.*)\/src\//)
-      ? prop.relativePath.match(/nav-frontend-(.*)\/src\//)[1]
-      : "";
+    const match = prop.relativePath.match(/nav-frontend-(.*)\/src\//);
+    const propPath = match && match.length >= 2 ? match[1] : "";
+    if (propPath === pathComp) {
+      console.log(JSON.stringify(props, null, 4));
+    }
     return propPath === pathComp;
   });
 };
