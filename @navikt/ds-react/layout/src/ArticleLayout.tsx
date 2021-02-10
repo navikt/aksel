@@ -3,24 +3,30 @@ import { Cell, Container, Grid } from "../../grid/src";
 import cl from "classnames";
 import "@navikt/ds-css/layout/index.css";
 
-export interface LayoutProps extends HTMLAttributes<HTMLDivElement> {
+export interface ArticleLayoutProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   className?: string;
   columns: 1 | 2 | 3;
   leftContent: React.Node;
+  leftContentProps?: HTMLAttributes<HTMLDivElement>;
   mainContent: React.Node;
+  mainContentProps?: HTMLAttributes<HTMLDivElement>;
   rightContent: React.Node;
+  rightContentProps?: HTMLAttributes<HTMLDivElement>;
 }
 
-const Layout = forwardRef<HTMLDivElement, LayoutProps>(
+const ArticleLayout = forwardRef<HTMLDivElement, ArticleLayout>(
   (
     {
       children,
       columns,
       className,
       leftContent,
+      leftContentProps,
       mainContent,
+      mainContentProps,
       rightContent,
+      rightContentProps,
       ...rest
     },
     ref
@@ -32,13 +38,13 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
         {...rest}
       >
         <Grid>
-          <Cell sm={4} md={8} lg={12} xl={3}>
+          <Cell {...leftContentProps} sm={4} md={8} lg={12} xl={3}>
             {leftContent}
           </Cell>
-          <Cell sm={4} md={8} lg={8} xl={6}>
+          <Cell {...mainContentProps} sm={4} md={8} lg={8} xl={6}>
             {mainContent}
           </Cell>
-          <Cell sm={4} md={8} lg={4} xl={3}>
+          <Cell {...rightContentProps} sm={4} md={8} lg={4} xl={3}>
             {rightContent}
           </Cell>
         </Grid>
@@ -47,4 +53,4 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   }
 );
 
-export default Layout;
+export default ArticleLayout;

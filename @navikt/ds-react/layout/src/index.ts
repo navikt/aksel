@@ -1,1 +1,1 @@
-export { default as Layout, LayoutProps } from "./Layout";
+export { default as ArticleLayout, ArticleLayoutProps } from "./ArticleLayout";
