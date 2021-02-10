@@ -17,7 +17,7 @@ export default {
           value: "#ffffff",
         },
         {
-          name: "nav gray",
+          name: "NAV gray",
           value: "#f1f1f1",
         },
       ],
