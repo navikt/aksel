@@ -3,7 +3,7 @@ import { Heading } from "../../../lib/typography/src";
 import { Normaltekst } from "nav-frontend-typografi";
 import { Cell, Grid } from "../../../grid/src";
 import Lenke from "nav-frontend-lenker";
-import { styles } from "../article.layout.stories";
+import { styles } from "./styles";
 
 export const Content = () => (
   <div>

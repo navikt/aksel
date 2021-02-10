@@ -9,36 +9,16 @@ export default {
   component: { ArticleLayout },
 };
 
-export const OneColumn = () => {
-  return <ArticleLayout mainContent={<Content />} />;
-};
+export const ThreeColumns = () => (
+  <ArticleLayout
+    leftContent={<Navigation />}
+    mainContent={<Content />}
+    rightContent={<Context />}
+  />
+);
 
-export const TwoColumns = () => {
-  return (
-    <ArticleLayout leftContent={<Navigation />} mainContent={<Content />} />
-  );
-};
+export const TwoColumns = () => (
+  <ArticleLayout leftContent={<Navigation />} mainContent={<Content />} />
+);
 
-export const ThreeColumns = () => {
-  return (
-    <ArticleLayout
-      leftContent={<Navigation />}
-      mainContent={<Content />}
-      rightContent={<Context />}
-    />
-  );
-};
-
-export const styles = {
-  ul: {
-    margin: 0,
-    padding: 0,
-    listStyleType: "none",
-  },
-  li: {
-    marginBottom: "1rem",
-  },
-  p: {
-    marginBottom: "1rem",
-  },
-};
+export const OneColumn = () => <ArticleLayout mainContent={<Content />} />;

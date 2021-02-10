@@ -1,7 +1,7 @@
 import React from "react";
 import Lenke from "nav-frontend-lenker";
 import { Button } from "../../../lib";
-import { styles } from "../article.layout.stories";
+import { styles } from "./styles";
 
 export const Navigation = () => (
   <ul style={styles.ul}>
