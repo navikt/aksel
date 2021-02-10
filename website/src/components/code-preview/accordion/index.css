@@ -39,7 +39,8 @@
 }
 
 .accordion__collapse[aria-hidden="true"] {
-  border: none;
+  border-top: none;
+  border-bottom: none;
 }
 
 .accordion__wrapper {
