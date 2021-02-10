@@ -41,8 +41,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       )}
       {...rest}
     >
-      <title id="svgtitle1">Settings</title>
-      <Icon aria-labelledby="svgtitle1" variant={variant} />
+      <Icon variant={variant} />
       <span>{children}</span>
     </div>
   )
