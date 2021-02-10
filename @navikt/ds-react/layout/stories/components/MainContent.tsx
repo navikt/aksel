@@ -5,7 +5,7 @@ import { Cell, Grid } from "../../../grid/src";
 import Lenke from "nav-frontend-lenker";
 import { styles } from "./styles";
 
-export const Content = () => (
+export const MainContent = () => (
   <div>
     <Heading style={styles.p} level={1} size={"xl"}>
       Quis autem

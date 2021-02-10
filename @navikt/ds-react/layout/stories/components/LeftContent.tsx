@@ -3,7 +3,7 @@ import Lenke from "nav-frontend-lenker";
 import { Button } from "../../../lib";
 import { styles } from "./styles";
 
-export const Navigation = () => (
+export const LeftContent = () => (
   <ul style={styles.ul}>
     <li style={styles.li}>
       <Lenke href={"#"}>Iusto odio dignissimos</Lenke>

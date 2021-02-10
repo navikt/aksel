@@ -1,8 +1,8 @@
 import React from "react";
 import { ArticleLayout } from "../src/index";
-import { Navigation } from "./components/Navigation";
-import { Content } from "./components/Content";
-import { Context } from "./components/Context";
+import { LeftContent } from "./components/LeftContent";
+import { MainContent } from "./components/MainContent";
+import { RightContent } from "./components/RightContent";
 
 export default {
   title: "@navikt/layout/Article",
@@ -27,14 +27,14 @@ export default {
 
 export const ThreeColumns = () => (
   <ArticleLayout
-    leftContent={<Navigation />}
-    mainContent={<Content />}
-    rightContent={<Context />}
+    leftContent={<LeftContent />}
+    mainContent={<MainContent />}
+    rightContent={<RightContent />}
   />
 );
 
 export const TwoColumns = () => (
-  <ArticleLayout leftContent={<Navigation />} mainContent={<Content />} />
+  <ArticleLayout leftContent={<LeftContent />} mainContent={<MainContent />} />
 );
 
-export const OneColumn = () => <ArticleLayout mainContent={<Content />} />;
+export const OneColumn = () => <ArticleLayout mainContent={<MainContent />} />;
