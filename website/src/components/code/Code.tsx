@@ -1,4 +1,3 @@
-import "@navikt/ds-css/accordion/index.css";
 import classnames from "classnames";
 import copy from "copy-to-clipboard";
 import Popover, { PopoverOrientering } from "nav-frontend-popover";
