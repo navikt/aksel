@@ -87,19 +87,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       name: String
       raw: String
     }
-    union DefaultValues = intType | floatType | stringType | boolType
-    type intType {
-      value: Int
-    }
-    type floatType {
-      value: Float
-    }
-    type stringType {
-      value: String
-    }
-    type boolType {
-      value: Boolean
-    }
     type DefaultValue @noInfer {
       value: String
     }
