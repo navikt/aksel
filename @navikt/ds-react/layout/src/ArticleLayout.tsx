@@ -36,15 +36,19 @@ const ArticleLayout = forwardRef<HTMLDivElement, ArticleLayoutProps>(
         {...rest}
       >
         <Grid>
-          <Cell {...leftContentProps} sm={4} md={8} lg={12} xl={3}>
-            {leftContent}
-          </Cell>
+          {leftContent && (
+            <Cell {...leftContentProps} sm={4} md={8} lg={12} xl={3}>
+              {leftContent}
+            </Cell>
+          )}
           <Cell {...mainContentProps} sm={4} md={8} lg={8} xl={6}>
             {mainContent}
           </Cell>
-          <Cell {...rightContentProps} sm={4} md={8} lg={4} xl={3}>
-            {rightContent}
-          </Cell>
+          {rightContent && (
+            <Cell {...rightContentProps} sm={4} md={8} lg={4} xl={3}>
+              {rightContent}
+            </Cell>
+          )}
         </Grid>
       </Container>
     );
