@@ -7,9 +7,7 @@ import "@navikt/ds-css/layout/index.css";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {
-  Section: ForwardRefExoticComponent<
-    SectionProps & HTMLAttributes<HTMLElement>
-  >;
+  Section: ForwardRefExoticComponent<SectionProps>;
 }
 
 export interface LayoutProps extends HTMLAttributes<HTMLElement> {
