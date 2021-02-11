@@ -23,7 +23,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
           md={8}
           lg={8}
           xl={6}
-          className={(cl("navds-layout-main-content"), className)}
+          className={cl("navds-layout-main-content", className)}
           {...rest}
         >
           {children}
