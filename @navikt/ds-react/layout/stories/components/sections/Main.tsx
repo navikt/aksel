@@ -18,10 +18,10 @@ export const Main = () => (
       sequi nesciunt.{" "}
     </Normaltekst>
     <Grid>
-      <Cell className={"section"} sm={2} md={4} lg={6}>
+      <Cell className={"section"} sm={6}>
         <Lenke href={"#"}>Test</Lenke>
       </Cell>
-      <Cell className={"section"} sm={2} md={4} lg={6}>
+      <Cell className={"section"} sm={6}>
         <Lenke href={"#"}>Test</Lenke>
       </Cell>
     </Grid>

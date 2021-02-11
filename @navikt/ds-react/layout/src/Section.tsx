@@ -15,8 +15,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
     <>
       {left && (
         <Cell
-          sm={4}
-          md={8}
+          sm={12}
           lg={12}
           xl={3}
           padding
@@ -28,8 +27,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       )}
       {!left && !right && (
         <Cell
-          sm={4}
-          md={8}
+          sm={12}
           lg={8}
           xl={6}
           padding
@@ -41,8 +39,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       )}
       {right && (
         <Cell
-          sm={4}
-          md={8}
+          sm={12}
           lg={4}
           xl={3}
           padding
