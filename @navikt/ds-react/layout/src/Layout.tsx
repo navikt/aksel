@@ -5,31 +5,29 @@ import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
 import "@navikt/ds-css/layout/index.css";
 
-interface SubComponents {
-  Section: React.ForwardRefExoticComponent<
+export interface LayoutWidthSubComponents
+  extends ForwardRefExoticComponent<LayoutProps> {
+  Section: ForwardRefExoticComponent<
     SectionProps & HTMLAttributes<HTMLElement>
   >;
 }
 
-export interface LayoutProps
-  extends ForwardRefExoticComponent<HTMLAttributes<HTMLDivElement>> {
+export interface LayoutProps extends HTMLAttributes<HTMLElement> {
   children?: React.ReactNode;
   className?: string;
 }
 
-const Layout: React.FC<SubComponents> = forwardRef<HTMLDivElement, LayoutProps>(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <Container
-        ref={ref}
-        className={cl("navds-layout-container", className)}
-        {...rest}
-      >
-        <Grid>{children}</Grid>
-      </Container>
-    );
-  }
-);
+const Layout = forwardRef<HTMLDivElement, LayoutProps>(
+  ({ children, className, ...rest }, ref) => (
+    <Container
+      ref={ref}
+      className={cl("navds-layout-container", className)}
+      {...rest}
+    >
+      <Grid>{children}</Grid>
+    </Container>
+  )
+) as LayoutWidthSubComponents;
 
 Layout.Section = Section;
 export default Layout;
