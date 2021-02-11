@@ -1,8 +1,14 @@
 .navds-grid-cell {
-  background: white;
   border-radius: 0.25rem;
-  padding: 1rem;
   margin: calc(var(--navds-grid-gutter-small) / 2);
+}
+
+.navds-grid-cell--white {
+  background: white;
+}
+
+.navds-grid-cell--padding {
+  padding: 1rem;
 }
 
 @media (min-width: 448px) {
