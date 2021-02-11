@@ -19,44 +19,55 @@ CSS-pakken er skrevet i ren CSS, noe som betyr at man ikke lengre trenger støtt
 Css-en er skrevet med hjelp av css-variabler, noe som betyr man må ta i bruk pakken `@navikt/ds-tokens` for at alt skal fungere riktig.
 Formatet på CSS koden er BEM, noe som gjør det lettere å forstå hvilken effekt koden har på utseende.
 
+```jsx accordion=false
+yarn add @navikt/ds-css
+```
+
+Beta versjon: **`v0.1.0-beta.1`**
+
 ## ds-react
 
 React-pakken har som hovedmål å implementere CSS en fra css-pakken, men også tilby enklere løsninger for utviklere å ta i bruk.
 Alle pakkene tar i bruk refForwarding, noe som betyr at man nå kan enkelt sende ref som prop til kompoentene.
 
+```css accordion=false
+yarn add @navikt/ds-react
+```
+
+Beta versjon: **`v0.1.0-beta.1`**
+
 ## ds-tokens
 
-Tokens-pakken eksponerer design-tokens i Css, Js, Sass og less format som man kan ta i bruk.
+Tokens-pakken tilbyr design-tokens i Css, Js, Sass og Less format som man kan ta i bruk.
 Disse variablene er autogenererte og er pakken tilbyr css-variablene for `ds-css` pakken vår.
+
+```css accordion=false
+yarn add @navikt/ds-tokens
+```
+
+Versjon: **`v0.1.0-beta.1`**
 
 ## ds-icons
 
 Ikonpakken tilbyr NAV sine egen ikoner i React og SVG format.
 
-## Installering
-
-### CSS
-
-```jsx accordion=false
-yarn add @navikt/ds-css
-```
-
-### React
-
-```jsx accordion=false
-yarn add @navikt/ds-react
-```
-
-### Tokens
-
-```jsx accordion=false
-yarn add @navikt/ds-tokens
-```
-
-### Icons
-
-```jsx accordion=false
+```css accordion=false
 yarn add @navikt/ds-icons
 ```
 
+Beta versjon: **`v0.1`**
+
 ## Oppsett i app
+
+For at css-variablene skal være tilgjengelige for css-pakken må tokens-pakken være importert, da gjerne høyst mulig i strukturen.
+
+```css
+import "@navikt/ds-tokens";
+```
+
+Variablene blir lagt på `root` i stil-strukturen, noe som betyr at man kan endre på variablene hvis man gjør endringer
+på dem lengre ned i strukturen. Dette vil gjøre det mulig å gjøre mindre endringer på for eksempel farger for å støtte darkmode
+mens man fortsatt får stilen fra designsystemet.
+
+**Viktig:**
+Css-variabler støttes ikke av IE11 by default. For å fikset dette kan man ta i bruk denne pakken [css-vars-ponyfill](https://jhildenbiddle.github.io/css-vars-ponyfill/#/)
