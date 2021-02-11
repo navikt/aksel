@@ -1,5 +1,10 @@
 @import "~@navikt/ds-css/baseline/index.css";
 
+.table-of-contents {
+  display: none !important;
+  width: 0px !important;
+}
+
 .ds-page-wrapper {
   display: grid;
   padding: 0;
@@ -22,12 +27,18 @@
   min-height: auto;
 }
 
+.ds-content--wrapper {
+  width: 100%;
+}
+
 .ds-content {
   grid-area: content;
   overflow-y: auto;
   padding: 24px 0 24px 24px;
   background-color: var(--background-color);
   color: var(--text-color);
+  max-width: 750px;
+  margin: 0 auto 0 0;
 }
 
 .ds-header__title {

@@ -54,12 +54,6 @@ export const Header = ({ onClick, open, onOpenSidebar }) => {
           <NAVLogoWhite role="img" aria-label="NAV logo hvit" />
         </span>
         <div className="ds-header--right">
-          <input
-            onChange={() => onClick()}
-            className="ds-header-darkswitch"
-            type="checkbox"
-            aria-label="Toggle darkmode"
-          />
           <a
             href="https://github.com/navikt/nav-frontend-moduler"
             className="ds-header__link ds-header__link--right"
