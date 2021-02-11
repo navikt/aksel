@@ -1,3 +1,9 @@
 /*
     layout css
  */
+
+@media (min-width: 448px) {
+  .navds-layout-main-content {
+    padding: 2.5rem;
+  }
+}

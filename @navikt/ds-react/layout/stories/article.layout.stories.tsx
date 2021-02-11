@@ -1,12 +1,12 @@
 import React from "react";
-import { ArticleLayout } from "../src/index";
+import { Layout } from "../src/index";
 import { LeftContent } from "./components/LeftContent";
 import { MainContent } from "./components/MainContent";
 import { RightContent } from "./components/RightContent";
 
 export default {
   title: "@navikt/layout/Article",
-  component: { ArticleLayout },
+  component: { Layout },
   parameters: {
     layout: "fullscreen",
     backgrounds: {
@@ -26,15 +26,34 @@ export default {
 };
 
 export const ThreeColumns = () => (
-  <ArticleLayout
-    leftContent={<LeftContent />}
-    mainContent={<MainContent />}
-    rightContent={<RightContent />}
-  />
+  <Layout>
+    <Layout.Section secondary>
+      <LeftContent />
+    </Layout.Section>
+    <Layout.Section>
+      <MainContent />
+    </Layout.Section>
+    <Layout.Section secondary>
+      <RightContent />
+    </Layout.Section>
+  </Layout>
 );
 
 export const TwoColumns = () => (
-  <ArticleLayout leftContent={<LeftContent />} mainContent={<MainContent />} />
+  <Layout>
+    <Layout.Section secondary>
+      <LeftContent />
+    </Layout.Section>
+    <Layout.Section>
+      <MainContent />
+    </Layout.Section>
+  </Layout>
 );
 
-export const OneColumn = () => <ArticleLayout mainContent={<MainContent />} />;
+export const OneColumn = () => (
+  <Layout>
+    <Layout.Section>
+      <MainContent />
+    </Layout.Section>
+  </Layout>
+);

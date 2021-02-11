@@ -1,1 +1,4 @@
-export { default as ArticleLayout, ArticleLayoutProps } from "./ArticleLayout";
+import { default as Layout, LayoutProps } from "./Layout";
+import { SectionProps } from "./Section";
+
+export { Layout, LayoutProps, SectionProps };
