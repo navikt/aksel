@@ -39,8 +39,8 @@ export const SubMenu = ({ hidden, ...props }) => {
               <Link
                 to={props.link}
                 className="ds-sidebar__submenu--item"
-                activeClassName="active"
                 tabIndex={hidden ? -1 : 0}
+                activeClassName="ds-sidebar--active"
               >
                 {props.title}
               </Link>
@@ -67,7 +67,7 @@ export const Menu = forwardRef<HTMLElement, { hidden: boolean }>(
                 <Link
                   to={props.link}
                   className="ds-sidebar__button"
-                  activeClassName="active"
+                  activeClassName="ds-sidebar--active"
                   tabIndex={hidden ? -1 : 0}
                   aria-label={props.title}
                 >

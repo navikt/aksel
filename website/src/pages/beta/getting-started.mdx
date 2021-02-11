@@ -5,4 +5,58 @@ rank: 1
 
 # Kom i gang
 
-Én pakke. Baseline css. Typografi. Komponenter.
+Denne siden forklarer hvordan du tar i bruk det designsystemet v2.
+
+## Hva er designsystemet v2?
+
+V2 består av fire forskjellige pakker for å gjør det lettere for deg å ta i bruk og holde alt oppdatert.
+Disse pakkene er designet med CSS som grunnpilar, noe som gjør at vi på best mulig måte kan tilby designsystemet sine
+komponenter for alle selv om du ikke bruker react.
+
+## ds-css
+
+CSS-pakken er skrevet i ren CSS, noe som betyr at man ikke lengre trenger støtte for Less.js når man bruker V2.
+Css-en er skrevet med hjelp av css-variabler, noe som betyr man må ta i bruk pakken `@navikt/ds-tokens` for at alt skal fungere riktig.
+Formatet på CSS koden er BEM, noe som gjør det lettere å forstå hvilken effekt koden har på utseende.
+
+## ds-react
+
+React-pakken har som hovedmål å implementere CSS en fra css-pakken, men også tilby enklere løsninger for utviklere å ta i bruk.
+Alle pakkene tar i bruk refForwarding, noe som betyr at man nå kan enkelt sende ref som prop til kompoentene.
+
+## ds-tokens
+
+Tokens-pakken eksponerer design-tokens i Css, Js, Sass og less format som man kan ta i bruk.
+Disse variablene er autogenererte og er pakken tilbyr css-variablene for `ds-css` pakken vår.
+
+## ds-icons
+
+Ikonpakken tilbyr NAV sine egen ikoner i React og SVG format.
+
+## Installering
+
+### CSS
+
+```jsx accordion=false
+yarn add @navikt/ds-css
+```
+
+### React
+
+```jsx accordion=false
+yarn add @navikt/ds-react
+```
+
+### Tokens
+
+```jsx accordion=false
+yarn add @navikt/ds-tokens
+```
+
+### Icons
+
+```jsx accordion=false
+yarn add @navikt/ds-icons
+```
+
+## Oppsett i app

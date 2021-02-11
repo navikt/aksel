@@ -266,6 +266,10 @@ div[class="ds-content"] > .table-of-contents {
   outline-offset: -2px;
 }
 
+.ds-sidebar--active {
+  background-color: var(--menu-background-active);
+}
+
 .ds-sidebar__mobile {
   z-index: 999;
   display: flex;
