@@ -5,7 +5,7 @@ import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
 import "@navikt/ds-css/layout/index.css";
 
-export interface LayoutWidthSubComponents
+export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {
   Section: ForwardRefExoticComponent<
     SectionProps & HTMLAttributes<HTMLElement>
@@ -27,7 +27,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
       <Grid>{children}</Grid>
     </Container>
   )
-) as LayoutWidthSubComponents;
+) as LayoutWithSubComponents;
 
 Layout.Section = Section;
 export default Layout;
