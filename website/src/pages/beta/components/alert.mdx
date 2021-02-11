@@ -2,8 +2,106 @@
 title: Alert
 ---
 
-# Alert component
+import { Alert } from "@navikt/ds-react";
 
-Sånn ser den ut: _eksempel med kode_
+# Alert
 
-Sånn funker den: _api doc_
+## Import
+
+```css accordion=false
+import { Alert } from "@navikt/ds-react"
+```
+
+## Standard
+
+<Example>
+  <Alert variant="info">Nå kan du sende inn søknaden.</Alert>
+  <Alert variant="success">Du har sendt søknaden.</Alert>
+  <Alert variant="warning">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alert>
+  <Alert variant="error">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+  </Alert>
+</Example>
+
+```type=react
+<Alert
+    variant="info"
+    className="navds-alert navds-alert--info navds-alert--medium"
+>
+    Nå kan du sende inn søknaden.
+</Alert>
+```
+
+```type=html
+<div
+    className="navds-alert navds-alert--info navds-alert--medium"
+>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM9 19V17H11V12H9V10H13V17H15V19H9ZM12 5C12.8284 5 13.5 5.67157 13.5 6.5C13.5 7.32843 12.8284 8 12 8C11.1716 8 10.5 7.32843 10.5 6.5C10.5 5.67157 11.1716 5 12 5Z" fill="currentColor"/>
+    </svg>
+    <span>Nå kan du sende inn søknaden.</span>
+</div>
+```
+
+## Interne-flater
+
+<Example>
+  <Alert variant="info" size="small">
+    Nå kan du sende inn søknaden.
+  </Alert>
+  <Alert variant="success" size="small">
+    Du har sendt søknaden.
+  </Alert>
+  <Alert variant="warning" size="small">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alert>
+  <Alert variant="error" size="small">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+  </Alert>
+</Example>
+
+```type=react
+<Alert
+    variant="info"
+    size="small"
+    className="navds-alert navds-alert--info navds-alert--medium"
+>
+    Nå kan du sende inn søknaden.
+</Alert>
+```
+
+```type=html
+<div
+    className="navds-alert navds-alert--info navds-alert--small"
+>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12C0 5.37258 5.37258 0 12 0ZM9 19V17H11V12H9V10H13V17H15V19H9ZM12 5C12.8284 5 13.5 5.67157 13.5 6.5C13.5 7.32843 12.8284 8 12 8C11.1716 8 10.5 7.32843 10.5 6.5C10.5 5.67157 11.1716 5 12 5Z" fill="currentColor"/>
+    </svg>
+    <span>Nå kan du sende inn søknaden.</span>
+</div>
+```
+
+## Accessibility
+
+### Dynamisk visning
+
+Hvis alertstripene skal dukke opp dynamisk, for eksempel som en reaksjon på noe brukeren gjør, er det viktig at det allerede ligger et element på siden som har definert en såkalt "live region" hvor Alertstripene skal bli rendret i. Dette kan gjøres ved å gi container-elementet et `aria-live`-attributt med verdien `polite` eller `assertive`.
+
+```html
+<div aria-live="polite">
+  <!-- her kommer det en Alertstripe når brukeren klikker på noe -->
+</div>
+```
+
+Merk at `aria-live="assertive"` bør brukes varsomt og kun når det er nødvendig å få brukerens oppmerksomhet umiddelbart. Et alternativ er å gi konteiner-elementet et `role="alert"`-attributt, som er akkurat det samme som å sette `aria-live="assertive"` og `aria-atomic="true`.
+
+### Mer informasjon
+
+- [Using ARIA role=alert or Live Regions to Identify Errors (W3.org)](https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html)
+- [ARIA Live Regions (Mozilla Developer Network)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
+- [Using the alert role (Mozilla Developer Network)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_alert_role)
+- [User Notifications (W3.org)](https://www.w3.org/WAI/tutorials/forms/notifications/)
