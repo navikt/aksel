@@ -1,8 +1,9 @@
 import * as React from "react";
 import { Layout } from "../src/index";
-import { LeftContent } from "./components/LeftContent";
-import { MainContent } from "./components/MainContent";
-import { RightContent } from "./components/RightContent";
+import { Left } from "./components/sections/Left";
+import { Main } from "./components/sections/Main";
+import { Right } from "./components/sections/Right";
+import "./components/styles.css";
 
 export default {
   title: "@navikt/layout/Article",
@@ -28,13 +29,13 @@ export default {
 export const ThreeColumns = () => (
   <Layout>
     <Layout.Section left>
-      <LeftContent />
+      <Left />
     </Layout.Section>
     <Layout.Section>
-      <MainContent />
+      <Main />
     </Layout.Section>
     <Layout.Section right>
-      <RightContent />
+      <Right />
     </Layout.Section>
   </Layout>
 );
@@ -42,10 +43,10 @@ export const ThreeColumns = () => (
 export const TwoColumns = () => (
   <Layout>
     <Layout.Section left>
-      <LeftContent />
+      <Left />
     </Layout.Section>
     <Layout.Section>
-      <MainContent />
+      <Main />
     </Layout.Section>
   </Layout>
 );
@@ -53,7 +54,7 @@ export const TwoColumns = () => (
 export const OneColumn = () => (
   <Layout>
     <Layout.Section>
-      <MainContent />
+      <Main />
     </Layout.Section>
   </Layout>
 );

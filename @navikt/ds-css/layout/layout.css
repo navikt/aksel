@@ -2,8 +2,20 @@
     layout css
  */
 
-@media (min-width: 960px) {
-  .navds-layout-main-content {
+@media (min-width: 448px) {
+  .navds-layout-section-main {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 448px) and (max-width: 960px) {
+  .navds-layout-section-left {
+    padding: 2.5rem;
+  }
+}
+
+@media (min-width: 448px) and (max-width: 648px) {
+  .navds-layout-section-right {
     padding: 2.5rem;
   }
 }

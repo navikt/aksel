@@ -1,23 +1,22 @@
 import * as React from "react";
 import Lenke from "nav-frontend-lenker";
-import { Button } from "../../../lib";
-import { styles } from "./styles";
+import { Button } from "../../../../lib";
 
-export const LeftContent = () => (
-  <ul style={styles.ul}>
-    <li style={styles.li}>
+export const Left = () => (
+  <ul className={"menu"}>
+    <li>
       <Lenke href={"#"}>Iusto odio dignissimos</Lenke>
     </li>
-    <li style={styles.li}>
+    <li>
       <Lenke href={"#"}>Nam libero tempore</Lenke>
     </li>
-    <li style={styles.li}>
+    <li>
       <Lenke href={"#"}>Reiciendis voluptatibus</Lenke>
     </li>
-    <li style={styles.li}>
+    <li>
       <Lenke href={"#"}>Earum rerum</Lenke>
     </li>
-    <li style={styles.li}>
+    <li>
       <Button>Søk ...</Button>
     </li>
   </ul>
