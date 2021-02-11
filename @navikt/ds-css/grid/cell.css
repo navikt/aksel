@@ -1,6 +1,12 @@
 .navds-grid-cell {
-  background: white;
   border-radius: 0.25rem;
+}
+
+.navds-grid-cell--white {
+  background: white;
+}
+
+.navds-grid-cell--padding {
   padding: 1rem;
 }
 
