@@ -28,13 +28,13 @@ export default {
 
 export const ThreeColumns = () => (
   <Layout>
-    <Layout.Section left>
+    <Layout.Section white left>
       <Left />
     </Layout.Section>
-    <Layout.Section>
+    <Layout.Section white>
       <Main />
     </Layout.Section>
-    <Layout.Section right>
+    <Layout.Section white right>
       <Right />
     </Layout.Section>
   </Layout>
@@ -42,10 +42,10 @@ export const ThreeColumns = () => (
 
 export const TwoColumns = () => (
   <Layout>
-    <Layout.Section left>
+    <Layout.Section white left>
       <Left />
     </Layout.Section>
-    <Layout.Section>
+    <Layout.Section white>
       <Main />
     </Layout.Section>
   </Layout>
@@ -53,7 +53,7 @@ export const TwoColumns = () => (
 
 export const OneColumn = () => (
   <Layout>
-    <Layout.Section>
+    <Layout.Section white>
       <Main />
     </Layout.Section>
   </Layout>

@@ -1,8 +1,9 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import { Cell } from "../../grid/src";
+import { Cell, CellProps } from "../../grid/src";
 import cl from "classnames";
 
-export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
+export interface SectionProps
+  extends Omit<CellProps, "sm" | "md" | "lg" | "xl" | "padding"> {
   children?: React.ReactNode;
   className?: string;
   left?: boolean;
@@ -18,6 +19,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
           md={8}
           lg={12}
           xl={3}
+          padding
           className={cl("navds-layout-section-left", className)}
           {...rest}
         >
@@ -30,6 +32,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
           md={8}
           lg={8}
           xl={6}
+          padding
           className={cl("navds-layout-section-main", className)}
           {...rest}
         >
@@ -42,6 +45,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
           md={8}
           lg={4}
           xl={3}
+          padding
           className={cl("navds-layout-section-right", className)}
           {...rest}
         >
