@@ -22,18 +22,20 @@ export default {
   },
 };
 
-export const All = () => (
-  <Container>
-    <Grid>
-      <Cell sm={4} md={8} lg={3} white padding>
-        Kolonne
-      </Cell>
-      <Cell sm={4} md={4} lg={6} white padding>
-        Kolonne
-      </Cell>
-      <Cell sm={4} md={4} lg={3} white padding>
-        Kolonne
-      </Cell>
-    </Grid>
-  </Container>
-);
+export const All = () => {
+  return (
+    <Container>
+      <Grid>
+        <Cell sm={12} md={6} xl={4} white padding>
+          Kolonne
+        </Cell>
+        <Cell sm={12} md={6} xl={4} white padding>
+          Kolonne
+        </Cell>
+        <Cell sm={12} md={12} xl={4} white padding>
+          Kolonne
+        </Cell>
+      </Grid>
+    </Container>
+  );
+};
