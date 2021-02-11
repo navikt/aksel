@@ -26,13 +26,13 @@ export const All = () => {
   return (
     <Container>
       <Grid>
-        <Cell sm={6} xl={4} white padding>
+        <Cell sm={12} md={6} xl={4} white padding>
           Kolonne
         </Cell>
-        <Cell sm={6} xl={4} white padding>
+        <Cell sm={12} md={6} xl={4} white padding>
           Kolonne
         </Cell>
-        <Cell sm={12} xl={4} white padding>
+        <Cell sm={12} md={12} xl={4} white padding>
           Kolonne
         </Cell>
       </Grid>
