@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { Container, Grid } from "../../grid/src";
 import cl from "classnames";

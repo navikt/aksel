@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Layout } from "../src/index";
 import { LeftContent } from "./components/LeftContent";
 import { MainContent } from "./components/MainContent";

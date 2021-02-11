@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { Heading } from "../../../lib/typography/src";
 import { Normaltekst } from "nav-frontend-typografi";
 import { Cell, Grid } from "../../../grid/src";
