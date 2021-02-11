@@ -1,8 +1,8 @@
 @import "~@navikt/ds-css/baseline/index.css";
 
-.table-of-contents {
-  display: none !important;
-  width: 0px !important;
+div[class="ds-content"] > .table-of-contents {
+  display: none;
+  width: 0px;
 }
 
 .ds-page-wrapper {
