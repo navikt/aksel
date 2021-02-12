@@ -17,11 +17,11 @@ export const Main = () => (
       fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem
       sequi nesciunt.{" "}
     </Normaltekst>
-    <Grid>
-      <Cell className={"section"} sm={6}>
+    <Grid className={"section"}>
+      <Cell sm={6}>
         <Lenke href={"#"}>Test</Lenke>
       </Cell>
-      <Cell className={"section"} sm={6}>
+      <Cell sm={6}>
         <Lenke href={"#"}>Test</Lenke>
       </Cell>
     </Grid>
