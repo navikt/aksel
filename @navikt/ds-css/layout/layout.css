@@ -1,7 +1,7 @@
 @media (min-width: 448px) {
-  .navds-layout-section-left,
-  .navds-layout-section-main,
-  .navds-layout-section-right {
+  .navds-layout-section-left.navds-grid-cell--padding,
+  .navds-layout-section-main.navds-grid-cell--padding,
+  .navds-layout-section-right.navds-grid-cell--padding {
     padding: var(--navds-layout-padding-medium-and-larger);
   }
 }
@@ -17,6 +17,9 @@
 
   .navds-layout-section-right {
     grid-row: 1 / span 2;
+  }
+
+  .navds-layout-section-right.navds-grid-cell--padding {
     padding: var(--navds-layout-padding-small);
   }
 }
@@ -24,6 +27,9 @@
 @media (min-width: 960px) {
   .navds-layout-section-left {
     grid-row: 1;
+  }
+
+  .navds-layout-section-left.navds-grid-cell--padding {
     padding: var(--navds-layout-padding-small);
   }
 
