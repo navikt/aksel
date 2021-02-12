@@ -22,6 +22,7 @@
   .navds-layout-container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
+
   .navds-layout-section-left,
   .navds-layout-section-main,
   .navds-layout-section-right {
@@ -33,14 +34,17 @@
   .navds-layout-container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
+
   .navds-layout-section-left {
     grid-row: 1;
     grid-column: span 8;
   }
+
   .navds-layout-section-main {
     grid-row: 2;
     grid-column: span 8;
   }
+
   .navds-layout-section-right {
     padding: 1rem;
     grid-column: span 4;
@@ -52,15 +56,18 @@
   .navds-layout-container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
+
   .navds-layout-section-left {
     padding: 1rem;
     grid-row: 1;
     grid-column: span 3;
   }
+
   .navds-layout-section-main {
     grid-row: 1;
     grid-column: span 6;
   }
+
   .navds-layout-section-right {
     grid-row: 1;
     grid-column: span 3;
