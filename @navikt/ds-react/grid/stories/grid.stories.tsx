@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Container, Grid, Cell } from "../src/index";
-import ContentContainer from "../../page-container/src";
+import ContentContainer from "../../content-container/src";
 
 export default {
   title: "@navikt/grid",
