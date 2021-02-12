@@ -3,7 +3,7 @@ import ContentContainer from "../src/index";
 import "./style.css";
 
 export default {
-  title: "@navikt/page-container",
+  title: "@navikt/content-container",
   component: ContentContainer,
   parameters: {
     layout: "fullscreen",
