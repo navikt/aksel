@@ -8,14 +8,14 @@ export default {
   parameters: {
     layout: "fullscreen",
     backgrounds: {
-      default: "white",
+      default: "NAV gray",
       values: [
         {
           name: "white",
           value: "#ffffff",
         },
         {
-          name: "nav gray",
+          name: "NAV gray",
           value: "#f1f1f1",
         },
       ],
