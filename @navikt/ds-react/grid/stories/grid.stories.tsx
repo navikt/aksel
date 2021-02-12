@@ -28,13 +28,13 @@ export const All = () => {
   return (
     <Container>
       <Grid>
-        <Cell className={"navds-story-cell"} sm={12} md={6} xl={4}>
+        <Cell className={"navds-story-cell"} small={12} medium={6} xLarge={4}>
           Kolonne
         </Cell>
-        <Cell className={"navds-story-cell"} sm={12} md={6} xl={4}>
+        <Cell className={"navds-story-cell"} small={12} medium={6} xLarge={4}>
           Kolonne
         </Cell>
-        <Cell className={"navds-story-cell"} sm={12} md={12} xl={4}>
+        <Cell className={"navds-story-cell"} small={12} medium={12} xLarge={4}>
           Kolonne
         </Cell>
       </Grid>
