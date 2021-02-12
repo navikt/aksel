@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Container, Grid, Cell } from "../src/index";
-import ContentContainer from "../../content-container/src";
+import { Grid, Cell } from "../src/index";
+import Container from "../../content-container/src";
 
 export default {
   title: "@navikt/grid",
@@ -25,7 +25,7 @@ export default {
 
 export const All = () => {
   return (
-    <ContentContainer>
+    <Container>
       <Grid>
         <Cell sm={12} md={6} xl={4} white padding>
           Kolonne
@@ -37,6 +37,6 @@ export const All = () => {
           Kolonne
         </Cell>
       </Grid>
-    </ContentContainer>
+    </Container>
   );
 };
