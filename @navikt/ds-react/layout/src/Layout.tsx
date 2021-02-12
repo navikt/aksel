@@ -1,8 +1,9 @@
 import * as React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { Container, Grid } from "../../grid/src";
+import { Grid } from "../../grid/src";
 import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
+import Container from "../../content-container/src";
 import "@navikt/ds-css/layout/index.css";
 
 export interface LayoutWithSubComponents

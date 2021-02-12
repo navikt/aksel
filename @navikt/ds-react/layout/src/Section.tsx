@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import { Cell, CellProps } from "../../grid/src";
 import cl from "classnames";
 
