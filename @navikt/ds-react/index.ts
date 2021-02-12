@@ -21,3 +21,7 @@ export {
   HeadingProps,
   TextProps,
 } from "./typography/src/index";
+
+export { Layout } from "./layout/src/index";
+export { Grid, Cell } from "./grid/src/index";
+export { default as ContentContainer } from "./content-container/src/index";
