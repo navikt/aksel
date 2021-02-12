@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Grid, Cell } from "../src/index";
 import Container from "../../content-container/src";
+import "./styles.css";
 
 export default {
   title: "@navikt/grid",
@@ -27,13 +28,13 @@ export const All = () => {
   return (
     <Container>
       <Grid>
-        <Cell sm={12} md={6} xl={4} white padding>
+        <Cell className={"navds-story-cell"} sm={12} md={6} xl={4}>
           Kolonne
         </Cell>
-        <Cell sm={12} md={6} xl={4} white padding>
+        <Cell className={"navds-story-cell"} sm={12} md={6} xl={4}>
           Kolonne
         </Cell>
-        <Cell sm={12} md={12} xl={4} white padding>
+        <Cell className={"navds-story-cell"} sm={12} md={12} xl={4}>
           Kolonne
         </Cell>
       </Grid>
