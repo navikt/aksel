@@ -53,7 +53,7 @@ export const TwoColumns = () => (
 
 export const OneColumn = () => (
   <Layout>
-    <Layout.Section white padding>
+    <Layout.Section padding white>
       <Main />
     </Layout.Section>
   </Layout>
