@@ -1,21 +1,37 @@
-/*
-    layout css
- */
-
 @media (min-width: 448px) {
-  .navds-layout-section-main {
-    padding: 2.5rem;
-  }
-}
-
-@media (min-width: 448px) and (max-width: 960px) {
-  .navds-layout-section-left {
-    padding: 2.5rem;
-  }
-}
-
-@media (min-width: 448px) and (max-width: 648px) {
+  .navds-layout-section-left,
+  .navds-layout-section-main,
   .navds-layout-section-right {
-    padding: 2.5rem;
+    padding: var(--navds-layout-padding-medium-and-larger);
+  }
+}
+
+@media (min-width: 648px) {
+  .navds-layout-section-left {
+    grid-row: 1;
+  }
+
+  .navds-layout-section-main {
+    grid-row: 2;
+  }
+
+  .navds-layout-section-right {
+    grid-row: 1 / span 2;
+    padding: var(--navds-layout-padding-small);
+  }
+}
+
+@media (min-width: 960px) {
+  .navds-layout-section-left {
+    grid-row: 1;
+    padding: var(--navds-layout-padding-small);
+  }
+
+  .navds-layout-section-main {
+    grid-row: 1;
+  }
+
+  .navds-layout-section-right {
+    grid-row: 1;
   }
 }

@@ -16,7 +16,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       {left && (
         <Cell
           sm={12}
-          lg={12}
+          lg={8}
           xl={3}
           padding
           className={cl("navds-layout-section-left", className)}
