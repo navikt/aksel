@@ -158,7 +158,7 @@ module.exports = {
     },
     contentContainer: {
       maxWidth: { value: "79.5rem" },
-      gutter: {
+      padding: {
         small: { value: "1rem" },
         mediumAndLarger: { value: "1.5rem" },
       },
