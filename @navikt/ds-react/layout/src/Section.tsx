@@ -11,11 +11,11 @@ export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
 const Section = forwardRef<HTMLDivElement, SectionProps>(
   (
     {
-      children,
       left,
       right,
-      withPadding = true,
+      children,
       white = true,
+      withPadding = true,
       className,
       ...rest
     },
