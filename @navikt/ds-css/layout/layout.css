@@ -23,9 +23,9 @@
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
 
-  .navds-layout-section-left.navds-layout-section--padding,
-  .navds-layout-section-main.navds-layout-section--padding,
-  .navds-layout-section-right.navds-layout-section--padding {
+  .navds-layout-section--padding.navds-layout-section-left,
+  .navds-layout-section--padding.navds-layout-section-main,
+  .navds-layout-section--padding.navds-layout-section-right {
     padding: var(--navds-layout-padding-medium-and-larger);
   }
 }
@@ -50,7 +50,7 @@
     grid-row: 1 / span 2;
   }
 
-  .navds-layout-section-right.navds-layout-section--padding {
+  .navds-layout-section--padding.navds-layout-section-right {
     padding: var(--navds-layout-padding-small);
   }
 }
@@ -65,7 +65,7 @@
     grid-column: span 3;
   }
 
-  .navds-layout-section-left.navds-layout-container {
+  .navds-layout-section--padding.navds-layout-section-left {
     padding: var(--navds-layout-padding-small);
   }
 
