@@ -2,16 +2,25 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  className?: string;
   left?: boolean;
   right?: boolean;
-  padding?: boolean;
   white?: boolean;
+  withPadding?: boolean;
 }
 
 const Section = forwardRef<HTMLDivElement, SectionProps>(
-  ({ children, left, right, white, padding, className, ...rest }, ref) => (
+  (
+    {
+      children,
+      left,
+      right,
+      withPadding = true,
+      white = true,
+      className,
+      ...rest
+    },
+    ref
+  ) => (
     <div
       ref={ref}
       className={cl(
@@ -19,7 +28,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
         left && "navds-layout-section-left",
         right && "navds-layout-section-right",
         !left && !right && "navds-layout-section-main",
-        padding && "navds-layout-section--padding",
+        withPadding && "navds-layout-section--padding",
         white && "navds-layout-section--white",
         className
       )}
