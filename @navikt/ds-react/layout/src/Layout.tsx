@@ -1,6 +1,5 @@
 import * as React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { Grid } from "../../grid/src";
 import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
 import Container from "../../content-container/src";
@@ -18,12 +17,8 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   ({ children, className, ...rest }, ref) => (
-    <Container
-      ref={ref}
-      className={cl("navds-layout-container", className)}
-      {...rest}
-    >
-      <Grid>{children}</Grid>
+    <Container ref={ref} {...rest}>
+      <div className={cl("navds-layout-container", className)}>{children}</div>
     </Container>
   )
 ) as LayoutWithSubComponents;

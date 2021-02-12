@@ -1,55 +1,32 @@
-import React, { forwardRef } from "react";
-import { Cell, CellProps } from "../../grid/src";
+import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export interface SectionProps
-  extends Omit<CellProps, "sm" | "md" | "lg" | "xl" | "padding"> {
+export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   className?: string;
   left?: boolean;
   right?: boolean;
+  padding?: boolean;
+  white?: boolean;
 }
 
 const Section = forwardRef<HTMLDivElement, SectionProps>(
-  ({ children, left, right, className, ...rest }, ref) => (
-    <>
-      {left && (
-        <Cell
-          sm={12}
-          lg={12}
-          xl={3}
-          padding
-          className={cl("navds-layout-section-left", className)}
-          {...rest}
-        >
-          {children}
-        </Cell>
+  ({ children, left, right, white, padding, className, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cl(
+        "navds-layout-section",
+        left && "navds-layout-section-left",
+        right && "navds-layout-section-right",
+        !left && !right && "navds-layout-section-main",
+        padding && "navds-layout-section--padding",
+        white && "navds-layout-section--white",
+        className
       )}
-      {!left && !right && (
-        <Cell
-          sm={12}
-          lg={8}
-          xl={6}
-          padding
-          className={cl("navds-layout-section-main", className)}
-          {...rest}
-        >
-          {children}
-        </Cell>
-      )}
-      {right && (
-        <Cell
-          sm={12}
-          lg={4}
-          xl={3}
-          padding
-          className={cl("navds-layout-section-right", className)}
-          {...rest}
-        >
-          {children}
-        </Cell>
-      )}
-    </>
+      {...rest}
+    >
+      {children}
+    </div>
   )
 );
 
