@@ -5,6 +5,7 @@ export { default as Link, LinkProps } from "./link/src/index";
 export { default as Modal, ModalProps } from "./modal/src/index";
 export { default as Popover, PopoverProps } from "./popover/src/index";
 export { default as Tag, TagProps } from "./tag/src/index";
+export { CopyToClipboard } from "./copy-to-clipboard/src/index";
 export {
   InternalHeader,
   InternalHeaderProps,

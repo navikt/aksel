@@ -25,6 +25,8 @@ module.exports = {
       white: { value: white },
       darkgray: { value: darkgray },
       gray: {
+        10: { value: "#e9e7e7" },
+        20: { value: "#c6c2bf" },
         40: { value: "#b7b1a9" },
         60: { value: "#78706a" },
       },

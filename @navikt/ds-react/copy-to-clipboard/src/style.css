@@ -1,0 +1,48 @@
+.navds-copyToClipboard-button {
+  display: inline-flex;
+  margin-bottom: -0.35em;
+  padding: 0.35em;
+  border-radius: 0.2em;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.navds-copyToClipboard-button:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-copyToClipboard-button:hover {
+  background-color: var(--navds-color-gray-10);
+}
+
+.navds-copyToClipboard-button:active {
+  opacity: 0.5;
+}
+
+.navds-copyToClipboard-button svg {
+  width: 1em;
+  color: var(--navds-color-text-primary);
+  stroke-width: 1.4;
+}
+
+.navds-copyToClipboard-success {
+  position: absolute;
+  left: 0;
+  top: 1.3em;
+  padding: 0.25em 0.75em;
+  background-color: white;
+  box-shadow: 0 0.1em 0.2em var(--navds-color-gray-60);
+  border: 0.1em solid var(--navds-color-gray-60);
+  border-radius: 0.25em;
+  white-space: nowrap;
+}
+
+.navds-copyToClipboard-success::first-letter {
+  text-transform: uppercase;
+}
+
+.navds-copyToClipboard-wrapper {
+  position: relative;
+}
