@@ -169,6 +169,12 @@ module.exports = {
         mediumAndLarger: { value: "1.5rem" },
       },
     },
+    layout: {
+      padding: {
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "2.5rem" },
+      },
+    },
     z: {
       index: {
         modal: {

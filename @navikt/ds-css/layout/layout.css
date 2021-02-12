@@ -9,7 +9,7 @@
 }
 
 .navds-layout-section--padding {
-  padding: 1rem;
+  padding: var(--navds-layout-padding-small);
 }
 
 .navds-layout-section-left,
@@ -26,7 +26,7 @@
   .navds-layout-section-left,
   .navds-layout-section-main,
   .navds-layout-section-right {
-    padding: 2.5rem;
+    padding: var(--navds-layout-padding-medium-and-larger);
   }
 }
 
@@ -46,7 +46,7 @@
   }
 
   .navds-layout-section-right {
-    padding: 1rem;
+    padding: var(--navds-layout-padding-small);
     grid-column: span 4;
     grid-row: 1 / span 2;
   }
@@ -58,7 +58,7 @@
   }
 
   .navds-layout-section-left {
-    padding: 1rem;
+    padding: var(--navds-layout-padding-small);
     grid-row: 1;
     grid-column: span 3;
   }
