@@ -27,6 +27,7 @@
   background-color: var(--code-background-color);
   border: 2px solid transparent;
   overflow-x: auto;
+  overflow-y: hidden;
   z-index: 1;
   margin: 2px;
   margin-bottom: 6px;
