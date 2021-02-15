@@ -6,28 +6,43 @@ import React, {
   useState,
 } from "react";
 import cl from "classnames";
-import Step, { StepProps } from "./Step";
+import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+  children:
+    | React.ReactElement<typeof StepperStep>
+    | Array<React.ReactElement<typeof StepperStep>>;
   orientation?: "horizontal" | "vertical";
   activeStep?: number;
 }
 
-interface StepperComponent
-  extends React.ForwardRefExoticComponent<
-    StepperProps & React.RefAttributes<HTMLDivElement>
-  > {
-  Step: React.ForwardRefExoticComponent<
-    StepProps & React.RefAttributes<HTMLDivElement>
-  >;
-}
-
-export const OrientationContext = createContext("horizontal");
+export const StepContext = createContext({
+  orientation: "horizontal",
+  activeStep: 0,
+});
 
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
-  ({ children, className, orientation = "horizontal", ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      orientation = "horizontal",
+      activeStep = 0,
+      ...rest
+    },
+    ref
+  ) => {
+    const stepsWithIndex = React.Children.toArray(children).map(
+      (step: React.ReactElement<typeof StepperStep>, index) => {
+        return React.cloneElement(step, {
+          ...{ index },
+          ...step.props,
+        });
+      }
+    );
+    const context = { orientation: "horizontal", activeStep };
+
     return (
       <div
         ref={ref}
@@ -38,14 +53,12 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         )}
         {...rest}
       >
-        <OrientationContext.Provider value={orientation}>
-          {children}
-        </OrientationContext.Provider>
+        <StepContext.Provider value={context}>
+          {stepsWithIndex}
+        </StepContext.Provider>
       </div>
     );
   }
-) as StepperComponent;
-
-Stepper.Step = Step;
+);
 
 export default Stepper;

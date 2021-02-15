@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Stepper from "../src/index";
+import { Stepper, StepperStep } from "../src/index";
 
 export default {
   title: "@navikt/stepper",
@@ -11,14 +11,14 @@ export const All = () => {
     <>
       <h1>Stepper horizontal</h1>
       <Stepper>
-        <Stepper.Step>Step 1</Stepper.Step>
-        <Stepper.Step>Step 2</Stepper.Step>
+        <StepperStep>Step 1</StepperStep>
+        <StepperStep>Step 2</StepperStep>
       </Stepper>
 
       <h1>Stepper vertical</h1>
       <Stepper orientation="vertical">
-        <Stepper.Step>Step 1</Stepper.Step>
-        <Stepper.Step>Step 2</Stepper.Step>
+        <StepperStep>Step 1</StepperStep>
+        <StepperStep>Step 2</StepperStep>
       </Stepper>
     </>
   );

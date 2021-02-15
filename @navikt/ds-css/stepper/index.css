@@ -33,3 +33,13 @@
   flex-direction: row;
   align-items: center;
 }
+.navds-stepper__stepInner__number {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0 0 0 1px #78706a inset;
+  background: white;
+}
