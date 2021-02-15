@@ -3,8 +3,11 @@ title: Accordion
 ---
 
 import { Accordion } from "@navikt/ds-react";
+import { AccordionExample } from "../../../examples/AccordionExample.tsx";
 
 # Accordion
+
+## Standard
 
 <Example>
   <Accordion heading="tittel">
@@ -14,7 +17,7 @@ import { Accordion } from "@navikt/ds-react";
 </Example>
 
 ```jsx type=react
-<Accordion heading="tittel" onClick={(e) => null}>
+<Accordion heading="tittel">
   Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia. Culpa
   fugiat irure deserunt irure enim adipisicing qui id.
 </Accordion>
@@ -23,3 +26,16 @@ import { Accordion } from "@navikt/ds-react";
 <!-- ```html type=html
 
 ``` -->
+
+## Med state-handling
+
+<Example>
+  <AccordionExample />
+</Example>
+
+```jsx type=react
+<Accordion heading="tittel" open={() => setOpen((open) => !open)}>
+  Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia. Culpa
+  fugiat irure deserunt irure enim adipisicing qui id.
+</Accordion>
+```

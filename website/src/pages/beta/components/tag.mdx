@@ -1,0 +1,34 @@
+---
+title: Tag
+---
+
+import { Tag } from "@navikt/ds-react";
+
+# Tag
+
+## Standard
+
+<Example>
+  <Tag variant="info"> Info tag</Tag>
+  <Tag variant="warning"> Warning tag</Tag>
+  <Tag variant="success"> Success tag</Tag>
+  <Tag variant="error">Error tag</Tag>
+</Example>
+
+```jsx type=react
+<Tag variant="info">Info tag</Tag>
+```
+
+```html type=html
+<span className="navds-tag navds-tag--info">Info tag</span>
+```
+
+## Accessibility
+
+### Farge og tekst må høre sammen
+
+Pass på at fargen og teksten på tag alltid samsvarer med hverandre. Da forhinder du at personer med dårlig fargesyn, eller en dårlig skjerm, går glipp av informasjon.
+
+### Mer informasjon
+
+- [WCAG 1.4.1: Bruk av farge](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/141-bruk-av-farge-niva)
