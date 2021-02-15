@@ -28,7 +28,8 @@ export const useProps = (path) => {
   const props = useAllProps();
 
   return props.filter((prop) => {
-    const propPath = prop.relativePath.match(/nav-frontend-(.*)\/src\//)[1];
+    const match = prop.relativePath.match(/nav-frontend-(.*)\/src\//);
+    const propPath = match && match.length >= 2 ? match[1] : "";
     return propPath === pathComp;
   });
 };
