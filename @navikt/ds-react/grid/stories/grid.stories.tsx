@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Grid, Cell } from "../src/index";
-import Container from "../../content-container/src";
+import { ContentContainer } from "../../content-container/src";
 import "./styles.css";
 
 export default {
   title: "@navikt/grid",
-  component: { Container, Grid, Cell },
+  component: { Grid, Cell },
   parameters: {
     layout: "fullscreen",
     backgrounds: {
@@ -26,7 +26,7 @@ export default {
 
 export const All = () => {
   return (
-    <Container>
+    <ContentContainer>
       <Grid>
         <Cell className={"navds-story-cell"} small={12} medium={6} xLarge={4}>
           Kolonne
@@ -38,6 +38,6 @@ export const All = () => {
           Kolonne
         </Cell>
       </Grid>
-    </Container>
+    </ContentContainer>
   );
 };

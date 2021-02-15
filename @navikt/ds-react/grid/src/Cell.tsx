@@ -17,10 +17,10 @@ const Cell = forwardRef<HTMLDivElement, CellProps>(
         ref={ref}
         className={cl(
           "navds-grid-cell",
-          small && `navds-grid-cell-sm-${small}`,
-          medium && `navds-grid-cell-md-${medium}`,
-          large && `navds-grid-cell-lg-${large}`,
-          xLarge && `navds-grid-cell-xl-${xLarge}`,
+          small && `navds-grid-cell-small-${small}`,
+          medium && `navds-grid-cell-medium-${medium}`,
+          large && `navds-grid-cell-small-${large}`,
+          xLarge && `navds-grid-cell-x-large-${xLarge}`,
           className
         )}
         {...rest}
