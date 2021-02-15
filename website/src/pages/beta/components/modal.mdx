@@ -1,0 +1,43 @@
+---
+title: Modal
+---
+
+import { Modal } from "@navikt/ds-react";
+import { ModalExample } from "../../../examples/ModalExample.tsx";
+
+# Modal
+
+## Standard
+
+<Example>
+  <ModalExample />
+</Example>
+
+```jsx type=react
+<Modal open={open} onClose={() => setOpen(false)}>
+  <h1>Header</h1>
+  <h2>subheader</h2>
+  <p>
+    Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet laboris ea
+    ex aliquip. Dolore dolore reprehenderit sint esse commodo aliqua cupidatat
+    incididunt proident laborum qui.
+  </p>
+</Modal>
+```
+
+<!-- ```html type=html
+
+``` -->
+
+## Accessibility
+
+### Fokus
+
+Når modalen åpnes skal fokus settes på det første naturlige elementet i visuell rekkefølge. vanligvis betyr dette lukknappen. Hvis dette ikke gjøres manuelt vil komponenten automatisk sette fokus på selve modalvinduet.
+
+Det skal ikke være mulig å navigere seg ut av modalvinduet med skjermleser eller tastatur, uten å lukke vinduet først.
+
+### Mer informasjon
+
+- [WCAG 2.4.3: Fokusrekkefølge, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/243-fokusrekkefolge-niva)
+- [WCAG 1.3.1: Informasjon og relasjoner, nivå A](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)

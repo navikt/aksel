@@ -1,0 +1,41 @@
+---
+title: Accordion
+---
+
+import { Accordion } from "@navikt/ds-react";
+import { AccordionExample } from "../../../examples/AccordionExample.tsx";
+
+# Accordion
+
+## Standard
+
+<Example>
+  <Accordion heading="tittel">
+    Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia.
+    Culpa fugiat irure deserunt irure enim adipisicing qui id.
+  </Accordion>
+</Example>
+
+```jsx type=react
+<Accordion heading="tittel">
+  Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia. Culpa
+  fugiat irure deserunt irure enim adipisicing qui id.
+</Accordion>
+```
+
+<!-- ```html type=html
+
+``` -->
+
+## Med state-handling
+
+<Example>
+  <AccordionExample />
+</Example>
+
+```jsx type=react
+<Accordion heading="tittel" open={() => setOpen((open) => !open)}>
+  Eu magna fugiat officia sit ullamco reprehenderit reprehenderit officia. Culpa
+  fugiat irure deserunt irure enim adipisicing qui id.
+</Accordion>
+```
