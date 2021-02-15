@@ -1,4 +1,4 @@
-import ContentContainer from "./ContentContainer";
-export default ContentContainer;
-
-export { PageContainerProps } from "./ContentContainer";
+export {
+  default as ContentContainer,
+  ContentContainerProps,
+} from "./ContentContainer";
