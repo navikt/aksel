@@ -1,5 +1,5 @@
 import * as React from "react";
-import ContentContainer from "../src/index";
+import { ContentContainer } from "../src/index";
 import "./style.css";
 
 export default {
