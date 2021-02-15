@@ -2,7 +2,6 @@ import * as React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
 import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
-import Container from "../../content-container/src";
 import "@navikt/ds-css/layout/index.css";
 
 export interface LayoutWithSubComponents
@@ -17,9 +16,13 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   ({ children, className, ...rest }, ref) => (
-    <Container ref={ref} {...rest}>
-      <div className={cl("navds-layout-container", className)}>{children}</div>
-    </Container>
+    <div
+      ref={ref}
+      className={cl("navds-layout-container", className)}
+      {...rest}
+    >
+      {children}
+    </div>
   )
 ) as LayoutWithSubComponents;
 

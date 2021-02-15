@@ -3,6 +3,7 @@ import { Layout } from "../src/index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
+import { ContentContainer } from "../../content-container/src";
 import "./components/styles.css";
 
 export default {
@@ -27,34 +28,40 @@ export default {
 };
 
 export const ThreeColumns = () => (
-  <Layout>
-    <Layout.Section left>
-      <Left />
-    </Layout.Section>
-    <Layout.Section>
-      <Main />
-    </Layout.Section>
-    <Layout.Section right>
-      <Right />
-    </Layout.Section>
-  </Layout>
+  <ContentContainer>
+    <Layout>
+      <Layout.Section left>
+        <Left />
+      </Layout.Section>
+      <Layout.Section>
+        <Main />
+      </Layout.Section>
+      <Layout.Section right>
+        <Right />
+      </Layout.Section>
+    </Layout>
+  </ContentContainer>
 );
 
 export const TwoColumns = () => (
-  <Layout>
-    <Layout.Section left>
-      <Left />
-    </Layout.Section>
-    <Layout.Section>
-      <Main />
-    </Layout.Section>
-  </Layout>
+  <ContentContainer>
+    <Layout>
+      <Layout.Section left>
+        <Left />
+      </Layout.Section>
+      <Layout.Section>
+        <Main />
+      </Layout.Section>
+    </Layout>
+  </ContentContainer>
 );
 
 export const OneColumn = () => (
-  <Layout>
-    <Layout.Section>
-      <Main />
-    </Layout.Section>
-  </Layout>
+  <ContentContainer>
+    <Layout>
+      <Layout.Section>
+        <Main />
+      </Layout.Section>
+    </Layout>
+  </ContentContainer>
 );
