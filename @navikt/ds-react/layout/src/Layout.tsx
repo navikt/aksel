@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { Children } from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
 import cl from "classnames";
 import { default as Section, SectionProps } from "./Section";
@@ -15,15 +15,22 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
 }
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(
-  ({ children, className, ...rest }, ref) => (
-    <div
-      ref={ref}
-      className={cl("navds-layout-container", className)}
-      {...rest}
-    >
-      {children}
-    </div>
-  )
+  ({ children, className, ...rest }, ref) => {
+    const columns = Children.count(children);
+    return (
+      <div
+        ref={ref}
+        className={cl(
+          "navds-layout__container",
+          `navds-layout__container--${columns}-columns`,
+          className
+        )}
+        {...rest}
+      >
+        {children}
+      </div>
+    );
+  }
 ) as LayoutWithSubComponents;
 
 Layout.Section = Section;

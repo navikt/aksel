@@ -4,7 +4,7 @@ import cl from "classnames";
 export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   left?: boolean;
   right?: boolean;
-  white?: boolean;
+  whiteBackground?: boolean;
   withPadding?: boolean;
 }
 
@@ -14,7 +14,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       left,
       right,
       children,
-      white = true,
+      whiteBackground = true,
       withPadding = true,
       className,
       ...rest
@@ -24,12 +24,12 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
     <div
       ref={ref}
       className={cl(
-        "navds-layout-section",
-        left && "navds-layout-section-left",
-        right && "navds-layout-section-right",
-        !left && !right && "navds-layout-section-main",
-        withPadding && "navds-layout-section--padding",
-        white && "navds-layout-section--white",
+        "navds-layout__section",
+        left && "navds-layout__section--left",
+        right && "navds-layout__section--right",
+        !left && !right && "navds-layout__section--main",
+        whiteBackground && "navds-layout__section--white",
+        withPadding && "navds-layout__section--padding",
         className
       )}
       {...rest}
