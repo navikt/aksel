@@ -43,7 +43,7 @@ export const ThreeColumns = () => (
   </ContentContainer>
 );
 
-export const TwoColumns = () => (
+export const TwoColumnsLeft = () => (
   <ContentContainer>
     <Layout>
       <Layout.Section left>
@@ -51,6 +51,19 @@ export const TwoColumns = () => (
       </Layout.Section>
       <Layout.Section>
         <Main />
+      </Layout.Section>
+    </Layout>
+  </ContentContainer>
+);
+
+export const TwoColumnsRight = () => (
+  <ContentContainer>
+    <Layout>
+      <Layout.Section>
+        <Main />
+      </Layout.Section>
+      <Layout.Section right>
+        <Right />
       </Layout.Section>
     </Layout>
   </ContentContainer>
