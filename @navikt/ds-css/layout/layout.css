@@ -78,12 +78,12 @@
 }
 
 @media (min-width: 960px) {
-  .navds-layout__container--1-columns > .navds-layout__section--main {
-    grid-column: span 8;
-  }
-
   .navds-layout__section--padding.navds-layout__section--left {
     padding: var(--navds-layout-padding-small);
+  }
+
+  .navds-layout__container--1-columns > .navds-layout__section--main {
+    grid-column: span 8;
   }
 
   .navds-layout__container--3-columns > .navds-layout__section--left {
