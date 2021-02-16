@@ -30,13 +30,13 @@ export default {
 export const ThreeColumns = () => (
   <ContentContainer>
     <Layout>
-      <Layout.Section left>
+      <Layout.Section left sticky>
         <Left />
       </Layout.Section>
       <Layout.Section>
         <Main />
       </Layout.Section>
-      <Layout.Section right>
+      <Layout.Section right sticky>
         <Right />
       </Layout.Section>
     </Layout>
@@ -46,7 +46,7 @@ export const ThreeColumns = () => (
 export const TwoColumnsLeft = () => (
   <ContentContainer>
     <Layout>
-      <Layout.Section left>
+      <Layout.Section left sticky>
         <Left />
       </Layout.Section>
       <Layout.Section>
@@ -62,7 +62,7 @@ export const TwoColumnsRight = () => (
       <Layout.Section>
         <Main />
       </Layout.Section>
-      <Layout.Section right>
+      <Layout.Section right sticky>
         <Right />
       </Layout.Section>
     </Layout>

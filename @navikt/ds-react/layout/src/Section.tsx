@@ -6,6 +6,7 @@ export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   right?: boolean;
   whiteBackground?: boolean;
   withPadding?: boolean;
+  sticky?: boolean;
 }
 
 const Section = forwardRef<HTMLDivElement, SectionProps>(
@@ -16,6 +17,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       children,
       whiteBackground = true,
       withPadding = true,
+      sticky,
       className,
       ...rest
     },
@@ -30,6 +32,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
         !left && !right && "navds-layout__section--main",
         whiteBackground && "navds-layout__section--white",
         withPadding && "navds-layout__section--padding",
+        sticky && "navds-layout__section--sticky",
         className
       )}
       {...rest}
