@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "@navikt/ds-css": "0.1.0-beta.3",
+    "@navikt/ds-css": "0.1.0-beta.4",
     "@navikt/ds-icons": "^0.1.0",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",

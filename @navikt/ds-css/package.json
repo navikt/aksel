@@ -17,6 +17,6 @@
   },
   "dependencies": {
     "normalize.css": "^8.0.1",
-    "@navikt/ds-tokens": "0.1.0-beta.3"
+    "@navikt/ds-tokens": "0.1.0-beta.4"
   }
 }
