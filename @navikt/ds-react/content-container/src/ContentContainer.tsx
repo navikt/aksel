@@ -7,7 +7,7 @@ const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
   ({ children, className, ...rest }, ref) => (
     <div
       ref={ref}
-      className={cl("navds-content__container", className)}
+      className={cl("navds-content-container", className)}
       {...rest}
     >
       {children}
