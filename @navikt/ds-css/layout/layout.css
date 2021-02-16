@@ -46,8 +46,8 @@
     padding: var(--navds-layout-padding-small);
   }
 
-  .navds-layout__container--2-columns
-    > .navds-layout__section--padding.navds-layout__section--left {
+  /* prettier-ignore */
+  .navds-layout__container--2-columns > .navds-layout__section--padding.navds-layout__section--left {
     padding: var(--navds-layout-padding-small);
   }
 
