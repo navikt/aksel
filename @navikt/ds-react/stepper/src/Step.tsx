@@ -30,7 +30,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
       }
     };
 
-    const content = (orientation, activeStep, index) => (
+    const content = (orientation, activeStep, index, interactive) => (
       <>
         {!last && (
           <div
@@ -49,6 +49,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
             <div
               className={cl("navds-stepper__stepinner__label", {
                 "navds-stepper__step--active": activeStep === index,
+                "navds-stepper__step--interactive--text": interactive,
               })}
             >
               {children}
@@ -103,10 +104,10 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
                   className="navds-stepper__step__button"
                   onClick={(e) => handleClick(onClick, e)}
                 >
-                  {content(orientation, active, index)}
+                  {content(orientation, active, index, interactive)}
                 </button>
               ) : (
-                content(orientation, active, index)
+                content(orientation, active, index, interactive)
               )}
             </div>
           </>
