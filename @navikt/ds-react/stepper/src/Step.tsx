@@ -46,7 +46,13 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
             <span className="navds-stepper__stepInner__number">
               {status === "none" ? index : getIcon()}
             </span>
-            <div className="navds-stepper__stepinner__label">{children}</div>
+            <div
+              className={cl("navds-stepper__stepinner__label", {
+                "navds-stepper__step--active": activeStep === index,
+              })}
+            >
+              {children}
+            </div>
           </div>
         ) : (
           <>
@@ -54,7 +60,13 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
             {/* Here goes StepperLabel/StepperContent */}
             {/* This is the step-wrapper */}
             {/* Insert Step-circle here with correct number */}
-            <div className="navds-stepper__stepinner__label">{children}</div>
+            <div
+              className={cl("navds-stepper__stepinner__label", {
+                "navds-stepper__step--active": activeStep === index,
+              })}
+            >
+              {children}
+            </div>
           </>
         )}
       </>

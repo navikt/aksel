@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
@@ -16,6 +10,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   orientation?: "horizontal" | "vertical";
   activeStep?: number;
   onClick?: (event) => void;
+  colorful?: boolean;
 }
 
 export const StepContext = createContext({
@@ -23,6 +18,7 @@ export const StepContext = createContext({
   active: 0,
   onClick: (event) => null,
   interactive: false,
+  colorful: false,
 });
 
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
@@ -33,6 +29,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       orientation = "horizontal",
       activeStep,
       onClick,
+      colorful = false,
       ...rest
     },
     ref
@@ -65,11 +62,14 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       }
     );
 
-    const context = {
-      orientation,
-      active,
-      onClick: (e) => handleClick(e),
-      interactive: onClick ? true : false,
+    const context = () => {
+      return {
+        orientation,
+        active,
+        onClick: (e) => handleClick(e),
+        interactive: onClick ? true : false,
+        colorful,
+      };
     };
 
     return (
@@ -82,7 +82,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         )}
         {...rest}
       >
-        <StepContext.Provider value={context}>
+        <StepContext.Provider value={context()}>
           {stepsWithIndex}
         </StepContext.Provider>
       </div>

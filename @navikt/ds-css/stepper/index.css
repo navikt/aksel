@@ -118,7 +118,7 @@
   padding: calc(2rem + 0.25rem) 0 0.25rem;
 }
 
-.navds-stepper__step--line--horizontal::after {
+.navds-stepper__step--line--horizontal::before {
   content: "";
   height: 2px;
   width: 100%;
@@ -127,7 +127,7 @@
   z-index: 1;
 }
 
-.navds-stepper__step--line--vertical::after {
+.navds-stepper__step--line--vertical::before {
   content: "";
   width: 2px;
   height: 100%;
@@ -137,7 +137,37 @@
   z-index: 1;
 }
 
-.navds-stepper__step--line--light::after {
+/* AFTER ARROW vertical */
+/* .navds-stepper__step--line--vertical::after {
+  border-style: solid;
+  border-width: 0 0 2px 2px;
+  border-color: var(--navds-color-gray-40);
+  content: "";
+  display: inline-block;
+  height: 8px;
+  width: 0.45em;
+  left: -3px;
+  top: -1.5rem;
+  position: relative;
+  transform: rotate(-45deg);
+} */
+
+/* AFTER ARROW horizontal */
+/* .navds-stepper__step--line--horizontal::after {
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  border-color: var(--navds-color-gray-40);
+  content: "";
+  display: inline-block;
+  height: 8px;
+  width: 0.45em;
+  right: -4rem;
+  top: -1.3rem;
+  position: relative;
+  transform: rotate(-45deg);
+} */
+
+.navds-stepper__step--line--light::before {
   background-color: var(--navds-color-gray-40);
 }
 
@@ -171,6 +201,12 @@
 
 .navds-stepper__step--interactive {
   border: 2px solid transparent;
+  text-decoration: underline;
+  color: #0067c5;
+}
+
+.navds-stepper__step--interactive > * svg {
+  color: #0067c5;
 }
 
 .navds-stepper__step--interactive:hover {
@@ -182,4 +218,10 @@
   z-index: 0;
   outline: none;
   box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-stepper__step--active {
+  color: var(--navds-color-darkgray);
+  font-weight: var(--navds-font-weight-bold);
+  text-decoration: none;
 }
