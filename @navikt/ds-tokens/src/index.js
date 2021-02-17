@@ -163,6 +163,12 @@ module.exports = {
         mediumAndLarger: { value: "1.5rem" },
       },
     },
+    grid: {
+      gutter: {
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "1.5rem" },
+      },
+    },
     z: {
       index: {
         modal: {
