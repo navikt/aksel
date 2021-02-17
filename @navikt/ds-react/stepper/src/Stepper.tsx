@@ -15,11 +15,14 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
     | Array<React.ReactElement<typeof StepperStep>>;
   orientation?: "horizontal" | "vertical";
   activeStep?: number;
+  onClick?: (event) => void;
 }
 
 export const StepContext = createContext({
   orientation: "horizontal",
-  activeStep: 0,
+  active: 0,
+  onClick: (event) => null,
+  interactive: false,
 });
 
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
@@ -28,11 +31,30 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       children,
       className,
       orientation = "horizontal",
-      activeStep = 0,
+      activeStep,
+      onClick,
       ...rest
     },
     ref
   ) => {
+    const [active, setActive] = useState(0);
+
+    useEffect(() => {
+      if (activeStep) {
+        setActive(activeStep);
+      }
+    }, [activeStep]);
+
+    const handleClick = (e) => {
+      if (activeStep && onClick) {
+        onClick(e);
+      } else if (onClick) {
+        setActive(e.target.value);
+        onClick(e);
+      }
+      return null;
+    };
+
     const steps = React.Children.toArray(children);
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
@@ -42,7 +64,13 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         });
       }
     );
-    const context = { orientation, activeStep };
+
+    const context = {
+      orientation,
+      active,
+      onClick: (e) => handleClick(e),
+      interactive: onClick ? true : false,
+    };
 
     return (
       <div

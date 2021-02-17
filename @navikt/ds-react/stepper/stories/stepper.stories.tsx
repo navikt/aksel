@@ -7,6 +7,7 @@ export default {
 };
 
 export const All = () => {
+  const [activeS, setActiveS] = useState(3);
   return (
     <>
       <h1>Stepper horizontal</h1>
@@ -23,10 +24,10 @@ export const All = () => {
           <StepperStep>Step 2</StepperStep>
         </Stepper>
 
-        <Stepper>
-          <StepperStep>Step 1</StepperStep>
-          <StepperStep>Step 2</StepperStep>
-          <StepperStep>
+        <Stepper onClick={(e) => setActiveS(e.target.value)}>
+          <StepperStep status="done">Step 1</StepperStep>
+          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep status="inProgress">
             Step 3Cillum veniam exercitation adipisicing fugiat consectetur
             proident officia.
           </StepperStep>
@@ -46,6 +47,12 @@ export const All = () => {
         <Stepper orientation="vertical">
           <StepperStep>Step 1</StepperStep>
           <StepperStep>Step 2</StepperStep>
+        </Stepper>
+
+        <Stepper onClick={(e) => null} orientation="vertical">
+          <StepperStep>Step 1</StepperStep>
+          <StepperStep>Step 2</StepperStep>
+          <StepperStep>Step 3</StepperStep>
         </Stepper>
 
         <Stepper orientation="vertical">
