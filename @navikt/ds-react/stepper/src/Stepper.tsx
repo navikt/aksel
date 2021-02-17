@@ -33,15 +33,16 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
     },
     ref
   ) => {
-    const stepsWithIndex = React.Children.toArray(children).map(
+    const steps = React.Children.toArray(children);
+    const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
         return React.cloneElement(step, {
-          ...{ index },
+          ...{ index, last: steps.length === index + 1 },
           ...step.props,
         });
       }
     );
-    const context = { orientation: "horizontal", activeStep };
+    const context = { orientation, activeStep };
 
     return (
       <div
