@@ -56,16 +56,16 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
       };
     };
 
-    const content = (activeStep, colorful, interactive) => (
+    const content = (activeStep, colorful, interactive, dot) => (
       <>
         <span
           className={cl("navds-step__indicator", {
             "navds-step__indicator--active":
-              status === "none" && activeStep === index,
-            "navds-step--no-shadow": status !== "none",
+              (status === "none" || dot) && activeStep === index,
+            "navds-step--no-shadow": status !== "none" && !dot,
           })}
         >
-          {status === "none" ? index : getIcon(colorful)}
+          {!dot && (status === "none" ? index + 1 : getIcon(colorful))}
         </span>
         <div
           className={cl("navds-step__label", {
@@ -86,11 +86,13 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
           onClick,
           interactive,
           colorful,
+          dot,
         }) => (
           <>
             <div
               ref={ref}
               className={cl(`navds-step`, className, {
+                "navds-step__dot": dot,
                 "navds-step--interactive": interactive,
               })}
               {...rest}
@@ -107,10 +109,10 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
 
               {orientation === "horizontal" ? (
                 <div className="navds-step--horizontal-wrapper">
-                  {content(activeStep, colorful, interactive)}
+                  {content(activeStep, colorful, interactive, dot)}
                 </div>
               ) : (
-                <>{content(activeStep, colorful, interactive)}</>
+                <>{content(activeStep, colorful, interactive, dot)}</>
               )}
             </div>
           </>

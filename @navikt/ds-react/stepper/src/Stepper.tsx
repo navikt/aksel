@@ -11,6 +11,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
   activeStep?: number;
   onClick?: (event) => void;
   colorful?: boolean;
+  dot?: boolean;
 }
 
 export const StepContext = createContext({
@@ -19,6 +20,7 @@ export const StepContext = createContext({
   onClick: (event) => null,
   interactive: false,
   colorful: false,
+  dot: false,
 });
 
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
@@ -30,6 +32,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
       activeStep,
       onClick,
       colorful = false,
+      dot = false,
       ...rest
     },
     ref
@@ -69,6 +72,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         onClick: (e) => handleClick(e),
         interactive: onClick ? true : false,
         colorful,
+        dot,
       };
     };
 
