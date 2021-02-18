@@ -1,6 +1,20 @@
-<div
-  id="decorator-env"
-  data-src='https://www.nav.no/dekoratoren/env?availableLanguages=[{"locale":"nb","url":"http://localhost:8088/dekoratoren/","handleInApp":true},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/","handleInApp":true}]&breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"ditt%20nav"},%20{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"kontakt%20oss"}]'
-></div>
 <link href="https://www.nav.no/dekoratoren/css/client.css" rel="stylesheet" />
 <script async src="https://www.nav.no/dekoratoren/client.js"></script>
+<div
+  data-src='https://www.nav.no/dekoratoren/env?availableLanguages=[{"locale":"nb","url":"http://localhost:8088/dekoratoren/","handleInApp":true},{"locale":"en","url":"http://localhost:8088/dekoratoren/en/","handleInApp":true}]&breadcrumbs=[{"url":"https://www.nav.no/person/dittnav","title":"ditt%20nav"},%20{"url":"https://www.nav.no/person/kontakt-oss/nb/","title":"kontakt%20oss"}]'
+  id="decorator-env"
+></div>
+<style>
+  html,
+  body,
+  #decorator-wrapper {
+    min-height: 100vh;
+  }
+  #decorator-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  #decorator-footer {
+    margin-top: auto;
+  }
+</style>
