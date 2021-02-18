@@ -17,20 +17,32 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
     { children, className, index, last = false, status = "none", ...rest },
     ref
   ) => {
-    const getIcon = () => {
+    const getIcon = (colorful) => {
       switch (status) {
         case "done":
-          return <SuccessFilled />;
+          return (
+            <SuccessFilled
+              style={{ color: colorful ? "#06893A" : undefined }}
+            />
+          );
         case "warning":
-          return <WarningFilled />;
+          return (
+            <WarningFilled
+              style={{
+                color: colorful ? "#FFA733" : undefined,
+              }}
+            />
+          );
         case "inProgress":
-          return <ClockFilled />;
+          return (
+            <ClockFilled style={{ color: colorful ? "#0C5EA8" : undefined }} />
+          );
         default:
           return <div />;
       }
     };
 
-    const content = (orientation, activeStep, index, interactive) => (
+    const content = (orientation, activeStep, index, interactive, colorful) => (
       <>
         {!last && (
           <div
@@ -43,8 +55,16 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
 
         {orientation === "horizontal" ? (
           <div className="navds-stepper__step--horizontal--wrapper">
-            <span className="navds-stepper__stepInner__number">
-              {status === "none" ? index : getIcon()}
+            <span
+              className={cl("navds-stepper__stepInner__number", {
+                "navds-stepper__stepInner__number--active":
+                  status === "none" && activeStep === index,
+                "navds-stepper__stepInner__number--no-shadow":
+                  status !== "none",
+                "navds-stepper__stepInner__number--interactive": interactive,
+              })}
+            >
+              {status === "none" ? index : getIcon(colorful)}
             </span>
             <div
               className={cl("navds-stepper__stepinner__label", {
@@ -57,10 +77,16 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
           </div>
         ) : (
           <>
-            <span className="navds-stepper__stepInner__number">{index}</span>
-            {/* Here goes StepperLabel/StepperContent */}
-            {/* This is the step-wrapper */}
-            {/* Insert Step-circle here with correct number */}
+            <span
+              className={cl("navds-stepper__stepInner__number", {
+                "navds-stepper__stepInner__number--active":
+                  status === "none" && activeStep === index,
+                "navds-stepper__stepInner__number--no-shadow":
+                  status !== "none",
+              })}
+            >
+              {status === "none" ? index : getIcon(colorful)}
+            </span>
             <div
               className={cl("navds-stepper__stepinner__label", {
                 "navds-stepper__step--active": activeStep === index,
@@ -88,7 +114,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
 
     return (
       <StepContext.Consumer>
-        {({ orientation, active, onClick, interactive }) => (
+        {({ orientation, active, onClick, interactive, colorful }) => (
           <>
             <div
               ref={ref}
@@ -104,10 +130,10 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
                   className="navds-stepper__step__button"
                   onClick={(e) => handleClick(onClick, e)}
                 >
-                  {content(orientation, active, index, interactive)}
+                  {content(orientation, active, index, interactive, colorful)}
                 </button>
               ) : (
-                content(orientation, active, index, interactive)
+                content(orientation, active, index, interactive, colorful)
               )}
             </div>
           </>

@@ -62,6 +62,20 @@
   background-color: white;
 }
 
+.navds-stepper__stepInner__number--interactive {
+  color: var(--navds-color-blue-60);
+  box-shadow: 0 0 0 2px var(--navds-color-blue-60) inset;
+}
+
+.navds-stepper__stepInner__number--active {
+  background-color: #0067c5;
+  box-shadow: 0 0 0 2px #0067c5 inset;
+  color: white;
+}
+.navds-stepper__stepInner__number--no-shadow {
+  box-shadow: none;
+}
+
 .navds-stepper__stepInner__number > svg {
   font-size: 2rem;
 }
@@ -211,6 +225,13 @@
 .navds-stepper__step--interactive:hover {
   z-index: 0;
   border: 2px solid #0067c5;
+  text-decoration: none;
+}
+
+.navds-stepper__step--interactive:hover
+  > *
+  .navds-stepper__step--interactive--text {
+  text-decoration: none;
 }
 
 .navds-stepper__step--interactive:focus {

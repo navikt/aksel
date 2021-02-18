@@ -24,7 +24,7 @@ export const All = () => {
           <StepperStep>Step 2</StepperStep>
         </Stepper>
 
-        <Stepper onClick={(e) => setActiveS(e.target.value)}>
+        <Stepper colorful onClick={(e) => setActiveS(e.target.value)}>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
