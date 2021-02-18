@@ -28,8 +28,16 @@ export const All = () => {
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
-            Step 3Cillum veniam exercitation adipisicing fugiat consectetur
-            proident officia.
+            Step 3Cillum veniam exercitation
+          </StepperStep>
+          <StepperStep>Step 4</StepperStep>
+          <StepperStep>Step 5</StepperStep>
+        </Stepper>
+        <Stepper onClick={(e) => setActiveS(e.target.value)}>
+          <StepperStep status="done">Step 1</StepperStep>
+          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep status="inProgress">
+            Step 3Cillum veniam exercitation
           </StepperStep>
           <StepperStep>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>

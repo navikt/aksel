@@ -1,0 +1,169 @@
+/* Step */
+
+.navds-stepper--vertical > .navds-step {
+  flex: 1 0;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  display: block;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+.navds-stepper--horizontal > .navds-step {
+  overflow: visible;
+  display: inline-block;
+  flex: 1;
+  position: relative;
+  box-sizing: border-box;
+  min-width: 6rem;
+}
+
+.navds-step--horizontal-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+  z-index: 0;
+  border: 2px solid transparent;
+  border-radius: 2px;
+}
+
+.navds-step--interactive {
+  border: 2px solid transparent;
+}
+
+.navds-step--interactive > * svg {
+  color: #0067c5;
+}
+
+.navds-step--interactive:hover {
+  z-index: 0;
+  border: 2px solid #0067c5;
+  text-decoration: none;
+}
+
+.navds-step--interactive:hover * > .navds-step__label--interactive,
+.navds-step--interactive:focus * > .navds-step__label--interactive,
+.navds-step--interactive:hover > .navds-step__label--interactive,
+.navds-step--interactive:focus > .navds-step__label--interactive {
+  text-decoration: none;
+}
+
+.navds-step--interactive:focus {
+  z-index: 0;
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-step__indicator {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  box-shadow: 0 0 0 2px var(--navds-color-darkgray) inset;
+  background-color: white;
+}
+
+.navds-stepper--vertical > * .navds-step__indicator {
+  margin-right: 0.5rem;
+  float: left;
+}
+
+.navds-step__indicator > svg {
+  font-size: 2rem;
+}
+
+.navds-step__indicator--active {
+  background-color: var(--navds-color-darkgray);
+  box-shadow: none;
+  color: white;
+}
+
+.navds-step--interactive > * .navds-step__indicator,
+.navds-step--interactive > .navds-step__indicator {
+  color: var(--navds-color-blue-60);
+  box-shadow: 0 0 0 2px var(--navds-color-blue-60) inset;
+}
+
+.navds-step--interactive > * .navds-step__indicator--active,
+.navds-step--interactive > .navds-step__indicator--active {
+  background-color: #0067c5;
+  box-shadow: 0 0 0 2px #0067c5 inset;
+  color: white;
+}
+
+.navds-stepper--horizontal > * .navds-step__label {
+  display: block;
+  text-align: center;
+  margin-top: 0.5rem;
+  width: 8rem;
+}
+
+.navds-stepper--vertical > * .navds-step__label {
+  min-height: 4rem;
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  box-sizing: border-box;
+  line-height: 2;
+}
+
+.navds-step__label--interactive {
+  text-decoration: underline;
+  color: #0067c5;
+}
+
+.navds-step__label--active {
+  color: var(--navds-color-darkgray);
+  text-decoration: none;
+}
+
+.navds-stepper--horizontal > * .navds-step__line {
+  position: absolute;
+  left: calc(50% + 1.25rem);
+  top: 0.5rem;
+  height: 2px;
+  width: 100%;
+  display: block;
+  padding: 0 2.25rem 0 0;
+  z-index: 1;
+}
+
+.navds-stepper--vertical > * .navds-step__line {
+  position: absolute;
+  top: 0;
+  left: calc(1rem - 1px);
+  width: 1px;
+  height: 100%;
+  display: block;
+  padding: calc(2rem + 0.25rem) 0 0.25rem;
+}
+
+.navds-stepper--horizontal > * .navds-step__line::before {
+  content: "";
+  height: 2px;
+  width: 100%;
+  background-color: var(--navds-color-darkgray);
+  display: inline-block;
+  z-index: 1;
+}
+
+.navds-stepper--vertical > * .navds-step__line::before {
+  content: "";
+  width: 2px;
+  height: 100%;
+  min-height: 1.5rem;
+  background-color: var(--navds-color-darkgray);
+  display: inline-block;
+  z-index: 1;
+}
+
+.navds-step__line--light::before {
+  background-color: var(--navds-color-gray-40);
+}
+
+.navds-step--no-shadow.navds-step--no-shadow {
+  box-shadow: none;
+}

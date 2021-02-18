@@ -75,11 +75,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
     return (
       <div
         ref={ref}
-        className={cl(
-          "navds-stepper",
-          `navds-stepper--${orientation}`,
-          className
-        )}
+        className={cl(`navds-stepper--${orientation}`, className)}
         {...rest}
       >
         <StepContext.Provider value={context()}>
