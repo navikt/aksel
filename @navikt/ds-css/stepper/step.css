@@ -3,13 +3,13 @@
 .navds-stepper--vertical > .navds-step {
   flex: 1 0;
   position: relative;
-  padding: 0;
   margin: 0;
   display: block;
   overflow: visible;
   box-sizing: border-box;
   padding: 0.5rem;
   padding-top: 0;
+  border: 2px solid transparent;
 }
 
 .navds-stepper--horizontal > .navds-step {
@@ -19,6 +19,7 @@
   position: relative;
   box-sizing: border-box;
   min-width: 6rem;
+  border: 2px solid transparent;
 }
 
 .navds-step--horizontal-wrapper {
@@ -80,7 +81,7 @@
 .navds-step__dot > * .navds-step__indicator--active,
 .navds-step__dot > .navds-step__indicator--active {
   background-color: white;
-  box-shadow: 0px 0px 0px 0.25rem var(--navds-color-darkgray);
+  box-shadow: 0 0 0 0.25rem var(--navds-color-darkgray);
 }
 
 .navds-step--interactive.navds-step__dot > * .navds-step__indicator,
@@ -91,7 +92,7 @@
 .navds-step--interactive.navds-step__dot > * .navds-step__indicator--active,
 .navds-step--interactive.navds-step__dot > .navds-step__indicator--active {
   background-color: white;
-  box-shadow: 0px 0px 0px 0.25rem var(--navds-color-blue-60);
+  box-shadow: 0 0 0 0.25rem var(--navds-color-blue-60);
 }
 
 .navds-stepper--vertical > * .navds-step__indicator {
@@ -163,12 +164,8 @@
   height: 2px;
   width: 100%;
   display: block;
-  padding: 0 2.5rem 0 0;
-  z-index: 1;
-}
-
-.navds-stepper--horizontal > .navds-step--interactive > .navds-step__line {
   padding: 0 2.25rem 0 0;
+  z-index: 1;
 }
 
 .navds-stepper--vertical > * .navds-step__line {
@@ -184,7 +181,7 @@
 .navds-stepper--vertical > .navds-step--interactive > .navds-step__line {
   padding: calc(2rem + 0.25rem) 0 0 0.5rem;
 }
-/* TODO:--------------- */
+
 .navds-stepper--horizontal > .navds-step__dot > .navds-step__line {
   padding: 0 1.25rem 0 0;
   left: calc(50% + 0.75rem);

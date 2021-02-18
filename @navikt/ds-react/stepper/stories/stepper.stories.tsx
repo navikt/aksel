@@ -7,7 +7,9 @@ export default {
 };
 
 export const All = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeS, setActiveS] = useState(3);
+
   return (
     <>
       <h1>Stepper horizontal</h1>
@@ -19,7 +21,7 @@ export const All = () => {
           rowGap: "2rem",
         }}
       >
-        <Stepper>
+        <Stepper activeStep={3}>
           <StepperStep>Step 1</StepperStep>
           <StepperStep>Step 2</StepperStep>
           <StepperStep>Step 3</StepperStep>
@@ -27,7 +29,7 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper>
+        <Stepper activeStep={3}>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -37,7 +39,7 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper onClick={(e) => setActiveS(e.target.value)}>
+        <Stepper activeStep={3} onClick={(e) => setActiveS(e.target.value)}>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -47,7 +49,11 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper colorful onClick={(e) => setActiveS(e.target.value)}>
+        <Stepper
+          activeStep={3}
+          colorful
+          onClick={(e) => setActiveS(e.target.value)}
+        >
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -57,7 +63,7 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper dot>
+        <Stepper activeStep={3} dot>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -67,7 +73,7 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper dot onClick={(e) => setActiveS(e.target.value)}>
+        <Stepper activeStep={3} dot onClick={(e) => setActiveS(e.target.value)}>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -86,7 +92,7 @@ export const All = () => {
           flexWrap: "wrap",
         }}
       >
-        <Stepper orientation="vertical">
+        <Stepper activeStep={3} orientation="vertical">
           <StepperStep>Step 1</StepperStep>
           <StepperStep>Step 2</StepperStep>
           <StepperStep>Step 3</StepperStep>
@@ -95,7 +101,7 @@ export const All = () => {
         </Stepper>
 
         <div style={{ maxWidth: "300px" }}>
-          <Stepper orientation="vertical">
+          <Stepper activeStep={3} orientation="vertical">
             <StepperStep status="done">Step 1</StepperStep>
             <StepperStep status="warning">Step 2</StepperStep>
             <StepperStep status="inProgress">
@@ -107,6 +113,7 @@ export const All = () => {
         </div>
 
         <Stepper
+          activeStep={3}
           orientation="vertical"
           onClick={(e) => setActiveS(e.target.value)}
         >
@@ -120,6 +127,7 @@ export const All = () => {
         </Stepper>
 
         <Stepper
+          activeStep={3}
           orientation="vertical"
           colorful
           onClick={(e) => setActiveS(e.target.value)}
@@ -133,7 +141,7 @@ export const All = () => {
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
-        <Stepper orientation="vertical" dot>
+        <Stepper activeStep={3} orientation="vertical" dot>
           <StepperStep status="done">Step 1</StepperStep>
           <StepperStep status="warning">Step 2</StepperStep>
           <StepperStep status="inProgress">
@@ -144,6 +152,7 @@ export const All = () => {
         </Stepper>
 
         <Stepper
+          activeStep={3}
           orientation="vertical"
           dot
           onClick={(e) => setActiveS(e.target.value)}

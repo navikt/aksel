@@ -16,6 +16,7 @@
 }
 
 /* AFTER ARROW vertical */
+
 /* .navds-stepper--vertical > * .navds-step__line::after {
   border-style: solid;
   border-width: 0 0 2px 2px;
@@ -31,6 +32,7 @@
 } */
 
 /* AFTER ARROW horizontal */
+
 /* .navds-stepper--horizontal > * .navds-step__line::after {
   border-style: solid;
   border-width: 0 2px 2px 0;
