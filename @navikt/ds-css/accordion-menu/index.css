@@ -1,0 +1,28 @@
+.navds-accorcion-menu__container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.navds-accordion-menu__item {
+  margin: 0.75rem 0;
+}
+
+.navds-accordion-menu__link {
+  display: inline-flex;
+}
+
+.navds-accordion-menu__chevron {
+  margin-right: 0.25rem;
+}
+
+.navds-accordion-menu__button {
+  display: inline-flex;
+  border: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.navds-accordion-menu__dropdown--content {
+  padding-left: 0.5rem;
+}
