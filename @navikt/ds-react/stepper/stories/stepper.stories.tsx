@@ -25,7 +25,7 @@ export const All = () => {
           <StepperStep>Step 1</StepperStep>
           <StepperStep>Step 2</StepperStep>
           <StepperStep>Step 3</StepperStep>
-          <StepperStep>Step 4</StepperStep>
+          <StepperStep disabled>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
@@ -35,7 +35,7 @@ export const All = () => {
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
-          <StepperStep>Step 4</StepperStep>
+          <StepperStep disabled>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
@@ -45,7 +45,7 @@ export const All = () => {
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
-          <StepperStep>Step 4</StepperStep>
+          <StepperStep disabled>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>
         </Stepper>
 
@@ -59,13 +59,15 @@ export const All = () => {
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
-          <StepperStep>Step 4</StepperStep>
-          <StepperStep>Step 5</StepperStep>
+          <StepperStep disabled>Step 4</StepperStep>
+          <StepperStep disabled>Step 5</StepperStep>
         </Stepper>
 
         <Stepper activeStep={3} dot>
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
@@ -75,12 +77,14 @@ export const All = () => {
 
         <Stepper activeStep={3} dot onClick={(e) => setActiveS(e.target.value)}>
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
           <StepperStep>Step 4</StepperStep>
-          <StepperStep>Step 5</StepperStep>
+          <StepperStep disabled>Step 5</StepperStep>
         </Stepper>
       </div>
 
@@ -94,7 +98,7 @@ export const All = () => {
       >
         <Stepper activeStep={3} orientation="vertical">
           <StepperStep>Step 1</StepperStep>
-          <StepperStep>Step 2</StepperStep>
+          <StepperStep disabled>Step 2</StepperStep>
           <StepperStep>Step 3</StepperStep>
           <StepperStep>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>
@@ -103,7 +107,9 @@ export const All = () => {
         <div style={{ maxWidth: "300px" }}>
           <Stepper activeStep={3} orientation="vertical">
             <StepperStep status="done">Step 1</StepperStep>
-            <StepperStep status="warning">Step 2</StepperStep>
+            <StepperStep disabled status="warning">
+              Step 2
+            </StepperStep>
             <StepperStep status="inProgress">
               Do cupidatat aliqua quis non id deserunt labore officia elit.
             </StepperStep>
@@ -118,7 +124,9 @@ export const All = () => {
           onClick={(e) => setActiveS(e.target.value)}
         >
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
@@ -133,7 +141,9 @@ export const All = () => {
           onClick={(e) => setActiveS(e.target.value)}
         >
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
@@ -143,7 +153,9 @@ export const All = () => {
 
         <Stepper activeStep={3} orientation="vertical" dot>
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
@@ -158,12 +170,14 @@ export const All = () => {
           onClick={(e) => setActiveS(e.target.value)}
         >
           <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep status="warning">Step 2</StepperStep>
+          <StepperStep disabled status="warning">
+            Step 2
+          </StepperStep>
           <StepperStep status="inProgress">
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
           <StepperStep>Step 4</StepperStep>
-          <StepperStep>Step 5</StepperStep>
+          <StepperStep disabled>Step 5</StepperStep>
         </Stepper>
       </div>
     </>

@@ -11,11 +11,20 @@ export interface StepperStepProps extends React.HTMLAttributes<HTMLDivElement> {
   index?: number;
   last?: boolean;
   status?: "none" | "done" | "warning" | "inProgress";
+  disabled?: boolean;
 }
 
 const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
   (
-    { children, className, index = 0, last = false, status = "none", ...rest },
+    {
+      children,
+      className,
+      index = 0,
+      last = false,
+      status = "none",
+      disabled,
+      ...rest
+    },
     ref
   ) => {
     const getIcon = (colorful) => {
@@ -23,20 +32,34 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
         case "done":
           return (
             <SuccessFilled
-              style={{ color: colorful ? "#06893A" : undefined }}
+              style={{
+                color: disabled ? "#B7B1A9" : colorful ? "#06893A" : undefined,
+                backgroundColor: "white",
+              }}
             />
           );
         case "warning":
           return (
             <WarningFilled
               style={{
-                color: colorful ? "#FFA733" : undefined,
+                color: disabled ? "#B7B1A9" : colorful ? "#FFA733" : undefined,
+                background: disabled
+                  ? "white"
+                  : colorful
+                  ? "radial-gradient(circle,var(--navds-color-darkgray) 50%,0,transparent)"
+                  : undefined,
+                borderRadius: !disabled ? "1rem" : "0px",
               }}
             />
           );
         case "inProgress":
           return (
-            <ClockFilled style={{ color: colorful ? "#0C5EA8" : undefined }} />
+            <ClockFilled
+              style={{
+                color: disabled ? "#B7B1A9" : colorful ? "#0C5EA8" : undefined,
+                backgroundColor: "white",
+              }}
+            />
           );
         default:
           return <div />;
@@ -48,11 +71,15 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
       onClick(e);
     };
 
-    const newProps = (interactive, onClick) => {
+    const newProps = (interactive, onClick, disabled) => {
       return {
         role: interactive ? "button" : undefined,
-        tabIndex: interactive ? 0 : undefined,
-        onClick: interactive ? (e) => handleClick(onClick, e) : undefined,
+        tabIndex: !disabled ? (interactive ? 0 : undefined) : undefined,
+        onClick: !disabled
+          ? interactive
+            ? (e) => handleClick(onClick, e)
+            : undefined
+          : undefined,
       };
     };
 
@@ -94,9 +121,10 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
               className={cl(`navds-step`, className, {
                 "navds-step__dot": dot,
                 "navds-step--interactive": interactive,
+                "navds-step--disabled": disabled,
               })}
               {...rest}
-              {...newProps(interactive, onClick)}
+              {...newProps(interactive, onClick, disabled)}
             >
               {!last && (
                 <div
