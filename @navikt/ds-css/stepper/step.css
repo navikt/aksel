@@ -36,6 +36,10 @@
   border: 2px solid transparent;
 }
 
+.navds-step--disabled.navds-step--interactive {
+  cursor: initial;
+}
+
 .navds-step--interactive > * svg {
   color: #0067c5;
 }
@@ -52,16 +56,11 @@
   text-decoration: none;
 }
 
-.navds-step--interactive:hover:not(.navds-step--disabled)
-  *
-  > .navds-step__label--interactive,
-.navds-step--interactive:focus:not(.navds-step--disabled)
-  *
-  > .navds-step__label--interactive,
-.navds-step--interactive:hover:not(.navds-step--disabled)
-  > .navds-step__label--interactive,
-.navds-step--interactive:focus:not(.navds-step--disabled)
-  > .navds-step__label--interactive {
+/* prettier-ignore */
+.navds-step--interactive:hover:not(.navds-step--disabled) > * .navds-step__label--interactive,
+.navds-step--interactive:focus:not(.navds-step--disabled) > * .navds-step__label--interactive,
+.navds-step--interactive:hover:not(.navds-step--disabled) > .navds-step__label--interactive,
+.navds-step--interactive:focus:not(.navds-step--disabled) > .navds-step__label--interactive {
   text-decoration: none;
 }
 
@@ -128,11 +127,9 @@
   color: white;
 }
 
-.navds-step--interactive.navds-step__dot.navds-step--disabled
-  > *
-  .navds-step__indicator,
-.navds-step--interactive.navds-step__dot.navds-step--disabled
-  > .navds-step__indicator {
+/* prettier-ignore */
+.navds-step--interactive.navds-step__dot.navds-step--disabled > * .navds-step__indicator,
+.navds-step--interactive.navds-step__dot.navds-step--disabled > .navds-step__indicator {
   background-color: var(--navds-color-gray-40);
   box-shadow: none;
 }
@@ -260,11 +257,4 @@
 
 .navds-step--no-shadow.navds-step--no-shadow {
   box-shadow: none;
-}
-
-.navds-step--disabled {
-}
-
-.navds-step--disabled.navds-step--interactive {
-  cursor: initial;
 }
