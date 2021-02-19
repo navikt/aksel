@@ -48,7 +48,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
                   : colorful
                   ? "radial-gradient(circle,var(--navds-color-darkgray) 50%,0,transparent)"
                   : undefined,
-                borderRadius: !disabled ? "1rem" : "0px",
+                borderRadius: "1rem",
               }}
             />
           );
