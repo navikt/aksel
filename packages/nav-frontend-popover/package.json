@@ -22,7 +22,7 @@
     "nav-frontend-popover-style": "^1.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^15.4.2 || ^16.0.0"
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
@@ -32,7 +32,7 @@
     "nav-frontend-popover-style": "^1.0.2",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^15.4.2 || ^16.0.0"
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "Popover"
 }
