@@ -2,34 +2,38 @@ import React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
 import cl from "classnames";
 import { default as Item, AccordionMenuItemProps } from "./Item";
-import { default as Dropdown, AccordionMenuDropdownProps } from "./Dropdown";
+import { Element } from "nav-frontend-typografi";
+import { default as Collapsable } from "./Collapsable";
+import { AccordionMenuCollapsableProps } from "./Collapsable";
 import "@navikt/ds-css/accordion-menu/index.css";
 
 export interface LayoutWithSubComponents
-  extends ForwardRefExoticComponent<LayoutProps> {
+  extends ForwardRefExoticComponent<AccordionMenuProps> {
+  Collapsable: ForwardRefExoticComponent<AccordionMenuCollapsableProps>;
   Item: ForwardRefExoticComponent<AccordionMenuItemProps>;
-  Dropdown: ForwardRefExoticComponent<AccordionMenuDropdownProps>;
 }
 
-export interface LayoutProps extends HTMLAttributes<HTMLUListElement> {
-  children?: React.ReactNode;
-  className?: string;
+export interface AccordionMenuProps extends HTMLAttributes<HTMLUListElement> {
+  title?: string;
 }
 
-const Menu = forwardRef<HTMLUListElement, LayoutProps>(
-  ({ children, className, ...rest }, ref) => {
+const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
+  ({ children, title, className, ...rest }, ref) => {
     return (
-      <ul
-        ref={ref}
-        className={cl("navds-accorcion-menu__container", className)}
-        {...rest}
-      >
-        {children}
-      </ul>
+      <nav aria-label={title || "menu"}>
+        <Element>{title}</Element>
+        <ul
+          ref={ref}
+          className={cl("navds-accorcion-menu__container", className)}
+          {...rest}
+        >
+          {children}
+        </ul>
+      </nav>
     );
   }
 ) as LayoutWithSubComponents;
 
-Menu.Item = Item;
-Menu.Dropdown = Dropdown;
-export default Menu;
+AccordionMenu.Item = Item;
+AccordionMenu.Collapsable = Collapsable;
+export default AccordionMenu;

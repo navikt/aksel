@@ -8,6 +8,7 @@ import { Button } from "../../../../lib";
 
 export const Main = () => (
   <div>
+    <a id="quis-autem" />
     <Heading className={"navds-story-section"} level={1} size={"xl"}>
       Quis autem
     </Heading>
@@ -43,6 +44,7 @@ export const Main = () => (
       molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
       pariatur?
     </Normaltekst>
+    <a id={"nulla-pariatur"} />
     <Heading className={"navds-story-section"} level={2} size={"lg"}>
       Nulla pariatur?
     </Heading>
@@ -52,8 +54,7 @@ export const Main = () => (
       lorem, in elementum purus commodo eget. Mauris maximus congue efficitur.
       Cras vestibulum id metus sed pellentesque.
     </Normaltekst>
-
-    <table className={"section tabell tabell--stripet"}>
+    <table className={"navds-story-section tabell tabell--stripet"}>
       <thead>
         <tr>
           <th>ID</th>
@@ -83,7 +84,7 @@ export const Main = () => (
         </tr>
       </tbody>
     </table>
-    <Normaltekst className={".navds-story-section"}>
+    <Normaltekst className={"navds-story-section"}>
       Curabitur a purus pretium, condimentum magna ac, pellentesque diam. Nulla
       facilisi. Nullam consequat, dui sed bibendum faucibus, metus mauris
       commodo tortor, eget mollis nunc augue eu elit. Ut nec fringilla odio, eu

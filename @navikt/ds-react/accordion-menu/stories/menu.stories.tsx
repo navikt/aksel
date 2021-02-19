@@ -45,25 +45,25 @@ export const All = () => (
   <ContentContainer>
     <Layout>
       <Layout.Section left sticky>
-        <Menu>
-          <Menu.Dropdown title={"Dropdown 1"}>
-            <Menu.Item href={"#test1"}>Dropdown 1 lenke 1</Menu.Item>
-            <Menu.Item href={"#test1"}>Dropdown 2 lenke 2</Menu.Item>
-            <Menu.Item href={"#test1"}>Dropdown 3 lenke 3</Menu.Item>
-          </Menu.Dropdown>
-          <Menu.Item href={"#test2"}>Lenke 1</Menu.Item>
-          <Menu.Item href={"#test3"}>Lenke 2</Menu.Item>
-          <Menu.Item href={"#test4"}>Lenke 3</Menu.Item>
-          <Menu.Item href={"#test5"}>Lenke 4</Menu.Item>
-          <Menu.Dropdown title={"Dropdown 2"}>
-            <Menu.Dropdown title={"Dropdown 2 Subdropdown 1"}>
-              <Menu.Item href={"#test1"}>Dropdown 3 lenke 1</Menu.Item>
-              <Menu.Item href={"#test1"}>Dropdown 3 lenke 2</Menu.Item>
-              <Menu.Item href={"#test1"}>Dropdown 3 lenke 3</Menu.Item>
-            </Menu.Dropdown>
-            <Menu.Item href={"#test1"}>Dropdown 2 lenke 2</Menu.Item>
-            <Menu.Item href={"#test1"}>Dropdown 2 lenke 3</Menu.Item>
-          </Menu.Dropdown>
+        <Menu title={"Minima"}>
+          <Menu.Item href={"#quis-autem"}>Quis autem </Menu.Item>
+          <Menu.Collapsable title={"Nulla pariatur?"}>
+            <Menu.Item href={"#nulla-pariatur"}>Ipsum quia</Menu.Item>
+            <Menu.Item href={"#test1"}>Perspiciatis unde omnis</Menu.Item>
+            <Menu.Item href={"#test1"}>Voluptatem accusantium</Menu.Item>
+          </Menu.Collapsable>
+          <Menu.Item href={"#test3"}>Dolores eos</Menu.Item>
+          <Menu.Item href={"#test4"}>Ratione voluptatem</Menu.Item>
+          <Menu.Item href={"#test5"}>Quis nostrum</Menu.Item>
+          <Menu.Collapsable title={"Etiam viverra"}>
+            <Menu.Collapsable title={"Ullam corporis"}>
+              <Menu.Item href={"#test1"}>Curabitur a purus</Menu.Item>
+              <Menu.Item href={"#test1"}>Scelerisque sapien</Menu.Item>
+              <Menu.Item href={"#test1"}>Sed ac augue</Menu.Item>
+            </Menu.Collapsable>
+            <Menu.Item href={"#test1"}>Cras vestibulum</Menu.Item>
+            <Menu.Item href={"#test1"}>Metus sed pellentesque.</Menu.Item>
+          </Menu.Collapsable>
         </Menu>
       </Layout.Section>
       <Layout.Section>

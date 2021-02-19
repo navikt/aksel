@@ -1,7 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import Lenke from "nav-frontend-lenker";
-import { HoyreChevron } from "nav-frontend-chevron";
 
 export interface AccordionMenuItemProps
   extends HTMLAttributes<HTMLAnchorElement> {
@@ -16,9 +15,6 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
         className={cl("navds-accordion-menu__link", className)}
         {...rest}
       >
-        <div className="navds-accordion-menu__chevron">
-          <HoyreChevron />
-        </div>
         {children}
       </Lenke>
     </li>
