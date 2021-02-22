@@ -183,7 +183,7 @@
   margin-bottom: 0.5rem;
   overflow: hidden;
   box-sizing: border-box;
-  line-height: 2;
+  margin-top: 0.275rem;
 }
 
 .navds-step__label--interactive {

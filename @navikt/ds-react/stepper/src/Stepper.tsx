@@ -23,6 +23,9 @@ export const StepContext = createContext({
   dot: false,
 });
 
+/*
+ * TODO: Kode steps i <ol><li>
+ */
 const Stepper = forwardRef<HTMLDivElement, StepperProps>(
   (
     {
