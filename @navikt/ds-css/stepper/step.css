@@ -4,7 +4,6 @@
   flex: 1 0;
   position: relative;
   margin: 0;
-  display: block;
   overflow: visible;
   box-sizing: border-box;
   padding: 0.5rem;
@@ -39,7 +38,7 @@ button.navds-step:hover:not(.navds-step--disabled) {
 }
 
 /* prettier-ignore */
-button.navds-step:focus:not(.navds-step--disabled) ,
+button.navds-step:focus:not(.navds-step--disabled),
 a.navds-step:hover:not(.navds-step--disabled) {
   text-decoration: none;
 }
@@ -71,11 +70,14 @@ a.navds-step:focus {
 .navds-stepper > li:not(:last-child) > .navds-step::after {
   content: "";
   position: absolute;
+
   /* left padding + indicator width/2 - line width/2 */
   left: calc(0.5rem + 2rem / 2 - 2px/2);
+
   /* top padding + indicator width - line padding */
   top: calc(0.5rem + 2rem + 4px);
   width: 2px;
+
   /* this just works. not sure why */
   height: calc(100% + 8px);
   background-color: var(--navds-color-gray-40);

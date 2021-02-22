@@ -1,4 +1,4 @@
-import React, { createContext, forwardRef, useEffect, useState } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
