@@ -52,7 +52,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
                   ? "white"
                   : colorful
                   ? "radial-gradient(circle,var(--navds-color-darkgray) 50%,0,transparent)"
-                  : undefined,
+                  : "white",
                 borderRadius: "1rem",
               }}
             />

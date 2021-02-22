@@ -16,6 +16,8 @@
 .navds-step {
   border: 2px solid transparent;
   position: relative;
+  text-align: left;
+  line-height: 1.5;
 }
 
 .navds-step.navds-step--disabled {
@@ -96,9 +98,14 @@ a.navds-step:focus {
 }
 
 .navds-step.navds-step--disabled > .navds-step__indicator {
+  box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
+  color: var(--navds-color-gray-40);
+}
+
+.navds-step.navds-step--disabled.navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-gray-40);
-  box-shadow: none;
   color: white;
+  box-shadow: none;
 }
 
 .navds-stepper--vertical > * .navds-step__indicator {
@@ -134,7 +141,7 @@ a.navds-step.navds-step--active > .navds-step__indicator {
 .navds-stepper--vertical > * .navds-step__label {
   overflow: hidden;
   box-sizing: border-box;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 
 button.navds-step,
@@ -142,6 +149,7 @@ a.navds-step {
   background: none;
   text-decoration: underline;
   color: #0067c5;
+  text-align: left;
 }
 
 button.navds-step.navds-step--disabled,
@@ -184,6 +192,7 @@ a.navds-step.navds-step--disabled {
   background-color: var(--navds-color-gray-40);
 }
 
-.navds-step--no-shadow.navds-step--no-shadow {
+.navds-step__indicator.navds-step--no-shadow.navds-step__indicator.navds-step--no-shadow {
   box-shadow: none;
+  background: none;
 }
