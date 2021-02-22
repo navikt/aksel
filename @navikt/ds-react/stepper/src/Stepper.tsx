@@ -2,6 +2,7 @@ import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
+import { uuid } from "../../util/src";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   children:
@@ -22,7 +23,7 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
         return (
-          <li>
+          <li key={uuid()}>
             {React.cloneElement(step, {
               ...{ index, last: steps.length === index + 1 },
               ...step.props,

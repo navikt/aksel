@@ -2,7 +2,7 @@ import { ClockFilled, SuccessFilled, WarningFilled } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef } from "react";
 import { StepContext } from "./Stepper";
-import { OverridableComponent } from "./OverridableComponent";
+import { OverridableComponent } from "../../util/src/index";
 
 import "@navikt/ds-css/button/index.css";
 import "@navikt/ds-css/stepper/index.css";
