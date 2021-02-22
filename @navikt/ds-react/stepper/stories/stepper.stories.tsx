@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Stepper, StepperStep } from "../src/index";
-import { HashRouter as Router, Link } from "react-router-dom";
+import { HashRouter as Router, Link, useLocation } from "react-router-dom";
 
 export default {
   title: "@navikt/stepper",
@@ -9,21 +9,27 @@ export default {
 
 const steps = ["Step1", "Step2", "Step3", "Step4", "Step5", "Step6"];
 
+const StepperWithRouter = () => {
+  let location = useLocation();
+
+  return (
+    <Stepper activeStep={steps.indexOf(location)}>
+      {steps.map((step) => (
+        <StepperStep component={Link} to={step}>
+          {step}
+        </StepperStep>
+      ))}
+    </Stepper>
+  );
+};
+
 export const All = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeS, setActiveS] = useState(3);
 
   return (
     <>
-      <Router>
-        <Stepper activeStep={steps.indexOf()}>
-          {steps.map((step) => (
-            <StepperStep component={Link} to={step}>
-              {step}
-            </StepperStep>
-          ))}
-        </Stepper>
-      </Router>
+      <Router></Router>
 
       <h1>Stepper horizontal</h1>
       <div

@@ -88,37 +88,6 @@
   background-color: white;
 }
 
-.navds-step__dot > .navds-step__indicator,
-.navds-step__dot > * .navds-step__indicator {
-  width: 0.5rem;
-  height: 0.5rem;
-  box-shadow: none;
-  background-color: var(--navds-color-darkgray);
-}
-
-.navds-step__dot.navds-step--disabled > .navds-step__indicator,
-.navds-step__dot.navds-step--disabled > * .navds-step__indicator {
-  box-shadow: none;
-  background-color: var(--navds-color-gray-40);
-}
-
-.navds-step__dot > * .navds-step__indicator--active,
-.navds-step__dot > .navds-step__indicator--active {
-  background-color: white;
-  box-shadow: 0 0 0 0.25rem var(--navds-color-darkgray);
-}
-
-.navds-step--interactive.navds-step__dot > * .navds-step__indicator,
-.navds-step--interactive.navds-step__dot > .navds-step__indicator {
-  background-color: var(--navds-color-blue-60);
-}
-
-.navds-step--interactive.navds-step__dot > * .navds-step__indicator--active,
-.navds-step--interactive.navds-step__dot > .navds-step__indicator--active {
-  background-color: white;
-  box-shadow: 0 0 0 0.25rem var(--navds-color-blue-60);
-}
-
 /* aaaaaaaaaaaa */
 .navds-step--interactive.navds-step--disabled > * .navds-step__indicator,
 .navds-step--interactive.navds-step--disabled > .navds-step__indicator {
@@ -127,25 +96,9 @@
   color: white;
 }
 
-/* prettier-ignore */
-.navds-step--interactive.navds-step__dot.navds-step--disabled > * .navds-step__indicator,
-.navds-step--interactive.navds-step__dot.navds-step--disabled > .navds-step__indicator {
-  background-color: var(--navds-color-gray-40);
-  box-shadow: none;
-}
-
 .navds-stepper--vertical > * .navds-step__indicator {
   margin-right: 0.5rem;
   float: left;
-}
-
-.navds-stepper--vertical > .navds-step__dot > .navds-step__indicator {
-  margin-top: calc(1rem - 0.25rem);
-  margin-left: calc(1rem - 0.25rem);
-}
-
-.navds-stepper--horizontal > .navds-step__dot > * .navds-step__indicator {
-  margin-top: calc(1rem - 0.25rem);
 }
 
 .navds-step__indicator > svg {
@@ -219,15 +172,6 @@
 
 .navds-stepper--vertical > .navds-step--interactive > .navds-step__line {
   padding: calc(2rem + 0.25rem) 0 0 0.5rem;
-}
-
-.navds-stepper--horizontal > .navds-step__dot > .navds-step__line {
-  padding: 0 1.25rem 0 0;
-  left: calc(50% + 0.75rem);
-}
-
-.navds-stepper--vertical > .navds-step__dot > .navds-step__line {
-  padding: 2.25rem 0 0 0.5rem;
 }
 
 .navds-stepper--horizontal > * .navds-step__line::before {
