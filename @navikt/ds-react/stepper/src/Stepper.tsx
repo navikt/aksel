@@ -14,7 +14,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
 }
 
 export const StepContext = createContext({
-  orientation: "horizontal",
+  orientation: "vertical",
   active: 0,
   onClick: (event) => null,
   interactive: false,
@@ -29,7 +29,7 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
     {
       children,
       className,
-      orientation = "horizontal",
+      orientation = "vertical",
       activeStep,
       onClick,
       colorful = false,
