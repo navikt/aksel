@@ -1,15 +1,7 @@
 @import "./step.css";
 
 /* Stepper */
-.navds-stepper--horizontal {
-  display: flex;
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  align-items: flex-start;
-}
-
-.navds-stepper--vertical {
+.navds-stepper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;

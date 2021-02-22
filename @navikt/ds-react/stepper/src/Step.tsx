@@ -26,7 +26,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
       index = 0,
       last = false,
       status = "none",
-      disabled,
+      disabled = false,
       component: Component = "span",
       ...rest
     },
@@ -73,7 +73,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
 
     return (
       <StepContext.Consumer>
-        {({ interactive, colorful, activeStep }) => (
+        {({ colorful, activeStep }) => (
           <Component
             ref={ref}
             className={cl(className, `navds-step`, {
@@ -84,14 +84,6 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
             disabled={Component === "button" && disabled}
             {...rest}
           >
-            {false && !last && (
-              <div
-                aria-hidden
-                className={cl(`navds-step__line`, {
-                  "navds-step__line--light": index >= activeStep,
-                })}
-              />
-            )}
             <span
               className={cl("navds-step__indicator", {
                 "navds-step--no-shadow": status !== "none",
@@ -99,13 +91,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
             >
               {status === "none" ? index + 1 : getIcon(colorful)}
             </span>
-            <div
-              className={cl("navds-step__label", {
-                "navds-step__label--interactive": interactive,
-              })}
-            >
-              {children}
-            </div>
+            <div className={cl("navds-step__label")}>{children}</div>
           </Component>
         )}
       </StepContext.Consumer>

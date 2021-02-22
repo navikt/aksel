@@ -1,6 +1,6 @@
 /* Step */
 
-.navds-stepper--vertical > * .navds-step {
+.navds-stepper > * .navds-step {
   flex: 1 0;
   position: relative;
   margin: 0;
@@ -108,7 +108,7 @@ a.navds-step:focus {
   box-shadow: none;
 }
 
-.navds-stepper--vertical > * .navds-step__indicator {
+.navds-stepper > * .navds-step__indicator {
   margin-right: 0.5rem;
   float: left;
 }
@@ -138,7 +138,7 @@ a.navds-step.navds-step--active > .navds-step__indicator {
   color: white;
 }
 
-.navds-stepper--vertical > * .navds-step__label {
+.navds-stepper > * .navds-step__label {
   overflow: hidden;
   box-sizing: border-box;
   margin-top: 3px;
@@ -162,7 +162,7 @@ a.navds-step.navds-step--disabled {
   text-decoration: none;
 }
 
-.navds-stepper--vertical > * .navds-step__line {
+.navds-stepper > * .navds-step__line {
   position: absolute;
   top: 0;
   left: calc(1rem - 1px);
@@ -172,12 +172,12 @@ a.navds-step.navds-step--disabled {
   padding: calc(2rem + 0.25rem) 0 0.25rem 0.5rem;
 }
 
-.navds-stepper--vertical > a > .navds-step__line,
-.navds-stepper--vertical > button > .navds-step__line {
+.navds-stepper > a > .navds-step__line,
+.navds-stepper > button > .navds-step__line {
   padding: calc(2rem + 0.25rem) 0 0 0.5rem;
 }
 
-.navds-stepper--vertical > * .navds-step__line::before {
+.navds-stepper > * .navds-step__line::before {
   content: "";
   width: 2px;
   min-height: 2.5rem;
