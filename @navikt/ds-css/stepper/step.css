@@ -162,36 +162,6 @@ a.navds-step.navds-step--disabled {
   text-decoration: none;
 }
 
-.navds-stepper > * .navds-step__line {
-  position: absolute;
-  top: 0;
-  left: calc(1rem - 1px);
-  width: 1px;
-  height: 100%;
-  display: block;
-  padding: calc(2rem + 0.25rem) 0 0.25rem 0.5rem;
-}
-
-.navds-stepper > a > .navds-step__line,
-.navds-stepper > button > .navds-step__line {
-  padding: calc(2rem + 0.25rem) 0 0 0.5rem;
-}
-
-.navds-stepper > * .navds-step__line::before {
-  content: "";
-  width: 2px;
-  min-height: 2.5rem;
-  height: 100%;
-  background-color: var(--navds-color-darkgray);
-  display: inline-block;
-  z-index: 1;
-  border-radius: 1rem;
-}
-
-.navds-step__line--light.navds-step__line--light::before {
-  background-color: var(--navds-color-gray-40);
-}
-
 .navds-step__indicator.navds-step--no-shadow.navds-step__indicator.navds-step--no-shadow {
   box-shadow: none;
   background: none;
