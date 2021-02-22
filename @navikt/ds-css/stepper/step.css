@@ -1,6 +1,6 @@
 /* Step */
 
-.navds-stepper--vertical > .navds-step {
+.navds-stepper--vertical > * .navds-step {
   flex: 1 0;
   position: relative;
   margin: 0;
@@ -8,69 +8,57 @@
   overflow: visible;
   box-sizing: border-box;
   padding: 0.5rem;
-  padding-top: 0;
+  margin-bottom: 2.75rem;
   border: 2px solid transparent;
-}
-
-.navds-stepper--horizontal > .navds-step {
-  overflow: visible;
-  display: inline-block;
-  flex: 1;
-  position: relative;
-  box-sizing: border-box;
-  min-width: 6rem;
-  border: 2px solid transparent;
-}
-
-.navds-step--horizontal-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0.5rem 0.5rem 0 0.5rem;
-  z-index: 0;
-  border: 2px solid transparent;
-  border-radius: 2px;
+  align-items: flex-start;
 }
 
-.navds-step--interactive {
+.navds-step {
   border: 2px solid transparent;
+  position: relative;
 }
 
-.navds-step--disabled.navds-step--interactive {
+.navds-step.navds-step--disabled {
   cursor: initial;
 }
 
-.navds-step--interactive > * svg {
+.navds-step > * svg {
   color: #0067c5;
 }
 
-.navds-step--interactive:hover:not(.navds-step--disabled) {
+a.navds-step:hover:not(.navds-step--disabled),
+button.navds-step:hover:not(.navds-step--disabled) {
   z-index: 0;
   border: 2px solid #0067c5;
   text-decoration: none;
 }
 
-.navds-step--disabled > * .navds-step__label,
 .navds-step--disabled > .navds-step__label {
   color: var(--navds-color-gray-40);
   text-decoration: none;
 }
 
 /* prettier-ignore */
-.navds-step--interactive:hover:not(.navds-step--disabled) > * .navds-step__label--interactive,
-.navds-step--interactive:focus:not(.navds-step--disabled) > * .navds-step__label--interactive,
-.navds-step--interactive:hover:not(.navds-step--disabled) > .navds-step__label--interactive,
-.navds-step--interactive:focus:not(.navds-step--disabled) > .navds-step__label--interactive {
+button.navds-step:focus:not(.navds-step--disabled) ,
+a.navds-step:hover:not(.navds-step--disabled) {
   text-decoration: none;
 }
 
-.navds-step--interactive:focus {
+button.navds-step.navds-step--active,
+a.navds-step.navds-step--active {
+  text-decoration: none;
+}
+
+button.navds-step:focus,
+a.navds-step:focus {
   z-index: 0;
   outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
 
 .navds-step__indicator {
+  flex-shrink: 0;
   width: 2rem;
   height: 2rem;
   display: flex;
@@ -81,16 +69,29 @@
   background-color: white;
 }
 
-.navds-step--disabled > * .navds-step__indicator,
+/* prettier-ignore */
+.navds-stepper > li:not(:last-child) > .navds-step::after {
+  content: "";
+  position: absolute;
+  left: 23px;
+  top: 46px;
+  width: 2px;
+  height: calc(100% + 4px);
+  background-color: var(--navds-color-gray-40);
+}
+
+/* prettier-ignore */
+.navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active > .navds-step__indicator::after {
+  background-color: var(--navds-color-darkgray);
+}
+
 .navds-step--disabled > .navds-step__indicator {
   box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
   color: var(--navds-color-gray-40);
   background-color: white;
 }
 
-/* aaaaaaaaaaaa */
-.navds-step--interactive.navds-step--disabled > * .navds-step__indicator,
-.navds-step--interactive.navds-step--disabled > .navds-step__indicator {
+.navds-step.navds-step--disabled > .navds-step__indicator {
   background-color: var(--navds-color-gray-40);
   box-shadow: none;
   color: white;
@@ -105,59 +106,49 @@
   font-size: 2rem;
 }
 
-.navds-step__indicator--active {
+.navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-darkgray);
   box-shadow: none;
   color: white;
 }
 
-.navds-step--interactive > * .navds-step__indicator,
-.navds-step--interactive > .navds-step__indicator {
+button.navds-step > * .navds-step__indicator,
+button.navds-step > .navds-step__indicator,
+a.navds-step > * .navds-step__indicator,
+a.navds-step > .navds-step__indicator {
   color: var(--navds-color-blue-60);
   box-shadow: 0 0 0 2px var(--navds-color-blue-60) inset;
 }
 
-.navds-step--interactive > * .navds-step__indicator--active,
-.navds-step--interactive > .navds-step__indicator--active {
+button.navds-step.navds-step--active > .navds-step__indicator,
+a.navds-step.navds-step--active > .navds-step__indicator {
   background-color: #0067c5;
   box-shadow: 0 0 0 2px #0067c5 inset;
   color: white;
 }
 
-.navds-stepper--horizontal > * .navds-step__label {
-  display: block;
-  text-align: center;
-  margin-top: 0.5rem;
-  min-width: 8rem;
-}
-
 .navds-stepper--vertical > * .navds-step__label {
-  min-height: 4rem;
-  margin-bottom: 0.5rem;
   overflow: hidden;
   box-sizing: border-box;
-  margin-top: 0.275rem;
+  margin-top: 4px;
 }
 
-.navds-step__label--interactive {
+button.navds-step,
+a.navds-step {
+  background: none;
   text-decoration: underline;
   color: #0067c5;
 }
 
-.navds-step__label--active {
-  color: var(--navds-color-darkgray);
+button.navds-step.navds-step--disabled,
+a.navds-step,
+.navds-step--disabled {
   text-decoration: none;
 }
 
-.navds-stepper--horizontal > * .navds-step__line {
-  position: absolute;
-  left: calc(50% + 1.25rem);
-  top: calc(0.5rem + 2px);
-  height: 2px;
-  width: 100%;
-  display: block;
-  padding: 0 2.25rem 0 0;
-  z-index: 1;
+.navds-step--active > .navds-step__label {
+  color: var(--navds-color-darkgray);
+  text-decoration: none;
 }
 
 .navds-stepper--vertical > * .navds-step__line {
@@ -170,25 +161,16 @@
   padding: calc(2rem + 0.25rem) 0 0.25rem 0.5rem;
 }
 
-.navds-stepper--vertical > .navds-step--interactive > .navds-step__line {
+.navds-stepper--vertical > a > .navds-step__line,
+.navds-stepper--vertical > button > .navds-step__line {
   padding: calc(2rem + 0.25rem) 0 0 0.5rem;
-}
-
-.navds-stepper--horizontal > * .navds-step__line::before {
-  content: "";
-  height: 2px;
-  width: 100%;
-  background-color: var(--navds-color-darkgray);
-  display: inline-block;
-  z-index: 1;
-  border-radius: 1rem;
 }
 
 .navds-stepper--vertical > * .navds-step__line::before {
   content: "";
   width: 2px;
+  min-height: 2.5rem;
   height: 100%;
-  min-height: 1.5rem;
   background-color: var(--navds-color-darkgray);
   display: inline-block;
   z-index: 1;

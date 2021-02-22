@@ -7,18 +7,15 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   children:
     | React.ReactElement<typeof StepperStep>
     | Array<React.ReactElement<typeof StepperStep>>;
-  orientation?: "horizontal" | "vertical";
-  activeStep?: number;
+  activeStep: number;
   onClick?: (event) => void;
   colorful?: boolean;
 }
 
 export const StepContext = createContext({
-  orientation: "vertical",
-  active: 0,
-  onClick: (event) => null,
   interactive: false,
   colorful: false,
+  activeStep: 0,
 });
 
 /*
@@ -26,35 +23,9 @@ export const StepContext = createContext({
  */
 const Stepper = forwardRef<HTMLOListElement, StepperProps>(
   (
-    {
-      children,
-      className,
-      orientation = "vertical",
-      activeStep,
-      onClick,
-      colorful = false,
-      ...rest
-    },
+    { children, className, activeStep, onClick, colorful = false, ...rest },
     ref
   ) => {
-    const [active, setActive] = useState(0);
-
-    useEffect(() => {
-      if (activeStep) {
-        setActive(activeStep);
-      }
-    }, [activeStep]);
-
-    const handleClick = (e) => {
-      if (activeStep && onClick) {
-        onClick(e);
-      } else if (onClick) {
-        setActive(e.target.value);
-        onClick(e);
-      }
-      return null;
-    };
-
     const steps = React.Children.toArray(children);
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
@@ -67,22 +38,26 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
 
     const context = () => {
       return {
-        orientation,
-        active,
-        onClick: (e) => handleClick(e),
         interactive: onClick ? true : false,
         colorful,
+        activeStep,
       };
     };
 
     return (
       <ol
         ref={ref}
-        className={cl(`navds-stepper--${orientation}`, className)}
+        className={cl(`navds-stepper`, "navds-stepper--vertical", className)}
         {...rest}
       >
         <StepContext.Provider value={context()}>
-          {stepsWithIndex}
+          {/*  {stepsWithIndex} */}
+
+          {stepsWithIndex.map(
+            (element: React.ReactElement<typeof StepperStep>) => {
+              return <li>{element}</li>;
+            }
+          )}
         </StepContext.Provider>
       </ol>
     );

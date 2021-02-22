@@ -2,20 +2,23 @@ import { ClockFilled, SuccessFilled, WarningFilled } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef } from "react";
 import { StepContext } from "./Stepper";
+import { OverridableComponent } from "./OverridableComponent";
 
 import "@navikt/ds-css/button/index.css";
 import "@navikt/ds-css/stepper/index.css";
 
-export interface StepperStepProps
-  extends React.LiHTMLAttributes<HTMLLIElement> {
-  children: React.ReactNode;
-  index?: number;
-  last?: boolean;
-  status?: "none" | "done" | "warning" | "inProgress";
-  disabled?: boolean;
+export interface StepperStepProps {
+  props: {
+    children: React.ReactNode;
+    index?: number;
+    last?: boolean;
+    status?: "none" | "done" | "warning" | "inProgress";
+    disabled?: boolean;
+  } & React.HTMLAttributes<HTMLLIElement>;
+  defaultComponent: "span";
 }
 
-const StepperStep = forwardRef<HTMLLIElement, StepperStepProps>(
+const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
   (
     {
       children,
@@ -24,6 +27,7 @@ const StepperStep = forwardRef<HTMLLIElement, StepperStepProps>(
       last = false,
       status = "none",
       disabled,
+      component: Component = "span",
       ...rest
     },
     ref
@@ -67,82 +71,42 @@ const StepperStep = forwardRef<HTMLLIElement, StepperStepProps>(
       }
     };
 
-    const handleClick = (onClick, e) => {
-      e.target.value = index;
-      onClick(e);
-    };
-
-    const newProps = (interactive, onClick, disabled) => {
-      return {
-        role: interactive ? "button" : undefined,
-        tabIndex: !disabled ? (interactive ? 0 : undefined) : undefined,
-        onClick: !disabled
-          ? interactive
-            ? (e) => handleClick(onClick, e)
-            : undefined
-          : undefined,
-      };
-    };
-
-    const content = (activeStep, colorful, interactive) => (
-      <>
-        <span
-          className={cl("navds-step__indicator", {
-            "navds-step__indicator--active":
-              status === "none" && activeStep === index,
-            "navds-step--no-shadow": status !== "none",
-          })}
-        >
-          {status === "none" ? index + 1 : getIcon(colorful)}
-        </span>
-        <div
-          className={cl("navds-step__label", {
-            "navds-step__label--active": activeStep === index,
-            "navds-step__label--interactive": interactive,
-          })}
-        >
-          {children}
-        </div>
-      </>
-    );
-
     return (
       <StepContext.Consumer>
-        {({
-          orientation,
-          active: activeStep,
-          onClick,
-          interactive,
-          colorful,
-        }) => (
-          <>
-            <li
-              ref={ref}
-              className={cl(`navds-step`, className, {
-                "navds-step--interactive": interactive,
-                "navds-step--disabled": disabled,
+        {({ interactive, colorful, activeStep }) => (
+          <Component
+            ref={ref}
+            className={cl(className, `navds-step`, {
+              "navds-step--disabled": disabled,
+              "navds-step--active": activeStep === index,
+              "navds-step--before-active": index < activeStep,
+            })}
+            disabled={Component === "button" && disabled}
+            {...rest}
+          >
+            {false && !last && (
+              <div
+                aria-hidden
+                className={cl(`navds-step__line`, {
+                  "navds-step__line--light": index >= activeStep,
+                })}
+              />
+            )}
+            <span
+              className={cl("navds-step__indicator", {
+                "navds-step--no-shadow": status !== "none",
               })}
-              {...rest}
-              {...newProps(interactive, onClick, disabled)}
             >
-              {!last && (
-                <div
-                  aria-hidden
-                  className={cl(`navds-step__line`, {
-                    "navds-step__line--light": index >= activeStep,
-                  })}
-                />
-              )}
-
-              {orientation === "horizontal" ? (
-                <div className="navds-step--horizontal-wrapper">
-                  {content(activeStep, colorful, interactive)}
-                </div>
-              ) : (
-                <>{content(activeStep, colorful, interactive)}</>
-              )}
-            </li>
-          </>
+              {status === "none" ? index + 1 : getIcon(colorful)}
+            </span>
+            <div
+              className={cl("navds-step__label", {
+                "navds-step__label--interactive": interactive,
+              })}
+            >
+              {children}
+            </div>
+          </Component>
         )}
       </StepContext.Consumer>
     );

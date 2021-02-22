@@ -61,7 +61,11 @@ export const StepperLink = () => {
   const location = useLocation();
 
   return (
-    <Stepper activeStep={steps.findIndex(({ link }) => link === location)}>
+    <Stepper
+      activeStep={steps.findIndex(
+        ({ link }) => link === location.pathname.substring(1)
+      )}
+    >
       {steps.map(({ label, link }) => (
         <StepperStep component={Link} to={link}>
           {label}
