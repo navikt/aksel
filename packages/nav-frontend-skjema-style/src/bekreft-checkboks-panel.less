@@ -26,6 +26,14 @@
     background-color: @navGronnLighten80;
     border-color: @navGronnLighten80;
 
+    .bekreftCheckboksPanel__innhold {
+      .lenke {
+        &:not(:focus) {
+          color: @navMorkGra;
+        }
+      }
+    }
+
     .checkboks {
       + .skjemaelement__label {
         &::before {
@@ -36,9 +44,12 @@
         }
 
         &:hover {
+          color: @navMorkGra;
+          text-decoration: underline;
+
           &::before {
-            background-color: @navGronnLighten40;
-            border-color: @navGronnLighten40;
+            background-color: @navGronnDarken40;
+            border-color: @navGronnDarken40;
           }
         }
       }
