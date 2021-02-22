@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Stepper, StepperStep } from "../src/index";
+import { HashRouter as Router, Link } from "react-router-dom";
 
 export default {
   title: "@navikt/stepper",
@@ -12,6 +13,8 @@ export const All = () => {
 
   return (
     <>
+      <Router></Router>
+
       <h1>Stepper horizontal</h1>
       <div
         style={{

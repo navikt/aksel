@@ -6,7 +6,8 @@ import { StepContext } from "./Stepper";
 import "@navikt/ds-css/button/index.css";
 import "@navikt/ds-css/stepper/index.css";
 
-export interface StepperStepProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StepperStepProps
+  extends React.LiHTMLAttributes<HTMLLIElement> {
   children: React.ReactNode;
   index?: number;
   last?: boolean;
@@ -14,7 +15,7 @@ export interface StepperStepProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: boolean;
 }
 
-const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
+const StepperStep = forwardRef<HTMLLIElement, StepperStepProps>(
   (
     {
       children,
@@ -116,7 +117,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
           dot,
         }) => (
           <>
-            <div
+            <li
               ref={ref}
               className={cl(`navds-step`, className, {
                 "navds-step__dot": dot,
@@ -142,7 +143,7 @@ const StepperStep = forwardRef<HTMLDivElement, StepperStepProps>(
               ) : (
                 <>{content(activeStep, colorful, interactive, dot)}</>
               )}
-            </div>
+            </li>
           </>
         )}
       </StepContext.Consumer>

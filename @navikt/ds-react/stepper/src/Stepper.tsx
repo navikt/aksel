@@ -3,7 +3,7 @@ import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
 
-export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface StepperProps extends React.OlHTMLAttributes<HTMLOListElement> {
   children:
     | React.ReactElement<typeof StepperStep>
     | Array<React.ReactElement<typeof StepperStep>>;
@@ -26,7 +26,7 @@ export const StepContext = createContext({
 /*
  * TODO: Kode steps i <ol><li>
  */
-const Stepper = forwardRef<HTMLDivElement, StepperProps>(
+const Stepper = forwardRef<HTMLUListElement, StepperProps>(
   (
     {
       children,
@@ -80,7 +80,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
     };
 
     return (
-      <div
+      <ol
         ref={ref}
         className={cl(`navds-stepper--${orientation}`, className)}
         {...rest}
@@ -88,7 +88,7 @@ const Stepper = forwardRef<HTMLDivElement, StepperProps>(
         <StepContext.Provider value={context()}>
           {stepsWithIndex}
         </StepContext.Provider>
-      </div>
+      </ol>
     );
   }
 );
