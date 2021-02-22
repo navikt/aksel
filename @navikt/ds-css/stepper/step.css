@@ -29,7 +29,6 @@
 
 a.navds-step:hover:not(.navds-step--disabled),
 button.navds-step:hover:not(.navds-step--disabled) {
-  z-index: 0;
   border: 2px solid #0067c5;
   text-decoration: none;
 }
@@ -52,7 +51,6 @@ a.navds-step.navds-step--active {
 
 button.navds-step:focus,
 a.navds-step:focus {
-  z-index: 0;
   outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
@@ -74,13 +72,14 @@ a.navds-step:focus {
   content: "";
   position: absolute;
   /* left padding + indicator width/2 - line width/2 */
-  left: calc(0.5rem + 2rem/2 - 2px/2);
+  left: calc(0.5rem + 2rem / 2 - 2px/2);
   /* top padding + indicator width - line padding */
   top: calc(0.5rem + 2rem + 4px);
   width: 2px;
   /* this just works. not sure why */
   height: calc(100% + 8px);
   background-color: var(--navds-color-gray-40);
+  z-index: -1;
 }
 
 /* prettier-ignore */
@@ -144,8 +143,7 @@ a.navds-step {
 }
 
 button.navds-step.navds-step--disabled,
-a.navds-step,
-.navds-step--disabled {
+a.navds-step.navds-step--disabled {
   text-decoration: none;
 }
 
