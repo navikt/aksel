@@ -72,7 +72,7 @@ a.navds-step:focus {
   position: absolute;
 
   /* left padding + indicator width/2 - line width/2 */
-  left: calc(0.5rem + 2rem / 2 - 2px/2);
+  left: calc(0.5rem + 2rem / 2 - 2px / 2);
 
   /* top padding + indicator width - line padding */
   top: calc(0.5rem + 2rem + 4px);
