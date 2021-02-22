@@ -73,15 +73,18 @@ a.navds-step:focus {
 .navds-stepper > li:not(:last-child) > .navds-step::after {
   content: "";
   position: absolute;
-  left: 23px;
-  top: 46px;
+  /* left padding + indicator width/2 - line width/2 */
+  left: calc(0.5rem + 2rem/2 - 2px/2);
+  /* top padding + indicator width - line padding */
+  top: calc(0.5rem + 2rem + 4px);
   width: 2px;
-  height: calc(100% + 4px);
+  /* this just works. not sure why */
+  height: calc(100% + 8px);
   background-color: var(--navds-color-gray-40);
 }
 
 /* prettier-ignore */
-.navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active > .navds-step__indicator::after {
+.navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active::after {
   background-color: var(--navds-color-darkgray);
 }
 
