@@ -3,7 +3,7 @@ import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
 
-export interface StepperProps extends React.OlHTMLAttributes<HTMLOListElement> {
+export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   children:
     | React.ReactElement<typeof StepperStep>
     | Array<React.ReactElement<typeof StepperStep>>;
@@ -11,7 +11,6 @@ export interface StepperProps extends React.OlHTMLAttributes<HTMLOListElement> {
   activeStep?: number;
   onClick?: (event) => void;
   colorful?: boolean;
-  dot?: boolean;
 }
 
 export const StepContext = createContext({
@@ -20,13 +19,12 @@ export const StepContext = createContext({
   onClick: (event) => null,
   interactive: false,
   colorful: false,
-  dot: false,
 });
 
 /*
  * TODO: Kode steps i <ol><li>
  */
-const Stepper = forwardRef<HTMLUListElement, StepperProps>(
+const Stepper = forwardRef<HTMLOListElement, StepperProps>(
   (
     {
       children,
@@ -35,7 +33,6 @@ const Stepper = forwardRef<HTMLUListElement, StepperProps>(
       activeStep,
       onClick,
       colorful = false,
-      dot = false,
       ...rest
     },
     ref
@@ -75,7 +72,6 @@ const Stepper = forwardRef<HTMLUListElement, StepperProps>(
         onClick: (e) => handleClick(e),
         interactive: onClick ? true : false,
         colorful,
-        dot,
       };
     };
 

@@ -7,13 +7,23 @@ export default {
   component: Stepper,
 };
 
+const steps = ["Step1", "Step2", "Step3", "Step4", "Step5", "Step6"];
+
 export const All = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeS, setActiveS] = useState(3);
 
   return (
     <>
-      <Router></Router>
+      <Router>
+        <Stepper activeStep={steps.indexOf()}>
+          {steps.map((step) => (
+            <StepperStep component={Link} to={step}>
+              {step}
+            </StepperStep>
+          ))}
+        </Stepper>
+      </Router>
 
       <h1>Stepper horizontal</h1>
       <div
@@ -63,30 +73,6 @@ export const All = () => {
             Do cupidatat aliqua quis non id deserunt labore officia elit.
           </StepperStep>
           <StepperStep disabled>Step 4</StepperStep>
-          <StepperStep disabled>Step 5</StepperStep>
-        </Stepper>
-
-        <Stepper activeStep={3} dot>
-          <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep disabled status="warning">
-            Step 2
-          </StepperStep>
-          <StepperStep status="inProgress">
-            Do cupidatat aliqua quis non id deserunt labore officia elit.
-          </StepperStep>
-          <StepperStep>Step 4</StepperStep>
-          <StepperStep>Step 5</StepperStep>
-        </Stepper>
-
-        <Stepper activeStep={3} dot onClick={(e) => setActiveS(e.target.value)}>
-          <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep disabled status="warning">
-            Step 2
-          </StepperStep>
-          <StepperStep status="inProgress">
-            Do cupidatat aliqua quis non id deserunt labore officia elit.
-          </StepperStep>
-          <StepperStep>Step 4</StepperStep>
           <StepperStep disabled>Step 5</StepperStep>
         </Stepper>
       </div>
@@ -152,35 +138,6 @@ export const All = () => {
           </StepperStep>
           <StepperStep>Step 4</StepperStep>
           <StepperStep>Step 5</StepperStep>
-        </Stepper>
-
-        <Stepper activeStep={3} orientation="vertical" dot>
-          <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep disabled status="warning">
-            Step 2
-          </StepperStep>
-          <StepperStep status="inProgress">
-            Do cupidatat aliqua quis non id deserunt labore officia elit.
-          </StepperStep>
-          <StepperStep>Step 4</StepperStep>
-          <StepperStep>Step 5</StepperStep>
-        </Stepper>
-
-        <Stepper
-          activeStep={3}
-          orientation="vertical"
-          dot
-          onClick={(e) => setActiveS(e.target.value)}
-        >
-          <StepperStep status="done">Step 1</StepperStep>
-          <StepperStep disabled status="warning">
-            Step 2
-          </StepperStep>
-          <StepperStep status="inProgress">
-            Do cupidatat aliqua quis non id deserunt labore officia elit.
-          </StepperStep>
-          <StepperStep>Step 4</StepperStep>
-          <StepperStep disabled>Step 5</StepperStep>
         </Stepper>
       </div>
     </>
