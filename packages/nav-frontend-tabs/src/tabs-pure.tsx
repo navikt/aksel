@@ -31,11 +31,16 @@ export interface TabsPureProps {
 class TabsPure extends React.PureComponent<TabsPureProps> {
   static Tab = Tab;
 
-  private aktivIndex: number = 0;
+  aktivIndex: number;
+  focusIndex: number;
+  linkRefs: any[];
 
-  private focusIndex: number = 0;
-
-  public linkRefs: any[] = [];
+  constructor(props) {
+    super(props);
+    this.aktivIndex = 0;
+    this.focusIndex = 0;
+    this.linkRefs = [];
+  }
 
   static defaultProps: Partial<TabsPureProps> = {
     kompakt: false,

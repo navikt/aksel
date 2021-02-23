@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-knapper",
-  "version": "2.0.30",
+  "version": "2.0.31",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -21,16 +21,16 @@
     "nav-frontend-js-utils": "^1.0.16",
     "nav-frontend-knapper-style": "^1.0.15",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-js-utils": "^1.0.16",
-    "nav-frontend-knapper-style": "^1.0.15",
+    "nav-frontend-js-utils": "^1.0.17",
+    "nav-frontend-knapper-style": "^1.0.16",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "KnappBase"
 }

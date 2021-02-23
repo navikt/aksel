@@ -3,13 +3,13 @@
     "name": "Brødsmulesti",
     "description": "Felles brødsmulesti for apper på nav.no",
     "repository": "https://github.com/navikt/nav-dekoratoren/#eksempler",
-    "demo_url": "https://www.nav.no/dekoratoren/?breadcrumbs=[{%22url%22:%22https://www.nav.no/person/dittnav%22,%22title%22:%22ditt%20nav%22},{%22url%22:%22https://www.nav.no/person/kontakt-oss/nb/%22,%22title%22:%22kontakt%20oss%22}]"
+    "demo_url": "https://dekoratoren.dev.nav.no/?breadcrumbs=[{%22url%22:%22https://www.nav.no/person/dittnav%22,%22title%22:%22ditt%20nav%22},{%22url%22:%22https://www.nav.no/person/kontakt-oss/nb/%22,%22title%22:%22kontakt%20oss%22}]"
   },
   {
     "name": "Språkvelger",
     "description": "Felles språkvelger for apper på nav.no",
     "repository": "https://github.com/navikt/nav-dekoratoren/#eksempler",
-    "demo_url": "https://www.nav.no/dekoratoren/?availableLanguages=[{%22locale%22:%22nb%22,%22url%22:%22https://www.nav.no/dekoratoren/nb/%22,%22handleInApp%22:true},{%22locale%22:%22en%22,%22url%22:%22https://www.nav.no/dekoratoren/en/%22,%22handleInApp%22:true}]"
+    "demo_url": "https://dekoratoren.dev.nav.no/?availableLanguages=[{%22locale%22:%22nb%22,%22url%22:%22https://www.nav.no/dekoratoren/nb/%22,%22handleInApp%22:true},{%22locale%22:%22en%22,%22url%22:%22https://www.nav.no/dekoratoren/en/%22,%22handleInApp%22:true}]"
   },
   {
     "name": "Datovelger",

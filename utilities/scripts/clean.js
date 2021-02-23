@@ -41,7 +41,9 @@ Promise.all([
     fs.unlinkSync(file);
   });
 
-  const folders = [...lib, ...dist];
+  const folders = [...lib, ...dist].filter(
+    (path) => !path.includes("node_modules")
+  );
 
   folders.forEach((folder) => {
     console.log(`Deleting folder ${folder}`);

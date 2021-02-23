@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-alertstriper-style",
-  "version": "2.0.35",
+  "version": "2.0.36",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,9 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-ikoner-assets": "^2.0.9",
+    "nav-frontend-ikoner-assets": "^2.0.10",
     "nav-frontend-paneler-style": "^0.3.34",
-    "nav-frontend-typografi-style": "^1.0.33",
-    "react": "^16.8.0"
+    "nav-frontend-typografi-style": "^1.0.34"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",

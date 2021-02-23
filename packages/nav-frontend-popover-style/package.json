@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover-style",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "src/popover-style.less",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",

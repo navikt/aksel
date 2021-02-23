@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ekspanderbartpanel-style",
-  "version": "1.0.39",
+  "version": "1.0.41",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -8,7 +8,7 @@
     "/dist/main.css"
   ],
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -21,10 +21,9 @@
     "nav-frontend-typografi-style": "^1.0.33"
   },
   "devDependencies": {
-    "nav-frontend-chevron-style": "^1.0.3",
+    "nav-frontend-chevron-style": "^1.0.4",
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-paneler-style": "^1.0.1",
-    "nav-frontend-typografi-style": "^1.0.33",
-    "react": "^16.8.0"
+    "nav-frontend-paneler-style": "^1.0.2",
+    "nav-frontend-typografi-style": "^1.0.34"
   }
 }

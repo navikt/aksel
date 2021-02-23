@@ -39,7 +39,7 @@
     "prism-react-renderer": "^1.1.1",
     "prismjs": "1.23.0",
     "prop-types": "^15.7.2",
-    "react": "^16.13.1",
+    "react": "^17.0.0",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
     "react-media": "^1.10.0",
@@ -47,16 +47,18 @@
     "react-use-keypress": "^1.0.1",
     "rehype-slug": "^4.0.1",
     "rehype-toc": "^3.0.2",
-    "@navikt/ds-css": "0.1.0-beta.1"
+    "@navikt/ds-css": "0.1.0-beta.1",
+    "canvg": "^3.0.7"
   },
   "devDependencies": {
     "prettier": "2.2.1"
   },
   "scripts": {
-    "build:gatsby": "gatsby build",
+    "build:gatsby": "npm run copy:static && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "npx copyfiles -E -f ../@navikt/ds-icons/*.zip ./static && npm run develop",
+    "copy:static": "npx copyfiles -E -f ../@navikt/ds-icons/*.zip ./static",
+    "start": "npm run copy:static && npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",

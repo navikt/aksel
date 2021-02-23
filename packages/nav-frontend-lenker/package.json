@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-lenker",
-  "version": "1.0.59",
+  "version": "1.0.60",
   "main": "lib/lenke.js",
   "types": "lib/lenke.d.ts",
   "license": "MIT",
@@ -20,13 +20,13 @@
     "classnames": "^2.2.5",
     "nav-frontend-lenker-style": "^1.0.0",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-lenker-style": "^1.0.1",
+    "nav-frontend-lenker-style": "^1.0.2",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "Lenke"
 }

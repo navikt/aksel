@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-typografi",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "types": "lib/index.d.ts",
   "main": "lib/index.js",
   "license": "MIT",
@@ -21,13 +21,13 @@
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-typografi-style": "^1.0.33",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-typografi-style": "^1.0.33",
+    "nav-frontend-typografi-style": "^1.0.34",
     "prop-types": "^15.5.10",
-    "react": "^16.8.0"
+    "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "TypografiBase"
 }

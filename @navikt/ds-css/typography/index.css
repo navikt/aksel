@@ -2,7 +2,6 @@
  * Heading
  */
 .navds-heading {
-  margin: 0;
   font-weight: var(--navds-font-weight-bold);
   line-height: calc(1em + 0.25rem);
 }

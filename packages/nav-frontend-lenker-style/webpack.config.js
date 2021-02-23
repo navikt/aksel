@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: "./src/lenker-style.less",
   plugins: [new MiniCssExtractPlugin()],
+  stats: "errors-only",
   module: {
     rules: [
       {

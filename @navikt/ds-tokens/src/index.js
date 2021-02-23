@@ -156,6 +156,25 @@ module.exports = {
       focus: { value: "{navds.color.blue.80.value}" },
       shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
     },
+    contentContainer: {
+      maxWidth: { value: "79.5rem" },
+      padding: {
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "1.5rem" },
+      },
+    },
+    grid: {
+      gutter: {
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "1.5rem" },
+      },
+    },
+    layout: {
+      padding: {
+        small: { value: "1rem" },
+        mediumAndLarger: { value: "2.5rem" },
+      },
+    },
     z: {
       index: {
         modal: {
