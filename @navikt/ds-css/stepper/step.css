@@ -107,10 +107,11 @@ a.navds-step:focus {
   height: calc(100% + 8px);
   background-color: var(--navds-color-gray-40);
   z-index: 1;
+  border-radius: 0.5rem;
 }
 
 .navds-stepper.navds-stepper--arrow > li:last-child > .navds-step::before {
-  height: calc(120% + 8px);
+  height: calc(175% + 8px);
 }
 
 /* prettier-ignore */
@@ -121,8 +122,8 @@ a.navds-step:focus {
 
 /* prettier-ignore */
 .navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--inProgress.navds-step.navds-step--active::before {
-  height: calc(75% + 8px - 2px);
-  top: calc(45% + 0.5rem + 2rem + 4px + 2px);
+  height: calc(120% + 8px - 2px);
+  top: calc(55% + 0.5rem + 2rem + 4px + 2px);
 }
 
 /* prettier-ignore */
@@ -151,6 +152,17 @@ a.navds-step:focus {
   /* this just works. not sure why */
   height: 45%;
   background-color: var(--navds-color-darkgray);
+  border-radius: 0.5rem;
+}
+
+/* prettier-ignore */
+.navds-stepper:not(.navds-stepper--arrow) > li:last-child > .navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
+  content: none;
+}
+
+/* prettier-ignore */
+.navds-stepper--arrow > li:last-child > .navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
+  height: 55%;
 }
 
 /* prettier-ignore */
@@ -174,12 +186,13 @@ button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--dis
   left: calc(0.5rem + 2rem / 2 - 10px / 2);
 
   /* margin-bottom + content height */
-  top: calc(2.75rem + 120% - 2px);
+  top: calc(2.75rem + 175% - 2px);
+  border-radius: 2px;
 }
 
 /* prettier-ignore */
 .navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--active.navds-step::after {
-  top: calc(2.75rem + 120% - 2px);
+  top: calc(2.75rem + 175% - 2px);
 }
 
 .navds-stepper > * .navds-step__indicator {

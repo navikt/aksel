@@ -66,6 +66,14 @@ export const StaticStepper = () => (
         </StepperStep>
       ))}
     </Stepper>
+
+    <Stepper activeStep={3} colorful arrow>
+      {steps.map(({ label, status }, index) => (
+        <StepperStep key={uuid()} status={status as any}>
+          {label}
+        </StepperStep>
+      ))}
+    </Stepper>
   </div>
 );
 
@@ -100,7 +108,7 @@ export const StepperButton = () => {
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
-            disabled={true}
+            disabled={!!disabled}
           >
             {label}
           </StepperStep>
@@ -114,7 +122,21 @@ export const StepperButton = () => {
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
-            disabled={true}
+            disabled={!!disabled}
+          >
+            {label}
+          </StepperStep>
+        ))}
+      </Stepper>
+
+      <Stepper activeStep={activeStep} colorful arrow>
+        {steps.map(({ label, disabled, status }, index) => (
+          <StepperStep
+            key={uuid()}
+            status={status as any}
+            component="button"
+            onClick={() => setActiveStep(index)}
+            disabled={!!disabled}
           >
             {label}
           </StepperStep>
@@ -136,7 +158,6 @@ export const StepperLink = () => {
       }}
     >
       <Stepper
-        arrow
         activeStep={steps.findIndex(
           ({ link }) => link === location.pathname.substring(1)
         )}
@@ -148,7 +169,6 @@ export const StepperLink = () => {
         ))}
       </Stepper>
       <Stepper
-        arrow
         activeStep={steps.findIndex(
           ({ link }) => link === location.pathname.substring(1)
         )}
@@ -164,6 +184,24 @@ export const StepperLink = () => {
           </StepperStep>
         ))}
       </Stepper>
+      <Stepper
+        colorful
+        activeStep={steps.findIndex(
+          ({ link }) => link === location.pathname.substring(1)
+        )}
+      >
+        {steps.map(({ label, link, status }) => (
+          <StepperStep
+            key={uuid()}
+            status={status as any}
+            component={Link}
+            to={link}
+          >
+            {label}
+          </StepperStep>
+        ))}
+      </Stepper>
+
       <Stepper
         arrow
         colorful
