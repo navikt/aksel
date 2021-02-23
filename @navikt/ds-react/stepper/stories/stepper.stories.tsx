@@ -12,12 +12,12 @@ const steps = [
   {
     label: "Step 1",
     link: "step1",
-    status: "done",
+    status: "finished",
   },
   {
     label: "Step 2",
     link: "step2",
-    status: "done",
+    status: "finished",
   },
   {
     label: "Do cupidatat aliqua quis non id deserunt labore officia elit.",
@@ -100,7 +100,7 @@ export const StepperButton = () => {
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
-            disabled={!!disabled}
+            disabled={true}
           >
             {label}
           </StepperStep>
@@ -114,7 +114,7 @@ export const StepperButton = () => {
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
-            disabled={!!disabled}
+            disabled={true}
           >
             {label}
           </StepperStep>

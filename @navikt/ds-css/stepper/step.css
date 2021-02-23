@@ -20,29 +20,50 @@
   line-height: 1.5;
 }
 
-.navds-step.navds-step--disabled {
-  cursor: initial;
+.navds-step--inProgress.navds-step--colorful > * svg {
+  color: #0c5ea8;
+  background-color: white;
+}
+.navds-step--warning.navds-step--colorful > * svg {
+  color: #ffa733;
+  background: radial-gradient(
+    circle,
+    var(--navds-color-darkgray) 50%,
+    0,
+    transparent
+  );
+}
+
+.navds-step--finished.navds-step--colorful > * svg {
+  color: #06893a;
+  background-color: white;
+}
+
+.navds-step--active.navds-step--inProgress > * svg,
+.navds-step--active.navds-step--finished > * svg,
+.navds-step--active.navds-step--warning > * svg {
+  background-color: white;
+}
+
+.navds-step--finished > .navds-step__indicator,
+.navds-step--inProgress > .navds-step__indicator {
+  background-color: white;
+  box-shadow: none;
+}
+
+.navds-step.navds-step--colorful.navds-step--warning > .navds-step__indicator {
+  box-shadow: none;
+  background: none;
 }
 
 .navds-step > * svg {
+  color: var(--navds-color-darkgray);
+  background-color: white;
+}
+
+a.navds-step > * svg,
+button.navds-step > * svg {
   color: #0067c5;
-}
-
-a.navds-step:hover:not(.navds-step--disabled),
-button.navds-step:hover:not(.navds-step--disabled) {
-  border: 2px solid #0067c5;
-  text-decoration: none;
-}
-
-.navds-step--disabled > .navds-step__label {
-  color: var(--navds-color-gray-40);
-  text-decoration: none;
-}
-
-/* prettier-ignore */
-button.navds-step:focus:not(.navds-step--disabled),
-a.navds-step:hover:not(.navds-step--disabled) {
-  text-decoration: none;
 }
 
 button.navds-step.navds-step--active,
@@ -91,23 +112,6 @@ a.navds-step:focus {
   background-color: var(--navds-color-darkgray);
 }
 
-.navds-step--disabled > .navds-step__indicator {
-  box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
-  color: var(--navds-color-gray-40);
-  background-color: white;
-}
-
-.navds-step.navds-step--disabled > .navds-step__indicator {
-  box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
-  color: var(--navds-color-gray-40);
-}
-
-.navds-step.navds-step--disabled.navds-step--active > .navds-step__indicator {
-  background-color: var(--navds-color-gray-40);
-  color: white;
-  box-shadow: none;
-}
-
 .navds-stepper > * .navds-step__indicator {
   margin-right: 0.5rem;
   float: left;
@@ -152,17 +156,61 @@ a.navds-step {
   text-align: left;
 }
 
-button.navds-step.navds-step--disabled,
-a.navds-step.navds-step--disabled {
-  text-decoration: none;
-}
-
 .navds-step--active > .navds-step__label {
   color: var(--navds-color-darkgray);
   text-decoration: none;
 }
 
-.navds-step__indicator.navds-step--no-shadow.navds-step__indicator.navds-step--no-shadow {
+.navds-step--disabled.navds-step--inProgress > * svg,
+.navds-step--disabled.navds-step--warning > * svg,
+.navds-step--disabled.navds-step--finished > * svg {
+  color: #b7b1a9;
+  background: white;
+}
+
+.navds-step--disabled > .navds-step__label {
+  color: var(--navds-color-gray-40);
+  text-decoration: none;
+}
+
+.navds-step.navds-step--disabled {
+  cursor: initial;
+}
+
+a.navds-step:hover:not(.navds-step--disabled),
+button.navds-step:hover:not(.navds-step--disabled) {
+  border: 2px solid #0067c5;
+  text-decoration: none;
+}
+
+/* prettier-ignore */
+button.navds-step:focus:not(.navds-step--disabled),
+a.navds-step:hover:not(.navds-step--disabled) {
+  text-decoration: none;
+}
+
+.navds-step--disabled > .navds-step__indicator {
+  box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
+  color: var(--navds-color-gray-40);
+  background-color: white;
+}
+
+.navds-step.navds-step--disabled > .navds-step__indicator {
+  box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
+  color: var(--navds-color-gray-40);
+}
+
+.navds-step.navds-step--disabled.navds-step--active > .navds-step__indicator {
+  background-color: var(--navds-color-gray-40);
+  color: white;
   box-shadow: none;
-  background: none;
+}
+
+button.navds-step.navds-step--disabled,
+a.navds-step.navds-step--disabled {
+  text-decoration: none;
+}
+
+.navds-step--disabled.navds-step--active > .navds-step__label {
+  color: #b7b1a9;
 }

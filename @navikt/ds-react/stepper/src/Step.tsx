@@ -12,7 +12,7 @@ export interface StepperStepProps {
     children: React.ReactNode;
     index?: number;
     last?: boolean;
-    status?: "none" | "done" | "warning" | "inProgress";
+    status?: "none" | "finished" | "warning" | "inProgress";
     disabled?: boolean;
   } & React.HTMLAttributes<HTMLLIElement>;
   defaultComponent: "span";
@@ -32,40 +32,14 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
     },
     ref
   ) => {
-    const getIcon = (colorful) => {
+    const getIcon = () => {
       switch (status) {
-        case "done":
-          return (
-            <SuccessFilled
-              style={{
-                color: disabled ? "#B7B1A9" : colorful ? "#06893A" : undefined,
-                backgroundColor: "white",
-              }}
-            />
-          );
+        case "finished":
+          return <SuccessFilled />;
         case "warning":
-          return (
-            <WarningFilled
-              style={{
-                color: disabled ? "#B7B1A9" : colorful ? "#FFA733" : undefined,
-                background: disabled
-                  ? "white"
-                  : colorful
-                  ? "radial-gradient(circle,var(--navds-color-darkgray) 50%,0,transparent)"
-                  : "white",
-                borderRadius: "1rem",
-              }}
-            />
-          );
+          return <WarningFilled />;
         case "inProgress":
-          return (
-            <ClockFilled
-              style={{
-                color: disabled ? "#B7B1A9" : colorful ? "#0C5EA8" : undefined,
-                backgroundColor: "white",
-              }}
-            />
-          );
+          return <ClockFilled />;
         default:
           return <div />;
       }
@@ -76,20 +50,21 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
         {({ colorful, activeStep }) => (
           <Component
             ref={ref}
-            className={cl(className, `navds-step`, {
+            className={cl(className, `navds-step`, `navds-step--${status}`, {
               "navds-step--disabled": disabled,
               "navds-step--active": activeStep === index,
               "navds-step--before-active": index < activeStep,
+              "navds-step--colorful": colorful,
             })}
             disabled={Component === "button" && disabled}
             {...rest}
           >
             <span
               className={cl("navds-step__indicator", {
-                "navds-step--no-shadow": status !== "none",
+                /* "navds-step--no-shadow": status !== "none", */
               })}
             >
-              {status === "none" ? index + 1 : getIcon(colorful)}
+              {status === "none" ? index + 1 : getIcon()}
             </span>
             <div className={cl("navds-step__label")}>{children}</div>
           </Component>
