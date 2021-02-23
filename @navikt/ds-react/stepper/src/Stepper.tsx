@@ -10,6 +10,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
     | Array<React.ReactElement<typeof StepperStep>>;
   activeStep: number;
   colorful?: boolean;
+  arrow?: boolean;
 }
 
 export const StepContext = createContext({
@@ -18,7 +19,17 @@ export const StepContext = createContext({
 });
 
 const Stepper = forwardRef<HTMLOListElement, StepperProps>(
-  ({ children, className, activeStep, colorful = false, ...rest }, ref) => {
+  (
+    {
+      children,
+      className,
+      activeStep,
+      colorful = false,
+      arrow = false,
+      ...rest
+    },
+    ref
+  ) => {
     const steps = React.Children.toArray(children);
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
@@ -34,7 +45,13 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
     );
 
     return (
-      <ol ref={ref} className={cl(`navds-stepper`, className)} {...rest}>
+      <ol
+        ref={ref}
+        className={cl(`navds-stepper`, className, {
+          "navds-stepper--arrow": arrow,
+        })}
+        {...rest}
+      >
         <StepContext.Provider
           value={{
             colorful,

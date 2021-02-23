@@ -32,7 +32,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
     },
     ref
   ) => {
-    const getIcon = () => {
+    const getIndicator = () => {
       switch (status) {
         case "finished":
           return <SuccessFilled />;
@@ -41,7 +41,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
         case "inProgress":
           return <ClockFilled />;
         default:
-          return <div />;
+          return index + 1;
       }
     };
 
@@ -59,13 +59,7 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
             disabled={Component === "button" && disabled}
             {...rest}
           >
-            <span
-              className={cl("navds-step__indicator", {
-                /* "navds-step--no-shadow": status !== "none", */
-              })}
-            >
-              {status === "none" ? index + 1 : getIcon()}
-            </span>
+            <span className="navds-step__indicator">{getIndicator()}</span>
             <div className={cl("navds-step__label")}>{children}</div>
           </Component>
         )}

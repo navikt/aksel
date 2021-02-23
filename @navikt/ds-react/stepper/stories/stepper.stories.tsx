@@ -31,9 +31,9 @@ const steps = [
     status: "inProgress",
   },
   {
-    label: "Step 5",
+    label: "Do cupidatat aliqua quis non id deserunt labore officia elit.",
     link: "step5",
-    status: "none",
+    status: "inProgress",
   },
 ];
 
@@ -136,6 +136,7 @@ export const StepperLink = () => {
       }}
     >
       <Stepper
+        arrow
         activeStep={steps.findIndex(
           ({ link }) => link === location.pathname.substring(1)
         )}
@@ -147,6 +148,7 @@ export const StepperLink = () => {
         ))}
       </Stepper>
       <Stepper
+        arrow
         activeStep={steps.findIndex(
           ({ link }) => link === location.pathname.substring(1)
         )}
@@ -163,6 +165,7 @@ export const StepperLink = () => {
         ))}
       </Stepper>
       <Stepper
+        arrow
         colorful
         activeStep={steps.findIndex(
           ({ link }) => link === location.pathname.substring(1)

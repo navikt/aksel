@@ -91,7 +91,8 @@ a.navds-step:focus {
 }
 
 /* prettier-ignore */
-.navds-stepper > li:not(:last-child) > .navds-step::after {
+.navds-stepper > li:not(:last-child) > .navds-step::before,
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:before {
   content: "";
   position: absolute;
 
@@ -108,9 +109,71 @@ a.navds-step:focus {
   z-index: -1;
 }
 
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:before {
+  height: calc(120% + 8px);
+}
+
 /* prettier-ignore */
-.navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active::after {
+.navds-stepper > li:not(:last-child) > .navds-step--inProgress:not(.navds-step--disabled).navds-step.navds-step--active:before {
+  height: calc(55% + 8px - 2px);
+  top: calc(45% + 0.5rem + 2rem + 4px + 2px);
+}
+
+/* prettier-ignore */
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--inProgress.navds-step.navds-step--active:before {
+  height: calc(75% + 8px - 2px);
+  top: calc(45% + 0.5rem + 2rem + 4px + 2px);
+}
+
+/* prettier-ignore */
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step.navds-step--active:before {
+  height: calc(125% + 8px - 2px);
+}
+
+/* prettier-ignore */
+.navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active::before {
   background-color: var(--navds-color-darkgray);
+  border: none;
+}
+
+/* prettier-ignore */
+.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before {
+  content: "";
+  position: absolute;
+
+  /* left padding + indicator width/2 - line width/2 */
+  left: calc(0.5rem + 2rem / 2 - 4px / 2);
+
+  /* top padding + indicator width - line padding */
+  top: calc(0.5rem + 2rem + 4px);
+  width: 4px;
+
+  /* this just works. not sure why */
+  height: 45%;
+  background-color: var(--navds-color-blue-60);
+  z-index: 1;
+}
+
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:after {
+  content: "";
+  border-style: solid;
+  border-width: 0 0 2px 2px;
+  border-color: var(--navds-color-gray-40);
+  height: 10px;
+  width: 10px;
+  transform: rotate(-45deg);
+  position: absolute;
+
+  /* left padding + indicator width/2 - line width/2 */
+  left: calc(0.5rem + 2rem / 2 - 10px / 2);
+
+  /* margin-bottom + content height */
+  top: calc(2.75rem + 120% - 2px);
+}
+
+/* prettier-ignore */
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--active.navds-step:after {
+  top: calc(2.75rem + 120% - 2px);
 }
 
 .navds-stepper > * .navds-step__indicator {
