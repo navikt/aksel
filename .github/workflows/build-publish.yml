@@ -123,7 +123,7 @@ jobs:
       - name: Building Storybook
         run: yarn build-storybook
 
-      - name: Deploy 🚀
+      - name: Deploy to Design.nav.no 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: $NAV_DS_TOKEN
@@ -132,7 +132,7 @@ jobs:
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
 
-      - name: Deploy 🚀
+      - name: Deploy Storybook 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: $NAV_DS_TOKEN
