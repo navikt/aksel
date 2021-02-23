@@ -92,7 +92,7 @@ a.navds-step:focus {
 
 /* prettier-ignore */
 .navds-stepper > li:not(:last-child) > .navds-step::before,
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:before {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step::before {
   content: "";
   position: absolute;
 
@@ -109,24 +109,24 @@ a.navds-step:focus {
   z-index: 1;
 }
 
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:before {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step::before {
   height: calc(120% + 8px);
 }
 
 /* prettier-ignore */
-.navds-stepper > li:not(:last-child) > .navds-step--inProgress:not(.navds-step--disabled).navds-step.navds-step--active:before {
+.navds-stepper > li:not(:last-child) > .navds-step--inProgress:not(.navds-step--disabled).navds-step.navds-step--active::before {
   height: calc(55% + 8px - 2px);
   top: calc(45% + 0.5rem + 2rem + 4px + 2px);
 }
 
 /* prettier-ignore */
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--inProgress.navds-step.navds-step--active:before {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--inProgress.navds-step.navds-step--active::before {
   height: calc(75% + 8px - 2px);
   top: calc(45% + 0.5rem + 2rem + 4px + 2px);
 }
 
 /* prettier-ignore */
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step.navds-step--active:before {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step.navds-step--active::before {
   height: calc(125% + 8px - 2px);
 }
 
@@ -137,8 +137,7 @@ a.navds-step:focus {
 }
 
 /* prettier-ignore */
-.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before,
-.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before {
+.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
   content: "";
   position: absolute;
 
@@ -151,22 +150,17 @@ a.navds-step:focus {
 
   /* this just works. not sure why */
   height: 45%;
-}
-
-/* prettier-ignore */
-.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before {
   background-color: var(--navds-color-darkgray);
 }
 
 /* prettier-ignore */
-a.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before,
-button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before,
-.navds-step--inProgress.navds-step--colorful.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator:before {
-    background-color: var(--navds-color-blue-60);
-
+a.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before,
+button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before,
+.navds-step--inProgress.navds-step--colorful.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
+  background-color: var(--navds-color-blue-60);
 }
 
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step:after {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step::after {
   content: "";
   border-style: solid;
   border-width: 0 0 2px 2px;
@@ -184,7 +178,7 @@ button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--dis
 }
 
 /* prettier-ignore */
-.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--active.navds-step:after {
+.navds-stepper.navds-stepper--arrow > li:last-child > .navds-step--active.navds-step::after {
   top: calc(2.75rem + 120% - 2px);
 }
 
