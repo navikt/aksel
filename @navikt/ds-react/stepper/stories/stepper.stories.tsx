@@ -51,7 +51,7 @@ export const StaticStepper = () => (
       ))}
     </Stepper>
 
-    <Stepper activeStep={0}>
+    <Stepper activeStep={3}>
       {steps.map(({ label, status }, index) => (
         <StepperStep key={uuid()} status={status as any}>
           {label}
@@ -59,7 +59,7 @@ export const StaticStepper = () => (
       ))}
     </Stepper>
 
-    <Stepper activeStep={0} colorful>
+    <Stepper activeStep={3} colorful>
       {steps.map(({ label, status }, index) => (
         <StepperStep key={uuid()} status={status as any}>
           {label}
