@@ -10,8 +10,6 @@
 }
 
 .navds-copy-to-clipboard:hover {
-  /* background-color: var(--navds-color-gray-10); */
-  /* padding: calc(0.5rem - 2px) */
   border-color: var(--navds-color-action-default);
   color: var(--navds-color-action-default);
 }
@@ -21,13 +19,8 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-/* .navds-copy-to-clipboard:active {
-  opacity: 0.5;
-} */
-
 .navds-copy-to-clipboard svg {
   width: 1.5em;
-  /* color: var(--navds-color-text-primary); */
   stroke-width: 1.4;
 }
 
