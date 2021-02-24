@@ -47,14 +47,13 @@ const StepperStep: OverridableComponent<StepperStepProps> = forwardRef(
 
     return (
       <StepContext.Consumer>
-        {({ colorful, activeStep }) => (
+        {({ activeStep }) => (
           <Component
             ref={ref}
             className={cl(className, `navds-step`, `navds-step--${status}`, {
               "navds-step--disabled": disabled,
               "navds-step--active": activeStep === index,
               "navds-step--before-active": index < activeStep,
-              "navds-step--colorful": colorful,
             })}
             disabled={Component === "button" && disabled}
             {...rest}

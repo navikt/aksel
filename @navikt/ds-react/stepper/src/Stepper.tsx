@@ -14,7 +14,6 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
 }
 
 export const StepContext = createContext({
-  colorful: false,
   activeStep: 0,
 });
 
@@ -36,8 +35,8 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
         return (
           <li key={uuid()}>
             {React.cloneElement(step, {
-              ...{ index, last: steps.length === index + 1 },
               ...step.props,
+              ...{ index, last: steps.length === index + 1 },
             })}
           </li>
         );
@@ -49,12 +48,12 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
         ref={ref}
         className={cl(`navds-stepper`, className, {
           "navds-stepper--arrow": arrow,
+          "navds-stepper--colorful": colorful,
         })}
         {...rest}
       >
         <StepContext.Provider
           value={{
-            colorful,
             activeStep,
           }}
         >

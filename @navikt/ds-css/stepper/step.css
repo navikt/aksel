@@ -13,12 +13,12 @@
   line-height: 1.5;
 }
 
-.navds-step--inProgress.navds-step--colorful > * svg {
+.navds-stepper--colorful > * .navds-step--inProgress > * svg {
   color: var(--navds-color-blue-60);
   background-color: #ffffff;
 }
 
-.navds-step--warning.navds-step--colorful > * svg {
+.navds-stepper--colorful > * .navds-step--warning > * svg {
   color: var(--navds-color-orange-40);
   background: radial-gradient(
     circle,
@@ -28,7 +28,7 @@
   );
 }
 
-.navds-step--finished.navds-step--colorful > * svg {
+.navds-stepper--colorful > * .navds-step--finished > * svg {
   color: var(--navds-color-green-50);
   background-color: #ffffff;
 }
@@ -45,7 +45,10 @@
   box-shadow: none;
 }
 
-.navds-step.navds-step--colorful.navds-step--warning > .navds-step__indicator {
+.navds-stepper--colorful
+  > *
+  .navds-step.navds-step--warning
+  > .navds-step__indicator {
   box-shadow: none;
   background: none;
 }
@@ -83,7 +86,6 @@ a.navds-step:focus {
   background-color: #ffffff;
 }
 
-/* prettier-ignore */
 .navds-stepper > li:not(:last-child) > .navds-step::before,
 .navds-stepper--arrow > li:last-child > .navds-step::before {
   content: "";
@@ -154,7 +156,7 @@ a.navds-step:focus {
 /* prettier-ignore */
 a.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before,
 button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before,
-.navds-step--inProgress.navds-step--colorful.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
+.navds-stepper--colorful > * .navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--disabled) > .navds-step__indicator::before {
   background-color: var(--navds-color-blue-60);
 }
 
@@ -167,9 +169,7 @@ button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--dis
   width: 10px;
   transform: rotate(-45deg);
   position: absolute;
-
   left: calc(0.5rem + 2rem / 2 - 10px / 2);
-
   top: calc(2.75rem + 100% - 2px);
   border-radius: 2px;
 }
@@ -243,6 +243,7 @@ a.navds-step:hover:not(.navds-step--disabled),
 button.navds-step:hover:not(.navds-step--disabled) {
   border: 2px solid var(--navds-color-blue-50);
   text-decoration: none;
+  cursor: pointer;
 }
 
 /* prettier-ignore */
