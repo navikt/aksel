@@ -15,7 +15,7 @@
 
 .navds-stepper--colorful > * .navds-step--inProgress > * svg {
   color: var(--navds-color-blue-60);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .navds-stepper--colorful > * .navds-step--warning > * svg {
@@ -30,32 +30,30 @@
 
 .navds-stepper--colorful > * .navds-step--finished > * svg {
   color: var(--navds-color-green-50);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .navds-step--active.navds-step--inProgress > * svg,
 .navds-step--active.navds-step--finished > * svg,
 .navds-step--active.navds-step--warning > * svg {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .navds-step--finished > .navds-step__indicator,
 .navds-step--inProgress > .navds-step__indicator {
-  background-color: #ffffff;
+  background-color: #fff;
   box-shadow: none;
 }
 
-.navds-stepper--colorful
-  > *
-  .navds-step.navds-step--warning
-  > .navds-step__indicator {
+/* prettier-ignore */
+.navds-stepper--colorful > * .navds-step.navds-step--warning > .navds-step__indicator {
   box-shadow: none;
   background: none;
 }
 
 .navds-step > * svg {
   color: var(--navds-color-darkgray);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 a.navds-step > * svg,
@@ -83,7 +81,7 @@ a.navds-step:focus {
   align-items: center;
   border-radius: 1rem;
   box-shadow: 0 0 0 2px var(--navds-color-darkgray) inset;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .navds-stepper > li:not(:last-child) > .navds-step::before,
@@ -186,7 +184,7 @@ button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--dis
 .navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-darkgray);
   box-shadow: none;
-  color: #ffffff;
+  color: #fff;
 }
 
 button.navds-step > * .navds-step__indicator,
@@ -201,7 +199,7 @@ button.navds-step.navds-step--active > .navds-step__indicator,
 a.navds-step.navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-blue-50);
   box-shadow: 0 0 0 2px var(--navds-color-blue-50) inset;
-  color: #ffffff;
+  color: #fff;
 }
 
 .navds-stepper > * .navds-step__label {
@@ -227,7 +225,7 @@ a.navds-step {
 .navds-step--disabled.navds-step--warning > * svg,
 .navds-step--disabled.navds-step--finished > * svg {
   color: var(--navds-color-disabled);
-  background: #ffffff;
+  background: #fff;
 }
 
 .navds-step--disabled > .navds-step__label {
@@ -255,7 +253,7 @@ a.navds-step:hover:not(.navds-step--disabled) {
 .navds-step--disabled > .navds-step__indicator {
   box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
   color: var(--navds-color-gray-40);
-  background-color: #ffffff;
+  background-color: #fff;
 }
 
 .navds-step.navds-step--disabled > .navds-step__indicator {
@@ -265,7 +263,7 @@ a.navds-step:hover:not(.navds-step--disabled) {
 
 .navds-step.navds-step--disabled.navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-gray-40);
-  color: #ffffff;
+  color: #fff;
   box-shadow: none;
 }
 
