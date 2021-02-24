@@ -1,15 +1,9 @@
 /* Step */
 .navds-stepper > * .navds-step {
-  flex: 1 0;
-  position: relative;
-  margin: 0;
-  overflow: visible;
-  box-sizing: border-box;
   padding: 0.5rem;
   margin-bottom: 2.75rem;
   border: 2px solid transparent;
   display: flex;
-  align-items: flex-start;
 }
 
 .navds-step {
@@ -20,12 +14,12 @@
 }
 
 .navds-step--inProgress.navds-step--colorful > * svg {
-  color: #0c5ea8;
-  background-color: white;
+  color: var(--navds-color-blue-60);
+  background-color: #ffffff;
 }
 
 .navds-step--warning.navds-step--colorful > * svg {
-  color: #ffa733;
+  color: var(--navds-color-orange-40);
   background: radial-gradient(
     circle,
     var(--navds-color-darkgray) 50%,
@@ -35,19 +29,19 @@
 }
 
 .navds-step--finished.navds-step--colorful > * svg {
-  color: #06893a;
-  background-color: white;
+  color: var(--navds-color-green-50);
+  background-color: #ffffff;
 }
 
 .navds-step--active.navds-step--inProgress > * svg,
 .navds-step--active.navds-step--finished > * svg,
 .navds-step--active.navds-step--warning > * svg {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .navds-step--finished > .navds-step__indicator,
 .navds-step--inProgress > .navds-step__indicator {
-  background-color: white;
+  background-color: #ffffff;
   box-shadow: none;
 }
 
@@ -58,12 +52,12 @@
 
 .navds-step > * svg {
   color: var(--navds-color-darkgray);
-  background-color: white;
+  background-color: #ffffff;
 }
 
 a.navds-step > * svg,
 button.navds-step > * svg {
-  color: #0067c5;
+  color: var(--navds-color-blue-50);
 }
 
 button.navds-step.navds-step--active,
@@ -86,7 +80,7 @@ a.navds-step:focus {
   align-items: center;
   border-radius: 1rem;
   box-shadow: 0 0 0 2px var(--navds-color-darkgray) inset;
-  background-color: white;
+  background-color: #ffffff;
 }
 
 /* prettier-ignore */
@@ -109,10 +103,6 @@ a.navds-step:focus {
   border-radius: 0.5rem;
 }
 
-/* .navds-stepper.navds-stepper--arrow > li:last-child > .navds-step::before {
-  height: calc(175% + 8px);
-} */
-
 /* prettier-ignore */
 .navds-stepper > li:not(:last-child) > .navds-step--inProgress:not(.navds-step--disabled).navds-step.navds-step--active::before {
   height: calc(65% + 8px - 2px);
@@ -132,7 +122,6 @@ a.navds-step:focus {
 /* prettier-ignore */
 .navds-stepper > li:not(:last-child) > .navds-step.navds-step--before-active::before {
   background-color: var(--navds-color-darkgray);
-  border: none;
 }
 
 /* prettier-ignore */
@@ -197,7 +186,7 @@ button.navds-step--inProgress.navds-step.navds-step--active:not(.navds-step--dis
 .navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-darkgray);
   box-shadow: none;
-  color: white;
+  color: #ffffff;
 }
 
 button.navds-step > * .navds-step__indicator,
@@ -210,9 +199,9 @@ a.navds-step > .navds-step__indicator {
 
 button.navds-step.navds-step--active > .navds-step__indicator,
 a.navds-step.navds-step--active > .navds-step__indicator {
-  background-color: #0067c5;
-  box-shadow: 0 0 0 2px #0067c5 inset;
-  color: white;
+  background-color: var(--navds-color-blue-50);
+  box-shadow: 0 0 0 2px var(--navds-color-blue-50) inset;
+  color: #ffffff;
 }
 
 .navds-stepper > * .navds-step__label {
@@ -225,7 +214,7 @@ button.navds-step,
 a.navds-step {
   background: none;
   text-decoration: underline;
-  color: #0067c5;
+  color: var(--navds-color-blue-50);
   text-align: left;
 }
 
@@ -237,8 +226,8 @@ a.navds-step {
 .navds-step--disabled.navds-step--inProgress > * svg,
 .navds-step--disabled.navds-step--warning > * svg,
 .navds-step--disabled.navds-step--finished > * svg {
-  color: #b7b1a9;
-  background: white;
+  color: var(--navds-color-disabled);
+  background: #ffffff;
 }
 
 .navds-step--disabled > .navds-step__label {
@@ -252,7 +241,7 @@ a.navds-step {
 
 a.navds-step:hover:not(.navds-step--disabled),
 button.navds-step:hover:not(.navds-step--disabled) {
-  border: 2px solid #0067c5;
+  border: 2px solid var(--navds-color-blue-50);
   text-decoration: none;
 }
 
@@ -265,7 +254,7 @@ a.navds-step:hover:not(.navds-step--disabled) {
 .navds-step--disabled > .navds-step__indicator {
   box-shadow: 0 0 0 2px var(--navds-color-gray-40) inset;
   color: var(--navds-color-gray-40);
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .navds-step.navds-step--disabled > .navds-step__indicator {
@@ -275,7 +264,7 @@ a.navds-step:hover:not(.navds-step--disabled) {
 
 .navds-step.navds-step--disabled.navds-step--active > .navds-step__indicator {
   background-color: var(--navds-color-gray-40);
-  color: white;
+  color: #ffffff;
   box-shadow: none;
 }
 
@@ -285,5 +274,5 @@ a.navds-step.navds-step--disabled {
 }
 
 .navds-step--disabled.navds-step--active > .navds-step__label {
-  color: #b7b1a9;
+  color: var(--navds-color-disabled);
 }
