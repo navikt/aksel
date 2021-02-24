@@ -59,6 +59,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           onClose={() => setOpenPopover(false)}
           size="small"
           placement="bottom-start"
+          arrow={false}
         >
           {label} er kopiert
         </Popover>
