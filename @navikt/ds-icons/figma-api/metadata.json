@@ -507,7 +507,7 @@
     "name": "DialogDots",
     "description": "",
     "created_at": "2020-07-01T10:37:43.133Z",
-    "updated_at": "2021-01-28T14:18:12.403Z",
+    "updated_at": "2021-02-23T08:58:14.310Z",
     "pageName": "Communication",
     "visible": true
   },
@@ -915,7 +915,7 @@
     "name": "Filter",
     "description": "",
     "created_at": "2020-07-01T10:37:42.891Z",
-    "updated_at": "2020-12-08T09:58:27.629Z",
+    "updated_at": "2021-02-23T08:58:14.284Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -923,7 +923,7 @@
     "name": "FilterFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.605Z",
-    "updated_at": "2021-01-28T14:51:50.930Z",
+    "updated_at": "2021-02-23T08:58:14.297Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -1235,7 +1235,7 @@
     "name": "Laptop",
     "description": "",
     "created_at": "2020-07-01T10:37:42.660Z",
-    "updated_at": "2020-07-01T10:37:42.660Z",
+    "updated_at": "2021-02-09T13:20:24.925Z",
     "pageName": "Device",
     "visible": true
   },
@@ -1467,7 +1467,7 @@
     "name": "MonitorFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.526Z",
-    "updated_at": "2021-01-25T10:37:34.902Z",
+    "updated_at": "2021-02-23T18:47:13.465Z",
     "pageName": "Device",
     "visible": true
   },
@@ -1507,7 +1507,7 @@
     "name": "Neutral",
     "description": "",
     "created_at": "2020-07-01T10:37:42.832Z",
-    "updated_at": "2020-11-24T11:50:38.568Z",
+    "updated_at": "2021-02-04T13:05:20.928Z",
     "pageName": "Gender",
     "visible": true
   },
@@ -1579,7 +1579,7 @@
     "name": "Office2Filled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.393Z",
-    "updated_at": "2021-01-30T16:27:27.156Z",
+    "updated_at": "2021-02-23T08:58:14.273Z",
     "pageName": "Building",
     "visible": true
   },
@@ -1699,7 +1699,7 @@
     "name": "Plane",
     "description": "",
     "created_at": "2020-07-01T10:37:43.153Z",
-    "updated_at": "2020-07-01T10:37:43.153Z",
+    "updated_at": "2021-02-04T08:50:51.279Z",
     "pageName": "International",
     "visible": true
   },
@@ -1763,7 +1763,7 @@
     "name": "Receipt",
     "description": "",
     "created_at": "2020-07-01T10:37:42.904Z",
-    "updated_at": "2020-07-01T10:37:42.904Z",
+    "updated_at": "2021-02-22T11:08:16.519Z",
     "pageName": "Money",
     "visible": true
   },
@@ -1955,7 +1955,7 @@
     "name": "Settings",
     "description": "",
     "created_at": "2020-07-01T10:37:43.062Z",
-    "updated_at": "2020-07-01T10:37:43.062Z",
+    "updated_at": "2021-02-04T10:27:43.426Z",
     "pageName": "Settings",
     "visible": true
   },
@@ -2027,7 +2027,7 @@
     "name": "SightFilled",
     "description": "",
     "created_at": "2021-01-28T14:00:38.604Z",
-    "updated_at": "2021-01-28T14:00:38.604Z",
+    "updated_at": "2021-02-23T18:47:13.472Z",
     "pageName": "Fyrstikkalleen",
     "visible": true
   },
@@ -2163,7 +2163,7 @@
     "name": "System",
     "description": "",
     "created_at": "2020-07-01T10:37:42.766Z",
-    "updated_at": "2020-07-01T10:37:42.766Z",
+    "updated_at": "2021-02-04T12:57:42.991Z",
     "pageName": "Settings",
     "visible": true
   },

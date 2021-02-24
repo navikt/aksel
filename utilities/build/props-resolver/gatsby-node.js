@@ -32,7 +32,10 @@ const flattenProps = (props) =>
     ? Object.entries(props).map(([key, value]) => ({
         ...value,
         name: key,
-        defaultValue: JSON.stringify(value.defaultValue),
+        defaultValue:
+          value.defaultValue && value.defaultValue.value
+            ? { value: JSON.stringify(value.defaultValue.value) }
+            : null,
       }))
     : [];
 
@@ -84,17 +87,17 @@ exports.createSchemaCustomization = ({ actions }) => {
       name: String
       raw: String
     }
-    type defaultValue @noInfer {
+    type DefaultValue @noInfer {
       value: String
     }
-    type PropsType @noInfer {
+    type PropsType @dontInfer {
       beta: Boolean
       name: String!
       description: String
       required: Boolean
       type: TypeType
       tsType: TsType
-      defaultValue: defaultValue
+      defaultValue: DefaultValue
     }
     type ComponentMetadata implements Node @noInfer {
       name: String!
