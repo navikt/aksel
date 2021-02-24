@@ -2608,6 +2608,14 @@
     "@navikt/ds-tokens" "0.1.0-beta.1"
     normalize.css "^8.0.1"
 
+"@navikt/ds-css@0.1.0-beta.6":
+  version "0.1.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-0.1.0-beta.6.tgz#c5402322a3013138457702857b70901a99e526e5"
+  integrity sha512-ZFJpAhSm1qEHhgFb+j+HBU8UHubixGEx9nNGCyzCsIjx0xPGX9+oOZR1UbVfKCQXghEcwmp/2VMo4NQ3T7gZVA==
+  dependencies:
+    "@navikt/ds-tokens" "0.1.0-beta.6"
+    normalize.css "^8.0.1"
+
 "@navikt/ds-tokens@0.1.0-beta.1":
   version "0.1.0-beta.1"
   resolved "https://registry.yarnpkg.com/@navikt/ds-tokens/-/ds-tokens-0.1.0-beta.1.tgz#23d861897ef2c9e3d69cf77760a5d2eb854c9646"

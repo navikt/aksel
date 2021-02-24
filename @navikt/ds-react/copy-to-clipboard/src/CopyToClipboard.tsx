@@ -1,63 +1,68 @@
 import * as React from "react";
 import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { Files } from "@navikt/ds-icons";
+import { Popover } from "../../index";
+import copy from "copy-to-clipboard";
 import "@navikt/ds-css/baseline/utility.css";
-import "./style.css";
+import "@navikt/ds-css/copy-to-clipboard/index.css";
+import mergeRefs from "react-merge-refs";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
-  /** Verdi som skal kopieres */
-  value: string;
-  /** Beskrivelse av verdien, feks "personnummer", "navn", "epost" etc. */
+  /**
+   * Text to be copied to clipboard
+   */
+  text: string;
+  /**
+   * Description of text, examples: "personnummer", "navn", "epost" etc.
+   */
   label: string;
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
-  (props, ref) => {
-    const { value, label, className, ...rest } = props;
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const [showSuccess, setShowSuccess] = useState(false);
+  ({ text, label, className, ...rest }, ref) => {
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    const mergedRef = mergeRefs([buttonRef, ref]);
+    const timeoutRef = useRef<NodeJS.Timeout>();
+    const [openPopover, setOpenPopover] = useState(false);
 
     useEffect(() => {
-      const timeout = setTimeout(() => setShowSuccess(false), 3000);
-      return () => clearTimeout(timeout);
-    }, [showSuccess]);
+      if (openPopover) {
+        timeoutRef.current = setTimeout(() => setOpenPopover(false), 3000);
+        return () => timeoutRef.current && clearTimeout(timeoutRef.current);
+      }
+    }, [openPopover]);
 
-    const copyToClipboard = (event: React.MouseEvent) => {
-      event.stopPropagation();
-      textAreaRef.current?.select();
-      document.execCommand("copy");
-      setShowSuccess(true);
+    const title = `Kopier ${label} (${text})`;
+
+    const handleClick = () => {
+      copy(text);
+      setOpenPopover(true);
     };
 
-    const title = `Kopier ${label} (${value})`;
-
     return (
-      <span className={`${className} navds-copyToClipboard-wrapper`}>
+      <>
         <button
-          ref={ref}
+          ref={mergedRef}
           title={title}
           {...rest}
-          className="navds-copyToClipboard-button"
-          onClick={copyToClipboard}
+          className="navds-copy-to-clipboard"
+          onClick={handleClick}
         >
           <Files />
           <span className="sr-only">{title}</span>
         </button>
-        {showSuccess && (
-          <span role="alert" className="navds-copyToClipboard-success">
-            {label} er kopiert
-          </span>
-        )}
-        <textarea
-          className="sr-only"
-          tabIndex={-1}
-          aria-hidden={true}
-          ref={textAreaRef}
-          value={value}
-          readOnly
-        />
-      </span>
+        <Popover
+          role="alert"
+          anchorEl={buttonRef.current}
+          open={openPopover}
+          onClose={() => setOpenPopover(false)}
+          size="small"
+          placement="bottom-start"
+        >
+          {label} er kopiert
+        </Popover>
+      </>
     );
   }
 );
