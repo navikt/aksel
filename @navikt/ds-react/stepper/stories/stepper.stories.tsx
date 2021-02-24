@@ -45,13 +45,13 @@ export const StaticStepper = () => (
       rowGap: "2rem",
     }}
   >
-    <Stepper activeStep={0}>
+    <Stepper activeStep={0} arrow>
       {steps.map(({ label }, index) => (
         <StepperStep key={uuid()}>{label}</StepperStep>
       ))}
     </Stepper>
 
-    <Stepper activeStep={3}>
+    <Stepper activeStep={3} arrow>
       {steps.map(({ label, status }, index) => (
         <StepperStep key={uuid()} status={status as any}>
           {label}
@@ -59,7 +59,7 @@ export const StaticStepper = () => (
       ))}
     </Stepper>
 
-    <Stepper activeStep={3} colorful>
+    <Stepper activeStep={3} colorful arrow>
       {steps.map(({ label, status }, index) => (
         <StepperStep key={uuid()} status={status as any}>
           {label}
