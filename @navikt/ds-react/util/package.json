@@ -7,7 +7,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
-    "@navikt/ds-css": "0.1.0-beta.1",
+    "@navikt/ds-css": "0.1.0-beta.6",
     "classnames": "^2.2.6",
     "uuid": "^8.3.2"
   },
