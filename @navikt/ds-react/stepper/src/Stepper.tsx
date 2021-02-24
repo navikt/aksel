@@ -3,6 +3,7 @@ import cl from "classnames";
 import StepperStep from "./Step";
 import "@navikt/ds-css/stepper/index.css";
 import { uuid } from "../../util/src";
+import { afterMain } from "@popperjs/core";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   children:
@@ -33,7 +34,7 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
         return (
-          <li key={uuid()}>
+          <li key={uuid()} aria-current={index === activeStep && "step"}>
             {React.cloneElement(step, {
               ...step.props,
               ...{ index, last: steps.length === index + 1 },
