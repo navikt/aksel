@@ -1,4 +1,3 @@
-import { FileUploaderProps } from "./file-uploader/src/FileUploader";
 export { default as Accordion, AccordionProps } from "./accordion/src/index";
 export { default as Alert, AlertProps } from "./alert/src/index";
 export { default as Button, ButtonProps } from "./button/src/index";
