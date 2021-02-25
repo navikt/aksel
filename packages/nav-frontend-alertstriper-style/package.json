@@ -17,13 +17,13 @@
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-ikoner-assets": "^2.0.10",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.2",
     "nav-frontend-typografi-style": "^1.0.34"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",
     "nav-frontend-ikoner-assets": "^2.0.9",
-    "nav-frontend-paneler-style": "^0.3.34",
+    "nav-frontend-paneler-style": "^1.0.2",
     "nav-frontend-typografi-style": "^1.0.33"
   }
 }
