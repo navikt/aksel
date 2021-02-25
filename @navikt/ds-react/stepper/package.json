@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@navikt/ds-css": "0.1.0-beta.6",
+    "@navikt/ds-icons": "0.1.6",
     "classnames": "^2.2.6"
   },
   "peerDependencies": {

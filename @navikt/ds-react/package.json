@@ -34,7 +34,8 @@
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.12.1",
-    "react-popper": "^2.2.4"
+    "react-popper": "^2.2.4",
+    "uuid": "^8.3.2"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",
