@@ -131,14 +131,3 @@ jobs:
           FOLDER: website/public
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-
-      - name: Deploy Storybook 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
-        with:
-          GITHUB_TOKEN: $NAV_DS_TOKEN
-          BRANCH: gh-pages
-          FOLDER: storybook-static
-          REPOSITORY-NAME: navikt/designsystemet
-          DRY-RUN: true
-        env:
-          NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
