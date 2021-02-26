@@ -135,7 +135,7 @@ jobs:
       - name: Deploy storybook
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: $NAV_DS_TOKEN
+          personal_token: $NAV_DS_TOKEN
           external_repository: navikt/designsystemet
           publish_dir: ./storybook-static
         env: 
