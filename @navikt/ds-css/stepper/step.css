@@ -1,16 +1,13 @@
 /* Step */
-.navds-stepper > * .navds-step {
-  padding: 0.5rem;
-  margin-bottom: 2.75rem;
-  border: 2px solid transparent;
-  display: flex;
-}
-
 .navds-step {
   border: 2px solid transparent;
   position: relative;
   text-align: left;
   line-height: 1.5;
+  padding: 0.5rem;
+  margin-bottom: 2.75rem;
+  border: 2px solid transparent;
+  display: flex;
 }
 
 .navds-stepper--colorful > * .navds-step--inProgress > * svg {
