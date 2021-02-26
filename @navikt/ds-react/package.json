@@ -4,6 +4,7 @@
   "private": true,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
+  "private": "true",
   "keywords": [
     "react",
     "typescript",

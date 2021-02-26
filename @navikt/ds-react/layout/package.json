@@ -1,6 +1,7 @@
 {
   "name": "@navikt/ds-react-layout",
   "author": "NAV Designsystem team",
+  "private": "true",
   "license": "MIT",
   "repository": {
     "type": "git",
