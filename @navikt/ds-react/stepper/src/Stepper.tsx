@@ -1,7 +1,6 @@
 import "@navikt/ds-css/stepper/index.css";
 import cl from "classnames";
 import React, { createContext, forwardRef } from "react";
-import { uuid } from "../../util/src";
 import StepperStep from "./Step";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
