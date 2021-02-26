@@ -1,10 +1,9 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
-
 import { Expand } from "@navikt/ds-icons";
 import "@navikt/ds-css/accordion/index.css";
-import { guid } from "nav-frontend-js-utils";
+import { v4 as uuidv4 } from "uuid";
 
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -28,8 +27,8 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     },
     ref
   ) => {
-    const contentId = useRef(guid());
-    const buttonId = useRef(guid());
+    const contentId = useRef(uuidv4());
+    const buttonId = useRef(uuidv4());
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
 
     useEffect(() => {
