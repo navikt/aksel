@@ -1,3 +1,28 @@
 .navds-file-uploader {
   background: none;
 }
+
+.navds-file-uploader input {
+  opacity: 0;
+  width: 0;
+}
+
+.navds-file-view {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.navds-file-view-row {
+  padding-left: 1rem;
+  background-color: #f4f4f4;
+  min-height: 3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navds-file-view-row:last-child {
+  margin-bottom: 0;
+}
