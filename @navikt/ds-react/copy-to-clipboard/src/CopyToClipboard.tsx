@@ -20,7 +20,7 @@ export interface CopyToClipboardProps
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
-  ({ text, label, className, ...rest }, ref) => {
+  ({ children, text, label, className, ...rest }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
     const timeoutRef = useRef<NodeJS.Timeout>();
@@ -49,8 +49,8 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           className="navds-copy-to-clipboard"
           onClick={handleClick}
         >
+          {children ? children : <span className="sr-only">{title}</span>}
           <Files />
-          <span className="sr-only">{title}</span>
         </button>
         <Popover
           role="alert"

@@ -16,14 +16,16 @@ export const All = () => {
 
       <h2>Sammen med tekst</h2>
       <p>
-        Her kan du kopiere {label}
-        <CopyToClipboard label={label} text={text} />
+        <CopyToClipboard label={label} text={text}>
+          Kopier tekst
+        </CopyToClipboard>
       </p>
 
       <h2>Tilpasser seg fontstørrelse</h2>
       <p style={{ fontSize: "0.8rem" }}>
-        Her kan du kopiere {label}
-        <CopyToClipboard label={label} text={text} />
+        <CopyToClipboard label={label} text={text}>
+          Kopier tekst
+        </CopyToClipboard>
       </p>
     </div>
   );
