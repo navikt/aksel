@@ -30,6 +30,7 @@
     "website",
     "packages/*",
     "@navikt/ds-css",
+    "@navikt/ds-css/*",
     "@navikt/ds-react",
     "@navikt/ds-icons",
     "@navikt/ds-tokens",
