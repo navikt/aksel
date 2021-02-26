@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ekspanderbartpanel-style",
-  "version": "1.0.40",
+  "version": "1.0.41",
   "main": "src/index.less",
   "license": "MIT",
   "files": [

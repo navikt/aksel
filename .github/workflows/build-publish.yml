@@ -120,12 +120,23 @@ jobs:
         run: yarn boot
       - name: Building Gatsby
         run: yarn build:gatsby
+      - name: Building Storybook
+        run: yarn build-storybook
 
-      - name: Deploy 🚀
+      - name: Deploy to Design.nav.no 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: $NAV_DS_TOKEN
           BRANCH: gh-pages
           FOLDER: website/public
+        env:
+          NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
+
+      - name: Deploy storybook
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: $NAV_DS_TOKEN
+          external_repository: navikt/designsystemet
+          publish_dir: ./storybook-static
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
