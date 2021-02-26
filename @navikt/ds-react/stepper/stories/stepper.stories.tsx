@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Stepper, StepperStep } from "../src/index";
 import { HashRouter as Router, Link, useLocation } from "react-router-dom";
-import { uuid } from "../../util/src";
 
 export default {
   title: "@navikt/stepper",
@@ -47,13 +46,13 @@ export const StaticStepper = () => (
   >
     <Stepper activeStep={0} arrow>
       {steps.map(({ label }, index) => (
-        <StepperStep key={uuid()}>{label}</StepperStep>
+        <StepperStep key={label + index}>{label}</StepperStep>
       ))}
     </Stepper>
 
     <Stepper activeStep={3} arrow>
       {steps.map(({ label, status }, index) => (
-        <StepperStep key={uuid()} status={status as any}>
+        <StepperStep key={label + index} status={status as any}>
           {label}
         </StepperStep>
       ))}
@@ -61,7 +60,7 @@ export const StaticStepper = () => (
 
     <Stepper activeStep={3} colorful arrow>
       {steps.map(({ label, status }, index) => (
-        <StepperStep key={uuid()} status={status as any}>
+        <StepperStep key={label + index} status={status as any}>
           {label}
         </StepperStep>
       ))}
@@ -69,7 +68,7 @@ export const StaticStepper = () => (
 
     <Stepper activeStep={3} colorful arrow>
       {steps.map(({ label, status }, index) => (
-        <StepperStep key={uuid()} status={status as any}>
+        <StepperStep key={label + index} status={status as any}>
           {label}
         </StepperStep>
       ))}
@@ -91,7 +90,7 @@ export const StepperButton = () => {
       <Stepper activeStep={activeStep}>
         {steps.map(({ label, disabled }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             component="button"
             onClick={() => setActiveStep(index)}
             disabled={!!disabled}
@@ -104,7 +103,7 @@ export const StepperButton = () => {
       <Stepper activeStep={activeStep}>
         {steps.map(({ label, disabled, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
@@ -118,7 +117,7 @@ export const StepperButton = () => {
       <Stepper activeStep={activeStep} colorful>
         {steps.map(({ label, disabled, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
@@ -132,7 +131,7 @@ export const StepperButton = () => {
       <Stepper activeStep={activeStep} colorful arrow>
         {steps.map(({ label, disabled, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component="button"
             onClick={() => setActiveStep(index)}
@@ -162,8 +161,8 @@ export const StepperLink = () => {
           ({ link }) => link === location.pathname.substring(1)
         )}
       >
-        {steps.map(({ label, link }) => (
-          <StepperStep key={uuid()} component={Link} to={link}>
+        {steps.map(({ label, link }, index) => (
+          <StepperStep key={label + index} component={Link} to={link}>
             {label}
           </StepperStep>
         ))}
@@ -173,9 +172,9 @@ export const StepperLink = () => {
           ({ link }) => link === location.pathname.substring(1)
         )}
       >
-        {steps.map(({ label, link, status }) => (
+        {steps.map(({ label, link, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component={Link}
             to={link}
@@ -190,9 +189,9 @@ export const StepperLink = () => {
           ({ link }) => link === location.pathname.substring(1)
         )}
       >
-        {steps.map(({ label, link, status }) => (
+        {steps.map(({ label, link, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component={Link}
             to={link}
@@ -209,9 +208,9 @@ export const StepperLink = () => {
           ({ link }) => link === location.pathname.substring(1)
         )}
       >
-        {steps.map(({ label, link, status }) => (
+        {steps.map(({ label, link, status }, index) => (
           <StepperStep
-            key={uuid()}
+            key={label + index}
             status={status as any}
             component={Link}
             to={link}

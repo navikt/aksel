@@ -33,7 +33,7 @@ const Stepper = forwardRef<HTMLOListElement, StepperProps>(
     const stepsWithIndex = steps.map(
       (step: React.ReactElement<typeof StepperStep>, index) => {
         return (
-          <li key={uuid()} aria-current={index === activeStep && "step"}>
+          <li key={index} aria-current={index === activeStep && "step"}>
             {React.cloneElement(step, {
               ...step.props,
               ...{ index, last: steps.length === index + 1 },
