@@ -6,6 +6,7 @@
   border-radius: 2px;
   margin: 0 0.25rem;
   position: relative;
+  cursor: copy;
 }
 
 .navds-copy-to-clipboard:hover {
