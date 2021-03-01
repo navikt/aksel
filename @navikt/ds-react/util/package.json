@@ -6,10 +6,6 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
-  "dependencies": {
-    "@navikt/ds-css": "0.1.0",
-    "classnames": "^2.2.6"
-  },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
   }
