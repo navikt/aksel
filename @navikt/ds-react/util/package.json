@@ -1,0 +1,12 @@
+{
+  "name": "@navikt/ds-react-util",
+  "author": "NAV Designsystem team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0"
+  }
+}

@@ -1,13 +1,11 @@
-export { default as Accordion, AccordionProps } from "./accordion/src/index";
-export { default as Alert, AlertProps } from "./alert/src/index";
-export { default as Button, ButtonProps } from "./button/src/index";
-export { default as Link, LinkProps } from "./link/src/index";
-export { default as Modal, ModalProps } from "./modal/src/index";
-export { default as Popover, PopoverProps } from "./popover/src/index";
-export { default as Tag, TagProps } from "./tag/src/index";
-export { Grid, Cell, GridProps, CellProps } from "./grid/src/index";
-export { Layout, LayoutProps, SectionProps } from "./layout/src/index";
-
+export { AccordionProps, default as Accordion } from "./accordion/src/index";
+export { AlertProps, default as Alert } from "./alert/src/index";
+export { ButtonProps, default as Button } from "./button/src/index";
+export {
+  ContentContainer,
+  ContentContainerProps,
+} from "./content-container/src/index";
+export { Cell, CellProps, Grid, GridProps } from "./grid/src/index";
 export {
   InternalHeader,
   InternalHeaderProps,
@@ -16,17 +14,17 @@ export {
   InternalHeaderUser,
   InternalHeaderUserProps,
 } from "./internal-header/src/index";
-
+export { Layout, LayoutProps, SectionProps } from "./layout/src/index";
+export { default as Link, LinkProps } from "./link/src/index";
+export { default as Modal, ModalProps } from "./modal/src/index";
+export { default as Popover, PopoverProps } from "./popover/src/index";
+export { default as Tag, TagProps } from "./tag/src/index";
 export {
   Heading,
-  Text,
-  Paragraph,
-  Lead,
   HeadingProps,
+  Lead,
+  Paragraph,
+  Text,
   TextProps,
 } from "./typography/src/index";
-
-export {
-  ContentContainer,
-  ContentContainerProps,
-} from "./content-container/src/index";
+export { OverridableComponent } from "./util/src/index";
