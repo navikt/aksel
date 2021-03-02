@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst",
-  "version": "2.0.55",
+  "version": "2.0.56",
   "main": "lib/hjelpetekst.js",
   "types": "lib/hjelpetekst.d.ts",
   "license": "MIT",
@@ -32,7 +32,7 @@
     "nav-frontend-hjelpetekst-style": "^2.0.42",
     "nav-frontend-ikoner-assets": "^2.0.10",
     "nav-frontend-js-utils": "^1.0.17",
-    "nav-frontend-popover": "^1.0.2",
+    "nav-frontend-popover": "^1.0.3",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },
