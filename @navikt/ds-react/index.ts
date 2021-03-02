@@ -1,13 +1,12 @@
-export { default as Accordion, AccordionProps } from "./accordion/src/index";
-export { default as Alert, AlertProps } from "./alert/src/index";
-export { default as Button, ButtonProps } from "./button/src/index";
-export { CopyToClipboard } from "./copy-to-clipboard/src/index";
-
+export { Accordion, AccordionProps } from "./accordion/index";
+export { Alert, AlertProps } from "./alert/index";
+export { Button, ButtonProps } from "./button/index";
 export {
   ContentContainer,
   ContentContainerProps,
 } from "./content-container/index";
 export { Cell, CellProps, Grid, GridProps } from "./grid/index";
+export { CopyToClipboard } from "./copy-to-clipboard/src/index";
 export {
   InternalHeader,
   InternalHeaderProps,
