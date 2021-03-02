@@ -1,9 +1,9 @@
 import * as React from "react";
-import { Layout } from "../src/index";
+import { Layout } from "../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
-import { ContentContainer } from "../../content-container/src";
+import { ContentContainer } from "../../index";
 import "./components/styles.css";
 
 export default {

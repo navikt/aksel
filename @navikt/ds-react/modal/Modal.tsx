@@ -4,7 +4,7 @@ import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
 import "@navikt/ds-css/modal/index.css";
-import Button from "../../button/src/index";
+import { Button } from "../index";
 
 // TODO: Has to be documented well that the user has to import react-modal and call
 // ReactModal.setAppElement("#root")
