@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { CopyToClipboard } from "../index";
 
 export default {
@@ -8,6 +9,7 @@ export default {
 
 export const All = () => {
   const label = "pi";
+
   const text = "3.14159265359";
   return (
     <div>
