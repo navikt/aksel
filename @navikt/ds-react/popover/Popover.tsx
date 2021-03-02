@@ -34,6 +34,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   placement?: Placement;
   size?: "medium" | "small";
+  arrow?: boolean;
 }
 
 const useEventLister = (event: string, callback) =>
@@ -54,6 +55,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       placement = "right",
       className,
       size = "medium",
+      arrow = true,
       ...rest
     },
     ref
@@ -102,6 +104,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         modifiers: [
           {
             name: "arrow",
+            enabled: arrow,
             options: {
               padding: 8,
               element: arrowRef.current,
@@ -110,7 +113,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {
             name: "offset",
             options: {
-              offset: [0, 16],
+              offset: [0, arrow ? 16 : 4],
             },
           },
         ],
@@ -135,11 +138,13 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         style={styles.popper}
       >
         {children}
-        <div
-          ref={arrowRef}
-          style={styles.arrow}
-          className="navds-popover__arrow"
-        />
+        {arrow && (
+          <div
+            ref={arrowRef}
+            style={styles.arrow}
+            className="navds-popover__arrow"
+          />
+        )}
       </div>
     );
   }

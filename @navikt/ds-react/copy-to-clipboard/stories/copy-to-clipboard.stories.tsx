@@ -1,5 +1,6 @@
 import * as React from "react";
-import { CopyToClipboard } from "../src";
+
+import { CopyToClipboard } from "../index";
 
 export default {
   title: "@navikt/copy-to-clipboard",
@@ -8,22 +9,25 @@ export default {
 
 export const All = () => {
   const label = "pi";
-  const value = "3.14159265359";
+
+  const text = "3.14159265359";
   return (
     <div>
       <h2>Fritstående knapp</h2>
-      <CopyToClipboard label={label} value={value} />
+      <CopyToClipboard label={label} text={text} />
 
       <h2>Sammen med tekst</h2>
       <p>
-        Her kan du kopiere {label}
-        <CopyToClipboard label={label} value={value} />
+        <CopyToClipboard label={label} text={text}>
+          Kopier tekst
+        </CopyToClipboard>
       </p>
 
       <h2>Tilpasser seg fontstørrelse</h2>
       <p style={{ fontSize: "0.8rem" }}>
-        Her kan du kopiere {label}
-        <CopyToClipboard label={label} value={value} />
+        <CopyToClipboard label={label} text={text}>
+          Kopier tekst
+        </CopyToClipboard>
       </p>
     </div>
   );
