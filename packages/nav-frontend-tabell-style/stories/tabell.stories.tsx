@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
 
-import button from "nav-frontend-lenker";
+import { Checkbox } from "nav-frontend-skjema";
 import "../src/index.less";
 
 export default {
@@ -152,6 +152,55 @@ export const All = () => {
             <td>2</td>
             <td className="tabell__td--sortert">William</td>
             <td>Riker</td>
+            <td>Kommandør</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className="tabell">
+        <thead>
+          <tr>
+            <th>
+              <Checkbox label="Velg alle" />
+            </th>
+            <th role="columnheader" aria-sort="none">
+              <button aria-label="Sorter Fornavn stigende">Fornavn</button>
+            </th>
+            <th
+              role="columnheader"
+              aria-sort="descending"
+              className="tabell__th--sortert-desc"
+            >
+              <button aria-label="Sorter Etternavn stigende">Etternavn</button>
+            </th>
+            <th role="columnheader" aria-sort="none">
+              <button aria-label="Sorter Rolle stigende">Rolle</button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <Checkbox label="Velg denne raden" />
+            </td>
+            <td>Geordi</td>
+            <td className="tabell__td--sortert">La Forge</td>
+            <td>Sjefsingeniør</td>
+          </tr>
+          <tr className="tabell__tr--valgt" aria-selected="true">
+            <td>
+              <Checkbox label="Velg denne raden" checked readOnly />
+            </td>
+            <td>Jean-Luc</td>
+            <td className="tabell__td--sortert">Picard</td>
+            <td>Kaptein</td>
+          </tr>
+          <tr>
+            <td>
+              <Checkbox label="Velg denne raden" />
+            </td>
+            <td>William</td>
+            <td className="tabell__td--sortert">Riker</td>
             <td>Kommandør</td>
           </tr>
         </tbody>

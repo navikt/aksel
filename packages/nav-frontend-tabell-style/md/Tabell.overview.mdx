@@ -339,7 +339,10 @@ import "nav-frontend-tabell-style";
 
 ## Selekterbar tabell
 
-[Checkbokser](/components/checkbox) som blir plassert i første celle på en rad vil bli stylet til å skjule sin label og oppta kun 24x24 piksler. Bruk klassen `tabell__tr--valgt` på `tr`-elementene for å style alle cellene i den raden som "valgt".
+[Checkbokser](/components/checkbox) som blir plassert i første celle på en rad vil bli stylet til å skjule sin
+label og oppta kun 24x24 piksler. Bruk klassen `tabell__tr--valgt` på `tr`-elementene for å style alle cellene i den
+raden som "valgt". Hvis det er ønsket at label skal vises på første elementet kan
+man legge til `data-label="true"` på selve checkboxen.
 
 <Alertstripe type="advarsel">
   Husk å legg til <InlineCode>aria-selected="true"</InlineCode> på{" "}

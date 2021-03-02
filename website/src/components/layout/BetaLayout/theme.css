@@ -1,0 +1,27 @@
+.ds-darkmode {
+  --background-color: #2c3741;
+  --header-color: #222b32;
+  --sidebar-color: #222b32;
+  --text-color: var(--navds-color-text-inverse);
+  --text-color-inverse: var(--navds-color-text-primary);
+  --heading-block-background: #f1f1f1;
+  --menu-background-active: #3c4b58;
+  --header-background-active: #3c4b58;
+  --focus-outline: 2px solid #fff;
+  --sidebar-divider: 2px solid #3c4b58;
+  --header-divider: 1px solid #3c4b58;
+}
+
+.ds-lightmode {
+  --background-color: #fff;
+  --sidebar-color: #fff;
+  --header-color: #222b32;
+  --text-color: var(--navds-color-text-primary);
+  --text-color-inverse: var(--navds-color-text-inverse);
+  --heading-block-background: #1a2026;
+  --header-background-active: #3c4b58;
+  --menu-background-active: #e6e6e6;
+  --focus-outline: 2px solid #1a2026;
+  --sidebar-divider: 1px solid #3c4b58;
+  --header-divider: 1px solid #3c4b58;
+}
