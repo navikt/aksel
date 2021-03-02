@@ -3,7 +3,7 @@ import Lenke from "nav-frontend-lenker";
 import { Button } from "../../../../lib";
 
 export const Left = () => (
-  <ul className={"menu"}>
+  <ul className={"navds-story-menu"}>
     <li>
       <Lenke href={"#"}>Iusto odio dignissimos</Lenke>
     </li>
