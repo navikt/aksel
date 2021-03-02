@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -27,9 +27,9 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "@popperjs/core": "^2.5.4",
     "@navikt/ds-css": "0.1.0",
     "@navikt/ds-icons": "^0.1.0",
+    "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
