@@ -2,7 +2,7 @@ import * as React from "react";
 import { Button, Link } from "../../../../index";
 
 export const Left = () => (
-  <ul className={"menu"}>
+  <ul className={"navds-story-menu"}>
     <li>
       <Link href={"#"}>Iusto odio dignissimos</Link>
     </li>

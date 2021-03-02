@@ -11,7 +11,7 @@ import {
 
 export const Main = () => (
   <div>
-    <Heading className={"section"} level={1} size={"xl"}>
+    <Heading className={"navds-story-section"} level={1} size={"xl"}>
       Quis autem
     </Heading>
     <Paragraph className={"section"}>

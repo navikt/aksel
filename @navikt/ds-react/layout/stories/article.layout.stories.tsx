@@ -1,14 +1,28 @@
 import * as React from "react";
+import { useEffect } from "react";
+import { ContentContainer } from "../../index";
 import { Layout } from "../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
-import { ContentContainer } from "../../index";
 import "./components/styles.css";
 
 export default {
   title: "@navikt/layout/Article",
   component: { Layout },
+  decorators: [
+    (Story) => {
+      useEffect(() => {
+        document.getElementById("decorator-header").style.display = "block";
+        document.getElementById("decorator-footer").style.display = "block";
+        return () => {
+          document.getElementById("decorator-header").style.display = "none";
+          document.getElementById("decorator-footer").style.display = "none";
+        };
+      }, []);
+      return <Story />;
+    },
+  ],
   parameters: {
     layout: "fullscreen",
     backgrounds: {
