@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CopyToClipboard } from "../src";
+import { CopyToClipboard } from "../index";
 
 export default {
   title: "@navikt/copy-to-clipboard",

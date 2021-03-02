@@ -1,11 +1,16 @@
-import * as React from "react";
-import { forwardRef, HTMLAttributes, useEffect, useRef, useState } from "react";
-import { Files } from "@navikt/ds-icons";
-import { Popover } from "../../index";
-import copy from "copy-to-clipboard";
 import "@navikt/ds-css/baseline/utility.css";
 import "@navikt/ds-css/copy-to-clipboard/index.css";
+import { Files } from "@navikt/ds-icons";
+import copy from "copy-to-clipboard";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import mergeRefs from "react-merge-refs";
+import { Popover } from "../index";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
