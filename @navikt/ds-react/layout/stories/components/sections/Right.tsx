@@ -1,8 +1,8 @@
 import * as React from "react";
-import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
+import { Accordion } from "../../../../index";
 
 export const Right = () => (
   <div>
-    <Ekspanderbartpanel tittel={"Snareveier"}>Test</Ekspanderbartpanel>
+    <Accordion heading={"Snareveier"}>Test</Accordion>
   </div>
 );

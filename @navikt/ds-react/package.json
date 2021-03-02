@@ -1,7 +1,7 @@
 {
   "name": "@navikt/ds-react",
   "version": "0.1.0-beta.6",
-  "private": true,
+  "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
   "keywords": [
@@ -28,16 +28,19 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.5.4",
-    "@navikt/ds-css": "0.1.0-beta.6",
+    "@navikt/ds-css": "0.1.0",
     "@navikt/ds-icons": "^0.1.0",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.12.1",
-    "react-popper": "^2.2.4"
+    "react-popper": "^2.2.4",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "react-router-dom": "^5.2.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0",
-    "react-dom": "^16.8.0 || ^17.0.0"
+    "react": "^16.8.0 || ^17.0.0"
   }
 }

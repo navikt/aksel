@@ -1,20 +1,19 @@
 import * as React from "react";
-import Lenke from "nav-frontend-lenker";
-import { Button } from "../../../../lib";
+import { Button, Link } from "../../../../index";
 
 export const Left = () => (
   <ul className={"navds-story-menu"}>
     <li>
-      <Lenke href={"#"}>Iusto odio dignissimos</Lenke>
+      <Link href={"#"}>Iusto odio dignissimos</Link>
     </li>
     <li>
-      <Lenke href={"#"}>Nam libero tempore</Lenke>
+      <Link href={"#"}>Nam libero tempore</Link>
     </li>
     <li>
-      <Lenke href={"#"}>Reiciendis voluptatibus</Lenke>
+      <Link href={"#"}>Reiciendis voluptatibus</Link>
     </li>
     <li>
-      <Lenke href={"#"}>Earum rerum</Lenke>
+      <Link href={"#"}>Earum rerum</Link>
     </li>
     <li>
       <Button>Søk ...</Button>

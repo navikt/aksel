@@ -4,7 +4,7 @@ import {
   InternalHeader,
   InternalHeaderTitle,
   InternalHeaderUser,
-} from "../src/index";
+} from "../index";
 
 export default {
   title: "@navikt/internal-header",
