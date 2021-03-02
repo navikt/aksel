@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst-style",
-  "version": "2.0.41",
+  "version": "2.0.42",
   "main": "src/hjelpetekst-style.less",
   "license": "MIT",
   "files": [
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^5.0.11",
-    "nav-frontend-typografi-style": "^1.0.34"
+    "nav-frontend-typografi-style": "^1.0.35"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11",

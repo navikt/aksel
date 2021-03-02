@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../src/index";
+import { Button } from "../index";
 
 export default {
   title: "@navikt/button",

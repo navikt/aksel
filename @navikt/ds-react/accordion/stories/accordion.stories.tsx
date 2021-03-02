@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Accordion from "../src/index";
+import { Accordion } from "../index";
 
 export default {
   title: "@navikt/accordion",

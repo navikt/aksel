@@ -1,5 +1,5 @@
 import React from "react";
-import { Heading, Text, Paragraph, Lead } from "../src/index";
+import { Heading, Text, Paragraph, Lead } from "../index";
 
 export default {
   title: "@navikt/typography",

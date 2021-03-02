@@ -1,8 +1,12 @@
-import React, { Children } from "react";
-import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
-import cl from "classnames";
-import { default as Section, SectionProps } from "./Section";
 import "@navikt/ds-css/layout/index.css";
+import cl from "classnames";
+import React, {
+  Children,
+  forwardRef,
+  ForwardRefExoticComponent,
+  HTMLAttributes,
+} from "react";
+import { default as Section, SectionProps } from "./Section";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {

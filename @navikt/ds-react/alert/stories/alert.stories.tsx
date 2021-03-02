@@ -1,5 +1,5 @@
 import React from "react";
-import Alert from "../src/index";
+import { Alert } from "../index";
 
 export default {
   title: "@navikt/alert",
