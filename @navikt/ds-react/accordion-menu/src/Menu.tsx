@@ -5,6 +5,8 @@ import { default as Item, AccordionMenuItemProps } from "./Item";
 import { Element } from "nav-frontend-typografi";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
+import { StoreProvider } from "./Context";
+import Nav from "./Nav";
 import "@navikt/ds-css/accordion-menu/index.css";
 
 export interface LayoutWithSubComponents
@@ -20,16 +22,18 @@ export interface AccordionMenuProps extends HTMLAttributes<HTMLUListElement> {
 const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
   ({ children, title, className, ...rest }, ref) => {
     return (
-      <nav aria-label={title || "menu"}>
-        <Element>{title}</Element>
-        <ul
-          ref={ref}
-          className={cl("navds-accorcion-menu__container", className)}
-          {...rest}
-        >
-          {children}
-        </ul>
-      </nav>
+      <StoreProvider>
+        <Nav title={title}>
+          <Element>{title}</Element>
+          <ul
+            ref={ref}
+            className={cl("navds-accorcion-menu__container", className)}
+            {...rest}
+          >
+            {children}
+          </ul>
+        </Nav>
+      </StoreProvider>
     );
   }
 ) as LayoutWithSubComponents;

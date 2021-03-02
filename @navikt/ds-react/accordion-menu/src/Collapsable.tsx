@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useState } from "react";
 import cl from "classnames";
-import { HoyreChevron, NedChevron } from "nav-frontend-chevron";
+import { NedChevron, OppChevron } from "nav-frontend-chevron";
 
 export interface AccordionMenuCollapsableProps
   extends HTMLAttributes<HTMLButtonElement> {
@@ -26,10 +26,10 @@ const Collapsable = forwardRef<
         className={cl("lenke", "navds-accordion-menu__button", className)}
         {...rest}
       >
-        <div className="navds-accordion-menu__chevron">
-          {open ? <NedChevron /> : <HoyreChevron />}
-        </div>
         {title}
+        <div className="navds-accordion-menu__chevron">
+          {open ? <OppChevron /> : <NedChevron />}
+        </div>
       </button>
       {open && (
         <ul

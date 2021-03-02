@@ -1,24 +1,54 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
 import cl from "classnames";
 import Lenke from "nav-frontend-lenker";
+import { useStore } from "./Context";
 
 export interface AccordionMenuItemProps
   extends HTMLAttributes<HTMLAnchorElement> {
   href: string;
+  active?: boolean;
 }
 
 const Item = forwardRef<Lenke, AccordionMenuItemProps>(
-  ({ children, className, ...rest }, ref) => (
-    <li className={"navds-accordion-menu__item"}>
-      <Lenke
-        ref={ref}
-        className={cl("navds-accordion-menu__link", className)}
-        {...rest}
+  ({ children, href, active = false, className, ...rest }, ref) => {
+    const anchor = href.split("#")[1];
+    const [{ activeAnchor }, dispatch] = useStore();
+
+    useEffect(() => {
+      if (anchor) {
+        const target = document.getElementById(anchor);
+        if (target) {
+          dispatch({
+            type: "INSERT_ANCHOR",
+            id: anchor,
+            position: {
+              y: target.offsetTop,
+            },
+          });
+        }
+      }
+    }, []);
+
+    return (
+      <li
+        className={cl(
+          "navds-accordion-menu__item",
+          (active || activeAnchor === anchor) &&
+            "navds-accordion-menu__item--active"
+        )}
       >
-        {children}
-      </Lenke>
-    </li>
-  )
+        <Lenke
+          ref={ref}
+          href={href}
+          onClick={() => {}}
+          className={cl("navds-accordion-menu__link", className)}
+          {...rest}
+        >
+          {children}
+        </Lenke>
+      </li>
+    );
+  }
 );
 
 export default Item;
