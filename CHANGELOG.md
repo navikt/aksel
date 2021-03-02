@@ -1,5 +1,52 @@
 # Endringslogg
 
+## 01. Mars 2021
+
+### Nav-frontend-typografi-style støtter nå Less v4
+
+[#1014](https://github.com/navikt/nav-frontend-moduler/pull/1014)
+
+- Alle divisjoner i Less-filer er nå wrappet i parentes
+
+## 22. Februar 2021
+
+### Kan nå vise label på checkbox i første column i tabell
+
+[#1000](https://github.com/navikt/nav-frontend-moduler/pull/1000)
+
+- Ved å sette `data-label="true"` på <Checkbox/> som blir brukt i tabell, kan man nå vise label om ønsket
+
+### Oppdatert Bekreftcheckboxpanel for bedre UU
+
+[#1002](https://github.com/navikt/nav-frontend-moduler/pull/1002)
+
+- Styling for Lenke blir nå endret ved bruk på Bekreftcheckboxpanel for å sikre god kontrast
+
+## 19. Februar 2021
+
+### Oppdatert animasjon Ekspanderbartpanel
+
+[#993](https://github.com/navikt/nav-frontend-moduler/pull/993)
+
+- Animasjonen er nå på 250ms, erstatter 400ms
+
+## 15. Februar 2021
+
+### Oppdatert dokumentasjon om obligatoriske felt i skjema
+
+[#996](https://github.com/navikt/nav-frontend-moduler/pull/996)
+
+- https://design.nav.no/patterns/form-validation
+
+## 12. Februar 2021
+
+### Proptable viser nå riktige default-values for props
+
+[#988](https://github.com/navikt/nav-frontend-moduler/pull/988)
+
+- Man kan nå se hva default-value er for props under teknisk side for komponenter
+- Eks: https://design.nav.no/components/alertstripe/technical
+
 ## 05. Februar 2021
 
 ### Komponenter støtter nå React v17
