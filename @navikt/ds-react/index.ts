@@ -1,4 +1,4 @@
-export { AccordionProps, default as Accordion } from "./accordion/src/index";
+export { AccordionProps, Accordion } from "./accordion/index";
 export { AlertProps, default as Alert } from "./alert/src/index";
 export { ButtonProps, default as Button } from "./button/src/index";
 export {
