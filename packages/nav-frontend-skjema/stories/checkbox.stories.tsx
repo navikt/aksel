@@ -30,6 +30,15 @@ export const checkbox = () => {
         <Checkbox label={"Midten"} />
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
+      <CheckboxGruppe
+        legend="Hvor vil du sitte?"
+        feil="Her er det noe feil"
+        utenFeilPropagering
+      >
+        <Checkbox label={"Bakerst"} />
+        <Checkbox label={"Midten"} feil />
+        <Checkbox label={"Fremst"} />
+      </CheckboxGruppe>
     </div>
   );
 };

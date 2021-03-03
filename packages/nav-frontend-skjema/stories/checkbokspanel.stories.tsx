@@ -34,6 +34,43 @@ export const checkboksPanel = () => {
         ]}
         onChange={() => {}}
       />
+
+      <CheckboksPanelGruppe
+        legend={"Velg en eller flere:"}
+        description="Beskrivelse av felt"
+        feil="Dette er en feilmelding"
+        checkboxes={[
+          { label: "Eplejuice", value: "juice1", id: "juice1id", feil: true },
+          { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+          { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+          {
+            label: "Ananasjuice",
+            value: "juice3",
+            id: "juice4id",
+            subtext: "Subtext example",
+          },
+        ]}
+        onChange={() => {}}
+      />
+
+      <CheckboksPanelGruppe
+        legend={"Velg en eller flere:"}
+        description="Beskrivelse av felt"
+        feil="Dette er en feilmelding"
+        utenFeilPropagering
+        checkboxes={[
+          { label: "Eplejuice", value: "juice1", id: "juice1id", feil: true },
+          { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+          { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+          {
+            label: "Ananasjuice",
+            value: "juice3",
+            id: "juice4id",
+            subtext: "Subtext example",
+          },
+        ]}
+        onChange={() => {}}
+      />
     </div>
   );
 };

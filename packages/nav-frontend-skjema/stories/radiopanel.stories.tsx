@@ -42,7 +42,26 @@ export const radioPanel = () => {
         legend="Hvilken drikke er best?"
         description="beskrivelse av felter"
         radios={[
-          { label: "Eplejuice", value: "juice1", id: "juice1id" },
+          { label: "Eplejuice", value: "juice1", id: "juice1id", feil: true },
+          { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+          { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+          {
+            label: "Ananasjuice",
+            value: "juice3",
+            id: "juice4id",
+            checked: true,
+          },
+        ]}
+        onChange={() => null}
+        feil={"Her er det en feil."}
+      />
+      <RadioPanelGruppe
+        name="samplename"
+        legend="Hvilken drikke er best?"
+        description="beskrivelse av felter"
+        utenFeilPropagering
+        radios={[
+          { label: "Eplejuice", value: "juice1", id: "juice1id", feil: true },
           { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
           { label: "Melk", value: "melk", disabled: true, id: "melkid" },
           {

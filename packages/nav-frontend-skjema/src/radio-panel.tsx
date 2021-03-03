@@ -11,6 +11,7 @@ export interface RadioPanelProps
    * Referanse til selve radioknappen. Brukes for eksempel til å sette fokus
    */
   radioRef?: (element: HTMLInputElement | null) => any;
+  feil?: boolean;
 }
 
 export interface RadioPanelState {
@@ -31,21 +32,31 @@ export class RadioPanel extends React.Component<
   }
 
   render() {
-    const { id, label, checked, disabled, radioRef, ...other } = this.props;
+    const {
+      id,
+      label,
+      checked,
+      disabled,
+      radioRef,
+      feil,
+      ...other
+    } = this.props;
     const { hasFocus } = this.state;
     const inputId = id || guid();
 
-    const cls = classNames("inputPanel radioPanel", {
-      "inputPanel--checked": checked && !disabled,
-      "inputPanel--focused": hasFocus && !disabled,
-      "inputPanel--disabled": disabled === true,
-    });
+    const cls = (feil) =>
+      classNames("inputPanel radioPanel", {
+        "inputPanel--checked": checked && !disabled,
+        "inputPanel--focused": hasFocus && !disabled,
+        "inputPanel--disabled": disabled === true,
+        "skjemaelement__input--harFeil": feil && !checked,
+      });
 
     /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => (
-          <label className={cls} htmlFor={inputId}>
+          <label className={cls(!!context.feil || !!feil)} htmlFor={inputId}>
             <input
               id={inputId}
               className="inputPanel__field"

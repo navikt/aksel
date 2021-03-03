@@ -6,6 +6,10 @@ import "nav-frontend-skjema-style";
 import { SkjemaGruppeFeilContext, SkjemaGruppeFeilContextProps } from ".";
 
 const cls = (className) => classNames("skjemaelement", className);
+const inputCls = (harFeil) =>
+  classNames("skjemaelement__input radioknapp", {
+    "skjemaelement__input--harFeil": harFeil,
+  });
 
 export interface RadioProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -26,6 +30,10 @@ export interface RadioProps
    */
   name: string;
   /**
+   * Toggle for om radioknapp skal ha error-styling
+   */
+  feil?: boolean;
+  /**
    * Referanse til selve radioknappen. Brukes for eksempel til å sette fokus
    */
   radioRef?: (element: HTMLInputElement | null) => any;
@@ -36,7 +44,7 @@ export interface RadioProps
  */
 class Radio extends React.Component<RadioProps> {
   render() {
-    const { className, name, label, id, radioRef, ...other } = this.props;
+    const { className, name, label, id, radioRef, feil, ...other } = this.props;
     const inputId = id || guid();
     /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
@@ -46,7 +54,7 @@ class Radio extends React.Component<RadioProps> {
             <input
               type="radio"
               name={name}
-              className="skjemaelement__input radioknapp"
+              className={inputCls(context.feil || feil)}
               id={inputId}
               ref={radioRef}
               aria-invalid={!!context.feil}

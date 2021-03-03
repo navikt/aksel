@@ -55,7 +55,7 @@ export class Checkbox extends React.Component<CheckboxProps, {}> {
             <div className={cls(className)}>
               <input
                 type="checkbox"
-                className={inputCls(feil)}
+                className={inputCls(feilmelding)}
                 id={inputId}
                 ref={checkboxRef}
                 aria-invalid={!!feilmelding}

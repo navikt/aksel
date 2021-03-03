@@ -24,8 +24,19 @@ export const radio = () => {
         <Radio label={"Midten"} name="sitteplass" />
         <Radio label={"Fremst"} name="sitteplass" />
       </RadioGruppe>
+
       <RadioGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
         <Radio label={"Bakerst"} name="sitteplass" />
+        <Radio label={"Midten"} name="sitteplass" />
+        <Radio label={"Fremst"} name="sitteplass" />
+      </RadioGruppe>
+
+      <RadioGruppe
+        legend="Hvor vil du sitte?"
+        feil="Her er det noe feil"
+        utenFeilPropagering
+      >
+        <Radio label={"Bakerst"} name="sitteplass" feil />
         <Radio label={"Midten"} name="sitteplass" />
         <Radio label={"Fremst"} name="sitteplass" />
       </RadioGruppe>
