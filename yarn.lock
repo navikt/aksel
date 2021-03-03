@@ -2600,14 +2600,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-css@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-0.1.0.tgz#ff56edecc3d4a9738c17d74e18766e002da8cd6c"
-  integrity sha512-DqTLimCjaFmrUiiO0MHiq5zMLPbgXwLCeiMT09kKHLjJCm3Q3D2nLA919A14ybfSUsHs26CR6Jz0y6dPSJWOqA==
-  dependencies:
-    "@navikt/ds-tokens" "0.1.0-beta.6"
-    normalize.css "^8.0.1"
-
 "@navikt/ds-css@0.1.0-beta.1":
   version "0.1.0-beta.1"
   resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-0.1.0-beta.1.tgz#c900b1b83e160b56feea5c6191dfa74657b529af"
@@ -2616,15 +2608,18 @@
     "@navikt/ds-tokens" "0.1.0-beta.1"
     normalize.css "^8.0.1"
 
+"@navikt/ds-css@0.1.0-beta.6":
+  version "0.1.0-beta.6"
+  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-0.1.0-beta.6.tgz#c5402322a3013138457702857b70901a99e526e5"
+  integrity sha512-ZFJpAhSm1qEHhgFb+j+HBU8UHubixGEx9nNGCyzCsIjx0xPGX9+oOZR1UbVfKCQXghEcwmp/2VMo4NQ3T7gZVA==
+  dependencies:
+    "@navikt/ds-tokens" "0.1.0-beta.6"
+    normalize.css "^8.0.1"
+
 "@navikt/ds-tokens@0.1.0-beta.1":
   version "0.1.0-beta.1"
   resolved "https://registry.yarnpkg.com/@navikt/ds-tokens/-/ds-tokens-0.1.0-beta.1.tgz#23d861897ef2c9e3d69cf77760a5d2eb854c9646"
   integrity sha512-bfxoleZ5xLEE+5juLWyvyqvywWmB8wOJCO1AuHpiyVfdx6nWK0PsCMsOQ93YuTdIyKMZu9tbbPuocFfYY3xcqA==
-
-"@navikt/ds-tokens@0.1.0-beta.6":
-  version "0.1.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-tokens/-/ds-tokens-0.1.0-beta.6.tgz#e5248c45a47c8625e650b14bbf08d6d1132249e2"
-  integrity sha512-Hf/pPnocxHB7LA0oUbr8zaALy3C2sXhae/MNfHP3JBQqSYD8czRgXeIZMQHayXa3Tg6KjeiDzOgu3bC0Nl+Thw==
 
 "@navikt/fnrvalidator@^1.1.0":
   version "1.1.3"
@@ -16368,6 +16363,11 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
+nav-frontend-paneler-style@^0.3.34:
+  version "0.3.34"
+  resolved "https://registry.yarnpkg.com/nav-frontend-paneler-style/-/nav-frontend-paneler-style-0.3.34.tgz#48bc6a4331262658490644976c65258d6b3cbcec"
+  integrity sha512-ufqCAPGofVHrof7yh7TGdby9hMHI6HPr4x4KegeTSXg83jPsW5ElynznkBtfMpsGWTD8MoxBxIJkSOlqEvzbvg==
+
 needle@^2.5.2:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/needle/-/needle-2.6.0.tgz#24dbb55f2509e2324b4a99d61f413982013ccdbe"
@@ -19075,7 +19075,7 @@ react-docgen@devongovett/react-docgen#importing:
     resolve "^1.10.1"
     strip-indent "^3.0.0"
 
-react-dom@^16.12.0:
+"react-dom@^15.4.2 || ^16.0.0", react-dom@^16.12.0:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.14.0.tgz#7ad838ec29a777fb3c75c3a190f661cf92ab8b89"
   integrity sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==
@@ -19084,15 +19084,6 @@ react-dom@^16.12.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.19.1"
-
-"react-dom@^16.8.0 || ^17.0.0":
-  version "17.0.1"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.1.tgz#1de2560474ec9f0e334285662ede52dbc5426fc6"
-  integrity sha512-6eV150oJZ9U2t9svnsspTMrWNyHc6chX0KzDeAOXftRa8bNeOKTTfCJ7KorIwenkHd2xqVTBTCZd79yk/lx/Ug==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    scheduler "^0.20.1"
 
 react-draggable@^4.0.3:
   version "4.4.3"
@@ -20335,14 +20326,6 @@ scheduler@^0.19.1:
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
   integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-
-scheduler@^0.20.1:
-  version "0.20.1"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.20.1.tgz#da0b907e24026b01181ecbc75efdc7f27b5a000c"
-  integrity sha512-LKTe+2xNJBNxu/QhHvDR14wUXHRQbVY5ZOYpOGWRzhydZUqrLb2JBvLPY7cAqFmqrWuDED0Mjk7013SZiOz6Bw==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
