@@ -67,7 +67,7 @@ import Lenke from "./../../../nav-frontend-lenker";
       },
     ]}
     onChange={() => {}}
-    feil="Her er det noe feil"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
   />
 </Example>
 
@@ -86,6 +86,50 @@ import Lenke from "./../../../nav-frontend-lenker";
     },
   ]}
   onChange={() => {}}
-  feil="Her er det noe feil"
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+/>
+```
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+
+<Example>
+  <CheckboksPanelGruppe
+    legend={"Velg en eller flere:"}
+    checkboxes={[
+      { label: "Eplejuice", value: "juice1", id: "juice1id-2" },
+      { label: "Appelsinjuice", value: "juice2", id: "juice2id-2", feil: true },
+      { label: "Melk", value: "melk", disabled: true, id: "melkid-2" },
+      {
+        label: "Ananasjuice",
+        value: "juice3",
+        id: "juice4id-2",
+        subtext: "Subtext example",
+      },
+    ]}
+    onChange={() => {}}
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  />
+</Example>
+
+```jsx
+<CheckboksPanelGruppe
+  legend={"Velg en eller flere:"}
+  checkboxes={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id", feil: true },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    {
+      label: "Ananasjuice",
+      value: "juice3",
+      id: "juice4id",
+      subtext: "Subtext example",
+    },
+  ]}
+  onChange={() => {}}
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  utenFeilPropagering
 />
 ```

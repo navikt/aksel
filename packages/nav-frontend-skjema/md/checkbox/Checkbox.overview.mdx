@@ -36,11 +36,17 @@ import Lenke from "./../../../nav-frontend-lenker";
 ## Feilmelding
 
 <Example>
-  <Checkbox label={"Checkbox"} feil="Her er det noe feil" />
+  <Checkbox
+    label={"Checkbox"}
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  />
 </Example>
 
 ```jsx
-<Checkbox label={"Checkbox"} feil="Her er det noe feil" />
+<Checkbox
+  label={"Checkbox"}
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+/>
 ```
 
 ## CheckboxGruppe
@@ -68,7 +74,10 @@ import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
 ### Felles feilmelding
 
 <Example>
-  <CheckboxGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+  <CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
     <Checkbox label={"Bakerst"} />
     <Checkbox label={"Midten"} />
     <Checkbox label={"Fremst"} />
@@ -78,9 +87,42 @@ import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
 ```jsx
 import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
 
-<CheckboxGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+<CheckboxGruppe
+  legend="Hvor vil du sitte?"
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+>
   <Checkbox label={"Bakerst"} />
   <Checkbox label={"Midten"} />
+  <Checkbox label={"Fremst"} />
+</CheckboxGruppe>;
+```
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+
+<Example>
+  <CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} feil />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Example>
+
+```jsx
+import { CheckboxGruppe, Checkbox } from "nav-frontend-skjema";
+
+<CheckboxGruppe
+  legend="Hvor vil du sitte?"
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  utenFeilPropagering
+>
+  <Checkbox label={"Bakerst"} />
+  <Checkbox label={"Midten"} feil />
   <Checkbox label={"Fremst"} />
 </CheckboxGruppe>;
 ```

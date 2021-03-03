@@ -64,7 +64,10 @@ import { RadioGruppe, Radio } from "nav-frontend-skjema";
 ### Felles feilmelding
 
 <Example>
-  <RadioGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+  <RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
     <Radio label={"Bakerst"} name="sitteplass" />
     <Radio label={"Midten"} name="sitteplass" />
     <Radio label={"Fremst"} name="sitteplass" />
@@ -74,9 +77,42 @@ import { RadioGruppe, Radio } from "nav-frontend-skjema";
 ```jsx
 import { RadioGruppe, Radio } from "nav-frontend-skjema";
 
-<RadioGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+<RadioGruppe
+  legend="Hvor vil du sitte?"
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+>
   <Radio label={"Bakerst"} name="sitteplass" />
   <Radio label={"Midten"} name="sitteplass" />
+  <Radio label={"Fremst"} name="sitteplass" />
+</RadioGruppe>;
+```
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+
+<Example>
+  <RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" feil />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>
+</Example>
+
+```jsx
+import { RadioGruppe, Radio } from "nav-frontend-skjema";
+
+<RadioGruppe
+  legend="Hvor vil du sitte?"
+  feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  utenFeilPropagering
+>
+  <Radio label={"Bakerst"} name="sitteplass" />
+  <Radio label={"Midten"} name="sitteplass" feil />
   <Radio label={"Fremst"} name="sitteplass" />
 </RadioGruppe>;
 ```

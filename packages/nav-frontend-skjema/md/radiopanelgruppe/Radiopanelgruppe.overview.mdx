@@ -44,6 +44,30 @@ import { RadioPanelGruppe } from "./../../";
 />
 ```
 
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+
+<Example>
+  <RadioPanelGruppeExample name="example-4" feil={true} utenFeilPropagering />
+</Example>
+
+```jsx
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id", feil },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Feilmeldingstekst må gjenta nøkkelord fra label" }}
+/>
+```
+
 ## Bruk av radioRef
 
 <Example>
