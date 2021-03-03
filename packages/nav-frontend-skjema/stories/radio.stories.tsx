@@ -17,22 +17,26 @@ export const radio = () => {
         gridAutoColumns: "fit-content",
       }}
     >
-      <Radio label={"Radio-label"} name="minRadioKnapp" />
-      <Radio label={"Radio-label"} name="minRadioKnapp" disabled />
-      <RadioGruppe legend="Hvor vil du sitte?">
-        <Radio label={"Bakerst"} name="sitteplass" />
-        <Radio label={"Midten"} name="sitteplass" />
-        <Radio label={"Fremst"} name="sitteplass" />
-      </RadioGruppe>
+      <Radio label={"Standard Radio-label"} name="minRadioKnapp" />
+      <Radio label={"Disabled Radio-label"} name="minRadioKnapp" disabled />
 
-      <RadioGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+      <RadioGruppe legend="RadioGruppe legend">
         <Radio label={"Bakerst"} name="sitteplass" />
         <Radio label={"Midten"} name="sitteplass" />
         <Radio label={"Fremst"} name="sitteplass" />
       </RadioGruppe>
 
       <RadioGruppe
-        legend="Hvor vil du sitte?"
+        legend="RadioGruppe med feil legend"
+        feil="Her er det noe feil"
+      >
+        <Radio label={"Bakerst"} name="sitteplass" />
+        <Radio label={"Midten"} name="sitteplass" />
+        <Radio label={"Fremst"} name="sitteplass" />
+      </RadioGruppe>
+
+      <RadioGruppe
+        legend="RadioGruppe med feil utenFeilPropagering legend"
         feil="Her er det noe feil"
         utenFeilPropagering
       >

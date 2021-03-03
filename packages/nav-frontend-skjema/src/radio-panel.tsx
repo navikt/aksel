@@ -56,7 +56,10 @@ export class RadioPanel extends React.Component<
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => (
-          <label className={cls(!!context.feil || !!feil)} htmlFor={inputId}>
+          <label
+            className={cls(!!context.feil || (!!feil && !!!disabled))}
+            htmlFor={inputId}
+          >
             <input
               id={inputId}
               className="inputPanel__field"

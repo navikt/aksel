@@ -44,7 +44,16 @@ export interface RadioProps
  */
 class Radio extends React.Component<RadioProps> {
   render() {
-    const { className, name, label, id, radioRef, feil, ...other } = this.props;
+    const {
+      className,
+      name,
+      label,
+      id,
+      radioRef,
+      feil,
+      disabled,
+      ...other
+    } = this.props;
     const inputId = id || guid();
     /* eslint-disable jsx-a11y/role-supports-aria-props */
     return (
@@ -54,13 +63,14 @@ class Radio extends React.Component<RadioProps> {
             <input
               type="radio"
               name={name}
-              className={inputCls(context.feil || feil)}
+              className={inputCls(!!context.feil || (!!feil && !!!disabled))}
               id={inputId}
               ref={radioRef}
               aria-invalid={!!context.feil}
               aria-errormessage={
                 context.feil ? context.feilmeldingId : undefined
               }
+              disabled={disabled}
               {...other}
             />
             <label className="skjemaelement__label" htmlFor={inputId}>

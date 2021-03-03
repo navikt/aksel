@@ -41,13 +41,21 @@ export interface CheckboxProps
  */
 export class Checkbox extends React.Component<CheckboxProps, {}> {
   render() {
-    const { className, label, id, feil, checkboxRef, ...other } = this.props;
+    const {
+      className,
+      label,
+      id,
+      feil,
+      checkboxRef,
+      disabled,
+      ...other
+    } = this.props;
     const inputId = id || guid();
     // tslint:disable:react-a11y-role-has-required-aria-props
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => {
-          const feilmelding = context.feil || feil;
+          const feilmelding = context.feil || (feil && !!!disabled);
           // eslint-disable-next-line no-shadow
           const feilmeldingId = context.feilmeldingId || guid();
 
@@ -60,6 +68,7 @@ export class Checkbox extends React.Component<CheckboxProps, {}> {
                 ref={checkboxRef}
                 aria-invalid={!!feilmelding}
                 aria-errormessage={feilmelding ? feilmeldingId : undefined}
+                disabled={disabled}
                 {...other}
               />
               <label className="skjemaelement__label" htmlFor={inputId}>

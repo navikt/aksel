@@ -19,7 +19,7 @@ export const radioPanel = () => {
     >
       <RadioPanelGruppe
         name="samplename"
-        legend="Hvilken drikke er best?"
+        legend="RadioPanelGruppe legend"
         radios={[
           {
             label: "Eplejuice",
@@ -39,7 +39,7 @@ export const radioPanel = () => {
       />
       <RadioPanelGruppe
         name="samplename"
-        legend="Hvilken drikke er best?"
+        legend="RadioPanelGruppe med feil legend"
         description="beskrivelse av felter"
         radios={[
           { label: "Eplejuice", value: "juice1", id: "juice1id", feil: true },
@@ -57,7 +57,7 @@ export const radioPanel = () => {
       />
       <RadioPanelGruppe
         name="samplename"
-        legend="Hvilken drikke er best?"
+        legend="RadioPanelGruppe med feil utenFeilPropagering legend"
         description="beskrivelse av felter"
         utenFeilPropagering
         radios={[

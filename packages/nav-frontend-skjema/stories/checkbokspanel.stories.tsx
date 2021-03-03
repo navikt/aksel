@@ -17,9 +17,16 @@ export const checkboksPanel = () => {
         gridAutoColumns: "fit-content",
       }}
     >
-      <CheckboksPanel label={"Checkbox"} />
+      <CheckboksPanel label={"Standard Checkbox"} />
+      <CheckboksPanel label={"Standard Checkbox med feil"} feil />
+      <CheckboksPanel
+        label={"Standard Checkbox med feil, disabled"}
+        feil
+        disabled
+      />
+
       <CheckboksPanelGruppe
-        legend={"Velg en eller flere:"}
+        legend={"CheckboksPanelGruppe legend"}
         description="Beskrivelse av felt"
         checkboxes={[
           { label: "Eplejuice", value: "juice1", id: "juice1id" },
@@ -36,7 +43,7 @@ export const checkboksPanel = () => {
       />
 
       <CheckboksPanelGruppe
-        legend={"Velg en eller flere:"}
+        legend={"CheckboksPanelGruppe med feil legend"}
         description="Beskrivelse av felt"
         feil="Dette er en feilmelding"
         checkboxes={[
@@ -54,7 +61,7 @@ export const checkboksPanel = () => {
       />
 
       <CheckboksPanelGruppe
-        legend={"Velg en eller flere:"}
+        legend={"CheckboksPanelGruppe med feil utenFeilPropagering legend"}
         description="Beskrivelse av felt"
         feil="Dette er en feilmelding"
         utenFeilPropagering
