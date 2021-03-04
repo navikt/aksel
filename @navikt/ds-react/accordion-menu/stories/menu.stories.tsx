@@ -63,7 +63,7 @@ export const All = () => (
       <Layout.Section>
         <div>
           <a id="quis-autem" />
-          <Heading className={"navds-story-section"} level={1} size={"xl"}>
+          <Heading className={"navds-story-section"} level={1}>
             Quis autem
           </Heading>
           <Normaltekst className={"navds-story-section"}>
@@ -73,7 +73,7 @@ export const All = () => (
         </div>
         <div>
           <a id="quis-autem" />
-          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+          <Heading className={"navds-story-section"} level={2}>
             Nulla pariatur
           </Heading>
           <Normaltekst className={"navds-story-section"}>
@@ -81,19 +81,19 @@ export const All = () => (
             non elit eget justo mattis venenatis.
           </Normaltekst>
           <a id="ipsum-quia" />
-          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+          <Heading className={"navds-story-section"} level={3}>
             Ipsum quia
           </Heading>
           Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
           eros condimentum facilisis non vitae massa.
           <a id="perspiciatis-unde-omnis" />
-          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+          <Heading className={"navds-story-section"} level={3}>
             Perspiciatis unde omnis
           </Heading>
           Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
           eros condimentum facilisis non vitae massa.
           <a id="voluptatem-accusantium" />
-          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+          <Heading className={"navds-story-section"} level={3}>
             Voluptatem accusantium
           </Heading>
           Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
@@ -101,7 +101,7 @@ export const All = () => (
         </div>
         <div>
           <a id="dolores-eos" />
-          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+          <Heading className={"navds-story-section"} level={2}>
             Dolores eos
           </Heading>
           Orci varius natoque penatibus et magnis dis parturient montes,
@@ -111,7 +111,7 @@ export const All = () => (
         </div>
         <div>
           <a id="ratione-voluptatem" />
-          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+          <Heading className={"navds-story-section"} level={2}>
             Ratione voluptatem
           </Heading>
           <Normaltekst className={"navds-story-section"}>
@@ -128,7 +128,7 @@ export const All = () => (
         </div>
         <div>
           <a id="quis-nostrum" />
-          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+          <Heading className={"navds-story-section"} level={2}>
             Quis nostrum
           </Heading>
           <Normaltekst className={"navds-story-section"}>
