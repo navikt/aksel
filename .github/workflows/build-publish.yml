@@ -15,6 +15,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v1
         with:
           node-version: 14
@@ -33,36 +35,15 @@ jobs:
         run: yarn lint
       - name: Test gatsby-build
         run: yarn build:gatsby
-
-  chromatic:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # Required to retrieve git history
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - name: Node-modules cache
-        uses: actions/cache@v2
-        id: node-cache
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
-      - name: Gulp-build
-        run: yarn boot
-      - uses: chromaui/action@v1
+      - name: Test chromatic
+        uses: chromaui/action@v1
         with:
           token: ${{ secrets.GIT_REPO }}
           projectToken: ${{ secrets.CHROMATIC }}
           exitZeroOnChanges: true
 
   publish-npm:
-    needs: chromatic
+    needs: build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
@@ -85,9 +66,9 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Gulp-build
         run: yarn boot
-      - run: git config --global user.email "ken.aleksander.johansen@nav.no"
-      - run: git config --global user.name "navikt"
-      - run: git remote set-url origin https://KenAJoh:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
+      - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
+      - run: git config --global user.name "github-actions[bot]"
+      - run: git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --no-private --yes
@@ -120,8 +101,10 @@ jobs:
         run: yarn boot
       - name: Building Gatsby
         run: yarn build:gatsby
+      - name: Building Storybook
+        run: yarn build-storybook
 
-      - name: Deploy 🚀
+      - name: Deploy to Design.nav.no 🚀
         uses: JamesIves/github-pages-deploy-action@3.6.2
         with:
           GITHUB_TOKEN: $NAV_DS_TOKEN
@@ -129,3 +112,12 @@ jobs:
           FOLDER: website/public
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
+
+      - name: Deploy storybook
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{secrets.GIT_REPO}}
+          external_repository: navikt/designsystemet
+          publish_dir: ./storybook-static
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"

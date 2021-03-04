@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Grid, Cell } from "../src/index";
-import { ContentContainer } from "../../content-container/src";
+import { Grid, Cell } from "../index";
+import { ContentContainer } from "../../index";
 import "./styles.css";
 
 export default {

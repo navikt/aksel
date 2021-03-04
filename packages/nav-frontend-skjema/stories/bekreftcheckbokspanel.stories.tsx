@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { BekreftCheckboksPanel } from "../src/index";
+import Lenke from "nav-frontend-lenker";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
@@ -8,6 +9,8 @@ export default {
 } as Meta;
 
 export const BekreftCheckboks = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
     <div
       style={{
@@ -19,12 +22,22 @@ export const BekreftCheckboks = () => {
     >
       <BekreftCheckboksPanel
         label="Ja, jeg samtykker"
+        checked={isChecked}
+        onChange={() => setIsChecked((isChecked) => !isChecked)}
+      >
+        For å gå videre må du samtykke til at vi får lov til å innhente og
+        behandle persondata om deg. <Lenke href="wat">Les mer</Lenke> om hvilke
+        data vi henter og hvordan vi behandler disse dataene.
+      </BekreftCheckboksPanel>
+
+      <BekreftCheckboksPanel
+        label="Ja, jeg samtykker"
         checked
         onChange={() => null}
       >
         For å gå videre må du samtykke til at vi får lov til å innhente og
-        behandle persondata om deg. Les mer om hvilke data vi henter og hvordan
-        vi behandler disse dataene.
+        behandle persondata om deg. <Lenke href="wat">Les mer</Lenke> om hvilke
+        data vi henter og hvordan vi behandler disse dataene.
       </BekreftCheckboksPanel>
 
       <BekreftCheckboksPanel
@@ -33,8 +46,8 @@ export const BekreftCheckboks = () => {
         onChange={() => null}
       >
         For å gå videre må du samtykke til at vi får lov til å innhente og
-        behandle persondata om deg. Les mer om hvilke data vi henter og hvordan
-        vi behandler disse dataene.
+        behandle persondata om deg. <Lenke href="wat">Les mer</Lenke> om hvilke
+        data vi henter og hvordan vi behandler disse dataene.
       </BekreftCheckboksPanel>
 
       <BekreftCheckboksPanel
@@ -44,8 +57,8 @@ export const BekreftCheckboks = () => {
         onChange={() => null}
       >
         For å gå videre må du samtykke til at vi får lov til å innhente og
-        behandle persondata om deg. Les mer om hvilke data vi henter og hvordan
-        vi behandler disse dataene.
+        behandle persondata om deg. <Lenke href="wat">Les mer</Lenke> om hvilke
+        data vi henter og hvordan vi behandler disse dataene.
       </BekreftCheckboksPanel>
     </div>
   );
