@@ -64,6 +64,10 @@
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
 
+  .navds-layout__header h1 {
+    margin: 0.25rem 0;
+  }
+
   .navds-layout__section--padding.navds-layout__section--right > * {
     padding: var(--navds-layout-padding-small);
   }
