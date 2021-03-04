@@ -1,10 +1,8 @@
 import * as React from "react";
 import Menu from "../src/index";
 import { useEffect } from "react";
-import { Layout } from "../../layout/src";
-import { ContentContainer } from "../../content-container/src";
 import { Right } from "../../layout/stories/components/sections/Right";
-import { Heading } from "../../lib";
+import { ContentContainer, Heading, Layout } from "../../index";
 import { Normaltekst } from "nav-frontend-typografi";
 import "./components/styles.css";
 
