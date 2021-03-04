@@ -16,7 +16,6 @@
 
 .navds-layout__header--container {
   background: white;
-  background-size: cover;
 }
 
 .navds-layout__panel {
@@ -29,13 +28,13 @@
 }
 
 .navds-layout__panel-icon {
-  background: transparent;
   position: absolute;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   top: -1.5rem;
+  left: 0;
 }
 
 .navds-layout__panel-icon svg {
