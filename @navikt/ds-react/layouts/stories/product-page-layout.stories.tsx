@@ -54,6 +54,12 @@ export const ThreeColumns = () => (
       >
         <Main title={false} />
       </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Proin ornare accumsan"}
+        icon={<LightBulb />}
+      >
+        <Main title={false} />
+      </ProductPageLayout.Panel>
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
       <Right />
