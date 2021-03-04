@@ -8,11 +8,13 @@ import {
   Paragraph,
 } from "../../../../index";
 
-export const Main = () => (
+export const Main = ({ title = true }) => (
   <div>
-    <Heading level={1} size={"xl"}>
-      Quis autem
-    </Heading>
+    {title && (
+      <Heading level={1} size={"xl"}>
+        Quis autem
+      </Heading>
+    )}
     <Paragraph className={"section"}>
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
       doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo

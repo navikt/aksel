@@ -4,6 +4,7 @@ import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
+import { LightBulb } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
@@ -46,8 +47,13 @@ export const ThreeColumns = () => (
     <ProductPageLayout.Section left sticky>
       <Left />
     </ProductPageLayout.Section>
-    <ProductPageLayout.Section>
-      <Main />
+    <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
+      <ProductPageLayout.Panel
+        title={"Proin ornare accumsan"}
+        icon={<LightBulb />}
+      >
+        <Main title={false} />
+      </ProductPageLayout.Panel>
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
       <Right />
