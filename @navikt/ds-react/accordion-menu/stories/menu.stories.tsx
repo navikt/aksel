@@ -6,6 +6,8 @@ import { ContentContainer } from "../../content-container/src";
 import { Main } from "../../layout/stories/components/sections/Main";
 import { Right } from "../../layout/stories/components/sections/Right";
 import "./components/styles.css";
+import { Heading } from "../../lib";
+import { Normaltekst } from "nav-frontend-typografi";
 
 export default {
   title: "@navikt/accordion-menu",
@@ -48,26 +50,110 @@ export const All = () => (
         <Menu title={"Minima"}>
           <Menu.Item href={"#quis-autem"}>Quis autem </Menu.Item>
           <Menu.Collapsable title={"Nulla pariatur?"}>
-            <Menu.Item href={"#nulla-pariatur"}>Ipsum quia</Menu.Item>
-            <Menu.Item href={"#test1"}>Perspiciatis unde omnis</Menu.Item>
-            <Menu.Item href={"#test1"}>Voluptatem accusantium</Menu.Item>
+            <Menu.Item href={"#ipsum-quia"}>Ipsum quia</Menu.Item>
+            <Menu.Item href={"#perspiciatis-unde-omnis"}>
+              Perspiciatis unde omnis
+            </Menu.Item>
+            <Menu.Item href={"#voluptatem-accusantium"}>
+              Voluptatem accusantium
+            </Menu.Item>
           </Menu.Collapsable>
-          <Menu.Item href={"#test3"}>Dolores eos</Menu.Item>
-          <Menu.Item href={"#test4"}>Ratione voluptatem</Menu.Item>
-          <Menu.Item href={"#test5"}>Quis nostrum</Menu.Item>
-          <Menu.Collapsable title={"Etiam viverra"}>
-            <Menu.Collapsable title={"Ullam corporis"}>
-              <Menu.Item href={"#test1"}>Curabitur a purus</Menu.Item>
-              <Menu.Item href={"#test1"}>Scelerisque sapien</Menu.Item>
-              <Menu.Item href={"#test1"}>Sed ac augue</Menu.Item>
-            </Menu.Collapsable>
-            <Menu.Item href={"#test1"}>Cras vestibulum</Menu.Item>
-            <Menu.Item href={"#test1"}>Metus sed pellentesque.</Menu.Item>
-          </Menu.Collapsable>
+          <Menu.Item href={"#dolores-eos"}>Dolores eos</Menu.Item>
+          <Menu.Item href={"#ratione-voluptatem"}>Ratione voluptatem</Menu.Item>
+          <Menu.Item href={"#quis-nostrum"}>Quis nostrum</Menu.Item>
         </Menu>
       </Layout.Section>
       <Layout.Section>
-        <Main />
+        <div>
+          <a id="quis-autem" />
+          <Heading className={"navds-story-section"} level={1} size={"xl"}>
+            Quis autem
+          </Heading>
+          <Normaltekst className={"navds-story-section"}>
+            Proin nec luctus justo. Pellentesque et dapibus libero. Phasellus
+            non elit eget justo mattis venenatis.
+          </Normaltekst>
+        </div>
+        <div>
+          <a id="quis-autem" />
+          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+            Nulla pariatur
+          </Heading>
+          <Normaltekst className={"navds-story-section"}>
+            Proin nec luctus justo. Pellentesque et dapibus libero. Phasellus
+            non elit eget justo mattis venenatis.
+          </Normaltekst>
+          <a id="ipsum-quia" />
+          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+            Ipsum quia
+          </Heading>
+          Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
+          eros condimentum facilisis non vitae massa.
+          <a id="perspiciatis-unde-omnis" />
+          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+            Perspiciatis unde omnis
+          </Heading>
+          Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
+          eros condimentum facilisis non vitae massa.
+          <a id="voluptatem-accusantium" />
+          <Heading className={"navds-story-section"} level={3} size={"lg"}>
+            Voluptatem accusantium
+          </Heading>
+          Nam id metus libero. Nunc sed ipsum neque. Donec et tortor sit amet
+          eros condimentum facilisis non vitae massa.
+        </div>
+        <div>
+          <a id="dolores-eos" />
+          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+            Dolores eos
+          </Heading>
+          Orci varius natoque penatibus et magnis dis parturient montes,
+          nascetur ridiculus mus. Fusce finibus nunc et ex bibendum fermentum.
+          Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+          per inceptos himenaeos.
+        </div>
+        <div>
+          <a id="ratione-voluptatem" />
+          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+            Ratione voluptatem
+          </Heading>
+          <Normaltekst className={"navds-story-section"}>
+            Orci varius natoque penatibus et magnis dis parturient montes,
+            nascetur ridiculus mus. Fusce finibus nunc et ex bibendum fermentum.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+            per inceptos himenaeos.
+          </Normaltekst>
+          <Normaltekst className={"navds-story-section"}>
+            Suspendisse ullamcorper sapien at augue ornare sagittis. Lorem ipsum
+            dolor sit amet, consectetur adipiscing elit. Proin quis erat
+            elementum, dictum mauris ac, convallis ipsum.
+          </Normaltekst>
+        </div>
+        <div>
+          <a id="quis-nostrum" />
+          <Heading className={"navds-story-section"} level={2} size={"lg"}>
+            Quis nostrum
+          </Heading>
+          <Normaltekst className={"navds-story-section"}>
+            Orci varius natoque penatibus et magnis dis parturient montes,
+            nascetur ridiculus mus. Fusce finibus nunc et ex bibendum fermentum.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+            per inceptos himenaeos.
+          </Normaltekst>
+          <Normaltekst className={"navds-story-section"}>
+            Mauris et mauris auctor, consequat felis vitae, tincidunt arcu.
+          </Normaltekst>
+          <Normaltekst className={"navds-story-section"}>
+            Sed congue massa lectus, laoreet ultricies augue pharetra nec. Etiam
+            eleifend velit eget tortor sollicitudin, eget finibus nunc dapibus.
+            Maecenas eu justo ultrices, lacinia neque nec, rutrum eros. Duis at
+            mauris rutrum, feugiat augue at, congue urna. Quisque eu ante
+            tortor. Nulla a urna leo. Nunc id ultrices elit. Etiam pulvinar
+            ipsum eget nisl vehicula, bibendum porta odio facilisis. Vivamus
+            eleifend orci gravida, vulputate mauris quis, euismod sapien. In
+            faucibus placerat pharetra.
+          </Normaltekst>
+        </div>
       </Layout.Section>
       <Layout.Section right sticky>
         <Right />

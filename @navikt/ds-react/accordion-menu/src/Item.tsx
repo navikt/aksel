@@ -21,10 +21,15 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
           dispatch({
             type: "INSERT_ANCHOR",
             id: anchor,
-            position: {
-              y: target.offsetTop,
-            },
+            position: { y: target.offsetTop },
           });
+
+          return () => {
+            dispatch({
+              type: "REMOVE_ANCHOR",
+              id: anchor,
+            });
+          };
         }
       }
     }, []);
@@ -40,7 +45,6 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
         <Lenke
           ref={ref}
           href={href}
-          onClick={() => {}}
           className={cl("navds-accordion-menu__link", className)}
           {...rest}
         >

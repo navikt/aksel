@@ -12,20 +12,22 @@ const Nav = forwardRef<Lenke, AccordionMenuItemProps>(
     const [{ anchors }, dispatch] = useStore();
 
     useEffect(() => {
-      window.addEventListener("scroll", () => {
-        const lastAnchor = anchors
-          .filter((anchor) => window.scrollY > anchor.position.y)
+      const scrollListener = () => {
+        const lastPassedAnchor = anchors
+          .sort((a, b) => (a.position.y < b.position.y ? -1 : 1))
+          .filter((anchor) => window.scrollY > anchor.position.y - 10)
           .pop();
 
-        console.log(lastAnchor);
-
-        if (lastAnchor) {
-          dispatch({ type: "SET_ACTIVE_ANCHOR", id: lastAnchor.id });
+        if (lastPassedAnchor) {
+          dispatch({
+            type: "SET_ACTIVE_ANCHOR",
+            id: lastPassedAnchor.id,
+          });
         }
-      });
-
+      };
+      window.addEventListener("scroll", scrollListener);
       return () => {
-        window.removeEventListener("scroll", () => {});
+        window.removeEventListener("scroll", scrollListener);
       };
     }, [anchors]);
 

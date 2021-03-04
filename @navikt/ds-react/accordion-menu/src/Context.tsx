@@ -3,8 +3,9 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export interface Position {
-  y: number;
+export interface Store {
+  activeAnchor?: string;
+  anchors?: Anchor[];
 }
 
 export interface Anchor {
@@ -12,9 +13,8 @@ export interface Anchor {
   position: Position;
 }
 
-export interface Store {
-  activeAnchor?: string;
-  anchors?: Anchor[];
+export interface Position {
+  y: number;
 }
 
 export type Action =
@@ -24,8 +24,12 @@ export type Action =
       position;
     }
   | {
+      type: "REMOVE_ANCHOR";
+      id: string;
+    }
+  | {
       type: "SET_ACTIVE_ANCHOR";
-      id?: string;
+      id: string;
     };
 
 const initialState = {
@@ -41,6 +45,11 @@ export const reducer = (state: Store, action: Action) => {
           ...state.anchors,
           { id: action.id, position: action.position },
         ],
+      };
+    case "REMOVE_ANCHOR":
+      return {
+        ...state,
+        anchors: state.anchors.filter((anchor) => anchor.id != action.id),
       };
     case "SET_ACTIVE_ANCHOR":
       return {

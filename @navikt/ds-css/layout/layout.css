@@ -14,6 +14,9 @@
 .navds-layout__container--3-columns {
   max-width: 79.5rem;
 }
+.navds-layout__section > * {
+  margin-bottom: 1rem;
+}
 
 .navds-layout__section--white > * {
   background: white;
