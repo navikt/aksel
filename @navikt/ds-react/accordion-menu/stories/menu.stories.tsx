@@ -63,7 +63,7 @@ export const All = () => (
       <Layout.Section>
         <div>
           <a id="quis-autem" />
-          <Heading className={"navds-story-section"} level={1}>
+          <Heading size={"xl"} level={1}>
             Quis autem
           </Heading>
           <Normaltekst className={"navds-story-section"}>

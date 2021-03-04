@@ -10,7 +10,7 @@ import {
 
 export const Main = () => (
   <div>
-    <Heading className={"navds-story-section"} level={1} size={"large"}>
+    <Heading level={1} size={"xl"}>
       Quis autem
     </Heading>
     <Paragraph className={"section"}>
@@ -41,7 +41,7 @@ export const Main = () => (
       molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
       pariatur?
     </Paragraph>
-    <Heading className={"section"} level={2}>
+    <Heading level={2} size={"large"}>
       Nulla pariatur?
     </Heading>
     <Paragraph className={"section"}>

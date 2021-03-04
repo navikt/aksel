@@ -14,6 +14,10 @@ html {
   margin: 0;
 }
 
+.navds-accorcion-menu__title {
+  margin-bottom: 0.75rem;
+}
+
 .navds-accordion-menu__item--active::after {
   content: "";
   position: absolute;
@@ -37,13 +41,21 @@ html {
 }
 
 .navds-accordion-menu__dropdown > ul > li {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
+}
+
+.navds-accordion-menu__link--active {
+  font-size: 1.125rem;
+  font-weight: 600;
 }
 
 .navds-accordion-menu__link,
+.navds-accordion-menu__link--active,
 .navds-accordion-menu__button {
-  min-height: 2.5rem;
-  padding: 0.5rem 0;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
 }
 
 .navds-accordion-menu__link {

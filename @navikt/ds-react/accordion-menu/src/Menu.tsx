@@ -2,7 +2,7 @@ import React from "react";
 import { forwardRef, ForwardRefExoticComponent, HTMLAttributes } from "react";
 import cl from "classnames";
 import { default as Item, AccordionMenuItemProps } from "./Item";
-import { Element } from "nav-frontend-typografi";
+import { Undertittel } from "nav-frontend-typografi";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
 import { StoreProvider } from "./Context";
@@ -24,7 +24,9 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
     return (
       <StoreProvider>
         <Nav title={title}>
-          <Element>{title}</Element>
+          <Undertittel className={cl("navds-accorcion-menu__title", className)}>
+            {title}
+          </Undertittel>
           <ul
             ref={ref}
             className={cl("navds-accorcion-menu__container", className)}
