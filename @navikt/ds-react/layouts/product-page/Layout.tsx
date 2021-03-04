@@ -29,10 +29,10 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
 
     return (
       <div ref={ref}>
-        <div id={"layout-header"} className={"navds-layout__header--container"}>
+        <div id={"layout-header"} className={"navds-layout__header"}>
           <ContentContainer>
             <div className={classNames} {...rest}>
-              <div className={cl("navds-layout__header")}>
+              <div className={cl("navds-layout__header--content")}>
                 <Heading size={"xxl"} level={1}>
                   {title}
                 </Heading>

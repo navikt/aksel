@@ -18,13 +18,13 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
 
     return (
       <div ref={ref} className={cl("navds-layout__panel", className)} {...rest}>
-        {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
-        <div className={"navds-layout__panel-heading"}>
+        {icon && <div className={"navds-layout__panel--icon"}>{icon}</div>}
+        <div className={"navds-layout__panel--heading"}>
           <Heading size={"xl"} level={2}>
             {title}
           </Heading>
         </div>
-        <div className={"navds-layout__panel-content"}>{children}</div>
+        <div className={"navds-layout__panel--content"}>{children}</div>
       </div>
     );
   }
