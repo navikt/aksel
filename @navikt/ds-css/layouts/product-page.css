@@ -8,10 +8,15 @@
 
 .navds-layout__container--white {
   background: white;
+  background-size: cover;
 }
 
 .navds-layout__header {
   grid-column: span 12;
+}
+
+.navds-layout__header h1 {
+  margin: 0.25rem 0.75rem;
 }
 
 .navds-layout__container--1-columns,

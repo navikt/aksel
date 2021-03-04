@@ -3,8 +3,7 @@ import cl from "classnames";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { Children, forwardRef } from "react";
 import { default as Section, SectionProps } from "./Section";
-import { ContentContainer } from "../../";
-import { Sidetittel } from "nav-frontend-typografi";
+import { ContentContainer, Heading } from "../../";
 import "@navikt/ds-css/layouts/index.css";
 
 export interface LayoutWithSubComponents
@@ -32,7 +31,9 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
           <ContentContainer>
             <div className={classNames} {...rest}>
               <div className={cl("navds-layout__header")}>
-                <Sidetittel>{title}</Sidetittel>
+                <Heading size={"xxl"} level={1}>
+                  {title}
+                </Heading>
               </div>
             </div>
           </ContentContainer>
