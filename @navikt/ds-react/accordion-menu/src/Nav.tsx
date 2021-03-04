@@ -29,7 +29,7 @@ const Nav = forwardRef<Lenke, AccordionMenuItemProps>(
       return () => {
         window.removeEventListener("scroll", scrollListener);
       };
-    }, [anchors]);
+    }, [anchors, dispatch]);
 
     return <nav aria-label={title || "menu"}>{children}</nav>;
   }

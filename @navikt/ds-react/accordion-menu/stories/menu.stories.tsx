@@ -3,11 +3,10 @@ import Menu from "../src/index";
 import { useEffect } from "react";
 import { Layout } from "../../layout/src";
 import { ContentContainer } from "../../content-container/src";
-import { Main } from "../../layout/stories/components/sections/Main";
 import { Right } from "../../layout/stories/components/sections/Right";
-import "./components/styles.css";
 import { Heading } from "../../lib";
 import { Normaltekst } from "nav-frontend-typografi";
+import "./components/styles.css";
 
 export default {
   title: "@navikt/accordion-menu",

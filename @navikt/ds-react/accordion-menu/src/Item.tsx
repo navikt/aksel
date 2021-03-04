@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
+import React, { forwardRef, HTMLAttributes, useEffect } from "react";
 import cl from "classnames";
 import Lenke from "nav-frontend-lenker";
 import { useStore } from "./Context";
@@ -32,7 +32,7 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
           };
         }
       }
-    }, []);
+    }, [anchor, dispatch]);
 
     return (
       <li

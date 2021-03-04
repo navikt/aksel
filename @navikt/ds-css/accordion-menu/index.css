@@ -14,10 +14,10 @@ html {
   margin: 0;
 }
 
-.navds-accordion-menu__item--active:after {
+.navds-accordion-menu__item--active::after {
   content: "";
   position: absolute;
-  top: 0px;
+  top: 0;
   left: -1rem;
   width: 0.3rem;
   height: 100%;
@@ -25,13 +25,13 @@ html {
 }
 
 @media (min-width: 448px) {
-  .navds-accordion-menu__item--active:after {
+  .navds-accordion-menu__item--active::after {
     left: -2.5rem;
   }
 }
 
 @media (min-width: 980px) {
-  .navds-accordion-menu__item--active:after {
+  .navds-accordion-menu__item--active::after {
     left: -1rem;
   }
 }
