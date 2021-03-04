@@ -50,12 +50,14 @@ export const ThreeColumns = () => (
     <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
       <ProductPageLayout.Panel
         title={"Proin ornare accumsan"}
+        anchor={"proin-ornare-accumsan"}
         icon={<LightBulb />}
       >
         <Main title={false} />
       </ProductPageLayout.Panel>
       <ProductPageLayout.Panel
         title={"Proin ornare accumsan"}
+        anchor={"proin-ornare-accumsan"}
         icon={<LightBulb />}
       >
         <Main title={false} />

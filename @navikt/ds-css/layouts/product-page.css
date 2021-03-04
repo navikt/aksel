@@ -19,12 +19,13 @@
 }
 
 .navds-layout__panel {
+  width: 100%;
+  max-width: 100%;
   position: relative;
   display: inline-block;
-  max-width: 100%;
   padding: var(--navds-layout-padding-small);
   background: white;
-  margin-top: 1.5rem;
+  margin-top: 2rem;
 }
 
 .navds-layout__panel--icon {
@@ -33,16 +34,59 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -1.5rem;
+  top: -2rem;
   left: 0;
+}
+
+.navds-layout__panel--heading h2 {
+  margin: 0.5rem 0;
 }
 
 .navds-layout__panel--icon svg {
   background: #c7dbed;
   border-radius: 2rem;
-  padding: 0.5rem;
-  height: 3.5rem;
-  width: 3.5rem;
+  padding: 1rem;
+  height: 4rem;
+  width: 4rem;
+}
+
+.navds-layout__panel--copy {
+  display: flex;
+  align-items: center;
+}
+
+.navds-layout__panel--copy div.etikett {
+  height: auto;
+  background: var(--navds-color-darkgray);
+  color: white;
+  border: 1px solid var(--navds-color-darkgray);
+  padding: 0.25rem 0.5rem;
+}
+
+.navds-layout__panel--content {
+  margin-top: 1.25rem;
+}
+
+.navds-layout__panel--copy button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  margin: 0 1rem 0 0;
+  padding-left: 0;
+  padding-right: 0;
+  border: 0;
+}
+
+.navds-layout__panel--copy span {
+  font-weight: 600;
+}
+
+.navds-layout__panel--copy svg {
+  color: var(--navds-color-text-link);
+  margin-right: 0.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .navds-layout__container--1-columns,
@@ -148,12 +192,12 @@
 
 @media (min-width: 960px) {
   .navds-layout__panel {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3.5rem;
     margin-top: 0;
   }
 
   .navds-layout__header--margin {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
   }
 
   .navds-layout__section--padding.navds-layout__section--left > * {

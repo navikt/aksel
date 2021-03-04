@@ -4,7 +4,7 @@ import { Button, Link } from "../../../../index";
 export const Left = () => (
   <ul className={"navds-story-menu"}>
     <li>
-      <Link href={"#"}>Iusto odio dignissimos</Link>
+      <Link href={"#proin-ornare-accumsan"}>Iusto odio dignissimos</Link>
     </li>
     <li>
       <Link href={"#"}>Nam libero tempore</Link>
