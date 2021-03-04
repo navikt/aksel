@@ -6,12 +6,11 @@ import {
   Heading,
   Link,
   Paragraph,
-  Alert,
 } from "../../../../index";
 
 export const Main = () => (
   <div>
-    <Heading className={"navds-story-section"} level={1} size={"xl"}>
+    <Heading className={"navds-story-section"} level={1} size={"large"}>
       Quis autem
     </Heading>
     <Paragraph className={"section"}>
@@ -35,10 +34,6 @@ export const Main = () => (
       consectetur, adipisci velit, sed quia non numquam eius modi tempora
       incidunt ut labore et dolore magnam aliquam quaerat voluptatem.{" "}
     </Paragraph>
-    <Alert variant="info" className={"section"}>
-      Suspendisse potenti. Interdum et malesuada fames ac ante ipsum primis in
-      faucibus.
-    </Alert>
     <Paragraph className={"section"}>
       Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
       suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem
@@ -46,7 +41,7 @@ export const Main = () => (
       molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
       pariatur?
     </Paragraph>
-    <Heading className={"section"} level={2} size={"xl"}>
+    <Heading className={"section"} level={2}>
       Nulla pariatur?
     </Heading>
     <Paragraph className={"section"}>

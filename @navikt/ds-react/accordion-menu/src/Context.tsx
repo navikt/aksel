@@ -49,7 +49,7 @@ export const reducer = (state: Store, action: Action) => {
     case "REMOVE_ANCHOR":
       return {
         ...state,
-        anchors: state.anchors.filter((anchor) => anchor.id != action.id),
+        anchors: state.anchors.filter((anchor) => anchor.id !== action.id),
       };
     case "SET_ACTIVE_ANCHOR":
       return {

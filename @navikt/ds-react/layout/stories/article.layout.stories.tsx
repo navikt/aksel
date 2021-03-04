@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ContentContainer } from "../../index";
-import { Layout } from "../index";
+import { ContentContainer, Layout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
@@ -9,7 +8,7 @@ import "./components/styles.css";
 
 export default {
   title: "@navikt/layout/Article",
-  component: { Layout },
+  component: Layout,
   decorators: [
     (Story) => {
       useEffect(() => {
