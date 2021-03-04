@@ -1,0 +1,9 @@
+@import "./product-page.css";
+
+.decorator-utils-container {
+  background: white;
+}
+
+.decorator-utils-content {
+  padding-bottom: 0;
+}

@@ -1,15 +1,14 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ContentContainer } from "../../index";
-import { Layout } from "../index";
+import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
 import "./components/styles.css";
 
 export default {
-  title: "@navikt/layout/Article",
-  component: { Layout },
+  title: "@navikt/layouts/ProductPage",
+  component: { ProductPageLayout },
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -41,54 +40,47 @@ export default {
   },
 };
 
+const title = "Nunc et lorem";
 export const ThreeColumns = () => (
-  <ContentContainer>
-    <Layout>
-      <Layout.Section left sticky>
-        <Left />
-      </Layout.Section>
-      <Layout.Section>
-        <Main />
-      </Layout.Section>
-      <Layout.Section right sticky>
-        <Right />
-      </Layout.Section>
-    </Layout>
-  </ContentContainer>
+  <ProductPageLayout title={title}>
+    <ProductPageLayout.Section left sticky>
+      <Left />
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section>
+      <Main />
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section right sticky>
+      <Right />
+    </ProductPageLayout.Section>
+  </ProductPageLayout>
 );
 
 export const TwoColumnsLeft = () => (
-  <ContentContainer>
-    <Layout>
-      <Layout.Section left sticky>
-        <Left />
-      </Layout.Section>
-      <Layout.Section>
-        <Main />
-      </Layout.Section>
-    </Layout>
-  </ContentContainer>
+  <ProductPageLayout title={title}>
+    <ProductPageLayout.Section left sticky>
+      <Left />
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section>
+      <Main />
+    </ProductPageLayout.Section>
+  </ProductPageLayout>
 );
 
 export const TwoColumnsRight = () => (
-  <ContentContainer>
-    <Layout>
-      <Layout.Section>
-        <Main />
-      </Layout.Section>
-      <Layout.Section right sticky>
-        <Right />
-      </Layout.Section>
-    </Layout>
-  </ContentContainer>
+  <ProductPageLayout title={title}>
+    <ProductPageLayout.Section>
+      <Main />
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section right sticky>
+      <Right />
+    </ProductPageLayout.Section>
+  </ProductPageLayout>
 );
 
 export const OneColumn = () => (
-  <ContentContainer>
-    <Layout>
-      <Layout.Section>
-        <Main />
-      </Layout.Section>
-    </Layout>
-  </ContentContainer>
+  <ProductPageLayout title={title}>
+    <ProductPageLayout.Section>
+      <Main />
+    </ProductPageLayout.Section>
+  </ProductPageLayout>
 );

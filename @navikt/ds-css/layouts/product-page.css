@@ -6,6 +6,14 @@
   margin-left: auto;
 }
 
+.navds-layout__container--white {
+  background: white;
+}
+
+.navds-layout__header {
+  grid-column: span 12;
+}
+
 .navds-layout__container--1-columns,
 .navds-layout__container--2-columns {
   max-width: 60rem;
