@@ -2,12 +2,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
-import {
-  Main,
-  MainTwo,
-  MainThree,
-  MainHighlight,
-} from "./components/sections/Main";
+import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
 import {
   LightBulb,
@@ -64,20 +59,20 @@ export const ThreeColumns = () => (
         highlight={true}
         icon={<LightBulb />}
       >
-        <MainHighlight title={false} />
+        <MainOne title={false} />
       </ProductPageLayout.Panel>
       <ProductPageLayout.Panel
-        title={"Proin ornare accumsan"}
-        anchor={"proin-ornare-accumsan"}
-      >
-        <Main title={false} />
-      </ProductPageLayout.Panel>
-      <ProductPageLayout.Panel
-        title={"Proin ornare accumsan"}
-        anchor={"proin-ornare-accumsan"}
-        icon={<Telephone />}
+        title={"Proin accumsan"}
+        anchor={"proin-accumsan"}
       >
         <MainTwo title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Maecenas in pretium"}
+        anchor={"maecenas-in-pretium"}
+        icon={<Telephone />}
+      >
+        <MainThree title={false} />
       </ProductPageLayout.Panel>
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
@@ -93,8 +88,6 @@ export const TwoColumnsLeft = () => (
     </ProductPageLayout.Section>
     <ProductPageLayout.Section>
       <Main />
-      <MainTwo />
-      <MainThree />
     </ProductPageLayout.Section>
   </ProductPageLayout>
 );
@@ -103,8 +96,6 @@ export const TwoColumnsRight = () => (
   <ProductPageLayout title={title}>
     <ProductPageLayout.Section>
       <Main />
-      <MainTwo />
-      <MainThree />
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
       <Right />
@@ -116,8 +107,6 @@ export const OneColumn = () => (
   <ProductPageLayout title={title}>
     <ProductPageLayout.Section>
       <Main />
-      <MainTwo />
-      <MainThree />
     </ProductPageLayout.Section>
   </ProductPageLayout>
 );
