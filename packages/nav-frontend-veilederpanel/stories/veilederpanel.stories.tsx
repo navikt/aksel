@@ -3,7 +3,7 @@ import Veilederpanel from "../src/veilederpanel";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Veilederpanelpanel",
+  title: "nav-frontend/Veilederpanelpanel",
   component: Veilederpanel,
 } as Meta;
 

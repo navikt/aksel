@@ -3,7 +3,7 @@ import Snakkeboble from "../src/snakkeboble";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Snakkeboble",
+  title: "nav-frontend/Snakkeboble",
   component: Snakkeboble,
 } as Meta;
 

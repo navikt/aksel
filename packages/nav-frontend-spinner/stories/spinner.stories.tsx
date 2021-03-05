@@ -3,7 +3,7 @@ import NavFrontendSpinner from "../src/spinner";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Spinner",
+  title: "nav-frontend/Spinner",
   component: NavFrontendSpinner,
 } as Meta;
 

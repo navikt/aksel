@@ -3,7 +3,7 @@ import Lesmerpanel from "../src/lesmerpanel";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Lesmerpanel",
+  title: "nav-frontend/Lesmerpanel",
   component: Lesmerpanel,
 } as Meta;
 

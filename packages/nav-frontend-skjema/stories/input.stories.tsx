@@ -3,7 +3,7 @@ import { Input } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/Input",
   component: Input,
 } as Meta;
 

@@ -8,7 +8,7 @@ import NavFrontendChevron, {
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Chevron",
+  title: "nav-frontend/Chevron",
   component: NavFrontendChevron,
 } as Meta;
 
