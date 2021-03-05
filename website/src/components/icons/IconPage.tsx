@@ -98,7 +98,7 @@ const IconPage = () => {
   const downloadSvg = () => {
     const element = document.createElement("a");
     const file = new Blob(
-      [renderToString(<Icon />).replace("currentColor", color)],
+      [renderToString(<Icon />).replaceAll("currentColor", color)],
       { type: "text/plain" }
     );
     element.href = URL.createObjectURL(file);
@@ -111,7 +111,7 @@ const IconPage = () => {
   const downloadPng = async () => {
     const element = document.createElement("a");
     const file = await generatePngZip(
-      renderToString(<Icon />).replace("currentColor", color),
+      renderToString(<Icon />).replaceAll("currentColor", color),
       selectedIcon.name
     );
     element.href = URL.createObjectURL(file);
@@ -306,7 +306,7 @@ const IconPage = () => {
               className="language-jsx iconPage__modalSvg"
             >
               {`${beautify_html(
-                renderToString(<Icon />).replace("currentColor", color)
+                renderToString(<Icon />).replaceAll("currentColor", color)
               )}`}
             </Code>
             <span className="iconPage__modalIcons">
