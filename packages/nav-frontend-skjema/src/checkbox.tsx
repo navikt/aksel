@@ -55,7 +55,7 @@ export class Checkbox extends React.Component<CheckboxProps, {}> {
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => {
-          const feilmelding = context.feil || (feil && !!!disabled);
+          const feilmelding = !!disabled ? undefined : context.feil || feil;
           // eslint-disable-next-line no-shadow
           const feilmeldingId = context.feilmeldingId || guid();
 
@@ -74,7 +74,7 @@ export class Checkbox extends React.Component<CheckboxProps, {}> {
               <label className="skjemaelement__label" htmlFor={inputId}>
                 {label}
               </label>
-              {!context.feil && !!feil && (
+              {!context.feil && !!feil && !disabled && (
                 <SkjemaelementFeilmelding id={feilmeldingId}>
                   {typeof feilmelding !== "boolean" && feilmelding}
                 </SkjemaelementFeilmelding>

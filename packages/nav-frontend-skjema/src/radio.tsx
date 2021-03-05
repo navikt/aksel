@@ -63,7 +63,7 @@ class Radio extends React.Component<RadioProps> {
             <input
               type="radio"
               name={name}
-              className={inputCls(!!context.feil || (!!feil && !!!disabled))}
+              className={inputCls(disabled ? false : !!context.feil || !!feil)}
               id={inputId}
               ref={radioRef}
               aria-invalid={!!context.feil}

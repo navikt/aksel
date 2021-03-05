@@ -46,7 +46,7 @@ import { RadioPanelGruppe } from "./../../";
 
 ### Feilmelding uten propagering av feil-prop til children
 
-Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `RadioPanelGruppe` skal propageres til children.
 
 <Example>
   <RadioPanelGruppeExample name="example-4" feil={true} utenFeilPropagering />
@@ -65,6 +65,7 @@ Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGr
   checked={this.state.checked}
   onChange={this.onChange}
   feil={{ feilmelding: "Feilmeldingstekst må gjenta nøkkelord fra label" }}
+  utenFeilPropagering
 />
 ```
 

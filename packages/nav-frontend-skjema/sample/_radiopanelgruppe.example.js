@@ -18,6 +18,7 @@ class RadioPanelGruppeExample extends React.Component {
         label: "Appelsinjuice",
         value: "juice2",
         id: `juice2id-${this.props.name}`,
+        feil: this.props.utenFeilPropagering,
       },
       {
         label: "Melk",
