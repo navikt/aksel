@@ -4,12 +4,7 @@ import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
-import {
-  LightBulb,
-  Information,
-  CustomerService,
-  Telephone,
-} from "@navikt/ds-icons";
+import { LightBulb, Telephone } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
