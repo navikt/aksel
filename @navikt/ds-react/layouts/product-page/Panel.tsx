@@ -49,7 +49,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
               <span>Kopier lenke</span>
             </Button>
             {copied && (
-              <EtikettInfo className={"navds-layout__panel-copy-etikett"}>
+              <EtikettInfo className={"navds-layout__panel-copy-etiquette"}>
                 <Undertekst>Kopiert</Undertekst>
               </EtikettInfo>
             )}
