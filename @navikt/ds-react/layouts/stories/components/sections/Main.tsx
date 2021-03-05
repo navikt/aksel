@@ -50,7 +50,6 @@ export const Main = () => (
       lorem, in elementum purus commodo eget. Mauris maximus congue efficitur.
       Cras vestibulum id metus sed pellentesque.
     </Paragraph>
-
     <table className={"section tabell tabell--stripet"}>
       <thead>
         <tr>
