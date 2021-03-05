@@ -8,15 +8,6 @@
 
 .navds-layout__container--white {
   background: white;
-  background-size: cover;
-}
-
-.navds-layout__header {
-  grid-column: span 12;
-}
-
-.navds-layout__header h1 {
-  margin: 0.25rem 0.85rem;
 }
 
 .navds-layout__container--1-columns,
@@ -50,10 +41,6 @@
 @media (min-width: 448px) {
   .navds-layout__container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
-  }
-
-  .navds-layout__header h1 {
-    margin: 0.25rem 0;
   }
 
   .navds-layout__section--padding.navds-layout__section--left > *,
