@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import cl from "classnames";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { Children, forwardRef } from "react";
 import { default as Section, SectionProps } from "./Section";
 import { default as Panel, PanelProps } from "./Panel";
 import { ContentContainer, Heading } from "../../";
+import { whiteDecoratorUtils } from "../common/utils";
 import "@navikt/ds-css/layouts/index.css";
 
 export interface LayoutWithSubComponents
@@ -27,13 +28,24 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
       className
     );
 
+    useEffect(() => {
+      whiteDecoratorUtils(true);
+      return () => {
+        whiteDecoratorUtils(false);
+      };
+    }, []);
+
     return (
       <div ref={ref}>
         <div id={"layout-header"} className={"navds-layout__header"}>
           <ContentContainer>
             <div className={classNames} {...rest}>
-              <div className={cl("navds-layout__header--content")}>
-                <Heading size={"xxl"} level={1}>
+              <div className={cl("navds-layout__header")}>
+                <Heading
+                  size={"xxl"}
+                  className={cl("navds-layout__header-title")}
+                  level={1}
+                >
                   {title}
                 </Heading>
               </div>

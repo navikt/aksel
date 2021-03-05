@@ -26,37 +26,36 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
 
     return (
       <div ref={ref} className={cl("navds-layout__panel", className)} {...rest}>
-        {icon && <div className={"navds-layout__panel--icon"}>{icon}</div>}
+        {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
         {anchor && <a id={anchor} />}
-        <div className={"navds-layout__panel--heading"}>
-          <Heading size={"xl"} level={2}>
-            {title}
-          </Heading>
-          {anchor && (
-            <div className={"navds-layout__panel--copy"}>
-              <Button
-                ref={copyRef}
-                variant={"secondary"}
-                onClick={() => {
-                  setIsCopied(true);
-                  setTimeout(() => {
-                    copyLink(`${window.location.href}/#${anchor}`);
-                    setIsCopied(false);
-                  }, 1000);
-                }}
-              >
-                <Attachment />
-                <span>Kopier lenke</span>
-              </Button>
-              {copied && (
-                <EtikettInfo>
-                  <Undertekst>Kopiert</Undertekst>
-                </EtikettInfo>
-              )}
-            </div>
-          )}
-        </div>
-        <div className={"navds-layout__panel--content"}>{children}</div>
+        <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>
+          {title}
+        </Heading>
+        {anchor && (
+          <div className={"navds-layout__panel-copy"}>
+            <Button
+              ref={copyRef}
+              variant={"secondary"}
+              className={"navds-layout__panel-copy-button"}
+              onClick={() => {
+                setIsCopied(true);
+                setTimeout(() => {
+                  copyLink(`${window.location.href}/#${anchor}`);
+                  setIsCopied(false);
+                }, 1000);
+              }}
+            >
+              <Attachment className={"navds-layout__panel-copy-icon"} />
+              <span>Kopier lenke</span>
+            </Button>
+            {copied && (
+              <EtikettInfo className={"navds-layout__panel-copy-etikett"}>
+                <Undertekst>Kopiert</Undertekst>
+              </EtikettInfo>
+            )}
+          </div>
+        )}
+        <div className={"navds-layout__panel-content"}>{children}</div>
       </div>
     );
   }

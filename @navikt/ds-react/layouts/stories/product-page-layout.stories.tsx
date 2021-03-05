@@ -4,7 +4,7 @@ import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
-import { LightBulb } from "@navikt/ds-icons";
+import { LightBulb, Money } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
@@ -58,7 +58,7 @@ export const ThreeColumns = () => (
       <ProductPageLayout.Panel
         title={"Proin ornare accumsan"}
         anchor={"proin-ornare-accumsan"}
-        icon={<LightBulb />}
+        icon={<Money />}
       >
         <Main title={false} />
       </ProductPageLayout.Panel>
