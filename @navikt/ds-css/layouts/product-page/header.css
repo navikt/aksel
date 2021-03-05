@@ -2,12 +2,12 @@
   grid-column: span 12;
 }
 
-.navds-layout__header--title {
+.navds-layout__header-title {
   margin: 0.25rem 0.85rem;
 }
 
 @media (min-width: 448px) {
-  .navds-layout__header--title {
+  .navds-layout__header-title {
     margin: 0.25rem 0;
   }
 }

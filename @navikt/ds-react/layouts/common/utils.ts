@@ -4,8 +4,8 @@ export const whiteDecoratorUtils = (toggle: boolean) => {
     .item(0);
 
   if (toggle) {
-    decUtilsContainer?.classList?.add("navds-layout__container--white");
+    decUtilsContainer?.classList?.add("navds-layout__decorator--white");
   } else {
-    decUtilsContainer?.classList?.remove("navds-layout__container--white");
+    decUtilsContainer?.classList?.remove("navds-layout__decorator--white");
   }
 };
