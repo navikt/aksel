@@ -11,11 +11,13 @@ const Nav = forwardRef<Lenke, AccordionMenuItemProps>(
   ({ children, title, className, ...rest }, ref) => {
     const [{ anchors }, dispatch] = useStore();
 
+    console.log(anchors);
+
     useEffect(() => {
       const scrollListener = () => {
         const lastPassedAnchor = anchors
           .sort((a, b) => (a.position.y < b.position.y ? -1 : 1))
-          .filter((anchor) => window.scrollY > anchor.position.y - 10)
+          .filter((anchor) => window.scrollY > anchor.position.y)
           .pop();
 
         if (lastPassedAnchor) {

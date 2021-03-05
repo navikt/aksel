@@ -1,1 +1,5 @@
 @import "./product-page/index.css";
+
+.decorator-utils-container {
+  background: white;
+}

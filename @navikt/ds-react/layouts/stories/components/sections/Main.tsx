@@ -144,7 +144,13 @@ export const MainThree = ({ title = true }) => (
     </Snakkeboble>
     <Paragraph>
       Suspendisse potenti. Praesent at elit interdum, porttitor sem eget,
-      blandit dolor.
+      blandit dolor. Nunc eget consectetur felis, id scelerisque sapien. Ut id
+      feugiat nulla, ut cursus sem. In viverra felis vitae aliquet finibus.
+    </Paragraph>
+    <Paragraph>
+      Vivamus id mi lectus. Duis ac augue magna. Aliquam ut euismod dui. Duis
+      consectetur, magna a malesuada tempus, elit urna fermentum arcu, at
+      porttitor magna sapien id enim.
     </Paragraph>
   </div>
 );

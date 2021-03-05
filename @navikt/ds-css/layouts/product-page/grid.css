@@ -21,7 +21,7 @@
 }
 
 .navds-layout__section > * {
-  margin-bottom: 1rem;
+  margin-bottom: var(--navds-layout-padding-small);
 }
 
 .navds-layout__section--white > * {
@@ -35,10 +35,6 @@
 .navds-layout__section--sticky > * {
   top: var(--navds-grid-gutter-small);
   position: sticky;
-}
-
-.navds-layout__section > * {
-  margin-bottom: var(--navds-layout-padding-small);
 }
 
 .navds-layout__section--left,

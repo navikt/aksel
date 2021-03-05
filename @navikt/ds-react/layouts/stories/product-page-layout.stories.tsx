@@ -51,7 +51,6 @@ export const ThreeColumns = () => (
     <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
       <ProductPageLayout.Panel
         title={"Leo quis"}
-        anchor={"leo-quis"}
         highlight={true}
         icon={<LightBulb />}
       >

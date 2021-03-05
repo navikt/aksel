@@ -19,11 +19,12 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
     useEffect(() => {
       if (anchor) {
         const target = document.getElementById(anchor);
+
         if (target) {
           dispatch({
             type: "INSERT_ANCHOR",
             id: anchor,
-            position: { y: target.offsetTop },
+            position: { y: target.getBoundingClientRect().top - 15 },
           });
 
           return () => {
@@ -48,7 +49,7 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
             className={cl("navds-accordion-menu__link--active", className)}
             {...rest}
           >
-            Test
+            {children}
           </Normaltekst>
         ) : (
           <Lenke
