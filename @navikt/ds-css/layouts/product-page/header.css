@@ -11,10 +11,6 @@
   .navds-layout__header-title {
     margin: 0.25rem 0;
   }
-
-  .navds-layout__header--content h1 {
-    margin: 0.25rem 0;
-  }
 }
 
 @media (min-width: 960px) {

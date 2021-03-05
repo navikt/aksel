@@ -40,7 +40,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
               onClick={() => {
                 setIsCopied(true);
                 setTimeout(() => {
-                  copyLink(`${window.location.href}/#${anchor}`);
+                  copyToClipboard(`${window.location.href}/#${anchor}`);
                   setIsCopied(false);
                 }, 1000);
               }}
@@ -61,7 +61,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
   }
 );
 
-const copyLink = (text: string) => {
+const copyToClipboard = (text: string) => {
   const textArea = document.createElement("textarea");
   textArea.value = text;
   textArea.style.top = "0";
