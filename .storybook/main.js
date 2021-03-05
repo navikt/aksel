@@ -1,7 +1,12 @@
 module.exports = {
   stories: [
-    "../packages/**/*.stories.@(js|jsx|ts|tsx)",
-    "../@navikt/**/*.stories.@(js|jsx|ts|tsx)",
+    "../.storybook/**/*.stories.@(mdx)",
+    "../packages/**/*.stories.@(js|jsx|ts|tsx|mdx)",
+    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-docs",
+    "@storybook/addon-essentials",
+  ],
 };

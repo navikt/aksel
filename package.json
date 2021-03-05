@@ -108,6 +108,7 @@
     "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-essentials": "^6.1.15",
     "@storybook/addon-links": "^6.1.15",
+    "@storybook/addon-docs": "^6.1.21",
     "@storybook/react": "^6.1.15",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
