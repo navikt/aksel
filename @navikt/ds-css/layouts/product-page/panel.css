@@ -5,8 +5,15 @@
   display: inline-block;
   padding: var(--navds-layout-padding-small);
   background: white;
-  margin-top: 2rem;
   padding-top: 2.5rem;
+}
+
+.navds-layout__panel--margin {
+  margin-top: 2rem;
+}
+
+.navds-layout__panel--highlight {
+  box-shadow: rgb(102 164 220) 0px 0px 0px 0.15rem;
 }
 
 .navds-layout__panel-content {
@@ -74,8 +81,10 @@
 }
 
 @media (min-width: 960px) {
-  .navds-layout__panel {
-    margin-bottom: 3.5rem;
+  .navds-layout__panel--margin:first-child {
     margin-top: 0;
+  }
+  .navds-layout__panel--margin:not(:first-child) {
+    margin-top: 2rem;
   }
 }

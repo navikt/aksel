@@ -9,13 +9,14 @@ import { Undertekst } from "nav-frontend-typografi";
 export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   icon?: ReactNode;
+  highlight?: boolean;
   anchor?: string;
   whiteBackground?: boolean;
   withPadding?: boolean;
 }
 
 const Panel = forwardRef<HTMLDivElement, PanelProps>(
-  ({ icon, anchor, title, children, className, ...rest }, ref) => {
+  ({ icon, highlight, anchor, title, children, className, ...rest }, ref) => {
     const [copied, setIsCopied] = useState<boolean>(false);
     const copyRef = React.createRef<HTMLButtonElement>();
 
@@ -25,7 +26,16 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
     }, []);
 
     return (
-      <div ref={ref} className={cl("navds-layout__panel", className)} {...rest}>
+      <div
+        ref={ref}
+        className={cl(
+          "navds-layout__panel",
+          icon && "navds-layout__panel--margin",
+          highlight && "navds-layout__panel--highlight",
+          className
+        )}
+        {...rest}
+      >
         {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
         {anchor && <a id={anchor} />}
         <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>

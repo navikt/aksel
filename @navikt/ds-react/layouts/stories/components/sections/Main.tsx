@@ -7,6 +7,22 @@ import {
   Link,
   Paragraph,
 } from "../../../../index";
+import Veilederpanel from "nav-frontend-veilederpanel";
+
+export const MainHighlight = ({ title = true }) => (
+  <div>
+    {title && (
+      <Heading level={1} size={"xl"}>
+        Quis autem
+      </Heading>
+    )}
+    <Paragraph>
+      Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
+      Quisque varius ornare nulla, ut condimentum sapien dapibus non. Nullam
+      eget interdum nibh
+    </Paragraph>
+  </div>
+);
 
 export const Main = ({ title = true }) => (
   <div>
@@ -43,7 +59,7 @@ export const Main = ({ title = true }) => (
       molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla
       pariatur?
     </Paragraph>
-    <Heading className={"section"} level={2} size={"xl"}>
+    <Heading level={2} size={"xl"}>
       Nulla pariatur?
     </Heading>
     <Paragraph className={"section"}>
@@ -100,5 +116,57 @@ export const Main = ({ title = true }) => (
       ut cursus sem. In viverra felis vitae aliquet finibus.
     </Paragraph>
     <Button>Søk ...</Button>
+  </div>
+);
+
+export const MainTwo = ({ title = true }) => (
+  <div>
+    {title && (
+      <Heading level={1} size={"xl"}>
+        Quis autem
+      </Heading>
+    )}
+    <Paragraph>
+      Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
+      Quisque varius ornare nulla, ut condimentum sapien dapibus non. Nullam
+      eget interdum nibh
+    </Paragraph>
+    <Veilederpanel svg={undefined}>
+      In a ante sed nisl placerat pharetra nec eget ex.
+    </Veilederpanel>
+    <Paragraph>
+      Cras tempor eros sed dapibus egestas. Curabitur bibendum quam quis lectus
+      pretium lacinia. Nunc consequat ac augue quis laoreet. Donec porta, erat
+      vitae blandit egestas, arcu metus pharetra nulla, et laoreet risus purus
+      convallis turpis. Integer quis vehicula nulla, id ullamcorper urna.
+      Integer rutrum imperdiet dolor, vel luctus nibh hendrerit id. Integer
+      aliquam feugiat purus et imperdie
+    </Paragraph>
+  </div>
+);
+
+export const MainThree = ({ title = true }) => (
+  <div>
+    {title && (
+      <Heading level={1} size={"xl"}>
+        Quis autem
+      </Heading>
+    )}
+    <Paragraph>
+      Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
+      Quisque varius ornare nulla, ut condimentum sapien dapibus non. Nullam
+      eget interdum nibh
+    </Paragraph>
+    <Veilederpanel svg={undefined}>
+      In a ante sed nisl placerat pharetra nec eget ex.
+    </Veilederpanel>
+    <Paragraph>
+      Cras tempor eros sed dapibus egestas. Curabitur bibendum quam quis lectus
+      pretium lacinia. Nunc consequat ac augue quis laoreet. Donec porta, erat
+      vitae blandit egestas, arcu metus pharetra nulla, et laoreet risus purus
+      convallis turpis. Integer quis vehicula nulla, id ullamcorper urna.
+      Integer rutrum imperdiet dolor, vel luctus nibh hendrerit id. Integer
+      aliquam feugiat purus et imperdie
+    </Paragraph>
   </div>
 );

@@ -2,9 +2,19 @@ import * as React from "react";
 import { useEffect } from "react";
 import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
-import { Main } from "./components/sections/Main";
+import {
+  Main,
+  MainTwo,
+  MainThree,
+  MainHighlight,
+} from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
-import { LightBulb, Money } from "@navikt/ds-icons";
+import {
+  LightBulb,
+  Information,
+  CustomerService,
+  Telephone,
+} from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
@@ -49,18 +59,25 @@ export const ThreeColumns = () => (
     </ProductPageLayout.Section>
     <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
       <ProductPageLayout.Panel
+        title={"Leo quis"}
+        anchor={"leo-quis"}
+        highlight={true}
+        icon={<LightBulb />}
+      >
+        <MainHighlight title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
         title={"Proin ornare accumsan"}
         anchor={"proin-ornare-accumsan"}
-        icon={<LightBulb />}
       >
         <Main title={false} />
       </ProductPageLayout.Panel>
       <ProductPageLayout.Panel
         title={"Proin ornare accumsan"}
         anchor={"proin-ornare-accumsan"}
-        icon={<Money />}
+        icon={<Telephone />}
       >
-        <Main title={false} />
+        <MainTwo title={false} />
       </ProductPageLayout.Panel>
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
@@ -76,6 +93,8 @@ export const TwoColumnsLeft = () => (
     </ProductPageLayout.Section>
     <ProductPageLayout.Section>
       <Main />
+      <MainTwo />
+      <MainThree />
     </ProductPageLayout.Section>
   </ProductPageLayout>
 );
@@ -84,6 +103,8 @@ export const TwoColumnsRight = () => (
   <ProductPageLayout title={title}>
     <ProductPageLayout.Section>
       <Main />
+      <MainTwo />
+      <MainThree />
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
       <Right />
@@ -95,6 +116,8 @@ export const OneColumn = () => (
   <ProductPageLayout title={title}>
     <ProductPageLayout.Section>
       <Main />
+      <MainTwo />
+      <MainThree />
     </ProductPageLayout.Section>
   </ProductPageLayout>
 );
