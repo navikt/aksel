@@ -13,7 +13,7 @@
 }
 
 .navds-layout__panel--highlight {
-  box-shadow: rgb(102 164 220) 0px 0px 0px 0.15rem;
+  box-shadow: rgb(102, 164, 220) 0 0 0 0.15rem;
 }
 
 .navds-layout__panel-content {
@@ -84,6 +84,7 @@
   .navds-layout__panel--margin:first-child {
     margin-top: 0;
   }
+
   .navds-layout__panel--margin:not(:first-child) {
     margin-top: 2rem;
   }
