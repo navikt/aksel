@@ -3,8 +3,9 @@ import { useEffect } from "react";
 import { ContentContainer } from "../../index";
 import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
-import { Main } from "./components/sections/Main";
+import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
+import { LightBulb, Telephone } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
@@ -47,8 +48,28 @@ export const ThreeColumns = () => (
     <ProductPageLayout.Section left sticky>
       <Left />
     </ProductPageLayout.Section>
-    <ProductPageLayout.Section>
-      <Main />
+    <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
+      <ProductPageLayout.Panel
+        title={"Leo quis"}
+        anchor={"leo-quis"}
+        highlight={true}
+        icon={<LightBulb />}
+      >
+        <MainOne title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Proin accumsan"}
+        anchor={"proin-accumsan"}
+      >
+        <MainTwo title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Maecenas in pretium"}
+        anchor={"maecenas-in-pretium"}
+        icon={<Telephone />}
+      >
+        <MainThree title={false} />
+      </ProductPageLayout.Panel>
     </ProductPageLayout.Section>
     <ProductPageLayout.Section right sticky>
       <Right />

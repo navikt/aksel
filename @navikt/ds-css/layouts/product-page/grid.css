@@ -37,6 +37,10 @@
   position: sticky;
 }
 
+.navds-layout__section > * {
+  margin-bottom: var(--navds-layout-padding-small);
+}
+
 .navds-layout__section--left,
 .navds-layout__section--main,
 .navds-layout__section--right {
@@ -46,6 +50,10 @@
 @media (min-width: 448px) {
   .navds-layout__container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
+  }
+
+  .navds-layout__section > * {
+    margin-bottom: var(--navds-grid-gutter-medium-and-larger);
   }
 
   .navds-layout__section--padding.navds-layout__section--left > *,
