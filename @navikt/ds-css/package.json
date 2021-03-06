@@ -15,11 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
+  "main": "./dist/index.min.css",
   "scripts": {
     "build": "yarn cleancss --output dist/index.min.css index.css --source-map"
   },
   "devDependencies": {
-    "normalize.css": "^8.0.1",
     "clean-css-cli": "^5.2.1"
   }
 }
