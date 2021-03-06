@@ -1,5 +1,3 @@
-import "@navikt/ds-css/typography/index.css";
-
 export { default as Heading } from "./Heading";
 export * from "./Heading";
 export { default as Text } from "./Text";

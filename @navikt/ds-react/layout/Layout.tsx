@@ -1,4 +1,3 @@
-import "@navikt/ds-css/layout/index.css";
 import cl from "classnames";
 import React, {
   Children,
