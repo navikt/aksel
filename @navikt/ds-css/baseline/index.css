@@ -1,5 +1,4 @@
-@import url(~normalize.css);
-@import url(~@navikt/ds-tokens/dist/tokens.css);
+@import url(../../../node_modules/normalize.css/normalize.css);
 @import url(Source-Sans-Pro-regular.css);
 @import url(Source-Sans-Pro-italic.css);
 @import url(Source-Sans-Pro-600.css);
