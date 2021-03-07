@@ -28,8 +28,11 @@ const scan = (key) => {
 };
 
 const getProps = (path) => {
+  let props = [];
   const pathComp = path.match(/\/nav-frontend-(.*)\/md/)[1];
-  const props = require("../react-docgen.json");
+  try {
+    props = require("../react-docgen.json");
+  } catch {}
 
   return props
     .filter((prop) => {
@@ -102,7 +105,7 @@ exports.onCreatePage = ({ page, actions }) => {
         version: pkgjson.version,
         defaultExport:
           ("defaultExport" in pkgjson && pkgjson.defaultExport) || "",
-        props: getProps(page.path),
+        props: [...getProps(page.path)],
       },
       component: TechnicalTemp,
     });

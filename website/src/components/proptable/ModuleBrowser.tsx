@@ -6,9 +6,8 @@ import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
 import PropTable from "./PropTable";
 
 const ModuleBrowser = ({ context }) => {
-  const modules = context.props[0];
+  const modules = context.props.length > 0 ? context.props[0] : [];
 
-  /* console.log(JSON.stringify(modules, null, 4)); */
   const useExportName = (name: string) => {
     const [exportName, setExport] = useState<string>(
       name && name[0].toUpperCase() + name.slice(1)

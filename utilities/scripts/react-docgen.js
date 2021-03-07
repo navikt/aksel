@@ -52,10 +52,14 @@ try {
   }
 
   /* Parses all the given typescript files */
-  /* const docs = docgen.parse(files); */
   const docs = groups.map((group) => {
     const doc = docgen.parse(group.files);
-    return { fileName: group.name, docs: doc };
+    return {
+      fileName: group.name,
+      docs: [
+        ...new Map(doc.map((item) => [item["displayName"], item])).values(),
+      ],
+    };
   });
 
   fs.writeFileSync("./react-docgen.json", JSON.stringify(docs));
