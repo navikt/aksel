@@ -1,6 +1,5 @@
 const glob = require("glob");
 const fs = require("fs");
-
 const docgen = require("react-docgen-typescript").withDefaultConfig({
   propFilter(prop) {
     if (prop.parent) {
@@ -13,6 +12,16 @@ const docgen = require("react-docgen-typescript").withDefaultConfig({
   },
 });
 
+const findMatch = (file) => {
+  if (file.includes("nav-frontend-")) {
+    const match = file.match(/nav-frontend-(.+)\/src/);
+    return match && "nav-frontend-" + match[1].replace("/", "");
+  } else if (file.includes("@navikt/ds-react")) {
+    const match = file.match(/@navikt\/ds-react\/(.*)\//);
+    return match && "@navikt/ds-react/" + match[1];
+  }
+};
+
 try {
   const newComponents = glob.sync("@navikt/ds-react/**/*.tsx");
   const oldComponents = glob.sync("packages/**/src/*.tsx");
@@ -20,36 +29,36 @@ try {
     (file) => !file.includes("stories")
   );
 
-  /* Parses all the given typescript files */
-  const docs = docgen.parse(files);
-
-  /*  Finds and sets fileName for each component*/
-  const withPath = docs.map((doc) => {
-    let paths = [];
-    for (const key in doc.props) {
-      doc.props[key].parent && paths.push(doc.props[key].parent.fileName);
+  const found = [];
+  const groups = [];
+  for (const file of files) {
+    if (found.some((y) => y.includes(file))) {
+      continue;
     }
 
-    paths = paths
-      .filter((file) => !file.includes("node_modules"))
-      .map((file) => {
-        if (file.includes("nav-frontend-")) {
-          const match = file.match(/nav-frontend-(.+)\/src/);
-          return match && "nav-frontend-" + match[1].replace("/", "");
-        } else if (file.includes("@navikt/ds-react")) {
-          const match = file.match(/@navikt\/ds-react\/(.*)\//);
-          return match && "@navikt/ds-react/" + match[1];
-        }
-        return file;
-      });
+    found.push(file);
+    const current = findMatch(file);
+    const matching = files.filter((x) => {
+      if (found.some((y) => y.includes(x))) {
+        return false;
+      }
+      if (findMatch(x) === current) {
+        found.push(x);
+        return true;
+      }
+      return false;
+    });
+    groups.push({ name: current, files: [file, ...matching] });
+  }
 
-    return {
-      fileName: [...new Set(paths)][0],
-      ...doc,
-    };
+  /* Parses all the given typescript files */
+  /* const docs = docgen.parse(files); */
+  const docs = groups.map((group) => {
+    const doc = docgen.parse(group.files);
+    return { fileName: group.name, docs: doc };
   });
 
-  fs.writeFileSync("./react-docgen.json", JSON.stringify(withPath));
+  fs.writeFileSync("./react-docgen.json", JSON.stringify(docs));
 } catch (e) {
   console.error(e);
   console.log("Failed in generating docgen");

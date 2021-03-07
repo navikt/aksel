@@ -103,12 +103,12 @@ module.exports = {
     },
 
     //`gatsby-transformer-react-docgen-typescript-custom`,
-    {
+    /* {
       resolve: "gatsby-transformer-react-docgen-typescript-custom",
       options: {
         ignore: [".docs", "/example", "/stories", ".md"],
       },
-    },
+    }, */
     {
       resolve: `gatsby-plugin-amplitude-analytics`,
       options: {

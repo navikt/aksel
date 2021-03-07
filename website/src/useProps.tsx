@@ -1,4 +1,4 @@
-import { graphql, useStaticQuery } from "gatsby";
+/* import { graphql, useStaticQuery } from "gatsby";
 
 const useAllProps = () =>
   useStaticQuery(graphql`
@@ -33,3 +33,4 @@ export const useProps = (path) => {
     return propPath === pathComp;
   });
 };
+ */

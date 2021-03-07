@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Panel from "nav-frontend-paneler";
 import { Systemtittel, Undertittel } from "nav-frontend-typografi";
-import { useProps } from "../../useProps";
 import Code from "../code/Code";
 import { ModuleBrowserMobileNav, ModuleBrowserNav } from "./ModuleBrowserNav";
 import PropTable from "./PropTable";
 
 const ModuleBrowser = ({ context }) => {
-  const modules = useProps(context.source);
+  const modules = context.props[0];
 
+  /* console.log(JSON.stringify(modules, null, 4)); */
   const useExportName = (name: string) => {
     const [exportName, setExport] = useState<string>(
       name && name[0].toUpperCase() + name.slice(1)
@@ -26,17 +26,18 @@ const ModuleBrowser = ({ context }) => {
       .toLowerCase();
 
     const cIndex = modules.findIndex(
-      (module) => module.name.toLowerCase() === urlComponentName.toLowerCase()
+      (module) =>
+        module.displayName.toLowerCase() === urlComponentName.toLowerCase()
     );
     const dIndex = modules.findIndex(
-      (module) => module.name === context.defaultExport
+      (module) => module.displayName === context.defaultExport
     );
     index = Math.max(0, dIndex, cIndex);
     // In cases where a components have multiple exports from file and no default export (eks checkbox, radio)
     name =
       dIndex === -1 && cIndex === -1 && context.name === "nav-frontend-skjema"
         ? urlComponentName
-        : modules[index]?.name || "";
+        : modules[index]?.displayName || "";
     return { index, name };
   };
 
@@ -53,7 +54,7 @@ const ModuleBrowser = ({ context }) => {
 
   const handlePropChange = (x: number) => {
     setActiveModule(x);
-    setExportName(modules[x].name);
+    setExportName(modules[x].displayName);
   };
 
   return (
