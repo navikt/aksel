@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "husky install",
     "start": "yarn workspace website start",
-    "boot": "yarn clean:lib && yarn lerna:build",
+    "boot": "yarn clean:lib && yarn react-docgen && yarn lerna:build",
     "clean": "yarn workspace website clean",
     "build:gatsby": "yarn workspace website build:gatsby",
     "serve": "yarn workspace website serve",
@@ -24,7 +24,8 @@
     "lint:css": "npx stylelint --syntax css @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
-    "gen:docs": "node utilities/scripts/generateReadmes.js"
+    "gen:docs": "node utilities/scripts/generateReadmes.js",
+    "react-docgen": "node utilities/scripts/react-docgen.js"
   },
   "workspaces": [
     "website",
@@ -138,6 +139,7 @@
     "svg-url-loader": "^7.1.1",
     "typescript": "^3.7.3",
     "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0"
+    "webpack-cli": "^4.2.0",
+    "react-docgen-typescript": "^1.21.0"
   }
 }
