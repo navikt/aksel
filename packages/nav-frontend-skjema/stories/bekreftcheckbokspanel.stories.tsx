@@ -4,7 +4,7 @@ import Lenke from "nav-frontend-lenker";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/BekreftCheckboksPanel",
   component: BekreftCheckboksPanel,
 } as Meta;
 
