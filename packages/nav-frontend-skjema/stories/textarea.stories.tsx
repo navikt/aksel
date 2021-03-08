@@ -3,7 +3,7 @@ import { TextareaControlled, Textarea } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/TextareaControlled",
   component: TextareaControlled,
 } as Meta;
 

@@ -3,7 +3,7 @@ import Veileder from "../src/veileder";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Veileder",
+  title: "nav-frontend/Veileder",
   component: Veileder,
 } as Meta;
 

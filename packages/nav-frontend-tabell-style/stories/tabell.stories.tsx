@@ -5,7 +5,7 @@ import { Checkbox } from "nav-frontend-skjema";
 import "../src/index.less";
 
 export default {
-  title: "Tabell",
+  title: "nav-frontend/Tabell",
 } as Meta;
 
 export const All = () => {
