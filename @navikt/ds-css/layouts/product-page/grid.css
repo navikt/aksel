@@ -29,7 +29,7 @@
 }
 
 .navds-layout__section--sticky > * {
-  top: var(--navds-grid-gutter-small);
+  top: calc(var(--navds-grid-gutter-small) + var(--decorator-sticky-offset));
   position: sticky;
 }
 
