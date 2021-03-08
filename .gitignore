@@ -111,3 +111,5 @@ utilities/**/css
 @navikt/ds-icons/NAV-ikonpakke-svg.zip
 */**/NAV-ikonpakke-png.zip
 */**/NAV-ikonpakke-svg.zip
+
+react-docgen.json
