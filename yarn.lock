@@ -2629,34 +2629,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-css@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-css/-/ds-css-0.1.0.tgz#ff56edecc3d4a9738c17d74e18766e002da8cd6c"
-  integrity sha512-DqTLimCjaFmrUiiO0MHiq5zMLPbgXwLCeiMT09kKHLjJCm3Q3D2nLA919A14ybfSUsHs26CR6Jz0y6dPSJWOqA==
-  dependencies:
-    "@navikt/ds-tokens" "0.1.0-beta.6"
-    normalize.css "^8.0.1"
-
-"@navikt/ds-react@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-react/-/ds-react-0.1.0.tgz#8fe2b54906e78e669a0ebdbd5ca6e8918b52bc36"
-  integrity sha512-RfbZeXsbebAsCLO3MClWm76vbPgDiKszXleKvtl5n5HD2uiUacVduMjuYitxpXD7nnE6d1p+bRkrx7m88jcAEQ==
-  dependencies:
-    "@navikt/ds-css" "0.1.0"
-    "@navikt/ds-icons" "^0.1.0"
-    "@popperjs/core" "^2.5.4"
-    classnames "^2.2.6"
-    react-collapse "^5.1.0"
-    react-merge-refs "^1.1.0"
-    react-modal "3.12.1"
-    react-popper "^2.2.4"
-    uuid "^8.3.2"
-
-"@navikt/ds-tokens@0.1.0-beta.6":
-  version "0.1.0-beta.6"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-tokens/-/ds-tokens-0.1.0-beta.6.tgz#e5248c45a47c8625e650b14bbf08d6d1132249e2"
-  integrity sha512-Hf/pPnocxHB7LA0oUbr8zaALy3C2sXhae/MNfHP3JBQqSYD8czRgXeIZMQHayXa3Tg6KjeiDzOgu3bC0Nl+Thw==
-
 "@navikt/fnrvalidator@^1.1.0":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@navikt/fnrvalidator/-/fnrvalidator-1.1.3.tgz#1bd136977a708120b6069276b0069b2a9cc9ae73"
@@ -16614,11 +16586,6 @@ normalize-url@^4.1.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
   integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
-
-normalize.css@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
-  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 now-and-later@^2.0.0:
   version "2.0.1"
