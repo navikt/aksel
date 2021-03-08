@@ -3,7 +3,7 @@ import { Popover } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
 export default {
-  title: "@navikt/popover",
+  title: "ds-react/popover",
   component: Popover,
   parameters: {
     chromatic: { disable: true },

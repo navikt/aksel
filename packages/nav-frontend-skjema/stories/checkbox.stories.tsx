@@ -3,7 +3,7 @@ import { Checkbox, CheckboxGruppe } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/Checkbox",
   component: Checkbox,
 } as Meta;
 

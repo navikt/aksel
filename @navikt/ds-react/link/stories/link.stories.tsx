@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "../index";
 import { Add } from "@navikt/ds-icons";
 export default {
-  title: "@navikt/link",
+  title: "ds-react/link",
   component: Link,
 };
 

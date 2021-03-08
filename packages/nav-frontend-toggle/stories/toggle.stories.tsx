@@ -3,7 +3,7 @@ import { ToggleGruppe, ToggleKnapp } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Toggle",
+  title: "nav-frontend/Toggle",
   component: ToggleKnapp,
 } as Meta;
 

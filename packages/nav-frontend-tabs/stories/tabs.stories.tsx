@@ -3,7 +3,7 @@ import Tabs from "../src/tabs";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Tabs",
+  title: "nav-frontend/Tabs",
   component: Tabs,
 } as Meta;
 

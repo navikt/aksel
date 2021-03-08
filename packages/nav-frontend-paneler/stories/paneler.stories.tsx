@@ -3,7 +3,7 @@ import Panel from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Panel",
+  title: "nav-frontend/Panel",
   component: Panel,
 } as Meta;
 

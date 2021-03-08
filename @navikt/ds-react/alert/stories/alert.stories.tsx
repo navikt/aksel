@@ -2,7 +2,7 @@ import React from "react";
 import { Alert } from "../index";
 
 export default {
-  title: "@navikt/alert",
+  title: "ds-react/alert",
   component: Alert,
 };
 
