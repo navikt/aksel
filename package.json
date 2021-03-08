@@ -25,12 +25,12 @@
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "gen:docs": "node utilities/scripts/generateReadmes.js",
-    "next-dev": "yarn workspace nextjs-website run dev",
-    "next-prod": "yarn workspace nextjs-website run start"
+    "next-dev": "yarn workspace docs run dev",
+    "next-prod": "yarn workspace docs run start"
   },
   "workspaces": [
     "website",
-    "nextjs-website",
+    "docs",
     "packages/*",
     "@navikt/ds-css",
     "@navikt/ds-css/*",
