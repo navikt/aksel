@@ -19,12 +19,10 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
     useEffect(() => {
       if (anchor) {
         const target = document.getElementById(anchor);
-
         if (target) {
           dispatch({
             type: "INSERT_ANCHOR",
             id: anchor,
-            position: { y: target.getBoundingClientRect().top - 15 },
           });
 
           return () => {

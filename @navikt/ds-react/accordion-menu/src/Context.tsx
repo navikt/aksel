@@ -10,18 +10,12 @@ export interface Store {
 
 export interface Anchor {
   id: string;
-  position: Position;
-}
-
-export interface Position {
-  y: number;
 }
 
 export type Action =
   | {
       type: "INSERT_ANCHOR";
       id: string;
-      position;
     }
   | {
       type: "REMOVE_ANCHOR";
@@ -41,10 +35,7 @@ export const reducer = (state: Store, action: Action) => {
     case "INSERT_ANCHOR":
       return {
         ...state,
-        anchors: [
-          ...state.anchors,
-          { id: action.id, position: action.position },
-        ],
+        anchors: [...state.anchors, { id: action.id }],
       };
     case "REMOVE_ANCHOR":
       return {
