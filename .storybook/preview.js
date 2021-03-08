@@ -1,6 +1,5 @@
 import "nav-frontend-core";
-import "@navikt/ds-css/index.css"; /* Unngår å bruke minified versjon lokalt */
-import "@navikt/ds-tokens";
+import "@navikt/ds-css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
