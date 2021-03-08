@@ -3,7 +3,7 @@ import Lenkepanel from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Lenkepanel",
+  title: "nav-frontend/Lenkepanel",
   component: Lenkepanel,
 } as Meta;
 

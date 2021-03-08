@@ -4,7 +4,7 @@ import Popover from "../src/popover";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Popover",
+  title: "nav-frontend/Popover",
   component: Popover,
   parameters: {
     chromatic: { disable: true },

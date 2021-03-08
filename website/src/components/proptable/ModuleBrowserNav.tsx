@@ -12,9 +12,9 @@ export const ModuleBrowserNav = ({
     <nav>
       <ul className="nav-list">
         {modules.map((module, i) => {
-          if (module.name === undefined) return null;
+          if (module.displayName === undefined) return null;
           return (
-            <li key={module.name}>
+            <li key={module.displayName}>
               <button
                 className={classnames(
                   "module-browser--reset-button",
@@ -25,8 +25,8 @@ export const ModuleBrowserNav = ({
                 )}
                 onClick={() => onClick(i)}
               >
-                {module.name}
-                {module.name === context.defaultExport && (
+                {module.displayName}
+                {module.displayName === context.defaultExport && (
                   <span>&nbsp;(default)</span>
                 )}
               </button>
@@ -50,10 +50,10 @@ export const ModuleBrowserMobileNav = ({
       value={activeModule}
     >
       {modules.map((module, i) => {
-        if (module.name === undefined) return null;
+        if (module.displayName === undefined) return null;
         return (
-          <option key={module.name} value={i}>
-            {module.name}
+          <option key={module.displayName} value={i}>
+            {module.displayName}
           </option>
         );
       })}
