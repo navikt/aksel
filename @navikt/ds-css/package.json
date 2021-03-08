@@ -15,11 +15,15 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
-  "main": "./dist/index.min.css",
+  "main": "./dist/index.css",
   "scripts": {
-    "build": "yarn cleancss --output dist/index.min.css index.css --source-map"
+    "build": "postcss --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.2.1"
+    "postcss": "^8.2.7",
+    "postcss-import": "^14.0.0",
+    "postcss-cli": "^8.3.1",
+    "@navikt/ds-tokens": "^0.1.0",
+    "normalize.css": "^8.0.1"
   }
 }
