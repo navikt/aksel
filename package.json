@@ -24,10 +24,13 @@
     "lint:css": "npx stylelint --syntax css @navikt/**/*.css",
     "clean:lib": "node utilities/scripts/clean.js",
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
-    "gen:docs": "node utilities/scripts/generateReadmes.js"
+    "gen:docs": "node utilities/scripts/generateReadmes.js",
+    "next-dev": "yarn workspace docs run dev",
+    "next-prod": "yarn workspace docs run start"
   },
   "workspaces": [
     "website",
+    "docs",
     "packages/*",
     "@navikt/ds-css",
     "@navikt/ds-css/*",
