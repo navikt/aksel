@@ -4,25 +4,26 @@
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
+  "license": "MIT",
   "keywords": [
     "react",
     "typescript",
     "javascript"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-react"
+  },
   "main": "lib/index.js",
   "module": "lib/esm/index.js",
   "typings": "lib/index.d.ts",
-  "license": "MIT",
+  "sideEffects": false,
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "/lib"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
-  },
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
     "watch": "tsc --watch -p tsconfig.json"
