@@ -1,6 +1,5 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ContentContainer } from "../../index";
 import { ProductPageLayout } from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
@@ -9,7 +8,7 @@ import { LightBulb, Telephone } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
-  title: "@navikt/layouts/ProductPage",
+  title: "ds-react/layouts/ProductPage",
   component: ProductPageLayout,
   decorators: [
     (Story) => {
@@ -51,6 +50,7 @@ export const ThreeColumns = () => (
     <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
       <ProductPageLayout.Panel
         title={"Leo quis"}
+        anchor={"leo-quis"}
         highlight={true}
         icon={<LightBulb />}
       >
