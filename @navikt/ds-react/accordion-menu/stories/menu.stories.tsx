@@ -10,7 +10,7 @@ import { MainThree } from "../../layouts/stories/components/sections/Main";
 import "./components/styles.css";
 
 export default {
-  title: "@navikt/accordion-menu",
+  title: "ds-react/accordion-menu",
   component: { Menu },
   decorators: [
     (Story) => {
