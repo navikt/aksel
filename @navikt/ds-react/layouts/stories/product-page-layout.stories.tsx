@@ -8,7 +8,7 @@ import { LightBulb, Telephone } from "@navikt/ds-icons";
 import "./components/styles.css";
 
 export default {
-  title: "@navikt/layouts/ProductPage",
+  title: "ds-react/layouts/ProductPage",
   component: { ProductPageLayout },
   decorators: [
     (Story) => {
