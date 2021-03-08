@@ -1,12 +1,13 @@
 {
   "extends": "../../utilities/build/tsconfig-pakker.json",
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "./lib/esm",
     "rootDir": "./",
     "esModuleInterop": true,
-    "sourceMap": true,
-    "module": "commonjs",
-    "target": "es2015"
+    "module": "esnext",
+    "target": "esnext",
+    "sourceMap": false,
+    "declaration": false
   },
   "include": ["./*"]
 }

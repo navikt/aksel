@@ -10,7 +10,8 @@
     "javascript"
   ],
   "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "module": "lib/esm/index.js",
+  "typings": "lib/index.d.ts",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
@@ -23,7 +24,7 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-esm.json",
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
