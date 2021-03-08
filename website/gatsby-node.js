@@ -27,6 +27,22 @@ const scan = (key) => {
   }
 };
 
+const getProps = (path) => {
+  let props = [];
+  const pathComp = path.match(/\/nav-frontend-(.*)\/md/)[1];
+  try {
+    props = require("../react-docgen.json");
+  } catch {}
+
+  return props
+    .filter((prop) => {
+      const match = prop.fileName && prop.fileName.match(/nav-frontend-(.*)/);
+      const propPath = match && match.length >= 2 ? match[1] : "";
+      return propPath === pathComp;
+    })
+    .map((prop) => prop.docs);
+};
+
 exports.onCreatePage = ({ page, actions }) => {
   const { createPage, deletePage } = actions;
 
@@ -89,6 +105,7 @@ exports.onCreatePage = ({ page, actions }) => {
         version: pkgjson.version,
         defaultExport:
           ("defaultExport" in pkgjson && pkgjson.defaultExport) || "",
+        props: [...getProps(page.path)],
       },
       component: TechnicalTemp,
     });
