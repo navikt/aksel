@@ -1,3 +1,17 @@
+# Nytt oppsett for design.nav.no
+
+Planener er at nytt design og innhold for design.nav.no vil bli utviklet her med hjelp av nextjs.
+
+## Kom i gang
+
+> Note: Kjøres fra root, ikke docs/package.json
+
+- `yarn install`
+- `yarn boot`
+- `yarn next-dev`
+
+## Nextjs default Readme
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
