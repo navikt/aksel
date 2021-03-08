@@ -7,7 +7,7 @@ import {
 } from "../index";
 
 export default {
-  title: "@navikt/internal-header",
+  title: "ds-react/internal-header",
   component: InternalHeader,
 };
 

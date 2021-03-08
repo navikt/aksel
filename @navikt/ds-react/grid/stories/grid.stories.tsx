@@ -4,7 +4,7 @@ import { ContentContainer } from "../../index";
 import "./styles.css";
 
 export default {
-  title: "@navikt/grid",
+  title: "ds-react/grid",
   component: { Grid, Cell },
   parameters: {
     layout: "fullscreen",

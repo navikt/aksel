@@ -5,7 +5,7 @@ import Etikett from "nav-frontend-etiketter";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Ekspanderbartpanel",
+  title: "nav-frontend/Ekspanderbartpanel",
   component: Ekspanderbartpanel,
 } as Meta;
 

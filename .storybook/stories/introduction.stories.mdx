@@ -1,0 +1,18 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="ds-react/Introduksjon" />
+
+# Ta i bruk `@navikt/ds-react` pakken
+
+## Oppsett
+
+```bash
+yarn install @navikt/ds-react
+```
+
+Importer `@navikt/ds-tokens` høyt opp i dom-strukturen (må nås av alle komponentene)
+Dette vil legge til css-variabler på :root. For å få dette til å fungere med IE11, kan denne pakken tas i bruk: https://jhildenbiddle.github.io/css-vars-ponyfill/#/
+
+```bash
+import "@navikt/ds-tokens";
+```
