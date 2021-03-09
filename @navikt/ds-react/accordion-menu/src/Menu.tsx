@@ -10,12 +10,12 @@ import { AccordionMenuCollapsableProps } from "./Collapsable";
 import { StoreProvider } from "./Context";
 import Nav from "./Nav";
 import "@navikt/ds-css/accordion-menu/index.css";
-import { Heading } from "../../index";
+import { Heading, OverridableComponent } from "../../index";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<AccordionMenuProps> {
   Collapsable: ForwardRefExoticComponent<AccordionMenuCollapsableProps>;
-  Item: ForwardRefExoticComponent<AccordionMenuItemProps>;
+  Item: OverridableComponent<AccordionMenuItemProps>;
 }
 
 export interface AccordionMenuProps extends HTMLAttributes<HTMLUListElement> {

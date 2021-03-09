@@ -1,19 +1,30 @@
-import React, { forwardRef, HTMLAttributes, useEffect } from "react";
+import React, { forwardRef, useEffect } from "react";
 import cl from "classnames";
 import { useStore } from "./Context";
-import { Text, Link } from "../../index";
+import { OverridableComponent } from "../../index";
 
-export interface AccordionMenuItemProps
-  extends HTMLAttributes<HTMLAnchorElement> {
-  href: string;
-  active?: boolean;
+export interface AccordionMenuItemProps {
+  props: {
+    children: React.ReactNode;
+    active?: boolean;
+  } & React.HTMLAttributes<HTMLLIElement>;
+  defaultComponent: "a";
 }
 
-const Item = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
-  ({ children, href, active = false, className, ...rest }, ref) => {
-    const anchor = href.split("#")[1];
+const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
+  (
+    {
+      children,
+      component: Component = "a",
+      active = false,
+      className,
+      ...rest
+    },
+    ref
+  ) => {
+    const anchor = rest.href && rest.href.split("#")[1];
     const [{ activeAnchor }, dispatch] = useStore();
-    const isActive = active || activeAnchor === anchor;
+    const isActive = active || (anchor && activeAnchor === anchor) || false;
 
     useEffect(() => {
       if (anchor) {
@@ -41,24 +52,15 @@ const Item = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
           isActive && "navds-accordion-menu__item--active"
         )}
       >
-        {isActive ? (
-          <Text
-            size="medium"
-            className={cl("navds-accordion-menu__link--active", className)}
-            {...rest}
-          >
-            {children}
-          </Text>
-        ) : (
-          <Link
-            ref={ref}
-            href={href}
-            className={cl("navds-accordion-menu__link", className)}
-            {...rest}
-          >
-            {children}
-          </Link>
-        )}
+        <Component
+          ref={ref}
+          className={cl("navds-link", "navds-accordion-menu__link", className, {
+            "navds-accordion-menu__link--active": isActive,
+          })}
+          {...rest}
+        >
+          {children}
+        </Component>
       </li>
     );
   }

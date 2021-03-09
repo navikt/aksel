@@ -7,6 +7,8 @@ import { LightBulb, Telephone } from "@navikt/ds-icons";
 import { MainOne } from "../../layouts/stories/components/sections/Main";
 import { MainTwo } from "../../layouts/stories/components/sections/Main";
 import { MainThree } from "../../layouts/stories/components/sections/Main";
+import { Link, HashRouter as Router } from "react-router-dom";
+
 import "./components/styles.css";
 
 export default {
@@ -83,3 +85,68 @@ export const All = () => (
     </ProductPageLayout.Section>
   </ProductPageLayout>
 );
+
+export const ReactRouter = () => (
+  <ProductPageLayout title={"TEST"}>
+    <ProductPageLayout.Section left sticky>
+      <Menu>
+        <Menu.Item component={Link} to="/link1">
+          Leo quis
+        </Menu.Item>
+        <Menu.Collapsable title={"Proin accumsan"}>
+          <Menu.Item component={Link} to="/link2">
+            Nulla pariatur
+          </Menu.Item>
+          <Menu.Item component={Link} to="/link3">
+            Luctus justo
+          </Menu.Item>
+        </Menu.Collapsable>
+        <Menu.Collapsable title={"Sint cupidatat"}>
+          <Menu.Item component={Link} to="/link4">
+            Nulla pariatur
+          </Menu.Item>
+          <Menu.Item component={Link} to="/link5">
+            Luctus justo
+          </Menu.Item>
+        </Menu.Collapsable>
+        <Menu.Item component={Link} to="/link6">
+          Maecenas in pretium
+        </Menu.Item>
+      </Menu>
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
+      <ProductPageLayout.Panel
+        title={"Leo quis"}
+        anchor={"leo-quis"}
+        highlight={true}
+        icon={<LightBulb />}
+      >
+        <MainOne title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Proin accumsan"}
+        anchor={"proin-accumsan"}
+      >
+        <MainTwo title={false} />
+      </ProductPageLayout.Panel>
+      <ProductPageLayout.Panel
+        title={"Maecenas in pretium"}
+        anchor={"maecenas-in-pretium"}
+        icon={<Telephone />}
+      >
+        <MainThree title={false} />
+      </ProductPageLayout.Panel>
+    </ProductPageLayout.Section>
+    <ProductPageLayout.Section right sticky>
+      <Right />
+    </ProductPageLayout.Section>
+  </ProductPageLayout>
+);
+
+ReactRouter.decorators = [
+  (Story) => (
+    <Router>
+      <Story />
+    </Router>
+  ),
+];
