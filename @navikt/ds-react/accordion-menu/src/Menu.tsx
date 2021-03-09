@@ -27,13 +27,15 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
     return (
       <StoreProvider>
         <Nav title={title}>
-          <Heading
-            level={2}
-            size="medium"
-            className={cl("navds-accordion-menu__title", className)}
-          >
-            {title}
-          </Heading>
+          {title && (
+            <Heading
+              level={2}
+              size="medium"
+              className={cl("navds-accordion-menu__title", className)}
+            >
+              {title}
+            </Heading>
+          )}
           <ul
             ref={ref}
             className={cl("navds-accordion-menu__container", className)}
