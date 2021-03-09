@@ -1,12 +1,7 @@
-import React, { forwardRef, HTMLAttributes, useEffect } from "react";
+import React, { forwardRef, useEffect } from "react";
 import cl from "classnames";
 import { useStore } from "./Context";
-import { Link, OverridableComponent } from "../../index";
-
-/* export interface AccordionMenuItemProps
-  extends HTMLAttributes<HTMLAnchorElement> {
-  active?: boolean;
-} */
+import { OverridableComponent } from "../../index";
 
 export interface AccordionMenuItemProps {
   props: {
