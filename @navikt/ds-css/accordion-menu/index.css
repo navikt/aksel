@@ -23,9 +23,9 @@ html {
   position: absolute;
   top: 0;
   left: -1rem;
-  width: 0.3rem;
+  width: 8px;
   height: 100%;
-  background-color: var(--navds-color-blue-60);
+  background-color: var(--navds-color-blue-50);
 }
 
 @media (min-width: 448px) {
