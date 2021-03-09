@@ -48,7 +48,8 @@
       "node_modules",
       "lib",
       "public",
-      "examples"
+      "examples",
+      "stories"
     ]
   },
   "stylelint": {
