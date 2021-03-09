@@ -2,7 +2,7 @@ html {
   scroll-behavior: smooth;
 }
 
-.navds-accorcion-menu__container {
+.navds-accordion-menu__container {
   padding: 0;
   margin: 0;
   list-style: none;
@@ -14,7 +14,7 @@ html {
   margin: 0;
 }
 
-.navds-accorcion-menu__title {
+.navds-accordion-menu__title {
   margin-bottom: 0.75rem;
 }
 

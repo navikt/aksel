@@ -38,7 +38,7 @@ const Collapsable = forwardRef<
       {open && (
         <ul
           className={cl(
-            "navds-accorcion-menu__container",
+            "navds-accordion-menu__container",
             "navds-accordion-menu__dropdown--content"
           )}
         >

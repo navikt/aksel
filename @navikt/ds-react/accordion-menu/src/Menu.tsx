@@ -30,13 +30,13 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
           <Heading
             level={2}
             size="medium"
-            className={cl("navds-accorcion-menu__title", className)}
+            className={cl("navds-accordion-menu__title", className)}
           >
             {title}
           </Heading>
           <ul
             ref={ref}
-            className={cl("navds-accorcion-menu__container", className)}
+            className={cl("navds-accordion-menu__container", className)}
             {...rest}
           >
             {children}
