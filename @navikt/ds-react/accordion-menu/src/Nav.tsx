@@ -1,5 +1,4 @@
 import React, { forwardRef, HTMLAttributes, useEffect } from "react";
-import Lenke from "nav-frontend-lenker";
 import { useStore } from "./Context";
 
 export interface AccordionMenuItemProps
@@ -7,7 +6,7 @@ export interface AccordionMenuItemProps
   title?: string;
 }
 
-const Nav = forwardRef<Lenke, AccordionMenuItemProps>(
+const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
   ({ children, title, className, ...rest }, ref) => {
     const [{ anchors }, dispatch] = useStore();
 

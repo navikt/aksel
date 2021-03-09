@@ -56,6 +56,7 @@ html {
   display: flex;
   align-items: center;
   padding: 0;
+  background: none;
 }
 
 .navds-accordion-menu__link {
@@ -64,6 +65,7 @@ html {
 
 .navds-accordion-menu__chevron {
   margin-right: 0.25rem;
+  font-size: 1rem;
 }
 
 .navds-accordion-menu__button {

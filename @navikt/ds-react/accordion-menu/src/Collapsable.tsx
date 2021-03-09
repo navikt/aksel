@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useState } from "react";
 import cl from "classnames";
-import { NedChevron, OppChevron } from "nav-frontend-chevron";
+import { Expand } from "@navikt/ds-icons";
 
 export interface AccordionMenuCollapsableProps
   extends HTMLAttributes<HTMLButtonElement> {
@@ -23,13 +23,17 @@ const Collapsable = forwardRef<
       <button
         ref={ref}
         onClick={() => setOpen(!open)}
-        className={cl("lenke", "navds-accordion-menu__button", className)}
+        className={cl("navds-link", "navds-accordion-menu__button", className)}
         {...rest}
       >
         {title}
-        <div className="navds-accordion-menu__chevron">
-          {open ? <OppChevron /> : <NedChevron />}
-        </div>
+        <Expand
+          className={cl(
+            "navds-accordion__chevron",
+            `navds-accordion__chevron--${open ? "up" : "down"}`,
+            `navds-accordion-menu__chevron`
+          )}
+        />
       </button>
       {open && (
         <ul

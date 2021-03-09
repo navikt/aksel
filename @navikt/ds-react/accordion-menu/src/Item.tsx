@@ -1,8 +1,7 @@
 import React, { forwardRef, HTMLAttributes, useEffect } from "react";
 import cl from "classnames";
-import Lenke from "nav-frontend-lenker";
 import { useStore } from "./Context";
-import { Normaltekst } from "nav-frontend-typografi";
+import { Text, Link } from "../../index";
 
 export interface AccordionMenuItemProps
   extends HTMLAttributes<HTMLAnchorElement> {
@@ -10,7 +9,7 @@ export interface AccordionMenuItemProps
   active?: boolean;
 }
 
-const Item = forwardRef<Lenke, AccordionMenuItemProps>(
+const Item = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
   ({ children, href, active = false, className, ...rest }, ref) => {
     const anchor = href.split("#")[1];
     const [{ activeAnchor }, dispatch] = useStore();
@@ -43,21 +42,22 @@ const Item = forwardRef<Lenke, AccordionMenuItemProps>(
         )}
       >
         {isActive ? (
-          <Normaltekst
+          <Text
+            size="medium"
             className={cl("navds-accordion-menu__link--active", className)}
             {...rest}
           >
             {children}
-          </Normaltekst>
+          </Text>
         ) : (
-          <Lenke
+          <Link
             ref={ref}
             href={href}
             className={cl("navds-accordion-menu__link", className)}
             {...rest}
           >
             {children}
-          </Lenke>
+          </Link>
         )}
       </li>
     );
