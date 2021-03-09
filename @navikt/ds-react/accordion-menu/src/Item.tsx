@@ -59,15 +59,6 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
           isActive && "navds-accordion-menu__item--active"
         )}
       >
-        {/* <Link
-          href={"#1233"}
-          className={cl("navds-accordion-menu__link", className, {
-            "navds-accordion-menu__link--active": isActive,
-          })}
-          {...rest}
-        >
-          {children}
-        </Link> */}
         <Component
           ref={ref}
           className={cl("navds-link", "navds-accordion-menu__link", className, {

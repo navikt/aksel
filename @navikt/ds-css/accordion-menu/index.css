@@ -59,9 +59,10 @@ html {
   align-items: center;
   padding: 0;
   background: none;
+  cursor: pointer;
 }
 
-.navds-accordion-menu__link {
+.navds-accordion-menu__link.navds-link {
   display: flex;
 }
 
