@@ -41,24 +41,16 @@ const Item = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
           isActive && "navds-accordion-menu__item--active"
         )}
       >
-        {isActive ? (
-          <Text
-            size="medium"
-            className={cl("navds-accordion-menu__link--active", className)}
-            {...rest}
-          >
-            {children}
-          </Text>
-        ) : (
-          <Link
-            ref={ref}
-            href={href}
-            className={cl("navds-accordion-menu__link", className)}
-            {...rest}
-          >
-            {children}
-          </Link>
-        )}
+        <Link
+          ref={ref}
+          href={href}
+          className={cl("navds-accordion-menu__link", className, {
+            "navds-accordion-menu__link--active": isActive,
+          })}
+          {...rest}
+        >
+          {children}
+        </Link>
       </li>
     );
   }

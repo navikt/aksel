@@ -47,6 +47,8 @@ html {
 .navds-accordion-menu__link--active {
   font-size: 1.125rem;
   font-weight: 600;
+  color: var(--navds-color-text);
+  text-decoration: none;
 }
 
 .navds-accordion-menu__link,
