@@ -26,8 +26,6 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
     const [{ activeAnchor }, dispatch] = useStore();
     const isActive = active || (anchor && activeAnchor === anchor) || false;
 
-    console.log("active: " + activeAnchor);
-    console.log("anchor: " + anchor + "\n");
     useEffect(() => {
       if (anchor) {
         const target = document.getElementById(anchor);
