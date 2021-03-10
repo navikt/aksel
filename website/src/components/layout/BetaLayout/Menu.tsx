@@ -1,5 +1,4 @@
 import React, { forwardRef, useState } from "react";
-import "@navikt/ds-css/accordion/index.css";
 import { Expand } from "@navikt/ds-icons";
 import cl from "classnames";
 import { Link } from "gatsby";

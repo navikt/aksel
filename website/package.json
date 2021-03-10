@@ -43,8 +43,8 @@
     "react-use-keypress": "^1.0.1",
     "rehype-slug": "^4.0.1",
     "rehype-toc": "^3.0.2",
-    "@navikt/ds-css": "0.1.0",
-    "@navikt/ds-react": "0.1.0",
+    "@navikt/ds-css": "^0.2.0",
+    "@navikt/ds-react": "^0.2.0",
     "canvg": "^3.0.7"
   },
   "devDependencies": {

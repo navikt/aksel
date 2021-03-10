@@ -1,7 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/internal-header/index.css";
-import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {

@@ -5,7 +5,6 @@ import { Children, forwardRef } from "react";
 import { default as Section, SectionProps } from "./Section";
 import { ContentContainer, Heading } from "../../";
 import { whiteDecoratorUtils } from "../common/utils";
-import "@navikt/ds-css/layouts/index.css";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {

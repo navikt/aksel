@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/grid/index.css";
 
 export type GridProps = HTMLAttributes<HTMLDivElement>;
 const Grid = forwardRef<HTMLDivElement, GridProps>(

@@ -3,7 +3,6 @@ import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 
 import { Expand } from "@navikt/ds-icons";
-import "@navikt/ds-css/accordion/index.css";
 import { v4 as uuidv4 } from "uuid";
 
 export interface AccordionProps

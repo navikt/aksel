@@ -8,6 +8,7 @@ export interface CheckboksPanelProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
   subtext?: string;
+  feil?: boolean;
 }
 
 export interface CheckboksPanelState {
@@ -39,20 +40,25 @@ class CheckboksPanel extends React.Component<
   }
 
   render() {
-    const { id, label, subtext, disabled, ...other } = this.props;
+    const { id, label, subtext, disabled, feil, ...other } = this.props;
     const { hasFocus, checked } = this.state;
     const inputId = id || guid();
 
-    const cls = classNames("inputPanel checkboksPanel", {
-      "inputPanel--checked": checked && !disabled,
-      "inputPanel--focused": hasFocus && !disabled,
-      "inputPanel--disabled": disabled === true,
-    });
+    const cls = (feil) =>
+      classNames("inputPanel checkboksPanel", {
+        "inputPanel--checked": checked && !disabled,
+        "inputPanel--focused": hasFocus && !disabled,
+        "inputPanel--disabled": disabled === true,
+        "skjemaelement__input--harFeil": feil && !checked,
+      });
 
     return (
       <SkjemaGruppeFeilContext.Consumer>
         {(context: SkjemaGruppeFeilContextProps) => (
-          <label className={cls} htmlFor={inputId}>
+          <label
+            className={cls(disabled ? false : !!context.feil || !!feil)}
+            htmlFor={inputId}
+          >
             <input
               id={inputId}
               className="inputPanel__field"

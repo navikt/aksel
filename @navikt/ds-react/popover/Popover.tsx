@@ -9,7 +9,6 @@ import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import "@navikt/ds-css/popover/index.css";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
