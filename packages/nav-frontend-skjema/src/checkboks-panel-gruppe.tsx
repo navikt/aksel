@@ -31,6 +31,10 @@ export interface CheckboksPanelGruppeProps
    * Styling klasse for container
    */
   className?: string;
+  /**
+   * Option om man skal propagere feil til children
+   */
+  utenFeilPropagering?: boolean;
 }
 
 class CheckboksPanelGruppe extends React.Component<CheckboksPanelGruppeProps> {
