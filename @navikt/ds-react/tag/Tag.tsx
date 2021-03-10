@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/tag/index.css";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;

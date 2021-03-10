@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/link/index.css";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

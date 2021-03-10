@@ -6,7 +6,6 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import "@navikt/ds-css/alert/index.css";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   variant: "error" | "warning" | "info" | "success";

@@ -1,5 +1,5 @@
 import "nav-frontend-core";
-import "@navikt/ds-css/baseline/index.css";
+import "@navikt/ds-css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
