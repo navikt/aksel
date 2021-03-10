@@ -26,9 +26,13 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      setDecoratorParams({ utilsBackground: "white" });
+      setDecoratorParams({
+        utilsBackground: "white",
+      });
       return () => {
-        setDecoratorParams({ utilsBackground: "transparent" });
+        setDecoratorParams({
+          utilsBackground: "transparent",
+        });
       };
     }, []);
 
