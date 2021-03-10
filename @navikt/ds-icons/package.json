@@ -14,9 +14,9 @@
   ],
   "license": "MIT",
   "author": "NAV",
-  "main": "jsx/index.js",
-  "module": "jsx/index.js",
-  "typings": "jsx/index.d.ts",
+  "main": "ems/index.js",
+  "module": "esm/index.js",
+  "typings": "esm/index.d.ts",
   "sideEffects": false,
   "type": "module",
   "files": [
