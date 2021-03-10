@@ -1,34 +1,39 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.1.2",
+  "version": "0.2.0-beta.1",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
+  "license": "MIT",
   "keywords": [
     "react",
     "typescript",
     "javascript"
   ],
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-react"
+  },
+  "main": "esm/index.js",
+  "module": "esm/index.js",
+  "typings": "esm/index.d.ts",
+  "sideEffects": false,
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "/lib"
+    "/cjs",
+    "/esm"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
-  },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "cjs-package": "copyfiles -f config/package.json cjs",
+    "build": "tsc -p tsconfig.json && tsc -p tsconfig-esm.json && yarn cjs-package",
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
     "@navikt/ds-css": "^0.1.17",
-    "@navikt/ds-icons": "^0.1.7",
+    "@navikt/ds-icons": "^0.2.0-beta.1",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
@@ -38,7 +43,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "copyfiles": "^2.4.1"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"

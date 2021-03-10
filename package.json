@@ -48,7 +48,9 @@
       "node_modules",
       "lib",
       "public",
-      "examples"
+      "examples",
+      "esm",
+      "cjs"
     ]
   },
   "stylelint": {
