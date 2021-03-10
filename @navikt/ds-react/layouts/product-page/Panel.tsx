@@ -49,8 +49,8 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
               className={"navds-layout__panel-copy-button"}
               onClick={() => {
                 setIsCopied(true);
+                copyToClipboard(`${window.location.href}/#${anchor}`);
                 setTimeout(() => {
-                  copyToClipboard(`${window.location.href}/#${anchor}`);
                   setIsCopied(false);
                 }, 1000);
               }}
