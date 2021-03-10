@@ -24,10 +24,6 @@
   max-width: 79.5rem;
 }
 
-.navds-layout__section > * {
-  margin-bottom: var(--navds-layout-padding-small);
-}
-
 .navds-layout__section--white > * {
   background: white;
 }
@@ -39,6 +35,10 @@
 .navds-layout__section--sticky > * {
   top: calc(var(--navds-grid-gutter-small) + var(--decorator-sticky-offset));
   position: sticky;
+}
+
+.navds-layout__section > * {
+  margin-bottom: var(--navds-layout-padding-small);
 }
 
 .navds-layout__section--left,
