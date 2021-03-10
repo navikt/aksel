@@ -48,7 +48,9 @@
       "node_modules",
       "lib",
       "public",
-      "examples"
+      "examples",
+      "esm",
+      "cjs"
     ]
   },
   "stylelint": {
@@ -135,13 +137,13 @@
     "prettier": "2.2.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0",
+    "react-docgen-typescript": "^1.21.0",
     "react-is": "^16.13.1",
     "stylelint": "^13.7.2",
     "stylelint-config-standard": "^20.0.0",
     "svg-url-loader": "^7.1.1",
     "typescript": "^3.7.3",
     "webpack": "^5.4.0",
-    "webpack-cli": "^4.2.0",
-    "react-docgen-typescript": "^1.21.0"
+    "webpack-cli": "^4.2.0"
   }
 }

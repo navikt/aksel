@@ -18,6 +18,7 @@ class RadioPanelGruppeExample extends React.Component {
         label: "Appelsinjuice",
         value: "juice2",
         id: `juice2id-${this.props.name}`,
+        feil: this.props.utenFeilPropagering,
       },
       {
         label: "Melk",
@@ -46,7 +47,12 @@ class RadioPanelGruppeExample extends React.Component {
           radios={this.radios}
           checked={this.state.checked}
           onChange={this.onChange}
-          feil={this.props.feil ? "Her er det en feil." : undefined}
+          feil={
+            this.props.feil
+              ? "Feilmeldingstekst må gjenta nøkkelord fra label"
+              : undefined
+          }
+          utenFeilPropagering={!!this.props.utenFeilPropagering}
         />
         {this.props.button && (
           <Knapp

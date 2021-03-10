@@ -1,0 +1,18 @@
+@import "@navikt/ds-tokens";
+@import "normalize.css";
+@import "Source-Sans-Pro-regular.css";
+@import "Source-Sans-Pro-italic.css";
+@import "Source-Sans-Pro-600.css";
+@import "print.css";
+@import "utility.css";
+
+body {
+  font-family: var(--navds-font-family);
+  line-height: 1.375;
+  color: var(--navds-color-text-primary);
+  font-size: 1.125rem;
+}
+
+a {
+  color: var(--navds-color-text-link);
+}

@@ -1,4 +1,4 @@
-@import "~@navikt/ds-css/baseline/index.css";
+@import "~@navikt/ds-css";
 
 div[class="ds-content"] > .table-of-contents {
   display: none;

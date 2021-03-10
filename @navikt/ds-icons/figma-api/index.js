@@ -1,9 +1,9 @@
-const api = require("./api");
-const fs = require("fs");
-const path = require("path");
-const pLimit = require("p-limit");
-const rimraf = require("rimraf");
-const startCase = require("lodash.startcase");
+import { getNodeChildren, getSvgImageUrls, getIconContent } from "./api";
+import { existsSync, unlinkSync, writeFileSync, mkdirSync } from "fs";
+import { resolve } from "path";
+import pLimit from "p-limit";
+import rimraf from "rimraf";
+import startCase from "lodash.startcase";
 
 const generateMetadata = (iconNodesArr) => {
   return iconNodesArr
@@ -32,14 +32,14 @@ const main = async () => {
   // Limiting to ~20 concurrent downloads seems to lead to fewer erros
   const limit = pLimit(20);
 
-  const iconNodesArr = await api.getNodeChildren().catch((e) => {
+  const iconNodesArr = await getNodeChildren().catch((e) => {
     throw e;
   });
 
-  if (fs.existsSync(metadataFileName)) {
-    fs.unlinkSync(metadataFileName);
+  if (existsSync(metadataFileName)) {
+    unlinkSync(metadataFileName);
   }
-  fs.writeFileSync(
+  writeFileSync(
     metadataFileName,
     JSON.stringify(generateMetadata(iconNodesArr), null, 4),
     {
@@ -47,25 +47,24 @@ const main = async () => {
     }
   );
 
-  const iconUrls = await api.getSvgImageUrls(
+  const iconUrls = await getSvgImageUrls(
     iconNodesArr.map((node) => node.node_id).join(",")
   );
 
-  if (fs.existsSync(iconFolder)) {
+  if (existsSync(iconFolder)) {
     rimraf.sync(iconFolder);
   }
-  fs.mkdirSync(iconFolder);
+  mkdirSync(iconFolder);
 
   console.log("Total icons: " + iconNodesArr.length);
 
   await Promise.all(
     iconUrls.map((url, x) =>
       limit(() =>
-        api
-          .getIconContent(url)
+        getIconContent(url)
           .then(({ data }) => {
-            fs.writeFileSync(
-              path.resolve(
+            writeFileSync(
+              resolve(
                 iconFolder,
                 `${startCase(iconNodesArr[x].name).replace(/\s/g, "")}.svg`
               ),
@@ -86,8 +85,8 @@ const main = async () => {
   );
 
   if (misses.length > 0) {
-    fs.writeFileSync(
-      path.resolve("./", `misses.txt`),
+    writeFileSync(
+      resolve("./", `misses.txt`),
       JSON.stringify(misses, null, 4),
       {
         encoding: "utf8",
