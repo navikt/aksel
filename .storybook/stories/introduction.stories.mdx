@@ -1,18 +1,33 @@
 import { Meta } from "@storybook/addon-docs/blocks";
 
-<Meta title="ds-react/Introduksjon" />
+<Meta title="ds-react/Kom i gang" />
 
 # Ta i bruk `@navikt/ds-react` pakken
 
 ## Oppsett
 
 ```bash
-yarn install @navikt/ds-react
+yarn install @navikt/ds-react @navikt/ds-css
 ```
 
-Importer `@navikt/ds-tokens` høyt opp i dom-strukturen (må nås av alle komponentene)
-Dette vil legge til css-variabler på :root. For å få dette til å fungere med IE11, kan denne pakken tas i bruk: https://jhildenbiddle.github.io/css-vars-ponyfill/#/
+Siden stilene ikke importeres direkte i komponentene, så må man selv importere ds-css.
+Dette gjøres for å la komponetene brukes i Nextjs prosjekter.
 
 ```bash
-import "@navikt/ds-tokens";
+import "@navikt/ds-css"
 ```
+
+Dette vil også legge css-variabler på :root. For å få dette til å fungere med IE11, kan denne pakken tas i bruk: https://jhildenbiddle.github.io/css-vars-ponyfill/#/
+
+## Testing
+
+For å støtte testing med eks Jest som ikke tillater ESM moduler, så kan denne configen legges til
+
+```bash
+"moduleNameMapper": {
+  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
+  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
+}
+```
+
+Dette vil remappe komponentene (og ikonpakken) til å bruke CommonJs versjonen for testing

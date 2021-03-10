@@ -1,7 +1,7 @@
 // https://levelup.gitconnected.com/learn-svg-to-react-using-figma-api-be0a5f9c0ca
 // used for reference/implementation
 
-const api = require("axios");
+import { create, get } from "axios";
 
 // Requires user to add a personalized figma token in .env
 const headers = {
@@ -11,7 +11,7 @@ const headers = {
  * Api connection for icon components
  * https://www.figma.com/file/UmEVH3pZ71uJPsSz9ilP3Y/NAV-ikoner-2.1-Figma-i-test?node-id=0%3A1
  */
-const instanceFiles = api.create({
+const instanceFiles = create({
   baseURL: `https://api.figma.com/v1/files/${process.env.FILE_KEY}/components`,
   headers,
 });
@@ -19,7 +19,7 @@ const instanceFiles = api.create({
 /**
  * api endpoint for images
  */
-const instanceImages = api.create({
+const instanceImages = create({
   baseURL: `https://api.figma.com/v1/images/${process.env.FILE_KEY}`,
   headers,
 });
@@ -45,9 +45,9 @@ const getSvgImageUrls = async (nodeIds) => {
 /**
  * Gets raw svg data from url
  */
-const getIconContent = async (url) => api.get(url);
+const getIconContent = async (url) => get(url);
 
-module.exports = {
+export default {
   getNodeChildren,
   getSvgImageUrls,
   getIconContent,
