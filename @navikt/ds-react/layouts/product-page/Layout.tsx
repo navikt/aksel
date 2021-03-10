@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Children, forwardRef } from "react";
 import cl from "classnames";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { setParams as setDecoratorParams } from "@navikt/nav-dekoratoren-moduler";
-import { Children, forwardRef } from "react";
 import { ContentContainer, Heading } from "../../";
 import { default as Section, SectionProps } from "./Section";
 
