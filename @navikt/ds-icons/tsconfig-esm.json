@@ -3,11 +3,11 @@
   "compilerOptions": {
     "rootDir": "./src",
     "esModuleInterop": true,
-    "module": "esnext",
-    "outDir": "./lib/esm",
-    "target": "esnext",
-    "sourceMap": false,
-    "declaration": false
+    "module": "ES2020",
+    "target": "ES2015",
+    "outDir": "./esm",
+    "sourceMap": true,
+    "declaration": true
   },
   "include": ["./src"]
 }
