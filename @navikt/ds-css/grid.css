@@ -1,3 +1,23 @@
+/**************************
+ * .navds-grid *
+ **************************/
+
+.navds-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-gap: var(--navds-grid-gutter-small);
+}
+
+@media (min-width: 448px) {
+  .navds-grid {
+    grid-gap: var(--navds-grid-gutter-medium-and-larger);
+  }
+}
+
+/**************************
+ * .navds-grid__cell *
+ **************************/
+
 .navds-grid__cell--xs-1 {
   grid-column: span 1;
 }
