@@ -47,7 +47,7 @@ export default {
 
 export const All = () => (
   <ProductPageLayout title={"TEST"}>
-    <ProductPageLayout.Section left sticky>
+    <ProductPageLayout.Section left sticky withPadding={false}>
       <Menu title={"Minima"}>
         <Menu.Item href={"#leo-quis"}>Leo quis</Menu.Item>
         <Menu.Collapsable title={"Proin accumsan"}>
@@ -88,7 +88,7 @@ export const All = () => (
 
 export const ReactRouter = () => (
   <ProductPageLayout title={"TEST"}>
-    <ProductPageLayout.Section left sticky>
+    <ProductPageLayout.Section left sticky withPadding={false}>
       <Menu>
         <Menu.Item component={Link} to="/link1">
           Leo quis
