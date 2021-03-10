@@ -5,7 +5,7 @@
 @import "content-container.css";
 @import "grid.css";
 @import "internal-header.css";
-@import "layouts/index.css";
+@import "layouts.css";
 @import "link.css";
 @import "modal.css";
 @import "popover.css";
