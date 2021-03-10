@@ -44,7 +44,8 @@ html {
   padding-left: 1rem;
 }
 
-.navds-accordion-menu__link--active {
+.navds-accordion-menu__link--active,
+.navds-accordion-menu__link--active.navds-link {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--navds-color-text);
@@ -62,6 +63,7 @@ html {
   cursor: pointer;
 }
 
+.navds-accordion-menu__link,
 .navds-accordion-menu__link.navds-link {
   display: flex;
 }
