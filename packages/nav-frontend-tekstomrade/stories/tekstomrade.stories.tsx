@@ -7,7 +7,7 @@ import Tekstomrade, {
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Tekstomrade",
+  title: "nav-frontend/Tekstomrade",
   component: Tekstomrade,
 } as Meta;
 

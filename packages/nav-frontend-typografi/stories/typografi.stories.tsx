@@ -14,7 +14,7 @@ import {
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Typografi",
+  title: "nav-frontend/Typografi",
   component: Sidetittel,
 } as Meta;
 

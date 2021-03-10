@@ -3,7 +3,7 @@ import { Modal } from "../index";
 import ReactModal from "react-modal";
 
 export default {
-  title: "@navikt/modal",
+  title: "ds-react/modal",
   component: Modal,
 };
 

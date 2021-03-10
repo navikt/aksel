@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Accordion } from "../index";
 
 export default {
-  title: "@navikt/accordion",
+  title: "ds-react/accordion",
   component: Accordion,
 };
 

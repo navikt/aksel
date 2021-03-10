@@ -9,7 +9,7 @@ const Cog = () => (
 );
 
 export default {
-  title: "Knapper",
+  title: "nav-frontend/Knapper",
   component: Knapp,
 } as Meta;
 

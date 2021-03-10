@@ -5,7 +5,7 @@ import "./style.css";
 import { useEffect } from "react";
 
 export default {
-  title: "@navikt/content-container",
+  title: "ds-react/content-container",
   component: ContentContainer,
   decorators: [
     (Story) => {

@@ -8,7 +8,7 @@ import { Right } from "./components/sections/Right";
 import "./components/styles.css";
 
 export default {
-  title: "@navikt/layout/Article",
+  title: "ds-react/layout/Article",
   component: { Layout },
   decorators: [
     (Story) => {

@@ -4,7 +4,7 @@ import Lenke from "../src/lenke";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Lenke",
+  title: "nav-frontend/Lenke",
   component: Lenke,
 } as Meta;
 

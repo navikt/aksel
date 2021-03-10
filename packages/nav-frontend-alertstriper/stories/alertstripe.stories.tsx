@@ -8,7 +8,7 @@ import Alertstripe, {
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Alertstripe",
+  title: "nav-frontend/Alertstripe",
   component: Alertstripe,
 } as Meta;
 
