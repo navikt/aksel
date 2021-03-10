@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.2.0-beta.1",
+  "version": "0.2.0",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -32,7 +32,7 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^0.2.0-beta.1",
+    "@navikt/ds-icons": "^0.2.0",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
@@ -42,8 +42,8 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "react-router-dom": "^5.2.0",
-    "copyfiles": "^2.4.1"
+    "copyfiles": "^2.4.1",
+    "react-router-dom": "^5.2.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
