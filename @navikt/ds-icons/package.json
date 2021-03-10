@@ -14,7 +14,7 @@
   ],
   "license": "MIT",
   "author": "NAV",
-  "main": "ems/index.js",
+  "main": "esm/index.js",
   "module": "esm/index.js",
   "typings": "esm/index.d.ts",
   "sideEffects": false,
