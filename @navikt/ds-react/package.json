@@ -27,7 +27,7 @@
     "/esm"
   ],
   "scripts": {
-    "cjs-package": "copyfiles -f src/package.json cjs",
+    "cjs-package": "copyfiles -f config/package.json cjs",
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-esm.json && yarn cjs-package",
     "watch": "tsc --watch -p tsconfig.json"
   },
