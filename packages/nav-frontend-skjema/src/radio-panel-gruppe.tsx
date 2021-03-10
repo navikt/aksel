@@ -39,6 +39,10 @@ export interface RadioPanelGruppeProps {
    * Feilmarkering
    */
   feil?: React.ReactNode | boolean;
+  /**
+   * Option om man skal propagere feil til children
+   */
+  utenFeilPropagering?: boolean;
 }
 
 class RadioPanelGruppe extends React.Component<RadioPanelGruppeProps> {
