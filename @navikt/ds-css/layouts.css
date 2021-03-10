@@ -230,10 +230,10 @@
   border: 0;
 }
 
-.navds-layout__panel-copy-etiquette {
+.navds-layout__panel-copy-etiquette.etikett--info {
   height: auto;
-  background: var(--navds-color-darkgray);
   color: white;
+  background-color: var(--navds-color-darkgray);
   border: 1px solid var(--navds-color-darkgray);
   padding: 0.25rem 0.5rem;
 }
