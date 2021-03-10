@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import cl from "classnames";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
+import { setParams } from "@navikt/nav-dekoratoren-moduler";
 import { Children, forwardRef } from "react";
-import { default as Section, SectionProps } from "./Section";
 import { ContentContainer, Heading } from "../../";
-import { whiteDecoratorUtils } from "../common/utils";
+import { default as Section, SectionProps } from "./Section";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {
@@ -26,9 +26,13 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      whiteDecoratorUtils(true);
+      setParams({
+        utilsBackground: "white",
+      });
       return () => {
-        whiteDecoratorUtils(false);
+        setParams({
+          utilsBackground: undefined,
+        });
       };
     }, []);
 

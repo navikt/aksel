@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.2.0",
+    "@navikt/nav-dekoratoren-moduler": "^1.2.8",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
