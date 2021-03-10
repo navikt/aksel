@@ -31,7 +31,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
       });
       return () => {
         setParams({
-          utilsBackground: undefined,
+          utilsBackground: "transparent",
         });
       };
     }, []);

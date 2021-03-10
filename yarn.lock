@@ -2577,6 +2577,13 @@
   resolved "https://registry.yarnpkg.com/@navikt/fnrvalidator/-/fnrvalidator-1.1.3.tgz#1bd136977a708120b6069276b0069b2a9cc9ae73"
   integrity sha512-xBwlPOI08kbByUWI4Yyd6NbIYLFs78I0h05mlHPjmrPPikyM89IQRbMac+6ovkgpi2s63OV6ryv3w4QqPubwiw==
 
+"@navikt/nav-dekoratoren-moduler@^1.2.9":
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/@navikt/nav-dekoratoren-moduler/-/nav-dekoratoren-moduler-1.2.9.tgz#f237b783d306d20a6045c238c98907bbaabc1ddc"
+  integrity sha512-Es6hBBYZoo+FHOYCoFQ5Mnzp4mB4Mz+JIuoU0IkmKEuWRA5MxqhkXgCvBN+IY7QmxWasJZcGjpdbhdPr3NNPiw==
+  dependencies:
+    nav-frontend-ikoner-assets "^2.0.10"
+
 "@navikt/textparser@^2.0.0":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@navikt/textparser/-/textparser-2.1.0.tgz#08fe604278de7ac409b421c72b19e7ea288116d5"
