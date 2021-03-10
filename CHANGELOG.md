@@ -1,5 +1,16 @@
 # Endringslogg
 
+## 10. Mars 2021
+
+### Oppdatert feil-styling og state-handling for skjemakomponenter
+
+[#1018](https://github.com/navikt/nav-frontend-moduler/pull/1018)
+
+- Feil på Skjemagruppe vil føre til feil-styling på checkbox/radio og checkboxpanel/radiopanel
+- Checkboxpanel og Radiopanel har nå feil-prop
+- Feil + disabled styling er satt til bare disabled nå.
+- checkbox/radio og checkboxpanel/radiopanel kan nå alle ta i bruk utenFeilPropagerings-prop
+
 ## 01. Mars 2021
 
 ### Nav-frontend-typografi-style støtter nå Less v4
