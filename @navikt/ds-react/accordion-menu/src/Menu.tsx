@@ -3,14 +3,13 @@ import React, {
   ForwardRefExoticComponent,
   HTMLAttributes,
 } from "react";
-import cl from "classnames";
 import { default as Item, AccordionMenuItemProps } from "./Item";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
 import { StoreProvider } from "./Context";
-import Nav from "./Nav";
-import "@navikt/ds-css/accordion-menu/index.css";
 import { Heading, OverridableComponent } from "../../index";
+import Nav from "./Nav";
+import cl from "classnames";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<AccordionMenuProps> {
