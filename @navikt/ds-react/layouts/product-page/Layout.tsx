@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import cl from "classnames";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { setParams } from "@navikt/nav-dekoratoren-moduler";
+import { setParams as setDecoratorParams } from "@navikt/nav-dekoratoren-moduler";
 import { Children, forwardRef } from "react";
 import { ContentContainer, Heading } from "../../";
 import { default as Section, SectionProps } from "./Section";
@@ -26,13 +26,9 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      setParams({
-        utilsBackground: "white",
-      });
+      setDecoratorParams({ utilsBackground: "white" });
       return () => {
-        setParams({
-          utilsBackground: "transparent",
-        });
+        setDecoratorParams({ utilsBackground: "transparent" });
       };
     }, []);
 
