@@ -52,7 +52,7 @@
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
 
-  .navds-layout__section > * {
+  .navds-layout__section > *:not(:last-child) {
     margin-bottom: var(--navds-grid-gutter-medium-and-larger);
   }
 
