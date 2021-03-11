@@ -50,8 +50,8 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
               onClick={() => {
                 setIsCopied(true);
                 const { href, hash } = window.location;
-                const url = href.replace(hash, "");
-                copyToClipboard(`${url}#${anchor}`);
+                const urlWithoutHash = href.replace(hash, "");
+                copyToClipboard(`${urlWithoutHash}#${anchor}`);
                 setTimeout(() => {
                   setIsCopied(false);
                 }, 1000);
