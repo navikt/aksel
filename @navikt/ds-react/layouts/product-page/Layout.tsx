@@ -19,7 +19,7 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   ({ children, title, className, ...rest }, ref) => {
-    const columns = Children.count(children);
+    const columns = Children.toArray(children).length;
     const classNames = cl(
       "navds-layout__container",
       `navds-layout__container--${columns}-columns`,

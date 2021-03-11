@@ -37,7 +37,7 @@
   position: sticky;
 }
 
-.navds-layout__section > *:not:last-child {
+.navds-layout__section > *:not(:last-child) {
   margin-bottom: var(--navds-layout-padding-small);
 }
 
@@ -187,7 +187,7 @@
   margin-top: 2rem;
 }
 
-.navds-layout__panel--margin:not:last-child {
+.navds-layout__panel--margin:not(:last-child) {
   margin-bottom: var(--navds-grid-gutter-small);
 }
 
