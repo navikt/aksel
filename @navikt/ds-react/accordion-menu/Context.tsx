@@ -21,20 +21,20 @@ export const StoreProvider = (props: Props) => {
   const [anchors, setAnchors] = useState<Anchor[]>([]);
   const [activeAnchor, setActiveAnchor] = useState<Anchor>();
 
-  const registerAnchor = (anchor) =>
-    setAnchors((anchors) => [...anchors, anchor]);
-
-  const unregisterAnchor = (anchor) =>
-    setAnchors((prevAnchors) => prevAnchors.filter((a) => a.id !== anchor));
-
   return (
     <StoreContext.Provider
       value={{
         anchors,
         activeAnchor,
-        registerAnchor,
-        unregisterAnchor,
-        setActiveAnchor,
+        registerAnchor: useCallback((anchor) => {
+          setAnchors((anchors) => [...anchors, anchor]);
+        }, []),
+        unregisterAnchor: useCallback((anchor) => {
+          setAnchors((anchors) => anchors.filter((a) => a.id !== anchor));
+        }, []),
+        setActiveAnchor: useCallback((anchor) => {
+          setActiveAnchor(anchor);
+        }, []),
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React, { forwardRef, useCallback, useEffect } from "react";
+import React, { forwardRef, useEffect } from "react";
 import cl from "classnames";
 import { useStore } from "./Context";
 import { OverridableComponent } from "../index";
@@ -36,7 +36,7 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
           };
         }
       }
-    }, [anchor]);
+    }, [anchor, registerAnchor, unregisterAnchor]);
 
     return (
       <li
