@@ -37,7 +37,7 @@
   position: sticky;
 }
 
-.navds-layout__section > *:not:last-child {
+.navds-layout__section > *:not(:last-child) {
   margin-bottom: var(--navds-layout-padding-small);
 }
 
