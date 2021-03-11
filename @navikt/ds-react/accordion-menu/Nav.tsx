@@ -34,7 +34,7 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
     }, [anchors, setActiveAnchor]);
 
     return (
-      <nav className={"navds-accordion-menu__nav"} aria-label={title || "menu"}>
+      <nav className={"navds-accordion-menu__nav"} aria-label={title || "Meny"}>
         {children}
       </nav>
     );
