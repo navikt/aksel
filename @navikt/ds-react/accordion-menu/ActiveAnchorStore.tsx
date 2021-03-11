@@ -33,9 +33,7 @@ export const ActiveAnchorProvider = (props: Props) => {
           setAnchors((anchors) => anchors.filter((a) => a.id !== anchor));
         }, []),
         setActiveAnchor: useCallback((anchor) => {
-          if (activeAnchor !== anchor) {
-            setActiveAnchor(anchor);
-          }
+          setActiveAnchor(anchor);
         }, []),
       }}
     >
