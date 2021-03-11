@@ -31,7 +31,7 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
       return () => {
         window.removeEventListener("scroll", scrollListener);
       };
-    }, [anchors, setActiveAnchor]);
+    }, [anchors]);
 
     return (
       <nav className={"navds-accordion-menu__nav"} aria-label={title || "menu"}>
