@@ -7,9 +7,8 @@ import React, {
 import { default as Item, AccordionMenuItemProps } from "./Item";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
-import { StoreProvider } from "./Context";
 import { Heading, OverridableComponent } from "../index";
-import { useSmoothScrollBehavior } from "./utils/scroll-behavior";
+import { StoreProvider } from "./Context";
 import Nav from "./Nav";
 import cl from "classnames";
 
