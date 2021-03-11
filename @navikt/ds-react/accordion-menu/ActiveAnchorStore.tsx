@@ -7,7 +7,7 @@ export interface Anchor {
   id: string;
 }
 
-export interface Context {
+export interface ActiveAnchorStore {
   anchors: Anchor[];
   activeAnchor?: Anchor;
   registerAnchor: (anchor: Anchor) => void;
@@ -15,14 +15,14 @@ export interface Context {
   setActiveAnchor: (anchor: Anchor) => void;
 }
 
-export const StoreContext = createContext({} as Context);
-export const StoreProvider = (props: Props) => {
+export const ActiveAnchorStore = createContext({} as ActiveAnchorStore);
+export const ActiveAnchorProvider = (props: Props) => {
   const { children } = props;
   const [anchors, setAnchors] = useState<Anchor[]>([]);
   const [activeAnchor, setActiveAnchor] = useState<Anchor>();
 
   return (
-    <StoreContext.Provider
+    <ActiveAnchorStore.Provider
       value={{
         anchors,
         activeAnchor,
@@ -38,7 +38,7 @@ export const StoreProvider = (props: Props) => {
       }}
     >
       {children}
-    </StoreContext.Provider>
+    </ActiveAnchorStore.Provider>
   );
 };
-export const useStore = () => useContext(StoreContext);
+export const useStore = () => useContext(ActiveAnchorStore);

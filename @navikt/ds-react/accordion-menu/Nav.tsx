@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes, useEffect } from "react";
-import { useStore } from "./Context";
+import { useStore } from "./ActiveAnchorStore";
 
 export interface AccordionMenuItemProps
   extends HTMLAttributes<HTMLAnchorElement> {

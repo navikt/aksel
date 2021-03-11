@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect } from "react";
+import { useStore } from "./ActiveAnchorStore";
+import { OverridableComponent } from "../util";
 import cl from "classnames";
-import { useStore } from "./Context";
-import { OverridableComponent } from "../index";
 
 export interface AccordionMenuItemProps {
   props: {

@@ -8,7 +8,7 @@ import { default as Item, AccordionMenuItemProps } from "./Item";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
 import { Heading, OverridableComponent } from "../index";
-import { StoreProvider } from "./Context";
+import { ActiveAnchorProvider } from "./ActiveAnchorStore";
 import Nav from "./Nav";
 import cl from "classnames";
 
@@ -39,7 +39,7 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
     }, [smoothScrollBehavior]);
 
     return (
-      <StoreProvider>
+      <ActiveAnchorProvider>
         <Nav title={title}>
           {title && (
             <Heading
@@ -58,7 +58,7 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
             {children}
           </ul>
         </Nav>
-      </StoreProvider>
+      </ActiveAnchorProvider>
     );
   }
 ) as LayoutWithSubComponents;
