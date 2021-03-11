@@ -7,7 +7,8 @@ import { default as Item, AccordionMenuItemProps } from "./Item";
 import { default as Collapsable } from "./Collapsable";
 import { AccordionMenuCollapsableProps } from "./Collapsable";
 import { StoreProvider } from "./Context";
-import { Heading, OverridableComponent } from "../../index";
+import { Heading, OverridableComponent } from "../index";
+import { useSmoothScrollBehavior } from "./utils/scroll-behavior";
 import Nav from "./Nav";
 import cl from "classnames";
 
@@ -19,10 +20,18 @@ export interface LayoutWithSubComponents
 
 export interface AccordionMenuProps extends HTMLAttributes<HTMLUListElement> {
   title?: string;
+  smoothScrollBehavior?: boolean;
 }
 
 const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
-  ({ children, title, className, ...rest }, ref) => {
+  (
+    { children, title, smoothScrollBehavior = true, className, ...rest },
+    ref
+  ) => {
+    if (smoothScrollBehavior) {
+      useSmoothScrollBehavior();
+    }
+
     return (
       <StoreProvider>
         <Nav title={title}>

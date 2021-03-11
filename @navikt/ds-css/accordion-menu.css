@@ -2,7 +2,7 @@
  * .accordion-menu *
  *******************/
 
-html {
+.navds-accordion-menu__html {
   scroll-behavior: smooth;
 }
 

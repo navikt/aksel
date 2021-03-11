@@ -1,5 +1,5 @@
 import * as React from "react";
-import Menu from "../src/index";
+import Menu from "../index";
 import { useEffect } from "react";
 import { ProductPageLayout } from "../../index";
 import { Right } from "../../layouts/stories/components/sections/Right";
