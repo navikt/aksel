@@ -32,7 +32,7 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "0.2.1-beta.0",
+    "@navikt/ds-icons": "^0.2.0",
     "@navikt/nav-dekoratoren-moduler": "^1.2.9",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
