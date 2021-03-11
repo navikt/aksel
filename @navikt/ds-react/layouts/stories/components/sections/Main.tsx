@@ -20,12 +20,9 @@ export const Main = ({ title = true }) => (
 export const MainOne = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"leo-quis"} />
-        <Heading level={1} size={"xl"}>
-          Leo quis
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"leo-quis"}>
+        Leo quis
+      </Heading>
     )}
     <Paragraph>
       Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
@@ -38,12 +35,9 @@ export const MainOne = ({ title = true }) => (
 export const MainTwo = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"proin-accumsan"} />
-        <Heading level={1} size={"xl"}>
-          Proin accumsan
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"proin-accumsan"}>
+        Proin accumsan
+      </Heading>
     )}
     <Paragraph className={"section"}>
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
@@ -62,8 +56,7 @@ export const MainTwo = ({ title = true }) => (
       Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
       consectetur, adipisci velit, sed quia non numquam eius modi tempora.
     </Paragraph>
-    <a id={"nulla-pariatur"} />
-    <Heading level={2} size={"large"}>
+    <Heading level={2} size={"large"} id={"nulla-pariatur"}>
       Nulla pariatur?
     </Heading>
     <Paragraph className={"section"}>
@@ -105,8 +98,7 @@ export const MainTwo = ({ title = true }) => (
       facilisi. Nullam consequat, dui sed bibendum faucibus, metus mauris
       commodo tortor.
     </Paragraph>
-    <a id={"luctus-justo"} />
-    <Heading level={2} size={"large"}>
+    <Heading level={2} size={"large"} id={"luctus-justo"}>
       Luctus justo
     </Heading>
     <Paragraph className={"section"}>
@@ -120,12 +112,9 @@ export const MainTwo = ({ title = true }) => (
 export const MainThree = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"maecenas-in-pretium"} />
-        <Heading level={1} size={"xl"}>
-          Maecenas in pretium
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"maecenas-in-pretium"}>
+        Maecenas in pretium
+      </Heading>
     )}
     <Paragraph>
       Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.

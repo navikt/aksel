@@ -4,16 +4,16 @@ import { Button, Link } from "../../../../index";
 export const Left = () => (
   <ul className={"navds-story-menu"}>
     <li>
-      <Link href={"#proin-ornare-accumsan"}>Iusto odio dignissimos</Link>
+      <Link href={"#leo-quis"}>Leo quis</Link>
     </li>
     <li>
-      <Link href={"#"}>Nam libero tempore</Link>
+      <Link href={"#proin-accumsan"}>Proin accumsan</Link>
     </li>
     <li>
-      <Link href={"#"}>Reiciendis voluptatibus</Link>
+      <Link href={"#nulla-pariatur"}>Nulla pariatur?</Link>
     </li>
     <li>
-      <Link href={"#"}>Earum rerum</Link>
+      <Link href={"#maecenas-in-pretium"}>Maecenas in pretium</Link>
     </li>
     <li>
       <Button>Søk ...</Button>

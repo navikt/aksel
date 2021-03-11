@@ -28,6 +28,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
     return (
       <div
         ref={ref}
+        id={anchor}
         className={cl(
           "navds-layout__panel",
           icon && "navds-layout__panel--margin",
@@ -37,7 +38,6 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
         {...rest}
       >
         {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
-        {anchor && <a id={anchor} />}
         <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>
           {title}
         </Heading>
