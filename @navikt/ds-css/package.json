@@ -17,7 +17,8 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import -o dist/index.css index.css"
+    "build": "postcss --use postcss-import -o dist/index.css index.css",
+    "watch-css": "postcss -w --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^0.1.0",
