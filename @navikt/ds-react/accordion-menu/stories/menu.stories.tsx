@@ -29,24 +29,11 @@ export default {
   ],
   parameters: {
     layout: "fullscreen",
-    backgrounds: {
-      default: "NAV gray",
-      values: [
-        {
-          name: "NAV gray",
-          value: "#f1f1f1",
-        },
-        {
-          name: "white",
-          value: "#ffffff",
-        },
-      ],
-    },
   },
 };
 
 export const All = () => (
-  <ProductPageLayout title={"TEST"}>
+  <ProductPageLayout title={"Nunc et lorem"}>
     <ProductPageLayout.Section left sticky withPadding={false}>
       <Menu title={"Minima"}>
         <Menu.Item href={"#leo-quis"}>Leo quis</Menu.Item>
@@ -87,7 +74,7 @@ export const All = () => (
 );
 
 export const ReactRouter = () => (
-  <ProductPageLayout title={"TEST"}>
+  <ProductPageLayout title={"Nunc et lorem"}>
     <ProductPageLayout.Section left sticky withPadding={false}>
       <Menu>
         <Menu.Item component={Link} to="/link1">
