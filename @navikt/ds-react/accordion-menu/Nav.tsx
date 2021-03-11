@@ -8,7 +8,7 @@ export interface AccordionMenuItemProps
 
 const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
   ({ children, title, className, ...rest }, ref) => {
-    const { anchors, setActiveAnchor } = useStore();
+    const { anchors, activeAnchor, setActiveAnchor } = useStore();
 
     useEffect(() => {
       const scrollListener = () => {
@@ -23,7 +23,12 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
           .sort((a, b) => (a.top < b.top ? -1 : 1))
           .pop();
 
-        if (lastPassedAnchor) {
+        // Set active anchor and related url hash
+        if (lastPassedAnchor && activeAnchor?.id !== lastPassedAnchor.id) {
+          const url = window.location.href.replace(window.location.hash, "");
+          const urlWithHash = `${url}#${lastPassedAnchor.id}`;
+          const title = document.title;
+          window.history.pushState(lastPassedAnchor, title, urlWithHash);
           setActiveAnchor(lastPassedAnchor);
         }
       };
@@ -31,7 +36,7 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
       return () => {
         window.removeEventListener("scroll", scrollListener);
       };
-    }, [anchors, setActiveAnchor]);
+    }, [anchors, activeAnchor, setActiveAnchor]);
 
     return (
       <nav className={"navds-accordion-menu__nav"} aria-label={title || "Meny"}>
