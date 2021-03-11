@@ -25,10 +25,11 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
 
         // Set active anchor and related url hash
         if (lastPassedAnchor && activeAnchor?.id !== lastPassedAnchor.id) {
-          const url = window.location.href.replace(window.location.hash, "");
-          const urlWithHash = `${url}#${lastPassedAnchor.id}`;
+          const { href, hash } = window.location;
+          const urlWithoutHash = href.replace(hash, "");
+          const urlWithAnchor = `${urlWithoutHash}#${lastPassedAnchor.id}`;
           const title = document.title;
-          window.history.pushState(lastPassedAnchor, title, urlWithHash);
+          window.history.pushState(lastPassedAnchor, title, urlWithAnchor);
           setActiveAnchor(lastPassedAnchor);
         }
       };
