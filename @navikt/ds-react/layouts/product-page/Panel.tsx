@@ -18,6 +18,7 @@ export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
 const Panel = forwardRef<HTMLDivElement, PanelProps>(
   ({ icon, highlight, anchor, title, children, className, ...rest }, ref) => {
     const [copied, setIsCopied] = useState<boolean>(false);
+    const url = window.location.href.replace(window.location.hash, "");
     const copyRef = React.createRef<HTMLButtonElement>();
 
     useEffect(() => {
@@ -49,7 +50,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
               className={"navds-layout__panel-copy-button"}
               onClick={() => {
                 setIsCopied(true);
-                copyToClipboard(`${window.location.href}#${anchor}`);
+                copyToClipboard(`${url}#${anchor}`);
                 setTimeout(() => {
                   setIsCopied(false);
                 }, 1000);
