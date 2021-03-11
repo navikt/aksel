@@ -138,7 +138,10 @@
  ************************/
 
 .navds-layout__header {
-  background: white;
+  background: var(--navds-layout-background-white);
+}
+
+.navds-layout__header-content {
   grid-column: span 12;
 }
 
@@ -152,9 +155,17 @@
   }
 }
 
+/*************************
+ * .navds-layout__body *
+ ************************/
+
+.navds-layout__body {
+  background: var(--navds-layout-background-gray);
+}
+
 @media (min-width: 960px) {
-  .navds-layout__header--margin {
-    margin-bottom: 3rem;
+  .navds-layout__body--padding {
+    padding-top: 3rem;
   }
 }
 

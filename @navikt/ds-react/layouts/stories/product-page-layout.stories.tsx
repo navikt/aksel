@@ -25,19 +25,6 @@ export default {
   ],
   parameters: {
     layout: "fullscreen",
-    backgrounds: {
-      default: "NAV gray",
-      values: [
-        {
-          name: "NAV gray",
-          value: "#f1f1f1",
-        },
-        {
-          name: "white",
-          value: "#ffffff",
-        },
-      ],
-    },
   },
 };
 
