@@ -20,12 +20,9 @@ export const Main = ({ title = true }) => (
 export const MainOne = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"leo-quis"} />
-        <Heading level={1} size={"xl"}>
-          Leo quis
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"leo-quis"}>
+        Leo quis
+      </Heading>
     )}
     <Paragraph>
       Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
@@ -38,12 +35,9 @@ export const MainOne = ({ title = true }) => (
 export const MainTwo = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"proin-accumsan"} />
-        <Heading level={1} size={"xl"}>
-          Proin accumsan
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"proin-accumsan"}>
+        Proin accumsan
+      </Heading>
     )}
     <Paragraph className={"section"}>
       Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
@@ -120,12 +114,9 @@ export const MainTwo = ({ title = true }) => (
 export const MainThree = ({ title = true }) => (
   <div>
     {title && (
-      <>
-        <a id={"maecenas-in-pretium"} />
-        <Heading level={1} size={"xl"}>
-          Maecenas in pretium
-        </Heading>
-      </>
+      <Heading level={1} size={"xl"} id={"maecenas-in-pretium"}>
+        Maecenas in pretium
+      </Heading>
     )}
     <Paragraph>
       Sed ullamcorper quam eget lorem volutpat, quis cursus risus fermentum.
