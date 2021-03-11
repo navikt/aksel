@@ -1,63 +1,39 @@
-import React, { createContext, useContext, useReducer, Dispatch } from "react";
+import React, { createContext, useContext, useState } from "react";
 interface Props {
   children: JSX.Element | JSX.Element[];
-}
-
-export interface Store {
-  activeAnchor?: string;
-  anchors?: Anchor[];
 }
 
 export interface Anchor {
   id: string;
 }
 
-export type Action =
-  | {
-      type: "INSERT_ANCHOR";
-      id: string;
-    }
-  | {
-      type: "REMOVE_ANCHOR";
-      id: string;
-    }
-  | {
-      type: "SET_ACTIVE_ANCHOR";
-      id: string;
-    };
-
-const initialState = {
-  anchors: [],
-};
-
-export const reducer = (state: Store, action: Action) => {
-  switch (action.type) {
-    case "INSERT_ANCHOR":
-      return {
-        ...state,
-        anchors: [...state.anchors, { id: action.id }],
-      };
-    case "REMOVE_ANCHOR":
-      return {
-        ...state,
-        anchors: state.anchors.filter((anchor) => anchor.id !== action.id),
-      };
-    case "SET_ACTIVE_ANCHOR":
-      return {
-        ...state,
-        activeAnchor: action.id,
-      };
-    default:
-      return state;
+export const StoreContext = createContext(
+  {} as {
+    anchors: Anchor[];
+    activeAnchor?: Anchor;
+    registerAnchor: (anchor: Anchor) => void;
+    unregisterAnchor: (id: string) => void;
+    setActiveAnchor: (anchor: Anchor) => void;
   }
-};
+);
 
-export const StoreContext = createContext({} as [Store, Dispatch<Action>]);
 export const StoreProvider = (props: Props) => {
   const { children } = props;
+  const [anchors, setAnchors] = useState<Anchor[]>([]);
+  const [activeAnchor, setActiveAnchor] = useState<Anchor>();
 
   return (
-    <StoreContext.Provider value={useReducer(reducer, initialState)}>
+    <StoreContext.Provider
+      value={{
+        anchors,
+        activeAnchor,
+        registerAnchor: (anchor) =>
+          setAnchors((anchors) => [...anchors, anchor]),
+        unregisterAnchor: (id) =>
+          setAnchors((anchors) => anchors.filter((a) => a.id !== id)),
+        setActiveAnchor,
+      }}
+    >
       {children}
     </StoreContext.Provider>
   );

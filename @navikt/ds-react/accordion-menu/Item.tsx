@@ -23,27 +23,20 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
     ref
   ) => {
     const anchor = rest.href && rest.href.split("#")[1];
-    const [{ activeAnchor }, dispatch] = useStore();
-    const isActive = active || (anchor && activeAnchor === anchor) || false;
+    const { activeAnchor, registerAnchor, unregisterAnchor } = useStore();
+    const isActive = active || (anchor && activeAnchor?.id === anchor) || false;
 
     useEffect(() => {
       if (anchor) {
         const target = document.getElementById(anchor);
         if (target) {
-          dispatch({
-            type: "INSERT_ANCHOR",
-            id: anchor,
-          });
-
+          registerAnchor({ id: anchor });
           return () => {
-            dispatch({
-              type: "REMOVE_ANCHOR",
-              id: anchor,
-            });
+            unregisterAnchor(anchor);
           };
         }
       }
-    }, [anchor, dispatch]);
+    }, [anchor]);
 
     return (
       <li
