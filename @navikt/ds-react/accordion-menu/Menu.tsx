@@ -2,6 +2,7 @@ import React, {
   forwardRef,
   ForwardRefExoticComponent,
   HTMLAttributes,
+  useEffect,
 } from "react";
 import { default as Item, AccordionMenuItemProps } from "./Item";
 import { default as Collapsable } from "./Collapsable";
@@ -28,9 +29,15 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
     { children, title, smoothScrollBehavior = true, className, ...rest },
     ref
   ) => {
-    if (smoothScrollBehavior) {
-      useSmoothScrollBehavior();
-    }
+    useEffect(() => {
+      if (smoothScrollBehavior) {
+        const htmlElement = document.documentElement;
+        htmlElement.classList.add("navds-accordion-menu__html");
+        return () => {
+          htmlElement.classList.remove("navds-accordion-menu__html");
+        };
+      }
+    }, [smoothScrollBehavior]);
 
     return (
       <StoreProvider>
