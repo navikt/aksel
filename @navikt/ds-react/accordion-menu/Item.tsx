@@ -36,7 +36,7 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
           };
         }
       }
-    }, [anchor]);
+    }, [anchor, registerAnchor, unregisterAnchor]);
 
     return (
       <li

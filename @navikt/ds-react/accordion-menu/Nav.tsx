@@ -10,13 +10,12 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
   ({ children, title, className, ...rest }, ref) => {
     const { anchors, setActiveAnchor } = useStore();
 
-    console.log(anchors);
     useEffect(() => {
       const scrollListener = () => {
         const offset = 100;
         const lastPassedAnchor = anchors
           .map((anchor) => document.getElementById(anchor.id))
-          .map((element) => ({
+          .map((element: HTMLElement) => ({
             id: element.id,
             top: element.getBoundingClientRect().top - offset,
           }))
@@ -32,7 +31,7 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
       return () => {
         window.removeEventListener("scroll", scrollListener);
       };
-    }, [anchors]);
+    }, [anchors, setActiveAnchor]);
 
     return (
       <nav className={"navds-accordion-menu__nav"} aria-label={title || "menu"}>
