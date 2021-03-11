@@ -19,7 +19,8 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
             id: element.id,
             top: element.getBoundingClientRect().top - offset,
             scrolledToBottom:
-              window.innerHeight + window.scrollY >= document.body.offsetHeight,
+              window.innerHeight + window.pageYOffset >=
+              document.body.offsetHeight,
           }))
           .filter((element) => element.scrolledToBottom || element.top <= 0)
           .sort((a, b) => (a.top < b.top ? -1 : 1))
