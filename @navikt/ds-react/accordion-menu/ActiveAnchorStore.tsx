@@ -15,14 +15,14 @@ export interface ActiveAnchorStore {
   setActiveAnchor: (anchor: Anchor) => void;
 }
 
-export const ActiveAnchorStore = createContext({} as ActiveAnchorStore);
+export const ActiveAnchorContext = createContext({} as ActiveAnchorStore);
 export const ActiveAnchorProvider = (props: Props) => {
   const { children } = props;
   const [anchors, setAnchors] = useState<Anchor[]>([]);
   const [activeAnchor, setActiveAnchor] = useState<Anchor>();
 
   return (
-    <ActiveAnchorStore.Provider
+    <ActiveAnchorContext.Provider
       value={{
         anchors,
         activeAnchor,
@@ -38,7 +38,7 @@ export const ActiveAnchorProvider = (props: Props) => {
       }}
     >
       {children}
-    </ActiveAnchorStore.Provider>
+    </ActiveAnchorContext.Provider>
   );
 };
-export const useStore = () => useContext(ActiveAnchorStore);
+export const useStore = () => useContext(ActiveAnchorContext);
