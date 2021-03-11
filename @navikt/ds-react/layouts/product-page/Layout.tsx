@@ -39,10 +39,10 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
 
     return (
       <div ref={ref}>
-        <div id={"layout-header"} className={"navds-layout__header"}>
+        <div id={"navds-layout-header"} className={"navds-layout__header"}>
           <ContentContainer>
             <div className={classNames} {...rest}>
-              <div className={cl("navds-layout__header")}>
+              <div className={cl("navds-layout__header-content")}>
                 <Heading
                   size={"xxl"}
                   className={cl("navds-layout__header-title")}
@@ -54,11 +54,13 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
             </div>
           </ContentContainer>
         </div>
-        <ContentContainer>
-          <div className={classNames} {...rest}>
-            {children}
-          </div>
-        </ContentContainer>
+        <div id={"navds-layout-body"} className={"navds-layout__body"}>
+          <ContentContainer>
+            <div className={classNames} {...rest}>
+              {children}
+            </div>
+          </ContentContainer>
+        </div>
       </div>
     );
   }

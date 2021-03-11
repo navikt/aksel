@@ -21,8 +21,8 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
     const copyRef = React.createRef<HTMLButtonElement>();
 
     useEffect(() => {
-      const header = document.getElementById("layout-header");
-      header?.classList.add("navds-layout__header--margin");
+      const header = document.getElementById("navds-layout-body");
+      header?.classList.add("navds-layout__body--padding");
     }, []);
 
     return (
