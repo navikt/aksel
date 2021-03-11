@@ -56,8 +56,7 @@ export const MainTwo = ({ title = true }) => (
       Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
       consectetur, adipisci velit, sed quia non numquam eius modi tempora.
     </Paragraph>
-    <a id={"nulla-pariatur"} />
-    <Heading level={2} size={"large"}>
+    <Heading level={2} size={"large"} id={"nulla-pariatur"}>
       Nulla pariatur?
     </Heading>
     <Paragraph className={"section"}>
@@ -99,8 +98,7 @@ export const MainTwo = ({ title = true }) => (
       facilisi. Nullam consequat, dui sed bibendum faucibus, metus mauris
       commodo tortor.
     </Paragraph>
-    <a id={"luctus-justo"} />
-    <Heading level={2} size={"large"}>
+    <Heading level={2} size={"large"} id={"luctus-justo"}>
       Luctus justo
     </Heading>
     <Paragraph className={"section"}>
