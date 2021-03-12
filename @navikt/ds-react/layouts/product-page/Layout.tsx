@@ -3,13 +3,13 @@ import { ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { setParams as setDecoratorParams } from "@navikt/nav-dekoratoren-moduler";
 import { default as Section, SectionProps } from "./Section";
 import { default as Panel, PanelProps } from "./Panel";
-import { ContentContainer, Heading } from "../../";
+import { ContentContainer, Heading, OverridableComponent } from "../../";
 import cl from "classnames";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {
   Section: ForwardRefExoticComponent<SectionProps>;
-  Panel: ForwardRefExoticComponent<PanelProps>;
+  Panel: OverridableComponent<PanelProps>;
 }
 
 export interface LayoutProps extends HTMLAttributes<HTMLElement> {

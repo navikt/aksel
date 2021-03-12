@@ -1,22 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { Component, useEffect, useState } from "react";
 import { forwardRef, HTMLAttributes, ReactNode } from "react";
 import cl from "classnames";
 import { Button, Heading } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 import { EtikettInfo } from "nav-frontend-etiketter";
 import { Undertekst } from "nav-frontend-typografi";
+import { OverridableComponent } from "../../util";
 
-export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
-  icon?: ReactNode;
-  highlight?: boolean;
-  anchor?: string;
-  whiteBackground?: boolean;
-  withPadding?: boolean;
+export interface PanelProps {
+  props: {
+    title: string;
+    icon?: ReactNode;
+    highlight?: boolean;
+    anchor?: string;
+    whiteBackground?: boolean;
+    withPadding?: boolean;
+    defaultComponent: "a";
+  } & React.HTMLAttributes<HTMLDivElement>;
+  defaultComponent: "div";
 }
 
-const Panel = forwardRef<HTMLDivElement, PanelProps>(
-  ({ icon, highlight, anchor, title, children, className, ...rest }, ref) => {
+const Panel: OverridableComponent<PanelProps> = forwardRef(
+  (
+    {
+      title,
+      highlight,
+      icon,
+      anchor,
+      component: Component = "div",
+      className,
+      children,
+      ...rest
+    },
+    ref
+  ) => {
     const [copied, setIsCopied] = useState<boolean>(false);
     const copyRef = React.createRef<HTMLButtonElement>();
 
@@ -26,7 +43,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
     }, []);
 
     return (
-      <div
+      <Component
         ref={ref}
         id={anchor}
         className={cl(
@@ -68,7 +85,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
           </div>
         )}
         <div className={"navds-layout__panel-content"}>{children}</div>
-      </div>
+      </Component>
     );
   }
 );
