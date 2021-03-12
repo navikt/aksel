@@ -27,10 +27,13 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
+      const header = document.getElementById("navds-layout-body");
+      header?.classList.add(`navds-layout__body--${columns}-columns`);
       setDecoratorParams({
         utilsBackground: "white",
       });
       return () => {
+        header?.classList.remove(`navds-layout__body--${columns}-columns`);
         setDecoratorParams({
           utilsBackground: "transparent",
         });
