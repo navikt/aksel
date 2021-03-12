@@ -31,7 +31,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
         id={anchor}
         className={cl(
           "navds-layout__panel",
-          icon && "navds-layout__panel--margin",
+          icon && "navds-layout__panel--icon-margin",
           highlight && "navds-layout__panel--highlight",
           className
         )}
