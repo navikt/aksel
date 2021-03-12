@@ -15,7 +15,6 @@ export interface PanelProps {
     anchor?: string;
     whiteBackground?: boolean;
     withPadding?: boolean;
-    defaultComponent: "a";
   } & React.HTMLAttributes<HTMLDivElement>;
   defaultComponent: "div";
 }
