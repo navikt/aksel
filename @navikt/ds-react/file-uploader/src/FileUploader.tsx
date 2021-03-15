@@ -6,11 +6,21 @@ import Button from "../../button/src";
 
 export interface FileUploaderProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  onInputChange: (event: React.ChangeEvent<HTMLElement>) => void;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  /**
+   * A string that defines the file types the file input should accept.
+   * This string is a comma-separated list of unique file type specifiers.
+   */
+  accept?: string;
+  multiple?: boolean;
+  capture?: boolean | string;
 }
 
 const FileUploader = forwardRef<HTMLDivElement, FileUploaderProps>(
-  ({ className, id, onInputChange, ...rest }, ref) => {
+  (
+    { className, id, onChange, accept, multiple = false, capture, ...rest },
+    ref
+  ) => {
     const fileIntputRef = React.useRef<HTMLInputElement>(null);
 
     const onButtonClick = () => {
@@ -30,11 +40,14 @@ const FileUploader = forwardRef<HTMLDivElement, FileUploaderProps>(
           Velg filer
         </Button>
         <input
+          id={id}
           type="file"
           ref={fileIntputRef}
           tabIndex={-1}
-          onChange={(event) => onInputChange(event)}
-          multiple
+          onChange={onChange}
+          accept={accept}
+          multiple={multiple}
+          capture={capture}
         />
       </div>
     );
