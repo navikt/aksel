@@ -41,7 +41,7 @@ const Sidebar = ({
           </button>
         )}
         <Link href="/">Home</Link>
-        <Link href="/komponenter">KomponenterKomponenterKompo</Link>
+        <Link href="/komponenter">Komponenter</Link>
         <Link href="/komponenter/button">Button</Link>
       </div>
     </>

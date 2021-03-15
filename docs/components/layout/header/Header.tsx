@@ -1,3 +1,4 @@
+import Link from "next/link";
 import NavLogo from "../../assets/navLogo.svg";
 import { HamburgerFilled } from "@navikt/ds-icons";
 import cl from "classnames";
@@ -26,10 +27,12 @@ const Header = ({
       >
         <HamburgerFilled />
       </button>
-      <button className={style.header__link}>
-        <NavLogo />
-        <span className={style["header__link-title"]}>NAV Designsystem</span>
-      </button>
+      <Link href="/">
+        <button className={style.header__link}>
+          <NavLogo />
+          <span className={style["header__link-title"]}>NAV Designsystem</span>
+        </button>
+      </Link>
     </header>
   );
 };
