@@ -1,7 +1,17 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export type GridProps = HTMLAttributes<HTMLDivElement>;
+export interface GridProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Component content
+   */
+  children: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+}
 const Grid = forwardRef<HTMLDivElement, GridProps>(
   ({ children, className, ...rest }, ref) => (
     <div ref={ref} className={cl("navds-grid", className)} {...rest}>
@@ -9,5 +19,16 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
     </div>
   )
 );
+
+Grid.propTypes = {
+  /**
+   * Component content
+   */
+  children: PropTypes.node,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+};
 
 export default Grid;
