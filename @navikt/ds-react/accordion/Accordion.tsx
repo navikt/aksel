@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
@@ -7,10 +8,34 @@ import { v4 as uuidv4 } from "uuid";
 
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
+  /**
+   * Component content
+   */
   children: React.ReactNode;
+  /**
+   * Content on interactive surface of component
+   */
   heading: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
+   * Opens component if 'true', closes if 'false'
+   * Using this props removes automatic control of open-state
+   * @default false
+   */
   open?: boolean;
+  /**
+   * Callback for when user interacts with component
+   *
+   * @param {object} event
+   */
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  /**
+   * Removes content-element from dom when closed
+   * @default false
+   */
   renderContentWhenClosed?: boolean;
 }
 
@@ -77,4 +102,35 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   }
 );
 
+Accordion.propTypes = {
+  /**
+   * Component content
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * Content on interactive surface of component
+   */
+  heading: PropTypes.node.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Callback for when user interacts with component
+   *
+   * @param {object} event
+   */
+  onClick: PropTypes.any,
+  /**
+   * Opens component if 'true', closes if 'false'
+   * Using this props removes automatic control of open-state
+   * @default false
+   */
+  open: PropTypes.bool,
+  /**
+   * Removes content-element from dom when closed
+   * @default false
+   */
+  renderContentWhenClosed: PropTypes.bool,
+};
 export default Accordion;
