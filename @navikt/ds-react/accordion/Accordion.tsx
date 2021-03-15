@@ -9,6 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Component content
    */
   children: React.ReactNode;
@@ -16,10 +20,6 @@ export interface AccordionProps
    * Content on interactive surface of component
    */
   heading: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
   /**
    * Opens component if 'true', closes if 'false'
    * Using this props removes automatic control of open-state
@@ -104,6 +104,10 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
 Accordion.propTypes = {
   /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
    * Component content
    */
   children: PropTypes.node.isRequired,
@@ -111,10 +115,6 @@ Accordion.propTypes = {
    * Content on interactive surface of component
    */
   heading: PropTypes.node.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
   /**
    * Callback for when user interacts with component
    *

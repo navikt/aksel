@@ -1,7 +1,18 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export type ContentContainerProps = HTMLAttributes<HTMLDivElement>;
+export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * @ignore
+   */
+  classNames?: string;
+  /**
+   * Component content
+   */
+  children: React.ReactNode;
+}
+
 const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
   ({ children, className, ...rest }, ref) => (
     <div
@@ -13,5 +24,16 @@ const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
     </div>
   )
 );
+
+ContentContainer.propTypes = {
+  /**
+   * Component content
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+};
 
 export default ContentContainer;

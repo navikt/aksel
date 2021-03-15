@@ -8,6 +8,10 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   className?: string;
   /**
+   * Component content
+   */
+  children: React.ReactNode;
+  /**
    * Decides component design and interactions
    * @default "primary"
    */
@@ -38,6 +42,10 @@ Button.propTypes = {
    * @ignore
    */
   className: PropTypes.string,
+  /**
+   * Component content
+   */
+  children: PropTypes.node.isRequired,
   /**
    * Reduces internal padding for component
    */
