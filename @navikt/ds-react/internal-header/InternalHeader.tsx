@@ -1,8 +1,16 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
 export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
+  /**
+   * Component content
+   */
   children?: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
 }
 
 const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(
@@ -12,5 +20,16 @@ const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(
     </header>
   )
 );
+
+InternalHeader.propTypes = {
+  /**
+   * Component content
+   */
+  children: PropTypes.node,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+};
 
 export default InternalHeader;

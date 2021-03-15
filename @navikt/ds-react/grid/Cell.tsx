@@ -7,11 +7,11 @@ export interface CellProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @ignore
    */
-  className: string;
+  className?: string;
   /**
    * Component content
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Cell columns on width < 448px
    */

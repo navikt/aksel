@@ -24,7 +24,7 @@ Grid.propTypes = {
   /**
    * Component content
    */
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   /**
    * @ignore
    */
