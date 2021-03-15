@@ -1,0 +1,110 @@
+import { Button } from "@navikt/ds-react";
+import { SendFilled } from "@navikt/ds-icons";
+
+# Button
+
+De fleste komponentene våre består av en React-pakke og en tilhørende Less-pakke. React-pakkene er avhengige av Less-pakkene, men ikke motsatt. Det betyr at du kan velge å installere kun Less-pakkene hvis du f.eks. vil bruke et Javascript-rammeverk som er inkompatibelt med React - eller hvis du av andre grunner ønsker å håndtere HTML og Javascript selv.
+
+<Npm packName="@navikt/ds-react" imports="Button" />
+
+## Variant
+
+### Primary
+
+Dette er hvordan en normal knapp skal se ut. De fleste knappene i løsningene våre skal se slik ut. Hvis du er i tvil om hvilken knapp du skal bruke, er det sikkert denne som er riktig.
+
+<Preview react={`<Button variant="primary">Primary</Button>`}>
+  <Button variant="primary">Primary</Button>
+</Preview>
+
+### Secondary
+
+Denne knappen kan brukes som et alternativ til primary knapp ved behov.
+
+<Preview react={`<Button variant="secondary">Secondary</Button>`}>
+  <Button variant="secondary">Secondary</Button>
+</Preview>
+
+### Action
+
+Denne knappen skal brukes der løsningen/siden har en tydelig hoved-/primær-funksjon (f.eks. "Lagre" eller "Send søknad"). Merk at det som regel bare skal finnes èn eneste hovedknapp på en og samme side. Et mulig unntak til denne regelen kan være inne i en modal-rute som legger seg oppå det øvrige innholdet hvor det er tillatt med en ekstra hoved- eller fare-knapp ved behov.
+
+<Preview react={`<Button variant="action">Action</Button>`}>
+  <Button variant="action">Action</Button>
+</Preview>
+
+### Danger
+
+Denne knappen skal brukes på samme måte som hovedknapp, men bare der hoved-/primær-funksjonen kan føre til tap av viktig lagret informasjon (f.eks. "Slett") eller ellers bety svært negative konsekvenser hvis handlingen ikke var ønsket (f.eks. som en bekreftelse på at brukeren ikke lenger ønsker å motta ytelser).
+
+<Preview react={`<Button variant="danger">Danger</Button>`}>
+  <Button variant="danger">Danger</Button>
+</Preview>
+
+### Disabled
+
+Disabled knapper bør unngås, og at man heller bør bruke vanlige knapper kombinert med tydelige feilmeldinger hvis handlingen av en eller annen grunn ikke er tillatt.
+
+<Preview react={`<Button disabled>Disabled</Button>`}>
+  <Button disabled>Disabled</Button>
+</Preview>
+
+## Størrelser
+
+### Medium
+
+Knappene vi lager kommer i to størrelser: "medium" som er default og "small" som er ment for interne-flater.
+
+<Preview
+  react={`<Button variant="action" size="medium">
+    Medium
+  </Button>`}
+>
+  <Button variant="action" size="medium">
+    Medium
+  </Button>
+</Preview>
+
+### Small
+
+<Preview
+  react={`<Button variant="action" size="small">
+    Small
+  </Button>`}
+>
+  <Button variant="action" size="small">
+    Small
+  </Button>
+</Preview>
+
+## Med ikoner
+
+<Preview
+  react={`<Button>
+    Button
+    <SendFilled />
+  </Button>`}
+>
+  <Button>
+    Button
+    <SendFilled />
+  </Button>
+</Preview>
+
+## Tilgjengelighet
+
+### Unngå lenker som knapper
+
+For å oppfylle [WCAGs suksesskriterium 1.3.1](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva) skal ting være kodet som det det ser ut som. Derfor skal ting som ser ut som knapper være nettopp knapper og ikke lenker. Du finner eksempler på hvordan navigasjonslenker skal se ut på [komponent-siden for lenker](/components/lenke).
+
+### Bakgrunnskontrast
+
+Ved bruk av action/primary eller secondary bør man passe på at bakgrunnsfargen der de plasseres er enten hvit eller lys grå slik at kontrastkravene fra WCAG blir oppfylt.
+
+### Fareknappen
+
+Fareknappen skiller seg bare ut med farge, og bryter dermed egentlig med [WCAGs suksesskriterium 1.4.1](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/141-bruk-av-farge-niva). Vi har likevel valgt å ikke tilsette noe label for skjermleser. Dette har vi gjort fordi selve navnet på knappen forteller hva son skjer hvis man trykker på den, og fordi en ekstra label vil, etter vår vurdering, kunne snarere tilføye støy enn å skape mer oversikt for skjermleserbrukere.
+
+### Knapper med bare ikon
+
+Husk at knapper med bare ikoner også må få en tekst-verdi av hensyn til skjermlesere. Utility-klassen `sr-only` kan brukes for å skjule teksten visuelt.

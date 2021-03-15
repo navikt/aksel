@@ -1,0 +1,44 @@
+{
+  "name": "docs",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@types/react": "^17.0.2",
+    "classnames": "^2.2.6",
+    "next": "10.0.8",
+    "@next/mdx": "^10.0.8",
+    "@mdx-js/loader": "^1.6.22",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "typescript": "^4.2.3",
+    "@svgr/webpack": "^5.5.0",
+    "uuid": "^8.3.2",
+    "copy-to-clipboard": "^3.3.1",
+    "react-responsive": "^8.2.0",
+    "react-use-keypress": "^1.2.0",
+    "prismjs": "^1.23.0",
+    "react-element-to-jsx-string": "^14.3.2",
+    "prettier": "2.2.1",
+    "@mdx-js/react": "^1.6.22",
+    "nav-frontend-tabell-style": "^1.0.7",
+    "@navikt/ds-css": "^0.2.0",
+    "@navikt/ds-react": "^0.2.0",
+    "@navikt/ds-icons": "^0.2.0"
+  },
+  "eslintConfig": {
+    "rules": {
+      "react/react-in-jsx-scope": "off"
+    }
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^10.0.8",
+    "@types/prettier": "^2.2.2",
+    "@types/react-dom": "^17.0.2",
+    "prettier": "2.2.1"
+  }
+}

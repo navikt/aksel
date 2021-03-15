@@ -1,0 +1,17 @@
+@import "nav-frontend-tabell-style/dist/main.css";
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  background-color: var(--bg-primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
