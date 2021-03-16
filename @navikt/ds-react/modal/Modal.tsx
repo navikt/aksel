@@ -27,12 +27,11 @@ export interface ModalProps {
    */
   shouldCloseOnOverlayClick?: boolean;
   /**
-   * @ignore
+   * User defined classname for wrapper element
    */
   className?: string;
   /**
    * User defined classname for modal content
-   * @default ""
    */
   contentClassName?: string;
 }
