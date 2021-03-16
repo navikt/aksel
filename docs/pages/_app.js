@@ -1,7 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Sidebar from "../components/sidebar/Sidebar";
-/* import "@navikt/ds-css/baseline/index.css"; */
+import Layout from "../components/layout/Layout";
+import "../styles/theme.css";
+import "../styles/globals.css";
+import "../styles/prismjs.css";
+import "@navikt/ds-css";
 
 const Website = ({ Component, pageProps }) => {
   const route = useRouter();
@@ -11,8 +14,9 @@ const Website = ({ Component, pageProps }) => {
         <title>NAV Designsystem</title>
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <Sidebar route={route} />
-      <Component {...pageProps} />
+      <Layout route={route}>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 };
