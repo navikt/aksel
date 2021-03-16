@@ -36,7 +36,14 @@ export interface ModalProps {
   contentClassName?: string;
 }
 
-const Modal = forwardRef<ReactModal, ModalProps>(
+type ModalLifecycle = {
+  setAppElement?: (element: any) => void;
+};
+
+const Modal: ModalLifecycle &
+  React.ForwardRefExoticComponent<
+    ModalProps & React.RefAttributes<ReactModal>
+  > = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
@@ -89,8 +96,6 @@ const Modal = forwardRef<ReactModal, ModalProps>(
   }
 );
 
-export const setAppElement = (element) => {
-  ReactModal.setAppElement(element);
-};
+Modal.setAppElement = (element) => ReactModal.setAppElement(element);
 
 export default Modal;
