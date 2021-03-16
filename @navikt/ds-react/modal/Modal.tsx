@@ -33,19 +33,11 @@ export interface ModalProps {
   className?: string;
   /**
    * User defined classname for modal content
-   * @default ""
    */
   contentClassName?: string;
 }
 
-type ModalLifecycle = {
-  setAppElement?: (element: any) => void;
-};
-
-const Modal: ModalLifecycle &
-  React.ForwardRefExoticComponent<
-    ModalProps & React.RefAttributes<ReactModal>
-  > = forwardRef<ReactModal, ModalProps>(
+const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
@@ -104,10 +96,6 @@ Modal.propTypes = {
    */
   children: PropTypes.node.isRequired,
   /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
    * Open state for modal
    */
   open: PropTypes.bool.isRequired,
@@ -121,12 +109,17 @@ Modal.propTypes = {
    */
   shouldCloseOnOverlayClick: PropTypes.bool,
   /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
    * User defined classname for modal content
-   * @default ""
    */
   contentClassName: PropTypes.string,
 };
 
-Modal.setAppElement = (element) => ReactModal.setAppElement(element);
+export const setAppElement = (element) => {
+  ReactModal.setAppElement(element);
+};
 
 export default Modal;
