@@ -90,6 +90,7 @@
   overflow-y: auto;
   overflow: visible;
   margin: 0 auto 0 0;
+  width: 100%;
 }
 
 .content {

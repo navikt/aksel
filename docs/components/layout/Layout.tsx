@@ -26,7 +26,7 @@ const Layout = ({ children }: LayoutProps) => {
   useEffect(() => {
     setSidebar(!small);
   }, [small]);
-  /* console.log(sidebar); */
+
   return (
     <div className={style.pageWrapper + " lightTheme"}>
       <Header sidebar={sidebar} onSidebarChange={(x) => setSidebar(x)} />
@@ -35,9 +35,9 @@ const Layout = ({ children }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
-      <main>
+      <main className={style.contentWrapper}>
         <ContentContainer>
-          <Grid className={style.contentWrapper}>
+          <Grid>
             <Cell className={style.content} xs={12} sm={12} md={10} lg={7}>
               <Mdx>{children}</Mdx>
             </Cell>
