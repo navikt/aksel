@@ -36,12 +36,14 @@ InternalHeaderTitle.propTypes = {
   /**
    * @ignore
    */
-  className: PropTypes.any,
+  className: PropTypes.string,
   /**
    * Tag this component will use. Usefull for defining a button/link
    * @default "h1"
    */
-  element: PropTypes.oneOf<keyof React.ReactHTML>([]),
+  element: PropTypes.oneOf<keyof React.ReactHTML>(
+    Array<keyof React.ReactHTML>()
+  ),
 };
 
 export default InternalHeaderTitle;

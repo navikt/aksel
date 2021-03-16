@@ -9,13 +9,13 @@ import { v4 as uuidv4 } from "uuid";
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Component content
    */
   children: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
   /**
    * Content on interactive surface of component
    */

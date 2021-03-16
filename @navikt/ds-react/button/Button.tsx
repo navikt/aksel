@@ -4,13 +4,13 @@ import cl from "classnames";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Component content
    */
   children: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
   /**
    * Decides component design and interactions
    * @default "primary"
@@ -18,6 +18,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "action" | "danger";
   /**
    * Reduces internal padding for component
+   * @default "medium"
    */
   size?: "medium" | "small";
 }
@@ -39,15 +40,16 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.propTypes = {
   /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
    * Component content
    */
   children: PropTypes.node.isRequired,
   /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
    * Reduces internal padding for component
+   * @default "medium"
    */
   size: PropTypes.oneOf<"medium" | "small">(["medium", "small"]),
   /**

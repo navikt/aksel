@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, {
   forwardRef,
   HTMLAttributes,
@@ -6,7 +7,7 @@ import React, {
   useRef,
 } from "react";
 import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
+import { Placement, placements } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 
@@ -28,10 +29,18 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Orientation for popover
-   * @default 'auto'
+   * @default "right"
    */
   placement?: Placement;
+  /**
+   * Small reduces padding on popover content
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 
@@ -143,5 +152,38 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     );
   }
 );
+
+Popover.propTypes = {
+  /**
+   * Element that popover will anchor to
+   */
+  anchorEl: PropTypes.instanceOf(HTMLElement).isRequired,
+  /**
+   * Open state for popover
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * Callback for when popover closes
+   */
+  onClose: PropTypes.func.isRequired,
+  /**
+   * Content rendered inside popover
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Orientation for popover
+   * @default "right"
+   */
+  placement: PropTypes.oneOf<Placement>([...placements]),
+  /**
+   * Small reduces padding on popover content
+   * @default "medium"
+   */
+  size: PropTypes.oneOf(["medium", "small"]),
+};
 
 export default Popover;

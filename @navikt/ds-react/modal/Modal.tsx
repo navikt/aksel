@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
 import ReactModal from "react-modal";
@@ -27,16 +28,24 @@ export interface ModalProps {
    */
   shouldCloseOnOverlayClick?: boolean;
   /**
-   * User defined classname for wrapper element
+   * @ignore
    */
   className?: string;
   /**
    * User defined classname for modal content
+   * @default ""
    */
   contentClassName?: string;
 }
 
-const Modal = forwardRef<ReactModal, ModalProps>(
+type ModalLifecycle = {
+  setAppElement?: (element: any) => void;
+};
+
+const Modal: ModalLifecycle &
+  React.ForwardRefExoticComponent<
+    ModalProps & React.RefAttributes<ReactModal>
+  > = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
@@ -89,8 +98,35 @@ const Modal = forwardRef<ReactModal, ModalProps>(
   }
 );
 
-export const setAppElement = (element) => {
-  ReactModal.setAppElement(element);
+Modal.propTypes = {
+  /**
+   * Content of modal
+   */
+  children: PropTypes.node.isRequired,
+  /**
+   * @ignore
+   */
+  className: PropTypes.string,
+  /**
+   * Open state for modal
+   */
+  open: PropTypes.bool.isRequired,
+  /**
+   * Called when modal wants to close
+   */
+  onClose: PropTypes.func.isRequired,
+  /**
+   * If modal should close on overlay click
+   * @default true
+   */
+  shouldCloseOnOverlayClick: PropTypes.bool,
+  /**
+   * User defined classname for modal content
+   * @default ""
+   */
+  contentClassName: PropTypes.string,
 };
+
+Modal.setAppElement = (element) => ReactModal.setAppElement(element);
 
 export default Modal;
