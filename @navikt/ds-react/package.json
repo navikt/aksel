@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
