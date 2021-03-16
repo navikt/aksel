@@ -164,7 +164,7 @@ Popover.propTypes = {
   /**
    * Element that popover will anchor to
    */
-  anchorEl: PropTypes.instanceOf(HTMLElement).isRequired,
+  anchorEl: PropTypes.any,
   /**
    * Open state for popover
    */
