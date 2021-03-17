@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Layout from "../components/layout/Layout";
 import "../styles/theme.css";
 import "../styles/globals.css";
@@ -7,7 +6,6 @@ import "../styles/prismjs.css";
 import "@navikt/ds-css";
 
 const Website = ({ Component, pageProps }) => {
-  const route = useRouter();
   return (
     <>
       <Head>

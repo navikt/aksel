@@ -1,7 +1,6 @@
 import cl from "classnames";
 import { Close } from "@navikt/ds-icons";
 import style from "../layout.module.css";
-import { NextRouter } from "next/router";
 import Menu from "./Menu";
 
 interface SidebarProps {
