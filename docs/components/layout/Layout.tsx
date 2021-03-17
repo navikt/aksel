@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
 import style from "./layout.module.css";
-import { NextRouter, useRouter } from "next/router";
+import { NextRouter } from "next/router";
 
 interface LayoutProps {
   children?: React.ReactNode;
