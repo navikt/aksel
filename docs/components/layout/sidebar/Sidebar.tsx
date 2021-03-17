@@ -9,10 +9,9 @@ interface SidebarProps {
   sidebar: boolean;
   small: boolean;
   onSidebarChange: (x: boolean) => void;
-  route: NextRouter;
 }
 
-const Sidebar = ({ sidebar, small, onSidebarChange, route }: SidebarProps) => {
+const Sidebar = ({ sidebar, small, onSidebarChange }: SidebarProps) => {
   return (
     <>
       {sidebar && small && (

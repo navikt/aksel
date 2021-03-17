@@ -7,14 +7,12 @@ import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
 import style from "./layout.module.css";
-import { NextRouter } from "next/router";
 
 interface LayoutProps {
   children?: React.ReactNode;
-  route: NextRouter;
 }
 
-const Layout = ({ route, children }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   const [sidebar, setSidebar] = useState(false);
 
   const small = useMediaQuery({
@@ -36,7 +34,6 @@ const Layout = ({ route, children }: LayoutProps) => {
         sidebar={sidebar}
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
-        route={route}
       />
       <main className={style.contentWrapper}>
         <ContentContainer>

@@ -14,7 +14,7 @@ const Website = ({ Component, pageProps }) => {
         <title>NAV Designsystem</title>
         <link rel="icon" href="/favicon-32x32.png" />
       </Head>
-      <Layout route={route}>
+      <Layout>
         <Component {...pageProps} />
       </Layout>
     </>
