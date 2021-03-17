@@ -1,7 +1,7 @@
-import Link from "next/link";
 import cl from "classnames";
 import { Close } from "@navikt/ds-icons";
 import style from "../layout.module.css";
+import Menu from "./Menu";
 
 interface SidebarProps {
   classname?: string;
@@ -10,12 +10,7 @@ interface SidebarProps {
   onSidebarChange: (x: boolean) => void;
 }
 
-const Sidebar = ({
-  sidebar,
-  small,
-  onSidebarChange,
-  ...props
-}: SidebarProps) => {
+const Sidebar = ({ sidebar, small, onSidebarChange }: SidebarProps) => {
   return (
     <>
       {sidebar && small && (
@@ -40,9 +35,7 @@ const Sidebar = ({
             <Close />
           </button>
         )}
-        <Link href="/">Home</Link>
-        <Link href="/komponenter">Komponenter</Link>
-        <Link href="/komponenter/button">Button</Link>
+        <Menu />
       </div>
     </>
   );
