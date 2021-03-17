@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import {
@@ -60,29 +59,5 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
     </div>
   )
 );
-Alert.propTypes = {
-  /**
-   * Decides what design the alert will have
-   */
-  variant: PropTypes.oneOf<"error" | "warning" | "info" | "success">([
-    "error",
-    "warning",
-    "info",
-    "success",
-  ]).isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Component content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Reduces padding on component
-   * @default "medium"
-   */
-  size: PropTypes.oneOf(["medium", "small"]),
-};
 
 export default Alert;

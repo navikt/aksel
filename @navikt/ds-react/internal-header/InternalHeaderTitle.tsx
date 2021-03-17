@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes, createElement } from "react";
 import cl from "classnames";
 
@@ -27,23 +26,5 @@ const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
       children: <span>{children}</span>,
     })
 );
-
-InternalHeaderTitle.propTypes = {
-  /**
-   * Component content
-   */
-  children: PropTypes.node,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Tag this component will use. Usefull for defining a button/link
-   * @default "h1"
-   */
-  element: PropTypes.oneOf<keyof React.ReactHTML>(
-    Array<keyof React.ReactHTML>()
-  ),
-};
 
 export default InternalHeaderTitle;

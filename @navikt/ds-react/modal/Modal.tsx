@@ -1,13 +1,9 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
 import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
 import { Button } from "../index";
-
-// TODO: Has to be documented well that the user has to import react-modal and call
-// ReactModal.setAppElement("#root")
 
 export interface ModalProps {
   /**
@@ -89,34 +85,6 @@ const Modal = forwardRef<ReactModal, ModalProps>(
     );
   }
 );
-
-Modal.propTypes = {
-  /**
-   * Content of modal
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * Open state for modal
-   */
-  open: PropTypes.bool.isRequired,
-  /**
-   * Called when modal wants to close
-   */
-  onClose: PropTypes.func.isRequired,
-  /**
-   * If modal should close on overlay click
-   * @default true
-   */
-  shouldCloseOnOverlayClick: PropTypes.bool,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * User defined classname for modal content
-   */
-  contentClassName: PropTypes.string,
-};
 
 export const setAppElement = (element) => {
   ReactModal.setAppElement(element);

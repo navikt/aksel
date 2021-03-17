@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
@@ -24,16 +23,5 @@ const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
     </div>
   )
 );
-
-ContentContainer.propTypes = {
-  /**
-   * Component content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-};
 
 export default ContentContainer;

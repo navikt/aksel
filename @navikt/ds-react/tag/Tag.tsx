@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
@@ -30,25 +29,5 @@ const Tag = forwardRef<HTMLSpanElement, TagProps>(
     );
   }
 );
-
-Tag.propTypes = {
-  /**
-   * Component content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Changes background-color and border-color
-   */
-  variant: PropTypes.oneOf<"warning" | "error" | "info" | "success">([
-    "warning",
-    "error",
-    "info",
-    "success",
-  ]).isRequired,
-};
 
 export default Tag;

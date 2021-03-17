@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
@@ -19,16 +18,5 @@ const Grid = forwardRef<HTMLDivElement, GridProps>(
     </div>
   )
 );
-
-Grid.propTypes = {
-  /**
-   * Component content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-};
 
 export default Grid;

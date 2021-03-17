@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
@@ -26,20 +25,5 @@ const InternalHeaderUser = forwardRef<HTMLDivElement, InternalHeaderUserProps>(
     </div>
   )
 );
-
-InternalHeaderUser.propTypes = {
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * User ident
-   */
-  ident: PropTypes.string.isRequired,
-  /**
-   * user name
-   */
-  name: PropTypes.string.isRequired,
-};
 
 export default InternalHeaderUser;

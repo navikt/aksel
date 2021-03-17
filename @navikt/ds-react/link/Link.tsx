@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
@@ -32,19 +31,5 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     );
   }
 );
-Link.propTypes = {
-  /**
-   * Component content
-   */
-  children: PropTypes.node.isRequired,
-  /**
-   * @ignore
-   */
-  className: PropTypes.string,
-  /**
-   * Link anchor should direct to
-   */
-  href: PropTypes.string.isRequired,
-};
 
 export default Link;
