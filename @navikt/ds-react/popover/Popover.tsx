@@ -28,10 +28,18 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Orientation for popover
-   * @default 'auto'
+   * @default "right"
    */
   placement?: Placement;
+  /**
+   * Small reduces padding on popover content
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 

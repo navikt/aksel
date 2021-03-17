@@ -5,9 +5,6 @@ import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
 import { Button } from "../index";
 
-// TODO: Has to be documented well that the user has to import react-modal and call
-// ReactModal.setAppElement("#root")
-
 export interface ModalProps {
   /**
    * Content of modal
@@ -27,7 +24,7 @@ export interface ModalProps {
    */
   shouldCloseOnOverlayClick?: boolean;
   /**
-   * User defined classname for wrapper element
+   * @ignore
    */
   className?: string;
   /**

@@ -3,9 +3,29 @@ import cl from "classnames";
 
 type Column = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export interface CellProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
+   * Component content
+   */
+  children?: React.ReactNode;
+  /**
+   * Cell columns on width < 448px
+   */
   xs: Column;
+  /**
+   * Cell columns on min-width: 448
+   */
   sm?: Column;
+  /**
+   * Cell columns on min-width: 648
+   */
   md?: Column;
+  /**
+   * Cell columns on min-width: 960px
+   */
   lg?: Column;
 }
 
