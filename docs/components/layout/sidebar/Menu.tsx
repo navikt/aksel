@@ -15,8 +15,8 @@ const parsePages = (pages) => {
   return pages.map((page) => {
     if (page.pathName) {
       return (
-        <li>
-          <Link key={page.pathName} href={page.pathName}>
+        <li key={page.pathName}>
+          <Link href={page.pathName}>
             {page.title ? page.title : parseTitle(page.pathName)}
           </Link>
         </li>
