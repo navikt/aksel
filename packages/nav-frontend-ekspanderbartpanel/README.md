@@ -27,7 +27,7 @@ Legg til `import EkspanderbartPanel from 'nav-frontend-ekspanderbartpanel'`
 Bruker man `redux` har man mulighet til å lagre staten der, og kan (om man vil) bruke en `pure` versjon av panelet.
 Da må man selv alltid sende inn `apen`-propen.
 
-Legg til `import { EkspanderbartpanelPure } from 'nav-frontend-ekspanderbartpanel'`
+Legg til `import { EkspanderbartpanelBase } from 'nav-frontend-ekspanderbartpanel'`
 
 <!-- AUTO-GENERATED-CONTENT:START (DISCLAIMER) -->
 
