@@ -35,6 +35,7 @@ const Layout = ({ children }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
+      {/* TEMP UNTIL LAYOUT UPDATE */}
       <main className={style.contentWrapper}>
         <ContentContainer>
           <Grid>

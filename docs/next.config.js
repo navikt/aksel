@@ -4,7 +4,6 @@
 const fs = require("fs");
 var markdown = require("remark-parse");
 const unified = require("unified");
-/* const toc = require("@jsdevtools/rehype-toc"); */
 const glob = require("glob");
 const { v4 } = require("uuid");
 const withMDX = require("@next/mdx")({
