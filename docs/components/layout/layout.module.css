@@ -91,6 +91,7 @@
   overflow: visible;
   margin: 0 auto 0 0;
   width: 100%;
+  max-width: 620px;
 }
 
 .content {

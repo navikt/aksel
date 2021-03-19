@@ -1,6 +1,40 @@
-.toc {
-  background-color: var(--bg-secondary);
-  width: 100%;
-  height: 500px;
-  outline: var(--outline);
+.ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.25rem;
+  color: var(--navds-color-blue-50);
+  display: flex;
+  align-items: center;
+  transition: margin 100ms linear;
+  column-gap: 0.25rem;
+  padding: 0.25rem 0;
+}
+
+.li > svg {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.li:hover {
+  margin-left: 0.25rem;
+}
+
+.li:hover > a,
+.li:hover > svg {
+  color: var(--navds-color-darkgray);
+  transition: color 150ms linear;
+}
+
+.li > svg + a:focus {
+  color: white;
+  transition: color 0ms linear;
+  background-color: var(--navds-color-blue-80);
+  outline: none;
 }
