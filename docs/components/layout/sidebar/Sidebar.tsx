@@ -8,9 +8,10 @@ interface SidebarProps {
   sidebar: boolean;
   small: boolean;
   onSidebarChange: (x: boolean) => void;
+  menu: any[];
 }
 
-const Sidebar = ({ sidebar, small, onSidebarChange }: SidebarProps) => {
+const Sidebar = ({ sidebar, small, onSidebarChange, menu }: SidebarProps) => {
   return (
     <>
       {sidebar && small && (
@@ -35,7 +36,7 @@ const Sidebar = ({ sidebar, small, onSidebarChange }: SidebarProps) => {
             <Close />
           </button>
         )}
-        <Menu />
+        <Menu menu={menu} />
       </div>
     </>
   );
