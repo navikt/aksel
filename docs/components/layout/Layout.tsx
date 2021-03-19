@@ -37,15 +37,12 @@ const Layout = ({ children, menu }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
+      {/* TEMP UNTIL LAYOUT UPDATE */}
       <main className={style.contentWrapper}>
         <ContentContainer>
           <Grid>
-            <Cell className={style.content} xs={12} sm={12} md={10} lg={7}>
+            <Cell className={style.content} xs={12} sm={12} md={12} lg={12}>
               <Mdx>{children}</Mdx>
-            </Cell>
-            <Cell xs={12} sm={1} md={2} lg={1} />
-            <Cell xs={12} sm={12} md={8} lg={4}>
-              <Toc />
             </Cell>
           </Grid>
         </ContentContainer>
