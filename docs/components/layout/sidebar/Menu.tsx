@@ -12,7 +12,7 @@ const subLinks = (page: NavdsPage) => {
 };
 
 const parsePages = (pages) => {
-  return pages.map((page) => {
+  return pages?.map((page) => {
     if (page.pathName) {
       return (
         <li key={page.pathName}>
@@ -36,10 +36,10 @@ const parseTitle = (path: string) =>
     .replace(/^\w/, (c) => c.toUpperCase())
     .replace("-", " ") || "ERR: Default Title";
 
-const Menu = () => {
+const Menu = ({ menu }) => {
   return (
     <nav>
-      <ul>{parsePages(Pages)}</ul>
+      <ul>{parsePages(menu)}</ul>
     </nav>
   );
 };
