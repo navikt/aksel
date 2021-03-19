@@ -1,8 +1,7 @@
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import Mdx from "./MdxProvider";
-import Toc from "../toc/Toc";
-import { Grid, Cell, ContentContainer } from "@navikt/ds-react";
+import { ContentContainer } from "@navikt/ds-react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
@@ -35,7 +34,6 @@ const Layout = ({ children }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
-      {/* TEMP UNTIL LAYOUT UPDATE */}
       <main className={style.contentWrapper}>
         <ContentContainer>
           <div className={style.content}>

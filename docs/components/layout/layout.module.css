@@ -91,11 +91,6 @@
   width: 100%;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-}
-
 .content {
   width: 100%;
   max-width: 520px;
