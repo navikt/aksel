@@ -4,7 +4,7 @@ import Bash from "../code/Bash";
 import Import from "../code/Import";
 import Preview from "../code-preview/Preview";
 import Npm from "../npm/Npm";
-import TableOfContents from "../toc/Toc";
+import TableOfContents from "../table-of-contents/TableOfContents";
 /* import { Button } from "@navikt/ds-react"; */
 
 const MdxWrapper = (props) => (
@@ -12,7 +12,7 @@ const MdxWrapper = (props) => (
     components={{
       h1: (props) => (
         <Heading
-          id={props.children.replace(/\s/g, "")}
+          id={props.children.replace(/\s/g, "-")}
           size="xxl"
           level={1}
           {...props}
@@ -20,7 +20,7 @@ const MdxWrapper = (props) => (
       ),
       h2: (props) => (
         <Heading
-          id={props.children.replace(/\s/g, "")}
+          id={props.children.replace(/\s/g, "-")}
           size="large"
           level={2}
           {...props}
@@ -28,7 +28,7 @@ const MdxWrapper = (props) => (
       ),
       h3: (props) => (
         <Heading
-          id={props.children.replace(/\s/g, "")}
+          id={props.children.replace(/\s/g, "-")}
           size="small"
           level={3}
           {...props}

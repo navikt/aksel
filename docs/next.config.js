@@ -6,6 +6,7 @@ var markdown = require("remark-parse");
 const unified = require("unified");
 /* const toc = require("@jsdevtools/rehype-toc"); */
 const glob = require("glob");
+const { v4 } = require("uuid");
 const withMDX = require("@next/mdx")({
   extension: /\.(md|mdx)$/,
 });
@@ -40,6 +41,7 @@ const loadToc = () => {
           return {
             depth: x.depth,
             heading: x.children[0].value,
+            key: v4(),
           };
         }),
     };

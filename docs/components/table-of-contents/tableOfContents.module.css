@@ -8,7 +8,8 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  font-size: 1.25rem;
+  font-size: var(--navds-font-size-medium);
+  line-height: var(--navds-font-line-height-medium);
   color: var(--navds-color-blue-50);
   display: flex;
   align-items: center;
@@ -30,6 +31,7 @@
 .li:hover > svg {
   color: var(--navds-color-darkgray);
   transition: color 150ms linear;
+  text-decoration: underline;
 }
 
 .li > svg + a:focus {

@@ -1,11 +1,10 @@
 import { useRouter } from "next/router";
 import getConfig from "next/config";
-import style from "./toc.module.css";
+import style from "./tableOfContents.module.css";
 import Link from "next/link";
 import { Next } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
 import { forwardRef } from "react";
-import { v4 } from "uuid";
 
 const AnchorLink = forwardRef<
   HTMLAnchorElement,
@@ -14,9 +13,10 @@ const AnchorLink = forwardRef<
   return (
     <>
       <Next
-        aria-label="Chevron ikon på lenketekst"
+        aria-label="Pil peker på lenke"
         focusable="false"
         role="img"
+        aria-hidden
       />
       <a ref={ref} href={href}>
         {children}
@@ -42,9 +42,9 @@ const TableOfContents = () => {
             Table of contents
           </Heading>
           <ul className={style.ul}>
-            {tree.map(({ heading }) => (
-              <li key={v4()} className={style.li}>
-                <Link passHref shallow href={`#${heading.replace(/\s/g, "")}`}>
+            {tree.map(({ heading, key }) => (
+              <li key={key} className={style.li}>
+                <Link passHref shallow href={`#${heading.replace(/\s/g, "-")}`}>
                   <AnchorLink>{heading}</AnchorLink>
                 </Link>
               </li>
