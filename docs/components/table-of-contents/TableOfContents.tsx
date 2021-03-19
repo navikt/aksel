@@ -1,28 +1,8 @@
-import style from "./tableOfContents.module.css";
-import Link from "next/link";
+import { useContext } from "react";
 import { Next } from "@navikt/ds-icons";
 import { Heading } from "@navikt/ds-react";
-import { forwardRef, useContext } from "react";
+import style from "./tableOfContents.module.css";
 import { PagePropsContext } from "../../pages/_app";
-
-const AnchorLink = forwardRef<
-  HTMLAnchorElement,
-  { href?: string; children: React.ReactNode }
->(({ href = "", children }, ref) => {
-  return (
-    <>
-      <Next
-        aria-label="Pil peker på lenke"
-        focusable="false"
-        role="img"
-        aria-hidden
-      />
-      <a ref={ref} href={href}>
-        {children}
-      </a>
-    </>
-  );
-});
 
 const TableOfContents = () => {
   const { tableOfContents } = useContext<any>(PagePropsContext);
@@ -34,9 +14,13 @@ const TableOfContents = () => {
       <ul className={style.ul}>
         {tableOfContents?.map((heading, i) => (
           <li key={i} className={style.li}>
-            <Link passHref shallow href={`#${heading.replace(/\s/g, "-")}`}>
-              <AnchorLink>{heading}</AnchorLink>
-            </Link>
+            <Next
+              aria-label="Pil peker på lenke"
+              focusable="false"
+              role="img"
+              aria-hidden
+            />
+            <a href={`#${heading.replace(/\s/g, "-")}`}>{heading}</a>
           </li>
         ))}
       </ul>
