@@ -3,7 +3,7 @@ import glob from "glob";
 import matter from "gray-matter";
 import hydrate from "next-mdx-remote/hydrate";
 import renderToString from "next-mdx-remote/render-to-string";
-import components from "../components/layout/MDXComponents";
+import components from "../components/MDXComponents";
 import tableOfContents from "../src/table-of-contents";
 import mainMenu from "../src/main-menu";
 

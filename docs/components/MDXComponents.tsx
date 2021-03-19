@@ -1,9 +1,9 @@
 import { Heading, Paragraph } from "@navikt/ds-react";
-import Bash from "../code/Bash";
-import Import from "../code/Import";
-import Preview from "../code-preview/Preview";
-import Npm from "../npm/Npm";
-import TableOfContents from "../table-of-contents/TableOfContents";
+import Bash from "./code/Bash";
+import Import from "./code/Import";
+import Preview from "./code-preview/Preview";
+import Npm from "./npm/Npm";
+import TableOfContents from "./table-of-contents/TableOfContents";
 
 export default {
   h1: (props) => (
