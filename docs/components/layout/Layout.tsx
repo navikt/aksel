@@ -38,11 +38,9 @@ const Layout = ({ children }: LayoutProps) => {
       {/* TEMP UNTIL LAYOUT UPDATE */}
       <main className={style.contentWrapper}>
         <ContentContainer>
-          <Grid>
-            <Cell className={style.content} xs={12} sm={12} md={12} lg={12}>
-              <Mdx>{children}</Mdx>
-            </Cell>
-          </Grid>
+          <div className={style.content}>
+            <Mdx>{children}</Mdx>
+          </div>
         </ContentContainer>
       </main>
     </div>

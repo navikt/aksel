@@ -7,6 +7,7 @@
     "sidebar content";
   height: 100vh;
   background-color: var(--bg-primary);
+  overflow-x: hidden;
 }
 
 .header {
@@ -87,17 +88,20 @@
 
 .contentWrapper {
   grid-area: content;
-  overflow-y: auto;
-  overflow: visible;
-  margin: 0 auto 0 0;
-  width: 100%;
+  /* overflow-y: auto; */
 
-  /* TMP UNTIL LAYOUT UPDATE */
-  max-width: 520px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
 }
 
 .content {
   width: 100%;
+  max-width: 520px;
+  margin: 0 auto 0 0;
 }
 
 @media (max-width: 959px) {
