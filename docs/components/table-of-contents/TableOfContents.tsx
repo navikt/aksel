@@ -1,5 +1,3 @@
-import { useRouter } from "next/router";
-import getConfig from "next/config";
 import style from "./tableOfContents.module.css";
 import Link from "next/link";
 import { Next } from "@navikt/ds-icons";
