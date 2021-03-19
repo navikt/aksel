@@ -97,7 +97,6 @@ const Bash = ({
               >
                 Kode er kopiert
               </Popover>
-              )
             </div>
           </>
         )}
