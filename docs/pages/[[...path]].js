@@ -1,7 +1,6 @@
 import fs from "fs";
 import glob from "glob";
 import matter from "gray-matter";
-import mdxPrism from "mdx-prism";
 import hydrate from "next-mdx-remote/hydrate";
 import renderToString from "next-mdx-remote/render-to-string";
 import pathsToTree from "../src/paths-to-tree";
@@ -65,7 +64,6 @@ export async function getStaticProps({ params: { path } }) {
     components: MDXComponents,
     mdxOptions: {
       remarkPlugins: [],
-      rehypePlugins: [mdxPrism],
     },
   });
 

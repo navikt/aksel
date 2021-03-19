@@ -1,7 +1,5 @@
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import Mdx from "./MdxProvider";
-import Toc from "../toc/Toc";
 import { Grid, Cell, ContentContainer } from "@navikt/ds-react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
@@ -42,7 +40,7 @@ const Layout = ({ children, menu }: LayoutProps) => {
         <ContentContainer>
           <Grid>
             <Cell className={style.content} xs={12} sm={12} md={12} lg={12}>
-              <Mdx>{children}</Mdx>
+              {children}
             </Cell>
           </Grid>
         </ContentContainer>

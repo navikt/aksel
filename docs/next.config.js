@@ -6,9 +6,6 @@ var markdown = require("remark-parse");
 const unified = require("unified");
 const glob = require("glob");
 const { v4 } = require("uuid");
-const withMDX = require("@next/mdx")({
-  extension: /\.(md|mdx)$/,
-});
 
 const loadPackage = () => {
   const navFrontend = glob.sync("../packages/**/package.json");
@@ -47,9 +44,8 @@ const loadToc = () => {
   });
 };
 
-module.exports = withMDX({
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+module.exports = {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
@@ -60,4 +56,4 @@ module.exports = withMDX({
     packages: loadPackage(),
     toc: loadToc(),
   },
-});
+};
