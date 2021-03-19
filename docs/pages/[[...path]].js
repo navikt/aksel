@@ -1,15 +1,23 @@
 import fs from "fs";
 import glob from "glob";
 import matter from "gray-matter";
+import mdxPrism from "mdx-prism";
+import hydrate from "next-mdx-remote/hydrate";
+import renderToString from "next-mdx-remote/render-to-string";
 import pathsToTree from "../src/paths-to-tree";
+import MDXComponents from "../components/layout/MDXComponents";
 
-const Page = () => {
-  return <p>Hello!</p>;
+const Page = ({ mdxSource }) => {
+  const content = hydrate(mdxSource, {
+    components: MDXComponents,
+  });
+
+  return content;
 };
 
 export default Page;
 
-export async function getStaticProps(context) {
+export async function getStaticProps({ params: { path } }) {
   let tree = pathsToTree(
     glob.sync("data/**/*.mdx").filter((path) => !path.endsWith("index.mdx"))
   );
@@ -41,7 +49,7 @@ export async function getStaticProps(context) {
       );
       node.children.sort((a, b) => a.rank - b.rank);
     } else {
-      node.pathName = `${parentPath}${node.name}`.slice(5, -4);
+      node.pathName = `/${parentPath}${node.name}`.slice(5, -4);
     }
   };
 
@@ -49,9 +57,22 @@ export async function getStaticProps(context) {
 
   const menu = tree[0].children;
 
+  const { content } = matter(
+    fs.readFileSync(`data/${path.join("/")}.mdx`, "utf8")
+  );
+
+  const mdxSource = await renderToString(content, {
+    components: MDXComponents,
+    mdxOptions: {
+      remarkPlugins: [],
+      rehypePlugins: [mdxPrism],
+    },
+  });
+
   return {
     props: {
       menu,
+      mdxSource,
     },
   };
 }
