@@ -12,7 +12,7 @@ const subLinks = (page: NavdsPage) => {
 };
 
 const parsePages = (pages) => {
-  return pages.map((page) => {
+  return pages?.map((page) => {
     if (page.pathName) {
       return (
         <li key={page.pathName}>
