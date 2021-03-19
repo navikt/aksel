@@ -18,7 +18,12 @@ export async function getStaticProps({ params: { path } }) {
 
   return {
     props: {
-      mdxSource: await renderToString(content, { components }),
+      mdxSource: await renderToString(content, {
+        components,
+        mdxOptions: {
+          remarkPlugins: [require("remark-slug")],
+        },
+      }),
       menu: mainMenu(),
       tableOfContents: tableOfContents(content),
     },
