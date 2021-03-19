@@ -3,6 +3,7 @@ import Bash from "../code/Bash";
 import Import from "../code/Import";
 import Preview from "../code-preview/Preview";
 import Npm from "../npm/Npm";
+import TableOfContents from "../table-of-contents/TableOfContents";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -13,4 +14,5 @@ export default {
   Preview,
   Import,
   Npm,
+  TableOfContents,
 };

@@ -58,7 +58,7 @@ export async function getStaticProps({ params: { path } }) {
   const menu = tree[0].children;
 
   const { content } = matter(
-    fs.readFileSync(`data/${path.join("/")}.mdx`, "utf8")
+    fs.readFileSync(`data/${path?.join("/") || "index"}.mdx`, "utf8")
   );
 
   const mdxSource = await renderToString(content, {
