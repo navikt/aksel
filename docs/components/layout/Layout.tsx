@@ -10,9 +10,10 @@ import style from "./layout.module.css";
 
 interface LayoutProps {
   children?: React.ReactNode;
+  menu: any[];
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children, menu }: LayoutProps) => {
   const [sidebar, setSidebar] = useState(false);
 
   const small = useMediaQuery({
@@ -31,6 +32,7 @@ const Layout = ({ children }: LayoutProps) => {
     <div className={style.pageWrapper + " lightTheme"}>
       <Header sidebar={sidebar} onSidebarChange={(x) => setSidebar(x)} />
       <Sidebar
+        menu={menu}
         sidebar={sidebar}
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
