@@ -25,7 +25,7 @@ export default {
   parameters: {
     layout: "fullscreen",
     backgrounds: {
-      default: "NAV gray",
+      default: "white",
       values: [
         {
           name: "NAV gray",

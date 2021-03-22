@@ -1,7 +1,7 @@
 import React, { useEffect, Children, forwardRef } from "react";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { ContentContainer, Heading } from "../../";
 import { default as Section, SectionProps } from "./Section";
+import { ContentContainer, Heading } from "../../";
 import cl from "classnames";
 
 export interface LayoutWithSubComponents
@@ -16,7 +16,7 @@ export interface LayoutProps extends HTMLAttributes<HTMLElement> {
 
 const Layout = forwardRef<HTMLDivElement, LayoutProps>(
   ({ children, title, className, ...rest }, ref) => {
-    const columns = Children.count(children);
+    const columns = Children.toArray(children).length;
     const classNames = cl(
       "navds-layout__container",
       `navds-layout__container--${columns}-columns`,
@@ -24,31 +24,30 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      const layoutBody = document.getElementById("navds-layout__body");
       document.body.classList.add("navds-layout__body--white");
-      layoutBody?.classList.add("navds-layout__body--gray");
       return () => {
-        document.body.classList.remove("navds-layout__container--white");
-        layoutBody?.classList.remove("navds-layout__body--gray");
+        document.body.classList.remove("navds-layout__body--white");
       };
     }, []);
 
     return (
       <div ref={ref}>
-        <ContentContainer>
-          <div className={classNames} {...rest}>
-            <div className={cl("navds-layout__header")}>
-              <Heading
-                size={"xxl"}
-                className={cl("navds-layout__header-title")}
-                level={1}
-              >
-                {title}
-              </Heading>
+        <div id={"navds-layout-header"} className={"navds-layout__header"}>
+          <ContentContainer>
+            <div className={classNames} {...rest}>
+              <div className={cl("navds-layout__header-content")}>
+                <Heading
+                  size={"xxl"}
+                  className={cl("navds-layout__header-title")}
+                  level={1}
+                >
+                  {title}
+                </Heading>
+              </div>
             </div>
-          </div>
-        </ContentContainer>
-        <div id={"navds-layout__body"}>
+          </ContentContainer>
+        </div>
+        <div id={"navds-layout-body"} className={"navds-layout__body"}>
           <ContentContainer>
             <div className={classNames} {...rest}>
               {children}
