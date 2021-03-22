@@ -26,12 +26,9 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      const layoutBody = document.getElementById("navds-layout-body");
-      layoutBody?.classList.add("navds-layout__body--gray");
       document.body.classList.add("navds-layout__body--white");
       return () => {
-        layoutBody?.classList.remove("navds-layout__body--gray");
-        document.body.classList.remove("navds-layout__container--white");
+        document.body.classList.remove("navds-layout__body--white");
       };
     }, []);
 

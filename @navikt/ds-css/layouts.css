@@ -10,14 +10,6 @@
   margin-left: auto;
 }
 
-.navds-layout__body--white {
-  background: var(--navds-layout-background-white);
-}
-
-.navds-layout__body--gray {
-  background: var(--navds-layout-background-gray);
-}
-
 .navds-layout__container--1-columns,
 .navds-layout__container--2-columns {
   max-width: 60rem;
@@ -164,6 +156,10 @@
 
 .navds-layout__body {
   background: var(--navds-layout-background-gray);
+}
+
+.navds-layout__body--white {
+  background: var(--navds-layout-background-white);
 }
 
 @media (min-width: 960px) {
