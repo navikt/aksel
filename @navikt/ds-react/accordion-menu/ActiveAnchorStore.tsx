@@ -11,7 +11,7 @@ export interface ActiveAnchorStore {
   anchors: Anchor[];
   activeAnchor?: Anchor;
   registerAnchor: (anchor: Anchor) => void;
-  unregisterAnchor: (id: string) => void;
+  unregisterAnchor: (anchor: Anchor) => void;
   setActiveAnchor: (anchor: Anchor) => void;
 }
 
@@ -30,7 +30,7 @@ export const ActiveAnchorProvider = (props: Props) => {
           setAnchors((anchors) => [...anchors, anchor]);
         }, []),
         unregisterAnchor: useCallback((anchor) => {
-          setAnchors((anchors) => anchors.filter((a) => a.id !== anchor));
+          setAnchors((anchors) => anchors.filter((a) => a.id !== anchor.id));
         }, []),
         setActiveAnchor: useCallback((anchor) => {
           setActiveAnchor(anchor);

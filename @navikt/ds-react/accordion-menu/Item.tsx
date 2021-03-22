@@ -32,7 +32,7 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
         if (target) {
           registerAnchor({ id: anchor });
           return () => {
-            unregisterAnchor(anchor);
+            unregisterAnchor({ id: anchor });
           };
         }
       }
