@@ -36,11 +36,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "right"
    */
   placement?: Placement;
-  /**
-   * Small reduces padding on popover content
-   * @default "medium"
-   */
-  size?: "medium" | "small";
 }
 
 const useEventLister = (event: string, callback) =>
@@ -60,7 +55,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       children,
       placement = "right",
       className,
-      size = "medium",
       ...rest
     },
     ref
@@ -138,7 +132,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <div
         ref={mergedRef}
-        className={cl("navds-popover", `navds-popover--${size}`, className, {
+        className={cl("navds-popover", className, {
           "navds-popover--hidden": !open || !anchorEl,
         })}
         aria-live="polite"

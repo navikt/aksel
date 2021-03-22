@@ -24,7 +24,6 @@
 .navds-accordion__chevron {
   width: 1.25em;
   height: 1.25em;
-  transition: 300ms transform;
   transform: rotateZ(0deg);
   flex-shrink: 0;
   margin-left: 1rem;

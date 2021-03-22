@@ -27,7 +27,7 @@ const Template = (props) => {
         {props.placement}
       </div>
       <Popover {...props} anchorEl={anchorEl} onClose={() => {}} open>
-        Contents
+        <div style={{ margin: "1rem" }}>Contents</div>
       </Popover>
     </>
   );
@@ -51,30 +51,6 @@ export const All = () => {
           }}
         >
           <Template placement={placement} />
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export const Small = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexWrap: "wrap",
-        margin: "4rem 8rem 4rem 8rem",
-      }}
-    >
-      {placements.map((placement) => (
-        <div
-          style={{
-            width: "20%",
-            height: "100px",
-            margin: "4rem",
-          }}
-        >
-          <Template placement={placement} size="small" />
         </div>
       ))}
     </div>
