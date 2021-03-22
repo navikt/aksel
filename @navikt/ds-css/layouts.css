@@ -10,9 +10,12 @@
   margin-left: auto;
 }
 
-.navds-layout__decorator--white,
-.navds-layout__container--white {
-  background: white;
+.navds-layout__body--white {
+  background: var(--navds-layout-background-white);
+}
+
+.navds-layout__body--gray {
+  background: var(--navds-layout-background-gray);
 }
 
 .navds-layout__container--1-columns,

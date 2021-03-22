@@ -1,6 +1,5 @@
 import React, { useEffect, Children, forwardRef } from "react";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { setParams as setDecoratorParams } from "@navikt/nav-dekoratoren-moduler";
 import { ContentContainer, Heading } from "../../";
 import { default as Section, SectionProps } from "./Section";
 import cl from "classnames";
@@ -25,38 +24,37 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      setDecoratorParams({
-        utilsBackground: "white",
-      });
+      const layoutBody = document.getElementById("navds-layout__body");
+      document.body.classList.add("navds-layout__body--white");
+      layoutBody?.classList.add("navds-layout__body--gray");
       return () => {
-        setDecoratorParams({
-          utilsBackground: "transparent",
-        });
+        document.body.classList.remove("navds-layout__container--white");
+        layoutBody?.classList.remove("navds-layout__body--gray");
       };
     }, []);
 
     return (
       <div ref={ref}>
-        <div className={"navds-layout__container--white"}>
+        <ContentContainer>
+          <div className={classNames} {...rest}>
+            <div className={cl("navds-layout__header")}>
+              <Heading
+                size={"xxl"}
+                className={cl("navds-layout__header-title")}
+                level={1}
+              >
+                {title}
+              </Heading>
+            </div>
+          </div>
+        </ContentContainer>
+        <div id={"navds-layout__body"}>
           <ContentContainer>
             <div className={classNames} {...rest}>
-              <div className={cl("navds-layout__header")}>
-                <Heading
-                  size={"xxl"}
-                  className={cl("navds-layout__header-title")}
-                  level={1}
-                >
-                  {title}
-                </Heading>
-              </div>
+              {children}
             </div>
           </ContentContainer>
         </div>
-        <ContentContainer>
-          <div className={classNames} {...rest}>
-            {children}
-          </div>
-        </ContentContainer>
       </div>
     );
   }
