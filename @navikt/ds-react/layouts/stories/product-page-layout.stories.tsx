@@ -9,7 +9,7 @@ import "./components/styles.css";
 
 export default {
   title: "ds-react/layouts/ProductPage",
-  component: { ProductPageLayout },
+  component: ProductPageLayout,
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -69,6 +69,14 @@ export const TwoColumnsLeft = () => (
       <Left />
     </ProductPageLayout.Section>
     <ProductPageLayout.Section>
+      <ProductPageLayout.Panel
+        title={"Leo quis"}
+        anchor={"leo-quis"}
+        highlight={true}
+        icon={<LightBulb />}
+      >
+        <MainOne title={false} />
+      </ProductPageLayout.Panel>
       <Main />
     </ProductPageLayout.Section>
   </ProductPageLayout>

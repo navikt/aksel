@@ -2,13 +2,13 @@ import React, { useEffect, Children, forwardRef } from "react";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
 import { default as Section, SectionProps } from "./Section";
 import { default as Panel, PanelProps } from "./Panel";
-import { ContentContainer, Heading } from "../../";
+import { ContentContainer, Heading, OverridableComponent } from "../../";
 import cl from "classnames";
 
 export interface LayoutWithSubComponents
   extends ForwardRefExoticComponent<LayoutProps> {
   Section: ForwardRefExoticComponent<SectionProps>;
-  Panel: ForwardRefExoticComponent<PanelProps>;
+  Panel: OverridableComponent<PanelProps>;
 }
 
 export interface LayoutProps extends HTMLAttributes<HTMLElement> {
@@ -26,11 +26,14 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
+      const layoutBody = document.getElementById("navds-layout-body");
+      layoutBody?.classList.add(`navds-layout__body--${columns}-columns`);
       document.body.classList.add("navds-layout__body--white");
       return () => {
+        layoutBody?.classList.remove(`navds-layout__body--${columns}-columns`);
         document.body.classList.remove("navds-layout__body--white");
       };
-    }, []);
+    }, [columns]);
 
     return (
       <div ref={ref}>
