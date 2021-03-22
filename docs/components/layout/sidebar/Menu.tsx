@@ -1,4 +1,4 @@
-import Pages, { NavdsPage } from "../../../src/pages";
+import { NavdsPage } from "../../../src/pages";
 import Link from "next/link";
 
 /* TODO: Replace with accordion-menu when ready */
