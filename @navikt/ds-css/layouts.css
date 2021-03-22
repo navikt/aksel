@@ -240,6 +240,10 @@
   width: 1.5rem;
 }
 
+.navds-layout__panel-popover-content {
+  margin: 0.5rem;
+}
+
 .navds-layout__panel-copy-button {
   display: flex;
   align-items: center;
@@ -249,14 +253,6 @@
   padding-left: 0;
   padding-right: 0;
   border: 0;
-}
-
-.navds-layout__panel-copy-etiquette.etikett--info {
-  height: auto;
-  color: white;
-  background-color: var(--navds-color-darkgray);
-  border: 1px solid var(--navds-color-darkgray);
-  padding: 0.25rem 0.5rem;
 }
 
 @media (min-width: 448px) {

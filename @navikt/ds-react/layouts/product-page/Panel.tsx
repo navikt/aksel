@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
-import { Button, Heading } from "../../";
+import { Button, Heading, Popover } from "../../";
 import { Attachment } from "@navikt/ds-icons";
-import { EtikettInfo } from "nav-frontend-etiketter";
-import { Undertekst } from "nav-frontend-typografi";
 import { OverridableComponent } from "../../util";
 
 export interface PanelProps {
@@ -33,8 +31,8 @@ const Panel: OverridableComponent<PanelProps> = forwardRef(
     },
     ref
   ) => {
+    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const [copied, setIsCopied] = useState<boolean>(false);
-    const copyRef = React.createRef<HTMLButtonElement>();
 
     useEffect(() => {
       const header = document.getElementById("navds-layout-body");
@@ -60,7 +58,7 @@ const Panel: OverridableComponent<PanelProps> = forwardRef(
         {anchor && (
           <div className={"navds-layout__panel-copy"}>
             <Button
-              ref={copyRef}
+              ref={(el) => setAnchorEl(el)}
               variant={"secondary"}
               className={"navds-layout__panel-copy-button"}
               onClick={() => {
@@ -76,11 +74,9 @@ const Panel: OverridableComponent<PanelProps> = forwardRef(
               <Attachment className={"navds-layout__panel-copy-icon"} />
               <span>Kopier lenke</span>
             </Button>
-            {copied && (
-              <EtikettInfo className={"navds-layout__panel-copy-etiquette"}>
-                <Undertekst>Kopiert</Undertekst>
-              </EtikettInfo>
-            )}
+            <Popover anchorEl={anchorEl} open={copied} onClose={() => {}}>
+              <div className="navds-layout__panel-popover-content">Kopiert</div>
+            </Popover>
           </div>
         )}
         <div className={"navds-layout__panel-content"}>{children}</div>
