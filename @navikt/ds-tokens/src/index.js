@@ -170,6 +170,10 @@ module.exports = {
       },
     },
     layout: {
+      background: {
+        white: { value: "#FFFFFF" },
+        gray: { value: "#F1F1F1" },
+      },
       padding: {
         small: { value: "1rem" },
         mediumAndLarger: { value: "2.5rem" },
