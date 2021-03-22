@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
 import { Button, Heading } from "../../";
