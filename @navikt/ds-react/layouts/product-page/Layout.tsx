@@ -1,6 +1,5 @@
 import React, { useEffect, Children, forwardRef } from "react";
 import { ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { setParams as setDecoratorParams } from "@navikt/nav-dekoratoren-moduler";
 import { default as Section, SectionProps } from "./Section";
 import { default as Panel, PanelProps } from "./Panel";
 import { ContentContainer, Heading, OverridableComponent } from "../../";
@@ -27,16 +26,12 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
     );
 
     useEffect(() => {
-      const header = document.getElementById("navds-layout-body");
-      header?.classList.add(`navds-layout__body--${columns}-columns`);
-      setDecoratorParams({
-        utilsBackground: "white",
-      });
+      const layoutBody = document.getElementById("navds-layout-body");
+      layoutBody?.classList.add(`navds-layout__body--${columns}-columns`);
+      document.body.classList.add("navds-layout__body--white");
       return () => {
-        header?.classList.remove(`navds-layout__body--${columns}-columns`);
-        setDecoratorParams({
-          utilsBackground: "transparent",
-        });
+        layoutBody?.classList.remove(`navds-layout__body--${columns}-columns`);
+        document.body.classList.remove("navds-layout__body--white");
       };
     }, []);
 
