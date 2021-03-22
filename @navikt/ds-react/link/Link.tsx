@@ -4,6 +4,14 @@ import cl from "classnames";
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
+   * Component content
+   */
+  children: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Link anchor should direct to
    */
   href: string;
