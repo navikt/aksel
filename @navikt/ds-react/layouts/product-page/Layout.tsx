@@ -33,7 +33,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
         layoutBody?.classList.remove(`navds-layout__body--${columns}-columns`);
         document.body.classList.remove("navds-layout__body--white");
       };
-    }, []);
+    }, [columns]);
 
     return (
       <div ref={ref}>

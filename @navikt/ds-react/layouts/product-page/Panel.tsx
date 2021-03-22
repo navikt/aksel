@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
-import { forwardRef, HTMLAttributes, ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
 import { Button, Heading } from "../../";
 import { Attachment } from "@navikt/ds-icons";
