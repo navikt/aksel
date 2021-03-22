@@ -14,7 +14,7 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
       const scrollListener = () => {
         const offset = 100;
         const lastPassedAnchor = anchors
-          .map((anchor) => document.getElementById(anchor.id))
+          .map((anchor) => document.getElementById(anchor))
           .map((element: HTMLElement) => ({
             id: element.id,
             top: element.getBoundingClientRect().top - offset,
@@ -24,13 +24,14 @@ const Nav = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
           }))
           .filter((element) => element.scrolledToBottom || element.top <= 0)
           .sort((a, b) => (a.top < b.top ? -1 : 1))
+          .map((anchor) => anchor.id)
           .pop();
 
         // Set active anchor and related url hash
-        if (lastPassedAnchor && activeAnchor?.id !== lastPassedAnchor.id) {
+        if (lastPassedAnchor && activeAnchor !== lastPassedAnchor) {
           const { href, hash } = window.location;
           const urlWithoutHash = href.replace(hash, "");
-          const urlWithAnchor = `${urlWithoutHash}#${lastPassedAnchor.id}`;
+          const urlWithAnchor = `${urlWithoutHash}#${lastPassedAnchor}`;
           const title = document.title;
           window.history.pushState(lastPassedAnchor, title, urlWithAnchor);
           setActiveAnchor(lastPassedAnchor);

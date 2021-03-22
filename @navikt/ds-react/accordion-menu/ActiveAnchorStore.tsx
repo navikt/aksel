@@ -3,23 +3,19 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-export interface Anchor {
-  id: string;
-}
-
 export interface ActiveAnchorStore {
-  anchors: Anchor[];
-  activeAnchor?: Anchor;
-  registerAnchor: (anchor: Anchor) => void;
-  unregisterAnchor: (anchor: Anchor) => void;
-  setActiveAnchor: (anchor: Anchor) => void;
+  anchors: string[];
+  activeAnchor?: string;
+  registerAnchor: (anchor: string) => void;
+  unregisterAnchor: (anchor: string) => void;
+  setActiveAnchor: (anchor: string) => void;
 }
 
 export const ActiveAnchorContext = createContext({} as ActiveAnchorStore);
 export const ActiveAnchorProvider = (props: Props) => {
   const { children } = props;
-  const [anchors, setAnchors] = useState<Anchor[]>([]);
-  const [activeAnchor, setActiveAnchor] = useState<Anchor>();
+  const [anchors, setAnchors] = useState<string[]>([]);
+  const [activeAnchor, setActiveAnchor] = useState<string>();
 
   return (
     <ActiveAnchorContext.Provider
@@ -30,7 +26,7 @@ export const ActiveAnchorProvider = (props: Props) => {
           setAnchors((anchors) => [...anchors, anchor]);
         }, []),
         unregisterAnchor: useCallback((anchor) => {
-          setAnchors((anchors) => anchors.filter((a) => a.id !== anchor.id));
+          setAnchors((anchors) => anchors.filter((a) => a !== anchor));
         }, []),
         setActiveAnchor: useCallback((anchor) => {
           setActiveAnchor(anchor);
