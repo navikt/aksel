@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { Modal } from "../index";
-import ReactModal from "react-modal";
 
 export default {
   title: "ds-react/modal",
   component: Modal,
 };
 
-ReactModal.setAppElement("#root");
+Modal.setAppElement("#root");
 
 export const All = () => {
   const [open, setOpen] = useState(true);

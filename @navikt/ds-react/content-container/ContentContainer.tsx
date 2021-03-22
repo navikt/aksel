@@ -1,7 +1,17 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export type ContentContainerProps = HTMLAttributes<HTMLDivElement>;
+export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * @ignore
+   */
+  classNames?: string;
+  /**
+   * Component content
+   */
+  children: React.ReactNode;
+}
+
 const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
   ({ children, className, ...rest }, ref) => (
     <div

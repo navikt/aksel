@@ -28,10 +28,18 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Orientation for popover
-   * @default 'auto'
+   * @default "right"
    */
   placement?: Placement;
+  /**
+   * Small reduces padding on popover content
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 
@@ -66,9 +74,16 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     useEventLister(
       "click",
       useCallback(
-        (e: MouseEvent) =>
-          !popoverRef.current?.contains(e.target as Node) && close(),
-        [close]
+        (e: MouseEvent) => {
+          if (
+            ![anchorEl, popoverRef.current].some((element) =>
+              element?.contains(e.target as Node)
+            )
+          ) {
+            close();
+          }
+        },
+        [anchorEl, close]
       )
     );
 
@@ -124,7 +139,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       <div
         ref={mergedRef}
         className={cl("navds-popover", `navds-popover--${size}`, className, {
-          "popover--hidden": !open || !anchorEl,
+          "navds-popover--hidden": !open || !anchorEl,
         })}
         aria-live="polite"
         aria-hidden={!open || !anchorEl}

@@ -123,7 +123,7 @@ class Popover extends React.Component<PopoverProps, PopoverState> {
   handleClick = (e) => {
     if (
       this.state.apen &&
-      !ReactDOM.findDOMNode(this.props.ankerEl).contains(e.target)
+      !ReactDOM.findDOMNode(this.props.ankerEl)?.contains(e.target)
     ) {
       this.props.onRequestClose();
     }
