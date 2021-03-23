@@ -1,35 +1,64 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
-interface Props {
-  children: JSX.Element | JSX.Element[];
-}
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 
 export interface ActiveAnchorStore {
-  anchors: string[];
   activeAnchor?: string;
   registerAnchor: (anchor: string) => void;
   unregisterAnchor: (anchor: string) => void;
-  setActiveAnchor: (anchor: string) => void;
 }
 
 export const ActiveAnchorContext = createContext({} as ActiveAnchorStore);
-export const ActiveAnchorProvider = (props: Props) => {
-  const { children } = props;
+export const ActiveAnchorProvider = ({ children }) => {
   const [anchors, setAnchors] = useState<string[]>([]);
   const [activeAnchor, setActiveAnchor] = useState<string>();
+
+  useEffect(() => {
+    const scrollListener = () => {
+      const offset = 100;
+      const lastPassedAnchor = anchors
+        .map((anchor) => document.getElementById(anchor))
+        .map((element: HTMLElement) => ({
+          id: element.id,
+          top: element.getBoundingClientRect().top - offset,
+          scrolledToBottom:
+            window.innerHeight + window.pageYOffset >=
+            document.body.offsetHeight,
+        }))
+        .filter((element) => element.scrolledToBottom || element.top <= 0)
+        .sort((a, b) => (a.top < b.top ? -1 : 1))
+        .map((anchor) => anchor.id)
+        .pop();
+
+      // Set active anchor and related url hash
+      if (lastPassedAnchor && activeAnchor !== lastPassedAnchor) {
+        const { href, hash } = window.location;
+        const urlWithoutHash = href.replace(hash, "");
+        const urlWithAnchor = `${urlWithoutHash}#${lastPassedAnchor}`;
+        const title = document.title;
+        window.history.pushState(lastPassedAnchor, title, urlWithAnchor);
+        setActiveAnchor(lastPassedAnchor);
+      }
+    };
+    window.addEventListener("scroll", scrollListener);
+    return () => {
+      window.removeEventListener("scroll", scrollListener);
+    };
+  }, [anchors, activeAnchor]);
 
   return (
     <ActiveAnchorContext.Provider
       value={{
-        anchors,
         activeAnchor,
         registerAnchor: useCallback((anchor) => {
           setAnchors((anchors) => [...anchors, anchor]);
         }, []),
         unregisterAnchor: useCallback((anchor) => {
           setAnchors((anchors) => anchors.filter((a) => a !== anchor));
-        }, []),
-        setActiveAnchor: useCallback((anchor) => {
-          setActiveAnchor(anchor);
         }, []),
       }}
     >

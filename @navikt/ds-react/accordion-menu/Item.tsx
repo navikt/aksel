@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util";
 import cl from "classnames";
 
-export type ItemType = OverridableComponent<AccordionMenuItemProps>;
+export type AccordionMenuItemType = OverridableComponent<AccordionMenuItemProps>;
 
 export interface AccordionMenuItemProps {
   props: {
@@ -12,7 +12,7 @@ export interface AccordionMenuItemProps {
   defaultComponent: "a";
 }
 
-const Item: ItemType = forwardRef(
+const Item: AccordionMenuItemType = forwardRef(
   (
     {
       children,

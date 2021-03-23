@@ -1,62 +1,37 @@
 import React, { forwardRef, useEffect } from "react";
+import { AccordionMenuItem, AccordionMenuItemType } from "../accordion-menu";
 import { useStore } from "./ActiveAnchorStore";
-import { OverridableComponent } from "../util";
-import cl from "classnames";
 
-export interface AccordionMenuItemProps {
-  props: {
-    children: React.ReactNode;
-    active?: boolean;
-  } & React.HTMLAttributes<HTMLLIElement>;
-  defaultComponent: "a";
-}
+const Item: AccordionMenuItemType = forwardRef((props, ref) => {
+  const isAnchorActive = useIsAnchorActive(
+    props.href && props.href.split("#")[1]
+  );
 
-const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
-  (
-    {
-      children,
-      component: Component = "a",
-      active = false,
-      className,
-      ...rest
-    },
-    ref
-  ) => {
-    const anchor = rest.href && rest.href.split("#")[1];
-    const { activeAnchor, registerAnchor, unregisterAnchor } = useStore();
-    const isActive = active || (anchor && activeAnchor === anchor) || false;
+  return (
+    <AccordionMenuItem
+      {...props}
+      ref={ref}
+      active={props.active || isAnchorActive}
+    />
+  );
+});
 
-    useEffect(() => {
-      if (anchor) {
-        const target = document.getElementById(anchor);
-        if (target) {
-          registerAnchor(anchor);
-          return () => {
-            unregisterAnchor(anchor);
-          };
-        }
+const useIsAnchorActive = (anchor: string | undefined) => {
+  const { activeAnchor, registerAnchor, unregisterAnchor } = useStore();
+
+  useEffect(() => {
+    if (anchor) {
+      const target = document.getElementById(anchor);
+      if (target) {
+        registerAnchor(anchor);
+        return () => {
+          unregisterAnchor(anchor);
+        };
       }
-    }, [anchor, registerAnchor, unregisterAnchor]);
+    }
+  }, [anchor, registerAnchor, unregisterAnchor]);
 
-    return (
-      <li
-        className={cl(
-          "navds-accordion-menu__item",
-          isActive && "navds-accordion-menu__item--active"
-        )}
-      >
-        <Component
-          ref={ref}
-          className={cl("navds-link", "navds-accordion-menu__link", className, {
-            "navds-accordion-menu__link--active": isActive,
-          })}
-          {...rest}
-        >
-          {children}
-        </Component>
-      </li>
-    );
-  }
-);
+  return (anchor && activeAnchor === anchor) || false;
+};
 
 export default Item;

@@ -1,29 +1,19 @@
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  useEffect,
-} from "react";
-import { default as Item, AccordionMenuItemProps } from "./Item";
-import { default as Collapsable } from "./Collapsable";
-import { AccordionMenuCollapsableProps } from "./Collapsable";
-import { Heading, OverridableComponent } from "../index";
+import React, { forwardRef, HTMLAttributes, useEffect } from "react";
+import { AccordionMenu as BaseAccordionMenu } from "../accordion-menu";
+import { Heading } from "../index";
 import { ActiveAnchorProvider } from "./ActiveAnchorStore";
-import Nav from "./Nav";
 import cl from "classnames";
 
-export interface LayoutWithSubComponents
-  extends ForwardRefExoticComponent<AccordionMenuProps> {
-  Collapsable: ForwardRefExoticComponent<AccordionMenuCollapsableProps>;
-  Item: OverridableComponent<AccordionMenuItemProps>;
-}
-
-export interface AccordionMenuProps extends HTMLAttributes<HTMLUListElement> {
+export interface AccordionAnchorMenuProps
+  extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   smoothScrollBehavior?: boolean;
 }
 
-const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
+const AccordionAnchorMenu = forwardRef<
+  HTMLDivElement,
+  AccordionAnchorMenuProps
+>(
   (
     { children, title, smoothScrollBehavior = true, className, ...rest },
     ref
@@ -39,30 +29,28 @@ const AccordionMenu = forwardRef<HTMLUListElement, AccordionMenuProps>(
     }, [smoothScrollBehavior]);
 
     return (
-      <ActiveAnchorProvider>
-        <Nav title={title}>
-          {title && (
-            <Heading
-              level={2}
-              size="medium"
-              className={cl("navds-accordion-menu__title", className)}
-            >
-              {title}
-            </Heading>
-          )}
-          <ul
-            ref={ref}
-            className={cl("navds-accordion-menu__container", className)}
-            {...rest}
+      <div
+        className={cl("navds-accordion-anchor-menu", className)}
+        ref={ref}
+        {...rest}
+      >
+        {title && (
+          <Heading
+            level={2}
+            size="medium"
+            className="navds-accordion-anchor-menu__title"
           >
+            {title}
+          </Heading>
+        )}
+        <ActiveAnchorProvider>
+          <BaseAccordionMenu aria-label={title || "Meny"}>
             {children}
-          </ul>
-        </Nav>
-      </ActiveAnchorProvider>
+          </BaseAccordionMenu>
+        </ActiveAnchorProvider>
+      </div>
     );
   }
-) as LayoutWithSubComponents;
+);
 
-AccordionMenu.Item = Item;
-AccordionMenu.Collapsable = Collapsable;
-export default AccordionMenu;
+export default AccordionAnchorMenu;
