@@ -2,34 +2,6 @@
  * .accordion-menu *
  *******************/
 
-.navds-accordion-menu {
-  padding: var(--navds-layout-padding-small) 0;
-  overflow: hidden;
-}
-
-/* .navds-accordion-menu-collapsable__button {
-  min-height: 3rem;
-  display: flex;
-  align-items: center;
-  padding: 0 var(--navds-layout-padding-small);
-  background: none;
-  cursor: pointer;
-}
-
-.navds-accordion-menu-collapsable__expand-icon {
-  font-size: 1.25rem;
-  flex-shrink: 0;
-  transform: rotateZ(0deg);
-  margin-left: 1rem;
-}
-
-.navds-accordion-menu-collapsable--open
-  .navds-accordion-menu-collapsable__expand-icon {
-  transform: rotateZ(180deg);
-} */
-
-/* ------------------------OLD------------------------------ */
-/*
 .navds-accordion-menu__html {
   scroll-behavior: smooth;
 }
@@ -139,4 +111,3 @@
     padding: 0 calc(var(--navds-layout-padding-small) + 1rem);
   }
 }
- */

@@ -1,52 +1,42 @@
 import React, { forwardRef, HTMLAttributes, useState } from "react";
 import cl from "classnames";
 import { Expand } from "@navikt/ds-icons";
+import MenuItems from "./MenuItems";
 
 export interface AccordionMenuCollapsableProps
-  extends HTMLAttributes<HTMLButtonElement> {
+  extends HTMLAttributes<HTMLDivElement> {
   title: string;
-  active?: boolean;
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+  className?: string;
 }
 
-const Collapsable = forwardRef<
-  HTMLButtonElement,
-  AccordionMenuCollapsableProps
->(({ children, active, title, className, ...rest }, ref) => {
-  const [open, setOpen] = useState(active || false);
-  return (
-    <li
-      className={cl(
-        "navds-accordion-menu__item",
-        "navds-accordion-menu__dropdown"
-      )}
-    >
-      <button
+const Collapsable = forwardRef<HTMLDivElement, AccordionMenuCollapsableProps>(
+  ({ children, defaultOpen = false, title, className, ...rest }, ref) => {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+    return (
+      <div
         ref={ref}
-        onClick={() => setOpen(!open)}
-        className={cl("navds-link", "navds-accordion-menu__button", className)}
+        className={cl("navds-accordion-menu-collapsable", className, {
+          "navds-accordion-menu-collapsable--open": isOpen,
+        })}
         {...rest}
       >
-        {title}
-        <Expand
-          className={cl(
-            "navds-accordion__chevron",
-            `navds-accordion__chevron--${open ? "up" : "down"}`,
-            `navds-accordion-menu__chevron`
-          )}
-        />
-      </button>
-      {open && (
-        <ul
-          className={cl(
-            "navds-accordion-menu__container",
-            "navds-accordion-menu__dropdown--content"
-          )}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="navds-accordion-menu-collapsable__button"
         >
-          {children}
-        </ul>
-      )}
-    </li>
-  );
-});
+          {title}
+          <Expand
+            role="img"
+            aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
+            className="navds-accordion-menu-collapsable__expand-icon"
+          />
+        </button>
+        {isOpen && <MenuItems>{children}</MenuItems>}
+      </div>
+    );
+  }
+);
 
 export default Collapsable;

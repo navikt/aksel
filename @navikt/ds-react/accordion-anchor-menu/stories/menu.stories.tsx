@@ -12,7 +12,7 @@ import { Link, HashRouter as Router } from "react-router-dom";
 import "./components/styles.css";
 
 export default {
-  title: "ds-react/accordion-menu",
+  title: "ds-react/accordion-anchor-menu",
   component: { Menu },
   decorators: [
     (Story) => {

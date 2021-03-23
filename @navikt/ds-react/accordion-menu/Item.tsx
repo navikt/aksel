@@ -1,17 +1,18 @@
-import React, { forwardRef, useEffect } from "react";
-import { useStore } from "./ActiveAnchorStore";
+import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util";
 import cl from "classnames";
+
+export type ItemType = OverridableComponent<AccordionMenuItemProps>;
 
 export interface AccordionMenuItemProps {
   props: {
     children: React.ReactNode;
     active?: boolean;
-  } & React.HTMLAttributes<HTMLLIElement>;
+  } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";
 }
 
-const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
+const Item: ItemType = forwardRef(
   (
     {
       children,
@@ -22,39 +23,16 @@ const Item: OverridableComponent<AccordionMenuItemProps> = forwardRef(
     },
     ref
   ) => {
-    const anchor = rest.href && rest.href.split("#")[1];
-    const { activeAnchor, registerAnchor, unregisterAnchor } = useStore();
-    const isActive = active || (anchor && activeAnchor === anchor) || false;
-
-    useEffect(() => {
-      if (anchor) {
-        const target = document.getElementById(anchor);
-        if (target) {
-          registerAnchor(anchor);
-          return () => {
-            unregisterAnchor(anchor);
-          };
-        }
-      }
-    }, [anchor, registerAnchor, unregisterAnchor]);
-
     return (
-      <li
-        className={cl(
-          "navds-accordion-menu__item",
-          isActive && "navds-accordion-menu__item--active"
-        )}
+      <Component
+        ref={ref}
+        className={cl("navds-accordion-menu-item", className, {
+          "navds-accordion-menu-item--active": active,
+        })}
+        {...rest}
       >
-        <Component
-          ref={ref}
-          className={cl("navds-link", "navds-accordion-menu__link", className, {
-            "navds-accordion-menu__link--active": isActive,
-          })}
-          {...rest}
-        >
-          {children}
-        </Component>
-      </li>
+        {children}
+      </Component>
     );
   }
 );
