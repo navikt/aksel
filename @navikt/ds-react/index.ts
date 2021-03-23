@@ -19,11 +19,7 @@ export {
   ProductPageLayoutProps,
   ProductPageLayoutSectionProps,
 } from "./layouts/index";
-export {
-  AccordionMenu,
-  AccordionMenuProps,
-  AccordionMenuItemProps,
-} from "./accordion-menu";
+export { AccordionMenu } from "./accordion-menu";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";
