@@ -36,7 +36,7 @@
 .navds-accordion-menu-item,
 .navds-accordion-menu-collapsable__button {
   display: flex;
-  padding: 0.625rem 1.5rem;
+  padding: 0.625rem 1rem;
   line-height: 1.5rem; /* TODO: fix typography. */
 }
 
@@ -57,7 +57,7 @@
 .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable__button {
-  padding-left: 3rem;
+  padding-left: 2rem;
 }
 
 .navds-accordion-menu-collapsable
@@ -67,7 +67,7 @@
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable__button {
-  padding-left: 4.5rem;
+  padding-left: 3rem;
 }
 
 .navds-accordion-menu-item:hover,
