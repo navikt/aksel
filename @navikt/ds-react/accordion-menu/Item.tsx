@@ -8,6 +8,7 @@ export interface AccordionMenuItemProps {
   props: {
     children: React.ReactNode;
     active?: boolean;
+    ariaCurrent?: string;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";
 }
@@ -18,6 +19,7 @@ const Item: AccordionMenuItemType = forwardRef(
       children,
       component: Component = "a",
       active = false,
+      ariaCurrent = "page",
       className,
       ...rest
     },
@@ -29,6 +31,7 @@ const Item: AccordionMenuItemType = forwardRef(
         className={cl("navds-accordion-menu-item", className, {
           "navds-accordion-menu-item--active": active,
         })}
+        aria-current={active && ariaCurrent}
         {...rest}
       >
         {children}
