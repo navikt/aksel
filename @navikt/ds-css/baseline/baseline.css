@@ -6,6 +6,10 @@
 @import "print.css";
 @import "utility.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--navds-font-family);
   line-height: 1.375;
@@ -15,4 +19,17 @@ body {
 
 a {
   color: var(--navds-color-text-link);
+}
+
+/* https://web.dev/prefers-reduced-motion/ */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
 }
