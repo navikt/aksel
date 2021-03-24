@@ -14,6 +14,7 @@ export interface AccordionMenuCollapsableProps
 const Collapsable = forwardRef<HTMLDivElement, AccordionMenuCollapsableProps>(
   ({ children, defaultOpen = false, title, className, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
+
     return (
       <div
         ref={ref}
