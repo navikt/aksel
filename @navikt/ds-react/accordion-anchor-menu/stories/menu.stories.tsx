@@ -37,7 +37,7 @@ export default {
 export const All = () => (
   <ProductPageLayout title={"Nunc et lorem"}>
     <ProductPageLayout.Section left sticky withPadding={false}>
-      <Menu title={"Minima"}>
+      <Menu title={"Minima"} smoothScrollBehavior>
         <Item href={"#leo-quis"}>Leo quis</Item>
         <Collapsable title={"Proin accumsan"}>
           <Item href={"#nulla-pariatur"}>Nulla pariatur</Item>

@@ -1,3 +1,7 @@
+.navds-accordion-anchor__html {
+  scroll-behavior: smooth;
+}
+
 .navds-accordion-anchor-menu {
   padding: 1rem 0;
 }

@@ -21,9 +21,9 @@ const AccordionAnchorMenu = forwardRef<
     useEffect(() => {
       if (smoothScrollBehavior) {
         const htmlElement = document.documentElement;
-        htmlElement.classList.add("navds-accordion-menu__html");
+        htmlElement.classList.add("navds-accordion-anchor__html");
         return () => {
-          htmlElement.classList.remove("navds-accordion-menu__html");
+          htmlElement.classList.remove("navds-accordion-anchor__html");
         };
       }
     }, [smoothScrollBehavior]);
