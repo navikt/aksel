@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, useEffect } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import { AccordionMenu as BaseAccordionMenu } from "../accordion-menu";
 import { Heading } from "../index";
 import { ActiveAnchorProvider } from "./ActiveAnchorStore";
