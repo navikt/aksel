@@ -13,7 +13,7 @@ export interface AccordionMenuItemProps {
   defaultComponent: "a";
 }
 
-const Item: AccordionMenuItemType = forwardRef(
+const AccordionMenuItem: AccordionMenuItemType = forwardRef(
   (
     {
       children,
@@ -40,4 +40,4 @@ const Item: AccordionMenuItemType = forwardRef(
   }
 );
 
-export default Item;
+export default AccordionMenuItem;
