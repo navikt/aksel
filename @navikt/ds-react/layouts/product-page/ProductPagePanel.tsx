@@ -4,6 +4,7 @@ import cl from "classnames";
 import { Button, Heading, Popover } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 import { OverridableComponent } from "../../util";
+import copy from "copy-to-clipboard";
 
 export interface ProductPagePanelProps {
   props: {
@@ -40,6 +41,16 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
       header?.classList.add("navds-layout__body--padding");
     }, []);
 
+    const handleClick = () => {
+      setIsCopied(true);
+      const { href, hash } = window.location;
+      const urlWithoutHash = href.replace(hash, "");
+      copy(`${urlWithoutHash}#${anchor}`);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
+    };
+
     return (
       <Component
         ref={ref}
@@ -62,15 +73,7 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
               ref={(el) => setAnchorEl(el)}
               variant={"secondary"}
               className={"navds-layout__panel-copy-button"}
-              onClick={() => {
-                setIsCopied(true);
-                const { href, hash } = window.location;
-                const urlWithoutHash = href.replace(hash, "");
-                copyToClipboard(`${urlWithoutHash}#${anchor}`);
-                setTimeout(() => {
-                  setIsCopied(false);
-                }, 1000);
-              }}
+              onClick={handleClick}
             >
               <Attachment className={"navds-layout__panel-copy-icon"} />
               <span>Kopier lenke</span>
@@ -85,18 +88,5 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
     );
   }
 );
-
-const copyToClipboard = (text: string) => {
-  const textArea = document.createElement("textarea");
-  textArea.value = text;
-  textArea.style.top = "0";
-  textArea.style.left = "0";
-  textArea.style.position = "fixed";
-  document.body.appendChild(textArea);
-  textArea.focus();
-  textArea.select();
-  document.execCommand("copy");
-  document.body.removeChild(textArea);
-};
 
 export default ProductPagePanel;
