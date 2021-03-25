@@ -5,7 +5,7 @@ import { Button, Heading, Popover } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 import { OverridableComponent } from "../../util";
 
-export interface PanelProps {
+export interface ProductPagePanelProps {
   props: {
     title: string;
     icon?: ReactNode;
@@ -17,7 +17,7 @@ export interface PanelProps {
   defaultComponent: "div";
 }
 
-const Panel: OverridableComponent<PanelProps> = forwardRef(
+const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef(
   (
     {
       title,
@@ -98,4 +98,4 @@ const copyToClipboard = (text: string) => {
   document.body.removeChild(textArea);
 };
 
-export default Panel;
+export default ProductPagePanel;

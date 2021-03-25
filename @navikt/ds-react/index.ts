@@ -1,3 +1,4 @@
+export { AccordionMenu } from "./accordion-menu";
 export { Accordion, AccordionProps } from "./accordion/index";
 export { Alert, AlertProps } from "./alert/index";
 export { Button, ButtonProps } from "./button/index";
@@ -16,14 +17,9 @@ export {
 } from "./internal-header/index";
 export {
   ProductPageLayout,
-  ProductPageLayoutProps,
-  ProductPageLayoutSectionProps,
+  ProductPagePanel,
+  ProductPageSection,
 } from "./layouts/index";
-export {
-  AccordionMenu,
-  AccordionMenuProps,
-  AccordionMenuItemProps,
-} from "./accordion-menu";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";
