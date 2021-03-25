@@ -7,12 +7,13 @@ import { OverridableComponent } from "../../util";
 
 export interface ProductPagePanelProps {
   props: {
+    children: React.ReactNode;
+    className?: string;
     title: string;
     icon?: ReactNode;
     highlight?: boolean;
     anchor?: string;
     whiteBackground?: boolean;
-    withPadding?: boolean;
   } & React.HTMLAttributes<HTMLDivElement>;
   defaultComponent: "div";
 }
@@ -20,13 +21,13 @@ export interface ProductPagePanelProps {
 const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef(
   (
     {
+      children,
+      className,
       title,
       highlight,
       icon,
       anchor,
       component: Component = "div",
-      className,
-      children,
       ...rest
     },
     ref
