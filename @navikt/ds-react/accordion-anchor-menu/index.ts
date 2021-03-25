@@ -1,3 +1,3 @@
-export { default as AccordionAnchorMenu } from "./Menu";
-export { default as AccordionAnchorMenuCollapsable } from "./Collapsable";
-export { default as AccordionAnchorMenuItem } from "./Item";
+export { default as AccordionAnchorMenu } from "./AccordionAnchorMenu";
+export { AccordionAnchorMenuCollapsable } from "./AccordionAnchorMenuCollapsable";
+export { default as AccordionAnchorMenuItem } from "./AccordionAnchorMenuItem";

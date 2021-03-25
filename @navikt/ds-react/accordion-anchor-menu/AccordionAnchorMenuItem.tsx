@@ -2,19 +2,21 @@ import React, { forwardRef, useEffect } from "react";
 import { AccordionMenuItem, AccordionMenuItemType } from "../accordion-menu";
 import { useStore } from "./ActiveAnchorStore";
 
-const Item: AccordionMenuItemType = forwardRef((props, ref) => {
-  const isAnchorActive = useIsAnchorActive(
-    props.href && props.href.split("#")[1]
-  );
+const AccordionAnchorMenuItem: AccordionMenuItemType = forwardRef(
+  (props, ref) => {
+    const isAnchorActive = useIsAnchorActive(
+      props.href && props.href.split("#")[1]
+    );
 
-  return (
-    <AccordionMenuItem
-      {...props}
-      ref={ref}
-      active={props.active || isAnchorActive}
-    />
-  );
-});
+    return (
+      <AccordionMenuItem
+        {...props}
+        ref={ref}
+        active={props.active || isAnchorActive}
+      />
+    );
+  }
+);
 
 const useIsAnchorActive = (anchor: string | undefined) => {
   const { activeAnchor, registerAnchor, unregisterAnchor } = useStore();
@@ -34,4 +36,4 @@ const useIsAnchorActive = (anchor: string | undefined) => {
   return (anchor && activeAnchor === anchor) || false;
 };
 
-export default Item;
+export default AccordionAnchorMenuItem;
