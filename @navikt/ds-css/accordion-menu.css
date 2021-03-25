@@ -32,7 +32,7 @@
 .navds-accordion-menu-item,
 .navds-accordion-menu-collapsable__button {
   display: flex;
-  padding: 0.625rem 1rem;
+  padding: 0.75rem 1rem;
   line-height: 1.5rem; /* TODO: fix typography. */
 }
 
