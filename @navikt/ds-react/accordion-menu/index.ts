@@ -1,5 +1,6 @@
-import { default as AccordionMenu, AccordionMenuProps } from "./Menu";
-import { AccordionMenuItemProps } from "./Item";
-
-export { AccordionMenu, AccordionMenuProps, AccordionMenuItemProps };
-export default AccordionMenu;
+export { default as AccordionMenu } from "./AccordionMenu";
+export { default as AccordionMenuCollapsable } from "./AccordionMenuCollapsable";
+export {
+  default as AccordionMenuItem,
+  AccordionMenuItemType,
+} from "./AccordionMenuItem";
