@@ -42,8 +42,10 @@ export const All = () => (
         <Item href="#luctus">Luctus</Item>
       </Collapsable>
       <Collapsable title="Accumsan">
-        <Item href="#justo">Justo</Item>
-        <Item href="#pariatur" active>
+        <Item href="#justo" ariaCurrent="page">
+          Justo
+        </Item>
+        <Item href="#pariatur" active ariaCurrent="page">
           Pariatur
         </Item>
         <Collapsable title="Proin">
