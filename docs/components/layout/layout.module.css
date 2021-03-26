@@ -83,6 +83,7 @@
   background-color: var(--bg-secondary);
   box-shadow: inset -2px 0px 0px var(--sidebar-shadow);
   flex-grow: 1;
+  padding: 1rem 0.5rem;
 }
 
 .contentWrapper {
