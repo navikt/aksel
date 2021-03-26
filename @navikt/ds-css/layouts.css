@@ -244,15 +244,14 @@
   margin: 0.5rem;
 }
 
-.navds-layout__panel-copy-button {
+.navds-layout__panel-copy-anchor {
   display: flex;
   align-items: center;
-  cursor: pointer;
-  background: transparent;
-  margin: 0 1rem 0 0;
-  padding-left: 0;
-  padding-right: 0;
-  border: 0;
+  text-decoration: none;
+}
+
+.navds-layout__panel-copy-anchor:hover {
+  text-decoration: underline;
 }
 
 @media (min-width: 448px) {

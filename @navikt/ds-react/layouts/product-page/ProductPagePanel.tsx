@@ -13,7 +13,7 @@ export interface ProductPagePanelProps {
     title: string;
     icon?: ReactNode;
     highlight?: boolean;
-    anchor?: string;
+    anchor: string;
     whiteBackground?: boolean;
   } & React.HTMLAttributes<HTMLDivElement>;
   defaultComponent: "div";
@@ -67,22 +67,27 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
         <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>
           {title}
         </Heading>
-        {anchor && (
-          <div className={"navds-layout__panel-copy"}>
-            <Button
-              ref={(el) => setAnchorEl(el)}
-              variant={"secondary"}
-              className={"navds-layout__panel-copy-button"}
-              onClick={handleClick}
-            >
-              <Attachment className={"navds-layout__panel-copy-icon"} />
-              <span>Kopier lenke</span>
-            </Button>
-            <Popover anchorEl={anchorEl} open={copied} onClose={() => {}}>
-              <div className="navds-layout__panel-popover-content">Kopiert</div>
-            </Popover>
-          </div>
-        )}
+
+        <div className={"navds-layout__panel-copy"}>
+          <a
+            ref={(el) => setAnchorEl(el)}
+            className={"navds-layout__panel-copy-anchor"}
+            onClick={handleClick}
+            href={`#${anchor}`}
+          >
+            <Attachment className={"navds-layout__panel-copy-icon"} />
+            <span>Kopier lenke</span>
+          </a>
+          <Popover
+            size="small"
+            anchorEl={anchorEl}
+            open={copied}
+            onClose={() => {}}
+          >
+            <div className="navds-layout__panel-popover-content">Kopiert</div>
+          </Popover>
+        </div>
+
         <div className={"navds-layout__panel-content"}>{children}</div>
       </Component>
     );
