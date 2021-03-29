@@ -20,11 +20,11 @@ const MenuLink = (node) => {
 
 const mapToComponents = (node) =>
   node.children ? (
-    <AccordionMenuCollapsable title={node.title}>
+    <AccordionMenuCollapsable key={node.title} title={node.title}>
       {node.children.map(mapToComponents)}
     </AccordionMenuCollapsable>
   ) : (
-    <MenuLink {...node} />
+    <MenuLink key={node.title} {...node} />
   );
 
 const Menu = ({ menu }) => (
