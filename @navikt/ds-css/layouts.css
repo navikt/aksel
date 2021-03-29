@@ -27,9 +27,16 @@
   padding: var(--navds-layout-padding-small);
 }
 
+/* prettier-ignore */
 .navds-layout__section--sticky > * {
-  top: calc(var(--navds-grid-gutter-small) + var(--decorator-sticky-offset));
+  /* TEMP Solution until dekratøren has updated */
+  --navds-sidebar-sticky-offset: var(--decorator-sticky-offset);
+
+  top: calc(var(--navds-grid-gutter-small) + var(--navds-sidebar-sticky-offset));
   position: sticky;
+  max-height: calc(
+    100vh - var(--navds-grid-gutter-small) * 2 - var(--navds-sidebar-sticky-offset));
+  overflow-y: auto;
 }
 
 .navds-layout__section > *:not(:last-child) {
