@@ -54,7 +54,6 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
     return (
       <Component
         ref={ref}
-        id={anchor}
         className={cl(
           "navds-layout__panel",
           icon && "navds-layout__panel--icon-margin",
@@ -63,27 +62,30 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
         )}
         {...rest}
       >
+        <div className="navds-layout__panel-anchor">
+          <div
+            id={anchor}
+            className={cl("navds-layout__panel-anchor--child", {
+              "navds-layout__panel-anchor--child--icon": !!icon,
+            })}
+          />
+        </div>
         {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
         <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>
           {title}
         </Heading>
 
         <div className={"navds-layout__panel-copy"}>
-          <a
+          <Button
             ref={(el) => setAnchorEl(el)}
             className={"navds-layout__panel-copy-anchor"}
+            variant="secondary"
             onClick={handleClick}
-            href={`#${anchor}`}
           >
             <Attachment className={"navds-layout__panel-copy-icon"} />
             <span>Kopier lenke</span>
-          </a>
-          <Popover
-            size="small"
-            anchorEl={anchorEl}
-            open={copied}
-            onClose={() => {}}
-          >
+          </Button>
+          <Popover anchorEl={anchorEl} open={copied} onClose={() => {}}>
             <div className="navds-layout__panel-popover-content">Kopiert</div>
           </Popover>
         </div>
