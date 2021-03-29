@@ -11,7 +11,12 @@ interface SidebarProps {
   menu: any[];
 }
 
-const Sidebar = ({ sidebar, small, onSidebarChange, menu }: SidebarProps) => {
+const Sidebar = ({
+  sidebar,
+  small,
+  onSidebarChange,
+  menu = [],
+}: SidebarProps) => {
   return (
     <>
       {sidebar && small && (
