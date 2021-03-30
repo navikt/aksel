@@ -1,3 +1,4 @@
+import cl from "classnames";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 import { Grid, Cell, ContentContainer } from "@navikt/ds-react";
@@ -5,6 +6,7 @@ import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
 import style from "./layout.module.css";
+import themes from "./theme.module.css";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -27,7 +29,7 @@ const Layout = ({ children, menu }: LayoutProps) => {
   }, [small]);
 
   return (
-    <div className={style.pageWrapper + " lightTheme"}>
+    <div className={cl(style.pageWrapper, themes.lightTheme)}>
       <Header sidebar={sidebar} onSidebarChange={(x) => setSidebar(x)} />
       <Sidebar
         menu={menu}
