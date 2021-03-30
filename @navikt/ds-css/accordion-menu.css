@@ -69,7 +69,7 @@
 .navds-accordion-menu-item:focus,
 .navds-accordion-menu-collapsable__button:focus {
   outline: 3px solid var(--navds-text-focus);
-  outline-offset: 0;
+  outline-offset: -3px;
 }
 
 .navds-accordion-menu-item:hover,
