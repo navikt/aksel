@@ -34,8 +34,7 @@
 
   top: calc(var(--navds-grid-gutter-small) + var(--navds-sidebar-sticky-offset));
   position: sticky;
-  max-height: calc(
-    100vh - var(--navds-grid-gutter-small) * 2 - var(--navds-sidebar-sticky-offset));
+  max-height: calc(100vh - var(--navds-grid-gutter-small) * 2 - var(--navds-sidebar-sticky-offset));
   overflow-y: auto;
 }
 
