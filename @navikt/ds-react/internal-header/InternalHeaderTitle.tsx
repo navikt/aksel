@@ -1,10 +1,19 @@
 import React, { forwardRef, HTMLAttributes, createElement } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/internal-header/index.css";
-import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
+  /**
+   * Component content
+   */
   children?: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
+   * Tag this component will use. Usefull for defining a button/link
+   * @default "h1"
+   */
   element?: keyof React.ReactHTML;
 }
 

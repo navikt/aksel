@@ -1,3 +1,13 @@
+export {
+  AccordionAnchorMenu,
+  AccordionAnchorMenuCollapsable,
+  AccordionAnchorMenuItem,
+} from "./accordion-anchor-menu";
+export {
+  AccordionMenu,
+  AccordionMenuCollapsable,
+  AccordionMenuItem,
+} from "./accordion-menu";
 export { Accordion, AccordionProps } from "./accordion/index";
 export { Alert, AlertProps } from "./alert/index";
 export { Button, ButtonProps } from "./button/index";
@@ -15,7 +25,11 @@ export {
   InternalHeaderUser,
   InternalHeaderUserProps,
 } from "./internal-header/index";
-export { Layout, LayoutProps, SectionProps } from "./layout/index";
+export {
+  ProductPageLayout,
+  ProductPageLayoutProps,
+  ProductPageLayoutSectionProps,
+} from "./layouts/index";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";

@@ -3,7 +3,7 @@ import Modal from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Modal",
+  title: "nav-frontend/Modal",
   component: Modal,
 } as Meta;
 

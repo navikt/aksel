@@ -3,7 +3,7 @@ import { Checkbox, CheckboxGruppe } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/Checkbox",
   component: Checkbox,
 } as Meta;
 
@@ -17,17 +17,42 @@ export const checkbox = () => {
         gridAutoColumns: "fit-content",
       }}
     >
-      <Checkbox label={"Checkbox"} />
-      <Checkbox disabled label={"Checkbox"} />
-      <Checkbox label={"Checkbox"} feil="Her er det noe feil" />
-      <CheckboxGruppe legend="Hvor vil du sitte?">
+      <Checkbox label={"Standard Checkbox"} />
+      <Checkbox disabled label={"Disabled Checkbox"} />
+      <Checkbox label={"Feil Checkbox"} feil="Her er det noe feil" />
+      <Checkbox label={"Feil Checkbox"} feil="Her er det noe feil" disabled />
+
+      <CheckboxGruppe legend="CheckboxGruppe legend">
         <Checkbox label={"Bakerst"} />
         <Checkbox label={"Midten"} />
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
-      <CheckboxGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+
+      <CheckboxGruppe
+        legend="CheckboxGruppe med feil legend"
+        feil="Her er det noe feil"
+      >
         <Checkbox label={"Bakerst"} />
         <Checkbox label={"Midten"} />
+        <Checkbox label={"Fremst"} />
+      </CheckboxGruppe>
+
+      <CheckboxGruppe
+        legend="CheckboxGruppe med feil legend"
+        feil="Her er det noe feil"
+      >
+        <Checkbox label={"Bakerst"} />
+        <Checkbox label={"Midten"} disabled />
+        <Checkbox label={"Fremst"} />
+      </CheckboxGruppe>
+
+      <CheckboxGruppe
+        legend="CheckboxGruppe med feil utenFeilPropagering legend"
+        feil="Her er det noe feil"
+        utenFeilPropagering
+      >
+        <Checkbox label={"Bakerst"} />
+        <Checkbox label={"Midten"} feil disabled />
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
     </div>

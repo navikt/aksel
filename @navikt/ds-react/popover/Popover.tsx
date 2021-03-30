@@ -9,7 +9,6 @@ import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import "@navikt/ds-css/popover/index.css";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -29,11 +28,14 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
+   * @ignore
+   */
+  className?: string;
+  /**
    * Orientation for popover
-   * @default 'auto'
+   * @default "right"
    */
   placement?: Placement;
-  size?: "medium" | "small";
   arrow?: boolean;
 }
 
@@ -54,7 +56,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       children,
       placement = "right",
       className,
-      size = "medium",
       arrow = true,
       ...rest
     },
@@ -69,9 +70,16 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     useEventLister(
       "click",
       useCallback(
-        (e: MouseEvent) =>
-          !popoverRef.current?.contains(e.target as Node) && close(),
-        [close]
+        (e: MouseEvent) => {
+          if (
+            ![anchorEl, popoverRef.current].some((element) =>
+              element?.contains(e.target as Node)
+            )
+          ) {
+            close();
+          }
+        },
+        [anchorEl, close]
       )
     );
 
@@ -127,8 +135,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     return (
       <div
         ref={mergedRef}
-        className={cl("navds-popover", `navds-popover--${size}`, className, {
-          "popover--hidden": !open || !anchorEl,
+        className={cl("navds-popover", className, {
+          "navds-popover--hidden": !open || !anchorEl,
         })}
         aria-live="polite"
         aria-hidden={!open || !anchorEl}

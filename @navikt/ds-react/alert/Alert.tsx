@@ -6,11 +6,24 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import "@navikt/ds-css/alert/index.css";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Decides what design the alert will have
+   */
   variant: "error" | "warning" | "info" | "success";
+  /**
+   * Component content
+   */
   children: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
+  /**
+   * Reduces padding on component
+   * @default "medium"
+   */
   size?: "medium" | "small";
 }
 

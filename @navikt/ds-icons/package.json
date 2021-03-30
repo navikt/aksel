@@ -1,8 +1,12 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.1.6",
+  "version": "0.2.0",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-icons"
+  },
   "keywords": [
     "NAV",
     "designsystem",
@@ -10,29 +14,30 @@
   ],
   "license": "MIT",
   "author": "NAV",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "esm/index.js",
+  "module": "esm/index.js",
+  "typings": "esm/index.d.ts",
+  "sideEffects": false,
+  "type": "module",
   "files": [
-    "/lib",
-    "/src",
+    "/cjs",
+    "/esm",
     "/svg"
   ],
   "scripts": {
+    "cjs-package": "copyfiles -f config/package.json cjs",
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node -r dotenv/config figma-api/index.js dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --silent --typescript --ref --icon --title-prop --replace-attr-values \"#3E3832=currentColor\" -d src svg",
     "convert-icons": "node figma-api/pngConverter.js",
-    "clean": "rm -rf src && rm -rf lib && rm -rf png && rm -rf NAV-ikonpakke-png.zip && rm -rf NAV-ikonpakke-svg.zip",
-    "build": "npm run clean && npm run create-icons && tsc && npm run convert-icons && node figma-api/zipIcons.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-icons"
+    "clean": "rm -rf src && rm -rf esm && rm -rf cjs && rm -rf png && rm -rf NAV-ikonpakke-png.zip && rm -rf NAV-ikonpakke-svg.zip",
+    "build": "npm run clean && npm run create-icons && tsc && tsc -p tsconfig-esm.json && yarn cjs-package && npm run convert-icons && node figma-api/zipIcons.js"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
     "@svgr/cli": "^5.4.0",
+    "copyfiles": "^2.4.1",
     "dotenv": "^8.2.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.startcase": "4.4.0",
@@ -40,6 +45,5 @@
     "rimraf": "3.0.2",
     "sharp": "0.27.1",
     "zip-dir": "^2.0.0"
-  },
-  "sideEffects": false
+  }
 }

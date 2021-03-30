@@ -1,10 +1,15 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import "@navikt/ds-css/internal-header/index.css";
-import "@navikt/ds-css/typography/index.css";
 
 export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
+  /**
+   * Component content
+   */
   children?: React.ReactNode;
+  /**
+   * @ignore
+   */
+  className?: string;
 }
 
 const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(

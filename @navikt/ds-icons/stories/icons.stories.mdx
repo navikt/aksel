@@ -1,0 +1,36 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="ds-icons/Kom i gang" />
+
+# Ta i bruk ikonpakken `@navikt/ds-icons`
+
+Alle ikoner kan bli funnet her https://design.nav.no/resources/icons
+
+## Oppsett
+
+```bash
+yarn add @navikt/ds-icons
+```
+
+```bash
+Import { Expand } from `@navikt/ds-icons`;
+
+<Expand
+	aria-label="Åpne meny"
+	role="img"
+	focusable="false"
+/>
+```
+
+## Testing
+
+For å støtte testing med eks Jest som ikke tillater ESM moduler, så kan denne configen legges til
+
+```bash
+"moduleNameMapper": {
+  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
+  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
+}
+```
+
+Dette vil remappe Ikonpakken (og komponentpakken) til å bruke CommonJs versjonen for testing

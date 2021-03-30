@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import cl from "classnames";
 import { Close } from "@navikt/ds-icons";
 import "./index.css";
-import "@navikt/ds-css/button/index.css";
 
 const cls = (selected, none = false) => {
   return cl("colorswitch__button", "navds-button", "navds-button--secondary", {

@@ -1,6 +1,4 @@
 import { MDXProvider } from "@mdx-js/react";
-import "@navikt/ds-css/accordion/index.css";
-import "@navikt/ds-css/baseline/utility.css";
 import { Heading, Paragraph } from "@navikt/ds-react";
 import cl from "classnames";
 import React, { useEffect, useState } from "react";

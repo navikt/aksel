@@ -62,7 +62,6 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           anchorEl={buttonRef.current}
           open={openPopover}
           onClose={() => setOpenPopover(false)}
-          size="small"
           placement="bottom-start"
           arrow={false}
         >

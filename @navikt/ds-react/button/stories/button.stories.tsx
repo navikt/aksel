@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../index";
 
 export default {
-  title: "@navikt/button",
+  title: "ds-react/button",
   component: Button,
 };
 

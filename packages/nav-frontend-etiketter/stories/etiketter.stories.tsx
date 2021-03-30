@@ -8,7 +8,7 @@ import EtikettBase, {
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Etiketter",
+  title: "nav-frontend/Etiketter",
   component: EtikettBase,
 } as Meta;
 

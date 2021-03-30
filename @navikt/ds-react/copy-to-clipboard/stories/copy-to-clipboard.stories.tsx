@@ -3,7 +3,7 @@ import * as React from "react";
 import { CopyToClipboard } from "../index";
 
 export default {
-  title: "@navikt/copy-to-clipboard",
+  title: "@ds-react/copy-to-clipboard",
   component: CopyToClipboard,
 };
 
@@ -17,18 +17,18 @@ export const All = () => {
       <CopyToClipboard label={label} text={text} />
 
       <h2>Sammen med tekst</h2>
-      <p>
+      <div>
         <CopyToClipboard label={label} text={text}>
           Kopier tekst
         </CopyToClipboard>
-      </p>
+      </div>
 
       <h2>Tilpasser seg fontstørrelse</h2>
-      <p style={{ fontSize: "0.8rem" }}>
+      <div style={{ fontSize: "0.8rem" }}>
         <CopyToClipboard label={label} text={text}>
           Kopier tekst
         </CopyToClipboard>
-      </p>
+      </div>
     </div>
   );
 };

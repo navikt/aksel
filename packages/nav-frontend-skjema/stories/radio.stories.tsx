@@ -3,7 +3,7 @@ import { Radio, RadioGruppe } from "../src/index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Skjema",
+  title: "nav-frontend/Skjema/Radio",
   component: Radio,
 } as Meta;
 
@@ -17,15 +17,30 @@ export const radio = () => {
         gridAutoColumns: "fit-content",
       }}
     >
-      <Radio label={"Radio-label"} name="minRadioKnapp" />
-      <Radio label={"Radio-label"} name="minRadioKnapp" disabled />
-      <RadioGruppe legend="Hvor vil du sitte?">
+      <Radio label={"Standard Radio-label"} name="minRadioKnapp" />
+      <Radio label={"Disabled Radio-label"} name="minRadioKnapp" disabled />
+
+      <RadioGruppe legend="RadioGruppe legend">
         <Radio label={"Bakerst"} name="sitteplass" />
         <Radio label={"Midten"} name="sitteplass" />
         <Radio label={"Fremst"} name="sitteplass" />
       </RadioGruppe>
-      <RadioGruppe legend="Hvor vil du sitte?" feil="Her er det noe feil">
+
+      <RadioGruppe
+        legend="RadioGruppe med feil legend"
+        feil="Her er det noe feil"
+      >
         <Radio label={"Bakerst"} name="sitteplass" />
+        <Radio label={"Midten"} name="sitteplass" />
+        <Radio label={"Fremst"} name="sitteplass" />
+      </RadioGruppe>
+
+      <RadioGruppe
+        legend="RadioGruppe med feil utenFeilPropagering legend"
+        feil="Her er det noe feil"
+        utenFeilPropagering
+      >
+        <Radio label={"Bakerst"} name="sitteplass" feil />
         <Radio label={"Midten"} name="sitteplass" />
         <Radio label={"Fremst"} name="sitteplass" />
       </RadioGruppe>

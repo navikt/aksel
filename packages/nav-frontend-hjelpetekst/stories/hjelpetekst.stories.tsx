@@ -3,7 +3,7 @@ import Hjelpetekst from "../src/hjelpetekst";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "Hjelpetekst",
+  title: "nav-frontend/Hjelpetekst",
   component: Hjelpetekst,
 } as Meta;
 

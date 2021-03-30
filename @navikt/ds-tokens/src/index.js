@@ -25,10 +25,12 @@ module.exports = {
       white: { value: white },
       darkgray: { value: darkgray },
       gray: {
-        10: { value: "#e9e7e7" },
-        20: { value: "#c6c2bf" },
-        40: { value: "#b7b1a9" },
-        60: { value: "#78706a" },
+        90: { value: "#262626" },
+        80: { value: "#4F4F4F" },
+        60: { value: "#6A6A6A" },
+        40: { value: "#A0A0A0" },
+        20: { value: "#C9C9C9" },
+        10: { value: "#F1F1F1" },
       },
       ...Object.entries(baseColors).reduce(
         (colors, [name, color]) => ({
@@ -172,6 +174,10 @@ module.exports = {
       },
     },
     layout: {
+      background: {
+        white: { value: "#FFFFFF" },
+        gray: { value: "#F1F1F1" },
+      },
       padding: {
         small: { value: "1rem" },
         mediumAndLarger: { value: "2.5rem" },

@@ -34,16 +34,23 @@ function getGlobFiles(globPattern, options) {
 Promise.all([
   getGlobFiles("./packages/**/lib", { dot: true }),
   getGlobFiles("./packages/**/dist", { dot: true }),
+  getGlobFiles("./@navikt/**/lib", { dot: true }),
+  getGlobFiles("./@navikt/**/esm", { dot: true }),
+  getGlobFiles("./@navikt/**/cjs", { dot: true }),
   getGlobFiles("./packages/**/src/*.d.ts", { dit: true }),
-]).then(([lib, dist, files]) => {
+]).then(([lib, dist, libvnext, esmvnext, cjsvnext, files]) => {
   files.forEach((file) => {
     console.log(`Deleting file ${file}`);
     fs.unlinkSync(file);
   });
 
-  const folders = [...lib, ...dist].filter(
-    (path) => !path.includes("node_modules")
-  );
+  const folders = [
+    ...lib,
+    ...dist,
+    ...libvnext,
+    ...esmvnext,
+    ...cjsvnext,
+  ].filter((path) => !path.includes("node_modules"));
 
   folders.forEach((folder) => {
     console.log(`Deleting folder ${folder}`);
