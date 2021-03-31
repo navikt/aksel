@@ -1,14 +1,12 @@
 .navds-copy-to-clipboard {
   display: inline-flex;
-  padding: 0.25rem;
+  align-items: center;
+  column-gap: 0.5em;
+  padding: 0.25em;
   background-color: transparent;
   border: 2px solid transparent;
   border-radius: 2px;
-  margin: 0 0.25rem;
-  position: relative;
   cursor: copy;
-  align-items: center;
-  column-gap: 0.5rem;
 }
 
 .navds-copy-to-clipboard:hover {
@@ -21,22 +19,6 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-copy-to-clipboard svg {
+.navds-copy-to-clipboard .navds-copy-to-clipboard__icon {
   font-size: 1.5em;
-}
-
-.navds-copy-to-clipboard--success {
-  position: absolute;
-  left: 0;
-  top: 1.3em;
-  padding: 0.25em 0.75em;
-  background-color: white;
-  box-shadow: 0 0.1em 0.2em var(--navds-color-gray-60);
-  border: 0.1em solid var(--navds-color-gray-60);
-  border-radius: 0.25em;
-  white-space: nowrap;
-}
-
-.navds-copy-to-clipboard--success::first-letter {
-  text-transform: uppercase;
 }

@@ -53,7 +53,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           onClick={handleClick}
         >
           {children ? children : <span className="sr-only">{title}</span>}
-          <Files />
+          <Files className="navds-copy-to-clipboard__icon" />
         </button>
         <Popover
           role="alert"
