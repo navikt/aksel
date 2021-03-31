@@ -62,9 +62,13 @@
 }
 
 .navds-button--secondary:hover,
-.navds-button--secondary:focus,
-.navds-button--secondary:active {
+.navds-button--secondary:focus {
   border-color: var(--navds-color-action-default);
+}
+
+.navds-button--secondary:active {
+  color: var(--navds-color-action-active);
+  border-color: var(--navds-color-action-active);
 }
 
 /*************************
