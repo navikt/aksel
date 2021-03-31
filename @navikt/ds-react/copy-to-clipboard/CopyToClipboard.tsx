@@ -1,5 +1,6 @@
 import { Files } from "@navikt/ds-icons";
 import copy from "copy-to-clipboard";
+import cl from "classnames";
 import React, {
   forwardRef,
   HTMLAttributes,
@@ -8,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover } from "../index";
+import { Popover, Button } from "../index";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
@@ -45,16 +46,17 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
 
     return (
       <>
-        <button
-          ref={mergedRef}
-          title={title}
+        <Button
           {...rest}
-          className="navds-copy-to-clipboard"
+          ref={mergedRef}
+          variant="secondary"
+          title={title}
+          className={cl("navds-copy-to-clipboard", className)}
           onClick={handleClick}
         >
           {children ? children : <span className="sr-only">{title}</span>}
           <Files className="navds-copy-to-clipboard__icon" />
-        </button>
+        </Button>
         <Popover
           role="alert"
           anchorEl={buttonRef.current}

@@ -3,20 +3,6 @@
   align-items: center;
   column-gap: 0.5em;
   padding: 0.25em;
-  background-color: transparent;
-  border: 2px solid transparent;
-  border-radius: 2px;
-  cursor: copy;
-}
-
-.navds-copy-to-clipboard:hover {
-  border-color: var(--navds-color-action-default);
-  color: var(--navds-color-action-default);
-}
-
-.navds-copy-to-clipboard:focus {
-  outline: none;
-  box-shadow: var(--navds-shadow-focus);
 }
 
 .navds-copy-to-clipboard .navds-copy-to-clipboard__icon {
