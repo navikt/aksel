@@ -22,6 +22,7 @@
   "files": [
     "/cjs",
     "/esm",
+    "/src",
     "/svg"
   ],
   "scripts": {
