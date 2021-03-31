@@ -1,5 +1,3 @@
-import "@navikt/ds-css/baseline/utility.css";
-import "@navikt/ds-css/copy-to-clipboard/index.css";
 import { Files } from "@navikt/ds-icons";
 import copy from "copy-to-clipboard";
 import React, {
