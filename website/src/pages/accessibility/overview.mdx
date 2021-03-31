@@ -144,7 +144,9 @@ Dette er noen av de viktigste tingene du bør huske på for å unngå de vanligs
 
 ### For designere
 
-1.  Bruk aktuell versjon av [NAVs komponent- og illustrasjonsbibliotek i Sketch](/resources/new-project#for-designere) når du designer.
+[Flere tips for produktdesignere](https://navikt.github.io/uu/hvordan-faa-det-til/tips-etter-rolle/Produktdesigner/) og [tjenestedesignere](https://navikt.github.io/uu/hvordan-faa-det-til/tips-etter-rolle/Tjenestedesigner/) finner du på uu-sidene.
+
+1.  Bruk aktuell versjon av [NAVs komponent- og illustrasjonsbibliotek](/resources/new-project#for-designere) når du designer.
 2.  Design for grupper med spesielle behov («ytterkantene»). Spør deg selv: Hadde bestemoren min klart å bruke tjenesten? [Om inklusiv design (University of Cambridge)](http://www.inclusivedesigntoolkit.com/whatis/whatis.html)
 3.  Husk [god kontrast](/resources/colors/accessibility#krav-til-kontrast), både på tekst, interaktive elementer, grafer og illustrasjoner.
 4.  Husk [beskrivende alt-tekster](/accessibility/alt-text) på bilder, illustrasjoner og grafer.
@@ -152,10 +154,12 @@ Dette er noen av de viktigste tingene du bør huske på for å unngå de vanligs
 6.  Video: Husk å ha en tekstversjon som har samme innhold som videoen på siden, samt tekste video og bruk nyeste versjon av QBrick. Snart kommer en lovendring om at videoer også må være synstolket. Det betyr at man skal tilby en audiobeskrivelse av det som vises i videoen som ikke blir tydelig av selve lydsporet.
 7.  Språk og begreper: Skriv så forståelig som mulig og test teksten på reelle brukere. Bruk beskrivende overskrifter, deloverskrifter og punktlister der det er hensiktsmessig. Husk å ha en hovedoverskrift som beskriver hovedinnholdet på siden. Les mer om [tekst og struktur (Difi)]([https://uu.difi.no/krav-og-regelverk/losningsforslag-web/tekst-og-struktur) og våre [retningslinjer for språk](https://design.nav.no/resources/language)
 8.  Lenker: Skriv lenketekster slik at det er tydelig hvor lenken går. Ikke åpne lenker i ny fane/vindu. Se [retningslinjer for gode lenker](https://design.nav.no/components/lenke/accessibility).
-9.  Lag gode og [beskrivende feilmeldinger (Difi)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/feilhandtering) og pass på at meldingene er i tråd med Designsystemet.
-10. Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Sannergata (rom 5006).
+9.  Lag gode og [beskrivende feilmeldinger (DigDir)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/feilhandtering) og pass på at meldingene er i tråd med Designsystemet.
+10. Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Fyrstikkaleen.
 
 ### For utviklere
+
+[Flere tips for utviklere(https://navikt.github.io/uu/hvordan-faa-det-til/tips-etter-rolle/Utvikler/) på uu-sidene.
 
 1.  Bruk [komponentene våre](/components).
 2.  Sjekk at koderekkefølgen gjenspeiler den visuelle rekkefølgen.
@@ -163,10 +167,10 @@ Dette er noen av de viktigste tingene du bør huske på for å unngå de vanligs
 4.  Bruk de [semantiske egenskapene i HTML (MDN)](https://developer.mozilla.org/en-US/docs/Glossary/Semantics).
 5.  Sjekk at du har med [hopp-lenkene (W3)](https://www.w3.org/TR/WCAG21/#bypass-blocks) og at de fungerer.
 6.  Sjekk at du har med [riktig &lt;title&gt; (W3)](https://www.w3.org/TR/WCAG21/#page-titled). Formen skal være `[hovedinnhold/overskrift på siden] - www.nav.no`
-7.  Pass på riktig [overskriftshierarki (Difi)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/tekst-og-struktur)
+7.  Pass på riktig [overskriftshierarki (DigDir)](https://uu.difi.no/krav-og-regelverk/losningsforslag-web/tekst-og-struktur)
 8.  Sjekk at HTMLen din [validerer (W3)](https://validator.w3.org).
 9.  Bruk [WAI-Aria (W3)](https://www.w3.org/WAI/standards-guidelines/aria) der standard HTML ikke er tilstrekkelig, for eksempel på [feilmeldinger](https://www.w3.org/TR/WCAG21/#status-messages)
 10. Bruk automatiserte testverktøy (som f.eks. [WAVE](https://wave.webaim.org) eller [Sortsite](https://www.powermapper.com/products/sortsite/)) aktivt og ofte.
 11. Test med skjermleser på egen hånd. Med for eksempel [ChromeVox](https://www.chromevox.com), [VoiceOver på Mac](https://webaim.org/articles/voiceover/), eller [TalkBack på Android](https://support.google.com/accessibility/android/answer/6283677?hl=en) er dette enklere enn du tror.
-12. Hvis mulig, bruk [NAV-ally](https://www.npmjs.com/package/nav-ally) i utviklingsprosessen.
-13. Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Sannergata (rom 5006).
+12. Hvis mulig, bruk [automatisert testing](https://navikt.github.io/uu/hvordan-faa-det-til/UU-testing/automatisert-testing/) i utviklingsprosessen. Husk at dette dekker maks 20-30 prosent av potensielle feil.
+13. Test med reelle brukere, også med personer som bruker hjelpemidler. Bruk Sanselaben i Fyrstikkaleen.
