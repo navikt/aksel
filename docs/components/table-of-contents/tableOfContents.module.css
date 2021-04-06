@@ -22,8 +22,9 @@
   flex-shrink: 0;
 }
 
-.li:hover {
+.li:hover > svg {
   margin-left: 0.25rem;
+  margin-right: -0.25rem;
 }
 
 .li > a {
