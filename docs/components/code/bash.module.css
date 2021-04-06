@@ -21,7 +21,7 @@
 .code {
   color: var(--color-code);
   font-family: var(--font-family-code);
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .terminal::before {
