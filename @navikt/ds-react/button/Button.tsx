@@ -20,6 +20,11 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Prevent the user from interacting with the button: it cannot be pressed or focused.
+   * @default false
+   */
+  disabled?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
