@@ -27,27 +27,9 @@ const Npm = ({
               rel="noreferrer"
               href={`https://www.npmjs.com/package/${name}`}
             >
-              <img src={`https://badgen.net/npm/v/${name}`} alt="123" />
-            </a>
-
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://bundlephobia.com/result?p=${name}`}
-            >
               <img
-                src={`https://badgen.net/bundlephobia/tree-shaking/${name}`}
-                alt="123"
-              />
-            </a>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://bundlephobia.com/result?p=${name}`}
-            >
-              <img
-                src={`https://badgen.net/bundlephobia/min/${name}`}
-                alt="123"
+                src={`https://badgen.net/npm/v/${name}`}
+                alt="Versjonsbadge for npm-pakken"
               />
             </a>
           </span>
