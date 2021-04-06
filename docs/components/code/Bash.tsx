@@ -94,7 +94,7 @@ const Bash = ({
               placement="auto-start"
               /* arrow={false} */
             >
-              Kode er kopiert
+              Kopiert!
             </Popover>
           </>
         )}
