@@ -22,7 +22,8 @@
   flex-shrink: 0;
 }
 
-.li:hover > svg {
+.li:hover > svg,
+.li:focus-within > svg {
   margin-left: 0.25rem;
   margin-right: -0.25rem;
 }
@@ -42,4 +43,8 @@
   transition: color 0ms linear;
   background-color: var(--navds-color-blue-80);
   outline: none;
+}
+
+.li:focus-within > svg {
+  color: var(--navds-color-darkgray);
 }
