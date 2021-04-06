@@ -7,6 +7,8 @@
 }
 
 .preview {
+  display: flex;
+  column-gap: 0.5rem;
   border-bottom: 2px solid var(--code-divider);
   padding-bottom: 3rem;
   margin-bottom: 1rem;

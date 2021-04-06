@@ -78,26 +78,24 @@ const Bash = ({
         />
         {copy && (
           <>
-            <div className={style.buttonBackground}>
-              <button
-                ref={buttonRef}
-                className={style.copyButton}
-                onClick={() => handleCopy()}
-              >
-                <Files />
-              </button>
-              <Popover
-                role="alert"
-                anchorEl={buttonRef.current}
-                open={openPopover}
-                onClose={() => setOpenPopover(false)}
-                size="small"
-                placement="auto-start"
-                /* arrow={false} */
-              >
-                Kode er kopiert
-              </Popover>
-            </div>
+            <button
+              ref={buttonRef}
+              className={style.copyButton}
+              onClick={() => handleCopy()}
+            >
+              <Files />
+            </button>
+            <Popover
+              role="alert"
+              anchorEl={buttonRef.current}
+              open={openPopover}
+              onClose={() => setOpenPopover(false)}
+              size="small"
+              placement="auto-start"
+              /* arrow={false} */
+            >
+              Kode er kopiert
+            </Popover>
           </>
         )}
       </pre>

@@ -52,7 +52,7 @@ const Preview = ({
   return (
     <div className={style.wrapper}>
       {!!children && <div className={style.preview}>{children}</div>}
-      <Tabs tabs={tabs} onChange={(x) => handleChange(x)} />
+      <Tabs tabs={tabs} tab={tab} onChange={(x) => handleChange(x)} />
       {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
 
       {(!hideHtml || !!children) && tab === 1 && (

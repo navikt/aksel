@@ -28,7 +28,7 @@ const Npm = ({
               href={`https://www.npmjs.com/package/${name}`}
             >
               <img
-                src={`https://badgen.net/npm/v/${name}`}
+                src={`https://badgen.net/npm/v/${name}/?style=for-the-badge&logo=appveyor`}
                 alt="Versjonsbadge for npm-pakken"
               />
             </a>

@@ -1,5 +1,6 @@
 :root {
   --bg-primary: #faf9f9;
+  --font-family-code: "Source Code Pro", monospace;
 }
 
 .darkTheme {
