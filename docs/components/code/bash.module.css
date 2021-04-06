@@ -31,18 +31,20 @@
 }
 
 .buttonBackground {
-  width: 3rem;
+  /* width: 3rem;
   background-color: var(--bg-code);
-  position: absolute;
   right: 0;
   margin: 1rem 0;
   display: flex;
   justify-content: center;
   height: calc(100% - 3rem - 0.5rem);
-  align-items: center;
+  align-items: center; */
 }
 
 .copyButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 0.5rem;
   background-color: var(--bg-code);
   color: white;
   font-size: 1.5rem;
@@ -55,7 +57,7 @@
 }
 
 .copyButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--navds-color-gray-60);
 }
 
 .copyButton:focus {
