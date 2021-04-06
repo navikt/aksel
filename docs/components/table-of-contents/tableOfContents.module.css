@@ -35,7 +35,6 @@
 .li:hover > svg {
   color: var(--navds-color-darkgray);
   transition: color 150ms linear;
-  text-decoration: underline;
 }
 
 .li > svg + a:focus {
