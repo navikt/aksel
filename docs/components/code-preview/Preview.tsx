@@ -28,7 +28,11 @@ const Preview = ({
 }: PreviewProps) => {
   const [tab, setTab] = useState(0);
   const handleChange = (x: number) => {
-    setTab(x);
+    if (tab === x) {
+      setTab(null);
+    } else {
+      setTab(x);
+    }
   };
 
   const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
