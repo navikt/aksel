@@ -28,7 +28,8 @@
   ],
   "scripts": {
     "cjs-package": "copyfiles -f config/package.json cjs",
-    "build": "tsc -p tsconfig.json && tsc -p tsconfig-esm.json && yarn cjs-package",
+    "clean": "rm -rf cjs esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn cjs-package",
     "watch": "tsc --watch -p tsconfig.json"
   },
   "dependencies": {
