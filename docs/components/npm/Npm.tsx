@@ -21,7 +21,9 @@ const Npm = ({
     <div>
       {packs.map(({ name, data }) => (
         <div key={name}>
-          <span className={style.badges}>
+          <Import from={name} imports={imports} namedExport={namedExport} />
+          {/* TODO: Move to separate component? */}
+          {/* <span className={style.badges}>
             <a
               target="_blank"
               rel="noreferrer"
@@ -32,8 +34,7 @@ const Npm = ({
                 alt="Versjonsbadge for npm-pakken"
               />
             </a>
-          </span>
-          <Import from={name} imports={imports} namedExport={namedExport} />
+          </span> */}
         </div>
       ))}
     </div>
