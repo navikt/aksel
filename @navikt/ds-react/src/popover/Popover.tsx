@@ -122,7 +122,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             name: "arrow",
             options: {
               padding: 0,
-              element: arrowRef.current,
             },
           },
           {
@@ -155,7 +154,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         {children}
         {arrow && (
           <div
-            ref={arrowRef}
+            data-popper-arrow
             style={styles.arrow}
             className="navds-popover__arrow"
           />

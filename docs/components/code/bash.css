@@ -51,3 +51,7 @@
   outline: var(--outline-code);
   outline-offset: var(--outline-offset);
 }
+
+.bash__popover {
+  padding: 0.5rem;
+}
