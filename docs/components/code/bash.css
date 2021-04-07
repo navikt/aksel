@@ -22,22 +22,11 @@
   color: var(--color-code);
   font-family: var(--font-family-code);
   font-size: 1rem;
+  padding-right: 4rem;
 }
 
 .bash__terminal::before {
   content: "$ ";
-}
-
-.bash__button {
-  width: 3rem;
-  background-color: var(--bg-code);
-  position: absolute;
-  right: 0;
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-  height: calc(100% - 3rem - 0.5rem);
-  align-items: center;
 }
 
 .bash__copyButton {
@@ -51,6 +40,7 @@
   border: none;
   align-items: center;
   display: flex;
+  z-index: 0;
 }
 
 .bash__copyButton:hover {
