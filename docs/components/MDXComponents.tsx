@@ -1,9 +1,11 @@
-import { Heading, Paragraph } from "@navikt/ds-react";
+import { Heading, Paragraph, Alert, Link } from "@navikt/ds-react";
 import Bash from "./code/Bash";
 import Import from "./code/Import";
 import Preview from "./code-preview/Preview";
 import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
+import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
+import { Settings } from "@navikt/ds-icons";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -15,4 +17,11 @@ export default {
   Import,
   Npm,
   TableOfContents,
+  Alert,
+  Link,
+  Knapp,
+  Fareknapp,
+  Flatknapp,
+  Hovedknapp,
+  Settings,
 };

@@ -1,0 +1,236 @@
+---
+title: Knapp
+---
+
+<!--
+<Npm packName="nav-frontend-knapper" imports="Button" />
+ -->
+
+# Knapp
+
+## Alle knapper side om side
+
+Alle knappene våre er alignet på samme bunnlinje.
+
+<Preview
+  hideHtml
+  react={`<><Knapp>Normal</Knapp>
+  <Hovedknapp>Hoved</Hovedknapp>
+  <Fareknapp>Fare</Fareknapp>
+  <Flatknapp>Flat</Flatknapp></>`}
+>
+  <Knapp>Normal</Knapp>
+  <Hovedknapp>Hoved</Hovedknapp>
+  <Fareknapp>Fare</Fareknapp>
+  <Flatknapp>Flat</Flatknapp>
+</Preview>
+
+<!--
+## Normal
+
+Dette er hvordan en normal knapp skal se ut. De fleste knappene i løsningene våre skal se
+slik ut. Hvis du er i tvil om hvilken knapp du skal bruke, er det sikkert denne som er
+riktig.
+
+<Preview>
+  <Knapp>Normal</Knapp>
+</Preview>
+
+## Hovedknapp
+
+Denne knappen skal brukes der løsningen/siden har en tydelig hoved-/primær-funksjon (f.eks.
+"Lagre" eller "Send søknad"). Merk at det som regel bare skal finnes èn eneste hovedknapp
+på en og samme side. Et mulig unntak til denne regelen kan være inne i en modal-rute som
+legger seg oppå det øvrige innholdet hvor det er tillatt med en ekstra hoved- eller
+fare-knapp ved behov.
+
+<Preview>
+  <Hovedknapp>Hovedknapp</Hovedknapp>
+</Preview>
+
+## Fareknapp
+
+Denne knappen skal brukes på samme måte som hovedknapp, men bare der hoved-/primær-funksjonen
+kan føre til tap av viktig lagret informasjon (f.eks. "Slett") eller ellers bety svært negative
+konsekvenser hvis handlingen ikke var ønsket (f.eks. som en bekreftelse på at brukeren ikke lenger
+ønsker å motta ytelser).
+
+<Preview>
+  <Fareknapp>Fareknapp</Fareknapp>
+</Preview>
+
+## Flatknapp
+
+Denne knappen kan brukes som et alternativ til normal knapp ved behov.
+
+<Preview>
+  <Flatknapp>Flatknapp</Flatknapp>
+</Preview>
+
+## Med spinner
+
+Alle knappene våre har støtte for å vise en spinner.
+
+<Preview>
+  <Knapp spinner>Normal</Knapp>
+  <br />
+  <br />
+  <Hovedknapp spinner>Hoved</Hovedknapp>
+  <br />
+  <br />
+  <Fareknapp spinner>Fare</Fareknapp>
+  <br />
+  <br />
+  <Flatknapp spinner>Flat</Flatknapp>
+  <br />
+  <br />
+  <Knapp disabled spinner>
+    Disabled
+  </Knapp>
+</Preview>
+
+## Disabled
+
+Alle knappene har støtte for disabled stil.
+
+<Alert type="warning">
+  Merk at disabled knapper bør unngås, og at man heller bør bruke vanlige
+  knapper kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+</Alert>
+
+<Preview>
+  <Knapp disabled>Normal</Knapp>
+  <br />
+  <br />
+  <Hovedknapp disabled>Hoved</Hovedknapp>
+  <br />
+  <br />
+  <Fareknapp disabled>Fare</Fareknapp>
+  <br />
+  <br />
+  <Flatknapp disabled>Flat</Flatknapp>
+</Preview>
+
+```jsx
+<Knapp disabled>Normal</Knapp>
+<Hovedknapp disabled>Hoved</Hovedknapp>
+<Fareknapp disabled>Fare</Fareknapp>
+<Flatknapp disabled>Flat</Flatknapp>
+```
+
+## Mini
+
+Alle knappene kan rendres i en mindre `32px` versjon.
+
+<Alert type="waring">
+  Som hovedregel skal vi <strong>alltid</strong> bruke de store knappene våre.
+  For tilfeller med svært begrenset plass kan de mindre knappene brukes{" "}
+  <strong>unntaksvis ved klart behov</strong>.
+</Alert>
+
+<Preview>
+  <Knapp mini>Normal</Knapp>
+  <br />
+  <br />
+  <Hovedknapp mini>Hoved</Hovedknapp>
+  <br />
+  <br />
+  <Fareknapp mini>Fare</Fareknapp>
+  <br />
+  <br />
+  <Flatknapp mini>Flat</Flatknapp>
+  <br />
+  <br />
+  <Knapp disabled mini>
+    Disabled
+  </Knapp>
+</Preview>
+
+## Med ikon
+
+<Alert type="info">
+  Når du bruker ikoner er det viktig at du pakker inn teksten med{" "}
+  <code>&lt;span&gt;</code>-elementer for å påse riktig avstand til ikonet.
+</Alert>
+
+<Preview>
+  <Knapp>
+    <Settings />
+    <span>Normal</span>
+  </Knapp>
+  <br />
+  <br />
+  <Hovedknapp>
+    <Settings />
+    <span>Hoved</span>
+  </Hovedknapp>
+  <br />
+  <br />
+  <Fareknapp>
+    <Settings />
+    <span>Fare</span>
+  </Fareknapp>
+  <br />
+  <br />
+  <Flatknapp>
+    <Settings />
+    <span>Flat</span>
+  </Flatknapp>
+  <br />
+  <br />
+  <Knapp disabled>
+    <Settings />
+    <span>Disabled</span>
+  </Knapp>
+</Preview>
+
+### Plassering av ikon
+
+<Preview>
+  <Knapp>
+    <Settings />
+    <span>Knapp</span>
+  </Knapp>
+  <br />
+  <br />
+  <Knapp>
+    <span>Knapp</span>
+    <Settings />
+  </Knapp>
+  <br />
+  <br />
+  <Knapp>
+    <Settings />
+    <span>Knapp</span>
+    <Settings />
+  </Knapp>
+</Preview>
+
+### Kompakt
+
+Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
+
+<Alert type="warning">
+  Husk at knapper med bare ikoner også må få en tekst-verdi av hensyn til
+  skjermlesere. Utility-klassen <code>sr-only</code> som gis av{" "}
+  <Link href="https://github.com/navikt/nav-frontend-moduler/blob/master/packages/node_modules/nav-frontend-core/less/_mixins.less">
+    mixins-fila i Core-pakken
+  </Link>{" "}
+  kan brukes for å skjule teksten visuelt.
+</Alert>
+
+<Preview>
+  <Knapp kompakt>
+    <Settings />
+    <span>Knapp</span>
+  </Knapp>
+  <br />
+  <br />
+  <Knapp kompakt>
+    <Settings />
+    <span className="sr-only">Knapp</span>
+  </Knapp>
+</Preview>
+-->

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Tabs from "../tabs/Tabs";
-import style from "./preview.module.css";
 import { renderToString } from "react-dom/server";
 import Bash from "../code/Bash";
 import Prettier from "prettier/standalone";
 import ParserBabel from "prettier/parser-babel";
+import "./preview.css";
 
 const prettierOptions = {
   semi: true,
@@ -28,7 +28,11 @@ const Preview = ({
 }: PreviewProps) => {
   const [tab, setTab] = useState(0);
   const handleChange = (x: number) => {
-    setTab(x);
+    if (tab === x) {
+      setTab(null);
+    } else {
+      setTab(x);
+    }
   };
 
   const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
@@ -43,12 +47,12 @@ const Preview = ({
       .slice(0, -2)
       .replace(` data-reactroot=""`, "");
 
-  const tabs = !hideHtml || !!children ? ["REACT", "HTML/CSS"] : ["REACT"];
+  const tabs = !hideHtml && !!children ? ["REACT", "HTML/CSS"] : ["REACT"];
 
   return (
-    <div className={style.wrapper}>
-      {!!children && <div className={style.preview}>{children}</div>}
-      <Tabs tabs={tabs} onChange={(x) => handleChange(x)} />
+    <div className={"preview__wrapper"}>
+      {!!children && <div className={"preview__container"}>{children}</div>}
+      <Tabs tabs={tabs} tab={tab} onChange={(x) => handleChange(x)} />
       {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
 
       {(!hideHtml || !!children) && tab === 1 && (
