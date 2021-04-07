@@ -71,7 +71,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   ) => {
     const popoverRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = mergeRefs([popoverRef, ref]);
-    const arrowRef = useRef<HTMLDivElement | null>(null);
 
     const close = useCallback(() => open && onClose(), [open, onClose]);
 
