@@ -88,7 +88,8 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string,
-.token.variable {
+.token.variable,
+.token.plain-text {
   color: #f8f8f2;
 }
 

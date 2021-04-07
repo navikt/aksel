@@ -1,11 +1,11 @@
 import copy from "copy-to-clipboard";
 import Prism from "prismjs";
-import style from "./bash.module.css";
 import cl from "classnames";
 import { Files } from "@navikt/ds-icons";
 import { Popover } from "@navikt/ds-react";
 import { useEffect, useRef, useState } from "react";
 import "prismjs/components/prism-jsx.min";
+import "./bash.css";
 
 type PrismLanguages =
   | "extend"
@@ -66,39 +66,40 @@ const Bash = ({
   };
 
   return (
-    <div className={style.preWrapper}>
-      <pre className={style.pre}>
+    <div className={"bash__preWrapper"}>
+      <pre className={"bash__pre"}>
         <code
-          className={cl(style.code, {
-            [style.codeCopy]: copy,
-            [style.terminal]: terminal,
+          className={cl(code, {
+            bash__codeCopy: copy,
+            bash__terminal: terminal,
           })}
           {...props}
           dangerouslySetInnerHTML={{ __html: highlighted }}
         />
         {copy && (
           <>
-            <button
-              ref={buttonRef}
-              className={style.copyButton}
-              onClick={() => handleCopy()}
-            >
-              <Files />
-            </button>
-            <Popover
-              role="alert"
-              anchorEl={buttonRef.current}
-              open={openPopover}
-              onClose={() => setOpenPopover(false)}
-              size="small"
-              placement="auto-start"
-              /* arrow={false} */
-            >
-              Kopiert!
-            </Popover>
+            <div className={"bash__button"}>
+              <button
+                ref={buttonRef}
+                className={"bash__copyButton"}
+                onClick={() => handleCopy()}
+              >
+                <Files />
+              </button>
+            </div>
           </>
         )}
       </pre>
+      <Popover
+        role="alert"
+        anchorEl={buttonRef.current}
+        open={openPopover}
+        onClose={() => setOpenPopover(false)}
+        placement="right"
+        arrow={false}
+      >
+        Kopiert!
+      </Popover>
     </div>
   );
 };

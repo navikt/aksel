@@ -1,14 +1,14 @@
-.ul {
+.tabs__ul {
   padding: 0;
   margin: 0;
   display: flex;
 }
 
-.li {
+.tabs__li {
   list-style: none;
 }
 
-.button {
+.tabs__button {
   color: var(--tab-color);
   border: none;
   background: none;
@@ -17,17 +17,17 @@
   border-bottom: 4px solid transparent;
 }
 
-.button:hover {
+.tabs__button:hover {
   border-bottom: 4px solid var(--navds-color-darkgray);
   color: var(--navds-color-darkgray);
 }
 
-.button:focus {
+.tabs__button:focus {
   outline: var(--outline-focus);
   outline-offset: var(--outline-offset);
 }
 
-.buttonActive {
+.tabs__buttonActive {
   border-bottom: var(--tab-border);
   color: var(--tab-color-active);
 }

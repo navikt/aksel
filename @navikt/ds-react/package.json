@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -24,7 +24,8 @@
   },
   "files": [
     "/cjs",
-    "/esm"
+    "/esm",
+    "/src"
   ],
   "scripts": {
     "cjs-package": "copyfiles -f config/package.json cjs",

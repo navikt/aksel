@@ -1,4 +1,7 @@
 const glob = require("glob");
+const withLess = require("@zeit/next-less");
+const withCss = require("@zeit/next-css");
+const withPlugins = require("next-compose-plugins");
 
 const loadPackage = () => {
   const navFrontend = glob.sync("../packages/**/package.json");
@@ -11,7 +14,7 @@ const loadPackage = () => {
     });
 };
 
-module.exports = {
+module.exports = withPlugins([withLess, withCss], {
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
@@ -22,4 +25,4 @@ module.exports = {
   publicRuntimeConfig: {
     packages: loadPackage(),
   },
-};
+});

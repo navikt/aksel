@@ -1,6 +1,6 @@
 import getConfig from "next/config";
 import Import from "../code/Import";
-import style from "./npm.module.css";
+import "./npm.css";
 
 const Npm = ({
   packName,
@@ -24,6 +24,7 @@ const Npm = ({
           <Import from={name} imports={imports} namedExport={namedExport} />
           {/* TODO: Move to separate component? */}
           {/* <span className={style.badges}>
+          <span className={"npm__.badges"}>
             <a
               target="_blank"
               rel="noreferrer"
