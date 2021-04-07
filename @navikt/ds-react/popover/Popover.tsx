@@ -36,8 +36,14 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "right"
    */
   placement?: Placement;
-  /* Deteremines if popover contains an arrow */
+  /**
+   *  Deteremines if popover contains an arrow
+   */
   arrow?: boolean;
+  /**
+   * Distance from anchor to popover
+   */
+  offset?: number;
 }
 
 const useEventLister = (event: string, callback) =>
@@ -58,6 +64,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       open,
       onClose,
       placement = "right",
+      offset,
       ...rest
     },
     ref
@@ -114,14 +121,14 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {
             name: "arrow",
             options: {
-              padding: 8,
+              padding: 0,
               element: arrowRef.current,
             },
           },
           {
             name: "offset",
             options: {
-              offset: [0, arrow ? 16 : 0],
+              offset: [0, offset ? offset : arrow ? 16 : 4],
             },
           },
         ],
