@@ -1,6 +1,46 @@
 # Endringslogg
 
+## 07. April 2021
+
+### Sourcemapping ds-icons og ds-react
+
+[#1064](https://github.com/navikt/nav-frontend-moduler/pull/1064)
+[#1065](https://github.com/navikt/nav-frontend-moduler/pull/1065)
+
+
+## 24. Mars 2021
+
+### Smoothscroll og reduced animations
+
+[#1055](https://github.com/navikt/nav-frontend-moduler/pull/1055)
+
+- `@navikt/ds-css` sin baseline setter nå `scroll-behavior: smooth;` på html by default
+- Ved `(prefers-reduced-motion: reduce)` vil baseline redusere animasjoner.
+ 
 ## 10. Mars 2021
+
+### @navikt/ds-react importerer nå ikke styling i selve komponenten
+
+[#1030](https://github.com/navikt/nav-frontend-moduler/pull/1030)
+
+- Dette betyr at pakken `@navikt/ds-css` må importeres separat ved å endten linke til pakken i `<head>` eller importere den høyt i dom-strukturen.
+
+### @navikt/ds-react og @navikt/ds-icons er nå treeshakable
+
+[#1033](https://github.com/navikt/nav-frontend-moduler/pull/1033)
+
+- Begge pakkene defaulter nå til esm versjonen av pakken. De vanligste bundlerne hånterer da treeshaking selv når pakken blir brukt. Hvis man man ønsker å ta i bruk Commonjs versjonen kan man importere direkte fra `cjs` dir i pakken
+```bash
+Esm -> import { Button } from "@navikt/ds-react";
+Cjs -> import { Button } from "@navikt/ds-react/cjs";
+```
+Siden eks noen test-libraries ikke støtter ESM enda kan man legge denne til i jest config for å bruke pakkene: 
+```
+"moduleNameMapper": {
+  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
+  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
+}
+```
 
 ### Oppdatert feil-styling og state-handling for skjemakomponenter
 
