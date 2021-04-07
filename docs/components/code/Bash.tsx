@@ -69,7 +69,7 @@ const Bash = ({
     <div className={"bash__preWrapper"}>
       <pre className={"bash__pre"}>
         <code
-          className={cl(code, {
+          className={cl("bash__code", {
             bash__codeCopy: copy,
             bash__terminal: terminal,
           })}
@@ -78,28 +78,26 @@ const Bash = ({
         />
         {copy && (
           <>
-            <div className={"bash__button"}>
-              <button
-                ref={buttonRef}
-                className={"bash__copyButton"}
-                onClick={() => handleCopy()}
-              >
-                <Files />
-              </button>
-              <Popover
-                role="alert"
-                anchorEl={buttonRef.current}
-                open={openPopover}
-                onClose={() => setOpenPopover(false)}
-                placement="auto-start"
-                /* arrow={false} */
-              >
-                Kode er kopiert
-              </Popover>
-            </div>
+            <button
+              ref={buttonRef}
+              className={"bash__copyButton"}
+              onClick={() => handleCopy()}
+            >
+              <Files />
+            </button>
           </>
         )}
       </pre>
+      <Popover
+        role="alert"
+        anchorEl={buttonRef.current}
+        open={openPopover}
+        onClose={() => setOpenPopover(false)}
+        placement="right"
+        /* arrow={false} */
+      >
+        Kopiert!
+      </Popover>
     </div>
   );
 };

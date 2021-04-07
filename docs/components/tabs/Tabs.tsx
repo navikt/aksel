@@ -5,14 +5,12 @@ import cl from "classnames";
 interface TabsProps {
   onChange: (tab: number) => void;
   tabs: string[];
+  tab: number;
 }
 
-const Tabs = ({ onChange, tabs, ...props }: TabsProps) => {
-  const [tab, setTab] = useState(0);
-
+const Tabs = ({ onChange, tabs, tab, ...props }: TabsProps) => {
   const handleClick = (x: number) => {
     onChange(x);
-    setTab(x);
   };
 
   return (

@@ -21,37 +21,21 @@ const Npm = ({
     <div>
       {packs.map(({ name, data }) => (
         <div key={name}>
+          <Import from={name} imports={imports} namedExport={namedExport} />
+          {/* TODO: Move to separate component? */}
+          {/* <span className={style.badges}>
           <span className={"npm__.badges"}>
             <a
               target="_blank"
               rel="noreferrer"
               href={`https://www.npmjs.com/package/${name}`}
             >
-              <img src={`https://badgen.net/npm/v/${name}`} alt="123" />
-            </a>
-
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://bundlephobia.com/result?p=${name}`}
-            >
               <img
-                src={`https://badgen.net/bundlephobia/tree-shaking/${name}`}
-                alt="123"
+                src={`https://badgen.net/npm/v/${name}/?style=for-the-badge&logo=appveyor`}
+                alt="Versjonsbadge for npm-pakken"
               />
             </a>
-            <a
-              target="_blank"
-              rel="noreferrer"
-              href={`https://bundlephobia.com/result?p=${name}`}
-            >
-              <img
-                src={`https://badgen.net/bundlephobia/min/${name}`}
-                alt="123"
-              />
-            </a>
-          </span>
-          <Import from={name} imports={imports} namedExport={namedExport} />
+          </span> */}
         </div>
       ))}
     </div>

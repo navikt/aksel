@@ -1,14 +1,11 @@
 .bash__pre {
   padding: 1rem;
-  margin: 1rem 0 0 0;
-  overflow: auto;
-  width: calc(100vw - 2rem);
+  overflow-x: auto;
+  width: 100%;
   background-color: var(--bg-code);
   align-items: center;
   display: flex;
-
-  /* Fixer pixelbug på høyre side av bash-panel */
-  box-shadow: inset -4px 0 0 var(--bg-code);
+  font-family: var(--navds-font-family);
 }
 
 .bash__preWrapper {
@@ -22,40 +19,32 @@
 }
 
 .bash__code {
-  padding-right: 4rem;
   color: var(--color-code);
+  font-family: var(--font-family-code);
+  font-size: 1rem;
+  padding-right: 4rem;
 }
 
 .bash__terminal::before {
   content: "$ ";
 }
 
-.bash__button {
-  width: 3rem;
-  background-color: var(--bg-code);
-  position: absolute;
-  right: 0;
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-  height: calc(100% - 3rem - 0.5rem);
-  align-items: center;
-}
-
 .bash__copyButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 0.5rem;
   background-color: var(--bg-code);
   color: white;
   font-size: 1.5rem;
   padding: 0.5rem;
   border: none;
   align-items: center;
-  display: inline-flex;
-  height: 2.5rem;
-  width: 2.5rem;
+  display: flex;
+  z-index: 0;
 }
 
 .bash__copyButton:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--navds-color-gray-60);
 }
 
 .bash__copyButton:focus {

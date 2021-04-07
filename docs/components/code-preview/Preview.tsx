@@ -28,7 +28,11 @@ const Preview = ({
 }: PreviewProps) => {
   const [tab, setTab] = useState(0);
   const handleChange = (x: number) => {
-    setTab(x);
+    if (tab === x) {
+      setTab(null);
+    } else {
+      setTab(x);
+    }
   };
 
   const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
@@ -48,7 +52,7 @@ const Preview = ({
   return (
     <div className={"preview__wrapper"}>
       {!!children && <div className={"preview__container"}>{children}</div>}
-      <Tabs tabs={tabs} onChange={(x) => handleChange(x)} />
+      <Tabs tabs={tabs} tab={tab} onChange={(x) => handleChange(x)} />
       {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
 
       {(!hideHtml || !!children) && tab === 1 && (

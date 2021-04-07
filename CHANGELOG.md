@@ -7,7 +7,6 @@
 [#1064](https://github.com/navikt/nav-frontend-moduler/pull/1064)
 [#1065](https://github.com/navikt/nav-frontend-moduler/pull/1065)
 
-
 ## 24. Mars 2021
 
 ### Smoothscroll og reduced animations
@@ -16,7 +15,7 @@
 
 - `@navikt/ds-css` sin baseline setter nå `scroll-behavior: smooth;` på html by default
 - Ved `(prefers-reduced-motion: reduce)` vil baseline redusere animasjoner.
- 
+
 ## 10. Mars 2021
 
 ### @navikt/ds-react importerer nå ikke styling i selve komponenten
@@ -30,11 +29,14 @@
 [#1033](https://github.com/navikt/nav-frontend-moduler/pull/1033)
 
 - Begge pakkene defaulter nå til esm versjonen av pakken. De vanligste bundlerne hånterer da treeshaking selv når pakken blir brukt. Hvis man man ønsker å ta i bruk Commonjs versjonen kan man importere direkte fra `cjs` dir i pakken
+
 ```bash
 Esm -> import { Button } from "@navikt/ds-react";
 Cjs -> import { Button } from "@navikt/ds-react/cjs";
 ```
-Siden eks noen test-libraries ikke støtter ESM enda kan man legge denne til i jest config for å bruke pakkene: 
+
+Siden eks noen test-libraries ikke støtter ESM enda kan man legge denne til i jest config for å bruke pakkene:
+
 ```
 "moduleNameMapper": {
   "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",

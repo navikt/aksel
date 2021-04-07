@@ -22,8 +22,10 @@
   flex-shrink: 0;
 }
 
-.toc__li:hover {
+.toc__li:hover > svg,
+.toc__li:focus-within > svg {
   margin-left: 0.25rem;
+  margin-right: -0.25rem;
 }
 
 .toc__li > a {
@@ -34,7 +36,6 @@
 .toc__li:hover > svg {
   color: var(--navds-color-darkgray);
   transition: color 150ms linear;
-  text-decoration: underline;
 }
 
 .toc__li > svg + a:focus {
@@ -42,4 +43,8 @@
   transition: color 0ms linear;
   background-color: var(--navds-color-blue-80);
   outline: none;
+}
+
+.li:focus-within > svg {
+  color: var(--navds-color-darkgray);
 }
