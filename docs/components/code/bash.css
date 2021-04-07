@@ -1,4 +1,4 @@
-.pre {
+.bash__pre {
   padding: 1rem;
   margin: 1rem 0 0 0;
   overflow: auto;
@@ -11,26 +11,26 @@
   box-shadow: inset -4px 0 0 var(--bg-code);
 }
 
-.preWrapper {
+.bash__preWrapper {
   position: relative;
   align-items: center;
   display: flex;
 }
 
-.terminal {
+.bash__terminal {
   color: var(--color-code);
 }
 
-.code {
+.bash__code {
   padding-right: 4rem;
   color: var(--color-code);
 }
 
-.terminal::before {
+.bash__terminal::before {
   content: "$ ";
 }
 
-.buttonBackground {
+.bash__button {
   width: 3rem;
   background-color: var(--bg-code);
   position: absolute;
@@ -42,7 +42,7 @@
   align-items: center;
 }
 
-.copyButton {
+.bash__copyButton {
   background-color: var(--bg-code);
   color: white;
   font-size: 1.5rem;
@@ -54,11 +54,11 @@
   width: 2.5rem;
 }
 
-.copyButton:hover {
+.bash__copyButton:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.copyButton:focus {
+.bash__copyButton:focus {
   outline: var(--outline-code);
   outline-offset: var(--outline-offset);
 }

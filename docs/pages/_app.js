@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import Head from "next/head";
 import Layout from "../components/layout/Layout";
-import "../styles/theme.css";
+/* import "../styles/theme.css"; */
 import "../styles/globals.css";
 import "../styles/prismjs.css";
 import "@navikt/ds-css";

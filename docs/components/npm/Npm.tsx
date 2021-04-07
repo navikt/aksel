@@ -1,6 +1,6 @@
 import getConfig from "next/config";
 import Import from "../code/Import";
-import style from "./npm.module.css";
+import "./npm.css";
 
 const Npm = ({
   packName,
@@ -21,7 +21,7 @@ const Npm = ({
     <div>
       {packs.map(({ name, data }) => (
         <div key={name}>
-          <span className={style.badges}>
+          <span className={"npm__.badges"}>
             <a
               target="_blank"
               rel="noreferrer"

@@ -1,4 +1,4 @@
-.wrapper {
+.preview__wrapper {
   padding: 1rem;
   margin: 1rem 0;
   background-color: var(--bg-secondary);
@@ -6,7 +6,7 @@
   outline: var(--outline);
 }
 
-.preview {
+.preview__container {
   border-bottom: 2px solid var(--code-divider);
   padding-bottom: 3rem;
   margin-bottom: 1rem;
