@@ -24,7 +24,8 @@
   },
   "files": [
     "/cjs",
-    "/esm"
+    "/esm",
+    "/src"
   ],
   "scripts": {
     "cjs-package": "copyfiles -f config/package.json cjs",

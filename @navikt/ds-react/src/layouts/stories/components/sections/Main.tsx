@@ -7,7 +7,6 @@ import {
   Link,
   Paragraph,
 } from "../../../../index";
-import Snakkeboble from "nav-frontend-snakkeboble";
 
 export const Main = ({ title = true }) => (
   <>
@@ -121,16 +120,12 @@ export const MainThree = ({ title = true }) => (
       Quisque varius ornare nulla, ut condimentum sapien dapibus non. Nullam
       eget interdum nibh
     </Paragraph>
-    <Snakkeboble>Integer aliquam feugiat purus et imperdie</Snakkeboble>
     <Paragraph>
       Cras tempor eros sed dapibus egestas. Curabitur bibendum quam quis lectus
       pretium lacinia. Nunc consequat ac augue quis laoreet. Donec porta, erat
       vitae blandit egestas, arcu metus pharetra nulla, et laoreet risus purus
       convallis turpis.
     </Paragraph>
-    <Snakkeboble pilHoyre={true}>
-      Integer aliquam feugiat purus et imperdie
-    </Snakkeboble>
     <Paragraph>
       Suspendisse potenti. Praesent at elit interdum, porttitor sem eget,
       blandit dolor. Nunc eget consectetur felis, id scelerisque sapien. Ut id
