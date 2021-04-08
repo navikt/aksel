@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-veileder-style",
-  "version": "2.0.29",
+  "version": "2.1.0",
   "main": "src/index.less",
   "license": "MIT",
   "files": [
@@ -11,7 +11,7 @@
     "build": "webpack --mode=production"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.11"
+    "nav-frontend-core": "^5.1.0"
   },
   "peerDependencies": {
     "nav-frontend-core": "^5.0.11"

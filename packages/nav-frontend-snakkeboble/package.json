@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-snakkeboble",
-  "version": "2.0.36",
+  "version": "2.1.0",
   "main": "lib/snakkeboble.js",
   "types": "lib/snakkeboble.d.ts",
   "license": "MIT",
@@ -26,10 +26,10 @@
     "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "nav-frontend-paneler": "^2.0.32",
-    "nav-frontend-paneler-style": "^1.0.2",
-    "nav-frontend-snakkeboble-style": "^1.0.3",
-    "nav-frontend-typografi": "^3.0.4",
+    "nav-frontend-paneler": "^2.1.0",
+    "nav-frontend-paneler-style": "^1.1.0",
+    "nav-frontend-snakkeboble-style": "^1.1.0",
+    "nav-frontend-typografi": "^3.1.0",
     "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "Snakkeboble"
