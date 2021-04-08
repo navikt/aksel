@@ -120,7 +120,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {
             name: "offset",
             options: {
-              offset: [0, !!offset ? offset : arrow ? 16 : 4],
+              offset: [0, value || value === 0 ? offset : arrow ? 16 : 4],
             },
           },
         ],
