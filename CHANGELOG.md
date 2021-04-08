@@ -1,5 +1,24 @@
 # Endringslogg
 
+## 08. April 2021
+
+### Gråskala er endret i `nav-frontend-core`
+
+[#1068](https://github.com/navikt/nav-frontend-moduler/pull/1068)
+
+- Gråfargene er endret til en mer nøytral og leselig farge enn tidligere. 
+- Alle pakker som bruker `nav-frontend-core` eller har tilknytning til den (inkludert selve pakken) er minor bumpet fra x.0.x -> x.1.0.
+- Letteste måten å oppdatere pakkene på er å kjøre `npm update` 
+- Hvis man ønsker å bumpe pakkene manuelt så kan alle `nav-frontend-*` pakker minor bumpes til x.1.x utenom disse: 
+- - nav-frontend-chevron-style
+- - nav-frontend-chevron
+- - nav-frontend-fullbreddeknapp-style
+- - nav-frontend-grid-style
+- - nav-frontend-ikoner-assets
+- - nav-frontend-js-utils
+- - nav-frontend-spinner-style
+- - nav-frontend-spinner
+
 ## 07. April 2021
 
 ### Sourcemapping ds-icons og ds-react
