@@ -36,6 +36,14 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default "right"
    */
   placement?: Placement;
+  /**
+   *  Deteremines if popover contains an arrow
+   */
+  arrow?: boolean;
+  /**
+   * Distance from anchor to popover
+   */
+  offset?: number;
 }
 
 const useEventLister = (event: string, callback) =>
@@ -49,19 +57,20 @@ const useEventLister = (event: string, callback) =>
 const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
+      className,
+      children,
       anchorEl,
+      arrow = true,
       open,
       onClose,
-      children,
       placement = "right",
-      className,
+      offset,
       ...rest
     },
     ref
   ) => {
     const popoverRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = mergeRefs([popoverRef, ref]);
-    const arrowRef = useRef<HTMLDivElement | null>(null);
 
     const close = useCallback(() => open && onClose(), [open, onClose]);
 
@@ -109,16 +118,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         placement,
         modifiers: [
           {
-            name: "arrow",
-            options: {
-              padding: 8,
-              element: arrowRef.current,
-            },
-          },
-          {
             name: "offset",
             options: {
-              offset: [0, 16],
+              offset: [0, offset ?? arrow ? 16 : 4],
             },
           },
         ],
@@ -143,11 +145,13 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         style={styles.popper}
       >
         {children}
-        <div
-          ref={arrowRef}
-          style={styles.arrow}
-          className="navds-popover__arrow"
-        />
+        {arrow && (
+          <div
+            data-popper-arrow
+            style={styles.arrow}
+            className="navds-popover__arrow"
+          />
+        )}
       </div>
     );
   }

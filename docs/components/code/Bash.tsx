@@ -89,12 +89,13 @@ const Bash = ({
         )}
       </pre>
       <Popover
+        className="bash__popover"
         role="alert"
         anchorEl={buttonRef.current}
         open={openPopover}
         onClose={() => setOpenPopover(false)}
         placement="right"
-        /* arrow={false} */
+        arrow={false}
       >
         Kopiert!
       </Popover>
