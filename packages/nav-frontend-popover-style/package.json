@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover-style",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "main": "src/popover-style.less",
   "license": "MIT",
   "files": [
@@ -15,6 +15,6 @@
     "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.0.11"
+    "nav-frontend-core": "^5.1.0"
   }
 }
