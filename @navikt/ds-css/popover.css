@@ -4,7 +4,6 @@
   box-shadow: 0 0.05rem 0.25rem 0.125rem rgba(0, 0, 0, 0.08);
   border: var(--navds-border-default);
   border-radius: 2px;
-  align-items: center;
 }
 
 .navds-popover--hidden {
