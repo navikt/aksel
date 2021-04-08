@@ -8,31 +8,13 @@ title: Knapp
 
 # Knapp
 
-## Alle knapper side om side
-
-Alle knappene våre er alignet på samme bunnlinje.
-
-<Preview
-  hideHtml
-  react={`<><Knapp>Normal</Knapp>
-  <Hovedknapp>Hoved</Hovedknapp>
-  <Fareknapp>Fare</Fareknapp>
-  <Flatknapp>Flat</Flatknapp></>`}
->
-  <Knapp>Normal</Knapp>
-  <Hovedknapp>Hoved</Hovedknapp>
-  <Fareknapp>Fare</Fareknapp>
-  <Flatknapp>Flat</Flatknapp>
-</Preview>
-
-<!--
 ## Normal
 
 Dette er hvordan en normal knapp skal se ut. De fleste knappene i løsningene våre skal se
 slik ut. Hvis du er i tvil om hvilken knapp du skal bruke, er det sikkert denne som er
 riktig.
 
-<Preview>
+<Preview react={`<Knapp>Normal</Knapp>`}>
   <Knapp>Normal</Knapp>
 </Preview>
 
@@ -44,8 +26,8 @@ på en og samme side. Et mulig unntak til denne regelen kan være inne i en moda
 legger seg oppå det øvrige innholdet hvor det er tillatt med en ekstra hoved- eller
 fare-knapp ved behov.
 
-<Preview>
-  <Hovedknapp>Hovedknapp</Hovedknapp>
+<Preview react={`<Knapp type="hoved">Hovedknapp</Knapp>`}>
+  <Knapp type="hoved">Hovedknapp</Knapp>
 </Preview>
 
 ## Fareknapp
@@ -55,35 +37,45 @@ kan føre til tap av viktig lagret informasjon (f.eks. "Slett") eller ellers bet
 konsekvenser hvis handlingen ikke var ønsket (f.eks. som en bekreftelse på at brukeren ikke lenger
 ønsker å motta ytelser).
 
-<Preview>
-  <Fareknapp>Fareknapp</Fareknapp>
+<Preview react={`<Knapp type="fare">Fareknapp</Knapp>`}>
+  <Knapp type="fare">Fareknapp</Knapp>
 </Preview>
 
 ## Flatknapp
 
 Denne knappen kan brukes som et alternativ til normal knapp ved behov.
 
-<Preview>
-  <Flatknapp>Flatknapp</Flatknapp>
+<Preview react={`<Knapp type="flat">Flatknapp</Knapp>`}>
+  <Knapp type="flat">Flatknapp</Knapp>
 </Preview>
 
 ## Med spinner
 
 Alle knappene våre har støtte for å vise en spinner.
 
-<Preview>
+<Preview
+  react={`<><Knapp spinner>Normal</Knapp>
+  <Knapp type="hoved" spinner>Hoved</Knapp>
+  <Knapp type="fare" spinner>Fare</Knapp>
+  <Knapp type="flat" spinner>Flat</Knapp>
+  <Knapp disabled spinner>
+    Disabled
+  </Knapp></>`}
+>
   <Knapp spinner>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp spinner>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp spinner>Fare</Fareknapp>
-  <br />
-  <br />
-  <Flatknapp spinner>Flat</Flatknapp>
-  <br />
-  <br />
+
+<Knapp type="hoved" spinner>
+  Hoved
+</Knapp>
+
+<Knapp type="fare" spinner>
+  Fare
+</Knapp>
+
+<Knapp type="flat" spinner>
+  Flat
+</Knapp>
+
   <Knapp disabled spinner>
     Disabled
   </Knapp>
@@ -93,56 +85,75 @@ Alle knappene våre har støtte for å vise en spinner.
 
 Alle knappene har støtte for disabled stil.
 
-<Alert type="warning">
+<Alert variant="warning">
   Merk at disabled knapper bør unngås, og at man heller bør bruke vanlige
   knapper kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
-  grunn ikke er tillatt. Ler mer om dette på{" "}
+  grunn ikke er tillatt. Ler mer om dette på
   <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
 </Alert>
 
-<Preview>
+<Preview
+  react={`<><Knapp disabled>Normal</Knapp>
+  <Knapp type="hoved" disabled>
+    Hoved
+  </Knapp>
+  <Knapp type="fare" disabled>
+    Fare
+  </Knapp>
+  <Knapp type="flat" disabled>
+    Flat
+  </Knapp></>`}
+>
   <Knapp disabled>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp disabled>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp disabled>Fare</Fareknapp>
-  <br />
-  <br />
-  <Flatknapp disabled>Flat</Flatknapp>
-</Preview>
 
-```jsx
-<Knapp disabled>Normal</Knapp>
-<Hovedknapp disabled>Hoved</Hovedknapp>
-<Fareknapp disabled>Fare</Fareknapp>
-<Flatknapp disabled>Flat</Flatknapp>
-```
+<Knapp type="hoved" disabled>
+  Hoved
+</Knapp>
+
+<Knapp type="fare" disabled>
+  Fare
+</Knapp>
+
+  <Knapp type="flat" disabled>
+    Flat
+  </Knapp>
+</Preview>
 
 ## Mini
 
 Alle knappene kan rendres i en mindre `32px` versjon.
 
-<Alert type="waring">
+<Alert variant="warning">
   Som hovedregel skal vi <strong>alltid</strong> bruke de store knappene våre.
-  For tilfeller med svært begrenset plass kan de mindre knappene brukes{" "}
-  <strong>unntaksvis ved klart behov</strong>.
+  For tilfeller med svært begrenset plass kan de mindre knappene brukes
+  <strong> unntaksvis ved klart behov</strong>.
 </Alert>
 
-<Preview>
+<Preview
+  react={`<><Knapp mini>Normal</Knapp>
+<Knapp type="hoved" mini>
+  Hoved
+</Knapp>
+<Knapp type="fare" mini>
+  Fare
+</Knapp>
+<Knapp type="flat" mini>
+  Flat
+</Knapp>
+  <Knapp disabled mini>
+    Disabled
+  </Knapp></>`}
+>
   <Knapp mini>Normal</Knapp>
-  <br />
-  <br />
-  <Hovedknapp mini>Hoved</Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp mini>Fare</Fareknapp>
-  <br />
-  <br />
-  <Flatknapp mini>Flat</Flatknapp>
-  <br />
-  <br />
+  <Knapp type="hoved" mini>
+    Hoved
+  </Knapp>
+  <Knapp type="fare" mini>
+    Fare
+  </Knapp>
+  <Knapp type="flat" mini>
+    Flat
+  </Knapp>
   <Knapp disabled mini>
     Disabled
   </Knapp>
@@ -150,61 +161,55 @@ Alle knappene kan rendres i en mindre `32px` versjon.
 
 ## Med ikon
 
-<Alert type="info">
-  Når du bruker ikoner er det viktig at du pakker inn teksten med{" "}
-  <code>&lt;span&gt;</code>-elementer for å påse riktig avstand til ikonet.
+<Alert variant="info">
+  Når du bruker ikoner er det viktig at du pakker inn teksten med
+  <code> &lt;span&gt;</code>-elementer for å påse riktig avstand til ikonet.
 </Alert>
 
-<Preview>
+<Preview
+  react={`<><Knapp>
+    <Settings />
+    <span>Normal</span>
+  </Knapp>
+<Knapp type="hoved">
+  <Settings />
+  <span>Hoved</span>
+</Knapp>
+<Knapp type="fare">
+  <Settings />
+  <span>Fare</span>
+</Knapp>
+<Knapp type="flat">
+  <Settings />
+  <span>Flat</span>
+</Knapp>
+  <Knapp disabled>
+    <Settings />
+    <span>Disabled</span>
+  </Knapp></>`}
+>
   <Knapp>
     <Settings />
     <span>Normal</span>
   </Knapp>
-  <br />
-  <br />
-  <Hovedknapp>
-    <Settings />
-    <span>Hoved</span>
-  </Hovedknapp>
-  <br />
-  <br />
-  <Fareknapp>
-    <Settings />
-    <span>Fare</span>
-  </Fareknapp>
-  <br />
-  <br />
-  <Flatknapp>
-    <Settings />
-    <span>Flat</span>
-  </Flatknapp>
-  <br />
-  <br />
+<Knapp type="hoved">
+  <Settings />
+  <span>Hoved</span>
+</Knapp>
+
+<Knapp type="fare">
+  <Settings />
+  <span>Fare</span>
+</Knapp>
+
+<Knapp type="flat">
+  <Settings />
+  <span>Flat</span>
+</Knapp>
+
   <Knapp disabled>
     <Settings />
     <span>Disabled</span>
-  </Knapp>
-</Preview>
-
-### Plassering av ikon
-
-<Preview>
-  <Knapp>
-    <Settings />
-    <span>Knapp</span>
-  </Knapp>
-  <br />
-  <br />
-  <Knapp>
-    <span>Knapp</span>
-    <Settings />
-  </Knapp>
-  <br />
-  <br />
-  <Knapp>
-    <Settings />
-    <span>Knapp</span>
-    <Settings />
   </Knapp>
 </Preview>
 
@@ -212,7 +217,7 @@ Alle knappene kan rendres i en mindre `32px` versjon.
 
 Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
 
-<Alert type="warning">
+<Alert variant="warning">
   Husk at knapper med bare ikoner også må få en tekst-verdi av hensyn til
   skjermlesere. Utility-klassen <code>sr-only</code> som gis av{" "}
   <Link href="https://github.com/navikt/nav-frontend-moduler/blob/master/packages/node_modules/nav-frontend-core/less/_mixins.less">
@@ -221,16 +226,22 @@ Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
   kan brukes for å skjule teksten visuelt.
 </Alert>
 
-<Preview>
-  <Knapp kompakt>
+<Preview
+  react={`<><Knapp kompakt>
     <Settings />
     <span>Knapp</span>
   </Knapp>
-  <br />
-  <br />
   <Knapp kompakt>
     <Settings />
     <span className="sr-only">Knapp</span>
-  </Knapp>
+  </Knapp></>`}
+>
+  <button className="knapp knapp--kompakt">
+    <Settings />
+    <span>Knapp</span>
+  </button>
+  <button className="knapp knapp--kompakt">
+    <Settings />
+    <span className="sr-only">Knapp</span>
+  </button>
 </Preview>
--->

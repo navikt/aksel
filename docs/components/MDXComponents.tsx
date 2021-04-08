@@ -4,10 +4,11 @@ import Import from "./code/Import";
 import Preview from "./code-preview/Preview";
 import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
-import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
+import KnappBase, { Knapp } from "nav-frontend-knapper";
 import { Settings } from "@navikt/ds-icons";
+import renderToString from "next-mdx-remote/render-to-string";
 
-export default {
+const components = {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
   h2: (props) => <Heading size="large" level={2} {...props} />,
   h3: (props) => <Heading size="small" level={3} {...props} />,
@@ -20,8 +21,16 @@ export default {
   Alert,
   Link,
   Knapp,
-  Fareknapp,
-  Flatknapp,
-  Hovedknapp,
   Settings,
 };
+
+export default components;
+
+/* export const mdxSource = (content) => {
+  return renderToString(content, {
+    components: { components },
+    mdxOptions: {
+      remarkPlugins: [require("remark-slug")],
+    },
+  });
+}; */
