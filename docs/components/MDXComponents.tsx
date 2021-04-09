@@ -6,7 +6,11 @@ import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
 import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
 import Alertstripe from "nav-frontend-alertstriper";
+import { BekreftCheckboksPanel } from "nav-frontend-skjema";
+import Lenke from "nav-frontend-lenker";
 import { Settings } from "@navikt/ds-icons";
+import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Normal";
+import BekreftcheckboxpanelExample2 from "../examples/bekreftcheckboxpanel/Feilmelding";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -26,4 +30,8 @@ export default {
   Hovedknapp,
   Settings,
   Alertstripe,
+  BekreftCheckboksPanel,
+  Lenke,
+  BekreftcheckboxpanelExample1,
+  BekreftcheckboxpanelExample2,
 };
