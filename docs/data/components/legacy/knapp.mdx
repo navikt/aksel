@@ -2,11 +2,21 @@
 title: Knapp
 ---
 
-<!--
-<Npm packName="nav-frontend-knapper" imports="Button" />
- -->
-
 # Knapp
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-knapper classnames nav-frontend-js-utils
+  lodash.throttle prop-types react nav-frontend-knapper-style nav-frontend-core
+  nav-frontend-typografi-style --save`}
+/>
+
+<Npm packName="nav-frontend-knapper" imports="Knapp" />
 
 ## Normal
 
@@ -49,38 +59,6 @@ Denne knappen kan brukes som et alternativ til normal knapp ved behov.
   <Knapp type="flat">Flatknapp</Knapp>
 </Preview>
 
-## Med spinner
-
-Alle knappene våre har støtte for å vise en spinner.
-
-<Preview
-  react={`<><Knapp spinner>Normal</Knapp>
-  <Knapp type="hoved" spinner>Hoved</Knapp>
-  <Knapp type="fare" spinner>Fare</Knapp>
-  <Knapp type="flat" spinner>Flat</Knapp>
-  <Knapp disabled spinner>
-    Disabled
-  </Knapp></>`}
->
-  <Knapp spinner>Normal</Knapp>
-
-<Knapp type="hoved" spinner>
-  Hoved
-</Knapp>
-
-<Knapp type="fare" spinner>
-  Fare
-</Knapp>
-
-<Knapp type="flat" spinner>
-  Flat
-</Knapp>
-
-  <Knapp disabled spinner>
-    Disabled
-  </Knapp>
-</Preview>
-
 ## Disabled
 
 Alle knappene har støtte for disabled stil.
@@ -88,8 +66,7 @@ Alle knappene har støtte for disabled stil.
 <Alert variant="warning">
   Merk at disabled knapper bør unngås, og at man heller bør bruke vanlige
   knapper kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
-  grunn ikke er tillatt. Ler mer om dette på
-  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+  grunn ikke er tillatt.
 </Alert>
 
 <Preview
@@ -159,11 +136,36 @@ Alle knappene kan rendres i en mindre `32px` versjon.
   </Knapp>
 </Preview>
 
+### Kompakt
+
+Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
+
+<Preview
+  react={`<Knapp kompakt>
+    <Settings />
+    <span>Knapp</span>
+  </Knapp>`}
+>
+  <button className="knapp knapp--kompakt">
+    <Settings />
+    <span>Knapp</span>
+  </button>
+</Preview>
+
 ## Med ikon
 
 <Alert variant="info">
   Når du bruker ikoner er det viktig at du pakker inn teksten med
   <code> &lt;span&gt;</code>-elementer for å påse riktig avstand til ikonet.
+</Alert>
+<br />
+<Alert variant="warning">
+  Husk at knapper med bare ikoner også må få en tekst-verdi av hensyn til
+  skjermlesere. Utility-klassen <code>sr-only</code> som gis av{" "}
+  <Link href="https://github.com/navikt/nav-frontend-moduler/blob/master/packages/node_modules/nav-frontend-core/less/_mixins.less">
+    mixins-fila i Core-pakken
+  </Link>{" "}
+  kan brukes for å skjule teksten visuelt.
 </Alert>
 
 <Preview
@@ -186,7 +188,11 @@ Alle knappene kan rendres i en mindre `32px` versjon.
   <Knapp disabled>
     <Settings />
     <span>Disabled</span>
-  </Knapp></>`}
+  </Knapp>
+  <Knapp>
+  <Settings />
+  <span className="sr-only">Knapp</span>
+</Knapp></>`}
 >
   <Knapp>
     <Settings />
@@ -196,54 +202,55 @@ Alle knappene kan rendres i en mindre `32px` versjon.
   <Settings />
   <span>Hoved</span>
 </Knapp>
-
 <Knapp type="fare">
   <Settings />
   <span>Fare</span>
 </Knapp>
-
 <Knapp type="flat">
   <Settings />
   <span>Flat</span>
 </Knapp>
+<Knapp disabled>
+  <Settings />
+  <span>Disabled</span>
+</Knapp>
+<Knapp>
+  <Settings />
+  <span className="sr-only">Knapp</span>
+</Knapp>
 
-  <Knapp disabled>
-    <Settings />
-    <span>Disabled</span>
-  </Knapp>
 </Preview>
 
-### Kompakt
+## Med spinner
 
-Bruk `kompakt` for å redusere høyre-/venstre-padding på knappene.
-
-<Alert variant="warning">
-  Husk at knapper med bare ikoner også må få en tekst-verdi av hensyn til
-  skjermlesere. Utility-klassen <code>sr-only</code> som gis av{" "}
-  <Link href="https://github.com/navikt/nav-frontend-moduler/blob/master/packages/node_modules/nav-frontend-core/less/_mixins.less">
-    mixins-fila i Core-pakken
-  </Link>{" "}
-  kan brukes for å skjule teksten visuelt.
-</Alert>
+Alle knappene våre har støtte for å vise en spinner.
 
 <Preview
-  react={`<><Knapp kompakt>
-    <Settings />
-    <span>Knapp</span>
-  </Knapp>
-  <Knapp kompakt>
-    <Settings />
-    <span className="sr-only">Knapp</span>
+  react={`<><Knapp spinner>Normal</Knapp>
+  <Knapp type="hoved" spinner>Hoved</Knapp>
+  <Knapp type="fare" spinner>Fare</Knapp>
+  <Knapp type="flat" spinner>Flat</Knapp>
+  <Knapp disabled spinner>
+    Disabled
   </Knapp></>`}
 >
-  <button className="knapp knapp--kompakt">
-    <Settings />
-    <span>Knapp</span>
-  </button>
-  <button className="knapp knapp--kompakt">
-    <Settings />
-    <span className="sr-only">Knapp</span>
-  </button>
+  <Knapp spinner>Normal</Knapp>
+
+<Knapp type="hoved" spinner>
+  Hoved
+</Knapp>
+
+<Knapp type="fare" spinner>
+  Fare
+</Knapp>
+
+<Knapp type="flat" spinner>
+  Flat
+</Knapp>
+
+  <Knapp disabled spinner>
+    Disabled
+  </Knapp>
 </Preview>
 
 ## Tilgjengelighet
