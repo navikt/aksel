@@ -5,6 +5,7 @@ import Preview from "./code-preview/Preview";
 import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
 import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
+import Alertstripe from "nav-frontend-alertstriper";
 import { Settings } from "@navikt/ds-icons";
 
 export default {
@@ -24,4 +25,5 @@ export default {
   Flatknapp,
   Hovedknapp,
   Settings,
+  Alertstripe,
 };
