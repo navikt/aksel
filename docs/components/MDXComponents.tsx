@@ -10,13 +10,24 @@ import Chevron from "nav-frontend-chevron";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import Etikett from "nav-frontend-etiketter";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
-import { Undertittel, Normaltekst } from "nav-frontend-typografi";
+import { Element, Undertittel, Normaltekst } from "nav-frontend-typografi";
+import {
+  Hamburgerknapp,
+  Tilbakeknapp,
+  Nesteknapp,
+  Xknapp,
+  Søkeknapp,
+  Menyknapp,
+  Systemerknapp,
+} from "nav-frontend-ikonknapper";
 import {
   BekreftCheckboksPanel,
   CheckboksPanelGruppe,
   FnrInput,
   Feiloppsummering,
   Input,
+  SkjemaGruppe,
+  Label,
 } from "nav-frontend-skjema";
 import Lenke from "nav-frontend-lenker";
 import { Settings } from "@navikt/ds-icons";
@@ -29,6 +40,7 @@ export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
   h2: (props) => <Heading size="large" level={2} {...props} />,
   h3: (props) => <Heading size="small" level={3} {...props} />,
+  h4: (props) => <Heading size="small" level={4} {...props} />,
   p: (props) => <Paragraph size="medium" {...props} />,
   Bash,
   Preview,
@@ -48,6 +60,7 @@ export default {
   Chevron,
   Ekspanderbartpanel,
   Etikett,
+  Element,
   Normaltekst,
   Undertittel,
   Lenke,
@@ -55,6 +68,15 @@ export default {
   Input,
   Feiloppsummering,
   Hjelpetekst,
+  Hamburgerknapp,
+  Tilbakeknapp,
+  Nesteknapp,
+  Xknapp,
+  Søkeknapp,
+  Menyknapp,
+  Systemerknapp,
+  SkjemaGruppe,
+  Label,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,
