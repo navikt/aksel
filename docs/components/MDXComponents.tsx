@@ -6,11 +6,24 @@ import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
 import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
 import Alertstripe from "nav-frontend-alertstriper";
-import { BekreftCheckboksPanel } from "nav-frontend-skjema";
+import Chevron from "nav-frontend-chevron";
+import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
+import Etikett from "nav-frontend-etiketter";
+import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { Undertittel, Normaltekst } from "nav-frontend-typografi";
+import {
+  BekreftCheckboksPanel,
+  CheckboksPanelGruppe,
+  FnrInput,
+  Feiloppsummering,
+  Input,
+} from "nav-frontend-skjema";
 import Lenke from "nav-frontend-lenker";
 import { Settings } from "@navikt/ds-icons";
 import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Normal";
 import BekreftcheckboxpanelExample2 from "../examples/bekreftcheckboxpanel/Feilmelding";
+import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
+import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -31,7 +44,19 @@ export default {
   Settings,
   Alertstripe,
   BekreftCheckboksPanel,
+  CheckboksPanelGruppe,
+  Chevron,
+  Ekspanderbartpanel,
+  Etikett,
+  Normaltekst,
+  Undertittel,
   Lenke,
+  FnrInput,
+  Input,
+  Feiloppsummering,
+  Hjelpetekst,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
+  EkspanderbartpanelExample,
+  FnrInputExample,
 };
