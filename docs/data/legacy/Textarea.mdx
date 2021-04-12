@@ -1,0 +1,190 @@
+---
+title: Popover
+---
+
+# Popover
+
+Popover er et flytende panel av vilkårlig størrelse som kan posisjonere seg selv i forhold til et annet element.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-popover classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-popover-style react-dom --save`}
+/>
+
+<Npm packName="nav-frontend-popover" imports="Popover" defaultExport />
+
+## Normal
+
+Normal variant av komponenten er skjult. For å åpne komponenten må den få et annet element som anker.
+Typisk er det elementet som åpner komponenten som bør bli komponentens anker (som i eksempelet med knappen
+nedenfor). Popover-komponenten vil da posisjonere seg selv i forhold til dette anker-elementet.
+
+<Preview
+  react={`<div>
+        <Knapp
+          onClick={(e) => this.togglePopover(e.currentTarget)}
+          aria-expanded={this.state.anker !== undefined}
+          aria-controls={this.popoverId}
+          aria-haspopup="dialog"
+        >
+          Åpne popover
+        </Knapp>
+        <Popover
+          id={this.popoverId}
+          ankerEl={this.state.anker}
+          onRequestClose={() => this.setState({ anker: undefined })}
+        >
+          <p style={{ padding: "1rem" }}>Dette er en popover.</p>
+        </Popover>
+      </div>`}
+>
+  <PopoverNormalEksempel />
+</Preview>
+
+## Orientering
+
+Komponenten kan posisjonere seg med forskjellige orienteringer i forhold til anker-elementet. Default er `over`, men
+kan også være `under`, `hoyre`, `venstre`, `over-venstre`, `over-hoyre`, `under-venstre` eller `under-hoyre`.
+
+<!--
+<Preview react={`<div>
+        <div style={{ width: 204 }}>
+          <Select
+            label="Velg orientering"
+            onChange={(e) => this.setState({ orientering: e.target.value })}
+            defaultValue={this.state.orientering}
+          >
+            <option value="over">Over</option>
+            <option value="under">Under</option>
+            <option value="hoyre">Høyre</option>
+            <option value="venstre">Venstre</option>
+            <option value="over-venstre">Over, fra venstre kant</option>
+            <option value="over-hoyre">Over, fra høyre kant</option>
+            <option value="under-venstre">Under, fra venstre kant</option>
+            <option value="under-hoyre">Under, fra høyre kant</option>
+          </Select>
+          <Knapp onClick={(e) => this.togglePopover(e.currentTarget)}>
+            Åpne popover
+          </Knapp>
+        </div>
+
+        <Popover
+          ankerEl={this.state.anker}
+          onRequestClose={() => this.setState({ anker: undefined })}
+          orientering={this.state.orientering}
+        >
+          <p style={{ margin: "1rem", maxWidth: 300 }}>
+            Dette er en popover som bruker{" "}
+            <code className="inline">orientering</code>
+            -propen til å posisjonere seg i forhold til ankeret sitt.
+          </p>
+        </Popover>
+      </div>`}>
+
+  <PopoverOrienteringEksempel />
+</Preview>
+
+
+ -->
+
+## Uten pil
+
+Du kan også skru av pilen og få komponenten til å posisjonere seg helt inntil anker-elementet sitt. Kjekt hvis man f.eks. vil lage typiske dropdown-menyer:
+
+<Preview
+  react={`<div>
+        <Menyknapp
+          id={this.buttonId}
+          onClick={(e) => this.togglePopover(e.currentTarget)}
+          aria-expanded={this.state.anker !== undefined}
+          aria-controls={this.popoverId}
+          aria-haspopup="menu"
+        >
+          <span>Dropdown meny</span>
+        </Menyknapp>
+        <Popover
+          id={this.popoverId}
+          ankerEl={this.state.anker}
+          onRequestClose={() => this.setState({ anker: undefined })}
+          orientering="under"
+          autoFokus={false}
+          tabIndex={-1}
+          utenPil
+        >
+          <ul
+            className="menu"
+            role="menu"
+            style={{ minWidth: 190 }}
+            aria-labelledby={this.buttonId}
+          >
+            <li>
+              <a
+                role="menuitem"
+                className="lenke"
+                href="#"
+                ref={(node) => node && node.focus()}
+              >
+                Et valg
+              </a>
+            </li>
+            <li>
+              <a role="menuitem" className="lenke" href="#">
+                Et annet valg
+              </a>
+            </li>
+            <li>
+              <a role="menuitem" className="lenke" href="#">
+                Et tredje valg
+              </a>
+            </li>
+            <li>
+              <a role="menuitem" className="lenke" href="#">
+                Et fjerde valg
+              </a>
+            </li>
+          </ul>
+        </Popover>
+      </div>`}
+>
+  <PopoverDropdownEksempel />
+</Preview>
+
+## Input-trigger
+
+<Preview
+  react={`<div>
+        <Input label="Skriv noe" onChange={this.handleChange} />
+        <Popover
+          id={this.popoverId}
+          ankerEl={this.state.anker}
+          onRequestClose={() => this.setState({ anker: undefined })}
+          orientering="under-venstre"
+          autoFokus={false}
+          utenPil
+        >
+          <p style={{ padding: "1rem" }}>Dette er en popover.</p>
+        </Popover>
+      </div>`}
+>
+  <PopoverInputEksempel />
+</Preview>
+
+## Base
+
+Selve Popover-vinduet er en selvstendig "dum" komponent kalt `PopoverBase` som du kan bruke hvis du
+ønsker å håndtere posisjonering osv. manuelt.
+
+<Preview
+  react={`<PopoverBase>
+    <div style={{ padding: "1rem" }}>Dette er en PopoverBase</div>
+  </PopoverBase>`}
+>
+  <PopoverBase>
+    <div style={{ padding: "1rem" }}>Dette er en PopoverBase</div>
+  </PopoverBase>
+</Preview>

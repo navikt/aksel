@@ -38,6 +38,8 @@ import {
   Input,
   SkjemaGruppe,
   Label,
+  Radio,
+  RadioGruppe,
 } from "nav-frontend-skjema";
 import Lenke from "nav-frontend-lenker";
 import { Settings } from "@navikt/ds-icons";
@@ -51,6 +53,7 @@ import PopoverNormalEksempel from "../examples/popover/_popover-normal.example";
 import PopoverOrienteringEksempel from "../examples/popover/_popover-orientering.example";
 import PopoverInputEksempel from "../examples/popover/_popover-input.example";
 import PopoverDropdownEksempel from "../examples/popover/_popover-dropdown.example";
+import RadioPanelGruppeExample from "../examples/navfrontendskjema/radiopanelgruppe";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -102,6 +105,8 @@ export default {
   Panel,
   Popover,
   PopoverBase,
+  Radio,
+  RadioGruppe,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,
@@ -111,4 +116,5 @@ export default {
   PopoverInputEksempel,
   PopoverNormalEksempel,
   PopoverOrienteringEksempel,
+  RadioPanelGruppeExample,
 };
