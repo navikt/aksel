@@ -1,7 +1,6 @@
 import { Heading, Paragraph, Alert, Link } from "@navikt/ds-react";
 import Bash from "./code/Bash";
 import Import from "./code/Import";
-import Preview from "./code-preview/Preview";
 import Npm from "./npm/Npm";
 import TableOfContents from "./table-of-contents/TableOfContents";
 import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
@@ -10,7 +9,18 @@ import Chevron from "nav-frontend-chevron";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import Etikett from "nav-frontend-etiketter";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
-import { Element, Undertittel, Normaltekst } from "nav-frontend-typografi";
+import Lesmerpanel from "nav-frontend-lesmerpanel";
+import Modal from "nav-frontend-modal";
+import Popover, { PopoverBase } from "nav-frontend-popover";
+import Lenkepanel, { LenkepanelBase } from "nav-frontend-lenkepanel";
+import Panel from "nav-frontend-paneler";
+import {
+  Element,
+  Undertittel,
+  Normaltekst,
+  Innholdstittel,
+  Systemtittel,
+} from "nav-frontend-typografi";
 import {
   Hamburgerknapp,
   Tilbakeknapp,
@@ -35,6 +45,12 @@ import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Norma
 import BekreftcheckboxpanelExample2 from "../examples/bekreftcheckboxpanel/Feilmelding";
 import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
 import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
+import ModalExample from "../examples/modal/modal-example";
+import Preview from "./code-preview/Preview";
+import PopoverNormalEksempel from "../examples/popover/_popover-normal.example";
+import PopoverOrienteringEksempel from "../examples/popover/_popover-orientering.example";
+import PopoverInputEksempel from "../examples/popover/_popover-input.example";
+import PopoverDropdownEksempel from "../examples/popover/_popover-dropdown.example";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -63,6 +79,8 @@ export default {
   Element,
   Normaltekst,
   Undertittel,
+  Innholdstittel,
+  Systemtittel,
   Lenke,
   FnrInput,
   Input,
@@ -77,8 +95,20 @@ export default {
   Systemerknapp,
   SkjemaGruppe,
   Label,
+  Lenkepanel,
+  LenkepanelBase,
+  Lesmerpanel,
+  Modal,
+  Panel,
+  Popover,
+  PopoverBase,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,
   FnrInputExample,
+  ModalExample,
+  PopoverDropdownEksempel,
+  PopoverInputEksempel,
+  PopoverNormalEksempel,
+  PopoverOrienteringEksempel,
 };

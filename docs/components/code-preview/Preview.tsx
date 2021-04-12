@@ -10,8 +10,8 @@ const prettierOptions = {
   semi: true,
   parser: "babel",
   plugins: [ParserBabel],
-  jsxBracketSameLine: false,
-  printWidth: 30,
+  jsxBracketSameLine: true,
+  printWidth: 60,
 };
 
 interface PreviewProps {
