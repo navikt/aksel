@@ -1,59 +1,80 @@
-import { Heading, Paragraph, Alert, Link } from "@navikt/ds-react";
-import Bash from "./code/Bash";
-import Import from "./code/Import";
-import Npm from "./npm/Npm";
-import TableOfContents from "./table-of-contents/TableOfContents";
-import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "nav-frontend-knapper";
+import { Settings } from "@navikt/ds-icons";
+import { Alert, Heading, Link, Paragraph } from "@navikt/ds-react";
 import Alertstripe from "nav-frontend-alertstriper";
 import Chevron from "nav-frontend-chevron";
 import Ekspanderbartpanel from "nav-frontend-ekspanderbartpanel";
 import Etikett from "nav-frontend-etiketter";
 import Hjelpetekst from "nav-frontend-hjelpetekst";
-import Lesmerpanel from "nav-frontend-lesmerpanel";
-import Modal from "nav-frontend-modal";
-import Popover, { PopoverBase } from "nav-frontend-popover";
-import Lenkepanel, { LenkepanelBase } from "nav-frontend-lenkepanel";
-import Panel from "nav-frontend-paneler";
-import {
-  Element,
-  Undertittel,
-  Normaltekst,
-  Innholdstittel,
-  Systemtittel,
-} from "nav-frontend-typografi";
 import {
   Hamburgerknapp,
-  Tilbakeknapp,
-  Nesteknapp,
-  Xknapp,
-  Søkeknapp,
   Menyknapp,
+  Nesteknapp,
   Systemerknapp,
+  Søkeknapp,
+  Tilbakeknapp,
+  Xknapp,
 } from "nav-frontend-ikonknapper";
+import { Fareknapp, Flatknapp, Hovedknapp, Knapp } from "nav-frontend-knapper";
+import Lenkepanel, { LenkepanelBase } from "nav-frontend-lenkepanel";
+import Lenke from "nav-frontend-lenker";
+import Lesmerpanel from "nav-frontend-lesmerpanel";
+import Modal from "nav-frontend-modal";
+import Panel from "nav-frontend-paneler";
+import Popover, { PopoverBase } from "nav-frontend-popover";
 import {
   BekreftCheckboksPanel,
   CheckboksPanelGruppe,
-  FnrInput,
+  Checkbox,
+  CheckboxGruppe,
   Feiloppsummering,
+  FnrInput,
   Input,
-  SkjemaGruppe,
   Label,
   Radio,
   RadioGruppe,
+  Select,
+  SkjemaGruppe,
+  Textarea,
+  TextareaControlled,
 } from "nav-frontend-skjema";
-import Lenke from "nav-frontend-lenker";
-import { Settings } from "@navikt/ds-icons";
-import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Normal";
+import Snakkeboble from "nav-frontend-snakkeboble";
+import Spinner from "nav-frontend-spinner";
+import Stegindikator from "nav-frontend-stegindikator";
+import "nav-frontend-tabell-style";
+import Tabs from "nav-frontend-tabs";
+import Tekstomrade from "nav-frontend-tekstomrade";
+import { ToggleGruppe, ToggleKnapp } from "nav-frontend-toggle";
+import {
+  Element,
+  Feilmelding,
+  Ingress,
+  Innholdstittel,
+  Normaltekst,
+  Sidetittel,
+  Systemtittel,
+  Undertekst,
+  UndertekstBold,
+  Undertittel,
+} from "nav-frontend-typografi";
+import Veileder from "nav-frontend-veileder";
+import Veilederpanel from "nav-frontend-veilederpanel";
 import BekreftcheckboxpanelExample2 from "../examples/bekreftcheckboxpanel/Feilmelding";
+import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Normal";
 import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
-import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
 import ModalExample from "../examples/modal/modal-example";
-import Preview from "./code-preview/Preview";
+import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
+import RadioPanelGruppeExample from "../examples/navfrontendskjema/radiopanelgruppe";
+import TextareaExample from "../examples/navfrontendskjema/textarea-example";
+import PopoverDropdownEksempel from "../examples/popover/_popover-dropdown.example";
+import PopoverInputEksempel from "../examples/popover/_popover-input.example";
 import PopoverNormalEksempel from "../examples/popover/_popover-normal.example";
 import PopoverOrienteringEksempel from "../examples/popover/_popover-orientering.example";
-import PopoverInputEksempel from "../examples/popover/_popover-input.example";
-import PopoverDropdownEksempel from "../examples/popover/_popover-dropdown.example";
-import RadioPanelGruppeExample from "../examples/navfrontendskjema/radiopanelgruppe";
+import TekstomradeExample from "../examples/tekstomrade/tekstomrade-example";
+import Preview from "./code-preview/Preview";
+import Bash from "./code/Bash";
+import Import from "./code/Import";
+import Npm from "./npm/Npm";
+import TableOfContents from "./table-of-contents/TableOfContents";
 
 export default {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -84,6 +105,11 @@ export default {
   Undertittel,
   Innholdstittel,
   Systemtittel,
+  Sidetittel,
+  Undertekst,
+  Feilmelding,
+  UndertekstBold,
+  Ingress,
   Lenke,
   FnrInput,
   Input,
@@ -107,6 +133,20 @@ export default {
   PopoverBase,
   Radio,
   RadioGruppe,
+  Select,
+  Checkbox,
+  CheckboxGruppe,
+  TextareaControlled,
+  Textarea,
+  Snakkeboble,
+  Spinner,
+  Stegindikator,
+  Tabs,
+  Tekstomrade,
+  ToggleGruppe,
+  ToggleKnapp,
+  Veileder,
+  Veilederpanel,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,
@@ -117,4 +157,6 @@ export default {
   PopoverNormalEksempel,
   PopoverOrienteringEksempel,
   RadioPanelGruppeExample,
+  TekstomradeExample,
+  TextareaExample,
 };

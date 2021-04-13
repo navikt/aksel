@@ -16,17 +16,20 @@ const prettierOptions = {
 
 interface PreviewProps {
   react: string;
+  html?: React.ReactElement;
   children?: React.ReactElement;
   hideHtml?: boolean;
+  defaultClosed?: false;
 }
 
 const Preview = ({
   children,
   react,
+  html,
+  defaultClosed,
   hideHtml = false,
-  ...props
 }: PreviewProps) => {
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(defaultClosed ? null : 0);
   const handleChange = (x: number) => {
     if (tab === x) {
       setTab(null);
@@ -38,9 +41,15 @@ const Preview = ({
   const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
   const htmlFormat =
     !!children &&
+    !hideHtml &&
     Prettier.format(
       renderToString(
-        React.Children.count(children) > 1 ? <div>{children}</div> : children
+        html ??
+          (React.Children.count(children) > 1 ? (
+            <div>{children}</div>
+          ) : (
+            children
+          ))
       ),
       prettierOptions
     )

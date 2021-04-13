@@ -1,10 +1,10 @@
 ---
-title: Popover
+title: Typografi
 ---
 
-# Popover
+# Typografi
 
-Popover er et flytende panel av vilkårlig størrelse som kan posisjonere seg selv i forhold til et annet element.
+Typografi-pakken vår består av flere tekstkomponenter med forhåndsbestemt størrelse og styling.
 
 <TableOfContents />
 
@@ -13,178 +13,153 @@ Popover er et flytende panel av vilkårlig størrelse som kan posisjonere seg se
 <Bash
   terminal
   copy
-  code={`npm install nav-frontend-popover classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-popover-style react-dom --save`}
+  code={`npm install nav-frontend-typografi classnames nav-frontend-core nav-frontend-typografi-style prop-types react --save`}
 />
 
-<Npm packName="nav-frontend-popover" imports="Popover" defaultExport />
+<Npm
+  packName="nav-frontend-typografi"
+  imports={[
+    "Element",
+    "Feilmelding",
+    "Ingress",
+    "Innholdstittel",
+    "Normaltekst",
+    "Sidetittel",
+    "Systemtittel",
+    "Undertekst",
+    "UndertekstBold",
+    "Undertittel",
+  ]}
+/>
 
-## Normal
+## Bruk av Typografi i prosjekter
 
-Normal variant av komponenten er skjult. For å åpne komponenten må den få et annet element som anker.
-Typisk er det elementet som åpner komponenten som bør bli komponentens anker (som i eksempelet med knappen
-nedenfor). Popover-komponenten vil da posisjonere seg selv i forhold til dette anker-elementet.
+For å sikre at prosjektet ditt får riktig typografi bruker typografi-komponenten vår denne CSS-klassen fra `nav-frontend-typografi-style`.
 
-<Preview
-  react={`<div>
-        <Knapp
-          onClick={(e) => this.togglePopover(e.currentTarget)}
-          aria-expanded={this.state.anker !== undefined}
-          aria-controls={this.popoverId}
-          aria-haspopup="dialog"
-        >
-          Åpne popover
-        </Knapp>
-        <Popover
-          id={this.popoverId}
-          ankerEl={this.state.anker}
-          onRequestClose={() => this.setState({ anker: undefined })}
-        >
-          <p style={{ padding: "1rem" }}>Dette er en popover.</p>
-        </Popover>
-      </div>`}
->
-  <PopoverNormalEksempel />
-</Preview>
+<Bash
+  copy
+  language="css"
+  code={`.app {
+  .typo-normal-mixin();
+  color: @navMorkGra;
+  font-family: @font-family;
+  line-height: @line-height-base;
+}`}
+/>
 
-## Orientering
+Det antas da at prosjektet er pakket inn under CSS-klassen `.app` å disse blir da lagt til der. Hvis dette ikke er tilfellet i prosjektet ditt,
+kan det være greit å legge til manuelt da man sikrer at hele prosjektet får riktig typografi.
+Dette kan gjøres ved å legge til
 
-Komponenten kan posisjonere seg med forskjellige orienteringer i forhold til anker-elementet. Default er `over`, men
-kan også være `under`, `hoyre`, `venstre`, `over-venstre`, `over-hoyre`, `under-venstre` eller `under-hoyre`.
+<Bash
+  code={`@import (reference) "~nav-frontend-typografi-style/src/index.less";`}
+  copy
+  language="css"
+/>
 
-<!--
-<Preview react={`<div>
-        <div style={{ width: 204 }}>
-          <Select
-            label="Velg orientering"
-            onChange={(e) => this.setState({ orientering: e.target.value })}
-            defaultValue={this.state.orientering}
-          >
-            <option value="over">Over</option>
-            <option value="under">Under</option>
-            <option value="hoyre">Høyre</option>
-            <option value="venstre">Venstre</option>
-            <option value="over-venstre">Over, fra venstre kant</option>
-            <option value="over-hoyre">Over, fra høyre kant</option>
-            <option value="under-venstre">Under, fra venstre kant</option>
-            <option value="under-hoyre">Under, fra høyre kant</option>
-          </Select>
-          <Knapp onClick={(e) => this.togglePopover(e.currentTarget)}>
-            Åpne popover
-          </Knapp>
-        </div>
+i ønsket less fil og da legge til klassen `app` på elementet som pakker in prosjektet ditt.
 
-        <Popover
-          ankerEl={this.state.anker}
-          onRequestClose={() => this.setState({ anker: undefined })}
-          orientering={this.state.orientering}
-        >
-          <p style={{ margin: "1rem", maxWidth: 300 }}>
-            Dette er en popover som bruker{" "}
-            <code className="inline">orientering</code>
-            -propen til å posisjonere seg i forhold til ankeret sitt.
-          </p>
-        </Popover>
-      </div>`}>
-
-  <PopoverOrienteringEksempel />
-</Preview>
-
-
- -->
-
-## Uten pil
-
-Du kan også skru av pilen og få komponenten til å posisjonere seg helt inntil anker-elementet sitt. Kjekt hvis man f.eks. vil lage typiske dropdown-menyer:
+## Alle vekter
 
 <Preview
-  react={`<div>
-        <Menyknapp
-          id={this.buttonId}
-          onClick={(e) => this.togglePopover(e.currentTarget)}
-          aria-expanded={this.state.anker !== undefined}
-          aria-controls={this.popoverId}
-          aria-haspopup="menu"
-        >
-          <span>Dropdown meny</span>
-        </Menyknapp>
-        <Popover
-          id={this.popoverId}
-          ankerEl={this.state.anker}
-          onRequestClose={() => this.setState({ anker: undefined })}
-          orientering="under"
-          autoFokus={false}
-          tabIndex={-1}
-          utenPil
-        >
-          <ul
-            className="menu"
-            role="menu"
-            style={{ minWidth: 190 }}
-            aria-labelledby={this.buttonId}
-          >
-            <li>
-              <a
-                role="menuitem"
-                className="lenke"
-                href="#"
-                ref={(node) => node && node.focus()}
-              >
-                Et valg
-              </a>
-            </li>
-            <li>
-              <a role="menuitem" className="lenke" href="#">
-                Et annet valg
-              </a>
-            </li>
-            <li>
-              <a role="menuitem" className="lenke" href="#">
-                Et tredje valg
-              </a>
-            </li>
-            <li>
-              <a role="menuitem" className="lenke" href="#">
-                Et fjerde valg
-              </a>
-            </li>
-          </ul>
-        </Popover>
-      </div>`}
+  react={`<Sidetittel>Sidetittel</Sidetittel>`}
+  html={<Sidetittel>Sidetittel</Sidetittel>}
 >
-  <PopoverDropdownEksempel />
+  <Sidetittel>Sidetittel</Sidetittel>
+  <Undertekst>Font size: 40px</Undertekst>
+  <Undertekst>Line height: 44px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
 </Preview>
 
-## Input-trigger
-
 <Preview
-  react={`<div>
-        <Input label="Skriv noe" onChange={this.handleChange} />
-        <Popover
-          id={this.popoverId}
-          ankerEl={this.state.anker}
-          onRequestClose={() => this.setState({ anker: undefined })}
-          orientering="under-venstre"
-          autoFokus={false}
-          utenPil
-        >
-          <p style={{ padding: "1rem" }}>Dette er en popover.</p>
-        </Popover>
-      </div>`}
+  react={`<Innholdstittel>Innholdstittel</Innholdstittel>`}
+  html={<Innholdstittel>Innholdstittel</Innholdstittel>}
 >
-  <PopoverInputEksempel />
+  <Innholdstittel>Innholdstittel</Innholdstittel>
+  <Undertekst>Font size: 32px</Undertekst>
+  <Undertekst>Line height: 36px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
 </Preview>
 
-## Base
-
-Selve Popover-vinduet er en selvstendig "dum" komponent kalt `PopoverBase` som du kan bruke hvis du
-ønsker å håndtere posisjonering osv. manuelt.
+<Preview
+  react={`<Systemtittel>Systemtittel</Systemtittel>`}
+  html={<Systemtittel>Systemtittel</Systemtittel>}
+>
+  <Systemtittel>Systemtittel</Systemtittel>
+  <Undertekst>Font size: 24px</Undertekst>
+  <Undertekst>Line height: 28px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
+</Preview>
 
 <Preview
-  react={`<PopoverBase>
-    <div style={{ padding: "1rem" }}>Dette er en PopoverBase</div>
-  </PopoverBase>`}
+  react={`<Undertittel>Undertittel</Undertittel>`}
+  html={<Undertittel>Undertittel</Undertittel>}
 >
-  <PopoverBase>
-    <div style={{ padding: "1rem" }}>Dette er en PopoverBase</div>
-  </PopoverBase>
+  <Undertittel>Undertittel</Undertittel>
+  <Undertekst>Font size: 20px</Undertekst>
+  <Undertekst>Line height: 25px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
+</Preview>
+
+<Preview react={`<Ingress>Ingress</Ingress>`} html={<Ingress>Ingress</Ingress>}>
+  <Ingress>Ingress</Ingress>
+  <Undertekst>Font size: 18px</Undertekst>
+  <Undertekst>Line height: 26px</Undertekst>
+  <Undertekst>Font weight: 400 regular</Undertekst>
+</Preview>
+
+<Preview react={`<Element>Element</Element>`} html={<Element>Element</Element>}>
+  <Element>Element</Element>
+  <Undertekst>Font size: 16px</Undertekst>
+  <Undertekst>Line height: 22px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
+</Preview>
+
+<Preview
+  react={`<Feilmelding>Feilmelding</Feilmelding>`}
+  html={<Feilmelding>Feilmelding</Feilmelding>}
+>
+  <Feilmelding>Feilmelding</Feilmelding>
+  <Undertekst>Font size: 16px</Undertekst>
+  <Undertekst>Line height: 22px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
+</Preview>
+
+<Preview
+  react={`<Normaltekst>Normaltekst</Normaltekst>`}
+  html={<Normaltekst>Normaltekst</Normaltekst>}
+>
+  <Normaltekst>Normaltekst</Normaltekst>
+  <Undertekst>Font size: 16px</Undertekst>
+  <Undertekst>Line height: 22px</Undertekst>
+  <Undertekst>Font weight: 400 regular</Undertekst>
+</Preview>
+
+<Preview
+  react={`<Undertekst>Undertekst</Undertekst>`}
+  html={<Undertekst>Undertekst</Undertekst>}
+>
+  <Undertekst>Undertekst</Undertekst>
+  <Undertekst>Font size: 14px</Undertekst>
+  <Undertekst>Line height: 20px</Undertekst>
+  <Undertekst>Font weight: 400 regular</Undertekst>
+</Preview>
+
+<Preview
+  react={`<UndertekstBold>UndertekstBold</UndertekstBold>`}
+  html={<UndertekstBold>UndertekstBold</UndertekstBold>}
+>
+  <UndertekstBold>UndertekstBold</UndertekstBold>
+  <Undertekst>Font size: 14px</Undertekst>
+  <Undertekst>Line height: 20px</Undertekst>
+  <Undertekst>Font weight: 600 semi bold</Undertekst>
+</Preview>
+
+## Selvbestemt HTML-tag
+
+Du kan selv bestemme hvilken HTML-tag de forskjellige typografi-vektene skal bruke. For eksempel kan du overstyre `h1`-defaulten for
+`Sidetittel` med `h4` slik:
+
+<Preview react={`<Sidetittel tag="h4">Sidetittel</Sidetittel>`}>
+  <Sidetittel tag="h4">Sidetittel</Sidetittel>
 </Preview>
