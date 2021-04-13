@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Tabs from "../tabs/Tabs";
-import { renderToString } from "react-dom/server";
+import { renderToStaticMarkup } from "react-dom/server";
 import Bash from "../code/Bash";
 import Prettier from "prettier/standalone";
 import ParserBabel from "prettier/parser-babel";
@@ -39,11 +39,11 @@ const Preview = ({
   };
 
   const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
-  const htmlFormat =
+  const htmlFormat = () =>
     !!children &&
     !hideHtml &&
     Prettier.format(
-      renderToString(
+      renderToStaticMarkup(
         html ??
           (React.Children.count(children) > 1 ? (
             <div>{children}</div>
@@ -65,7 +65,11 @@ const Preview = ({
       {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
 
       {(!hideHtml || !!children) && tab === 1 && (
-        <Bash code={htmlFormat} language="jsx" copy />
+        <Bash
+          code={process.browser ? htmlFormat() : `<div />`}
+          language="jsx"
+          copy
+        />
       )}
     </div>
   );
