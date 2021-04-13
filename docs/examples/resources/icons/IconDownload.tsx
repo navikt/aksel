@@ -14,10 +14,11 @@ const IconSidebar = () => {
         style={{ cursor: "pointer" }}
         className="lenkepanel lenkepanel--border resource-link iconSidebar__linkPanels"
         href="/NAV-ikonpakke-png.zip"
+        download="Ikonpakke-png.zip"
         aria-label="Last ned alle ikoner i png format"
       >
         <Undertittel>
-          NAV-ikonpakke-png{" "}
+          Ikonpakke i PNG-format{" "}
           <Normaltekst>
             128px og 256px er ment for digitale presentasjoner
           </Normaltekst>
@@ -30,9 +31,10 @@ const IconSidebar = () => {
         style={{ cursor: "pointer" }}
         className="lenkepanel lenkepanel--border resource-link iconSidebar__linkPanels"
         href="/NAV-ikonpakke-svg.zip"
+        download="Ikonpakke-svg.zip"
         aria-label="Last ned alle ikoner i png format"
       >
-        <Undertittel>NAV-ikonpakke-svg</Undertittel>
+        <Undertittel>Ikonpakke i SVG-format</Undertittel>
         <span className="iconSidebar__save">
           <Download />
         </span>
