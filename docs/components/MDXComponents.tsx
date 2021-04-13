@@ -74,7 +74,13 @@ import Preview from "./code-preview/Preview";
 import Bash from "./code/Bash";
 import Import from "./code/Import";
 import Npm from "./npm/Npm";
+import Inline from "./code/Inline";
 import TableOfContents from "./table-of-contents/TableOfContents";
+import FormValidationExample from "../examples/form-validation/FormValidationExample";
+import Palette from "../examples/resources/colors/Palette";
+import { ButtonIcon, TypoIcon, VeilederIcon } from "./assets/svg";
+import IconPage from "../examples/resources/icons/IconPage";
+import IconDownload from "../examples/resources/icons/IconDownload";
 
 const components = {
   h1: (props) => <Heading size="xxl" level={1} {...props} />,
@@ -83,6 +89,7 @@ const components = {
   h4: (props) => <Heading size="small" level={4} {...props} />,
   p: (props) => <Paragraph size="medium" {...props} />,
   a: (props) => <Link {...props} />,
+  code: (props) => <Inline {...props} />,
   Bash,
   Preview,
   Import,
@@ -145,6 +152,9 @@ const components = {
   ToggleKnapp,
   Veileder,
   Veilederpanel,
+  ButtonIcon,
+  TypoIcon,
+  VeilederIcon,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,
@@ -157,6 +167,10 @@ const components = {
   RadioPanelGruppeExample,
   TekstomradeExample,
   TextareaExample,
+  FormValidationExample,
+  Palette,
+  IconPage,
+  IconDownload,
 };
 
 export default components;

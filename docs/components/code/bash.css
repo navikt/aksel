@@ -55,3 +55,10 @@
 .bash__popover {
   padding: 0.5rem;
 }
+
+.inline-code {
+  color: #c30000;
+  font-family: var(--font-family-code);
+  display: inline-block;
+  padding: 0 0.125rem;
+}

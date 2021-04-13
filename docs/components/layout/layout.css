@@ -93,7 +93,12 @@
   width: 100%;
 
   /* TMP UNTIL LAYOUT UPDATE */
-  max-width: 520px;
+  max-width: 700px;
+}
+
+.contentWrapper > * li {
+  margin-bottom: 0.75rem;
+  line-height: 1.375rem;
 }
 
 .content {

@@ -5,6 +5,8 @@ import Bash from "../code/Bash";
 import Prettier from "prettier/standalone";
 import ParserBabel from "prettier/parser-babel";
 import "./preview.css";
+import OverflowDetector from "../overflow-detector/OverflowDetector";
+import cl from "classnames";
 
 const prettierOptions = {
   semi: true,
@@ -19,14 +21,16 @@ interface PreviewProps {
   html?: React.ReactElement;
   children?: React.ReactElement;
   hideHtml?: boolean;
-  defaultClosed?: false;
+  defaultClosed?: boolean;
+  noCode?: boolean;
 }
 
 const Preview = ({
   children,
   react,
   html,
-  defaultClosed,
+  noCode,
+  defaultClosed = false,
   hideHtml = false,
 }: PreviewProps) => {
   const [tab, setTab] = useState(defaultClosed ? null : 0);
@@ -38,8 +42,10 @@ const Preview = ({
     }
   };
 
-  const reactFormat = Prettier.format(react, prettierOptions).slice(0, -2);
+  const reactFormat =
+    !noCode && Prettier.format(react, prettierOptions).slice(0, -2);
   const htmlFormat = () =>
+    !noCode &&
     !!children &&
     !hideHtml &&
     Prettier.format(
@@ -60,16 +66,30 @@ const Preview = ({
 
   return (
     <div className={"preview__wrapper"}>
-      {!!children && <div className={"preview__container"}>{children}</div>}
-      <Tabs tabs={tabs} tab={tab} onChange={(x) => handleChange(x)} />
-      {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
+      {!!children && (
+        <OverflowDetector>
+          <div
+            className={cl("preview__container", {
+              "preview__container--no-code": noCode,
+            })}
+          >
+            {children}
+          </div>
+        </OverflowDetector>
+      )}
+      {!noCode && (
+        <>
+          <Tabs tabs={tabs} tab={tab} onChange={(x) => handleChange(x)} />
+          {tab === 0 && <Bash code={reactFormat} language="jsx" copy />}
 
-      {(!hideHtml || !!children) && tab === 1 && (
-        <Bash
-          code={process.browser ? htmlFormat() : `<div />`}
-          language="jsx"
-          copy
-        />
+          {(!hideHtml || !!children) && tab === 1 && (
+            <Bash
+              code={process.browser ? htmlFormat() : `<div />`}
+              language="jsx"
+              copy
+            />
+          )}
+        </>
       )}
     </div>
   );
