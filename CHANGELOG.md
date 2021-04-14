@@ -1,6 +1,67 @@
 # Endringslogg
 
+## 08. April 2021
+
+### Gråskala er endret i `nav-frontend-core`
+
+[#1068](https://github.com/navikt/nav-frontend-moduler/pull/1068)
+
+- Gråfargene er endret til en mer nøytral og leselig farge enn tidligere.
+- Alle pakker som bruker `nav-frontend-core` eller har tilknytning til den (inkludert selve pakken) er minor bumpet fra x.0.x -> x.1.0.
+- Letteste måten å oppdatere pakkene på er å kjøre `npm update`
+- Hvis man ønsker å bumpe pakkene manuelt så kan alle `nav-frontend-*` pakker minor bumpes til x.1.x utenom disse:
+- - nav-frontend-chevron-style
+- - nav-frontend-chevron
+- - nav-frontend-fullbreddeknapp-style
+- - nav-frontend-grid-style
+- - nav-frontend-ikoner-assets
+- - nav-frontend-js-utils
+- - nav-frontend-spinner-style
+- - nav-frontend-spinner
+
+## 07. April 2021
+
+### Sourcemapping ds-icons og ds-react
+
+[#1064](https://github.com/navikt/nav-frontend-moduler/pull/1064)
+[#1065](https://github.com/navikt/nav-frontend-moduler/pull/1065)
+
+## 24. Mars 2021
+
+### Smoothscroll og reduced animations
+
+[#1055](https://github.com/navikt/nav-frontend-moduler/pull/1055)
+
+- `@navikt/ds-css` sin baseline setter nå `scroll-behavior: smooth;` på html by default
+- Ved `(prefers-reduced-motion: reduce)` vil baseline redusere animasjoner.
+
 ## 10. Mars 2021
+
+### @navikt/ds-react importerer nå ikke styling i selve komponenten
+
+[#1030](https://github.com/navikt/nav-frontend-moduler/pull/1030)
+
+- Dette betyr at pakken `@navikt/ds-css` må importeres separat ved å endten linke til pakken i `<head>` eller importere den høyt i dom-strukturen.
+
+### @navikt/ds-react og @navikt/ds-icons er nå treeshakable
+
+[#1033](https://github.com/navikt/nav-frontend-moduler/pull/1033)
+
+- Begge pakkene defaulter nå til esm versjonen av pakken. De vanligste bundlerne hånterer da treeshaking selv når pakken blir brukt. Hvis man man ønsker å ta i bruk Commonjs versjonen kan man importere direkte fra `cjs` dir i pakken
+
+```bash
+Esm -> import { Button } from "@navikt/ds-react";
+Cjs -> import { Button } from "@navikt/ds-react/cjs";
+```
+
+Siden eks noen test-libraries ikke støtter ESM enda kan man legge denne til i jest config for å bruke pakkene:
+
+```
+"moduleNameMapper": {
+  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
+  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
+}
+```
 
 ### Oppdatert feil-styling og state-handling for skjemakomponenter
 

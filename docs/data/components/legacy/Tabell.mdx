@@ -1,0 +1,775 @@
+---
+title: Tabell
+---
+
+# Tabell
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-tabell-style nav-frontend-core nav-frontend-knapper-style nav-frontend-typografi-style --save`}
+/>
+
+<Bash code={`import "nav-frontend-tabell-style"`} copy language="jsx" />
+
+## Enkel tabell
+
+Legg til stilarket fra pakken og sett CSS-klassen `tabell` på HTML-tabellen din.
+
+<Preview
+  react={`<table className="tabell">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>`}
+>
+  <table className="tabell">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>
+</Preview>
+
+## Stripete tabell
+
+Bruk modifikatoren `tabell--stripet` for å gjøre annenhver tabellrad grå.
+
+<Preview
+  react={`<table className="tabell tabell--stripet">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>`}
+>
+  <table className="tabell tabell--stripet">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>
+</Preview>
+
+## Border tabell
+
+Bruk modifikatoren `tabell--border` for å gi alle cellene en tydelig border på alle sidene.
+
+<Preview
+  react={`<table className="tabell tabell--border">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>`}
+>
+  <table className="tabell tabell--border">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+        <th>Rolle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+    </tbody>
+  </table>
+</Preview>
+
+## Sorterbar tabell
+
+Knapper som er barn av `th`-elementene blir stylet til å være helt utfyllende og får et :after-element med to små chevrons som peker opp og ned for å indikere at kolonnen kan sorteres i vilkårlig rekkefølge. Bruk klassene `tabell__th--sortert-desc` og `tabell__th--sortert-asc` for at lenkene skal indikere hvilken retning kolonnen er sortert. Bruk klassen `tabell__td--sortert` på cellene i den sorterte kolonnen for å gi disse en svak grå bakgrunn.
+
+<Alert variant="warning">
+  Husk at du må legge til både <code>aria-sort</code> og{" "}
+  <code>role="columnheader"</code> på alle tabell-headere som skal sorteres.
+  Bruk <code>none</code>/<code>descending</code>/<code>ascending</code> som
+  verdier til <code>aria-sort</code> alt ettersom.
+</Alert>
+
+<Preview
+  react={`<table className="tabell">
+    <thead>
+      <tr>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter ID stigende">
+            ID
+          </button>
+        </th>
+        <th
+          role="columnheader"
+          aria-sort="descending"
+          className="tabell__th--sortert-desc"
+        >
+          <button aria-label="Sorter Fornavn synkende">
+            Fornavn
+          </button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3</td>
+        <td className="tabell__td--sortert">Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td className="tabell__td--sortert">Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td className="tabell__td--sortert">William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+  </table>`}
+>
+  <table className="tabell">
+    <thead>
+      <tr>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter ID stigende">ID</button>
+        </th>
+        <th
+          role="columnheader"
+          aria-sort="descending"
+          className="tabell__th--sortert-desc"
+        >
+          <button aria-label="Sorter Fornavn synkende">Fornavn</button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Etternavn stigende">Etternavn</button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Rolle stigende">Rolle</button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>3</td>
+        <td className="tabell__td--sortert">Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td className="tabell__td--sortert">Jean-Luc</td>
+        <td>Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td className="tabell__td--sortert">William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+  </table>
+</Preview>
+
+## Selekterbar tabell
+
+[Checkbokser](/components/checkbox) som blir plassert i første celle på en rad vil bli stylet til å skjule sin
+label og oppta kun 24x24 piksler. Bruk klassen `tabell__tr--valgt` på `tr`-elementene for å style alle cellene i den
+raden som "valgt". Hvis det er ønsket at label skal vises på første elementet kan
+man legge til `data-label="true"` på selve checkboxen.
+
+<Alert variant="warning">
+  Husk å legg til <code>aria-selected="true"</code> på <code>tr</code>-elementet
+  som representerer den valgte raden.
+</Alert>
+
+<Preview react={`<table className="tabell">
+    <thead>
+      <tr>
+        <th width="1">
+          <Checkbox label="Velg alle" />
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
+        </th>
+        <th
+          role="columnheader"
+          aria-sort="descending"
+          className="tabell__th--sortert-desc"
+        >
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <Checkbox label="Velg denne raden" />
+        </td>
+        <td>Geordi</td>
+        <td className="tabell__td--sortert">La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr className="tabell__tr--valgt" aria-selected="true">
+        <td>
+          <Checkbox label="Velg denne raden" checked readOnly />
+        </td>
+        <td>Jean-Luc</td>
+        <td className="tabell__td--sortert">Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>
+          <Checkbox label="Velg denne raden" />
+        </td>
+        <td>William</td>
+        <td className="tabell__td--sortert">Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+  </table>`}>
+  <table className="tabell">
+    <thead>
+      <tr>
+        <th width="1">
+          <Checkbox label="Velg alle" />
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
+        </th>
+        <th
+          role="columnheader"
+          aria-sort="descending"
+          className="tabell__th--sortert-desc"
+        >
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
+        </th>
+        <th role="columnheader" aria-sort="none">
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <Checkbox label="Velg denne raden" />
+        </td>
+        <td>Geordi</td>
+        <td className="tabell__td--sortert">La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr className="tabell__tr--valgt" aria-selected="true">
+        <td>
+          <Checkbox label="Velg denne raden" checked readOnly />
+        </td>
+        <td>Jean-Luc</td>
+        <td className="tabell__td--sortert">Picard</td>
+        <td>Kaptein</td>
+      </tr>
+      <tr>
+        <td>
+          <Checkbox label="Velg denne raden" />
+        </td>
+        <td>William</td>
+        <td className="tabell__td--sortert">Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+
+  </table>
+</Preview>
+
+## Tabell med input-felter
+
+<Preview react={`<table className="tabell">
+    <thead>
+      <tr>
+        <th id="header-fornavn">
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
+        </th>
+        <th id="header-etternavn">
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
+        </th>
+        <th id="header-rolle">
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr>
+        <td>
+          <Input aria-labelledby="header-fornavn" defaultValue="Jean-Luc" />
+        </td>
+        <td>
+          <Input aria-labelledby="header-etternavn" defaultValue="Picard" />
+        </td>
+        <td>
+          <Input aria-labelledby="header-rolle" defaultValue="Kaptein" />
+        </td>
+      </tr>
+      <tr>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+  </table>`}>
+  <table className="tabell">
+    <thead>
+      <tr>
+        <th id="header-fornavn">
+          <button aria-label="Sorter Fornavn stigende">
+            Fornavn
+          </button>
+        </th>
+        <th id="header-etternavn">
+          <button aria-label="Sorter Etternavn stigende">
+            Etternavn
+          </button>
+        </th>
+        <th id="header-rolle">
+          <button aria-label="Sorter Rolle stigende">
+            Rolle
+          </button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Geordi</td>
+        <td>La Forge</td>
+        <td>Sjefsingeniør</td>
+      </tr>
+      <tr>
+        <td>
+          <Input aria-labelledby="header-fornavn" defaultValue="Jean-Luc" />
+        </td>
+        <td>
+          <Input aria-labelledby="header-etternavn" defaultValue="Picard" />
+        </td>
+        <td>
+          <Input aria-labelledby="header-rolle" defaultValue="Kaptein" />
+        </td>
+      </tr>
+      <tr>
+        <td>William</td>
+        <td>Riker</td>
+        <td>Kommandør</td>
+      </tr>
+    </tbody>
+
+  </table>
+</Preview>
+
+## Komplisert header
+
+<Preview
+  react={`<table className="tabell">
+    <thead>
+      <tr>
+        <td></td>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Kaptein</td>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+      </tr>
+      <tr>
+        <td>Kommandør</td>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+      </tr>
+      <tr>
+        <td>Sjefsingeniør</td>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+      </tr>
+    </tfoot>
+  </table>`}
+>
+  <table className="tabell">
+    <thead>
+      <tr>
+        <td></td>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Kaptein</td>
+        <td>1</td>
+        <td>Jean-Luc</td>
+        <td>Picard</td>
+      </tr>
+      <tr>
+        <td>Kommandør</td>
+        <td>2</td>
+        <td>William</td>
+        <td>Riker</td>
+      </tr>
+      <tr>
+        <td>Sjefsingeniør</td>
+        <td>3</td>
+        <td>Geordi</td>
+        <td>La Forge</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <th>ID</th>
+        <th>Fornavn</th>
+        <th>Etternavn</th>
+      </tr>
+    </tfoot>
+  </table>
+</Preview>
+
+## Tabell med divs
+
+<Alert variant="warning">
+  Hvis man skal bygge tabeller uten å bruke vanlig <code>&lt;tabell&gt;</code>
+  -markup er det svært viktig at man supplerer elementene med <Link href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/table/table.html">
+    riktige
+  </Link> <code>role</code>-attributter og <code>display</code>
+  -stiler for å bevare den semantiske verdien i tabellene. Vi anbefaler fortsatt
+  å ikke ta i bruk denne metoden hvis mulig, da nettleseren ikke kan tolke
+  tabellen like bra uten riktig markup.
+</Alert>
+
+<Preview
+  react={`<div className="tabell" role="table">
+    <div className="tabell__thead" role="row-group">
+      <div className="tabell__tr" role="row">
+        <div className="tabell__th" role="columnheader">
+          Fornavn
+        </div>
+        <div className="tabell__th" role="columnheader">
+          Etternavn
+        </div>
+        <div className="tabell__th" role="columnheader">
+          Rolle
+        </div>
+      </div>
+    </div>
+    <div className="tabell__tbody" role="row-group">
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          Jean-Luc
+        </div>
+        <div className="tabell__td" role="cell">
+          Picard
+        </div>
+        <div className="tabell__td" role="cell">
+          Kaptein
+        </div>
+      </div>
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          William
+        </div>
+        <div className="tabell__td" role="cell">
+          Riker
+        </div>
+        <div className="tabell__td" role="cell">
+          Kommandør
+        </div>
+      </div>
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          Geordi
+        </div>
+        <div className="tabell__td" role="cell">
+          La Forge
+        </div>
+        <div className="tabell__td" role="cell">
+          Sjefsingeniør
+        </div>
+      </div>
+    </div>
+  </div>`}
+>
+  <div className="tabell" role="table">
+    <div className="tabell__thead" role="row-group">
+      <div className="tabell__tr" role="row">
+        <div className="tabell__th" role="columnheader">
+          Fornavn
+        </div>
+        <div className="tabell__th" role="columnheader">
+          Etternavn
+        </div>
+        <div className="tabell__th" role="columnheader">
+          Rolle
+        </div>
+      </div>
+    </div>
+    <div className="tabell__tbody" role="row-group">
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          Jean-Luc
+        </div>
+        <div className="tabell__td" role="cell">
+          Picard
+        </div>
+        <div className="tabell__td" role="cell">
+          Kaptein
+        </div>
+      </div>
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          William
+        </div>
+        <div className="tabell__td" role="cell">
+          Riker
+        </div>
+        <div className="tabell__td" role="cell">
+          Kommandør
+        </div>
+      </div>
+      <div className="tabell__tr" role="row">
+        <div className="tabell__td" role="cell">
+          Geordi
+        </div>
+        <div className="tabell__td" role="cell">
+          La Forge
+        </div>
+        <div className="tabell__td" role="cell">
+          Sjefsingeniør
+        </div>
+      </div>
+    </div>
+  </div>
+</Preview>
+
+## Tilgjengelighet
+
+### Riktig struktur
+
+Når man setter opp en tabell er det viktig at man tar i bruk riktige HTML-tags for å beskrive innholdet, slik at nettleseren bedre kan forstå hva som foregår.
+Hvis man følger eksemplene under oversikt og bruker `<table>` over `<div>`så er man allerede godt på vei!
+Men et punkt som er lurt å følge litt ekstra med på er bruken av `<th>`, table-header. Denne brukes ofte for å beskrive overskriften for en column,
+men kan også bli brukt i tilfeller der en verdi i rekken er unikt identifiserbar. Dette er et bevist valg man kan gjøre for å tabellen lettere å navigere for alle,
+men i de aller fleste tilfeller klarer nettleseren selv å tolke hvordan en tabell skal best navigeres.
+
+### Sorterbar tabell
+
+For å skape en god brukeropplevelse for alle er det viktig at man `aria-sort` på table-headers,
+samt bruker aria-label på `button` som utfører sorteringen `onClick`. Labelen skal da fortelle hva den neste handlingen blir å utføre.
+
+<Bash code={`<button aria-label="Sorter ID stigende">ID</button>`} />
+
+### Responsivitet
+
+Det finnes [mange måter](https://medium.com/appnroll-publication/5-practical-solutions-to-make-responsive-data-tables-ff031c48b122) å gjøre tabeller responsive på, men flere av disse teknikkene innebærer ofte [store fallgruver](https://developer.paciellogroup.com/blog/2018/03/short-note-on-what-css-display-properties-do-to-table-semantics/) for tilgjengelighet.
+
+Den enkleste måten å gjøre tabeller responsive samtidig som man sørger for at tabellene forblir tilgjengelige er å gå for en [enkel horisontal scroll-løsning](http://adrianroselli.com/2017/11/a-responsive-accessible-table.html#ResponsiveScrolling) og standard `<table>` HTML.
+
+<Alert variant="info">
+  Tastaturvennlig horisontal scrolling krever at man setter{" "}
+  <code className="inline">tabindex="0"</code> og{" "}
+  <code className="inline">role="region"</code> på konteineren som skal scrolle.
+  Dette kan utløse advarsler fra lintere om at bare <em>interaktive</em>{" "}
+  elementer skal ha <code className="inline">tabindex</code>-attributtet. Disse
+  advarslene kan trygt ignoreres da scrolling teller som interaktivitet, men
+  blir ofte ikke oppfattet av lintere.
+</Alert>

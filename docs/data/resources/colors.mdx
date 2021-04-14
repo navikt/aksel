@@ -1,0 +1,139 @@
+---
+title: Farger
+rank: 1
+---
+
+# Farger
+
+<TableOfContents />
+
+## Fargepalette
+
+<Palette />
+
+## Teknisk
+
+### Installering
+
+Alle fargene våre er [definert](https://github.com/navikt/nav-frontend-core/blob/master/less/_variabler.less) i
+pakken `nav-frontend-core`, og kan installeres slik:
+
+<Bash terminal copy code={`npm install nav-frontend-core --save`} />
+<Bash terminal copy code={`yarn add nav-frontend-core`} />
+
+### Bruk med Less
+
+Hvis du bruker Less kan du bruke disse variablene ved å importere en referanse til `_variabler`-fila i cora-pakken i stilarket ditt:
+
+<Bash
+  code={`@import (reference) "~nav-frontend-core/less/_variabler";
+.minDiv {
+    background: @navRod;
+}`}
+  copy
+  language="css"
+/>
+
+## Tilgjengelighet
+
+### Generell bruk av farge
+
+Ved bruk av farger gjelder det et generelt krav om at fargene ikke er det eneste virkemiddel for å
+formidle informasjon.
+
+<Preview noCode>
+  <Undertittel>Eksempler:</Undertittel>
+  <ul>
+    <li>
+      Lenker kan ikke bare skille seg fra vanlig tekst ved å bruke en annen
+      farge, men bør også ha understrek eller andre effekter i tillegg
+    </li>
+    <li>
+      En knapp kan ikke bare skifte farge ved hover/klikk, men bør også endre
+      form eller posisjon
+    </li>
+    <li>
+      En notifikasjon om noe positivt/negativt kan ikke bare være farget grønn
+      eller rød, men bør også ha et støttende ikon med unik form.
+    </li>
+  </ul>
+</Preview>
+
+### Krav til kontrast
+
+Kravene til fargekontrast varierer avhengig av hvilket element det er snakk om:
+
+<table className="tabell" id="color-accessibility__contrast-table">
+  <thead>
+    <tr>
+      <th>Element</th>
+      <th className="align-right">Kontrast&shy;krav</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div className="table-element-type">
+          <i id="color-accessibility__typo-icon">
+            <TypoIcon />
+          </i>
+          Tekst og bilder av tekst
+        </div>
+      </td>
+      <td className="align-right">
+        Minst <strong>4.5:1</strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div className="table-element-type">
+          <i id="color-accessibility__button-icon">
+            <ButtonIcon />
+          </i>
+          Interaktive komponenter
+        </div>
+      </td>
+      <td className="align-right">
+        Minst <strong>3:1</strong> *
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div className="table-element-type">
+          <i id="color-accessibility__graphics-icon">
+            <VeilederIcon />
+          </i>
+          Illustrasjoner og informativ grafikk
+        </div>
+      </td>
+      <td className="align-right">
+        Minst <strong>3:1</strong>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<Alert variant="info">
+  *{" "}
+  <Link href="https://www.w3.org/TR/WCAG21/#non-text-contrast">
+    WCAGs suksesskriterium 1.4.11
+  </Link>{" "}
+  gir egentlig unntak for interaktive elementer som er <i>disabled</i>, men det
+  er en{" "}
+  <Link href="https://github.com/w3c/wcag21/issues/805">
+    pågående diskusjon
+  </Link>{" "}
+  om dette er hensiktsmessig eller ikke - som ikke har resultert i noe tydelig
+  konsensus enda. Vi synes mange av argumentene mot dette unntaket er fornuftige
+  og har derfor valgt å etterleve kontrastkravene også for disabled elementer.
+</Alert>
+
+### Verktøy
+
+- [Sjekk kontrastverdier hos Web AIM](https://webaim.org/resources/contrastchecker/)
+
+### WCAGs suksesskriterier
+
+- [WCAG 1.4.1: Use of color](https://www.w3.org/TR/WCAG21/#use-of-color)
+- [WCAG 1.4.3: Contrast (minimum)](https://www.w3.org/TR/WCAG21/#contrast-minimum)
+- [WCAG 1.4.11: Non-text contrast](https://www.w3.org/TR/WCAG21/#non-text-contrast)

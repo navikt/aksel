@@ -1,14 +1,7 @@
-/* const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-}); */
-const fs = require("fs");
-var markdown = require("remark-parse");
-const unified = require("unified");
 const glob = require("glob");
-const { v4 } = require("uuid");
-const withMDX = require("@next/mdx")({
-  extension: /\.(md|mdx)$/,
-});
+const withLess = require("@zeit/next-less");
+const withCss = require("@zeit/next-css");
+const withPlugins = require("next-compose-plugins");
 
 const loadPackage = () => {
   const navFrontend = glob.sync("../packages/**/package.json");
@@ -21,35 +14,8 @@ const loadPackage = () => {
     });
 };
 
-const loadToc = () => {
-  const parser = unified().use(markdown);
-  const files = glob.sync("./pages/**/*.@(md|mdx)");
-  return files.map((file) => {
-    const data = fs.readFileSync(file, "utf8");
-    const parsed = parser.parse(data);
-    return {
-      file: file
-        .replace("./pages", "")
-        .replace("/index", "")
-        .replace(".mdx", "")
-        .replace(".md", ""),
-      tree: parsed.children
-        .filter((x) => x.type === "heading")
-        .filter((x) => x.depth === 2)
-        .map((x) => {
-          return {
-            depth: x.depth,
-            heading: x.children[0].value,
-            key: v4(),
-          };
-        }),
-    };
-  });
-};
-
-module.exports = withMDX({
-  pageExtensions: ["js", "jsx", "ts", "tsx", "md", "mdx"],
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+module.exports = withPlugins([withLess, withCss], {
+  webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
@@ -58,6 +24,5 @@ module.exports = withMDX({
   },
   publicRuntimeConfig: {
     packages: loadPackage(),
-    toc: loadToc(),
   },
 });

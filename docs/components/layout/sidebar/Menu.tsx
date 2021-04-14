@@ -1,47 +1,34 @@
-import Pages, { NavdsPage } from "../../../src/pages";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import {
+  AccordionMenu,
+  AccordionMenuCollapsable,
+  AccordionMenuItem,
+} from "@navikt/ds-react";
 
-/* TODO: Replace with accordion-menu when ready */
-const subLinks = (page: NavdsPage) => {
+const MenuLink = (node) => {
+  const { asPath } = useRouter();
+
   return (
-    <div key={page.title}>
-      <span>{page.title}</span>
-      <ul id={"collapse " + page.title}>{parsePages(page.children)}</ul>
-    </div>
+    <Link href={node.pathName} passHref>
+      <AccordionMenuItem active={asPath === node.pathName}>
+        {node.title}
+      </AccordionMenuItem>
+    </Link>
   );
 };
 
-const parsePages = (pages) => {
-  return pages?.map((page) => {
-    if (page.pathName) {
-      return (
-        <li key={page.pathName}>
-          <Link href={page.pathName}>
-            {page.title ? page.title : parseTitle(page.pathName)}
-          </Link>
-        </li>
-      );
-    } else if (page.title && page.children) {
-      return subLinks(page);
-    } else {
-      return null;
-    }
-  });
-};
-
-const parseTitle = (path: string) =>
-  path
-    .split("/")
-    .pop()
-    .replace(/^\w/, (c) => c.toUpperCase())
-    .replace("-", " ") || "ERR: Default Title";
-
-const Menu = ({ menu }) => {
-  return (
-    <nav>
-      <ul>{parsePages(menu)}</ul>
-    </nav>
+const mapToComponents = (node) =>
+  node.children ? (
+    <AccordionMenuCollapsable key={node.title} title={node.title}>
+      {node.children.map(mapToComponents)}
+    </AccordionMenuCollapsable>
+  ) : (
+    <MenuLink key={node.title} {...node} />
   );
-};
+
+const Menu = ({ menu }) => (
+  <AccordionMenu>{menu.map(mapToComponents)}</AccordionMenu>
+);
 
 export default Menu;

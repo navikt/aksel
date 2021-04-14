@@ -1,0 +1,137 @@
+---
+title: Hjelpetekst
+---
+
+# Hjelpetekst
+
+Hjelpetekst er en knapp som kan åpne en Popover med kontekstuell informasjon.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-hjelpetekst classnames nav-frontend-hjelpetekst-style nav-frontend-core nav-frontend-typografi-style nav-frontend-ikoner-assets nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-popover nav-frontend-popover-style react-dom --save`}
+/>
+
+<Npm packName="nav-frontend-hjelpetekst" imports="Hjelpetekst" defaultExport />
+
+## Normal
+
+Hjelpetekst brukes når brukeren kan trenge mer informasjon, men hvor det ikke er naturlig
+å bruke plass på det i grensesnittet. Dette kan for eksempel være for å forklare vanskelige
+begreper, gi veiledning i utfylling av skjema-felter eller utdype bakgrunn for et regelverk.
+
+<Preview
+  react={`<Hjelpetekst>
+    Innholdet vil vises når brukeren klikker på knappen.
+  </Hjelpetekst>`}
+>
+  <Hjelpetekst>
+    Innholdet vil vises når brukeren klikker på knappen.
+  </Hjelpetekst>
+</Preview>
+
+## Kombinasjon med skjemafelt
+
+For å enkelt knytte Hjelpetekst-komponenten til et skjemafelt kan komponenten sendes inn
+via `label`-propen til skjemafeltet.
+
+<Preview
+  react={`<Input
+    id="min-input"
+    label={
+      <div style={{ display: "flex" }}>
+        Fødselsnummer
+        <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+          Innholdet vil vises når brukeren klikker på knappen.
+        </Hjelpetekst>
+      </div>
+    }
+  />`}
+>
+  <Input
+    id="min-input"
+    label={
+      <div style={{ display: "flex" }}>
+        Fødselsnummer
+        <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+          Innholdet vil vises når brukeren klikker på knappen.
+        </Hjelpetekst>
+      </div>
+    }
+  />
+</Preview>
+
+## Posisjon av popup
+
+Du kan bestemme hvor popup-ruten dukker opp.
+
+<Preview
+  react={`<><Hjelpetekst type="over">Denne vil åpnes over knappen.</Hjelpetekst>
+  <Hjelpetekst type="over-venstre">
+    Denne vil åpnes over knappen, justert fra venstre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="over-hoyre">
+    Denne vil åpnes over knappen, justert fra høyre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="under">Denne vil åpnes under knappen.</Hjelpetekst>
+  <Hjelpetekst type="under-venstre">
+    Denne vil åpnes under knappen, justert fra venstre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="under-hoyre">
+    Denne vil åpnes under knappen, justert fra høyre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="venstre">
+    Denne vil åpnes til venstre for knappen.
+  </Hjelpetekst>
+  <Hjelpetekst type="hoyre">Denne vil åpnes til høyre for knappen.</Hjelpetekst></>`}
+>
+  <Hjelpetekst type="over">Denne vil åpnes over knappen.</Hjelpetekst>
+  <Hjelpetekst type="over-venstre">
+    Denne vil åpnes over knappen, justert fra venstre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="over-hoyre">
+    Denne vil åpnes over knappen, justert fra høyre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="under">Denne vil åpnes under knappen.</Hjelpetekst>
+  <Hjelpetekst type="under-venstre">
+    Denne vil åpnes under knappen, justert fra venstre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="under-hoyre">
+    Denne vil åpnes under knappen, justert fra høyre kant.
+  </Hjelpetekst>
+  <Hjelpetekst type="venstre">
+    Denne vil åpnes til venstre for knappen.
+  </Hjelpetekst>
+  <Hjelpetekst type="hoyre">Denne vil åpnes til høyre for knappen.</Hjelpetekst>
+</Preview>
+
+## Tilgjengelighet
+
+### Assosiasjon
+
+Hjelpeteksten bør få en logisk kobling til elementet som det forsøker å beskrive/støtte.
+
+Om hjelpeteksten må plasseres på utsiden av `<label>`, eller på andre måter ikke har noen annen logisk kobling til elementet som det forsøker å beskrive, kan dette løses ved å bruke `aria-describedby` og `aria-labelledby` slik:
+
+<Bash
+  code={`<>
+  <span id="mitt-faguttrykk" aria-describedby="min-hjelpetekst">
+    Restarbeidsevne
+  </span>
+  <Hjelpetekst
+    id="min-hjelpetekst"
+    aria-labelledby="mitt-faguttrykk"
+  >
+    Mulighet til å jobbe litt eller delvis
+  </Hjelpetekst>
+</>`}
+/>
+
+### Mer informasjon
+
+- [WCAG 1.1.1: Ikke-tekstlig innhold](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/111-ikke-tekstlig-innhold-niva)
+- [WCAG 3.3.5: Hjelp](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/ikke-lovpalagte-krav/335-hjelp-niva-aaa)

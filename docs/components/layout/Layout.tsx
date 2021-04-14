@@ -1,11 +1,12 @@
+import cl from "classnames";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import Mdx from "./MdxProvider";
 import { ContentContainer } from "@navikt/ds-react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
-import style from "./layout.module.css";
+import "./theme.css";
+import "./layout.css";
 
 interface LayoutProps {
   children?: React.ReactNode;
@@ -27,8 +28,12 @@ const Layout = ({ children, menu }: LayoutProps) => {
     setSidebar(!small);
   }, [small]);
 
+  useEffect(() => {
+    document.body.classList.add("lightTheme");
+  }, []);
+
   return (
-    <div className={style.pageWrapper + " lightTheme"}>
+    <div id="pageWrapper" className={cl("pageWrapper")}>
       <Header sidebar={sidebar} onSidebarChange={(x) => setSidebar(x)} />
       <Sidebar
         menu={menu}
@@ -36,11 +41,11 @@ const Layout = ({ children, menu }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
-      <main className={style.contentWrapper}>
+
+      {/* TEMP UNTIL LAYOUT UPDATE */}
+      <main className={"contentWrapper"}>
         <ContentContainer>
-          <div className={style.content}>
-            <Mdx>{children}</Mdx>
-          </div>
+          <div className={"content"}>{children}</div>
         </ContentContainer>
       </main>
     </div>

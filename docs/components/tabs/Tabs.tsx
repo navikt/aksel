@@ -1,26 +1,24 @@
 import { useState } from "react";
-import style from "./tabs.module.css";
+import "./tabs.css";
 import cl from "classnames";
 
 interface TabsProps {
   onChange: (tab: number) => void;
   tabs: string[];
+  tab: number;
 }
 
-const Tabs = ({ onChange, tabs, ...props }: TabsProps) => {
-  const [tab, setTab] = useState(0);
-
+const Tabs = ({ onChange, tabs, tab, ...props }: TabsProps) => {
   const handleClick = (x: number) => {
     onChange(x);
-    setTab(x);
   };
 
   return (
-    <ul className={style.ul}>
+    <ul className={"tabs__ul"}>
       {tabs.map((t, x) => (
-        <li key={t + x} className={style.li}>
+        <li key={t + x} className={"tabs__li"}>
           <button
-            className={cl(style.button, { [style.buttonActive]: x === tab })}
+            className={cl("tabs__button", { tabs__buttonActive: x === tab })}
             onClick={() => handleClick(x)}
           >
             {t}

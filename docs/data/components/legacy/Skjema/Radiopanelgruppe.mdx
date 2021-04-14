@@ -1,0 +1,106 @@
+---
+title: RadioPanelGruppe
+---
+
+# RadioPanelGruppe
+
+Radioknapper brukes når brukeren bare skal få velge én av flere forhåndsbestemte alternativer.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="RadioPanelGruppe" />
+
+<Preview
+  react={`<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+/>`}
+>
+  <RadioPanelGruppeExample name="Preview-1" />
+</Preview>
+
+## Feilmelding
+
+<Preview
+  react={`<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Her er det en feil." }}
+/>`}
+>
+  <RadioPanelGruppeExample name="Preview-2" feil={true} />
+</Preview>
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `RadioPanelGruppe` skal propageres til children.
+
+<Preview
+  react={`<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    { label: "Eplejuice", value: "juice1", id: "juice1id" },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id", feil },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Feilmeldingstekst må gjenta nøkkelord fra label" }}
+  utenFeilPropagering
+/>`}
+>
+  <RadioPanelGruppeExample name="Preview-4" feil={true} utenFeilPropagering />
+</Preview>
+
+## Bruk av radioRef
+
+<Preview react={`
+const juice1Ref = useRef(null);
+
+<RadioPanelGruppe
+  name="samplename"
+  legend="Hvilken drikke er best?"
+  radios={[
+    {
+      label: "Eplejuice",
+      value: "juice1",
+      id: "juice1id",
+      radioRef: (ref) => (juice1Ref.current = ref),
+    },
+    { label: "Appelsinjuice", value: "juice2", id: "juice2id" },
+    { label: "Melk", value: "melk", disabled: true, id: "melkid" },
+    { label: "Ananasjuice", value: "juice3", id: "juice4id" },
+  ]}
+  checked={this.state.checked}
+  onChange={this.onChange}
+  feil={{ feilmelding: "Her er det en feil." }}
+/>
+`}>
+  <RadioPanelGruppeExample button name="Preview-3" />
+</Preview>

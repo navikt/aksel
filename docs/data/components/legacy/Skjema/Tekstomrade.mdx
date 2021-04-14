@@ -1,0 +1,60 @@
+---
+title: Tekstomrade
+---
+
+# Tekstomrade
+
+Tekstområde er en ren teknisk komponent som lar utviklere parse tekst (strings), og automatisk rendre HTML-markup med f.eks. avsnitt og lenker.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-tekstomrade nav-frontend-lenker classnames nav-frontend-lenker-style nav-frontend-core prop-types react nav-frontend-typografi nav-frontend-typografi-style --save`}
+/>
+
+<Npm packName="nav-frontend-tekstomrade" imports="Tekstomrade" defaultExport />
+
+## Standard bruk
+
+Standard oppsettet håndterer avsnitt, linjeskift og lenker.
+Komponent har som mål at struktur av tekst visuelt beholdes, dvs linjeskift i input-teksten ivaretas av komponenten.
+
+<Preview
+  react={`<Tekstomrade>
+    {\`En komponent som tar ansvar for å brekke opp \\ntekst i avsnitt, og \\nlegge til lenker.\\n\\nVi kan f.eks lenke til www.nav.no, og ha flere lenker på samme linje. (Les mer her; design.nav.no)\`}
+  </Tekstomrade>`}
+>
+  <Tekstomrade>
+    {`En komponent som tar ansvar for å brekke opp \ntekst i avsnitt, og \nlegge til lenker.\n\nVi kan f.eks lenke til www.nav.no, og ha flere lenker på samme linje. (Les mer her; design.nav.no)`}
+  </Tekstomrade>
+</Preview>
+
+## Avansert bruk
+
+Komponenten er regel-basert, og åpner opp for at konsumenter kan lage sine egne rendering-regler ved behov.
+For å endre reglene som er aktive kan man sende inn en liste av regler man ønsker via `rules`-propen.
+
+<Preview
+  react={`<Tekstomrade
+    rules={[HighlightRule, BoldRule, createDynamicHighlightingRule(["ruk"])]}
+  >
+    {"*Vi* kan bruke helt egne regler _her_"}
+  </Tekstomrade>`}
+>
+  <TekstomradeExample />
+</Preview>
+
+Komponenten kommer med ett sett av ferdig-implementerte regler;
+
+- `LinebreakRule`
+- `ParagraphRule`
+- `HighlightRule`
+- `createDynamicHighlightingRule`
+- `BoldRule`
+- `LinkRule`
+
+For dokumentasjon av regel-utvikling se [parser biblioteket](https://github.com/navikt/textparser)
