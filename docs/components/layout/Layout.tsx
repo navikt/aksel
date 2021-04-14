@@ -28,8 +28,12 @@ const Layout = ({ children, menu }: LayoutProps) => {
     setSidebar(!small);
   }, [small]);
 
+  useEffect(() => {
+    document.body.classList.add("lightTheme");
+  }, []);
+
   return (
-    <div className={cl("pageWrapper", "lightTheme")}>
+    <div id="pageWrapper" className={cl("pageWrapper")}>
       <Header sidebar={sidebar} onSidebarChange={(x) => setSidebar(x)} />
       <Sidebar
         menu={menu}

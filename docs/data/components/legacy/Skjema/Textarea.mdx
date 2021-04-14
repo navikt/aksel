@@ -1,0 +1,106 @@
+---
+title: Textarea
+---
+
+# Textarea
+
+Textarea tillater brukeren å legge inn fritekst som kan gå over flere linjer.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="Textarea" />
+
+## Normal
+
+<Preview hideHtml react={`<TextareaControlled label="Textarea-label" />`}>
+  <TextareaControlled maxLength={2000} label="Textarea-label" />
+</Preview>
+
+## Uten teller
+
+<Preview
+  hideHtml
+  react={`<TextareaControlled label="Textarea-label" maxLength={0} />`}
+>
+  <TextareaControlled label="Textarea-label" maxLength={0} />
+</Preview>
+
+## Disabled
+
+<Alert variant="warning">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+</Alert>
+
+<Preview
+  hideHtml
+  react={`<TextareaControlled label="Textarea-label" disabled />`}
+>
+  <TextareaControlled maxLength={2000} label="Textarea-label" disabled />
+</Preview>
+
+## Feilmelding
+
+<Preview
+  hideHtml
+  react={`<TextareaControlled label="Textarea-label" feil="Her er det noe feil." />`}
+>
+  <TextareaControlled
+    maxLength={2000}
+    label="Textarea-label"
+    feil="Her er det noe feil."
+  />
+</Preview>
+
+## Innhold mellom label og skjemafelt
+
+Bruk `description`-propen for å legge inn egendefinert HTML-innhold mellom labelen og skjemafeltet.
+
+<Preview
+  hideHtml
+  react={`<TextareaControlled
+    label="Textarea-label"
+    description="Beskriv kort din situasjon"
+  />`}
+>
+  <TextareaControlled
+    label="Textarea-label"
+    description="Beskriv kort din situasjon"
+    maxLength={2000}
+  />
+</Preview>
+
+## Manuell håndtering av state
+
+Hvis du ønsker å håndtere state manuelt, kan du bruke `Textarea` i stedet for `TextareaControlled`
+
+<Preview
+  hideHtml
+  react={`<Textarea value={value} onChange={(e) => setValue(e.target.value)} />`}
+>
+  <TextareaExample />
+</Preview>
+
+## Tilgjengelighet
+
+### Tegnteller
+
+Brukere av skjermlesere, får varslinger når det er 10 og 5 tegn igjen (polite), og en assertive varsling når de ikke har noen tegn igjen eller overskrider det maksimale antall tegn.
+
+### Unngå placeholders
+
+Vi fraråder bruken av `placeholder`-attributtet på input-elementer.
+
+### Mer informasjon
+
+- [WCAG 1.3.1: Informasjon og relasjoner](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/131-informasjon-og-relasjoner-niva)

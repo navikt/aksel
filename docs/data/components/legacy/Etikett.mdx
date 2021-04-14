@@ -1,0 +1,85 @@
+---
+title: Etikett
+---
+
+# Etikett
+
+Etiketter er ment for rask visuell kategorisering og organisering av elementer, ved bruk av farge og beskrivende nøkkelord.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-etiketter classnames nav-frontend-core nav-frontend-etiketter-style nav-frontend-typografi nav-frontend-typografi-style prop-types react --save`}
+/>
+
+<Npm packName="nav-frontend-etiketter" imports="Etikett" defaultExport />
+
+## Alle etiketter side om side
+
+Vi bruker etiketter for å vise status i en handling. Standard farger på etikettene er basert på
+informasjon til brukere, men man kan skape egne etikker med eget farge og nøkkelord. Bruk etiketter
+sparsomt. Mange etiketter med forskjellige farger og grupperinger kan skape mer rot en orden.
+
+<Preview
+  react={`<><Etikett type="suksess">Suksess</Etikett>&nbsp;
+  <Etikett type="info">Info</Etikett>&nbsp;
+  <Etikett type="advarsel">Advarsel</Etikett>&nbsp;
+  <Etikett type="fokus">Fokus</Etikett></>`}
+>
+  <Etikett type="suksess">Suksess</Etikett>&nbsp;
+  <Etikett type="info">Info</Etikett>&nbsp;
+  <Etikett type="advarsel">Advarsel</Etikett>&nbsp;
+  <Etikett type="fokus">Fokus</Etikett>
+</Preview>
+
+## Mini
+
+Alle etiketter kan rendres i en mindre `24px` versjon med `14px` font.
+
+<Alert variant="warning">
+  Som hovedregel burde man alltid bruke de normale etikettene våre. For
+  tilfeller med svært begrenset plass kan de mindre etikettene brukes{" "}
+  <strong>unntaksvis ved klart behov</strong>.
+</Alert>
+
+<Preview
+  react={`<><Etikett mini type="suksess">
+    Suksess
+  </Etikett>
+  <Etikett mini type="info">
+    Info
+  </Etikett>
+  <Etikett mini type="advarsel">
+    Advarsel
+  </Etikett>
+  <Etikett mini type="fokus">
+    Fokus
+  </Etikett></>`}
+>
+  <Etikett mini type="suksess">
+    Suksess
+  </Etikett>
+  <Etikett mini type="info">
+    Info
+  </Etikett>
+  <Etikett mini type="advarsel">
+    Advarsel
+  </Etikett>
+  <Etikett mini type="fokus">
+    Fokus
+  </Etikett>
+</Preview>
+
+## Tilgjengelighet
+
+### Farge og tekst må høre sammen
+
+Pass på at fargen og teksten på etiketten alltid samsvarer med hverandre. Da forhinder du at personer med dårlig fargesyn, eller en dårlig skjerm, går glipp av informasjon.
+
+### Mer informasjon
+
+- [WCAG 1.4.1: Bruk av farge](https://uu.difi.no/krav-og-regelverk/wcag-20-standarden/141-bruk-av-farge-niva)

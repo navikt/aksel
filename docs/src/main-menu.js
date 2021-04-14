@@ -21,6 +21,8 @@ export default () => {
     }
 
     if (metadata) {
+      node.title = "DEFAULT-TITLE";
+      node.rank = 9999;
       if (metadata.title) {
         node.title = metadata.title;
       }
