@@ -31,7 +31,7 @@
     "cjs-package": "copyfiles -f config/package.json cjs",
     "clean": "rm -rf cjs esm",
     "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn cjs-package",
-    "watch": "tsc --watch -p tsconfig.json"
+    "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.2.1",
