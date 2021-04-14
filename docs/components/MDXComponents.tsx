@@ -58,8 +58,8 @@ import {
 } from "nav-frontend-typografi";
 import Veileder from "nav-frontend-veileder";
 import Veilederpanel from "nav-frontend-veilederpanel";
-import BekreftcheckboxpanelExample2 from "../examples/bekreftcheckboxpanel/Feilmelding";
-import BekreftcheckboxpanelExample1 from "../examples/bekreftcheckboxpanel/Normal";
+import BekreftcheckboxpanelExample2 from "../examples/navfrontendskjema/bekreftcheckboxpanel/Feilmelding";
+import BekreftcheckboxpanelExample1 from "../examples/navfrontendskjema/bekreftcheckboxpanel/Normal";
 import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
 import ModalExample from "../examples/modal/modal-example";
 import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
@@ -100,14 +100,11 @@ const components = {
   p: (props) => <Paragraph size="medium" {...props} />,
   a: (props) => <Link {...props} />,
   code: (props) => <Inline {...props} />,
-  SuccessIcon: (props) => (
-    <SuccessFilled
-      style={{ color: "var(--navds-color-green-70)" }}
-      {...props}
-    />
+  SuccessIcon: () => (
+    <SuccessFilled style={{ color: "var(--navds-color-green-70)" }} />
   ),
-  ErrorIcon: (props) => (
-    <ErrorFilled style={{ color: "var(--navds-color-red-60)" }} {...props} />
+  ErrorIcon: () => (
+    <ErrorFilled style={{ color: "var(--navds-color-red-60)" }} />
   ),
   Bash,
   Preview,
