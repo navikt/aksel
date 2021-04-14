@@ -1,0 +1,112 @@
+---
+title: Select
+---
+
+# Select
+
+Select viser en meny med valgalternativer og brukes når brukeren skal velge ett av flere alternativer.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="Select" />
+
+## Normal
+
+<Alert variant="info">
+  Dersom du har mindre enn fem valg kan du vurdere å bruke{" "}
+  <Link href="/components/radio">radioknapper</Link> i stedet, siden de er
+  enklere og mer oversiktlige for brukerne.
+</Alert>
+
+<Preview
+  react={`<Select label="Hvilken land er best om sommeren?">
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>`}
+>
+  <Select label="Hvilken land er best om sommeren?">
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>
+</Preview>
+
+## Disabled
+
+<Alert variant="warning">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+</Alert>
+
+<Preview
+  react={`<Select label="Hvilken land er best om sommeren?" disabled>
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>`}
+>
+  <Select label="Hvilken land er best om sommeren?" disabled>
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>
+</Preview>
+
+## Feilmelding
+
+<Preview
+  react={`<Select label="Hvilken land er best om sommeren?" feil="Her er det noe feil">
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>`}
+>
+  <Select label="Hvilken land er best om sommeren?" feil="Her er det noe feil">
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>
+</Preview>
+
+## Innhold mellom label og skjemafelt
+
+Bruk `description`-propen for å legge inn egendefinert HTML-innhold mellom labelen og skjemafeltet.
+
+<Preview
+  react={`<Select
+    label="Hvilken land er best om sommeren?"
+    description="En kort beskrivelse av listen"
+  >
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>`}
+>
+  <Select
+    label="Hvilken land er best om sommeren?"
+    description="En kort beskrivelse av listen"
+  >
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+    <option value="danmark">Danmark</option>
+  </Select>
+</Preview>

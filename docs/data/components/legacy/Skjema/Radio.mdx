@@ -1,0 +1,112 @@
+---
+title: Radio
+---
+
+# Radio
+
+Radioknapper brukes når brukeren bare skal få velge én av flere forhåndsbestemte alternativer.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="Radio" />
+
+## Normal
+
+<Preview react={`<Radio label={"Radio-label"} name="minRadioKnapp" />`}>
+  <Radio label={"Radio-label"} name="minRadioKnapp" />
+</Preview>
+
+## Disabled
+
+<Alert variant="warning">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+</Alert>
+
+<Preview
+  react={`<Radio label={"Radio-label"} name="minRadioKnapp" disabled />`}
+>
+  <Radio label={"Radio-label"} name="minRadioKnapp" disabled />
+</Preview>
+
+## RadioGruppe
+
+Denne komponenten inkluderer også en `RadioGruppe`-komponent som kan brukes til å gruppere flere radioknapper:
+
+<Alert variant="info">
+  Dersom du har mer enn fem alternativer, kan du vurdere om det er mer
+  hensiktsmessig å benytte en <Link href="/components/select">Select</Link> i
+  stedet.
+</Alert>
+
+<Preview
+  react={`<RadioGruppe legend="Hvor vil du sitte?">
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>`}
+>
+  <RadioGruppe legend="Hvor vil du sitte?">
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>
+</Preview>
+
+### Felles feilmelding
+
+<Preview
+  react={`<RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>`}
+>
+  <RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>
+</Preview>
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `RadioGruppe` skal propageres til children.
+
+<Preview
+  react={`<RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" feil />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>`}
+>
+  <RadioGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" feil />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>
+</Preview>

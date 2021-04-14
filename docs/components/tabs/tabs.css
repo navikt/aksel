@@ -1,0 +1,33 @@
+.tabs__ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.tabs__li {
+  list-style: none;
+}
+
+.tabs__button {
+  color: var(--tab-color);
+  border: none;
+  background: none;
+  padding: 0.5rem 1.5rem 0.25rem 1.5rem;
+  font-weight: var(--navds-font-weight-bold);
+  border-bottom: 4px solid transparent;
+}
+
+.tabs__button:hover {
+  border-bottom: 4px solid var(--navds-color-darkgray);
+  color: var(--navds-color-darkgray);
+}
+
+.tabs__button:focus {
+  outline: var(--outline-focus);
+  outline-offset: var(--outline-offset);
+}
+
+.tabs__buttonActive {
+  border-bottom: var(--tab-border);
+  color: var(--tab-color-active);
+}

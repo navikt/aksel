@@ -1,0 +1,277 @@
+@import (reference) "nav-frontend-core/less/_variabler";
+
+.contrast {
+  &__sample {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    color: white;
+    margin-bottom: 1rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__ratio {
+    svg {
+      height: 0.9rem;
+      position: relative;
+      top: 2px;
+      margin-left: 0.25rem;
+    }
+
+    &--label {
+      @media (max-width: 400px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.color__sample {
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  transition: all linear 50ms;
+  text-decoration: none;
+  position: relative;
+  width: 100%;
+  border: 4px solid black;
+
+  span {
+    color: white;
+
+    &:last-child {
+      text-transform: uppercase;
+    }
+  }
+
+  &--light {
+    span {
+      color: @navMorkGra;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: none !important;
+
+    span {
+      color: @navMorkGra;
+    }
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px @fokusFarge;
+    outline: none;
+    z-index: 1;
+  }
+}
+
+.color-group {
+  margin: 2rem 0;
+
+  .color-description {
+    background: #f4f4f4;
+    padding: 1rem;
+
+    p,
+    .typo-element {
+      line-height: 1.5rem;
+
+      &:first-child {
+        margin-top: 0 !important;
+      }
+
+      &:last-child {
+        margin-bottom: 0 !important;
+      }
+    }
+  }
+}
+
+.color-group--dark {
+  border: 2px solid @navBla;
+  background: @navGra80;
+}
+
+.color-group--dark:hover {
+  .color__sample--light:hover {
+    span {
+      color: @white;
+    }
+  }
+}
+
+#color-modal {
+  width: 500px;
+  padding: 1rem;
+
+  .color-banner {
+    height: 5rem;
+    margin: 0 -2rem;
+    margin-bottom: 1rem;
+  }
+
+  .typo-systemtittel {
+    margin-bottom: 1.5rem;
+  }
+
+  .typo-undertittel,
+  .typo-ingress {
+    margin-bottom: 1rem;
+  }
+
+  .typo-etikett-liten {
+    margin-bottom: 0.5rem;
+    color: @navGra60;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .section {
+    margin-top: 1.5rem;
+  }
+
+  .color-values {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1rem;
+    row-gap: 1rem;
+
+    .color-value-pair {
+      line-height: 1.5rem;
+
+      span {
+        display: block;
+        font-size: 1.75rem;
+        padding: 0.5rem;
+        background: #f4f4f4;
+      }
+    }
+
+    @media (max-width: 550px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    width: auto;
+  }
+}
+
+.color-modal-outer {
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+}
+
+.table-element-type {
+  display: flex;
+  align-items: center;
+
+  i {
+    display: flex;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: #f4f4f4;
+    justify-content: center;
+    align-items: center;
+    margin-right: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+
+    svg {
+      width: 80%;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 50%;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+      z-index: 1;
+    }
+
+    @media (max-width: 550px) {
+      width: 3rem;
+      height: 3rem;
+      margin-right: 1rem;
+    }
+  }
+
+  #color-accessibility__typo-icon {
+    svg {
+      width: 50%;
+      fill: @navGra80;
+    }
+  }
+
+  #color-accessibility__button-icon {
+    svg {
+      width: 200%;
+      position: relative;
+      left: 0.75rem;
+    }
+  }
+
+  #color-accessibility__graphics-icon {
+    svg {
+      width: 60%;
+      position: relative;
+      top: 0.5rem;
+    }
+  }
+}
+
+#color-accessibility__contrast-table {
+  tbody {
+    font-size: 1.25rem;
+
+    td {
+      vertical-align: middle;
+    }
+
+    @media (max-width: 400px) {
+      font-size: 1rem;
+    }
+  }
+}
+
+.typo-normal {
+  line-height: 1.375rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.typo-systemtittel {
+  margin: 3rem 0 1.5rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}
+
+.typo-undertittel {
+  margin: 2.5rem 0 1.5rem;
+
+  &:first-child {
+    margin-top: 0;
+  }
+}

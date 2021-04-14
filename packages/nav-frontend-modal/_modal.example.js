@@ -1,38 +1,23 @@
-import React, { Component } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
+import React, { useState } from "react";
 import { Knapp } from "nav-frontend-knapper";
-// eslint-disable-next-line
-import Modal from "./";
+import Modal from "nav-frontend-modal";
 
-export default class ModalEksempel extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalIsOpen: false,
-    };
-  }
+const ModalEksempel = () => {
+  const [open, setOpen] = useState(false);
 
-  openModal() {
-    this.setState({ modalIsOpen: true });
-  }
+  return (
+    <div>
+      <Knapp onClick={() => setOpen(true)}>Klikk for å åpne modal</Knapp>
+      <Modal
+        isOpen={open}
+        onRequestClose={() => setOpen(false)}
+        closeButton
+        contentLabel="Min modalrute"
+      >
+        <div style={{ padding: "2rem 2.5rem" }}>Innhold her</div>
+      </Modal>
+    </div>
+  );
+};
 
-  closeModal() {
-    this.setState({ modalIsOpen: false });
-  }
-
-  render() {
-    return (
-      <div>
-        <Knapp onClick={() => this.openModal()}>Klikk for å åpne modal</Knapp>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onRequestClose={() => this.closeModal()}
-          closeButton
-          contentLabel="Min modalrute"
-        >
-          <div style={{ padding: "2rem 2.5rem" }}>Innhold her</div>
-        </Modal>
-      </div>
-    );
-  }
-}
+export default ModalEksempel;

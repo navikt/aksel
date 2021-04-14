@@ -1,0 +1,94 @@
+---
+title: Ressurser
+rank: 2
+---
+
+# Ikoner
+
+<TableOfContents />
+
+## Nedlastning og ressurser
+
+<IconDownload />
+
+## Teknisk
+
+### Installering
+
+<Bash copy terminal code={`yarn add @navikt/ds-icons`} />
+<Bash copy terminal code={`npm i @navikt/ds-icons`} />
+
+Ikonene er tilgjengeliggjort for React og SVG.
+Husk å sjekke at prosjektet støtter lasting av SVG med riktige loaders
+eks <Link href="https://www.npmjs.com/package/file-loader">file-loader</Link> eller <Link href="https://www.npmjs.com/package/@svgr/webpack">@svgr/webpack</Link>.
+React komponenten tar imot props og setter dem direkte på SVG elementet. Husk <code>`aria-label`</code>
+, <code>`role`</code>, <code>`focusable`</code> propsene for en tilgjengelig brukeropplevelse.
+
+### Bruk
+
+SVG til ikonene har height og width satt til <code>1em</code>. Dette betyr at man må sette font-size på ikonet/parent for å
+endre størrelse eller endre width og height med props.
+
+### React
+
+<Bash code={`import { System } from '@navikt/ds-icons';`} language="jsx" copy />
+
+Med wrapper (16px font-size)
+
+<Bash
+  code={`<span style={{"fontSize": "1.5rem"}}>
+  <System aria-label="System ikon" role="img" focusable="false"/>
+</span>`}
+  language="jsx"
+  copy
+/>
+
+Uten wrapper (16px font-size)
+
+<Bash
+  code={`<System style={{"fontSize": "1.5rem"}} aria-label="System ikon" role="img" focusable="false"/>`}
+  language="jsx"
+  copy
+/>
+
+### SVG
+
+<Bash
+  code={`const System = require('@navikt/ds-icons/svg/System.svg');`}
+  language="jsx"
+  copy
+/>
+
+Med <code>img</code> (16px font-size)
+
+<Bash
+  code={`<img src={System} style={{ height: "1.5rem" }} alt="System ikon" />`}
+  language="jsx"
+  copy
+/>
+
+Med CSS
+
+<Bash
+  code={`.cssClass::after {
+  content: url("~@navikt/ds-icons/svg/System.svg");
+}`}
+  language="css"
+  copy
+/>
+
+## Tilgjengelighet
+
+### Universell utforming
+
+Meningsbærende ikoner skal forholde seg til WCAG 2.0 med AA 4.5 kontrastverdi som minimum. Ikoner som har en ornamental eller støttende funksjon til tekst kan vises med en 3.0 kontrastverdi.
+
+### Interaksjon
+
+Interaksjon med et ikon skal markeres ved å bruke mer enn to visuelle virkemidler. Forandring av form og farge, form og bevegelse, farge og bevegelse osv. I en NAV-sammenheng brukes form og farge som hovedform for markering av interaksjon.
+
+I praksis betyr dette av ikonene vises i sin “linje” versjon frem til man hoverer over dem. Ved hover blir ikonene erstattet med sin tilsvarende fylte versjon av det samme ikonet.
+
+### Sammensatte ikoner
+
+Det finnes ikoner som kan settes sammen for å kommunisere to eller flere ideer samtidig. Noen ikoner kan brukes som substantiver, mens andre kan fungere som et verb som tilsetter en handling over en annen konkret betydning. Selv om dette er noe som kan gjøres med de fleste av ikonene så skal man være forsiktig at ikonen beskriver en handling som medfører en tydelig handling til base ikonen

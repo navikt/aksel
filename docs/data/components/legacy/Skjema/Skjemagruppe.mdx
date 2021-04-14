@@ -1,0 +1,175 @@
+---
+title: SkjemaGruppe
+---
+
+# SkjemaGruppe
+
+Skjemagruppe lar deg semantisk gruppere flere skjemaelementer i en `fieldset`. Du kan både gi denne gruppen en felles overskrift (`legend`) og en felles feilmelding.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="SkjemaGruppe" />
+
+## Normal/Fieldset
+
+I sin enkleste from er SkjemaGruppe bare en `fieldset`-wrapper som sørger for semantisk gruppering av et sett med skjemafelter. Skjemaelementer i en SkjemaGruppe får som default `1rem` vertikal avstand til hverandre.
+
+<Preview
+  react={`<SkjemaGruppe>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>
+
+## Legend
+
+### Normal
+
+Du kan også gi skjemagruppen en felles overskrift (`legend`):
+
+<Preview
+  react={`<SkjemaGruppe legend="Kontaktperson">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe legend="Kontaktperson">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>
+
+### Custom styling
+
+Du kan også sende inn en annen [Typografi-komponent](/components/typografi) for å overstyre default `legend`-styling.
+
+<Preview
+  react={`<SkjemaGruppe legend={<Undertittel>Kontaktperson</Undertittel>}>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe legend={<Undertittel>Kontaktperson</Undertittel>}>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>
+
+## Innhold mellom legend og skjemagruppe
+
+Bruk `description`-propen for å legge inn egendefinert HTML-innhold mellom legend og skjemagruppen.
+
+<Preview
+  react={`<SkjemaGruppe
+    legend="Kontaktperson"
+    description="Personen som noen kan kontakte"
+  >
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe
+    legend="Kontaktperson"
+    description="Personen som noen kan kontakte"
+  >
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>
+
+## Grupper av radio- og checkboxer
+
+Skjemagrupper brukes vanligvis for å gruppere flere radioknapper eller checkboxer. For slike grupper har vi laget egne [RadioGruppe](/components/radio#radiogruppe)- og [CheckboxGruppe](/components/checkbox#checkboxgruppe)-komponenter for at disse skal bli stylet slik at avstanden mellom elementene blir litt mindre og for at `legend` skal bli seende ut som en vanlig `label`:
+
+### RadioGruppe
+
+<Preview
+  react={`<RadioGruppe legend="Hvor vil du sitte?">
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>`}
+>
+  <RadioGruppe legend="Hvor vil du sitte?">
+    <Radio label={"Bakerst"} name="sitteplass" />
+    <Radio label={"Midten"} name="sitteplass" />
+    <Radio label={"Fremst"} name="sitteplass" />
+  </RadioGruppe>
+</Preview>
+
+### CheckboxGruppe
+
+<Preview
+  react={`<CheckboxGruppe legend="Hvor vil du sitte?">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>`}
+>
+  <CheckboxGruppe legend="Hvor vil du sitte?">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Preview>
+
+## Felles feilmelding
+
+<Preview
+  react={`<SkjemaGruppe feil="Her er det noe feil">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe feil="Her er det noe feil">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>
+
+### Uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `SkjemaGruppe` skal propageres til children.
+
+<Preview
+  react={`<SkjemaGruppe feil="Her er det noe feil" utenFeilPropagering>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" feil="Feilen er her!" />
+    <Input label="Adresse" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe feil="Her er det noe feil" utenFeilPropagering>
+    <Input label="Fornavn" />
+    <Input label="Etternavn" feil="Feilen er her!" />
+    <Input label="Adresse" />
+  </SkjemaGruppe>
+</Preview>
+
+## Custom element
+
+Du kan også selv bestemme hvilket HTML-element som SkjemaGruppe skal rendres som. Default er som nevnt `fieldset`, men du kan overstyre dette via `tag`-propen:
+
+<Preview
+  react={`<SkjemaGruppe tag="div">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe tag="div">
+    <Input label="Fornavn" />
+    <Input label="Etternavn" />
+  </SkjemaGruppe>
+</Preview>

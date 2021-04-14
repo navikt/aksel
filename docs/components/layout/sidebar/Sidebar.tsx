@@ -1,6 +1,6 @@
 import cl from "classnames";
 import { Close } from "@navikt/ds-icons";
-import style from "../layout.module.css";
+import "../layout.css";
 import Menu from "./Menu";
 
 interface SidebarProps {
@@ -11,27 +11,32 @@ interface SidebarProps {
   menu: any[];
 }
 
-const Sidebar = ({ sidebar, small, onSidebarChange, menu }: SidebarProps) => {
+const Sidebar = ({
+  sidebar,
+  small,
+  onSidebarChange,
+  menu = [],
+}: SidebarProps) => {
   return (
     <>
       {sidebar && small && (
         <div
           onClick={() => onSidebarChange(false)}
-          className={cl(style["sidebar--overlay"], {
-            [style["sidebar--overlay--fade"]]: sidebar,
+          className={cl("sidebar--overlay", {
+            "sidebar--overlay--fade": sidebar,
           })}
         />
       )}
       <div
-        className={cl(style.sidebar, {
-          [style.sidebar__mobile]: small,
-          [style["sidebar__mobile--open"]]: small && sidebar,
+        className={cl("sidebar", {
+          sidebar__mobile: small,
+          "sidebar__mobile--open": small && sidebar,
         })}
       >
         {small && sidebar && (
           <button
             onClick={() => onSidebarChange(!sidebar)}
-            className={style.sidebar__icon}
+            className={"sidebar__icon"}
           >
             <Close />
           </button>

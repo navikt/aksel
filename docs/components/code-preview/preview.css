@@ -1,0 +1,26 @@
+.preview__wrapper {
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: var(--bg-secondary);
+  margin-bottom: 3rem;
+  outline: var(--outline);
+}
+
+.preview__container {
+  border-bottom: 2px solid var(--code-divider);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.preview__container--no-code {
+  border-bottom: 2px solid transparent;
+  margin-bottom: 0;
+}
+
+.preview__container > * {
+  margin-top: 1rem;
+}
+
+.preview__container > *:first-child {
+  margin-top: 0px;
+}

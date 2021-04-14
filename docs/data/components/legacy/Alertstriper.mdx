@@ -1,0 +1,98 @@
+---
+title: Alertstriper
+---
+
+# Alertstriper
+
+Alertstripen er en komponent som benyttes for å gi brukeren varsler av ymse slag, og komponenten støtter forskjellige visninger basert på hvilken type varsel som formidles til brukeren.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-alertstriper classnames nav-frontend-alertstriper-style nav-frontend-core nav-frontend-ikoner-assets nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi prop-types react --save`}
+/>
+
+<Npm packName="nav-frontend-alertstriper" imports="AlertStripe" defaultExport />
+
+## Default striper
+
+<Preview
+  react={`<><Alertstripe type="info">Nå kan du sende inn søknaden.</Alertstripe>
+  <Alertstripe type="suksess">Du har sendt søknaden.</Alertstripe>
+  <Alertstripe type="advarsel">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alertstripe>
+  <Alertstripe type="feil">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Link href="#">følge med på hvordan det går</Link>.
+  </Alertstripe></>`}
+>
+  <Alertstripe type="info">Nå kan du sende inn søknaden.</Alertstripe>
+  <Alertstripe type="suksess">Du har sendt søknaden.</Alertstripe>
+  <Alertstripe type="advarsel">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alertstripe>
+  <Alertstripe type="feil">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Link href="#">følge med på hvordan det går</Link>.
+  </Alertstripe>
+</Preview>
+
+## Inline striper
+
+<Preview
+  react={`<><Alertstripe type="info" form="inline">
+    Nå kan du sende inn søknaden.
+  </Alertstripe>
+  <Alertstripe type="suksess" form="inline">
+    Du har sendt søknaden.
+  </Alertstripe>
+  <Alertstripe type="advarsel" form="inline">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alertstripe>
+  <Alertstripe type="feil" form="inline">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Link href="#">følge med på hvordan det går</Link>.
+  </Alertstripe></>`}
+>
+  <Alertstripe type="info" form="inline">
+    Nå kan du sende inn søknaden.
+  </Alertstripe>
+  <Alertstripe type="suksess" form="inline">
+    Du har sendt søknaden.
+  </Alertstripe>
+  <Alertstripe type="advarsel" form="inline">
+    Det er mange som bruker nav.no nå, derfor kan det ta litt tid før søknaden
+    din kommer fram.
+  </Alertstripe>
+  <Alertstripe type="feil" form="inline">
+    Det er ikke mulig å sende søknaden akkurat nå, vennligst prøv igjen senere.
+    Du er velkommen til å <Link href="#">følge med på hvordan det går</Link>.
+  </Alertstripe>
+</Preview>
+
+## Tilgjengelighet
+
+### Dynamisk visning
+
+Hvis alertstripene skal dukke opp dynamisk, for eksempel som en reaksjon på noe brukeren gjør, er det viktig at det allerede ligger et element på siden som har definert en såkalt "live region" hvor Alertstripene skal bli rendret i. Dette kan gjøres ved å gi container-elementet et `aria-live`-attributt med verdien `polite` eller `assertive`.
+
+<Bash code={`<div aria-live="polite">
+  <!-- her kommer det en Alertstripe når brukeren klikker på noe -->
+</div>`}/>
+
+Merk at `aria-live="assertive"` bør brukes varsomt og kun når det er nødvendig å få brukerens oppmerksomhet umiddelbart. Et alternativ er å gi konteiner-elementet et `role="alert"`-attributt, som er akkurat det samme som å sette `aria-live="assertive"` og `aria-atomic="true`.
+
+### Mer informasjon
+
+- [Using ARIA role=alert or Live Regions to Identify Errors (W3.org)](https://www.w3.org/TR/WCAG20-TECHS/ARIA19.html)
+- [ARIA Live Regions (Mozilla Developer Network)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions)
+- [Using the alert role (Mozilla Developer Network)](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_alert_role)
+- [User Notifications (W3.org)](https://www.w3.org/WAI/tutorials/forms/notifications/)
