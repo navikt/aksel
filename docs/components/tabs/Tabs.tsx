@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./tabs.css";
 import cl from "classnames";
 

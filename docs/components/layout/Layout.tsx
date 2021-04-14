@@ -1,7 +1,7 @@
 import cl from "classnames";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import { Grid, Cell, ContentContainer } from "@navikt/ds-react";
+import { ContentContainer } from "@navikt/ds-react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
@@ -41,14 +41,9 @@ const Layout = ({ children, menu }: LayoutProps) => {
         small={small}
         onSidebarChange={(x) => setSidebar(x)}
       />
-      {/* TEMP UNTIL LAYOUT UPDATE */}
       <main className={"contentWrapper"}>
         <ContentContainer>
-          <Grid>
-            <Cell className={"content"} xs={12} sm={12} md={12} lg={12}>
-              {children}
-            </Cell>
-          </Grid>
+          <div className={"content"}>{children}</div>
         </ContentContainer>
       </main>
     </div>
