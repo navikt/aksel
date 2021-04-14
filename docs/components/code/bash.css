@@ -8,10 +8,26 @@
   font-family: var(--navds-font-family);
 }
 
+.bash__pre--good {
+  border-bottom: 8px solid var(--navds-color-green-50);
+}
+
+.bash__pre--bad {
+  border-bottom: 8px solid var(--navds-color-red-60);
+}
+
+.bash__good-bad {
+  margin-top: -1rem;
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+}
+
 .bash__preWrapper {
   position: relative;
   align-items: center;
   display: flex;
+  flex-direction: column;
 }
 
 .bash__terminal {

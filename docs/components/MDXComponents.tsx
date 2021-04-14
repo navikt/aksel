@@ -1,4 +1,4 @@
-import { Settings } from "@navikt/ds-icons";
+import { Settings, SuccessFilled, ErrorFilled } from "@navikt/ds-icons";
 import { Alert, Heading, Link, Paragraph } from "@navikt/ds-react";
 import Alertstripe from "nav-frontend-alertstriper";
 import Chevron from "nav-frontend-chevron";
@@ -14,7 +14,7 @@ import {
   Tilbakeknapp,
   Xknapp,
 } from "nav-frontend-ikonknapper";
-import { Fareknapp, Flatknapp, Hovedknapp, Knapp } from "nav-frontend-knapper";
+import { Knapp } from "nav-frontend-knapper";
 import Lenkepanel, { LenkepanelBase } from "nav-frontend-lenkepanel";
 import Lenke from "nav-frontend-lenker";
 import Lesmerpanel from "nav-frontend-lesmerpanel";
@@ -78,7 +78,17 @@ import Inline from "./code/Inline";
 import TableOfContents from "./table-of-contents/TableOfContents";
 import FormValidationExample from "../examples/form-validation/FormValidationExample";
 import Palette from "../examples/resources/colors/Palette";
-import { ButtonIcon, TypoIcon, VeilederIcon } from "./assets/svg";
+import {
+  ButtonIcon,
+  TypoIcon,
+  VeilederIcon,
+  NAVLogoCircle,
+  SketchLogo,
+  FigmaIcon,
+  W3CLogo,
+  ZeplinLogo,
+  GithubLogo,
+} from "./assets/svg";
 import IconPage from "../examples/resources/icons/IconPage";
 import IconDownload from "../examples/resources/icons/IconDownload";
 
@@ -90,6 +100,15 @@ const components = {
   p: (props) => <Paragraph size="medium" {...props} />,
   a: (props) => <Link {...props} />,
   code: (props) => <Inline {...props} />,
+  SuccessIcon: (props) => (
+    <SuccessFilled
+      style={{ color: "var(--navds-color-green-70)" }}
+      {...props}
+    />
+  ),
+  ErrorIcon: (props) => (
+    <ErrorFilled style={{ color: "var(--navds-color-red-60)" }} {...props} />
+  ),
   Bash,
   Preview,
   Import,
@@ -155,6 +174,12 @@ const components = {
   ButtonIcon,
   TypoIcon,
   VeilederIcon,
+  NAVLogoCircle,
+  W3CLogo,
+  SketchLogo,
+  FigmaIcon,
+  ZeplinLogo,
+  GithubLogo,
   BekreftcheckboxpanelExample1,
   BekreftcheckboxpanelExample2,
   EkspanderbartpanelExample,

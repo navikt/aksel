@@ -1,7 +1,7 @@
 import copy from "copy-to-clipboard";
 import Prism from "prismjs";
 import cl from "classnames";
-import { Files } from "@navikt/ds-icons";
+import { ErrorFilled, Files, SuccessFilled } from "@navikt/ds-icons";
 import { Popover } from "@navikt/ds-react";
 import { useEffect, useRef, useState } from "react";
 import "prismjs/components/prism-jsx.min";
@@ -38,12 +38,16 @@ const Bash = ({
   terminal = false,
   copy = false,
   language = "html",
+  good,
+  bad,
   ...props
 }: {
   code: string;
   terminal?: boolean;
   copy?: boolean;
   language?: PrismLanguages;
+  good?: boolean;
+  bad?: boolean;
 }) => {
   const highlighted = terminal
     ? code
@@ -67,7 +71,12 @@ const Bash = ({
 
   return (
     <div className={"bash__preWrapper"}>
-      <pre className={"bash__pre"}>
+      <pre
+        className={cl("bash__pre", {
+          "bash__pre--good": !!good,
+          "bash__pre--bad": !!bad,
+        })}
+      >
         <code
           className={cl("bash__code", {
             bash__codeCopy: copy,
@@ -88,6 +97,22 @@ const Bash = ({
           </>
         )}
       </pre>
+      {(good || bad) && (
+        <div className="bash__good-bad">
+          {good && (
+            <>
+              <SuccessFilled style={{ color: "var(--navds-color-green-50)" }} />
+              Gjør dette!
+            </>
+          )}
+          {bad && (
+            <>
+              <ErrorFilled style={{ color: "var(--navds-color-red-60)" }} />
+              Ikke gjør dette!
+            </>
+          )}
+        </div>
+      )}
       <Popover
         className="bash__popover"
         role="alert"

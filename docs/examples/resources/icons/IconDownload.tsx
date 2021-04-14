@@ -39,9 +39,7 @@ const IconSidebar = () => {
           <Download />
         </span>
       </a>
-      <Undertittel className="iconPage__headlines iconPage__linkHeadlines">
-        Ressurser
-      </Undertittel>
+      <Undertittel>Ressurser</Undertittel>
       <Lenkepanel
         className="resource-link iconSidebar__linkPanels"
         href="https://www.figma.com/proto/UmEVH3pZ71uJPsSz9ilP3Y/NAV-ikoner-2.1-Figma-i-test?node-id=241%3A696&scaling=min-zoom"
