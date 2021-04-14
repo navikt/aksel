@@ -85,7 +85,12 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
             <Attachment className={"navds-layout__panel-copy-icon"} />
             <span>Kopier lenke</span>
           </Button>
-          <Popover anchorEl={anchorEl} open={copied} onClose={() => {}}>
+          <Popover
+            arrow={false}
+            anchorEl={anchorEl}
+            open={copied}
+            onClose={() => {}}
+          >
             <div className="navds-layout__panel-popover-content">Kopiert</div>
           </Popover>
         </div>
