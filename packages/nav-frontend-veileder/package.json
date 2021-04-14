@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-veileder",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "lib/veileder.js",
   "types": "lib/veileder.d.ts",
   "license": "MIT",
