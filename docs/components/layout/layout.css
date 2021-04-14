@@ -103,6 +103,8 @@
 
 .content {
   width: 100%;
+  max-width: 600px;
+  margin: 0 auto 0 0;
 }
 
 @media (max-width: 959px) {
