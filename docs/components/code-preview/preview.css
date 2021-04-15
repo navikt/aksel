@@ -15,6 +15,7 @@
 .preview__container--no-code {
   border-bottom: 2px solid transparent;
   margin-bottom: 0;
+  padding: 0;
 }
 
 .preview__container > * {
@@ -23,4 +24,10 @@
 
 .preview__container > *:first-child {
   margin-top: 0px;
+}
+
+.preview__container figcaption {
+  text-align: center;
+  padding: 0.5em;
+  font-style: italic;
 }

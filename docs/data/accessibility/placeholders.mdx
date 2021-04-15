@@ -25,7 +25,7 @@ Selv om placeholders kan virke som en kjempegod snarvei for å gi brukeren enkel
     alt="Eksempelbilde som viser hvorfor styling og høy kontrast av placeholder kan være upraktisk."
 />
 
-  <figcaption className="placeholders__figcaption">
+  <figcaption>
     Er adressen allerede utfylt?
   </figcaption>
 </Preview>
@@ -37,46 +37,51 @@ Selv om placeholders kan virke som en kjempegod snarvei for å gi brukeren enkel
 
 Vår anbefaling er å heller bruke vanlige labels, `description`-propen eller [Hjelpetekst](/components/hjelpetekst)-komponenter i nærheten av feltet.
 
-<Input
-  label="Password"
-  description="8-16 Characters, containing atleast 2 numbers"
-  type="password"
-/>
-<Bash
-  good
-  code={`<Input
+<Preview noCode>
+  <Input
+    label="Password"
+    description="8-16 Characters, containing atleast 2 numbers"
+    type="password"
+  />
+  <Bash
+    good
+    code={`<Input
     label="Password"
     description="8-16 Characters, containing atleast 2 numbers"
     type="password"
   />`}
-/>
+  />
+</Preview>
 
-<Input
-  label="Password"
-  placeholder="8-16 Characters, containing atleast 2 numbers"
-/>
-<Bash
-  bad
-  code={`<Input
+<Preview noCode>
+  <Input
+    label="Password"
+    placeholder="8-16 Characters, containing atleast 2 numbers"
+  />
+  <Bash
+    bad
+    code={`<Input
     label="Password"
     placeholder="8-16 Characters, containing atleast 2 numbers"
 />`}
-/>
+  />
+</Preview>
 <br />
 
-<Input
-  label={
-    <div style={{ display: "flex" }}>
-      E-Mail
-      <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
-        Example: ola.nordmann@norge.no
-      </Hjelpetekst>
-    </div>
-  }
-/>
-<Bash
-  good
-  code={`<Input
+<Preview noCode>
+  <Input
+    label={
+      <div style={{ display: "flex" }}>
+        E-Mail
+        <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+          Example: ola.nordmann@norge.no
+        </Hjelpetekst>
+      </div>
+    }
+  />
+  <Bash
+    good
+    code={`<Input
       label={
         <div style={{ display: "flex" }}>
           E-Mail
@@ -86,14 +91,16 @@ Vår anbefaling er å heller bruke vanlige labels, `description`-propen eller [H
         </div>
       }
     />`}
-/>
+  />
+</Preview>
 
-<Input label="E-Mail" placeholder="ola.nordmann@norge.no" />
-<Bash
-  bad
-  code={`<Input label="E-Mail" placeholder="ola.nordmann@norge.no" />`}
-/>
-
+<Preview noCode>
+  <Input label="E-Mail" placeholder="ola.nordmann@norge.no" />
+  <Bash
+    bad
+    code={`<Input label="E-Mail" placeholder="ola.nordmann@norge.no" />`}
+  />
+</Preview>
 ## Mer om Placeholders
 
 <Lenkepanel

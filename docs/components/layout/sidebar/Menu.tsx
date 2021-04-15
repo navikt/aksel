@@ -5,6 +5,7 @@ import {
   AccordionMenuCollapsable,
   AccordionMenuItem,
 } from "@navikt/ds-react";
+import React from "react";
 
 const MenuLink = (node) => {
   const { asPath } = useRouter();
@@ -18,17 +19,38 @@ const MenuLink = (node) => {
   );
 };
 
-const mapToComponents = (node) =>
-  node.children ? (
-    <AccordionMenuCollapsable key={node.title} title={node.title}>
-      {node.children.map(mapToComponents)}
+const isActive = (children, path) => {
+  const active = children.find((child) => {
+    return child.children
+      ? isActive(child.children, path)
+      : child.pathName === path;
+  });
+  return active;
+};
+
+const mapToComponents = (node, path) => {
+  const active = node.children ? isActive(node.children, path) : false;
+
+  return node.children ? (
+    <AccordionMenuCollapsable
+      defaultOpen={active}
+      key={node.title}
+      title={node.title}
+    >
+      {node.children.map((item) => mapToComponents(item, path))}
     </AccordionMenuCollapsable>
   ) : (
     <MenuLink key={node.title} {...node} />
   );
+};
 
-const Menu = ({ menu }) => (
-  <AccordionMenu>{menu.map(mapToComponents)}</AccordionMenu>
-);
+const Menu = ({ menu }) => {
+  const { asPath } = useRouter();
+  return (
+    <AccordionMenu>
+      {menu.map((item) => mapToComponents(item, asPath))}
+    </AccordionMenu>
+  );
+};
 
 export default Menu;
