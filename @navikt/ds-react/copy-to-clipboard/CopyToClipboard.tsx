@@ -21,10 +21,15 @@ export interface CopyToClipboardProps
    * Description of text, examples: "personnummer", "navn", "epost" etc.
    */
   label: string;
+  /**
+   * Use a differnet icon to display
+   * @default "Files" from @navikt/ds-icons
+   */
+  icon?: React.ReactElement;
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
-  ({ children, text, label, className, ...rest }, ref) => {
+  ({ children, text, label, icon, className, ...rest }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
     const timeoutRef = useRef<NodeJS.Timeout>();
@@ -32,7 +37,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
 
     useEffect(() => {
       if (openPopover) {
-        timeoutRef.current = setTimeout(() => setOpenPopover(false), 1500);
+        timeoutRef.current = setTimeout(() => setOpenPopover(false), 2000);
         return () => timeoutRef.current && clearTimeout(timeoutRef.current);
       }
     }, [openPopover]);
@@ -47,23 +52,24 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
     return (
       <>
         <Button
-          {...rest}
           ref={mergedRef}
           variant="secondary"
           title={title}
           className={cl("navds-copy-to-clipboard", className)}
           onClick={handleClick}
+          {...rest}
         >
+          {icon ? <>{icon}</> : <Files aria-label="Fil ikon for kopiering" />}
           {children ? children : <span className="sr-only">{title}</span>}
-          <Files className="navds-copy-to-clipboard__icon" />
         </Button>
         <Popover
           role="alert"
           anchorEl={buttonRef.current}
           open={openPopover}
           onClose={() => setOpenPopover(false)}
-          placement="bottom-start"
+          placement="auto"
           arrow={false}
+          className="navds-copy-to-clipboard__popover"
         >
           {label} er kopiert
         </Popover>

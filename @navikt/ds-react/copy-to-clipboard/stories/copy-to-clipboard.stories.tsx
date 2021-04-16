@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { CopyToClipboard } from "../index";
+import { Link } from "@navikt/ds-icons";
 
 export default {
   title: "@ds-react/copy-to-clipboard",
@@ -23,6 +24,16 @@ export const All = () => {
 
       <h2>Tilpasser seg fontstørrelse</h2>
       <CopyToClipboard label={label} text={text} style={{ fontSize: "0.8rem" }}>
+        Kopier tekst
+      </CopyToClipboard>
+
+      <h2>Custom icon</h2>
+      <CopyToClipboard
+        icon={<Link />}
+        label={label}
+        text={text}
+        style={{ fontSize: "0.8rem" }}
+      >
         Kopier tekst
       </CopyToClipboard>
     </div>

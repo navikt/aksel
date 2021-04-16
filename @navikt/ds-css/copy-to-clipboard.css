@@ -5,6 +5,6 @@
   padding: 0.25em;
 }
 
-.navds-copy-to-clipboard .navds-copy-to-clipboard__icon {
-  font-size: 1.5em;
+.navds-copy-to-clipboard__popover {
+  padding: 0.25rem;
 }
