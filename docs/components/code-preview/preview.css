@@ -22,10 +22,6 @@
   margin-top: 1rem;
 }
 
-.preview__container > *:first-child {
-  margin-top: 0px;
-}
-
 .preview__container figcaption {
   text-align: center;
   padding: 0.5em;

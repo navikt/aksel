@@ -26,7 +26,8 @@
     "fix:versions": "node utilities/scripts/fixDependencyVersions.js",
     "gen:docs": "node utilities/scripts/generateReadmes.js",
     "react-docgen": "node utilities/scripts/react-docgen.js",
-    "next-dev": "yarn workspace docs run dev",
+    "react-docgen-docs": "node utilities/scripts/react-docgen-docs.js",
+    "next-dev": "yarn react-docgen-docs && yarn workspace docs run dev",
     "next-prod": "yarn workspace docs run start"
   },
   "workspaces": [
