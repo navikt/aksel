@@ -6,7 +6,7 @@
 @import "print.css";
 @import "utility.css";
 
-html {
+html:focus-within {
   scroll-behavior: smooth;
 }
 
