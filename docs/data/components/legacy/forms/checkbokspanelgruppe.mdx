@@ -1,0 +1,118 @@
+---
+title: Checkbokspanelgruppe
+---
+
+# Checkbokspanelgruppe
+
+Denne komponenten bør benyttes hvis brukeren må utføre en viktig flervalgsoppgave som fortjener større plass på skjermen.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="CheckboksPanelGruppe" />
+
+## Normal
+
+<Preview react={`<Checkbox label={"Checkbox"} />`}>
+  <Checkbox label={"Checkbox"} />
+</Preview>
+
+## Disabled
+
+<Alert variant="warning">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt. Ler mer om dette på{" "}
+  <Link href="/accessibility/disabled">siden vår om `disabled`</Link>.
+</Alert>
+
+<Preview react={`<Checkbox label={"Checkbox"} disabled />`}>
+  <Checkbox label={"Checkbox"} disabled />
+</Preview>
+
+## Feilmelding
+
+<Preview
+  react={`<Checkbox
+    label={"Checkbox"}
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  />`}
+>
+  <Checkbox
+    label={"Checkbox"}
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  />
+</Preview>
+
+## CheckboxGruppe
+
+Denne komponenten inkluderer også en `CheckboxGruppe`-komponent som kan brukes til å gruppere flere checkboxer:
+
+<Preview
+  react={`<CheckboxGruppe legend="Hvor vil du sitte?">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>`}
+>
+  <CheckboxGruppe legend="Hvor vil du sitte?">
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Preview>
+
+### Felles feilmelding
+
+<Preview
+  react={`<CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>`}
+>
+  <CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+  >
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Preview>
+
+### Feilmelding uten propagering av feil-prop til children
+
+Bruk `utenFeilPropagering`-propen for å bestemme om `feil`-propen til `CheckboxGruppe` skal propageres til children.
+
+<Preview
+  react={`<CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} feil />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>`}
+>
+  <CheckboxGruppe
+    legend="Hvor vil du sitte?"
+    feil="Feilmeldingstekst må gjenta nøkkelord fra label"
+    utenFeilPropagering
+  >
+    <Checkbox label={"Bakerst"} />
+    <Checkbox label={"Midten"} feil />
+    <Checkbox label={"Fremst"} />
+  </CheckboxGruppe>
+</Preview>

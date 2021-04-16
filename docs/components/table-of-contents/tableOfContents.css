@@ -1,0 +1,64 @@
+.toc__ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.toc__li {
+  list-style: none;
+  margin: 0;
+  font-size: var(--navds-font-size-medium);
+  line-height: var(--navds-font-line-height-medium);
+  color: var(--navds-color-blue-50);
+  display: flex;
+  align-items: center;
+  transition: margin 100ms linear;
+  column-gap: 0.25rem;
+  padding: 0.25rem 0;
+  width: fit-content;
+}
+
+.toc__li > a {
+  text-decoration: none;
+  border-bottom: none;
+  background: linear-gradient(
+    to bottom,
+    var(--navds-color-text-link) 0%,
+    var(--navds-color-text-link) 100%
+  );
+  background-size: 0px 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  transition: background-size 0.15s;
+}
+
+.toc__li > svg {
+  flex-shrink: 0;
+}
+
+.toc__li:hover > a {
+  background-size: 100% 2px;
+}
+
+.toc__li:focus-within > a {
+  color: var(--navds-color-darkgray);
+  background: linear-gradient(
+    to bottom,
+    var(--navds-color-darkgray) 0%,
+    var(--navds-color-darkgray) 100%
+  );
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  outline: none;
+}
+
+.toc__li:focus-within > svg {
+  color: var(--navds-color-darkgray);
+}
+
+.toc__li > a:active {
+  color: var(--navds-color-text-inverse);
+  background-color: var(--navds-color-blue-80);
+  background-size: 0px 2px;
+}

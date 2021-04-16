@@ -1,0 +1,262 @@
+---
+title: Input
+---
+
+# Input
+
+Input brukes når vi har behov for å ta imot tekst fra sluttbruker.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="Input" />
+
+## Normal
+
+I sin enkleste form er `Input` bare et enkelt tekstinputfelt.
+
+<Preview react={`<Input label="Inputfelt-label" />`}>
+  <Input label="Inputfelt-label" />
+</Preview>
+
+## Med label
+
+<Alert variant="info">
+  <Link href="https://www.w3.org/TR/WCAG21/#labels-or-instructions">
+    WCAG 3.3.2
+  </Link>{" "}
+  krever at alle skjemafelter skal ha en tilhørende
+  <code>label</code>.
+</Alert>
+
+### Label som prop
+
+Den enkleste (og anbefalte) måten å gi inputfeltet en label er å angi dette gjennom komponentens `label`-prop. Dette vil rendre en `<label>` rett over feltet, med korrekt CSS-klasse og `for`-attributt ferdig påført:
+
+<Preview react={`<Input label="Mitt skjemafelt:" />`}>
+  <Input label="Mitt skjemafelt:" />
+</Preview>
+
+### Label som komponent
+
+Du kan også importere `Label`-komponenten og manuelt sette denne utenfor inputfeltet:
+
+<Alert variant="warning">
+  Husk å gi Label-komponenten korrekt <code>for</code>/<code>htmlFor</code>
+  -attributt (som skal ha samme verdi som inputfeltets <code>id</code>
+  -attributt) slik at disse blir sammenkoblet riktig.
+</Alert>
+
+<Preview
+  react={`<><Label htmlFor="min-input">Mitt skjemafelt:</Label>
+  <Input id="min-input" /></>`}
+>
+  <Label htmlFor="min-input">Mitt skjemafelt:</Label>
+  <Input id="min-input" />
+</Preview>
+
+Dette kan være nødvendig om man f.eks. vil sette `label` til venstre for inputfeltet:
+
+<Preview
+  react={`<div style={{ display: "flex", alignItems: "center" }}>
+    <Label htmlFor="min-input-2" style={{ margin: 0, marginRight: "1rem" }}>
+      Mitt skjemafelt:
+    </Label>
+    <div style={{ flexGrow: 1 }}>
+      <Input id="min-input-2" />
+    </div>
+  </div>`}
+>
+  <div style={{ display: "flex", alignItems: "center" }}>
+    <Label htmlFor="min-input-2" style={{ margin: 0, marginRight: "1rem" }}>
+      Mitt skjemafelt:
+    </Label>
+    <div style={{ flexGrow: 1 }}>
+      <Input id="min-input-2" />
+    </div>
+  </div>
+</Preview>
+
+### Label som aria-attributter
+
+Unntaksvis kan man også angi `label` via inputfeltets `aria-label`- eller `aria-labelledby`-attributter. I slike tilfeller kan det være greit å supplere inputfeltet med et `placeholder`-attributt også.
+
+<Alert variant="warning">
+  Dette er foreløpig <strong>kun tillatt</strong> på inputfelter inne i
+  tabell-rader eller lignende tilfeller hvor det er veldig vanskelig å ha en
+  synlig tekst-label i nærheten av inputfeltet.{" "}
+  <strong>Skal ikke misbrukes.</strong>
+</Alert>
+
+<Preview
+  react={`<><Input aria-label="Mitt skjemafelt:" placeholder="Her kan det skrives" />/** eller */<Input aria-labelledby="id-til-html-element-med-label-tekst" placeholder="Her kan det skrives" /></>`}
+>
+  <Input aria-label="Mitt skjemafelt:" placeholder="Her kan det skrives" />
+</Preview>
+
+## Nummer
+
+Hvis man ønsker at brukeren skal sette inn tall og da gi dem talltastaturet på mobil, ta i bruk `inputMode="numeric" pattern="[0-9]*"`
+
+<Alert variant="info">
+  Les mer om hvorfor man bør bruke <code>inputMode</code> og{" "}
+  <code>pattern</code> ovenfor <code> type="number" </code> på{" "}
+  <Link href="/legacy/Input#unntak">under tilgjengelighet</Link>.
+</Alert>
+
+<Preview
+  react={`<Input label="Inputfelt-nummer" inputMode="numeric" pattern="[0-9]*" />`}
+>
+  <Input label="Inputfelt-nummer" inputMode="numeric" pattern="[0-9]*" />
+</Preview>
+
+## Kombinasjon med Hjelpetekst
+
+<Alert variant="info">
+  Les mer om hvorfor det kan være lurt å sende Hjelpetekst inn med{" "}
+  <code>label</code>-propen under{" "}
+  <Link href="/legacy/hjelpetekst">
+    komponentens tilgjengelighets-informasjon
+  </Link>
+  .
+</Alert>
+
+<Preview
+  react={`<Input
+    label={
+      <div style={{ display: "flex" }}>
+        Inputfelt-label
+        <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+          Innholdet vil vises når brukeren klikker på knappen.
+        </Hjelpetekst>
+      </div>
+    }
+  />`}
+>
+  <Input
+    label={
+      <div style={{ display: "flex" }}>
+        Inputfelt-label
+        <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+          Innholdet vil vises når brukeren klikker på knappen.
+        </Hjelpetekst>
+      </div>
+    }
+  />
+</Preview>
+
+## Disabled
+
+<Alert variant="warning">
+  Merk at disabled bør unngås, og at bruken heller bør løses på andre måter, da
+  fks kombinert med tydelige feilmeldinger hvis handlingen av en eller annen
+  grunn ikke er tillatt.
+</Alert>
+
+<Preview react={`<Input label="Inputfelt-label" disabled />`}>
+  <Input label="Inputfelt-label" disabled />
+</Preview>
+
+## Innhold mellom label og skjemafelt
+
+Bruk `description`-propen for å legge inn egendefinert HTML-innhold mellom labelen og skjemafeltet.
+
+<Preview
+  react={`<Input label="Inputfelt-label" description="En kort beskrivelse av feltet" />`}
+>
+  <Input label="Inputfelt-label" description="En kort beskrivelse av feltet" />
+</Preview>
+
+## Feilmarkering
+
+### Normal
+
+<Preview react={`<Input label="Inputfelt-label" feil="Her er det noe feil" />`}>
+  <Input label="Inputfelt-label" feil="Her er det noe feil" />
+</Preview>
+
+### Forenklet
+
+<Preview react={`<Input label="Inputfelt-label" feil />`}>
+  <Input label="Inputfelt-label" feil />
+</Preview>
+
+## Lengde
+
+Lengden på inputfelt skal tilpasses det antallet tegn bruker skal fylle inn. For å holde skjemaene
+ryddige og oversiktlige, samt for å lette utviklingen er det satt et sett med faste bredder. Velg
+den bredden som passer best til dataene bruker skal fylle inn.
+
+<Preview
+  react={`<SkjemaGruppe>
+    <Input label="Fullbredde inputfelt:" bredde="fullbredde" />
+    <Input label="XXL inputfelt" bredde="XXL" />
+    <Input label="XL inputfelt" bredde="XL" />
+    <Input label="L inputfelt" bredde="L" />
+    <Input label="M inputfelt" bredde="M" />
+    <Input label="S inputfelt" bredde="S" />
+    <Input label="XS inputfelt" bredde="XS" />
+    <Input label="XXS inputfelt" bredde="XXS" />
+  </SkjemaGruppe>`}
+>
+  <SkjemaGruppe>
+    <Input label="Fullbredde inputfelt:" bredde="fullbredde" />
+    <Input label="XXL inputfelt" bredde="XXL" />
+    <Input label="XL inputfelt" bredde="XL" />
+    <Input label="L inputfelt" bredde="L" />
+    <Input label="M inputfelt" bredde="M" />
+    <Input label="S inputfelt" bredde="S" />
+    <Input label="XS inputfelt" bredde="XS" />
+    <Input label="XXS inputfelt" bredde="XXS" />
+  </SkjemaGruppe>
+</Preview>
+
+## Mini
+
+Man kan også rendre en mindre `32px` versjon ved å bruke `mini`-attributtet.
+
+<Alert variant="warning">
+  Som hovedregel skal vi <strong>alltid</strong> bruke de store inputfeltene
+  våre. For tilfeller med svært begrenset plass kan de mindre inputfeltene
+  brukes <strong>unntaksvis ved klart behov</strong>.
+</Alert>
+
+<Preview react={`<Input mini />`}>
+  <Input mini />
+</Preview>
+
+## Tilgjengelighet
+
+### Obligatoriske felter
+
+Normalt ber man bare brukeren oppgi informasjon når det er nødvendig, og i NAVs løsninger betyr det at de fleste input-feltene vil være påkrevd. Vi har derfor valgt å ikke markere obligatoriske felter. Hvis et felt er _valgfritt_, skal disse markeres med ordet «valgfri» i parentes bak label-teksten. For eksempel «Alder (valgfri)».
+
+Uansett om du markerer valgfrie eller obligatoriske felt, trenges det en forklaring i begynnelsen av skjemaet. Et eksempel på en tekst kan være:
+
+<Bash
+  code={`Alle felt må fylles ut, bortsett fra de som er markert som valgfrie.`}
+/>
+
+### Inputtyper
+
+Bruk alltid input med `type`-attributt som passer for den dataen som skal tastes inn. Hvis brukes skal oppgi epostadressen sin så bør du bruke `type="email"` slik at mobilbrukere får opp tastatur med @-symbolet, eller `type="tel"` slik at de får opp nummer-tastatur osv. Se [oversikt over hvilke typer du kan bruke her](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#<input>_types).
+
+#### Unntak
+
+Det gir semantisk mening å ta i bruk `type="number"`, men det viser seg å kunne være problematisk for enkelte brukere.
+
+- Noen skjermlesere har problemer med å tolke og skjønne bruken av `type="number"`.
+- Nettlesere formaterer større nummer på forskjellige måter. Chrome 79.0 kan ende opp med å vise tallet i eksponentielt format, mens safari vil prøve å runde ned tallet.
+- Blant annet Chrome lar ikke brukeren skrive noe annet enn tall, komma/punktum og ´e´. Dette betyr at brukeren ikke får noe feedback på om det de skriver er rett eller ikke.
+- Scroll wheel/gesture vil kunne brukes for å inkrementere og dekrementere input, noe som kan føre til uheldig feil utfylling av data.
+
+### Unngå placeholders
+
+Vi fraråder bruken av `placeholder`-attributtet på input-elementer.

@@ -1,0 +1,54 @@
+---
+title: FnrInput
+---
+
+# FnrInput
+
+Feiloppsummering skal brukes til å gi enkel oversikt over alle feil i et skjema.
+
+<TableOfContents />
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-skjema @navikt/fnrvalidator classnames nav-frontend-js-utils lodash.throttle prop-types react nav-frontend-lenker nav-frontend-lenker-style nav-frontend-core nav-frontend-skjema-style nav-frontend-paneler-style nav-frontend-typografi-style nav-frontend-typografi --save`}
+/>
+
+<Npm packName="nav-frontend-skjema" imports="FnrInput" />
+
+## Eksempler
+
+Komponenten bruker [@navikt/fnrvalidator](https://github.com/navikt/fnrvalidator) internt for å validere brukers input.
+
+<Preview
+  react={`<form onSubmit={(e) => handleSubmit(e)}>
+        <FnrInput
+          label="Fødselsnummer (11 siffer)"
+          bredde="S"
+          value={value}
+          onChange={(e) => handleChange(e)}
+          onValidate={(val) => setValid(val)}
+          feil={submit && !valid ? "Ugyldig fødselsnummer" : undefined}
+        />
+      </form>`}
+>
+  <FnrInputExample />
+</Preview>
+
+## Tilgjengelighet
+
+### Validering
+
+- Validering av felt skal ikke skje før etter første submit-forsøk, deretter `onChange`.
+- Feil skal forsvinne etterhvert som den blir utbedret.
+- Etter at en feil er blitt utbredet, må det et nytt `submit`-forsøk til for at ny feilmelding skal vises.
+
+### Lenge på inputfelt
+
+Inputfeltenes sin lengde bør tilpasses det antallet tegn som brukeren skal fylle inn. For fødselsnummer på 11 siffer anbefaler vi å bruke `bredde="S"`.
+
+### Unngå placeholders
+
+Vi fraråder bruken av `placeholder`-attributtet på input-elementer.

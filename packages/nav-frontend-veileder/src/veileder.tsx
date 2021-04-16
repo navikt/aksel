@@ -126,7 +126,7 @@ class Veileder extends React.Component<VeilederProps> {
         <div className={frameCls(this.props)}>{children}</div>
         {tekst && <i className={pilCls(this.props)} />}
         {tekst && (
-          <div className={snakkebobleCls(this.props)}> {this.props.tekst}</div>
+          <div className={snakkebobleCls(this.props)}>{this.props.tekst}</div>
         )}
       </div>
     );
