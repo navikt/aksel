@@ -67,8 +67,9 @@
 }
 
 .navds-button--secondary:active {
-  color: var(--navds-color-action-active);
+  color: var(--navds-color-text-inverse);
   border-color: var(--navds-color-action-active);
+  background-color: var(--navds-color-action-active);
 }
 
 /*************************
