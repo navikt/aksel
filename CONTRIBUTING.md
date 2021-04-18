@@ -7,6 +7,8 @@ slik at mest mulig av fremtidige moduler er å finne her og fungerer etter de be
 
 ## TL;DR
 
+Vi bruker yarn pga yarn workspaces. Har du ikke yarn? `npm i -g yarn`
+
 ```sh
 git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
