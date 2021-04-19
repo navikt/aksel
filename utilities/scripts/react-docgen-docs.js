@@ -1,7 +1,7 @@
 const glob = require("glob");
 const fs = require("fs");
-const { exit } = require("process");
 const docgen = require("react-docgen-typescript").withDefaultConfig({
+  shouldExtractLiteralValuesFromEnum: true,
   propFilter(prop) {
     if (prop.parent) {
       if (prop.name === "className") {
@@ -16,7 +16,13 @@ const docgen = require("react-docgen-typescript").withDefaultConfig({
 const parseProps = (props) =>
   Object.values(props).map(
     ({ name, defaultValue, description, required, type }) => {
-      return { name, defaultValue, description, required, type: type.name };
+      return {
+        name,
+        defaultValue,
+        description,
+        required,
+        type: type.name === "enum" ? type.raw : type.name,
+      };
     }
   );
 

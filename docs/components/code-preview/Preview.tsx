@@ -17,7 +17,7 @@ const prettierOptions = {
 };
 
 interface PreviewProps {
-  react: string;
+  react?: string;
   html?: React.ReactElement;
   children?: React.ReactElement;
   hideHtml?: boolean;
