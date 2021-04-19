@@ -1,0 +1,10 @@
+.navds-copy-to-clipboard {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.5em;
+  padding: 0.25em;
+}
+
+.navds-copy-to-clipboard__popover {
+  padding: 0.25rem;
+}
