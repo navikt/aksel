@@ -16,7 +16,8 @@ interface LayoutProps {
 const Layout = ({ children, menu }: LayoutProps) => {
   const [sidebar, setSidebar] = useState(false);
 
-  const small = useMediaQuery({
+  const small = false;
+  useMediaQuery({
     query: "(max-width: 959px)",
   });
 
