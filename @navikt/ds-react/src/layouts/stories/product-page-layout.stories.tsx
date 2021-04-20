@@ -68,6 +68,7 @@ export const TwoColumnsLeft = () => (
   <Layout title={title}>
     <Section left sticky>
       <Left />
+      <Left />
     </Section>
     <Section>
       <Panel

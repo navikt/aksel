@@ -28,7 +28,7 @@
 }
 
 /* prettier-ignore */
-.navds-layout__section--sticky > * {
+.navds-layout__section--sticky  {
   /* TEMP Solution until dekratøren has updated */
   --navds-sidebar-sticky-offset: var(--decorator-sticky-offset);
 
@@ -238,29 +238,11 @@
   display: flex;
   align-items: center;
   font-weight: 600;
-}
-
-.navds-layout__panel-copy-icon {
-  color: var(--navds-color-text-link);
-  margin-right: 0.5rem;
-  height: 1rem;
-  width: 1rem;
+  font-size: 14px;
 }
 
 .navds-layout__panel-popover-content {
   margin: 0.5rem;
-}
-
-.navds-layout__panel-copy-anchor {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  background: transparent;
-  margin: 0 1rem 0 0;
-  padding-left: 0;
-  padding-right: 0;
-  border: 0;
-  font-size: 14px;
 }
 
 .navds-layout__panel-copy-anchor:hover {

@@ -1,10 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
-import { Button, Heading, Popover } from "../../";
+import { Heading, CopyToClipboard } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 import { OverridableComponent } from "../../util";
-import { CopyToClipboard } from "../../index";
 
 export interface ProductPagePanelProps {
   props: {
@@ -33,8 +32,6 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
     },
     ref
   ) => {
-    const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-    const [copied, setIsCopied] = useState<boolean>(false);
     const copyRef = useRef(null);
 
     useEffect(() => {
@@ -72,24 +69,15 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
           {title}
         </Heading>
 
-        <div className={"navds-layout__panel-copy"}>
-          <Button
-            ref={(el) => setAnchorEl(el)}
-            className={"navds-layout__panel-copy-anchor"}
-            variant="secondary"
-            /* onClick={handleClick} */
-          >
-            <Attachment className={"navds-layout__panel-copy-icon"} />
-            <span>Kopier lenke</span>
-          </Button>
-          <CopyToClipboard
-            ref={copyRef}
-            text={getLink()}
-            label="Kopierte lenke til panel"
-          >
-            Kopier lenke
-          </CopyToClipboard>
-        </div>
+        <CopyToClipboard
+          className="navds-layout__panel-copy"
+          ref={copyRef}
+          text={getLink()}
+          label="Kopierte lenke til panel"
+          icon={<Attachment />}
+        >
+          Kopier lenke
+        </CopyToClipboard>
 
         <div className={"navds-layout__panel-content"}>{children}</div>
       </Component>
