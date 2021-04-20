@@ -1,10 +1,7 @@
 import getConfig from "next/config";
 import { useState } from "react";
-import Tabs from "../tabs/Tabs";
 import "./proptable.css";
 import Inline from "../code/Inline";
-import Preview from "../code-preview/Preview";
-import { AccordionMenu, AccordionMenuItem } from "@navikt/ds-react";
 import "nav-frontend-tabell-style";
 import { Select } from "nav-frontend-skjema";
 import Import from "../code/Import";
@@ -96,7 +93,9 @@ const Proptable = ({
           label="Velg komponent"
         >
           {props.map((x, i) => (
-            <option value={i}>{x.displayName}</option>
+            <option key={i + x} value={i}>
+              {x.displayName}
+            </option>
           ))}
         </Select>
 

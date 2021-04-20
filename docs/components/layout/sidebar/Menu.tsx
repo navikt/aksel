@@ -20,6 +20,7 @@ const MenuLink = (node) => {
 };
 
 const isActive = (children, path) => {
+  path = path.split("#")[0];
   const active = children.find((child) => {
     return child.children
       ? isActive(child.children, path)
