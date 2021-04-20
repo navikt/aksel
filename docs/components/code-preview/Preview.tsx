@@ -67,15 +67,13 @@ const Preview = ({
   return (
     <div className={"preview__wrapper"}>
       {!!children && (
-        <OverflowDetector>
-          <div
-            className={cl("preview__container", {
-              "preview__container--no-code": noCode,
-            })}
-          >
-            {children}
-          </div>
-        </OverflowDetector>
+        <div
+          className={cl("preview__container", {
+            "preview__container--no-code": noCode,
+          })}
+        >
+          {children}
+        </div>
       )}
       {!noCode && (
         <>

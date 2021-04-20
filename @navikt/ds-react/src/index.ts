@@ -16,6 +16,7 @@ export {
   ContentContainerProps,
 } from "./content-container/index";
 export { Cell, CellProps, Grid, GridProps } from "./grid/index";
+export { CopyToClipboard } from "./copy-to-clipboard/index";
 export {
   InternalHeader,
   InternalHeaderProps,

@@ -36,7 +36,7 @@ export const copyCode = (content) => {
 const Bash = ({
   code,
   terminal = false,
-  copy = false,
+  copy = true,
   language = "html",
   good,
   bad,

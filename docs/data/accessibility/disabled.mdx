@@ -29,45 +29,49 @@ Her må man da også være sikker på at brukeren ikke vil "savne" dette element
 
 <br />
 
-<RadioGruppe
-  legend="Når ønsker du å reservere bord?"
-  description="Lunsjservering er desverre ikke tilgjengelig grunnet ombygging av resturant."
->
-  <Radio label={"Frokost"} name="tid" />
-  <Radio label={"Middag"} name="tid" />
-</RadioGruppe>
-
-<Bash
-  good
-  code={`<RadioGruppe
+<Preview noCode>
+  <RadioGruppe
     legend="Når ønsker du å reservere bord?"
     description="Lunsjservering er desverre ikke tilgjengelig grunnet ombygging av resturant."
   >
     <Radio label={"Frokost"} name="tid" />
     <Radio label={"Middag"} name="tid" />
-  </RadioGruppe>`}
+  </RadioGruppe>
+
+  <Bash
+    good
+    code={`<RadioGruppe
+      legend="Når ønsker du å reservere bord?"
+      description="Lunsjservering er desverre ikke tilgjengelig grunnet ombygging av resturant."
+    >
+      <Radio label={"Frokost"} name="tid" />
+      <Radio label={"Middag"} name="tid" />
+    </RadioGruppe>`}
 />
+</Preview>
 
 <br />
-
-<RadioGruppe legend="Når ønsker du å reservere bord?">
-  <Radio label={"Frokost"} name="tid" />
-  <Radio label={"Lunsj"} name="tid" disabled />
-  <Radio label={"Middag"} name="tid" />
-</RadioGruppe>
-
-<Bash
-  bad
-  code={`<RadioGruppe legend="Når ønsker du å reservere bord?">
+<Preview noCode>
+  <RadioGruppe legend="Når ønsker du å reservere bord?">
     <Radio label={"Frokost"} name="tid" />
     <Radio label={"Lunsj"} name="tid" disabled />
     <Radio label={"Middag"} name="tid" />
-  </RadioGruppe>`}
-/>
+  </RadioGruppe>
+
+  <Bash
+    bad
+    code={`<RadioGruppe legend="Når ønsker du å reservere bord?">
+      <Radio label={"Frokost"} name="tid" />
+      <Radio label={"Lunsj"} name="tid" disabled />
+      <Radio label={"Middag"} name="tid" />
+    </RadioGruppe>`}
+  />
+</Preview>
 
 <br />
 <br />
 
+<Preview noCode>
 <Knapp className="doButton" type="hoved">
   Neste
 </Knapp>
@@ -93,18 +97,21 @@ Her må man da også være sikker på at brukeren ikke vil "savne" dette element
     ]}
 />`}
 />
+</Preview>
 
 <br />
 
-<Knapp className="botMargin" type="hoved" disabled>
-  Neste
-</Knapp>
-<Bash
-  bad
-  code={`<Knapp type="hoved" disabled>
+<Preview noCode>
+  <Knapp className="botMargin" type="hoved" disabled>
+    Neste
+  </Knapp>
+  <Bash
+    bad
+    code={`<Knapp type="hoved" disabled>
     Neste
 </Knapp>`}
-/>
+  />
+</Preview>
 
 <br />
 

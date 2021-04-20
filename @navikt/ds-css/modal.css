@@ -22,7 +22,7 @@
 }
 
 .navds-modal__overlay {
-  position: absolute;
+  position: fixed;
   z-index: var(--navds-z-index-modal-overlay);
   top: 0;
   bottom: 0;
