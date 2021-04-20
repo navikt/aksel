@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
 import { Button, Heading, Popover } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 import { OverridableComponent } from "../../util";
-import copy from "copy-to-clipboard";
+import { CopyToClipboard } from "../../index";
 
 export interface ProductPagePanelProps {
   props: {
@@ -35,20 +35,17 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
   ) => {
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
     const [copied, setIsCopied] = useState<boolean>(false);
+    const copyRef = useRef(null);
 
     useEffect(() => {
       const header = document.getElementById("navds-layout-body");
       header?.classList.add("navds-layout__body--padding");
     }, []);
 
-    const handleClick = () => {
-      setIsCopied(true);
+    const getLink = () => {
       const { href, hash } = window.location;
       const urlWithoutHash = href.replace(hash, "");
-      copy(`${urlWithoutHash}#${anchor}`);
-      setTimeout(() => {
-        setIsCopied(false);
-      }, 1000);
+      return `${urlWithoutHash}#${anchor}`;
     };
 
     return (
@@ -80,19 +77,18 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
             ref={(el) => setAnchorEl(el)}
             className={"navds-layout__panel-copy-anchor"}
             variant="secondary"
-            onClick={handleClick}
+            /* onClick={handleClick} */
           >
             <Attachment className={"navds-layout__panel-copy-icon"} />
             <span>Kopier lenke</span>
           </Button>
-          <Popover
-            arrow={false}
-            anchorEl={anchorEl}
-            open={copied}
-            onClose={() => {}}
+          <CopyToClipboard
+            ref={copyRef}
+            text={getLink()}
+            label="Kopierte lenke til panel"
           >
-            <div className="navds-layout__panel-popover-content">Kopiert</div>
-          </Popover>
+            Kopier lenke
+          </CopyToClipboard>
         </div>
 
         <div className={"navds-layout__panel-content"}>{children}</div>
