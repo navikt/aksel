@@ -8,7 +8,7 @@ export interface OverridableComponent<M extends OverridableTypeMap> {
 
   <C extends React.ElementType>(
     props: {
-      component: C;
+      component?: C;
     } & OverrideProps<M, C>
   ): React.ReactElement | null;
 }
