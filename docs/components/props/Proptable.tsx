@@ -21,10 +21,7 @@ const Proptable = ({
   const props = publicRuntimeConfig.props
     .filter((comp) => [...names, defaultExport].includes(comp.displayName))
     .map((comp) => {
-      if (comp.displayName === defaultExport) {
-        return { ...comp, defaultExport: true };
-      }
-      return { ...comp, defaultExport: false };
+      return { ...comp, defaultExport: comp.displayName === defaultExport };
     })
     .sort((a, b) => a.defaultValue === b.defaultValue);
 
@@ -37,7 +34,7 @@ const Proptable = ({
       if (val.name === "enum") {
         return val.value.map((x) => x.value).join(" | ");
       }
-      val = val.name || val.value; // eslint-disable-line no-param-reassign
+      val = val.name || val.value;
     }
     if (val === null || typeof val === "undefined" || val.length <= 0) {
       return "-";
@@ -46,12 +43,12 @@ const Proptable = ({
   };
 
   const parseDescription = (desc) => {
-    const found = desc.match(/^@deprecated/);
+    const found = desc.match(/^@deprecated(.*)/);
     if (found) {
       return (
         <span>
           <strong>{found[0]}</strong>
-          {desc.substr(11, desc.length)}
+          {found[1]}
         </span>
       );
     }
@@ -59,7 +56,6 @@ const Proptable = ({
   };
 
   const PropTypeTableRow = (props) => {
-    const desc = parseDescription(parsePropValue(props.val.description));
     return (
       <tr className="proptable__tr">
         <td>
@@ -76,7 +72,7 @@ const Proptable = ({
           <div>{parsePropValue(props.val.defaultValue)}</div>
         </td> */}
         <td>
-          <div>{desc}</div>
+          <div>{parseDescription(parsePropValue(props.val.description))}</div>
         </td>
       </tr>
     );
@@ -84,7 +80,6 @@ const Proptable = ({
 
   return (
     <div className="proptable__wrapper">
-      {/* <Preview noCode> */}
       <>
         <h3>Komponenter</h3>
 
@@ -115,7 +110,6 @@ const Proptable = ({
           <tbody>
             {props[tab].props
               .filter((item) => item.name.indexOf("aria-") !== 0)
-              /* .sort((a, b) => a.name.localeCompare(b.name)) */
               .map((prop, key) => (
                 <PropTypeTableRow
                   val={{
@@ -128,7 +122,6 @@ const Proptable = ({
           </tbody>
         </table>
       </>
-      {/* </Preview> */}
     </div>
   );
 };

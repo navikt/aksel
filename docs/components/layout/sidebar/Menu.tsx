@@ -46,7 +46,6 @@ const mapToComponents = (node, path) => {
 
 const Menu = ({ menu }) => {
   const { asPath } = useRouter();
-
   return (
     <AccordionMenu>
       {menu.map((item) => mapToComponents(item, asPath.split("#")[0]))}
