@@ -41,5 +41,11 @@ export {
   Paragraph,
   Text,
   TextProps,
+  Title,
+  Ingress,
+  Body,
+  Label,
+  Element,
+  Component,
 } from "./typography/index";
 export { OverridableComponent } from "./util/index";
