@@ -5,7 +5,7 @@
 @import "Source-Sans-Pro-600.css";
 @import "print.css";
 @import "utility.css";
-@import "scroll-fix.css";
+@import "smooth-scroll.css";
 
 body {
   font-family: var(--navds-font-family);
