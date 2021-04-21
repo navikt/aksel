@@ -1,11 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-const Body = forwardRef<
+const Ingress = forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, ...rest }, ref) => (
-  <p {...rest} ref={ref} className={cl(className, "navds-body")} />
+  <p {...rest} ref={ref} className={cl(className, "navds-ingress")} />
 ));
 
-export default Body;
+export default Ingress;
