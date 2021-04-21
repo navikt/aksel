@@ -20,11 +20,10 @@ const MenuLink = (node) => {
 };
 
 const isActive = (children, path) => {
-  const newPath = path.split("#")[0];
   const active = children.find((child) => {
     return child.children
       ? isActive(child.children, path)
-      : child.pathName === newPath;
+      : child.pathName === path;
   });
   return active;
 };
@@ -47,9 +46,10 @@ const mapToComponents = (node, path) => {
 
 const Menu = ({ menu }) => {
   const { asPath } = useRouter();
+
   return (
     <AccordionMenu>
-      {menu.map((item) => mapToComponents(item, asPath))}
+      {menu.map((item) => mapToComponents(item, asPath.split("#")[0]))}
     </AccordionMenu>
   );
 };
