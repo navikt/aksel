@@ -6,13 +6,14 @@ import {
   AccordionMenuItem,
 } from "@navikt/ds-react";
 import React from "react";
+import parseUrl from "url-parse";
 
 const MenuLink = (node) => {
   const { asPath } = useRouter();
 
   return (
     <Link href={node.pathName} passHref>
-      <AccordionMenuItem active={asPath === node.pathName}>
+      <AccordionMenuItem active={parseUrl(asPath).pathname === node.pathName}>
         {node.title}
       </AccordionMenuItem>
     </Link>
@@ -25,7 +26,7 @@ const isActive = (children, path) => {
       ? isActive(child.children, path)
       : child.pathName === path;
   });
-  return active;
+  return !!active;
 };
 
 const mapToComponents = (node, path) => {
@@ -48,7 +49,7 @@ const Menu = ({ menu }) => {
   const { asPath } = useRouter();
   return (
     <AccordionMenu>
-      {menu.map((item) => mapToComponents(item, asPath.split("#")[0]))}
+      {menu.map((item) => mapToComponents(item, parseUrl(asPath).pathname))}
     </AccordionMenu>
   );
 };

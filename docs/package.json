@@ -44,7 +44,8 @@
     "css-loader": "^5.2.0",
     "webpack": "^4.44.2",
     "jszip": "^3.6.0",
-    "canvg": "^3.0.7"
+    "canvg": "^3.0.7",
+    "url-parse": "^1.5.1"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^10.0.8",
