@@ -8,7 +8,7 @@ export interface BodyProps extends React.HTMLAttributes<HTMLParagraphElement> {
    */
   size?: "m" | "s";
   /**
-   * Heading to render
+   * Component content
    */
   children: React.ReactNode;
   /**
@@ -22,7 +22,7 @@ const Body = forwardRef<HTMLParagraphElement, BodyProps>(
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-body", `navds-body--${size}`)}
+      className={cl(className, "navds-body", { "navds-body--s": size === "s" })}
     />
   )
 );

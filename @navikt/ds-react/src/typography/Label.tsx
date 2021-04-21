@@ -8,7 +8,7 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
    */
   size?: "m" | "s";
   /**
-   * Heading to render
+   * Component content
    */
   children: React.ReactNode;
   /**
@@ -22,7 +22,9 @@ const Label = forwardRef<HTMLParagraphElement, LabelProps>(
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-label", `navds-label--${size}`)}
+      className={cl(className, "navds-label", {
+        "navds-label--s": size === "s",
+      })}
     />
   )
 );

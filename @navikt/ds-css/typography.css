@@ -3,31 +3,31 @@
   font-weight: var(--navds-font-weight-bold);
 }
 
-.navds-title--1 {
+.navds-title--xxl {
   font-size: var(--navds-font-size-title-xxl);
   letter-spacing: -0.01em;
   line-height: var(--navds-font-line-height-xxl);
 }
 
-.navds-title--2 {
+.navds-title--xl {
   font-size: var(--navds-font-size-title-xl);
   letter-spacing: -0.008em;
   line-height: var(--navds-font-line-height-xl);
 }
 
-.navds-title--3 {
+.navds-title--l {
   font-size: var(--navds-font-size-title-l);
   letter-spacing: -0.004em;
   line-height: var(--navds-font-line-height-l);
 }
 
-.navds-title--4 {
+.navds-title--m {
   font-size: var(--navds-font-size-title-m);
   letter-spacing: -0.002em;
   line-height: var(--navds-font-line-height-m);
 }
 
-.navds-title--5 {
+.navds-title--s {
   font-size: var(--navds-font-size-title-s);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-s);
@@ -47,12 +47,6 @@
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-body--m {
-  font-size: var(--navds-font-size-l);
-  letter-spacing: 0;
-  line-height: var(--navds-font-line-height-s);
-}
-
 .navds-body--s {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
@@ -67,12 +61,6 @@
   font-weight: var(--navds-font-weight-bold);
 }
 
-.navds-label--m {
-  font-size: var(--navds-font-size-l);
-  letter-spacing: 0;
-  line-height: var(--navds-font-line-height-xs);
-}
-
 .navds-label--s {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
@@ -80,12 +68,6 @@
 }
 
 /* Small text */
-.navds-tag {
-  font-size: var(--navds-font-size-s);
-  letter-spacing: 0.004em;
-  line-height: var(--navds-font-line-height-xxs);
-}
-
 .navds-element {
   font-size: var(--navds-font-size-s);
   letter-spacing: 0.004em;
@@ -93,14 +75,12 @@
   font-weight: var(--navds-font-weight-bold);
 }
 
-/* Component */
-.navds-component {
-  font-size: var(--navds-font-size-l);
-  letter-spacing: 0;
-  line-height: var(--navds-font-line-height-xs);
+.navds-element--s {
+  font-weight: var(--navds-font-weight-regular);
 }
 
-.navds-component--m {
+/* Component */
+.navds-component {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-xs);

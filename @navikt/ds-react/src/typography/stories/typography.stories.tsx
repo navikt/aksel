@@ -1,5 +1,6 @@
 import React from "react";
 import { Heading, Text, Paragraph, Lead } from "../index";
+import { Title, Component, Body, Element, Ingress, Label } from "../index";
 
 export default {
   title: "ds-react/typography",
@@ -112,5 +113,60 @@ export const article = () => {
         30 prosent.
       </Paragraph>
     </article>
+  );
+};
+
+export const ExampleSolution = () => {
+  const lorem = (text) => (
+    <>
+      {text} <br /> Veniam consequat cillum pariatur officia duis aute labore
+      anim labore. Pariatur ad duis do nulla.
+    </>
+  );
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        rowGap: "1.5rem",
+      }}
+    >
+      <div>
+        <Title level={1} size="xxl">
+          {lorem("Title xxl")}
+        </Title>
+        <Title level={2} size="xl">
+          {lorem("Title xl")}
+        </Title>
+        <Title level={3} size="l">
+          {lorem("Title l")}
+        </Title>
+        <Title level={4} size="m">
+          {lorem("Title m")}
+        </Title>
+        <Title level={5} size="s">
+          {lorem("Title s")}
+        </Title>
+      </div>
+      <div>
+        <Ingress>{lorem("Ingress")}</Ingress>
+      </div>
+      <div>
+        <Body>{lorem("Body")}</Body>
+        <Body size="s">{lorem("Body small")}</Body>
+      </div>
+      <div>
+        <Label>{lorem("Label")}</Label>
+        <Label size="s">{lorem("Label small")}</Label>
+      </div>
+      <div>
+        <Element>{lorem("Element")}</Element>
+        <Element size="s">{lorem("Element small")}</Element>
+      </div>
+      <div>
+        <Component>{lorem("Component")}</Component>
+        <Component size="s">{lorem("Component small")}</Component>
+      </div>
+    </div>
   );
 };
