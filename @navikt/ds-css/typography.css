@@ -1,3 +1,51 @@
+/* Title */
+.navds-title {
+  font-weight: 600;
+  font-size: 2.22rem;
+  line-height: 1.3;
+
+  letter-spacing: -0.01em;
+}
+.navds-title--1 {
+}
+.navds-title--2 {
+}
+.navds-title--3 {
+}
+.navds-title--4 {
+}
+.navds-title--5 {
+}
+.navds-title--6 {
+}
+
+/* Ingress */
+.navds-ingress {
+}
+
+/* Body */
+.navds-body {
+}
+
+/* Component */
+.navds-component {
+}
+
+/* Small text */
+.navds-tag {
+}
+
+.navds-element {
+}
+
+/* Label */
+.navds-label {
+}
+
+/*************************************
+*                OLD                 *
+*************************************/
+
 /*
  * Heading
  */

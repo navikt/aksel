@@ -8,8 +8,12 @@ export { default as Lead } from "./old/Lead";
 export * from "./old/Lead";
 
 /**
- * Wei forslag
+ * Forslag
  */
 export { default as Title } from "./Title";
 export { default as Ingress } from "./Ingress";
 export { default as Body } from "./Body";
+export { default as Component } from "./Component";
+export { default as Element } from "./Element";
+export { default as Tag } from "./Tag";
+export { default as Label } from "./Label";
