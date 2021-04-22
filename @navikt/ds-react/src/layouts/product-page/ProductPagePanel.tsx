@@ -3,35 +3,20 @@ import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
 import { Heading, CopyToClipboard } from "../../";
 import { Attachment } from "@navikt/ds-icons";
-import { OverridableComponent } from "../../util";
 
-export interface ProductPagePanelProps {
-  props: {
-    children: React.ReactNode;
-    className?: string;
-    title: string;
-    icon?: ReactNode;
-    highlight?: boolean;
-    anchor: string;
-    whiteBackground?: boolean;
-  } & React.HTMLAttributes<HTMLDivElement>;
-  defaultComponent: "div";
+export interface ProductPagePanelProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+  anchor: string;
+  className?: string;
+  title: string;
+  icon?: ReactNode;
+  highlight?: boolean;
+  whiteBackground?: boolean;
 }
 
-const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef(
-  (
-    {
-      children,
-      className,
-      title,
-      highlight,
-      icon,
-      anchor,
-      component: Component = "div",
-      ...rest
-    },
-    ref
-  ) => {
+const ProductPagePanel = forwardRef<HTMLDivElement, ProductPagePanelProps>(
+  ({ children, className, title, highlight, icon, anchor, ...rest }, ref) => {
     const copyRef = useRef(null);
 
     useEffect(() => {
@@ -46,7 +31,7 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
     };
 
     return (
-      <Component
+      <div
         ref={ref}
         className={cl(
           "navds-layout__panel",
@@ -80,7 +65,7 @@ const ProductPagePanel: OverridableComponent<ProductPagePanelProps> = forwardRef
         </CopyToClipboard>
 
         <div className={"navds-layout__panel-content"}>{children}</div>
-      </Component>
+      </div>
     );
   }
 );
