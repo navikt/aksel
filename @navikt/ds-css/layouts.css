@@ -241,6 +241,12 @@
   font-size: 14px;
 }
 
+.navds-layout__panel-copy + .navds-copy-to-clipboard__popover {
+  background-color: var(--navds-color-gray-90);
+  color: var(--navds-color-white);
+  font-size: 14px;
+}
+
 .navds-layout__panel-popover-content {
   margin: 0.5rem;
 }
