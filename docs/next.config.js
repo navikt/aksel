@@ -14,6 +14,14 @@ const loadPackage = () => {
     });
 };
 
+const loadProps = () => {
+  try {
+    return require("../react-docgen-docs.json");
+  } catch {
+    return [];
+  }
+};
+
 module.exports = withPlugins([withLess, withCss], {
   webpack: (config) => {
     config.module.rules.push({
@@ -24,5 +32,6 @@ module.exports = withPlugins([withLess, withCss], {
   },
   publicRuntimeConfig: {
     packages: loadPackage(),
+    props: loadProps(),
   },
 });
