@@ -1,7 +1,8 @@
 // https://levelup.gitconnected.com/learn-svg-to-react-using-figma-api-be0a5f9c0ca
 // used for reference/implementation
 
-import { create, get } from "axios";
+import Axios from "axios";
+const { create, get } = Axios;
 
 // Requires user to add a personalized figma token in .env
 const headers = {
@@ -27,7 +28,7 @@ const instanceImages = create({
 /**
  * get Figma node components children
  */
-const getNodeChildren = async () => {
+export const getNodeChildren = async () => {
   const { data } = await instanceFiles.get();
   return data.meta.components;
 };
@@ -35,7 +36,7 @@ const getNodeChildren = async () => {
 /**
  * get svg image resource urls
  */
-const getSvgImageUrls = async (nodeIds) => {
+export const getSvgImageUrls = async (nodeIds) => {
   const {
     data: { images },
   } = await instanceImages.get(`/?ids=${nodeIds}&format=svg`);
@@ -45,10 +46,4 @@ const getSvgImageUrls = async (nodeIds) => {
 /**
  * Gets raw svg data from url
  */
-const getIconContent = async (url) => get(url);
-
-export default {
-  getNodeChildren,
-  getSvgImageUrls,
-  getIconContent,
-};
+export const getIconContent = async (url) => get(url);
