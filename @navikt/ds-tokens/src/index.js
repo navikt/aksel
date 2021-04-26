@@ -170,6 +170,17 @@ module.exports = {
           paragraph: { value: "1.125rem" },
         },
       },
+      spacing: {
+        xxxl: { value: getFontSize(40) },
+        xxl: { value: getFontSize(36) },
+        xl: { value: getFontSize(32) },
+        l: { value: getFontSize(28) },
+        m: { value: getFontSize(24) },
+        s: { value: getFontSize(20) },
+        xs: { value: getFontSize(16) },
+        xxs: { value: getFontSize(12) },
+        xxxs: { value: getFontSize(8) },
+      },
       weight: {
         bold: { value: "600" },
         regular: { value: "400" },

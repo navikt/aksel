@@ -18,17 +18,23 @@ export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
    * Custom styling on element
    */
   className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
 const Title = forwardRef<HTMLHeadingElement, TitleProps>(
-  ({ level, size, className, children, ...rest }, ref) => {
+  ({ level, size, spacing, className, children, ...rest }, ref) => {
     let HeadingTag = `h${level}` as React.ElementType;
 
     return (
       <HeadingTag
         {...rest}
         ref={ref}
-        className={cl(className, "navds-title", `navds-title--${size}`)}
+        className={cl(className, "navds-title", `navds-title--${size}`, {
+          "navds-typo--spacing": !!spacing,
+        })}
       >
         {children}
       </HeadingTag>

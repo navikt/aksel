@@ -15,15 +15,20 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
    * Custom styling on element
    */
   className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
 const Label = forwardRef<HTMLParagraphElement, LabelProps>(
-  ({ className, size = "m", ...rest }, ref) => (
+  ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
       className={cl(className, "navds-label", {
         "navds-label--s": size === "s",
+        "navds-typo--spacing": !!spacing,
       })}
     />
   )

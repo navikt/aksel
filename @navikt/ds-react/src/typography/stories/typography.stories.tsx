@@ -170,3 +170,52 @@ export const ExampleSolution = () => {
     </div>
   );
 };
+
+export const SideInnholdEksempel = () => {
+  return (
+    <div style={{ maxWidth: 600 }}>
+      <Title level={1} size="xxl" spacing>
+        Sidetittel
+      </Title>
+      <Body spacing>
+        Aliqua ad et nisi commodo sit excepteur in commodo proident proident.
+        Nostrud consectetur dolore eu nostrud aliqua. Adipisicing labore aliqua
+        qui velit amet ea amet do. Magna anim velit et incididunt. Lorem ad
+        pariatur pariatur quis magna cupidatat. Exercitation officia occaecat
+        occaecat id nulla fugiat laborum elit laboris non est ex nostrud
+        occaecat. Commodo laboris veniam cillum in aute.
+      </Body>
+      <Body spacing>
+        Cillum consequat velit est ea voluptate. Et elit irure magna sit
+        consequat mollit excepteur ad non excepteur velit exercitation aute.
+        Fugiat deserunt quis nulla cupidatat esse quis ex. Laborum eiusmod culpa
+        labore eu irure quis laborum. Irure veniam et nostrud do. Quis ut ea est
+        culpa tempor anim.
+      </Body>
+      <Title level={2} size="xl" spacing>
+        Underittel
+      </Title>
+      <Ingress spacing>
+        Ingress: Mollit incididunt incididunt officia amet est et non aliqua
+        officia nulla et aute aliqua culpa.
+      </Ingress>
+      <Body spacing>
+        Commodo veniam enim laborum pariatur excepteur commodo do cillum. Nisi
+        elit sunt commodo id in adipisicing cupidatat dolore dolore et tempor
+        cupidatat. Cillum quis sunt in dolor occaecat.
+      </Body>
+      <Body spacing>
+        Irure dolore laborum amet occaecat ex laboris mollit reprehenderit nisi
+        laborum voluptate laborum. Ipsum eu sint laborum adipisicing ut
+        incididunt laborum laborum. Ipsum non amet laboris quis Lorem est
+        laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
+      </Body>
+      <Body size="s" spacing>
+        Irure dolore laborum amet occaecat ex laboris mollit reprehenderit nisi
+        laborum voluptate laborum. Ipsum eu sint laborum adipisicing ut
+        incididunt laborum laborum. Ipsum non amet laboris quis Lorem est
+        laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
+      </Body>
+    </div>
+  );
+};

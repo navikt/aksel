@@ -16,15 +16,20 @@ export interface ElementProps
    * Custom styling on element
    */
   className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
 const Element = forwardRef<HTMLParagraphElement, ElementProps>(
-  ({ className, size = "m", ...rest }, ref) => (
+  ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
       className={cl(className, "navds-element", {
         "navds-element--s": size === "s",
+        "navds-typo--spacing": !!spacing,
       })}
     />
   )

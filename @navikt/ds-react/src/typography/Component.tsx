@@ -16,15 +16,20 @@ export interface ComponentProps
    * Custom styling on element
    */
   className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
 const Component = forwardRef<HTMLParagraphElement, ComponentProps>(
-  ({ className, size = "m", ...rest }, ref) => (
+  ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
       className={cl(className, "navds-component", {
         "navds-component--s": size === "s",
+        "navds-typo--spacing": !!spacing,
       })}
     />
   )

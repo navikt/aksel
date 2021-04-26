@@ -15,14 +15,21 @@ export interface BodyProps extends React.HTMLAttributes<HTMLParagraphElement> {
    * Custom styling on element
    */
   className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
 const Body = forwardRef<HTMLParagraphElement, BodyProps>(
-  ({ className, size = "m", ...rest }, ref) => (
+  ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-body", { "navds-body--s": size === "s" })}
+      className={cl(className, "navds-body", {
+        "navds-body--s": size === "s",
+        "navds-typo--spacing": !!spacing,
+      })}
     />
   )
 );
