@@ -7,7 +7,7 @@ export default {
   component: Heading,
 };
 
-export const heading = () => {
+const heading = () => {
   return (
     <>
       <Heading level={1} size="xxl">
@@ -29,7 +29,7 @@ export const heading = () => {
   );
 };
 
-export const text = () => {
+const text = () => {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Text size="large">large</Text>
@@ -40,7 +40,7 @@ export const text = () => {
   );
 };
 
-export const article = () => {
+const article = () => {
   return (
     <article>
       <Heading level={1} size="xxl">
@@ -116,7 +116,10 @@ export const article = () => {
   );
 };
 
-export const ExampleSolution = () => {
+export const TypoMedSpacing = () => <TypoMal spacing={true} />;
+export const TypoUtenSpacing = () => <TypoMal spacing={false} />;
+
+const TypoMal = ({ ...rest }) => {
   const lorem = (text) => (
     <>
       {text} <br /> Veniam consequat cillum pariatur officia duis aute labore
@@ -128,44 +131,53 @@ export const ExampleSolution = () => {
       style={{
         display: "flex",
         flexDirection: "column",
-        rowGap: "1.5rem",
       }}
     >
       <div>
-        <Title level={1} size="xxl">
+        <Title {...rest} level={1} size="xxl">
           {lorem("Title xxl")}
         </Title>
-        <Title level={2} size="xl">
+        <Title {...rest} level={2} size="xl">
           {lorem("Title xl")}
         </Title>
-        <Title level={3} size="l">
+        <Title {...rest} level={3} size="l">
           {lorem("Title l")}
         </Title>
-        <Title level={4} size="m">
+        <Title {...rest} level={4} size="m">
           {lorem("Title m")}
         </Title>
-        <Title level={5} size="s">
+        <Title {...rest} level={5} size="s">
           {lorem("Title s")}
         </Title>
       </div>
       <div>
-        <Ingress>{lorem("Ingress")}</Ingress>
+        <Ingress {...rest}>{lorem("Ingress")}</Ingress>
       </div>
       <div>
-        <Body>{lorem("Body")}</Body>
-        <Body size="s">{lorem("Body small")}</Body>
+        <Body {...rest}>{lorem("Body")}</Body>
+        <Body {...rest} size="s">
+          {lorem("Body small")}
+        </Body>
       </div>
       <div>
-        <Label>{lorem("Label")}</Label>
-        <Label size="s">{lorem("Label small")}</Label>
+        <Label {...rest}>{lorem("Label")}</Label>
+        <Label {...rest} size="s">
+          {lorem("Label small")}
+        </Label>
       </div>
       <div>
-        <Element>{lorem("Element")}</Element>
-        <Element size="s">{lorem("Element small")}</Element>
+        <Element {...rest}>{lorem("Element")}</Element>
+        <Element {...rest} size="s">
+          {lorem("Element small")}
+        </Element>
       </div>
       <div>
-        <Component>{lorem("Component")}</Component>
-        <Component size="s">{lorem("Component small")}</Component>
+        <Component {...rest} {...rest}>
+          {lorem("Component")}
+        </Component>
+        <Component {...rest} size="s">
+          {lorem("Component small")}
+        </Component>
       </div>
     </div>
   );
