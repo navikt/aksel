@@ -1,6 +1,7 @@
 import React from "react";
 import { Heading, Text, Paragraph, Lead } from "../index";
-import { Title, Component, Body, Element, Ingress, Label } from "../index";
+import { Title, Component, Body, Detail, Ingress, Label } from "../index";
+import "./index.css";
 
 export default {
   title: "ds-react/typography",
@@ -128,6 +129,7 @@ const TypoMal = ({ ...rest }) => {
   );
   return (
     <div
+      className="typo-story"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -166,10 +168,10 @@ const TypoMal = ({ ...rest }) => {
         </Label>
       </div>
       <div>
-        <Element {...rest}>{lorem("Element")}</Element>
-        <Element {...rest} size="s">
-          {lorem("Element small")}
-        </Element>
+        <Detail {...rest}>{lorem("Detail")}</Detail>
+        <Detail {...rest} size="s">
+          {lorem("Detail small")}
+        </Detail>
       </div>
       <div>
         <Component {...rest} {...rest}>

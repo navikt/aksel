@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface ElementProps
+export interface DetailProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * M: semi-bold, S: normal
@@ -22,17 +22,17 @@ export interface ElementProps
   spacing?: boolean;
 }
 
-const Element = forwardRef<HTMLParagraphElement, ElementProps>(
+const Detail = forwardRef<HTMLParagraphElement, DetailProps>(
   ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-element", {
-        "navds-element--s": size === "s",
+      className={cl(className, "navds-detail", {
+        "navds-detail--s": size === "s",
         "navds-typo--spacing": !!spacing,
       })}
     />
   )
 );
 
-export default Element;
+export default Detail;

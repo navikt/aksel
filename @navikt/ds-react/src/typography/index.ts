@@ -14,5 +14,5 @@ export { default as Title } from "./Title";
 export { default as Ingress } from "./Ingress";
 export { default as Body } from "./Body";
 export { default as Component } from "./Component";
-export { default as Element } from "./Element";
+export { default as Detail } from "./Detail";
 export { default as Label } from "./Label";

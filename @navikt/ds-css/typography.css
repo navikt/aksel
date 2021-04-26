@@ -112,7 +112,7 @@
 }
 
 /* Small text */
-.navds-element {
+.navds-detail {
   font-size: var(--navds-font-size-s);
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-xxs);
@@ -120,15 +120,15 @@
   margin: 0;
 }
 
-.navds-element.navds-typo--spacing {
+.navds-detail.navds-typo--spacing {
   margin-bottom: var(--navds-font-spacing-xxxs);
 }
 
-.navds-element--s {
+.navds-detail--s {
   font-weight: var(--navds-font-weight-regular);
 }
 
-.navds-element--s.navds-typo--spacing {
+.navds-detail--s.navds-typo--spacing {
   margin-bottom: var(--navds-font-spacing-xxxs);
 }
 
