@@ -61,7 +61,7 @@ const PopoverBase = forwardRef<HTMLDivElement, PopoverBaseProps>(
         tabIndex={-1}
         style={{
           transform: `translate3d(${newPosition.x}px, ${newPosition.y}px, 0px)`,
-          position: "relative",
+          position: "absolute",
         }}
         {...rest}
       >
