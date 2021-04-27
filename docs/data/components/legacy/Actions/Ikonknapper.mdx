@@ -8,32 +8,11 @@ Denne pakken inneholder en samling med ferdig-komponerte knapper med tilhørende
 
 <TableOfContents />
 
-## Teknisk
-
-<Bash
-  terminal
-  copy
-  code={`npm install nav-frontend-ikonknapper nav-frontend-chevron classnames nav-frontend-chevron-style prop-types react nav-frontend-ikoner-assets nav-frontend-knapper nav-frontend-js-utils lodash.throttle nav-frontend-knapper-style nav-frontend-core nav-frontend-typografi-style --save`}
-/>
-
-<Npm
-  packName="nav-frontend-ikonknapper"
-  imports={[
-    "Xknapp",
-    "Tilbakeknapp",
-    "Systemerknapp",
-    "Søkeknapp",
-    "Nesteknapp",
-    "Menyknapp",
-    "Hamburgerknapp",
-  ]}
-/>
-
 ## Tilbake-/Nesteknapp
 
 <Preview
-  react={`<><Tilbakeknapp />
-  <Nesteknapp /></>`}
+  react={`<Proptable><Tilbakeknapp />
+  <Nesteknapp /></Proptable>`}
 >
   <Tilbakeknapp />
   <Nesteknapp />
@@ -88,3 +67,26 @@ Denne pakken inneholder en samling med ferdig-komponerte knapper med tilhørende
 <Preview react={`<Xknapp />`}>
   <Xknapp />
 </Preview>
+
+## Teknisk
+
+<Bash
+  terminal
+  copy
+  code={`npm install nav-frontend-ikonknapper nav-frontend-chevron classnames nav-frontend-chevron-style prop-types react nav-frontend-ikoner-assets nav-frontend-knapper nav-frontend-js-utils lodash.throttle nav-frontend-knapper-style nav-frontend-core nav-frontend-typografi-style --save`}
+/>
+
+## Proptable
+
+<Proptable
+  names={[
+    "Xknapp",
+    "Tilbakeknapp",
+    "Systemerknapp",
+    "Søkeknapp",
+    "Nesteknapp",
+    "Menyknapp",
+    "Hamburgerknapp",
+  ]}
+  from="nav-frontend-ikonknapper"
+/>

@@ -113,5 +113,6 @@ utilities/**/css
 */**/NAV-ikonpakke-svg.zip
 
 react-docgen.json
+react-docgen-docs.json
 cjs
 esm
