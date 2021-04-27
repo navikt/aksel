@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "lib/popover.js",
   "types": "lib/popover.d.ts",
   "license": "MIT",
