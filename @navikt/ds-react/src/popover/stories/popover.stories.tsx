@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Popover } from "../index";
+import { Popover, PopoverBase } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { placements } from "@popperjs/core";
 export default {
@@ -53,6 +53,17 @@ export const All = () => {
           <Template placement={placement} />
         </div>
       ))}
+    </div>
+  );
+};
+
+export const PopoverBaseExample = () => {
+  return (
+    <div>
+      <div style={{ width: 50, height: 50, background: "blue" }}></div>
+      <PopoverBase onClose={() => {}} open position={{ y: 50, x: 100 }}>
+        <div style={{ margin: "1rem" }}>Contents</div>
+      </PopoverBase>
     </div>
   );
 };
