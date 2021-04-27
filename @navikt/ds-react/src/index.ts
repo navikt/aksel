@@ -45,7 +45,7 @@ export {
   Ingress,
   Body,
   Label,
-  Element,
+  Detail,
   Component,
 } from "./typography/index";
 export { OverridableComponent } from "./util/index";
