@@ -32,7 +32,7 @@ export {
 } from "./layouts/index";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
-export { Popover } from "./popover/index";
+export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export {
   Heading,
