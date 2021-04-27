@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as ReactDOM from "react-dom";
-import Popover, { PopoverBase, PopoverOrientering } from "../src/popover";
+import Popover from "../src/popover";
 
 import { Meta } from "@storybook/react/types-6-0";
 
@@ -47,31 +47,6 @@ export const All = () => {
     >
       <Template />
       <Template utenPil />
-    </div>
-  );
-};
-
-export const PopoverBaseExample = () => {
-  const [anchor, setAnchor] = useState(undefined);
-  const popoverRef = useRef<any>();
-
-  return (
-    <div style={{ width: "100vw" }}>
-      <button
-        ref={popoverRef}
-        onClick={(e) => setAnchor(e.currentTarget)}
-        style={{ width: "50px" }}
-      >
-        open
-      </button>
-      <PopoverBase
-        orientering={PopoverOrientering.Under}
-        posisjon={{ top: 0, left: 100, pilLeft: 10 }}
-      >
-        <div>
-          <p>Dette er en popover.</p>
-        </div>
-      </PopoverBase>
     </div>
   );
 };
