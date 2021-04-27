@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as ReactDOM from "react-dom";
 import Popover from "../src/popover";
-
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
