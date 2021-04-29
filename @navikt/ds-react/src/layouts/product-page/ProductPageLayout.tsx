@@ -1,29 +1,23 @@
-import React, { useEffect, Children, forwardRef } from "react";
-import { ForwardRefExoticComponent, HTMLAttributes } from "react";
-import { default as Section, SectionProps } from "./Section";
-import { default as Panel, PanelProps } from "./Panel";
-import { ContentContainer, Heading, OverridableComponent } from "../../";
 import cl from "classnames";
+import React, { Children, forwardRef, HTMLAttributes, useEffect } from "react";
+import { ContentContainer, Heading } from "../../index";
 
-export interface LayoutWithSubComponents
-  extends ForwardRefExoticComponent<LayoutProps> {
-  Section: ForwardRefExoticComponent<SectionProps>;
-  Panel: OverridableComponent<PanelProps>;
-}
+const cls = (className, columns) =>
+  cl(
+    "navds-layout__container",
+    `navds-layout__container--${columns}-columns`,
+    className
+  );
 
-export interface LayoutProps extends HTMLAttributes<HTMLElement> {
+export interface ProductPageLayoutProps extends HTMLAttributes<HTMLElement> {
   title: string;
   children?: React.ReactNode;
+  className?: string;
 }
 
-const Layout = forwardRef<HTMLDivElement, LayoutProps>(
+const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(
   ({ children, title, className, ...rest }, ref) => {
     const columns = Children.toArray(children).length;
-    const classNames = cl(
-      "navds-layout__container",
-      `navds-layout__container--${columns}-columns`,
-      className
-    );
 
     useEffect(() => {
       const layoutBody = document.getElementById("navds-layout-body");
@@ -39,7 +33,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
       <div ref={ref}>
         <div id={"navds-layout-header"} className={"navds-layout__header"}>
           <ContentContainer>
-            <div className={classNames} {...rest}>
+            <div className={cls(className, columns)} {...rest}>
               <div className={cl("navds-layout__header-content")}>
                 <Heading
                   size={"xxl"}
@@ -54,7 +48,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
         </div>
         <div id={"navds-layout-body"} className={"navds-layout__body"}>
           <ContentContainer>
-            <div className={classNames} {...rest}>
+            <div className={cls(className, columns)} {...rest}>
               {children}
             </div>
           </ContentContainer>
@@ -62,8 +56,6 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
       </div>
     );
   }
-) as LayoutWithSubComponents;
+);
 
-Layout.Section = Section;
-Layout.Panel = Panel;
-export default Layout;
+export default ProductPageLayout;

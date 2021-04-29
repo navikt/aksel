@@ -50,7 +50,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
     };
 
     return (
-      <>
+      <div>
         <Button
           ref={mergedRef}
           variant="secondary"
@@ -73,7 +73,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
         >
           {label}
         </Popover>
-      </>
+      </div>
     );
   }
 );

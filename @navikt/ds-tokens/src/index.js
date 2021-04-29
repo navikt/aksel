@@ -195,5 +195,10 @@ module.exports = {
         },
       },
     },
+    sidebar: {
+      sticky: {
+        offset: { value: "0" },
+      },
+    },
   },
 };

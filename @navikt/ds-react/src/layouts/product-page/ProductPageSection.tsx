@@ -1,7 +1,8 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
+export interface ProductPageSectionProps
+  extends HTMLAttributes<HTMLDivElement> {
   left?: boolean;
   right?: boolean;
   whiteBackground?: boolean;
@@ -9,7 +10,7 @@ export interface SectionProps extends HTMLAttributes<HTMLDivElement> {
   sticky?: boolean;
 }
 
-const Section = forwardRef<HTMLDivElement, SectionProps>(
+const ProductPageSection = forwardRef<HTMLDivElement, ProductPageSectionProps>(
   (
     {
       left,
@@ -42,4 +43,4 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
   )
 );
 
-export default Section;
+export default ProductPageSection;

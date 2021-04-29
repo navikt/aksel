@@ -66,6 +66,18 @@
   padding-left: 3rem;
 }
 
+.navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable
+  .navds-accordion-menu-item,
+.navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable
+  .navds-accordion-menu-collapsable__button {
+  padding-left: 4rem;
+}
+
 .navds-accordion-menu-item:focus,
 .navds-accordion-menu-collapsable__button:focus {
   outline: 3px solid var(--navds-text-focus);
