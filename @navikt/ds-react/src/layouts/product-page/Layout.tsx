@@ -42,7 +42,7 @@ const Layout = forwardRef<HTMLDivElement, LayoutProps>(
             <div className={classNames} {...rest}>
               <div className={cl("navds-layout__header-content")}>
                 <Heading
-                  size={"xxl"}
+                  size="2xl"
                   className={cl("navds-layout__header-title")}
                   level={1}
                 >

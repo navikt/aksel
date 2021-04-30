@@ -93,7 +93,7 @@ import IconPage from "../examples/resources/icons/IconPage";
 import IconDownload from "../examples/resources/icons/IconDownload";
 
 const components = {
-  h1: (props) => <Heading size="xxl" level={1} {...props} />,
+  h1: (props) => <Heading size="2xl" level={1} {...props} />,
   h2: (props) => <Heading size="large" level={2} {...props} />,
   h3: (props) => <Heading size="small" level={3} {...props} />,
   h4: (props) => <Heading size="small" level={4} {...props} />,

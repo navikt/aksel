@@ -11,8 +11,8 @@ export default {
 const heading = () => {
   return (
     <>
-      <Heading level={1} size="xxl">
-        xxl
+      <Heading level={1} size="2xl">
+        2xl
       </Heading>
       <Heading level={2} size="xl">
         xl
@@ -44,7 +44,7 @@ const text = () => {
 const article = () => {
   return (
     <article>
-      <Heading level={1} size="xxl">
+      <Heading level={1} size="2xl">
         Uføretrygd
       </Heading>
       <Lead>
@@ -136,8 +136,8 @@ const TypoMal = ({ ...rest }) => {
       }}
     >
       <div>
-        <Title {...rest} level={1} size="xxl">
-          {lorem("Title xxl")}
+        <Title {...rest} level={1} size="2xl">
+          {lorem("Title 2xl")}
         </Title>
         <Title {...rest} level={2} size="xl">
           {lorem("Title xl")}
@@ -188,7 +188,7 @@ const TypoMal = ({ ...rest }) => {
 export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
-      <Title level={1} size="xxl" spacing>
+      <Title level={1} size="2xl" spacing>
         Sidetittel
       </Title>
       <Body spacing>
