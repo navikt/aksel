@@ -55,7 +55,7 @@ const BetaLayout = (props) => {
                 code: (props) => <Codeblock {...props} />,
                 inlineCode: (props) => <InlineCode {...props} />,
                 Example,
-                h1: (props) => <Heading {...props} level={1} size="xxl" />,
+                h1: (props) => <Heading {...props} level={1} size="2xl" />,
                 h2: (props) => <Heading {...props} level={2} size="xl" />,
                 h3: (props) => <Heading {...props} level={3} size="large" />,
                 h4: (props) => <Heading {...props} level={4} size="medium" />,

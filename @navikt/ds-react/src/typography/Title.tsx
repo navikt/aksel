@@ -7,9 +7,9 @@ export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
    */
   level: 1 | 2 | 3 | 4 | 5;
   /**
-   * Sizes from largest "xxl" to smallest "s"
+   * Sizes from largest "2xl" to smallest "s"
    */
-  size: "xxl" | "xl" | "l" | "m" | "s";
+  size: "2xl" | "xl" | "l" | "m" | "s";
   /**
    * Heading to render
    */

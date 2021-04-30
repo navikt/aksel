@@ -132,18 +132,18 @@ module.exports = {
           small: { value: "1.375rem" },
           /* xs: { value: "1.25rem" }, */
           /** new */
-          xxl: { value: getFontSize(52) },
+          "2xl": { value: getFontSize(52) },
           xl: { value: getFontSize(40) },
           l: { value: getFontSize(36) },
           m: { value: getFontSize(32) },
           s: { value: getFontSize(28) },
           xs: { value: getFontSize(24) },
-          xxs: { value: getFontSize(20) },
+          "2xs": { value: getFontSize(20) },
         },
       },
       size: {
         title: {
-          xxl: { value: getFontSize(40) },
+          "2xl": { value: getFontSize(40) },
           xl: { value: getFontSize(32) },
           l: { value: getFontSize(28) },
           m: { value: getFontSize(24) },
@@ -155,7 +155,7 @@ module.exports = {
         s: { value: getFontSize(14) },
 
         heading: {
-          xxl: { value: "2.5rem" },
+          "2xl": { value: "2.5rem" },
           xl: { value: "2rem" },
           large: { value: "1.5rem" },
           medium: { value: "1.25rem" },
@@ -171,15 +171,15 @@ module.exports = {
         },
       },
       spacing: {
-        xxxl: { value: getFontSize(40) },
-        xxl: { value: getFontSize(36) },
+        "3xl": { value: getFontSize(40) },
+        "2xl": { value: getFontSize(36) },
         xl: { value: getFontSize(32) },
         l: { value: getFontSize(28) },
         m: { value: getFontSize(24) },
         s: { value: getFontSize(20) },
         xs: { value: getFontSize(16) },
-        xxs: { value: getFontSize(12) },
-        xxxs: { value: getFontSize(8) },
+        "2xs": { value: getFontSize(12) },
+        "3xs": { value: getFontSize(8) },
       },
       weight: {
         bold: { value: "600" },
