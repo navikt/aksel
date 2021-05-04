@@ -27,27 +27,6 @@
   padding: var(--navds-layout-padding-small);
 }
 
-/* prettier-ignore */
-.navds-layout__section--sticky  {
-  /* TEMP Solution until dekratøren has updated */
-  --navds-sidebar-sticky-offset: var(--decorator-sticky-offset);
-
-  top: calc(var(--navds-grid-gutter-small) + var(--navds-sidebar-sticky-offset));
-  position: sticky;
-  max-height: calc(100vh - var(--navds-grid-gutter-small) * 2 - var(--navds-sidebar-sticky-offset));
-  overflow-y: auto;
-}
-
-.navds-layout__container--3-columns
-  > .navds-layout__section--left.navds-layout__section--sticky {
-  position: sticky;
-}
-
-.navds-layout__container--2-columns
-  > .navds-layout__section--left.navds-layout__section--sticky {
-  position: sticky;
-}
-
 .navds-layout__section > *:not(:last-child) {
   margin-bottom: var(--navds-layout-padding-small);
 }
@@ -74,21 +53,23 @@
   }
 }
 
-@media (max-width: 959px) {
-  .navds-layout__container--3-columns
-    > .navds-layout__section--left.navds-layout__section--sticky {
-    position: inherit;
-  }
-}
-
-@media (max-width: 647px) {
-  .navds-layout__container--2-columns
-    > .navds-layout__section--left.navds-layout__section--sticky {
-    position: inherit;
-  }
-}
-
 @media (min-width: 648px) {
+  /* prettier-ignore */
+  .navds-layout__container--2-columns > .navds-layout__section--left.navds-layout__section--sticky {
+    /* TEMP Solution until dekratøren has updated */
+    --navds-sidebar-sticky-offset: var(--decorator-sticky-offset);
+
+    top: calc(
+      var(--navds-grid-gutter-small) + var(--navds-sidebar-sticky-offset)
+    );
+    position: sticky;
+    max-height: calc(
+      100vh - var(--navds-grid-gutter-small) * 2 -
+        var(--navds-sidebar-sticky-offset)
+    );
+    overflow-y: auto;
+  }
+
   .navds-layout__container {
     grid-gap: var(--navds-grid-gutter-medium-and-larger);
   }
@@ -134,6 +115,22 @@
 }
 
 @media (min-width: 960px) {
+  /* prettier-ignore */
+  .navds-layout__container--3-columns > .navds-layout__section--left.navds-layout__section--sticky {
+    /* TEMP Solution until dekratøren has updated */
+    --navds-sidebar-sticky-offset: var(--decorator-sticky-offset);
+
+    top: calc(
+      var(--navds-grid-gutter-small) + var(--navds-sidebar-sticky-offset)
+    );
+    position: sticky;
+    max-height: calc(
+      100vh - var(--navds-grid-gutter-small) * 2 -
+        var(--navds-sidebar-sticky-offset)
+    );
+    overflow-y: auto;
+  }
+
   .navds-layout__section--padding.navds-layout__section--left > * {
     padding: var(--navds-layout-padding-small);
   }
