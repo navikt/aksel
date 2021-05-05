@@ -1,3 +1,4 @@
+import { FieldsetProps } from "./fieldset/Fieldset";
 export {
   AccordionAnchorMenu,
   AccordionAnchorMenuCollapsable,
@@ -34,6 +35,7 @@ export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
+export { Fieldset, FieldsetProps } from "./fieldset/index";
 export {
   Heading,
   HeadingProps,
