@@ -7,7 +7,8 @@
     "module": "commonjs",
     "target": "es2015",
     "sourceMap": false,
-    "declaration": false
+    "declaration": false,
+    "strict": true
   },
   "include": ["./src"],
   "exclude": ["./src/*/stories"]

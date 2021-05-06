@@ -51,7 +51,7 @@ class Lukknapp extends React.Component<LukknappProps, {}> {
     overstHjorne: false,
   };
 
-  buttonRef: HTMLButtonElement;
+  buttonRef!: HTMLButtonElement;
 
   constructor(props) {
     super(props);

@@ -65,7 +65,7 @@ class Stegindikator extends React.Component<
     autoResponsiv: false,
   };
 
-  private list: HTMLOListElement;
+  private list!: HTMLOListElement;
 
   constructor(props: StegindikatorProps) {
     super(props);
