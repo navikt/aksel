@@ -32,14 +32,16 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
   ({ children, text, label, icon, className, ...rest }, ref) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
-    const timeoutRef = useRef<NodeJS.Timeout>();
+    const timeoutRef = useRef<number | null>();
     const [openPopover, setOpenPopover] = useState(false);
 
     useEffect(() => {
-      if (openPopover) {
-        timeoutRef.current = setTimeout(() => setOpenPopover(false), 2000);
-        return () => timeoutRef.current && clearTimeout(timeoutRef.current);
-      }
+      timeoutRef.current = openPopover
+        ? window.setTimeout(() => setOpenPopover(false), 2000)
+        : null;
+      return () => {
+        timeoutRef.current && clearTimeout(timeoutRef.current);
+      };
     }, [openPopover]);
 
     const title = `Kopier ${label} (${text})`;
