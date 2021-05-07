@@ -17,9 +17,9 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    */
   legend: React.ReactNode;
   /**
-   * Fieldset description
+   * Fieldset caption
    */
-  description?: React.ReactNode;
+  caption?: React.ReactNode;
   /**
    * Error stylyling and attributes
    */
@@ -32,36 +32,46 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (
-    {
-      children,
-      className,
-      legend,
-      description,
-      error,
-      errorId = guid(),
-      ...rest
-    },
+    { children, className, legend, caption, error, errorId = guid(), ...rest },
     ref
   ) => {
-    const descriptionIdRef = useRef(description ? guid() : undefined);
+    const captionIdRef = useRef<string | undefined>(
+      caption ? guid() : undefined
+    );
+
+    const describe = () => {
+      const desc = [caption && captionIdRef.current, error && errorId]
+        .filter((x) => !!x)
+        .join(" ");
+      return desc === "" ? undefined : desc;
+    };
 
     return (
       <fieldset
         ref={ref}
         className={cl("navds-fieldset", className)}
         aria-invalid={!!error}
-        aria-describedby={descriptionIdRef.current + error && errorId}
+        aria-describedby={describe()}
         {...rest}
       >
-        <legend className="navds-fieldset__legend">
+        <legend>
           <Label spacing>{legend}</Label>
+          {caption && (
+            <div id={captionIdRef.current}>
+              <Component spacing>{caption}</Component>
+            </div>
+          )}
         </legend>
-        {description && (
-          <div className="navds-description" id={descriptionIdRef.current}>
-            <Component spacing>{description}</Component>
-          </div>
-        )}
+
         {children}
+
+        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+          {error && (
+            <Label spacing className="navds-typo--error">
+              {error}
+            </Label>
+          )}
+        </div>
       </fieldset>
     );
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
@@ -20,16 +20,27 @@ const FormElements = () => (
 );
 
 export const All = () => {
+  const [error, setError] = useState(null);
+
   return (
     <div>
+      <button onClick={() => setError(error ? null : "New error!")}>
+        Toggle error
+      </button>
       <h1>Fieldset</h1>
       <Fieldset legend="This is the legend">
         <FormElements />
       </Fieldset>
       <h1>Fieldset w/description</h1>
+      <Fieldset legend="This is the legend" caption="This is the description">
+        <FormElements />
+      </Fieldset>
+      <h1>Fieldset w/error</h1>
       <Fieldset
         legend="This is the legend"
-        description="This is the description"
+        caption="This is the description"
+        error={error}
+        errorId="123ID"
       >
         <FormElements />
       </Fieldset>
