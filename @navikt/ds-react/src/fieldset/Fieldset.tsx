@@ -11,21 +11,41 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    */
   className?: string;
   /**
-   * Changes background-color and border-color
+   *
    */
-  variant: "warning" | "error" | "info" | "success";
+  legend: React.ReactNode;
+  /**
+   *
+   */
+  description?: React.ReactNode;
+  /**
+   *
+   */
+  inline?: boolean;
 }
 
-const Fieldset = forwardRef<HTMLSpanElement, FieldsetProps>(
-  ({ children, className, variant, ...rest }, ref) => {
+const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+  (
+    { children, className, legend, description, inline = false, ...rest },
+    ref
+  ) => {
     return (
-      <span
+      <fieldset
         ref={ref}
-        className={cl("navds-tag", className, `navds-tag--${variant}`)}
+        className={cl("navds-fieldset", className, {
+          "navds-fieldset--inline": inline,
+        })}
         {...rest}
       >
+        <legend className="navds-fieldset__legend">{legend}</legend>
+        {description && !inline && (
+          <span className="navds-description">{description}</span>
+        )}
         {children}
-      </span>
+        {description && inline && (
+          <span className="navds-description">{description}</span>
+        )}
+      </fieldset>
     );
   }
 );
