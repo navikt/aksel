@@ -15,8 +15,8 @@ import PopoverBase, {
   PopoverOrientering,
 } from "./popover-base";
 
-const cls = (state, props) =>
-  classnames("popover--controlled", {
+const cls = (state, className) =>
+  classnames("popover--controlled", className, {
     "popover--hidden": !state.apen,
   });
 
@@ -25,6 +25,10 @@ export interface PopoverProps extends PopoverBaseProps {
    * Elementet som popover er forankret til. Dette elementet blir brukt til å posisjonere popover.
    */
   ankerEl?: HTMLElement;
+  /**
+   * Egedefinert styling
+   */
+  className?: string;
   /**
    * Callback når popover åpnes.
    */
@@ -230,13 +234,14 @@ class Popover extends React.Component<PopoverProps, PopoverState> {
       onRequestClose,
       avstandTilAnker,
       autoFokus,
+      className,
       ...rest
     } = this.props;
     const position = this.getPosition();
     return (
       <EventThrottler event="resize" callback={this.handleResize} delay={100}>
         <PopoverBase
-          className={cls(this.state, this.props)}
+          className={cls(this.state, className)}
           innerRef={this.popoverRef}
           posisjon={position}
           tabIndex={0}

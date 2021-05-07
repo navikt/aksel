@@ -5,10 +5,7 @@
 @import "Source-Sans-Pro-600.css";
 @import "print.css";
 @import "utility.css";
-
-html:focus-within {
-  scroll-behavior: smooth;
-}
+@import "smooth-scroll.css";
 
 body {
   font-family: var(--navds-font-family);

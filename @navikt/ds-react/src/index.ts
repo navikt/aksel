@@ -27,8 +27,8 @@ export {
 } from "./internal-header/index";
 export {
   ProductPageLayout,
-  ProductPageLayoutProps,
-  ProductPageLayoutSectionProps,
+  ProductPagePanel,
+  ProductPageSection,
 } from "./layouts/index";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";

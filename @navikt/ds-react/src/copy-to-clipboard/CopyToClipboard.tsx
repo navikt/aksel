@@ -50,7 +50,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
     };
 
     return (
-      <>
+      <div>
         <Button
           ref={mergedRef}
           variant="secondary"
@@ -67,13 +67,13 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           anchorEl={buttonRef.current}
           open={openPopover}
           onClose={() => setOpenPopover(false)}
-          placement="auto"
+          placement="right"
           arrow={false}
           className="navds-copy-to-clipboard__popover"
         >
-          {label} er kopiert
+          {label}
         </Popover>
-      </>
+      </div>
     );
   }
 );

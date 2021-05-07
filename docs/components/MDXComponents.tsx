@@ -1,4 +1,4 @@
-import { Settings, SuccessFilled, ErrorFilled } from "@navikt/ds-icons";
+import { ErrorFilled, Settings, SuccessFilled } from "@navikt/ds-icons";
 import { Alert, Heading, Link, Paragraph } from "@navikt/ds-react";
 import Alertstripe from "nav-frontend-alertstriper";
 import Chevron from "nav-frontend-chevron";
@@ -58,10 +58,11 @@ import {
 } from "nav-frontend-typografi";
 import Veileder from "nav-frontend-veileder";
 import Veilederpanel from "nav-frontend-veilederpanel";
+import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
+import FormValidationExample from "../examples/form-validation/FormValidationExample";
+import ModalExample from "../examples/modal/modal-example";
 import BekreftcheckboxpanelExample2 from "../examples/navfrontendskjema/bekreftcheckboxpanel/Feilmelding";
 import BekreftcheckboxpanelExample1 from "../examples/navfrontendskjema/bekreftcheckboxpanel/Normal";
-import EkspanderbartpanelExample from "../examples/ekspanderbartpanel/ekspanderbartpanel-base";
-import ModalExample from "../examples/modal/modal-example";
 import FnrInputExample from "../examples/navfrontendskjema/fnr-input-example";
 import RadioPanelGruppeExample from "../examples/navfrontendskjema/radiopanelgruppe";
 import TextareaExample from "../examples/navfrontendskjema/textarea-example";
@@ -69,28 +70,28 @@ import PopoverDropdownEksempel from "../examples/popover/_popover-dropdown.examp
 import PopoverInputEksempel from "../examples/popover/_popover-input.example";
 import PopoverNormalEksempel from "../examples/popover/_popover-normal.example";
 import PopoverOrienteringEksempel from "../examples/popover/_popover-orientering.example";
+import Palette from "../examples/resources/colors/Palette";
+import IconDownload from "../examples/resources/icons/IconDownload";
+import IconPage from "../examples/resources/icons/IconPage";
 import TekstomradeExample from "../examples/tekstomrade/tekstomrade-example";
+import {
+  ButtonIcon,
+  FigmaIcon,
+  GithubLogo,
+  NAVLogoCircle,
+  SketchLogo,
+  TypoIcon,
+  VeilederIcon,
+  W3CLogo,
+  ZeplinLogo,
+} from "./assets/svg";
 import Preview from "./code-preview/Preview";
 import Bash from "./code/Bash";
 import Import from "./code/Import";
-import Npm from "./npm/Npm";
 import Inline from "./code/Inline";
+import Npm from "./npm/Npm";
+import Proptable from "./props/Proptable";
 import TableOfContents from "./table-of-contents/TableOfContents";
-import FormValidationExample from "../examples/form-validation/FormValidationExample";
-import Palette from "../examples/resources/colors/Palette";
-import {
-  ButtonIcon,
-  TypoIcon,
-  VeilederIcon,
-  NAVLogoCircle,
-  SketchLogo,
-  FigmaIcon,
-  W3CLogo,
-  ZeplinLogo,
-  GithubLogo,
-} from "./assets/svg";
-import IconPage from "../examples/resources/icons/IconPage";
-import IconDownload from "../examples/resources/icons/IconDownload";
 
 const components = {
   h1: (props) => <Heading size="2xl" level={1} {...props} />,
@@ -168,6 +169,7 @@ const components = {
   ToggleKnapp,
   Veileder,
   Veilederpanel,
+  Proptable,
   ButtonIcon,
   TypoIcon,
   VeilederIcon,

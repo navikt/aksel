@@ -46,7 +46,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
         </button>
         {showSuccess && (
           <span role="alert" className="navds-copyToClipboard-success">
-            {label} er kopiert
+            {label}
           </span>
         )}
         <textarea

@@ -1,6 +1,10 @@
 import * as React from "react";
 import { useEffect } from "react";
-import { ProductPageLayout } from "../../index";
+import {
+  ProductPageLayout as Layout,
+  ProductPageSection as Section,
+  ProductPagePanel as Panel,
+} from "../../index";
 import { Left } from "./components/sections/Left";
 import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";
@@ -9,7 +13,7 @@ import "./components/styles.css";
 
 export default {
   title: "ds-react/layouts/ProductPage",
-  component: ProductPageLayout,
+  component: Layout,
   decorators: [
     (Story) => {
       useEffect(() => {
@@ -30,73 +34,71 @@ export default {
 
 const title = "Nunc et lorem";
 export const ThreeColumns = () => (
-  <ProductPageLayout title={title}>
-    <ProductPageLayout.Section left sticky>
+  <Layout title={title}>
+    <Section left sticky>
       <Left />
-    </ProductPageLayout.Section>
-    <ProductPageLayout.Section whiteBackground={false} withPadding={false}>
-      <ProductPageLayout.Panel
+    </Section>
+    <Section whiteBackground={false} withPadding={false}>
+      <Panel
         title={"Leo quis"}
         anchor={"leo-quis"}
         highlight={true}
         icon={<LightBulb />}
       >
         <MainOne title={false} />
-      </ProductPageLayout.Panel>
-      <ProductPageLayout.Panel
-        title={"Proin accumsan"}
-        anchor={"proin-accumsan"}
-      >
+      </Panel>
+      <Panel title={"Proin accumsan"} anchor={"proin-accumsan"}>
         <MainTwo title={false} />
-      </ProductPageLayout.Panel>
-      <ProductPageLayout.Panel
+      </Panel>
+      <Panel
         title={"Maecenas in pretium"}
         anchor={"maecenas-in-pretium"}
         icon={<Telephone />}
       >
         <MainThree title={false} />
-      </ProductPageLayout.Panel>
-    </ProductPageLayout.Section>
-    <ProductPageLayout.Section right sticky>
+      </Panel>
+    </Section>
+    <Section right sticky>
       <Right />
-    </ProductPageLayout.Section>
-  </ProductPageLayout>
+    </Section>
+  </Layout>
 );
 
 export const TwoColumnsLeft = () => (
-  <ProductPageLayout title={title}>
-    <ProductPageLayout.Section left sticky>
+  <Layout title={title}>
+    <Section left sticky>
       <Left />
-    </ProductPageLayout.Section>
-    <ProductPageLayout.Section>
-      <ProductPageLayout.Panel
+      <Left />
+    </Section>
+    <Section>
+      <Panel
         title={"Leo quis"}
         anchor={"leo-quis"}
         highlight={true}
         icon={<LightBulb />}
       >
         <MainOne title={false} />
-      </ProductPageLayout.Panel>
+      </Panel>
       <Main />
-    </ProductPageLayout.Section>
-  </ProductPageLayout>
+    </Section>
+  </Layout>
 );
 
 export const TwoColumnsRight = () => (
-  <ProductPageLayout title={title}>
-    <ProductPageLayout.Section>
+  <Layout title={title}>
+    <Section>
       <Main />
-    </ProductPageLayout.Section>
-    <ProductPageLayout.Section right sticky>
+    </Section>
+    <Section right sticky>
       <Right />
-    </ProductPageLayout.Section>
-  </ProductPageLayout>
+    </Section>
+  </Layout>
 );
 
 export const OneColumn = () => (
-  <ProductPageLayout title={title}>
-    <ProductPageLayout.Section>
+  <Layout title={title}>
+    <Section>
       <Main />
-    </ProductPageLayout.Section>
-  </ProductPageLayout>
+    </Section>
+  </Layout>
 );

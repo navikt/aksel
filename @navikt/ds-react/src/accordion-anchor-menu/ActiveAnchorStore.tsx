@@ -40,7 +40,7 @@ export const ActiveAnchorProvider = ({ children }) => {
         const urlWithoutHash = href.replace(hash, "");
         const urlWithAnchor = `${urlWithoutHash}#${lastPassedAnchor}`;
         const title = document.title;
-        window.history.pushState(lastPassedAnchor, title, urlWithAnchor);
+        window.history.replaceState(window.history.state, title, urlWithAnchor);
         setActiveAnchor(lastPassedAnchor);
       }
     };

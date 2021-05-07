@@ -15,7 +15,7 @@ interface ColorSwtichProps {
 }
 
 const ColorSwitch = ({ onChange, ...props }: ColorSwtichProps) => {
-  const colors = ["#FFFFFF", "#000000", "#0067C5"];
+  const colors = ["#FFFFFF", "#292929", "#0067C5"];
   const [selectedColor, setSelectedColor] = useState("currentColor");
 
   const onColorChange = (color) => {
