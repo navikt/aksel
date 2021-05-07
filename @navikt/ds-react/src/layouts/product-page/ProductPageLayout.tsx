@@ -36,7 +36,7 @@ const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(
             <div className={cls(className, columns)} {...rest}>
               <div className={cl("navds-layout__header-content")}>
                 <Heading
-                  size={"xxl"}
+                  size="2xl"
                   className={cl("navds-layout__header-title")}
                   level={1}
                 >

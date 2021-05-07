@@ -94,7 +94,7 @@ import Proptable from "./props/Proptable";
 import TableOfContents from "./table-of-contents/TableOfContents";
 
 const components = {
-  h1: (props) => <Heading size="xxl" level={1} {...props} />,
+  h1: (props) => <Heading size="2xl" level={1} {...props} />,
   h2: (props) => <Heading size="large" level={2} {...props} />,
   h3: (props) => <Heading size="small" level={3} {...props} />,
   h4: (props) => <Heading size="small" level={4} {...props} />,

@@ -1,5 +1,9 @@
 const Color = require("color");
 
+const baseFontSize = 16;
+
+const getFontSize = (size) => `${size / baseFontSize}rem`;
+
 const baseColors = {
   blue: "#0067c5",
   deepblue: "#005B82",
@@ -121,9 +125,37 @@ module.exports = {
     },
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
+      line: {
+        height: {
+          large: { value: "1.625rem" },
+          medium: { value: "1.5rem" },
+          small: { value: "1.375rem" },
+          /* xs: { value: "1.25rem" }, */
+          /** new */
+          "2xl": { value: getFontSize(52) },
+          xl: { value: getFontSize(40) },
+          l: { value: getFontSize(36) },
+          m: { value: getFontSize(32) },
+          s: { value: getFontSize(28) },
+          xs: { value: getFontSize(24) },
+          "2xs": { value: getFontSize(20) },
+        },
+      },
       size: {
+        title: {
+          "2xl": { value: getFontSize(40) },
+          xl: { value: getFontSize(32) },
+          l: { value: getFontSize(28) },
+          m: { value: getFontSize(24) },
+          s: { value: getFontSize(20) },
+        },
+        xl: { value: getFontSize(20) },
+        l: { value: getFontSize(18) },
+        m: { value: getFontSize(16) },
+        s: { value: getFontSize(14) },
+
         heading: {
-          xxl: { value: "2.5rem" },
+          "2xl": { value: "2.5rem" },
           xl: { value: "2rem" },
           large: { value: "1.5rem" },
           medium: { value: "1.25rem" },
@@ -138,17 +170,20 @@ module.exports = {
           paragraph: { value: "1.125rem" },
         },
       },
+      spacing: {
+        "3xl": { value: getFontSize(40) },
+        "2xl": { value: getFontSize(36) },
+        xl: { value: getFontSize(32) },
+        l: { value: getFontSize(28) },
+        m: { value: getFontSize(24) },
+        s: { value: getFontSize(20) },
+        xs: { value: getFontSize(16) },
+        "2xs": { value: getFontSize(12) },
+        "3xs": { value: getFontSize(8) },
+      },
       weight: {
         bold: { value: "600" },
         regular: { value: "400" },
-      },
-      line: {
-        height: {
-          large: { value: "1.625rem" },
-          medium: { value: "1.5rem" },
-          small: { value: "1.375rem" },
-          xs: { value: "1.25rem" },
-        },
       },
     },
     shadow: {

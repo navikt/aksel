@@ -1,0 +1,38 @@
+import React, { forwardRef } from "react";
+import cl from "classnames";
+
+export interface ComponentProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
+  /**
+   * M: 18px, S: 16px
+   * @default "m"
+   */
+  size?: "m" | "s";
+  /**
+   * Component content
+   */
+  children: React.ReactNode;
+  /**
+   * Custom styling on element
+   */
+  className?: string;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
+}
+
+const Component = forwardRef<HTMLParagraphElement, ComponentProps>(
+  ({ className, size = "m", spacing, ...rest }, ref) => (
+    <p
+      {...rest}
+      ref={ref}
+      className={cl(className, "navds-component", {
+        "navds-component--s": size === "s",
+        "navds-typo--spacing": !!spacing,
+      })}
+    />
+  )
+);
+
+export default Component;
