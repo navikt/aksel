@@ -33,10 +33,6 @@ export const All = () => {
       >
         <FormElements />
       </Fieldset>
-      <h1>Fieldset inline</h1>
-      <Fieldset legend="This is the legend" inline>
-        <FormElements />
-      </Fieldset>
     </div>
   );
 };
