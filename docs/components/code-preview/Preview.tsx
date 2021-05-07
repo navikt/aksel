@@ -5,7 +5,6 @@ import Bash from "../code/Bash";
 import Prettier from "prettier/standalone";
 import ParserBabel from "prettier/parser-babel";
 import "./preview.css";
-import OverflowDetector from "../overflow-detector/OverflowDetector";
 import cl from "classnames";
 
 const prettierOptions = {
