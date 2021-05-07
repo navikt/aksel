@@ -18,33 +18,15 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    *
    */
   description?: React.ReactNode;
-  /**
-   *
-   */
-  inline?: boolean;
 }
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
-  (
-    { children, className, legend, description, inline = false, ...rest },
-    ref
-  ) => {
+  ({ children, className, legend, description, ...rest }, ref) => {
     return (
-      <fieldset
-        ref={ref}
-        className={cl("navds-fieldset", className, {
-          "navds-fieldset--inline": inline,
-        })}
-        {...rest}
-      >
+      <fieldset ref={ref} className={cl("navds-fieldset", className)} {...rest}>
         <legend className="navds-fieldset__legend">{legend}</legend>
-        {description && !inline && (
-          <span className="navds-description">{description}</span>
-        )}
+        {description && <div className="navds-description">{description}</div>}
         {children}
-        {description && inline && (
-          <span className="navds-description">{description}</span>
-        )}
       </fieldset>
     );
   }
