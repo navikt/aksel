@@ -1,4 +1,4 @@
-import { Files } from "@navikt/ds-icons";
+import { Copy } from "@navikt/ds-icons";
 import copy from "copy-to-clipboard";
 import cl from "classnames";
 import React, {
@@ -61,7 +61,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           onClick={handleClick}
           {...rest}
         >
-          {icon ? <>{icon}</> : <Files aria-label="Fil ikon for kopiering" />}
+          {icon ? <>{icon}</> : <Copy aria-label="Fil ikon for kopiering" />}
           {children ? children : <span className="sr-only">{title}</span>}
         </Button>
         <Popover
