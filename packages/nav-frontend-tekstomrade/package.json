@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tekstomrade",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "lib/tekstomrade.js",
   "types": "lib/tekstomrade.d.ts",
   "license": "MIT",
