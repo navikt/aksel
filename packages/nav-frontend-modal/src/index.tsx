@@ -58,9 +58,9 @@ export interface ModalProps extends Props {
 }
 
 class ModalWrapper extends React.Component<ModalProps, {}> {
-  closeButtonRef: Lukknapp | null;
+  closeButtonRef: Lukknapp | null | undefined;
 
-  modalRef: Modal | null;
+  modalRef!: Modal | null;
 
   static setAppElement(element) {
     Modal.setAppElement(element);

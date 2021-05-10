@@ -10,7 +10,7 @@ export interface EventThrottlerProps {
 }
 
 export class EventThrottler extends React.Component<EventThrottlerProps> {
-  private throttled: () => void;
+  private throttled!: () => void;
 
   componentDidMount() {
     this.throttled = _throttle(this.props.callback, this.props.delay, {

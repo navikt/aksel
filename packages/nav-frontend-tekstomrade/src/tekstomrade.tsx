@@ -42,6 +42,11 @@ class Tekstomrade extends React.Component<TekstomradeProps> {
 
   render() {
     const { as, children, ingenFormattering, rules, ...rest } = this.props;
+
+    if (typeof children !== "string") {
+      return null;
+    }
+
     if (ingenFormattering) {
       return <div {...rest}>{children}</div>;
     }

@@ -18,6 +18,10 @@ const cls = (bla, hvit, hjorne, className) =>
 export interface LukknappProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
+   * Tekst som beskriver knappen for skjermleser
+   */
+  children: string;
+  /**
    * Blå variant
    */
   bla?: boolean;
@@ -51,7 +55,7 @@ class Lukknapp extends React.Component<LukknappProps, {}> {
     overstHjorne: false,
   };
 
-  buttonRef: HTMLButtonElement;
+  buttonRef!: HTMLButtonElement;
 
   constructor(props) {
     super(props);
