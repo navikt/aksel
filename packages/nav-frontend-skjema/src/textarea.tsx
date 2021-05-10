@@ -159,6 +159,7 @@ class Textarea extends React.Component<TextareaProps> {
   }
 
   componentDidMount() {
+    // @ts-ignore
     requestAnimationFrame.call(window, this.updateHeight, 0);
   }
 
