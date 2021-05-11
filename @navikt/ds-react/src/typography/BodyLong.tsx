@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface BodyProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface BodyLongProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * M: 18px, S: 16px
    * @default "m"
@@ -21,12 +22,12 @@ export interface BodyProps extends React.HTMLAttributes<HTMLParagraphElement> {
   spacing?: boolean;
 }
 
-const Body = forwardRef<HTMLParagraphElement, BodyProps>(
+const BodyLong = forwardRef<HTMLParagraphElement, BodyLongProps>(
   ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-body", {
+      className={cl(className, "navds-body-long", {
         "navds-body--s": size === "s",
         "navds-typo--spacing": !!spacing,
       })}
@@ -34,4 +35,4 @@ const Body = forwardRef<HTMLParagraphElement, BodyProps>(
   )
 );
 
-export default Body;
+export default BodyLong;

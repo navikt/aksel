@@ -1,6 +1,6 @@
 import React from "react";
 import { Heading, Text, Paragraph, Lead } from "../index";
-import { Title, Component, Body, Detail, Ingress, Label } from "../index";
+import { Title, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
 import "./index.css";
 
 export default {
@@ -156,10 +156,18 @@ const TypoMal = ({ ...rest }) => {
         <Ingress {...rest}>{lorem("Ingress")}</Ingress>
       </div>
       <div>
-        <Body {...rest}>{lorem("Body")}</Body>
-        <Body {...rest} size="s">
-          {lorem("Body small")}
-        </Body>
+        <BodyLong {...rest}>{lorem("BodyLong")}</BodyLong>
+        <BodyLong {...rest} size="s">
+          {lorem("BodyLong small")}
+        </BodyLong>
+      </div>
+      <div>
+        <BodyShort {...rest} {...rest}>
+          {lorem("BodyShort")}
+        </BodyShort>
+        <BodyShort {...rest} size="s">
+          {lorem("BodyShort small")}
+        </BodyShort>
       </div>
       <div>
         <Label {...rest}>{lorem("Label")}</Label>
@@ -173,14 +181,6 @@ const TypoMal = ({ ...rest }) => {
           {lorem("Detail small")}
         </Detail>
       </div>
-      <div>
-        <Component {...rest} {...rest}>
-          {lorem("Component")}
-        </Component>
-        <Component {...rest} size="s">
-          {lorem("Component small")}
-        </Component>
-      </div>
     </div>
   );
 };
@@ -189,47 +189,59 @@ export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
       <Title level={1} size="2xl" spacing>
-        Sidetittel
+        Title lvl 1 2xl
       </Title>
-      <Body spacing>
-        Aliqua ad et nisi commodo sit excepteur in commodo proident proident.
-        Nostrud consectetur dolore eu nostrud aliqua. Adipisicing labore aliqua
-        qui velit amet ea amet do. Magna anim velit et incididunt. Lorem ad
-        pariatur pariatur quis magna cupidatat. Exercitation officia occaecat
-        occaecat id nulla fugiat laborum elit laboris non est ex nostrud
-        occaecat. Commodo laboris veniam cillum in aute.
-      </Body>
-      <Body spacing>
-        Cillum consequat velit est ea voluptate. Et elit irure magna sit
-        consequat mollit excepteur ad non excepteur velit exercitation aute.
+      <BodyLong spacing>
+        BodyLong: Aliqua ad et nisi commodo sit excepteur in commodo proident
+        proident. Nostrud consectetur dolore eu nostrud aliqua. Adipisicing
+        labore aliqua qui velit amet ea amet do. Magna anim velit et incididunt.
+        Lorem ad pariatur pariatur quis magna cupidatat. Exercitation officia
+        occaecat occaecat id nulla fugiat laborum elit laboris non est ex
+        nostrud occaecat. Commodo laboris veniam cillum in aute.
+      </BodyLong>
+      <BodyLong spacing>
+        BodyLong: Cillum consequat velit est ea voluptate. Et elit irure magna
+        sit consequat mollit excepteur ad non excepteur velit exercitation aute.
         Fugiat deserunt quis nulla cupidatat esse quis ex. Laborum eiusmod culpa
         labore eu irure quis laborum. Irure veniam et nostrud do. Quis ut ea est
         culpa tempor anim.
-      </Body>
+      </BodyLong>
+      <Detail>
+        Detail: Dolore commodo ad veniam commodo aute voluptate est officia sunt
+        proident irure consectetur excepteur.
+      </Detail>
       <Title level={2} size="xl" spacing>
-        Underittel
+        Title lvl 2 xl
       </Title>
       <Ingress spacing>
         Ingress: Mollit incididunt incididunt officia amet est et non aliqua
         officia nulla et aute aliqua culpa.
       </Ingress>
-      <Body spacing>
-        Commodo veniam enim laborum pariatur excepteur commodo do cillum. Nisi
-        elit sunt commodo id in adipisicing cupidatat dolore dolore et tempor
-        cupidatat. Cillum quis sunt in dolor occaecat.
-      </Body>
-      <Body spacing>
-        Irure dolore laborum amet occaecat ex laboris mollit reprehenderit nisi
-        laborum voluptate laborum. Ipsum eu sint laborum adipisicing ut
-        incididunt laborum laborum. Ipsum non amet laboris quis Lorem est
-        laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
-      </Body>
-      <Body size="s" spacing>
-        Irure dolore laborum amet occaecat ex laboris mollit reprehenderit nisi
-        laborum voluptate laborum. Ipsum eu sint laborum adipisicing ut
-        incididunt laborum laborum. Ipsum non amet laboris quis Lorem est
-        laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
-      </Body>
+      <BodyLong spacing>
+        BodyLong: Commodo veniam enim laborum pariatur excepteur commodo do
+        cillum. Nisi elit sunt commodo id in adipisicing cupidatat dolore dolore
+        et tempor cupidatat. Cillum quis sunt in dolor occaecat.
+      </BodyLong>
+      <BodyLong spacing>
+        BodyLong: Irure dolore laborum amet occaecat ex laboris mollit
+        reprehenderit nisi laborum voluptate laborum. Ipsum eu sint laborum
+        adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
+        Lorem est laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
+      </BodyLong>
+      <BodyLong size="s" spacing>
+        BodyLong small: Irure dolore laborum amet occaecat ex laboris mollit
+        reprehenderit nisi laborum voluptate laborum. Ipsum eu sint laborum
+        adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
+        Lorem est laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
+      </BodyLong>
+      <BodyShort spacing>
+        BodyShort: Id consectetur velit sunt laboris consequat ullamco
+        incididunt.
+      </BodyShort>
+      <BodyShort size="s" spacing>
+        BodyShort small: Sunt amet officia sit excepteur sit pariatur sit
+        reprehenderit irure ipsum.
+      </BodyShort>
     </div>
   );
 };

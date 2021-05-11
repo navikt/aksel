@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface ComponentProps
+export interface BodyShortProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * M: 18px, S: 16px
@@ -22,17 +22,17 @@ export interface ComponentProps
   spacing?: boolean;
 }
 
-const Component = forwardRef<HTMLParagraphElement, ComponentProps>(
+const BodyShort = forwardRef<HTMLParagraphElement, BodyShortProps>(
   ({ className, size = "m", spacing, ...rest }, ref) => (
     <p
       {...rest}
       ref={ref}
-      className={cl(className, "navds-component", {
-        "navds-component--s": size === "s",
+      className={cl(className, "navds-body-short", {
+        "navds-body--s": size === "s",
         "navds-typo--spacing": !!spacing,
       })}
     />
   )
 );
 
-export default Component;
+export default BodyShort;

@@ -67,15 +67,26 @@
 }
 
 /* Body */
-.navds-body {
+.navds-body-long {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-s);
   margin: 0;
 }
 
-.navds-body.navds-typo--spacing {
+.navds-body-short {
+  font-size: var(--navds-font-size-l);
+  letter-spacing: 0;
+  line-height: var(--navds-font-line-height-xs);
+  margin: 0;
+}
+
+.navds-body-long.navds-typo--spacing {
   margin-bottom: var(--navds-font-spacing-2xl);
+}
+
+.navds-body-short.navds-typo--spacing {
+  margin-bottom: var(--navds-font-spacing-2xs);
 }
 
 .navds-body--s {
@@ -84,8 +95,12 @@
   line-height: var(--navds-font-line-height-xs);
 }
 
-.navds-body--s.navds-typo--spacing {
+.navds-body-long.navds-body--s.navds-typo--spacing {
   margin-bottom: var(--navds-font-spacing-xl);
+}
+
+.navds-body-short.navds-body--s.navds-typo--spacing {
+  margin-bottom: var(--navds-font-spacing-3xs);
 }
 
 /* Label */
@@ -132,31 +147,10 @@
   margin-bottom: var(--navds-font-spacing-3xs);
 }
 
-/* Component */
-.navds-component {
-  font-size: var(--navds-font-size-l);
-  letter-spacing: 0;
-  line-height: var(--navds-font-line-height-xs);
-  margin: 0;
-}
-
-.navds-component.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
-}
-
-.navds-component--s {
-  font-size: var(--navds-font-size-m);
-  letter-spacing: 0.002em;
-  line-height: var(--navds-font-line-height-2xs);
-}
-
-.navds-component--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xs);
-}
-
 .navds-typo--error {
   color: var(--navds-color-red-50);
 }
+
 /*************************************
 *                OLD                 *
 *************************************/

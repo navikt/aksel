@@ -45,9 +45,9 @@ export {
   TextProps,
   Title,
   Ingress,
-  Body,
+  BodyLong,
+  BodyShort,
   Label,
   Detail,
-  Component,
 } from "./typography/index";
 export { OverridableComponent } from "./util/index";
