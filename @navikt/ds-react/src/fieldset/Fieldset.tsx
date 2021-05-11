@@ -1,6 +1,5 @@
-import React, { forwardRef, HTMLAttributes, useRef } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { Label, Component } from "../index";
 import { v4 as guid } from "uuid";
 
 export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
@@ -25,7 +24,7 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    */
   error?: React.ReactNode;
   /**
-   * Custom id for error-msg
+   * Custom id for error message
    */
   errorId?: React.ReactNode;
 }
@@ -35,42 +34,30 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     { children, className, legend, caption, error, errorId = guid(), ...rest },
     ref
   ) => {
-    const captionIdRef = useRef<string | undefined>(
-      caption ? guid() : undefined
-    );
-
-    const describe = () => {
-      const desc = [caption && captionIdRef.current, error && errorId]
-        .filter((x) => !!x)
-        .join(" ");
-      return desc === "" ? undefined : desc;
-    };
-
     return (
       <fieldset
         ref={ref}
         className={cl("navds-fieldset", className)}
         aria-invalid={!!error}
-        aria-describedby={describe()}
+        aria-describedby={error && errorId}
         {...rest}
       >
         <legend>
-          <Label spacing>{legend}</Label>
+          <div className="navds-label navds-typo--spacing">{legend}</div>
           {caption && (
-            <div id={captionIdRef.current}>
-              <Component spacing>{caption}</Component>
+            <div className="navds-body-short navds-typo--spacing">
+              {caption}
             </div>
           )}
         </legend>
-
         {children}
-
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {error && (
-            <Label spacing className="navds-typo--error">
-              {error}
-            </Label>
-          )}
+        <div
+          className="navds-label navds-typo--spacing navds-typo--error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {error && <span>{error}</span>}
         </div>
       </fieldset>
     );

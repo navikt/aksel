@@ -8,14 +8,22 @@ export default {
 
 const FormElements = () => (
   <>
-    <label>input 1 label</label>
-    <input />
-    <input type="checkbox" />
-    <label>box 1</label>
-    <input type="checkbox" />
-    <label>box 2</label>
-    <input type="checkbox" />
-    <label>box 3</label>
+    <div>
+      <label>input 1 label</label>
+      <input />
+    </div>
+    <div>
+      <input type="checkbox" />
+      <label>box 1</label>
+    </div>
+    <div>
+      <input type="checkbox" />
+      <label>box 2</label>
+    </div>
+    <div>
+      <input type="checkbox" />
+      <label>box 3</label>
+    </div>
   </>
 );
 
@@ -24,9 +32,6 @@ export const All = () => {
 
   return (
     <div>
-      <button onClick={() => setError(error ? null : "New error!")}>
-        Toggle error
-      </button>
       <h1>Fieldset</h1>
       <Fieldset legend="This is the legend">
         <FormElements />
@@ -44,6 +49,9 @@ export const All = () => {
       >
         <FormElements />
       </Fieldset>
+      <button onClick={() => setError(error ? null : "New error!")}>
+        Toggle error
+      </button>
     </div>
   );
 };
