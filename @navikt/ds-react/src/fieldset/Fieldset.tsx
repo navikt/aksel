@@ -16,9 +16,9 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    */
   legend: React.ReactNode;
   /**
-   * Fieldset caption
+   * Fieldset description
    */
-  caption?: React.ReactNode;
+  description?: React.ReactNode;
   /**
    * Error stylyling and attributes
    */
@@ -31,7 +31,15 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (
-    { children, className, legend, caption, error, errorId = guid(), ...rest },
+    {
+      children,
+      className,
+      legend,
+      description,
+      error,
+      errorId = guid(),
+      ...rest
+    },
     ref
   ) => {
     return (
@@ -44,9 +52,9 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <legend>
           <div className="navds-label navds-typo--spacing">{legend}</div>
-          {caption && (
+          {description && (
             <div className="navds-body-short navds-typo--spacing">
-              {caption}
+              {description}
             </div>
           )}
         </legend>
