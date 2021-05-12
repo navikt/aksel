@@ -101,11 +101,11 @@ export default class Icon extends React.Component {
               />
               <path
                 d="M12.027 19H12A1.499 1.499 0 0 1 11.973 16L12 16a1.501 1.501 0 0 1 .027 3z"
-                fill="#3E3832"
+                fill="#262626"
               />
               <path
                 d="M12 5a1 1 0 0 1 1 1v7a1 1 0 0 1-2 0V6a1 1 0 0 1 1-1z"
-                fill="#3E3832"
+                fill="#262626"
                 fillRule="nonzero"
               />
             </g>
