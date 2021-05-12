@@ -7,6 +7,8 @@ FARGER
 */
 
 // Navfarger
+@navds-color-white: #ffffff;
+@navds-color-darkgray: #262626;
 
 @navRod: #c30000;
 @navOransje: #ff9100;
@@ -33,7 +35,6 @@ FARGER
 @fokusFarge: @navBlaDarken60;
 
 // kvarliggande farger for skjerm
-@orangeFocus: #ffbd66;
 @redError: #ba3a26;
 @white: #fff;
 @grayBackground: @navLysGra; // Deprecated
@@ -43,96 +44,87 @@ FARGER
 @pinkErrorBg: #f3e3e3;
 
 // Tilleggsfarger
-// Går mot +#FFF respektive +#3E3832 i inkrement av 20%
-@navGronnLighten20: mix(@navGronn, #fff, 80%);
-@navGronnLighten40: mix(@navGronn, #fff, 60%);
-@navGronnLighten60: mix(@navGronn, #fff, 40%);
-@navGronnLighten80: mix(@navGronn, #fff, 20%);
+// Kalkulering finnes i @navikt/ds-tokens/src/index.js
 
-@navGronnDarken20: mix(@navGronn, #3e3832, 80%);
-@navGronnDarken40: mix(@navGronn, #3e3832, 60%);
-@navGronnDarken60: mix(@navGronn, #3e3832, 40%);
-@navGronnDarken80: mix(@navGronn, #3e3832, 20%);
+@navGronnLighten80: #ccf1d6;
+@navGronnLighten60: #99dead;
+@navGronnLighten40: #66c786;
+@navGronnLighten20: #33aa5f;
 
-@navLimeGronnLighten20: mix(@navLimeGronn, #fff, 80%);
-@navLimeGronnLighten40: mix(@navLimeGronn, #fff, 60%);
-@navLimeGronnLighten60: mix(@navLimeGronn, #fff, 40%);
-@navLimeGronnLighten80: mix(@navLimeGronn, #fff, 20%);
+@navGronnDarken20: #007c2e;
+@navGronnDarken40: #006a23;
+@navGronnDarken60: #005519;
+@navGronnDarken80: #003b0f;
 
-@navLimeGronnDarken20: mix(@navLimeGronn, #3e3832, 80%);
-@navLimeGronnDarken40: mix(@navLimeGronn, #3e3832, 60%);
-@navLimeGronnDarken60: mix(@navLimeGronn, #3e3832, 40%);
-@navLimeGronnDarken80: mix(@navLimeGronn, #3e3832, 20%);
+@navLimeGronnLighten80: #f9fccc;
+@navLimeGronnLighten60: #ecf399;
+@navLimeGronnLighten40: #d9e366;
+@navLimeGronnLighten20: #c1cb33;
 
-@navLysBlaLighten20: mix(@navLysBla, #fff, 80%);
-@navLysBlaLighten40: mix(@navLysBla, #fff, 60%);
-@navLysBlaLighten60: mix(@navLysBla, #fff, 40%);
-@navLysBlaLighten80: mix(@navLysBla, #fff, 20%);
+@navLimeGronnDarken20: #939e00;
+@navLimeGronnDarken40: #7f8900;
+@navLimeGronnDarken60: #666e00;
+@navLimeGronnDarken80: #474e00;
 
-@navLysBlaDarken20: mix(@navLysBla, #3e3832, 80%);
-@navLysBlaDarken40: mix(@navLysBla, #3e3832, 60%);
-@navLysBlaDarken60: mix(@navLysBla, #3e3832, 40%);
-@navLysBlaDarken80: mix(@navLysBla, #3e3832, 20%);
+@navLysBlaLighten80: #d8f9ff;
+@navLysBlaLighten60: #b5f1ff;
+@navLysBlaLighten40: #97e6ff;
+@navLysBlaLighten20: #7cdaf8;
 
-@navBlaLighten20: mix(@navBla, #fff, 80%);
-@navBlaLighten40: mix(@navBla, #fff, 60%);
-@navBlaLighten60: mix(@navBla, #fff, 40%);
-@navBlaLighten80: mix(@navBla, #fff, 20%);
+@navLysBlaDarken20: #4cadcd;
+@navLysBlaDarken40: #368da8;
+@navLysBlaDarken60: #236b7d;
+@navLysBlaDarken80: #134852;
 
-@navBlaDarken20: mix(@navBla, #3e3832, 80%);
-@navBlaDarken40: mix(@navBla, #3e3832, 60%);
-@navBlaDarken60: mix(@navBla, #3e3832, 40%);
-@navBlaDarken80: mix(@navBla, #3e3832, 20%);
+@navBlaLighten80: #cce1ff;
+@navBlaLighten60: #99c3ff;
+@navBlaLighten40: #66a5f4;
+@navBlaLighten20: #3386e0;
 
-@navDypBlaLighten20: mix(@navDypBla, #fff, 80%);
-@navDypBlaLighten40: mix(@navDypBla, #fff, 60%);
-@navDypBlaLighten60: mix(@navDypBla, #fff, 40%);
-@navDypBlaLighten80: mix(@navDypBla, #fff, 20%);
+@navBlaDarken20: #0056b4;
+@navBlaDarken40: #00459c;
+@navBlaDarken60: #00347d;
+@navBlaDarken80: #002252;
 
-@navDypBlaDarken20: mix(@navDypBla, #3e3832, 80%);
-@navDypBlaDarken40: mix(@navDypBla, #3e3832, 60%);
-@navDypBlaDarken60: mix(@navDypBla, #3e3832, 40%);
-@navDypBlaDarken80: mix(@navDypBla, #3e3832, 20%);
+@navDypBlaLighten80: #cce2f0;
+@navDypBlaLighten60: #99c4dd;
+@navDypBlaLighten40: #66a3c4;
+@navDypBlaLighten20: #3380a5;
 
-@navLillaLighten20: mix(@navLilla, #fff, 80%);
-@navLillaLighten40: mix(@navLilla, #fff, 60%);
-@navLillaLighten60: mix(@navLilla, #fff, 40%);
-@navLillaLighten80: mix(@navLilla, #fff, 20%);
+@navDypBlaDarken20: #005077;
+@navDypBlaDarken40: #004367;
+@navDypBlaDarken60: #003453;
+@navDypBlaDarken80: #00243a;
 
-@navLillaDarken20: mix(@navLilla, #3e3832, 80%);
-@navLillaDarken40: mix(@navLilla, #3e3832, 60%);
-@navLillaDarken60: mix(@navLilla, #3e3832, 40%);
-@navLillaDarken80: mix(@navLilla, #3e3832, 20%);
+@navLillaLighten80: #e0d8e9;
+@navLillaLighten60: #c0b2d2;
+@navLillaLighten40: #a18dbb;
+@navLillaLighten20: #8269a2;
 
-@navRodLighten20: mix(@navRod, #fff, 80%);
-@navRodLighten40: mix(@navRod, #fff, 60%);
-@navRodLighten60: mix(@navRod, #fff, 40%);
-@navRodLighten80: mix(@navRod, #fff, 20%);
+@navLillaDarken20: #523874;
+@navLillaDarken40: #412b5d;
+@navLillaDarken60: #301f46;
+@navLillaDarken80: #1f142f;
 
-@navRodDarken20: mix(@navRod, #3e3832, 80%);
-@navRodDarken40: mix(@navRod, #3e3832, 60%);
-@navRodDarken60: mix(@navRod, #3e3832, 40%);
-@navRodDarken80: mix(@navRod, #3e3832, 20%);
+@redErrorLighten80: #f9d2cc;
+@redErrorLighten60: #efa89d;
+@redErrorLighten40: #e18071;
+@redErrorLighten20: #d05c4a;
 
-@navOransjeLighten20: mix(@navOransje, #fff, 80%);
-@navOransjeLighten40: mix(@navOransje, #fff, 60%);
-@navOransjeLighten60: mix(@navOransje, #fff, 40%);
-@navOransjeLighten80: mix(@navOransje, #fff, 20%);
+@redErrorDarken20: #a32a17;
+@redErrorDarken40: #881d0c;
+@redErrorDarken60: #6a1204;
+@redErrorDarken80: #480900;
 
-@navOransjeDarken20: mix(@navOransje, #3e3832, 80%);
-@navOransjeDarken40: mix(@navOransje, #3e3832, 60%);
-@navOransjeDarken60: mix(@navOransje, #3e3832, 40%);
-@navOransjeDarken80: mix(@navOransje, #3e3832, 20%);
+@navOransjeLighten80: #ffeccc;
+@navOransjeLighten60: #ffd799;
+@navOransjeLighten40: #ffc166;
+@navOransjeLighten20: #ffaa33;
 
-@orangeFocusLighten20: mix(@orangeFocus, #fff, 80%);
-@orangeFocusLighten40: mix(@orangeFocus, #fff, 60%);
-@orangeFocusLighten60: mix(@orangeFocus, #fff, 40%);
-@orangeFocusLighten80: mix(@orangeFocus, #fff, 20%);
-
-@orangeFocusDarken20: mix(@orangeFocus, #3e3832, 80%);
-@orangeFocusDarken40: mix(@orangeFocus, #3e3832, 60%);
-@orangeFocusDarken60: mix(@orangeFocus, #3e3832, 40%);
-@orangeFocusDarken80: mix(@orangeFocus, #3e3832, 20%);
+@navOransjeDarken20: #d47b00;
+@navOransjeDarken40: #a86400;
+@navOransjeDarken60: #7d4c00;
+@navOransjeDarken80: #523300;
 
 @redErrorLighten20: mix(@redError, #fff, 80%);
 @redErrorLighten40: mix(@redError, #fff, 60%);
