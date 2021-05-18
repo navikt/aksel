@@ -89,19 +89,19 @@ module.exports = {
       tag: {
         error: {
           border: { value: "{navds.color.red.50.value}" },
-          background: { value: "{navds.color.red.20.value}" },
+          background: { value: "{navds.color.red.10.value}" },
         },
         warning: {
           border: { value: "{navds.color.orange.60.value}" },
-          background: { value: "{navds.color.orange.20.value}" },
+          background: { value: "{navds.color.orange.10.value}" },
         },
         info: {
           border: { value: "{navds.color.lightblue.70.value}" },
-          background: { value: "{navds.color.lightblue.20.value}" },
+          background: { value: "{navds.color.lightblue.10.value}" },
         },
         success: {
           border: { value: "{navds.color.green.50.value}" },
-          background: { value: "{navds.color.green.20.value}" },
+          background: { value: "{navds.color.green.10.value}" },
         },
       },
       modal: {
