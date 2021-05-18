@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Next } from "@navikt/ds-icons";
-import { Heading } from "@navikt/ds-react";
+import { Title } from "@navikt/ds-react";
 import { PagePropsContext } from "../../pages/_app";
 import "./tableOfContents.css";
 
@@ -9,9 +9,9 @@ const TableOfContents = () => {
 
   return (
     <>
-      <Heading size="large" level={2}>
+      <Title size="l" level={2}>
         Innhold
-      </Heading>
+      </Title>
       <ul className={"toc__ul"}>
         {tableOfContents?.map(({ heading, slug }) => (
           <li key={slug} className={"toc__li"}>
