@@ -22,6 +22,10 @@
     margin-bottom: 0;
   }
 
+  .checkboks:hover + .skjemaelement__label {
+    text-decoration: underline;
+  }
+
   &--checked {
     background-color: @navGronnLighten80;
     border-color: @navGronnLighten80;
@@ -45,7 +49,6 @@
 
         &:hover {
           color: @navMorkGra;
-          text-decoration: underline;
 
           &::before {
             background-color: @navGronnDarken40;

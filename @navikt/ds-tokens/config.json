@@ -38,6 +38,10 @@
         {
           "destination": "tokens.js",
           "format": "javascript/es6"
+        },
+        {
+          "destination": "tokens-cjs.js",
+          "format": "javascript/module"
         }
       ]
     }
