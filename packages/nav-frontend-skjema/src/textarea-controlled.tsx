@@ -14,7 +14,7 @@ export interface TextareaControlledProps
   name?: string;
   feil?: React.ReactNode | boolean;
   tellerTekst?: (antallTegn: number, maxLength: number) => React.ReactNode;
-  textareaRef?: () => any;
+  textareaRef?: (textarea: HTMLTextAreaElement | null) => any;
   defaultValue: string;
 }
 
