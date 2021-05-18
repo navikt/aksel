@@ -29,18 +29,13 @@ const baseColors = {
 const white = "#ffffff";
 const darkgray = "#262626";
 
-const lighten = (color, percentage) =>
-  Color(color)
-    .mix(Color("white"), percentage / 100)
-    .hex();
-
 module.exports = {
   navds: {
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
       gray: {
-        90: { value: "#262626" },
+        90: { value: "{navds.color.darkgray.value}" },
         80: { value: "#4F4F4F" },
         60: { value: "#6A6A6A" },
         40: { value: "#A0A0A0" },
@@ -67,12 +62,12 @@ module.exports = {
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
         default: { value: "{navds.color.blue.50.value}" },
-        hover: { value: lighten(baseColors.blue, 5) },
+        hover: { value: Color(baseColors.blue).lighten(0.1) },
         active: { value: "{navds.color.deepblue.50.value}" },
       },
       danger: {
         default: { value: "{navds.color.red.50.value}" },
-        hover: { value: lighten(baseColors.red, 5) },
+        hover: { value: Color(baseColors.red).lighten(0.1) },
         active: { value: "{navds.color.red.70.value}" },
       },
       error: {
