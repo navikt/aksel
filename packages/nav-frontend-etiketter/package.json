@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-etiketter",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-core": "^5.1.1",
-    "nav-frontend-etiketter-style": "^1.1.1",
+    "nav-frontend-etiketter-style": "^1.1.2",
     "nav-frontend-typografi": "^3.1.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
