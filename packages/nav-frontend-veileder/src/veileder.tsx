@@ -40,6 +40,7 @@ const pilCls = (props) =>
     "nav-veileder__snakkeboblePil--hoyre": props.posisjon === "høyre",
     "nav-veileder__snakkeboblePil--bunn": props.posisjon === "bunn",
     "nav-veileder__snakkeboblePil--venstre": props.posisjon === "venstre",
+    "nav-veileder__snakkeboblePil--hvit": props.hvitSnakkeboble,
   });
 
 const snakkebobleCls = (props) =>
@@ -49,6 +50,7 @@ const snakkebobleCls = (props) =>
     "nav-veileder__snakkeboble--hoyre": props.posisjon === "høyre",
     "nav-veileder__snakkeboble--bunn": props.posisjon === "bunn",
     "nav-veileder__snakkeboble--venstre": props.posisjon === "venstre",
+    "nav-veileder__snakkeboble--hvit": props.hvitSnakkeboble,
   });
 
 export interface VeilederProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -93,6 +95,10 @@ export interface VeilederProps extends React.HTMLAttributes<HTMLDivElement> {
    * Posisjon på snakkeboblen
    */
   posisjon?: "flytende" | "topp" | "høyre" | "bunn" | "venstre";
+  /**
+   * Bakgrunnsfarge for snakkeboble
+   */
+  hvitSnakkeboble?: boolean;
 }
 
 class Veileder extends React.Component<VeilederProps> {
@@ -118,7 +124,8 @@ class Veileder extends React.Component<VeilederProps> {
       "fargetema",
       "storrelse",
       "posisjon",
-      "className"
+      "className",
+      "hvitSnakkeboble"
     );
 
     return (
