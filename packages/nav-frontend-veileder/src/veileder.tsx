@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as PT from "prop-types";
-import * as cn from "classnames";
+import cn from "classnames";
 
 import { omit } from "nav-frontend-js-utils";
 

@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as classnames from "classnames";
+import classnames from "classnames";
 import { Undertittel } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
 import "nav-frontend-skjema-style";

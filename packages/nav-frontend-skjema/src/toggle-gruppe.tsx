@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PT from "prop-types";
 import "nav-frontend-skjema-style";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export interface ToggleGruppeProps {
   /**
