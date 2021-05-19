@@ -182,6 +182,10 @@ export const VeilederPropsShape = {
    * Posisjon på snakkeboblen
    */
   posisjon: PT.oneOf(["flytende", "topp", "høyre", "bunn", "venstre"]),
+  /**
+   * Bakgrunnsfarge for snakkeboble
+   */
+  hvitSnakkeboble: PT.bool,
 };
 
 (Veileder as React.ComponentClass).propTypes = VeilederPropsShape;
