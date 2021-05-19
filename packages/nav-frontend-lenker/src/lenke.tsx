@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as classnames from "classnames";
+import classnames from "classnames";
 import "nav-frontend-lenker-style";
 
 export interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

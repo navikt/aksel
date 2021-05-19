@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import { guid } from "nav-frontend-js-utils";
 import "nav-frontend-skjema-style";
 import { SkjemaGruppeFeilContext, SkjemaGruppeFeilContextProps } from ".";

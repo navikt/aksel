@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as classnames from "classnames";
+import classnames from "classnames";
 
 import {
   EventThrottler,

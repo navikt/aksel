@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as cn from "classnames";
+import cn from "classnames";
 import { omit } from "nav-frontend-js-utils";
 
 const tabCls = (props) =>
