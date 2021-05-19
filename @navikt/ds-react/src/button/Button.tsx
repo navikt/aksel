@@ -35,7 +35,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className,
         "navds-button",
         `navds-button--${variant}`,
-        `navds-button--${size}`
+        `navds-button--${size}`,
+        "navds-body-short"
       )}
       {...rest}
     />

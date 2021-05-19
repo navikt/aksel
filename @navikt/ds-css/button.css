@@ -3,12 +3,9 @@
   cursor: pointer;
   background-color: var(--navds-color-background);
   color: var(--navds-color-action-default);
-  font: inherit;
   margin: 0;
   text-align: center;
   text-decoration: none;
-  font-size: var(--navds-font-size-small);
-  line-height: var(--navds-font-line-height-small);
   border-color: var(--navds-color-action-default);
   border-radius: 2px;
   border-style: solid;
