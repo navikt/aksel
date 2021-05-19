@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-alertstriper",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "main": "lib/alertstripe.js",
   "types": "lib/alertstripe.d.ts",
   "license": "MIT",
@@ -29,7 +29,7 @@
     "@types/react": "15.0.23 || ^16.0.0",
     "nav-frontend-alertstriper-style": "^2.1.1",
     "nav-frontend-ikoner-assets": "^2.0.10",
-    "nav-frontend-typografi": "^3.1.1",
+    "nav-frontend-typografi": "^3.1.2",
     "react": "^16.8.0 || ^17.0.0"
   },
   "defaultExport": "AlertStripe"
