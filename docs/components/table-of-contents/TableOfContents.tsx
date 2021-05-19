@@ -14,7 +14,7 @@ const TableOfContents = () => {
       </Title>
       <ul className={"toc__ul"}>
         {tableOfContents?.map(({ heading, slug }) => (
-          <li key={slug} className={"toc__li"}>
+          <li key={slug} className={"toc__li navds-body-short"}>
             <Next
               aria-label="Pil peker på lenke"
               focusable="false"
