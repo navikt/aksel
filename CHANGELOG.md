@@ -6,7 +6,7 @@
 
 [#1092](https://github.com/navikt/nav-frontend-moduler/pull/1092)
 
-- Alle nav-frontend pakker som `nav-frontend-core` berører vil major bumpes, inkludert `nav-frontend-core`.
+- Alle nav-frontend pakker som `nav-frontend-core` berører vil major bumpes, inkludert `na v-frontend-core`.
 - `@navikt/ds-tokens`, `@navikt/ds-css` og `@navikt/ds-react` vil minor bumpes
 
 - `orangeFocus` og alle variantene av denne fargen er fjernet fra `nav-frontend-core`
