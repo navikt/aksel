@@ -7,6 +7,8 @@ export default {
   component: Modal,
 } as Meta;
 
+Modal.setAppElement("#root");
+
 export const All = () => {
   const [open, setOpen] = useState(true);
 
