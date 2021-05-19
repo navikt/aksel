@@ -94,11 +94,11 @@ import Proptable from "./props/Proptable";
 import TableOfContents from "./table-of-contents/TableOfContents";
 
 const components = {
-  h1: (props) => <Title size="2xl" level={1} {...props} />,
-  h2: (props) => <Title size="l" level={2} {...props} />,
-  h3: (props) => <Title size="s" level={3} {...props} />,
-  h4: (props) => <Title size="s" level={4} {...props} />,
-  p: (props) => <BodyLong size="m" {...props} />,
+  h1: (props) => <Title size="2xl" level={1} spacing {...props} />,
+  h2: (props) => <Title size="l" level={2} spacing {...props} />,
+  h3: (props) => <Title size="s" level={3} spacing {...props} />,
+  h4: (props) => <Title size="s" level={4} spacing {...props} />,
+  p: (props) => <BodyLong size="m" spacing {...props} />,
   a: (props) => <Link {...props} />,
   code: (props) => <Inline {...props} />,
   SuccessIcon: () => (

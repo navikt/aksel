@@ -9,7 +9,7 @@ const TableOfContents = () => {
 
   return (
     <>
-      <Title size="l" level={2}>
+      <Title size="l" spacing level={2}>
         Innhold
       </Title>
       <ul className={"toc__ul"}>
