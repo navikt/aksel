@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-ikonknapper",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "react": "^16.8.0 || ^17.0.0"
   },
   "devDependencies": {
-    "nav-frontend-chevron": "^1.0.29",
-    "nav-frontend-ikoner-assets": "^3.0.0",
-    "nav-frontend-knapper": "^3.0.0",
+    "nav-frontend-chevron": "^1.0.30",
+    "nav-frontend-ikoner-assets": "^3.0.1",
+    "nav-frontend-knapper": "^3.0.1",
     "react": "^16.8.0 || ^17.0.0"
   }
 }

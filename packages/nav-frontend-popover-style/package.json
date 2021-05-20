@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover-style",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "src/popover-style.less",
   "license": "MIT",
   "files": [
@@ -18,6 +18,6 @@
     "nav-frontend-core": "^6.0.0"
   },
   "devDependencies": {
-    "nav-frontend-core": "^6.0.0"
+    "nav-frontend-core": "^6.0.1"
   }
 }
