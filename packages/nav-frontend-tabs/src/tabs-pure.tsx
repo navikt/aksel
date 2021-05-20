@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as cn from "classnames";
+import cn from "classnames";
 import { guid, omit, keyCodes } from "nav-frontend-js-utils";
 
 import Tab, { TabProps } from "./tab";

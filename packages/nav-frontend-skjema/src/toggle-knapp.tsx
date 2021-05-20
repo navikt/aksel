@@ -2,7 +2,7 @@ import * as React from "react";
 import * as PT from "prop-types";
 import { guid } from "nav-frontend-js-utils";
 import "nav-frontend-skjema-style";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 export interface ToggleKnappProps {
   children: React.ReactNode;

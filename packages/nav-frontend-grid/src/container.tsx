@@ -1,6 +1,6 @@
 import * as PT from "prop-types";
 import * as React from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import "nav-frontend-grid-style";
 
 const cls = (fluid, className) =>

@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as PT from "prop-types";
-import * as classnames from "classnames";
+import classnames from "classnames";
 
 import { omit, guid } from "nav-frontend-js-utils";
 
