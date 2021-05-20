@@ -1,6 +1,7 @@
 {
   "name": "nav-frontend-ikoner-assets",
   "version": "3.0.0",
+  "private": true,
   "license": "SEE LICENSE IN LICENSE",
   "files": [
     "/src",
