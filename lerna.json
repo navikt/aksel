@@ -12,5 +12,11 @@
       "ignore": "*"
     }
   },
-  "packages": ["packages/*"]
+  "packages": [
+    "packages/*",
+    "@navikt/ds-css",
+    "@navikt/ds-react",
+    "@navikt/ds-icons",
+    "@navikt/ds-tokens"
+  ]
 }
