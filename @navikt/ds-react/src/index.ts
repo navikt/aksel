@@ -35,12 +35,6 @@ export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export {
-  Heading,
-  HeadingProps,
-  Lead,
-  Paragraph,
-  Text,
-  TextProps,
   Title,
   Ingress,
   BodyLong,

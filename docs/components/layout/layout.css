@@ -67,9 +67,6 @@
 
 .header__link-title {
   color: white;
-  font-size: var(--navds-font-size-heading-large);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-large);
 }
 
 .sidebar {
