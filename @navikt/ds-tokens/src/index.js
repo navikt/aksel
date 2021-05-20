@@ -1,5 +1,20 @@
 const Color = require("color");
 
+// https://github.com/hihayk/scale/blob/69b766bba2db046d3e8cb4026ae32a32c897f9ff/src/utils.js#L44
+const mixColors = (color, step, amount, mixColor) => {
+  const saturation = Math.round(Color(color).hsl().color[1]);
+  // Setting directly to hex returns different result...
+  return Color(
+    Color(color)
+      .saturate(((step + 1) / 5) * (saturation / 100))
+      .mix(Color(mixColor), ((amount / 100) * (step + 1)) / 5)
+      .string()
+  ).hex();
+};
+
+const lightColor = (color, step) => mixColors(color, step, 100, "white");
+const darkColor = (color, step) => mixColors(color, step, 85, "black");
+
 const baseColors = {
   blue: "#0067c5",
   deepblue: "#005B82",
@@ -7,17 +22,15 @@ const baseColors = {
   orange: "#FF9100",
   green: "#06893A",
   red: "#BA3A26",
+  purple: "#634689",
+  limegreen: "#a2ad00",
 };
+
 const white = "#ffffff";
-const darkgray = "#3e3832";
+const darkgray = "#262626";
+const lightgray = "#F1F1F1";
 
-const mix = (a, b, percentage) =>
-  Color(a)
-    .mix(Color(b), percentage / 100)
-    .hex();
-
-const darken = (color, percentage) => mix(color, darkgray, percentage);
-const lighten = (color, percentage) => mix(color, white, percentage);
+const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
 module.exports = {
   navds: {
@@ -25,26 +38,26 @@ module.exports = {
       white: { value: white },
       darkgray: { value: darkgray },
       gray: {
-        90: { value: "#262626" },
-        80: { value: "#4F4F4F" },
-        60: { value: "#6A6A6A" },
-        40: { value: "#A0A0A0" },
-        20: { value: "#C9C9C9" },
-        10: { value: "#F1F1F1" },
+        90: { value: gray(1) },
+        80: { value: gray(0.8) },
+        60: { value: gray(0.6667) },
+        40: { value: gray(0.4) },
+        20: { value: gray(0.196) },
+        10: { value: gray(0) },
       },
       ...Object.entries(baseColors).reduce(
         (colors, [name, color]) => ({
           ...colors,
           [name]: {
-            90: { value: darken(color, 80) },
-            80: { value: darken(color, 60) },
-            70: { value: darken(color, 40) },
-            60: { value: darken(color, 20) },
+            90: { value: darkColor(color, 3) },
+            80: { value: darkColor(color, 2) },
+            70: { value: darkColor(color, 1) },
+            60: { value: darkColor(color, 0) },
             50: { value: color },
-            40: { value: lighten(color, 20) },
-            30: { value: lighten(color, 40) },
-            20: { value: lighten(color, 60) },
-            10: { value: lighten(color, 80) },
+            40: { value: lightColor(color, 0) },
+            30: { value: lightColor(color, 1) },
+            20: { value: lightColor(color, 2) },
+            10: { value: lightColor(color, 3) },
           },
         }),
         {}
@@ -52,12 +65,12 @@ module.exports = {
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
         default: { value: "{navds.color.blue.50.value}" },
-        hover: { value: lighten(baseColors.blue, 5) },
+        hover: { value: Color(baseColors.blue).lighten(0.1) },
         active: { value: "{navds.color.deepblue.50.value}" },
       },
       danger: {
         default: { value: "{navds.color.red.50.value}" },
-        hover: { value: lighten(baseColors.red, 5) },
+        hover: { value: Color(baseColors.red).lighten(0.1) },
         active: { value: "{navds.color.red.70.value}" },
       },
       error: {
@@ -106,7 +119,7 @@ module.exports = {
       },
       modal: {
         overlay: {
-          value: "rgba(61, 56, 49, 0.7)",
+          value: "rgba(38, 38, 38, 0.7)",
         },
       },
     },
@@ -175,8 +188,8 @@ module.exports = {
     },
     layout: {
       background: {
-        white: { value: "#FFFFFF" },
-        gray: { value: "#F1F1F1" },
+        white: { value: white },
+        gray: { value: "{navds.color.gray.10.value}" },
       },
       padding: {
         small: { value: "1rem" },

@@ -13,7 +13,6 @@ const ColorPalette = ({ onClick }: PaletteProps) => (
     {[
       "redError",
       "navOransje",
-      "orangeFocus",
       "navLimeGronn",
       "navGronn",
       "navLilla",

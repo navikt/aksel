@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-hjelpetekst",
-  "version": "2.1.4",
+  "version": "3.0.0",
   "main": "lib/hjelpetekst.js",
   "types": "lib/hjelpetekst.d.ts",
   "license": "MIT",
@@ -18,10 +18,10 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-hjelpetekst-style": "^2.0.40",
-    "nav-frontend-ikoner-assets": "^2.0.9",
-    "nav-frontend-js-utils": "^1.0.16",
-    "nav-frontend-popover": "^1.0.2",
+    "nav-frontend-hjelpetekst-style": "^3.0.0",
+    "nav-frontend-ikoner-assets": "^3.0.0",
+    "nav-frontend-js-utils": "^1.0.19",
+    "nav-frontend-popover": "^2.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },
@@ -29,10 +29,10 @@
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-hjelpetekst-style": "^2.1.1",
-    "nav-frontend-ikoner-assets": "^2.0.10",
+    "nav-frontend-hjelpetekst-style": "^3.0.0",
+    "nav-frontend-ikoner-assets": "^3.0.0",
     "nav-frontend-js-utils": "^1.0.19",
-    "nav-frontend-popover": "^1.1.4",
+    "nav-frontend-popover": "^2.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },

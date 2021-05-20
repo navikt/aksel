@@ -1,5 +1,18 @@
 # Endringslogg
 
+## 19. Mai 2021
+
+### Oppdatert fargepalett
+
+[#1092](https://github.com/navikt/nav-frontend-moduler/pull/1092)
+
+- Alle nav-frontend pakker som `nav-frontend-core` berører vil major bumpes, inkludert `na v-frontend-core`.
+- `@navikt/ds-tokens`, `@navikt/ds-css` og `@navikt/ds-react` vil minor bumpes
+
+- `orangeFocus` og alle variantene av denne fargen er fjernet fra `nav-frontend-core`
+- `navRod`sine lighten/darken varianter er fjernet fra `nav-frontend-core`. Bruk `redError` som erstattning.
+- `@navikt/ds-tokens` har nå `purple` og `limegreen` farger tilgjengelige
+
 ## 08. April 2021
 
 ### Gråskala er endret i `nav-frontend-core`
