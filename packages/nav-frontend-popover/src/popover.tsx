@@ -83,6 +83,7 @@ class Popover extends React.Component<PopoverProps, PopoverState> {
     this.scrollParents.forEach((scrollParent) =>
       scrollParent.addEventListener("scroll", this.handleScroll)
     );
+    this.props.ankerEl && this.updatePosition(this.props);
   }
 
   componentDidUpdate(prevProps, prevState) {
