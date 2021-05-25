@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PT from "prop-types";
-import * as classnames from "classnames";
-import * as Modal from "react-modal";
+import classnames from "classnames";
+import Modal from "react-modal";
 import { Props } from "react-modal";
 import Lukknapp from "nav-frontend-lukknapp";
 

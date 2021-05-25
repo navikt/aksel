@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-toggle-style",
-  "version": "1.1.2",
+  "version": "2.0.1",
   "main": "src/toggle-style.less",
   "license": "MIT",
   "files": [
@@ -11,13 +11,13 @@
     "build": "webpack --mode=production"
   },
   "peerDependencies": {
-    "nav-frontend-core": "^5.0.11",
-    "nav-frontend-knapper-style": "^1.0.15",
-    "nav-frontend-typografi-style": "^1.0.33"
+    "nav-frontend-core": "^6.0.0",
+    "nav-frontend-knapper-style": "^2.0.0",
+    "nav-frontend-typografi-style": "^2.0.0"
   },
   "devDependencies": {
-    "nav-frontend-core": "^5.1.1",
-    "nav-frontend-knapper-style": "^1.1.2",
-    "nav-frontend-typografi-style": "^1.1.1"
+    "nav-frontend-core": "^6.0.1",
+    "nav-frontend-knapper-style": "^2.0.1",
+    "nav-frontend-typografi-style": "^2.0.1"
   }
 }

@@ -16,7 +16,7 @@ module.exports = (baseConfig) => {
     }
   );
   baseConfig.config.resolve.alias = {
-    ...baseConfig.config.resolve?.alias,
+    ...baseConfig.config.resolve.alias,
     "./normalize.css": path.resolve(
       __dirname,
       "../node_modules/normalize.css/normalize.css"

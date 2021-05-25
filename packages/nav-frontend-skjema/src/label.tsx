@@ -1,6 +1,6 @@
 import * as React from "react";
 import { HTMLAttributes } from "react";
-import * as classnames from "classnames";
+import classnames from "classnames";
 import "nav-frontend-skjema-style";
 
 export interface LabelProps extends HTMLAttributes<HTMLLabelElement> {
