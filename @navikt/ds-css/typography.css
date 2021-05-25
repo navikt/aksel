@@ -1,7 +1,8 @@
 /* Title */
 .navds-title {
   font-weight: var(--navds-font-weight-bold);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-title--2xl {
@@ -11,6 +12,7 @@
 }
 
 .navds-title--2xl.navds-typo--spacing {
+  margin-top: var(--navds-font-spacing-3xl);
   margin-bottom: var(--navds-font-spacing-s);
 }
 
@@ -21,6 +23,7 @@
 }
 
 .navds-title--xl.navds-typo--spacing {
+  margin-top: var(--navds-font-spacing-xl);
   margin-bottom: var(--navds-font-spacing-xs);
 }
 
@@ -31,6 +34,7 @@
 }
 
 .navds-title--l.navds-typo--spacing {
+  margin-top: var(--navds-font-spacing-l);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
@@ -41,6 +45,7 @@
 }
 
 .navds-title--m.navds-typo--spacing {
+  margin-top: var(--navds-font-spacing-m);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
@@ -51,6 +56,7 @@
 }
 
 .navds-title--s.navds-typo--spacing {
+  margin-top: var(--navds-font-spacing-m);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
@@ -59,7 +65,8 @@
   font-size: var(--navds-font-size-xl);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-s);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-ingress.navds-typo--spacing {
@@ -71,14 +78,16 @@
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-s);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-body-short {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-xs);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-body-long.navds-typo--spacing {
@@ -109,7 +118,8 @@
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-xs);
   font-weight: var(--navds-font-weight-bold);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-label.navds-typo--spacing {
@@ -132,7 +142,8 @@
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-2xs);
   font-weight: var(--navds-font-weight-bold);
-  margin: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .navds-detail.navds-typo--spacing {
