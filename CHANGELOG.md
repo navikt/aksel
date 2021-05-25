@@ -1,5 +1,14 @@
 # Endringslogg
 
+## 21. Mai 2021
+
+### Popover-position oppdateres nå onMount
+
+[#1104](https://github.com/navikt/nav-frontend-moduler/pull/1104)
+
+- Hvis popover mountes med `ankerEl` så vil posisjon oppdateres riktig nå.
+- OPS! Tilfeller ved bruk av useRef som `ankerEl` kan føre til feil i posisjonering da Popover mountes med `ankerEl == null`, og da oppdatering av ref ikke fører til props oppdatering siden det er en ref. Anbefales å ta i bruk state for `ankerEl`
+
 ## 19. Mai 2021
 
 ### Oppdatert fargepalett
@@ -12,6 +21,110 @@
 - `orangeFocus` og alle variantene av denne fargen er fjernet fra `nav-frontend-core`
 - `navRod`sine lighten/darken varianter er fjernet fra `nav-frontend-core`. Bruk `redError` som erstattning.
 - `@navikt/ds-tokens` har nå `purple` og `limegreen` farger tilgjengelige
+
+### Prop for hvit bakgrunn på veileder sin snakkeboble
+
+[#1099](https://github.com/navikt/nav-frontend-moduler/pull/1099)
+
+- Kan nå bruke prop `hvitSnakkeboble` for å setteakgrunnen på snakkeboble til hvit.
+
+## 18. Mai 2021
+
+### Oppdatert bakgrunnsfarge på Tag/Etikett for å synke med figma
+
+[#1097](https://github.com/navikt/nav-frontend-moduler/pull/1097)
+[#1094](https://github.com/navikt/nav-frontend-moduler/pull/1094)
+
+- Bakgrunnene til de fire komponent-variasjonenen er nå endret til `Lighten80` istedenfor `Lighten60`
+
+### Oppdatert textareaRef prop for textarea-controlled
+
+[#1098](https://github.com/navikt/nav-frontend-moduler/pull/1098)
+
+- Legger på optional argument i textareaRef-propen på samme måte som i Textarea-componenten.
+
+### BekreftCheckboksPanel label har nå underline onHover
+
+[#1095](https://github.com/navikt/nav-frontend-moduler/pull/1095)
+
+- Fikser en uu-feil hvor forskjellen på default og hover stil ikke var stor nok.
+
+## 14. Mai 2021
+
+### @navikt/ds-tokens eksporteres nå også i CommonJs format
+
+## 13. Mai 2021
+
+### Typeguard for children i Tekstomrade-komponenten
+
+[#1089](https://github.com/navikt/nav-frontend-moduler/pull/1089)
+
+- Sjekker at children == string, hvis ikke return null
+
+## 04. Mai 2021
+
+### Forbedret scroll-behavior for sticky-panel
+
+[#1084](https://github.com/navikt/nav-frontend-moduler/pull/1084)
+
+- Oppførselen til menyen scrollet separat på mobil-skjermer (< 648px), noe som førte til en litt rar interaksjon. Menyen og innholdet under flyter nå naturlig uten noen overflow og max-height.
+
+## 30. April 2021
+
+### xxxl -> 3xl etc
+
+[#1086](https://github.com/navikt/nav-frontend-moduler/pull/1086)
+
+### AnchorMenu history-state fiks
+
+[#1085](https://github.com/navikt/nav-frontend-moduler/pull/1085)
+
+- Beholder state-objektet når history oppdateres ved scrolling med anchor-menu. Dette benyttes ved async navigering mellom sider i bl.a. next.js, og denne vil brekke dersom state'en overskrives.
+
+- Bruker replaceState istedenfor pushState slik at frem/tilbake-knapper i browser oppfører seg mer som forventet
+
+## 27. April 2021
+
+### Kan nå bruke className på `Popover`-komponent
+
+[#1082](https://github.com/navikt/nav-frontend-moduler/pull/1082)
+
+- Bruker kan nå bruke className som en prop på `<Popover />` uten at den overskriver komponentens styling
+
+### Fikser Checkbokspanel focus+feil markering
+
+[#1081](https://github.com/navikt/nav-frontend-moduler/pull/1081)
+
+- Fokusmarkering vises nå når man har focus + feil
+
+## 21. April 2021
+
+## Active stil for secondary/normal-knapp er endret for å skille seg fra hover
+
+[#1062](https://github.com/navikt/nav-frontend-moduler/pull/1062)
+
+## 19. April 2021
+
+### Modal-overlay klasse for @navikt/ds-css er nå `fixed
+
+[#1074](https://github.com/navikt/nav-frontend-moduler/pull/1074)
+
+- `absolute -> fixed`
+
+## 16. April 2021
+
+### Fokusmarkering forsvinner ikke nå onHover
+
+[#1072](https://github.com/navikt/nav-frontend-moduler/pull/1072)
+
+### Scroll er nå bare "smooth" onFocus
+
+[#1071](https://github.com/navikt/nav-frontend-moduler/pull/1071)
+
+Smooth-scroll bare satt i html:focus-within
+Slipper da at det er smooth-scroll når man gjør eks ctrl + f søk på siden.
+
+Takk for tips @winsvold !
 
 ## 08. April 2021
 
