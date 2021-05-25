@@ -11,7 +11,7 @@
 }
 
 .navds-title--2xl.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-m);
+  margin-bottom: var(--navds-font-spacing-s);
 }
 
 .navds-title--xl {
@@ -21,7 +21,7 @@
 }
 
 .navds-title--xl.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-s);
+  margin-bottom: var(--navds-font-spacing-xs);
 }
 
 .navds-title--l {
@@ -31,7 +31,7 @@
 }
 
 .navds-title--l.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-xs);
+  margin-bottom: var(--navds-font-spacing-2xs);
 }
 
 .navds-title--m {
@@ -82,7 +82,7 @@
 }
 
 .navds-body-long.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xl);
+  margin-bottom: var(--navds-font-spacing-l);
 }
 
 .navds-body-short.navds-typo--spacing {
@@ -96,7 +96,7 @@
 }
 
 .navds-body-long.navds-body--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-xl);
+  margin-bottom: var(--navds-font-spacing-m);
 }
 
 .navds-body-short.navds-body--s.navds-typo--spacing {
