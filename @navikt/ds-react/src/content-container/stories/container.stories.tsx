@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ContentContainer } from "../index";
-import { Text } from "../../index";
+import { BodyLong } from "../../index";
 import "./style.css";
 import { useEffect } from "react";
 
@@ -41,7 +41,7 @@ export default {
 export const All = () => {
   return (
     <ContentContainer className={"navds-story-content-container"}>
-      <Text size="medium">-- Innhold --</Text>
+      <BodyLong size="m">-- Innhold --</BodyLong>
     </ContentContainer>
   );
 };

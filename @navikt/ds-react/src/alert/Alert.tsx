@@ -50,7 +50,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className,
         "navds-alert",
         `navds-alert--${variant}`,
-        `navds-alert--${size}`
+        `navds-alert--${size}`,
+        "navds-body-long",
+        "navds-body--s"
       )}
       {...rest}
     >

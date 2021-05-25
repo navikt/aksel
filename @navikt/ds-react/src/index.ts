@@ -37,12 +37,6 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { Fieldset, FieldsetProps } from "./fieldset/index";
 export {
-  Heading,
-  HeadingProps,
-  Lead,
-  Paragraph,
-  Text,
-  TextProps,
   Title,
   Ingress,
   BodyLong,
