@@ -1,6 +1,6 @@
 import * as PT from "prop-types";
 import * as React from "react";
-import * as _throttle from "lodash.throttle";
+import throttle from "lodash.throttle";
 
 export interface EventThrottlerProps {
   children: React.ReactNode | React.ReactChild | React.ReactChildren;
@@ -10,10 +10,10 @@ export interface EventThrottlerProps {
 }
 
 export class EventThrottler extends React.Component<EventThrottlerProps> {
-  private throttled: () => void;
+  private throttled!: () => void;
 
   componentDidMount() {
-    this.throttled = _throttle(this.props.callback, this.props.delay, {
+    this.throttled = throttle(this.props.callback, this.props.delay, {
       leading: false,
     });
     window.addEventListener(this.props.event, this.throttled);

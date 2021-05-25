@@ -117,6 +117,14 @@ export const All = () => {
           <SvgTemplate />
         </Veileder>
       </div>
+      <div style={{ background: "#f1f1f1", height: "fit-content" }}>
+        <Veileder posisjon="venstre" hvitSnakkeboble tekst={"Hvit snakkeboble"}>
+          <SvgTemplate />
+        </Veileder>
+        <Veileder posisjon="høyre" hvitSnakkeboble tekst={"Hvit snakkeboble"}>
+          <SvgTemplate />
+        </Veileder>
+      </div>
     </div>
   );
 };

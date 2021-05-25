@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as PT from "prop-types";
-import * as classnames from "classnames";
-import * as Modal from "react-modal";
+import classnames from "classnames";
+import Modal from "react-modal";
 import { Props } from "react-modal";
 import Lukknapp from "nav-frontend-lukknapp";
 
@@ -58,9 +58,9 @@ export interface ModalProps extends Props {
 }
 
 class ModalWrapper extends React.Component<ModalProps, {}> {
-  closeButtonRef: Lukknapp | null;
+  closeButtonRef: Lukknapp | null | undefined;
 
-  modalRef: Modal | null;
+  modalRef!: Modal | null;
 
   static setAppElement(element) {
     Modal.setAppElement(element);

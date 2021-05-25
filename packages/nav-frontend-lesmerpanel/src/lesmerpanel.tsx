@@ -3,7 +3,7 @@ import * as PT from "prop-types";
 import "nav-frontend-lesmerpanel-style";
 import { UnmountClosed } from "react-collapse";
 import { guid, omit } from "nav-frontend-js-utils";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import LesmerpanelToggle from "./lesmerpanelToggle";
 
 export interface LesMerPanelBaseProps

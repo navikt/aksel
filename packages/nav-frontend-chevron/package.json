@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-chevron",
-  "version": "1.0.28",
+  "version": "1.0.30",
   "main": "lib/chevron.js",
   "types": "lib/chevron.d.ts",
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "peerDependencies": {
     "classnames": "^2.2.5",
-    "nav-frontend-chevron-style": "^1.0.3",
+    "nav-frontend-chevron-style": "^1.0.4",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },

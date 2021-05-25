@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import * as classnames from "classnames";
+import classnames from "classnames";
 
 import {
   EventThrottler,
@@ -83,6 +83,7 @@ class Popover extends React.Component<PopoverProps, PopoverState> {
     this.scrollParents.forEach((scrollParent) =>
       scrollParent.addEventListener("scroll", this.handleScroll)
     );
+    this.props.ankerEl && this.updatePosition(this.props);
   }
 
   componentDidUpdate(prevProps, prevState) {

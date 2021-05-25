@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-tekstomrade",
-  "version": "2.1.1",
+  "version": "3.0.1",
   "main": "lib/tekstomrade.js",
   "types": "lib/tekstomrade.d.ts",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "watch": "tsc --watch -p tsconfig.json"
   },
   "peerDependencies": {
-    "nav-frontend-lenker": "^1.0.58",
-    "nav-frontend-typografi": "^3.0.2",
+    "nav-frontend-lenker": "^2.0.0",
+    "nav-frontend-typografi": "^4.0.0",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },
@@ -26,8 +26,8 @@
     "@navikt/textparser": "^2.0.0"
   },
   "devDependencies": {
-    "nav-frontend-lenker": "^1.1.1",
-    "nav-frontend-typografi": "^3.1.1",
+    "nav-frontend-lenker": "^2.0.1",
+    "nav-frontend-typografi": "^4.0.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   },

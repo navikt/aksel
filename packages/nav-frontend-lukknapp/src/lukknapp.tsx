@@ -1,6 +1,6 @@
 import * as PT from "prop-types";
 import * as React from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 
 import "nav-frontend-lukknapp-style";
 
@@ -17,6 +17,10 @@ const cls = (bla, hvit, hjorne, className) =>
 
 export interface LukknappProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Tekst som beskriver knappen for skjermleser
+   */
+  children: string;
   /**
    * Blå variant
    */
@@ -51,7 +55,7 @@ class Lukknapp extends React.Component<LukknappProps, {}> {
     overstHjorne: false,
   };
 
-  buttonRef: HTMLButtonElement;
+  buttonRef!: HTMLButtonElement;
 
   constructor(props) {
     super(props);

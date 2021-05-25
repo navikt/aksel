@@ -24,7 +24,7 @@ export interface TabsState {
 class Tabs extends React.Component<TabsProps, TabsState> {
   static Tab = Tab;
 
-  private pure: TabsPure;
+  private pure!: TabsPure;
 
   static defaultProps: Partial<TabsProps> = {
     kompakt: false,

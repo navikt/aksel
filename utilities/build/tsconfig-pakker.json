@@ -12,6 +12,9 @@
     "noImplicitAny": false,
     "declaration": true,
     "skipLibCheck": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "lib": ["DOM", "es2015", "es2016", "es2017"]
   },

@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as cn from "classnames";
+import cn from "classnames";
 
 import { omit } from "nav-frontend-js-utils";
 import StegindikatorSteg, {
@@ -65,7 +65,7 @@ class Stegindikator extends React.Component<
     autoResponsiv: false,
   };
 
-  private list: HTMLOListElement;
+  private list!: HTMLOListElement;
 
   constructor(props: StegindikatorProps) {
     super(props);

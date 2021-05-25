@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import * as PT from "prop-types";
 import { guid } from "nav-frontend-js-utils";
 import SkjemaelementFeilmelding from "./skjemaelement-feilmelding";
@@ -37,9 +37,7 @@ export interface BekreftCheckboksPanelProps {
   feil?: React.ReactNode | boolean;
 }
 
-export class BekreftCheckboksPanel extends React.Component<
-  BekreftCheckboksPanelProps
-> {
+export class BekreftCheckboksPanel extends React.Component<BekreftCheckboksPanelProps> {
   render() {
     const {
       checked,

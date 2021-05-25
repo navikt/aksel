@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as classNames from "classnames";
+import classNames from "classnames";
 import { SkjemaGruppe, SkjemaGruppeProps } from ".";
 import "nav-frontend-skjema-style";
 class RadioGruppe extends React.Component<SkjemaGruppeProps> {

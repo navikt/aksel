@@ -37,8 +37,9 @@ Promise.all([
   getGlobFiles("./@navikt/**/lib", { dot: true }),
   getGlobFiles("./@navikt/**/esm", { dot: true }),
   getGlobFiles("./@navikt/**/cjs", { dot: true }),
+  getGlobFiles("./@navikt/ds-icons/src", { dot: true }),
   getGlobFiles("./packages/**/src/*.d.ts", { dit: true }),
-]).then(([lib, dist, libvnext, esmvnext, cjsvnext, files]) => {
+]).then(([lib, dist, libvnext, esmvnext, cjsvnext, iconsrc, files]) => {
   files.forEach((file) => {
     console.log(`Deleting file ${file}`);
     fs.unlinkSync(file);
@@ -50,6 +51,7 @@ Promise.all([
     ...libvnext,
     ...esmvnext,
     ...cjsvnext,
+    ...iconsrc,
   ].filter((path) => !path.includes("node_modules"));
 
   folders.forEach((folder) => {

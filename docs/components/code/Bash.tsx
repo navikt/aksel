@@ -1,7 +1,7 @@
 import copy from "copy-to-clipboard";
 import Prism from "prismjs";
 import cl from "classnames";
-import { ErrorFilled, Files, SuccessFilled } from "@navikt/ds-icons";
+import { ErrorFilled, Copy, SuccessFilled } from "@navikt/ds-icons";
 import { Popover } from "@navikt/ds-react";
 import { useEffect, useRef, useState } from "react";
 import "prismjs/components/prism-jsx.min";
@@ -92,7 +92,7 @@ const Bash = ({
               className={"bash__copyButton"}
               onClick={() => handleCopy()}
             >
-              <Files />
+              <Copy />
             </button>
           </>
         )}
