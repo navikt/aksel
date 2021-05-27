@@ -1,4 +1,3 @@
-import { FieldsetProps } from "./fieldset/Fieldset";
 export {
   AccordionAnchorMenu,
   AccordionAnchorMenuCollapsable,
