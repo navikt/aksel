@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, HTMLAttributes, useRef } from "react";
 import cl from "classnames";
 import { v4 as guid } from "uuid";
 
@@ -31,23 +31,17 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (
-    {
-      children,
-      className,
-      legend,
-      description,
-      error,
-      errorId = guid(),
-      ...rest
-    },
+    { children, className, legend, description, error, errorId, ...rest },
     ref
   ) => {
+    const errorRef = useRef(guid());
+
     return (
       <fieldset
         ref={ref}
         className={cl("navds-fieldset", className)}
         aria-invalid={!!error}
-        aria-describedby={error && errorId}
+        aria-describedby={error && (errorId ?? errorRef.current)}
         {...rest}
       >
         <legend>
@@ -61,7 +55,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         {children}
         <div
           className="navds-label navds-typo--spacing navds-typo--error"
-          id={errorId}
+          id={errorId ?? errorRef.current}
           aria-relevant="additions removals"
           aria-live="polite"
         >

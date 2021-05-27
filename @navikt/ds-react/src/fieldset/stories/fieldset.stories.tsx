@@ -29,6 +29,7 @@ const FormElements = () => (
 
 export const All = () => {
   const [error, setError] = useState(null);
+  const [desc, setDesc] = useState("");
 
   return (
     <div>
@@ -37,13 +38,16 @@ export const All = () => {
         <FormElements />
       </Fieldset>
       <h1>Fieldset w/description</h1>
-      <Fieldset legend="This is the legend" caption="This is the description">
+      <Fieldset
+        legend="This is the legend"
+        description="This is the description"
+      >
         <FormElements />
       </Fieldset>
       <h1>Fieldset w/error</h1>
       <Fieldset
         legend="This is the legend"
-        caption="This is the description"
+        description="This is the description"
         error={error}
         errorId="123ID"
       >
@@ -52,6 +56,14 @@ export const All = () => {
       <button onClick={() => setError(error ? null : "New error!")}>
         Toggle error
       </button>
+      <Fieldset
+        legend="This is the legend"
+        description={desc}
+        error="this is an error"
+      >
+        <FormElements />
+      </Fieldset>
+      <input onChange={(e) => setDesc(e.target.value)} />
     </div>
   );
 };
