@@ -12,13 +12,13 @@ export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   /**
    * Adds a border to the panel
-   * @default true
+   * @default false
    */
   border?: boolean;
 }
 
 const Panel = forwardRef<HTMLDivElement, PanelProps>(
-  ({ children, className, border = true, ...rest }, ref) => {
+  ({ children, className, border = false, ...rest }, ref) => {
     return (
       <div
         ref={ref}
