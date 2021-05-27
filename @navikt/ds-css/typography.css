@@ -1,8 +1,7 @@
 /* Title */
 .navds-title {
   font-weight: var(--navds-font-weight-bold);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-title--2xl {
@@ -65,8 +64,7 @@
   font-size: var(--navds-font-size-xl);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-s);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-ingress.navds-typo--spacing {
@@ -78,16 +76,14 @@
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-s);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-body-short {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-xs);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-body-long.navds-typo--spacing {
@@ -118,8 +114,7 @@
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-xs);
   font-weight: var(--navds-font-weight-bold);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-label.navds-typo--spacing {
@@ -142,8 +137,7 @@
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-2xs);
   font-weight: var(--navds-font-weight-bold);
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .navds-detail.navds-typo--spacing {
