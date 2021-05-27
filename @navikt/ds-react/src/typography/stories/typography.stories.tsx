@@ -52,7 +52,7 @@ const TypoMal = ({ ...rest }) => {
         </BodyLong>
       </div>
       <div>
-        <BodyShort {...rest} {...rest}>
+        <BodyShort component="span" {...rest} {...rest}>
           {lorem("BodyShort")}
         </BodyShort>
         <BodyShort {...rest} size="s">

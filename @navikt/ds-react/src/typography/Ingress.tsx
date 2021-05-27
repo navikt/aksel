@@ -1,25 +1,28 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
+import { OverridableComponent } from "../util";
 
-export interface IngressProps
-  extends React.HTMLAttributes<HTMLParagraphElement> {
-  /**
-   * Component content
-   */
-  children: React.ReactNode;
-  /**
-   * Custom styling on element
-   */
-  className?: string;
-  /**
-   * Adds margins to typo
-   */
-  spacing?: boolean;
+export interface IngressProps {
+  props: {
+    /**
+     * Component content
+     */
+    children: React.ReactNode;
+    /**
+     * Custom styling on element
+     */
+    className?: string;
+    /**
+     * Adds margins to typo
+     */
+    spacing?: boolean;
+  } & React.HTMLAttributes<HTMLParagraphElement>;
+  defaultComponent: "p";
 }
 
-const Ingress = forwardRef<HTMLParagraphElement, IngressProps>(
-  ({ className, spacing, ...rest }, ref) => (
-    <p
+const Ingress: OverridableComponent<IngressProps> = forwardRef(
+  ({ className, spacing, component: Component = "p", ...rest }, ref) => (
+    <Component
       {...rest}
       ref={ref}
       className={cl(className, "navds-ingress", {
