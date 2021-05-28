@@ -54,6 +54,11 @@
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
+/* Spacing between title and spaced text */
+.navds-typo--spacing + .navds-title {
+  margin-top: var(--navds-font-spacing-2xl);
+}
+
 /* Ingress */
 .navds-ingress {
   font-size: var(--navds-font-size-xl);
