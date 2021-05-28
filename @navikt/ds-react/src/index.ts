@@ -35,6 +35,7 @@ export { Modal, ModalProps } from "./modal/index";
 export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps } from "./link-panel/index";
+export { Panel, PanelProps } from "./panel/index";
 export {
   Heading,
   HeadingProps,

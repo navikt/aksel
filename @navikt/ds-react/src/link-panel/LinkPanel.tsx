@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util";
+import { Panel, Heading } from "../index";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
 
@@ -16,39 +17,48 @@ export interface LinkPanelProps {
 }
 
 const LinkPanel: LinkPanelType = forwardRef(
-  (
-    {
-      children,
-      component: Component = "a",
-      border = true,
-      noHeading = false,
-      className,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ children, component = "a", border = true, className, ...rest }, ref) => {
+    console.log(children, typeof children);
     return (
-      <Component
+      <Panel
+        component={component}
+        border={border}
         ref={ref}
-        className={cl("navds-link-panel", className, {
-          "navds-link-panel--border": border,
-        })}
+        className={cl("navds-link-panel", className)}
         {...rest}
       >
-        <span
-          className={cl("navds-link-panel__content", {
-            "navds-link-panel__heading": !noHeading,
-          })}
-        >
-          {children}
-        </span>
+        {typeof children === "string" ? (
+          <LinkPanelHeading>{children}</LinkPanelHeading>
+        ) : (
+          <span className="navds-link-panel__content">{children}</span>
+        )}
         <Next
           className="navds-link-panel__chevron"
           aria-label="arrow-icon pointing right"
         />
-      </Component>
+      </Panel>
     );
   }
+);
+
+interface LinkPanelHeadingProps
+  extends React.HTMLAttributes<HTMLHeadingElement> {
+  level?: 1 | 2 | 3 | 4 | 5 | 6;
+  size?: "xxl" | "xl" | "large" | "medium" | "small";
+  children: React.ReactNode;
+}
+
+export const LinkPanelHeading = ({
+  level = 2,
+  size = "medium",
+  ...rest
+}: LinkPanelHeadingProps) => (
+  <Heading
+    level={level}
+    size={size}
+    className="navds-link-panel-heading navds-heading navds-heading--medium"
+    {...rest}
+  />
 );
 
 export default LinkPanel;
