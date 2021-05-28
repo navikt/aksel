@@ -96,10 +96,10 @@ export const SideInnholdEksempel = () => {
         labore eu irure quis laborum. Irure veniam et nostrud do. Quis ut ea est
         culpa tempor anim.
       </BodyLong>
-      <Detail>
-        Detail: Dolore commodo ad veniam commodo aute voluptate est officia sunt
-        proident irure consectetur excepteur.
-      </Detail>
+      <BodyLong spacing>
+        BodyLong: Dolore commodo ad veniam commodo aute voluptate est officia
+        sunt proident irure consectetur excepteur.
+      </BodyLong>
       <Title level={2} size="xl" spacing>
         Title lvl 2 xl
       </Title>
