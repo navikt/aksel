@@ -11,7 +11,6 @@
 }
 
 .navds-title--2xl.navds-typo--spacing {
-  margin-top: var(--navds-font-spacing-3xl);
   margin-bottom: var(--navds-font-spacing-s);
 }
 
@@ -22,7 +21,6 @@
 }
 
 .navds-title--xl.navds-typo--spacing {
-  margin-top: var(--navds-font-spacing-xl);
   margin-bottom: var(--navds-font-spacing-xs);
 }
 
@@ -33,7 +31,6 @@
 }
 
 .navds-title--l.navds-typo--spacing {
-  margin-top: var(--navds-font-spacing-l);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
@@ -44,7 +41,6 @@
 }
 
 .navds-title--m.navds-typo--spacing {
-  margin-top: var(--navds-font-spacing-m);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
@@ -55,7 +51,6 @@
 }
 
 .navds-title--s.navds-typo--spacing {
-  margin-top: var(--navds-font-spacing-m);
   margin-bottom: var(--navds-font-spacing-2xs);
 }
 
