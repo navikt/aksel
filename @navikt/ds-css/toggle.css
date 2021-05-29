@@ -1,0 +1,90 @@
+/* Toggle Group */
+
+.navds-toggle-group {
+}
+
+.navds-toggle-group > .navds-toggle-button {
+  border-radius: 0;
+  margin: 0 -1px;
+}
+
+.navds-toggle-group > .navds-toggle-button:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.navds-toggle-group > .navds-toggle-button:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+/* Toggle Button */
+
+.navds-toggle-button.navds-button {
+  transform: translateY(calc(-1 * 2px));
+  box-shadow: 0 2px 0 #d6d6d6;
+  z-index: 1;
+}
+
+/* Trick to avoid jumping between hover/non-hover state when translating Y-axis */
+.navds-toggle-button.navds-button::before {
+  bottom: calc(-1 * 3px);
+  height: 3px;
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.navds-toggle-button.navds-button:hover::before {
+  bottom: calc(-1 * 4px);
+  height: 4px;
+}
+
+.navds-toggle-button.navds-button:hover {
+  transform: translateY(calc(-1 * 3px));
+  background-color: var(--navds-color-action-default);
+  border-color: var(--navds-color-action-default);
+  color: var(--navds-color-white);
+  box-shadow: 0 3px 0 #d6d6d6;
+}
+
+.navds-toggle-button.navds-button:hover:not([aria-pressed="true"]):not(:focus):after {
+  content: "";
+  bottom: -3px;
+  left: 0px;
+  height: 1px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  transform: translateY(-1px);
+  position: absolute;
+}
+
+.navds-toggle-button.navds-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  z-index: 5;
+  position: relative;
+}
+
+.navds-toggle-button.navds-button[aria-pressed="true"] {
+  transform: translateY(0);
+  background-color: var(--navds-color-deepblue-80);
+  background-color: var(--navds-color-action-active);
+  color: var(--navds-color-white);
+  border-color: var(--navds-color-action-active);
+  box-shadow: none;
+}
+
+.navds-toggle-button.navds-button[aria-pressed="true"]:hover {
+  transform: translateY(0);
+  background-color: var(--navds-color-deepblue-80);
+  color: var(--navds-color-white);
+  border-color: var(--navds-color-deepblue-80);
+  box-shadow: none;
+}
+
+.navds-toggle-button.navds-button[aria-pressed="true"]:focus {
+  box-shadow: var(--navds-shadow-focus);
+}

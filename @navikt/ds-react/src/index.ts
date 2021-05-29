@@ -36,6 +36,12 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { Panel, PanelProps } from "./panel/index";
 export {
+  ToggleButton,
+  ToggleButtonProps,
+  ToggleGroup,
+  ToggleGroupProps,
+} from "./toggle/index";
+export {
   Heading,
   HeadingProps,
   Lead,
