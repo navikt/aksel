@@ -1,5 +1,4 @@
 /* Toggle Group */
-
 .navds-toggle-group {
   padding: 0 1px;
 }
@@ -53,7 +52,7 @@
 .navds-toggle-button.navds-button:hover:not([aria-pressed="true"]):not(:focus):after {
   content: "";
   bottom: -3px;
-  left: 0px;
+  left: 0;
   height: 1px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.25);
