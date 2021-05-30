@@ -94,6 +94,7 @@
   height: 90%;
   width: 100%;
 }
+
 /* Illustration sizes */
 .navds-guide__illustration--s {
   height: 5rem;
@@ -152,6 +153,7 @@
 }
 
 /* Illustration themes */
+
 /* .navds-guide__illustration--default {
 } */
 .navds-guide__illustration--info {
@@ -193,6 +195,7 @@
   height: 1.25rem;
   order: 2;
 }
+
 /* Arrow positions */
 .navds-guide__arrow--floating {
   position: absolute;
@@ -211,9 +214,10 @@
   border-top: 1.25rem solid transparent;
 }
 .navds-guide__arrow--left {
+  border-top: 1.25rem solid transparent;
+
   /* change tp gray-10 ? */
   border-left: 1.25rem solid #efefef;
-  border-top: 1.25rem solid transparent;
   border-right: 0;
   margin-right: 0.75rem;
 }
@@ -228,9 +232,10 @@
 
 /* guide speech-bubble */
 .navds-guide__speech-bubble {
+  border-radius: 0.5rem;
+
   /* change tp gray-10 ? */
   background: #efefef;
-  border-radius: 0.5rem;
   order: 1;
   padding: 1.25rem;
   text-align: left;
