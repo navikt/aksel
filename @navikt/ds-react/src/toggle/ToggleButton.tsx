@@ -11,11 +11,11 @@ export interface ToggleButtonProps extends HTMLAttributes<HTMLButtonElement> {
    */
   className?: string;
   /**
-   * Active state for button
+   * Lets user handle toggle-state
    */
   active?: boolean;
   /**
-   * Toggle value
+   * Toggle value, used by `ToggleGroup` for state-handling
    */
   value: string;
 }

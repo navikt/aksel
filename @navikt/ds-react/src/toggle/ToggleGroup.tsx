@@ -4,7 +4,7 @@ import ToggleButton, { ToggleButtonProps } from "./ToggleButton";
 
 export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * Child toggles. Can only be of type `<ToggleButton />`
    */
   children:
     | React.ReactElement<typeof ToggleButton>
@@ -14,15 +14,15 @@ export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
    */
   className?: string;
   /**
-   * active ToggleButton values
+   * Lets user handle active-state
    */
   active?: string | string[];
   /**
-   * Allow multiple selections
+   * Allow internal-state to allow mutiple active toggles
    */
   multiple?: boolean;
   /**
-   * Retuns active values of ToggleButtons
+   * Returns list of current active toggles when a toggle-state changes
    */
   onToggleChange: (value: string[]) => void;
 }
