@@ -1,0 +1,96 @@
+/* variant?: "default" | "success" | "warning" | "error";
+  theme?: "default" | "info" | "success" | "warning" | "error";
+  size?: "s" | "m" | "l" | "xl";
+  position?: "floating" | "top" | "right" | "bottom" | "left"; */
+
+.navds-guide {
+}
+/* guide variants */
+.navds-guide--default {
+}
+.navds-guide--success {
+}
+.navds-guide--warning {
+}
+.navds-guide--error {
+}
+
+/* positions */
+.navds-guide--floating {
+}
+.navds-guide--top {
+}
+.navds-guide--right {
+}
+.navds-guide--bottom {
+}
+.navds-guide--left {
+}
+
+/* Guide illustration frame */
+.navds-guide__illustration {
+}
+/* Illustration sizes */
+.navds-guide__illustration--s {
+}
+.navds-guide__illustration--m {
+}
+.navds-guide__illustration--l {
+}
+.navds-guide__illustration--xl {
+}
+
+/* Illustration themes */
+.navds-guide__illustration--default {
+}
+.navds-guide__illustration--info {
+}
+.navds-guide__illustration--success {
+}
+.navds-guide__illustration--waring {
+}
+.navds-guide__illustration--error {
+}
+
+.navds-guide__illustration--center {
+}
+.navds-guide__illustration--transparent {
+}
+.navds-guide__illustration--nomask {
+}
+
+.navds-guide__arrow {
+}
+/* Arrow positions */
+.navds-guide__arrow--floating {
+}
+.navds-guide__arrow--top {
+}
+.navds-guide__arrow--right {
+}
+.navds-guide__arrow--bottom {
+}
+.navds-guide__arrow--left {
+}
+/* arrow color */
+.navds-guide__arrow--white {
+}
+
+/* guide speech-bubble */
+.navds-guide__speech-bubble {
+}
+/* Bubble position */
+.navds-guide__speech-bubble--floating {
+}
+.navds-guide__speech-bubble--top {
+}
+.navds-guide__speech-bubble--right {
+}
+.navds-guide__speech-bubble--bottom {
+}
+.navds-guide__speech-bubble--left {
+}
+
+/* bubble color */
+.navds-guide__speech-bubble--white {
+}
