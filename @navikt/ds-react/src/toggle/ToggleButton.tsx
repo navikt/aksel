@@ -12,16 +12,13 @@ export interface ToggleButtonProps extends HTMLAttributes<HTMLButtonElement> {
    */
   className?: string;
   /**
-   *
+   * Active state for button
    */
   active?: boolean;
   /**
-   *
+   * Toggle value
    */
   value: string;
-  /**
-   *
-   */
 }
 
 const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
@@ -32,16 +29,17 @@ const ToggleButton = forwardRef<HTMLButtonElement, ToggleButtonProps>(
       active !== undefined && setActiveState(active);
     }, [active]);
 
+    const handleClick = (e) => {
+      onClick && onClick(e);
+      !active && setActiveState((activeState) => !activeState);
+    };
+
     return (
       <button
         ref={ref}
         className={cl("navds-toggle-button", "navds-button", className)}
         aria-pressed={activeState}
-        onClick={
-          onClick
-            ? onClick
-            : () => setActiveState((activeState) => !activeState)
-        }
+        onClick={handleClick}
         {...rest}
       >
         {children}

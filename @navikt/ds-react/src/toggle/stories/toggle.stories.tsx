@@ -13,9 +13,6 @@ export const All = () => {
     "button2",
   ]);
 
-  console.log(singleValue);
-  console.log(multipleValue);
-
   const [buttonState, setButtonState] = useState(false);
   return (
     <div>
@@ -39,7 +36,7 @@ export const All = () => {
         <ToggleButton value="button3">Knapp3</ToggleButton>
       </ToggleGroup>
       <h1>ToggleGroup no states</h1>
-      <ToggleGroup>
+      <ToggleGroup onToggleChange={() => null}>
         <ToggleButton value="button1">Knapp1</ToggleButton>
         <ToggleButton value="button2">Knapp2</ToggleButton>
         <ToggleButton value="button3">Knapp3</ToggleButton>
@@ -50,6 +47,10 @@ export const All = () => {
         active={buttonState}
         onClick={() => setButtonState(!buttonState)}
       >
+        Knapp1
+      </ToggleButton>
+      <h1>ToggleButton no active</h1>
+      <ToggleButton value="button1" active={buttonState} onClick={() => null}>
         Knapp1
       </ToggleButton>
     </div>
