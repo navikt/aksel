@@ -1,6 +1,7 @@
 /* Toggle Group */
 
 .navds-toggle-group {
+  padding: 0 1px;
 }
 
 .navds-toggle-group > .navds-toggle-button {
@@ -23,7 +24,6 @@
 .navds-toggle-button.navds-button {
   transform: translateY(calc(-1 * 2px));
   box-shadow: 0 2px 0 #d6d6d6;
-  z-index: 1;
 }
 
 /* Trick to avoid jumping between hover/non-hover state when translating Y-axis */
@@ -64,7 +64,7 @@
 
 .navds-toggle-button.navds-button:focus {
   box-shadow: var(--navds-shadow-focus);
-  z-index: 5;
+  z-index: 1;
   position: relative;
 }
 

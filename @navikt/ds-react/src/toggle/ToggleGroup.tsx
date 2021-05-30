@@ -1,19 +1,8 @@
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
 import cl from "classnames";
 import ToggleButton, { ToggleButtonProps } from "./ToggleButton";
 
-export interface ToggleGroupProps
-  extends Pick<
-    HTMLAttributes<HTMLDivElement>,
-    Exclude<keyof HTMLAttributes<HTMLDivElement>, "onChange">
-  > {
+export interface ToggleGroupProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Component content
    */
@@ -35,7 +24,7 @@ export interface ToggleGroupProps
   /**
    * Retuns active values of ToggleButtons
    */
-  onToggleChange?: (value: string[]) => void;
+  onToggleChange: (value: string[]) => void;
 }
 
 const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
@@ -55,33 +44,34 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       const newArr = [...activeToggles];
       if (index !== -1) {
         newArr.splice(index, 1);
-        onToggleChange
-          ? onToggleChange([...newArr])
-          : setActiveToggles([...newArr]);
+        onToggleChange([...newArr]);
+        !active && setActiveToggles([...newArr]);
       } else {
         if (multiple) {
-          onToggleChange
-            ? onToggleChange([...activeToggles, value])
-            : setActiveToggles([...activeToggles, value]);
+          onToggleChange([...activeToggles, value]);
+          !active && setActiveToggles([...activeToggles, value]);
         } else {
-          onToggleChange ? onToggleChange([value]) : setActiveToggles([value]);
+          onToggleChange([value]);
+          !active && setActiveToggles([value]);
         }
       }
     };
-    console.count("render");
+
     return (
       <div
         ref={ref}
         role="group"
         className={cl("navds-toggle-group", className)}
-        /* onClick={() => console.log("div changed")} */
         {...rest}
       >
         {React.Children.toArray(children).map(
           (child: React.ReactElement<ToggleButtonProps>, i) => {
             return React.cloneElement(child, {
               ...child.props,
-              onClick: (e) => handleChange(child.props.value),
+              onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+                child.props.onClick && child.props.onClick(e);
+                handleChange(child.props.value);
+              },
               active: activeToggles.includes(child.props.value),
             });
           }
