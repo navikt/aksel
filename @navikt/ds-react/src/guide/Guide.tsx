@@ -50,14 +50,49 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
    * @ignore
    */
   className?: string;
+  /**
+   * Custom svg/img element (preferably svg)
+   */
   illustration: React.ReactNode;
+  /**
+   * Turns off background on illustration
+   * @default false
+   */
   transparent?: boolean;
+  /**
+   * Turns off cropping of illustration
+   * @default false
+   */
   noMask?: boolean;
+  /**
+   * Center aligns illustation and renders it in full height
+   * @default false
+   */
   center?: boolean;
+  /**
+   * Changes variant of speech-bubble based on wanted message and tone
+   * @default "default"
+   */
   variant?: "default" | "success" | "warning" | "error";
+  /**
+   * Predefined background-themes for the illustration
+   * @default "default"
+   */
   theme?: "default" | "info" | "success" | "warning" | "error";
+  /**
+   * Predefined size properties for illustration
+   * @default "m"
+   */
   size?: "s" | "m" | "l" | "xl";
+  /**
+   * Position of speech-bubble in refenrece to illustration
+   * @default "floating"
+   */
   position?: "floating" | "top" | "right" | "bottom" | "left";
+  /**
+   * Renders the speech-bubble with white backround
+   * @default false
+   */
   whiteSpeechBubble?: boolean;
 }
 

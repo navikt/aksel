@@ -6,20 +6,6 @@
 }
 
 /* guide variants */
-
-/* .navds-guide--default .navds-guide__speech-bubble {
-  background-color: var(--navds-color-orange-20);
-}
-
-.navds-guide--default .navds-guide__arrow {
-  border-right: 1.25rem solid var(--navds-color-orange-20);
-}
-
-.navds-guide--default .navds-guide__arrow--left {
-  border-right: 0;
-  border-left: 1.25rem solid var(--navds-color-orange-20);
-} */
-
 .navds-guide--success .navds-guide__speech-bubble {
   background-color: var(--navds-color-green-20);
 }
@@ -153,9 +139,6 @@
 }
 
 /* Illustration themes */
-
-/* .navds-guide__illustration--default {
-} */
 .navds-guide__illustration--info {
   background: var(--navds-color-lightblue-30);
 }

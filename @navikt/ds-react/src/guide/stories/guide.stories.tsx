@@ -8,7 +8,7 @@ export default {
 
 export const All = () => {
   return (
-    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "5rem" }}>
+    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "10rem" }}>
       <div style={{ display: "flex", gap: "2rem" }}>
         <Guide theme="default" illustration={<SvgTemplate />} />
         <Guide theme="success" illustration={<SvgTemplate />} />
@@ -16,7 +16,13 @@ export const All = () => {
         <Guide theme="error" illustration={<SvgTemplate />} />
         <Guide theme="info" illustration={<SvgTemplate />} />
       </div>
-      <div style={{ display: "flex", gap: "2rem" }}>
+      <div
+        style={{
+          display: "flex",
+          columnGap: "5rem",
+          height: "5rem",
+        }}
+      >
         <Guide theme="default" illustration={<SvgTemplate />}>
           With text in speech bubble!
         </Guide>
