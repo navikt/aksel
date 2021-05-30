@@ -104,16 +104,16 @@ export const All = () => {
         </Veileder>
       </div>
       <div style={{ display: "flex", gap: "2rem" }}>
-        <Veileder center storrelse="S">
+        <Veileder center storrelse="S" tekst="med tekst">
           <SvgTemplate />
         </Veileder>
-        <Veileder storrelse="M">
+        <Veileder storrelse="M" tekst="med tekst">
           <SvgTemplate />
         </Veileder>
-        <Veileder storrelse="L">
+        <Veileder storrelse="L" tekst="med tekst">
           <SvgTemplate />
         </Veileder>
-        <Veileder storrelse="XL">
+        <Veileder storrelse="XL" tekst="med tekst">
           <SvgTemplate />
         </Veileder>
       </div>
