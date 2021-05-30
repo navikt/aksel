@@ -1,5 +1,4 @@
 import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
-import { Button } from "../index";
 import cl from "classnames";
 
 export interface ToggleButtonProps extends HTMLAttributes<HTMLButtonElement> {
