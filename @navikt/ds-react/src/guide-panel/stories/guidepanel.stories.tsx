@@ -15,8 +15,8 @@ export const All = () => {
   return (
     <div>
       <h1>GuidePanel</h1>
+      <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
       <div style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
-        <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
         <h2>GuidePanel themes</h2>
         <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
         <GuidePanel theme="info" illustration={<SvgTemplate />}>
