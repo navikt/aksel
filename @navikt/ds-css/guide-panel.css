@@ -1,0 +1,78 @@
+.navds-guide-panel {
+  background-color: #fff;
+  display: block;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 4px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  position: relative;
+  border-radius: 0.5rem;
+  border: 2px solid #c9c9c9;
+  min-height: 7.25rem;
+  padding: 1.5rem;
+  padding-left: 7rem;
+  background: white;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.navds-guide-panel__content {
+  width: 100%;
+}
+
+.navds-guide-panel .navds-guide {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.navds-guide-panel--poster {
+  padding: 2rem;
+  padding-top: 8.25rem;
+}
+
+.navds-guide-panel--poster .navds-guide {
+  left: 50%;
+  margin-left: -3.125rem;
+}
+
+.navds-guide-panel--poster .navds-guide {
+  left: 50%;
+  margin-left: -3.125rem;
+}
+
+.navds-guide-panel--compact:not(.navds-guide-panel--poster) {
+  padding: 1.5rem;
+  padding-left: 3.5rem;
+  margin-left: 2.5rem;
+}
+
+.navds-guide-panel--compact:not(.navds-guide-panel--poster) .navds-guide {
+  left: -40px;
+}
+
+.navds-guide-panel--compact.navds-guide-panel--poster {
+  margin-top: 3.125rem;
+  padding: 2rem;
+  padding-top: 4.25rem;
+}
+
+.navds-guide-panel--compact.navds-guide-panel--poster .navds-guide {
+  top: -50px;
+}
+
+.navds-guide-panel--info {
+  border: 2px solid var(--navds-color-lightblue-30);
+}
+.navds-guide-panel--success {
+  border: 2px solid var(--navds-color-green-20);
+}
+.navds-guide-panel--warning {
+  border: 2px solid var(--navds-color-orange-20);
+}
+.navds-guide-panel--error {
+  border: 2px solid var(--navds-color-red-20);
+}
