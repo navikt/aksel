@@ -1,0 +1,10 @@
+.navds-panel {
+  background-color: var(--navds-color-white);
+  display: block;
+  padding: 1rem;
+  border-radius: var(--navds-border-radius);
+}
+
+.navds-panel--border {
+  border: var(--navds-border-default);
+}
