@@ -15,9 +15,10 @@ export {
   ContentContainer,
   ContentContainerProps,
 } from "./content-container/index";
-export { Cell, CellProps, Grid, GridProps } from "./grid/index";
 export { CopyToClipboard } from "./copy-to-clipboard/index";
+export { Cell, CellProps, Grid, GridProps } from "./grid/index";
 export { GuidePanel, GuidePanelProps } from "./guide-panel/index";
+export { Guide, GuideProps } from "./guide/index";
 export {
   InternalHeader,
   InternalHeaderProps,
@@ -33,9 +34,9 @@ export {
 } from "./layouts/index";
 export { Link, LinkProps } from "./link/index";
 export { Modal, ModalProps } from "./modal/index";
+export { Panel, PanelProps } from "./panel/index";
 export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
-export { Panel, PanelProps } from "./panel/index";
 export {
   Heading,
   HeadingProps,

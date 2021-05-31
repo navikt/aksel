@@ -1,11 +1,101 @@
 import React from "react";
-import Veileder from "../src/veileder";
+import { Guide } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-
 export default {
-  title: "nav-frontend/Veileder",
-  component: Veileder,
+  title: "ds-react/guide",
+  component: Guide,
 } as Meta;
+
+export const All = () => {
+  return (
+    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "10rem" }}>
+      <div style={{ display: "flex", gap: "2rem" }}>
+        <Guide theme="default" illustration={<SvgTemplate />} />
+        <Guide theme="success" illustration={<SvgTemplate />} />
+        <Guide theme="warning" illustration={<SvgTemplate />} />
+        <Guide theme="error" illustration={<SvgTemplate />} />
+        <Guide theme="info" illustration={<SvgTemplate />} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          columnGap: "5rem",
+          height: "5rem",
+        }}
+      >
+        <Guide theme="default" illustration={<SvgTemplate />}>
+          With text in speech bubble!
+        </Guide>
+        <Guide transparent theme="default" illustration={<SvgTemplate />}>
+          With text in speech bubble and transparent background!
+        </Guide>
+        <Guide center theme="default" illustration={<SvgTemplate />}>
+          With text in speech bubble and center
+        </Guide>
+      </div>
+      <div style={{ display: "flex", gap: "2rem" }}>
+        <Guide size="s" illustration={<SvgTemplate />}>
+          Size s illustration
+        </Guide>
+        <Guide size="m" illustration={<SvgTemplate />}>
+          Size m illustration
+        </Guide>
+        <Guide size="l" illustration={<SvgTemplate />}>
+          Size l illustration
+        </Guide>
+        <Guide size="xl" illustration={<SvgTemplate />}>
+          Size xl illustration
+        </Guide>
+      </div>
+      <div>
+        <div style={{ height: "fit-content" }}>
+          <Guide position="left" illustration={<SvgTemplate />}>
+            position left speechbubble
+          </Guide>
+          <Guide position="right" illustration={<SvgTemplate />}>
+            position right speechbubble
+          </Guide>
+          <Guide position="top" illustration={<SvgTemplate />}>
+            position top speechbubble
+          </Guide>
+          <Guide position="bottom" illustration={<SvgTemplate />}>
+            position bottom speechbubble
+          </Guide>
+        </div>
+        <div style={{ background: "#f1f1f1", height: "fit-content" }}>
+          <Guide
+            position="left"
+            whiteSpeechBubble
+            illustration={<SvgTemplate />}
+          >
+            whiteSpeechBubble & position left speechbubble
+          </Guide>
+          <Guide
+            position="right"
+            whiteSpeechBubble
+            illustration={<SvgTemplate />}
+          >
+            whiteSpeechBubble & position right speechbubble
+          </Guide>
+          <Guide
+            position="top"
+            whiteSpeechBubble
+            illustration={<SvgTemplate />}
+          >
+            whiteSpeechBubble & position top speechbubble
+          </Guide>
+          <Guide
+            position="bottom"
+            whiteSpeechBubble
+            illustration={<SvgTemplate />}
+          >
+            whiteSpeechBubble & position bottom speechbubble
+          </Guide>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const SvgTemplate = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 54 93">
@@ -72,59 +162,3 @@ const SvgTemplate = () => (
     />
   </svg>
 );
-export const All = () => {
-  return (
-    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "5rem" }}>
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <Veileder fargetema="normal">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder fargetema="suksess">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder fargetema="advarsel">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder fargetema="feilmelding">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder fargetema="info">
-          <SvgTemplate />
-        </Veileder>
-      </div>
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <Veileder tekst="med tekst">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder transparent tekst="uten bakgrunn">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder center tekst="sentrert bilde">
-          <SvgTemplate />
-        </Veileder>
-      </div>
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <Veileder center storrelse="S" tekst="med tekst">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder storrelse="M" tekst="med tekst">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder storrelse="L" tekst="med tekst">
-          <SvgTemplate />
-        </Veileder>
-        <Veileder storrelse="XL" tekst="med tekst">
-          <SvgTemplate />
-        </Veileder>
-      </div>
-      <div style={{ background: "#f1f1f1", height: "fit-content" }}>
-        <Veileder posisjon="venstre" hvitSnakkeboble tekst={"Hvit snakkeboble"}>
-          <SvgTemplate />
-        </Veileder>
-        <Veileder posisjon="høyre" hvitSnakkeboble tekst={"Hvit snakkeboble"}>
-          <SvgTemplate />
-        </Veileder>
-      </div>
-    </div>
-  );
-};
