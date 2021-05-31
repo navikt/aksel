@@ -1,19 +1,11 @@
 .navds-guide-panel {
-  background-color: #fff;
-  display: block;
-  padding: 1rem 1rem 1rem 1rem;
+  background-color: var(--navds-color-background);
   border-radius: 4px;
-  font-family: "Source Sans Pro", Arial, sans-serif;
-  font-size: 1rem;
-  line-height: 1.375rem;
-  font-weight: 400;
   position: relative;
-  border-radius: 0.5rem;
-  border: 2px solid #c9c9c9;
+  border: 2px solid var(--navds-color-gray-20);
   min-height: 7.25rem;
   padding: 1.5rem;
   padding-left: 7rem;
-  background: white;
   display: flex;
   align-items: center;
   text-align: left;
@@ -32,11 +24,6 @@
 .navds-guide-panel--poster {
   padding: 2rem;
   padding-top: 8.25rem;
-}
-
-.navds-guide-panel--poster .navds-guide {
-  left: 50%;
-  margin-left: -3.125rem;
 }
 
 .navds-guide-panel--poster .navds-guide {
