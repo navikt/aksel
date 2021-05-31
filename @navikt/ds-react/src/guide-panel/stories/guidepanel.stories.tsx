@@ -36,11 +36,11 @@ export const All = () => {
       <GuidePanel compact illustration={<SvgTemplate />}>
         {panelText}
       </GuidePanel>
-      <h2>GuidePanel variant=poster</h2>
+      <h2>GuidePanel poster</h2>
       <GuidePanel poster illustration={<SvgTemplate />}>
         {panelText}
       </GuidePanel>
-      <h2>GuidePanel compact variant=poster</h2>
+      <h2>GuidePanel compact, poster</h2>
       <GuidePanel poster compact illustration={<SvgTemplate />}>
         {panelText}
       </GuidePanel>
