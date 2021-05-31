@@ -12,7 +12,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Component content
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
   /**
    * @ignore
    */
