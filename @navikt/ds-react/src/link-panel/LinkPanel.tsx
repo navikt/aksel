@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util";
-import { Panel, Heading } from "../index";
+import { Panel } from "../index";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
 
@@ -28,7 +28,7 @@ const LinkPanel: LinkPanelType = forwardRef(
         {...rest}
       >
         {typeof children === "string" ? (
-          <LinkPanelHeading>{children}</LinkPanelHeading>
+          <LinkPanelTitle>{children}</LinkPanelTitle>
         ) : (
           <span className="navds-link-panel__content">{children}</span>
         )}
@@ -41,24 +41,21 @@ const LinkPanel: LinkPanelType = forwardRef(
   }
 );
 
-interface LinkPanelHeadingProps
-  extends React.HTMLAttributes<HTMLHeadingElement> {
-  level?: 1 | 2 | 3 | 4 | 5 | 6;
-  size?: "xxl" | "xl" | "large" | "medium" | "small";
-  children: React.ReactNode;
+interface LinkPanelTitleProps {
+  props: {
+    children: React.ReactNode;
+  } & React.HTMLAttributes<HTMLSpanElement>;
+  defaultComponent: "span";
 }
 
-export const LinkPanelHeading = ({
-  level = 2,
-  size = "medium",
-  ...rest
-}: LinkPanelHeadingProps) => (
-  <Heading
-    level={level}
-    size={size}
-    className="navds-link-panel-heading navds-heading navds-heading--medium"
-    {...rest}
-  />
+export const LinkPanelTitle: OverridableComponent<LinkPanelTitleProps> = forwardRef(
+  ({ className, component: Component = "span", ...rest }, ref) => (
+    <Component
+      ref={ref}
+      className={cl("navds-link-panel-title", className)}
+      {...rest}
+    />
+  )
 );
 
 export default LinkPanel;

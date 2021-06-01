@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkPanel, LinkPanelHeading } from "../index";
+import { LinkPanel, LinkPanelTitle } from "../index";
 
 export default {
   title: "ds-react/linkPanel",
@@ -30,7 +30,7 @@ export const All = () => {
         >
           <Illustration />
           <div>
-            <LinkPanelHeading>Dagpenger</LinkPanelHeading>
+            <LinkPanelTitle>Dagpenger</LinkPanelTitle>
             <p>
               Du kan få dagpenger når du er arbeidsledig og har mistet inntekten
               din.

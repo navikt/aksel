@@ -6,11 +6,14 @@
   color: var(--navds-color-gray-90);
 }
 
-.navds-link-panel-heading {
+.navds-link-panel-title {
   margin: 0;
+  font-size: var(--navds-font-size-heading-medium);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: calc(1em + 0.25rem);
 }
 
-.navds-link-panel:hover .navds-link-panel-heading {
+.navds-link-panel:hover .navds-link-panel-title {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
