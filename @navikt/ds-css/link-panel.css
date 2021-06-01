@@ -38,6 +38,6 @@
   transform: translateX(4px);
 }
 
-.navds-link-panel.navds-panel--border:hover {
-  border: var(--navds-panel-hover);
+.navds-link-panel:hover {
+  border-color: var(--navds-color-blue-50);
 }
