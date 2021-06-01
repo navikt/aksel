@@ -18,7 +18,6 @@ export interface LinkPanelProps {
 
 const LinkPanel: LinkPanelType = forwardRef(
   ({ children, component = "a", border = true, className, ...rest }, ref) => {
-    console.log(children, typeof children);
     return (
       <Panel
         component={component}
