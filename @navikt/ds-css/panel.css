@@ -3,8 +3,9 @@
   display: block;
   padding: 1rem;
   border-radius: var(--navds-border-radius);
+  border: 1px solid transparent;
 }
 
 .navds-panel--border {
-  border: var(--navds-border-default);
+  border-color: var(--navds-color-border);
 }

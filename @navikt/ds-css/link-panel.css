@@ -1,7 +1,4 @@
 .navds-link-panel {
-  background-color: var(--navds-color-white);
-  padding: 1rem;
-  border-radius: var(--navds-border-radius);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,18 +6,27 @@
   color: var(--navds-color-gray-90);
 }
 
+/* TODO: Change to typo-class when possible */
+.navds-link-panel-title {
+  margin: 0;
+  font-size: var(--navds-font-size-heading-medium);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: calc(1em + 0.25rem);
+}
+
+.navds-link-panel:hover .navds-link-panel-title {
+  text-decoration: underline;
+  color: var(--navds-color-text-link);
+}
+
 .navds-link-panel:hover {
   box-shadow: var(--navds-shadow-hover);
+  border-color: var(--navds-color-blue-50);
 }
 
 .navds-link-panel:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
-}
-
-.navds-link-panel:hover .navds-link-panel__heading {
-  text-decoration: underline;
-  color: var(--navds-color-text-link);
 }
 
 .navds-link-panel__chevron {
@@ -31,12 +37,4 @@
 .navds-link-panel:hover > .navds-link-panel__chevron,
 .navds-link-panel:focus-within > .navds-link-panel__chevron {
   transform: translateX(4px);
-}
-
-.navds-link-panel--border {
-  border: var(--navds-border-default);
-}
-
-.navds-link-panel--border:hover {
-  border: var(--navds-panel-hover);
 }
