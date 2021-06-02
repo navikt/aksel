@@ -51,7 +51,11 @@ export const LinkPanelTitle: OverridableComponent<LinkPanelTitleProps> = forward
   ({ className, component: Component = "span", ...rest }, ref) => (
     <Component
       ref={ref}
-      className={cl("navds-link-panel-title", className)}
+      className={cl(
+        "navds-link-panel-title",
+        "navds-title navds-title--m",
+        className
+      )}
       {...rest}
     />
   )
