@@ -1,0 +1,32 @@
+.navds-link-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: var(--navds-color-gray-90);
+}
+
+.navds-link-panel:hover .navds-link-panel-title {
+  text-decoration: underline;
+  color: var(--navds-color-text-link);
+}
+
+.navds-link-panel:hover {
+  box-shadow: var(--navds-shadow-hover);
+  border-color: var(--navds-color-blue-50);
+}
+
+.navds-link-panel:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-link-panel__chevron {
+  font-size: 1.5rem;
+  transition: transform 200ms;
+}
+
+.navds-link-panel:hover > .navds-link-panel__chevron,
+.navds-link-panel:focus-within > .navds-link-panel__chevron {
+  transform: translateX(4px);
+}
