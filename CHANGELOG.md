@@ -1,5 +1,27 @@
 # Endringslogg
 
+## 02. Juni 2021
+
+### Nytt typo-oppsett for ds-react, ds-css og ds-tokens
+
+[#1079](https://github.com/navikt/nav-frontend-moduler/pull/1079)
+
+[Typo med spacing](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--typo-med-spacing)
+[Typo uten spacing](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--typo-uten-spacing)
+[Bruks eksempel](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--side-innhold-eksempel)
+
+Ds-react, ds-css og ds-tokens er alle minor-bumpet
+
+Nye komponenter for typografi:
+- Title: Heading
+- Ingress
+- BodyLong: Lengre tekster, tenk en vanlig paragraf
+- BodyShort: Mindre tekster, tenk teksten på en knapp eller label
+- Label
+- Detail: Detaljetekst på 14px 
+
+Ds-css og ds-tokens er endret for å tilrettelegge for disse. Diverse komponenter i ds-react bruker nå også typo-stilene for å sikre riktig typo.
+
 ## 21. Mai 2021
 
 ### Popover-position oppdateres nå onMount
