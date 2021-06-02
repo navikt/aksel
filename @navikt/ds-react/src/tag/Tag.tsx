@@ -21,7 +21,13 @@ const Tag = forwardRef<HTMLSpanElement, TagProps>(
     return (
       <span
         ref={ref}
-        className={cl("navds-tag", className, `navds-tag--${variant}`)}
+        className={cl(
+          "navds-tag",
+          className,
+          "navds-detail",
+          "navds-detail--s",
+          `navds-tag--${variant}`
+        )}
         {...rest}
       >
         {children}

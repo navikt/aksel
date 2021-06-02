@@ -37,11 +37,11 @@ export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps } from "./link-panel/index";
 export { Panel, PanelProps } from "./panel/index";
 export {
-  Heading,
-  HeadingProps,
-  Lead,
-  Paragraph,
-  Text,
-  TextProps,
+  Title,
+  Ingress,
+  BodyLong,
+  BodyShort,
+  Label,
+  Detail,
 } from "./typography/index";
 export { OverridableComponent } from "./util/index";

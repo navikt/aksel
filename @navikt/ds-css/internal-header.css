@@ -29,9 +29,6 @@
   text-decoration: none;
   margin: 0;
   color: var(--navds-color-text-inverse);
-  font-size: var(--navds-font-size-medium);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-medium);
 }
 
 .navds-header__title > span > a {
@@ -58,15 +55,6 @@
   align-items: center;
 }
 
-.navds-header__name {
+.navds-header__name.navds-body-short {
   margin-right: 1rem;
-  font-size: var(--navds-font-size-small);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-small);
-}
-
-.navds-header__ident {
-  font-size: var(--navds-font-size-xs);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-xs);
 }
