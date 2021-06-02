@@ -8,8 +8,6 @@
   grid-auto-flow: column;
   column-gap: 0.75rem;
   justify-content: start;
-  font-size: var(--navds-font-size-small);
-  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-alert--small {

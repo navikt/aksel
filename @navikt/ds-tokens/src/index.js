@@ -1,5 +1,8 @@
 const Color = require("color");
 
+const baseFontSize = 16;
+
+const getFontSize = (size) => `${size / baseFontSize}rem`;
 // https://github.com/hihayk/scale/blob/69b766bba2db046d3e8cb4026ae32a32c897f9ff/src/utils.js#L44
 const mixColors = (color, step, amount, mixColor) => {
   const saturation = Math.round(Color(color).hsl().color[1]);
@@ -92,7 +95,7 @@ module.exports = {
       border: { value: "{navds.color.gray.40.value}" },
       background: { value: "{navds.color.white.value}" },
       text: {
-        primary: { value: "{navds.color.darkgray.value}" },
+        primary: { value: "{navds.color.gray.90}" },
         inverse: { value: "{navds.color.white.value}" },
         disabled: { value: "{navds.color.gray.60.value}" },
         link: { value: "{navds.color.blue.50.value}" },
@@ -134,34 +137,44 @@ module.exports = {
     },
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
+      line: {
+        height: {
+          "2xl": { value: getFontSize(52) },
+          xl: { value: getFontSize(40) },
+          l: { value: getFontSize(36) },
+          m: { value: getFontSize(32) },
+          s: { value: getFontSize(28) },
+          xs: { value: getFontSize(24) },
+          "2xs": { value: getFontSize(20) },
+        },
+      },
       size: {
-        heading: {
-          xxl: { value: "2.5rem" },
-          xl: { value: "2rem" },
-          large: { value: "1.5rem" },
-          medium: { value: "1.25rem" },
-          small: { value: "1.125rem" },
+        title: {
+          "2xl": { value: getFontSize(40) },
+          xl: { value: getFontSize(32) },
+          l: { value: getFontSize(28) },
+          m: { value: getFontSize(24) },
+          s: { value: getFontSize(20) },
         },
-        large: { value: "1.25rem" },
-        medium: { value: "1.125rem" },
-        small: { value: "1rem" },
-        xs: { value: "0.875rem" },
-        article: {
-          lead: { value: "1.25rem" },
-          paragraph: { value: "1.125rem" },
-        },
+        xl: { value: getFontSize(20) },
+        l: { value: getFontSize(18) },
+        m: { value: getFontSize(16) },
+        s: { value: getFontSize(14) },
+      },
+      spacing: {
+        "3xl": { value: getFontSize(40) },
+        "2xl": { value: getFontSize(36) },
+        xl: { value: getFontSize(32) },
+        l: { value: getFontSize(28) },
+        m: { value: getFontSize(24) },
+        s: { value: getFontSize(20) },
+        xs: { value: getFontSize(16) },
+        "2xs": { value: getFontSize(12) },
+        "3xs": { value: getFontSize(8) },
       },
       weight: {
         bold: { value: "600" },
         regular: { value: "400" },
-      },
-      line: {
-        height: {
-          large: { value: "1.625rem" },
-          medium: { value: "1.5rem" },
-          small: { value: "1.375rem" },
-          xs: { value: "1.25rem" },
-        },
       },
     },
     shadow: {

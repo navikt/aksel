@@ -36,11 +36,11 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { Panel, PanelProps } from "./panel/index";
 export {
-  Heading,
-  HeadingProps,
-  Lead,
-  Paragraph,
-  Text,
-  TextProps,
+  Title,
+  Ingress,
+  BodyLong,
+  BodyShort,
+  Label,
+  Detail,
 } from "./typography/index";
 export { OverridableComponent } from "./util/index";

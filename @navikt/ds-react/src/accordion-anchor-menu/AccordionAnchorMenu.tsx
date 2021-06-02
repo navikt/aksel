@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import { AccordionMenu as BaseAccordionMenu } from "../accordion-menu";
-import { Heading } from "../index";
+import { Title } from "../index";
 import { ActiveAnchorProvider } from "./ActiveAnchorStore";
 import cl from "classnames";
 
@@ -21,13 +21,9 @@ const AccordionAnchorMenu = forwardRef<
     {...rest}
   >
     {title && (
-      <Heading
-        level={2}
-        size="medium"
-        className="navds-accordion-anchor-menu__title"
-      >
+      <Title level={2} size="m" className="navds-accordion-anchor-menu__title">
         {title}
-      </Heading>
+      </Title>
     )}
     <ActiveAnchorProvider>
       <BaseAccordionMenu aria-label={title || "Meny"}>
