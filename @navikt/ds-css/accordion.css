@@ -26,7 +26,7 @@
   height: 1.25em;
   transform: rotateZ(0deg);
   flex-shrink: 0;
-  margin-left: 1rem;
+  margin-left: var(--navds-spacing-4);
 }
 
 .navds-accordion__chevron--up {
@@ -38,7 +38,7 @@
 }
 
 .navds-accordion__button {
-  padding: 1rem;
+  padding: var(--navds-spacing-4);
   border-radius: 4px;
   background: transparent;
   border: 0;
@@ -57,7 +57,7 @@
 }
 
 .navds-accordion__content {
-  padding: 0.5rem 1rem 1rem;
+  padding: var(--navds-spacing-2) var(--navds-spacing-4) var(--navds-spacing-4);
 }
 
 .navds-accordion--open .navds-accordion__content {

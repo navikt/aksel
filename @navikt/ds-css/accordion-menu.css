@@ -32,7 +32,7 @@
 .navds-accordion-menu-item,
 .navds-accordion-menu-collapsable__button {
   display: flex;
-  padding: 0.75rem 1rem;
+  padding: var(--navds-spacing-3) var(--navds-spacing-4);
   line-height: 1.5rem; /* TODO: fix typography. */
 }
 
@@ -40,7 +40,7 @@
   font-size: 1.5rem;
   color: var(--navds-color-text-link);
   flex-shrink: 0;
-  margin-left: 0.5rem;
+  margin-left: var(--navds-spacing-2);
 }
 
 .navds-accordion-menu-collapsable--open
@@ -53,7 +53,7 @@
 .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable__button {
-  padding-left: 2rem;
+  padding-left: var(--navds-spacing-8);
 }
 
 .navds-accordion-menu-collapsable
@@ -63,7 +63,7 @@
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable__button {
-  padding-left: 3rem;
+  padding-left: var(--navds-spacing-12);
 }
 
 .navds-accordion-menu-collapsable
@@ -75,7 +75,7 @@
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable
   .navds-accordion-menu-collapsable__button {
-  padding-left: 4rem;
+  padding-left: var(--navds-spacing-16);
 }
 
 .navds-accordion-menu-item:focus,

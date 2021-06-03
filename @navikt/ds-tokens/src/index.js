@@ -161,17 +161,6 @@ module.exports = {
         m: { value: getFontSize(16) },
         s: { value: getFontSize(14) },
       },
-      spacing: {
-        "3xl": { value: getFontSize(40) },
-        "2xl": { value: getFontSize(36) },
-        xl: { value: getFontSize(32) },
-        l: { value: getFontSize(28) },
-        m: { value: getFontSize(24) },
-        s: { value: getFontSize(20) },
-        xs: { value: getFontSize(16) },
-        "2xs": { value: getFontSize(12) },
-        "3xs": { value: getFontSize(8) },
-      },
       weight: {
         bold: { value: "600" },
         regular: { value: "400" },
@@ -189,14 +178,14 @@ module.exports = {
     contentContainer: {
       maxWidth: { value: "79.5rem" },
       padding: {
-        small: { value: "1rem" },
-        mediumAndLarger: { value: "1.5rem" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.6.value}" },
       },
     },
     grid: {
       gutter: {
-        small: { value: "1rem" },
-        mediumAndLarger: { value: "1.5rem" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.6.value}" },
       },
     },
     layout: {
@@ -205,20 +194,18 @@ module.exports = {
         gray: { value: "{navds.color.gray.10.value}" },
       },
       padding: {
-        small: { value: "1rem" },
-        mediumAndLarger: { value: "2.5rem" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.10.value}" },
       },
     },
-    z: {
-      index: {
-        modal: {
-          content: { value: "1010" },
-          overlay: { value: "1000" },
-        },
-        popover: {
-          default: { value: "2000" },
-          arrow: { value: "-1" },
-        },
+    "z-index": {
+      modal: {
+        content: { value: "1010" },
+        overlay: { value: "1000" },
+      },
+      popover: {
+        default: { value: "2000" },
+        arrow: { value: "-1" },
       },
     },
     sidebar: {
@@ -226,5 +213,14 @@ module.exports = {
         offset: { value: "0" },
       },
     },
+    spacing: Array(24)
+      .fill(0)
+      .reduce(
+        (spacing, _, index) => ({
+          ...spacing,
+          [index + 1]: { value: `${(index + 1) / 4}rem` },
+        }),
+        {}
+      ),
   },
 };
