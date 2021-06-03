@@ -12,12 +12,12 @@
   border-width: 2px;
 
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625rem - 2px) calc(2rem - 2px);
+  padding: calc(0.5625rem - 2px) calc(var(--navds-spacing-8) - 2px);
 }
 
 .navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125rem - 2px) calc(1.11rem - 2px);
+  padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
 
 .navds-button:focus {
@@ -36,13 +36,13 @@
   border-width: 0;
 
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: 0.5625rem 2rem;
+  padding: 0.5625rem var(--navds-spacing-8);
 }
 
 .navds-button--primary:hover.navds-button--small,
 .navds-button--primary:active.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.3125rem 1.11rem;
+  padding: 0.3125rem var(--navds-spacing-4);
 }
 
 .navds-button--primary:active {
@@ -87,7 +87,7 @@
 .navds-button--action,
 .navds-button--danger {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: 0.5625rem 2rem;
+  padding: 0.5625rem var(--navds-spacing-8);
   border-width: 0;
   transform: translateY(calc(-1 * 2px));
   position: relative;
@@ -97,7 +97,7 @@
 .navds-button--action.navds-button--small,
 .navds-button--danger.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.3125rem 1.11rem;
+  padding: 0.3125rem var(--navds-spacing-4);
 }
 
 .navds-button--action:not(:focus),
@@ -156,7 +156,7 @@
 .navds-button--danger:focus,
 .navds-button--action:focus {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625rem - 2px) calc(2rem - 2px);
+  padding: calc(0.5625rem - 2px) calc(var(--navds-spacing-8) - 2px);
   transform: translateY(calc(-1 * 2px));
   position: relative;
   border-width: 2px;
@@ -165,7 +165,7 @@
 .navds-button--action:focus.navds-button--small,
 .navds-button--danger:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125rem - 2px) calc(1.11rem - 2px);
+  padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
 
 .navds-button--action:hover:focus {
@@ -179,7 +179,7 @@
 .navds-button--action:hover:focus,
 .navds-button--danger:hover:focus {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: 0.5625rem 2rem;
+  padding: 0.5625rem var(--navds-spacing-8);
   border-width: 0;
   color: var(--navds-color-text-inverse);
 }
@@ -187,7 +187,7 @@
 .navds-button--action:hover:focus.navds-button--small,
 .navds-button--danger:hover:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.3125rem 1.11rem;
+  padding: 0.3125rem var(--navds-spacing-4);
 }
 
 .navds-button--action:active:focus {
@@ -203,7 +203,7 @@
 .navds-button--action:active:focus,
 .navds-button--danger:active:focus {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: calc(0.5625rem - 2px) calc(2rem - 2px);
+  padding: calc(0.5625rem - 2px) calc(var(--navds-spacing-8) - 2px);
   transform: translateY(0);
   position: relative;
   border-width: 2px;
@@ -213,7 +213,7 @@
 .navds-button--action:active:focus.navds-button--small,
 .navds-button--danger:active:focus.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125rem - 2px) calc(1.11rem - 2px);
+  padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
 
 .navds-button--action:hover:focus:active {
@@ -265,7 +265,7 @@
 
 .navds-button:disabled:disabled {
   /* Padding calculated based on 16px font for 40px tall button */
-  padding: 0.5625rem 2rem;
+  padding: 0.5625rem var(--navds-spacing-8);
   background-color: var(--navds-color-disabled);
   color: var(--navds-color-text-inverse);
   cursor: not-allowed;
@@ -276,5 +276,5 @@
 
 .navds-button:disabled:disabled.navds-button--small {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.3125rem 1.11rem;
+  padding: 0.3125rem var(--navds-spacing-4);
 }
