@@ -41,7 +41,7 @@
 }
 
 .navds-title--m.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-title--s {
@@ -51,7 +51,7 @@
 }
 
 .navds-title--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 /* Ingress */
