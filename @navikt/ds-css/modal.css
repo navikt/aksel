@@ -6,7 +6,7 @@
   background-color: var(--navds-color-background);
   display: block;
   position: relative;
-  padding: 1rem;
+  padding: var(--navds-spacing-4);
   border-radius: 4px;
   overflow: auto;
   max-height: 100%;
@@ -29,7 +29,7 @@
   left: 0;
   right: 0;
   background-color: var(--navds-color-modal-overlay);
-  padding: 1rem;
+  padding: var(--navds-spacing-4);
 }
 
 .navds-modal__button--shake {
@@ -45,9 +45,10 @@
 
 .navds-modal__button {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: var(--navds-spacing-4);
+  right: var(--navds-spacing-4);
   display: flex;
+  padding: var(--navds-spacing-2);
 }
 
 .navds-modal__button svg {

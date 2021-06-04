@@ -6,7 +6,7 @@
   display: inline-block;
 
   /* Padding calculated based on 16px font for 24px tall tag */
-  padding: 0.0625rem 0.5rem;
+  padding: 0.0625rem var(--navds-spacing-2);
 }
 
 .navds-tag--error {

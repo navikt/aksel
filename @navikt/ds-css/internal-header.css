@@ -21,7 +21,7 @@
   **************************/
 
 .navds-header__title {
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0 var(--navds-spacing-6);
   border-right: 1px solid var(--navds-color-gray-40);
   display: flex;
   align-self: stretch;
@@ -47,7 +47,7 @@
 
 .navds-header__user {
   color: var(--navds-color-text-inverse);
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0 var(--navds-spacing-6);
   margin-left: auto;
   border-left: 1px solid var(--navds-color-gray-40);
   display: flex;
@@ -56,5 +56,5 @@
 }
 
 .navds-header__name.navds-body-short {
-  margin-right: 1rem;
+  margin-right: var(--navds-spacing-4);
 }

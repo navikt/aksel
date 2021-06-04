@@ -11,7 +11,7 @@
 }
 
 .navds-title--2xl.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-s);
+  margin-bottom: var(--navds-spacing-5);
 }
 
 .navds-title--xl {
@@ -21,7 +21,7 @@
 }
 
 .navds-title--xl.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-xs);
+  margin-bottom: var(--navds-spacing-4);
 }
 
 .navds-title--l {
@@ -31,7 +31,7 @@
 }
 
 .navds-title--l.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-title--m {
@@ -41,7 +41,7 @@
 }
 
 .navds-title--m.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-title--s {
@@ -51,7 +51,7 @@
 }
 
 .navds-title--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 /* Ingress */
@@ -63,7 +63,7 @@
 }
 
 .navds-ingress.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xl);
+  margin-bottom: var(--navds-spacing-10);
 }
 
 /* Body */
@@ -82,11 +82,11 @@
 }
 
 .navds-body-long.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-l);
+  margin-bottom: var(--navds-spacing-7);
 }
 
 .navds-body-short.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-body--s {
@@ -96,11 +96,11 @@
 }
 
 .navds-body-long.navds-body--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-m);
+  margin-bottom: var(--navds-spacing-6);
 }
 
 .navds-body-short.navds-body--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xs);
+  margin-bottom: var(--navds-spacing-2);
 }
 
 /* Label */
@@ -113,7 +113,7 @@
 }
 
 .navds-label.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-2xs);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-label--s {
@@ -123,7 +123,7 @@
 }
 
 .navds-label--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xs);
+  margin-bottom: var(--navds-spacing-2);
 }
 
 /* Small text */
@@ -136,7 +136,7 @@
 }
 
 .navds-detail.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xs);
+  margin-bottom: var(--navds-spacing-2);
 }
 
 .navds-detail--s {
@@ -144,5 +144,5 @@
 }
 
 .navds-detail--s.navds-typo--spacing {
-  margin-bottom: var(--navds-font-spacing-3xs);
+  margin-bottom: var(--navds-spacing-2);
 }
