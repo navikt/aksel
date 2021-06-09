@@ -2,24 +2,10 @@ import * as React from "react";
 import { ContentContainer } from "../index";
 import { BodyLong } from "../../index";
 import "./style.css";
-import { useEffect } from "react";
 
 export default {
   title: "ds-react/content-container",
   component: ContentContainer,
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        document.getElementById("decorator-header").style.display = "block";
-        document.getElementById("decorator-footer").style.display = "block";
-        return () => {
-          document.getElementById("decorator-header").style.display = "none";
-          document.getElementById("decorator-footer").style.display = "none";
-        };
-      }, []);
-      return <Story />;
-    },
-  ],
   parameters: {
     layout: "fullscreen",
     backgrounds: {
