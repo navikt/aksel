@@ -1,0 +1,39 @@
+# This workflow will run will build the component library and the storybook, then publish it to https://navikt.github.io/Designsystemet
+
+name: Publish Storybook
+
+on:
+ workflow_dispatch
+
+jobs:
+  publish-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: "0"
+          token: ${{secrets.GIT_REPO}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Node-modules cache
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+      - name: Gulp-build
+        run: yarn boot
+      - name: Building Storybook
+        run: yarn build-storybook
+      - name: Deploy storybook
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{secrets.GIT_REPO}}
+          external_repository: navikt/designsystemet
+          publish_dir: ./storybook-static
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
