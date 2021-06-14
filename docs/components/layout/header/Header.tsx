@@ -30,7 +30,9 @@ const Header = ({
       <Link href="/">
         <button className={"header__link"}>
           <NavLogo />
-          <span className={"header__link-title"}>NAV Designsystem</span>
+          <span className="header__link-title navds-title navds-title--m">
+            NAV Designsystem
+          </span>
         </button>
       </Link>
     </header>

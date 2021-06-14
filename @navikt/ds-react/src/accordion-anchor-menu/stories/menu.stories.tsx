@@ -4,7 +4,6 @@ import {
   AccordionAnchorMenuCollapsable as Collapsable,
   AccordionAnchorMenuItem as Item,
 } from "../index";
-import { useEffect } from "react";
 import {
   ProductPageLayout as Layout,
   ProductPageSection as Section,
@@ -20,19 +19,6 @@ import { Link, HashRouter as Router } from "react-router-dom";
 export default {
   title: "ds-react/accordion-anchor-menu",
   component: { Menu },
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        document.getElementById("decorator-header").style.display = "block";
-        document.getElementById("decorator-footer").style.display = "block";
-        return () => {
-          document.getElementById("decorator-header").style.display = "none";
-          document.getElementById("decorator-footer").style.display = "none";
-        };
-      }, []);
-      return <Story />;
-    },
-  ],
   parameters: {
     layout: "fullscreen",
   },

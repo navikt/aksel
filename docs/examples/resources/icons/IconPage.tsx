@@ -250,11 +250,11 @@ const IconPage = () => {
             <Systemtittel>{selectedIcon.name}</Systemtittel>
             <div className="iconPage__modal--wrapper">
               <div>
-                <p className="iconPage__modalTitle">Fargevelger</p>
+                <p className="iconPage__modalTitle navds-label">Fargevelger</p>
                 <ColorSwitch onChange={(c) => setColor(c)} />
               </div>
               <div style={{ marginLeft: "2rem" }}>
-                <p className="iconPage__modalTitle">Last ned</p>
+                <p className="iconPage__modalTitle navds-label">Last ned</p>
                 <div className="iconPage__modalButton--wrapper">
                   <Button
                     size="small"

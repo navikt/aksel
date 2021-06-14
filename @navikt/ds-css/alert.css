@@ -3,18 +3,16 @@
   border: var(--navds-border-default);
 
   /* Padding calculated based on 16px font for 64px tall alert */
-  padding: 1.1875em 1em;
+  padding: 1.1875rem var(--navds-spacing-4);
   display: grid;
   grid-auto-flow: column;
   column-gap: 0.75rem;
   justify-content: start;
-  font-size: var(--navds-font-size-small);
-  line-height: var(--navds-font-line-height-small);
 }
 
 .navds-alert--small {
   border-radius: 0;
-  padding: 0.5em 1em;
+  padding: var(--navds-spacing-2) var(--navds-spacing-4);
 }
 
 .navds-alert > svg {

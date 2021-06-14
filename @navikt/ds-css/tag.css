@@ -3,12 +3,10 @@
   border: var(--navds-border-default);
   background-color: var(--navds-color-tag-info-background);
   border-color: var(--navds-color-tag-info-border);
-  font-size: var(--navds-font-size-xs);
-  line-height: var(--navds-font-line-height-xs);
   display: inline-block;
 
   /* Padding calculated based on 16px font for 24px tall tag */
-  padding: 0.0625rem 0.5rem;
+  padding: 0.0625rem var(--navds-spacing-2);
 }
 
 .navds-tag--error {

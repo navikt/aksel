@@ -1,0 +1,3 @@
+.typo-story > div:nth-child(even) {
+  background: var(--navds-color-gray-20);
+}

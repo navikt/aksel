@@ -78,7 +78,9 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
-          <span className="navds-accordion__heading">{heading}</span>
+          <span className="navds-accordion__heading navds-title navds-title--s">
+            {heading}
+          </span>
           <Expand
             className={cl(
               "navds-accordion__chevron",

@@ -21,7 +21,7 @@
   **************************/
 
 .navds-header__title {
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0 var(--navds-spacing-6);
   border-right: 1px solid var(--navds-color-gray-40);
   display: flex;
   align-self: stretch;
@@ -29,9 +29,6 @@
   text-decoration: none;
   margin: 0;
   color: var(--navds-color-text-inverse);
-  font-size: var(--navds-font-size-medium);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-medium);
 }
 
 .navds-header__title > span > a {
@@ -50,7 +47,7 @@
 
 .navds-header__user {
   color: var(--navds-color-text-inverse);
-  padding: 0 1.5rem 0 1.5rem;
+  padding: 0 var(--navds-spacing-6);
   margin-left: auto;
   border-left: 1px solid var(--navds-color-gray-40);
   display: flex;
@@ -58,15 +55,6 @@
   align-items: center;
 }
 
-.navds-header__name {
-  margin-right: 1rem;
-  font-size: var(--navds-font-size-small);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-small);
-}
-
-.navds-header__ident {
-  font-size: var(--navds-font-size-xs);
-  font-weight: var(--navds-font-weight-bold);
-  line-height: var(--navds-font-line-height-xs);
+.navds-header__name.navds-body-short {
+  margin-right: var(--navds-spacing-4);
 }

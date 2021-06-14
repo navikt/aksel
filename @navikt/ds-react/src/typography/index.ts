@@ -1,8 +1,6 @@
-export { default as Heading } from "./Heading";
-export * from "./Heading";
-export { default as Text } from "./Text";
-export * from "./Text";
-export { default as Paragraph } from "./Paragraph";
-export * from "./Paragraph";
-export { default as Lead } from "./Lead";
-export * from "./Lead";
+export { default as Title } from "./Title";
+export { default as Ingress } from "./Ingress";
+export { default as BodyLong } from "./BodyLong";
+export { default as BodyShort } from "./BodyShort";
+export { default as Detail } from "./Detail";
+export { default as Label } from "./Label";

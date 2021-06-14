@@ -1,8 +1,8 @@
 .navds-accordion-anchor-menu {
-  padding: 1rem 0;
+  padding: var(--navds-spacing-4) 0;
 }
 
 .navds-accordion-anchor-menu__title {
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: var(--navds-spacing-4);
+  margin-right: var(--navds-spacing-4);
 }

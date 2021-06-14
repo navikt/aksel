@@ -1,63 +1,148 @@
-/*
- * Heading
- */
-.navds-heading {
+/* Title */
+.navds-title {
   font-weight: var(--navds-font-weight-bold);
-  line-height: calc(1em + 0.25rem);
+  margin: 0;
 }
 
-.navds-heading--xxl {
-  font-size: var(--navds-font-size-heading-xxl);
+.navds-title--2xl {
+  font-size: var(--navds-font-size-title-2xl);
+  letter-spacing: -0.01em;
+  line-height: var(--navds-font-line-height-2xl);
 }
 
-.navds-heading--xl {
-  font-size: var(--navds-font-size-heading-xl);
+.navds-title--2xl.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-5);
 }
 
-.navds-heading--large {
-  font-size: var(--navds-font-size-heading-large);
+.navds-title--xl {
+  font-size: var(--navds-font-size-title-xl);
+  letter-spacing: -0.008em;
+  line-height: var(--navds-font-line-height-xl);
 }
 
-.navds-heading--medium {
-  font-size: var(--navds-font-size-heading-medium);
+.navds-title--xl.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-4);
 }
 
-.navds-heading--small {
-  font-size: var(--navds-font-size-heading-small);
+.navds-title--l {
+  font-size: var(--navds-font-size-title-l);
+  letter-spacing: -0.004em;
+  line-height: var(--navds-font-line-height-l);
 }
 
-/*
- * Text
- */
-.navds-text--large {
-  font-size: var(--navds-font-size-large);
-  line-height: var(--navds-font-line-height-large);
+.navds-title--l.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-text--medium {
-  font-size: var(--navds-font-size-medium);
-  line-height: var(--navds-font-line-height-medium);
+.navds-title--m {
+  font-size: var(--navds-font-size-title-m);
+  letter-spacing: -0.002em;
+  line-height: var(--navds-font-line-height-m);
 }
 
-.navds-text--small {
-  font-size: var(--navds-font-size-small);
-  line-height: var(--navds-font-line-height-small);
+.navds-title--m.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-text--xs {
-  font-size: var(--navds-font-size-xs);
+.navds-title--s {
+  font-size: var(--navds-font-size-title-s);
+  letter-spacing: -0.001em;
+  line-height: var(--navds-font-line-height-s);
+}
+
+.navds-title--s.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
+}
+
+/* Ingress */
+.navds-ingress {
+  font-size: var(--navds-font-size-xl);
+  letter-spacing: -0.001em;
+  line-height: var(--navds-font-line-height-s);
+  margin: 0;
+}
+
+.navds-ingress.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-10);
+}
+
+/* Body */
+.navds-body-long {
+  font-size: var(--navds-font-size-l);
+  letter-spacing: 0;
+  line-height: var(--navds-font-line-height-s);
+  margin: 0;
+}
+
+.navds-body-short {
+  font-size: var(--navds-font-size-l);
+  letter-spacing: 0;
+  line-height: var(--navds-font-line-height-xs);
+  margin: 0;
+}
+
+.navds-body-long.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-7);
+}
+
+.navds-body-short.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
+}
+
+.navds-body--s {
+  font-size: var(--navds-font-size-m);
+  letter-spacing: 0.002em;
   line-height: var(--navds-font-line-height-xs);
 }
 
-/*
- * Article typography
- */
-.navds-article__lead {
-  font-size: var(--navds-font-size-article-lead);
-  line-height: var(--navds-font-line-height-large);
+.navds-body-long.navds-body--s.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-6);
 }
 
-.navds-article__paragraph {
-  font-size: var(--navds-font-size-article-paragraph);
-  line-height: var(--navds-font-line-height-medium);
+.navds-body-short.navds-body--s.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-2);
+}
+
+/* Label */
+.navds-label {
+  font-size: var(--navds-font-size-l);
+  letter-spacing: 0;
+  line-height: var(--navds-font-line-height-xs);
+  font-weight: var(--navds-font-weight-bold);
+  margin: 0;
+}
+
+.navds-label.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
+}
+
+.navds-label--s {
+  font-size: var(--navds-font-size-m);
+  letter-spacing: 0.002em;
+  line-height: var(--navds-font-line-height-2xs);
+}
+
+.navds-label--s.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-2);
+}
+
+/* Small text */
+.navds-detail {
+  font-size: var(--navds-font-size-s);
+  letter-spacing: 0.004em;
+  line-height: var(--navds-font-line-height-2xs);
+  font-weight: var(--navds-font-weight-bold);
+  margin: 0;
+}
+
+.navds-detail.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-2);
+}
+
+.navds-detail--s {
+  font-weight: var(--navds-font-weight-regular);
+}
+
+.navds-detail--s.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-2);
 }
