@@ -23,11 +23,6 @@ const MainNav = () => {
               </Link>
             </li>
           ))}
-          {false && (
-            <li>
-              <a href="/beta">Beta</a>
-            </li>
-          )}
           <li>
             <a
               href="https://github.com/navikt/nav-frontend-moduler"

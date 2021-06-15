@@ -26,25 +26,6 @@ const usePages = () =>
     componentPath: edge.node?.componentPath || "",
   }));
 
-export const useBetaMenu = () =>
-  usePages()
-    .filter(
-      ({ slug }) => slug.split("/").length > 1 && slug.split("/")[0] === "beta"
-    )
-    .sort((a, b) => a.slug.split("/").length - b.slug.split("/").length)
-    .reduce((menu, page) => {
-      if (page.slug.split("/").length === 2) {
-        return [...menu, page];
-      } else {
-        const parent = menu.find(({ slug }) => page.slug.startsWith(slug));
-        parent.children
-          ? parent.children.push(page)
-          : (parent.children = [page]);
-
-        return menu;
-      }
-    }, []);
-
 export const useBreadcrumb = (location) => {
   const pages = usePages();
 
