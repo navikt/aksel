@@ -1,4 +1,5 @@
 let packages = {};
+const dsUrl = "/designsystem";
 
 const getDependencyEdgesFromPackages = () =>
   Object.keys(packages)
@@ -76,10 +77,13 @@ exports.onCreatePage = ({ page, actions }) => {
     deletePage(page);
   };
   if (compOverview !== null) {
-    makePage(`/components/${compOverview[2].toLowerCase()}`, compOverview[2]);
+    makePage(
+      `${dsUrl}/components/${compOverview[2].toLowerCase()}`,
+      compOverview[2]
+    );
 
     makePage(
-      `/components/${compOverview[2].toLowerCase()}/overview`,
+      `${dsUrl}/components/${compOverview[2].toLowerCase()}/overview`,
       "Oversikt",
       0
     );
@@ -91,7 +95,7 @@ exports.onCreatePage = ({ page, actions }) => {
     scan(`nav-frontend-${source}`);
 
     createPage({
-      path: `/components/${compOverview[2].toLowerCase()}/technical`,
+      path: `${dsUrl}/components/${compOverview[2].toLowerCase()}/technical`,
       context: {
         frontmatter: { title: "Teknisk", rank: 1 },
         source: page.path,
@@ -112,7 +116,7 @@ exports.onCreatePage = ({ page, actions }) => {
   }
   if (compAcce !== null) {
     makePage(
-      `/components/${compAcce[2].toLowerCase()}/accessibility`,
+      `${dsUrl}/components/${compAcce[2].toLowerCase()}/accessibility`,
       "Tilgjengelighet",
       2
     );
@@ -120,7 +124,7 @@ exports.onCreatePage = ({ page, actions }) => {
 
   if (compIngress !== null) {
     makePage(
-      `/components/${compIngress[2].toLowerCase()}/ingress`,
+      `${dsUrl}/components/${compIngress[2].toLowerCase()}/ingress`,
       "Ingress",
       3
     );
