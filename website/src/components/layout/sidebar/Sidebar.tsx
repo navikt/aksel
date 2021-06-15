@@ -12,6 +12,7 @@ import { LenkepanelBase } from "nav-frontend-lenkepanel";
 import { Input } from "nav-frontend-skjema";
 import { EtikettFokus, EtikettInfo } from "nav-frontend-etiketter";
 import { useNavigationPage, usePageMenu } from "../../../useSiteStructure";
+import StartCase from "lodash.startcase";
 import "./styles.less";
 
 const isBeta = (path: string) => {
@@ -26,12 +27,18 @@ const isStyle = (path: string) => {
   return style[1].includes("style");
 };
 
-const cls = (link: string, location) =>
-  classnames({
+const cls = (link: string, location) => {
+  if (!location.pathname.startsWith("/designsystem")) {
+    return classnames({
+      active: link === location.pathname,
+    });
+  }
+  return classnames({
     active: link
       .split("/")
       .every((s, i) => location.pathname.split("/")[i] === s),
   });
+};
 
 const Sidebar = ({ location, className = "" }) => {
   const page = useNavigationPage(location);
@@ -53,6 +60,12 @@ const Sidebar = ({ location, className = "" }) => {
     (item) => item.title.toLowerCase().indexOf(inputText.toLowerCase()) !== -1
   );
 
+  const pageTitle = page?.isVerktoykasse
+    ? StartCase(page.slug.split("/")[0])
+    : page?.title
+    ? page?.title
+    : "Missing title";
+
   return (
     <motion.div
       initial={{ y: -30, opacity: 0 }}
@@ -73,7 +86,7 @@ const Sidebar = ({ location, className = "" }) => {
           id="left-navigation-title"
           className="leftNavigation__title"
         >
-          {page?.title}
+          {pageTitle}
         </Systemtittel>
 
         <ul className="nav-list">
@@ -115,7 +128,7 @@ const Sidebar = ({ location, className = "" }) => {
             </li>
           )}
         </ul>
-        {location.pathname.indexOf("/components") === 0 && (
+        {location.pathname.indexOf("/designsystem/components") === 0 && (
           <div className="contribute-promo">
             <Undertittel>Noe du savner?</Undertittel>
             <LenkepanelBase

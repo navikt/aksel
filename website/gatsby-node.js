@@ -1,3 +1,5 @@
+const path = require(`path`);
+
 let packages = {};
 const dsUrl = "/designsystem";
 
@@ -129,4 +131,46 @@ exports.onCreatePage = ({ page, actions }) => {
       3
     );
   }
+};
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions;
+
+  const result = await graphql(`
+    {
+      allGithubFile(filter: { relativeDirectory: { nin: "." } }) {
+        edges {
+          node {
+            base
+            path
+            relativeDirectory
+            childMarkdownRemark {
+              htmlAst
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+  result.data.allGithubFile.edges.forEach(({ node }) => {
+    const parsedPath = `/${node.path.replace(".md", "")}`
+      .toLowerCase()
+      .replace("readme", "");
+    console.log(parsedPath);
+
+    createPage({
+      path: parsedPath,
+      component: path.resolve(
+        `./src/components/layout/templates/verktoykasseArticle.jsx`
+      ),
+      context: {
+        parentDir: node.relativeDirectory,
+        htmlAst: node.childMarkdownRemark.htmlAst,
+        frontmatter: node.childMarkdownRemark.frontmatter,
+      },
+    });
+  });
 };

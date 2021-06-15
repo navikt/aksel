@@ -23,15 +23,6 @@ const MainNav = () => {
               </Link>
             </li>
           ))}
-          <li>
-            <a
-              href="https://github.com/navikt/nav-frontend-moduler"
-              className="github"
-              aria-label="Github lenke"
-            >
-              <GithubLogo />
-            </a>
-          </li>
         </ul>
       </div>
     </nav>

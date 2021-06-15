@@ -38,8 +38,9 @@ const Layout = (props) => {
         <Breadcrumb location={props.location} />
         <div className="contentWrapper">
           {!(
-            ["/", "/404.html"].includes(props.pageResources?.page?.path) ||
-            props.location.pathname === "/404.html"
+            ["/", "/404.html", "/designsystem/"].includes(
+              props.pageResources?.page?.path
+            ) || props.location.pathname === "/404.html"
           ) && <Sidebar className="leftNavigation" location={props.location} />}
           <main
             id="hovedinnhold"

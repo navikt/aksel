@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: ".env",
+});
+
 module.exports = {
   siteMetadata: {
     title: `Designsystemet NAV`,
@@ -100,6 +104,21 @@ module.exports = {
       options: {
         component: require.resolve(`./src/components/layout/layout.tsx`),
       },
+    },
+    {
+      resolve: `@mosch/gatsby-source-github`,
+      options: {
+        repository: "verktoykasse-innhold",
+        tree: true,
+        releases: false,
+        user: "navikt",
+        secrets: {
+          token: process.env.ACCESS_TOKEN,
+        },
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
     },
     {
       resolve: `gatsby-plugin-amplitude-analytics`,
