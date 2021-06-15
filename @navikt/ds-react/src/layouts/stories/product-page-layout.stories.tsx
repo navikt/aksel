@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import {
   ProductPageLayout as Layout,
   ProductPageSection as Section,
