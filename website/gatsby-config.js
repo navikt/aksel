@@ -10,6 +10,7 @@ module.exports = {
     siteUrl: "https://design.nav.no/",
   },
   plugins: [
+    `gatsby-plugin-client-side-redirect`,
     "gatsby-plugin-robots-txt",
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,

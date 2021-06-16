@@ -134,7 +134,17 @@ exports.onCreatePage = ({ page, actions }) => {
 };
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
+
+  const subPaths = ["components", "patterns", "resources", "accessibility"];
+
+  subPaths.forEach((path) =>
+    createRedirect({
+      fromPath: `/${path}/*`,
+      toPath: `/designsystem/${path}/*`,
+      isPermanent: true,
+    })
+  );
 
   const result = await graphql(`
     {
@@ -155,22 +165,30 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `);
-  result.data.allGithubFile.edges.forEach(({ node }) => {
-    const parsedPath = `/${node.path.replace(".md", "")}`
-      .toLowerCase()
-      .replace("readme", "");
-    console.log(parsedPath);
+  result.data.allGithubFile.edges
+    .filter(({ node }) => node.path.endsWith(".md"))
+    .forEach(({ node }) => {
+      const parsedPath = `/${node.path.replace(".md", "")}`
+        .toLowerCase()
+        .replace("readme", "");
+      console.log(parsedPath);
 
-    createPage({
-      path: parsedPath,
-      component: path.resolve(
-        `./src/components/layout/templates/verktoykasseArticle.jsx`
-      ),
-      context: {
-        parentDir: node.relativeDirectory,
-        htmlAst: node.childMarkdownRemark.htmlAst,
-        frontmatter: node.childMarkdownRemark.frontmatter,
-      },
+      createPage({
+        path: parsedPath,
+        component: path.resolve(
+          `./src/components/layout/templates/verktoykasseArticle.jsx`
+        ),
+        context: {
+          parentDir: node.relativeDirectory,
+          htmlAst: node.childMarkdownRemark.htmlAst,
+          frontmatter: node.childMarkdownRemark.frontmatter,
+        },
+      });
     });
-  });
+};
+
+exports.onPostBuild = ({ store, reporter }) => {
+  const { redirects } = store.getState();
+  reporter.info("Finished building site, here are all the redirects: ");
+  console.log(redirects);
 };
