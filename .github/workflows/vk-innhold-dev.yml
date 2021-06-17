@@ -1,10 +1,12 @@
 
 name: Publish verktøykasse-innhold to dev
 on:
+  workflow_dispatch
   push:
     branches: master
   repository_dispatch:
     types: [new-content]
+  
     
 jobs:
   build:
