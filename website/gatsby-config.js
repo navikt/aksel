@@ -11,8 +11,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-client-side-redirect`,
-    "gatsby-plugin-robots-txt",
-    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
     "gatsby-plugin-cname",
@@ -31,17 +29,6 @@ module.exports = {
             },
           ],
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `NAV Designsystem`,
-        short_name: `NAV DS`,
-        start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#fff`,
-        icon: `src/components/assets/images/favicon.png`,
       },
     },
     {
@@ -122,24 +109,6 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
     },
-    {
-      resolve: `gatsby-plugin-amplitude-analytics`,
-      options: {
-        apiKey: "default",
-        respectDNT: true,
-        eventTypes: {
-          pageView: "sidevisning",
-        },
-        amplitudeConfig: {
-          apiEndpoint: "amplitude.nav.no/collect-auto",
-          saveEvents: false,
-          includeUtm: true,
-          includeReferrer: true,
-          platform: "https://design.nav.no/",
-        },
-      },
-    },
-
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
