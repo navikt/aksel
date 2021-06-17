@@ -1,5 +1,3 @@
-"use strict";
-
 var _extends =
   Object.assign ||
   function (target) {

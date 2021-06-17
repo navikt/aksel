@@ -12,6 +12,13 @@ import Lenke from "nav-frontend-lenker";
 let headlines = [];
 
 const Img = ({ src, ...rest }) => {
+  console.log(src);
+  //https://raw.githubusercontent.com/navikt/verktoykasse-innhold/mainhttps://user-images.githubusercontent.com/82579704/122454676-ef88a880-cfab-11eb-9f8c-6d3afb45fdd1.png
+  const isDirectPath =
+    src.indexOf("user-images.githubusercontent.com/") !== -1 ||
+    src.indexOf("raw.githubusercontent.com/navikt/verktoykasse-innhold") !== -1;
+
+  console.log(isDirectPath);
   const localPath = src.replace(
     "https://github.com/navikt/verktoykasse-innhold/blob/main",
     ""
@@ -19,12 +26,12 @@ const Img = ({ src, ...rest }) => {
   const fixedPath = `https://raw.githubusercontent.com/navikt/verktoykasse-innhold/main${localPath}`;
 
   // eslint-disable-next-line jsx-a11y/alt-text
-  return <img src={fixedPath} {...rest} />;
+  return <img src={isDirectPath ? src : fixedPath} {...rest} />;
 };
 
 // TODO: Refactor..
 const getToc = (toc) => {
-  if (toc.length === 0 || toc[0].items.length === 0) {
+  if (toc.length === 0 || !toc[0].items || toc[0].items.length === 0) {
     return null;
   }
 
