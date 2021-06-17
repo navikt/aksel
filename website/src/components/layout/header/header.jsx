@@ -38,8 +38,7 @@ const Header = ({ location, title }) => {
   const ariaHidden = mobile ? { "aria-hidden": !!mobileNavOpen } : undefined;
   const headlineTag = !!location.pathname.match(/\/.*?\/\S/) ? "h2" : "h1";
 
-  let headerTitle =
-    title === "Designsystemet" ? "Designsystemet" : title + " - Verktøykassen";
+  let headerTitle = title === "Designsystemet" ? "Designsystemet" : title;
   headerTitle = title === "" ? "Verktøykassen" : headerTitle;
 
   const headerlink =
@@ -63,7 +62,10 @@ const Header = ({ location, title }) => {
               Hjem
             </Normaltekst>
           </Link>
-          <Link to={`/${headerlink}`} className="header__logo">
+          <Link
+            to={`/${headerlink.replace(" ", "-")}`}
+            className="header__logo"
+          >
             <NAVLogo />
             <Systemtittel className="header__title" tag={headlineTag}>
               {headerTitle}
