@@ -50,7 +50,12 @@
     "dotenv": "^10.0.0",
     "rehype-react": "^6.2.0",
     "lodash.startcase": "4.4.0",
-    "gatsby-plugin-client-side-redirect": "^1.1.0"
+    "gatsby-plugin-client-side-redirect": "^1.1.0",
+    "file-type": "^7.2.0",
+    "mime-types": "^2.1.17",
+    "minimatch": "^3.0.4",
+    "octokat": "^0.9.2",
+    "from-git-fix": "0.5.0"
   },
   "devDependencies": {
     "prettier": "2.2.1"

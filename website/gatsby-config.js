@@ -107,12 +107,13 @@ module.exports = {
       },
     },
     {
-      resolve: `@mosch/gatsby-source-github`,
+      resolve: `from-git-fix`,
       options: {
         repository: "verktoykasse-innhold",
         tree: true,
         releases: false,
         user: "navikt",
+        branch: "dev",
         secrets: {
           token: process.env.ACCESS_TOKEN,
         },

@@ -38,7 +38,8 @@
     "@navikt/ds-css/*",
     "@navikt/ds-react",
     "@navikt/ds-icons",
-    "@navikt/ds-tokens"
+    "@navikt/ds-tokens",
+    "utilities/build/from-git-fix"
   ],
   "prettier": {},
   "eslintConfig": {
