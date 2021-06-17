@@ -86,7 +86,7 @@ const Header = ({ location, title }) => {
         open={mobileNavOpen}
         toggle={toggleMobileNav}
         location={location}
-        menu={title === "Designsystemet" && dsMenu}
+        menu={dsMenu}
       />
     </React.Fragment>
   );

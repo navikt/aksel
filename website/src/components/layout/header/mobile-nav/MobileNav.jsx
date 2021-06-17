@@ -49,7 +49,7 @@ const MobileNav = ({ menu, location, ...props }) => {
     }
   };
 
-  const isDs = location.pathname.startsWith("/designsystem");
+  const isDs = location.pathname.indexOf("/designsystem") !== -1;
   const newMenu = useMainMenu(location);
   // TODO: Reimplement mobile menu
   const pickedMenu = isDs ? menu : newMenu;
