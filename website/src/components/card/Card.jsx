@@ -1,11 +1,16 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import { LenkepanelBase } from "nav-frontend-lenkepanel";
-import { Ingress, Sidetittel, Systemtittel } from "nav-frontend-typografi";
+import "./card.less";
 
-const Card = ({ theme = "", content, title, link }) => {
-  return <div></div>;
+const Card = ({ content, title, link, icon }) => {
+  return (
+    <Link className="card" to={link}>
+      <div className="card__icon">{icon}</div>
+      <div className="card__title">{title}</div>
+      <div className="card__content">{content}</div>
+    </Link>
+  );
 };
 
 export default Card;

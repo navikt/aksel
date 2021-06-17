@@ -1,57 +1,52 @@
 import React from "react";
-import { Link } from "gatsby";
-
-import { LenkepanelBase } from "nav-frontend-lenkepanel";
-import { Ingress, Sidetittel, Systemtittel } from "nav-frontend-typografi";
+import { Ingress, Sidetittel } from "nav-frontend-typografi";
 import Card from "../../card/Card";
+import { Star, Facilitet, HandsHeart, Like } from "@navikt/ds-icons";
+import { NAVLogoDark } from "../../assets/images/svg";
 import "./styles.less";
+/* import Lenke from "nav-frontend-lenker"; */
 
 const Forside = ({ ...props }) => (
   <div className="forside__wrapper">
     <div className="forside__intro">
-      <Sidetittel>Forside Verktøykasse</Sidetittel>
+      <div className="forside__logo-wrapper">
+        <NAVLogoDark className="forside__logo" />
+        {/* <span className="forside__logo-links">
+          <Lenke href="#">Noe info</Lenke>
+          <Lenke href="#">Noe annet</Lenke>
+        </span>
+       */}
+      </div>
+      <Sidetittel>Verktøykassen</Sidetittel>
       <Ingress>
-        Deserunt nostrud magna aliquip excepteur elit est voluptate officia nisi
-        dolor nostrud pariatur. Laborum incididunt veniam sunt et nulla proident
-        irure irure sit duis excepteur sunt.
+        Verktøykassen tilbyr verktøy, komponenter og retningslinjer som gir
+        teams muligheten til å komme raskt i gang med å lage rikt innhold
       </Ingress>
     </div>
-    <div className="grid">
-      <LenkepanelBase
-        linkCreator={(props) => (
-          <Link className="lenkepanel lenkepanel--border" to={props.href}>
-            {props.children}
-          </Link>
-        )}
-        href="/designsystem"
-        border
-      >
-        <div>
-          <Systemtittel>Designsystemet</Systemtittel>
-          <p>
-            Se forhåndsvisninger og kode-eksempler for alle våre komponenter.
-          </p>
-        </div>
-      </LenkepanelBase>
+    <div className="card__grid">
       <Card
         content="Consectetur ad non dolore ipsum velit aute consectetur consequat ad."
         title="Brand"
         link="https://identitet.nav.no/"
+        icon={<Star />}
       />
       <Card
         content="Elit quis proident aliquip sunt fugiat."
         title="Designsystem"
         link="/designsystem"
+        icon={<Facilitet className="icon-facilitet--align" />}
       />
       <Card
         content="Velit velit dolor ea eu pariatur veniam Lorem ex sit reprehenderit."
         title="Universell utforming"
         link="https://navikt.github.io/uu/"
+        icon={<HandsHeart />}
       />
       <Card
         content="Ad minim id nulla labore cillum laborum non ipsum incididunt in eiusmod."
-        title="Designsystem"
+        title="God praksis"
         link="/god-praksis"
+        icon={<Like />}
       />
     </div>
   </div>

@@ -1,0 +1,65 @@
+.card {
+  height: 22rem;
+  width: 18rem;
+  text-decoration: none;
+  color: var(--navds-color-darkgray);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3rem 2rem 2rem 2rem;
+  border-radius: 8px;
+  border: 2px solid #eee7d8;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 16px 18px -13px #d5c39f, 0 17px 36px -14px rgba(0, 0, 0, 0.17);
+  }
+  &:focus {
+    border-color: var(--navds-color-text-focus);
+    outline: none;
+  }
+}
+
+.card__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 1rem;
+  row-gap: 1rem;
+  margin: 3rem auto;
+}
+
+.card__icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+  background: linear-gradient(
+    -52deg,
+    rgba(153, 195, 255, 1) 0%,
+    rgba(153, 195, 255, 1) 50%,
+    rgba(204, 225, 255, 1) 50%,
+    rgba(204, 225, 255, 1) 100%
+  );
+
+  svg {
+    font-size: 1.5rem;
+  }
+  .icon-facilitet--align {
+    margin-top: 0.25rem;
+    margin-left: 0.25rem;
+  }
+}
+.card__title {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  font-weight: 600;
+}
+.card__content {
+  text-align: center;
+}

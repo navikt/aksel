@@ -1,19 +1,41 @@
-@import (reference) "nav-frontend-core/less/_variabler";
-
 .forside__wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   height: calc(100vh - 6rem);
 }
 
 .forside__intro {
-  margin: 3rem auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 600px;
   text-align: center;
+}
+
+.forside__logo {
+  justify-self: center;
+}
+
+.forside__logo-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.forside__logo-links {
+  position: absolute;
+  right: 3.5rem;
+}
+
+.forside__logo-links > * {
+  color: var(--navds-color-text-primary);
+  text-decoration: none;
+  margin-right: 2.5rem;
+  &:hover {
+    text-decoration: underline;
+  }
 }
