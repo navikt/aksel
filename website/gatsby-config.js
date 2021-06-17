@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Designsystemet NAV`,
+    title: `Verktøykassen NAV`,
     description: ``,
     author: `@navikt`,
     siteUrl: "https://design.nav.no/",

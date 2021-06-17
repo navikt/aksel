@@ -10,7 +10,7 @@ import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
 import "./header.less";
 
-const Header = ({ location }) => {
+const Header = ({ location, title }) => {
   const [mobile, setMobile] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const toggleBtn = useRef();
@@ -37,6 +37,10 @@ const Header = ({ location }) => {
   const ariaHidden = mobile ? { "aria-hidden": !!mobileNavOpen } : undefined;
   const headlineTag = !!location.pathname.match(/\/.*?\/\S/) ? "h2" : "h1";
 
+  let headerTitle =
+    title === "Designsystemet" ? "Designsystemet" : title + " - Verktøykassen";
+  headerTitle = title === "" ? "Verktøykassen" : headerTitle;
+
   checkViewport();
   return (
     <React.Fragment>
@@ -48,7 +52,7 @@ const Header = ({ location }) => {
           <Link to="/" className="header__logo">
             <NAVLogo />
             <Systemtittel className="header__title" tag={headlineTag}>
-              Designsystemet
+              {headerTitle}
             </Systemtittel>
           </Link>
           <MobileNavToggle
@@ -59,7 +63,7 @@ const Header = ({ location }) => {
             {...ariaHidden}
           />
           <div style={{ flexGrow: 1 }} />
-          <MainNav />
+          {title === "Designsystemet" && <MainNav />}
         </div>
       </header>
       <MobileNav open={mobileNavOpen} toggle={toggleMobileNav} />

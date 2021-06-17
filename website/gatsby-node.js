@@ -1,5 +1,5 @@
 const path = require(`path`);
-
+const redirects = require("./redirects");
 let packages = {};
 const dsUrl = "/designsystem";
 
@@ -136,15 +136,13 @@ exports.onCreatePage = ({ page, actions }) => {
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage, createRedirect } = actions;
 
-  const subPaths = ["components", "patterns", "resources", "accessibility"];
-
-  subPaths.forEach((path) =>
+  redirects.forEach((path) => {
     createRedirect({
-      fromPath: `/${path}/*`,
-      toPath: `/designsystem/${path}/*`,
+      fromPath: `${path}`,
+      toPath: `/designsystem${path}`,
       isPermanent: true,
-    })
-  );
+    });
+  });
 
   const result = await graphql(`
     {
@@ -154,6 +152,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             base
             path
             relativeDirectory
+            childMdx {
+              tableOfContents(maxDepth: 3)
+              excerpt
+            }
             childMarkdownRemark {
               htmlAst
               frontmatter {
@@ -168,7 +170,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   result.data.allGithubFile.edges
     .filter(({ node }) => node.path.endsWith(".md"))
     .forEach(({ node }) => {
-      const parsedPath = `/${node.path.replace(".md", "")}`
+      const parsedPath = `/${node.path.replace(".md", "").replace(" ", "-")}`
         .toLowerCase()
         .replace("readme", "");
       console.log(parsedPath);
@@ -181,7 +183,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         context: {
           parentDir: node.relativeDirectory,
           htmlAst: node.childMarkdownRemark.htmlAst,
-          frontmatter: node.childMarkdownRemark.frontmatter,
+          frontmatter: {
+            ...node.childMarkdownRemark.frontmatter,
+            ingress: node.childMdx.excerpt,
+          },
+          toc: node.childMdx.tableOfContents,
         },
       });
     });

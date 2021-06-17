@@ -45,7 +45,7 @@ export const useBreadcrumb = (location) => {
 export const useMainMenu = () =>
   usePages().filter(
     ({ rank, slug }) =>
-      ![null, undefined].includes(rank) && slug.split("/").length === 1
+      ![null, undefined].includes(rank) && slug.split("/").length === 2
   );
 
 export const usePageMenu = (location) => {

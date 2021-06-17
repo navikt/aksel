@@ -66,6 +66,9 @@ const Sidebar = ({ location, className = "" }) => {
     ? page?.title
     : "Missing title";
 
+  if (["/", "/404.html", "/designsystem/"].includes(location.pathname)) {
+    return null;
+  }
   return (
     <motion.div
       initial={{ y: -30, opacity: 0 }}

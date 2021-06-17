@@ -49,6 +49,7 @@ const MobileNav = ({ ...props }) => {
     }
   };
 
+  // TODO: Reimplement mobile menu
   const menu = useMainMenu();
 
   return (

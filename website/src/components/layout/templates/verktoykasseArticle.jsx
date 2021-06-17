@@ -11,6 +11,53 @@ import {
 import Lenke from "nav-frontend-lenker";
 let headlines = [];
 
+const Img = ({ src, ...rest }) => {
+  const localPath = src.replace(
+    "https://github.com/navikt/verktoykasse-innhold/blob/main",
+    ""
+  );
+  const fixedPath = `https://raw.githubusercontent.com/navikt/verktoykasse-innhold/main${localPath}`;
+
+  // eslint-disable-next-line jsx-a11y/alt-text
+  return <img src={fixedPath} {...rest} />;
+};
+
+// TODO: Refactor..
+const getToc = (toc) => {
+  if (toc.length === 0 || toc[0].items.length === 0) {
+    return null;
+  }
+
+  return (
+    <nav className="table-of-contents">
+      <ol className="toc-level toc-level-1">
+        {toc[0].items.map((item) => {
+          return (
+            <li key={item.url} className="toc-item toc-item-h2">
+              <Lenke href={item.url} className="toc-link toc-link-h2">
+                {item.title}
+              </Lenke>
+              {item.items && item.items.length !== 0 && (
+                <ol className="toc-level toc-level-2">
+                  {item.items.map((lvl3) => {
+                    return (
+                      <li key={item.url} className="toc-item toc-item-h3">
+                        <Lenke href={lvl3.url} className="toc-link toc-link-h3">
+                          {lvl3.title}
+                        </Lenke>
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+};
+
 const registerHeadline = (props, comp) => {
   const text = props.children.toString();
   let id = text
@@ -20,7 +67,7 @@ const registerHeadline = (props, comp) => {
 
   if (headlines.includes(id)) {
     headlines.push(id);
-    id = `${id}-${headlines.filter((hid) => hid === id).length}`;
+    id = `${id}-${headlines.filter((hid) => hid === id).length - 1}`;
   } else {
     headlines.push(id);
   }
@@ -33,6 +80,7 @@ const renderAst = new rehypeReact({
   createElement: React.createElement,
   components: {
     ...comps,
+    img: (props) => <Img {...props} />,
     h1: (props) => registerHeadline(props, Innholdstittel),
     h2: (props) => registerHeadline(props, Systemtittel),
     h3: (props) =>
@@ -53,6 +101,7 @@ const Article = ({ path, pageContext }) => {
     <>
       <div>
         <article className="section" id="main-content">
+          {pageContext.toc?.items && getToc(pageContext.toc.items)}
           {renderAst(pageContext.htmlAst)}
         </article>
         <Normaltekst className="gitLink">
