@@ -39,6 +39,9 @@ const Layout = (props) => {
           />
         )}
       </Helmet>
+      <a href="#hovedinnhold" id="skip-link">
+        Hopp til innhold
+      </a>
       <div className="mainWrapper">
         {props.path !== "/" && (
           <Header location={props.location} title={source} />

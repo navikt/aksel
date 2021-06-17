@@ -4,10 +4,11 @@ import { Link } from "gatsby";
 import { useMediaQuery } from "react-responsive";
 
 import { NAVLogo } from "../../assets/images/svg";
-import { Systemtittel } from "nav-frontend-typografi";
+import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import MainNav from "./main-nav/MainNav";
 import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
+import { Left } from "@navikt/ds-icons";
 import "./header.less";
 
 const Header = ({ location, title }) => {
@@ -55,10 +56,13 @@ const Header = ({ location, title }) => {
   return (
     <React.Fragment>
       <header className="header">
-        <a href="#hovedinnhold" id="skip-link">
-          Hopp til innhold
-        </a>
         <div className="header__content">
+          <Link to="/" className="header__home">
+            <Left />
+            <Normaltekst className="header__home_title" tag={"span"}>
+              Hjem
+            </Normaltekst>
+          </Link>
           <Link to={`/${headerlink}`} className="header__logo">
             <NAVLogo />
             <Systemtittel className="header__title" tag={headlineTag}>

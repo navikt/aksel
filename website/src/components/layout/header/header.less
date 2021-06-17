@@ -93,18 +93,30 @@
   }
 }
 
-#skip-link {
-  padding: 1rem;
-  border: 2px solid @navBla;
-  background: white;
+.header__home {
+  display: inline-flex;
+  width: fit-content;
+  color: @navMorkGra;
+  align-items: center;
+  margin-right: 1rem;
+  text-decoration: none;
+  padding: 0 1rem;
 
-  &:not(:focus) {
-    .sr-only();
+  &:hover {
+    text-decoration: underline;
   }
-
   &:focus {
-    position: absolute;
-    top: 0;
-    z-index: 1;
+    outline: none;
+    box-shadow: 0 0 0 3px #00347d;
   }
+
+  svg {
+    height: 1.75rem;
+    width: 1.75rem;
+  }
+}
+
+.header__home_title {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
 }

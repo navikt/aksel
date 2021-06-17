@@ -16,7 +16,7 @@ body {
 }
 
 .contentWrapper .mainContent.forside {
-  background-color: #f4f4f4;
+  background-color: #cce2f0;
 }
 
 .contentWrapper {
@@ -820,4 +820,20 @@ p,
 
 .gitLink {
   margin-top: 4rem;
+}
+
+#skip-link {
+  padding: 1rem;
+  border: 2px solid @navBla;
+  background: white;
+
+  &:not(:focus) {
+    .sr-only();
+  }
+
+  &:focus {
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+  }
 }
