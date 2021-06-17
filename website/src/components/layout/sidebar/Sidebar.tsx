@@ -82,13 +82,15 @@ const Sidebar = ({ location, className = "" }) => {
       className={className}
     >
       <nav aria-labelledby="left-navigation-title">
-        <Input
-          className="leftNavigation__input"
-          label="Filter"
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          autoComplete="on"
-        />
+        {location.pathname.startsWith("/designsystem") && (
+          <Input
+            className="leftNavigation__input"
+            label="Filter"
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            autoComplete="on"
+          />
+        )}
         <Systemtittel
           id="left-navigation-title"
           className="leftNavigation__title"
