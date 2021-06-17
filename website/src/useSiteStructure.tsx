@@ -32,21 +32,27 @@ const usePages = () => {
 
 export const useBreadcrumb = (location) => {
   const pages = usePages();
-  const crumb = location.pathname
-    .replace(/^\//, "")
-    .replace(/\/$/, "")
+  let crumb = location.pathname.replace(/^\//, "").replace(/\/$/, "");
+  crumb = crumb
     .split("/")
-    .slice(0, 2)
-    .map((_, i, a) => a.slice(0, i).join("/"))
+    .map((_, i, a) => a.slice(0, i + 1).join("/"))
     .map((slug) => pages.find((page) => page.slug === slug));
+
   return crumb;
 };
 
-export const useMainMenu = () =>
-  usePages().filter(
-    ({ rank, slug }) =>
-      ![null, undefined].includes(rank) && slug.split("/").length === 2
-  );
+export const useMainMenu = (location) =>
+  usePages()
+    .filter(({ slug }) => {
+      return (
+        location.pathname.startsWith(`/${slug.split("/")[0]}`) && slug !== ""
+      );
+    })
+    .sort((a, b) => {
+      if (!/^[a-zA-Z\s]+$/.test(a.title)) return 1;
+      if (!/^[a-zA-Z\s]+$/.test(b.title)) return -1;
+      return a.title.localeCompare(b.title);
+    });
 
 export const usePageMenu = (location) => {
   const pages = usePages();

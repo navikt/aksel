@@ -22,7 +22,7 @@ const Layout = (props) => {
 
   let source = startCase(props.path.split("/")[1]);
   source = source === "Designsystem" ? "Designsystemet" : source;
-  console.log(props.pageResources);
+
   return (
     <>
       <Helmet
@@ -40,7 +40,9 @@ const Layout = (props) => {
         )}
       </Helmet>
       <div className="mainWrapper">
-        <Header location={props.location} title={source} />
+        {props.path !== "/" && (
+          <Header location={props.location} title={source} />
+        )}
         {props.path.startsWith("/designsystem") && (
           <Breadcrumb location={props.location} />
         )}
@@ -52,6 +54,7 @@ const Layout = (props) => {
             id="hovedinnhold"
             className={cl("mainContent", {
               "dsportal--fullwidth": props.path === "/",
+              forside: props.path === "/",
             })}
           >
             <LayoutPicker {...props}>

@@ -41,6 +41,16 @@ const Header = ({ location, title }) => {
     title === "Designsystemet" ? "Designsystemet" : title + " - Verktøykassen";
   headerTitle = title === "" ? "Verktøykassen" : headerTitle;
 
+  const headerlink =
+    title === "Designsystemet" ? "designsystem" : title.toLowerCase();
+
+  const dsMenu = [
+    { link: "/designsystem/resources", title: "Ressurser" },
+    { link: "/designsystem/components/alertstripe", title: "Komponenter" },
+    { link: "/designsystem/patterns", title: "Mønster" },
+    { link: "/designsystem/accessibility", title: "Tilgjengelighet" },
+  ];
+
   checkViewport();
   return (
     <React.Fragment>
@@ -49,7 +59,7 @@ const Header = ({ location, title }) => {
           Hopp til innhold
         </a>
         <div className="header__content">
-          <Link to="/" className="header__logo">
+          <Link to={`/${headerlink}`} className="header__logo">
             <NAVLogo />
             <Systemtittel className="header__title" tag={headlineTag}>
               {headerTitle}
@@ -63,10 +73,15 @@ const Header = ({ location, title }) => {
             {...ariaHidden}
           />
           <div style={{ flexGrow: 1 }} />
-          {title === "Designsystemet" && <MainNav />}
+          {title === "Designsystemet" && <MainNav menu={dsMenu} />}
         </div>
       </header>
-      <MobileNav open={mobileNavOpen} toggle={toggleMobileNav} />
+      <MobileNav
+        open={mobileNavOpen}
+        toggle={toggleMobileNav}
+        location={location}
+        menu={title === "Designsystemet" && dsMenu}
+      />
     </React.Fragment>
   );
 };
