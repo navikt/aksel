@@ -99,6 +99,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Gulp-build
         run: yarn boot
+      - name: add CNAME to website
+        run: echo "design.nav.no" >> website/static/CNAME
       - name: Building Gatsby
         run: yarn build:gatsby
       - name: Building Storybook
