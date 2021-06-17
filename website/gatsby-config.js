@@ -11,6 +11,8 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-client-side-redirect`,
+    "gatsby-plugin-robots-txt",
+    `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-less`,
     "gatsby-plugin-cname",
@@ -104,6 +106,17 @@ module.exports = {
         secrets: {
           token: process.env.ACCESS_TOKEN,
         },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `NAV Designsystem`,
+        short_name: `NAV DS`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
+        icon: `src/components/assets/images/favicon.png`,
       },
     },
     {
