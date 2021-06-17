@@ -30,7 +30,8 @@ const isStyle = (path: string) => {
 const cls = (link: string, location) => {
   if (!location.pathname.startsWith("/designsystem")) {
     return classnames({
-      active: link === location.pathname,
+      active:
+        link.replace(/\//g, "-") === location.pathname.replace(/\//g, "-"),
     });
   }
   return classnames({

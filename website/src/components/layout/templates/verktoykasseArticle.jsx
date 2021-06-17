@@ -24,7 +24,11 @@ const Img = ({ src, ...rest }) => {
   const fixedPath = `https://raw.githubusercontent.com/navikt/verktoykasse-innhold/main${localPath}`;
 
   // eslint-disable-next-line jsx-a11y/alt-text
-  return <img src={isDirectPath ? src : fixedPath} {...rest} />;
+  return (
+    <span>
+      <img src={isDirectPath ? src : fixedPath} {...rest} />
+    </span>
+  );
 };
 
 // TODO: Refactor..
@@ -105,7 +109,7 @@ const Article = ({ path, pageContext }) => {
   return (
     <>
       <div>
-        <article className="section" id="main-content">
+        <article className="section article" id="main-content">
           {pageContext.toc?.items && getToc(pageContext.toc.items)}
           {renderAst(pageContext.htmlAst)}
         </article>

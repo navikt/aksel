@@ -43,9 +43,7 @@ const Layout = (props) => {
         Hopp til innhold
       </a>
       <div className="mainWrapper">
-        {props.path !== "/" && (
-          <Header location={props.location} title={source} />
-        )}
+        <Header location={props.location} title={source} />
         {props.path.startsWith("/designsystem") && (
           <Breadcrumb location={props.location} />
         )}
@@ -56,7 +54,6 @@ const Layout = (props) => {
           <main
             id="hovedinnhold"
             className={cl("mainContent", {
-              "dsportal--fullwidth": props.path === "/",
               forside: props.path === "/",
             })}
           >

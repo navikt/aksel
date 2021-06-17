@@ -20,6 +20,10 @@ const Header = ({ location, title }) => {
     query: "(max-width: 1094px)",
   });
 
+  if (location.pathname === "/") {
+    return null;
+  }
+
   const checkViewport = () => {
     if (small && !mobile) {
       setMobile(true);
