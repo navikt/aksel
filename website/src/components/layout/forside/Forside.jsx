@@ -19,8 +19,9 @@ const Forside = ({ ...props }) => (
       </div>
       <Sidetittel>Verktøykassen</Sidetittel>
       <Ingress>
-        Verktøykassen tilbyr verktøy, komponenter og retningslinjer som gir
-        teams muligheten til å komme raskt i gang med å lage rikt innhold
+        Verktøykassen er en samling ressurser fra ulike fagdisipliner, som
+        sammen hjelper oss med å skape bedre, universelt tilgjengelige og mer
+        sammenhengende brukeropplevelser i NAV.
       </Ingress>
     </div>
     <div className="card__grid">
