@@ -1,0 +1,45 @@
+
+name: Publish verktøykasse-innhold to dev
+on:
+  push:
+    branches: master
+  repository_dispatch:
+    types: [new-content]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: verktoykasse-prototype
+          fetch-depth: 0 # Required to retrieve git history
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Node-modules cache
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Install deps
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: Gulp-build
+        run: yarn boot
+      - name: Eslint and Stylelint
+        run: yarn lint
+      - name: add .env to website
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+      - name: Gatsby-build
+        run: yarn build:gatsby
+      - name: Deploy to dev gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{secrets.GIT_REPO}}
+          external_repository: navikt/verktoykasse-innhold
+          publish_dir: website/public
+          user_name: "github-actions[bot]"
+          user_email: "github-actions[bot]@users.noreply.github.com"
+          
