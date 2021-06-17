@@ -3,6 +3,7 @@ require("dotenv").config({
 });
 
 module.exports = {
+  pathPrefix: "/verktoykasse-innhold",
   siteMetadata: {
     title: `Verktøykassen NAV`,
     description: ``,
