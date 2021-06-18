@@ -185,9 +185,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           htmlAst: node.childMarkdownRemark.htmlAst,
           frontmatter: {
             ...node.childMarkdownRemark.frontmatter,
-            ingress: node.childMdx.excerpt,
+            ingress: node.childMdx?.excerpt || null,
           },
-          toc: node.childMdx.tableOfContents,
+          toc: node.childMdx?.tableOfContents || null,
         },
       });
     });
