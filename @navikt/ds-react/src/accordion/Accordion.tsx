@@ -37,7 +37,7 @@ export interface AccordionProps
   renderContentWhenClosed?: boolean;
 }
 
-const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
   (
     {
       children,
@@ -50,9 +50,15 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     },
     ref
   ) => {
-    const contentId = useRef(uuidv4());
-    const buttonId = useRef(uuidv4());
+    const [contentId, setContentId] = useState("");
+    const [buttonId, setButtonId] = useState("");
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
+
+    // Forsøk på å fikse Nextjs SSR server/client clock problem
+    useEffect(() => {
+      setContentId(() => uuidv4());
+      setButtonId(() => uuidv4());
+    }, []);
 
     useEffect(() => {
       setInternalOpen(open);
@@ -64,17 +70,17 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     return (
       <div
-        ref={ref}
         className={cl("navds-accordion", className, {
           "navds-accordion--open": internalOpen,
           "navds-accordion--closed": !internalOpen,
         })}
       >
         <button
-          id={buttonId.current}
+          ref={ref}
+          id={buttonId}
           className="navds-accordion__button"
           aria-expanded={open}
-          aria-controls={contentId.current}
+          aria-controls={contentId}
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
@@ -88,11 +94,7 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
             )}
           />
         </button>
-        <div
-          id={contentId.current}
-          role="region"
-          aria-labelledby={buttonId.current}
-        >
+        <div id={contentId} role="region" aria-labelledby={buttonId}>
           <CollapseComponent isOpened={internalOpen}>
             <div className="navds-accordion__content">{children}</div>
           </CollapseComponent>
