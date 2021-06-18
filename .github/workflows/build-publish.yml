@@ -33,6 +33,8 @@ jobs:
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
+      - name: add .env to website
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}\nENVIROMENT=HEAD" >> website/.env
       - name: Test gatsby-build
         run: yarn build:gatsby
       - name: Test chromatic
