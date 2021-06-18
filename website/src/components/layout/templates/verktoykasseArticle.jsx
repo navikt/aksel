@@ -114,7 +114,7 @@ const Article = ({ path, pageContext }) => {
         </article>
         <Normaltekst className="gitLink">
           <Lenke href={editUrl}>
-            <GithubLogo /> Rediger siden på Github
+            <GithubLogo /> Rediger siden på Github (krever innlogging)
           </Lenke>
         </Normaltekst>
       </div>
