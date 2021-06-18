@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding: 3rem 2rem 2rem 2rem;
+  padding: 4rem 2rem 2rem 2rem;
   border-radius: 8px;
   border: 2px solid var(--navds-color-gray-20);
   background-color: white;
@@ -29,6 +29,7 @@
   row-gap: 1rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  padding: 0;
 }
 
 .card__icon {
@@ -39,6 +40,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
+  flex-shrink: 0;
   background: linear-gradient(
     -52deg,
     rgba(153, 195, 255, 1) 0%,
@@ -63,7 +65,8 @@
   font-weight: 600;
 }
 
-.card:hover .card__title {
+.card:hover .card__title,
+.card:focus .card__title {
   text-decoration: underline;
 }
 

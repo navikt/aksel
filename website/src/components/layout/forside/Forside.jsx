@@ -19,9 +19,9 @@ const Forside = ({ ...props }) => (
       </div>
       <Sidetittel>Verktøykassen</Sidetittel>
       <Ingress>
-        Verktøykassen er en samling ressurser fra ulike fagdisipliner, som
-        sammen hjelper oss med å skape bedre, universelt tilgjengelige og mer
-        sammenhengende brukeropplevelser i NAV.
+        En samling ressurser fra ulike fagdisipliner, som sammen hjelper oss med
+        å skape bedre, universelt tilgjengelige og sammenhengende produkter i
+        NAV.
       </Ingress>
     </div>
 
@@ -29,7 +29,7 @@ const Forside = ({ ...props }) => (
       <ol className="card__grid">
         <li>
           <Card
-            content="Consectetur ad non dolore ipsum velit aute consectetur consequat ad."
+            content="Brand og visuell profil basert på vår visjon og våre verdier."
             title="Brand"
             link="https://identitet.nav.no/"
             icon={<Star focusable="false" />}
@@ -37,7 +37,7 @@ const Forside = ({ ...props }) => (
         </li>
         <li>
           <Card
-            content="Elit quis proident aliquip sunt fugiat."
+            content="Gjør det enklere å lage produkter i NAV."
             title="Designsystem"
             link="/designsystem"
             icon={
@@ -47,7 +47,7 @@ const Forside = ({ ...props }) => (
         </li>
         <li>
           <Card
-            content="Tjenester til befolkningen må fungere for alle som trenger dem."
+            content="Tjenester til brukerne må fungere for alle."
             title="Universell utforming"
             link="https://navikt.github.io/uu/"
             icon={<HandsHeart focusable="false" />}
@@ -55,7 +55,7 @@ const Forside = ({ ...props }) => (
         </li>
         <li>
           <Card
-            content="Ad minim id nulla labore cillum laborum non ipsum incididunt in eiusmod."
+            content="Vi gjør innholdsarbeidet åpent og tidlig tilgjengelig."
             title="God praksis"
             link="/god-praksis"
             icon={<Like focusable="false" />}
