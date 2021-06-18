@@ -100,7 +100,6 @@ const renderAst = new rehypeReact({
 }).Compiler;
 
 const Article = ({ path, pageContext }) => {
-  /* console.log(pageContext); */
   headlines = [];
 
   const editPath = path.endsWith("/") ? path + "readme" : path;

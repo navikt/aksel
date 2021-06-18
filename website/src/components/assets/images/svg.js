@@ -54,6 +54,8 @@ export const NAVLogoDark = ({ className }) => (
     height="57"
     viewBox="0 0 269 169"
     focusable="false"
+    aria-label="Nav logo mørk versjon"
+    role="img"
   >
     <defs>
       <path d="M22.407 43.417V.687H.564v42.73h21.843z" />

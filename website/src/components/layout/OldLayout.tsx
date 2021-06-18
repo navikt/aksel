@@ -39,7 +39,7 @@ const Layout = (props) => {
           />
         )}
       </Helmet>
-      <a href="#hovedinnhold" id="skip-link">
+      <a href="#hovedinnhold" tab-index={-1} id="skip-link">
         Hopp til innhold
       </a>
       <div className="mainWrapper">

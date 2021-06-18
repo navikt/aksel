@@ -24,32 +24,45 @@ const Forside = ({ ...props }) => (
         sammenhengende brukeropplevelser i NAV.
       </Ingress>
     </div>
-    <div className="card__grid">
-      <Card
-        content="Consectetur ad non dolore ipsum velit aute consectetur consequat ad."
-        title="Brand"
-        link="https://identitet.nav.no/"
-        icon={<Star />}
-      />
-      <Card
-        content="Elit quis proident aliquip sunt fugiat."
-        title="Designsystem"
-        link="/designsystem"
-        icon={<Facilitet className="icon-facilitet--align" />}
-      />
-      <Card
-        content="Velit velit dolor ea eu pariatur veniam Lorem ex sit reprehenderit."
-        title="Universell utforming"
-        link="https://navikt.github.io/uu/"
-        icon={<HandsHeart />}
-      />
-      <Card
-        content="Ad minim id nulla labore cillum laborum non ipsum incididunt in eiusmod."
-        title="God praksis"
-        link="/god-praksis"
-        icon={<Like />}
-      />
-    </div>
+
+    <nav className="card__wrapper" aria-label="Hovedmeny">
+      <ol className="card__grid">
+        <li>
+          <Card
+            content="Consectetur ad non dolore ipsum velit aute consectetur consequat ad."
+            title="Brand"
+            link="https://identitet.nav.no/"
+            icon={<Star focusable="false" />}
+          />
+        </li>
+        <li>
+          <Card
+            content="Elit quis proident aliquip sunt fugiat."
+            title="Designsystem"
+            link="/designsystem"
+            icon={
+              <Facilitet focusable="false" className="icon-facilitet--align" />
+            }
+          />
+        </li>
+        <li>
+          <Card
+            content="Tjenester til befolkningen må fungere for alle som trenger dem."
+            title="Universell utforming"
+            link="https://navikt.github.io/uu/"
+            icon={<HandsHeart focusable="false" />}
+          />
+        </li>
+        <li>
+          <Card
+            content="Ad minim id nulla labore cillum laborum non ipsum incididunt in eiusmod."
+            title="God praksis"
+            link="/god-praksis"
+            icon={<Like focusable="false" />}
+          />
+        </li>
+      </ol>
+    </nav>
   </div>
 );
 
