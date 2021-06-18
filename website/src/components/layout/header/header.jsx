@@ -8,7 +8,7 @@ import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import MainNav from "./main-nav/MainNav";
 import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
-import { Left, Back } from "@navikt/ds-icons";
+import { Back } from "@navikt/ds-icons";
 import "./header.less";
 
 const Header = ({ location, title }) => {

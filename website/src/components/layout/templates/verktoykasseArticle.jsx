@@ -104,7 +104,7 @@ const Article = ({ path, pageContext }) => {
   headlines = [];
 
   const editPath = path.endsWith("/") ? path + "readme" : path;
-  const editUrl = `https://www.github.com/navikt/verktoykasse-innhold/edit/main${editPath}.md`;
+  const editUrl = `https://www.github.com/navikt/verktoykasse-innhold/edit/dev${editPath}.md`;
 
   return (
     <>
