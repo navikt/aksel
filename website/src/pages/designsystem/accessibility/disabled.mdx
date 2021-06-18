@@ -1,0 +1,101 @@
+---
+title: "HTML: Disabled"
+ingress: "Disabled attributten gir oss muligheten til å hindre brukeren i å påvirke diverse HTML-Elementer som fks: input og button, men på bekostning av UX og UU."
+rank: 4
+---
+
+import { Ingress, Undertittel } from "nav-frontend-typografi";
+import {
+  Input,
+  Radio,
+  RadioGruppe,
+  Feiloppsummering,
+} from "nav-frontend-skjema";
+import Lenkepanel from "nav-frontend-lenkepanel";
+import { DoDont, Do, Dont } from "../../../components/do-dont/DoDont";
+import Hjelpetekst from "nav-frontend-hjelpetekst";
+import { Knapp } from "nav-frontend-knapper";
+
+# Bruk av Disabled-attributtet
+
+<Ingress>
+  Disabled attributten gir oss muligheten til å hindre brukeren i å påvirke
+  diverse HTML-Elementer som fks: input og button, men på bekostning av UX og
+  UU.{" "}
+</Ingress>
+
+## Hvorfor unngå disable attributten?
+
+Bruk av `disabled` kan virke som en veldig grei måte å hindre brukeren tilgang til forskjellige elementer, men glemmer ofte hva vi da krever av brukeren.
+
+- Ikke alle brukerene vet at elementet <i><u>kan</u></i> være deaktivert, som da fører til forvirring.
+- Deaktiverte elementer har ofte dårlig kontrast.
+- Man forventer at brukeren skal vite hvorfor de ikke kan bruke elementet, men dette er ikke alltid tilfellet.
+- Deaktiverte elementer uten mulighet til fokus vil gjøre det vanskelig for skjermlesere å få all informasjonen den trenger.
+
+## Alternativ
+
+Så hva kan man bruke som erstattning for skjema-elementer og knapper da?
+
+Et alternativ er å fjerne elementet helt fra siden hvis brukeren ikke skal kunne ta det i bruk.
+Her må man da også være sikker på at brukeren ikke vil "savne" dette elementet og da blir forvirret når det ikke er å finne på siden, eventuelt kan man også fortelle brukeren hvorfor muligheten ikke er der.
+
+<br />
+
+<DoDont className="placeholders__dodont">
+  <Do>
+    <RadioGruppe
+      legend="Når ønsker du å reservere bord?"
+      description="Lunsjservering er desverre ikke tilgjengelig grunnet ombygging av resturant."
+    >
+      <Radio label={"Frokost"} name="tid" />
+      <Radio label={"Middag"} name="tid" />
+    </RadioGruppe>
+  </Do>
+  <Dont>
+    <RadioGruppe legend="Når ønsker du å reservere bord?">
+      <Radio label={"Frokost"} name="tid" />
+      <Radio label={"Lunsj"} name="tid" disabled />
+      <Radio label={"Middag"} name="tid" />
+    </RadioGruppe>
+  </Dont>
+</DoDont>
+
+<br />
+
+<br />
+
+<DoDont className="placeholders__dodont">
+  <Do>
+    <Knapp className="doButton" type="hoved">
+      Neste
+    </Knapp>
+    <Feiloppsummering
+      className="botMargin"
+      tittel="For å gå videre må du rette opp følgende:"
+      feil={[
+        { skjemaelementId: "1", feilmelding: "Du må oppgi et navn" },
+        { skjemaelementId: "2", feilmelding: "Du må oppgi en adresse" },
+      ]}
+    />
+  </Do>
+  <Dont>
+    <Knapp className="botMargin" type="hoved" disabled>
+      Neste
+    </Knapp>
+  </Dont>
+</DoDont>
+
+<br />
+
+## Mer om disabled-attributtet
+
+<Lenkepanel
+  className="resource-link"
+  href="https://uxdesign.cc/why-you-shouldnt-include-disabled-interaction-elements-in-your-design-system-76a2d4307faf"
+  border
+>
+  <Undertittel className="lenkepanel__heading">
+    Artikkel om bruk av `disabled`
+  </Undertittel>
+</Lenkepanel>

@@ -1,11 +1,16 @@
+require("dotenv").config({
+  path: ".env",
+});
+
 module.exports = {
   siteMetadata: {
-    title: `Designsystemet NAV`,
+    title: `Verktøykassen NAV`,
     description: ``,
     author: `@navikt`,
     siteUrl: "https://design.nav.no/",
   },
   plugins: [
+    `gatsby-plugin-client-side-redirect`,
     "gatsby-plugin-robots-txt",
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-react-helmet`,
@@ -26,17 +31,6 @@ module.exports = {
             },
           ],
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `NAV Designsystem`,
-        short_name: `NAV DS`,
-        start_url: `/`,
-        background_color: `#fff`,
-        theme_color: `#fff`,
-        icon: `src/components/assets/images/favicon.png`,
       },
     },
     {
@@ -102,23 +96,32 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-amplitude-analytics`,
+      resolve: `from-git-fix`,
       options: {
-        apiKey: "default",
-        respectDNT: true,
-        eventTypes: {
-          pageView: "sidevisning",
-        },
-        amplitudeConfig: {
-          apiEndpoint: "amplitude.nav.no/collect-auto",
-          saveEvents: false,
-          includeUtm: true,
-          includeReferrer: true,
-          platform: "https://design.nav.no/",
+        repository: "verktoykasse-innhold",
+        tree: true,
+        releases: false,
+        user: "navikt",
+        branch: process.env.BRANCH,
+        secrets: {
+          token: process.env.ACCESS_TOKEN,
         },
       },
     },
-
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `NAV Designsystem`,
+        short_name: `NAV DS`,
+        start_url: `/`,
+        background_color: `#fff`,
+        theme_color: `#fff`,
+        icon: `src/components/assets/images/favicon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,

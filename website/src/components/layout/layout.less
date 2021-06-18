@@ -15,6 +15,11 @@ body {
   flex-direction: column;
 }
 
+.contentWrapper .mainContent.forside {
+  background-color: #f7f7f7;
+  min-height: 100vh;
+}
+
 .contentWrapper {
   display: flex;
   flex: 1;
@@ -816,4 +821,31 @@ p,
 
 .gitLink {
   margin-top: 4rem;
+}
+
+#skip-link {
+  padding: 1rem;
+  border: 2px solid @navBla;
+  background: white;
+
+  &:not(:focus) {
+    .sr-only();
+  }
+
+  &:focus {
+    position: absolute;
+    top: 0;
+    z-index: 9999;
+  }
+}
+
+.article img {
+  display: block;
+  max-width: 100%;
+  padding: 0.25rem;
+  border: 2px solid transparent;
+}
+
+.article a:focus img {
+  border: 2px solid #00347d;
 }

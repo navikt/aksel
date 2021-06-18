@@ -1,0 +1,100 @@
+---
+title: "Start nytt prosjekt"
+rank: 0
+---
+
+import { Ingress, Undertittel } from "nav-frontend-typografi";
+import { EtikettFokus } from "nav-frontend-etiketter";
+import Lenkepanel, { LenkepanelBase } from "nav-frontend-lenkepanel";
+import Alertstripe from "nav-frontend-alertstriper";
+import Lenke from "nav-frontend-lenker";
+import Panel from "nav-frontend-paneler";
+import {
+  NAVLogoCircle,
+  SketchLogo,
+  FigmaIcon,
+  ZeplinLogo,
+  GithubLogo,
+} from "../../../components/assets/images/svg";
+
+# Start nytt prosjekt
+
+<Ingress>
+  Denne siden er ment å være til hjelp for de som trenger litt veiledning til å
+  komme i gang med nye prosjekter i NAV.
+</Ingress>
+
+## For designere
+
+### Figma-ressurser
+
+<Lenkepanel
+  className="resource-link"
+  href="https://www.figma.com/file/kze2fE59WLaATAS9XAM7Es/%F0%9F%92%A0NAV-UI-biblioteket-2.1-Figma"
+  border
+>
+  <FigmaIcon />
+  UI-bibliotek
+</Lenkepanel>
+<Lenkepanel
+  className="resource-link"
+  href="https://www.figma.com/file/Fqn33tUPirzG8jLsI7kpc4/%F0%9F%92%A0NAV-illustrasjonsbiblioteket-2.1-Figma"
+  border
+>
+  <FigmaIcon />
+  Illustrasjons&shy;bibliotek
+</Lenkepanel>
+<Lenkepanel
+  className="resource-link"
+  href="https://www.figma.com/file/UmEVH3pZ71uJPsSz9ilP3Y/%F0%9F%92%A0NAV-ikoner-2.5-Figma"
+  border
+>
+  <FigmaIcon />
+  Ikon&shy;bibliotek
+</Lenkepanel>
+<Lenkepanel
+  className="resource-link"
+  href="https://www.figma.com/file/3AjAxeQP4uMFgqSazKXxOh/NAV-Ikonbiblioteket-Streamline"
+  border
+>
+  <FigmaIcon />
+  Gammelt ikon&shy;bibliotek (Streamline, kun tilgjengelig for interne)
+</Lenkepanel>
+
+## For utviklere
+
+### Eksempel-applikasjoner
+
+Her er noen eksempler på forskjellige oppsett med frontend-rammeverket.
+
+<Lenkepanel
+  className="resource-link"
+  href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/cra"
+  border
+>
+  <GithubLogo />
+  Create React App
+</Lenkepanel>
+<Lenkepanel
+  className="resource-link"
+  href="https://github.com/navikt/nav-frontend-moduler/tree/master/examples/webpack"
+  border
+>
+  <GithubLogo />
+  Webpack
+</Lenkepanel>
+
+Du finner også en mengde [åpne frontend-prosjekter under NAVIKT-gruppen på Github](https://github.com/navikt?utf8=✓&q=frontend&type=&language=).
+
+### Ikoner
+
+Alle våre streamline-ikoner ligger i et lukket Github-repo her:
+
+<Lenkepanel
+  className="resource-link"
+  href="https://github.com/navikt/nav-frontend-ikoner-backend/tree/master/src/main/resources/static/api/icons"
+  border
+>
+  <GithubLogo />
+  Streamline-ikoner
+</Lenkepanel>

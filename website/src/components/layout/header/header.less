@@ -9,7 +9,7 @@
 
   &__content {
     top: 4px;
-    padding: 0.5rem 2rem 0.5rem 2rem;
+    padding: 0.5rem 2rem 0.5rem 1rem;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -93,18 +93,34 @@
   }
 }
 
-#skip-link {
-  padding: 1rem;
-  border: 2px solid @navBla;
-  background: white;
+.header__home {
+  display: inline-flex;
+  width: fit-content;
+  color: @navMorkGra;
+  align-items: center;
+  margin-right: 1rem;
+  text-decoration: none;
+  padding: 0 1rem;
 
-  &:not(:focus) {
-    .sr-only();
+  &:hover {
+    text-decoration: underline;
+
+    svg {
+      transform: translateX(-0.25rem);
+    }
   }
-
   &:focus {
-    position: absolute;
-    top: 0;
-    z-index: 1;
+    outline: none;
+    box-shadow: 0 0 0 3px #00347d;
   }
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.header__home_title {
+  font-size: 1.25rem;
+  margin-left: 0.5rem;
 }

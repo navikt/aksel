@@ -1,4 +1,7 @@
+const path = require(`path`);
+const redirects = require("./redirects");
 let packages = {};
+const dsUrl = "/designsystem";
 
 const getDependencyEdgesFromPackages = () =>
   Object.keys(packages)
@@ -76,10 +79,13 @@ exports.onCreatePage = ({ page, actions }) => {
     deletePage(page);
   };
   if (compOverview !== null) {
-    makePage(`/components/${compOverview[2].toLowerCase()}`, compOverview[2]);
+    makePage(
+      `${dsUrl}/components/${compOverview[2].toLowerCase()}`,
+      compOverview[2]
+    );
 
     makePage(
-      `/components/${compOverview[2].toLowerCase()}/overview`,
+      `${dsUrl}/components/${compOverview[2].toLowerCase()}/overview`,
       "Oversikt",
       0
     );
@@ -91,7 +97,7 @@ exports.onCreatePage = ({ page, actions }) => {
     scan(`nav-frontend-${source}`);
 
     createPage({
-      path: `/components/${compOverview[2].toLowerCase()}/technical`,
+      path: `${dsUrl}/components/${compOverview[2].toLowerCase()}/technical`,
       context: {
         frontmatter: { title: "Teknisk", rank: 1 },
         source: page.path,
@@ -112,7 +118,7 @@ exports.onCreatePage = ({ page, actions }) => {
   }
   if (compAcce !== null) {
     makePage(
-      `/components/${compAcce[2].toLowerCase()}/accessibility`,
+      `${dsUrl}/components/${compAcce[2].toLowerCase()}/accessibility`,
       "Tilgjengelighet",
       2
     );
@@ -120,9 +126,75 @@ exports.onCreatePage = ({ page, actions }) => {
 
   if (compIngress !== null) {
     makePage(
-      `/components/${compIngress[2].toLowerCase()}/ingress`,
+      `${dsUrl}/components/${compIngress[2].toLowerCase()}/ingress`,
       "Ingress",
       3
     );
   }
+};
+
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage, createRedirect } = actions;
+
+  redirects.forEach((path) => {
+    createRedirect({
+      fromPath: `${path}`,
+      toPath: `/designsystem${path}`,
+      isPermanent: true,
+    });
+  });
+
+  const result = await graphql(`
+    {
+      allGithubFile(filter: { relativeDirectory: { nin: "." } }) {
+        edges {
+          node {
+            base
+            path
+            relativeDirectory
+            childMdx {
+              tableOfContents(maxDepth: 3)
+              excerpt
+            }
+            childMarkdownRemark {
+              htmlAst
+              frontmatter {
+                title
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+  result.data.allGithubFile.edges
+    .filter(({ node }) => node.path.endsWith(".md"))
+    .forEach(({ node }) => {
+      const parsedPath = `/${node.path.replace(".md", "").replace(" ", "-")}`
+        .toLowerCase()
+        .replace("readme", "");
+      console.log(parsedPath);
+
+      createPage({
+        path: parsedPath,
+        component: path.resolve(
+          `./src/components/layout/templates/verktoykasseArticle.jsx`
+        ),
+        context: {
+          parentDir: node.relativeDirectory,
+          htmlAst: node.childMarkdownRemark.htmlAst,
+          frontmatter: {
+            ...node.childMarkdownRemark.frontmatter,
+            ingress: node.childMdx?.excerpt || null,
+          },
+          toc: node.childMdx?.tableOfContents || null,
+        },
+      });
+    });
+};
+
+exports.onPostBuild = ({ store, reporter }) => {
+  const { redirects } = store.getState();
+  reporter.info("Finished building site, here are all the redirects: ");
+  console.log(redirects);
 };
