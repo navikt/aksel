@@ -36,7 +36,7 @@ jobs:
       - name: add access token to .env
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
-        run: echo "BRANCH=dev" >> website/.env
+        run: echo "BRANCH=HEAD" >> website/.env
       - name: Test gatsby-build
         run: yarn build:gatsby
       - name: Test chromatic
@@ -108,7 +108,7 @@ jobs:
       - name: add access token to .env
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
-        run: echo "BRANCH=dev" >> website/.env
+        run: echo "BRANCH=HEAD" >> website/.env
       - name: Building Gatsby
         run: yarn build:gatsby
       - name: Building Storybook
