@@ -23,6 +23,7 @@ const Layout = (props) => {
   let source = startCase(props.path.split("/")[1]);
   source = source === "Designsystem" ? "Designsystemet" : source;
 
+  console.log(props);
   return (
     <>
       <Helmet
@@ -54,7 +55,7 @@ const Layout = (props) => {
           <main
             id="hovedinnhold"
             className={cl("mainContent", {
-              forside: props.path === "/",
+              forside: props.location.pathname === "/",
             })}
           >
             <LayoutPicker {...props}>
