@@ -9,7 +9,7 @@
 
   &__content {
     top: 4px;
-    padding: 0.5rem 2rem 0.5rem 2rem;
+    padding: 0.5rem 2rem 0.5rem 1rem;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -104,6 +104,10 @@
 
   &:hover {
     text-decoration: underline;
+
+    svg {
+      transform: translateX(-0.25rem);
+    }
   }
   &:focus {
     outline: none;
@@ -111,8 +115,8 @@
   }
 
   svg {
-    height: 1.75rem;
-    width: 1.75rem;
+    height: 1.5rem;
+    width: 1.5rem;
   }
 }
 

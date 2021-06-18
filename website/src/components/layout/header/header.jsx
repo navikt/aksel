@@ -8,7 +8,7 @@ import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import MainNav from "./main-nav/MainNav";
 import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
-import { Left } from "@navikt/ds-icons";
+import { Left, Back } from "@navikt/ds-icons";
 import "./header.less";
 
 const Header = ({ location, title }) => {
@@ -61,7 +61,7 @@ const Header = ({ location, title }) => {
       <header className="header">
         <div className="header__content">
           <Link to="/" className="header__home">
-            <Left />
+            <Back />
             <Normaltekst className="header__home_title" tag={"span"}>
               Hjem
             </Normaltekst>
