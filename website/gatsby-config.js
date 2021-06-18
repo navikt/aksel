@@ -102,7 +102,7 @@ module.exports = {
         tree: true,
         releases: false,
         user: "navikt",
-        branch: process.env.ENVIROMENT,
+        branch: process.env.BRANCH,
         secrets: {
           token: process.env.ACCESS_TOKEN,
         },
