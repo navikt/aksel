@@ -14,7 +14,7 @@ const GetStartedPage = ({ ...props }) => (
           {props.children}
         </Link>
       )}
-      href="/components"
+      href="/designsystem/components"
       border
     >
       <div>
@@ -28,7 +28,7 @@ const GetStartedPage = ({ ...props }) => (
           {props.children}
         </Link>
       )}
-      href="/resources/icons"
+      href="/designsystem/resources/icons"
       border
     >
       <div>
@@ -42,7 +42,7 @@ const GetStartedPage = ({ ...props }) => (
           {props.children}
         </Link>
       )}
-      href="/resources/new-project"
+      href="/designsystem/resources/new-project"
       border
     >
       <div>

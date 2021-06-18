@@ -1,4 +1,3 @@
-
 name: Publish verktøykasse-innhold to dev
 
 on:
@@ -6,9 +5,8 @@ on:
     branches: verktoykasse-prototype
   repository_dispatch:
     types: [new-content]
-  workflow_dispatch: 
+  workflow_dispatch:
 
-    
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -33,8 +31,10 @@ jobs:
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
-      - name: add .env to website
-        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}\nENVIROMENT=dev" >> website/.env
+      - name: add access token to .env
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+      - name: add branch token to .env
+        run: echo "BRANCH=dev" >> website/.env
       - name: Gatsby-build
         run: yarn build:gatsby
       - name: Deploy to dev gh-pages
@@ -45,4 +45,3 @@ jobs:
           publish_dir: website/public
           user_name: "github-actions[bot]"
           user_email: "github-actions[bot]@users.noreply.github.com"
-          

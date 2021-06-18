@@ -4,13 +4,14 @@ import { Link } from "gatsby";
 import { useMediaQuery } from "react-responsive";
 
 import { NAVLogo } from "../../assets/images/svg";
-import { Systemtittel } from "nav-frontend-typografi";
+import { Systemtittel, Normaltekst } from "nav-frontend-typografi";
 import MainNav from "./main-nav/MainNav";
 import MobileNav from "./mobile-nav/MobileNav";
 import MobileNavToggle from "./mobile-nav-toggle/MobileNavToggle";
+import { Back } from "@navikt/ds-icons";
 import "./header.less";
 
-const Header = ({ location }) => {
+const Header = ({ location, title }) => {
   const [mobile, setMobile] = useState(false);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const toggleBtn = useRef();
@@ -18,6 +19,10 @@ const Header = ({ location }) => {
   const small = useMediaQuery({
     query: "(max-width: 1094px)",
   });
+
+  if (location.pathname === "/") {
+    return null;
+  }
 
   const checkViewport = () => {
     if (small && !mobile) {
@@ -37,18 +42,37 @@ const Header = ({ location }) => {
   const ariaHidden = mobile ? { "aria-hidden": !!mobileNavOpen } : undefined;
   const headlineTag = !!location.pathname.match(/\/.*?\/\S/) ? "h2" : "h1";
 
+  let headerTitle = title === "Designsystemet" ? "Designsystemet" : title;
+  headerTitle = title === "" ? "Verktøykassen" : headerTitle;
+
+  const headerlink =
+    title === "Designsystemet" ? "designsystem" : title.toLowerCase();
+
+  const dsMenu = [
+    { link: "/designsystem/resources", title: "Ressurser" },
+    { link: "/designsystem/components/alertstripe", title: "Komponenter" },
+    { link: "/designsystem/patterns", title: "Mønster" },
+    { link: "/designsystem/accessibility", title: "Tilgjengelighet" },
+  ];
+
   checkViewport();
   return (
     <React.Fragment>
       <header className="header">
-        <a href="#hovedinnhold" id="skip-link">
-          Hopp til innhold
-        </a>
         <div className="header__content">
-          <Link to="/" className="header__logo">
+          <Link to="/" className="header__home">
+            <Back />
+            <Normaltekst className="header__home_title" tag={"span"}>
+              Hjem
+            </Normaltekst>
+          </Link>
+          <Link
+            to={`/${headerlink.replace(" ", "-")}`}
+            className="header__logo"
+          >
             <NAVLogo />
             <Systemtittel className="header__title" tag={headlineTag}>
-              Designsystemet
+              {headerTitle}
             </Systemtittel>
           </Link>
           <MobileNavToggle
@@ -59,10 +83,15 @@ const Header = ({ location }) => {
             {...ariaHidden}
           />
           <div style={{ flexGrow: 1 }} />
-          <MainNav />
+          {title === "Designsystemet" && <MainNav menu={dsMenu} />}
         </div>
       </header>
-      <MobileNav open={mobileNavOpen} toggle={toggleMobileNav} />
+      <MobileNav
+        open={mobileNavOpen}
+        toggle={toggleMobileNav}
+        location={location}
+        menu={dsMenu}
+      />
     </React.Fragment>
   );
 };

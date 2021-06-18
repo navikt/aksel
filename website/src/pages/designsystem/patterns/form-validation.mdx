@@ -1,0 +1,39 @@
+---
+title: Skjemavalidering
+rank: 0
+---
+
+import { Ingress } from "nav-frontend-typografi";
+import Alertstripe from "nav-frontend-alertstriper";
+import Example from "../../../components/example/Example";
+import FormValidationExample from "../../../components/example-solutions/FormValidationExample";
+
+# Skjemavalidering
+
+<Ingress>
+  Dette mønsteret skal demonstrere reglene for skjema-validering.
+</Ingress>
+
+## Regler
+
+- Kravene for å fylle ut skjemaet riktig skal tydelig fremgå av skjemaet uten at brukeren trenger å få noen feilmeldinger fra valideringen for å forstå dette (retningslinjer for dette er [under arbeid](https://github.com/navikt/Designsystemet/issues/135))
+- Validering per felt skal ikke skje før etter første `submit`-forsøk, deretter på `change`
+- Hvis skjemaet har feil ved `submit` skal [feiloppsummeringsboks](/components/feiloppsummering) med liste over alle feil vises nederst i skjemaet, men over submit-knappen
+- Feiloppsummeringsboks skal automatisk få `fokus` når den vises
+- Feil i feiloppsummeringsboks skal være [lenker](/components/lenke) til det feltet feilen gjelder
+- Feil i feiloppsummeringsboks forsvinner etterhvert som de blir utbedret
+- Etter at alle feil er blitt utbedret, må det et nytt `submit`-forsøk til for at nye feil igjen skal vises i feiloppsummeringen
+- Husk at obligatoriske felt må markeres tydelig. I NAV er stort sett alt vi spør etter obligatoriske spørsmål, så vi markerer som regel heller frivillige felt (for eksempel med "frivillig" i selve labelen til feltet). Uansett om vi markerer obligatoriske felt eller frivillige, må vi gi informasjon om dette i begynnelsen av skjemaet. For eksempel ved å si "Vi spør stort sett bare om informasjon som er nødvendig for å behandle saken din. Det vil si alle felt er i utgangspunkt påkrevde og må fylles ut. Frivillige felt er markert med "frivillig"."
+
+<br />
+
+<Alertstripe type="info">
+  Skjema som bare har ett skjemafelt (f.eks. søkefelt eller skjema fordelt over
+  flere sider/steg) er unntatt disse reglene.
+</Alertstripe>
+
+## Live eksempel
+
+<Example>
+  <FormValidationExample />
+</Example>
