@@ -34,7 +34,7 @@ jobs:
       - name: Eslint and Stylelint
         run: yarn lint
       - name: add .env to website
-        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}\nENVIROMENT=dev" >> website/.env
       - name: Gatsby-build
         run: yarn build:gatsby
       - name: Deploy to dev gh-pages

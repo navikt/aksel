@@ -103,6 +103,8 @@ jobs:
         run: yarn boot
       - name: add CNAME to website
         run: echo "design.nav.no" >> website/static/CNAME
+      - name: add .env to website
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}\nENVIROMENT=HEAD" >> website/.env
       - name: Building Gatsby
         run: yarn build:gatsby
       - name: Building Storybook
