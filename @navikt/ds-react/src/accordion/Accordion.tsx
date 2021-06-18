@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
