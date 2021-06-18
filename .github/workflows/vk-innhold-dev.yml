@@ -3,7 +3,7 @@ name: Publish verktøykasse-innhold to dev
 
 on:
   push:
-    branches: master
+    branches: verktoykasse-prototype
   repository_dispatch:
     types: [new-content]
   workflow_dispatch: 
