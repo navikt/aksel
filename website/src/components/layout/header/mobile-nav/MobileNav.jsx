@@ -108,7 +108,7 @@ const MobileNav = ({ menu, location, ...props }) => {
                 className="github"
               >
                 <GithubLogo />
-                Rediger innhold
+                Rediger innhold (krever innlogging)
               </a>
             )}
           </li>
