@@ -8,6 +8,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -103,8 +104,6 @@ jobs:
         run: yarn install
       - name: Gulp-build
         run: yarn boot
-      - name: add CNAME to website
-        run: echo "design.nav.no" >> website/static/CNAME
       - name: add access token to .env
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
