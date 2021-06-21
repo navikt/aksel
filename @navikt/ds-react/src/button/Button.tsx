@@ -19,7 +19,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Reduces internal padding for component
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "m" | "s";
   /**
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
    * @default false
@@ -28,7 +28,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", className, size = "medium", ...rest }, ref) => (
+  ({ variant = "primary", className, size = "m", ...rest }, ref) => (
     <button
       ref={ref}
       className={cl(
