@@ -10,7 +10,7 @@
   justify-content: start;
 }
 
-.navds-alert--small {
+.navds-alert--s {
   border-radius: 0;
   padding: var(--navds-spacing-2) var(--navds-spacing-4);
 }

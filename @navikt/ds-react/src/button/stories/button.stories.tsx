@@ -62,7 +62,7 @@ export const All = () => {
       <h2>Small</h2>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small">
+          <Button key={variant} variant={variant} size="s">
             {variant}
           </Button>
         ))}

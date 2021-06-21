@@ -25,7 +25,7 @@ export const All = () => {
       <h2>Small</h2>
       <div>
         {variants.map((variant) => (
-          <Alert key={variant} variant={variant} size="small">
+          <Alert key={variant} variant={variant} size="s">
             {Array(8).fill(`${variant} content`).join(" ")}
           </Alert>
         ))}
