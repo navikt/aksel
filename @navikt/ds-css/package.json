@@ -21,7 +21,7 @@
     "watch-css": "postcss -w --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^0.3.2",
+    "@navikt/ds-tokens": "^0.4.0",
     "normalize.css": "^8.0.1",
     "postcss": "^8.2.7",
     "postcss-cli": "^8.3.1",
