@@ -7,73 +7,64 @@ export default {
   component: BodyLong,
 };
 
-export const TypoMedSpacing = () => <TypoMal spacing={true} />;
-export const TypoUtenSpacing = () => <TypoMal spacing={false} />;
+const lorem = () => (
+  <>
+    Veniam consequat cillum pariatur officia duis aute labore anim labore.
+    Pariatur ad duis do nulla.
+  </>
+);
 
-const TypoMal = ({ ...rest }) => {
-  const lorem = (text) => (
-    <>
-      {text} <br /> Veniam consequat cillum pariatur officia duis aute labore
-      anim labore. Pariatur ad duis do nulla.
-    </>
-  );
-  return (
-    <div
-      className="typo-story"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <div>
-        <Title {...rest} level={1} size="2xl">
-          {lorem("Title 2xl")}
-        </Title>
-        <Title {...rest} level={2} size="xl">
-          {lorem("Title xl")}
-        </Title>
-        <Title {...rest} level={3} size="l">
-          {lorem("Title l")}
-        </Title>
-        <Title {...rest} level={4} size="m">
-          {lorem("Title m")}
-        </Title>
-        <Title {...rest} level={5} size="s">
-          {lorem("Title s")}
-        </Title>
-      </div>
-      <div>
-        <Ingress {...rest}>{lorem("Ingress")}</Ingress>
-      </div>
-      <div>
-        <BodyLong {...rest}>{lorem("BodyLong")}</BodyLong>
-        <BodyLong {...rest} size="s">
-          {lorem("BodyLong small")}
-        </BodyLong>
-      </div>
-      <div>
-        <BodyShort component="span" {...rest} {...rest}>
-          {lorem("BodyShort")}
-        </BodyShort>
-        <BodyShort {...rest} size="s">
-          {lorem("BodyShort small")}
-        </BodyShort>
-      </div>
-      <div>
-        <Label {...rest}>{lorem("Label")}</Label>
-        <Label {...rest} size="s">
-          {lorem("Label small")}
-        </Label>
-      </div>
-      <div>
-        <Detail {...rest}>{lorem("Detail")}</Detail>
-        <Detail {...rest} size="s">
-          {lorem("Detail small")}
-        </Detail>
-      </div>
-    </div>
-  );
-};
+const TitleTemplate = ({ level, size, spacing }) => (
+  <Title spacing={spacing} size={size} level={level}>
+    {lorem()}
+  </Title>
+);
+
+export const TitleStory = TitleTemplate.bind({});
+TitleStory.args = { level: 1, size: "2xl", spacing: false };
+
+const IngressTemplate = ({ spacing }) => (
+  <Ingress spacing={spacing}>{lorem()}</Ingress>
+);
+
+export const IngressStory = IngressTemplate.bind({});
+IngressStory.args = { spacing: false };
+
+const BodyLongTemplate = ({ spacing, size }) => (
+  <BodyLong size={size} spacing={spacing}>
+    {lorem()}
+  </BodyLong>
+);
+
+export const BodyLongStory = BodyLongTemplate.bind({});
+BodyLongStory.args = { spacing: false, size: "m" };
+
+const BodyShortTemplate = ({ spacing, size }) => (
+  <BodyShort size={size} spacing={spacing}>
+    {lorem()}
+  </BodyShort>
+);
+
+export const BodyShortStory = BodyShortTemplate.bind({});
+BodyShortStory.args = { spacing: false, size: "m" };
+
+const LabelTemplate = ({ spacing, size }) => (
+  <Label size={size} spacing={spacing}>
+    {lorem()}
+  </Label>
+);
+
+export const LabelStory = LabelTemplate.bind({});
+LabelStory.args = { spacing: false, size: "m" };
+
+const DetailTemplate = ({ spacing, size }) => (
+  <Detail size={size} spacing={spacing}>
+    {lorem()}
+  </Detail>
+);
+
+export const DetailStory = DetailTemplate.bind({});
+DetailStory.args = { spacing: false, size: "m" };
 
 export const SideInnholdEksempel = () => {
   return (
