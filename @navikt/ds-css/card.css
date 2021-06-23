@@ -20,7 +20,6 @@
 
 .navds-card__micro:focus {
   background-color: var(--navds-color-white);
-
   color: var(--navds-color-blue-50);
   outline: none;
   box-shadow: var(--navds-shadow-focus);
