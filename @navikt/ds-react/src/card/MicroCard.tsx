@@ -19,8 +19,8 @@ export const MicroCard: OverridableComponent<MicroCardProps> = forwardRef(
       ref={ref}
       className={cl(
         "navds-card__micro",
-        "navds-body-short",
-        "navds-body--s",
+        "navds-detail",
+        "navds-detail--s",
         className
       )}
       title={children}
