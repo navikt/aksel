@@ -22,7 +22,7 @@ const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
     createElement(element, {
       ...rest,
       ref,
-      className: cl("navds-header__title", "navds-label", className),
+      className: cl("navds-interal-header__title", "navds-label", className),
       children: <span>{children}</span>,
     })
 );

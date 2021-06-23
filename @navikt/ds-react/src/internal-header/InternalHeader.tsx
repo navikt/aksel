@@ -14,7 +14,11 @@ export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
 
 const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(
   ({ children, className, ...rest }, ref) => (
-    <header ref={ref} className={cl("navds-header", className)} {...rest}>
+    <header
+      ref={ref}
+      className={cl("navds-interal-header", className)}
+      {...rest}
+    >
       {children}
     </header>
   )
