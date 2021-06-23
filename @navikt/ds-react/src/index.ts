@@ -25,7 +25,7 @@ export {
   InternalHeaderUser,
   InternalHeaderUserProps,
 } from "./internal-header/index";
-export { Header } from "./header/index";
+export { Header, HeaderProps } from "./header/index";
 export {
   ProductPageLayout,
   ProductPagePanel,
