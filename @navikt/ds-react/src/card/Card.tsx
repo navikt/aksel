@@ -10,9 +10,8 @@ export interface CardProps {
      */
     className?: string;
     /**
-     * @default "m"
+     * SVG element
      */
-    size?: "m" | "s";
     illustration?: React.ReactNode;
     description?: React.ReactNode;
     category?: React.ReactNode;
@@ -26,32 +25,27 @@ export const Card: OverridableComponent<CardProps> = forwardRef(
       className,
       component: Component = "a",
       children,
-      size = "m",
       illustration,
-      desciption,
+      description,
       category,
       ...rest
     },
     ref
   ) => (
-    <Component
-      ref={ref}
-      className={cl("navds-card", className, `navds-card--${size}`)}
-      {...rest}
-    >
+    <Component ref={ref} className={cl("navds-card", className)} {...rest}>
       <div className="navds-card__wrapper">
         {illustration && (
           <div className="navds-card__illustration">{illustration}</div>
         )}
-        <div className="navds-card__title navds-title navds-title--l">
+        <div className="navds-card__title navds-title navds-title--m">
           {children}
         </div>
-        {desciption && size === "m" && (
+        {description && (
           <p className="navds-card__description navds-body-long">
-            {desciption}
+            {description}
           </p>
         )}
-        {category && size === "m" && (
+        {category && (
           <p className="navds-card__category navds-detail navds-detail--s">
             {category}
           </p>

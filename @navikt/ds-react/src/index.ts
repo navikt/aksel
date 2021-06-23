@@ -36,7 +36,14 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel/index";
 export { Panel, PanelProps } from "./panel/index";
-export { MicroCard, MicroCardProps, Card, CardProps } from "./card/index";
+export {
+  MicroCard,
+  MicroCardProps,
+  Card,
+  CardProps,
+  MiniCard,
+  MiniCardProps,
+} from "./card/index";
 export {
   Title,
   Ingress,
