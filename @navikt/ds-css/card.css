@@ -99,7 +99,6 @@
   border-radius: 4px;
   border: 2px solid transparent;
   display: inline-block;
-  text-decoration: none;
   width: 100%;
   align-items: center;
   padding: var(--navds-spacing-4);
