@@ -13,8 +13,8 @@ export interface CardProps {
      * SVG element
      */
     illustration?: React.ReactNode;
-    description?: React.ReactNode;
-    category?: React.ReactNode;
+    description?: string;
+    category?: string;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";
 }
