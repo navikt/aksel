@@ -2,7 +2,7 @@
  * .navds-header *
  **************************/
 
-.navds-header {
+.navds-interal-header {
   display: flex;
   align-items: center;
   background: var(--navds-color-darkgray);
@@ -11,16 +11,16 @@
   min-height: 50px;
 }
 
-.navds-header__column {
+.navds-interal-header__column {
   display: flex;
   align-items: center;
 }
 
 /**************************
-  * .navds-header__title *
+  * .navds-interal-header__title *
   **************************/
 
-.navds-header__title {
+.navds-interal-header__title {
   padding: 0 var(--navds-spacing-6);
   border-right: 1px solid var(--navds-color-gray-40);
   display: flex;
@@ -31,21 +31,21 @@
   color: var(--navds-color-text-inverse);
 }
 
-.navds-header__title > span > a {
+.navds-interal-header__title > span > a {
   text-decoration: none;
   color: inherit;
 }
 
-.navds-header__title > span > a:focus {
+.navds-interal-header__title > span > a:focus {
   box-shadow: var(--navds-shadow-focus-on-dark);
   outline: none;
 }
 
 /**************************
-  * .navds-header__user *
+  * .navds-interal-header__user *
   **************************/
 
-.navds-header__user {
+.navds-interal-header__user {
   color: var(--navds-color-text-inverse);
   padding: 0 var(--navds-spacing-6);
   margin-left: auto;
@@ -55,6 +55,6 @@
   align-items: center;
 }
 
-.navds-header__name.navds-body-short {
+.navds-interal-header__name.navds-body-short {
   margin-right: var(--navds-spacing-4);
 }
