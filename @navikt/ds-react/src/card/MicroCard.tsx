@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "../util";
 
-interface MicroCardProps {
+export interface MicroCardProps {
   props: {
     children: string;
     /**
