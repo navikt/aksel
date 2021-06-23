@@ -3,9 +3,9 @@ import cl from "classnames";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * Header title
    */
-  children: React.ReactNode;
+  children: string;
   /**
    * @ignore
    */
@@ -17,7 +17,7 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Short text placed under title
    */
-  description?: React.ReactNode;
+  description?: string;
   /**
    * Decides how to align content
    * @default "left"
