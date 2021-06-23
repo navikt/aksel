@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "../util";
 
-export interface MicroCardProps {
+export interface CardProps {
   props: {
     children: string;
     /**
@@ -14,11 +14,13 @@ export interface MicroCardProps {
      */
     size?: "m" | "s";
     illustration?: React.ReactNode;
+    description?: React.ReactNode;
+    category?: React.ReactNode;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";
 }
 
-export const MicroCard: OverridableComponent<MicroCardProps> = forwardRef(
+export const Card: OverridableComponent<CardProps> = forwardRef(
   (
     {
       className,
@@ -26,6 +28,8 @@ export const MicroCard: OverridableComponent<MicroCardProps> = forwardRef(
       children,
       size = "m",
       illustration,
+      desciption,
+      category,
       ...rest
     },
     ref
@@ -35,9 +39,26 @@ export const MicroCard: OverridableComponent<MicroCardProps> = forwardRef(
       className={cl("navds-card", className, `navds-card--${size}`)}
       {...rest}
     >
-      {children}
+      <div className="navds-card__wrapper">
+        {illustration && (
+          <div className="navds-card__illustration">{illustration}</div>
+        )}
+        <div className="navds-card__title navds-title navds-title--l">
+          {children}
+        </div>
+        {desciption && size === "m" && (
+          <p className="navds-card__description navds-body-long">
+            {desciption}
+          </p>
+        )}
+        {category && size === "m" && (
+          <p className="navds-card__category navds-detail navds-detail--s">
+            {category}
+          </p>
+        )}
+      </div>
     </Component>
   )
 );
 
-export default MicroCard;
+export default Card;

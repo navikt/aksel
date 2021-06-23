@@ -1,4 +1,60 @@
 /*
+  Card
+*/
+
+.navds-card {
+  background-color: var(--navds-color-white);
+  border-radius: 4px;
+  display: block;
+  padding: var(--navds-spacing-6);
+  width: 100%;
+}
+
+.navds-card:not(:focus-visible) {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(38, 38, 38, 0.12), 0px 1px 3px rgba(38, 38, 38, 0.2);
+}
+
+.navds-card__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.navds-card__illustration {
+  height: 6rem;
+  width: 6rem;
+  align-self: center;
+  margin-top: 0;
+  margin-bottom: var(--navds-spacing-8);
+}
+
+.navds-card__title {
+  text-decoration: underline;
+  color: var(--navds-color-text-primary);
+  margin-bottom: var(--navds-spacing-4);
+}
+
+.navds-card__description {
+  color: var(--navds-color-text-primary);
+  margin-bottom: var(--navds-spacing-7);
+}
+
+.navds-card__category {
+  text-decoration: underline;
+  color: var(--navds-color-text-primary);
+  margin-top: auto;
+  text-transform: uppercase;
+  margin-bottom: var(--navds-spacing-4);
+}
+
+.navds-card--m {
+}
+
+.navds-card--s {
+}
+
+/*
   MicroCard
 */
 
