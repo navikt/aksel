@@ -95,7 +95,7 @@ module.exports = {
       border: { value: "{navds.color.gray.40.value}" },
       background: { value: "{navds.color.white.value}" },
       text: {
-        primary: { value: "{navds.color.gray.90}" },
+        primary: { value: "{navds.color.gray.90.value}" },
         inverse: { value: "{navds.color.white.value}" },
         disabled: { value: "{navds.color.gray.60.value}" },
         link: { value: "{navds.color.blue.50.value}" },
