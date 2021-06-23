@@ -13,7 +13,7 @@
 .navds-header__wrapper {
   width: 100%;
   max-width: 56.5rem;
-  text-align: center;
+  text-align: start;
 }
 
 .navds-header__title {
@@ -24,13 +24,12 @@
   flex-direction: column;
 }
 
-.navds-header--left {
-  align-items: flex-start;
+.navds-header--left > .navds-header__wrapper {
   text-align: start;
 }
 
-.navds-header--left > .navds-header__wrapper {
-  text-align: start;
+.navds-header--center > .navds-header__wrapper {
+  text-align: center;
 }
 
 .navds-header__illustration {
