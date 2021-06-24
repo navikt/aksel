@@ -43,6 +43,10 @@
   align-self: center;
   margin-top: 0;
   margin-bottom: var(--navds-spacing-8);
+
+  /* Needed if user adds non svg illustration */
+  height: 6rem;
+  width: 6rem;
 }
 
 .navds-card__illustration > svg {
@@ -145,6 +149,10 @@
   margin: 0;
   margin-right: var(--navds-spacing-4);
   align-self: center;
+
+  /* Needed if user chooses non non-svg illustration */
+  height: 3.5rem;
+  width: 3.5rem;
 }
 
 .navds-card-mini__illustration > svg {
@@ -204,20 +212,4 @@
 .navds-card-micro:active {
   background-color: var(--navds-color-blue-70);
   color: var(--navds-color-white);
-}
-
-/*
-  Card illustration color inverting
- */
-
-/* prettier-ignore */
-.navds-card:active .navds-card__illustration > svg > *:not(.navds-card__illustration-bg),
-.navds-card-mini:active .navds-card-mini__illustration > svg > *:not(.navds-card__illustration-bg) {
-  filter: brightness(0) invert(1);
-}
-
-/* prettier-ignore */
-.navds-card:active .navds-card__illustration > svg > .navds-card__illustration-bg,
-.navds-card-mini:active .navds-card-mini__illustration > svg > .navds-card__illustration-bg {
-  fill: var(--navds-color-blue-40);
 }

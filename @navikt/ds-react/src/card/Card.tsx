@@ -10,7 +10,7 @@ export interface CardProps {
      */
     className?: string;
     /**
-     * SVG element
+     * Pictogram
      */
     illustration?: React.ReactNode;
     description?: string;
