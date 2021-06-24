@@ -2,20 +2,20 @@
   border-radius: 4px;
   border: var(--navds-border-default);
 
-  /* Padding calculated based on 16px font for 64px tall alert */
-  padding: 1.1875rem var(--navds-spacing-4);
+  /* Padding calculated based on 18px font for 64px tall alert */
+  padding: 1.0625rem var(--navds-spacing-4);
   display: grid;
   grid-auto-flow: column;
-  column-gap: 0.75rem;
   justify-content: start;
 }
 
 .navds-alert--s {
-  border-radius: 0;
-  padding: var(--navds-spacing-2) var(--navds-spacing-4);
+  padding: 0.1875rem var(--navds-spacing-4);
 }
 
 .navds-alert > svg {
+  align-self: center;
+  margin-right: var(--navds-spacing-3);
   font-size: 1.5rem;
   background: radial-gradient(
     circle,
