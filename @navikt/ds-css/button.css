@@ -12,12 +12,12 @@
   border-width: 2px;
 
   /* Padding calculated based on 18px font for 44px tall button */
-  padding: calc(0.625rem - 2px) calc(var(--navds-spacing-8) - 2px);
+  padding: 0.53125rem var(--navds-spacing-3);
 }
 
 .navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
+  padding: 0.25rem calc(var(--navds-spacing-4) - 2px);
 }
 
 .navds-button:focus {
@@ -33,16 +33,16 @@
 .navds-button--primary:active {
   color: var(--navds-color-text-inverse);
   background-color: var(--navds-color-action-hover);
-  border-width: 0;
+  border-color: transparent;
 
   /* Padding calculated based on 18px font for 44px tall button */
-  padding: 0.625rem var(--navds-spacing-8);
+  padding: 0.53125rem var(--navds-spacing-3);
 }
 
 .navds-button--primary:hover.navds-button--s,
 .navds-button--primary:active.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.3125rem var(--navds-spacing-4);
+  padding: 0.25rem calc(var(--navds-spacing-4) - 2px);
 }
 
 .navds-button--primary:active {
