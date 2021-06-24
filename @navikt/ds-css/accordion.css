@@ -5,14 +5,12 @@
 .navds-accordion {
   position: relative;
   background: var(--navds-color-background);
-  border: var(--navds-border-default);
-  border-radius: 4px;
+  border-bottom: 2px solid #c9c9c9;
 }
 
 .navds-accordion:hover {
-  box-shadow: var(--navds-color-hover);
-  border: var(--navds-panel-hover);
-  color: black;
+  /* color: black; */
+  border-bottom: 2px solid var(--navds-color-blue-50);
 }
 
 .navds-accordion:focus,
@@ -39,16 +37,16 @@
 
 .navds-accordion__button {
   padding: var(--navds-spacing-4);
-  border-radius: 4px;
   background: transparent;
-  border: 0;
   text-align: left;
+  border: none;
   width: 100%;
   margin-bottom: 0;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--navds-color-text-link);
 }
 
 .navds-accordion__button:hover .navds-accordion__heading {
@@ -68,4 +66,17 @@
 .navds-accordion--open > .navds-accordion__button {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.navds-accordion__chevron--filled {
+  display: none;
+}
+
+.navds-accordion__button:hover
+  > .navds-accordion__chevron.navds-accordion__chevron--filled {
+  display: inherit;
+}
+
+.navds-accordion__button:hover > .navds-accordion__chevron {
+  display: none;
 }
