@@ -213,3 +213,19 @@
   background-color: var(--navds-color-blue-70);
   color: var(--navds-color-white);
 }
+
+/*
+  Card illustration color inverting
+ */
+
+/* prettier-ignore */
+.navds-card:active .navds-card__illustration > svg > *:not(.navds-card__illustration-bg),
+.navds-card-mini:active .navds-card-mini__illustration > svg > *:not(.navds-card__illustration-bg) {
+  filter: brightness(0) invert(1);
+}
+
+/* prettier-ignore */
+.navds-card:active .navds-card__illustration > svg > .navds-card__illustration-bg,
+.navds-card-mini:active .navds-card-mini__illustration > svg > .navds-card__illustration-bg {
+  fill: var(--navds-color-blue-40);
+}
