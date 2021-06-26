@@ -3,17 +3,71 @@ title: Mal for produktsider på nav.no
 rank: 1
 ---
 
+# Produktsiden
+Alle stønader og tjenester skal ha én produktside. Et team eller en styringsenhet har ansvaret for sine egne produktsider.
 
-import { Ingress } from "nav-frontend-typografi";
-import Alertstripe from "nav-frontend-alertstriper";
+<br>
 
-# Sidemaler
+### Bakgrunn:
+Produktsiden samler all informasjon om stønaden eller tjenesten slik at innbyggere slipper å hoppe rundt for å samle informasjon.
+* Det reduserer usikkerhet for innbyggerne og øker sjansen for at de får all viktig informasjon.
+* Én side per produkt bedrer søket vårt, både internt på nav.no og hos søkemotorene.
+* Kontaktsenteret får én lenke å dele med innbyggere når de har tipset om en konkret stønad eller tjeneste.
+* Det gjør det mulig å bruke produktene våre som «byggeklosser» på [nav.no](http://nav.no/), slik at vi kan sette dem sammen på ulike måter i ulike kontekster. For eksempel for en livssituasjon eller per område eller per produkttype. Det muliggjør ulike typer navigasjon og ulike innfallsvinkler til innholdet på [nav.no](http://nav.no/).
+* Det gir enklere forvaltning og bedre oversikt over innhold og ansvar internt.
+<br>
 
-<Ingress>
-  Ingress for sidemaler her
-</Ingress>
+## URL
+Produktsiden ligger rett på roten av strukturen på [nav.no](http://nav.no/), altså rett under forsiden.
 
-## Sidemaler 123
+**For personbruker og på bokmål:**  
+nav.no/produktnavn (eventuelt kortversjon av produktnavn der disse er lange)
+f.eks nav.no/foreldrepenger
 
+**For andre målgrupper:**  
+nav.no/målgruppe/produktnavn
+f.eks nav.no/arbeidsgiver/foreldrepenger
 
-Innhold her
+**For andre språkvarianter:**  
+nav.no/produktnav/språk
+ .eks nav.no/foreldrepenger/en
+
+**For både andre målgrupper og språkvarianter:**  
+nav.no/målgruppe/produktnavn/språk
+f.eks: nav.no/arbeidsgiver/foreldrepenger/en
+
+<br>
+
+### Bakgrunn:
+Personbrukere er hovedmålgruppen vår, og hovedspråket på [nav.no](http://nav.no/) er bokmål. For at flertallet skal få en URL som er så enkel som mulig, dropper vi denne informasjonen i URL til denne gruppen. Men vi bruker den i URLer til andre grupper og for andre språkvarianter.  
+
+Vi bruker ikke område eller annet hierarki i URL siden produktene og livssituasjonene ikke har én fast plass i strukturen, men brukes og settes sammen i ulike kontekster. De ligger rett under forsiden i strukturen.
+*	NKS får korte, enkle lenker å dele med innbyggere
+*	Lenker i brev blir enklere å skrive inn i nettleseren
+*	Bedre brukeropplevelse for innbyggere som skal skrive inn lenker manuelt, mindre sjanse for feil
+*	Vi slipper å lage egne kortlenker for NKS og brev
+*	Ærligere URLer utifra hvordan innholdet vårt faktisk er organisert
+
+<br>
+
+## Innholdsstruktur og ankerlenker
+Innholdet på produktsiden er delt opp i meningsfulle underkapitler. Teamet strukturerer innholdet slik det er mest hensiktsmessig å strukturere det for det aktuelle produktet. Utgangspunktet er en felles innholdsstruktur, men denne kan justeres slik at den passer produktet best mulig.  
+
+Samme type innhold om ulike produkter bør, så langt det er fornuftig, bruke mest mulig like titler og inndeling av innhold.  
+
+Ankerlenker til innholdskapitler
+*	Ankerlenkene trenger ikke å bruke samme ordlyd som tittelen på kapittelet
+*	Ankerlenkene bør formuleres på en mest mulig kortfattet og standardisert måte
+*	Ankerlenkene bør ikke forandres for ofte. Hvis lenken blir endret, gi beskjed til kontaktsenteret slik at de kan endre den aktuelle ankerlenken i sitt støttemateriell. Sørg også for at eventuelle brev til innbyggere som bruker denne lenken, blir endret samtidig.
+
+Eksempel: kapittel om utbetalingsinformasjon har ankerlenke nav.no/produktnavn#utbetaling, enten tittelen på kapittelet er «Når utbetales pengene?» eller noe annet, og om tittelen endres.
+
+<br>
+
+### Bakgrunn
+Mange innbyggere bruker flere produkter samtidig, og har nytte av mest mulig lik struktur og gjenkjennelighet på tvers. Vi tror også at dette kan gi oss nye muligheter når vi etter hvert vil utforske muligheter for å viske ut skillet mellom åpne og innloggede sider for eksempel ved å knytte individspesifikk informasjon til generisk informasjon på produktsidene.  
+
+Korte lenker og ankerlenker er nyttig i brev eller dialog med kontaktsenteret eller andre situasjoner der innbyggeren skal skrive inn lenken manuelt i nettleseren. Det reduserer også sjansen for feil og dårlig brukeropplevelse.
+
+**Forslag til innhold på siden**
+Kapittel / tittel | Type innhold | Ankerlenke | Ikon
