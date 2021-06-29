@@ -1,0 +1,192 @@
+---
+
+title: Mal for produktsider på nav.no  
+rank: 1
+
+---
+
+# Produktsiden
+
+Alle stønader og tjenester skal ha én produktside. Et team eller en styringsenhet har ansvaret for sine egne produktsider.
+
+### Bakgrunn
+
+Produktsiden samler all informasjon om stønaden eller tjenesten slik at innbyggere slipper å hoppe rundt for å samle informasjon.
+
+*   Det reduserer usikkerhet for innbyggerne og øker sjansen for at de får all viktig informasjon.
+*   Én side per produkt bedrer søket vårt, både internt på [nav.no](http://nav.no/) og hos søkemotorene.
+*   Kontaktsenteret får én lenke å dele med innbyggere når de har tipset om en konkret stønad eller tjeneste.
+*   Det gjør det mulig å bruke produktene våre som «byggeklosser» på [nav.no](http://nav.no/), slik at vi kan sette dem sammen på ulike måter i ulike kontekster. For eksempel for en livssituasjon eller per område eller per produkttype. Det muliggjør ulike typer navigasjon og ulike innfallsvinkler til innholdet på [nav.no](http://nav.no/).
+*   Det gir enklere forvaltning og bedre oversikt over innhold og ansvar internt.
+
+## URL
+
+Produktsiden ligger rett på roten av strukturen på [nav.no](http://nav.no/), altså rett under forsiden.
+
+**For personbruker og på bokmål:**  
+nav.no/produktnavn (eventuelt kortversjon av produktnavn der disse er lange)  
+f.eks nav.no/foreldrepenger
+
+**For andre målgrupper:**  
+nav.no/målgruppe/produktnavn  
+f.eks nav.no/arbeidsgiver/foreldrepenger
+
+**For andre språkvarianter:**  
+nav.no/produktnav/språk  
+.eks nav.no/foreldrepenger/en
+
+**For både andre målgrupper og språkvarianter:**  
+nav.no/målgruppe/produktnavn/språk  
+f.eks: nav.no/arbeidsgiver/foreldrepenger/en
+
+### Bakgrunn
+
+Personbrukere er hovedmålgruppen vår, og hovedspråket på [nav.no](http://nav.no/) er bokmål. For at flertallet skal få en URL som er så enkel som mulig, dropper vi denne informasjonen i URL til denne gruppen. Men vi bruker den i URLer til andre grupper og for andre språkvarianter.
+
+Vi bruker ikke område eller annet hierarki i URL siden produktene og livssituasjonene ikke har én fast plass i strukturen, men brukes og settes sammen i ulike kontekster. De ligger rett under forsiden i strukturen.
+
+*   NKS får korte, enkle lenker å dele med innbyggere
+*   Lenker i brev blir enklere å skrive inn i nettleseren
+*   Bedre brukeropplevelse for innbyggere som skal skrive inn lenker manuelt, mindre sjanse for feil
+*   Vi slipper å lage egne kortlenker for NKS og brev
+*   Ærligere URLer utifra hvordan innholdet vårt faktisk er organisert
+
+## Innholdsstruktur og ankerlenker
+
+Innholdet på produktsiden er delt opp i meningsfulle underkapitler. Teamet strukturerer innholdet slik det er mest hensiktsmessig å strukturere det for det aktuelle produktet. Utgangspunktet er en felles innholdsstruktur, men denne kan justeres slik at den passer produktet best mulig.
+
+Samme type innhold om ulike produkter bør, så langt det er fornuftig, bruke mest mulig like titler og inndeling av innhold.
+
+Ankerlenker til innholdskapitler
+
+*   Ankerlenkene trenger ikke å bruke samme ordlyd som tittelen på kapittelet
+*   Ankerlenkene bør formuleres på en mest mulig kortfattet og standardisert måte
+*   Ankerlenkene bør ikke forandres for ofte. Hvis lenken blir endret, gi beskjed til kontaktsenteret slik at de kan endre den aktuelle ankerlenken i sitt støttemateriell. Sørg også for at eventuelle brev til innbyggere som bruker denne lenken, blir endret samtidig.
+
+Eksempel: kapittel om utbetalingsinformasjon har ankerlenke nav.no/produktnavn#utbetaling, enten tittelen på kapittelet er «Når utbetales pengene?» eller noe annet, og om tittelen endres.
+
+### Bakgrunn
+
+Mange innbyggere bruker flere produkter samtidig, og har nytte av mest mulig lik struktur og gjenkjennelighet på tvers. Vi tror også at dette kan gi oss nye muligheter når vi etter hvert vil utforske muligheter for å viske ut skillet mellom åpne og innloggede sider for eksempel ved å knytte individspesifikk informasjon til generisk informasjon på produktsidene.
+
+Korte lenker og ankerlenker er nyttig i brev eller dialog med kontaktsenteret eller andre situasjoner der innbyggeren skal skrive inn lenken manuelt i nettleseren. Det reduserer også sjansen for feil og dårlig brukeropplevelse.
+
+#### Forslag til innhold på siden
+
+| **Kapittel / tittel** | **Type innhold** | **Ankerlenke** | **Ikon** |
+| --- | --- | --- | --- |
+| Kort om \[produkt\] (obligatorisk) | En kort beskrivelse som hjelper innbyggeren å forstå de mest sentrale aspektene ved produktet. Typisk et par setninger. | #kort | Ingen
+| Hvem kan få? | Vilkår for å få stønaden/tjenesten. Også medlemsskapsvilkår. Inngang til eventuelle veivisere som kan hjelpe innbyggeren å forstå om de kan få produktet. | #hvem |![Et ikon som heter People](https://user-images.githubusercontent.com/82579704/123791741-174b0b00-d8e0-11eb-93aa-7dbf30331b91.png)<br>Standard<br>![Et ikon som heter Single parent](https://user-images.githubusercontent.com/82579704/123791934-58dbb600-d8e0-11eb-862d-da9c9bf0a6d5.png)<br>(hvis enslige foreldre)
+| Når kan du få? | Hvis det er ulike situasjoner som kan trigge behovet for produktet eller om det er ulike situasjoner som vil gjøre at produktet oppfører seg annerledes. | #situasjon | ![Et ikon som heter Helptext](https://user-images.githubusercontent.com/82579704/123792077-83c60a00-d8e0-11eb-987c-3adc4a418190.png)<br>![Et ikon som heter Bag](https://user-images.githubusercontent.com/82579704/123792135-94768000-d8e0-11eb-9499-5d78dca19f2e.png)<br>Hvis relatert til ulike arbeidssituasjoner
+| Hva kan du få støtte til? | Hvis det er behov for å beskrive en eller flere typer utgifter stønaden dekker | #hva | ![Et ikon som heter Ruler](https://user-images.githubusercontent.com/82579704/123792330-ca1b6900-d8e0-11eb-9714-e790f456b824.png)<br>Hvis utdanningsrelatert<br>![Et ikon som heter Horse](https://user-images.githubusercontent.com/82579704/123792399-dacbdf00-d8e0-11eb-9cee-e9eef5daf156.png)<br>Hvis relatert til barn eller barnepass<br>![Car-24px](https://user-images.githubusercontent.com/82579704/123792462-eb7c5500-d8e0-11eb-860a-ad627ac9da21.png)<br>Hvis transportrelatert. Har kan det velges relevant ikon for området
+| Hvor mye kan du få? | Beregningsmodeller, informasjon om hva som tas med i beregningen (type inntekt, andre stønader etc), satstabeller (kan hentes sentralt i Enonic), eventuelle kalkulatorer kan integreres på siden eller lenkes til herfra. Informasjon om feriepenger og skatt. | #hvor-mye | ![Et ikon som heter Calculator](https://user-images.githubusercontent.com/82579704/123792721-37c79500-d8e1-11eb-9981-63cfea6bf791.png)
+| Hvor lenge kan du få? | Informasjon om når man tidligst kan få produktet (første utbetaling) og hvor lenge man kan få. Informasjon om mulige forlengelser eller utvidelser. | #hvor-lenge | ![Et ikon som heter Sandglass](https://user-images.githubusercontent.com/82579704/123792830-5af24480-d8e1-11eb-8349-4a0f9229e65b.png)
+| Når utbetales pengene? | Informasjon om utbetalingsdatoer, lenke til Dine utbetalinger på Ditt NAV. | #utbetaling | ![Et ikon som heter Calender](https://user-images.githubusercontent.com/82579704/123792951-7f4e2100-d8e1-11eb-958a-e6f4263804c9.png)
+| Til og fra utlandet | Informasjon om reiseregler og utenlandsopphold | #utland | ![Et ikon som heter Globe](https://user-images.githubusercontent.com/82579704/123793087-a0af0d00-d8e1-11eb-8007-215cba9ff51f.png)
+| Meld fra om endringer | Endringer innbyggere som får produktet må melde fra om. Inngang til Skriv til oss (eller annet sted man evt skal melde fra) | #melde |![Et ikon som heter Dialog dots](https://user-images.githubusercontent.com/82579704/123793214-c0463580-d8e1-11eb-8ed4-da5953036964.png)
+| Pass på å ikke miste retten til \[produkt\] | Plikter innbyggeren har når de får stønaden/tjenesten | #miste-rett | ![Et ikon som heter Warning](https://user-images.githubusercontent.com/82579704/123793338-e1a72180-d8e1-11eb-8ea9-872a74996271.png)
+| Søknad og dokumentasjon | Informasjon om når man kan sende søknad. Fullstendig liste over alle dokumentasjonskrav (hva som trigger behov for dokumentasjon og hvordan det skal dokumenteres). Saksbehandlingstider. Inngang til søknad. | #soke | ![Et ikon som heter Task](https://user-images.githubusercontent.com/82579704/123793448-fedbf000-d8e1-11eb-8141-f4905b7721bd.png)
+<br>
+
+## Produktheader
+
+Inneholder
+
+*   Produktnavnet
+*   Produkttype (f.eks «Pengestøtte», «Råd og veiledning» eller «Kurs»)
+*   Unikt ikon for produktet
+
+### Bakgrunn
+
+Produktheaderen er med på å skille produktsiden fra andre innholdstyper på [nav.no](http://nav.no/). 
+
+Et produkt skal være mulig å identifisere som et produkt både i headeren på produktsiden og når det presenteres som et produktkort (inngang til produktsiden) i ulike kontekster. Navn, type og ikon er alltid med og er alltid lik for det enkelte produktet. Unntaket er minikort og mikrokort, der kun tittel og ikon er med.
+
+Disse ikonene må tegnes ut for hvert enkelt produkt. Ta kontakt med Team personbruker eller Designsystemteamet.
+
+## Innholdsmeny
+
+Produktsiden har en innholdsmeny med snarvei til korresponderende kapittel på siden. Her kan det også legges inngang til søknad eller annen relevant CTA for produktet.
+
+### Bakgrunn
+
+Innholdsmenyen skal gjøre det enklere å få overblikk over innholdet på siden og navigere raskt til det man lurer på. Den følger med nedover siden (kun på desktop foreløpig, vi ser på løsninger for mobil) slik at innbyggeren raskt kan navigere til en annen del av siden.
+
+## Lenkemeny (hvis relevant)
+
+Lenker til andre sider med støtteinformasjon, for eksempel inngang til lovtekst om produktet eller sentral klageinformasjon. Lenkemenyen kan brukes til å lenke til denne typen tilleggsinformasjon som ikke er dekket på produktsiden. 
+
+### Bakgrunn
+
+Produktsiden skal i utgangspunktet være «selvforsynt» slik at innbyggere ikke skal måtte oppsøke andre sider for å finne ut om de har rett til ytelsen. Det kan likevel være behov for noen få lenker til mer utfyllende informasjon. Den separate lenkemenyen skiller denne navigasjonen fra internnavigasjonen på siden i innholdsmenyen, slik at det blir tydeligere at disse lenkene ikke går til innhold på denne siden.
+
+## Inngang til andre relevante produkter (hvis relevant)
+
+Mini-produktkort med inngang til andre produkter kan settes inn i løpende tekst. Før produktkortet bør det være tekst som setter produktet i kontekst - hvorfor kan det være relevant for innbyggeren å se på dette produktet?
+
+### Bakgrunn
+
+Produktkort i kontekst gjør det enklere for brukeren å identifisere unike produkter og skille dem fra hverandre.
+
+## Tilpasningsfunksjon / filter (hvis relevant)
+
+Tilpasningsfunksjonen tar utgangspunkt i innbyggerens situasjon, og gjør det mulig for innbyggere å tilpasse innholdet på siden til sin situasjon ved å filtrere bort situasjoner som ikke er relevante. 
+
+Alternativene i en kategori i filteret korresponderer med et H3-kapittel i et H2-kapittel. Ikke valgte alternativer i dette kapittelet filtreres da bort.
+
+Man kan ha flere kategorier. Hvilke kategorier og hvilke alternativer som er relevante for de ulike produktene vil variere.
+
+### Bakgrunn
+
+Produktsidene blir lange med mye tekst. Innbyggerne er ofte usikre på om generisk informasjon på [nav.no](http://nav.no/) også gjelder i deres situasjon. Ved å gjøre det mulig å filtrere bort innhold basert på hvilken situasjon man er i, blir det både mindre tekst å lese og forstå, og innholdet oppleves mer relevant.
+
+## Designmal og publiseringssystem
+
+Alle produktsider skal ha samme visuelle design, men teamet avgjør selv hvilket publiseringssystem (CMS) de vil bruke for sine produktsider.
+
+### Alternativ 1: Innhold og design I Enonic (det sentrale publiseringssystemet)
+
+I Enonic ligger produktsiden som en mal med eget redaktørgrensesnitt. Denne malen forvaltes teknisk av Team personbruker slik at teamene ikke behøver å utvikle funksjonalitet eller vedlikeholde visuelt design og kode.
+
+### Alternativ 2: Designmal fra designsystemet kombinert med innhold i eget CMS
+
+Team som har innholdet sitt i andre CMS kan velge å beholde innholdet der det er, og bruke designmaler på toppen. Teamet må da utvikle funksjonaliteten de trenger og oppdatere designet selv.
+
+#### Funksjonalitet i malalternativene
+||**Produktsider i Enonic**|**Produktsidemal i designsystemet kombinert med innhold i eget CMS**|
+|---|---|---|
+|noe|her|også
+|Oppdatert design og funksjonalitet som er likt på tvers av områder.|Ja|Ja
+|Automatisk oppdatering av grid, design og typografi|Ja, gjøres av Team personbruker|Kan oppdateres på samme måte som komponenter i designsystemet.
+|Enkelt redaktørgrensesnitt med drag and drop.|Ja|Avhengig av CMS.
+|Livssituasjonsside i samme redaktørgrensesnitt som stønadsinnhold|Ja|Livssituasjonssiden vil bo i Enonic for å gi alle team og områder som er involvert lik tilgang til denne.
+|Innholdsmeny|Ja|Tilgjengelig som designkomponent. Funksjonalitet må utvikles av teamet.
+|Lenkemeny|Ja|Tilgjengelig som designkomponent. Funksjonalitet må utvikles av teamet.
+|Automatisk oppdatering av G-beløp, satser, utbetalingsdatoer og saksbehandlingstider|Ja|Vil sannsynligvis bli støtte for dette på sikt.
+|Mulighet for gjenbruk av innhold på egne sider|Ja|Ja (hvis hodeløst CMS)
+|Mulighet for gjenbruk av innhold på andre sider på [nav.no](http://nav.no/)|Ja|Nei
+|Tilpasningsfunksjonalitet (filter)|Ja|Tilgjengelig som designkomponent. Funksjonalitet må utvikles av teamet.
+|Kalkulator integrert på siden.|Planlagt. Vil se på muligheten for at disse blir redigerbare i redaktørgrensesnittet, og at de kan bruke satser og G-beløp som oppdateres sentralt.|Tilgjengelig som designkomponent. Funksjonalitet må utvikles av teamet.
+|Metadata for produktside|Ja, ivaretas av Enonic.|Teamet må sørge for at dette er ivaretatt.
+<br>
+
+## Publisering av nye sider
+
+Publisere ny produktside
+
+Hvis man skal bruke produktsidemalen i Enonic: Lenke til e-læring
+
+### Avpublisere gamle sider
+
+I Enonic: Lenke til e-læring
+
+### Redirects
+
+Tekst
+
+### Metadata
+
+Alle produktsider skal ha
+
+*   Informasjon om type produkt (f.eks «Pengestøtte» eller «Råd og veiledning»)
+*   Område (f.eks «Familie» eller «Helse og sykdom»)
