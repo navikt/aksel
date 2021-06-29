@@ -32,6 +32,10 @@ export const comps = {
   FileIcon,
   Cog,
   Example,
+  table: (props) => {
+    console.log(props);
+    return <table className="tabell">{props.children}</table>;
+  },
 };
 
 const MdxWrapper = (props) => <MDXProvider components={comps} {...props} />;
