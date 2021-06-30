@@ -24,7 +24,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Reduces padding on component
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "m" | "s";
 }
 
 const Icon = ({ variant }) => {
@@ -43,7 +43,7 @@ const Icon = ({ variant }) => {
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "medium", ...rest }, ref) => (
+  ({ variant, children, className, size = "m", ...rest }, ref) => (
     <div
       ref={ref}
       className={cl(

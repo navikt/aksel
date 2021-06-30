@@ -19,8 +19,12 @@ export interface InternalHeaderUserProps
 
 const InternalHeaderUser = forwardRef<HTMLDivElement, InternalHeaderUserProps>(
   ({ className, name, ident, ...rest }, ref) => (
-    <div ref={ref} className={cl("navds-header__user", className)} {...rest}>
-      <span className="navds-header__name navds-body-short navds-body--s">
+    <div
+      ref={ref}
+      className={cl("navds-interal-header__user", className)}
+      {...rest}
+    >
+      <span className="navds-interal-header__name navds-body-short navds-body--s">
         {name}
       </span>
       <span className="navds-detail navds-detail--s">{ident}</span>

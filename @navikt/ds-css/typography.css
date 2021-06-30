@@ -7,7 +7,7 @@
 .navds-title--2xl {
   font-size: var(--navds-font-size-title-2xl);
   letter-spacing: -0.01em;
-  line-height: var(--navds-font-line-height-2xl);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-title--2xl.navds-typo--spacing {
@@ -17,7 +17,7 @@
 .navds-title--xl {
   font-size: var(--navds-font-size-title-xl);
   letter-spacing: -0.008em;
-  line-height: var(--navds-font-line-height-xl);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-title--xl.navds-typo--spacing {
@@ -27,7 +27,7 @@
 .navds-title--l {
   font-size: var(--navds-font-size-title-l);
   letter-spacing: -0.004em;
-  line-height: var(--navds-font-line-height-l);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-title--l.navds-typo--spacing {
@@ -37,7 +37,7 @@
 .navds-title--m {
   font-size: var(--navds-font-size-title-m);
   letter-spacing: -0.002em;
-  line-height: var(--navds-font-line-height-m);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-title--m.navds-typo--spacing {
@@ -58,7 +58,7 @@
 .navds-ingress {
   font-size: var(--navds-font-size-xl);
   letter-spacing: -0.001em;
-  line-height: var(--navds-font-line-height-s);
+  line-height: var(--navds-font-line-height-m);
   margin: 0;
 }
 
@@ -70,14 +70,14 @@
 .navds-body-long {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
-  line-height: var(--navds-font-line-height-s);
+  line-height: var(--navds-font-line-height-m);
   margin: 0;
 }
 
 .navds-body-short {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
-  line-height: var(--navds-font-line-height-xs);
+  line-height: var(--navds-font-line-height-s);
   margin: 0;
 }
 
@@ -92,7 +92,7 @@
 .navds-body--s {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
-  line-height: var(--navds-font-line-height-xs);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-body-long.navds-body--s.navds-typo--spacing {
@@ -107,7 +107,7 @@
 .navds-label {
   font-size: var(--navds-font-size-l);
   letter-spacing: 0;
-  line-height: var(--navds-font-line-height-xs);
+  line-height: var(--navds-font-line-height-s);
   font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }
@@ -119,7 +119,7 @@
 .navds-label--s {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
-  line-height: var(--navds-font-line-height-2xs);
+  line-height: var(--navds-font-line-height-s);
 }
 
 .navds-label--s.navds-typo--spacing {
@@ -130,7 +130,7 @@
 .navds-detail {
   font-size: var(--navds-font-size-s);
   letter-spacing: 0.004em;
-  line-height: var(--navds-font-line-height-2xs);
+  line-height: var(--navds-font-line-height-s);
   font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }

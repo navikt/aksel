@@ -25,6 +25,7 @@ export {
   InternalHeaderUser,
   InternalHeaderUserProps,
 } from "./internal-header/index";
+export { Header, HeaderProps } from "./header/index";
 export {
   ProductPageLayout,
   ProductPagePanel,
@@ -36,6 +37,7 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel/index";
 export { Panel, PanelProps } from "./panel/index";
+export { MicroCard, MicroCardProps } from "./card/index";
 export {
   Title,
   Ingress,

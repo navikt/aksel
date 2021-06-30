@@ -1,0 +1,21 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="ds-react/card/intro" />
+
+# Hvordan ta i bruk card
+
+## MicroCard
+
+Kan brukes som en vanlig lenke direkte:
+
+```
+<MicroCard href="/lenke/til/side">Lenketekst</MicroCard>
+```
+
+Hvis man ønsker å ta i bruk nextjs sin `Link`-komponent:
+
+```
+<Link href="/lenke/til/side" passHref>
+  <MicroCard>Lenketekst</MicroCard>
+</Link>
+```

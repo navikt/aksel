@@ -15,7 +15,7 @@
   padding: calc(0.625rem - 2px) calc(var(--navds-spacing-8) - 2px);
 }
 
-.navds-button--small {
+.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
@@ -39,8 +39,8 @@
   padding: 0.625rem var(--navds-spacing-8);
 }
 
-.navds-button--primary:hover.navds-button--small,
-.navds-button--primary:active.navds-button--small {
+.navds-button--primary:hover.navds-button--s,
+.navds-button--primary:active.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: 0.3125rem var(--navds-spacing-4);
 }
@@ -94,8 +94,8 @@
   color: var(--navds-color-text-inverse);
 }
 
-.navds-button--action.navds-button--small,
-.navds-button--danger.navds-button--small {
+.navds-button--action.navds-button--s,
+.navds-button--danger.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: 0.3125rem var(--navds-spacing-4);
 }
@@ -162,8 +162,8 @@
   border-width: 2px;
 }
 
-.navds-button--action:focus.navds-button--small,
-.navds-button--danger:focus.navds-button--small {
+.navds-button--action:focus.navds-button--s,
+.navds-button--danger:focus.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
@@ -184,8 +184,8 @@
   color: var(--navds-color-text-inverse);
 }
 
-.navds-button--action:hover:focus.navds-button--small,
-.navds-button--danger:hover:focus.navds-button--small {
+.navds-button--action:hover:focus.navds-button--s,
+.navds-button--danger:hover:focus.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: 0.3125rem var(--navds-spacing-4);
 }
@@ -210,8 +210,8 @@
   background-color: var(--navds-color-background);
 }
 
-.navds-button--action:active:focus.navds-button--small,
-.navds-button--danger:active:focus.navds-button--small {
+.navds-button--action:active:focus.navds-button--s,
+.navds-button--danger:active:focus.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: calc(0.3125rem - 2px) calc(var(--navds-spacing-4) - 2px);
 }
@@ -274,7 +274,7 @@
   transform: none;
 }
 
-.navds-button:disabled:disabled.navds-button--small {
+.navds-button:disabled:disabled.navds-button--s {
   /* Padding calculated based on 16px font for 32px tall button */
   padding: 0.3125rem var(--navds-spacing-4);
 }

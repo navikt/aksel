@@ -11,7 +11,7 @@
       <a href="https://github.com/navikt/nav-frontend-moduler/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
       </a>
-                  <img src="https://github.com/navikt/nav-frontend-moduler/workflows/Build,%20test%20and%20maybe%20publish/badge.svg" />
+         <img src="https://github.com/navikt/nav-frontend-moduler/workflows/Build,%20test%20and%20maybe%20publish/badge.svg" />
     </p>
     <h4><a href="https://design.nav.no">Nettside</a> | <a href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/nav-frontend-moduler/issues">Bug-rapport</a>
 </div>

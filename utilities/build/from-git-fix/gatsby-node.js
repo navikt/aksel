@@ -55,7 +55,9 @@ exports.sourceNodes = (() => {
     { user, repository, tree = false, releases = false, branch, secrets = {} }
   ) {
     if (!user || !repository) {
-      throw "You need to define user & repository for gatsby-source-github to work";
+      throw new Error(
+        "You need to define user & repository for gatsby-source-github to work"
+      );
     }
 
     const octo = new Octokat(secrets);

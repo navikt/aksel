@@ -95,7 +95,7 @@ module.exports = {
       border: { value: "{navds.color.gray.40.value}" },
       background: { value: "{navds.color.white.value}" },
       text: {
-        primary: { value: "{navds.color.gray.90}" },
+        primary: { value: "{navds.color.gray.90.value}" },
         inverse: { value: "{navds.color.white.value}" },
         disabled: { value: "{navds.color.gray.60.value}" },
         link: { value: "{navds.color.blue.50.value}" },
@@ -139,13 +139,8 @@ module.exports = {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {
         height: {
-          "2xl": { value: getFontSize(52) },
-          xl: { value: getFontSize(40) },
-          l: { value: getFontSize(36) },
-          m: { value: getFontSize(32) },
-          s: { value: getFontSize(28) },
-          xs: { value: getFontSize(24) },
-          "2xs": { value: getFontSize(20) },
+          m: { value: 1.5 },
+          s: { value: 1.3 },
         },
       },
       size: {
