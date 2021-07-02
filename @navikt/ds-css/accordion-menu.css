@@ -22,18 +22,11 @@
   text-decoration: underline;
 }
 
-.navds-accordion-menu-collapsable .navds-accordion-menu__list,
-.navds-accordion-menu-collapsable
-  .navds-accordion-menu-collapsable
-  .navds-accordion-menu-collapsable__button {
-  font-weight: var(--navds-font-weight-regular);
-}
-
 .navds-accordion-menu-item,
 .navds-accordion-menu-collapsable__button {
   display: flex;
   padding: var(--navds-spacing-3) var(--navds-spacing-4);
-  line-height: 1.5rem; /* TODO: fix typography. */
+  text-decoration: none;
 }
 
 .navds-accordion-menu-collapsable__expand-icon {
@@ -82,16 +75,16 @@
 .navds-accordion-menu-collapsable__button:focus {
   outline: 3px solid var(--navds-text-focus);
   outline-offset: -3px;
+  color: var(--navds-color-darkgray);
 }
 
 .navds-accordion-menu-item:hover,
 .navds-accordion-menu-collapsable__button:hover {
-  background-color: var(--navds-color-gray-20);
+  background-color: var(--navds-color-blue-10);
 }
 
 .navds-accordion-menu-item--active {
   box-shadow: inset 0.5rem 0 var(--navds-color-text-link);
   color: var(--navds-color-text);
   text-decoration: none;
-  font-weight: var(--navds-font-weight-bold);
 }
