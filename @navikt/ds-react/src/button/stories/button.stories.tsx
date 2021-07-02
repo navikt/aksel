@@ -52,7 +52,7 @@ export const All = () => {
         {variants.map((variant) => (
           <a
             key={variant}
-            className={`navds-button navds-button--${variant}`}
+            className={`navds-button navds-button--${variant} navds-body-short`}
             href="the-link"
           >
             {variant}
