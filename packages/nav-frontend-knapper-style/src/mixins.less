@@ -64,6 +64,46 @@
   }
 }
 
+.knappefylt-cta-mixin(@bgColor, @hoverColor, @activeColor, @textColor) {
+  color: white;
+  border-color: @bgColor;
+  background-color: @bgColor;
+  position: relative;
+
+  &:hover {
+    background-color: @hoverColor;
+    color: white;
+    border-color: @hoverColor;
+  }
+
+  &:hover&:focus {
+    background-color: @bgColor;
+    color: white;
+    border-color: @bgColor;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px @fokusFarge;
+    background-color: @white;
+    color: @textColor;
+  }
+
+  &:active {
+    background-color: @activeColor;
+    color: white;
+    border-color: transparent;
+  }
+
+  &:hover&:focus&:active {
+    background-color: @activeColor;
+    color: white;
+    outline: none;
+    border-color: @activeColor;
+  }
+}
+
+/* Beholdes i kode for å unngå breaking change */
 .knappfylt-mixin(@bgColor, @textColor, @activeColor, @highlighColor) {
   .knapptaktil-mixin();
 

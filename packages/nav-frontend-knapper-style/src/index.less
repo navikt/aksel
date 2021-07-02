@@ -12,11 +12,14 @@
 }
 
 .knapp--hoved {
-  .knappfylt-mixin(@navBla, @white, @navDypBla, lighten(@navBla, 5%));
+  /* .knappfylt-mixin(@navBla, @white, @navDypBla, lighten(@navBla, 5%));*/
+  /* .knappramme-mixin(@navBla, @navDypBla, @navBla); */
+  .knappefylt-cta-mixin(@navBla, @navBlaDarken20, @navDypBla, @navBla);
 }
 
 .knapp--fare {
-  .knappfylt-mixin(@redError, @white, darken(@redError, 5%), lighten(@redError, 5%));
+  .knappefylt-cta-mixin(@redError, @redErrorDarken20, @redErrorDarken40, @redError);
+  /* .knappfylt-mixin(@redError, @white, darken(@redError, 5%), lighten(@redError, 5%)); */
 }
 
 .knapp--flat {
