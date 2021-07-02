@@ -1,7 +1,7 @@
 import React, { forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
-import { Expand } from "@navikt/ds-icons";
+import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import { v4 as uuidv4 } from "uuid";
 
 export interface AccordionProps
@@ -90,6 +90,13 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
           <Expand
             className={cl(
               "navds-accordion__chevron",
+              `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
+            )}
+          />
+          <ExpandFilled
+            className={cl(
+              "navds-accordion__chevron",
+              "navds-accordion__chevron--filled",
               `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
             )}
           />
