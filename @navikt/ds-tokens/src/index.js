@@ -68,12 +68,12 @@ module.exports = {
       disabled: { value: "{navds.color.gray.40.value}" },
       action: {
         default: { value: "{navds.color.blue.50.value}" },
-        hover: { value: Color(baseColors.blue).lighten(0.1) },
+        hover: { value: "{navds.color.blue.60.value}" },
         active: { value: "{navds.color.deepblue.50.value}" },
       },
       danger: {
         default: { value: "{navds.color.red.50.value}" },
-        hover: { value: Color(baseColors.red).lighten(0.1) },
+        hover: { value: "{navds.color.red.60.value}" },
         active: { value: "{navds.color.red.70.value}" },
       },
       error: {
