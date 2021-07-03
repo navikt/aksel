@@ -5,7 +5,7 @@
   "rules": [
     {
       "name": "Colors",
-      "path": "@navikt/ds-tokens/src/color.js",
+      "path": "@navikt/ds-tokens/src/color.mjs",
       "filter": {
         "types": ["color"]
       },
