@@ -21,12 +21,12 @@
           "options": {
             "formatName": "camelCase",
             "formatTokens": {
-              "colorFormat": "rgb",
-              "textStyleFormat": "object"
+              "colorFormat": "hex",
+              "textStyleFormat": "classObject"
             },
             "formatConfig": {
               "jssObjectName": "navds",
-              "exportDefault": true,
+              "exportDefault": false,
               "tabWidth": 4,
               "singleQuote": true
             }
