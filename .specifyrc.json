@@ -1,0 +1,38 @@
+{
+  "repository": "@nav/designsystem",
+  "head": "updated-specify-tokens",
+  "base": "specify-tokens",
+  "rules": [
+    {
+      "name": "Colors",
+      "path": "@navikt/ds-tokens/src/color.js",
+      "filter": {
+        "types": ["color"]
+      },
+      "parsers": [
+        {
+          "name": "sort-by",
+          "options": {
+            "keys": ["name"]
+          }
+        },
+        {
+          "name": "to-jss",
+          "options": {
+            "formatName": "camelCase",
+            "formatTokens": {
+              "colorFormat": "rgb",
+              "textStyleFormat": "object"
+            },
+            "formatConfig": {
+              "jssObjectName": "navds",
+              "exportDefault": true,
+              "tabWidth": 4,
+              "singleQuote": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
