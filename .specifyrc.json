@@ -17,18 +17,16 @@
           }
         },
         {
-          "name": "to-jss",
+          "name": "to-tailwind",
           "options": {
-            "formatName": "camelCase",
             "formatTokens": {
-              "colorFormat": "hex",
-              "textStyleFormat": "classObject"
+              "colorFormat": {
+                "format": "hex"
+              }
             },
             "formatConfig": {
-              "jssObjectName": "navds",
-              "exportDefault": false,
-              "tabWidth": 4,
-              "singleQuote": true
+              "objectName": "colors",
+              "module": "commonjs"
             }
           }
         }
