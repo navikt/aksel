@@ -5,7 +5,7 @@
   "rules": [
     {
       "name": "Colors",
-      "path": "@navikt/ds-tokens/src/color.js",
+      "path": "@navikt/ds-tokens/src/color.json",
       "filter": {
         "types": ["color"]
       },
@@ -26,7 +26,7 @@
             },
             "formatConfig": {
               "objectName": "colors",
-              "module": "commonjs"
+              "module": "json"
             }
           }
         }
