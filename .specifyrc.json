@@ -25,7 +25,6 @@
               }
             },
             "formatConfig": {
-              "objectName": "colors",
               "module": "json"
             }
           }
