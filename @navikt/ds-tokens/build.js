@@ -8,7 +8,15 @@ StyleDictionary.registerTransform({
     kebabCase([options.prefix].concat(prop.path).join(" ")),
 });
 
+StyleDictionary.registerParser({
+  pattern: /\color.js$/,
+  parse: ({ filePath, contents }) => {
+    return {};
+  },
+});
+
 const StyleDictionaryExtended = StyleDictionary.extend(
   __dirname + "/config.json"
 );
+
 StyleDictionaryExtended.buildAllPlatforms();
