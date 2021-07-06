@@ -1,33 +1,19 @@
 {
   "repository": "@nav/designsystem",
   "head": "updated-specify-tokens",
-  "base": "specify-tokens",
+  "base": "master",
   "rules": [
     {
-      "name": "Colors",
-      "path": "@navikt/ds-tokens/src/color.js",
+      "name": "Specify / Icons",
+      "path": "@navikt/ds-icons/svg",
       "filter": {
-        "types": ["color"]
+        "types": ["vector"]
       },
       "parsers": [
         {
-          "name": "sort-by",
+          "name": "name-assets-files-by-pattern",
           "options": {
-            "keys": ["name"]
-          }
-        },
-        {
-          "name": "to-tailwind",
-          "options": {
-            "formatTokens": {
-              "colorFormat": {
-                "format": "hex"
-              }
-            },
-            "formatConfig": {
-              "objectName": "colors",
-              "module": "commonjs"
-            }
+            "pattern": "{{name}}.{{format}}"
           }
         }
       ]
