@@ -88,12 +88,16 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
             {heading}
           </span>
           <Expand
+            focusable="false"
+            role="img"
             className={cl(
               "navds-accordion__chevron",
               `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
             )}
           />
           <ExpandFilled
+            focusable="false"
+            role="img"
             className={cl(
               "navds-accordion__chevron",
               "navds-accordion__chevron--filled",

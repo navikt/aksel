@@ -32,6 +32,7 @@ const AccordionMenuCollapsable = forwardRef<
         {title}
         <Expand
           role="img"
+          focusable="false"
           aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
           className="navds-accordion-menu-collapsable__expand-icon"
         />

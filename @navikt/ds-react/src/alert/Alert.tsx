@@ -30,13 +30,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled />;
+      return <ErrorFilled focusable="false" role="img" />;
     case "warning":
-      return <WarningFilled />;
+      return <WarningFilled focusable="false" role="img" />;
     case "info":
-      return <InformationFilled />;
+      return <InformationFilled focusable="false" role="img" />;
     case "success":
-      return <SuccessFilled />;
+      return <SuccessFilled focusable="false" role="img" />;
     default:
       return null;
   }
