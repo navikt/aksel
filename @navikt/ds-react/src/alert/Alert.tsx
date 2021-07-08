@@ -30,13 +30,37 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled focusable="false" role="img" />;
+      return (
+        <ErrorFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "warning":
-      return <WarningFilled focusable="false" role="img" />;
+      return (
+        <WarningFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "info":
-      return <InformationFilled focusable="false" role="img" />;
+      return (
+        <InformationFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "success":
-      return <SuccessFilled focusable="false" role="img" />;
+      return (
+        <SuccessFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     default:
       return null;
   }
@@ -56,8 +80,11 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       )}
       {...rest}
     >
-      <Icon variant={variant} />
-      <span>{children}</span>
+      <span>
+        <span className="sr-only">{`${variant}-ikon`}</span>
+        <Icon variant={variant} />
+      </span>
+      <div>{children}</div>
     </div>
   )
 );
