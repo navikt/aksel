@@ -34,7 +34,6 @@
 .navds-alert > span {
   display: flex;
   align-items: center;
-
   max-height: calc(var(--navds-spacing-8) - 2px);
 }
 
