@@ -1,6 +1,6 @@
 import * as React from "react";
 import classnames from "classnames";
-import { guid, keyCodes, omit } from "nav-frontend-js-utils";
+import { guid, keyCodes } from "nav-frontend-js-utils";
 import Ikon from "nav-frontend-ikoner-assets";
 import Popover, {
   PopoverOrientering,
