@@ -75,6 +75,11 @@ class Hjelpetekst extends React.Component<HjelpetekstProps, State> {
     }
   };
 
+  handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    this.togglePopover(e);
+    this.props.onClick && this.props.onClick(e);
+  };
+
   render() {
     const {
       children,
@@ -82,6 +87,7 @@ class Hjelpetekst extends React.Component<HjelpetekstProps, State> {
       popoverProps,
       type,
       tittel,
+      onClick,
       ...rest
     } = this.props;
 
@@ -90,7 +96,7 @@ class Hjelpetekst extends React.Component<HjelpetekstProps, State> {
         <button
           type="button"
           className="hjelpetekst__apneknapp"
-          onClick={this.togglePopover}
+          onClick={this.handleClick}
           title={tittel}
           aria-expanded={this.state.ankerEl !== undefined}
           aria-controls={this.popoverId}
