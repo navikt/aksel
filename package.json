@@ -10,7 +10,7 @@
     "clean": "yarn workspace website clean",
     "build:gatsby": "yarn react-docgen && yarn workspace website build:gatsby",
     "serve": "yarn workspace website serve",
-    "storybook": "yarn run start-storybook -p 6006",
+    "storybook": "yarn run start-storybook --loglevel warn --quiet -p 6006",
     "build-storybook": "build-storybook",
     "watch-css": "yarn workspace @navikt/ds-css run watch",
     "chromatic": "STORYBOOK_CHROMATIC=true npx chromatic --project-token x3xqdfgkujg",
