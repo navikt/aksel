@@ -8,6 +8,7 @@
   grid-auto-flow: column;
   justify-content: start;
   min-height: 64px;
+  box-sizing: border-box;
 }
 
 .navds-alert--s {
