@@ -20,6 +20,7 @@ export { CopyToClipboard } from "./copy-to-clipboard/index";
 export { Cell, CellProps, Grid, GridProps } from "./grid/index";
 export { Header, HeaderProps } from "./header/index";
 export { Input, InputProps } from "./input/index";
+export { Checkbox, CheckboxProps } from "./checkbox/index";
 export {
   InternalHeader,
   InternalHeaderProps,
