@@ -5,7 +5,8 @@
   border-radius: 4px;
   border: 1px solid var(--navds-color-border);
   box-sizing: border-box;
-  min-height: 44px;
+  min-height: 48px;
+  width: 100%;
 }
 
 .navds-input--s {

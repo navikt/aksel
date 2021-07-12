@@ -13,18 +13,20 @@ export interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, size = "m", ...rest }, ref) => {
     return (
-      <input
-        ref={ref}
-        type="text"
-        className={cl(
-          "navds-input",
-          className,
-          `navds-input--${size}`,
-          "navds-body-short",
-          { "navds-body--s": size === "s" }
-        )}
-        {...rest}
-      />
+      <div>
+        <input
+          ref={ref}
+          type="text"
+          className={cl(
+            "navds-input",
+            className,
+            `navds-input--${size}`,
+            "navds-body-short",
+            { "navds-body--s": size === "s" }
+          )}
+          {...rest}
+        />
+      </div>
     );
   }
 );
