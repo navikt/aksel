@@ -1,7 +1,8 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 
-export interface RadioProps extends HTMLAttributes<HTMLInputElement> {
+export interface RadioProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * @ignore
    */
@@ -13,7 +14,7 @@ export interface RadioProps extends HTMLAttributes<HTMLInputElement> {
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, size = "m", label, ...rest }, ref) => {
-    const id = "test123" + size;
+    const id = "test123" + size + ref;
     return (
       <div>
         <input

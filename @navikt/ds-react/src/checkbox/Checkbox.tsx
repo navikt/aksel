@@ -1,7 +1,8 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 
-export interface CheckboxProps extends HTMLAttributes<HTMLInputElement> {
+export interface CheckboxProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * @ignore
    */
