@@ -1,0 +1,161 @@
+.navds-radio {
+  position: absolute;
+  opacity: 0;
+  appearance: none;
+  padding: 0.5rem;
+  background-color: #fff;
+  border: 1px solid var(--navds-color-gray-40);
+  box-sizing: border-box;
+}
+
+.navds-radio__label {
+  padding-left: 4rem;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  margin-bottom: 0;
+  line-height: 3rem;
+}
+
+.navds-radio__label::before {
+  content: "";
+  position: absolute;
+  display: block;
+  text-align: center;
+  background-color: #fff;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 1px solid var(--navds-color-gray-40);
+  width: 3rem;
+  height: 3rem;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+}
+
+.navds-radio--s + .navds-radio__label {
+  line-height: 2rem;
+}
+
+.navds-radio--s + .navds-radio__label::before {
+  width: 2rem;
+  height: 2rem;
+}
+
+.navds-radio:hover + .navds-radio__label::before {
+  color: #0067c5;
+}
+
+.navds-radio:focus + .navds-radio__label::before {
+  box-shadow: 0 0 0 3px #00347d, 0 0 0 2rem #fff inset;
+}
+
+.navds-radio:checked + .navds-radio__label::before {
+  border: 2px solid #0067c5;
+  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem #0067c5 inset;
+}
+
+.navds-radio:checked:focus + .navds-radio__label::before {
+  transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
+  box-shadow: 0 0 0 3px #00347d, 0 0 0 3px #fff inset, 0 0 0 2rem #0067c5 inset;
+}
+
+.navds-radio:disabled + .navds-radio__label {
+  color: var(--navds-color-gray-40);
+}
+
+.navds-radio:disabled:hover + .navds-radio__label {
+  cursor: not-allowed;
+}
+
+.navds-radio:disabled + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-10);
+  border-color: var(--navds-color-gray-60);
+  box-shadow: none;
+}
+
+.navds-radio:disabled:checked + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-40);
+  border-color: var(--navds-color-gray-40);
+  box-shadow: 0 0 0 3px #00347d, 0 0 0 3px #fff inset,
+    0 0 0 2rem var(--navds-color-gray-40) inset;
+}
+
+/*
+.navds-radio--s + .navds-radio__label {
+  padding-left: 3rem;
+  height: 2rem;
+  line-height: 2rem;
+}
+
+.navds-radio--s + .navds-radio__label::before {
+  width: 2rem;
+  height: 2rem;
+}
+
+.navds-radio:hover + .navds-radio__label::before {
+  border-color: var(--navds-color-blue-50);
+  background-color: var(--navds-color-blue-10);
+}
+
+.navds-radio:focus + .navds-radio__label::before {
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-radio:checked + .navds-radio__label::before {
+  background-color: var(--navds-color-blue-50);
+  border: 2px solid var(--navds-color-blue-50);
+  box-shadow: 0 0 0 3px white inset, 0 0 0 12px var(--navds-color-blue-50) inset;
+}
+
+.navds-radio:checked:focus + .navds-radio__label::before {
+  background-color: white;
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjMDA2N0M1IiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
+}
+
+.navds-radio:disabled + .navds-radio__label {
+  color: var(--navds-color-gray-40);
+}
+
+.navds-radio:disabled:hover + .navds-radio__label {
+  cursor: not-allowed;
+}
+
+.navds-radio:disabled + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-10);
+  border-color: var(--navds-color-gray-60);
+  box-shadow: none;
+}
+
+.navds-radio:disabled:checked + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-40);
+  border-color: var(--navds-color-gray-40);
+} */
+
+/*
+.radioknapp {
+  &:checked + .skjemaelement__label::before {
+    border: 2px solid @navBla;
+    box-shadow: 0 0 0 3px @white inset, 0 0 0 12px @navBla inset;
+  }
+
+  &:disabled {
+    &:checked + .skjemaelement__label::before {
+      border: 2px solid @navGra40;
+      box-shadow: 0 0 0 3px @white inset, 0 0 0 12px @navGra40 inset;
+    }
+  }
+
+  &:focus + .skjemaelement__label::before {
+    box-shadow: 0 0 0 3px @fokusFarge, 0 0 0 12px @white inset;
+  }
+
+  &:checked:focus + .skjemaelement__label::before {
+    .mixin-transition(200ms, box-shadow);
+
+    box-shadow: 0 0 0 3px @fokusFarge, 0 0 0 3px @white inset,
+      0 0 0 12px @navBla inset;
+  }
+}
+
+*/

@@ -40,6 +40,7 @@ export { Modal, ModalProps } from "./modal/index";
 export { Panel, PanelProps } from "./panel/index";
 export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
+export { Radio, RadioProps } from "./radio/index";
 export {
   BodyLong,
   BodyShort,
