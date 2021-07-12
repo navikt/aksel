@@ -7,5 +7,10 @@ export default {
 } as Meta;
 
 export const All = () => {
-  return <div></div>;
+  return (
+    <div>
+      <Input />
+      <Input size="s" />
+    </div>
+  );
 };

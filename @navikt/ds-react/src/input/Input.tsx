@@ -6,12 +6,24 @@ export interface InputProps extends HTMLAttributes<HTMLInputElement> {
    * @ignore
    */
   className?: string;
+  size?: "m" | "s";
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, ...rest }, ref) => {
+  ({ className, size = "m", ...rest }, ref) => {
     return (
-      <input ref={ref} className={cl("navds-input", className)} {...rest} />
+      <input
+        ref={ref}
+        type="text"
+        className={cl(
+          "navds-input",
+          className,
+          `navds-input--${size}`,
+          "navds-body-short",
+          { "navds-body--s": size === "s" }
+        )}
+        {...rest}
+      />
     );
   }
 );
