@@ -10,7 +10,18 @@ export const All = () => {
   return (
     <div>
       <Input />
+      <br />
       <Input size="s" />
+      <br />
+      <Input label="Label for input" />
+      <br />
+      <Input label="Label for input" description="description for label" />
+      <br />
+      <Input
+        size="s"
+        label="Label for input"
+        description="description for label"
+      />
     </div>
   );
 };

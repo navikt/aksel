@@ -9,15 +9,38 @@ export interface InputProps
    */
   className?: string;
   size?: "m" | "s";
+  label?: React.ReactNode;
+  description?: React.ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size = "m", ...rest }, ref) => {
-    /* const internalId = useRef(uuidv4()) */
+  ({ className, size = "m", id, label, description, ...rest }, ref) => {
+    const internalId = useRef(uuidv4());
 
     return (
       <div>
+        {label && (
+          <label htmlFor={id ?? internalId.current}>
+            <div
+              className={cl("navds-input__label", "navds-label", {
+                "navds-label--s": size === "s",
+              })}
+            >
+              {label}
+            </div>
+            {description && (
+              <div
+                className={cl("navds-input__description", "navds-body-short", {
+                  "navds-body--s": size === "s",
+                })}
+              >
+                {description}
+              </div>
+            )}
+          </label>
+        )}
         <input
+          id={id ?? internalId.current}
           ref={ref}
           type="text"
           className={cl(
