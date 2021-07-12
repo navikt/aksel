@@ -1,5 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
 import cl from "classnames";
+import { v4 as uuidv4 } from "uuid";
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -12,6 +13,8 @@ export interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, size = "m", ...rest }, ref) => {
+    /* const internalId = useRef(uuidv4()) */
+
     return (
       <div>
         <input

@@ -1,5 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
 import cl from "classnames";
+import { v4 as uuidv4 } from "uuid";
 
 export interface RadioProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -14,11 +15,11 @@ export interface RadioProps
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, size = "m", label, ...rest }, ref) => {
-    const id = "test123" + size + ref;
+    const internalId = useRef(uuidv4());
     return (
       <div>
         <input
-          id={id}
+          id={internalId.current}
           ref={ref}
           type="radio"
           className={cl("navds-radio", className, `navds-radio--${size}`)}
@@ -26,7 +27,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
         />
         {label && (
           <label
-            htmlFor={id}
+            htmlFor={internalId.current}
             className={cl("navds-radio__label", "navds-body-short", {
               "navds-body--s": size === "s",
             })}

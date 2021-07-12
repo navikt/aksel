@@ -1,5 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useRef } from "react";
 import cl from "classnames";
+import { v4 as uuidv4 } from "uuid";
 
 export interface CheckboxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -14,11 +15,12 @@ export interface CheckboxProps
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   ({ className, size = "m", label, ...rest }, ref) => {
-    const id = "test123" + size;
+    const internalId = useRef(uuidv4());
+
     return (
       <div>
         <input
-          id={id}
+          id={internalId.current}
           ref={ref}
           type="checkbox"
           className={cl("navds-checkbox", className, `navds-checkbox--${size}`)}
@@ -26,7 +28,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         {label && (
           <label
-            htmlFor={id}
+            htmlFor={internalId.current}
             className={cl("navds-checkbox__label", "navds-body-short", {
               "navds-body--s": size === "s",
             })}
