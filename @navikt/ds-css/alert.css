@@ -19,6 +19,7 @@
 .navds-alert > span > svg {
   margin-right: var(--navds-spacing-3);
   font-size: 1.5rem;
+  flex-shrink: 0;
   background: radial-gradient(
     circle,
     var(--navds-color-background) 50%,
@@ -28,8 +29,10 @@
 }
 
 .navds-alert > div {
-  display: flex;
-  align-items: center;
+  display: block;
+  margin: auto 0;
+  max-width: 43.5rem;
+  flex: 1;
 }
 
 .navds-alert > span {
