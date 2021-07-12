@@ -9,11 +9,16 @@
 /* Disabled because of UU concerns */
 /* @import "smooth-scroll.css"; */
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--navds-font-family);
   line-height: 1.375;
   color: var(--navds-color-text-primary);
   font-size: 1.125rem;
+  /* box-sizing: border-box; */
 }
 
 a {
