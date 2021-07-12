@@ -9,7 +9,7 @@ export default {
 };
 
 export const All = () => {
-  const label = "pi";
+  const label = "Kopierte PI til clipboard";
 
   const text = "3.14159265359";
   return (
