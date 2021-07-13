@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "../index";
+import { Success } from "@navikt/ds-icons";
 
 export default {
   title: "ds-react/button",
@@ -64,6 +65,22 @@ export const All = () => {
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="s">
             {variant}
+          </Button>
+        ))}
+      </Section>
+      <h2>Button w/icon</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant}>
+            {variant} <Success />
+          </Button>
+        ))}
+      </Section>
+      <h2>Small w/icon</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} size="s">
+            {variant} <Success />
           </Button>
         ))}
       </Section>
