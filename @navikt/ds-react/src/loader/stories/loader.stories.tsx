@@ -35,8 +35,27 @@ export const All = () => {
 };
 
 export const LoaderInButton = () => (
-  <Button>
-    Laster...
-    <Loader />
-  </Button>
+  <div>
+    <Button>
+      Laster...
+      <Loader />
+    </Button>
+    <Button size="s">
+      Laster...
+      <Loader />
+    </Button>
+    <h2>variants</h2>
+    <Button variant="secondary">
+      Laster...
+      <Loader />
+    </Button>
+    <Button variant="action">
+      Laster...
+      <Loader />
+    </Button>
+    <Button variant="danger">
+      Laster...
+      <Loader />
+    </Button>
+  </div>
 );

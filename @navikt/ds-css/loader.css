@@ -9,7 +9,15 @@
   animation: loader-dasharray 1.4s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
-  /* stroke: var(--navds-gray-70); */
+  stroke: var(--navds-color-gray-40);
+}
+
+.navds-loader circle:nth-child(2) {
+  stroke: var(--navds-color-gray-10);
+}
+
+.navds-loader--transparent circle:nth-child(2) {
+  stroke: transparent;
 }
 
 .navds-loader--2xl {
@@ -34,6 +42,27 @@
 
 .navds-loader--xs {
   width: 1rem;
+}
+
+/*
+ * Button spesific styling
+ */
+
+.navds-button .navds-loader circle:nth-child(3) {
+  stroke: currentColor;
+}
+
+.navds-button:hover .navds-loader circle:nth-child(2) {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-button:active .navds-loader circle:nth-child(2) {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-button--action .navds-loader circle:nth-child(2),
+.navds-button--danger .navds-loader circle:nth-child(2) {
+  stroke: rgba(255, 255, 255, 0.3);
 }
 
 @keyframes loader-rotate {
