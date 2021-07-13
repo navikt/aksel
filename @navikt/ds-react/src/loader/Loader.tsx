@@ -13,8 +13,9 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * @default "m"
    */
   size?: "2xl" | "xl" | "l" | "m" | "s" | "xs";
-  /*
-    Title prop on svg
+  /**
+   * Title prop on svg
+   * @default "venter..."
    */
   title?: React.ReactNode;
   /*
