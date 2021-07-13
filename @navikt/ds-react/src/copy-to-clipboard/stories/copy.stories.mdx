@@ -6,56 +6,30 @@ import { Success } from "@navikt/ds-react";
 
 # Hvordan ta i bruk CopyToClipboard
 
+Innholdet i `text` vil da bli kopiert til clipboard, mens innholdet i `label`
+brukes i popovertekst og `sr-only` span som rendres hvis knappen ikke har noe tekstinnhold
+`sr-only` tekst blir da `Kopier ${label} (${text})`
+
 ```jsx
-<CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"} />
+<CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
+  Kopier Pi{" "}
+</CopyToClipboard>
 ```
 
 <Canvas>
-  <CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"} />
+  <CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
+    Kopier Pi{" "}
+  </CopyToClipboard>
 </Canvas>
 
-## Varianter
+## Custom ikon
 
-`variants`-prop kan brukes for å endre utseende mellom
-`primary`, `secondary`, `action` og `danger`
+Man kan sette andre ikoner en `Copy` ved `icon`-proppen
 
-<Canvas>
-  <Button variant="primary">Buttontekst</Button>
-  <Button variant="secondary">Buttontekst</Button>
-  <Button variant="action">Buttontekst</Button>
-  <Button variant="danger">Buttontekst</Button>
-</Canvas>
-
-## Sizing
-
-Button har to størrelser: Default 48px min-height og small 32px min-height
-
-<Canvas>
-  <Button size="s" variant="primary">
-    Buttontekst
-  </Button>
-  <Button size="s" variant="secondary">
-    Buttontekst
-  </Button>
-  <Button size="s" variant="action">
-    Buttontekst
-  </Button>
-  <Button size="s" variant="danger">
-    Buttontekst
-  </Button>
-</Canvas>
-
-## Med ikon eller `<Loader />`
-
-Hvis man setter ikoner (svg) eller `<Loader />` rett på button vil størrelsen
-bli justert automatisk
-
-<Canvas>
-  <Button>
-    Buttontekst <Loader />
-  </Button>
-  <Button size="s">
-    Buttontekst
-    <Loader />
-  </Button>
-</Canvas>
+```jsx
+<CopyToClipboard
+  icon={<Link />}
+  label={"Kopierte PI til clipboard"}
+  text={"3.14"}
+/>
+```

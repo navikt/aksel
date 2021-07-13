@@ -48,14 +48,18 @@ Button har to størrelser: Default 48px min-height og small 32px min-height
 ## Med ikon eller `<Loader />`
 
 Hvis man setter ikoner (svg) eller `<Loader />` rett på button vil størrelsen
-bli justert automatisk
+bli justert automatisk. For å få riktige marginer rundt ikonet må man da wrappe innholdet
+i et element
 
 <Canvas>
   <Button>
-    Buttontekst <Loader />
+    <span>Buttontekst</span> <Loader />
   </Button>
   <Button size="s">
-    Buttontekst
+    <span>Buttontekst</span>
     <Loader />
+  </Button>
+  <Button>
+    <Loader /> <span>Buttontekst</span>
   </Button>
 </Canvas>
