@@ -10,6 +10,7 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
    * Changes sizing
    * 64px | 40px | 32px | 24px | 20px | 16px
+   * @default "m"
    */
   size?: "2xl" | "xl" | "l" | "m" | "s" | "xs";
   /*

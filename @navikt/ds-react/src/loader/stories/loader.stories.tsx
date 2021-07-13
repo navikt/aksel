@@ -30,32 +30,30 @@ export const All = () => {
       <Loader size="m" transparent />
       <Loader size="s" transparent />
       <Loader size="xs" transparent />
+      <h2>Brukt i knapper</h2>
+      <div>
+        <Button>
+          Laster...
+          <Loader />
+        </Button>{" "}
+        <Button size="s">
+          Laster...
+          <Loader />
+        </Button>
+        <h2>Variants</h2>
+        <Button variant="secondary">
+          Laster...
+          <Loader />
+        </Button>{" "}
+        <Button variant="action">
+          Laster...
+          <Loader />
+        </Button>{" "}
+        <Button variant="danger">
+          Laster...
+          <Loader />
+        </Button>
+      </div>
     </div>
   );
 };
-
-export const LoaderInButton = () => (
-  <div>
-    <Button>
-      Laster...
-      <Loader />
-    </Button>
-    <Button size="s">
-      Laster...
-      <Loader />
-    </Button>
-    <h2>variants</h2>
-    <Button variant="secondary">
-      Laster...
-      <Loader />
-    </Button>
-    <Button variant="action">
-      Laster...
-      <Loader />
-    </Button>
-    <Button variant="danger">
-      Laster...
-      <Loader />
-    </Button>
-  </div>
-);
