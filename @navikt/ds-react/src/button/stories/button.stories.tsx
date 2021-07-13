@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "../index";
-import { Success } from "@navikt/ds-icons";
 
 export default {
   title: "ds-react/button",
@@ -69,22 +68,5 @@ export const All = () => {
         ))}
       </Section>
     </>
-  );
-};
-
-export const ButtonWIcon = () => {
-  return (
-    <div>
-      <Button>
-        Button
-        <Success />
-      </Button>
-      <br />
-      <div>--</div>
-      <Button size="s">
-        Button
-        <Success />
-      </Button>
-    </div>
   );
 };
