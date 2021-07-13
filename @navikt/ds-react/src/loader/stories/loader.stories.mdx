@@ -1,0 +1,86 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { background } from "@storybook/theming";
+import { Loader } from "../index";
+import { Button } from "../../index";
+
+<Meta title="ds-react/loader/intro" />
+
+# Hvordan ta i bruk Loader
+
+```jsx
+<Loader title="Laster inn ny data" />
+```
+
+<Canvas>
+  <Loader />
+</Canvas>
+
+Her kan `title` proppen brukes for å gi en liten tooltip som sier hvorfor den laster
+
+## Justering av størrelse
+
+Loaderen kommer i størrelsene `2xl`, `xl`, `l`, `m`, `s` og `xs`
+
+```jsx
+<Loader size="xl" />
+```
+
+<Canvas>
+  <Loader size="2xl" />
+  <Loader size="xl" />
+  <Loader size="l" />
+  <Loader size="m" />
+  <Loader size="s" />
+  <Loader size="xs" />
+</Canvas>
+
+## Transparent
+
+Bakgrunnen kan settes til transparent med `transparent={true}`
+
+```jsx
+<Loader transparent />
+```
+
+<Canvas>
+  <Loader size="2xl" transparent />
+</Canvas>
+
+## Bruk av loader i knapper
+
+Husk her å gi brukeren nok informasjon om hvorfor knappen har en Loader. Dette kan gjøres ved å ha god tekst på siden,
+i knappen og i `title`-proppen for `Loader`. Unngå også bruk av `Loader` uten noen tekst som hinter til hva som foregår.
+
+Stylingen er overstyrt for knapper, slik at `transparent` ikke fungerer by-default ved bruk i knapper.
+Størrelsen justeres også automatisk, slik at alt man trenger er å sette Loaderen rett inn i knappen.
+
+```jsx
+<Button>
+  Laster inn nytt innhold...
+  <Loader />
+</Button>
+```
+
+<Canvas>
+  <Button>
+    Laster inn nytt innhold...
+    <Loader />
+  </Button>
+</Canvas>
+
+## Overskrive farger for å sikre kontrast
+
+I de casene der man må justere fargene for å ha bedre kontrast så vil disse to klassene være relevante.
+Om mulig bør man unngå dette og bare ta i bruk default.
+
+```css
+/* Foreground */
+.navds-loader circle:nth-child(3) {
+  stroke: var(--navds-color-gray-40);
+}
+
+/* Background */
+.navds-loader circle:nth-child(2) {
+  stroke: var(--navds-color-gray-10);
+}
+```
