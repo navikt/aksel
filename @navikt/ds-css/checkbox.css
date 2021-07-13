@@ -2,6 +2,7 @@
   min-height: 44px;
   position: absolute;
   opacity: 0;
+  box-sizing: border-box;
 }
 
 .navds-checkbox__label {

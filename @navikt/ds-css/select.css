@@ -1,0 +1,80 @@
+.navds-select {
+  appearance: none;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid var(--navds-color-gray-40);
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  display: inline-block;
+}
+
+.navds-select:hover {
+  border-color: var(--navds-color-blue-50);
+}
+
+.navds-select:focus {
+  outline: 0;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-select__container {
+  position: relative;
+}
+.navds-select__container > select {
+  padding-right: 1.5em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  width: 100%;
+}
+
+/* Skjuler pil i IE10 */
+.navds-select__container > select::-ms-expand {
+  display: none;
+}
+
+.navds-select__container::before {
+  pointer-events: none;
+  content: "";
+  background: var(--navds-color-darkgray);
+  height: 2px;
+  width: 10px;
+  border-radius: 10px;
+  right: 0.75rem;
+  top: 50%;
+  z-index: 4;
+  position: absolute;
+  transform: translateX(3px) rotate(-45deg);
+}
+
+.navds-select__container::after {
+  pointer-events: none;
+  content: "";
+  background: var(--navds-color-darkgray);
+  height: 2px;
+  width: 10px;
+  border-radius: 10px;
+  right: 0.75rem;
+  top: 50%;
+  z-index: 4;
+  position: absolute;
+  transform: translateX(-3px) rotate(45deg);
+}
+
+.navds-select--s {
+  min-height: 32px;
+  padding: 0.25rem;
+}
+
+.navds-select__label {
+  margin-bottom: var(--navds-spacing-2);
+  display: block;
+}
+
+.navds-select__description {
+  margin-bottom: var(--navds-spacing-2);
+  display: block;
+}
