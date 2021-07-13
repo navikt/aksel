@@ -60,7 +60,7 @@ export const All = () => {
 };
 
 /* prettier-ignore */
-const illustrationPictogram = <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const illustrationPictogram = <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M37.6697 60.6469L9 31.9772L30.9772 10L59.6469 38.6697L72.1116 26.205L81 82L25.205 73.1116L37.6697 60.6469Z" fill="#FFECCC"/>
 <path d="M94.5 64.0584C94.5 72.104 88.003 78.6169 80 78.6169C71.997 78.6169 65.5 72.104 65.5 64.0584C65.5 56.0129 71.997 49.5 80 49.5C88.003 49.5 94.5 56.0129 94.5 64.0584Z" stroke="#262626" stroke-width="3"/>
 <path d="M91.9999 95.9999V95.9999C91.9999 89.3725 86.6274 83.9561 79.9999 83.9561V83.9561C73.3725 83.9561 67.9999 89.3725 67.9999 95.9999V95.9999" stroke="#262626" stroke-width="3"/>
