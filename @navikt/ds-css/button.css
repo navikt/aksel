@@ -29,11 +29,6 @@
   height: 1.25rem;
 }
 
-.navds-button > svg {
-  /* margin-right: 0.5rem;
-  margin-left: 0.5rem; */
-}
-
 .navds-button > svg + *:not(.sr-only),
 .navds-button > *:not(.sr-only) + svg {
   margin-left: 0.5rem;
