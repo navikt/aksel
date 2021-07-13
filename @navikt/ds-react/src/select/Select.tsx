@@ -22,7 +22,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const internalId = useRef(uuidv4());
 
     return (
-      <div>
+      <div className="navds-form__element">
         {label && (
           <label htmlFor={id ?? internalId.current}>
             <div

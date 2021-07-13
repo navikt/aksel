@@ -18,7 +18,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const internalId = useRef(uuidv4());
 
     return (
-      <div>
+      <div className="navds-form__element">
         <input
           id={internalId.current}
           ref={ref}
