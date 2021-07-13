@@ -1,0 +1,5 @@
+.navds-form--error {
+  color: var(--navds-color-red-50);
+  display: block;
+  margin-top: var(--navds-spacing-2);
+}
