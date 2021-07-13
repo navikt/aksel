@@ -19,11 +19,15 @@
 
 .navds-button > svg {
   font-size: 1.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
   margin-left: 0.5rem;
 }
 
 .navds-button--s > svg {
   font-size: 1.25rem;
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .navds-button--s {
