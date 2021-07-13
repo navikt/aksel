@@ -1,0 +1,58 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="ds-react/roadmap" />
+
+# Roadmap/Fremtidsplan
+
+Arbeidet med det nye pakke-oppsettet har nå foregått en stund og skulle egentlig vært
+lengre på vei en det er nå. Men arbeidet har på ingen måte stoppet opp! Vi jobber kontinuerlig med
+å finne bedre løsninger for å kunne bygge systemet opp fra bunnen av. Dette innegår da
+ny dokumentasjons-side bygd med Sanity, nye byggeblokker helt fra token-nivå og bedre sizing for eksterne/interne sider. Dette vil da forhåpentligvis la oss
+bygge mer robuste og fleksible løsninger for fremtiden.
+
+(Rekkefølgen representer ikke faktisk tidsline eller prioritet)
+
+## Tokens
+
+Vi bygger opp `@navikt/ds-tokens` pakken som inneholder alle design-tokensene til designsystemet fra bunnen av.
+Dette vil gjøre styling og overriding av komponenter enklere da man kan bruke css-variabler.
+
+## Interne / Ekstern sizing
+
+Komponenter tilpasses og standariseres bedre for skillet mellom interne/eksterne flater.
+Løsning er ikke fast bestemt, men eksempel på dette er `size="s" -> 32px, size="m"-> 48px`.
+Dette vil da eksempelvis kunne være en standard som er gjennomgående for de fleste komponentene.
+
+## Ny dokumentasjon-side
+
+Vi bygger en ny side for å dokumentere systemet, og mer rundt utvikling/design i nav med "Verktøykassen"
+
+## Migrere komponenter/styling fra nav-frontend-\* -> `@navikt/ds-css / @navikt/ds-react`
+
+Dette arbeidet kommer sakte men sikkert på plass, men tar litt tid da mye må på plass først, da eksempelvis sizing og tokens.
+Noen komponenter vil ha oppdatert funksjonalitet, noen bare stilendringer, mens noen kan nesten brukes 1-1 fra nav-frontend-.
+
+Note: Noen pakker vil ikke flyttes over fra nav-frontend og `deprecates` i praksis da. Selve pakkene kommer
+ikke til å faktisk bli deprecated på `npm`, slik at man kan fortsette å ta dem i bruk uten en sint terminal hver gang man kjører `yarn install`.
+
+## Theming
+
+Etterhvert når vi har nye react, css og token pakke på plass har vi et ønske om å kunne se på theming for
+eks darkmode.
+
+## Vue, svelte, web-components etc...
+
+Dette er noe vi ikke har på planene for tiden, men etterhvert som ting faller på plass så vil dette være
+noe vi kunne ta en titt på hvis vi ser at det trengs.
+
+## Feature-flagging
+
+Ideen om å ta i bruk feature-flagging er noe som virker veldig interessant og vil da se på muligheten for å kunne levere
+større endringe i feature-flags for testing, og da publisere under eks major-bump i faste intervaller. Dette vil da kunne
+gjøre det enklere for deg som consumer av pakkene å ha oversikt over endringer og hva som må migreres.
+
+## Versjonering
+
+To av de nye pakkene under `@navikt`, da `ds-css` og `ds-react` er nå samversjonert. I fremtiden vil vi se på å
+ha både samversjonering (alle pakker under en eks ds-react versjon) og induvduell verjsonering da eks ds-react/button har en egen versjon
+slik at man kan ha mer finkontroll over komponentbruk på siden sin.
