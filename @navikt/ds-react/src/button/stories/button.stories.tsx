@@ -1,7 +1,6 @@
 import React from "react";
 import { Button } from "../index";
 import { Success } from "@navikt/ds-icons";
-import { Loader } from "../..";
 
 export default {
   title: "ds-react/button",
