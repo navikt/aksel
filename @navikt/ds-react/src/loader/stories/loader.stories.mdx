@@ -67,3 +67,20 @@ Størrelsen justeres også automatisk, slik at alt man trenger er å sette Loade
     <Loader />
   </Button>
 </Canvas>
+
+## Overskrive farger for å sikre kontrast
+
+I de casene der man må justere fargene for å ha bedre kontrast så vil disse to klassene være relevante.
+Om mulig bør man unngå dette og bare ta i bruk default.
+
+```css
+/* Foreground */
+.navds-loader circle:nth-child(3) {
+  stroke: var(--navds-color-gray-40);
+}
+
+/* Background */
+.navds-loader circle:nth-child(2) {
+  stroke: var(--navds-color-gray-10);
+}
+```
