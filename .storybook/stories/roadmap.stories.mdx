@@ -1,8 +1,8 @@
 import { Meta } from "@storybook/addon-docs";
 
-<Meta title="ds-react/roadmap" />
+<Meta title="ds-react/Roadmap" />
 
-# Roadmap/Fremtidsplan
+# Plan videre
 
 Arbeidet med det nye pakke-oppsettet har nå foregått en stund og skulle egentlig vært
 lengre på vei en det er nå. Men arbeidet har på ingen måte stoppet opp! Vi jobber kontinuerlig med
@@ -17,7 +17,7 @@ bygge mer robuste og fleksible løsninger for fremtiden.
 Vi bygger opp `@navikt/ds-tokens` pakken som inneholder alle design-tokensene til designsystemet fra bunnen av.
 Dette vil gjøre styling og overriding av komponenter enklere da man kan bruke css-variabler.
 
-## Interne / Ekstern sizing
+## Intern / Ekstern sizing
 
 Komponenter tilpasses og standariseres bedre for skillet mellom interne/eksterne flater.
 Løsning er ikke fast bestemt, men eksempel på dette er `size="s" -> 32px, size="m"-> 48px`.
@@ -32,8 +32,7 @@ Vi bygger en ny side for å dokumentere systemet, og mer rundt utvikling/design 
 Dette arbeidet kommer sakte men sikkert på plass, men tar litt tid da mye må på plass først, da eksempelvis sizing og tokens.
 Noen komponenter vil ha oppdatert funksjonalitet, noen bare stilendringer, mens noen kan nesten brukes 1-1 fra nav-frontend-.
 
-Note: Noen pakker vil ikke flyttes over fra nav-frontend og `deprecates` i praksis da. Selve pakkene kommer
-ikke til å faktisk bli deprecated på `npm`, slik at man kan fortsette å ta dem i bruk uten en sint terminal hver gang man kjører `yarn install`.
+Note: Noen pakker vil ikke flyttes over fra nav-frontend og `deprecates` i praksis da. De pakkene som ikka tas over vil ikke bli deprecated på `npm`, slik at man kan fortsette å ta dem i bruk uten en sint terminal hver gang man kjører `yarn install`.
 
 ## Theming
 
@@ -53,6 +52,6 @@ gjøre det enklere for deg som consumer av pakkene å ha oversikt over endringer
 
 ## Versjonering
 
-To av de nye pakkene under `@navikt`, da `ds-css` og `ds-react` er nå samversjonert. I fremtiden vil vi se på å
+To av de nye pakkene under `@navikt`, da `ds-css` og `ds-react` er nå versjonert under to store pakker med alle komponentene. I fremtiden vil vi se på å
 ha både samversjonering (alle pakker under en eks ds-react versjon) og induvduell verjsonering da eks ds-react/button har en egen versjon
 slik at man kan ha mer finkontroll over komponentbruk på siden sin.
