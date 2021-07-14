@@ -22,7 +22,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <label htmlFor={id ?? internalId.current}>
             <div
-              className={cl("navds-input__label", "navds-label", {
+              className={cl("navds-form__label", "navds-label", {
                 "navds-label--s": size === "s",
               })}
             >
@@ -30,7 +30,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             </div>
             {description && (
               <div
-                className={cl("navds-input__description", "navds-body-short", {
+                className={cl("navds-form__description", "navds-body-short", {
                   "navds-body--s": size === "s",
                 })}
               >

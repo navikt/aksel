@@ -58,7 +58,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <legend>
           <div
-            className={cl("navds-fieldset__legend", "navds-label", {
+            className={cl("navds-form__legend", "navds-label", {
               "navds-label--s": size === "s",
             })}
           >
@@ -66,7 +66,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           </div>
           {description && (
             <div
-              className={cl("navds-fieldset__description", "navds-body-short", {
+              className={cl("navds-form__description", "navds-body-short", {
                 "navds-body--s": size === "s",
               })}
             >

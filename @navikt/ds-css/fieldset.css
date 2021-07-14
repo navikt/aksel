@@ -5,16 +5,6 @@
   position: relative;
 }
 
-.navds-fieldset__legend {
-  margin-bottom: var(--navds-spacing-2);
-  display: block;
-}
-
-.navds-fieldset__description {
-  margin-bottom: var(--navds-spacing-2);
-  display: block;
-}
-
 .navds-fieldset .navds-form__element {
   margin-bottom: var(--navds-spacing-4);
   position: relative;
