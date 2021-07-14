@@ -26,7 +26,7 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * Colored variants for loader
    * @default "neutral"
    */
-  variant?: "neutral" | "interaction" | "danger" | "inverted";
+  variant?: "neutral" | "interaction" | "inverted";
 }
 
 const Loader = forwardRef<SVGSVGElement, LoaderProps>(
