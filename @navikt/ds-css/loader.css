@@ -5,18 +5,34 @@
   animation: loader-rotate 1.4s linear infinite;
 }
 
-.navds-loader circle:nth-child(3) {
+.navds-loader__foreground {
   animation: loader-dasharray 1.4s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
   stroke: var(--navds-color-gray-40);
 }
 
-.navds-loader circle:nth-child(2) {
+.navds-loader__background {
   stroke: var(--navds-color-gray-10);
 }
 
-.navds-loader--transparent circle:nth-child(2) {
+.navds-loader--neutral .navds-loader__foreground {
+  stroke: var(--navds-color-gray-40);
+}
+
+.navds-loader--interaction .navds-loader__foreground {
+  stroke: var(--navds-color-blue-50);
+}
+
+.navds-loader--inverted .navds-loader__foreground {
+  stroke: white;
+}
+
+.navds-loader--inverted .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-loader--transparent .navds-loader__background {
   stroke: transparent;
 }
 

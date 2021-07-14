@@ -22,6 +22,11 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * Background-circle in svg set to transparent
    */
   transparent?: boolean;
+  /**
+   * Colored variants for loader
+   * @default "neutral"
+   */
+  variant?: "neutral" | "interaction" | "danger" | "inverted";
 }
 
 const Loader = forwardRef<SVGSVGElement, LoaderProps>(
@@ -32,6 +37,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
       size = "m",
       title = "venter...",
       transparent = false,
+      variant = "neutral",
       id,
       ...rest
     },
@@ -45,6 +51,9 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
         ref={ref}
         className={cl("navds-loader", className, `navds-loader--${size}`, {
           "navds-loader--transparent": transparent,
+          "navds-loader--neutral": variant === "neutral",
+          "navds-loader--interaction": variant === "interaction",
+          "navds-loader--inverted": variant === "inverted",
         })}
         focusable="false"
         viewBox="0 0 50 50"
@@ -53,6 +62,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
       >
         <title id={id ?? internalId.current}>{title}</title>
         <circle
+          className="navds-loader__background"
           xmlns="http://www.w3.org/2000/svg"
           cx="25"
           cy="25"
@@ -61,6 +71,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           strokeWidth="5"
         />
         <circle
+          className="navds-loader__foreground"
           cx="25"
           cy="25"
           r="20"

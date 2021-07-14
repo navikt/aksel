@@ -30,7 +30,17 @@ export const All = () => {
       <Loader size="m" transparent />
       <Loader size="s" transparent />
       <Loader size="xs" transparent />
-      <h2>Brukt i knapper</h2>
+      <div style={{ backgroundColor: "#c9c9c9" }}>
+        <h2>Varianter</h2>
+        <Loader size="xl" variant="neutral" />
+        <Loader size="xl" variant="interaction" />
+        <Loader size="xl" variant="inverted" />
+        <h2>Varianter transparent</h2>
+        <Loader size="xl" variant="neutral" transparent />
+        <Loader size="xl" variant="interaction" transparent />
+        <Loader size="xl" variant="inverted" transparent />
+        <h2>Brukt i knapper</h2>
+      </div>
       <div>
         <Button>
           Laster...
