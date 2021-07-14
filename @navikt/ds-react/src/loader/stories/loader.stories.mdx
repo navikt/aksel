@@ -34,6 +34,24 @@ Loaderen kommer i størrelsene `2xl`, `xl`, `l`, `m`, `s` og `xs`
   <Loader size="xs" />
 </Canvas>
 
+## Varianter
+
+Loaderen kommer i variantene `neutral`, `interaction` og `inverted`
+
+```jsx
+<Loader size="2xl" variant="neutral"/>
+<Loader size="2xl" variant="interaction"/>
+<Loader size="2xl" variant="inverted"/>
+```
+
+<Canvas>
+  <Loader size="2xl" variant="neutral" />
+  <Loader size="2xl" variant="interaction" />
+  <div style={{ backgroundColor: "black" }}>
+    <Loader size="2xl" variant="inverted" />
+  </div>
+</Canvas>
+
 ## Transparent
 
 Bakgrunnen kan settes til transparent med `transparent={true}`
