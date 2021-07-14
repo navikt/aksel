@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Loader } from "../index";
-import { Button } from "../../index";
+import { Button, Panel } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
+import "./demo.css";
 export default {
   title: "ds-react/loader",
   component: Loader,
@@ -68,62 +69,58 @@ export const All = () => {
   );
 };
 
-export const LoaderDemoShort = () => {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        maxWidth: "30rem",
-        textAlign: "center",
-        rowGap: "0.5rem",
-      }}
-      aria-live="polite"
-      aria-busy="true"
-    >
-      <Loader
-        size="xl"
-        title="Adipisicing non voluptate aute in ea eu officia duis fugiat aute
-        pariatur et deserunt nisi."
-      />
-      <span>Henter innholdet...</span>
-    </div>
-  );
-};
-
-export const LoaderDemoLong = () => {
+export const LoaderDemo = () => {
   const [loading, setLoading] = useState(false);
-  return (
-    <div>
-      <button onClick={() => setLoading(!loading)}>Toggle Loading</button>
+  const [longText, setLongText] = useState(false);
 
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          maxWidth: "30rem",
-          textAlign: "center",
-          rowGap: "0.5rem",
-        }}
+  const handleAuto = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  };
+
+  const text = longText
+    ? "Laster inn nytt innhold fra databasen. Hvis dette tar lengre enn 10 sekunder kan man prøve å laste siden på nytt."
+    : "Laster inn innholdet...";
+
+  return (
+    <div className="demo__wrapper">
+      <div>
+        <button onClick={() => setLoading(!loading)}>
+          Toggle Loading state
+        </button>
+        <button onClick={() => setLongText(!longText)}>
+          Toggle Text-lengde
+        </button>
+        <button onClick={() => handleAuto()}>
+          Automatisk endring (3 sekunder)
+        </button>
+      </div>
+
+      <Panel
+        border
+        className="demo__panel"
         aria-live="polite"
         aria-busy={loading}
       >
-        {loading && (
+        {loading ? (
           <>
-            <Loader
-              size="xl"
-              title="Adipisicing non voluptate aute in ea eu officia duis fugiat aute
-        pariatur et deserunt nisi."
-            />
-            <span>
-              Adipisicing non voluptate aute in ea eu officia duis fugiat aute
-              pariatur et deserunt nisi.
-            </span>
+            <Loader size="xl" title={text} />
+            <span>{text}</span>
           </>
+        ) : (
+          <div>
+            <h2>DummyTittel</h2>
+            <p>
+              Dolor nostrud sint incididunt consectetur adipisicing sit. Laborum
+              enim consequat non labore velit ex. Esse amet irure cillum amet
+              dolor ad consequat. Est sit id tempor dolore officia proident
+              consequat sunt cillum.
+            </p>
+          </div>
         )}
-      </div>
+      </Panel>
     </div>
   );
 };
