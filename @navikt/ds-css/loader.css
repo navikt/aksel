@@ -5,18 +5,34 @@
   animation: loader-rotate 1.4s linear infinite;
 }
 
-.navds-loader circle:nth-child(3) {
+.navds-loader__foreground {
   animation: loader-dasharray 1.4s ease-in-out infinite;
   stroke-dasharray: 80px, 200px;
   stroke-dashoffset: 0;
   stroke: var(--navds-color-gray-40);
 }
 
-.navds-loader circle:nth-child(2) {
+.navds-loader__background {
   stroke: var(--navds-color-gray-10);
 }
 
-.navds-loader--transparent circle:nth-child(2) {
+.navds-loader--neutral .navds-loader__foreground {
+  stroke: var(--navds-color-gray-40);
+}
+
+.navds-loader--interaction .navds-loader__foreground {
+  stroke: var(--navds-color-blue-50);
+}
+
+.navds-loader--inverted .navds-loader__foreground {
+  stroke: white;
+}
+
+.navds-loader--inverted .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-loader--transparent .navds-loader__background {
   stroke: transparent;
 }
 
@@ -48,20 +64,20 @@
  * Button spesific styling
  */
 
-.navds-button .navds-loader circle:nth-child(3) {
+.navds-button .navds-loader .navds-loader__foreground {
   stroke: currentColor;
 }
 
-.navds-button:hover .navds-loader circle:nth-child(2) {
+.navds-button:hover .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.navds-button:active .navds-loader circle:nth-child(2) {
+.navds-button:active .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.navds-button--action .navds-loader circle:nth-child(2),
-.navds-button--danger .navds-loader circle:nth-child(2) {
+.navds-button--action .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
