@@ -1,0 +1,55 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Alert } from "../../index";
+
+<Meta title="ds-react/alert/intro" />
+
+# Hvordan ta i bruk Alert
+
+```jsx
+<Alert variant="info">
+  Id elit esse enim reprehenderit.Tempor tempor ex exercitation id aute
+  eu.Laborum nulla nisi irure voluptate mollit fugiat.Est quis culpa nostrud et
+  reprehenderit ea sint.Eu veniam labore enim labore qui eiusmod Lorem amet ad
+  esse.
+</Alert>
+```
+
+<Canvas>
+  <Alert variant="info">
+    Id elit esse enim reprehenderit.Tempor tempor ex exercitation id aute
+    eu.Laborum nulla nisi irure voluptate mollit fugiat.Est quis culpa nostrud
+    et reprehenderit ea sint.Eu veniam labore enim labore qui eiusmod Lorem amet
+    ad esse.
+  </Alert>
+</Canvas>
+
+## Varianter
+
+`variants`-prop kan brukes for å endre utseende mellom
+`info`, `success`, `warning` og `error`
+
+<Canvas>
+  <Alert variant="info">Id elit esse enim reprehenderit.</Alert>
+  <Alert variant="success">Id elit esse enim reprehenderit.</Alert>
+  <Alert variant="warning">Id elit esse enim reprehenderit.</Alert>
+  <Alert variant="error">Id elit esse enim reprehenderit.</Alert>
+</Canvas>
+
+## Sizing
+
+Alert har to størrelser: Default 64px min-height og small 32px min-height
+
+<Canvas>
+  <Alert size="s" variant="info">
+    Id elit esse enim reprehenderit.
+  </Alert>
+  <Alert size="s" variant="success">
+    Id elit esse enim reprehenderit.
+  </Alert>
+  <Alert size="s" variant="warning">
+    Id elit esse enim reprehenderit.
+  </Alert>
+  <Alert size="s" variant="error">
+    Id elit esse enim reprehenderit.
+  </Alert>
+</Canvas>

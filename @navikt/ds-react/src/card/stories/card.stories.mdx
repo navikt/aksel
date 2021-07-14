@@ -1,4 +1,5 @@
-import { Meta } from "@storybook/addon-docs/blocks";
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { MicroCard } from "../index.ts";
 
 <Meta title="ds-react/card/intro" />
 
@@ -12,9 +13,13 @@ Kan brukes som en vanlig lenke direkte:
 <MicroCard href="/lenke/til/side">Lenketekst</MicroCard>
 ```
 
+<Canvas>
+  <MicroCard href="/lenke/til/side">Lenketekst</MicroCard>
+</Canvas>
+
 Hvis man ønsker å ta i bruk nextjs sin `Link`-komponent:
 
-```
+```jsx
 <Link href="/lenke/til/side" passHref>
   <MicroCard>Lenketekst</MicroCard>
 </Link>
