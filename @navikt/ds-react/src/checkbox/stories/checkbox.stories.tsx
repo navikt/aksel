@@ -9,7 +9,7 @@ export default {
 export const All = () => {
   return (
     <div>
-      <Checkbox label="DoloreIn quis consectetur proident id adipisicing ut. Quis commodo enim amet pariatur ex consectetur. Aute nulla aliqua reprehenderit veniam tempor aute. Dolore non velit sint labore ipsum adipisicing est Lorem dolor. Lorem amet sunt exercitation." />
+      <Checkbox label="DoloreIn quis consectetur proident id adipisicing ut. " />
       <Checkbox size="s" label="Dolore Lorem amet sunt exercitation." />
       <Checkbox
         disabled
