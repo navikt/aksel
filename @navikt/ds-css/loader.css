@@ -64,20 +64,20 @@
  * Button spesific styling
  */
 
-.navds-button .navds-loader circle:nth-child(3) {
+.navds-button .navds-loader .navds-loader__foreground {
   stroke: currentColor;
 }
 
-.navds-button:hover .navds-loader circle:nth-child(2) {
+.navds-button:hover .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.navds-button:active .navds-loader circle:nth-child(2) {
+.navds-button:active .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
-.navds-button--action .navds-loader circle:nth-child(2),
-.navds-button--danger .navds-loader circle:nth-child(2) {
+.navds-button--action .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
   stroke: rgba(255, 255, 255, 0.3);
 }
 
