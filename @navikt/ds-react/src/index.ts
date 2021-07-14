@@ -38,6 +38,7 @@ export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel/index";
 export { Panel, PanelProps } from "./panel/index";
 export { MicroCard, MicroCardProps } from "./card/index";
+export { Loader, LoaderProps } from "./loader/index";
 export {
   Title,
   Ingress,

@@ -1,0 +1,33 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Accordion } from "../../index";
+
+<Meta title="ds-react/accordion/intro" />
+
+# Hvordan ta i bruk Accordion
+
+```jsx
+<Accordion heading="Qui id id ad cupidatat ullamco.">
+  Et anim nostrud reprehenderit duis eu tempor et irure proident. Eu ea occaecat
+  aliqua commodo sunt. Sit cupidatat ad id occaecat exercitation ipsum laboris
+  duis velit consequat adipisicing do amet aute. Aliquip culpa minim commodo
+  laborum eiusmod eu magna elit veniam ullamco ullamco minim.
+</Accordion>
+```
+
+<Canvas>
+  <Accordion heading="Qui id id ad cupidatat ullamco.">
+    Et anim nostrud reprehenderit duis eu tempor et irure proident. Eu ea
+    occaecat aliqua commodo sunt. Sit cupidatat ad id occaecat exercitation
+    ipsum laboris duis velit consequat adipisicing do amet aute. Aliquip culpa
+    minim commodo laborum eiusmod eu magna elit veniam ullamco ullamco minim.
+  </Accordion>
+</Canvas>
+
+Accordion-komponeten styrer selv open/closed state, men om man ønsker kan man selv overskrive denne med
+`open`-prop + `onClick`-prop.
+
+Note: Hvis man tar i bruk `onClick`, så tolker komponeten det slik at du ønsker å styre state selv, så
+man må da også bruke `open`-prop
+
+`renderContentWhenClosed`-prop bestemmer om innholdet (children) skal beholdes i dom-strukturen mens
+Accordion er lukket. Defaulter til `false`.

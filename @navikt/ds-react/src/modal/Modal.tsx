@@ -86,7 +86,11 @@ const Modal: ModalLifecycle &
           aria-label="lukk modalvindu"
           onClick={onClose}
         >
-          <Close />
+          <Close
+            focusable="false"
+            role="img"
+            aria-label="X-ikon for å lukke modal"
+          />
         </Button>
       </ReactModal>
     );
