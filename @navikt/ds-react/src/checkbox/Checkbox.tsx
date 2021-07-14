@@ -21,6 +21,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <div
         className={cl("navds-form__element", {
           "navds-form__element--no-margin": size === "m",
+          "navds-checkbox--error": true,
         })}
       >
         <input

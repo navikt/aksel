@@ -87,6 +87,17 @@
     0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
+/**
+  Error handling
+*/
+
+.navds-radio--error
+  > .navds-radio:not(:hover):not(:focus):not(:disabled):not(:checked)
+  + .navds-radio__label::after {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
 .navds-radio:disabled + .navds-radio__label {
   color: var(--navds-color-gray-40);
   cursor: default;
