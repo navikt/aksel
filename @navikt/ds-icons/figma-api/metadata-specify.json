@@ -1,0 +1,3718 @@
+[
+    {
+        "name": "Add",
+        "createdAt": "2021-07-06T14:52:26.159Z",
+        "updatedAt": "2021-07-06T14:52:26.159Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "add"
+        }
+    },
+    {
+        "name": "AddCircle",
+        "createdAt": "2021-07-06T14:52:26.076Z",
+        "updatedAt": "2021-07-06T14:52:26.076Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "add--circle"
+        }
+    },
+    {
+        "name": "AddCircleFilled",
+        "createdAt": "2021-07-06T14:52:26.391Z",
+        "updatedAt": "2021-07-06T14:52:26.391Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "add--circle-filled"
+        }
+    },
+    {
+        "name": "AtomPrintSolid",
+        "createdAt": "2021-07-06T14:52:26.314Z",
+        "updatedAt": "2021-07-06T14:52:26.314Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": ".atom--print-solid"
+        }
+    },
+    {
+        "name": "Attachment",
+        "createdAt": "2021-07-06T14:52:25.965Z",
+        "updatedAt": "2021-07-06T14:52:25.965Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "attachment"
+        }
+    },
+    {
+        "name": "Attachment",
+        "createdAt": "2021-07-06T14:52:26.192Z",
+        "updatedAt": "2021-07-06T14:52:26.192Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "attachment"
+        }
+    },
+    {
+        "name": "Baby",
+        "createdAt": "2021-07-06T14:52:26.290Z",
+        "updatedAt": "2021-07-06T14:52:26.290Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "baby"
+        }
+    },
+    {
+        "name": "Back",
+        "createdAt": "2021-07-06T14:52:25.945Z",
+        "updatedAt": "2021-07-06T14:52:25.945Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "back"
+        }
+    },
+    {
+        "name": "BackFilled",
+        "createdAt": "2021-07-06T14:52:26.324Z",
+        "updatedAt": "2021-07-06T14:52:26.324Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Chevron",
+            "frame": "back-filled"
+        }
+    },
+    {
+        "name": "Bag",
+        "createdAt": "2021-07-06T14:52:26.007Z",
+        "updatedAt": "2021-07-06T14:52:26.007Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "bag"
+        }
+    },
+    {
+        "name": "Bag",
+        "createdAt": "2021-07-06T14:52:26.275Z",
+        "updatedAt": "2021-07-06T14:52:26.275Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "bag"
+        }
+    },
+    {
+        "name": "Baggage",
+        "createdAt": "2021-07-06T14:52:26.113Z",
+        "updatedAt": "2021-07-06T14:52:26.113Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Baggage"
+        }
+    },
+    {
+        "name": "Bandage",
+        "createdAt": "2021-07-06T14:52:25.942Z",
+        "updatedAt": "2021-07-06T14:52:25.942Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "bandage"
+        }
+    },
+    {
+        "name": "Bandage",
+        "createdAt": "2021-07-06T14:52:26.268Z",
+        "updatedAt": "2021-07-06T14:52:26.268Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "bandage"
+        }
+    },
+    {
+        "name": "BandageFilled",
+        "createdAt": "2021-07-06T14:52:26.370Z",
+        "updatedAt": "2021-07-06T14:52:26.370Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Health",
+            "frame": "bandage-filled"
+        }
+    },
+    {
+        "name": "Bell",
+        "createdAt": "2021-07-06T14:52:26.036Z",
+        "updatedAt": "2021-07-06T14:52:26.036Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "bell"
+        }
+    },
+    {
+        "name": "Bell",
+        "createdAt": "2021-07-06T14:52:26.442Z",
+        "updatedAt": "2021-07-06T14:52:26.442Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Reminder",
+            "frame": "bell"
+        }
+    },
+    {
+        "name": "Bell",
+        "createdAt": "2021-07-06T14:52:26.297Z",
+        "updatedAt": "2021-07-06T14:52:26.297Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "bell"
+        }
+    },
+    {
+        "name": "Bike",
+        "createdAt": "2021-07-06T14:52:26.122Z",
+        "updatedAt": "2021-07-06T14:52:26.122Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "bike"
+        }
+    },
+    {
+        "name": "Bookmark",
+        "createdAt": "2021-07-06T14:52:25.987Z",
+        "updatedAt": "2021-07-06T14:52:25.987Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "bookmark"
+        }
+    },
+    {
+        "name": "Bookmark",
+        "createdAt": "2021-07-06T14:52:26.259Z",
+        "updatedAt": "2021-07-06T14:52:26.259Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Bookmark"
+        }
+    },
+    {
+        "name": "BookmarkFilled",
+        "createdAt": "2021-07-06T14:52:26.353Z",
+        "updatedAt": "2021-07-06T14:52:26.353Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "bookmark-filled"
+        }
+    },
+    {
+        "name": "Bowl",
+        "createdAt": "2021-07-06T14:52:26.108Z",
+        "updatedAt": "2021-07-06T14:52:26.108Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Bowl"
+        }
+    },
+    {
+        "name": "Braille",
+        "createdAt": "2021-07-06T14:52:26.089Z",
+        "updatedAt": "2021-07-06T14:52:26.089Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "braille"
+        }
+    },
+    {
+        "name": "Braille3",
+        "createdAt": "2021-07-06T14:52:26.144Z",
+        "updatedAt": "2021-07-06T14:52:26.144Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Braille 3"
+        }
+    },
+    {
+        "name": "BrailleFilled",
+        "createdAt": "2021-07-06T14:52:26.363Z",
+        "updatedAt": "2021-07-06T14:52:26.363Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Handicap",
+            "frame": "braille-filled"
+        }
+    },
+    {
+        "name": "Building3",
+        "createdAt": "2021-07-06T14:52:26.222Z",
+        "updatedAt": "2021-07-06T14:52:26.222Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "building 3"
+        }
+    },
+    {
+        "name": "Building4",
+        "createdAt": "2021-07-06T14:52:26.226Z",
+        "updatedAt": "2021-07-06T14:52:26.226Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "building 4"
+        }
+    },
+    {
+        "name": "Calculator",
+        "createdAt": "2021-07-06T14:52:26.281Z",
+        "updatedAt": "2021-07-06T14:52:26.281Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "calculator"
+        }
+    },
+    {
+        "name": "Calculator",
+        "createdAt": "2021-07-06T14:52:26.011Z",
+        "updatedAt": "2021-07-06T14:52:26.011Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "calculator"
+        }
+    },
+    {
+        "name": "Calender",
+        "createdAt": "2021-07-06T14:52:26.050Z",
+        "updatedAt": "2021-07-06T14:52:26.050Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "calender"
+        }
+    },
+    {
+        "name": "Calender",
+        "createdAt": "2021-07-06T14:52:26.173Z",
+        "updatedAt": "2021-07-06T14:52:26.173Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "calender"
+        }
+    },
+    {
+        "name": "Camera",
+        "createdAt": "2021-07-06T14:52:26.205Z",
+        "updatedAt": "2021-07-06T14:52:26.205Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "camera"
+        }
+    },
+    {
+        "name": "Camera",
+        "createdAt": "2021-07-06T14:52:25.969Z",
+        "updatedAt": "2021-07-06T14:52:25.969Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "camera"
+        }
+    },
+    {
+        "name": "CameraFilled",
+        "createdAt": "2021-07-06T14:52:26.318Z",
+        "updatedAt": "2021-07-06T14:52:26.318Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "camera-filled"
+        }
+    },
+    {
+        "name": "Cancel",
+        "createdAt": "2021-07-06T14:52:26.155Z",
+        "updatedAt": "2021-07-06T14:52:26.155Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "cancel"
+        }
+    },
+    {
+        "name": "Cancel",
+        "createdAt": "2021-07-06T14:52:26.382Z",
+        "updatedAt": "2021-07-06T14:52:26.382Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "cancel"
+        }
+    },
+    {
+        "name": "Cancel",
+        "createdAt": "2021-07-06T14:52:26.070Z",
+        "updatedAt": "2021-07-06T14:52:26.070Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "cancel"
+        }
+    },
+    {
+        "name": "CancelFilled",
+        "createdAt": "2021-07-06T14:52:26.383Z",
+        "updatedAt": "2021-07-06T14:52:26.383Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "cancel-filled"
+        }
+    },
+    {
+        "name": "Cantine1",
+        "createdAt": "2021-07-06T14:52:26.114Z",
+        "updatedAt": "2021-07-06T14:52:26.114Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Cantine 1"
+        }
+    },
+    {
+        "name": "Cantine2",
+        "createdAt": "2021-07-06T14:52:26.116Z",
+        "updatedAt": "2021-07-06T14:52:26.116Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Cantine 2"
+        }
+    },
+    {
+        "name": "Car",
+        "createdAt": "2021-07-06T14:52:26.121Z",
+        "updatedAt": "2021-07-06T14:52:26.121Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "car"
+        }
+    },
+    {
+        "name": "Category",
+        "createdAt": "2021-07-06T14:52:26.427Z",
+        "updatedAt": "2021-07-06T14:52:26.427Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "category"
+        }
+    },
+    {
+        "name": "Child",
+        "createdAt": "2021-07-06T14:52:26.017Z",
+        "updatedAt": "2021-07-06T14:52:26.017Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "child"
+        }
+    },
+    {
+        "name": "ChildFilled",
+        "createdAt": "2021-07-06T14:52:26.432Z",
+        "updatedAt": "2021-07-06T14:52:26.432Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩People",
+            "frame": "child-filled"
+        }
+    },
+    {
+        "name": "Clock",
+        "createdAt": "2021-07-06T14:52:26.180Z",
+        "updatedAt": "2021-07-06T14:52:26.180Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "clock"
+        }
+    },
+    {
+        "name": "Clock",
+        "createdAt": "2021-07-06T14:52:26.050Z",
+        "updatedAt": "2021-07-06T14:52:26.050Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "clock"
+        }
+    },
+    {
+        "name": "Close",
+        "createdAt": "2021-07-06T14:52:26.145Z",
+        "updatedAt": "2021-07-06T14:52:26.145Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "close"
+        }
+    },
+    {
+        "name": "Close",
+        "createdAt": "2021-07-06T14:52:26.060Z",
+        "updatedAt": "2021-07-06T14:52:26.060Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "close"
+        }
+    },
+    {
+        "name": "CloseFilled",
+        "createdAt": "2021-07-06T14:52:26.373Z",
+        "updatedAt": "2021-07-06T14:52:26.373Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "close-filled"
+        }
+    },
+    {
+        "name": "Collapse",
+        "createdAt": "2021-07-06T14:52:25.947Z",
+        "updatedAt": "2021-07-06T14:52:25.947Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "collapse"
+        }
+    },
+    {
+        "name": "CollapseFilled",
+        "createdAt": "2021-07-06T14:52:26.325Z",
+        "updatedAt": "2021-07-06T14:52:26.325Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Chevron",
+            "frame": "collapse-filled"
+        }
+    },
+    {
+        "name": "Combifridge1",
+        "createdAt": "2021-07-06T14:52:26.097Z",
+        "updatedAt": "2021-07-06T14:52:26.097Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Combifridge 1"
+        }
+    },
+    {
+        "name": "Combifridge1",
+        "createdAt": "2021-07-06T14:52:26.492Z",
+        "updatedAt": "2021-07-06T14:52:26.492Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Combifridge 1"
+        }
+    },
+    {
+        "name": "Combifridge2",
+        "createdAt": "2021-07-06T14:52:26.104Z",
+        "updatedAt": "2021-07-06T14:52:26.104Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Combifridge 2"
+        }
+    },
+    {
+        "name": "Combifridge2",
+        "createdAt": "2021-07-06T14:52:26.493Z",
+        "updatedAt": "2021-07-06T14:52:26.493Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Combifridge 2"
+        }
+    },
+    {
+        "name": "CombinedShape",
+        "createdAt": "2021-07-06T14:52:26.445Z",
+        "updatedAt": "2021-07-06T14:52:26.445Z",
+        "meta": {
+            "parentFrame": "hamburger-filled",
+            "frame": "Combined Shape"
+        }
+    },
+    {
+        "name": "CombinedShape",
+        "createdAt": "2021-07-06T14:52:26.400Z",
+        "updatedAt": "2021-07-06T14:52:26.400Z",
+        "meta": {
+            "parentFrame": "globe-filled",
+            "frame": "Combined Shape"
+        }
+    },
+    {
+        "name": "CombinedShape",
+        "createdAt": "2021-07-06T14:52:26.294Z",
+        "updatedAt": "2021-07-06T14:52:26.294Z",
+        "meta": {
+            "parentFrame": "bell",
+            "frame": "Combined Shape"
+        }
+    },
+    {
+        "name": "Copy",
+        "createdAt": "2021-07-06T14:52:25.986Z",
+        "updatedAt": "2021-07-06T14:52:25.986Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Copy"
+        }
+    },
+    {
+        "name": "CopyFilled",
+        "createdAt": "2021-07-06T14:52:26.346Z",
+        "updatedAt": "2021-07-06T14:52:26.346Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "copy-filled"
+        }
+    },
+    {
+        "name": "Coronavirus",
+        "createdAt": "2021-07-06T14:52:25.929Z",
+        "updatedAt": "2021-07-06T14:52:25.929Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "coronavirus"
+        }
+    },
+    {
+        "name": "Coronavirus",
+        "createdAt": "2021-07-06T14:52:26.268Z",
+        "updatedAt": "2021-07-06T14:52:26.268Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "coronavirus"
+        }
+    },
+    {
+        "name": "CoronavirusFilled",
+        "createdAt": "2021-07-06T14:52:26.368Z",
+        "updatedAt": "2021-07-06T14:52:26.368Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Health",
+            "frame": "coronavirus-filled"
+        }
+    },
+    {
+        "name": "CourseForLeader",
+        "createdAt": "2021-07-06T14:52:26.428Z",
+        "updatedAt": "2021-07-06T14:52:26.428Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "Course for leader"
+        }
+    },
+    {
+        "name": "CourseRegistration",
+        "createdAt": "2021-07-06T14:52:26.430Z",
+        "updatedAt": "2021-07-06T14:52:26.430Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "course registration"
+        }
+    },
+    {
+        "name": "Cup",
+        "createdAt": "2021-07-06T14:52:26.095Z",
+        "updatedAt": "2021-07-06T14:52:26.095Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "cup"
+        }
+    },
+    {
+        "name": "CustomerService",
+        "createdAt": "2021-07-06T14:52:26.240Z",
+        "updatedAt": "2021-07-06T14:52:26.240Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "customer service"
+        }
+    },
+    {
+        "name": "Data",
+        "createdAt": "2021-07-06T14:52:26.353Z",
+        "updatedAt": "2021-07-06T14:52:26.353Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "data"
+        }
+    },
+    {
+        "name": "DataFilled",
+        "createdAt": "2021-07-06T14:52:26.354Z",
+        "updatedAt": "2021-07-06T14:52:26.354Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "data-filled"
+        }
+    },
+    {
+        "name": "Delete",
+        "createdAt": "2021-07-06T14:52:26.060Z",
+        "updatedAt": "2021-07-06T14:52:26.060Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "delete"
+        }
+    },
+    {
+        "name": "Delete",
+        "createdAt": "2021-07-06T14:52:26.145Z",
+        "updatedAt": "2021-07-06T14:52:26.145Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "delete"
+        }
+    },
+    {
+        "name": "DeleteFilled",
+        "createdAt": "2021-07-06T14:52:26.374Z",
+        "updatedAt": "2021-07-06T14:52:26.374Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "delete-filled"
+        }
+    },
+    {
+        "name": "Dialog",
+        "createdAt": "2021-07-06T14:52:25.947Z",
+        "updatedAt": "2021-07-06T14:52:25.947Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "dialog"
+        }
+    },
+    {
+        "name": "Dialog",
+        "createdAt": "2021-07-06T14:52:26.230Z",
+        "updatedAt": "2021-07-06T14:52:26.230Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "dialog"
+        }
+    },
+    {
+        "name": "DialogDots",
+        "createdAt": "2021-07-06T14:52:25.948Z",
+        "updatedAt": "2021-07-06T14:52:25.948Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "dialog dots"
+        }
+    },
+    {
+        "name": "DialogDots",
+        "createdAt": "2021-07-06T14:52:26.233Z",
+        "updatedAt": "2021-07-06T14:52:26.233Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "dialog dots"
+        }
+    },
+    {
+        "name": "DialogDotsFilled",
+        "createdAt": "2021-07-06T14:52:26.330Z",
+        "updatedAt": "2021-07-06T14:52:26.330Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "dialog dots-filled"
+        }
+    },
+    {
+        "name": "DialogFilled",
+        "createdAt": "2021-07-06T14:52:26.327Z",
+        "updatedAt": "2021-07-06T14:52:26.327Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "dialog-filled"
+        }
+    },
+    {
+        "name": "DialogReport",
+        "createdAt": "2021-07-06T14:52:25.948Z",
+        "updatedAt": "2021-07-06T14:52:25.948Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "dialog report"
+        }
+    },
+    {
+        "name": "DialogReportFilled",
+        "createdAt": "2021-07-06T14:52:26.327Z",
+        "updatedAt": "2021-07-06T14:52:26.327Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "dialog report-filled"
+        }
+    },
+    {
+        "name": "DialogSuccess",
+        "createdAt": "2021-07-06T14:52:26.231Z",
+        "updatedAt": "2021-07-06T14:52:26.231Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "dialog success"
+        }
+    },
+    {
+        "name": "DialogSuccess",
+        "createdAt": "2021-07-06T14:52:25.948Z",
+        "updatedAt": "2021-07-06T14:52:25.948Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "dialog success"
+        }
+    },
+    {
+        "name": "DialogSuccessFilled",
+        "createdAt": "2021-07-06T14:52:26.329Z",
+        "updatedAt": "2021-07-06T14:52:26.329Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "dialog success-filled"
+        }
+    },
+    {
+        "name": "DialogWarning",
+        "createdAt": "2021-07-06T14:52:26.231Z",
+        "updatedAt": "2021-07-06T14:52:26.231Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "dialog warning"
+        }
+    },
+    {
+        "name": "Disability",
+        "createdAt": "2021-07-06T14:52:25.992Z",
+        "updatedAt": "2021-07-06T14:52:25.992Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "disability"
+        }
+    },
+    {
+        "name": "Disability",
+        "createdAt": "2021-07-06T14:52:26.259Z",
+        "updatedAt": "2021-07-06T14:52:26.259Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "disability"
+        }
+    },
+    {
+        "name": "DisabilityFilled",
+        "createdAt": "2021-07-06T14:52:26.362Z",
+        "updatedAt": "2021-07-06T14:52:26.362Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Handicap",
+            "frame": "disability-filled"
+        }
+    },
+    {
+        "name": "Dish",
+        "createdAt": "2021-07-06T14:52:26.091Z",
+        "updatedAt": "2021-07-06T14:52:26.091Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Dish"
+        }
+    },
+    {
+        "name": "Dishwasher",
+        "createdAt": "2021-07-06T14:52:26.089Z",
+        "updatedAt": "2021-07-06T14:52:26.089Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Dishwasher"
+        }
+    },
+    {
+        "name": "Down",
+        "createdAt": "2021-07-06T14:52:25.930Z",
+        "updatedAt": "2021-07-06T14:52:25.930Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "down"
+        }
+    },
+    {
+        "name": "Down",
+        "createdAt": "2021-07-06T14:52:26.227Z",
+        "updatedAt": "2021-07-06T14:52:26.227Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "down"
+        }
+    },
+    {
+        "name": "Down",
+        "createdAt": "2021-07-06T14:52:26.189Z",
+        "updatedAt": "2021-07-06T14:52:26.189Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "down"
+        }
+    },
+    {
+        "name": "DownFilled",
+        "createdAt": "2021-07-06T14:52:26.312Z",
+        "updatedAt": "2021-07-06T14:52:26.312Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Arrow",
+            "frame": "down-filled"
+        }
+    },
+    {
+        "name": "Download",
+        "createdAt": "2021-07-06T14:52:26.192Z",
+        "updatedAt": "2021-07-06T14:52:26.192Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "download"
+        }
+    },
+    {
+        "name": "Download",
+        "createdAt": "2021-07-06T14:52:25.965Z",
+        "updatedAt": "2021-07-06T14:52:25.965Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "download"
+        }
+    },
+    {
+        "name": "DownloadFilled",
+        "createdAt": "2021-07-06T14:52:26.315Z",
+        "updatedAt": "2021-07-06T14:52:26.315Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "download-filled"
+        }
+    },
+    {
+        "name": "DrinkingWaterFilled",
+        "createdAt": "2021-07-06T14:52:26.474Z",
+        "updatedAt": "2021-07-06T14:52:26.474Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Drinking water filled"
+        }
+    },
+    {
+        "name": "DrinkingWaterStroke",
+        "createdAt": "2021-07-06T14:52:26.472Z",
+        "updatedAt": "2021-07-06T14:52:26.472Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Drinking water stroke"
+        }
+    },
+    {
+        "name": "DrinkingWaterStroke",
+        "createdAt": "2021-07-06T14:52:26.476Z",
+        "updatedAt": "2021-07-06T14:52:26.476Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Drinking water stroke"
+        }
+    },
+    {
+        "name": "Edit",
+        "createdAt": "2021-07-06T14:52:26.163Z",
+        "updatedAt": "2021-07-06T14:52:26.163Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "edit"
+        }
+    },
+    {
+        "name": "Edit",
+        "createdAt": "2021-07-06T14:52:26.000Z",
+        "updatedAt": "2021-07-06T14:52:26.000Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "edit"
+        }
+    },
+    {
+        "name": "EditFilled",
+        "createdAt": "2021-07-06T14:52:26.394Z",
+        "updatedAt": "2021-07-06T14:52:26.394Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "edit-filled"
+        }
+    },
+    {
+        "name": "Email",
+        "createdAt": "2021-07-06T14:52:25.948Z",
+        "updatedAt": "2021-07-06T14:52:25.948Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "email"
+        }
+    },
+    {
+        "name": "Email",
+        "createdAt": "2021-07-06T14:52:26.236Z",
+        "updatedAt": "2021-07-06T14:52:26.236Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "email"
+        }
+    },
+    {
+        "name": "EmailFilled",
+        "createdAt": "2021-07-06T14:52:26.331Z",
+        "updatedAt": "2021-07-06T14:52:26.331Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "email-filled"
+        }
+    },
+    {
+        "name": "EmailOpen",
+        "createdAt": "2021-07-06T14:52:26.239Z",
+        "updatedAt": "2021-07-06T14:52:26.239Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "email open"
+        }
+    },
+    {
+        "name": "EmailOpen",
+        "createdAt": "2021-07-06T14:52:25.951Z",
+        "updatedAt": "2021-07-06T14:52:25.951Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "email-open"
+        }
+    },
+    {
+        "name": "EmailOpenFilled",
+        "createdAt": "2021-07-06T14:52:26.332Z",
+        "updatedAt": "2021-07-06T14:52:26.332Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "email-open-filled"
+        }
+    },
+    {
+        "name": "Error",
+        "createdAt": "2021-07-06T14:52:26.046Z",
+        "updatedAt": "2021-07-06T14:52:26.046Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "error"
+        }
+    },
+    {
+        "name": "Error",
+        "createdAt": "2021-07-06T14:52:26.302Z",
+        "updatedAt": "2021-07-06T14:52:26.302Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "error"
+        }
+    },
+    {
+        "name": "Exclude",
+        "createdAt": "2021-07-06T14:52:26.443Z",
+        "updatedAt": "2021-07-06T14:52:26.443Z",
+        "meta": {
+            "parentFrame": "light-bulb-filled",
+            "frame": "Exclude"
+        }
+    },
+    {
+        "name": "Expand",
+        "createdAt": "2021-07-06T14:52:25.936Z",
+        "updatedAt": "2021-07-06T14:52:25.936Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "expand"
+        }
+    },
+    {
+        "name": "ExpandFilled",
+        "createdAt": "2021-07-06T14:52:26.324Z",
+        "updatedAt": "2021-07-06T14:52:26.324Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Chevron",
+            "frame": "expand-filled"
+        }
+    },
+    {
+        "name": "ExternalLink",
+        "createdAt": "2021-07-06T14:52:26.147Z",
+        "updatedAt": "2021-07-06T14:52:26.147Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "external link"
+        }
+    },
+    {
+        "name": "ExternalLink",
+        "createdAt": "2021-07-06T14:52:26.062Z",
+        "updatedAt": "2021-07-06T14:52:26.062Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "external-link"
+        }
+    },
+    {
+        "name": "ExternalLinkFilled",
+        "createdAt": "2021-07-06T14:52:26.374Z",
+        "updatedAt": "2021-07-06T14:52:26.374Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "external-link-filled"
+        }
+    },
+    {
+        "name": "Eye",
+        "createdAt": "2021-07-06T14:52:26.291Z",
+        "updatedAt": "2021-07-06T14:52:26.291Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "eye"
+        }
+    },
+    {
+        "name": "Eye",
+        "createdAt": "2021-07-06T14:52:26.026Z",
+        "updatedAt": "2021-07-06T14:52:26.026Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "eye"
+        }
+    },
+    {
+        "name": "EyeScreened",
+        "createdAt": "2021-07-06T14:52:26.291Z",
+        "updatedAt": "2021-07-06T14:52:26.291Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "eye screened"
+        }
+    },
+    {
+        "name": "EyeScreened",
+        "createdAt": "2021-07-06T14:52:26.441Z",
+        "updatedAt": "2021-07-06T14:52:26.441Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Privacy",
+            "frame": "eye-screened"
+        }
+    },
+    {
+        "name": "EyeScreened",
+        "createdAt": "2021-07-06T14:52:26.026Z",
+        "updatedAt": "2021-07-06T14:52:26.026Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "eye-screened"
+        }
+    },
+    {
+        "name": "Family",
+        "createdAt": "2021-07-06T14:52:26.250Z",
+        "updatedAt": "2021-07-06T14:52:26.250Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "family"
+        }
+    },
+    {
+        "name": "Family",
+        "createdAt": "2021-07-06T14:52:25.970Z",
+        "updatedAt": "2021-07-06T14:52:25.970Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "family"
+        }
+    },
+    {
+        "name": "FamilyFilled",
+        "createdAt": "2021-07-06T14:52:26.335Z",
+        "updatedAt": "2021-07-06T14:52:26.335Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "family-filled"
+        }
+    },
+    {
+        "name": "FeedingBottle",
+        "createdAt": "2021-07-06T14:52:26.251Z",
+        "updatedAt": "2021-07-06T14:52:26.251Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "feeding bottle"
+        }
+    },
+    {
+        "name": "FeedingBottle",
+        "createdAt": "2021-07-06T14:52:25.970Z",
+        "updatedAt": "2021-07-06T14:52:25.970Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "feeding-bottle"
+        }
+    },
+    {
+        "name": "FeedingBottleFilled",
+        "createdAt": "2021-07-06T14:52:26.336Z",
+        "updatedAt": "2021-07-06T14:52:26.336Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "feeding-bottle-filled"
+        }
+    },
+    {
+        "name": "Female",
+        "createdAt": "2021-07-06T14:52:25.992Z",
+        "updatedAt": "2021-07-06T14:52:25.992Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "female"
+        }
+    },
+    {
+        "name": "Female",
+        "createdAt": "2021-07-06T14:52:26.170Z",
+        "updatedAt": "2021-07-06T14:52:26.170Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "female"
+        }
+    },
+    {
+        "name": "FemaleFilled",
+        "createdAt": "2021-07-06T14:52:26.359Z",
+        "updatedAt": "2021-07-06T14:52:26.359Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Gender",
+            "frame": "female-filled"
+        }
+    },
+    {
+        "name": "File",
+        "createdAt": "2021-07-06T14:52:25.984Z",
+        "updatedAt": "2021-07-06T14:52:25.984Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "file"
+        }
+    },
+    {
+        "name": "File",
+        "createdAt": "2021-07-06T14:52:26.254Z",
+        "updatedAt": "2021-07-06T14:52:26.254Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "file"
+        }
+    },
+    {
+        "name": "File",
+        "createdAt": "2021-07-06T14:52:26.421Z",
+        "updatedAt": "2021-07-06T14:52:26.421Z",
+        "meta": {
+            "parentFrame": "Union",
+            "frame": "file"
+        }
+    },
+    {
+        "name": "File",
+        "createdAt": "2021-07-06T14:52:26.420Z",
+        "updatedAt": "2021-07-06T14:52:26.420Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "file"
+        }
+    },
+    {
+        "name": "FileContent",
+        "createdAt": "2021-07-06T14:52:26.256Z",
+        "updatedAt": "2021-07-06T14:52:26.256Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "file content"
+        }
+    },
+    {
+        "name": "FileContent",
+        "createdAt": "2021-07-06T14:52:25.986Z",
+        "updatedAt": "2021-07-06T14:52:25.986Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "file-content"
+        }
+    },
+    {
+        "name": "FileContent",
+        "createdAt": "2021-07-06T14:52:26.059Z",
+        "updatedAt": "2021-07-06T14:52:26.059Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "file-content"
+        }
+    },
+    {
+        "name": "FileContent",
+        "createdAt": "2021-07-06T14:52:26.051Z",
+        "updatedAt": "2021-07-06T14:52:26.051Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "file-content"
+        }
+    },
+    {
+        "name": "FileContentFilled",
+        "createdAt": "2021-07-06T14:52:26.345Z",
+        "updatedAt": "2021-07-06T14:52:26.345Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "file-content-filled"
+        }
+    },
+    {
+        "name": "FileFilled",
+        "createdAt": "2021-07-06T14:52:26.343Z",
+        "updatedAt": "2021-07-06T14:52:26.343Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "file-filled"
+        }
+    },
+    {
+        "name": "Files",
+        "createdAt": "2021-07-06T14:52:26.257Z",
+        "updatedAt": "2021-07-06T14:52:26.257Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "files"
+        }
+    },
+    {
+        "name": "FillForms",
+        "createdAt": "2021-07-06T14:52:26.155Z",
+        "updatedAt": "2021-07-06T14:52:26.155Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "fill forms"
+        }
+    },
+    {
+        "name": "FillForms",
+        "createdAt": "2021-07-06T14:52:25.995Z",
+        "updatedAt": "2021-07-06T14:52:25.995Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "fill-forms"
+        }
+    },
+    {
+        "name": "FillForms",
+        "createdAt": "2021-07-06T14:52:26.378Z",
+        "updatedAt": "2021-07-06T14:52:26.378Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "fill-forms"
+        }
+    },
+    {
+        "name": "FillFormsFilled",
+        "createdAt": "2021-07-06T14:52:26.379Z",
+        "updatedAt": "2021-07-06T14:52:26.379Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "fill-forms-filled"
+        }
+    },
+    {
+        "name": "Filter",
+        "createdAt": "2021-07-06T14:52:26.155Z",
+        "updatedAt": "2021-07-06T14:52:26.155Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "filter"
+        }
+    },
+    {
+        "name": "Filter",
+        "createdAt": "2021-07-06T14:52:25.996Z",
+        "updatedAt": "2021-07-06T14:52:25.996Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "filter"
+        }
+    },
+    {
+        "name": "FilterFilled",
+        "createdAt": "2021-07-06T14:52:26.382Z",
+        "updatedAt": "2021-07-06T14:52:26.382Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "filter-filled"
+        }
+    },
+    {
+        "name": "Folder",
+        "createdAt": "2021-07-06T14:52:25.987Z",
+        "updatedAt": "2021-07-06T14:52:25.987Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "folder"
+        }
+    },
+    {
+        "name": "Folder",
+        "createdAt": "2021-07-06T14:52:26.257Z",
+        "updatedAt": "2021-07-06T14:52:26.257Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "folder"
+        }
+    },
+    {
+        "name": "FolderFilled",
+        "createdAt": "2021-07-06T14:52:26.349Z",
+        "updatedAt": "2021-07-06T14:52:26.349Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "folder-filled"
+        }
+    },
+    {
+        "name": "ForkSpoonKnife",
+        "createdAt": "2021-07-06T14:52:26.096Z",
+        "updatedAt": "2021-07-06T14:52:26.096Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "fork--spoon--knife"
+        }
+    },
+    {
+        "name": "Freezer",
+        "createdAt": "2021-07-06T14:52:26.495Z",
+        "updatedAt": "2021-07-06T14:52:26.495Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Freezer"
+        }
+    },
+    {
+        "name": "Freezer",
+        "createdAt": "2021-07-06T14:52:26.107Z",
+        "updatedAt": "2021-07-06T14:52:26.107Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Freezer"
+        }
+    },
+    {
+        "name": "Glass",
+        "createdAt": "2021-07-06T14:52:26.096Z",
+        "updatedAt": "2021-07-06T14:52:26.096Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "glass"
+        }
+    },
+    {
+        "name": "Globe",
+        "createdAt": "2021-07-06T14:52:26.269Z",
+        "updatedAt": "2021-07-06T14:52:26.269Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "globe"
+        }
+    },
+    {
+        "name": "Globe",
+        "createdAt": "2021-07-06T14:52:26.003Z",
+        "updatedAt": "2021-07-06T14:52:26.003Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "globe"
+        }
+    },
+    {
+        "name": "GroupOfPeople",
+        "createdAt": "2021-07-06T14:52:26.415Z",
+        "updatedAt": "2021-07-06T14:52:26.415Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "group of people"
+        }
+    },
+    {
+        "name": "GuideDog",
+        "createdAt": "2021-07-06T14:52:26.078Z",
+        "updatedAt": "2021-07-06T14:52:26.078Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "guide-dog"
+        }
+    },
+    {
+        "name": "GuideDog",
+        "createdAt": "2021-07-06T14:52:26.265Z",
+        "updatedAt": "2021-07-06T14:52:26.265Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Guide dog"
+        }
+    },
+    {
+        "name": "GuideDogFilled",
+        "createdAt": "2021-07-06T14:52:26.367Z",
+        "updatedAt": "2021-07-06T14:52:26.367Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Handicap",
+            "frame": "guide-dog-filled"
+        }
+    },
+    {
+        "name": "Hamburger",
+        "createdAt": "2021-07-06T14:52:26.037Z",
+        "updatedAt": "2021-07-06T14:52:26.037Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "hamburger"
+        }
+    },
+    {
+        "name": "Hamburger",
+        "createdAt": "2021-07-06T14:52:26.297Z",
+        "updatedAt": "2021-07-06T14:52:26.297Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "hamburger"
+        }
+    },
+    {
+        "name": "HandBandage",
+        "createdAt": "2021-07-06T14:52:26.268Z",
+        "updatedAt": "2021-07-06T14:52:26.268Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "hand bandage"
+        }
+    },
+    {
+        "name": "HandBandage",
+        "createdAt": "2021-07-06T14:52:25.931Z",
+        "updatedAt": "2021-07-06T14:52:25.931Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "hand-bandage"
+        }
+    },
+    {
+        "name": "HandBandageFilled",
+        "createdAt": "2021-07-06T14:52:26.373Z",
+        "updatedAt": "2021-07-06T14:52:26.373Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Health",
+            "frame": "hand-bandage-filled"
+        }
+    },
+    {
+        "name": "HandsHeartFilled",
+        "createdAt": "2021-07-06T14:52:26.405Z",
+        "updatedAt": "2021-07-06T14:52:26.405Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Jobs",
+            "frame": "hands heart filled"
+        }
+    },
+    {
+        "name": "Hanger",
+        "createdAt": "2021-07-06T14:52:26.079Z",
+        "updatedAt": "2021-07-06T14:52:26.079Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "hanger"
+        }
+    },
+    {
+        "name": "Hanger",
+        "createdAt": "2021-07-06T14:52:26.145Z",
+        "updatedAt": "2021-07-06T14:52:26.145Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Hanger"
+        }
+    },
+    {
+        "name": "HangerFilled",
+        "createdAt": "2021-07-06T14:52:26.337Z",
+        "updatedAt": "2021-07-06T14:52:26.337Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "hanger-filled"
+        }
+    },
+    {
+        "name": "HealthCase",
+        "createdAt": "2021-07-06T14:52:26.266Z",
+        "updatedAt": "2021-07-06T14:52:26.266Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "health case"
+        }
+    },
+    {
+        "name": "HealthCase",
+        "createdAt": "2021-07-06T14:52:25.909Z",
+        "updatedAt": "2021-07-06T14:52:25.909Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "health-case"
+        }
+    },
+    {
+        "name": "HealthCaseFilled",
+        "createdAt": "2021-07-06T14:52:26.367Z",
+        "updatedAt": "2021-07-06T14:52:26.367Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Health",
+            "frame": "health-case-filled"
+        }
+    },
+    {
+        "name": "Heart",
+        "createdAt": "2021-07-06T14:52:26.043Z",
+        "updatedAt": "2021-07-06T14:52:26.043Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "heart"
+        }
+    },
+    {
+        "name": "Heart",
+        "createdAt": "2021-07-06T14:52:26.301Z",
+        "updatedAt": "2021-07-06T14:52:26.301Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "heart"
+        }
+    },
+    {
+        "name": "Heart",
+        "createdAt": "2021-07-06T14:52:26.343Z",
+        "updatedAt": "2021-07-06T14:52:26.343Z",
+        "meta": {
+            "parentFrame": "🧩Family",
+            "frame": "heart"
+        }
+    },
+    {
+        "name": "HeartBroken",
+        "createdAt": "2021-07-06T14:52:26.342Z",
+        "updatedAt": "2021-07-06T14:52:26.342Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "heart broken"
+        }
+    },
+    {
+        "name": "HeartBrokenFilled",
+        "createdAt": "2021-07-06T14:52:26.343Z",
+        "updatedAt": "2021-07-06T14:52:26.343Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "heart broken filled"
+        }
+    },
+    {
+        "name": "HeartFilled",
+        "createdAt": "2021-07-06T14:52:26.450Z",
+        "updatedAt": "2021-07-06T14:52:26.450Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Social media",
+            "frame": "heart-filled"
+        }
+    },
+    {
+        "name": "Helmet",
+        "createdAt": "2021-07-06T14:52:26.009Z",
+        "updatedAt": "2021-07-06T14:52:26.009Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "helmet"
+        }
+    },
+    {
+        "name": "Helmet",
+        "createdAt": "2021-07-06T14:52:26.276Z",
+        "updatedAt": "2021-07-06T14:52:26.276Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "helmet"
+        }
+    },
+    {
+        "name": "Helptext",
+        "createdAt": "2021-07-06T14:52:26.453Z",
+        "updatedAt": "2021-07-06T14:52:26.453Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Status",
+            "frame": "helptext"
+        }
+    },
+    {
+        "name": "Helptext",
+        "createdAt": "2021-07-06T14:52:26.046Z",
+        "updatedAt": "2021-07-06T14:52:26.046Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "helptext"
+        }
+    },
+    {
+        "name": "Helptext",
+        "createdAt": "2021-07-06T14:52:26.304Z",
+        "updatedAt": "2021-07-06T14:52:26.304Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "helptext"
+        }
+    },
+    {
+        "name": "Home",
+        "createdAt": "2021-07-06T14:52:26.217Z",
+        "updatedAt": "2021-07-06T14:52:26.217Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "home"
+        }
+    },
+    {
+        "name": "Home",
+        "createdAt": "2021-07-06T14:52:25.931Z",
+        "updatedAt": "2021-07-06T14:52:25.931Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "home"
+        }
+    },
+    {
+        "name": "HomeFilled",
+        "createdAt": "2021-07-06T14:52:26.322Z",
+        "updatedAt": "2021-07-06T14:52:26.322Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Building",
+            "frame": "home-filled"
+        }
+    },
+    {
+        "name": "Infants",
+        "createdAt": "2021-07-06T14:52:26.282Z",
+        "updatedAt": "2021-07-06T14:52:26.282Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "infants"
+        }
+    },
+    {
+        "name": "Infants",
+        "createdAt": "2021-07-06T14:52:26.014Z",
+        "updatedAt": "2021-07-06T14:52:26.014Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "infants"
+        }
+    },
+    {
+        "name": "InfantsFilled",
+        "createdAt": "2021-07-06T14:52:26.431Z",
+        "updatedAt": "2021-07-06T14:52:26.431Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩People",
+            "frame": "infants-filled"
+        }
+    },
+    {
+        "name": "Information",
+        "createdAt": "2021-07-06T14:52:26.046Z",
+        "updatedAt": "2021-07-06T14:52:26.046Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "information"
+        }
+    },
+    {
+        "name": "Information",
+        "createdAt": "2021-07-06T14:52:26.304Z",
+        "updatedAt": "2021-07-06T14:52:26.304Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "information"
+        }
+    },
+    {
+        "name": "Laptop",
+        "createdAt": "2021-07-06T14:52:26.243Z",
+        "updatedAt": "2021-07-06T14:52:26.243Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "laptop"
+        }
+    },
+    {
+        "name": "Laptop",
+        "createdAt": "2021-07-06T14:52:25.958Z",
+        "updatedAt": "2021-07-06T14:52:25.958Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "laptop"
+        }
+    },
+    {
+        "name": "Law",
+        "createdAt": "2021-07-06T14:52:26.291Z",
+        "updatedAt": "2021-07-06T14:52:26.291Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "law"
+        }
+    },
+    {
+        "name": "Law",
+        "createdAt": "2021-07-06T14:52:26.018Z",
+        "updatedAt": "2021-07-06T14:52:26.018Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "law"
+        }
+    },
+    {
+        "name": "Left",
+        "createdAt": "2021-07-06T14:52:26.190Z",
+        "updatedAt": "2021-07-06T14:52:26.190Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "left"
+        }
+    },
+    {
+        "name": "Left",
+        "createdAt": "2021-07-06T14:52:26.227Z",
+        "updatedAt": "2021-07-06T14:52:26.227Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "left"
+        }
+    },
+    {
+        "name": "Left",
+        "createdAt": "2021-07-06T14:52:25.930Z",
+        "updatedAt": "2021-07-06T14:52:25.930Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "left"
+        }
+    },
+    {
+        "name": "LeftFilled",
+        "createdAt": "2021-07-06T14:52:26.314Z",
+        "updatedAt": "2021-07-06T14:52:26.314Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Arrow",
+            "frame": "left-filled"
+        }
+    },
+    {
+        "name": "LightBulb",
+        "createdAt": "2021-07-06T14:52:26.297Z",
+        "updatedAt": "2021-07-06T14:52:26.297Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "light bulb"
+        }
+    },
+    {
+        "name": "LightBulb",
+        "createdAt": "2021-07-06T14:52:26.037Z",
+        "updatedAt": "2021-07-06T14:52:26.037Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "light-bulb"
+        }
+    },
+    {
+        "name": "Like",
+        "createdAt": "2021-07-06T14:52:26.301Z",
+        "updatedAt": "2021-07-06T14:52:26.301Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "like"
+        }
+    },
+    {
+        "name": "Like",
+        "createdAt": "2021-07-06T14:52:26.042Z",
+        "updatedAt": "2021-07-06T14:52:26.042Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "like"
+        }
+    },
+    {
+        "name": "Link",
+        "createdAt": "2021-07-06T14:52:26.395Z",
+        "updatedAt": "2021-07-06T14:52:26.395Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "Link"
+        }
+    },
+    {
+        "name": "Link",
+        "createdAt": "2021-07-06T14:52:26.396Z",
+        "updatedAt": "2021-07-06T14:52:26.396Z",
+        "meta": {
+            "parentFrame": "🧩Interface",
+            "frame": "Link"
+        }
+    },
+    {
+        "name": "LinkFilled",
+        "createdAt": "2021-07-06T14:52:26.399Z",
+        "updatedAt": "2021-07-06T14:52:26.399Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "Link-filled"
+        }
+    },
+    {
+        "name": "List",
+        "createdAt": "2021-07-06T14:52:25.987Z",
+        "updatedAt": "2021-07-06T14:52:25.987Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "list"
+        }
+    },
+    {
+        "name": "List",
+        "createdAt": "2021-07-06T14:52:26.257Z",
+        "updatedAt": "2021-07-06T14:52:26.257Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "List"
+        }
+    },
+    {
+        "name": "ListFilled",
+        "createdAt": "2021-07-06T14:52:26.349Z",
+        "updatedAt": "2021-07-06T14:52:26.349Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩File",
+            "frame": "list-filled"
+        }
+    },
+    {
+        "name": "Locked",
+        "createdAt": "2021-07-06T14:52:26.291Z",
+        "updatedAt": "2021-07-06T14:52:26.291Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "locked"
+        }
+    },
+    {
+        "name": "Locked",
+        "createdAt": "2021-07-06T14:52:26.018Z",
+        "updatedAt": "2021-07-06T14:52:26.018Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "locked"
+        }
+    },
+    {
+        "name": "Login",
+        "createdAt": "2021-07-06T14:52:26.155Z",
+        "updatedAt": "2021-07-06T14:52:26.155Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "login"
+        }
+    },
+    {
+        "name": "Login",
+        "createdAt": "2021-07-06T14:52:25.996Z",
+        "updatedAt": "2021-07-06T14:52:25.996Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "login"
+        }
+    },
+    {
+        "name": "LoginFilled",
+        "createdAt": "2021-07-06T14:52:26.382Z",
+        "updatedAt": "2021-07-06T14:52:26.382Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "login-filled"
+        }
+    },
+    {
+        "name": "Logout",
+        "createdAt": "2021-07-06T14:52:25.996Z",
+        "updatedAt": "2021-07-06T14:52:25.996Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "logout"
+        }
+    },
+    {
+        "name": "Logout",
+        "createdAt": "2021-07-06T14:52:26.155Z",
+        "updatedAt": "2021-07-06T14:52:26.155Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "logout"
+        }
+    },
+    {
+        "name": "LogoutFilled",
+        "createdAt": "2021-07-06T14:52:26.388Z",
+        "updatedAt": "2021-07-06T14:52:26.388Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "logout-filled"
+        }
+    },
+    {
+        "name": "Male",
+        "createdAt": "2021-07-06T14:52:25.991Z",
+        "updatedAt": "2021-07-06T14:52:25.991Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "male"
+        }
+    },
+    {
+        "name": "Male",
+        "createdAt": "2021-07-06T14:52:26.168Z",
+        "updatedAt": "2021-07-06T14:52:26.168Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "male"
+        }
+    },
+    {
+        "name": "MaleFilled",
+        "createdAt": "2021-07-06T14:52:26.358Z",
+        "updatedAt": "2021-07-06T14:52:26.358Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Gender",
+            "frame": "male-filled"
+        }
+    },
+    {
+        "name": "MeetingRoom",
+        "createdAt": "2021-07-06T14:52:26.488Z",
+        "updatedAt": "2021-07-06T14:52:26.488Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Meeting room"
+        }
+    },
+    {
+        "name": "MeetingRoom",
+        "createdAt": "2021-07-06T14:52:26.466Z",
+        "updatedAt": "2021-07-06T14:52:26.466Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Meeting room"
+        }
+    },
+    {
+        "name": "MeetingRoom",
+        "createdAt": "2021-07-06T14:52:26.466Z",
+        "updatedAt": "2021-07-06T14:52:26.466Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Meeting room"
+        }
+    },
+    {
+        "name": "MeetingRoomFilled",
+        "createdAt": "2021-07-06T14:52:26.489Z",
+        "updatedAt": "2021-07-06T14:52:26.489Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Meeting room filled"
+        }
+    },
+    {
+        "name": "Minus",
+        "createdAt": "2021-07-06T14:52:26.156Z",
+        "updatedAt": "2021-07-06T14:52:26.156Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "minus"
+        }
+    },
+    {
+        "name": "MinusCircle",
+        "createdAt": "2021-07-06T14:52:26.073Z",
+        "updatedAt": "2021-07-06T14:52:26.073Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "minus--circle"
+        }
+    },
+    {
+        "name": "MinusCircleFilled",
+        "createdAt": "2021-07-06T14:52:26.389Z",
+        "updatedAt": "2021-07-06T14:52:26.389Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "minus--circle-filled"
+        }
+    },
+    {
+        "name": "Mobile",
+        "createdAt": "2021-07-06T14:52:26.245Z",
+        "updatedAt": "2021-07-06T14:52:26.245Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "mobile"
+        }
+    },
+    {
+        "name": "Mobile",
+        "createdAt": "2021-07-06T14:52:25.965Z",
+        "updatedAt": "2021-07-06T14:52:25.965Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "mobile"
+        }
+    },
+    {
+        "name": "MobileFilled",
+        "createdAt": "2021-07-06T14:52:26.334Z",
+        "updatedAt": "2021-07-06T14:52:26.334Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Device",
+            "frame": "mobile-filled"
+        }
+    },
+    {
+        "name": "Money",
+        "createdAt": "2021-07-06T14:52:26.282Z",
+        "updatedAt": "2021-07-06T14:52:26.282Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "money"
+        }
+    },
+    {
+        "name": "Money",
+        "createdAt": "2021-07-06T14:52:26.013Z",
+        "updatedAt": "2021-07-06T14:52:26.013Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "money"
+        }
+    },
+    {
+        "name": "MoneyFilled",
+        "createdAt": "2021-07-06T14:52:26.410Z",
+        "updatedAt": "2021-07-06T14:52:26.410Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Money",
+            "frame": "money-filled"
+        }
+    },
+    {
+        "name": "Monitor",
+        "createdAt": "2021-07-06T14:52:25.959Z",
+        "updatedAt": "2021-07-06T14:52:25.959Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "monitor"
+        }
+    },
+    {
+        "name": "Monitor",
+        "createdAt": "2021-07-06T14:52:26.243Z",
+        "updatedAt": "2021-07-06T14:52:26.243Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "monitor"
+        }
+    },
+    {
+        "name": "MonitorFilled",
+        "createdAt": "2021-07-06T14:52:26.334Z",
+        "updatedAt": "2021-07-06T14:52:26.334Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Device",
+            "frame": "monitor-filled"
+        }
+    },
+    {
+        "name": "Motorcycle",
+        "createdAt": "2021-07-06T14:52:26.123Z",
+        "updatedAt": "2021-07-06T14:52:26.123Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "motorcycle"
+        }
+    },
+    {
+        "name": "Mute",
+        "createdAt": "2021-07-06T14:52:26.501Z",
+        "updatedAt": "2021-07-06T14:52:26.501Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Mute"
+        }
+    },
+    {
+        "name": "MyPlan",
+        "createdAt": "2021-07-06T14:52:26.419Z",
+        "updatedAt": "2021-07-06T14:52:26.419Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "My plan"
+        }
+    },
+    {
+        "name": "MyProfile",
+        "createdAt": "2021-07-06T14:52:26.419Z",
+        "updatedAt": "2021-07-06T14:52:26.419Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "My profile"
+        }
+    },
+    {
+        "name": "Neutral",
+        "createdAt": "2021-07-06T14:52:26.169Z",
+        "updatedAt": "2021-07-06T14:52:26.169Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "neutral"
+        }
+    },
+    {
+        "name": "Neutral",
+        "createdAt": "2021-07-06T14:52:25.991Z",
+        "updatedAt": "2021-07-06T14:52:25.991Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "neutral"
+        }
+    },
+    {
+        "name": "NeutralFilled",
+        "createdAt": "2021-07-06T14:52:26.359Z",
+        "updatedAt": "2021-07-06T14:52:26.359Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Gender",
+            "frame": "neutral-filled"
+        }
+    },
+    {
+        "name": "NewIcons",
+        "createdAt": "2021-07-06T14:52:26.132Z",
+        "updatedAt": "2021-07-06T14:52:26.132Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "New icons"
+        }
+    },
+    {
+        "name": "Next",
+        "createdAt": "2021-07-06T14:52:25.947Z",
+        "updatedAt": "2021-07-06T14:52:25.947Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "next"
+        }
+    },
+    {
+        "name": "NextFilled",
+        "createdAt": "2021-07-06T14:52:26.324Z",
+        "updatedAt": "2021-07-06T14:52:26.324Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Chevron",
+            "frame": "next-filled"
+        }
+    },
+    {
+        "name": "NoSmoking",
+        "createdAt": "2021-07-06T14:52:26.095Z",
+        "updatedAt": "2021-07-06T14:52:26.095Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "No smoking"
+        }
+    },
+    {
+        "name": "Office1",
+        "createdAt": "2021-07-06T14:52:25.930Z",
+        "updatedAt": "2021-07-06T14:52:25.930Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "office-1"
+        }
+    },
+    {
+        "name": "Office1Filled",
+        "createdAt": "2021-07-06T14:52:26.323Z",
+        "updatedAt": "2021-07-06T14:52:26.323Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Building",
+            "frame": "office-1-filled"
+        }
+    },
+    {
+        "name": "Office2",
+        "createdAt": "2021-07-06T14:52:26.323Z",
+        "updatedAt": "2021-07-06T14:52:26.323Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Building",
+            "frame": "office-2"
+        }
+    },
+    {
+        "name": "Office2Filled",
+        "createdAt": "2021-07-06T14:52:26.324Z",
+        "updatedAt": "2021-07-06T14:52:26.324Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Building",
+            "frame": "office-2-filled"
+        }
+    },
+    {
+        "name": "Parking",
+        "createdAt": "2021-07-06T14:52:26.130Z",
+        "updatedAt": "2021-07-06T14:52:26.130Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Parking"
+        }
+    },
+    {
+        "name": "Passport",
+        "createdAt": "2021-07-06T14:52:26.271Z",
+        "updatedAt": "2021-07-06T14:52:26.271Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "passport"
+        }
+    },
+    {
+        "name": "Passport",
+        "createdAt": "2021-07-06T14:52:26.004Z",
+        "updatedAt": "2021-07-06T14:52:26.004Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "passport"
+        }
+    },
+    {
+        "name": "PassportFilled",
+        "createdAt": "2021-07-06T14:52:26.403Z",
+        "updatedAt": "2021-07-06T14:52:26.403Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩International",
+            "frame": "passport-filled"
+        }
+    },
+    {
+        "name": "Path",
+        "createdAt": "2021-07-06T14:52:26.334Z",
+        "updatedAt": "2021-07-06T14:52:26.334Z",
+        "meta": {
+            "parentFrame": "telephone-filled",
+            "frame": "Path"
+        }
+    },
+    {
+        "name": "PensionBag",
+        "createdAt": "2021-07-06T14:52:26.079Z",
+        "updatedAt": "2021-07-06T14:52:26.079Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "pension-bag"
+        }
+    },
+    {
+        "name": "PensionBagFilled",
+        "createdAt": "2021-07-06T14:52:26.413Z",
+        "updatedAt": "2021-07-06T14:52:26.413Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Pension",
+            "frame": "pension-bag-filled"
+        }
+    },
+    {
+        "name": "PensionFlower",
+        "createdAt": "2021-07-06T14:52:26.087Z",
+        "updatedAt": "2021-07-06T14:52:26.087Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "pension-flower"
+        }
+    },
+    {
+        "name": "PensionFlowerFilled",
+        "createdAt": "2021-07-06T14:52:26.414Z",
+        "updatedAt": "2021-07-06T14:52:26.414Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Pension",
+            "frame": "pension-flower-filled"
+        }
+    },
+    {
+        "name": "PensionSaving",
+        "createdAt": "2021-07-06T14:52:26.305Z",
+        "updatedAt": "2021-07-06T14:52:26.305Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "pension saving"
+        }
+    },
+    {
+        "name": "PensionSaving3",
+        "createdAt": "2021-07-06T14:52:26.305Z",
+        "updatedAt": "2021-07-06T14:52:26.305Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "pension saving 3"
+        }
+    },
+    {
+        "name": "People",
+        "createdAt": "2021-07-06T14:52:26.017Z",
+        "updatedAt": "2021-07-06T14:52:26.017Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "people"
+        }
+    },
+    {
+        "name": "Picture",
+        "createdAt": "2021-07-06T14:52:26.201Z",
+        "updatedAt": "2021-07-06T14:52:26.201Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "picture"
+        }
+    },
+    {
+        "name": "Picture",
+        "createdAt": "2021-07-06T14:52:25.969Z",
+        "updatedAt": "2021-07-06T14:52:25.969Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "picture"
+        }
+    },
+    {
+        "name": "PictureFilled",
+        "createdAt": "2021-07-06T14:52:26.317Z",
+        "updatedAt": "2021-07-06T14:52:26.317Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "picture-filled"
+        }
+    },
+    {
+        "name": "Place",
+        "createdAt": "2021-07-06T14:52:26.004Z",
+        "updatedAt": "2021-07-06T14:52:26.004Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "place"
+        }
+    },
+    {
+        "name": "Place",
+        "createdAt": "2021-07-06T14:52:26.273Z",
+        "updatedAt": "2021-07-06T14:52:26.273Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "place"
+        }
+    },
+    {
+        "name": "Plane",
+        "createdAt": "2021-07-06T14:52:26.004Z",
+        "updatedAt": "2021-07-06T14:52:26.004Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "plane"
+        }
+    },
+    {
+        "name": "Plane",
+        "createdAt": "2021-07-06T14:52:26.271Z",
+        "updatedAt": "2021-07-06T14:52:26.271Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "plane"
+        }
+    },
+    {
+        "name": "PlaneFilled",
+        "createdAt": "2021-07-06T14:52:26.401Z",
+        "updatedAt": "2021-07-06T14:52:26.401Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩International",
+            "frame": "plane-filled"
+        }
+    },
+    {
+        "name": "Pregnant",
+        "createdAt": "2021-07-06T14:52:25.976Z",
+        "updatedAt": "2021-07-06T14:52:25.976Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "pregnant"
+        }
+    },
+    {
+        "name": "Pregnant",
+        "createdAt": "2021-07-06T14:52:26.251Z",
+        "updatedAt": "2021-07-06T14:52:26.251Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "pregnant"
+        }
+    },
+    {
+        "name": "PregnantFilled",
+        "createdAt": "2021-07-06T14:52:26.341Z",
+        "updatedAt": "2021-07-06T14:52:26.341Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "pregnant-filled"
+        }
+    },
+    {
+        "name": "Print",
+        "createdAt": "2021-07-06T14:52:26.205Z",
+        "updatedAt": "2021-07-06T14:52:26.205Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "print"
+        }
+    },
+    {
+        "name": "Print",
+        "createdAt": "2021-07-06T14:52:25.969Z",
+        "updatedAt": "2021-07-06T14:52:25.969Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "print"
+        }
+    },
+    {
+        "name": "PrintFilled",
+        "createdAt": "2021-07-06T14:52:26.320Z",
+        "updatedAt": "2021-07-06T14:52:26.320Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "print-filled"
+        }
+    },
+    {
+        "name": "Profile",
+        "createdAt": "2021-07-06T14:52:26.290Z",
+        "updatedAt": "2021-07-06T14:52:26.290Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "profile"
+        }
+    },
+    {
+        "name": "Question",
+        "createdAt": "2021-07-06T14:52:26.431Z",
+        "updatedAt": "2021-07-06T14:52:26.431Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "question"
+        }
+    },
+    {
+        "name": "Receipt",
+        "createdAt": "2021-07-06T14:52:26.012Z",
+        "updatedAt": "2021-07-06T14:52:26.012Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "receipt"
+        }
+    },
+    {
+        "name": "Receipt",
+        "createdAt": "2021-07-06T14:52:26.282Z",
+        "updatedAt": "2021-07-06T14:52:26.282Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "receipt"
+        }
+    },
+    {
+        "name": "ReceiptFilled",
+        "createdAt": "2021-07-06T14:52:26.409Z",
+        "updatedAt": "2021-07-06T14:52:26.409Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Money",
+            "frame": "receipt-filled"
+        }
+    },
+    {
+        "name": "Reception",
+        "createdAt": "2021-07-06T14:52:26.483Z",
+        "updatedAt": "2021-07-06T14:52:26.483Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "reception"
+        }
+    },
+    {
+        "name": "ReceptionFilled",
+        "createdAt": "2021-07-06T14:52:26.482Z",
+        "updatedAt": "2021-07-06T14:52:26.482Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "reception filled"
+        }
+    },
+    {
+        "name": "Recycle",
+        "createdAt": "2021-07-06T14:52:26.078Z",
+        "updatedAt": "2021-07-06T14:52:26.078Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Recycle"
+        }
+    },
+    {
+        "name": "Recycle",
+        "createdAt": "2021-07-06T14:52:26.495Z",
+        "updatedAt": "2021-07-06T14:52:26.495Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Recycle"
+        }
+    },
+    {
+        "name": "Recycle1",
+        "createdAt": "2021-07-06T14:52:26.167Z",
+        "updatedAt": "2021-07-06T14:52:26.167Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Recycle1"
+        }
+    },
+    {
+        "name": "Recycle2",
+        "createdAt": "2021-07-06T14:52:26.459Z",
+        "updatedAt": "2021-07-06T14:52:26.459Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Recycle2"
+        }
+    },
+    {
+        "name": "RecycleFilled",
+        "createdAt": "2021-07-06T14:52:26.496Z",
+        "updatedAt": "2021-07-06T14:52:26.496Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Recycle-filled"
+        }
+    },
+    {
+        "name": "RecycleFilled",
+        "createdAt": "2021-07-06T14:52:26.308Z",
+        "updatedAt": "2021-07-06T14:52:26.308Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Recycle-filled"
+        }
+    },
+    {
+        "name": "Refresh",
+        "createdAt": "2021-07-06T14:52:25.967Z",
+        "updatedAt": "2021-07-06T14:52:25.967Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "refresh"
+        }
+    },
+    {
+        "name": "Refresh",
+        "createdAt": "2021-07-06T14:52:26.196Z",
+        "updatedAt": "2021-07-06T14:52:26.196Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "refresh"
+        }
+    },
+    {
+        "name": "RefreshFilled",
+        "createdAt": "2021-07-06T14:52:26.315Z",
+        "updatedAt": "2021-07-06T14:52:26.315Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "refresh-filled"
+        }
+    },
+    {
+        "name": "Refrigerator",
+        "createdAt": "2021-07-06T14:52:26.107Z",
+        "updatedAt": "2021-07-06T14:52:26.107Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "refrigerator"
+        }
+    },
+    {
+        "name": "ReseptionStroke",
+        "createdAt": "2021-07-06T14:52:26.466Z",
+        "updatedAt": "2021-07-06T14:52:26.466Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "reseption stroke"
+        }
+    },
+    {
+        "name": "Right",
+        "createdAt": "2021-07-06T14:52:25.931Z",
+        "updatedAt": "2021-07-06T14:52:25.931Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "right"
+        }
+    },
+    {
+        "name": "Right",
+        "createdAt": "2021-07-06T14:52:26.192Z",
+        "updatedAt": "2021-07-06T14:52:26.192Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "right"
+        }
+    },
+    {
+        "name": "Right",
+        "createdAt": "2021-07-06T14:52:26.227Z",
+        "updatedAt": "2021-07-06T14:52:26.227Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "right"
+        }
+    },
+    {
+        "name": "RightFilled",
+        "createdAt": "2021-07-06T14:52:26.314Z",
+        "updatedAt": "2021-07-06T14:52:26.314Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Arrow",
+            "frame": "right-filled"
+        }
+    },
+    {
+        "name": "Sandglass",
+        "createdAt": "2021-07-06T14:52:26.181Z",
+        "updatedAt": "2021-07-06T14:52:26.181Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "sandglass"
+        }
+    },
+    {
+        "name": "Sandglass",
+        "createdAt": "2021-07-06T14:52:26.051Z",
+        "updatedAt": "2021-07-06T14:52:26.051Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "sandglass"
+        }
+    },
+    {
+        "name": "Save2",
+        "createdAt": "2021-07-06T14:52:26.149Z",
+        "updatedAt": "2021-07-06T14:52:26.149Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "save2"
+        }
+    },
+    {
+        "name": "SaveFile",
+        "createdAt": "2021-07-06T14:52:26.063Z",
+        "updatedAt": "2021-07-06T14:52:26.063Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "save-file"
+        }
+    },
+    {
+        "name": "SaveFileFilled",
+        "createdAt": "2021-07-06T14:52:26.377Z",
+        "updatedAt": "2021-07-06T14:52:26.377Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "save-file-filled"
+        }
+    },
+    {
+        "name": "Saving",
+        "createdAt": "2021-07-06T14:52:26.282Z",
+        "updatedAt": "2021-07-06T14:52:26.282Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "saving"
+        }
+    },
+    {
+        "name": "Saving",
+        "createdAt": "2021-07-06T14:52:26.012Z",
+        "updatedAt": "2021-07-06T14:52:26.012Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "saving"
+        }
+    },
+    {
+        "name": "SavingFilled",
+        "createdAt": "2021-07-06T14:52:26.408Z",
+        "updatedAt": "2021-07-06T14:52:26.408Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Money",
+            "frame": "saving-filled"
+        }
+    },
+    {
+        "name": "Search",
+        "createdAt": "2021-07-06T14:52:26.074Z",
+        "updatedAt": "2021-07-06T14:52:26.074Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "search"
+        }
+    },
+    {
+        "name": "Search",
+        "createdAt": "2021-07-06T14:52:26.156Z",
+        "updatedAt": "2021-07-06T14:52:26.156Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "search"
+        }
+    },
+    {
+        "name": "SearchFilled",
+        "createdAt": "2021-07-06T14:52:26.391Z",
+        "updatedAt": "2021-07-06T14:52:26.391Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "search-filled"
+        }
+    },
+    {
+        "name": "SearchInBook",
+        "createdAt": "2021-07-06T14:52:26.426Z",
+        "updatedAt": "2021-07-06T14:52:26.426Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "Search in book"
+        }
+    },
+    {
+        "name": "Selection",
+        "createdAt": "2021-07-06T14:52:26.167Z",
+        "updatedAt": "2021-07-06T14:52:26.167Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "selection"
+        }
+    },
+    {
+        "name": "Selection",
+        "createdAt": "2021-07-06T14:52:26.000Z",
+        "updatedAt": "2021-07-06T14:52:26.000Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "selection"
+        }
+    },
+    {
+        "name": "SelectionFilled",
+        "createdAt": "2021-07-06T14:52:26.395Z",
+        "updatedAt": "2021-07-06T14:52:26.395Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Interface",
+            "frame": "selection-filled"
+        }
+    },
+    {
+        "name": "SelfServiceFilled",
+        "createdAt": "2021-07-06T14:52:26.479Z",
+        "updatedAt": "2021-07-06T14:52:26.479Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service filled"
+        }
+    },
+    {
+        "name": "SelfServiceMobile",
+        "createdAt": "2021-07-06T14:52:26.478Z",
+        "updatedAt": "2021-07-06T14:52:26.478Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service mobile"
+        }
+    },
+    {
+        "name": "SelfServiceMobileFilled",
+        "createdAt": "2021-07-06T14:52:26.477Z",
+        "updatedAt": "2021-07-06T14:52:26.477Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service mobile filled"
+        }
+    },
+    {
+        "name": "SelfServiceMobileStroke",
+        "createdAt": "2021-07-06T14:52:26.470Z",
+        "updatedAt": "2021-07-06T14:52:26.470Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service mobile stroke"
+        }
+    },
+    {
+        "name": "SelfServiceStroke",
+        "createdAt": "2021-07-06T14:52:26.467Z",
+        "updatedAt": "2021-07-06T14:52:26.467Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service stroke"
+        }
+    },
+    {
+        "name": "SelfServiceStroke",
+        "createdAt": "2021-07-06T14:52:26.480Z",
+        "updatedAt": "2021-07-06T14:52:26.480Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "self-service stroke"
+        }
+    },
+    {
+        "name": "Send",
+        "createdAt": "2021-07-06T14:52:25.955Z",
+        "updatedAt": "2021-07-06T14:52:25.955Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "send"
+        }
+    },
+    {
+        "name": "Send",
+        "createdAt": "2021-07-06T14:52:26.241Z",
+        "updatedAt": "2021-07-06T14:52:26.241Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "send"
+        }
+    },
+    {
+        "name": "SendFilled",
+        "createdAt": "2021-07-06T14:52:26.333Z",
+        "updatedAt": "2021-07-06T14:52:26.333Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "send-filled"
+        }
+    },
+    {
+        "name": "Service",
+        "createdAt": "2021-07-06T14:52:25.952Z",
+        "updatedAt": "2021-07-06T14:52:25.952Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "service"
+        }
+    },
+    {
+        "name": "ServiceFilled",
+        "createdAt": "2021-07-06T14:52:26.438Z",
+        "updatedAt": "2021-07-06T14:52:26.438Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩People",
+            "frame": "service-filled"
+        }
+    },
+    {
+        "name": "Settings",
+        "createdAt": "2021-07-06T14:52:26.297Z",
+        "updatedAt": "2021-07-06T14:52:26.297Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "settings"
+        }
+    },
+    {
+        "name": "Settings",
+        "createdAt": "2021-07-06T14:52:26.037Z",
+        "updatedAt": "2021-07-06T14:52:26.037Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "settings"
+        }
+    },
+    {
+        "name": "ShakeHands",
+        "createdAt": "2021-07-06T14:52:26.239Z",
+        "updatedAt": "2021-07-06T14:52:26.239Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "shake hands"
+        }
+    },
+    {
+        "name": "ShakeHands",
+        "createdAt": "2021-07-06T14:52:25.952Z",
+        "updatedAt": "2021-07-06T14:52:25.952Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "shake hands"
+        }
+    },
+    {
+        "name": "ShakeHandsFilled",
+        "createdAt": "2021-07-06T14:52:26.333Z",
+        "updatedAt": "2021-07-06T14:52:26.333Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "shake-hands-filled"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.458Z",
+        "updatedAt": "2021-07-06T14:52:26.458Z",
+        "meta": {
+            "parentFrame": "clock-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.456Z",
+        "updatedAt": "2021-07-06T14:52:26.456Z",
+        "meta": {
+            "parentFrame": "warning-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.445Z",
+        "updatedAt": "2021-07-06T14:52:26.445Z",
+        "meta": {
+            "parentFrame": "settings-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.454Z",
+        "updatedAt": "2021-07-06T14:52:26.454Z",
+        "meta": {
+            "parentFrame": "success-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.453Z",
+        "updatedAt": "2021-07-06T14:52:26.453Z",
+        "meta": {
+            "parentFrame": "helptext-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.404Z",
+        "updatedAt": "2021-07-06T14:52:26.404Z",
+        "meta": {
+            "parentFrame": "place-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.454Z",
+        "updatedAt": "2021-07-06T14:52:26.454Z",
+        "meta": {
+            "parentFrame": "information-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.453Z",
+        "updatedAt": "2021-07-06T14:52:26.453Z",
+        "meta": {
+            "parentFrame": "error-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.441Z",
+        "updatedAt": "2021-07-06T14:52:26.441Z",
+        "meta": {
+            "parentFrame": "unlocked-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.440Z",
+        "updatedAt": "2021-07-06T14:52:26.440Z",
+        "meta": {
+            "parentFrame": "locked-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.413Z",
+        "updatedAt": "2021-07-06T14:52:26.413Z",
+        "meta": {
+            "parentFrame": "🧩Pension",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shape",
+        "createdAt": "2021-07-06T14:52:26.406Z",
+        "updatedAt": "2021-07-06T14:52:26.406Z",
+        "meta": {
+            "parentFrame": "calculator-filled",
+            "frame": "Shape"
+        }
+    },
+    {
+        "name": "Shredding",
+        "createdAt": "2021-07-06T14:52:26.114Z",
+        "updatedAt": "2021-07-06T14:52:26.114Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "shredding"
+        }
+    },
+    {
+        "name": "Sight",
+        "createdAt": "2021-07-06T14:52:26.131Z",
+        "updatedAt": "2021-07-06T14:52:26.131Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "sight"
+        }
+    },
+    {
+        "name": "SightFilled",
+        "createdAt": "2021-07-06T14:52:26.502Z",
+        "updatedAt": "2021-07-06T14:52:26.502Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "sight-filled"
+        }
+    },
+    {
+        "name": "SightFilled",
+        "createdAt": "2021-07-06T14:52:26.312Z",
+        "updatedAt": "2021-07-06T14:52:26.312Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "sight-filled"
+        }
+    },
+    {
+        "name": "SightOutline",
+        "createdAt": "2021-07-06T14:52:26.438Z",
+        "updatedAt": "2021-07-06T14:52:26.438Z",
+        "meta": {
+            "parentFrame": "🧩Privacy",
+            "frame": "sight outline"
+        }
+    },
+    {
+        "name": "SightOutline",
+        "createdAt": "2021-07-06T14:52:26.438Z",
+        "updatedAt": "2021-07-06T14:52:26.438Z",
+        "meta": {
+            "parentFrame": "🧩Privacy",
+            "frame": "sight outline"
+        }
+    },
+    {
+        "name": "SightStroke",
+        "createdAt": "2021-07-06T14:52:26.461Z",
+        "updatedAt": "2021-07-06T14:52:26.461Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "sight stroke"
+        }
+    },
+    {
+        "name": "SignLanguage",
+        "createdAt": "2021-07-06T14:52:26.260Z",
+        "updatedAt": "2021-07-06T14:52:26.260Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "sign language"
+        }
+    },
+    {
+        "name": "SignLanguage",
+        "createdAt": "2021-07-06T14:52:25.992Z",
+        "updatedAt": "2021-07-06T14:52:25.992Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "sign-language"
+        }
+    },
+    {
+        "name": "SignLanguage",
+        "createdAt": "2021-07-06T14:52:26.363Z",
+        "updatedAt": "2021-07-06T14:52:26.363Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Handicap",
+            "frame": "sign-language"
+        }
+    },
+    {
+        "name": "SignLanguageFilled",
+        "createdAt": "2021-07-06T14:52:26.363Z",
+        "updatedAt": "2021-07-06T14:52:26.363Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Handicap",
+            "frame": "sign-language-filled"
+        }
+    },
+    {
+        "name": "SocialAid",
+        "createdAt": "2021-07-06T14:52:26.301Z",
+        "updatedAt": "2021-07-06T14:52:26.301Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "social aid"
+        }
+    },
+    {
+        "name": "SocialAid",
+        "createdAt": "2021-07-06T14:52:26.045Z",
+        "updatedAt": "2021-07-06T14:52:26.045Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "social-aid"
+        }
+    },
+    {
+        "name": "SocialAid",
+        "createdAt": "2021-07-06T14:52:26.453Z",
+        "updatedAt": "2021-07-06T14:52:26.453Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Social service",
+            "frame": "social-aid"
+        }
+    },
+    {
+        "name": "SpeechBubbleFilled",
+        "createdAt": "2021-07-06T14:52:26.329Z",
+        "updatedAt": "2021-07-06T14:52:26.329Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Communication",
+            "frame": "speech-bubble-filled"
+        }
+    },
+    {
+        "name": "Star",
+        "createdAt": "2021-07-06T14:52:26.299Z",
+        "updatedAt": "2021-07-06T14:52:26.299Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "star"
+        }
+    },
+    {
+        "name": "Star",
+        "createdAt": "2021-07-06T14:52:26.042Z",
+        "updatedAt": "2021-07-06T14:52:26.042Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "star"
+        }
+    },
+    {
+        "name": "StarFilled",
+        "createdAt": "2021-07-06T14:52:26.450Z",
+        "updatedAt": "2021-07-06T14:52:26.450Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Social media",
+            "frame": "star-filled"
+        }
+    },
+    {
+        "name": "Stroller",
+        "createdAt": "2021-07-06T14:52:26.252Z",
+        "updatedAt": "2021-07-06T14:52:26.252Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "stroller"
+        }
+    },
+    {
+        "name": "Stroller",
+        "createdAt": "2021-07-06T14:52:25.977Z",
+        "updatedAt": "2021-07-06T14:52:25.977Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "stroller"
+        }
+    },
+    {
+        "name": "StrollerFilled",
+        "createdAt": "2021-07-06T14:52:26.341Z",
+        "updatedAt": "2021-07-06T14:52:26.341Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Family",
+            "frame": "stroller-filled"
+        }
+    },
+    {
+        "name": "Subtract",
+        "createdAt": "2021-07-06T14:52:26.314Z",
+        "updatedAt": "2021-07-06T14:52:26.314Z",
+        "meta": {
+            "parentFrame": ".atom--print-solid",
+            "frame": "Subtract"
+        }
+    },
+    {
+        "name": "Success",
+        "createdAt": "2021-07-06T14:52:26.304Z",
+        "updatedAt": "2021-07-06T14:52:26.304Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "success"
+        }
+    },
+    {
+        "name": "Success",
+        "createdAt": "2021-07-06T14:52:26.047Z",
+        "updatedAt": "2021-07-06T14:52:26.047Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "success"
+        }
+    },
+    {
+        "name": "System",
+        "createdAt": "2021-07-06T14:52:26.297Z",
+        "updatedAt": "2021-07-06T14:52:26.297Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "system"
+        }
+    },
+    {
+        "name": "System",
+        "createdAt": "2021-07-06T14:52:26.041Z",
+        "updatedAt": "2021-07-06T14:52:26.041Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "system"
+        }
+    },
+    {
+        "name": "TalkingRoom",
+        "createdAt": "2021-07-06T14:52:26.484Z",
+        "updatedAt": "2021-07-06T14:52:26.484Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Talking room"
+        }
+    },
+    {
+        "name": "TalkingRoomFilled",
+        "createdAt": "2021-07-06T14:52:26.487Z",
+        "updatedAt": "2021-07-06T14:52:26.487Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Talking room filled"
+        }
+    },
+    {
+        "name": "Telephone",
+        "createdAt": "2021-07-06T14:52:26.241Z",
+        "updatedAt": "2021-07-06T14:52:26.241Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "telephone"
+        }
+    },
+    {
+        "name": "Telephone",
+        "createdAt": "2021-07-06T14:52:25.958Z",
+        "updatedAt": "2021-07-06T14:52:25.958Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "telephone"
+        }
+    },
+    {
+        "name": "Traning",
+        "createdAt": "2021-07-06T14:52:26.130Z",
+        "updatedAt": "2021-07-06T14:52:26.130Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "traning"
+        }
+    },
+    {
+        "name": "Union",
+        "createdAt": "2021-07-06T14:52:26.315Z",
+        "updatedAt": "2021-07-06T14:52:26.315Z",
+        "meta": {
+            "parentFrame": "attachment-filled",
+            "frame": "Union"
+        }
+    },
+    {
+        "name": "Union",
+        "createdAt": "2021-07-06T14:52:26.422Z",
+        "updatedAt": "2021-07-06T14:52:26.422Z",
+        "meta": {
+            "parentFrame": "🧩People",
+            "frame": "Union"
+        }
+    },
+    {
+        "name": "Union",
+        "createdAt": "2021-07-06T14:52:26.445Z",
+        "updatedAt": "2021-07-06T14:52:26.445Z",
+        "meta": {
+            "parentFrame": "system-filled",
+            "frame": "Union"
+        }
+    },
+    {
+        "name": "Unlocked",
+        "createdAt": "2021-07-06T14:52:26.036Z",
+        "updatedAt": "2021-07-06T14:52:26.036Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "unlocked"
+        }
+    },
+    {
+        "name": "Unlocked",
+        "createdAt": "2021-07-06T14:52:26.291Z",
+        "updatedAt": "2021-07-06T14:52:26.291Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "unlocked"
+        }
+    },
+    {
+        "name": "Up",
+        "createdAt": "2021-07-06T14:52:25.931Z",
+        "updatedAt": "2021-07-06T14:52:25.931Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "up"
+        }
+    },
+    {
+        "name": "Up",
+        "createdAt": "2021-07-06T14:52:26.229Z",
+        "updatedAt": "2021-07-06T14:52:26.229Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "up"
+        }
+    },
+    {
+        "name": "Up",
+        "createdAt": "2021-07-06T14:52:26.189Z",
+        "updatedAt": "2021-07-06T14:52:26.189Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "up"
+        }
+    },
+    {
+        "name": "UpFilled",
+        "createdAt": "2021-07-06T14:52:26.312Z",
+        "updatedAt": "2021-07-06T14:52:26.312Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Arrow",
+            "frame": "up-filled"
+        }
+    },
+    {
+        "name": "Upload",
+        "createdAt": "2021-07-06T14:52:26.205Z",
+        "updatedAt": "2021-07-06T14:52:26.205Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "upload"
+        }
+    },
+    {
+        "name": "Upload",
+        "createdAt": "2021-07-06T14:52:25.969Z",
+        "updatedAt": "2021-07-06T14:52:25.969Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "upload"
+        }
+    },
+    {
+        "name": "UploadFilled",
+        "createdAt": "2021-07-06T14:52:26.321Z",
+        "updatedAt": "2021-07-06T14:52:26.321Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Attachment",
+            "frame": "upload-filled"
+        }
+    },
+    {
+        "name": "Vacation",
+        "createdAt": "2021-07-06T14:52:26.014Z",
+        "updatedAt": "2021-07-06T14:52:26.014Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "vacation"
+        }
+    },
+    {
+        "name": "Vacation",
+        "createdAt": "2021-07-06T14:52:26.282Z",
+        "updatedAt": "2021-07-06T14:52:26.282Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "vacation"
+        }
+    },
+    {
+        "name": "VacationFilled",
+        "createdAt": "2021-07-06T14:52:26.404Z",
+        "updatedAt": "2021-07-06T14:52:26.404Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Jobs",
+            "frame": "vacation-filled"
+        }
+    },
+    {
+        "name": "VideoRoom",
+        "createdAt": "2021-07-06T14:52:26.119Z",
+        "updatedAt": "2021-07-06T14:52:26.119Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Video-room"
+        }
+    },
+    {
+        "name": "VideoRoomFilled",
+        "createdAt": "2021-07-06T14:52:26.306Z",
+        "updatedAt": "2021-07-06T14:52:26.306Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "Video-room-filled"
+        }
+    },
+    {
+        "name": "VolumeDown",
+        "createdAt": "2021-07-06T14:52:26.497Z",
+        "updatedAt": "2021-07-06T14:52:26.497Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Volume down"
+        }
+    },
+    {
+        "name": "VolumeUp",
+        "createdAt": "2021-07-06T14:52:26.500Z",
+        "updatedAt": "2021-07-06T14:52:26.500Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "Volume up"
+        }
+    },
+    {
+        "name": "WaitingRoom",
+        "createdAt": "2021-07-06T14:52:26.474Z",
+        "updatedAt": "2021-07-06T14:52:26.474Z",
+        "meta": {
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "waiting room"
+        }
+    },
+    {
+        "name": "WaitingRoom",
+        "createdAt": "2021-07-06T14:52:26.474Z",
+        "updatedAt": "2021-07-06T14:52:26.474Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "waiting room"
+        }
+    },
+    {
+        "name": "WaitingRoomFilled",
+        "createdAt": "2021-07-06T14:52:26.474Z",
+        "updatedAt": "2021-07-06T14:52:26.474Z",
+        "meta": {
+            "description": "",
+            "parentFrame": "🧩Fyrstikkalleen",
+            "frame": "waiting room filled"
+        }
+    },
+    {
+        "name": "Warning",
+        "createdAt": "2021-07-06T14:52:26.047Z",
+        "updatedAt": "2021-07-06T14:52:26.047Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "warning"
+        }
+    },
+    {
+        "name": "Warning",
+        "createdAt": "2021-07-06T14:52:26.304Z",
+        "updatedAt": "2021-07-06T14:52:26.304Z",
+        "meta": {
+            "parentFrame": "🔴NAV icons",
+            "frame": "warning"
+        }
+    },
+    {
+        "name": "Washing",
+        "createdAt": "2021-07-06T14:52:26.113Z",
+        "updatedAt": "2021-07-06T14:52:26.113Z",
+        "meta": {
+            "parentFrame": "New icons",
+            "frame": "Washing"
+        }
+    }
+]
