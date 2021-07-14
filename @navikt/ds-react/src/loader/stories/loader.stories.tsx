@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Loader } from "../index";
 import { Button } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
@@ -63,6 +63,66 @@ export const All = () => {
           <span>Laster...</span>
           <Loader />
         </Button>
+      </div>
+    </div>
+  );
+};
+
+export const LoaderDemoShort = () => {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        maxWidth: "30rem",
+        textAlign: "center",
+        rowGap: "0.5rem",
+      }}
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <Loader
+        size="xl"
+        title="Adipisicing non voluptate aute in ea eu officia duis fugiat aute
+        pariatur et deserunt nisi."
+      />
+      <span>Henter innholdet...</span>
+    </div>
+  );
+};
+
+export const LoaderDemoLong = () => {
+  const [loading, setLoading] = useState(false);
+  return (
+    <div>
+      <button onClick={() => setLoading(!loading)}>Toggle Loading</button>
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          maxWidth: "30rem",
+          textAlign: "center",
+          rowGap: "0.5rem",
+        }}
+        aria-live="polite"
+        aria-busy={loading}
+      >
+        {loading && (
+          <>
+            <Loader
+              size="xl"
+              title="Adipisicing non voluptate aute in ea eu officia duis fugiat aute
+        pariatur et deserunt nisi."
+            />
+            <span>
+              Adipisicing non voluptate aute in ea eu officia duis fugiat aute
+              pariatur et deserunt nisi.
+            </span>
+          </>
+        )}
       </div>
     </div>
   );
