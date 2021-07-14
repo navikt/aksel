@@ -43,7 +43,7 @@
   height: 3rem;
   left: 0;
   top: 0;
-  border-radius: 0px;
+  /* border-radius: 0px; */
 }
 
 /* .navds-checkbox--s + .navds-checkbox__label {
