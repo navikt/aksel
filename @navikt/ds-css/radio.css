@@ -33,18 +33,24 @@
   border-radius: 50%;
 }
 
-.navds-radio:hover:not(:disabled) + .navds-radio__label::before {
+.navds-radio + .navds-radio__label::before {
   content: "";
   position: absolute;
   display: block;
   box-sizing: border-box;
-  background-color: var(--navds-color-gray-40);
   width: 3rem;
   height: 3rem;
   left: 0;
   top: 0;
+  /* background-color: transparent; */
 
-  /* border-radius: 0px; */
+  /* transition: background-color 100ms; */
+
+  /*  border-radius: 4px; */
+}
+
+.navds-radio:hover:not(:disabled) + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-40);
 }
 
 /* .navds-radio--s + .navds-radio__label {

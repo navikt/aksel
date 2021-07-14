@@ -33,7 +33,7 @@
   left: 0.75rem;
 }
 
-.navds-checkbox:hover:not(:disabled) + .navds-checkbox__label::before {
+.navds-checkbox:hover + .navds-checkbox__label::before {
   content: "";
   position: absolute;
   display: block;
@@ -58,7 +58,7 @@
   height: 2rem;
 } */
 
-.navds-checkbox:hover:not(:disabled) + .navds-checkbox__label::after {
+.navds-checkbox:hover + .navds-checkbox__label::after {
   border-color: var(--navds-color-blue-50);
   background-color: var(--navds-color-blue-10);
 }
@@ -96,7 +96,20 @@
   box-shadow: none;
 }
 
+.navds-checkbox:hover:disabled + .navds-checkbox__label::before {
+  background-color: transparent;
+}
+
+.navds-checkbox:checked:hover:disabled + .navds-checkbox__label::before {
+  background-color: transparent;
+}
+
 .navds-checkbox:disabled:checked + .navds-checkbox__label::after {
+  background-color: var(--navds-color-gray-40);
+  border-color: var(--navds-color-gray-40);
+}
+
+.navds-checkbox:disabled:checked:hover + .navds-checkbox__label::after {
   background-color: var(--navds-color-gray-40);
   border-color: var(--navds-color-gray-40);
 }
