@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Loader } from "../index";
-import { Button, Panel } from "../../index";
+import { Button, Panel, Title } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 import "./demo.css";
 export default {
@@ -81,21 +81,24 @@ export const LoaderDemo = () => {
   };
 
   const text = longText
-    ? "Laster inn nytt innhold fra databasen. Hvis dette tar lengre enn 10 sekunder kan man prøve å laste siden på nytt."
+    ? "Laster inn nytt innhold fra databasen. Hvis dette tar lengre enn 10 sekunder kan man prøve å laste siden på nytt. Om dette ikke fungerer kan det hende tjenesten har nedetid nå, sjekk ut denne linken for å se status"
     : "Laster inn innholdet...";
 
   return (
     <div className="demo__wrapper">
+      <Title level="1" size="l">
+        Test/Demo for loading state. Ikke bruk som referanse i implmentasjon
+      </Title>
       <div>
-        <button onClick={() => setLoading(!loading)}>
+        <Button onClick={() => setLoading(!loading)}>
           Toggle Loading state
-        </button>
-        <button onClick={() => setLongText(!longText)}>
+        </Button>
+        <Button onClick={() => setLongText(!longText)}>
           Toggle Text-lengde
-        </button>
-        <button onClick={() => handleAuto()}>
+        </Button>
+        <Button onClick={() => handleAuto()}>
           Automatisk endring (3 sekunder)
-        </button>
+        </Button>
       </div>
 
       <Panel
