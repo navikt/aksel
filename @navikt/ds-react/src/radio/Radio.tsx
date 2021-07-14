@@ -17,7 +17,11 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
   ({ className, size = "m", label, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     return (
-      <div className="navds-form__element">
+      <div
+        className={cl("navds-form__element", {
+          "navds-form__element--no-margin": size === "m",
+        })}
+      >
         <input
           id={internalId.current}
           ref={ref}

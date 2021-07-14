@@ -1,96 +1,85 @@
 import React, { useState } from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Checkbox } from "../../index";
+import { Checkbox, Radio } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,
 } as Meta;
 
-const FormElements = () => (
+const Checkboxes = ({ size = "m" }: { size?: "m" | "s" }) => (
   <>
-    <div>
-      <label>input 1 label</label>
-      <input />
-    </div>
-    <div>
-      <input type="checkbox" />
-      <label>box 1</label>
-    </div>
-    <div>
-      <input type="checkbox" />
-      <label>box 2</label>
-    </div>
-    <div>
-      <input type="checkbox" />
-      <label>box 3</label>
-    </div>
+    <Checkbox size={size} label="box 1" />
+    <Checkbox size={size} label="box 2" />
+    <Checkbox size={size} label="box 3" />
+    <Checkbox size={size} label="box 4" />
+  </>
+);
+
+const Radios = ({ size = "m" }: { size?: "m" | "s" }) => (
+  <>
+    <Radio size={size} name="test" label="DoloreIn quis consectetur." />
+    <Radio
+      size={size}
+      name="test"
+      label="Dolore Lorem amet sunt exercitation."
+    />
+    <Radio size={size} name="test" label="Dolore Lorem" />
   </>
 );
 
 export const All = () => {
-  const [error, setError] = useState(null);
-  const [desc, setDesc] = useState("");
-
   return (
     <div>
       <h1>Fieldset</h1>
       <Fieldset legend="This is the legend">
-        <FormElements />
+        <Checkboxes />
+      </Fieldset>
+      <Fieldset
+        legend="This is the legend"
+        description="This is the description"
+      >
+        <Radios />
       </Fieldset>
       <h1>Fieldset w/description</h1>
       <Fieldset
         legend="This is the legend"
         description="This is the description"
       >
-        <FormElements />
+        <Checkboxes />
+      </Fieldset>
+      <h1>Fieldset small</h1>
+      <Fieldset
+        size="s"
+        legend="This is the legend"
+        description="This is the description"
+      >
+        <Checkboxes size="s" />
+      </Fieldset>
+      <h1>Fieldset small</h1>
+      <Fieldset
+        size="s"
+        legend="This is the legend"
+        description="This is the description"
+      >
+        <Radios size="s" />
       </Fieldset>
       <h1>Fieldset w/error</h1>
       <Fieldset
         legend="This is the legend"
         description="This is the description"
-        error={error}
+        error="Dette er errormeldingen"
         errorId="123ID"
       >
-        <FormElements />
+        <Checkboxes />
       </Fieldset>
-      <button onClick={() => setError(error ? null : "New error!")}>
-        Toggle error
-      </button>
+
       <Fieldset
         legend="This is the legend"
-        description={desc}
+        description="This is the description"
         error="this is an error"
       >
-        <FormElements />
-      </Fieldset>
-      <input onChange={(e) => setDesc(e.target.value)} />
-    </div>
-  );
-};
-
-export const FieldsetMedKomponenter = () => {
-  return (
-    <div>
-      <Fieldset
-        legend="Hvor vil du sitte?"
-        description="Velg hvilken seksjon i flyet du vil sitte"
-      >
-        <Checkbox label="Fremst" />
-        <Checkbox label="Midtseksjon" />
-        <Checkbox label="Bakerst" />
-        <Checkbox label="Ved nødutgang" />
-      </Fieldset>
-      <br />
-      <Fieldset
-        size="s"
-        legend="Hvor vil du sitte?"
-        description="Velg hvilken seksjon i flyet du vil sitte"
-      >
-        <Checkbox label="Fremst" />
-        <Checkbox label="Midtseksjon" />
-        <Checkbox label="Bakerst" />
-        <Checkbox label="Ved nødutgang" />
+        <Checkboxes />
       </Fieldset>
     </div>
   );

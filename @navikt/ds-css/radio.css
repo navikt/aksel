@@ -50,17 +50,22 @@
 
 .navds-radio:hover:not(:disabled) + .navds-radio__label::before {
   background-color: var(--navds-color-gray-40);
+  border-radius: 50%;
 }
 
-/* .navds-radio--s + .navds-radio__label {
-  line-height: 2rem;
-  padding-left: 3rem;
+.navds-radio--s + .navds-radio__label {
+  line-height: 1.5rem;
+  padding-left: 2rem;
 }
 
 .navds-radio--s + .navds-radio__label::after {
-  width: 2rem;
-  height: 2rem;
-} */
+  top: 0;
+  left: 0;
+}
+
+.navds-radio--s + .navds-radio__label::before {
+  display: none;
+}
 
 .navds-radio:hover + .navds-radio__label::after {
   border-color: var(--navds-color-blue-50);
