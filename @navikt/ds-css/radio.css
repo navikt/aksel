@@ -38,11 +38,12 @@
   position: absolute;
   display: block;
   box-sizing: border-box;
-  background-color: var(--navds-color-gray-20);
+  background-color: var(--navds-color-gray-40);
   width: 3rem;
   height: 3rem;
   left: 0;
   top: 0;
+
   /* border-radius: 0px; */
 }
 
@@ -57,21 +58,23 @@
 } */
 
 .navds-radio:hover + .navds-radio__label::after {
-  color: #0067c5;
+  border-color: var(--navds-color-blue-50);
+  background-color: var(--navds-color-blue-10);
 }
 
 .navds-radio:focus + .navds-radio__label::after {
-  box-shadow: 0 0 0 3px #00347d, 0 0 0 2rem #fff inset;
+  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 2rem #fff inset;
 }
 
 .navds-radio:checked + .navds-radio__label::after {
-  border: 2px solid #0067c5;
-  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem #0067c5 inset;
+  border: 2px solid var(--navds-color-blue-50);
+  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
 .navds-radio:checked:focus + .navds-radio__label::after {
   transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  box-shadow: 0 0 0 3px #00347d, 0 0 0 3px #fff inset, 0 0 0 2rem #0067c5 inset;
+  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
+    0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
 .navds-radio:disabled + .navds-radio__label {
@@ -93,6 +96,6 @@
 .navds-radio:disabled:checked + .navds-radio__label::after {
   background-color: var(--navds-color-gray-40);
   border-color: var(--navds-color-gray-40);
-  box-shadow: 0 0 0 3px #00347d, 0 0 0 3px #fff inset,
+  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
     0 0 0 2rem var(--navds-color-gray-40) inset;
 }
