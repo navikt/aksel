@@ -43,24 +43,24 @@ export const All = () => {
       </div>
       <div>
         <Button>
-          Laster...
+          <span>Laster...</span>
           <Loader />
         </Button>{" "}
         <Button size="s">
-          Laster...
+          <span>Laster...</span>
           <Loader />
         </Button>
         <h2>Variants</h2>
         <Button variant="secondary">
-          Laster...
+          <span>Laster...</span>
           <Loader />
         </Button>{" "}
         <Button variant="action">
-          Laster...
+          <span>Laster...</span>
           <Loader />
         </Button>{" "}
         <Button variant="danger">
-          Laster...
+          <span>Laster...</span>
           <Loader />
         </Button>
       </div>
