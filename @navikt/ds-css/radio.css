@@ -42,11 +42,10 @@
   height: 3rem;
   left: 0;
   top: 0;
-  /* background-color: transparent; */
 
-  /* transition: background-color 100ms; */
-
-  /*  border-radius: 4px; */
+  /* background-color: transparent;
+  transition: background-color 100ms;
+   border-radius: 4px; */
 }
 
 .navds-radio:hover:not(:disabled) + .navds-radio__label::before {
