@@ -23,8 +23,18 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
+/**
+  Error handling
+*/
+
+.navds-input--error > .navds-input:not(:hover):not(:focus):not(:disabled) {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
 /*
   TODO: Oppdater denne til riktige farger
+  Disabled handling
  */
 .navds-input:disabled,
 .navds-input[readonly] {

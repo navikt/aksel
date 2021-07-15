@@ -78,3 +78,26 @@
   margin-bottom: var(--navds-spacing-2);
   display: block;
 }
+
+/**
+  Error handling
+*/
+
+.navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
+/*
+  Disabled handling
+  TODO: Oppdatere farger her
+ */
+
+.navds-select:disabled,
+.navds-select[read-only] {
+  background-color: var(--navds-color-gray-10);
+  border-color: var(--navds-color-gray-40);
+  box-shadow: none;
+  color: var(--navds-color-darkgray);
+  cursor: not-allowed;
+}

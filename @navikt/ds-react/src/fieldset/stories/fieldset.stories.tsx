@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Checkbox, Radio } from "../../index";

@@ -30,6 +30,7 @@ export const All = () => {
       <Select
         label="Hvilken land er best om sommeren?"
         description="Velg hvilket land som er best"
+        disabled
       >
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
@@ -46,14 +47,6 @@ export const All = () => {
         <option value="sverige">Sverige</option>
         <option value="danmark">Danmark</option>
       </Select>
-
-      {/* <Checkbox label="DoloreIn quis consectetur proident id adipisicing ut. Quis commodo enim amet pariatur ex consectetur. Aute nulla aliqua reprehenderit veniam tempor aute. Dolore non velit sint labore ipsum adipisicing est Lorem dolor. Lorem amet sunt exercitation." />
-      <Checkbox size="s" label="Dolore Lorem amet sunt exercitation." />
-      <Checkbox
-        disabled
-        size="s"
-        label="Dolore Lorem amet sunt exercitation."
-      /> */}
     </div>
   );
 };

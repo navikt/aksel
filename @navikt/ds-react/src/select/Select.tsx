@@ -22,7 +22,11 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     const internalId = useRef(uuidv4());
 
     return (
-      <div className="navds-form__element">
+      <div
+        className={cl("navds-form__element", {
+          "navds-select--error": true,
+        })}
+      >
         {label && (
           <label htmlFor={id ?? internalId.current}>
             <div

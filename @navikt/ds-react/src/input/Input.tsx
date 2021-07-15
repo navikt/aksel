@@ -18,7 +18,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const internalId = useRef(uuidv4());
 
     return (
-      <div className="navds-form__element">
+      <div
+        className={cl("navds-form__element", {
+          "navds-input--error": true,
+        })}
+      >
         {label && (
           <label htmlFor={id ?? internalId.current}>
             <div
