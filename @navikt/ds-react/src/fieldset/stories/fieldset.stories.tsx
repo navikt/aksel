@@ -1,7 +1,7 @@
 import React from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Checkbox, Radio } from "../../index";
+import { Checkbox, Input, Radio, Select } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,
@@ -32,10 +32,11 @@ export const All = () => {
   return (
     <div>
       <h1>Fieldset</h1>
-      <Fieldset legend="This is the legend">
+      <Fieldset type="checkbox" legend="This is the legend">
         <Checkboxes />
       </Fieldset>
       <Fieldset
+        type="radio"
         legend="This is the legend"
         description="This is the description"
       >
@@ -43,6 +44,7 @@ export const All = () => {
       </Fieldset>
       <h1>Fieldset w/description</h1>
       <Fieldset
+        type="checkbox"
         legend="This is the legend"
         description="This is the description"
       >
@@ -50,6 +52,7 @@ export const All = () => {
       </Fieldset>
       <h1>Fieldset small</h1>
       <Fieldset
+        type="checkbox"
         size="s"
         legend="This is the legend"
         description="This is the description"
@@ -58,6 +61,7 @@ export const All = () => {
       </Fieldset>
       <h1>Fieldset small</h1>
       <Fieldset
+        type="radio"
         size="s"
         legend="This is the legend"
         description="This is the description"
@@ -66,6 +70,7 @@ export const All = () => {
       </Fieldset>
       <h1>Fieldset w/error</h1>
       <Fieldset
+        type="checkbox"
         legend="This is the legend"
         description="This is the description"
         error="Dette er errormeldingen"
@@ -75,11 +80,25 @@ export const All = () => {
       </Fieldset>
 
       <Fieldset
+        type="checkbox"
         legend="This is the legend"
         description="This is the description"
         error="this is an error"
       >
         <Checkboxes />
+      </Fieldset>
+      <Fieldset
+        legend="This is the legend"
+        description="This is the description"
+        error="this is an error"
+      >
+        <Input />
+        <Select>
+          <option value="">Velg land</option>
+          <option value="norge">Norge</option>
+          <option value="sverige">Sverige</option>
+          <option value="danmark">Danmark</option>
+        </Select>
       </Fieldset>
     </div>
   );

@@ -16,3 +16,19 @@
 .navds-fieldset .navds-form__element--no-margin {
   margin-bottom: 0;
 }
+
+.navds-fieldset--margin * .navds-form__description {
+  margin-bottom: var(--navds-spacing-4);
+}
+
+.navds-fieldset--margin * .navds-form__legend {
+  margin-bottom: var(--navds-spacing-4);
+}
+
+.navds-fieldset--s * .navds-form__description {
+  margin-bottom: var(--navds-spacing-2);
+}
+
+.navds-fieldset--s * .navds-form__legend {
+  margin-bottom: var(--navds-spacing-2);
+}
