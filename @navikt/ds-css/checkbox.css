@@ -1,6 +1,7 @@
 .navds-checkbox {
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 24px;
+  min-width: 24px;
+  top: 0.75rem;
   position: absolute;
   opacity: 0;
   box-sizing: border-box;
@@ -13,6 +14,10 @@
   cursor: pointer;
   margin-bottom: 0;
   line-height: 3rem;
+}
+
+.navds-form__element--no-margin .navds-form--error {
+  margin-top: 0;
 }
 
 .navds-checkbox__label::before {

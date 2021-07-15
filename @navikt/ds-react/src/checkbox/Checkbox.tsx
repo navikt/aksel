@@ -50,7 +50,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           type="checkbox"
           className={cl("navds-checkbox", className, `navds-checkbox--${size}`)}
           aria-invalid={rest.disabled ? undefined : !!errorMsg}
-          aria-errormessage={rest.disabled ? undefined : errorMsg}
           aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
           {...rest}
         />
@@ -72,7 +71,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-relevant="additions removals"
           aria-live="polite"
         >
-          {errorMsg && <div>{errorMsg}</div>}
+          {!context.error && errorMsg && !rest.disabled && (
+            <div>{errorMsg}</div>
+          )}
         </div>
       </div>
     );

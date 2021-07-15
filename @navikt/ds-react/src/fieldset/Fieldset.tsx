@@ -39,6 +39,7 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    * Custom id for error message
    */
   errorId?: string;
+  noErrorProvider?: boolean;
   /**
    * Tells Fieldset what content it can expect
    */
@@ -54,6 +55,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       description,
       error,
       errorId,
+      noErrorProvider = false,
       type = "default",
       size = "m",
 
@@ -65,7 +67,9 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
 
     const isCheckElement = type === "checkbox" || type === "radio";
     return (
-      <FieldsetContext.Provider value={{ error, errorId }}>
+      <FieldsetContext.Provider
+        value={noErrorProvider ? {} : { error, errorId }}
+      >
         <fieldset
           ref={ref}
           className={cl(

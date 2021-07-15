@@ -9,7 +9,7 @@ export default {
 
 const Checkboxes = ({ size = "m" }: { size?: "m" | "s" }) => (
   <>
-    <Checkbox size={size} label="box 1" />
+    <Checkbox error="testerror" size={size} label="box 1" />
     <Checkbox size={size} label="box 2" />
     <Checkbox size={size} label="box 3" />
     <Checkbox size={size} label="box 4" />
@@ -45,8 +45,18 @@ export const All = () => {
       <h1>Fieldset w/description</h1>
       <Fieldset
         type="checkbox"
+        error="FielsetError"
         legend="This is the legend"
         description="This is the description"
+      >
+        <Checkboxes />
+      </Fieldset>
+      <Fieldset
+        type="checkbox"
+        error="FielsetError"
+        legend="This is the legend"
+        description="This is the description"
+        noErrorProvider
       >
         <Checkboxes />
       </Fieldset>
