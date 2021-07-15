@@ -1,3 +1,7 @@
+.navds-form__element {
+  position: relative;
+}
+
 .navds-form--error {
   color: var(--navds-color-red-50);
   display: block;

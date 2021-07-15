@@ -5,19 +5,12 @@
   position: relative;
 }
 
-/* .navds-fieldset .navds-form__element {
+.navds-fieldset .navds-form__element {
   margin-bottom: var(--navds-spacing-4);
-  position: relative;
 }
 
 .navds-fieldset--s .navds-form__element {
   margin-bottom: var(--navds-spacing-2);
-}
-*/
-
-.navds-fieldset .navds-form__element {
-  position: relative;
-  margin-bottom: var(--navds-spacing-4);
 }
 
 .navds-fieldset .navds-form__element--no-margin {
