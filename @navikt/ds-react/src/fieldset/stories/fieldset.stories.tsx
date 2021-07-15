@@ -23,6 +23,7 @@ const Radios = ({ size = "m" }: { size?: "m" | "s" }) => (
       size={size}
       name="test"
       label="Dolore Lorem amet sunt exercitation."
+      error="testerror radio"
     />
     <Radio size={size} name="test" label="Dolore Lorem" />
   </>
@@ -73,6 +74,7 @@ export const All = () => {
       <Fieldset
         type="radio"
         size="s"
+        error="FielsetError"
         legend="This is the legend"
         description="This is the description"
       >
@@ -85,8 +87,10 @@ export const All = () => {
         description="This is the description"
         error="Dette er errormeldingen"
         errorId="123ID"
+        noErrorProvider
       >
         <Checkboxes />
+        <Radios />
       </Fieldset>
 
       <Fieldset
