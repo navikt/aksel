@@ -9,7 +9,7 @@
 }
 
 .navds-radio__label {
-  padding-left: 3.5rem;
+  padding-left: 2rem;
   position: relative;
   display: inline-block;
   cursor: pointer;
@@ -17,7 +17,7 @@
   line-height: 3rem;
 }
 
-.navds-radio__label::after {
+.navds-radio__label::before {
   content: "";
   position: absolute;
   display: block;
@@ -29,27 +29,7 @@
   width: 1.5rem;
   height: 1.5rem;
   top: 0.75rem;
-  left: 0.75rem;
-  border-radius: 50%;
-}
-
-.navds-radio + .navds-radio__label::before {
-  content: "";
-  position: absolute;
-  display: block;
-  box-sizing: border-box;
-  width: 3rem;
-  height: 3rem;
   left: 0;
-  top: 0;
-
-  /* background-color: transparent;
-  transition: background-color 100ms;
-   border-radius: 4px; */
-}
-
-.navds-radio:hover:not(:disabled) + .navds-radio__label::before {
-  background-color: var(--navds-color-gray-40);
   border-radius: 50%;
 }
 
@@ -58,30 +38,26 @@
   padding-left: 2rem;
 }
 
-.navds-radio--s + .navds-radio__label::after {
+.navds-radio--s + .navds-radio__label::before {
   top: 0;
   left: 0;
 }
 
-.navds-radio--s + .navds-radio__label::before {
-  display: none;
-}
-
-.navds-radio:hover + .navds-radio__label::after {
+.navds-radio:hover + .navds-radio__label::before {
   border-color: var(--navds-color-blue-50);
   background-color: var(--navds-color-blue-10);
 }
 
-.navds-radio:focus + .navds-radio__label::after {
+.navds-radio:focus + .navds-radio__label::before {
   box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 2rem #fff inset;
 }
 
-.navds-radio:checked + .navds-radio__label::after {
+.navds-radio:checked + .navds-radio__label::before {
   border: 2px solid var(--navds-color-blue-50);
   box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
-.navds-radio:checked:focus + .navds-radio__label::after {
+.navds-radio:checked:focus + .navds-radio__label::before {
   transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
   box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
     0 0 0 2rem var(--navds-color-blue-50) inset;
@@ -93,7 +69,7 @@
 
 .navds-radio--error
   > .navds-radio:not(:hover):not(:focus):not(:disabled):not(:checked)
-  + .navds-radio__label::after {
+  + .navds-radio__label::before {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
@@ -107,14 +83,14 @@
   cursor: not-allowed;
 }
 
-.navds-radio:disabled + .navds-radio__label::after {
+.navds-radio:disabled + .navds-radio__label::before {
   background-color: var(--navds-color-gray-10);
   border-color: var(--navds-color-gray-60);
   box-shadow: none;
   cursor: not-allowed;
 }
 
-.navds-radio:disabled:checked + .navds-radio__label::after {
+.navds-radio:disabled:checked + .navds-radio__label::before {
   background-color: var(--navds-color-gray-40);
   border-color: var(--navds-color-gray-40);
   box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
