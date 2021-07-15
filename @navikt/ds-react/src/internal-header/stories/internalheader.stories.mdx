@@ -1,0 +1,71 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import {
+  InternalHeader,
+  InternalHeaderTitle,
+  InternalHeaderUser,
+} from "../../index.ts";
+
+<Meta title="ds-react/internal-header/intro" />
+
+# Hvordan ta i bruk InternalHeader
+
+Denne header-komponenten vil forgå en del endringer og er for det meste nå
+bare en enkel wrapper med lit enkel styling. Bruk på egen risiko
+
+```jsx
+<InternalHeader>
+  <InternalHeaderTitle>NAV Internside</InternalHeaderTitle>
+  <InternalHeaderUser name="Ola Normann" ident="D123456" />
+</InternalHeader>
+```
+
+<Canvas>
+  <InternalHeader>
+    <InternalHeaderTitle>NAV Internside</InternalHeaderTitle>
+    <InternalHeaderUser name="Ola Normann" ident="D123456" />
+  </InternalHeader>
+</Canvas>
+
+## Uten innhold (wrapper)
+
+```jsx
+<InternalHeader></InternalHeader>
+```
+
+<Canvas>
+  <InternalHeader />
+</Canvas>
+
+## Tittel, men ikke heading (h-element)
+
+```jsx
+<InternalHeader>
+  <InternalHeaderTitle element="span">NAV Internside</InternalHeaderTitle>
+</InternalHeader>
+```
+
+<Canvas>
+  <InternalHeader>
+    <InternalHeaderTitle element="span">NAV Internside</InternalHeaderTitle>
+  </InternalHeader>
+</Canvas>
+
+## Heading med link
+
+Focus-stylingen her er bare placeholder for nå
+
+```jsx
+<InternalHeader>
+  <InternalHeaderTitle>
+    <a href="/#">NAV Internside med lenke</a>
+  </InternalHeaderTitle>
+</InternalHeader>
+```
+
+<Canvas>
+  <InternalHeader>
+    <InternalHeaderTitle>
+      <a href="/#">NAV Internside med lenke</a>
+    </InternalHeaderTitle>
+  </InternalHeader>
+</Canvas>

@@ -1,0 +1,35 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { CopyToClipboard } from "../../index";
+import { Success } from "@navikt/ds-react";
+
+<Meta title="ds-react/copy-to-clipboard/intro" />
+
+# Hvordan ta i bruk CopyToClipboard
+
+Innholdet i `text` vil da bli kopiert til clipboard, mens innholdet i `label`
+brukes i popovertekst og `sr-only` span som rendres hvis knappen ikke har noe tekstinnhold
+`sr-only` tekst blir da `Kopier ${label} (${text})`
+
+```jsx
+<CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
+  Kopier Pi{" "}
+</CopyToClipboard>
+```
+
+<Canvas>
+  <CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
+    Kopier Pi{" "}
+  </CopyToClipboard>
+</Canvas>
+
+## Custom ikon
+
+Man kan sette andre ikoner en `Copy` ved `icon`-proppen
+
+```jsx
+<CopyToClipboard
+  icon={<Link />}
+  label={"Kopierte PI til clipboard"}
+  text={"3.14"}
+/>
+```

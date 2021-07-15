@@ -1,0 +1,70 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import {
+  AccordionMenu,
+  AccordionMenuItem,
+  AccordionMenuCollapsable,
+} from "../../index";
+
+<Meta title="ds-react/accordion-menu/intro" />
+
+# Hvordan ta i bruk Accordion-menu
+
+```jsx
+<AccordionMenu>
+  <AccordionMenuItem href="#leo">Leo</AccordionMenuItem>
+  <AccordionMenuCollapsable title="Proin">
+    <AccordionMenuItem href="#nulla" active>
+      Nulla
+    </AccordionMenuItem>
+    <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
+  </AccordionMenuCollapsable>
+  <AccordionMenuCollapsable title="Accumsan">
+    <AccordionMenuItem href="#justo" aria-current="page">
+      Justo
+    </AccordionMenuItem>
+    <AccordionMenuCollapsable title="Proin">
+      <AccordionMenuItem href="#nulla">Nulla</AccordionMenuItem>
+      <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
+    </AccordionMenuCollapsable>
+  </AccordionMenuCollapsable>
+</AccordionMenu>
+```
+
+<Canvas>
+  <AccordionMenu>
+    <AccordionMenuItem href="#leo">Leo</AccordionMenuItem>
+    <AccordionMenuCollapsable title="Proin">
+      <AccordionMenuItem href="#nulla" active>
+        Nulla
+      </AccordionMenuItem>
+      <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
+    </AccordionMenuCollapsable>
+    <AccordionMenuCollapsable title="Accumsan">
+      <AccordionMenuItem href="#justo" aria-current="page">
+        Justo
+      </AccordionMenuItem>
+      <AccordionMenuCollapsable title="Proin">
+        <AccordionMenuItem href="#nulla">Nulla</AccordionMenuItem>
+        <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
+      </AccordionMenuCollapsable>
+    </AccordionMenuCollapsable>
+  </AccordionMenu>
+</Canvas>
+
+Accordion-menu støtter opp til maks to-nivårer av `AccordionMenuCollapsable` akkurat nå.
+
+`AccordionMenuItem` er implementert med `OverridableComponent`, noe som
+gjør at man kan ta i bruk eks react-router slik:
+
+```jsx
+<Item
+  component={NavLink}
+  activeClassName="navds-accordion-menu-item--active"
+  to="/1"
+>
+  Lenketekst
+</Item>
+```
+
+Her er `NavLink` fra `react-router-dom` brukt, og man får da
+samtidig bruke alle propsene til denne komponenten som da er `activeClassName` her.
