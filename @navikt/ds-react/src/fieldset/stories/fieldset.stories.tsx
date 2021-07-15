@@ -7,16 +7,16 @@ export default {
   component: Fieldset,
 } as Meta;
 
-const Checkboxes = ({ size = "m" }: { size?: "m" | "s" }) => (
+const Checkboxes = ({ size }: { size?: "m" | "s" }) => (
   <>
-    <Checkbox error="testerror" size={size} label="box 1" />
+    <Checkbox size={size} label="box 1" />
     <Checkbox size={size} label="box 2" />
     <Checkbox size={size} label="box 3" />
     <Checkbox size={size} label="box 4" />
   </>
 );
 
-const Radios = ({ size = "m" }: { size?: "m" | "s" }) => (
+/* const Radios = ({ size }: { size?: "m" | "s" }) => (
   <>
     <Radio size={size} name="test" label="DoloreIn quis consectetur." />
     <Radio
@@ -27,7 +27,7 @@ const Radios = ({ size = "m" }: { size?: "m" | "s" }) => (
     />
     <Radio size={size} name="test" label="Dolore Lorem" />
   </>
-);
+); */
 
 export const All = () => {
   return (
@@ -36,83 +36,71 @@ export const All = () => {
       <Fieldset type="checkbox" legend="This is the legend">
         <Checkboxes />
       </Fieldset>
-      <Fieldset
-        type="radio"
-        legend="This is the legend"
-        description="This is the description"
-      >
-        <Radios />
-      </Fieldset>
-      <h1>Fieldset w/description</h1>
+      <h2>Fieldset w/description</h2>
       <Fieldset
         type="checkbox"
-        error="FielsetError"
         legend="This is the legend"
         description="This is the description"
       >
         <Checkboxes />
-      </Fieldset>
-      <Fieldset
-        type="checkbox"
-        error="FielsetError"
-        legend="This is the legend"
-        description="This is the description"
-        noErrorProvider
-      >
-        <Checkboxes />
-      </Fieldset>
-      <h1>Fieldset small</h1>
-      <Fieldset
-        type="checkbox"
-        size="s"
-        legend="This is the legend"
-        description="This is the description"
-      >
-        <Checkboxes size="s" />
-      </Fieldset>
-      <h1>Fieldset small</h1>
-      <Fieldset
-        type="radio"
-        size="s"
-        error="FielsetError"
-        legend="This is the legend"
-        description="This is the description"
-      >
-        <Radios size="s" />
-      </Fieldset>
-      <h1>Fieldset w/error</h1>
-      <Fieldset
-        type="checkbox"
-        legend="This is the legend"
-        description="This is the description"
-        error="Dette er errormeldingen"
-        errorId="123ID"
-        noErrorProvider
-      >
-        <Checkboxes />
-        <Radios />
       </Fieldset>
 
+      <h2>Fieldset w/error</h2>
+      <Fieldset
+        type="checkbox"
+        error="FielsetError"
+        legend="This is the legend"
+        description="This is the description"
+      >
+        <Checkboxes />
+      </Fieldset>
+
+      <h2>Fieldset small</h2>
       <Fieldset
         type="checkbox"
         legend="This is the legend"
         description="This is the description"
-        error="this is an error"
+        size="s"
       >
         <Checkboxes />
       </Fieldset>
+
+      <h2>Fieldset small w/error</h2>
+      <Fieldset
+        type="checkbox"
+        error="FielsetError"
+        legend="This is the legend"
+        description="This is the description"
+        size="s"
+      >
+        <Checkboxes />
+      </Fieldset>
+
+      <h2>Fieldset uten checkbox/radion</h2>
       <Fieldset
         legend="This is the legend"
         description="This is the description"
-        error="this is an error"
-        noErrorProvider
       >
-        <Input error="Inputerror" />
-        <Select error="selecterror">
+        <Input />
+      </Fieldset>
+
+      <h2>Fieldset uten checkbox/radion small</h2>
+      <Fieldset
+        legend="This is the legend"
+        description="This is the description"
+        size="s"
+      >
+        <Input />
+      </Fieldset>
+      <h2>Fieldset uten checkbox/radion w/error</h2>
+      <Fieldset
+        legend="This is the legend"
+        description="This is the description"
+        error="FielsetError"
+      >
+        <Select>
           <option value="">Velg land</option>
           <option value="norge">Norge</option>
-          <option value="sverige">Sverige</option>
-          <option value="danmark">Danmark</option>
         </Select>
       </Fieldset>
     </div>
