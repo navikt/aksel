@@ -9,10 +9,18 @@ export default {
 export const All = () => {
   return (
     <div>
-      <Checkbox label="DoloreIn quis consectetur proident id adipisicing ut. " />
-      <Checkbox size="s" label="Dolore Lorem amet sunt exercitation." />
+      <Checkbox
+        label="DoloreIn quis consectetur proident id adipisicing ut. "
+        error="testerror"
+      />
+      <Checkbox
+        size="s"
+        label="Dolore Lorem amet sunt exercitation."
+        error="testerror"
+      />
       <Checkbox
         disabled
+        error="testerror"
         size="s"
         label="Dolore Lorem amet sunt exercitation."
       />

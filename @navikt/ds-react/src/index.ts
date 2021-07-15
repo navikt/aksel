@@ -42,7 +42,7 @@ export { Popover, PopoverProps } from "./popover/index";
 export { Tag, TagProps } from "./tag/index";
 export { Radio, RadioProps } from "./radio/index";
 export { Select, SelectProps } from "./select/index";
-export { Fieldset, FieldsetProps } from "./fieldset/index";
+export { Fieldset, FieldsetProps, FieldsetContext } from "./fieldset/index";
 export {
   BodyLong,
   BodyShort,
