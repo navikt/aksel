@@ -28,7 +28,7 @@ export interface RadioProps
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, size = "m", label, error, errorId, ...rest }, ref) => {
+  ({ className, size = "m", label, error, errorId, id, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     const internalErrorId = useRef(uuidv4());
 
@@ -45,7 +45,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
         })}
       >
         <input
-          id={internalId.current}
+          id={id ?? internalId.current}
           ref={ref}
           type="radio"
           className={cl("navds-radio", className, `navds-radio--${size}`)}
@@ -54,7 +54,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
           {...rest}
         />
         <label
-          htmlFor={internalId.current}
+          htmlFor={id ?? internalId.current}
           className={cl("navds-radio__label", "navds-body-short", {
             "navds-body--s": size === "s",
           })}

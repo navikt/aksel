@@ -105,9 +105,11 @@ export const All = () => {
         legend="This is the legend"
         description="This is the description"
         error="this is an error"
+        noErrorProvider
+        size="s"
       >
-        <Input />
-        <Select>
+        <Input error="Inputerror" />
+        <Select error="selecterror">
           <option value="">Velg land</option>
           <option value="norge">Norge</option>
           <option value="sverige">Sverige</option>

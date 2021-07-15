@@ -28,7 +28,7 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, size = "m", label, error, errorId, ...rest }, ref) => {
+  ({ className, size = "m", label, error, errorId, id, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     const internalErrorId = useRef(uuidv4());
 
@@ -45,7 +45,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         })}
       >
         <input
-          id={internalId.current}
+          id={id ?? internalId.current}
           ref={ref}
           type="checkbox"
           className={cl("navds-checkbox", className, `navds-checkbox--${size}`)}
@@ -55,7 +55,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         />
         {label && (
           <label
-            htmlFor={internalId.current}
+            htmlFor={id ?? internalId.current}
             className={cl("navds-checkbox__label", "navds-body-short", {
               "navds-body--s": size === "s",
             })}
