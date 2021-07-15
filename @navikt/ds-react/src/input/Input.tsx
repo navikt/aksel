@@ -29,7 +29,7 @@ export interface InputProps
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { className, size = "m", id, label, description, error, errorId, ...rest },
+    { className, size, id, label, description, error, errorId, ...rest },
     ref
   ) => {
     const internalId = useRef(uuidv4());
@@ -39,6 +39,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const errorMsg = context.error ?? error;
     const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
+
+    const selectedSize = size ? size : context.size ?? "m";
 
     return (
       <div
@@ -50,7 +52,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           <label htmlFor={id ?? internalId.current}>
             <div
               className={cl("navds-form__label", "navds-label", {
-                "navds-label--s": size === "s",
+                "navds-label--s": selectedSize === "s",
               })}
             >
               {label}
@@ -58,7 +60,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             {description && (
               <div
                 className={cl("navds-form__description", "navds-body-short", {
-                  "navds-body--s": size === "s",
+                  "navds-body--s": selectedSize === "s",
                 })}
               >
                 {description}
@@ -73,9 +75,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           className={cl(
             "navds-input",
             className,
-            `navds-input--${size}`,
+            `navds-input--${selectedSize}`,
             "navds-body-short",
-            { "navds-body--s": size === "s" }
+            { "navds-body--s": selectedSize === "s" }
           )}
           aria-invalid={rest.disabled ? undefined : !!errorMsg}
           aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
@@ -83,7 +85,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         />
         <div
           className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": size === "s",
+            "navds-label--s": selectedSize === "s",
           })}
           id={errorUuid}
           aria-relevant="additions removals"

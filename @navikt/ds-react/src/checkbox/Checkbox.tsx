@@ -37,10 +37,12 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     const errorMsg = context.error ?? error;
     const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
 
+    const selectedSize = size ? size : context.size ?? "m";
+
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-form__element--no-margin": size === "m",
+          "navds-form__element--no-margin": selectedSize === "m",
           "navds-checkbox--error": !!errorMsg,
         })}
       >
@@ -48,7 +50,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={id ?? internalId.current}
           ref={ref}
           type="checkbox"
-          className={cl("navds-checkbox", className, `navds-checkbox--${size}`)}
+          className={cl(
+            "navds-checkbox",
+            className,
+            `navds-checkbox--${selectedSize}`
+          )}
           aria-invalid={rest.disabled ? undefined : !!errorMsg}
           aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
           {...rest}
@@ -57,7 +63,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <label
             htmlFor={id ?? internalId.current}
             className={cl("navds-checkbox__label", "navds-body-short", {
-              "navds-body--s": size === "s",
+              "navds-body--s": selectedSize === "s",
             })}
           >
             {label}
@@ -65,7 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         )}
         <div
           className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": size === "s",
+            "navds-label--s": selectedSize === "s",
           })}
           id={errorUuid}
           aria-relevant="additions removals"

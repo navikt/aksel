@@ -28,7 +28,7 @@ export interface RadioProps
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, size = "m", label, error, errorId, id, ...rest }, ref) => {
+  ({ className, size, label, error, errorId, id, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     const internalErrorId = useRef(uuidv4());
 
@@ -36,11 +36,12 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
 
     const errorMsg = context.error ?? error;
     const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
+    const selectedSize = size ? size : context.size ?? "m";
 
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-form__element--no-margin": size === "m",
+          "navds-form__element--no-margin": selectedSize === "m",
           "navds-radio--error": !!errorMsg,
         })}
       >
@@ -48,7 +49,11 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
           id={id ?? internalId.current}
           ref={ref}
           type="radio"
-          className={cl("navds-radio", className, `navds-radio--${size}`)}
+          className={cl(
+            "navds-radio",
+            className,
+            `navds-radio--${selectedSize}`
+          )}
           aria-invalid={rest.disabled ? undefined : !!errorMsg}
           aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
           {...rest}
@@ -56,14 +61,14 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
         <label
           htmlFor={id ?? internalId.current}
           className={cl("navds-radio__label", "navds-body-short", {
-            "navds-body--s": size === "s",
+            "navds-body--s": selectedSize === "s",
           })}
         >
           {label}
         </label>
         <div
           className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": size === "s",
+            "navds-label--s": selectedSize === "s",
           })}
           id={errorUuid}
           aria-relevant="additions removals"

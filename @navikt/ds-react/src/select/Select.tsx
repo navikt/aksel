@@ -50,6 +50,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
 
     const errorMsg = context.error ?? error;
     const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
+    const selectedSize = size ? size : context.size ?? "m";
 
     return (
       <div
@@ -61,7 +62,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           <label htmlFor={id ?? internalId.current}>
             <div
               className={cl("navds-select__label", "navds-label", {
-                "navds-label--s": size === "s",
+                "navds-label--s": selectedSize === "s",
               })}
             >
               {label}
@@ -69,7 +70,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             {description && (
               <div
                 className={cl("navds-select__description", "navds-body-short", {
-                  "navds-body--s": size === "s",
+                  "navds-body--s": selectedSize === "s",
                 })}
               >
                 {description}
@@ -83,9 +84,9 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={cl(
               "navds-select",
               className,
-              `navds-select--${size}`,
+              `navds-select--${selectedSize}`,
               "navds-body-short",
-              { "navds-body--s": size === "s" }
+              { "navds-body--s": selectedSize === "s" }
             )}
             ref={ref}
             aria-invalid={rest.disabled ? undefined : !!errorMsg}
@@ -99,7 +100,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         </div>
         <div
           className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": size === "s",
+            "navds-label--s": selectedSize === "s",
           })}
           id={errorUuid}
           aria-relevant="additions removals"

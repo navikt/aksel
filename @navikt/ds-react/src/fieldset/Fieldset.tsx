@@ -5,6 +5,7 @@ import { v4 as guid } from "uuid";
 export type FieldsetContextProps = {
   error?: string | undefined;
   errorId?: string | undefined;
+  size?: "m" | "s";
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps>({});
@@ -68,7 +69,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     const isCheckElement = type === "checkbox" || type === "radio";
     return (
       <FieldsetContext.Provider
-        value={noErrorProvider ? {} : { error, errorId }}
+        value={noErrorProvider ? { size } : { error, errorId, size }}
       >
         <fieldset
           ref={ref}

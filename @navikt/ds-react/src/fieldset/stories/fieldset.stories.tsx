@@ -106,7 +106,6 @@ export const All = () => {
         description="This is the description"
         error="this is an error"
         noErrorProvider
-        size="s"
       >
         <Input error="Inputerror" />
         <Select error="selecterror">
