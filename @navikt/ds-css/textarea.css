@@ -8,7 +8,7 @@
   resize: none;
   width: 100%;
   overflow: hidden;
-  min-height: 64px;
+
   transition: height 0.1s ease-out;
   display: block;
 }
@@ -27,15 +27,9 @@
   width: 100%;
 }
 
-.navds-textarea--m {
-}
-
 .navds-textarea--s {
   padding: 0.25rem;
-  min-height: 32px;
-}
-
-.navds-textarea--error {
+  min-height: 7px;
 }
 
 .navds-textarea__mirror {

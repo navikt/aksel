@@ -1,7 +1,7 @@
 import React from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Checkbox, Input, Radio, Select } from "../../index";
+import { Checkbox, Input, /* Radio, */ Select } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,

@@ -12,6 +12,11 @@ import { FieldsetContext } from "../index";
 import Throttle from "lodash.throttle";
 import mergeRefs from "react-merge-refs";
 import { requestAnimationFrame } from "../index";
+import { useLayoutEffect } from "react";
+
+/**
+ * TODO: Mulighet for lokalisering av sr-only/counter text
+ */
 
 export interface TextareaProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -59,6 +64,9 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     const mirrorRef = useRef<HTMLDivElement | null>(null);
     const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
+    const throttledRef = useRef<any>(null);
+    const firstRef = useRef<boolean>(false);
+
     const mergedRef = mergeRefs([textareaRef, ref]);
     const maxLengthId = useRef(uuidv4());
     const internalId = useRef(uuidv4());
@@ -73,18 +81,34 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const updateHeight = useCallback(() => {
       if (mirrorRef.current && textareaRef.current) {
+        console.count("updateheight");
         mirrorRef.current.textContent = `${textareaRef.current.value} `;
         textareaRef.current.style.height = `${
-          mirrorRef.current.offsetHeight + 25
+          mirrorRef.current.offsetHeight + 23
         }px`;
       }
     }, []);
 
     useEffect(() => {
+      if (!firstRef.current) {
+        firstRef.current = true;
+        return;
+      }
       updateHeight();
     }, [value, updateHeight]);
 
     useEffect(() => {
+      throttledRef.current = Throttle(updateHeight, 100, {
+        leading: false,
+      });
+      window.addEventListener("resize", throttledRef.current);
+      return () => {
+        throttledRef.current &&
+          window.removeEventListener("resize", throttledRef.current);
+      };
+    }, [updateHeight]);
+
+    useLayoutEffect(() => {
       // @ts-ignore
       requestAnimationFrame.call(window, updateHeight, 0);
     }, [updateHeight]);
