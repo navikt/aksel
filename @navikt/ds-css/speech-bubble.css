@@ -100,6 +100,7 @@
   text-align: left;
   margin-bottom: 0.5rem;
   color: var(--navds-color-gray-60);
+  display: block;
 }
 
 .navds-speechbubble--right .navds-speechbubble__top-text {

@@ -35,7 +35,9 @@ const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
         {...rest}
       >
         {topText && (
-          <p className="navds-speechbubble__top-text navds-detail">{topText}</p>
+          <span className="navds-speechbubble__top-text navds-detail">
+            {topText}
+          </span>
         )}
         {children}
       </div>
