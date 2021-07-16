@@ -7,13 +7,16 @@ export default {
 } as Meta;
 
 export const All = () => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(
+    "Adipisicing cillum incididunt fugiat laboris culpa exercitation ipsum consectetur magna proident dolore pariatur cillum."
+  );
+
   const handleChange = (e) => {
     setValue(e.target.value);
   };
 
   return (
-    <div>
+    <div style={{ maxWidth: 400 }}>
       <Textarea value={value} onChange={handleChange} />
       <br />
       <Textarea

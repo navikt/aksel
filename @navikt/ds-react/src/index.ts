@@ -53,4 +53,4 @@ export {
   Label,
   Title,
 } from "./typography/index";
-export { OverridableComponent, requestAnimationFrame } from "./util/index";
+export { OverridableComponent } from "./util/index";

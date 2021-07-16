@@ -5,14 +5,13 @@ import React, {
   useContext,
   useEffect,
   useRef,
+  useLayoutEffect,
 } from "react";
 import cl from "classnames";
 import { v4 as uuidv4 } from "uuid";
 import { FieldsetContext } from "../index";
 import Throttle from "lodash.throttle";
 import mergeRefs from "react-merge-refs";
-import { requestAnimationFrame } from "../index";
-import { useLayoutEffect } from "react";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -81,7 +80,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const updateHeight = useCallback(() => {
       if (mirrorRef.current && textareaRef.current) {
-        console.count("updateheight");
         mirrorRef.current.textContent = `${textareaRef.current.value} `;
         textareaRef.current.style.height = `${
           mirrorRef.current.offsetHeight + 23
@@ -109,8 +107,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     }, [updateHeight]);
 
     useLayoutEffect(() => {
-      // @ts-ignore
-      requestAnimationFrame.call(window, updateHeight, 0);
+      updateHeight();
     }, [updateHeight]);
 
     return (
