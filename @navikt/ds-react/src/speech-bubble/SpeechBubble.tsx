@@ -18,7 +18,7 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Illustration for messenger
    */
-  illustration?: React.ReactNode;
+  illustration: React.ReactNode;
   /**
    * Background color bubbles
    */
@@ -29,6 +29,7 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   illustrationBgColor?: string;
   /**
    * Positions illustration and Speechbubbles
+   * @default "left"
    */
   position?: "left" | "right";
 }

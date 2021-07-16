@@ -11,7 +11,7 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   className?: string;
   /**
-   *
+   * User defined toptext, normally "username + date"
    */
   topText?: React.ReactNode;
   /**

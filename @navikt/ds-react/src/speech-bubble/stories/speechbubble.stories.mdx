@@ -1,0 +1,115 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { SpeechBubble, Bubble } from "../../index";
+import { Illustration } from "./illustration";
+
+<Meta title="ds-react/speechbubble/intro" />
+
+# Hvordan ta i bruk Speechbubble
+
+```jsx
+<SpeechBubble illustration="OLA" topText="Ola Normann 01.01.21 14:00">
+  <Bubble>
+    Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+  </Bubble>
+  <Bubble>Tempor fugiat amet eu sint in in ullamco.</Bubble>
+  <Bubble>
+    Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+    labore nisi ut.
+  </Bubble>
+</SpeechBubble>
+```
+
+<Canvas>
+  <SpeechBubble illustration="OLA" topText="Ola Normann 01.01.21 14:00">
+    <Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Bubble>
+    <Bubble>Tempor fugiat amet eu sint in in ullamco.</Bubble>
+    <Bubble>
+      Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+      labore nisi ut.
+    </Bubble>
+  </SpeechBubble>
+</Canvas>
+
+## Positioning
+
+Speechbubble can be positioned "left" and "right" with the `position`-prop
+
+```jsx
+<SpeechBubble illustration="OLA" position="left">
+  <Bubble>
+    Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+  </Bubble>
+</SpeechBubble>
+<SpeechBubble illustration="OLA" position="right">
+  <Bubble>
+    Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+  </Bubble>
+</SpeechBubble>
+```
+
+<Canvas>
+  <div>
+    <SpeechBubble illustration="OLA" position="left">
+      <Bubble>
+        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+      </Bubble>
+    </SpeechBubble>
+    <br />
+    <SpeechBubble illustration="PER" position="right">
+      <Bubble>Ipsum laborum culpa ea ea commodo eiusmod in aute.</Bubble>
+    </SpeechBubble>
+  </div>
+</Canvas>
+
+## Changing colors
+
+User can change background-color of bubbles and illustration with `illustrationBgColor` and `backgroundColor` props.
+
+```jsx
+<SpeechBubble
+  illustration="OLA"
+  position="left"
+  illustrationBgColor="var(--navds-color-lightblue-10)"
+  backgroundColor="var(--navds-color-lightblue-20)"
+>
+  <Bubble>
+    Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+  </Bubble>
+</SpeechBubble>
+```
+
+<Canvas>
+  <SpeechBubble
+    illustration="OLA"
+    position="left"
+    illustrationBgColor="var(--navds-color-lightblue-10)"
+    backgroundColor="var(--navds-color-lightblue-20)"
+  >
+    <Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Bubble>
+  </SpeechBubble>
+</Canvas>
+
+## Illustrations
+
+The `illustration`-prop accepts `React.ReactNode`.
+If used with an illustration of format SVG its handled like in `nav-frontend-veilederpanel`
+
+```jsx
+<SpeechBubble illustration={<Illustration />} position="left">
+  <Bubble>
+    Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+  </Bubble>
+</SpeechBubble>
+```
+
+<Canvas>
+  <SpeechBubble illustration={<Illustration />} position="left">
+    <Bubble>
+      Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+    </Bubble>
+  </SpeechBubble>
+</Canvas>
