@@ -55,9 +55,6 @@
   padding: 0;
 }
 
-/* .navds-textarea__counter-text {
-} */
-
 .navds-textarea__counter-text--error {
   color: var(--navds-color-red-50);
 }
