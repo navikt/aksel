@@ -22,6 +22,7 @@ export { Fieldset, FieldsetContext, FieldsetProps } from "./fieldset/index";
 export { Cell, CellProps, Grid, GridProps } from "./grid/index";
 export { Header, HeaderProps } from "./header/index";
 export { Input, InputProps } from "./input/index";
+export { Textarea, TextareaProps } from "./textarea/index";
 export {
   InternalHeader,
   InternalHeaderProps,
