@@ -12,6 +12,12 @@ export { Accordion, AccordionProps } from "./accordion/index";
 export { Alert, AlertProps } from "./alert/index";
 export { Button, ButtonProps } from "./button/index";
 export {
+  SpeechBubble,
+  SpeechBubbleProps,
+  Bubble,
+  BubbleProps,
+} from "./speech-bubble/index";
+export {
   ContentContainer,
   ContentContainerProps,
 } from "./content-container/index";

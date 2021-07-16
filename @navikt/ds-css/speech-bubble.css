@@ -1,0 +1,108 @@
+.navds-speechbubble {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-left: 4rem;
+  position: relative;
+}
+
+.navds-speechbubble__illustration {
+  align-items: center;
+  background: var(--navds-color-gray-20);
+  color: var(--navds-color-darkgray);
+  border-radius: 50%;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  order: 3;
+  overflow: hidden;
+  height: 3rem;
+  width: 3rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.navds-speechbubble--right {
+  align-items: flex-end;
+  padding-left: 0;
+  padding-right: 4rem;
+}
+
+.navds-speechbubble--right > .navds-speechbubble__illustration {
+  right: 0;
+  left: inherit;
+}
+
+.navds-speechbubble__illustration svg {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+}
+
+.navds-speechbubble__bubble {
+  padding: 1rem;
+  box-shadow: 0 2px 4px 0 var(--navds-color-gray-20);
+  margin-bottom: 1rem;
+  min-height: 3rem;
+  width: fit-content;
+  max-width: 37.5rem;
+  min-width: 12rem;
+  background-color: var(--navds-color-gray-10);
+  border-radius: 2px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+.navds-speechbubble__bubble:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-speechbubble__bubble ~ .navds-speechbubble__bubble {
+  border-top-right-radius: 12px;
+  border-end-end-radius: 12px;
+  border-top-left-radius: 2px;
+  border-end-start-radius: 2px;
+}
+
+.navds-speechbubble--right .navds-speechbubble__bubble {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-end-end-radius: 2px;
+  border-end-start-radius: 12px;
+}
+
+.navds-speechbubble__bubble:last-child {
+  margin-bottom: 0;
+  border-top-right-radius: 12px;
+  border-end-end-radius: 12px;
+}
+
+.navds-speechbubble--right .navds-speechbubble__bubble:last-child {
+  border-end-end-radius: 2px;
+  border-end-start-radius: 12px;
+  border-start-start-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.navds-speechbubble--right
+  .navds-speechbubble__bubble
+  ~ .navds-speechbubble__bubble {
+  border-top-left-radius: 12px;
+  border-end-start-radius: 12px;
+  border-top-right-radius: 2px;
+  border-end-end-radius: 2px;
+}
+
+.navds-speechbubble__top-text {
+  text-align: left;
+  margin-bottom: 0.5rem;
+  color: var(--navds-color-gray-60);
+  display: block;
+}
+
+.navds-speechbubble--right .navds-speechbubble__top-text {
+  text-align: right;
+}
