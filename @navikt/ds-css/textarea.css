@@ -1,0 +1,95 @@
+.navds-textarea {
+  appearance: none;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid var(--navds-color-border);
+  box-sizing: border-box;
+  resize: none;
+  width: 100%;
+  overflow: hidden;
+  min-height: 64px;
+  transition: height 0.1s ease-out;
+  display: block;
+}
+
+.navds-textarea:hover {
+  border-color: var(--navds-color-blue-50);
+}
+
+.navds-textarea:focus {
+  outline: 0;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-textarea__wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.navds-textarea--m {
+}
+
+.navds-textarea--s {
+  padding: 0.25rem;
+  min-height: 32px;
+}
+
+.navds-textarea--error {
+}
+
+.navds-textarea__mirror {
+  white-space: pre-wrap;
+  display: inline-block;
+  width: 100%;
+  word-wrap: break-word;
+  position: absolute;
+  left: -99999px;
+  top: 0;
+}
+
+.navds-textarea__counter {
+  pointer-events: none;
+  color: var(--navds-color-gray-40);
+  font-style: italic;
+  position: absolute;
+  text-align: right;
+  left: 32px;
+  right: 12px;
+  bottom: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+/* .navds-textarea__counter-text {
+} */
+
+.navds-textarea__counter-text--error {
+  color: var(--navds-color-red-50);
+}
+
+/**
+  Error handling
+*/
+
+.navds-textarea--error .navds-textarea:not(:hover):not(:focus):not(:disabled) {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
+/*
+  TODO: Oppdater denne til riktige farger
+  Disabled handling
+ */
+.navds-textarea:disabled,
+.navds-textarea[readonly] {
+  background-color: #f1f1f1;
+  border-color: #6a6a6a;
+  box-shadow: none;
+  color: #262626;
+}
+
+.navds-input:disabled:hover,
+.navds-input[readonly]:hover {
+  cursor: not-allowed;
+}
