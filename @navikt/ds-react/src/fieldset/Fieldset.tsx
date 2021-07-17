@@ -1,4 +1,10 @@
-import React, { forwardRef, HTMLAttributes, useRef } from "react";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import cl from "classnames";
 import { v4 as guid } from "uuid";
 
@@ -64,12 +70,20 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     },
     ref
   ) => {
-    const errorRef = useRef(guid());
+    const [intErrorId, setIntErrorId] = useState();
+
+    useEffect(() => {
+      setIntErrorId(() => guid());
+    }, []);
 
     const isCheckElement = type === "checkbox" || type === "radio";
     return (
       <FieldsetContext.Provider
-        value={noErrorProvider ? { size } : { error, errorId, size }}
+        value={
+          noErrorProvider
+            ? { size }
+            : { error, errorId: errorId ?? intErrorId, size }
+        }
       >
         <fieldset
           ref={ref}
@@ -83,7 +97,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             }
           )}
           aria-invalid={!!error}
-          aria-describedby={error && (errorId ?? errorRef.current)}
+          aria-describedby={error && (errorId ?? intErrorId)}
           {...rest}
         >
           <legend>
@@ -112,7 +126,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             className={cl("navds-label", "navds-form--error", {
               "navds-label--s": size === "s",
             })}
-            id={errorId ?? errorRef.current}
+            id={errorId ?? intErrorId}
             aria-relevant="additions removals"
             aria-live="polite"
           >

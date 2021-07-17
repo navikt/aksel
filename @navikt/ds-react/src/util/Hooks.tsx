@@ -2,6 +2,17 @@ import { useContext, useEffect, useState } from "react";
 import { FieldsetContext } from "../index";
 import { v4 as uuidv4 } from "uuid";
 
+type FormHandlerProps = {
+  describeBy: string;
+  errorMsg: string;
+  errorId: string;
+  id: string;
+  renderErrorMsg: boolean;
+  size: string;
+  intId: string;
+  intErrorId: string;
+};
+
 export function useFormHandler(props) {
   const {
     error,
@@ -11,49 +22,58 @@ export function useFormHandler(props) {
     size: oldSize,
     ...rest
   } = props;
-
-  const [intId, setIntId] = useState("");
-  const [intErrorId, setIntErrorId] = useState("");
-  const [errorMsg, setErrorMsg] = useState<string>();
-  const [errorId, setErrorId] = useState<string>();
-  const [id, setId] = useState("");
-  const [renderErrorMsg, setRenderErrorMsg] = useState(false);
-  const [size, setSize] = useState("m");
+  const [state, setState] = useState<Partial<FormHandlerProps>>({});
 
   const context = useContext(FieldsetContext);
 
   useEffect(() => {
-    setIntId(() => uuidv4());
-    setIntErrorId(() => uuidv4());
+    setState((old) => ({ ...old, intId: uuidv4(), intErrorId: uuidv4() }));
   }, []);
 
   useEffect(() => {
-    setErrorMsg(context.error ?? error);
+    setState((old) => ({ ...old, errorMsg: context.error ?? error }));
   }, [error, context.error]);
 
   useEffect(() => {
-    setErrorId(context.errorId ?? oldErrorId ?? intErrorId);
-  }, [oldErrorId, context.errorId, intErrorId]);
+    setState((old) => ({ ...old, errorId: oldErrorId ?? old.intErrorId }));
+  }, [oldErrorId, state.intErrorId]);
 
   useEffect(() => {
-    setId(oldId ?? intId);
-  }, [oldId, intId]);
+    setState((old) => ({ ...old, id: oldId ?? old.intId }));
+  }, [oldId, state.intId]);
 
   useEffect(() => {
-    setRenderErrorMsg(!context.error && !!errorMsg && !disabled);
-  }, [context.error, disabled, errorMsg]);
+    setState((old) => ({
+      ...old,
+      renderErrorMsg: !context.error && !!old.errorMsg && !disabled,
+    }));
+  }, [context.error, disabled, state.errorMsg]);
 
   useEffect(() => {
-    setSize(oldSize ? oldSize : context.size ?? "m");
+    setState((old) => ({
+      ...old,
+      size: oldSize ? oldSize : context.size ?? "m",
+    }));
   }, [context.size, oldSize]);
 
+  useEffect(() => {
+    setState((old) => ({
+      ...old,
+      describeBy:
+        !!old.errorMsg && !disabled
+          ? context.errorId ?? old.errorId
+          : undefined,
+    }));
+  }, [context.errorId, disabled, state.errorId, state.errorMsg]);
+
   return {
-    isInvalid: !!errorMsg && !disabled,
-    errorMsg,
-    errorId,
-    id,
-    renderErrorMsg,
-    size,
-    restProps: rest,
+    isInvalid: !!state.errorMsg && !disabled,
+    describeBy: state.describeBy,
+    errorMsg: state.errorMsg,
+    errorId: state.errorId,
+    id: state.id,
+    renderErrorMsg: state.renderErrorMsg,
+    size: state.size,
+    restProps: { ...rest },
   };
 }

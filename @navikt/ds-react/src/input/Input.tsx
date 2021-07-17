@@ -31,6 +31,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       renderErrorMsg,
       size,
       restProps,
+      describeBy,
     } = useFormHandler(rest);
 
     return (
@@ -71,7 +72,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             { "navds-body--s": size === "s" }
           )}
           aria-invalid={isInvalid}
-          aria-describedby={isInvalid ? errorId : undefined}
+          aria-describedby={describeBy}
           {...restProps}
         />
         <div
