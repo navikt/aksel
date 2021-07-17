@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
 import cl from "classnames";
 import { v4 as guid } from "uuid";
 
