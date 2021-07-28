@@ -20,12 +20,27 @@ export const All = () => {
         error="This text input has an error"
       />
 
-      <Select label="Select">
-        <option>one</option>
-        <option>two</option>
-        <option>three</option>
+      <Select label="Select" error="Select error message">
+        <option hidden value="">
+          Select an option
+        </option>
+        <optgroup label="Group 1">
+          <option>one</option>
+          <option>two</option>
+          <option>three</option>
+        </optgroup>
+        <optgroup label="Group 2">
+          <option>four</option>
+          <option>five</option>
+          <option>six</option>
+        </optgroup>
       </Select>
-      <Select label="Small select" size="s">
+      <Select
+        label="Small select"
+        description="Such a small select. wow."
+        disabled
+        size="s"
+      >
         <option>one</option>
         <option>two</option>
         <option>three</option>
