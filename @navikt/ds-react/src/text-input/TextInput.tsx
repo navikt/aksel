@@ -9,6 +9,10 @@ export interface TextInputProps
    */
   className?: string;
   size?: "m" | "s";
+  /**
+   * Expose the HTML size attribute
+   */
+  htmlSize?: number;
   label?: React.ReactNode;
   description?: React.ReactNode;
   /**
@@ -26,7 +30,7 @@ export interface TextInputProps
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, label, description, ...rest }, ref) => {
+  ({ className, label, description, htmlSize, ...rest }, ref) => {
     const {
       isInvalid,
       errorMsg,
@@ -77,6 +81,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
           aria-invalid={isInvalid}
           aria-describedby={describeBy}
+          size={htmlSize}
           {...restProps}
         />
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">

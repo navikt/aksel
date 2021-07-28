@@ -15,6 +15,10 @@ export interface SelectProps
    */
   className?: string;
   size?: "m" | "s";
+  /**
+   * Expose the HTML size attribute
+   */
+  htmlSize?: number;
   disabled?: boolean;
   label?: string;
   description?: React.ReactNode;
@@ -39,6 +43,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       description,
       error,
       errorId,
+      htmlSize,
       ...rest
     },
     ref
@@ -93,6 +98,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             aria-describedby={
               rest.disabled ? undefined : !!errorMsg && errorUuid
             }
+            size={htmlSize}
             {...rest}
           >
             {children}
