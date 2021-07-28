@@ -75,15 +75,16 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           aria-describedby={describeBy}
           {...restProps}
         />
-        <div
-          className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": size === "s",
-          })}
-          id={errorId}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {renderErrorMsg && <div>{errorMsg}</div>}
+        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+          {renderErrorMsg && (
+            <div
+              className={cl("navds-label", "navds-form--error", {
+                "navds-label--s": size === "s",
+              })}
+            >
+              {errorMsg}
+            </div>
+          )}
         </div>
       </div>
     );
