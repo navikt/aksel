@@ -2,7 +2,7 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { useFormHandler } from "../util";
 
-export interface InputProps
+export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * @ignore
@@ -21,7 +21,7 @@ export interface InputProps
   errorId?: string;
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ({ className, label, description, ...rest }, ref) => {
     const {
       isInvalid,
@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-input--error": isInvalid,
+          "navds-text-input--error": isInvalid,
         })}
       >
         {label && (
@@ -65,9 +65,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           type="text"
           className={cl(
-            "navds-input",
+            "navds-text-input",
             className,
-            `navds-input--${size}`,
+            `navds-text-input--${size}`,
             "navds-body-short",
             { "navds-body--s": size === "s" }
           )}
@@ -90,4 +90,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   }
 );
 
-export default Input;
+export default TextInput;

@@ -79,7 +79,7 @@
   color: #262626;
 }
 
-.navds-input:disabled:hover,
-.navds-input[readonly]:hover {
+.navds-text-input:disabled:hover,
+.navds-text-input[readonly]:hover {
   cursor: not-allowed;
 }

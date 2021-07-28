@@ -1,38 +1,38 @@
 import React from "react";
-import { Input } from "../index";
+import { TextInput } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Fieldset } from "../../fieldset";
 export default {
-  title: "ds-react/form/input",
-  component: Input,
+  title: "ds-react/form/text-input",
+  component: TextInput,
 } as Meta;
 
 export const All = () => {
   return (
     <div>
-      <Input />
+      <TextInput />
       <br />
-      <Input size="s" />
+      <TextInput size="s" />
       <br />
-      <Input label="Label for input" />
+      <TextInput label="Label for input" />
       <br />
-      <Input label="Label for input" description="description for label" />
+      <TextInput label="Label for input" description="description for label" />
       <br />
-      <Input
+      <TextInput
         size="s"
         label="Label for input"
         description="description for label"
       />
       <br />
-      <Input
+      <TextInput
         size="s"
         label="Label for input"
         description="description for label"
         error="Error message"
       />
-      <Fieldset legend="Input test" error="errormessag fieldset">
-        <Input error="Error message" />
-        <Input />
+      <Fieldset legend="TextInput test" error="errormessag fieldset">
+        <TextInput error="Error message" />
+        <TextInput />
       </Fieldset>
     </div>
   );

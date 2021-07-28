@@ -1,4 +1,4 @@
-.navds-input {
+.navds-text-input {
   appearance: none;
   padding: 0.5rem;
   background-color: white;
@@ -9,16 +9,16 @@
   width: 100%;
 }
 
-.navds-input--s {
+.navds-text-input--s {
   padding: 0.25rem;
   min-height: 32px;
 }
 
-.navds-input:hover {
+.navds-text-input:hover {
   border-color: var(--navds-color-blue-50);
 }
 
-.navds-input:focus {
+.navds-text-input:focus {
   outline: 0;
   box-shadow: var(--navds-shadow-focus);
 }
@@ -27,7 +27,8 @@
   Error handling
 */
 
-.navds-input--error > .navds-input:not(:hover):not(:focus):not(:disabled) {
+.navds-text-input--error
+  > .navds-text-input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
@@ -36,15 +37,15 @@
   TODO: Oppdater denne til riktige farger
   Disabled handling
  */
-.navds-input:disabled,
-.navds-input[readonly] {
+.navds-text-input:disabled,
+.navds-text-input[readonly] {
   background-color: #f1f1f1;
   border-color: #6a6a6a;
   box-shadow: none;
   color: #262626;
 }
 
-.navds-input:disabled:hover,
-.navds-input[readonly]:hover {
+.navds-text-input:disabled:hover,
+.navds-text-input[readonly]:hover {
   cursor: not-allowed;
 }
