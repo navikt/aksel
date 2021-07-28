@@ -1,6 +1,8 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { useRef, forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { useFormHandler } from "../util";
+import { useContext } from "react";
+import { FieldsetContext } from "../index";
+import { v4 as uuidv4 } from "uuid";
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -29,70 +31,91 @@ export interface TextInputProps
   disabled?: boolean;
 }
 
+const useId = (id?: string): string => {
+  const localId = useRef(uuidv4()).current;
+  return id ?? localId;
+};
+
+const Description = (props) => (
+  <div
+    {...props}
+    className={cl("navds-form__description", "navds-body-short", {
+      "navds-body--s": props.size === "s",
+    })}
+  />
+);
+
+const Label = (props) => (
+  <label
+    {...props}
+    className={cl("navds-form__label", "navds-label", {
+      "navds-label--s": props.size === "s",
+    })}
+  />
+);
+
+const ErrorMessage = (props) => (
+  <div
+    {...props}
+    className={cl("navds-label", "navds-form--error", {
+      "navds-label--s": props.size === "s",
+    })}
+  />
+);
+
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ className, label, description, htmlSize, ...rest }, ref) => {
-    const {
-      isInvalid,
-      errorMsg,
-      errorId,
-      id,
-      renderErrorMsg,
-      size,
-      restProps,
-      describeBy,
-    } = useFormHandler(rest);
+  (
+    { className, label, description, htmlSize, error, disabled, ...rest },
+    ref
+  ) => {
+    const context = useContext(FieldsetContext);
+
+    const id = useId(rest.id);
+    const errorId = useId(rest.errorId);
+    const descriptionId = useId();
+
+    const size = rest.size ?? context.size ?? "m";
+
+    const hasError = !disabled && !!(error || context.error);
 
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-text-input--error": isInvalid,
+          "navds-text-input--error": hasError,
         })}
       >
         {label && (
-          <label htmlFor={id}>
-            <div
-              className={cl("navds-form__label", "navds-label", {
-                "navds-label--s": size === "s",
-              })}
-            >
-              {label}
-            </div>
-            {description && (
-              <div
-                className={cl("navds-form__description", "navds-body-short", {
-                  "navds-body--s": size === "s",
-                })}
-              >
-                {description}
-              </div>
-            )}
-          </label>
+          <Label htmlFor={id} size={size}>
+            {label}
+          </Label>
+        )}
+        {description && (
+          <Description id={descriptionId} size={size}>
+            {description}
+          </Description>
         )}
         <input
+          {...rest}
           id={id}
           ref={ref}
           type="text"
           className={cl(
-            "navds-text-input",
             className,
+            "navds-text-input",
             `navds-text-input--${size}`,
             "navds-body-short",
             { "navds-body--s": size === "s" }
           )}
-          aria-invalid={isInvalid}
-          aria-describedby={describeBy}
+          aria-invalid={hasError}
+          aria-describedby={cl({
+            [descriptionId]: description,
+            [context.errorId ?? errorId]: hasError,
+          })}
           size={htmlSize}
-          {...restProps}
         />
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {renderErrorMsg && (
-            <div
-              className={cl("navds-label", "navds-form--error", {
-                "navds-label--s": size === "s",
-              })}
-            >
-              {errorMsg}
-            </div>
+          {hasError && !context.error && (
+            <ErrorMessage size={size}>{error}</ErrorMessage>
           )}
         </div>
       </div>
