@@ -65,15 +65,21 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
         >
           {illustration}
         </div>
-        {React.Children.map(children, (child, i) => {
-          if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-              topText: topText && i === 0 ? topText : undefined,
-              backgroundColor,
-              ...child.props,
-            });
-          }
-        })}
+        <ol className="navds-speechbubble__bubble-list">
+          {React.Children.map(children, (child, i) => {
+            if (React.isValidElement(child)) {
+              return (
+                <li>
+                  {React.cloneElement(child, {
+                    topText: topText && i === 0 ? topText : undefined,
+                    backgroundColor,
+                    ...child.props,
+                  })}
+                </li>
+              );
+            }
+          })}
+        </ol>
       </div>
     );
   }
