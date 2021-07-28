@@ -41,10 +41,6 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    */
   errorId?: string;
   noErrorProvider?: boolean;
-  /**
-   * Tells Fieldset what content it can expect
-   */
-  type?: "default" | "radio" | "checkbox";
 }
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
@@ -57,9 +53,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       error,
       errorId,
       noErrorProvider = false,
-      type = "default",
       size = "m",
-
       ...rest
     },
     ref
@@ -70,7 +64,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       setIntErrorId(() => guid());
     }, []);
 
-    const isCheckElement = type === "checkbox" || type === "radio";
     return (
       <FieldsetContext.Provider
         value={
@@ -87,7 +80,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             `navds-fieldset--${size}`,
             {
               "navds-fieldset--error": !!error,
-              "navds-fieldset--margin": !isCheckElement,
             }
           )}
           aria-invalid={!!error}
@@ -96,11 +88,8 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         >
           <legend>
             <div
-              className={cl("navds-form__legend", {
-                "navds-label": isCheckElement,
-                "navds-label--s": isCheckElement && size === "s",
-                "navds-ingress": !isCheckElement,
-                "navds-body-short": !isCheckElement && size === "s",
+              className={cl("navds-form__legend", "navds-label", {
+                "navds-label--s": size === "s",
               })}
             >
               {legend}

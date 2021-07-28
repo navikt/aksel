@@ -15,7 +15,7 @@ export interface CheckboxProps
    */
   className?: string;
   size?: "m" | "s";
-  label?: string;
+  children: React.ReactNode;
   disabled?: boolean;
   /**
    * Error message
@@ -28,7 +28,7 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, size = "m", label, error, errorId, id, ...rest }, ref) => {
+  ({ className, size = "m", children, error, errorId, id, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     const internalErrorId = useRef(uuidv4());
 
@@ -59,26 +59,27 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
           {...rest}
         />
-        {label && (
-          <label
-            htmlFor={id ?? internalId.current}
-            className={cl("navds-checkbox__label", "navds-body-short", {
-              "navds-body--s": selectedSize === "s",
-            })}
-          >
-            {label}
-          </label>
-        )}
-        <div
-          className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": selectedSize === "s",
+        <label
+          htmlFor={id ?? internalId.current}
+          className={cl("navds-checkbox__label", "navds-body-short", {
+            "navds-body--s": selectedSize === "s",
           })}
+        >
+          {children}
+        </label>
+        <div
           id={errorUuid}
           aria-relevant="additions removals"
           aria-live="polite"
         >
           {!context.error && errorMsg && !rest.disabled && (
-            <div>{errorMsg}</div>
+            <div
+              className={cl("navds-label", "navds-form--error", {
+                "navds-label--s": selectedSize === "s",
+              })}
+            >
+              {errorMsg}
+            </div>
           )}
         </div>
       </div>

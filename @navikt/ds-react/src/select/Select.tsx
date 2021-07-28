@@ -105,15 +105,18 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           </select>
         </div>
         <div
-          className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": selectedSize === "s",
-          })}
           id={errorUuid}
           aria-relevant="additions removals"
           aria-live="polite"
         >
           {!context.error && errorMsg && !rest.disabled && (
-            <div>{errorMsg}</div>
+            <div
+              className={cl("navds-label", "navds-form--error", {
+                "navds-label--s": selectedSize === "s",
+              })}
+            >
+              {errorMsg}
+            </div>
           )}
         </div>
       </div>

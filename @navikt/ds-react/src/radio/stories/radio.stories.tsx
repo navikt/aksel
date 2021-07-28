@@ -10,18 +10,13 @@ export const All = () => {
   return (
     <div>
       <fieldset>
-        <Radio name="test" label="DoloreIn quis consectetur." />
-        <Radio
-          name="test"
-          size="s"
-          label="Dolore Lorem amet sunt exercitation."
-        />
-        <Radio
-          name="test"
-          disabled
-          size="s"
-          label="Dolore Lorem amet sunt exercitation."
-        />
+        <Radio name="test">DoloreIn quis consectetur.</Radio>
+        <Radio name="test" size="s">
+          Dolore Lorem amet sunt exercitation.
+        </Radio>
+        <Radio name="test" disabled size="s">
+          Dolore Lorem amet sunt exercitation.
+        </Radio>
       </fieldset>
     </div>
   );

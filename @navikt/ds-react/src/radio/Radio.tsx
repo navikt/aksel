@@ -10,7 +10,7 @@ import { FieldsetContext } from "../index";
 
 export interface RadioProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  label: string;
+  children: React.ReactNode;
   /**
    * @ignore
    */
@@ -28,7 +28,7 @@ export interface RadioProps
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ className, size, label, error, errorId, id, ...rest }, ref) => {
+  ({ className, size, children, error, errorId, id, ...rest }, ref) => {
     const internalId = useRef(uuidv4());
     const internalErrorId = useRef(uuidv4());
 
@@ -64,18 +64,21 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
             "navds-body--s": selectedSize === "s",
           })}
         >
-          {label}
+          {children}
         </label>
         <div
-          className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": selectedSize === "s",
-          })}
           id={errorUuid}
           aria-relevant="additions removals"
           aria-live="polite"
         >
           {!context.error && errorMsg && !rest.disabled && (
-            <div>{errorMsg}</div>
+            <div
+              className={cl("navds-label", "navds-form--error", {
+                "navds-label--s": selectedSize === "s",
+              })}
+            >
+              {errorMsg}
+            </div>
           )}
         </div>
       </div>
