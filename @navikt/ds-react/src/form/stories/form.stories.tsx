@@ -11,8 +11,10 @@ export const All = () => {
   return (
     <form>
       <TextInput label="Text input" />
+      <TextInput label="A disabled text input" disabled />
       <TextInput
         label="Another text input"
+        description="Text input description"
         value={text}
         onChange={(e) => setText(e.target.value)}
         error="This text input has an error"

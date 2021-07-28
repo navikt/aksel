@@ -74,6 +74,6 @@ export function useFormHandler(props) {
     id: state.id,
     renderErrorMsg: state.renderErrorMsg,
     size: state.size,
-    restProps: { ...rest },
+    restProps: { ...rest, disabled },
   };
 }

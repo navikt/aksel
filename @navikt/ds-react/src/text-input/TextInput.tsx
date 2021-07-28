@@ -19,6 +19,10 @@ export interface TextInputProps
    * Custom id for error message
    */
   errorId?: string;
+  /**
+   * If true, the input element will be disabled
+   */
+  disabled?: boolean;
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
