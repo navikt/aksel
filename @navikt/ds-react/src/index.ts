@@ -14,6 +14,12 @@ export { Button, ButtonProps } from "./button/index";
 export { MicroCard, MicroCardProps } from "./card/index";
 export { Checkbox, CheckboxProps } from "./checkbox/index";
 export {
+  SpeechBubble,
+  SpeechBubbleProps,
+  Bubble,
+  BubbleProps,
+} from "./speech-bubble/index";
+export {
   ContentContainer,
   ContentContainerProps,
 } from "./content-container/index";
