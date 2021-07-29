@@ -41,7 +41,6 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-form__element--no-margin": selectedSize === "m",
           "navds-radio--error": !!errorMsg,
         })}
       >

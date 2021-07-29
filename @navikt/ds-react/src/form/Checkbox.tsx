@@ -1,12 +1,7 @@
-import React, {
-  forwardRef,
-  InputHTMLAttributes,
-  useContext,
-  useRef,
-} from "react";
+import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import cl from "classnames";
-import { v4 as uuidv4 } from "uuid";
 import { FieldsetContext } from "../index";
+import useId from "./useId";
 
 export interface CheckboxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -28,63 +23,90 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ className, size = "m", children, error, errorId, id, ...rest }, ref) => {
-    const internalId = useRef(uuidv4());
-    const internalErrorId = useRef(uuidv4());
-
-    const context = useContext(FieldsetContext);
-
-    const errorMsg = context.error ?? error;
-    const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
-
-    const selectedSize = size ? size : context.size ?? "m";
+  (
+    { className, children, error, size, disabled, id: _id, errorId: _errorId },
+    ref
+  ) => {
+    const id = useId(_id);
+    const errorId = useId(_errorId);
 
     return (
-      <div
-        className={cl("navds-form__element", {
-          "navds-form__element--no-margin": selectedSize === "m",
-          "navds-checkbox--error": !!errorMsg,
-        })}
+      <Field
+        className={className}
+        disabled={disabled}
+        error={error}
+        size={size}
       >
-        <input
-          id={id ?? internalId.current}
+        <Input
           ref={ref}
-          type="checkbox"
-          className={cl(
-            "navds-checkbox",
-            className,
-            `navds-checkbox--${selectedSize}`
-          )}
-          aria-invalid={rest.disabled ? undefined : !!errorMsg}
-          aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
-          {...rest}
+          id={id}
+          disabled={disabled}
+          error={error}
+          errorId={errorId}
         />
-        <label
-          htmlFor={id ?? internalId.current}
-          className={cl("navds-checkbox__label", "navds-body-short", {
-            "navds-body--s": selectedSize === "s",
-          })}
-        >
-          {children}
-        </label>
-        <div
-          id={errorUuid}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {!context.error && errorMsg && !rest.disabled && (
-            <div
-              className={cl("navds-label", "navds-form--error", {
-                "navds-label--s": selectedSize === "s",
-              })}
-            >
-              {errorMsg}
-            </div>
-          )}
-        </div>
-      </div>
+        <Label htmlFor={id}>{children}</Label>
+        <ErrorMessage disabled={disabled} error={error} errorId={errorId} />
+      </Field>
     );
   }
 );
+
+const Field = ({ error, disabled, className, size, children }) => {
+  const context = useContext(FieldsetContext);
+
+  return (
+    <div
+      className={cl(
+        className,
+        "navds-checkbox",
+        `navds-checkbox--${size ?? context.size ?? "m"}`,
+        `navds-body--${size ?? context.size ?? "m"}`,
+        `navds-body-short`,
+        { "navds-checkbox--error": !disabled && (error || context.error) }
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
+const Label = ({ htmlFor, children }) => (
+  <label htmlFor={htmlFor} className="navds-checkbox__label">
+    {children}
+  </label>
+);
+
+const Input = ({ id, ref, disabled, error, errorId }) => {
+  const context = useContext(FieldsetContext);
+
+  return (
+    <input
+      id={id}
+      ref={ref}
+      type="checkbox"
+      className="navds-checkbox__input"
+      aria-invalid={!disabled && (error || context.error)}
+      aria-describedby={
+        !disabled && error
+          ? errorId
+          : context.error
+          ? context.errorId
+          : undefined
+      }
+    />
+  );
+};
+
+const ErrorMessage = ({ errorId, error, disabled }) => {
+  const context = useContext(FieldsetContext);
+
+  return (
+    <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+      {!disabled && error && !context.error && (
+        <div className="navds-error-message">{error}</div>
+      )}
+    </div>
+  );
+};
 
 export default Checkbox;

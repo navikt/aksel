@@ -13,10 +13,6 @@
   margin-bottom: var(--navds-spacing-2);
 }
 
-.navds-fieldset .navds-form__element--no-margin {
-  margin-bottom: 0;
-}
-
 .navds-fieldset--margin * .navds-form__description {
   margin-bottom: var(--navds-spacing-4);
 }
