@@ -12,7 +12,6 @@ export { Accordion, AccordionProps } from "./accordion/index";
 export { Alert, AlertProps } from "./alert/index";
 export { Button, ButtonProps } from "./button/index";
 export { MicroCard, MicroCardProps } from "./card/index";
-export { Checkbox, CheckboxProps } from "./checkbox/index";
 export {
   SpeechBubble,
   SpeechBubbleProps,
@@ -24,11 +23,8 @@ export {
   ContentContainerProps,
 } from "./content-container/index";
 export { CopyToClipboard } from "./copy-to-clipboard/index";
-export { Fieldset, FieldsetContext, FieldsetProps } from "./fieldset/index";
 export { Cell, CellProps, Grid, GridProps } from "./grid/index";
 export { Header, HeaderProps } from "./header/index";
-export { TextInput, TextInputProps } from "./text-input/index";
-export { Textarea, TextareaProps } from "./textarea/index";
 export {
   InternalHeader,
   InternalHeaderProps,
@@ -48,7 +44,6 @@ export { Loader, LoaderProps } from "./loader/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Panel, PanelProps } from "./panel/index";
 export { Popover, PopoverProps } from "./popover/index";
-export { Radio, RadioProps } from "./radio/index";
 export { Select, SelectProps } from "./select/index";
 export { Tag, TagProps } from "./tag/index";
 export {
@@ -59,4 +54,18 @@ export {
   Label,
   Title,
 } from "./typography/index";
-export { OverridableComponent, useFormHandler } from "./util/index";
+export { OverridableComponent } from "./util/index";
+
+export {
+  Checkbox,
+  CheckboxProps,
+  Fieldset,
+  FieldsetContext,
+  FieldsetProps,
+  TextInput,
+  TextInputProps,
+  Textarea,
+  TextareaProps,
+  Radio,
+  RadioProps,
+} from "./form/index";

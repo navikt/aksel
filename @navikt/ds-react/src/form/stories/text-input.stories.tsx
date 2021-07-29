@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Fieldset } from "../../fieldset";
+import { Fieldset } from "../..";
 export default {
   title: "ds-react/form/text-input",
   component: TextInput,
