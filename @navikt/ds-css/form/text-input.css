@@ -19,7 +19,7 @@
 }
 
 .navds-text-input:focus {
-  outline: 0;
+  outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
 

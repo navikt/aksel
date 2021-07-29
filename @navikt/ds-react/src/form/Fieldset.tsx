@@ -63,7 +63,10 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             { "navds-fieldset--error": !!error }
           )}
           aria-invalid={!!error}
-          aria-describedby={error && errorId}
+          aria-describedby={cl({
+            [descriptionId]: description,
+            [errorId]: error,
+          })}
           {...rest}
         >
           <legend

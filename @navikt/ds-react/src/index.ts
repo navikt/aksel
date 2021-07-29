@@ -44,7 +44,6 @@ export { Loader, LoaderProps } from "./loader/index";
 export { Modal, ModalProps } from "./modal/index";
 export { Panel, PanelProps } from "./panel/index";
 export { Popover, PopoverProps } from "./popover/index";
-export { Select, SelectProps } from "./select/index";
 export { Tag, TagProps } from "./tag/index";
 export {
   BodyLong,
@@ -68,4 +67,6 @@ export {
   TextareaProps,
   Radio,
   RadioProps,
+  Select,
+  SelectProps,
 } from "./form/index";

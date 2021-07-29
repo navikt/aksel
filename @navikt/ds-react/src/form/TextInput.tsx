@@ -3,6 +3,7 @@ import cl from "classnames";
 import { useContext } from "react";
 import { FieldsetContext } from "../index";
 import useId from "./useId";
+import Label from "./Label";
 import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
 
@@ -32,15 +33,6 @@ export interface TextInputProps
    */
   disabled?: boolean;
 }
-
-const Label = (props) => (
-  <label
-    {...props}
-    className={cl("navds-form__label", "navds-label", {
-      "navds-label--s": props.size === "s",
-    })}
-  />
-);
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (

@@ -1,24 +1,18 @@
-import React, {
-  forwardRef,
-  TextareaHTMLAttributes,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-} from "react";
+import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { v4 as uuidv4 } from "uuid";
+import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { FieldsetContext } from "../index";
-import Throttle from "lodash.throttle";
-import mergeRefs from "react-merge-refs";
+import ErrorMessage from "./ErrorMessage";
+import useId from "./useId";
+import Description from "./Description";
+import Label from "./Label";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
  */
 
 export interface TextareaProps
-  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * @ignore
    */
@@ -36,160 +30,105 @@ export interface TextareaProps
   errorId?: string;
   /**
    * Visually allowed length of content
-   * @default 2000
    */
   maxLength?: number;
   value: string;
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+  /**
+   * Maximum number of rows to display.
+   */
+  maxRows?: number;
+  /**
+   * Minimum number of rows to display.
+   */
+  minRows?: number;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       className,
-      size,
-      id,
       label,
       description,
       error,
-      errorId,
       maxLength,
       value,
-      onChange,
+      disabled,
       ...rest
     },
     ref
   ) => {
-    const mirrorRef = useRef<HTMLDivElement | null>(null);
-    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
-
-    const throttledRef = useRef<any>(null);
-    const firstRef = useRef<boolean>(false);
-
-    const mergedRef = mergeRefs([textareaRef, ref]);
-    const maxLengthId = useRef(uuidv4());
-    const internalId = useRef(uuidv4());
-    const internalErrorId = useRef(uuidv4());
+    const id = useId(rest.id);
+    const errorId = useId(rest.errorId);
+    const maxLengthId = useId();
+    const descriptionId = useId();
 
     const context = useContext(FieldsetContext);
 
-    const errorMsg = context.error ?? error;
-    const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
+    const size = rest.size ?? context.size ?? "m";
 
-    const selectedSize = size ? size : context.size ?? "m";
-
-    const updateHeight = useCallback(() => {
-      if (mirrorRef.current && textareaRef.current) {
-        mirrorRef.current.textContent = `${textareaRef.current.value} `;
-        textareaRef.current.style.height = `${
-          mirrorRef.current.offsetHeight + 23
-        }px`;
-      }
-    }, []);
-
-    useEffect(() => {
-      if (!firstRef.current) {
-        firstRef.current = true;
-        return;
-      }
-      updateHeight();
-    }, [value, updateHeight]);
-
-    useEffect(() => {
-      throttledRef.current = Throttle(updateHeight, 100, {
-        leading: false,
-      });
-      window.addEventListener("resize", throttledRef.current);
-      return () => {
-        throttledRef.current &&
-          window.removeEventListener("resize", throttledRef.current);
-      };
-    }, [updateHeight]);
-
-    useLayoutEffect(() => {
-      updateHeight();
-    }, [updateHeight]);
+    const hasError = !disabled && !!(error || context.error);
+    const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     return (
       <div
         className={cl("navds-form__element", {
-          "navds-textarea--error": !!errorMsg,
+          "navds-textarea--error": hasError,
         })}
       >
         {label && (
-          <label htmlFor={id ?? internalId.current}>
-            <div
-              className={cl("navds-form__label", "navds-label", {
-                "navds-label--s": selectedSize === "s",
-              })}
-            >
-              {label}
-            </div>
-            {description && (
-              <div
-                className={cl("navds-form__description", "navds-body-short", {
-                  "navds-body--s": selectedSize === "s",
-                })}
-              >
-                {description}
-              </div>
-            )}
-          </label>
+          <Label htmlFor={id} size={size}>
+            {label}
+          </Label>
+        )}
+        {description && (
+          <Description id={descriptionId} size={size}>
+            {description}
+          </Description>
         )}
         <div className="navds-textarea__wrapper">
-          {maxLength && (
-            <span id={maxLengthId.current} className="sr-only">
-              Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
-              {maxLength} signs.
-            </span>
-          )}
-          <textarea
-            id={id ?? internalId.current}
-            ref={mergedRef}
+          <TextareaAutosize
+            {...rest}
+            id={id}
+            ref={ref}
             className={cl(
-              "navds-textarea",
               className,
-              `navds-textarea--${selectedSize}`,
+              "navds-textarea",
+              `navds-textarea--${size}`,
               "navds-body-short",
-              { "navds-body--s": selectedSize === "s" }
+              {
+                "navds-body--s": size === "s",
+                "navds-textarea--counter": hasMaxLength,
+              }
             )}
             value={value}
-            onChange={(e) => onChange(e)}
-            aria-invalid={rest.disabled ? undefined : !!errorMsg}
-            aria-describedby={
-              rest.disabled ? undefined : !!errorMsg && errorUuid
-            }
-            {...rest}
+            disabled={disabled}
+            aria-invalid={hasError}
+            aria-describedby={cl({
+              [maxLengthId]: hasMaxLength,
+              [descriptionId]: description,
+              [context.errorId ?? errorId]: hasError,
+            })}
           />
-          <Counter
-            maxLength={maxLength}
-            currentLength={value.length}
-            size={size}
-          />
-        </div>
-        <div
-          className={cl("navds-label", "navds-form--error", {
-            "navds-label--s": selectedSize === "s",
-          })}
-          id={errorUuid}
-          aria-relevant="additions removals"
-          aria-live="polite"
-        >
-          {!context.error && errorMsg && !rest.disabled && (
-            <div>{errorMsg}</div>
+          {hasMaxLength && (
+            <>
+              <span id={maxLengthId} className="sr-only">
+                Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
+                {maxLength} signs.
+              </span>
+              <Counter
+                maxLength={maxLength}
+                currentLength={value.length}
+                size={size}
+              />
+            </>
           )}
         </div>
-        <div
-          className={cl(
-            "navds-textarea",
-            "navds-textarea__mirror",
-            `navds-textarea--${selectedSize}`,
-            "navds-body-short",
-            { "navds-body--s": selectedSize === "s" }
+        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+          {hasError && !context.error && (
+            <ErrorMessage size={size}>{error}</ErrorMessage>
           )}
-          ref={mirrorRef}
-          aria-hidden="true"
-        />
+        </div>
       </div>
     );
   }
@@ -198,24 +137,17 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 const Counter = ({ maxLength, currentLength, size }) => {
   const difference = maxLength - currentLength;
 
-  if (maxLength <= 0) {
-    return null;
-  }
   return (
     <p
       className={cl("navds-textarea__counter", "navds-body-short", {
         "navds-body--s": size === "s",
+        "navds-textarea__counter--error": difference < 0,
       })}
+      aria-live="polite"
     >
-      <span
-        className={cl("navds-textarea__counter-text", {
-          "navds-textarea__counter-text--error": difference < 0,
-        })}
-        aria-live="polite"
-      >
-        {difference >= 0 && `Du har ${difference} tegn igjen`}
-        {difference < 0 && `Du har ${Math.abs(difference)} tegn for mye`}
-      </span>
+      {difference < 0
+        ? `Du har ${Math.abs(difference)} tegn for mye`
+        : `Du har ${difference} tegn igjen`}
     </p>
   );
 };
