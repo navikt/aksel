@@ -1,8 +1,10 @@
-import React, { useRef, forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { useContext } from "react";
 import { FieldsetContext } from "../index";
-import { v4 as uuidv4 } from "uuid";
+import useId from "./useId";
+import Description from "./Description";
+import ErrorMessage from "./ErrorMessage";
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -31,33 +33,10 @@ export interface TextInputProps
   disabled?: boolean;
 }
 
-const useId = (id?: string): string => {
-  const localId = useRef(uuidv4()).current;
-  return id ?? localId;
-};
-
-const Description = (props) => (
-  <div
-    {...props}
-    className={cl("navds-form__description", "navds-body-short", {
-      "navds-body--s": props.size === "s",
-    })}
-  />
-);
-
 const Label = (props) => (
   <label
     {...props}
     className={cl("navds-form__label", "navds-label", {
-      "navds-label--s": props.size === "s",
-    })}
-  />
-);
-
-const ErrorMessage = (props) => (
-  <div
-    {...props}
-    className={cl("navds-label", "navds-form--error", {
       "navds-label--s": props.size === "s",
     })}
   />

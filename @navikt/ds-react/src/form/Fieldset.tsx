@@ -1,6 +1,8 @@
-import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { v4 as guid } from "uuid";
+import useId from "./useId";
+import Description from "./Description";
+import ErrorMessage from "./ErrorMessage";
 
 export type FieldsetContextProps = {
   error?: string | undefined;
@@ -40,80 +42,49 @@ export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
    * Custom id for error message
    */
   errorId?: string;
-  noErrorProvider?: boolean;
 }
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (
-    {
-      children,
-      className,
-      legend,
-      description,
-      error,
-      errorId,
-      noErrorProvider = false,
-      size = "m",
-      ...rest
-    },
+    { children, className, legend, description, error, size = "m", ...rest },
     ref
   ) => {
-    const [intErrorId, setIntErrorId] = useState();
-
-    useEffect(() => {
-      setIntErrorId(() => guid());
-    }, []);
+    const errorId = useId(rest.errorId);
+    const descriptionId = useId();
 
     return (
-      <FieldsetContext.Provider
-        value={
-          noErrorProvider
-            ? { size }
-            : { error, errorId: errorId ?? intErrorId, size }
-        }
-      >
+      <FieldsetContext.Provider value={{ error, errorId, size }}>
         <fieldset
           ref={ref}
           className={cl(
-            "navds-fieldset",
             className,
+            "navds-fieldset",
             `navds-fieldset--${size}`,
-            {
-              "navds-fieldset--error": !!error,
-            }
+            { "navds-fieldset--error": !!error }
           )}
           aria-invalid={!!error}
-          aria-describedby={error && (errorId ?? intErrorId)}
+          aria-describedby={error && errorId}
           {...rest}
         >
-          <legend>
-            <div
-              className={cl("navds-form__legend", "navds-label", {
-                "navds-label--s": size === "s",
-              })}
-            >
-              {legend}
-            </div>
-            {description && (
-              <div
-                className={cl("navds-form__description", "navds-body-short", {
-                  "navds-body--s": size === "s",
-                })}
-              >
-                {description}
-              </div>
-            )}
-          </legend>
-          {children}
-          <div
-            className={cl("navds-label", "navds-form--error", {
+          <legend
+            className={cl("navds-form__legend", "navds-label", {
               "navds-label--s": size === "s",
             })}
-            id={errorId ?? intErrorId}
+          >
+            {legend}
+          </legend>
+          {description && (
+            <Description id={descriptionId} size={size}>
+              {description}
+            </Description>
+          )}
+          {children}
+          <div
+            id={errorId}
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {error && <div>{error}</div>}
+            {error && <ErrorMessage size={size}>{error}</ErrorMessage>}
           </div>
         </fieldset>
       </FieldsetContext.Provider>
