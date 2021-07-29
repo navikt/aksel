@@ -1,11 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { useContext } from "react";
-import { FieldsetContext } from "../index";
-import useId from "./useId";
-import Label from "./Label";
-import Description from "./Description";
-import ErrorMessage from "./ErrorMessage";
+import Field from "./Field";
 
 export interface TextInputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -34,64 +29,24 @@ export interface TextInputProps
   disabled?: boolean;
 }
 
-const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  (
-    { className, label, description, htmlSize, error, disabled, ...rest },
-    ref
-  ) => {
-    const context = useContext(FieldsetContext);
-
-    const id = useId(rest.id);
-    const errorId = useId(rest.errorId);
-    const descriptionId = useId();
-
-    const size = rest.size ?? context.size ?? "m";
-
-    const hasError = !disabled && !!(error || context.error);
-
-    return (
-      <div
-        className={cl("navds-form__element", {
-          "navds-text-input--error": hasError,
-        })}
-      >
-        {label && (
-          <Label htmlFor={id} size={size}>
-            {label}
-          </Label>
+const TextInput = forwardRef<HTMLInputElement, TextInputProps>((props, ref) => (
+  <Field {...props}>
+    {({ className, size, htmlSize, ...rest }) => (
+      <input
+        {...rest}
+        ref={ref}
+        type="text"
+        className={cl(
+          className,
+          "navds-text-input",
+          `navds-text-input--${size}`,
+          "navds-body-short",
+          { "navds-body--s": size === "s" }
         )}
-        {description && (
-          <Description id={descriptionId} size={size}>
-            {description}
-          </Description>
-        )}
-        <input
-          {...rest}
-          id={id}
-          ref={ref}
-          type="text"
-          className={cl(
-            className,
-            "navds-text-input",
-            `navds-text-input--${size}`,
-            "navds-body-short",
-            { "navds-body--s": size === "s" }
-          )}
-          aria-invalid={hasError}
-          aria-describedby={cl({
-            [descriptionId]: description,
-            [context.errorId ?? errorId]: hasError,
-          })}
-          size={htmlSize}
-        />
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {hasError && !context.error && (
-            <ErrorMessage size={size}>{error}</ErrorMessage>
-          )}
-        </div>
-      </div>
-    );
-  }
-);
+        size={htmlSize}
+      />
+    )}
+  </Field>
+));
 
 export default TextInput;

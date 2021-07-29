@@ -83,7 +83,7 @@
   Error handling
 */
 
-.navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
+.navds-field--error > * select:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }

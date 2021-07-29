@@ -47,6 +47,16 @@ export const All = () => {
         <option value="sverige">Sverige</option>
         <option value="danmark">Danmark</option>
       </Select>
+      <Select
+        label="Hvilken land er best om sommeren?"
+        error="Danmark er feil svar"
+        value="danmark"
+      >
+        <option value="">Velg land</option>
+        <option value="norge">Norge</option>
+        <option value="sverige">Sverige</option>
+        <option value="danmark">Danmark</option>
+      </Select>
     </div>
   );
 };

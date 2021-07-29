@@ -2,6 +2,7 @@
   position: relative;
   width: 100%;
 }
+
 .navds-textarea {
   appearance: none;
   padding: var(--navds-spacing-2);
@@ -53,7 +54,7 @@
 /**
   Error handling
 */
-.navds-textarea--error .navds-textarea:not(:hover):not(:focus):not(:disabled) {
+.navds-field--error .navds-textarea:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
