@@ -24,7 +24,16 @@ export interface CheckboxProps
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
-    { className, children, error, size, disabled, id: _id, errorId: _errorId },
+    {
+      className,
+      children,
+      error,
+      size,
+      disabled,
+      id: _id,
+      errorId: _errorId,
+      ...rest
+    },
     ref
   ) => {
     const id = useId(_id);
@@ -38,6 +47,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         size={size}
       >
         <Input
+          {...rest}
           ref={ref}
           id={id}
           disabled={disabled}
@@ -61,7 +71,7 @@ const Field = ({ error, disabled, className, size, children }) => {
         "navds-checkbox",
         `navds-checkbox--${size ?? context.size ?? "m"}`,
         `navds-body--${size ?? context.size ?? "m"}`,
-        `navds-body-short`,
+        "navds-body-short",
         { "navds-checkbox--error": !disabled && (error || context.error) }
       )}
     >
@@ -76,21 +86,23 @@ const Label = ({ htmlFor, children }) => (
   </label>
 );
 
-const Input = ({ id, ref, disabled, error, errorId }) => {
+const Input = ({ id, ref, disabled, error, errorId, ...rest }) => {
   const context = useContext(FieldsetContext);
 
   return (
     <input
+      {...rest}
       id={id}
       ref={ref}
+      disabled={disabled}
       type="checkbox"
       className="navds-checkbox__input"
-      aria-invalid={!disabled && (error || context.error)}
+      aria-invalid={!disabled && !!(error || context.error)}
       aria-describedby={
-        !disabled && error
-          ? errorId
-          : context.error
-          ? context.errorId
+        !disabled && (error || context.error)
+          ? error
+            ? errorId
+            : context.errorId
           : undefined
       }
     />

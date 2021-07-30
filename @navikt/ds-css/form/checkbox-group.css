@@ -1,0 +1,5 @@
+.navds-checkbox-group > .navds-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-3);
+}
