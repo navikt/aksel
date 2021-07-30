@@ -1,5 +1,9 @@
-export { default as Checkbox, CheckboxProps } from "./Checkbox";
-export { default as CheckboxGroup, CheckboxGroupProps } from "./CheckboxGroup";
+export {
+  Checkbox,
+  CheckboxProps,
+  CheckboxGroup,
+  CheckboxGroupProps,
+} from "./checkbox";
 export {
   default as Fieldset,
   FieldsetContext,
