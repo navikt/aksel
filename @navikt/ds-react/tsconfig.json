@@ -10,5 +10,5 @@
     "declaration": false
   },
   "include": ["./src"],
-  "exclude": ["./src/*/stories"]
+  "exclude": ["./src/**/stories"]
 }
