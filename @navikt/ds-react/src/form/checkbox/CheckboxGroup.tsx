@@ -22,8 +22,8 @@ export interface CheckboxGroupProps extends Omit<FieldsetProps, "onChange"> {
 }
 
 const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
-  (props, ref) => {
-    const {
+  (
+    {
       value,
       defaultValue = [],
       disabled = false,
@@ -31,8 +31,9 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
       children,
       className,
       ...rest
-    } = props;
-
+    },
+    ref
+  ) => {
     const state = value ?? [];
 
     return (

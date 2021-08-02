@@ -16,6 +16,7 @@ export const All = () => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         id={text}
+        required
       />
       <button type="submit">Submit</button>
     </form>
