@@ -1,9 +1,8 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import useId from "./useId";
+import React, { FieldsetHTMLAttributes, forwardRef } from "react";
 import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
-import { FieldsetHTMLAttributes } from "react";
+import useId from "./useId";
 
 export type FieldsetContextProps = {
   error?: string | undefined;

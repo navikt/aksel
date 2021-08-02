@@ -6,10 +6,6 @@ export default {
   component: RadioGroup,
 } as Meta;
 
-// error
-// disabled group
-// disbaled single
-
 export const All = () => {
   const [selected, setSelected] = useState<string>("orange");
 
@@ -40,6 +36,10 @@ export const All = () => {
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
       <button>Submit</button>
+      <RadioGroup legend="Radio group label" error="Error message...">
+        <Radio value="apple">Apple</Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
     </form>
   );
 };
