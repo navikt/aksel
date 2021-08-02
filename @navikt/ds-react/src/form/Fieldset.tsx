@@ -3,6 +3,7 @@ import cl from "classnames";
 import useId from "./useId";
 import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
+import { FieldsetHTMLAttributes } from "react";
 
 export type FieldsetContextProps = {
   error?: string | undefined;
@@ -11,8 +12,8 @@ export type FieldsetContextProps = {
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps>({});
-
-export interface FieldsetProps extends HTMLAttributes<HTMLFieldSetElement> {
+export interface FieldsetProps
+  extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
    * Component content
    */
