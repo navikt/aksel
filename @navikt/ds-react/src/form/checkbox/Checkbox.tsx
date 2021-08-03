@@ -2,6 +2,7 @@ import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import cl from "classnames";
 import { FieldsetContext } from "../../index";
 import useCheckbox from "./useCheckbox";
+import ErrorMessage from "../ErrorMessage";
 
 export interface CheckboxProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -25,7 +26,7 @@ export interface CheckboxProps
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const context = useContext(FieldsetContext);
-  const { inputProps, errorId } = useCheckbox(props);
+  const { inputProps, errorId, showErrorMsg } = useCheckbox(props);
 
   return (
     <div
@@ -46,9 +47,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         {props.children}
       </label>
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {!inputProps.disabled && props.error && !context.error && (
-          <div className="navds-error-message">{props.error}</div>
-        )}
+        {showErrorMsg && <ErrorMessage>{props.error}</ErrorMessage>}
       </div>
     </div>
   );

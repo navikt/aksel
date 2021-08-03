@@ -1,13 +1,9 @@
-import React, {
-  forwardRef,
-  InputHTMLAttributes,
-  useContext,
-  useRef,
-} from "react";
+import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import cl from "classnames";
-import { v4 as uuidv4 } from "uuid";
 import { FieldsetContext } from "../../index";
 import { RadioGroupContext } from "./RadioGroup";
+import useId from "../useId";
+import ErrorMessage from "../ErrorMessage";
 
 export interface RadioProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
@@ -31,11 +27,17 @@ export interface RadioProps
 
 const useRadio = (props: RadioProps) => {
   const radioGroup = useContext(RadioGroupContext);
+  const { error: fieldsetError, errorId: fieldsetErrorId, size } = useContext(
+    FieldsetContext
+  );
 
   if (!radioGroup) {
     console.warn("<Radio> must be used inside <RadioGroup>.");
   }
 
+  const id = useId({ id: props.id, prefix: "Radio" });
+  const errorId = useId({ id: props.errorId, prefix: "RadioError" });
+  const disabled = radioGroup?.disabled || props.disabled;
   return {
     inputProps: {
       name: radioGroup?.name,
@@ -48,7 +50,23 @@ const useRadio = (props: RadioProps) => {
         radioGroup?.onChange && radioGroup.onChange(props.value);
       },
       required: radioGroup?.required || props.required,
+      id: id,
+      "aria-invalid": !props.disabled && !!(props.error || fieldsetError),
+      "aria-describedby":
+        !props.disabled && (props.error || fieldsetError)
+          ? props.error
+            ? props.errorId
+              ? props.errorId
+              : errorId
+            : fieldsetErrorId
+          : undefined,
+      type: "radio",
+      disabled: radioGroup?.disabled || props.disabled,
     },
+    _errorId: errorId,
+    showErrorStyle: disabled && (props.error || fieldsetError),
+    showErrorMsg: disabled && props.error && !fieldsetError,
+    _size: props.size ? props.size : size ?? "m",
   };
 };
 
@@ -66,50 +84,36 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   if (required !== undefined) {
     console.warn("required is only supported on <RadioGroup>.");
   }
-  const { inputProps } = useRadio(props);
-  const internalId = useRef(uuidv4());
-  const internalErrorId = useRef(uuidv4());
-
-  const context = useContext(FieldsetContext);
-
-  const errorMsg = context.error ?? error;
-  const errorUuid = context.errorId ?? errorId ?? internalErrorId.current;
-  const selectedSize = size ? size : context.size ?? "m";
+  const {
+    inputProps,
+    _errorId,
+    showErrorStyle,
+    showErrorMsg,
+    _size,
+  } = useRadio(props);
 
   return (
     <div
       className={cl("navds-form__element", {
-        "navds-radio--error": !!errorMsg,
+        "navds-radio--error": showErrorStyle,
       })}
     >
       <input
         {...inputProps}
         {...rest}
-        id={id ?? internalId.current}
         ref={ref}
-        type="radio"
-        className={cl("navds-radio", className, `navds-radio--${selectedSize}`)}
-        aria-invalid={rest.disabled ? undefined : !!errorMsg}
-        aria-describedby={rest.disabled ? undefined : !!errorMsg && errorUuid}
+        className={cl("navds-radio", className, `navds-radio--${_size}`)}
       />
       <label
-        htmlFor={id ?? internalId.current}
+        htmlFor={inputProps.id}
         className={cl("navds-radio__label", "navds-body-short", {
-          "navds-body--s": selectedSize === "s",
+          "navds-body--s": _size,
         })}
       >
         {children}
       </label>
-      <div id={errorUuid} aria-relevant="additions removals" aria-live="polite">
-        {!context.error && errorMsg && !rest.disabled && (
-          <div
-            className={cl("navds-label", "navds-form--error", {
-              "navds-label--s": selectedSize === "s",
-            })}
-          >
-            {errorMsg}
-          </div>
-        )}
+      <div id={_errorId} aria-relevant="additions removals" aria-live="polite">
+        {showErrorMsg && <ErrorMessage>{props.error}</ErrorMessage>}
       </div>
     </div>
   );

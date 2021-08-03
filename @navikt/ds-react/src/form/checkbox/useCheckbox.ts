@@ -11,7 +11,7 @@ const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
   );
 
   const id = useId({ id: props.id, prefix: "Checkbox" });
-  const errorId = useId({ id: props.id, prefix: "CheckboxError" });
+  const errorId = useId({ id: props.errorId, prefix: "CheckboxError" });
 
   if (groupState) {
     if (props.checked) {
@@ -28,6 +28,8 @@ const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
 
   return {
     errorId,
+    showErrorMsg:
+      (groupState?.disabled || props.disabled) && props.error && !fieldsetError,
     inputProps: {
       ...props,
       id,
@@ -37,6 +39,8 @@ const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
         !props.disabled && (props.error || fieldsetError)
           ? props.error
             ? props.errorId
+              ? props.errorId
+              : errorId
             : fieldsetErrorId
           : undefined,
       disabled: groupState?.disabled || props.disabled,
