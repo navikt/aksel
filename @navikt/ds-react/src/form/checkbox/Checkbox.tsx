@@ -34,8 +34,8 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         props.className,
         "navds-checkbox",
         `navds-checkbox--${props.size ?? context.size ?? "m"}`,
-        `navds-body--${props.size ?? context.size ?? "m"}`,
         "navds-body-short",
+        `navds-body--${props.size ?? context.size ?? "m"}`,
         {
           "navds-checkbox--error":
             !inputProps.disabled && (props.error || context.error),
