@@ -49,8 +49,8 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
     { children, className, legend, description, error, size = "m", ...rest },
     ref
   ) => {
-    const errorId = useId(rest.errorId);
-    const descriptionId = useId();
+    const errorId = useId({ id: rest.errorId, prefix: "FieldsetError" });
+    const descriptionId = useId({ prefix: "FieldsetDescription" });
 
     return (
       <FieldsetContext.Provider value={{ error, errorId, size }}>

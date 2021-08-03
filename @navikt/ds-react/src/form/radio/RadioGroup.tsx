@@ -49,7 +49,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       >
         <RadioGroupContext.Provider
           value={{
-            name: useId(name),
+            name: useId({ id: name, prefix: "RadioGroupName" }),
             defaultValue,
             value,
             onChange,

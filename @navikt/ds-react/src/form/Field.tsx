@@ -27,9 +27,9 @@ const Field = ({
 }: FieldProps) => {
   const context = useContext(FieldsetContext);
 
-  const id = useId(props.id);
-  const errorId = useId(_errorId);
-  const descriptionId = useId();
+  const id = useId({ id: props.id, prefix: "Field" });
+  const errorId = useId({ id: _errorId, prefix: "FieldError" });
+  const descriptionId = useId({ prefix: "FieldDescription" });
 
   const size = props.size ?? context.size ?? "m";
   const hasError = !props.disabled && !!(error || context.error);

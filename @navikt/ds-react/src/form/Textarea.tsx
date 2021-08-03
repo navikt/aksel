@@ -42,7 +42,7 @@ export interface TextareaProps
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ maxLength, ...props }, ref) => {
-    const maxLengthId = useId();
+    const maxLengthId = useId({ prefix: "TextareaMaxLength" });
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     return (

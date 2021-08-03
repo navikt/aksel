@@ -10,8 +10,8 @@ const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
     FieldsetContext
   );
 
-  const id = useId(props.id);
-  const errorId = useId(props.id);
+  const id = useId({ id: props.id, prefix: "Checkbox" });
+  const errorId = useId({ id: props.id, prefix: "CheckboxError" });
 
   if (groupState) {
     if (props.checked) {
