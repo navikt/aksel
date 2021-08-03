@@ -7,9 +7,7 @@ export default {
 } as Meta;
 
 export const All = () => {
-  const [value, setValue] = useState(
-    "Adipisicing cillum incididunt fugiat laboris culpa exercitation ipsum consectetur magna proident dolore pariatur cillum."
-  );
+  const [value, setValue] = useState("");
 
   const handleChange = (e) => {
     setValue(e.target.value);
