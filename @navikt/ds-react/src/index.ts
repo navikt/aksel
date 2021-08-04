@@ -1,3 +1,4 @@
+export { Accordion, AccordionProps } from "./accordion";
 export {
   AccordionAnchorMenu,
   AccordionAnchorMenuCollapsable,
@@ -8,23 +9,28 @@ export {
   AccordionMenuCollapsable,
   AccordionMenuItem,
 } from "./accordion-menu";
-export { Accordion, AccordionProps } from "./accordion/index";
-export { Alert, AlertProps } from "./alert/index";
-export { Button, ButtonProps } from "./button/index";
-export { MicroCard, MicroCardProps } from "./card/index";
+export { Alert, AlertProps } from "./alert";
+export { Button, ButtonProps } from "./button";
+export { MicroCard, MicroCardProps } from "./card";
+export { ContentContainer, ContentContainerProps } from "./content-container";
+export { CopyToClipboard } from "./copy-to-clipboard";
 export {
-  SpeechBubble,
-  SpeechBubbleProps,
-  Bubble,
-  BubbleProps,
-} from "./speech-bubble/index";
-export {
-  ContentContainer,
-  ContentContainerProps,
-} from "./content-container/index";
-export { CopyToClipboard } from "./copy-to-clipboard/index";
-export { Cell, CellProps, Grid, GridProps } from "./grid/index";
-export { Header, HeaderProps } from "./header/index";
+  Checkbox,
+  CheckboxProps,
+  Fieldset,
+  FieldsetContext,
+  FieldsetProps,
+  Radio,
+  RadioProps,
+  Select,
+  SelectProps,
+  Textarea,
+  TextareaProps,
+  TextInput,
+  TextInputProps,
+} from "./form";
+export { Cell, CellProps, Grid, GridProps } from "./grid";
+export { Header, HeaderProps } from "./header";
 export {
   InternalHeader,
   InternalHeaderProps,
@@ -32,19 +38,25 @@ export {
   InternalHeaderTitleProps,
   InternalHeaderUser,
   InternalHeaderUserProps,
-} from "./internal-header/index";
+} from "./internal-header";
 export {
   ProductPageLayout,
   ProductPagePanel,
   ProductPageSection,
-} from "./layouts/index";
-export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel/index";
-export { Link, LinkProps } from "./link/index";
-export { Loader, LoaderProps } from "./loader/index";
-export { Modal, ModalProps } from "./modal/index";
-export { Panel, PanelProps } from "./panel/index";
-export { Popover, PopoverProps } from "./popover/index";
-export { Tag, TagProps } from "./tag/index";
+} from "./layouts";
+export { Link, LinkProps } from "./link";
+export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel";
+export { Loader, LoaderProps } from "./loader";
+export { Modal, ModalProps } from "./modal";
+export { Panel, PanelProps } from "./panel";
+export { Popover, PopoverProps } from "./popover";
+export {
+  Bubble,
+  BubbleProps,
+  SpeechBubble,
+  SpeechBubbleProps,
+} from "./speech-bubble";
+export { Tag, TagProps } from "./tag";
 export {
   BodyLong,
   BodyShort,
@@ -52,21 +64,5 @@ export {
   Ingress,
   Label,
   Title,
-} from "./typography/index";
-export { OverridableComponent } from "./util/index";
-
-export {
-  Checkbox,
-  CheckboxProps,
-  Fieldset,
-  FieldsetContext,
-  FieldsetProps,
-  TextInput,
-  TextInputProps,
-  Textarea,
-  TextareaProps,
-  Radio,
-  RadioProps,
-  Select,
-  SelectProps,
-} from "./form/index";
+} from "./typography";
+export * from "./util";

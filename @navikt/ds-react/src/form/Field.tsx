@@ -31,8 +31,8 @@ const Field = ({
   const errorId = useId({ id: _errorId, prefix: "FieldError" });
   const descriptionId = useId({ prefix: "FieldDescription" });
 
-  const size = props.size ?? context.size ?? "m";
-  const hasError = !props.disabled && !!(error || context.error);
+  const size = props.size ?? context?.size ?? "m";
+  const hasError = !props.disabled && !!(error || context?.error);
 
   return (
     <div
@@ -57,11 +57,11 @@ const Field = ({
         "aria-invalid": hasError,
         "aria-describedby": cl({
           [descriptionId]: description,
-          [context.errorId ?? errorId]: hasError,
+          [context?.errorId ?? errorId]: hasError,
         }),
       })}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {hasError && !context.error && (
+        {hasError && !context?.error && (
           <ErrorMessage size={size}>{error}</ErrorMessage>
         )}
       </div>

@@ -1,19 +1,14 @@
 import { useContext } from "react";
-import { CheckboxProps, FieldsetContext } from "../../index";
-import useId from "../useId";
+import { CheckboxProps, omit } from "../../index";
+import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
 
-const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
-  const groupState = useContext(CheckboxGroupContext);
+const useCheckbox = ({ children, ...props }: CheckboxProps) => {
+  const checkboxGroup = useContext(CheckboxGroupContext);
 
-  const { error: fieldsetError, errorId: fieldsetErrorId } = useContext(
-    FieldsetContext
-  );
+  const { inputProps, ...rest } = useFormField(props, "checkbox");
 
-  const id = useId({ id: props.id, prefix: "Checkbox" });
-  const errorId = useId({ id: props.errorId, prefix: "CheckboxError" });
-
-  if (groupState) {
+  if (checkboxGroup) {
     if (props.checked) {
       console.warn(
         "`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead."
@@ -27,32 +22,20 @@ const useCheckbox = ({ children, size, ...props }: CheckboxProps) => {
   }
 
   return {
-    errorId,
-    showErrorMsg:
-      (groupState?.disabled || props.disabled) && props.error && !fieldsetError,
+    ...rest,
     inputProps: {
-      ...props,
-      id,
+      ...omit(props, ["size", "error", "errorId", "className"]),
+      ...inputProps,
       type: "checkbox",
-      "aria-invalid": !props.disabled && !!(props.error || fieldsetError),
-      "aria-describedby":
-        !props.disabled && (props.error || fieldsetError)
-          ? props.error
-            ? props.errorId
-              ? props.errorId
-              : errorId
-            : fieldsetErrorId
-          : undefined,
-      disabled: groupState?.disabled || props.disabled,
-      checked: groupState?.value
-        ? groupState.value.includes(props.value as string)
+      checked: checkboxGroup?.value
+        ? checkboxGroup.value.includes(props.value as string)
         : props.checked,
-      defaultChecked: groupState
-        ? groupState.defaultValue.includes(props.value as string)
+      defaultChecked: checkboxGroup
+        ? checkboxGroup.defaultValue.includes(props.value as string)
         : props.defaultChecked,
       onChange: (e) => {
         props.onChange && props.onChange(e);
-        groupState && groupState.toggleValue(props.value as string);
+        checkboxGroup && checkboxGroup.toggleValue(props.value as string);
       },
     },
   };

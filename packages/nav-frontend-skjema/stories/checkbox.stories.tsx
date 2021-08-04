@@ -46,13 +46,9 @@ export const checkbox = () => {
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
 
-      <CheckboxGruppe
-        legend="CheckboxGruppe med feil utenFeilPropagering legend"
-        feil="Her er det noe feil"
-        utenFeilPropagering
-      >
+      <CheckboxGruppe legend="CheckboxGruppe med feil utenFeilPropagering legend">
         <Checkbox label={"Bakerst"} />
-        <Checkbox label={"Midten"} feil disabled />
+        <Checkbox label={"Midten"} feil="Errormelding" />
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
     </div>

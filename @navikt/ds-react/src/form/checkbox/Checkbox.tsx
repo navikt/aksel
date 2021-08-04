@@ -12,11 +12,12 @@ export interface CheckboxProps
   className?: string;
   size?: "m" | "s";
   children: React.ReactNode;
+  description?: React.ReactNode;
   disabled?: boolean;
   /**
    * Error message
    */
-  error?: string;
+  error?: React.ReactNode | boolean;
   /**
    * Custom id for error message
    */
@@ -26,28 +27,35 @@ export interface CheckboxProps
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const context = useContext(FieldsetContext);
-  const { inputProps, errorId, showErrorMsg } = useCheckbox(props);
+  const { inputProps, errorId, showErrorMsg, hasError, size } = useCheckbox(
+    props
+  );
 
   return (
     <div
       className={cl(
         props.className,
         "navds-checkbox",
-        `navds-checkbox--${props.size ?? context.size ?? "m"}`,
+        `navds-checkbox--${size}`,
         "navds-body-short",
-        `navds-body--${props.size ?? context.size ?? "m"}`,
+        `navds-body--${size}`,
         {
-          "navds-checkbox--error":
-            !inputProps.disabled && (props.error || context.error),
+          "navds-checkbox--error": hasError,
+          "navds-checkbox--with-error-message": showErrorMsg,
+          "navds-checkbox--with-description": !!props.description,
         }
       )}
     >
       <input {...inputProps} className="navds-checkbox__input" ref={ref} />
-      <label htmlFor={inputProps.id} className="navds-checkbox__label">
+      <label htmlFor={inputProps.id} className={cl("navds-checkbox__label")}>
         {props.children}
       </label>
+
+      {props.description && (
+        <div className="navds-checkbox__description">{props.description}</div>
+      )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage>{props.error}</ErrorMessage>}
+        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
       </div>
     </div>
   );

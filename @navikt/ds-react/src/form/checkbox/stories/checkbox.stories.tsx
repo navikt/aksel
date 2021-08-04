@@ -90,6 +90,100 @@ export const Group = () => {
           Cherry
         </Checkbox>
       </CheckboxGroup>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error="error message"
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox error="Checkbox-spesific error" value="Banana">
+          Banana
+        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error="error message"
+        errorPropagation={false}
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox error="Checkbox-spesific error" value="Banana">
+          Banana
+        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error=""
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox error="Checkbox-spesific error" value="Banana">
+          Banana
+        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox error="Checkbox-spesific error" value="Banana">
+          Banana
+        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+      <h2>With description</h2>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Banana">Banana</Checkbox>
+        <Checkbox description="Checkbox description" value="Orange">
+          Orange
+        </Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+      <h2>Size "s"</h2>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        size="s"
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Banana">Banana</Checkbox>
+        <Checkbox description="Checkbox description" value="Orange">
+          Orange
+        </Checkbox>
+        <Checkbox error="testerror" value="Melon">
+          Melon
+        </Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
     </>
   );
 };

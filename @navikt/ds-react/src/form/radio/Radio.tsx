@@ -34,6 +34,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     required,
     ...rest
   } = props;
+
   if (required !== undefined) {
     console.warn("required is only supported on <RadioGroup>.");
   }

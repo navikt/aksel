@@ -4,7 +4,6 @@ import { forwardRef } from "react";
 import { Fieldset, FieldsetProps } from "..";
 
 export interface CheckboxGroupState {
-  readonly disabled: boolean;
   readonly defaultValue: readonly string[];
   readonly value?: readonly string[];
   toggleValue(value: string): void;
@@ -15,7 +14,6 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
 );
 
 export interface CheckboxGroupProps extends Omit<FieldsetProps, "onChange"> {
-  disabled?: boolean;
   value?: string[];
   defaultValue?: string[];
   onChange?: (value: string[]) => void;
@@ -26,7 +24,6 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
     {
       value,
       defaultValue = [],
-      disabled = false,
       onChange = () => {},
       children,
       className,
@@ -40,12 +37,15 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
       <Fieldset
         {...rest}
         ref={ref}
-        className={cl(className, "navds-checkbox-group")}
+        className={cl(
+          className,
+          "navds-checkbox-group",
+          `navds-checkbox-group--${rest.size}`
+        )}
       >
         <CheckboxGroupContext.Provider
           value={{
             value,
-            disabled,
             defaultValue,
             toggleValue: (value: string) =>
               onChange(
