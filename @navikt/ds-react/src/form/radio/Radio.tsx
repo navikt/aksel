@@ -40,7 +40,6 @@ const useRadio = (props: RadioProps) => {
   const disabled = radioGroup?.disabled || props.disabled;
   return {
     inputProps: {
-      ...props,
       name: radioGroup?.name,
       checked:
         (radioGroup?.value ?? radioGroup?.defaultValue) === props.value
@@ -72,7 +71,16 @@ const useRadio = (props: RadioProps) => {
 };
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { className, children, required } = props;
+  const {
+    className,
+    size,
+    children,
+    error,
+    errorId,
+    id,
+    required,
+    ...rest
+  } = props;
   if (required !== undefined) {
     console.warn("required is only supported on <RadioGroup>.");
   }
@@ -88,8 +96,8 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     <div
       className={cl(
         "navds-form__element",
-        "navds-body-short",
         `navds-body--${_size}`,
+        "navds-body-short",
         {
           "navds-radio--error": showErrorStyle,
         }
