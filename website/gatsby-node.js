@@ -167,6 +167,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       }
     }
   `);
+
   result.data.allGithubFile.edges
     .filter(({ node }) => node.path.endsWith(".md"))
     .forEach(({ node }) => {

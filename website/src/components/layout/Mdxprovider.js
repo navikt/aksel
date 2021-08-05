@@ -33,7 +33,6 @@ export const comps = {
   Cog,
   Example,
   table: (props) => {
-    console.log(props);
     return <table className="tabell">{props.children}</table>;
   },
 };

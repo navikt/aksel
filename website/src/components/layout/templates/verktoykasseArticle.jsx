@@ -2,6 +2,7 @@ import React from "react";
 import rehypeReact from "rehype-react";
 import { comps } from "../Mdxprovider";
 import { GithubLogo } from "../../assets/images/svg";
+import { InlineCode } from "../../code/Code";
 import {
   Innholdstittel,
   Systemtittel,
@@ -96,6 +97,7 @@ const renderAst = new rehypeReact({
       registerHeadline(props, (props) => <Undertittel tag="h3" {...props} />),
     h4: (props) =>
       registerHeadline(props, (props) => <Undertittel tag="h4" {...props} />),
+    inlineCode: (props) => <InlineCode {...props} />,
   },
 }).Compiler;
 
