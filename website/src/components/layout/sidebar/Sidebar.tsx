@@ -102,32 +102,42 @@ const Sidebar = ({ location, className = "" }) => {
         <ul className="nav-list">
           {result.length > 0 && (
             <AnimatePresence>
-              {result.map(({ link, title, componentPath }, index) => {
+              {result.map(({ link, title, componentPath, heading }, index) => {
                 return (
-                  <motion.li
-                    initial={{ x: -10, opacity: 0 }}
-                    animate={{
-                      x: 0,
-                      opacity: 1,
-                      transition: { duration: 0.2 },
-                    }}
-                    exit={{ x: 10, opacity: 0, transition: { duration: 0.2 } }}
-                    key={index}
-                  >
-                    <Link to={link} className={cls(link, location)}>
-                      {title}
-                      {isBeta(componentPath) && (
-                        <EtikettFokus>
-                          <Undertekst>Beta</Undertekst>
-                        </EtikettFokus>
-                      )}
-                      {isStyle(componentPath) && (
-                        <EtikettInfo>
-                          <Undertekst>CSS</Undertekst>
-                        </EtikettInfo>
-                      )}
-                    </Link>
-                  </motion.li>
+                  <div key={index + title}>
+                    {heading && (
+                      <Systemtittel tag="div" style={{ marginTop: "1rem" }}>
+                        {heading}
+                      </Systemtittel>
+                    )}
+                    <motion.li
+                      initial={{ x: -10, opacity: 0 }}
+                      animate={{
+                        x: 0,
+                        opacity: 1,
+                        transition: { duration: 0.2 },
+                      }}
+                      exit={{
+                        x: 10,
+                        opacity: 0,
+                        transition: { duration: 0.2 },
+                      }}
+                    >
+                      <Link to={link} className={cls(link, location)}>
+                        {title}
+                        {isBeta(componentPath) && (
+                          <EtikettFokus>
+                            <Undertekst>Beta</Undertekst>
+                          </EtikettFokus>
+                        )}
+                        {isStyle(componentPath) && (
+                          <EtikettInfo>
+                            <Undertekst>CSS</Undertekst>
+                          </EtikettInfo>
+                        )}
+                      </Link>
+                    </motion.li>
+                  </div>
                 );
               })}
             </AnimatePresence>

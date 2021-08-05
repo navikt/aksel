@@ -49,9 +49,9 @@ const getToc = (toc) => {
               </Lenke>
               {item.items && item.items.length !== 0 && (
                 <ol className="toc-level toc-level-2">
-                  {item.items.map((lvl3) => {
+                  {item.items.map((lvl3, x) => {
                     return (
-                      <li key={item.url} className="toc-item toc-item-h3">
+                      <li key={item.url + x} className="toc-item toc-item-h3">
                         <Lenke href={lvl3.url} className="toc-link toc-link-h3">
                           {lvl3.title}
                         </Lenke>

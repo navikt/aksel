@@ -160,6 +160,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               htmlAst
               frontmatter {
                 title
+                rank
+                heading
               }
             }
           }
