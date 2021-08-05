@@ -2,6 +2,7 @@ import React from "react";
 import rehypeReact from "rehype-react";
 import { comps } from "../Mdxprovider";
 import { GithubLogo } from "../../assets/images/svg";
+import { InlineCode } from "../../code/Code";
 import {
   Innholdstittel,
   Systemtittel,
@@ -48,9 +49,9 @@ const getToc = (toc) => {
               </Lenke>
               {item.items && item.items.length !== 0 && (
                 <ol className="toc-level toc-level-2">
-                  {item.items.map((lvl3) => {
+                  {item.items.map((lvl3, x) => {
                     return (
-                      <li key={item.url} className="toc-item toc-item-h3">
+                      <li key={item.url + x} className="toc-item toc-item-h3">
                         <Lenke href={lvl3.url} className="toc-link toc-link-h3">
                           {lvl3.title}
                         </Lenke>
@@ -96,6 +97,7 @@ const renderAst = new rehypeReact({
       registerHeadline(props, (props) => <Undertittel tag="h3" {...props} />),
     h4: (props) =>
       registerHeadline(props, (props) => <Undertittel tag="h4" {...props} />),
+    inlineCode: (props) => <InlineCode {...props} />,
   },
 }).Compiler;
 

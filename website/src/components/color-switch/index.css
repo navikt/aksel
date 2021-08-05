@@ -11,6 +11,7 @@
   box-shadow: var(--navds-shadow-hover);
   transform: translateY(0.2rem);
   border: 1px solid var(--navds-color-darkgray);
+  min-height: 2rem;
 }
 
 .colorswitch__button--none.navds-button {
