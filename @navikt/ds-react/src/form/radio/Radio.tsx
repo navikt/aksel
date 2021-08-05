@@ -21,57 +21,56 @@ export interface RadioProps
    */
   errorId?: string;
   value: string;
+  description?: React.ReactNode;
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const {
-    className,
-    size,
-    children,
-    error,
-    errorId,
-    id,
-    required,
-    ...rest
-  } = props;
+  const { className, children, required } = props;
 
   if (required !== undefined) {
     console.warn("required is only supported on <RadioGroup>.");
   }
   const {
     inputProps,
-    _errorId,
-    showErrorStyle,
+    errorId,
     showErrorMsg,
-    _size,
+    size,
+    hasError,
+    inputDescriptionId,
   } = useRadio(props);
 
   return (
     <div
       className={cl(
         "navds-form__element",
-        `navds-body--${_size}`,
+        `navds-body--${size}`,
         "navds-body-short",
         {
-          "navds-radio--error": showErrorStyle,
+          "navds-radio--error": hasError,
+          "navds-radio--with-error-message": showErrorMsg,
+          "navds-radio--with-description": !!props.description,
         }
       )}
     >
       <input
         {...inputProps}
-        {...rest}
         ref={ref}
-        className={cl("navds-radio", className, `navds-radio--${_size}`)}
+        className={cl("navds-radio", className, `navds-radio--${size}`)}
       />
       <label
         htmlFor={inputProps.id}
         className={cl("navds-radio__label", "navds-body-short", {
-          "navds-body--s": _size,
+          "navds-body--s": size,
         })}
       >
         {children}
       </label>
-      <div id={_errorId} aria-relevant="additions removals" aria-live="polite">
+      {props.description && (
+        <div id={inputDescriptionId} className="navds-radio__description">
+          {props.description}
+        </div>
+      )}
+      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage>{props.error}</ErrorMessage>}
       </div>
     </div>

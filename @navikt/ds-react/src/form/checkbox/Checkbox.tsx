@@ -26,10 +26,14 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const context = useContext(FieldsetContext);
-  const { inputProps, errorId, showErrorMsg, hasError, size } = useCheckbox(
-    props
-  );
+  const {
+    inputProps,
+    errorId,
+    showErrorMsg,
+    hasError,
+    size,
+    inputDescriptionId,
+  } = useCheckbox(props);
 
   return (
     <div
@@ -52,7 +56,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       </label>
 
       {props.description && (
-        <div className="navds-checkbox__description">{props.description}</div>
+        <div id={inputDescriptionId} className="navds-checkbox__description">
+          {props.description}
+        </div>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
