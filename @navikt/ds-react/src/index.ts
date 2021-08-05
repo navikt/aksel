@@ -12,6 +12,12 @@ export { Accordion, AccordionProps } from "./accordion/index";
 export { Alert, AlertProps } from "./alert/index";
 export { Button, ButtonProps } from "./button/index";
 export {
+  SpeechBubble,
+  SpeechBubbleProps,
+  Bubble,
+  BubbleProps,
+} from "./speech-bubble/index";
+export {
   ContentContainer,
   ContentContainerProps,
 } from "./content-container/index";
@@ -38,6 +44,7 @@ export { Tag, TagProps } from "./tag/index";
 export { LinkPanel, LinkPanelProps, LinkPanelTitle } from "./link-panel/index";
 export { Panel, PanelProps } from "./panel/index";
 export { MicroCard, MicroCardProps } from "./card/index";
+export { Loader, LoaderProps } from "./loader/index";
 export {
   Title,
   Ingress,

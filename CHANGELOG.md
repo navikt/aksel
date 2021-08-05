@@ -1,6 +1,58 @@
 # Endringslogg
 
-## 02. Juni 2021
+
+## Juli 2021
+
+### SpeechBubble komponent lagt til i ds-react
+
+- Oppdatert SpeechBubble kode og design lagt til i ds-react pakken
+
+### Loader komponent i ds-react (spinner)
+
+- Loader er nå oppdatert og lagt til i ds-react
+
+### Oppdatert AccordionMenu
+
+- AccordionMenu har fått oppdatert design for å synce med figma
+
+### MicroCard komponent
+
+- Liten tag brukt for lenger i produktsider er lagt tilk i ds-react
+
+### Oppdatert styling for ds-react komponenter + button
+
+- Action/Hoved knapp og Danger/Fare knapp har fått oppdatert styling i ds-react og nav-frontend-knapper
+- I tillegg har noen komponenter ds-css fått justert styling for å matche Figma bedre.
+
+### Ny Header komponent for produktsider i ds-react
+
+[#1128](https://github.com/navikt/nav-frontend-moduler/pull/1128)
+
+### Fikset RefAttributes for Accordion
+
+[#1122](https://github.com/navikt/nav-frontend-moduler/pull/1122)
+
+- Ref er satt til type HTMLButtonElement nå istedenfor HTMLDivElement. 
+- Fikser SSR/CSR problem med forskjellige id-er som ble laget på server vs client.
+
+## Juni 2021
+
+### Verktøykasse MVP
+
+- MVP for verktøykassen ble publisert til design.nav.no
+
+### Fjernet smoothscroll fra ds-css 
+
+[#1123](https://github.com/navikt/nav-frontend-moduler/pull/1123)
+
+- ds-css pakken defaulter ikke til at smoothscroll er satt. Dette er gjort av UU årsaker.
+
+
+### Linkpanel lagt til i `ds-react`-pakken
+
+### Nytt typo-oppsett for ds-react, ds-css og ds-tokens
+
+[#1079](https://github.com/navikt/nav-frontend-moduler/pull/1079)
 
 ### Nytt typo-oppsett for ds-react, ds-css og ds-tokens
 

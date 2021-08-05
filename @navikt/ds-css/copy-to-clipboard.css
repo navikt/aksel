@@ -3,6 +3,7 @@
   align-items: center;
   column-gap: 0.5em;
   padding: var(--navds-spacing-1);
+  min-height: 32px;
 }
 
 .navds-copy-to-clipboard__popover {

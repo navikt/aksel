@@ -1,0 +1,14 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { AccordionAnchorMenu } from "../../index";
+import { Success } from "@navikt/ds-react";
+
+<Meta title="ds-react/accordion-anchor-menu/intro" />
+
+# AccordionAnchorMenu
+
+NOTE: Komponenten er ikke oppdatert og er veldig buggy. Ville ungått bruk av denne om mulig og bare brukt
+vanlig `AccordionMenu`. Hvorvidt vi kommer til å oppdatere denne og ta den med i 1.0 er usikkert.
+
+`AccordionAnchorMenu` er en meny-komponent som implementerer `AccordionMenu` med context
+for lytting på aktiv anchor/heading. Dette vil si at active-state settes automatisk.
+når man scroller forbi den relevante linken på siden.

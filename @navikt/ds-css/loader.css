@@ -1,0 +1,105 @@
+.navds-loader {
+  width: 1.5rem;
+  display: inline-block;
+  position: relative;
+  animation: loader-rotate 1.4s linear infinite;
+}
+
+.navds-loader__foreground {
+  animation: loader-dasharray 1.4s ease-in-out infinite;
+  stroke-dasharray: 80px, 200px;
+  stroke-dashoffset: 0;
+  stroke: var(--navds-color-gray-40);
+}
+
+.navds-loader__background {
+  stroke: var(--navds-color-gray-10);
+}
+
+.navds-loader--neutral .navds-loader__foreground {
+  stroke: var(--navds-color-gray-40);
+}
+
+.navds-loader--interaction .navds-loader__foreground {
+  stroke: var(--navds-color-blue-50);
+}
+
+.navds-loader--inverted .navds-loader__foreground {
+  stroke: white;
+}
+
+.navds-loader--inverted .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-loader--transparent .navds-loader__background {
+  stroke: transparent;
+}
+
+.navds-loader--2xl {
+  width: 4rem;
+}
+
+.navds-loader--xl {
+  width: 2.5rem;
+}
+
+.navds-loader--l {
+  width: 2rem;
+}
+
+.navds-loader--m {
+  width: 1.5rem;
+}
+
+.navds-loader--s {
+  width: 1.25rem;
+}
+
+.navds-loader--xs {
+  width: 1rem;
+}
+
+/*
+ * Button spesific styling
+ */
+
+.navds-button .navds-loader .navds-loader__foreground {
+  stroke: currentColor;
+}
+
+.navds-button:hover .navds-loader .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-button:active .navds-loader .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+.navds-button--action .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
+  stroke: rgba(255, 255, 255, 0.3);
+}
+
+@keyframes loader-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loader-dasharray {
+  0% {
+    stroke-dasharray: 1px, 200px;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -15px;
+  }
+
+  100% {
+    stroke-dasharray: 100px, 200px;
+    stroke-dashoffset: -120px;
+  }
+}

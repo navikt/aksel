@@ -1,0 +1,81 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { LinkPanel, LinkPanelTitle } from "../../index";
+import { Success } from "@navikt/ds-react";
+import { Illustration } from "./illustration";
+
+<Meta title="ds-react/linkPanel/intro" />
+
+# Hvordan ta i bruk LinkPanel
+
+Komponenten fungerer relativt likt son `nav-frontend-lenkepanel`
+
+```jsx
+<LinkPanel href="#">Dette er en tekstlenke</LinkPanel>
+```
+
+<Canvas>
+  <LinkPanel href="#">Dette er en tekstlenke</LinkPanel>
+</Canvas>
+
+## Uten border
+
+```jsx
+<LinkPanel href="#" border={false}>
+  Dette er en tekstlenke
+</LinkPanel>
+```
+
+<Canvas>
+  <LinkPanel href="#" border={false}>
+    Dette er en tekstlenke
+  </LinkPanel>
+</Canvas>
+
+## Custom styling
+
+Kan her ta i bruk `<LinkPanelTitle />` for å få riktig styling på lenke-tittel.
+
+```jsx
+<LinkPanel href="#" style={{ textDecoration: "none" }}>
+  <div
+    style={{
+      padding: "1rem",
+      display: "grid",
+      gridAutoFlow: "column",
+      gap: "2rem",
+      alignItems: "center",
+    }}
+  >
+    {Illustration}
+    <div>
+      <LinkPanelTitle>Dagpenger</LinkPanelTitle>
+      <p>
+        Du kan få dagpenger når du er arbeidsledig og har mistet inntekten din.
+      </p>
+    </div>
+  </div>
+</LinkPanel>
+```
+
+<Canvas>
+  <LinkPanel href="#" style={{ textDecoration: "none" }}>
+    <div
+      style={{
+        padding: "1rem",
+        display: "grid",
+        gridAutoFlow: "column",
+        gap: "2rem",
+        alignItems: "center",
+      }}
+    >
+      {Illustration}
+      <div>
+        <LinkPanelTitle>Dagpenger</LinkPanelTitle>
+        <p>
+          Du kan få dagpenger når du er arbeidsledig og har mistet inntekten
+          din.
+        </p>
+      </div>
+    </div>
+  </LinkPanel>
+</Canvas>
