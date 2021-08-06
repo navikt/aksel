@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import useId from "./useId";
-import Field from "./Field";
 import ErrorMessage from "./ErrorMessage";
 import { BodyShort, Label } from "../typography";
 import { GenericFormProps, useFormField } from "./useFormField";

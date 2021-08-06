@@ -11,5 +11,5 @@ export {
   FieldsetProps,
 } from "./Fieldset";
 export { default as TextField, TextFieldProps } from "./TextField";
-export { default as Textarea, TextareaProps } from "./Textarea";
+export { default as Textarea, TextareaProps, Counter } from "./Textarea";
 export { default as Select, SelectProps } from "./Select";
