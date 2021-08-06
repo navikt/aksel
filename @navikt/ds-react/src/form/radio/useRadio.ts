@@ -1,16 +1,11 @@
 import { useContext } from "react";
-import { FieldsetContext } from "..";
 import { omit } from "../..";
 import { useFormField } from "../useFormField";
-import useId from "../useId";
 import { RadioProps } from "./Radio";
 import { RadioGroupContext } from "./RadioGroup";
 
 export const useRadio = (props: RadioProps) => {
   const radioGroup = useContext(RadioGroupContext);
-  /* const { error: fieldsetError, errorId: fieldsetErrorId, size } = useContext(
-    FieldsetContext
-  ); */
 
   const { inputProps, ...rest } = useFormField(props, "radio");
 
@@ -21,7 +16,14 @@ export const useRadio = (props: RadioProps) => {
   return {
     ...rest,
     inputProps: {
-      ...omit(props, ["size", "error", "errorId", "className"]),
+      ...omit(props, [
+        "children",
+        "size",
+        "error",
+        "errorId",
+        "className",
+        "description",
+      ]),
       ...inputProps,
       name: radioGroup?.name,
       checked:

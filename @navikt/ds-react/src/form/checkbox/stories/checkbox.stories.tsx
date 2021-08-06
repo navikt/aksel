@@ -58,6 +58,22 @@ export const Group = () => {
           Cherry
         </Checkbox>
       </CheckboxGroup>
+      <h2>All disabled</h2>
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error="error message"
+        defaultValue={["Banana", "Orange"]}
+        disabled
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Banana">Banana</Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
 
       <CheckboxGroup
         legend="Controlled checkbox group"

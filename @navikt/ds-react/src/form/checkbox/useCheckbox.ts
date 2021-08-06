@@ -24,7 +24,14 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   return {
     ...rest,
     inputProps: {
-      ...omit(props, ["size", "error", "errorId", "className"]),
+      ...omit(props, [
+        "children",
+        "size",
+        "error",
+        "errorId",
+        "className",
+        "description",
+      ]),
       ...inputProps,
       type: "checkbox",
       checked: checkboxGroup?.value

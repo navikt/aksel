@@ -43,6 +43,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   return (
     <div
       className={cl(
+        props.className,
         "navds-form__element",
         `navds-body--${size}`,
         "navds-body-short",
@@ -64,7 +65,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
           "navds-body--s": size,
         })}
       >
-        {children}
+        {props.children}
       </label>
       {props.description && (
         <div id={inputDescriptionId} className="navds-radio__description">

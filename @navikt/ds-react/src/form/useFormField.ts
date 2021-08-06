@@ -29,11 +29,11 @@ export const useFormField = (props: any, prefix?: string) => {
     errorId: errorId,
     inputDescriptionId,
     size: size ? size : fieldset?.size ?? "m",
-    disabled,
     inputProps: {
       id,
       "aria-invalid": hasError,
       "aria-describedby": describedBy.length > 0 ? describedBy : undefined,
+      disabled,
     },
   };
 

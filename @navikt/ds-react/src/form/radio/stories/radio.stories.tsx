@@ -27,17 +27,16 @@ export const All = () => {
         <Radio value="apple">Apple</Radio>
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
-      <RadioGroup
-        legend="Radio group label"
-        value={selected}
-        onChange={setSelected}
-      >
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <button>Submit</button>
       <RadioGroup legend="Radio group label" error="Error message...">
         <Radio value="apple">Apple</Radio>
+        <Radio value="orange">Orange</Radio>
+        <Radio disabled value="orange">
+          Orange
+        </Radio>
+      </RadioGroup>
+      <RadioGroup disabled legend="Radio group label" error="Error message...">
+        <Radio value="apple">Apple</Radio>
+        <Radio value="orange">Orange</Radio>
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
     </form>

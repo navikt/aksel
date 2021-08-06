@@ -11,7 +11,6 @@ export interface RadioGroupContextProps {
   onChange: (value: string) => void;
   required: boolean;
   autoFocus?: boolean;
-  readonly disabled?: boolean;
 }
 
 export const RadioGroupContext = React.createContext<RadioGroupContextProps | null>(
@@ -25,7 +24,6 @@ export interface RadioGroupProps extends Omit<FieldsetProps, "onChange"> {
   onChange?: (value: string) => void;
   required?: boolean;
   autoFocus?: boolean;
-  disabled?: boolean;
 }
 
 const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
@@ -39,7 +37,6 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       onChange = () => {},
       required = false,
       autoFocus,
-      disabled = false,
       ...rest
     },
     ref
@@ -58,7 +55,6 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
             onChange,
             required,
             autoFocus,
-            disabled,
           }}
         >
           <div className="navds-radio-buttons">{children}</div>
