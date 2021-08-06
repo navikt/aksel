@@ -1,11 +1,19 @@
 .navds-textarea {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  /* gap: 8px; */
+}
+
+.navds-textarea > *:not(:first-child):not(:empty) {
+  margin-top: 8px;
+}
+
+.navds-textarea--s > *:not(:first-child):not(:empty) {
+  margin-top: 4px;
 }
 
 .navds-textarea--s {
-  gap: 4px;
+  /* gap: 4px; */
 }
 
 .navds-textarea__wrapper {
