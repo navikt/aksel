@@ -2,7 +2,10 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  position: relative;
+}
+
+.navds-select--s {
+  gap: 4px;
 }
 
 .navds-select__input {

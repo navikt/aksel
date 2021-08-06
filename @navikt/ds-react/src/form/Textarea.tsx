@@ -3,27 +3,21 @@ import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import useId from "./useId";
 import Field from "./Field";
+import ErrorMessage from "./ErrorMessage";
+import { BodyShort, Label } from "../typography";
+import { GenericFormProps, useFormField } from "./useFormField";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
  */
 export interface TextareaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+  extends GenericFormProps,
+    React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * @ignore
    */
   className?: string;
-  size?: "m" | "s";
   label?: React.ReactNode;
-  description?: React.ReactNode;
-  /**
-   * Error message
-   */
-  error?: string;
-  /**
-   * Custom id for error message
-   */
-  errorId?: string;
   /**
    * Visually allowed length of content
    */
@@ -41,66 +35,106 @@ export interface TextareaProps
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ maxLength, ...props }, ref) => {
+  (props, ref) => {
+    const {
+      inputProps,
+      errorId,
+      showErrorMsg,
+      hasError,
+      size,
+      inputDescriptionId,
+    } = useFormField(props, "textarea");
+
+    const { label, className, description, maxLength, ...rest } = props;
+
     const maxLengthId = useId({ prefix: "TextareaMaxLength" });
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     return (
-      <Field {...props}>
-        {({ className, size, ...rest }) => (
-          <div className="navds-textarea__wrapper">
-            <TextareaAutosize
-              {...rest}
-              ref={ref}
-              className={cl(
-                className,
-                "navds-textarea",
-                `navds-textarea--${size}`,
-                "navds-body-short",
-                {
-                  "navds-body--s": size === "s",
-                  "navds-textarea--counter": hasMaxLength,
-                }
-              )}
-              aria-describedby={cl(rest["aria-describedby"], {
-                [maxLengthId]: hasMaxLength,
-              })}
-            />
-            {hasMaxLength && (
-              <>
-                <span id={maxLengthId} className="sr-only">
-                  Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
-                  {maxLength} signs.
-                </span>
-                <Counter
-                  maxLength={maxLength}
-                  currentLength={props.value.length}
-                  size={size}
-                />
-              </>
-            )}
-          </div>
+      <div
+        className={cl(
+          props.className,
+          "navds-textarea",
+          `navds-textarea--${size}`,
+          { "navds-textarea--error": hasError }
         )}
-      </Field>
+      >
+        {!!label && (
+          <Label
+            htmlFor={inputProps.id}
+            size={size}
+            component="label"
+            className="navds-textarea__label"
+          >
+            {label}
+          </Label>
+        )}
+        {!!description && (
+          <BodyShort
+            className="navds-textarea__description"
+            id={inputDescriptionId}
+            size={size}
+          >
+            {description}
+          </BodyShort>
+        )}
+        <div className="navds-textarea__wrapper">
+          <TextareaAutosize
+            {...inputProps}
+            {...rest}
+            ref={ref}
+            className={cl(
+              className,
+              "navds-textarea__input",
+              "navds-body-short",
+              {
+                "navds-body--s": size === "s",
+                "navds-textarea--counter": hasMaxLength,
+              }
+            )}
+            aria-describedby={cl(inputProps["aria-describedby"], {
+              [maxLengthId]: hasMaxLength,
+            })}
+          />
+          {hasMaxLength && (
+            <>
+              <span id={maxLengthId} className="sr-only">
+                Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
+                {maxLength} signs.
+              </span>
+              <Counter
+                maxLength={maxLength}
+                currentLength={props.value.length}
+                size={size}
+              />
+            </>
+          )}
+        </div>
+        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+          {showErrorMsg && (
+            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+          )}
+        </div>
+      </div>
     );
   }
 );
 
-const Counter = ({ maxLength, currentLength, size }) => {
+export const Counter = ({ maxLength, currentLength, size }) => {
   const difference = maxLength - currentLength;
 
   return (
-    <p
-      className={cl("navds-textarea__counter", "navds-body-short", {
-        "navds-body--s": size === "s",
+    <BodyShort
+      className={cl("navds-textarea__counter", {
         "navds-textarea__counter--error": difference < 0,
       })}
       aria-live="polite"
+      size={size}
     >
       {difference < 0
         ? `Du har ${Math.abs(difference)} tegn for mye`
         : `Du har ${difference} tegn igjen`}
-    </p>
+    </BodyShort>
   );
 };
 

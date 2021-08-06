@@ -1,9 +1,19 @@
+.navds-textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navds-textarea--s {
+  gap: 4px;
+}
+
 .navds-textarea__wrapper {
   position: relative;
   width: 100%;
 }
 
-.navds-textarea {
+.navds-textarea__input {
   appearance: none;
   padding: var(--navds-spacing-2);
   background-color: white;
@@ -20,21 +30,21 @@
   padding-bottom: var(--navds-spacing-8);
 }
 
-.navds-textarea:hover {
+.navds-textarea__input:hover {
   border-color: var(--navds-color-blue-50);
 }
 
-.navds-textarea:focus {
+.navds-textarea__input:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-textarea--s {
+.navds-textarea--s .navds-textarea__input {
   padding: var(--navds-spacing-1);
   min-height: 32px;
 }
 
-.navds-textarea--counter.navds-textarea--s {
+.navds-textarea--s .navds-textarea--counter.navds-textarea__input {
   padding-bottom: var(--navds-spacing-7);
 }
 
@@ -56,7 +66,8 @@
 /**
   Error handling
 */
-.navds-field--error .navds-textarea:not(:hover):not(:focus):not(:disabled) {
+.navds-textarea--error
+  .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
@@ -65,15 +76,15 @@
   TODO: Oppdater denne til riktige farger
   Disabled handling
  */
-.navds-textarea:disabled,
-.navds-textarea[readonly] {
+.navds-textarea__input:disabled,
+.navds-textarea__input[readonly] {
   background-color: #f1f1f1;
   border-color: #6a6a6a;
   box-shadow: none;
   color: #262626;
 }
 
-.navds-text-input:disabled:hover,
-.navds-text-input[readonly]:hover {
+.navds-text-input__input:disabled:hover,
+.navds-text-input__input[readonly]:hover {
   cursor: not-allowed;
 }
