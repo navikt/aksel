@@ -39,7 +39,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         { "navds-text-field--error": hasError }
       )}
     >
-      <Label size={size} component="legend" className="navds-text-field__label">
+      <Label size={size} component="label" className="navds-text-field__label">
         {label}
       </Label>
       {!!description && (

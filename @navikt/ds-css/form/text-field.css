@@ -1,4 +1,14 @@
-.navds-text-input {
+.navds-text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.navds-text-field--s {
+  gap: 4px;
+}
+
+.navds-text-field__input {
   appearance: none;
   padding: 0.5rem;
   background-color: white;
@@ -9,16 +19,16 @@
   width: 100%;
 }
 
-.navds-text-input--s {
+.navds-text-field--s > .navds-text-field__input {
   padding: 0.25rem;
   min-height: 32px;
 }
 
-.navds-text-input:hover {
+.navds-text-field__input:hover {
   border-color: var(--navds-color-blue-50);
 }
 
-.navds-text-input:focus {
+.navds-text-field__input:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
@@ -27,7 +37,8 @@
   Error handling
 */
 
-.navds-field--error > .navds-text-input:not(:hover):not(:focus):not(:disabled) {
+.navds-text-field--error
+  > .navds-text-field__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
@@ -36,15 +47,15 @@
   TODO: Oppdater denne til riktige farger
   Disabled handling
  */
-.navds-text-input:disabled,
-.navds-text-input[readonly] {
+.navds-text-field__input:disabled,
+.navds-text-field__input[readonly] {
   background-color: #f1f1f1;
   border-color: #6a6a6a;
   box-shadow: none;
   color: #262626;
 }
 
-.navds-text-input:disabled:hover,
-.navds-text-input[readonly]:hover {
+.navds-text-field__input:disabled:hover,
+.navds-text-field__input[readonly]:hover {
   cursor: not-allowed;
 }

@@ -1,7 +1,6 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef } from "react";
 import { BodyShort, Label } from "../typography";
-import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
 import { useFormField } from "./useFormField";
 

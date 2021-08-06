@@ -9,8 +9,14 @@
 /* Disabled because of UU concerns */
 /* @import "smooth-scroll.css"; */
 
-* {
+html {
   box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
 body {
