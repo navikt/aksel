@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { TextField, Select } from "../..";
+import { TextField } from "../..";
 export default {
   title: "ds-react/form",
 } as Meta;

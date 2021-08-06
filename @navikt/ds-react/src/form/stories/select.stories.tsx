@@ -46,6 +46,7 @@ export const All = () => {
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
         <option value="danmark">Danmark</option>
+        <option value="Bosnia-Hercegovina">Bosnia-Hercegovina</option>
       </Select>
       <Select
         label="Hvilken land er best om sommeren?"
