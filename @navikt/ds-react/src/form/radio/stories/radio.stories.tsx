@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { RadioGroup, Radio } from "..";
 export default {
@@ -7,8 +7,6 @@ export default {
 } as Meta;
 
 export const All = () => {
-  const [selected, setSelected] = useState<string>("orange");
-
   return (
     <form>
       <RadioGroup legend="Radio group label">
@@ -24,7 +22,9 @@ export const All = () => {
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
       <RadioGroup legend="Radio group label" defaultValue="apple">
-        <Radio value="apple">Apple</Radio>
+        <Radio value="apple" disabled>
+          Apple
+        </Radio>
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
       <RadioGroup legend="Radio group label" error="Error message...">
@@ -37,6 +37,65 @@ export const All = () => {
       <RadioGroup disabled legend="Radio group label" error="Error message...">
         <Radio value="apple">Apple</Radio>
         <Radio value="orange">Orange</Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
+      <RadioGroup legend="Radio group label" error="Error message...">
+        <Radio value="apple">Apple</Radio>
+        <Radio error="radio-spesific errormsg" value="orange">
+          Orange
+        </Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
+      <RadioGroup legend="Radio group label" error="Error message...">
+        <Radio value="apple">Apple</Radio>
+        <Radio
+          description="Radio description"
+          error="radio-spesific errormsg"
+          value="orange"
+        >
+          Orange
+        </Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
+      <RadioGroup
+        errorPropagation={false}
+        legend="Radio group label"
+        description="Radio with description"
+        error="Error message..."
+      >
+        <Radio value="apple">Apple</Radio>
+        <Radio error="radio-spesific errormsg" value="orange">
+          Orange
+        </Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
+      <RadioGroup
+        errorPropagation={false}
+        legend="Radio group label"
+        description="Radio with description"
+        error="Error message..."
+      >
+        <Radio description="Radio description for input" value="apple">
+          Apple
+        </Radio>
+        <Radio error="radio-spesific errormsg" value="orange">
+          Orange
+        </Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
+      <h2>size s</h2>
+      <RadioGroup
+        legend="Radio group label"
+        description="Radio with description"
+        error="Error message..."
+        size="s"
+      >
+        <Radio description="Radio description for input" value="apple">
+          Apple
+        </Radio>
+        <Radio error="radio-spesific errormsg" value="orange">
+          Orange
+        </Radio>
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
     </form>

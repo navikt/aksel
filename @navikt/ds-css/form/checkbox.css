@@ -32,6 +32,14 @@
   padding-bottom: 0;
 }
 
+.navds-checkbox .navds-error-message {
+  margin-top: var(--navds-spacing-3);
+}
+
+.navds-checkbox--with-description .navds-error-message {
+  margin-top: 0;
+}
+
 .navds-checkbox--with-error-message {
   padding-bottom: var(--navds-spacing-2);
 }
@@ -53,7 +61,7 @@
 .navds-checkbox--s > .navds-checkbox__input {
   width: 24px;
   height: 24px;
-  top: 10px;
+  top: 2px;
   left: 0;
 }
 

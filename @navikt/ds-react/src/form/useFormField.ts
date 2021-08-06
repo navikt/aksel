@@ -3,24 +3,33 @@ import { useContext } from "react";
 import { FieldsetContext } from ".";
 import useId from "./useId";
 
-export const useFormField = (props: any, prefix?: string) => {
+export interface GenericFormProps {
+  error?: React.ReactNode;
+  errorId?: string;
+  size?: "m" | "s";
+  disabled?: boolean;
+  description?: React.ReactNode;
+  id?: string;
+}
+
+export const useFormField = (props: GenericFormProps, prefix?: string) => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
 
   const id = useId({ id: props.id, prefix: prefix ?? "" });
   const errorId = useId({ id: propErrorId, prefix: prefix + "Error" ?? "" });
-  const inputDescriptionId = useId({ prefix: "checkboxDescription" });
+  const inputDescriptionId = useId({ prefix: prefix + "Description" });
 
   const disabled = fieldset?.disabled || props.disabled;
-  const hasError = !disabled && (error || fieldset?.error);
+  const hasError: boolean = !disabled && !!(error || fieldset?.error);
   const renderError = !!error && typeof error !== "boolean";
 
-  const describedBy = cl({
+  const describedBy: string = cl({
     [errorId]: renderError,
     [fieldset?.errorId || ""]:
       !!fieldset?.error && typeof fieldset?.error !== "boolean",
-    [inputDescriptionId]: !props?.description,
+    [inputDescriptionId]: !!props?.description,
   });
 
   const newProps = {
@@ -32,7 +41,7 @@ export const useFormField = (props: any, prefix?: string) => {
     inputProps: {
       id,
       "aria-invalid": hasError,
-      "aria-describedby": describedBy.length > 0 ? describedBy : undefined,
+      "aria-describedby": describedBy || undefined,
       disabled,
     },
   };

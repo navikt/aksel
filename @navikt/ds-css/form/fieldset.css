@@ -5,6 +5,10 @@
   position: relative;
 }
 
+.navds-fieldset--s > .navds-fieldset__error-wrapper > .navds-error-message {
+  margin-top: var(--navds-spacing-3);
+}
+
 .navds-fieldset .navds-form__element {
   margin-bottom: var(--navds-spacing-4);
 }

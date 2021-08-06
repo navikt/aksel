@@ -2,32 +2,18 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import ErrorMessage from "../ErrorMessage";
 import { useRadio } from "./useRadio";
+import { GenericFormProps } from "../useFormField";
 
 export interface RadioProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  extends GenericFormProps,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
   className?: string;
-  size?: "m" | "s";
-  disabled?: boolean;
-  /**
-   * Error message
-   */
-  error?: string;
-  /**
-   * Custom id for error message
-   */
-  errorId?: string;
   value: string;
-  description?: React.ReactNode;
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { className, children, required } = props;
-
-  if (required !== undefined) {
+  if (props?.required !== undefined) {
     console.warn("required is only supported on <RadioGroup>.");
   }
 
@@ -44,9 +30,10 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     <div
       className={cl(
         props.className,
-        "navds-form__element",
-        `navds-body--${size}`,
+        "navds-radio",
+        `navds-radio--${size}`,
         "navds-body-short",
+        `navds-body--${size}`,
         {
           "navds-radio--error": hasError,
           "navds-radio--with-error-message": showErrorMsg,
@@ -54,17 +41,8 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         }
       )}
     >
-      <input
-        {...inputProps}
-        ref={ref}
-        className={cl("navds-radio", className, `navds-radio--${size}`)}
-      />
-      <label
-        htmlFor={inputProps.id}
-        className={cl("navds-radio__label", "navds-body-short", {
-          "navds-body--s": size,
-        })}
-      >
+      <input {...inputProps} className="navds-radio__input" ref={ref} />
+      <label htmlFor={inputProps.id} className="navds-radio__label">
         {props.children}
       </label>
       {props.description && (
@@ -73,7 +51,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         </div>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage>{props.error}</ErrorMessage>}
+        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
       </div>
     </div>
   );

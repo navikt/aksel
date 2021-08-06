@@ -111,6 +111,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           {children}
           <div
             id={errorId}
+            className="navds-fieldset__error-wrapper"
             aria-relevant="additions removals"
             aria-live="polite"
           >

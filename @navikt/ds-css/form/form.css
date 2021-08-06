@@ -1,11 +1,6 @@
 .navds-error-message {
   display: block;
   color: var(--navds-color-red-50);
-  padding-top: var(--navds-spacing-3);
-}
-
-.navds-error-message--s {
-  padding-top: var(--navds-spacing-1);
 }
 
 .navds-form__label,

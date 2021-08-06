@@ -36,7 +36,9 @@ export const Group = () => {
         defaultValue={["Banana", "Orange"]}
       >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
+        <Checkbox disabled value="Banana">
+          Banana
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
         <Checkbox disabled value="Cherry">
@@ -186,6 +188,25 @@ export const Group = () => {
       <CheckboxGroup
         legend="Checkbox group"
         description="This is the description"
+        size="s"
+      >
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Banana">Banana</Checkbox>
+        <Checkbox description="Checkbox description" value="Orange">
+          Orange
+        </Checkbox>
+        <Checkbox error="testerror" value="Melon">
+          Melon
+        </Checkbox>
+        <Checkbox disabled value="Cherry">
+          Cherry
+        </Checkbox>
+      </CheckboxGroup>
+
+      <CheckboxGroup
+        legend="Checkbox group"
+        description="This is the description"
+        error="Errormsg"
         size="s"
       >
         <Checkbox value="Apple">Apple</Checkbox>

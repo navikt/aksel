@@ -1,98 +1,120 @@
 .navds-radio {
+  position: relative;
+  padding: var(--navds-spacing-3) 0;
+}
+
+.navds-radio .navds-error-message {
+  margin-top: var(--navds-spacing-3);
+}
+
+.navds-radio--with-description .navds-error-message {
+  margin-top: 0;
+}
+
+.navds-radio__input {
+  cursor: pointer;
   position: absolute;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  left: -12px;
+  margin: 0;
   opacity: 0;
-  appearance: none;
-  padding: 0.5rem;
-  background-color: #fff;
-  border: 1px solid var(--navds-color-gray-40);
-  box-sizing: border-box;
+  top: 0;
 }
 
 .navds-radio__label {
-  padding-left: 2rem;
-  position: relative;
-  display: inline-block;
+  display: flex;
+  width: fit-content;
+  gap: 12px;
+  min-width: 48px;
   cursor: pointer;
-  margin-bottom: 0;
-  line-height: 3rem;
+}
+
+.navds-radio__description {
+  padding-left: calc(48px - 12px);
+  color: var(--navds-color-gray-80);
+}
+
+.navds-radio--with-description {
+  padding-bottom: 0;
+}
+
+.navds-radio--with-error-message {
+  padding-bottom: var(--navds-spacing-2);
 }
 
 .navds-radio__label::before {
   content: "";
-  position: absolute;
-  display: block;
-  text-align: center;
-  background-color: #fff;
-  background-position: center center;
-  background-repeat: no-repeat;
-  border: 1px solid var(--navds-color-gray-40);
+  background-color: white;
+  border: 1px solid var(--navds-color-border);
   width: 1.5rem;
   height: 1.5rem;
-  top: 0.75rem;
-  left: 0;
+  border-radius: 4px;
+  flex-shrink: 0;
   border-radius: 50%;
 }
 
-.navds-radio--s + .navds-radio__label {
-  line-height: 1.5rem;
-  padding-left: 2rem;
+.navds-radio--s {
+  padding: var(--navds-spacing-1) 0;
 }
 
-.navds-radio--s + .navds-radio__label::before {
-  top: 0;
+.navds-radio--s > .navds-radio__input {
+  width: 24px;
+  height: 24px;
+  top: 2px;
   left: 0;
 }
 
-.navds-radio:hover + .navds-radio__label::before {
+.navds-radio--s > .navds-radio__label::before {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.navds-radio__input:hover + .navds-radio__label {
+  color: var(--navds-color-blue-50);
+}
+
+.navds-radio__input:hover + .navds-radio__label::before {
   border-color: var(--navds-color-blue-50);
   background-color: var(--navds-color-blue-10);
 }
 
-.navds-radio:focus + .navds-radio__label::before {
-  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 2rem #fff inset;
+.navds-radio__input:focus + .navds-radio__label::before {
+  box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-radio:checked + .navds-radio__label::before {
+.navds-radio__input:checked + .navds-radio__label::before {
   border: 2px solid var(--navds-color-blue-50);
   box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
-.navds-radio:checked:focus + .navds-radio__label::before {
+.navds-radio__input:checked:focus + .navds-radio__label::before {
   transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
   box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
     0 0 0 2rem var(--navds-color-blue-50) inset;
 }
 
-/**
-  Error handling
-*/
-
 .navds-radio--error
-  > .navds-radio:not(:hover):not(:focus):not(:disabled):not(:checked)
+  > .navds-radio__input:not(:hover):not(:focus):not(:disabled):not(:checked)
   + .navds-radio__label::before {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
 }
 
-.navds-radio:disabled + .navds-radio__label {
+.navds-radio__input:disabled,
+.navds-radio__input:disabled + .navds-radio__label {
   color: var(--navds-color-gray-40);
-  cursor: default;
-}
-
-.navds-radio:disabled:hover + .navds-radio__label {
   cursor: not-allowed;
 }
 
-.navds-radio:disabled + .navds-radio__label::before {
+.navds-radio__input:disabled + .navds-radio__label::before {
   background-color: var(--navds-color-gray-10);
   border-color: var(--navds-color-gray-60);
-  box-shadow: none;
-  cursor: not-allowed;
 }
 
-.navds-radio:disabled:checked + .navds-radio__label::before {
+.navds-radio__input:disabled:checked + .navds-radio__label::before {
   background-color: var(--navds-color-gray-40);
   border-color: var(--navds-color-gray-40);
-  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
-    0 0 0 2rem var(--navds-color-gray-40) inset;
+  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-gray-40) inset;
 }

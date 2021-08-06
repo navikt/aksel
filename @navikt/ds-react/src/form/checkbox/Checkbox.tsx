@@ -1,27 +1,14 @@
-import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { FieldsetContext } from "../../index";
 import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
+import { GenericFormProps } from "../useFormField";
 
 export interface CheckboxProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /**
-   * @ignore
-   */
+  extends GenericFormProps,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   className?: string;
-  size?: "m" | "s";
   children: React.ReactNode;
-  description?: React.ReactNode;
-  disabled?: boolean;
-  /**
-   * Error message
-   */
-  error?: React.ReactNode | boolean;
-  /**
-   * Custom id for error message
-   */
-  errorId?: string;
   value?: string;
 }
 
