@@ -42,7 +42,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         )}
       >
         {!!label && (
-          <Label size={size} component="label" className="navds-select__label">
+          <Label
+            htmlFor={inputProps.id}
+            size={size}
+            component="label"
+            className="navds-select__label"
+          >
             {label}
           </Label>
         )}

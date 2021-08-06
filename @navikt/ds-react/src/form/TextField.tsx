@@ -41,6 +41,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     >
       {!!label && (
         <Label
+          htmlFor={inputProps.id}
           size={size}
           component="label"
           className="navds-text-field__label"
