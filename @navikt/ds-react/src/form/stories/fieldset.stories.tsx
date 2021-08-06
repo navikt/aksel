@@ -1,5 +1,5 @@
 import React from "react";
-import { Fieldset } from "../index";
+import { CheckboxGroup, Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Checkbox, TextInput, /* Radio, */ Select } from "../../index";
 export default {
@@ -8,12 +8,12 @@ export default {
 } as Meta;
 
 const Checkboxes = () => (
-  <>
-    <Checkbox>box 1</Checkbox>
+  <CheckboxGroup error="Checkboxgroup-error" legend="Velg språk">
+    <Checkbox error="CheckboxErrorMsg">box 1</Checkbox>
     <Checkbox>box 2</Checkbox>
     <Checkbox>box 3</Checkbox>
     <Checkbox>box 4</Checkbox>
-  </>
+  </CheckboxGroup>
 );
 
 export const All = () => {

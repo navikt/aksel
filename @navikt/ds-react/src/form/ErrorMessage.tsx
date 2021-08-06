@@ -1,11 +1,12 @@
 import React from "react";
 import cl from "classnames";
+import { Label } from "../typography";
 
 const ErrorMessage = (props) => (
-  <div
+  <Label
     {...props}
-    className={cl("navds-label", "navds-error-message", props.className, {
-      "navds-label--s": props.size === "s",
+    component="div"
+    className={cl("navds-error-message", props.className, {
       "navds-error-message--s": props.size === "s",
     })}
   />

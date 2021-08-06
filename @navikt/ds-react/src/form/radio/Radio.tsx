@@ -3,6 +3,7 @@ import cl from "classnames";
 import ErrorMessage from "../ErrorMessage";
 import { useRadio } from "./useRadio";
 import { GenericFormProps } from "../useFormField";
+import { BodyShort } from "../../typography";
 
 export interface RadioProps
   extends GenericFormProps,
@@ -28,27 +29,29 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
 
   return (
     <div
-      className={cl(
-        props.className,
-        "navds-radio",
-        `navds-radio--${size}`,
-        "navds-body-short",
-        `navds-body--${size}`,
-        {
-          "navds-radio--error": hasError,
-          "navds-radio--with-error-message": showErrorMsg,
-          "navds-radio--with-description": !!props.description,
-        }
-      )}
+      className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
+        "navds-radio--error": hasError,
+        "navds-radio--with-error-message": showErrorMsg,
+        "navds-radio--with-description": !!props.description,
+      })}
     >
       <input {...inputProps} className="navds-radio__input" ref={ref} />
-      <label htmlFor={inputProps.id} className="navds-radio__label">
+      <BodyShort
+        component="label"
+        htmlFor={inputProps.id}
+        size={size}
+        className="navds-radio__label"
+      >
         {props.children}
-      </label>
+      </BodyShort>
       {props.description && (
-        <div id={inputDescriptionId} className="navds-radio__description">
+        <BodyShort
+          size={size}
+          id={inputDescriptionId}
+          className="navds-radio__description"
+        >
           {props.description}
-        </div>
+        </BodyShort>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}

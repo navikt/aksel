@@ -25,23 +25,26 @@ export const useFormField = (props: GenericFormProps, prefix?: string) => {
   const hasError: boolean = !disabled && !!(error || fieldset?.error);
   const renderError = !!error && typeof error !== "boolean";
 
-  const describedBy: string = cl({
+  const errorDescribedBy: string = cl(fieldset?.errorDescribedBy, {
     [errorId]: renderError,
-    [fieldset?.errorId || ""]:
-      !!fieldset?.error && typeof fieldset?.error !== "boolean",
-    [inputDescriptionId]: !!props?.description,
   });
 
   const newProps = {
     showErrorMsg: !disabled && renderError,
     hasError,
-    errorId: errorId,
+    errorId,
+    fieldsetErrorId: fieldset?.errorId,
+    fieldsetError: fieldset?.error,
     inputDescriptionId,
     size: size ? size : fieldset?.size ?? "m",
+    errorDescribedBy,
     inputProps: {
       id,
       "aria-invalid": hasError,
-      "aria-describedby": describedBy || undefined,
+      "aria-describedby":
+        cl(errorDescribedBy, {
+          [inputDescriptionId]: !!props?.description,
+        }) || undefined,
       disabled,
     },
   };

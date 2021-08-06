@@ -3,6 +3,7 @@ import cl from "classnames";
 import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
 import { GenericFormProps } from "../useFormField";
+import { BodyShort } from "../../typography";
 
 export interface CheckboxProps
   extends GenericFormProps,
@@ -28,8 +29,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         props.className,
         "navds-checkbox",
         `navds-checkbox--${size}`,
-        "navds-body-short",
-        `navds-body--${size}`,
         {
           "navds-checkbox--error": hasError,
           "navds-checkbox--with-error-message": showErrorMsg,
@@ -38,14 +37,23 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       )}
     >
       <input {...inputProps} className="navds-checkbox__input" ref={ref} />
-      <label htmlFor={inputProps.id} className={cl("navds-checkbox__label")}>
+      <BodyShort
+        component="label"
+        htmlFor={inputProps.id}
+        size={size}
+        className="navds-checkbox__label"
+      >
         {props.children}
-      </label>
+      </BodyShort>
 
       {props.description && (
-        <div id={inputDescriptionId} className="navds-checkbox__description">
+        <BodyShort
+          size={size}
+          id={inputDescriptionId}
+          className="navds-checkbox__description"
+        >
           {props.description}
-        </div>
+        </BodyShort>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}

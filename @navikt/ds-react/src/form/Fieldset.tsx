@@ -1,14 +1,16 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef } from "react";
+import { Label } from "../typography";
 import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
-import useId from "./useId";
+import { useFormField } from "./useFormField";
 
 export type FieldsetContextProps = {
   error?: string | boolean;
   errorId: string;
   size: "m" | "s";
   disabled: boolean;
+  errorDescribedBy?: string;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
@@ -54,57 +56,55 @@ export interface FieldsetProps
 }
 
 const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
-  (
-    {
+  (props, ref) => {
+    const {
+      inputProps,
+      errorId,
+      showErrorMsg,
+      hasError,
+      size,
+      inputDescriptionId,
+      fieldsetError,
+      fieldsetErrorId,
+      errorDescribedBy,
+    } = useFormField(props, "fieldset");
+
+    const {
       children,
       className,
+      errorPropagation = true,
       legend,
       description,
-      error,
-      size = "m",
-      disabled = false,
-      errorPropagation = true,
       ...rest
-    },
-    ref
-  ) => {
-    const errorId = useId({ id: rest.errorId, prefix: "FieldsetError" });
-    const descriptionId = useId({ prefix: "FieldsetDescription" });
-    const renderError = !!error && typeof error !== "boolean";
+    } = props;
 
     return (
       <FieldsetContext.Provider
         value={{
-          error: errorPropagation ? error : undefined,
-          errorId,
+          error: errorPropagation ? props.error ?? fieldsetError : undefined,
+          errorId: props.error ? errorId : fieldsetErrorId ?? errorId,
           size,
-          disabled,
+          disabled: props.disabled ?? false,
+          errorDescribedBy,
         }}
       >
         <fieldset
+          {...rest}
           ref={ref}
           className={cl(
             className,
             "navds-fieldset",
             `navds-fieldset--${size}`,
-            { "navds-fieldset--error": !!error }
+            { "navds-fieldset--error": hasError }
           )}
-          aria-invalid={!!error}
-          aria-describedby={cl({
-            [descriptionId]: description,
-            [errorId]: renderError,
-          })}
-          {...rest}
+          aria-invalid={inputProps["aria-invalid"]}
+          aria-describedby={inputProps["aria-describedby"]}
         >
-          <legend
-            className={cl("navds-form__legend", "navds-label", {
-              "navds-label--s": size === "s",
-            })}
-          >
+          <Label size={size} component="legend" className="navds-form__legend">
             {legend}
-          </legend>
-          {description && (
-            <Description id={descriptionId} size={size}>
+          </Label>
+          {!!description && (
+            <Description id={inputDescriptionId} size={size}>
               {description}
             </Description>
           )}
@@ -115,8 +115,8 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {!disabled && renderError && (
-              <ErrorMessage size={size}>{error}</ErrorMessage>
+            {!inputProps.disabled && showErrorMsg && (
+              <ErrorMessage size={size}>{props.error}</ErrorMessage>
             )}
           </div>
         </fieldset>
