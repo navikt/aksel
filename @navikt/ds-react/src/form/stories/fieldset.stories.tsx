@@ -1,7 +1,7 @@
 import React from "react";
 import { CheckboxGroup, Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Checkbox, TextInput, /* Radio, */ Select } from "../../index";
+import { Checkbox, TextField, /* Radio, */ Select } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,
@@ -64,7 +64,7 @@ export const All = () => {
         legend="This is the legend"
         description="This is the description"
       >
-        <TextInput />
+        <TextField />
       </Fieldset>
 
       <h2>Fieldset uten checkbox/radion small</h2>
@@ -73,7 +73,7 @@ export const All = () => {
         description="This is the description"
         size="s"
       >
-        <TextInput />
+        <TextField />
       </Fieldset>
       <h2>Fieldset uten checkbox/radion w/error</h2>
       <Fieldset

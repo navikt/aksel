@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef } from "react";
-import { Label } from "../typography";
+import { BodyShort, Label } from "../typography";
 import Description from "./Description";
 import ErrorMessage from "./ErrorMessage";
 import { useFormField } from "./useFormField";
@@ -104,9 +104,13 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             {legend}
           </Label>
           {!!description && (
-            <Description id={inputDescriptionId} size={size}>
+            <BodyShort
+              className="navds-form__description"
+              id={inputDescriptionId}
+              size={size}
+            >
               {description}
-            </Description>
+            </BodyShort>
           )}
           {children}
           <div
@@ -115,7 +119,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             aria-relevant="additions removals"
             aria-live="polite"
           >
-            {!inputProps.disabled && showErrorMsg && (
+            {showErrorMsg && (
               <ErrorMessage size={size}>{props.error}</ErrorMessage>
             )}
           </div>

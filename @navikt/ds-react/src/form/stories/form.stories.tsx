@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { TextInput, Select } from "../..";
+import { TextField, Select } from "../..";
 export default {
   title: "ds-react/form",
 } as Meta;
@@ -10,7 +10,7 @@ export const All = () => {
 
   return (
     <form>
-      <TextInput
+      <TextField
         label="Text small input"
         size="s"
         value={text}

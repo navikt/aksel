@@ -26,8 +26,8 @@ export {
   SelectProps,
   Textarea,
   TextareaProps,
-  TextInput,
-  TextInputProps,
+  TextField,
+  TextFieldProps,
 } from "./form";
 export { Cell, CellProps, Grid, GridProps } from "./grid";
 export { Header, HeaderProps } from "./header";
