@@ -3,9 +3,10 @@
   color: var(--navds-color-red-50);
 }
 
-.navds-form__label,
-.navds-form__description,
-.navds-form__legend {
-  display: block;
-  margin-bottom: var(--navds-spacing-2);
+.navds-form-field > :not(:first-child):not(:empty) {
+  margin-top: 8px;
+}
+
+.navds-form-field--s > :not(:first-child):not(:empty) {
+  margin-top: 4px;
 }

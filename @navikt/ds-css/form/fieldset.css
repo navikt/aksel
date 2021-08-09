@@ -2,33 +2,13 @@
   margin: 0;
   padding: 0;
   border: 0;
-  position: relative;
+  min-width: 0;
 }
 
-.navds-fieldset--s > .navds-fieldset__error-wrapper > .navds-error-message {
-  margin-top: var(--navds-spacing-3);
+.navds-fieldset > :not(:first-child):not(:empty) {
+  margin-top: 8px;
 }
 
-.navds-fieldset .navds-form__element {
-  margin-bottom: var(--navds-spacing-4);
-}
-
-.navds-fieldset--s .navds-form__element {
-  margin-bottom: var(--navds-spacing-2);
-}
-
-.navds-fieldset--margin * .navds-form__description {
-  margin-bottom: var(--navds-spacing-4);
-}
-
-.navds-fieldset--margin * .navds-form__legend {
-  margin-bottom: var(--navds-spacing-4);
-}
-
-.navds-fieldset--s * .navds-form__description {
-  margin-bottom: var(--navds-spacing-2);
-}
-
-.navds-fieldset--s * .navds-form__legend {
-  margin-bottom: var(--navds-spacing-2);
+.navds-fieldset--s > :not(:first-child):not(:empty) {
+  margin-top: 4px;
 }

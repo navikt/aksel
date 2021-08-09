@@ -17,6 +17,15 @@ export const All = () => {
         <Radio value="apple">Apple</Radio>
         <Radio value="orange">Orange</Radio>
       </RadioGroup>
+      <RadioGroup
+        size="s"
+        legend="Radio group label"
+        description="radio description"
+        error="errormsg"
+      >
+        <Radio value="apple">Apple</Radio>
+        <Radio value="orange">Orange</Radio>
+      </RadioGroup>
       <RadioGroup legend="Radio group label" disabled>
         <Radio value="apple">Apple</Radio>
         <Radio value="orange">Orange</Radio>

@@ -79,12 +79,16 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           aria-invalid={inputProps["aria-invalid"]}
           aria-describedby={inputProps["aria-describedby"]}
         >
-          <Label size={size} component="legend" className="navds-form__legend">
+          <Label
+            size={size}
+            component="legend"
+            className="navds-fieldset__legend"
+          >
             {legend}
           </Label>
           {!!description && (
             <BodyShort
-              className="navds-form__description"
+              className="navds-fieldset__description"
               id={inputDescriptionId}
               size={size}
             >
@@ -94,7 +98,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           {children}
           <div
             id={errorId}
-            className="navds-fieldset__error-wrapper"
             aria-relevant="additions removals"
             aria-live="polite"
           >

@@ -1,8 +1,8 @@
-.navds-textarea > *:not(:first-child):not(:empty) {
+.navds-textarea > :not(:first-child):not(:empty) {
   margin-top: 8px;
 }
 
-.navds-textarea--s > *:not(:first-child):not(:empty) {
+.navds-textarea--s > :not(:first-child):not(:empty) {
   margin-top: 4px;
 }
 

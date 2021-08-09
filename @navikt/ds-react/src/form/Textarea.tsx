@@ -53,8 +53,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       <div
         className={cl(
           props.className,
-          "navds-textarea",
-          `navds-textarea--${size}`,
+          "navds-form-field",
+          `navds-form-field--${size}`,
           { "navds-textarea--error": hasError }
         )}
       >
