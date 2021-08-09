@@ -11,3 +11,7 @@
 .navds-fieldset.navds-checkbox-group--m > .navds-fieldset__error {
   margin-top: 0;
 }
+
+.navds-checkbox-group--s .navds-error-message {
+  margin-top: 4px;
+}
