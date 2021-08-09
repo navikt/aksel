@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../..";
+import { OverridableComponent } from "../../index";
 
 export type ErrorType = OverridableComponent<ErrorSummaryErrorProps>;
 

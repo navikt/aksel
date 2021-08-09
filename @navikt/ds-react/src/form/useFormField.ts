@@ -1,6 +1,6 @@
-import cl from "classnames";
 import { useContext } from "react";
-import { FieldsetContext } from ".";
+import cl from "classnames";
+import { FieldsetContext } from "./index";
 import useId from "./useId";
 
 export interface GenericFormProps {

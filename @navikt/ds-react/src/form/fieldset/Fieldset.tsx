@@ -1,9 +1,9 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyShort, Label } from "../../typography";
+import { BodyShort, Label } from "../../index";
 import ErrorMessage from "../ErrorMessage";
-import { useFieldset } from "./useFieldset";
 import { GenericFormProps } from "../useFormField";
+import { useFieldset } from "./useFieldset";
 
 export type FieldsetContextProps = {
   error?: React.ReactNode;

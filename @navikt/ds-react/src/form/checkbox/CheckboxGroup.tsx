@@ -1,8 +1,7 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, forwardRef, useContext } from "react";
 import cl from "classnames";
-import { forwardRef } from "react";
-import { Fieldset, FieldsetProps } from "..";
 import { FieldsetContext } from "../fieldset";
+import { Fieldset, FieldsetProps } from "../index";
 
 export interface CheckboxGroupState {
   readonly defaultValue: readonly string[];

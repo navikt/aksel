@@ -1,6 +1,6 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { RadioGroup, Radio } from "..";
+import { RadioGroup, Radio } from "../index";
 export default {
   title: "ds-react/form/radio",
   component: RadioGroup,

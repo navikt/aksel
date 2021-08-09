@@ -1,6 +1,6 @@
 import React from "react";
 import cl from "classnames";
-import { Label } from "../typography";
+import { Label } from "../index";
 
 const ErrorMessage = (props) => (
   <Label

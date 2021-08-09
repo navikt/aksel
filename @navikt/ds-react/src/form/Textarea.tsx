@@ -1,10 +1,10 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import useId from "./useId";
+import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { BodyShort, Label } from "../typography";
 import { GenericFormProps, useFormField } from "./useFormField";
+import useId from "./useId";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
