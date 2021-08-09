@@ -1,90 +1,69 @@
 import React from "react";
-import { CheckboxGroup, Fieldset } from "../index";
+import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Checkbox, TextField, /* Radio, */ Select } from "../../index";
+import { TextField } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,
 } as Meta;
 
-const Checkboxes = () => (
-  <CheckboxGroup error="Checkboxgroup-error" legend="Velg språk">
-    <Checkbox error="CheckboxErrorMsg">box 1</Checkbox>
-    <Checkbox>box 2</Checkbox>
-    <Checkbox>box 3</Checkbox>
-    <Checkbox>box 4</Checkbox>
-  </CheckboxGroup>
-);
-
 export const All = () => {
   return (
     <div>
       <h1>Fieldset</h1>
-      <Fieldset legend="This is the legend">
-        <Checkboxes />
-      </Fieldset>
-      <h2>Fieldset w/description</h2>
-      <Fieldset
-        legend="This is the legend"
-        description="This is the description"
-      >
-        <Checkboxes />
+
+      <Fieldset legend="Mollit eiusmod">
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
 
-      <h2>Fieldset w/error</h2>
+      <h2>Description</h2>
+
       <Fieldset
-        error="FieldsetError"
-        legend="This is the legend"
-        description="This is the description"
+        legend="Mollit eiusmod"
+        description="Quis reprehenderit esse cillum"
       >
-        <Checkboxes />
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
 
-      <h2>Fieldset small</h2>
-      <Fieldset
-        legend="This is the legend"
-        description="This is the description"
-        size="s"
-      >
-        <Checkboxes />
+      <h2>Errors</h2>
+
+      <Fieldset legend="Mollit eiusmod" error="Fieldsett error">
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
 
-      <h2>Fieldset small w/error</h2>
+      <h2>Errors uten errorPropagation</h2>
+
       <Fieldset
-        error="FielsetError"
-        legend="This is the legend"
-        description="This is the description"
-        size="s"
+        legend="Mollit eiusmod"
+        error="Fieldsett error"
+        errorPropagation={false}
       >
-        <Checkboxes />
+        <TextField label="Textfield label" hideLabel error="Må være fylt ut" />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
 
-      <h2>Fieldset uten checkbox/radio</h2>
-      <Fieldset
-        legend="This is the legend"
-        description="This is the description"
-      >
-        <TextField label="textfieldLabel" hideLabel />
+      <h2>Sizing</h2>
+
+      <Fieldset size="s" legend="Mollit eiusmod" description="Dolore minim">
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
 
-      <h2>Fieldset uten checkbox/radion small</h2>
-      <Fieldset
-        legend="This is the legend"
-        description="This is the description"
-        size="s"
-      >
-        <TextField label="textfieldLabel" hideLabel />
+      <h2>hideLegend</h2>
+
+      <Fieldset legend="Mollit eiusmod" description="Dolore minim" hideLegend>
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
-      <h2>Fieldset uten checkbox/radion w/error</h2>
-      <Fieldset
-        legend="This is the legend"
-        description="This is the description"
-        error="FielsetError"
-      >
-        <Select label="select-label" hideLabel>
-          <option value="">Velg land</option>
-          <option value="norge">Norge</option>
-        </Select>
+
+      <h2>Disabled</h2>
+
+      <Fieldset legend="Mollit eiusmod" description="Dolore minim" disabled>
+        <TextField label="Textfield label" hideLabel />
+        <TextField label="Textfield label" hideLabel />
       </Fieldset>
     </div>
   );

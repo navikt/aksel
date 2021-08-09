@@ -9,65 +9,61 @@ export default {
 export const All = () => {
   return (
     <div>
-      <Select label="Select">
+      <h1>Select</h1>
+
+      <Select label="Ipsum enim quis culpa">
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
       </Select>
-      <Select label="Select size s" size="s">
+
+      <h2>Description</h2>
+
+      <Select label="Ipsum enim quis culpa" description="Aute enim">
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
       </Select>
-      <Select label="Hvilken land er best om sommeren?">
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
-      </Select>
+
+      <h2>Errors</h2>
+
       <Select
-        label="Hvilken land er best om sommeren?"
-        description="Velg hvilket land som er best"
-        disabled
+        label="Ipsum enim quis culpa"
+        description="Aute enim"
+        error="Select error message"
       >
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
       </Select>
+
+      <h2>Sizing</h2>
+
       <Select
-        size="s"
-        label="Hvilken land er best om sommeren?"
-        description="Velg hvilket land som er best"
-      >
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
-        <option value="Bosnia-Hercegovina">Bosnia-Hercegovina</option>
-      </Select>
-      <Select
-        label="Hvilken land er best om sommeren?"
-        error="Danmark er feil svar"
-        value="danmark"
-      >
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
-      </Select>
-      <Select
-        label="Hvilken land er best om sommeren?"
-        error="Danmark er feil svar"
-        value="danmark"
+        label="Ipsum enim quis culpa"
+        description="Aute enim"
+        error="Select error message"
         size="s"
       >
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
-        <option value="danmark">Danmark</option>
+      </Select>
+
+      <h2>hideLabel</h2>
+
+      <Select label="Ipsum enim quis culpa" description="Aute enim" hideLabel>
+        <option value="">Velg land</option>
+        <option value="norge">Norge</option>
+        <option value="sverige">Sverige</option>
+      </Select>
+
+      <h2>Disabled</h2>
+
+      <Select label="Ipsum enim quis culpa" description="Aute enim" disabled>
+        <option value="">Velg land</option>
+        <option value="norge">Norge</option>
+        <option value="sverige">Sverige</option>
       </Select>
     </div>
   );

@@ -15,62 +15,71 @@ export const All = () => {
 
   return (
     <div style={{ maxWidth: 400 }}>
-      <Textarea label="Textearea" value={value} onChange={handleChange} />
-      <br />
+      <h1>Textarea</h1>
+
+      <Textarea label="In anim elit" value={value} onChange={handleChange} />
+
+      <h2>Description</h2>
+
       <Textarea
-        label="Textearea size s"
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        value={value}
+        onChange={handleChange}
+      />
+
+      <h2>maxLength</h2>
+
+      <Textarea
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        maxLength={400}
+        value={value}
+        onChange={handleChange}
+      />
+
+      <h2>Errors</h2>
+
+      <Textarea
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        error="Textarea error"
+        maxLength={400}
+        value={value}
+        onChange={handleChange}
+      />
+
+      <h2>Sizing</h2>
+
+      <Textarea
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        maxLength={400}
         size="s"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
+        onChange={handleChange}
       />
-      <br />
+
+      <h2>hideLabel</h2>
+
       <Textarea
-        label="Label for input"
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        maxLength={400}
+        hideLabel
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
+        onChange={handleChange}
       />
-      <br />
+
+      <h2>Disabled</h2>
+
       <Textarea
-        label="Label for input"
-        description="description for label"
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        maxLength={400}
+        disabled
         value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
-      />
-      <br />
-      <Textarea
-        label="Label for input"
-        description="description for label"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
-      />
-      <Textarea
-        label="Label for input"
-        description="description for label"
-        error="Error message"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
-      />
-      <Textarea
-        size="s"
-        label="Label for input"
-        description="description for label"
-        error="Error message"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        maxLength={200}
-      />
-      <Textarea
-        label="Label for input"
-        description="description for label"
-        error="Error message"
-        errorId="Custom error id"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={handleChange}
       />
     </div>
   );
