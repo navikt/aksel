@@ -2,10 +2,10 @@ import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef } from "react";
 import { BodyShort, Label } from "../typography";
 import ErrorMessage from "./ErrorMessage";
-import { useFormField } from "./useFormField";
+import { GenericFormProps, useFormField } from "./useFormField";
 
 export type FieldsetContextProps = {
-  error?: string | boolean;
+  error?: React.ReactNode;
   errorId: string;
   size: "m" | "s";
   disabled: boolean;
@@ -16,37 +16,17 @@ export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
   null
 );
 export interface FieldsetProps
-  extends FieldsetHTMLAttributes<HTMLFieldSetElement> {
+  extends GenericFormProps,
+    FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
    * Component content
    */
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
   className?: string;
-  /**
-   * Toggles between spacious and tighter design
-   * @default "m"
-   */
-  size?: "m" | "s";
   /**
    * Fieldset legend
    */
   legend: React.ReactNode;
-  /**
-   * Fieldset description
-   */
-  description?: React.ReactNode;
-  /**
-   * Error message or toggle
-   */
-  error?: string | boolean;
-  /**
-   * Custom id for error message
-   */
-  errorId?: string;
-  disabled?: boolean;
   /**
    * Toggles error propagation to child-elements
    * @default true
