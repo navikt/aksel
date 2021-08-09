@@ -30,7 +30,14 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       inputDescriptionId,
     } = useFormField(props, "textField");
 
-    const { label, className, description, htmlSize, ...rest } = props;
+    const {
+      label,
+      className,
+      description,
+      htmlSize,
+      "aria-describedby": ariaDescribedby,
+      ...rest
+    } = props;
 
     return (
       <div

@@ -42,7 +42,7 @@ export const useFormField = (props: GenericFormProps, prefix?: string) => {
       id,
       "aria-invalid": hasError,
       "aria-describedby":
-        cl(errorDescribedBy, {
+        cl(errorDescribedBy, props["aria-describedby"], {
           [inputDescriptionId]: !!props?.description,
         }) || undefined,
       disabled,

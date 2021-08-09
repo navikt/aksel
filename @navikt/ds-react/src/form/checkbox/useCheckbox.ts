@@ -31,6 +31,7 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
         "errorId",
         "className",
         "description",
+        "aria-describedby",
       ]),
       ...inputProps,
       type: "checkbox",

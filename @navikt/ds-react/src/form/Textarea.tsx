@@ -44,7 +44,14 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       inputDescriptionId,
     } = useFormField(props, "textarea");
 
-    const { label, className, description, maxLength, ...rest } = props;
+    const {
+      label,
+      className,
+      description,
+      maxLength,
+      "aria-describedby": ariaDescribedby,
+      ...rest
+    } = props;
 
     const maxLengthId = useId({ prefix: "TextareaMaxLength" });
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
