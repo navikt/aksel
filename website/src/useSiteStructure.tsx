@@ -11,6 +11,7 @@ const usePages = () => {
                 title
                 rank
                 ingress
+                heading
               }
             }
             path
@@ -67,11 +68,17 @@ export const usePageMenu = (location) => {
         );
       })
       .sort((a, b) => {
-        if (a.slug.split("/").length < b.slug.split("/").length) return -1;
-        if (a.slug.split("/").length > b.slug.split("/").length) return 1;
-        if (!/^[a-zA-Z\s]+$/.test(a.title)) return 1;
-        if (!/^[a-zA-Z\s]+$/.test(b.title)) return -1;
-        return a.title.localeCompare(b.title);
+        if (!!a.rank && !!b.rank) {
+          return `${a.rank}`.localeCompare(`${b.rank}`, undefined, {
+            numeric: true,
+          });
+        } else {
+          if (a.slug.split("/").length < b.slug.split("/").length) return -1;
+          if (a.slug.split("/").length > b.slug.split("/").length) return 1;
+          if (!/^[a-zA-Z\s]+$/.test(a.title)) return 1;
+          if (!/^[a-zA-Z\s]+$/.test(b.title)) return -1;
+          return a.title.localeCompare(b.title);
+        }
       });
   } else {
     return pages

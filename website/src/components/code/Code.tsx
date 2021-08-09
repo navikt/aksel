@@ -100,7 +100,22 @@ const Code = ({
   ...props
 }: CodeProps) => {
   const [anchor, setAnchor] = useState(undefined);
-  const highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
+  /* console.log(children); */
+
+  if (!children) {
+    return <div>{children}</div>;
+  }
+  let highlighted = "";
+
+  try {
+    if (typeof children === "object") {
+      return <code>{children}</code>;
+    } else {
+      highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
+    }
+  } catch (e) {
+    return <div>{children}</div>;
+  }
 
   const getNewProps = () => {
     if (!noCopy) {
