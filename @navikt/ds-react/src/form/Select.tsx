@@ -39,7 +39,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       className,
       description,
       htmlSize,
-      "aria-describedby": ariaDescribedby,
       hideLabel,
       ...rest
     } = props;
@@ -53,18 +52,16 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           { "navds-select--error": hasError }
         )}
       >
-        {!!label && (
-          <Label
-            htmlFor={inputProps.id}
-            size={size}
-            component="label"
-            className={cl("navds-select__label", {
-              "sr-only": !!hideLabel,
-            })}
-          >
-            {label}
-          </Label>
-        )}
+        <Label
+          htmlFor={inputProps.id}
+          size={size}
+          component="label"
+          className={cl("navds-select__label", {
+            "sr-only": !!hideLabel,
+          })}
+        >
+          {label}
+        </Label>
         {!!description && (
           <BodyShort
             className={cl("navds-select__description", {

@@ -1,7 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { FieldsetProps } from "..";
-import Fieldset from "../Fieldset";
+import Fieldset, { FieldsetContext } from "../Fieldset";
 import useId from "../useId";
 
 export interface RadioGroupContextProps {
@@ -41,6 +41,8 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     },
     ref
   ) => {
+    const fieldset = useContext(FieldsetContext);
+
     return (
       <Fieldset
         {...rest}
@@ -48,7 +50,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         className={cl(
           className,
           "navds-radio-group",
-          `navds-radio-group--${rest.size ?? "m"}`
+          `navds-radio-group--${rest.size ?? fieldset?.size ?? "m"}`
         )}
       >
         <RadioGroupContext.Provider

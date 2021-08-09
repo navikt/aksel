@@ -32,15 +32,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     inputDescriptionId,
   } = useFormField(props, "textField");
 
-  const {
-    label,
-    className,
-    description,
-    htmlSize,
-    "aria-describedby": ariaDescribedby,
-    hideLabel,
-    ...rest
-  } = props;
+  const { label, className, description, htmlSize, hideLabel, ...rest } = props;
 
   return (
     <div
@@ -51,16 +43,15 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         { "navds-text-field--error": hasError }
       )}
     >
-      {!!label && (
-        <Label
-          htmlFor={inputProps.id}
-          size={size}
-          component="label"
-          className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
-        >
-          {label}
-        </Label>
-      )}
+      <Label
+        htmlFor={inputProps.id}
+        size={size}
+        component="label"
+        className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
+      >
+        {label}
+      </Label>
+
       {!!description && (
         <BodyShort
           className={cl("navds-text-field__description", {
@@ -73,8 +64,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         </BodyShort>
       )}
       <input
-        {...inputProps}
         {...rest}
+        {...inputProps}
         ref={ref}
         type="text"
         className={cl(

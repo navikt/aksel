@@ -1,7 +1,8 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 import cl from "classnames";
 import { forwardRef } from "react";
 import { Fieldset, FieldsetProps } from "..";
+import { FieldsetContext } from "../Fieldset";
 
 export interface CheckboxGroupState {
   readonly defaultValue: readonly string[];
@@ -34,6 +35,8 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   ) => {
     const state = value ?? [];
 
+    const fieldset = useContext(FieldsetContext);
+
     return (
       <Fieldset
         {...rest}
@@ -41,7 +44,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
         className={cl(
           className,
           "navds-checkbox-group",
-          `navds-checkbox-group--${rest.size ?? "m"}`
+          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "m"}`
         )}
       >
         <CheckboxGroupContext.Provider

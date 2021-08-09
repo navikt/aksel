@@ -58,7 +58,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       errorPropagation = true,
       legend,
       description,
-      "aria-describedby": ariaDescribedby,
       hideLegend,
       ...rest
     } = props;

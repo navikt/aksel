@@ -16,7 +16,6 @@ export const useRadio = (props: RadioProps) => {
   return {
     ...rest,
     inputProps: {
-      ...inputProps,
       ...omit(props, [
         "children",
         "size",
@@ -26,6 +25,7 @@ export const useRadio = (props: RadioProps) => {
         "description",
         "aria-describedby",
       ]),
+      ...inputProps,
       name: radioGroup?.name,
       checked:
         (radioGroup?.value ?? radioGroup?.defaultValue) === props.value

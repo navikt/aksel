@@ -53,7 +53,6 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       description,
       maxLength,
-      "aria-describedby": ariaDescribedby,
       hideLabel,
       ...rest
     } = props;
@@ -70,18 +69,16 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           { "navds-textarea--error": hasError }
         )}
       >
-        {!!label && (
-          <Label
-            htmlFor={inputProps.id}
-            size={size}
-            component="label"
-            className={cl("navds-textarea__label", {
-              "sr-only": !!hideLabel,
-            })}
-          >
-            {label}
-          </Label>
-        )}
+        <Label
+          htmlFor={inputProps.id}
+          size={size}
+          component="label"
+          className={cl("navds-textarea__label", {
+            "sr-only": !!hideLabel,
+          })}
+        >
+          {label}
+        </Label>
         {!!description && (
           <BodyShort
             className={cl("navds-textarea__description", {
@@ -95,8 +92,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize
-            {...inputProps}
             {...rest}
+            {...inputProps}
             ref={ref}
             className={cl(
               className,
