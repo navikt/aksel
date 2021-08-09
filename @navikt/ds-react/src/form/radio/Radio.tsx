@@ -27,6 +27,12 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     inputDescriptionId,
   } = useRadio(props);
 
+  /* const { inputProps: FieldsetInputProps, errorId,
+    showErrorMsg,
+    size,
+    hasError,
+    inputDescriptionId,...rest } = useFormField(props, "radio"); */
+
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {

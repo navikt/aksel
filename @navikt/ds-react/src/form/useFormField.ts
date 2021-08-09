@@ -23,26 +23,19 @@ export const useFormField = (props: GenericFormProps, prefix?: string) => {
 
   const disabled = fieldset?.disabled || props.disabled;
   const hasError: boolean = !disabled && !!(error || fieldset?.error);
-  const renderError = !!error && typeof error !== "boolean";
-
-  const errorDescribedBy: string = cl(fieldset?.errorDescribedBy, {
-    [errorId]: renderError,
-  });
+  const showErrorMsg = !disabled && !!error && typeof error !== "boolean";
 
   const newProps = {
-    showErrorMsg: !disabled && renderError,
+    showErrorMsg,
     hasError,
     errorId,
-    fieldsetErrorId: fieldset?.errorId,
-    fieldsetError: fieldset?.error,
     inputDescriptionId,
     size: size ? size : fieldset?.size ?? "m",
-    errorDescribedBy,
     inputProps: {
       id,
       "aria-invalid": hasError,
       "aria-describedby":
-        cl(errorDescribedBy, props["aria-describedby"], {
+        cl(props["aria-describedby"], {
           [inputDescriptionId]: !!props?.description,
         }) || undefined,
       disabled,
