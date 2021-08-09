@@ -3,10 +3,6 @@
   padding: var(--navds-spacing-3) 0;
 }
 
-.navds-radio .navds-error-message {
-  margin-top: var(--navds-spacing-3);
-}
-
 .navds-radio--with-description .navds-error-message {
   margin-top: 0;
 }

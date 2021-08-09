@@ -1,8 +1,12 @@
-@import "checkbox.css";
-@import "checkbox-group.css";
+/*
+  Order matters, do not rearange
+*/
 @import "fieldset.css";
 @import "form.css";
+@import "checkbox.css";
+@import "checkbox-group.css";
 @import "radio.css";
+@import "radio-group.css";
 @import "select.css";
 @import "text-field.css";
 @import "textarea.css";

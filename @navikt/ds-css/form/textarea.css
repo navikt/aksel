@@ -1,11 +1,3 @@
-.navds-textarea > :not(:first-child):not(:empty) {
-  margin-top: 8px;
-}
-
-.navds-textarea--s > :not(:first-child):not(:empty) {
-  margin-top: 4px;
-}
-
 .navds-textarea__wrapper {
   position: relative;
   width: 100%;
@@ -37,12 +29,12 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-textarea--s .navds-textarea__input {
+.navds-form-field--s .navds-textarea__input {
   padding: var(--navds-spacing-1);
   min-height: 32px;
 }
 
-.navds-textarea--s .navds-textarea--counter.navds-textarea__input {
+.navds-form-field--s .navds-textarea--counter.navds-textarea__input {
   padding-bottom: var(--navds-spacing-7);
 }
 

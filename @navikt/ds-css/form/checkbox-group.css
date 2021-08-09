@@ -1,11 +1,13 @@
-.navds-checkbox-group > .navds-checkboxes {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
 .navds-checkbox-group--s > .navds-checkboxes {
   display: flex;
   flex-direction: column;
-  gap: var(--navds-spacing-2);
+  gap: 4px;
+}
+
+.navds-fieldset.navds-checkbox-group--m > .navds-checkboxes {
+  margin-top: 0;
+}
+
+.navds-fieldset.navds-checkbox-group--m > .navds-fieldset__error {
+  margin-top: 0;
 }

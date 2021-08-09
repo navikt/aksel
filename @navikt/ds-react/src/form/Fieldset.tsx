@@ -100,6 +100,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             id={errorId}
             aria-relevant="additions removals"
             aria-live="polite"
+            className="navds-fieldset__error"
           >
             {showErrorMsg && (
               <ErrorMessage size={size}>{props.error}</ErrorMessage>

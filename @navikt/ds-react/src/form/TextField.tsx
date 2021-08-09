@@ -34,8 +34,8 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     <div
       className={cl(
         props.className,
-        "navds-text-field",
-        `navds-text-field--${size}`,
+        "navds-form-field",
+        `navds-form-field--${size}`,
         { "navds-text-field--error": hasError }
       )}
     >
