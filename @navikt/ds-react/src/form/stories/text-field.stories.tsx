@@ -10,9 +10,9 @@ export default {
 export const All = () => {
   return (
     <div>
-      <TextField />
+      <TextField label="Textfield" />
       <br />
-      <TextField size="s" />
+      <TextField label="Textfield" size="s" />
       <br />
       <TextField label="Label for input" />
       <br />
@@ -31,20 +31,30 @@ export const All = () => {
         error="Error message"
       />
       <Fieldset legend="TextField test" error="errormessag fieldset">
-        <TextField error="Error message" />
-        <TextField />
+        <TextField label="Textfield" error="Error message" />
+        <TextField label="Textfield" />
       </Fieldset>
 
       <Fieldset disabled legend="TextField test" error="errormessag fieldset">
-        <TextField error="Error message" />
+        <TextField label="Textfield" error="Error message" />
       </Fieldset>
       <Fieldset
         description="fieldsetDescription"
         error="fieldsetError"
         legend="TextField test"
       >
-        <TextField description="textfieldDescription" error="Error message" />
+        <TextField
+          label="Textfield"
+          description="textfieldDescription"
+          error="Error message"
+        />
       </Fieldset>
+
+      <TextField
+        label="Textfield"
+        description="textfieldDescription"
+        hideLabel
+      />
     </div>
   );
 };

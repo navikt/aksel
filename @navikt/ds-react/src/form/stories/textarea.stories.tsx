@@ -15,9 +15,10 @@ export const All = () => {
 
   return (
     <div style={{ maxWidth: 400 }}>
-      <Textarea value={value} onChange={handleChange} />
+      <Textarea label="Textearea" value={value} onChange={handleChange} />
       <br />
       <Textarea
+        label="Textearea size s"
         size="s"
         value={value}
         onChange={(e) => setValue(e.target.value)}

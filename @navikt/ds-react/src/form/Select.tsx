@@ -16,7 +16,11 @@ export interface SelectProps
    * Expose the HTML size attribute
    */
   htmlSize?: number;
-  label?: string;
+  label: string;
+  /**
+   * If enabled shows the label and description for screenreaders only
+   */
+  hideLabel?: boolean;
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -36,6 +40,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
       description,
       htmlSize,
       "aria-describedby": ariaDescribedby,
+      hideLabel,
       ...rest
     } = props;
 
@@ -53,14 +58,18 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             htmlFor={inputProps.id}
             size={size}
             component="label"
-            className="navds-select__label"
+            className={cl("navds-select__label", {
+              "sr-only": !!hideLabel,
+            })}
           >
             {label}
           </Label>
         )}
         {!!description && (
           <BodyShort
-            className="navds-select__description"
+            className={cl("navds-select__description", {
+              "sr-only": !!hideLabel,
+            })}
             id={inputDescriptionId}
             size={size}
           >

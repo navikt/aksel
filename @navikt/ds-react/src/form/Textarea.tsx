@@ -16,7 +16,6 @@ export interface TextareaProps
    * @ignore
    */
   className?: string;
-  label?: React.ReactNode;
   /**
    * Visually allowed length of content
    */
@@ -31,6 +30,11 @@ export interface TextareaProps
    * Minimum number of rows to display.
    */
   minRows?: number;
+  /**
+   * If enabled shows the label and description for screenreaders only
+   */
+  label: React.ReactNode;
+  hideLabel?: boolean;
 }
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -50,6 +54,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       description,
       maxLength,
       "aria-describedby": ariaDescribedby,
+      hideLabel,
       ...rest
     } = props;
 
@@ -70,14 +75,18 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             htmlFor={inputProps.id}
             size={size}
             component="label"
-            className="navds-textarea__label"
+            className={cl("navds-textarea__label", {
+              "sr-only": !!hideLabel,
+            })}
           >
             {label}
           </Label>
         )}
         {!!description && (
           <BodyShort
-            className="navds-textarea__description"
+            className={cl("navds-textarea__description", {
+              "sr-only": !!hideLabel,
+            })}
             id={inputDescriptionId}
             size={size}
           >

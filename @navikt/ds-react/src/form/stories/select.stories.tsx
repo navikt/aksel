@@ -9,13 +9,13 @@ export default {
 export const All = () => {
   return (
     <div>
-      <Select>
+      <Select label="Select">
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>
         <option value="danmark">Danmark</option>
       </Select>
-      <Select size="s">
+      <Select label="Select size s" size="s">
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>

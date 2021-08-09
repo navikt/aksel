@@ -15,7 +15,11 @@ export interface TextFieldProps
    * Expose the HTML size attribute
    */
   htmlSize?: number;
-  label?: React.ReactNode;
+  /**
+   * If enabled shows the label and description for screenreaders only
+   */
+  hideLabel?: boolean;
+  label: React.ReactNode;
 }
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
@@ -34,6 +38,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     description,
     htmlSize,
     "aria-describedby": ariaDescribedby,
+    hideLabel,
     ...rest
   } = props;
 
@@ -51,14 +56,16 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           htmlFor={inputProps.id}
           size={size}
           component="label"
-          className="navds-text-field__label"
+          className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
         >
           {label}
         </Label>
       )}
       {!!description && (
         <BodyShort
-          className="navds-text-field__description"
+          className={cl("navds-text-field__description", {
+            "sr-only": !!hideLabel,
+          })}
           id={inputDescriptionId}
           size={size}
         >

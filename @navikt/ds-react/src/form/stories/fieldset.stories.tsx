@@ -64,7 +64,7 @@ export const All = () => {
         legend="This is the legend"
         description="This is the description"
       >
-        <TextField />
+        <TextField label="textfieldLabel" hideLabel />
       </Fieldset>
 
       <h2>Fieldset uten checkbox/radion small</h2>
@@ -73,7 +73,7 @@ export const All = () => {
         description="This is the description"
         size="s"
       >
-        <TextField />
+        <TextField label="textfieldLabel" hideLabel />
       </Fieldset>
       <h2>Fieldset uten checkbox/radion w/error</h2>
       <Fieldset
@@ -81,7 +81,7 @@ export const All = () => {
         description="This is the description"
         error="FielsetError"
       >
-        <Select>
+        <Select label="select-label" hideLabel>
           <option value="">Velg land</option>
           <option value="norge">Norge</option>
         </Select>

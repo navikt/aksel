@@ -28,6 +28,10 @@ export interface FieldsetProps
    */
   legend: React.ReactNode;
   /**
+   * If enabled shows the legend and description for screenreaders only
+   */
+  hideLegend?: boolean;
+  /**
    * Toggles error propagation to child-elements
    * @default true
    */
@@ -55,6 +59,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       "aria-describedby": ariaDescribedby,
+      hideLegend,
       ...rest
     } = props;
 
@@ -83,13 +88,17 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           <Label
             size={size}
             component="legend"
-            className="navds-fieldset__legend"
+            className={cl("navds-fieldset__legend", {
+              "sr-only": !!hideLegend,
+            })}
           >
             {legend}
           </Label>
           {!!description && (
             <BodyShort
-              className="navds-fieldset__description"
+              className={cl("navds-fieldset__description", {
+                "sr-only": !!hideLegend,
+              })}
               id={inputDescriptionId}
               size={size}
             >
