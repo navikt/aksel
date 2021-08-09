@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
@@ -9,217 +9,75 @@ export default {
 export const All = () => {
   return (
     <>
-      <Checkbox>DoloreIn quis consectetur proident id adipisicing ut.</Checkbox>
-      <Checkbox size="s">Dolore Lorem amet sunt exercitation.</Checkbox>
-      <Checkbox disabled>Dolore Lorem amet sunt exercitation</Checkbox>
-      <Checkbox error="testerror">Dolore Lorem amet sunt exercitation</Checkbox>
-      <Checkbox error="testerror" size="s">
-        Dolore Lorem amet sunt exercitation
-      </Checkbox>
-      <Checkbox disabled error="testerror">
-        Dolore Lorem amet sunt exercitation
-      </Checkbox>
-      <Checkbox disabled checked>
-        Dolore Lorem amet sunt exercitation
-      </Checkbox>
-    </>
-  );
-};
-
-export const Group = () => {
-  const [selected, setSelected] = useState<string[]>([]);
-
-  return (
-    <>
-      <CheckboxGroup
-        legend="Checkbox group"
-        defaultValue={["Banana", "Orange"]}
-      >
+      <h1>Checkboxes</h1>
+      <CheckboxGroup legend="Mollit eiusmod">
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox disabled value="Banana">
-          Banana
-        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
       </CheckboxGroup>
-
+      <h2>description</h2>
       <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="error message"
-        defaultValue={["Banana", "Orange"]}
+        legend="Mollit eiusmod"
+        description="Exercitation do labore"
       >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
+        <Checkbox value="Orange" description="Laborum ad">
+          Orange
         </Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
-      <h2>All disabled</h2>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="error message"
-        defaultValue={["Banana", "Orange"]}
-        disabled
-      >
+      <h2>error</h2>
+      <CheckboxGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
       </CheckboxGroup>
-
+      <h2>error uten errorPropagation</h2>
       <CheckboxGroup
-        legend="Controlled checkbox group"
-        description="This is the description"
-        value={selected}
-        onChange={setSelected}
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <div>You have selected: {selected.join(", ")}</div>
-
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="error message"
-        disabled
-        defaultValue={["Banana", "Orange"]}
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="error message"
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox error="Checkbox-spesific error" value="Banana">
-          Banana
-        </Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="error message"
+        legend="Mollit eiusmod"
         errorPropagation={false}
+        error="Boks nr 2 må være valgt"
       >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox error="Checkbox-spesific error" value="Banana">
-          Banana
-        </Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error=""
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox error="Checkbox-spesific error" value="Banana">
-          Banana
-        </Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox error="Checkbox-spesific error" value="Banana">
-          Banana
-        </Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
-      </CheckboxGroup>
-      <h2>With description</h2>
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-      >
-        <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox description="Checkbox description" value="Orange">
+        <Checkbox value="Orange" error="Boksen må være valgt">
           Orange
         </Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
       </CheckboxGroup>
-      <h2>Size "s"</h2>
+      <h2>Sizing</h2>
       <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
+        legend="Mollit eiusmod"
+        error="Boks nr 2 må være valgt"
         size="s"
       >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox description="Checkbox description" value="Orange">
-          Orange
-        </Checkbox>
-        <Checkbox error="testerror" value="Melon">
-          Melon
-        </Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
-
-      <CheckboxGroup
-        legend="Checkbox group"
-        description="This is the description"
-        error="Errormsg"
-        size="s"
-      >
+      <h2>defaultValue</h2>
+      <CheckboxGroup legend="Mollit eiusmod" defaultValue={["Orange", "Melon"]}>
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Banana">Banana</Checkbox>
-        <Checkbox description="Checkbox description" value="Orange">
-          Orange
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+      </CheckboxGroup>
+      <h2>hideLenged</h2>
+      <CheckboxGroup legend="Mollit eiusmod" hideLegend>
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+      </CheckboxGroup>
+      <h2>Disabled</h2>
+      <CheckboxGroup legend="Mollit eiusmod" disabled>
+        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
+      </CheckboxGroup>
+      <CheckboxGroup legend="Mollit eiusmod">
+        <Checkbox value="Apple" disabled>
+          Apple
         </Checkbox>
-        <Checkbox error="testerror" value="Melon">
-          Melon
-        </Checkbox>
-        <Checkbox disabled value="Cherry">
-          Cherry
-        </Checkbox>
+        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
     </>
   );

@@ -7,6 +7,10 @@
   margin-top: 0;
 }
 
+.navds-radio .navds-error-message {
+  margin-top: var(--navds-spacing-3);
+}
+
 .navds-radio__input {
   cursor: pointer;
   position: absolute;

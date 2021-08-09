@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CheckboxProps, omit } from "../../index";
+import { CheckboxProps } from "../../index";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
 
@@ -24,15 +24,6 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   return {
     ...rest,
     inputProps: {
-      ...omit(props, [
-        "children",
-        "size",
-        "error",
-        "errorId",
-        "className",
-        "description",
-        "aria-describedby",
-      ]),
       ...inputProps,
       type: "checkbox",
       checked: checkboxGroup?.value

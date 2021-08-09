@@ -4,6 +4,7 @@ import ErrorMessage from "../ErrorMessage";
 import { useRadio } from "./useRadio";
 import { GenericFormProps } from "../useFormField";
 import { BodyShort } from "../../typography";
+import { omit } from "../..";
 
 export interface RadioProps
   extends GenericFormProps,
@@ -27,12 +28,6 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
     inputDescriptionId,
   } = useRadio(props);
 
-  /* const { inputProps: FieldsetInputProps, errorId,
-    showErrorMsg,
-    size,
-    hasError,
-    inputDescriptionId,...rest } = useFormField(props, "radio"); */
-
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
@@ -41,7 +36,18 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         "navds-radio--with-description": !!props.description,
       })}
     >
-      <input {...inputProps} className="navds-radio__input" ref={ref} />
+      <input
+        {...omit(props, [
+          "children",
+          "size",
+          "error",
+          "errorId",
+          "description",
+        ])}
+        {...inputProps}
+        className="navds-radio__input"
+        ref={ref}
+      />
       <BodyShort
         component="label"
         htmlFor={inputProps.id}

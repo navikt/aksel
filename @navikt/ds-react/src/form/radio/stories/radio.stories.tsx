@@ -8,105 +8,74 @@ export default {
 
 export const All = () => {
   return (
-    <form>
-      <RadioGroup legend="Radio group label">
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
+    <>
+      <h1>Radios</h1>
+      <RadioGroup legend="Mollit eiusmod">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
       </RadioGroup>
-      <RadioGroup legend="Radio group label" required>
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
+      <h2>description</h2>
+      <RadioGroup legend="Mollit eiusmod" description="Exercitation do labore">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange" description="Laborum ad">
+          Orange
+        </Radio>
+        <Radio value="Melon">Melon</Radio>
       </RadioGroup>
+      <h2>error</h2>
+      <RadioGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
+      <h2>error uten errorPropagation</h2>
       <RadioGroup
-        size="s"
-        legend="Radio group label"
-        description="radio description"
-        error="errormsg"
-      >
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Radio group label" disabled>
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Radio group label" defaultValue="apple">
-        <Radio value="apple" disabled>
-          Apple
-        </Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Radio group label" error="Error message...">
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
-        <Radio disabled value="orange">
-          Orange
-        </Radio>
-      </RadioGroup>
-      <RadioGroup disabled legend="Radio group label" error="Error message...">
-        <Radio value="apple">Apple</Radio>
-        <Radio value="orange">Orange</Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Radio group label" error="Error message...">
-        <Radio value="apple">Apple</Radio>
-        <Radio error="radio-spesific errormsg" value="orange">
-          Orange
-        </Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Radio group label" error="Error message...">
-        <Radio value="apple">Apple</Radio>
-        <Radio
-          description="Radio description"
-          error="radio-spesific errormsg"
-          value="orange"
-        >
-          Orange
-        </Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <RadioGroup
+        legend="Mollit eiusmod"
         errorPropagation={false}
-        legend="Radio group label"
-        description="Radio with description"
-        error="Error message..."
+        error="Boks nr 2 må være valgt"
       >
-        <Radio value="apple">Apple</Radio>
-        <Radio error="radio-spesific errormsg" value="orange">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange" error="Boksen må være valgt">
           Orange
         </Radio>
-        <Radio value="orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
       </RadioGroup>
+      <h2>Sizing</h2>
       <RadioGroup
-        errorPropagation={false}
-        legend="Radio group label"
-        description="Radio with description"
-        error="Error message..."
-      >
-        <Radio description="Radio description for input" value="apple">
-          Apple
-        </Radio>
-        <Radio error="radio-spesific errormsg" value="orange">
-          Orange
-        </Radio>
-        <Radio value="orange">Orange</Radio>
-      </RadioGroup>
-      <h2>size s</h2>
-      <RadioGroup
-        legend="Radio group label"
-        description="Radio with description"
-        error="Error message..."
+        legend="Mollit eiusmod"
+        error="Boks nr 2 må være valgt"
         size="s"
       >
-        <Radio description="Radio description for input" value="apple">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
+      <h2>defaultValue</h2>
+      <RadioGroup legend="Mollit eiusmod" defaultValue="Orange">
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
+      <h2>hideLenged</h2>
+      <RadioGroup legend="Mollit eiusmod" hideLegend>
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
+      <h2>Disabled</h2>
+      <RadioGroup legend="Mollit eiusmod" disabled>
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
+      <RadioGroup legend="Mollit eiusmod">
+        <Radio value="Apple" disabled>
           Apple
         </Radio>
-        <Radio error="radio-spesific errormsg" value="orange">
-          Orange
-        </Radio>
-        <Radio value="orange">Orange</Radio>
+        <Radio value="Orange">Orange</Radio>
+        <Radio value="Melon">Melon</Radio>
       </RadioGroup>
-    </form>
+    </>
   );
 };

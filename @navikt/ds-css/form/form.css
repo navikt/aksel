@@ -4,10 +4,12 @@
   color: var(--navds-color-red-50);
 }
 
-.navds-form-field > :not(:first-child):not(:empty) {
+.navds-form-field > :not(:first-child):not(:empty),
+.navds-form-field > input:not(:first-child) {
   margin-top: 8px;
 }
 
-.navds-form-field--s > :not(:first-child):not(:empty) {
+.navds-form-field--s > :not(:first-child):not(:empty),
+.navds-form-field--s > input:not(:first-child) {
   margin-top: 4px;
 }

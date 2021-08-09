@@ -4,6 +4,7 @@ import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
 import { GenericFormProps } from "../useFormField";
 import { BodyShort } from "../../typography";
+import { omit } from "../../util";
 
 export interface CheckboxProps
   extends GenericFormProps,
@@ -36,7 +37,18 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         }
       )}
     >
-      <input {...inputProps} className="navds-checkbox__input" ref={ref} />
+      <input
+        {...omit(props, [
+          "children",
+          "size",
+          "error",
+          "errorId",
+          "description",
+        ])}
+        {...inputProps}
+        className="navds-checkbox__input"
+        ref={ref}
+      />
       <BodyShort
         component="label"
         htmlFor={inputProps.id}

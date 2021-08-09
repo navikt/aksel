@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import { omit } from "../..";
 import { useFormField } from "../useFormField";
 import { RadioProps } from "./Radio";
 import { RadioGroupContext } from "./RadioGroup";
@@ -16,15 +15,6 @@ export const useRadio = (props: RadioProps) => {
   return {
     ...rest,
     inputProps: {
-      ...omit(props, [
-        "children",
-        "size",
-        "error",
-        "errorId",
-        "className",
-        "description",
-        "aria-describedby",
-      ]),
       ...inputProps,
       name: radioGroup?.name,
       checked:
