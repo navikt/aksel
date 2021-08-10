@@ -1,0 +1,56 @@
+.navds-confirmation-panel {
+  background-color: #fff;
+  display: block;
+  padding: var(--navds-spacing-4);
+  border-radius: 4px;
+  background-color: #ffeccc;
+  border-color: #ffeccc;
+  cursor: unset;
+  transition: background-color linear 100ms;
+}
+
+.navds-confirmation-panel__content {
+  max-width: 80ch;
+  margin-bottom: var(--navds-spacing-4);
+}
+
+.navds-confirmation-panel--s {
+  padding: var(--navds-spacing-2);
+}
+
+.navds-confirmation-panel--s > .navds-confirmation-panel__content {
+  margin-bottom: var(--navds-spacing-2);
+}
+
+.navds-confirmation-panel--error {
+  background-color: #f3e3e3;
+  border: 1px solid transparent;
+}
+
+.navds-confirmation-panel--checked {
+  background-color: #ccf1d6;
+  border-color: #ccf1d6;
+}
+
+.navds-confirmation-panel--checked
+  > .navds-confirmation-panel__content
+  .navds-link:not(:focus) {
+  color: var(--navds-color-darkgray);
+}
+
+/* .navds-confirmation-panel--checked .navds-checkbox__input
++ .navds-checkbox__label {
+
+} */
+
+.navds-confirmation-panel
+  .navds-checkbox__input:hover
+  + .navds-checkbox__label {
+  text-decoration: underline;
+}
+
+.navds-confirmation-panel--checked
+  .navds-checkbox__input:hover
+  + .navds-checkbox__label {
+  color: var(--navds-color-darkgray);
+}

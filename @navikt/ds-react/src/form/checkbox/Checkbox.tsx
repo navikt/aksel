@@ -3,8 +3,7 @@ import cl from "classnames";
 import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
-import { BodyShort } from "../../index";
-import { omit } from "../../index";
+import { BodyShort, omit } from "../../index";
 
 export interface CheckboxProps
   extends FormFieldProps,
