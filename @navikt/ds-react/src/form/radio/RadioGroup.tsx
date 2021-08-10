@@ -8,8 +8,7 @@ export interface RadioGroupContextProps {
   defaultValue?: string;
   value?: string;
   onChange: (value: string) => void;
-  required: boolean;
-  autoFocus?: boolean;
+  required?: boolean;
 }
 
 export const RadioGroupContext = React.createContext<RadioGroupContextProps | null>(
@@ -18,11 +17,22 @@ export const RadioGroupContext = React.createContext<RadioGroupContextProps | nu
 
 export interface RadioGroupProps extends Omit<FieldsetProps, "onChange"> {
   name?: string;
+  /**
+   * Default checked radiobutton
+   */
   defaultValue?: string;
+  /**
+   * Controlled state for Radiobutton
+   */
   value?: string;
+  /**
+   * Returns current checked radiobutton in group
+   */
   onChange?: (value: string) => void;
+  /**
+   * Tells Fieldset if group is required
+   */
   required?: boolean;
-  autoFocus?: boolean;
 }
 
 const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
@@ -34,8 +44,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
       defaultValue,
       value,
       onChange = () => {},
-      required = false,
-      autoFocus,
+      required,
       ...rest
     },
     ref
@@ -59,7 +68,6 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
             value,
             onChange,
             required,
-            autoFocus,
           }}
         >
           <div className="navds-radio-buttons">{children}</div>

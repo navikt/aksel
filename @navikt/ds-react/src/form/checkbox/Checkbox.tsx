@@ -14,7 +14,6 @@ export interface CheckboxProps
    * Label for checkbox
    */
   children: React.ReactNode;
-  value?: string;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {

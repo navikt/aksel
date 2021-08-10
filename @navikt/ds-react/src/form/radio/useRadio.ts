@@ -12,6 +12,10 @@ export const useRadio = (props: RadioProps) => {
     console.warn("<Radio> must be used inside <RadioGroup>.");
   }
 
+  if (props?.required !== undefined) {
+    console.warn("required is only supported on <RadioGroup>.");
+  }
+
   return {
     ...rest,
     inputProps: {
@@ -25,7 +29,7 @@ export const useRadio = (props: RadioProps) => {
         props.onChange && props.onChange(e);
         radioGroup?.onChange && radioGroup.onChange(props.value);
       },
-      required: radioGroup?.required || props.required,
+      required: radioGroup?.required,
       type: "radio",
     },
   };

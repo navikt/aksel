@@ -17,10 +17,6 @@ export interface RadioProps
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  if (props?.required !== undefined) {
-    console.warn("required is only supported on <RadioGroup>.");
-  }
-
   const {
     inputProps,
     errorId,
