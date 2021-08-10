@@ -1,10 +1,9 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
+import { BodyShort, omit } from "../../index";
 import ErrorMessage from "../ErrorMessage";
-import { useRadio } from "./useRadio";
 import { GenericFormProps } from "../useFormField";
-import { BodyShort } from "../../typography";
-import { omit } from "../..";
+import { useRadio } from "./useRadio";
 
 export interface RadioProps
   extends GenericFormProps,

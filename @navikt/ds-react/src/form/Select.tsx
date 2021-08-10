@@ -1,9 +1,9 @@
 import React, { forwardRef, SelectHTMLAttributes } from "react";
 import cl from "classnames";
-import { GenericFormProps, useFormField } from "./useFormField";
-import { BodyShort, Label } from "../typography";
-import ErrorMessage from "./ErrorMessage";
 import { Expand } from "@navikt/ds-icons";
+import { BodyShort, Label } from "../index";
+import ErrorMessage from "./ErrorMessage";
+import { GenericFormProps, useFormField } from "./useFormField";
 
 export interface SelectProps
   extends GenericFormProps,

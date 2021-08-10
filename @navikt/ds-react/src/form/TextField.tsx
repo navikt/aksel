@@ -1,8 +1,8 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { GenericFormProps, useFormField } from "./useFormField";
-import { BodyShort, Label } from "../typography";
+import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
+import { GenericFormProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
   extends GenericFormProps,
