@@ -12,6 +12,9 @@ export interface FormFieldProps {
   id?: string;
 }
 
+/**
+ * Handles props and their state for various form-fields in context with Fieldset
+ */
 export const useFormField = (props: FormFieldProps, prefix?: string) => {
   const { size, error, errorId: propErrorId } = props;
 
@@ -25,7 +28,7 @@ export const useFormField = (props: FormFieldProps, prefix?: string) => {
   const hasError: boolean = !disabled && !!(error || fieldset?.error);
   const showErrorMsg = !disabled && !!error && typeof error !== "boolean";
 
-  const newProps = {
+  return {
     showErrorMsg,
     hasError,
     errorId,
@@ -41,6 +44,4 @@ export const useFormField = (props: FormFieldProps, prefix?: string) => {
       disabled,
     },
   };
-
-  return newProps;
 };

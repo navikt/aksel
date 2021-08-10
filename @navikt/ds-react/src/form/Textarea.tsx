@@ -28,9 +28,12 @@ export interface TextareaProps
    */
   minRows?: number;
   /**
-   * If enabled shows the label and description for screenreaders only
+   * Textarea label
    */
   label: React.ReactNode;
+  /**
+   * If enabled shows the label and description for screenreaders only
+   */
   hideLabel?: boolean;
 }
 

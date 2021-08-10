@@ -3,6 +3,9 @@ import { useFormField } from "../useFormField";
 import { RadioProps } from "./Radio";
 import { RadioGroupContext } from "./RadioGroup";
 
+/**
+ * Handles props for Radios in context with Fieldset and RadioGroup
+ */
 export const useRadio = (props: RadioProps) => {
   const radioGroup = useContext(RadioGroupContext);
 

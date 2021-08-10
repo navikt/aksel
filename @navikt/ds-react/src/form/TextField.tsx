@@ -19,6 +19,9 @@ export interface TextFieldProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * TextField label
+   */
   label: React.ReactNode;
 }
 

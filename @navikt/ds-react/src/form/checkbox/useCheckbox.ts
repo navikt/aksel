@@ -3,6 +3,9 @@ import { CheckboxProps } from "../../index";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
 
+/**
+ * Handles props for Checkboxes in context with Fieldset and CheckboxGroup
+ */
 const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   const checkboxGroup = useContext(CheckboxGroupContext);
 
