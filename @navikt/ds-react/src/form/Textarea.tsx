@@ -53,7 +53,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       description,
       maxLength,
-      hideLabel,
+      hideLabel = false,
       ...rest
     } = props;
 
@@ -74,7 +74,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           size={size}
           component="label"
           className={cl("navds-textarea__label", {
-            "sr-only": !!hideLabel,
+            "sr-only": hideLabel,
           })}
         >
           {label}
@@ -82,7 +82,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {!!description && (
           <BodyShort
             className={cl("navds-textarea__description", {
-              "sr-only": !!hideLabel,
+              "sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}

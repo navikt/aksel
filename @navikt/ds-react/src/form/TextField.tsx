@@ -32,7 +32,14 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     inputDescriptionId,
   } = useFormField(props, "textField");
 
-  const { label, className, description, htmlSize, hideLabel, ...rest } = props;
+  const {
+    label,
+    className,
+    description,
+    htmlSize,
+    hideLabel = false,
+    ...rest
+  } = props;
 
   return (
     <div
@@ -47,7 +54,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         htmlFor={inputProps.id}
         size={size}
         component="label"
-        className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
+        className={cl("navds-text-field__label", { "sr-only": hideLabel })}
       >
         {label}
       </Label>
@@ -55,7 +62,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
       {!!description && (
         <BodyShort
           className={cl("navds-text-field__description", {
-            "sr-only": !!hideLabel,
+            "sr-only": hideLabel,
           })}
           id={inputDescriptionId}
           size={size}

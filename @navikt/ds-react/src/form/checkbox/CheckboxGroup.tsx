@@ -27,7 +27,6 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
       onChange = () => {},
       children,
       className,
-
       ...rest
     },
     ref

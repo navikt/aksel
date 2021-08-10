@@ -39,7 +39,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
     className,
     description,
     htmlSize,
-    hideLabel,
+    hideLabel = false,
     ...rest
   } = props;
 
@@ -57,7 +57,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
         size={size}
         component="label"
         className={cl("navds-select__label", {
-          "sr-only": !!hideLabel,
+          "sr-only": hideLabel,
         })}
       >
         {label}
@@ -65,7 +65,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
       {!!description && (
         <BodyShort
           className={cl("navds-select__description", {
-            "sr-only": !!hideLabel,
+            "sr-only": hideLabel,
           })}
           id={inputDescriptionId}
           size={size}
