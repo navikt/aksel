@@ -3,10 +3,6 @@ import cl from "classnames";
 import { Title } from "../..";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * @ignore
-   */
-  className?: string;
   children: React.ReactNode;
   size?: "m" | "s";
   heading?: React.ReactNode;
