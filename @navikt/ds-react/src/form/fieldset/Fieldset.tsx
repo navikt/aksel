@@ -75,6 +75,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <fieldset
           {...rest}
+          {...inputProps}
           ref={ref}
           className={cl(
             className,
@@ -82,8 +83,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             `navds-fieldset--${size}`,
             { "navds-fieldset--error": hasError }
           )}
-          aria-invalid={inputProps["aria-invalid"]}
-          aria-describedby={inputProps["aria-describedby"]}
         >
           <Label
             size={size}

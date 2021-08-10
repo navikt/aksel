@@ -16,7 +16,7 @@ export const useFieldset = (props) => {
     ...formField,
     errorDescribedBy,
     inputProps: {
-      ...inputProps,
+      "aria-invalid": inputProps["aria-invalid"],
       "aria-describedby": cl(inputProps["aria-describedby"], errorDescribedBy),
     },
   };

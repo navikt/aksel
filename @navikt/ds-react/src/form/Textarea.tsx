@@ -13,10 +13,6 @@ export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Visually allowed length of content
    */
   maxLength?: number;
@@ -24,6 +20,7 @@ export interface TextareaProps
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
    * Maximum number of rows to display.
+   * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
