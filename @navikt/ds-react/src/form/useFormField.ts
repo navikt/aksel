@@ -33,7 +33,7 @@ export const useFormField = (props: FormFieldProps, prefix?: string) => {
     hasError,
     errorId,
     inputDescriptionId,
-    size: size ? size : fieldset?.size ?? "m",
+    size: size ?? fieldset?.size ?? "m",
     inputProps: {
       id,
       "aria-invalid": hasError,
