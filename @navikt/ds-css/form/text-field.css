@@ -1,0 +1,45 @@
+.navds-text-field__input {
+  appearance: none;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid var(--navds-color-border);
+  min-height: 48px;
+  width: 100%;
+}
+
+.navds-form-field--s > .navds-text-field__input {
+  padding: 0.25rem;
+  min-height: 32px;
+}
+
+.navds-text-field__input:hover {
+  border-color: var(--navds-color-blue-50);
+}
+
+.navds-text-field__input:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+/**
+  Error handling
+*/
+.navds-text-field--error
+  > .navds-text-field__input:not(:hover):not(:focus):not(:disabled) {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
+/*
+  TODO: Oppdater denne til riktige farger
+  Disabled handling
+ */
+.navds-text-field__input:disabled,
+.navds-text-field__input[readonly] {
+  background-color: #f1f1f1;
+  border-color: #6a6a6a;
+  box-shadow: none;
+  color: #262626;
+  cursor: not-allowed;
+}
