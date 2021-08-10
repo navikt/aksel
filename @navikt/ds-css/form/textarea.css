@@ -72,9 +72,5 @@
   border-color: #6a6a6a;
   box-shadow: none;
   color: #262626;
-}
-
-.navds-text-input__input:disabled:hover,
-.navds-text-input__input[readonly]:hover {
   cursor: not-allowed;
 }
