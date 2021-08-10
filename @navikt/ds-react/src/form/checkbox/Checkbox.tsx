@@ -2,16 +2,18 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
-import { GenericFormProps } from "../useFormField";
+import { FormFieldProps } from "../useFormField";
 import { BodyShort } from "../../index";
 import { omit } from "../../index";
 
 export interface CheckboxProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   className?: string;
+  /**
+   * Label for checkbox
+   */
   children: React.ReactNode;
-  value?: string;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
@@ -57,7 +59,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       >
         {props.children}
       </BodyShort>
-
       {props.description && (
         <BodyShort
           size={size}

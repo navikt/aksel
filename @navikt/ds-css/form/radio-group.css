@@ -11,7 +11,3 @@
 .navds-fieldset.navds-radio-group--m > .navds-fieldset__error {
   margin-top: 0;
 }
-
-.navds-radio-group--s .navds-error-message {
-  margin-top: 4px;
-}

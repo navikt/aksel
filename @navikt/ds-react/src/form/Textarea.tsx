@@ -3,19 +3,15 @@ import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { GenericFormProps, useFormField } from "./useFormField";
+import { FormFieldProps, useFormField } from "./useFormField";
 import useId from "./useId";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
  */
 export interface TextareaProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  /**
-   * @ignore
-   */
-  className?: string;
   /**
    * Visually allowed length of content
    */
@@ -24,6 +20,7 @@ export interface TextareaProps
   onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
    * Maximum number of rows to display.
+   * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
@@ -31,9 +28,12 @@ export interface TextareaProps
    */
   minRows?: number;
   /**
-   * If enabled shows the label and description for screenreaders only
+   * Textarea label
    */
   label: React.ReactNode;
+  /**
+   * If enabled shows the label and description for screenreaders only
+   */
   hideLabel?: boolean;
 }
 
@@ -53,7 +53,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       className,
       description,
       maxLength,
-      hideLabel,
+      hideLabel = false,
       ...rest
     } = props;
 
@@ -74,7 +74,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           size={size}
           component="label"
           className={cl("navds-textarea__label", {
-            "sr-only": !!hideLabel,
+            "sr-only": hideLabel,
           })}
         >
           {label}
@@ -82,7 +82,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {!!description && (
           <BodyShort
             className={cl("navds-textarea__description", {
-              "sr-only": !!hideLabel,
+              "sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -99,8 +99,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               className,
               "navds-textarea__input",
               "navds-body-short",
+              `navds-body-${size ?? "m"}`,
               {
-                "navds-body--s": size === "s",
                 "navds-textarea--counter": hasMaxLength,
               }
             )}

@@ -3,7 +3,7 @@ import cl from "classnames";
 import { FieldsetContext } from "./index";
 import useId from "./useId";
 
-export interface GenericFormProps {
+export interface FormFieldProps {
   error?: React.ReactNode;
   errorId?: string;
   size?: "m" | "s";
@@ -12,7 +12,10 @@ export interface GenericFormProps {
   id?: string;
 }
 
-export const useFormField = (props: GenericFormProps, prefix?: string) => {
+/**
+ * Handles props and their state for various form-fields in context with Fieldset
+ */
+export const useFormField = (props: FormFieldProps, prefix?: string) => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
@@ -25,12 +28,12 @@ export const useFormField = (props: GenericFormProps, prefix?: string) => {
   const hasError: boolean = !disabled && !!(error || fieldset?.error);
   const showErrorMsg = !disabled && !!error && typeof error !== "boolean";
 
-  const newProps = {
+  return {
     showErrorMsg,
     hasError,
     errorId,
     inputDescriptionId,
-    size: size ? size : fieldset?.size ?? "m",
+    size: size ?? fieldset?.size ?? "m",
     inputProps: {
       id,
       "aria-invalid": hasError,
@@ -41,6 +44,4 @@ export const useFormField = (props: GenericFormProps, prefix?: string) => {
       disabled,
     },
   };
-
-  return newProps;
 };

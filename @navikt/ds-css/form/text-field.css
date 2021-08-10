@@ -4,7 +4,6 @@
   background-color: white;
   border-radius: 4px;
   border: 1px solid var(--navds-color-border);
-  box-sizing: border-box;
   min-height: 48px;
   width: 100%;
 }
@@ -42,9 +41,5 @@
   border-color: #6a6a6a;
   box-shadow: none;
   color: #262626;
-}
-
-.navds-text-field__input:disabled:hover,
-.navds-text-field__input[readonly]:hover {
   cursor: not-allowed;
 }

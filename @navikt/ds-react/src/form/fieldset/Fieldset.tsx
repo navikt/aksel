@@ -2,7 +2,7 @@ import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
 import { BodyShort, Label } from "../../index";
 import ErrorMessage from "../ErrorMessage";
-import { GenericFormProps } from "../useFormField";
+import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
 
 export type FieldsetContextProps = {
@@ -17,10 +17,10 @@ export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
   null
 );
 export interface FieldsetProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     FieldsetHTMLAttributes<HTMLFieldSetElement> {
   /**
-   * Component content
+   * FormFields in Fieldset
    */
   children: React.ReactNode;
   className?: string;
@@ -75,6 +75,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       >
         <fieldset
           {...rest}
+          {...inputProps}
           ref={ref}
           className={cl(
             className,
@@ -82,8 +83,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             `navds-fieldset--${size}`,
             { "navds-fieldset--error": hasError }
           )}
-          aria-invalid={inputProps["aria-invalid"]}
-          aria-describedby={inputProps["aria-describedby"]}
         >
           <Label
             size={size}

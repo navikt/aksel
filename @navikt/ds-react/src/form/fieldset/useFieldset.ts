@@ -3,6 +3,9 @@ import { useContext } from "react";
 import { FieldsetContext } from "./index";
 import { useFormField } from "../useFormField";
 
+/**
+ * Handles props for Fieldset in context with parent Fieldset.
+ */
 export const useFieldset = (props) => {
   const formField = useFormField(props, "fieldset");
   const { errorId, inputProps, showErrorMsg } = formField;
@@ -16,7 +19,7 @@ export const useFieldset = (props) => {
     ...formField,
     errorDescribedBy,
     inputProps: {
-      ...inputProps,
+      "aria-invalid": inputProps["aria-invalid"],
       "aria-describedby": cl(inputProps["aria-describedby"], errorDescribedBy),
     },
   };

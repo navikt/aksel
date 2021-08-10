@@ -19,7 +19,6 @@
   display: flex;
   width: fit-content;
   gap: 12px;
-  min-width: 48px;
   cursor: pointer;
 }
 
@@ -88,8 +87,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 75%;
-  border-color: var(--navds-color-blue-50);
-  border-width: 2px;
+  border: 2px solid var(--navds-color-blue-50);
   background-color: var(--navds-color-blue-50);
 }
 
@@ -103,6 +101,10 @@
   + .navds-checkbox__label::before {
   box-shadow: 0 0 0 1px var(--navds-color-red-50);
   border-color: var(--navds-color-red-50);
+}
+
+.navds-checkbox--s .navds-error-message {
+  margin-top: 4px;
 }
 
 .navds-checkbox__input:disabled,

@@ -1,9 +1,3 @@
-/* TODO: Flytte denne til bedre lokal */
-.navds-error-message {
-  display: block;
-  color: var(--navds-color-red-50);
-}
-
 .navds-form-field > :not(:first-child):not(:empty),
 .navds-form-field > input:not(:first-child) {
   margin-top: 8px;

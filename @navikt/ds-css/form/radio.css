@@ -102,6 +102,10 @@
   border-color: var(--navds-color-red-50);
 }
 
+.navds-radio--s .navds-error-message {
+  margin-top: 4px;
+}
+
 .navds-radio__input:disabled,
 .navds-radio__input:disabled + .navds-radio__label {
   color: var(--navds-color-gray-40);

@@ -2,10 +2,10 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { GenericFormProps, useFormField } from "./useFormField";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * @ignore
@@ -19,6 +19,9 @@ export interface TextFieldProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * TextField label
+   */
   label: React.ReactNode;
 }
 
@@ -32,7 +35,14 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     inputDescriptionId,
   } = useFormField(props, "textField");
 
-  const { label, className, description, htmlSize, hideLabel, ...rest } = props;
+  const {
+    label,
+    className,
+    description,
+    htmlSize,
+    hideLabel = false,
+    ...rest
+  } = props;
 
   return (
     <div
@@ -47,7 +57,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         htmlFor={inputProps.id}
         size={size}
         component="label"
-        className={cl("navds-text-field__label", { "sr-only": !!hideLabel })}
+        className={cl("navds-text-field__label", { "sr-only": hideLabel })}
       >
         {label}
       </Label>
@@ -55,7 +65,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
       {!!description && (
         <BodyShort
           className={cl("navds-text-field__description", {
-            "sr-only": !!hideLabel,
+            "sr-only": hideLabel,
           })}
           id={inputDescriptionId}
           size={size}
@@ -72,7 +82,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           className,
           "navds-text-field__input",
           "navds-body-short",
-          { "navds-body--s": size === "s" }
+          `navds-body-${size ?? "m"}`
         )}
         size={htmlSize}
       />
