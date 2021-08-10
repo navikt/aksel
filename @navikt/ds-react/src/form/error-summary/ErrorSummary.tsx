@@ -26,13 +26,7 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         tabIndex={0}
         role="region"
       >
-        <div
-          className={cl("navds-title navds-title--m", {
-            "navds-title--s": size === "s",
-          })}
-        >
-          {title}
-        </div>
+        <div className="navds-title navds-title--s">{title}</div>
         <div
           className={cl("navds-body-short", {
             "navds-body--s": size === "s",
