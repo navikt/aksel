@@ -19,7 +19,6 @@
   display: flex;
   width: fit-content;
   gap: 12px;
-  min-width: 48px;
   cursor: pointer;
 }
 
