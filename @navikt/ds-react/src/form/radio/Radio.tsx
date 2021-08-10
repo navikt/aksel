@@ -2,12 +2,15 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { BodyShort, omit } from "../../index";
 import ErrorMessage from "../ErrorMessage";
-import { GenericFormProps } from "../useFormField";
+import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
 export interface RadioProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /**
+   * Label for radio
+   */
   children: React.ReactNode;
   className?: string;
   value: string;

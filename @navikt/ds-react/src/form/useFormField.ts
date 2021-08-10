@@ -11,7 +11,7 @@ import {
 } from "./index";
 import useId from "./useId";
 
-export interface GenericFormProps {
+export interface FormFieldProps {
   error?: React.ReactNode;
   errorId?: string;
   size?: "m" | "s";
@@ -19,18 +19,6 @@ export interface GenericFormProps {
   description?: React.ReactNode;
   id?: string;
 }
-
-type FormFieldProps = GenericFormProps &
-  (
-    | SelectProps
-    | TextareaProps
-    | TextFieldProps
-    | CheckboxProps
-    | RadioProps
-    | FieldsetProps
-    | SelectProps
-    | SelectProps
-  );
 
 export const useFormField = (props: FormFieldProps, prefix?: string) => {
   const { size, error, errorId: propErrorId } = props;

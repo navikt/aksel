@@ -3,10 +3,10 @@ import cl from "classnames";
 import { Expand } from "@navikt/ds-icons";
 import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { GenericFormProps, useFormField } from "./useFormField";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SelectProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /**
    * @ignore

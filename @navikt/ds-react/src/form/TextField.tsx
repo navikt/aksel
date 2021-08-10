@@ -2,10 +2,10 @@ import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { GenericFormProps, useFormField } from "./useFormField";
+import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * @ignore

@@ -3,14 +3,14 @@ import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { BodyShort, Label } from "../index";
 import ErrorMessage from "./ErrorMessage";
-import { GenericFormProps, useFormField } from "./useFormField";
+import { FormFieldProps, useFormField } from "./useFormField";
 import useId from "./useId";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
  */
 export interface TextareaProps
-  extends GenericFormProps,
+  extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
    * @ignore
