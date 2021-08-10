@@ -1,0 +1,54 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { ErrorSummary, ErrorSummaryItem } from "../index";
+
+<Meta title="ds-react/form/errorsummary/intro" />
+
+# Hvordan ta i bruk ErrorSummary
+
+`href` på `ErrorSummaryItem` linker til id som er satt på skjema-elementer.
+
+```jsx
+<ErrorSummary heading="Eiusmod est cillum mollit pariatur deserunt">
+  <ErrorSummaryItem href="#1">Checkbox må fylles ut</ErrorSummaryItem>
+  <ErrorSummaryItem href="#2">
+    Tekstfeltet må ha en godkjent e-mail
+  </ErrorSummaryItem>
+</ErrorSummaryItem>
+```
+
+<Canvas>
+  <ErrorSummary heading="Eiusmod est cillum mollit pariatur deserunt">
+    <ErrorSummaryItem href="#1">Checkbox må fylles ut</ErrorSummaryItem>
+    <ErrorSummaryItem href="#2">
+      Tekstfeltet må ha en godkjent e-mail
+    </ErrorSummaryItem>
+  </ErrorSummary>
+</Canvas>
+
+## Custom headingTag
+
+`headingTag` lar deg sette heading til en annen html-tag en default "h2"
+
+```jsx
+<ErrorSummary
+  heading="Eiusmod est cillum mollit pariatur deserunt"
+  headingTag="h3"
+>
+  <ErrorSummaryItem href="#1">Checkbox må fylles ut</ErrorSummaryItem>
+  <ErrorSummaryItem href="#2">
+    Tekstfeltet må ha en godkjent e-mail
+  </ErrorSummaryItem>
+</ErrorSummaryItem>
+```
+
+<Canvas>
+  <ErrorSummary
+    heading="Eiusmod est cillum mollit pariatur deserunt"
+    headingTag="h3"
+  >
+    <ErrorSummaryItem href="#1">Checkbox må fylles ut</ErrorSummaryItem>
+    <ErrorSummaryItem href="#2">
+      Tekstfeltet må ha en godkjent e-mail
+    </ErrorSummaryItem>
+  </ErrorSummary>
+</Canvas>

@@ -17,7 +17,7 @@ const ErrorSummaryItem: ErrorType = forwardRef(
       <Component
         {...rest}
         ref={ref}
-        className={cl(className, "navds-error-summary__error", "navds-link")}
+        className={cl(className, "navds-error-summary__item", "navds-link")}
       >
         {children}
       </Component>

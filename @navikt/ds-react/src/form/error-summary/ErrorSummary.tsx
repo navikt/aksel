@@ -4,8 +4,18 @@ import { Title } from "../..";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  /**
+   * @default "m"
+   */
   size?: "m" | "s";
+  /**
+   * ErroSummary heading above links
+   */
   heading?: React.ReactNode;
+  /**
+   * Allows setting a different HTML <tag>
+   * @default "h2"
+   */
   headingTag?: React.ElementType<any>;
 }
 
@@ -26,7 +36,11 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         tabIndex={-1}
         role="region"
       >
-        <Title component={headingTag} size="s">
+        <Title
+          className="navds-error-summary__title"
+          component={headingTag}
+          size="s"
+        >
           {heading}
         </Title>
         <ul
