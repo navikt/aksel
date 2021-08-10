@@ -9,13 +9,12 @@ export interface SelectProps
   extends FormFieldProps,
     Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Expose the HTML size attribute
    */
   htmlSize?: number;
+  /**
+   * Label for select
+   */
   label: string;
   /**
    * If enabled shows the label and description for screenreaders only
@@ -78,9 +77,12 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
           {...rest}
           {...inputProps}
           ref={ref}
-          className={cl(className, "navds-select__input", "navds-body-short", {
-            "navds-body--s": size === "s",
-          })}
+          className={cl(
+            className,
+            "navds-select__input",
+            "navds-body-short",
+            `navds-body--${size ?? "m"}`
+          )}
           size={props.htmlSize}
         >
           {children}

@@ -1,14 +1,6 @@
 import { useContext } from "react";
 import cl from "classnames";
-import {
-  CheckboxProps,
-  FieldsetContext,
-  FieldsetProps,
-  RadioProps,
-  SelectProps,
-  TextareaProps,
-  TextFieldProps,
-} from "./index";
+import { FieldsetContext } from "./index";
 import useId from "./useId";
 
 export interface FormFieldProps {
