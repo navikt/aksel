@@ -51,8 +51,8 @@ export const checkbox = () => {
         feil="Her er det noe feil"
         utenFeilPropagering
       >
-        <Checkbox label={"Bakerst"} disabled />
-        <Checkbox label={"Midten"} feil />
+        <Checkbox label={"Bakerst"} />
+        <Checkbox label={"Midten"} feil disabled />
         <Checkbox label={"Fremst"} />
       </CheckboxGruppe>
     </div>
