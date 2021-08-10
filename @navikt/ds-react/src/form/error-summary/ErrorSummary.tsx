@@ -13,9 +13,11 @@ export interface ErrorSummaryProps
 }
 
 const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
-  ({ children, className, title, size = "m" }, ref) => {
+  ({ children, className, title, size = "m", ...rest }, ref) => {
     return (
       <div
+        ref={ref}
+        {...rest}
         className={cl(
           className,
           "navds-error-summary",
@@ -23,7 +25,6 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         )}
         tabIndex={0}
         role="region"
-        ref={ref}
       >
         <div
           className={cl("navds-title navds-title--m", {
