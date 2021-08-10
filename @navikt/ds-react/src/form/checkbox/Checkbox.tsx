@@ -57,7 +57,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       >
         {props.children}
       </BodyShort>
-
       {props.description && (
         <BodyShort
           size={size}

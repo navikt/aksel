@@ -105,6 +105,10 @@
   border-color: var(--navds-color-red-50);
 }
 
+.navds-checkbox--s .navds-error-message {
+  margin-top: 4px;
+}
+
 .navds-checkbox__input:disabled,
 .navds-checkbox__input:disabled + .navds-checkbox__label {
   color: var(--navds-color-gray-40);
