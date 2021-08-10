@@ -1,19 +1,23 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { Title } from "../..";
 
-export interface ErrorSummaryProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * @ignore
    */
   className?: string;
   children: React.ReactNode;
   size?: "m" | "s";
-  title: React.ReactNode;
+  heading?: React.ReactNode;
+  headingTag?: React.ElementType<any>;
 }
 
 const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
-  ({ children, className, title, size = "m", ...rest }, ref) => {
+  (
+    { children, className, size = "m", headingTag = "h2", heading, ...rest },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
@@ -23,21 +27,23 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           "navds-error-summary",
           `navds-error-summary--${size}`
         )}
-        tabIndex={0}
+        tabIndex={-1}
         role="region"
       >
-        <div className="navds-title navds-title--s">{title}</div>
-        <div
-          className={cl("navds-body-short", {
-            "navds-body--s": size === "s",
-          })}
+        <Title component={headingTag} size="s">
+          {heading}
+        </Title>
+        <ul
+          className={cl(
+            "navds-error-summary__list",
+            "navds-body-short",
+            `navds-body--${size}`
+          )}
         >
-          <ul className="navds-error-summary__list">
-            {React.Children.map(children, (child) => {
-              return <li key={child?.toString()}>{child}</li>;
-            })}
-          </ul>
-        </div>
+          {React.Children.map(children, (child) => {
+            return <li key={child?.toString()}>{child}</li>;
+          })}
+        </ul>
       </div>
     );
   }

@@ -14,7 +14,8 @@ export { default as Select, SelectProps } from "./Select";
 export {
   ErrorSummary,
   ErrorSummaryProps,
-  ErrorSummaryError,
+  ErrorSummaryItem,
+  ErrorSummaryItemProps,
 } from "./error-summary";
 export { Counter, default as Textarea, TextareaProps } from "./Textarea";
 export { default as TextField, TextFieldProps } from "./TextField";
