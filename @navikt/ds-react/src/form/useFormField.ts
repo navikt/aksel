@@ -1,6 +1,14 @@
 import { useContext } from "react";
 import cl from "classnames";
-import { FieldsetContext } from "./index";
+import {
+  CheckboxProps,
+  FieldsetContext,
+  FieldsetProps,
+  RadioProps,
+  SelectProps,
+  TextareaProps,
+  TextFieldProps,
+} from "./index";
 import useId from "./useId";
 
 export interface GenericFormProps {
@@ -12,7 +20,19 @@ export interface GenericFormProps {
   id?: string;
 }
 
-export const useFormField = (props: GenericFormProps, prefix?: string) => {
+type FormFieldProps = GenericFormProps &
+  (
+    | SelectProps
+    | TextareaProps
+    | TextFieldProps
+    | CheckboxProps
+    | RadioProps
+    | FieldsetProps
+    | SelectProps
+    | SelectProps
+  );
+
+export const useFormField = (props: FormFieldProps, prefix?: string) => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
