@@ -44,7 +44,6 @@
     "react-popper": "^2.2.4",
     "uuid": "^8.3.2",
     "short-uuid": "^4.2.0",
-    "lodash.throttle": "^4.1.1",
     "@material-ui/core": "^4.12.2"
   },
   "devDependencies": {
