@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.6.11",
+  "version": "0.6.12",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -34,6 +34,7 @@
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.2",
     "@navikt/ds-icons": "^0.3.3",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
@@ -42,9 +43,8 @@
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.12.1",
     "react-popper": "^2.2.4",
-    "uuid": "^8.3.2",
     "short-uuid": "^4.2.0",
-    "@material-ui/core": "^4.12.2"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
