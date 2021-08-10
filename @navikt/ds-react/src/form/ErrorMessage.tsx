@@ -6,9 +6,11 @@ const ErrorMessage = (props) => (
   <Label
     {...props}
     component="div"
-    className={cl("navds-error-message", props.className, {
-      "navds-error-message--s": props.size === "s",
-    })}
+    className={cl(
+      "navds-error-message",
+      props.className,
+      `navds-error-message--${props.size ?? "m"}`
+    )}
   />
 );
 
