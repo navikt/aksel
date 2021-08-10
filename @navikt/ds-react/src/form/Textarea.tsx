@@ -99,8 +99,8 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               className,
               "navds-textarea__input",
               "navds-body-short",
+              `navds-body-${size ?? "m"}`,
               {
-                "navds-body--s": size === "s",
                 "navds-textarea--counter": hasMaxLength,
               }
             )}
