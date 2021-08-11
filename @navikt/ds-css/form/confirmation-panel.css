@@ -15,7 +15,7 @@
 }
 
 .navds-confirmation-panel--s {
-  padding: var(--navds-spacing-2);
+  padding: var(--navds-spacing-3);
 }
 
 .navds-confirmation-panel--s > .navds-confirmation-panel__content {

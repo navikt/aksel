@@ -2,11 +2,11 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyLong, Checkbox, CheckboxProps } from "../index";
 
-export interface ConfirmationPanelProps extends CheckboxProps {
+export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
   /**
    * children
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Checkbox label
    */
@@ -28,12 +28,14 @@ const ConfirmationPanel = forwardRef<HTMLDivElement, ConfirmationPanelProps>(
           "navds-confirmation-panel--checked": !!props.checked,
         })}
       >
-        <BodyLong
-          size={props.size}
-          className="navds-confirmation-panel__content"
-        >
-          {children}
-        </BodyLong>
+        {children && (
+          <BodyLong
+            size={props.size}
+            className="navds-confirmation-panel__content"
+          >
+            {children}
+          </BodyLong>
+        )}
         <Checkbox {...props}>{label}</Checkbox>
       </div>
     );

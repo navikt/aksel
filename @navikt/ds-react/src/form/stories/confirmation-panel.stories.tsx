@@ -40,6 +40,12 @@ export const All = () => {
         Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
         minim ut mollit voluptate exercitation nulla mollit.
       </ConfirmationPanel>
+      <h2>Empty</h2>
+      <ConfirmationPanel
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+        label="Checkbox label text"
+      ></ConfirmationPanel>
     </div>
   );
 };
