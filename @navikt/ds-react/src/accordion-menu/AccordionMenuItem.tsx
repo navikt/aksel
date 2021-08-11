@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
 import cl from "classnames";
 
 export interface AccordionMenuItemProps
