@@ -40,6 +40,8 @@ export const useFormField = (props: FormFieldProps, prefix?: string) => {
       "aria-describedby":
         cl(props["aria-describedby"], {
           [inputDescriptionId]: !!props?.description,
+          [errorId]: showErrorMsg,
+          [fieldset?.errorId ?? ""]: hasError && !!fieldset?.error,
         }) || undefined,
       disabled,
     },

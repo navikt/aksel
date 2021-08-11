@@ -10,7 +10,6 @@ export type FieldsetContextProps = {
   errorId: string;
   size: "m" | "s";
   disabled: boolean;
-  errorDescribedBy?: string;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
@@ -48,7 +47,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       hasError,
       size,
       inputDescriptionId,
-      errorDescribedBy,
     } = useFieldset(props);
 
     const fieldset = useContext(FieldsetContext);
@@ -60,6 +58,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
+      errorId: _errorId,
       ...rest
     } = props;
 
@@ -67,10 +66,12 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       <FieldsetContext.Provider
         value={{
           error: errorPropagation ? props.error ?? fieldset?.error : undefined,
-          errorId: props.error ? errorId : fieldset?.errorId ?? errorId,
+          errorId: cl(
+            { [errorId]: showErrorMsg },
+            { [fieldset?.errorId ?? ""]: !!fieldset?.error }
+          ),
           size,
           disabled: props.disabled ?? false,
-          errorDescribedBy,
         }}
       >
         <fieldset
