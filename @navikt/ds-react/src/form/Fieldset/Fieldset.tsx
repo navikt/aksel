@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyShort, Label } from "../..";
+import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
@@ -66,7 +66,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       legend,
       description,
       hideLegend,
-      errorId: _errorId,
       ...rest
     } = props;
 
@@ -83,7 +82,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         }}
       >
         <fieldset
-          {...rest}
+          {...omit(rest, ["errorId"])}
           {...inputProps}
           ref={ref}
           className={cl(
