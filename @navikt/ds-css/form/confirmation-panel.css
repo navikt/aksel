@@ -5,7 +5,6 @@
   border-radius: 4px;
   background-color: #ffeccc;
   border-color: #ffeccc;
-  cursor: unset;
   transition: background-color linear 100ms;
 }
 
