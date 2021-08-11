@@ -9,7 +9,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    */
   size?: "m" | "s";
   /**
-   * ErroSummary heading above links
+   * ErrorSummary heading above links
    */
   heading?: React.ReactNode;
   /**
