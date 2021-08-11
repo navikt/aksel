@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import { AccordionMenu as BaseAccordionMenu } from "../accordion-menu";
-import { Title } from "../index";
+import { Title } from "..";
 import { ActiveAnchorProvider } from "./ActiveAnchorStore";
 import cl from "classnames";
 

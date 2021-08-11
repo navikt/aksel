@@ -1,6 +1,6 @@
 import * as React from "react";
-import { ContentContainer } from "../index";
-import { BodyLong } from "../../index";
+import { ContentContainer } from "..";
+import { BodyLong } from "../..";
 import "./style.css";
 
 export default {

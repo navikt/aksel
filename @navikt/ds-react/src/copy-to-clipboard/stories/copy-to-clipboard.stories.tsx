@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { CopyToClipboard } from "../index";
+import { CopyToClipboard } from "..";
 import { Link } from "@navikt/ds-icons";
 
 export default {

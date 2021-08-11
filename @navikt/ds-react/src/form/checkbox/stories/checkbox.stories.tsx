@@ -1,5 +1,5 @@
 import React from "react";
-import { Checkbox, CheckboxGroup } from "../../index";
+import { Checkbox, CheckboxGroup } from "../..";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "ds-react/form/checkbox",

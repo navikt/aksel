@@ -1,5 +1,5 @@
 import React from "react";
-import { MicroCard } from "../index";
+import { MicroCard } from "..";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "ds-react/card",

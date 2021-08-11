@@ -1,5 +1,5 @@
 import React from "react";
-import { SpeechBubble, Bubble } from "../index";
+import { SpeechBubble, Bubble } from "..";
 import { Meta } from "@storybook/react/types-6-0";
 import { Illustration } from "./illustration";
 

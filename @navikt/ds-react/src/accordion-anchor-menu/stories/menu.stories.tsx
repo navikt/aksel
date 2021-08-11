@@ -3,12 +3,12 @@ import {
   AccordionAnchorMenu as Menu,
   AccordionAnchorMenuCollapsable as Collapsable,
   AccordionAnchorMenuItem as Item,
-} from "../index";
+} from "..";
 import {
   ProductPageLayout as Layout,
   ProductPageSection as Section,
   ProductPagePanel as Panel,
-} from "../../index";
+} from "../..";
 import { Right } from "../../layouts/stories/components/sections/Right";
 import { LightBulb, Telephone } from "@navikt/ds-icons";
 import { MainOne } from "../../layouts/stories/components/sections/Main";

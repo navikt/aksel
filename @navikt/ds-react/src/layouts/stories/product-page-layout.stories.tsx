@@ -3,7 +3,7 @@ import {
   ProductPageLayout as Layout,
   ProductPageSection as Section,
   ProductPagePanel as Panel,
-} from "../../index";
+} from "../..";
 import { Left } from "./components/sections/Left";
 import { Main, MainOne, MainTwo, MainThree } from "./components/sections/Main";
 import { Right } from "./components/sections/Right";

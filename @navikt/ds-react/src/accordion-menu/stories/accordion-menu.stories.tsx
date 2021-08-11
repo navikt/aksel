@@ -3,7 +3,7 @@ import {
   AccordionMenu,
   AccordionMenuItem as Item,
   AccordionMenuCollapsable as Collapsable,
-} from "../index";
+} from "..";
 import { NavLink, HashRouter as Router } from "react-router-dom";
 
 export default {

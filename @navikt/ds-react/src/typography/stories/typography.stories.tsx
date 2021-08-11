@@ -1,5 +1,5 @@
 import React from "react";
-import { Title, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
+import { Title, BodyShort, BodyLong, Detail, Ingress, Label } from "..";
 import "./index.css";
 
 export default {
