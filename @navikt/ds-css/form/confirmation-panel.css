@@ -1,0 +1,68 @@
+.navds-confirmation-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-4);
+  padding: var(--navds-spacing-4);
+  border-radius: 4px;
+  background-color: #ffeccc;
+  transition: background-color linear 100ms;
+}
+
+.navds-confirmation-panel__content {
+  max-width: 80ch;
+}
+
+.navds-confirmation-panel--s {
+  padding: var(--navds-spacing-3);
+  gap: var(--navds-spacing-2);
+}
+
+.navds-confirmation-panel--checked {
+  background-color: #ccf1d6;
+  border-color: #ccf1d6;
+}
+
+.navds-confirmation-panel--error {
+  background-color: #f3e3e3;
+  border: 1px solid transparent;
+}
+
+.navds-confirmation-panel--checked
+  > .navds-confirmation-panel__content
+  .navds-link:not(:focus) {
+  color: var(--navds-color-darkgray);
+}
+
+.navds-confirmation-panel
+  .navds-checkbox__input:hover
+  + .navds-checkbox__label {
+  text-decoration: underline;
+}
+
+.navds-confirmation-panel--checked
+  .navds-checkbox__input:hover
+  + .navds-checkbox__label {
+  color: var(--navds-color-darkgray);
+}
+
+.navds-confirmation-panel--checked
+  .navds-checkbox__input
+  + .navds-checkbox__label::before {
+  transition: none;
+  background-color: var(--navds-color-green-50);
+  border-color: var(--navds-color-green-50);
+  background-image: var(--navds-checkmark-image-white);
+}
+
+.navds-confirmation-panel--checked
+  .navds-checkbox__input:hover
+  + .navds-checkbox__label::before {
+  background-color: var(--navds-color-green-70);
+  border-color: var(--navds-color-green-70);
+}
+
+.navds-confirmation-panel--checked
+  .navds-checkbox__input:focus:hover
+  + .navds-checkbox__label::before {
+  background-image: var(--navds-checkmark-image-white);
+}

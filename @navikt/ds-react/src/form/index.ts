@@ -19,3 +19,7 @@ export {
 } from "./error-summary";
 export { Counter, default as Textarea, TextareaProps } from "./Textarea";
 export { default as TextField, TextFieldProps } from "./TextField";
+export {
+  default as ConfirmationPanel,
+  ConfirmationPanelProps,
+} from "./ConfirmationPanel";
