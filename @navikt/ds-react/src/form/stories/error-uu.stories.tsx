@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Button, Checkbox, CheckboxGroup, TextField } from "../../index";
+import { Button, Checkbox, CheckboxGroup } from "../../index";
 export default {
   title: "ds-react/form/uu-demo",
   component: Fieldset,
