@@ -3,7 +3,7 @@ import cl from "classnames";
 import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
-import { Button } from "../index";
+import { Button } from "..";
 
 export interface ModalProps {
   /**

@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { Fieldset, FieldsetContext, FieldsetProps } from "../index";
+import { Fieldset, FieldsetContext, FieldsetProps } from "..";
 import useId from "../useId";
 
 export interface RadioGroupContextProps {
