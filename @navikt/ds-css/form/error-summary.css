@@ -1,8 +1,6 @@
 .navds-error-summary {
-  display: block;
   background-color: #fff;
   padding: var(--navds-spacing-4);
-  border-radius: 0;
   border: 4px solid #ba3a26;
 }
 
