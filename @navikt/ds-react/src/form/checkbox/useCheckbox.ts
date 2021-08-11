@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CheckboxProps } from "../..";
+import { CheckboxProps } from "../../index";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
 

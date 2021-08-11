@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { Children, forwardRef, HTMLAttributes, useEffect } from "react";
-import { ContentContainer, Title } from "../..";
+import { ContentContainer, Title } from "../../index";
 
 const cls = (className, columns) =>
   cl(

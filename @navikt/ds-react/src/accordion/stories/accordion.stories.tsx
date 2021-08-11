@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Accordion } from "..";
+import { Accordion } from "../index";
 
 export default {
   title: "ds-react/accordion",

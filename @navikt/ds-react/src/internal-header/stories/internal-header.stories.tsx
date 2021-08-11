@@ -1,6 +1,10 @@
 import React from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import { InternalHeader, InternalHeaderTitle, InternalHeaderUser } from "..";
+import {
+  InternalHeader,
+  InternalHeaderTitle,
+  InternalHeaderUser,
+} from "../index";
 
 export default {
   title: "ds-react/internal-header",

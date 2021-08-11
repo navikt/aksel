@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Loader } from "..";
-import { Button, Panel, Title } from "../..";
+import { Loader } from "../index";
+import { Button, Panel, Title } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 import "./demo.css";
 export default {

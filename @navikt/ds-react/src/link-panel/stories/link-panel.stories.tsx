@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkPanel, LinkPanelTitle } from "..";
+import { LinkPanel, LinkPanelTitle } from "../index";
 import { Illustration } from "./illustration";
 
 export default {

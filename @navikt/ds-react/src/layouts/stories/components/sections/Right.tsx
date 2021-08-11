@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Accordion } from "../../../..";
+import { Accordion } from "../../../../index";
 
 export const Right = () => (
   <div>

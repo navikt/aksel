@@ -1,5 +1,5 @@
 import React from "react";
-import { Alert } from "..";
+import { Alert } from "../index";
 
 export default {
   title: "ds-react/alert",

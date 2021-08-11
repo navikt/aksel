@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "../util";
-import { Panel } from "..";
+import { Panel } from "../index";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
 

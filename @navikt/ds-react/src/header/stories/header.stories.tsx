@@ -1,5 +1,5 @@
 import React from "react";
-import { Header } from "..";
+import { Header } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { illustrationPictogram } from "./pictogram";
 export default {

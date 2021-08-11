@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Link } from "../../../..";
+import { Button, Link } from "../../../../index";
 
 export const Left = () => (
   <ul className={"navds-story-menu"}>

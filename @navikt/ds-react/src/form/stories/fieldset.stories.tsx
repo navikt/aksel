@@ -1,7 +1,7 @@
 import React from "react";
-import { Fieldset } from "..";
+import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { TextField } from "../..";
+import { TextField } from "../../index";
 export default {
   title: "ds-react/form/fieldset",
   component: Fieldset,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "..";
+import { Link } from "../index";
 import { Add } from "@navikt/ds-icons";
 export default {
   title: "ds-react/link",

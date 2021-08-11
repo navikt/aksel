@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Cell, Grid, Title, Link, BodyLong } from "../../../..";
+import { Button, Cell, Grid, Title, Link, BodyLong } from "../../../../index";
 
 export const Main = ({ title = true }) => (
   <>
