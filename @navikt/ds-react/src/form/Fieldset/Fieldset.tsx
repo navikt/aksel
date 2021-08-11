@@ -6,10 +6,22 @@ import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
 
 export type FieldsetContextProps = {
+  /**
+   * Error message applied to element
+   */
   error?: React.ReactNode;
+  /**
+   * Overrides internal errorId
+   */
   errorId: string;
+  /**
+   * Changes paddings, margins and font-sizes
+   */
   size: "m" | "s";
   disabled: boolean;
+  /**
+   * passes id for two tier fieldset
+   */
   errorDescribedBy?: string;
 };
 
@@ -23,7 +35,6 @@ export interface FieldsetProps
    * FormFields in Fieldset
    */
   children: React.ReactNode;
-  className?: string;
   /**
    * Fieldset legend
    */

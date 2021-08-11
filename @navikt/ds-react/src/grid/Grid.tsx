@@ -3,13 +3,9 @@ import cl from "classnames";
 
 export interface GridProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * Collection of <Cell>-elements
    */
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
 }
 const Grid = forwardRef<HTMLDivElement, GridProps>(
   ({ children, className, ...rest }, ref) => (

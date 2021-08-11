@@ -7,15 +7,11 @@ export type PanelType = OverridableComponent<PanelProps>;
 export interface PanelProps {
   props: {
     /**
-     * Component content
+     * Panel content
      */
     children: React.ReactNode;
     /**
-     * @ignore
-     */
-    className?: string;
-    /**
-     * Adds a border to the panel
+     * Toggles border on panel
      * @default false
      */
     border?: boolean;

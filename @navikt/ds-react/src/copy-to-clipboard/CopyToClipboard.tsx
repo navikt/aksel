@@ -14,6 +14,10 @@ import { Popover, Button } from "..";
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
   /**
+   * Button text
+   */
+  children?: React.ReactNode;
+  /**
    * Text to be copied to clipboard
    */
   text: string;

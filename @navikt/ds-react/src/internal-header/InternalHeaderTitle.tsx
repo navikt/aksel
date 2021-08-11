@@ -7,10 +7,6 @@ export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
    */
   children?: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Tag this component will use. Usefull for defining a button/link
    * @default "h1"
    */

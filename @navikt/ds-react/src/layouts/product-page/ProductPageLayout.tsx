@@ -12,7 +12,6 @@ const cls = (className, columns) =>
 export interface ProductPageLayoutProps extends HTMLAttributes<HTMLElement> {
   title: string;
   children?: React.ReactNode;
-  className?: string;
 }
 
 const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(

@@ -4,7 +4,6 @@ import MenuItems from "./MenuItems";
 
 export interface AccordionMenuProps extends HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
-  className?: string;
 }
 
 const AccordionMenu = forwardRef<HTMLElement, AccordionMenuProps>(

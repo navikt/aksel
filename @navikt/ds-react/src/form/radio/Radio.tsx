@@ -12,7 +12,6 @@ export interface RadioProps
    * Label for radio
    */
   children: React.ReactNode;
-  className?: string;
   value: string;
 }
 

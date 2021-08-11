@@ -8,7 +8,6 @@ export interface AccordionMenuCollapsableProps
   title: string;
   defaultOpen?: boolean;
   children: React.ReactNode;
-  className?: string;
 }
 
 const AccordionMenuCollapsable = forwardRef<

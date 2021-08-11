@@ -16,6 +16,13 @@ export const RadioGroupContext = React.createContext<RadioGroupContextProps | nu
 );
 
 export interface RadioGroupProps extends Omit<FieldsetProps, "onChange"> {
+  /**
+   * Collection of <Radio>-elements
+   */
+  children: React.ReactNode;
+  /**
+   * Override internal name
+   */
   name?: string;
   /**
    * Default checked radiobutton

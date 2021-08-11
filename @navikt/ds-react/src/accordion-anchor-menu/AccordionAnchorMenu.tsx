@@ -8,7 +8,6 @@ export interface AccordionAnchorMenuProps
   extends HTMLAttributes<HTMLDivElement> {
   title?: string;
   children: React.ReactNode;
-  className?: string;
 }
 
 const AccordionAnchorMenu = forwardRef<

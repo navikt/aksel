@@ -3,13 +3,9 @@ import cl from "classnames";
 
 export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * Bubble text
    */
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
   /**
    * User defined toptext, normally "username + date"
    */

@@ -7,7 +7,7 @@ import { Button } from "..";
 
 export interface ModalProps {
   /**
-   * Content of modal
+   * Modal content
    */
   children: React.ReactNode;
   /**

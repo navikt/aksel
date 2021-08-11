@@ -4,11 +4,29 @@ import { FieldsetContext } from "./index";
 import useId from "./useId";
 
 export interface FormFieldProps {
+  /**
+   * Error message for element
+   */
   error?: React.ReactNode;
+  /**
+   * Override internal errorId
+   */
   errorId?: string;
+  /**
+   * Changes font-size, padding and gaps
+   */
   size?: "m" | "s";
+  /**
+   * Disables element
+   */
   disabled?: boolean;
+  /**
+   * Adds a description to extend labling of a field
+   */
   description?: React.ReactNode;
+  /**
+   * Override internal id
+   */
   id?: string;
 }
 
