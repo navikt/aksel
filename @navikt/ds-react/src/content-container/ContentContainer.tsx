@@ -3,10 +3,6 @@ import cl from "classnames";
 
 export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * @ignore
-   */
-  classNames?: string;
-  /**
    * Component content
    */
   children: React.ReactNode;

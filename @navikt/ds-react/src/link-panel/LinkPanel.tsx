@@ -8,9 +8,13 @@ export type LinkPanelType = OverridableComponent<LinkPanelProps>;
 
 export interface LinkPanelProps {
   props: {
+    /**
+     * Panel content
+     */
     children?: React.ReactNode;
-    className?: string;
-    noHeading?: boolean;
+    /**
+     * Toggles border on panel
+     */
     border?: boolean;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";

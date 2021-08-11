@@ -6,6 +6,9 @@ export type ErrorType = OverridableComponent<ErrorSummaryItemProps>;
 
 export interface ErrorSummaryItemProps {
   props: {
+    /**
+     * Link text
+     */
     children: React.ReactNode;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";

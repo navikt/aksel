@@ -3,13 +3,17 @@ import cl from "classnames";
 import { Title } from "../..";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * ErrorSummaryItems
+   */
   children: React.ReactNode;
   /**
+   * Changes padding and font-sizes
    * @default "m"
    */
   size?: "m" | "s";
   /**
-   * ErrorSummary heading above links
+   * Heading above links
    */
   heading?: React.ReactNode;
   /**

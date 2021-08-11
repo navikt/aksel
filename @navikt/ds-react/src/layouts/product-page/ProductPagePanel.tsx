@@ -8,7 +8,6 @@ export interface ProductPagePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   anchor: string;
-  className?: string;
   title: string;
   icon?: ReactNode;
   highlight?: boolean;

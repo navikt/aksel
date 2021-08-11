@@ -4,13 +4,8 @@ import cl from "classnames";
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Children of type <Bubble />
-   * TODO: Type this to <Bubble /> comp
    */
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
   /**
    * Top text for personalia and date
    */

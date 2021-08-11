@@ -14,6 +14,10 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
 
 export interface CheckboxGroupProps extends Omit<FieldsetProps, "onChange"> {
   /**
+   * Checkboxes
+   */
+  children: React.ReactNode;
+  /**
    * Controlled state for group
    */
   value?: string[];

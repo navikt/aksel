@@ -4,10 +4,6 @@ import { v4 as uuidv4 } from "uuid";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Changes sizing
    * 64px | 40px | 32px | 24px | 20px | 16px
    * @default "m"
