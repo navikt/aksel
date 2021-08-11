@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyLong, Checkbox, CheckboxProps } from "../index";
+import { BodyLong, Checkbox, CheckboxProps } from "..";
 
 export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
   /**
