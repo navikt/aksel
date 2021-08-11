@@ -4,10 +4,6 @@ import cl from "classnames";
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * user name
    */
   name: string;

@@ -6,10 +6,6 @@ export interface InternalHeaderProps extends HTMLAttributes<HTMLElement> {
    * Component content
    */
   children?: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
 }
 
 const InternalHeader = forwardRef<HTMLElement, InternalHeaderProps>(

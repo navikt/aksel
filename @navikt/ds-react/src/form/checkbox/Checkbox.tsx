@@ -8,7 +8,6 @@ import { BodyShort, omit } from "../..";
 export interface CheckboxProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  className?: string;
   /**
    * Label for checkbox
    */

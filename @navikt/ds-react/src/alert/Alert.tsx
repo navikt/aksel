@@ -12,17 +12,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Decides what design the alert will have
    */
   variant: "error" | "warning" | "info" | "success";
-  /**
-   * Component content
-   */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * Reduces padding on component
-   * @default "medium"
+   * Changes padding and font-sizes
+   * @default "m"
    */
   size?: "m" | "s";
 }

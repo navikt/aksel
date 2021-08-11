@@ -7,10 +7,6 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Changes background-color and border-color
    */
   variant: "warning" | "error" | "info" | "success";

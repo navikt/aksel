@@ -4,7 +4,7 @@ import { BodyLong, Checkbox, CheckboxProps } from "..";
 
 export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
   /**
-   * children
+   * Additional information on panel
    */
   children?: React.ReactNode;
   /**

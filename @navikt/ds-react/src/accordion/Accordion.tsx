@@ -11,10 +11,6 @@ export interface AccordionProps
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Content on interactive surface of component
    */
   heading: React.ReactNode;
@@ -26,8 +22,6 @@ export interface AccordionProps
   open?: boolean;
   /**
    * Callback for when user interacts with component
-   *
-   * @param {object} event
    */
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   /**

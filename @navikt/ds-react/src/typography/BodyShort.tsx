@@ -10,13 +10,9 @@ export interface BodyShortProps {
      */
     size?: "m" | "s";
     /**
-     * Component content
+     * Paragraph text
      */
     children: React.ReactNode;
-    /**
-     * Custom styling on element
-     */
-    className?: string;
     /**
      * Adds margins to typo
      */

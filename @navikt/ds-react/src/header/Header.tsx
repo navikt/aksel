@@ -7,10 +7,6 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: string;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Pictogram placed in header
    */
   illustration?: React.ReactNode;

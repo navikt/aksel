@@ -28,10 +28,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Orientation for popover
    * @default "right"
    */

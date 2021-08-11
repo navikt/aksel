@@ -5,13 +5,9 @@ import { OverridableComponent } from "../util";
 export interface IngressProps {
   props: {
     /**
-     * Component content
+     * Paragraph text
      */
     children: React.ReactNode;
-    /**
-     * Custom styling on element
-     */
-    className?: string;
     /**
      * Adds margins to typo
      */

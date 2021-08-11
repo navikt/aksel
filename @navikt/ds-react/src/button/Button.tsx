@@ -7,21 +7,18 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * Decides component design and interactions
+   * Changes design and interactions
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "action" | "danger";
   /**
-   * Reduces internal padding for component
-   * @default "medium"
+   * Changes padding, height and font-size
+   * @default "m"
    */
   size?: "m" | "s";
   /**
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
+   * @note Avoid using if possible for accessibility purposes
    * @default false
    */
   disabled?: boolean;

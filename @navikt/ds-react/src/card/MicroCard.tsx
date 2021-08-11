@@ -5,10 +5,6 @@ import { OverridableComponent } from "../util";
 export interface MicroCardProps {
   props: {
     children: string;
-    /**
-     * @ignore
-     */
-    className?: string;
   } & React.HTMLAttributes<HTMLAnchorElement>;
   defaultComponent: "a";
 }

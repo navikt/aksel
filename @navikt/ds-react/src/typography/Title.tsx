@@ -13,13 +13,9 @@ export interface TitleProps {
      */
     size: "2xl" | "xl" | "l" | "m" | "s";
     /**
-     * Heading to render
+     * Paragraph text
      */
     children: React.ReactNode;
-    /**
-     * Custom styling on element
-     */
-    className?: string;
     /**
      * Adds margins to typo
      */
