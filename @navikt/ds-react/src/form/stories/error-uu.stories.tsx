@@ -9,8 +9,9 @@ export default {
 } as Meta;
 
 export const Demo1 = () => {
-  const [error, setError] = useState("");
-  const [fieldsetError, setFieldsetError] = useState("");
+  const [error, setError] = useState(undefined);
+  const [fieldsetError, setFieldsetError] = useState(undefined);
+  const [groupError, setGroupError] = useState(undefined);
   const [propagation, setPropagation] = useState(true);
   return (
     <SSRProvider>
