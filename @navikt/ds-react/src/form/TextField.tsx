@@ -40,6 +40,12 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     ...rest
   } = props;
 
+  if (typeof window === "undefined") {
+    console.log("server", inputProps.id);
+  } else {
+    console.log("client", inputProps.id);
+  }
+
   return (
     <div
       className={cl(

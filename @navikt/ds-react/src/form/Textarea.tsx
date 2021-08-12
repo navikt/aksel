@@ -4,7 +4,7 @@ import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import { BodyShort, Label } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
-import useId from "./useId";
+import { useId } from "..";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -57,7 +57,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
-    const maxLengthId = useId({ prefix: "TextareaMaxLength" });
+    const maxLengthId = `TextareaMaxLength-${useId()}`;
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     return (

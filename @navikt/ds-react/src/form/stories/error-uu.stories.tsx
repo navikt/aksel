@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Fieldset } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Button, Checkbox, CheckboxGroup } from "../../index";
+import { Button, Checkbox, CheckboxGroup, TextField } from "../../index";
 import { SSRProvider } from "../../util";
 export default {
   title: "ds-react/form/uu-demo",
@@ -29,11 +29,17 @@ export const Demo1 = () => {
         </Button>
         <Button
           style={{ marginBottom: "2rem" }}
+          onClick={() => setGroupError("CheckboxGroup error message")}
+        >
+          Toggle group-error
+        </Button>
+        <Button
+          style={{ marginBottom: "2rem" }}
           onClick={() => {
-            !!error ? setError("") : setError("Textfield error message");
+            !!error ? setError("") : setError("Checkbox error message");
           }}
         >
-          Toggle textfield-error
+          Toggle checkbox-error
         </Button>
         <Button
           style={{ marginBottom: "2rem" }}
@@ -42,8 +48,10 @@ export const Demo1 = () => {
           Toggle errorPropagation
         </Button>
         <Fieldset legend="Mollit eiusmod" error={fieldsetError}>
+          <TextField label="testlabel"></TextField>
           <CheckboxGroup
             errorPropagation={propagation}
+            error={groupError}
             legend="checkboxgroup"
             hideLegend
           >

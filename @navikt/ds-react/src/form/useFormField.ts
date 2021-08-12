@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import cl from "classnames";
 import { FieldsetContext } from "./index";
-import { useId } from "..";
+import { useId } from "../index";
 
 export interface FormFieldProps {
   /**
@@ -33,14 +33,16 @@ export interface FormFieldProps {
 /**
  * Handles props and their state for various form-fields in context with Fieldset
  */
-export const useFormField = (props: FormFieldProps, prefix?: string) => {
+export const useFormField = (props: FormFieldProps, prefix: string) => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
 
-  const id = useId({ id: props.id, prefix: prefix ?? "" });
-  const errorId = useId({ id: propErrorId, prefix: prefix + "Error" ?? "" });
-  const inputDescriptionId = useId({ prefix: prefix + "Description" });
+  const genId = useId();
+
+  const id = props.id ?? `${prefix}-${genId}`;
+  const errorId = propErrorId ?? `${prefix}-error-${genId}`;
+  const inputDescriptionId = `${prefix}-description-${genId}`;
 
   const disabled = fieldset?.disabled || props.disabled;
   const hasError: boolean = !disabled && !!(error || fieldset?.error);
