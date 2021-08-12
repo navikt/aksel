@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyShort, Label } from "../..";
+import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
@@ -19,10 +19,6 @@ export type FieldsetContextProps = {
    */
   size: "m" | "s";
   disabled: boolean;
-  /**
-   * passes id for two tier fieldset
-   */
-  errorDescribedBy?: string;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
@@ -59,7 +55,6 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       hasError,
       size,
       inputDescriptionId,
-      errorDescribedBy,
     } = useFieldset(props);
 
     const fieldset = useContext(FieldsetContext);
@@ -78,14 +73,18 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       <FieldsetContext.Provider
         value={{
           error: errorPropagation ? props.error ?? fieldset?.error : undefined,
-          errorId: props.error ? errorId : fieldset?.errorId ?? errorId,
+          errorId: cl(
+            {
+              [errorId]: showErrorMsg,
+              [fieldset?.errorId ?? ""]: !!fieldset?.error,
+            }
+          ),
           size,
           disabled: props.disabled ?? false,
-          errorDescribedBy,
         }}
       >
         <fieldset
-          {...rest}
+          {...omit(rest, ["errorId"])}
           {...inputProps}
           ref={ref}
           className={cl(
