@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import cl from "classnames";
 import { FieldsetContext } from "./index";
-import useId from "./useId";
+import { useId } from "..";
 
 export interface FormFieldProps {
   /**
