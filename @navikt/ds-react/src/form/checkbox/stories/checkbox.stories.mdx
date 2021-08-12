@@ -157,6 +157,38 @@ Ved bruk av `hideLegend` på CheckboxGroup kan man gjøre slik at legend/descrip
   </CheckboxGroup>
 </Canvas>
 
+## hideLabel
+
+Ved bruk av `hideLabel` kan man lettere ta i bruk checkbox internt i eks tabeller.
+
+```jsx
+<CheckboxGroup legend="Mollit eiusmod" hideLegend>
+  <Checkbox value="Apple" hideLabel>
+    Apple
+  </Checkbox>
+  <Checkbox value="Orange" hideLabel>
+    Orange
+  </Checkbox>
+  <Checkbox value="Melon" hideLabel>
+    Melon
+  </Checkbox>
+</CheckboxGroup>
+```
+
+<Canvas>
+  <CheckboxGroup legend="Mollit eiusmod" hideLegend>
+    <Checkbox value="Apple" hideLabel>
+      Apple
+    </Checkbox>
+    <Checkbox value="Orange" hideLabel>
+      Orange
+    </Checkbox>
+    <Checkbox value="Melon" hideLabel>
+      Melon
+    </Checkbox>
+  </CheckboxGroup>
+</Canvas>
+
 ## Disabled
 
 Ved bruk av `disabled` kan man både disabled enkelte checkboxer eller checkboxgruppen.
