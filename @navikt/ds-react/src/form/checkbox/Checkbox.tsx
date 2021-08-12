@@ -12,6 +12,10 @@ export interface CheckboxProps
    * Label for checkbox
    */
   children: React.ReactNode;
+  /**
+   * Hides label and makes it viewable for screen-readers only.
+   */
+  hideLabel?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
@@ -44,6 +48,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "error",
           "errorId",
           "description",
+          "hideLabel",
         ])}
         {...inputProps}
         className="navds-checkbox__input"
@@ -55,7 +60,11 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         size={size}
         className="navds-checkbox__label"
       >
-        {props.children}
+        {props.hideLabel ? (
+          <span className="sr-only">{props.children}</span>
+        ) : (
+          props.children
+        )}
       </BodyShort>
       {props.description && (
         <BodyShort
