@@ -12,7 +12,7 @@ export const useFieldset = (props) => {
     ...formField,
     inputProps: {
       "aria-invalid": inputProps["aria-invalid"],
-      "aria-describedby": cl(inputProps["aria-describedby"]),
+      "aria-describedby": inputProps["aria-describedby"],
     },
   };
 };
