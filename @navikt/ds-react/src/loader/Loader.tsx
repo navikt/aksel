@@ -1,4 +1,4 @@
-import React, { forwardRef, SVGProps, useRef } from "react";
+import React, { forwardRef, SVGProps } from "react";
 import cl from "classnames";
 import { useId } from "..";
 
