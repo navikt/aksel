@@ -11,10 +11,8 @@ export const ReactRouter = () => (
   <Router>
     <AccordionMenu>
       <AccordionMenuItem href="yes">Nivå 1</AccordionMenuItem>
-      <AccordionMenuItem component="span">Nivå 1</AccordionMenuItem>
-      <AccordionMenuItem component={Link} to="hmm">
-        Nivå 1
-      </AccordionMenuItem>
+      <AccordionMenuItem as="span">Nivå 1</AccordionMenuItem>
+      <AccordionMenuItem as={Link}>Nivå 1</AccordionMenuItem>
     </AccordionMenu>
   </Router>
 );
