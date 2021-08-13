@@ -1,6 +1,6 @@
-import React, { forwardRef, SVGProps, useRef } from "react";
+import React, { forwardRef, SVGProps } from "react";
 import cl from "classnames";
-import { v4 as uuidv4 } from "uuid";
+import { useId } from "..";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
@@ -39,11 +39,11 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
     },
     ref
   ) => {
-    const internalId = useRef(uuidv4());
+    const internalId = useId(id);
 
     return (
       <svg
-        aria-labelledby={id ?? internalId.current}
+        aria-labelledby={internalId}
         ref={ref}
         className={cl("navds-loader", className, `navds-loader--${size}`, {
           "navds-loader--transparent": transparent,
@@ -56,7 +56,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
         preserveAspectRatio="xMidYMid"
         {...rest}
       >
-        <title id={id ?? internalId.current}>{title}</title>
+        <title id={internalId}>{title}</title>
         <circle
           className="navds-loader__background"
           xmlns="http://www.w3.org/2000/svg"

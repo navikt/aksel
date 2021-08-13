@@ -73,12 +73,10 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       <FieldsetContext.Provider
         value={{
           error: errorPropagation ? props.error ?? fieldset?.error : undefined,
-          errorId: cl(
-            {
-              [errorId]: showErrorMsg,
-              [fieldset?.errorId ?? ""]: !!fieldset?.error,
-            }
-          ),
+          errorId: cl({
+            [errorId]: showErrorMsg,
+            [fieldset?.errorId ?? ""]: !!fieldset?.error,
+          }),
           size,
           disabled: props.disabled ?? false,
         }}
