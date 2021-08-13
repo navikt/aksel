@@ -1,15 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { Link } from "gatsby";
-import useKeypress from "react-use-keypress";
-
 import classnames from "classnames";
-
-import { useMainMenu } from "../../../../useSiteStructure";
+import { Link } from "gatsby";
 import { Xknapp } from "nav-frontend-ikonknapper";
-
+import { Undertittel, Systemtittel } from "nav-frontend-typografi";
+import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
+import useKeypress from "react-use-keypress";
+import { useMainMenu } from "../../../../useSiteStructure";
 import { GithubLogo } from "../../../assets/images/svg";
-
 import "./styles.less";
 
 const cls = (props, hidden) =>
@@ -54,6 +51,8 @@ const MobileNav = ({ menu, location, ...props }) => {
   // TODO: Reimplement mobile menu
   const pickedMenu = isDs ? menu : newMenu;
 
+  const title = isDs ? "Designsystemet" : "God praksis";
+
   return (
     <div
       className={cls(props, hidden)}
@@ -78,17 +77,37 @@ const MobileNav = ({ menu, location, ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
+          <Systemtittel
+            className="mobile__subtitle"
+            tag="div"
+            style={{ marginTop: "1rem" }}
+          >
+            {title}
+          </Systemtittel>
           {pickedMenu.map((route) => {
             return (
-              <li key={route.link}>
-                <Link
-                  tabIndex={hidden ? -1 : 0}
-                  activeClassName="active"
-                  to={route.link ? route.link.replace("/alertstripe", "") : "/"}
-                >
-                  {route.title}
-                </Link>
-              </li>
+              <div key={route.link}>
+                {route?.heading && (
+                  <Undertittel
+                    className="mobile__subtitle"
+                    tag="div"
+                    style={{ marginTop: "1rem" }}
+                  >
+                    {route?.heading}
+                  </Undertittel>
+                )}
+                <li>
+                  <Link
+                    tabIndex={hidden ? -1 : 0}
+                    activeClassName="active"
+                    to={
+                      route.link ? route.link.replace("/alertstripe", "") : "/"
+                    }
+                  >
+                    {route.title}
+                  </Link>
+                </li>
+              </div>
             );
           })}
           <li>
