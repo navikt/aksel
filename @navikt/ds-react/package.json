@@ -48,7 +48,8 @@
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "@types/react-router-dom": "^5.1.8"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
