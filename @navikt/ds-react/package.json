@@ -27,9 +27,9 @@
     "/src"
   ],
   "scripts": {
-    "modify-package": "node ../../utilities/scripts/packageHandler.js",
+    "create-package-json-pointers-to-esm": "node ../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rm -rf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn modify-package",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {

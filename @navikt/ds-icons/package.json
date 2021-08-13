@@ -25,13 +25,13 @@
     "/svg"
   ],
   "scripts": {
-    "modify-package": "node ../../utilities/scripts/packageHandler.js",
+    "create-package-json-pointers-to-esm": "node ../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node --experimental-modules --es-module-specifier-resolution=node -r dotenv/config figma-api/index.mjs dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --silent --typescript --ref --icon --title-prop --replace-attr-values \"#262626=currentColor\" -d src svg",
     "convert-icons": "node figma-api/pngConverter.mjs",
     "clean": "rm -rf src && rm -rf esm && rm -rf cjs && rm -rf png && rm -rf NAV-ikonpakke-png.zip && rm -rf NAV-ikonpakke-svg.zip",
     "zip-icons": "node figma-api/zipIcons.mjs",
-    "build": "npm run clean && npm run create-icons && tsc && tsc -p tsconfig-esm.json && yarn modify-package && npm run convert-icons && yarn zip-icons"
+    "build": "npm run clean && npm run create-icons && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm && npm run convert-icons && yarn zip-icons"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
