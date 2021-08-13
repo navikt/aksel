@@ -6,12 +6,13 @@ interface AccordionMenuItemProps
   extends React.HTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   active?: boolean;
+  requiredProp: string;
 }
 
-export interface AccordionMenuItemType
-  extends OverridableComponent<HTMLAnchorElement, AccordionMenuItemProps> {}
-
-const AccordionMenuItem: AccordionMenuItemType = forwardRef(
+const AccordionMenuItem: OverridableComponent<
+  HTMLAnchorElement,
+  AccordionMenuItemProps
+> = forwardRef(
   (
     { children, as: Component = "a", active = false, className, ...rest },
     ref

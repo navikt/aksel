@@ -1,34 +1,22 @@
-type ForwardRefProps<T, P = {}> = React.PropsWithoutRef<
-  React.PropsWithChildren<P>
-> &
-  React.RefAttributes<T>;
+type ForwardRefProps<T, P> = React.PropsWithoutRef<P> & React.RefAttributes<T>;
 
-type JSXIntrinsicElementProps<
-  K extends keyof JSX.IntrinsicElements,
-  REF extends boolean = false
-> = REF extends true
-  ? JSX.IntrinsicElements[K]
-  : Omit<JSX.IntrinsicElements[K], "ref">;
-
-type SafeProps<As, ComponentType> = Omit<As, "as" | keyof ComponentType>;
+type SafeProps<As, ComponentType> = Omit<
+  As,
+  "as" | "ref" | keyof ComponentType
+>;
 
 type IntrinsicProps<
   Component,
   As extends keyof JSX.IntrinsicElements
 > = Component &
-  SafeProps<JSXIntrinsicElementProps<As>, Component> & {
+  SafeProps<JSX.IntrinsicElements[As], Component> & {
     as: As;
   };
 
-type CustomComponentProps<
-  Component,
-  As extends React.JSXElementConstructor<any>
-> = As extends React.JSXElementConstructor<infer InferredAs>
-  ? Component &
-      SafeProps<InferredAs, Component> & {
-        as: As;
-      }
-  : never;
+type CustomComponentProps<Component, As extends React.ElementType> = Component &
+  SafeProps<React.ComponentProps<As>, Component> & {
+    as: As;
+  };
 
 export default interface OverridableComponent<
   Element extends HTMLElement,
@@ -40,7 +28,7 @@ export default interface OverridableComponent<
     props: ForwardRefProps<Element, IntrinsicProps<Component, As>>
   ): ReturnType<React.FC>;
 
-  <As extends React.JSXElementConstructor<any>, R = unknown>(
-    props: ForwardRefProps<R, CustomComponentProps<Component, As>>
+  <As extends React.JSXElementConstructor<any>, Element = unknown>(
+    props: ForwardRefProps<Element, CustomComponentProps<Component, As>>
   ): ReturnType<React.FC>;
 }

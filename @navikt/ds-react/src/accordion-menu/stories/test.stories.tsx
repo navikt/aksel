@@ -10,8 +10,10 @@ export default {
 export const ReactRouter = () => (
   <Router>
     <AccordionMenu>
-      <AccordionMenuItem href="yes">Nivå 1</AccordionMenuItem>
-      <AccordionMenuItem as="span">Nivå 1</AccordionMenuItem>
+      <AccordionMenuItem requiredProp="string">Nivå 1</AccordionMenuItem>
+      <AccordionMenuItem as="span" requiredProp="string">
+        Nivå 1
+      </AccordionMenuItem>
       <AccordionMenuItem as={Link}>Nivå 1</AccordionMenuItem>
     </AccordionMenu>
   </Router>
