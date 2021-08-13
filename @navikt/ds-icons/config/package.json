@@ -1,6 +1,0 @@
-{
-  "type": "commonjs",
-  "main": "index.js",
-  "typings": "../esm/index.d.ts",
-  "sideEffects": false
-}

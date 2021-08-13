@@ -90,6 +90,8 @@
     "extend": "^3.0.2",
     "gh-pages": "^3.1.0",
     "glob": "^7.1.6",
+    "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
     "gulp": "^4.0.2",
     "gulp-cssfont64-formatter": "0.0.2",
     "gulp-newer": "^1.3.0",
