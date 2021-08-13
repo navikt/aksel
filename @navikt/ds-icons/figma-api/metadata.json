@@ -11,7 +11,7 @@
     "name": "AddCircle",
     "description": "",
     "created_at": "2020-07-01T10:37:42.784Z",
-    "updated_at": "2021-04-09T13:32:16.308Z",
+    "updated_at": "2021-08-12T11:15:52.168Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -32,18 +32,18 @@
     "visible": true
   },
   {
-    "name": "AddPeople",
+    "name": "AddPerson",
     "description": "",
     "created_at": "2021-06-15T15:06:55.651Z",
-    "updated_at": "2021-06-15T15:06:55.651Z",
+    "updated_at": "2021-08-13T06:33:04.695Z",
     "pageName": "People",
     "visible": true
   },
   {
-    "name": "AddPeopleFilled",
+    "name": "AddPersonFilled",
     "description": "",
     "created_at": "2021-06-15T15:06:55.654Z",
-    "updated_at": "2021-06-15T15:06:55.654Z",
+    "updated_at": "2021-08-13T06:33:04.683Z",
     "pageName": "People",
     "visible": true
   },
@@ -107,7 +107,7 @@
     "name": "Back",
     "description": "",
     "created_at": "2020-07-01T10:37:42.840Z",
-    "updated_at": "2021-04-09T13:32:23.607Z",
+    "updated_at": "2021-08-12T14:51:21.441Z",
     "pageName": "Chevron",
     "visible": true
   },
@@ -203,7 +203,7 @@
     "name": "Bookmark",
     "description": "",
     "created_at": "2020-07-01T10:37:42.877Z",
-    "updated_at": "2021-04-09T13:32:23.611Z",
+    "updated_at": "2021-08-12T12:32:34.047Z",
     "pageName": "File",
     "visible": true
   },
@@ -251,7 +251,7 @@
     "name": "Calculator",
     "description": "",
     "created_at": "2020-07-01T10:37:42.917Z",
-    "updated_at": "2021-06-14T07:21:59.043Z",
+    "updated_at": "2021-08-12T12:31:15.652Z",
     "pageName": "Money",
     "visible": true
   },
@@ -411,7 +411,7 @@
     "name": "Close",
     "description": "",
     "created_at": "2020-07-01T10:37:42.827Z",
-    "updated_at": "2021-04-09T13:32:16.911Z",
+    "updated_at": "2021-08-12T13:19:34.922Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -419,7 +419,7 @@
     "name": "CloseFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.364Z",
-    "updated_at": "2021-04-09T13:32:16.624Z",
+    "updated_at": "2021-08-12T10:54:40.891Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -427,7 +427,7 @@
     "name": "CoApplicant",
     "description": "",
     "created_at": "2021-04-30T10:55:32.823Z",
-    "updated_at": "2021-04-30T10:55:32.823Z",
+    "updated_at": "2021-08-12T11:17:26.030Z",
     "pageName": "People",
     "visible": true
   },
@@ -507,7 +507,7 @@
     "name": "Copy",
     "description": "",
     "created_at": "2020-07-01T10:37:42.619Z",
-    "updated_at": "2021-05-05T12:44:31.388Z",
+    "updated_at": "2021-08-12T12:36:11.164Z",
     "pageName": "File",
     "visible": true
   },
@@ -568,6 +568,14 @@
     "visible": true
   },
   {
+    "name": "Decision",
+    "description": "",
+    "created_at": "2021-08-13T06:33:04.661Z",
+    "updated_at": "2021-08-13T06:33:04.661Z",
+    "pageName": "People",
+    "visible": true
+  },
+  {
     "name": "DecisionCheck",
     "description": "",
     "created_at": "2021-04-28T14:44:00.530Z",
@@ -588,6 +596,14 @@
     "description": "",
     "created_at": "2021-04-30T09:54:17.420Z",
     "updated_at": "2021-04-30T09:54:17.420Z",
+    "pageName": "People",
+    "visible": true
+  },
+  {
+    "name": "DecisionFilled",
+    "description": "",
+    "created_at": "2021-08-13T06:33:04.665Z",
+    "updated_at": "2021-08-13T06:33:04.665Z",
     "pageName": "People",
     "visible": true
   },
@@ -619,7 +635,7 @@
     "name": "DialogDots",
     "description": "",
     "created_at": "2020-07-01T10:37:43.133Z",
-    "updated_at": "2021-04-09T13:32:23.486Z",
+    "updated_at": "2021-08-12T11:19:13.127Z",
     "pageName": "Communication",
     "visible": true
   },
@@ -875,7 +891,7 @@
     "name": "EmployerFilled",
     "description": "",
     "created_at": "2021-01-22T13:40:32.293Z",
-    "updated_at": "2021-04-22T08:46:31.424Z",
+    "updated_at": "2021-08-13T06:33:04.692Z",
     "pageName": "People",
     "visible": true
   },
@@ -931,7 +947,7 @@
     "name": "Eye",
     "description": "",
     "created_at": "2020-07-01T10:37:42.895Z",
-    "updated_at": "2021-04-09T13:32:23.514Z",
+    "updated_at": "2021-08-12T09:55:24.102Z",
     "pageName": "Privacy",
     "visible": true
   },
@@ -939,7 +955,7 @@
     "name": "EyeFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.321Z",
-    "updated_at": "2021-04-09T13:32:16.996Z",
+    "updated_at": "2021-08-12T09:55:25.386Z",
     "pageName": "Privacy",
     "visible": true
   },
@@ -947,7 +963,7 @@
     "name": "EyeScreened",
     "description": "",
     "created_at": "2020-07-01T10:37:42.956Z",
-    "updated_at": "2021-04-09T13:32:23.351Z",
+    "updated_at": "2021-08-12T09:56:29.536Z",
     "pageName": "Privacy",
     "visible": true
   },
@@ -955,7 +971,7 @@
     "name": "EyeScreenedFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.578Z",
-    "updated_at": "2021-04-09T13:32:23.419Z",
+    "updated_at": "2021-08-12T09:55:47.137Z",
     "pageName": "Privacy",
     "visible": true
   },
@@ -1107,7 +1123,7 @@
     "name": "Findout",
     "description": "",
     "created_at": "2021-05-05T13:04:25.502Z",
-    "updated_at": "2021-05-05T13:04:25.502Z",
+    "updated_at": "2021-08-12T12:32:46.082Z",
     "pageName": "File",
     "visible": true
   },
@@ -1491,7 +1507,7 @@
     "name": "Information",
     "description": "",
     "created_at": "2020-07-01T10:37:43.005Z",
-    "updated_at": "2021-04-09T13:32:16.578Z",
+    "updated_at": "2021-08-12T12:35:33.631Z",
     "pageName": "Status",
     "visible": true
   },
@@ -1499,7 +1515,7 @@
     "name": "InformationFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.736Z",
-    "updated_at": "2021-04-09T13:32:16.132Z",
+    "updated_at": "2021-08-12T11:36:44.756Z",
     "pageName": "Status",
     "visible": true
   },
@@ -1539,7 +1555,7 @@
     "name": "Left",
     "description": "",
     "created_at": "2020-07-01T10:37:42.797Z",
-    "updated_at": "2021-04-09T13:32:23.354Z",
+    "updated_at": "2021-08-13T06:33:04.688Z",
     "pageName": "Arrow",
     "visible": true
   },
@@ -1619,7 +1635,7 @@
     "name": "Locked",
     "description": "",
     "created_at": "2020-07-01T10:37:43.027Z",
-    "updated_at": "2021-04-09T13:32:23.385Z",
+    "updated_at": "2021-08-12T09:56:54.295Z",
     "pageName": "Privacy",
     "visible": true
   },
@@ -1715,7 +1731,7 @@
     "name": "MinusCircleFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.721Z",
-    "updated_at": "2021-04-09T13:32:16.246Z",
+    "updated_at": "2021-08-12T10:26:25.789Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -1731,7 +1747,7 @@
     "name": "Mobile",
     "description": "",
     "created_at": "2020-07-01T10:37:43.010Z",
-    "updated_at": "2021-04-09T13:32:16.508Z",
+    "updated_at": "2021-08-12T11:19:05.339Z",
     "pageName": "Device",
     "visible": true
   },
@@ -1747,7 +1763,7 @@
     "name": "Money",
     "description": "",
     "created_at": "2020-07-01T10:37:42.741Z",
-    "updated_at": "2021-04-09T13:32:23.388Z",
+    "updated_at": "2021-08-12T12:31:01.092Z",
     "pageName": "Money",
     "visible": true
   },
@@ -1891,7 +1907,7 @@
     "name": "Office1",
     "description": "",
     "created_at": "2020-07-01T10:37:42.720Z",
-    "updated_at": "2021-04-09T13:32:23.456Z",
+    "updated_at": "2021-08-12T12:56:17.625Z",
     "pageName": "Building",
     "visible": true
   },
@@ -1987,7 +2003,7 @@
     "name": "People",
     "description": "",
     "created_at": "2020-07-01T10:37:42.850Z",
-    "updated_at": "2021-04-09T13:32:23.661Z",
+    "updated_at": "2021-08-12T11:17:04.979Z",
     "pageName": "People",
     "visible": true
   },
@@ -2115,7 +2131,7 @@
     "name": "Profile",
     "description": "",
     "created_at": "2021-04-26T09:24:38.029Z",
-    "updated_at": "2021-04-30T10:55:32.846Z",
+    "updated_at": "2021-08-12T12:32:56.285Z",
     "pageName": "File",
     "visible": true
   },
@@ -2147,7 +2163,7 @@
     "name": "Receipt",
     "description": "",
     "created_at": "2020-07-01T10:37:42.904Z",
-    "updated_at": "2021-04-09T13:32:23.649Z",
+    "updated_at": "2021-08-12T12:29:47.091Z",
     "pageName": "Money",
     "visible": true
   },
@@ -2227,7 +2243,7 @@
     "name": "Right",
     "description": "",
     "created_at": "2020-07-01T10:37:42.642Z",
-    "updated_at": "2021-04-09T13:32:23.409Z",
+    "updated_at": "2021-08-12T07:14:26.093Z",
     "pageName": "Arrow",
     "visible": true
   },
@@ -2259,7 +2275,7 @@
     "name": "Sandglass",
     "description": "",
     "created_at": "2020-07-01T10:37:43.117Z",
-    "updated_at": "2021-04-09T13:32:23.313Z",
+    "updated_at": "2021-08-12T08:18:12.598Z",
     "pageName": "Time",
     "visible": true
   },
@@ -2323,7 +2339,7 @@
     "name": "Search",
     "description": "",
     "created_at": "2020-07-01T10:37:42.983Z",
-    "updated_at": "2021-04-09T13:32:16.382Z",
+    "updated_at": "2021-08-12T12:37:22.919Z",
     "pageName": "Interface",
     "visible": true
   },
@@ -2403,7 +2419,7 @@
     "name": "Service",
     "description": "",
     "created_at": "2020-07-01T10:37:42.707Z",
-    "updated_at": "2021-06-14T07:21:59.047Z",
+    "updated_at": "2021-08-12T11:15:52.145Z",
     "pageName": "People",
     "visible": true
   },
@@ -2675,7 +2691,7 @@
     "name": "SuccessStroke",
     "description": "",
     "created_at": "2021-04-15T07:12:49.753Z",
-    "updated_at": "2021-04-15T07:12:49.753Z",
+    "updated_at": "2021-08-12T11:30:36.177Z",
     "pageName": "Status",
     "visible": true
   },
@@ -2755,7 +2771,7 @@
     "name": "ThermometerStroke",
     "description": "",
     "created_at": "2021-04-07T12:13:28.179Z",
-    "updated_at": "2021-04-09T13:32:16.814Z",
+    "updated_at": "2021-08-12T12:34:12.825Z",
     "pageName": "Health",
     "visible": true
   },
@@ -2811,7 +2827,7 @@
     "name": "Unlocked",
     "description": "",
     "created_at": "2020-07-01T10:37:42.823Z",
-    "updated_at": "2021-04-09T13:32:16.901Z",
+    "updated_at": "2021-08-12T09:56:56.564Z",
     "pageName": "Privacy",
     "visible": true
   },
