@@ -1,5 +1,16 @@
 # Endringslogg
 
+## August 2021
+
+### Skjema-elementer i `ds-react`-pakken
+
+- Pakken ds-react og ds-css har nå implementert skjemakomponenter
+- Kan sees her: https://navikt.github.io/Designsystemet/?path=/story/ds-react-form-checkbox--all
+
+### Ikoner
+
+- `Addpeople` renamet til `Addperson` i ds-icons
+- `Desicion`-ikon lagt til.
 
 ## Juli 2021
 
@@ -32,7 +43,7 @@
 
 [#1122](https://github.com/navikt/nav-frontend-moduler/pull/1122)
 
-- Ref er satt til type HTMLButtonElement nå istedenfor HTMLDivElement. 
+- Ref er satt til type HTMLButtonElement nå istedenfor HTMLDivElement.
 - Fikser SSR/CSR problem med forskjellige id-er som ble laget på server vs client.
 
 ## Juni 2021
@@ -41,12 +52,11 @@
 
 - MVP for verktøykassen ble publisert til design.nav.no
 
-### Fjernet smoothscroll fra ds-css 
+### Fjernet smoothscroll fra ds-css
 
 [#1123](https://github.com/navikt/nav-frontend-moduler/pull/1123)
 
 - ds-css pakken defaulter ikke til at smoothscroll er satt. Dette er gjort av UU årsaker.
-
 
 ### Linkpanel lagt til i `ds-react`-pakken
 
@@ -65,12 +75,13 @@
 Ds-react, ds-css og ds-tokens er alle minor-bumpet
 
 Nye komponenter for typografi:
+
 - Title: Heading
 - Ingress
 - BodyLong: Lengre tekster, tenk en vanlig paragraf
 - BodyShort: Mindre tekster, tenk teksten på en knapp eller label
 - Label
-- Detail: Detaljetekst på 14px 
+- Detail: Detaljetekst på 14px
 
 Ds-css og ds-tokens er endret for å tilrettelegge for disse. Diverse komponenter i ds-react bruker nå også typo-stilene for å sikre riktig typo.
 
