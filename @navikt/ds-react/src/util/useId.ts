@@ -9,12 +9,12 @@ const canUseDOM = (): boolean => {
   );
 };
 
-const useIsomorphicLayoutEffect = canUseDOM() ? useLayoutEffect : useEffect;
+const useClientLayoutEffect = canUseDOM() ? useLayoutEffect : () => {};
 
 export const useId: (id?: string) => string = (id) => {
   const [newId, setNewId] = useState<string | undefined>(undefined);
 
-  useIsomorphicLayoutEffect(() => {
+  useClientLayoutEffect(() => {
     setNewId(ShortUuid.generate());
   }, []);
 
