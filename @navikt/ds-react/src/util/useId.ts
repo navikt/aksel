@@ -18,6 +18,5 @@ export const useId: (id?: string) => string = (id) => {
     setNewId(ShortUuid.generate());
   }, []);
 
-  console.count("generate id");
   return id ?? newId ?? "";
 };

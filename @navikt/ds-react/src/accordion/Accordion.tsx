@@ -2,7 +2,7 @@ import React, { forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
-import { v4 as uuidv4 } from "uuid";
+import { useId } from "..";
 
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -40,19 +40,15 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       className,
       renderContentWhenClosed = false,
       onClick,
+      id,
       ...rest
     },
     ref
   ) => {
-    const [contentId, setContentId] = useState("");
-    const [buttonId, setButtonId] = useState("");
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
 
-    // Forsøk på å fikse Nextjs SSR server/client clock problem
-    useEffect(() => {
-      setContentId(() => uuidv4());
-      setButtonId(() => uuidv4());
-    }, []);
+    const buttonId = useId(id);
+    const contentId = useId();
 
     useEffect(() => {
       setInternalOpen(open);
