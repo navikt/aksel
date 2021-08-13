@@ -21,11 +21,14 @@ const createPackages = async () => {
         "package.json"
       );
 
+      const depth = (packageJsonPath.match(/\//g) || []).length;
+      const esmDir = `../`.repeat(depth) + "esm";
+
       const packageJson = {
         sideEffects: false,
         main: "./index.js",
-        module: path.posix.join("../esm", directoryPackage, "index.js"),
-        types: path.posix.join("../esm", directoryPackage, "index.d.ts"),
+        module: path.posix.join(esmDir, directoryPackage, "index.js"),
+        types: path.posix.join(esmDir, directoryPackage, "index.d.ts"),
       };
 
       const [
@@ -43,7 +46,7 @@ const createPackages = async () => {
           path.resolve(path.dirname(packageJsonPath), packageJson.main)
         ),
         fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
-      ]);
+      ]).catch((_) => null);
 
       const manifestErrorMessages = [];
       if (!typingsEntryExist) {
@@ -69,7 +72,7 @@ const createPackages = async () => {
 
       return packageJsonPath;
     })
-  );
+  ).catch((e) => null /* console.error(e) */);
 };
 
 createPackages();

@@ -14,11 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-react"
   },
-  "main": "esm/index.js",
-  "module": "esm/index.js",
-  "typings": "esm/index.d.ts",
   "sideEffects": false,
-  "type": "module",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -28,9 +27,9 @@
     "/src"
   ],
   "scripts": {
-    "cjs-package": "copyfiles -f config/package.json cjs",
+    "modify-package": "node ../../utilities/scripts/packageHandler.js",
     "clean": "rm -rf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn cjs-package",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn modify-package",
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
