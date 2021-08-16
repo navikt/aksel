@@ -3,15 +3,14 @@ import OverridableComponent from "../util/newOverridableComponent";
 import cl from "classnames";
 
 interface AccordionMenuItemProps
-  extends React.HTMLAttributes<HTMLAnchorElement> {
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   active?: boolean;
-  requiredProp: string;
 }
 
 const AccordionMenuItem: OverridableComponent<
-  HTMLAnchorElement,
-  AccordionMenuItemProps
+  AccordionMenuItemProps,
+  HTMLAnchorElement
 > = forwardRef(
   (
     { children, as: Component = "a", active = false, className, ...rest },
