@@ -2926,11 +2926,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-icons@^0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-icons/-/ds-icons-0.3.3.tgz#19432cc0b711f4643cba611c5b593ff2b7b67626"
-  integrity sha512-851CJ6GJu4u1iLLhqhGW+jeEB4NpOsoN8Guhy6KZUPSGI1mbN1fGkUcu7p2BC7VF3Rcad/EdHGwTmPPAYZ4vDg==
-
 "@navikt/fnrvalidator@^1.1.0":
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/@navikt/fnrvalidator/-/fnrvalidator-1.1.4.tgz#22a776ba05a90c1ba5316a4f7567f9a45abcda04"
