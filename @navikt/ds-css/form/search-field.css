@@ -1,6 +1,18 @@
 .navds-search-field__input-wrapper {
   width: 100%;
   display: flex;
+  min-height: 48px;
+}
+
+.navds-search-field--s > .navds-search-field__input-wrapper {
+  min-height: 32px;
+}
+
+.navds-search-field--s
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__input {
+  padding: 0.25rem;
+  min-height: 32px;
 }
 
 .navds-search-field__input-wrapper :first-child {

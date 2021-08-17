@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
+import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { SearchFieldContext } from "./SearchField";
 import { Button, ButtonProps } from "../..";
@@ -20,14 +20,15 @@ const SearchFieldButton = forwardRef<HTMLButtonElement, SearchFieldButtonProps>(
       return null;
     }
 
-    const { inputProps } = searchField;
+    const { size, inputProps } = searchField;
 
     return (
       <Button
+        ref={ref}
         className={cl(className, "navds-search-field__button")}
         {...rest}
+        size={size}
         variant={variant}
-        ref={ref}
         disabled={disabled ?? inputProps?.disabled}
       />
     );

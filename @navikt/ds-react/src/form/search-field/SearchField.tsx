@@ -52,7 +52,9 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         ref={ref}
         className={cl(
           props?.className,
+          "navds-form-field",
           "navds-search-field",
+          `navds-form-field--${size ?? "m"}`,
           `navds-search-field--${size ?? "m"}`,
           { "navds-search-field--error": hasError }
         )}
