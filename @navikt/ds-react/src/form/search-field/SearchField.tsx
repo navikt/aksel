@@ -9,6 +9,7 @@ export interface SearchFieldContextProps {
   "aria-invalid": boolean;
   "aria-describedby"?: string;
   disabled?: boolean;
+  size?: "m" | "s";
 }
 
 export const SearchFieldContext = React.createContext<SearchFieldContextProps | null>(
@@ -78,6 +79,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         <SearchFieldContext.Provider
           value={{
             ...inputProps,
+            size,
           }}
         >
           {props.children}
