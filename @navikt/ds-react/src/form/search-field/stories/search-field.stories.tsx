@@ -1,6 +1,7 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { SearchField, SearchFieldInput } from "../index";
+import { Search } from "@navikt/ds-icons";
+import { SearchField, SearchFieldInput, SearchFieldButton } from "../index";
 export default {
   title: "ds-react/form/search-field",
   component: SearchField,
@@ -15,6 +16,9 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
       >
         <SearchFieldInput />
+        <SearchFieldButton>
+          <Search /> Søk
+        </SearchFieldButton>
       </SearchField>
 
       <h2>SearchField small</h2>
@@ -23,6 +27,7 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="s"
       >
+        <SearchFieldButton>Søk</SearchFieldButton>
         <SearchFieldInput />
       </SearchField>
 
@@ -33,6 +38,7 @@ export const All = () => {
         error="Errormsg"
       >
         <SearchFieldInput />
+        <SearchFieldButton>Søk</SearchFieldButton>
       </SearchField>
     </>
   );

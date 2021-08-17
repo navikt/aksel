@@ -67,7 +67,6 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         >
           {props?.label}
         </Label>
-
         {!!props.description && (
           <BodyShort
             className={cl("navds-text-field__description", {
@@ -79,15 +78,17 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
             {props?.description}
           </BodyShort>
         )}
-        <SearchFieldContext.Provider
-          value={{
-            inputProps,
-            size,
-            hasError,
-          }}
-        >
-          {props.children}
-        </SearchFieldContext.Provider>
+        <div className="navds-search-field__input-wrapper">
+          <SearchFieldContext.Provider
+            value={{
+              inputProps,
+              size,
+              hasError,
+            }}
+          >
+            {props.children}
+          </SearchFieldContext.Provider>
+        </div>
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
           {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>

@@ -3,3 +3,7 @@ export {
   default as SearchFieldInput,
   SearchFieldInputProps,
 } from "./SearchFieldInput";
+export {
+  default as SearchFieldButton,
+  SearchFieldButtonProps,
+} from "./SearchFieldButton";
