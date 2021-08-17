@@ -7,3 +7,9 @@
 .navds-form-field--s > input:not(:first-child) {
   margin-top: 4px;
 }
+
+/* Applied when hideLegend/hideLabel is applied to form-element */
+.navds-form-field--s > .sr-only + :not(:first-child):not(:empty),
+.navds-form-field--s > .sr-only + input:not(:first-child) {
+  margin-top: 0;
+}
