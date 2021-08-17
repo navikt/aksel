@@ -5,11 +5,14 @@ import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
 
 export interface SearchFieldContextProps {
-  id: string;
-  "aria-invalid": boolean;
-  "aria-describedby"?: string;
-  disabled?: boolean;
+  inputProps: {
+    id: string;
+    "aria-invalid": boolean;
+    "aria-describedby"?: string;
+    disabled?: boolean;
+  };
   size?: "m" | "s";
+  hasError: boolean;
 }
 
 export const SearchFieldContext = React.createContext<SearchFieldContextProps | null>(
@@ -78,8 +81,9 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         )}
         <SearchFieldContext.Provider
           value={{
-            ...inputProps,
+            inputProps,
             size,
+            hasError,
           }}
         >
           {props.children}

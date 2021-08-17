@@ -1,50 +1,40 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import cl from "classnames";
-import { BodyShort, Label } from "..";
-import ErrorMessage from "./ErrorMessage";
-import { FormFieldProps, useFormField } from "./useFormField";
+import { SearchFieldContext } from "./SearchField";
 
-export interface TextFieldProps
-  extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /**
-   * Expose the HTML size attribute
-   */
-  htmlSize?: number;
-  /**
-   * If enabled shows the label and description for screenreaders only
-   */
-  hideLabel?: boolean;
-  /**
-   * TextField label
-   */
-  label: React.ReactNode;
-}
+export interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
-  return (
-    <div
-      className={cl(
-        props.className,
-        "navds-form-field",
-        `navds-form-field--${size}`,
-        { "navds-text-field--error": hasError }
-      )}
-    >
-      <input
-        {...rest}
-        {...inputProps}
-        ref={ref}
-        type="text"
-        className={cl(
-          className,
-          "navds-text-field__input",
-          "navds-body-short",
-          `navds-body-${size ?? "m"}`
-        )}
-      />
-    </div>
-  );
-});
+const SearchFieldInput = forwardRef<HTMLInputElement, TextFieldProps>(
+  ({ className, ...rest }, ref) => {
+    const searchField = useContext(SearchFieldContext);
 
-export default TextField;
+    if (searchField === null) {
+      console.warn("SearchFieldInput has to be wrapped in <SearchField />");
+      return null;
+    }
+    const { hasError, size, ...inputProps } = searchField;
+
+    return (
+      <div
+        className={cl(className, {
+          "navds-search-field--error": !!hasError,
+        })}
+      >
+        <input
+          {...rest}
+          {...inputProps}
+          ref={ref}
+          type="text"
+          className={cl(
+            className,
+            "navds-search-field__input",
+            "navds-body-short",
+            `navds-body-${size ?? "m"}`
+          )}
+        />
+      </div>
+    );
+  }
+);
+
+export default SearchFieldInput;
