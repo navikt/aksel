@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { forwardRef } from "react";
-import { BodyShort, Label } from "../..";
+import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
 
@@ -12,7 +12,6 @@ export interface SearchFieldContextProps {
     disabled?: boolean;
   };
   size?: "m" | "s";
-  hasError: boolean;
 }
 
 export const SearchFieldContext = React.createContext<SearchFieldContextProps | null>(
@@ -47,11 +46,22 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
       inputDescriptionId,
     } = useFormField(props, "searchfield");
 
+    const {
+      className,
+      hideLabel,
+      children,
+      label,
+      description,
+      error,
+      ...rest
+    } = props;
+
     return (
       <div
         ref={ref}
+        {...omit(rest, ["id", "error", "errorId", "size", "disabled"])}
         className={cl(
-          props?.className,
+          className,
           "navds-form-field",
           "navds-search-field",
           `navds-form-field--${size ?? "m"}`,
@@ -64,20 +74,20 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           size={size}
           component="label"
           className={cl("navds-text-field__label", {
-            "sr-only": props?.hideLabel,
+            "sr-only": hideLabel,
           })}
         >
-          {props?.label}
+          {label}
         </Label>
-        {!!props.description && (
+        {!!description && (
           <BodyShort
             className={cl("navds-text-field__description", {
-              "sr-only": props?.hideLabel,
+              "sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
           >
-            {props?.description}
+            {description}
           </BodyShort>
         )}
         <div className="navds-search-field__input-wrapper">
@@ -85,16 +95,13 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
             value={{
               inputProps,
               size,
-              hasError,
             }}
           >
-            {props.children}
+            {children}
           </SearchFieldContext.Provider>
         </div>
         <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {showErrorMsg && (
-            <ErrorMessage size={size}>{props.error}</ErrorMessage>
-          )}
+          {showErrorMsg && <ErrorMessage size={size}>{error}</ErrorMessage>}
         </div>
       </div>
     );
