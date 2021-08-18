@@ -1,5 +1,5 @@
 import cl from "classnames";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
