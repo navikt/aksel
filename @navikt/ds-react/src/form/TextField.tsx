@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Label } from "..";
+import { BodyShort, Label, omit } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
 
@@ -70,7 +70,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         </BodyShort>
       )}
       <input
-        {...rest}
+        {...omit(rest, ["error", "errorId", "size"])}
         {...inputProps}
         ref={ref}
         type="text"

@@ -82,7 +82,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         }}
       >
         <fieldset
-          {...omit(rest, ["errorId"])}
+          {...omit(rest, ["errorId", "error", "size"])}
           {...inputProps}
           ref={ref}
           className={cl(
