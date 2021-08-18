@@ -4,7 +4,7 @@ import { Meta } from "@storybook/addon-docs";
 
 # Ta i bruk ikonpakken `@navikt/ds-icons`
 
-Alle ikoner kan bli funnet her https://design.nav.no/resources/icons
+Alle ikoner kan bli funnet her https://design.nav.no/designsystem/resources/icons
 
 ## Oppsett
 
@@ -12,7 +12,7 @@ Alle ikoner kan bli funnet her https://design.nav.no/resources/icons
 yarn add @navikt/ds-icons
 ```
 
-```bash
+```jsx
 Import { Expand } from `@navikt/ds-icons`;
 
 <Expand
@@ -22,15 +22,4 @@ Import { Expand } from `@navikt/ds-icons`;
 />
 ```
 
-## Testing
-
-For å støtte testing med eks Jest som ikke tillater ESM moduler, så kan denne configen legges til
-
-```bash
-"moduleNameMapper": {
-  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
-  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
-}
-```
-
-Dette vil remappe Ikonpakken (og komponentpakken) til å bruke CommonJs versjonen for testing
+Note: Det kan være tilfeller der oppsettet ditt ikke har støtte for SVG, og det må da legges til manuelt i eks en webpack config basert på hva som blir brukt.
