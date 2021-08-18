@@ -10,7 +10,6 @@ module.exports = {
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],
   addons: [
-    "@storybook/addon-links",
     "@storybook/addon-docs",
     {
       name: "@storybook/addon-storysource",
@@ -27,6 +26,5 @@ module.exports = {
         controls: { hideNoControlsWarning: true },
       },
     },
-    "@whitespace/storybook-addon-html",
   ],
 };
