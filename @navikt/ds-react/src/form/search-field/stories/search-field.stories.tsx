@@ -31,6 +31,18 @@ export const All = () => {
         <SearchFieldInput />
       </SearchField>
 
+      <h2>Hidelabel</h2>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        hideLabel
+      >
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+        <SearchFieldInput />
+      </SearchField>
+
       <h2>SearchField small</h2>
       <SearchField
         label="Mollit eiusmod"
@@ -39,6 +51,7 @@ export const All = () => {
       >
         <SearchFieldButton>
           <Search />
+          <span className="sr-only">Søk</span>
         </SearchFieldButton>
         <SearchFieldInput />
       </SearchField>
@@ -51,6 +64,7 @@ export const All = () => {
         <SearchFieldInput />
         <SearchFieldButton>
           <Search />
+          <span className="sr-only">Søk</span>
         </SearchFieldButton>
       </SearchField>
 

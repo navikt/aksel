@@ -18,6 +18,7 @@ const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
 
     return (
       <input
+        placeholder="Søk..."
         {...rest}
         {...inputProps}
         ref={ref}
