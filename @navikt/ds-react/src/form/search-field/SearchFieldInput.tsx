@@ -14,7 +14,7 @@ const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
       return null;
     }
 
-    const { size, ...inputProps } = searchField;
+    const { size, inputProps } = searchField;
 
     return (
       <input
