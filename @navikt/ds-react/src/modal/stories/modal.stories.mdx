@@ -1,0 +1,23 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Modal } from "../../index";
+
+<Meta title="ds-react/modal/intro" />
+
+# Hvordan ta i bruk Modal
+
+NOTE: For at modalen skal mountes riktig må man kjøre
+`Modal.setAppElement("#root");` før man bruke modalen, da i eks useEffect/useLayoutEffect.
+`#root` kan da her erstattes med andre elementer, men root er relativt vanlig.
+Dette er nødvendig for at skjermlesere ikke skal lese opp innholdet feil i open/closed state
+
+Modalen styres med `open`-proppen som triggrer modal-staten til å endre. Når bruker ønsker å lukke modalen
+vil `onClose`-triggre og det er opp til systemet å håndtere det.
+
+```jsx
+<Modal open={open} onClose={() => setOpen(false)}>
+```
+
+## shouldCloseOnOverlayClick
+
+Proppen `shouldCloseOnOverlayClick` toggler om `onClose` skal triggres
+når bruker trykker utenfor modalen (overlayet). Defaulter til true.

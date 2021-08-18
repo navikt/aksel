@@ -8,6 +8,7 @@ on:
     branches: [master]
   pull_request:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -28,11 +29,15 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install deps
         if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Gulp-build
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
+      - name: add access token to .env
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+      - name: add branch token to .env
+        run: echo "BRANCH=HEAD" >> website/.env
       - name: Test gatsby-build
         run: yarn build:gatsby
       - name: Test chromatic
@@ -96,9 +101,13 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Install deps
         if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+        run: yarn install
       - name: Gulp-build
         run: yarn boot
+      - name: add access token to .env
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+      - name: add branch token to .env
+        run: echo "BRANCH=HEAD" >> website/.env
       - name: Building Gatsby
         run: yarn build:gatsby
       - name: Building Storybook

@@ -19,14 +19,19 @@ export const All = () => {
       <h1>Alert</h1>
       {variants.map((variant) => (
         <Alert key={variant} variant={variant}>
-          {Array(8).fill(`${variant} content`).join(" ")}
+          Id elit esse enim reprehenderit.Tempor tempor ex exercitation id aute
+          eu.Laborum nulla nisi irure voluptate mollit fugiat.Est quis culpa
+          nostrud et reprehenderit ea sint.Eu veniam labore enim labore qui
+          eiusmod Lorem amet ad esse.
         </Alert>
       ))}
       <h2>Small</h2>
       <div>
         {variants.map((variant) => (
-          <Alert key={variant} variant={variant} size="small">
-            {Array(8).fill(`${variant} content`).join(" ")}
+          <Alert key={variant} variant={variant} size="s">
+            Exercitation enim nisi veniam nostrud Lorem ipsum ea fugiat. Aute
+            exercitation voluptate proident sit ex reprehenderit quis ex ut
+            mollit.
           </Alert>
         ))}
       </div>

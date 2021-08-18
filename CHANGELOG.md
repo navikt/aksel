@@ -1,5 +1,90 @@
 # Endringslogg
 
+## August 2021
+
+### Skjema-elementer i `ds-react`-pakken
+
+- Pakken ds-react og ds-css har nå implementert skjemakomponenter
+- Kan sees her: https://navikt.github.io/Designsystemet/?path=/story/ds-react-form-checkbox--all
+
+### Ikoner
+
+- `Addpeople` renamet til `Addperson` i ds-icons
+- `Desicion`-ikon lagt til.
+
+## Juli 2021
+
+### SpeechBubble komponent lagt til i ds-react
+
+- Oppdatert SpeechBubble kode og design lagt til i ds-react pakken
+
+### Loader komponent i ds-react (spinner)
+
+- Loader er nå oppdatert og lagt til i ds-react
+
+### Oppdatert AccordionMenu
+
+- AccordionMenu har fått oppdatert design for å synce med figma
+
+### MicroCard komponent
+
+- Liten tag brukt for lenger i produktsider er lagt tilk i ds-react
+
+### Oppdatert styling for ds-react komponenter + button
+
+- Action/Hoved knapp og Danger/Fare knapp har fått oppdatert styling i ds-react og nav-frontend-knapper
+- I tillegg har noen komponenter ds-css fått justert styling for å matche Figma bedre.
+
+### Ny Header komponent for produktsider i ds-react
+
+[#1128](https://github.com/navikt/nav-frontend-moduler/pull/1128)
+
+### Fikset RefAttributes for Accordion
+
+[#1122](https://github.com/navikt/nav-frontend-moduler/pull/1122)
+
+- Ref er satt til type HTMLButtonElement nå istedenfor HTMLDivElement.
+- Fikser SSR/CSR problem med forskjellige id-er som ble laget på server vs client.
+
+## Juni 2021
+
+### Verktøykasse MVP
+
+- MVP for verktøykassen ble publisert til design.nav.no
+
+### Fjernet smoothscroll fra ds-css
+
+[#1123](https://github.com/navikt/nav-frontend-moduler/pull/1123)
+
+- ds-css pakken defaulter ikke til at smoothscroll er satt. Dette er gjort av UU årsaker.
+
+### Linkpanel lagt til i `ds-react`-pakken
+
+### Nytt typo-oppsett for ds-react, ds-css og ds-tokens
+
+[#1079](https://github.com/navikt/nav-frontend-moduler/pull/1079)
+
+### Nytt typo-oppsett for ds-react, ds-css og ds-tokens
+
+[#1079](https://github.com/navikt/nav-frontend-moduler/pull/1079)
+
+[Typo med spacing](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--typo-med-spacing)
+[Typo uten spacing](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--typo-uten-spacing)
+[Bruks eksempel](https://navikt.github.io/Designsystemet/?path=/story/ds-react-typography--side-innhold-eksempel)
+
+Ds-react, ds-css og ds-tokens er alle minor-bumpet
+
+Nye komponenter for typografi:
+
+- Title: Heading
+- Ingress
+- BodyLong: Lengre tekster, tenk en vanlig paragraf
+- BodyShort: Mindre tekster, tenk teksten på en knapp eller label
+- Label
+- Detail: Detaljetekst på 14px
+
+Ds-css og ds-tokens er endret for å tilrettelegge for disse. Diverse komponenter i ds-react bruker nå også typo-stilene for å sikre riktig typo.
+
 ## 21. Mai 2021
 
 ### Popover-position oppdateres nå onMount

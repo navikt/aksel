@@ -9,10 +9,14 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover, Button } from "../index";
+import { Popover, Button } from "..";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
+  /**
+   * Button text
+   */
+  children?: React.ReactNode;
   /**
    * Text to be copied to clipboard
    */
@@ -61,7 +65,15 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           onClick={handleClick}
           {...rest}
         >
-          {icon ? <>{icon}</> : <Copy aria-label="Fil ikon for kopiering" />}
+          {icon ? (
+            <>{icon}</>
+          ) : (
+            <Copy
+              focusable="false"
+              role="img"
+              aria-label="Fil ikon for kopiering"
+            />
+          )}
           {children ? children : <span className="sr-only">{title}</span>}
         </Button>
         <Popover

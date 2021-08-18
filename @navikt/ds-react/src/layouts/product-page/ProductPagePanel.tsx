@@ -1,14 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { forwardRef, ReactNode } from "react";
 import cl from "classnames";
-import { Heading, CopyToClipboard } from "../../";
+import { Title, CopyToClipboard } from "../../";
 import { Attachment } from "@navikt/ds-icons";
 
 export interface ProductPagePanelProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   anchor: string;
-  className?: string;
   title: string;
   icon?: ReactNode;
   highlight?: boolean;
@@ -50,9 +49,9 @@ const ProductPagePanel = forwardRef<HTMLDivElement, ProductPagePanelProps>(
           />
         </div>
         {icon && <div className={"navds-layout__panel-icon"}>{icon}</div>}
-        <Heading size={"xl"} className={"navds-layout__panel-title"} level={2}>
+        <Title size={"xl"} className={"navds-layout__panel-title"} level={2}>
           {title}
-        </Heading>
+        </Title>
 
         <CopyToClipboard
           className="navds-layout__panel-copy"

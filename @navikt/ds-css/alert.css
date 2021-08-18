@@ -2,23 +2,24 @@
   border-radius: 4px;
   border: var(--navds-border-default);
 
-  /* Padding calculated based on 16px font for 64px tall alert */
-  padding: 1.1875em 1em;
+  /* Padding calculated based on 18px font for 64px tall alert */
+  padding: var(--navds-spacing-4) var(--navds-spacing-4);
   display: grid;
   grid-auto-flow: column;
-  column-gap: 0.75rem;
   justify-content: start;
-  font-size: var(--navds-font-size-small);
-  line-height: var(--navds-font-line-height-small);
+  min-height: 64px;
+  box-sizing: border-box;
 }
 
-.navds-alert--small {
-  border-radius: 0;
-  padding: 0.5em 1em;
+.navds-alert--s {
+  padding: var(--navds-spacing-1) var(--navds-spacing-4);
+  min-height: 32px;
 }
 
-.navds-alert > svg {
+.navds-alert > span > svg {
+  margin-right: var(--navds-spacing-3);
   font-size: 1.5rem;
+  flex-shrink: 0;
   background: radial-gradient(
     circle,
     var(--navds-color-background) 50%,
@@ -27,8 +28,17 @@
   );
 }
 
+.navds-alert > div {
+  display: block;
+  margin: auto 0;
+  max-width: 43.5rem;
+  flex: 1;
+}
+
 .navds-alert > span {
-  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  max-height: calc(var(--navds-spacing-8) - 2px);
 }
 
 .navds-alert--error {
@@ -36,7 +46,7 @@
   background-color: var(--navds-color-error-background);
 }
 
-.navds-alert--error > svg {
+.navds-alert--error > span > svg {
   color: var(--navds-color-red-60);
 }
 
@@ -45,7 +55,7 @@
   background-color: var(--navds-color-warning-background);
 }
 
-.navds-alert--warning > svg {
+.navds-alert--warning > span > svg {
   color: var(--navds-color-orange-40);
   background: radial-gradient(
     circle,
@@ -60,7 +70,7 @@
   background-color: var(--navds-color-info-background);
 }
 
-.navds-alert--info > svg {
+.navds-alert--info > span > svg {
   color: var(--navds-color-lightblue-70);
 }
 
@@ -69,6 +79,6 @@
   background-color: var(--navds-color-success-background);
 }
 
-.navds-alert--success > svg {
+.navds-alert--success > span > svg {
   color: var(--navds-color-green-70);
 }

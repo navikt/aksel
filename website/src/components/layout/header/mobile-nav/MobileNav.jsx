@@ -1,15 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { Link } from "gatsby";
-import useKeypress from "react-use-keypress";
-
 import classnames from "classnames";
-
-import { useMainMenu } from "../../../../useSiteStructure";
+import { Link } from "gatsby";
 import { Xknapp } from "nav-frontend-ikonknapper";
-
+import { Undertittel, Systemtittel } from "nav-frontend-typografi";
+import React, { useEffect, useRef, useState } from "react";
+import ReactDOM from "react-dom";
+import useKeypress from "react-use-keypress";
+import { useMainMenu } from "../../../../useSiteStructure";
 import { GithubLogo } from "../../../assets/images/svg";
-
 import "./styles.less";
 
 const cls = (props, hidden) =>
@@ -18,7 +15,7 @@ const cls = (props, hidden) =>
     "mobile-nav--hidden": hidden,
   });
 
-const MobileNav = ({ ...props }) => {
+const MobileNav = ({ menu, location, ...props }) => {
   const [hidden, setHidden] = useState(true);
   const lukkBtn = useRef();
   const bg = useRef();
@@ -49,7 +46,12 @@ const MobileNav = ({ ...props }) => {
     }
   };
 
-  const menu = useMainMenu();
+  const isDs = location.pathname.indexOf("/designsystem") !== -1;
+  const newMenu = useMainMenu(location);
+  // TODO: Reimplement mobile menu
+  const pickedMenu = isDs ? menu : newMenu;
+
+  const title = isDs ? "Designsystemet" : "God praksis";
 
   return (
     <div
@@ -75,28 +77,59 @@ const MobileNav = ({ ...props }) => {
           <span className="sr-only">Lukk meny</span>
         </Xknapp>
         <ul className="nav-list">
-          {menu.map((route) => {
+          <Systemtittel
+            className="mobile__subtitle"
+            tag="div"
+            style={{ marginTop: "1rem" }}
+          >
+            {title}
+          </Systemtittel>
+          {pickedMenu.map((route) => {
             return (
-              <li key={route.link}>
-                <Link
-                  tabIndex={hidden ? -1 : 0}
-                  activeClassName="active"
-                  to={route.link ? route.link : "/"}
-                >
-                  {route.title}
-                </Link>
-              </li>
+              <div key={route.link}>
+                {route?.heading && (
+                  <Undertittel
+                    className="mobile__subtitle"
+                    tag="div"
+                    style={{ marginTop: "1rem" }}
+                  >
+                    {route?.heading}
+                  </Undertittel>
+                )}
+                <li>
+                  <Link
+                    tabIndex={hidden ? -1 : 0}
+                    activeClassName="active"
+                    to={
+                      route.link ? route.link.replace("/alertstripe", "") : "/"
+                    }
+                  >
+                    {route.title}
+                  </Link>
+                </li>
+              </div>
             );
           })}
           <li>
-            <a
-              tabIndex={hidden ? -1 : 0}
-              href="https://github.com/navikt/nav-frontend-moduler"
-              className="github"
-            >
-              <GithubLogo />
-              Github
-            </a>
+            {isDs ? (
+              <a
+                tabIndex={hidden ? -1 : 0}
+                href="https://github.com/navikt/nav-frontend-moduler"
+                className="github"
+              >
+                <GithubLogo />
+                Github
+              </a>
+            ) : (
+              <a
+                tabIndex={hidden ? -1 : 0}
+                href="https://github.com/navikt/verktoykasse-innhold"
+                className="github"
+              >
+                <GithubLogo />
+                Rediger innhold (krever innlogging)
+              </a>
+            )}
           </li>
         </ul>
       </nav>

@@ -1,0 +1,124 @@
+.navds-radio {
+  position: relative;
+  padding: var(--navds-spacing-3) 0;
+}
+
+.navds-radio--with-description .navds-error-message {
+  margin-top: 0;
+}
+
+.navds-radio .navds-error-message {
+  margin-top: var(--navds-spacing-3);
+}
+
+.navds-radio__input {
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  left: -12px;
+  margin: 0;
+  opacity: 0;
+  top: 0;
+}
+
+.navds-radio__label {
+  display: flex;
+  width: fit-content;
+  gap: 12px;
+  min-width: 48px;
+  cursor: pointer;
+}
+
+.navds-radio__description {
+  padding-left: calc(48px - 12px);
+  color: var(--navds-color-gray-80);
+}
+
+.navds-radio--with-description {
+  padding-bottom: 0;
+}
+
+.navds-radio--with-error-message {
+  padding-bottom: var(--navds-spacing-2);
+}
+
+.navds-radio__label::before {
+  content: "";
+  background-color: white;
+  border: 1px solid var(--navds-color-border);
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+.navds-radio--s {
+  padding: var(--navds-spacing-1) 0;
+}
+
+.navds-radio--s > .navds-radio__input {
+  width: 24px;
+  height: 24px;
+  top: 2px;
+  left: 0;
+}
+
+.navds-radio--s > .navds-radio__label::before {
+  margin-top: -2px;
+  margin-bottom: -2px;
+}
+
+.navds-radio__input:hover + .navds-radio__label {
+  color: var(--navds-color-blue-50);
+}
+
+.navds-radio__input:hover + .navds-radio__label::before {
+  border-color: var(--navds-color-blue-50);
+  background-color: var(--navds-color-blue-10);
+}
+
+.navds-radio__input:focus + .navds-radio__label::before {
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-radio__input:checked + .navds-radio__label::before {
+  border: 2px solid var(--navds-color-blue-50);
+  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-blue-50) inset;
+}
+
+.navds-radio__input:checked:focus + .navds-radio__label::before {
+  transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
+  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
+    0 0 0 2rem var(--navds-color-blue-50) inset;
+}
+
+.navds-radio--error
+  > .navds-radio__input:not(:hover):not(:focus):not(:disabled):not(:checked)
+  + .navds-radio__label::before {
+  box-shadow: 0 0 0 1px var(--navds-color-red-50);
+  border-color: var(--navds-color-red-50);
+}
+
+.navds-radio--s .navds-error-message {
+  margin-top: 4px;
+}
+
+.navds-radio__input:disabled,
+.navds-radio__input:disabled + .navds-radio__label {
+  color: var(--navds-color-gray-40);
+  cursor: not-allowed;
+}
+
+.navds-radio__input:disabled + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-10);
+  border-color: var(--navds-color-gray-60);
+}
+
+.navds-radio__input:disabled:checked + .navds-radio__label::before {
+  background-color: var(--navds-color-gray-40);
+  border-color: var(--navds-color-gray-40);
+  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-gray-40) inset;
+}

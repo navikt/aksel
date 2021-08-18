@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
 import {
   ProductPageLayout as Layout,
   ProductPageSection as Section,
@@ -14,19 +13,6 @@ import "./components/styles.css";
 export default {
   title: "ds-react/layouts/ProductPage",
   component: Layout,
-  decorators: [
-    (Story) => {
-      useEffect(() => {
-        document.getElementById("decorator-header").style.display = "block";
-        document.getElementById("decorator-footer").style.display = "block";
-        return () => {
-          document.getElementById("decorator-header").style.display = "none";
-          document.getElementById("decorator-footer").style.display = "none";
-        };
-      }, []);
-      return <Story />;
-    },
-  ],
   parameters: {
     layout: "fullscreen",
   },

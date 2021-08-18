@@ -1,0 +1,120 @@
+---
+title: "HTML: Placeholders"
+ingress: Placeholder attributten representere et kort hint med intensjon om å hjelpe brukeren med data utfylling. Dessverre er det en del problemer som stopper den fra å gjøre akkurat dette i flere tilfeller.
+rank: 2
+---
+
+import { Ingress } from "nav-frontend-typografi";
+import { Input } from "nav-frontend-skjema";
+import Lenkepanel from "nav-frontend-lenkepanel";
+import { DoDont, Do, Dont } from "../../../components/do-dont/DoDont";
+import PlaceholderPassword from "../../../components/assets/videos/placeholder-password.mp4";
+import PlaceholderContrast from "../../../components/assets/images/placeholder-contrast.png";
+import Hjelpetekst from "nav-frontend-hjelpetekst";
+
+# Bruk av placeholder-attributtet
+
+<Ingress>
+  Placeholder attributten representere et <i>kort</i> hint med intensjon om å
+  hjelpe brukeren med data utfylling. Dessverre er det en del problemer som
+  stopper den fra å gjøre akkurat dette i flere tilfeller.
+</Ingress>
+
+## Hvorfor unngå placeholders
+
+Selv om placeholders kan virke som en kjempegod snarvei for å gi brukeren enkel og praktisk informasjon, vil det i enkelte tilfeller føre til dårlige brukeropplevelser.
+
+- En placeholder forsvinner når feltet blir utfylt. Dette kan være spesielt utfordrende for personer med kognitive vansker (f.eks. hukommelse).
+
+  <figure className="placeholders__figure">
+    <video
+      src={PlaceholderPassword}
+      autoPlay
+      loop
+      preload="auto"
+      alt="Eksempelvideo for hvorfor informasjon i placeholder kan være vanskelig å huske."
+    />
+    <figcaption className="placeholders__figcaption">
+      Hvor langt måtte passordet være?...
+    </figcaption>
+  </figure>
+
+- Ikke alle skjermlesere leser opp placeholder.
+- Har dårlig kontrast. WCAG krever at tekst skal ha en kontrast på 4,5:1, men om man forsøker å oppfylle dette kravet her vil det bli vanskelig å se at det faktisk er en placeholder og ikke vanlig tekst som er skrevet i input-feltet. Heller ikke alle nettlesere støtter [styling av placeholder](https://caniuse.com/#feat=css-placeholder).
+
+  <figure className="placeholders__figure">
+    <img
+      src={PlaceholderContrast}
+      height="77px"
+      width="294px"
+      alt="Eksempelvideo som viser hvorfor styling og høy kontrast av placeholder kan være upraktisk."
+    />
+    <figcaption className="placeholders__figcaption">
+      Er adressen allerede utfylt?...
+    </figcaption>
+  </figure>
+
+- Kan være vanskelig å skjønne i høykontrastmodus.
+- Blir ikke oversatt med auto-translate.
+
+## Alternativ
+
+Vår anbefaling er å heller bruke vanlige labels, `description`-propen eller [Hjelpetekst](/components/hjelpetekst)-komponenter i nærheten av feltet.
+
+<DoDont className="placeholders__dodont">
+  <Do>
+    <Input
+      label="Password"
+      description="8-16 Characters, containing atleast 2 numbers"
+      type="password"
+    />
+  </Do>
+  <Dont>
+    <Input
+      label="Password"
+      placeholder="8-16 Characters, containing atleast 2 numbers"
+    />
+  </Dont>
+</DoDont>
+
+<br />
+
+<DoDont className="placeholders__dodont">
+  <Do>
+    <Input
+      label={
+        <div style={{ display: "flex" }}>
+          E-Mail
+          <Hjelpetekst style={{ marginLeft: "0.5rem" }}>
+            Example: ola.nordmann@norge.no
+          </Hjelpetekst>
+        </div>
+      }
+    />
+  </Do>
+  <Dont>
+    <Input label="E-Mail" placeholder="ola.nordmann@norge.no" />
+  </Dont>
+</DoDont>
+
+## Mer om Placeholders
+
+<Lenkepanel
+  className="resource-link"
+  href="https://developer.mozilla.org/en-US/docs/Web/CSS/::placeholder"
+  border
+>
+  <Undertittel className="lenkepanel__heading">
+    Bruk og erfaringer fra Mozilla (MDN web docs)
+  </Undertittel>
+</Lenkepanel>
+
+<Lenkepanel
+  className="resource-link"
+  href="https://www.smashingmagazine.com/2018/06/placeholder-attribute/"
+  border
+>
+  <Undertittel className="lenkepanel__heading">
+    Artikkel om bruk av placeholders (Smashing Magazine)
+  </Undertittel>
+</Lenkepanel>

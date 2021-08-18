@@ -28,10 +28,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Orientation for popover
    * @default "right"
    */
@@ -42,6 +38,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   arrow?: boolean;
   /**
    * Distance from anchor to popover
+   * @default 16 w/arrow, 4 wo/arrow
    */
   offset?: number;
 }
@@ -120,7 +117,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           {
             name: "offset",
             options: {
-              offset: [0, offset ?? arrow ? 16 : 4],
+              offset: [0, offset ?? (arrow ? 16 : 4)],
             },
           },
         ],

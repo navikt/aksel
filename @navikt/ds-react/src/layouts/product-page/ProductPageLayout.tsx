@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { Children, forwardRef, HTMLAttributes, useEffect } from "react";
-import { ContentContainer, Heading } from "../../index";
+import { ContentContainer, Title } from "../..";
 
 const cls = (className, columns) =>
   cl(
@@ -12,7 +12,6 @@ const cls = (className, columns) =>
 export interface ProductPageLayoutProps extends HTMLAttributes<HTMLElement> {
   title: string;
   children?: React.ReactNode;
-  className?: string;
 }
 
 const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(
@@ -35,13 +34,13 @@ const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(
           <ContentContainer>
             <div className={cls(className, columns)} {...rest}>
               <div className={cl("navds-layout__header-content")}>
-                <Heading
-                  size={"xxl"}
+                <Title
+                  size="2xl"
                   className={cl("navds-layout__header-title")}
                   level={1}
                 >
                   {title}
-                </Heading>
+                </Title>
               </div>
             </div>
           </ContentContainer>

@@ -12,50 +12,72 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * Decides what design the alert will have
    */
   variant: "error" | "warning" | "info" | "success";
-  /**
-   * Component content
-   */
   children: React.ReactNode;
   /**
-   * @ignore
+   * Changes padding and font-sizes
+   * @default "m"
    */
-  className?: string;
-  /**
-   * Reduces padding on component
-   * @default "medium"
-   */
-  size?: "medium" | "small";
+  size?: "m" | "s";
 }
 
 const Icon = ({ variant }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled />;
+      return (
+        <ErrorFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "warning":
-      return <WarningFilled />;
+      return (
+        <WarningFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "info":
-      return <InformationFilled />;
+      return (
+        <InformationFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     case "success":
-      return <SuccessFilled />;
+      return (
+        <SuccessFilled
+          aria-label={`${variant}-ikon`}
+          focusable="false"
+          role="img"
+        />
+      );
     default:
       return null;
   }
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "medium", ...rest }, ref) => (
+  ({ variant, children, className, size = "m", ...rest }, ref) => (
     <div
       ref={ref}
       className={cl(
         className,
         "navds-alert",
         `navds-alert--${variant}`,
-        `navds-alert--${size}`
+        `navds-alert--${size}`,
+        "navds-body-long",
+        { "navds-body--s": size === "s" }
       )}
       {...rest}
     >
-      <Icon variant={variant} />
-      <span>{children}</span>
+      <span>
+        <span className="sr-only">{`${variant}-ikon`}</span>
+        <Icon variant={variant} />
+      </span>
+      <div>{children}</div>
     </div>
   )
 );

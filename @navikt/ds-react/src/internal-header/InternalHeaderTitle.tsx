@@ -7,10 +7,6 @@ export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
    */
   children?: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Tag this component will use. Usefull for defining a button/link
    * @default "h1"
    */
@@ -22,7 +18,7 @@ const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
     createElement(element, {
       ...rest,
       ref,
-      className: cl("navds-header__title", className),
+      className: cl("navds-interal-header__title", "navds-label", className),
       children: <span>{children}</span>,
     })
 );

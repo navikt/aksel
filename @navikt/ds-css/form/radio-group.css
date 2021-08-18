@@ -1,0 +1,13 @@
+.navds-radio-group--s > .navds-radio-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navds-fieldset.navds-radio-group--m > .navds-radio-buttons {
+  margin-top: 0;
+}
+
+.navds-fieldset.navds-radio-group--m > .navds-fieldset__error {
+  margin-top: 0;
+}

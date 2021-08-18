@@ -1,0 +1,4 @@
+.navds-error-message {
+  display: block;
+  color: var(--navds-color-red-50);
+}

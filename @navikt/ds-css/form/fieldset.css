@@ -1,0 +1,19 @@
+.navds-fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.navds-fieldset > :not(:first-child):not(:empty) {
+  margin-top: 8px;
+}
+
+.navds-fieldset--s > :not(:first-child):not(:empty) {
+  margin-top: 4px;
+}
+
+/* Applied when hideLegend is applied to fieldset */
+.navds-fieldset > .sr-only + :not(:first-child):not(:empty) {
+  margin-top: 0;
+}

@@ -9,6 +9,7 @@ import LayoutPicker from "./layoutPicker";
 import MdxWrapper from "./Mdxprovider";
 import { globalHistory } from "@reach/router";
 import "./layout.less";
+import startCase from "lodash.startcase";
 
 const Layout = (props) => {
   useEffect(() => {
@@ -19,11 +20,16 @@ const Layout = (props) => {
     });
   }, []);
 
+  let source = startCase(props.path.split("/")[1]);
+  source = source === "Designsystem" ? "Designsystemet" : source;
+
   return (
     <>
       <Helmet
         title={props.pageContext?.frontmatter?.title}
-        titleTemplate="%s - NAV Designsystem"
+        titleTemplate={`%s - ${
+          source === "" ? "" : source + " -"
+        }  NAV Verktøykassen`}
       >
         <html lang="no" />
         {props.pageContext?.frontmatter?.ingress && (
@@ -33,18 +39,22 @@ const Layout = (props) => {
           />
         )}
       </Helmet>
+      <a href="#hovedinnhold" tab-index={-1} id="skip-link">
+        Hopp til innhold
+      </a>
       <div className="mainWrapper">
-        <Header location={props.location} />
-        <Breadcrumb location={props.location} />
+        <Header location={props.location} title={source} />
+        {props.path.startsWith("/designsystem") && (
+          <Breadcrumb location={props.location} />
+        )}
         <div className="contentWrapper">
-          {!(
-            ["/", "/404.html"].includes(props.pageResources?.page?.path) ||
-            props.location.pathname === "/404.html"
-          ) && <Sidebar className="leftNavigation" location={props.location} />}
+          {props?.pageResources?.page?.path !== "/404.html" && (
+            <Sidebar className="leftNavigation" location={props.location} />
+          )}
           <main
             id="hovedinnhold"
             className={cl("mainContent", {
-              "dsportal--fullwidth": props.path === "/",
+              forside: props.location.pathname === "/",
             })}
           >
             <LayoutPicker {...props}>

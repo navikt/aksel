@@ -1,8 +1,8 @@
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
 import { UnmountClosed, Collapse } from "react-collapse";
-import { Expand } from "@navikt/ds-icons";
-import { v4 as uuidv4 } from "uuid";
+import { Expand, ExpandFilled } from "@navikt/ds-icons";
+import { useId } from "..";
 
 export interface AccordionProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -10,10 +10,6 @@ export interface AccordionProps
    * Component content
    */
   children: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
   /**
    * Content on interactive surface of component
    */
@@ -26,8 +22,6 @@ export interface AccordionProps
   open?: boolean;
   /**
    * Callback for when user interacts with component
-   *
-   * @param {object} event
    */
   onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   /**
@@ -37,7 +31,7 @@ export interface AccordionProps
   renderContentWhenClosed?: boolean;
 }
 
-const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
   (
     {
       children,
@@ -46,13 +40,15 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       className,
       renderContentWhenClosed = false,
       onClick,
+      id,
       ...rest
     },
     ref
   ) => {
-    const contentId = useRef(uuidv4());
-    const buttonId = useRef(uuidv4());
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
+
+    const buttonId = useId(id);
+    const contentId = useId();
 
     useEffect(() => {
       setInternalOpen(open);
@@ -64,33 +60,42 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
 
     return (
       <div
-        ref={ref}
         className={cl("navds-accordion", className, {
           "navds-accordion--open": internalOpen,
           "navds-accordion--closed": !internalOpen,
         })}
       >
         <button
-          id={buttonId.current}
+          ref={ref}
+          id={buttonId}
           className="navds-accordion__button"
           aria-expanded={open}
-          aria-controls={contentId.current}
+          aria-controls={contentId}
           onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
           {...rest}
         >
-          <span className="navds-accordion__heading">{heading}</span>
+          <span className="navds-accordion__heading navds-title navds-title--s">
+            {heading}
+          </span>
           <Expand
+            focusable="false"
+            role="img"
             className={cl(
               "navds-accordion__chevron",
               `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
             )}
           />
+          <ExpandFilled
+            focusable="false"
+            role="img"
+            className={cl(
+              "navds-accordion__chevron",
+              "navds-accordion__chevron--filled",
+              `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
+            )}
+          />
         </button>
-        <div
-          id={contentId.current}
-          role="region"
-          aria-labelledby={buttonId.current}
-        >
+        <div id={contentId} role="region" aria-labelledby={buttonId}>
           <CollapseComponent isOpened={internalOpen}>
             <div className="navds-accordion__content">{children}</div>
           </CollapseComponent>

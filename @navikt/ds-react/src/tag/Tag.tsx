@@ -7,10 +7,6 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
    * Changes background-color and border-color
    */
   variant: "warning" | "error" | "info" | "success";
@@ -21,7 +17,13 @@ const Tag = forwardRef<HTMLSpanElement, TagProps>(
     return (
       <span
         ref={ref}
-        className={cl("navds-tag", className, `navds-tag--${variant}`)}
+        className={cl(
+          "navds-tag",
+          className,
+          "navds-detail",
+          "navds-detail--s",
+          `navds-tag--${variant}`
+        )}
         {...rest}
       >
         {children}

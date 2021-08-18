@@ -1,26 +1,37 @@
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
+import { OverridableComponent } from "../util";
 
-export interface PanelProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * Component content
-   */
-  children: React.ReactNode;
-  /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * Adds a border to the panel
-   * @default false
-   */
-  border?: boolean;
+export type PanelType = OverridableComponent<PanelProps>;
+
+export interface PanelProps {
+  props: {
+    /**
+     * Panel content
+     */
+    children: React.ReactNode;
+    /**
+     * Toggles border on panel
+     * @default false
+     */
+    border?: boolean;
+  } & React.HTMLAttributes<HTMLElement>;
+  defaultComponent: "div";
 }
 
-const Panel = forwardRef<HTMLDivElement, PanelProps>(
-  ({ children, className, border = false, ...rest }, ref) => {
+const Panel: PanelType = forwardRef(
+  (
+    {
+      children,
+      className,
+      border = false,
+      component: Component = "div",
+      ...rest
+    },
+    ref
+  ) => {
     return (
-      <div
+      <Component
         ref={ref}
         className={cl("navds-panel", className, {
           "navds-panel--border": border,
@@ -28,7 +39,7 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
         {...rest}
       >
         {children}
-      </div>
+      </Component>
     );
   }
 );

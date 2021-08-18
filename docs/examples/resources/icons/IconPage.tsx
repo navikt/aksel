@@ -220,7 +220,7 @@ const IconPage = () => {
             onClick={() => setListView(0)}
             variant={!listView ? "primary" : "secondary"}
             aria-label="Vis ikoner med kategorier"
-            size="small"
+            size="s"
             className="iconPage__viewSelectButton"
           >
             <List />
@@ -229,7 +229,7 @@ const IconPage = () => {
             onClick={() => setListView(1)}
             variant={!listView ? "secondary" : "primary"}
             aria-label="Vis ikoner uten kategorier"
-            size="small"
+            size="s"
             className="iconPage__viewSelectButton"
           >
             <System />
@@ -250,14 +250,14 @@ const IconPage = () => {
             <Systemtittel>{selectedIcon.name}</Systemtittel>
             <div className="iconPage__modal--wrapper">
               <div>
-                <p className="iconPage__modalTitle">Fargevelger</p>
+                <p className="iconPage__modalTitle navds-label">Fargevelger</p>
                 <ColorSwitch onChange={(c) => setColor(c)} />
               </div>
               <div style={{ marginLeft: "2rem" }}>
-                <p className="iconPage__modalTitle">Last ned</p>
+                <p className="iconPage__modalTitle navds-label">Last ned</p>
                 <div className="iconPage__modalButton--wrapper">
                   <Button
-                    size="small"
+                    size="s"
                     variant="action"
                     onClick={() => downloadSvg()}
                     className="iconPage__modalButton"
@@ -267,7 +267,7 @@ const IconPage = () => {
                     SVG
                   </Button>
                   <Button
-                    size="small"
+                    size="s"
                     variant="action"
                     onClick={() => downloadPng()}
                     className="iconPage__modalButton"

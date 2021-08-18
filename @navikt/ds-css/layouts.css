@@ -168,12 +168,12 @@
 }
 
 .navds-layout__header-title {
-  margin: 0.25rem 0.85rem;
+  margin: var(--navds-spacing-1) var(--navds-spacing-3);
 }
 
 @media (min-width: 448px) {
   .navds-layout__header-title {
-    margin: 0.25rem 0;
+    margin: var(--navds-spacing-1) 0;
   }
 }
 

@@ -3,11 +3,11 @@ import cl from "classnames";
 import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
-import { Button } from "../index";
+import { Button } from "..";
 
 export interface ModalProps {
   /**
-   * Content of modal
+   * Modal content
    */
   children: React.ReactNode;
   /**
@@ -80,13 +80,17 @@ const Modal: ModalLifecycle &
           className={cl("navds-modal__button", {
             "navds-modal__button--shake": shouldCloseOnOverlayClick,
           })}
-          size="small"
+          size="s"
           variant="secondary"
           ref={buttonRef}
           aria-label="lukk modalvindu"
           onClick={onClose}
         >
-          <Close />
+          <Close
+            focusable="false"
+            role="img"
+            aria-label="X-ikon for å lukke modal"
+          />
         </Button>
       </ReactModal>
     );

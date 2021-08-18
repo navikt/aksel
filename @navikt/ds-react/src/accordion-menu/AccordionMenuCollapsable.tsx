@@ -8,7 +8,6 @@ export interface AccordionMenuCollapsableProps
   title: string;
   defaultOpen?: boolean;
   children: React.ReactNode;
-  className?: string;
 }
 
 const AccordionMenuCollapsable = forwardRef<
@@ -32,6 +31,7 @@ const AccordionMenuCollapsable = forwardRef<
         {title}
         <Expand
           role="img"
+          focusable="false"
           aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
           className="navds-accordion-menu-collapsable__expand-icon"
         />
