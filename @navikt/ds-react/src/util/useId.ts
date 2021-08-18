@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import ShortUuid from "short-uuid";
 
 const canUseDOM = (): boolean => {
