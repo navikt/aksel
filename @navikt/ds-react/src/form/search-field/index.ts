@@ -7,3 +7,7 @@ export {
   default as SearchFieldButton,
   SearchFieldButtonProps,
 } from "./SearchFieldButton";
+export {
+  default as SearchFieldClearButton,
+  SearchFieldClearButtonProps,
+} from "./SearchFieldClearButton";

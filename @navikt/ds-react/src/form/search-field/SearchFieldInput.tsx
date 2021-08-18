@@ -3,7 +3,9 @@ import cl from "classnames";
 import { SearchFieldContext } from "./SearchField";
 
 export interface SearchFieldInputProps
-  extends InputHTMLAttributes<HTMLInputElement> {}
+  extends InputHTMLAttributes<HTMLInputElement> {
+  clearSearch?: boolean;
+}
 
 const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
   ({ className, ...rest }, ref) => {
@@ -17,19 +19,21 @@ const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
     const { size, inputProps } = searchField;
 
     return (
-      <input
-        {...rest}
-        {...inputProps}
-        ref={ref}
-        type="text"
-        className={cl(
-          className,
-          "navds-search-field__input",
-          "navds-text-field__input",
-          "navds-body-short",
-          `navds-body-${size ?? "m"}`
-        )}
-      />
+      <>
+        <input
+          {...rest}
+          {...inputProps}
+          ref={ref}
+          type="text"
+          className={cl(
+            className,
+            "navds-search-field__input",
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size ?? "m"}`
+          )}
+        />
+      </>
     );
   }
 );

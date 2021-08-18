@@ -1,7 +1,12 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import { Search } from "@navikt/ds-icons";
-import { SearchField, SearchFieldInput, SearchFieldButton } from "../index";
+import { Close, Search } from "@navikt/ds-icons";
+import {
+  SearchField,
+  SearchFieldInput,
+  SearchFieldButton,
+  SearchFieldClearButton,
+} from "../index";
 import { Fieldset } from "../..";
 export default {
   title: "ds-react/form/search-field",
@@ -28,6 +33,29 @@ export const All = () => {
         <SearchFieldButton>
           <Search /> <span>Søk</span>
         </SearchFieldButton>
+        <SearchFieldInput />
+      </SearchField>
+
+      <h1>SearchField w clearsearch</h1>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+      >
+        <SearchFieldInput clearSearch />
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+      </SearchField>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+      >
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+        <SearchFieldClearButton>
+          <Close /> <span>Tøm</span>
+        </SearchFieldClearButton>
         <SearchFieldInput />
       </SearchField>
 

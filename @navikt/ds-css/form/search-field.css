@@ -1,18 +1,15 @@
 .navds-search-field__input-wrapper {
   width: 100%;
   display: flex;
-  min-height: 48px;
 }
 
-.navds-form-field--s > .navds-search-field__input-wrapper {
-  min-height: 32px;
-}
-
-.navds-form-field--s
-  > .navds-search-field__input-wrapper
-  > .navds-search-field__input {
+.navds-form-field--s .navds-search-field__input {
   padding: 0.25rem;
   min-height: 32px;
+}
+
+.navds-search-field__input-wrapper > *:not(:first-child):not(:last-child) {
+  border-radius: 0;
 }
 
 .navds-search-field__input-wrapper :first-child {

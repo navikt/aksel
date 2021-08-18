@@ -3,12 +3,12 @@ import cl from "classnames";
 import { SearchFieldContext } from "./SearchField";
 import { Button, ButtonProps } from "../..";
 
-export interface SearchFieldButtonProps extends ButtonProps {
+export interface SearchFieldButtonProps extends Omit<ButtonProps, "size"> {
   /**
    * Changes design and interactions
    * @default "action"
    */
-  variant?: "primary" | "secondary" | "action" | "danger";
+  variant?: "primary" | "action";
 }
 
 const SearchFieldButton = forwardRef<HTMLButtonElement, SearchFieldButtonProps>(

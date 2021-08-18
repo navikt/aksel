@@ -1,5 +1,5 @@
 import cl from "classnames";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
@@ -64,6 +64,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           className,
           "navds-form-field",
           `navds-form-field--${size ?? "m"}`,
+          "navds-search-field",
           { "navds-search-field--error": hasError }
         )}
       >
