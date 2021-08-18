@@ -17,8 +17,17 @@ export const All = () => {
       >
         <SearchFieldInput />
         <SearchFieldButton>
-          <Search /> Søk
+          <Search /> <span>Søk</span>
         </SearchFieldButton>
+      </SearchField>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+      >
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+        <SearchFieldInput />
       </SearchField>
 
       <h2>SearchField small</h2>
@@ -27,8 +36,21 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="s"
       >
-        <SearchFieldButton>Søk</SearchFieldButton>
+        <SearchFieldButton>
+          <Search />
+        </SearchFieldButton>
         <SearchFieldInput />
+      </SearchField>
+
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        size="s"
+      >
+        <SearchFieldInput />
+        <SearchFieldButton>
+          <Search />
+        </SearchFieldButton>
       </SearchField>
 
       <h2>SearchField w error</h2>
@@ -38,7 +60,19 @@ export const All = () => {
         error="Errormsg"
       >
         <SearchFieldInput />
-        <SearchFieldButton>Søk</SearchFieldButton>
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+      </SearchField>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        error="Errormsg"
+      >
+        <SearchFieldButton>
+          <Search /> <span>Søk</span>
+        </SearchFieldButton>
+        <SearchFieldInput />
       </SearchField>
     </>
   );
