@@ -50,16 +50,3 @@
 .navds-guide-panel--compact.navds-guide-panel--poster .navds-guide {
   top: -50px;
 }
-
-.navds-guide-panel--info {
-  border: 2px solid var(--navds-color-lightblue-30);
-}
-.navds-guide-panel--success {
-  border: 2px solid var(--navds-color-green-20);
-}
-.navds-guide-panel--warning {
-  border: 2px solid var(--navds-color-orange-20);
-}
-.navds-guide-panel--error {
-  border: 2px solid var(--navds-color-red-20);
-}

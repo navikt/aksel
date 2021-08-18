@@ -17,19 +17,13 @@ const illustrationCls = (
   center: boolean,
   transparent: boolean,
   noMask: boolean,
-  size: string,
-  theme: string
+  size: string
 ) =>
-  cl(
-    "navds-guide__illustration",
-    `navds-guide__illustration--${size}`,
-    `navds-guide__illustration--${theme}`,
-    {
-      "navds-guide__illustration--center": center,
-      "navds-guide__illustration--transparent": transparent,
-      "navds-guide__illustration--nomask": noMask,
-    }
-  );
+  cl("navds-guide__illustration", `navds-guide__illustration--${size}`, {
+    "navds-guide__illustration--center": center,
+    "navds-guide__illustration--transparent": transparent,
+    "navds-guide__illustration--nomask": noMask,
+  });
 
 const arrowCls = (position: string, whiteSpeechBubble: boolean) =>
   cl("navds-guide__arrow", `navds-guide__arrow--${position}`, {
@@ -75,11 +69,6 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
    */
   variant?: "default" | "success" | "warning" | "error";
   /**
-   * Predefined background-themes for the illustration
-   * @default "default"
-   */
-  theme?: "default" | "info" | "success" | "warning" | "error";
-  /**
    * Predefined size properties for illustration
    * @default "m"
    */
@@ -106,7 +95,6 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
       transparent = false,
       illustration,
       variant = "default",
-      theme = "default",
       size = "m",
       position = "floating",
       whiteSpeechBubble = false,
@@ -120,9 +108,7 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
         className={wrapperCls(className, position, variant)}
         {...rest}
       >
-        <div
-          className={illustrationCls(center, transparent, noMask, size, theme)}
-        >
+        <div className={illustrationCls(center, transparent, noMask, size)}>
           {illustration}
         </div>
         {children && <span className={arrowCls(position, whiteSpeechBubble)} />}

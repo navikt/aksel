@@ -16,22 +16,6 @@ export const All = () => {
     <div>
       <h1>GuidePanel</h1>
       <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
-      <div style={{ display: "flex", flexDirection: "column", rowGap: "1rem" }}>
-        <h2>GuidePanel themes</h2>
-        <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
-        <GuidePanel theme="info" illustration={<SvgTemplate />}>
-          {panelText}
-        </GuidePanel>
-        <GuidePanel theme="success" illustration={<SvgTemplate />}>
-          {panelText}
-        </GuidePanel>
-        <GuidePanel theme="warning" illustration={<SvgTemplate />}>
-          {panelText}
-        </GuidePanel>
-        <GuidePanel theme="error" illustration={<SvgTemplate />}>
-          {panelText}
-        </GuidePanel>
-      </div>
       <h2>GuidePanel compact</h2>
       <GuidePanel compact illustration={<SvgTemplate />}>
         {panelText}

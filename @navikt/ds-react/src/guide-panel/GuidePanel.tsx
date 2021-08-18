@@ -2,8 +2,8 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import { Guide, GuideProps } from "../index";
 import cl from "classnames";
 
-const guideCls = (className, poster, compact, theme) =>
-  cl("navds-guide-panel", className, `navds-guide-panel--${theme}`, {
+const guideCls = (className, poster, compact) =>
+  cl("navds-guide-panel", className, {
     "navds-guide-panel--poster": poster,
     "navds-guide-panel--compact": compact,
   });
@@ -21,11 +21,6 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
    * Custom svg/img element (preferably svg)
    */
   illustration: React.ReactNode;
-  /**
-   * Predefined color-themes depending on message wanting to be displayed
-   * @default "default"
-   */
-  theme?: "default" | "success" | "warning" | "error" | "info";
   /**
    * Allows setting props on Guide-element
    */
@@ -48,7 +43,6 @@ const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       children,
       className,
       guideProps,
-      theme = "default",
       illustration,
       compact = false,
       poster = false,
@@ -57,14 +51,9 @@ const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
     ref
   ) => {
     return (
-      <div
-        ref={ref}
-        className={guideCls(className, poster, compact, theme)}
-        {...rest}
-      >
+      <div ref={ref} className={guideCls(className, poster, compact)} {...rest}>
         <Guide
           {...guideProps}
-          theme={theme}
           size={poster ? "m" : "s"}
           illustration={illustration}
         />

@@ -158,13 +158,16 @@
 .navds-guide__illustration--center {
   align-items: center;
 }
+
 .navds-guide__illustration--center svg,
 .navds-guide__illustration--center img {
   height: 100%;
 }
+
 .navds-guide__illustration--transparent {
   background: none;
 }
+
 .navds-guide__illustration--nomask {
   overflow: visible;
 }
@@ -184,18 +187,22 @@
   position: absolute;
   right: 50%;
 }
+
 .navds-guide__arrow--top {
   margin-right: 40px;
 }
+
 .navds-guide__arrow--right {
   margin-left: 0.75rem;
   border-top: 1.25rem solid transparent;
 }
+
 .navds-guide__arrow--bottom {
   border-bottom: 0;
   margin-right: 40px;
   border-top: 1.25rem solid transparent;
 }
+
 .navds-guide__arrow--left {
   border-top: 1.25rem solid transparent;
 
