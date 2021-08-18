@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label } from "..";
+import { BodyShort, Label, omit } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
@@ -92,7 +92,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize
-            {...rest}
+            {...omit(rest, ["error", "errorId", "size"])}
             {...inputProps}
             ref={ref}
             className={cl(

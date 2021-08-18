@@ -1,7 +1,7 @@
 import React, { forwardRef, SelectHTMLAttributes } from "react";
 import cl from "classnames";
 import { Expand } from "@navikt/ds-icons";
-import { BodyShort, Label } from "..";
+import { BodyShort, Label, omit } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
 
@@ -78,7 +78,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
       )}
       <div className="navds-select__container">
         <select
-          {...rest}
+          {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           ref={ref}
           className={cl(
