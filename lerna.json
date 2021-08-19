@@ -15,7 +15,9 @@
   "packages": [
     "packages/*",
     "@navikt/ds-css",
-    "@navikt/ds-react",
+    "@navikt/ds-react/core",
+    "@navikt/ds-react/internal",
+    "@navikt/ds-react/navno",
     "@navikt/ds-icons",
     "@navikt/ds-tokens"
   ]
