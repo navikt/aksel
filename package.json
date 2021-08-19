@@ -36,7 +36,7 @@
     "packages/*",
     "@navikt/ds-css",
     "@navikt/ds-css/*",
-    "@navikt/ds-react",
+    "@navikt/ds-react/*",
     "@navikt/ds-icons",
     "@navikt/ds-tokens",
     "utilities/build/from-git-fix"
