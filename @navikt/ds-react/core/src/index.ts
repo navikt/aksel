@@ -5,7 +5,6 @@ export * from "./button";
 export * from "./content-container";
 export * from "./form";
 export * from "./grid";
-export * from "./layouts";
 export * from "./link";
 export * from "./link-panel";
 export * from "./loader";
