@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "@navikt/ds-react";
 
 export interface MicroCardProps {
   props: {

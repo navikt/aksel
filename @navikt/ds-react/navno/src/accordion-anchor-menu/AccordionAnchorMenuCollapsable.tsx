@@ -1,1 +1,1 @@
-export { AccordionMenuCollapsable as AccordionAnchorMenuCollapsable } from "../accordion-menu";
+export { AccordionMenuCollapsable as AccordionAnchorMenuCollapsable } from "@navikt/ds-react";

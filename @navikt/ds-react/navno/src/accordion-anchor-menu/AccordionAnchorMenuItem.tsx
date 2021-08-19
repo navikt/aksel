@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect } from "react";
-import { AccordionMenuItem, AccordionMenuItemType } from "../accordion-menu";
+import { AccordionMenuItem, AccordionMenuItemType } from "@navikt/ds-react";
 import { useStore } from "./ActiveAnchorStore";
 
 const AccordionAnchorMenuItem: AccordionMenuItemType = forwardRef(

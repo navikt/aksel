@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import { AccordionMenu as BaseAccordionMenu } from "../accordion-menu";
-import { Title } from "..";
+import { Title, AccordionMenu as BaseAccordionMenu } from "@navikt/ds-react";
 import { ActiveAnchorProvider } from "./ActiveAnchorStore";
 import cl from "classnames";
 
