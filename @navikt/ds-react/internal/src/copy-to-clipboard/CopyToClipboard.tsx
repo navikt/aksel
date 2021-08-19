@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover, Button } from "..";
+import { Popover, Button } from "@navikt/ds-react";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
