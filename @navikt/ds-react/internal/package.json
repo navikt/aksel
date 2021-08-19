@@ -30,8 +30,7 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build2": "yarn run clean && tsc -p ../tsconfig.json && tsc -p ../tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
-    "build-new": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
