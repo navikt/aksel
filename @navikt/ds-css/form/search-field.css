@@ -1,5 +1,4 @@
 .navds-search-field__input-wrapper {
-  width: 100%;
   display: flex;
 }
 
@@ -12,12 +11,12 @@
   border-radius: 0;
 }
 
-.navds-search-field__input-wrapper :first-child {
+.navds-search-field__input-wrapper > :first-child {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
 
-.navds-search-field__input-wrapper :last-child {
+.navds-search-field__input-wrapper > :last-child {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
