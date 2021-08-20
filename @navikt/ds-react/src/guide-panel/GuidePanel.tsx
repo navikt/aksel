@@ -20,7 +20,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Allows setting props on Guide-element
    */
-  guideProps?: GuideProps;
+  guideProps?: Partial<GuideProps>;
   /**
    * Poster positions guide-illustation above content
    * @default false, renders illustation left of content
