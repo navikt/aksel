@@ -8,13 +8,20 @@ export default {
 
 export const All = () => {
   return (
-    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "10rem" }}>
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <Guide theme="default" illustration={<SvgTemplate />} />
-        <Guide theme="success" illustration={<SvgTemplate />} />
-        <Guide theme="warning" illustration={<SvgTemplate />} />
-        <Guide theme="error" illustration={<SvgTemplate />} />
-        <Guide theme="info" illustration={<SvgTemplate />} />
+    <div style={{ display: "flex", gap: "12rem", flexDirection: "column" }}>
+      <div style={{ display: "flex", gap: "4rem", marginTop: "4rem" }}>
+        <Guide illustration={<SvgTemplate />}>
+          Velit velit laborum occaecat labore laboris sunt id eu duis in
+          incididunt.
+        </Guide>
+        <Guide illustration={<SvgTemplate />}>
+          Velit velit laborum occaecat labore laboris sunt id eu duis in
+          incididunt.
+        </Guide>
+        <Guide illustration={<SvgTemplate />}>
+          Velit velit laborum occaecat labore laboris sunt id eu duis in
+          incididunt.
+        </Guide>
       </div>
       <div
         style={{
@@ -23,13 +30,13 @@ export const All = () => {
           height: "5rem",
         }}
       >
-        <Guide theme="default" illustration={<SvgTemplate />}>
+        <Guide illustration={<SvgTemplate />}>
           With text in speech bubble!
         </Guide>
-        <Guide transparent theme="default" illustration={<SvgTemplate />}>
+        <Guide transparent illustration={<SvgTemplate />}>
           With text in speech bubble and transparent background!
         </Guide>
-        <Guide center theme="default" illustration={<SvgTemplate />}>
+        <Guide center illustration={<SvgTemplate />}>
           With text in speech bubble and center
         </Guide>
       </div>

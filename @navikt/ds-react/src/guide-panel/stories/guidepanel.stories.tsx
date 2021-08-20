@@ -38,6 +38,29 @@ export const All = () => {
       >
         {panelText}
       </GuidePanel>
+      <GuidePanel illustration={<SvgTemplate />} color="#99C3FF">
+        {panelText}Ullamco reprehenderit fugiat reprehenderit ad nisi aliqua
+        irure enim id nisi do non magna. Nisi ut incididunt dolor aliqua
+        adipisicing. Cupidatat sint et qui minim sint aute anim non Lorem
+        reprehenderit id et excepteur. Consectetur velit aliqua eiusmod sit. Sit
+        velit minim consectetur deserunt Lorem non elit fugiat consectetur sunt
+        aliqua Lorem minim. Ullamco dolor mollit laboris velit deserunt nisi
+        ipsum minim dolor ad cillum in id do.
+        {panelText}Ullamco reprehenderit fugiat reprehenderit ad nisi aliqua
+        irure enim id nisi do non magna. Nisi ut incididunt dolor aliqua
+        adipisicing. Cupidatat sint et qui minim sint aute anim non Lorem
+        reprehenderit id et excepteur. Consectetur velit aliqua eiusmod sit. Sit
+        velit minim consectetur deserunt Lorem non elit fugiat consectetur sunt
+        aliqua Lorem minim. Ullamco dolor mollit laboris velit deserunt nisi
+        ipsum minim dolor ad cillum in id do.
+        {panelText}Ullamco reprehenderit fugiat reprehenderit ad nisi aliqua
+        irure enim id nisi do non magna. Nisi ut incididunt dolor aliqua
+        adipisicing. Cupidatat sint et qui minim sint aute anim non Lorem
+        reprehenderit id et excepteur. Consectetur velit aliqua eiusmod sit. Sit
+        velit minim consectetur deserunt Lorem non elit fugiat consectetur sunt
+        aliqua Lorem minim. Ullamco dolor mollit laboris velit deserunt nisi
+        ipsum minim dolor ad cillum in id do.
+      </GuidePanel>
     </div>
   );
 };

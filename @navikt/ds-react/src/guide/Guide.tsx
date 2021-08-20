@@ -37,15 +37,11 @@ const speechBubbleCls = (position: string, whiteSpeechBubble: boolean) =>
 
 export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * Guide speechbubble-content
    */
   children?: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * Custom svg/img element (preferably svg)
+   * Custom svg/img element
    */
   illustration: React.ReactNode;
   /**

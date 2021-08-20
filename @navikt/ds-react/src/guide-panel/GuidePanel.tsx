@@ -10,15 +10,11 @@ const guideCls = (className, poster, compact) =>
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Component content
+   * GuidePanel content
    */
   children: React.ReactNode;
   /**
-   * @ignore
-   */
-  className?: string;
-  /**
-   * Custom svg/img element (preferably svg)
+   * Custom svg/img element
    */
   illustration: React.ReactNode;
   /**
@@ -26,7 +22,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
    */
   guideProps?: GuideProps;
   /**
-   * Poster positions guide-illustation over content
+   * Poster positions guide-illustation above content
    * @default false, renders illustation left of content
    */
   poster?: boolean;
