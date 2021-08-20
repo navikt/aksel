@@ -1,6 +1,7 @@
 import React from "react";
 import { Guide } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
+import { Search } from "@navikt/ds-icons";
 export default {
   title: "ds-react/guide",
   component: Guide,
@@ -9,20 +10,6 @@ export default {
 export const All = () => {
   return (
     <div style={{ display: "flex", gap: "12rem", flexDirection: "column" }}>
-      <div style={{ display: "flex", gap: "4rem", marginTop: "4rem" }}>
-        <Guide illustration={<SvgTemplate />}>
-          Velit velit laborum occaecat labore laboris sunt id eu duis in
-          incididunt.
-        </Guide>
-        <Guide illustration={<SvgTemplate />}>
-          Velit velit laborum occaecat labore laboris sunt id eu duis in
-          incididunt.
-        </Guide>
-        <Guide illustration={<SvgTemplate />}>
-          Velit velit laborum occaecat labore laboris sunt id eu duis in
-          incididunt.
-        </Guide>
-      </div>
       <div
         style={{
           display: "flex",
@@ -30,75 +17,19 @@ export const All = () => {
           height: "5rem",
         }}
       >
-        <Guide illustration={<SvgTemplate />}>
-          With text in speech bubble!
-        </Guide>
-        <Guide transparent illustration={<SvgTemplate />}>
-          With text in speech bubble and transparent background!
-        </Guide>
-        <Guide center illustration={<SvgTemplate />}>
-          With text in speech bubble and center
-        </Guide>
+        <Guide illustration={<SvgTemplate />} />
+        <Guide transparent illustration={<SvgTemplate />} />
+        <Guide center illustration={<SvgTemplate />} />
+        <Guide noMask transparent illustration={<SvgTemplate />} />
+        <Guide center noMask transparent illustration={<SvgTemplate />} />
+        <Guide color="papayawhip" illustration={<SvgTemplate />} />
       </div>
       <div style={{ display: "flex", gap: "2rem" }}>
-        <Guide size="s" illustration={<SvgTemplate />}>
-          Size s illustration
-        </Guide>
-        <Guide size="m" illustration={<SvgTemplate />}>
-          Size m illustration
-        </Guide>
-        <Guide size="l" illustration={<SvgTemplate />}>
-          Size l illustration
-        </Guide>
-        <Guide size="xl" illustration={<SvgTemplate />}>
-          Size xl illustration
-        </Guide>
-      </div>
-      <div>
-        <div style={{ height: "fit-content" }}>
-          <Guide position="left" illustration={<SvgTemplate />}>
-            position left speechbubble
-          </Guide>
-          <Guide position="right" illustration={<SvgTemplate />}>
-            position right speechbubble
-          </Guide>
-          <Guide position="top" illustration={<SvgTemplate />}>
-            position top speechbubble
-          </Guide>
-          <Guide position="bottom" illustration={<SvgTemplate />}>
-            position bottom speechbubble
-          </Guide>
-        </div>
-        <div style={{ background: "#f1f1f1", height: "fit-content" }}>
-          <Guide
-            position="left"
-            whiteSpeechBubble
-            illustration={<SvgTemplate />}
-          >
-            whiteSpeechBubble & position left speechbubble
-          </Guide>
-          <Guide
-            position="right"
-            whiteSpeechBubble
-            illustration={<SvgTemplate />}
-          >
-            whiteSpeechBubble & position right speechbubble
-          </Guide>
-          <Guide
-            position="top"
-            whiteSpeechBubble
-            illustration={<SvgTemplate />}
-          >
-            whiteSpeechBubble & position top speechbubble
-          </Guide>
-          <Guide
-            position="bottom"
-            whiteSpeechBubble
-            illustration={<SvgTemplate />}
-          >
-            whiteSpeechBubble & position bottom speechbubble
-          </Guide>
-        </div>
+        <Guide size="s" illustration={<SvgTemplate />} />
+        <Guide size="m" illustration={<SvgTemplate />} />
+        <Guide size="l" illustration={<SvgTemplate />} />
+        <Guide size="xl" illustration={<SvgTemplate />} />
+        <Guide size="xl" center illustration={<Search />} />
       </div>
     </div>
   );

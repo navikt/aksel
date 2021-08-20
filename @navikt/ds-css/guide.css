@@ -5,21 +5,6 @@
   position: relative;
 }
 
-/* positions */
-
-.navds-guide--top {
-  flex-direction: column;
-}
-.navds-guide--right {
-  flex-direction: row-reverse;
-}
-.navds-guide--bottom {
-  flex-direction: column-reverse;
-}
-.navds-guide--left {
-  flex-direction: row;
-}
-
 /* Guide illustration frame */
 .navds-guide__illustration {
   align-items: flex-end;
@@ -48,23 +33,9 @@
   bottom: 5rem;
 }
 
-.navds-guide__illustration--s ~ .navds-guide__arrow--floating {
-  bottom: 4.1rem;
-  transform: scale(0.5);
-}
-
 .navds-guide__illustration--m {
   height: 6.25rem;
   width: 6.25rem;
-}
-
-.navds-guide__illustration--m ~ .navds-guide__speech-bubble--floating {
-  bottom: 6.5rem;
-}
-
-.navds-guide__illustration--m ~ .navds-guide__arrow--floating {
-  bottom: 5.5rem;
-  transform: scale(0.666667);
 }
 
 .navds-guide__illustration--l {
@@ -72,27 +43,9 @@
   width: 10rem;
 }
 
-.navds-guide__illustration--l ~ .navds-guide__speech-bubble--floating {
-  bottom: 10rem;
-}
-
-.navds-guide__illustration--l ~ .navds-guide__arrow--floating {
-  bottom: 8.8rem;
-  transform: scale(1.06667);
-}
-
 .navds-guide__illustration--xl {
   height: 15rem;
   width: 15rem;
-}
-
-.navds-guide__illustration--xl ~ .navds-guide__speech-bubble--floating {
-  bottom: 15rem;
-}
-
-.navds-guide__illustration--xl ~ .navds-guide__arrow--floating {
-  bottom: 14rem;
-  transform: scale(1.6);
 }
 
 /* Illustration themes */
@@ -127,74 +80,4 @@
 
 .navds-guide__illustration--nomask {
   overflow: visible;
-}
-
-.navds-guide__arrow {
-  border-bottom: 1.25rem solid transparent;
-
-  /* change tp gray-10 ? */
-  border-right: 1.25rem solid #efefef;
-  display: block;
-  height: 1.25rem;
-  order: 2;
-}
-
-/* Arrow positions */
-.navds-guide__arrow--floating {
-  position: absolute;
-  right: 50%;
-}
-
-.navds-guide__arrow--top {
-  margin-right: 40px;
-}
-
-.navds-guide__arrow--right {
-  margin-left: 0.75rem;
-  border-top: 1.25rem solid transparent;
-}
-
-.navds-guide__arrow--bottom {
-  border-bottom: 0;
-  margin-right: 40px;
-  border-top: 1.25rem solid transparent;
-}
-
-.navds-guide__arrow--left {
-  border-top: 1.25rem solid transparent;
-
-  /* change tp gray-10 ? */
-  border-left: 1.25rem solid #efefef;
-  border-right: 0;
-  margin-right: 0.75rem;
-}
-
-/* arrow color */
-.navds-guide__arrow--white {
-  border-right-color: white;
-}
-
-.navds-guide__arrow--left.navds-guide__arrow--white {
-  border-left-color: white;
-}
-
-/* guide speech-bubble */
-.navds-guide__speech-bubble {
-  border-radius: 0.5rem;
-
-  /* change tp gray-10 ? */
-  background: #efefef;
-  order: 1;
-  padding: 1.25rem;
-  text-align: left;
-}
-
-/* Bubble position */
-.navds-guide__speech-bubble--floating {
-  position: absolute;
-}
-
-/* bubble color */
-.navds-guide__speech-bubble--white {
-  background: white;
 }

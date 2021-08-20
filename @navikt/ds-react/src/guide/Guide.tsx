@@ -1,36 +1,8 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-const wrapperCls = (className: string | undefined, position: string) =>
-  cl("navds-guide", className, `navds-guide--${position}`);
-
-const illustrationCls = (
-  center: boolean,
-  transparent: boolean,
-  noMask: boolean,
-  size: string
-) =>
-  cl("navds-guide__illustration", `navds-guide__illustration--${size}`, {
-    "navds-guide__illustration--center": center,
-    "navds-guide__illustration--transparent": transparent,
-    "navds-guide__illustration--nomask": noMask,
-  });
-
-const arrowCls = (position: string, whiteSpeechBubble: boolean) =>
-  cl("navds-guide__arrow", `navds-guide__arrow--${position}`, {
-    "navds-guide__arrow--white": whiteSpeechBubble,
-  });
-
-const speechBubbleCls = (position: string, whiteSpeechBubble: boolean) =>
-  cl("navds-guide__speech-bubble", `navds-guide__speech-bubble--${position}`, {
-    "navds-guide__speech-bubble--white": whiteSpeechBubble,
-  });
-
-export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
-  /**
-   * Guide speechbubble-content
-   */
-  children?: React.ReactNode;
+export interface GuideProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
   /**
    * Custom svg/img element
    */
@@ -56,16 +28,6 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
    */
   size?: "s" | "m" | "l" | "xl";
   /**
-   * Position of speech-bubble in refenrece to illustration
-   * @default "floating"
-   */
-  position?: "floating" | "top" | "right" | "bottom" | "left";
-  /**
-   * Renders the speech-bubble with white backround
-   * @default false
-   */
-  whiteSpeechBubble?: boolean;
-  /**
    * Change color of illustration background
    * Is set with inline style, so css-variables can be used
    */
@@ -75,34 +37,33 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
 const Guide = forwardRef<HTMLDivElement, GuideProps>(
   (
     {
-      children,
       className,
       center = false,
       noMask = false,
       transparent = false,
       illustration,
       size = "m",
-      position = "floating",
-      whiteSpeechBubble = false,
       color,
       ...rest
     },
     ref
   ) => {
     return (
-      <div ref={ref} className={wrapperCls(className, position)} {...rest}>
+      <div ref={ref} className={cl("navds-guide", className)} {...rest}>
         <div
           style={!!color ? { backgroundColor: `${color}` } : {}}
-          className={illustrationCls(center, transparent, noMask, size)}
+          className={cl(
+            "navds-guide__illustration",
+            `navds-guide__illustration--${size}`,
+            {
+              "navds-guide__illustration--center": center,
+              "navds-guide__illustration--transparent": transparent,
+              "navds-guide__illustration--nomask": noMask,
+            }
+          )}
         >
           {illustration}
         </div>
-        {children && <span className={arrowCls(position, whiteSpeechBubble)} />}
-        {children && (
-          <div className={speechBubbleCls(position, whiteSpeechBubble)}>
-            {children}
-          </div>
-        )}
       </div>
     );
   }
