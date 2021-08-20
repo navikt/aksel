@@ -32,6 +32,12 @@ export const All = () => {
       <GuidePanel illustration={<SvgTemplate />} color="#99C3FF">
         {panelText}
       </GuidePanel>
+      <GuidePanel
+        illustration={<SvgTemplate />}
+        color="var(--navds-color-green-30)"
+      >
+        {panelText}
+      </GuidePanel>
     </div>
   );
 };
