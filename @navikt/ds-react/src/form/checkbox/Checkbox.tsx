@@ -16,6 +16,10 @@ export interface CheckboxProps
    * Hides label and makes it viewable for screen-readers only.
    */
   hideLabel?: boolean;
+  /**
+   * The value of the HTML element.
+   */
+  value?: string;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
