@@ -1,34 +1,36 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
 
-export interface MicroCardProps {
-  props: {
-    children: string;
-    /**
-     * @ignore
-     */
-    className?: string;
-  } & React.HTMLAttributes<HTMLAnchorElement>;
-  defaultComponent: "a";
+export interface MicroCardProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  override?: boolean;
 }
 
-export const MicroCard: OverridableComponent<MicroCardProps> = forwardRef(
-  ({ className, component: Component = "a", children, ...rest }, ref) => (
-    <Component
-      ref={ref}
-      className={cl(
+export const MicroCard = forwardRef<HTMLAnchorElement, MicroCardProps>(
+  ({ className, children, override = false, ...rest }, ref) => {
+    const props = {
+      ...rest,
+      ref: ref,
+      className: cl(
         "navds-card__micro",
         "navds-detail",
         "navds-detail--s",
         className
-      )}
-      title={children}
-      {...rest}
-    >
-      {children}
-    </Component>
-  )
+      ),
+    };
+    if (override) {
+      let child = React.Children.only(children);
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child, props);
+      } else {
+        console.error(
+          "MicroCard with override=true received invalid react element as child."
+        );
+        return null;
+      }
+    }
+    return <a {...props}>{children}</a>;
+  }
 );
 
 export default MicroCard;
