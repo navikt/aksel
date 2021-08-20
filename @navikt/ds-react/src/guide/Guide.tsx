@@ -1,17 +1,8 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-const wrapperCls = (
-  className: string | undefined,
-  position: string,
-  variant: string
-) =>
-  cl(
-    "navds-guide",
-    className,
-    `navds-guide--${position}`,
-    `navds-guide--${variant}`
-  );
+const wrapperCls = (className: string | undefined, position: string) =>
+  cl("navds-guide", className, `navds-guide--${position}`);
 
 const illustrationCls = (
   center: boolean,
@@ -60,11 +51,6 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
    */
   center?: boolean;
   /**
-   * Changes variant of speech-bubble based on wanted message and tone
-   * @default "default"
-   */
-  variant?: "default" | "success" | "warning" | "error";
-  /**
    * Predefined size properties for illustration
    * @default "m"
    */
@@ -95,7 +81,6 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
       noMask = false,
       transparent = false,
       illustration,
-      variant = "default",
       size = "m",
       position = "floating",
       whiteSpeechBubble = false,
@@ -105,11 +90,7 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
     ref
   ) => {
     return (
-      <div
-        ref={ref}
-        className={wrapperCls(className, position, variant)}
-        {...rest}
-      >
+      <div ref={ref} className={wrapperCls(className, position)} {...rest}>
         <div
           style={!!color ? { backgroundColor: `${color}` } : {}}
           className={illustrationCls(center, transparent, noMask, size)}
