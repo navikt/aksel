@@ -5,10 +5,15 @@ import { Button, ButtonProps } from "../..";
 
 export interface SearchFieldClearButtonProps extends Omit<ButtonProps, "size"> {
   /**
-   * Changes design and interactions
-   * @default "secondary"
+   * Button text
+   * @example <Close /> <span>Søk</span>
    */
-  variant?: "primary" | "secondary" | "action" | "danger";
+  children: React.ReactNode;
+  /**
+   * Changes design and interactions
+   * @default "primary"
+   */
+  variant?: "primary" | "action";
 }
 
 const SearchFieldClearButton = forwardRef<

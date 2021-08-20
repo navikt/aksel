@@ -3,9 +3,7 @@ import cl from "classnames";
 import { SearchFieldContext } from "./SearchField";
 
 export interface SearchFieldInputProps
-  extends InputHTMLAttributes<HTMLInputElement> {
-  clearSearch?: boolean;
-}
+  extends InputHTMLAttributes<HTMLInputElement> {}
 
 const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
   ({ className, ...rest }, ref) => {

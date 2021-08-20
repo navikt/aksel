@@ -5,6 +5,11 @@ import { Button, ButtonProps } from "../..";
 
 export interface SearchFieldButtonProps extends Omit<ButtonProps, "size"> {
   /**
+   * Button text
+   * @example <Search /> <span>Søk</span>
+   */
+  children: React.ReactNode;
+  /**
    * Changes design and interactions
    * @default "action"
    */
