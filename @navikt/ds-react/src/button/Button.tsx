@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Component content
    */

@@ -1,0 +1,206 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import {
+  SearchField,
+  SearchFieldInput,
+  SearchFieldButton,
+  SearchFieldClearButton,
+} from "../index";
+
+import { Example } from "./search-field-example.tsx";
+
+import { Search } from "@navikt/ds-icons";
+
+<Meta title="ds-react/form/search-field/intro" />
+
+# Hvordan ta i bruk SearchField
+
+## Viktig
+
+Komponenten er ikke testet eller gått gjennom et design-review, så anbefalses og vente med å ta den i bruk.
+
+## Bruk
+
+```jsx
+<SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
+  <SearchFieldInput />
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <SearchField
+    label="Mollit eiusmod"
+    description="Ea cupidatat eu sunt commodo"
+  >
+    <SearchFieldInput />
+    <SearchFieldButton>
+      <Search /> <span>Søk</span>
+    </SearchFieldButton>
+  </SearchField>
+</Canvas>
+
+## hideLabel
+
+`hideLabel` proppen kan brukes for å vise label + description for bare skjermlesere.
+Vi har satt `label` som required siden man vil bruke den i sammenheng med denne proppen for bedre UU.
+
+```jsx
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+>
+  <SearchFieldInput />
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <SearchField
+    label="Mollit eiusmod"
+    description="Ea cupidatat eu sunt commodo"
+    hideLabel
+  >
+    <SearchFieldInput />
+    <SearchFieldButton>
+      <Search /> <span>Søk</span>
+    </SearchFieldButton>
+  </SearchField>
+</Canvas>
+
+## Sizing
+
+```jsx
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+  size="s"
+>
+  <SearchFieldInput />
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <SearchField
+    label="Mollit eiusmod"
+    description="Ea cupidatat eu sunt commodo"
+    hideLabel
+    size="s"
+  >
+    <SearchFieldInput />
+    <SearchFieldButton>
+      <Search /> <span>Søk</span>
+    </SearchFieldButton>
+  </SearchField>
+</Canvas>
+
+## Errors
+
+```jsx
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+  error="Error message"
+>
+  <SearchFieldInput />
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <SearchField
+    label="Mollit eiusmod"
+    description="Ea cupidatat eu sunt commodo"
+    hideLabel
+    error="Error message"
+  >
+    <SearchFieldInput />
+    <SearchFieldButton>
+      <Search /> <span>Søk</span>
+    </SearchFieldButton>
+  </SearchField>
+</Canvas>
+
+## Plassering av knapp
+
+```jsx
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+>
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+  <SearchFieldInput />
+</SearchField>
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+>
+  <SearchFieldInput />
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <div>
+    <SearchField
+      label="Mollit eiusmod"
+      description="Ea cupidatat eu sunt commodo"
+      hideLabel
+    >
+      <SearchFieldButton>
+        <Search /> <span>Søk</span>
+      </SearchFieldButton>
+      <SearchFieldInput />
+    </SearchField>
+    <br />
+    <SearchField
+      label="Mollit eiusmod"
+      description="Ea cupidatat eu sunt commodo"
+      hideLabel
+    >
+      <SearchFieldInput />
+      <SearchFieldButton>
+        <Search /> <span>Søk</span>
+      </SearchFieldButton>
+    </SearchField>
+  </div>
+</Canvas>
+
+<h2>ClearButton</h2>
+
+Man kan bruke `SearchFieldClearButton` for å håndtere clearing av value i `<input />`. For å bruke denne
+kreves det da at `SearchFieldInput` er controlled slik at man styrer state selv slik som eksemplet under.
+
+```jsx
+<SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
+  <SearchFieldInput value={value} onChange={(e) => setValue(e.target.value)} />
+  <SearchFieldClearButton onClick={() => setValue("")}>
+    <Close />
+    <span>Tøm</span>
+  </SearchFieldClearButton>
+  <SearchFieldButton>
+    <Search /> <span>Søk</span>
+  </SearchFieldButton>
+</SearchField>
+```
+
+<Canvas>
+  <Example />
+</Canvas>
