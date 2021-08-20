@@ -81,6 +81,9 @@ jobs:
       - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
+      - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GIT_REPO}}
 
   publish-pages:
     needs: publish-npm
