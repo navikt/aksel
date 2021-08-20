@@ -1,0 +1,83 @@
+.navds-guide {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Guide illustration frame */
+.navds-guide__illustration {
+  align-items: flex-end;
+  background: var(--navds-color-gray-20);
+  border-radius: 50%;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  order: 3;
+  overflow: hidden;
+}
+
+.navds-guide__illustration svg,
+.navds-guide__illustration img {
+  height: 90%;
+  width: 100%;
+}
+
+/* Illustration sizes */
+.navds-guide__illustration--s {
+  height: 5rem;
+  width: 5rem;
+}
+
+.navds-guide__illustration--s ~ .navds-guide__speech-bubble--floating {
+  bottom: 5rem;
+}
+
+.navds-guide__illustration--m {
+  height: 6.25rem;
+  width: 6.25rem;
+}
+
+.navds-guide__illustration--l {
+  height: 10rem;
+  width: 10rem;
+}
+
+.navds-guide__illustration--xl {
+  height: 15rem;
+  width: 15rem;
+}
+
+/* Illustration themes */
+.navds-guide__illustration--info {
+  background: var(--navds-color-lightblue-30);
+}
+
+.navds-guide__illustration--success {
+  background: var(--navds-color-green-20);
+}
+
+.navds-guide__illustration--warning {
+  background: var(--navds-color-orange-20);
+}
+
+.navds-guide__illustration--error {
+  background: var(--navds-color-red-20);
+}
+
+.navds-guide__illustration--center {
+  align-items: center;
+}
+
+.navds-guide__illustration--center svg,
+.navds-guide__illustration--center img {
+  height: 100%;
+}
+
+.navds-guide__illustration--transparent {
+  background: none;
+}
+
+.navds-guide__illustration--nomask {
+  overflow: visible;
+}

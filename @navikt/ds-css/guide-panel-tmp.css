@@ -1,0 +1,52 @@
+.navds-guide-panel {
+  background-color: var(--navds-color-background);
+  border-radius: 4px;
+  position: relative;
+  border: 2px solid var(--navds-color-gray-20);
+  min-height: 7.25rem;
+  padding: 1.5rem;
+  padding-left: 7rem;
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.navds-guide-panel__content {
+  width: 100%;
+}
+
+.navds-guide-panel .navds-guide {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.navds-guide-panel--poster {
+  padding: 2rem;
+  padding-top: 8.25rem;
+}
+
+.navds-guide-panel--poster .navds-guide {
+  left: 50%;
+  margin-left: -3.125rem;
+}
+
+.navds-guide-panel--compact:not(.navds-guide-panel--poster) {
+  padding: 1.5rem;
+  padding-left: 3.5rem;
+  margin-left: 2.5rem;
+}
+
+.navds-guide-panel--compact:not(.navds-guide-panel--poster) .navds-guide {
+  left: -40px;
+}
+
+.navds-guide-panel--compact.navds-guide-panel--poster {
+  margin-top: 3.125rem;
+  padding: 2rem;
+  padding-top: 4.25rem;
+}
+
+.navds-guide-panel--compact.navds-guide-panel--poster .navds-guide {
+  top: -50px;
+}
