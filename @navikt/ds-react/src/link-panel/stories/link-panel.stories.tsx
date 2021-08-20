@@ -1,4 +1,5 @@
 import React from "react";
+import { HashRouter, Link } from "react-router-dom";
 import { LinkPanel, LinkPanelTitle } from "../index";
 import { Illustration } from "./illustration";
 
@@ -39,6 +40,12 @@ export const All = () => {
           </div>
         </div>
       </LinkPanel>
+
+      <HashRouter>
+        <LinkPanel override>
+          <Link to="sup">overridden link</Link>
+        </LinkPanel>
+      </HashRouter>
     </>
   );
 };

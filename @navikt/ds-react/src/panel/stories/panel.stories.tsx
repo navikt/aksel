@@ -1,4 +1,5 @@
 import React from "react";
+import { HashRouter, Link } from "react-router-dom";
 import { Panel } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
@@ -33,6 +34,12 @@ export const All = () => {
         adipisicing. Est aliqua ad ullamco aute nostrud amet ea adipisicing
         consequat id officia irure pariatur. Eu mollit amet culpa culpa velit.
       </Panel>
+      <h2>Overridden</h2>
+      <HashRouter>
+        <Panel override>
+          <Link to="yes">Overridden panel</Link>
+        </Panel>
+      </HashRouter>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
+import { OverriddenComponent } from "../util";
 
 export interface MicroCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -7,10 +8,9 @@ export interface MicroCardProps
 }
 
 export const MicroCard = forwardRef<HTMLAnchorElement, MicroCardProps>(
-  ({ className, children, override = false, ...rest }, ref) => {
+  ({ className, override = false, ...rest }, ref) => {
     const props = {
       ...rest,
-      ref: ref,
       className: cl(
         "navds-card__micro",
         "navds-detail",
@@ -18,18 +18,12 @@ export const MicroCard = forwardRef<HTMLAnchorElement, MicroCardProps>(
         className
       ),
     };
+
     if (override) {
-      let child = React.Children.only(children);
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child, props);
-      } else {
-        console.error(
-          "MicroCard with override=true received invalid react element as child."
-        );
-        return null;
-      }
+      return <OverriddenComponent {...props} />;
+    } else {
+      return <a {...props} ref={ref} />;
     }
-    return <a {...props}>{children}</a>;
   }
 );
 
