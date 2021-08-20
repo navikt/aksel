@@ -78,9 +78,6 @@ jobs:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --yes
       - run: yarn lerna publish from-package --yes
-      - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - name: Create a .npmrc file for the github package repository
         uses: FerLuisxd/create-npmrc@3
         with:
