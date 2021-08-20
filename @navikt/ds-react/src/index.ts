@@ -8,6 +8,8 @@ export * from "./content-container";
 export * from "./copy-to-clipboard";
 export * from "./form";
 export * from "./grid";
+export * from "./guide";
+export * from "./guide-panel";
 export * from "./header";
 export * from "./internal-header";
 export * from "./layouts";
