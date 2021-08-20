@@ -84,6 +84,16 @@ jobs:
           org_name: navikt
         env:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
+
+      - name: Remove lerna.json for npm
+        uses: JesseTG/rm@v1.0.2
+        with:
+          path: lerna.json
+      - name: Replace old lerna.json with lerna.sjon for GPR
+        uses: canastro/copy-file-action@master
+        with:
+          source: "utilities/lerna.json"
+          target: "lerna.json"
       - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
