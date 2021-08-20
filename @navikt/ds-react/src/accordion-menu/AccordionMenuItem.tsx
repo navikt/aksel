@@ -2,20 +2,14 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 
 export interface AccordionMenuItemProps
-  extends React.HTMLAttributes<HTMLAnchorElement> {
+  extends React.LinkHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   active?: boolean;
+  override?: boolean;
 }
 
 const AccordionMenuItem = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
-  ({ children, active = false, className, ...rest }, ref) => {
-    let child =
-      typeof children === "string" ? (
-        <a>{children}</a>
-      ) : (
-        React.Children.only(children)
-      );
-
+  ({ children, active = false, className, override, ...rest }, ref) => {
     const props = {
       ...rest,
       ref,
@@ -24,9 +18,19 @@ const AccordionMenuItem = forwardRef<HTMLAnchorElement, AccordionMenuItemProps>(
       }),
     };
 
-    return React.isValidElement(child)
-      ? React.cloneElement(child, props)
-      : null;
+    if (override) {
+      let child = React.Children.only(children);
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child, props);
+      } else {
+        console.error(
+          "AccordionMenuItem with override=true received invalid react element as child."
+        );
+        return null;
+      }
+    } else {
+      return <a {...props}>{children}</a>;
+    }
   }
 );
 
