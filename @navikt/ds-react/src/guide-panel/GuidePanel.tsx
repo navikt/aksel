@@ -35,6 +35,11 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   compact?: boolean;
+  /**
+   * Change color of panel-border and illustration background
+   * Is set with inline style, so css-variables can be used
+   */
+  color?: string;
 }
 
 const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
@@ -46,16 +51,23 @@ const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       illustration,
       compact = false,
       poster = false,
+      color,
       ...rest
     },
     ref
   ) => {
     return (
-      <div ref={ref} className={guideCls(className, poster, compact)} {...rest}>
+      <div
+        ref={ref}
+        style={!!color ? { borderColor: `${color}` } : {}}
+        className={guideCls(className, poster, compact)}
+        {...rest}
+      >
         <Guide
           {...guideProps}
           size={poster ? "m" : "s"}
           illustration={illustration}
+          color={color}
         />
         <div className="navds-guide-panel__content">{children}</div>
       </div>

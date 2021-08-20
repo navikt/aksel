@@ -83,6 +83,11 @@ export interface GuideProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   whiteSpeechBubble?: boolean;
+  /**
+   * Change color of illustration background
+   * Is set with inline style, so css-variables can be used
+   */
+  color?: string;
 }
 
 const Guide = forwardRef<HTMLDivElement, GuideProps>(
@@ -98,6 +103,7 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
       size = "m",
       position = "floating",
       whiteSpeechBubble = false,
+      color,
       ...rest
     },
     ref
@@ -108,7 +114,10 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
         className={wrapperCls(className, position, variant)}
         {...rest}
       >
-        <div className={illustrationCls(center, transparent, noMask, size)}>
+        <div
+          style={!!color ? { backgroundColor: `${color}` } : {}}
+          className={illustrationCls(center, transparent, noMask, size)}
+        >
           {illustration}
         </div>
         {children && <span className={arrowCls(position, whiteSpeechBubble)} />}

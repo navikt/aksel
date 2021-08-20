@@ -28,6 +28,10 @@ export const All = () => {
       <GuidePanel poster compact illustration={<SvgTemplate />}>
         {panelText}
       </GuidePanel>
+      <h2>custom colors</h2>
+      <GuidePanel illustration={<SvgTemplate />} color="#99C3FF">
+        {panelText}
+      </GuidePanel>
     </div>
   );
 };
