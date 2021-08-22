@@ -85,6 +85,7 @@ jobs:
         env:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
       - run: rm lerna.json && cp utilities/lerna.json lerna.json
+      - run: git add . && git commit -m "tmp"
       - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
