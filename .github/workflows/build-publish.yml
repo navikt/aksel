@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test-build:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     steps:
@@ -27,10 +27,10 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
+      - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Gulp-build
+      - name: Boot
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
@@ -38,7 +38,7 @@ jobs:
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
         run: echo "BRANCH=HEAD" >> website/.env
-      - name: Test gatsby-build
+      - name: Test gatsby-build (design.nav.no)
         run: yarn build:gatsby
       - name: Test chromatic
         uses: chromaui/action@v1
@@ -66,10 +66,10 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
+      - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
-      - name: Gulp-build
+      - name: Boot
         run: yarn boot
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
@@ -128,7 +128,7 @@ jobs:
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
 
-      - name: Deploy storybook
+      - name: Deploy storybook to designsystem-repo
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{secrets.GIT_REPO}}
