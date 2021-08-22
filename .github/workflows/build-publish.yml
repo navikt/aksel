@@ -84,6 +84,7 @@ jobs:
           org_name: navikt
         env:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
+      - run: rm lerna.json && cp utilities/lerna.json lerna.json
       - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
