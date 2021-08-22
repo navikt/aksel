@@ -48,7 +48,7 @@ jobs:
           exitZeroOnChanges: true
 
   publish-npm:
-    needs: build
+    needs: test-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
