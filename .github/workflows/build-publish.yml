@@ -78,6 +78,13 @@ jobs:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --yes
       - run: yarn lerna publish from-package --yes
+      - name: Create a .npmrc file for the github package repository
+        uses: FerLuisxd/create-npmrc@3
+        with:
+          org_name: navikt
+        env:
+          AUTH_TOKEN: ${{secrets.GIT_REPO}}
+      - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
     needs: publish-npm
