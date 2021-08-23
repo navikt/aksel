@@ -20,6 +20,7 @@
 .navds-accordion__header:hover {
   color: var(--navds-color-blue-50);
   border-color: var(--navds-color-blue-50);
+  text-decoration: underline;
 }
 
 .navds-accordion__expand-icon {
@@ -50,11 +51,6 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid #a0a0a0;
-}
-
-.navds-accordion__header:hover {
-  text-decoration: underline;
-  color: var(--navds-color-text-link);
 }
 
 .navds-accordion__content {
