@@ -1,19 +1,25 @@
-import React, { forwardRef, useEffect, useState } from "react";
 import cl from "classnames";
-import { UnmountClosed, Collapse } from "react-collapse";
-import { Expand, ExpandFilled } from "@navikt/ds-icons";
-import { useId } from "..";
+import React, { createContext, forwardRef, useEffect, useState } from "react";
+import AccordionContent, { AccordionContentProps } from "./AccordionContent";
+import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
 
-export interface AccordionProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface AccordionComponent
+  extends React.ForwardRefExoticComponent<
+    AccordionProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Header: React.ForwardRefExoticComponent<
+    AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
+  >;
+  Content: React.ForwardRefExoticComponent<
+    AccordionContentProps & React.RefAttributes<HTMLDivElement>
+  >;
+}
+
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Content inside accordion
    */
   children: React.ReactNode;
-  /**
-   * Always visible content on accordion
-   */
-  heading: React.ReactNode;
   /**
    * Opens component if 'true', closes if 'false'
    * Using this props removes automatic control of open-state
@@ -21,23 +27,32 @@ export interface AccordionProps
    */
   open?: boolean;
   /**
-   * Callback for when user interacts with component
-   */
-  onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  /**
    * Removes content-element from dom when closed
    * @default false
    */
   renderContentWhenClosed?: boolean;
 }
 
+export interface AccordionContextProps {
+  expanded: boolean;
+  toggleExpanded: (state: boolean) => void;
+  setButtonId: (id: string) => void;
+  setContentId: (id: string) => void;
+  buttonId: string;
+  contentId: string;
+  renderContentWhenClosed: boolean;
+}
+
+export const AccordionContext = createContext<AccordionContextProps | null>(
+  null
+);
+
 const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
   (
     {
       children,
-      heading,
-      open = false,
       className,
+      open = false,
       renderContentWhenClosed = false,
       onClick,
       id,
@@ -46,17 +61,14 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(open);
-
-    const buttonId = useId(id);
-    const contentId = useId();
+    const [buttonId, setButtonId] = useState("");
+    const [contentId, setContentId] = useState("");
 
     useEffect(() => {
       setInternalOpen(open);
     }, [open]);
 
-    const CollapseComponent = renderContentWhenClosed
-      ? Collapse
-      : UnmountClosed;
+    console.count("Accordion re-renders");
 
     return (
       <div
@@ -65,44 +77,25 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
           "navds-accordion--closed": !internalOpen,
         })}
       >
-        <button
-          ref={ref}
-          id={buttonId}
-          className="navds-accordion__button"
-          aria-expanded={open}
-          aria-controls={contentId}
-          onClick={onClick ? onClick : () => setInternalOpen((open) => !open)}
-          {...rest}
+        <AccordionContext.Provider
+          value={{
+            expanded: internalOpen,
+            toggleExpanded: (v) => setInternalOpen(v),
+            renderContentWhenClosed,
+            setButtonId,
+            buttonId,
+            setContentId,
+            contentId,
+          }}
         >
-          <span className="navds-accordion__heading navds-title navds-title--s">
-            {heading}
-          </span>
-          <Expand
-            focusable="false"
-            role="img"
-            className={cl(
-              "navds-accordion__chevron",
-              `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
-            )}
-          />
-          <ExpandFilled
-            focusable="false"
-            role="img"
-            className={cl(
-              "navds-accordion__chevron",
-              "navds-accordion__chevron--filled",
-              `navds-accordion__chevron--${internalOpen ? "up" : "down"}`
-            )}
-          />
-        </button>
-        <div id={contentId} role="region" aria-labelledby={buttonId}>
-          <CollapseComponent isOpened={internalOpen}>
-            <div className="navds-accordion__content">{children}</div>
-          </CollapseComponent>
-        </div>
+          {children}
+        </AccordionContext.Provider>
       </div>
     );
   }
-);
+) as AccordionComponent;
+
+Accordion.Header = AccordionHeader;
+Accordion.Content = AccordionContent;
 
 export default Accordion;
