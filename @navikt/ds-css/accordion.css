@@ -9,7 +9,7 @@
 }
 
 .navds-accordion:hover {
-  /* color: black; */
+  color: var(--navds-color-blue-50);
   border-bottom: 2px solid var(--navds-color-blue-50);
 }
 
@@ -46,7 +46,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--navds-color-text-link);
+  /* color: var(--navds-color-text-link); */
 }
 
 .navds-accordion__button:hover .navds-accordion__heading {
@@ -56,6 +56,7 @@
 
 .navds-accordion__content {
   padding: var(--navds-spacing-2) var(--navds-spacing-4) var(--navds-spacing-4);
+  color: var(--navds-color-darkgray);
 }
 
 .navds-accordion--open .navds-accordion__content {
@@ -79,4 +80,5 @@
 
 .navds-accordion__button:hover > .navds-accordion__chevron {
   display: none;
+  color: var(--navds-color-text-link);
 }

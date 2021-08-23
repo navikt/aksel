@@ -5,13 +5,13 @@ import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import { useId } from "..";
 
 export interface AccordionProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Component content
+   * Content inside accordion
    */
   children: React.ReactNode;
   /**
-   * Content on interactive surface of component
+   * Always visible content on accordion
    */
   heading: React.ReactNode;
   /**
