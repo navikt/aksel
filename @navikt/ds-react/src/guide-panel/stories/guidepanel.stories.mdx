@@ -1,0 +1,68 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Button, Loader, GuidePanel } from "../../index";
+import { Success } from "@navikt/ds-react";
+import { Illustration } from "./illustration";
+
+<Meta title="ds-react/guidepanel/intro" />
+
+# Hvordan ta i bruk GuidePanel
+
+```jsx
+<GuidePanel illustration={<Illustration />}>
+  Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+</GuidePanel>
+```
+
+<Canvas>
+  <GuidePanel illustration={<Illustration />}>
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+</Canvas>
+
+## Varianter
+
+Komponenten har to props `compact` og `poster` som kan mikses for å endre plassering på illustrasjonen
+
+<Canvas>
+  <GuidePanel illustration={<Illustration />} compact>
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+  <GuidePanel illustration={<Illustration />} poster>
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+  <GuidePanel illustration={<Illustration />} poster compact>
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+</Canvas>
+
+## Fargebruk
+
+Istedenfor fargetema/themes slik som tidligere veileder brukte velger man nå selv farge på border/illustrasjons-bakgrunn
+med hjelp av `color`-propen. Denne setter fargen inline på elementet med `style`, slik at man kan sette fargeverdier direkte eller bruke css-variabler.
+
+```jsx
+<GuidePanel
+  illustration={<Illustration />}
+  color="#99C3FF"
+>
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+<GuidePanel
+  illustration={<Illustration />}
+  color="var(--navds-color-blue-20)"
+>
+  Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+</GuidePanel>
+```
+
+<Canvas>
+  <GuidePanel illustration={<Illustration />} color="#99C3FF">
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+  <GuidePanel
+    illustration={<Illustration />}
+    color="var(--navds-color-blue-20)"
+  >
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+</Canvas>
