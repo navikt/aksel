@@ -68,7 +68,7 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
       setInternalOpen(open);
     }, [open]);
 
-    console.count("Accordion re-renders");
+    /* console.count("Accordion re-renders"); */
 
     return (
       <div
@@ -76,6 +76,7 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
           "navds-accordion--open": internalOpen,
           "navds-accordion--closed": !internalOpen,
         })}
+        {...rest}
       >
         <AccordionContext.Provider
           value={{
