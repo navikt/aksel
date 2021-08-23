@@ -1,18 +1,14 @@
 import cl from "classnames";
 import React, { createContext, forwardRef, useEffect, useState } from "react";
-import AccordionContent, { AccordionContentProps } from "./AccordionContent";
-import AccordionHeader, { AccordionHeaderProps } from "./AccordionHeader";
+import AccordionContent, { AccordionContentType } from "./AccordionContent";
+import AccordionHeader, { AccordionHeaderType } from "./AccordionHeader";
 
 interface AccordionComponent
   extends React.ForwardRefExoticComponent<
     AccordionProps & React.RefAttributes<HTMLDivElement>
   > {
-  Header: React.ForwardRefExoticComponent<
-    AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
-  >;
-  Content: React.ForwardRefExoticComponent<
-    AccordionContentProps & React.RefAttributes<HTMLDivElement>
-  >;
+  Header: AccordionHeaderType;
+  Content: AccordionContentType;
 }
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -34,8 +30,8 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export interface AccordionContextProps {
-  expanded: boolean;
-  toggleExpanded: (state: boolean) => void;
+  open: boolean;
+  toggleOpen: (state: boolean) => void;
   setButtonId: (id: string) => void;
   setContentId: (id: string) => void;
   buttonId: string;
@@ -80,8 +76,8 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       >
         <AccordionContext.Provider
           value={{
-            expanded: internalOpen,
-            toggleExpanded: (v) => setInternalOpen(v),
+            open: internalOpen,
+            toggleOpen: (v) => setInternalOpen(v),
             renderContentWhenClosed,
             setButtonId,
             buttonId,

@@ -11,13 +11,17 @@ export interface AccordionHeaderProps
   children: React.ReactNode;
 }
 
-const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
+export type AccordionHeaderType = React.ForwardRefExoticComponent<
+  AccordionHeaderProps & React.RefAttributes<HTMLButtonElement>
+>;
+
+const AccordionHeader: AccordionHeaderType = forwardRef(
   ({ children, className, id, ...rest }, ref) => {
     const context = useContext(AccordionContext);
     const newId = useId(id);
 
     useEffect(() => {
-      context && context.setContentId(newId);
+      context && context.setButtonId(newId);
     }, [context, newId]);
 
     if (context === null) {
@@ -44,7 +48,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           role="img"
           className={cl(
             "navds-accordion__expand-icon",
-            `navds-accordion__expand-icon--${context.expanded ? "up" : "down"}`
+            `navds-accordion__expand-icon--${context.open ? "up" : "down"}`
           )}
         />
         <ExpandFilled
@@ -53,7 +57,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",
-            `navds-accordion__expand-icon--${context.expanded ? "up" : "down"}`
+            `navds-accordion__expand-icon--${context.open ? "up" : "down"}`
           )}
         />
       </button>

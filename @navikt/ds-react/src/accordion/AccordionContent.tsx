@@ -13,7 +13,11 @@ export interface AccordionContentProps
   children: React.ReactNode;
 }
 
-const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
+export type AccordionContentType = React.ForwardRefExoticComponent<
+  AccordionContentProps & React.RefAttributes<HTMLDivElement>
+>;
+
+const AccordionContent: AccordionContentType = forwardRef(
   ({ children, className, id, ...rest }, ref) => {
     const context = useContext(AccordionContext);
 
@@ -40,7 +44,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         aria-labelledby={context.buttonId}
         {...rest}
       >
-        <CollapseComponent isOpened={context.expanded}>
+        <CollapseComponent isOpened={context.open}>
           <div className={cl("navds-accordion__content", className)}>
             {children}
           </div>
