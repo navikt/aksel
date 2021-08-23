@@ -38,6 +38,7 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
         id={context.contentId}
         role="region"
         aria-labelledby={context.buttonId}
+        {...rest}
       >
         <CollapseComponent isOpened={context.expanded}>
           <div className={cl("navds-accordion__content", className)}>
