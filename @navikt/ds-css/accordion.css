@@ -1,25 +1,28 @@
-.ReactCollapse--collapse {
-  transition: height 300ms cubic-bezier(0.4, 0, 0.2, 1);
+.navds-accordion .ReactCollapse--collapse {
+  transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navds-accordion {
   position: relative;
   background: var(--navds-color-background);
 }
+.navds-accordion + .navds-accordion {
+  margin-top: var(--navds-spacing-3);
+}
 
 .navds-accordion:focus,
-.navds-accordion__button:focus {
+.navds-accordion__header:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
   border-color: var(--navds-color-background);
 }
 
-.navds-accordion__button:hover {
+.navds-accordion__header:hover {
   color: var(--navds-color-blue-50);
   border-color: var(--navds-color-blue-50);
 }
 
-.navds-accordion__chevron {
+.navds-accordion__expand-icon {
   width: 1.25em;
   height: 1.25em;
   transform: rotateZ(0deg);
@@ -27,16 +30,16 @@
   margin-left: var(--navds-spacing-4);
 }
 
-.navds-accordion__chevron--up {
+.navds-accordion__expand-icon--up {
   transform: rotateZ(-180deg);
 }
 
-.navds-accordion__chevron--down {
+.navds-accordion__expand-icon--down {
   transform: rotateZ(0deg);
 }
 
-.navds-accordion__button {
-  padding: var(--navds-spacing-4);
+.navds-accordion__header {
+  padding: var(--navds-spacing-4) var(--navds-spacing-3);
   background: transparent;
   text-align: left;
   border: none;
@@ -49,14 +52,15 @@
   border-bottom: 2px solid #a0a0a0;
 }
 
-.navds-accordion__button:hover .navds-accordion__heading {
+.navds-accordion__header:hover {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
 
 .navds-accordion__content {
-  padding: var(--navds-spacing-2) var(--navds-spacing-4) var(--navds-spacing-4);
   color: var(--navds-color-darkgray);
+  padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10)
+    var(--navds-spacing-3);
 }
 
 .navds-accordion--open .navds-accordion__content {
@@ -64,16 +68,16 @@
   border-top-right-radius: 0;
 }
 
-.navds-accordion__chevron--filled {
+.navds-accordion__expand-icon--filled {
   display: none;
 }
 
-.navds-accordion__button:hover
-  > .navds-accordion__chevron.navds-accordion__chevron--filled {
+.navds-accordion__header:hover
+  > .navds-accordion__expand-icon.navds-accordion__expand-icon--filled {
   display: inherit;
 }
 
-.navds-accordion__button:hover > .navds-accordion__chevron {
+.navds-accordion__header:hover > .navds-accordion__expand-icon {
   display: none;
   color: var(--navds-color-text-link);
 }

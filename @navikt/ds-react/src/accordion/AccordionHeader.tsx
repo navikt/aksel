@@ -29,28 +29,31 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       <button
         ref={ref}
         id={context.buttonId}
-        className={cl("navds-accordion__button", className)}
+        className={cl(
+          "navds-accordion__header",
+          className,
+          "navds-title",
+          "navds-title--s"
+        )}
         aria-controls={context.contentId}
         {...rest}
       >
-        <span className="navds-accordion__heading navds-title navds-title--s">
-          {children}
-        </span>
+        {children}
         <Expand
           focusable="false"
           role="img"
           className={cl(
-            "navds-accordion__chevron",
-            `navds-accordion__chevron--${context.expanded ? "up" : "down"}`
+            "navds-accordion__expand-icon",
+            `navds-accordion__expand-icon--${context.expanded ? "up" : "down"}`
           )}
         />
         <ExpandFilled
           focusable="false"
           role="img"
           className={cl(
-            "navds-accordion__chevron",
-            "navds-accordion__chevron--filled",
-            `navds-accordion__chevron--${context.expanded ? "up" : "down"}`
+            "navds-accordion__expand-icon",
+            "navds-accordion__expand-icon--filled",
+            `navds-accordion__expand-icon--${context.expanded ? "up" : "down"}`
           )}
         />
       </button>

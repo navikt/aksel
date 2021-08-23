@@ -74,7 +74,6 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
       <div
         className={cl("navds-accordion", className, {
           "navds-accordion--open": internalOpen,
-          "navds-accordion--closed": !internalOpen,
         })}
         ref={ref}
         {...rest}
