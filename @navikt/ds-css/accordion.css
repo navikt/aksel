@@ -46,7 +46,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* color: var(--navds-color-text-link); */
 }
 
 .navds-accordion__button:hover .navds-accordion__heading {
