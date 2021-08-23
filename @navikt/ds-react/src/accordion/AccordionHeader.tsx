@@ -29,7 +29,7 @@ const AccordionHeader = forwardRef<HTMLButtonElement, AccordionHeaderProps>(
       <button
         ref={ref}
         id={context.buttonId}
-        className="navds-accordion__button"
+        className={cl("navds-accordion__button", className)}
         aria-controls={context.contentId}
         {...rest}
       >

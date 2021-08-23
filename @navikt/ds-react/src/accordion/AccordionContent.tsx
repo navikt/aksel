@@ -1,5 +1,6 @@
 import React, { forwardRef, useEffect } from "react";
 import { useContext } from "react";
+import cl from "classnames";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { useId } from "../util";
 import { AccordionContext } from "./Accordion";
@@ -7,7 +8,7 @@ import { AccordionContext } from "./Accordion";
 export interface AccordionContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Button content
+   * Accordion panel content
    */
   children: React.ReactNode;
 }
@@ -33,12 +34,15 @@ const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
 
     return (
       <div
+        ref={ref}
         id={context.contentId}
         role="region"
         aria-labelledby={context.buttonId}
       >
         <CollapseComponent isOpened={context.expanded}>
-          <div className="navds-accordion__content">{children}</div>
+          <div className={cl("navds-accordion__content", className)}>
+            {children}
+          </div>
         </CollapseComponent>
       </div>
     );

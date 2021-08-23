@@ -47,7 +47,7 @@ export const AccordionContext = createContext<AccordionContextProps | null>(
   null
 );
 
-const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
+const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   (
     {
       children,
@@ -76,6 +76,7 @@ const Accordion = forwardRef<HTMLButtonElement, AccordionProps>(
           "navds-accordion--open": internalOpen,
           "navds-accordion--closed": !internalOpen,
         })}
+        ref={ref}
         {...rest}
       >
         <AccordionContext.Provider
