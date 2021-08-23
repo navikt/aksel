@@ -1,7 +1,7 @@
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "classnames";
-import React, { forwardRef, useContext, useEffect } from "react";
-import { AccordionContext, useId } from "..";
+import React, { forwardRef, useContext } from "react";
+import { AccordionContext, useClientLayoutEffect, useId } from "..";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,18 +16,27 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
-  ({ children, className, id, ...rest }, ref) => {
+  ({ children, className, id, onClick, ...rest }, ref) => {
     const context = useContext(AccordionContext);
     const newId = useId(id);
 
-    useEffect(() => {
-      context && context.setButtonId(newId);
-    }, [context, newId]);
+    const setButtonId = context && context.setButtonId;
+
+    useClientLayoutEffect(() => {
+      setButtonId && setButtonId(newId);
+    }, [setButtonId, newId]);
 
     if (context === null) {
       console.error("<Accordion.Header> has to be used within an <Accordion>");
       return null;
     }
+
+    const handleClick = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      context.toggleOpen();
+      onClick && onClick(e);
+    };
 
     return (
       <button
@@ -39,6 +48,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-title",
           "navds-title--s"
         )}
+        onClick={handleClick}
         aria-controls={context.contentId}
         {...rest}
       >

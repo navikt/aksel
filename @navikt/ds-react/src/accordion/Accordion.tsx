@@ -1,5 +1,5 @@
 import cl from "classnames";
-import React, { createContext, forwardRef, useEffect, useState } from "react";
+import React, { createContext, forwardRef, useState } from "react";
 import AccordionContent, { AccordionContentType } from "./AccordionContent";
 import AccordionHeader, { AccordionHeaderType } from "./AccordionHeader";
 
@@ -19,9 +19,13 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Opens component if 'true', closes if 'false'
    * Using this props removes automatic control of open-state
-   * @default false
    */
   open?: boolean;
+  /**
+   * Defaults the accordion to opened state
+   * @default false
+   */
+  defaultOpen?: boolean;
   /**
    * Removes content-element from dom when closed
    * @default false
@@ -31,7 +35,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export interface AccordionContextProps {
   open: boolean;
-  toggleOpen: (state: boolean) => void;
+  toggleOpen: () => void;
   setButtonId: (id: string) => void;
   setContentId: (id: string) => void;
   buttonId: string;
@@ -48,7 +52,8 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     {
       children,
       className,
-      open = false,
+      open,
+      defaultOpen = false,
       renderContentWhenClosed = false,
       onClick,
       id,
@@ -56,28 +61,26 @@ const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
     },
     ref
   ) => {
-    const [internalOpen, setInternalOpen] = useState<boolean>(open);
+    const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const [buttonId, setButtonId] = useState("");
     const [contentId, setContentId] = useState("");
-
-    useEffect(() => {
-      setInternalOpen(open);
-    }, [open]);
-
-    /* console.count("Accordion re-renders"); */
 
     return (
       <div
         className={cl("navds-accordion", className, {
-          "navds-accordion--open": internalOpen,
+          "navds-accordion--open": open ?? internalOpen,
         })}
         ref={ref}
         {...rest}
       >
         <AccordionContext.Provider
           value={{
-            open: internalOpen,
-            toggleOpen: (v) => setInternalOpen(v),
+            open: open ?? internalOpen,
+            toggleOpen: () => {
+              if (open === undefined) {
+                setInternalOpen((iOpen) => !iOpen);
+              }
+            },
             renderContentWhenClosed,
             setButtonId,
             buttonId,

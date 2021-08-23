@@ -1,8 +1,7 @@
-import React, { forwardRef, useEffect } from "react";
-import { useContext } from "react";
 import cl from "classnames";
+import React, { forwardRef, useContext } from "react";
 import { Collapse, UnmountClosed } from "react-collapse";
-import { useId } from "../util";
+import { useClientLayoutEffect, useId } from "../util";
 import { AccordionContext } from "./Accordion";
 
 export interface AccordionContentProps
@@ -22,10 +21,11 @@ const AccordionContent: AccordionContentType = forwardRef(
     const context = useContext(AccordionContext);
 
     const newId = useId(id);
+    const setContentId = context && context.setContentId;
 
-    useEffect(() => {
-      context && context.setContentId(newId);
-    }, [context, newId]);
+    useClientLayoutEffect(() => {
+      setContentId && setContentId(newId);
+    }, [setContentId, newId]);
 
     if (context === null) {
       console.error("<Accordion.Content> has to be used within an <Accordion>");
