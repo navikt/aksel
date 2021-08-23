@@ -5,18 +5,18 @@
 .navds-accordion {
   position: relative;
   background: var(--navds-color-background);
-  border-bottom: 2px solid #c9c9c9;
-}
-
-.navds-accordion:hover {
-  color: var(--navds-color-blue-50);
-  border-bottom: 2px solid var(--navds-color-blue-50);
 }
 
 .navds-accordion:focus,
 .navds-accordion__button:focus {
-  box-shadow: var(--navds-shadow-focus);
   outline: none;
+  box-shadow: var(--navds-shadow-focus);
+  border-color: var(--navds-color-background);
+}
+
+.navds-accordion__button:hover {
+  color: var(--navds-color-blue-50);
+  border-color: var(--navds-color-blue-50);
 }
 
 .navds-accordion__chevron {
@@ -46,6 +46,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 2px solid #a0a0a0;
 }
 
 .navds-accordion__button:hover .navds-accordion__heading {
@@ -61,11 +62,6 @@
 .navds-accordion--open .navds-accordion__content {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.navds-accordion--open > .navds-accordion__button {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
 }
 
 .navds-accordion__chevron--filled {
