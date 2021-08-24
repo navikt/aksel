@@ -28,7 +28,7 @@ export const All = () => {
       <h2>Small</h2>
       <div>
         {variants.map((variant) => (
-          <Alert key={variant} variant={variant} size="s">
+          <Alert key={variant} variant={variant} size="small">
             Exercitation enim nisi veniam nostrud Lorem ipsum ea fugiat. Aute
             exercitation voluptate proident sit ex reprehenderit quis ex ut
             mollit.

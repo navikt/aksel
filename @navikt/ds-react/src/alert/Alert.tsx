@@ -54,12 +54,12 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         {...rest}
       >
         <span>
-          <span className="navds-sr-only">{`${variant}-ikon`}</span>
           <Icon
             aria-label={`${variant}-ikon`}
             focusable="false"
             role="img"
             variant={variant}
+            alt={`${variant}-ikon`}
           />
         </span>
         <div>{children}</div>
