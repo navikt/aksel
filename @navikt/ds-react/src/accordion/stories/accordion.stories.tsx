@@ -1,25 +1,10 @@
-import React, { memo, useState } from "react";
+import React, { useState } from "react";
 import { Accordion } from "../index";
 
 export default {
   title: "ds-react/accordion",
   component: Accordion,
 };
-
-const B = memo(
-  () => (
-    console.count("B"),
-    (
-      <div>
-        Velit ad sunt enim in pariatur aute aliquip. Ipsum dolore commodo et
-        laboris duis aute et. Mollit incididunt laboris anim minim sint ullamco
-        tempor magna. Dolore id eu do aliquip ad nisi dolor eiusmod. Incididunt
-        culpa minim aliqua id ex sit exercitation aute anim consequat aute velit
-        velit ipsum.
-      </div>
-    )
-  )
-);
 
 export const All = () => {
   const [open, setOpen] = useState(false);

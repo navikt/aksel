@@ -24,7 +24,7 @@ const AccordionContent: AccordionContentType = forwardRef(
     const setContentId = context && context.setContentId;
 
     useClientLayoutEffect(() => {
-      setContentId && setContentId(newId);
+      setContentId && setContentId(id ? newId : `accordionContent-${newId}`);
     }, [setContentId, newId]);
 
     if (context === null) {
