@@ -100,7 +100,6 @@ const Code = ({
   ...props
 }: CodeProps) => {
   const [anchor, setAnchor] = useState(undefined);
-  /* console.log(children); */
 
   if (!children) {
     return <div>{children}</div>;
@@ -109,7 +108,16 @@ const Code = ({
 
   try {
     if (typeof children === "object") {
-      return <code>{children}</code>;
+      console.log(children[0].split(/\r\n|\r|\n/).length);
+      if (children[0].split(/\r\n|\r|\n/).length > 1) {
+        return (
+          <pre className="language-">
+            <code className="language-html">{children}</code>
+          </pre>
+        );
+      } else {
+        return <code className="inline">{children}</code>;
+      }
     } else {
       highlighted = Prism.highlight(children, Prism.languages.jsx, "jsx");
     }
