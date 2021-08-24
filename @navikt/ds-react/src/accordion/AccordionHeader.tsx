@@ -58,7 +58,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           role="img"
           className={cl(
             "navds-accordion__expand-icon",
-            `navds-accordion__expand-icon--${context.open ? "up" : "down"}`
+            `navds-accordion__expand-icon--down${context.open}`
           )}
         />
         <ExpandFilled

@@ -26,9 +26,7 @@ export const All = () => {
 
   return (
     <>
-      <B />
       <div>
-        <h1>Accordion</h1>
         <Accordion open={open}>
           <Accordion.Header onClick={(e) => setOpen(!open)}>
             Accordion header text
