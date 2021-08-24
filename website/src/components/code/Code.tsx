@@ -108,7 +108,6 @@ const Code = ({
 
   try {
     if (typeof children === "object") {
-      console.log(children[0].split(/\r\n|\r|\n/).length);
       if (children[0].split(/\r\n|\r|\n/).length > 1) {
         return (
           <pre className="language-">
