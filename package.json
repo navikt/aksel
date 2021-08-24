@@ -30,7 +30,6 @@
   },
   "workspaces": [
     "website",
-    "docs",
     "packages/*",
     "@navikt/ds-css",
     "@navikt/ds-css/*",
