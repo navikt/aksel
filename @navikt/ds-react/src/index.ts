@@ -1,5 +1,4 @@
 export * from "./accordion";
-export * from "./accordion-anchor-menu";
 export * from "./accordion-menu";
 export * from "./alert";
 export * from "./button";
@@ -10,7 +9,6 @@ export * from "./form";
 export * from "./grid";
 export * from "./header";
 export * from "./internal-header";
-export * from "./layouts";
 export * from "./link";
 export * from "./link-panel";
 export * from "./loader";
