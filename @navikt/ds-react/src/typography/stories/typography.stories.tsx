@@ -21,7 +21,7 @@ const TitleTemplate = ({ level, size, spacing }) => (
 );
 
 export const TitleStory = TitleTemplate.bind({});
-TitleStory.args = { level: 1, size: "2xl", spacing: false };
+TitleStory.args = { level: 1, size: "2xlarge", spacing: false };
 
 const IngressTemplate = ({ spacing }) => (
   <Ingress spacing={spacing}>{lorem()}</Ingress>
@@ -37,7 +37,7 @@ const BodyLongTemplate = ({ spacing, size }) => (
 );
 
 export const BodyLongStory = BodyLongTemplate.bind({});
-BodyLongStory.args = { spacing: false, size: "m" };
+BodyLongStory.args = { spacing: false, size: "medium" };
 
 const BodyShortTemplate = ({ spacing, size }) => (
   <BodyShort size={size} spacing={spacing}>
@@ -46,7 +46,7 @@ const BodyShortTemplate = ({ spacing, size }) => (
 );
 
 export const BodyShortStory = BodyShortTemplate.bind({});
-BodyShortStory.args = { spacing: false, size: "m" };
+BodyShortStory.args = { spacing: false, size: "medium" };
 
 const LabelTemplate = ({ spacing, size }) => (
   <Label size={size} spacing={spacing}>
@@ -55,7 +55,7 @@ const LabelTemplate = ({ spacing, size }) => (
 );
 
 export const LabelStory = LabelTemplate.bind({});
-LabelStory.args = { spacing: false, size: "m" };
+LabelStory.args = { spacing: false, size: "medium" };
 
 const DetailTemplate = ({ spacing, size }) => (
   <Detail size={size} spacing={spacing}>
@@ -64,13 +64,13 @@ const DetailTemplate = ({ spacing, size }) => (
 );
 
 export const DetailStory = DetailTemplate.bind({});
-DetailStory.args = { spacing: false, size: "m" };
+DetailStory.args = { spacing: false, size: "medium" };
 
 export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
-      <Title level={1} size="2xl" spacing>
-        Title lvl 1 2xl
+      <Title level={"1"} size="2xlarge" spacing>
+        Title lvl 1 2xlarge
       </Title>
       <BodyLong spacing>
         BodyLong: Aliqua ad et nisi commodo sit excepteur in commodo proident
@@ -91,8 +91,8 @@ export const SideInnholdEksempel = () => {
         BodyLong: Dolore commodo ad veniam commodo aute voluptate est officia
         sunt proident irure consectetur excepteur.
       </BodyLong>
-      <Title level={2} size="xl" spacing>
-        Title lvl 2 xl
+      <Title level={"2"} size="xlarge" spacing>
+        Title lvl 2 xlarge
       </Title>
       <Ingress spacing>
         Ingress: Mollit incididunt incididunt officia amet est et non aliqua
@@ -109,7 +109,7 @@ export const SideInnholdEksempel = () => {
         adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
         Lorem est laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
       </BodyLong>
-      <BodyLong size="s" spacing>
+      <BodyLong size="small" spacing>
         BodyLong small: Irure dolore laborum amet occaecat ex laboris mollit
         reprehenderit nisi laborum voluptate laborum. Ipsum eu sint laborum
         adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
@@ -119,7 +119,7 @@ export const SideInnholdEksempel = () => {
         BodyShort: Id consectetur velit sunt laboris consequat ullamco
         incididunt.
       </BodyShort>
-      <BodyShort size="s" spacing>
+      <BodyShort size="small" spacing>
         BodyShort small: Sunt amet officia sit excepteur sit pariatur sit
         reprehenderit irure ipsum.
       </BodyShort>
