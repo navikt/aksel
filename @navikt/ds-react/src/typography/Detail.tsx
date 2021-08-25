@@ -1,35 +1,30 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
+import OverridableComponent from "../util/newOverridableComponent";
 
-export interface DetailProps {
-  props: {
-    /**
-     * medium: 14px bold, small: 14px
-     * @default "medium"
-     */
-    size?: "medium" | "small";
-    /**
-     * Paragraph text
-     */
-    children: React.ReactNode;
-    /**
-     * Adds margins to typo
-     */
-    spacing?: boolean;
-  } & React.HTMLAttributes<HTMLParagraphElement>;
-  defaultComponent: "p";
+export interface DetailProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
+  /**
+   * medium: 14px bold, small: 14px
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /**
+   * Paragraph text
+   */
+  children: React.ReactNode;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
-const Detail: OverridableComponent<DetailProps> = forwardRef(
+const Detail: OverridableComponent<
+  DetailProps,
+  HTMLParagraphElement
+> = forwardRef(
   (
-    {
-      className,
-      size = "medium",
-      spacing,
-      component: Component = "p",
-      ...rest
-    },
+    { className, size = "medium", spacing, as: Component = "p", ...rest },
     ref
   ) => (
     <Component

@@ -1,35 +1,30 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util/OverridableComponent";
+import OverridableComponent from "../util/newOverridableComponent";
 
-export interface BodyShortProps {
-  props: {
-    /**
-     * medium: 18px, small: 16px
-     * @default "medium"
-     */
-    size?: "medium" | "small";
-    /**
-     * Paragraph text
-     */
-    children: React.ReactNode;
-    /**
-     * Adds margins to typo
-     */
-    spacing?: boolean;
-  } & React.HTMLAttributes<HTMLParagraphElement>;
-  defaultComponent: "p";
+export interface BodyShortProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
+  /**
+   * medium: 18px, small: 16px
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /**
+   * Paragraph text
+   */
+  children: React.ReactNode;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
-const BodyShort: OverridableComponent<BodyShortProps> = forwardRef(
+const BodyShort: OverridableComponent<
+  BodyShortProps,
+  HTMLParagraphElement
+> = forwardRef(
   (
-    {
-      className,
-      size = "medium",
-      spacing,
-      component: Component = "p",
-      ...rest
-    },
+    { className, size = "medium", spacing, as: Component = "p", ...rest },
     ref
   ) => (
     <Component

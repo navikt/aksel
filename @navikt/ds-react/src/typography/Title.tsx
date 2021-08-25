@@ -1,30 +1,27 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
+import OverridableComponent from "../util/newOverridableComponent";
 
-export interface TitleProps {
-  props: {
-    /**
-     * Heading level
-     */
-    level?: "1" | "2" | "3" | "4" | "5";
-    /**
-     * Sizes from largest "2xl" to smallest "s"
-     */
-    size: "2xlarge" | "xlarge" | "large" | "medium" | "small";
-    /**
-     * Heading text
-     */
-    children: React.ReactNode;
-    /**
-     * Adds margins to typo
-     */
-    spacing?: boolean;
-  } & React.HTMLAttributes<HTMLHeadingElement>;
-  defaultComponent: "h1";
+export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+  /**
+   * Heading level
+   */
+  level?: "1" | "2" | "3" | "4" | "5";
+  /**
+   * Sizes from largest "2xl" to smallest "s"
+   */
+  size: "2xlarge" | "xlarge" | "large" | "medium" | "small";
+  /**
+   * Heading text
+   */
+  children: React.ReactNode;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
-const Title: OverridableComponent<TitleProps> = forwardRef(
+const Title: OverridableComponent<TitleProps, HTMLHeadingElement> = forwardRef(
   (
     {
       level = "1",
@@ -32,12 +29,12 @@ const Title: OverridableComponent<TitleProps> = forwardRef(
       spacing,
       className,
       children,
-      component,
+      as,
       ...rest
     },
     ref
   ) => {
-    let HeadingTag = component ?? (`h${level}` as React.ElementType);
+    let HeadingTag = as ?? (`h${level}` as React.ElementType);
 
     return (
       <HeadingTag
