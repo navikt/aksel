@@ -57,6 +57,7 @@
 /* Ingress */
 .navds-ingress {
   font-size: var(--navds-font-size-xl);
+  font-weight: var(--navds-font-weight-regular);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-m);
   margin: 0;
@@ -69,6 +70,7 @@
 /* Body */
 .navds-body-long {
   font-size: var(--navds-font-size-l);
+  font-weight: var(--navds-font-weight-regular);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-m);
   margin: 0;
@@ -76,6 +78,7 @@
 
 .navds-body-short {
   font-size: var(--navds-font-size-l);
+  font-weight: var(--navds-font-weight-regular);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-s);
   margin: 0;
@@ -106,9 +109,9 @@
 /* Label */
 .navds-label {
   font-size: var(--navds-font-size-l);
+  font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0;
   line-height: var(--navds-font-line-height-s);
-  font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }
 
@@ -129,9 +132,9 @@
 /* Small text */
 .navds-detail {
   font-size: var(--navds-font-size-s);
+  font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-s);
-  font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }
 

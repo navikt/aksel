@@ -28,7 +28,7 @@ const Title: OverridableComponent<TitleProps> = forwardRef(
   (
     {
       level = "1",
-      size = "2xl",
+      size = "2xlarge",
       spacing,
       className,
       children,
