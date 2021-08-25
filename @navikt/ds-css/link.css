@@ -1,10 +1,9 @@
 .navds-link {
   color: var(--navds-color-text-link);
   text-decoration: underline;
-  display: inline-grid;
-  grid-auto-flow: column;
+  display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--navds-spacing-1);
 }
 
 .navds-link:hover {
