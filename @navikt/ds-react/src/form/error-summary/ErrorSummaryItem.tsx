@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import OverridableComponent from "../../util/newOverridableComponent";
+import { OverridableComponent } from "../..";
 
 export interface ErrorSummaryItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
