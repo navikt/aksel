@@ -72,7 +72,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            <span> {variant}</span> <Success />
+            {variant} <Success />
           </Button>
         ))}
       </Section>
@@ -100,6 +100,14 @@ export const All = () => {
           </Button>
         ))}
       </Section>
+      <div style={{ maxWidth: "200px" }}>
+        <Button>
+          Proident commodo dolore duis ad et minim reprehenderit nulla ipsum.
+        </Button>
+        <Button size="small">
+          Proident commodo dolore duis ad et minim reprehenderit nulla ipsum.
+        </Button>
+      </div>
     </>
   );
 };

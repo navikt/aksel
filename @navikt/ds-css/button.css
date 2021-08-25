@@ -17,13 +17,10 @@
 }
 
 .navds-button__inner {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
   align-items: center;
-  justify-content: center;
   margin: auto;
   gap: var(--navds-spacing-2);
-  box-sizing: border-box;
 }
 
 .navds-button svg {
