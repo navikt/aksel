@@ -1,26 +1,22 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import { Grid, Cell, ContentContainer } from "../../index";
+import { Grid, Cell } from "../../index";
 
 <Meta title="ds-react/grid/intro" />
 
 # Hvordan ta i bruk Grid
 
-`<ContentContainer />` er ikke nødvendig her, men er laget for tas i bruk i grid.
-
 ```jsx
-<ContentContainer>
-  <Grid>
-    <Cell xs={12} sm={6} lg={4}>
-      Kolonne
-    </Cell>
-    <Cell xs={12} sm={6} lg={4}>
-      Kolonne
-    </Cell>
-    <Cell xs={12} sm={12} lg={4}>
-      Kolonne
-    </Cell>
-  </Grid>
-</ContentContainer>
+<Grid>
+  <Cell xs={12} sm={6} lg={4}>
+    Kolonne
+  </Cell>
+  <Cell xs={12} sm={6} lg={4}>
+    Kolonne
+  </Cell>
+  <Cell xs={12} sm={12} lg={4}>
+    Kolonne
+  </Cell>
+</Grid>
 ```
 
 ## Bredder
