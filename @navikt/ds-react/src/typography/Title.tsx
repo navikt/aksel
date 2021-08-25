@@ -7,13 +7,13 @@ export interface TitleProps {
     /**
      * Heading level
      */
-    level?: 1 | 2 | 3 | 4 | 5 | "1" | "2" | "3" | "4" | "5";
+    level?: "1" | "2" | "3" | "4" | "5";
     /**
      * Sizes from largest "2xl" to smallest "s"
      */
-    size: "2xl" | "xl" | "l" | "m" | "s";
+    size: "2xlarge" | "xlarge" | "large" | "medium" | "small";
     /**
-     * Paragraph text
+     * Heading text
      */
     children: React.ReactNode;
     /**
@@ -27,7 +27,7 @@ export interface TitleProps {
 const Title: OverridableComponent<TitleProps> = forwardRef(
   (
     {
-      level = 1,
+      level = "1",
       size = "2xl",
       spacing,
       className,
