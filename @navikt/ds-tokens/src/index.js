@@ -194,6 +194,7 @@ module.exports = {
       },
     },
     "z-index": {
+      focus: { value: 10 },
       modal: {
         content: { value: 2010 },
         overlay: { value: 2000 },
