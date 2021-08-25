@@ -13,13 +13,13 @@ export const All = () => {
       <Link href="#">Dette er en tekstlenke</Link>
       <h1>Icon after</h1>
       <Link href="#">
-        <span>Dette er en tekstlenke</span>
+        Dette er en tekstlenke
         <Add />
       </Link>
       <h1>Icon before</h1>
       <Link href="#">
         <Add />
-        <span>Dette er en tekstlenke </span>
+        Dette er en tekstlenke
       </Link>
     </>
   );
