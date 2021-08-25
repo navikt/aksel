@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import { Guide, GuideProps } from "../index";
+import Guide, { GuideProps } from "./Guide";
 import cl from "classnames";
 
 const guideCls = (className, poster, compact) =>
