@@ -80,7 +80,7 @@ const Modal: ModalLifecycle &
           className={cl("navds-modal__button", {
             "navds-modal__button--shake": shouldCloseOnOverlayClick,
           })}
-          size="s"
+          size="small"
           variant="secondary"
           ref={buttonRef}
           aria-label="lukk modalvindu"

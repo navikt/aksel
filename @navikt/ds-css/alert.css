@@ -11,7 +11,7 @@
   box-sizing: border-box;
 }
 
-.navds-alert--s {
+.navds-alert--small {
   padding: var(--navds-spacing-1) var(--navds-spacing-4);
   min-height: 32px;
 }

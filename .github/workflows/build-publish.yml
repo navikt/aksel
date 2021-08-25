@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test-build:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     steps:
@@ -27,10 +27,10 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
+      - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install
-      - name: Gulp-build
+      - name: Boot
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
@@ -38,7 +38,7 @@ jobs:
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
         run: echo "BRANCH=HEAD" >> website/.env
-      - name: Test gatsby-build
+      - name: Test gatsby-build (design.nav.no)
         run: yarn build:gatsby
       - name: Test chromatic
         uses: chromaui/action@v1
@@ -48,7 +48,7 @@ jobs:
           exitZeroOnChanges: true
 
   publish-npm:
-    needs: build
+    needs: test-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
@@ -66,10 +66,10 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
+      - name: install
         if: steps.node-cache.outputs.cache-hit != 'true'
         run: yarn install --frozen-lockfile
-      - name: Gulp-build
+      - name: Boot
         run: yarn boot
       - run: git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - run: git config --global user.name "github-actions[bot]"
@@ -78,8 +78,15 @@ jobs:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
       - run: yarn lerna version patch --include-merged-tags --yes
       - run: yarn lerna publish from-package --yes
+      - name: Create a .npmrc file for the github package repository
+        uses: FerLuisxd/create-npmrc@3
+        with:
+          org_name: navikt
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
+          AUTH_TOKEN: ${{secrets.GIT_REPO}}
+      - run: rm lerna.json && cp utilities/lerna.json lerna.json
+      - run: git add . && git commit -m "tmp"
+      - run: yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
     needs: publish-npm
@@ -122,7 +129,7 @@ jobs:
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
 
-      - name: Deploy storybook
+      - name: Deploy storybook to designsystem-repo
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{secrets.GIT_REPO}}

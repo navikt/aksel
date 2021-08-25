@@ -3,10 +3,10 @@ import { ConfirmationPanel } from "..";
 import { Link } from "../..";
 
 export const ConfirmationPanelExample = ({
-  size = "m",
+  size = "medium",
   error,
 }: {
-  size: "m" | "s";
+  size: "medium" | "small";
   error?: string;
 }) => {
   const [checked, setChecked] = useState(false);

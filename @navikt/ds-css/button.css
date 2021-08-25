@@ -11,36 +11,28 @@
   border-style: solid;
   border-width: 2px;
   min-height: 48px;
+  min-width: 48px;
   align-items: center;
-
-  /* Padding calculated based on 18px font for 44px tall button */
-  padding: calc(var(--navds-spacing-3) - 2px) var(--navds-spacing-3);
+  padding: var(--navds-spacing-2) var(--navds-spacing-2);
 }
 
-.navds-button > svg {
+.navds-button__inner {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-button svg {
   font-size: 1.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
-.navds-button--s > svg {
+.navds-button--small svg {
   font-size: 1.25rem;
-  width: 1.25rem;
-  height: 1.25rem;
 }
 
-.navds-button > svg + *:not(.sr-only),
-.navds-button > *:not(.sr-only) + svg {
-  margin-left: 0.5rem;
-}
-
-/* .navds-button:last-child {
-  margin-left: 0.5rem;
-} */
-
-.navds-button--s {
-  /* Padding calculated based on 16px font for 32px tall button */
-  padding: 0.25rem calc(var(--navds-spacing-4) - 2px);
+.navds-button--small {
+  padding: var(--navds-spacing-1) var(--navds-spacing-2);
   min-height: 32px;
 }
 

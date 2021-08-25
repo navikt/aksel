@@ -3,7 +3,13 @@
   margin-top: 8px;
 }
 
-.navds-form-field--s > :not(:first-child):not(:empty),
-.navds-form-field--s > input:not(:first-child) {
+.navds-form-field--small > :not(:first-child):not(:empty),
+.navds-form-field--small > input:not(:first-child) {
   margin-top: 4px;
+}
+
+/* Applied when hideLabel is applied to form-element */
+.navds-form-field > .sr-only + :not(:first-child):not(:empty),
+.navds-form-field > .sr-only + input:not(:first-child) {
+  margin-top: 0;
 }

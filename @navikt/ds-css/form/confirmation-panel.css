@@ -12,7 +12,7 @@
   max-width: 80ch;
 }
 
-.navds-confirmation-panel--s {
+.navds-confirmation-panel--small {
   padding: var(--navds-spacing-3);
   gap: var(--navds-spacing-2);
 }

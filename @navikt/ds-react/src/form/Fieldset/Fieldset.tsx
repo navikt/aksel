@@ -17,7 +17,7 @@ export type FieldsetContextProps = {
   /**
    * Changes paddings, margins and font-sizes
    */
-  size: "m" | "s";
+  size: "medium" | "small";
   disabled: boolean;
 };
 
@@ -73,18 +73,16 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
       <FieldsetContext.Provider
         value={{
           error: errorPropagation ? props.error ?? fieldset?.error : undefined,
-          errorId: cl(
-            {
-              [errorId]: showErrorMsg,
-              [fieldset?.errorId ?? ""]: !!fieldset?.error,
-            }
-          ),
+          errorId: cl({
+            [errorId]: showErrorMsg,
+            [fieldset?.errorId ?? ""]: !!fieldset?.error,
+          }),
           size,
           disabled: props.disabled ?? false,
         }}
       >
         <fieldset
-          {...omit(rest, ["errorId"])}
+          {...omit(rest, ["errorId", "error", "size"])}
           {...inputProps}
           ref={ref}
           className={cl(

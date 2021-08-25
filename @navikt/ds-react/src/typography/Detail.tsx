@@ -5,10 +5,10 @@ import { OverridableComponent } from "../util";
 export interface DetailProps {
   props: {
     /**
-     * M: 18px, S: 16px
-     * @default "m"
+     * medium: 14px bold, small: 14px
+     * @default "medium"
      */
-    size?: "m" | "s";
+    size?: "medium" | "small";
     /**
      * Paragraph text
      */
@@ -23,14 +23,20 @@ export interface DetailProps {
 
 const Detail: OverridableComponent<DetailProps> = forwardRef(
   (
-    { className, size = "m", spacing, component: Component = "p", ...rest },
+    {
+      className,
+      size = "medium",
+      spacing,
+      component: Component = "p",
+      ...rest
+    },
     ref
   ) => (
     <Component
       {...rest}
       ref={ref}
       className={cl(className, "navds-detail", {
-        "navds-detail--s": size === "s",
+        "navds-detail--small": size === "small",
         "navds-typo--spacing": !!spacing,
       })}
     />

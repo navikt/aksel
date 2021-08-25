@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.6.19",
+  "version": "0.7.5",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -14,11 +14,10 @@
     "type": "git",
     "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-react"
   },
-  "main": "esm/index.js",
-  "module": "esm/index.js",
-  "typings": "esm/index.d.ts",
   "sideEffects": false,
-  "type": "module",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
@@ -28,14 +27,14 @@
     "/src"
   ],
   "scripts": {
-    "cjs-package": "copyfiles -f config/package.json cjs",
-    "clean": "rm -rf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn cjs-package",
+    "create-package-json-pointers-to-esm": "node ../../utilities/scripts/createPackageJsonsWithESMPointers.js",
+    "clean": "rimraf cjs esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
-    "@navikt/ds-icons": "^0.4.1",
+    "@navikt/ds-icons": "^0.5.2",
     "@popperjs/core": "^2.5.4",
     "classnames": "^2.2.6",
     "copy-to-clipboard": "^3.3.1",
@@ -43,13 +42,13 @@
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.12.1",
     "react-popper": "^2.2.4",
-    "short-uuid": "^4.2.0",
-    "uuid": "^8.3.2"
+    "short-uuid": "^4.2.0"
   },
   "devDependencies": {
     "copyfiles": "^2.4.1",
     "react-router-dom": "^5.2.0",
-    "@types/react-router-dom": "^5.1.8"
+    "@types/react-router-dom": "^5.1.8",
+    "rimraf": "3.0.2"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"

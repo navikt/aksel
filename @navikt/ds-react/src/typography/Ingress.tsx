@@ -5,7 +5,7 @@ import { OverridableComponent } from "../util";
 export interface IngressProps {
   props: {
     /**
-     * Paragraph text
+     * Ingress text
      */
     children: React.ReactNode;
     /**

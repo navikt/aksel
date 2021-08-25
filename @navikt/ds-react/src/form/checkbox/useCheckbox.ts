@@ -17,7 +17,7 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
         "`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead."
       );
     }
-    if (props.value === null) {
+    if (props.value === undefined) {
       console.warn(
         "A <Checkbox> element within a <CheckboxGroup> requires a `value` property."
       );

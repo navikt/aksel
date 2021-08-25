@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.navds-form-field--s > .navds-text-field__input {
+.navds-form-field--small > .navds-text-field__input {
   padding: 0.25rem;
   min-height: 32px;
 }

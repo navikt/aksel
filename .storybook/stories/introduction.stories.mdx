@@ -11,7 +11,7 @@ yarn add @navikt/ds-react @navikt/ds-css
 ```
 
 Siden stilene ikke importeres direkte i komponentene, så må man selv importere ds-css.
-Dette gjøres for å la komponetene brukes i Nextjs prosjekter.
+For å legge til all stylingen som trengs må man da bare importere `ds-css`.
 
 ```bash
 import "@navikt/ds-css"
@@ -19,15 +19,4 @@ import "@navikt/ds-css"
 
 Dette vil også legge css-variabler på :root. For å få dette til å fungere med IE11, kan denne pakken tas i bruk: https://jhildenbiddle.github.io/css-vars-ponyfill/#/
 
-## Testing
-
-For å støtte testing med eks Jest som ikke tillater ESM moduler, så kan denne configen legges til
-
-```bash
-"moduleNameMapper": {
-  "@navikt/ds-react(.*)": "@navikt/ds-react/cjs$1",
-  "@navikt/ds-icons(.*)": "@navikt/ds-icons/cjs$1"
-}
-```
-
-Dette vil remappe komponentene (og ikonpakken) til å bruke CommonJs versjonen for testing
+Note: Disse komponentene kan ikke garanteres at fungerer som forventet i IE11 da vi har valgt og ikke unngå styling-valg basert på IE11 støtte eller ikke.
