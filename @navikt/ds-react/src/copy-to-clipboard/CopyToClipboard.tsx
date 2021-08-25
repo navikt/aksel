@@ -9,7 +9,7 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover, Button } from "..";
+import { Popover, PopoverProps, Button, BodyShort } from "..";
 
 export interface CopyToClipboardProps
   extends HTMLAttributes<HTMLButtonElement> {
@@ -20,20 +20,34 @@ export interface CopyToClipboardProps
   /**
    * Text to be copied to clipboard
    */
-  text: string;
+  copyText: string;
   /**
    * Description of text, examples: "personnummer", "navn", "epost" etc.
    */
-  label: string;
+  popoverText: string;
   /**
-   * Use a differnet icon to display
-   * @default "Files" from @navikt/ds-icons
+   * Allows extending popover properties like "placement"
    */
-  icon?: React.ReactElement;
+  popoverProps?: Partial<PopoverProps>;
+  /**
+   * Handles resizing icon and text
+   */
+  size?: "medium" | "small";
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
-  ({ children, text, label, icon, className, ...rest }, ref) => {
+  (
+    {
+      children,
+      copyText,
+      popoverText,
+      className,
+      size = "medium",
+      popoverProps,
+      ...rest
+    },
+    ref
+  ) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
     const timeoutRef = useRef<number | null>();
@@ -48,10 +62,10 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       };
     }, [openPopover]);
 
-    const title = `Kopier ${label} (${text})`;
+    const title = `Kopier ${copyText}`;
 
     const handleClick = () => {
-      copy(text);
+      copy(copyText);
       setOpenPopover(true);
     };
 
@@ -63,17 +77,14 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           title={title}
           className={cl("navds-copy-to-clipboard", className)}
           onClick={handleClick}
+          size={size}
           {...rest}
         >
-          {icon ? (
-            <>{icon}</>
-          ) : (
-            <Copy
-              focusable="false"
-              role="img"
-              aria-label="Fil ikon for kopiering"
-            />
-          )}
+          <Copy
+            focusable="false"
+            role="img"
+            aria-label="Fil ikon for kopiering"
+          />
           {children ? children : <span className="sr-only">{title}</span>}
         </Button>
         <Popover
@@ -84,8 +95,11 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           placement="right"
           arrow={false}
           className="navds-copy-to-clipboard__popover"
+          {...popoverProps}
         >
-          {label}
+          <BodyShort size={size} component="span">
+            {popoverText}
+          </BodyShort>
         </Popover>
       </div>
     );
