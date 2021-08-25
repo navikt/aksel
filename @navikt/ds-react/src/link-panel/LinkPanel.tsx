@@ -1,24 +1,25 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
 import { Panel } from "..";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
+import OverridableComponent from "../util/newOverridableComponent";
 
-export type LinkPanelType = OverridableComponent<LinkPanelProps>;
-
-export interface LinkPanelProps {
-  props: {
-    /**
-     * Panel content
-     */
-    children?: React.ReactNode;
-    /**
-     * Toggles border on panel
-     */
-    border?: boolean;
-  } & React.HTMLAttributes<HTMLAnchorElement>;
-  defaultComponent: "a";
+export interface LinkPanelProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * Panel content
+   */
+  children?: React.ReactNode;
+  /**
+   * Toggles border on panel
+   */
+  border?: boolean;
 }
+
+export type LinkPanelType = OverridableComponent<
+  LinkPanelProps,
+  HTMLAnchorElement
+>;
 
 const LinkPanel: LinkPanelType = forwardRef(
   ({ children, component = "a", border = true, className, ...rest }, ref) => {
@@ -44,26 +45,24 @@ const LinkPanel: LinkPanelType = forwardRef(
   }
 );
 
-interface LinkPanelTitleProps {
-  props: {
-    children: React.ReactNode;
-  } & React.HTMLAttributes<HTMLSpanElement>;
-  defaultComponent: "span";
+interface LinkPanelTitleProps extends React.HTMLAttributes<HTMLSpanElement> {
+  children: React.ReactNode;
 }
 
-export const LinkPanelTitle: OverridableComponent<LinkPanelTitleProps> = forwardRef(
-  ({ className, component: Component = "span", ...rest }, ref) => (
-    <Component
-      ref={ref}
-      className={cl(
-        "navds-link-panel-title",
-        "navds-title",
-        "navds-title--m",
-        className
-      )}
-      {...rest}
-    />
-  )
-);
+export const LinkPanelTitle: OverridableComponent<
+  LinkPanelTitleProps,
+  HTMLSpanElement
+> = forwardRef(({ className, as: Component = "span", ...rest }, ref) => (
+  <Component
+    ref={ref}
+    className={cl(
+      "navds-link-panel-title",
+      "navds-title",
+      "navds-title--m",
+      className
+    )}
+    {...rest}
+  />
+));
 
 export default LinkPanel;

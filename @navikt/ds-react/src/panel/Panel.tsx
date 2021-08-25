@@ -1,33 +1,24 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
+import OverridableComponent from "../util/newOverridableComponent";
 
-export type PanelType = OverridableComponent<PanelProps>;
-
-export interface PanelProps {
-  props: {
-    /**
-     * Panel content
-     */
-    children: React.ReactNode;
-    /**
-     * Toggles border on panel
-     * @default false
-     */
-    border?: boolean;
-  } & React.HTMLAttributes<HTMLElement>;
-  defaultComponent: "div";
+export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Panel content
+   */
+  children: React.ReactNode;
+  /**
+   * Toggles border on panel
+   * @default false
+   */
+  border?: boolean;
 }
+
+export type PanelType = OverridableComponent<PanelProps, HTMLDivElement>;
 
 const Panel: PanelType = forwardRef(
   (
-    {
-      children,
-      className,
-      border = false,
-      component: Component = "div",
-      ...rest
-    },
+    { children, className, border = false, as: Component = "div", ...rest },
     ref
   ) => {
     return (
