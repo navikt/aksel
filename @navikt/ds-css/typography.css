@@ -4,53 +4,53 @@
   margin: 0;
 }
 
-.navds-title--2xl {
+.navds-title--2xlarge {
   font-size: var(--navds-font-size-title-2xl);
   letter-spacing: -0.01em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--2xl.navds-typo--spacing {
+.navds-title--2xlarge.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-5);
 }
 
-.navds-title--xl {
+.navds-title--xlarge {
   font-size: var(--navds-font-size-title-xl);
   letter-spacing: -0.008em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--xl.navds-typo--spacing {
+.navds-title--xlarge.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-4);
 }
 
-.navds-title--l {
+.navds-title--large {
   font-size: var(--navds-font-size-title-l);
   letter-spacing: -0.004em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--l.navds-typo--spacing {
+.navds-title--large.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-title--m {
+.navds-title--medium {
   font-size: var(--navds-font-size-title-m);
   letter-spacing: -0.002em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--m.navds-typo--spacing {
+.navds-title--medium.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-title--s {
+.navds-title--small {
   font-size: var(--navds-font-size-title-s);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--s.navds-typo--spacing {
+.navds-title--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 
@@ -89,17 +89,17 @@
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-body--s {
+.navds-body--small {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-body-long.navds-body--s.navds-typo--spacing {
+.navds-body-long.navds-body--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-6);
 }
 
-.navds-body-short.navds-body--s.navds-typo--spacing {
+.navds-body-short.navds-body--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-2);
 }
 
@@ -116,13 +116,13 @@
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-label--s {
+.navds-label--small {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-label--s.navds-typo--spacing {
+.navds-label--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-2);
 }
 
@@ -139,10 +139,10 @@
   margin-bottom: var(--navds-spacing-2);
 }
 
-.navds-detail--s {
+.navds-detail--small {
   font-weight: var(--navds-font-weight-regular);
 }
 
-.navds-detail--s.navds-typo--spacing {
+.navds-detail--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-2);
 }
