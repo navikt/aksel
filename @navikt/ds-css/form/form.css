@@ -3,8 +3,8 @@
   margin-top: 8px;
 }
 
-.navds-form-field--s > :not(:first-child):not(:empty),
-.navds-form-field--s > input:not(:first-child) {
+.navds-form-field--small > :not(:first-child):not(:empty),
+.navds-form-field--small > input:not(:first-child) {
   margin-top: 4px;
 }
 

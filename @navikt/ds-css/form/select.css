@@ -35,7 +35,7 @@
   pointer-events: none;
 }
 
-.navds-form-field--s .navds-select__input {
+.navds-form-field--small .navds-select__input {
   min-height: 32px;
   padding: 0.25rem;
 }

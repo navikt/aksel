@@ -54,7 +54,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
         className={cl(
           className,
           "navds-checkbox-group",
-          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "m"}`
+          `navds-checkbox-group--${rest.size ?? fieldset?.size ?? "medium"}`
         )}
       >
         <CheckboxGroupContext.Provider

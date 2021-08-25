@@ -67,7 +67,7 @@ const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
         className={cl(
           className,
           "navds-radio-group",
-          `navds-radio-group--${rest.size ?? fieldset?.size ?? "m"}`
+          `navds-radio-group--${rest.size ?? fieldset?.size ?? "medium"}`
         )}
       >
         <RadioGroupContext.Provider

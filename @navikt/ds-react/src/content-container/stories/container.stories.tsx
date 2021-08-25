@@ -27,7 +27,7 @@ export default {
 export const All = () => {
   return (
     <ContentContainer className={"navds-story-content-container"}>
-      <BodyLong size="m">-- Innhold --</BodyLong>
+      <BodyLong size="medium">-- Innhold --</BodyLong>
     </ContentContainer>
   );
 };
