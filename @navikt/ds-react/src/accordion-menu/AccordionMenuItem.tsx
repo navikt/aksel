@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "..";
 import cl from "classnames";
 
-interface AccordionMenuItemProps
+export interface AccordionMenuItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
   active?: boolean;
