@@ -1,18 +1,17 @@
 import { Copy } from "@navikt/ds-icons";
-import copy from "copy-to-clipboard";
 import cl from "classnames";
+import copy from "copy-to-clipboard";
 import React, {
+  ButtonHTMLAttributes,
   forwardRef,
-  HTMLAttributes,
   useEffect,
   useRef,
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover, PopoverProps, Button, BodyShort } from "..";
+import { BodyShort, Button, ButtonProps, Popover, PopoverProps } from "..";
 
-export interface CopyToClipboardProps
-  extends HTMLAttributes<HTMLButtonElement> {
+export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   /**
    * Button text
    */
@@ -29,10 +28,6 @@ export interface CopyToClipboardProps
    * Allows extending popover properties like "placement"
    */
   popoverProps?: Partial<PopoverProps>;
-  /**
-   * Handles resizing icon and text
-   */
-  size?: "medium" | "small";
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
