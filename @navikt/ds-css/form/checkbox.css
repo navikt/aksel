@@ -53,18 +53,18 @@
   flex-shrink: 0;
 }
 
-.navds-checkbox--s {
+.navds-checkbox--small {
   padding: var(--navds-spacing-1) 0;
 }
 
-.navds-checkbox--s > .navds-checkbox__input {
+.navds-checkbox--small > .navds-checkbox__input {
   width: 24px;
   height: 24px;
   top: 2px;
   left: 0;
 }
 
-.navds-checkbox--s > .navds-checkbox__label::before {
+.navds-checkbox--small > .navds-checkbox__label::before {
   margin-top: -2px;
   margin-bottom: -2px;
 }
@@ -103,7 +103,7 @@
   border-color: var(--navds-color-red-50);
 }
 
-.navds-checkbox--s .navds-error-message {
+.navds-checkbox--small .navds-error-message {
   margin-top: 4px;
 }
 
