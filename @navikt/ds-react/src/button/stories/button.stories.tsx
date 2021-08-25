@@ -72,7 +72,15 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            <span>{variant}</span> <Success />
+            <span> {variant}</span> <Success />
+          </Button>
+        ))}
+      </Section>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant}>
+            <span className="sr-only">Success ikon</span>
+            <Success />
           </Button>
         ))}
       </Section>
@@ -80,7 +88,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="s">
-            <Success /> <span>{variant}</span>
+            <Success /> {variant}
           </Button>
         ))}
       </Section>
