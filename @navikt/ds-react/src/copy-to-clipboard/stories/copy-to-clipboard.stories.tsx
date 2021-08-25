@@ -25,6 +25,7 @@ export const All = () => {
       <CopyToClipboard popoverText={label} copyText={text} size="small">
         Kopier tekst
       </CopyToClipboard>
+      <CopyToClipboard popoverText={label} copyText={text} size="small" />
 
       <h2>Endrer placement av popover</h2>
       <CopyToClipboard
