@@ -57,11 +57,7 @@ Accordion-menu støtter opp til maks to-nivårer av `AccordionMenuCollapsable` a
 gjør at man kan ta i bruk eks react-router slik:
 
 ```jsx
-<Item
-  component={NavLink}
-  activeClassName="navds-accordion-menu-item--active"
-  to="/1"
->
+<Item as={NavLink} activeClassName="navds-accordion-menu-item--active" to="/1">
   Lenketekst
 </Item>
 ```

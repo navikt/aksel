@@ -71,7 +71,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          component="label"
+          as="label"
           className={cl("navds-text-field__label", {
             "sr-only": hideLabel,
           })}

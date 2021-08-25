@@ -58,7 +58,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
       <Label
         htmlFor={inputProps.id}
         size={size}
-        component="label"
+        as="label"
         className={cl("navds-select__label", {
           "sr-only": hideLabel,
         })}

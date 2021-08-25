@@ -72,7 +72,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          component="label"
+          as="label"
           className={cl("navds-textarea__label", {
             "sr-only": hideLabel,
           })}

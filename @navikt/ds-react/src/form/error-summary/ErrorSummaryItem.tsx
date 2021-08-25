@@ -2,20 +2,20 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "../..";
 
-export type ErrorType = OverridableComponent<ErrorSummaryItemProps>;
-
-export interface ErrorSummaryItemProps {
-  props: {
-    /**
-     * Link text
-     */
-    children: React.ReactNode;
-  } & React.HTMLAttributes<HTMLAnchorElement>;
-  defaultComponent: "a";
+export interface ErrorSummaryItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * Link text
+   */
+  children: React.ReactNode;
 }
 
+export type ErrorType = OverridableComponent<
+  ErrorSummaryItemProps,
+  HTMLAnchorElement
+>;
 const ErrorSummaryItem: ErrorType = forwardRef(
-  ({ children, component: Component = "a", className, ...rest }, ref) => {
+  ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
       <Component
         {...rest}
