@@ -1,6 +1,6 @@
 import cl from "classnames";
 import React, { Children, forwardRef, HTMLAttributes, useEffect } from "react";
-import { ContentContainer, Title } from "../..";
+import { Title } from "../..";
 
 const cls = (className, columns) =>
   cl(
@@ -31,26 +31,22 @@ const ProductPageLayout = forwardRef<HTMLDivElement, ProductPageLayoutProps>(
     return (
       <div ref={ref}>
         <div id={"navds-layout-header"} className={"navds-layout__header"}>
-          <ContentContainer>
-            <div className={cls(className, columns)} {...rest}>
-              <div className={cl("navds-layout__header-content")}>
-                <Title
-                  size="2xl"
-                  className={cl("navds-layout__header-title")}
-                  level={1}
-                >
-                  {title}
-                </Title>
-              </div>
+          <div className={cls(className, columns)} {...rest}>
+            <div className={cl("navds-layout__header-content")}>
+              <Title
+                size="2xl"
+                className={cl("navds-layout__header-title")}
+                level={1}
+              >
+                {title}
+              </Title>
             </div>
-          </ContentContainer>
+          </div>
         </div>
         <div id={"navds-layout-body"} className={"navds-layout__body"}>
-          <ContentContainer>
-            <div className={cls(className, columns)} {...rest}>
-              {children}
-            </div>
-          </ContentContainer>
+          <div className={cls(className, columns)} {...rest}>
+            {children}
+          </div>
         </div>
       </div>
     );

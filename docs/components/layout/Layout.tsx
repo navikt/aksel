@@ -1,7 +1,6 @@
 import cl from "classnames";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import { ContentContainer } from "@navikt/ds-react";
 import { useMediaQuery } from "react-responsive";
 import useKeypress from "react-use-keypress";
 import { useEffect, useState } from "react";
@@ -42,9 +41,7 @@ const Layout = ({ children, menu }: LayoutProps) => {
         onSidebarChange={(x) => setSidebar(x)}
       />
       <main className={"contentWrapper"}>
-        <ContentContainer>
-          <div className={"content"}>{children}</div>
-        </ContentContainer>
+        <div className={"content"}>{children}</div>
       </main>
     </div>
   );
