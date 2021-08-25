@@ -1,26 +1,19 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
+import OverridableComponent from "../util/newOverridableComponent";
 import cl from "classnames";
 
-export type AccordionMenuItemType = OverridableComponent<AccordionMenuItemProps>;
-
-export interface AccordionMenuItemProps {
-  props: {
-    children: React.ReactNode;
-    active?: boolean;
-  } & React.HTMLAttributes<HTMLAnchorElement>;
-  defaultComponent: "a";
+interface AccordionMenuItemProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  children: React.ReactNode;
+  active?: boolean;
 }
 
-const AccordionMenuItem: AccordionMenuItemType = forwardRef(
+const AccordionMenuItem: OverridableComponent<
+  AccordionMenuItemProps,
+  HTMLAnchorElement
+> = forwardRef(
   (
-    {
-      children,
-      component: Component = "a",
-      active = false,
-      className,
-      ...rest
-    },
+    { children, as: Component = "a", active = false, className, ...rest },
     ref
   ) => {
     return (
