@@ -15,12 +15,20 @@ export interface LinkPanelProps
   border?: boolean;
 }
 
-export type LinkPanelType = OverridableComponent<
+interface LinkPanelComponentType
+  extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
+  Title: LinkPanelTitleType;
+  Content: LinkPanelContentType;
+}
+
+/* React.ForwardRefExoticComponent<
+  OverridableComponent<LinkPanelProps, HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>
+> */
+
+const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement
->;
-
-const LinkPanel: LinkPanelType = forwardRef(
+> = forwardRef(
   ({ children, as = "a", border = true, className, ...rest }, ref) => {
     return (
       <Panel
@@ -30,11 +38,7 @@ const LinkPanel: LinkPanelType = forwardRef(
         className={cl("navds-link-panel", className)}
         {...rest}
       >
-        {typeof children === "string" ? (
-          <LinkPanelTitle>{children}</LinkPanelTitle>
-        ) : (
-          <span className="navds-link-panel__content">{children}</span>
-        )}
+        {children}
         <Next
           className="navds-link-panel__chevron"
           aria-label="arrow-icon pointing right"
@@ -44,24 +48,49 @@ const LinkPanel: LinkPanelType = forwardRef(
   }
 );
 
+const LinkPanel = LinkPanelComponent as LinkPanelComponentType;
 interface LinkPanelTitleProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
 }
 
-export const LinkPanelTitle: OverridableComponent<
+export type LinkPanelTitleType = OverridableComponent<
   LinkPanelTitleProps,
   HTMLSpanElement
-> = forwardRef(({ className, as: Component = "span", ...rest }, ref) => (
-  <Component
-    ref={ref}
-    className={cl(
-      "navds-link-panel-title",
-      "navds-title",
-      "navds-title--m",
-      className
-    )}
-    {...rest}
-  />
-));
+>;
+
+export const LinkPanelTitle: LinkPanelTitleType = forwardRef(
+  ({ className, as: Component = "span", ...rest }, ref) => (
+    <Component
+      ref={ref}
+      className={cl(
+        "navds-link-panel-title",
+        "navds-title",
+        "navds-title--m",
+        className
+      )}
+      {...rest}
+    />
+  )
+);
+interface LinkPanelContentProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+export type LinkPanelContentType = React.ForwardRefExoticComponent<
+  LinkPanelContentProps & React.RefAttributes<HTMLDivElement>
+>;
+
+export const LinkPanelContent: LinkPanelContentType = forwardRef(
+  ({ className, ...rest }, ref) => (
+    <div
+      ref={ref}
+      className={cl("navds-link-panel__content", className)}
+      {...rest}
+    />
+  )
+);
+
+LinkPanel.Title = LinkPanelTitle;
+LinkPanel.Content = LinkPanelContent;
 
 export default LinkPanel;
