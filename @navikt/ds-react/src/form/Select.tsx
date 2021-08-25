@@ -85,7 +85,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
             className,
             "navds-select__input",
             "navds-body-short",
-            `navds-body--${size ?? "m"}`
+            `navds-body--${size ?? "medium"}`
           )}
           size={props.htmlSize}
         >

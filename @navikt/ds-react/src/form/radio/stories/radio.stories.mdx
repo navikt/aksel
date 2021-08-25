@@ -95,10 +95,14 @@ Man kan både sette en description på RadioGroup og selve Radio
 
 ## Sizing
 
-Radioer har default 44px høy klikkflate. Med size="s" blir denne til 24px slik som før
+Radioer har default 44px høy klikkflate. Med size="small" blir denne til 24px slik som før
 
 ```jsx
-<RadioGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt" size="s">
+<RadioGroup
+  legend="Mollit eiusmod"
+  error="Boks nr 2 må være valgt"
+  size="small"
+>
   <Radio value="Apple">Apple</Radio>
   <Radio value="Orange">Orange</Radio>
   <Radio value="Melon">Melon</Radio>
@@ -106,7 +110,11 @@ Radioer har default 44px høy klikkflate. Med size="s" blir denne til 24px slik 
 ```
 
 <Canvas>
-  <RadioGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt" size="s">
+  <RadioGroup
+    legend="Mollit eiusmod"
+    error="Boks nr 2 må være valgt"
+    size="small"
+  >
     <Radio value="Apple">Apple</Radio>
     <Radio value="Orange" error="Boksen må være valgt">
       Orange
