@@ -45,7 +45,7 @@
 }
 
 .navds-modal__button {
-  position: fixed;
+  position: absolute;
   top: var(--navds-spacing-4);
   right: var(--navds-spacing-4);
   display: flex;
