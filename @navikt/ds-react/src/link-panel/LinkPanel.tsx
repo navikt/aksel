@@ -22,10 +22,10 @@ export type LinkPanelType = OverridableComponent<
 >;
 
 const LinkPanel: LinkPanelType = forwardRef(
-  ({ children, component = "a", border = true, className, ...rest }, ref) => {
+  ({ children, as = "a", border = true, className, ...rest }, ref) => {
     return (
       <Panel
-        component={component}
+        as={as}
         border={border}
         ref={ref}
         className={cl("navds-link-panel", className)}

@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import OverridableComponent from "../util/newOverridableComponent";
 
-export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Panel content
    */
@@ -14,7 +14,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   border?: boolean;
 }
 
-export type PanelType = OverridableComponent<PanelProps, HTMLDivElement>;
+export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 
 const Panel: PanelType = forwardRef(
   (

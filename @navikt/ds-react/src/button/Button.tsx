@@ -41,7 +41,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )}
       {...rest}
     >
-      <BodyShort component="span" className="navds-button__inner" size={size}>
+      <BodyShort as="span" className="navds-button__inner" size={size}>
         {children}
       </BodyShort>
     </button>

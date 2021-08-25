@@ -49,16 +49,12 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       >
         <Title
           className="navds-error-summary__title"
-          component={headingTag}
+          as={headingTag}
           size="small"
         >
           {heading}
         </Title>
-        <BodyShort
-          component="ul"
-          size={size}
-          className="navds-error-summary__list"
-        >
+        <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {React.Children.map(children, (child) => {
             return <li key={child?.toString()}>{child}</li>;
           })}

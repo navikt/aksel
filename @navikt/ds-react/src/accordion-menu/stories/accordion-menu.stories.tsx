@@ -67,14 +67,14 @@ export const ReactRouter = () => (
   <AccordionMenu>
     <Collapsable title="Nivå 1 – 3 rems høy">
       <Item
-        component={NavLink}
+        as={NavLink}
         activeClassName="navds-accordion-menu-item--active"
         to="/1"
       >
         Nivå 2 innrykk 2 rems
       </Item>
       <Item
-        component={NavLink}
+        as={NavLink}
         activeClassName="navds-accordion-menu-item--active"
         to="/2"
       >
@@ -84,7 +84,7 @@ export const ReactRouter = () => (
     <Collapsable title="Skjema og søknad">
       <Collapsable title="Satser">
         <Item
-          component={NavLink}
+          as={NavLink}
           activeClassName="navds-accordion-menu-item--active"
           to="/3"
         >
@@ -93,14 +93,14 @@ export const ReactRouter = () => (
         </Item>
       </Collapsable>
       <Item
-        component={NavLink}
+        as={NavLink}
         activeClassName="navds-accordion-menu-item--active"
         to="/4"
       >
         Subtitle 2
       </Item>
       <Item
-        component={NavLink}
+        as={NavLink}
         activeClassName="navds-accordion-menu-item--active"
         to="/5"
       >
@@ -110,7 +110,7 @@ export const ReactRouter = () => (
     <Collapsable title="Sakbehandlingstider">
       <Collapsable title="Subtitle 4 Lang tittel på andre nivå lorem ipsum">
         <Item
-          component={NavLink}
+          as={NavLink}
           activeClassName="navds-accordion-menu-item--active"
           to="/6"
         >
@@ -119,7 +119,7 @@ export const ReactRouter = () => (
       </Collapsable>
     </Collapsable>
     <Item
-      component={NavLink}
+      as={NavLink}
       activeClassName="navds-accordion-menu-item--active"
       to="/7"
     >
@@ -127,7 +127,7 @@ export const ReactRouter = () => (
     </Item>
     <Collapsable title="Meld fra om endringer lang tittel på første nivå">
       <Item
-        component={NavLink}
+        as={NavLink}
         activeClassName="navds-accordion-menu-item--active"
         to="/8"
       >
@@ -135,7 +135,7 @@ export const ReactRouter = () => (
       </Item>
     </Collapsable>
     <Item
-      component={NavLink}
+      as={NavLink}
       activeClassName="navds-accordion-menu-item--active"
       to="/9"
     >

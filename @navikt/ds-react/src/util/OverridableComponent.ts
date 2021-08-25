@@ -14,7 +14,7 @@ export interface OverridableComponent<M extends OverridableTypeMap> {
 }
 
 /**
- * Props of the component if `component={Component}` is used.
+ * Props of the component if `as={Component}` is used.
  */
 // prettier-ignore
 export type OverrideProps<
@@ -26,7 +26,7 @@ export type OverrideProps<
 );
 
 /**
- * Props if `component={Component}` is NOT used.
+ * Props if `as={Component}` is NOT used.
  */
 // prettier-ignore
 export type DefaultComponentProps<

@@ -94,7 +94,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         >
           <Label
             size={size}
-            component="legend"
+            as="legend"
             className={cl("navds-fieldset__legend", {
               "sr-only": !!hideLegend,
             })}
