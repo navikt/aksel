@@ -194,13 +194,14 @@ module.exports = {
       },
     },
     "z-index": {
+      focus: { value: 10 },
       modal: {
-        content: { value: "1010" },
-        overlay: { value: "1000" },
+        content: { value: 2010 },
+        overlay: { value: 2000 },
       },
       popover: {
-        default: { value: "2000" },
-        arrow: { value: "-1" },
+        default: { value: 1000 },
+        arrow: { value: -1 },
       },
     },
     sidebar: {
