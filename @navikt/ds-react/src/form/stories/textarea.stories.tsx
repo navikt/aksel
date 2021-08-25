@@ -55,7 +55,7 @@ export const All = () => {
         label="In anim elit"
         description="Reprehenderit esse proident"
         maxLength={400}
-        size="s"
+        size="small"
         value={value}
         onChange={handleChange}
       />

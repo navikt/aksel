@@ -6,9 +6,9 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
    * Changes sizing
    * 64px | 40px | 32px | 24px | 20px | 16px
-   * @default "m"
+   * @default "medium"
    */
-  size?: "2xl" | "xl" | "l" | "m" | "s" | "xs";
+  size?: "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
   /**
    * Title prop on svg
    * @default "venter..."
@@ -30,7 +30,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
     {
       children,
       className,
-      size = "m",
+      size = "medium",
       title = "venter...",
       transparent = false,
       variant = "neutral",

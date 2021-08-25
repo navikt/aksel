@@ -9,7 +9,7 @@ const ErrorMessage = (props) => (
     className={cl(
       "navds-error-message",
       props.className,
-      `navds-error-message--${props.size ?? "m"}`
+      `navds-error-message--${props.size ?? "medium"}`
     )}
   />
 );

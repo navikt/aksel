@@ -18,28 +18,28 @@ export const All = () => {
       <Loader transparent />
 
       <h2>Sizing</h2>
-      <Loader size="2xl" />
-      <Loader size="xl" />
-      <Loader size="l" />
-      <Loader size="m" />
-      <Loader size="s" />
-      <Loader size="xs" />
+      <Loader size="2xlarge" />
+      <Loader size="xlarge" />
+      <Loader size="large" />
+      <Loader size="medium" />
+      <Loader size="small" />
+      <Loader size="xsmall" />
       <h2>Sizing transparent</h2>
-      <Loader size="2xl" transparent />
-      <Loader size="xl" transparent />
-      <Loader size="l" transparent />
-      <Loader size="m" transparent />
-      <Loader size="s" transparent />
-      <Loader size="xs" transparent />
+      <Loader size="2xlarge" transparent />
+      <Loader size="xlarge" transparent />
+      <Loader size="large" transparent />
+      <Loader size="medium" transparent />
+      <Loader size="small" transparent />
+      <Loader size="xsmall" transparent />
       <div style={{ backgroundColor: "#c9c9c9" }}>
         <h2>Varianter</h2>
-        <Loader size="xl" variant="neutral" />
-        <Loader size="xl" variant="interaction" />
-        <Loader size="xl" variant="inverted" />
+        <Loader size="xlarge" variant="neutral" />
+        <Loader size="xlarge" variant="interaction" />
+        <Loader size="xlarge" variant="inverted" />
         <h2>Varianter transparent</h2>
-        <Loader size="xl" variant="neutral" transparent />
-        <Loader size="xl" variant="interaction" transparent />
-        <Loader size="xl" variant="inverted" transparent />
+        <Loader size="xlarge" variant="neutral" transparent />
+        <Loader size="xlarge" variant="interaction" transparent />
+        <Loader size="xlarge" variant="inverted" transparent />
         <h2>Brukt i knapper</h2>
       </div>
       <div>
@@ -47,7 +47,7 @@ export const All = () => {
           <span>Laster...</span>
           <Loader />
         </Button>{" "}
-        <Button size="s">
+        <Button size="small">
           <span>Laster...</span>
           <Loader />
         </Button>
@@ -86,7 +86,7 @@ export const LoaderDemo = () => {
 
   return (
     <div className="demo__wrapper">
-      <Title level="1" size="l">
+      <Title level="1" size="large">
         Test/Demo for loading state. Ikke bruk som referanse i implmentasjon
       </Title>
       <div>
@@ -109,7 +109,7 @@ export const LoaderDemo = () => {
       >
         {loading ? (
           <>
-            <Loader size="xl" title={text} />
+            <Loader size="xlarge" title={text} />
             <span>{text}</span>
           </>
         ) : (

@@ -11,7 +11,7 @@ export interface SearchFieldContextProps {
     "aria-describedby"?: string;
     disabled?: boolean;
   };
-  size?: "m" | "s";
+  size?: "medium" | "small";
 }
 
 export const SearchFieldContext = React.createContext<SearchFieldContextProps | null>(
@@ -63,7 +63,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         className={cl(
           className,
           "navds-form-field",
-          `navds-form-field--${size ?? "m"}`,
+          `navds-form-field--${size ?? "medium"}`,
           "navds-search-field",
           { "navds-search-field--error": hasError }
         )}

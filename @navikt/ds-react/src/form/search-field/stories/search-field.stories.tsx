@@ -75,7 +75,7 @@ export const All = () => {
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
-        size="s"
+        size="small"
       >
         <SearchFieldButton>
           <Search />
@@ -87,7 +87,7 @@ export const All = () => {
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
-        size="s"
+        size="small"
       >
         <SearchFieldInput />
         <SearchFieldButton>

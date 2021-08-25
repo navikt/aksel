@@ -43,7 +43,7 @@ export const All = () => {
         label="Ipsum enim quis culpa"
         description="Aute enim"
         error="Select error message"
-        size="s"
+        size="small"
       >
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
