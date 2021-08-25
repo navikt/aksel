@@ -3,7 +3,6 @@ export * from "./accordion-menu";
 export * from "./alert";
 export * from "./button";
 export * from "./card";
-export * from "./content-container";
 export * from "./copy-to-clipboard";
 export * from "./form";
 export * from "./grid";
