@@ -17,7 +17,7 @@ export type FieldsetContextProps = {
   /**
    * Changes paddings, margins and font-sizes
    */
-  size: "m" | "s";
+  size: "medium" | "small";
   disabled: boolean;
 };
 

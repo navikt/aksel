@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { Title } from "../..";
+import { Title, BodyShort } from "../..";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -9,9 +9,9 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Changes padding and font-sizes
-   * @default "m"
+   * @default "medium"
    */
-  size?: "m" | "s";
+  size?: "medium" | "small";
   /**
    * Heading above links
    */
@@ -25,7 +25,14 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
 
 const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
   (
-    { children, className, size = "m", headingTag = "h2", heading, ...rest },
+    {
+      children,
+      className,
+      size = "medium",
+      headingTag = "h2",
+      heading,
+      ...rest
+    },
     ref
   ) => {
     return (
@@ -43,21 +50,19 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         <Title
           className="navds-error-summary__title"
           component={headingTag}
-          size="s"
+          size="small"
         >
           {heading}
         </Title>
-        <ul
-          className={cl(
-            "navds-error-summary__list",
-            "navds-body-short",
-            `navds-body--${size}`
-          )}
+        <BodyShort
+          component="ul"
+          size={size}
+          className="navds-error-summary__list"
         >
           {React.Children.map(children, (child) => {
             return <li key={child?.toString()}>{child}</li>;
           })}
-        </ul>
+        </BodyShort>
       </div>
     );
   }

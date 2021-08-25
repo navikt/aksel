@@ -15,9 +15,9 @@ export interface ButtonProps
   variant?: "primary" | "secondary" | "action" | "danger";
   /**
    * Changes padding, height and font-size
-   * @default "m"
+   * @default "medium"
    */
-  size?: "m" | "s";
+  size?: "medium" | "small";
   /**
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
    * @note Avoid using if possible for accessibility purposes
@@ -27,7 +27,10 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", className, children, size = "m", ...rest }, ref) => (
+  (
+    { variant = "primary", className, children, size = "medium", ...rest },
+    ref
+  ) => (
     <button
       ref={ref}
       className={cl(

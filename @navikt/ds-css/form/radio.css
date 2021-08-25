@@ -55,18 +55,18 @@
   border-radius: 50%;
 }
 
-.navds-radio--s {
+.navds-radio--small {
   padding: var(--navds-spacing-1) 0;
 }
 
-.navds-radio--s > .navds-radio__input {
+.navds-radio--small > .navds-radio__input {
   width: 24px;
   height: 24px;
   top: 2px;
   left: 0;
 }
 
-.navds-radio--s > .navds-radio__label::before {
+.navds-radio--small > .navds-radio__label::before {
   margin-top: -2px;
   margin-bottom: -2px;
 }
@@ -102,7 +102,7 @@
   border-color: var(--navds-color-red-50);
 }
 
-.navds-radio--s .navds-error-message {
+.navds-radio--small .navds-error-message {
   margin-top: 4px;
 }
 

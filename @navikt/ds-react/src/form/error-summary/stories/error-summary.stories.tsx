@@ -16,8 +16,8 @@ export const All = () => {
           Tekstfeltet må ha en godkjent e-mail
         </ErrorSummaryItem>
       </ErrorSummary>
-      <h2>size s</h2>
-      <ErrorSummary size="s" heading="Feiloppsummering komponent">
+      <h2>size small</h2>
+      <ErrorSummary size="small" heading="Feiloppsummering komponent">
         <ErrorSummaryItem href="#1">Checkbox må fylles ut</ErrorSummaryItem>
         <ErrorSummaryItem href="#2">
           Tekstfeltet må ha en godkjent e-mail

@@ -47,7 +47,7 @@ export const All = () => {
 
       <h2>Sizing</h2>
 
-      <Fieldset size="s" legend="Mollit eiusmod" description="Dolore minim">
+      <Fieldset size="small" legend="Mollit eiusmod" description="Dolore minim">
         <TextField label="Textfield label" hideLabel />
         <TextField label="Textfield label" hideLabel />
       </Fieldset>
