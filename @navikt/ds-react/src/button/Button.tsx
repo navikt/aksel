@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
+import { BodyShort } from "../";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,19 +27,24 @@ export interface ButtonProps
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant = "primary", className, size = "medium", ...rest }, ref) => (
+  (
+    { variant = "primary", className, children, size = "medium", ...rest },
+    ref
+  ) => (
     <button
       ref={ref}
       className={cl(
         className,
         "navds-button",
         `navds-button--${variant}`,
-        `navds-button--${size}`,
-        "navds-body-short",
-        { "navds-body--small": size === "small" }
+        `navds-button--${size}`
       )}
       {...rest}
-    />
+    >
+      <BodyShort component="span" className="navds-button__inner" size={size}>
+        {children}
+      </BodyShort>
+    </button>
   )
 );
 
