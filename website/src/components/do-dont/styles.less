@@ -1,11 +1,21 @@
 @import (reference) "nav-frontend-core/less/_variabler";
 
 .dodont {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 0.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+  gap: 0.5rem;
+
+  .dodont__button-example {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    gap: 0.25rem;
+  }
 
   .dodont__label {
+    margin-top: 0.25rem;
     padding: 0.5rem;
     display: flex;
     align-items: center;
@@ -18,12 +28,14 @@
   }
 
   .dodont__do {
+    width: 100%;
     .dodont__label {
       border-top: 4px solid #1c6937;
     }
   }
 
   .dodont__dont {
+    width: 100%;
     .dodont__label {
       border-top: 4px solid #a13a28;
     }

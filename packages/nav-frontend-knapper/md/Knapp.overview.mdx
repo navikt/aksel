@@ -2,6 +2,11 @@ import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "./..";
 import Alertstripe from "./../../nav-frontend-alertstriper";
 import Lenke from "./../../nav-frontend-lenker";
 import { Cog } from "../../../website/src/components/assets/images/svg";
+import {
+  DoDont,
+  Do,
+  Dont,
+} from "../../../website/src/components/do-dont/DoDont";
 
 ## Alle knapper side om side
 
@@ -20,6 +25,31 @@ Alle knappene våre er alignet på samme bunnlinje.
 <Fareknapp>Fare</Fareknapp>
 <Flatknapp>Flat</Flatknapp>
 ```
+
+## Knappen i bruk på NAV
+
+I tidligere versjoner av knappen ble den satt til "uppercase" automatisk av stilen sin. Dette er nå
+tatt en vurdering på å vi skal prøve at alle knappene på NAV tar i bruk "Sentence case". Det vil si at alle
+knapper skal starte med "uppercase", mens resten av teksten skal være "lowercase".
+
+<DoDont>
+  <Do>
+    <Knapp>Send søknad</Knapp>
+  </Do>
+  <Dont>
+    <div className="dodont__button-example">
+      <div>
+        <Knapp>SEND SØKNAD</Knapp>
+      </div>
+      <div>
+        <Knapp>send søknad</Knapp>
+      </div>
+      <div>
+        <Knapp>Send Søknad</Knapp>
+      </div>
+    </div>
+  </Dont>
+</DoDont>
 
 ## Normal
 
