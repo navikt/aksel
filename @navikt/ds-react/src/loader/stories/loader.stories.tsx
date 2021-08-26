@@ -2,7 +2,6 @@ import React from "react";
 import { Loader } from "../index";
 import { Button } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
-import "./demo.css";
 export default {
   title: "ds-react/loader",
   component: Loader,
@@ -44,24 +43,24 @@ export const All = () => {
       <h2>Brukt i knapper</h2>
       <div>
         <Button>
-          <span>Laster...</span>
+          Laster...
           <Loader />
-        </Button>{" "}
+        </Button>
         <Button size="small">
-          <span>Laster...</span>
+          Laster...
           <Loader />
         </Button>
         <h2>Variants</h2>
         <Button variant="secondary">
-          <span>Laster...</span>
+          Laster...
           <Loader />
-        </Button>{" "}
+        </Button>
         <Button variant="action">
-          <span>Laster...</span>
+          Laster...
           <Loader />
-        </Button>{" "}
+        </Button>
         <Button variant="danger">
-          <span>Laster...</span>
+          Laster...
           <Loader />
         </Button>
       </div>
