@@ -29,8 +29,13 @@ export const All = () => {
       <LinkPanel href="#" style={{ textDecoration: "none" }}>
         {Illustration}
         <div>
-          <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
-          <LinkPanel.Content>Aliqua id aliquip Lorem esse</LinkPanel.Content>
+          <LinkPanel.Title>
+            Anim pariatur eiusmod deserunt elit cillum
+          </LinkPanel.Title>
+          <LinkPanel.Content>
+            Ex velit id voluptate labore irure ipsum exercitation sunt et id
+            enim magna veniam consequat. id aliquip Lorem esse
+          </LinkPanel.Content>
         </div>
       </LinkPanel>
     </>
