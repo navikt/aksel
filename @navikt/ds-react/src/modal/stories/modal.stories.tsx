@@ -18,15 +18,8 @@ export const All = () => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <h1>Header</h1>
         <h2>subheader</h2>
-        <p>
-          Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
-          laboris ea ex aliquip. Dolore dolore reprehenderit sint esse commodo
-          aliqua cupidatat incididunt proident laborum qui. Officia fugiat non
-          anim cupidatat. Adipisicing ut aliqua cillum nulla elit. Mollit et id
-          duis cupidatat labore magna consectetur et veniam tempor. In minim
-          exercitation id irure velit sit dolor aliquip velit esse. Excepteur
-          sint non minim nulla excepteur labore non magna eu.
-        </p>
+        <p>Cupidatat irure ipsum veniam ad in esse.</p>
+        <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
       </Modal>
 
       <button onClick={() => setOpenTwo(true)}>
