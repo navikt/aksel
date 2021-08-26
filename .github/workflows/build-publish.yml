@@ -86,7 +86,7 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
-          AUTH_TOKEN: ${{secrets.NPM_AUTOMATION}}
+          NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - name: Publish to NPM registry
         run: |
           yarn lerna publish from-package --yes
