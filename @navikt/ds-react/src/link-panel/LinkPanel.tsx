@@ -23,10 +23,6 @@ interface LinkPanelComponentType
   Content: LinkPanelContentType;
 }
 
-/* React.ForwardRefExoticComponent<
-  OverridableComponent<LinkPanelProps, HTMLAnchorElement> & React.RefAttributes<HTMLAnchorElement>
-> */
-
 const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement

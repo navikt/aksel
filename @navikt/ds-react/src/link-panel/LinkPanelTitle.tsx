@@ -16,7 +16,7 @@ export const LinkPanelTitle: LinkPanelTitleType = forwardRef(
     <Component
       ref={ref}
       className={cl(
-        "navds-link-panel-title",
+        "navds-link-panel__title",
         "navds-title",
         "navds-title--m",
         className

@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkPanel, LinkPanelTitle } from "../index";
+import { LinkPanel } from "../index";
 import { Illustration } from "./illustration";
 
 export default {
@@ -14,11 +14,11 @@ export const All = () => {
       <LinkPanel href="#">Dette er en tekstlenke</LinkPanel>
 
       <h1>No border</h1>
-      <LinkPanel href="#" border={false}>
+      {/* <LinkPanel href="#" border={false}>
         Dette er en tekstlenke
-      </LinkPanel>
+      </LinkPanel> */}
 
-      <h1>Custom styling</h1>
+      {/* <h1>Custom styling</h1>
       <LinkPanel href="#" style={{ textDecoration: "none" }}>
         <div
           style={{
@@ -38,7 +38,7 @@ export const All = () => {
             </p>
           </div>
         </div>
-      </LinkPanel>
+      </LinkPanel> */}
     </>
   );
 };
