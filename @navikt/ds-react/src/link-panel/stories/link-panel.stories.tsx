@@ -11,34 +11,28 @@ export const All = () => {
   return (
     <>
       <h1>Link</h1>
-      <LinkPanel href="#">Dette er en tekstlenke</LinkPanel>
+      <LinkPanel href="#">
+        <LinkPanel.Title>
+          Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+        </LinkPanel.Title>
+        <LinkPanel.Content>Aliqua id aliquip Lorem esse</LinkPanel.Content>
+      </LinkPanel>
 
       <h1>No border</h1>
-      {/* <LinkPanel href="#" border={false}>
-        Dette er en tekstlenke
-      </LinkPanel> */}
+      <LinkPanel href="#" border={false}>
+        <LinkPanel.Title>
+          Veniam cillum cupidatat aliqua id ipsum culpa ea.
+        </LinkPanel.Title>
+      </LinkPanel>
 
-      {/* <h1>Custom styling</h1>
+      <h1>Custom styling</h1>
       <LinkPanel href="#" style={{ textDecoration: "none" }}>
-        <div
-          style={{
-            padding: "1rem",
-            display: "grid",
-            gridAutoFlow: "column",
-            gap: "2rem",
-            alignItems: "center",
-          }}
-        >
-          {Illustration}
-          <div>
-            <LinkPanelTitle>Dagpenger</LinkPanelTitle>
-            <p>
-              Du kan få dagpenger når du er arbeidsledig og har mistet inntekten
-              din.
-            </p>
-          </div>
+        {Illustration}
+        <div>
+          <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
+          <LinkPanel.Content>Aliqua id aliquip Lorem esse</LinkPanel.Content>
         </div>
-      </LinkPanel> */}
+      </LinkPanel>
     </>
   );
 };

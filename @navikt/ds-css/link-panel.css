@@ -1,12 +1,16 @@
 .navds-link-panel {
+  position: relative;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   text-decoration: none;
+  flex-wrap: wrap;
   color: var(--navds-color-gray-90);
+  column-gap: 2rem;
+  row-gap: 0.5rem;
 }
 
-.navds-link-panel:hover .navds-link-panel-title {
+.navds-link-panel:hover .navds-link-panel__title {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
@@ -16,12 +20,23 @@
   border-color: var(--navds-color-blue-50);
 }
 
+.navds-link-panel__title {
+  width: calc(100% - 2rem);
+}
+
+.navds-link-panel__content {
+  width: calc(100% - 2rem);
+  margin-top: 0.5rem;
+}
+
 .navds-link-panel:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
 .navds-link-panel__chevron {
+  position: absolute;
+  right: 1rem;
   font-size: 1.5rem;
   transition: transform 200ms;
 }
