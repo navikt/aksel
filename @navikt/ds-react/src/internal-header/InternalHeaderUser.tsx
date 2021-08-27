@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { BodyShort, Detail } from "..";
 
 export interface InternalHeaderUserProps
   extends HTMLAttributes<HTMLDivElement> {
@@ -13,17 +14,23 @@ export interface InternalHeaderUserProps
   ident: string;
 }
 
-const InternalHeaderUser = forwardRef<HTMLDivElement, InternalHeaderUserProps>(
+export type InternalHeaderUserType = React.ForwardRefExoticComponent<
+  InternalHeaderUserProps & React.RefAttributes<HTMLDivElement>
+>;
+
+const InternalHeaderUser: InternalHeaderUserType = forwardRef(
   ({ className, name, ident, ...rest }, ref) => (
     <div
       ref={ref}
       className={cl("navds-interal-header__user", className)}
       {...rest}
     >
-      <span className="navds-interal-header__name navds-body-short navds-body--s">
+      <BodyShort as="span" className="navds-interal-header__name" size="small">
         {name}
-      </span>
-      <span className="navds-detail navds-detail--s">{ident}</span>
+      </BodyShort>
+      <Detail as="span" className="navds-interal-header__ident" size="small">
+        {ident}
+      </Detail>
     </div>
   )
 );

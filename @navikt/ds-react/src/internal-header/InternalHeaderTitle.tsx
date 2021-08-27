@@ -1,26 +1,30 @@
-import React, { forwardRef, HTMLAttributes, createElement } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { OverridableComponent } from "..";
 
-export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
+export interface InternalHeaderTitleProps
+  extends HTMLAttributes<HTMLHeadingElement> {
   /**
    * Component content
    */
   children?: React.ReactNode;
-  /**
-   * Tag this component will use. Usefull for defining a button/link
-   * @default "h1"
-   */
-  element?: keyof React.ReactHTML;
 }
 
-const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
-  ({ element = "h1", children, className, ...rest }, ref) =>
-    createElement(element, {
-      ...rest,
-      ref,
-      className: cl("navds-interal-header__title", "navds-label", className),
-      children: <span>{children}</span>,
-    })
+export type InternalHeaderTitleType = OverridableComponent<
+  InternalHeaderTitleProps,
+  HTMLHeadingElement
+>;
+
+const InternalHeaderTitle: InternalHeaderTitleType = forwardRef(
+  ({ as: Component = "h1", children, className, ...rest }, ref) => (
+    <Component
+      ref={ref}
+      className={cl("navds-interal-header__title", "navds-label", className)}
+      {...rest}
+    >
+      {children}
+    </Component>
+  )
 );
 
 export default InternalHeaderTitle;
