@@ -14,17 +14,13 @@ export type ModalContentType = React.ForwardRefExoticComponent<
 >;
 
 const ModalContent: ModalContentType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cl("navds-modal__content", className)}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  }
+  ({ className, ...rest }, ref) => (
+    <div
+      {...rest}
+      ref={ref}
+      className={cl("navds-modal__content", className)}
+    />
+  )
 );
 
 export default ModalContent;
