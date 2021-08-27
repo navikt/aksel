@@ -136,6 +136,8 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
 
 Man kan bruke `SearchFieldClearButton` for å håndtere clearing av value i `<input />`. For å bruke denne
 kreves det da at `SearchFieldInput` er controlled slik at man styrer state selv slik som eksemplet under.
+Hvis man bare ønsker at den skal vises når bruker har begynt å skrive, kan man toggle `visible`-proppen
+true/false for å kontrollere dette.
 
 ```jsx
 <SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
