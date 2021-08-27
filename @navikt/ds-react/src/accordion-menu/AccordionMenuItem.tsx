@@ -5,6 +5,10 @@ import cl from "classnames";
 export interface AccordionMenuItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
+  /**
+   * Sets active styling if true
+   * @default false
+   */
   active?: boolean;
 }
 

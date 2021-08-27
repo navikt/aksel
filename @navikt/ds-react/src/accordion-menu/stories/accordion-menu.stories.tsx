@@ -5,21 +5,6 @@ import { NavLink, HashRouter as Router } from "react-router-dom";
 export default {
   title: "ds-react/accordion-menu",
   component: { AccordionMenu },
-  parameters: {
-    backgrounds: {
-      default: "light",
-      values: [
-        {
-          name: "light",
-          value: "#F1F1F1",
-        },
-        {
-          name: "white",
-          value: "#fff",
-        },
-      ],
-    },
-  },
 };
 
 export const All = () => (
