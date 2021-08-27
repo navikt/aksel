@@ -35,6 +35,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   placement?: Placement;
   /**
    *  Toggles rendering of arrow
+   *  @default true
    */
   arrow?: boolean;
   /**
