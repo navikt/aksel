@@ -120,6 +120,12 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               offset: [0, offset ?? (arrow ? 16 : 4)],
             },
           },
+          {
+            name: "arrow",
+            options: {
+              padding: 8,
+            },
+          },
         ],
       }
     );

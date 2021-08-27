@@ -27,7 +27,7 @@ const Template = (props) => {
         {props.placement}
       </div>
       <Popover {...props} anchorEl={anchorEl} onClose={() => {}} open>
-        <div style={{ margin: "1rem" }}>Contents</div>
+        <span>Contents</span>
       </Popover>
     </>
   );
