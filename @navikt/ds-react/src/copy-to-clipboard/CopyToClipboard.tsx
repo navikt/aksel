@@ -1,15 +1,10 @@
 import { Copy } from "@navikt/ds-icons";
+import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import copy from "copy-to-clipboard";
-import React, {
-  ButtonHTMLAttributes,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
-import { BodyShort, Button, ButtonProps, Popover, PopoverProps } from "..";
+import { BodyShort, Button, ButtonProps, Popover } from "..";
 
 export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   /**
@@ -26,8 +21,9 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   popoverText: string;
   /**
    * Allows extending popover properties like "placement"
+   * @default "right"
    */
-  popoverProps?: Partial<PopoverProps>;
+  popoverPlacement?: Placement;
 }
 
 const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
@@ -38,7 +34,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       popoverText,
       className,
       size = "medium",
-      popoverProps,
+      popoverPlacement = "right",
       ...rest
     },
     ref
@@ -87,12 +83,11 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           anchorEl={buttonRef.current}
           open={openPopover}
           onClose={() => setOpenPopover(false)}
-          placement="right"
+          placement={popoverPlacement}
           arrow={false}
           className="navds-copy-to-clipboard__popover"
-          {...popoverProps}
         >
-          <BodyShort size={size} component="span">
+          <BodyShort size={size} as="span">
             {popoverText}
           </BodyShort>
         </Popover>

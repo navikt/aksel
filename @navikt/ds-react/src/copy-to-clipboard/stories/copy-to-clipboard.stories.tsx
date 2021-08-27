@@ -31,7 +31,7 @@ export const All = () => {
       <CopyToClipboard
         popoverText={label}
         copyText={text}
-        popoverProps={{ placement: "bottom-end" }}
+        popoverPlacement="bottom-end"
       >
         Kopier tekst
       </CopyToClipboard>
