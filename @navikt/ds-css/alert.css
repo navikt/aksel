@@ -13,6 +13,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: auto 0;
+  max-width: 43.5rem;
+  flex: 1;
 }
 
 .navds-alert--small {
@@ -36,13 +39,6 @@
     0,
     transparent
   );
-}
-
-.navds-alert__content {
-  display: block;
-  margin: auto 0;
-  max-width: 43.5rem;
-  flex: 1;
 }
 
 .navds-alert__icon {
