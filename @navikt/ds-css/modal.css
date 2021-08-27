@@ -4,13 +4,16 @@
 
 .navds-modal {
   background-color: var(--navds-color-background);
-  padding: var(--navds-spacing-4);
   border-radius: 4px;
   display: block;
   position: relative;
   overflow: auto;
   max-height: 100%;
   z-index: var(--navds-z-index-modal-content);
+}
+
+.navds-modal__content {
+  padding: var(--navds-spacing-4);
 }
 
 .navds-modal:focus,
