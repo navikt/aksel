@@ -9,7 +9,7 @@ const canUseDOM = (): boolean => {
   );
 };
 
-const useClientLayoutEffect = canUseDOM() ? useLayoutEffect : () => {};
+export const useClientLayoutEffect = canUseDOM() ? useLayoutEffect : () => {};
 
 export const useId: (id?: string) => string = (id) => {
   const [newId, setNewId] = useState<string | undefined>(undefined);
