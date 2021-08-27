@@ -28,13 +28,16 @@ Alle knappene våre er alignet på samme bunnlinje.
 
 ## Knappen i bruk på NAV
 
-I tidligere versjoner av knappen ble den satt til "uppercase" automatisk av stilen sin. Dette er nå
-tatt en vurdering på å vi skal prøve at alle knappene på NAV tar i bruk "Sentence case". Det vil si at alle
-knapper skal starte med "uppercase", mens resten av teksten skal være "lowercase".
+I tidligere knappeversjon ble teksten satt til all-caps automatisk av stilsettet, dette er nå endret til
+sentence case som standard for alle flater. Sentence case starter med uppercase og fortsetter i lowercase som angitt her.
+Når man nå tar i bruk `nav-frontend-knapper` v3.1.0
+eller nyere så burde man gå gjennom knappebruken i løsningene sine for å sjekke dette.
 
 <DoDont>
   <Do>
-    <Knapp>Send søknad</Knapp>
+    <div className="dodont__button-example">
+      <Knapp>Send søknad</Knapp>
+    </div>
   </Do>
   <Dont>
     <div className="dodont__button-example">

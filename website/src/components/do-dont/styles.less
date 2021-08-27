@@ -3,7 +3,6 @@
 .dodont {
   display: flex;
   justify-content: space-evenly;
-  align-items: flex-end;
   gap: 0.5rem;
 
   .dodont__button-example {
@@ -11,14 +10,18 @@
     flex-direction: column;
     justify-content: center;
     gap: 0.25rem;
+    width: calc(100% - 4rem);
+
+    & > div > * {
+      width: 100%;
+    }
   }
 
   .dodont__label {
-    margin-top: 0.25rem;
+    margin-bottom: 0.5rem;
     padding: 0.5rem;
     display: flex;
     align-items: center;
-
     svg {
       width: 1.5rem;
       height: 1.5rem;
@@ -26,17 +29,11 @@
     }
   }
 
-  .dodont__do {
-    width: 100%;
-    .dodont__label {
-      border-top: 4px solid #1c6937;
-    }
-  }
-
+  .dodont__do,
   .dodont__dont {
     width: 100%;
-    .dodont__label {
-      border-top: 4px solid #a13a28;
-    }
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-between; */
   }
 }
