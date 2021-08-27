@@ -14,17 +14,13 @@ export type PopoverContentType = React.ForwardRefExoticComponent<
 >;
 
 const PopoverContent: PopoverContentType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cl("navds-popover__content", className)}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  }
+  ({ className, ...rest }, ref) => (
+    <div
+      {...rest}
+      ref={ref}
+      className={cl("navds-popover__content", className)}
+    />
+  )
 );
 
 export default PopoverContent;
