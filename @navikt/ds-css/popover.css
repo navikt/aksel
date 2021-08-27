@@ -4,7 +4,10 @@
   box-shadow: 0 2px 4px 0 var(--navds-color-gray-20);
   border: var(--navds-border-default);
   border-radius: 4px;
-  padding: 1rem;
+}
+
+.navds-popover__content {
+  padding: var(--navds-spacing-4);
 }
 
 .navds-popover--hidden {
