@@ -22,6 +22,11 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Toggles full-width Alert
+   * @default false
+   */
+  fullWidth?: boolean;
 }
 
 const Icon = ({ variant, ...props }) => {
@@ -40,19 +45,30 @@ const Icon = ({ variant, ...props }) => {
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "medium", ...rest }, ref) => {
+  (
+    {
+      variant,
+      children,
+      className,
+      size = "medium",
+      fullWidth = false,
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <div
+        {...rest}
         ref={ref}
         className={cl(
           className,
           "navds-alert",
           `navds-alert--${variant}`,
-          `navds-alert--${size}`
+          `navds-alert--${size}`,
+          { "navds-alert--full-width": fullWidth }
         )}
-        {...rest}
       >
-        <span>
+        <span className="navds-alert__icon">
           <Icon
             aria-label={`${variant}-ikon`}
             focusable="false"
@@ -61,7 +77,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
             alt={`${variant}-ikon`}
           />
         </span>
-        <BodyLong size={size}>{children}</BodyLong>
+        <BodyLong className="navds-alert__content" size={size}>
+          {children}
+        </BodyLong>
       </div>
     );
   }
