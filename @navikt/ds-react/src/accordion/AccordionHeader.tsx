@@ -46,7 +46,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-accordion__header",
           className,
           "navds-title",
-          "navds-title--s"
+          "navds-title--small"
         )}
         onClick={handleClick}
         aria-controls={context.contentId}
@@ -56,10 +56,9 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         <Expand
           focusable="false"
           role="img"
-          className={cl(
-            "navds-accordion__expand-icon",
-            `navds-accordion__expand-icon--down${context.open}`
-          )}
+          className={cl("navds-accordion__expand-icon", {
+            "navds-accordion__expand-icon--flip": context.open,
+          })}
         />
         <ExpandFilled
           focusable="false"
@@ -67,7 +66,9 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",
-            `navds-accordion__expand-icon--${context.open ? "up" : "down"}`
+            {
+              "navds-accordion__expand-icon--flip": context.open,
+            }
           )}
         />
       </button>
