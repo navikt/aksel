@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Grid, Cell } from "../index";
-import { ContentContainer } from "../../index";
 import "./styles.css";
 
 export default {
@@ -26,18 +25,16 @@ export default {
 
 export const All = () => {
   return (
-    <ContentContainer>
-      <Grid>
-        <Cell className={"navds-story-cell"} xs={12} sm={6} lg={4}>
-          Kolonne
-        </Cell>
-        <Cell className={"navds-story-cell"} xs={12} sm={6} lg={4}>
-          Kolonne
-        </Cell>
-        <Cell className={"navds-story-cell"} xs={12} sm={12} lg={4}>
-          Kolonne
-        </Cell>
-      </Grid>
-    </ContentContainer>
+    <Grid>
+      <Cell className={"navds-story-cell"} xs={12} sm={6} lg={4}>
+        Kolonne
+      </Cell>
+      <Cell className={"navds-story-cell"} xs={12} sm={6} lg={4}>
+        Kolonne
+      </Cell>
+      <Cell className={"navds-story-cell"} xs={12} sm={12} lg={4}>
+        Kolonne
+      </Cell>
+    </Grid>
   );
 };

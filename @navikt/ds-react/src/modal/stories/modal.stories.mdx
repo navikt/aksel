@@ -15,9 +15,18 @@ vil `onClose`-triggre og det er opp til systemet å håndtere det.
 
 ```jsx
 <Modal open={open} onClose={() => setOpen(false)}>
+  <Modal.Content>
+    <h2>Heading</h2>
+    <p>
+      Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
+      laboriselit sit dolor aliquip velit esse. Excepteur sint non minim nulla
+      excepteur labore non magna eu.
+    </p>
+  </Modal.Content>
+</Modal>
 ```
 
 ## shouldCloseOnOverlayClick
 
 Proppen `shouldCloseOnOverlayClick` toggler om `onClose` skal triggres
-når bruker trykker utenfor modalen (overlayet). Defaulter til true.
+når bruker trykker utenfor modalen (overlayet). Er default: true .

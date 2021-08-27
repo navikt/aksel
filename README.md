@@ -25,7 +25,7 @@ Dette repoet inneholder følgende:
 - [Kildekoden](https://github.com/navikt/nav-frontend-moduler/tree/master/website) til vår nettside; [design.nav.no](https://design.nav.no) som tilbyr dokumentasjon for komponentene og NAVs designsystem generelt
 - [Eksempler på forskjellige frontend-oppsett](https://github.com/navikt/nav-frontend-moduler/tree/master/examples) til applikasjoner som skal bruke komponentene
 - [Storybook](https://navikt.github.io/Designsystemet/?path=/story/ds-react-kom-i-gang--page) for v2 komponenter (wip) og eldre komponenter.
-    
+
 ## Bidra
 
 Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md)

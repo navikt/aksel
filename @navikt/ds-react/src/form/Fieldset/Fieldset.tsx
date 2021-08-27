@@ -17,7 +17,7 @@ export type FieldsetContextProps = {
   /**
    * Changes paddings, margins and font-sizes
    */
-  size: "m" | "s";
+  size: "medium" | "small";
   disabled: boolean;
 };
 
@@ -94,7 +94,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
         >
           <Label
             size={size}
-            component="legend"
+            as="legend"
             className={cl("navds-fieldset__legend", {
               "sr-only": !!hideLegend,
             })}

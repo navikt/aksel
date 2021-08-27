@@ -4,7 +4,7 @@
   border: 4px solid #ba3a26;
 }
 
-.navds-error-summary--s {
+.navds-error-summary--small {
   padding: var(--navds-spacing-2);
 }
 
@@ -20,6 +20,6 @@
   gap: 0.25rem;
 }
 
-.navds-error-summary--s > .navds-error-summary__list {
+.navds-error-summary--small > .navds-error-summary__list {
   margin: 0.5rem 0;
 }

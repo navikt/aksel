@@ -29,12 +29,12 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-form-field--s .navds-textarea__input {
+.navds-form-field--small .navds-textarea__input {
   padding: var(--navds-spacing-1);
   min-height: 32px;
 }
 
-.navds-form-field--s .navds-textarea--counter.navds-textarea__input {
+.navds-form-field--small .navds-textarea--counter.navds-textarea__input {
   padding-bottom: var(--navds-spacing-7);
 }
 

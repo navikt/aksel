@@ -48,7 +48,7 @@ export const All = () => {
       <CheckboxGroup
         legend="Mollit eiusmod"
         error="Boks nr 2 må være valgt"
-        size="s"
+        size="small"
       >
         <Checkbox value="Apple">Apple</Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>

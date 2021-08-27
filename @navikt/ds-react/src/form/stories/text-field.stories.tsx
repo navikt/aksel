@@ -28,7 +28,7 @@ export const All = () => {
       <h2>Sizing</h2>
 
       <TextField
-        size="s"
+        size="small"
         label="Laborum excepteur"
         description="Cillum mollit"
         error="TextField error"
