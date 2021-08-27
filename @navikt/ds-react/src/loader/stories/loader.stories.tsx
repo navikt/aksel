@@ -1,5 +1,5 @@
 import React from "react";
-import { Loader } from "../index";
+import { Loader } from "..";
 import { Button } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
