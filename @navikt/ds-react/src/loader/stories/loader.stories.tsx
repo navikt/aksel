@@ -1,6 +1,6 @@
 import React from "react";
 import { Loader } from "..";
-import { Button } from "../../index";
+import { Button } from "../..";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "ds-react/loader",
