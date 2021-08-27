@@ -1,0 +1,112 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { ProductHeader } from "../../index";
+import { illustrationPictogram } from "./pictogram";
+
+<Meta title="ds-react/product-header/intro" />
+
+# Hvordan ta i bruk ProductHeader
+
+Denne header-komponenten er utviklet i sammenheng med nye produktsider på NAV.
+
+```jsx
+<ProductHeader>
+  <ProductHeader.Wrapper>
+    <ProductHeader.Heading>Arbeidsavklaringspenger (AAP)</ProductHeader.Heading>
+    <ProductHeader.Description>
+      LABORIS AUTE DESERUNT ID Arbeidsavklaringspenger (AAP) EX ET CUPIDATAT
+      CONSEQUAT DOLORE.
+    </ProductHeader.Description>
+  </ProductHeader.Wrapper>
+</ProductHeader>
+```
+
+<Canvas>
+  <ProductHeader>
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+</Canvas>
+
+## Med illustrasjon
+
+Illustrasjonene brukt i header er "Pictogram" som er designet for den sepsifikke siden og
+man skal da ikke bare velge et fra figma vilkårlig.
+
+<Canvas>
+  <ProductHeader>
+    <ProductHeader.Illustration>
+      {illustrationPictogram}
+    </ProductHeader.Illustration>
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+</Canvas>
+
+## Temaer
+
+Headeren kommer i tre tema: `guide`, `product` og `situation`
+
+<Canvas>
+  <ProductHeader theme="guide">
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+  <ProductHeader theme="product">
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+  <ProductHeader theme="situation">
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+</Canvas>
+
+## Sentrert
+
+Innhold kan sentreres med `variant="center"`-prop
+
+<Canvas>
+  <ProductHeader variant="center">
+    <ProductHeader.Illustration>
+      {illustrationPictogram}
+    </ProductHeader.Illustration>
+    <ProductHeader.Wrapper>
+      <ProductHeader.Heading>
+        Arbeidsavklaringspenger (AAP)
+      </ProductHeader.Heading>
+      <ProductHeader.Description>
+        PENGESTØTTE OG OPPFØLGING
+      </ProductHeader.Description>
+    </ProductHeader.Wrapper>
+  </ProductHeader>
+</Canvas>

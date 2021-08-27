@@ -9,16 +9,15 @@ import ProductHeaderHeading, {
 import ProductHeaderDescription, {
   ProductHeaderDescriptionType,
 } from "./ProductHeaderDescription";
+import ProductHeaderWrapper, {
+  ProductHeaderWrapperType,
+} from "./ProductHeaderWrapper";
 
 export interface ProductHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * ProductHeader content
    */
-  children: string;
-  /**
-   * Short text placed under title
-   */
-  description?: string;
+  children: React.ReactNode;
   /**
    * Decides how to align content
    * @default "left"
@@ -38,18 +37,12 @@ interface ProductHeaderComponent
   Illustration: ProductHeaderIllustrationType;
   Heading: ProductHeaderHeadingType;
   Description: ProductHeaderDescriptionType;
+  Wrapper: ProductHeaderWrapperType;
 }
 
 const ProductHeader = forwardRef<HTMLDivElement, ProductHeaderProps>(
   (
-    {
-      children,
-      className,
-      description,
-      theme = "guide",
-      variant = "left",
-      ...rest
-    },
+    { children, className, theme = "guide", variant = "left", ...rest },
     ref
   ) => {
     return (
@@ -63,7 +56,7 @@ const ProductHeader = forwardRef<HTMLDivElement, ProductHeaderProps>(
         )}
         {...rest}
       >
-        <div className="navds-product-header__wrapper"></div>
+        {children}
       </div>
     );
   }
@@ -72,5 +65,6 @@ const ProductHeader = forwardRef<HTMLDivElement, ProductHeaderProps>(
 ProductHeader.Illustration = ProductHeaderIllustration;
 ProductHeader.Heading = ProductHeaderHeading;
 ProductHeader.Description = ProductHeaderDescription;
+ProductHeader.Wrapper = ProductHeaderWrapper;
 
 export default ProductHeader;
