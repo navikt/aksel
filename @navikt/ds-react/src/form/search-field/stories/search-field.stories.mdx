@@ -142,7 +142,7 @@ true/false for å kontrollere dette.
 ```jsx
 <SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
   <SearchFieldInput value={value} onChange={(e) => setValue(e.target.value)} />
-  <SearchFieldClearButton onClick={() => setValue("")}>
+  <SearchFieldClearButton onClick={() => setValue("")} visible={!!value}>
     <Close /> Tøm
   </SearchFieldClearButton>
   <SearchFieldButton>

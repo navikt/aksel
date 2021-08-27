@@ -11,16 +11,12 @@ export const Example = ({ size = "medium" }: { size: "medium" | "small" }) => {
   const [value, setValue] = useState("");
 
   return (
-    <SearchField
-      size={size}
-      label="Mollit eiusmod"
-      description="Ea cupidatat eu sunt commodo"
-    >
+    <SearchField size={size} label="Skriv i søkefeltet for å vise clearbutton">
       <SearchFieldInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <SearchFieldClearButton onClick={() => setValue("")}>
+      <SearchFieldClearButton onClick={() => setValue("")} visible={!!value}>
         <Close />
         Tøm
       </SearchFieldClearButton>
