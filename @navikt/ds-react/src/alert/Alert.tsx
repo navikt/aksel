@@ -6,7 +6,7 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import { BodyLong } from "../";
+import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
