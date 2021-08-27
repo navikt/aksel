@@ -1,9 +1,5 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import {
-  AccordionMenu,
-  AccordionMenuItem,
-  AccordionMenuCollapsable,
-} from "../../index";
+import { AccordionMenu } from "../../index";
 
 <Meta title="ds-react/accordion-menu/intro" />
 
@@ -11,55 +7,59 @@ import {
 
 ```jsx
 <AccordionMenu>
-  <AccordionMenuItem href="#leo">Leo</AccordionMenuItem>
-  <AccordionMenuCollapsable title="Proin">
-    <AccordionMenuItem href="#nulla" active>
+  <AccordionMenu.item href="#leo">Leo</AccordionMenu.item>
+  <AccordionMenu.Collapsable title="Proin">
+    <AccordionMenu.item href="#nulla" active>
       Nulla
-    </AccordionMenuItem>
-    <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
-  </AccordionMenuCollapsable>
-  <AccordionMenuCollapsable title="Accumsan">
-    <AccordionMenuItem href="#justo" aria-current="page">
+    </AccordionMenu.item>
+    <AccordionMenu.item href="#luctus">Luctus</AccordionMenu.item>
+  </AccordionMenu.Collapsable>
+  <AccordionMenu.Collapsable title="Accumsan">
+    <AccordionMenu.item href="#justo" aria-current="page">
       Justo
-    </AccordionMenuItem>
-    <AccordionMenuCollapsable title="Proin">
-      <AccordionMenuItem href="#nulla">Nulla</AccordionMenuItem>
-      <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
-    </AccordionMenuCollapsable>
-  </AccordionMenuCollapsable>
+    </AccordionMenu.item>
+    <AccordionMenu.Collapsable title="Proin">
+      <AccordionMenu.item href="#nulla">Nulla</AccordionMenu.item>
+      <AccordionMenu.item href="#luctus">Luctus</AccordionMenu.item>
+    </AccordionMenu.Collapsable>
+  </AccordionMenu.Collapsable>
 </AccordionMenu>
 ```
 
 <Canvas>
   <AccordionMenu>
-    <AccordionMenuItem href="#leo">Leo</AccordionMenuItem>
-    <AccordionMenuCollapsable title="Proin">
-      <AccordionMenuItem href="#nulla" active>
+    <AccordionMenu.Item href="#leo">Leo</AccordionMenu.Item>
+    <AccordionMenu.Collapsable title="Proin">
+      <AccordionMenu.Item href="#nulla" active>
         Nulla
-      </AccordionMenuItem>
-      <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
-    </AccordionMenuCollapsable>
-    <AccordionMenuCollapsable title="Accumsan">
-      <AccordionMenuItem href="#justo" aria-current="page">
+      </AccordionMenu.Item>
+      <AccordionMenu.Item href="#luctus">Luctus</AccordionMenu.Item>
+    </AccordionMenu.Collapsable>
+    <AccordionMenu.Collapsable title="Accumsan">
+      <AccordionMenu.Item href="#justo" aria-current="page">
         Justo
-      </AccordionMenuItem>
-      <AccordionMenuCollapsable title="Proin">
-        <AccordionMenuItem href="#nulla">Nulla</AccordionMenuItem>
-        <AccordionMenuItem href="#luctus">Luctus</AccordionMenuItem>
-      </AccordionMenuCollapsable>
-    </AccordionMenuCollapsable>
+      </AccordionMenu.Item>
+      <AccordionMenu.Collapsable title="Proin">
+        <AccordionMenu.Item href="#nulla">Nulla</AccordionMenu.Item>
+        <AccordionMenu.Item href="#luctus">Luctus</AccordionMenu.Item>
+      </AccordionMenu.Collapsable>
+    </AccordionMenu.Collapsable>
   </AccordionMenu>
 </Canvas>
 
-Accordion-menu støtter opp til maks to-nivårer av `AccordionMenuCollapsable` akkurat nå.
+Accordion-menu støtter opp til maks to-nivårer av `AccordionMenu.Collapsable` akkurat nå.
 
-`AccordionMenuItem` er implementert med `OverridableComponent`, noe som
+`AccordionMenu.Item` er implementert med `OverridableComponent`, noe som
 gjør at man kan ta i bruk eks react-router slik:
 
 ```jsx
-<Item as={NavLink} activeClassName="navds-accordion-menu-item--active" to="/1">
+<AccordionMenu.item
+  as={NavLink}
+  activeClassName="navds-accordion-menu-item--active"
+  to="/1"
+>
   Lenketekst
-</Item>
+</AccordionMenu.item>
 ```
 
 Her er `NavLink` fra `react-router-dom` brukt, og man får da

@@ -5,13 +5,19 @@ import cl from "classnames";
 export interface AccordionMenuItemProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
+  /**
+   * Sets active styling if true
+   * @default false
+   */
   active?: boolean;
 }
 
-const AccordionMenuItem: OverridableComponent<
+export type AccordionMenuItemType = OverridableComponent<
   AccordionMenuItemProps,
   HTMLAnchorElement
-> = forwardRef(
+>;
+
+const Item: AccordionMenuItemType = forwardRef(
   (
     { children, as: Component = "a", active = false, className, ...rest },
     ref
@@ -30,4 +36,4 @@ const AccordionMenuItem: OverridableComponent<
   }
 );
 
-export default AccordionMenuItem;
+export default Item;
