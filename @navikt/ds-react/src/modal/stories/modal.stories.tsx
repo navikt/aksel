@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Modal } from "../index";
+import React, { useRef, useState } from "react";
+import { Modal, Popover } from "../..";
 
 export default {
   title: "ds-react/modal",
@@ -7,6 +7,27 @@ export default {
 };
 
 Modal.setAppElement("#root");
+
+export const ZIndex = () => {
+  const [anchor, setAnchor] = useState<HTMLButtonElement>();
+  const [anchor2, setAnchor2] = useState<HTMLButtonElement>();
+
+  return (
+    <>
+      <button ref={(el) => setAnchor(el)}></button>
+      <Popover open onClose={() => {}} anchorEl={anchor}>
+        {new Array(100).fill("Popover ")}
+      </Popover>
+      <Modal open onClose={() => {}}>
+        {new Array(100).fill("Modal ")}
+        <button ref={(el) => setAnchor2(el)}></button>
+        <Popover open onClose={() => {}} anchorEl={anchor2}>
+          {new Array(100).fill("Popover ")}
+        </Popover>
+      </Modal>
+    </>
+  );
+};
 
 export const All = () => {
   const [open, setOpen] = useState(true);
