@@ -9,7 +9,6 @@
   position: relative;
   overflow: auto;
   max-height: 100%;
-  z-index: var(--navds-z-index-modal-content);
 }
 
 .navds-modal__content {
@@ -24,7 +23,7 @@
 
 .navds-modal__overlay {
   position: fixed;
-  z-index: var(--navds-z-index-modal-overlay);
+  z-index: var(--navds-z-index-modal);
   top: 0;
   bottom: 0;
   left: 0;
