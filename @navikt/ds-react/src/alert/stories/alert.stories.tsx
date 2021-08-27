@@ -28,7 +28,26 @@ export const All = () => {
       <h2>Small</h2>
       <div>
         {variants.map((variant) => (
-          <Alert key={variant} variant={variant} size="s">
+          <Alert key={variant} variant={variant} size="small">
+            Exercitation enim nisi veniam nostrud Lorem ipsum ea fugiat. Aute
+            exercitation voluptate proident sit ex reprehenderit quis ex ut
+            mollit.
+          </Alert>
+        ))}
+      </div>
+      <h2>Alert fullWidth</h2>
+      {variants.map((variant) => (
+        <Alert fullWidth key={variant} variant={variant}>
+          Id elit esse enim reprehenderit.Tempor tempor ex exercitation id aute
+          eu.Laborum nulla nisi irure voluptate mollit fugiat.Est quis culpa
+          nostrud et reprehenderit ea sint.Eu veniam labore enim labore qui
+          eiusmod Lorem amet ad esse.
+        </Alert>
+      ))}
+      <h2>Small</h2>
+      <div>
+        {variants.map((variant) => (
+          <Alert fullWidth key={variant} variant={variant} size="small">
             Exercitation enim nisi veniam nostrud Lorem ipsum ea fugiat. Aute
             exercitation voluptate proident sit ex reprehenderit quis ex ut
             mollit.
