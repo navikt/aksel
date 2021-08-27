@@ -59,7 +59,7 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
         preserveAspectRatio="xMidYMid"
         {...rest}
       >
-        <title id={id ?? "loader-" + internalId}>{title}</title>
+        <title id={id ?? `loader-${internalId}`}>{title}</title>
         <circle
           className="navds-loader__background"
           xmlns="http://www.w3.org/2000/svg"
