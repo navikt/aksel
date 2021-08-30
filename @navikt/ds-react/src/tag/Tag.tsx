@@ -1,6 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { Detail } from "../";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
