@@ -61,7 +61,7 @@ const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
       >
         <Guide
           {...guideProps}
-          size={poster ? "m" : "s"}
+          size={poster ? "medium" : "small"}
           illustration={illustration}
           color={color}
         />

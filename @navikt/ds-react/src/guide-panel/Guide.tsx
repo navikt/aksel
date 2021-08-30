@@ -26,7 +26,7 @@ export interface GuideProps
    * Predefined size properties for illustration
    * @default "m"
    */
-  size?: "s" | "m" | "l" | "xl";
+  size?: "small" | "medium" | "large" | "xlarge";
   /**
    * Change color of illustration background
    * Is set with inline style, so css-variables can be used
@@ -42,7 +42,7 @@ const Guide = forwardRef<HTMLDivElement, GuideProps>(
       noMask = false,
       transparent = false,
       illustration,
-      size = "m",
+      size = "medium",
       color,
       ...rest
     },

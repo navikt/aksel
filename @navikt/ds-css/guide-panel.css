@@ -83,26 +83,26 @@
 }
 
 /* Illustration sizes */
-.navds-guide__illustration--s {
+.navds-guide__illustration--small {
   height: 5rem;
   width: 5rem;
 }
 
-.navds-guide__illustration--s ~ .navds-guide__speech-bubble--floating {
+.navds-guide__illustration--small ~ .navds-guide__speech-bubble--floating {
   bottom: 5rem;
 }
 
-.navds-guide__illustration--m {
+.navds-guide__illustration--medium {
   height: 6.25rem;
   width: 6.25rem;
 }
 
-.navds-guide__illustration--l {
+.navds-guide__illustration--large {
   height: 10rem;
   width: 10rem;
 }
 
-.navds-guide__illustration--xl {
+.navds-guide__illustration--xlarge {
   height: 15rem;
   width: 15rem;
 }
