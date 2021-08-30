@@ -1,0 +1,132 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="ds-react/Migration" />
+
+TODO: Overridablecomp button, optional href link, legge tilbake ContentContainer, style LinkPanel bedre
+
+# Migrering til ds-react og ds-css v0.8.0
+
+Denne guiden vil være til hjelp for de som allerede har begynt å ta i bruk de nye pakkene våre tidligere enn v0.8.0.
+For de som ikke har begynt å ta i bruk pakkene kan man se bort fra denne.
+
+Fra versjon v0.7 til v0.8 er det komment flere store endringer både i ds-react og ds-css. For å lettere
+oppdatere til v0.8 har vi da laget en liten guide som forklarer de største endringene. Hvis du vil se alle endringene
+kan man sjekke [denne PR en ](https://github.com/navikt/nav-frontend-moduler/pull/1213)
+
+## Styling
+
+De fleste komponenter har fått diverse småjustering på styling. Anbefales da å ta en rask sjekk om alt fortsatt stemmer
+etter oppdateringen.
+
+## Sizing
+
+Alle komponenter som tidligere var implementert med `size`-prop har fått oppdatert
+typene fra "xs", "s", "m", "l", "xl", "2xl" -> "xsmall", "small", "medium", "large", "xlarge", "2xlarge".
+
+Dette betyr også at stylingen er eks endret fra `.navds-body-short--s` -> `.navds-body-short--small`
+
+## Overridable component
+
+Komponenter som tidligere implementerte ovveridable component med bruk av `component`-prop bruker nå `as`.
+
+```jsx
+/* Før */
+<BodyShort component="span" />
+
+/* Etter */
+<BodyShort as="span" />
+```
+
+## Fjernet komponenter
+
+Fjernet disse komponente da de ikke var utdaterte/må ses mer på
+
+- ProductPageLayout
+- MicroCard
+- Header
+
+## AccordionMenu
+
+Implementert med dot-notation
+
+- Trenger bare importere AccordionMenu
+- AccordionMenuCollapsable -> AccordionMenu.Collapsable
+- AccordionMenuItem -> AccordionMenu.Item
+
+## Accordion
+
+Implementert med dot-notation
+
+- Trenger bare importere Accordion
+
+Fragmenterte komponenten:
+
+- Header -> Accordion.Header
+- children -> Accordion.Content
+
+La til prop: `defaultOpen`
+Antar komponenten er controlled hvis `open` prop er satt
+
+```jsx
+/* Før */
+<Accordion heading="tittel" open={open} onClick={(e) => setOpen(!open)}>
+  Eu magna fugiat officia
+</Accordion>
+
+/* Etter */
+<Accordion open={open}>
+  <Accordion.Header onClick={(e) => setOpen(!open)}>
+    tittel
+  </Accordion.Header>
+  <Accordion.Content>
+    Magna aliquip aliquip fugiat nostrud
+  </Accordion.Content>
+</Accordion>
+```
+
+## Alert
+
+La til `fullWidth`-prop for alert uten border-radius og width 100%
+
+## Button
+
+Oppdatert med Overridablecomponent.
+
+Håndtering av sentrering, margins er oppdatert. Trenger ikke wrappe tekst med `span` når man skal bruke ikoner lengre.
+
+## CopyToClipboard
+
+Ekstender nå ButtonProps, slik at man eks kan ta i bruk `size`-proppen
+
+`text`-prop -> `copyText`
+`label`-prop -> `popoverText`
+
+Fjernet `icon`-prop, la til `popoverPlacement`
+
+## Modal
+
+Implementert med dot-notasjon
+
+Innholds-padding er flyttet fra Modal -> Modal.Content
+
+```
+/* Før */
+<Modal>Modal innhold</Modal>
+
+/* Etter */
+<Modal><Modal.Content>Modal innhold</Modal.Content></Modal>
+```
+
+## Popover
+
+Implementert med dot-notasjon
+
+Får nå padding rundt innhold med Popover.Content
+
+```
+/* Før */
+<Popover>Popover innhold</Popover>
+
+/* Etter */
+<Popover><Popover.Content>Modal innhold</Popover.Content></Popover>
+```
