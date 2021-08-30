@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyShort } from "../";
+import { BodyShort, OverridableComponent } from "../";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,12 +26,19 @@ export interface ButtonProps
   disabled?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
   (
-    { variant = "primary", className, children, size = "medium", ...rest },
+    {
+      as: Component = "button",
+      variant = "primary",
+      className,
+      children,
+      size = "medium",
+      ...rest
+    },
     ref
   ) => (
-    <button
+    <Component
       ref={ref}
       className={cl(
         className,
@@ -44,7 +51,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <BodyShort as="span" className="navds-button__inner" size={size}>
         {children}
       </BodyShort>
-    </button>
+    </Component>
   )
 );
 
