@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
+import { OverridableComponent } from "..";
 
 export interface LinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -13,17 +14,17 @@ export interface LinkProps
   href: string;
 }
 
-const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ children, className, href, ...rest }, ref) => {
+const Link: OverridableComponent<LinkProps, HTMLAnchorElement> = forwardRef(
+  ({ children, as: Component = "a", className, href, ...rest }, ref) => {
     return (
-      <a
+      <Component
         ref={ref}
         href={href}
         className={cl("navds-link", className)}
         {...rest}
       >
         {children}
-      </a>
+      </Component>
     );
   }
 );

@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.navds-form-field--s .navds-search-field__input {
+.navds-form-field--small .navds-search-field__input {
   padding: 0.25rem;
   min-height: 32px;
 }
@@ -22,7 +22,7 @@
 }
 
 .navds-search-field__input-wrapper :focus {
-  z-index: 1;
+  z-index: var(--navds-z-index-focus);
 }
 
 .navds-search-field--error

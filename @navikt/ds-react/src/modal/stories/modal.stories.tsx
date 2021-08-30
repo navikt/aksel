@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal } from "../index";
+import { Modal, Popover } from "../..";
 
 export default {
   title: "ds-react/modal",
@@ -7,6 +7,27 @@ export default {
 };
 
 Modal.setAppElement("#root");
+
+export const ZIndex = () => {
+  const [anchor, setAnchor] = useState<HTMLButtonElement>();
+  const [anchor2, setAnchor2] = useState<HTMLButtonElement>();
+
+  return (
+    <>
+      <button ref={(el) => setAnchor(el)}></button>
+      <Popover open onClose={() => {}} anchorEl={anchor}>
+        {new Array(100).fill("Popover ")}
+      </Popover>
+      <Modal open onClose={() => {}}>
+        {new Array(100).fill("Modal ")}
+        <button ref={(el) => setAnchor2(el)}></button>
+        <Popover open onClose={() => {}} anchorEl={anchor2}>
+          {new Array(100).fill("Popover ")}
+        </Popover>
+      </Modal>
+    </>
+  );
+};
 
 export const All = () => {
   const [open, setOpen] = useState(true);
@@ -16,17 +37,12 @@ export const All = () => {
     <>
       <button onClick={() => setOpen(true)}>Open modal</button>
       <Modal open={open} onClose={() => setOpen(false)}>
-        <h1>Header</h1>
-        <h2>subheader</h2>
-        <p>
-          Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
-          laboris ea ex aliquip. Dolore dolore reprehenderit sint esse commodo
-          aliqua cupidatat incididunt proident laborum qui. Officia fugiat non
-          anim cupidatat. Adipisicing ut aliqua cillum nulla elit. Mollit et id
-          duis cupidatat labore magna consectetur et veniam tempor. In minim
-          exercitation id irure velit sit dolor aliquip velit esse. Excepteur
-          sint non minim nulla excepteur labore non magna eu.
-        </p>
+        <Modal.Content>
+          <h1>Header</h1>
+          <h2>subheader</h2>
+          <p>Cupidatat irure ipsum veniam ad in esse.</p>
+          <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
+        </Modal.Content>
       </Modal>
 
       <button onClick={() => setOpenTwo(true)}>
@@ -37,17 +53,19 @@ export const All = () => {
         open={openTwo}
         onClose={() => setOpenTwo(false)}
       >
-        <h1>Header</h1>
-        <h2>subheader</h2>
-        <p>
-          Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
-          laboris ea ex aliquip. Dolore dolore reprehenderit sint esse commodo
-          aliqua cupidatat incididunt proident laborum qui. Officia fugiat non
-          anim cupidatat. Adipisicing ut aliqua cillum nulla elit. Mollit et id
-          duis cupidatat labore magna consectetur et veniam tempor. In minim
-          exercitation id irure velit sit dolor aliquip velit esse. Excepteur
-          sint non minim nulla excepteur labore non magna eu.
-        </p>
+        <Modal.Content>
+          <h1>Header</h1>
+          <h2>subheader</h2>
+          <p>
+            Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
+            laboris ea ex aliquip. Dolore dolore reprehenderit sint esse commodo
+            aliqua cupidatat incididunt proident laborum qui. Officia fugiat non
+            anim cupidatat. Adipisicing ut aliqua cillum nulla elit. Mollit et
+            id duis cupidatat labore magna consectetur et veniam tempor. In
+            minim exercitation id irure velit sit dolor aliquip velit esse.
+            Excepteur sint non minim nulla excepteur labore non magna eu.
+          </p>
+        </Modal.Content>
       </Modal>
     </>
   );

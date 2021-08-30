@@ -6,30 +6,40 @@ import { Success } from "@navikt/ds-react";
 
 # Hvordan ta i bruk CopyToClipboard
 
-Innholdet i `text` vil da bli kopiert til clipboard, mens innholdet i `label`
-brukes i popovertekst og `sr-only` span som rendres hvis knappen ikke har noe tekstinnhold
-`sr-only` tekst blir da `Kopier ${label} (${text})`
+Innholdet i `copyText` vil bli kopiert til clipboard, mens innholdet i `popoverText`
+brukes i popover. Hvis komponenten ikke har noen children (tekst i button) vil da en "sr-only" tekst blie
+lagt på knappen med tekst "Kopier copyText"
 
 ```jsx
-<CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
-  Kopier Pi{" "}
+<CopyToClipboard popoverText={"Kopierte adresse"} copyText={"0660 OSLO"}>
+  Kopier adresse
 </CopyToClipboard>
 ```
 
 <Canvas>
-  <CopyToClipboard label={"Kopierte PI til clipboard"} text={"3.14"}>
-    Kopier Pi{" "}
+  <CopyToClipboard popoverText={"Kopiert adresse"} copyText={"0660 OSLO"}>
+    Kopier adresse
   </CopyToClipboard>
 </Canvas>
 
-## Custom ikon
-
-Man kan sette andre ikoner en `Copy` ved `icon`-proppen
+## Sizing
 
 ```jsx
 <CopyToClipboard
-  icon={<Link />}
-  label={"Kopierte PI til clipboard"}
-  text={"3.14"}
-/>
+  popoverText={"Kopierte adressen"}
+  copyText={"0660 OSLO"}
+  size="small"
+>
+  Kopier adresse
+</CopyToClipboard>
 ```
+
+<Canvas>
+  <CopyToClipboard
+    popoverText={"Kopierte adressen"}
+    copyText={"0660 OSLO"}
+    size="small"
+  >
+    Kopier adresse
+  </CopyToClipboard>
+</Canvas>

@@ -5,11 +5,11 @@ import { Label } from "..";
 const ErrorMessage = (props) => (
   <Label
     {...props}
-    component="div"
+    as="div"
     className={cl(
       "navds-error-message",
       props.className,
-      `navds-error-message--${props.size ?? "m"}`
+      `navds-error-message--${props.size ?? "medium"}`
     )}
   />
 );
