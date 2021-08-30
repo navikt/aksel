@@ -160,10 +160,7 @@ class Input extends React.Component<InputProps> {
   /**
    * Referanse til selve inputfeltet. Brukes for eksempel til å sette fokus
    */
-  inputRef: PT.oneOfType([
-    PT.func,
-    PT.shape({ current: PT.instanceOf(Element) }),
-  ]),
+  inputRef: PT.oneOfType([PT.func, PT.shape({ current: PT.any })]),
   /**
    * Classname som blir satt på komponentwrapperen
    */
