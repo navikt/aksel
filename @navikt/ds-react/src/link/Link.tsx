@@ -11,7 +11,7 @@ export interface LinkProps
   /**
    * Link anchor should direct to
    */
-  href: string;
+  href?: string;
 }
 
 const Link: OverridableComponent<LinkProps, HTMLAnchorElement> = forwardRef(
