@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-toggle",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "license": "MIT",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "classnames": "^2.2.5",
     "nav-frontend-js-utils": "^1.0.19",
-    "nav-frontend-toggle-style": "^2.1.0",
+    "nav-frontend-toggle-style": "^2.1.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0"
   }
