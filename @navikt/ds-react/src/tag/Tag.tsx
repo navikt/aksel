@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { BodyShort, Detail } from "..";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -20,21 +21,20 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 
 const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ className, variant, size = "medium", ...rest }, ref) => {
+    const Component = size === "medium" ? BodyShort : Detail;
+
     return (
-      <span
+      <Component
+        {...rest}
         ref={ref}
+        as="span"
+        size={size}
         className={cl(
           "navds-tag",
           className,
           `navds-tag--${variant}`,
-          `navds-tag--${size}`,
-          {
-            "navds-body-short": size === "medium",
-            "navds-detail": size === "small",
-            "navds-detail--small": size === "small",
-          }
+          `navds-tag--${size}`
         )}
-        {...rest}
       />
     );
   }
