@@ -3,7 +3,12 @@ import cl from "classnames";
 import { OverridableComponent } from "..";
 
 export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {}
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * Link text
+   */
+  children: React.ReactNode;
+}
 
 const Link: OverridableComponent<
   LinkProps,
