@@ -12,7 +12,8 @@
 
 .navds-tag--small {
   min-height: 24px;
-  padding: 0.125rem var(--navds-spacing-1);
+  padding-right: var(--navds-spacing-1);
+  padding-left: var(--navds-spacing-1);
 }
 
 .navds-tag--error {
