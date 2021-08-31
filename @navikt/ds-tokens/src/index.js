@@ -144,7 +144,7 @@ module.exports = {
         },
       },
       size: {
-        title: {
+        heading: {
           "2xl": { value: getFontSize(40) },
           xl: { value: getFontSize(32) },
           l: { value: getFontSize(28) },

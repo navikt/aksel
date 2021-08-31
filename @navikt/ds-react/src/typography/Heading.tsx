@@ -40,7 +40,7 @@ const Title: OverridableComponent<TitleProps, HTMLHeadingElement> = forwardRef(
       <HeadingTag
         {...rest}
         ref={ref}
-        className={cl(className, "navds-title", `navds-title--${size}`, {
+        className={cl(className, "navds-heading", `navds-heading--${size}`, {
           "navds-typo--spacing": !!spacing,
         })}
       >
