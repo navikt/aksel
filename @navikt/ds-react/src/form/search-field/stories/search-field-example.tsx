@@ -7,24 +7,23 @@ import {
   SearchFieldClearButton,
 } from "../index";
 
-export const Example = () => {
+export const Example = ({ size = "medium" }: { size: "medium" | "small" }) => {
   const [value, setValue] = useState("");
 
   return (
-    <SearchField
-      label="Mollit eiusmod"
-      description="Ea cupidatat eu sunt commodo"
-    >
+    <SearchField size={size} label="Skriv i søkefeltet for å vise clearbutton">
       <SearchFieldInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <SearchFieldClearButton onClick={() => setValue("")}>
-        <Close />
-        <span>Tøm</span>
-      </SearchFieldClearButton>
+      {!!value && (
+        <SearchFieldClearButton onClick={() => setValue("")}>
+          <Close />
+          Tøm
+        </SearchFieldClearButton>
+      )}
       <SearchFieldButton>
-        <Search /> <span>Søk</span>
+        <Search /> Søk
       </SearchFieldButton>
     </SearchField>
   );
