@@ -3,7 +3,7 @@ name: Update-PR
 on:
   pull_request:
     branches:
-      - Master
+      - master
   workflow_dispatch:
 
 jobs:
