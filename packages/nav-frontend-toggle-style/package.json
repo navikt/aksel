@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-toggle-style",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "main": "src/toggle-style.less",
   "license": "MIT",
   "files": [
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "nav-frontend-core": "^6.0.1",
-    "nav-frontend-knapper-style": "^2.0.2",
+    "nav-frontend-knapper-style": "^2.1.0",
     "nav-frontend-typografi-style": "^2.0.1"
   }
 }

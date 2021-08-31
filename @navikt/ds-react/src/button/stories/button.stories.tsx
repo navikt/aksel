@@ -29,6 +29,13 @@ const variants: Array<"primary" | "secondary" | "action" | "danger"> = [
   "danger",
 ];
 
+const varSwitch = {
+  primary: "Primary",
+  secondary: "Secondary",
+  action: "Action",
+  danger: "Danger",
+};
+
 export const All = () => {
   return (
     <>
@@ -36,7 +43,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -44,7 +51,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} disabled>
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -56,7 +63,7 @@ export const All = () => {
             className={`navds-button navds-button--${variant} navds-body-short`}
             href="the-link"
           >
-            {variant}
+            {varSwitch[variant]}
           </a>
         ))}
       </Section>
@@ -64,7 +71,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="s">
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -72,7 +79,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            <span>{variant}</span> <Success />
+            <span>{varSwitch[variant]}</span> <Success />
           </Button>
         ))}
       </Section>
@@ -80,7 +87,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="s">
-            <Success /> <span>{variant}</span>
+            <Success /> <span>{varSwitch[variant]}</span>
           </Button>
         ))}
       </Section>
