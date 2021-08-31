@@ -51,6 +51,18 @@ async function run() {
       return;
     }
 
+    let chromatic;
+    try {
+      chromatic = execSync(`yarn chromatic --exit-zero-on-changes`);
+    } catch (e) {
+      console.error(error.message);
+      return;
+    }
+
+    const storybook = chromatic
+      .toString()
+      .match(/((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)/)[0];
+
     const { data } = await octokit.rest.issues.listComments({
       ...github.context.repo,
       issue_number: github.context.payload.pull_request.number,
@@ -75,6 +87,8 @@ async function run() {
     changes.forEach((x) => {
       prText = `${prText} - ${x}\n`;
     });
+
+    prText = `${prText} ### Se bygg på chromatic ${storybook}\n`;
 
     await octokit.rest.issues.createComment({
       ...github.context.repo,
