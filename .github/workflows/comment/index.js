@@ -31,7 +31,7 @@ async function run() {
         return;
     }
     try {
-      execSync("git checkout main");
+      execSync("git checkout master");
       execSync(`git fetch  origin ${ref}`);
       output = execSync(`yarn lerna version ${version} --no-push`, {
         input: "n",
