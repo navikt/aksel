@@ -14,45 +14,31 @@ export interface SearchFieldClearButtonProps extends Omit<ButtonProps, "size"> {
    * @default "primary"
    */
   variant?: "primary" | "action";
-  /**
-   * Toggles rendering of button
-   * @default true
-   */
-  visible?: boolean;
 }
 
 const SearchFieldClearButton = forwardRef<
   HTMLButtonElement,
   SearchFieldClearButtonProps
->(
-  (
-    { className, variant = "primary", disabled, visible = true, ...rest },
-    ref
-  ) => {
-    const searchField = useContext(SearchFieldContext);
+>(({ className, variant = "primary", disabled, ...rest }, ref) => {
+  const searchField = useContext(SearchFieldContext);
 
-    if (searchField === null) {
-      console.warn(
-        "SearchFieldClearButton has to be wrapped in <SearchField />"
-      );
-      return null;
-    }
-
-    const { size, inputProps } = searchField;
-
-    return (
-      <Button
-        ref={ref}
-        className={cl(className, "navds-search-field__clear-button", {
-          "navds-search-field__clear-button--visible": visible,
-        })}
-        {...rest}
-        size={size}
-        variant={variant}
-        disabled={disabled ?? inputProps?.disabled}
-      />
-    );
+  if (searchField === null) {
+    console.warn("SearchFieldClearButton has to be wrapped in <SearchField />");
+    return null;
   }
-);
+
+  const { size, inputProps } = searchField;
+
+  return (
+    <Button
+      ref={ref}
+      className={cl(className, "navds-search-field__clear-button")}
+      {...rest}
+      size={size}
+      variant={variant}
+      disabled={disabled ?? inputProps?.disabled}
+    />
+  );
+});
 
 export default SearchFieldClearButton;

@@ -16,10 +16,12 @@ export const Example = ({ size = "medium" }: { size: "medium" | "small" }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      <SearchFieldClearButton onClick={() => setValue("")} visible={!!value}>
-        <Close />
-        Tøm
-      </SearchFieldClearButton>
+      {!!value && (
+        <SearchFieldClearButton onClick={() => setValue("")}>
+          <Close />
+          Tøm
+        </SearchFieldClearButton>
+      )}
       <SearchFieldButton>
         <Search /> Søk
       </SearchFieldButton>
