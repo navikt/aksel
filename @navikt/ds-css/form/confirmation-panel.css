@@ -23,7 +23,7 @@
 }
 
 .navds-confirmation-panel--error {
-  background-color: #f3e3e3;
+  background-color: var(--navds-color-error-background);
   border: 1px solid transparent;
 }
 
