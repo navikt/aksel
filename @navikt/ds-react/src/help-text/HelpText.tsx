@@ -40,21 +40,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       open && popoverRef.current?.focus();
     }, [open]);
 
-    useEffect(() => {
-      const handleKeydown = (e: KeyboardEvent) => {
-        e.key === "ESC" && setOpen(false);
-        e.key === "Tab" &&
-          wrapperRef?.current &&
-          !wrapperRef.current.contains(document.activeElement) &&
-          setOpen(false);
-      };
-
-      window.addEventListener("keydown", handleKeydown, true);
-      return () => {
-        window.removeEventListener("keydown", handleKeydown, true);
-      };
-    }, []);
-
     const handleClick = (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
