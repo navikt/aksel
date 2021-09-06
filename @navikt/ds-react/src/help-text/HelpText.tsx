@@ -70,7 +70,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       rest.onClick && rest.onClick(e);
     };
 
-    console.log(title);
     return (
       <div className="navds-help-text" ref={wrapperRef}>
         <button
