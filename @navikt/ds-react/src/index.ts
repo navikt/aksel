@@ -5,6 +5,7 @@ export * from "./button";
 export * from "./copy-to-clipboard";
 export * from "./form";
 export * from "./grid";
+export * from "./help-text";
 export * from "./internal-header";
 export * from "./link";
 export * from "./link-panel";

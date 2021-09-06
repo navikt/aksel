@@ -113,6 +113,7 @@ class Hjelpetekst extends React.Component<HjelpetekstProps, State> {
           onRequestClose={this.togglePopover}
           orientering={type}
           role="tooltip"
+          tabIndex={0}
           {...popoverProps}
         >
           <div className="hjelpetekst__innhold">{this.props.children}</div>
