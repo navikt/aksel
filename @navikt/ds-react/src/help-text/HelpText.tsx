@@ -16,7 +16,6 @@ export interface HelpTextProps
    * @default "hjelp"
    */
   title?: string;
-  defaultOpen?: boolean;
   /**
    * Placement of popover
    * @default "top"
@@ -26,14 +25,7 @@ export interface HelpTextProps
 
 const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
-    {
-      className,
-      children,
-      defaultOpen = false,
-      placement = "top",
-      title = "hjelp",
-      ...rest
-    },
+    { className, children, placement = "top", title = "hjelp", ...rest },
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -41,7 +33,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const popoverRef = useRef<HTMLDivElement | null>(null);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
-    const [open, setOpen] = useState(defaultOpen);
+    const [open, setOpen] = useState(false);
     const popoverId = `popover-${useId()}`;
 
     useEffect(() => {
@@ -49,7 +41,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     }, [open]);
 
     useEffect(() => {
-      const handleKeydown = (e) => {
+      const handleKeydown = (e: KeyboardEvent) => {
         e.key === "ESC" && setOpen(false);
         e.key === "Tab" &&
           wrapperRef?.current &&
