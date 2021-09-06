@@ -27,12 +27,6 @@
   border: 1px solid transparent;
 }
 
-.navds-confirmation-panel--checked
-  > .navds-confirmation-panel__content
-  .navds-link:not(:focus) {
-  color: var(--navds-color-darkgray);
-}
-
 .navds-confirmation-panel
   .navds-checkbox__input:hover
   + .navds-checkbox__label {
