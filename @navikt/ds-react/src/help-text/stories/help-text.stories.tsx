@@ -24,7 +24,7 @@ export const All = () => {
       </BodyLong>
 
       <h2>HelpText defaultOpen</h2>
-      <HelpText title="show tooltip" defaultOpen>
+      <HelpText title="show tooltip">
         Id ullamco excepteur elit fugiat labore.
       </HelpText>
     </>
