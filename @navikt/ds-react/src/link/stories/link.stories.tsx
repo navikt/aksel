@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "../index";
+import { Alert } from "../..";
+import { Link } from "..";
 import { Add } from "@navikt/ds-icons";
 export default {
   title: "ds-react/link",
@@ -21,6 +22,18 @@ export const All = () => {
         <Add />
         <span>Dette er en tekstlenke </span>
       </Link>
+      <Alert variant="error">
+        Her er en <Link href="#about">lenke</Link> på farget bakgrunn
+      </Alert>
+      <Alert variant="info">
+        Her er en <Link href="#about">lenke</Link> på farget bakgrunn
+      </Alert>
+      <Alert variant="success">
+        Her er en <Link href="#about">lenke</Link> på farget bakgrunn
+      </Alert>
+      <Alert variant="warning">
+        Her er en <Link href="#about">lenke</Link> på farget bakgrunn
+      </Alert>
     </>
   );
 };

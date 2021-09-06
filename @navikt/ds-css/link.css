@@ -7,6 +7,14 @@
   gap: 0.25rem;
 }
 
+.navds-alert--error .navds-link {
+  color: var(--navds-color-text-primary);
+}
+
+.navds-alert--info .navds-link {
+  color: var(--navds-color-text-primary);
+}
+
 .navds-link:hover {
   text-decoration: none;
 }
