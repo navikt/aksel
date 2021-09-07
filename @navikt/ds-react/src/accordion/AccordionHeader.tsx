@@ -59,6 +59,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         <Expand
           focusable="false"
           role="img"
+          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl("navds-accordion__expand-icon", {
             "navds-accordion__expand-icon--flip": context.open,
           })}
@@ -66,6 +67,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         <ExpandFilled
           focusable="false"
           role="img"
+          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",
