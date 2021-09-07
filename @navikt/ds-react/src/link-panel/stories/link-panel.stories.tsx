@@ -24,7 +24,9 @@ export const All = () => (
       <LinkPanel.Title>
         Consectetur eu duis aliqua eu irure fugiat fugiat eu.
       </LinkPanel.Title>
-      <LinkPanel.Content>Aliqua id aliquip Lorem esse</LinkPanel.Content>
+      <LinkPanel.Description>
+        Aliqua id aliquip Lorem esse
+      </LinkPanel.Description>
     </LinkPanel>
 
     <h1>No border</h1>
@@ -41,10 +43,10 @@ export const All = () => (
         <LinkPanel.Title>
           Anim pariatur eiusmod deserunt elit cillum
         </LinkPanel.Title>
-        <LinkPanel.Content>
+        <LinkPanel.Description>
           Ex velit id voluptate labore irure ipsum exercitation sunt et id enim
           magna veniam consequat. id aliquip Lorem esse
-        </LinkPanel.Content>
+        </LinkPanel.Description>
       </div>
     </StyledLinkPanel>
   </>

@@ -32,3 +32,7 @@
 .navds-link-panel:focus-within > .navds-link-panel__chevron {
   transform: translateX(4px);
 }
+
+.navds-link-panel__description {
+  margin-top: var(--navds-spacing-2);
+}

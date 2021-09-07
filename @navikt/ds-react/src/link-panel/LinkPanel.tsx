@@ -3,7 +3,10 @@ import { Panel, OverridableComponent } from "..";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
 import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
-import { LinkPanelContent, LinkPanelContentType } from "./LinkPanelContent";
+import {
+  LinkPanelDescription,
+  LinkPanelDescriptionType,
+} from "./LinkPanelDescription";
 
 export interface LinkPanelProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -20,7 +23,7 @@ export interface LinkPanelProps
 interface LinkPanelComponentType
   extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
   Title: LinkPanelTitleType;
-  Content: LinkPanelContentType;
+  Content: LinkPanelDescriptionType;
 }
 
 const LinkPanelComponent: OverridableComponent<
@@ -49,6 +52,6 @@ const LinkPanelComponent: OverridableComponent<
 const LinkPanel = LinkPanelComponent as LinkPanelComponentType;
 
 LinkPanel.Title = LinkPanelTitle;
-LinkPanel.Content = LinkPanelContent;
+LinkPanel.Description = LinkPanelDescription;
 
 export default LinkPanel;
