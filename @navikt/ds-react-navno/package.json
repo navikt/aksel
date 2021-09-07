@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-navno",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": false,
   "description": "NAV designsystem react components for nav.no sites",
   "author": "NAV Designsystem team",
