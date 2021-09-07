@@ -20,8 +20,9 @@ const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
       <input
         {...rest}
         {...inputProps}
+        type="search"
+        role="searchbox"
         ref={ref}
-        type="text"
         className={cl(
           className,
           "navds-search-field__input",
