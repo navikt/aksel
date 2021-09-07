@@ -23,8 +23,6 @@
   width: 1.5rem;
   height: 1.5rem;
   transform: rotateZ(0deg);
-  flex-shrink: 0;
-  margin-left: var(--navds-spacing-4);
 }
 
 .navds-accordion__expand-icon--flip {
@@ -39,10 +37,11 @@
   width: 100%;
   margin-bottom: 0;
   cursor: pointer;
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
   border-bottom: 2px solid #a0a0a0;
+  display: grid;
+  grid-auto-flow: column;
+  gap: var(--navds-spacing-4);
+  align-items: center;
 }
 
 .navds-accordion__content {
