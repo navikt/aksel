@@ -1,5 +1,0 @@
-name: "Comment on PR"
-description: "Comment on PR with information about changes"
-runs:
-  using: "node12"
-  main: "index.js"
