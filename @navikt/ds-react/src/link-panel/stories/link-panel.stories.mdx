@@ -23,6 +23,30 @@ import { Illustration } from "./illustration";
   </LinkPanel>
 </Canvas>
 
+## Med description
+
+```jsx
+<LinkPanel href="#">
+  <LinkPanel.Title>
+    Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+  </LinkPanel.Title>
+  <LinkPanel.Description>
+    Velit mollit do commodo elit Lorem aliqua Lorem.
+  </LinkPanel.Description>
+</LinkPanel>
+```
+
+<Canvas>
+  <LinkPanel href="#">
+    <LinkPanel.Title>
+      Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+    </LinkPanel.Title>
+    <LinkPanel.Description>
+      Velit mollit do commodo elit Lorem aliqua Lorem.
+    </LinkPanel.Description>
+  </LinkPanel>
+</Canvas>
+
 ## Uten border
 
 ```jsx
@@ -44,23 +68,43 @@ import { Illustration } from "./illustration";
 ## Custom styling
 
 ```jsx
-<LinkPanel href="#" style={{ textDecoration: "none" }}>
-  {Illustration}
-  <div>
-    <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
-    <LinkPanel.Description>Aliqua id aliquip Lorem esse</LinkPanel.Description>
+<LinkPanel href="#">
+  <div
+    style={{
+      display: "grid",
+      gridAutoFlow: "column",
+      gap: "var(--navds-spacing-8)",
+      alignItems: "center",
+    }}
+  >
+    {Illustration}
+    <div>
+      <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
+      <LinkPanel.Description>
+        Aliqua id aliquip Lorem esse
+      </LinkPanel.Description>
+    </div>
   </div>
 </LinkPanel>
 ```
 
 <Canvas>
-  <LinkPanel href="#" style={{ textDecoration: "none" }}>
-    {Illustration}
-    <span>
-      <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
-      <LinkPanel.Description>
-        Aliqua id aliquip Lorem esse
-      </LinkPanel.Description>
-    </span>
+  <LinkPanel href="#">
+    <div
+      style={{
+        display: "grid",
+        gridAutoFlow: "column",
+        gap: "var(--navds-spacing-8)",
+        alignItems: "center",
+      }}
+    >
+      {Illustration}
+      <div>
+        <LinkPanel.Title>Consectetur eu duis aliqua</LinkPanel.Title>
+        <LinkPanel.Description>
+          Aliqua id aliquip Lorem esse
+        </LinkPanel.Description>
+      </div>
+    </div>
   </LinkPanel>
 </Canvas>
