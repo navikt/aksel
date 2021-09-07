@@ -39,11 +39,19 @@ Komponenter som tidligere implementerte ovveridable component med bruk av `compo
 
 ## Fjernet komponenter
 
-Fjernet disse komponente da de ikke var utdaterte/må ses mer på
+Fjernet da den var utdaterte/må ses mer på
 
 - ProductPageLayout
+
+## Flyttet komponenter
+
+Vi har valgt å legge disse komponentenen i en egen pakke da de skiller seg for mye ut fra "kjernebiblioteket"
+og vi ønsker å ha et tydeligere skille.
+
 - MicroCard
 - Header
+
+Disse ligger nå i en egen pakke som heter `@navikt/ds-react-navno`.
 
 ## AccordionMenu
 
@@ -57,30 +65,45 @@ Implementert med dot-notation
 
 Implementert med dot-notation
 
-- Trenger bare importere Accordion
+- Trenger bare importere Accordion nå
 
 Fragmenterte komponenten:
 
+- Accordion -> Accordion.Item
 - Header -> Accordion.Header
 - children -> Accordion.Content
 
-La til prop: `defaultOpen`
-Antar komponenten er controlled hvis `open` prop er satt
+La til prop: `defaultOpen` på `Accordion.Item`
 
 ```jsx
 /* Før */
-<Accordion heading="tittel" open={open} onClick={(e) => setOpen(!open)}>
+<Accordion heading="tittel" open={open} onClick={(open) => setOpen(!open)}>
+  Eu magna fugiat officia
+</Accordion>
+<Accordion heading="tittel2" open={open2} onClick={(open2) => setOpen(!open2)}>
   Eu magna fugiat officia
 </Accordion>
 
 /* Etter */
-<Accordion open={open}>
-  <Accordion.Header onClick={(e) => setOpen(!open)}>
-    tittel
-  </Accordion.Header>
-  <Accordion.Content>
-    Magna aliquip aliquip fugiat nostrud
-  </Accordion.Content>
+<Accordion>
+  <Accordion.Item open={open}>
+    <Accordion.Header onClick={(open) => setOpen(!open)}>
+      Accordion header text
+    </Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit
+    </Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item open={open2}>
+    <Accordion.Header onClick={(open2) => setOpen(!open2)}>
+      Accordion header text
+    </Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit
+    </Accordion.Content>
+  </Accordion.Item>
 </Accordion>
 ```
 
