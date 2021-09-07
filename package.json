@@ -34,6 +34,7 @@
     "@navikt/ds-css",
     "@navikt/ds-css/*",
     "@navikt/ds-react",
+    "@navikt/ds-react-navno",
     "@navikt/ds-icons",
     "@navikt/ds-tokens",
     "utilities/build/from-git-fix"
