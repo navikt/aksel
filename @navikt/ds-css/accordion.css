@@ -20,14 +20,14 @@
 }
 
 .navds-accordion__expand-icon {
-  width: 1.25em;
-  height: 1.25em;
+  width: 1.5rem;
+  height: 1.5rem;
   transform: rotateZ(0deg);
   flex-shrink: 0;
   margin-left: var(--navds-spacing-4);
 }
 
-.navds-accordion__expand-icon--up {
+.navds-accordion__expand-icon--flip {
   transform: rotateZ(-180deg);
 }
 

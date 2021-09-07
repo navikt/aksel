@@ -45,18 +45,21 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
       <svg
         aria-labelledby={internalId}
         ref={ref}
-        className={cl("navds-loader", className, `navds-loader--${size}`, {
-          "navds-loader--transparent": transparent,
-          "navds-loader--neutral": variant === "neutral",
-          "navds-loader--interaction": variant === "interaction",
-          "navds-loader--inverted": variant === "inverted",
-        })}
+        className={cl(
+          "navds-loader",
+          className,
+          `navds-loader--${size}`,
+          `navds-loader--${variant}`,
+          {
+            "navds-loader--transparent": transparent,
+          }
+        )}
         focusable="false"
         viewBox="0 0 50 50"
         preserveAspectRatio="xMidYMid"
         {...rest}
       >
-        <title id={internalId}>{title}</title>
+        <title id={id ?? `loader-${internalId}`}>{title}</title>
         <circle
           className="navds-loader__background"
           xmlns="http://www.w3.org/2000/svg"

@@ -26,7 +26,7 @@ import { Alert } from "../../index";
 ## Varianter
 
 `variants`-prop kan brukes for å endre utseende mellom
-`info`, `success`, `warning` og `error`
+`info`, `success`, `warning` og `error`.
 
 <Canvas>
   <Alert variant="info">Id elit esse enim reprehenderit.</Alert>
@@ -37,19 +37,32 @@ import { Alert } from "../../index";
 
 ## Sizing
 
-Alert har to størrelser: Default 64px min-height og small 32px min-height
+Alert har to størrelser: Default 64px height og small 32px height default.
 
 <Canvas>
-  <Alert size="s" variant="info">
+  <Alert size="small" variant="info">
     Id elit esse enim reprehenderit.
   </Alert>
-  <Alert size="s" variant="success">
+  <Alert size="small" variant="success">
     Id elit esse enim reprehenderit.
   </Alert>
-  <Alert size="s" variant="warning">
+  <Alert size="small" variant="warning">
     Id elit esse enim reprehenderit.
   </Alert>
-  <Alert size="s" variant="error">
+  <Alert size="small" variant="error">
     Id elit esse enim reprehenderit.
   </Alert>
+</Canvas>
+
+## fullWidth
+
+<Canvas>
+  <div style={{ margin: 32, display: "grid", gap: 16 }}>
+    <Alert fullWidth variant="info">
+      Id elit esse enim reprehenderit.
+    </Alert>
+    <Alert fullWidth size="small" variant="info">
+      Id elit esse enim reprehenderit.
+    </Alert>
+  </div>
 </Canvas>

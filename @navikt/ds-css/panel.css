@@ -1,6 +1,5 @@
 .navds-panel {
   background-color: var(--navds-color-white);
-  display: block;
   padding: var(--navds-spacing-4);
   border-radius: var(--navds-border-radius);
   border: 1px solid transparent;
