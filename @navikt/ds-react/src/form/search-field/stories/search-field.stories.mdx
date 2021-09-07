@@ -24,7 +24,7 @@ Komponenten er ikke testet eller gått gjennom et design-review, så anbefalses 
 <SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
   <SearchFieldInput />
   <SearchFieldButton>
-    <Search /> <span>Søk</span>
+    <Search /> Søk
   </SearchFieldButton>
 </SearchField>
 ```
@@ -36,7 +36,7 @@ Komponenten er ikke testet eller gått gjennom et design-review, så anbefalses 
   >
     <SearchFieldInput />
     <SearchFieldButton>
-      <Search /> <span>Søk</span>
+      <Search /> Søk
     </SearchFieldButton>
   </SearchField>
 </Canvas>
@@ -54,7 +54,7 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
 >
   <SearchFieldInput />
   <SearchFieldButton>
-    <Search /> <span>Søk</span>
+    <Search /> Søk
   </SearchFieldButton>
 </SearchField>
 ```
@@ -67,7 +67,7 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   >
     <SearchFieldInput />
     <SearchFieldButton>
-      <Search /> <span>Søk</span>
+      <Search /> Søk
     </SearchFieldButton>
   </SearchField>
 </Canvas>
@@ -83,7 +83,7 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
 >
   <SearchFieldInput />
   <SearchFieldButton>
-    <Search /> <span>Søk</span>
+    <Search /> Søk
   </SearchFieldButton>
 </SearchField>
 ```
@@ -97,7 +97,7 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   >
     <SearchFieldInput />
     <SearchFieldButton>
-      <Search /> <span>Søk</span>
+      <Search /> Søk
     </SearchFieldButton>
   </SearchField>
 </Canvas>
@@ -113,7 +113,7 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
 >
   <SearchFieldInput />
   <SearchFieldButton>
-    <Search /> <span>Søk</span>
+    <Search /> Søk
   </SearchFieldButton>
 </SearchField>
 ```
@@ -127,80 +127,35 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   >
     <SearchFieldInput />
     <SearchFieldButton>
-      <Search /> <span>Søk</span>
+      <Search /> Søk
     </SearchFieldButton>
   </SearchField>
 </Canvas>
 
-## Plassering av knapp
+## ClearButton
+
+Man kan bruke `SearchFieldClearButton` for å håndtere clearing av value i `<input />`. For å bruke denne
+kreves det da at `SearchFieldInput` er controlled slik at man styrer state selv slik som eksemplet under.
+Hvis man bare ønsker at den bare skal vises når bruker har begynt å skrive, anbefaler vi bare å rendre
+den når inputvalue ikke er empty.
 
 ```jsx
-<SearchField
-  label="Mollit eiusmod"
-  description="Ea cupidatat eu sunt commodo"
-  hideLabel
->
+<SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
+  <SearchFieldInput value={value} onChange={(e) => setValue(e.target.value)} />
+  {!!value && (
+    <SearchFieldClearButton onClick={() => setValue("")}>
+      <Close /> Tøm
+    </SearchFieldClearButton>
+  )}
   <SearchFieldButton>
-    <Search /> <span>Søk</span>
-  </SearchFieldButton>
-  <SearchFieldInput />
-</SearchField>
-<SearchField
-  label="Mollit eiusmod"
-  description="Ea cupidatat eu sunt commodo"
-  hideLabel
->
-  <SearchFieldInput />
-  <SearchFieldButton>
-    <Search /> <span>Søk</span>
+    <Search /> Søk
   </SearchFieldButton>
 </SearchField>
 ```
 
 <Canvas>
   <div>
-    <SearchField
-      label="Mollit eiusmod"
-      description="Ea cupidatat eu sunt commodo"
-      hideLabel
-    >
-      <SearchFieldButton>
-        <Search /> <span>Søk</span>
-      </SearchFieldButton>
-      <SearchFieldInput />
-    </SearchField>
-    <br />
-    <SearchField
-      label="Mollit eiusmod"
-      description="Ea cupidatat eu sunt commodo"
-      hideLabel
-    >
-      <SearchFieldInput />
-      <SearchFieldButton>
-        <Search /> <span>Søk</span>
-      </SearchFieldButton>
-    </SearchField>
+    <Example />
+    <Example size="small" />
   </div>
-</Canvas>
-
-<h2>ClearButton</h2>
-
-Man kan bruke `SearchFieldClearButton` for å håndtere clearing av value i `<input />`. For å bruke denne
-kreves det da at `SearchFieldInput` er controlled slik at man styrer state selv slik som eksemplet under.
-
-```jsx
-<SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
-  <SearchFieldInput value={value} onChange={(e) => setValue(e.target.value)} />
-  <SearchFieldClearButton onClick={() => setValue("")}>
-    <Close />
-    <span>Tøm</span>
-  </SearchFieldClearButton>
-  <SearchFieldButton>
-    <Search /> <span>Søk</span>
-  </SearchFieldButton>
-</SearchField>
-```
-
-<Canvas>
-  <Example />
 </Canvas>

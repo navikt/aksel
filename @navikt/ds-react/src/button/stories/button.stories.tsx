@@ -51,13 +51,9 @@ export const All = () => {
       <h2>As link</h2>
       <Section>
         {variants.map((variant) => (
-          <a
-            key={variant}
-            className={`navds-button navds-button--${variant} navds-body-short`}
-            href="the-link"
-          >
+          <Button as="a" key={variant} variant={variant} href="the-link">
             {variant}
-          </a>
+          </Button>
         ))}
       </Section>
       <h2>Small</h2>
