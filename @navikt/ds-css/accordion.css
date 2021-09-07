@@ -1,21 +1,29 @@
+:root {
+  --navds-accordion-background-color: var(--navds-color-background);
+  --navds-accordion-color: var(--navds-color-darkgray);
+  --navds-accordion-color-hover: var(--navds-color-blue-50);
+  --navds-accordion-border-color-hover: var(--navds-color-blue-50);
+  --navds-accordion-border-color-focus: var(--navds-color-background);
+}
+
 .navds-accordion .ReactCollapse--collapse {
   transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navds-accordion {
-  background: var(--navds-color-background);
+  background: var(--navds-accordion-background-color);
 }
 
 .navds-accordion:focus,
 .navds-accordion__header:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
-  border-color: var(--navds-color-background);
+  border-color: var(--navds-accordion-border-color-focus);
 }
 
 .navds-accordion__header:hover {
-  color: var(--navds-color-blue-50);
-  border-color: var(--navds-color-blue-50);
+  color: var(--navds-accordion-color-hover);
+  border-color: var(--navds-accordion-border-color-hover);
   text-decoration: underline;
 }
 
@@ -46,7 +54,7 @@
 }
 
 .navds-accordion__content {
-  color: var(--navds-color-darkgray);
+  color: var(--navds-accordion-color);
   padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10)
     var(--navds-spacing-3);
 }
@@ -67,5 +75,5 @@
 
 .navds-accordion__header:hover > .navds-accordion__expand-icon {
   display: none;
-  color: var(--navds-color-text-link);
+  color: var(--navds-accordion-color-hover);
 }
