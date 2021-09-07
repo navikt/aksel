@@ -23,7 +23,7 @@ export interface LinkPanelProps
 interface LinkPanelComponentType
   extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
   Title: LinkPanelTitleType;
-  Content: LinkPanelDescriptionType;
+  Description: LinkPanelDescriptionType;
 }
 
 const LinkPanelComponent: OverridableComponent<
