@@ -14,6 +14,7 @@ export type LinkPanelTitleType = OverridableComponent<
 export const LinkPanelTitle: LinkPanelTitleType = forwardRef(
   ({ className, as: Component = "div", ...rest }, ref) => (
     <Component
+      {...rest}
       ref={ref}
       className={cl(
         "navds-link-panel__title",
@@ -21,7 +22,6 @@ export const LinkPanelTitle: LinkPanelTitleType = forwardRef(
         "navds-title--medium",
         className
       )}
-      {...rest}
     />
   )
 );

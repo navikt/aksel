@@ -12,9 +12,9 @@ export type LinkPanelContentType = React.ForwardRefExoticComponent<
 export const LinkPanelContent: LinkPanelContentType = forwardRef(
   ({ className, ...rest }, ref) => (
     <div
+      {...rest}
       ref={ref}
       className={cl("navds-link-panel__content", className)}
-      {...rest}
     />
   )
 );

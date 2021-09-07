@@ -30,11 +30,11 @@ const LinkPanelComponent: OverridableComponent<
   ({ children, as = "a", border = true, className, ...rest }, ref) => {
     return (
       <Panel
+        {...rest}
         as={as}
         border={border}
         ref={ref}
         className={cl("navds-link-panel", className)}
-        {...rest}
       >
         <div className="navds-link-panel__content">{children}</div>
         <Next
