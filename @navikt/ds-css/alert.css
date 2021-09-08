@@ -71,7 +71,7 @@
   color: var(--navds-alert-color-warning-icon);
   background: radial-gradient(
     circle,
-    var(--navds-alert-color-icon-inverted-background-) 50%,
+    var(--navds-alert-color-icon-inverted-background) 50%,
     0,
     transparent
   );
