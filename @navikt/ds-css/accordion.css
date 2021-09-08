@@ -22,6 +22,7 @@
   width: 1.5rem;
   height: 1.5rem;
   transform: rotateZ(0deg);
+  margin-left: auto;
 }
 
 .navds-accordion__expand-icon--flip {

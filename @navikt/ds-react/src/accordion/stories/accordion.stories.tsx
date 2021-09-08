@@ -25,7 +25,8 @@ export const All = () => {
         <Accordion>
           <Accordion.Item open={open}>
             <Accordion.Header onClick={() => setOpen(!open)}>
-              Accordion header text
+              Nisi amet aute ullamco anim labore ex sunt magna elit. Do occaecat
+              aliqua id laboris et cillum quis proident culpa deserunt
             </Accordion.Header>
             <Accordion.Content>
               Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam
