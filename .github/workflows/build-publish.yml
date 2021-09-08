@@ -50,7 +50,7 @@ jobs:
   publish-npm:
     needs: test-build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[fix]') || contains(github.event.head_commit.message, '[feature]') || contains(github.event.head_commit.message, '[breaking]')
     steps:
       - uses: actions/checkout@v2
         with:
@@ -78,8 +78,16 @@ jobs:
           git remote set-url origin https://github-actions[bot]:$NAV_DS_TOKEN@github.com/$GITHUB_REPOSITORY.git
         env:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-      - name: Update all package-versions with patch
+
+      - name: Update changed packages with PATCH
+        if: "contains(github.event.head_commit.message, '[fix]')"
         run: yarn lerna version patch --include-merged-tags --yes
+      - name: Update changed packages with MINOR
+        if: "contains(github.event.head_commit.message, '[feature]')"
+        run: yarn lerna version minor --include-merged-tags --yes
+      - name: Update changed packages with MAJOR
+        if: "contains(github.event.head_commit.message, '[breaking]')"
+        run: yarn lerna version major --include-merged-tags --yes
 
       - name: Create a .npmrc file for NPM
         run: |
