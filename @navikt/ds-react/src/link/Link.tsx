@@ -1,16 +1,11 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface LinkProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  /**
-   * Link text
-   */
-  children: React.ReactNode;
-  /**
-   * Link anchor should direct to
-   */
-  href: string;
+export interface LinkProps {
+  props: {
+    children: string;
+  } & React.HTMLAttributes<HTMLAnchorElement>;
+  defaultComponent: "a";
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
