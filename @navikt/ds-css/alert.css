@@ -1,6 +1,25 @@
+:root {
+  --navds-alert-color-border: var(--navds-color-gray-40);
+  --navds-alert-color-error-border: var(--navds-color-error-border);
+  --navds-alert-color-error-background: var(--navds-color-error-background);
+  --navds-alert-color-warning-border: var(--navds-color-warning-border);
+  --navds-alert-color-warning-background: var(--navds-color-warning-background);
+  --navds-alert-color-info-border: var(--navds-color-info-border);
+  --navds-alert-color-info-background: var(--navds-color-info-background);
+  --navds-alert-color-success-border: var(--navds-color-success-border);
+  --navds-alert-color-success-background: var(--navds-color-success-background);
+  --navds-alert-color-icon-background: var(--navds-color-background);
+  --navds-alert-color-icon-background-inverted: var(--navds-color-darkgray);
+  --navds-alert-color-error-icon: var(--navds-color-red-60);
+  --navds-alert-color-warning-icon: var(--navds-color-orange-40);
+  --navds-alert-color-info-icon: var(--navds-color-lightblue-70);
+  --navds-alert-color-success-icon: var(--navds-color-green-70);
+}
+
 .navds-alert {
   border-radius: 4px;
-  border: var(--navds-border-default);
+  border: 1px solid;
+  border-color: var(--navds-alert-color-border);
   padding: var(--navds-spacing-4);
   display: grid;
   grid-auto-flow: column;
@@ -35,7 +54,7 @@
   flex-shrink: 0;
   background: radial-gradient(
     circle,
-    var(--navds-color-background) 50%,
+    var(--navds-alert-color-icon-background) 50%,
     0,
     transparent
   );
@@ -48,43 +67,43 @@
 }
 
 .navds-alert--error {
-  border-color: var(--navds-color-error-border);
-  background-color: var(--navds-color-error-background);
+  border-color: var(--navds-alert-color-error-border);
+  background-color: var(--navds-alert-color-error-background);
 }
 
 .navds-alert--error > .navds-alert__icon > svg {
-  color: var(--navds-color-red-60);
+  color: var(--navds-alert-color-error-icon);
 }
 
 .navds-alert--warning {
-  border-color: var(--navds-color-warning-border);
-  background-color: var(--navds-color-warning-background);
+  border-color: var(--navds-alert-color-warning-border);
+  background-color: var(--navds-alert-color-warning-background);
 }
 
 .navds-alert--warning > .navds-alert__icon > svg {
-  color: var(--navds-color-orange-40);
+  color: var(--navds-alert-color-warning-icon);
   background: radial-gradient(
     circle,
-    var(--navds-color-darkgray) 50%,
+    var(--navds-alert-color-icon-background-inverted) 50%,
     0,
     transparent
   );
 }
 
 .navds-alert--info {
-  border-color: var(--navds-color-info-border);
-  background-color: var(--navds-color-info-background);
+  border-color: var(--navds-alert-color-info-border);
+  background-color: var(--navds-alert-color-info-background);
 }
 
 .navds-alert--info > .navds-alert__icon > svg {
-  color: var(--navds-color-lightblue-70);
+  color: var(--navds-alert-color-info-icon);
 }
 
 .navds-alert--success {
-  border-color: var(--navds-color-success-border);
-  background-color: var(--navds-color-success-background);
+  border-color: var(--navds-alert-color-success-border);
+  background-color: var(--navds-alert-color-success-background);
 }
 
 .navds-alert--success > .navds-alert__icon > svg {
-  color: var(--navds-color-green-70);
+  color: var(--navds-alert-color-success-icon);
 }
