@@ -1,12 +1,13 @@
 .navds-link-panel {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   text-decoration: none;
   color: var(--navds-color-gray-90);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--navds-spacing-2);
 }
 
-.navds-link-panel:hover .navds-link-panel-title {
+.navds-link-panel:hover .navds-link-panel__title {
   text-decoration: underline;
   color: var(--navds-color-text-link);
 }
@@ -22,6 +23,7 @@
 }
 
 .navds-link-panel__chevron {
+  flex-shrink: 0;
   font-size: 1.5rem;
   transition: transform 200ms;
 }
@@ -29,4 +31,8 @@
 .navds-link-panel:hover > .navds-link-panel__chevron,
 .navds-link-panel:focus-within > .navds-link-panel__chevron {
   transform: translateX(4px);
+}
+
+.navds-link-panel__description {
+  margin-top: var(--navds-spacing-2);
 }

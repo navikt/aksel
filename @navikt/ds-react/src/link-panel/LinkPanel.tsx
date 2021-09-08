@@ -2,6 +2,11 @@ import React, { forwardRef } from "react";
 import { Panel, OverridableComponent } from "..";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
+import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
+import {
+  LinkPanelDescription,
+  LinkPanelDescriptionType,
+} from "./LinkPanelDescription";
 
 export interface LinkPanelProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -15,26 +20,26 @@ export interface LinkPanelProps
   border?: boolean;
 }
 
-export type LinkPanelType = OverridableComponent<
+interface LinkPanelComponentType
+  extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
+  Title: LinkPanelTitleType;
+  Description: LinkPanelDescriptionType;
+}
+
+const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement
->;
-
-const LinkPanel: LinkPanelType = forwardRef(
+> = forwardRef(
   ({ children, as = "a", border = true, className, ...rest }, ref) => {
     return (
       <Panel
+        {...rest}
         as={as}
         border={border}
         ref={ref}
         className={cl("navds-link-panel", className)}
-        {...rest}
       >
-        {typeof children === "string" ? (
-          <LinkPanelTitle>{children}</LinkPanelTitle>
-        ) : (
-          <span className="navds-link-panel__content">{children}</span>
-        )}
+        <div className="navds-link-panel__content">{children}</div>
         <Next
           className="navds-link-panel__chevron"
           aria-label="arrow-icon pointing right"
@@ -44,24 +49,9 @@ const LinkPanel: LinkPanelType = forwardRef(
   }
 );
 
-interface LinkPanelTitleProps extends React.HTMLAttributes<HTMLSpanElement> {
-  children: React.ReactNode;
-}
+const LinkPanel = LinkPanelComponent as LinkPanelComponentType;
 
-export const LinkPanelTitle: OverridableComponent<
-  LinkPanelTitleProps,
-  HTMLSpanElement
-> = forwardRef(({ className, as: Component = "span", ...rest }, ref) => (
-  <Component
-    ref={ref}
-    className={cl(
-      "navds-link-panel-title",
-      "navds-title",
-      "navds-title--m",
-      className
-    )}
-    {...rest}
-  />
-));
+LinkPanel.Title = LinkPanelTitle;
+LinkPanel.Description = LinkPanelDescription;
 
 export default LinkPanel;
