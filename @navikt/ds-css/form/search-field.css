@@ -1,3 +1,9 @@
+:root {
+  --navds-search-field-shadow-error: var(--navds-color-red-50);
+  --navds-search-field-border-error: var(--navds-color-red-50);
+  --navds-search-field-clearbutton-border: var(--navds-color-gray-40);
+}
+
 .navds-search-field__input-wrapper {
   display: flex;
   align-items: center;
@@ -29,13 +35,13 @@
 
 .navds-search-field--error
   .navds-search-field__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-color-red-50) inset;
-  border-color: var(--navds-color-red-50);
+  box-shadow: 0 0 0 1px var(--navds-search-field-shadow-error) inset;
+  border-color: var(--navds-search-field-border-error);
 }
 
 .navds-search-field__clear-button {
   background-color: initial;
-  border: 1px solid var(--navds-color-gray-40);
+  border: 1px solid var(--navds-search-field-clearbutton-border);
   display: flex;
   flex-shrink: 0;
   justify-content: center;
