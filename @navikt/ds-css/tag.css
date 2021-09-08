@@ -1,7 +1,6 @@
 :root {
   --navds-tag-color-border: var(--navds-color-gray-40);
   --navds-tag-color-background: var(--navds-color-gray-10);
-
   --navds-tag-color-info-background: var(--navds-color-tag-info-background);
   --navds-tag-color-info-border: var(--navds-color-tag-info-border);
   --navds-tag-color-warning-background: var(
