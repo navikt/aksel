@@ -1,8 +1,15 @@
+:root {
+  --navds-popover-color-background: var(--navds-color-background);
+  --navds-popover-color-border: var(--navds-color-gray-40);
+  --navds-popover-color-shadow: var(--navds-color-gray-20);
+}
+
 .navds-popover {
   z-index: var(--navds-z-index-popover);
-  background-color: var(--navds-color-background);
-  box-shadow: 0 2px 4px 0 var(--navds-color-gray-20);
-  border: var(--navds-border-default);
+  background-color: var(--navds-popover-color-background);
+  box-shadow: 0 2px 4px 0 var(--navds-popover-color-shadow);
+  border: 1px solid;
+  border-color: var(--navds-popover-color-border);
   border-radius: 4px;
 }
 
@@ -27,8 +34,9 @@
   display: block;
   content: "";
   transform: rotate(45deg);
-  background-color: var(--navds-color-background);
-  border: var(--navds-border-default);
+  background-color: var(--navds-popover-color-background);
+  border: 1px solid;
+  border-color: var(--navds-popover-color-border);
   width: 1rem;
   height: 1rem;
   top: 0;
