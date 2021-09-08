@@ -15,20 +15,20 @@ export const DoDont = ({ children, className = "" }: DoDontProps) => (
 
 export const Do = ({ children }: DoDontProps) => (
   <div className="dodont__do">
-    {children}
     <div className="dodont__label">
       <SuccessIcon />
       &nbsp; Gjør dette
     </div>
+    {children}
   </div>
 );
 
 export const Dont = ({ children }: DoDontProps) => (
   <div className="dodont__dont">
-    {children}
     <div className="dodont__label">
       <ErrorIcon />
       &nbsp; Ikke gjør dette
     </div>
+    {children}
   </div>
 );

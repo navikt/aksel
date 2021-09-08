@@ -2,6 +2,11 @@ import { Knapp, Hovedknapp, Fareknapp, Flatknapp } from "./..";
 import Alertstripe from "./../../nav-frontend-alertstriper";
 import Lenke from "./../../nav-frontend-lenker";
 import { Cog } from "../../../website/src/components/assets/images/svg";
+import {
+  DoDont,
+  Do,
+  Dont,
+} from "../../../website/src/components/do-dont/DoDont";
 
 ## Alle knapper side om side
 
@@ -20,6 +25,34 @@ Alle knappene våre er alignet på samme bunnlinje.
 <Fareknapp>Fare</Fareknapp>
 <Flatknapp>Flat</Flatknapp>
 ```
+
+## Knappen i bruk på NAV
+
+I tidligere knappeversjon ble teksten satt til all-caps automatisk av stilsettet, dette er nå endret til
+sentence case som standard for alle flater. Sentence case starter med uppercase og fortsetter i lowercase som angitt her.
+Når man nå tar i bruk `nav-frontend-knapper` v3.1.0
+eller nyere så burde man gå gjennom knappebruken i løsningene sine for å sjekke dette.
+
+<DoDont>
+  <Do>
+    <div className="dodont__button-example">
+      <Knapp>Send søknad</Knapp>
+    </div>
+  </Do>
+  <Dont>
+    <div className="dodont__button-example">
+      <div>
+        <Knapp>SEND SØKNAD</Knapp>
+      </div>
+      <div>
+        <Knapp>send søknad</Knapp>
+      </div>
+      <div>
+        <Knapp>Send Søknad</Knapp>
+      </div>
+    </div>
+  </Dont>
+</DoDont>
 
 ## Normal
 
@@ -350,4 +383,4 @@ const Cog = () => (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><
 
 ### Ferdigkomponerte ikonknapper
 
-Se [Ikonknapper](/components/ikonknapper) for flere ferdige knapper med tilhørende ikon.
+Se [Ikonknapper](/designsystem/components/ikonknapper) for flere ferdige knapper med tilhørende ikon.

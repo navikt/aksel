@@ -26,6 +26,7 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   transition: transform 200ms;
+  flex-shrink: 0;
 }
 
 .navds-link-panel:hover > .navds-link-panel__chevron,
