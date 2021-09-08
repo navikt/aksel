@@ -2,7 +2,7 @@
   --navds-confirmation-panel-color-background: #ffeccc;
   --navds-confirmation-panel-color-background-checked: #ccf1d6;
   --navds-confirmation-panel-color-border-checked: #ccf1d6;
-  --navds-confirmation-panel-color-background-error: var(
+  --navds-confirmation-panel-color-background_error: var(
     --navds-color-error-background
   );
   --navds-confirmation-panel-color-checkbox-background-checked-hover: var(

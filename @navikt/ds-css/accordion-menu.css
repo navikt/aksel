@@ -1,8 +1,9 @@
 :root {
-  --navds-accordion-menu-color: var(--navds-color-text-link);
-  --navds-accordion-menu-color-focus: var(--navds-color-darkgray);
+  --navds-accordion-menu-color-text: var(--navds-color-text-link);
+  --navds-accordion-menu-color-text-focus: var(--navds-color-darkgray);
   --navds-accordion-menu-color-background-hover: var(--navds-color-blue-10);
-  --navds-accordion-menu-color-active: var(--navds-color-text);
+  --navds-accordion-menu-color-text-active: var(--navds-color-text);
+  --navds-accordion-menu-outline-focus: var(--navds-text-focus);
 }
 
 .navds-accordion-menu__list {
@@ -25,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   font-weight: var(--navds-font-weight-bold);
-  color: var(--navds-accordion-menu-color);
+  color: var(--navds-accordion-menu-color-text);
   text-decoration: underline;
 }
 
@@ -80,9 +81,9 @@
 
 .navds-accordion-menu-item:focus,
 .navds-accordion-menu-collapsable__button:focus {
-  outline: 3px solid var(--navds-text-focus);
+  outline: 3px solid var(--navds-accordion-menu-outline-focus);
   outline-offset: -3px;
-  color: var(--navds-accordion-menu-color-focus);
+  color: var(--navds-accordion-menu-color-text-focus);
 }
 
 .navds-accordion-menu-collapsable__button:focus
@@ -97,6 +98,6 @@
 
 .navds-accordion-menu-item--active {
   box-shadow: inset 0.5rem 0 var(--navds-color-text-link);
-  color: var(--navds-accordion-menu-color-active);
+  color: var(--navds-accordion-menu-color-text-active);
   text-decoration: none;
 }
