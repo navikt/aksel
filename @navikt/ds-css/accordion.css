@@ -6,7 +6,6 @@
   background: var(--navds-color-background);
 }
 
-.navds-accordion:focus,
 .navds-accordion__header:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
@@ -26,7 +25,7 @@
 }
 
 .navds-accordion__expand-icon--flip {
-  transform: rotateZ(-180deg);
+  transform: rotateZ(180deg);
 }
 
 .navds-accordion__header {
@@ -35,7 +34,7 @@
   text-align: left;
   border: none;
   width: 100%;
-  margin-bottom: 0;
+  margin: 0;
   cursor: pointer;
   border-bottom: 2px solid #a0a0a0;
   display: grid;
@@ -46,13 +45,7 @@
 
 .navds-accordion__content {
   color: var(--navds-color-darkgray);
-  padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10)
-    var(--navds-spacing-3);
-}
-
-.navds-accordion--open .navds-accordion__content {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10);
 }
 
 .navds-accordion__expand-icon--filled {
@@ -66,5 +59,4 @@
 
 .navds-accordion__header:hover > .navds-accordion__expand-icon {
   display: none;
-  color: var(--navds-color-text-link);
 }

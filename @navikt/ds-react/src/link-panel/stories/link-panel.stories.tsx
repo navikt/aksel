@@ -1,5 +1,6 @@
 import React from "react";
-import { LinkPanel, LinkPanelTitle } from "../index";
+import styled from "styled-components";
+import { LinkPanel } from "..";
 import { Illustration } from "./illustration";
 
 export default {
@@ -7,38 +8,46 @@ export default {
   component: LinkPanel,
 };
 
-export const All = () => {
-  return (
-    <>
-      <h1>Link</h1>
-      <LinkPanel href="#">Dette er en tekstlenke</LinkPanel>
+const StyledLinkPanel = styled(LinkPanel)`
+  .navds-link-panel__content {
+    display: grid;
+    grid-auto-flow: column;
+    gap: var(--navds-spacing-8);
+    align-items: center;
+  }
+`;
 
-      <h1>No border</h1>
-      <LinkPanel href="#" border={false}>
-        Dette er en tekstlenke
-      </LinkPanel>
+export const All = () => (
+  <>
+    <h1>Link panel</h1>
+    <LinkPanel href="#">
+      <LinkPanel.Title>
+        Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+      </LinkPanel.Title>
+      <LinkPanel.Description>
+        Aliqua id aliquip Lorem esse
+      </LinkPanel.Description>
+    </LinkPanel>
 
-      <h1>Custom styling</h1>
-      <LinkPanel href="#" style={{ textDecoration: "none" }}>
-        <div
-          style={{
-            padding: "1rem",
-            display: "grid",
-            gridAutoFlow: "column",
-            gap: "2rem",
-            alignItems: "center",
-          }}
-        >
-          {Illustration}
-          <div>
-            <LinkPanelTitle>Dagpenger</LinkPanelTitle>
-            <p>
-              Du kan få dagpenger når du er arbeidsledig og har mistet inntekten
-              din.
-            </p>
-          </div>
-        </div>
-      </LinkPanel>
-    </>
-  );
-};
+    <h1>No border</h1>
+    <LinkPanel href="#" border={false}>
+      <LinkPanel.Title>
+        Veniam cillum cupidatat aliqua id ipsum culpa ea.
+      </LinkPanel.Title>
+    </LinkPanel>
+
+    <h1>Custom styling</h1>
+    <StyledLinkPanel href="#">
+      {Illustration}
+      <div>
+        <LinkPanel.Title>
+          Anim pariatur eiusmod deserunt elit cillum
+        </LinkPanel.Title>
+        <LinkPanel.Description>
+          Ex velit id voluptate labore irure ipsum exercitation sunt et id enim
+          magna veniam consequat. id aliquip Lorem esse
+        </LinkPanel.Description>
+      </div>
+    </StyledLinkPanel>
+  </>
+);
