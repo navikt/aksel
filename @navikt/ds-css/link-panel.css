@@ -1,6 +1,12 @@
+:root {
+  --navds-link-panel-color: var(--navds-color-gray-90);
+  --navds-link-panel-color-border-hover: var(--navds-color-blue-50);
+  --navds-link-panel-color-title-hover: var(--navds-color-text-link);
+}
+
 .navds-link-panel {
   text-decoration: none;
-  color: var(--navds-color-gray-90);
+  color: var(--navds-link-panel-color);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -9,12 +15,12 @@
 
 .navds-link-panel:hover .navds-link-panel__title {
   text-decoration: underline;
-  color: var(--navds-color-text-link);
+  color: var(--navds-link-panel-color-title-hover);
 }
 
 .navds-link-panel:hover {
   box-shadow: var(--navds-shadow-hover);
-  border-color: var(--navds-color-blue-50);
+  border-color: var(--navds-link-panel-color-border-hover);
 }
 
 .navds-link-panel:focus {
