@@ -2,9 +2,7 @@
   border-radius: 4px;
   border: var(--navds-border-default);
   padding: calc(var(--navds-spacing-5) - 1px) calc(var(--navds-spacing-4) - 1px);
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
+  display: flex;
   gap: var(--navds-spacing-3);
 }
 
@@ -22,6 +20,7 @@
 }
 
 .navds-alert > .navds-alert__icon {
+  flex-shrink: 0;
   font-size: 1.5rem;
   background: radial-gradient(
     circle,
@@ -29,6 +28,10 @@
     0,
     transparent
   );
+}
+
+.navds-alert--small > .navds-alert__icon {
+  font-size: 1.25rem;
 }
 
 .navds-alert--error {
