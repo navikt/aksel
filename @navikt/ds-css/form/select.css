@@ -58,10 +58,7 @@
   border-color: var(--navds-select-color-border-error);
 }
 
-/*
-  Disabled handling
-  TODO: Oppdatere farger her
- */
+/* Disabled handling */
 .navds-select__input:disabled,
 .navds-select__input[read-only] {
   background-color: var(--navds-select-color-background-disabled);
