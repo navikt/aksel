@@ -1,5 +1,16 @@
+:root {
+  --navds-link-color: var(--navds-color-text-link);
+  --navds-link-color-focus: var(--navds-color-text-inverse);
+  --navds-link-color-background-focus: var(--navds-text-focus);
+  --navds-link-color-active: var(--navds-color-text-inverse);
+  --navds-link-color-background-active: var(--navds-text-focus);
+  --navds-link-color-high-contrast: var(--navds-color-text-primary);
+  --navds-link-color-icon: var(--navds-color-text-link);
+  --navds-link-color-icon-focus: var(--navds-color-text-inverse);
+}
+
 .navds-link {
-  color: var(--navds-color-text-link);
+  color: var(--navds-link-color);
   text-decoration: underline;
   display: inline-flex;
   align-items: center;
@@ -9,7 +20,7 @@
 .navds-alert--error .navds-link,
 .navds-alert--info .navds-link,
 .navds-confirmation-panel--error .navds-link {
-  color: var(--navds-color-text-primary);
+  color: var(--navds-link-color-high-contrast);
 }
 
 .navds-link:hover {
@@ -18,24 +29,24 @@
 
 .navds-link:focus {
   outline: none;
-  color: var(--navds-color-text-inverse);
+  color: var(--navds-link-color-focus);
   text-decoration: none;
-  background-color: var(--navds-text-focus);
+  background-color: var(--navds-link-color-background-focus);
   box-shadow: var(--navds-text-shadow);
 }
 
 .navds-link:active {
   outline: none;
-  color: var(--navds-color-text-inverse);
+  color: var(--navds-link-color-active);
   text-decoration: none;
-  background-color: var(--navds-text-focus);
+  background-color: var(--navds-link-color-background-active);
   box-shadow: var(--navds-text-shadow);
 }
 
 .navds-link svg {
-  color: var(--navds-color-text-link);
+  color: var(--navds-link-color-icon);
 }
 
 .navds-link:focus svg {
-  color: var(--navds-color-text-inverse);
+  color: var(--navds-link-color-icon-focus);
 }
