@@ -7,10 +7,6 @@ export interface LinkProps
    * Link text
    */
   children: React.ReactNode;
-  /**
-   * Link anchor should direct to
-   */
-  href: string;
 }
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(
