@@ -2,6 +2,8 @@
   --navds-button-color: var(--navds-color-action-default);
   --navds-button-color-background: var(--navds-color-background);
   --navds-button-color-border: var(--navds-color-action-default);
+
+  /* Primary */
   --navds-button-color-primary-hover: var(--navds-color-text-inverse);
   --navds-button-color-primary-background-hover: var(
     --navds-color-action-hover
@@ -10,6 +12,8 @@
   --navds-button-color-primary-background-active: var(
     --navds-color-action-active
   );
+
+  /* Secondary */
   --navds-button-color-secondary-border: transparent;
   --navds-button-color-secondary-background: transparent;
   --navds-button-color-secondary-border-hover: var(
@@ -26,13 +30,10 @@
     --navds-color-action-active
   );
 
+  /* Action */
   --navds-button-color-action: var(--navds-color-white);
   --navds-button-color-action-background: var(--navds-color-action-default);
   --navds-button-color-action-border: var(--navds-color-action-default);
-  --navds-button-color-danger: var(--navds-color-white);
-  --navds-button-color-danger-background: var(--navds-color-danger-default);
-  --navds-button-color-danger-border: var(--navds-color-danger-default);
-
   --navds-button-color-action-background-hover: var(--navds-color-action-hover);
   --navds-button-color-action-border-hover: var(--navds-color-action-hover);
   --navds-button-color-action-background-active: var(
@@ -40,6 +41,10 @@
   );
   --navds-button-color-action-border-focus: var(--navds-color-white);
 
+  /* Danger */
+  --navds-button-color-danger: var(--navds-color-white);
+  --navds-button-color-danger-background: var(--navds-color-danger-default);
+  --navds-button-color-danger-border: var(--navds-color-danger-default);
   --navds-button-color-danger-background-hover: var(--navds-color-danger-hover);
   --navds-button-color-danger-border-hover: var(--navds-color-danger-hover);
   --navds-button-color-danger-background-active: var(
@@ -47,6 +52,7 @@
   );
   --navds-button-color-danger-border-focus: var(--navds-color-white);
 
+  /* Disabled */
   --navds-button-color-disabled: var(--navds-color-text-inverse);
   --navds-button-color-disabled-background: var(--navds-color-disabled);
 }
