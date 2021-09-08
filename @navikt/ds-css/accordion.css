@@ -1,7 +1,7 @@
 :root {
-  --navds-accordion-color: var(--navds-color-darkgray);
+  --navds-accordion-color-text: var(--navds-color-darkgray);
   --navds-accordion-color-background: var(--navds-color-background);
-  --navds-accordion-color-hover: var(--navds-color-blue-50);
+  --navds-accordion-color-text-hover: var(--navds-color-blue-50);
   --navds-accordion-color-border-hover: var(--navds-color-blue-50);
   --navds-accordion-color-border-focus: var(--navds-color-background);
 }
@@ -21,7 +21,7 @@
 }
 
 .navds-accordion__header:hover {
-  color: var(--navds-accordion-color-hover);
+  color: var(--navds-accordion-color-text-hover);
   border-color: var(--navds-accordion-color-border-hover);
   text-decoration: underline;
 }
@@ -52,7 +52,7 @@
 }
 
 .navds-accordion__content {
-  color: var(--navds-accordion-color);
+  color: var(--navds-accordion-color-text);
   padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10);
 }
 
