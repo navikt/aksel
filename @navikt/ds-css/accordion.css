@@ -1,9 +1,9 @@
 :root {
-  --navds-accordion-background-color: var(--navds-color-background);
   --navds-accordion-color: var(--navds-color-darkgray);
+  --navds-accordion-color-background: var(--navds-color-background);
   --navds-accordion-color-hover: var(--navds-color-blue-50);
-  --navds-accordion-border-color-hover: var(--navds-color-blue-50);
-  --navds-accordion-border-color-focus: var(--navds-color-background);
+  --navds-accordion-color-border-hover: var(--navds-color-blue-50);
+  --navds-accordion-color-border-focus: var(--navds-color-background);
 }
 
 .navds-accordion .ReactCollapse--collapse {
@@ -11,18 +11,18 @@
 }
 
 .navds-accordion {
-  background: var(--navds-accordion-background-color);
+  background: var(--navds-accordion-color-background);
 }
 
 .navds-accordion__header:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
-  border-color: var(--navds-accordion-border-color-focus);
+  border-color: var(--navds-accordion-color-border-focus);
 }
 
 .navds-accordion__header:hover {
   color: var(--navds-accordion-color-hover);
-  border-color: var(--navds-accordion-border-color-hover);
+  border-color: var(--navds-accordion-color-border-hover);
   text-decoration: underline;
 }
 
