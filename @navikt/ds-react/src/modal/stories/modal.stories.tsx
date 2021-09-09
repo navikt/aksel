@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Popover } from "../..";
+import { Modal } from "../..";
 
 export default {
   title: "ds-react/modal",
