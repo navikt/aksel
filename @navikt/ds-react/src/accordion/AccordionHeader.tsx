@@ -1,7 +1,8 @@
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { AccordionContext, useClientLayoutEffect, useId } from "..";
+import { AccordionItemContext } from "./AccordionItem";
+import { useClientLayoutEffect, useId } from "..";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,7 +18,7 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
   ({ children, className, id, onClick, ...rest }, ref) => {
-    const context = useContext(AccordionContext);
+    const context = useContext(AccordionItemContext);
     const newId = useId(id);
 
     const setButtonId = context && context.setButtonId;
@@ -27,7 +28,9 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
     }, [setButtonId, newId]);
 
     if (context === null) {
-      console.error("<Accordion.Header> has to be used within an <Accordion>");
+      console.error(
+        "<Accordion.Header> has to be used within an <Accordion.Item>"
+      );
       return null;
     }
 
@@ -45,8 +48,8 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         className={cl(
           "navds-accordion__header",
           className,
-          "navds-title",
-          "navds-title--small"
+          "navds-heading",
+          "navds-heading--small"
         )}
         onClick={handleClick}
         aria-controls={context.contentId}
@@ -56,6 +59,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         <Expand
           focusable="false"
           role="img"
+          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl("navds-accordion__expand-icon", {
             "navds-accordion__expand-icon--flip": context.open,
           })}
@@ -63,6 +67,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         <ExpandFilled
           focusable="false"
           role="img"
+          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",

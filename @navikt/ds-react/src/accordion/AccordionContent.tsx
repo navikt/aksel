@@ -2,7 +2,7 @@ import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { useClientLayoutEffect, useId } from "../util";
-import { AccordionContext } from "./Accordion";
+import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,7 +18,7 @@ export type AccordionContentType = React.ForwardRefExoticComponent<
 
 const AccordionContent: AccordionContentType = forwardRef(
   ({ children, className, id, ...rest }, ref) => {
-    const context = useContext(AccordionContext);
+    const context = useContext(AccordionItemContext);
 
     const newId = useId(id);
     const setContentId = context && context.setContentId;
@@ -28,7 +28,9 @@ const AccordionContent: AccordionContentType = forwardRef(
     }, [setContentId, newId]);
 
     if (context === null) {
-      console.error("<Accordion.Content> has to be used within an <Accordion>");
+      console.error(
+        "<Accordion.Content> has to be used within an <Accordion.Item>"
+      );
       return null;
     }
 

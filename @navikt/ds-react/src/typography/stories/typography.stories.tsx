@@ -1,5 +1,5 @@
 import React from "react";
-import { Title, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
+import { Heading, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
 import "./index.css";
 
 export default {
@@ -15,13 +15,13 @@ const lorem = () => (
 );
 
 const TitleTemplate = ({ level, size, spacing }) => (
-  <Title spacing={spacing} size={size} level={level}>
+  <Heading spacing={spacing} size={size} level={level}>
     {lorem()}
-  </Title>
+  </Heading>
 );
 
-export const TitleStory = TitleTemplate.bind({});
-TitleStory.args = { level: 1, size: "2xlarge", spacing: false };
+export const HeadingStory = TitleTemplate.bind({});
+HeadingStory.args = { level: 1, size: "2xlarge", spacing: false };
 
 const IngressTemplate = ({ spacing }) => (
   <Ingress spacing={spacing}>{lorem()}</Ingress>
@@ -69,9 +69,9 @@ DetailStory.args = { spacing: false, size: "medium" };
 export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
-      <Title level={"1"} size="2xlarge" spacing>
+      <Heading level={"1"} size="2xlarge" spacing>
         Title lvl 1 2xlarge
-      </Title>
+      </Heading>
       <BodyLong spacing>
         BodyLong: Aliqua ad et nisi commodo sit excepteur in commodo proident
         proident. Nostrud consectetur dolore eu nostrud aliqua. Adipisicing
@@ -91,9 +91,9 @@ export const SideInnholdEksempel = () => {
         BodyLong: Dolore commodo ad veniam commodo aute voluptate est officia
         sunt proident irure consectetur excepteur.
       </BodyLong>
-      <Title level={"2"} size="xlarge" spacing>
+      <Heading level={"2"} size="xlarge" spacing>
         Title lvl 2 xlarge
-      </Title>
+      </Heading>
       <Ingress spacing>
         Ingress: Mollit incididunt incididunt officia amet est et non aliqua
         officia nulla et aute aliqua culpa.

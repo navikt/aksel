@@ -1,10 +1,34 @@
+:root {
+  --navds-confirmation-panel-color-background: #ffeccc;
+  --navds-confirmation-panel-color-background-checked: #ccf1d6;
+  --navds-confirmation-panel-color-border-checked: #ccf1d6;
+  --navds-confirmation-panel-color-background-error: var(
+    --navds-color-error-background
+  );
+  --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
+    --navds-color-green-70
+  );
+  --navds-confirmation-panel-color-checkbox-border-checked-hover: var(
+    --navds-color-green-70
+  );
+  --navds-confirmation-panel-color-checkbox-background-checked: var(
+    --navds-color-green-50
+  );
+  --navds-confirmation-panel-color-checkbox-border-checked: var(
+    --navds-color-green-50
+  );
+  --navds-confirmation-panel-color-checkbox-label-checked: var(
+    --navds-color-darkgray
+  );
+}
+
 .navds-confirmation-panel {
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-4);
   padding: var(--navds-spacing-4);
   border-radius: 4px;
-  background-color: #ffeccc;
+  background-color: var(--navds-confirmation-panel-color-background);
   transition: background-color linear 100ms;
 }
 
@@ -18,19 +42,13 @@
 }
 
 .navds-confirmation-panel--checked {
-  background-color: #ccf1d6;
-  border-color: #ccf1d6;
+  background-color: var(--navds-confirmation-panel-color-background-checked);
+  border-color: var(--navds-confirmation-panel-color-border-checked);
 }
 
 .navds-confirmation-panel--error {
-  background-color: #f3e3e3;
+  background-color: var(--navds-confirmation-panel-color-background-error);
   border: 1px solid transparent;
-}
-
-.navds-confirmation-panel--checked
-  > .navds-confirmation-panel__content
-  .navds-link:not(:focus) {
-  color: var(--navds-color-darkgray);
 }
 
 .navds-confirmation-panel
@@ -42,23 +60,29 @@
 .navds-confirmation-panel--checked
   .navds-checkbox__input:hover
   + .navds-checkbox__label {
-  color: var(--navds-color-darkgray);
+  color: var(--navds-confirmation-panel-color-checkbox-label-checked);
 }
 
 .navds-confirmation-panel--checked
   .navds-checkbox__input
   + .navds-checkbox__label::before {
   transition: none;
-  background-color: var(--navds-color-green-50);
-  border-color: var(--navds-color-green-50);
+  background-color: var(
+    --navds-confirmation-panel-color-checkbox-background-checked
+  );
+  border-color: var(--navds-confirmation-panel-color-checkbox-border-checked);
   background-image: var(--navds-checkmark-image-white);
 }
 
 .navds-confirmation-panel--checked
   .navds-checkbox__input:hover
   + .navds-checkbox__label::before {
-  background-color: var(--navds-color-green-70);
-  border-color: var(--navds-color-green-70);
+  background-color: var(
+    --navds-confirmation-panel-color-checkbox-background-checked-hover
+  );
+  border-color: var(
+    --navds-confirmation-panel-color-checkbox-border-checked-hover
+  );
 }
 
 .navds-confirmation-panel--checked

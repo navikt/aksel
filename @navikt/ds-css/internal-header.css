@@ -1,3 +1,9 @@
+:root {
+  --navds-internal-header-color-background: var(--navds-color-darkgray);
+  --navds-internal-header-color-border: var(--navds-color-gray-40);
+  --navds-internal-header-color-text: var(--navds-color-text-inverse);
+}
+
 /**************************
  * .navds-header *
  **************************/
@@ -5,8 +11,8 @@
 .navds-interal-header {
   display: flex;
   align-items: center;
-  background: var(--navds-color-darkgray);
-  color: white;
+  background: var(--navds-internal-header-color-background);
+  color: var(--navds-internal-header-color-text);
   max-width: 100vw;
   min-height: 50px;
 }
@@ -22,13 +28,13 @@
 
 .navds-interal-header__title {
   padding: 0 var(--navds-spacing-6);
-  border-right: 1px solid var(--navds-color-gray-40);
+  border-right: 1px solid var(--navds-internal-header-color-border);
   display: flex;
   align-self: stretch;
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--navds-color-text-inverse);
+  color: var(--navds-internal-header-color-text);
 }
 
 .navds-interal-header__title > span > a {
@@ -46,10 +52,10 @@
   **************************/
 
 .navds-interal-header__user {
-  color: var(--navds-color-text-inverse);
+  color: var(--navds-internal-header-color-text);
   padding: 0 var(--navds-spacing-6);
   margin-left: auto;
-  border-left: 1px solid var(--navds-color-gray-40);
+  border-left: 1px solid var(--navds-internal-header-color-border);
   display: flex;
   align-self: stretch;
   align-items: center;

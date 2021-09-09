@@ -45,13 +45,13 @@ export const All = () => (
         justifyContent: "space-evenly",
       }}
     >
-      <Knapp spinner>spinner</Knapp>
+      <Knapp spinner>Spinner</Knapp>
 
-      <Hovedknapp spinner>spinner</Hovedknapp>
+      <Hovedknapp spinner>Spinner</Hovedknapp>
 
-      <Fareknapp spinner>spinner</Fareknapp>
+      <Fareknapp spinner>Spinner</Fareknapp>
 
-      <Flatknapp spinner>spinner</Flatknapp>
+      <Flatknapp spinner>Spinner</Flatknapp>
 
       <Knapp disabled spinner>
         Disabled spinner
@@ -65,23 +65,23 @@ export const All = () => (
       }}
     >
       <a href="#som-lenke" className="knapp">
-        som-lenke
+        Som-lenke
       </a>
 
       <a href="#som-lenke" className="knapp knapp--hoved">
-        som-lenke
+        Som-lenke
       </a>
 
       <a href="#som-lenke" className="knapp knapp--fare">
-        som-lenke
+        Som-lenke
       </a>
 
       <a href="#som-lenke" className="knapp knapp--flat">
-        som-lenke
+        Som-lenke
       </a>
 
       <a href="#som-lenke" className="knapp knapp--disabled">
-        som-lenke
+        Som-lenke
       </a>
     </div>
 
@@ -91,16 +91,16 @@ export const All = () => (
         justifyContent: "space-evenly",
       }}
     >
-      <Knapp mini>mini</Knapp>
+      <Knapp mini>Mini</Knapp>
 
-      <Hovedknapp mini>mini</Hovedknapp>
+      <Hovedknapp mini>Mini</Hovedknapp>
 
-      <Fareknapp mini>mini</Fareknapp>
+      <Fareknapp mini>Mini</Fareknapp>
 
-      <Flatknapp mini>mini</Flatknapp>
+      <Flatknapp mini>Mini</Flatknapp>
 
       <Knapp disabled mini>
-        mini
+        Mini
       </Knapp>
     </div>
 
@@ -110,16 +110,16 @@ export const All = () => (
         justifyContent: "space-evenly",
       }}
     >
-      <Knapp kompakt>kompakt</Knapp>
+      <Knapp kompakt>Kompakt</Knapp>
 
-      <Hovedknapp kompakt>kompakt</Hovedknapp>
+      <Hovedknapp kompakt>Kompakt</Hovedknapp>
 
-      <Fareknapp kompakt>kompakt</Fareknapp>
+      <Fareknapp kompakt>Kompakt</Fareknapp>
 
-      <Flatknapp kompakt>kompakt</Flatknapp>
+      <Flatknapp kompakt>Kompakt</Flatknapp>
 
       <Knapp disabled kompakt>
-        kompakt
+        Kompakt
       </Knapp>
     </div>
 
@@ -130,23 +130,23 @@ export const All = () => (
       }}
     >
       <Knapp kompakt mini>
-        kompakt mini
+        Kompakt mini
       </Knapp>
 
       <Hovedknapp kompakt mini>
-        kompakt mini
+        Kompakt mini
       </Hovedknapp>
 
       <Fareknapp kompakt mini>
-        kompakt mini
+        Kompakt mini
       </Fareknapp>
 
       <Flatknapp kompakt mini>
-        kompakt mini
+        Kompakt mini
       </Flatknapp>
 
       <Knapp disabled kompakt mini>
-        kompakt mini
+        Kompakt mini
       </Knapp>
     </div>
 
@@ -213,12 +213,12 @@ export const All = () => (
     >
       <Knapp kompakt>
         <Cog />
-        <span>kompakt</span>
+        <span>Kompakt</span>
       </Knapp>
 
       <Knapp kompakt>
         <Cog />
-        <span className="sr-only">kompakt</span>
+        <span className="sr-only">Kompakt</span>
       </Knapp>
     </div>
   </div>

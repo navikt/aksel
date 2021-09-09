@@ -6,7 +6,7 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import { BodyLong } from "..";
+import { BodyShort } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -47,42 +47,39 @@ const Icon = ({ variant, ...props }) => {
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
-      variant,
       children,
       className,
+      variant,
       size = "medium",
       fullWidth = false,
       ...rest
     },
     ref
-  ) => {
-    return (
-      <div
-        {...rest}
-        ref={ref}
-        className={cl(
-          className,
-          "navds-alert",
-          `navds-alert--${variant}`,
-          `navds-alert--${size}`,
-          { "navds-alert--full-width": fullWidth }
-        )}
-      >
-        <span className="navds-alert__icon">
-          <Icon
-            aria-label={`${variant}-ikon`}
-            focusable="false"
-            role="img"
-            variant={variant}
-            alt={`${variant}-ikon`}
-          />
-        </span>
-        <BodyLong className="navds-alert__content" size={size}>
-          {children}
-        </BodyLong>
-      </div>
-    );
-  }
+  ) => (
+    <div
+      {...rest}
+      ref={ref}
+      className={cl(
+        className,
+        "navds-alert",
+        `navds-alert--${variant}`,
+        `navds-alert--${size}`,
+        { "navds-alert--full-width": fullWidth }
+      )}
+    >
+      <Icon
+        aria-label={`${variant}-ikon`}
+        focusable="false"
+        role="img"
+        variant={variant}
+        alt={`${variant}-ikon`}
+        className="navds-alert__icon"
+      />
+      <BodyShort className="navds-alert__content" size={size}>
+        {children}
+      </BodyShort>
+    </div>
+  )
 );
 
 export default Alert;

@@ -29,6 +29,13 @@ const variants: Array<"primary" | "secondary" | "action" | "danger"> = [
   "danger",
 ];
 
+const varSwitch = {
+  primary: "Primary",
+  secondary: "Secondary",
+  action: "Action",
+  danger: "Danger",
+};
+
 export const All = () => {
   return (
     <>
@@ -36,7 +43,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -44,7 +51,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} disabled>
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -52,7 +59,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button as="a" key={variant} variant={variant} href="the-link">
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
@@ -60,7 +67,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="small">
-            {variant}
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
