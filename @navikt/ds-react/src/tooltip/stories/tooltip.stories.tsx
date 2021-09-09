@@ -15,7 +15,7 @@ export default {
 
 const Template = (props) => {
   return (
-    <Tooltip enterDelay={300} {...props} title={props.placement}>
+    <Tooltip {...props} title={props.placement}>
       <Refresh />
     </Tooltip>
   );

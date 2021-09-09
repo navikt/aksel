@@ -27,6 +27,11 @@
   justify-content: center;
 }
 
+/* Tooltip should never get focus, so ignoring styling it */
+.navds-tooltip:focus {
+  outline: none;
+}
+
 .navds-tooltip__arrow {
   z-index: -1;
 }
