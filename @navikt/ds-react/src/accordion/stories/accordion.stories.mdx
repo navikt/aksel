@@ -1,4 +1,4 @@
-import { Meta, Canvas } from "@storybook/addon-docs";
+import { Meta, Canvas, Props } from "@storybook/addon-docs";
 import { Accordion } from "../../index";
 
 <Meta title="ds-react/accordion/intro" />
@@ -6,28 +6,67 @@ import { Accordion } from "../../index";
 # Hvordan ta i bruk Accordion
 
 ```jsx
-<Accordion heading="Qui id id ad cupidatat ullamco.">
-  Et anim nostrud reprehenderit duis eu tempor et irure proident. Eu ea occaecat
-  aliqua commodo sunt. Sit cupidatat ad id occaecat exercitation ipsum laboris
-  duis velit consequat adipisicing do amet aute. Aliquip culpa minim commodo
-  laborum eiusmod eu magna elit veniam ullamco ullamco minim.
+<Accordion>
+  <Accordion.Item>
+    <Accordion.Header>Accordion header text</Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit occaecat nisi
+      qui nostrud sit.
+    </Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item>
+    <Accordion.Header>Aliquip amet irure consectetur occaecat</Accordion.Header>
+    <Accordion.Content>
+      Cupidatat aliqua eu ea et anim excepteur. Labore aliquip dolore laborum
+      consequat. Reprehenderit ad velit quis eiusmod ex sint aliquip do deserunt
+      amet exercitation velit Lorem.
+    </Accordion.Content>
+  </Accordion.Item>
 </Accordion>
 ```
 
 <Canvas>
-  <Accordion heading="Qui id id ad cupidatat ullamco.">
-    Et anim nostrud reprehenderit duis eu tempor et irure proident. Eu ea
-    occaecat aliqua commodo sunt. Sit cupidatat ad id occaecat exercitation
-    ipsum laboris duis velit consequat adipisicing do amet aute. Aliquip culpa
-    minim commodo laborum eiusmod eu magna elit veniam ullamco ullamco minim.
+  <Accordion>
+    <Accordion.Item>
+      <Accordion.Header>Accordion header text</Accordion.Header>
+      <Accordion.Content>
+        Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam
+        officia laboris voluptate officia pariatur.Lorem est ex anim velit
+        occaecat nisi qui nostrud sit.
+      </Accordion.Content>
+    </Accordion.Item>
+    <Accordion.Item>
+      <Accordion.Header>
+        Aliquip amet irure consectetur occaecat
+      </Accordion.Header>
+      <Accordion.Content>
+        Cupidatat aliqua eu ea et anim excepteur. Labore aliquip dolore laborum
+        consequat. Reprehenderit ad velit quis eiusmod ex sint aliquip do
+        deserunt amet exercitation velit Lorem.
+      </Accordion.Content>
+    </Accordion.Item>
   </Accordion>
 </Canvas>
 
-Accordion-komponeten styrer selv open/closed state, men om man ønsker kan man selv overskrive denne med
-`open`-prop + `onClick`-prop.
+## Controlled state
 
-Note: Hvis man tar i bruk `onClick`, så tolker komponeten det slik at du ønsker å styre state selv, så
-man må da også bruke `open`-prop
+Accordion-komponeten styrer selv open-state, men om man ønsker kan man selv overskrive denne med
+`open`-prop + `onClick`-prop slik det er gjort på eksemplet.
 
-`renderContentWhenClosed`-prop bestemmer om innholdet (children) skal beholdes i dom-strukturen mens
+```jsx
+<Accordion>
+  <Accordion.Item open={open}>
+    <Accordion.Header onClick={(open) => setOpen(!open)}>
+      Accordion header text
+    </Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+`renderContentWhenClosed`-prop på `Accordion.Item` bestemmer om innholdet (children) skal beholdes i dom-strukturen mens
 Accordion er lukket. Defaulter til `false`.

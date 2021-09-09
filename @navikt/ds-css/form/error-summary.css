@@ -1,7 +1,12 @@
+:root {
+  --navds-error-summary-color-background: var(--navds-color-white);
+  --navds-error-summary-color-border: var(--navds-color-error-border);
+}
+
 .navds-error-summary {
-  background-color: #fff;
+  background-color: var(--navds-error-summary-color-background);
   padding: var(--navds-spacing-4);
-  border: 4px solid #ba3a26;
+  border: 4px solid var(--navds-error-summary-color-border);
 }
 
 .navds-error-summary--small {

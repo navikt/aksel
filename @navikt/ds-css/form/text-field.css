@@ -1,20 +1,31 @@
+:root {
+  --navds-text-field-color-background: var(--navds-color-white);
+  --navds-text-field-color-border: var(--navds-color-gray-40);
+  --navds-text-field-color-border-hover: var(--navds-color-blue-50);
+  --navds-text-field-color-border-error: var(--navds-color-red-50);
+  --navds-text-field-color-shadow-error: var(--navds-color-red-50);
+  --navds-text-field-color-border-disabled: var(--navds-color-gray-40);
+  --navds-text-field-color-background-disabled: var(--navds-color-gray-10);
+  --navds-text-field-color-text-disabled: var(--navds-color-darkgray);
+}
+
 .navds-text-field__input {
   appearance: none;
   padding: 0.5rem;
-  background-color: white;
+  background-color: var(--navds-text-field-color-background);
   border-radius: 4px;
-  border: 1px solid var(--navds-color-border);
+  border: 1px solid var(--navds-text-field-color-border);
   min-height: 48px;
   width: 100%;
 }
 
 .navds-form-field--small > .navds-text-field__input {
-  padding: 0.25rem;
+  padding: 0.15rem;
   min-height: 32px;
 }
 
 .navds-text-field__input:hover {
-  border-color: var(--navds-color-blue-50);
+  border-color: var(--navds-text-field-color-border-hover);
 }
 
 .navds-text-field__input:focus {
@@ -27,19 +38,26 @@
 */
 .navds-text-field--error
   > .navds-text-field__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-color-red-50);
-  border-color: var(--navds-color-red-50);
+  box-shadow: 0 0 0 1px var(--navds-text-field-color-shadow-error);
+  border-color: var(--navds-text-field-color-border-error);
 }
 
-/*
-  TODO: Oppdater denne til riktige farger
-  Disabled handling
- */
+/* Disabled handling */
 .navds-text-field__input:disabled,
 .navds-text-field__input[readonly] {
-  background-color: #f1f1f1;
-  border-color: #6a6a6a;
+  background-color: var(--navds-text-field-color-background-disabled);
+  border-color: var(--navds-text-field-color-border-disabled);
   box-shadow: none;
-  color: #262626;
+  color: var(--navds-text-field-color-text-disabled);
   cursor: not-allowed;
+}
+
+/**
+  * Removes default search icon
+  */
+.navds-text-field__input[type="search"]::-webkit-search-decoration,
+.navds-text-field__input[type="search"]::-webkit-search-cancel-button,
+.navds-text-field__input[type="search"]::-webkit-search-results-button,
+.navds-text-field__input[type="search"]::-webkit-search-results-decoration {
+  -webkit-appearance: none;
 }

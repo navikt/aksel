@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { Title, BodyShort } from "../..";
+import { Heading, BodyShort } from "../..";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -47,13 +47,13 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         tabIndex={-1}
         role="region"
       >
-        <Title
-          className="navds-error-summary__title"
+        <Heading
+          className="navds-error-summary__heading"
           as={headingTag}
           size="small"
         >
           {heading}
-        </Title>
+        </Heading>
         <BodyShort as="ul" size={size} className="navds-error-summary__list">
           {React.Children.map(children, (child) => {
             return <li key={child?.toString()}>{child}</li>;

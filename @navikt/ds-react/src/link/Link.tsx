@@ -8,25 +8,13 @@ export interface LinkProps
    * Link text
    */
   children: React.ReactNode;
-  /**
-   * Link anchor should direct to
-   */
-  href: string;
 }
 
-const Link: OverridableComponent<LinkProps, HTMLAnchorElement> = forwardRef(
-  ({ children, as: Component = "a", className, href, ...rest }, ref) => {
-    return (
-      <Component
-        ref={ref}
-        href={href}
-        className={cl("navds-link", className)}
-        {...rest}
-      >
-        {children}
-      </Component>
-    );
-  }
-);
+const Link: OverridableComponent<
+  LinkProps,
+  HTMLAnchorElement
+> = forwardRef(({ as: Component = "a", className, ...rest }, ref) => (
+  <Component {...rest} ref={ref} className={cl("navds-link", className)} />
+));
 
 export default Link;

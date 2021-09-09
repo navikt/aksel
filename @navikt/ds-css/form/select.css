@@ -1,9 +1,20 @@
+:root {
+  --navds-select-color-background: var(--navds-color-white);
+  --navds-select-color-border: var(--navds-color-gray-40);
+  --navds-select-color-border-hover: var(--navds-color-blue-50);
+  --navds-select-color-border-error: var(--navds-color-red-50);
+  --navds-select-color-shadow-error: var(--navds-color-red-50);
+  --navds-select-color-border-disabled: var(--navds-color-gray-40);
+  --navds-select-color-background-disabled: var(--navds-color-gray-10);
+  --navds-select-color-text-disabled: var(--navds-color-darkgray);
+}
+
 .navds-select__input {
   appearance: none;
   padding: 0.5rem;
-  background-color: white;
+  background-color: var(--navds-select-color-background);
   border-radius: 4px;
-  border: 1px solid var(--navds-color-gray-40);
+  border: 1px solid var(--navds-select-color-border);
   width: 100%;
   box-sizing: border-box;
   min-height: 48px;
@@ -13,7 +24,7 @@
 }
 
 .navds-select__input:hover {
-  border-color: var(--navds-color-blue-50);
+  border-color: var(--navds-select-color-border-hover);
 }
 
 .navds-select__input:focus {
@@ -44,19 +55,16 @@
   Error handling
 */
 .navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-color-red-50);
-  border-color: var(--navds-color-red-50);
+  box-shadow: 0 0 0 1px var(--navds-select-color-shadow-error);
+  border-color: var(--navds-select-color-border-error);
 }
 
-/*
-  Disabled handling
-  TODO: Oppdatere farger her
- */
+/* Disabled handling */
 .navds-select__input:disabled,
 .navds-select__input[read-only] {
-  background-color: var(--navds-color-gray-10);
-  border-color: var(--navds-color-gray-40);
+  background-color: var(--navds-select-color-background-disabled);
+  border-color: var(--navds-select-color-border-disabled);
   box-shadow: none;
-  color: var(--navds-color-darkgray);
+  color: var(--navds-select-color-text-disabled);
   cursor: not-allowed;
 }

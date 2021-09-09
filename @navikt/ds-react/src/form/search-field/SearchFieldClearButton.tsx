@@ -32,7 +32,7 @@ const SearchFieldClearButton = forwardRef<
   return (
     <Button
       ref={ref}
-      className={cl(className, "navds-search-field__button")}
+      className={cl(className, "navds-search-field__clear-button")}
       {...rest}
       size={size}
       variant={variant}
