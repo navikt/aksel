@@ -29,7 +29,6 @@ export const All = () => {
         style={{
           display: "flex",
           flexWrap: "wrap",
-
           gap: "3rem",
         }}
       >

@@ -1,15 +1,9 @@
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { Detail, useId } from "..";
+import { Detail, useClientLayoutEffect, useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -39,6 +33,11 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * Tekst shown in tooltip
    */
   title: string;
+  /**
+   * Adds a delay when opening to tooltip
+   * @default 150ms
+   */
+  delay?: number;
 }
 
 const Popover = forwardRef<HTMLDivElement, TooltipProps>(
@@ -51,6 +50,7 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       open,
       offset,
       title,
+      delay = 150,
       id,
       ...rest
     },
@@ -60,15 +60,24 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
     const mergedRef = mergeRefs([popoverRef, ref]);
 
     const anchor = useRef<HTMLDivElement | null>(null);
+    const timeoutRef = useRef<number>();
+
     const [openState, setOpenState] = useState(open ?? false);
     const tooltipId = useId();
 
     const handleOpen = () => {
-      open === undefined && setOpenState(true);
+      if (open !== undefined) return;
+
+      window.clearTimeout(timeoutRef.current);
+      timeoutRef.current = window.setTimeout(() => {
+        setOpenState(true);
+      }, delay);
     };
 
     const handleClose = () => {
-      open === undefined && setOpenState(false);
+      window.clearTimeout(timeoutRef.current);
+      if (open !== undefined) return;
+      setOpenState(false);
     };
 
     const { styles, attributes, update } = usePopper(
@@ -93,8 +102,8 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       }
     );
 
-    //Needed because of sync issue with useId
-    useEffect(() => {
+    // Needed because of stete sync-issue with useId
+    useClientLayoutEffect(() => {
       update && update();
     }, [open, openState, update]);
 
