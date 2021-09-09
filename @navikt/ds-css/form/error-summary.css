@@ -1,6 +1,6 @@
 :root {
   --navds-error-summary-color-background: var(--navds-color-white);
-  --navds-error-summary-color-border: #ba3a26;
+  --navds-error-summary-color-border: var(--navds-color-error-border);
 }
 
 .navds-error-summary {
