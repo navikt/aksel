@@ -1,0 +1,87 @@
+:root {
+  --navds-tooltip-color-text: var(--navds-color-text-inverse);
+  --navds-tooltip-color-background: var(--navds-color-gray-90);
+  --navds-tooltip-color-border: transparent;
+  --navds-tooltip-color-shadow: var(--navds-color-gray-20);
+}
+
+.navds-tooltip {
+  z-index: var(--navds-z-index-popover);
+  background-color: var(--navds-tooltip-color-background);
+  color: var(--navds-tooltip-color-text);
+  box-shadow: 0 2px 4px 0 var(--navds-tooltip-color-shadow);
+  border: 1px solid;
+  border-color: var(--navds-tooltip-color-border);
+  border-radius: 4px;
+  padding: var(--navds-spacing-2);
+  white-space: nowrap;
+}
+
+.navds-tooltip--hidden {
+  display: none;
+}
+
+.navds-tooltip__wrapper {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.navds-tooltip:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-tooltip__arrow {
+  z-index: -1;
+}
+
+.navds-tooltip__arrow::before {
+  display: block;
+  content: "";
+  transform: rotate(45deg);
+  background-color: var(--navds-tooltip-color-background);
+  border: 1px solid;
+  border-color: var(--navds-tooltip-color-border);
+  width: 0.75rem;
+  height: 0.75rem;
+  top: 0;
+  left: 0;
+}
+
+.navds-tooltip[data-popper-placement^="top"] > .navds-tooltip__arrow {
+  bottom: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="top"] > .navds-tooltip__arrow::before {
+  border-left-color: transparent;
+  border-top-color: transparent;
+}
+
+.navds-tooltip[data-popper-placement^="bottom"] > .navds-tooltip__arrow {
+  top: calc(0.75rem / -2);
+}
+
+/* prettier-ignore */
+.navds-tooltip[data-popper-placement^="bottom"] > .navds-tooltip__arrow::before {
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+}
+
+.navds-tooltip[data-popper-placement^="left"] > .navds-tooltip__arrow {
+  right: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="left"] > .navds-tooltip__arrow::before {
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.navds-tooltip[data-popper-placement^="right"] > .navds-tooltip__arrow {
+  left: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="right"] > .navds-tooltip__arrow::before {
+  border-right-color: transparent;
+  border-top-color: transparent;
+}
