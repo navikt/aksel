@@ -1,26 +1,31 @@
 :root {
-  --navds-link-color: var(--navds-color-text-link);
-  --navds-link-color-focus: var(--navds-color-text-inverse);
+  --navds-link-color-text: var(--navds-color-text-link);
+  --navds-link-color-text-focus: var(--navds-color-text-inverse);
+  --navds-link-color-text-active: var(--navds-color-text-inverse);
   --navds-link-color-background-focus: var(--navds-text-focus);
-  --navds-link-color-active: var(--navds-color-text-inverse);
   --navds-link-color-background-active: var(--navds-text-focus);
-  --navds-link-color-high-contrast: var(--navds-color-text-primary);
   --navds-link-color-icon: var(--navds-color-text-link);
   --navds-link-color-icon-focus: var(--navds-color-text-inverse);
+
+  --navds-link-color-on-info-background: var(--navds-color-text-primary);
+  --navds-link-color-on-error-background: var(--navds-color-text-primary);
 }
 
 .navds-link {
-  color: var(--navds-link-color);
+  color: var(--navds-link-color-text);
   text-decoration: underline;
   display: inline-flex;
   align-items: center;
   gap: var(--navds-spacing-1);
 }
 
+.navds-alert--info .navds-link {
+  color: var(--navds-link-color-on-info-background);
+}
+
 .navds-alert--error .navds-link,
-.navds-alert--info .navds-link,
 .navds-confirmation-panel--error .navds-link {
-  color: var(--navds-link-color-high-contrast);
+  color: var(--navds-link-color-on-error-background);
 }
 
 .navds-link:hover {
@@ -29,7 +34,7 @@
 
 .navds-link:focus {
   outline: none;
-  color: var(--navds-link-color-focus);
+  color: var(--navds-link-color-text-focus);
   text-decoration: none;
   background-color: var(--navds-link-color-background-focus);
   box-shadow: var(--navds-text-shadow);
@@ -37,7 +42,7 @@
 
 .navds-link:active {
   outline: none;
-  color: var(--navds-link-color-active);
+  color: var(--navds-link-color-text-active);
   text-decoration: none;
   background-color: var(--navds-link-color-background-active);
   box-shadow: var(--navds-text-shadow);
