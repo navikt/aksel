@@ -27,11 +27,6 @@
   justify-content: center;
 }
 
-.navds-tooltip:focus {
-  outline: none;
-  box-shadow: var(--navds-shadow-focus);
-}
-
 .navds-tooltip__arrow {
   z-index: -1;
 }
