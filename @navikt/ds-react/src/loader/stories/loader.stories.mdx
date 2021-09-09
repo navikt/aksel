@@ -88,17 +88,16 @@ Størrelsen justeres også automatisk, slik at alt man trenger er å sette Loade
 
 ## Overskrive farger for å sikre kontrast
 
-I de casene der man må justere fargene for å ha bedre kontrast så vil disse to klassene være relevante.
-Om mulig bør man unngå dette og bare ta i bruk default.
+I de casene der man må justere fargene for å ha bedre kontrast så kan man endre på selve css-variablene som bli brukt
 
 ```css
-/* Foreground */
-.navds-loader > .navds-loader__foreground {
-  stroke: var(--navds-color-gray-40);
-}
-
-/* Background */
-.navds-loader > .navds-loader__background {
-  stroke: var(--navds-color-gray-10);
-}
+--navds-loader-color-foreground: var(--navds-color-gray-40);
+--navds-loader-color-background: var(--navds-color-gray-10);
+--navds-loader-color-neutral-foreground: var(--navds-color-gray-40);
+--navds-loader-color-interaction-foreground: var(--navds-color-blue-50);
+--navds-loader-color-inverted-foreground: var(--navds-color-white);
+--navds-loader-color-inverted-background: rgba(255, 255, 255, 0.3);
+--navds-loader-color-transparent-background: transparent;
+--navds-loader-color-on-button-background: rgba(255, 255, 255, 0.3);
+--navds-loader-color-on-button-foreground: currentColor;
 ```
