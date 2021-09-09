@@ -2,19 +2,20 @@
   --navds-checkbox-color-background: var(--navds-color-white);
   --navds-checkbox-color-border: var(--navds-color-border);
   --navds-checkbox-color-label-hover: var(--navds-color-blue-50);
+  --navds-checkbox-color-border-hover: var(--navds-color-blue-50);
   --navds-checkbox-color-background-hover: var(--navds-color-blue-10);
   --navds-checkbox-color-description: var(--navds-color-gray-80);
   --navds-checkbox-color-border-checked: var(--navds-color-blue-50);
   --navds-checkbox-color-background-checked: var(--navds-color-blue-50);
-  --navds-checkbox-color-error-shadow: var(--navds-color-red-50);
-  --navds-checkbox-color-error-border: var(--navds-color-red-50);
-  --navds-checkbox-color-disabled-label: var(--navds-color-gray-40);
+  --navds-checkbox-color-shadow-error: var(--navds-color-red-50);
+  --navds-checkbox-color-border-error: var(--navds-color-red-50);
 
   /* Disabled */
-  --navds-checkbox-color-disabled-border: var(--navds-color-gray-60);
-  --navds-checkbox-color-disabled-background: var(--navds-color-gray-10);
-  --navds-checkbox-color-disabled-border-checked: var(--navds-color-gray-40);
-  --navds-checkbox-color-disabled-background-checked: var(
+  --navds-checkbox-color-label-disabled: var(--navds-color-gray-40);
+  --navds-checkbox-color-border-disabled: var(--navds-color-gray-60);
+  --navds-checkbox-color-background-disabled: var(--navds-color-gray-10);
+  --navds-checkbox-color-border-checked-disabled: var(--navds-color-gray-40);
+  --navds-checkbox-color-background-checked-disabled: var(
     --navds-color-gray-40
   );
 }
@@ -95,7 +96,7 @@
 }
 
 .navds-checkbox__input:hover + .navds-checkbox__label::before {
-  border-color: var(--navds-checkbox-color-hover);
+  border-color: var(--navds-checkbox-color-border-hover);
   background-color: var(--navds-checkbox-color-background-hover);
 }
 
@@ -120,8 +121,8 @@
 .navds-checkbox--error
   > .navds-checkbox__input:not(:hover):not(:focus):not(:disabled):not(:checked)
   + .navds-checkbox__label::before {
-  box-shadow: 0 0 0 1px var(--navds-checkbox-color-error-shadow);
-  border-color: var(--navds-checkbox-color-error-border);
+  box-shadow: 0 0 0 1px var(--navds-checkbox-color-shadow-error);
+  border-color: var(--navds-checkbox-color-border-error);
 }
 
 .navds-checkbox--small .navds-error-message {
@@ -130,16 +131,16 @@
 
 .navds-checkbox__input:disabled,
 .navds-checkbox__input:disabled + .navds-checkbox__label {
-  color: var(--navds-checkbox-color-disabled-label);
+  color: var(--navds-checkbox-color-label-disabled);
   cursor: not-allowed;
 }
 
 .navds-checkbox__input:disabled + .navds-checkbox__label::before {
-  background-color: var(--navds-checkbox-color-disabled-background);
-  border-color: var(--navds-checkbox-color-disabled-border);
+  background-color: var(--navds-checkbox-color-background-disabled);
+  border-color: var(--navds-checkbox-color-border-disabled);
 }
 
 .navds-checkbox__input:disabled:checked + .navds-checkbox__label::before {
-  background-color: var(--navds-checkbox-color-disabled-background-checked);
-  border-color: var(--navds-checkbox-color-disabled-border-checked);
+  background-color: var(--navds-checkbox-color-background-checked-disabled);
+  border-color: var(--navds-checkbox-color-border-checked-disabled);
 }
