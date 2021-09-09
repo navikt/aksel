@@ -1,3 +1,5 @@
+import { Placement } from "@popperjs/core";
+import cl from "classnames";
 import React, {
   forwardRef,
   HTMLAttributes,
@@ -5,10 +7,9 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
-import cl from "classnames";
+import { usePopper } from "react-popper";
+import { useClientLayoutEffect } from "..";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -139,7 +140,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     );
 
-    useEffect(() => {
+    useClientLayoutEffect(() => {
       open && update && update();
     }, [open, update]);
 
