@@ -1,5 +1,5 @@
 :root {
-  --navds-error-message-color-text: var(--navds-color-red-50);
+  --navds-error-message-color-text: var(--navds-color-text-error);
 }
 
 .navds-error-message {
