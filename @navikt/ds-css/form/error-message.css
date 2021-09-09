@@ -1,8 +1,8 @@
 :root {
-  --navds-error-message-color: var(--navds-color-red-50);
+  --navds-error-message-color-text: var(--navds-color-red-50);
 }
 
 .navds-error-message {
   display: block;
-  color: var(--navds-error-message-color);
+  color: var(--navds-error-message-color-text);
 }
