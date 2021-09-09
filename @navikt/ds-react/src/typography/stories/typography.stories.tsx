@@ -20,8 +20,8 @@ const TitleTemplate = ({ level, size, spacing }) => (
   </Heading>
 );
 
-export const TitleStory = TitleTemplate.bind({});
-TitleStory.args = { level: 1, size: "2xlarge", spacing: false };
+export const HeadingStory = TitleTemplate.bind({});
+HeadingStory.args = { level: 1, size: "2xlarge", spacing: false };
 
 const IngressTemplate = ({ spacing }) => (
   <Ingress spacing={spacing}>{lorem()}</Ingress>
