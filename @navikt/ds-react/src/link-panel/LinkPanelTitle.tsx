@@ -18,8 +18,8 @@ export const LinkPanelTitle: LinkPanelTitleType = forwardRef(
       ref={ref}
       className={cl(
         "navds-link-panel__title",
-        "navds-title",
-        "navds-title--medium",
+        "navds-heading",
+        "navds-heading--medium",
         className
       )}
     />

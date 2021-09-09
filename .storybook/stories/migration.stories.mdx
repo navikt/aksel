@@ -35,6 +35,13 @@ Komponenter som tidligere implementerte ovveridable component med bruk av `compo
 <BodyShort as="span" />
 ```
 
+## Navneendringer
+
+Vi har valgt å endre fra `<Title/>` -> `<Heading/>` i typografien vår da dette ga mer mening i bruk.
+APIet til komponenten er ikke endret borsett fra "Sizing" endringene nevt lengre opp, så skal bare være en rask search/replace.
+
+For de som har brukt css-en direkte, eks `navds-title` så må man endre til `navds-heading`
+
 ## Fjernet komponenter
 
 Fjernet da den var utdaterte/må ses mer på
@@ -142,7 +149,7 @@ Innholds-padding er flyttet fra Modal -> Modal.Content
 
 Implementert med dot-notasjon
 
-````jsx
+```jsx
 /* Før */
 <LinkPanel href="#">Consectetur eu duis aliqua eu irure fugiat fugiat eu.</LinkPanel>
 
@@ -161,12 +168,9 @@ Kan nå legge til en beskrivelse med `Linkpanel.Description`
   <LinkPanel.Title>
     Consectetur eu duis aliqua eu irure fugiat fugiat eu.
   </LinkPanel.Title>
-  <LinkPanel.Description>
-    Aliqua id aliquip Lorem esse
-  </LinkPanel.Description>
+  <LinkPanel.Description>Aliqua id aliquip Lorem esse</LinkPanel.Description>
 </LinkPanel>
 ```
-
 
 ## Popover
 
@@ -174,15 +178,19 @@ Implementert med dot-notasjon
 
 Får nå padding rundt innhold med Popover.Content
 
-````
+```jsx
 
-/_ Før _/
+/* Før */
 
 <Popover>Popover innhold</Popover>
 
-/_ Etter _/
+/* Etter */
 
 <Popover>
   <Popover.Content>Modal innhold</Popover.Content>
 </Popover>
+```
+
+```
+
 ```
