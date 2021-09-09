@@ -6,7 +6,6 @@
   --navds-link-color-background-active: var(--navds-text-focus);
   --navds-link-color-icon: var(--navds-color-text-link);
   --navds-link-color-icon-focus: var(--navds-color-text-inverse);
-
   --navds-link-color-on-info-background: var(--navds-color-text-primary);
   --navds-link-color-on-error-background: var(--navds-color-text-primary);
 }
