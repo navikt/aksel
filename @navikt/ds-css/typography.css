@@ -1,56 +1,56 @@
-/* Title */
-.navds-title {
+/* Heading */
+.navds-heading {
   font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }
 
-.navds-title--2xlarge {
-  font-size: var(--navds-font-size-title-2xl);
+.navds-heading--2xlarge {
+  font-size: var(--navds-font-size-heading-2xl);
   letter-spacing: -0.01em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--2xlarge.navds-typo--spacing {
+.navds-heading--2xlarge.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-5);
 }
 
-.navds-title--xlarge {
-  font-size: var(--navds-font-size-title-xl);
+.navds-heading--xlarge {
+  font-size: var(--navds-font-size-heading-xl);
   letter-spacing: -0.008em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--xlarge.navds-typo--spacing {
+.navds-heading--xlarge.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-4);
 }
 
-.navds-title--large {
-  font-size: var(--navds-font-size-title-l);
+.navds-heading--large {
+  font-size: var(--navds-font-size-heading-l);
   letter-spacing: -0.004em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--large.navds-typo--spacing {
+.navds-heading--large.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-title--medium {
-  font-size: var(--navds-font-size-title-m);
+.navds-heading--medium {
+  font-size: var(--navds-font-size-heading-m);
   letter-spacing: -0.002em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--medium.navds-typo--spacing {
+.navds-heading--medium.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 
-.navds-title--small {
-  font-size: var(--navds-font-size-title-s);
+.navds-heading--small {
+  font-size: var(--navds-font-size-heading-s);
   letter-spacing: -0.001em;
   line-height: var(--navds-font-line-height-s);
 }
 
-.navds-title--small.navds-typo--spacing {
+.navds-heading--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-3);
 }
 

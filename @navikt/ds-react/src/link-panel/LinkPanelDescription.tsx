@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
+import { BodyLong } from "..";
 
 interface LinkPanelDescriptionProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -12,8 +13,9 @@ export type LinkPanelDescriptionType = React.ForwardRefExoticComponent<
 
 export const LinkPanelDescription: LinkPanelDescriptionType = forwardRef(
   ({ className, ...rest }, ref) => (
-    <div
+    <BodyLong
       {...rest}
+      as="div"
       ref={ref}
       className={cl("navds-link-panel__description", className)}
     />

@@ -48,8 +48,8 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         className={cl(
           "navds-accordion__header",
           className,
-          "navds-title",
-          "navds-title--small"
+          "navds-heading",
+          "navds-heading--small"
         )}
         onClick={handleClick}
         aria-controls={context.contentId}

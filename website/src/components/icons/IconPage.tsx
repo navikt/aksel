@@ -229,7 +229,7 @@ const IconPage = () => {
             onClick={() => setListView(0)}
             variant={!listView ? "primary" : "secondary"}
             aria-label="Vis ikoner med kategorier"
-            size="s"
+            size="small"
             className="iconPage__viewSelectButton"
           >
             <List />
@@ -238,7 +238,7 @@ const IconPage = () => {
             onClick={() => setListView(1)}
             variant={!listView ? "secondary" : "primary"}
             aria-label="Vis ikoner uten kategorier"
-            size="s"
+            size="small"
             className="iconPage__viewSelectButton"
           >
             <System />
@@ -267,7 +267,7 @@ const IconPage = () => {
                 <p className="iconPage__modalTitle navds-label">Last ned</p>
                 <div className="iconPage__modalButton--wrapper">
                   <Button
-                    size="s"
+                    size="small"
                     variant="action"
                     onClick={() => downloadSvg()}
                     className="iconPage__modalButton"
@@ -277,7 +277,7 @@ const IconPage = () => {
                     SVG
                   </Button>
                   <Button
-                    size="s"
+                    size="small"
                     variant="action"
                     onClick={() => downloadPng()}
                     className="iconPage__modalButton"

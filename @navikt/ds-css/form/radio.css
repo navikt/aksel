@@ -1,3 +1,27 @@
+:root {
+  --navds-radio-color-description: var(--navds-color-gray-80);
+  --navds-radio-color-background: var(--navds-color-white);
+  --navds-radio-color-border: var(--navds-color-border);
+  --navds-radio-color-label-hover: var(--navds-color-blue-50);
+  --navds-radio-color-border-hover: var(--navds-color-blue-50);
+  --navds-radio-color-background-hover: var(--navds-color-blue-10);
+  --navds-radio-color-border-checked: var(--navds-color-blue-50);
+  --navds-radio-color-shadow-checked: var(--navds-color-blue-50);
+  --navds-radio-color-shadow-checked-focus: var(--navds-color-blue-80);
+  --navds-radio-color-shadow-background-checked-focus: var(--navds-color-white);
+  --navds-radio-color-shadow-dot-checked-focus: var(--navds-color-blue-50);
+  --navds-radio-color-shadow-error: var(--navds-color-red-50);
+  --navds-radio-color-border-error: var(--navds-color-red-50);
+
+  /* Disabled */
+  --navds-radio-color-background-disabled: var(--navds-color-gray-10);
+  --navds-radio-color-border-disabled: var(--navds-color-gray-60);
+  --navds-radio-color-label-disabled: var(--navds-color-gray-40);
+  --navds-radio-color-background-disabled-checked: var(--navds-color-gray-40);
+  --navds-radio-color-border-disabled-checked: var(--navds-color-gray-40);
+  --navds-radio-color-shadow-disabled-checked: var(--navds-color-gray-40);
+}
+
 .navds-radio {
   position: relative;
   padding: var(--navds-spacing-3) 0;
@@ -33,7 +57,7 @@
 
 .navds-radio__description {
   padding-left: calc(48px - 12px);
-  color: var(--navds-color-gray-80);
+  color: var(--navds-radio-color-description);
 }
 
 .navds-radio--with-description {
@@ -46,8 +70,8 @@
 
 .navds-radio__label::before {
   content: "";
-  background-color: white;
-  border: 1px solid var(--navds-color-border);
+  background-color: var(--navds-radio-color-background);
+  border: 1px solid var(--navds-radio-color-border);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 4px;
@@ -72,12 +96,12 @@
 }
 
 .navds-radio__input:hover + .navds-radio__label {
-  color: var(--navds-color-blue-50);
+  color: var(--navds-radio-color-label-hover);
 }
 
 .navds-radio__input:hover + .navds-radio__label::before {
-  border-color: var(--navds-color-blue-50);
-  background-color: var(--navds-color-blue-10);
+  border-color: var(--navds-radio-color-border-hover);
+  background-color: var(--navds-radio-color-background-hover);
 }
 
 .navds-radio__input:focus + .navds-radio__label::before {
@@ -85,21 +109,23 @@
 }
 
 .navds-radio__input:checked + .navds-radio__label::before {
-  border: 2px solid var(--navds-color-blue-50);
-  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-blue-50) inset;
+  border: 2px solid var(--navds-radio-color-border-checked);
+  box-shadow: 0 0 0 3px #fff inset,
+    0 0 0 2rem var(--navds-radio-color-shadow-checked) inset;
 }
 
 .navds-radio__input:checked:focus + .navds-radio__label::before {
   transition: box-shadow 200ms cubic-bezier(0.465, 0.183, 0.153, 0.946);
-  box-shadow: 0 0 0 3px var(--navds-color-blue-80), 0 0 0 3px #fff inset,
-    0 0 0 2rem var(--navds-color-blue-50) inset;
+  box-shadow: 0 0 0 3px var(--navds-radio-color-shadow-checked-focus),
+    0 0 0 3px var(--navds-radio-color-shadow-background-checked-focus) inset,
+    0 0 0 2rem var(--navds-radio-color-shadow-dot-checked-focus) inset;
 }
 
 .navds-radio--error
   > .navds-radio__input:not(:hover):not(:focus):not(:disabled):not(:checked)
   + .navds-radio__label::before {
-  box-shadow: 0 0 0 1px var(--navds-color-red-50);
-  border-color: var(--navds-color-red-50);
+  box-shadow: 0 0 0 1px var(--navds-radio-color-shadow-error);
+  border-color: var(--navds-radio-color-border-error);
 }
 
 .navds-radio--small .navds-error-message {
@@ -108,17 +134,18 @@
 
 .navds-radio__input:disabled,
 .navds-radio__input:disabled + .navds-radio__label {
-  color: var(--navds-color-gray-40);
+  color: var(--navds-radio-color-label-disabled);
   cursor: not-allowed;
 }
 
 .navds-radio__input:disabled + .navds-radio__label::before {
-  background-color: var(--navds-color-gray-10);
-  border-color: var(--navds-color-gray-60);
+  background-color: var(--navds-radio-color-background-disabled);
+  border-color: var(--navds-radio-color-border-disabled);
 }
 
 .navds-radio__input:disabled:checked + .navds-radio__label::before {
-  background-color: var(--navds-color-gray-40);
-  border-color: var(--navds-color-gray-40);
-  box-shadow: 0 0 0 3px #fff inset, 0 0 0 2rem var(--navds-color-gray-40) inset;
+  background-color: var(--navds-radio-color-background-disabled-checked);
+  border-color: var(--navds-radio-color-border-disabled-checked);
+  box-shadow: 0 0 0 3px #fff inset,
+    0 0 0 2rem var(--navds-radio-color-shadow-disabled-checked) inset;
 }

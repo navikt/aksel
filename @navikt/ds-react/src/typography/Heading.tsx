@@ -2,9 +2,10 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "..";
 
-export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
+export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Heading level
+   * @default "1"
    */
   level?: "1" | "2" | "3" | "4" | "5";
   /**
@@ -17,37 +18,28 @@ export interface TitleProps extends React.HTMLAttributes<HTMLHeadingElement> {
   children: React.ReactNode;
   /**
    * Adds margins to typo
+   * @default false
    */
   spacing?: boolean;
 }
 
-const Title: OverridableComponent<TitleProps, HTMLHeadingElement> = forwardRef(
-  (
-    {
-      level = "1",
-      size = "2xlarge",
-      spacing,
-      className,
-      children,
-      as,
-      ...rest
-    },
-    ref
-  ) => {
+const Heading: OverridableComponent<
+  HeadingProps,
+  HTMLHeadingElement
+> = forwardRef(
+  ({ level = "1", size, spacing = false, className, as, ...rest }, ref) => {
     let HeadingTag = as ?? (`h${level}` as React.ElementType);
 
     return (
       <HeadingTag
         {...rest}
         ref={ref}
-        className={cl(className, "navds-title", `navds-title--${size}`, {
-          "navds-typo--spacing": !!spacing,
+        className={cl(className, "navds-heading", `navds-heading--${size}`, {
+          "navds-typo--spacing": spacing,
         })}
-      >
-        {children}
-      </HeadingTag>
+      />
     );
   }
 );
 
-export default Title;
+export default Heading;
