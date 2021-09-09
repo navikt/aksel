@@ -49,6 +49,10 @@
   padding: 0 0.5rem;
 }
 
+.navds-search-field__clear-button:focus {
+  border-color: transparent;
+}
+
 .navds-search-field__clear-button:not(:first-child) {
   border-left: none;
 }
