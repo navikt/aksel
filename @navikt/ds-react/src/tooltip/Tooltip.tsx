@@ -1,9 +1,15 @@
-import React, { forwardRef, HTMLAttributes, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { Detail } from "..";
+import { Detail, useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -45,6 +51,7 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       open,
       offset,
       title,
+      id,
       ...rest
     },
     ref
@@ -53,8 +60,8 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
     const mergedRef = mergeRefs([popoverRef, ref]);
 
     const anchor = useRef<HTMLDivElement | null>(null);
-
     const [openState, setOpenState] = useState(open ?? false);
+    const tooltipId = useId();
 
     const handleOpen = () => {
       open === undefined && setOpenState(true);
@@ -64,7 +71,7 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       open === undefined && setOpenState(false);
     };
 
-    const { styles, attributes } = usePopper(
+    const { styles, attributes, update } = usePopper(
       anchor.current,
       popoverRef.current,
       {
@@ -86,10 +93,17 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       }
     );
 
+    //Needed because of sync issue with useId
+    useEffect(() => {
+      update && update();
+    }, [open, openState, update]);
+
+    const isOpen = open || openState;
+
     return (
       <div className="navds-tooltip__wrapper">
         <div
-          ref={anchor}
+          ref={(el) => (anchor.current = el)}
           onFocus={handleOpen}
           onBlur={handleClose}
           onMouseEnter={handleOpen}
@@ -98,18 +112,20 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
           onMouseOut={handleClose}
           onPointerEnter={handleOpen}
           onPointerLeave={handleClose}
+          aria-describedby={isOpen && id ? id : `tooltip-${tooltipId}`}
         >
           {children}
         </div>
         <div
           ref={mergedRef}
           className={cl("navds-tooltip", className, {
-            "navds-tooltip--hidden": !open && !openState,
+            "navds-tooltip--hidden": !isOpen,
           })}
           aria-live="polite"
-          aria-hidden={!open && !openState}
+          aria-hidden={!isOpen}
           tabIndex={-1}
           role="tooltip"
+          id={id ? id : `tooltip-${tooltipId}`}
           {...attributes.popper}
           {...rest}
           style={styles.popper}
