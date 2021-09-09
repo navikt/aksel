@@ -4,9 +4,9 @@
   --navds-textarea-color-border-hover: var(--navds-color-blue-50);
   --navds-textarea-color-border-error: var(--navds-color-red-50);
   --navds-textarea-color-shadow-error: var(--navds-color-red-50);
-  --navds-textarea-color-counter: var(--navds-color-gray-40);
-  --navds-textarea-color-counter-error: var(--navds-color-red-50);
-  --navds-textarea-color-disabled: var(--navds-color-darkgray);
+  --navds-textarea-color-counter-text: var(--navds-color-gray-40);
+  --navds-textarea-color-counter-text-error: var(--navds-color-red-50);
+  --navds-textarea-color-text-disabled: var(--navds-color-darkgray);
   --navds-textarea-color-border-disabled: var(--navds-color-gray-40);
   --navds-textarea-color-background-disabled: var(--navds-color-gray-10);
 }
@@ -53,7 +53,7 @@
 
 .navds-textarea__counter {
   pointer-events: none;
-  color: var(--navds-textarea-color-counter);
+  color: var(--navds-textarea-color-counter-text);
   font-style: italic;
   position: absolute;
   text-align: right;
@@ -63,7 +63,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--navds-textarea-color-counter-error);
+  color: var(--navds-textarea-color-counter-text-error);
 }
 
 /**
@@ -83,6 +83,6 @@
   background-color: var(--navds-textarea-color-background-disabled);
   border-color: var(--navds-textarea-color-border-disabled);
   box-shadow: none;
-  color: var(--navds-textarea-color-disabled);
+  color: var(--navds-textarea-color-text-disabled);
   cursor: not-allowed;
 }

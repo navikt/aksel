@@ -6,7 +6,7 @@
   --navds-select-color-shadow-error: var(--navds-color-red-50);
   --navds-select-color-border-disabled: var(--navds-color-gray-40);
   --navds-select-color-background-disabled: var(--navds-color-gray-10);
-  --navds-select-color-disabled: var(--navds-color-darkgray);
+  --navds-select-color-text-disabled: var(--navds-color-darkgray);
 }
 
 .navds-select__input {
@@ -65,6 +65,6 @@
   background-color: var(--navds-select-color-background-disabled);
   border-color: var(--navds-select-color-border-disabled);
   box-shadow: none;
-  color: var(--navds-select-color-disabled);
+  color: var(--navds-select-color-text-disabled);
   cursor: not-allowed;
 }
