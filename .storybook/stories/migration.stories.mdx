@@ -1,0 +1,188 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="ds-react/Migration" />
+
+# Migrering til ds-react og ds-css v0.8.0
+
+Denne guiden vil være til hjelp for de som allerede har begynt å ta i bruk de nye pakkene våre tidligere enn v0.8.0.
+For de som ikke har begynt å ta i bruk pakkene kan man se bort fra denne.
+
+Fra versjon v0.7 til v0.8 er det komment flere store endringer både i ds-react og ds-css. For å lettere
+oppdatere til v0.8 har vi da laget en liten guide som forklarer de største endringene. Hvis du vil se alle endringene
+kan man sjekke [denne PR en ](https://github.com/navikt/nav-frontend-moduler/pull/1213)
+
+## Styling
+
+De fleste komponenter har fått diverse småjustering på styling. Anbefales da å ta en rask sjekk om alt fortsatt stemmer
+etter oppdateringen.
+
+## Sizing
+
+Alle komponenter som tidligere var implementert med `size`-prop har fått oppdatert
+typene fra "xs", "s", "m", "l", "xl", "2xl" -> "xsmall", "small", "medium", "large", "xlarge", "2xlarge".
+
+Dette betyr også at stylingen er eks endret fra `.navds-body-short--s` -> `.navds-body-short--small`
+
+## Overridable component
+
+Komponenter som tidligere implementerte ovveridable component med bruk av `component`-prop bruker nå `as`.
+
+```jsx
+/* Før */
+<BodyShort component="span" />
+
+/* Etter */
+<BodyShort as="span" />
+```
+
+## Fjernet komponenter
+
+Fjernet da den var utdaterte/må ses mer på
+
+- ProductPageLayout
+
+## Flyttet komponenter
+
+Vi har valgt å legge disse komponentenen i en egen pakke da de skiller seg for mye ut fra "kjernebiblioteket"
+og vi ønsker å ha et tydeligere skille.
+
+- MicroCard
+- Header
+
+Disse ligger nå i en egen pakke som heter `@navikt/ds-react-navno`.
+
+## AccordionMenu
+
+Implementert med dot-notation
+
+- Trenger bare importere AccordionMenu
+- AccordionMenuCollapsable -> AccordionMenu.Collapsable
+- AccordionMenuItem -> AccordionMenu.Item
+
+## Accordion
+
+Implementert med dot-notation
+
+- Trenger bare importere Accordion nå
+
+Fragmenterte komponenten:
+
+- Accordion -> Accordion.Item
+- Header -> Accordion.Header
+- children -> Accordion.Content
+
+La til prop: `defaultOpen` på `Accordion.Item`
+
+```jsx
+/* Før */
+<Accordion heading="tittel" open={open} onClick={(open) => setOpen(!open)}>
+  Eu magna fugiat officia
+</Accordion>
+<Accordion heading="tittel2" open={open2} onClick={(open2) => setOpen(!open2)}>
+  Eu magna fugiat officia
+</Accordion>
+
+/* Etter */
+<Accordion>
+  <Accordion.Item open={open}>
+    <Accordion.Header onClick={(open) => setOpen(!open)}>
+      Accordion header text
+    </Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit
+    </Accordion.Content>
+  </Accordion.Item>
+  <Accordion.Item open={open2}>
+    <Accordion.Header onClick={(open2) => setOpen(!open2)}>
+      Accordion header text
+    </Accordion.Header>
+    <Accordion.Content>
+      Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam officia
+      laboris voluptate officia pariatur.Lorem est ex anim velit
+    </Accordion.Content>
+  </Accordion.Item>
+</Accordion>
+```
+
+## Alert
+
+La til `fullWidth`-prop for alert uten border-radius og width 100%
+
+## Button
+
+Oppdatert med Overridablecomponent.
+
+Håndtering av sentrering, margins er oppdatert. Trenger ikke wrappe tekst med `span` når man skal bruke ikoner lengre.
+
+## CopyToClipboard
+
+Ekstender nå ButtonProps, slik at man eks kan ta i bruk `size`-proppen
+
+`text`-prop -> `copyText`
+`label`-prop -> `popoverText`
+
+Fjernet `icon`-prop, la til `popoverPlacement`
+
+## Modal
+
+Implementert med dot-notasjon
+
+Innholds-padding er flyttet fra Modal -> Modal.Content
+
+```
+/* Før */
+<Modal>Modal innhold</Modal>
+
+/* Etter */
+<Modal><Modal.Content>Modal innhold</Modal.Content></Modal>
+```
+
+## LinkPanel
+
+Implementert med dot-notasjon
+
+````jsx
+/* Før */
+<LinkPanel href="#">Consectetur eu duis aliqua eu irure fugiat fugiat eu.</LinkPanel>
+
+/* Etter */
+<LinkPanel href="#">
+  <LinkPanel.Title>
+    Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+  </LinkPanel.Title>
+</LinkPanel>
+```
+
+Kan nå legge til en beskrivelse med `Linkpanel.Description`
+
+```jsx
+<LinkPanel href="#">
+  <LinkPanel.Title>
+    Consectetur eu duis aliqua eu irure fugiat fugiat eu.
+  </LinkPanel.Title>
+  <LinkPanel.Description>
+    Aliqua id aliquip Lorem esse
+  </LinkPanel.Description>
+</LinkPanel>
+```
+
+
+## Popover
+
+Implementert med dot-notasjon
+
+Får nå padding rundt innhold med Popover.Content
+
+````
+
+/_ Før _/
+
+<Popover>Popover innhold</Popover>
+
+/_ Etter _/
+
+<Popover>
+  <Popover.Content>Modal innhold</Popover.Content>
+</Popover>
+```

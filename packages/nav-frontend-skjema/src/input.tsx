@@ -47,7 +47,9 @@ export interface InputProps
   /**
    * Referanse til selve inputfeltet. Brukes for eksempel til å sette fokus
    */
-  inputRef?: (element: HTMLInputElement | null) => any;
+  inputRef?:
+    | ((element: HTMLInputElement | null) => any)
+    | React.RefObject<HTMLInputElement>;
   /**
    * Label for tekstfeltet
    */
@@ -158,7 +160,7 @@ class Input extends React.Component<InputProps> {
   /**
    * Referanse til selve inputfeltet. Brukes for eksempel til å sette fokus
    */
-  inputRef: PT.func,
+  inputRef: PT.oneOfType([PT.func, PT.shape({ current: PT.any })]),
   /**
    * Classname som blir satt på komponentwrapperen
    */
