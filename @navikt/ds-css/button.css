@@ -25,7 +25,9 @@
   --navds-button-color-secondary-background-active: var(
     --navds-color-action-active
   );
-  --navds-button-color-secondary-border-focus: var(--navds-color-white);
+  --navds-button-color-secondary-border-focus-active-hover: var(
+    --navds-color-white
+  );
 
   /* tertiary */
   --navds-button-color-tertiary-border: transparent;
@@ -114,8 +116,14 @@
   border-color: transparent;
 }
 
-.navds-button--secondary:focus {
-  border-color: var(--navds-button-color-secondary-border-focus);
+.navds-button--secondary:focus:hover {
+  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
+  border-width: 1px;
+  padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
+}
+
+.navds-button--secondary:focus:active {
+  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
   border-width: 1px;
   padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
 }
