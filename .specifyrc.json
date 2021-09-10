@@ -1,0 +1,29 @@
+{
+  "repository": "@nav/designsystem",
+  "head": "specify-sync",
+  "base": "master",
+  "rules": [
+    {
+      "name": "Color sync",
+      "path": "@navikt/ds-tokens/src/colors.js",
+      "filter": {
+        "types": ["color"]
+      },
+      "parsers": [
+        {
+          "name": "to-theme-ui",
+          "options": {
+            "formatConfig": {
+              "module": "commonjs"
+            },
+            "formatTokens": {
+              "colorFormat": {
+                "format": "rgb"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
