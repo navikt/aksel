@@ -6,7 +6,7 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import { BodyShort } from "..";
+import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -75,9 +75,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         alt={`${variant}-ikon`}
         className="navds-alert__icon"
       />
-      <BodyShort className="navds-alert__content" size={size}>
+      <BodyLong className="navds-alert__content" size={size}>
         {children}
-      </BodyShort>
+      </BodyLong>
     </div>
   )
 );

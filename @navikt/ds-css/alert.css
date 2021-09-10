@@ -22,9 +22,10 @@
   border-radius: 4px;
   border: 1px solid;
   border-color: var(--navds-alert-color-border);
-  padding: calc(var(--navds-spacing-5) - 1px) calc(var(--navds-spacing-4) - 1px);
+  padding: calc(var(--navds-spacing-4) + 1px) calc(var(--navds-spacing-4) - 1px);
   display: flex;
   gap: var(--navds-spacing-3);
+  min-height: 64px;
 }
 
 .navds-alert__content {
@@ -33,6 +34,7 @@
 
 .navds-alert--small {
   padding: calc(var(--navds-spacing-2) - 1px) calc(var(--navds-spacing-4) - 1px);
+  min-height: 40px;
 }
 
 .navds-alert--full-width {
