@@ -1,0 +1,13 @@
+.sb-guidepanel__tokens--purple {
+  --navds-guide-panel-color-border: var(--navds-color-purple-40);
+  --navds-guide-panel-color-illustration-background: var(
+    --navds-color-purple-20
+  );
+}
+
+.sb-guidepanel__tokens--green {
+  --navds-guide-panel-color-border: var(--navds-color-green-40);
+  --navds-guide-panel-color-illustration-background: var(
+    --navds-color-green-20
+  );
+}

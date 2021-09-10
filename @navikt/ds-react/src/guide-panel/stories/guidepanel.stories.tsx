@@ -1,7 +1,6 @@
 import React from "react";
 import { GuidePanel } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Illustration as SvgTemplate } from "./illustration";
 export default {
   title: "ds-react/guidepanel",
   component: GuidePanel,
@@ -16,30 +15,32 @@ export const All = () => {
   return (
     <div>
       <h1>GuidePanel</h1>
-      <GuidePanel illustration={<SvgTemplate />}>{panelText}</GuidePanel>
-      <h2>GuidePanel compact</h2>
-      <GuidePanel compact illustration={<SvgTemplate />}>
-        {panelText}
-      </GuidePanel>
+      <GuidePanel>{panelText}</GuidePanel>
       <h2>GuidePanel poster</h2>
-      <GuidePanel poster illustration={<SvgTemplate />}>
-        {panelText}
-      </GuidePanel>
-      <h2>GuidePanel compact, poster</h2>
-      <GuidePanel poster compact illustration={<SvgTemplate />}>
-        {panelText}
-      </GuidePanel>
+      <GuidePanel poster>{panelText}</GuidePanel>
       <h2>custom colors</h2>
-      <GuidePanel illustration={<SvgTemplate />} color="#99C3FF">
-        {panelText}
-      </GuidePanel>
       <GuidePanel
-        illustration={<SvgTemplate />}
-        color="var(--navds-color-green-30)"
+        style={{
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-purple-20)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-purple-40)",
+        }}
       >
         {panelText}
       </GuidePanel>
-      <GuidePanel illustration={<SvgTemplate />} color="#99C3FF">
+      <GuidePanel
+        style={{
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-green-20)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-green-40)",
+        }}
+      >
+        {panelText}
+      </GuidePanel>
+      <GuidePanel
+        style={{
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+        }}
+      >
         {panelText}Ullamco reprehenderit fugiat reprehenderit ad nisi aliqua
         irure enim id nisi do non magna. Nisi ut incididunt dolor aliqua
         adipisicing. Cupidatat sint et qui minim sint aute anim non Lorem

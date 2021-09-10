@@ -2,67 +2,81 @@ import { Meta, Canvas } from "@storybook/addon-docs";
 import { Button, Loader, GuidePanel } from "../../index";
 import { Success } from "@navikt/ds-react";
 import { Illustration } from "./illustration";
+import "./example.css";
 
 <Meta title="ds-react/guidepanel/intro" />
 
 # Hvordan ta i bruk GuidePanel
 
 ```jsx
-<GuidePanel illustration={<Illustration />}>
+<GuidePanel>
   Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
 </GuidePanel>
 ```
 
 <Canvas>
-  <GuidePanel illustration={<Illustration />}>
+  <GuidePanel>
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
 </Canvas>
 
 ## Varianter
 
-Komponenten har to props `compact` og `poster` som kan mikses for å endre plassering på illustrasjonen
+`poster` endrer på plassering av illustrasjon
 
 <Canvas>
-  <GuidePanel illustration={<Illustration />} compact>
+  <GuidePanel>
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
-  <GuidePanel illustration={<Illustration />} poster>
-    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
-  </GuidePanel>
-  <GuidePanel illustration={<Illustration />} poster compact>
+  <GuidePanel poster>
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
 </Canvas>
 
 ## Fargebruk
 
-Istedenfor fargetema/themes slik som tidligere veileder brukte velger man nå selv farge på border/illustrasjons-bakgrunn
-med hjelp av `color`-propen. Denne setter fargen inline på elementet med `style`, slik at man kan sette fargeverdier direkte eller bruke css-variabler.
+Istedenfor fargetema/themes slik som tidligere veileder brukte velger man nå selv farge på border/illustrasjons-bakgrunn ved å
+overskrive tokens. Det anbefalses å gjøre dette med eks Styled-Components eller css-klasser, men kan inlines også
+
+```css
+/* default */
+--navds-guide-panel-color-border: var(--navds-color-blue-40);
+--navds-guide-panel-color-illustration-background: var(--navds-color-blue-20);
+```
 
 ```jsx
+/* Css */
+<GuidePanel className="sb-guidepanel__tokens--purple">
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+  <GuidePanel className="sb-guidepanel__tokens--green">
+    Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
+  </GuidePanel>
+
+/* Inline */
 <GuidePanel
-  illustration={<Illustration />}
-  color="#99C3FF"
+  style={{
+    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
+    ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+  }}
 >
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
 <GuidePanel
-  illustration={<Illustration />}
-  color="var(--navds-color-blue-20)"
+    style={{
+    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
+    ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+  }}
 >
   Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
 </GuidePanel>
 ```
 
 <Canvas>
-  <GuidePanel illustration={<Illustration />} color="#99C3FF">
+  <GuidePanel className="sb-guidepanel__tokens--purple">
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
-  <GuidePanel
-    illustration={<Illustration />}
-    color="var(--navds-color-blue-20)"
-  >
+  <GuidePanel className="sb-guidepanel__tokens--green">
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
 </Canvas>

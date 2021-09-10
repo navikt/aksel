@@ -1,11 +1,17 @@
+:root {
+  --navds-guide-panel-color-background: var(--navds-color-background);
+  --navds-guide-panel-color-border: var(--navds-color-blue-40);
+  --navds-guide-panel-color-illustration-background: var(--navds-color-blue-20);
+}
+
 /**
  * GuidePanel component
  */
 .navds-guide-panel {
-  background-color: var(--navds-color-background);
+  background-color: var(--navds-guide-panel-color-background);
   border-radius: 4px;
   position: relative;
-  border: 2px solid var(--navds-color-gray-20);
+  border: 2px solid var(--navds-guide-panel-color-border);
   min-height: 7.25rem;
   padding: 1.5rem;
   padding-left: 7rem;
@@ -34,23 +40,23 @@
   margin-left: -3.125rem;
 }
 
-.navds-guide-panel--compact:not(.navds-guide-panel--poster) {
+.navds-guide-panel:not(.navds-guide-panel--poster) {
   padding: 1.5rem;
   padding-left: 3.5rem;
   margin-left: 2.5rem;
 }
 
-.navds-guide-panel--compact:not(.navds-guide-panel--poster) .navds-guide {
+.navds-guide-panel:not(.navds-guide-panel--poster) .navds-guide {
   left: -40px;
 }
 
-.navds-guide-panel--compact.navds-guide-panel--poster {
+.navds-guide-panel.navds-guide-panel--poster {
   margin-top: 3.125rem;
   padding: 2rem;
   padding-top: 4.25rem;
 }
 
-.navds-guide-panel--compact.navds-guide-panel--poster .navds-guide {
+.navds-guide-panel.navds-guide-panel--poster .navds-guide {
   top: -50px;
 }
 
@@ -67,7 +73,7 @@
 /* Guide illustration frame */
 .navds-guide__illustration {
   align-items: flex-end;
-  background: var(--navds-color-gray-20);
+  background: var(--navds-guide-panel-color-illustration-background);
   border-radius: 50%;
   display: flex;
   flex-shrink: 0;
@@ -88,55 +94,7 @@
   width: 5rem;
 }
 
-.navds-guide__illustration--small ~ .navds-guide__speech-bubble--floating {
-  bottom: 5rem;
-}
-
 .navds-guide__illustration--medium {
   height: 6.25rem;
   width: 6.25rem;
-}
-
-.navds-guide__illustration--large {
-  height: 10rem;
-  width: 10rem;
-}
-
-.navds-guide__illustration--xlarge {
-  height: 15rem;
-  width: 15rem;
-}
-
-/* Illustration themes */
-.navds-guide__illustration--info {
-  background: var(--navds-color-lightblue-30);
-}
-
-.navds-guide__illustration--success {
-  background: var(--navds-color-green-20);
-}
-
-.navds-guide__illustration--warning {
-  background: var(--navds-color-orange-20);
-}
-
-.navds-guide__illustration--error {
-  background: var(--navds-color-red-20);
-}
-
-.navds-guide__illustration--center {
-  align-items: center;
-}
-
-.navds-guide__illustration--center svg,
-.navds-guide__illustration--center img {
-  height: 100%;
-}
-
-.navds-guide__illustration--transparent {
-  background: none;
-}
-
-.navds-guide__illustration--nomask {
-  overflow: visible;
 }
