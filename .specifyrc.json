@@ -1,7 +1,7 @@
 {
   "repository": "@nav/designsystem",
   "head": "specify-sync",
-  "base": "master",
+  "base": "specify-token-parsing",
   "rules": [
     {
       "name": "Color sync",
