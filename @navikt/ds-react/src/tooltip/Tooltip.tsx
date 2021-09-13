@@ -1,9 +1,16 @@
-import React, { forwardRef, HTMLAttributes, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { Detail, useClientLayoutEffect, useId } from "..";
+import { Detail, useClientLayoutEffect, useId, useKeyPress } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -74,11 +81,13 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
       }, delay);
     };
 
-    const handleClose = () => {
+    const handleClose = useCallback(() => {
       window.clearTimeout(timeoutRef.current);
       if (open !== undefined) return;
       setOpenState(false);
-    };
+    }, [open]);
+
+    useKeyPress("Escape", handleClose);
 
     const { styles, attributes, update } = usePopper(
       anchor.current,

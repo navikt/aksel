@@ -1,5 +1,6 @@
 export * from "./OverridableComponent";
 export * from "./useId";
+export * from "./useKeyPress";
 
 export const omit = (obj: object, props: string[]) =>
   Object.entries(obj)
