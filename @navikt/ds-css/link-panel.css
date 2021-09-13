@@ -19,12 +19,12 @@
 }
 
 .navds-link-panel:hover {
-  box-shadow: var(--navds-shadow-hover);
+  box-shadow: 0 2px 1px 0 var(--navds-color-gray-40);
   border-color: var(--navds-link-panel-color-border-hover);
 }
 
 .navds-link-panel:focus {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
   outline: none;
 }
 

@@ -39,7 +39,7 @@
 
 .navds-textarea__input:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
 }
 
 .navds-form-field--small .navds-textarea__input {

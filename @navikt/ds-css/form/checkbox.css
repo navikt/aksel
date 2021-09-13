@@ -101,7 +101,7 @@
 }
 
 .navds-checkbox__input:focus + .navds-checkbox__label::before {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
 }
 
 .navds-checkbox__input:checked + .navds-checkbox__label::before {

@@ -43,7 +43,7 @@
 }
 
 .navds-interal-header__title > span > a:focus {
-  box-shadow: var(--navds-shadow-focus-on-dark);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-orange-40);
   outline: none;
 }
 

@@ -23,7 +23,7 @@
 
 .navds-popover:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
 }
 
 .navds-popover__arrow {

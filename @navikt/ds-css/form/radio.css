@@ -105,7 +105,7 @@
 }
 
 .navds-radio__input:focus + .navds-radio__label::before {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
 }
 
 .navds-radio__input:checked + .navds-radio__label::before {

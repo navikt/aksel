@@ -64,7 +64,7 @@
 }
 
 .navds-speechbubble__bubble:focus {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
   outline: none;
 }
 

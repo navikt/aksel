@@ -16,7 +16,7 @@
 
 .navds-accordion__header:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus) var(--navds-color-blue-80);
   border-color: var(--navds-accordion-color-border-focus);
 }
 
