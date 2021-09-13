@@ -160,15 +160,6 @@ module.exports = {
     /* NEW TOKENS */
 
     /* OLD TOKENS */
-    border: {
-      default: {
-        value: "1px solid {navds.color.border.value}",
-      },
-      radius: { value: "4px" },
-    },
-    panel: {
-      hover: { value: "1px solid {navds.color.blue.50.value}" },
-    },
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {
