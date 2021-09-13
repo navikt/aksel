@@ -189,25 +189,10 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px" },
     },
-    layout: {
-      background: {
-        white: { value: white },
-        gray: { value: "{navds.color.gray.10.value}" },
-      },
-      padding: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.10.value}" },
-      },
-    },
-    "z-index": {
+    depth: {
       modal: { value: 2000 },
       popover: { value: 1000 },
       focus: { value: 10 },
-    },
-    sidebar: {
-      sticky: {
-        offset: { value: "0" },
-      },
     },
     spacing: Array(24)
       .fill(0)

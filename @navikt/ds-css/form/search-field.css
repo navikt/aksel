@@ -30,7 +30,7 @@
 }
 
 .navds-search-field__input-wrapper :focus {
-  z-index: var(--navds-z-index-focus);
+  z-index: var(--navds-depth-focus);
 }
 
 .navds-search-field--error
