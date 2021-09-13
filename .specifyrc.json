@@ -33,12 +33,6 @@
       },
       "parsers": [
         {
-          "name": "px-to-rem",
-          "options": {
-            "keys": ["measurement"]
-          }
-        },
-        {
           "name": "to-theme-ui",
           "options": {
             "formatConfig": {
