@@ -25,7 +25,7 @@
         }
       ]
     },
-{
+    {
       "name": "Spacing sync",
       "path": "@navikt/ds-tokens/src/spacing.js",
       "filter": {
@@ -33,17 +33,17 @@
       },
       "parsers": [
         {
-  "name": "px-to-rem",
-  "options": {
-    "keys": ["measurement"]
-  }
-},
+          "name": "px-to-rem",
+          "options": {
+            "keys": ["measurement"]
+          }
+        },
         {
           "name": "to-theme-ui",
           "options": {
             "formatConfig": {
               "module": "commonjs"
-            },
+            }
           }
         }
       ]
