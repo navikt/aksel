@@ -29,7 +29,10 @@
           "destination": "tokens.css",
           "format": "css/variables"
         }
-      ]
+      ],
+      "options": {
+        "outputReferences": true
+      }
     },
     "js": {
       "transformGroup": "js",

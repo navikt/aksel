@@ -46,6 +46,7 @@ const globalColors = Object.entries(colors)
 const getColorRef = (color) => {
   for (const c in globalColors) {
     if (colorNpm(globalColors[c]).string() === colorNpm(color).string()) {
+      console.log(`{navds.${c.replace("global", "globalColor")}.value}`);
       return `{navds.${c.replace("global", "globalColor")}.value}`;
     }
   }
@@ -153,6 +154,7 @@ module.exports = {
         },
       },
     },
+
     border: {
       default: {
         value: "1px solid {navds.color.border.value}",
