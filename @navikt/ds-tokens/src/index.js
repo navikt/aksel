@@ -55,6 +55,7 @@ const getColorRef = (color) => {
 
 module.exports = {
   navds: {
+    /* NEW COLORS */
     ...Object.entries(colors).reduce((colors, [name, color]) => {
       const newColor = name.startsWith("global") ? color : getColorRef(color);
 
@@ -65,6 +66,7 @@ module.exports = {
         },
       };
     }, {}),
+    /* OLD COLORS */
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
@@ -155,6 +157,9 @@ module.exports = {
       },
     },
 
+    /* NEW TOKENS */
+
+    /* OLD TOKENS */
     border: {
       default: {
         value: "1px solid {navds.color.border.value}",
