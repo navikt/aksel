@@ -189,13 +189,6 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px" },
     },
-    contentContainer: {
-      maxWidth: { value: "79.5rem" },
-      padding: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.6.value}" },
-      },
-    },
     grid: {
       gutter: {
         small: { value: "{navds.spacing.4.value}" },
