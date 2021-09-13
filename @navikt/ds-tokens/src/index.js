@@ -1,9 +1,11 @@
 const colorNpm = require("color");
 const specifyColors = require("./colors");
+const specifySpacing = require("./spacing");
+
+const colors = specifyColors.colors;
+const spacing = specifySpacing.sizes;
 
 const baseFontSize = 16;
-const colors = specifyColors.colors;
-
 const getFontSize = (size) => `${size / baseFontSize}rem`;
 
 const globalColors = Object.entries(colors)
@@ -13,7 +15,6 @@ const globalColors = Object.entries(colors)
 const getColorRef = (color) => {
   for (const c in globalColors) {
     if (colorNpm(globalColors[c]).string() === colorNpm(color).string()) {
-      console.log(`{navds.${c.replace("global", "globalColor")}.value}`);
       return `{navds.${c.replace("global", "globalColor")}.value}`;
     }
   }
@@ -34,15 +35,15 @@ module.exports = {
         },
       };
     }, {}),
-    spacing: Array(24)
-      .fill(0)
-      .reduce(
-        (spacing, _, index) => ({
-          ...spacing,
-          [index + 1]: { value: `${(index + 1) / 4}rem` },
-        }),
-        {}
-      ),
+    /* NEW SPACING */
+    ...Object.entries(spacing).reduce((spacing, [name, size]) => {
+      return {
+        ...spacing,
+        [name]: {
+          value: `${Number(size.replace("px", "")) / baseFontSize}rem`,
+        },
+      };
+    }, {}),
     shadow: {
       focus: { value: "0 0 0 3px" },
     },
