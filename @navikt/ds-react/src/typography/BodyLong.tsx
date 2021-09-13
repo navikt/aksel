@@ -1,36 +1,37 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "../util";
+import { OverridableComponent } from "..";
 
-export interface BodyLongProps {
-  props: {
-    /**
-     * M: 18px, S: 16px
-     * @default "m"
-     */
-    size?: "m" | "s";
-    /**
-     * Paragraph text
-     */
-    children: React.ReactNode;
-    /**
-     * Adds margins to typo
-     */
-    spacing?: boolean;
-  } & React.HTMLAttributes<HTMLParagraphElement>;
-  defaultComponent: "p";
+export interface BodyLongProps
+  extends React.HTMLAttributes<HTMLParagraphElement> {
+  /**
+   * medium: 18px, small: 16px
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /**
+   * Paragraph text
+   */
+  children: React.ReactNode;
+  /**
+   * Adds margins to typo
+   */
+  spacing?: boolean;
 }
 
-const BodyLong: OverridableComponent<BodyLongProps> = forwardRef(
+const BodyLong: OverridableComponent<
+  BodyLongProps,
+  HTMLParagraphElement
+> = forwardRef(
   (
-    { className, size = "m", spacing, component: Component = "p", ...rest },
+    { className, size = "medium", spacing, as: Component = "p", ...rest },
     ref
   ) => (
     <Component
       {...rest}
       ref={ref}
       className={cl(className, "navds-body-long", {
-        "navds-body--s": size === "s",
+        "navds-body--small": size === "small",
         "navds-typo--spacing": !!spacing,
       })}
     />

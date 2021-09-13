@@ -10,35 +10,38 @@ export interface AccordionMenuCollapsableProps
   children: React.ReactNode;
 }
 
-const AccordionMenuCollapsable = forwardRef<
-  HTMLDivElement,
-  AccordionMenuCollapsableProps
->(({ children, defaultOpen = false, title, className, ...rest }, ref) => {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
+export type AccordionMenuCollapsableType = React.ForwardRefExoticComponent<
+  AccordionMenuCollapsableProps & React.RefAttributes<HTMLDivElement>
+>;
 
-  return (
-    <div
-      ref={ref}
-      className={cl("navds-accordion-menu-collapsable", className, {
-        "navds-accordion-menu-collapsable--open": isOpen,
-      })}
-      {...rest}
-    >
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="navds-accordion-menu-collapsable__button"
+const Collapsable: AccordionMenuCollapsableType = forwardRef(
+  ({ children, defaultOpen = false, title, className, ...rest }, ref) => {
+    const [isOpen, setIsOpen] = useState(defaultOpen);
+
+    return (
+      <div
+        ref={ref}
+        className={cl("navds-accordion-menu-collapsable", className, {
+          "navds-accordion-menu-collapsable--open": isOpen,
+        })}
+        {...rest}
       >
-        {title}
-        <Expand
-          role="img"
-          focusable="false"
-          aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
-          className="navds-accordion-menu-collapsable__expand-icon"
-        />
-      </button>
-      {isOpen && <MenuItems>{children}</MenuItems>}
-    </div>
-  );
-});
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="navds-accordion-menu-collapsable__button"
+        >
+          {title}
+          <Expand
+            role="img"
+            focusable="false"
+            aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
+            className="navds-accordion-menu-collapsable__expand-icon"
+          />
+        </button>
+        {isOpen && <MenuItems>{children}</MenuItems>}
+      </div>
+    );
+  }
+);
 
-export default AccordionMenuCollapsable;
+export default Collapsable;

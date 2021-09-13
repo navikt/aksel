@@ -173,7 +173,7 @@ module.exports = {
         },
       },
       size: {
-        title: {
+        heading: {
           "2xl": { value: getFontSize(40) },
           xl: { value: getFontSize(32) },
           l: { value: getFontSize(28) },
@@ -223,14 +223,9 @@ module.exports = {
       },
     },
     "z-index": {
-      modal: {
-        content: { value: "1010" },
-        overlay: { value: "1000" },
-      },
-      popover: {
-        default: { value: "2000" },
-        arrow: { value: "-1" },
-      },
+      modal: { value: 2000 },
+      popover: { value: 1000 },
+      focus: { value: 10 },
     },
     sidebar: {
       sticky: {

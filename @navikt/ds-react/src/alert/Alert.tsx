@@ -6,78 +6,78 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
+import { BodyShort } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Alert content
+   */
+  children: React.ReactNode;
   /**
    * Decides what design the alert will have
    */
   variant: "error" | "warning" | "info" | "success";
-  children: React.ReactNode;
   /**
    * Changes padding and font-sizes
-   * @default "m"
+   * @default "medium"
    */
-  size?: "m" | "s";
+  size?: "medium" | "small";
+  /**
+   * Toggles full-width Alert
+   * @default false
+   */
+  fullWidth?: boolean;
 }
 
-const Icon = ({ variant }) => {
+const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return (
-        <ErrorFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <ErrorFilled {...props} />;
     case "warning":
-      return (
-        <WarningFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <WarningFilled {...props} />;
     case "info":
-      return (
-        <InformationFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <InformationFilled {...props} />;
     case "success":
-      return (
-        <SuccessFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <SuccessFilled {...props} />;
     default:
       return null;
   }
 };
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "m", ...rest }, ref) => (
+  (
+    {
+      children,
+      className,
+      variant,
+      size = "medium",
+      fullWidth = false,
+      ...rest
+    },
+    ref
+  ) => (
     <div
+      {...rest}
       ref={ref}
       className={cl(
         className,
         "navds-alert",
         `navds-alert--${variant}`,
         `navds-alert--${size}`,
-        "navds-body-long",
-        { "navds-body--s": size === "s" }
+        { "navds-alert--full-width": fullWidth }
       )}
-      {...rest}
     >
-      <span>
-        <span className="sr-only">{`${variant}-ikon`}</span>
-        <Icon variant={variant} />
-      </span>
-      <div>{children}</div>
+      <Icon
+        aria-label={`${variant}-ikon`}
+        focusable="false"
+        role="img"
+        variant={variant}
+        alt={`${variant}-ikon`}
+        className="navds-alert__icon"
+      />
+      <BodyShort className="navds-alert__content" size={size}>
+        {children}
+      </BodyShort>
     </div>
   )
 );

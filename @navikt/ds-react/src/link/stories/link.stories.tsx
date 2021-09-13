@@ -1,7 +1,7 @@
 import React from "react";
-import { Alert } from "../..";
 import { Link } from "..";
 import { Add } from "@navikt/ds-icons";
+import { Alert } from "../..";
 import { ConfirmationPanel } from "../../form";
 export default {
   title: "ds-react/link",

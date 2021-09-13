@@ -1,3 +1,13 @@
+:root {
+  --navds-speechbubble-color-background: var(--navds-color-gray-10);
+  --navds-speechbubble-color-shadow: var(--navds-color-gray-20);
+  --navds-speechbubble-color-illustration: var(--navds-color-darkgray);
+  --navds-speechbubble-color-illustration-background: var(
+    --navds-color-gray-20
+  );
+  --navds-speechbubble-color-detail-text: var(--navds-color-gray-60);
+}
+
 .navds-speechbubble {
   display: flex;
   align-items: flex-end;
@@ -23,8 +33,8 @@
 
 .navds-speechbubble__illustration {
   align-items: center;
-  background: var(--navds-color-gray-20);
-  color: var(--navds-color-darkgray);
+  background: var(--navds-speechbubble-color-illustration-background);
+  color: var(--navds-speechbubble-color-illustration);
   border-radius: 50%;
   display: flex;
   flex-shrink: 0;
@@ -42,10 +52,10 @@
 
 .navds-speechbubble__bubble {
   padding: 1rem;
-  box-shadow: 0 2px 4px 0 var(--navds-color-gray-20);
+  box-shadow: 0 2px 4px 0 var(--navds-speechbubble-color-shadow);
   width: fit-content;
   max-width: 37.5rem;
-  background-color: var(--navds-color-gray-10);
+  background-color: var(--navds-speechbubble-color-background);
   border-radius: 12px;
   border-bottom-left-radius: 2px;
   display: flex;
@@ -65,5 +75,5 @@
 }
 
 .navds-speechbubble__top-text {
-  color: var(--navds-color-gray-60);
+  color: var(--navds-speechbubble-color-detail-text);
 }

@@ -19,19 +19,19 @@ Her kan `title` proppen brukes for å gi en liten tooltip som sier hvorfor den l
 
 ## Justering av størrelse
 
-Loaderen kommer i størrelsene `2xl`, `xl`, `l`, `m`, `s` og `xs`
+Loaderen kommer i størrelsene `2xlarge`, `xlarge`, `large`, `medium`, `small` og `xsmall`
 
 ```jsx
-<Loader size="xl" />
+<Loader size="xlarge" />
 ```
 
 <Canvas>
-  <Loader size="2xl" />
-  <Loader size="xl" />
-  <Loader size="l" />
-  <Loader size="m" />
-  <Loader size="s" />
-  <Loader size="xs" />
+  <Loader size="2xlarge" />
+  <Loader size="xlarge" />
+  <Loader size="large" />
+  <Loader size="medium" />
+  <Loader size="small" />
+  <Loader size="xsmall" />
 </Canvas>
 
 ## Varianter
@@ -39,16 +39,16 @@ Loaderen kommer i størrelsene `2xl`, `xl`, `l`, `m`, `s` og `xs`
 Loaderen kommer i variantene `neutral`, `interaction` og `inverted`
 
 ```jsx
-<Loader size="2xl" variant="neutral"/>
-<Loader size="2xl" variant="interaction"/>
-<Loader size="2xl" variant="inverted"/>
+<Loader size="2xlarge" variant="neutral"/>
+<Loader size="2xlarge" variant="interaction"/>
+<Loader size="2xlarge" variant="inverted"/>
 ```
 
 <Canvas>
-  <Loader size="2xl" variant="neutral" />
-  <Loader size="2xl" variant="interaction" />
+  <Loader size="2xlarge" variant="neutral" />
+  <Loader size="2xlarge" variant="interaction" />
   <div style={{ backgroundColor: "black" }}>
-    <Loader size="2xl" variant="inverted" />
+    <Loader size="2xlarge" variant="inverted" />
   </div>
 </Canvas>
 
@@ -61,7 +61,7 @@ Bakgrunnen kan settes til transparent med `transparent={true}`
 ```
 
 <Canvas>
-  <Loader size="2xl" transparent />
+  <Loader size="2xlarge" transparent />
 </Canvas>
 
 ## Bruk av loader i knapper
@@ -74,31 +74,30 @@ Størrelsen justeres også automatisk, slik at alt man trenger er å sette Loade
 
 ```jsx
 <Button>
-  <span>Laster inn nytt innhold...</span>
+  Laster inn nytt innhold...
   <Loader />
 </Button>
 ```
 
 <Canvas>
   <Button>
-    <span>Laster inn nytt innhold...</span>
+    Laster inn nytt innhold...
     <Loader />
   </Button>
 </Canvas>
 
 ## Overskrive farger for å sikre kontrast
 
-I de casene der man må justere fargene for å ha bedre kontrast så vil disse to klassene være relevante.
-Om mulig bør man unngå dette og bare ta i bruk default.
+I de casene der man må justere fargene for å ha bedre kontrast så kan man endre på selve css-variablene som bli brukt
 
 ```css
-/* Foreground */
-.navds-loader > .navds-loader__foreground {
-  stroke: var(--navds-color-gray-40);
-}
-
-/* Background */
-.navds-loader > .navds-loader__background {
-  stroke: var(--navds-color-gray-10);
-}
+--navds-loader-color-foreground: var(--navds-color-gray-40);
+--navds-loader-color-background: var(--navds-color-gray-10);
+--navds-loader-color-neutral-foreground: var(--navds-color-gray-40);
+--navds-loader-color-interaction-foreground: var(--navds-color-blue-50);
+--navds-loader-color-inverted-foreground: var(--navds-color-white);
+--navds-loader-color-inverted-background: rgba(255, 255, 255, 0.3);
+--navds-loader-color-transparent-background: transparent;
+--navds-loader-color-on-button-background: rgba(255, 255, 255, 0.3);
+--navds-loader-color-on-button-foreground: currentColor;
 ```
