@@ -24,6 +24,29 @@
           }
         }
       ]
+    },
+{
+      "name": "Spacing sync",
+      "path": "@navikt/ds-tokens/src/spacing.js",
+      "filter": {
+        "types": ["measurement"]
+      },
+      "parsers": [
+        {
+  "name": "px-to-rem",
+  "options": {
+    "keys": ["measurement"]
+  }
+},
+        {
+          "name": "to-theme-ui",
+          "options": {
+            "formatConfig": {
+              "module": "commonjs"
+            },
+          }
+        }
+      ]
     }
   ]
 }
