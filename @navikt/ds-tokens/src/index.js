@@ -1,8 +1,12 @@
 const Color = require("color");
+const colorNpm = require("color");
+const specifyColors = require("./colors");
 
 const baseFontSize = 16;
+const colors = specifyColors.colors;
 
 const getFontSize = (size) => `${size / baseFontSize}rem`;
+
 // https://github.com/hihayk/scale/blob/69b766bba2db046d3e8cb4026ae32a32c897f9ff/src/utils.js#L44
 const mixColors = (color, step, amount, mixColor) => {
   const saturation = Math.round(Color(color).hsl().color[1]);
@@ -35,8 +39,31 @@ const lightgray = "#F1F1F1";
 
 const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
+const globalColors = Object.entries(colors)
+  .filter(([key, _]) => key.startsWith("global"))
+  .reduce((colors, [key, value]) => ({ ...colors, [key]: value }), {});
+
+const getColorRef = (color) => {
+  for (const c in globalColors) {
+    if (colorNpm(globalColors[c]).string() === colorNpm(color).string()) {
+      return `{navds.${c.replace("global", "globalColor")}.value}`;
+    }
+  }
+  return color;
+};
+
 module.exports = {
   navds: {
+    ...Object.entries(colors).reduce((colors, [name, color]) => {
+      const newColor = name.startsWith("global") ? color : getColorRef(color);
+
+      return {
+        ...colors,
+        [name.replace("global", "globalColor")]: {
+          value: newColor,
+        },
+      };
+    }, {}),
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
