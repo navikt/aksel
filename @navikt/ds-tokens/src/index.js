@@ -189,10 +189,6 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px" },
     },
-    text: {
-      focus: { value: "{navds.color.blue.80.value}" },
-      shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
-    },
     contentContainer: {
       maxWidth: { value: "79.5rem" },
       padding: {
