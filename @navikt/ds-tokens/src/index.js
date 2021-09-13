@@ -1,4 +1,3 @@
-const Color = require("color");
 const colorNpm = require("color");
 const specifyColors = require("./colors");
 
