@@ -19,18 +19,22 @@ export const All = () => {
       <h1>Alert</h1>
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-          )}
+          <Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert.Content>
         </Alert>
       ))}
       <h2>Small</h2>
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
           </Alert>
         ))}
       </div>
@@ -46,9 +50,11 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert fullWidth key={variant} variant={variant} size="small">
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
           </Alert>
         ))}
       </div>
@@ -56,9 +62,11 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert inline key={variant} variant={variant}>
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
           </Alert>
         ))}
       </div>
@@ -66,9 +74,37 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert inline key={variant} variant={variant} size="small">
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
+          </Alert>
+        ))}
+      </div>
+      <h2>Med Heading</h2>
+      <div>
+        {variants.map((variant, i) => (
+          <Alert key={variant} variant={variant}>
+            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
+          </Alert>
+        ))}
+      </div>
+      <h2>Med Heading small</h2>
+      <div>
+        {variants.map((variant, i) => (
+          <Alert key={variant} variant={variant} size="small">
+            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Content>
+              {new Array(i + 1).fill(
+                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+              )}
+            </Alert.Content>
           </Alert>
         ))}
       </div>

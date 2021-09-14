@@ -29,13 +29,20 @@
   align-items: center;
 }
 
-.navds-alert__content {
+.navds-alert__wrapper {
   max-width: 43.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .navds-alert--small {
   padding: calc(var(--navds-spacing-2) + 0.5px)
     calc(var(--navds-spacing-4) + 0.5px);
+}
+
+.navds-alert--small > .navds-alert__wrapper {
+  gap: 0.25rem;
 }
 
 .navds-alert--full-width {

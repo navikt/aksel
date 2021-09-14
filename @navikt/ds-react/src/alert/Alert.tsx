@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import {
   ErrorFilled,
@@ -6,7 +6,8 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import { BodyLong } from "..";
+import AlertContent, { AlertContentType } from "./AlertContent";
+import AlertTitle, { AlertTitleType } from "./AlertTitle";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -48,6 +49,19 @@ const Icon = ({ variant, ...props }) => {
   }
 };
 
+export interface AlertContextProps {
+  size: "medium" | "small";
+}
+
+export const AlertContext = createContext<AlertContextProps | null>(null);
+interface AlertComponent
+  extends React.ForwardRefExoticComponent<
+    AlertProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Title: AlertTitleType;
+  Content: AlertContentType;
+}
+
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
@@ -80,11 +94,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         alt={`${variant}-ikon`}
         className="navds-alert__icon"
       />
-      <BodyLong className="navds-alert__content" size={size}>
-        {children}
-      </BodyLong>
+      <AlertContext.Provider value={{ size }}>
+        <div className="navds-alert__wrapper">{children}</div>
+      </AlertContext.Provider>
     </div>
   )
-);
+) as AlertComponent;
+
+Alert.Title = AlertTitle;
+Alert.Content = AlertContent;
 
 export default Alert;
