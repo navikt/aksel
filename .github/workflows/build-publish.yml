@@ -112,7 +112,7 @@ jobs:
           yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
-    needs: publish-npm
+    needs: test-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
