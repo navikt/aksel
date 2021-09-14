@@ -52,6 +52,26 @@ export const All = () => {
           </Alert>
         ))}
       </div>
+      <h2>Inline</h2>
+      <div>
+        {variants.map((variant, i) => (
+          <Alert inline key={variant} variant={variant}>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert>
+        ))}
+      </div>
+      <h2>Inline small</h2>
+      <div>
+        {variants.map((variant, i) => (
+          <Alert inline key={variant} variant={variant} size="small">
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert>
+        ))}
+      </div>
     </>
   );
 };

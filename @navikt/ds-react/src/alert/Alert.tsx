@@ -27,6 +27,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   fullWidth?: boolean;
+  /**
+   * Removes background from Alert
+   */
+  inline?: boolean;
 }
 
 const Icon = ({ variant, ...props }) => {
@@ -52,6 +56,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       variant,
       size = "medium",
       fullWidth = false,
+      inline = false,
       ...rest
     },
     ref
@@ -64,7 +69,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         "navds-alert",
         `navds-alert--${variant}`,
         `navds-alert--${size}`,
-        { "navds-alert--full-width": fullWidth }
+        { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
       )}
     >
       <Icon
