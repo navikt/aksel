@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.7.7",
+  "version": "0.8.0",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -45,12 +45,12 @@
     "short-uuid": "^4.2.0"
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.8",
+    "@types/styled-components": "^5.1.14",
     "copyfiles": "^2.4.1",
     "react-router-dom": "^5.2.0",
-    "@types/react-router-dom": "^5.1.8",
     "rimraf": "3.0.2",
-    "styled-components": "^5.3.1",
-    "@types/styled-components": "^5.1.14"
+    "styled-components": "^5.3.1"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
