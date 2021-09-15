@@ -4,42 +4,41 @@
   --navds-button-color-border: var(--navds-color-action-default);
 
   /* Primary */
-  --navds-button-color-primary-text-hover: var(--navds-color-text-inverse);
+  --navds-button-color-primary-text: var(--navds-color-white);
+  --navds-button-color-primary-background: var(--navds-color-action-default);
+  --navds-button-color-primary-border: var(--navds-color-action-default);
   --navds-button-color-primary-background-hover: var(
     --navds-color-action-hover
   );
-  --navds-button-color-primary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-primary-border-hover: var(--navds-color-action-hover);
   --navds-button-color-primary-background-active: var(
     --navds-color-action-active
   );
+  --navds-button-color-primary-border-focus: var(--navds-color-white);
 
-  /* Secondary */
-  --navds-button-color-secondary-border: transparent;
-  --navds-button-color-secondary-background: transparent;
-  --navds-button-color-secondary-border-hover: var(
-    --navds-color-action-default
-  );
-  --navds-button-color-secondary-border-focus: var(
-    --navds-color-action-default
-  );
-  --navds-button-color-secondary-border-active: var(
-    --navds-color-action-active
+  /* secondary */
+  --navds-button-color-secondary-text-hover: var(--navds-color-text-inverse);
+  --navds-button-color-secondary-background-hover: var(
+    --navds-color-action-hover
   );
   --navds-button-color-secondary-text-active: var(--navds-color-text-inverse);
   --navds-button-color-secondary-background-active: var(
     --navds-color-action-active
   );
+  --navds-button-color-secondary-border-focus-active-hover: var(
+    --navds-color-white
+  );
 
-  /* Action */
-  --navds-button-color-action-text: var(--navds-color-white);
-  --navds-button-color-action-background: var(--navds-color-action-default);
-  --navds-button-color-action-border: var(--navds-color-action-default);
-  --navds-button-color-action-background-hover: var(--navds-color-action-hover);
-  --navds-button-color-action-border-hover: var(--navds-color-action-hover);
-  --navds-button-color-action-background-active: var(
+  /* tertiary */
+  --navds-button-color-tertiary-border: transparent;
+  --navds-button-color-tertiary-background: transparent;
+  --navds-button-color-tertiary-border-hover: var(--navds-color-action-default);
+  --navds-button-color-tertiary-border-focus: var(--navds-color-action-default);
+  --navds-button-color-tertiary-border-active: var(--navds-color-white);
+  --navds-button-color-tertiary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-tertiary-background-active: var(
     --navds-color-action-active
   );
-  --navds-button-color-action-border-focus: var(--navds-color-white);
 
   /* Danger */
   --navds-button-color-danger-text: var(--navds-color-white);
@@ -53,8 +52,8 @@
   --navds-button-color-danger-border-focus: var(--navds-color-white);
 
   /* Disabled */
-  --navds-button-color-disabled-text: var(--navds-color-text-inverse);
-  --navds-button-color-disabled-background: var(--navds-color-disabled);
+  --navds-button-color-text-disabled: var(--navds-color-text-inverse);
+  --navds-button-color-background-disabled: var(--navds-color-disabled);
 }
 
 .navds-button {
@@ -71,7 +70,6 @@
   border-width: 2px;
   min-height: 48px;
   min-width: 48px;
-  align-items: center;
   padding: var(--navds-spacing-2) var(--navds-spacing-2);
   flex-shrink: 0;
 }
@@ -102,53 +100,71 @@
 }
 
 /**************************
- * .navds-button--primary *
+ * .navds-button--secondary *
  **************************/
 
-.navds-button--primary:hover {
-  color: var(--navds-button-color-primary-text-hover);
-  background-color: var(--navds-button-color-primary-background-hover);
-  border-color: transparent;
-}
-
-.navds-button--primary:active {
-  color: var(--navds-button-color-primary-text-active);
-  background-color: var(--navds-button-color-primary-background-active);
-  border-color: transparent;
-}
-
-/****************************
- * .navds-button--secondary *
- ****************************/
-
-.navds-button--secondary {
-  border-color: var(--navds-button-color-secondary-border);
-  background-color: var(--navds-button-color-secondary-background);
-}
-
 .navds-button--secondary:hover {
-  border-color: var(--navds-button-color-secondary-border-hover);
-}
-
-.navds-button--secondary:focus {
-  border-color: var(--navds-button-color-secondary-border-focus);
+  color: var(--navds-button-color-secondary-text-hover);
+  background-color: var(--navds-button-color-secondary-background-hover);
+  border-color: transparent;
 }
 
 .navds-button--secondary:active {
-  border-color: var(--navds-button-color-secondary-border-active);
   color: var(--navds-button-color-secondary-text-active);
   background-color: var(--navds-button-color-secondary-background-active);
+  border-color: transparent;
+}
+
+.navds-button--secondary:focus:hover {
+  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
+  border-width: 1px;
+  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
+}
+
+.navds-button--secondary:focus:active {
+  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
+  border-width: 1px;
+  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
+}
+
+/****************************
+ * .navds-button--tertiary *
+ ****************************/
+
+.navds-button--tertiary {
+  border-color: var(--navds-button-color-tertiary-border);
+  background-color: var(--navds-button-color-tertiary-background);
+}
+
+.navds-button--tertiary:hover {
+  border-color: var(--navds-button-color-tertiary-border-hover);
+}
+
+.navds-button--tertiary:focus {
+  border-color: var(--navds-button-color-tertiary-border-focus);
+}
+
+.navds-button--tertiary:active {
+  color: var(--navds-button-color-tertiary-text-active);
+  background-color: var(--navds-button-color-tertiary-background-active);
+  border-color: var(--navds-button-color-tertiary-border-active);
+  border-width: 1px;
+  padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
+}
+
+.navds-button--small.navds-button--tertiary:active {
+  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
 }
 
 /*************************
- * .navds-button--action *
+ * .navds-button--primary *
  * .navds-button--danger *
  *************************/
 
-.navds-button--action {
-  background-color: var(--navds-button-color-action-background);
-  border-color: var(--navds-button-color-action-border);
-  color: var(--navds-button-color-action-text);
+.navds-button--primary {
+  background-color: var(--navds-button-color-primary-background);
+  border-color: var(--navds-button-color-primary-border);
+  color: var(--navds-button-color-primary-text);
 }
 
 .navds-button--danger {
@@ -157,14 +173,14 @@
   color: var(--navds-button-color-danger-text);
 }
 
-.navds-button--action,
+.navds-button--primary,
 .navds-button--danger {
   border-width: 1px;
 }
 
-.navds-button--action:hover {
-  background-color: var(--navds-button-color-action-background-hover);
-  border-color: var(--navds-button-color-action-border-hover);
+.navds-button--primary:hover {
+  background-color: var(--navds-button-color-primary-background-hover);
+  border-color: var(--navds-button-color-primary-border-hover);
 }
 
 .navds-button--danger:hover {
@@ -172,16 +188,16 @@
   border-color: var(--navds-button-color-danger-border-hover);
 }
 
-.navds-button--action:active {
-  background-color: var(--navds-button-color-action-background-active);
+.navds-button--primary:active {
+  background-color: var(--navds-button-color-primary-background-active);
 }
 
 .navds-button--danger:active {
   background-color: var(--navds-button-color-danger-background-active);
 }
 
-.navds-button--action:focus {
-  border-color: var(--navds-button-color-action-border-focus);
+.navds-button--primary:focus {
+  border-color: var(--navds-button-color-primary-border-focus);
 }
 
 .navds-button--danger:focus {
@@ -192,11 +208,15 @@
  * .navds-button:disabled *
  **************************/
 
-.navds-button:disabled:disabled {
-  color: var(--navds-button-color-disabled-text);
-  background-color: var(--navds-button-color-disabled-background);
+.navds-button:disabled {
+  color: var(--navds-button-color-text-disabled);
+  background-color: var(--navds-button-color-background-disabled);
   cursor: not-allowed;
   border-width: 0;
   box-shadow: none;
   transform: none;
+}
+
+.navds-button:disabled.navds-button--tertiary:active {
+  padding: var(--navds-spacing-2) var(--navds-spacing-2);
 }

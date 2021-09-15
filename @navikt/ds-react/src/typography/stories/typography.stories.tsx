@@ -7,12 +7,7 @@ export default {
   component: BodyLong,
 };
 
-const lorem = () => (
-  <>
-    Veniam consequat cillum pariatur officia duis aute labore anim labore.
-    Pariatur ad duis do nulla.
-  </>
-);
+const lorem = () => <>Veniam consequat cillum pariatur officia duis</>;
 
 const TitleTemplate = ({ level, size, spacing }) => (
   <Heading spacing={spacing} size={size} level={level}>

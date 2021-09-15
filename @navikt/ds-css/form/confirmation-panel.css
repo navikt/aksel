@@ -1,7 +1,13 @@
 :root {
-  --navds-confirmation-panel-color-background: #ffeccc;
-  --navds-confirmation-panel-color-background-checked: #ccf1d6;
-  --navds-confirmation-panel-color-border-checked: #ccf1d6;
+  --navds-confirmation-panel-color-background: var(
+    --navds-color-warning-background
+  );
+  --navds-confirmation-panel-color-background-checked: var(
+    --navds-color-success-background
+  );
+  --navds-confirmation-panel-color-border-checked: var(
+    --navds-color-success-background
+  );
   --navds-confirmation-panel-color-background-error: var(
     --navds-color-error-background
   );

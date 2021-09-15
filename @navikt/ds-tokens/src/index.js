@@ -139,8 +139,17 @@ module.exports = {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {
         height: {
-          m: { value: 1.5 },
-          s: { value: 1.3 },
+          heading: {
+            "2xl": { value: getFontSize(52) },
+            xl: { value: getFontSize(40) },
+            l: { value: getFontSize(36) },
+            m: { value: getFontSize(32) },
+            s: { value: getFontSize(28) },
+            xs: { value: getFontSize(24) },
+          },
+          xl: { value: getFontSize(28) },
+          l: { value: getFontSize(24) },
+          m: { value: getFontSize(20) },
         },
       },
       size: {
@@ -150,6 +159,7 @@ module.exports = {
           l: { value: getFontSize(28) },
           m: { value: getFontSize(24) },
           s: { value: getFontSize(20) },
+          xs: { value: getFontSize(18) },
         },
         xl: { value: getFontSize(20) },
         l: { value: getFontSize(18) },

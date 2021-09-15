@@ -22,17 +22,17 @@ const Section = ({ children }) => (
   </div>
 );
 
-const variants: Array<"primary" | "secondary" | "action" | "danger"> = [
+const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
   "primary",
   "secondary",
-  "action",
+  "tertiary",
   "danger",
 ];
 
 const varSwitch = {
   primary: "Primary",
   secondary: "Secondary",
-  action: "Action",
+  tertiary: "Tertiary",
   danger: "Danger",
 };
 

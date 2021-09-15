@@ -1,0 +1,46 @@
+{
+  "repository": "@nav/designsystem",
+  "head": "specify-sync",
+  "base": "specify-token-parsing",
+  "rules": [
+    {
+      "name": "Color sync",
+      "path": "@navikt/ds-tokens/src/colors.js",
+      "filter": {
+        "types": ["color"]
+      },
+      "parsers": [
+        {
+          "name": "to-theme-ui",
+          "options": {
+            "formatConfig": {
+              "module": "commonjs"
+            },
+            "formatTokens": {
+              "colorFormat": {
+                "format": "rgb"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Spacing sync",
+      "path": "@navikt/ds-tokens/src/spacing.js",
+      "filter": {
+        "types": ["measurement"]
+      },
+      "parsers": [
+        {
+          "name": "to-theme-ui",
+          "options": {
+            "formatConfig": {
+              "module": "commonjs"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

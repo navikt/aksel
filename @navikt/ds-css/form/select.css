@@ -1,6 +1,6 @@
 :root {
   --navds-select-color-background: var(--navds-color-white);
-  --navds-select-color-border: var(--navds-color-gray-40);
+  --navds-select-color-border: var(--navds-color-gray-60);
   --navds-select-color-border-hover: var(--navds-color-blue-50);
   --navds-select-color-border-error: var(--navds-color-red-50);
   --navds-select-color-shadow-error: var(--navds-color-red-50);

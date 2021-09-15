@@ -1,5 +1,5 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import { Alert } from "../../index";
+import { Alert, Heading, BodyLong } from "../../index";
 
 <Meta title="ds-react/alert/intro" />
 
@@ -65,4 +65,32 @@ Alert har to størrelser: Default 64px height og small 32px height default.
       Id elit esse enim reprehenderit.
     </Alert>
   </div>
+</Canvas>
+
+## Med heading
+
+```jsx
+<Alert variant="info">
+  <Heading spacing size="small" level="2">
+    Aliquip duis est in commodo pariatur
+  </Heading>
+  <BodyLong>
+    Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui laboris
+    ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat sint commodo
+    consequat eu aute.
+  </BodyLong>
+</Alert>
+```
+
+<Canvas>
+  <Alert variant="info">
+    <Heading spacing size="small" level="3">
+      Aliquip duis est in commodo pariatur
+    </Heading>
+    <BodyLong>
+      Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui laboris
+      ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat sint commodo
+      consequat eu aute.
+    </BodyLong>
+  </Alert>
 </Canvas>

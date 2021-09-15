@@ -12,7 +12,7 @@ export interface ButtonProps
    * Changes design and interactions
    * @default "primary"
    */
-  variant?: "primary" | "secondary" | "action" | "danger";
+  variant?: "primary" | "secondary" | "tertiary" | "danger";
   /**
    * Changes padding, height and font-size
    * @default "medium"
@@ -39,6 +39,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     ref
   ) => (
     <Component
+      {...rest}
       ref={ref}
       className={cl(
         className,
@@ -46,7 +47,6 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         `navds-button--${variant}`,
         `navds-button--${size}`
       )}
-      {...rest}
     >
       <BodyShort as="span" className="navds-button__inner" size={size}>
         {children}
