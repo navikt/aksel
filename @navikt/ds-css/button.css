@@ -66,9 +66,8 @@
   text-decoration: none;
   border: none;
   border-radius: 2px;
-  min-height: 48px;
   min-width: 48px;
-  padding: var(--navds-spacing-2);
+  padding: var(--navds-spacing-3);
   flex-shrink: 0;
 }
 
@@ -88,8 +87,8 @@
 }
 
 .navds-button--small {
-  padding: var(--navds-spacing-1) var(--navds-spacing-2);
-  min-height: 32px;
+  padding: 0.375rem var(--navds-spacing-2);
+  min-width: 32px;
 }
 
 .navds-button:focus {
