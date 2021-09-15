@@ -16,15 +16,15 @@ export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
    */
   description?: string;
   /**
+   * Predefined variants for PageHeader
+   * @default "guide"
+   */
+  variant?: "situation" | "product" | "guide";
+  /**
    * Decides how to align content
    * @default "left"
    */
-  variant?: "left" | "center";
-  /**
-   * Predefined theming for PageHeader
-   * @default "guide"
-   */
-  theme?: "situation" | "product" | "guide";
+  align?: "left" | "center";
 }
 
 const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
@@ -34,8 +34,8 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
       className,
       illustration,
       description,
-      theme = "guide",
-      variant = "left",
+      variant = "guide",
+      align = "left",
       ...rest
     },
     ref
@@ -46,8 +46,8 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
         className={cl(
           "navds-page-header",
           className,
-          `navds-page-header--${theme}`,
-          `navds-page-header--${variant}`
+          `navds-page-header--${variant}`,
+          `navds-page-header--${align}`
         )}
         {...rest}
       >
