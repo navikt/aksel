@@ -208,7 +208,7 @@
  * .navds-button:disabled *
  **************************/
 
-.navds-button:disabled:disabled {
+.navds-button:disabled {
   color: var(--navds-button-color-text-disabled);
   background-color: var(--navds-button-color-background-disabled);
   cursor: not-allowed;
@@ -217,6 +217,6 @@
   transform: none;
 }
 
-.navds-button:disabled:disabled.navds-button--tertiary:active {
+.navds-button:disabled.navds-button--tertiary:active {
   padding: var(--navds-spacing-2) var(--navds-spacing-2);
 }
