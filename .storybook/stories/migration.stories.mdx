@@ -2,30 +2,31 @@ import { Meta } from "@storybook/addon-docs";
 
 <Meta title="ds-react/Migration" />
 
-# Migrering til ds-react og ds-css v0.8.0
+# Migrering til ds-react, ds-css v0.8.0
 
 Denne guiden vil være til hjelp for de som allerede har begynt å ta i bruk de nye pakkene våre tidligere enn v0.8.0.
 For de som ikke har begynt å ta i bruk pakkene kan man se bort fra denne.
 
 Fra versjon v0.7 til v0.8 er det komment flere store endringer både i ds-react og ds-css. For å lettere
-oppdatere til v0.8 har vi da laget en liten guide som forklarer de største endringene. Hvis du vil se alle endringene
-kan man sjekke [denne PR en ](https://github.com/navikt/nav-frontend-moduler/pull/1213)
+oppdatere til v0.8 har vi da laget en liten guide som forklarer de største endringene.
 
 ## Styling
 
-De fleste komponenter har fått diverse småjustering på styling. Anbefales da å ta en rask sjekk om alt fortsatt stemmer
+De fleste komponenter har fått diverse justering på styling. Anbefales da å ta en rask sjekk om alt fortsatt stemmer
 etter oppdateringen.
 
 ## Sizing
 
 Alle komponenter som tidligere var implementert med `size`-prop har fått oppdatert
-typene fra "xs", "s", "m", "l", "xl", "2xl" -> "xsmall", "small", "medium", "large", "xlarge", "2xlarge".
+props fra "xs", "s", "m", "l", "xl", "2xl" -> "xsmall", "small", "medium", "large", "xlarge", "2xlarge".
 
-Dette betyr også at stylingen er eks endret fra `.navds-body-short--s` -> `.navds-body-short--small`
+Dette betyr også at css-stylingen er eks endret fra `.navds-body-short--s` -> `.navds-body-short--small`
 
 ## Overridable component
 
 Komponenter som tidligere implementerte ovveridable component med bruk av `component`-prop bruker nå `as`.
+Implementasjonen av OverridableComponent er WIP så kan hende typene ender opp med å krangle i enkelte tilfeller. Om så ta gjerne kontakt med oss
+slik at vi får sett på det tilfellet!
 
 ```jsx
 /* Før */
@@ -43,7 +44,7 @@ Komponenter som tidligere implementerte ovveridable component med bruk av `compo
 - `Action` -> `Primary` (Hoved)
 - `Secondary` -> `Tertiary` (Flat)
 
-For alle som har brukt `<Button />` så må man fikse slik at riktige knapper blir brukt der de skal.
+For alle som har brukt `<Button />` så må man fikse slik at riktige knapper blir brukt der de skal!
 
 ## Nytt
 
@@ -57,7 +58,7 @@ APIet til komponenten er ikke endret borsett fra "Sizing" endringene nevt lengre
 
 For de som har brukt css-en direkte, eks `navds-title` så må man endre til `navds-heading`
 
-Endret `Header` -> `PageHeader`
+Endret `Header` -> `PageHeader`, samme som er nevnt ang endringen over gjelder her også: sjekk css hvis brukt direkte.
 
 ## Fjernet komponenter
 
@@ -127,13 +128,17 @@ La til prop: `defaultOpen` på `Accordion.Item`
 
 ## Alert
 
-La til `fullWidth`-prop for alert uten border-radius og width 100%
+- La til `fullWidth`-prop for alert uten border-radius og width 100%
+- La til `inline`-prop for alert med transparent border/background og 0 padding.
 
 ## Button
 
 Oppdatert med Overridablecomponent.
 
 Håndtering av sentrering, margins er oppdatert. Trenger ikke wrappe tekst med `span` når man skal bruke ikoner lengre.
+
+Hvis man skal manuelt justere på alignment av innhold, eks bruke `flex-direction: column` må man sette
+det på css-klassen `.navds-button__inner` da children er wrappet i den.
 
 ## CopyToClipboard
 
@@ -203,3 +208,14 @@ Får nå padding rundt innhold med Popover.Content
   <Popover.Content>Modal innhold</Popover.Content>
 </Popover>
 ```
+
+## Header -> PageHeader
+
+Props må fikses for de som har brukt denne komponenten, i tilleg til å endre navn.
+
+- `variant`-prop -> `align`
+- `theme`-prop -> `variant`
+
+## MicroCard
+
+- Oppdatert med OverridableComponent
