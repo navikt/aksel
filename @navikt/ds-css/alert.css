@@ -22,8 +22,7 @@
   border-radius: 4px;
   border: 1px solid;
   border-color: var(--navds-alert-color-border);
-  padding: calc(var(--navds-spacing-4) + 0.5px)
-    calc(var(--navds-spacing-4) + 0.5px);
+  padding: calc(var(--navds-spacing-4) + 1px) calc(var(--navds-spacing-4) + 1px);
   display: flex;
   gap: var(--navds-spacing-3);
   align-items: center;
@@ -34,8 +33,7 @@
 }
 
 .navds-alert--small {
-  padding: calc(var(--navds-spacing-2) + 0.5px)
-    calc(var(--navds-spacing-4) + 0.5px);
+  padding: calc(var(--navds-spacing-1) - 1px) calc(var(--navds-spacing-4));
 }
 
 .navds-alert--full-width {
