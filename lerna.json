@@ -16,7 +16,6 @@
     "packages/*",
     "@navikt/ds-css",
     "@navikt/ds-react",
-    "@navikt/ds-react-navno",
     "@navikt/ds-icons",
     "@navikt/ds-tokens"
   ]
