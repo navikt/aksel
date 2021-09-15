@@ -17,6 +17,7 @@ export * from "./popover";
 export * from "./speech-bubble";
 export * from "./tag";
 export * from "./typography";
+export * from "./tooltip";
 export * from "./util";
 
 /* Navno spesific packages */

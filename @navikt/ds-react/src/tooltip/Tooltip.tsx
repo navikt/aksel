@@ -2,7 +2,6 @@ import React, {
   forwardRef,
   HTMLAttributes,
   useCallback,
-  useMemo,
   useRef,
   useState,
 } from "react";
@@ -124,10 +123,6 @@ const Popover = forwardRef<HTMLDivElement, TooltipProps>(
           ref={(el) => (anchor.current = el)}
           onFocus={handleOpen}
           onBlur={handleClose}
-          onMouseEnter={handleOpen}
-          onMouseLeave={handleClose}
-          onMouseOver={handleOpen}
-          onMouseOut={handleClose}
           onPointerEnter={handleOpen}
           onPointerLeave={handleClose}
           aria-describedby={isOpen && id ? id : `tooltip-${tooltipId}`}
