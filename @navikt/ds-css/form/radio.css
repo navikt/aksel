@@ -1,7 +1,7 @@
 :root {
   --navds-radio-color-description: var(--navds-color-gray-80);
   --navds-radio-color-background: var(--navds-color-white);
-  --navds-radio-color-border: var(--navds-color-border);
+  --navds-radio-color-border: var(--navds-color-gray-60);
   --navds-radio-color-label-hover: var(--navds-color-blue-50);
   --navds-radio-color-border-hover: var(--navds-color-blue-50);
   --navds-radio-color-background-hover: var(--navds-color-blue-10);

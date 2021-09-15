@@ -1,6 +1,6 @@
 :root {
   --navds-textarea-color-background: var(--navds-color-white);
-  --navds-textarea-color-border: var(--navds-color-gray-40);
+  --navds-textarea-color-border: var(--navds-color-gray-60);
   --navds-textarea-color-border-hover: var(--navds-color-blue-50);
   --navds-textarea-color-border-error: var(--navds-color-red-50);
   --navds-textarea-color-shadow-error: var(--navds-color-red-50);

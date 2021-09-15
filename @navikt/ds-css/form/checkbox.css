@@ -1,6 +1,6 @@
 :root {
   --navds-checkbox-color-background: var(--navds-color-white);
-  --navds-checkbox-color-border: var(--navds-color-border);
+  --navds-checkbox-color-border: var(--navds-color-gray-60);
   --navds-checkbox-color-label-hover: var(--navds-color-blue-50);
   --navds-checkbox-color-border-hover: var(--navds-color-blue-50);
   --navds-checkbox-color-background-hover: var(--navds-color-blue-10);
