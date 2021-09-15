@@ -15,7 +15,7 @@ export interface FormFieldProps {
   /**
    * Changes font-size, padding and gaps
    */
-  size?: "m" | "s";
+  size?: "medium" | "small";
   /**
    * Disables element
    */
@@ -53,7 +53,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
     hasError,
     errorId,
     inputDescriptionId,
-    size: size ?? fieldset?.size ?? "m",
+    size: size ?? fieldset?.size ?? "medium",
     inputProps: {
       id,
       "aria-invalid": hasError,

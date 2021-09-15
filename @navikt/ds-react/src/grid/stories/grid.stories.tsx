@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Grid, Cell } from "../index";
-import { ContentContainer } from "../../index";
+import { BodyLong } from "../..";
+import { Grid, Cell, ContentContainer } from "../index";
 import "./styles.css";
 
 export default {
@@ -38,6 +38,14 @@ export const All = () => {
           Kolonne
         </Cell>
       </Grid>
+    </ContentContainer>
+  );
+};
+
+export const Contentcontainer = () => {
+  return (
+    <ContentContainer className={"navds-story-content-container"}>
+      <BodyLong size="medium">-- Innhold --</BodyLong>
     </ContentContainer>
   );
 };

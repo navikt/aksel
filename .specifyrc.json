@@ -1,54 +1,26 @@
 {
   "repository": "@nav/designsystem",
-  "head": "updated-specify-tokens",
-  "base": "master",
+  "head": "specify-sync",
+  "base": "specify-token-parsing",
   "rules": [
     {
-      "name": "Specify / Icons",
-      "path": "@navikt/ds-icons/svg",
+      "name": "Color sync",
+      "path": "@navikt/ds-tokens/src/colors.js",
       "filter": {
-        "types": ["vector"]
+        "types": ["color"]
       },
       "parsers": [
         {
-          "name": "pascalcasify",
+          "name": "to-theme-ui",
           "options": {
-            "keys": ["name"]
-          }
-        },
-        {
-          "name": "name-assets-files-by-pattern",
-          "options": {
-            "pattern": "{{name}}.{{format}}"
-          }
-        }
-      ]
-    },
-    {
-      "name": "Specify / Icons - metadata",
-      "path": "@navikt/ds-icons/figma-api/metadata-specify.json",
-      "filter": {
-        "types": ["vector"]
-      },
-      "parsers": [
-        {
-          "name": "pascalcasify",
-          "options": {
-            "keys": ["name"]
-          }
-        },
-        {
-          "name": "pick",
-          "options": {
-            "keys": [
-              "name",
-              "createdAt",
-              "updatedAt",
-              "meta.description",
-              "meta.parentFrame",
-              "meta.frame",
-              "page"
-            ]
+            "formatConfig": {
+              "module": "commonjs"
+            },
+            "formatTokens": {
+              "colorFormat": {
+                "format": "rgb"
+              }
+            }
           }
         }
       ]

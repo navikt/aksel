@@ -4,6 +4,7 @@ import ReactModal from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
 import { Button } from "..";
+import ModalContent, { ModalContentType } from "./ModalContent";
 
 export interface ModalProps {
   /**
@@ -24,31 +25,31 @@ export interface ModalProps {
    */
   shouldCloseOnOverlayClick?: boolean;
   /**
-   * @ignore
+   * User defined classname for modal
    */
   className?: string;
-  /**
-   * User defined classname for modal content
-   */
-  contentClassName?: string;
+}
+
+interface ModalComponent
+  extends ModalLifecycle,
+    React.ForwardRefExoticComponent<
+      ModalProps & React.RefAttributes<ReactModal>
+    > {
+  Content: ModalContentType;
 }
 
 type ModalLifecycle = {
   setAppElement?: (element: any) => void;
 };
 
-const Modal: ModalLifecycle &
-  React.ForwardRefExoticComponent<
-    ModalProps & React.RefAttributes<ReactModal>
-  > = forwardRef<ReactModal, ModalProps>(
+const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
       open,
-      className,
       onClose,
+      className,
       shouldCloseOnOverlayClick = true,
-      contentClassName = "",
       ...rest
     },
     ref
@@ -75,12 +76,12 @@ const Modal: ModalLifecycle &
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         onRequestClose={(e) => onModalCloseRequest(e)}
       >
-        <section className={contentClassName}>{children}</section>
+        {children}
         <Button
           className={cl("navds-modal__button", {
             "navds-modal__button--shake": shouldCloseOnOverlayClick,
           })}
-          size="s"
+          size="small"
           variant="secondary"
           ref={buttonRef}
           aria-label="lukk modalvindu"
@@ -95,8 +96,9 @@ const Modal: ModalLifecycle &
       </ReactModal>
     );
   }
-);
+) as ModalComponent;
 
 Modal.setAppElement = (element) => ReactModal.setAppElement(element);
+Modal.Content = ModalContent;
 
 export default Modal;

@@ -1,3 +1,16 @@
+:root {
+  --navds-textarea-color-background: var(--navds-color-white);
+  --navds-textarea-color-border: var(--navds-color-gray-60);
+  --navds-textarea-color-border-hover: var(--navds-color-blue-50);
+  --navds-textarea-color-border-error: var(--navds-color-red-50);
+  --navds-textarea-color-shadow-error: var(--navds-color-red-50);
+  --navds-textarea-color-counter-text: var(--navds-color-gray-40);
+  --navds-textarea-color-counter-text-error: var(--navds-color-red-50);
+  --navds-textarea-color-text-disabled: var(--navds-color-darkgray);
+  --navds-textarea-color-border-disabled: var(--navds-color-gray-40);
+  --navds-textarea-color-background-disabled: var(--navds-color-gray-10);
+}
+
 .navds-textarea__wrapper {
   position: relative;
   width: 100%;
@@ -6,9 +19,9 @@
 .navds-textarea__input {
   appearance: none;
   padding: var(--navds-spacing-2);
-  background-color: white;
+  background-color: var(--navds-textarea-color-background);
   border-radius: 4px;
-  border: 1px solid var(--navds-color-border);
+  border: 1px solid var(--navds-textarea-color-border);
   resize: none;
   width: 100%;
   transition: height 0.1s ease-out;
@@ -21,7 +34,7 @@
 }
 
 .navds-textarea__input:hover {
-  border-color: var(--navds-color-blue-50);
+  border-color: var(--navds-textarea-color-border-hover);
 }
 
 .navds-textarea__input:focus {
@@ -29,18 +42,18 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-form-field--s .navds-textarea__input {
+.navds-form-field--small .navds-textarea__input {
   padding: var(--navds-spacing-1);
   min-height: 32px;
 }
 
-.navds-form-field--s .navds-textarea--counter.navds-textarea__input {
+.navds-form-field--small .navds-textarea--counter.navds-textarea__input {
   padding-bottom: var(--navds-spacing-7);
 }
 
 .navds-textarea__counter {
   pointer-events: none;
-  color: var(--navds-color-gray-40);
+  color: var(--navds-textarea-color-counter-text);
   font-style: italic;
   position: absolute;
   text-align: right;
@@ -50,7 +63,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--navds-color-red-50);
+  color: var(--navds-textarea-color-counter-text-error);
 }
 
 /**
@@ -58,19 +71,18 @@
 */
 .navds-textarea--error
   .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-color-red-50);
-  border-color: var(--navds-color-red-50);
+  box-shadow: 0 0 0 1px var(--navds-textarea-color-shadow-error);
+  border-color: var(--navds-textarea-color-border-error);
 }
 
 /*
-  TODO: Oppdater denne til riktige farger
   Disabled handling
  */
 .navds-textarea__input:disabled,
 .navds-textarea__input[readonly] {
-  background-color: #f1f1f1;
-  border-color: #6a6a6a;
+  background-color: var(--navds-textarea-color-background-disabled);
+  border-color: var(--navds-textarea-color-border-disabled);
   box-shadow: none;
-  color: #262626;
+  color: var(--navds-textarea-color-text-disabled);
   cursor: not-allowed;
 }

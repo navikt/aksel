@@ -1,7 +1,6 @@
 import * as React from "react";
 
 import { CopyToClipboard } from "../index";
-import { Link } from "@navikt/ds-icons";
 
 export default {
   title: "@ds-react/copy-to-clipboard",
@@ -15,24 +14,24 @@ export const All = () => {
   return (
     <div>
       <h2>Fritstående knapp</h2>
-      <CopyToClipboard label={label} text={text} />
+      <CopyToClipboard popoverText={label} copyText={text} />
 
       <h2>Sammen med tekst</h2>
-      <CopyToClipboard label={label} text={text}>
+      <CopyToClipboard popoverText={label} copyText={text}>
         Kopier tekst
       </CopyToClipboard>
 
-      <h2>Tilpasser seg fontstørrelse</h2>
-      <CopyToClipboard label={label} text={text} style={{ fontSize: "0.8rem" }}>
+      <h2>Small size</h2>
+      <CopyToClipboard popoverText={label} copyText={text} size="small">
         Kopier tekst
       </CopyToClipboard>
+      <CopyToClipboard popoverText={label} copyText={text} size="small" />
 
-      <h2>Custom icon</h2>
+      <h2>Endrer placement av popover</h2>
       <CopyToClipboard
-        icon={<Link />}
-        label={label}
-        text={text}
-        style={{ fontSize: "0.8rem" }}
+        popoverText={label}
+        copyText={text}
+        popoverPlacement="bottom-end"
       >
         Kopier tekst
       </CopyToClipboard>

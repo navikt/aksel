@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Close, Search } from "@navikt/ds-icons";
 import {
@@ -14,6 +14,7 @@ export default {
 } as Meta;
 
 export const All = () => {
+  const [show, setShow] = useState(false);
   return (
     <>
       <h1>SearchField</h1>
@@ -23,7 +24,7 @@ export const All = () => {
       >
         <SearchFieldInput />
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
       </SearchField>
       <SearchField
@@ -31,7 +32,7 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
       >
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
         <SearchFieldInput />
       </SearchField>
@@ -41,9 +42,12 @@ export const All = () => {
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
       >
-        <SearchFieldInput clearSearch />
-        <SearchFieldButton>
-          <Search /> <span>Søk</span>
+        <SearchFieldInput />
+        <SearchFieldClearButton>
+          <Close />
+        </SearchFieldClearButton>
+        <SearchFieldButton onClick={() => setShow(!show)}>
+          <Search /> Søk
         </SearchFieldButton>
       </SearchField>
       <SearchField
@@ -51,10 +55,10 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
       >
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
         <SearchFieldClearButton>
-          <Close /> <span>Tøm</span>
+          <Close /> Tøm
         </SearchFieldClearButton>
         <SearchFieldInput />
       </SearchField>
@@ -66,7 +70,7 @@ export const All = () => {
         hideLabel
       >
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
         <SearchFieldInput />
       </SearchField>
@@ -75,7 +79,7 @@ export const All = () => {
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
-        size="s"
+        size="small"
       >
         <SearchFieldButton>
           <Search />
@@ -87,9 +91,38 @@ export const All = () => {
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
-        size="s"
+        size="small"
       >
         <SearchFieldInput />
+        <SearchFieldButton>
+          <Search />
+          <span className="sr-only">Søk</span>
+        </SearchFieldButton>
+      </SearchField>
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        size="small"
+      >
+        <SearchFieldButton>
+          <Search />
+          <span className="sr-only">Søk</span>
+        </SearchFieldButton>
+        <SearchFieldClearButton>
+          <Close /> Tøm
+        </SearchFieldClearButton>
+        <SearchFieldInput />
+      </SearchField>
+
+      <SearchField
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        size="small"
+      >
+        <SearchFieldInput />
+        <SearchFieldClearButton>
+          <Close /> Tøm
+        </SearchFieldClearButton>
         <SearchFieldButton>
           <Search />
           <span className="sr-only">Søk</span>
@@ -104,7 +137,7 @@ export const All = () => {
       >
         <SearchFieldInput />
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
       </SearchField>
       <SearchField
@@ -113,7 +146,7 @@ export const All = () => {
         error="Errormsg"
       >
         <SearchFieldButton>
-          <Search /> <span>Søk</span>
+          <Search /> Søk
         </SearchFieldButton>
         <SearchFieldInput />
       </SearchField>
@@ -128,7 +161,7 @@ export const All = () => {
         >
           <SearchFieldInput />
           <SearchFieldButton>
-            <Search /> <span>Søk</span>
+            <Search /> Søk
           </SearchFieldButton>
         </SearchField>
         <SearchField
@@ -137,7 +170,7 @@ export const All = () => {
           hideLabel
         >
           <SearchFieldButton>
-            <Search /> <span>Søk</span>
+            <Search /> Søk
           </SearchFieldButton>
           <SearchFieldInput />
         </SearchField>

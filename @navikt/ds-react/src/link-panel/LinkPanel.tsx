@@ -1,40 +1,45 @@
 import React, { forwardRef } from "react";
-import { OverridableComponent } from "../util";
-import { Panel } from "..";
+import { Panel, OverridableComponent } from "..";
 import { Next } from "@navikt/ds-icons";
 import cl from "classnames";
+import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
+import {
+  LinkPanelDescription,
+  LinkPanelDescriptionType,
+} from "./LinkPanelDescription";
 
-export type LinkPanelType = OverridableComponent<LinkPanelProps>;
-
-export interface LinkPanelProps {
-  props: {
-    /**
-     * Panel content
-     */
-    children?: React.ReactNode;
-    /**
-     * Toggles border on panel
-     */
-    border?: boolean;
-  } & React.HTMLAttributes<HTMLAnchorElement>;
-  defaultComponent: "a";
+export interface LinkPanelProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  /**
+   * Panel content
+   */
+  children?: React.ReactNode;
+  /**
+   * Toggles border on panel
+   */
+  border?: boolean;
 }
 
-const LinkPanel: LinkPanelType = forwardRef(
-  ({ children, component = "a", border = true, className, ...rest }, ref) => {
+interface LinkPanelComponentType
+  extends OverridableComponent<LinkPanelProps, HTMLAnchorElement> {
+  Title: LinkPanelTitleType;
+  Description: LinkPanelDescriptionType;
+}
+
+const LinkPanelComponent: OverridableComponent<
+  LinkPanelProps,
+  HTMLAnchorElement
+> = forwardRef(
+  ({ children, as = "a", border = true, className, ...rest }, ref) => {
     return (
       <Panel
-        component={component}
+        {...rest}
+        as={as}
         border={border}
         ref={ref}
         className={cl("navds-link-panel", className)}
-        {...rest}
       >
-        {typeof children === "string" ? (
-          <LinkPanelTitle>{children}</LinkPanelTitle>
-        ) : (
-          <span className="navds-link-panel__content">{children}</span>
-        )}
+        <div className="navds-link-panel__content">{children}</div>
         <Next
           className="navds-link-panel__chevron"
           aria-label="arrow-icon pointing right"
@@ -44,26 +49,9 @@ const LinkPanel: LinkPanelType = forwardRef(
   }
 );
 
-interface LinkPanelTitleProps {
-  props: {
-    children: React.ReactNode;
-  } & React.HTMLAttributes<HTMLSpanElement>;
-  defaultComponent: "span";
-}
+const LinkPanel = LinkPanelComponent as LinkPanelComponentType;
 
-export const LinkPanelTitle: OverridableComponent<LinkPanelTitleProps> = forwardRef(
-  ({ className, component: Component = "span", ...rest }, ref) => (
-    <Component
-      ref={ref}
-      className={cl(
-        "navds-link-panel-title",
-        "navds-title",
-        "navds-title--m",
-        className
-      )}
-      {...rest}
-    />
-  )
-);
+LinkPanel.Title = LinkPanelTitle;
+LinkPanel.Description = LinkPanelDescription;
 
 export default LinkPanel;

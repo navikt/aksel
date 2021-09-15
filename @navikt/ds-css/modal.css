@@ -1,16 +1,23 @@
+:root {
+  --navds-modal-color-background: var(--navds-color-background);
+  --navds-modal-color-overlay: var(--navds-color-modal-overlay);
+}
+
 .ReactModal__Body--open {
   overflow: hidden;
 }
 
 .navds-modal {
-  background-color: var(--navds-color-background);
-  padding: var(--navds-spacing-4);
+  background-color: var(--navds-modal-color-background);
   border-radius: 4px;
   display: block;
   position: relative;
   overflow: auto;
   max-height: 100%;
-  z-index: var(--navds-z-index-modal-content);
+}
+
+.navds-modal__content {
+  padding: var(--navds-spacing-4);
 }
 
 .navds-modal:focus,
@@ -21,12 +28,12 @@
 
 .navds-modal__overlay {
   position: fixed;
-  z-index: var(--navds-z-index-modal-overlay);
+  z-index: var(--navds-z-index-modal);
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--navds-color-modal-overlay);
+  background-color: var(--navds-modal-color-overlay);
   padding: var(--navds-spacing-4);
   display: flex;
   align-items: center;

@@ -29,6 +29,7 @@ const Cell = forwardRef<HTMLDivElement, CellProps>(
   ({ children, xs, sm, md, lg, className, ...rest }, ref) => {
     return (
       <div
+        {...rest}
         ref={ref}
         className={cl(
           "navds-grid__cell",
@@ -38,7 +39,6 @@ const Cell = forwardRef<HTMLDivElement, CellProps>(
           lg && `navds-grid__cell--lg-${lg}`,
           className
         )}
-        {...rest}
       >
         {children}
       </div>
