@@ -93,7 +93,7 @@
 .navds-body-long--small {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
-  line-height: var(--navds-font-line-height-m);
+  line-height: var(--navds-font-line-height-l);
 }
 
 .navds-body-long--small.navds-typo--spacing {

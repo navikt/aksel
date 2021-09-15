@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { AlertContext, Heading, Label } from "..";
+import { AlertContext, Heading } from "..";
 
 export interface AlertTitleProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

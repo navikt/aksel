@@ -41,10 +41,6 @@
     calc(var(--navds-spacing-4) + 0.5px);
 }
 
-.navds-alert--small > .navds-alert__wrapper {
-  gap: 0.25rem;
-}
-
 .navds-alert--full-width {
   border-radius: 0;
 }
@@ -53,10 +49,12 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   align-self: flex-start;
+  height: var(--navds-font-line-height-xl);
 }
 
 .navds-alert--small > .navds-alert__icon {
   font-size: 1.25rem;
+  height: var(--navds-font-line-height-l);
 }
 
 .navds-alert--error {

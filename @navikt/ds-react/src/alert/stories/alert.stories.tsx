@@ -1,5 +1,6 @@
 import React from "react";
 import { Alert } from "..";
+import { BodyLong, Heading } from "../..";
 
 export default {
   title: "ds-react/alert",
@@ -41,9 +42,11 @@ export const All = () => {
       <h2>Alert fullWidth</h2>
       {variants.map((variant, i) => (
         <Alert fullWidth key={variant} variant={variant}>
-          {new Array(i + 1).fill(
-            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-          )}
+          <Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
+          </Alert.Content>
         </Alert>
       ))}
       <h2>Small</h2>
@@ -88,9 +91,19 @@ export const All = () => {
           <Alert key={variant} variant={variant}>
             <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
             <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
+              <BodyLong spacing>
+                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
+                qui laboris ex. Labore ex occaecat proident qui qui fugiat
+                magna. Fugiat sint commodo consequat eu aute.
+              </BodyLong>
+              <Heading as="div" size="small" spacing>
+                Ullamco eiusmod Lorem eiusmod eu.
+              </Heading>
+              <BodyLong>
+                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
+                qui laboris ex. Labore ex occaecat proident qui qui fugiat
+                magna. Fugiat sint commodo consequat eu aute.
+              </BodyLong>
             </Alert.Content>
           </Alert>
         ))}
@@ -101,9 +114,19 @@ export const All = () => {
           <Alert key={variant} variant={variant} size="small">
             <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
             <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
+              <BodyLong spacing>
+                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
+                qui laboris ex. Labore ex occaecat proident qui qui fugiat
+                magna. Fugiat sint commodo consequat eu aute.
+              </BodyLong>
+              <Heading as="div" size="xsmall" spacing>
+                Ullamco eiusmod Lorem eiusmod eu.
+              </Heading>
+              <BodyLong>
+                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
+                qui laboris ex. Labore ex occaecat proident qui qui fugiat
+                magna. Fugiat sint commodo consequat eu aute.
+              </BodyLong>
             </Alert.Content>
           </Alert>
         ))}
