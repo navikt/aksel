@@ -221,3 +221,7 @@
   box-shadow: none;
   transform: none;
 }
+
+.navds-button:disabled:disabled.navds-button--tertiary:active {
+  padding: var(--navds-spacing-2) var(--navds-spacing-2);
+}
