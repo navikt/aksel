@@ -22,32 +22,18 @@ const AlertTitle: AlertTitleType = forwardRef(
       return null;
     }
 
-    const size = context.size ?? "medium";
+    const size = context.size === "medium" ? "small" : "xsmall";
 
     return (
-      <>
-        {size === "medium" ? (
-          <Heading
-            {...rest}
-            ref={ref}
-            className={cl(className, "navds-alert__title")}
-            as="div"
-            size="small"
-          >
-            {children}
-          </Heading>
-        ) : (
-          <Label
-            {...rest}
-            ref={ref}
-            className={cl(className, "navds-alert__title")}
-            as="div"
-            size="medium"
-          >
-            {children}
-          </Label>
-        )}
-      </>
+      <Heading
+        {...rest}
+        ref={ref}
+        className={cl(className, "navds-alert__title")}
+        as="div"
+        size={size}
+      >
+        {children}
+      </Heading>
     );
   }
 );
