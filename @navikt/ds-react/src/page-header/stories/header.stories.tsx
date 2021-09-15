@@ -25,7 +25,7 @@ export const All = () => {
       <h2>PageHeader center</h2>
       <PageHeader
         description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
-        variant="center"
+        align="center"
       >
         AUTE OFFICIA SINT SUNT FUGIAT
       </PageHeader>
@@ -33,26 +33,26 @@ export const All = () => {
       <PageHeader
         illustration={illustrationPictogram}
         description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
-        variant="center"
+        align="center"
       >
         AUTE OFFICIA SINT SUNT FUGIAT
       </PageHeader>
       <h2>PageHeader variants</h2>
       <PageHeader
         description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
-        theme="guide"
+        variant="guide"
       >
         AUTE OFFICIA SINT SUNT FUGIAT
       </PageHeader>
       <PageHeader
         description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
-        theme="product"
+        variant="product"
       >
         AUTE OFFICIA SINT SUNT FUGIAT
       </PageHeader>
       <PageHeader
         description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
-        theme="situation"
+        variant="situation"
       >
         AUTE OFFICIA SINT SUNT FUGIAT
       </PageHeader>
