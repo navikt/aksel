@@ -17,12 +17,12 @@ import { Success } from "@navikt/ds-react";
 ## Varianter
 
 `variants`-prop kan brukes for å endre utseende mellom
-`primary`, `secondary`, `action` og `danger`
+`primary`, `secondary`, `tertiary` og `danger`
 
 <Canvas>
   <Button variant="primary">Buttontekst</Button>
   <Button variant="secondary">Buttontekst</Button>
-  <Button variant="action">Buttontekst</Button>
+  <Button variant="tertiary">Buttontekst</Button>
   <Button variant="danger">Buttontekst</Button>
 </Canvas>
 
@@ -31,16 +31,16 @@ import { Success } from "@navikt/ds-react";
 Button har to størrelser: Default 48px min-height og small 32px min-height
 
 <Canvas>
-  <Button size="s" variant="primary">
+  <Button size="small" variant="primary">
     Buttontekst
   </Button>
-  <Button size="s" variant="secondary">
+  <Button size="small" variant="secondary">
     Buttontekst
   </Button>
-  <Button size="s" variant="action">
+  <Button size="small" variant="tertiary">
     Buttontekst
   </Button>
-  <Button size="s" variant="danger">
+  <Button size="small" variant="danger">
     Buttontekst
   </Button>
 </Canvas>
@@ -48,18 +48,17 @@ Button har to størrelser: Default 48px min-height og small 32px min-height
 ## Med ikon eller `<Loader />`
 
 Hvis man setter ikoner (svg) eller `<Loader />` rett på button vil størrelsen
-bli justert automatisk. For å få riktige marginer rundt ikonet må man da wrappe innholdet
-i et element
+bli justert automatisk.
 
 <Canvas>
   <Button>
-    <span>Buttontekst</span> <Loader />
-  </Button>
-  <Button size="s">
-    <span>Buttontekst</span>
-    <Loader />
+    <Loader /> Buttontekst
   </Button>
   <Button>
-    <Loader /> <span>Buttontekst</span>
+    Buttontekst <Loader />
+  </Button>
+  <Button size="small">
+    Buttontekst
+    <Loader />
   </Button>
 </Canvas>

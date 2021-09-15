@@ -1,5 +1,5 @@
 import React from "react";
-import { Title, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
+import { Heading, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
 import "./index.css";
 
 export default {
@@ -7,21 +7,16 @@ export default {
   component: BodyLong,
 };
 
-const lorem = () => (
-  <>
-    Veniam consequat cillum pariatur officia duis aute labore anim labore.
-    Pariatur ad duis do nulla.
-  </>
-);
+const lorem = () => <>Veniam consequat cillum pariatur officia duis</>;
 
 const TitleTemplate = ({ level, size, spacing }) => (
-  <Title spacing={spacing} size={size} level={level}>
+  <Heading spacing={spacing} size={size} level={level}>
     {lorem()}
-  </Title>
+  </Heading>
 );
 
-export const TitleStory = TitleTemplate.bind({});
-TitleStory.args = { level: 1, size: "2xl", spacing: false };
+export const HeadingStory = TitleTemplate.bind({});
+HeadingStory.args = { level: 1, size: "2xlarge", spacing: false };
 
 const IngressTemplate = ({ spacing }) => (
   <Ingress spacing={spacing}>{lorem()}</Ingress>
@@ -37,7 +32,7 @@ const BodyLongTemplate = ({ spacing, size }) => (
 );
 
 export const BodyLongStory = BodyLongTemplate.bind({});
-BodyLongStory.args = { spacing: false, size: "m" };
+BodyLongStory.args = { spacing: false, size: "medium" };
 
 const BodyShortTemplate = ({ spacing, size }) => (
   <BodyShort size={size} spacing={spacing}>
@@ -46,7 +41,7 @@ const BodyShortTemplate = ({ spacing, size }) => (
 );
 
 export const BodyShortStory = BodyShortTemplate.bind({});
-BodyShortStory.args = { spacing: false, size: "m" };
+BodyShortStory.args = { spacing: false, size: "medium" };
 
 const LabelTemplate = ({ spacing, size }) => (
   <Label size={size} spacing={spacing}>
@@ -55,7 +50,7 @@ const LabelTemplate = ({ spacing, size }) => (
 );
 
 export const LabelStory = LabelTemplate.bind({});
-LabelStory.args = { spacing: false, size: "m" };
+LabelStory.args = { spacing: false, size: "medium" };
 
 const DetailTemplate = ({ spacing, size }) => (
   <Detail size={size} spacing={spacing}>
@@ -64,14 +59,14 @@ const DetailTemplate = ({ spacing, size }) => (
 );
 
 export const DetailStory = DetailTemplate.bind({});
-DetailStory.args = { spacing: false, size: "m" };
+DetailStory.args = { spacing: false, size: "medium" };
 
 export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
-      <Title level={1} size="2xl" spacing>
-        Title lvl 1 2xl
-      </Title>
+      <Heading level={"1"} size="2xlarge" spacing>
+        Title lvl 1 2xlarge
+      </Heading>
       <BodyLong spacing>
         BodyLong: Aliqua ad et nisi commodo sit excepteur in commodo proident
         proident. Nostrud consectetur dolore eu nostrud aliqua. Adipisicing
@@ -91,9 +86,9 @@ export const SideInnholdEksempel = () => {
         BodyLong: Dolore commodo ad veniam commodo aute voluptate est officia
         sunt proident irure consectetur excepteur.
       </BodyLong>
-      <Title level={2} size="xl" spacing>
-        Title lvl 2 xl
-      </Title>
+      <Heading level={"2"} size="xlarge" spacing>
+        Title lvl 2 xlarge
+      </Heading>
       <Ingress spacing>
         Ingress: Mollit incididunt incididunt officia amet est et non aliqua
         officia nulla et aute aliqua culpa.
@@ -109,7 +104,7 @@ export const SideInnholdEksempel = () => {
         adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
         Lorem est laborum qui pariatur ex eu. Eiusmod proident amet esse ex.
       </BodyLong>
-      <BodyLong size="s" spacing>
+      <BodyLong size="small" spacing>
         BodyLong small: Irure dolore laborum amet occaecat ex laboris mollit
         reprehenderit nisi laborum voluptate laborum. Ipsum eu sint laborum
         adipisicing ut incididunt laborum laborum. Ipsum non amet laboris quis
@@ -119,7 +114,7 @@ export const SideInnholdEksempel = () => {
         BodyShort: Id consectetur velit sunt laboris consequat ullamco
         incididunt.
       </BodyShort>
-      <BodyShort size="s" spacing>
+      <BodyShort size="small" spacing>
         BodyShort small: Sunt amet officia sit excepteur sit pariatur sit
         reprehenderit irure ipsum.
       </BodyShort>

@@ -6,12 +6,12 @@
 @import "accordion-menu.css";
 @import "alert.css";
 @import "button.css";
-@import "card.css";
 @import "content-container.css";
 @import "copy-to-clipboard.css";
-@import "header.css";
 @import "internal-header.css";
+@import "guide-panel.css";
 @import "form/index.css";
+@import "help-text.css";
 @import "link.css";
 @import "loader.css";
 @import "modal.css";
@@ -20,3 +20,7 @@
 @import "panel.css";
 @import "link-panel.css";
 @import "speech-bubble.css";
+
+/* Navno spesific packages */
+@import "page-header.css";
+@import "card.css";

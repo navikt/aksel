@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import {
   ErrorFilled,
@@ -6,80 +6,103 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
+import AlertContent, { AlertContentType } from "./AlertContent";
+import AlertTitle, { AlertTitleType } from "./AlertTitle";
+import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Alert content
+   */
+  children: React.ReactNode;
   /**
    * Decides what design the alert will have
    */
   variant: "error" | "warning" | "info" | "success";
-  children: React.ReactNode;
   /**
    * Changes padding and font-sizes
-   * @default "m"
+   * @default "medium"
    */
-  size?: "m" | "s";
+  size?: "medium" | "small";
+  /**
+   * Toggles full-width Alert
+   * @default false
+   */
+  fullWidth?: boolean;
+  /**
+   * Removes background from Alert
+   */
+  inline?: boolean;
 }
 
-const Icon = ({ variant }) => {
+const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return (
-        <ErrorFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <ErrorFilled {...props} />;
     case "warning":
-      return (
-        <WarningFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <WarningFilled {...props} />;
     case "info":
-      return (
-        <InformationFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <InformationFilled {...props} />;
     case "success":
-      return (
-        <SuccessFilled
-          aria-label={`${variant}-ikon`}
-          focusable="false"
-          role="img"
-        />
-      );
+      return <SuccessFilled {...props} />;
     default:
       return null;
   }
 };
 
+export interface AlertContextProps {
+  size: "medium" | "small";
+}
+
+export const AlertContext = createContext<AlertContextProps | null>(null);
+interface AlertComponent
+  extends React.ForwardRefExoticComponent<
+    AlertProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Title: AlertTitleType;
+  Content: AlertContentType;
+}
+
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
-  ({ variant, children, className, size = "m", ...rest }, ref) => (
+  (
+    {
+      children,
+      className,
+      variant,
+      size = "medium",
+      fullWidth = false,
+      inline = false,
+      ...rest
+    },
+    ref
+  ) => (
     <div
+      {...rest}
       ref={ref}
       className={cl(
         className,
         "navds-alert",
         `navds-alert--${variant}`,
         `navds-alert--${size}`,
-        "navds-body-long",
-        { "navds-body--s": size === "s" }
+        { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
       )}
-      {...rest}
     >
-      <span>
-        <span className="sr-only">{`${variant}-ikon`}</span>
-        <Icon variant={variant} />
-      </span>
-      <div>{children}</div>
+      <Icon
+        aria-label={`${variant}-ikon`}
+        focusable="false"
+        role="img"
+        variant={variant}
+        alt={`${variant}-ikon`}
+        className="navds-alert__icon"
+      />
+      <BodyLong as="div" size={size} className="navds-alert__wrapper">
+        {children}
+      </BodyLong>
     </div>
   )
-);
+) as AlertComponent;
+
+Alert.Title = AlertTitle;
+Alert.Content = AlertContent;
 
 export default Alert;

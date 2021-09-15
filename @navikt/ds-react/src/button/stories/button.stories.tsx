@@ -22,17 +22,17 @@ const Section = ({ children }) => (
   </div>
 );
 
-const variants: Array<"primary" | "secondary" | "action" | "danger"> = [
+const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
   "primary",
   "secondary",
-  "action",
+  "tertiary",
   "danger",
 ];
 
 const varSwitch = {
   primary: "Primary",
   secondary: "Secondary",
-  action: "Action",
+  tertiary: "Tertiary",
   danger: "Danger",
 };
 
@@ -58,19 +58,15 @@ export const All = () => {
       <h2>As link</h2>
       <Section>
         {variants.map((variant) => (
-          <a
-            key={variant}
-            className={`navds-button navds-button--${variant} navds-body-short`}
-            href="the-link"
-          >
+          <Button as="a" key={variant} variant={variant} href="the-link">
             {varSwitch[variant]}
-          </a>
+          </Button>
         ))}
       </Section>
       <h2>Small</h2>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="s">
+          <Button key={variant} variant={variant} size="small">
             {varSwitch[variant]}
           </Button>
         ))}
@@ -79,21 +75,29 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            <span>{varSwitch[variant]}</span> <Success />
+            {variant} <Success />
+          </Button>
+        ))}
+      </Section>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant}>
+            <span className="sr-only">Success ikon</span>
+            <Success />
           </Button>
         ))}
       </Section>
       <h2>Small w/icon</h2>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="s">
-            <Success /> <span>{varSwitch[variant]}</span>
+          <Button key={variant} variant={variant} size="small">
+            <Success /> {variant}
           </Button>
         ))}
       </Section>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="s">
+          <Button key={variant} variant={variant} size="small">
             <span className="sr-only">Success ikon</span>
             <Success />
           </Button>

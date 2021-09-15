@@ -11,15 +11,15 @@ export interface SearchFieldClearButtonProps extends Omit<ButtonProps, "size"> {
   children: React.ReactNode;
   /**
    * Changes design and interactions
-   * @default "primary"
+   * @default "secondary"
    */
-  variant?: "primary" | "action";
+  variant?: "primary" | "secondary";
 }
 
 const SearchFieldClearButton = forwardRef<
   HTMLButtonElement,
   SearchFieldClearButtonProps
->(({ className, variant = "primary", disabled, ...rest }, ref) => {
+>(({ className, variant = "secondary", disabled, ...rest }, ref) => {
   const searchField = useContext(SearchFieldContext);
 
   if (searchField === null) {
@@ -31,9 +31,9 @@ const SearchFieldClearButton = forwardRef<
 
   return (
     <Button
-      ref={ref}
-      className={cl(className, "navds-search-field__button")}
       {...rest}
+      ref={ref}
+      className={cl(className, "navds-search-field__clear-button")}
       size={size}
       variant={variant}
       disabled={disabled ?? inputProps?.disabled}

@@ -1,3 +1,5 @@
+import { Placement } from "@popperjs/core";
+import cl from "classnames";
 import React, {
   forwardRef,
   HTMLAttributes,
@@ -5,26 +7,26 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { usePopper } from "react-popper";
-import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
-import cl from "classnames";
+import { usePopper } from "react-popper";
+import { useClientLayoutEffect } from "..";
+import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Element that popover will anchor to
+   * Element popover anchors to
    */
   anchorEl: HTMLElement | null;
   /**
-   * Open state for popover
+   * Open state
    */
   open: boolean;
   /**
-   * Callback for when popover closes
+   * onClose callback
    */
   onClose: () => void;
   /**
-   * Content rendered inside popover
+   * Popover content
    */
   children: React.ReactNode;
   /**
@@ -33,12 +35,13 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   placement?: Placement;
   /**
-   *  Deteremines if popover contains an arrow
+   *  Toggles rendering of arrow
+   *  @default true
    */
   arrow?: boolean;
   /**
    * Distance from anchor to popover
-   * @default 16 w/arrow, 4 wo/arrow
+   * @default 16 w/arrow, 4 w/no-arrow
    */
   offset?: number;
 }
@@ -50,6 +53,13 @@ const useEventLister = (event: string, callback) =>
       document.removeEventListener(event, callback);
     };
   }, [event, callback]);
+
+interface PopoverComponent
+  extends React.ForwardRefExoticComponent<
+    PopoverProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Content: PopoverContentType;
+}
 
 const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
@@ -120,11 +130,17 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               offset: [0, offset ?? (arrow ? 16 : 4)],
             },
           },
+          {
+            name: "arrow",
+            options: {
+              padding: 8,
+            },
+          },
         ],
       }
     );
 
-    useEffect(() => {
+    useClientLayoutEffect(() => {
       open && update && update();
     }, [open, update]);
 
@@ -152,6 +168,8 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       </div>
     );
   }
-);
+) as PopoverComponent;
+
+Popover.Content = PopoverContent;
 
 export default Popover;

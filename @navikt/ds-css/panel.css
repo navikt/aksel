@@ -1,11 +1,15 @@
+:root {
+  --navds-panel-color-background: var(--navds-color-white);
+  --navds-panel-color-border: var(--navds-color-border);
+}
+
 .navds-panel {
-  background-color: var(--navds-color-white);
-  display: block;
+  background-color: var(--navds-panel-color-background);
   padding: var(--navds-spacing-4);
   border-radius: var(--navds-border-radius);
   border: 1px solid transparent;
 }
 
 .navds-panel--border {
-  border-color: var(--navds-color-border);
+  border-color: var(--navds-panel-color-border);
 }

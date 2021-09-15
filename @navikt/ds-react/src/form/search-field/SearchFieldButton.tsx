@@ -11,13 +11,13 @@ export interface SearchFieldButtonProps extends Omit<ButtonProps, "size"> {
   children: React.ReactNode;
   /**
    * Changes design and interactions
-   * @default "action"
+   * @default "primary"
    */
-  variant?: "primary" | "action";
+  variant?: "primary" | "secondary";
 }
 
 const SearchFieldButton = forwardRef<HTMLButtonElement, SearchFieldButtonProps>(
-  ({ className, variant = "action", disabled, ...rest }, ref) => {
+  ({ className, variant = "primary", disabled, ...rest }, ref) => {
     const searchField = useContext(SearchFieldContext);
 
     if (searchField === null) {
