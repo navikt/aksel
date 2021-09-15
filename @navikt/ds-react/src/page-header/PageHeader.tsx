@@ -2,13 +2,13 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import { BodyShort, Heading } from "..";
 
-export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
+export interface PageHeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Header title
+   * PageHeader title
    */
   children: string;
   /**
-   * Pictogram placed in header
+   * Pictogram placed in PageHeader
    */
   illustration?: React.ReactNode;
   /**
@@ -21,13 +21,13 @@ export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
    */
   variant?: "left" | "center";
   /**
-   * Predefined theming for header
+   * Predefined theming for PageHeader
    * @default "guide"
    */
   theme?: "situation" | "product" | "guide";
 }
 
-const Header = forwardRef<HTMLDivElement, HeaderProps>(
+const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
   (
     {
       children,
@@ -44,22 +44,26 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
       <div
         ref={ref}
         className={cl(
-          "navds-header",
+          "navds-page-header",
           className,
-          `navds-header--${theme}`,
-          `navds-header--${variant}`
+          `navds-page-header--${theme}`,
+          `navds-page-header--${variant}`
         )}
         {...rest}
       >
         {illustration && (
-          <div className="navds-header__illustration">{illustration}</div>
+          <div className="navds-page-header__illustration">{illustration}</div>
         )}
-        <div className="navds-header__wrapper">
-          <Heading className="navds-header__title" size="2xlarge" level="1">
+        <div className="navds-page-header__wrapper">
+          <Heading
+            className="navds-page-header__title"
+            size="2xlarge"
+            level="1"
+          >
             {children}
           </Heading>
           {description && (
-            <BodyShort className="navds-header__description">
+            <BodyShort className="navds-page-header__description">
               {description}
             </BodyShort>
           )}
@@ -69,4 +73,4 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
   }
 );
 
-export default Header;
+export default PageHeader;

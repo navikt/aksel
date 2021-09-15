@@ -1,38 +1,38 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import { Header } from "../index";
+import { PageHeader } from "../index";
 import { illustrationPictogram } from "./pictogram";
 
-<Meta title="ds-react/header/intro" />
+<Meta title="ds-react/page-header/intro" />
 
-# Hvordan ta i bruk Header
+# Hvordan ta i bruk PageHeader
 
-Denne header-komponenten er utviklet i sammenheng med nye produktsider på NAV og
+Denne PageHeader-komponenten er utviklet i sammenheng med nye produktsider på NAV og
 vil sannsynligvis forgå en del endringer før de er ferdige.
 
 ```jsx
-<Header description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE.">
+<PageHeader description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE.">
   AUTE OFFICIA SINT SUNT FUGIAT
-</Header>
+</PageHeader>
 ```
 
 <Canvas>
-  <Header description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE.">
+  <PageHeader description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE.">
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
+  </PageHeader>
 </Canvas>
 
 ## Med illustrasjon
 
-Illustrasjonene brukt i header er "Pictogram" som er designet for den sepsifikke siden og
+Illustrasjonene brukt i PageHeader er "Pictogram" som er designet for den sepsifikke siden og
 man skal da ikke bare velge et fra figma vilkårlig.
 
 <Canvas>
-  <Header
+  <PageHeader
     illustration={illustrationPictogram}
     description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
   >
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
+  </PageHeader>
 </Canvas>
 
 ## Temaer
@@ -40,24 +40,24 @@ man skal da ikke bare velge et fra figma vilkårlig.
 Headeren kommer i tre tema: `guide`, `product` og `situation`
 
 <Canvas>
-  <Header
+  <PageHeader
     description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
     theme="guide"
   >
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
-  <Header
+  </PageHeader>
+  <PageHeader
     description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
     theme="product"
   >
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
-  <Header
+  </PageHeader>
+  <PageHeader
     description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
     theme="situation"
   >
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
+  </PageHeader>
 </Canvas>
 
 ## Sentrert
@@ -65,10 +65,10 @@ Headeren kommer i tre tema: `guide`, `product` og `situation`
 Innhold kan sentreres med `variant="center"`-prop
 
 <Canvas>
-  <Header
+  <PageHeader
     description="LABORIS AUTE DESERUNT ID AUTE OFFICIA SINT SUNT FUGIAT EX ET CUPIDATAT CONSEQUAT DOLORE."
     variant="center"
   >
     AUTE OFFICIA SINT SUNT FUGIAT
-  </Header>
+  </PageHeader>
 </Canvas>

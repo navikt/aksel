@@ -20,5 +20,5 @@
 @import "speech-bubble.css";
 
 /* Navno spesific packages */
-@import "header.css";
+@import "page-header.css";
 @import "card.css";

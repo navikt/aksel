@@ -19,4 +19,4 @@ export * from "./util";
 
 /* Navno spesific packages */
 export * from "./card";
-export * from "./header";
+export * from "./page-header";
