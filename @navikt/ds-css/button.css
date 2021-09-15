@@ -119,16 +119,12 @@
 .navds-button--secondary:focus:hover {
   border-color: var(--navds-button-color-secondary-border-focus-active-hover);
   border-width: 1px;
-  padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
+  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
 }
 
 .navds-button--secondary:focus:active {
   border-color: var(--navds-button-color-secondary-border-focus-active-hover);
   border-width: 1px;
-  padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
-}
-
-.navds-button--small.navds-button--secondary:focus {
   padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
 }
 
