@@ -64,13 +64,11 @@
   margin: 0;
   text-align: center;
   text-decoration: none;
-  border-color: var(--navds-button-color-border);
+  border: none;
   border-radius: 2px;
-  border-style: solid;
-  border-width: 2px;
   min-height: 48px;
   min-width: 48px;
-  padding: var(--navds-spacing-2) var(--navds-spacing-2);
+  padding: var(--navds-spacing-2);
   flex-shrink: 0;
 }
 
@@ -103,28 +101,37 @@
  * .navds-button--secondary *
  **************************/
 
+.navds-button--secondary {
+  box-shadow: inset 0 0 0 2px var(--navds-button-color-border);
+}
+
 .navds-button--secondary:hover {
   color: var(--navds-button-color-secondary-text-hover);
   background-color: var(--navds-button-color-secondary-background-hover);
-  border-color: transparent;
+  box-shadow: none;
+}
+
+.navds-button--secondary:focus {
+  box-shadow: inset 0 0 0 2px var(--navds-button-color-border),
+    var(--navds-shadow-focus);
 }
 
 .navds-button--secondary:active {
   color: var(--navds-button-color-secondary-text-active);
   background-color: var(--navds-button-color-secondary-background-active);
-  border-color: transparent;
+  box-shadow: none;
 }
 
 .navds-button--secondary:focus:hover {
-  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
-  border-width: 1px;
-  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
+  box-shadow: inset 0 0 0 1px
+      var(--navds-button-color-secondary-border-focus-active-hover),
+    var(--navds-shadow-focus);
 }
 
 .navds-button--secondary:focus:active {
-  border-color: var(--navds-button-color-secondary-border-focus-active-hover);
-  border-width: 1px;
-  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
+  box-shadow: inset 0 0 0 1px
+      var(--navds-button-color-secondary-border-focus-active-hover),
+    var(--navds-shadow-focus);
 }
 
 /****************************
@@ -132,28 +139,27 @@
  ****************************/
 
 .navds-button--tertiary {
-  border-color: var(--navds-button-color-tertiary-border);
   background-color: var(--navds-button-color-tertiary-background);
 }
 
 .navds-button--tertiary:hover {
-  border-color: var(--navds-button-color-tertiary-border-hover);
+  box-shadow: inset 0 0 0 2px var(--navds-button-color-tertiary-border-hover);
 }
 
 .navds-button--tertiary:focus {
-  border-color: var(--navds-button-color-tertiary-border-focus);
+  box-shadow: inset 0 0 0 2px var(--navds-button-color-tertiary-border-focus),
+    var(--navds-shadow-focus);
 }
 
 .navds-button--tertiary:active {
   color: var(--navds-button-color-tertiary-text-active);
   background-color: var(--navds-button-color-tertiary-background-active);
-  border-color: var(--navds-button-color-tertiary-border-active);
-  border-width: 1px;
-  padding: calc(0.5rem + 1px) calc(0.5rem + 1px);
+  box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-active);
 }
 
-.navds-button--small.navds-button--tertiary:active {
-  padding: calc(0.25rem + 1px) calc(0.5rem + 1px);
+.navds-button--tertiary:active:focus {
+  box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-active),
+    var(--navds-shadow-focus);
 }
 
 /*************************
@@ -163,29 +169,20 @@
 
 .navds-button--primary {
   background-color: var(--navds-button-color-primary-background);
-  border-color: var(--navds-button-color-primary-border);
   color: var(--navds-button-color-primary-text);
 }
 
 .navds-button--danger {
   background-color: var(--navds-button-color-danger-background);
-  border-color: var(--navds-button-color-danger-border);
   color: var(--navds-button-color-danger-text);
-}
-
-.navds-button--primary,
-.navds-button--danger {
-  border-width: 1px;
 }
 
 .navds-button--primary:hover {
   background-color: var(--navds-button-color-primary-background-hover);
-  border-color: var(--navds-button-color-primary-border-hover);
 }
 
 .navds-button--danger:hover {
   background-color: var(--navds-button-color-danger-background-hover);
-  border-color: var(--navds-button-color-danger-border-hover);
 }
 
 .navds-button--primary:active {
@@ -197,11 +194,13 @@
 }
 
 .navds-button--primary:focus {
-  border-color: var(--navds-button-color-primary-border-focus);
+  box-shadow: inset 0 0 0 1px var(--navds-button-color-primary-border-focus),
+    var(--navds-shadow-focus);
 }
 
 .navds-button--danger:focus {
-  border-color: var(--navds-button-color-danger-border-focus);
+  box-shadow: inset 0 0 0 1px var(--navds-button-color-danger-border-focus),
+    var(--navds-shadow-focus);
 }
 
 /**************************
@@ -212,11 +211,6 @@
   color: var(--navds-button-color-text-disabled);
   background-color: var(--navds-button-color-background-disabled);
   cursor: not-allowed;
-  border-width: 0;
   box-shadow: none;
   transform: none;
-}
-
-.navds-button:disabled.navds-button--tertiary:active {
-  padding: var(--navds-spacing-2) var(--navds-spacing-2);
 }
