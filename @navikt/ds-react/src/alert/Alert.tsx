@@ -8,6 +8,7 @@ import {
 } from "@navikt/ds-icons";
 import AlertContent, { AlertContentType } from "./AlertContent";
 import AlertTitle, { AlertTitleType } from "./AlertTitle";
+import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -94,9 +95,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         alt={`${variant}-ikon`}
         className="navds-alert__icon"
       />
-      <AlertContext.Provider value={{ size }}>
-        <div className="navds-alert__wrapper">{children}</div>
-      </AlertContext.Provider>
+      <BodyLong as="div" size={size} className="navds-alert__wrapper">
+        {children}
+      </BodyLong>
     </div>
   )
 ) as AlertComponent;

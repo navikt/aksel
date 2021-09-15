@@ -31,9 +31,6 @@
 
 .navds-alert__wrapper {
   max-width: 43.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
 }
 
 .navds-alert--small {
@@ -120,6 +117,5 @@
 .navds-alert--inline {
   background-color: transparent;
   border-color: transparent;
-  padding-right: 0;
-  padding-left: 0;
+  padding: 0;
 }

@@ -20,44 +20,36 @@ export const All = () => {
       <h1>Alert</h1>
       {variants.map((variant, i) => (
         <Alert key={variant} variant={variant}>
-          <Alert.Content>
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
-          </Alert.Content>
+          {new Array(i + 1).fill(
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+          )}
         </Alert>
       ))}
       <h2>Small</h2>
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
-            <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
-            </Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
           </Alert>
         ))}
       </div>
       <h2>Alert fullWidth</h2>
       {variants.map((variant, i) => (
         <Alert fullWidth key={variant} variant={variant}>
-          <Alert.Content>
-            {new Array(i + 1).fill(
-              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-            )}
-          </Alert.Content>
+          {new Array(i + 1).fill(
+            "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+          )}
         </Alert>
       ))}
       <h2>Small</h2>
       <div>
         {variants.map((variant, i) => (
           <Alert fullWidth key={variant} variant={variant} size="small">
-            <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
-            </Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
           </Alert>
         ))}
       </div>
@@ -65,11 +57,9 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert inline key={variant} variant={variant}>
-            <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
-            </Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
           </Alert>
         ))}
       </div>
@@ -77,11 +67,9 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert inline key={variant} variant={variant} size="small">
-            <Alert.Content>
-              {new Array(i + 1).fill(
-                "Id elit esse enim reprehenderit enim nisi veniam nostrud."
-              )}
-            </Alert.Content>
+            {new Array(i + 1).fill(
+              "Id elit esse enim reprehenderit enim nisi veniam nostrud."
+            )}
           </Alert>
         ))}
       </div>
@@ -89,22 +77,22 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant}>
-            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
-            <Alert.Content>
-              <BodyLong spacing>
-                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
-                qui laboris ex. Labore ex occaecat proident qui qui fugiat
-                magna. Fugiat sint commodo consequat eu aute.
-              </BodyLong>
-              <Heading as="div" size="small" spacing>
-                Ullamco eiusmod Lorem eiusmod eu.
-              </Heading>
-              <BodyLong>
-                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
-                qui laboris ex. Labore ex occaecat proident qui qui fugiat
-                magna. Fugiat sint commodo consequat eu aute.
-              </BodyLong>
-            </Alert.Content>
+            <Heading spacing size="small" level="3">
+              Aliquip duis est in commodo pariatur
+            </Heading>
+            <BodyLong spacing>
+              Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+              laboris ex. Labore ex occaecat proident qui qui fugiat magna.
+              Fugiat sint commodo consequat eu aute.
+            </BodyLong>
+            <Heading level="4" size="xsmall" spacing>
+              Ullamco eiusmod Lorem eiusmod eu.
+            </Heading>
+            <BodyLong>
+              Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+              laboris ex. Labore ex occaecat proident qui qui fugiat magna.
+              Fugiat sint commodo consequat eu aute.
+            </BodyLong>
           </Alert>
         ))}
       </div>
@@ -112,22 +100,22 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
-            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
-            <Alert.Content>
-              <BodyLong spacing>
-                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
-                qui laboris ex. Labore ex occaecat proident qui qui fugiat
-                magna. Fugiat sint commodo consequat eu aute.
-              </BodyLong>
-              <Heading as="div" size="xsmall" spacing>
-                Ullamco eiusmod Lorem eiusmod eu.
-              </Heading>
-              <BodyLong>
-                Ullamco ullamco laborum et commodo sint culpa cupidatat culpa
-                qui laboris ex. Labore ex occaecat proident qui qui fugiat
-                magna. Fugiat sint commodo consequat eu aute.
-              </BodyLong>
-            </Alert.Content>
+            <Heading spacing size="small" level="3">
+              Aliquip duis est in commodo pariatur
+            </Heading>
+            <BodyLong spacing>
+              Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+              laboris ex. Labore ex occaecat proident qui qui fugiat magna.
+              Fugiat sint commodo consequat eu aute.
+            </BodyLong>
+            <Heading level="4" size="xsmall" spacing>
+              Ullamco eiusmod Lorem eiusmod eu.
+            </Heading>
+            <BodyLong>
+              Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
+              laboris ex. Labore ex occaecat proident qui qui fugiat magna.
+              Fugiat sint commodo consequat eu aute.
+            </BodyLong>
           </Alert>
         ))}
       </div>
