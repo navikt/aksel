@@ -54,6 +54,16 @@
   margin-bottom: var(--navds-spacing-3);
 }
 
+.navds-heading--xsmall {
+  font-size: var(--navds-font-size-heading-xs);
+  letter-spacing: -0.001em;
+  line-height: var(--navds-font-line-height-heading-xs);
+}
+
+.navds-heading--xsmall.navds-typo--spacing {
+  margin-bottom: var(--navds-spacing-3);
+}
+
 /* Ingress */
 .navds-ingress {
   font-size: var(--navds-font-size-xl);
@@ -83,7 +93,7 @@
 .navds-body-long--small {
   font-size: var(--navds-font-size-m);
   letter-spacing: 0.002em;
-  line-height: var(--navds-font-line-height-m);
+  line-height: var(--navds-font-line-height-l);
 }
 
 .navds-body-long--small.navds-typo--spacing {

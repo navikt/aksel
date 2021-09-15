@@ -37,6 +37,21 @@ Komponenter som tidligere implementerte ovveridable component med bruk av `compo
 
 ## Navneendringer
 
+### Buttons
+
+- `Primary` -> `Secondary` (Normal)
+- `Action` -> `Primary` (Hoved)
+- `Secondary` -> `Tertiary` (Flat)
+
+For alle som har brukt `<Button />` så må man fikse slik at riktige knapper blir brukt der de skal.
+
+## Nytt
+
+- GuidePanel (veilederpanel)
+- HelpText (Hjeleptext)
+
+### Typography
+
 Vi har valgt å endre fra `<Title/>` -> `<Heading/>` i typografien vår da dette ga mer mening i bruk.
 APIet til komponenten er ikke endret borsett fra "Sizing" endringene nevt lengre opp, så skal bare være en rask search/replace.
 
@@ -49,6 +64,12 @@ Endret `Header` -> `PageHeader`
 Fjernet da den var utdaterte/må ses mer på
 
 - ProductPageLayout
+
+## Typography
+
+Linjehøyder for alle typo-komponentene er oppdatert til å matche figma.
+
+Lagt til en Heading lvl 6 og size="xsmall"
 
 ## AccordionMenu
 
@@ -181,8 +202,4 @@ Får nå padding rundt innhold med Popover.Content
 <Popover>
   <Popover.Content>Modal innhold</Popover.Content>
 </Popover>
-```
-
-```
-
 ```

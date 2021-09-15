@@ -1,0 +1,54 @@
+:root {
+  --navds-help-text-color-button-background: transparent;
+  --navds-help-text-color-icon: var(--navds-color-blue-50);
+  --navds-help-text-color-icon-hover: var(--navds-color-white);
+  --navds-help-text-color-icon-background-hover: var(--navds-color-blue-50);
+  --navds-help-text-color-icon-shadow-hover: var(--navds-color-blue-50);
+  --navds-help-text-color-icon-focus: var(--navds-color-white);
+  --navds-help-text-color-icon-background-focus: var(--navds-color-blue-50);
+  --navds-help-text-color-icon-shadow-focus: var(--navds-color-blue-80);
+  --navds-help-text-color-popover-background: var(--navds-color-lightblue-10);
+}
+
+.navds-help-text__button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background-color: var(--navds-help-text-color-button-background);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navds-help-text__button:focus {
+  outline: none;
+}
+
+.navds-help-text__icon {
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: var(--navds-help-text-color-icon);
+}
+
+.navds-help-text__button:hover > .navds-help-text__icon {
+  color: var(--navds-help-text-color-icon-hover);
+  background: var(--navds-help-text-color-icon-background-hover);
+  box-shadow: 0 0 0 2px var(--navds-help-text-color-icon-shadow-hover);
+}
+
+.navds-help-text__button:focus > .navds-help-text__icon {
+  outline: none;
+  color: var(--navds-help-text-color-icon-focus);
+  background: var(--navds-help-text-color-icon-background-focus);
+  box-shadow: 0 0 0 3px var(--navds-help-text-color-icon-shadow-focus);
+}
+
+.navds-help-text__popover > .navds-popover__arrow::before {
+  background-color: var(--navds-help-text-color-popover-background);
+}
+
+.navds-help-text__popover.navds-popover {
+  background-color: var(--navds-help-text-color-popover-background);
+}

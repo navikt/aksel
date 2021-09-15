@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import {
   ErrorFilled,
@@ -6,7 +6,9 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import { BodyShort } from "..";
+import AlertContent, { AlertContentType } from "./AlertContent";
+import AlertTitle, { AlertTitleType } from "./AlertTitle";
+import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -27,6 +29,10 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   fullWidth?: boolean;
+  /**
+   * Removes background from Alert
+   */
+  inline?: boolean;
 }
 
 const Icon = ({ variant, ...props }) => {
@@ -44,6 +50,19 @@ const Icon = ({ variant, ...props }) => {
   }
 };
 
+export interface AlertContextProps {
+  size: "medium" | "small";
+}
+
+export const AlertContext = createContext<AlertContextProps | null>(null);
+interface AlertComponent
+  extends React.ForwardRefExoticComponent<
+    AlertProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Title: AlertTitleType;
+  Content: AlertContentType;
+}
+
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
@@ -52,6 +71,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       variant,
       size = "medium",
       fullWidth = false,
+      inline = false,
       ...rest
     },
     ref
@@ -64,7 +84,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         "navds-alert",
         `navds-alert--${variant}`,
         `navds-alert--${size}`,
-        { "navds-alert--full-width": fullWidth }
+        { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
       )}
     >
       <Icon
@@ -75,11 +95,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         alt={`${variant}-ikon`}
         className="navds-alert__icon"
       />
-      <BodyShort className="navds-alert__content" size={size}>
+      <BodyLong as="div" size={size} className="navds-alert__wrapper">
         {children}
-      </BodyShort>
+      </BodyLong>
     </div>
   )
-);
+) as AlertComponent;
+
+Alert.Title = AlertTitle;
+Alert.Content = AlertContent;
 
 export default Alert;
