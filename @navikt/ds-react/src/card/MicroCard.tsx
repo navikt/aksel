@@ -19,7 +19,7 @@ export const MicroCard: OverridableComponent<
     className={cl(
       "navds-card__micro",
       "navds-detail",
-      "navds-detail--s",
+      "navds-detail--small",
       className
     )}
     title={children}

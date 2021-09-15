@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { BodyShort, Heading } from "..";
 
 export interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -54,11 +55,13 @@ const Header = forwardRef<HTMLDivElement, HeaderProps>(
           <div className="navds-header__illustration">{illustration}</div>
         )}
         <div className="navds-header__wrapper">
-          <h1 className="navds-header__title navds-title navds-title--2xl">
+          <Heading className="navds-header__title" size="2xlarge" level="1">
             {children}
-          </h1>
+          </Heading>
           {description && (
-            <p className="navds-body-short navds-body--s">{description}</p>
+            <BodyShort className="navds-header__description">
+              {description}
+            </BodyShort>
           )}
         </div>
       </div>
