@@ -33,7 +33,7 @@
 }
 
 .navds-alert--small {
-  padding: calc(var(--navds-spacing-1) - 1px) calc(var(--navds-spacing-4));
+  padding: calc(var(--navds-spacing-1) - 1px) var(--navds-spacing-4);
 }
 
 .navds-alert--full-width {
