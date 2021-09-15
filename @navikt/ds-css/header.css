@@ -1,7 +1,14 @@
+:root {
+  --navds-header-color-background: var(--navds-color-background);
+  --navds-header-color-shadow-situation: var(--navds-color-orange-40);
+  --navds-header-color-shadow-product: var(--navds-color-green-40);
+  --navds-header-color-shadow-guide: var(--navds-color-deepblue-40);
+}
+
 .navds-header {
   display: flex;
   justify-content: center;
-  background-color: var(--navds-color-background);
+  background-color: var(--navds-header-color-background);
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
   padding-left: calc((100vw - 100%) / 2);
@@ -43,13 +50,13 @@
 }
 
 .navds-header--situation {
-  box-shadow: 0 -4px 0 var(--navds-color-orange-40) inset;
+  box-shadow: 0 -4px 0 var(--navds-header-color-shadow-situation) inset;
 }
 .navds-header--product {
-  box-shadow: 0 -4px 0 var(--navds-color-green-40) inset;
+  box-shadow: 0 -4px 0 var(--navds-header-color-shadow-product) inset;
 }
 .navds-header--guide {
-  box-shadow: 0 -4px 0 var(--navds-color-deepblue-40) inset;
+  box-shadow: 0 -4px 0 var(--navds-header-color-shadow-guide) inset;
 }
 
 @media (max-width: 649px) {
