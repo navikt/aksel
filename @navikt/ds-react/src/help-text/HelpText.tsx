@@ -12,11 +12,6 @@ export interface HelpTextProps
    */
   children: React.ReactNode;
   /**
-   * Tekst shown on mouseover and by screenreaders
-   * @default "hjelp"
-   */
-  title?: string;
-  /**
    * Placement of popover
    * @default "top"
    */
