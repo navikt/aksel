@@ -17,6 +17,7 @@ export {
   SearchFieldInputProps,
 } from "./search-field";
 export { default as Select, SelectProps } from "./Select";
+export { default as Switch, SwitchProps } from "./Switch";
 export {
   ErrorSummary,
   ErrorSummaryProps,
