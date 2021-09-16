@@ -1,4 +1,4 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useState } from "react";
 import cl from "classnames";
 import { BodyShort, Label, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
@@ -30,20 +30,38 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     ...rest
   } = props;
 
+  const [checked, setChecked] = useState(
+    props.checked ?? props.defaultChecked ?? false
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (props.checked && props.onChange) {
+      props.onChange(e);
+      return;
+    }
+    setChecked((c) => !c);
+  };
+
   return (
-    <div
-      className={cl(
-        props.className,
-        "navds-form-field",
-        `navds-form-field--${size}`
-      )}
-    >
+    <div className={cl("navds-switch", props.className)}>
       <input
         {...omit(rest, ["size"])}
         {...inputProps}
+        checked={checked}
+        onChange={handleChange}
         ref={ref}
         type="checkbox"
         className={cl(className, "navds-switch__input")}
+      />
+      <span
+        className={cl("navds-switch__track", {
+          "navds-switch__track--checked": checked,
+        })}
+      />
+      <span
+        className={cl("navds-switch__thumb", {
+          "navds-switch__thumb--checked": checked,
+        })}
       />
       <Label
         htmlFor={inputProps.id}
