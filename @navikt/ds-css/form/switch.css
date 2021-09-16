@@ -83,12 +83,13 @@
 .navds-switch__input:checked ~ .navds-switch__track {
   background-color: var(--navds-switch-color-track-background-checked);
 }
-.navds-switch__input:checked:disabled ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-checked-disabled);
-}
 
 .navds-switch__input:hover:checked ~ .navds-switch__track {
   background-color: var(--navds-switch-color-track-background-hover-checked);
+}
+
+.navds-switch__input:checked:disabled ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background-checked-disabled);
 }
 
 .navds-switch__input:focus ~ .navds-switch__track {
