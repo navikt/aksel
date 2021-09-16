@@ -16,6 +16,14 @@ export const All = () => {
       <h2>Switch w/Description</h2>
       <Switch description="Switch description">Label text</Switch>
 
+      <h2>hidelabel</h2>
+      <Switch description="Switch description" hideLabel>
+        Label text
+      </Switch>
+      <Switch description="Switch description" hideLabel>
+        Label text
+      </Switch>
+
       <h2>Switch small</h2>
       <Switch description="Switch description" size="small">
         Label text
@@ -31,6 +39,15 @@ export const All = () => {
 
       <h2>Disabled</h2>
       <Switch disabled>Label text</Switch>
+      <Switch disabled defaultChecked>
+        Label text
+      </Switch>
+
+      <h2>Loader</h2>
+      <Switch loader>Label text</Switch>
+      <Switch loader size="small">
+        Label text
+      </Switch>
     </div>
   );
 };

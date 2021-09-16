@@ -1,37 +1,43 @@
 :root {
-  --navds-switch-color-background: var(--navds-color-white);
-  --navds-switch-color-border: var(--navds-color-gray-60);
   --navds-switch-color-label-hover: var(--navds-color-blue-50);
-  --navds-switch-color-border-hover: var(--navds-color-blue-50);
-  --navds-switch-color-background-hover: var(--navds-color-blue-10);
+  --navds-switch-color-label-disabled: var(--navds-color-gray-90);
   --navds-switch-color-description: var(--navds-color-gray-80);
-  --navds-switch-color-border-checked: var(--navds-color-blue-50);
-  --navds-switch-color-background-checked: var(--navds-color-blue-50);
-  --navds-switch-color-shadow-error: var(--navds-color-red-50);
-  --navds-switch-color-border-error: var(--navds-color-red-50);
-
-  /* Disabled */
-  --navds-switch-color-label-disabled: var(--navds-color-gray-40);
-  --navds-switch-color-border-disabled: var(--navds-color-gray-60);
-  --navds-switch-color-background-disabled: var(--navds-color-gray-10);
-  --navds-switch-color-border-checked-disabled: var(--navds-color-gray-40);
-  --navds-switch-color-background-checked-disabled: var(--navds-color-gray-40);
+  --navds-switch-color-track-background: var(--navds-color-gray-40);
+  --navds-switch-color-track-background-checked: var(--navds-color-blue-50);
+  --navds-switch-color-track-background-checked-disabled: var(
+    --navds-color-deepblue-30
+  );
+  --navds-switch-color-track-shadow-inner-focus: var(--navds-color-white);
+  --navds-switch-color-track-shadow-focus: var(--navds-color-blue-80);
+  --navds-switch-color-thumb: var(--navds-color-white);
+  --navds-switch-color-thumb-loader-checked: var(--navds-color-blue-50);
 }
 
 .navds-switch {
   position: relative;
+  padding: 0.75rem 0;
+}
+
+.navds-switch.navds-switch--small {
+  position: relative;
+  padding: calc(0.5rem - 2px) 0;
 }
 
 .navds-switch__input {
   cursor: pointer;
   position: absolute;
   z-index: 1;
-  width: 48px;
+  width: 44px;
   height: 48px;
-  left: -12px;
   margin: 0;
   opacity: 0;
-  top: -12px;
+  top: 0;
+}
+
+.navds-switch--small > .navds-switch__input {
+  height: 32px;
+  width: 44px;
+  top: 0;
 }
 
 .navds-switch__label {
@@ -39,67 +45,98 @@
   width: fit-content;
   gap: 12px;
   cursor: pointer;
-  padding-left: 60px;
+  padding-left: 3.25rem;
+}
+
+.navds-switch__input:hover ~ .navds-switch__label {
+  color: var(--navds-switch-color-label-hover);
 }
 
 .navds-switch__description {
+  margin-top: 12px;
   color: var(--navds-switch-color-description);
+}
+
+.navds-switch--small > .navds-switch__description {
+  margin-top: 8px;
 }
 
 .navds-switch__track {
   border: none;
   width: 44px;
   height: 24px;
-  background-color: gray;
+  background-color: var(--navds-switch-color-track-background);
   position: absolute;
-  top: 0;
+  top: 12px;
   left: 0;
   border-radius: 16px;
-  transition: background-color 250ms;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.navds-switch__track--checked {
-  background-color: blue;
+.navds-switch--small > .navds-switch__track {
+  top: 4px;
+}
+
+.navds-switch__input:checked ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background-checked);
+}
+.navds-switch__input:checked:disabled ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background-checked-disabled);
+}
+
+.navds-switch__input:focus ~ .navds-switch__track {
+  box-shadow: 0 0 0 1px var(--navds-switch-color-track-shadow-inner-focus),
+    0 0 0 3px var(--navds-switch-color-track-shadow-focus);
 }
 
 .navds-switch__thumb {
-  background-color: white;
+  background-color: var(--navds-switch-color-thumb);
   border-radius: 50%;
   width: 20px;
   height: 20px;
-  display: inline-block;
   position: absolute;
   transform: translate(0, -50%);
   left: 2px;
-  top: 12px;
-  transition: transform 250ms;
+  top: 24px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.navds-switch__thumb--checked {
+.navds-switch--small > .navds-switch__thumb {
+  top: 16px;
+}
+
+.navds-switch__input:checked ~ .navds-switch__thumb {
   transform: translate(20px, -50%);
 }
 
-.navds-switch--small > .navds-switch__input {
-  width: 24px;
-  height: 24px;
-  left: 0;
+.navds-switch__input:hover ~ .navds-switch__thumb {
+  transform: translate(2px, -50%);
 }
 
-.navds-switch__input:hover + .navds-switch__label {
-  color: var(--navds-switch-color-label-hover);
+.navds-switch__input:checked:hover ~ .navds-switch__thumb {
+  transform: translate(18px, -50%);
 }
 
-.navds-switch__input:hover + .navds-switch__label::before {
-  border-color: var(--navds-switch-color-border-hover);
-  background-color: var(--navds-switch-color-background-hover);
+.navds-switch__input:disabled:hover ~ .navds-switch__thumb {
+  transform: translate(0, -50%);
 }
 
-.navds-switch__input:focus + .navds-switch__label::before {
-  box-shadow: var(--navds-shadow-focus);
+.navds-switch__input:checked:disabled:hover ~ .navds-switch__thumb {
+  transform: translate(20px, -50%);
+}
+
+.navds-switch__input:checked
+  ~ .navds-switch__thumb
+  > .navds-loader
+  > .navds-loader__foreground {
+  stroke: var(--navds-switch-color-thumb-loader-checked);
 }
 
 .navds-switch__input:disabled,
-.navds-switch__input:disabled + .navds-switch__label {
-  color: var(--navds-switch-color-label-disabled);
+.navds-switch__input:disabled ~ .navds-switch__label {
   cursor: not-allowed;
+  color: var(--navds-switch-color-label-disabled);
 }

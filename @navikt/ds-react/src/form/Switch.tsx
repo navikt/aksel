@@ -1,6 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes, useState } from "react";
+import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Label, omit } from "..";
+import { BodyShort, Label, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SwitchProps
@@ -14,6 +14,7 @@ export interface SwitchProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  loader?: boolean;
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
@@ -26,43 +27,26 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     children,
     className,
     description,
+    loader,
     hideLabel = false,
     ...rest
   } = props;
 
-  const [checked, setChecked] = useState(
-    props.checked ?? props.defaultChecked ?? false
-  );
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (props.checked && props.onChange) {
-      props.onChange(e);
-      return;
-    }
-    setChecked((c) => !c);
-  };
-
   return (
-    <div className={cl("navds-switch", props.className)}>
+    <div
+      className={cl("navds-switch", props.className, `navds-switch--${size}`)}
+    >
       <input
         {...omit(rest, ["size"])}
         {...inputProps}
-        checked={checked}
-        onChange={handleChange}
         ref={ref}
         type="checkbox"
         className={cl(className, "navds-switch__input")}
       />
-      <span
-        className={cl("navds-switch__track", {
-          "navds-switch__track--checked": checked,
-        })}
-      />
-      <span
-        className={cl("navds-switch__thumb", {
-          "navds-switch__thumb--checked": checked,
-        })}
-      />
+      <span className="navds-switch__track" />
+      <span className="navds-switch__thumb">
+        {loader && <Loader size="small" />}
+      </span>
       <Label
         htmlFor={inputProps.id}
         size={size}
