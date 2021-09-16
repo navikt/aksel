@@ -117,3 +117,5 @@ react-docgen.json
 react-docgen-docs.json
 cjs
 esm
+
+*.tsbuildinfo

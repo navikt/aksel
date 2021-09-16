@@ -7,7 +7,8 @@
     "target": "ES2015",
     "outDir": "./esm",
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "incremental": true
   },
   "include": ["./src"]
 }
