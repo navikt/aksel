@@ -39,9 +39,7 @@
   /* Danger */
   --navds-button-color-danger-text: var(--navds-color-white);
   --navds-button-color-danger-background: var(--navds-color-danger-default);
-  --navds-button-color-danger-border: var(--navds-color-danger-default);
   --navds-button-color-danger-background-hover: var(--navds-color-danger-hover);
-  --navds-button-color-danger-border-hover: var(--navds-color-danger-hover);
   --navds-button-color-danger-background-active: var(
     --navds-color-danger-active
   );
