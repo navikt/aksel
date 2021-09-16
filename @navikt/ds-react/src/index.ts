@@ -16,6 +16,7 @@ export * from "./panel";
 export * from "./popover";
 export * from "./speech-bubble";
 export * from "./tag";
+export * from "./timeline";
 export * from "./typography";
 export * from "./util";
 

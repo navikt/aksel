@@ -20,6 +20,7 @@
 @import "panel.css";
 @import "link-panel.css";
 @import "speech-bubble.css";
+@import "timeline.css";
 
 /* Navno spesific packages */
 @import "page-header.css";
