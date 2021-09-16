@@ -1,5 +1,11 @@
 # Endringslogg
 
+## September 2021
+
+### Større oppdaterting for ds-react og ds-css
+
+- Følg migreringsguiden: https://navikt.github.io/Designsystemet/?path=/story/ds-react-migration--page
+
 ## August 2021
 
 ### Skjema-elementer i `ds-react`-pakken
