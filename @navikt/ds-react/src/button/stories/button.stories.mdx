@@ -1,29 +1,29 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
 import { Button, Loader } from "../../index";
-import { Success } from "@navikt/ds-react";
+import { Success } from "@navikt/ds-icons";
 
 <Meta title="ds-react/button/intro" />
 
 # Hvordan ta i bruk Button
 
 ```jsx
-<Button>Buttontekst</Button>
+<Button>Button</Button>
 ```
 
 <Canvas>
-  <Button>Buttontekst</Button>
+  <Button>Button</Button>
 </Canvas>
 
 ## Varianter
 
 `variants`-prop kan brukes for å endre utseende mellom
-`primary`, `secondary`, `action` og `danger`
+`primary`, `secondary`, `tertiary` og `danger`
 
 <Canvas>
-  <Button variant="primary">Buttontekst</Button>
-  <Button variant="secondary">Buttontekst</Button>
-  <Button variant="action">Buttontekst</Button>
-  <Button variant="danger">Buttontekst</Button>
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="tertiary">Tertiary</Button>
+  <Button variant="danger">Danger</Button>
 </Canvas>
 
 ## Sizing
@@ -32,33 +32,39 @@ Button har to størrelser: Default 48px min-height og small 32px min-height
 
 <Canvas>
   <Button size="small" variant="primary">
-    Buttontekst
+    Primary
   </Button>
   <Button size="small" variant="secondary">
-    Buttontekst
+    Secondary
   </Button>
-  <Button size="small" variant="action">
-    Buttontekst
+  <Button size="small" variant="tertiary">
+    Tertiary
   </Button>
   <Button size="small" variant="danger">
-    Buttontekst
+    Danger
   </Button>
 </Canvas>
 
 ## Med ikon eller `<Loader />`
 
 Hvis man setter ikoner (svg) eller `<Loader />` rett på button vil størrelsen
-bli justert automatisk.
+bli justert automatisk og sentrert.
 
 <Canvas>
   <Button>
-    <Loader /> Buttontekst
-  </Button>
-  <Button>
-    Buttontekst <Loader />
+    <Loader /> Laster... <Loader />
   </Button>
   <Button size="small">
-    Buttontekst
     <Loader />
+    Laster...
+    <Loader />
+  </Button>
+  <Button>
+    <Success /> Laster... <Success />
+  </Button>
+  <Button size="small">
+    <Success />
+    Laster...
+    <Success />
   </Button>
 </Canvas>

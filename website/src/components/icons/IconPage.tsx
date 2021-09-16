@@ -268,7 +268,7 @@ const IconPage = () => {
                 <div className="iconPage__modalButton--wrapper">
                   <Button
                     size="small"
-                    variant="action"
+                    variant="primary"
                     onClick={() => downloadSvg()}
                     className="iconPage__modalButton"
                     aria-label="last ned ikon som svg"
@@ -278,7 +278,7 @@ const IconPage = () => {
                   </Button>
                   <Button
                     size="small"
-                    variant="action"
+                    variant="primary"
                     onClick={() => downloadPng()}
                     className="iconPage__modalButton"
                     aria-label="last ned ikon som png"

@@ -10,35 +10,35 @@ export default {
 const Section = ({ children }) => (
   <div
     style={{
-      display: "grid",
+      display: "flex",
       gap: 16,
       gridAutoFlow: "column",
       justifyContent: "start",
       padding: 24,
-      background: "lightgray",
+      paddingLeft: 0,
     }}
   >
     {children}
   </div>
 );
 
-const variants: Array<"primary" | "secondary" | "action" | "danger"> = [
+const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
   "primary",
   "secondary",
-  "action",
+  "tertiary",
   "danger",
 ];
 
 const varSwitch = {
   primary: "Primary",
   secondary: "Secondary",
-  action: "Action",
+  tertiary: "Tertiary",
   danger: "Danger",
 };
 
 export const All = () => {
   return (
-    <>
+    <div style={{ paddingLeft: "1rem" }}>
       <h1>Button</h1>
       <Section>
         {variants.map((variant) => (
@@ -103,14 +103,6 @@ export const All = () => {
           </Button>
         ))}
       </Section>
-      <div style={{ maxWidth: "200px" }}>
-        <Button>
-          Proident commodo dolore duis ad et minim reprehenderit nulla ipsum.
-        </Button>
-        <Button size="small">
-          Proident commodo dolore duis ad et minim reprehenderit nulla ipsum.
-        </Button>
-      </div>
-    </>
+    </div>
   );
 };

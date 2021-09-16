@@ -31,7 +31,7 @@ const BodyLong: OverridableComponent<
       {...rest}
       ref={ref}
       className={cl(className, "navds-body-long", {
-        "navds-body--small": size === "small",
+        "navds-body-long--small": size === "small",
         "navds-typo--spacing": !!spacing,
       })}
     />

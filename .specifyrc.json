@@ -24,6 +24,23 @@
           }
         }
       ]
+    },
+    {
+      "name": "Spacing sync",
+      "path": "@navikt/ds-tokens/src/spacing.js",
+      "filter": {
+        "types": ["measurement"]
+      },
+      "parsers": [
+        {
+          "name": "to-theme-ui",
+          "options": {
+            "formatConfig": {
+              "module": "commonjs"
+            }
+          }
+        }
+      ]
     }
   ]
 }
