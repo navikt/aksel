@@ -7,6 +7,9 @@
   --navds-switch-color-track-background-checked-disabled: var(
     --navds-color-deepblue-30
   );
+  --navds-switch-color-track-background-hover-checked: var(
+    --navds-color-blue-60
+  );
   --navds-switch-color-track-shadow-inner-focus: var(--navds-color-white);
   --navds-switch-color-track-shadow-focus: var(--navds-color-blue-80);
   --navds-switch-color-thumb: var(--navds-color-white);
@@ -82,6 +85,10 @@
 }
 .navds-switch__input:checked:disabled ~ .navds-switch__track {
   background-color: var(--navds-switch-color-track-background-checked-disabled);
+}
+
+.navds-switch__input:hover:checked ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background-hover-checked);
 }
 
 .navds-switch__input:focus ~ .navds-switch__track {
