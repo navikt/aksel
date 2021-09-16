@@ -10,12 +10,12 @@ export default {
 const Section = ({ children }) => (
   <div
     style={{
-      display: "grid",
+      display: "flex",
       gap: 16,
       gridAutoFlow: "column",
       justifyContent: "start",
       padding: 24,
-      background: "lightgray",
+      paddingLeft: 0,
     }}
   >
     {children}
@@ -38,7 +38,7 @@ const varSwitch = {
 
 export const All = () => {
   return (
-    <>
+    <div style={{ paddingLeft: "1rem" }}>
       <h1>Button</h1>
       <Section>
         {variants.map((variant) => (
@@ -103,6 +103,6 @@ export const All = () => {
           </Button>
         ))}
       </Section>
-    </>
+    </div>
   );
 };
