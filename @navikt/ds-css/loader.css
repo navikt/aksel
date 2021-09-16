@@ -88,7 +88,7 @@
   stroke: var(--navds-loader-color-on-button-background);
 }
 
-.navds-button--action .navds-loader .navds-loader__background,
+.navds-button--primary .navds-loader .navds-loader__background,
 .navds-button--danger .navds-loader .navds-loader__background {
   stroke: var(--navds-loader-color-on-button-background);
 }
