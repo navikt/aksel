@@ -1,17 +1,17 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
 import { Button, Loader } from "../../index";
-import { Success } from "@navikt/ds-react";
+import { Success } from "@navikt/ds-icons";
 
 <Meta title="ds-react/button/intro" />
 
 # Hvordan ta i bruk Button
 
 ```jsx
-<Button>Buttontekst</Button>
+<Button>Button</Button>
 ```
 
 <Canvas>
-  <Button>Buttontekst</Button>
+  <Button>Button</Button>
 </Canvas>
 
 ## Varianter
@@ -20,10 +20,10 @@ import { Success } from "@navikt/ds-react";
 `primary`, `secondary`, `tertiary` og `danger`
 
 <Canvas>
-  <Button variant="primary">Buttontekst</Button>
-  <Button variant="secondary">Buttontekst</Button>
-  <Button variant="tertiary">Buttontekst</Button>
-  <Button variant="danger">Buttontekst</Button>
+  <Button variant="primary">Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+  <Button variant="tertiary">Tertiary</Button>
+  <Button variant="danger">Danger</Button>
 </Canvas>
 
 ## Sizing
@@ -32,16 +32,16 @@ Button har to størrelser: Default 48px min-height og small 32px min-height
 
 <Canvas>
   <Button size="small" variant="primary">
-    Buttontekst
+    Primary
   </Button>
   <Button size="small" variant="secondary">
-    Buttontekst
+    Secondary
   </Button>
   <Button size="small" variant="tertiary">
-    Buttontekst
+    Tertiary
   </Button>
   <Button size="small" variant="danger">
-    Buttontekst
+    Danger
   </Button>
 </Canvas>
 
@@ -52,11 +52,19 @@ bli justert automatisk og sentrert.
 
 <Canvas>
   <Button>
-    <Loader /> Buttontekst <Loader />
+    <Loader /> Laster... <Loader />
   </Button>
   <Button size="small">
     <Loader />
-    Buttontekst
+    Laster...
     <Loader />
+  </Button>
+  <Button>
+    <Success /> Laster... <Success />
+  </Button>
+  <Button size="small">
+    <Success />
+    Laster...
+    <Success />
   </Button>
 </Canvas>
