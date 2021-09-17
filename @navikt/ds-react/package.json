@@ -42,7 +42,7 @@
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.12.1",
     "react-popper": "^2.2.4",
-    "short-uuid": "^4.2.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
