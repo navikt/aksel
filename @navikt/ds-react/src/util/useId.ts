@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import ShortUuid from "short-uuid";
+import { v4 as uuidv4 } from "uuid";
 
 const canUseDOM = (): boolean => {
   return (
@@ -15,7 +15,7 @@ export const useId: (id?: string) => string = (id) => {
   const [newId, setNewId] = useState<string | undefined>(undefined);
 
   useClientLayoutEffect(() => {
-    setNewId(ShortUuid.generate());
+    setNewId(uuidv4());
   }, []);
 
   return id ?? newId ?? "";
