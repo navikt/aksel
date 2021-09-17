@@ -1,8 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import TimelineRow, { TimelineRowType } from "./TimeLineRow";
 
-export interface TimelineProps extends HTMLAttributes<HTMLDivElement> {
+export interface TimelineRowProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Timeline
    */
@@ -19,14 +18,11 @@ export interface TimelineProps extends HTMLAttributes<HTMLDivElement> {
   size?: "medium" | "small";
 }
 
-interface TimelineComponent
-  extends React.ForwardRefExoticComponent<
-    TimelineProps & React.RefAttributes<HTMLDivElement>
-  > {
-  Row: TimelineRowType;
-}
+export type TimelineRowType = React.ForwardRefExoticComponent<
+  TimelineRowProps & React.RefAttributes<HTMLDivElement>
+>;
 
-const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
+const TimelineRow: TimelineRowType = forwardRef(
   ({ className, children, size = "medium", ...rest }, ref) => {
     return (
       <div
@@ -38,8 +34,6 @@ const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       </div>
     );
   }
-) as TimelineComponent;
+);
 
-Timeline.Row = TimelineRow;
-
-export default Timeline;
+export default TimelineRow;
