@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { Bubble, BubbleType } from ".";
 
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -27,6 +28,13 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
    * @default "left"
    */
   position?: "left" | "right";
+}
+
+interface SpeechBubbleComponent
+  extends React.ForwardRefExoticComponent<
+    SpeechBubbleProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Bubble: BubbleType;
 }
 
 const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
@@ -78,6 +86,8 @@ const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
       </div>
     );
   }
-);
+) as SpeechBubbleComponent;
+
+SpeechBubble.Bubble = Bubble;
 
 export default SpeechBubble;
