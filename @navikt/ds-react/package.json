@@ -30,7 +30,8 @@
     "create-package-json-pointers-to-esm": "node ../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
     "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
-    "watch": "tsc --watch -p tsconfig-esm.json"
+    "watch": "tsc --watch -p tsconfig-esm.json",
+    "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.2",
@@ -47,10 +48,16 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.8",
     "@types/styled-components": "^5.1.14",
+    "@types/jest": "^27.0.1",
     "copyfiles": "^2.4.1",
     "react-router-dom": "^5.2.0",
     "rimraf": "3.0.2",
-    "styled-components": "^5.3.1"
+    "styled-components": "^5.3.1",
+    "@testing-library/react": "^12.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/user-event": "^13.2.1",
+    "jest": "^27.2.0",
+    "ts-jest": "^27.0.5"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
