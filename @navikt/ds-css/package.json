@@ -18,13 +18,13 @@
   "main": "./dist/index.css",
   "scripts": {
     "build": "postcss --use postcss-import -o dist/index.css index.css",
-    "watch-css": "postcss -w --use postcss-import -o dist/index.css index.css"
+    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^0.5.0",
     "normalize.css": "^8.0.1",
-    "postcss": "^8.2.7",
+    "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.0"
+    "postcss-import": "^14.0.2"
   }
 }
