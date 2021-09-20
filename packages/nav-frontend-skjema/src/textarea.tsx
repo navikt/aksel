@@ -285,7 +285,7 @@ function defaultTellerTekst(antallTegn, maxLength) {
   return (
     <span
       className={tellerTekstCls(difference)}
-      aria-live={difference > 20 ? "off" : "polite"}
+      aria-live={difference < 20 ? "polite" : "off"}
     >
       {difference >= 0 && `Du har ${difference} tegn igjen`}
       {difference < 0 && `Du har ${Math.abs(difference)} tegn for mye`}
