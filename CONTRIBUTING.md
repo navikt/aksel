@@ -14,7 +14,7 @@ git clone git@github.com:navikt/nav-frontend-moduler.git
 cd nav-frontend-moduler
 yarn install
 yarn boot
-yarn sb
+yarn storybook
 ```
 
 [http://localhost:6006](http://localhost:6006) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
