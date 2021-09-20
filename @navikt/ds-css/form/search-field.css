@@ -33,6 +33,11 @@
   z-index: var(--navds-z-index-focus);
 }
 
+.navds-search-field__button,
+.navds-search-field__clear-button {
+  flex-shrink: 0;
+}
+
 .navds-search-field--error
   .navds-search-field__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-search-field-color-shadow-error) inset;
