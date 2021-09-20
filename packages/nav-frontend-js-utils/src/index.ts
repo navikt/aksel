@@ -36,7 +36,7 @@ export function omit(obj: object, ...props) {
 
 function nativeRaf() {
   if (typeof window !== "undefined") {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame;
+    return window.requestAnimationFrame;
   }
   return undefined;
 }
