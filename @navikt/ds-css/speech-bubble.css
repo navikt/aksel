@@ -71,9 +71,12 @@
 .navds-speechbubble--right .navds-speechbubble__bubble {
   border-radius: 12px;
   border-bottom-right-radius: 2px;
-  align-items: flex-end;
 }
 
 .navds-speechbubble__top-text {
   color: var(--navds-speechbubble-color-detail-text);
+}
+
+.navds-speechbubble--right .navds-speechbubble__top-text {
+  align-self: flex-end;
 }
