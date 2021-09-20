@@ -22,7 +22,7 @@ yarn sb
 ## Utviklingsmiljø
 
 Vi tar nå i bruk storybook [https://storybook.js.org/](https://storybook.js.org/) som utviklermiljø.
-`yarn sb` vil starte opp dette miljøet og kan da skrive `stories` for komponentene man vil teste [hvordan skrive storybook stories](https://storybook.js.org/docs/react/writing-stories/introduction)
+`yarn storybook` vil starte opp dette miljøet og kan da skrive `stories` for komponentene man vil teste [hvordan skrive storybook stories](https://storybook.js.org/docs/react/writing-stories/introduction)
 
 ## Utvikling av nye komponenter
 
@@ -45,7 +45,7 @@ For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver 
 - `yarn boot` - bygger alle komponentene, css og ikoner
 - `yarn lerna:watch` - watcher alle komponenten for hot-reloading av endringer.
 - `yarn lint` - Kjører diverse lintere på kode og styling
-- `yarn sb` - starter opp utviklingsmiljø for storybook
+- `yarn storybook` - starter opp utviklingsmiljø for storybook
 
 ### Nettside
 
