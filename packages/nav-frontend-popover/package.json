@@ -1,6 +1,6 @@
 {
   "name": "nav-frontend-popover",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "main": "lib/popover.js",
   "types": "lib/popover.d.ts",
   "license": "MIT",
@@ -28,7 +28,7 @@
     "@types/classnames": "^2.2.3",
     "@types/react": "15.0.23 || ^16.0.0",
     "classnames": "^2.2.5",
-    "nav-frontend-js-utils": "^1.0.19",
+    "nav-frontend-js-utils": "^1.0.20",
     "nav-frontend-popover-style": "^2.0.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0",
