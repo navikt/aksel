@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -42,7 +42,7 @@
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.14.3",
     "react-popper": "^2.2.5",
-    "short-uuid": "^4.2.0"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.9",
