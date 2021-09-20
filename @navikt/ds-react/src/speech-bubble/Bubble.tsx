@@ -16,7 +16,11 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   backgroundColor?: string;
 }
 
-const Bubble = forwardRef<HTMLDivElement, BubbleProps>(
+export type BubbleType = React.ForwardRefExoticComponent<
+  BubbleProps & React.RefAttributes<HTMLDivElement>
+>;
+
+const Bubble: BubbleType = forwardRef(
   ({ children, className, topText, backgroundColor, ...rest }, ref) => {
     return (
       <div

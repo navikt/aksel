@@ -61,7 +61,6 @@
   border-radius: 2px;
   min-width: 48px;
   padding: var(--navds-spacing-3);
-  flex-shrink: 0;
 }
 
 .navds-button--small {
