@@ -283,7 +283,10 @@ const Teller = (props: TellerProps) => {
 function defaultTellerTekst(antallTegn, maxLength) {
   const difference = maxLength - antallTegn;
   return (
-    <span className={tellerTekstCls(difference)} aria-live="polite">
+    <span
+      className={tellerTekstCls(difference)}
+      aria-live={difference > 20 ? "off" : "polite"}
+    >
       {difference >= 0 && `Du har ${difference} tegn igjen`}
       {difference < 0 && `Du har ${Math.abs(difference)} tegn for mye`}
     </span>
