@@ -140,7 +140,7 @@ export const Counter = ({ maxLength, currentLength, size }) => {
       className={cl("navds-textarea__counter", {
         "navds-textarea__counter--error": difference < 0,
       })}
-      aria-live="polite"
+      aria-live={difference < 20 ? "polite" : "off"}
       size={size}
     >
       {difference < 0
