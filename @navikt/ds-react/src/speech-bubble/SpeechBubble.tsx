@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import { Bubble, BubbleType } from ".";
+import Bubble, { BubbleType } from "./Bubble";
 
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
