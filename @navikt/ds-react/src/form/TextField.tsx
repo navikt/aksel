@@ -19,6 +19,11 @@ export interface TextFieldProps
    * TextField label
    */
   label: React.ReactNode;
+  /**
+   * Type of form control
+   * @default "text"
+   */
+  type?: "email" | "number" | "password" | "tel" | "text" | "url";
 }
 
 const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
@@ -37,6 +42,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
     description,
     htmlSize,
     hideLabel = false,
+    type = "text",
     ...rest
   } = props;
 
@@ -73,7 +79,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         {...omit(rest, ["error", "errorId", "size"])}
         {...inputProps}
         ref={ref}
-        type="text"
+        type={type}
         className={cl(
           className,
           "navds-text-field__input",
