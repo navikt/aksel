@@ -5,7 +5,7 @@
   "rules": [
     {
       "name": "Color sync",
-      "path": "@navikt/ds-tokens/src/colors.js",
+      "path": "@navikt/core/tokens/src/colors.js",
       "filter": {
         "types": ["color"]
       },
@@ -27,7 +27,7 @@
     },
     {
       "name": "Spacing sync",
-      "path": "@navikt/ds-tokens/src/spacing.js",
+      "path": "@navikt/core/tokens/src/spacing.js",
       "filter": {
         "types": ["measurement"]
       },

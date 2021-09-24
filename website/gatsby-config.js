@@ -76,7 +76,7 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `docgen-vnext`,
-        path: `${__dirname}/../@navikt/ds-react`,
+        path: `${__dirname}/../@navikt/core/react`,
         ignore: [
           `**/*.js`,
           `**/stories/**`,

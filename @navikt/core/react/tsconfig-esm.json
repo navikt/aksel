@@ -1,0 +1,14 @@
+{
+  "extends": "../../../utilities/build/tsconfig-pakker.json",
+  "compilerOptions": {
+    "outDir": "./esm",
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "module": "ES2020",
+    "target": "ES2015",
+    "sourceMap": true,
+    "declaration": true
+  },
+  "include": ["./src"],
+  "exclude": ["./src/**/stories", "**/*.test.ts", "**/*.test.tsx"]
+}

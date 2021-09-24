@@ -64,7 +64,7 @@
     "build:gatsby": "npm run copy:static && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "copy:static": "npx copyfiles -E -f ../@navikt/ds-icons/*.zip ./static",
+    "copy:static": "npx copyfiles -E -f ../@navikt/core/icons/*.zip ./static",
     "start": "npm run copy:static && npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
