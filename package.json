@@ -28,11 +28,7 @@
   "workspaces": [
     "website",
     "packages/*",
-    "@navikt/ds-css",
-    "@navikt/ds-css/*",
-    "@navikt/ds-react",
-    "@navikt/ds-icons",
-    "@navikt/ds-tokens",
+    "@navikt/core/*",
     "utilities/build/from-git-fix"
   ],
   "prettier": {},
@@ -136,7 +132,7 @@
     "prettier": "2.2.1",
     "prop-types": "^15.5.10",
     "react": "^16.8.0 || ^17.0.0",
-    "react-docgen-typescript": "^1.21.0",
+    "react-docgen-typescript": "^2.1.0",
     "react-is": "^16.13.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^22.0.0",

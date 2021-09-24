@@ -14,9 +14,9 @@
   },
   "packages": [
     "packages/*",
-    "@navikt/ds-css",
-    "@navikt/ds-react",
-    "@navikt/ds-icons",
-    "@navikt/ds-tokens"
+    "@navikt/core/css",
+    "@navikt/core/react",
+    "@navikt/core/icons",
+    "@navikt/core/tokens"
   ]
 }
