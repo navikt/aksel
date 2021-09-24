@@ -1,13 +1,14 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import faker from "faker";
 import { Checkbox, CheckboxGroup } from ".";
 
 test("checkbox group chains onChange calls", () => {
   const onGroupChange = jest.fn();
   const onChange = jest.fn();
-  const value = "value";
-  const label = "label";
+  const value = faker.datatype.string();
+  const label = faker.datatype.string();
 
   render(
     <CheckboxGroup legend="legend" onChange={onGroupChange}>
