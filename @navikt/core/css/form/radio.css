@@ -74,7 +74,6 @@
   border: 1px solid var(--navds-radio-color-border);
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 4px;
   flex-shrink: 0;
   border-radius: 50%;
 }
