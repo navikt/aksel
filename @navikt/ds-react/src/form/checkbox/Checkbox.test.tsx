@@ -22,5 +22,7 @@ test("checkbox group chains onChange calls", () => {
   expect(onGroupChange).toBeCalledTimes(1);
   expect(onGroupChange).toBeCalledWith([value]);
   expect(onChange).toBeCalledTimes(1);
-  expect(onChange.mock.calls[0][0].target.checked).toBe(true);
+  expect(firstArgumentOfFirstCall(onChange).target.checked).toBe(true);
 });
+
+const firstArgumentOfFirstCall = (fn: jest.Mock) => fn.mock.calls[0][0];
