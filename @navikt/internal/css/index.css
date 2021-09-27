@@ -1,3 +1,5 @@
 :root {
-  --navds-internal-test: black;
+  --navdsi-test: black;
 }
+
+@import "header.css";

@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes, createElement } from "react";
 import cl from "classnames";
 
-export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
+export interface HeaderTitleProps extends HTMLAttributes<HTMLElement> {
   /**
    * Component content
    */
@@ -13,14 +13,14 @@ export interface InternalHeaderTitleProps extends HTMLAttributes<HTMLElement> {
   element?: keyof React.ReactHTML;
 }
 
-const InternalHeaderTitle = forwardRef<HTMLElement, InternalHeaderTitleProps>(
+const HeaderTitle = forwardRef<HTMLElement, HeaderTitleProps>(
   ({ element = "h1", children, className, ...rest }, ref) =>
     createElement(element, {
       ...rest,
       ref,
-      className: cl("navds-interal-header__title", "navds-label", className),
+      className: cl("navdsi-header__title", "navds-label", className),
       children: <span>{children}</span>,
     })
 );
 
-export default InternalHeaderTitle;
+export default HeaderTitle;

@@ -18,6 +18,7 @@
     "@navikt/core/react",
     "@navikt/core/icons",
     "@navikt/core/tokens",
-    "@navikt/internal/css"
+    "@navikt/internal/css",
+    "@navikt/internal/react"
   ]
 }
