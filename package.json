@@ -29,6 +29,7 @@
     "website",
     "packages/*",
     "@navikt/core/*",
+    "@navikt/internal/*",
     "utilities/build/from-git-fix"
   ],
   "prettier": {},
