@@ -20,7 +20,8 @@
     "build": "node ./build.js",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
-    "test": "jest"
+    "test": "jest",
+    "update": "node --experimental-modules --es-module-specifier-resolution=node -r dotenv/config figma-api/index.mjs dotenv_config_path=figma-api/.env"
   },
   "repository": {
     "type": "git",
