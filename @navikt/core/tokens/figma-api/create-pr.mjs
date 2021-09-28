@@ -31,8 +31,8 @@ export const createNewPr = async (content) => {
       octokit.createPullRequest({
         owner: "navikt",
         repo: "nav-frontend-moduler",
-        title: "[FEATURE] ",
-        body: "Beskrivelse av PR",
+        title: "[FEATURE] Color-tokens: Automatisk oppdatering",
+        body: "",
         head: "ds-token-sync-branch",
         changes: {
           files: {

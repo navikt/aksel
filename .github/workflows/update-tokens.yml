@@ -1,0 +1,37 @@
+name: Update tokens
+
+on:
+  schedule:
+    - cron: 0 0 * * *
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # Required to retrieve git history
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Node-modules cache
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: postinstall
+        if: steps.node-cache.outputs.cache-hit == 'true'
+        run: yarn postinstall
+      - name: add access token to .env
+        run: echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> @navikt/core/tokens/figma-api/.env
+      - name: add Figma token to .env
+        run: echo "FIGMA_TOKEN=${{ secrets.FIGMA_IKONER_API }}" >> @navikt/core/tokens/figma-api/.env
+      - name: cd into token
+        run: cd @navikt/core/tokens
+      - name: update tokens
+        run: yarn update
