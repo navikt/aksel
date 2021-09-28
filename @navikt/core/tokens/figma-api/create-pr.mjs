@@ -18,6 +18,9 @@ export const createNewPr = async (content) => {
   if (
     issues.data.find((x) => x?.head?.ref === "ds-token-sync-branch")?.number
   ) {
+    execSync("git stash");
+    execSync("git checkout ds-token-sync-branch");
+    execSync("git stash pop");
     execSync("git add .");
     execSync(`git commit -m "updated PR content"`);
 
