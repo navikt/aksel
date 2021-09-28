@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "0.8.4",
+  "version": "0.9.0",
   "private": false,
   "description": "Css for NAV Designsystem components",
   "author": "NAV Designsystem team",
