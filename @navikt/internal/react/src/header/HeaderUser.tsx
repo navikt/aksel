@@ -15,10 +15,10 @@ export interface HeaderUserProps extends HTMLAttributes<HTMLDivElement> {
 const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
   ({ className, name, ident, ...rest }, ref) => (
     <div ref={ref} className={cl("navdsi-header__user", className)} {...rest}>
-      <span className="navdsi-header__name navds-body-short navds-body--s">
+      <span className="navdsi-header__name navds-body-short navds-body--small">
         {name}
       </span>
-      <span className="navds-detail navds-detail--s">{ident}</span>
+      <span className="navds-detail navds-detail--small">{ident}</span>
     </div>
   )
 );
