@@ -1,0 +1,44 @@
+{
+  "name": "@navikt/ds-react-internal",
+  "version": "0.1.0",
+  "private": false,
+  "description": "NAV internal designsystem react components",
+  "author": "NAV Designsystem team",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler"
+  },
+  "sideEffects": false,
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/cjs",
+    "/esm",
+    "/src"
+  ],
+  "scripts": {
+    "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
+    "clean": "rimraf cjs esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
+    "watch": "tsc --watch -p tsconfig-esm.json"
+  },
+  "dependencies": {
+    "classnames": "^2.3.1"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0"
+  }
+}
