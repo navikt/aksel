@@ -55,7 +55,7 @@ const Forside = ({ ...props }) => (
         </li>
         <li>
           <Card
-            content="Vi gjør innholdsarbeidet åpent og tidlig tilgjengelig."
+            content="Metoder og prinsipper for tverrfaglig produktutvikling."
             title="God praksis"
             link="/god-praksis"
             icon={<Like focusable="false" />}
