@@ -33,12 +33,12 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
-      - name: test
-        run: yarn test
       - name: Boot
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
+      - name: Test
+        run: yarn test
       - name: add access token to .env
         run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
       - name: add branch token to .env
