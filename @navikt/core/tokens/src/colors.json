@@ -6,7 +6,6 @@
   "navds-global-color-gray-100": "rgb(241, 241, 241)",
   "navds-global-color-gray-200": "rgb(201, 201, 201)",
   "navds-global-color-gray-400": "rgb(160, 160, 160)",
-  "navds-global-color-gray-600": "rgb(106, 106, 106)",
   "navds-global-color-gray-800": "rgb(79, 79, 79)",
   "navds-global-color-gray-900": "rgb(38, 38, 38)",
   "navds-global-color-blue-50": "rgb(230, 240, 255)",
@@ -19,5 +18,6 @@
   "navds-global-color-blue-700": "rgb(0, 69, 156)",
   "navds-global-color-blue-800": "rgb(0, 52, 125)",
   "navds-global-color-blue-900": "rgb(0, 34, 82)",
-  "navds-semantic-color-interaction-primary-hover": "{navds-navds-global-color-blue-600.value}"
+  "navds-semantic-color-interaction-primary-hover": "{navds-navds-global-color-blue-600.value}",
+  "navds-semantic-color-interaction-primary-default": "{navds-navds-global-color-blue-500.value}"
 }

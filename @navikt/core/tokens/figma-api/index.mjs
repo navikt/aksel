@@ -1,5 +1,6 @@
 import { writeFile, readFile } from "fs";
 import { getColors } from "./colors.mjs";
+import { createNewPr } from "./create-pr.mjs";
 
 const main = async () => {
   if (!process.env.FIGMA_TOKEN) {
@@ -29,9 +30,11 @@ const main = async () => {
     },
     (e) => {
       if (e) throw e;
-      console.log("Updated colors values");
+      console.log("Oppdaterte colors.json");
     }
   );
+
+  createPr && createNewPr(JSON.stringify(colors, null, 2));
 };
 
 try {
