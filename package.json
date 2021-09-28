@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "test": "yarn workspace @navikt/ds-react test",
-    "postinstall": "husky install && yarn build:ds",
+    "postinstall": "husky install",
     "start": "yarn workspace website start",
     "boot": "yarn clean:lib && yarn build:packages --stream",
     "clean": "yarn workspace website clean",
@@ -29,6 +29,7 @@
     "website",
     "packages/*",
     "@navikt/core/*",
+    "@navikt/internal/*",
     "utilities/build/from-git-fix"
   ],
   "prettier": {},
