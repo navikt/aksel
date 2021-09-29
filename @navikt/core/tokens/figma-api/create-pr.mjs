@@ -23,6 +23,7 @@ export const createNewPr = async (content) => {
     execSync("git stash pop");
     execSync("git add .");
     execSync(`git commit -m "updated PR content"`);
+    execSync(`git push --force"`);
 
     console.log("Oppdatert PR");
     return;
