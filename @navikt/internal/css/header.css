@@ -62,3 +62,7 @@
 .navdsi-header__name.navds-body-short {
   margin-right: var(--navds-spacing-4);
 }
+
+.navdsi-header-user-menu__dropdown {
+  color: initial;
+}

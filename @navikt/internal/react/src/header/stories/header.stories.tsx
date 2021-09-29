@@ -11,7 +11,14 @@ export const All = () => (
   <div>
     <Header>
       <Header.Title>NAV Sykepenger</Header.Title>
-      <Header.User name="Kong Harald" ident="D123456" />
+      <Header.UserMenu name="Kong Harald" ident="D123456">
+        <Header.UserMenu.Item as="a" href="/#settings">
+          Innstillinger
+        </Header.UserMenu.Item>
+        <Header.UserMenu.Item onClick={() => console.log("logg ut")}>
+          Logg ut
+        </Header.UserMenu.Item>
+      </Header.UserMenu>
     </Header>
 
     <h1>Uten innhold</h1>

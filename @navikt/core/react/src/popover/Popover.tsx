@@ -16,7 +16,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Element popover anchors to
    */
-  anchorEl: HTMLElement | null;
+  anchorEl: Element | null;
   /**
    * Open state
    */
