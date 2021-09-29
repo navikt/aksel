@@ -22,23 +22,23 @@ export const All = () => (
       <Header.Title>Tittel</Header.Title>
     </Header>
 
-    <h1>Title but not heading</h1>
+    <h1>Title as span</h1>
     <Header>
-      <Header.Title element="span">Tittel</Header.Title>
+      <Header.Title as="span">Tittel</Header.Title>
     </Header>
 
-    <h1>Title with link</h1>
+    <h1>Title as link</h1>
     <Header>
-      <Header.Title>
-        <a href="/#">Tittel med lenke</a>
+      <Header.Title as="a" href="/#home">
+        Tittel med lenke
       </Header.Title>
     </Header>
 
-    <h1>Title with react-router link</h1>
+    <h1>Title as react-router link</h1>
     <Router>
       <Header>
-        <Header.Title>
-          <Link to="/">Tittel med lenke</Link>
+        <Header.Title as={Link} to="/home">
+          Tittel med lenke
         </Header.Title>
       </Header>
     </Router>

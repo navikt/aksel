@@ -35,15 +35,13 @@
   text-decoration: none;
   margin: 0;
   color: var(--navdsi-header-color-text);
+  font-size: var(--navds-font-size-l);
+  font-weight: var(--navds-font-weight-bold);
+  line-height: var(--navds-font-line-height-l);
 }
 
-.navdsi-header__title > span > a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.navdsi-header__title > span > a:focus {
-  box-shadow: var(--navds-shadow-focus-on-dark);
+.navdsi-header__title:focus {
+  box-shadow: inset var(--navds-shadow-focus-on-dark);
   outline: none;
 }
 
