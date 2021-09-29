@@ -13,6 +13,10 @@ export interface HeaderTitleProps extends HTMLAttributes<HTMLElement> {
   element?: keyof React.ReactHTML;
 }
 
+export type HeaderTitleType = React.ForwardRefExoticComponent<
+  HeaderTitleProps & React.RefAttributes<HTMLElement>
+>;
+
 const HeaderTitle = forwardRef<HTMLElement, HeaderTitleProps>(
   ({ element = "h1", children, className, ...rest }, ref) =>
     createElement(element, {

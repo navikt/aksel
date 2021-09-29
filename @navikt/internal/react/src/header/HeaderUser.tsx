@@ -12,6 +12,10 @@ export interface HeaderUserProps extends HTMLAttributes<HTMLDivElement> {
   ident: string;
 }
 
+export type HeaderUserType = React.ForwardRefExoticComponent<
+  HeaderUserProps & React.RefAttributes<HTMLDivElement>
+>;
+
 const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
   ({ className, name, ident, ...rest }, ref) => (
     <div ref={ref} className={cl("navdsi-header__user", className)} {...rest}>
