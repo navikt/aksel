@@ -1,6 +1,6 @@
 <h1 align="center">
     <img src="https://www.nav.no/_/asset/no.nav.navno:1575554845/img/navno/logo.svg" />
-    <br/>nav-frontend-moduler
+    <br/>Designsystemet
 </h1>
 
 <div align="center">
