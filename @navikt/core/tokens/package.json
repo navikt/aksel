@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
+    "figma-api": "^1.7.0",
     "ts-jest": "^27.0.5",
     "color": "^4.0.1",
     "jest": "^27.2.0",
