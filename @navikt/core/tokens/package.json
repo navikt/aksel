@@ -29,6 +29,8 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "ts-jest": "^27.0.5",
     "color": "^4.0.1",
     "jest": "^27.2.0",
     "lodash": "^4.17.21",
