@@ -33,6 +33,7 @@
     "watch": "tsc --watch -p tsconfig-esm.json"
   },
   "dependencies": {
+    "@navikt/ds-react": "^0.10.0",
     "classnames": "^2.3.1"
   },
   "devDependencies": {

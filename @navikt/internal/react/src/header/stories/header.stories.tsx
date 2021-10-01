@@ -1,6 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import { Header, HeaderTitle, HeaderUser } from "../index";
+import { Header } from "..";
 
 export default {
   title: "ds-react-internal/header",
@@ -10,8 +10,8 @@ export default {
 export const All = () => (
   <div>
     <Header>
-      <HeaderTitle>NAV Sykepenger</HeaderTitle>
-      <HeaderUser name="Kong Harald" ident="D123456" />
+      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.User name="Kong Harald" ident="D123456" />
     </Header>
 
     <h1>Uten innhold</h1>
@@ -19,34 +19,34 @@ export const All = () => (
 
     <h1>Title</h1>
     <Header>
-      <HeaderTitle>Tittel</HeaderTitle>
+      <Header.Title>Tittel</Header.Title>
     </Header>
 
-    <h1>Title but not heading</h1>
+    <h1>Title as span</h1>
     <Header>
-      <HeaderTitle element="span">Tittel</HeaderTitle>
+      <Header.Title as="span">Tittel</Header.Title>
     </Header>
 
-    <h1>Title with link</h1>
+    <h1>Title as link</h1>
     <Header>
-      <HeaderTitle>
-        <a href="/#">Tittel med lenke</a>
-      </HeaderTitle>
+      <Header.Title as="a" href="/#home">
+        Tittel med lenke
+      </Header.Title>
     </Header>
 
-    <h1>Title with react-router link</h1>
+    <h1>Title as react-router link</h1>
     <Router>
       <Header>
-        <HeaderTitle>
-          <Link to="/">Tittel med lenke</Link>
-        </HeaderTitle>
+        <Header.Title as={Link} to="/home">
+          Tittel med lenke
+        </Header.Title>
       </Header>
     </Router>
 
     <h1>Title + User</h1>
     <Header>
-      <HeaderTitle>NAV Sykepenger</HeaderTitle>
-      <HeaderUser name="Kong Harald" ident="D123456" />
+      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.User name="Kong Harald" ident="D123456" />
     </Header>
   </div>
 );
