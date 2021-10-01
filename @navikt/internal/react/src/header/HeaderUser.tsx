@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { BodyShort, Detail } from "@navikt/ds-react";
 
 export interface HeaderUserProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,11 +19,11 @@ export type HeaderUserType = React.ForwardRefExoticComponent<
 
 const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
   ({ className, name, ident, ...rest }, ref) => (
-    <div ref={ref} className={cl("navdsi-header__user", className)} {...rest}>
-      <span className="navdsi-header__name navds-body-short navds-body--small">
+    <div {...rest} ref={ref} className={cl("navdsi-header__user", className)}>
+      <BodyShort size="small" className="navdsi-header__name">
         {name}
-      </span>
-      <span className="navds-detail navds-detail--small">{ident}</span>
+      </BodyShort>
+      <Detail size="small">{ident}</Detail>
     </div>
   )
 );
