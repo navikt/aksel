@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "@navikt/ds-react";
+import { Heading, OverridableComponent } from "@navikt/ds-react";
 
 export interface HeaderTitleProps
   extends React.HTMLAttributes<HTMLHeadingElement> {
@@ -16,14 +16,16 @@ export type HeaderTitleType = OverridableComponent<
 >;
 
 const HeaderTitle: HeaderTitleType = forwardRef(
-  ({ as: Component = "h1", children, className, ...rest }, ref) => (
-    <Component
+  ({ as = "h1", children, className, ...rest }, ref) => (
+    <Heading
       {...rest}
       ref={ref}
+      size="xsmall"
+      as={as}
       className={cl("navdsi-header__title", className)}
     >
       <span>{children}</span>
-    </Component>
+    </Heading>
   )
 );
 
