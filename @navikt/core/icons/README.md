@@ -1,6 +1,6 @@
 # @navikt/ds-icons
 
-Denne pakken leverer [NAV sine ikoner](https://design.nav.no/resources/icons) i en pakke med React-komponenter og SVG er.
+Denne pakken leverer [NAVs ikoner](https://design.nav.no/resources/icons) i en pakke med React-komponenter og SVGer.
 
 ## Installering
 

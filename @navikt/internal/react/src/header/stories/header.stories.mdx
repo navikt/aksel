@@ -10,15 +10,15 @@ bare en enkel wrapper med lit enkel styling. Bruk på egen risiko
 
 ```jsx
 <Header>
-  <HeaderTitle>NAV Internside</HeaderTitle>
-  <HeaderUser name="Ola Normann" ident="D123456" />
+  <Header.Title>NAV Sykepenger</Header.Title>
+  <Header.User name="Kong Harald" ident="D123456" />
 </Header>
 ```
 
 <Canvas>
   <Header>
-    <HeaderTitle>NAV Internside</HeaderTitle>
-    <HeaderUser name="Ola Normann" ident="D123456" />
+    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.User name="Kong Harald" ident="D123456" />
   </Header>
 </Canvas>
 
@@ -36,13 +36,13 @@ bare en enkel wrapper med lit enkel styling. Bruk på egen risiko
 
 ```jsx
 <Header>
-  <HeaderTitle element="span">NAV Internside</HeaderTitle>
+  <Header.Title>Tittel</Header.Title>
 </Header>
 ```
 
 <Canvas>
   <Header>
-    <HeaderTitle element="span">NAV Internside</HeaderTitle>
+    <Header.Title as="span">Tittel</Header.Title>
   </Header>
 </Canvas>
 
@@ -52,16 +52,16 @@ Focus-stylingen her er bare placeholder for nå
 
 ```jsx
 <Header>
-  <HeaderTitle>
-    <a href="/#">NAV Internside med lenke</a>
-  </HeaderTitle>
+  <Header.Title as="a" href="/#home">
+    Tittel med lenke
+  </Header.Title>
 </Header>
 ```
 
 <Canvas>
   <Header>
-    <HeaderTitle>
-      <a href="/#">NAV Internside med lenke</a>
-    </HeaderTitle>
+    <Header.Title as="a" href="/#home">
+      Tittel med lenke
+    </Header.Title>
   </Header>
 </Canvas>
