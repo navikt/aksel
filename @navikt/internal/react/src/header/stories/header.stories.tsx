@@ -10,6 +10,32 @@ export default {
 export const Test = () => (
   <Header>
     <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.DropdownMenu>
+      <Header.DropdownMenu.Heading>
+        Systemer og oppslagsverk
+      </Header.DropdownMenu.Heading>
+      <Header.DropdownMenu.Item
+        as="a"
+        href="http://example.com"
+        target="_blank"
+      >
+        A.Inntekt
+      </Header.DropdownMenu.Item>
+      <Header.DropdownMenu.Item
+        as="a"
+        href="http://example.com"
+        target="_blank"
+      >
+        Aa-registeret
+      </Header.DropdownMenu.Item>
+      <Header.DropdownMenu.Item
+        as="a"
+        href="http://example.com"
+        target="_blank"
+      >
+        Gosys
+      </Header.DropdownMenu.Item>
+    </Header.DropdownMenu>
     <Header.UserMenu name="Kong Harald" ident="D123456">
       <Header.UserMenu.Item as="a" href="/#settings">
         Innstillinger
