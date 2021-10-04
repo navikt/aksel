@@ -1,4 +1,4 @@
-import React, { forwardRef, HTMLAttributes, useState } from "react";
+import React, { forwardRef, useState, useCallback } from "react";
 import Item, { ItemType } from "./Item";
 import cl from "classnames";
 import { Popover } from "@navikt/ds-react";
@@ -37,20 +37,25 @@ const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
       return `${split[0][0]}${split[split.length - 1][0]}`;
     };
 
+    const onClose = useCallback(() => setIsOpen(false), []);
+
     return (
       <>
         <button
           {...rest}
           ref={ref}
           className={cl("navdsi-header-user-menu", className)}
-          onClick={() => setIsOpen((isOpen) => !isOpen)}
+          onClick={(e) => {
+            setAnchorEl(e.currentTarget);
+            setIsOpen((isOpen) => !isOpen);
+          }}
         >
           {getInitials(name)}
-          <Expand ref={(el) => setAnchorEl(el)} />
+          <Expand />
         </button>
         <Popover
           anchorEl={anchorEl}
-          onClose={() => setIsOpen(false)}
+          onClose={onClose}
           open={isOpen}
           arrow={false}
           placement="bottom-end"

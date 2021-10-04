@@ -7,6 +7,20 @@ export default {
   component: Header,
 };
 
+export const Test = () => (
+  <Header>
+    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.UserMenu name="Kong Harald" ident="D123456">
+      <Header.UserMenu.Item as="a" href="/#settings">
+        Innstillinger
+      </Header.UserMenu.Item>
+      <Header.UserMenu.Item onClick={() => console.log("logg ut")}>
+        Logg ut
+      </Header.UserMenu.Item>
+    </Header.UserMenu>
+  </Header>
+);
+
 export const All = () => (
   <div>
     <Header>
