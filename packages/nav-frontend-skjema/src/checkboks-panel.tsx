@@ -7,7 +7,7 @@ import { SkjemaGruppeFeilContext, SkjemaGruppeFeilContextProps } from ".";
 export interface CheckboksPanelProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label: React.ReactNode;
-  subtext?: string;
+  subtext?: React.ReactNode;
   feil?: boolean;
 }
 
