@@ -63,7 +63,7 @@ jobs:
           token: ${{secrets.GIT_REPO}}
       - uses: actions/setup-node@v1
         with:
-          registry-url: http://registry.npmjs.org
+          registry-url: https://registry.npmjs.org
           node-version: 14
       - name: Node-modules cache
         uses: actions/cache@v2
@@ -96,7 +96,7 @@ jobs:
 
       - name: Create a .npmrc file for NPM
         run: |
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+          echo "registry=https://registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
           NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
