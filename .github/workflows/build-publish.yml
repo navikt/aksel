@@ -97,7 +97,6 @@ jobs:
       - name: Create a .npmrc file for NPM
         run: |
           echo "registry=https://registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          npm whoami
         env:
           NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - name: Publish to NPM registry
