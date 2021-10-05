@@ -28,7 +28,7 @@ export const All = () => {
           <ExternalLink style={{ fontSize: "0.875rem" }} />
         </DropdownMenu.Item>
         <Divider />
-        <DropdownMenu.Item>Logg ut</DropdownMenu.Item>
+        <DropdownMenu.Item onClick={() => {}}>Logg ut</DropdownMenu.Item>
       </DropdownMenu>
     </Router>
   );
