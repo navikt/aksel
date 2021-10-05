@@ -1,8 +1,8 @@
 import React, { forwardRef, useState, useCallback } from "react";
-import Item, { ItemType } from "./Item";
+import { DropdownMenuItem, DropdownMenuItemType } from "./Item";
 import cl from "classnames";
-import { Popover } from "@navikt/ds-react";
 import { Expand } from "@navikt/ds-icons";
+import { DropdownMenu } from "../..";
 
 export interface HeaderUserMenuProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,7 +24,7 @@ export interface HeaderUserMenuType
   extends React.ForwardRefExoticComponent<
     HeaderUserMenuProps & React.RefAttributes<HTMLDivElement>
   > {
-  Item: ItemType;
+  Item: DropdownMenuItemType;
 }
 
 const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
@@ -53,26 +53,22 @@ const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
           {getInitials(name)}
           <Expand />
         </button>
-        <Popover
+        <DropdownMenu
           anchorEl={anchorEl}
           onClose={onClose}
           open={isOpen}
-          arrow={false}
-          placement="bottom-end"
           className="navdsi-header-user-menu__dropdown"
         >
-          <Popover.Content>
-            <div>{name}</div>
-            <div>{ident}</div>
-            <hr />
-            {children}
-          </Popover.Content>
-        </Popover>
+          <div>{name}</div>
+          <div>{ident}</div>
+          <hr />
+          {children}
+        </DropdownMenu>
       </>
     );
   }
 ) as HeaderUserMenuType;
 
-HeaderUserMenu.Item = Item;
+HeaderUserMenu.Item = DropdownMenuItem;
 
 export default HeaderUserMenu;

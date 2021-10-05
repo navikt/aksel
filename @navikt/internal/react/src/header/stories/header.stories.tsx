@@ -1,5 +1,6 @@
 import React from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
+import { Heading } from "@navikt/ds-react";
 import { Header } from "..";
 
 export default {
@@ -11,9 +12,9 @@ export const Test = () => (
   <Header>
     <Header.Title>NAV Sykepenger</Header.Title>
     <Header.DropdownMenu>
-      <Header.DropdownMenu.Heading>
+      <Heading level="2" size="xsmall">
         Systemer og oppslagsverk
-      </Header.DropdownMenu.Heading>
+      </Heading>
       <Header.DropdownMenu.Item
         as="a"
         href="http://example.com"

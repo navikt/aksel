@@ -1,6 +1,5 @@
 import React, { forwardRef, useState, useCallback } from "react";
-import DropdownHeading, { HeadingType } from "./Heading";
-import Item, { ItemType } from "./Item";
+import { DropdownMenuItem, DropdownMenuItemType } from "./Item";
 import cl from "classnames";
 import { Popover } from "@navikt/ds-react";
 import { System } from "@navikt/ds-icons";
@@ -17,8 +16,7 @@ export interface HeaderDropdownMenuType
   extends React.ForwardRefExoticComponent<
     HeaderDropdownMenuProps & React.RefAttributes<HTMLDivElement>
   > {
-  Heading: HeadingType;
-  Item: ItemType;
+  Item: DropdownMenuItemType;
 }
 
 const HeaderDropdownMenu = forwardRef<
@@ -57,7 +55,6 @@ const HeaderDropdownMenu = forwardRef<
   );
 }) as HeaderDropdownMenuType;
 
-HeaderDropdownMenu.Heading = DropdownHeading;
-HeaderDropdownMenu.Item = Item;
+HeaderDropdownMenu.Item = DropdownMenuItem;
 
 export default HeaderDropdownMenu;

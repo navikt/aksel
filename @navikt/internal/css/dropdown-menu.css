@@ -1,0 +1,34 @@
+.navdsi-dropdown-menu {
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.navdsi-dropdown-menu > :not(.navdsi-divider) {
+  padding: 4px 16px;
+}
+
+.navdsi-dropdown-menu__item {
+  border: none;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  color: #0056b4;
+  font: inherit;
+  line-height: normal;
+  text-decoration: none;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: var(--navds-spacing-2);
+}
+
+.navdsi-dropdown-menu__item:hover {
+  background-color: #cce1ff;
+}
+
+.navdsi-dropdown-menu__item:focus {
+  outline: none;
+  box-shadow: inset var(--navds-shadow-focus);
+}
