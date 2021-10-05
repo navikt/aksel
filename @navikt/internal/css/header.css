@@ -4,6 +4,33 @@
   --navdsi-header-color-text: var(--navds-color-text-inverse);
 }
 
+.navdsi-header__button {
+  border: none;
+  margin: 0;
+  overflow: visible;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  color: white;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: var(--navds-spacing-2);
+  border-left: 1px solid var(--navdsi-header-color-border);
+  align-self: stretch;
+  padding: 12px;
+}
+
+.navdsi-header__button:hover {
+  background-color: gray;
+}
+
+.navdsi-header__button:focus {
+  box-shadow: inset var(--navds-shadow-focus-on-dark);
+  outline: none;
+}
+
 /**************************
  * .navdsi-header *
  **************************/

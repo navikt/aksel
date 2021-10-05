@@ -1,6 +1,7 @@
 .navdsi-dropdown-menu {
   overflow: hidden;
   padding: 4px 0;
+  color: var(--navds-color-darkgray);
 }
 
 .navdsi-dropdown-menu > :not(.navdsi-divider) {

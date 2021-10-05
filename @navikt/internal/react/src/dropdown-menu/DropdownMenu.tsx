@@ -19,6 +19,11 @@ export interface HeaderDropdownMenuProps extends PopoverProps {
    *  @default false
    */
   arrow?: boolean;
+  /**
+   * Distance from anchor to popover
+   * @default 8 w/arrow, -4 w/no-arrow
+   */
+  offset?: number;
 }
 
 export interface DropdownMenuType
@@ -30,7 +35,14 @@ export interface DropdownMenuType
 
 const DropdownMenu = forwardRef<HTMLButtonElement, HeaderDropdownMenuProps>(
   (
-    { className, children, placement = "bottom-end", arrow = false, ...rest },
+    {
+      className,
+      children,
+      placement = "bottom-end",
+      arrow = false,
+      offset,
+      ...rest
+    },
     ref
   ) => (
     <Popover
@@ -38,6 +50,7 @@ const DropdownMenu = forwardRef<HTMLButtonElement, HeaderDropdownMenuProps>(
       placement={placement}
       arrow={arrow}
       className={cl("navdsi-dropdown-menu", className)}
+      offset={offset ?? arrow ? 8 : -4}
     >
       {children}
     </Popover>

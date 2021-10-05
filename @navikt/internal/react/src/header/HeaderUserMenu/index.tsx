@@ -2,7 +2,7 @@ import React, { forwardRef, useState, useCallback } from "react";
 import { DropdownMenuItem, DropdownMenuItemType } from "./Item";
 import cl from "classnames";
 import { Expand } from "@navikt/ds-icons";
-import { DropdownMenu } from "../..";
+import { Divider, DropdownMenu } from "../..";
 
 export interface HeaderUserMenuProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -32,11 +32,6 @@ const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
     const [anchorEl, setAnchorEl] = useState<Element | null>(null);
     const [isOpen, setIsOpen] = useState<boolean>(false);
 
-    const getInitials = (name) => {
-      const split = name.split(" ");
-      return `${split[0][0]}${split[split.length - 1][0]}`;
-    };
-
     const onClose = useCallback(() => setIsOpen(false), []);
 
     return (
@@ -50,7 +45,7 @@ const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
             setIsOpen((isOpen) => !isOpen);
           }}
         >
-          {getInitials(name)}
+          {name}
           <Expand />
         </button>
         <DropdownMenu
@@ -61,7 +56,7 @@ const HeaderUserMenu = forwardRef<HTMLButtonElement, HeaderUserMenuProps>(
         >
           <div>{name}</div>
           <div>{ident}</div>
-          <hr />
+          <Divider />
           {children}
         </DropdownMenu>
       </>
