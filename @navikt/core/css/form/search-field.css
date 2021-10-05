@@ -29,6 +29,10 @@
   border-bottom-left-radius: 0;
 }
 
+.navds-search-field__input-wrapper > :last-child:first-child {
+  border-radius: 4px;
+}
+
 .navds-search-field__input-wrapper :focus {
   z-index: var(--navds-z-index-focus);
 }

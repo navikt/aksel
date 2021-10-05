@@ -12,6 +12,7 @@ export interface RadioPanelProps
    */
   radioRef?: (element: HTMLInputElement | null) => any;
   feil?: boolean;
+  subtext?: React.ReactNode;
 }
 
 export interface RadioPanelState {
@@ -39,6 +40,7 @@ export class RadioPanel extends React.Component<
       disabled,
       radioRef,
       feil,
+      subtext,
       ...other
     } = this.props;
     const { hasFocus } = this.state;
@@ -75,6 +77,7 @@ export class RadioPanel extends React.Component<
               onBlur={() => this.toggleOutline()}
             />
             <span className="inputPanel__label">{label}</span>
+            {subtext && <span className="inputPanel__subtext">{subtext}</span>}
           </label>
         )}
       </SkjemaGruppeFeilContext.Consumer>
