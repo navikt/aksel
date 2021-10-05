@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
+import { BodyShort, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System } from "@navikt/ds-icons";
 import { DropdownMenu } from "../..";
