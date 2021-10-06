@@ -1,55 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import { BodyLong, BodyShort, Detail, Heading, useId } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System, ExternalLink } from "@navikt/ds-icons";
-import { Divider, DropdownMenu } from "../..";
+import { Divider } from "../..";
 
 export default {
   title: "ds-react-internal/header",
   component: Header,
 };
-
-const SystemMenu = (props) => (
-  <DropdownMenu {...props}>
-    <Heading level="2" size="xsmall">
-      Systemer og oppslagsverk
-    </Heading>
-    <DropdownMenu.List>
-      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-        <span>A.Inntekt</span>
-        <ExternalLink style={{ fontSize: "0.875rem" }} />
-      </DropdownMenu.Item>
-      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-        <span>Aa-registeret</span>
-        <ExternalLink style={{ fontSize: "0.875rem" }} />
-      </DropdownMenu.Item>
-      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-        <span>Gosys</span>
-        <ExternalLink style={{ fontSize: "0.875rem" }} />
-      </DropdownMenu.Item>
-    </DropdownMenu.List>
-  </DropdownMenu>
-);
-
-const UserMenu = (props) => (
-  <DropdownMenu {...props}>
-    <BodyLong size="small">Kong Harald 16px</BodyLong>
-    <Detail size="small">Ident nr 14px</Detail>
-    <Detail size="small" style={{ marginBottom: 12 }}>
-      Enhet: Skien
-    </Detail>
-    <Divider />
-    <DropdownMenu.List>
-      <DropdownMenu.Item as="a" href="/#settings">
-        Innstillinger
-      </DropdownMenu.Item>
-      <DropdownMenu.Item onClick={() => console.log("logg ut")}>
-        Logg ut
-      </DropdownMenu.Item>
-    </DropdownMenu.List>
-  </DropdownMenu>
-);
 
 const Full = () => (
   <Header>
@@ -103,64 +62,57 @@ const Full = () => (
   </Header>
 );
 
-const InitialWithChevron = () => {
-  const [systemAnchorEl, setSystemAnchorEl] = useState<Element | null>(null);
-  const [isSystemOpen, setIsSystemOpen] = useState<boolean>(false);
-  const [userAnchorEl, setUserAnchorEl] = useState<Element | null>(null);
-  const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
-
-  return (
-    <Header>
-      <Header.Title>NAV Sykepenger</Header.Title>
-      <Header.Dropdown>
-        <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
-          <System style={{ fontSize: "1.5rem" }} />
-        </Header.Dropdown.Button>
-        <Header.Dropdown.Menu>
-          <Heading level="2" size="xsmall">
-            Systemer og oppslagsverk
-          </Heading>
-          <Header.Dropdown.Menu.List>
-            <Header.Dropdown.Menu.Item>
-              <span>A.Inntekt</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
-              <span>Aa-registeret</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
-              <span>Gosys</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-          </Header.Dropdown.Menu.List>
-        </Header.Dropdown.Menu>
-      </Header.Dropdown>
-      <Header.Dropdown>
-        <Header.Dropdown.Button>
-          <BodyShort>KH</BodyShort>
-          <Expand />
-        </Header.Dropdown.Button>
-        <Header.Dropdown.Menu>
-          <BodyLong size="small">Kong Harald 16px</BodyLong>
-          <Detail size="small">Ident nr 14px</Detail>
-          <Detail size="small" style={{ marginBottom: 12 }}>
-            Enhet: Skien
-          </Detail>
-          <Divider />
-          <Header.Dropdown.Menu.List>
-            <Header.Dropdown.Menu.Item as="a" href="/#settings">
-              Innstillinger
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-              Logg ut
-            </Header.Dropdown.Menu.Item>
-          </Header.Dropdown.Menu.List>
-        </Header.Dropdown.Menu>
-      </Header.Dropdown>
-    </Header>
-  );
-};
+const InitialWithChevron = () => (
+  <Header>
+    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.Dropdown>
+      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+        <System style={{ fontSize: "1.5rem" }} />
+      </Header.Dropdown.Button>
+      <Header.Dropdown.Menu>
+        <Heading level="2" size="xsmall">
+          Systemer og oppslagsverk
+        </Heading>
+        <Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item>
+            <span>A.Inntekt</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Aa-registeret</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Gosys</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+        </Header.Dropdown.Menu.List>
+      </Header.Dropdown.Menu>
+    </Header.Dropdown>
+    <Header.Dropdown>
+      <Header.Dropdown.Button>
+        <BodyShort>KH</BodyShort>
+        <Expand />
+      </Header.Dropdown.Button>
+      <Header.Dropdown.Menu>
+        <BodyLong size="small">Kong Harald 16px</BodyLong>
+        <Detail size="small">Ident nr 14px</Detail>
+        <Detail size="small" style={{ marginBottom: 12 }}>
+          Enhet: Skien
+        </Detail>
+        <Divider />
+        <Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item as="a" href="/#settings">
+            Innstillinger
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+            Logg ut
+          </Header.Dropdown.Menu.Item>
+        </Header.Dropdown.Menu.List>
+      </Header.Dropdown.Menu>
+    </Header.Dropdown>
+  </Header>
+);
 
 export const Test = () => (
   <div
