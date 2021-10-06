@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
-import { Expand, System } from "@navikt/ds-icons";
+import { Expand, System, ExternalLink } from "@navikt/ds-icons";
 import { Divider, DropdownMenu } from "../..";
 
 export default {
@@ -15,36 +15,43 @@ const SystemMenu = (props) => (
     <Heading level="2" size="xsmall">
       Systemer og oppslagsverk
     </Heading>
-    <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-      A.Inntekt
-    </DropdownMenu.Item>
-    <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-      Aa-registeret
-    </DropdownMenu.Item>
-    <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
-      Gosys
-    </DropdownMenu.Item>
+    <DropdownMenu.List>
+      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
+        <span>A.Inntekt</span>
+        <ExternalLink style={{ fontSize: "0.875rem" }} />
+      </DropdownMenu.Item>
+      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
+        <span>Aa-registeret</span>
+        <ExternalLink style={{ fontSize: "0.875rem" }} />
+      </DropdownMenu.Item>
+      <DropdownMenu.Item as="a" href="http://example.com" target="_blank">
+        <span>Gosys</span>
+        <ExternalLink style={{ fontSize: "0.875rem" }} />
+      </DropdownMenu.Item>
+    </DropdownMenu.List>
   </DropdownMenu>
 );
 
 const UserMenu = (props) => (
   <DropdownMenu {...props}>
-    <BodyLong size="small">Saksbehandler 16px</BodyLong>
+    <BodyLong size="small">Kong Harald 16px</BodyLong>
     <Detail size="small">Ident nr 14px</Detail>
     <Detail size="small" style={{ marginBottom: 12 }}>
       Enhet: Skien
     </Detail>
     <Divider />
-    <DropdownMenu.Item as="a" href="/#settings">
-      Innstillinger
-    </DropdownMenu.Item>
-    <DropdownMenu.Item onClick={() => console.log("logg ut")}>
-      Logg ut
-    </DropdownMenu.Item>
+    <DropdownMenu.List>
+      <DropdownMenu.Item as="a" href="/#settings">
+        Innstillinger
+      </DropdownMenu.Item>
+      <DropdownMenu.Item onClick={() => console.log("logg ut")}>
+        Logg ut
+      </DropdownMenu.Item>
+    </DropdownMenu.List>
   </DropdownMenu>
 );
 
-export const Test = () => {
+const Full = () => {
   const [systemAnchorEl, setSystemAnchorEl] = useState<Element | null>(null);
   const [isSystemOpen, setIsSystemOpen] = useState<boolean>(false);
   const [userAnchorEl, setUserAnchorEl] = useState<Element | null>(null);
@@ -80,6 +87,105 @@ export const Test = () => {
     </Header>
   );
 };
+
+const Initial = () => {
+  const [systemAnchorEl, setSystemAnchorEl] = useState<Element | null>(null);
+  const [isSystemOpen, setIsSystemOpen] = useState<boolean>(false);
+  const [userAnchorEl, setUserAnchorEl] = useState<Element | null>(null);
+  const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
+
+  return (
+    <Header>
+      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.Button
+        style={{ marginLeft: "auto" }}
+        ref={(el) => setSystemAnchorEl(el)}
+        onClick={() => setIsSystemOpen((isOpen) => !isOpen)}
+      >
+        <System style={{ fontSize: "1.5rem" }} />
+      </Header.Button>
+      <SystemMenu
+        anchorEl={systemAnchorEl}
+        open={isSystemOpen}
+        onClose={() => setIsSystemOpen(false)}
+      />
+      <Header.Button
+        ref={(el) => setUserAnchorEl(el)}
+        onClick={() => setIsUserOpen((isOpen) => !isOpen)}
+      >
+        <div
+          style={{
+            background: "white",
+            color: "var(--navds-color-darkgray)",
+            borderRadius: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            height: 28,
+            width: 28,
+          }}
+        >
+          <BodyShort>K</BodyShort>
+        </div>
+        <Expand />
+      </Header.Button>
+      <UserMenu
+        anchorEl={userAnchorEl}
+        open={isUserOpen}
+        onClose={() => setIsUserOpen(false)}
+      />
+    </Header>
+  );
+};
+const InitialWithChevron = () => {
+  const [systemAnchorEl, setSystemAnchorEl] = useState<Element | null>(null);
+  const [isSystemOpen, setIsSystemOpen] = useState<boolean>(false);
+  const [userAnchorEl, setUserAnchorEl] = useState<Element | null>(null);
+  const [isUserOpen, setIsUserOpen] = useState<boolean>(false);
+
+  return (
+    <Header>
+      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.Button
+        style={{ marginLeft: "auto" }}
+        ref={(el) => setSystemAnchorEl(el)}
+        onClick={() => setIsSystemOpen((isOpen) => !isOpen)}
+      >
+        <System style={{ fontSize: "1.5rem" }} />
+      </Header.Button>
+      <SystemMenu
+        anchorEl={systemAnchorEl}
+        open={isSystemOpen}
+        onClose={() => setIsSystemOpen(false)}
+      />
+      <Header.Button
+        ref={(el) => setUserAnchorEl(el)}
+        onClick={() => setIsUserOpen((isOpen) => !isOpen)}
+      >
+        <BodyShort>KH</BodyShort>
+        <Expand />
+      </Header.Button>
+      <UserMenu
+        anchorEl={userAnchorEl}
+        open={isUserOpen}
+        onClose={() => setIsUserOpen(false)}
+      />
+    </Header>
+  );
+};
+
+export const Test = () => (
+  <div
+    style={{
+      display: "grid",
+      gap: 64,
+    }}
+  >
+    <Full />
+    <Initial />
+    <InitialWithChevron />
+  </div>
+);
 
 export const All = () => (
   <div>

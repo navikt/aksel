@@ -20,6 +20,7 @@ const Item: DropdownMenuItemType = forwardRef(
     <Component
       {...rest}
       ref={ref}
+      role="menuitem"
       className={cl(
         "navdsi-dropdown-menu__item navds-body-short navds-body-short__small",
         className

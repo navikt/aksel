@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Placement } from "@popperjs/core";
 import { Popover, PopoverProps } from "@navikt/ds-react";
+import List, { DropdownMenuListType } from "./List";
 import Item, { DropdownMenuItemType } from "./Item";
 
 export interface HeaderDropdownMenuProps extends PopoverProps {
@@ -30,6 +31,7 @@ export interface DropdownMenuType
   extends React.ForwardRefExoticComponent<
     HeaderDropdownMenuProps & React.RefAttributes<HTMLDivElement>
   > {
+  List: DropdownMenuListType;
   Item: DropdownMenuItemType;
 }
 
@@ -57,6 +59,7 @@ const DropdownMenu = forwardRef<HTMLButtonElement, HeaderDropdownMenuProps>(
   )
 ) as DropdownMenuType;
 
+DropdownMenu.List = List;
 DropdownMenu.Item = Item;
 
 export default DropdownMenu;

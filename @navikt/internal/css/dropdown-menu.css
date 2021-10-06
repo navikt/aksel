@@ -5,8 +5,14 @@
   width: 27ch;
 }
 
-.navdsi-dropdown-menu > :not(.navdsi-divider) {
+.navdsi-dropdown-menu > :not(.navdsi-divider):not(.navdsi-dropdown-menu__list) {
   padding: 4px 16px;
+}
+
+.navdsi-dropdown-menu__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .navdsi-dropdown-menu__item {
@@ -24,6 +30,7 @@
   display: flex;
   align-items: center;
   gap: var(--navds-spacing-2);
+  padding: 4px 16px;
 }
 
 .navdsi-dropdown-menu__item:hover {
