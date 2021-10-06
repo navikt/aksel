@@ -4,7 +4,7 @@
   --navdsi-header-color-text: var(--navds-color-text-inverse);
 }
 
-.navdsi-header__button {
+.navdsi-header-dropdown__button {
   border: none;
   margin: 0;
   overflow: visible;
@@ -22,11 +22,11 @@
   padding: 12px;
 }
 
-.navdsi-header__button:hover {
+.navdsi-header-dropdown__button:hover {
   background-color: #4f4f4f;
 }
 
-.navdsi-header__button:focus {
+.navdsi-header-dropdown__button:focus {
   box-shadow: inset 0 0 0 1px var(--navdsi-header-color-background),
     inset 0 0 0 3px #cce1ff;
   outline: none;
