@@ -23,11 +23,12 @@
 }
 
 .navdsi-header__button:hover {
-  background-color: gray;
+  background-color: #4f4f4f;
 }
 
 .navdsi-header__button:focus {
-  box-shadow: inset var(--navds-shadow-focus-on-dark);
+  box-shadow: inset 0 0 0 1px var(--navdsi-header-color-background),
+    inset 0 0 0 3px #cce1ff;
   outline: none;
 }
 

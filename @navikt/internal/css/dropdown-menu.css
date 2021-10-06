@@ -2,6 +2,7 @@
   overflow: hidden;
   padding: 4px 0;
   color: var(--navds-color-darkgray);
+  width: 27ch;
 }
 
 .navdsi-dropdown-menu > :not(.navdsi-divider) {

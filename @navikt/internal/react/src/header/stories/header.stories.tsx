@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Link } from "react-router-dom";
-import { BodyShort, Heading } from "@navikt/ds-react";
+import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System } from "@navikt/ds-icons";
-import { DropdownMenu } from "../..";
+import { Divider, DropdownMenu } from "../..";
 
 export default {
   title: "ds-react-internal/header",
@@ -29,6 +29,12 @@ const SystemMenu = (props) => (
 
 const UserMenu = (props) => (
   <DropdownMenu {...props}>
+    <BodyLong size="small">Saksbehandler 16px</BodyLong>
+    <Detail size="small">Ident nr 14px</Detail>
+    <Detail size="small" style={{ marginBottom: 12 }}>
+      Enhet: Skien
+    </Detail>
+    <Divider />
     <DropdownMenu.Item as="a" href="/#settings">
       Innstillinger
     </DropdownMenu.Item>
