@@ -12,7 +12,7 @@ export interface HeaderTitleProps
 
 export type HeaderTitleType = OverridableComponent<
   HeaderTitleProps,
-  HTMLAnchorElement
+  HTMLHeadingElement
 >;
 
 const HeaderTitle: HeaderTitleType = forwardRef(
@@ -20,8 +20,8 @@ const HeaderTitle: HeaderTitleType = forwardRef(
     <Heading
       {...rest}
       ref={ref}
-      size="xsmall"
       as={as}
+      size="xsmall"
       className={cl("navdsi-header__title", className)}
     >
       <span>{children}</span>

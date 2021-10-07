@@ -4,13 +4,13 @@ import { BodyShort, Detail } from "@navikt/ds-react";
 
 export interface HeaderUserProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * user name
+   * User name
    */
   name: string;
   /**
-   * user ident
+   * User description
    */
-  ident: string;
+  description?: string;
 }
 
 export type HeaderUserType = React.ForwardRefExoticComponent<
@@ -18,12 +18,12 @@ export type HeaderUserType = React.ForwardRefExoticComponent<
 >;
 
 const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
-  ({ className, name, ident, ...rest }, ref) => (
+  ({ className, name, description, ...rest }, ref) => (
     <div {...rest} ref={ref} className={cl("navdsi-header__user", className)}>
-      <BodyShort size="small" className="navdsi-header__name">
-        {name}
-      </BodyShort>
-      <Detail size="small">{ident}</Detail>
+      <span>
+        <BodyShort size="small">{name}</BodyShort>
+        <Detail size="small">{description}</Detail>
+      </span>
     </div>
   )
 );
