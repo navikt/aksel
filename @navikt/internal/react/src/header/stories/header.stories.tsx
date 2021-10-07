@@ -38,6 +38,66 @@ const Full = () => (
       </Header.Dropdown.Menu>
     </Header.Dropdown>
     <Header.Dropdown>
+      <Header.Dropdown.Button
+        style={{
+          paddingTop: 4,
+          paddingBottom: 4,
+        }}
+      >
+        <div style={{ marginRight: 16 }}>
+          <BodyShort size="small">Kong Harald</BodyShort>
+          <Detail size="small">Enhet: Skien</Detail>
+        </div>
+        <Expand />
+      </Header.Dropdown.Button>
+      <Header.Dropdown.Menu>
+        <BodyLong size="small">Kong Harald 16px</BodyLong>
+        <Detail size="small">Ident nr 14px</Detail>
+        <Detail size="small" style={{ marginBottom: 12 }}>
+          Enhet: Skien
+        </Detail>
+        <Divider />
+        <Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item as="a" href="/#settings">
+            Innstillinger
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+            Logg ut
+          </Header.Dropdown.Menu.Item>
+        </Header.Dropdown.Menu.List>
+      </Header.Dropdown.Menu>
+    </Header.Dropdown>
+  </Header>
+);
+
+const OnlyName = () => (
+  <Header>
+    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.Dropdown>
+      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+        <System style={{ fontSize: "1.5rem" }} />
+      </Header.Dropdown.Button>
+      <Header.Dropdown.Menu>
+        <Heading level="2" size="xsmall">
+          Systemer og oppslagsverk
+        </Heading>
+        <Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item>
+            <span>A.Inntekt</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Aa-registeret</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Gosys</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+        </Header.Dropdown.Menu.List>
+      </Header.Dropdown.Menu>
+    </Header.Dropdown>
+    <Header.Dropdown>
       <Header.Dropdown.Button>
         <BodyShort size="small">Kong Harald</BodyShort>
         <Expand />
@@ -122,6 +182,7 @@ export const Test = () => (
     }}
   >
     <Full />
+    <OnlyName />
     <InitialWithChevron />
   </div>
 );
