@@ -32,6 +32,15 @@ export const All = () => (
     </Header>
 
     <Heading level="2" size="medium">
+      Title as button
+    </Heading>
+    <Header>
+      <Header.Title as="button" onClick={() => {}}>
+        Tittel med lenke
+      </Header.Title>
+    </Header>
+
+    <Heading level="2" size="medium">
       User
     </Heading>
     <Header>
