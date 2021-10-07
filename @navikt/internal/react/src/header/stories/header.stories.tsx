@@ -68,7 +68,10 @@ const Full = () => (
     <Header.Title>NAV Sykepenger</Header.Title>
     <Header.Dropdown>
       <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
-        <System style={{ fontSize: "1.5rem" }} />
+        <System
+          style={{ fontSize: "1.5rem" }}
+          title="Systemer og oppslagsverk"
+        />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
         <Heading level="2" size="xsmall" spacing>
@@ -111,7 +114,9 @@ const Initials = () => (
     <Header.Title>NAV Sykepenger</Header.Title>
     <Header.Dropdown>
       <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
-        <BodyShort size="small">KH</BodyShort>
+        <BodyShort size="small" title="Kong Harald">
+          KH
+        </BodyShort>
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
