@@ -3,6 +3,8 @@
   padding: var(--navds-spacing-4) 0;
   color: var(--navds-color-darkgray);
   width: 27ch;
+  max-height: 616px;
+  overflow-y: auto;
 }
 
 .navdsi-dropdown-menu > :not(.navdsi-divider):not(.navdsi-dropdown-menu__list) {
