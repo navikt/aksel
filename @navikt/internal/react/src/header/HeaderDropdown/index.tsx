@@ -2,10 +2,14 @@ import { useId } from "@navikt/ds-react";
 import React, { createContext, useState } from "react";
 import HeaderDropdownButton, { HeaderDropdownButtonType } from "./Button";
 import HeaderDropdownMenu, { HeaderDropdownMenuType } from "./Menu";
+import HeaderDropdownUserButton, {
+  HeaderDropdownUserButtonType,
+} from "./UserButton";
 
 export interface HeaderDropdownType extends React.FC {
   Button: HeaderDropdownButtonType;
   Menu: HeaderDropdownMenuType;
+  UserButton: HeaderDropdownUserButtonType;
 }
 
 export interface HeaderDropdownContextType {
@@ -42,5 +46,6 @@ const HeaderDropdown = (({ children }) => {
 
 HeaderDropdown.Button = HeaderDropdownButton;
 HeaderDropdown.Menu = HeaderDropdownMenu;
+HeaderDropdown.UserButton = HeaderDropdownUserButton;
 
 export default HeaderDropdown;

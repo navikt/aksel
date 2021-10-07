@@ -36,9 +36,17 @@ export const All = () => (
     </Heading>
     <Header>
       <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.User name="Kong Harald" style={{ marginLeft: "auto" }} />
+    </Header>
+
+    <Heading level="2" size="medium">
+      User with description
+    </Heading>
+    <Header>
+      <Header.Title>NAV Sykepenger</Header.Title>
       <Header.User
         name="Kong Harald"
-        ident="D123456"
+        description="D123456"
         style={{ marginLeft: "auto" }}
       />
     </Header>
@@ -83,24 +91,12 @@ const Full = () => (
       </Header.Dropdown.Menu>
     </Header.Dropdown>
     <Header.Dropdown>
-      <Header.Dropdown.Button>
-        <div>
-          <BodyShort size="small">Kong Harald</BodyShort>
-          <Detail size="small">Enhet: Skien</Detail>
-        </div>
-        <Expand />
-      </Header.Dropdown.Button>
+      <Header.Dropdown.UserButton
+        name="Kong Harald"
+        description="Enhet: Skien"
+      />
       <Header.Dropdown.Menu>
-        <div style={{ marginBottom: 12 }}>
-          <BodyLong size="small">Kong Harald 16px</BodyLong>
-          <Detail size="small">Ident nr 14px</Detail>
-          <Detail size="small">Enhet: Skien</Detail>
-        </div>
-        <Divider />
         <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item as="a" href="/#settings">
-            Innstillinger
-          </Header.Dropdown.Menu.Item>
           <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
             Logg ut
           </Header.Dropdown.Menu.Item>
@@ -119,7 +115,16 @@ const Initials = () => (
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
+        <div style={{ marginBottom: 12 }}>
+          <BodyLong size="small">Kong Harald 16px</BodyLong>
+          <Detail size="small">Ident nr 14px</Detail>
+          <Detail size="small">Enhet: Skien</Detail>
+        </div>
+        <Divider />
         <Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item as="a" href="/#settings">
+            Innstillinger
+          </Header.Dropdown.Menu.Item>
           <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
             Logg ut
           </Header.Dropdown.Menu.Item>

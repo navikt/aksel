@@ -31,7 +31,7 @@
 
 .navdsi-header__user {
   color: var(--navdsi-header-color-text);
-  padding: 0 var(--navds-spacing-6);
+  padding: 0 var(--navds-spacing-5);
   border-left: 1px solid var(--navdsi-header-color-border);
   display: flex;
   align-items: center;
@@ -62,4 +62,9 @@
 .navdsi-header-dropdown__button:focus {
   box-shadow: var(--navdsi-header-focus);
   outline: none;
+}
+
+.navdsi-header-dropdown__user-button {
+  padding-left: var(--navds-spacing-5);
+  gap: var(--navds-spacing-4);
 }
