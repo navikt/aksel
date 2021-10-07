@@ -12,7 +12,7 @@ export interface HeaderButtonProps
 
 export type HeaderButtonType = OverridableComponent<
   HeaderButtonProps,
-  HTMLAnchorElement
+  HTMLButtonElement
 >;
 
 const HeaderButton: HeaderButtonType = forwardRef(

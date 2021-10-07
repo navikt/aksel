@@ -7,14 +7,14 @@ import cl from "classnames";
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
   /**
-   * Component content
+   * Header content
    */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 interface HeaderComponent
   extends React.ForwardRefExoticComponent<
-    HeaderProps & React.RefAttributes<HTMLDivElement>
+    HeaderProps & React.RefAttributes<HTMLElement>
   > {
   Title: HeaderTitleType;
   User: HeaderUserType;
@@ -22,13 +22,9 @@ interface HeaderComponent
   Dropdown: HeaderDropdownType;
 }
 
-const Header = forwardRef<HTMLElement, HeaderProps>(
-  ({ children, className, ...rest }, ref) => (
-    <header ref={ref} className={cl("navdsi-header", className)} {...rest}>
-      {children}
-    </header>
-  )
-) as HeaderComponent;
+const Header = forwardRef(({ className, ...rest }, ref) => (
+  <header ref={ref} className={cl("navdsi-header", className)} {...rest} />
+)) as HeaderComponent;
 
 Header.Title = HeaderTitle;
 Header.User = HeaderUser;

@@ -5,7 +5,7 @@ import { Popover, PopoverProps } from "@navikt/ds-react";
 import List, { DropdownMenuListType } from "./List";
 import Item, { DropdownMenuItemType } from "./Item";
 
-export interface HeaderDropdownMenuProps extends PopoverProps {
+export interface DropdownMenuProps extends PopoverProps {
   /**
    * Menu content
    */
@@ -29,13 +29,13 @@ export interface HeaderDropdownMenuProps extends PopoverProps {
 
 export interface DropdownMenuType
   extends React.ForwardRefExoticComponent<
-    HeaderDropdownMenuProps & React.RefAttributes<HTMLDivElement>
+    DropdownMenuProps & React.RefAttributes<HTMLDivElement>
   > {
   List: DropdownMenuListType;
   Item: DropdownMenuItemType;
 }
 
-const DropdownMenu = forwardRef<HTMLButtonElement, HeaderDropdownMenuProps>(
+const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
   (
     {
       className,
@@ -49,6 +49,7 @@ const DropdownMenu = forwardRef<HTMLButtonElement, HeaderDropdownMenuProps>(
   ) => (
     <Popover
       {...rest}
+      ref={ref}
       placement={placement}
       arrow={arrow}
       className={cl("navdsi-dropdown-menu", className)}

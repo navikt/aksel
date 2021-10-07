@@ -3,9 +3,7 @@ import React, { createContext, useState } from "react";
 import HeaderDropdownButton, { HeaderDropdownButtonType } from "./Button";
 import HeaderDropdownMenu, { HeaderDropdownMenuType } from "./Menu";
 
-export interface HeaderDropdownProps {}
-
-export interface HeaderDropdownType extends React.FC<HeaderDropdownProps> {
+export interface HeaderDropdownType extends React.FC {
   Button: HeaderDropdownButtonType;
   Menu: HeaderDropdownMenuType;
 }
