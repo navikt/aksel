@@ -1,5 +1,4 @@
 import React from "react";
-import { HashRouter as Router, Link } from "react-router-dom";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System, ExternalLink } from "@navikt/ds-icons";
@@ -10,6 +9,52 @@ export default {
   component: Header,
 };
 
+export const All = () => (
+  <>
+    <Heading level="1" size="xlarge">
+      Header for interne flater
+    </Heading>
+
+    <Heading level="2" size="medium">
+      Title
+    </Heading>
+    <Header>
+      <Header.Title>Tittel</Header.Title>
+    </Header>
+
+    <Heading level="2" size="medium">
+      Title as link
+    </Heading>
+    <Header>
+      <Header.Title as="a" href="/#home">
+        Tittel med lenke
+      </Header.Title>
+    </Header>
+
+    <Heading level="2" size="medium">
+      User
+    </Heading>
+    <Header>
+      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.User
+        name="Kong Harald"
+        ident="D123456"
+        style={{ marginLeft: "auto" }}
+      />
+    </Header>
+
+    <Heading level="2" size="medium">
+      Systems and user menu
+    </Heading>
+    <Full />
+
+    <Heading level="2" size="medium">
+      Initials
+    </Heading>
+    <Initials />
+  </>
+);
+
 const Full = () => (
   <Header>
     <Header.Title>NAV Sykepenger</Header.Title>
@@ -18,7 +63,7 @@ const Full = () => (
         <System style={{ fontSize: "1.5rem" }} />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <Heading level="2" size="xsmall">
+        <Heading level="2" size="xsmall" spacing>
           Systemer og oppslagsverk
         </Heading>
         <Header.Dropdown.Menu.List>
@@ -38,24 +83,19 @@ const Full = () => (
       </Header.Dropdown.Menu>
     </Header.Dropdown>
     <Header.Dropdown>
-      <Header.Dropdown.Button
-        style={{
-          paddingTop: 4,
-          paddingBottom: 4,
-        }}
-      >
-        <div style={{ marginRight: 16 }}>
+      <Header.Dropdown.Button>
+        <div>
           <BodyShort size="small">Kong Harald</BodyShort>
           <Detail size="small">Enhet: Skien</Detail>
         </div>
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <BodyLong size="small">Kong Harald 16px</BodyLong>
-        <Detail size="small">Ident nr 14px</Detail>
-        <Detail size="small" style={{ marginBottom: 12 }}>
-          Enhet: Skien
-        </Detail>
+        <div style={{ marginBottom: 12 }}>
+          <BodyLong size="small">Kong Harald 16px</BodyLong>
+          <Detail size="small">Ident nr 14px</Detail>
+          <Detail size="small">Enhet: Skien</Detail>
+        </div>
         <Divider />
         <Header.Dropdown.Menu.List>
           <Header.Dropdown.Menu.Item as="a" href="/#settings">
@@ -70,49 +110,16 @@ const Full = () => (
   </Header>
 );
 
-const OnlyName = () => (
+const Initials = () => (
   <Header>
     <Header.Title>NAV Sykepenger</Header.Title>
     <Header.Dropdown>
       <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
-        <System style={{ fontSize: "1.5rem" }} />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
-        <Heading level="2" size="xsmall">
-          Systemer og oppslagsverk
-        </Heading>
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item>
-            <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
-    <Header.Dropdown>
-      <Header.Dropdown.Button>
-        <BodyShort size="small">Kong Harald</BodyShort>
+        <BodyShort size="small">KH</BodyShort>
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <BodyLong size="small">Kong Harald 16px</BodyLong>
-        <Detail size="small">Ident nr 14px</Detail>
-        <Detail size="small" style={{ marginBottom: 12 }}>
-          Enhet: Skien
-        </Detail>
-        <Divider />
         <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item as="a" href="/#settings">
-            Innstillinger
-          </Header.Dropdown.Menu.Item>
           <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
             Logg ut
           </Header.Dropdown.Menu.Item>
@@ -120,108 +127,4 @@ const OnlyName = () => (
       </Header.Dropdown.Menu>
     </Header.Dropdown>
   </Header>
-);
-
-const InitialWithChevron = () => (
-  <Header>
-    <Header.Title>NAV Sykepenger</Header.Title>
-    <Header.Dropdown>
-      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
-        <System style={{ fontSize: "1.5rem" }} />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
-        <Heading level="2" size="xsmall">
-          Systemer og oppslagsverk
-        </Heading>
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item>
-            <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
-    <Header.Dropdown>
-      <Header.Dropdown.Button>
-        <BodyShort>KH</BodyShort>
-        <Expand />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
-        <BodyLong size="small">Kong Harald 16px</BodyLong>
-        <Detail size="small">Ident nr 14px</Detail>
-        <Detail size="small" style={{ marginBottom: 12 }}>
-          Enhet: Skien
-        </Detail>
-        <Divider />
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item as="a" href="/#settings">
-            Innstillinger
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-            Logg ut
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
-  </Header>
-);
-
-export const Test = () => (
-  <div
-    style={{
-      display: "grid",
-      gap: 64,
-    }}
-  >
-    <Full />
-    <OnlyName />
-    <InitialWithChevron />
-  </div>
-);
-
-export const All = () => (
-  <div>
-    <h1>Uten innhold</h1>
-    <Header />
-
-    <h1>Title</h1>
-    <Header>
-      <Header.Title>Tittel</Header.Title>
-    </Header>
-
-    <h1>Title as span</h1>
-    <Header>
-      <Header.Title as="span">Tittel</Header.Title>
-    </Header>
-
-    <h1>Title as link</h1>
-    <Header>
-      <Header.Title as="a" href="/#home">
-        Tittel med lenke
-      </Header.Title>
-    </Header>
-
-    <h1>Title as react-router link</h1>
-    <Router>
-      <Header>
-        <Header.Title as={Link} to="/home">
-          Tittel med lenke
-        </Header.Title>
-      </Header>
-    </Router>
-
-    <h1>Title + User</h1>
-    <Header>
-      <Header.Title>NAV Sykepenger</Header.Title>
-      <Header.User name="Kong Harald" ident="D123456" />
-    </Header>
-  </div>
 );

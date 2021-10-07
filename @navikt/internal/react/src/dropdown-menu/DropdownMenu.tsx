@@ -27,9 +27,9 @@ export interface DropdownMenuProps extends PopoverProps {
   offset?: number;
 }
 
-export interface DropdownMenuType
+export interface DropdownMenuType<Props = DropdownMenuProps>
   extends React.ForwardRefExoticComponent<
-    DropdownMenuProps & React.RefAttributes<HTMLDivElement>
+    Props & React.RefAttributes<HTMLDivElement>
   > {
   List: DropdownMenuListType;
   Item: DropdownMenuItemType;

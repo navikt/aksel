@@ -2,7 +2,15 @@ import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { DropdownMenu, DropdownMenuType } from "../..";
 import { HeaderDropdownContext } from ".";
-export { DropdownMenuType as HeaderDropdownMenuType } from "../..";
+
+interface HeaderDropdownMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Dropdown content
+   */
+  children: React.ReactNode;
+}
+
+export type HeaderDropdownMenuType = DropdownMenuType<HeaderDropdownMenuProps>;
 
 const HeaderDropdownMenu = forwardRef(({ className, ...rest }, ref) => {
   const context = useContext(HeaderDropdownContext);
@@ -25,7 +33,7 @@ const HeaderDropdownMenu = forwardRef(({ className, ...rest }, ref) => {
       className={cl("navdsi-header-dropdown-menu", className)}
     />
   );
-}) as DropdownMenuType;
+}) as HeaderDropdownMenuType;
 
 HeaderDropdownMenu.List = DropdownMenu.List;
 HeaderDropdownMenu.Item = DropdownMenu.Item;

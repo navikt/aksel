@@ -22,7 +22,7 @@ const Item: DropdownMenuItemType = forwardRef(
       ref={ref}
       role="menuitem"
       className={cl(
-        "navdsi-dropdown-menu__item navds-body-short navds-body-short__small",
+        "navdsi-dropdown-menu__item navds-body-short navds-body-short--small",
         className
       )}
     />

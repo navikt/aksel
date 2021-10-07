@@ -23,12 +23,12 @@ export const HeaderDropdownContext = createContext<HeaderDropdownContextType | n
 const HeaderDropdown = (({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
-  const dropdownId = useId("header-dropdown");
+  const id = useId();
 
   return (
     <HeaderDropdownContext.Provider
       value={{
-        dropdownId,
+        dropdownId: `header-dropdown-${id}`,
         isOpen,
         setIsOpen,
         anchorEl,
