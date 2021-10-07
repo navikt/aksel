@@ -6,7 +6,13 @@ import { Expand } from "@navikt/ds-icons";
 
 export interface HeaderDropdownUserButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * User name
+   */
   name: string;
+  /**
+   * User description
+   */
   description?: string;
 }
 
@@ -15,15 +21,21 @@ export type HeaderDropdownUserButtonType = React.ForwardRefExoticComponent<
 >;
 
 const HeaderDropdownUserButton: HeaderDropdownUserButtonType = forwardRef(
-  ({ className, ...rest }, ref) => (
+  ({ name, description, className, ...rest }, ref) => (
     <HeaderDropdownButton
       {...rest}
       ref={ref}
       className={cl("navdsi-header__dropdown-user-button", className)}
     >
       <div>
-        <BodyShort size="small">Kong Harald</BodyShort>
-        <Detail size="small">Enhet: Skien</Detail>
+        <BodyShort size="small" as="div">
+          {name}
+        </BodyShort>
+        {description && (
+          <Detail size="small" as="div">
+            {description}
+          </Detail>
+        )}
       </div>
       <Expand />
     </HeaderDropdownButton>
