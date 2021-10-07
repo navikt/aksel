@@ -19,32 +19,21 @@ export const All = () => (
       Title
     </Heading>
     <Header>
-      <Header.Title>Tittel</Header.Title>
+      <Header.Title href="/#home">Tittel med lenke</Header.Title>
     </Header>
 
     <Heading level="2" size="medium">
-      Title as link
+      Title as h1
     </Heading>
     <Header>
-      <Header.Title as="a" href="/#home">
-        Tittel med lenke
-      </Header.Title>
-    </Header>
-
-    <Heading level="2" size="medium">
-      Title as button
-    </Heading>
-    <Header>
-      <Header.Title as="button" onClick={() => {}}>
-        Tittel med lenke
-      </Header.Title>
+      <Header.Title as="h1">Tittel</Header.Title>
     </Header>
 
     <Heading level="2" size="medium">
       User
     </Heading>
     <Header>
-      <Header.Title>NAV Sykepenger</Header.Title>
+      <Header.Title href="/#home">NAV Sykepenger</Header.Title>
       <Header.User name="Kong Harald" style={{ marginLeft: "auto" }} />
     </Header>
 
@@ -52,12 +41,32 @@ export const All = () => (
       User with description
     </Heading>
     <Header>
-      <Header.Title>NAV Sykepenger</Header.Title>
-      <Header.User
-        name="Kong Harald"
-        description="D123456"
-        style={{ marginLeft: "auto" }}
-      />
+      <Header.Title href="/#home">NAV Sykepenger</Header.Title>
+      <Header.Dropdown>
+        <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+          <System
+            style={{ fontSize: "1.5rem" }}
+            title="Systemer og oppslagsverk"
+          />
+        </Header.Dropdown.Button>
+        <Header.Dropdown.Menu>
+          <Header.Dropdown.Menu.List>
+            <Header.Dropdown.Menu.Item>
+              <span>A.Inntekt</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Header.Dropdown.Menu.Item>
+            <Header.Dropdown.Menu.Item>
+              <span>Aa-registeret</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Header.Dropdown.Menu.Item>
+            <Header.Dropdown.Menu.Item>
+              <span>Gosys</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Header.Dropdown.Menu.Item>
+          </Header.Dropdown.Menu.List>
+        </Header.Dropdown.Menu>
+      </Header.Dropdown>
+      <Header.User name="Kong Harald" description="D123456" />
     </Header>
 
     <Heading level="2" size="medium">
@@ -74,7 +83,7 @@ export const All = () => (
 
 const Full = () => (
   <Header>
-    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.Title href="/#home">NAV Sykepenger</Header.Title>
     <Header.Dropdown>
       <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
         <System
@@ -83,9 +92,9 @@ const Full = () => (
         />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <Heading level="2" size="xsmall" spacing>
+        <BodyShort size="small" style={{ fontWeight: 600, marginBottom: 16 }}>
           Systemer og oppslagsverk
-        </Heading>
+        </BodyShort>
         <Header.Dropdown.Menu.List>
           <Header.Dropdown.Menu.Item>
             <span>A.Inntekt</span>
@@ -120,7 +129,7 @@ const Full = () => (
 
 const Initials = () => (
   <Header>
-    <Header.Title>NAV Sykepenger</Header.Title>
+    <Header.Title href="/#home">NAV Sykepenger</Header.Title>
     <Header.Dropdown>
       <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
         <BodyShort size="small" title="Kong Harald">

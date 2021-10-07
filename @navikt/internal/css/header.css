@@ -58,8 +58,8 @@ button.navdsi-header__title {
   color: var(--navdsi-header-color-text);
 }
 
-a.navdsi-header__title:hover:not(:active),
-button.navdsi-header__title:hover:not(:active),
+a.navdsi-header__title:hover,
+button.navdsi-header__title:hover,
 .navdsi-header__dropdown-button:hover {
   background-color: var(--navds-color-gray-80);
 }
@@ -70,7 +70,8 @@ button.navdsi-header__title:hover:not(:active),
   outline: none;
 }
 
-.navdsi-header__title:active,
+a.navdsi-header__title:active,
+button.navdsi-header__title:active,
 .navdsi-header__dropdown-button:active {
   background-color: var(--navds-color-gray-60);
 }
