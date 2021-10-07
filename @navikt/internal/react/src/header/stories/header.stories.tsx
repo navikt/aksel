@@ -115,7 +115,7 @@ const Initials = () => (
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <div style={{ marginBottom: 12 }}>
+        <div style={{ marginBottom: "var(--navds-spacing-4)" }}>
           <BodyLong size="small">Kong Harald 16px</BodyLong>
           <Detail size="small">Ident nr 14px</Detail>
           <Detail size="small">Enhet: Skien</Detail>

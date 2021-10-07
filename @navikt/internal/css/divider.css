@@ -1,5 +1,5 @@
 .navdsi-divider {
-  margin: 4px 0;
+  margin: var(--navds-spacing-3) 0;
   border: none;
   border-bottom: 1px solid var(--navds-color-gray-40);
 }
