@@ -38,7 +38,7 @@ const HeaderDropdownButton: HeaderDropdownButtonType = forwardRef(
         aria-expanded={isOpen}
         aria-controls={dropdownId}
         aria-haspopup="menu"
-        className={cl("navdsi-header-dropdown__button", className)}
+        className={cl("navdsi-header__dropdown-button", className)}
       />
     );
   }

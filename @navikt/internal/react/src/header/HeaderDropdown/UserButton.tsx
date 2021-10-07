@@ -19,7 +19,7 @@ const HeaderDropdownUserButton: HeaderDropdownUserButtonType = forwardRef(
     <HeaderDropdownButton
       {...rest}
       ref={ref}
-      className={cl("navdsi-header-dropdown__user-button", className)}
+      className={cl("navdsi-header__dropdown-user-button", className)}
     >
       <div>
         <BodyShort size="small">Kong Harald</BodyShort>
