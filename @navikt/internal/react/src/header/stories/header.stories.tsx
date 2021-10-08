@@ -50,20 +50,18 @@ export const All = () => (
           />
         </Header.Dropdown.Button>
         <Header.Dropdown.Menu>
-          <Header.Dropdown.Menu.List>
-            <Header.Dropdown.Menu.Item>
-              <span>A.Inntekt</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
-              <span>Aa-registeret</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
-              <span>Gosys</span>
-              <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-          </Header.Dropdown.Menu.List>
+          <Header.Dropdown.Menu.Item>
+            <span>A.Inntekt</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Aa-registeret</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
+          <Header.Dropdown.Menu.Item>
+            <span>Gosys</span>
+            <ExternalLink style={{ fontSize: "0.875rem" }} />
+          </Header.Dropdown.Menu.Item>
         </Header.Dropdown.Menu>
       </Header.Dropdown>
       <Header.User name="Kong Harald" description="D123456" />
@@ -92,23 +90,21 @@ const Full = () => (
         />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <BodyShort size="small" style={{ fontWeight: 600, marginBottom: 16 }}>
+        <Heading size="xsmall" as="div">
           Systemer og oppslagsverk
-        </BodyShort>
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item>
-            <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
+        </Heading>
+        <Header.Dropdown.Menu.Item>
+          <span>A.Inntekt</span>
+          <ExternalLink style={{ fontSize: "0.875rem" }} />
+        </Header.Dropdown.Menu.Item>
+        <Header.Dropdown.Menu.Item>
+          <span>Aa-registeret</span>
+          <ExternalLink style={{ fontSize: "0.875rem" }} />
+        </Header.Dropdown.Menu.Item>
+        <Header.Dropdown.Menu.Item>
+          <span>Gosys</span>
+          <ExternalLink style={{ fontSize: "0.875rem" }} />
+        </Header.Dropdown.Menu.Item>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
     <Header.Dropdown>
@@ -117,11 +113,9 @@ const Full = () => (
         description="Enhet: Skien"
       />
       <Header.Dropdown.Menu>
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-            Logg ut
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
+        <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+          Logg ut
+        </Header.Dropdown.Menu.Item>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
   </Header>
@@ -138,20 +132,22 @@ const Initials = () => (
         <Expand />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <div style={{ marginBottom: "var(--navds-spacing-4)" }}>
-          <BodyLong size="small">Kong Harald 16px</BodyLong>
-          <Detail size="small">Ident nr 14px</Detail>
-          <Detail size="small">Enhet: Skien</Detail>
+        <div>
+          <BodyLong size="small" as="div">
+            Kong Harald 16px
+          </BodyLong>
+          <Detail size="small" as="div">
+            <div>Ident nr 14px</div>
+            <div>Enhet: Skien</div>
+          </Detail>
         </div>
         <Divider />
-        <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item as="a" href="/#settings">
-            Innstillinger
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-            Logg ut
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu.List>
+        <Header.Dropdown.Menu.Item as="a" href="/#settings">
+          Innstillinger
+        </Header.Dropdown.Menu.Item>
+        <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+          Logg ut
+        </Header.Dropdown.Menu.Item>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
   </Header>
