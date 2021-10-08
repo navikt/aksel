@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Placement } from "@popperjs/core";
 import { Popover, PopoverProps } from "@navikt/ds-react";
-import List, { DropdownMenuListType } from "./List";
 import Item, { DropdownMenuItemType } from "./Item";
 
 export interface DropdownMenuProps extends PopoverProps {
@@ -31,7 +30,6 @@ export interface DropdownMenuType<Props = DropdownMenuProps>
   extends React.ForwardRefExoticComponent<
     Props & React.RefAttributes<HTMLDivElement>
   > {
-  List: DropdownMenuListType;
   Item: DropdownMenuItemType;
 }
 
@@ -55,12 +53,15 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
       className={cl("navdsi-dropdown-menu", className)}
       offset={offset ?? arrow ? 8 : -4}
     >
-      {children}
+      <ul role="menu" className="navdsi-dropdown-menu__list">
+        {React.Children.map(children, (child) => (
+          <li>{child}</li>
+        ))}
+      </ul>
     </Popover>
   )
 ) as DropdownMenuType;
 
-DropdownMenu.List = List;
 DropdownMenu.Item = Item;
 
 export default DropdownMenu;

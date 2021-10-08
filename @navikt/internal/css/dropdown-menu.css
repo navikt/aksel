@@ -7,15 +7,17 @@
   overflow-y: auto;
 }
 
-.navdsi-dropdown-menu > :not(.navdsi-divider):not(.navdsi-dropdown-menu__list) {
-  padding-left: var(--navds-spacing-4);
-  padding-right: var(--navds-spacing-4);
-}
-
 .navdsi-dropdown-menu__list {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.navdsi-dropdown-menu__list
+  > *
+  > :not(.navdsi-divider):not(.navdsi-dropdown-menu__item) {
+  margin: var(--navds-spacing-4);
+  margin-top: 0;
 }
 
 .navdsi-dropdown-menu__item {

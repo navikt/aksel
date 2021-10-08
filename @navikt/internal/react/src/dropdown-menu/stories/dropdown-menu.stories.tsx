@@ -17,7 +17,7 @@ export const All = () => {
     <Router>
       <span ref={(el) => setAnchorEl(el)} />
       <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
-        <Heading level="2" size="xsmall">
+        <Heading size="xsmall" as="div">
           Systemer og oppslagsverk
         </Heading>
         <DropdownMenu.Item as={Link} to="/settings">
