@@ -22,12 +22,12 @@ export const All = () => {
         <span ref={(el) => setAnchorEl(el)} />
         <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
           <DropdownMenu.DescriptionList>
-            <DropdownMenu.Heading>
+            <DropdownMenu.DescriptionTerm>
               Systemer og oppslagsverk
-            </DropdownMenu.Heading>
-            <DropdownMenu.DescriptionListItem>
+            </DropdownMenu.DescriptionTerm>
+            <DropdownMenu.DescriptionDetail>
               Gosys
-            </DropdownMenu.DescriptionListItem>
+            </DropdownMenu.DescriptionDetail>
           </DropdownMenu.DescriptionList>
           <Divider />
           <DropdownMenu.List>
