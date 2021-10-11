@@ -21,7 +21,7 @@ yarn storybook
 
 ### Yarn install med MAC M1 chip
 
-Du må ha installert "libvps" globalt for å få installert sharp-pakken via yarn install. Libvps krever også gcc og xcode build tools CLI. Dette kan installeres med følgende kommandoer:
+For at `yarn install` skal funke på Mac med M1 chilp må du ha "libvps" installert globalt for å få installert sharp-pakken via yarn install. Libvps krever også gcc og xcode build tools CLI. Dette kan installeres med følgende kommandoer:
 
 ```sh
 xcode-select --install
