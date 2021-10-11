@@ -7,6 +7,10 @@
   overflow-y: auto;
 }
 
+.navdsi-dropdown-menu > :not(.navdsi-divider):not(.navdsi-dropdown-menu__list) {
+  margin: 0 var(--navds-spacing-4) var(--navds-spacing-3);
+}
+
 .navdsi-dropdown-menu__list {
   margin: 0;
   padding: 0;
