@@ -4,7 +4,15 @@ import { Placement } from "@popperjs/core";
 import { Popover, PopoverProps } from "@navikt/ds-react";
 import List, { DropdownMenuListType } from "./List";
 import Item, { DropdownMenuItemType } from "./Item";
-import Heading, { DropdownMenuHeadingType } from "./Heading";
+import DescriptionList, {
+  DropdownMenuDescriptionListType,
+} from "./DescriptionList";
+import DescriptionTerm, {
+  DropdownMenuDescriptionTermType,
+} from "./DescriptionTerm";
+import DescriptionDetail, {
+  DropdownMenuDescriptionDetailType,
+} from "./DescriptionDetail";
 
 export interface DropdownMenuProps extends PopoverProps {
   /**
@@ -34,7 +42,9 @@ export interface DropdownMenuType<Props = DropdownMenuProps>
   > {
   List: DropdownMenuListType;
   Item: DropdownMenuItemType;
-  Heading: DropdownMenuHeadingType;
+  DescriptionList: DropdownMenuDescriptionListType;
+  DescriptionTerm: DropdownMenuDescriptionTermType;
+  DescriptionDetail: DropdownMenuDescriptionDetailType;
 }
 
 const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
@@ -64,6 +74,8 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 
 DropdownMenu.List = List;
 DropdownMenu.Item = Item;
-DropdownMenu.Heading = Heading;
+DropdownMenu.DescriptionList = DescriptionList;
+DropdownMenu.DescriptionDetail = DescriptionDetail;
+DropdownMenu.DescriptionTerm = DescriptionTerm;
 
 export default DropdownMenu;

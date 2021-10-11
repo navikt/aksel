@@ -11,7 +11,7 @@ export default {
 };
 
 export const All = () => {
-  const [anchorEl, setAnchorEl] = useState<Element>();
+  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
   return (
     <>

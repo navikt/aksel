@@ -2,22 +2,22 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "@navikt/ds-react";
 
-export interface DropdownMenuItemProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface DropdownMenuDescriptionDetailProps
+  extends React.ButtonHTMLAttributes<HTMLElement> {
   /**
    * Menu item content
    */
   children: React.ReactNode;
 }
 
-export type DropdownMenuItemType = OverridableComponent<
-  DropdownMenuItemProps,
+export type DropdownMenuDescriptionDetailType = OverridableComponent<
+  DropdownMenuDescriptionDetailProps,
   HTMLButtonElement
 >;
 
-const Item: DropdownMenuItemType = forwardRef(
+const DescriptionDetail: DropdownMenuDescriptionDetailType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
-    <li className="navdsi-dropdown-menu__list-item">
+    <dd className="navdsi-dropdown-menu__list-item">
       <Component
         {...rest}
         ref={ref}
@@ -28,8 +28,8 @@ const Item: DropdownMenuItemType = forwardRef(
           className
         )}
       />
-    </li>
+    </dd>
   )
 );
 
-export default Item;
+export default DescriptionDetail;

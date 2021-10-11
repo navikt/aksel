@@ -20,6 +20,14 @@
   margin-top: 0;
 }
 
+.navdsi-dropdown-menu__list-item {
+  margin: 0;
+}
+
+.navdsi-dropdown-menu__list-heading {
+  padding: var(--navds-spacing-1) var(--navds-spacing-4);
+}
+
 .navdsi-dropdown-menu__item {
   border: none;
   margin: 0;

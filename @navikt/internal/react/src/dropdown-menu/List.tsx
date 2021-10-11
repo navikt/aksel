@@ -1,6 +1,5 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { DropdownMenuHeadingProps, DropdownMenuHeadingType } from "./Heading";
 
 export interface DropdownMenuListProps
   extends React.HTMLAttributes<HTMLUListElement> {
