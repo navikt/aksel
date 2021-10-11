@@ -17,15 +17,18 @@ export type DropdownMenuItemType = OverridableComponent<
 
 const Item: DropdownMenuItemType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
-    <Component
-      {...rest}
-      ref={ref}
-      role="menuitem"
-      className={cl(
-        "navdsi-dropdown-menu__item navds-body-short navds-body-short--small",
-        className
-      )}
-    />
+    <li>
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(
+          "navdsi-dropdown-menu__item",
+          "navds-body-short",
+          "navds-body-short--small",
+          className
+        )}
+      />
+    </li>
   )
 );
 

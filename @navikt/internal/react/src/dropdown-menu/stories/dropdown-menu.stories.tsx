@@ -14,22 +14,28 @@ export const All = () => {
   const [anchorEl, setAnchorEl] = useState<Element>();
 
   return (
-    <Router>
-      <span ref={(el) => setAnchorEl(el)} />
-      <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
-        <Heading size="xsmall" as="div">
-          Systemer og oppslagsverk
-        </Heading>
-        <DropdownMenu.Item as={Link} to="/settings">
-          Innstillinger
-        </DropdownMenu.Item>
-        <DropdownMenu.Item as="a" href="https://example.org" target="_blank">
-          <span>Gosys</span>
-          <ExternalLink style={{ fontSize: "0.875rem" }} />
-        </DropdownMenu.Item>
-        <Divider />
-        <DropdownMenu.Item onClick={() => {}}>Logg ut</DropdownMenu.Item>
-      </DropdownMenu>
-    </Router>
+    <>
+      <Heading level="1" size="xlarge">
+        Dropdown menu
+      </Heading>
+      <Router>
+        <span ref={(el) => setAnchorEl(el)} />
+        <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
+          <DropdownMenu.DescriptionList>
+            <DropdownMenu.Heading>
+              Systemer og oppslagsverk
+            </DropdownMenu.Heading>
+            <DropdownMenu.DescriptionListItem>
+              Gosys
+            </DropdownMenu.DescriptionListItem>
+          </DropdownMenu.DescriptionList>
+          <Divider />
+          <DropdownMenu.List>
+            <DropdownMenu.Item>Gosys</DropdownMenu.Item>
+            <DropdownMenu.Item>Psys</DropdownMenu.Item>
+          </DropdownMenu.List>
+        </DropdownMenu>
+      </Router>
+    </>
   );
 };
