@@ -4,7 +4,7 @@ import cl from "classnames";
 export interface DropdownMenuDescriptionListProps
   extends React.HTMLAttributes<HTMLDListElement> {
   /**
-   * Menu item content
+   * Menu list content
    */
   children: React.ReactNode;
 }
@@ -14,17 +14,15 @@ export type DropdownMenuDescriptionListType = React.ForwardRefExoticComponent<
 >;
 
 const DescriptionList: DropdownMenuDescriptionListType = forwardRef(
-  ({ className, children, ...rest }, ref) => {
-    return (
-      <dl
-        {...rest}
-        ref={ref}
-        className={cl("navdsi-dropdown-menu__list", className)}
-      >
-        {children}
-      </dl>
-    );
-  }
+  ({ className, children, ...rest }, ref) => (
+    <dl
+      {...rest}
+      ref={ref}
+      className={cl("navdsi-dropdown-menu__list", className)}
+    >
+      {children}
+    </dl>
+  )
 );
 
 export default DescriptionList;

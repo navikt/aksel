@@ -18,7 +18,12 @@ const DropdownMenuDescriptionTerm: DropdownMenuDescriptionTermType = forwardRef(
     <dt
       {...rest}
       ref={ref}
-      className={cl("navdsi-dropdown-menu__list-heading", className)}
+      className={cl(
+        "navdsi-dropdown-menu__list-heading",
+        "navds-heading",
+        "navds-heading--xsmall",
+        className
+      )}
     />
   )
 );

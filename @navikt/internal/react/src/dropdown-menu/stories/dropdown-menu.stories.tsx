@@ -1,7 +1,6 @@
 import { Heading } from "@navikt/ds-react";
 import React, { useState } from "react";
-import { HashRouter as Router, Link } from "react-router-dom";
-import { ExternalLink } from "@navikt/ds-icons";
+import { HashRouter as Router } from "react-router-dom";
 import { DropdownMenu } from "..";
 import { Divider } from "../..";
 
