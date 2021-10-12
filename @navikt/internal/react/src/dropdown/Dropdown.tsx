@@ -26,7 +26,7 @@ const Dropdown = (({ children }) => {
   return (
     <DropdownContext.Provider
       value={{
-        dropdownId: `header-dropdown-${id}`,
+        dropdownId: `dropdown-${id}`,
         isOpen,
         setIsOpen,
         anchorEl,

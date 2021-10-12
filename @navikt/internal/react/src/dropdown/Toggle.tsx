@@ -18,11 +18,11 @@ const Toggle: ToggleType = forwardRef(({ className, ...rest }, ref) => {
   const context = useContext(DropdownContext);
 
   if (!context) {
-    console.warn("Toggle has to be wrapped in <HeaderDropdown />");
+    console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
     return null;
   }
 
-  const { setAnchorEl, setIsOpen, isOpen, dropdownId } = context;
+  const { setAnchorEl, setIsOpen, isOpen } = context;
 
   return (
     <button
@@ -33,9 +33,8 @@ const Toggle: ToggleType = forwardRef(({ className, ...rest }, ref) => {
         setIsOpen((isOpen) => !isOpen);
       }}
       aria-expanded={isOpen}
-      aria-controls={dropdownId}
       aria-haspopup="menu"
-      className={cl("navdsi-header__dropdown-button", className)}
+      className={cl("navdsi-dropdown__toggle", className)}
     />
   );
 });

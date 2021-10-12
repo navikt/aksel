@@ -17,11 +17,7 @@ export interface ListType
 }
 
 const List = forwardRef(({ className, children, ...rest }, ref) => (
-  <ul
-    {...rest}
-    ref={ref}
-    className={cl("navdsi-dropdown-menu__list", className)}
-  >
+  <ul {...rest} ref={ref} className={cl("navdsi-dropdown__list", className)}>
     {children}
   </ul>
 )) as ListType;

@@ -20,11 +20,7 @@ export interface GroupedListType
 }
 
 const DescriptionList = forwardRef(({ className, children, ...rest }, ref) => (
-  <dl
-    {...rest}
-    ref={ref}
-    className={cl("navdsi-dropdown-menu__list", className)}
-  >
+  <dl {...rest} ref={ref} className={cl("navdsi-dropdown__list", className)}>
     {children}
   </dl>
 )) as GroupedListType;

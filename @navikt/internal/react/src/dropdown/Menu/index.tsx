@@ -6,26 +6,11 @@ import List, { ListType } from "./List";
 import GroupedList, { GroupedListType } from "./GroupedList";
 import { DropdownContext } from "../Dropdown";
 
-export interface MenuProps extends PopoverProps {
+interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Menu content
+   * Dropdown content
    */
   children: React.ReactNode;
-  /**
-   * Orientation for menu
-   * @default "bottom-end"
-   */
-  placement?: Placement;
-  /**
-   *  Toggles rendering of arrow
-   *  @default false
-   */
-  arrow?: boolean;
-  /**
-   * Distance from anchor to popover
-   * @default 8 w/arrow, -4 w/no-arrow
-   */
-  offset?: number;
 }
 
 export interface MenuType<Props = MenuProps>
@@ -37,40 +22,29 @@ export interface MenuType<Props = MenuProps>
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>(
-  (
-    {
-      className,
-      children,
-      placement = "bottom-end",
-      arrow = false,
-      offset,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ className, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
     if (!context) {
-      console.warn("HeaderMenu has to be wrapped in <HeaderDropdown />");
+      console.warn("Dropdown.Menu has to be wrapped in <Dropdown />");
       return null;
     }
+
     const { isOpen, anchorEl, setIsOpen, dropdownId } = context;
 
     return (
       <Popover
         {...rest}
         ref={ref}
-        placement={placement}
-        arrow={arrow}
-        className={cl("navdsi-dropdown-menu", className)}
-        offset={offset ?? arrow ? 8 : -4}
+        placement="bottom-end"
+        arrow={false}
+        className={cl("navdsi-dropdown__menu", className)}
+        offset={-4}
         anchorEl={anchorEl}
         id={dropdownId}
         open={isOpen}
         onClose={() => setIsOpen(false)}
-      >
-        {children}
-      </Popover>
+      />
     );
   }
 ) as MenuType;

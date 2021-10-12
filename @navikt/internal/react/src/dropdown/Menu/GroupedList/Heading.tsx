@@ -17,7 +17,7 @@ const Heading: HeadingType = forwardRef(({ className, ...rest }, ref) => (
     {...rest}
     ref={ref}
     className={cl(
-      "navdsi-dropdown-menu__list-heading",
+      "navdsi-dropdown__list-heading",
       "navds-heading",
       "navds-heading--xsmall",
       className
