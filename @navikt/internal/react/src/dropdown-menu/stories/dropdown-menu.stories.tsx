@@ -20,18 +20,16 @@ export const All = () => {
       <Router>
         <span ref={(el) => setAnchorEl(el)} />
         <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
-          <DropdownMenu.DescriptionList>
-            <DropdownMenu.DescriptionTerm>
+          <DropdownMenu.GroupedList>
+            <DropdownMenu.GroupedList.Heading>
               Systemer og oppslagsverk
-            </DropdownMenu.DescriptionTerm>
-            <DropdownMenu.DescriptionDetail>
-              Gosys
-            </DropdownMenu.DescriptionDetail>
-          </DropdownMenu.DescriptionList>
+            </DropdownMenu.GroupedList.Heading>
+            <DropdownMenu.GroupedList.Item>Gosys</DropdownMenu.GroupedList.Item>
+          </DropdownMenu.GroupedList>
           <Divider />
           <DropdownMenu.List>
-            <DropdownMenu.Item>Gosys</DropdownMenu.Item>
-            <DropdownMenu.Item>Psys</DropdownMenu.Item>
+            <DropdownMenu.List.Item>Gosys</DropdownMenu.List.Item>
+            <DropdownMenu.List.Item>Psys</DropdownMenu.List.Item>
           </DropdownMenu.List>
         </DropdownMenu>
       </Router>

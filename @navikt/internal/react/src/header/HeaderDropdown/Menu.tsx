@@ -36,9 +36,6 @@ const HeaderDropdownMenu = forwardRef(({ className, ...rest }, ref) => {
 }) as HeaderDropdownMenuType;
 
 HeaderDropdownMenu.List = DropdownMenu.List;
-HeaderDropdownMenu.Item = DropdownMenu.Item;
-HeaderDropdownMenu.DescriptionList = DropdownMenu.DescriptionList;
-HeaderDropdownMenu.DescriptionDetail = DropdownMenu.DescriptionDetail;
-HeaderDropdownMenu.DescriptionTerm = DropdownMenu.DescriptionTerm;
+HeaderDropdownMenu.GroupedList = DropdownMenu.GroupedList;
 
 export default HeaderDropdownMenu;

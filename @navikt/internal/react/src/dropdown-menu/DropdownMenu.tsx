@@ -2,17 +2,8 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Placement } from "@popperjs/core";
 import { Popover, PopoverProps } from "@navikt/ds-react";
-import List, { DropdownMenuListType } from "./List";
-import Item, { DropdownMenuItemType } from "./Item";
-import DescriptionList, {
-  DropdownMenuDescriptionListType,
-} from "./DescriptionList";
-import DescriptionTerm, {
-  DropdownMenuDescriptionTermType,
-} from "./DescriptionTerm";
-import DescriptionDetail, {
-  DropdownMenuDescriptionDetailType,
-} from "./DescriptionDetail";
+import List, { ListType } from "./List";
+import GroupedList, { GroupedListType } from "./GroupedList";
 
 export interface DropdownMenuProps extends PopoverProps {
   /**
@@ -40,11 +31,8 @@ export interface DropdownMenuType<Props = DropdownMenuProps>
   extends React.ForwardRefExoticComponent<
     Props & React.RefAttributes<HTMLDivElement>
   > {
-  List: DropdownMenuListType;
-  Item: DropdownMenuItemType;
-  DescriptionList: DropdownMenuDescriptionListType;
-  DescriptionTerm: DropdownMenuDescriptionTermType;
-  DescriptionDetail: DropdownMenuDescriptionDetailType;
+  List: ListType;
+  GroupedList: GroupedListType;
 }
 
 const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
@@ -73,9 +61,6 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 ) as DropdownMenuType;
 
 DropdownMenu.List = List;
-DropdownMenu.Item = Item;
-DropdownMenu.DescriptionList = DescriptionList;
-DropdownMenu.DescriptionDetail = DescriptionDetail;
-DropdownMenu.DescriptionTerm = DescriptionTerm;
+DropdownMenu.GroupedList = GroupedList;
 
 export default DropdownMenu;

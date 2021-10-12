@@ -51,18 +51,18 @@ export const All = () => (
         </Header.Dropdown.Button>
         <Header.Dropdown.Menu>
           <Header.Dropdown.Menu.List>
-            <Header.Dropdown.Menu.Item>
+            <Header.Dropdown.Menu.List.Item>
               <span>A.Inntekt</span>
               <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
+            </Header.Dropdown.Menu.List.Item>
+            <Header.Dropdown.Menu.List.Item>
               <span>Aa-registeret</span>
               <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
-            <Header.Dropdown.Menu.Item>
+            </Header.Dropdown.Menu.List.Item>
+            <Header.Dropdown.Menu.List.Item>
               <span>Gosys</span>
               <ExternalLink style={{ fontSize: "0.875rem" }} />
-            </Header.Dropdown.Menu.Item>
+            </Header.Dropdown.Menu.List.Item>
           </Header.Dropdown.Menu.List>
         </Header.Dropdown.Menu>
       </Header.Dropdown>
@@ -92,23 +92,23 @@ const Full = () => (
         />
       </Header.Dropdown.Button>
       <Header.Dropdown.Menu>
-        <Header.Dropdown.Menu.DescriptionList>
-          <Header.Dropdown.Menu.DescriptionTerm>
+        <Header.Dropdown.Menu.GroupedList>
+          <Header.Dropdown.Menu.GroupedList.Heading>
             Systemer og oppslagsverk
-          </Header.Dropdown.Menu.DescriptionTerm>
-          <Header.Dropdown.Menu.DescriptionDetail>
+          </Header.Dropdown.Menu.GroupedList.Heading>
+          <Header.Dropdown.Menu.GroupedList.Item>
             <span>A.Inntekt</span>
             <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.DescriptionDetail>
-          <Header.Dropdown.Menu.DescriptionDetail>
+          </Header.Dropdown.Menu.GroupedList.Item>
+          <Header.Dropdown.Menu.GroupedList.Item>
             <span>Aa-registeret</span>
             <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.DescriptionDetail>
-          <Header.Dropdown.Menu.DescriptionDetail>
+          </Header.Dropdown.Menu.GroupedList.Item>
+          <Header.Dropdown.Menu.GroupedList.Item>
             <span>Gosys</span>
             <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.DescriptionDetail>
-        </Header.Dropdown.Menu.DescriptionList>
+          </Header.Dropdown.Menu.GroupedList.Item>
+        </Header.Dropdown.Menu.GroupedList>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
     <Header.Dropdown>
@@ -118,9 +118,11 @@ const Full = () => (
       />
       <Header.Dropdown.Menu>
         <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+          <Header.Dropdown.Menu.List.Item
+            onClick={() => console.log("logg ut")}
+          >
             Logg ut
-          </Header.Dropdown.Menu.Item>
+          </Header.Dropdown.Menu.List.Item>
         </Header.Dropdown.Menu.List>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
@@ -149,12 +151,14 @@ const Initials = () => (
         </div>
         <Divider />
         <Header.Dropdown.Menu.List>
-          <Header.Dropdown.Menu.Item as="a" href="/#settings">
+          <Header.Dropdown.Menu.List.Item as="a" href="/#settings">
             Innstillinger
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
+          </Header.Dropdown.Menu.List.Item>
+          <Header.Dropdown.Menu.List.Item
+            onClick={() => console.log("logg ut")}
+          >
             Logg ut
-          </Header.Dropdown.Menu.Item>
+          </Header.Dropdown.Menu.List.Item>
         </Header.Dropdown.Menu.List>
       </Header.Dropdown.Menu>
     </Header.Dropdown>
