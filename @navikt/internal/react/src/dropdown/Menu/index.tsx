@@ -1,7 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { Placement } from "@popperjs/core";
-import { Popover, PopoverProps } from "@navikt/ds-react";
+import { Popover } from "@navikt/ds-react";
 import List, { ListType } from "./List";
 import GroupedList, { GroupedListType } from "./GroupedList";
 import { DropdownContext } from "../Dropdown";
