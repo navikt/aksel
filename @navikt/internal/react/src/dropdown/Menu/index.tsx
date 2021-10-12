@@ -29,7 +29,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
       return null;
     }
 
-    const { isOpen, anchorEl, setIsOpen, dropdownId } = context;
+    const { isOpen, anchorEl, setIsOpen } = context;
 
     return (
       <Popover
@@ -40,7 +40,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
         className={cl("navdsi-dropdown__menu", className)}
         offset={-4}
         anchorEl={anchorEl}
-        id={dropdownId}
         open={isOpen}
         onClose={() => setIsOpen(false)}
       />
