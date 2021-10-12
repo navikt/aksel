@@ -84,33 +84,27 @@ export const All = () => (
 const Full = () => (
   <Header>
     <Header.Title href="/#home">NAV Sykepenger</Header.Title>
-    <Header.Dropdown>
-      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+
+    <Dropdown>
+      <Header.ActionButton style={{ marginLeft: "auto" }}>
         <System
           style={{ fontSize: "1.5rem" }}
           title="Systemer og oppslagsverk"
         />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
-        <Header.Dropdown.Menu.GroupedList>
-          <Header.Dropdown.Menu.GroupedList.Heading>
+      </Header.ActionButton>
+
+      <Dropdown.Menu>
+        <Dropdown.Menu.GroupedList>
+          <Dropdown.Menu.GroupedList.Heading>
             Systemer og oppslagsverk
-          </Header.Dropdown.Menu.GroupedList.Heading>
-          <Header.Dropdown.Menu.GroupedList.Item>
-            <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.GroupedList.Item>
-          <Header.Dropdown.Menu.GroupedList.Item>
-            <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.GroupedList.Item>
-          <Header.Dropdown.Menu.GroupedList.Item>
-            <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.GroupedList.Item>
-        </Header.Dropdown.Menu.GroupedList>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
+          </Dropdown.Menu.GroupedList.Heading>
+          <Dropdown.Menu.GroupedList.Item>
+            A.Inntekt
+          </Dropdown.Menu.GroupedList.Item>
+        </Dropdown.Menu.GroupedList>
+      </Dropdown.Menu>
+    </Dropdown>
+
     <Header.Dropdown>
       <Header.Dropdown.UserButton
         name="Kong Harald"

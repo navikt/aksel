@@ -17,22 +17,25 @@ export const All = () => {
       <Heading level="1" size="xlarge">
         Dropdown menu
       </Heading>
-      <Router>
-        <span ref={(el) => setAnchorEl(el)} />
-        <DropdownMenu open onClose={() => {}} anchorEl={anchorEl}>
-          <DropdownMenu.GroupedList>
-            <DropdownMenu.GroupedList.Heading>
+      <Dropdown>
+        <Dropdown.Toggle>Toggle</Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Menu.GroupedList>
+            <Dropdown.Menu.GroupedList.Heading>
               Systemer og oppslagsverk
-            </DropdownMenu.GroupedList.Heading>
-            <DropdownMenu.GroupedList.Item>Gosys</DropdownMenu.GroupedList.Item>
-          </DropdownMenu.GroupedList>
+            </Dropdown.Menu.GroupedList.Heading>
+            <Dropdown.Menu.GroupedList.Item>
+              Gosys
+            </Dropdown.Menu.GroupedList.Item>
+          </Dropdown.Menu.GroupedList>
           <Divider />
-          <DropdownMenu.List>
-            <DropdownMenu.List.Item>Gosys</DropdownMenu.List.Item>
-            <DropdownMenu.List.Item>Psys</DropdownMenu.List.Item>
-          </DropdownMenu.List>
-        </DropdownMenu>
-      </Router>
+          <Dropdown.Menu.List>
+            <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
     </>
   );
 };
