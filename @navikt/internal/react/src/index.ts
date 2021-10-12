@@ -1,3 +1,3 @@
 export * from "./divider";
-export * from "./dropdown-menu";
+export * from "./dropdown";
 export * from "./header";

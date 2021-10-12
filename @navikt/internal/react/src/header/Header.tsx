@@ -1,7 +1,8 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import HeaderTitle, { HeaderTitleType } from "./HeaderTitle";
 import HeaderUser, { HeaderUserType } from "./HeaderUser";
-import HeaderDropdown, { HeaderDropdownType } from "./HeaderDropdown";
+import HeaderButton, { HeaderButtonType } from "./HeaderButton";
+import HeaderUserButton, { HeaderUserButtonType } from "./HeaderUserButton";
 import cl from "classnames";
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
@@ -17,7 +18,8 @@ interface HeaderComponent
   > {
   Title: HeaderTitleType;
   User: HeaderUserType;
-  Dropdown: HeaderDropdownType;
+  Button: HeaderButtonType;
+  UserButton: HeaderUserButtonType;
 }
 
 const Header = forwardRef(({ className, ...rest }, ref) => (
@@ -26,6 +28,7 @@ const Header = forwardRef(({ className, ...rest }, ref) => (
 
 Header.Title = HeaderTitle;
 Header.User = HeaderUser;
-Header.Dropdown = HeaderDropdown;
+Header.Button = HeaderButton;
+Header.UserButton = HeaderUserButton;
 
 export default Header;

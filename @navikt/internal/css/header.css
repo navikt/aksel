@@ -40,7 +40,7 @@ button.navdsi-header__title {
   align-items: center;
 }
 
-.navdsi-header__dropdown-button {
+.navdsi-header__button {
   border: none;
   margin: 0;
   padding: 0 var(--navds-spacing-3);
@@ -60,23 +60,23 @@ button.navdsi-header__title {
 
 a.navdsi-header__title:hover,
 button.navdsi-header__title:hover,
-.navdsi-header__dropdown-button:hover {
+.navdsi-header__button:hover {
   background-color: var(--navds-color-gray-80);
 }
 
 .navdsi-header__title:focus,
-.navdsi-header__dropdown-button:focus {
+.navdsi-header__button:focus {
   box-shadow: var(--navdsi-header-focus);
   outline: none;
 }
 
 a.navdsi-header__title:active,
 button.navdsi-header__title:active,
-.navdsi-header__dropdown-button:active {
+.navdsi-header__button:active {
   background-color: var(--navds-color-gray-60);
 }
 
-.navdsi-header__dropdown-user-button {
+.navdsi-header__user-button {
   padding-left: var(--navds-spacing-5);
   gap: var(--navds-spacing-4);
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System, ExternalLink } from "@navikt/ds-icons";
-import { Divider } from "../..";
+import { Divider, Dropdown } from "../..";
 
 export default {
   title: "ds-react-internal/header",
@@ -42,28 +42,30 @@ export const All = () => (
     </Heading>
     <Header>
       <Header.Title href="/#home">NAV Sykepenger</Header.Title>
-      <Header.Dropdown>
-        <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+      <Dropdown>
+        <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
           <System
             style={{ fontSize: "1.5rem" }}
             title="Systemer og oppslagsverk"
           />
-        </Header.Dropdown.Button>
-        <Header.Dropdown.Menu>
-          <Header.Dropdown.Menu.Item>
-            <span>A.Inntekt</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Aa-registeret</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-          <Header.Dropdown.Menu.Item>
-            <span>Gosys</span>
-            <ExternalLink style={{ fontSize: "0.875rem" }} />
-          </Header.Dropdown.Menu.Item>
-        </Header.Dropdown.Menu>
-      </Header.Dropdown>
+        </Header.Button>
+        <Dropdown.Menu>
+          <Dropdown.Menu.List>
+            <Dropdown.Menu.List.Item>
+              <span>A.Inntekt</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item>
+              <span>Aa-registeret</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item>
+              <span>Gosys</span>
+              <ExternalLink style={{ fontSize: "0.875rem" }} />
+            </Dropdown.Menu.List.Item>
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
       <Header.User name="Kong Harald" description="D123456" />
     </Header>
 
@@ -82,56 +84,55 @@ export const All = () => (
 const Full = () => (
   <Header>
     <Header.Title href="/#home">NAV Sykepenger</Header.Title>
-    <Header.Dropdown>
-      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+
+    <Dropdown>
+      <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
         <System
           style={{ fontSize: "1.5rem" }}
           title="Systemer og oppslagsverk"
         />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
-        <Heading size="xsmall" as="div">
-          Systemer og oppslagsverk
-        </Heading>
-        <Header.Dropdown.Menu.Item>
-          <span>A.Inntekt</span>
-          <ExternalLink style={{ fontSize: "0.875rem" }} />
-        </Header.Dropdown.Menu.Item>
-        <Header.Dropdown.Menu.Item>
-          <span>Aa-registeret</span>
-          <ExternalLink style={{ fontSize: "0.875rem" }} />
-        </Header.Dropdown.Menu.Item>
-        <Header.Dropdown.Menu.Item>
-          <span>Gosys</span>
-          <ExternalLink style={{ fontSize: "0.875rem" }} />
-        </Header.Dropdown.Menu.Item>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
-    <Header.Dropdown>
-      <Header.Dropdown.UserButton
+      </Header.Button>
+
+      <Dropdown.Menu>
+        <Dropdown.Menu.GroupedList>
+          <Dropdown.Menu.GroupedList.Heading>
+            Systemer og oppslagsverk
+          </Dropdown.Menu.GroupedList.Heading>
+          <Dropdown.Menu.GroupedList.Item>
+            A.Inntekt
+          </Dropdown.Menu.GroupedList.Item>
+        </Dropdown.Menu.GroupedList>
+      </Dropdown.Menu>
+    </Dropdown>
+
+    <Dropdown>
+      <Header.UserButton
+        as={Dropdown.Toggle}
         name="Kong Harald"
         description="Enhet: Skien"
       />
-      <Header.Dropdown.Menu>
-        <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-          Logg ut
-        </Header.Dropdown.Menu.Item>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
+      <Dropdown.Menu>
+        <Dropdown.Menu.List>
+          <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
+            Logg ut
+          </Dropdown.Menu.List.Item>
+        </Dropdown.Menu.List>
+      </Dropdown.Menu>
+    </Dropdown>
   </Header>
 );
 
 const Initials = () => (
   <Header>
     <Header.Title href="/#home">NAV Sykepenger</Header.Title>
-    <Header.Dropdown>
-      <Header.Dropdown.Button style={{ marginLeft: "auto" }}>
+    <Dropdown>
+      <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
         <BodyShort size="small" title="Kong Harald">
           KH
         </BodyShort>
         <Expand />
-      </Header.Dropdown.Button>
-      <Header.Dropdown.Menu>
+      </Header.Button>
+      <Dropdown.Menu>
         <div>
           <BodyLong size="small" as="div">
             Kong Harald 16px
@@ -142,13 +143,15 @@ const Initials = () => (
           </Detail>
         </div>
         <Divider />
-        <Header.Dropdown.Menu.Item as="a" href="/#settings">
-          Innstillinger
-        </Header.Dropdown.Menu.Item>
-        <Header.Dropdown.Menu.Item onClick={() => console.log("logg ut")}>
-          Logg ut
-        </Header.Dropdown.Menu.Item>
-      </Header.Dropdown.Menu>
-    </Header.Dropdown>
+        <Dropdown.Menu.List>
+          <Dropdown.Menu.List.Item as="a" href="/#settings">
+            Innstillinger
+          </Dropdown.Menu.List.Item>
+          <Dropdown.Menu.List.Item onClick={() => console.log("logg ut")}>
+            Logg ut
+          </Dropdown.Menu.List.Item>
+        </Dropdown.Menu.List>
+      </Dropdown.Menu>
+    </Dropdown>
   </Header>
 );
