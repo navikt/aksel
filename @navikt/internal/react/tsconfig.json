@@ -2,6 +2,8 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./cjs",
-    "module": "commonjs"
+    "module": "commonjs",
+    "jsx": "react",
+    "esModuleInterop": true
   }
 }

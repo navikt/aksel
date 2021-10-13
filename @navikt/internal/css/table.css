@@ -1,0 +1,23 @@
+.navdsi-table {
+  border-collapse: collapse;
+  width: 100%;
+  display: table;
+}
+
+.navdsi-table__header {
+  display: table-header-group;
+}
+
+.navdsi-table__body {
+  display: table-row-group;
+}
+
+.navdsi-table__row {
+  display: table-row;
+}
+
+.navdsi-table__cell {
+  display: table-cell;
+  padding: var(--navds-spacing-4);
+  text-align: left;
+}
