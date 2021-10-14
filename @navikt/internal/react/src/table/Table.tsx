@@ -8,12 +8,13 @@ import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
 
+type TableVariant = "zebra" | "vertical";
 export interface TableProps extends HTMLAttributes<HTMLTableElement> {
   /**
    * Changes design and interactions
-   * @default "simple"
+   * @default []
    */
-  variant?: "simple" | "zebra" | "verticalStripes";
+  variants?: TableVariant[];
   /**
    * Changes padding, height and font-size
    * @default "medium"
@@ -29,24 +30,27 @@ export interface TableType
   Body: BodyType;
 }
 
+const getVariantClassNames = (variants?: TableVariant[]) => {
+  return variants?.map((variant) => `navdsi-table--${variant}`).join(" ") ?? "";
+};
+
 const Table = forwardRef(
-  (
-    { variant = "simple", className, children, size = "medium", ...rest },
-    ref
-  ) => (
-    <table
-      {...rest}
-      ref={ref}
-      className={cl(
-        "navdsi-table",
-        `navdsi-table--${variant}`,
-        `navdsi-table--${size}`,
-        className
-      )}
-    >
-      {children}
-    </table>
-  )
+  ({ variants, className, children, size = "medium", ...rest }, ref) => {
+    return (
+      <table
+        {...rest}
+        ref={ref}
+        className={cl(
+          "navdsi-table",
+          getVariantClassNames(variants),
+          `navdsi-table--${size}`,
+          className
+        )}
+      >
+        {children}
+      </table>
+    );
+  }
 ) as TableType;
 
 Table.Header = Header;
