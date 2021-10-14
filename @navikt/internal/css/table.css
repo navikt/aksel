@@ -20,4 +20,13 @@
   display: table-cell;
   padding: var(--navds-spacing-4);
   text-align: left;
+  border-bottom: 1px solid #a0a0a0;
+}
+
+.navdsi-table--small .navdsi-table__cell {
+  padding: var(--navds-spacing-2);
+}
+
+.navdsi-table--zebra .navdsi-table__body .navdsi-table__row:nth-child(2n + 1) {
+  background-color: #f7f7f7;
 }
