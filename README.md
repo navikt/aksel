@@ -18,7 +18,7 @@
 
 ## Innhold
 
-Dette repoet inneholder følgende:
+Repoet inneholder følgende:
 
 - [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk forvaltet av designsystemet
 - [Felleskomponenter V2 (WIP)](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/) oppdaterte og scopede pakker for en bedre brukeropplevelse
