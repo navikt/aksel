@@ -5,13 +5,15 @@ import React, {
   RefAttributes,
 } from "react";
 import cl from "classnames";
-import Cell from "./Cell";
+import Cell, { CellType } from "./Cell";
+import HeaderCell, { HeaderCellType } from "./HeaderCell";
 
 export interface RowType
   extends ForwardRefExoticComponent<
     HTMLAttributes<HTMLTableRowElement> & RefAttributes<HTMLTableRowElement>
   > {
-  Cell: React.ReactNode;
+  Cell: CellType;
+  HeaderCell: HeaderCellType;
 }
 
 const Row = forwardRef(({ className, children, ...rest }, ref) => {
@@ -19,5 +21,6 @@ const Row = forwardRef(({ className, children, ...rest }, ref) => {
 }) as RowType;
 
 Row.Cell = Cell;
+Row.HeaderCell = HeaderCell;
 
 export default Row;

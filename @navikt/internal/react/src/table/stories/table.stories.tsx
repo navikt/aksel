@@ -12,30 +12,30 @@ export const All = () => {
       <Table>
         <Table.Header>
           <Table.Header.Row>
-            <th>ID</th>
-            <th>Fornavn</th>
-            <th>Etternavn</th>
-            <th>Rolle</th>
+            <Table.Body.Row.HeaderCell>ID</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.HeaderCell>Fornavn</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.HeaderCell>Etternavn</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.HeaderCell>Rolle</Table.Body.Row.HeaderCell>
           </Table.Header.Row>
         </Table.Header>
         <Table.Body>
           <Table.Body.Row>
-            <th>1</th>
-            <td>Jean-Luc</td>
-            <td>Picard</td>
-            <td>Kaptein</td>
+            <Table.Body.Row.HeaderCell>1</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.Cell>Jean-Luc</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>Picard</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>Kaptein</Table.Body.Row.Cell>
           </Table.Body.Row>
           <Table.Body.Row>
-            <th>2</th>
-            <td>William</td>
-            <td>Riker</td>
-            <td>Kommandør</td>
+            <Table.Body.Row.HeaderCell>2</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.Cell>William</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>Riker</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>Kommandør</Table.Body.Row.Cell>
           </Table.Body.Row>
           <Table.Body.Row>
-            <th>3</th>
-            <td>Geordi</td>
-            <td>La Forge</td>
-            <td>Sjefsingeniør</td>
+            <Table.Body.Row.HeaderCell>3</Table.Body.Row.HeaderCell>
+            <Table.Body.Row.Cell>Geordi</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>La Forge</Table.Body.Row.Cell>
+            <Table.Body.Row.Cell>Sjefsingeniør</Table.Body.Row.Cell>
           </Table.Body.Row>
         </Table.Body>
       </Table>

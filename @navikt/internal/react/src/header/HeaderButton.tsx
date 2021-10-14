@@ -2,6 +2,8 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "@navikt/ds-react";
 
+// TODO: Hvorfor extender ikke denne forwardRefExoticComponent
+
 export interface HeaderButtonProps
   extends React.AnchorHTMLAttributes<HTMLButtonElement> {
   /**
