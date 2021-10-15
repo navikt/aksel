@@ -6,16 +6,16 @@ import React, {
 } from "react";
 import cl from "classnames";
 
-export interface HeaderType
+export interface BodyType
   extends ForwardRefExoticComponent<
     HTMLAttributes<HTMLTableSectionElement> &
       RefAttributes<HTMLTableSectionElement>
   > {}
 
-const Header = forwardRef(({ className, children, ...rest }, ref) => {
+const Body = forwardRef(({ className, children, ...rest }, ref) => {
   return (
-    <thead className={cl("navdsi-table__header", className)}>{children}</thead>
+    <tbody className={cl("navds-table__body", className)}>{children}</tbody>
   );
-}) as HeaderType;
+}) as BodyType;
 
-export default Header;
+export default Body;

@@ -1,28 +1,28 @@
-.navdsi-table {
+.navds-table {
   border-collapse: collapse;
   width: 100%;
   display: table;
 }
 
-.navdsi-table__header {
+.navds-table__header {
   display: table-header-group;
 }
 
-.navdsi-table__body {
+.navds-table__body {
   display: table-row-group;
 }
 
-.navdsi-table__row {
+.navds-table__row {
   display: table-row;
 }
 
-.navdsi-table__cell {
+.navds-table__cell {
   display: table-cell;
   padding: var(--navds-spacing-4);
   text-align: left;
   border-bottom: 1px solid #a0a0a0;
 }
 
-.navdsi-table--small .navdsi-table__cell {
+.navds-table--small .navds-table__cell {
   padding: var(--navds-spacing-2);
 }

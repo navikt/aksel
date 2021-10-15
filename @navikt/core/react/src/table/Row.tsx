@@ -17,7 +17,7 @@ export interface RowType
 }
 
 const Row = forwardRef(({ className, children, ...rest }, ref) => {
-  return <tr className={cl("navdsi-table__row", className)}>{children}</tr>;
+  return <tr className={cl("navds-table__row", className)}>{children}</tr>;
 }) as RowType;
 
 Row.Cell = Cell;

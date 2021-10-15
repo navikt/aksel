@@ -1,9 +1,9 @@
 import React from "react";
-import Table from "../Table";
+import { Table } from "../index";
 import { Alert, Link } from "@navikt/ds-react";
 
 export default {
-  title: "ds-react-internal/table",
+  title: "ds-react/table",
   component: Table,
 };
 
@@ -84,51 +84,51 @@ export const All = () => {
         mulig, da nettleseren ikke kan tolke tabellen like bra uten riktig
         markup.
       </Alert>
-      <div className="navdsi-table navdsi-table--zebra" role="table">
-        <div className="navdsi-table__header" role="rowgroup">
-          <div className="navdsi-table__row" role="row">
-            <div className="navdsi-table__cell" role="columnheader">
+      <div className="navds-table navds-table--zebra" role="table">
+        <div className="navds-table__header" role="rowgroup">
+          <div className="navds-table__row" role="row">
+            <div className="navds-table__cell" role="columnheader">
               ID
             </div>
-            <div className="navdsi-table__cell" role="columnheader">
+            <div className="navds-table__cell" role="columnheader">
               Fornavn
             </div>
-            <div className="navdsi-table__cell" role="columnheader">
+            <div className="navds-table__cell" role="columnheader">
               Etternavn
             </div>
           </div>
         </div>
-        <div className="navdsi-table__body" role="rowgroup">
-          <div className="navdsi-table__row" role="row">
-            <div className="navdsi-table__cell" role="cell">
+        <div className="navds-table__body" role="rowgroup">
+          <div className="navds-table__row" role="row">
+            <div className="navds-table__cell" role="cell">
               Jean-Luc
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               Picard
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               Kaptein
             </div>
           </div>
-          <div className="navdsi-table__row" role="row">
-            <div className="navdsi-table__cell" role="cell">
+          <div className="navds-table__row" role="row">
+            <div className="navds-table__cell" role="cell">
               William
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               Riker
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               Kommandør
             </div>
           </div>
-          <div className="navdsi-table__row" role="row">
-            <div className="navdsi-table__cell" role="cell">
+          <div className="navds-table__row" role="row">
+            <div className="navds-table__cell" role="cell">
               Geordi
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               La Forge
             </div>
-            <div className="navdsi-table__cell" role="cell">
+            <div className="navds-table__cell" role="cell">
               Sjefsingeniør
             </div>
           </div>

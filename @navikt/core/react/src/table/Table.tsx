@@ -36,7 +36,7 @@ const Table = forwardRef(
       <table
         {...rest}
         ref={ref}
-        className={cl("navdsi-table", `navdsi-table--${size}`, className)}
+        className={cl("navds-table", `navds-table--${size}`, className)}
       >
         {children}
       </table>

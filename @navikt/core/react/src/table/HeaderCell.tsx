@@ -6,15 +6,15 @@ import React, {
 } from "react";
 import cl from "classnames";
 
-export interface DataCellType
+export interface HeaderCellType
   extends ForwardRefExoticComponent<
     HTMLAttributes<HTMLTableCellElement> & RefAttributes<HTMLTableCellElement>
   > {}
 
-const DataCell: DataCellType = forwardRef(
+const HeaderCell: HeaderCellType = forwardRef(
   ({ className, children, ...rest }, ref) => {
-    return <td className={cl("navdsi-table__cell", className)}>{children}</td>;
+    return <th className={cl("navds-table__cell", className)}>{children}</th>;
   }
 );
 
-export default DataCell;
+export default HeaderCell;
