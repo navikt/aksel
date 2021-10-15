@@ -27,30 +27,6 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: install
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: postinstall
-        if: steps.node-cache.outputs.cache-hit == 'true'
-        run: yarn postinstall
-      - name: Boot
-        run: yarn boot
-      - name: Eslint and Stylelint
-        run: yarn lint
-      - name: Test
-        run: yarn test
-      - name: add access token to .env
-        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
-      - name: add branch token to .env
-        run: echo "BRANCH=HEAD" >> website/.env
-      - name: Test gatsby-build (design.nav.no)
-        run: yarn build:gatsby
-      - name: Test chromatic
-        uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GIT_REPO }}
-          projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: true
 
   publish-npm:
     needs: test-build
