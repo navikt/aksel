@@ -73,7 +73,7 @@ jobs:
         run: yarn lerna version major --include-merged-tags --yes
       - name: Publish to NPM registry
         run: |
-          yarn lerna publish from-package --yes
+          yarn lerna publish --no-verify-access from-package --yes
           rm .npmrc
 
       - name: Create a .npmrc file for the github package repository
@@ -89,7 +89,7 @@ jobs:
           yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
-    needs: test-build
+    needs: publish-npm
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
