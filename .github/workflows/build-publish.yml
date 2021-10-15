@@ -93,11 +93,9 @@ jobs:
       - name: Update changed packages with MAJOR
         if: "contains(github.event.head_commit.message, '[breaking]')"
         run: yarn lerna version major --include-merged-tags --yes
-
       - name: Create a .npmrc file for NPM
         run: |
-          echo "//registry=https://registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          echo "//registry=https://registry.npmjs.org/:always-auth=true" >> .npmrc
+          echo "//https://registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
           npm whoami
         env:
           NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
@@ -105,6 +103,7 @@ jobs:
         run: |
           yarn lerna publish from-package --yes
           rm .npmrc
+
       - name: Create a .npmrc file for the github package repository
         uses: FerLuisxd/create-npmrc@3
         with:
