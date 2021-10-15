@@ -222,7 +222,7 @@ const RoadmapTable = () => (
     </Table.Header>
     <Table.Body>
       <Table.Row>
-        <Table.HeaderCell>Nye komponenter</Table.HeaderCell>
+        <Table.HeaderCell>NYTT</Table.HeaderCell>
         <Table.HeaderCell>
           <span>-</span>
         </Table.HeaderCell>
