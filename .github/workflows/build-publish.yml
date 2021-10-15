@@ -71,7 +71,6 @@ jobs:
       - name: Update changed packages with MAJOR
         if: "contains(github.event.head_commit.message, '[breaking]')"
         run: yarn lerna version major --include-merged-tags --yes
-      - name: Create a .npmrc file for NPM
       - name: Publish to NPM registry
         run: |
           yarn lerna publish from-package --yes
