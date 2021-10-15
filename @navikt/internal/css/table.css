@@ -26,13 +26,3 @@
 .navdsi-table--small .navdsi-table__cell {
   padding: var(--navds-spacing-2);
 }
-
-.navdsi-table--zebra .navdsi-table__body .navdsi-table__row:nth-child(2n + 1) {
-  background-color: #f7f7f7;
-}
-
-.navdsi-table--vertical
-  .navdsi-table__body
-  .navdsi-table__cell:not(:last-of-type) {
-  border-right: 1px solid #a0a0a0;
-}

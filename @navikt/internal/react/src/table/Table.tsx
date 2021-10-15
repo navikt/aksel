@@ -13,16 +13,6 @@ import DataCell, { DataCellType } from "./DataCell";
 
 export interface TableProps extends HTMLAttributes<HTMLTableElement> {
   /**
-   * Changes background color on every second row
-   * @default false
-   */
-  zebraStyle?: boolean;
-  /**
-   * Adds vertical lines to the table body
-   * @default false
-   */
-  verticalLines?: boolean;
-  /**
    * Changes padding
    * @default "medium"
    */
@@ -41,28 +31,12 @@ export interface TableType
 }
 
 const Table = forwardRef(
-  (
-    {
-      verticalLines = false,
-      zebraStyle = false,
-      className,
-      children,
-      size = "medium",
-      ...rest
-    },
-    ref
-  ) => {
+  ({ className, children, size = "medium", ...rest }, ref) => {
     return (
       <table
         {...rest}
         ref={ref}
-        className={cl(
-          "navdsi-table",
-          { "navdsi-table--zebra": zebraStyle },
-          { "navdsi-table--vertical": verticalLines },
-          `navdsi-table--${size}`,
-          className
-        )}
+        className={cl("navdsi-table", `navdsi-table--${size}`, className)}
       >
         {children}
       </table>
