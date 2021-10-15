@@ -27,6 +27,30 @@ jobs:
         with:
           path: "**/node_modules"
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: postinstall
+        if: steps.node-cache.outputs.cache-hit == 'true'
+        run: yarn postinstall
+      - name: Boot
+        run: yarn boot
+      - name: Eslint and Stylelint
+        run: yarn lint
+      - name: Test
+        run: yarn test
+      - name: add access token to .env
+        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
+      - name: add branch token to .env
+        run: echo "BRANCH=HEAD" >> website/.env
+      - name: Test gatsby-build (design.nav.no)
+        run: yarn build:gatsby
+      - name: Test chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GIT_REPO }}
+          projectToken: ${{ secrets.CHROMATIC }}
+          exitZeroOnChanges: true
 
   publish-npm:
     needs: test-build
@@ -72,9 +96,7 @@ jobs:
         if: "contains(github.event.head_commit.message, '[breaking]')"
         run: yarn lerna version major --include-merged-tags --yes
       - name: Publish to NPM registry
-        run: |
-          yarn lerna publish --no-verify-access from-package --yes
-          rm .npmrc
+        run: yarn lerna publish --no-verify-access from-package --yes
 
       - name: Create a .npmrc file for the github package repository
         uses: FerLuisxd/create-npmrc@3
@@ -89,7 +111,7 @@ jobs:
           yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:
-    needs: publish-npm
+    needs: test-build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
