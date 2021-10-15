@@ -31,13 +31,15 @@ jobs:
   publish-npm:
     needs: test-build
     runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
     if: github.event_name == 'push' && contains(github.event.head_commit.message, '[fix]') || contains(github.event.head_commit.message, '[feature]') || contains(github.event.head_commit.message, '[breaking]')
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: "0"
           token: ${{secrets.GIT_REPO}}
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
           registry-url: https://registry.npmjs.org
           node-version: 14
@@ -70,11 +72,6 @@ jobs:
         if: "contains(github.event.head_commit.message, '[breaking]')"
         run: yarn lerna version major --include-merged-tags --yes
       - name: Create a .npmrc file for NPM
-        run: |
-          echo "//https://registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
-          npm whoami
-        env:
-          NPM_TOKEN: ${{secrets.NPM_AUTOMATION}}
       - name: Publish to NPM registry
         run: |
           yarn lerna publish from-package --yes
