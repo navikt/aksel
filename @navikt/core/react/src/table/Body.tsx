@@ -1,21 +1,15 @@
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  RefAttributes,
-} from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
 
+interface BodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+
 export interface BodyType
-  extends ForwardRefExoticComponent<
-    HTMLAttributes<HTMLTableSectionElement> &
-      RefAttributes<HTMLTableSectionElement>
+  extends React.ForwardRefExoticComponent<
+    BodyProps & React.RefAttributes<HTMLTableSectionElement>
   > {}
 
-const Body = forwardRef(({ className, children, ...rest }, ref) => {
-  return (
-    <tbody className={cl("navds-table__body", className)}>{children}</tbody>
-  );
-}) as BodyType;
+const Body: BodyType = forwardRef(({ className, ...rest }, ref) => (
+  <tbody {...rest} ref={ref} className={cl("navds-table__body", className)} />
+));
 
 export default Body;

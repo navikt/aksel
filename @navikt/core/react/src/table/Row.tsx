@@ -1,26 +1,15 @@
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  RefAttributes,
-} from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
-import Cell, { CellType } from "./DataCell";
-import HeaderCell, { HeaderCellType } from "./HeaderCell";
+
+interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {}
 
 export interface RowType
-  extends ForwardRefExoticComponent<
-    HTMLAttributes<HTMLTableRowElement> & RefAttributes<HTMLTableRowElement>
-  > {
-  Cell: CellType;
-  HeaderCell: HeaderCellType;
-}
+  extends React.ForwardRefExoticComponent<
+    RowProps & React.RefAttributes<HTMLTableRowElement>
+  > {}
 
-const Row = forwardRef(({ className, children, ...rest }, ref) => {
-  return <tr className={cl("navds-table__row", className)}>{children}</tr>;
-}) as RowType;
-
-Row.Cell = Cell;
-Row.HeaderCell = HeaderCell;
+const Row: RowType = forwardRef(({ className, ...rest }, ref) => (
+  <tr {...rest} ref={ref} className={cl("navds-table__row", className)} />
+));
 
 export default Row;

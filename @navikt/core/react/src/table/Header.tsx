@@ -1,21 +1,15 @@
-import React, {
-  forwardRef,
-  ForwardRefExoticComponent,
-  HTMLAttributes,
-  RefAttributes,
-} from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
 
+interface HeaderProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+
 export interface HeaderType
-  extends ForwardRefExoticComponent<
-    HTMLAttributes<HTMLTableSectionElement> &
-      RefAttributes<HTMLTableSectionElement>
+  extends React.ForwardRefExoticComponent<
+    HeaderProps & React.RefAttributes<HTMLTableSectionElement>
   > {}
 
-const Header = forwardRef(({ className, children, ...rest }, ref) => {
-  return (
-    <thead className={cl("navds-table__header", className)}>{children}</thead>
-  );
-}) as HeaderType;
+const Header: HeaderType = forwardRef(({ className, ...rest }, ref) => (
+  <thead {...rest} ref={ref} className={cl("navds-table__header", className)} />
+));
 
 export default Header;

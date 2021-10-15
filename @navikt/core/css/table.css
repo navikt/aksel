@@ -20,7 +20,7 @@
   display: table-cell;
   padding: var(--navds-spacing-4);
   text-align: left;
-  border-bottom: 1px solid #a0a0a0;
+  border-bottom: var(--navds-border-default);
 }
 
 .navds-table--small .navds-table__cell {
