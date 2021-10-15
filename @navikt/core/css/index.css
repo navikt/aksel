@@ -19,6 +19,7 @@
 @import "panel.css";
 @import "link-panel.css";
 @import "speech-bubble.css";
+@import "table.css";
 
 /* Navno spesific packages */
 @import "page-header.css";
