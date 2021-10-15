@@ -12,125 +12,125 @@ export const All = () => {
       <h1>Table</h1>
       <Table>
         <Table.Header>
-          <Table.Header.Row>
-            <Table.Body.Row.HeaderCell>ID</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Fornavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Etternavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Rolle</Table.Body.Row.HeaderCell>
-          </Table.Header.Row>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>Fornavn</Table.HeaderCell>
+            <Table.HeaderCell>Etternavn</Table.HeaderCell>
+            <Table.HeaderCell>Rolle</Table.HeaderCell>
+          </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>1</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>Jean-Luc</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Picard</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kaptein</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>2</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>William</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Riker</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kommandør</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>3</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>Geordi</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>La Forge</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Sjefsingeniør</Table.Body.Row.Cell>
-          </Table.Body.Row>
+          <Table.Row>
+            <Table.HeaderCell>1</Table.HeaderCell>
+            <Table.DataCell>Jean-Luc</Table.DataCell>
+            <Table.DataCell>Picard</Table.DataCell>
+            <Table.DataCell>Kaptein</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell>2</Table.HeaderCell>
+            <Table.DataCell>William</Table.DataCell>
+            <Table.DataCell>Riker</Table.DataCell>
+            <Table.DataCell>Kommandør</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell>3</Table.HeaderCell>
+            <Table.DataCell>Geordi</Table.DataCell>
+            <Table.DataCell>La Forge</Table.DataCell>
+            <Table.DataCell>Sjefsingeniør</Table.DataCell>
+          </Table.Row>
         </Table.Body>
       </Table>
       <h2>Small Table</h2>
       <Table size="small">
         <Table.Header>
-          <Table.Header.Row>
-            <Table.Body.Row.HeaderCell>ID</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Fornavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Etternavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Rolle</Table.Body.Row.HeaderCell>
-          </Table.Header.Row>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>Fornavn</Table.HeaderCell>
+            <Table.HeaderCell>Etternavn</Table.HeaderCell>
+            <Table.HeaderCell>Rolle</Table.HeaderCell>
+          </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>1</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>Jean-Luc</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Picard</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kaptein</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>2</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>William</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Riker</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kommandør</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.HeaderCell>3</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.Cell>Geordi</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>La Forge</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Sjefsingeniør</Table.Body.Row.Cell>
-          </Table.Body.Row>
+          <Table.Row>
+            <Table.HeaderCell>1</Table.HeaderCell>
+            <Table.DataCell>Jean-Luc</Table.DataCell>
+            <Table.DataCell>Picard</Table.DataCell>
+            <Table.DataCell>Kaptein</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell>2</Table.HeaderCell>
+            <Table.DataCell>William</Table.DataCell>
+            <Table.DataCell>Riker</Table.DataCell>
+            <Table.DataCell>Kommandør</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.HeaderCell>3</Table.HeaderCell>
+            <Table.DataCell>Geordi</Table.DataCell>
+            <Table.DataCell>La Forge</Table.DataCell>
+            <Table.DataCell>Sjefsingeniør</Table.DataCell>
+          </Table.Row>
         </Table.Body>
       </Table>
       <h2>Table with zebra style</h2>
-      <Table variants={["zebra"]}>
+      <Table zebraStyle={true}>
         <Table.Header>
-          <Table.Header.Row>
-            <Table.Body.Row.HeaderCell>ID</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Fornavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Etternavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Rolle</Table.Body.Row.HeaderCell>
-          </Table.Header.Row>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.Row.HeaderCell>Fornavn</Table.Row.HeaderCell>
+            <Table.Row.HeaderCell>Etternavn</Table.Row.HeaderCell>
+            <Table.Row.HeaderCell>Rolle</Table.Row.HeaderCell>
+          </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>1</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Jean-Luc</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Picard</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kaptein</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>2</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>William</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Riker</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kommandør</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>3</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Geordi</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>La Forge</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Sjefsingeniør</Table.Body.Row.Cell>
-          </Table.Body.Row>
+          <Table.Row>
+            <Table.DataCell>1</Table.DataCell>
+            <Table.DataCell>Jean-Luc</Table.DataCell>
+            <Table.DataCell>Picard</Table.DataCell>
+            <Table.DataCell>Kaptein</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>2</Table.DataCell>
+            <Table.DataCell>William</Table.DataCell>
+            <Table.DataCell>Riker</Table.DataCell>
+            <Table.DataCell>Kommandør</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>3</Table.DataCell>
+            <Table.DataCell>Geordi</Table.DataCell>
+            <Table.DataCell>La Forge</Table.DataCell>
+            <Table.DataCell>Sjefsingeniør</Table.DataCell>
+          </Table.Row>
         </Table.Body>
       </Table>
-      <h2>Table with zebra style and vertical stripes</h2>
-      <Table variants={["zebra", "vertical"]}>
+      <h2>Table vertical lines</h2>
+      <Table verticalLines={true}>
         <Table.Header>
-          <Table.Header.Row>
-            <Table.Body.Row.HeaderCell>ID</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Fornavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Etternavn</Table.Body.Row.HeaderCell>
-            <Table.Body.Row.HeaderCell>Rolle</Table.Body.Row.HeaderCell>
-          </Table.Header.Row>
+          <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>Fornavn</Table.HeaderCell>
+            <Table.HeaderCell>Etternavn</Table.HeaderCell>
+            <Table.HeaderCell>Rolle</Table.HeaderCell>
+          </Table.Row>
         </Table.Header>
         <Table.Body>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>1</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Jean-Luc</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Picard</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kaptein</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>2</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>William</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Riker</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Kommandør</Table.Body.Row.Cell>
-          </Table.Body.Row>
-          <Table.Body.Row>
-            <Table.Body.Row.Cell>3</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Geordi</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>La Forge</Table.Body.Row.Cell>
-            <Table.Body.Row.Cell>Sjefsingeniør</Table.Body.Row.Cell>
-          </Table.Body.Row>
+          <Table.Row>
+            <Table.DataCell>1</Table.DataCell>
+            <Table.DataCell>Jean-Luc</Table.DataCell>
+            <Table.DataCell>Picard</Table.DataCell>
+            <Table.DataCell>Kaptein</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>2</Table.DataCell>
+            <Table.DataCell>William</Table.DataCell>
+            <Table.DataCell>Riker</Table.DataCell>
+            <Table.DataCell>Kommandør</Table.DataCell>
+          </Table.Row>
+          <Table.Row>
+            <Table.DataCell>3</Table.DataCell>
+            <Table.DataCell>Geordi</Table.DataCell>
+            <Table.DataCell>La Forge</Table.DataCell>
+            <Table.DataCell>Sjefsingeniør</Table.DataCell>
+          </Table.Row>
         </Table.Body>
       </Table>
     </>

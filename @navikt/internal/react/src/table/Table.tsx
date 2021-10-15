@@ -7,16 +7,23 @@ import React, {
 import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
+import Row, { RowType } from "./Row";
+import HeaderCell, { HeaderCellType } from "./HeaderCell";
+import DataCell, { DataCellType } from "./DataCell";
 
-type TableVariant = "zebra" | "vertical";
 export interface TableProps extends HTMLAttributes<HTMLTableElement> {
   /**
-   * Changes design and interactions
-   * @default []
+   * Changes background color on every second row
+   * @default false
    */
-  variants?: TableVariant[];
+  zebraStyle?: boolean;
   /**
-   * Changes padding, height and font-size
+   * Adds vertical lines to the table body
+   * @default false
+   */
+  verticalLines?: boolean;
+  /**
+   * Changes padding
    * @default "medium"
    */
   size?: "medium" | "small";
@@ -28,21 +35,31 @@ export interface TableType
   > {
   Header: HeaderType;
   Body: BodyType;
+  Row: RowType;
+  DataCell: DataCellType;
+  HeaderCell: HeaderCellType;
 }
 
-const getVariantClassNames = (variants?: TableVariant[]) => {
-  return variants?.map((variant) => `navdsi-table--${variant}`).join(" ") ?? "";
-};
-
 const Table = forwardRef(
-  ({ variants, className, children, size = "medium", ...rest }, ref) => {
+  (
+    {
+      verticalLines = false,
+      zebraStyle = false,
+      className,
+      children,
+      size = "medium",
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <table
         {...rest}
         ref={ref}
         className={cl(
           "navdsi-table",
-          getVariantClassNames(variants),
+          { "navdsi-table--zebra": zebraStyle },
+          { "navdsi-table--vertical": verticalLines },
           `navdsi-table--${size}`,
           className
         )}
@@ -55,5 +72,8 @@ const Table = forwardRef(
 
 Table.Header = Header;
 Table.Body = Body;
+Table.Row = Row;
+Table.HeaderCell = HeaderCell;
+Table.DataCell = DataCell;
 
 export default Table;

@@ -5,7 +5,7 @@ import React, {
   RefAttributes,
 } from "react";
 import cl from "classnames";
-import Cell, { CellType } from "./Cell";
+import Cell, { CellType } from "./DataCell";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 
 export interface RowType
