@@ -1,9 +1,15 @@
-import React, { createContext, forwardRef, useContext } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import cl from "classnames";
 import { Fieldset, FieldsetProps, FieldsetContext } from "..";
 
 export interface CheckboxGroupState {
-  readonly defaultValue: readonly string[];
+  readonly defaultValue?: readonly string[];
   readonly value?: readonly string[];
   toggleValue(value: string): void;
 }
@@ -33,19 +39,24 @@ export interface CheckboxGroupProps extends Omit<FieldsetProps, "onChange"> {
 
 const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   (
-    {
-      value,
-      defaultValue = [],
-      onChange = () => {},
-      children,
-      className,
-      ...rest
-    },
+    { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref
   ) => {
-    const state = value ?? [];
-
     const fieldset = useContext(FieldsetContext);
+
+    const [state, setState] = useState(value ?? []);
+
+    useEffect(() => {
+      value && setState(value);
+    }, [value]);
+
+    const handleChange = (value: string) => {
+      const newState = state.includes(value)
+        ? state.filter((v) => v !== value)
+        : [...state, value];
+      setState(newState);
+      onChange(newState);
+    };
 
     return (
       <Fieldset
@@ -61,12 +72,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
           value={{
             value,
             defaultValue,
-            toggleValue: (value: string) =>
-              onChange(
-                state.includes(value)
-                  ? state.filter((v) => v !== value)
-                  : [...state, value]
-              ),
+            toggleValue: (value: string) => handleChange(value),
           }}
         >
           <div className="navds-checkboxes">{children}</div>
