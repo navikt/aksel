@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  forwardRef,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, forwardRef, useContext, useState } from "react";
 import cl from "classnames";
 import { Fieldset, FieldsetProps, FieldsetContext } from "..";
 
@@ -46,15 +40,13 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
 
     const [state, setState] = useState(value ?? []);
 
-    useEffect(() => {
-      value && setState(value);
-    }, [value]);
+    const handleChange = (v: string) => {
+      const newValue = value ? value : state;
+      const newState = newValue.includes(v)
+        ? newValue.filter((x) => x !== v)
+        : [...newValue, v];
 
-    const handleChange = (value: string) => {
-      const newState = state.includes(value)
-        ? state.filter((v) => v !== value)
-        : [...state, value];
-      setState(newState);
+      value === undefined && setState(newState);
       onChange(newState);
     };
 

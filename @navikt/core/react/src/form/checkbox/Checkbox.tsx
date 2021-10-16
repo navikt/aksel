@@ -32,8 +32,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
     inputDescriptionId,
   } = useCheckbox(props);
 
-  console.log(inputProps);
-
   return (
     <div
       className={cl(
