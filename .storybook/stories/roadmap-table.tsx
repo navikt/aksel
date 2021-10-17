@@ -209,7 +209,7 @@ const NewComps: CompT[] = [
   },
 ];
 
-const RoadmapTable = () => (
+const CompTable = ({ list }) => (
   <Table>
     <Table.Header>
       <Table.Row>
@@ -221,69 +221,7 @@ const RoadmapTable = () => (
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      <Table.Row>
-        <Table.HeaderCell>NYTT</Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>-</Table.HeaderCell>
-      </Table.Row>
-      {NewComps.map((comp) => {
-        return (
-          <Table.Row>
-            <Table.HeaderCell>{comp.name}</Table.HeaderCell>
-            <Table.DataCell>
-              {comp.status?.[0] === undefined ? (
-                <span>-</span>
-              ) : comp.status?.[0] ? (
-                <Success />
-              ) : (
-                <Error />
-              )}
-            </Table.DataCell>
-            <Table.DataCell>
-              {comp.status?.[1] === undefined ? (
-                <span>-</span>
-              ) : comp.status?.[1] ? (
-                <Success />
-              ) : (
-                <Error />
-              )}
-            </Table.DataCell>
-            <Table.DataCell>
-              {comp.status?.[2] === undefined ? (
-                <span>-</span>
-              ) : comp.status?.[1] ? (
-                <Success />
-              ) : (
-                <Error />
-              )}
-            </Table.DataCell>
-            <Table.DataCell>{comp.desc ? comp.desc : "-"}</Table.DataCell>
-          </Table.Row>
-        );
-      })}
-      <Table.Row>
-        <Table.HeaderCell>-</Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>
-          <span>-</span>
-        </Table.HeaderCell>
-        <Table.HeaderCell>-</Table.HeaderCell>
-      </Table.Row>
-
-      {Components.map((comp) => {
+      {list.map((comp) => {
         return (
           <Table.Row>
             <Table.HeaderCell>{comp.name}</Table.HeaderCell>
@@ -322,4 +260,10 @@ const RoadmapTable = () => (
   </Table>
 );
 
-export default RoadmapTable;
+export const NewCompTable = () => {
+  return <CompTable list={NewComps} />;
+};
+
+export const OldCompTable = () => {
+  return <CompTable list={Components} />;
+};
