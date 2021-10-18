@@ -33,7 +33,7 @@ const GetStartedPage = ({ ...props }) => (
     >
       <div>
         <Systemtittel>Ikoner</Systemtittel>
-        <p>NAV sine egne ikoner tilgjengelig i SVG og React.</p>
+        <p>NAVs egne ikoner tilgjengelig som SVGer og React-komponenter.</p>
       </div>
     </LenkepanelBase>
     <LenkepanelBase

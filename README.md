@@ -1,6 +1,6 @@
 <h1 align="center">
     <img src="https://www.nav.no/_/asset/no.nav.navno:1575554845/img/navno/logo.svg" />
-    <br/>nav-frontend-moduler
+    <br/>Designsystemet
 </h1>
 
 <div align="center">
@@ -18,7 +18,7 @@
 
 ## Innhold
 
-Dette repoet inneholder følgende:
+Repoet inneholder følgende:
 
 - [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk forvaltet av designsystemet
 - [Felleskomponenter V2 (WIP)](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/) oppdaterte og scopede pakker for en bedre brukeropplevelse

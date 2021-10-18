@@ -1,26 +1,36 @@
-import React, { forwardRef, HTMLAttributes, createElement } from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
+import { OverridableComponent } from "@navikt/ds-react";
 
-export interface HeaderTitleProps extends HTMLAttributes<HTMLElement> {
+export interface HeaderTitleProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Component content
+   * Application title
    */
-  children?: React.ReactNode;
-  /**
-   * Tag this component will use. Usefull for defining a button/link
-   * @default "h1"
-   */
-  element?: keyof React.ReactHTML;
+  children: React.ReactNode;
 }
 
-const HeaderTitle = forwardRef<HTMLElement, HeaderTitleProps>(
-  ({ element = "h1", children, className, ...rest }, ref) =>
-    createElement(element, {
-      ...rest,
-      ref,
-      className: cl("navdsi-header__title", "navds-label", className),
-      children: <span>{children}</span>,
-    })
+export type HeaderTitleType = OverridableComponent<
+  HeaderTitleProps,
+  HTMLAnchorElement
+>;
+
+const HeaderTitle: HeaderTitleType = forwardRef(
+  ({ as: Component = "a", children, className, ...rest }, ref) => (
+    <Component
+      {...rest}
+      ref={ref}
+      size="xsmall"
+      className={cl(
+        "navdsi-header__title",
+        "navds-heading",
+        `navds-heading--xsmall`,
+        className
+      )}
+    >
+      <span>{children}</span>
+    </Component>
+  )
 );
 
 export default HeaderTitle;

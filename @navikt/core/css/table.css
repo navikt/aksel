@@ -1,0 +1,28 @@
+.navds-table {
+  border-collapse: collapse;
+  width: 100%;
+  display: table;
+}
+
+.navds-table__header {
+  display: table-header-group;
+}
+
+.navds-table__body {
+  display: table-row-group;
+}
+
+.navds-table__row {
+  display: table-row;
+}
+
+.navds-table__cell {
+  display: table-cell;
+  padding: var(--navds-spacing-4);
+  text-align: left;
+  border-bottom: var(--navds-border-default);
+}
+
+.navds-table--small .navds-table__cell {
+  padding: var(--navds-spacing-2);
+}

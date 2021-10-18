@@ -15,6 +15,8 @@ export {
   SearchFieldProps,
   SearchFieldInput,
   SearchFieldInputProps,
+  SearchFieldClearButton,
+  SearchFieldClearButtonProps,
 } from "./search-field";
 export { default as Select, SelectProps } from "./Select";
 export {
