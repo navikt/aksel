@@ -1,8 +1,9 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { AlertContext, Heading } from "..";
+import { HeadingProps } from "../typography/Heading";
 
-export interface AlertTitleProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AlertTitleProps extends Omit<HeadingProps, "size"> {
   /**
    * Alert content
    */
@@ -14,7 +15,7 @@ export type AlertTitleType = React.ForwardRefExoticComponent<
 >;
 
 const AlertTitle: AlertTitleType = forwardRef(
-  ({ children, className, ...rest }, ref) => {
+  ({ children, className, spacing = true, ...rest }, ref) => {
     const context = useContext(AlertContext);
 
     if (context === null) {
@@ -31,6 +32,7 @@ const AlertTitle: AlertTitleType = forwardRef(
         className={cl(className, "navds-alert__title")}
         as="div"
         size={size}
+        spacing
       >
         {children}
       </Heading>

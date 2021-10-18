@@ -2,9 +2,9 @@ import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { BodyLong } from "..";
 import { AlertContext } from ".";
+import { BodyLongProps } from "../typography/BodyLong";
 
-export interface AlertContentProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface AlertContentProps extends BodyLongProps {
   /**
    * Alert content
    */

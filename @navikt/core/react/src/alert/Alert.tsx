@@ -55,6 +55,7 @@ export interface AlertContextProps {
 }
 
 export const AlertContext = createContext<AlertContextProps | null>(null);
+
 interface AlertComponent
   extends React.ForwardRefExoticComponent<
     AlertProps & React.RefAttributes<HTMLDivElement>
@@ -96,7 +97,9 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         className="navds-alert__icon"
       />
       <BodyLong as="div" size={size} className="navds-alert__wrapper">
-        {children}
+        <AlertContext.Provider value={{ size }}>
+          {children}
+        </AlertContext.Provider>
       </BodyLong>
     </div>
   )

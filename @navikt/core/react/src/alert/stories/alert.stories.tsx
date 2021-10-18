@@ -1,6 +1,5 @@
 import React from "react";
 import { Alert } from "..";
-import { BodyLong, Heading } from "../..";
 
 export default {
   title: "ds-react/alert",
@@ -77,22 +76,18 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant}>
-            <Heading spacing size="small" level="3">
-              Aliquip duis est in commodo pariatur
-            </Heading>
-            <BodyLong spacing>
+            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Content spacing>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
-            </BodyLong>
-            <Heading level="4" size="xsmall" spacing>
-              Ullamco eiusmod Lorem eiusmod eu.
-            </Heading>
-            <BodyLong>
+            </Alert.Content>
+            <Alert.Title>Ullamco eiusmod Lorem eiusmod eu.</Alert.Title>
+            <Alert.Content>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
-            </BodyLong>
+            </Alert.Content>
           </Alert>
         ))}
       </div>
@@ -100,22 +95,18 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
-            <Heading spacing size="small" level="3">
-              Aliquip duis est in commodo pariatur
-            </Heading>
-            <BodyLong spacing>
+            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Content>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
-            </BodyLong>
-            <Heading level="4" size="xsmall" spacing>
-              Ullamco eiusmod Lorem eiusmod eu.
-            </Heading>
-            <BodyLong>
+            </Alert.Content>
+            <Alert.Title>Ullamco eiusmod Lorem eiusmod eu.</Alert.Title>
+            <Alert.Content>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
-            </BodyLong>
+            </Alert.Content>
           </Alert>
         ))}
       </div>
