@@ -1,4 +1,5 @@
 import { Meta } from "@storybook/addon-docs";
+import { Alert, Heading, BodyLong } from "@navikt/ds-react";
 
 <Meta title="ds-react/Typography/intro" />
 
@@ -37,3 +38,46 @@ Vi anbefaler å før eller siden endre tilbake til default root font size da des
 komponenter og design-tokens er basert på dette. Endringen til 18px root font size var i grunn for å teste en løsning for å
 forstørre font, noe som er fikset ved nye typo-løsningen. Vi vil derfor unngå å måtte ha midlertidge patcher/fikser
 for å tilpasse systemet for alle de forskjellige variantene av font size på root.
+
+## Migrasjonsguide fra `nav-frontend-typografi` til `@navikt/ds-react`
+
+De nye typografi-komponentene er ikke helt en-til-en med de gamle, så det kan hende du må trekke på en designer om du er usikker på hvilken komponent du skal velge. Eller du kan spørre en av oss i designsystemet.
+
+### Overskrifter
+
+Overskrifters tekststørrelse er nå uavhengig heading-nivå. Det betyr at du står fritt til å sørge for at overskrift-hierarkiet stemmer for din side, uavhengig av visuelt hierarki. Før kunne det være trøblete om men f.eks. ønsket seg en h1, men `<Sidetittel>` opplevdes som for stor.
+
+En direkte en-til-en oversettelse av gamle komponenter til nye, hvor man bevarer størrelsene, ser sånn ut:
+
+`<Sidetittel> -> <Heading size="2xlarge">`
+
+`<Innholdstittel> -> <Heading size="xlarge">`
+
+`<Systemtittel> -> <Heading size="medium">`
+
+`<Undertittel> -> <Heading size="small">`
+
+<Alert variant="warning">
+  Pass på å sette riktig `level` i hver Heading-komponent for å ivareta
+  hierarkiet (h1-h6).
+</Alert>
+
+### Brødtekst
+
+De nye komponentene for brødtekst heter `<BodyLong>` og `<BodyShort>`. `<BodyLong>` er men å brukes der det er snakk om løpende tekst, f.eks. i en artikkel. I komponent-tekst som med fordel kan være mer kompakt skal `<BodyShort>` brukes, for den har en lavere linjehøyde.
+
+Ny brødtekst-størrelse er 18px. Om du bygger grensesnitt med kompakt design (les; interne flater) der du ønsker å fortsette å bruke 16px brødtekst så finnes det en `<BodyLong size="small">` og `<BodyShort size="small">` som er til for deg.
+
+`<Normaltekst> ->` `<BodyLong>`/`<BodyShort>` (muligens med `size=small`)
+
+### Andre komponenter
+
+`<Ingress> -> <Ingress>`
+
+`<Element> -> <Label>`
+
+`<UndertekstBold> -> <Detail>`
+
+`<Undertekst> -> <Detail size="small">`
+
+`<Feilmelding>` Denne har vi valgt å ikke videreføre, for vi er usikre på om det er behov for en egen komponent. Skriv gjerne en melding på #designsystem eller send en PM til @andreas.nordahl eller @ken.aleksander.johansen om du savner den.
