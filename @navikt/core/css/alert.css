@@ -44,12 +44,12 @@
   flex-shrink: 0;
   font-size: 1.5rem;
   align-self: flex-start;
-  height: var(--navds-font-line-height-xl);
+  height: var(--navds-font-line-height-xlarge);
 }
 
 .navds-alert--small > .navds-alert__icon {
   font-size: 1.25rem;
-  height: var(--navds-font-line-height-l);
+  height: var(--navds-font-line-height-large);
 }
 
 .navds-alert--error {
