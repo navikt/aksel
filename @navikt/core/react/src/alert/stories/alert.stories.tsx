@@ -76,13 +76,17 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant}>
-            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Title level="2">
+              Aliquip duis est in commodo pariatur
+            </Alert.Title>
             <Alert.Content spacing>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
             </Alert.Content>
-            <Alert.Title>Ullamco eiusmod Lorem eiusmod eu.</Alert.Title>
+            <Alert.Title level="3">
+              Ullamco eiusmod Lorem eiusmod eu.
+            </Alert.Title>
             <Alert.Content>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
@@ -95,13 +99,17 @@ export const All = () => {
       <div>
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
-            <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+            <Alert.Title level="2">
+              Aliquip duis est in commodo pariatur
+            </Alert.Title>
             <Alert.Content spacing>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
             </Alert.Content>
-            <Alert.Title>Ullamco eiusmod Lorem eiusmod eu.</Alert.Title>
+            <Alert.Title level="3">
+              Ullamco eiusmod Lorem eiusmod eu.
+            </Alert.Title>
             <Alert.Content>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.

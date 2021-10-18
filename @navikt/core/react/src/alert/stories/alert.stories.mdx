@@ -69,9 +69,12 @@ Alert har to størrelser: Default 64px height og small 32px height default.
 
 ## Med heading
 
+Bruk Alert.Title og Alert.Content for bedre formatert innhold.
+usk å sette "level" slik at man får riktig heading nivå. Defaulter til `<h1/>`
+
 ```jsx
 <Alert variant="info">
-  <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+  <Alert.Title level="2">Aliquip duis est in commodo pariatur</Alert.Title>
   <Alert.Content>
     Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui laboris
     ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat sint commodo
@@ -81,7 +84,7 @@ Alert har to størrelser: Default 64px height og small 32px height default.
 ```
 
 <Canvas>
-  <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
+  <Alert.Title level="2">Aliquip duis est in commodo pariatur</Alert.Title>
   <Alert.Content>
     Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui laboris
     ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat sint commodo

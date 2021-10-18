@@ -30,7 +30,6 @@ const AlertTitle: AlertTitleType = forwardRef(
         {...rest}
         ref={ref}
         className={cl(className, "navds-alert__title")}
-        as="div"
         size={size}
         spacing
       >
