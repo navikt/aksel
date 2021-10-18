@@ -96,7 +96,7 @@ export const All = () => {
         {variants.map((variant, i) => (
           <Alert key={variant} variant={variant} size="small">
             <Alert.Title>Aliquip duis est in commodo pariatur</Alert.Title>
-            <Alert.Content>
+            <Alert.Content spacing>
               Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
               laboris ex. Labore ex occaecat proident qui qui fugiat magna.
               Fugiat sint commodo consequat eu aute.
