@@ -84,17 +84,17 @@ export const All = () => {
         mulig, da nettleseren ikke kan tolke tabellen like bra uten riktig
         markup.
       </Alert>
-      <div className="navds-table navds-table--zebra" role="table">
+      <div className="navds-table" role="table">
         <div className="navds-table__header" role="rowgroup">
           <div className="navds-table__row" role="row">
-            <div className="navds-table__cell" role="columnheader">
-              ID
-            </div>
             <div className="navds-table__cell" role="columnheader">
               Fornavn
             </div>
             <div className="navds-table__cell" role="columnheader">
               Etternavn
+            </div>
+            <div className="navds-table__cell" role="columnheader">
+              Rolle
             </div>
           </div>
         </div>
