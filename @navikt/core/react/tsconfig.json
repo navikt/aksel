@@ -1,14 +1,9 @@
 {
-  "extends": "../../../utilities/build/tsconfig-pakker.json",
+  "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./cjs",
-    "rootDir": "./src",
-    "esModuleInterop": true,
     "module": "commonjs",
-    "target": "es2015",
-    "sourceMap": false,
-    "declaration": false
+    "noImplicitAny": false
   },
-  "include": ["./src"],
-  "exclude": ["./src/**/stories", "**/*.test.ts", "**/*.test.tsx"]
+  "include": ["./src"]
 }

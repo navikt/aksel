@@ -29,8 +29,8 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
-    "watch": "tsc --watch -p tsconfig-esm.json"
+    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.5.5",
