@@ -34,13 +34,12 @@ test("checkbox group handles controlled sate", () => {
   const value2 = "value2";
   const label1 = faker.datatype.string();
   const label2 = faker.datatype.string();
-  const controlledValue = [value1, value2];
 
-  render(
+  const { rerender } = render(
     <CheckboxGroup
       legend="legend"
       onChange={onGroupChange}
-      value={controlledValue}
+      value={[value1, value2]}
     >
       <Checkbox data-testid="box1" value={value1}>
         {label1}
@@ -55,10 +54,34 @@ test("checkbox group handles controlled sate", () => {
   expect(onGroupChange).toBeCalledTimes(1);
   expect(onGroupChange).toBeCalledWith([value2]);
 
+  expect((screen.getByTestId("box1") as HTMLInputElement).checked).toBe(true);
+
   userEvent.click(screen.getByLabelText(label2));
   expect(onGroupChange).toBeCalledTimes(2);
   expect(onGroupChange).toBeCalledWith([value1]);
 
-  expect((screen.getByTestId("box1") as HTMLInputElement).checked).toBe(true);
   expect((screen.getByTestId("box2") as HTMLInputElement).checked).toBe(true);
+
+  rerender(
+    <CheckboxGroup legend="legend" onChange={onGroupChange} value={[]}>
+      <Checkbox data-testid="box1" value={value1}>
+        {label1}
+      </Checkbox>
+      <Checkbox data-testid="box2" value={value2}>
+        {label2}
+      </Checkbox>
+    </CheckboxGroup>
+  );
+
+  userEvent.click(screen.getByLabelText(label1));
+  expect(onGroupChange).toBeCalledTimes(3);
+  expect(onGroupChange).toBeCalledWith([value1]);
+
+  expect((screen.getByTestId("box1") as HTMLInputElement).checked).toBe(false);
+
+  userEvent.click(screen.getByLabelText(label2));
+  expect(onGroupChange).toBeCalledTimes(4);
+  expect(onGroupChange).toBeCalledWith([value2]);
+
+  expect((screen.getByTestId("box2") as HTMLInputElement).checked).toBe(false);
 });
