@@ -1,16 +1,30 @@
 import { Meta } from "@storybook/addon-docs";
+import { NewCompTable, OldCompTable } from "./roadmap-table.tsx";
 
 <Meta title="ds-react/Roadmap" />
 
-# Plan videre
+# Roadmap
 
-Arbeidet med det nye pakke-oppsettet har nå foregått en stund og skulle egentlig vært
-lengre på vei en det er nå. Men arbeidet har på ingen måte stoppet opp! Vi jobber kontinuerlig med
-å finne bedre løsninger for å kunne bygge systemet opp fra bunnen av. Dette innegår da
-ny dokumentasjons-side bygd med Sanity, nye byggeblokker helt fra token-nivå og bedre sizing for eksterne/interne sider. Dette vil da forhåpentligvis la oss
-bygge mer robuste og fleksible løsninger for fremtiden.
+## Komponenter
 
-(Rekkefølgen representer ikke faktisk tidsline eller prioritet)
+\*\* Fullført betyr i denne konteksten at vi føler API-et er ok og da kan forvente mindre breaking changes.
+Komponenten kan fortsatt bli utsatt for endringer i selve designet.
+
+### Nye komponenter / wip
+
+<NewCompTable />
+
+### Migrering av gamle komponenter
+
+<OldCompTable />
+
+## Plan videre
+
+Vi jobber kontinuerlig med å finne bedre løsninger for å kunne bygge systemet opp fra bunnen av. Dette innegår da
+ny dokumentasjon-side under Verktøykassen, nye byggeblokker helt fra token-nivå og bedre sizing for eksterne/interne sider.
+Dette vil la oss bygge mer robuste og fleksible løsninger for fremtiden som skal være bedre tilpasset produktene våre.
+
+(Rekkefølgen representer ikke faktisk tidslinje)
 
 ## Tokens
 
@@ -20,12 +34,11 @@ Dette vil gjøre styling og overriding av komponenter enklere da man kan bruke c
 ## Intern / Ekstern sizing
 
 Komponenter tilpasses og standariseres bedre for skillet mellom interne/eksterne flater.
-Løsning er ikke fast bestemt, men eksempel på dette er `size="small" -> 32px, size="medium"-> 48px`.
-Dette vil da eksempelvis kunne være en standard som er gjennomgående for de fleste komponentene.
+Eksempel på dette er `size="small" -> 32px, size="medium"-> 48px`.
 
 ## Ny dokumentasjon-side
 
-Vi bygger en ny side for å dokumentere systemet, og mer rundt utvikling/design i nav med "Verktøykassen"
+Vi bygger en ny side for å dokumentere systemet, og mer rundt utvikling/design i NAV med "Verktøykassen"
 
 ## Migrere komponenter/styling fra nav-frontend-\* -> `@navikt/ds-css / @navikt/ds-react`
 
@@ -46,6 +59,6 @@ noe vi kunne ta en titt på hvis vi ser at det trengs.
 
 ## Versjonering
 
-To av de nye pakkene under `@navikt`, da `ds-css` og `ds-react` er nå versjonert under to store pakker med alle komponentene. I fremtiden vil vi se på å
+De nye pakkene under `@navikt`, da `ds-css` og `ds-react` er nå versjonert under to store pakker med alle komponentene. I fremtiden vil vi se på å
 ha både samversjonering (alle pakker under en eks ds-react versjon) og induvduell verjsonering da eks ds-react/button har en egen versjon
 slik at man kan ha mer finkontroll over komponentbruk på siden sin.
