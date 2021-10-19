@@ -47,14 +47,14 @@ test("checkbox group handles controlled sate", () => {
   );
 
   userEvent.click(screen.getByLabelText(label1));
-  expect(onGroupChange).toBeCalledWith([value2]);
+  expect(onGroupChange).lastCalledWith([value2]);
 
   expect((screen.getByLabelText(label1) as HTMLInputElement).checked).toBe(
     true
   );
 
   userEvent.click(screen.getByLabelText(label2));
-  expect(onGroupChange).toBeCalledWith([value1]);
+  expect(onGroupChange).lastCalledWith([value1]);
 
   expect((screen.getByLabelText(label2) as HTMLInputElement).checked).toBe(
     true
@@ -68,14 +68,14 @@ test("checkbox group handles controlled sate", () => {
   );
 
   userEvent.click(screen.getByLabelText(label1));
-  expect(onGroupChange).toBeCalledWith([value1]);
+  expect(onGroupChange).lastCalledWith([value1]);
 
   expect((screen.getByLabelText(label1) as HTMLInputElement).checked).toBe(
     false
   );
 
   userEvent.click(screen.getByLabelText(label2));
-  expect(onGroupChange).toBeCalledWith([value2]);
+  expect(onGroupChange).lastCalledWith([value2]);
 
   expect((screen.getByLabelText(label2) as HTMLInputElement).checked).toBe(
     false
