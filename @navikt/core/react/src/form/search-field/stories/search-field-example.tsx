@@ -1,30 +1,25 @@
 import React, { useState } from "react";
 import { Close, Search } from "@navikt/ds-icons";
-import {
-  SearchField,
-  SearchFieldInput,
-  SearchFieldButton,
-  SearchFieldClearButton,
-} from "../index";
+import { SearchField } from "../index";
 
 export const Example = ({ size = "medium" }: { size: "medium" | "small" }) => {
   const [value, setValue] = useState("");
 
   return (
     <SearchField size={size} label="Skriv i søkefeltet for å vise clearbutton">
-      <SearchFieldInput
+      <SearchField.Input
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
       {!!value && (
-        <SearchFieldClearButton onClick={() => setValue("")}>
+        <SearchField.Clear onClick={() => setValue("")}>
           <Close />
           Tøm
-        </SearchFieldClearButton>
+        </SearchField.Clear>
       )}
-      <SearchFieldButton>
+      <SearchField.Button>
         <Search /> Søk
-      </SearchFieldButton>
+      </SearchField.Button>
     </SearchField>
   );
 };

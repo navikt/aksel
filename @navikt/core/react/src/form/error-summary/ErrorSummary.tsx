@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import { Heading, BodyShort } from "../..";
+import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -21,6 +22,13 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;
+}
+
+interface ErrorSummaryComponent
+  extends React.ForwardRefExoticComponent<
+    ErrorSummaryProps & React.RefAttributes<HTMLDivElement>
+  > {
+  Item: ErrorSummaryItemType;
 }
 
 const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
@@ -62,6 +70,8 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
       </div>
     );
   }
-);
+) as ErrorSummaryComponent;
+
+ErrorSummary.Item = ErrorSummaryItem;
 
 export default ErrorSummary;

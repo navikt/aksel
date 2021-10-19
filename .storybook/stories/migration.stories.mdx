@@ -2,7 +2,33 @@ import { Meta } from "@storybook/addon-docs";
 
 <Meta title="ds-react/Migration" />
 
-# Migrering til ds-react, ds-css v0.8.0
+# Migreringsguider
+
+## Migrering til ds-react v0.11, ds-css v0.10
+
+### ErrorSummary
+
+- ErrorSummaryItem -> ErrorSummary.Item
+  Må da slette import "ErrorSummaryItem" da denne ikke er eksponert alene lengre
+
+### SearchField
+
+- SearchFieldButton -> SearchField.Button
+- SearchFieldClearButton -> SearchField.Clear
+- SearchFieldInput -> SearchField.Input
+
+SearchFieldButton, SearchFieldClearButton og SearchFieldInput må da slettes fra imports da de ikke er eksponert lengre.
+
+### CopyToClipBoard
+
+Komponenten er flyttet til pakkene "@navikt/ds-react-internal" og "@navikt/ds-css-internal". API er ikke endret
+så fikses med
+
+```bash
+yarn install @navikt/ds-react-internal @navikt/ds-css-internal
+```
+
+## Migrering til ds-react, ds-css v0.8.0
 
 Denne guiden vil være til hjelp for de som allerede har begynt å ta i bruk de nye pakkene våre tidligere enn v0.8.0.
 For de som ikke har begynt å ta i bruk pakkene kan man se bort fra denne.

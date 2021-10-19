@@ -10,11 +10,12 @@ export interface ErrorSummaryItemProps
   children: React.ReactNode;
 }
 
-export type ErrorType = OverridableComponent<
+export type ErrorSummaryItemType = OverridableComponent<
   ErrorSummaryItemProps,
   HTMLAnchorElement
 >;
-const ErrorSummaryItem: ErrorType = forwardRef(
+
+const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
       <Component

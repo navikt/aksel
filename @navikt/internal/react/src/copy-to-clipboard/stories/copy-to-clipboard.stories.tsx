@@ -3,7 +3,7 @@ import * as React from "react";
 import { CopyToClipboard } from "../index";
 
 export default {
-  title: "@ds-react/copy-to-clipboard",
+  title: "ds-react-internal/copy-to-clipboard",
   component: CopyToClipboard,
 };
 

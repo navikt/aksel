@@ -35,7 +35,10 @@
   "dependencies": {
     "@navikt/ds-icons": "^0.5.6",
     "@navikt/ds-react": "^0.10.7",
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "copy-to-clipboard": "^3.3.1",
+    "@popperjs/core": "^2.10.1",
+    "react-merge-refs": "^1.1.0"
   },
   "devDependencies": {
     "rimraf": "^3.0.2"
