@@ -1,4 +1,4 @@
-import React, { createContext, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
 import {
   ErrorFilled,
@@ -6,8 +6,6 @@ import {
   InformationFilled,
   SuccessFilled,
 } from "@navikt/ds-icons";
-import AlertContent, { AlertContentType } from "./AlertContent";
-import AlertTitle, { AlertTitleType } from "./AlertTitle";
 import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -54,15 +52,6 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-export const AlertContext = createContext<AlertContextProps | null>(null);
-interface AlertComponent
-  extends React.ForwardRefExoticComponent<
-    AlertProps & React.RefAttributes<HTMLDivElement>
-  > {
-  Title: AlertTitleType;
-  Content: AlertContentType;
-}
-
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
@@ -100,9 +89,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       </BodyLong>
     </div>
   )
-) as AlertComponent;
-
-Alert.Title = AlertTitle;
-Alert.Content = AlertContent;
+);
 
 export default Alert;
