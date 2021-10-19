@@ -16,7 +16,11 @@ export interface SearchFieldButtonProps extends Omit<ButtonProps, "size"> {
   variant?: "primary" | "secondary";
 }
 
-const SearchFieldButton = forwardRef<HTMLButtonElement, SearchFieldButtonProps>(
+export type SearchFieldButtonType = React.ForwardRefExoticComponent<
+  SearchFieldButtonProps & React.RefAttributes<HTMLButtonElement>
+>;
+
+const SearchFieldButton: SearchFieldButtonType = forwardRef(
   ({ className, variant = "primary", disabled, ...rest }, ref) => {
     const searchField = useContext(SearchFieldContext);
 
