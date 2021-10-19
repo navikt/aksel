@@ -5,7 +5,11 @@ import { SearchFieldContext } from "./SearchField";
 export interface SearchFieldInputProps
   extends InputHTMLAttributes<HTMLInputElement> {}
 
-const SearchFieldInput = forwardRef<HTMLInputElement, SearchFieldInputProps>(
+export type SearchFieldInputType = React.ForwardRefExoticComponent<
+  SearchFieldInputProps & React.RefAttributes<HTMLInputElement>
+>;
+
+const SearchFieldInput: SearchFieldInputType = forwardRef(
   ({ className, ...rest }, ref) => {
     const searchField = useContext(SearchFieldContext);
 

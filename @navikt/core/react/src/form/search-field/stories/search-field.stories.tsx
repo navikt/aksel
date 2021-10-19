@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { Meta } from "@storybook/react/types-6-0";
 import { Close, Search } from "@navikt/ds-icons";
-import {
-  SearchField,
-  SearchFieldInput,
-  SearchFieldButton,
-  SearchFieldClearButton,
-} from "../index";
+import { SearchField } from "../index";
 import { Fieldset } from "../..";
 export default {
   title: "ds-react/form/search-field",
@@ -22,19 +17,19 @@ export const All = () => {
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
       >
-        <SearchFieldInput />
-        <SearchFieldButton>
+        <SearchField.Input />
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
+        </SearchField.Button>
       </SearchField>
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
-        <SearchFieldInput />
+        </SearchField.Button>
+        <SearchField.Input />
       </SearchField>
 
       <h1>SearchField w clearsearch</h1>
@@ -42,25 +37,25 @@ export const All = () => {
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
       >
-        <SearchFieldInput />
-        <SearchFieldClearButton>
+        <SearchField.Input />
+        <SearchField.Clear>
           <Close />
-        </SearchFieldClearButton>
-        <SearchFieldButton onClick={() => setShow(!show)}>
+        </SearchField.Clear>
+        <SearchField.Button onClick={() => setShow(!show)}>
           <Search /> Søk
-        </SearchFieldButton>
+        </SearchField.Button>
       </SearchField>
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
-        <SearchFieldClearButton>
+        </SearchField.Button>
+        <SearchField.Clear>
           <Close /> Tøm
-        </SearchFieldClearButton>
-        <SearchFieldInput />
+        </SearchField.Clear>
+        <SearchField.Input />
       </SearchField>
 
       <h2>Hidelabel</h2>
@@ -69,10 +64,10 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         hideLabel
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
-        <SearchFieldInput />
+        </SearchField.Button>
+        <SearchField.Input />
       </SearchField>
 
       <h2>SearchField small</h2>
@@ -81,11 +76,11 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="small"
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search />
           <span className="sr-only">Søk</span>
-        </SearchFieldButton>
-        <SearchFieldInput />
+        </SearchField.Button>
+        <SearchField.Input />
       </SearchField>
 
       <SearchField
@@ -93,25 +88,25 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="small"
       >
-        <SearchFieldInput />
-        <SearchFieldButton>
+        <SearchField.Input />
+        <SearchField.Button>
           <Search />
           <span className="sr-only">Søk</span>
-        </SearchFieldButton>
+        </SearchField.Button>
       </SearchField>
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
         size="small"
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search />
           <span className="sr-only">Søk</span>
-        </SearchFieldButton>
-        <SearchFieldClearButton>
+        </SearchField.Button>
+        <SearchField.Clear>
           <Close /> Tøm
-        </SearchFieldClearButton>
-        <SearchFieldInput />
+        </SearchField.Clear>
+        <SearchField.Input />
       </SearchField>
 
       <SearchField
@@ -119,14 +114,14 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="small"
       >
-        <SearchFieldInput />
-        <SearchFieldClearButton>
+        <SearchField.Input />
+        <SearchField.Clear>
           <Close /> Tøm
-        </SearchFieldClearButton>
-        <SearchFieldButton>
+        </SearchField.Clear>
+        <SearchField.Button>
           <Search />
           <span className="sr-only">Søk</span>
-        </SearchFieldButton>
+        </SearchField.Button>
       </SearchField>
 
       <h2>SearchField w error</h2>
@@ -135,20 +130,20 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         error="Errormsg"
       >
-        <SearchFieldInput />
-        <SearchFieldButton>
+        <SearchField.Input />
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
+        </SearchField.Button>
       </SearchField>
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
         error="Errormsg"
       >
-        <SearchFieldButton>
+        <SearchField.Button>
           <Search /> Søk
-        </SearchFieldButton>
-        <SearchFieldInput />
+        </SearchField.Button>
+        <SearchField.Input />
       </SearchField>
 
       <h2>SearchField in Fieldset</h2>
@@ -159,20 +154,20 @@ export const All = () => {
           error="Errormsg"
           hideLabel
         >
-          <SearchFieldInput />
-          <SearchFieldButton>
+          <SearchField.Input />
+          <SearchField.Button>
             <Search /> Søk
-          </SearchFieldButton>
+          </SearchField.Button>
         </SearchField>
         <SearchField
           label="Mollit eiusmod"
           description="Ea cupidatat eu sunt commodo"
           hideLabel
         >
-          <SearchFieldButton>
+          <SearchField.Button>
             <Search /> Søk
-          </SearchFieldButton>
-          <SearchFieldInput />
+          </SearchField.Button>
+          <SearchField.Input />
         </SearchField>
       </Fieldset>
     </>

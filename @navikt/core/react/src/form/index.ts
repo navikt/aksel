@@ -10,14 +10,7 @@ export {
   FieldsetProps,
 } from "./Fieldset";
 export { Radio, RadioGroup, RadioGroupProps, RadioProps } from "./radio";
-export {
-  SearchField,
-  SearchFieldProps,
-  SearchFieldInput,
-  SearchFieldInputProps,
-  SearchFieldClearButton,
-  SearchFieldClearButtonProps,
-} from "./search-field";
+export { SearchField, SearchFieldProps } from "./search-field";
 export { default as Select, SelectProps } from "./Select";
 export {
   ErrorSummary,
