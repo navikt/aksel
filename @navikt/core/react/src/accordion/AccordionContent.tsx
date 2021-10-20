@@ -1,7 +1,6 @@
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
 import { Collapse, UnmountClosed } from "react-collapse";
-import { useClientLayoutEffect, useId } from "../util";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps
@@ -20,13 +19,6 @@ const AccordionContent: AccordionContentType = forwardRef(
   ({ children, className, id, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
 
-    const newId = useId(id);
-    const setContentId = context && context.setContentId;
-
-    useClientLayoutEffect(() => {
-      setContentId && setContentId(id ? newId : `accordionContent-${newId}`);
-    }, [setContentId, newId]);
-
     if (context === null) {
       console.error(
         "<Accordion.Content> has to be used within an <Accordion.Item>"
@@ -39,13 +31,7 @@ const AccordionContent: AccordionContentType = forwardRef(
       : UnmountClosed;
 
     return (
-      <div
-        ref={ref}
-        id={context.contentId}
-        role="region"
-        aria-labelledby={context.buttonId}
-        {...rest}
-      >
+      <div ref={ref} role="region" aria-labelledby={context.buttonId} {...rest}>
         <CollapseComponent isOpened={context.open}>
           <div className={cl("navds-accordion__content", className)}>
             {children}

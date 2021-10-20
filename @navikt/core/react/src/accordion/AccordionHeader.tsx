@@ -52,7 +52,6 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-heading--small"
         )}
         onClick={handleClick}
-        aria-controls={context.contentId}
         {...rest}
       >
         {children}
