@@ -1,5 +1,5 @@
 import { PaintType } from "figma-api";
-import paintToRgba from "./paint-to-rgba";
+import paintToRgba from "../paint-to-rgba";
 
 test("parse-color", () => {
   expect(

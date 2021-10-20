@@ -1,4 +1,4 @@
-import globalColorRefs from "./global-color-ref";
+import globalColorRefs from "../global-color-ref";
 
 test("Global color refs", () => {
   let colors = [

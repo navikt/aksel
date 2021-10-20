@@ -1,4 +1,4 @@
-import parseName from "./parse-name";
+import parseName from "../parse-name";
 
 test("parse-name", () => {
   new Map([
