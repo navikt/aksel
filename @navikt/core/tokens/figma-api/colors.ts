@@ -1,18 +1,12 @@
 import { CANVAS, DOCUMENT, FRAME, Paint } from "figma-api";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
-import { getSyncDocument } from "./fetch";
 import formatToStyledDictionary from "./format-sd";
 import globalColorRefs, { ColorT } from "./global-color-ref";
 import parseColor from "./paint-to-rgba";
 import parseName from "./parse-name";
 
-const Colors = async () => {
-  console.log("Updating colors-tokens");
-  const file = await getSyncDocument();
-
-  const document: DOCUMENT = file.document;
-
+const Colors = async (document: DOCUMENT, documentStyles) => {
   const colorPage = document.children.find(
     (c) => c.name === "Colors"
   ) as CANVAS;
@@ -38,7 +32,7 @@ const Colors = async () => {
     .map((x) => ({ fill: x.fills?.[0], style: x?.styles?.fills }));
 
   const colors: ColorT[] = colorInstances.map((c) => ({
-    name: parseName(file.styles[c.style]?.name),
+    name: parseName(documentStyles.styles[c.style]?.name),
     color: parseColor(c.fill),
   }));
 

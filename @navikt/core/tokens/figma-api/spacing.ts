@@ -1,13 +1,10 @@
 import { CANVAS, DOCUMENT, FRAME, RECTANGLE } from "figma-api";
-import { getSyncDocument } from "./fetch";
 import formatToStyledDictionary from "./format-sd";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
-const Spacing = async () => {
+const Spacing = async (document: DOCUMENT) => {
   console.log("Updating spacing-tokens");
-  const file = await getSyncDocument();
-  const document: DOCUMENT = file.document;
 
   const spacingPage = document.children.find(
     (c) => c.name === "Spacing"
