@@ -33,11 +33,13 @@ const Colors = async (document: DOCUMENT, documentStyles) => {
     /* Fills -> Paint, style -> node used as ref to local style */
     .map((x) => ({ fill: x.fills?.[0], style: x?.styles?.fills }));
 
+  /* Parse name and color into correct format */
   const colors: ColorT[] = colorInstances.map((c) => ({
     name: parseName(documentStyles[c.style]?.name),
     color: parseColor(c.fill),
   }));
 
+  /* Make semantic colors reference global colors */
   const colorsWithRef = globalColorRefs(colors).reduce(
     (old, color) => ({ [color.name]: color.color, ...old }),
     {}
