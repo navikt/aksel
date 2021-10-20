@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "strict": true,
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node"
+  },
+  "exclude": ["**/stories", "**/*.test.ts", "**/*.test.tsx"]
+}

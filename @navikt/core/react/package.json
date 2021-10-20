@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.10.3",
+  "version": "0.11.0",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -29,16 +29,15 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig-esm.json && yarn create-package-json-pointers-to-esm",
-    "watch": "tsc --watch -p tsconfig-esm.json",
+    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
-    "@navikt/ds-icons": "^0.5.4",
+    "@navikt/ds-icons": "^0.5.6",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.2.6",
-    "copy-to-clipboard": "^3.3.1",
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
     "react-modal": "3.14.3",

@@ -23,7 +23,7 @@ const ConfirmationPanel = forwardRef<HTMLDivElement, ConfirmationPanelProps>(
       <div
         ref={ref}
         className={cl("navds-confirmation-panel", className, {
-          "navds-confirmation-panel--s": props.size === "small",
+          "navds-confirmation-panel--small": props.size === "small",
           "navds-confirmation-panel--error": !!props.error,
           "navds-confirmation-panel--checked": !!props.checked,
         })}

@@ -1,10 +1,5 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import {
-  SearchField,
-  SearchFieldInput,
-  SearchFieldButton,
-  SearchFieldClearButton,
-} from "../index";
+import { SearchField } from "../index";
 
 import { Example } from "./search-field-example.tsx";
 
@@ -22,10 +17,10 @@ Komponenten er ikke testet eller gått gjennom et design-review, så anbefalses 
 
 ```jsx
 <SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
-  <SearchFieldInput />
-  <SearchFieldButton>
+  <SearchField.Input />
+  <SearchField.Button>
     <Search /> Søk
-  </SearchFieldButton>
+  </SearchField.Button>
 </SearchField>
 ```
 
@@ -34,10 +29,10 @@ Komponenten er ikke testet eller gått gjennom et design-review, så anbefalses 
     label="Mollit eiusmod"
     description="Ea cupidatat eu sunt commodo"
   >
-    <SearchFieldInput />
-    <SearchFieldButton>
+    <SearchField.Input />
+    <SearchField.Button>
       <Search /> Søk
-    </SearchFieldButton>
+    </SearchField.Button>
   </SearchField>
 </Canvas>
 
@@ -52,10 +47,10 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   description="Ea cupidatat eu sunt commodo"
   hideLabel
 >
-  <SearchFieldInput />
-  <SearchFieldButton>
+  <SearchField.Input />
+  <SearchField.Button>
     <Search /> Søk
-  </SearchFieldButton>
+  </SearchField.Button>
 </SearchField>
 ```
 
@@ -65,10 +60,10 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
     description="Ea cupidatat eu sunt commodo"
     hideLabel
   >
-    <SearchFieldInput />
-    <SearchFieldButton>
+    <SearchField.Input />
+    <SearchField.Button>
       <Search /> Søk
-    </SearchFieldButton>
+    </SearchField.Button>
   </SearchField>
 </Canvas>
 
@@ -81,10 +76,10 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   hideLabel
   size="small"
 >
-  <SearchFieldInput />
-  <SearchFieldButton>
+  <SearchField.Input />
+  <SearchField.Button>
     <Search /> Søk
-  </SearchFieldButton>
+  </SearchField.Button>
 </SearchField>
 ```
 
@@ -95,10 +90,10 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
     hideLabel
     size="small"
   >
-    <SearchFieldInput />
-    <SearchFieldButton>
+    <SearchField.Input />
+    <SearchField.Button>
       <Search /> Søk
-    </SearchFieldButton>
+    </SearchField.Button>
   </SearchField>
 </Canvas>
 
@@ -111,10 +106,10 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   hideLabel
   error="Error message"
 >
-  <SearchFieldInput />
-  <SearchFieldButton>
+  <SearchField.Input />
+  <SearchField.Button>
     <Search /> Søk
-  </SearchFieldButton>
+  </SearchField.Button>
 </SearchField>
 ```
 
@@ -125,31 +120,31 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
     hideLabel
     error="Error message"
   >
-    <SearchFieldInput />
-    <SearchFieldButton>
+    <SearchField.Input />
+    <SearchField.Button>
       <Search /> Søk
-    </SearchFieldButton>
+    </SearchField.Button>
   </SearchField>
 </Canvas>
 
 ## ClearButton
 
-Man kan bruke `SearchFieldClearButton` for å håndtere clearing av value i `<input />`. For å bruke denne
-kreves det da at `SearchFieldInput` er controlled slik at man styrer state selv slik som eksemplet under.
+Man kan bruke `SearchField.Clear` for å håndtere clearing av value i `<input />`. For å bruke denne
+kreves det da at `SearchField.Input` er controlled slik at man styrer state selv slik som eksemplet under.
 Hvis man bare ønsker at den bare skal vises når bruker har begynt å skrive, anbefaler vi bare å rendre
 den når inputvalue ikke er empty.
 
 ```jsx
 <SearchField label="Mollit eiusmod" description="Ea cupidatat eu sunt commodo">
-  <SearchFieldInput value={value} onChange={(e) => setValue(e.target.value)} />
+  <SearchField.Input value={value} onChange={(e) => setValue(e.target.value)} />
   {!!value && (
-    <SearchFieldClearButton onClick={() => setValue("")}>
+    <SearchField.Clear onClick={() => setValue("")}>
       <Close /> Tøm
-    </SearchFieldClearButton>
+    </SearchField.Clear>
   )}
-  <SearchFieldButton>
+  <SearchField.Button>
     <Search /> Søk
-  </SearchFieldButton>
+  </SearchField.Button>
 </SearchField>
 ```
 
