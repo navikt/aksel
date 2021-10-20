@@ -1,5 +1,6 @@
 const Color = require("color");
 const newColors = require("./colors.json");
+const newSpacing = require("./spacing.json");
 
 const baseFontSize = 16;
 
@@ -38,6 +39,7 @@ const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
 module.exports = {
   ...newColors,
+  ...newSpacing,
   navds: {
     color: {
       white: { value: white },
