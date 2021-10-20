@@ -3,6 +3,8 @@ import { CANVAS, DOCUMENT, FRAME, Paint } from "figma-api";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 import { getSyncDocument } from "./fetch";
+import formatToStyledDictionary from "./format-sd";
+import globalColorRefs, { ColorT } from "./global-color-ref";
 import parseColor from "./paint-to-rgba";
 import parseName from "./parse-name";
 
@@ -37,13 +39,22 @@ const colors = async () => {
     /* Fills -> Paint, style -> node used as ref to local style */
     .map((x) => ({ fill: x.fills?.[0], style: x?.styles?.fills }));
 
-  const colors: { [key: string]: string } = colorInstances
-    .map((c) => ({
-      [parseName(file.styles[c.style]?.name)]: parseColor(c.fill),
-    }))
-    .reduce((old, color) => ({ ...color, ...old }), {});
+  const colors: ColorT[] = colorInstances.map((c) => ({
+    name: parseName(file.styles[c.style]?.name),
+    color: parseColor(c.fill),
+  }));
 
-  writeFileSync(resolve("./src/colors.json"), JSON.stringify(colors, null, 2));
+  const colorsWithRef = globalColorRefs(colors).reduce(
+    (old, color) => ({ [color.name]: color.color, ...old }),
+    {}
+  );
+
+  const styledDictionaryFormat = formatToStyledDictionary(colorsWithRef);
+
+  writeFileSync(
+    resolve("./src/colors.json"),
+    JSON.stringify(styledDictionaryFormat, null, 2)
+  );
 };
 
 try {

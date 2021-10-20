@@ -1,6 +1,6 @@
 import Color from "color";
 
-type ColorT = {
+export type ColorT = {
   name: string;
   color: string;
 };
