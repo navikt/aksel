@@ -150,7 +150,6 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         className={cl("navds-popover", className, {
           "navds-popover--hidden": !open || !anchorEl,
         })}
-        aria-live="polite"
         aria-hidden={!open || !anchorEl}
         tabIndex={-1}
         {...attributes.popper}
