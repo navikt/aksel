@@ -32,9 +32,7 @@ export interface AccordionItemContextProps {
   open: boolean;
   toggleOpen: () => void;
   setButtonId: (id: string) => void;
-  setContentId: (id: string) => void;
   buttonId: string;
-  contentId: string;
   renderContentWhenClosed: boolean;
 }
 
@@ -58,7 +56,6 @@ const AccordionItem: AccordionItemType = forwardRef(
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const [buttonId, setButtonId] = useState("");
-    const [contentId, setContentId] = useState("");
 
     return (
       <div
@@ -79,8 +76,6 @@ const AccordionItem: AccordionItemType = forwardRef(
             renderContentWhenClosed,
             setButtonId,
             buttonId,
-            setContentId,
-            contentId,
           }}
         >
           {children}
