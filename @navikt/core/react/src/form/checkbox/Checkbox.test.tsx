@@ -28,56 +28,61 @@ test("checkbox group chains onChange calls", () => {
   expect(firstArgumentOfFirstCall(onChange).target.checked).toBe(true);
 });
 
-test("checkbox group handles controlled sate", () => {
-  const onGroupChange = jest.fn();
-  const value1 = "value1";
-  const value2 = "value2";
-  const label1 = faker.datatype.string();
-  const label2 = faker.datatype.string();
-
-  const { rerender } = render(
-    <CheckboxGroup
-      legend="legend"
-      onChange={onGroupChange}
-      value={[value1, value2]}
-    >
-      <Checkbox value={value1}>{label1}</Checkbox>
-      <Checkbox value={value2}>{label2}</Checkbox>
+describe("Checkbox handles controlled-state correctly", () => {
+  const CheckboxComponent = ({
+    onChange = () => null,
+    value = ["value1", "value2"],
+  }) => (
+    <CheckboxGroup legend="legend" onChange={onChange} value={value}>
+      <Checkbox value={"value1"}>label1</Checkbox>
+      <Checkbox value={"value2"}>label2</Checkbox>
     </CheckboxGroup>
   );
 
-  userEvent.click(screen.getByLabelText(label1));
-  expect(onGroupChange).lastCalledWith([value2]);
+  test("Checkbox is still checked after click when controlled", () => {
+    render(<CheckboxComponent />);
+    userEvent.click(screen.getByLabelText("label1"));
+    userEvent.click(screen.getByLabelText("label2"));
 
-  expect((screen.getByLabelText(label1) as HTMLInputElement).checked).toBe(
-    true
-  );
+    expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
+      true
+    );
+    expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
+      true
+    );
+  });
 
-  userEvent.click(screen.getByLabelText(label2));
-  expect(onGroupChange).lastCalledWith([value1]);
+  test("onChange called with expected values", () => {
+    const onGroupChange = jest.fn();
 
-  expect((screen.getByLabelText(label2) as HTMLInputElement).checked).toBe(
-    true
-  );
+    render(<CheckboxComponent onChange={onGroupChange} />);
 
-  rerender(
-    <CheckboxGroup legend="legend" onChange={onGroupChange} value={[]}>
-      <Checkbox value={value1}>{label1}</Checkbox>
-      <Checkbox value={value2}>{label2}</Checkbox>
-    </CheckboxGroup>
-  );
+    userEvent.click(screen.getByLabelText("label1"));
 
-  userEvent.click(screen.getByLabelText(label1));
-  expect(onGroupChange).lastCalledWith([value1]);
+    expect(onGroupChange).lastCalledWith(["value2"]);
 
-  expect((screen.getByLabelText(label1) as HTMLInputElement).checked).toBe(
-    false
-  );
+    userEvent.click(screen.getByLabelText("label2"));
 
-  userEvent.click(screen.getByLabelText(label2));
-  expect(onGroupChange).lastCalledWith([value2]);
+    expect(onGroupChange).lastCalledWith(["value1"]);
+  });
 
-  expect((screen.getByLabelText(label2) as HTMLInputElement).checked).toBe(
-    false
-  );
+  test("Checkboxes updates after value-prop change", () => {
+    const { rerender } = render(<CheckboxComponent value={[]} />);
+
+    expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
+      false
+    );
+    expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
+      false
+    );
+
+    rerender(<CheckboxComponent value={["value1", "value2"]} />);
+
+    expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
+      true
+    );
+    expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
+      true
+    );
+  });
 });
