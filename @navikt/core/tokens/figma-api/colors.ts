@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import { CANVAS, DOCUMENT, FRAME, Paint } from "figma-api";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
@@ -8,9 +7,8 @@ import globalColorRefs, { ColorT } from "./global-color-ref";
 import parseColor from "./paint-to-rgba";
 import parseName from "./parse-name";
 
-dotenv.config();
-
-const colors = async () => {
+const Colors = async () => {
+  console.log("Updating colors-tokens");
   const file = await getSyncDocument();
 
   const document: DOCUMENT = file.document;
@@ -49,16 +47,17 @@ const colors = async () => {
     {}
   );
 
-  const styledDictionaryFormat = formatToStyledDictionary(colorsWithRef);
+  const styledDictionaryFormat = formatToStyledDictionary(
+    colorsWithRef,
+    "color"
+  );
 
   writeFileSync(
     resolve("./src/colors.json"),
     JSON.stringify(styledDictionaryFormat, null, 2)
   );
+
+  console.log("Finished updating color-tokens\n");
 };
 
-try {
-  colors();
-} catch (e) {
-  console.log(e);
-}
+export default Colors;
