@@ -27,11 +27,19 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
-      - name: add access token to .env
-        run: echo "TOKEN=${{ secrets.GITHUB_TOKEN }}" >> @navikt/core/tokens/figma-api/.env
       - name: add Figma token to .env
-        run: echo "FIGMA_TOKEN=${{ secrets.FIGMA_IKONER_API }}" >> @navikt/core/tokens/figma-api/.env
-      - name: cd into token
-        run: cd @navikt/core/tokens
-      - name: update tokens
-        run: yarn update
+        run: echo "FIGMA_TOKEN=${{ secrets.FIGMA_IKONER_API }}" >> @navikt/core/tokens/.env
+      - name: Update tokens
+        run: yarn update:tokens
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GIT_REPO }}
+          commit-message: "Oppdatert tokens fra figma"
+          committer: GitHub <noreply@github.com>
+          branch: figma-tokens-sync
+          delete-branch: true
+          title: "[FEATURE] Automatisk PR for tokens"
+          labels: |
+            Design tokens
+            automated pr
