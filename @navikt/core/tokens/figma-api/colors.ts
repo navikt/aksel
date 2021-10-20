@@ -7,6 +7,8 @@ import parseColor from "./paint-to-rgba";
 import parseName from "./parse-name";
 
 const Colors = async (document: DOCUMENT, documentStyles) => {
+  console.log("Updating color-tokens");
+
   const colorPage = document.children.find(
     (c) => c.name === "Colors"
   ) as CANVAS;
@@ -22,7 +24,7 @@ const Colors = async (document: DOCUMENT, documentStyles) => {
   const colorInstances: { fill: Paint; style: string }[] = colorFrames
     /* All children nodes in frame (ex global and sematic frame) */
     .reduce((old, frame) => [...old, ...frame.children], [])
-    /* Only get nodes that is a color instance */
+    /* Only get nodes that is a color-box instance */
     .filter((x) => x.type === "INSTANCE")
     /* Get each nodes content (ex [text, frame]) */
     .reduce((old, instance) => [...old, ...instance?.children], [])
@@ -32,7 +34,7 @@ const Colors = async (document: DOCUMENT, documentStyles) => {
     .map((x) => ({ fill: x.fills?.[0], style: x?.styles?.fills }));
 
   const colors: ColorT[] = colorInstances.map((c) => ({
-    name: parseName(documentStyles.styles[c.style]?.name),
+    name: parseName(documentStyles[c.style]?.name),
     color: parseColor(c.fill),
   }));
 
