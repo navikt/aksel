@@ -39,11 +39,11 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
     },
     ref
   ) => {
-    const internalId = useId(id);
+    const internalId = useId();
 
     return (
       <svg
-        aria-labelledby={internalId}
+        aria-labelledby={id ?? `loader-${internalId}`}
         ref={ref}
         className={cl(
           "navds-loader",
