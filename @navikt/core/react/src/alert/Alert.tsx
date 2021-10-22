@@ -81,7 +81,6 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         focusable="false"
         role="img"
         variant={variant}
-        alt={`${variant}-ikon`}
         className="navds-alert__icon"
       />
       <BodyLong as="div" size={size} className="navds-alert__wrapper">
