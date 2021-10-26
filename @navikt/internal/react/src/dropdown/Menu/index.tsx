@@ -10,6 +10,10 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
    * Dropdown content
    */
   children: React.ReactNode;
+  /**
+   * onClose callback
+   */
+  onClose?: () => void;
 }
 
 export interface MenuType<Props = MenuProps>
@@ -21,7 +25,7 @@ export interface MenuType<Props = MenuProps>
 }
 
 const Menu = forwardRef<HTMLDivElement, MenuProps>(
-  ({ className, ...rest }, ref) => {
+  ({ className, onClose, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
     if (!context) {
@@ -41,7 +45,10 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
         offset={-4}
         anchorEl={anchorEl}
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={() => {
+          setIsOpen(false);
+          onClose && onClose();
+        }}
       />
     );
   }
