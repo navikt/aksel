@@ -49,7 +49,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
   return (
     <div
       className={cl(
-        props.className,
+        className,
         "navds-form-field",
         `navds-form-field--${size}`,
         { "navds-select--error": hasError }
@@ -82,7 +82,6 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
           {...inputProps}
           ref={ref}
           className={cl(
-            className,
             "navds-select__input",
             "navds-body-short",
             `navds-body--${size ?? "medium"}`
