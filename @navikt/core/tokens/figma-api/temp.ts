@@ -1,6 +1,8 @@
 import Axios from "axios";
 import getFileStyles from "./file-styles";
 const { create } = Axios;
+const dotenv = require("dotenv");
+dotenv.config();
 
 const FIGMA_FILE = "m0qpSPpsnNC9DwdmerGqJH";
 
