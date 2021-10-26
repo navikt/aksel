@@ -1,8 +1,9 @@
 import file from "./file.json";
+import fileStyles from "./file-styles.json";
 import getFileStyles from "../file-styles";
 
 test("get file styles", () => {
-  expect(getFileStyles(file)).toEqual({
+  expect(getFileStyles(file, fileStyles)).toEqual({
     colors: {
       "test-color-style": "rgba(196, 196, 196, 1)",
       "stroke-color-style": "rgba(84, 138, 83, 1)",

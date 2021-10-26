@@ -2,7 +2,7 @@ import Axios from "axios";
 import getFileStyles from "./file-styles";
 const { create } = Axios;
 
-const FIGMA_FILE = "m0qpSPpsnNC9DwdmerGqJH";
+const FIGMA_FILE = "0mfgBpI1SEf32yYXo5efgf";
 
 const FigmaAxion = (token) =>
   create({
@@ -11,7 +11,7 @@ const FigmaAxion = (token) =>
     },
   });
 
-const getSyncDocument = async () => {
+const fetchFile = async () => {
   const { data } = await FigmaAxion(process.env.FIGMA_TOKEN)
     .get(`https://api.figma.com/v1/files/${FIGMA_FILE}`)
     .catch((e) => {
@@ -20,6 +20,19 @@ const getSyncDocument = async () => {
   return data;
 };
 
-getSyncDocument().then((data) =>
-  console.log(JSON.stringify(getFileStyles(data), null, 2))
+const fetchFileStyles = async () => {
+  const {
+    data: {
+      meta: { styles },
+    },
+  } = await FigmaAxion(process.env.FIGMA_TOKEN)
+    .get(`https://api.figma.com/v1/files/${FIGMA_FILE}/styles`)
+    .catch((e) => {
+      throw e;
+    });
+  return styles;
+};
+
+Promise.all([fetchFile(), fetchFileStyles()]).then(([file, styles]) =>
+  console.log(JSON.stringify(getFileStyles(file, styles), null, 2))
 );

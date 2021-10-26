@@ -4,7 +4,6 @@ import paintToRgba from "./paint-to-rgba";
 interface StyleId {
   id: string;
   styleType: "TEXT" | "FILL";
-  name: string;
 }
 
 const styleFieldNames = {
@@ -59,13 +58,13 @@ const styleTypeName = {
   TEXT: "textStyles",
 };
 
-const getFileStyles = (file) =>
-  Object.entries<any>(file.styles).reduce(
-    (styles, [id, { name, styleType }]) => ({
+const getFileStyles = (file, fileStyles) =>
+  fileStyles.reduce(
+    (styles, { node_id: id, style_type: styleType, name }) => ({
       ...styles,
       [styleTypeName[styleType]]: {
         ...styles[styleTypeName[styleType]],
-        [name]: findStyleValue(file.document, { id, styleType, name }),
+        [name]: findStyleValue(file.document, { id, styleType }),
       },
     }),
     {}
