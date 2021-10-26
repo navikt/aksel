@@ -1,3 +1,5 @@
+const template = require("./template");
+
 module.exports = {
   typescript: true,
   ref: true,
@@ -10,4 +12,5 @@ module.exports = {
   replaceAttrValues: {
     "#262626": "currentColor",
   },
+  template,
 };
