@@ -2,7 +2,7 @@ import Axios from "axios";
 import getFileStyles from "./file-styles";
 const { create } = Axios;
 
-const FIGMA_FILE = "0mfgBpI1SEf32yYXo5efgf";
+const FIGMA_FILE = "m0qpSPpsnNC9DwdmerGqJH";
 
 const FigmaAxion = (token) =>
   create({
