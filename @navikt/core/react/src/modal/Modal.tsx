@@ -87,11 +87,7 @@ const Modal = forwardRef<ReactModal, ModalProps>(
           aria-label="lukk modalvindu"
           onClick={onClose}
         >
-          <Close
-            focusable="false"
-            role="img"
-            aria-label="X-ikon for å lukke modal"
-          />
+          <Close title="X-ikon for å lukke modal" />
         </Button>
       </ReactModal>
     );
