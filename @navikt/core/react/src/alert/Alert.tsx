@@ -77,9 +77,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       )}
     >
       <Icon
-        aria-label={`${variant}-ikon`}
-        focusable="false"
-        role="img"
+        title={`${variant}-ikon`}
         variant={variant}
         className="navds-alert__icon"
       />

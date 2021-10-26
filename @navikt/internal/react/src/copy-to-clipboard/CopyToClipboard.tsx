@@ -71,11 +71,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           size={size}
           {...rest}
         >
-          <Copy
-            focusable="false"
-            role="img"
-            aria-label="Fil ikon for kopiering"
-          />
+          <Copy title="Fil ikon for kopiering" />
           {children ? children : <span className="navds-sr-only">{title}</span>}
         </Button>
         <Popover
