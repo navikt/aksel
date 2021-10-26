@@ -14,29 +14,32 @@ export type ToggleType = React.ForwardRefExoticComponent<
   ToggleProps & React.RefAttributes<HTMLButtonElement>
 >;
 
-const Toggle: ToggleType = forwardRef(({ className, ...rest }, ref) => {
-  const context = useContext(DropdownContext);
+const Toggle: ToggleType = forwardRef(
+  ({ className, onClick, ...rest }, ref) => {
+    const context = useContext(DropdownContext);
 
-  if (!context) {
-    console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
-    return null;
+    if (!context) {
+      console.warn("Dropdown.Toggle has to be wrapped in <Dropdown />");
+      return null;
+    }
+
+    const { setAnchorEl, setIsOpen, isOpen } = context;
+
+    return (
+      <button
+        {...rest}
+        ref={ref}
+        onClick={(e) => {
+          setAnchorEl(e.currentTarget);
+          setIsOpen((isOpen) => !isOpen);
+          onClick && onClick(e);
+        }}
+        aria-expanded={isOpen}
+        aria-haspopup="menu"
+        className={cl("navdsi-dropdown__toggle", className)}
+      />
+    );
   }
-
-  const { setAnchorEl, setIsOpen, isOpen } = context;
-
-  return (
-    <button
-      {...rest}
-      ref={ref}
-      onClick={(e) => {
-        setAnchorEl(e.currentTarget);
-        setIsOpen((isOpen) => !isOpen);
-      }}
-      aria-expanded={isOpen}
-      aria-haspopup="menu"
-      className={cl("navdsi-dropdown__toggle", className)}
-    />
-  );
-});
+);
 
 export default Toggle;
