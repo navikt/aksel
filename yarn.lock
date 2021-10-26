@@ -12462,6 +12462,13 @@ gatsby-plugin-cname@^1.0.0:
   resolved "https://registry.yarnpkg.com/gatsby-plugin-cname/-/gatsby-plugin-cname-1.0.0.tgz#5752d006c476a3c7897fca5c307901df5501747a"
   integrity sha512-U0yRgn4cm1zBi+qC5a827acPFnUqKSowoCvAxT3MDmMJVLSWB4vmSyM7m6ThVz35obO4nKr4iP4vZhvA7gEVsA==
 
+gatsby-plugin-hotjar-tracking@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-hotjar-tracking/-/gatsby-plugin-hotjar-tracking-1.1.0.tgz#9dd1e1c780a68ceb4d4118a29e36984821d3f0d5"
+  integrity sha512-ec3t8cLz0FABGqnmhccCwam/SCPdDdCAw7mqTGLoq2XPM6zKGZkbArjdXUIX6NS3jmuqk9h9An8Rwr+zyb9Asw==
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+
 gatsby-plugin-layout@^1.3.12:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-layout/-/gatsby-plugin-layout-1.10.0.tgz#6b058e51d995d33ee0d020f6f136878a3d5a7c39"
