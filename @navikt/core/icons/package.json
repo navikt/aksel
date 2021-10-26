@@ -29,7 +29,7 @@
     "dl-icons": "FILE_KEY=UmEVH3pZ71uJPsSz9ilP3Y node --experimental-modules --es-module-specifier-resolution=node -r dotenv/config figma-api/index.mjs dotenv_config_path=figma-api/.env",
     "create-icons": "svgr --out-dir src svg",
     "convert-icons": "node figma-api/pngConverter.mjs",
-    "clean": "rimraf src png NAV-ikonpakke-png.zip NAV-ikonpakke-svg.zip",
+    "clean": "rimraf src cjs esm png NAV-ikonpakke-png.zip NAV-ikonpakke-svg.zip",
     "zip-icons": "node figma-api/zipIcons.mjs",
     "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn run convert-icons && yarn zip-icons"
   },
