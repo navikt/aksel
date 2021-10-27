@@ -22,7 +22,8 @@
     "/cjs",
     "/esm",
     "/src",
-    "/svg"
+    "/svg",
+    "/meta.json"
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
