@@ -28,11 +28,11 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --out-dir src svg",
-    "convert-icons": "node figma-api/pngConverter.mjs",
+    "convert-icons": "node scripts/pngConverter.mjs",
     "clean": "rimraf src cjs esm png NAV-ikonpakke-png.zip NAV-ikonpakke-svg.zip",
-    "zip-icons": "node figma-api/zipIcons.mjs",
+    "zip-icons": "node scripts/zipIcons.mjs",
     "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn run convert-icons && yarn zip-icons",
-    "update": "ts-node figma-api/index.ts dotenv/config"
+    "update": "ts-node figma/index.ts dotenv/config"
   },
   "dependencies": {
     "uuid": "^8.3.2"
