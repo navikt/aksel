@@ -1,6 +1,6 @@
 # @navikt/ds-icons
 
-Denne pakken leverer [NAVs ikoner](https://design.nav.no/resources/icons) i en pakke med React-komponenter og SVGer.
+Leverer [NAVs ikoner](https://design.nav.no/resources/icons) i React og SVG.
 
 ## Installering
 
@@ -12,7 +12,17 @@ yarn add @navikt/ds-icons
 npm install @navikt/ds-icons
 ```
 
+## Bruk
+
+```jsx
+/* ESM (anbefalt for tree-shaking)*/
+import { Down } from "@navikt/ds-icons";
+/* CJS */
+import { Down } from "@navikt/cjs/ds-icons";
+
+<Down role="img" aria-label="Åpne meny" />;
+```
+
 ## Dokumentasjon
 
 - [Ikonsøk](https://design.nav.no/resources/icons)
-- [Installering](https://design.nav.no/resources/icons/install)
