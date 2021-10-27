@@ -20,7 +20,7 @@ import { Down } from "@navikt/ds-icons";
 /* CJS */
 import { Down } from "@navikt/cjs/ds-icons";
 
-<Down role="img" aria-label="Åpne meny" />;
+<Down aria-label="Åpne meny" />;
 ```
 
 ## Dokumentasjon
