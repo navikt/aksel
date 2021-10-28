@@ -12,7 +12,7 @@ import ColorSwitch from "../color-switch/ColorSwitch";
 import { Button } from "@navikt/ds-react";
 import "./styles.less";
 import { generatePngZip } from "./GeneratePng";
-const metadata = require("@navikt/ds-icons/figma-api/metadata.json");
+const metadata = require("@navikt/ds-icons/meta.json");
 const beautify_html = require("js-beautify").html;
 
 interface CategoryType {
@@ -24,7 +24,6 @@ interface MetaType {
   name: string;
   description: string;
   created_at: string;
-  updated_at: string;
   pageName: string;
   visible?: boolean;
 }
