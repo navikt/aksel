@@ -27,8 +27,6 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
-      - name: Clear Tests
-        run: yarn test
       - name: Update Icons
         run: yarn update:icons
         env:
