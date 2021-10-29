@@ -8,7 +8,6 @@ module.exports = {
   svgProps: {
     focusable: false,
     role: "img",
-    tabIndex: -1,
   },
   replaceAttrValues: {
     "#262626": "currentColor",
