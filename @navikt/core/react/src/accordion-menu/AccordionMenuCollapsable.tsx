@@ -32,9 +32,7 @@ const Collapsable: AccordionMenuCollapsableType = forwardRef(
         >
           {title}
           <Expand
-            role="img"
-            focusable="false"
-            aria-label={isOpen ? "Pil peker opp" : "Pil peker ned"}
+            title={isOpen ? "Pil peker opp" : "Pil peker ned"}
             className="navds-accordion-menu-collapsable__expand-icon"
           />
         </button>

@@ -52,22 +52,17 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-heading--small"
         )}
         onClick={handleClick}
-        aria-controls={context.contentId}
         {...rest}
       >
         {children}
         <Expand
-          focusable="false"
-          role="img"
-          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
+          title={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl("navds-accordion__expand-icon", {
             "navds-accordion__expand-icon--flip": context.open,
           })}
         />
         <ExpandFilled
-          focusable="false"
-          role="img"
-          aria-label={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
+          title={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",

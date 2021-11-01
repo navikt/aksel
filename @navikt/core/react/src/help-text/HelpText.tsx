@@ -3,7 +3,7 @@ import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover, useId } from "..";
+import { Popover } from "..";
 
 export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -29,7 +29,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     const [open, setOpen] = useState(false);
-    const popoverId = `popover-${useId()}`;
 
     useEffect(() => {
       open && popoverRef.current?.focus();
@@ -51,7 +50,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
-          aria-controls={popoverId}
           aria-haspopup="dialog"
           title={title}
         >
@@ -65,7 +63,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           open={open}
           role="tooltip"
           anchorEl={buttonRef.current}
-          id={popoverId}
           placement={placement}
         >
           <Popover.Content>{children}</Popover.Content>

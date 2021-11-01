@@ -25,6 +25,7 @@
     "gatsby-plugin-robots-txt": "^1.5.3",
     "gatsby-plugin-sharp": "^2.6.37",
     "gatsby-plugin-sitemap": "^2.6.0",
+    "gatsby-plugin-hotjar-tracking": "^1.1.0",
     "gatsby-remark-autolink-headers": "^2.3.15",
     "gatsby-remark-prismjs": "^3.5.16",
     "gatsby-source-filesystem": "^2.3.31",

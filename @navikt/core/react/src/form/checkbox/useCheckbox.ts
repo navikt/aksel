@@ -32,7 +32,7 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
       checked: checkboxGroup?.value
         ? checkboxGroup.value.includes(props.value as string)
         : props.checked,
-      defaultChecked: checkboxGroup
+      defaultChecked: checkboxGroup?.defaultValue
         ? checkboxGroup.defaultValue.includes(props.value as string)
         : props.defaultChecked,
       onChange: (e) => {
