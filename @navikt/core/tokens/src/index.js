@@ -39,8 +39,11 @@ const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
 module.exports = {
   ...newColors,
-  ...newSpacing,
+
   navds: {
+    spacing: {
+      ...newSpacing.navds.spacing,
+    },
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
@@ -187,14 +190,14 @@ module.exports = {
     contentContainer: {
       maxWidth: { value: "79.5rem" },
       padding: {
-        small: { value: "{navds-spacing-4.value}" },
-        mediumAndLarger: { value: "{navds-spacing-6.value}" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.6.value}" },
       },
     },
     grid: {
       gutter: {
-        small: { value: "{navds-spacing-4.value}" },
-        mediumAndLarger: { value: "{navds-spacing-6.value}" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.6.value}" },
       },
     },
     layout: {
@@ -203,8 +206,8 @@ module.exports = {
         gray: { value: "{navds.color.gray.10.value}" },
       },
       padding: {
-        small: { value: "{navds-spacing-4.value}" },
-        mediumAndLarger: { value: "{navds-spacing-10.value}" },
+        small: { value: "{navds.spacing.4.value}" },
+        mediumAndLarger: { value: "{navds.spacing.10.value}" },
       },
     },
     "z-index": {
