@@ -27,10 +27,10 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
+      - name: add Figma token to .env
+        run: echo "FIGMA_TOKEN=${{ secrets.FIGMA_IKONER_API }}" >> @navikt/core/icons/.env
       - name: Update Icons
         run: yarn update:icons
-        env:
-          FIGMA_TOKEN: ${{ secrets.FIGMA_IKONER_API }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
