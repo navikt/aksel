@@ -27,8 +27,6 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
-      - name: Test implementation
-        run: yarn test
       - name: Update tokens
         run: yarn update:tokens
         env:
