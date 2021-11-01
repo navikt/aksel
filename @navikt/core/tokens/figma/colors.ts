@@ -1,10 +1,7 @@
-import { CANVAS, DOCUMENT, FRAME, Paint } from "figma-api";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
-import { string } from "prop-types";
 import formatToStyledDictionary from "./format-sd";
 import globalColorRefs, { ColorT } from "./global-color-ref";
-import parseColor from "./paint-to-rgba";
 import parseName from "./parse-name";
 
 type FigmaColorsT = {
@@ -13,6 +10,7 @@ type FigmaColorsT = {
 
 const parseColors = async (figmaColors: FigmaColorsT) => {
   /* Parse name and color into correct format */
+  // TODO: Better sorting
   const colors: ColorT[] = Object.entries(figmaColors)
     .map(([key, value]) => ({
       name: parseName(key),
@@ -36,8 +34,6 @@ const parseColors = async (figmaColors: FigmaColorsT) => {
     resolve("./src/colors.json"),
     JSON.stringify(styledDictionaryFormat, null, 2)
   );
-
-  console.log("Finished updating color-tokens\n");
 };
 
 export default parseColors;
