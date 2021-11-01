@@ -18,6 +18,7 @@ export const getPublishedIcons = async () => {
   const { data } = await FigmaAxion(process.env.FIGMA_TOKEN)
     .get(`https://api.figma.com/v1/files/${FILE_KEY}/components`)
     .catch((e) => {
+      console.log("Failed getPublishedIcons ");
       throw e;
     });
   return data?.meta?.components;
@@ -34,6 +35,7 @@ export const getIconsDownloadableUrl = async (nodeIds: string) => {
       `https://api.figma.com/v1/images/${FILE_KEY}/?ids=${nodeIds}&format=svg`
     )
     .catch((e) => {
+      console.log("Failed getIconsDownloadableUrl ");
       throw e;
     });
 
