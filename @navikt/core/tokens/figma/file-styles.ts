@@ -49,7 +49,11 @@ const findStyleValue = (document: DOCUMENT, styleId: StyleId) => {
         return undefined;
       }
     case "TEXT":
-      return node.style;
+      if (node) {
+        return node?.style;
+      } else {
+        return undefined;
+      }
   }
 };
 
