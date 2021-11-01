@@ -33,3 +33,14 @@ export const fetchFileStyles = async () => {
     });
   return styles;
 };
+
+export const fetchSyncDocument = async () => {
+  const {
+    data: { document },
+  } = await FigmaAxion(process.env.FIGMA_TOKEN)
+    .get(`https://api.figma.com/v1/files/A7fbghTh75Hk65SieEhaKK`)
+    .catch((e) => {
+      throw e;
+    });
+  return document;
+};

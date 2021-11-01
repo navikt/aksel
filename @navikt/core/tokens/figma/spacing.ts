@@ -3,7 +3,7 @@ import formatToStyledDictionary from "./format-sd";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
-const Spacing = async (document: DOCUMENT) => {
+const Spacing = (document: DOCUMENT) => {
   console.log("Updating spacing-tokens");
 
   const spacingPage = document.children.find(
