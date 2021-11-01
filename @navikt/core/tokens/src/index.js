@@ -38,12 +38,12 @@ const lightgray = "#F1F1F1";
 const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
 module.exports = {
-  ...newColors,
-
   navds: {
     spacing: {
       ...newSpacing.navds.spacing,
     },
+    ...newColors?.global,
+    ...newColors?.semantic,
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
