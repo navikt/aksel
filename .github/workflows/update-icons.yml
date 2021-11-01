@@ -39,7 +39,7 @@ jobs:
           committer: GitHub <noreply@github.com>
           branch: figma-icons-sync
           delete-branch: true
-          title: "[FEATURE] Automatisk PR for ikoner"
+          title: "[FIX] Automatisk PR for ikoner"
           labels: |
             Icons
             automated pr
