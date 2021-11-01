@@ -187,14 +187,14 @@ module.exports = {
     contentContainer: {
       maxWidth: { value: "79.5rem" },
       padding: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.6.value}" },
+        small: { value: "{navds-spacing-4.value}" },
+        mediumAndLarger: { value: "{navds-spacing-6.value}" },
       },
     },
     grid: {
       gutter: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.6.value}" },
+        small: { value: "{navds-spacing-4.value}" },
+        mediumAndLarger: { value: "{navds-spacing-6.value}" },
       },
     },
     layout: {
@@ -203,8 +203,8 @@ module.exports = {
         gray: { value: "{navds.color.gray.10.value}" },
       },
       padding: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.10.value}" },
+        small: { value: "{navds-spacing-4.value}" },
+        mediumAndLarger: { value: "{navds-spacing-10.value}" },
       },
     },
     "z-index": {
@@ -217,15 +217,6 @@ module.exports = {
         offset: { value: "0" },
       },
     },
-    spacing: Array(24)
-      .fill(0)
-      .reduce(
-        (spacing, _, index) => ({
-          ...spacing,
-          [index + 1]: { value: `${(index + 1) / 4}rem` },
-        }),
-        {}
-      ),
     checkmark: {
       image: {
         white: {
