@@ -13,7 +13,7 @@ const FigmaAxion = (token) =>
     },
   });
 
-const fetchFile = async () => {
+export const fetchFile = async () => {
   const { data } = await FigmaAxion(process.env.FIGMA_TOKEN)
     .get(`https://api.figma.com/v1/files/${FIGMA_FILE}`)
     .catch((e) => {
@@ -22,7 +22,7 @@ const fetchFile = async () => {
   return data;
 };
 
-const fetchFileStyles = async () => {
+export const fetchFileStyles = async () => {
   const {
     data: {
       meta: { styles },
@@ -34,7 +34,3 @@ const fetchFileStyles = async () => {
     });
   return styles;
 };
-
-Promise.all([fetchFile(), fetchFileStyles()]).then(([file, styles]) =>
-  console.log(JSON.stringify(getFileStyles(file, styles), null, 2))
-);

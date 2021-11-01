@@ -1,20 +1,27 @@
 import dotenv from "dotenv";
 import { DOCUMENT } from "figma-api";
-import Colors from "./colors";
+import parseColors from "./colors";
 import { getSyncDocument } from "./fetch";
+import getFileStyles from "./file-styles";
 import Spacing from "./spacing";
+import { fetchFile, fetchFileStyles } from "./temp";
 
 dotenv.config();
 
 const main = async () => {
-  const file = await getSyncDocument();
-  const document: DOCUMENT = file?.document;
-  const styles = file?.styles;
-  if (!document || !styles)
-    throw new Error("Could not fetch document or styles from Figma file");
+  await Promise.all([fetchFile(), fetchFileStyles()])
+    .then(([file, styles]) => {
+      const parsedStyles = getFileStyles(file, styles);
 
-  await Colors(document, styles);
-  await Spacing(document);
+      parsedStyles.colors && parseColors(parsedStyles.colors);
+    })
+    .catch((e) => {
+      console.log("Failed fetching styles and file from figma");
+      throw e;
+    });
+
+  /* await Colors(document, styles); */
+  /* await Spacing(document); */
 };
 
 try {
