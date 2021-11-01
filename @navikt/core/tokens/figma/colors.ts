@@ -13,10 +13,13 @@ type FigmaColorsT = {
 
 const parseColors = async (figmaColors: FigmaColorsT) => {
   /* Parse name and color into correct format */
-  const colors: ColorT[] = Object.entries(figmaColors).map(([key, value]) => ({
-    name: parseName(key),
-    color: value,
-  }));
+  const colors: ColorT[] = Object.entries(figmaColors)
+    .map(([key, value]) => ({
+      name: parseName(key),
+      color: value,
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .reverse();
 
   /* Make semantic colors reference global colors */
   const colorsWithRef = globalColorRefs(colors).reduce(

@@ -1,10 +1,7 @@
 import dotenv from "dotenv";
-import { DOCUMENT } from "figma-api";
 import parseColors from "./colors";
-import { getSyncDocument } from "./fetch";
 import getFileStyles from "./file-styles";
-import Spacing from "./spacing";
-import { fetchFile, fetchFileStyles } from "./temp";
+import { fetchFile, fetchFileStyles } from "./fetch";
 
 dotenv.config();
 
@@ -20,7 +17,6 @@ const main = async () => {
       throw e;
     });
 
-  /* await Colors(document, styles); */
   /* await Spacing(document); */
 };
 
