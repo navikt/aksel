@@ -1,5 +1,5 @@
 import { CANVAS, DOCUMENT, FRAME, RECTANGLE } from "figma-api";
-import formatToStyledDictionary from "./format-sd";
+import formatToStyleDictionary from "./format-sd";
 import { writeFileSync } from "fs";
 import { resolve } from "path";
 
@@ -34,11 +34,11 @@ const Spacing = (document: DOCUMENT) => {
       {}
     );
 
-  const styledDictionaryFormat = formatToStyledDictionary(spaces, "spacing");
+  const styleDictionaryFormat = formatToStyleDictionary(spaces, "spacing");
 
   writeFileSync(
     resolve("./src/spacing.json"),
-    JSON.stringify(styledDictionaryFormat, null, 2)
+    JSON.stringify(styleDictionaryFormat, null, 2)
   );
 
   console.log("Finished updating spacing-tokens\n");
