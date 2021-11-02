@@ -27,7 +27,7 @@ jobs:
         run: yarn postinstall
       - name: Update Icons
         run: yarn update:icons
-        env: 
+        env:
           FIGMA_TOKEN: ${{ secrets.FIGMA_IKONER_API }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
@@ -35,9 +35,8 @@ jobs:
           token: ${{ secrets.GIT_REPO }}
           commit-message: "Ikoner synket fra figma"
           branch: figma-icons-sync
-          author: GitHub <noreply@github.com>
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
           delete-branch: true
-          title: "[FIX] Ikonsynk fra Figma (Automatisk PR)"
-          labels: |
-            Icons
-            automated pr
+          title: "[FIX] Ikonsynk Figma"
