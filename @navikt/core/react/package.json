@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.12.0",
+  "version": "0.12.1",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
-    "@navikt/ds-icons": "^0.6.0",
+    "@navikt/ds-icons": "^0.6.1",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
