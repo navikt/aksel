@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path";
-import deepen from "./deepenJson";
+import deepen from "./deepen";
 import formatToStyledDictionary from "./format-sd";
 import globalColorRefs, { ColorT } from "./global-color-ref";
 import parseName from "./parse-name";
