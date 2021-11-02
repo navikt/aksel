@@ -1,21 +1,27 @@
-const formatToStyledDictionary = (
+import deepen from "./deepen";
+
+const formatToStyleDictionary = (
   colors: { [key: string]: string },
   type: "color" | "spacing"
 ) => {
   switch (type) {
     case "color": {
-      return Object.entries(colors).reduce(
-        (old, [key, val]) =>
-          val.startsWith("rgba")
-            ? { ...old, [key]: { value: val } }
-            : { ...old, [key]: { value: `{${val}.value}` } },
-        {}
+      return deepen(
+        Object.entries(colors).reduce(
+          (old, [key, val]) =>
+            val.startsWith("rgba")
+              ? { ...old, [key]: { value: val } }
+              : { ...old, [key]: { value: `{${val}.value}` } },
+          {}
+        )
       );
     }
     case "spacing": {
-      return Object.entries(colors).reduce(
-        (old, [key, val]) => ({ ...old, [key]: { value: val } }),
-        {}
+      return deepen(
+        Object.entries(colors).reduce(
+          (old, [key, val]) => ({ ...old, [key]: { value: val } }),
+          {}
+        )
       );
     }
     default:
@@ -23,4 +29,4 @@ const formatToStyledDictionary = (
   }
 };
 
-export default formatToStyledDictionary;
+export default formatToStyleDictionary;

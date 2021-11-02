@@ -38,9 +38,12 @@ const lightgray = "#F1F1F1";
 const gray = (n) => Color(lightgray).mix(Color(darkgray), n).hex();
 
 module.exports = {
-  ...newColors,
-  ...newSpacing,
   navds: {
+    spacing: {
+      ...(newSpacing?.navds?.spacing ?? {}),
+    },
+    ...(newColors?.global ?? {}),
+    ...(newColors?.semantic ?? {}),
     color: {
       white: { value: white },
       darkgray: { value: darkgray },
@@ -217,15 +220,6 @@ module.exports = {
         offset: { value: "0" },
       },
     },
-    spacing: Array(24)
-      .fill(0)
-      .reduce(
-        (spacing, _, index) => ({
-          ...spacing,
-          [index + 1]: { value: `${(index + 1) / 4}rem` },
-        }),
-        {}
-      ),
     checkmark: {
       image: {
         white: {

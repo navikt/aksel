@@ -1,6 +1,6 @@
 import { writeFileSync } from "fs";
 import { resolve } from "path";
-import formatToStyledDictionary from "./format-sd";
+import formatToStyleDictionary from "./format-sd";
 import globalColorRefs, { ColorT } from "./global-color-ref";
 import parseName from "./parse-name";
 
@@ -25,14 +25,11 @@ const parseColors = async (figmaColors: FigmaColorsT) => {
     {}
   );
 
-  const styledDictionaryFormat = formatToStyledDictionary(
-    colorsWithRef,
-    "color"
-  );
+  const styleDictionaryFormat = formatToStyleDictionary(colorsWithRef, "color");
 
   writeFileSync(
     resolve("./src/colors.json"),
-    JSON.stringify(styledDictionaryFormat, null, 2)
+    JSON.stringify(styleDictionaryFormat, null, 2)
   );
 };
 

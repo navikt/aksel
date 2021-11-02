@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v1
         with:
           node-version: 14
@@ -35,11 +33,10 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GIT_REPO }}
-          commit-message: "Oppdatert tokens fra figma"
-          committer: GitHub <noreply@github.com>
           branch: figma-tokens-sync
           delete-branch: true
-          title: "[FEATURE] Automatisk PR for tokens"
-          labels: |
-            Design tokens
-            automated pr
+          title: "[FEATURE] Tokens sync Figma"
+          commit-message: "Ikoner synket fra figma"
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
