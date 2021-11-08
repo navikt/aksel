@@ -1,0 +1,45 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Tooltip, Button } from "../..";
+import { placements } from "@popperjs/core";
+import { Refresh } from "@navikt/ds-icons";
+
+<Meta title="ds-react/tooltip/intro" />
+
+# Hvordan ta i bruk Tooltip
+
+Tooltip wrappes rundt elementet man ønsker at den skal åpnes over når man endten får fokus eller hover
+
+```jsx
+<Tooltip title="Tooltip text">
+  <Refresh />
+</Tooltip>
+```
+
+<Canvas>
+  <div style={{ margin: "3rem" }}>
+    <Tooltip title="Tooltip text">
+      <Refresh tabIndex={0} />
+    </Tooltip>
+    <br />
+    <br />
+    <Tooltip placement="auto" title="Tooltip text">
+      <Button>
+        <Refresh aria-label="refresh ikon" />
+      </Button>
+    </Tooltip>
+  </div>
+</Canvas>
+
+## Plassering
+
+Plassering er alle mulighetene tilbytt av `import { placements } from "@popperjs/core";`
+
+`auto` , `auto-start` , `auto-end` , `top` , `bottom` , `right` , `left` , `top` ,`top-start` , `top-end` , `bottom-start` , `bottom-end` , `right-start` , `right-end` , `left-start` , `left-end`
+
+## Arrow + offset
+
+`arrow`-proppen toggler om arrow skal rendres med popoveren, mens `offset`-proppen er `px` offset tooltip har fra ankerelementet.
+
+## Controlles state
+
+Ved å bruke `open`-prop blir tooltip controlled og er da opp til deg å håndtere state
