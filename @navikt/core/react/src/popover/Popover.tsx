@@ -1,12 +1,6 @@
 import { Placement } from "@popperjs/core";
 import cl from "classnames";
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useCallback, useRef } from "react";
 import mergeRefs from "react-merge-refs";
 import { usePopper } from "react-popper";
 import { useIsomorphicLayoutEffect, useKey, useEvent } from "react-use";
