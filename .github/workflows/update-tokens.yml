@@ -32,11 +32,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.GIT_REPO }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           branch: figma-tokens-sync
           delete-branch: true
           title: "[FEATURE] Tokens sync Figma"
           commit-message: "Ikoner synket fra figma"
           committer: GitHub <noreply@github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
