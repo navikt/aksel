@@ -10,7 +10,6 @@ type FigmaColorsT = {
 
 const parseColors = async (figmaColors: FigmaColorsT) => {
   /* Parse name and color into correct format */
-  // TODO: Better sorting
   const colors: ColorT[] = Object.entries(figmaColors)
     .map(([key, value]) => ({
       name: parseName(key),
