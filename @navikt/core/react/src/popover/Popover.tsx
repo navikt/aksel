@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import mergeRefs from "react-merge-refs";
 import { usePopper } from "react-popper";
-import { useClientLayoutEffect } from "..";
+import { useIsomorphicLayoutEffect, useKey, useEvent } from "react-use";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -46,14 +46,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   offset?: number;
 }
 
-const useEventLister = (event: string, callback) =>
-  useEffect(() => {
-    document.addEventListener(event, callback);
-    return () => {
-      document.removeEventListener(event, callback);
-    };
-  }, [event, callback]);
-
 interface PopoverComponent
   extends React.ForwardRefExoticComponent<
     PopoverProps & React.RefAttributes<HTMLDivElement>
@@ -81,7 +73,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
 
     const close = useCallback(() => open && onClose(), [open, onClose]);
 
-    useEventLister(
+    useEvent(
       "click",
       useCallback(
         (e: MouseEvent) => {
@@ -97,12 +89,9 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       )
     );
 
-    useEventLister(
-      "keydown",
-      useCallback((e: KeyboardEvent) => e.key === "Escape" && close(), [close])
-    );
+    useKey("Escape", () => close(), {}, [close]);
 
-    useEventLister(
+    useEvent(
       "focusin",
       useCallback(
         (e: FocusEvent) => {
@@ -140,7 +129,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       }
     );
 
-    useClientLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       open && update && update();
     }, [open, update]);
 

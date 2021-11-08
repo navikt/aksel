@@ -1,20 +1,11 @@
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-const canUseDOM = (): boolean => {
-  return (
-    typeof window !== "undefined" &&
-    typeof window.document !== "undefined" &&
-    typeof window.document.createElement !== "undefined"
-  );
-};
-
-export const useClientLayoutEffect = canUseDOM() ? useLayoutEffect : () => {};
+import { useIsomorphicLayoutEffect } from "react-use";
 
 export const useId: (id?: string) => string = (id) => {
   const [newId, setNewId] = useState<string | undefined>(undefined);
 
-  useClientLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setNewId(uuidv4());
   }, []);
 

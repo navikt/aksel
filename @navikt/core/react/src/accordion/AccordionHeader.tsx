@@ -2,7 +2,8 @@ import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
 import { AccordionItemContext } from "./AccordionItem";
-import { useClientLayoutEffect, useId } from "..";
+import { useIsomorphicLayoutEffect } from "react-use";
+import { useId } from "..";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -23,7 +24,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
 
     const setButtonId = context && context.setButtonId;
 
-    useClientLayoutEffect(() => {
+    useIsomorphicLayoutEffect(() => {
       setButtonId && setButtonId(id ? newId : `accordionContent-${newId}`);
     }, [setButtonId, newId]);
 
