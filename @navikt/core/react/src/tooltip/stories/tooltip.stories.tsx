@@ -16,7 +16,7 @@ export default {
 const Template = (props) => {
   return (
     <Tooltip {...props} title={props.placement}>
-      <Refresh />
+      <Refresh aria-hidden />
     </Tooltip>
   );
 };
