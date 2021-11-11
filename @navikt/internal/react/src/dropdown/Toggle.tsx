@@ -35,7 +35,6 @@ const Toggle: ToggleType = forwardRef(
           onClick && onClick(e);
         }}
         aria-expanded={isOpen}
-        aria-haspopup="menu"
         className={cl("navdsi-dropdown__toggle", className)}
       />
     );
