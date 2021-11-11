@@ -1,10 +1,10 @@
 import { Copy } from "@navikt/ds-icons";
 import cl from "classnames";
-import copy from "copy-to-clipboard";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
 import { BodyShort, Button, ButtonProps, Popover } from "@navikt/ds-react";
 import { Placement } from "@popperjs/core";
+import { useCopyToClipboard } from "react-use";
 
 export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   /**
@@ -44,6 +44,9 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
     const timeoutRef = useRef<number | null>();
     const [openPopover, setOpenPopover] = useState(false);
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_, copyToClipboard] = useCopyToClipboard();
+
     useEffect(() => {
       timeoutRef.current = openPopover
         ? window.setTimeout(() => setOpenPopover(false), 2000)
@@ -56,7 +59,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
     const title = `Kopier ${copyText}`;
 
     const handleClick = () => {
-      copy(copyText);
+      copyToClipboard(copyText);
       setOpenPopover(true);
     };
 
