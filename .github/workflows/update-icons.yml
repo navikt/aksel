@@ -1,8 +1,8 @@
 name: Update Icons
 
 on:
-  schedule:
-    - cron: 0 0 * * *
+#  schedule:
+ #   - cron: 0 0 * * *
   workflow_dispatch:
 
 jobs:
@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # Required to retrieve git history
       - uses: actions/setup-node@v1
         with:
           node-version: 14
@@ -27,19 +25,18 @@ jobs:
       - name: postinstall
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
-      - name: add Figma token to .env
-        run: echo "FIGMA_TOKEN=${{ secrets.FIGMA_IKONER_API }}" >> @navikt/core/icons/.env
       - name: Update Icons
         run: yarn update:icons
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_IKONER_API }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GIT_REPO }}
-          commit-message: "Oppdatert ikoner fra figma"
-          committer: GitHub <noreply@github.com>
+          commit-message: "Ikoner synket fra figma"
           branch: figma-icons-sync
+          committer: GitHub <noreply@github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          signoff: false
           delete-branch: true
-          title: "[FIX] Automatisk PR for ikoner"
-          labels: |
-            Icons
-            automated pr
+          title: "[FIX] Ikonsynk Figma"

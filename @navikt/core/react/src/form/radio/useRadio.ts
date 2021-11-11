@@ -24,10 +24,14 @@ export const useRadio = (props: RadioProps) => {
     inputProps: {
       ...inputProps,
       name: radioGroup?.name,
+      defaultChecked:
+        radioGroup?.defaultValue === undefined
+          ? undefined
+          : radioGroup?.defaultValue === props.value,
       checked:
-        (radioGroup?.value ?? radioGroup?.defaultValue) === props.value
-          ? true
-          : undefined,
+        radioGroup?.value === undefined
+          ? undefined
+          : radioGroup?.value === props.value,
       onChange: (e) => {
         props.onChange && props.onChange(e);
         radioGroup?.onChange && radioGroup.onChange(props.value);
