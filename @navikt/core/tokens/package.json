@@ -20,7 +20,8 @@
     "build": "node ./build.js",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
-    "test": "jest"
+    "test": "jest",
+    "update": "ts-node figma/index.ts dotenv/config"
   },
   "repository": {
     "type": "git",
@@ -28,10 +29,15 @@
     "directory": "@navikt/core/tokens"
   },
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "figma-api": "^1.7.0",
+    "ts-jest": "^27.0.5",
     "color": "^4.0.1",
     "jest": "^27.2.0",
     "lodash": "^4.17.21",
     "nodemon": "^2.0.12",
-    "style-dictionary": "^3.0.2"
+    "style-dictionary": "^3.0.2",
+    "ts-node": "^10.3.0",
+    "dotenv": "^10.0.0"
   }
 }

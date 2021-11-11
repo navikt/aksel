@@ -29,10 +29,7 @@ test("checkbox group chains onChange calls", () => {
 });
 
 describe("Checkbox handles controlled-state correctly", () => {
-  const CheckboxComponent = ({
-    onChange = () => null,
-    value,
-  }) => (
+  const CheckboxComponent = ({ onChange = () => null, value }) => (
     <CheckboxGroup legend="legend" onChange={onChange} value={value}>
       <Checkbox value={"value1"}>label1</Checkbox>
       <Checkbox value={"value2"}>label2</Checkbox>
@@ -55,7 +52,12 @@ describe("Checkbox handles controlled-state correctly", () => {
   test("onChange called with expected values", () => {
     const onGroupChange = jest.fn();
 
-    render(<CheckboxComponent onChange={onGroupChange} value={["value1", "value2"]} />);
+    render(
+      <CheckboxComponent
+        onChange={onGroupChange}
+        value={["value1", "value2"]}
+      />
+    );
 
     userEvent.click(screen.getByLabelText("label1"));
 
