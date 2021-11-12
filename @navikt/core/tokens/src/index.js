@@ -110,12 +110,6 @@ module.exports = {
       focus: { value: "0 0 0 3px {navds.semantic.color.focus.value}" },
       "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
     },
-    grid: {
-      gutter: {
-        small: { value: "{navds.spacing.4.value}" },
-        mediumAndLarger: { value: "{navds.spacing.6.value}" },
-      },
-    },
     layout: {
       background: {
         white: { value: white },

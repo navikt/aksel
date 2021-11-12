@@ -5,12 +5,12 @@
 .navds-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-gap: var(--navds-grid-gutter-small);
+  grid-gap: var(--navds-spacing-4);
 }
 
 @media (min-width: 448px) {
   .navds-grid {
-    grid-gap: var(--navds-grid-gutter-medium-and-larger);
+    grid-gap: var(--navds-spacing-6);
   }
 }
 
