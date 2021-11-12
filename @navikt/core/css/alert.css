@@ -6,12 +6,24 @@
   --navds-alert-color-error-background: var(
     --navds-semantic-color-feedback-danger-background
   );
-  --navds-alert-color-warning-border: var(--navds-color-warning-border);
-  --navds-alert-color-warning-background: var(--navds-color-warning-background);
-  --navds-alert-color-info-border: var(--navds-color-info-border);
-  --navds-alert-color-info-background: var(--navds-color-info-background);
-  --navds-alert-color-success-border: var(--navds-color-success-border);
-  --navds-alert-color-success-background: var(--navds-color-success-background);
+  --navds-alert-color-warning-border: var(
+    --navds-semantic-color-feedback-success-border
+  );
+  --navds-alert-color-warning-background: var(
+    --navds-semantic-color-feedback-warning-background
+  );
+  --navds-alert-color-info-border: var(
+    --navds-semantic-color-feedback-info-border
+  );
+  --navds-alert-color-info-background: var(
+    --navds-semantic-color-feedback-info-background
+  );
+  --navds-alert-color-success-border: var(
+    --navds-semantic-color-feedback-success-border
+  );
+  --navds-alert-color-success-background: var(
+    --navds-semantic-color-feedback-success-background
+  );
   --navds-alert-color-error-icon: var(--navds-color-red-60);
   --navds-alert-color-error-icon-background: var(--navds-color-white);
   --navds-alert-color-warning-icon: var(--navds-color-orange-40);
