@@ -70,12 +70,6 @@ module.exports = {
         {}
       ),
     },
-    border: {
-      default: {
-        value: "1px solid {navds.semantic.color.border.muted.value}",
-      },
-      radius: { value: "4px" },
-    },
     panel: {
       hover: { value: "1px solid {navds.color.blue.50.value}" },
     },

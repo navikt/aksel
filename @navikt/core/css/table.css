@@ -1,3 +1,7 @@
+:root {
+  --navds-table-cell-color-border: var(--navds-semantic-color-border-muted);
+}
+
 .navds-table {
   border-collapse: collapse;
   width: 100%;
@@ -20,7 +24,7 @@
   display: table-cell;
   padding: var(--navds-spacing-4);
   text-align: left;
-  border-bottom: var(--navds-border-default);
+  border-bottom: 1px solid var(--navds-table-cell-color-border);
 }
 
 .navds-table--small .navds-table__cell {
