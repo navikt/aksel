@@ -119,8 +119,12 @@
     var(--navds-shadow-focus);
 }
 
+.navds-button--primary:hover:disabled {
+  background-color: var(--navds-button-color-primary-background);
+}
+
 /**************************
- * .navds-button--secondary *
+* .navds-button--secondary *
  **************************/
 
 .navds-button--secondary {
@@ -153,6 +157,13 @@
     var(--navds-shadow-focus);
 }
 
+.navds-button--secondary:disabled,
+.navds-button--secondary:hover:disabled {
+  color: var(--navds-button-color-secondary-text);
+  background-color: var(--navds-button-color-secondary-background);
+  box-shadow: inset 0 0 0 2px var(--navds-button-color-secondary-border);
+}
+
 /****************************
  * .navds-button--tertiary *
  ****************************/
@@ -176,9 +187,21 @@
   box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-active);
 }
 
+.navds-button--tertiary:active:hover {
+  background-color: var(--navds-button-color-tertiary-background-active);
+}
+
 .navds-button--tertiary:active:focus {
   box-shadow: inset 0 0 0 1px var(--navds-button-color-tertiary-border-active),
     var(--navds-shadow-focus);
+}
+
+.navds-button--tertiary:disabled,
+.navds-button--tertiary:active:disabled,
+.navds-button--tertiary:active:hover:disabled {
+  color: var(--navds-button-color-tertiary-text);
+  background: none;
+  box-shadow: none;
 }
 
 /*************************
@@ -203,6 +226,10 @@
     var(--navds-shadow-focus);
 }
 
+.navds-button--danger:hover:disabled {
+  background-color: var(--navds-button-color-danger-background);
+}
+
 /**************************
  * .navds-button:disabled *
  **************************/
@@ -210,6 +237,5 @@
 .navds-button:disabled {
   opacity: 30%;
   cursor: not-allowed;
-  box-shadow: none;
   transform: none;
 }
