@@ -69,7 +69,6 @@ module.exports = {
         }),
         {}
       ),
-      hover: { value: "{navds.color.gray.40.value}" },
       tag: {
         error: {
           border: { value: "{navds.color.red.50.value}" },
@@ -96,7 +95,7 @@ module.exports = {
     },
     border: {
       default: {
-        value: "1px solid {navds.color.border.value}",
+        value: "1px solid {navds.semantic.color.border.muted.value}",
       },
       radius: { value: "4px" },
     },
@@ -142,7 +141,6 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
       "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
-      hover: { value: "{navds.color.hover.value} 0 2px 1px 0" },
     },
     text: {
       focus: { value: "{navds.color.blue.80.value}" },
