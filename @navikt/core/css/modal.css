@@ -1,6 +1,6 @@
 :root {
   --navds-modal-color-background: var(--navds-color-background);
-  --navds-modal-color-overlay: var(--navds-color-modal-overlay);
+  --navds-modal-color-overlay: rgba(38, 38, 38, 0.7);
 }
 
 .ReactModal__Body--open {

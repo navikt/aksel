@@ -69,11 +69,6 @@ module.exports = {
         }),
         {}
       ),
-      modal: {
-        overlay: {
-          value: "rgba(38, 38, 38, 0.7)",
-        },
-      },
     },
     border: {
       default: {
