@@ -1,7 +1,7 @@
 import React from "react";
 import { Ingress, Sidetittel } from "nav-frontend-typografi";
 import Card from "../../card/Card";
-import { Star, Facilitet, HandsHeart, Like } from "@navikt/ds-icons";
+import { Star, Facilitet, HandsHeart, Like, Locked } from "@navikt/ds-icons";
 import { NAVLogoDark } from "../../assets/images/svg";
 import "./styles.less";
 /* import Lenke from "nav-frontend-lenker"; */
@@ -71,7 +71,7 @@ const Forside = ({ ...props }) => (
             }
             title="Security Champions Playbook"
             link="https://improved-train-2f244007.pages.github.io/"
-            icon={<HandsHeart focusable="false" />}
+            icon={<Locked focusable="false" />}
           />
         </li>
       </ol>
