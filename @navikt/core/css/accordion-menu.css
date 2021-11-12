@@ -3,7 +3,7 @@
   --navds-accordion-menu-color-text-focus: var(--navds-color-darkgray);
   --navds-accordion-menu-color-background-hover: var(--navds-color-blue-10);
   --navds-accordion-menu-color-text-active: var(--navds-color-text);
-  --navds-accordion-menu-outline-focus: var(--navds-text-focus);
+  --navds-accordion-menu-outline-focus: var(--navds-semantic-color-focus);
 }
 
 .navds-accordion-menu__list {

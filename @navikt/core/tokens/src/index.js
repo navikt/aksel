@@ -110,10 +110,6 @@ module.exports = {
       focus: { value: "0 0 0 3px {navds.semantic.color.focus.value}" },
       "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
     },
-    text: {
-      focus: { value: "{navds.color.blue.80.value}" },
-      shadow: { value: "0 0 0 2px {navds.color.blue.80.value}" },
-    },
     contentContainer: {
       maxWidth: { value: "79.5rem" },
       padding: {

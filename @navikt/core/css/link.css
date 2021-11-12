@@ -2,8 +2,8 @@
   --navds-link-color-text: var(--navds-semantic-color-text-link);
   --navds-link-color-text-focus: var(--navds-semantic-color-text-inverted);
   --navds-link-color-text-active: var(--navds-semantic-color-text-inverted);
-  --navds-link-color-background-focus: var(--navds-text-focus);
-  --navds-link-color-background-active: var(--navds-text-focus);
+  --navds-link-color-background-focus: var(--navds-semantic-color-focus);
+  --navds-link-color-background-active: var(--navds-semantic-color-focus);
   --navds-link-color-icon: var(--navds-semantic-color-text-link);
   --navds-link-color-icon-focus: var(--navds-semantic-color-text-inverted);
   --navds-link-color-on-info-background: var(
@@ -40,7 +40,7 @@
   color: var(--navds-link-color-text-focus);
   text-decoration: none;
   background-color: var(--navds-link-color-background-focus);
-  box-shadow: var(--navds-text-shadow);
+  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
 }
 
 .navds-link:active {
@@ -48,7 +48,7 @@
   color: var(--navds-link-color-text-active);
   text-decoration: none;
   background-color: var(--navds-link-color-background-active);
-  box-shadow: var(--navds-text-shadow);
+  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
 }
 
 .navds-link svg {
