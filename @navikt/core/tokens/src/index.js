@@ -107,7 +107,7 @@ module.exports = {
       },
     },
     shadow: {
-      focus: { value: "0 0 0 3px {navds.color.blue.80.value}" },
+      focus: { value: "0 0 0 3px {navds.semantic.color.focus.value}" },
       "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
     },
     text: {
