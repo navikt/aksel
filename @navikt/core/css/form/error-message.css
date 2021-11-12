@@ -1,5 +1,7 @@
 :root {
-  --navds-error-message-color-text: var(--navds-color-text-error);
+  --navds-error-message-color-text: var(
+    --navds-semantic-color-feedback-danger-text
+  );
 }
 
 .navds-error-message {

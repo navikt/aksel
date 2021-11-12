@@ -12,8 +12,12 @@
 
   /* Secondary */
   --navds-button-color-secondary-text: var(--navds-color-action-default);
-  --navds-button-color-secondary-text-hover: var(--navds-color-text-inverse);
-  --navds-button-color-secondary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-secondary-text-hover: var(
+    --navds-semantic-color-text-inverted
+  );
+  --navds-button-color-secondary-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
   --navds-button-color-secondary-border: var(--navds-color-action-default);
   --navds-button-color-secondary-border-focus-active-hover: var(
     --navds-color-white
@@ -28,7 +32,9 @@
 
   /* Tertiary */
   --navds-button-color-tertiary-text: var(--navds-color-action-default);
-  --navds-button-color-tertiary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-tertiary-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
   --navds-button-color-tertiary-border-hover: var(--navds-color-action-default);
   --navds-button-color-tertiary-border-focus: var(--navds-color-action-default);
   --navds-button-color-tertiary-border-active: var(--navds-color-white);
@@ -46,7 +52,7 @@
   --navds-button-color-danger-border-focus: var(--navds-color-white);
 
   /* Disabled */
-  --navds-button-color-text-disabled: var(--navds-color-text-inverse);
+  --navds-button-color-text-disabled: var(--navds-semantic-color-text-inverted);
   --navds-button-color-background-disabled: var(--navds-color-disabled);
 }
 

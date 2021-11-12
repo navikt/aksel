@@ -1,7 +1,7 @@
 :root {
   --navdsi-header-color-background: var(--navds-color-darkgray);
   --navdsi-header-color-border: var(--navds-color-gray-40);
-  --navdsi-header-color-text: var(--navds-color-text-inverse);
+  --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
   --navdsi-header-focus: inset 0 0 0 2px var(--navds-color-blue-10);
 }
 
