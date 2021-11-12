@@ -50,10 +50,14 @@
 
   /* Danger */
   --navds-button-color-danger-text: var(--navds-color-white);
-  --navds-button-color-danger-background: var(--navds-color-danger-default);
-  --navds-button-color-danger-background-hover: var(--navds-color-danger-hover);
+  --navds-button-color-danger-background: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-button-color-danger-background-hover: var(
+    --navds-semantic-color-interaction-danger-hover
+  );
   --navds-button-color-danger-background-active: var(
-    --navds-color-danger-active
+    --navds-semantic-color-interaction-danger-selected
   );
   --navds-button-color-danger-border-focus: var(--navds-color-white);
 }
