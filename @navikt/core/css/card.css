@@ -1,5 +1,5 @@
 :root {
-  --navds-card-micro-color-text: var(--navds-color-text-primary);
+  --navds-card-micro-color-text: var(--navds-semantic-color-text-default);
   --navds-card-micro-color-background: var(--navds-color-orange-20);
   --navds-card-micro-color-border: transparent;
   --navds-card-micro-color-text-hover: var(--navds-color-blue-50);
