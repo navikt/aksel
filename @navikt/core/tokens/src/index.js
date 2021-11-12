@@ -69,11 +69,6 @@ module.exports = {
         }),
         {}
       ),
-      action: {
-        default: { value: "{navds.color.blue.50.value}" },
-        hover: { value: "{navds.color.blue.60.value}" },
-        active: { value: "{navds.color.deepblue.50.value}" },
-      },
       danger: {
         default: { value: "{navds.color.red.50.value}" },
         hover: { value: "{navds.color.red.60.value}" },
