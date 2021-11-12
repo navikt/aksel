@@ -35,7 +35,8 @@ function defaultTemplate(
   ${imports}
   ${interfaces}
   function ${componentName}(${props}) {
-    const titleId = _titleId ?? (title ? v4() : undefined);
+    const titleId = _titleId ?? (title ?
+      "icon-title-" + v4() : undefined);
     return ${jsx};
   }
   ${exports}`;
