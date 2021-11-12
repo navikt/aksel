@@ -324,6 +324,9 @@
             },
             "inverted": {
               "value": "{navds.global.color.gray.900.value}"
+            },
+            "light": {
+              "value": "{navds.global.color.white.value}"
             }
           }
         },
