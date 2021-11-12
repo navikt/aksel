@@ -28,7 +28,7 @@ body {
 }
 
 a {
-  color: var(--navds-color-text-link);
+  color: var(--navds-semantic-color-text-link);
 }
 
 /* https://web.dev/prefers-reduced-motion/ */
