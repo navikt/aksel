@@ -2,38 +2,50 @@
   /* Primary */
   --navds-button-color-primary-text: var(--navds-color-white);
   --navds-button-color-primary-border-focus: var(--navds-color-white);
-  --navds-button-color-primary-background: var(--navds-color-action-default);
+  --navds-button-color-primary-background: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-button-color-primary-background-hover: var(
-    --navds-color-action-hover
+    --navds-semantic-color-interaction-primary-hover
   );
   --navds-button-color-primary-background-active: var(
-    --navds-color-action-active
+    --navds-semantic-color-interaction-primary-selected
   );
 
   /* Secondary */
-  --navds-button-color-secondary-text: var(--navds-color-action-default);
+  --navds-button-color-secondary-text: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-button-color-secondary-text-hover: var(--navds-color-text-inverse);
   --navds-button-color-secondary-text-active: var(--navds-color-text-inverse);
-  --navds-button-color-secondary-border: var(--navds-color-action-default);
+  --navds-button-color-secondary-border: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-button-color-secondary-border-focus-active-hover: var(
     --navds-color-white
   );
   --navds-button-color-secondary-background: var(--navds-color-background);
   --navds-button-color-secondary-background-hover: var(
-    --navds-color-action-hover
+    --navds-semantic-color-interaction-primary-hover
   );
   --navds-button-color-secondary-background-active: var(
-    --navds-color-action-active
+    --navds-semantic-color-interaction-primary-selected
   );
 
   /* Tertiary */
-  --navds-button-color-tertiary-text: var(--navds-color-action-default);
+  --navds-button-color-tertiary-text: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-button-color-tertiary-text-active: var(--navds-color-text-inverse);
-  --navds-button-color-tertiary-border-hover: var(--navds-color-action-default);
-  --navds-button-color-tertiary-border-focus: var(--navds-color-action-default);
+  --navds-button-color-tertiary-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-button-color-tertiary-border-focus: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-button-color-tertiary-border-active: var(--navds-color-white);
   --navds-button-color-tertiary-background-active: var(
-    --navds-color-action-active
+    --navds-semantic-color-interaction-primary-selected
   );
 
   /* Danger */
