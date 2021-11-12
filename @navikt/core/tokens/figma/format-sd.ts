@@ -11,7 +11,10 @@ const formatToStyleDictionary = (
           (old, [key, val]) =>
             val.startsWith("rgba")
               ? { ...old, [key]: { value: val } }
-              : { ...old, [key]: { value: `{${val}.value}` } },
+              : {
+                  ...old,
+                  [key]: { value: `{${val.replace(/-/g, ".")}.value}` },
+                },
           {}
         )
       );

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "yarn workspace @navikt/ds-react test",
+    "test": "yarn workspace @navikt/ds-react test && yarn workspace @navikt/ds-tokens test",
     "postinstall": "husky install",
     "start": "yarn workspace website start",
     "boot": "yarn clean:lib && yarn build:packages --stream",
