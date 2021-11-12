@@ -30,7 +30,7 @@
   margin: 0;
   overflow: visible;
   background: transparent;
-  color: var(--navds-color-text-link);
+  color: var(--navds-semantic-color-text-link);
   font: inherit;
   text-decoration: none;
   text-align: left;

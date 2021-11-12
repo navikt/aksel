@@ -16,8 +16,12 @@
   --navds-button-color-secondary-text: var(
     --navds-semantic-color-interaction-primary-default
   );
-  --navds-button-color-secondary-text-hover: var(--navds-color-text-inverse);
-  --navds-button-color-secondary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-secondary-text-hover: var(
+    --navds-semantic-color-text-inverted
+  );
+  --navds-button-color-secondary-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
   --navds-button-color-secondary-border: var(
     --navds-semantic-color-interaction-primary-default
   );
@@ -36,7 +40,9 @@
   --navds-button-color-tertiary-text: var(
     --navds-semantic-color-interaction-primary-default
   );
-  --navds-button-color-tertiary-text-active: var(--navds-color-text-inverse);
+  --navds-button-color-tertiary-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
   --navds-button-color-tertiary-border-hover: var(
     --navds-semantic-color-interaction-primary-default
   );
