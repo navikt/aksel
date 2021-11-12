@@ -1,7 +1,11 @@
 :root {
   --navds-alert-color-border: var(--navds-color-gray-40);
-  --navds-alert-color-error-border: var(--navds-color-error-border);
-  --navds-alert-color-error-background: var(--navds-color-error-background);
+  --navds-alert-color-error-border: var(
+    --navds-semantic-color-feedback-danger-border
+  );
+  --navds-alert-color-error-background: var(
+    --navds-semantic-color-feedback-danger-background
+  );
   --navds-alert-color-warning-border: var(--navds-color-warning-border);
   --navds-alert-color-warning-background: var(--navds-color-warning-background);
   --navds-alert-color-info-border: var(--navds-color-info-border);

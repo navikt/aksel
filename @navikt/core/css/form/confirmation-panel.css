@@ -9,7 +9,7 @@
     --navds-color-success-background
   );
   --navds-confirmation-panel-color-background-error: var(
-    --navds-color-error-background
+    --navds-semantic-color-feedback-danger-background
   );
   --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
     --navds-color-green-70
