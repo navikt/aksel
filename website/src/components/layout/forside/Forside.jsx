@@ -61,6 +61,19 @@ const Forside = ({ ...props }) => (
             icon={<Like focusable="false" />}
           />
         </li>
+        <li>
+          <Card
+            content={
+              <>
+                <p>Hvordan vi utvikler sikker software i NAV.</p>
+                <p>(Krever GitHub bruker i navikt org)</p>
+              </>
+            }
+            title="Security Champions Playbook"
+            link="https://improved-train-2f244007.pages.github.io/"
+            icon={<HandsHeart focusable="false" />}
+          />
+        </li>
       </ol>
     </nav>
   </div>
