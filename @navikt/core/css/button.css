@@ -44,10 +44,6 @@
     --navds-color-danger-active
   );
   --navds-button-color-danger-border-focus: var(--navds-color-white);
-
-  /* Disabled */
-  --navds-button-color-text-disabled: var(--navds-color-text-inverse);
-  --navds-button-color-background-disabled: var(--navds-color-disabled);
 }
 
 .navds-button {
@@ -200,8 +196,7 @@
  **************************/
 
 .navds-button:disabled {
-  color: var(--navds-button-color-text-disabled);
-  background-color: var(--navds-button-color-background-disabled);
+  opacity: 30%;
   cursor: not-allowed;
   box-shadow: none;
   transform: none;

@@ -69,7 +69,6 @@ module.exports = {
         }),
         {}
       ),
-      disabled: { value: "{navds.color.gray.40.value}" },
       action: {
         default: { value: "{navds.color.blue.50.value}" },
         hover: { value: "{navds.color.blue.60.value}" },
