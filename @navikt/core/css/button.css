@@ -1,7 +1,9 @@
 :root {
   /* Primary */
-  --navds-button-color-primary-text: var(--navds-color-white);
-  --navds-button-color-primary-border-focus: var(--navds-color-white);
+  --navds-button-color-primary-text: var(--navds-semantic-color-text-inverted);
+  --navds-button-color-primary-border-focus: var(
+    --navds-semantic-color-text-inverted
+  );
   --navds-button-color-primary-background: var(
     --navds-semantic-color-interaction-primary-default
   );
@@ -26,9 +28,11 @@
     --navds-semantic-color-interaction-primary-default
   );
   --navds-button-color-secondary-border-focus-active-hover: var(
-    --navds-color-white
+    --navds-semantic-color-component-background-light
   );
-  --navds-button-color-secondary-background: var(--navds-color-background);
+  --navds-button-color-secondary-background: var(
+    --navds-semantic-color-component-background-light
+  );
   --navds-button-color-secondary-background-hover: var(
     --navds-semantic-color-interaction-primary-hover
   );
@@ -49,13 +53,15 @@
   --navds-button-color-tertiary-border-focus: var(
     --navds-semantic-color-interaction-primary-default
   );
-  --navds-button-color-tertiary-border-active: var(--navds-color-white);
+  --navds-button-color-tertiary-border-active: var(
+    --navds-semantic-color-component-background-light
+  );
   --navds-button-color-tertiary-background-active: var(
     --navds-semantic-color-interaction-primary-selected
   );
 
   /* Danger */
-  --navds-button-color-danger-text: var(--navds-color-white);
+  --navds-button-color-danger-text: var(--navds-semantic-color-text-inverted);
   --navds-button-color-danger-background: var(
     --navds-semantic-color-interaction-danger-default
   );
@@ -65,7 +71,9 @@
   --navds-button-color-danger-background-active: var(
     --navds-semantic-color-interaction-danger-selected
   );
-  --navds-button-color-danger-border-focus: var(--navds-color-white);
+  --navds-button-color-danger-border-focus: var(
+    --navds-semantic-color-component-background-light
+  );
 }
 
 .navds-button {
