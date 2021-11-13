@@ -18,23 +18,21 @@
     --navds-semantic-color-interaction-primary-default
   );
   --navds-checkbox-color-shadow-error: var(
-    --navds-semantic-color-feedback-danger-border
+    --navds-semantic-color-interaction-danger-default
   );
   --navds-checkbox-color-border-error: var(
-    --navds-semantic-color-feedback-danger-border
+    --navds-semantic-color-interaction-danger-default
   );
 
   /* Disabled */
-  --navds-checkbox-color-label-disabled: var(--navds-color-gray-40);
+  --navds-checkbox-color-label-disabled: var(--navds-color-gray-400);
   --navds-checkbox-color-border-disabled: var(
     --navds-semantic-color-border-default
   );
-  --navds-checkbox-color-background-disabled: var(--navds-color-gray-10);
-  --navds-checkbox-color-border-checked-disabled: var(
-    --navds-semantic-color-border-muted
-  );
+  --navds-checkbox-color-background-disabled: var(--navds-color-gray-100);
+  --navds-checkbox-color-border-checked-disabled: var(--navds-color-gray-400);
   --navds-checkbox-color-background-checked-disabled: var(
-    --navds-semantic-color-border-muted
+    --navds-color-gray-400
   );
 }
 
