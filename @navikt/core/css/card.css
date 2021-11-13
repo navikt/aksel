@@ -1,15 +1,27 @@
 :root {
   --navds-card-micro-color-text: var(--navds-semantic-color-text-default);
-  --navds-card-micro-color-background: var(--navds-color-orange-20);
+  --navds-card-micro-color-background: var(
+    --navds-semantic-color-interaction-primary-default
+  );
   --navds-card-micro-color-border: transparent;
-  --navds-card-micro-color-text-hover: var(--navds-color-blue-50);
-  --navds-card-micro-color-background-hover: var(--navds-color-white);
-  --navds-card-micro-color-border-hover: var(--navds-color-blue-50);
-  --navds-card-micro-color-text-focus: var(--navds-color-blue-50);
-  --navds-card-micro-color-background-focus: var(--navds-color-white);
-  --navds-card-micro-color-shadow-focus: var(--navds-color-blue-80);
-  --navds-card-micro-color-background-active: var(--navds-color-blue-70);
-  --navds-card-micro-color-text-active: var(--navds-color-white);
+  --navds-card-micro-color-text-hover: var(--navds-global-color-blue-500);
+  --navds-card-micro-color-background-hover: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-card-micro-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-card-micro-color-text-focus: var(--navds-semantic-color-text-link);
+  --navds-card-micro-color-background-focus: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-card-micro-color-shadow-focus: var(--navds-semantic-color-focus);
+  --navds-card-micro-color-background-active: var(
+    --navds-semantic-color-interaction-primary-selected
+  );
+  --navds-card-micro-color-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
 }
 
 /*
