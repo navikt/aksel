@@ -1,5 +1,5 @@
 :root {
-  --navds-alert-color-border: var(--navds-color-gray-40);
+  --navds-alert-color-border: var(--navds-semantic-color-border-muted);
   --navds-alert-color-error-border: var(
     --navds-semantic-color-feedback-danger-border
   );
@@ -7,7 +7,7 @@
     --navds-semantic-color-feedback-danger-background
   );
   --navds-alert-color-warning-border: var(
-    --navds-semantic-color-feedback-success-border
+    --navds-semantic-color-feedback-warning-border
   );
   --navds-alert-color-warning-background: var(
     --navds-semantic-color-feedback-warning-background
@@ -24,14 +24,28 @@
   --navds-alert-color-success-background: var(
     --navds-semantic-color-feedback-success-background
   );
-  --navds-alert-color-error-icon: var(--navds-color-red-60);
-  --navds-alert-color-error-icon-background: var(--navds-color-white);
-  --navds-alert-color-warning-icon: var(--navds-color-orange-40);
-  --navds-alert-color-warning-icon-background: var(--navds-color-darkgray);
-  --navds-alert-color-info-icon: var(--navds-color-lightblue-70);
-  --navds-alert-color-info-icon-background: var(--navds-color-white);
-  --navds-alert-color-success-icon: var(--navds-color-green-70);
-  --navds-alert-color-success-icon-background: var(--navds-color-white);
+  --navds-alert-color-error-icon: var(
+    --navds-semantic-color-feedback-danger-icon
+  );
+  --navds-alert-color-error-icon-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-alert-color-warning-icon: var(
+    --navds-semantic-color-feedback-warning-icon
+  );
+  --navds-alert-color-warning-icon-background: var(
+    --navds-semantic-color-component-background-inverted
+  );
+  --navds-alert-color-info-icon: var(--navds-semantic-color-feedback-info-icon);
+  --navds-alert-color-info-icon-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-alert-color-success-icon: var(
+    --navds-semantic-color-feedback-success-icon
+  );
+  --navds-alert-color-success-icon-background: var(
+    --navds-semantic-color-component-background-light
+  );
 }
 
 .navds-alert {
