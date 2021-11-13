@@ -4,7 +4,7 @@
     --navds-semantic-color-text-default
   );
   --navds-accordion-menu-color-background-hover: var(
-    --navds-semantic-color-feedback-info-background
+    --navds-global-color-blue-50
   );
   --navds-accordion-menu-color-text-active: var(
     --navds-semantic-color-text-default
