@@ -21,10 +21,10 @@
     --navds-color-green-50
   );
   --navds-confirmation-panel-color-checkbox-border-checked: var(
-    --navds-color-green-50
+    --navds-semantic-color-feedback-success-border
   );
   --navds-confirmation-panel-color-checkbox-label-checked: var(
-    --navds-color-darkgray
+    --navds-semantic-color-text-default
   );
 }
 
