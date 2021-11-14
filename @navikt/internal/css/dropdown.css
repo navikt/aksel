@@ -1,6 +1,6 @@
 :root {
   --navds-dropdown-menu-color: var(--navds-semantic-color-text-default);
-  --navdsi-dropdown-item-text-color: var(--navds-semantic-color-text-link);
+  --navdsi-dropdown-item-color-text: var(--navds-semantic-color-text-link);
   --navdsi-dropdown-item-color-background-hover: var(
     --navds-global-color-blue-100
   );
@@ -42,7 +42,7 @@
   margin: 0;
   overflow: visible;
   background: transparent;
-  color: var(--navdsi-dropdown-item-text-color);
+  color: var(--navdsi-dropdown-item-color-text);
   font: inherit;
   text-decoration: none;
   text-align: left;
