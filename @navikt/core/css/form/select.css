@@ -12,7 +12,7 @@
   --navds-select-color-shadow-error: var(
     --navds-semantic-color-interaction-danger-default
   );
-  --navds-select-color-border-disabled: var(--navds-color-gray-400);
+  --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
   --navds-select-color-background-disabled: var(
     --navds-semantic-color-canvas-background-default
   );
