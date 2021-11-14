@@ -70,7 +70,7 @@
 .navds-radio__label::before {
   content: "";
   background-color: var(--navds-radio-color-background);
-  border: 1px solid var(--navds-radio-color-border);
+  border: 2px solid var(--navds-radio-color-border);
   width: 1.5rem;
   height: 1.5rem;
   flex-shrink: 0;
@@ -121,7 +121,12 @@
 .navds-radio--error
   > .navds-radio__input:not(:hover):not(:focus):not(:disabled):not(:checked)
   + .navds-radio__label::before {
-  box-shadow: 0 0 0 1px var(--navds-radio-color-shadow-error);
+  border-color: var(--navds-radio-color-border-error);
+}
+
+.navds-radio--error
+  > .navds-radio__input:focus:not(:hover):not(:disabled):not(:checked)
+  + .navds-radio__label::before {
   border-color: var(--navds-radio-color-border-error);
 }
 
