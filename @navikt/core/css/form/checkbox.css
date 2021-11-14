@@ -68,7 +68,7 @@
 .navds-checkbox__label::before {
   content: "";
   background-color: var(--navds-checkbox-color-background);
-  border: 1px solid var(--navds-checkbox-color-border);
+  border: 2px solid var(--navds-checkbox-color-border);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 4px;
