@@ -1,6 +1,8 @@
 :root {
-  --navds-panel-color-background: var(--navds-color-white);
-  --navds-panel-color-border: var(--navds-color-border);
+  --navds-panel-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-panel-color-border: var(--navds-semantic-color-border-muted);
 }
 
 .navds-panel {
