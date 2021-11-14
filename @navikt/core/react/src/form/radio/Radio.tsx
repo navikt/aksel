@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, omit } from "../..";
+import { BodyShort, Detail, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
@@ -54,13 +54,25 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         {props.children}
       </BodyShort>
       {props.description && (
-        <BodyShort
-          size={size}
-          id={inputDescriptionId}
-          className="navds-radio__description"
-        >
-          {props.description}
-        </BodyShort>
+        <>
+          {size === "medium" ? (
+            <BodyShort
+              size="small"
+              id={inputDescriptionId}
+              className="navds-radio__description"
+            >
+              {props.description}
+            </BodyShort>
+          ) : (
+            <Detail
+              size="small"
+              id={inputDescriptionId}
+              className="navds-radio__description"
+            >
+              {props.description}
+            </Detail>
+          )}
+        </>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}

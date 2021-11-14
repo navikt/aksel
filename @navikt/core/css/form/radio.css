@@ -57,7 +57,6 @@
 
 .navds-radio__description {
   padding-left: calc(48px - 12px);
-  color: var(--navds-radio-color-description);
 }
 
 .navds-radio--with-description {
@@ -83,15 +82,14 @@
 }
 
 .navds-radio--small > .navds-radio__input {
-  width: 24px;
-  height: 24px;
-  top: 2px;
-  left: 0;
+  width: 32px;
+  height: 32px;
+  top: 0;
+  left: -4px;
 }
 
-.navds-radio--small > .navds-radio__label::before {
-  margin-top: -2px;
-  margin-bottom: -2px;
+.navds-radio--small > .navds-radio__label {
+  gap: var(--navds-spacing-2);
 }
 
 .navds-radio__input:hover + .navds-radio__label {
