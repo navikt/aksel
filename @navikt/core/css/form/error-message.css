@@ -3,7 +3,6 @@
 }
 
 .navds-error-message {
-  display: block;
   color: var(--navds-error-message-color-text);
   display: list-item;
   margin-left: var(--navds-spacing-5);
