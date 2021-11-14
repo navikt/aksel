@@ -1,11 +1,6 @@
 .navds-form-field > :not(:first-child):not(:empty),
 .navds-form-field > input:not(:first-child) {
-  margin-top: 8px;
-}
-
-.navds-form-field--small > :not(:first-child):not(:empty),
-.navds-form-field--small > input:not(:first-child) {
-  margin-top: 4px;
+  margin-top: var(--navds-spacing-2);
 }
 
 /* Applied when hideLabel is applied to form-element */
