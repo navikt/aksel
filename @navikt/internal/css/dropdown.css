@@ -1,7 +1,19 @@
+:root {
+  --navds-dropdown-menu-color: var(--navds-semantic-color-text-default);
+  --navdsi-dropdown-item-text-color: var(--navds-semantic-color-text-link);
+  --navdsi-dropdown-item-color-background-hover: var(
+    --navds-global-color-blue-100
+  );
+  --navdsi-dropdown-item-color-background-active: var(
+    --navds-global-color-blue-200
+  );
+  --navds-dropdown-item-color-focus: var(--navds-semantic-color-focus);
+}
+
 .navdsi-dropdown__menu {
   overflow: hidden;
   padding: var(--navds-spacing-4) 0;
-  color: var(--navds-color-darkgray);
+  color: var(--navds-dropdown-menu-color);
   width: 27ch;
   max-height: 616px;
   overflow-y: auto;
@@ -30,7 +42,7 @@
   margin: 0;
   overflow: visible;
   background: transparent;
-  color: var(--navds-semantic-color-text-link);
+  color: var(--navdsi-dropdown-item-text-color);
   font: inherit;
   text-decoration: none;
   text-align: left;
@@ -43,14 +55,14 @@
 }
 
 .navdsi-dropdown__item:hover {
-  background-color: var(--navds-color-blue-10);
+  background-color: var(--navdsi-dropdown-item-color-background-hover);
 }
 
 .navdsi-dropdown__item:active {
-  background-color: var(--navds-color-blue-20);
+  background-color: var(--navdsi-dropdown-item-color-background-active);
 }
 
 .navdsi-dropdown__item:focus {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--navds-color-blue-80);
+  box-shadow: inset 0 0 0 2px var(--navds-dropdown-item-color-focus);
 }
