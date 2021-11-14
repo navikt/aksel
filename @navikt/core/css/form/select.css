@@ -1,6 +1,6 @@
 :root {
   --navds-select-color-background: var(
-    --navds-semantic-color-canvas-background-light
+    --navds-semantic-color-component-background-light
   );
   --navds-select-color-border: var(--navds-semantic-color-border-default);
   --navds-select-color-border-hover: var(
@@ -14,7 +14,7 @@
   );
   --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
   --navds-select-color-background-disabled: var(
-    --navds-semantic-color-canvas-background-default
+    --navds-semantic-color-component-background-alternate
   );
   --navds-select-color-text-disabled: var(--navds-semantic-color-text-default);
 }

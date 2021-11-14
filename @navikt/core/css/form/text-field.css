@@ -1,12 +1,24 @@
 :root {
-  --navds-text-field-color-background: var(--navds-color-white);
-  --navds-text-field-color-border: var(--navds-color-gray-60);
-  --navds-text-field-color-border-hover: var(--navds-color-blue-50);
-  --navds-text-field-color-border-error: var(--navds-color-red-50);
-  --navds-text-field-color-shadow-error: var(--navds-color-red-50);
-  --navds-text-field-color-border-disabled: var(--navds-color-gray-40);
-  --navds-text-field-color-background-disabled: var(--navds-color-gray-10);
-  --navds-text-field-color-text-disabled: var(--navds-color-darkgray);
+  --navds-text-field-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-text-field-color-border: var(--navds-semantic-color-border-default);
+  --navds-text-field-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-text-field-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-text-field-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-text-field-color-border-disabled: var(--navds-global-color-gray-400);
+  --navds-text-field-color-background-disabled: var(
+    --navds-semantic-color-component-background-alternate
+  );
+  --navds-text-field-color-text-disabled: var(
+    --navds-semantic-color-text-default
+  );
 }
 
 .navds-text-field__input {
