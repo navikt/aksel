@@ -10,7 +10,7 @@
   --navds-radio-color-border-hover: var(
     --navds-semantic-color-interaction-primary-default
   );
-  --navds-radio-color-background-hover: var(--navds-color-blue-10);
+  --navds-radio-color-background-hover: var(--navds-global-color-blue-100);
   --navds-radio-color-border-checked: var(
     --navds-semantic-color-interaction-primary-default
   );
@@ -39,9 +39,15 @@
     --navds-semantic-color-border-default
   );
   --navds-radio-color-label-disabled: var(--navds-global-color-gray-400);
-  --navds-radio-color-background-disabled-checked: var(--navds-color-gray-400);
-  --navds-radio-color-border-disabled-checked: var(--navds-color-gray-400);
-  --navds-radio-color-shadow-disabled-checked: var(--navds-color-gray-400);
+  --navds-radio-color-background-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
+  --navds-radio-color-border-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
+  --navds-radio-color-shadow-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
 }
 
 .navds-radio {
