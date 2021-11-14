@@ -40,13 +40,12 @@
 .navds-checkbox__label {
   display: flex;
   width: fit-content;
-  gap: 12px;
+  gap: var(--navds-spacing-3);
   cursor: pointer;
 }
 
 .navds-checkbox__description {
   padding-left: calc(48px - 12px);
-  color: var(--navds-checkbox-color-description);
 }
 
 .navds-checkbox--with-description {
@@ -80,15 +79,14 @@
 }
 
 .navds-checkbox--small > .navds-checkbox__input {
-  width: 24px;
-  height: 24px;
-  top: 2px;
-  left: 0;
+  width: 32px;
+  height: 32px;
+  top: 0;
+  left: -4px;
 }
 
-.navds-checkbox--small > .navds-checkbox__label::before {
-  margin-top: -2px;
-  margin-bottom: -2px;
+.navds-checkbox--small > .navds-checkbox__label {
+  gap: var(--navds-spacing-2);
 }
 
 .navds-checkbox__input:hover + .navds-checkbox__label {
@@ -121,7 +119,6 @@
 .navds-checkbox--error
   > .navds-checkbox__input:not(:hover):not(:focus):not(:disabled):not(:checked)
   + .navds-checkbox__label::before {
-  box-shadow: 0 0 0 1px var(--navds-checkbox-color-shadow-error);
   border-color: var(--navds-checkbox-color-border-error);
 }
 
