@@ -109,6 +109,9 @@ module.exports = {
     shadow: {
       focus: { value: "0 0 0 3px {navds.semantic.color.focus.value}" },
       "focus-on-dark": { value: "0 0 0 3px {navds.color.orange.40.value}" },
+      popover: {
+        value: "0 2px 4px 0 {navds.global.color.gray.20.value}",
+      },
     },
     "z-index": {
       modal: { value: 2000 },
