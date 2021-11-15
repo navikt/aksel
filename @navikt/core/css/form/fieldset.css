@@ -17,3 +17,10 @@
 .navds-fieldset > .sr-only + :not(:first-child):not(:empty) {
   margin-top: 0;
 }
+
+/* Disabled */
+
+.navds-fieldset:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
