@@ -11,7 +11,9 @@ export const All = () => {
     <>
       <h1>Checkboxes</h1>
       <CheckboxGroup legend="Mollit eiusmod">
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
@@ -20,7 +22,9 @@ export const All = () => {
         legend="Mollit eiusmod"
         description="Exercitation do labore"
       >
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange" description="Laborum ad">
           Orange
         </Checkbox>
@@ -28,7 +32,9 @@ export const All = () => {
       </CheckboxGroup>
       <h2>error</h2>
       <CheckboxGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
@@ -38,7 +44,9 @@ export const All = () => {
         errorPropagation={false}
         error="Boks nr 2 må være valgt"
       >
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange" error="Boksen må være valgt">
           Orange
         </Checkbox>
@@ -50,19 +58,25 @@ export const All = () => {
         error="Boks nr 2 må være valgt"
         size="small"
       >
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
       <h2>defaultValue</h2>
       <CheckboxGroup legend="Mollit eiusmod" defaultValue={["Orange", "Melon"]}>
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
       <h2>hideLenged</h2>
       <CheckboxGroup legend="Mollit eiusmod" hideLegend>
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
@@ -84,7 +98,9 @@ export const All = () => {
         disabled
         description="description123"
       >
-        <Checkbox value="Apple">Apple</Checkbox>
+        <Checkbox value="Apple">
+          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
+        </Checkbox>
         <Checkbox value="Orange" description="description" checked>
           Orange
         </Checkbox>

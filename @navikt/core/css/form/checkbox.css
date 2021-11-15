@@ -76,8 +76,9 @@
   left: -4px;
 }
 
-.navds-checkbox--small > .navds-checkbox__label {
-  gap: var(--navds-spacing-2);
+.navds-checkbox--small > .navds-checkbox__label > span {
+  /* align text with checkbox */
+  padding-top: 2px;
 }
 
 .navds-checkbox__input:hover + .navds-checkbox__label {

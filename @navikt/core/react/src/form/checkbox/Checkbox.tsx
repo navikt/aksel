@@ -64,11 +64,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         size={size}
         className="navds-checkbox__label"
       >
-        {props.hideLabel ? (
-          <span className="sr-only">{props.children}</span>
-        ) : (
-          props.children
-        )}
+        <span className={props.hideLabel ? "sr-only" : undefined}>
+          {props.children}
+        </span>
       </BodyShort>
       {props.description && (
         <>
