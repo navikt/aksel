@@ -61,7 +61,9 @@ export const All = () => {
         <Checkbox value="Apple">
           Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
         </Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Orange" error="En feilmelding">
+          Orange
+        </Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
       <h2>defaultValue</h2>
