@@ -30,7 +30,7 @@
 .navds-checkbox__label {
   display: flex;
   width: fit-content;
-  gap: var(--navds-spacing-3);
+  gap: var(--navds-spacing-2);
   cursor: pointer;
 }
 
