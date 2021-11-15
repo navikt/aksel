@@ -9,3 +9,8 @@
 .navds-fieldset.navds-checkbox-group--medium > .navds-fieldset__error {
   margin-top: 0;
 }
+
+.navds-fieldset.navds-checkbox-group:disabled > .navds-fieldset__legend,
+.navds-fieldset.navds-checkbox-group:disabled > .navds-fieldset__description {
+  opacity: 0.3;
+}

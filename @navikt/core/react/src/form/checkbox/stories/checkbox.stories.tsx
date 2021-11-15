@@ -79,9 +79,15 @@ export const All = () => {
         </Checkbox>
       </CheckboxGroup>
       <h2>Disabled</h2>
-      <CheckboxGroup legend="Mollit eiusmod" disabled>
+      <CheckboxGroup
+        legend="Mollit eiusmod"
+        disabled
+        description="description123"
+      >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Orange">Orange</Checkbox>
+        <Checkbox value="Orange" description="description" checked>
+          Orange
+        </Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
       <CheckboxGroup legend="Mollit eiusmod">
