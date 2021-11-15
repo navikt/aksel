@@ -4,9 +4,6 @@
   --navds-text-field-color-border-hover: var(--navds-color-blue-50);
   --navds-text-field-color-border-error: var(--navds-color-red-50);
   --navds-text-field-color-shadow-error: var(--navds-color-red-50);
-  --navds-text-field-color-border-disabled: var(--navds-color-gray-40);
-  --navds-text-field-color-background-disabled: var(--navds-color-gray-10);
-  --navds-text-field-color-text-disabled: var(--navds-color-darkgray);
 }
 
 .navds-text-field__input {
