@@ -12,14 +12,6 @@
   --navds-radio-color-shadow-dot-checked-focus: var(--navds-color-blue-50);
   --navds-radio-color-shadow-error: var(--navds-color-red-50);
   --navds-radio-color-border-error: var(--navds-color-red-50);
-
-  /* Disabled */
-  --navds-radio-color-background-disabled: var(--navds-color-gray-10);
-  --navds-radio-color-border-disabled: var(--navds-color-gray-60);
-  --navds-radio-color-label-disabled: var(--navds-color-gray-40);
-  --navds-radio-color-background-disabled-checked: var(--navds-color-gray-40);
-  --navds-radio-color-border-disabled-checked: var(--navds-color-gray-40);
-  --navds-radio-color-shadow-disabled-checked: var(--navds-color-gray-40);
 }
 
 .navds-radio {
