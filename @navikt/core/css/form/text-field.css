@@ -45,13 +45,19 @@
 }
 
 /* Disabled handling */
-.navds-text-field__input:disabled,
-.navds-text-field__input[readonly] {
+.navds-text-field__input:disabled {
   background-color: var(--navds-text-field-color-background);
   border-color: var(--navds-text-field-color-border);
   box-shadow: none;
   cursor: not-allowed;
   opacity: 0.3;
+}
+
+.navds-text-field__input[readonly] {
+  background-color: var(--navds-text-field-color-background);
+  border-color: var(--navds-text-field-color-border);
+  box-shadow: none;
+  cursor: not-allowed;
 }
 
 .navds-text-field--disabled > .navds-text-field__label,
