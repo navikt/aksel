@@ -13,7 +13,3 @@
 .navds-fieldset > .sr-only + :not(:first-child):not(:empty) {
   margin-top: 0;
 }
-
-.navds-fieldset:disabled {
-  opacity: 0.3;
-}
