@@ -47,3 +47,7 @@
   box-shadow: 0 0 0 1px var(--navds-search-field-color-shadow-error) inset;
   border-color: var(--navds-search-field-color-border-error);
 }
+
+.navds-search-field--disabled {
+  opacity: 0.3;
+}

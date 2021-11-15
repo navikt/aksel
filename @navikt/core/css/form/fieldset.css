@@ -19,8 +19,8 @@
 }
 
 /* Disabled */
-
-.navds-fieldset:disabled {
+.navds-fieldset:disabled > .navds-fieldset__legend,
+.navds-fieldset:disabled > .navds-fieldset__description {
   opacity: 0.3;
   cursor: not-allowed;
 }
