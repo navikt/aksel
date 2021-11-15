@@ -6,9 +6,6 @@
   --navds-textarea-color-shadow-error: var(--navds-color-red-50);
   --navds-textarea-color-counter-text: var(--navds-color-gray-40);
   --navds-textarea-color-counter-text-error: var(--navds-color-red-50);
-  --navds-textarea-color-text-disabled: var(--navds-color-darkgray);
-  --navds-textarea-color-border-disabled: var(--navds-color-gray-40);
-  --navds-textarea-color-background-disabled: var(--navds-color-gray-10);
 }
 
 .navds-textarea__wrapper {
@@ -84,14 +81,14 @@
 
 .navds-textarea__input:disabled {
   background-color: var(--navds-textarea-color-background);
-  border-color: var(--navds-text-field-color-border);
+  border-color: var(--navds-textarea-color-border);
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .navds-textarea__input[readonly] {
   background-color: var(--navds-textarea-color-background);
-  border-color: var(--navds-text-field-color-border);
+  border-color: var(--navds-textarea-color-border);
   box-shadow: none;
   cursor: not-allowed;
 }
