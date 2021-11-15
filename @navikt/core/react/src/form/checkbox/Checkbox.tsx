@@ -3,7 +3,7 @@ import cl from "classnames";
 import useCheckbox from "./useCheckbox";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
-import { BodyShort, omit } from "../..";
+import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
   extends FormFieldProps,
@@ -71,13 +71,25 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         )}
       </BodyShort>
       {props.description && (
-        <BodyShort
-          size="small"
-          id={inputDescriptionId}
-          className="navds-checkbox__description"
-        >
-          {props.description}
-        </BodyShort>
+        <>
+          {size === "medium" ? (
+            <BodyShort
+              size="small"
+              id={inputDescriptionId}
+              className="navds-checkbox__description"
+            >
+              {props.description}
+            </BodyShort>
+          ) : (
+            <Detail
+              size="small"
+              id={inputDescriptionId}
+              className="navds-checkbox__description"
+            >
+              {props.description}
+            </Detail>
+          )}
+        </>
       )}
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
