@@ -12,7 +12,6 @@ export const All = () => {
       <h1>TextField</h1>
 
       <TextField label="Laborum excepteur" />
-      <TextField label="Laborum excepteur" readOnly />
 
       <h2>Description</h2>
 
@@ -52,6 +51,14 @@ export const All = () => {
         label="Laborum excepteur"
         description="Cillum mollit"
         disabled
+      />
+
+      <h2>Readonly</h2>
+
+      <TextField
+        label="Laborum excepteur"
+        description="Cillum mollit"
+        readOnly
       />
     </div>
   );
