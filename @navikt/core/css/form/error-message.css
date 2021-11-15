@@ -4,6 +4,10 @@
 
 .navds-error-message {
   color: var(--navds-error-message-color-text);
-  display: list-item;
-  margin-left: var(--navds-spacing-5);
+  display: flex;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-error-message::before {
+  content: "•";
 }
