@@ -383,7 +383,9 @@
           }
         },
         "focus": {
-          "value": "{navds.global.color.blue.800.value}",
+          "default": {
+            "value": "{navds.global.color.blue.800.value}"
+          },
           "inverted": {
             "value": "{navds.global.color.blue.200.value}"
           }
@@ -405,7 +407,12 @@
               "value": "{navds.global.color.blue.500.value}"
             },
             "hover": {
-              "value": "{navds.global.color.blue.600.value}"
+              "subtle": {
+                "value": "{navds.global.color.blue.50.value}"
+              },
+              "@": {
+                "value": "{navds.global.color.blue.600.value}"
+              }
             },
             "selected": {
               "value": "{navds.global.color.deepblue.500.value}"
@@ -420,7 +427,9 @@
             "value": "{navds.global.color.white.value}"
           },
           "link": {
-            "value": "{navds.global.color.blue.500.value}",
+            "default": {
+              "value": "{navds.global.color.blue.500.value}"
+            },
             "visited": {
               "value": "{navds.global.color.purple.500.value}"
             }
