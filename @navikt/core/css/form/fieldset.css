@@ -17,3 +17,9 @@
 .navds-fieldset > .sr-only + :not(:first-child):not(:empty) {
   margin-top: 0;
 }
+
+.navds-fieldset:disabled > .navds-fieldset__legend,
+.navds-fieldset:disabled > .navds-fieldset__description {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

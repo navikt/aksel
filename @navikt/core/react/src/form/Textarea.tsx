@@ -66,7 +66,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           className,
           "navds-form-field",
           `navds-form-field--${size}`,
-          { "navds-textarea--error": hasError }
+          {
+            "navds-textarea--error": hasError,
+            "navds-textarea--disabled": !!inputProps.disabled,
+          }
         )}
       >
         <Label
