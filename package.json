@@ -31,6 +31,7 @@
     "packages/*",
     "@navikt/core/*",
     "@navikt/internal/*",
+    "@navikt/navno/*",
     "utilities/build/from-git-fix"
   ],
   "prettier": {},
