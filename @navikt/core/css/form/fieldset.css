@@ -6,14 +6,20 @@
 }
 
 .navds-fieldset > :not(:first-child):not(:empty) {
-  margin-top: var(--navds-spacing-1);
+  margin-top: var(--navds-spacing-2);
 }
 
-.navds-fieldset--small > :not(:first-child):not(:empty) {
-  margin-top: 4px;
+.navds-fieldset > .navds-fieldset__description:not(:empty) {
+  margin-top: var(--navds-spacing-1);
 }
 
 /* Applied when hideLegend is applied to fieldset */
 .navds-fieldset > .sr-only + :not(:first-child):not(:empty) {
   margin-top: 0;
+}
+
+.navds-fieldset:disabled > .navds-fieldset__legend,
+.navds-fieldset:disabled > .navds-fieldset__description {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
