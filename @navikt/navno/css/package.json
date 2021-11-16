@@ -1,0 +1,28 @@
+{
+  "name": "@navikt/ds-css-internal",
+  "version": "0.6.0",
+  "private": false,
+  "description": "Css for NAV internal Designsystem components",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "css"
+  ],
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+  },
+  "main": "./dist/index.css",
+  "scripts": {
+    "build": "postcss --use postcss-import -o dist/index.css index.css",
+    "watch": "yarn build --watch"
+  },
+  "devDependencies": {
+    "postcss": "^8.3.8",
+    "postcss-cli": "^9.0.0",
+    "postcss-import": "^14.0.2"
+  }
+}
