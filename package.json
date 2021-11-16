@@ -30,8 +30,8 @@
     "website",
     "packages/*",
     "@navikt/core/*",
-    "@navikt/internal/*",
     "@navikt/navno/*",
+    "@navikt/internal/*",
     "utilities/build/from-git-fix"
   ],
   "prettier": {},
