@@ -1,6 +1,6 @@
 const deepen = (obj: { [key: string]: { value: string } }) => {
   const result = {};
-
+  console.log(obj);
   // For each object path (property key) in the object
   for (const objectPath in obj) {
     // Split path into component parts
