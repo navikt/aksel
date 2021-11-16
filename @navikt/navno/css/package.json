@@ -1,8 +1,8 @@
 {
-  "name": "@navikt/ds-css-internal",
-  "version": "0.6.0",
+  "name": "@navikt/ds-css-navno",
+  "version": "0.1.0",
   "private": false,
-  "description": "Css for NAV internal Designsystem components",
+  "description": "Css for NAV external(navno) Designsystem components",
   "author": "NAV Designsystem team",
   "keywords": [
     "css"
