@@ -20,9 +20,9 @@ describe("Check unifying of nested levels", () => {
       },
     };
 
-    unifyNestedLevel(obj);
+    const newObj = unifyNestedLevel(obj);
 
-    expect(obj).toEqual({
+    expect(newObj).toEqual({
       "navds-global-color-green-50": { value: "rbga(0,1,0,0)" },
       "navds-global-color-green-500": { value: "rbga(0,2,0,0)" },
       "navds-semantic-color-primary-hover-@": {
