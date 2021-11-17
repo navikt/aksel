@@ -1,6 +1,4 @@
 const unifyNestedLevel = (obj: { [key: string]: { value: string } }) => {
-  let foundDeeperValue = false;
-
   Object.keys(obj).forEach((k) => {
     const deeperKeys = Object.keys(obj).filter(
       (k2) => k2.startsWith(`${k}-`) && k2.length > k.length
@@ -13,11 +11,8 @@ const unifyNestedLevel = (obj: { [key: string]: { value: string } }) => {
       delete Object.assign(obj, {
         [k + "-@".repeat(neededNestedLevel)]: obj[k],
       })[k];
-      foundDeeperValue = true;
     }
   });
-
-  foundDeeperValue && unifyNestedLevel(obj);
 };
 
 export default unifyNestedLevel;
