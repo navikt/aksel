@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "..";
+import { OverridableComponent } from "@navikt/ds-react";
 
 export interface MicroCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
