@@ -1,2 +1,2 @@
-export { default as ProductCard } from "./ProductCard";
-export * from "./ProductCard";
+export { default as LargeCard } from "./LargeCard";
+export { default as MicroCard } from "./MicroCard";

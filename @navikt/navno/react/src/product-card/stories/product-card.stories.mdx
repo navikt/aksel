@@ -1,0 +1,33 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { MicroCard } from "../index.ts";
+
+<Meta title="ds-react-navno/product-card/intro" />
+
+# Hvordan ta i bruk produktkort
+
+Produktkort er ment å brukes som lenker og henvisninger til andre produkter eller livssituasjoner.
+Du kan for eksempel henvise til andre stønader som kan være relevant for leseren eller du kan samle alle relevante
+produkter innenfor én livssituasjon ved å ta i bruk LargeCard.
+
+## MicroCard
+
+Dette brukes dersom du allerede har introdusert produktet og ønsker
+å lage en tydelig henvisning for å lede brukeren videre.
+
+```
+<MicroCard href="/lenke/til/side">Er helt eller delvis alene med barn</MicroCard>
+```
+
+<Canvas>
+  <MicroCard href="/lenke/til/side">
+    Er helt eller delvis alene med barn
+  </MicroCard>
+</Canvas>
+
+Hvis man ønsker å ta i bruk nextjs sin `Link`-komponent:
+
+```jsx
+<Link href="/lenke/til/side" passHref>
+  <MicroCard>Er helt eller delvis alene med barn</MicroCard>
+</Link>
+```
