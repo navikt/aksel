@@ -57,8 +57,11 @@ export const All = () => {
         legend="Mollit eiusmod"
         error="Boks nr 2 må være valgt"
         size="small"
+        description="wat"
       >
-        <Radio value="Apple">Apple</Radio>
+        <Radio value="Apple" description="Description">
+          Apple
+        </Radio>
         <Radio value="Orange">Orange</Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>

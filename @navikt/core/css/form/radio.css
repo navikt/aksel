@@ -42,11 +42,8 @@
 
 .navds-radio__description {
   /* label::before width + input gap */
-  padding-left: calc(1.5rem + 8px);
-}
-
-.navds-radio--with-description {
-  padding-bottom: 0;
+  margin-top: var(--navds-spacing-1);
+  margin-left: calc(1.5rem + var(--navds-spacing-2));
 }
 
 .navds-radio--with-error-message {
@@ -64,7 +61,7 @@
 }
 
 .navds-radio--small {
-  padding: var(--navds-spacing-1) 0;
+  padding: 6px 0;
 }
 
 .navds-radio--small > .navds-radio__input {
@@ -81,6 +78,11 @@
 .navds-radio--small > .navds-radio__label::before {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+.navds-radio--small > .navds-radio__description {
+  /* label::before width + input gap */
+  margin-left: calc(1.25rem + var(--navds-spacing-2));
 }
 
 .navds-radio__input:hover + .navds-radio__label {

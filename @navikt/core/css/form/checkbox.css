@@ -34,7 +34,7 @@
 
 .navds-checkbox__description {
   /* label::before width + input gap */
-  padding-left: calc(1.5rem + 8px);
+  margin-left: calc(1.5rem + 8px);
 }
 
 .navds-checkbox--with-description {
@@ -64,7 +64,8 @@
 }
 
 .navds-checkbox--small {
-  padding: 6px 0;
+  margin-top: var(--navds-spacing-1);
+  margin: 6px 0;
 }
 
 .navds-checkbox--small > .navds-checkbox__input {
