@@ -5,8 +5,3 @@
 .navds-fieldset.navds-radio-group--medium > .navds-fieldset__error {
   margin-top: var(--navds-spacing-2);
 }
-
-.navds-fieldset.navds-radio-group:disabled > .navds-fieldset__legend,
-.navds-fieldset.navds-radio-group:disabled > .navds-fieldset__description {
-  opacity: 0.3;
-}
