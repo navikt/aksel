@@ -11,7 +11,12 @@ export const All = () => {
       <h2>Micro card</h2>
       <MicroCard href="#">Sit laborum aliqua.</MicroCard>
       <h2>Product card</h2>
-      <LargeCard>tekst</LargeCard>
+      <LargeCard
+        href="#"
+        title="Utvidet barnetrygd"
+        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
+        category="Pengestøtte"
+      />
     </>
   );
 };
@@ -27,7 +32,12 @@ export const MicroCardStory = () => {
 export const LargeCardStory = () => {
   return (
     <>
-      <LargeCard href="#">Sit laborum aliqua.</LargeCard>
+      <LargeCard
+        href="#"
+        title="Utvidet barnetrygd"
+        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
+        category="Pengestøtte"
+      />
     </>
   );
 };

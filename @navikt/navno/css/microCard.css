@@ -17,13 +17,14 @@
 */
 
 .navds-card__micro {
+  background-color: var(--navds-card-micro-color-background);
   border-radius: 1rem;
+  border: 1px solid var(--navds-card-micro-color-border);
   color: var(--navds-card-micro-color-text);
-  display: inline-flex;
+  display: inline-block;
   padding: var(--navds-spacing-1) var(--navds-spacing-2);
   text-decoration: none;
-  background-color: var(--navds-card-micro-color-background);
-  border: 1px solid var(--navds-card-micro-color-border);
+  width: auto;
 }
 
 .navds-card__micro:hover {
@@ -34,9 +35,9 @@
 
 .navds-card__micro:focus {
   background-color: var(--navds-card-micro-color-background-focus);
+  box-shadow: 0 0 0 3px var(--navds-card-micro-color-shadow-focus);
   color: var(--navds-card-micro-color-text-focus);
   outline: none;
-  box-shadow: 0 0 0 3px var(--navds-card-micro-color-shadow-focus);
 }
 
 .navds-card__micro:active {
