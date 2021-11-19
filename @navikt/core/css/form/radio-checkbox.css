@@ -97,11 +97,17 @@
 
 .navds-checkbox__input:checked + .navds-checkbox__label::before {
   background-image: var(--navds-checkmark-image-white);
-  background-position: center center;
+  background-position: 6px center;
   background-repeat: no-repeat;
-  background-size: 60%;
+  background-size: 13px;
   box-shadow: none;
   background-color: var(--navds-radio-checkbox-color-background-checked);
+}
+
+.navds-checkbox--small
+  > .navds-checkbox__input:checked
+  + .navds-checkbox__label::before {
+  background-position: 4px center;
 }
 
 .navds-checkbox__input:checked:focus + .navds-checkbox__label::before {
