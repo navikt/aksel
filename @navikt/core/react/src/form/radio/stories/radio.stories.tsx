@@ -7,75 +7,44 @@ export default {
 } as Meta;
 
 export const All = () => {
+  const Radios = (props) => (
+    <RadioGroup
+      legend="Mollit eiusmod"
+      description="Exercitation do labore"
+      {...props}
+    >
+      <Radio value="Apple">Apple</Radio>
+      <Radio value="Orange" description="Laborum ad">
+        Orange
+      </Radio>
+      <Radio value="Melon">Melon</Radio>
+    </RadioGroup>
+  );
+
   return (
     <>
-      <h1>Radios</h1>
-      <RadioGroup legend="Mollit eiusmod">
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>description</h2>
-      <RadioGroup legend="Mollit eiusmod" description="Exercitation do labore">
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange" description="Laborum ad">
-          Orange
-        </Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>error</h2>
-      <RadioGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>error uten errorPropagation</h2>
-      <RadioGroup
-        legend="Mollit eiusmod"
-        errorPropagation={false}
-        error="Boks nr 2 må være valgt"
-      >
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange" error="Boksen må være valgt">
-          Orange
-        </Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>Sizing</h2>
-      <RadioGroup
-        legend="Mollit eiusmod"
-        error="Boks nr 2 må være valgt"
-        size="small"
-      >
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>defaultValue</h2>
-      <RadioGroup legend="Mollit eiusmod" defaultValue="Orange">
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <h2>hideLenged</h2>
-      <RadioGroup legend="Mollit eiusmod" hideLegend>
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
+      <h1>Radio group</h1>
+      <Radios />
+      <h2>Error</h2>
+      <Radios error="Dette er en feilmelding" />
+      <h2>Small</h2>
+      <Radios size="small" />
+      <h2>Small + error</h2>
+      <Radios size="small" error="Dette er en feilmelding" />
+      <h2>Default value</h2>
+      <Radios defaultValue="Orange" />
       <h2>Disabled</h2>
-      <RadioGroup legend="Mollit eiusmod" disabled>
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
-      <RadioGroup legend="Mollit eiusmod">
+      <RadioGroup legend="Mollit eiusmod" description="Exercitation do labore">
         <Radio value="Apple" disabled>
           Apple
         </Radio>
-        <Radio value="Orange">Orange</Radio>
+        <Radio value="Orange" description="Laborum ad" disabled>
+          Orange
+        </Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
+      <h2>Disabled group</h2>
+      <Radios disabled />
     </>
   );
 };

@@ -1,13 +1,17 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import useCheckbox from "./useCheckbox";
-import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
-import { BodyShort, omit } from "../..";
+import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /**
+   * Checkbox has error
+   * @default false
+   */
+  error?: boolean;
   /**
    * Label for checkbox
    */
@@ -23,14 +27,9 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const {
-    inputProps,
-    errorId,
-    showErrorMsg,
-    hasError,
-    size,
-    inputDescriptionId,
-  } = useCheckbox(props);
+  const { inputProps, hasError, size } = useCheckbox(props);
+
+  const Description = size === "medium" ? BodyShort : Detail;
 
   return (
     <div
@@ -40,8 +39,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         `navds-checkbox--${size}`,
         {
           "navds-checkbox--error": hasError,
-          "navds-checkbox--with-error-message": showErrorMsg,
-          "navds-checkbox--with-description": !!props.description,
+          "navds-checkbox--disabled": inputProps.disabled,
         }
       )}
     >
@@ -50,7 +48,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "children",
           "size",
           "error",
-          "errorId",
           "description",
           "hideLabel",
         ])}
@@ -58,30 +55,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         className="navds-checkbox__input"
         ref={ref}
       />
-      <BodyShort
-        as="label"
-        htmlFor={inputProps.id}
-        size={size}
-        className="navds-checkbox__label"
-      >
-        {props.hideLabel ? (
-          <span className="sr-only">{props.children}</span>
-        ) : (
-          props.children
-        )}
-      </BodyShort>
-      {props.description && (
-        <BodyShort
-          size="small"
-          id={inputDescriptionId}
-          className="navds-checkbox__description"
+      <label htmlFor={inputProps.id} className="navds-checkbox__label">
+        <div
+          className={cl("navds-checkbox__content", {
+            "sr-only": props.hideLabel,
+          })}
         >
-          {props.description}
-        </BodyShort>
-      )}
-      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
-      </div>
+          <BodyShort size={size}>{props.children}</BodyShort>
+          {props.description && (
+            <Description size="small" className="navds-checkbox__description">
+              {props.description}
+            </Description>
+          )}
+        </div>
+      </label>
     </div>
   );
 });
