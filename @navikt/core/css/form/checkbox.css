@@ -80,6 +80,11 @@
   height: 1.25rem;
 }
 
+.navds-checkbox--small > .navds-checkbox__description {
+  /* label::before width + input gap */
+  margin-left: calc(1.25rem + 8px);
+}
+
 .navds-checkbox__input:hover + .navds-checkbox__label {
   color: var(--navds-checkbox-color-label-hover);
 }
