@@ -1,36 +1,34 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import { BodyShort, Detail, omit } from "../..";
-import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
 export interface RadioProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /**
+   * Radio has error
+   * @default false
+   */
+  error?: boolean;
   /**
    * Label for radio
    */
   children: React.ReactNode;
+  /**
+   * The value of the HTML element
+   */
   value: string;
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const {
-    inputProps,
-    errorId,
-    showErrorMsg,
-    size,
-    hasError,
-    inputDescriptionId,
-  } = useRadio(props);
+  const { inputProps, size, hasError, inputDescriptionId } = useRadio(props);
 
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
         "navds-radio--error": hasError,
-        "navds-radio--with-error-message": showErrorMsg,
-        "navds-radio--with-description": !!props.description,
       })}
     >
       <input
@@ -74,9 +72,6 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
           )}
         </>
       )}
-      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
-      </div>
     </div>
   );
 });

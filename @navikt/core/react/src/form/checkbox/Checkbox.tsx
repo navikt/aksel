@@ -1,13 +1,17 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
 import useCheckbox from "./useCheckbox";
-import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps } from "../useFormField";
 import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /**
+   * Checkbox has error
+   * @default false
+   */
+  error?: boolean;
   /**
    * Label for checkbox
    */
@@ -23,14 +27,7 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const {
-    inputProps,
-    errorId,
-    showErrorMsg,
-    hasError,
-    size,
-    inputDescriptionId,
-  } = useCheckbox(props);
+  const { inputProps, hasError, size, inputDescriptionId } = useCheckbox(props);
 
   return (
     <div
@@ -38,11 +35,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         props.className,
         "navds-checkbox",
         `navds-checkbox--${size}`,
-        {
-          "navds-checkbox--error": hasError,
-          "navds-checkbox--with-error-message": showErrorMsg,
-          "navds-checkbox--with-description": !!props.description,
-        }
+        { "navds-checkbox--error": hasError }
       )}
     >
       <input
@@ -50,7 +43,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "children",
           "size",
           "error",
-          "errorId",
           "description",
           "hideLabel",
         ])}
@@ -89,9 +81,6 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           )}
         </>
       )}
-      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
-      </div>
     </div>
   );
 });

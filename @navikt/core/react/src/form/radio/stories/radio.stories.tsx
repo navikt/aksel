@@ -47,7 +47,7 @@ export const All = () => {
         error="Boks nr 2 må være valgt"
       >
         <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange" error="Boksen må være valgt">
+        <Radio value="Orange" error>
           Orange
         </Radio>
         <Radio value="Melon">Melon</Radio>
