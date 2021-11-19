@@ -4,8 +4,6 @@
   --navds-checkbox-color-label-hover: var(--navds-color-blue-50);
   --navds-checkbox-color-shadow-hover: var(--navds-color-blue-50);
   --navds-checkbox-color-background-hover: var(--navds-color-blue-10);
-  --navds-checkbox-color-description: var(--navds-color-gray-80);
-  --navds-checkbox-color-shadow-checked: var(--navds-color-blue-50);
   --navds-checkbox-color-background-checked: var(--navds-color-blue-50);
   --navds-checkbox-color-shadow-error: var(--navds-color-red-50);
 }
@@ -36,7 +34,8 @@
 
 .navds-checkbox__description {
   /* label::before width + input gap */
-  padding-left: calc(1.5rem + 8px);
+  margin-top: var(--navds-spacing-1);
+  margin-left: calc(1.5rem + 8px);
 }
 
 .navds-checkbox--with-description {

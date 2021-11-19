@@ -1,13 +1,7 @@
-.navds-radio-group--small > .navds-radio-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
 .navds-fieldset.navds-radio-group--medium > .navds-radio-buttons {
-  margin-top: 0;
+  margin-top: var(--navds-spacing-2);
 }
 
 .navds-fieldset.navds-radio-group--medium > .navds-fieldset__error {
-  margin-top: 0;
+  margin-top: var(--navds-spacing-2);
 }

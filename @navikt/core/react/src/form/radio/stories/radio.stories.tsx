@@ -23,6 +23,17 @@ export const All = () => {
         </Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
+      <RadioGroup
+        size="small"
+        legend="Mollit eiusmod"
+        description="Exercitation do labore"
+      >
+        <Radio value="Apple">Apple</Radio>
+        <Radio value="Orange" description="Laborum ad">
+          Orange
+        </Radio>
+        <Radio value="Melon">Melon</Radio>
+      </RadioGroup>
       <h2>error</h2>
       <RadioGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
         <Radio value="Apple">Apple</Radio>
@@ -46,8 +57,11 @@ export const All = () => {
         legend="Mollit eiusmod"
         error="Boks nr 2 må være valgt"
         size="small"
+        description="wat"
       >
-        <Radio value="Apple">Apple</Radio>
+        <Radio value="Apple" description="Description">
+          Apple
+        </Radio>
         <Radio value="Orange">Orange</Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
@@ -64,9 +78,19 @@ export const All = () => {
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
       <h2>Disabled</h2>
-      <RadioGroup legend="Mollit eiusmod" disabled>
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange">Orange</Radio>
+      <RadioGroup
+        errorPropagation={true}
+        legend="Mollit eiusmod"
+        description="Mollit eiusmod"
+        disabled
+        value="Orange"
+      >
+        <Radio value="Apple" description="description">
+          Apple
+        </Radio>
+        <Radio value="Orange" checked description="description">
+          Orange
+        </Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
       <RadioGroup legend="Mollit eiusmod">
