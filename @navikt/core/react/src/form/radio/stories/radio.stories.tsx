@@ -40,18 +40,6 @@ export const All = () => {
         <Radio value="Orange">Orange</Radio>
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
-      <h2>error uten errorPropagation</h2>
-      <RadioGroup
-        legend="Mollit eiusmod"
-        errorPropagation={false}
-        error="Boks nr 2 må være valgt"
-      >
-        <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange" error>
-          Orange
-        </Radio>
-        <Radio value="Melon">Melon</Radio>
-      </RadioGroup>
       <h2>Sizing</h2>
       <RadioGroup
         legend="Mollit eiusmod"

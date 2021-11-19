@@ -38,20 +38,6 @@ export const All = () => {
         <Checkbox value="Orange">Orange</Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>
       </CheckboxGroup>
-      <h2>error uten errorPropagation</h2>
-      <CheckboxGroup
-        legend="Mollit eiusmod"
-        errorPropagation={false}
-        error="Boks nr 2 må være valgt"
-      >
-        <Checkbox value="Apple">
-          Apple asd fasd fased flkadsøfasdf klasdøfalsdføl asdlfjasøl
-        </Checkbox>
-        <Checkbox value="Orange" error>
-          Orange
-        </Checkbox>
-        <Checkbox value="Melon">Melon</Checkbox>
-      </CheckboxGroup>
       <h2>Sizing</h2>
       <CheckboxGroup
         legend="Mollit eiusmod"

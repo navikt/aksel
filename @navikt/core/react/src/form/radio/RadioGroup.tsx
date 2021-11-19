@@ -15,7 +15,8 @@ export const RadioGroupContext = React.createContext<RadioGroupContextProps | nu
   null
 );
 
-export interface RadioGroupProps extends Omit<FieldsetProps, "onChange"> {
+export interface RadioGroupProps
+  extends Omit<FieldsetProps, "onChange" | "errorPropagation"> {
   /**
    * Collection of <Radio>-elements
    */
