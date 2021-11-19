@@ -67,7 +67,6 @@ export const All = () => {
       </RadioGroup>
       <h2>Disabled</h2>
       <RadioGroup
-        errorPropagation={true}
         legend="Mollit eiusmod"
         description="Mollit eiusmod"
         disabled

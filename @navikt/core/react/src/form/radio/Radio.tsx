@@ -5,13 +5,8 @@ import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
 export interface RadioProps
-  extends Omit<FormFieldProps, "errorId">,
+  extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-  /**
-   * Radio has error
-   * @default false
-   */
-  error?: boolean;
   /**
    * Label for radio
    */
@@ -32,13 +27,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       })}
     >
       <input
-        {...omit(props, [
-          "children",
-          "size",
-          "error",
-          "errorId",
-          "description",
-        ])}
+        {...omit(props, ["children", "size", "description"])}
         {...inputProps}
         className="navds-radio__input"
         ref={ref}
