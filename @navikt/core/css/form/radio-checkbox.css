@@ -50,7 +50,8 @@
   border-radius: 50%;
 }
 
-.navds-checkbox__content {
+.navds-checkbox__content,
+.navds-radio__content {
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-1);
