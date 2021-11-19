@@ -27,7 +27,9 @@ export interface CheckboxProps
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { inputProps, hasError, size, inputDescriptionId } = useCheckbox(props);
+  const { inputProps, hasError, size } = useCheckbox(props);
+
+  const Description = size === "medium" ? BodyShort : Detail;
 
   return (
     <div
@@ -35,7 +37,10 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         props.className,
         "navds-checkbox",
         `navds-checkbox--${size}`,
-        { "navds-checkbox--error": hasError }
+        {
+          "navds-checkbox--error": hasError,
+          "navds-checkbox--disabled": inputProps.disabled,
+        }
       )}
     >
       <input
@@ -50,37 +55,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
         className="navds-checkbox__input"
         ref={ref}
       />
-      <BodyShort
-        as="label"
-        htmlFor={inputProps.id}
-        size={size}
-        className="navds-checkbox__label"
-      >
-        <span className={props.hideLabel ? "sr-only" : undefined}>
-          {props.children}
-        </span>
-      </BodyShort>
-      {props.description && (
-        <>
-          {size === "medium" ? (
-            <BodyShort
-              size="small"
-              id={inputDescriptionId}
-              className="navds-checkbox__description"
-            >
+      <label htmlFor={inputProps.id} className="navds-checkbox__label">
+        <div
+          className={cl("navds-checkbox__content", {
+            "sr-only": props.hideLabel,
+          })}
+        >
+          <BodyShort size={size}>{props.children}</BodyShort>
+          {props.description && (
+            <Description size="small" className="navds-checkbox__description">
               {props.description}
-            </BodyShort>
-          ) : (
-            <Detail
-              size="small"
-              id={inputDescriptionId}
-              className="navds-checkbox__description"
-            >
-              {props.description}
-            </Detail>
+            </Description>
           )}
-        </>
-      )}
+        </div>
+      </label>
     </div>
   );
 });

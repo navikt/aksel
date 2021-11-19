@@ -18,12 +18,15 @@ export interface RadioProps
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { inputProps, size, hasError, inputDescriptionId } = useRadio(props);
+  const { inputProps, size, hasError } = useRadio(props);
+
+  const Description = size === "medium" ? BodyShort : Detail;
 
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {
         "navds-radio--error": hasError,
+        "navds-radio--disabled": inputProps.disabled,
       })}
     >
       <input
@@ -32,35 +35,16 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         className="navds-radio__input"
         ref={ref}
       />
-      <BodyShort
-        as="label"
-        htmlFor={inputProps.id}
-        size={size}
-        className="navds-radio__label"
-      >
-        {props.children}
-      </BodyShort>
-      {props.description && (
-        <>
-          {size === "medium" ? (
-            <BodyShort
-              size="small"
-              id={inputDescriptionId}
-              className="navds-radio__description"
-            >
+      <label htmlFor={inputProps.id} className="navds-radio__label">
+        <div className="navds-radio__content">
+          <BodyShort size={size}>{props.children}</BodyShort>
+          {props.description && (
+            <Description size="small" className="navds-radio__description">
               {props.description}
-            </BodyShort>
-          ) : (
-            <Detail
-              size="small"
-              id={inputDescriptionId}
-              className="navds-radio__description"
-            >
-              {props.description}
-            </Detail>
+            </Description>
           )}
-        </>
-      )}
+        </div>
+      </label>
     </div>
   );
 });

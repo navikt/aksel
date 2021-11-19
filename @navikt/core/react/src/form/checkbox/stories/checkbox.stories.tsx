@@ -38,7 +38,7 @@ export const All = () => {
         Orange
       </Checkbox>
       <h3>Hide label</h3>
-      <Checkbox value="Apple" hideLabel>
+      <Checkbox value="Apple" hideLabel description="Laborum ad">
         Apple
       </Checkbox>
       <h3>Disabled</h3>

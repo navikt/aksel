@@ -12,35 +12,27 @@
 .navds-checkbox,
 .navds-radio {
   position: relative;
-  padding: var(--navds-spacing-3) 0;
+  width: fit-content;
 }
 
 .navds-checkbox__input,
 .navds-radio__input {
-  cursor: pointer;
   position: absolute;
-  z-index: 1;
   width: 48px;
   height: 48px;
   top: 0;
   left: -12px;
+  z-index: 1;
   opacity: 0;
+  cursor: pointer;
 }
 
 .navds-checkbox__label,
 .navds-radio__label {
-  display: flex;
-  width: fit-content;
-  gap: var(--navds-spacing-2);
+  padding: var(--navds-spacing-3) 0;
   cursor: pointer;
-}
-
-.navds-checkbox__description,
-.navds-radio__description {
-  margin-top: var(--navds-spacing-1);
-
-  /* label::before width + input gap */
-  margin-left: calc(1.5rem + var(--navds-spacing-2));
+  display: flex;
+  gap: var(--navds-spacing-2);
 }
 
 .navds-checkbox__label::before,
@@ -58,9 +50,15 @@
   border-radius: 50%;
 }
 
-.navds-checkbox--small,
-.navds-radio--small {
-  padding: 6px 0;
+.navds-checkbox__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-1);
+}
+
+.navds-checkbox__description,
+.navds-radio__description {
+  color: var(--navds-color-text-primary);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
@@ -71,16 +69,15 @@
   left: -6px;
 }
 
+.navds-checkbox--small > .navds-checkbox__label,
+.navds-radio--small > .navds-radio__label {
+  padding: 6px 0;
+}
+
 .navds-checkbox--small > .navds-checkbox__label::before,
 .navds-radio--small > .navds-radio__label::before {
   width: 1.25rem;
   height: 1.25rem;
-}
-
-.navds-checkbox--small > .navds-checkbox__description,
-.navds-radio--small > .navds-radio__description {
-  /* label::before width + input gap */
-  margin-left: calc(1.25rem + var(--navds-spacing-2));
 }
 
 .navds-checkbox__input:focus + .navds-checkbox__label::before,
@@ -157,17 +154,14 @@
     var(--navds-shadow-focus);
 }
 
-.navds-checkbox__input:disabled,
-.navds-radio__input:disabled {
-  cursor: not-allowed;
+.navds-checkbox--disabled,
+.navds-radio--disabled {
+  opacity: 0.3;
 }
 
-.navds-checkbox__input:disabled + .navds-checkbox__label,
-.navds-checkbox__input:disabled
-  + .navds-checkbox__label
-  + .navds-checkbox__description,
-.navds-radio__input:disabled + .navds-radio__label,
-.navds-radio__input:disabled + .navds-radio__label + .navds-radio__description {
+.navds-checkbox--disabled > .navds-checkbox__input,
+.navds-checkbox--disabled > .navds-checkbox__label,
+.navds-radio--disabled > .navds-radio__input,
+.navds-radio--disabled > .navds-radio__label {
   cursor: not-allowed;
-  opacity: 0.3;
 }
