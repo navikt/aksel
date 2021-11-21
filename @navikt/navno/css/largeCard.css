@@ -70,6 +70,11 @@
 }
 
 /* ---- Generic styling ---- */
+.navds-large-card__animation {
+  width: 4rem;
+  height: 4rem;
+}
+
 .navds-large-card__heading {
   color: var(--navds-card-large-color-text);
   margin-bottom: var(--navds-spacing-4);

@@ -1,0 +1,9 @@
+.animation {
+  width: 4em;
+  height: 4em;
+  align-self: center;
+}
+
+.activeInvert {
+  background-color: rgb(23, 70, 150);
+}

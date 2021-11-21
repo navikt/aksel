@@ -35,7 +35,8 @@
   "dependencies": {
     "@navikt/ds-icons": "^0.6.3",
     "@navikt/ds-react": "^0.13.1",
-    "classnames": "^2.3.1"
+    "classnames": "^2.3.1",
+    "lottie-web": "^5.8.1"
   },
   "devDependencies": {
     "rimraf": "^3.0.2"

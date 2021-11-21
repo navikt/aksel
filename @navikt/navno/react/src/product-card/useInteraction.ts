@@ -5,13 +5,13 @@ type CardInteractionHandler = (type: Interaction) => void;
 
 interface UseCardState {
   isHovering: boolean;
-  isPressed: boolean;
+  isActive: boolean;
   handlers: { [key: string]: CardInteractionHandler };
 }
 
 export const useInteractions = (): UseCardState => {
   const [isHovering, setIsHovering] = useState(false);
-  const [isPressed, setIsPressed] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   const cardInteractionHandler = (type: Interaction): void => {
     if (type === Interaction.mouseenter || type === Interaction.mouseleave) {
@@ -19,19 +19,19 @@ export const useInteractions = (): UseCardState => {
     }
 
     if (type === Interaction.mouseleave) {
-      setIsPressed(false);
+      setIsActive(false);
     }
 
     if (type === Interaction.mousedown || type === Interaction.mouseup) {
-      setIsPressed(type === Interaction.mousedown);
+      setIsActive(type === Interaction.mousedown);
     }
 
     if (type === Interaction.touchstart) {
-      setIsPressed(true);
+      setIsActive(true);
     }
 
     if (type === Interaction.touchend || type === Interaction.touchcancel) {
-      setIsPressed(false);
+      setIsActive(false);
     }
   };
 
@@ -46,5 +46,5 @@ export const useInteractions = (): UseCardState => {
     onTouchMove: cardInteractionHandler,
   };
 
-  return { isHovering, isPressed, handlers };
+  return { isHovering, isActive, handlers };
 };
