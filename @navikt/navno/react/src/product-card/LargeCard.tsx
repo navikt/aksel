@@ -2,7 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "@navikt/ds-react";
 import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
-import { Animation } from "../animation";
+import { Animation } from "@navikt/ds-react-navno";
 import { useInteractions } from "./useInteraction";
 export interface LargeCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -30,7 +30,7 @@ const LargeCard: OverridableComponent<
     },
     ref
   ) => {
-    const { handlers, isHovering, isActive: isPressed } = useInteractions();
+    const { handlers, isHovering, isActive } = useInteractions();
     return (
       <Component
         {...rest}
@@ -42,7 +42,7 @@ const LargeCard: OverridableComponent<
           {hoverAnimation && activeAnimation && (
             <Animation
               isHovering={isHovering}
-              isActive={isPressed}
+              isActive={isActive}
               hoverAnimation={hoverAnimation}
               activeAnimation={activeAnimation}
               className={cl("navds-large-card__animation")}
