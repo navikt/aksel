@@ -16,8 +16,6 @@ const Animation = ({
   isActive,
   className,
 }: LottieAnimationProps) => {
-  // Need baseClassName to scope this component
-  // as it's being used throughout the page.
   const [direction, setDirection] = useState<number>(1);
   const lottieContainerRef = useRef<HTMLDivElement | null>(null);
   const lottiePlayerRef = useRef<AnimationItem | null>(null);
@@ -68,7 +66,7 @@ const Animation = ({
     if (isActive && player) {
       player.play();
     }
-  }, [isActive, isHovering, activeAnimation, hoverAnimation, lottiePlayerRef]);
+  }, [isActive]);
 
   return (
     <div className={className}>

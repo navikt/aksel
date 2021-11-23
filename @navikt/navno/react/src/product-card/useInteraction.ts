@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Interaction } from "./types";
 
-type CardInteractionHandler = (type: Interaction) => void;
+type CardInteractionHandler = (event: MouseEvent) => void;
 
 interface UseCardState {
   isHovering: boolean;
@@ -13,7 +13,8 @@ export const useInteractions = (): UseCardState => {
   const [isHovering, setIsHovering] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
-  const cardInteractionHandler = (type: Interaction): void => {
+  const cardInteractionHandler = (event: MouseEvent): void => {
+    const { type } = event;
     if (type === Interaction.mouseenter || type === Interaction.mouseleave) {
       setIsHovering(type === Interaction.mouseenter);
     }

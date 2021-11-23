@@ -6,19 +6,17 @@ import * as TestAnimations from "../barnepensjon";
 import "./animation.css";
 
 export default {
-  title: "ds-react-navno/illustration",
+  title: "ds-react-navno/animation",
   argTypes: {
     isHovering: {
       name: "isHovering",
       type: { name: "boolean", required: false },
       defaultValue: false,
-      description: "demo description",
     },
     isActive: {
       name: "isActive",
       type: { name: "boolean", required: false },
       defaultValue: false,
-      description: "demo description",
     },
   },
 };
