@@ -38,12 +38,12 @@ const LargeCard: OverridableComponent<
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-card-large", className)}
+        className={cl("navds-card", "navds-card-large", className)}
       >
         <div
           className={cl(
-            "navds-card-large__bed",
-            `navds-product-card__bed--general` // LargeCard has white background regardless of type
+            "navds-card__bed",
+            `navds-card__bed--general` // LargeCard has white background regardless of type
           )}
         >
           {hoverAnimation && activeAnimation && (
@@ -52,18 +52,14 @@ const LargeCard: OverridableComponent<
               isActive={isActive}
               hoverAnimation={hoverAnimation}
               activeAnimation={activeAnimation}
-              className={cl("navds-card-large__animation")}
+              className={cl("navds-card__animation")}
             />
           )}
-          <Heading
-            level="3"
-            size="medium"
-            className={cl("navds-card-large__heading")}
-          >
+          <Heading level="3" size="medium" className={cl("navds-card__title")}>
             {title}
           </Heading>
-          <BodyLong className={cl("navds-card-large__text")}>{text}</BodyLong>
-          <BodyShort className={cl("navds-card-large__category")}>
+          <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
+          <BodyShort className={cl("navds-card__category")}>
             {category}
           </BodyShort>
         </div>

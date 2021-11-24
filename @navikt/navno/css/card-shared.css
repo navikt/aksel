@@ -9,21 +9,62 @@
   --navds-product-card-color-background-general: var(--navds-color-white);
   --navds-product-card-color-background-situation: var(--navds-color-orange-20);
   --navds-product-card-color-background-product: var(--navds-color-green-20);
-  --navds-product-card-color-background-tool: var(--navds-color-blue-20);
+  --navds-product-card-color-background-tool: var(--navds-color-deepblue-20);
+  --navds-product-card-color-background-active: var(--navds-color-blue-70);
 }
 
-.navds-product-card__bed--situation {
+.navds-card:not(:focus-visible):not(:active) .navds-card__bed {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px rgba(38, 38, 38, 0.12),
+    0 1px 3px rgba(38, 38, 38, 0.2);
+}
+
+.navds-card__bed.navds-card__bed--situation {
   background-color: var(--navds-product-card-color-background-situation);
 }
 
-.navds-product-card__bed--product {
+.navds-card__bed.navds-card__bed--product {
   background-color: var(--navds-product-card-color-background-product);
 }
 
-.navds-product-card__bed--tool {
+.navds-card__bed.navds-card__bed--tool {
   background-color: var(--navds-product-card-color-background-tool);
 }
 
-.navds-product-card__bed--general {
+.navds-card__bed.navds-card__bed--general {
   background-color: var(--navds-product-card-color-background-general);
+}
+
+.navds-card:active .navds-card__title,
+.navds-card:active .navds-card__text,
+.navds-card:active .navds-card__category {
+  color: var(--navds-product-card-color-text-active);
+  text-decoration: none;
+}
+
+/* ---- Focus state --------------- */
+.navds-card:focus-visible .navds-card__bed {
+  box-shadow: 0 0 0 4px #00347d;
+}
+
+/* ---- Active state --------------- */
+.navds-card:active .navds-card__bed {
+  background-color: var(--navds-product-card-color-background-active);
+}
+
+/* ---- Hover state --------------- */
+.navds-card:hover:not(:active) .navds-card__bed {
+  box-shadow: 0 0 0 2px var(--navds-product-card-color-border-hover);
+  background-color: var(--navds-product-card-color-background-hover);
+}
+
+.navds-card:hover:not(:active) .navds-card__title,
+.navds-card:hover:not(:active) .navds-card__text,
+.navds-card:hover:not(:active) .navds-card__category {
+  text-decoration: none;
+  color: var(--navds-product-card-color-text);
+}
+
+.navds-card:hover:not(:active) .navds-card__title {
+  text-decoration: none;
+  color: var(--navds-product-card-color-text-hover);
 }

@@ -6,7 +6,7 @@
   width: 100%;
 }
 
-.navds-card-mini__bed {
+.navds-card-mini .navds-card__bed {
   align-items: center;
   background-color: var(--navds-product-card-color-background);
   border-radius: var(--navds-spacing-1);
@@ -20,54 +20,19 @@
   width: 100%;
 }
 
-.navds-card-mini:not(:focus-visible):not(:active) .navds-card-mini__bed {
+.navds-card-mini:not(:focus-visible):not(:active) .navds-card__bed {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px rgba(38, 38, 38, 0.12),
     0 1px 3px rgba(38, 38, 38, 0.2);
 }
 
-/* ---- Hover state --------------- */
-.navds-card-mini:hover:not(:active) .navds-card-mini__bed {
-  background-color: var(--navds-product-card-color-background-hover);
-  box-shadow: 0 0 0 2px var(--navds-product-card-color-border-hover);
-}
-
-.navds-card-mini:hover:not(:active) .navds-card-mini__heading,
-.navds-card-mini:hover:not(:active) .navds-card-mini__text,
-.navds-card-mini:hover:not(:active) .navds-card-mini__category {
-  color: var(--navds-product-card-color-text);
-  text-decoration: none;
-}
-
-.navds-card-mini:hover:not(:active) .navds-card-mini__heading {
-  text-decoration: none;
-  color: var(--navds-product-card-color-text-hover);
-}
-
-/* ---- Focus state --------------- */
-.navds-card-mini:focus-visible .navds-card-mini__bed {
-  box-shadow: 0 0 0 4px #00347d;
-}
-
-/* ---- Active state --------------- */
-.navds-card-mini:active .navds-card-mini__bed {
-  background-color: var(--navds-product-card-color-background-active);
-}
-
-.navds-card-mini:active .navds-card-mini__heading,
-.navds-card-mini:active .navds-card-mini__text,
-.navds-card-mini:active .navds-card-mini__category {
-  color: var(--navds-product-card-color-text-active);
-  text-decoration: none;
-}
-
 /* ---- Generic styling ---- */
-.navds-card-mini__heading {
+.navds-card-mini .navds-card__title {
   color: var(--navds-product-card-color-text);
+  font-weight: var(--navds-font-weight-bold);
   text-decoration: underline;
-  font-weight: 600;
 }
 
-.navds-card-mini__animation {
+.navds-card__animation {
   align-self: center;
   height: var(--navds-spacing-16);
   margin: 0 var(--navds-spacing-4) 0 0;

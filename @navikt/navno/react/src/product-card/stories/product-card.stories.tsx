@@ -11,11 +11,11 @@ export default {
 export const All = () => {
   return (
     <>
-      <h2>Micro Card</h2>
+      <h2>MicroCard</h2>
       <MicroCard href="#" type="situation">
-        Jeg er alene med barn
+        Er helt eller delvis alene med barn
       </MicroCard>
-      <h2>Mini Card</h2>
+      <h2>MiniCard</h2>
       <MiniCard
         href="#"
         title="Utvidet barnetrygd"
@@ -23,7 +23,7 @@ export const All = () => {
         activeAnimation={activeAnimation}
         type="situation"
       />
-      <h2>Large Card</h2>
+      <h2>LargeCard</h2>
       <LargeCard
         href="#"
         title="Utvidet barnetrygd"
@@ -40,7 +40,18 @@ export const All = () => {
 export const MicroCardStory = () => {
   return (
     <>
-      <MicroCard href="#">Sit laborum aliqua.</MicroCard>
+      <h1>MicroCard</h1>
+      <h2>Single</h2>
+      <MicroCard href="#" type="situation">
+        Er helt eller delvis alene med barn
+      </MicroCard>
+      <h2>Multiple MicroCard</h2>
+      <MicroCard href="#" type="product">
+        Overgangsstønad for enslig mor eller far
+      </MicroCard>
+      <MicroCard href="#" type="product">
+        Stønad til skolepenger for enslig mor eller far
+      </MicroCard>
     </>
   );
 };
@@ -48,12 +59,27 @@ export const MicroCardStory = () => {
 export const MiniCardStory = () => {
   return (
     <>
+      <h1>MiniCard</h1>
       <MiniCard
         href="#"
-        title="Utvidet barnetrygd"
+        title="Har mistet noen i nær familie"
         hoverAnimation={hoverAnimation}
         activeAnimation={activeAnimation}
         type="situation"
+      />
+      <MiniCard
+        href="#"
+        title="Gjenlevendepensjon"
+        hoverAnimation={hoverAnimation}
+        activeAnimation={activeAnimation}
+        type="product"
+      />
+      <MiniCard
+        href="#"
+        title="Finn ut hva du kan ha rett til når du er alene med barn"
+        hoverAnimation={hoverAnimation}
+        activeAnimation={activeAnimation}
+        type="tool"
       />
     </>
   );
@@ -67,6 +93,9 @@ export const LargeCardStory = () => {
         title="Utvidet barnetrygd"
         text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
         category="Pengestøtte"
+        hoverAnimation={hoverAnimation}
+        activeAnimation={activeAnimation}
+        type="product"
       />
     </>
   );

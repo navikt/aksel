@@ -34,26 +34,19 @@ const MiniCard: OverridableComponent<
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-card-mini", className)}
+        className={cl("navds-card", "navds-card-mini", className)}
       >
-        <div
-          className={cl(
-            "navds-card-mini__bed",
-            `navds-product-card__bed--${type}`
-          )}
-        >
+        <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
           {hoverAnimation && activeAnimation && (
             <Animation
               isHovering={isHovering}
               isActive={isActive}
               hoverAnimation={hoverAnimation}
               activeAnimation={activeAnimation}
-              className={cl("navds-card-mini__animation")}
+              className={cl("navds-card__animation")}
             />
           )}
-          <BodyShort className={cl("navds-card-mini__heading")}>
-            {title}
-          </BodyShort>
+          <BodyShort className={cl("navds-card__title")}>{title}</BodyShort>
         </div>
       </Component>
     );
