@@ -13,9 +13,7 @@ import * as React from "react";
 import cn from "classnames";
 
 import { omit } from "nav-frontend-js-utils";
-import StegindikatorSteg, {
-  StegindikatorStegProps,
-} from "./stegindikator-steg";
+import StepIndicatorStep, { StepIndicatorStepProps } from "./StepIndicatorStep";
 
 import "nav-frontend-stegindikator-style";
 
@@ -24,12 +22,12 @@ const cls = (state) =>
     "stegindikator--kompakt": state.kompakt,
   });
 
-export interface StegindikatorProps {
+export interface StepIndicatorProps {
   /**
    * Array av steg, se `stegindikator-steg.tsx`. Merk at steg også kan defineres som children av typen
-   * <Stegindikator.Steg />.
+   * <StepIndicator.Steg />.
    */
-  steg?: StegindikatorStegProps[];
+  steg?: StepIndicatorStepProps[];
   /**
    * Vise/skjule steg label
    */
@@ -57,19 +55,19 @@ export interface StegindikatorProps {
   autoResponsiv: boolean;
 }
 
-export interface StegindikatorState {
+export interface StepIndicatorState {
   aktivtSteg: number;
   visLabel: boolean;
   kompakt: boolean;
 }
 
-class Stegindikator extends React.Component<
-  StegindikatorProps,
-  StegindikatorState
+class StepIndicator extends React.Component<
+  StepIndicatorProps,
+  StepIndicatorState
 > {
-  static Steg = StegindikatorSteg;
+  static Steg = StepIndicatorStep;
 
-  static defaultProps: Partial<StegindikatorProps> = {
+  static defaultProps: Partial<StepIndicatorProps> = {
     steg: [],
     visLabel: false,
     kompakt: false,
@@ -78,7 +76,7 @@ class Stegindikator extends React.Component<
 
   private list!: HTMLOListElement;
 
-  constructor(props: StegindikatorProps) {
+  constructor(props: StepIndicatorProps) {
     super(props);
 
     let initialAktivtSteg;
@@ -103,7 +101,7 @@ class Stegindikator extends React.Component<
   }
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: StegindikatorProps) {
+  UNSAFE_componentWillReceiveProps(nextProps: StepIndicatorProps) {
     if (!this.props.autoResponsiv && nextProps.autoResponsiv) {
       window.addEventListener("resize", this.adjustSize);
     }
@@ -245,7 +243,7 @@ class Stegindikator extends React.Component<
       const aktiv = i === this.state.aktivtSteg;
 
       return (
-        <StegindikatorSteg
+        <StepIndicatorStep
           index={i}
           label={steg.label}
           visLabel={this.state.visLabel}
@@ -287,4 +285,4 @@ class Stegindikator extends React.Component<
   }
 }
 
-export default Stegindikator;
+export default StepIndicator;

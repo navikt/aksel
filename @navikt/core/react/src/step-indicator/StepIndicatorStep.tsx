@@ -17,7 +17,7 @@ const innerCls = (props) =>
       typeof props.onClick === "function" && !props.aktiv,
   });
 
-export interface StegindikatorStegProps
+export interface StepIndicatorStepProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   label: string;
   index: number;
@@ -28,7 +28,7 @@ export interface StegindikatorStegProps
   disabled?: boolean;
 }
 
-class StegindikatorSteg extends React.Component<StegindikatorStegProps> {
+class StepIndicatorStep extends React.Component<StepIndicatorStepProps> {
   getInnerStep() {
     const labelTemplate = (
       <div className="stegindikator__steg-label">
@@ -84,4 +84,4 @@ class StegindikatorSteg extends React.Component<StegindikatorStegProps> {
   }
 }
 
-export default StegindikatorSteg;
+export default StepIndicatorStep;
