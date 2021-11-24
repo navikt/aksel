@@ -11,6 +11,7 @@ export interface LargeCardProps
   category: string;
   hoverAnimation?: any;
   activeAnimation?: any;
+  type?: "situation" | "product" | "tool" | "general";
 }
 
 const LargeCard: OverridableComponent<
@@ -26,6 +27,7 @@ const LargeCard: OverridableComponent<
       category,
       hoverAnimation,
       activeAnimation,
+      type,
       ...rest
     },
     ref
@@ -36,27 +38,32 @@ const LargeCard: OverridableComponent<
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-large-card", className)}
+        className={cl("navds-card-large", className)}
       >
-        <div className={cl("navds-large-card__bed")}>
+        <div
+          className={cl(
+            "navds-card-large__bed",
+            `navds-product-card__bed--general` // LargeCard has white background regardless of type
+          )}
+        >
           {hoverAnimation && activeAnimation && (
             <Animation
               isHovering={isHovering}
               isActive={isActive}
               hoverAnimation={hoverAnimation}
               activeAnimation={activeAnimation}
-              className={cl("navds-large-card__animation")}
+              className={cl("navds-card-large__animation")}
             />
           )}
           <Heading
             level="3"
             size="medium"
-            className={cl("navds-large-card__heading")}
+            className={cl("navds-card-large__heading")}
           >
             {title}
           </Heading>
-          <BodyLong className={cl("navds-large-card__text")}>{text}</BodyLong>
-          <BodyShort className={cl("navds-large-card__category")}>
+          <BodyLong className={cl("navds-card-large__text")}>{text}</BodyLong>
+          <BodyShort className={cl("navds-card-large__category")}>
             {category}
           </BodyShort>
         </div>

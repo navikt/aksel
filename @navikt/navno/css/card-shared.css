@@ -1,0 +1,29 @@
+:root {
+  --navds-product-card-color-text: var(--navds-color-text-primary);
+  --navds-product-card-color-text-active: var(--navds-color-white);
+  --navds-product-card-color-text-hover: var(--navds-color-blue-50);
+  --navds-product-card-color-category: var(--navds-color-gray-80);
+  --navds-product-card-color-border-hover: var(--navds-color-blue-50);
+  --navds-product-card-color-shadow-focus: var(--navds-color-blue-80);
+  --navds-product-card-color-background-hover: var(--navds-color-white);
+  --navds-product-card-color-background-general: var(--navds-color-white);
+  --navds-product-card-color-background-situation: var(--navds-color-orange-20);
+  --navds-product-card-color-background-product: var(--navds-color-green-20);
+  --navds-product-card-color-background-tool: var(--navds-color-blue-20);
+}
+
+.navds-product-card__bed--situation {
+  background-color: var(--navds-product-card-color-background-situation);
+}
+
+.navds-product-card__bed--product {
+  background-color: var(--navds-product-card-color-background-product);
+}
+
+.navds-product-card__bed--tool {
+  background-color: var(--navds-product-card-color-background-tool);
+}
+
+.navds-product-card__bed--general {
+  background-color: var(--navds-product-card-color-background-general);
+}

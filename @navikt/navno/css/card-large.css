@@ -1,0 +1,90 @@
+.navds-card-large {
+  display: block;
+  margin-bottom: var(--navds-spacing-7);
+  max-width: 18rem;
+  outline: 0;
+  text-decoration: none;
+  width: 100%;
+}
+
+.navds-card-large__bed {
+  background-color: var(--navds-product-card-color-background);
+  border-radius: var(--navds-spacing-1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 25rem;
+  padding: var(--navds-spacing-6);
+  text-decoration: none;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.navds-card-large:not(:focus-visible):not(:active) .navds-card-large__bed {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.14), 0 2px 1px rgba(38, 38, 38, 0.12),
+    0 1px 3px rgba(38, 38, 38, 0.2);
+}
+
+/* ---- Hover state --------------- */
+.navds-card-large:hover:not(:active) .navds-card-large__bed {
+  box-shadow: 0 0 0 2px var(--navds-product-card-color-border-hover);
+  background-color: var(--navds-product-card-color-background-hover);
+}
+
+.navds-card-large:hover:not(:active) .navds-card-large__heading,
+.navds-card-large:hover:not(:active) .navds-card-large__text,
+.navds-card-large:hover:not(:active) .navds-card-large__category {
+  text-decoration: none;
+  color: var(--navds-product-card-color-text);
+}
+
+.navds-card-large:hover:not(:active) .navds-card-large__heading {
+  text-decoration: none;
+  color: var(--navds-product-card-color-text-hover);
+}
+
+/* ---- Focus state --------------- */
+.navds-card-large:focus-visible .navds-card-large__bed {
+  box-shadow: 0 0 0 4px #00347d;
+}
+
+/* ---- Active state --------------- */
+.navds-card-large:active .navds-card-large__bed {
+  background-color: var(--navds-product-card-color-background-active);
+}
+
+.navds-card-large:active .navds-card-large__heading,
+.navds-card-large:active .navds-card-large__text,
+.navds-card-large:active .navds-card-large__category {
+  color: var(--navds-product-card-color-text-active);
+  text-decoration: none;
+}
+
+/* ---- Generic styling ---- */
+.navds-card-large__heading {
+  color: var(--navds-product-card-color-text);
+  margin-bottom: var(--navds-spacing-4);
+  text-decoration: underline;
+}
+
+.navds-card-large__text {
+  color: var(--navds-product-card-color-text);
+  font-weight: 400;
+  margin-bottom: var(--navds-spacing-8);
+}
+
+.navds-card-large__category {
+  color: var(--navds-product-card-color-category);
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin-top: auto;
+  text-transform: uppercase;
+}
+
+.navds-card-large__animation {
+  align-self: center;
+  height: var(--navds-spacing-16);
+  margin-bottom: var(--navds-spacing-9);
+  margin-top: 0;
+  width: var(--navds-spacing-16);
+}

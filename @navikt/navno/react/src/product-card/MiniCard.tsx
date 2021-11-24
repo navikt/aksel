@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "@navikt/ds-react";
-import { Heading, BodyLong } from "@navikt/ds-react";
+import { BodyShort, OverridableComponent } from "@navikt/ds-react";
 import { Animation } from "../animation";
 import { useInteractions } from "./useInteraction";
 
@@ -10,6 +9,7 @@ export interface MiniCardProps
   title: string;
   hoverAnimation?: any;
   activeAnimation?: any;
+  type?: "situation" | "product" | "tool" | "general";
 }
 
 const MiniCard: OverridableComponent<
@@ -23,6 +23,7 @@ const MiniCard: OverridableComponent<
       className,
       hoverAnimation,
       title,
+      type = "general",
       ...rest
     },
     ref
@@ -33,25 +34,26 @@ const MiniCard: OverridableComponent<
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-mini-card", className)}
+        className={cl("navds-card-mini", className)}
       >
-        <div className={cl("navds-mini-card__bed")}>
+        <div
+          className={cl(
+            "navds-card-mini__bed",
+            `navds-product-card__bed--${type}`
+          )}
+        >
           {hoverAnimation && activeAnimation && (
             <Animation
               isHovering={isHovering}
               isActive={isActive}
               hoverAnimation={hoverAnimation}
               activeAnimation={activeAnimation}
-              className={cl("navds-mini-card__animation")}
+              className={cl("navds-card-mini__animation")}
             />
           )}
-          <Heading
-            level="3"
-            size="medium"
-            className={cl("navds-mini-card__heading")}
-          >
+          <BodyShort className={cl("navds-card-mini__heading")}>
             {title}
-          </Heading>
+          </BodyShort>
         </div>
       </Component>
     );

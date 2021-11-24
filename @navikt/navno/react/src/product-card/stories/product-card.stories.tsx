@@ -12,13 +12,16 @@ export const All = () => {
   return (
     <>
       <h2>Micro Card</h2>
-      <MicroCard href="#">Jeg er alene med barn</MicroCard>
+      <MicroCard href="#" type="situation">
+        Jeg er alene med barn
+      </MicroCard>
       <h2>Mini Card</h2>
       <MiniCard
         href="#"
         title="Utvidet barnetrygd"
         hoverAnimation={hoverAnimation}
         activeAnimation={activeAnimation}
+        type="situation"
       />
       <h2>Large Card</h2>
       <LargeCard
@@ -28,6 +31,7 @@ export const All = () => {
         category="Pengestøtte"
         hoverAnimation={hoverAnimation}
         activeAnimation={activeAnimation}
+        type="product"
       />
     </>
   );
@@ -49,6 +53,7 @@ export const MiniCardStory = () => {
         title="Utvidet barnetrygd"
         hoverAnimation={hoverAnimation}
         activeAnimation={activeAnimation}
+        type="situation"
       />
     </>
   );

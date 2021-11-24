@@ -1,3 +1,4 @@
-@import "largeCard.css";
-@import "miniCard.css";
-@import "microCard.css";
+@import "card-large.css";
+@import "card-mini.css";
+@import "card-micro.css";
+@import "card-shared.css";
