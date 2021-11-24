@@ -28,23 +28,23 @@ export interface StepIndicatorStepProps
   disabled?: boolean;
 }
 
-class StepIndicatorStep extends React.Component<StepIndicatorStepProps> {
-  getInnerStep() {
+function StepIndicatorStep(props: StepIndicatorStepProps) {
+  function getInnerStep() {
     const labelTemplate = (
       <div className="stegindikator__steg-label">
-        {this.props.label || this.props.children}
+        {props.label || props.children}
       </div>
     );
-    const label = this.props.visLabel ? labelTemplate : undefined;
-    const num = this.props.index + 1;
+    const label = props.visLabel ? labelTemplate : undefined;
+    const num = props.index + 1;
 
-    if (typeof this.props.onClick === "function" && !this.props.aktiv) {
+    if (typeof props.onClick === "function" && !props.aktiv) {
       return (
         <button
-          className={innerCls(this.props)}
-          title={this.props.label}
-          onClick={this.props.onClick}
-          disabled={this.props.disabled}
+          className={innerCls(props)}
+          title={props.label}
+          onClick={props.onClick}
+          disabled={props.disabled}
         >
           <div className="stegindikator__steg-num">{num}</div>
           {label}
@@ -53,35 +53,33 @@ class StepIndicatorStep extends React.Component<StepIndicatorStepProps> {
     }
 
     return (
-      <div className={innerCls(this.props)} title={this.props.label}>
+      <div className={innerCls(props)} title={props.label}>
         <div className="stegindikator__steg-num">{num}</div>
         {label}
       </div>
     );
   }
 
-  render() {
-    const domProps = omit(
-      this.props,
-      "label",
-      "aktiv",
-      "ferdig",
-      "visLabel",
-      "index",
-      "disabled",
-      "onClick"
-    );
+  const domProps = omit(
+    props,
+    "label",
+    "aktiv",
+    "ferdig",
+    "visLabel",
+    "index",
+    "disabled",
+    "onClick"
+  );
 
-    return (
-      <li
-        className={stegCls(this.props)}
-        {...domProps}
-        aria-current={this.props.aktiv ? "step" : undefined}
-      >
-        {this.getInnerStep()}
-      </li>
-    );
-  }
+  return (
+    <li
+      className={stegCls(props)}
+      {...domProps}
+      aria-current={props.aktiv ? "step" : undefined}
+    >
+      {getInnerStep()}
+    </li>
+  );
 }
 
 export default StepIndicatorStep;
