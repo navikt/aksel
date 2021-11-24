@@ -16,6 +16,7 @@ import { omit } from "nav-frontend-js-utils";
 import StepIndicatorStep, { StepIndicatorStepProps } from "./StepIndicatorStep";
 
 import "nav-frontend-stegindikator-style";
+import { useState } from "@storybook/addons";
 
 const cls = (state) =>
   cn("stegindikator", {
@@ -61,81 +62,84 @@ export interface StepIndicatorState {
   kompakt: boolean;
 }
 
-class StepIndicator extends React.Component<
-  StepIndicatorProps,
-  StepIndicatorState
-> {
-  static Steg = StepIndicatorStep;
+function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
+  // static Steg = StepIndicatorStep;
 
-  static defaultProps: Partial<StepIndicatorProps> = {
-    steg: [],
-    visLabel: false,
-    kompakt: false,
-    autoResponsiv: false,
-  };
+  // static defaultProps: Partial<StepIndicatorProps> = {
+  //   steg: [],
+  //   visLabel: false,
+  //   kompakt: false,
+  //   autoResponsiv: false,
+  // };
 
-  private list!: HTMLOListElement;
+  let list!: HTMLOListElement;
 
-  constructor(props: StepIndicatorProps) {
-    super(props);
+  //   constructor(props: StepIndicatorProps) {
+  //     super(props);
 
-    let initialAktivtSteg;
-    if (this.props.aktivtSteg !== undefined) {
-      initialAktivtSteg = this.props.aktivtSteg;
-    } else {
-      initialAktivtSteg = this.getDefaultActiveStegIndex();
+  //     let initialAktivtSteg;
+  //     if (props.aktivtSteg !== undefined) {
+  //       initialAktivtSteg = props.aktivtSteg;
+  //     } else {
+  //       initialAktivtSteg = getDefaultActiveStegIndex();
+  //     }
+
+  //     state = {
+  //       aktivtSteg: initialAktivtSteg,
+  //       visLabel: props.visLabel,
+  //       kompakt: props.kompakt,
+  //     };
+  //   }
+
+  let initialAktivtSteg;
+  if (props.aktivtSteg !== undefined) {
+    initialAktivtSteg = props.aktivtSteg;
+  } else {
+    initialAktivtSteg = getDefaultActiveStegIndex();
+  }
+
+  const [aktivtSteg, setAktivtSteg] = React.useState(initialAktivtSteg);
+  const [visLabel, setVisLabel] = useState(props.visLabel);
+  const [visKompakt, setVisKompakt] = useState(props.kompakt);
+
+  //replace componentDidMount and componentWillUnmount
+  React.useEffect(() => {
+    if (props.autoResponsiv) {
+      window.addEventListener("resize", adjustSize);
+      adjustSize();
     }
 
-    this.state = {
-      aktivtSteg: initialAktivtSteg,
-      visLabel: props.visLabel,
-      kompakt: props.kompakt,
+    return () => {
+      window.removeEventListener("resize", adjustSize);
     };
-  }
-
-  componentDidMount() {
-    if (this.props.autoResponsiv) {
-      window.addEventListener("resize", this.adjustSize);
-      this.adjustSize();
-    }
-  }
+  });
 
   // eslint-disable-next-line camelcase
-  UNSAFE_componentWillReceiveProps(nextProps: StepIndicatorProps) {
-    if (!this.props.autoResponsiv && nextProps.autoResponsiv) {
-      window.addEventListener("resize", this.adjustSize);
+  const UNSAFE_componentWillReceiveProps = (nextProps: StepIndicatorProps) => {
+    if (!props.autoResponsiv && nextProps.autoResponsiv) {
+      window.addEventListener("resize", adjustSize);
     }
 
     if (nextProps.autoResponsiv) {
-      this.setState({
-        visLabel: this.canShowLabel() ? nextProps.visLabel : false,
-        kompakt: nextProps.kompakt || !this.canBeNormal(),
-      });
+      setVisLabel(canShowLabel() ? nextProps.visLabel : false);
+      setVisKompakt(nextProps.kompakt || !canBeNormal());
     } else {
-      this.setState({
-        visLabel: nextProps.visLabel,
-        kompakt: nextProps.kompakt,
-      });
+      setVisLabel(nextProps.visLabel);
+      setVisKompakt(nextProps.kompakt);
     }
 
     if (
       nextProps.aktivtSteg !== undefined &&
-      nextProps.aktivtSteg !== this.state.aktivtSteg
+      nextProps.aktivtSteg !== aktivtSteg
     ) {
-      this.setState({
-        aktivtSteg: nextProps.aktivtSteg,
-      });
+      setAktivtSteg(nextProps.aktivtSteg);
     }
-  }
+  };
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.adjustSize);
-  }
-
-  getDefaultActiveStegIndex() {
+  const getDefaultActiveStegIndex = () => {
     let index;
-    if (this.props.children) {
-      React.Children.forEach(this.props.children, (child, i) => {
+    if (props.children) {
+      React.Children.forEach(props.children, (child, i) => {
         if (React.isValidElement(child)) {
           const clone = React.cloneElement(child as React.ReactElement<any>);
           if (clone.props.aktiv) {
@@ -144,22 +148,22 @@ class StepIndicator extends React.Component<
         }
       });
     } else {
-      index = this.props.steg!.findIndex((steg) => !!steg.aktiv);
+      index = props.steg!.findIndex((steg) => !!steg.aktiv);
     }
     return index !== -1 ? index : 0;
-  }
+  };
 
-  getNumSteg() {
-    if (this.props.children) {
-      return React.Children.toArray(this.props.children).filter((child) =>
+  const getNumSteg = () => {
+    if (props.children) {
+      return React.Children.toArray(props.children).filter((child) =>
         React.isValidElement(child)
       ).length;
     }
-    return this.props.steg!.length;
-  }
+    return props.steg!.length;
+  };
 
-  getDimensions() {
-    const numSteg = this.getNumSteg();
+  const getDimensions = () => {
+    const numSteg = getNumSteg();
     const remSize = parseFloat(
       String(getComputedStyle(document.documentElement).fontSize)
     );
@@ -171,64 +175,59 @@ class StepIndicator extends React.Component<
     return {
       visLabelWidth,
       normalWidth,
-      container: this.list!.getBoundingClientRect().width,
+      container: list!.getBoundingClientRect().width,
     };
-  }
+  };
 
-  handleClick = (e, index) => {
+  const handleClick = (e, index) => {
     e.preventDefault();
-    if (!this.props.onBeforeChange || this.props.onBeforeChange(index)) {
-      this.setState({
-        aktivtSteg: index,
-      });
+    if (!props.onBeforeChange || props.onBeforeChange(index)) {
+      setAktivtSteg(index);
       // tslint:disable-next-line:no-unused-expression
-      if (typeof this.props.onChange === "function")
-        this.props.onChange(index)!;
+      if (typeof props.onChange === "function") props.onChange(index)!;
     }
   };
 
-  canShowLabel = () => {
-    const dim = this.getDimensions();
-    return dim.container >= dim.visLabelWidth && this.props.visLabel;
+  const canShowLabel = () => {
+    const dim = getDimensions();
+    return dim.container >= dim.visLabelWidth && props.visLabel;
   };
 
-  canBeNormal = () => {
-    const dim = this.getDimensions();
-    return dim.container >= dim.normalWidth && !this.props.kompakt;
+  const canBeNormal = () => {
+    const dim = getDimensions();
+    return dim.container >= dim.normalWidth && !props.kompakt;
   };
 
-  adjustSize = () => {
-    if (!this.list) return;
+  const adjustSize = () => {
+    if (!list) return;
 
-    this.setState({
-      visLabel: this.canShowLabel(),
-      kompakt: !this.canBeNormal(),
-    });
+    setVisLabel(canShowLabel());
+    setVisKompakt(!canBeNormal());
   };
 
-  renderSteg() {
+  const renderSteg = () => {
     // eslint-disable-next-line max-len
     const onClick = (i) =>
-      typeof this.props.onChange === "function"
-        ? (e) => this.handleClick(e, i)
+      typeof props.onChange === "function"
+        ? (e) => handleClick(e, i)
         : undefined;
 
-    if (this.props.children) {
-      return React.Children.map(this.props.children, (child, i) => {
+    if (props.children) {
+      return React.Children.map(props.children, (child, i) => {
         if (React.isValidElement(child)) {
           return React.cloneElement(child as React.ReactElement<any>, {
             index: child.props.index || i,
-            aktiv: i === this.state.aktivtSteg,
-            ferdig: child.props.ferdig || i < this.state.aktivtSteg,
+            aktiv: i === aktivtSteg,
+            ferdig: child.props.ferdig || i < aktivtSteg,
             onClick: !child.props.disabled ? onClick(i) : undefined,
-            visLabel: this.state.visLabel,
+            visLabel: visLabel,
           });
         }
         return child;
       });
     }
 
-    return this.props.steg!.map((steg, i) => {
+    return props.steg!.map((steg, i) => {
       const stegDomProps = omit(
         steg,
         "label",
@@ -239,14 +238,14 @@ class StepIndicator extends React.Component<
         "onClick"
       );
 
-      const ferdig = steg.ferdig || i < this.state.aktivtSteg;
-      const aktiv = i === this.state.aktivtSteg;
+      const ferdig = steg.ferdig || i < aktivtSteg;
+      const aktiv = i === aktivtSteg;
 
       return (
         <StepIndicatorStep
           index={i}
           label={steg.label}
-          visLabel={this.state.visLabel}
+          visLabel={visLabel}
           key={`${steg.label.split(" ").join("")}`}
           aktiv={aktiv}
           ferdig={ferdig}
@@ -255,34 +254,32 @@ class StepIndicator extends React.Component<
         />
       );
     });
-  }
+  };
 
-  render() {
-    const domProps = omit(
-      this.props,
-      "steg",
-      "children",
-      "visLabel",
-      "kompakt",
-      "onChange",
-      "onBeforeChange",
-      "autoResponsiv",
-      "aktivtSteg"
-    );
+  const domProps = omit(
+    props,
+    "steg",
+    "children",
+    "visLabel",
+    "kompakt",
+    "onChange",
+    "onBeforeChange",
+    "autoResponsiv",
+    "aktivtSteg"
+  );
 
-    return (
-      <div className={cls(this.state)} {...domProps}>
-        <ol
-          className="stegindikator__liste"
-          ref={(list: HTMLOListElement) => {
-            this.list = list;
-          }}
-        >
-          {this.renderSteg()}
-        </ol>
-      </div>
-    );
-  }
+  return (
+    <div className={cls(state)} {...domProps}>
+      <ol
+        className="stegindikator__liste"
+        ref={(list: HTMLOListElement) => {
+          list = list;
+        }}
+      >
+        {renderSteg()}
+      </ol>
+    </div>
+  );
 }
 
 export default StepIndicator;
