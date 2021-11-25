@@ -16,14 +16,14 @@ import { omit } from "nav-frontend-js-utils";
 import StepIndicatorStep, { StepIndicatorStepProps } from "./StepIndicatorStep";
 
 import "nav-frontend-stegindikator-style";
-import { useState } from "@storybook/addons";
 
-const cls = (state) =>
+const cls = (kompakt) =>
   cn("stegindikator", {
-    "stegindikator--kompakt": state.kompakt,
+    "stegindikator--kompakt": kompakt,
   });
 
 export interface StepIndicatorProps {
+  children: React.ReactNode;
   /**
    * Array av steg, se `stegindikator-steg.tsx`. Merk at steg også kan defineres som children av typen
    * <StepIndicator.Steg />.
@@ -62,7 +62,8 @@ export interface StepIndicatorState {
   kompakt: boolean;
 }
 
-function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
+// function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
+function StepIndicator(props: StepIndicatorProps) {
   // static Steg = StepIndicatorStep;
 
   // static defaultProps: Partial<StepIndicatorProps> = {
@@ -91,6 +92,23 @@ function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
   //     };
   //   }
 
+  const getDefaultActiveStegIndex = () => {
+    let index;
+    if (props.children) {
+      React.Children.forEach(props.children, (child, i) => {
+        if (React.isValidElement(child)) {
+          const clone = React.cloneElement(child as React.ReactElement<any>);
+          if (clone.props.aktiv) {
+            index = i;
+          }
+        }
+      });
+    } else {
+      index = props.steg!.findIndex((steg) => !!steg.aktiv);
+    }
+    return index !== -1 ? index : 0;
+  };
+
   let initialAktivtSteg;
   if (props.aktivtSteg !== undefined) {
     initialAktivtSteg = props.aktivtSteg;
@@ -99,8 +117,8 @@ function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
   }
 
   const [aktivtSteg, setAktivtSteg] = React.useState(initialAktivtSteg);
-  const [visLabel, setVisLabel] = useState(props.visLabel);
-  const [visKompakt, setVisKompakt] = useState(props.kompakt);
+  const [visLabel, setVisLabel] = React.useState(props.visLabel);
+  const [kompakt, setVisKompakt] = React.useState(props.kompakt);
 
   //replace componentDidMount and componentWillUnmount
   React.useEffect(() => {
@@ -134,23 +152,6 @@ function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
     ) {
       setAktivtSteg(nextProps.aktivtSteg);
     }
-  };
-
-  const getDefaultActiveStegIndex = () => {
-    let index;
-    if (props.children) {
-      React.Children.forEach(props.children, (child, i) => {
-        if (React.isValidElement(child)) {
-          const clone = React.cloneElement(child as React.ReactElement<any>);
-          if (clone.props.aktiv) {
-            index = i;
-          }
-        }
-      });
-    } else {
-      index = props.steg!.findIndex((steg) => !!steg.aktiv);
-    }
-    return index !== -1 ? index : 0;
   };
 
   const getNumSteg = () => {
@@ -269,7 +270,8 @@ function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
   );
 
   return (
-    <div className={cls(state)} {...domProps}>
+    <div className={cls(kompakt)} {...domProps}>
+      {/* <div className="" {...domProps}> */}
       <ol
         className="stegindikator__liste"
         ref={(list: HTMLOListElement) => {
