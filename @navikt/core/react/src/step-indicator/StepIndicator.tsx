@@ -45,15 +45,16 @@ export interface StepIndicatorProps {
   autoResponsiv: boolean;
 }
 
+// static defaultProps: Partial<StepIndicatorProps> = {
+StepIndicator.defaultProps = {
+  steg: [],
+  visLabel: false,
+  kompakt: false,
+  autoResponsiv: false,
+};
+
 function StepIndicator(props: StepIndicatorProps) {
   // static Steg = StepIndicatorStep;
-
-  // static defaultProps: Partial<StepIndicatorProps> = {
-  //   steg: [],
-  //   visLabel: false,
-  //   kompakt: false,
-  //   autoResponsiv: false,
-  // };
 
   let list!: HTMLOListElement;
 
