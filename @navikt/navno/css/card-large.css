@@ -41,7 +41,8 @@
   text-transform: uppercase;
 }
 
-.navds-card-large .navds-card__animation {
+.navds-card-large .navds-card__animation,
+.navds-card-large .navds-pictogram {
   align-self: center;
   height: var(--navds-spacing-24);
   margin-bottom: var(--navds-spacing-6);

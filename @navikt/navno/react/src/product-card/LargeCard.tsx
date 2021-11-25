@@ -4,13 +4,16 @@ import { OverridableComponent } from "@navikt/ds-react";
 import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
 import { Animation } from "../animation";
 import { useInteractions } from "./useInteraction";
+import { Pictogram } from "../pictogram";
 export interface LargeCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  text: string;
+  activeAnimation?: any;
   category: string;
   hoverAnimation?: any;
-  activeAnimation?: any;
+  staticBack?: React.ReactElement<Symbol>;
+  staticFront?: React.ReactElement<Symbol>;
+  text: string;
+  title: string;
   type?: "situation" | "product" | "tool" | "general";
 }
 
@@ -27,12 +30,17 @@ const LargeCard: OverridableComponent<
       category,
       hoverAnimation,
       activeAnimation,
-      type,
+      staticFront,
+      staticBack,
+      type = "general",
       ...rest
     },
     ref
   ) => {
     const { handlers, isHovering, isActive } = useInteractions();
+    const hasAnimation = !!(hoverAnimation && activeAnimation);
+    const hasStatic = !hasAnimation && staticFront && staticBack;
+
     return (
       <Component
         {...rest}
@@ -46,6 +54,13 @@ const LargeCard: OverridableComponent<
             `navds-card__bed--general` // LargeCard has white background regardless of type
           )}
         >
+          {hasStatic && (
+            <Pictogram
+              isActive={isActive}
+              front={staticFront}
+              back={staticBack}
+            />
+          )}
           {hoverAnimation && activeAnimation && (
             <Animation
               isHovering={isHovering}

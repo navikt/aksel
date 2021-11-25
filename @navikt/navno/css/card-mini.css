@@ -32,7 +32,8 @@
   text-decoration: underline;
 }
 
-.navds-card__animation {
+.navds-card-mini .navds-card__animation,
+.navds-card-mini .navds-card__pictogram {
   align-self: center;
   height: var(--navds-spacing-16);
   margin: 0 var(--navds-spacing-4) 0 0;

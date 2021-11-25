@@ -1,8 +1,8 @@
 import React from "react";
 import { LargeCard, MicroCard, MiniCard } from "..";
 
-import hoverAnimation from "../../animation/barnepensjon/hover";
-import activeAnimation from "../../animation/barnepensjon/active";
+import * as Animation from "../../animation/barnepensjon";
+import * as Pictogram from "../../pictogram/gjenlevendepensjon";
 
 export default {
   title: "ds-react-navno/product-card",
@@ -19,18 +19,18 @@ export const All = () => {
       <MiniCard
         href="#"
         title="Utvidet barnetrygd"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        activeAnimation={Animation.Active}
         type="situation"
       />
       <h2>LargeCard</h2>
       <LargeCard
-        href="#"
-        title="Utvidet barnetrygd"
-        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
+        activeAnimation={Animation.Active}
         category="Pengestøtte"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        href="#"
+        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
+        title="Utvidet barnetrygd"
         type="product"
       />
     </>
@@ -63,22 +63,30 @@ export const MiniCardStory = () => {
       <MiniCard
         href="#"
         title="Har mistet noen i nær familie"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        activeAnimation={Animation.Active}
         type="situation"
       />
       <MiniCard
         href="#"
         title="Gjenlevendepensjon"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        activeAnimation={Animation.Active}
         type="product"
       />
       <MiniCard
         href="#"
         title="Finn ut hva du kan ha rett til når du er alene med barn"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        activeAnimation={Animation.Active}
+        type="tool"
+      />
+      <h2>MiniCard (med statisk pictogram)</h2>
+      <MiniCard
+        href="#"
+        title="Finn ut hva du kan ha rett til når du er alene med barn"
+        staticFront={Pictogram.Front}
+        staticBack={Pictogram.Back}
         type="tool"
       />
     </>
@@ -88,13 +96,24 @@ export const MiniCardStory = () => {
 export const LargeCardStory = () => {
   return (
     <>
+      <h1>LargeCard</h1>
       <LargeCard
         href="#"
         title="Utvidet barnetrygd"
         text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
         category="Pengestøtte"
-        hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
+        hoverAnimation={Animation.Hover}
+        activeAnimation={Animation.Active}
+        type="product"
+      />
+      <h2>LargeCard (med statisk pictogram)</h2>
+      <LargeCard
+        category="Pengestøtte"
+        staticFront={Pictogram.Front}
+        staticBack={Pictogram.Back}
+        href="#"
+        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
+        title="Utvidet barnetrygd"
         type="product"
       />
     </>

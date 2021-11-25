@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "@navikt/ds-react";
 import { Animation } from "../animation";
+import { Pictogram } from "../pictogram";
 import { useInteractions } from "./useInteraction";
 
 export interface MiniCardProps
@@ -9,6 +10,8 @@ export interface MiniCardProps
   title: string;
   hoverAnimation?: any;
   activeAnimation?: any;
+  staticBack?: React.ReactElement<Symbol>;
+  staticFront?: React.ReactElement<Symbol>;
   type?: "situation" | "product" | "tool" | "general";
 }
 
@@ -22,6 +25,8 @@ const MiniCard: OverridableComponent<
       as: Component = "a",
       className,
       hoverAnimation,
+      staticFront,
+      staticBack,
       title,
       type = "general",
       ...rest
@@ -29,6 +34,9 @@ const MiniCard: OverridableComponent<
     ref
   ) => {
     const { handlers, isHovering, isActive } = useInteractions();
+    const hasAnimation = !!(hoverAnimation && activeAnimation);
+    const hasStatic = !hasAnimation && staticFront && staticBack;
+
     return (
       <Component
         {...rest}
@@ -37,7 +45,15 @@ const MiniCard: OverridableComponent<
         className={cl("navds-card", "navds-card-mini", className)}
       >
         <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
-          {hoverAnimation && activeAnimation && (
+          {hasStatic && (
+            <Pictogram
+              isActive={isActive}
+              front={staticFront}
+              back={staticBack}
+              className={cl("navds-card__pictogram")}
+            />
+          )}
+          {hasAnimation && (
             <Animation
               isHovering={isHovering}
               isActive={isActive}

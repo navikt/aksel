@@ -1,0 +1,37 @@
+.navds-pictogram {
+  align-items: center;
+  display: flex;
+  position: relative;
+  height: inherit;
+  width: inherit;
+}
+
+.navds-pictogram .front,
+.navds-pictogram .back {
+  display: flex;
+  flex: 1;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
+.navds-pictogram .front {
+  z-index: 2;
+}
+.navds-pictogram svg {
+  width: 100%;
+  height: 100%;
+}
+
+.navds-pictogram .front--invert {
+  filter: brightness(0) invert(1);
+}
+
+.navds-pictogram .back {
+  z-index: 1;
+}
+
+.navds-pictogram .back--invert {
+  filter: invert(49%) sepia(37%) saturate(3786%) hue-rotate(192deg)
+    brightness(92%) contrast(90%);
+}
