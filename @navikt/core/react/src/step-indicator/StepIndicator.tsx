@@ -98,6 +98,7 @@ function StepIndicator(props: StepIndicatorProps) {
   });
 
   // eslint-disable-next-line camelcase
+  //replace with getDerivedStateFromProps
   const UNSAFE_componentWillReceiveProps = (nextProps: StepIndicatorProps) => {
     if (!props.autoResponsiv && nextProps.autoResponsiv) {
       window.addEventListener("resize", adjustSize);
