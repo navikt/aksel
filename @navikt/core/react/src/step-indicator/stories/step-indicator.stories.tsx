@@ -1,29 +1,3 @@
-// import React from "react";
-// import { StepIndicator } from "..";
-
-// export default {
-//   title: "ds-react/step-indicator",
-//   component: StepIndicator,
-// };
-
-// export const All = () => {
-//   return (
-//     <>
-//       <h1>StepIndicator</h1>
-//       <StepIndicator
-//         steg={[
-//           { label: "Dette steget først", index: 0 },
-//           { label: "Og så dette steget", aktiv: true, index: 1 },
-//           { label: "Deretter må du gjøre dette", index: 2 },
-//           { label: "Konklusjonen", disabled: true, index: 3 },
-//         ]}
-//         onChange={() => {}}
-//         visLabel
-//       />
-//     </>
-//   );
-// };
-
 import React from "react";
 import StepIndicator from "../StepIndicator";
 import { Meta } from "@storybook/react/types-6-0";
