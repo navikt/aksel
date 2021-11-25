@@ -52,6 +52,25 @@ export const All = () => {
         description="Cillum mollit"
         disabled
       />
+      <TextField
+        size="small"
+        label="Laborum excepteur"
+        description="Cillum mollit"
+        disabled
+      />
+      <h2>Readonly</h2>
+
+      <TextField
+        label="Laborum excepteur"
+        description="Cillum mollit"
+        readOnly
+      />
+      <TextField
+        label="Laborum excepteur"
+        description="Cillum mollit"
+        size="small"
+        readOnly
+      />
     </div>
   );
 };
