@@ -1,14 +1,3 @@
-// import React, { forwardRef } from "react";
-
-// export interface StepIndicatorProps
-//   extends React.HTMLAttributes<HTMLDivElement> {}
-
-// const StepIndicator = forwardRef<HTMLDivElement, StepIndicatorProps>(() => (
-//   <div>test</div>
-// ));
-
-// export default StepIndicator;
-
 import * as React from "react";
 import cn from "classnames";
 
@@ -56,13 +45,6 @@ export interface StepIndicatorProps {
   autoResponsiv: boolean;
 }
 
-export interface StepIndicatorState {
-  aktivtSteg: number;
-  visLabel: boolean;
-  kompakt: boolean;
-}
-
-// function StepIndicator(props: StepIndicatorProps & StepIndicatorState) {
 function StepIndicator(props: StepIndicatorProps) {
   // static Steg = StepIndicatorStep;
 
@@ -74,23 +56,6 @@ function StepIndicator(props: StepIndicatorProps) {
   // };
 
   let list!: HTMLOListElement;
-
-  //   constructor(props: StepIndicatorProps) {
-  //     super(props);
-
-  //     let initialAktivtSteg;
-  //     if (props.aktivtSteg !== undefined) {
-  //       initialAktivtSteg = props.aktivtSteg;
-  //     } else {
-  //       initialAktivtSteg = getDefaultActiveStegIndex();
-  //     }
-
-  //     state = {
-  //       aktivtSteg: initialAktivtSteg,
-  //       visLabel: props.visLabel,
-  //       kompakt: props.kompakt,
-  //     };
-  //   }
 
   const getDefaultActiveStegIndex = () => {
     let index;
@@ -126,7 +91,6 @@ function StepIndicator(props: StepIndicatorProps) {
       window.addEventListener("resize", adjustSize);
       adjustSize();
     }
-
     return () => {
       window.removeEventListener("resize", adjustSize);
     };
@@ -271,7 +235,6 @@ function StepIndicator(props: StepIndicatorProps) {
 
   return (
     <div className={cls(kompakt)} {...domProps}>
-      {/* <div className="" {...domProps}> */}
       <ol
         className="stegindikator__liste"
         ref={(list: HTMLOListElement) => {
