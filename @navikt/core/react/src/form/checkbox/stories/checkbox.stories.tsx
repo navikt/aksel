@@ -21,7 +21,7 @@ export const All = () => {
         description="Exercitation do labore"
       >
         <Checkbox value="Apple">Apple</Checkbox>
-        <Checkbox value="Orange" description="Laborum ad">
+        <Checkbox value="Orange" description={<div>Laborum ad</div>}>
           Orange
         </Checkbox>
         <Checkbox value="Melon">Melon</Checkbox>

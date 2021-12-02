@@ -16,9 +16,12 @@ export const All = () => {
         <Radio value="Melon">Melon</Radio>
       </RadioGroup>
       <h2>description</h2>
-      <RadioGroup legend="Mollit eiusmod" description="Exercitation do labore">
+      <RadioGroup
+        legend="Mollit eiusmod"
+        description={<div>Exercitation do labore</div>}
+      >
         <Radio value="Apple">Apple</Radio>
-        <Radio value="Orange" description="Laborum ad">
+        <Radio value="Orange" description={<div>Laborum ad</div>}>
           Orange
         </Radio>
         <Radio value="Melon">Melon</Radio>

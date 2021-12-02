@@ -21,9 +21,13 @@ export const All = () => {
 
       <Fieldset
         legend="Mollit eiusmod"
-        description="Quis reprehenderit esse cillum"
+        description={<div>Quis reprehenderit esse cillum</div>}
       >
-        <TextField label="Textfield label" hideLabel />
+        <TextField
+          label="Textfield label"
+          hideLabel
+          description={<div>Quis reprehenderit esse cillum</div>}
+        />
         <TextField label="Textfield label" hideLabel />
       </Fieldset>
 

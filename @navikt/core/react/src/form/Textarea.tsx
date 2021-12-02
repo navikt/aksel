@@ -81,6 +81,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         </Label>
         {!!description && (
           <BodyShort
+            as="div"
             className={cl("navds-textarea__description", {
               "sr-only": hideLabel,
             })}

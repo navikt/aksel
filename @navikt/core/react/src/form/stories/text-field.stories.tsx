@@ -15,7 +15,10 @@ export const All = () => {
 
       <h2>Description</h2>
 
-      <TextField label="Laborum excepteur" description="Cillum mollit" />
+      <TextField
+        label="Laborum excepteur"
+        description={<div>Cillum mollit</div>}
+      />
 
       <h2>Passord-type</h2>
       <TextField label="Passord" type="password" />
