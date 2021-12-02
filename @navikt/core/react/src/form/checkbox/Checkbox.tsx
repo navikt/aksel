@@ -72,6 +72,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       </BodyShort>
       {props.description && (
         <BodyShort
+          as="div"
           size={size}
           id={inputDescriptionId}
           className="navds-checkbox__description"

@@ -23,7 +23,7 @@ export const All = () => {
 
       <Textarea
         label="In anim elit"
-        description="Reprehenderit esse proident"
+        description={<div>Reprehenderit esse proident</div>}
         value={value}
         onChange={handleChange}
       />

@@ -66,6 +66,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
 
       {!!description && (
         <BodyShort
+          as="div"
           className={cl("navds-text-field__description", {
             "sr-only": hideLabel,
           })}

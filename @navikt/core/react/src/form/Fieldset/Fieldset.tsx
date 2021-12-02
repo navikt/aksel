@@ -103,6 +103,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           </Label>
           {!!description && (
             <BodyShort
+              as="div"
               className={cl("navds-fieldset__description", {
                 "sr-only": !!hideLegend,
               })}

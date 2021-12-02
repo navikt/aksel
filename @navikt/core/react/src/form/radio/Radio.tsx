@@ -55,6 +55,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       </BodyShort>
       {props.description && (
         <BodyShort
+          as="div"
           size={size}
           id={inputDescriptionId}
           className="navds-radio__description"
