@@ -20,7 +20,7 @@ const innerCls = (props) =>
 export interface StepIndicatorStepProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   label: string;
-  index: number;
+  index?: number;
   visLabel?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   aktiv?: boolean;
@@ -36,7 +36,7 @@ function StepIndicatorStep(props: StepIndicatorStepProps) {
       </div>
     );
     const label = props.visLabel ? labelTemplate : undefined;
-    const num = props.index + 1;
+    const num = (props.index ?? 0) + 1;
 
     if (typeof props.onClick === "function" && !props.aktiv) {
       return (

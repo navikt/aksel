@@ -12,84 +12,28 @@ export const All = () => {
   return (
     <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "2rem" }}>
       <StepIndicator visLabel={false} onChange={() => {}}>
-        <StepIndicatorStep
-          label="Dette steget først"
-          index={0}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Og så dette steget"
-          aktiv
-          index={1}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Deretter må du gjøre dette"
-          index={2}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Konklusjonen"
-          disabled
-          index={3}
-        ></StepIndicatorStep>
+        <StepIndicatorStep label="Dette steget først"></StepIndicatorStep>
+        <StepIndicatorStep label="Og så dette steget" aktiv></StepIndicatorStep>
+        <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
+        <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
       </StepIndicator>
       <StepIndicator visLabel onChange={() => {}}>
-        <StepIndicatorStep
-          label="Dette steget først"
-          index={0}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Og så dette steget"
-          aktiv
-          index={1}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Deretter må du gjøre dette"
-          index={2}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Konklusjonen"
-          disabled
-          index={3}
-        ></StepIndicatorStep>
+        <StepIndicatorStep label="Dette steget først"></StepIndicatorStep>
+        <StepIndicatorStep label="Og så dette steget" aktiv></StepIndicatorStep>
+        <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
+        <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
       </StepIndicator>
       <StepIndicator visLabel={false} kompakt onChange={() => {}}>
-        <StepIndicatorStep
-          label="Dette steget først"
-          index={0}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Og så dette steget"
-          aktiv
-          index={1}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Deretter må du gjøre dette"
-          index={2}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Konklusjonen"
-          disabled
-          index={3}
-        ></StepIndicatorStep>
+        <StepIndicatorStep label="Dette steget først"></StepIndicatorStep>
+        <StepIndicatorStep label="Og så dette steget" aktiv></StepIndicatorStep>
+        <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
+        <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
       </StepIndicator>
       <StepIndicator visLabel kompakt onChange={() => {}}>
-        <StepIndicatorStep
-          label="Dette steget først"
-          index={0}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Og så dette steget"
-          aktiv
-          index={1}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Deretter må du gjøre dette"
-          index={2}
-        ></StepIndicatorStep>
-        <StepIndicatorStep
-          label="Konklusjonen"
-          disabled
-          index={3}
-        ></StepIndicatorStep>
+        <StepIndicatorStep label="Dette steget først"></StepIndicatorStep>
+        <StepIndicatorStep label="Og så dette steget" aktiv></StepIndicatorStep>
+        <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
+        <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
       </StepIndicator>
     </div>
   );

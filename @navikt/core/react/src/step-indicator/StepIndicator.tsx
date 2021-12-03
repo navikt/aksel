@@ -168,7 +168,7 @@ function StepIndicator(props: StepIndicatorProps) {
     return React.Children.map(props.children, (child, i) => {
       if (React.isValidElement(child)) {
         return React.cloneElement(child as React.ReactElement<any>, {
-          index: child.props.index || i,
+          index: i,
           aktiv: i === aktivtSteg,
           ferdig: child.props.ferdig || i < aktivtSteg,
           onClick: !child.props.disabled ? onClick(i) : undefined,
