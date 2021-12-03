@@ -10,6 +10,7 @@ import {
   Normaltekst,
 } from "nav-frontend-typografi";
 import Lenke from "nav-frontend-lenker";
+import { Accordion } from "@navikt/ds-react";
 let headlines = [];
 
 const Img = ({ src, ...rest }) => {
@@ -98,6 +99,16 @@ const renderAst = new rehypeReact({
     h4: (props) =>
       registerHeadline(props, (props) => <Undertittel tag="h4" {...props} />),
     inlineCode: (props) => <InlineCode {...props} />,
+    accordion: (props) => {
+      return (
+        <Accordion>
+          <Accordion.Item>
+            <Accordion.Header>{props?.tittel}</Accordion.Header>
+            <Accordion.Content>{props.children}</Accordion.Content>
+          </Accordion.Item>
+        </Accordion>
+      );
+    },
   },
 }).Compiler;
 
