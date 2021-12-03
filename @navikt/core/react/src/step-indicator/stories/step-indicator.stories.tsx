@@ -35,6 +35,12 @@ export const All = () => {
         <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
         <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
       </StepIndicator>
+      <StepIndicator visLabel kompakt autoResponsiv onChange={() => {}}>
+        <StepIndicatorStep label="Dette steget først"></StepIndicatorStep>
+        <StepIndicatorStep label="Og så dette steget" aktiv></StepIndicatorStep>
+        <StepIndicatorStep label="Deretter må du gjøre dette"></StepIndicatorStep>
+        <StepIndicatorStep label="Konklusjonen" disabled></StepIndicatorStep>
+      </StepIndicator>
     </div>
   );
 };

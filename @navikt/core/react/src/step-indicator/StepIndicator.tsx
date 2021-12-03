@@ -49,7 +49,7 @@ StepIndicator.defaultProps = {
 function StepIndicator(props: StepIndicatorProps) {
   // static Steg = StepIndicatorStep;
 
-  let list!: HTMLOListElement;
+  const list = React.useRef<HTMLOListElement>(null);
 
   const getDefaultActiveStegIndex = () => {
     let index;
@@ -86,29 +86,6 @@ function StepIndicator(props: StepIndicatorProps) {
     };
   });
 
-  // eslint-disable-next-line camelcase
-  //replace with getDerivedStateFromProps
-  const UNSAFE_componentWillReceiveProps = (nextProps: StepIndicatorProps) => {
-    if (!props.autoResponsiv && nextProps.autoResponsiv) {
-      window.addEventListener("resize", adjustSize);
-    }
-
-    if (nextProps.autoResponsiv) {
-      setVisLabel(canShowLabel() ? nextProps.visLabel : false);
-      setVisKompakt(nextProps.kompakt || !canBeNormal());
-    } else {
-      setVisLabel(nextProps.visLabel);
-      setVisKompakt(nextProps.kompakt);
-    }
-
-    if (
-      nextProps.aktivtSteg !== undefined &&
-      nextProps.aktivtSteg !== aktivtSteg
-    ) {
-      setAktivtSteg(nextProps.aktivtSteg);
-    }
-  };
-
   const getNumSteg = () => {
     return React.Children.toArray(props.children).filter((child) =>
       React.isValidElement(child)
@@ -128,7 +105,7 @@ function StepIndicator(props: StepIndicatorProps) {
     return {
       visLabelWidth,
       normalWidth,
-      container: list!.getBoundingClientRect().width,
+      container: list.current!.getBoundingClientRect().width,
     };
   };
 
@@ -143,7 +120,8 @@ function StepIndicator(props: StepIndicatorProps) {
 
   const canShowLabel = () => {
     const dim = getDimensions();
-    return dim.container >= dim.visLabelWidth && props.visLabel;
+    console.log(dim);
+    return dim.container > dim.visLabelWidth && props.visLabel;
   };
 
   const canBeNormal = () => {
@@ -152,7 +130,7 @@ function StepIndicator(props: StepIndicatorProps) {
   };
 
   const adjustSize = () => {
-    if (!list) return;
+    if (!list.current) return;
 
     setVisLabel(canShowLabel());
     setVisKompakt(!canBeNormal());
@@ -191,14 +169,11 @@ function StepIndicator(props: StepIndicatorProps) {
     "aktivtSteg"
   );
 
+  console.log(visLabel);
+
   return (
     <div className={cls(kompakt)} {...domProps}>
-      <ol
-        className="stegindikator__liste"
-        ref={(list: HTMLOListElement) => {
-          list = list;
-        }}
-      >
+      <ol className="stegindikator__liste" ref={list}>
         {renderSteg()}
       </ol>
     </div>
