@@ -2,7 +2,6 @@ import * as React from "react";
 import cn from "classnames";
 
 import { omit } from "nav-frontend-js-utils";
-import StepIndicatorStep, { StepIndicatorStepProps } from "./StepIndicatorStep";
 
 import "nav-frontend-stegindikator-style";
 
@@ -13,11 +12,6 @@ const cls = (kompakt) =>
 
 export interface StepIndicatorProps {
   children: React.ReactNode;
-  /**
-   * Array av steg, se `stegindikator-steg.tsx`. Merk at steg også kan defineres som children av typen
-   * <StepIndicator.Steg />.
-   */
-  steg?: StepIndicatorStepProps[];
   /**
    * Vise/skjule steg label
    */
@@ -47,7 +41,6 @@ export interface StepIndicatorProps {
 
 // static defaultProps: Partial<StepIndicatorProps> = {
 StepIndicator.defaultProps = {
-  steg: [],
   visLabel: false,
   kompakt: false,
   autoResponsiv: false,
@@ -60,18 +53,14 @@ function StepIndicator(props: StepIndicatorProps) {
 
   const getDefaultActiveStegIndex = () => {
     let index;
-    if (props.children) {
-      React.Children.forEach(props.children, (child, i) => {
-        if (React.isValidElement(child)) {
-          const clone = React.cloneElement(child as React.ReactElement<any>);
-          if (clone.props.aktiv) {
-            index = i;
-          }
+    React.Children.forEach(props.children, (child, i) => {
+      if (React.isValidElement(child)) {
+        const clone = React.cloneElement(child as React.ReactElement<any>);
+        if (clone.props.aktiv) {
+          index = i;
         }
-      });
-    } else {
-      index = props.steg!.findIndex((steg) => !!steg.aktiv);
-    }
+      }
+    });
     return index !== -1 ? index : 0;
   };
 
@@ -121,12 +110,9 @@ function StepIndicator(props: StepIndicatorProps) {
   };
 
   const getNumSteg = () => {
-    if (props.children) {
-      return React.Children.toArray(props.children).filter((child) =>
-        React.isValidElement(child)
-      ).length;
-    }
-    return props.steg!.length;
+    return React.Children.toArray(props.children).filter((child) =>
+      React.isValidElement(child)
+    ).length;
   };
 
   const getDimensions = () => {
@@ -179,47 +165,17 @@ function StepIndicator(props: StepIndicatorProps) {
         ? (e) => handleClick(e, i)
         : undefined;
 
-    if (props.children) {
-      return React.Children.map(props.children, (child, i) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child as React.ReactElement<any>, {
-            index: child.props.index || i,
-            aktiv: i === aktivtSteg,
-            ferdig: child.props.ferdig || i < aktivtSteg,
-            onClick: !child.props.disabled ? onClick(i) : undefined,
-            visLabel: visLabel,
-          });
-        }
-        return child;
-      });
-    }
-
-    return props.steg!.map((steg, i) => {
-      const stegDomProps = omit(
-        steg,
-        "label",
-        "aktiv",
-        "ferdig",
-        "visLabel",
-        "index",
-        "onClick"
-      );
-
-      const ferdig = steg.ferdig || i < aktivtSteg;
-      const aktiv = i === aktivtSteg;
-
-      return (
-        <StepIndicatorStep
-          index={i}
-          label={steg.label}
-          visLabel={visLabel}
-          key={`${steg.label.split(" ").join("")}`}
-          aktiv={aktiv}
-          ferdig={ferdig}
-          onClick={!steg.disabled ? onClick(i) : undefined}
-          {...stegDomProps}
-        />
-      );
+    return React.Children.map(props.children, (child, i) => {
+      if (React.isValidElement(child)) {
+        return React.cloneElement(child as React.ReactElement<any>, {
+          index: child.props.index || i,
+          aktiv: i === aktivtSteg,
+          ferdig: child.props.ferdig || i < aktivtSteg,
+          onClick: !child.props.disabled ? onClick(i) : undefined,
+          visLabel: visLabel,
+        });
+      }
+      return child;
     });
   };
 

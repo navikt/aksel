@@ -1,5 +1,6 @@
 import React from "react";
 import StepIndicator from "../StepIndicator";
+import StepIndicatorStep from "../StepIndicatorStep";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
@@ -10,46 +11,86 @@ export default {
 export const All = () => {
   return (
     <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "2rem" }}>
-      <StepIndicator
-        steg={[
-          { label: "Dette steget først", index: 0 },
-          { label: "Og så dette steget", aktiv: true, index: 1 },
-          { label: "Deretter må du gjøre dette", index: 2 },
-          { label: "Konklusjonen", disabled: true, index: 3 },
-        ]}
-        onChange={() => {}}
-      />
-      <StepIndicator
-        visLabel
-        steg={[
-          { label: "Dette steget først", index: 0 },
-          { label: "Og så dette steget", aktiv: true, index: 1 },
-          { label: "Deretter må du gjøre dette", index: 2 },
-          { label: "Konklusjonen", disabled: true, index: 3 },
-        ]}
-        onChange={() => {}}
-      />
-      <StepIndicator
-        kompakt
-        steg={[
-          { label: "Dette steget først", index: 0 },
-          { label: "Og så dette steget", aktiv: true, index: 1 },
-          { label: "Deretter må du gjøre dette", index: 2 },
-          { label: "Konklusjonen", disabled: true, index: 3 },
-        ]}
-        onChange={() => {}}
-      />
-      <StepIndicator
-        kompakt
-        visLabel
-        steg={[
-          { label: "Dette steget først", index: 0 },
-          { label: "Og så dette steget", aktiv: true, index: 1 },
-          { label: "Deretter må du gjøre dette", index: 2 },
-          { label: "Konklusjonen", disabled: true, index: 3 },
-        ]}
-        onChange={() => {}}
-      />
+      <StepIndicator visLabel={false} onChange={() => {}}>
+        <StepIndicatorStep
+          label="Dette steget først"
+          index={0}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Og så dette steget"
+          aktiv
+          index={1}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Deretter må du gjøre dette"
+          index={2}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Konklusjonen"
+          disabled
+          index={3}
+        ></StepIndicatorStep>
+      </StepIndicator>
+      <StepIndicator visLabel onChange={() => {}}>
+        <StepIndicatorStep
+          label="Dette steget først"
+          index={0}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Og så dette steget"
+          aktiv
+          index={1}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Deretter må du gjøre dette"
+          index={2}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Konklusjonen"
+          disabled
+          index={3}
+        ></StepIndicatorStep>
+      </StepIndicator>
+      <StepIndicator visLabel={false} kompakt onChange={() => {}}>
+        <StepIndicatorStep
+          label="Dette steget først"
+          index={0}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Og så dette steget"
+          aktiv
+          index={1}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Deretter må du gjøre dette"
+          index={2}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Konklusjonen"
+          disabled
+          index={3}
+        ></StepIndicatorStep>
+      </StepIndicator>
+      <StepIndicator visLabel kompakt onChange={() => {}}>
+        <StepIndicatorStep
+          label="Dette steget først"
+          index={0}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Og så dette steget"
+          aktiv
+          index={1}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Deretter må du gjøre dette"
+          index={2}
+        ></StepIndicatorStep>
+        <StepIndicatorStep
+          label="Konklusjonen"
+          disabled
+          index={3}
+        ></StepIndicatorStep>
+      </StepIndicator>
     </div>
   );
 };
