@@ -1,7 +1,13 @@
 :root {
-  --navds-search-field-color-shadow-error: var(--navds-color-red-50);
-  --navds-search-field-color-border-error: var(--navds-color-red-50);
-  --navds-search-field-color-clearbutton-border: var(--navds-color-gray-60);
+  --navds-search-field-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-search-field-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-search-field-color-clearbutton-border: var(
+    --navds-semantic-color-border-default
+  );
 }
 
 .navds-search-field__input-wrapper {

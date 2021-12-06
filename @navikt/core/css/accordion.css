@@ -1,9 +1,15 @@
 :root {
-  --navds-accordion-color-text: var(--navds-color-darkgray);
-  --navds-accordion-color-background: var(--navds-color-background);
-  --navds-accordion-color-text-hover: var(--navds-color-blue-50);
-  --navds-accordion-color-border-hover: var(--navds-color-blue-50);
-  --navds-accordion-color-border-focus: var(--navds-color-background);
+  --navds-accordion-color-text: var(--navds-semantic-color-text-default);
+  --navds-accordion-color-background: var(
+    ---navds-semantic-color-component-background-light
+  );
+  --navds-accordion-color-text-hover: var(--navds-semantic-color-text-link);
+  --navds-accordion-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-accordion-color-border-focus: var(
+    ---navds-semantic-color-component-background-light
+  );
 }
 
 .navds-accordion .ReactCollapse--collapse {

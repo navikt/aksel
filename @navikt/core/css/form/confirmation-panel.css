@@ -12,19 +12,19 @@
     --navds-semantic-color-feedback-danger-background
   );
   --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
-    --navds-color-green-70
+    --navds-global-color-green-700
   );
   --navds-confirmation-panel-color-checkbox-border-checked-hover: var(
-    --navds-color-green-70
+    --navds-global-color-green-700
   );
   --navds-confirmation-panel-color-checkbox-background-checked: var(
-    --navds-color-green-50
+    --navds-global-color-green-500
   );
   --navds-confirmation-panel-color-checkbox-border-checked: var(
-    --navds-color-green-50
+    --navds-semantic-color-feedback-success-border
   );
   --navds-confirmation-panel-color-checkbox-label-checked: var(
-    --navds-color-darkgray
+    --navds-semantic-color-text-default
   );
 }
 

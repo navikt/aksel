@@ -1,12 +1,22 @@
 :root {
-  --navds-select-color-background: var(--navds-color-white);
-  --navds-select-color-border: var(--navds-color-gray-60);
-  --navds-select-color-border-hover: var(--navds-color-blue-50);
-  --navds-select-color-border-error: var(--navds-color-red-50);
-  --navds-select-color-shadow-error: var(--navds-color-red-50);
-  --navds-select-color-border-disabled: var(--navds-color-gray-40);
-  --navds-select-color-background-disabled: var(--navds-color-gray-10);
-  --navds-select-color-text-disabled: var(--navds-color-darkgray);
+  --navds-select-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-select-color-border: var(--navds-semantic-color-border-default);
+  --navds-select-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-select-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-select-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
+  --navds-select-color-background-disabled: var(
+    --navds-semantic-color-component-background-alternate
+  );
+  --navds-select-color-text-disabled: var(--navds-semantic-color-text-default);
 }
 
 .navds-select__input {

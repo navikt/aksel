@@ -112,6 +112,10 @@ module.exports = {
       popover: {
         value: "0 2px 4px 0 {navds.global.color.gray.20.value}",
       },
+      card: {
+        value:
+          "0 1px 3px 0 rgba(38,38,38,0.2),0 2px 1px 0 rgba(38,38,38,0.12),0 1px 1px 0 rgba(38,38,38,0.14)",
+      },
     },
     "z-index": {
       modal: { value: 2000 },

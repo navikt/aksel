@@ -1,14 +1,28 @@
 :root {
-  --navds-textarea-color-background: var(--navds-color-white);
-  --navds-textarea-color-border: var(--navds-color-gray-60);
-  --navds-textarea-color-border-hover: var(--navds-color-blue-50);
-  --navds-textarea-color-border-error: var(--navds-color-red-50);
-  --navds-textarea-color-shadow-error: var(--navds-color-red-50);
-  --navds-textarea-color-counter-text: var(--navds-color-gray-40);
-  --navds-textarea-color-counter-text-error: var(--navds-color-red-50);
-  --navds-textarea-color-text-disabled: var(--navds-color-darkgray);
-  --navds-textarea-color-border-disabled: var(--navds-color-gray-40);
-  --navds-textarea-color-background-disabled: var(--navds-color-gray-10);
+  --navds-textarea-color-background: var(
+    --navds-semantic-color-component-background-light:
+  );
+  --navds-textarea-color-border: var(--navds-semantic-color-border-default);
+  --navds-textarea-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-textarea-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-textarea-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-textarea-color-counter-text: var(--navds-global-color-gray-400);
+  --navds-textarea-color-counter-text-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-textarea-color-text-disabled: var(
+    --navds-semantic-color-text-default
+  );
+  --navds-textarea-color-border-disabled: var(--navds-global-color-gray-400);
+  --navds-textarea-color-background-disabled: var(
+    --navds-semantic-color-component-background-alternate
+  );
 }
 
 .navds-textarea__wrapper {
