@@ -48,7 +48,7 @@ const getToc = (toc) => {
               <Lenke href={item.url} className="toc-link toc-link-h2">
                 {item.title}
               </Lenke>
-              {item.items && item.items.length !== 0 && (
+              {/* {item.items && item.items.length !== 0 && (
                 <ol className="toc-level toc-level-2">
                   {item.items.map((lvl3, x) => {
                     return (
@@ -60,7 +60,7 @@ const getToc = (toc) => {
                     );
                   })}
                 </ol>
-              )}
+              )} */}
             </li>
           );
         })}
