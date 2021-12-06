@@ -30,6 +30,6 @@ Repoet inneholder følgende:
 
 Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md)
 
-## Lisens
+## Lisenser
 
 Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENSE)
