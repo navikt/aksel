@@ -22,7 +22,7 @@ html {
 
 body {
   font-family: var(--navds-font-family);
-  line-height: 1.375;
+  line-height: 1.333;
   color: var(--navds-semantic-color-text-default);
   font-size: 1.125rem;
 }

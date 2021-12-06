@@ -36,6 +36,6 @@ jobs:
           branch: figma-tokens-sync
           delete-branch: true
           title: "[FEATURE] Tokens sync Figma"
-          commit-message: "Ikoner synket fra figma"
+          commit-message: "Tokens synket fra figma"
           committer: GitHub <noreply@github.com>
           signoff: false

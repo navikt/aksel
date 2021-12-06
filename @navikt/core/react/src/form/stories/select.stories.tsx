@@ -19,7 +19,7 @@ export const All = () => {
 
       <h2>Description</h2>
 
-      <Select label="Ipsum enim quis culpa" description="Aute enim">
+      <Select label="Ipsum enim quis culpa" description={<div>Aute enim</div>}>
         <option value="">Velg land</option>
         <option value="norge">Norge</option>
         <option value="sverige">Sverige</option>

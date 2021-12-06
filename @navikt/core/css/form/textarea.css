@@ -92,11 +92,20 @@
 /*
   Disabled handling
  */
-.navds-textarea__input:disabled,
-.navds-textarea__input[readonly] {
-  background-color: var(--navds-textarea-color-background-disabled);
-  border-color: var(--navds-textarea-color-border-disabled);
+.navds-textarea--disabled {
+  opacity: 0.3;
+}
+
+.navds-textarea__input:disabled {
+  background-color: var(--navds-textarea-color-background);
+  border-color: var(--navds-textarea-color-border);
   box-shadow: none;
-  color: var(--navds-textarea-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.navds-textarea__input[readonly] {
+  background-color: var(--navds-textarea-color-background);
+  border-color: var(--navds-textarea-color-border);
+  box-shadow: none;
   cursor: not-allowed;
 }

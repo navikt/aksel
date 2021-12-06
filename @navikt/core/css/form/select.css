@@ -69,12 +69,16 @@
   border-color: var(--navds-select-color-border-error);
 }
 
-/* Disabled handling */
-.navds-select__input:disabled,
-.navds-select__input[read-only] {
-  background-color: var(--navds-select-color-background-disabled);
-  border-color: var(--navds-select-color-border-disabled);
+/*
+  Disabled handling
+ */
+.navds-select--disabled {
+  opacity: 0.3;
+}
+
+.navds-select__input:disabled {
+  background-color: var(--navds-select-color-background);
+  border-color: var(--navds-select-color-border);
   box-shadow: none;
-  color: var(--navds-select-color-text-disabled);
   cursor: not-allowed;
 }

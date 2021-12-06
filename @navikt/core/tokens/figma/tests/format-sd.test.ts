@@ -30,10 +30,10 @@ describe("Check conversion to Styled-dictionary format", () => {
           semantic: {
             color: {
               danger: {
-                value: "{navds.global.color.red.400.value}",
                 hover: {
                   value: "{navds.global.color.red.300.value}",
                 },
+                "@": { value: "{navds.global.color.red.400.value}" },
               },
             },
           },
