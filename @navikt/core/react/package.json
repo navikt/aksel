@@ -61,6 +61,7 @@
     "ts-jest": "^27.0.5"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
+    "react": "^17.0.0",
+    "@types/react": "^17.0.30"
   }
 }
