@@ -10,11 +10,14 @@ export const All = () => {
   const Radios = (props) => (
     <RadioGroup
       legend="Mollit eiusmod"
-      description="Exercitation do labore"
+      description={<div>"Exercitation do labore"</div>}
       {...props}
     >
       <Radio value="Apple">Apple</Radio>
       <Radio value="Orange" description="Laborum ad">
+        Orange
+      </Radio>
+      <Radio value="Orange" description={<div>Laborum ad</div>}>
         Orange
       </Radio>
       <Radio value="Melon">Melon</Radio>

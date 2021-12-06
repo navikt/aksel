@@ -70,6 +70,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
       </Label>
       {!!description && (
         <BodyShort
+          as="div"
           className={cl("navds-select__description", {
             "sr-only": hideLabel,
           })}

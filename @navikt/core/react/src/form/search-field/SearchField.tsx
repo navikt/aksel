@@ -97,6 +97,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         </Label>
         {!!description && (
           <BodyShort
+            as="div"
             className={cl("navds-text-field__description", {
               "sr-only": hideLabel,
             })}

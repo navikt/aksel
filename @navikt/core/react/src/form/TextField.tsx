@@ -76,6 +76,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
               })}
               id={inputDescriptionId}
               size="small"
+              as="div"
             >
               {description}
             </BodyShort>
@@ -86,6 +87,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
               })}
               id={inputDescriptionId}
               size="small"
+              as="div"
             >
               {description}
             </Detail>

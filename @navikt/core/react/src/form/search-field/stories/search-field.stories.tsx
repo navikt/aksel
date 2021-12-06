@@ -15,7 +15,7 @@ export const All = () => {
       <h1>SearchField</h1>
       <SearchField
         label="Mollit eiusmod"
-        description="Ea cupidatat eu sunt commodo"
+        description={<div>Ea cupidatat eu sunt commodo</div>}
       >
         <SearchField.Input />
         <SearchField.Button>

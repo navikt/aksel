@@ -37,9 +37,15 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
       />
       <label htmlFor={inputProps.id} className="navds-radio__label">
         <div className="navds-radio__content">
-          <BodyShort size={size}>{props.children}</BodyShort>
+          <BodyShort as="div" size={size}>
+            {props.children}
+          </BodyShort>
           {props.description && (
-            <Description size="small" className="navds-radio__description">
+            <Description
+              as="div"
+              size="small"
+              className="navds-radio__description"
+            >
               {props.description}
             </Description>
           )}

@@ -109,6 +109,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
                 })}
                 id={inputDescriptionId}
                 size="small"
+                as="div"
               >
                 {props.description}
               </BodyShort>
@@ -119,6 +120,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
                 })}
                 id={inputDescriptionId}
                 size="small"
+                as="div"
               >
                 {props.description}
               </Detail>

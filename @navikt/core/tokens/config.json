@@ -44,7 +44,7 @@
         },
         {
           "destination": "tokens-cjs.js",
-          "format": "javascript/module"
+          "format": "javascript/module-flat"
         }
       ]
     }

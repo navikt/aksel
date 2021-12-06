@@ -17,6 +17,9 @@ export const All = () => {
       <Checkbox value="Orange" description="Laborum ad">
         Orange
       </Checkbox>
+      <Checkbox value="Banana" description={<div>Laborum ad</div>}>
+        Banana
+      </Checkbox>
       <Checkbox value="Melon">Melon</Checkbox>
     </CheckboxGroup>
   );
