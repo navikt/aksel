@@ -24,7 +24,7 @@
     --navds-semantic-color-feedback-success-border
   );
   --navds-confirmation-panel-color-checkbox-label-checked: var(
-    --navds-semantic-color-text-default
+    --navds-semantic-color-text
   );
 }
 

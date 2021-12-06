@@ -1,5 +1,5 @@
 :root {
-  --navds-dropdown-menu-color: var(--navds-semantic-color-text-default);
+  --navds-dropdown-menu-color: var(--navds-semantic-color-text);
   --navdsi-dropdown-item-color-text: var(--navds-semantic-color-text-link);
   --navdsi-dropdown-item-color-background-hover: var(
     --navds-global-color-blue-100

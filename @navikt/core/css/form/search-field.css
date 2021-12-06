@@ -1,12 +1,12 @@
 :root {
   --navds-search-field-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger-default
+    --navds-semantic-color-interaction-danger
   );
   --navds-search-field-color-border-error: var(
-    --navds-semantic-color-interaction-danger-default
+    --navds-semantic-color-interaction-danger
   );
   --navds-search-field-color-clearbutton-border: var(
-    --navds-semantic-color-border-default
+    --navds-semantic-color-border
   );
 }
 

@@ -6,12 +6,8 @@
   --navds-link-color-background-active: var(--navds-semantic-color-focus);
   --navds-link-color-icon: var(--navds-semantic-color-text-link);
   --navds-link-color-icon-focus: var(--navds-semantic-color-text-inverted);
-  --navds-link-color-on-info-background: var(
-    --navds-semantic-color-text-default
-  );
-  --navds-link-color-on-error-background: var(
-    --navds-semantic-color-text-default
-  );
+  --navds-link-color-on-info-background: var(--navds-semantic-color-text);
+  --navds-link-color-on-error-background: var(--navds-semantic-color-text);
 }
 
 .navds-link {

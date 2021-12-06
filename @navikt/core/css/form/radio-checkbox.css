@@ -6,22 +6,20 @@
     --navds-global-color-blue-100
   );
   --navds-radio-checkbox-color-background-checked: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
-  --navds-radio-checkbox-color-shadow: var(
-    --navds-semantic-color-border-default
-  );
+  --navds-radio-checkbox-color-shadow: var(--navds-semantic-color-border);
   --navds-radio-checkbox-color-shadow-hover: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-radio-checkbox-color-shadow-checked: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-radio-checkbox-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger-default
+    --navds-semantic-color-interaction-danger
   );
   --navds-radio-checkbox-color-label-hover: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
 }
 

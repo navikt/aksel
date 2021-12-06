@@ -1,7 +1,7 @@
 :root {
-  --navds-link-panel-color-text: var(--navds-semantic-color-text-default);
+  --navds-link-panel-color-text: var(--navds-semantic-color-text);
   --navds-link-panel-color-border-hover: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-link-panel-color-title-hover: var(--navds-semantic-color-text-link);
 }

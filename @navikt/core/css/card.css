@@ -1,5 +1,5 @@
 :root {
-  --navds-card-micro-color-text: var(--navds-semantic-color-text-default);
+  --navds-card-micro-color-text: var(--navds-semantic-color-text);
   --navds-card-micro-color-background: var(--navds-global-color-orange-200);
   --navds-card-micro-color-border: transparent;
   --navds-card-micro-color-text-hover: var(--navds-semantic-color-text-link);
@@ -7,7 +7,7 @@
     --navds-semantic-color-component-background-light
   );
   --navds-card-micro-color-border-hover: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-card-micro-color-text-focus: var(--navds-semantic-color-text-link);
   --navds-card-micro-color-background-focus: var(
@@ -15,7 +15,7 @@
   );
   --navds-card-micro-color-shadow-focus: var(--navds-semantic-color-focus);
   --navds-card-micro-color-background-active: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-card-micro-color-text-active: var(
     --navds-semantic-color-text-inverted

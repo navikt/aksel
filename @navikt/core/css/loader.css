@@ -5,7 +5,7 @@
   );
   --navds-loader-color-neutral-foreground: var(--navds-global-color-gray-400);
   --navds-loader-color-interaction-foreground: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-loader-color-inverted-foreground: var(
     --navds-semantic-color-component-background-light

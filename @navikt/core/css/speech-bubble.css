@@ -2,9 +2,7 @@
   --navds-speechbubble-color-background: var(
     --navds-semantic-color-component-background-alternate
   );
-  --navds-speechbubble-color-illustration: var(
-    --navds-semantic-color-text-default
-  );
+  --navds-speechbubble-color-illustration: var(--navds-semantic-color-text);
   --navds-speechbubble-color-illustration-background: var(
     --navds-semantic-color-divider
   );

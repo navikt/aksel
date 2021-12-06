@@ -5,7 +5,7 @@
     --navds-semantic-color-text-inverted
   );
   --navds-button-color-primary-background: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-primary-background-hover: var(
     --navds-semantic-color-interaction-primary-hover
@@ -16,7 +16,7 @@
 
   /* Secondary */
   --navds-button-color-secondary-text: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-secondary-text-hover: var(
     --navds-semantic-color-text-inverted
@@ -25,7 +25,7 @@
     --navds-semantic-color-text-inverted
   );
   --navds-button-color-secondary-border: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-secondary-border-focus-active-hover: var(
     --navds-semantic-color-component-background-light
@@ -42,16 +42,16 @@
 
   /* Tertiary */
   --navds-button-color-tertiary-text: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-tertiary-text-active: var(
     --navds-semantic-color-text-inverted
   );
   --navds-button-color-tertiary-border-hover: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-tertiary-border-focus: var(
-    --navds-semantic-color-interaction-primary-default
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-tertiary-border-active: var(
     --navds-semantic-color-component-background-light
@@ -63,7 +63,7 @@
   /* Danger */
   --navds-button-color-danger-text: var(--navds-semantic-color-text-inverted);
   --navds-button-color-danger-background: var(
-    --navds-semantic-color-interaction-danger-default
+    --navds-semantic-color-interaction-danger
   );
   --navds-button-color-danger-background-hover: var(
     --navds-semantic-color-interaction-danger-hover
