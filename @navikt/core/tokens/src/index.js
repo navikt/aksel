@@ -1,13 +1,8 @@
-const newColors = require("./colors.json");
-const newSpacing = require("./spacing.json");
-
 const baseFontSize = 16;
 const getFontSize = (size) => `${size / baseFontSize}rem`;
 
 module.exports = {
   navds: {
-    ...(newSpacing?.navds ?? {}),
-    ...(newColors?.navds ?? {}),
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {
