@@ -1,22 +1,42 @@
 :root {
-  --navds-checkbox-color-background: var(--navds-color-white);
-  --navds-checkbox-color-border: var(--navds-color-gray-60);
-  --navds-checkbox-color-label-hover: var(--navds-color-blue-50);
-  --navds-checkbox-color-border-hover: var(--navds-color-blue-50);
-  --navds-checkbox-color-background-hover: var(--navds-color-blue-10);
-  --navds-checkbox-color-description: var(--navds-color-gray-80);
-  --navds-checkbox-color-border-checked: var(--navds-color-blue-50);
-  --navds-checkbox-color-background-checked: var(--navds-color-blue-50);
-  --navds-checkbox-color-shadow-error: var(--navds-color-red-50);
-  --navds-checkbox-color-border-error: var(--navds-color-red-50);
+  --navds-checkbox-color-background: var(
+    --navds-semantic-color-canvas-background-light
+  );
+  --navds-checkbox-color-border: var(--navds-semantic-color-border-default);
+  --navds-checkbox-color-label-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-checkbox-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-checkbox-color-background-hover: var(--navds-global-color-blue-100);
+  --navds-checkbox-color-description: var(--navds-semantic-color-text-muted);
+  --navds-checkbox-color-border-checked: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-checkbox-color-background-checked: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-checkbox-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-checkbox-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
 
   /* Disabled */
-  --navds-checkbox-color-label-disabled: var(--navds-color-gray-40);
-  --navds-checkbox-color-border-disabled: var(--navds-color-gray-60);
-  --navds-checkbox-color-background-disabled: var(--navds-color-gray-10);
-  --navds-checkbox-color-border-checked-disabled: var(--navds-color-gray-40);
+  --navds-checkbox-color-label-disabled: var(--navds-global-color-gray-400);
+  --navds-checkbox-color-border-disabled: var(
+    --navds-semantic-color-border-default
+  );
+  --navds-checkbox-color-background-disabled: var(
+    --navds-global-color-gray-100
+  );
+  --navds-checkbox-color-border-checked-disabled: var(
+    --navds-global-color-gray-400
+  );
   --navds-checkbox-color-background-checked-disabled: var(
-    --navds-color-gray-40
+    --navds-global-color-gray-400
   );
 }
 

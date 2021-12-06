@@ -1,25 +1,53 @@
 :root {
-  --navds-radio-color-description: var(--navds-color-gray-80);
-  --navds-radio-color-background: var(--navds-color-white);
-  --navds-radio-color-border: var(--navds-color-gray-60);
-  --navds-radio-color-label-hover: var(--navds-color-blue-50);
-  --navds-radio-color-border-hover: var(--navds-color-blue-50);
-  --navds-radio-color-background-hover: var(--navds-color-blue-10);
-  --navds-radio-color-border-checked: var(--navds-color-blue-50);
-  --navds-radio-color-shadow-checked: var(--navds-color-blue-50);
-  --navds-radio-color-shadow-checked-focus: var(--navds-color-blue-80);
-  --navds-radio-color-shadow-background-checked-focus: var(--navds-color-white);
-  --navds-radio-color-shadow-dot-checked-focus: var(--navds-color-blue-50);
-  --navds-radio-color-shadow-error: var(--navds-color-red-50);
-  --navds-radio-color-border-error: var(--navds-color-red-50);
+  --navds-radio-color-description: var(--navds-semantic-color-text-);
+  --navds-radio-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-radio-color-border: var(--navds-semantic-color-border-default);
+  --navds-radio-color-label-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-radio-color-border-hover: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-radio-color-background-hover: var(--navds-global-color-blue-100);
+  --navds-radio-color-border-checked: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-radio-color-shadow-checked: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-radio-color-shadow-checked-focus: var(--navds-semantic-color-focus);
+  --navds-radio-color-shadow-background-checked-focus: var(
+    --navds-semantic-color-canvas-background-light
+  );
+  --navds-radio-color-shadow-dot-checked-focus: var(
+    --navds-semantic-color-interaction-primary-default
+  );
+  --navds-radio-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
+  --navds-radio-color-border-error: var(
+    --navds-semantic-color-interaction-danger-default
+  );
 
   /* Disabled */
-  --navds-radio-color-background-disabled: var(--navds-color-gray-10);
-  --navds-radio-color-border-disabled: var(--navds-color-gray-60);
-  --navds-radio-color-label-disabled: var(--navds-color-gray-40);
-  --navds-radio-color-background-disabled-checked: var(--navds-color-gray-40);
-  --navds-radio-color-border-disabled-checked: var(--navds-color-gray-40);
-  --navds-radio-color-shadow-disabled-checked: var(--navds-color-gray-40);
+  --navds-radio-color-background-disabled: var(
+    --navds-semantic-color-canvas-background-default
+  );
+  --navds-radio-color-border-disabled: var(
+    --navds-semantic-color-border-default
+  );
+  --navds-radio-color-label-disabled: var(--navds-global-color-gray-400);
+  --navds-radio-color-background-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
+  --navds-radio-color-border-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
+  --navds-radio-color-shadow-disabled-checked: var(
+    --navds-global-color-gray-400
+  );
 }
 
 .navds-radio {

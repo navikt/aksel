@@ -1,5 +1,7 @@
 :root {
-  --navds-error-summary-color-background: var(--navds-color-white);
+  --navds-error-summary-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
   --navds-error-summary-color-border: var(
     --navds-semantic-color-feedback-danger-border
   );
