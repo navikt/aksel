@@ -170,6 +170,30 @@ export const All = () => {
           <SearchField.Input />
         </SearchField>
       </Fieldset>
+
+      <h2>Disabled </h2>
+      <SearchField
+        disabled
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+      >
+        <SearchField.Input />
+        <SearchField.Button>
+          <Search /> Søk
+        </SearchField.Button>
+      </SearchField>
+      <Fieldset legend="Filter" disabled>
+        <SearchField
+          label="Mollit eiusmod"
+          description="Ea cupidatat eu sunt commodo"
+          error="Errormsg"
+        >
+          <SearchField.Input />
+          <SearchField.Button>
+            <Search /> Søk
+          </SearchField.Button>
+        </SearchField>
+      </Fieldset>
     </>
   );
 };

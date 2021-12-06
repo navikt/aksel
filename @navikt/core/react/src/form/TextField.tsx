@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Label, omit } from "..";
+import { BodyShort, Detail, Label, omit } from "..";
 import ErrorMessage from "./ErrorMessage";
 import { FormFieldProps, useFormField } from "./useFormField";
 
@@ -52,7 +52,10 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         className,
         "navds-form-field",
         `navds-form-field--${size}`,
-        { "navds-text-field--error": hasError }
+        {
+          "navds-text-field--error": hasError,
+          "navds-text-field--disabled": !!inputProps.disabled,
+        }
       )}
     >
       <Label
@@ -65,16 +68,31 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
       </Label>
 
       {!!description && (
-        <BodyShort
-          as="div"
-          className={cl("navds-text-field__description", {
-            "sr-only": hideLabel,
-          })}
-          id={inputDescriptionId}
-          size={size}
-        >
-          {description}
-        </BodyShort>
+        <>
+          {size === "medium" ? (
+            <BodyShort
+              className={cl("navds-text-field__description", {
+                "sr-only": hideLabel,
+              })}
+              id={inputDescriptionId}
+              size="small"
+              as="div"
+            >
+              {description}
+            </BodyShort>
+          ) : (
+            <Detail
+              className={cl("navds-text-field__description", {
+                "sr-only": hideLabel,
+              })}
+              id={inputDescriptionId}
+              size="small"
+              as="div"
+            >
+              {description}
+            </Detail>
+          )}
+        </>
       )}
       <input
         {...omit(rest, ["error", "errorId", "size"])}

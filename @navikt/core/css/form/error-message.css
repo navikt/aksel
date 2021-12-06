@@ -3,6 +3,11 @@
 }
 
 .navds-error-message {
-  display: block;
   color: var(--navds-error-message-color-text);
+  display: flex;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-error-message::before {
+  content: "•";
 }
