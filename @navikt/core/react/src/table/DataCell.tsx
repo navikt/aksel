@@ -1,5 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
+import { BodyShort } from "..";
+import { TableContext } from ".";
 
 interface DataCellProps extends React.HTMLAttributes<HTMLTableCellElement> {}
 
@@ -8,8 +10,22 @@ export interface DataCellType
     DataCellProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const DataCell: DataCellType = forwardRef(({ className, ...rest }, ref) => (
-  <td {...rest} ref={ref} className={cl("navds-table__cell", className)} />
-));
+const DataCell: DataCellType = forwardRef(
+  ({ className, children = "", ...rest }, ref) => {
+    const context = useContext(TableContext);
+
+    return (
+      <BodyShort
+        as="td"
+        ref={ref}
+        className={cl("navds-table__data-cell", className)}
+        size={context?.size}
+        {...rest}
+      >
+        {children}
+      </BodyShort>
+    );
+  }
+);
 
 export default DataCell;

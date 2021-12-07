@@ -16,13 +16,18 @@
   display: table-row;
 }
 
-.navds-table__cell {
+.navds-table__header-cell,
+.navds-table__data-cell {
   display: table-cell;
   padding: var(--navds-spacing-4);
-  text-align: left;
   border-bottom: var(--navds-border-default);
 }
 
-.navds-table--small .navds-table__cell {
+.navds-table__header-cell {
+  text-align: left;
+}
+
+.navds-table--small .navds-table__header-cell,
+.navds-table--small .navds-table__data-cell {
   padding: var(--navds-spacing-2);
 }

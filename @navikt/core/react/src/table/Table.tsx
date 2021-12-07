@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
@@ -25,12 +25,20 @@ export interface TableType
   HeaderCell: HeaderCellType;
 }
 
+export interface TableContextProps {
+  size: "medium" | "small";
+}
+
+export const TableContext = createContext<TableContextProps | null>(null);
+
 const Table = forwardRef(({ className, size = "medium", ...rest }, ref) => (
-  <table
-    {...rest}
-    ref={ref}
-    className={cl("navds-table", `navds-table--${size}`, className)}
-  />
+  <TableContext.Provider value={{ size }}>
+    <table
+      {...rest}
+      ref={ref}
+      className={cl("navds-table", `navds-table--${size}`, className)}
+    />
+  </TableContext.Provider>
 )) as TableType;
 
 Table.Header = Header;
