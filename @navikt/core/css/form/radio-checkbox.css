@@ -3,7 +3,7 @@
     --navds-semantic-color-canvas-background-light
   );
   --navds-radio-checkbox-color-background-hover: var(
-    --navds-global-color-blue-100
+    --navds-semantic-color-interaction-primary-hover-subtle
   );
   --navds-radio-checkbox-color-background-checked: var(
     --navds-semantic-color-interaction-primary

@@ -2,7 +2,7 @@
   --navds-dropdown-menu-color: var(--navds-semantic-color-text);
   --navdsi-dropdown-item-color-text: var(--navds-semantic-color-link);
   --navdsi-dropdown-item-color-background-hover: var(
-    --navds-global-color-blue-100
+    --navds-semantic-color-interaction-primary-hover-subtle
   );
   --navdsi-dropdown-item-color-background-active: var(
     --navds-global-color-blue-200
