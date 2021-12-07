@@ -2,14 +2,14 @@
   --navds-card-micro-color-text: var(--navds-semantic-color-text);
   --navds-card-micro-color-background: var(--navds-global-color-orange-200);
   --navds-card-micro-color-border: transparent;
-  --navds-card-micro-color-text-hover: var(--navds-semantic-color-text-link);
+  --navds-card-micro-color-text-hover: var(--navds-semantic-color-link);
   --navds-card-micro-color-background-hover: var(
     --navds-semantic-color-component-background-light
   );
   --navds-card-micro-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-card-micro-color-text-focus: var(--navds-semantic-color-text-link);
+  --navds-card-micro-color-text-focus: var(--navds-semantic-color-link);
   --navds-card-micro-color-background-focus: var(
     --navds-semantic-color-component-background-light
   );

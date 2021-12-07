@@ -18,7 +18,7 @@
   );
   --navds-help-text-color-icon-shadow-focus: var(--navds-semantic-color-focus);
   --navds-help-text-color-popover-background: var(
-    --navds-global-color-lightblue-100
+    --navds-semantic-color-feedback-info-background
   );
 }
 

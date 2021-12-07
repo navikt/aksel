@@ -1,5 +1,5 @@
 :root {
-  --navds-accordion-menu-color-text: var(--navds-semantic-color-text-link);
+  --navds-accordion-menu-color-text: var(--navds-semantic-color-link);
   --navds-accordion-menu-color-text-focus: var(--navds-semantic-color-text);
   --navds-accordion-menu-color-background-hover: var(
     --navds-global-color-blue-50
@@ -99,7 +99,7 @@
 }
 
 .navds-accordion-menu-item--active {
-  box-shadow: inset 0.5rem 0 var(--navds-semantic-color-text-link);
+  box-shadow: inset 0.5rem 0 var(--navds-semantic-color-link);
   color: var(--navds-accordion-menu-color-text-active);
   text-decoration: none;
 }

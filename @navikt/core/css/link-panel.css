@@ -3,7 +3,7 @@
   --navds-link-panel-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-link-panel-color-title-hover: var(--navds-semantic-color-text-link);
+  --navds-link-panel-color-title-hover: var(--navds-semantic-color-link);
 }
 
 .navds-link-panel {

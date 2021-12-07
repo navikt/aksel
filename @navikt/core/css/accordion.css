@@ -3,7 +3,7 @@
   --navds-accordion-color-background: var(
     ---navds-semantic-color-component-background-light
   );
-  --navds-accordion-color-text-hover: var(--navds-semantic-color-text-link);
+  --navds-accordion-color-text-hover: var(--navds-semantic-color-link);
   --navds-accordion-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
