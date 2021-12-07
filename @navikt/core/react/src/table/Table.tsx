@@ -37,7 +37,7 @@ export interface TableContextProps {
 export const TableContext = createContext<TableContextProps | null>(null);
 
 const Table = forwardRef(
-  ({ className, zebraStripes, size = "medium", ...rest }, ref) => (
+  ({ className, zebraStripes = false, size = "medium", ...rest }, ref) => (
     <TableContext.Provider value={{ size }}>
       <table
         {...rest}

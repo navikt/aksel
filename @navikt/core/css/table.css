@@ -20,6 +20,14 @@
   background-color: var(--navds-semantic-color-canvas-background-default);
 }
 
+.navds-table__row--selected {
+  background-color: #e6f0ff;
+}
+
+.navds-table__body .navds-table__row--selected:hover {
+  background-color: #cce1ff;
+}
+
 .navds-table--zebra-stripes
   .navds-table__body
   .navds-table__row:nth-of-type(odd):not(:hover) {
