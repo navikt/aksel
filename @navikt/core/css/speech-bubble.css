@@ -4,7 +4,7 @@
   );
   --navds-speechbubble-color-illustration: var(--navds-semantic-color-text);
   --navds-speechbubble-color-illustration-background: var(
-    --navds-semantic-color-divider
+    --navds-global-color-gray-400
   );
   --navds-speechbubble-color-detail-text: var(
     --navds-semantic-color-text-muted
