@@ -41,6 +41,11 @@
   border-bottom: var(--navds-border-default);
 }
 
+.navds-table__body .navds-table__row:hover .navds-table__header-cell,
+.navds-table__body .navds-table__row:hover .navds-table__data-cell {
+  border-color: var(--navds-global-color-gray-600);
+}
+
 .navds-table__header-cell {
   text-align: left;
 }
