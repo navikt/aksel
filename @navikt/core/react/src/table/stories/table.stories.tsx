@@ -8,70 +8,46 @@ export default {
 };
 
 export const All = () => {
+  const TableComponent = (props) => (
+    <Table {...props}>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell>ID</Table.HeaderCell>
+          <Table.HeaderCell>Fornavn</Table.HeaderCell>
+          <Table.HeaderCell>Etternavn</Table.HeaderCell>
+          <Table.HeaderCell>Rolle</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        <Table.Row>
+          <Table.HeaderCell>1</Table.HeaderCell>
+          <Table.DataCell>Jean-Luc</Table.DataCell>
+          <Table.DataCell>Picard</Table.DataCell>
+          <Table.DataCell>Kaptein</Table.DataCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>2</Table.HeaderCell>
+          <Table.DataCell>William</Table.DataCell>
+          <Table.DataCell>Riker</Table.DataCell>
+          <Table.DataCell>Kommandør</Table.DataCell>
+        </Table.Row>
+        <Table.Row>
+          <Table.HeaderCell>3</Table.HeaderCell>
+          <Table.DataCell>Geordi</Table.DataCell>
+          <Table.DataCell>La Forge</Table.DataCell>
+          <Table.DataCell>Sjefsingeniør</Table.DataCell>
+        </Table.Row>
+      </Table.Body>
+    </Table>
+  );
   return (
     <>
       <h1>Table</h1>
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>ID</Table.HeaderCell>
-            <Table.HeaderCell>Fornavn</Table.HeaderCell>
-            <Table.HeaderCell>Etternavn</Table.HeaderCell>
-            <Table.HeaderCell>Rolle</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          <Table.Row>
-            <Table.HeaderCell>1</Table.HeaderCell>
-            <Table.DataCell>Jean-Luc</Table.DataCell>
-            <Table.DataCell>Picard</Table.DataCell>
-            <Table.DataCell>Kaptein</Table.DataCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.HeaderCell>2</Table.HeaderCell>
-            <Table.DataCell>William</Table.DataCell>
-            <Table.DataCell>Riker</Table.DataCell>
-            <Table.DataCell>Kommandør</Table.DataCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.HeaderCell>3</Table.HeaderCell>
-            <Table.DataCell>Geordi</Table.DataCell>
-            <Table.DataCell>La Forge</Table.DataCell>
-            <Table.DataCell>Sjefsingeniør</Table.DataCell>
-          </Table.Row>
-        </Table.Body>
-      </Table>
+      <TableComponent />
+      <h2>Zebra</h2>
+      <TableComponent zebraStripes />
       <h2>Small Table</h2>
-      <Table size="small">
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell>ID</Table.HeaderCell>
-            <Table.HeaderCell>Fornavn</Table.HeaderCell>
-            <Table.HeaderCell>Etternavn</Table.HeaderCell>
-            <Table.HeaderCell>Rolle</Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          <Table.Row>
-            <Table.HeaderCell>1</Table.HeaderCell>
-            <Table.DataCell>Jean-Luc</Table.DataCell>
-            <Table.DataCell>Picard</Table.DataCell>
-            <Table.DataCell>Kaptein</Table.DataCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.HeaderCell>2</Table.HeaderCell>
-            <Table.DataCell>William</Table.DataCell>
-            <Table.DataCell>Riker</Table.DataCell>
-            <Table.DataCell>Kommandør</Table.DataCell>
-          </Table.Row>
-          <Table.Row>
-            <Table.HeaderCell>3</Table.HeaderCell>
-            <Table.DataCell>Geordi</Table.DataCell>
-            <Table.DataCell>La Forge</Table.DataCell>
-            <Table.DataCell>Sjefsingeniør</Table.DataCell>
-          </Table.Row>
-        </Table.Body>
-      </Table>
+      <TableComponent size="small" />
       <h2>Table with divs</h2>
       <Alert variant="warning">
         Obs! Hvis man skal bygge tabeller uten å bruke vanlig {"<tabell> "}

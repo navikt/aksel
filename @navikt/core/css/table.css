@@ -20,6 +20,12 @@
   background-color: var(--navds-semantic-color-canvas-background-default);
 }
 
+.navds-table--zebra-stripes
+  .navds-table__body
+  .navds-table__row:nth-of-type(odd):not(:hover) {
+  background-color: var(--navds-semantic-color-component-background-alternate);
+}
+
 .navds-table__header-cell,
 .navds-table__data-cell {
   display: table-cell;
