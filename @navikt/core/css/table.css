@@ -16,6 +16,10 @@
   display: table-row;
 }
 
+.navds-table__body .navds-table__row:hover {
+  background-color: var(--navds-semantic-color-canvas-background-default);
+}
+
 .navds-table__header-cell,
 .navds-table__data-cell {
   display: table-cell;
