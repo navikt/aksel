@@ -38,9 +38,9 @@ Istedenfor fargetema/themes slik som tidligere veileder brukte velger man nå se
 overskrive tokens. Det anbefalses å gjøre dette med eks Styled-Components eller css-klasser, men kan inlines også
 
 ```css
-/* default */
---navds-guide-panel-color-border: var(--navds-color-blue-40);
---navds-guide-panel-color-illustration-background: var(--navds-color-blue-20);
+/* Tokens */
+--navds-guide-panel-color-border
+--navds-guide-panel-color-illustration-background
 ```
 
 ```jsx
@@ -55,16 +55,16 @@ overskrive tokens. Det anbefalses å gjøre dette med eks Styled-Components elle
 /* Inline */
 <GuidePanel
   style={{
-    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
-    ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-global-color-orange-200)",
+    ["--navds-guide-panel-color-border" as any]: "var(--navds-global-color-orange-400)",
   }}
 >
     Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.
   </GuidePanel>
 <GuidePanel
     style={{
-    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
-    ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+    ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-global-color-orange-200)",
+    ["--navds-guide-panel-color-border" as any]: "var(--navds-global-color-orange-400)",
   }}
 >
   Cupidatat proident adipisicing eu nulla laborum dolore irure aliqua.

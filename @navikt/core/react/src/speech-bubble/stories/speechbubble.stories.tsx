@@ -14,7 +14,7 @@ export const All = () => {
       <SpeechBubble
         illustration={<Illustration />}
         topText="Ola Normann 01.01.21 14:00"
-        backgroundColor="var(--navds-color-lightblue-20)"
+        backgroundColor="var(--navds-global-color-lightblue-200)"
       >
         <SpeechBubble.Bubble>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
@@ -42,7 +42,7 @@ export const All = () => {
           </div>
         }
         position="right"
-        backgroundColor="var(--navds-color-gray-10)"
+        backgroundColor="var(--navds-global-color-gray-100)"
       >
         <SpeechBubble.Bubble>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
