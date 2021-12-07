@@ -101,7 +101,7 @@ const renderAst = new rehypeReact({
     inlineCode: (props) => <InlineCode {...props} />,
     accordion: (props) => {
       return (
-        <Accordion>
+        <Accordion className="gp_accordion">
           <Accordion.Item>
             <Accordion.Header>{props?.tittel}</Accordion.Header>
             <Accordion.Content>{props.children}</Accordion.Content>
