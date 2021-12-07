@@ -26,7 +26,7 @@ Repoet inneholder følgende:
 - [Eksempler på forskjellige frontend-løsninger](https://github.com/navikt/nav-frontend-moduler/tree/master/examples) til applikasjoner som skal bruke komponentene
 - [Storybook](https://navikt.github.io/Designsystemet/?path=/story/ds-react-kom-i-gang--page) for v2 komponenter (wip) og eldre komponenter.
 
-## Bidrag
+## Bidra
 
 Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md)
 
