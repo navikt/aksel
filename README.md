@@ -16,7 +16,7 @@
     <h4><a href="https://design.nav.no">Nettside</a> | <a href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/nav-frontend-moduler/issues">Bug-rapport</a>
 </div>
 
-## Innhold
+## Innhold i repo
 
 Repoet inneholder følgende:
 
