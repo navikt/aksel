@@ -33,6 +33,8 @@ const StepComponent: OverridableComponent<
       return null;
     }
 
+    const safeIndex = index ?? 0;
+
     return (
       <Component
         {...rest}
@@ -42,10 +44,13 @@ const StepComponent: OverridableComponent<
           "navds-step-indicator__step--active": context.activeStep === index,
         })}
         onClick={(e) => {
-          context.onStepChange(index ?? 0);
+          context.onStepChange(safeIndex);
           rest.onClick && rest.onClick(e);
         }}
       >
+        <span className="navds-step-indicator__step-number">
+          {safeIndex + 1}
+        </span>
         <div className={cl("navds-step-indicator__step-label")}>{children}</div>
       </Component>
     );

@@ -1,4 +1,5 @@
 import React, { createContext, forwardRef } from "react";
+import cl from "classnames";
 import Step, { StepIndicatorStepType, StepIndicatorStepProps } from "./Step";
 
 export interface StepIndicatorProps
@@ -29,7 +30,11 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
 >(({ children, className, activeStep, onStepChange, ...rest }, ref) => {
   const stepsWithIndex = React.Children.map(children, (step, index) => {
     return React.isValidElement<StepIndicatorStepProps>(step) ? (
-      <li key={index} aria-current={index === activeStep && "step"}>
+      <li
+        className="navds-step-indicator__step-li"
+        key={index}
+        aria-current={index === activeStep && "step"}
+      >
         {React.cloneElement(step, {
           ...step.props,
           ...{ index },
@@ -41,9 +46,11 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
   });
 
   return (
-    <StepContext.Provider value={{ activeStep, onStepChange }}>
-      {stepsWithIndex}
-    </StepContext.Provider>
+    <ol ref={ref} className={cl(`navds-step-indicator`, className)} {...rest}>
+      <StepContext.Provider value={{ activeStep, onStepChange }}>
+        {stepsWithIndex}
+      </StepContext.Provider>
+    </ol>
   );
 }) as StepIndicatorComponent;
 
