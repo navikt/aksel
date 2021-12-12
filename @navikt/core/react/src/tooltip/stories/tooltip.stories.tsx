@@ -15,7 +15,7 @@ export default {
 
 const Template = (props) => {
   return (
-    <Tooltip {...props} title={props.placement}>
+    <Tooltip {...props} content={props.placement}>
       <Refresh aria-hidden />
     </Tooltip>
   );
@@ -39,10 +39,19 @@ export const All = () => {
       <h2>Controlled</h2>
       <Tooltip
         open={open}
-        title="Controlled tooltip example"
+        content="Controlled tooltip example"
         placement="auto-end"
       >
         <Button onClick={() => setOpen((x) => !x)}>Toggle tooltip</Button>
+      </Tooltip>
+
+      <h2>onOpenChange</h2>
+      <Tooltip
+        content="onOpenChangeTest"
+        placement="auto-end"
+        onOpenChange={console.log}
+      >
+        <Button>Tooltip</Button>
       </Tooltip>
     </div>
   );

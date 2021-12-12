@@ -1,24 +1,30 @@
 :root {
-  --navds-tooltip-color-text: var(--navds-color-text-inverse);
-  --navds-tooltip-color-background: var(--navds-color-gray-90);
-  --navds-tooltip-color-border: transparent;
-  --navds-tooltip-color-shadow: var(--navds-color-gray-20);
+  --navds-tooltip-color-text: var(--navds-semantic-color-text-inverted);
+  --navds-tooltip-color-background: var(
+    --navds-semantic-color-component-background-inverted
+  );
+  --navds-tooltip-color-border: var(
+    --navds-semantic-color-component-background-inverted
+  );
 }
 
 .navds-tooltip {
   z-index: var(--navds-z-index-popover);
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
-  box-shadow: 0 2px 4px 0 var(--navds-tooltip-color-shadow);
+  box-shadow: var(--navds-shadow-popover);
   border: 1px solid;
   border-color: var(--navds-tooltip-color-border);
   border-radius: 4px;
   padding: var(--navds-spacing-2);
   white-space: nowrap;
+  opacity: 1;
+  transition: opacity 100ms ease-in-out;
 }
 
 .navds-tooltip--hidden {
-  display: none;
+  opacity: 0.5;
+  visibility: hidden;
 }
 
 .navds-tooltip__wrapper {
@@ -27,7 +33,7 @@
   justify-content: center;
 }
 
-/* Tooltip should never get focus, so ignoring styling it */
+/* Tooltip has tabIndex -1 so hide focus from mouseclick */
 .navds-tooltip:focus {
   outline: none;
 }

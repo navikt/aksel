@@ -10,19 +10,19 @@ import { Refresh } from "@navikt/ds-icons";
 Tooltip wrappes rundt elementet man ønsker at den skal åpnes over når man endten får fokus eller hover
 
 ```jsx
-<Tooltip title="Tooltip text">
+<Tooltip content="Tooltip text">
   <Refresh />
 </Tooltip>
 ```
 
 <Canvas>
   <div style={{ margin: "3rem" }}>
-    <Tooltip title="Tooltip text">
+    <Tooltip content="Tooltip text">
       <Refresh tabIndex={0} />
     </Tooltip>
     <br />
     <br />
-    <Tooltip placement="auto" title="Tooltip text">
+    <Tooltip placement="auto" content="Tooltip text">
       <Button>
         <Refresh aria-label="refresh ikon" />
       </Button>

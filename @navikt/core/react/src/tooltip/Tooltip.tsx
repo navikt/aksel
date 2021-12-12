@@ -9,8 +9,7 @@ import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { Detail, useId } from "..";
-import { useKey, useIsomorphicLayoutEffect } from "react-use";
+import { Detail, useClientLayoutEffect, useEventLister, useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -37,14 +36,18 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   offset?: number;
   /**
-   * Tekst shown in tooltip
+   * Content shown in tooltip
    */
-  title: string;
+  content: React.ReactNode;
   /**
    * Adds a delay when opening to tooltip
    * @default 150ms
    */
   delay?: number;
+  /**
+   * Callback for whenTooltip opens or closes
+   */
+  onOpenChange?: (state: boolean) => void;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -56,9 +59,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       placement = "top",
       open,
       offset,
-      title,
+      content,
       delay = 150,
       id,
+      onOpenChange,
       ...rest
     },
     ref
@@ -73,11 +77,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const tooltipId = useId();
 
     const handleOpen = () => {
-      if (open !== undefined) return;
-
+      if (open !== undefined || openState) return;
       window.clearTimeout(timeoutRef.current);
       timeoutRef.current = window.setTimeout(() => {
         setOpenState(true);
+        onOpenChange && onOpenChange(true);
       }, delay);
     };
 
@@ -85,9 +89,15 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       window.clearTimeout(timeoutRef.current);
       if (open !== undefined) return;
       setOpenState(false);
-    }, [open]);
+      onOpenChange && onOpenChange(false);
+    }, [open, onOpenChange]);
 
-    useKey("Escape", handleClose, {}, [handleClose]);
+    useEventLister(
+      "keydown",
+      useCallback((e: KeyboardEvent) => e.key === "Escape" && handleClose(), [
+        handleClose,
+      ])
+    );
 
     const { styles, attributes, update } = usePopper(
       anchor.current,
@@ -111,7 +121,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       }
     );
 
-    useIsomorphicLayoutEffect(() => {
+    useClientLayoutEffect(() => {
       update && update();
     }, [open, openState, update]);
 
@@ -123,9 +133,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ref={(el) => (anchor.current = el)}
           onFocus={handleOpen}
           onBlur={handleClose}
-          onPointerEnter={handleOpen}
+          onMouseOver={handleOpen}
+          onMouseLeave={handleClose}
           aria-describedby={isOpen ? id ?? `tooltip-${tooltipId}` : undefined}
-          onPointerLeave={handleClose}
         >
           {children}
         </div>
@@ -143,7 +153,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           {...rest}
           style={styles.popper}
         >
-          <Detail as="span">{title}</Detail>
+          <Detail as="span">{content}</Detail>
           {arrow && (
             <div
               data-popper-arrow

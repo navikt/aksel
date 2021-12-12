@@ -1,15 +1,9 @@
 import { Placement } from "@popperjs/core";
 import cl from "classnames";
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useCallback,
-  useEffect,
-  useRef,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useCallback, useRef } from "react";
 import mergeRefs from "react-merge-refs";
 import { usePopper } from "react-popper";
-import { useClientLayoutEffect } from "..";
+import { useClientLayoutEffect, useEventLister } from "..";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -45,14 +39,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   offset?: number;
 }
-
-const useEventLister = (event: string, callback) =>
-  useEffect(() => {
-    document.addEventListener(event, callback);
-    return () => {
-      document.removeEventListener(event, callback);
-    };
-  }, [event, callback]);
 
 interface PopoverComponent
   extends React.ForwardRefExoticComponent<
