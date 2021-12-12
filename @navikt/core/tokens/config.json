@@ -1,5 +1,5 @@
 {
-  "source": ["src/index.js"],
+  "source": ["src/index.js", "src/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -27,7 +27,10 @@
       "files": [
         {
           "destination": "tokens.css",
-          "format": "css/variables"
+          "format": "css/variables",
+          "options": {
+            "outputReferences": true
+          }
         }
       ]
     },
@@ -41,7 +44,7 @@
         },
         {
           "destination": "tokens-cjs.js",
-          "format": "javascript/module"
+          "format": "javascript/module-flat"
         }
       ]
     }

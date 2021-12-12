@@ -23,7 +23,7 @@ export const All = () => {
 
       <Textarea
         label="In anim elit"
-        description="Reprehenderit esse proident"
+        description={<div>Reprehenderit esse proident</div>}
         value={value}
         onChange={handleChange}
       />
@@ -78,7 +78,17 @@ export const All = () => {
         description="Reprehenderit esse proident"
         maxLength={400}
         disabled
-        value={value}
+        value="Consectetur commodo mollit voluptate esse minim elit deserunt fugiat consectetur laboris."
+        onChange={handleChange}
+      />
+      <h2>Readonly</h2>
+
+      <Textarea
+        label="In anim elit"
+        description="Reprehenderit esse proident"
+        maxLength={400}
+        readOnly
+        value="Consectetur commodo mollit voluptate esse minim elit deserunt fugiat consectetur laboris."
         onChange={handleChange}
       />
     </div>

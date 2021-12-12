@@ -1,7 +1,13 @@
 :root {
-  --navds-search-field-color-shadow-error: var(--navds-color-red-50);
-  --navds-search-field-color-border-error: var(--navds-color-red-50);
-  --navds-search-field-color-clearbutton-border: var(--navds-color-gray-60);
+  --navds-search-field-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger
+  );
+  --navds-search-field-color-border-error: var(
+    --navds-semantic-color-interaction-danger
+  );
+  --navds-search-field-color-clearbutton-border: var(
+    --navds-semantic-color-border
+  );
 }
 
 .navds-search-field__input-wrapper {
@@ -46,4 +52,8 @@
   .navds-search-field__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-search-field-color-shadow-error) inset;
   border-color: var(--navds-search-field-color-border-error);
+}
+
+.navds-search-field--disabled {
+  opacity: 0.3;
 }

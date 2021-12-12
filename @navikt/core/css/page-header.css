@@ -1,8 +1,14 @@
 :root {
-  --navds-page-header-color-background: var(--navds-color-background);
-  --navds-page-header-color-shadow-situation: var(--navds-color-orange-40);
-  --navds-page-header-color-shadow-product: var(--navds-color-green-40);
-  --navds-page-header-color-shadow-guide: var(--navds-color-deepblue-40);
+  --navds-page-header-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-page-header-color-shadow-situation: var(
+    --navds-global-color-orange-400
+  );
+  --navds-page-header-color-shadow-product: var(--navds-global-color-green-400);
+  --navds-page-header-color-shadow-guide: var(
+    --navds-global-color-deepblue-400
+  );
 }
 
 .navds-page-header {

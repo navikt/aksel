@@ -79,7 +79,10 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           "navds-form-field",
           `navds-form-field--${size ?? "medium"}`,
           "navds-search-field",
-          { "navds-search-field--error": hasError }
+          {
+            "navds-search-field--error": hasError,
+            "navds-search-field--disabled": !!inputProps.disabled,
+          }
         )}
       >
         <Label
@@ -94,6 +97,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
         </Label>
         {!!description && (
           <BodyShort
+            as="div"
             className={cl("navds-text-field__description", {
               "sr-only": hideLabel,
             })}

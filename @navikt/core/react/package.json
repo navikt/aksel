@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.12.3",
+  "version": "0.14.0",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
-    "@navikt/ds-icons": "^0.6.2",
+    "@navikt/ds-icons": "^0.7.0",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
@@ -62,6 +62,7 @@
     "ts-jest": "^27.0.5"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
+    "@types/react": "^17.0.30",
+    "react": "^17.0.0"
   }
 }

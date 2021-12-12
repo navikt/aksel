@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "yarn workspace @navikt/ds-react test",
+    "test": "yarn workspace @navikt/ds-react test && yarn workspace @navikt/ds-tokens test",
     "postinstall": "husky install",
     "start": "yarn workspace website start",
     "boot": "yarn clean:lib && yarn build:packages --stream",
@@ -18,6 +18,7 @@
     "chromatic": "STORYBOOK_CHROMATIC=true npx chromatic --project-token x3xqdfgkujg",
     "lerna:watch": "yarn run lerna run watch --stream",
     "update:icons": "yarn workspace @navikt/ds-icons update",
+    "update:tokens": "yarn workspace @navikt/ds-tokens update",
     "lint": "yarn lint:jsts && yarn lint:less && yarn lint:css",
     "lint:jsts": "yarn eslint .",
     "lint:less": "yarn stylelint --syntax less **/*.less",

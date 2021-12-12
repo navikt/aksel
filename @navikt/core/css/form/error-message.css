@@ -1,8 +1,15 @@
 :root {
-  --navds-error-message-color-text: var(--navds-color-text-error);
+  --navds-error-message-color-text: var(
+    --navds-semantic-color-feedback-danger-text
+  );
 }
 
 .navds-error-message {
-  display: block;
   color: var(--navds-error-message-color-text);
+  display: flex;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-error-message::before {
+  content: "•";
 }

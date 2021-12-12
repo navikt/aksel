@@ -1,7 +1,7 @@
 import React from "react";
 import { Ingress, Sidetittel } from "nav-frontend-typografi";
 import Card from "../../card/Card";
-import { Star, Facilitet, HandsHeart, Like } from "@navikt/ds-icons";
+import { Star, Facilitet, HandsHeart, Like, Locked } from "@navikt/ds-icons";
 import { NAVLogoDark } from "../../assets/images/svg";
 import "./styles.less";
 /* import Lenke from "nav-frontend-lenker"; */
@@ -59,6 +59,19 @@ const Forside = ({ ...props }) => (
             title="God praksis"
             link="/god-praksis"
             icon={<Like focusable="false" />}
+          />
+        </li>
+        <li>
+          <Card
+            content={
+              <>
+                <p>Hvordan vi utvikler sikker software i NAV.</p>
+                <p>(Krever GitHub bruker i navikt org)</p>
+              </>
+            }
+            title="Security Champions Playbook"
+            link="https://improved-train-2f244007.pages.github.io/"
+            icon={<Locked focusable="false" />}
           />
         </li>
       </ol>

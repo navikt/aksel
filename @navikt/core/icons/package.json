@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {
@@ -38,7 +38,8 @@
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
+    "@types/react": "^17.0.30",
+    "react": "^17.0.0"
   },
   "devDependencies": {
     "@svgr/cli": "^5.5.0",
