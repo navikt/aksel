@@ -13,14 +13,11 @@
   justify-content: center;
 }
 
-.navds-step-indicator__step-li {
-  list-style: none;
-}
-
 /* Step */
 .navds-step-indicator__step-li {
   position: relative;
   padding-right: 1.25rem;
+  list-style: none;
 }
 
 .navds-step-indicator__step-li::after {
