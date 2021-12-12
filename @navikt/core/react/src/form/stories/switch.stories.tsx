@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Switch } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
+import { Fieldset } from "../..";
 export default {
   title: "ds-react/form/switch",
   component: Switch,
@@ -25,6 +26,7 @@ export const All = () => {
       </Switch>
 
       <h2>Switch small</h2>
+      <Switch size="small">Label text</Switch>
       <Switch description="Switch description" size="small">
         Label text
       </Switch>
@@ -43,11 +45,11 @@ export const All = () => {
         Label text
       </Switch>
 
-      <h2>Loader</h2>
-      <Switch loader>Label text</Switch>
-      <Switch loader size="small">
-        Label text
-      </Switch>
+      <h2>With fieldset error</h2>
+      <Fieldset legend="Fieldset legend" error="Errormsg">
+        <Switch defaultChecked>Label text</Switch>
+        <Switch>Label text</Switch>
+      </Fieldset>
     </div>
   );
 };

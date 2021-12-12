@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Label, Loader, omit } from "..";
+import { BodyShort, Detail, omit, useId } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SwitchProps
@@ -14,60 +14,61 @@ export interface SwitchProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
-  loader?: boolean;
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
-  const { inputProps, size, inputDescriptionId } = useFormField(
-    props,
-    "switch"
-  );
+  const { inputProps, size } = useFormField(props, "switch");
 
   const {
     children,
     className,
     description,
-    loader,
     hideLabel = false,
     ...rest
   } = props;
 
+  const genId = useId();
+
+  const Description = size === "medium" ? BodyShort : Detail;
+  const inputDescriptionId = `switch-description-${genId}`;
+
   return (
     <div
-      className={cl("navds-switch", props.className, `navds-switch--${size}`)}
+      className={cl("navds-switch", props.className, `navds-switch--${size}`, {
+        "navds-switch--disabled": inputProps.disabled,
+      })}
     >
       <input
         {...omit(rest, ["size"])}
-        {...inputProps}
+        {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
+        aria-describedby={(description && inputDescriptionId) || undefined}
         ref={ref}
         type="checkbox"
         className={cl(className, "navds-switch__input")}
       />
       <span className="navds-switch__track" />
-      <span className="navds-switch__thumb">
-        {loader && <Loader size="small" />}
-      </span>
-      <Label
-        htmlFor={inputProps.id}
-        size={size}
-        as="label"
-        className={cl("navds-switch__label", {
-          "sr-only": hideLabel,
-        })}
-      >
-        {children}
-      </Label>
-      {!!description && (
-        <BodyShort
-          className={cl("navds-switch__description", {
+      <span className="navds-switch__thumb" />
+
+      <label htmlFor={inputProps.id} className="navds-switch__label">
+        <div
+          className={cl("navds-switch__content", {
             "sr-only": hideLabel,
           })}
-          id={inputDescriptionId}
-          size={size}
         >
-          {description}
-        </BodyShort>
-      )}
+          <BodyShort as="div" size={size} className="navds-switch__label-text">
+            {children}
+          </BodyShort>
+          {description && (
+            <Description
+              as="div"
+              size="small"
+              className="navds-switch__description"
+            >
+              {description}
+            </Description>
+          )}
+        </div>
+      </label>
     </div>
   );
 });

@@ -1,24 +1,30 @@
 :root {
-  --navds-switch-color-label-hover: var(--navds-color-blue-50);
-  --navds-switch-color-label-disabled: var(--navds-color-gray-90);
-  --navds-switch-color-description: var(--navds-color-gray-80);
-  --navds-switch-color-track-background: var(--navds-color-gray-40);
-  --navds-switch-color-track-background-checked: var(--navds-color-blue-50);
-  --navds-switch-color-track-background-checked-disabled: var(
-    --navds-color-deepblue-30
+  --navds-switch-color-label-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-switch-color-label: var(--navds-color-text-primary);
+  --navds-switch-color-description: var(--navds-color-text-primary);
+  --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
+  --navds-switch-color-track-background-checked: var(
+    --navds-semantic-color-interaction-primary
   );
   --navds-switch-color-track-background-hover-checked: var(
-    --navds-color-blue-60
+    --navds-semantic-color-interaction-primary-hover
   );
-  --navds-switch-color-track-shadow-inner-focus: var(--navds-color-white);
-  --navds-switch-color-track-shadow-focus: var(--navds-color-blue-80);
-  --navds-switch-color-thumb: var(--navds-color-white);
-  --navds-switch-color-thumb-loader-checked: var(--navds-color-blue-50);
+  --navds-switch-color-track-shadow-inner-focus: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-switch-color-track-shadow-focus: var(--navds-semantic-color-focus);
+  --navds-switch-color-thumb: var(
+    --navds-semantic-color-component-background-light
+  );
 }
 
 .navds-switch {
   position: relative;
   padding: 0.75rem 0;
+  min-height: 48px;
+  width: fit-content;
 }
 
 .navds-switch.navds-switch--small {
@@ -27,10 +33,11 @@
 }
 
 .navds-switch__input {
+  appearance: none;
   cursor: pointer;
   position: absolute;
   z-index: 1;
-  width: 44px;
+  width: 48px;
   height: 48px;
   margin: 0;
   opacity: 0;
@@ -39,29 +46,29 @@
 
 .navds-switch--small > .navds-switch__input {
   height: 32px;
-  width: 44px;
   top: 0;
 }
 
-.navds-switch__label {
-  display: flex;
-  width: fit-content;
-  gap: 12px;
-  cursor: pointer;
+.navds-switch__label-text {
   padding-left: 3.25rem;
+}
+
+.navds-switch__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-3);
+}
+
+.navds-switch__description {
+  color: var(--navds-switch-color-description);
 }
 
 .navds-switch__input:hover ~ .navds-switch__label {
   color: var(--navds-switch-color-label-hover);
 }
 
-.navds-switch__description {
-  margin-top: 12px;
-  color: var(--navds-switch-color-description);
-}
-
-.navds-switch--small > .navds-switch__description {
-  margin-top: 8px;
+.navds-switch__input:disabled:hover ~ .navds-switch__label {
+  color: inherit;
 }
 
 .navds-switch__track {
@@ -88,8 +95,12 @@
   background-color: var(--navds-switch-color-track-background-hover-checked);
 }
 
+.navds-switch__input:disabled ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background);
+}
+
 .navds-switch__input:checked:disabled ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-checked-disabled);
+  background-color: var(--navds-switch-color-track-background-checked);
 }
 
 .navds-switch__input:focus ~ .navds-switch__track {
@@ -136,15 +147,15 @@
   transform: translate(20px, -50%);
 }
 
-.navds-switch__input:checked
-  ~ .navds-switch__thumb
-  > .navds-loader
-  > .navds-loader__foreground {
-  stroke: var(--navds-switch-color-thumb-loader-checked);
+.navds-switch__input:disabled {
+  appearance: none;
+}
+
+.navds-switch--disabled {
+  opacity: 0.3;
 }
 
 .navds-switch__input:disabled,
 .navds-switch__input:disabled ~ .navds-switch__label {
   cursor: not-allowed;
-  color: var(--navds-switch-color-label-disabled);
 }
