@@ -6,11 +6,11 @@ import {
 import styled from "styled-components";
 
 const Success = styled(SuccessIcon)`
-  color: var(--navds-color-green-50);
+  color: var(--navds-semantic-color-feedback-success-icon);
 `;
 
 const Error = styled(ErrorIcon)`
-  color: var(--navds-color-red-50);
+  color: var(--navds-semantic-color-feedback-danger-icon);
 `;
 
 const Table = styled(DsTable)`

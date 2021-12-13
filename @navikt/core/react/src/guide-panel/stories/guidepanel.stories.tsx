@@ -21,24 +21,24 @@ export const All = () => {
       <h2>custom colors</h2>
       <GuidePanel
         style={{
-          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-purple-20)",
-          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-purple-40)",
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-global-color-purple-200)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-global-color-purple-400)",
         }}
       >
         {panelText}
       </GuidePanel>
       <GuidePanel
         style={{
-          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-green-20)",
-          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-green-40)",
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-global-color-green-200)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-global-color-green-400)",
         }}
       >
         {panelText}
       </GuidePanel>
       <GuidePanel
         style={{
-          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-color-orange-20)",
-          ["--navds-guide-panel-color-border" as any]: "var(--navds-color-orange-40)",
+          ["--navds-guide-panel-color-illustration-background" as any]: "var(--navds-global-color-orange-200)",
+          ["--navds-guide-panel-color-border" as any]: "var(--navds-global-color-orange-400)",
         }}
       >
         {panelText}Ullamco reprehenderit fugiat reprehenderit ad nisi aliqua

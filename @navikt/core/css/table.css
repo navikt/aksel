@@ -1,3 +1,7 @@
+:root {
+  --navds-table-cell-color-border: var(--navds-semantic-color-border-muted);
+}
+
 .navds-table {
   border-collapse: collapse;
   width: 100%;
@@ -38,16 +42,13 @@
 .navds-table__data-cell {
   display: table-cell;
   padding: var(--navds-spacing-4);
-  border-bottom: var(--navds-border-default);
+  border-bottom: 1px solid var(--navds-table-cell-color-border);
+  text-align: left;
 }
 
 .navds-table__body .navds-table__row:hover .navds-table__header-cell,
 .navds-table__body .navds-table__row:hover .navds-table__data-cell {
   border-color: var(--navds-global-color-gray-600);
-}
-
-.navds-table__header-cell {
-  text-align: left;
 }
 
 .navds-table--small .navds-table__header-cell,

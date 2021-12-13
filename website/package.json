@@ -34,7 +34,7 @@
     "mdx-utils": "^0.2.0",
     "object-path-immutable": "^4.1.0",
     "prism-react-renderer": "^1.1.1",
-    "prismjs": "1.23.0",
+    "prismjs": "1.25.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",

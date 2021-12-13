@@ -1,7 +1,9 @@
 :root {
-  --navds-link-panel-color-text: var(--navds-color-gray-90);
-  --navds-link-panel-color-border-hover: var(--navds-color-blue-50);
-  --navds-link-panel-color-title-hover: var(--navds-color-text-link);
+  --navds-link-panel-color-text: var(--navds-semantic-color-text);
+  --navds-link-panel-color-border-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-link-panel-color-title-hover: var(--navds-semantic-color-link);
 }
 
 .navds-link-panel {
@@ -19,7 +21,7 @@
 }
 
 .navds-link-panel:hover {
-  box-shadow: var(--navds-shadow-hover);
+  box-shadow: var(--navds-shadow-card);
   border-color: var(--navds-link-panel-color-border-hover);
 }
 

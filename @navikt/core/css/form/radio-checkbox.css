@@ -1,12 +1,26 @@
 :root {
-  --navds-radio-checkbox-color-background: var(--navds-color-white);
-  --navds-radio-checkbox-color-background-hover: var(--navds-color-blue-10);
-  --navds-radio-checkbox-color-background-checked: var(--navds-color-blue-50);
-  --navds-radio-checkbox-color-shadow: var(--navds-color-gray-60);
-  --navds-radio-checkbox-color-shadow-hover: var(--navds-color-blue-50);
-  --navds-radio-checkbox-color-shadow-checked: var(--navds-color-blue-50);
-  --navds-radio-checkbox-color-shadow-error: var(--navds-color-red-50);
-  --navds-radio-checkbox-color-label-hover: var(--navds-color-blue-50);
+  --navds-radio-checkbox-color-background: var(
+    --navds-semantic-color-canvas-background-light
+  );
+  --navds-radio-checkbox-color-background-hover: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+  --navds-radio-checkbox-color-background-checked: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-radio-checkbox-color-shadow: var(--navds-semantic-color-border);
+  --navds-radio-checkbox-color-shadow-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-radio-checkbox-color-shadow-checked: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-radio-checkbox-color-shadow-error: var(
+    --navds-semantic-color-interaction-danger
+  );
+  --navds-radio-checkbox-color-label-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
 }
 
 .navds-checkbox,
@@ -94,7 +108,7 @@
 }
 
 .navds-checkbox__input:checked + .navds-checkbox__label::before {
-  background-image: var(--navds-checkmark-image-white);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
   background-position: 6px center;
   background-repeat: no-repeat;
   background-size: 13px;

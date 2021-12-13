@@ -1,13 +1,25 @@
 :root {
   --navds-help-text-color-button-background: transparent;
-  --navds-help-text-color-icon: var(--navds-color-blue-50);
-  --navds-help-text-color-icon-hover: var(--navds-color-white);
-  --navds-help-text-color-icon-background-hover: var(--navds-color-blue-50);
-  --navds-help-text-color-icon-shadow-hover: var(--navds-color-blue-50);
-  --navds-help-text-color-icon-focus: var(--navds-color-white);
-  --navds-help-text-color-icon-background-focus: var(--navds-color-blue-50);
-  --navds-help-text-color-icon-shadow-focus: var(--navds-color-blue-80);
-  --navds-help-text-color-popover-background: var(--navds-color-lightblue-10);
+  --navds-help-text-color-icon: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-icon-hover: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-help-text-color-icon-background-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-help-text-color-icon-shadow-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-help-text-color-icon-focus: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-help-text-color-icon-background-focus: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-help-text-color-icon-shadow-focus: var(--navds-semantic-color-focus);
+  --navds-help-text-color-popover-background: var(
+    --navds-semantic-color-feedback-info-background
+  );
 }
 
 .navds-help-text__button {

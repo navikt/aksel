@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "0.6.3",
+  "version": "0.7.0",
   "private": false,
   "description": "Auto-generated design-tokens for NAV design-systems framework",
   "author": "NAV Designsystem team",
@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",
-    "color": "^4.0.1",
     "dotenv": "^10.0.0",
     "figma-api": "^1.7.0",
     "jest": "^27.2.0",
