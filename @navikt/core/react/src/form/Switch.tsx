@@ -14,7 +14,7 @@ export interface SwitchProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
-  loader?: boolean;
+  loading?: boolean;
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
@@ -25,7 +25,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     className,
     description,
     hideLabel = false,
-    loader,
+    loading,
     ...rest
   } = props;
 
@@ -50,7 +50,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
       />
       <span className="navds-switch__track" />
       <span className="navds-switch__thumb">
-        {loader && <Loader size="small" />}
+        {loading && <Loader size="xsmall" />}
       </span>
 
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">

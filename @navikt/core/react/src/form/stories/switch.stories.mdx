@@ -83,3 +83,22 @@ NOTE: Husk at disabled bør unngås!
     </Switch>
   </div>
 </Canvas>
+
+## Loading
+
+Om systemet bruker tid på å utføre handlingen vises en loading-indikator på switch’en.
+Om ventetiden er mer enn noen sekunder bør en forklarende tekst også vises.
+Teksten må forklare kort og godt hvorfor brukeren må vente.
+
+```jsx
+<Switch loading>Slå på feature</Switch>
+```
+
+<Canvas>
+  <div>
+    <Switch loading>Slå på feature</Switch>
+    <Switch loading defaultChecked>
+      Slå på feature
+    </Switch>
+  </div>
+</Canvas>
