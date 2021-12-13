@@ -55,3 +55,11 @@
 .navds-table--small .navds-table__data-cell {
   padding: var(--navds-spacing-2);
 }
+
+.navds-table .navds-checkbox .navds-checkbox__input {
+  top: -12px;
+}
+
+.navds-table .navds-checkbox .navds-checkbox__label {
+  padding: 0;
+}

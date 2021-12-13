@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "../index";
 import { Alert, Checkbox, Link } from "@navikt/ds-react";
-import "./table.stories.css";
 
 export default {
   title: "ds-react/table",
