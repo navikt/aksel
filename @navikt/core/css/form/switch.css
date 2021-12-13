@@ -22,14 +22,13 @@
 
 .navds-switch {
   position: relative;
-  padding: 0.75rem 0;
   min-height: 48px;
   width: fit-content;
 }
 
 .navds-switch.navds-switch--small {
   position: relative;
-  padding: calc(0.5rem - 2px) 0;
+  min-height: 32px;
 }
 
 .navds-switch__input {
@@ -49,25 +48,38 @@
   top: 0;
 }
 
-.navds-switch__label-text {
+.navds-switch__label-wrapper {
+  cursor: pointer;
+}
+
+.navds-switch__label {
   padding-left: 3.25rem;
 }
 
 .navds-switch__content {
   display: flex;
   flex-direction: column;
-  gap: var(--navds-spacing-3);
+  gap: var(--navds-spacing-1);
+  padding: 0.75rem 0;
+}
+
+.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
+  padding: calc(0.5rem - 2px) 0;
+}
+
+.navds-switch--with-description {
+  padding-bottom: 0;
 }
 
 .navds-switch__description {
   color: var(--navds-switch-color-description);
 }
 
-.navds-switch__input:hover ~ .navds-switch__label {
+.navds-switch__input:hover ~ .navds-switch__label-wrapper {
   color: var(--navds-switch-color-label-hover);
 }
 
-.navds-switch__input:disabled:hover ~ .navds-switch__label {
+.navds-switch__input:disabled:hover ~ .navds-switch__label-wrapper {
   color: inherit;
 }
 
@@ -156,6 +168,6 @@
 }
 
 .navds-switch__input:disabled,
-.navds-switch__input:disabled ~ .navds-switch__label {
+.navds-switch__input:disabled ~ .navds-switch__label-wrapper {
   cursor: not-allowed;
 }

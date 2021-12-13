@@ -15,7 +15,9 @@ export const All = () => {
       <Switch>Label text</Switch>
 
       <h2>Switch w/Description</h2>
+      <Switch>Label text</Switch>
       <Switch description="Switch description">Label text</Switch>
+      <Switch>Label text</Switch>
 
       <h2>hidelabel</h2>
       <Switch description="Switch description" hideLabel>
@@ -24,12 +26,16 @@ export const All = () => {
       <Switch description="Switch description" hideLabel>
         Label text
       </Switch>
+      <Switch hideLabel size="small">
+        Label text small
+      </Switch>
 
       <h2>Switch small</h2>
       <Switch size="small">Label text</Switch>
       <Switch description="Switch description" size="small">
         Label text
       </Switch>
+      <Switch size="small">Label text</Switch>
 
       <h2>Controlled</h2>
       <Switch checked={checked} onChange={() => setChecked(!checked)}>

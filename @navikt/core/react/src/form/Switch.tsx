@@ -49,13 +49,14 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
       <span className="navds-switch__track" />
       <span className="navds-switch__thumb" />
 
-      <label htmlFor={inputProps.id} className="navds-switch__label">
+      <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
         <div
           className={cl("navds-switch__content", {
             "sr-only": hideLabel,
+            "navds-switch--with-description": !!description && !hideLabel,
           })}
         >
-          <BodyShort as="div" size={size} className="navds-switch__label-text">
+          <BodyShort as="div" size={size} className="navds-switch__label">
             {children}
           </BodyShort>
           {description && (
