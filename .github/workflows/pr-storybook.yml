@@ -21,7 +21,7 @@ jobs:
           vercel-project-id: ${{ secrets.PROJECT_ID}} #Required
           working-directory: ./
           alias-domains: |
-            pr-{{PR_NUMBER}}.nav-ds.vercel.app
+            nav-ds-pr-${{github.event.number}}-kenajoh.vercel.app
   prod:
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
