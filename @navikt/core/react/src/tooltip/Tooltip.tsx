@@ -155,7 +155,6 @@ const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
           })}
           aria-live="polite"
           aria-hidden={!isOpen}
-          tabIndex={-1}
           role="tooltip"
           id={id ?? `tooltip-${tooltipId}`}
           {...attributes.popper}

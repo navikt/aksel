@@ -32,11 +32,6 @@
   position: relative;
 }
 
-/* Tooltip has tabIndex -1 so hide focus from mouseclick */
-.navds-tooltip:focus {
-  outline: none;
-}
-
 .navds-tooltip__arrow {
   z-index: -1;
 }

@@ -7,11 +7,18 @@ import { Refresh } from "@navikt/ds-icons";
 
 # Hvordan ta i bruk Tooltip
 
-Tooltip wrappes rundt elementet man ønsker at den skal åpnes over når man endten får fokus eller hover
+Tooltip wrappes rundt elementet man ønsker at den skal åpnes over når man endten får fokus eller hover.
+Husk at innhold ikke bør bli gjemt for skjermleser-brukere eller de som bare navigerer med tastatur.
+Gjør det mulig å fokusere på elementene som har tabindex
 
 ```jsx
 <Tooltip content="Tooltip text">
-  <Refresh />
+  <Refresh tabIndex={0}/>
+</Tooltip>
+<Tooltip content="Tooltip text">
+  <Button>
+    <Refresh aria-label="refresh ikon" />
+  </Button>
 </Tooltip>
 ```
 
@@ -40,6 +47,55 @@ Plassering er alle mulighetene tilbytt av `import { placements } from "@popperjs
 
 `arrow`-proppen toggler om arrow skal rendres med popoveren, mens `offset`-proppen er `px` offset tooltip har fra ankerelementet.
 
-## Controlles state
+```jsx
+<Tooltip offset={50} arrow={false} content="Tooltip text">
+  <Button>
+    <Refresh aria-label="refresh ikon" />
+  </Button>
+</Tooltip>
+```
 
-Ved å bruke `open`-prop blir tooltip controlled og er da opp til deg å håndtere state
+<Canvas>
+  <Tooltip offset={50} arrow={false} content="Tooltip text" placement="auto">
+    <Button>
+      <Refresh aria-label="refresh ikon" />
+    </Button>
+  </Tooltip>
+</Canvas>
+
+## Controlled state
+
+Ved å bruke `open`-prop blir tooltip controlled og er da opp til deg å håndtere state. Tooltip vil da ikke åpnes/lukkes automatisk ved hover/fokus.
+
+## Disabled button
+
+Default interaksjon for disabled elementer som eks `button` er at interaksjons-eventer ikke triggres
+ved hover. For å støtte dette må elementet wrappes i eks `div` eller `span`. Elementet må også ha
+`pointer-events: none;` for at tooltip skal fungere riktig. Se eksempel
+
+```jsx
+<Tooltip content="Tooltip text">
+  <span>
+    <Button style={{ pointerEvents: "none" }}>
+      <Refresh aria-label="refresh ikon" />
+    </Button>
+  </span>
+</Tooltip>
+```
+
+<Canvas>
+  <div>
+    <h3>Feil implementert</h3>
+    <Tooltip content="Tooltip text" placement="auto">
+      <Button disabled>Disabled Tooltip knapp</Button>
+    </Tooltip>
+    <h3>Riktig implementert</h3>
+    <Tooltip content="Tooltip text" placement="auto">
+      <span>
+        <Button disabled style={{ pointerEvents: "none" }}>
+          Disabled Tooltip knapp
+        </Button>
+      </span>
+    </Tooltip>
+  </div>
+</Canvas>
