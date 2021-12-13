@@ -1,11 +1,13 @@
 import React from "react";
-import { render, screen, cleanup, act, waitFor } from "@testing-library/react";
+import { render, screen, cleanup, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Tooltip } from "..";
+import faker from "faker";
 
 const delay = 150;
 
 afterEach(cleanup);
+
 describe("Tooltip", () => {
   it("Hover triggers tooltip", async () => {
     render(
@@ -14,79 +16,90 @@ describe("Tooltip", () => {
       </Tooltip>
     );
 
-    const content = screen.getByText("Hoverable element");
-
-    userEvent.hover(content);
+    userEvent.hover(screen.getByText("Hoverable element"));
 
     await act(() => new Promise((r) => setTimeout(r, delay)));
 
     const tooltip = screen.getByTestId("hover-tooltip");
     expect(tooltip).toHaveAttribute("aria-hidden", "false");
   });
-  /* it("renders with a correct title", async () => {
+  it("Focus triggers tooltip", async () => {
     render(
-      <Tooltip title="Tooltip" placement="right-start">
-        <span>Test</span>
+      <Tooltip data-testid="focus-tooltip" content="Tooltip text">
+        <button>Focusable element</button>
       </Tooltip>
     );
 
-    const content = screen.getByText("Test");
+    userEvent.click(screen.getByText("Focusable element"));
 
-    fireEvent.mouseOver(content);
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)));
-    await waitFor(() => {
-      const tooltip = screen.getByRole("tooltip");
-      expect(content).toBeDefined();
-      expect(tooltip).toBeDefined();
-    });
+    await act(() => new Promise((r) => setTimeout(r, delay)));
+
+    const tooltip = screen.getByTestId("focus-tooltip");
+    expect(tooltip).toHaveAttribute("aria-hidden", "false");
   });
-  it("renders on focus", async () => {
+
+  it("Changing delay works", async () => {
     render(
-      <Tooltip title="Tooltip" placement="right-start">
-        <span>Test</span>
+      <Tooltip data-testid="delay-tooltip" content="Tooltip text" delay={400}>
+        <button>Changed delay</button>
       </Tooltip>
     );
 
-    const content = screen.getByText("Test");
+    userEvent.hover(screen.getByText("Changed delay"));
 
-    fireEvent.focusIn(content);
-    await act(() => new Promise((r) => setTimeout(r, enterDelayDefault)));
-    await waitFor(() => {
-      expect(screen.getByRole("tooltip")).toBeDefined();
-    });
+    await act(() => new Promise((r) => setTimeout(r, 150)));
+
+    /* Should not have opened yet */
+    expect(screen.getByTestId("delay-tooltip")).toHaveAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    /* Should open now */
+    await act(() => new Promise((r) => setTimeout(r, 350)));
+    expect(screen.getByTestId("delay-tooltip")).toHaveAttribute(
+      "aria-hidden",
+      "false"
+    );
   });
-  it("shows after correct delay", async () => {
+
+  it("Tooltip merges events correctly", async () => {
+    const onFocus = jest.fn();
+
     render(
-      <Tooltip title="Tooltip" placement="right-start" enterDelay={500}>
-        <span>Test</span>
+      <Tooltip data-testid="events-tooltip" content="Tooltip text">
+        <button onFocus={onFocus}>Merged events</button>
       </Tooltip>
     );
 
-    const content = screen.getByText("Test");
+    userEvent.click(screen.getByText("Merged events"));
 
-    fireEvent.mouseOver(content);
+    await act(() => new Promise((r) => setTimeout(r, 150)));
 
-    await act(() => new Promise((r) => setTimeout(r, 200)));
-    expect(screen.queryByText("Tooltip")).not.toBeInTheDocument();
-
-    await act(() => new Promise((r) => setTimeout(r, 300)));
-    await waitFor(() => {
-      const tooltip = screen.getByRole("tooltip");
-      expect(content).toBeDefined();
-      expect(tooltip).toBeDefined();
-    });
+    expect(screen.getByTestId("events-tooltip")).toHaveAttribute(
+      "aria-hidden",
+      "false"
+    );
+    expect(onFocus).toHaveBeenCalled();
   });
-  it("child onFocus is called when focusd", () => {
-    const handler = jest.fn();
+
+  it("Tooltip merges aria-describedby correctly", async () => {
+    const aria = faker.datatype.string();
+    const id = faker.datatype.string();
+
     render(
-      <Tooltip title="Tooltip">
-        <Button onFocus={handler}>Test</Button>
+      <Tooltip id={id} data-testid="aria-tooltip" content="Tooltip text">
+        <button aria-describedby={aria}>aria merge</button>
       </Tooltip>
     );
 
-    const button = screen.getByText("Test");
-    fireEvent.focus(button);
+    userEvent.click(screen.getByText("aria merge"));
 
-    expect(handler).toBeCalled();
-  }); */
+    await act(() => new Promise((r) => setTimeout(r, 150)));
+
+    expect(screen.getByText("aria merge")).toHaveAttribute(
+      "aria-describedby",
+      `${aria} ${id}`
+    );
+  });
 });
