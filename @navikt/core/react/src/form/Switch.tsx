@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Detail, omit, useId } from "..";
+import { BodyShort, Detail, Loader, omit, useId } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SwitchProps
@@ -14,6 +14,7 @@ export interface SwitchProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  loader?: boolean;
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
@@ -24,6 +25,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     className,
     description,
     hideLabel = false,
+    loader,
     ...rest
   } = props;
 
@@ -47,7 +49,9 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
         className={cl(className, "navds-switch__input")}
       />
       <span className="navds-switch__track" />
-      <span className="navds-switch__thumb" />
+      <span className="navds-switch__thumb">
+        {loader && <Loader size="small" />}
+      </span>
 
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
         <div

@@ -56,6 +56,15 @@ export const All = () => {
         <Switch defaultChecked>Label text</Switch>
         <Switch>Label text</Switch>
       </Fieldset>
+
+      <h2>Loader</h2>
+      <Switch loader>Label text</Switch>
+      <Switch size="small" loader>
+        Label text
+      </Switch>
+      <Switch disabled loader>
+        Label text
+      </Switch>
     </div>
   );
 };

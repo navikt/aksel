@@ -18,6 +18,9 @@
   --navds-switch-color-thumb: var(
     --navds-semantic-color-component-background-light
   );
+  --navds-switch-color-thumb-loader-checked: var(
+    --navds-semantic-color-interaction-primary
+  );
 }
 
 .navds-switch {
@@ -157,6 +160,10 @@
 
 .navds-switch__input:checked:disabled:hover ~ .navds-switch__thumb {
   transform: translate(20px, -50%);
+}
+
+.navds-switch__input:checked ~ .navds-switch__thumb .navds-loader__foreground {
+  stroke: var(--navds-switch-color-thumb-loader-checked);
 }
 
 .navds-switch__input:disabled {
