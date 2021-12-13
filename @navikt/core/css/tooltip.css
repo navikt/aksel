@@ -12,7 +12,6 @@
   z-index: var(--navds-z-index-popover);
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
-  box-shadow: var(--navds-shadow-popover);
   border: 1px solid;
   border-color: var(--navds-tooltip-color-border);
   border-radius: 4px;

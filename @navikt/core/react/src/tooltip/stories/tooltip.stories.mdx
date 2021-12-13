@@ -1,5 +1,5 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
-import { Tooltip, Button } from "../..";
+import { Tooltip, Button, BodyLong, Link } from "../..";
 import { placements } from "@popperjs/core";
 import { Refresh } from "@navikt/ds-icons";
 
@@ -98,4 +98,25 @@ ved hover. For å støtte dette må elementet wrappes i eks `div` eller `span`. 
       </span>
     </Tooltip>
   </div>
+</Canvas>
+
+## Inline i tekst
+
+```jsx
+<Tooltip placement="auto" content="Tooltip text">
+  <BodyLong>
+    Adipisicing et esse qui tempor eiusmod esse veniam excepteur nulla ut.
+    <abbr title="innhold"> Short form </abbr>Velit nostrud cillum sint deserunt in.
+  </BodyLong>
+</Tooltip>
+```
+
+<Canvas>
+  <BodyLong>
+    Ut pariatur{" "}
+    <Tooltip arrow={false} content="Tooltip text">
+      <Link href="#">Lenketekst her</Link>
+    </Tooltip>{" "}
+    Velit nostrud
+  </BodyLong>
 </Canvas>
