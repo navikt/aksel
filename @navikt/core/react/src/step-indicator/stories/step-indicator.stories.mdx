@@ -1,0 +1,105 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { StepIndicator } from "..";
+
+<Meta title="ds-react/step-indicator/intro" />
+
+# Hvordan ta i bruk StepIndicator
+
+Vi flytter over Stegindikator til `ds-react` uten noen veldig store endringer i design.
+Du må nå selv styre state med `activeStep` og `onStepChange`.
+
+```jsx
+<StepIndicator activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
+  <StepIndicator.Step>Start</StepIndicator.Step>
+  <StepIndicator.Step>Sunt deserunt qui sit sunt culpa nisi</StepIndicator.Step>
+  <StepIndicator.Step>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </StepIndicator.Step>
+  <StepIndicator.Step>
+    Nulla laborum proident consequat laborum elit et dolore ut sunt.
+  </StepIndicator.Step>
+</StepIndicator>
+```
+
+<Canvas>
+  <StepIndicator activeStep={1} onStepChange={console.log}>
+    <StepIndicator.Step>Start</StepIndicator.Step>
+    <StepIndicator.Step>
+      Sunt deserunt qui sit sunt culpa nisi
+    </StepIndicator.Step>
+    <StepIndicator.Step>
+      Nulla nisi pariatur nulla cupidatat elit.
+    </StepIndicator.Step>
+    <StepIndicator.Step>
+      Nulla laborum proident consequat laborum elit et dolore ut sunt.
+    </StepIndicator.Step>
+  </StepIndicator>
+</Canvas>
+
+## hideLabels
+
+Du kan gjemme labels fra hvert steg med `hideLabels`-prop
+
+```jsx
+<StepIndicator
+  hideLabels
+  activeStep={activeStep}
+  onStepChange={(x) => setActiveStep(x)}
+>
+  <StepIndicator.Step>Start</StepIndicator.Step>
+  <StepIndicator.Step>Sunt deserunt qui sit sunt culpa nisi</StepIndicator.Step>
+  <StepIndicator.Step>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </StepIndicator.Step>
+  <StepIndicator.Step>
+    Nulla laborum proident consequat laborum elit et dolore ut sunt.
+  </StepIndicator.Step>
+</StepIndicator>
+```
+
+<Canvas>
+  <StepIndicator hideLabels activeStep={1} onStepChange={console.log}>
+    <StepIndicator.Step>Start</StepIndicator.Step>
+    <StepIndicator.Step>
+      Sunt deserunt qui sit sunt culpa nisi
+    </StepIndicator.Step>
+    <StepIndicator.Step>
+      Nulla nisi pariatur nulla cupidatat elit.
+    </StepIndicator.Step>
+    <StepIndicator.Step>
+      Nulla laborum proident consequat laborum elit et dolore ut sunt.
+    </StepIndicator.Step>
+  </StepIndicator>
+</Canvas>
+
+## disabled
+
+```jsx
+<StepIndicator activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
+  <StepIndicator.Step>Start</StepIndicator.Step>
+  <StepIndicator.Step disabled>
+    Sunt deserunt qui sit sunt culpa nisi
+  </StepIndicator.Step>
+  <StepIndicator.Step disabled>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </StepIndicator.Step>
+  <StepIndicator.Step>
+    Nulla laborum proident consequat laborum elit et dolore ut sunt.
+  </StepIndicator.Step>
+</StepIndicator>
+```
+
+<Canvas>
+  <StepIndicator activeStep={1} onStepChange={console.log}>
+    <StepIndicator.Step>Start</StepIndicator.Step>
+    <StepIndicator.Step disabled>
+      Sunt deserunt qui sit sunt culpa nisi
+    </StepIndicator.Step>
+    <StepIndicator.Step disabled>
+      Nulla nisi pariatur nulla cupidatat elit.
+    </StepIndicator.Step>
+    <StepIndicator.Step>
+      Nulla laborum proident consequat laborum elit et dolore ut sunt.
+    </StepIndicator.Step>
+  </StepIndicator>
+</Canvas>

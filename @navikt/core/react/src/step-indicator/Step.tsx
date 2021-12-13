@@ -63,12 +63,8 @@ const StepComponent: OverridableComponent<
         <Number className="navds-step-indicator__step-number">
           {safeIndex + 1}
         </Number>
-        <div
-          className={cl("navds-step-indicator__step-label", {
-            "navds-sr-only": context.hideLabels,
-          })}
-        >
-          {children}
+        <div className={cl("navds-step-indicator__step-label")}>
+          {!context.hideLabels && children}
         </div>
         {safeIndex !== 0 && (
           <span aria-hidden className="navds-step-indicator__step-line" />
