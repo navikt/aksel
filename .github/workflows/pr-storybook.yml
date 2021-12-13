@@ -10,6 +10,7 @@ on:
 jobs:
   dev:
     runs-on: ubuntu-latest
+    if: github.event_name != 'push'
     steps:
       - uses: actions/checkout@v2
       - uses: amondnet/vercel-action@v20
