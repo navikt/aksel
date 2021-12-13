@@ -21,7 +21,7 @@
 }
 
 .navds-table__body .navds-table__row:hover {
-  background-color: var(--navds-semantic-color-canvas-background-default);
+  background-color: var(--navds-semantic-color-canvas-background);
 }
 
 .navds-table__row--selected {
