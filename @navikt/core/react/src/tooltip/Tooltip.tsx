@@ -11,7 +11,7 @@ import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import { Detail, useClientLayoutEffect, useEventLister, useId } from "..";
 
-export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
+export interface TooltipProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Element tooltip anchors to
    */
@@ -50,7 +50,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   onOpenChange?: (state: boolean) => void;
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+const Tooltip = forwardRef<HTMLSpanElement, TooltipProps>(
   (
     {
       children,
@@ -67,16 +67,17 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref
   ) => {
-    const popoverRef = useRef<HTMLDivElement | null>(null);
+    const popoverRef = useRef<HTMLSpanElement | null>(null);
     const mergedRef = mergeRefs([popoverRef, ref]);
 
-    const anchor = useRef<HTMLDivElement | null>(null);
+    const anchor = useRef<HTMLSpanElement | null>(null);
     const timeoutRef = useRef<number>();
 
     const [openState, setOpenState] = useState(open ?? false);
     const tooltipId = useId();
 
     const handleOpen = () => {
+      console.log("open");
       if (open !== undefined || openState) return;
       window.clearTimeout(timeoutRef.current);
       timeoutRef.current = window.setTimeout(() => {
@@ -86,6 +87,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     };
 
     const handleClose = useCallback(() => {
+      console.log("close");
       window.clearTimeout(timeoutRef.current);
       if (open !== undefined) return;
       setOpenState(false);
@@ -127,19 +129,26 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const isOpen = open || openState;
 
+    const events = {
+      onMouseOver: (open === undefined && handleOpen) || undefined,
+      onMouseLeave: (open === undefined && handleClose) || undefined,
+      onFocus: (open === undefined && handleOpen) || undefined,
+      onBlur: (open === undefined && handleClose) || undefined,
+    };
+
     return (
-      <div className="navds-tooltip__wrapper">
-        <div
+      <>
+        <span
+          className="navds-tooltip__wrapper"
           ref={(el) => (anchor.current = el)}
-          onFocus={handleOpen}
-          onBlur={handleClose}
-          onMouseOver={handleOpen}
-          onMouseLeave={handleClose}
-          aria-describedby={isOpen ? id ?? `tooltip-${tooltipId}` : undefined}
+          {...events}
+          aria-describedby={
+            isOpen && isOpen ? id ?? `tooltip-${tooltipId}` : undefined
+          }
         >
           {children}
-        </div>
-        <div
+        </span>
+        <span
           ref={mergedRef}
           className={cl("navds-tooltip", className, {
             "navds-tooltip--hidden": !isOpen,
@@ -155,14 +164,14 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         >
           <Detail as="span">{content}</Detail>
           {arrow && (
-            <div
+            <span
               data-popper-arrow
               style={styles.arrow}
               className="navds-tooltip__arrow"
             />
           )}
-        </div>
-      </div>
+        </span>
+      </>
     );
   }
 );

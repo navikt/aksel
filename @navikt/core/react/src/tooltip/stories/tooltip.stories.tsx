@@ -53,6 +53,13 @@ export const All = () => {
       >
         <Button>Tooltip</Button>
       </Tooltip>
+
+      <h2>With disabled element</h2>
+      <Tooltip content="disabled element example">
+        <div>
+          <Button disabled>Tooltip</Button>
+        </div>
+      </Tooltip>
     </div>
   );
 };

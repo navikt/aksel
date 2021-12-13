@@ -28,9 +28,8 @@
 }
 
 .navds-tooltip__wrapper {
+  display: inline-block;
   position: relative;
-  display: inline-flex;
-  justify-content: center;
 }
 
 /* Tooltip has tabIndex -1 so hide focus from mouseclick */
