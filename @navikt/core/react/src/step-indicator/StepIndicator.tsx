@@ -1,13 +1,29 @@
-import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
-import Step, { StepIndicatorStepType, StepIndicatorStepProps } from "./Step";
+import React, { createContext, forwardRef } from "react";
+import Step, { StepIndicatorStepProps, StepIndicatorStepType } from "./Step";
 
 export interface StepIndicatorProps
   extends React.HTMLAttributes<HTMLOListElement> {
+  /**
+   * <StepIndicator.Step /> elements
+   */
   children: React.ReactNode;
+  /**
+   * Adds classname to wrapper
+   */
   className?: string;
+  /**
+   * Current active step
+   */
   activeStep: number;
+  /**
+   * Callback clicked step
+   */
   onStepChange: (step: number) => void;
+  /**
+   * Hides labels for each step if true
+   * @default false
+   */
   hideLabels?: boolean;
 }
 
@@ -21,16 +37,11 @@ interface StepIndicatorComponent
 interface StepContextProps {
   activeStep: number;
   onStepChange: (step: number) => void;
-  /**
-   * Hides labels for each step if true
-   * @default false
-   */
   hideLabels: boolean;
 }
 
 export const StepContext = createContext<StepContextProps | null>(null);
 
-/* TODO: Legge til autoresponsive prop fra gammel versjon */
 const StepIndicator: StepIndicatorComponent = forwardRef<
   HTMLOListElement,
   StepIndicatorProps
@@ -65,7 +76,13 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
 
     return (
       <ol ref={ref} className={cl(`navds-step-indicator`, className)} {...rest}>
-        <StepContext.Provider value={{ activeStep, onStepChange, hideLabels }}>
+        <StepContext.Provider
+          value={{
+            activeStep,
+            onStepChange,
+            hideLabels,
+          }}
+        >
           {stepsWithIndex}
         </StepContext.Provider>
       </ol>

@@ -39,6 +39,7 @@
   flex: 1;
   position: relative;
   list-style: none;
+  min-width: 10rem;
 }
 
 .navds-step-indicator__step {
