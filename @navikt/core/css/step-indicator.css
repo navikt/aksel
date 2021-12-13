@@ -1,7 +1,15 @@
+/* TODO: Refactore hvordan linjer lages */
+
 :root {
   --navds-step-indicator-color-step-line: var(--navds-semantic-color-border);
   --navds-step-indicator-color-step-text: var(--navds-semantic-color-text);
   --navds-step-indicator-color-step-border: var(--navds-semantic-color-border);
+  --navds-step-indicator-color-step-active: var(
+    --navds-semantic-color-interaction-primary-selected
+  );
+  --navds-step-indicator-color-step-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
 }
 
 /* StepIndicator */
@@ -16,8 +24,14 @@
 /* Step */
 .navds-step-indicator__step-li {
   position: relative;
-  padding-right: 1.25rem;
   list-style: none;
+  text-align: center;
+  display: flex;
+  /* min-width: 10rem; */
+  max-width: 10rem;
+  flex: 1 1;
+  justify-content: center;
+  padding: 0 2rem;
 }
 
 .navds-step-indicator__step-li::after {
@@ -35,13 +49,12 @@
   left: var(--navds-spacing-12);
 }
 
-.navds-step-indicator__step-li:last-child {
-  padding-right: 0;
+.navds-step-indicator__step-li:first-child {
+  justify-content: flex-start;
 }
 
-.navds-step-indicator__step-li:last-child::after {
-  right: var(--navds-spacing-12);
-  left: 0;
+.navds-step-indicator__step-li:last-child {
+  justify-content: flex-end;
 }
 
 .navds-step-indicator__step {
@@ -69,6 +82,24 @@
   background: white;
 }
 
+.navds-step-indicator__step > .navds-step-indicator__step-number {
+  background: var(--navds-semantic-color-canvas-background-light);
+}
+
+.navds-step-indicator__step:hover > .navds-step-indicator__step-number {
+  background: var(--navds-semantic-color-canvas-background-light);
+  box-shadow: 0 0 0 2px var(--navds-step-indicator-color-step-active);
+}
+
+.navds-step-indicator__step:focus {
+  outline: none;
+}
+
+.navds-step-indicator__step:focus > .navds-step-indicator__step-number {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
 .navds-step-indicator__step-label {
   margin-top: var(--navds-spacing-3);
   text-align: center;
@@ -76,4 +107,45 @@
   text-overflow: ellipsis;
   overflow: hidden;
   max-width: 10rem;
+}
+
+.navds-step-indicator__step--active > .navds-step-indicator__step-number {
+  background: var(--navds-step-indicator-color-step-active);
+  color: var(--navds-step-indicator-color-step-text-active);
+  box-shadow: none;
+}
+
+.navds-step-indicator__step--active:hover > .navds-step-indicator__step-number {
+  background: var(--navds-step-indicator-color-step-active);
+  box-shadow: none;
+}
+
+.navds-step-indicator__step--active:focus {
+  outline: none;
+}
+
+.navds-step-indicator__step--active:focus > .navds-step-indicator__step-number {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-step-indicator__step > .navds-step-indicator__step-label {
+  text-decoration: underline;
+}
+
+.navds-step-indicator__step--active > .navds-step-indicator__step-label {
+  font-weight: var(--navds-font-weight-bold);
+}
+
+.navds-step-indicator__step--active > .navds-step-indicator__step-label {
+  font-weight: var(--navds-font-weight-bold);
+  text-decoration: none;
+}
+
+.navds-step-indicator__step:hover > .navds-step-indicator__step-label {
+  text-decoration: none;
+}
+
+.navds-step-indicator__step--finished > .navds-step-indicator__step-number {
+  background: var(--navds-semantic-color-canvas-background);
 }

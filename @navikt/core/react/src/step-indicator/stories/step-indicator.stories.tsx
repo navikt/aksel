@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StepIndicator from "../StepIndicator";
 import { Meta } from "@storybook/react/types-6-0";
 
@@ -8,13 +8,15 @@ export default {
 } as Meta;
 
 export const All = () => {
+  const [activeStep, setActiveStep] = useState(1);
   return (
-    <div style={{ display: "grid", gridAutoRows: "8rem", rowGap: "2rem" }}>
+    <div>
       <StepIndicator activeStep={1} onStepChange={console.log}>
         <StepIndicator.Step>Steg nr 1</StepIndicator.Step>
         <StepIndicator.Step>Laborum velit eu magna esse</StepIndicator.Step>
         <StepIndicator.Step>test</StepIndicator.Step>
       </StepIndicator>
+      <br />
 
       <StepIndicator activeStep={1} onStepChange={console.log}>
         <StepIndicator.Step href="#" as="a">
@@ -25,6 +27,40 @@ export const All = () => {
         </StepIndicator.Step>
         <StepIndicator.Step href="#" as="a">
           3
+        </StepIndicator.Step>
+      </StepIndicator>
+      <br />
+      <StepIndicator activeStep={activeStep} onStepChange={setActiveStep}>
+        <StepIndicator.Step>
+          Pariatur pariatur adipisicing reprehenderit ad occaecat reprehenderit
+          ut dolore.
+        </StepIndicator.Step>
+        <StepIndicator.Step>Laborum velit eu magna esse</StepIndicator.Step>
+        <StepIndicator.Step>
+          Cupidatat Lorem do nostrud ut eu.
+        </StepIndicator.Step>
+        <StepIndicator.Step>test</StepIndicator.Step>
+        <StepIndicator.Step>
+          Voluptate pariatur ut est voluptate elit officia excepteur laborum.
+        </StepIndicator.Step>
+      </StepIndicator>
+      <br />
+      <StepIndicator
+        activeStep={activeStep}
+        onStepChange={setActiveStep}
+        hideLabels
+      >
+        <StepIndicator.Step>
+          Pariatur pariatur adipisicing reprehenderit ad occaecat reprehenderit
+          ut dolore.
+        </StepIndicator.Step>
+        <StepIndicator.Step>Laborum velit eu magna esse</StepIndicator.Step>
+        <StepIndicator.Step>
+          Cupidatat Lorem do nostrud ut eu.
+        </StepIndicator.Step>
+        <StepIndicator.Step>test</StepIndicator.Step>
+        <StepIndicator.Step>
+          Voluptate pariatur ut est voluptate elit officia excepteur laborum.
         </StepIndicator.Step>
       </StepIndicator>
     </div>

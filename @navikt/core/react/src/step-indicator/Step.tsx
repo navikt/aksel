@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { StepContext } from ".";
-import { OverridableComponent } from "..";
+import { BodyShort, Label, OverridableComponent } from "..";
 
 export interface StepIndicatorStepProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -35,23 +35,34 @@ const StepComponent: OverridableComponent<
 
     const safeIndex = index ?? 0;
 
+    const Number = context.activeStep === safeIndex ? Label : BodyShort;
+
     return (
       <Component
         {...rest}
         ref={ref}
         className={cl("navds-step-indicator__step", className, {
           "navds-step-indicator__step--disabled": disabled,
-          "navds-step-indicator__step--active": context.activeStep === index,
+          "navds-step-indicator__step--active":
+            context.activeStep === safeIndex,
+          "navds-step-indicator__step--finished":
+            context.activeStep > safeIndex,
         })}
         onClick={(e) => {
           context.onStepChange(safeIndex);
           rest.onClick && rest.onClick(e);
         }}
       >
-        <span className="navds-step-indicator__step-number">
+        <Number className="navds-step-indicator__step-number">
           {safeIndex + 1}
-        </span>
-        <div className={cl("navds-step-indicator__step-label")}>{children}</div>
+        </Number>
+        <div
+          className={cl("navds-step-indicator__step-label", {
+            "navds-sr-only": context.hideLabels,
+          })}
+        >
+          {children}
+        </div>
       </Component>
     );
   }
