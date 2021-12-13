@@ -114,7 +114,17 @@ export const All = () => {
   );
 };
 
-export const Selection = () => {
+export const Selection = () => (
+  <>
+    <h1>Selection</h1>
+    <h2>Medium</h2>
+    <SelectionTable />
+    <h2>Small</h2>
+    <SelectionTable size="small" />
+  </>
+);
+
+const SelectionTable = ({ size }) => {
   const useToggleList = (initialState) => {
     const [list, setList] = useState(initialState);
 
@@ -132,7 +142,7 @@ export const Selection = () => {
   const [selectedRows, toggleSelectedRow] = useToggleList([]);
 
   return (
-    <Table>
+    <Table size={size}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>Selected</Table.HeaderCell>
@@ -146,6 +156,7 @@ export const Selection = () => {
         <Table.Row selected={selectedRows.includes("1")}>
           <Table.DataCell>
             <Checkbox
+              size={size}
               hideLabel
               checked={selectedRows.includes("1")}
               onChange={() => toggleSelectedRow("1")}
@@ -161,6 +172,7 @@ export const Selection = () => {
         <Table.Row selected={selectedRows.includes("2")}>
           <Table.DataCell>
             <Checkbox
+              size={size}
               hideLabel
               checked={selectedRows.includes("2")}
               onChange={() => toggleSelectedRow("2")}
@@ -176,6 +188,7 @@ export const Selection = () => {
         <Table.Row selected={selectedRows.includes("3")}>
           <Table.DataCell>
             <Checkbox
+              size={size}
               hideLabel
               checked={selectedRows.includes("3")}
               onChange={() => toggleSelectedRow("3")}

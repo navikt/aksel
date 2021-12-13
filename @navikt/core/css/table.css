@@ -60,6 +60,10 @@
   top: -12px;
 }
 
+.navds-table .navds-checkbox--small .navds-checkbox__input {
+  top: -6px;
+}
+
 .navds-table .navds-checkbox .navds-checkbox__label {
   padding: 0;
 }
