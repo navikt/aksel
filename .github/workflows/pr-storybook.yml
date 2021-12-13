@@ -9,7 +9,6 @@ on:
 
 jobs:
   dev:
-    needs: publish-npm
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
