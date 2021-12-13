@@ -1,9 +1,8 @@
 :root {
+  --navds-switch-color-label: var(--navds-color-text-primary);
   --navds-switch-color-label-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-switch-color-label: var(--navds-color-text-primary);
-  --navds-switch-color-description: var(--navds-color-text-primary);
   --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
   --navds-switch-color-track-background-checked: var(
     --navds-semantic-color-interaction-primary
@@ -14,7 +13,6 @@
   --navds-switch-color-track-shadow-inner-focus: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-switch-color-track-shadow-focus: var(--navds-semantic-color-focus);
   --navds-switch-color-thumb: var(
     --navds-semantic-color-component-background-light
   );
@@ -55,6 +53,7 @@
 /* Label */
 .navds-switch__label-wrapper {
   cursor: pointer;
+  color: var(--navds-switch-color-label);
 }
 
 .navds-switch__label {
@@ -74,10 +73,6 @@
 
 .navds-switch--with-description {
   padding-bottom: 0;
-}
-
-.navds-switch__description {
-  color: var(--navds-switch-color-description);
 }
 
 .navds-switch__input:hover ~ .navds-switch__label-wrapper {
