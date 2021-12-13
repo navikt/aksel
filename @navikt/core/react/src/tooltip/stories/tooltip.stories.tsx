@@ -41,8 +41,14 @@ export const All = () => {
         open={open}
         content="Controlled tooltip example"
         placement="auto-end"
+        id="testid"
       >
-        <Button onClick={() => setOpen((x) => !x)}>Toggle tooltip</Button>
+        <Button
+          aria-describedby="teststring"
+          onClick={() => setOpen((x) => !x)}
+        >
+          Toggle tooltip
+        </Button>
       </Tooltip>
 
       <h2>onOpenChange</h2>
@@ -56,9 +62,11 @@ export const All = () => {
 
       <h2>With disabled element</h2>
       <Tooltip content="disabled element example">
-        <Button style={{ pointerEvents: "none" }} disabled>
-          Tooltip
-        </Button>
+        <span>
+          <Button style={{ pointerEvents: "none" }} disabled>
+            Tooltip
+          </Button>
+        </span>
       </Tooltip>
     </div>
   );

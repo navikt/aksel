@@ -12,3 +12,8 @@ export const omit = (obj: object, props: string[]) =>
       }),
       {}
     );
+
+export const mergeCallbacks = (callback1, callback2) => (event) => {
+  callback1 && callback1(event);
+  callback2 && callback2(event);
+};
