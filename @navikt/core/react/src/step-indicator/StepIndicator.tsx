@@ -1,5 +1,13 @@
 import cl from "classnames";
-import React, { createContext, forwardRef } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import mergeRefs from "react-merge-refs";
 import Step, { StepIndicatorStepProps, StepIndicatorStepType } from "./Step";
 
 export interface StepIndicatorProps
@@ -25,6 +33,10 @@ export interface StepIndicatorProps
    * @default false
    */
   hideLabels?: boolean;
+  /**
+   * enables `hideLabels` internally when steps start to overflow
+   */
+  autoResponsive?: boolean;
 }
 
 interface StepIndicatorComponent
@@ -51,16 +63,26 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
       children,
       className,
       activeStep,
-      hideLabels = false,
+      hideLabels,
       onStepChange,
+      autoResponsive,
       ...rest
     },
     ref
   ) => {
+    const wrapperRef = useRef<HTMLOListElement | null>(null);
+    const mergedRef = mergeRefs([wrapperRef, ref]);
+
+    const [showLabels, setShowLabels] = useState(true);
+
+    const removeLabels = hideLabels ?? (!!autoResponsive && !showLabels);
+
     const stepsWithIndex = React.Children.map(children, (step, index) => {
       return React.isValidElement<StepIndicatorStepProps>(step) ? (
         <li
-          className="navds-step-indicator__step-wrapper"
+          className={cl("navds-step-indicator__step-wrapper", {
+            "navds-step-indicator__step-wrapper--hidelabel": removeLabels,
+          })}
           key={index}
           aria-current={index === activeStep && "step"}
         >
@@ -74,13 +96,40 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
       );
     });
 
+    const canShowLabels = useCallback(() => {
+      const remSize = parseFloat(
+        String(getComputedStyle(document.documentElement).fontSize)
+      );
+      const childrenLength = React.Children.toArray(children).filter((child) =>
+        React.isValidElement(child)
+      ).length;
+
+      wrapperRef.current &&
+        setShowLabels(
+          wrapperRef.current?.getBoundingClientRect().width >=
+            remSize * 10 * childrenLength
+        );
+    }, [children]);
+
+    useEffect(() => {
+      window.addEventListener("resize", canShowLabels);
+      canShowLabels();
+      return () => {
+        window.removeEventListener("resize", canShowLabels);
+      };
+    }, [canShowLabels]);
+
     return (
-      <ol ref={ref} className={cl(`navds-step-indicator`, className)} {...rest}>
+      <ol
+        ref={mergedRef}
+        className={cl(`navds-step-indicator`, className)}
+        {...rest}
+      >
         <StepContext.Provider
           value={{
             activeStep,
             onStepChange,
-            hideLabels,
+            hideLabels: removeLabels,
           }}
         >
           {stepsWithIndex}
