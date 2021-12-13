@@ -29,11 +29,12 @@
   width: fit-content;
 }
 
-.navds-switch.navds-switch--small {
+.navds-switch--small {
   position: relative;
   min-height: 32px;
 }
 
+/* Input */
 .navds-switch__input {
   appearance: none;
   cursor: pointer;
@@ -51,6 +52,7 @@
   top: 0;
 }
 
+/* Label */
 .navds-switch__label-wrapper {
   cursor: pointer;
 }
@@ -86,6 +88,7 @@
   color: inherit;
 }
 
+/* Track */
 .navds-switch__track {
   border: none;
   width: 44px;
@@ -120,9 +123,10 @@
 
 .navds-switch__input:focus ~ .navds-switch__track {
   box-shadow: 0 0 0 1px var(--navds-switch-color-track-shadow-inner-focus),
-    0 0 0 3px var(--navds-switch-color-track-shadow-focus);
+    var(--navds-shadow-focus);
 }
 
+/* Thumb */
 .navds-switch__thumb {
   background-color: var(--navds-switch-color-thumb);
   border-radius: 50%;
@@ -162,10 +166,12 @@
   transform: translate(20px, -50%);
 }
 
+/* Loader */
 .navds-switch__input:checked ~ .navds-switch__thumb .navds-loader__foreground {
   stroke: var(--navds-switch-color-thumb-loader-checked);
 }
 
+/* Disabled */
 .navds-switch__input:disabled {
   appearance: none;
 }
