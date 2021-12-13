@@ -23,6 +23,24 @@ describe("Tooltip", () => {
     const tooltip = screen.getByTestId("hover-tooltip");
     expect(tooltip).toHaveAttribute("aria-hidden", "false");
   });
+  it("Hover triggers tooltip on disabled button", async () => {
+    render(
+      <Tooltip data-testid="disabled-tooltip" content="Tooltip text">
+        <span data-testid="element-wrapper">
+          <button style={{ pointerEvents: "none" }} disabled>
+            disabled element
+          </button>
+        </span>
+      </Tooltip>
+    );
+
+    userEvent.hover(screen.getByTestId("element-wrapper"));
+
+    await act(() => new Promise((r) => setTimeout(r, delay)));
+
+    const tooltip = screen.getByTestId("disabled-tooltip");
+    expect(tooltip).toHaveAttribute("aria-hidden", "false");
+  });
   it("Focus triggers tooltip", async () => {
     render(
       <Tooltip data-testid="focus-tooltip" content="Tooltip text">
