@@ -118,8 +118,18 @@
   outline: none;
 }
 
-.navds-step-indicator__step:hover > .navds-step-indicator__step-label,
-.navds-step-indicator__step--active > .navds-step-indicator__step-label {
+.navds-step-indicator__step:hover > .navds-step-indicator__step-label {
+  text-decoration: none;
+}
+
+.navds-step-indicator__step.navds-step-indicator__step--disabled:hover
+  > .navds-step-indicator__step-label {
+  text-decoration: underline;
+}
+
+.navds-step-indicator__step--active > .navds-step-indicator__step-label,
+.navds-step-indicator__step--active.navds-step-indicator__step--disabled:hover
+  > .navds-step-indicator__step-label {
   text-decoration: none;
 }
 
