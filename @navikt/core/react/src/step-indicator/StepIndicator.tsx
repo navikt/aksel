@@ -49,7 +49,7 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
     const stepsWithIndex = React.Children.map(children, (step, index) => {
       return React.isValidElement<StepIndicatorStepProps>(step) ? (
         <li
-          className="navds-step-indicator__step-li"
+          className="navds-step-indicator__step-wrapper"
           key={index}
           aria-current={index === activeStep && "step"}
         >

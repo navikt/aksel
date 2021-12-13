@@ -5,7 +5,13 @@ import { BodyShort, Label, OverridableComponent } from "..";
 
 export interface StepIndicatorStepProps
   extends React.HTMLAttributes<HTMLButtonElement> {
+  /**
+   * Text content under indicator
+   */
   children: React.ReactNode;
+  /**
+   * Disables interaction with element
+   */
   disabled?: boolean;
   /**
    * Handled by StepIndicator
@@ -40,6 +46,7 @@ const StepComponent: OverridableComponent<
     return (
       <Component
         {...rest}
+        disabled={disabled}
         ref={ref}
         className={cl("navds-step-indicator__step", className, {
           "navds-step-indicator__step--disabled": disabled,
@@ -63,6 +70,9 @@ const StepComponent: OverridableComponent<
         >
           {children}
         </div>
+        {safeIndex !== 0 && (
+          <span aria-hidden className="navds-step-indicator__step-line" />
+        )}
       </Component>
     );
   }

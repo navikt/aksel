@@ -31,12 +31,12 @@ export const All = () => {
       </StepIndicator>
       <br />
       <StepIndicator activeStep={activeStep} onStepChange={setActiveStep}>
-        <StepIndicator.Step>
+        <StepIndicator.Step disabled>
           Pariatur pariatur adipisicing reprehenderit ad occaecat reprehenderit
           ut dolore.
         </StepIndicator.Step>
         <StepIndicator.Step>Laborum velit eu magna esse</StepIndicator.Step>
-        <StepIndicator.Step>
+        <StepIndicator.Step disabled>
           Cupidatat Lorem do nostrud ut eu.
         </StepIndicator.Step>
         <StepIndicator.Step>test</StepIndicator.Step>
@@ -55,7 +55,7 @@ export const All = () => {
           ut dolore.
         </StepIndicator.Step>
         <StepIndicator.Step>Laborum velit eu magna esse</StepIndicator.Step>
-        <StepIndicator.Step>
+        <StepIndicator.Step disabled>
           Cupidatat Lorem do nostrud ut eu.
         </StepIndicator.Step>
         <StepIndicator.Step>test</StepIndicator.Step>
