@@ -137,7 +137,8 @@
     var(--navds-shadow-focus);
 }
 
-.navds-button--primary:hover:disabled {
+.navds-button--primary:hover:disabled,
+.navds-button--primary:active:disabled {
   background-color: var(--navds-button-color-primary-background);
 }
 
@@ -244,7 +245,8 @@
     var(--navds-shadow-focus);
 }
 
-.navds-button--danger:hover:disabled {
+.navds-button--danger:hover:disabled,
+.navds-button--danger:active:disabled {
   background-color: var(--navds-button-color-danger-background);
 }
 
@@ -253,7 +255,7 @@
  **************************/
 
 .navds-button:disabled {
-  opacity: 30%;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
