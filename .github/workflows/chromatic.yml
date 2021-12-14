@@ -1,11 +1,10 @@
-name: Chromatic tests
+name: Chromatic
 
 on:
   push:
-    branches: [chromatic-testbranch]
+    branches: [master]
   pull_request:
-    branches: [chromatic-testbranch]
-  workflow_dispatch:
+    branches: [master]
 
 jobs:
   chromatic:
@@ -34,7 +33,7 @@ jobs:
         run: yarn boot
       - name: Eslint and Stylelint
         run: yarn lint
-      - name: Test chromatic
+      - name: run chromatic
         uses: chromaui/action@v1
         id: chromatic_tests
         with:
@@ -42,13 +41,21 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC }}
           exitZeroOnChanges: true
 
+      - name: replace storybook url
+        uses: frabert/replace-string-action@v2.0
+        id: storybook_url
+        with:
+          pattern: "(iframe.html)"
+          string: ${{ steps.chromatic_tests.outputs.storybookUrl }}
+          replace-with: ""
+
       - name: Find Comment
         uses: peter-evans/find-comment@v1
         id: fc
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
-          body-includes: Chromatic output
+          body-includes: Chromatic
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
@@ -56,6 +63,8 @@ jobs:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            Chromatic output
-            ${{steps.chromatic_tests.outputs.*}}
+            **Chromatic build-output**:
+
+            - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
+            - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
           edit-mode: replace
