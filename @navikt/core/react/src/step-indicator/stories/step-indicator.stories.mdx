@@ -36,11 +36,13 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
   </StepIndicator>
 </Canvas>
 
-## autoResponsive
+## responsive
+
+Bruk `responsive`-prop for å skjule labels med en gang StepIndicator begynner å overlfowe.
 
 ```jsx
 <StepIndicator
-  autoResponsive
+  responsive
   activeStep={activeStep}
   onStepChange={(x) => setActiveStep(x)}
 >
@@ -56,7 +58,7 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
 ```
 
 <Canvas>
-  <StepIndicator autoResponsive activeStep={1} onStepChange={console.log}>
+  <StepIndicator responsive activeStep={1} onStepChange={console.log}>
     <StepIndicator.Step>Start</StepIndicator.Step>
     <StepIndicator.Step>
       Sunt deserunt qui sit sunt culpa nisi
