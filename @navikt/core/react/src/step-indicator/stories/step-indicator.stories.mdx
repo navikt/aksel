@@ -1,5 +1,6 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
 import { StepIndicator } from "..";
+import { Example } from "./Example";
 
 <Meta title="ds-react/step-indicator/intro" />
 
@@ -22,18 +23,7 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
 ```
 
 <Canvas>
-  <StepIndicator activeStep={1} onStepChange={console.log}>
-    <StepIndicator.Step>Start</StepIndicator.Step>
-    <StepIndicator.Step>
-      Sunt deserunt qui sit sunt culpa nisi
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla nisi pariatur nulla cupidatat elit.
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla laborum proident consequat laborum elit et dolore ut sunt.
-    </StepIndicator.Step>
-  </StepIndicator>
+  <Example />
 </Canvas>
 
 ## responsive
@@ -58,18 +48,7 @@ Bruk `responsive`-prop for å skjule labels med en gang StepIndicator begynner �
 ```
 
 <Canvas>
-  <StepIndicator responsive activeStep={1} onStepChange={console.log}>
-    <StepIndicator.Step>Start</StepIndicator.Step>
-    <StepIndicator.Step>
-      Sunt deserunt qui sit sunt culpa nisi
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla nisi pariatur nulla cupidatat elit.
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla laborum proident consequat laborum elit et dolore ut sunt.
-    </StepIndicator.Step>
-  </StepIndicator>
+  <Example responsive />
 </Canvas>
 
 ## hideLabels
@@ -94,18 +73,7 @@ Du kan gjemme labels fra hvert steg med `hideLabels`-prop
 ```
 
 <Canvas>
-  <StepIndicator hideLabels activeStep={1} onStepChange={console.log}>
-    <StepIndicator.Step>Start</StepIndicator.Step>
-    <StepIndicator.Step>
-      Sunt deserunt qui sit sunt culpa nisi
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla nisi pariatur nulla cupidatat elit.
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla laborum proident consequat laborum elit et dolore ut sunt.
-    </StepIndicator.Step>
-  </StepIndicator>
+  <Example hideLabels />
 </Canvas>
 
 ## disabled
@@ -126,18 +94,7 @@ Du kan gjemme labels fra hvert steg med `hideLabels`-prop
 ```
 
 <Canvas>
-  <StepIndicator activeStep={1} onStepChange={console.log}>
-    <StepIndicator.Step>Start</StepIndicator.Step>
-    <StepIndicator.Step disabled>
-      Sunt deserunt qui sit sunt culpa nisi
-    </StepIndicator.Step>
-    <StepIndicator.Step disabled>
-      Nulla nisi pariatur nulla cupidatat elit.
-    </StepIndicator.Step>
-    <StepIndicator.Step>
-      Nulla laborum proident consequat laborum elit et dolore ut sunt.
-    </StepIndicator.Step>
-  </StepIndicator>
+  <Example disabled />
 </Canvas>
 
 ## Override tags
@@ -157,11 +114,9 @@ det du selv ønsker ved å bruke `as`-prop
 
 <Canvas>
   <StepIndicator activeStep={1} onStepChange={console.log}>
+    <StepIndicator.Step as="button">{`<button>`}</StepIndicator.Step>
     <StepIndicator.Step as="a" href="#">
-      Start
-    </StepIndicator.Step>
-    <StepIndicator.Step as="button">
-      Sunt deserunt qui sit sunt culpa nisi
+      {`<a>`}
     </StepIndicator.Step>
   </StepIndicator>
 </Canvas>
