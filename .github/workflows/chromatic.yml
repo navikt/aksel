@@ -48,6 +48,11 @@ jobs:
           pattern: "(iframe.html)"
           string: ${{ steps.chromatic_tests.outputs.storybookUrl }}
           replace-with: ""
+      - name: Declare some variables
+        id: vars
+        shell: bash
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Find Comment
         uses: peter-evans/find-comment@v1
@@ -68,4 +73,6 @@ jobs:
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
             - :dart: [Status](${{steps.chromatic_tests.outputs.status}})
+
+            `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
