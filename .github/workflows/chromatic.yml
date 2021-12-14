@@ -39,6 +39,11 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
 
+      - name: Log chromatic output
+        shell: bash
+        run: |
+          echo "OUT: ${{steps.chromatic_tests.outputs.code}}"
+
       - name: replace storybook url
         uses: frabert/replace-string-action@v2.0
         id: storybook_url
