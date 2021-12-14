@@ -57,5 +57,5 @@ jobs:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
             Chromatic output
-            ${{join(steps.chromatic_tests.outputs.*, '\n')}}
+            ${{steps.chromatic_tests.outputs}}
           edit-mode: replace
