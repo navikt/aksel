@@ -364,7 +364,7 @@
           },
           "success": {
             "background": {
-              "value": "{navds.global.color.green.100.value}"
+              "value": "{navds.global.color.red.100.value}"
             },
             "border": {
               "value": "{navds.global.color.green.500.value}"
