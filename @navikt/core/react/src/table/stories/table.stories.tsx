@@ -124,7 +124,7 @@ export const Selection = () => (
   </>
 );
 
-const SelectionTable = ({ size }) => {
+const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
   const useToggleList = (initialState) => {
     const [list, setList] = useState(initialState);
 
@@ -167,7 +167,9 @@ const SelectionTable = ({ size }) => {
               checked={selectedRows.includes("1")}
               onChange={() => toggleSelectedRow("1")}
               aria-labelledby="x_r1"
-            ></Checkbox>
+            >
+              {" "}
+            </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
             <span id="x_r1">Donald Smith</span>
@@ -184,7 +186,9 @@ const SelectionTable = ({ size }) => {
               checked={selectedRows.includes("2")}
               onChange={() => toggleSelectedRow("2")}
               aria-labelledby="x_r2"
-            ></Checkbox>
+            >
+              {" "}
+            </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
             <span id="x_r2">Preben Aalborg</span>
@@ -201,7 +205,9 @@ const SelectionTable = ({ size }) => {
               checked={selectedRows.includes("3")}
               onChange={() => toggleSelectedRow("3")}
               aria-labelledby="x_r3"
-            ></Checkbox>
+            >
+              {" "}
+            </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
             <span id="x_r3">Rudolph Bachenmeier</span>
