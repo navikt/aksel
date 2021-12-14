@@ -62,11 +62,11 @@ export const All = () => {
 
       <h2>With disabled element</h2>
       <Tooltip content="disabled element example">
-        <span>
+        <div>
           <Button style={{ pointerEvents: "none" }} disabled>
             Tooltip
           </Button>
-        </span>
+        </div>
       </Tooltip>
     </div>
   );
