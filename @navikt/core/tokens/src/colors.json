@@ -370,7 +370,7 @@
               "value": "{navds.global.color.green.500.value}"
             },
             "icon": {
-              "value": "{navds.global.color.green.600.value}"
+              "value": "{navds.global.color.red.600.value}"
             }
           },
           "warning": {
