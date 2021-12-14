@@ -3,17 +3,13 @@
   --navds-tooltip-color-background: var(
     --navds-semantic-color-component-background-inverted
   );
-  --navds-tooltip-color-border: var(
-    --navds-semantic-color-component-background-inverted
-  );
 }
 
 .navds-tooltip {
   z-index: var(--navds-z-index-popover);
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
-  border: 1px solid;
-  border-color: var(--navds-tooltip-color-border);
+  border: 1px solid transparent;
   border-radius: 4px;
   padding: var(--navds-spacing-2);
   white-space: nowrap;
@@ -40,8 +36,6 @@
   content: "";
   transform: rotate(45deg);
   background-color: var(--navds-tooltip-color-background);
-  border: 1px solid;
-  border-color: var(--navds-tooltip-color-border);
   width: 0.75rem;
   height: 0.75rem;
   top: 0;
