@@ -381,7 +381,7 @@
               "value": "{navds.global.color.orange.600.value}"
             },
             "icon": {
-              "value": "{navds.global.color.gray.500.value}"
+              "value": "{navds.global.color.red.500.value}"
             }
           }
         },
