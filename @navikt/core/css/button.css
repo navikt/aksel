@@ -255,7 +255,7 @@
  **************************/
 
 .navds-button:disabled {
-  opacity: 30%;
+  opacity: 0.3;
   cursor: not-allowed;
   transform: none;
 }
