@@ -7,6 +7,9 @@
   --navds-step-indicator-color-step-number-background: var(
     --navds-semantic-color-canvas-background-light
   );
+  --navds-step-indicator-color-step-number-background-finished: var(
+    --navds-semantic-color-canvas-background
+  );
   --navds-step-indicator-color-step-number-shadow: var(
     --navds-semantic-color-border
   );
@@ -102,7 +105,7 @@
   right: calc(50% + 2rem);
   left: calc(-50% + 2rem);
   display: block;
-  border: 1px solid var(--navds-step-indicator-color-step-line);
+  border-top: 2px solid var(--navds-step-indicator-color-step-line);
   border-radius: 4px;
   pointer-events: none;
 }
@@ -141,7 +144,7 @@
 }
 
 .navds-step-indicator__step:hover > .navds-step-indicator__step-number {
-  background: var(--navds-semantic-color-canvas-background-light);
+  background: var(--navds-step-indicator-color-step-number-background);
   box-shadow: 0 0 0 2px
     var(--navds-step-indicator-color-step-number-shadow-hover);
 }
@@ -181,7 +184,7 @@
 .navds-step-indicator__step--finished > .navds-step-indicator__step-number,
 .navds-step-indicator__step--finished.navds-step-indicator__step--disabled
   > .navds-step-indicator__step-number {
-  background: var(--navds-semantic-color-canvas-background);
+  background: var(--navds-step-indicator-color-step-number-background-finished);
 }
 
 /* Disabled */
