@@ -67,5 +67,5 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :dart: [Status](${{steps.chromatic_tests.status}})
+            - :dart: [Status](${{steps.chromatic_tests.outputs.status}})
           edit-mode: replace
