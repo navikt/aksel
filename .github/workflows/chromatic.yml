@@ -7,8 +7,8 @@ on:
     branches: [master]
 
 jobs:
-  chromatic:
-    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+  chromatic-pr:
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,8 +31,6 @@ jobs:
         run: yarn postinstall
       - name: Boot
         run: yarn boot
-      - name: Eslint and Stylelint
-        run: yarn lint
       - name: run chromatic
         uses: chromaui/action@v1
         id: chromatic_tests
@@ -48,7 +46,8 @@ jobs:
           pattern: "(iframe.html)"
           string: ${{ steps.chromatic_tests.outputs.storybookUrl }}
           replace-with: ""
-      - name: Declare some variables
+
+      - name: Get commit sha
         id: vars
         shell: bash
         run: |
@@ -72,7 +71,37 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :dart: [Status](${{steps.chromatic_tests.outputs.status}})
 
-            `${{ steps.vars.outputs.sha_short }}`
+            commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
+
+  chromatic-push:
+    if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name == 'push'"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - name: Node-modules cache
+        uses: actions/cache@v2
+        id: node-cache
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: install
+        if: steps.node-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      - name: postinstall
+        if: steps.node-cache.outputs.cache-hit == 'true'
+        run: yarn postinstall
+      - name: Boot
+        run: yarn boot
+      - name: run chromatic
+        uses: chromaui/action@v1
+        with:
+          token: ${{ secrets.GIT_REPO }}
+          projectToken: ${{ secrets.CHROMATIC }}
+          exitZeroOnChanges: true
