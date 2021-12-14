@@ -21,11 +21,11 @@ export interface StepIndicatorProps
    */
   className?: string;
   /**
-   * Current active step
+   * Current active step index
    */
   activeStep: number;
   /**
-   * Callback clicked step
+   * Callback for clicked step index
    */
   onStepChange: (step: number) => void;
   /**
@@ -34,9 +34,10 @@ export interface StepIndicatorProps
    */
   hideLabels?: boolean;
   /**
-   * enables `hideLabels` internally when steps start to overflow
+   * enables `hideLabels` internally when steps start to overflow.
+   * @note declaring `hideLabels` overwrites this functionality
    */
-  autoResponsive?: boolean;
+  responsive?: boolean;
 }
 
 interface StepIndicatorComponent
@@ -65,7 +66,7 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
       activeStep,
       hideLabels,
       onStepChange,
-      autoResponsive,
+      responsive,
       ...rest
     },
     ref
@@ -75,7 +76,7 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
 
     const [showLabels, setShowLabels] = useState(true);
 
-    const removeLabels = hideLabels ?? (!!autoResponsive && !showLabels);
+    const removeLabels = hideLabels ?? (!!responsive && !showLabels);
 
     const stepsWithIndex = React.Children.map(children, (step, index) => {
       return React.isValidElement<StepIndicatorStepProps>(step) ? (
