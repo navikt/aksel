@@ -34,10 +34,10 @@ jobs:
       - name: run chromatic
         uses: chromaui/action@v1
         id: chromatic_tests
+        continue-on-error: true
         with:
           token: ${{ secrets.GIT_REPO }}
           projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: true
 
       - name: replace storybook url
         uses: frabert/replace-string-action@v2.0
@@ -71,9 +71,17 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
+            - :dart: [Statuscode](${{steps.chromatic_tests.outputs.code}})
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
+
+      - name: Chromatic status
+        if: ${{ steps.chromatic_tests.outputs.code }} != 0
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Chromatic found visual changes, review them first')
 
   chromatic-push:
     if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name == 'push'"
