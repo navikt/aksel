@@ -3,6 +3,8 @@ name: Chromatic tests
 on:
   push:
     branches: [chromatic-testbranch]
+  pull_request:
+    branches: [chromatic-testbranch]
   workflow_dispatch:
 
 jobs:
