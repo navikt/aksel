@@ -22,6 +22,12 @@ class Ekspanderbartpanel extends React.Component<
     this.handleClick = this.handleClick.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.apen !== undefined && this.props.apen !== prevProps.apen) {
+      this.setState({ apen: this.props.apen });
+    }
+  }
+
   handleClick(event: React.SyntheticEvent<HTMLButtonElement>): void {
     event.preventDefault();
     this.setState({ apen: !this.state.apen });

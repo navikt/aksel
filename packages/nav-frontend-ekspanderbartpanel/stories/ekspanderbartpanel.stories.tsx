@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Ekspanderbartpanel from "../src/index";
 import { Normaltekst, Undertittel } from "nav-frontend-typografi";
 import Etikett from "nav-frontend-etiketter";
@@ -88,3 +88,18 @@ export const All = () => (
     </Ekspanderbartpanel>
   </div>
 );
+
+export const Controlled = () => {
+  const [open, setOpen] = useState(true);
+  return (
+    <>
+      <button onClick={() => setOpen((open) => !open)}>Toggle</button>
+      <Ekspanderbartpanel
+        tittel="Default, klikk her for å åpne/lukke panelet"
+        apen={open}
+      >
+        Panelet vil da ekspandere og vise innholdet.
+      </Ekspanderbartpanel>
+    </>
+  );
+};
