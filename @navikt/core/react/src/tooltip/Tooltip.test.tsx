@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { Tooltip } from "..";
 import faker from "faker";
 
-// Default delay in component
+// Default delay <Tooltip/>
 const delay = 150;
 
 afterEach(cleanup);
