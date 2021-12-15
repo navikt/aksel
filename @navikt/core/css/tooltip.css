@@ -46,35 +46,14 @@
   bottom: calc(0.75rem / -2);
 }
 
-.navds-tooltip[data-popper-placement^="top"] > .navds-tooltip__arrow::before {
-  border-left-color: transparent;
-  border-top-color: transparent;
-}
-
 .navds-tooltip[data-popper-placement^="bottom"] > .navds-tooltip__arrow {
   top: calc(0.75rem / -2);
-}
-
-/* prettier-ignore */
-.navds-tooltip[data-popper-placement^="bottom"] > .navds-tooltip__arrow::before {
-  border-bottom-color: transparent;
-  border-right-color: transparent;
 }
 
 .navds-tooltip[data-popper-placement^="left"] > .navds-tooltip__arrow {
   right: calc(0.75rem / -2);
 }
 
-.navds-tooltip[data-popper-placement^="left"] > .navds-tooltip__arrow::before {
-  border-left-color: transparent;
-  border-bottom-color: transparent;
-}
-
 .navds-tooltip[data-popper-placement^="right"] > .navds-tooltip__arrow {
   left: calc(0.75rem / -2);
-}
-
-.navds-tooltip[data-popper-placement^="right"] > .navds-tooltip__arrow::before {
-  border-right-color: transparent;
-  border-top-color: transparent;
 }
