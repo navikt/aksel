@@ -38,6 +38,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
+          exitZeroOnChanges: false
 
       - name: replace storybook url
         uses: frabert/replace-string-action@v2.0
