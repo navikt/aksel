@@ -39,11 +39,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
 
-      - name: Log chromatic output
-        shell: bash
-        run: |
-          echo "OUT: ${{steps.chromatic_tests.outputs.code}}"
-
       - name: replace storybook url
         uses: frabert/replace-string-action@v2.0
         id: storybook_url
@@ -67,7 +62,7 @@ jobs:
           body-includes: Chromatic build-output
 
       - name: Create or update comment
-        if: ${{steps.chromatic_tests.outcome == "success"}}
+        if: steps.chromatic_tests.outcome == 'success'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -83,7 +78,7 @@ jobs:
           edit-mode: replace
 
       - name: Create or update failed comment
-        if: ${{steps.chromatic_tests.outcome != "success"}}
+        if: steps.chromatic_tests.outcome != 'success'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -127,4 +122,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
-          exitZeroOnChanges: true
+          autoAcceptChanges: true
