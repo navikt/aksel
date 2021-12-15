@@ -33,7 +33,7 @@ export const All = () => {
         }}
       >
         {placements.map((placement) => (
-          <Template placement={placement} />
+          <Template placement={placement} key={placement} />
         ))}
       </div>
       <h2>Controlled</h2>
