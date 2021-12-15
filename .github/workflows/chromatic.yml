@@ -2,9 +2,9 @@ name: Chromatic
 
 on:
   push:
-    branches: [master]
+    branches: [test/chromatic-gha]
   pull_request:
-    branches: [master]
+    branches: [test/chromatic-gha]
 
 jobs:
   chromatic-pr:
