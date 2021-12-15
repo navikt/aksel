@@ -38,7 +38,7 @@
   width: 100%;
   transition: height 0.1s ease-out;
   display: block;
-  min-height: 48px;
+  min-height: 3rem;
 }
 
 .navds-textarea--counter {
@@ -56,7 +56,7 @@
 
 .navds-form-field--small .navds-textarea__input {
   padding: var(--navds-spacing-1);
-  min-height: 32px;
+  min-height: 2rem;
 }
 
 .navds-form-field--small .navds-textarea--counter.navds-textarea__input {
