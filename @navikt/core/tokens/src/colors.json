@@ -375,7 +375,7 @@
           },
           "warning": {
             "background": {
-              "value": "{navds.global.color.orange.100.value}"
+              "value": "{navds.global.color.red.100.value}"
             },
             "border": {
               "value": "{navds.global.color.orange.600.value}"
