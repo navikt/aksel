@@ -4,6 +4,7 @@ import TogglesButton, { ToggleButtonsType } from "./ToggleButton";
 
 export interface TogglesProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
+  size?: "medium" | "small";
 }
 
 interface TogglesComponent
@@ -14,9 +15,13 @@ interface TogglesComponent
 }
 
 const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, size = "medium", ...rest }, ref) => {
     return (
-      <div ref={ref} className={cl("navds-toggles", className)} {...rest}>
+      <div
+        ref={ref}
+        className={cl("navds-toggles", className, `navds-toggles--${size}`)}
+        {...rest}
+      >
         {children}
       </div>
     );
