@@ -5,7 +5,6 @@ module.exports = {
   },
   devServer: { stats: "errors-only" },
   stories: [
-    "../.storybook/**/*.stories.@(mdx)",
     "../packages/**/*.stories.@(js|jsx|ts|tsx|mdx)",
     "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
   ],

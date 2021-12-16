@@ -27,11 +27,8 @@
     "react-docgen": "node utilities/scripts/react-docgen.js"
   },
   "workspaces": [
-    "website",
-    "packages/*",
     "@navikt/core/*",
-    "@navikt/internal/*",
-    "utilities/build/from-git-fix"
+    "@navikt/internal/*"
   ],
   "prettier": {},
   "eslintConfig": {
