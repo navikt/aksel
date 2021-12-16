@@ -23,11 +23,26 @@ export const All = () => {
 
   const [activeValue, setActiveValue] = useState(["First"]);
 
-  console.log(activeValue);
   return (
     <div>
       <h2>Toggles</h2>
       <Toggles value={activeValue} onChange={(e) => setActiveValue(e)}>
+        {Buttons()}
+      </Toggles>
+      <h2>Toggles exclusive</h2>
+      <Toggles
+        exclusive
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        {Buttons()}
+      </Toggles>
+      <h2>Toggles required</h2>
+      <Toggles required value={activeValue} onChange={(e) => setActiveValue(e)}>
+        {Buttons()}
+      </Toggles>
+      <h2>Toggles required exclusive</h2>
+      <Toggles required value={activeValue} onChange={(e) => setActiveValue(e)}>
         {Buttons()}
       </Toggles>
       <h2>Toggles icons</h2>

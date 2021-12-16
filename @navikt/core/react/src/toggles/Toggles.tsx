@@ -1,5 +1,10 @@
 import cl from "classnames";
-import React, { createContext, forwardRef, HTMLAttributes } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  HTMLAttributes,
+  useState,
+} from "react";
 import TogglesButton, { ToggleButtonsType } from "./ToggleButton";
 
 export interface TogglesProps
@@ -16,12 +21,16 @@ export interface TogglesProps
   /**
    * Acitive value
    */
-  value: string | string[];
+  value: string[];
   onChange: (e: string[]) => void;
   /**
    * Allows only a single active element
    */
   exclusive?: boolean;
+  /**
+   * requires atleast one toggle to be active
+   */
+  required?: boolean;
 }
 
 interface TogglesComponent
@@ -33,19 +42,58 @@ interface TogglesComponent
 
 interface TogglesContextProps {
   size: string;
-  activeValue: string | string[];
+  activeValue: string[];
   handleChange: (val: string) => void;
 }
 
 export const TogglesContext = createContext<TogglesContextProps | null>(null);
 
 const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
-  ({ className, children, size = "medium", value, onChange, ...rest }, ref) => {
-    const handleChange = (val: string) => {
-      onChange([val]);
+  (
+    {
+      className,
+      children,
+      size = "medium",
+      value,
+      onChange,
+      exclusive,
+      required,
+      ...rest
+    },
+    ref
+  ) => {
+    const [state, setState] = useState<string[]>([]);
+
+    const handleChange = (v: string) => {
+      const newValue = value ? value : state;
+      let newState: string[] = [];
+
+      switch (true) {
+        case !!required && !!exclusive:
+          newState = [v];
+          break;
+        case required:
+          newState =
+            newValue.includes(v) && newValue.length === 1
+              ? [v]
+              : newValue.includes(v)
+              ? newValue.filter((x) => x !== v)
+              : [...newValue, v];
+          break;
+        case exclusive:
+          newState = [v];
+          break;
+        default:
+          newState = newValue.includes(v)
+            ? newValue.filter((x) => x !== v)
+            : [...newValue, v];
+          break;
+      }
+
+      value === undefined && setState(newState);
+      onChange(newState);
     };
 
-    console.log(value);
     return (
       <div
         ref={ref}
@@ -54,9 +102,10 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
         {...rest}
       >
         <TogglesContext.Provider
-          value={{ size, activeValue: value, handleChange }}
-        ></TogglesContext.Provider>
-        {children}
+          value={{ size, activeValue: value, handleChange: handleChange }}
+        >
+          {children}
+        </TogglesContext.Provider>
       </div>
     );
   }

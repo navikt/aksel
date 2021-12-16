@@ -22,29 +22,22 @@ const TogglesButton: ToggleButtonsType = forwardRef(
   ({ className, children, value, ...rest }, ref) => {
     const context = useContext(TogglesContext);
 
-    const isActive = () =>
-      Array.isArray(context?.activeValue)
-        ? context?.activeValue.includes(value)
-        : context?.activeValue === value;
-
     const handleClick = (e) => {
       context?.handleChange(value);
       rest.onClick && rest.onClick(e);
     };
 
-    /* console.log({ isactive: isActive() });
-    console.log({
-      array: Array.isArray(context?.activeValue),
-      v: context?.activeValue,
-    }); */
     return (
       <button
         {...rest}
         ref={ref}
         className={cl("navds-toggles__button", className, {
-          "navds-toggles__button--active": isActive(),
+          "navds-toggles__button--active": !!context?.activeValue.includes(
+            value
+          ),
         })}
         onClick={(e) => handleClick(e)}
+        aria-pressed={!!context?.activeValue.includes(value)}
       >
         <BodyShort as="span" className="navds-toggles__button-inner">
           {children}
