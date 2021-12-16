@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Hamburger } from "@navikt/ds-icons";
 import { Toggles } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
@@ -11,51 +11,44 @@ export default {
 } as Meta;
 
 export const All = () => {
+  const Buttons = (icon?: boolean) => (
+    <>
+      {["First", "Second", "Thrid", "Fourth"].map((x) => (
+        <Toggles.Button key={Math.random()} value={x}>
+          {icon ? <Hamburger /> : x}
+        </Toggles.Button>
+      ))}
+    </>
+  );
+
+  const [activeValue, setActiveValue] = useState(["First"]);
+
+  console.log(activeValue);
   return (
     <div>
       <h2>Toggles</h2>
-      <Toggles>
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
+      <Toggles value={activeValue} onChange={(e) => setActiveValue(e)}>
+        {Buttons()}
       </Toggles>
       <h2>Toggles icons</h2>
-      <Toggles>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
+      <Toggles value={activeValue} onChange={(e) => setActiveValue(e)}>
+        {Buttons(true)}
       </Toggles>
       <h2>Toggles small</h2>
-      <Toggles size="small">
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
-        <Toggles.Button>Tekst</Toggles.Button>
+      <Toggles
+        size="small"
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        {Buttons()}
       </Toggles>
       <h2>Toggles icons small</h2>
-      <Toggles size="small">
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
-        <Toggles.Button>
-          <Hamburger />
-        </Toggles.Button>
+      <Toggles
+        size="small"
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        {Buttons(true)}
       </Toggles>
     </div>
   );
