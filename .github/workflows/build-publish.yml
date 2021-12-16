@@ -100,8 +100,6 @@ jobs:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
       - name: Publish to Github registry
         run: |
-          rm lerna.json && cp utilities/lerna.json lerna.json
-          git add . && git commit -m "tmp"
           yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
 
   publish-pages:

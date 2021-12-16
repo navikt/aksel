@@ -13,7 +13,6 @@
     }
   },
   "packages": [
-    "packages/*",
     "@navikt/core/css",
     "@navikt/core/react",
     "@navikt/core/icons",
