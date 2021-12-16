@@ -13,8 +13,8 @@ export default {
 export const All = () => {
   const Buttons = (icon?: boolean) => (
     <>
-      {["First", "Second", "Thrid", "Fourth"].map((x) => (
-        <Toggles.Button key={Math.random()} value={x}>
+      {["First", "Second", "Third", "Fourth toggle"].map((x) => (
+        <Toggles.Button key={x} value={x}>
           {icon ? <Hamburger /> : x}
         </Toggles.Button>
       ))}
@@ -42,7 +42,12 @@ export const All = () => {
         {Buttons()}
       </Toggles>
       <h2>Toggles required exclusive</h2>
-      <Toggles required value={activeValue} onChange={(e) => setActiveValue(e)}>
+      <Toggles
+        required
+        exclusive
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
         {Buttons()}
       </Toggles>
       <h2>Toggles icons</h2>
@@ -60,6 +65,22 @@ export const All = () => {
       <h2>Toggles icons small</h2>
       <Toggles
         size="small"
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        {Buttons(true)}
+      </Toggles>
+      <h2>Toggles fullwidth</h2>
+      <Toggles
+        fullWidth
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        {Buttons()}
+      </Toggles>
+      <h2>Toggles icons fullWidth</h2>
+      <Toggles
+        fullWidth
         value={activeValue}
         onChange={(e) => setActiveValue(e)}
       >

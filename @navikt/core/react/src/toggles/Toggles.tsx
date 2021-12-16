@@ -31,6 +31,10 @@ export interface TogglesProps
    * requires atleast one toggle to be active
    */
   required?: boolean;
+  /**
+   * uses all avalaible space
+   */
+  fullWidth?: boolean;
 }
 
 interface TogglesComponent
@@ -41,7 +45,7 @@ interface TogglesComponent
 }
 
 interface TogglesContextProps {
-  size: string;
+  size: "medium" | "small";
   activeValue: string[];
   handleChange: (val: string) => void;
 }
@@ -58,6 +62,7 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
       onChange,
       exclusive,
       required,
+      fullWidth,
       ...rest
     },
     ref
@@ -69,7 +74,7 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
       let newState: string[] = [];
 
       switch (true) {
-        case !!required && !!exclusive:
+        case required && exclusive:
           newState = [v];
           break;
         case required:
@@ -81,7 +86,7 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
               : [...newValue, v];
           break;
         case exclusive:
-          newState = [v];
+          newState = newValue.includes(v) ? [] : [v];
           break;
         default:
           newState = newValue.includes(v)
@@ -97,7 +102,9 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
     return (
       <div
         ref={ref}
-        className={cl("navds-toggles", className, `navds-toggles--${size}`)}
+        className={cl("navds-toggles", className, `navds-toggles--${size}`, {
+          "navds-toggles--fullwidth": fullWidth,
+        })}
         role="group"
         {...rest}
       >

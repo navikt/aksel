@@ -39,7 +39,11 @@ const TogglesButton: ToggleButtonsType = forwardRef(
         onClick={(e) => handleClick(e)}
         aria-pressed={!!context?.activeValue.includes(value)}
       >
-        <BodyShort as="span" className="navds-toggles__button-inner">
+        <BodyShort
+          as="span"
+          className="navds-toggles__button-inner"
+          size={context?.size}
+        >
           {children}
         </BodyShort>
       </button>
