@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "../index";
 import { Success } from "@navikt/ds-icons";
+import { Loader } from "../..";
 
 export default {
   title: "ds-react/button",
@@ -101,6 +102,12 @@ export const All = () => {
             <span className="sr-only">Success ikon</span>
             <Success />
           </Button>
+        ))}
+      </Section>
+      <h2>Button w/loader</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} loading></Button>
         ))}
       </Section>
     </div>

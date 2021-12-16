@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
+import { Loader } from "../loader";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,6 +25,8 @@ export interface ButtonProps
    * @default false
    */
   disabled?: boolean;
+
+  loading?: boolean;
 }
 
 const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
@@ -34,6 +37,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       className,
       children,
       size = "medium",
+      loading = false,
       ...rest
     },
     ref
@@ -50,6 +54,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     >
       <BodyShort as="span" className="navds-button__inner" size={size}>
         {children}
+        {loading && <Loader />}
       </BodyShort>
     </Component>
   )
