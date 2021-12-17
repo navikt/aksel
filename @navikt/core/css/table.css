@@ -50,7 +50,7 @@ background-color: var(
 
 .navds-table__body .navds-table__row:hover .navds-table__header-cell,
 .navds-table__body .navds-table__row:hover .navds-table__data-cell {
-  border-color: var(--navds-global-color-gray-600);
+  border-color: var(--navds-semantic-color-border);
 }
 
 .navds-table--small .navds-table__header-cell,
