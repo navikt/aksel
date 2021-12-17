@@ -1,5 +1,18 @@
 :root {
   --navds-table-cell-color-border: var(--navds-semantic-color-border-muted);
+  --navds-table-row-color-background-hover: var(
+    --navds-semantic-color-canvas-background
+  );
+  --navds-table-row-color-background-selected: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+  --navds-table-row-color-background-selected-hover: var(
+    --navds-global-color-blue-100
+  );
+  --navds-table-row-color-background-zebra: var(
+    --navds-semantic-color-component-background-alternate
+  );
+  --navds-table-cell-color-border-hover: var(--navds-semantic-color-border);
 }
 
 .navds-table {
@@ -21,23 +34,21 @@
 }
 
 .navds-table__body .navds-table__row:hover {
-  background-color: var(--navds-semantic-color-canvas-background);
+  background-color: var(--navds-table-row-color-background-hover);
 }
 
 .navds-table__row--selected {
-background-color: var(
-    --navds-semantic-color-interaction-primary-hover-subtle
- );
+  background-color: var(--navds-table-row-color-background-selected);
 }
 
 .navds-table__body .navds-table__row--selected:hover {
-  background-color: var(--navds-global-color-blue-100);
+  background-color: var(--navds-table-row-color-background-selected-hover);
 }
 
 .navds-table--zebra-stripes
   .navds-table__body
   .navds-table__row:nth-of-type(odd):not(:hover) {
-  background-color: var(--navds-semantic-color-component-background-alternate);
+  background-color: var(--navds-table-row-color-background-zebra);
 }
 
 .navds-table__header-cell,
@@ -50,7 +61,7 @@ background-color: var(
 
 .navds-table__body .navds-table__row:hover .navds-table__header-cell,
 .navds-table__body .navds-table__row:hover .navds-table__data-cell {
-  border-color: var(--navds-semantic-color-border);
+  border-color: var(--navds-table-cell-color-border-hover);
 }
 
 .navds-table--small .navds-table__header-cell,
