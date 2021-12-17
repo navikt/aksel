@@ -142,7 +142,7 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
   const [selectedRows, toggleSelectedRow] = useToggleList([]);
 
   return (
-    <Table size={size}>
+    <Table size={size} zebraStripes>
       <Table.Body>
         <Table.Row>
           <Table.DataCell>
