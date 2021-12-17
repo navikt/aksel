@@ -25,7 +25,9 @@
 }
 
 .navds-table__row--selected {
-  background-color: #e6f0ff;
+background-color: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+ );
 }
 
 .navds-table__body .navds-table__row--selected:hover {
