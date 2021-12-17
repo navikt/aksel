@@ -41,23 +41,31 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       ...rest
     },
     ref
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(
-        className,
-        "navds-button",
-        `navds-button--${variant}`,
-        `navds-button--${size}`
-      )}
-    >
-      <BodyShort as="span" className="navds-button__inner" size={size}>
-        {children}
-        {loading && <Loader />}
-      </BodyShort>
-    </Component>
-  )
+  ) => {
+    const content = loading ? (
+      <div style={{ visibility: "hidden" }}>{children}</div>
+    ) : (
+      children
+    );
+    const spinner = loading ? <Loader /> : null;
+    return (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(
+          className,
+          "navds-button",
+          `navds-button--${variant}`,
+          `navds-button--${size}`
+        )}
+      >
+        <BodyShort as="span" className="navds-button__inner" size={size}>
+          {content}
+          {spinner}
+        </BodyShort>
+      </Component>
+    );
+  }
 );
 
 export default Button;
