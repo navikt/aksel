@@ -166,13 +166,13 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
               hideLabel
               checked={selectedRows.includes("1")}
               onChange={() => toggleSelectedRow("1")}
-              aria-labelledby="x_r1"
+              aria-labelledby={`x_r1-${size}`}
             >
               {" "}
             </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
-            <span id="x_r1">Donald Smith</span>
+            <span id={`x_r1-${size}`}>Donald Smith</span>
           </Table.HeaderCell>
           <Table.DataCell>32</Table.DataCell>
           <Table.DataCell>USA</Table.DataCell>
@@ -185,13 +185,13 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
               hideLabel
               checked={selectedRows.includes("2")}
               onChange={() => toggleSelectedRow("2")}
-              aria-labelledby="x_r2"
+              aria-labelledby={`x_r2-${size}`}
             >
               {" "}
             </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
-            <span id="x_r2">Preben Aalborg</span>
+            <span id={`x_r2-${size}`}>Preben Aalborg</span>
           </Table.HeaderCell>
           <Table.DataCell>44</Table.DataCell>
           <Table.DataCell>Denmark</Table.DataCell>
@@ -204,13 +204,13 @@ const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
               hideLabel
               checked={selectedRows.includes("3")}
               onChange={() => toggleSelectedRow("3")}
-              aria-labelledby="x_r3"
+              aria-labelledby={`x_r3-${size}`}
             >
               {" "}
             </Checkbox>
           </Table.DataCell>
           <Table.HeaderCell scope="row">
-            <span id="x_r3">Rudolph Bachenmeier</span>
+            <span id={`x_r3-${size}`}>Rudolph Bachenmeier</span>
           </Table.HeaderCell>
           <Table.DataCell>32</Table.DataCell>
           <Table.DataCell>Germany</Table.DataCell>
