@@ -31,7 +31,7 @@ background-color: var(
 }
 
 .navds-table__body .navds-table__row--selected:hover {
-  background-color: #cce1ff;
+  background-color: var(--navds-global-color-blue-100);
 }
 
 .navds-table--zebra-stripes
