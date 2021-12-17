@@ -47,7 +47,7 @@
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__row:nth-of-type(odd):not(:hover) {
+  .navds-table__row:nth-of-type(odd):not(:hover):not(.navds-table__row--selected) {
   background-color: var(--navds-table-row-color-background-zebra);
 }
 
