@@ -49,6 +49,8 @@ Man kan både sette en description på CheckboxGroup og selve checkbox
 
 ## Errors
 
+Feilmeldinger kan bare settes på gruppa
+
 ```jsx
 <CheckboxGroup legend="Mollit eiusmod" error="Boks nr 2 må være valgt">
   <Checkbox value="Apple">Apple</Checkbox>
@@ -65,37 +67,23 @@ Man kan både sette en description på CheckboxGroup og selve checkbox
   </CheckboxGroup>
 </Canvas>
 
-## Errors uten errorPropagation
+Enkelt-checkboxer tar en `boolean` error prop
 
 ```jsx
-<CheckboxGroup
-  legend="Mollit eiusmod"
-  errorPropagation={false}
-  error="Boks nr 2 må være valgt"
->
-  <Checkbox value="Apple">Apple</Checkbox>
-  <Checkbox value="Orange">Orange</Checkbox>
-  <Checkbox value="Melon">Melon</Checkbox>
-</CheckboxGroup>
+<Checkbox value="Apple" error>
+  Apple
+</Checkbox>
 ```
 
 <Canvas>
-  <CheckboxGroup
-    legend="Mollit eiusmod"
-    errorPropagation={false}
-    error="Boks nr 2 må være valgt"
-  >
-    <Checkbox value="Apple">Apple</Checkbox>
-    <Checkbox value="Orange" error="Boksen må være valgt">
-      Orange
-    </Checkbox>
-    <Checkbox value="Melon">Melon</Checkbox>
-  </CheckboxGroup>
+  <Checkbox value="Apple" error>
+    Apple
+  </Checkbox>
 </Canvas>
 
 ## Sizing
 
-Checkboxer har default 44px høy klikkflate. Med size="small" blir denne til 24px slik som før
+Checkboxer har default 48px høy klikkflate. Med size="small" blir klikkflaten 32px
 
 ```jsx
 <CheckboxGroup
@@ -166,31 +154,15 @@ Ved bruk av `hideLegend` på CheckboxGroup kan man gjøre slik at legend/descrip
 Ved bruk av `hideLabel` kan man lettere ta i bruk checkbox internt i eks tabeller.
 
 ```jsx
-<CheckboxGroup legend="Mollit eiusmod" hideLegend>
-  <Checkbox value="Apple" hideLabel>
-    Apple
-  </Checkbox>
-  <Checkbox value="Orange" hideLabel>
-    Orange
-  </Checkbox>
-  <Checkbox value="Melon" hideLabel>
-    Melon
-  </Checkbox>
-</CheckboxGroup>
+<Checkbox value="Orange" hideLabel>
+  Orange
+</Checkbox>
 ```
 
 <Canvas>
-  <CheckboxGroup legend="Mollit eiusmod" hideLegend>
-    <Checkbox value="Apple" hideLabel>
-      Apple
-    </Checkbox>
-    <Checkbox value="Orange" hideLabel>
-      Orange
-    </Checkbox>
-    <Checkbox value="Melon" hideLabel>
-      Melon
-    </Checkbox>
-  </CheckboxGroup>
+  <Checkbox value="Orange" hideLabel>
+    Orange
+  </Checkbox>
 </Canvas>
 
 ## Disabled
@@ -206,7 +178,7 @@ NOTE: Husk at disabled bør unngås!
   <Checkbox value="Melon">Melon</Checkbox>
 </CheckboxGroup>
 
-<CheckboxGroup legend="Mollit eiusmod" >
+<CheckboxGroup legend="Mollit eiusmod">
   <Checkbox value="Apple" disabled>Apple</Checkbox>
   <Checkbox value="Orange">Orange</Checkbox>
   <Checkbox value="Melon">Melon</Checkbox>

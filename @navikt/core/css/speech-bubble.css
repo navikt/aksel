@@ -1,11 +1,14 @@
 :root {
-  --navds-speechbubble-color-background: var(--navds-color-gray-10);
-  --navds-speechbubble-color-shadow: var(--navds-color-gray-20);
-  --navds-speechbubble-color-illustration: var(--navds-color-darkgray);
-  --navds-speechbubble-color-illustration-background: var(
-    --navds-color-gray-20
+  --navds-speechbubble-color-background: var(
+    --navds-semantic-color-component-background-alternate
   );
-  --navds-speechbubble-color-detail-text: var(--navds-color-gray-60);
+  --navds-speechbubble-color-illustration: var(--navds-semantic-color-text);
+  --navds-speechbubble-color-illustration-background: var(
+    --navds-semantic-color-canvas-background
+  );
+  --navds-speechbubble-color-detail-text: var(
+    --navds-semantic-color-text-muted
+  );
 }
 
 .navds-speechbubble {
@@ -52,7 +55,7 @@
 
 .navds-speechbubble__bubble {
   padding: 1rem;
-  box-shadow: 0 2px 4px 0 var(--navds-speechbubble-color-shadow);
+  box-shadow: var(--navds-shadow-popover);
   width: fit-content;
   max-width: 37.5rem;
   background-color: var(--navds-speechbubble-color-background);

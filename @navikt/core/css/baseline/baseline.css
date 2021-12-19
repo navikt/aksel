@@ -23,12 +23,12 @@ html {
 body {
   font-family: var(--navds-font-family);
   line-height: 1.333;
-  color: var(--navds-color-text-primary);
+  color: var(--navds-semantic-color-text);
   font-size: 1.125rem;
 }
 
 a {
-  color: var(--navds-color-text-link);
+  color: var(--navds-semantic-color-link);
 }
 
 /* https://web.dev/prefers-reduced-motion/ */

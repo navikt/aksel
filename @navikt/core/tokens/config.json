@@ -1,5 +1,5 @@
 {
-  "source": ["src/index.js"],
+  "source": ["src/index.js", "src/**/*.json"],
   "platforms": {
     "scss": {
       "transformGroup": "scss",
@@ -44,7 +44,7 @@
         },
         {
           "destination": "tokens-cjs.js",
-          "format": "javascript/module"
+          "format": "javascript/module-flat"
         }
       ]
     }

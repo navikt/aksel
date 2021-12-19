@@ -52,7 +52,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
         className,
         "navds-form-field",
         `navds-form-field--${size}`,
-        { "navds-select--error": hasError }
+        {
+          "navds-select--error": hasError,
+          "navds-select--disabled": !!inputProps.disabled,
+        }
       )}
     >
       <Label
@@ -67,6 +70,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
       </Label>
       {!!description && (
         <BodyShort
+          as="div"
           className={cl("navds-select__description", {
             "sr-only": hideLabel,
           })}

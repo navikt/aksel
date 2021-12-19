@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useFormField } from "../useFormField";
 import { RadioProps } from "./Radio";
 import { RadioGroupContext } from "./RadioGroup";
+import { omit } from "../..";
 
 /**
  * Handles props for Radios in context with Fieldset and RadioGroup
@@ -9,7 +10,10 @@ import { RadioGroupContext } from "./RadioGroup";
 export const useRadio = (props: RadioProps) => {
   const radioGroup = useContext(RadioGroupContext);
 
-  const { inputProps, ...rest } = useFormField(props, "radio");
+  const { inputProps, ...rest } = useFormField(
+    omit(props, ["description"]),
+    "radio"
+  );
 
   if (!radioGroup) {
     console.warn("<Radio> must be used inside <RadioGroup>.");

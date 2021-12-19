@@ -1,3 +1,20 @@
+:root {
+  --navds-table-cell-color-border: var(--navds-semantic-color-border-muted);
+  --navds-table-row-color-background-hover: var(
+    --navds-semantic-color-canvas-background
+  );
+  --navds-table-row-color-background-selected: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+  --navds-table-row-color-background-selected-hover: var(
+    --navds-global-color-blue-100
+  );
+  --navds-table-row-color-background-zebra: var(
+    --navds-semantic-color-component-background-alternate
+  );
+  --navds-table-cell-color-border-hover: var(--navds-semantic-color-border);
+}
+
 .navds-table {
   border-collapse: collapse;
   width: 100%;
@@ -16,13 +33,50 @@
   display: table-row;
 }
 
-.navds-table__cell {
-  display: table-cell;
-  padding: var(--navds-spacing-4);
-  text-align: left;
-  border-bottom: var(--navds-border-default);
+.navds-table__body .navds-table__row:hover {
+  background-color: var(--navds-table-row-color-background-hover);
 }
 
-.navds-table--small .navds-table__cell {
+.navds-table__row--selected {
+  background-color: var(--navds-table-row-color-background-selected);
+}
+
+.navds-table__body .navds-table__row--selected:hover {
+  background-color: var(--navds-table-row-color-background-selected-hover);
+}
+
+.navds-table--zebra-stripes
+  .navds-table__body
+  .navds-table__row:nth-of-type(odd):not(:hover):not(.navds-table__row--selected) {
+  background-color: var(--navds-table-row-color-background-zebra);
+}
+
+.navds-table__header-cell,
+.navds-table__data-cell {
+  display: table-cell;
+  padding: var(--navds-spacing-4);
+  border-bottom: 1px solid var(--navds-table-cell-color-border);
+  text-align: left;
+}
+
+.navds-table__body .navds-table__row:hover .navds-table__header-cell,
+.navds-table__body .navds-table__row:hover .navds-table__data-cell {
+  border-color: var(--navds-table-cell-color-border-hover);
+}
+
+.navds-table--small .navds-table__header-cell,
+.navds-table--small .navds-table__data-cell {
   padding: var(--navds-spacing-2);
+}
+
+.navds-table .navds-checkbox .navds-checkbox__input {
+  top: -12px;
+}
+
+.navds-table .navds-checkbox--small .navds-checkbox__input {
+  top: -6px;
+}
+
+.navds-table .navds-checkbox .navds-checkbox__label {
+  padding: 0;
 }

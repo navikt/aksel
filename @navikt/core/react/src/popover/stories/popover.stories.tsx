@@ -17,7 +17,7 @@ const Template = (props) => {
     <>
       <div
         style={{
-          background: "var(--navds-color-gray-60)",
+          background: "var(--navds-global-color-gray-600)",
           textAlign: "center",
           width: "2rem",
           height: "2rem",

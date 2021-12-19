@@ -1,8 +1,12 @@
 :root {
-  --navdsi-header-color-background: var(--navds-color-darkgray);
-  --navdsi-header-color-border: var(--navds-color-gray-40);
-  --navdsi-header-color-text: var(--navds-color-text-inverse);
-  --navdsi-header-focus: inset 0 0 0 2px var(--navds-color-blue-10);
+  --navdsi-header-color-background: var(
+    --navds-semantic-color-component-background-inverted
+  );
+  --navdsi-header-color-border: var(--navds-semantic-color-border-muted);
+  --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
+  --navdsi-header-focus: inset 0 0 0 2px var(--navds-global-color-blue-100);
+  --navdsi-header-color-hover: var(--navds-global-color-gray-800);
+  --navdsi-header-color-active: var(--navds-global-color-gray-600);
 }
 
 .navdsi-header {
@@ -61,7 +65,7 @@ button.navdsi-header__title {
 a.navdsi-header__title:hover,
 button.navdsi-header__title:hover,
 .navdsi-header__button:hover {
-  background-color: var(--navds-color-gray-80);
+  background-color: var(--navdsi-header-color-hover);
 }
 
 .navdsi-header__title:focus,
@@ -73,7 +77,7 @@ button.navdsi-header__title:hover,
 a.navdsi-header__title:active,
 button.navdsi-header__title:active,
 .navdsi-header__button:active {
-  background-color: var(--navds-color-gray-60);
+  background-color: var(--navdsi-header-color-active);
 }
 
 .navdsi-header__user-button {

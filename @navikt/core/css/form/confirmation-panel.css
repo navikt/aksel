@@ -1,30 +1,30 @@
 :root {
   --navds-confirmation-panel-color-background: var(
-    --navds-color-warning-background
+    --navds-semantic-color-feedback-warning-background
   );
   --navds-confirmation-panel-color-background-checked: var(
-    --navds-color-success-background
+    --navds-semantic-color-feedback-success-background
   );
   --navds-confirmation-panel-color-border-checked: var(
-    --navds-color-success-background
+    --navds-semantic-color-feedback-success-background
   );
   --navds-confirmation-panel-color-background-error: var(
-    --navds-color-error-background
+    --navds-semantic-color-feedback-danger-background
   );
   --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
-    --navds-color-green-70
+    --navds-global-color-green-700
   );
   --navds-confirmation-panel-color-checkbox-border-checked-hover: var(
-    --navds-color-green-70
+    --navds-global-color-green-700
   );
   --navds-confirmation-panel-color-checkbox-background-checked: var(
-    --navds-color-green-50
+    --navds-global-color-green-500
   );
   --navds-confirmation-panel-color-checkbox-border-checked: var(
-    --navds-color-green-50
+    --navds-semantic-color-feedback-success-border
   );
   --navds-confirmation-panel-color-checkbox-label-checked: var(
-    --navds-color-darkgray
+    --navds-semantic-color-text
   );
 }
 
@@ -77,7 +77,7 @@
     --navds-confirmation-panel-color-checkbox-background-checked
   );
   border-color: var(--navds-confirmation-panel-color-checkbox-border-checked);
-  background-image: var(--navds-checkmark-image-white);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
 }
 
 .navds-confirmation-panel--checked
@@ -94,5 +94,5 @@
 .navds-confirmation-panel--checked
   .navds-checkbox__input:focus:hover
   + .navds-checkbox__label::before {
-  background-image: var(--navds-checkmark-image-white);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
 }
