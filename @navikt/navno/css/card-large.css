@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-/* ---- Generic styling ---- */
+/* ---- Elements ---- */
 .navds-card-large .navds-card__title {
   color: var(--navds-product-card-color-text);
   margin-bottom: var(--navds-spacing-4);

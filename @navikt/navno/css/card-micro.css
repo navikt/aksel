@@ -16,6 +16,7 @@
   padding: var(--navds-spacing-3) 0;
 }
 
+/* Ensure adjecent MicroCards are spaced between */
 .navds-card-micro:not(:last-of-type) {
   margin: 0 var(--navds-spacing-2) 0 0;
 }
