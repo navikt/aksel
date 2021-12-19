@@ -86,6 +86,26 @@ export const All = () => {
       >
         {Buttons(true)}
       </Toggles>
+      <h2>Toggles Single</h2>
+      <Toggles value={activeValue} onChange={(e) => setActiveValue(e)}>
+        <Toggles.Button value="First">First</Toggles.Button>
+      </Toggles>
+      <h2>Toggles Single small</h2>
+      <Toggles
+        size="small"
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        <Toggles.Button value="First">First</Toggles.Button>
+      </Toggles>
+      <h2>Toggles Single fullwidth</h2>
+      <Toggles
+        fullWidth
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
+        <Toggles.Button value="First">First</Toggles.Button>
+      </Toggles>
     </div>
   );
 };
