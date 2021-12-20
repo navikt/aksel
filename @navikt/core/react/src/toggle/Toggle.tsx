@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import TogglesButton, { ToggleButtonsType } from "./ToggleButton";
 
-export interface TogglesProps
+export interface ToggleProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange"> {
   /**
    * Toggles.Button elements
@@ -44,22 +44,22 @@ export interface TogglesProps
   fullWidth?: boolean;
 }
 
-interface TogglesComponent
+interface ToggleComponent
   extends React.ForwardRefExoticComponent<
-    TogglesProps & React.RefAttributes<HTMLDivElement>
+    ToggleProps & React.RefAttributes<HTMLDivElement>
   > {
   Button: ToggleButtonsType;
 }
 
-interface TogglesContextProps {
+interface ToggleContextProps {
   size: "medium" | "small";
   activeValue: string[];
   handleChange: (val: string) => void;
 }
 
-export const TogglesContext = createContext<TogglesContextProps | null>(null);
+export const ToggleContext = createContext<ToggleContextProps | null>(null);
 
-const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
+const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
   (
     {
       className,
@@ -118,7 +118,7 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
         role="group"
         {...rest}
       >
-        <TogglesContext.Provider
+        <ToggleContext.Provider
           value={{
             size,
             activeValue: value === undefined ? state : value,
@@ -126,12 +126,12 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
           }}
         >
           {children}
-        </TogglesContext.Provider>
+        </ToggleContext.Provider>
       </div>
     );
   }
-) as TogglesComponent;
+) as ToggleComponent;
 
-Toggles.Button = TogglesButton;
+Toggle.Button = TogglesButton;
 
-export default Toggles;
+export default Toggle;

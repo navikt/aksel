@@ -14,7 +14,7 @@ export * from "./panel";
 export * from "./popover";
 export * from "./speech-bubble";
 export * from "./tag";
-export * from "./toggles";
+export * from "./toggle";
 export * from "./table";
 export * from "./typography";
 export * from "./util";
