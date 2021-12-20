@@ -106,6 +106,19 @@ export const All = () => {
       >
         <Toggles.Button value="First">First</Toggles.Button>
       </Toggles>
+      <h2>Toggles defaultValues</h2>
+
+      <div>
+        <Toggles defaultValue={["First", "Second"]} onChange={(e) => null}>
+          {Buttons(false)}
+        </Toggles>
+      </div>
+      <br />
+      <div>
+        <Toggles defaultValue={["Third"]} onChange={(e) => null}>
+          {Buttons(false)}
+        </Toggles>
+      </div>
     </div>
   );
 };

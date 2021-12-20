@@ -22,7 +22,9 @@ const TogglesButton: ToggleButtonsType = forwardRef(
   ({ className, children, value, ...rest }, ref) => {
     const context = useContext(TogglesContext);
 
-    const handleClick = (e) => {
+    const handleClick = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
       context?.handleChange(value);
       rest.onClick && rest.onClick(e);
     };

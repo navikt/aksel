@@ -21,7 +21,14 @@ export interface TogglesProps
   /**
    * Acitive value
    */
-  value: string[];
+  value?: string[];
+  /**
+   * DefaultActive version if component should handle state
+   */
+  defaultValue?: string[];
+  /**
+   * Returns elements that wants to be active
+   */
   onChange: (e: string[]) => void;
   /**
    * Allows only a single active element
@@ -59,6 +66,7 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
       children,
       size = "medium",
       value,
+      defaultValue,
       onChange,
       exclusive,
       required,
@@ -67,7 +75,9 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
     },
     ref
   ) => {
-    const [state, setState] = useState<string[]>([]);
+    const [state, setState] = useState<string[]>(
+      defaultValue ? defaultValue : []
+    );
 
     const handleChange = (v: string) => {
       const newValue = value ? value : state;
@@ -109,7 +119,11 @@ const Toggles = forwardRef<HTMLDivElement, TogglesProps>(
         {...rest}
       >
         <TogglesContext.Provider
-          value={{ size, activeValue: value, handleChange: handleChange }}
+          value={{
+            size,
+            activeValue: value === undefined ? state : value,
+            handleChange: handleChange,
+          }}
         >
           {children}
         </TogglesContext.Provider>
