@@ -45,12 +45,6 @@ jobs:
         run: echo "BRANCH=HEAD" >> website/.env
       - name: Test gatsby-build (design.nav.no)
         run: yarn build:gatsby
-      - name: Test chromatic
-        uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GIT_REPO }}
-          projectToken: ${{ secrets.CHROMATIC }}
-          exitZeroOnChanges: true
 
   publish-npm:
     needs: test-build
