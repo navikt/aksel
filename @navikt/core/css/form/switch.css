@@ -54,19 +54,16 @@
   color: var(--navds-switch-color-label);
 }
 
-.navds-switch__label {
-  padding-left: 3.25rem;
-}
-
 .navds-switch__content {
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-1);
-  padding: 0.75rem 0;
+  padding: 0.75rem 0 0.75rem 3.25rem;
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--navds-spacing-2) - 2px) 0;
+  padding: calc(var(--navds-spacing-2) - 2px) 0
+    calc(var(--navds-spacing-2) - 2px) 3.25rem;
 }
 
 .navds-switch--with-description,
