@@ -14,6 +14,9 @@ export interface SwitchProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * Toggles loading state with loader-component on switch
+   */
   loading?: boolean;
 }
 
