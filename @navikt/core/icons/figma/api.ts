@@ -21,7 +21,10 @@ export const getPublishedIcons = async () => {
       console.log("Failed getPublishedIcons ");
       throw e;
     });
-  return data?.meta?.components;
+
+  return data?.meta?.components?.filter(
+    (component: any) => component?.containing_frame?.pageName !== "🔆Pictogram"
+  );
 };
 
 /**
