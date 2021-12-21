@@ -71,7 +71,10 @@
   padding: calc(var(--navds-spacing-2) - 2px) 0;
 }
 
-.navds-switch--with-description {
+.navds-switch--with-description,
+.navds-switch--small
+  > .navds-switch__label-wrapper
+  > .navds-switch--with-description {
   padding-bottom: 0;
 }
 
@@ -85,7 +88,6 @@
 
 /* Track */
 .navds-switch__track {
-  border: none;
   width: 44px;
   height: 24px;
   background-color: var(--navds-switch-color-track-background);
