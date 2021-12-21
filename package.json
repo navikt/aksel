@@ -7,7 +7,7 @@
     "test": "yarn workspace @navikt/ds-react test && yarn workspace @navikt/ds-tokens test",
     "postinstall": "husky install",
     "boot": "yarn clean:lib && yarn build:packages --stream",
-    "storybook": "yarn run start-storybook --loglevel warn --quiet -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build:packages": "yarn run --silent lerna run build",
     "build:storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg",
