@@ -34,7 +34,6 @@
 
 /* Input */
 .navds-switch__input {
-  appearance: none;
   cursor: pointer;
   position: absolute;
   z-index: 1;
