@@ -46,7 +46,6 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
       <input
         {...omit(rest, ["size"])}
         {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
-        aria-describedby={(description && inputDescriptionId) || undefined}
         ref={ref}
         type="checkbox"
         className={cl(className, "navds-switch__input")}
