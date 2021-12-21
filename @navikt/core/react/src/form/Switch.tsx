@@ -1,6 +1,6 @@
-import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Detail, Loader, omit, useId } from "..";
+import React, { forwardRef, InputHTMLAttributes } from "react";
+import { BodyShort, Detail, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface SwitchProps
@@ -32,10 +32,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     ...rest
   } = props;
 
-  const genId = useId();
-
   const Description = size === "medium" ? BodyShort : Detail;
-  const inputDescriptionId = `switch-description-${genId}`;
 
   return (
     <div
