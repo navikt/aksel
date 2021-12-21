@@ -127,39 +127,44 @@
   position: absolute;
   transform: translateX(0);
   left: 2px;
-  top: 14px;
+  top: 2px;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.navds-switch--small > .navds-switch__thumb {
-  top: 6px;
-}
-
-.navds-switch__input:checked ~ .navds-switch__thumb {
+.navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(20px);
 }
 
-.navds-switch__input:hover ~ .navds-switch__thumb {
+.navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(2px);
 }
 
-.navds-switch__input:checked:hover ~ .navds-switch__thumb {
+.navds-switch__input:checked:hover
+  ~ .navds-switch__track
+  > .navds-switch__thumb {
   transform: translateX(18px);
 }
 
-.navds-switch__input:disabled:hover ~ .navds-switch__thumb {
+.navds-switch__input:disabled:hover
+  ~ .navds-switch__track
+  > .navds-switch__thumb {
   transform: translateX(0);
 }
 
-.navds-switch__input:checked:disabled:hover ~ .navds-switch__thumb {
+.navds-switch__input:checked:disabled:hover
+  ~ .navds-switch__track
+  > .navds-switch__thumb {
   transform: translateX(20px);
 }
 
 /* Loader */
-.navds-switch__input:checked ~ .navds-switch__thumb .navds-loader__foreground {
+.navds-switch__input:checked
+  ~ .navds-switch__track
+  > .navds-switch__thumb
+  .navds-loader__foreground {
   stroke: var(--navds-switch-color-thumb-loader-checked);
 }
 

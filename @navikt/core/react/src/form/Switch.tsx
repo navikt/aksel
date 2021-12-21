@@ -47,9 +47,10 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
         type="checkbox"
         className={cl(className, "navds-switch__input")}
       />
-      <span className="navds-switch__track" />
-      <span className="navds-switch__thumb">
-        {loading && <Loader size="xsmall" />}
+      <span className="navds-switch__track">
+        <span className="navds-switch__thumb">
+          {loading && <Loader size="xsmall" />}
+        </span>
       </span>
 
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
