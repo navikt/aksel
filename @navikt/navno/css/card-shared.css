@@ -1,16 +1,20 @@
 :root {
-  --navds-product-card-color-text: var(--navds-color-text-primary);
-  --navds-product-card-color-text-active: var(--navds-color-white);
-  --navds-product-card-color-text-hover: var(--navds-color-blue-50);
-  --navds-product-card-color-category: var(--navds-color-gray-80);
-  --navds-product-card-color-border-hover: var(--navds-color-blue-50);
-  --navds-product-card-color-shadow-focus: var(--navds-color-blue-80);
-  --navds-product-card-color-background-hover: var(--navds-color-white);
-  --navds-product-card-color-background-general: var(--navds-color-white);
-  --navds-product-card-color-background-situation: var(--navds-color-orange-20);
-  --navds-product-card-color-background-product: var(--navds-color-green-20);
-  --navds-product-card-color-background-tool: var(--navds-color-deepblue-20);
-  --navds-product-card-color-background-active: var(--navds-color-blue-70);
+  --navds-product-card-color-text: var(--navds-global-color-gray-900);
+  --navds-product-card-color-text-active: var(--navds-global-color-white);
+  --navds-product-card-color-text-hover: var(--navds-global-color-blue-500);
+  --navds-product-card-color-category: var(--navds-global-color-gray-800);
+  --navds-product-card-color-border-hover: var(--navds-global-color-blue-500);
+  --navds-product-card-color-shadow-focus: var(--navds-color-blue-800);
+  --navds-product-card-color-background-hover: var(--navds-global-color-white);
+  --navds-product-card-color-background-general: var(
+    --navds-global-color-white
+  );
+  --navds-product-card-color-background-situation: var(
+    --navds-color-orange-200
+  );
+  --navds-product-card-color-background-product: var(--navds-color-green-200);
+  --navds-product-card-color-background-tool: var(--navds-color-deepblue-200);
+  --navds-product-card-color-background-active: var(--navds-color-blue-700);
 }
 
 .navds-card:not(:focus-visible):not(:active) .navds-card__bed {
