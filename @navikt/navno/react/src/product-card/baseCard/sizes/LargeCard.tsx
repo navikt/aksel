@@ -2,8 +2,8 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { OverridableComponent } from "@navikt/ds-react";
 import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
-import { Animation } from "../animation";
-import { useInteractions } from "./useInteraction";
+import { Animation } from "../../../animation";
+import { useInteractions } from "../../useInteraction";
 
 export interface LargeCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {

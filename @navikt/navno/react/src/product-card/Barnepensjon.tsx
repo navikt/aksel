@@ -3,10 +3,13 @@ import React from "react";
 import { BaseCard, BaseCardProps } from "./baseCard/BaseCard";
 import * as Animation from "../animation/barnepensjon";
 
-export default (props: BaseCardProps) => {
+export default ({ text, ...rest }: BaseCardProps) => {
+  const defaultCardText =
+    "Hvis du er barn og mister en eller begge foreldrene dine, kan du få økonomisk støtte. Pensjonen skal sikre deg inntekt til å leve og bo.";
   return (
     <BaseCard
-      {...props}
+      {...rest}
+      text={text || defaultCardText}
       hoverAnimation={Animation.Hover}
       activeAnimation={Animation.Active}
     />

@@ -1,8 +1,8 @@
 import React from "react";
 
-import LargeCard from "../LargeCard";
-import MiniCard from "../MiniCard";
-import MicroCard from "../MicroCard";
+import LargeCard from "./sizes/LargeCard";
+import MiniCard from "./sizes/MiniCard";
+import MicroCard from "./sizes/MicroCard";
 
 export interface BaseCardProps {
   href: string;
@@ -20,11 +20,11 @@ export const BaseCard = ({
   activeAnimation,
 }: BaseCardProps) => {
   if (size === "micro") {
-    <MicroCard>Barnepensjon</MicroCard>;
+    return <MicroCard>Barnepensjon</MicroCard>;
   }
 
   if (size === "mini") {
-    <MiniCard title="Barnepensjon" type="product" />;
+    return <MiniCard title="Barnepensjon" type="product" />;
   }
 
   const cardText = text || "";

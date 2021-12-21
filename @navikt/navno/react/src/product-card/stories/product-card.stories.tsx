@@ -3,17 +3,26 @@ import { Barnepensjon } from "..";
 
 export default {
   title: "ds-react-navno/product-card",
+  argTypes: {
+    size: {
+      options: ["large", "mini", "micro"],
+      control: { type: "select" },
+    },
+    text: {
+      control: { type: "text" },
+    },
+  },
 };
+interface StoryProps {
+  size: "large" | "mini" | "micro";
+  text: string;
+}
 
-export const ProductCardStory = () => {
+export const ProductCardStory = ({ size = "large", text }: StoryProps) => {
   return (
     <>
-      <h1>LargeCard</h1>
-      <Barnepensjon
-        href="http://www.nav.no"
-        text="Et tillegg til ordinær barnetrygd når du bor alene med barn under 18 år."
-        size="large"
-      />
+      <h1>Product card</h1>
+      <Barnepensjon href="http://www.nav.no" text={text} size={size} />
     </>
   );
 };
