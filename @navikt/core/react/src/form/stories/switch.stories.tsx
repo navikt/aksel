@@ -57,12 +57,12 @@ export const All = () => {
         <Switch>Label text</Switch>
       </Fieldset>
 
-      <h2>Loader</h2>
-      <Switch loader>Label text</Switch>
-      <Switch size="small" loader>
+      <h2>loading prop</h2>
+      <Switch loading>Label text</Switch>
+      <Switch size="small" loading>
         Label text
       </Switch>
-      <Switch disabled loader>
+      <Switch disabled loading>
         Label text
       </Switch>
     </div>
