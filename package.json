@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "yarn workspace @navikt/ds-react test && yarn workspace @navikt/ds-tokens test",
+    "test": "lerna run test",
     "postinstall": "husky install",
     "boot": "yarn clean:lib && yarn build:packages --stream",
     "storybook": "start-storybook -p 6006",
