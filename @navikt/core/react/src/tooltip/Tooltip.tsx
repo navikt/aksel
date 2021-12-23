@@ -10,7 +10,6 @@ import React, {
 import { createPortal } from "react-dom";
 import { usePopper } from "react-popper";
 import { Placement } from "@popperjs/core";
-import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import {
   Detail,
@@ -77,10 +76,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref
   ) => {
-    const popoverRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = mergeRefs([popoverRef, ref]);
+    const [popoverRef, setPopoverRef] = useState<HTMLDivElement | null>(null);
 
-    const anchorRef = useRef<HTMLSpanElement | null>(null);
+    const [anchorRef, setAnchorRef] = useState<HTMLSpanElement | null>(null);
     const timeoutRef = useRef<number>();
 
     const [openState, setOpenState] = useState(open ?? false);
@@ -123,27 +121,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ])
     );
 
-    const { styles, attributes, update } = usePopper(
-      anchorRef.current,
-      popoverRef.current,
-      {
-        placement,
-        modifiers: [
-          {
-            name: "offset",
-            options: {
-              offset: [0, offset ?? (arrow ? 16 : 4)],
-            },
+    const { styles, attributes, update } = usePopper(anchorRef, popoverRef, {
+      placement,
+      modifiers: [
+        {
+          name: "offset",
+          options: {
+            offset: [0, offset ?? (arrow ? 16 : 4)],
           },
-          {
-            name: "arrow",
-            options: {
-              padding: 8,
-            },
+        },
+        {
+          name: "arrow",
+          options: {
+            padding: 8,
           },
-        ],
-      }
-    );
+        },
+      ],
+    });
 
     useClientLayoutEffect(() => {
       update && update();
@@ -163,18 +157,20 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        <span
-          className="navds-tooltip__wrapper"
-          ref={(el) => {
-            anchorRef.current = el;
-          }}
-        >
+        <span className="navds-tooltip__wrapper" ref={setAnchorRef}>
           {newChildren}
         </span>
         {mounted.current &&
           createPortal(
             <div
-              ref={mergedRef}
+              ref={(el) => {
+                setPopoverRef(el);
+                if (typeof ref === "function") {
+                  ref(el);
+                } else if (ref != null) {
+                  ref.current = el;
+                }
+              }}
               className={cl("navds-tooltip", className, {
                 "navds-tooltip--hidden": !isOpen,
               })}

@@ -36,6 +36,17 @@ export const All = () => {
           <Template placement={placement} key={placement} />
         ))}
       </div>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "3rem",
+        }}
+      >
+        {placements.map((placement) => (
+          <Template placement={placement} key={placement} open />
+        ))}
+      </div>
       <h2>Controlled</h2>
       <Tooltip
         open={open}
