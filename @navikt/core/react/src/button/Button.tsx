@@ -58,9 +58,23 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     }, [isLoading]);
 
     return (
-      <div ref={buttonRef} style={{ backgroundColor: "cyan" }}>
-        {content}
-      </div>
+      // <div ref={buttonRef} style={{ backgroundColor: "cyan" }}>
+      //   {content}
+      // </div>
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(
+          className,
+          "navds-button",
+          `navds-button--${variant}`,
+          `navds-button--${size}`
+        )}
+      >
+        <BodyShort as="span" className="navds-button__inner" size={size}>
+          {children}
+        </BodyShort>
+      </Component>
     );
   }
 );
