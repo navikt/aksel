@@ -2,6 +2,7 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
 import { Loader } from "../loader";
+import { useEffect } from "@storybook/addons";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,7 +27,7 @@ export interface ButtonProps
    */
   disabled?: boolean;
 
-  loading?: boolean;
+  isLoading?: boolean;
 }
 
 const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
@@ -37,33 +38,29 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       className,
       children,
       size = "medium",
-      loading = false,
+      isLoading = false,
       ...rest
     },
     ref
   ) => {
-    const content = loading ? (
-      <div style={{ visibility: "hidden" }}>{children}</div>
-    ) : (
-      children
-    );
-    const spinner = loading ? <Loader /> : null;
+    const buttonRef = React.useRef(document.createElement("div"));
+    const [content, setContent] = React.useState(children);
+
+    React.useEffect(() => {
+      //   // console.log("width", buttonRef.current.offsetWidth);
+      //   // console.log("width", buttonRef.current.getBoundingClientRect().width);
+
+      if (isLoading) {
+        buttonRef.current.style.backgroundColor = "yellow";
+        buttonRef.current.style.width = buttonRef.current.offsetWidth + "px";
+        setContent(<Loader></Loader>);
+      }
+    }, [isLoading]);
+
     return (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(
-          className,
-          "navds-button",
-          `navds-button--${variant}`,
-          `navds-button--${size}`
-        )}
-      >
-        <BodyShort as="span" className="navds-button__inner" size={size}>
-          {content}
-          {spinner}
-        </BodyShort>
-      </Component>
+      <div ref={buttonRef} style={{ backgroundColor: "cyan" }}>
+        {content}
+      </div>
     );
   }
 );
