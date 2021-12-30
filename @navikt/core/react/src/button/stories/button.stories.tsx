@@ -44,11 +44,6 @@ export const All = () => {
     console.log(loadingState);
   };
 
-  // let intervalID = window.setInterval(() => {
-  //   console.log(loadingState);
-  //   setLoadingState(!loadingState);
-  // }, 1000);
-
   return (
     <div style={{ paddingLeft: "1rem" }}>
       <h2>Button w/loader</h2>
