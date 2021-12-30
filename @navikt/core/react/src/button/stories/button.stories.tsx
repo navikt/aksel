@@ -51,6 +51,8 @@ export const All = () => {
 
   return (
     <div style={{ paddingLeft: "1rem" }}>
+      <Button onClick={toggleLoading}>Toggle loaders</Button>
+
       <h2>Button w/loader</h2>
       <Button onClick={toggleLoading}>Toggle loaders</Button>
       <Section>
