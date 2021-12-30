@@ -41,13 +41,16 @@ export const All = () => {
     <div style={{ paddingLeft: "1rem" }}>
       <h2>Button w/loader</h2>
       <Section>
-        <Button isLoading={false}>Regular button</Button>
-        <Button isLoading={true}>Loader button</Button>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} isLoading>
+            {varSwitch[variant]}
+          </Button>
+        ))}
       </Section>
       <h2>Small w/loader</h2>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small">
+          <Button key={variant} variant={variant} size="small" isLoading>
             {varSwitch[variant]}
           </Button>
         ))}
