@@ -44,13 +44,18 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
   ) => {
     const buttonRef = React.useRef(document.createElement("div"));
     const [content, setContent] = React.useState(children);
+    const [loadingState, setLoadingState] = React.useState(isLoading);
+
+    // setTimeout(function () {
+    //   setLoadingState(true);
+    // }, 1000);
 
     React.useEffect(() => {
-      if (isLoading) {
+      if (loadingState) {
         buttonRef.current.style.width = `${buttonRef.current.offsetWidth}px`;
         setContent(<Loader />);
       }
-    }, [isLoading]);
+    }, [loadingState]);
 
     return (
       <Component
