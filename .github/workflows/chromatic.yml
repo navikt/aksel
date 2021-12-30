@@ -38,11 +38,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
-
-      - name: Log chromatic output
-        shell: bash
-        run: |
-          echo "OUT: ${{steps.chromatic_tests.outputs.code}}"
+          exitZeroOnChanges: false
 
       - name: replace storybook url
         uses: frabert/replace-string-action@v2.0
@@ -64,26 +60,26 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           comment-author: "github-actions[bot]"
-          body-includes: Chromatic
+          body-includes: Chromatic build-output
 
       - name: Create or update comment
-        if: "${{ steps.chromatic_tests.outputs.code }} == 0"
+        if: steps.chromatic_tests.outcome == 'success'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            **Chromatic build-output**:
+            Chromatic build-output:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - Status: :white_check_mark: SUCCESS :white_check_mark:
+            - :white_check_mark: SUCCESS :white_check_mark:
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
 
       - name: Create or update failed comment
-        if: "${{ steps.chromatic_tests.outputs.code }} != 0"
+        if: steps.chromatic_tests.outcome != 'success'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -93,7 +89,7 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - Status: :no_entry_sign: FAILED :no_entry_sign:
+            - :no_entry_sign: FAILED :no_entry_sign:, review endringer.
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
@@ -127,4 +123,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
-          exitZeroOnChanges: true
+          autoAcceptChanges: true
