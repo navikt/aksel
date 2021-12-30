@@ -55,7 +55,7 @@ export const All = () => {
           </Button>
         ))}
       </Section>
-      <h2>Small w/loader</h2>
+      {/* <h2>Small w/loader</h2>
       <Section>
         {variants.map((variant) => (
           <Button
@@ -67,7 +67,7 @@ export const All = () => {
             {varSwitch[variant]}
           </Button>
         ))}
-      </Section>
+      </Section> */}
       <h1>Button</h1>
       <Section>
         {variants.map((variant) => (
