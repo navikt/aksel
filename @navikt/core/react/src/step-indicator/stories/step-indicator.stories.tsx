@@ -98,14 +98,7 @@ export const ReactRouter = () => {
 ReactRouter.decorators = [
   (Story) => (
     <Router>
-      <div
-        style={{
-          background: "white",
-          maxWidth: 288,
-        }}
-      >
-        <Story />
-      </div>
+      <Story />
     </Router>
   ),
 ];
