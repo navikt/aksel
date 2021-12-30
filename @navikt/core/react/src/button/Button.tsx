@@ -2,7 +2,6 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
 import { Loader } from "../loader";
-import { useEffect } from "@storybook/addons";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -47,23 +46,16 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     const [content, setContent] = React.useState(children);
 
     React.useEffect(() => {
-      //   // console.log("width", buttonRef.current.offsetWidth);
-      //   // console.log("width", buttonRef.current.getBoundingClientRect().width);
-
       if (isLoading) {
-        buttonRef.current.style.backgroundColor = "yellow";
-        buttonRef.current.style.width = buttonRef.current.offsetWidth + "px";
-        setContent(<Loader></Loader>);
+        buttonRef.current.style.width = `${buttonRef.current.offsetWidth}px`;
+        setContent(<Loader />);
       }
     }, [isLoading]);
 
     return (
-      // <div ref={buttonRef} style={{ backgroundColor: "cyan" }}>
-      //   {content}
-      // </div>
       <Component
         {...rest}
-        ref={ref}
+        ref={buttonRef}
         className={cl(
           className,
           "navds-button",
@@ -72,7 +64,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         )}
       >
         <BodyShort as="span" className="navds-button__inner" size={size}>
-          {children}
+          {content}
         </BodyShort>
       </Component>
     );

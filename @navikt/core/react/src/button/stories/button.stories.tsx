@@ -44,18 +44,15 @@ export const All = () => {
         <Button isLoading={false}>Regular button</Button>
         <Button isLoading={true}>Loader button</Button>
       </Section>
-      {/* <h2>Small w/loader</h2>
+      <h2>Small w/loader</h2>
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="small">
             {varSwitch[variant]}
           </Button>
-        ))} 
-        
-        
-        
-      </Section> */}
-      {/* <h1>Button</h1>
+        ))}
+      </Section>
+      <h1>Button</h1>
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
@@ -118,7 +115,7 @@ export const All = () => {
             <Success />
           </Button>
         ))}
-      </Section> */}
+      </Section>
     </div>
   );
 };
