@@ -46,28 +46,6 @@ export const All = () => {
 
   return (
     <div style={{ paddingLeft: "1rem" }}>
-      <h2>Button w/loader</h2>
-      <Button onClick={toggleLoading}>Toggle loaders</Button>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} isLoading={loadingState}>
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      {/* <h2>Small w/loader</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button
-            key={variant}
-            variant={variant}
-            size="small"
-            isLoading={loadingState}
-          >
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section> */}
       <h1>Button</h1>
       <Section>
         {variants.map((variant) => (
@@ -129,6 +107,15 @@ export const All = () => {
           <Button key={variant} variant={variant} size="small">
             <span className="sr-only">Success ikon</span>
             <Success />
+          </Button>
+        ))}
+      </Section>
+      <h2>Button w/loader</h2>
+      <Button onClick={toggleLoading}>Toggle loaders</Button>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} isLoading={loadingState}>
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>
