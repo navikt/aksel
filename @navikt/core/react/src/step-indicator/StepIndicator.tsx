@@ -27,7 +27,7 @@ export interface StepIndicatorProps
   /**
    * Callback for clicked step index
    */
-  onStepChange: (step: number) => void;
+  onStepChange?: (step: number) => void;
   /**
    * Hides labels for each step if true
    * @default false
@@ -65,7 +65,7 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
       className,
       activeStep,
       hideLabels,
-      onStepChange,
+      onStepChange = () => {},
       responsive,
       ...rest
     },

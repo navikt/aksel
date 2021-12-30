@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import StepIndicator from "../StepIndicator";
 import { Meta } from "@storybook/react/types-6-0";
+import { Link, HashRouter as Router, useLocation } from "react-router-dom";
 
 export default {
   title: "ds-react/step-indicator",
@@ -66,3 +67,45 @@ export const All = () => {
     </div>
   );
 };
+
+export const ReactRouter = () => {
+  const { pathname } = useLocation();
+
+  return (
+    <StepIndicator
+      activeStep={
+        {
+          "/": 0,
+          "/first": 0,
+          "/second": 1,
+          "/third": 2,
+        }[pathname]
+      }
+    >
+      <StepIndicator.Step as={Link} to="/first">
+        Steg nr 1
+      </StepIndicator.Step>
+      <StepIndicator.Step as={Link} to="/second">
+        Laborum velit eu magna esse
+      </StepIndicator.Step>
+      <StepIndicator.Step as={Link} to="/third">
+        test
+      </StepIndicator.Step>
+    </StepIndicator>
+  );
+};
+
+ReactRouter.decorators = [
+  (Story) => (
+    <Router>
+      <div
+        style={{
+          background: "white",
+          maxWidth: 288,
+        }}
+      >
+        <Story />
+      </div>
+    </Router>
+  ),
+];
