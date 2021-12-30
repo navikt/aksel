@@ -25,7 +25,10 @@ export interface ButtonProps
    * @default false
    */
   disabled?: boolean;
-
+  /**
+   * Replaces content with a Loader component, keeps width
+   * @default false
+   */
   isLoading?: boolean;
 }
 
