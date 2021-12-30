@@ -89,7 +89,7 @@ const StepIndicator: StepIndicatorComponent = forwardRef<
         >
           {React.cloneElement(step, {
             ...step.props,
-            ...{ index },
+            index,
           })}
         </li>
       ) : (
