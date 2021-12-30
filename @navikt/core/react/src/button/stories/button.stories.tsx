@@ -37,12 +37,25 @@ const varSwitch = {
 };
 
 export const All = () => {
+  const [loadingState, setLoadingState] = React.useState(true);
+
+  const toggleLoading = () => {
+    setLoadingState(!loadingState);
+    console.log(loadingState);
+  };
+
+  // let intervalID = window.setInterval(() => {
+  //   console.log(loadingState);
+  //   setLoadingState(!loadingState);
+  // }, 1000);
+
   return (
     <div style={{ paddingLeft: "1rem" }}>
       <h2>Button w/loader</h2>
+      <Button onClick={toggleLoading}>Toggle loaders</Button>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} isLoading>
+          <Button key={variant} variant={variant} isLoading={loadingState}>
             {varSwitch[variant]}
           </Button>
         ))}
@@ -50,7 +63,12 @@ export const All = () => {
       <h2>Small w/loader</h2>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small" isLoading>
+          <Button
+            key={variant}
+            variant={variant}
+            size="small"
+            isLoading={loadingState}
+          >
             {varSwitch[variant]}
           </Button>
         ))}
