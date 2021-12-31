@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { useRef, useEffect, useState, forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
 import { Loader } from "../loader";
@@ -45,10 +45,10 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     },
     ref
   ) => {
-    const buttonRef = React.useRef(document.createElement("div"));
-    const [content, setContent] = React.useState(children);
+    const buttonRef = useRef(document.createElement("div"));
+    const [content, setContent] = useState(children);
 
-    React.useEffect(() => {
+    useEffect(() => {
       if (isLoading) {
         buttonRef.current.style.width = `${buttonRef.current.offsetWidth}px`;
         setContent(<Loader />);
