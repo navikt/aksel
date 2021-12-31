@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../index";
 import { Success } from "@navikt/ds-icons";
 
@@ -37,7 +37,7 @@ const varSwitch = {
 };
 
 export const All = () => {
-  const [loadingState, setLoadingState] = React.useState(true);
+  const [loadingState, setLoadingState] = useState(true);
 
   const toggleLoading = () => {
     setLoadingState(!loadingState);
