@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, forwardRef } from "react";
+import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
 import { Loader } from "../loader";
@@ -45,12 +46,13 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     },
     ref
   ) => {
-    const buttonRef = useRef(document.createElement("div"));
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const mergedRef = mergeRefs([buttonRef, ref]);
     const [content, setContent] = useState(children);
 
     useEffect(() => {
       if (isLoading) {
-        buttonRef.current.style.width = `${buttonRef.current.offsetWidth}px`;
+        buttonRef!.current!.style.width = `${buttonRef?.current?.offsetWidth}px`;
         setContent(<Loader />);
       } else {
         setContent(children);
@@ -60,7 +62,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     return (
       <Component
         {...rest}
-        ref={buttonRef}
+        ref={mergedRef}
         className={cl(
           className,
           "navds-button",
