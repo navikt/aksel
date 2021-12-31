@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { createContext, forwardRef } from "react";
 import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
@@ -12,6 +12,11 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default "medium"
    */
   size?: "medium" | "small";
+  /**
+   * Zebra striped table
+   * @default false
+   */
+  zebraStripes?: boolean;
 }
 
 export interface TableType
@@ -25,13 +30,25 @@ export interface TableType
   HeaderCell: HeaderCellType;
 }
 
-const Table = forwardRef(({ className, size = "medium", ...rest }, ref) => (
-  <table
-    {...rest}
-    ref={ref}
-    className={cl("navds-table", `navds-table--${size}`, className)}
-  />
-)) as TableType;
+export interface TableContextProps {
+  size: "medium" | "small";
+}
+
+export const TableContext = createContext<TableContextProps | null>(null);
+
+const Table = forwardRef(
+  ({ className, zebraStripes = false, size = "medium", ...rest }, ref) => (
+    <TableContext.Provider value={{ size }}>
+      <table
+        {...rest}
+        ref={ref}
+        className={cl("navds-table", `navds-table--${size}`, className, {
+          "navds-table--zebra-stripes": zebraStripes,
+        })}
+      />
+    </TableContext.Provider>
+  )
+) as TableType;
 
 Table.Header = Header;
 Table.Body = Body;
