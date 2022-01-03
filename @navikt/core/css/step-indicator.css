@@ -69,8 +69,9 @@
 .navds-step-indicator__step-number {
   flex-shrink: 0;
   display: flex;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.5rem;
   border-radius: 50%;
   align-items: center;
   justify-content: center;
@@ -122,6 +123,9 @@
   color: var(--navds-step-indicator-color-step-number-text-active);
   box-shadow: 0 0 0 1px
     var(--navds-step-indicator-color-step-number-shadow-active);
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0.25rem;
 }
 
 .navds-step-indicator__step:focus {
@@ -191,5 +195,8 @@
 .navds-step-indicator__step--disabled > .navds-step-indicator__step-number,
 .navds-step-indicator__step--disabled > .navds-step-indicator__step-label {
   opacity: 0.3;
+}
+
+.navds-step-indicator__step--disabled {
   cursor: not-allowed;
 }
