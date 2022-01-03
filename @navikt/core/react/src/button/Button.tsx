@@ -48,16 +48,17 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
-    const [showLoader, setShowLoader] = useState(false);
+    const [widthOverride, setWidthOverride] = useState<number>();
 
     useEffect(() => {
       if (isLoading) {
-        const buttonWidth = buttonRef?.current?.getBoundingClientRect().width;
-        buttonRef!.current!.style.width = `${buttonWidth}px`;
-        setShowLoader(true);
-      } else {
-        buttonRef!.current!.style.width = "";
-        setShowLoader(false);
+        const requestID = window.requestAnimationFrame(() => {
+          setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
+        });
+        return () => {
+          setWidthOverride(undefined);
+          cancelAnimationFrame(requestID);
+        };
       }
     }, [isLoading, children]);
 
@@ -71,9 +72,10 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
           `navds-button--${variant}`,
           `navds-button--${size}`
         )}
+        style={{ width: widthOverride }}
       >
         <BodyShort as="span" className="navds-button__inner" size={size}>
-          {showLoader ? <Loader /> : children}
+          {widthOverride ? <Loader /> : children}
         </BodyShort>
       </Component>
     );
