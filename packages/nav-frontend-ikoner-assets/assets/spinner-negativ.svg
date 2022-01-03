@@ -1,5 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 50 50" preserveAspectRatio="xMidYMid">
-    <title>Venter...</title>
-    <circle xmlns="http://www.w3.org/2000/svg" cx="25" cy="25" r="20" stroke="#eee" fill="none" stroke-width="5"/>
-    <circle cx="25" cy="25" r="20" stroke="#888" fill="none" stroke-width="5" stroke-dasharray="50 155" stroke-linecap="round"/>
-</svg>

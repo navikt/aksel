@@ -37,6 +37,7 @@
     "nodemon": "^2.0.12",
     "style-dictionary": "^3.0.2",
     "ts-jest": "^27.0.5",
-    "ts-node": "^10.3.0"
+    "ts-node": "^10.3.0",
+    "axios": "^0.21.3"
   }
 }
