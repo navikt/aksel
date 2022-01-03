@@ -22,6 +22,7 @@ Repoet inneholder følgende:
 
 - [Felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/)
 - [Storybook](https://navikt.github.io/Designsystemet) for komponenter.
+- [Gammel dokumentasjon](https://old-design-nav.vercel.app/designsystem) for komponenter.
 
 ## Bidra
 
