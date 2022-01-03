@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Build, test and maybe publish
+name: Build -> Test -> Publish
 
 on:
   push:
@@ -39,12 +39,6 @@ jobs:
         run: yarn lint
       - name: Test
         run: yarn test
-      - name: add access token to .env
-        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
-      - name: add branch token to .env
-        run: echo "BRANCH=HEAD" >> website/.env
-      - name: Test gatsby-build (design.nav.no)
-        run: yarn build:gatsby
 
   publish-npm:
     needs: test-build
@@ -100,56 +94,4 @@ jobs:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
       - name: Publish to Github registry
         run: |
-          rm lerna.json && cp utilities/lerna.json lerna.json
-          git add . && git commit -m "tmp"
           yarn lerna publish --registry https://npm.pkg.github.com from-package --yes
-
-  publish-pages:
-    needs: test-build
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push'
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: "0"
-          token: ${{secrets.GIT_REPO}}
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - name: Node-modules cache
-        uses: actions/cache@v2
-        id: node-cache
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: Install deps
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: Gulp-build
-        run: yarn boot
-      - name: add access token to .env
-        run: echo "ACCESS_TOKEN=${{ secrets.VERKTOYKASSE_INNHOLD_TOKEN }}" >> website/.env
-      - name: add branch token to .env
-        run: echo "BRANCH=HEAD" >> website/.env
-      - name: Building Gatsby
-        run: yarn build:gatsby
-      - name: Building Storybook
-        run: yarn build-storybook
-
-      - name: Deploy to Design.nav.no 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
-        with:
-          GITHUB_TOKEN: $NAV_DS_TOKEN
-          BRANCH: gh-pages
-          FOLDER: website/public
-        env:
-          NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
-
-      - name: Deploy storybook to designsystem-repo
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          personal_token: ${{secrets.GIT_REPO}}
-          external_repository: navikt/designsystemet
-          publish_dir: ./storybook-static
-          user_name: "github-actions[bot]"
-          user_email: "github-actions[bot]@users.noreply.github.com"
