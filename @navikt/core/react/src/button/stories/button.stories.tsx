@@ -41,7 +41,6 @@ export const All = () => {
 
   const toggleLoading = () => {
     setLoadingState(!loadingState);
-    console.log(loadingState);
   };
 
   return (

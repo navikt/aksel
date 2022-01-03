@@ -56,6 +56,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         buttonRef!.current!.style.width = buttonWidth;
         setShowLoader(true);
       } else {
+        buttonRef!.current!.style.width = "";
         setShowLoader(false);
       }
     }, [isLoading, children]);
