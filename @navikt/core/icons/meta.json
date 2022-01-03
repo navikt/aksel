@@ -1908,6 +1908,12 @@
     "pageName": "Interface"
   },
   {
+    "name": "SelfService",
+    "description": "",
+    "created_at": "2021-04-26T09:24:37.989Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
     "name": "SelfServiceFilled",
     "description": "",
     "created_at": "2021-04-26T09:24:38.014Z",
@@ -1923,12 +1929,6 @@
     "name": "SelfServiceMobileFilled",
     "description": "",
     "created_at": "2021-04-26T09:24:37.982Z",
-    "pageName": "Fyrstikkalleen"
-  },
-  {
-    "name": "SelfServiceStroke",
-    "description": "",
-    "created_at": "2021-04-26T09:24:37.989Z",
     "pageName": "Fyrstikkalleen"
   },
   {
