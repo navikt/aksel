@@ -48,15 +48,15 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
-    const [buttonContent, setButtonContent] = useState(children);
+    const [showLoader, setShowLoader] = useState(false);
 
     useEffect(() => {
       if (isLoading) {
         const buttonWidth = `${buttonRef?.current?.offsetWidth}px`;
         buttonRef!.current!.style.width = buttonWidth;
-        setButtonContent(<Loader />);
+        setShowLoader(true);
       } else {
-        setButtonContent(children);
+        setShowLoader(false);
       }
     }, [isLoading, children]);
 
@@ -72,7 +72,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         )}
       >
         <BodyShort as="span" className="navds-button__inner" size={size}>
-          {buttonContent}
+          {showLoader ? <Loader /> : children}
         </BodyShort>
       </Component>
     );
