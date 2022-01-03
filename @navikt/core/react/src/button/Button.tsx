@@ -75,7 +75,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         style={{ width: widthOverride }}
       >
         <BodyShort as="span" className="navds-button__inner" size={size}>
-          {widthOverride ? <Loader /> : children}
+          {widthOverride ? <Loader size={size} /> : children}
         </BodyShort>
       </Component>
     );

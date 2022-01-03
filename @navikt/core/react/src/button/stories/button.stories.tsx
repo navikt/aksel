@@ -122,6 +122,19 @@ export const All = () => {
           </Button>
         ))}
       </Section>
+      <h2>Small w/loader</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button
+            key={variant}
+            variant={variant}
+            size="small"
+            isLoading={loadingState}
+          >
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </Section>
     </div>
   );
 };
