@@ -52,8 +52,8 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
 
     useEffect(() => {
       if (isLoading) {
-        const buttonWidth = `${buttonRef?.current?.offsetWidth}px`;
-        buttonRef!.current!.style.width = buttonWidth;
+        const buttonWidth = buttonRef?.current?.getBoundingClientRect().width;
+        buttonRef!.current!.style.width = `${buttonWidth}px`;
         setShowLoader(true);
       } else {
         buttonRef!.current!.style.width = "";
