@@ -38,6 +38,7 @@ const varSwitch = {
 
 export const All = () => {
   const [loadingState, setLoadingState] = useState(true);
+  const [content, setContent] = useState<string>("");
 
   const toggleLoading = () => {
     setLoadingState(!loadingState);
@@ -111,10 +112,13 @@ export const All = () => {
       </Section>
       <h2>Button w/loader</h2>
       <Button onClick={toggleLoading}>Toggle loaders</Button>
+      <Button onClick={() => setContent((content) => `${content} wat`)}>
+        Change content
+      </Button>
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} isLoading={loadingState}>
-            {varSwitch[variant]}
+            {content || varSwitch[variant]}
           </Button>
         ))}
       </Section>
