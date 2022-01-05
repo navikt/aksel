@@ -1,0 +1,12 @@
+{
+  "barnepensjon": {
+    "title": "Child pension",
+    "text": "If you are a child and lose one or both of your parents, you can get financial support. The pension will ensure you an income to live on.",
+    "category": "Financial support"
+  },
+  "engangsstonad": {
+    "title": "One-time benefit",
+    "text": "You can receive a one-off benefit if you have not had an income that entitles you to parental benefits. There are usually two requirements you must meet to receive a one-time benefit.",
+    "category": "Financial support"
+  }
+}

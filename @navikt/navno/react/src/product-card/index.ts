@@ -1,1 +1,1 @@
-export { default as Barnepensjon } from "./Barnepensjon";
+export { default as ProductCard } from "./ProductCard";

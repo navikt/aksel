@@ -1,41 +1,52 @@
 import React from "react";
 
+import { CardSize } from "../types";
+
 import LargeCard from "./sizes/LargeCard";
 import MiniCard from "./sizes/MiniCard";
 import MicroCard from "./sizes/MicroCard";
 
 export interface BaseCardProps {
-  href: string;
-  text?: string;
-  hoverAnimation?: any;
   activeAnimation?: any;
-  size: "large" | "mini" | "micro";
+  category: string;
+  hoverAnimation?: any;
+  href: string;
+  size: CardSize;
+  text: string;
+  title: string;
 }
 
 export const BaseCard = ({
   href,
-  text,
   size,
   hoverAnimation,
   activeAnimation,
+  title,
+  text,
+  category,
 }: BaseCardProps) => {
   if (size === "micro") {
-    return <MicroCard>Barnepensjon</MicroCard>;
+    return <MicroCard>{title}</MicroCard>;
   }
 
   if (size === "mini") {
-    return <MiniCard title="Barnepensjon" type="product" />;
+    return (
+      <MiniCard
+        title={title}
+        type="product"
+        hoverAnimation={hoverAnimation}
+        activeAnimation={activeAnimation}
+      />
+    );
   }
-
-  const cardText = text || "";
 
   return (
     <LargeCard
       href={href}
-      title="Barnepensjon"
+      title={title}
       type="product"
-      text={cardText}
-      category="pengestøtte"
+      text={text}
+      category={category}
       hoverAnimation={hoverAnimation}
       activeAnimation={activeAnimation}
     />

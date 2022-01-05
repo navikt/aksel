@@ -1,28 +1,62 @@
 import React from "react";
-import { Barnepensjon } from "..";
+import { ProductCard } from "..";
+import { CardSize, ProductName } from "../types";
 
 export default {
   title: "ds-react-navno/product-card",
   argTypes: {
-    size: {
-      options: ["large", "mini", "micro"],
+    productName: {
+      options: ["barnepensjon", "engangsstonad"],
       control: { type: "select" },
     },
-    text: {
+    customText: {
       control: { type: "text" },
     },
   },
 };
+
 interface StoryProps {
-  size: "large" | "mini" | "micro";
-  text: string;
+  customText?: string;
+  productName?: ProductName;
+  size: CardSize;
 }
 
-export const ProductCardStory = ({ size = "large", text }: StoryProps) => {
+const Template = ({
+  customText,
+  productName = "barnepensjon",
+  size,
+}: StoryProps) => {
   return (
     <>
       <h1>Product card</h1>
-      <Barnepensjon href="http://www.nav.no" text={text} size={size} />
+      <ProductCard
+        href="http://www.nav.no"
+        customText={customText}
+        size={size}
+        productName={productName}
+      />
     </>
   );
 };
+
+const LargeCard = Template.bind({});
+const MiniCard = Template.bind({});
+const MicroCard = Template.bind({});
+
+LargeCard.args = {
+  size: "large",
+};
+
+MiniCard.args = {
+  size: "mini",
+};
+
+MicroCard.args = {
+  size: "micro",
+};
+
+LargeCard.parameters = { controls: { exclude: ["size"] } };
+MiniCard.parameters = { controls: { exclude: ["size", "customText"] } };
+MicroCard.parameters = { controls: { exclude: ["size", "customText"] } };
+
+export { LargeCard, MiniCard, MicroCard };

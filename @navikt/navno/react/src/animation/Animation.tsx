@@ -58,7 +58,7 @@ const Animation = ({
   useEffect(() => {
     const lottieData = getLottieDataByState();
     updateLottieContainer(lottieData);
-  }, []);
+  }, [hoverAnimation, activeAnimation]);
 
   useEffect(() => {
     const lottieData = getLottieDataByState();
