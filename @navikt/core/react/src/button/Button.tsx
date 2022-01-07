@@ -1,8 +1,9 @@
-import React, { useRef, useEffect, useState, forwardRef } from "react";
+import React, { useRef, useState, forwardRef } from "react";
 import mergeRefs from "react-merge-refs";
 import cl from "classnames";
 import { BodyShort, OverridableComponent } from "../";
 import { Loader } from "../loader";
+import { useClientLayoutEffect } from "../util";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -50,7 +51,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     const mergedRef = mergeRefs([buttonRef, ref]);
     const [widthOverride, setWidthOverride] = useState<number>();
 
-    useEffect(() => {
+    useClientLayoutEffect(() => {
       if (isLoading) {
         const requestID = window.requestAnimationFrame(() => {
           setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
