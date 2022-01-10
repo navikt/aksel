@@ -1,7 +1,8 @@
 import { Meta, Canvas } from "@storybook/addon-docs";
 import { SearchField } from "../index";
 
-import { Search } from "@navikt/ds-icons";
+import { Table } from "@navikt/ds-react";
+import { Header } from "@navikt/ds-react-internal";
 
 <Meta title="ds-react/form/search-field/intro" />
 
@@ -110,3 +111,62 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
     size="small"
   />
 </Canvas>
+
+## Table
+
+<Canvas>
+  <Table>
+    <Table.Body>
+      <Table.Row>
+        <Table.HeaderCell scope="col">
+          <SearchField
+            label="Mollit eiusmod"
+            description="Ea cupidatat eu sunt commodo"
+            hideLabel
+          />
+        </Table.HeaderCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.HeaderCell scope="col">Name</Table.HeaderCell>
+        <Table.HeaderCell scope="col">Age</Table.HeaderCell>
+        <Table.HeaderCell scope="col">Country</Table.HeaderCell>
+        <Table.HeaderCell scope="col">Points</Table.HeaderCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.HeaderCell scope="row">
+          Donald SmithDonald Smith
+        </Table.HeaderCell>
+        <Table.DataCell>32</Table.DataCell>
+        <Table.DataCell>USA</Table.DataCell>
+        <Table.DataCell>38</Table.DataCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.HeaderCell scope="row">Preben Aalborg</Table.HeaderCell>
+        <Table.DataCell>44</Table.DataCell>
+        <Table.DataCell>Denmark</Table.DataCell>
+        <Table.DataCell>11</Table.DataCell>
+      </Table.Row>
+      <Table.Row>
+        <Table.HeaderCell scope="row">Rudolph Bachenmeier</Table.HeaderCell>
+        <Table.DataCell>32</Table.DataCell>
+        <Table.DataCell>Germany</Table.DataCell>
+        <Table.DataCell>70</Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+</Canvas>
+
+## Header
+
+<Header>
+  <Header.Title href="#">NAV Sykepenger</Header.Title>
+  <div style={{ margin: "auto 1rem auto auto" }}>
+    <SearchField
+      label="Mollit eiusmod"
+      description="Ea cupidatat eu sunt commodo"
+      hideLabel
+      size="small"
+    />
+  </div>
+  <Header.User name="Ola Normann" />
+</Header>
