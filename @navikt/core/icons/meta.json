@@ -126,6 +126,18 @@
     "pageName": "Health"
   },
   {
+    "name": "Bed",
+    "description": "",
+    "created_at": "2021-12-21T08:49:12.806Z",
+    "pageName": "Family"
+  },
+  {
+    "name": "BedFilled",
+    "description": "",
+    "created_at": "2021-12-21T08:49:12.811Z",
+    "pageName": "Family"
+  },
+  {
     "name": "Bell",
     "description": "",
     "created_at": "2020-07-01T10:37:42.756Z",
@@ -232,6 +244,18 @@
     "description": "",
     "created_at": "2021-01-11T13:37:55.351Z",
     "pageName": "Interface"
+  },
+  {
+    "name": "Candle",
+    "description": "",
+    "created_at": "2021-12-14T15:33:41.777Z",
+    "pageName": "Pension"
+  },
+  {
+    "name": "CandleFilled",
+    "description": "",
+    "created_at": "2021-12-14T15:33:41.768Z",
+    "pageName": "Pension"
   },
   {
     "name": "Cantine1",
@@ -636,6 +660,42 @@
     "pageName": "Fyrstikkalleen"
   },
   {
+    "name": "EllipsisCircleH",
+    "description": "",
+    "created_at": "2021-12-07T14:39:02.017Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "EllipsisCircleHFilled",
+    "description": "",
+    "created_at": "2021-12-07T14:39:02.022Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "EllipsisH",
+    "description": "",
+    "created_at": "2021-12-07T14:24:59.749Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "EllipsisHFilled",
+    "description": "",
+    "created_at": "2021-12-07T14:24:59.743Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "EllipsisV",
+    "description": "",
+    "created_at": "2021-12-07T14:39:02.012Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "EllipsisVFilled",
+    "description": "",
+    "created_at": "2021-12-07T14:39:02.005Z",
+    "pageName": "Settings"
+  },
+  {
     "name": "Email",
     "description": "",
     "created_at": "2020-07-01T10:37:43.128Z",
@@ -1017,6 +1077,42 @@
     "name": "HearingFilled",
     "description": "",
     "created_at": "2021-01-28T14:00:38.669Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpaired",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.143Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpairedFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.110Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpairedTeleslynge",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.154Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpairedTeleslyngeFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.147Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpairedWireless",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.150Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "HearingImpairedWirelessFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.124Z",
     "pageName": "Fyrstikkalleen"
   },
   {
@@ -1404,6 +1500,18 @@
     "pageName": "Chevron"
   },
   {
+    "name": "NorwegianFlag",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.135Z",
+    "pageName": "International"
+  },
+  {
+    "name": "NorwegianFlagFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.128Z",
+    "pageName": "International"
+  },
+  {
     "name": "NoSmoking",
     "description": "",
     "created_at": "2020-07-20T10:32:39.013Z",
@@ -1450,6 +1558,18 @@
     "description": "",
     "created_at": "2021-01-11T13:37:55.393Z",
     "pageName": "Building"
+  },
+  {
+    "name": "Over18",
+    "description": "",
+    "created_at": "2021-12-15T15:16:55.874Z",
+    "pageName": "Family"
+  },
+  {
+    "name": "Over18Filled",
+    "description": "",
+    "created_at": "2021-12-15T15:16:55.869Z",
+    "pageName": "Family"
   },
   {
     "name": "Parking",
@@ -1740,6 +1860,18 @@
     "pageName": "Money"
   },
   {
+    "name": "Scale",
+    "description": "",
+    "created_at": "2021-12-09T09:07:43.104Z",
+    "pageName": "Building"
+  },
+  {
+    "name": "ScaleFilled",
+    "description": "",
+    "created_at": "2021-12-09T09:07:43.111Z",
+    "pageName": "Building"
+  },
+  {
     "name": "SchoolBag",
     "description": "",
     "created_at": "2021-04-07T12:13:28.140Z",
@@ -1776,6 +1908,12 @@
     "pageName": "Interface"
   },
   {
+    "name": "SelfService",
+    "description": "",
+    "created_at": "2021-04-26T09:24:37.989Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
     "name": "SelfServiceFilled",
     "description": "",
     "created_at": "2021-04-26T09:24:38.014Z",
@@ -1791,12 +1929,6 @@
     "name": "SelfServiceMobileFilled",
     "description": "",
     "created_at": "2021-04-26T09:24:37.982Z",
-    "pageName": "Fyrstikkalleen"
-  },
-  {
-    "name": "SelfServiceStroke",
-    "description": "",
-    "created_at": "2021-04-26T09:24:37.989Z",
     "pageName": "Fyrstikkalleen"
   },
   {
@@ -1893,6 +2025,18 @@
     "name": "SightFilled",
     "description": "",
     "created_at": "2021-01-28T14:00:38.604Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "Sightless",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.157Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "SightlessFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.106Z",
     "pageName": "Fyrstikkalleen"
   },
   {
@@ -2028,6 +2172,18 @@
     "pageName": "Settings"
   },
   {
+    "name": "SystemError",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.113Z",
+    "pageName": "Device"
+  },
+  {
+    "name": "SystemErrorFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.161Z",
+    "pageName": "Device"
+  },
+  {
     "name": "SystemFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.639Z",
@@ -2056,6 +2212,18 @@
     "description": "",
     "created_at": "2021-01-21T12:56:37.968Z",
     "pageName": "File"
+  },
+  {
+    "name": "Teddy",
+    "description": "",
+    "created_at": "2021-12-15T15:16:55.856Z",
+    "pageName": "Family"
+  },
+  {
+    "name": "TeddyFilled",
+    "description": "",
+    "created_at": "2021-12-15T15:16:55.863Z",
+    "pageName": "Family"
   },
   {
     "name": "Telephone",
@@ -2116,6 +2284,18 @@
     "description": "",
     "created_at": "2021-03-29T09:45:27.057Z",
     "pageName": "Traffic"
+  },
+  {
+    "name": "Umbrella",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.117Z",
+    "pageName": "Pension"
+  },
+  {
+    "name": "UmbrellaFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.121Z",
+    "pageName": "Pension"
   },
   {
     "name": "Unlocked",
@@ -2260,6 +2440,30 @@
     "description": "",
     "created_at": "2021-04-02T07:31:49.699Z",
     "pageName": "Family"
+  },
+  {
+    "name": "Wireless",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.139Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "WirelessFilled",
+    "description": "",
+    "created_at": "2021-11-16T15:09:19.131Z",
+    "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "Wrench",
+    "description": "",
+    "created_at": "2021-12-21T08:49:12.800Z",
+    "pageName": "Settings"
+  },
+  {
+    "name": "WrenchFilled",
+    "description": "",
+    "created_at": "2021-12-21T08:49:12.817Z",
+    "pageName": "Settings"
   },
   {
     "name": "ZoomIn",

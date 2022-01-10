@@ -1,5 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import isChromatic from "chromatic/isChromatic";
 
 import * as Icons from "../src";
 export default {
@@ -16,7 +17,7 @@ export default {
   },
 };
 
-if (process.env.STORYBOOK_CHROMATIC === "true") {
+if (isChromatic()) {
   const iconsStories = storiesOf("ds-icons/Ikoner", module);
 
   Object.entries(Icons).forEach(([name, Icon]) => {

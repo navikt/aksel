@@ -32,34 +32,19 @@ function getGlobFiles(globPattern, options) {
 }
 
 Promise.all([
-  getGlobFiles("./packages/**/lib", { dot: true }),
-  getGlobFiles("./packages/**/dist", { dot: true }),
   getGlobFiles("./@navikt/**/lib", { dot: true }),
   getGlobFiles("./@navikt/**/esm", { dot: true }),
   getGlobFiles("./@navikt/**/cjs", { dot: true }),
   getGlobFiles("./@navikt/core/icons/src", { dot: true }),
-  getGlobFiles("./packages/**/src/*.d.ts", { dit: true }),
-]).then(([lib, dist, libvnext, esmvnext, cjsvnext, iconsrc, files]) => {
-  files.forEach((file) => {
-    console.log(`Deleting file ${file}`);
-    fs.unlinkSync(file);
-  });
-
-  const folders = [
-    ...lib,
-    ...dist,
-    ...libvnext,
-    ...esmvnext,
-    ...cjsvnext,
-    ...iconsrc,
-  ].filter((path) => !path.includes("node_modules"));
+]).then(([libvnext, esmvnext, cjsvnext, iconsrc]) => {
+  const folders = [...libvnext, ...esmvnext, ...cjsvnext, ...iconsrc].filter(
+    (path) => !path.includes("node_modules")
+  );
 
   folders.forEach((folder) => {
     console.log(`Deleting folder ${folder}`);
     deleteFolder(folder);
   });
 
-  console.log(
-    `Deleted ${folders.length} folders, and ${files.length} .d.ts-files`
-  );
+  console.log(`Deleted ${folders.length} folders`);
 });

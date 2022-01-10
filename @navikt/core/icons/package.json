@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {
@@ -28,10 +28,8 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --out-dir src svg",
-    "convert-icons": "node scripts/pngConverter.mjs",
-    "clean": "rimraf src cjs esm png NAV-ikonpakke-png.zip NAV-ikonpakke-svg.zip",
-    "zip-icons": "node scripts/zipIcons.mjs",
-    "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn run convert-icons && yarn zip-icons",
+    "clean": "rimraf src cjs esm",
+    "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config"
   },
   "dependencies": {
@@ -53,6 +51,6 @@
     "rimraf": "3.0.2",
     "sharp": "0.29.1",
     "ts-node": "^10.4.0",
-    "zip-dir": "^2.0.0"
+    "axios": "^0.21.3"
   }
 }
