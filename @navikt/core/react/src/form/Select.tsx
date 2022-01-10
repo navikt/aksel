@@ -94,7 +94,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>((props, ref) => {
         >
           {children}
         </select>
-        <Expand className="navds-select__chevron" aria-hidden="true" />
+        <Expand className="navds-select__chevron" aria-hidden />
       </div>
       <div id={errorId} aria-relevant="additions removals" aria-live="polite">
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
