@@ -5,10 +5,10 @@
   );
   --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
   --navds-switch-color-track-background-checked: var(
-    --navds-semantic-color-interaction-primary
+    --navds-semantic-color-feedback-success-border
   );
   --navds-switch-color-track-background-hover-checked: var(
-    --navds-semantic-color-interaction-primary-hover
+    --navds-semantic-color-feedback-success-icon
   );
   --navds-switch-color-track-shadow-inner-focus: var(
     --navds-semantic-color-component-background-light
@@ -17,7 +17,7 @@
     --navds-semantic-color-component-background-light
   );
   --navds-switch-color-thumb-loader-checked: var(
-    --navds-semantic-color-interaction-primary
+    --navds-semantic-color-feedback-success-border
   );
 }
 
@@ -89,7 +89,7 @@
   position: absolute;
   top: var(--navds-spacing-3);
   left: 0;
-  border-radius: var(--navds-spacing-4);
+  border-radius: 4px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -121,7 +121,7 @@
 /* Thumb */
 .navds-switch__thumb {
   background-color: var(--navds-switch-color-thumb);
-  border-radius: 50%;
+  border-radius: 2.5px;
   width: 20px;
   height: 20px;
   position: absolute;
