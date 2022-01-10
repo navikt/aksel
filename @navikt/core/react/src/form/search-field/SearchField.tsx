@@ -1,34 +1,19 @@
+import { Close, Search } from "@navikt/ds-icons";
 import cl from "classnames";
-import React, { forwardRef } from "react";
+import React, {
+  forwardRef,
+  InputHTMLAttributes,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { BodyShort, Label, omit } from "../..";
-import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
-import SearchFieldClearButton, {
-  SearchFieldClearButtonType,
-} from "./SearchFieldClearButton";
-import SearchFieldInput, { SearchFieldInputType } from "./SearchFieldInput";
-
-export interface SearchFieldContextProps {
-  inputProps: {
-    id: string;
-    "aria-invalid": boolean;
-    "aria-describedby"?: string;
-    disabled?: boolean;
-  };
-  size?: "medium" | "small";
-}
-
-export const SearchFieldContext = React.createContext<SearchFieldContextProps | null>(
-  null
-);
+import mergeRefs from "react-merge-refs";
 
 export interface SearchFieldProps
   extends FormFieldProps,
-    React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * SearchFieldInput & SearchFieldButton
-   */
-  children: React.ReactNode;
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * If enabled shows the label and description for screenreaders only
    */
@@ -37,48 +22,67 @@ export interface SearchFieldProps
    * SearchField label
    */
   label: React.ReactNode;
+  /**
+   * Customize aria-label on clear button
+   * @default "Slett tekst i felt"
+   */
+  clearButtonLabel?: string;
+  /**
+   *
+   */
+  onClear?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
-interface SearchFieldComponent
-  extends React.ForwardRefExoticComponent<
-    SearchFieldProps & React.RefAttributes<HTMLDivElement>
-  > {
-  Clear: SearchFieldClearButtonType;
-  Input: SearchFieldInputType;
-}
-
-const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
+const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (props, ref) => {
-    const {
-      inputProps,
-      errorId,
-      showErrorMsg,
-      hasError,
-      size,
-      inputDescriptionId,
-    } = useFormField(props, "searchfield");
+    const { inputProps, size, inputDescriptionId } = useFormField(
+      props,
+      "searchfield"
+    );
 
     const {
       className,
       hideLabel,
-      children,
       label,
       description,
-      error,
+      value,
+      clearButtonLabel,
+      onClear,
       ...rest
     } = props;
 
+    const [controlledValue, setControlledValue] = useState(value ?? "");
+    const searchRef = useRef<HTMLInputElement | null>(null);
+    const mergedRef = mergeRefs([searchRef, ref]);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setControlledValue(e.target.value);
+      props?.onChange?.(e);
+    };
+
+    useEffect(() => {
+      value !== undefined && setControlledValue(value);
+    }, [value]);
+
+    const handleClear = (
+      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      if (searchRef.current && value === undefined) {
+        searchRef.current.value = "";
+        setControlledValue("");
+        searchRef.current.dispatchEvent(new Event("change"));
+      }
+      onClear?.(e);
+    };
+
     return (
       <div
-        ref={ref}
-        {...omit(rest, ["id", "error", "errorId", "size", "disabled"])}
         className={cl(
           className,
           "navds-form-field",
           `navds-form-field--${size ?? "medium"}`,
           "navds-search-field",
           {
-            "navds-search-field--error": hasError,
             "navds-search-field--disabled": !!inputProps.disabled,
           }
         )}
@@ -106,24 +110,40 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           </BodyShort>
         )}
         <div className="navds-search-field__input-wrapper">
-          <SearchFieldContext.Provider
-            value={{
-              inputProps,
-              size,
-            }}
-          >
-            {children}
-          </SearchFieldContext.Provider>
-        </div>
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
-          {showErrorMsg && <ErrorMessage size={size}>{error}</ErrorMessage>}
+          <span className="navds-search-field__input-icon">
+            <Search aria-hidden />
+          </span>
+          <input
+            ref={mergedRef}
+            {...omit(rest, ["error", "errorId", "size"])}
+            {...inputProps}
+            value={value}
+            onChange={(e) => handleChange(e)}
+            type="search"
+            role="searchbox"
+            className={cl(
+              className,
+              "navds-search-field__input",
+              "navds-text-field__input",
+              "navds-body-short",
+              `navds-body-${size ?? "medium"}`
+            )}
+          />
+          {controlledValue && (
+            <button
+              onClick={(e) => handleClear(e)}
+              className="navds-search-field__clear-button"
+            >
+              <span className="navds-sr-only">
+                {clearButtonLabel ? clearButtonLabel : "Slett tekst i felt"}
+              </span>
+              <Close aria-hidden />
+            </button>
+          )}
         </div>
       </div>
     );
   }
-) as SearchFieldComponent;
-
-SearchField.Clear = SearchFieldClearButton;
-SearchField.Input = SearchFieldInput;
+);
 
 export default SearchField;

@@ -10,6 +10,12 @@
   );
 }
 
+.navds-search-field:hover
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__input {
+  border-color: var(--navds-semantic-color-interaction-primary);
+}
+
 .navds-search-field__input-wrapper {
   display: flex;
   align-items: center;
@@ -27,6 +33,7 @@
 
 .navds-search-field__input {
   padding-left: 2.75rem;
+  padding-right: 3rem;
 }
 
 .navds-form-field--small .navds-search-field__input-icon {
@@ -40,41 +47,49 @@
 
 .navds-form-field--small .navds-search-field__input {
   padding-left: 1.75rem;
+  padding-right: 2rem;
 }
 
-/* .navds-search-field__input-wrapper > *:not(:first-child):not(:last-child) {
-  border-radius: 0;
-}
+/* Button */
 
-.navds-search-field__input-wrapper > :first-child {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.navds-search-field__input-wrapper > :last-child {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-} */
-
-.navds-search-field__input-wrapper > :last-child:first-child {
-  border-radius: 4px;
-}
-
-/* .navds-search-field__input-wrapper :focus {
-  z-index: var(--navds-z-index-focus);
-} */
-
-.navds-search-field__button,
 .navds-search-field__clear-button {
-  flex-shrink: 0;
+  position: absolute;
+  right: 0;
+  color: var(--navds-semantic-color-text);
+  appearance: none;
+  background: none;
+  height: 3rem;
+  width: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.navds-search-field--error
-  .navds-search-field__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-search-field-color-shadow-error) inset;
-  border-color: var(--navds-search-field-color-border-error);
+.navds-form-field--small .navds-search-field__clear-button {
+  height: 2rem;
+  width: 2rem;
 }
 
+.navds-search-field__clear-button:hover {
+  border-color: var(--navds-semantic-color-interaction-primary);
+}
+
+.navds-search-field__clear-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  border-color: var(--navds-semantic-color-border);
+  outline: none;
+}
+
+.navds-search-field:hover
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__clear-button:focus {
+  border-color: var(--navds-semantic-color-interaction-primary);
+}
+
+/* disabled */
 .navds-search-field--disabled {
   opacity: 0.3;
 }
