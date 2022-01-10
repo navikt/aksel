@@ -1,6 +1,7 @@
 import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import cl from "classnames";
 import { SearchFieldContext } from "./SearchField";
+import { Search } from "@navikt/ds-icons";
 
 export interface SearchFieldInputProps
   extends InputHTMLAttributes<HTMLInputElement> {}
@@ -21,20 +22,25 @@ const SearchFieldInput: SearchFieldInputType = forwardRef(
     const { size, inputProps } = searchField;
 
     return (
-      <input
-        {...rest}
-        {...inputProps}
-        type="search"
-        role="searchbox"
-        ref={ref}
-        className={cl(
-          className,
-          "navds-search-field__input",
-          "navds-text-field__input",
-          "navds-body-short",
-          `navds-body-${size ?? "medium"}`
-        )}
-      />
+      <>
+        <span className="navds-search-field__input-icon">
+          <Search aria-hidden />
+        </span>
+        <input
+          {...rest}
+          {...inputProps}
+          type="search"
+          role="searchbox"
+          ref={ref}
+          className={cl(
+            className,
+            "navds-search-field__input",
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size ?? "medium"}`
+          )}
+        />
+      </>
     );
   }
 );

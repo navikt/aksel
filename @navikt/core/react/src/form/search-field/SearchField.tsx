@@ -3,7 +3,6 @@ import React, { forwardRef } from "react";
 import { BodyShort, Label, omit } from "../..";
 import ErrorMessage from "../ErrorMessage";
 import { FormFieldProps, useFormField } from "../useFormField";
-import SearchFieldButton, { SearchFieldButtonType } from "./SearchFieldButton";
 import SearchFieldClearButton, {
   SearchFieldClearButtonType,
 } from "./SearchFieldClearButton";
@@ -44,7 +43,6 @@ interface SearchFieldComponent
   extends React.ForwardRefExoticComponent<
     SearchFieldProps & React.RefAttributes<HTMLDivElement>
   > {
-  Button: SearchFieldButtonType;
   Clear: SearchFieldClearButtonType;
   Input: SearchFieldInputType;
 }
@@ -125,7 +123,6 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
   }
 ) as SearchFieldComponent;
 
-SearchField.Button = SearchFieldButton;
 SearchField.Clear = SearchFieldClearButton;
 SearchField.Input = SearchFieldInput;
 
