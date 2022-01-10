@@ -173,14 +173,16 @@
   color: var(--navds-switch-color-thumb-icon-checked);
 }
 
-.navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(2px);
-}
+@media (hover: hover) and (pointer: fine) {
+  .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(2px);
+  }
 
-.navds-switch__input:checked:hover
-  ~ .navds-switch__track
-  > .navds-switch__thumb {
-  transform: translateX(18px);
+  .navds-switch__input:checked:hover
+    ~ .navds-switch__track
+    > .navds-switch__thumb {
+    transform: translateX(18px);
+  }
 }
 
 .navds-switch__input:disabled:hover
