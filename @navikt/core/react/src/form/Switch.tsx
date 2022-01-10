@@ -1,4 +1,3 @@
-import { Error } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, {
   forwardRef,
@@ -11,8 +10,8 @@ import { FormFieldProps, useFormField } from "./useFormField";
 
 const DeSelectedIcon = () => (
   <svg
-    width="0.75rem"
-    height="0.75rem"
+    width="12px"
+    height="12px"
     viewBox="0 0 12 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -25,16 +24,16 @@ const DeSelectedIcon = () => (
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M10.5 2.19231L6.69231 6L10.5 9.80769L9.80769 10.5L6 6.69231L2.19231 10.5L1.5 9.80769L5.30769 6L1.5 2.19231L2.19231 1.5L6 5.30769L9.80769 1.5L10.5 2.19231Z"
-      fill="#6A6A6A"
-      stroke="#6A6A6A"
+      fill="currentColor"
+      stroke="currentColor"
     />
   </svg>
 );
 
 const SelectedIcon = () => (
   <svg
-    width="0.75rem"
-    height="0.75rem"
+    width="12px"
+    height="12px"
     viewBox="0 0 12 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -47,8 +46,8 @@ const SelectedIcon = () => (
       fill-rule="evenodd"
       clip-rule="evenodd"
       d="M4.01386 8L10.25 2L11 2.75L4.01386 9.5L1 6.5L1.75 5.75L4.01386 8Z"
-      fill="#007C2E"
-      stroke="#007C2E"
+      fill="currentColor"
+      stroke="currentColor"
     />
   </svg>
 );
@@ -68,6 +67,10 @@ export interface SwitchProps
    * Toggles loading state with loader-component on switch
    */
   loading?: boolean;
+  /**
+   * Positions switch on left/right side of label
+   */
+  position?: "left" | "right";
 }
 
 const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
@@ -81,6 +84,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
     loading,
     checked: checkedProp,
     defaultChecked,
+    position = "left",
     ...rest
   } = props;
 
@@ -101,9 +105,15 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
 
   return (
     <div
-      className={cl("navds-switch", props.className, `navds-switch--${size}`, {
-        "navds-switch--disabled": inputProps.disabled,
-      })}
+      className={cl(
+        "navds-switch",
+        props.className,
+        `navds-switch--${size}`,
+        `navds-switch--${position}`,
+        {
+          "navds-switch--disabled": inputProps.disabled,
+        }
+      )}
     >
       <input
         {...omit(rest, ["size"])}
@@ -126,7 +136,6 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
           )}
         </span>
       </span>
-
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
         <div
           className={cl("navds-switch__content", {

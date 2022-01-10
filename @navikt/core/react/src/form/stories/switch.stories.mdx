@@ -6,21 +6,70 @@ import { Switch } from "../index";
 # Hvordan ta i bruk Switch
 
 ```jsx
-<Switch>Slå på feature</Switch>
+  <Switch>Slå på feature</Switch>
+  <div>
+    <Switch position="right">Slå på feature</Switch>
+  </div>
 ```
 
 <Canvas>
   <Switch>Slå på feature</Switch>
+  <div>
+    <Switch position="right">Slå på feature</Switch>
+  </div>
 </Canvas>
 
 ## Description
 
 ```jsx
 <Switch description="Dette vil gjøre x og y">Slå på feature</Switch>
+  <div>
+    <Switch position="right" description="Dette vil gjøre x og y">
+      Slå på feature
+    </Switch>
+  </div>
 ```
 
 <Canvas>
   <Switch description="Dette vil gjøre x og y">Slå på feature</Switch>
+  <div>
+    <Switch position="right" description="Dette vil gjøre x og y">
+      Slå på feature
+    </Switch>
+  </div>
+</Canvas>
+
+## Position
+
+Switch kan ha label på høyre eller venstre side. Velges med "Position"-prop "left" | "right". Husk at hvis position
+"right" velges, må man selv passe på at den har en definert bredde slik at elementet ikke vises over hele skjermen.
+
+```jsx
+<div>
+  <div>
+    <h3>Feil</h3>
+    <Switch position="right">Slå på feature</Switch>
+    <h3>Riktig</h3>
+    <div style={{ width: 200 }}>
+      <Switch position="right">Slå på feature 1</Switch>
+      <Switch position="right">Slå på feature 2</Switch>
+      <Switch position="right">Slå på feature 3</Switch>
+    </div>
+  </div>
+</div>
+```
+
+<Canvas>
+  <div>
+    <h3>Feil</h3>
+    <Switch position="right">Slå på feature</Switch>
+    <h3>Riktig</h3>
+    <div style={{ width: 300 }}>
+      <Switch position="right">Slå på feature 1</Switch>
+      <Switch position="right">Slå på feature 2</Switch>
+      <Switch position="right">Slå på feature 3</Switch>
+    </div>
+  </div>
 </Canvas>
 
 ## Sizing
@@ -30,12 +79,23 @@ Switch har default 48px høy klikkflate. Med size="small" blir klikkflaten 32px
 ```jsx
 <Switch size="small" >Slå på feature</Switch>
 <Switch size="small" description="Dette vil gjøre x og y">Slå på feature</Switch>
+
+<Switch position="right" size="small" >Slå på feature</Switch>
+<Switch position="right" size="small" description="Dette vil gjøre x og y">Slå på feature</Switch>
 ```
 
 <Canvas>
   <div>
     <Switch size="small">Slå på feature</Switch>
     <Switch size="small" description="Dette vil gjøre x og y">
+      Slå på feature
+    </Switch>
+  </div>
+  <div>
+    <Switch position="right" size="small">
+      Slå på feature
+    </Switch>
+    <Switch position="right" size="small" description="Dette vil gjøre x og y">
       Slå på feature
     </Switch>
   </div>
