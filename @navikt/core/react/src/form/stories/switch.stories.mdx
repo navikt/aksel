@@ -118,11 +118,21 @@ Switch er en stylet checkbox, så både `checked` og `defaultChecked` fungerer
 Ved bruk av `hideLegend` på Switch kan man gjøre slik at legend/description bare vises for skjermlesere
 
 ```jsx
-<Switch hideLabel>Slå på feature</Switch>
+<div style={{ width: 300 }}>
+  <Switch hideLabel>Slå på feature</Switch>
+  <Switch hideLabel position="right">
+    Slå på feature
+  </Switch>
+</div>
 ```
 
 <Canvas>
-  <Switch hideLabel>Slå på feature</Switch>
+  <div style={{ width: 300 }}>
+    <Switch hideLabel>Slå på feature</Switch>
+    <Switch hideLabel position="right">
+      Slå på feature
+    </Switch>
+  </div>
 </Canvas>
 
 ## Disabled
