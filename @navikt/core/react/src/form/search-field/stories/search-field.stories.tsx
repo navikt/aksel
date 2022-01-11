@@ -27,6 +27,30 @@ export const All = () => {
         hideLabel
       />
 
+      <h2>Inverted</h2>
+      <div
+        style={{
+          width: 300,
+          padding: "1rem",
+          background: "var(--navds-global-color-gray-900)",
+        }}
+      >
+        <SearchField
+          label="Mollit eiusmod"
+          description="Ea cupidatat eu sunt commodo"
+          hideLabel
+          inverted
+        />
+        <br />
+        <SearchField
+          label="Mollit eiusmod"
+          description="Ea cupidatat eu sunt commodo"
+          hideLabel
+          inverted
+          value="Søketekst"
+        />
+      </div>
+
       <h2>SearchField small</h2>
       <SearchField
         label="Mollit eiusmod"
