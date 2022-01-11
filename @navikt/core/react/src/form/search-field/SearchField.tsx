@@ -8,11 +8,12 @@ import React, {
   useState,
 } from "react";
 import { BodyShort, Label, omit } from "../..";
-import { FormFieldProps, useFormField } from "../useFormField";
+import { FormFieldProps } from "../useFormField";
 import mergeRefs from "react-merge-refs";
+import { useSearchField } from "./useSearchField";
 
 export interface SearchFieldProps
-  extends FormFieldProps,
+  extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * If enabled shows the label and description for screenreaders only
@@ -40,7 +41,7 @@ export interface SearchFieldProps
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (props, ref) => {
-    const { inputProps, size, inputDescriptionId } = useFormField(
+    const { inputProps, size, inputDescriptionId } = useSearchField(
       props,
       "searchfield"
     );
@@ -125,9 +126,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           </span>
           <input
             ref={mergedRef}
-            {...omit(rest, ["error", "errorId", "size"])}
+            {...omit(rest, ["size"])}
             {...inputProps}
-            value={value}
+            {...(props.value !== undefined && { value: props.value })}
             onChange={(e) => handleChange(e)}
             type="search"
             role="searchbox"
