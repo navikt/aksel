@@ -9,9 +9,6 @@
   --navds-search-field-color-button-border-focus: var(
     --navds-semantic-color-border
   );
-  --navds-search-field-color-button-border-hover-focus: var(
-    --navds-semantic-color-interaction-primary
-  );
   --navds-search-field-color-input-inverted: var(
     --navds-semantic-color-component-background-light
   );
@@ -34,7 +31,7 @@
     --navds-semantic-color-component-background-light
   );
   --navds-search-field-color-input-inverted-focus: var(
-    --navds-semantic-color-text-inverted
+    --navds-semantic-color-text
   );
   --navds-search-field-color-input-inverted-border-focus: var(
     --navds-semantic-color-component-background-inverted
@@ -60,6 +57,7 @@
   padding: 0 1rem;
   align-items: center;
   display: flex;
+  pointer-events: none;
 }
 
 .navds-search-field__input {
@@ -111,18 +109,14 @@
   font-size: 1rem;
 }
 
-.navds-search-field__clear-button:hover {
-  border-color: var(--navds-search-field-color-button-border-hover);
-}
-
 .navds-search-field__clear-button:focus {
   box-shadow: var(--navds-shadow-focus);
   border-color: var(--navds-search-field-color-button-border-focus);
   outline: none;
 }
 
-.navds-search-field__clear-button:hover:focus {
-  border-color: var(--navds-search-field-color-button-border-hover-focus);
+.navds-search-field__clear-button:hover {
+  border-color: var(--navds-search-field-color-button-border-hover);
 }
 
 /* Inverted */
@@ -134,6 +128,7 @@
   color: var(--navds-search-field-color-input-inverted);
   border-color: var(--navds-search-field-color-input-inverted-border);
 }
+
 .navds-search-field--inverted
   > .navds-search-field__input-wrapper[data-value="true"]
   > .navds-search-field__input {
@@ -176,11 +171,6 @@
 }
 
 /* Inveted clear button */
-.navds-search-field--inverted
-  > .navds-search-field__input-wrapper
-  > .navds-search-field__clear-button:hover {
-  border-color: var(--navds-search-field-color-input-inverted-hover);
-}
 
 .navds-search-field--inverted
   > .navds-search-field__input-wrapper
@@ -188,6 +178,12 @@
   box-shadow: 0 0 0 3px var(--navds-semantic-color-focus-inverted);
   border-color: var(--navds-search-field-color-button-inverted-focus);
   outline: none;
+}
+
+.navds-search-field--inverted
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__clear-button:hover {
+  border-color: var(--navds-search-field-color-input-inverted-hover);
 }
 
 /* disabled */
