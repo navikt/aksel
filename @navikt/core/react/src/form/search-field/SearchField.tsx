@@ -116,7 +116,10 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             {description}
           </BodyShort>
         )}
-        <div className="navds-search-field__input-wrapper">
+        <div
+          data-value={!!controlledValue}
+          className="navds-search-field__input-wrapper"
+        >
           <span className="navds-search-field__input-icon">
             <Search aria-hidden />
           </span>
