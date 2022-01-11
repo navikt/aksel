@@ -21,42 +21,34 @@ interface StoryProps {
   size: CardSize;
 }
 
-const Template = ({
+export const ProductCards = ({
   customText,
   productName = "barnepensjon",
-  size,
 }: StoryProps) => {
   return (
     <>
       <h1>Product card</h1>
+      <h2>Large card</h2>
       <ProductCard
         href="http://www.nav.no"
         customText={customText}
-        size={size}
+        size="large"
+        productName={productName}
+      />
+      <h2>Mini card</h2>
+      <ProductCard
+        href="http://www.nav.no"
+        customText={customText}
+        size="mini"
+        productName={productName}
+      />
+      <h2>Micro card</h2>
+      <ProductCard
+        href="http://www.nav.no"
+        customText={customText}
+        size="micro"
         productName={productName}
       />
     </>
   );
 };
-
-const LargeCard = Template.bind({});
-const MiniCard = Template.bind({});
-const MicroCard = Template.bind({});
-
-LargeCard.args = {
-  size: "large",
-};
-
-MiniCard.args = {
-  size: "mini",
-};
-
-MicroCard.args = {
-  size: "micro",
-};
-
-LargeCard.parameters = { controls: { exclude: ["size"] } };
-MiniCard.parameters = { controls: { exclude: ["size", "customText"] } };
-MicroCard.parameters = { controls: { exclude: ["size", "customText"] } };
-
-export { LargeCard, MiniCard, MicroCard };

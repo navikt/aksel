@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent } from "@navikt/ds-react";
+import { OverridableComponent, Link } from "@navikt/ds-react";
 import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../../useInteraction";
@@ -21,7 +21,7 @@ const LargeCard: OverridableComponent<
 > = forwardRef(
   (
     {
-      as: Component = "a",
+      as: Component = "article",
       className,
       title,
       text,
@@ -29,19 +29,29 @@ const LargeCard: OverridableComponent<
       hoverAnimation,
       activeAnimation,
       type = "general",
+      href,
       ...rest
     },
     ref
   ) => {
-    const { handlers, isHovering, isActive } = useInteractions();
+    const { handlers, isHovering, isActive, isFocused } = useInteractions();
     const hasAnimation = !!(hoverAnimation && activeAnimation);
+
+    const focusClass = isFocused ? "navds-card--focus" : "";
+    const activeClass = isActive ? "navds-card--active" : "";
 
     return (
       <Component
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-card", "navds-card-large", className)}
+        className={cl(
+          "navds-card",
+          "navds-card-large",
+          className,
+          focusClass,
+          activeClass
+        )}
       >
         <div
           className={cl(
@@ -58,8 +68,10 @@ const LargeCard: OverridableComponent<
               className={cl("navds-card__animation")}
             />
           )}
-          <Heading level="3" size="medium" className={cl("navds-card__title")}>
-            {title}
+          <Heading level="3" size="medium">
+            <Link href={href} className={cl("navds-card__title")}>
+              {title}
+            </Link>
           </Heading>
           <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
           <BodyShort className={cl("navds-card__category")}>

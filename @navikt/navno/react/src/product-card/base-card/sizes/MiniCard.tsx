@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyShort, OverridableComponent } from "@navikt/ds-react";
+import { BodyShort, OverridableComponent, Link } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../../useInteraction";
 
@@ -19,24 +19,36 @@ const MiniCard: OverridableComponent<
   (
     {
       activeAnimation,
-      as: Component = "a",
+      as: Component = "article",
       className,
       hoverAnimation,
       title,
       type = "general",
+      href,
       ...rest
     },
     ref
   ) => {
-    const { handlers, isHovering, isActive } = useInteractions();
+    const { handlers, isHovering, isActive, isFocused } = useInteractions();
     const hasAnimation = !!(hoverAnimation && activeAnimation);
+
+    const focusClass = isFocused ? "navds-card--focus" : "";
+    const activeClass = isActive ? "navds-card--active" : "";
+
+    console.log(href);
 
     return (
       <Component
         {...rest}
         {...handlers}
         ref={ref}
-        className={cl("navds-card", "navds-card-mini", className)}
+        className={cl(
+          "navds-card",
+          "navds-card-mini",
+          className,
+          focusClass,
+          activeClass
+        )}
       >
         <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
           {hasAnimation && (
@@ -48,7 +60,11 @@ const MiniCard: OverridableComponent<
               className={cl("navds-card__animation")}
             />
           )}
-          <BodyShort className={cl("navds-card__title")}>{title}</BodyShort>
+          <BodyShort>
+            <Link href={href} className={cl("navds-card__title")}>
+              {title}
+            </Link>
+          </BodyShort>
         </div>
       </Component>
     );
