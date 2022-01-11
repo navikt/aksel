@@ -8,28 +8,6 @@ import React, {
 import { BodyShort, Detail, Loader, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
-const DeSelectedIcon = () => (
-  <svg
-    width="12px"
-    height="12px"
-    viewBox="0 0 12 12"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    focusable={false}
-    role="img"
-    aria-hidden
-    aria-label="Aktiver valg"
-  >
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M10.5 2.19231L6.69231 6L10.5 9.80769L9.80769 10.5L6 6.69231L2.19231 10.5L1.5 9.80769L5.30769 6L1.5 2.19231L2.19231 1.5L6 5.30769L9.80769 1.5L10.5 2.19231Z"
-      fill="currentColor"
-      stroke="currentColor"
-    />
-  </svg>
-);
-
 const SelectedIcon = () => (
   <svg
     width="12px"
@@ -131,9 +109,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
             <Loader size="xsmall" />
           ) : checked ? (
             <SelectedIcon />
-          ) : (
-            <DeSelectedIcon />
-          )}
+          ) : null}
         </span>
       </span>
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
