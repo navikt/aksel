@@ -3,7 +3,10 @@
     --navds-semantic-color-interaction-primary
   );
   --navds-search-field-color-button-text: var(--navds-semantic-color-text);
-  --navds-search-field-color-button-border-hover: var(
+  --navds-search-field-color-button-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-search-field-color-button-border-hover-focus: var(
     --navds-semantic-color-interaction-primary
   );
   --navds-search-field-color-button-border-focus: var(
@@ -36,7 +39,7 @@
   --navds-search-field-color-input-inverted-border-focus: var(
     --navds-semantic-color-component-background-inverted
   );
-  --navds-search-field-color-input-inverted-hover: var(
+  --navds-search-field-color-input-inverted-hover-focus: var(
     --navds-semantic-color-focus-inverted
   );
   --navds-search-field-color-button-inverted-focus: var(
@@ -111,7 +114,11 @@
 }
 
 .navds-search-field__clear-button:hover {
-  border-color: var(--navds-search-field-color-button-border-hover);
+  color: var(--navds-search-field-color-button-hover);
+}
+
+.navds-search-field__clear-button:hover:focus {
+  border-color: var(--navds-search-field-color-button-border-hover-focus);
 }
 
 /* Inverted */
@@ -158,12 +165,6 @@
   color: var(--navds-search-field-color-input-inverted-focus);
 }
 
-.navds-search-field--inverted
-  > .navds-search-field__input-wrapper
-  > .navds-search-field__input:hover {
-  border-color: var(--navds-search-field-color-input-inverted-hover);
-}
-
 /* Inveted clear button */
 
 .navds-search-field--inverted
@@ -176,8 +177,8 @@
 
 .navds-search-field--inverted
   > .navds-search-field__input-wrapper
-  > .navds-search-field__clear-button:hover {
-  border-color: var(--navds-search-field-color-input-inverted-hover);
+  > .navds-search-field__clear-button:hover:focus {
+  border-color: var(--navds-search-field-color-input-inverted-hover-focus);
 }
 
 /* disabled */
