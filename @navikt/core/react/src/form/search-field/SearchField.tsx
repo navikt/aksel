@@ -23,6 +23,11 @@ export interface SearchFieldProps
    */
   label: React.ReactNode;
   /**
+   * Inverts color theme
+   * @default false
+   */
+  inverted?: boolean;
+  /**
    * Customize aria-label on clear button
    * @default "Slett tekst i felt"
    */
@@ -48,6 +53,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       value,
       clearButtonLabel,
       onClear,
+      inverted = false,
       ...rest
     } = props;
 
@@ -84,6 +90,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           "navds-search-field",
           {
             "navds-search-field--disabled": !!inputProps.disabled,
+            "navds-search-field--inverted": inverted,
           }
         )}
       >

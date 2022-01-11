@@ -16,6 +16,24 @@
   border-color: var(--navds-semantic-color-interaction-primary);
 }
 
+.navds-search-field--inverted
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__input {
+  border-color: white;
+  color: white;
+  background-color: var(--navds-global-color-gray-900);
+}
+
+.navds-search-field--inverted > .navds-search-field__input-wrapper {
+  color: white;
+}
+
+.navds-search-field:hover
+  > .navds-search-field__input-wrapper
+  > .navds-search-field__input {
+  border-color: var(--navds-semantic-color-focus-inverted);
+}
+
 .navds-search-field__input-wrapper {
   display: flex;
   align-items: center;
