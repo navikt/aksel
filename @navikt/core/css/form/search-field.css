@@ -54,30 +54,25 @@
 .navds-search-field__input-icon {
   position: absolute;
   left: 0;
-  padding: 0 1rem;
+  padding: 0 var(--navds-spacing-4);
   align-items: center;
   display: flex;
   pointer-events: none;
 }
 
 .navds-search-field__input {
-  padding-left: 2.75rem;
-  padding-right: 3rem;
+  padding-left: var(--navds-spacing-11);
+  padding-right: var(--navds-spacing-12);
   border-width: 1px;
 }
 
 .navds-form-field--small .navds-search-field__input {
-  padding: 0.15rem;
   min-height: 32px;
+  padding: 0.15rem var(--navds-spacing-8) 0.15rem var(--navds-spacing-7);
 }
 
 .navds-form-field--small .navds-search-field__input-icon {
-  padding: 0 0.5rem;
-}
-
-.navds-form-field--small .navds-search-field__input {
-  padding-left: 1.75rem;
-  padding-right: 2rem;
+  padding: 0 var(--navds-spacing-2);
 }
 
 .navds-search-field__input:hover {
@@ -92,8 +87,8 @@
   color: var(--navds-search-field-color-button-text);
   appearance: none;
   background: none;
-  height: 3rem;
-  width: 3rem;
+  height: 48px;
+  width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,8 +99,8 @@
 }
 
 .navds-form-field--small .navds-search-field__clear-button {
-  height: 2rem;
-  width: 2rem;
+  height: 32px;
+  width: 32px;
   font-size: 1rem;
 }
 
@@ -120,7 +115,6 @@
 }
 
 /* Inverted */
-
 .navds-search-field--inverted
   > .navds-search-field__input-wrapper
   > .navds-search-field__input {
