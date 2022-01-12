@@ -1,14 +1,14 @@
 :root {
-  --navds-card-micro-color-background-active: var(--navds-color-blue-70);
-  --navds-card-micro-color-background-focus: var(--navds-color-white);
-  --navds-card-micro-color-background-hover: var(--navds-color-white);
-  --navds-card-micro-color-border-hover: var(--navds-color-blue-50);
+  --navds-card-micro-color-background-focus: var(--navds-global-color-white);
+  --navds-card-micro-color-background-hover: var(--navds-global-color-white);
+  --navds-card-micro-color-border-hover: var(--navds-global-color-blue-500);
+  --navds-card-micro-color-border-active: var(--navds-global-color-blue-500);
   --navds-card-micro-color-border: transparent;
-  --navds-card-micro-color-shadow-focus: var(--navds-color-blue-80);
-  --navds-card-micro-color-text-active: var(--navds-color-white);
-  --navds-card-micro-color-text-focus: var(--navds-color-blue-50);
-  --navds-card-micro-color-text-hover: var(--navds-color-blue-50);
-  --navds-card-micro-color-text: var(--navds-color-text-primary);
+  --navds-card-micro-color-shadow-focus: var(--navds-global-color-blue-800);
+  --navds-card-micro-color-text-active: var(--navds-global-color-white);
+  --navds-card-micro-color-text-focus: var(--navds-global-color-blue-500);
+  --navds-card-micro-color-text-hover: var(--navds-global-color-blue-500);
+  --navds-card-micro-color-text: var(--navds-global-color-gray-900);
 }
 
 .navds-card-micro {
@@ -36,12 +36,12 @@
   width: auto;
 }
 
-.navds-card.navds-card-micro:hover:not(.navds-card--focus) .navds-card__bed {
+.navds-card-micro:hover:not(:focus) .navds-card__bed {
   background-color: var(--navds-card-micro-color-background-hover);
   box-shadow: 0 0 0 1px var(--navds-product-card-color-border-hover);
 }
 
-.navds-card-micro.navds-card--focus:not(.navds-card--active) .navds-card__bed {
+.navds-card.navds-card-micro:focus:not(:active) .navds-card__bed {
   background-color: var(--navds-card-micro-color-background-focus);
   box-shadow: 0 0 0 3px var(--navds-card-micro-color-shadow-focus);
   color: var(--navds-card-micro-color-text-focus);
@@ -49,7 +49,7 @@
 }
 
 .navds-card-micro:active .navds-card__bed {
-  background-color: var(--navds-card-micro-color-background-active);
   border-color: transparent;
+  box-shadow: 0 0 0 3px var(--navds-card-micro-color-border-active);
   color: var(--navds-card-micro-color-text-active);
 }
