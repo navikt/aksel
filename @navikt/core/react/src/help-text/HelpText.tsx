@@ -1,5 +1,4 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
-import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
