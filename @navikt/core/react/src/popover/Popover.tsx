@@ -45,7 +45,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   offset?: number;
   /**
-   * Changes CSS position property to use
+   * Changes what CSS position property to use
    * You want to use "fixed" if reference element is inside a fixed container, but popover is not
    * @default "absolute"
    */
