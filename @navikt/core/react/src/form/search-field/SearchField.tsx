@@ -3,18 +3,19 @@ import cl from "classnames";
 import React, {
   forwardRef,
   InputHTMLAttributes,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { BodyShort, Label, omit } from "../..";
-import { FormFieldProps } from "../useFormField";
 import mergeRefs from "react-merge-refs";
+import { BodyShort, Label, omit, useEventListener } from "../..";
+import { FormFieldProps } from "../useFormField";
 import { useSearchField } from "./useSearchField";
 
 export interface SearchFieldProps
   extends Omit<FormFieldProps, "error" | "errorId">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   /**
    * If enabled shows the label and description for screenreaders only
    */
@@ -36,7 +37,11 @@ export interface SearchFieldProps
   /**
    *
    */
-  onClear?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  onClear?: () => void;
+  /**
+   *
+   */
+  onChange?: (value: string) => void;
 }
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
@@ -62,25 +67,38 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = mergeRefs([searchRef, ref]);
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setControlledValue(e.target.value);
-      props?.onChange?.(e);
-    };
+    const handleChange = useCallback(
+      (v: string) => {
+        if (searchRef.current && value === undefined) {
+          searchRef.current.value = v;
+          setControlledValue(v);
+        }
+        props?.onChange?.(v);
+      },
+      [props, value]
+    );
+
+    const handleClear = useCallback(() => {
+      onClear?.();
+      handleChange("");
+    }, [handleChange, onClear]);
+
+    useEventListener(
+      "keydown",
+      useCallback(
+        (e) => {
+          if (e.key === "Escape") {
+            e.preventDefault();
+            handleClear?.();
+          }
+        },
+        [handleClear]
+      )
+    );
 
     useEffect(() => {
       value !== undefined && setControlledValue(value);
     }, [value]);
-
-    const handleClear = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      if (searchRef.current && value === undefined) {
-        searchRef.current.value = "";
-        setControlledValue("");
-        searchRef.current.dispatchEvent(new Event("change"));
-      }
-      onClear?.(e);
-    };
 
     return (
       <div
@@ -129,7 +147,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
             {...omit(rest, ["size"])}
             {...inputProps}
             {...(props.value !== undefined && { value: props.value })}
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChange(e.target.value)}
             type="search"
             role="searchbox"
             className={cl(
@@ -142,7 +160,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           />
           {controlledValue && (
             <button
-              onClick={(e) => handleClear(e)}
+              onClick={() => handleClear()}
               className="navds-search-field__clear-button"
             >
               <span className="navds-sr-only">
