@@ -44,6 +44,13 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @default 16 w/arrow, 4 w/no-arrow
    */
   offset?: number;
+  /**
+   * Changes CSS position property to use
+   * You want to used "fixed" if reference element is inside a fixed container,
+   * but floating element is not
+   * @default "absolute"
+   */
+  strategy?: "absolute" | "fixed";
 }
 
 const useEventLister = (event: string, callback) =>
@@ -72,6 +79,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       onClose,
       placement = "right",
       offset,
+      strategy = "absolute",
       ...rest
     },
     ref
@@ -137,6 +145,7 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
             },
           },
         ],
+        strategy,
       }
     );
 
