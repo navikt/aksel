@@ -7,22 +7,6 @@ export default {
   component: SearchField,
 } as Meta;
 
-export const Demo = () => {
-  const [value, setValue] = useState("");
-
-  console.log(value);
-  return (
-    <div>
-      <SearchField
-        value={value}
-        onChange={(e) => setValue(e)}
-        onClear={() => console.log("CLEAR")}
-        label="Mollit eiusmod"
-        hideLabel
-      />
-    </div>
-  );
-};
 export const All = () => {
   const [value, setValue] = useState("");
   return (

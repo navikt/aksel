@@ -35,11 +35,11 @@ export interface SearchFieldProps
    */
   clearButtonLabel?: string;
   /**
-   *
+   * Callback for when user manually clears input with button or Escape
    */
   onClear?: () => void;
   /**
-   *
+   * Callback for value in input after change
    */
   onChange?: (value: string) => void;
 }
@@ -66,6 +66,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     const [controlledValue, setControlledValue] = useState(value ?? "");
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = mergeRefs([searchRef, ref]);
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const handleChange = useCallback(
       (v: string) => {
@@ -81,6 +82,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     const handleClear = useCallback(() => {
       onClear?.();
       handleChange("");
+      searchRef.current && searchRef.current?.focus?.();
     }, [handleChange, onClear]);
 
     useEventListener(
@@ -89,11 +91,12 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
-            handleClear?.();
+            handleClear();
           }
         },
         [handleClear]
-      )
+      ),
+      wrapperRef
     );
 
     useEffect(() => {
@@ -102,6 +105,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     return (
       <div
+        ref={setWrapperRef}
         className={cl(
           className,
           "navds-form-field",
@@ -118,7 +122,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           size={size}
           as="label"
           className={cl("navds-text-field__label", {
-            "sr-only": hideLabel,
+            "navds-sr-only": hideLabel,
           })}
         >
           {label}
@@ -127,7 +131,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           <BodyShort
             as="div"
             className={cl("navds-text-field__description", {
-              "sr-only": hideLabel,
+              "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}

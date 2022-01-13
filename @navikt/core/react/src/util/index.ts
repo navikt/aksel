@@ -14,16 +14,33 @@ export const omit = (obj: object, props: string[]) =>
       {}
     );
 
-export const useEventListener = <K extends keyof GlobalEventHandlersEventMap>(
-  type: K,
-  listener: (
-    this: GlobalEventHandlers,
-    ev: GlobalEventHandlersEventMap[K]
-  ) => any
-): void =>
+export interface ListenerT {
+  addEventListener(
+    name: string,
+    handler: (event?: any) => void,
+    ...args: any[]
+  );
+
+  removeEventListener(
+    name: string,
+    handler: (event?: any) => void,
+    ...args: any[]
+  );
+}
+
+/* https://github.com/streamich/react-use/blob/master/src/useEvent.ts */
+export const useEventListener = <T extends ListenerT>(
+  name: Parameters<ListenerT["addEventListener"]>[0],
+  handler: Parameters<ListenerT["addEventListener"]>[1],
+  target: null | T | Window = window
+): void => {
   useEffect(() => {
-    document.addEventListener(type, listener);
+    if (!target) {
+      return;
+    }
+    target?.addEventListener(name, handler);
     return () => {
-      document.removeEventListener(type, listener);
+      target?.addEventListener(name, handler);
     };
-  }, [type, listener]);
+  }, [name, handler, target]);
+};
