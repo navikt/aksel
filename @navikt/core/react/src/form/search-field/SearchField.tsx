@@ -42,6 +42,10 @@ export interface SearchFieldProps
    * Callback for value in input after change
    */
   onChange?: (value: string) => void;
+  /**
+   * Toggles display of "clear"-button when there is text in field
+   */
+  clearButton?: boolean;
 }
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
@@ -60,6 +64,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       clearButtonLabel,
       onClear,
       inverted = false,
+      clearButton = true,
       ...rest
     } = props;
 
@@ -162,7 +167,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               `navds-body-${size ?? "medium"}`
             )}
           />
-          {controlledValue && (
+          {controlledValue && clearButton && (
             <button
               onClick={() => handleClear()}
               className="navds-search-field__clear-button"

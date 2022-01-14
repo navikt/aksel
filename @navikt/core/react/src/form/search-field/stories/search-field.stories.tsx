@@ -95,6 +95,13 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         onChange={(e) => setValue(e)}
       />
+      <h2>No clear button</h2>
+      <SearchField
+        hideLabel
+        label="Mollit eiusmod"
+        description="Ea cupidatat eu sunt commodo"
+        clearButton={false}
+      />
     </>
   );
 };

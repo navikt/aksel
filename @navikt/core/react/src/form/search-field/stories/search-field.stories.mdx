@@ -81,6 +81,30 @@ Vi har satt `label` som required siden man vil bruke den i sammenheng med denne 
   </div>
 </Canvas>
 
+## Uten "clear"-button
+
+Fjerner "lukke"-knapp som dukker opp når feltet ikke er tomt.
+
+```jsx
+<SearchField
+  label="Mollit eiusmod"
+  description="Ea cupidatat eu sunt commodo"
+  hideLabel
+  clearButton={false}
+/>
+```
+
+<Canvas>
+  <div style={{ width: 300 }}>
+    <SearchField
+      label="Mollit eiusmod"
+      description="Ea cupidatat eu sunt commodo"
+      hideLabel
+      clearButton={false}
+    />
+  </div>
+</Canvas>
+
 ## Sizing
 
 ```jsx
