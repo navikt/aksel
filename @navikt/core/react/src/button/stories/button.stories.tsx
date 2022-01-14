@@ -117,7 +117,12 @@ export const All = () => {
       </Button>
       <Section>
         {variants.map((variant) => (
-          <Button key={variant} variant={variant} isLoading={loadingState}>
+          <Button
+            key={variant}
+            variant={variant}
+            isLoading={loadingState}
+            onClick={toggleLoading}
+          >
             {content || varSwitch[variant]}
           </Button>
         ))}
@@ -130,6 +135,7 @@ export const All = () => {
             variant={variant}
             size="small"
             isLoading={loadingState}
+            onClick={toggleLoading}
           >
             {varSwitch[variant]}
           </Button>
