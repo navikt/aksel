@@ -43,6 +43,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       children,
       size = "medium",
       isLoading = false,
+      disabled,
       ...rest
     },
     ref
@@ -71,11 +72,20 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
           className,
           "navds-button",
           `navds-button--${variant}`,
-          `navds-button--${size}`
+          `navds-button--${size}`,
+          {
+            "navds-button--loading": widthOverride,
+          }
         )}
         style={{ width: widthOverride }}
+        disabled={disabled ?? widthOverride ? true : undefined}
       >
-        <BodyShort as="span" className="navds-button__inner" size={size}>
+        <BodyShort
+          as="span"
+          className="navds-button__inner"
+          size={size}
+          aria-live="polite"
+        >
           {widthOverride ? <Loader size={size} /> : children}
         </BodyShort>
       </Component>
