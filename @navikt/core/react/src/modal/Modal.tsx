@@ -91,10 +91,9 @@ const Modal = forwardRef<ReactModal, ModalProps>(
             size="small"
             variant="tertiary"
             ref={buttonRef}
-            aria-label="lukk modalvindu"
             onClick={onClose}
           >
-            <Close aria-hidden />
+            <Close title="Lukk modalvindu" />
           </Button>
         )}
       </ReactModal>
