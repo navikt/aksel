@@ -1,0 +1,101 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Menu } from "../../index";
+
+<Meta title="ds-react/menu/intro" />
+
+# Hvordan ta i bruk Menu
+
+```jsx
+<Menu>
+  <Menu.item href="#leo">Leo</Menu.item>
+  <Menu.Drawer title="Proin">
+    <Menu.item href="#nulla" active>
+      Nulla
+    </Menu.item>
+    <Menu.item href="#luctus">Luctus</Menu.item>
+  </Menu.Drawer>
+  <Menu.Drawer title="Accumsan">
+    <Menu.item href="#justo" aria-current="page">
+      Justo
+    </Menu.item>
+    <Menu.Drawer title="Proin">
+      <Menu.item href="#nulla">Nulla</Menu.item>
+      <Menu.item href="#luctus">Luctus</Menu.item>
+    </Menu.Drawer>
+  </Menu.Drawer>
+</Menu>
+```
+
+<Canvas>
+  <Menu>
+    <Menu.Item href="#leo">Leo</Menu.Item>
+    <Menu.Drawer title="Proin">
+      <Menu.Item href="#nulla" active>
+        Nulla
+      </Menu.Item>
+      <Menu.Item href="#luctus">Luctus</Menu.Item>
+    </Menu.Drawer>
+    <Menu.Drawer title="Accumsan">
+      <Menu.Item href="#justo">Justo</Menu.Item>
+      <Menu.Drawer title="Proin">
+        <Menu.Item href="#nulla">Nulla</Menu.Item>
+        <Menu.Item href="#luctus">Luctus</Menu.Item>
+      </Menu.Drawer>
+    </Menu.Drawer>
+  </Menu>
+</Canvas>
+
+## Elementer i menyen
+
+Menyen har tre typer elementer man kan bruke: `Drawer` for nesting, `Item` for navigasjonslenker på siden eller `Link` som vil være vanlige lenker.
+
+<Canvas>
+  <div>
+    <h2>Item</h2>
+    <Menu>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+    </Menu>
+    <h2>Drawers + Item</h2>
+    <Menu>
+      <Menu.Drawer title="Proin">
+        <Menu.Item href="#nulla" active>
+          Nulla
+        </Menu.Item>
+        <Menu.Item href="#luctus">Luctus</Menu.Item>
+      </Menu.Drawer>
+      <Menu.Drawer title="Accumsan">
+        <Menu.Item href="#justo">Justo</Menu.Item>
+        <Menu.Drawer title="Proin">
+          <Menu.Item href="#nulla">Nulla</Menu.Item>
+          <Menu.Item href="#luctus">Luctus</Menu.Item>
+        </Menu.Drawer>
+      </Menu.Drawer>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+      <Menu.Item href="#leo">Lenke</Menu.Item>
+    </Menu>
+    <h2>Lenker</h2>
+    <Menu>
+      <Menu.Link href="#leo">Lenke</Menu.Link>
+      <Menu.Link href="#leo">Lenke</Menu.Link>
+      <Menu.Link href="#leo">Lenke</Menu.Link>
+      <Menu.Link href="#leo">Lenke</Menu.Link>
+      <Menu.Link href="#leo">Lenke</Menu.Link>
+    </Menu>
+  </div>
+</Canvas>
+
+`Menu.Item` er implementert med `OverridableComponent`, noe som
+gjør at man kan ta i bruk eks react-router slik:
+
+```jsx
+<Menu.item as={NavLink} activeClassName="navds-menu-item--active" to="/1">
+  Lenketekst
+</Menu.item>
+```
+
+Her er `NavLink` fra `react-router-dom` brukt, og man får da
+samtidig bruke alle propsene til denne komponenten som da er `activeClassName` her.
