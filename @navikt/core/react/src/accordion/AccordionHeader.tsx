@@ -49,7 +49,8 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-accordion__header",
           className,
           "navds-heading",
-          "navds-heading--small"
+          "navds-heading--small",
+          { "navds-accordion__header--open": context.open }
         )}
         onClick={handleClick}
         {...rest}
