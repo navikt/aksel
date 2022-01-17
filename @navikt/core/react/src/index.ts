@@ -13,6 +13,7 @@ export * from "./modal";
 export * from "./panel";
 export * from "./popover";
 export * from "./speech-bubble";
+export * from "./step-indicator";
 export * from "./tag";
 export * from "./tooltip";
 export * from "./table";

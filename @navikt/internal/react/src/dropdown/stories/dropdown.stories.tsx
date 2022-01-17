@@ -27,6 +27,7 @@ export const All = () => (
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
+          <Dropdown.Menu.List.Item disabled>Infotrygd</Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>

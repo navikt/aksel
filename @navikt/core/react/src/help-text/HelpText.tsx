@@ -1,26 +1,28 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
-import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
-import { Popover } from "..";
+import { Popover, PopoverProps } from "..";
 
 export interface HelpTextProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    Pick<PopoverProps, "strategy" | "placement"> {
   /**
    * Component content
    */
   children: React.ReactNode;
-  /**
-   * Placement of popover
-   * @default "top"
-   */
-  placement?: Placement;
 }
 
 const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
-    { className, children, placement = "top", title = "hjelp", ...rest },
+    {
+      className,
+      children,
+      placement = "top",
+      strategy = "absolute",
+      title = "hjelp",
+      ...rest
+    },
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -64,6 +66,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           role="tooltip"
           anchorEl={buttonRef.current}
           placement={placement}
+          strategy={strategy}
         >
           <Popover.Content>{children}</Popover.Content>
         </Popover>

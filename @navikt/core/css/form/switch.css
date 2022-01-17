@@ -1,14 +1,17 @@
 :root {
-  --navds-switch-color-label: var(--navds-color-text-primary);
+  --navds-switch-color-label: var(--navds-semantic-color-text);
   --navds-switch-color-label-hover: var(
     --navds-semantic-color-interaction-primary
   );
   --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
   --navds-switch-color-track-background-checked: var(
-    --navds-semantic-color-interaction-primary
+    --navds-semantic-color-feedback-success-border
+  );
+  --navds-switch-color-track-background-hover: var(
+    --navds-global-color-gray-800
   );
   --navds-switch-color-track-background-hover-checked: var(
-    --navds-semantic-color-interaction-primary-hover
+    --navds-semantic-color-feedback-success-icon
   );
   --navds-switch-color-track-shadow-inner-focus: var(
     --navds-semantic-color-component-background-light
@@ -16,8 +19,12 @@
   --navds-switch-color-thumb: var(
     --navds-semantic-color-component-background-light
   );
+  --navds-switch-color-thumb-icon: var(--navds-semantic-color-text-muted);
+  --navds-switch-color-thumb-icon-checked: var(
+    --navds-semantic-color-feedback-success-border
+  );
   --navds-switch-color-thumb-loader-checked: var(
-    --navds-semantic-color-interaction-primary
+    --navds-semantic-color-feedback-success-border
   );
 }
 
@@ -25,6 +32,10 @@
   position: relative;
   min-height: 48px;
   width: fit-content;
+}
+
+.navds-switch--right {
+  width: auto;
 }
 
 .navds-switch--small {
@@ -61,9 +72,20 @@
   padding: 0.75rem 0 0.75rem 3.25rem;
 }
 
+.navds-switch--right > .navds-switch__label-wrapper > .navds-switch__content {
+  padding: 0.75rem 3.25rem 0.75rem 0;
+}
+
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
   padding: calc(var(--navds-spacing-2) - 2px) 0
     calc(var(--navds-spacing-2) - 2px) 3.25rem;
+}
+
+.navds-switch--right.navds-switch--small
+  > .navds-switch__label-wrapper
+  > .navds-switch__content {
+  padding: calc(var(--navds-spacing-2) - 2px) 3.25rem
+    calc(var(--navds-spacing-2) - 2px) 0;
 }
 
 .navds-switch--with-description,
@@ -73,7 +95,8 @@
   padding-bottom: 0;
 }
 
-.navds-switch__input:hover ~ .navds-switch__label-wrapper {
+.navds-switch__input:hover ~ .navds-switch__label-wrapper,
+.navds-switch__label-wrapper:hover {
   color: var(--navds-switch-color-label-hover);
 }
 
@@ -89,7 +112,7 @@
   position: absolute;
   top: var(--navds-spacing-3);
   left: 0;
-  border-radius: var(--navds-spacing-4);
+  border-radius: 4px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -97,8 +120,18 @@
   top: var(--navds-spacing-1);
 }
 
+.navds-switch--right > .navds-switch__input,
+.navds-switch--right > .navds-switch__track {
+  right: 0;
+  left: auto;
+}
+
 .navds-switch__input:checked ~ .navds-switch__track {
   background-color: var(--navds-switch-color-track-background-checked);
+}
+
+.navds-switch__input:hover ~ .navds-switch__track {
+  background-color: var(--navds-switch-color-track-background-hover);
 }
 
 .navds-switch__input:hover:checked ~ .navds-switch__track {
@@ -121,7 +154,8 @@
 /* Thumb */
 .navds-switch__thumb {
   background-color: var(--navds-switch-color-thumb);
-  border-radius: 50%;
+  color: var(--navds-switch-color-thumb-icon);
+  border-radius: 2.5px;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -136,16 +170,19 @@
 
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(20px);
+  color: var(--navds-switch-color-thumb-icon-checked);
 }
 
-.navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
-  transform: translateX(2px);
-}
+@media (hover: hover) and (pointer: fine) {
+  .navds-switch__input:hover ~ .navds-switch__track > .navds-switch__thumb {
+    transform: translateX(2px);
+  }
 
-.navds-switch__input:checked:hover
-  ~ .navds-switch__track
-  > .navds-switch__thumb {
-  transform: translateX(18px);
+  .navds-switch__input:checked:hover
+    ~ .navds-switch__track
+    > .navds-switch__thumb {
+    transform: translateX(18px);
+  }
 }
 
 .navds-switch__input:disabled:hover

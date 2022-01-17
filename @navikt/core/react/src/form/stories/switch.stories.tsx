@@ -10,14 +10,21 @@ export default {
 export const All = () => {
   const [checked, setChecked] = useState(false);
   return (
-    <div>
+    <div style={{ width: "fit-content" }}>
       <h1>Switch</h1>
       <Switch>Label text</Switch>
+      <Switch position="right">Label text</Switch>
 
       <h2>Switch w/Description</h2>
       <Switch>Label text</Switch>
       <Switch description="Switch description">Label text</Switch>
       <Switch>Label text</Switch>
+
+      <Switch position="right">Label text</Switch>
+      <Switch position="right" description="Switch description">
+        Label text
+      </Switch>
+      <Switch position="right">Label text</Switch>
 
       <h2>hidelabel</h2>
       <Switch description="Switch description" hideLabel>
@@ -29,6 +36,15 @@ export const All = () => {
       <Switch hideLabel size="small">
         Label text small
       </Switch>
+      <Switch position="right" description="Switch description" hideLabel>
+        Label text
+      </Switch>
+      <Switch position="right" description="Switch description" hideLabel>
+        Label text
+      </Switch>
+      <Switch position="right" hideLabel size="small">
+        Label text small
+      </Switch>
 
       <h2>Switch small</h2>
       <Switch size="small">Label text</Switch>
@@ -36,6 +52,16 @@ export const All = () => {
         Label text
       </Switch>
       <Switch size="small">Label text</Switch>
+
+      <Switch position="right" size="small">
+        Label text
+      </Switch>
+      <Switch position="right" description="Switch description" size="small">
+        Label text
+      </Switch>
+      <Switch position="right" size="small">
+        Label text
+      </Switch>
 
       <h2>Controlled</h2>
       <Switch checked={checked} onChange={() => setChecked(!checked)}>

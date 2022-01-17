@@ -4,11 +4,7 @@ module.exports = {
     return config;
   },
   devServer: { stats: "errors-only" },
-  stories: [
-    "../.storybook/**/*.stories.@(mdx)",
-    "../packages/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-    "../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)",
-  ],
+  stories: ["../@navikt/**/*.stories.@(js|jsx|ts|tsx|mdx)"],
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-a11y",

@@ -20,11 +20,9 @@
 
 Repoet inneholder følgende:
 
-- [Alle felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/packages/) i NAVs frontend-rammeverk forvaltet av designsystemet
-- [Felleskomponenter V2 (WIP)](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/) oppdaterte og scopede pakker for en bedre brukeropplevelse
-- [Kildekoden](https://github.com/navikt/nav-frontend-moduler/tree/master/website) til vår nettside; [design.nav.no](https://design.nav.no) som tilbyr dokumentasjon for komponentene og NAVs designsystem generelt
-- [Eksempler på forskjellige frontend-løsninger](https://github.com/navikt/nav-frontend-moduler/tree/master/examples) til applikasjoner som skal bruke komponentene
-- [Storybook](https://navikt.github.io/Designsystemet/?path=/story/ds-react-kom-i-gang--page) for v2 komponenter (wip) og eldre komponenter.
+- [Felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/)
+- [Storybook](https://navikt.github.io/Designsystemet) for komponenter.
+- [Gammel dokumentasjon](https://old-design-nav.vercel.app/designsystem) for komponenter.
 
 ## Bidra
 
