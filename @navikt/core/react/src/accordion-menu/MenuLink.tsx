@@ -2,22 +2,17 @@ import React, { forwardRef } from "react";
 import { OverridableComponent } from "..";
 import cl from "classnames";
 
-export interface AccordionMenuItemProps
+export interface MenuLinkProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   children: React.ReactNode;
-  /**
-   * Sets active styling if true
-   * @default false
-   */
-  active?: boolean;
 }
 
-export type AccordionMenuItemType = OverridableComponent<
-  AccordionMenuItemProps,
+export type MenuLinkType = OverridableComponent<
+  MenuLinkProps,
   HTMLAnchorElement
 >;
 
-const Item: AccordionMenuItemType = forwardRef(
+const Link: MenuLinkType = forwardRef(
   (
     { children, as: Component = "a", active = false, className, ...rest },
     ref
@@ -25,9 +20,7 @@ const Item: AccordionMenuItemType = forwardRef(
     return (
       <Component
         ref={ref}
-        className={cl("navds-accordion-menu-item", className, {
-          "navds-accordion-menu-item--active": active,
-        })}
+        className={cl("navds-menu-link", "navds-link", className)}
         {...rest}
       >
         {children}
@@ -36,4 +29,4 @@ const Item: AccordionMenuItemType = forwardRef(
   }
 );
 
-export default Item;
+export default Link;

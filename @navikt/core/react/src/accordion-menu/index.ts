@@ -1,3 +1,4 @@
-export { default as AccordionMenu, AccordionMenuProps } from "./AccordionMenu";
-export { AccordionMenuCollapsableProps } from "./AccordionMenuCollapsable";
-export { AccordionMenuItemProps } from "./AccordionMenuItem";
+export { default as Menu, MenuProps } from "./Menu";
+export { MenuDrawerProps } from "./MenuDrawer";
+export { MenuItemProps } from "./MenuItem";
+export { MenuLinkProps } from "./MenuLink";

@@ -1,9 +1,9 @@
 import React from "react";
 
 const MenuItems = ({ children }: { children: React.ReactNode }) => (
-  <ul className="navds-accordion-menu__list">
+  <ul className="navds-menu__list">
     {React.Children.toArray(children).map((child, i) => (
-      <li key={i} className="navds-accordion-menu__list-item">
+      <li key={i} className="navds-menu__list-item">
         {child}
       </li>
     ))}
