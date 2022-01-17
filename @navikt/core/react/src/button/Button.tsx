@@ -31,7 +31,7 @@ export interface ButtonProps
    * Replaces button content with a Loader component, keeps width
    * @default false
    */
-  isLoading?: boolean;
+  loading?: boolean;
 }
 
 const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
@@ -42,7 +42,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       className,
       children,
       size = "medium",
-      isLoading = false,
+      loading = false,
       disabled,
       ...rest
     },
@@ -53,7 +53,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
     const [widthOverride, setWidthOverride] = useState<number>();
 
     useClientLayoutEffect(() => {
-      if (isLoading) {
+      if (loading) {
         const requestID = window.requestAnimationFrame(() => {
           setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
         });
@@ -62,7 +62,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
           cancelAnimationFrame(requestID);
         };
       }
-    }, [isLoading, children]);
+    }, [loading, children]);
 
     return (
       <Component

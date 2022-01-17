@@ -120,7 +120,7 @@ export const All = () => {
           <Button
             key={variant}
             variant={variant}
-            isLoading={loadingState}
+            loading={loadingState}
             onClick={toggleLoading}
           >
             {content || varSwitch[variant]}
@@ -134,7 +134,7 @@ export const All = () => {
             key={variant}
             variant={variant}
             size="small"
-            isLoading={loadingState}
+            loading={loadingState}
             onClick={toggleLoading}
           >
             {varSwitch[variant]}
