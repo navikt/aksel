@@ -3,13 +3,17 @@
 
 .navds-toggles {
   display: inline-flex;
+  border: 2px solid var(--navds-semantic-color-border);
+  border-radius: 4px;
+  gap: 1px;
 }
 
 .navds-toggles__button {
+  position: relative;
   appearance: none;
   background: none;
   background-color: var(--navds-semantic-color-component-background-light);
-  color: var(--navds-semantic-color-interaction-primary);
+  color: var(--navds-semantic-color-text);
   display: inline-flex;
   cursor: pointer;
   margin: 0;
@@ -18,8 +22,21 @@
   border: none;
   min-width: 48px;
   padding: var(--navds-spacing-3);
-  border-radius: 0;
-  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
+  /* box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary); */
+}
+
+.navds-toggles__button:not(:first-child)::before {
+  content: "";
+  height: 100%;
+  width: 2px;
+  background-color: var(--navds-semantic-color-border);
+  position: absolute;
+  top: 0;
+  left: -1px;
+}
+
+.navds-toggles__button:focus::before {
+  visibility: hidden;
 }
 
 .navds-toggles--small > .navds-toggles__button {
@@ -50,41 +67,50 @@
   );
 }
 
+.navds-toggles__button--active {
+  background-color: var(--navds-semantic-color-interaction-primary);
+  color: var(--navds-semantic-color-text-inverted);
+}
+
 .navds-toggles__button--active:hover {
   background-color: var(--navds-semantic-color-interaction-primary-selected);
 }
 
-.navds-toggles__button--active {
-  background-color: var(--navds-semantic-color-interaction-primary-selected);
-  color: var(--navds-semantic-color-text-inverted);
-  box-shadow: inset 0 0 0 2px
-    var(--navds-semantic-color-interaction-primary-selected);
+.navds-toggles__button--active::before {
+  visibility: hidden;
+}
+
+.navds-toggles__button--active + .navds-toggles__button--active::before {
+  visibility: visible;
+  background-color: white;
+}
+
+.navds-toggles__button--active + .navds-toggles__button--active:focus::before {
+  background-color: var(--navds-semantic-color-interaction-primary);
 }
 
 .navds-toggles__button:first-child {
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.navds-toggles__button:not(:first-child) {
-  margin-left: -2px;
+  border-top-left-radius: 1.5px;
+  border-bottom-left-radius: 1.5px;
 }
 
 .navds-toggles__button:last-child {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 1.5px;
+  border-bottom-right-radius: 1.5px;
 }
 
 .navds-toggles__button:focus {
   outline: none;
-  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary),
-    var(--navds-shadow-focus);
+  box-shadow: inset 0 0 0 1px var(--navds-semantic-color-interaction-primary),
+    0 0 0 2px var(--navds-semantic-color-focus);
   z-index: 1;
 }
 
 .navds-toggles__button--active:focus {
-  box-shadow: inset 0 0 0 1px
+  /* box-shadow: inset 0 0 0 1px
       var(--navds-semantic-color-component-background-light),
     inset 0 0 0 2px var(--navds-semantic-color-interaction-primary-selected),
-    var(--navds-shadow-focus);
+    var(--navds-shadow-focus); */
+  box-shadow: 0 0 0 2px var(--navds-semantic-color-interaction-primary),
+    0 0 0 3px white, 0 0 0 5px var(--navds-semantic-color-focus);
 }
