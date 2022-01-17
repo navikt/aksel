@@ -28,6 +28,11 @@ export interface ModalProps {
    * User defined classname for modal
    */
   className?: string;
+  /**
+   * Toggles addition of a X-button on modal
+   * @default true
+   */
+  closeButton?: boolean;
 }
 
 interface ModalComponent
@@ -50,6 +55,7 @@ const Modal = forwardRef<ReactModal, ModalProps>(
       onClose,
       className,
       shouldCloseOnOverlayClick = true,
+      closeButton = true,
       ...rest
     },
     ref
@@ -77,18 +83,20 @@ const Modal = forwardRef<ReactModal, ModalProps>(
         onRequestClose={(e) => onModalCloseRequest(e)}
       >
         {children}
-        <Button
-          className={cl("navds-modal__button", {
-            "navds-modal__button--shake": shouldCloseOnOverlayClick,
-          })}
-          size="small"
-          variant="secondary"
-          ref={buttonRef}
-          aria-label="lukk modalvindu"
-          onClick={onClose}
-        >
-          <Close title="X-ikon for å lukke modal" />
-        </Button>
+        {closeButton && (
+          <Button
+            className={cl("navds-modal__button", {
+              "navds-modal__button--shake": shouldCloseOnOverlayClick,
+            })}
+            size="small"
+            variant="tertiary"
+            ref={buttonRef}
+            aria-label="lukk modalvindu"
+            onClick={onClose}
+          >
+            <Close aria-hidden />
+          </Button>
+        )}
       </ReactModal>
     );
   }
