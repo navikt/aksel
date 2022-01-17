@@ -74,6 +74,10 @@
   --navds-button-color-danger-border-focus: var(
     --navds-semantic-color-component-background-light
   );
+
+  /* Loader */
+  --navds-loader-color-on-button-background: rgba(255, 255, 255, 0.3);
+  --navds-loader-color-on-button-foreground: currentColor;
 }
 
 .navds-button {
@@ -260,4 +264,13 @@
 
 .navds-button:disabled:not(.navds-button--loading) {
   opacity: 0.3;
+}
+
+.navds-button .navds-loader .navds-loader__foreground {
+  stroke: var(--navds-loader-color-on-button-foreground);
+}
+
+.navds-button--primary .navds-loader .navds-loader__background,
+.navds-button--danger .navds-loader .navds-loader__background {
+  stroke: var(--navds-loader-color-on-button-background);
 }
