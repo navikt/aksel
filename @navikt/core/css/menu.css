@@ -1,5 +1,6 @@
 :root {
   --navds-menu-color-text: var(--navds-semantic-color-link);
+  --navds-menu-color-text-hover: var(--navds-semantic-color-text);
   --navds-menu-color-text-focus: var(--navds-semantic-color-text);
   --navds-menu-color-background-hover: var(--navds-global-color-blue-50);
   --navds-menu-color-text-active: var(--navds-semantic-color-text);
@@ -11,6 +12,11 @@
   margin: 0;
   padding: 0;
   font-weight: var(--navds-font-weight-bold);
+  padding: 0 0.5rem;
+}
+
+.navds-menu__list--inner {
+  padding: 0;
 }
 
 .navds-menu-collapsable__button {
@@ -33,7 +39,7 @@
 .navds-menu-item,
 .navds-menu-collapsable__button {
   display: flex;
-  padding: var(--navds-spacing-3) var(--navds-spacing-4);
+  padding: var(--navds-spacing-3) var(--navds-spacing-2);
   text-decoration: none;
 }
 
@@ -44,13 +50,23 @@
   margin-left: var(--navds-spacing-2);
 }
 
+.navds-menu-collapsable__expand-icon--filled,
+.navds-menu-collapsable__button:hover > .navds-menu-collapsable__expand-icon {
+  display: none;
+}
+
+.navds-menu-collapsable__button:hover
+  > .navds-menu-collapsable__expand-icon--filled {
+  display: inherit;
+}
+
 .navds-menu-collapsable--open
   > .navds-menu-collapsable__button
   > .navds-menu-collapsable__expand-icon {
   transform: rotate(180deg);
 }
 
-.navds-menu-collapsable .navds-menu-item,
+.navds-menu-collapsable__button:hover .navds-menu-collapsable .navds-menu-item,
 .navds-menu-collapsable
   .navds-menu-collapsable
   .navds-menu-collapsable__button {
@@ -91,10 +107,27 @@
 .navds-menu-item:hover,
 .navds-menu-collapsable__button:hover {
   background-color: var(--navds-menu-color-background-hover);
+  color: var(--navds-menu-color-text-hover);
 }
 
 .navds-menu-item--active {
-  box-shadow: inset 0.5rem 0 var(--navds-semantic-color-link);
+  box-shadow: -0.5rem 0 var(--navds-semantic-color-link);
   color: var(--navds-menu-color-text-active);
   text-decoration: none;
+}
+
+/* Menu.Link */
+
+.navds-menu-link {
+  display: flex;
+  padding: var(--navds-spacing-3) var(--navds-spacing-2);
+}
+
+.navds-menu-link:hover {
+  text-decoration: none;
+}
+
+.navds-menu-link:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
 }

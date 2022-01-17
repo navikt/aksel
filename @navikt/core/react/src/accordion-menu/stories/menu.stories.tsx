@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Menu } from "../index";
 import { NavLink, HashRouter as Router } from "react-router-dom";
+import { Button } from "../..";
 
 export default {
   title: "ds-react/menu",
@@ -14,6 +15,22 @@ export const All = () => (
       maxWidth: 288,
     }}
   >
+    <h2>Only Menu.Items</h2>
+    <Menu>
+      <Menu.Item href="#leo">Leo</Menu.Item>
+
+      <Menu.Item href="#justo">Justo</Menu.Item>
+      <Menu.Item href="#pariatur" active aria-current="page">
+        Pariatur
+      </Menu.Item>
+      <Menu.Item href="#nulla">Nulla</Menu.Item>
+      <Menu.Item href="#luctus">Luctus</Menu.Item>
+      <Menu.Item href="#justo">Justo</Menu.Item>
+      <Menu.Item href="#pariatur">Pariatur</Menu.Item>
+      <Button>Test</Button>
+    </Menu>
+
+    <h2>With Drawers</h2>
     <Menu>
       <Menu.Item href="#leo">Leo</Menu.Item>
       <Menu.Drawer title="Proin">
@@ -40,6 +57,18 @@ export const All = () => (
         Justo
       </Menu.Item>
       <Menu.Item href="#pariatur">Pariatur</Menu.Item>
+    </Menu>
+    <h2>With links</h2>
+    <Menu>
+      <Menu.Link href="#leo">Leo</Menu.Link>
+
+      <Menu.Link href="#justo">Justo</Menu.Link>
+      <Menu.Link href="#pariatur">Pariatur</Menu.Link>
+      <Menu.Link href="#nulla">Nulla</Menu.Link>
+      <Menu.Link href="#luctus">Luctus</Menu.Link>
+      <Menu.Link href="#justo">Justo</Menu.Link>
+      <Menu.Link href="#pariatur">Pariatur</Menu.Link>
+      <Button>Test</Button>
     </Menu>
   </div>
 );

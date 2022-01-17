@@ -20,7 +20,7 @@ const Link: MenuLinkType = forwardRef(
     return (
       <Component
         ref={ref}
-        className={cl("navds-menu-link", "navds-link", className)}
+        className={cl("navds-menu-link", className)}
         {...rest}
       >
         {children}

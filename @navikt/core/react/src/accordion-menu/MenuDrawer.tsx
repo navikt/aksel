@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes, useState } from "react";
 import cl from "classnames";
-import { Expand } from "@navikt/ds-icons";
+import { Collapse, Expand, ExpandFilled } from "@navikt/ds-icons";
 import MenuItems from "./MenuItems";
 
 export interface MenuDrawerProps extends HTMLAttributes<HTMLDivElement> {
@@ -31,11 +31,17 @@ const Drawer: MenuDrawerType = forwardRef(
         >
           {title}
           <Expand
-            title={isOpen ? "Pil peker opp" : "Pil peker ned"}
+            title={isOpen ? "lukk navigasjons-skuff" : "åpne navigason-skuff"}
             className="navds-menu-collapsable__expand-icon"
           />
+          <ExpandFilled
+            title={isOpen ? "lukk navigasjons-skuff" : "åpne navigason-skuff"}
+            className="navds-menu-collapsable__expand-icon navds-menu-collapsable__expand-icon--filled"
+          />
         </button>
-        {isOpen && <MenuItems>{children}</MenuItems>}
+        {isOpen && (
+          <MenuItems className="navds-menu__list--inner">{children}</MenuItems>
+        )}
       </div>
     );
   }
