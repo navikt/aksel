@@ -45,26 +45,32 @@ Button har to størrelser: Default 48px min-height og small 32px min-height
   </Button>
 </Canvas>
 
-## Med ikon eller `<Loader />`
+## Loading
 
-Hvis man setter ikoner (svg) eller `<Loader />` rett på button vil størrelsen
+Button har en egen `loading`-prop setter knappen til disabled og viser `Loader`.
+Button width bli automatisk justert basert på innholdet sin bredde.
+
+<Canvas>
+  <Button loading variant="primary">
+    Primary
+  </Button>
+  <Button loading variant="secondary">
+    Secondary
+  </Button>
+</Canvas>
+
+## Med ikon
+
+Hvis man setter ikoner (svg) rett på button vil størrelsen
 bli justert automatisk og sentrert.
 
 <Canvas>
   <Button>
-    <Loader /> Laster... <Loader />
-  </Button>
-  <Button size="small">
-    <Loader />
-    Laster...
-    <Loader />
-  </Button>
-  <Button>
-    <Success /> Laster... <Success />
+    <Success /> Knapp <Success />
   </Button>
   <Button size="small">
     <Success />
-    Laster...
+    Knapp
     <Success />
   </Button>
 </Canvas>
