@@ -1,5 +1,8 @@
 :root {
   --navds-menu-color-text: var(--navds-semantic-color-link);
+  --navds-menu-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
   --navds-menu-color-text-hover: var(--navds-semantic-color-text);
   --navds-menu-color-text-focus: var(--navds-semantic-color-text);
   --navds-menu-color-background-hover: var(--navds-global-color-blue-50);
@@ -7,11 +10,15 @@
   --navds-menu-outline-focus: var(--navds-semantic-color-focus);
 }
 
+.navds-menu {
+  background-color: var(--navds-menu-color-background);
+  font-weight: var(--navds-font-weight-bold);
+}
+
 .navds-menu__list {
   list-style: none;
   margin: 0;
   padding: 0;
-  font-weight: var(--navds-font-weight-bold);
   padding: 0 0.5rem;
 }
 
@@ -19,7 +26,7 @@
   padding: 0;
 }
 
-.navds-menu-collapsable__button {
+.navds-menu-drawer__button {
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -37,75 +44,25 @@
 }
 
 .navds-menu-item,
-.navds-menu-collapsable__button {
+.navds-menu-drawer__button {
   display: flex;
   padding: var(--navds-spacing-3) var(--navds-spacing-2);
   text-decoration: none;
 }
 
-.navds-menu-collapsable__expand-icon {
-  font-size: 1.5rem;
-  color: var(--navds-menu-color);
-  flex-shrink: 0;
-  margin-left: var(--navds-spacing-2);
-}
-
-.navds-menu-collapsable__expand-icon--filled,
-.navds-menu-collapsable__button:hover > .navds-menu-collapsable__expand-icon {
-  display: none;
-}
-
-.navds-menu-collapsable__button:hover
-  > .navds-menu-collapsable__expand-icon--filled {
-  display: inherit;
-}
-
-.navds-menu-collapsable--open
-  > .navds-menu-collapsable__button
-  > .navds-menu-collapsable__expand-icon {
-  transform: rotate(180deg);
-}
-
-.navds-menu-collapsable__button:hover .navds-menu-collapsable .navds-menu-item,
-.navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable__button {
-  padding-left: var(--navds-spacing-8);
-}
-
-.navds-menu-collapsable .navds-menu-collapsable .navds-menu-item,
-.navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable__button {
-  padding-left: var(--navds-spacing-12);
-}
-
-.navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-item,
-.navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable
-  .navds-menu-collapsable__button {
-  padding-left: var(--navds-spacing-16);
-}
-
 .navds-menu-item:focus,
-.navds-menu-collapsable__button:focus {
+.navds-menu-drawer__button:focus {
   outline: 3px solid var(--navds-menu-outline-focus);
   outline-offset: -3px;
   color: var(--navds-menu-color-text-focus);
 }
 
-.navds-menu-collapsable__button:focus > .navds-menu-collapsable__expand-icon {
+.navds-menu-drawer__button:focus > .navds-menu-drawer__expand-icon {
   color: var(--navds-menu-color-focus);
 }
 
 .navds-menu-item:hover,
-.navds-menu-collapsable__button:hover {
+.navds-menu-drawer__button:hover {
   background-color: var(--navds-menu-color-background-hover);
   color: var(--navds-menu-color-text-hover);
 }
@@ -116,8 +73,46 @@
   text-decoration: none;
 }
 
-/* Menu.Link */
+/* Drawer icon */
+.navds-menu-drawer__expand-icon {
+  font-size: 1.5rem;
+  color: var(--navds-menu-color);
+  flex-shrink: 0;
+  margin-left: var(--navds-spacing-2);
+}
 
+.navds-menu-drawer__expand-icon--filled,
+.navds-menu-drawer__button:hover > .navds-menu-drawer__expand-icon {
+  display: none;
+}
+
+.navds-menu-drawer__button:hover > .navds-menu-drawer__expand-icon--filled {
+  display: inherit;
+}
+
+.navds-menu-drawer--open
+  > .navds-menu-drawer__button
+  > .navds-menu-drawer__expand-icon {
+  transform: rotate(180deg);
+}
+
+/* Nesting levels */
+[data-depth="1"] .navds-menu-drawer__button,
+[data-depth="1"] .navds-menu-item {
+  padding-left: var(--navds-spacing-6);
+}
+
+[data-depth="2"] .navds-menu-drawer__button,
+[data-depth="2"] .navds-menu-item {
+  padding-left: var(--navds-spacing-10);
+}
+
+[data-depth="3"] .navds-menu-drawer__button,
+[data-depth="3"] .navds-menu-item {
+  padding-left: var(--navds-spacing-14);
+}
+
+/* Menu.Link */
 .navds-menu-link {
   display: flex;
   padding: var(--navds-spacing-3) var(--navds-spacing-2);
