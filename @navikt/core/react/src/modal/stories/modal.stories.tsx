@@ -11,6 +11,7 @@ Modal.setAppElement("#root");
 export const All = () => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
+  const [openThree, setOpenThree] = useState(false);
 
   return (
     <>
@@ -44,6 +45,21 @@ export const All = () => {
             minim exercitation id irure velit sit dolor aliquip velit esse.
             Excepteur sint non minim nulla excepteur labore non magna eu.
           </p>
+        </Modal.Content>
+      </Modal>
+      <button onClick={() => setOpenThree(true)}>
+        Open modal without x-button
+      </button>
+      <Modal
+        open={openThree}
+        closeButton={false}
+        onClose={() => setOpenThree(false)}
+      >
+        <Modal.Content>
+          <h1>Header</h1>
+          <h2>subheader</h2>
+          <p>Cupidatat irure ipsum veniam ad in esse.</p>
+          <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
         </Modal.Content>
       </Modal>
     </>
