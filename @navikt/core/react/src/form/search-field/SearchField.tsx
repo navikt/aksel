@@ -37,7 +37,7 @@ export interface SearchFieldProps
   /**
    * Callback for when user manually clears input with button or Escape
    */
-  onClear?: () => void;
+  onClear?: ({ trigger: string, event: clearEventT }) => void;
   /**
    * Callback for value in input after change
    */
@@ -47,6 +47,10 @@ export interface SearchFieldProps
    */
   clearButton?: boolean;
 }
+
+type clearEventT =
+  | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  | React.KeyboardEvent<HTMLDivElement>;
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (props, ref) => {
@@ -81,14 +85,17 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       [props, value]
     );
 
-    const handleClear = useCallback(() => {
-      onClear?.();
-      handleChange("");
-      if (searchRef.current && value === undefined) {
-        searchRef.current.value = "";
-      }
-      searchRef.current && searchRef.current?.focus?.();
-    }, [handleChange, onClear, value]);
+    const handleClear = useCallback(
+      (event: clearEventT, source: string) => {
+        onClear?.({ trigger: source, event });
+        handleChange("");
+        if (searchRef.current && value === undefined) {
+          searchRef.current.value = "";
+        }
+        searchRef.current && searchRef.current?.focus?.();
+      },
+      [handleChange, onClear, value]
+    );
 
     useEventListener(
       "keydown",
@@ -96,7 +103,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
-            handleClear();
+            handleClear(e, "Escape keydown");
           }
         },
         [handleClear]
@@ -169,7 +176,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           />
           {controlledValue && clearButton && (
             <button
-              onClick={() => handleClear()}
+              onClick={(e) => handleClear(e, "Clear button click")}
               className="navds-search-field__clear-button"
             >
               <span className="navds-sr-only">

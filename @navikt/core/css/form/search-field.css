@@ -66,7 +66,6 @@
 .navds-search-field__input {
   padding-left: var(--navds-spacing-11);
   padding-right: var(--navds-spacing-12);
-  border-width: 1px;
   color: inherit;
 }
 
