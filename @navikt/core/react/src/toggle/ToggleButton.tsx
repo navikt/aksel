@@ -33,8 +33,8 @@ const ToggleButton: ToggleButtonsType = forwardRef(
       <button
         {...rest}
         ref={ref}
-        className={cl("navds-toggles__button", className, {
-          "navds-toggles__button--active": !!context?.activeValue.includes(
+        className={cl("navds-toggle__button", className, {
+          "navds-toggle__button--active": !!context?.activeValue.includes(
             value
           ),
         })}
@@ -43,7 +43,7 @@ const ToggleButton: ToggleButtonsType = forwardRef(
       >
         <BodyShort
           as="span"
-          className="navds-toggles__button-inner"
+          className="navds-toggle__button-inner"
           size={context?.size}
         >
           {children}

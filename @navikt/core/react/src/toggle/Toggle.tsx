@@ -112,8 +112,8 @@ const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
     return (
       <div
         ref={ref}
-        className={cl("navds-toggles", className, `navds-toggles--${size}`, {
-          "navds-toggles--fullwidth": fullWidth,
+        className={cl("navds-toggle", className, `navds-toggle--${size}`, {
+          "navds-toggle--fullwidth": fullWidth,
         })}
         role="group"
         {...rest}
