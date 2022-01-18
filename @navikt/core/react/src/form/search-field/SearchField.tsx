@@ -75,10 +75,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     const handleChange = useCallback(
       (v: string) => {
-        if (searchRef.current && value === undefined) {
-          searchRef.current.value = v;
-          setControlledValue(v);
-        }
+        searchRef.current && value === undefined && setControlledValue(v);
         props?.onChange?.(v);
       },
       [props, value]
@@ -87,8 +84,11 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     const handleClear = useCallback(() => {
       onClear?.();
       handleChange("");
+      if (searchRef.current && value === undefined) {
+        searchRef.current.value = "";
+      }
       searchRef.current && searchRef.current?.focus?.();
-    }, [handleChange, onClear]);
+    }, [handleChange, onClear, value]);
 
     useEventListener(
       "keydown",
