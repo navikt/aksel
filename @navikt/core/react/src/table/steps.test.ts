@@ -1,22 +1,4 @@
-const getSteps = ({ current, stepCount }) =>
-  new Array(stepCount)
-    .fill(null)
-    .map((_, i) => i)
-    .filter((n) => {
-      if (n === stepCount - 1 || n === 0) {
-        return true;
-      }
-      if (n >= current - 1 && n <= current + 1) {
-        return true;
-      }
-      if (current <= 2 && n === 2) {
-        return true;
-      }
-      if (current >= stepCount - 3 && n === stepCount - 3) {
-        return true;
-      }
-      return false;
-    });
+import { getSteps } from "./Pagination";
 
 test("wat", () => {
   expect(getSteps({ current: 0, stepCount: 1 })).toEqual([0]);

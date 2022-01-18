@@ -31,7 +31,13 @@ export const Full = () => {
   const rowsPerPage = 10;
 
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+      }}
+    >
       <Table style={{ width: "initial" }}>
         <Table.Header>
           <Table.Row>
@@ -111,6 +117,6 @@ export const Full = () => {
         rowsPerPage={rowsPerPage}
         count={people.length}
       />
-    </>
+    </div>
   );
 };

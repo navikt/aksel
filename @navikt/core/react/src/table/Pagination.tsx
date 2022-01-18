@@ -1,5 +1,6 @@
-import { Back, Next } from "@navikt/ds-icons";
 import React from "react";
+import cl from "classnames";
+import { Back, Next } from "@navikt/ds-icons";
 import { Button } from "..";
 
 interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -34,17 +35,21 @@ const Pagination = ({
   onPageChange,
   rowsPerPage,
   count,
+  className,
 }: PaginationProps) => {
   const stepCount = Math.ceil(count / rowsPerPage);
 
   return (
     <div
+      className={cl("navds-pagination", className)}
       style={{
         display: "flex",
+        gap: 4,
       }}
     >
       <Button
-        variant="secondary"
+        variant="tertiary"
+        size="small"
         disabled={page === 0}
         onClick={() => onPageChange(page - 1)}
       >
@@ -52,18 +57,30 @@ const Pagination = ({
       </Button>
       {getSteps({ current: page, stepCount }).map((n, i, a) => (
         <>
-          {i !== 0 && a[i - 1] !== n - 1 && <div>...</div>}
+          {i !== 0 && a[i - 1] !== n - 1 && (
+            <div
+              style={{
+                marginInline: 12,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span>...</span>
+            </div>
+          )}
           <Button
             key={n}
+            variant={page === n ? "primary" : "tertiary"}
+            size="small"
             onClick={() => onPageChange(n)}
-            variant={page === n ? "primary" : "secondary"}
           >
             {n + 1}
           </Button>
         </>
       ))}
       <Button
-        variant="secondary"
+        variant="tertiary"
+        size="small"
         disabled={page === stepCount - 1}
         onClick={() => onPageChange(page + 1)}
       >
