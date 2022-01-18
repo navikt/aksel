@@ -71,7 +71,7 @@
 
 .navds-form-field--small .navds-search-field__input {
   min-height: 32px;
-  padding: 0.15rem var(--navds-spacing-8) 0.15rem var(--navds-spacing-7);
+  padding: 0.15rem var(--navds-spacing-8);
 }
 
 .navds-form-field--small .navds-search-field__input-icon {
