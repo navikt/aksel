@@ -6,7 +6,7 @@
     "hair_color": "blond",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "19BBY",
+    "birth_year": 19,
     "gender": "male"
   },
   {
@@ -16,7 +16,7 @@
     "hair_color": "n/a",
     "skin_color": "gold",
     "eye_color": "yellow",
-    "birth_year": "112BBY",
+    "birth_year": 112,
     "gender": "n/a"
   },
   {
@@ -26,7 +26,7 @@
     "hair_color": "n/a",
     "skin_color": "white, blue",
     "eye_color": "red",
-    "birth_year": "33BBY",
+    "birth_year": 33,
     "gender": "n/a"
   },
   {
@@ -36,7 +36,7 @@
     "hair_color": "none",
     "skin_color": "white",
     "eye_color": "yellow",
-    "birth_year": "41.9BBY",
+    "birth_year": 41.9,
     "gender": "male"
   },
   {
@@ -46,7 +46,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "19BBY",
+    "birth_year": 19,
     "gender": "female"
   },
   {
@@ -56,7 +56,7 @@
     "hair_color": "brown, grey",
     "skin_color": "light",
     "eye_color": "blue",
-    "birth_year": "52BBY",
+    "birth_year": 52,
     "gender": "male"
   },
   {
@@ -66,7 +66,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "blue",
-    "birth_year": "47BBY",
+    "birth_year": 47,
     "gender": "female"
   },
   {
@@ -76,7 +76,7 @@
     "hair_color": "n/a",
     "skin_color": "white, red",
     "eye_color": "red",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "n/a"
   },
   {
@@ -86,7 +86,7 @@
     "hair_color": "black",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "24BBY",
+    "birth_year": 24,
     "gender": "male"
   },
   {
@@ -96,7 +96,7 @@
     "hair_color": "auburn, white",
     "skin_color": "fair",
     "eye_color": "blue-gray",
-    "birth_year": "57BBY",
+    "birth_year": 57,
     "gender": "male"
   },
   {
@@ -106,7 +106,7 @@
     "hair_color": "blond",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "41.9BBY",
+    "birth_year": 41.9,
     "gender": "male"
   },
   {
@@ -116,7 +116,7 @@
     "hair_color": "auburn, grey",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "64BBY",
+    "birth_year": 64,
     "gender": "male"
   },
   {
@@ -124,9 +124,9 @@
     "height": 228,
     "mass": 112,
     "hair_color": "brown",
-    "skin_color": "unknown",
+    "skin_color": null,
     "eye_color": "blue",
-    "birth_year": "200BBY",
+    "birth_year": 200,
     "gender": "male"
   },
   {
@@ -136,7 +136,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "brown",
-    "birth_year": "29BBY",
+    "birth_year": 29,
     "gender": "male"
   },
   {
@@ -146,7 +146,7 @@
     "hair_color": "n/a",
     "skin_color": "green",
     "eye_color": "black",
-    "birth_year": "44BBY",
+    "birth_year": 44,
     "gender": "male"
   },
   {
@@ -156,7 +156,7 @@
     "hair_color": "n/a",
     "skin_color": "green-tan, brown",
     "eye_color": "orange",
-    "birth_year": "600BBY",
+    "birth_year": 600,
     "gender": "hermaphrodite"
   },
   {
@@ -166,7 +166,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "hazel",
-    "birth_year": "21BBY",
+    "birth_year": 21,
     "gender": "male"
   },
   {
@@ -176,7 +176,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -186,7 +186,7 @@
     "hair_color": "white",
     "skin_color": "green",
     "eye_color": "brown",
-    "birth_year": "896BBY",
+    "birth_year": 896,
     "gender": "male"
   },
   {
@@ -196,7 +196,7 @@
     "hair_color": "grey",
     "skin_color": "pale",
     "eye_color": "yellow",
-    "birth_year": "82BBY",
+    "birth_year": 82,
     "gender": "male"
   },
   {
@@ -206,7 +206,7 @@
     "hair_color": "black",
     "skin_color": "fair",
     "eye_color": "brown",
-    "birth_year": "31.5BBY",
+    "birth_year": 31.5,
     "gender": "male"
   },
   {
@@ -216,7 +216,7 @@
     "hair_color": "none",
     "skin_color": "metal",
     "eye_color": "red",
-    "birth_year": "15BBY",
+    "birth_year": 15,
     "gender": "none"
   },
   {
@@ -226,7 +226,7 @@
     "hair_color": "none",
     "skin_color": "green",
     "eye_color": "red",
-    "birth_year": "53BBY",
+    "birth_year": 53,
     "gender": "male"
   },
   {
@@ -236,7 +236,7 @@
     "hair_color": "black",
     "skin_color": "dark",
     "eye_color": "brown",
-    "birth_year": "31BBY",
+    "birth_year": 31,
     "gender": "male"
   },
   {
@@ -246,7 +246,7 @@
     "hair_color": "none",
     "skin_color": "light",
     "eye_color": "blue",
-    "birth_year": "37BBY",
+    "birth_year": 37,
     "gender": "male"
   },
   {
@@ -256,7 +256,7 @@
     "hair_color": "none",
     "skin_color": "brown mottle",
     "eye_color": "orange",
-    "birth_year": "41BBY",
+    "birth_year": 41,
     "gender": "male"
   },
   {
@@ -266,7 +266,7 @@
     "hair_color": "auburn",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "48BBY",
+    "birth_year": 48,
     "gender": "female"
   },
   {
@@ -276,7 +276,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -286,7 +286,7 @@
     "hair_color": "brown",
     "skin_color": "brown",
     "eye_color": "brown",
-    "birth_year": "8BBY",
+    "birth_year": 8,
     "gender": "male"
   },
   {
@@ -296,7 +296,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -306,7 +306,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "92BBY",
+    "birth_year": 92,
     "gender": "male"
   },
   {
@@ -316,7 +316,7 @@
     "hair_color": "none",
     "skin_color": "mottled green",
     "eye_color": "red",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -326,7 +326,7 @@
     "hair_color": "blond",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "91BBY",
+    "birth_year": 91,
     "gender": "male"
   },
   {
@@ -336,7 +336,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "46BBY",
+    "birth_year": 46,
     "gender": "female"
   },
   {
@@ -346,7 +346,7 @@
     "hair_color": "none",
     "skin_color": "orange",
     "eye_color": "orange",
-    "birth_year": "52BBY",
+    "birth_year": 52,
     "gender": "male"
   },
   {
@@ -356,7 +356,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "orange",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -366,7 +366,7 @@
     "hair_color": "none",
     "skin_color": "green",
     "eye_color": "orange",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -376,7 +376,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -386,7 +386,7 @@
     "hair_color": "black",
     "skin_color": "blue, grey",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -396,7 +396,7 @@
     "hair_color": "none",
     "skin_color": "grey, red",
     "eye_color": "orange",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -406,7 +406,7 @@
     "hair_color": "black",
     "skin_color": "dark",
     "eye_color": "brown",
-    "birth_year": "62BBY",
+    "birth_year": 62,
     "gender": "male"
   },
   {
@@ -416,7 +416,7 @@
     "hair_color": "black",
     "skin_color": "fair",
     "eye_color": "brown",
-    "birth_year": "72BBY",
+    "birth_year": 72,
     "gender": "female"
   },
   {
@@ -426,7 +426,7 @@
     "hair_color": "none",
     "skin_color": "red",
     "eye_color": "yellow",
-    "birth_year": "54BBY",
+    "birth_year": 54,
     "gender": "male"
   },
   {
@@ -436,7 +436,7 @@
     "hair_color": "none",
     "skin_color": "pale",
     "eye_color": "pink",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -446,7 +446,7 @@
     "hair_color": "none",
     "skin_color": "blue",
     "eye_color": "hazel",
-    "birth_year": "48BBY",
+    "birth_year": 48,
     "gender": "female"
   },
   {
@@ -455,8 +455,8 @@
     "mass": 15,
     "hair_color": "none",
     "skin_color": "grey, blue",
-    "eye_color": "unknown",
-    "birth_year": "unknown",
+    "eye_color": null,
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -466,7 +466,7 @@
     "hair_color": "none",
     "skin_color": "blue, grey",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -476,7 +476,7 @@
     "hair_color": "none",
     "skin_color": "white, blue",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -486,7 +486,7 @@
     "hair_color": "none",
     "skin_color": "grey, green, yellow",
     "eye_color": "orange",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -496,7 +496,7 @@
     "hair_color": "none",
     "skin_color": "dark",
     "eye_color": "brown",
-    "birth_year": "72BBY",
+    "birth_year": 72,
     "gender": "male"
   },
   {
@@ -506,7 +506,7 @@
     "hair_color": "white",
     "skin_color": "pale",
     "eye_color": "yellow",
-    "birth_year": "92BBY",
+    "birth_year": 92,
     "gender": "male"
   },
   {
@@ -516,7 +516,7 @@
     "hair_color": "none",
     "skin_color": "green",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -526,7 +526,7 @@
     "hair_color": "black",
     "skin_color": "brown",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -536,7 +536,7 @@
     "hair_color": "none",
     "skin_color": "dark",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -546,7 +546,7 @@
     "hair_color": "none",
     "skin_color": "pale",
     "eye_color": "orange",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -556,7 +556,7 @@
     "hair_color": "none",
     "skin_color": "white",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -566,7 +566,7 @@
     "hair_color": "none",
     "skin_color": "orange",
     "eye_color": "black",
-    "birth_year": "22BBY",
+    "birth_year": 22,
     "gender": "male"
   },
   {
@@ -576,7 +576,7 @@
     "hair_color": "none",
     "skin_color": "blue",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -586,7 +586,7 @@
     "hair_color": "black",
     "skin_color": "dark",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -596,7 +596,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -606,7 +606,7 @@
     "hair_color": "brown",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "82BBY",
+    "birth_year": 82,
     "gender": "male"
   },
   {
@@ -616,7 +616,7 @@
     "hair_color": "none",
     "skin_color": "green",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -626,7 +626,7 @@
     "hair_color": "black",
     "skin_color": "yellow",
     "eye_color": "blue",
-    "birth_year": "58BBY",
+    "birth_year": 58,
     "gender": "female"
   },
   {
@@ -636,7 +636,7 @@
     "hair_color": "black",
     "skin_color": "yellow",
     "eye_color": "blue",
-    "birth_year": "40BBY",
+    "birth_year": 40,
     "gender": "female"
   },
   {
@@ -646,7 +646,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -656,7 +656,7 @@
     "hair_color": "white",
     "skin_color": "fair",
     "eye_color": "brown",
-    "birth_year": "102BBY",
+    "birth_year": 102,
     "gender": "male"
   },
   {
@@ -666,7 +666,7 @@
     "hair_color": "black",
     "skin_color": "tan",
     "eye_color": "brown",
-    "birth_year": "67BBY",
+    "birth_year": 67,
     "gender": "male"
   },
   {
@@ -676,7 +676,7 @@
     "hair_color": "black",
     "skin_color": "tan",
     "eye_color": "brown",
-    "birth_year": "66BBY",
+    "birth_year": 66,
     "gender": "male"
   },
   {
@@ -686,7 +686,7 @@
     "hair_color": "blonde",
     "skin_color": "fair, green, yellow",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -696,7 +696,7 @@
     "hair_color": "none",
     "skin_color": "brown",
     "eye_color": "yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -706,7 +706,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -716,7 +716,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -726,7 +726,7 @@
     "hair_color": "white",
     "skin_color": "fair",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -736,7 +736,7 @@
     "hair_color": "none",
     "skin_color": "silver, red",
     "eye_color": "red, blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -745,8 +745,8 @@
     "mass": 48,
     "hair_color": "none",
     "skin_color": "green, grey",
-    "eye_color": "unknown",
-    "birth_year": "unknown",
+    "eye_color": null,
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -756,7 +756,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "gold",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -766,7 +766,7 @@
     "hair_color": "none",
     "skin_color": "red, blue, white",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -776,7 +776,7 @@
     "hair_color": "none",
     "skin_color": "brown, white",
     "eye_color": "green, yellow",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -786,7 +786,7 @@
     "hair_color": "brown",
     "skin_color": "brown",
     "eye_color": "blue",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -796,7 +796,7 @@
     "hair_color": "brown",
     "skin_color": "light",
     "eye_color": "brown",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   },
   {
@@ -806,7 +806,7 @@
     "hair_color": "none",
     "skin_color": "pale",
     "eye_color": "white",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "female"
   },
   {
@@ -816,7 +816,7 @@
     "hair_color": "none",
     "skin_color": "grey",
     "eye_color": "black",
-    "birth_year": "unknown",
+    "birth_year": null,
     "gender": "male"
   }
 ]

@@ -22,7 +22,13 @@ export const Full = () => {
     { key: "name", name: "Name", width: 154 },
     { key: "height", name: "Height", width: 108 },
     { key: "mass", name: "Mass", width: 95 },
-    { key: "birth_year", name: "Birth year", width: 133 },
+    {
+      key: "birth_year",
+      name: "Birth year",
+      value: (person) =>
+        person.birth_year !== null ? `${person.birth_year}BBY` : undefined,
+      width: 133,
+    },
     { key: "eye_color", name: "Eye color", width: 127 },
     { key: "gender", name: "Gender", width: 113 },
     { key: "hair_color", name: "Hair color", width: 132 },
@@ -91,7 +97,7 @@ export const Full = () => {
             .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
             .map((person) => (
               <Table.Row key={person.name}>
-                {columns.map(({ key, width }) => (
+                {columns.map(({ key, width, value }) => (
                   <Table.DataCell
                     style={{
                       width,
@@ -104,7 +110,7 @@ export const Full = () => {
                     title={person[key]}
                     key={key}
                   >
-                    {person[key]}
+                    {value ? value(person) : person[key]}
                   </Table.DataCell>
                 ))}
               </Table.Row>
