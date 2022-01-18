@@ -65,6 +65,10 @@
   border-bottom: 2px solid var(--navds-accordion-color-border);
 }
 
+.navds-accordion__header--open:hover + * .navds-accordion__content {
+  border-color: var(--navds-accordion-color-border-hover);
+}
+
 .navds-accordion__expand-icon {
   width: 1.5rem;
   height: 1.5rem;
