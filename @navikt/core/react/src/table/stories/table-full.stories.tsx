@@ -37,6 +37,7 @@ export const Full = () => {
           <Table.Row>
             {columns.map(({ key, name, width }) => (
               <Table.HeaderCell
+                scope="row"
                 style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
                 aria-sort={
