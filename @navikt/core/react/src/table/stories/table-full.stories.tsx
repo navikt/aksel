@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import people from "./people.json";
 import { Table } from "../index";
+import Pagination from "../Pagination";
 
 export default {
   title: "ds-react/table",
@@ -8,58 +9,46 @@ export default {
 };
 
 export const Full = () => {
+  const [page, setPage] = useState(0);
   const columns = [
-    {
-      id: "name",
-      label: "Name",
-    },
-    {
-      id: "height",
-      label: "Height",
-    },
-    {
-      id: "mass",
-      label: "Mass",
-    },
-    {
-      id: "birth_year",
-      label: "Birth year",
-    },
-    {
-      id: "eye_color",
-      label: "Eye color",
-    },
-    {
-      id: "gender",
-      label: "Gender",
-    },
-    {
-      id: "hair_color",
-      label: "Hair color",
-    },
-    {
-      id: "skin_color",
-      label: "Skin color",
-    },
+    { key: "name", name: "Name" },
+    { key: "height", name: "Height" },
+    { key: "mass", name: "Mass" },
+    { key: "birth_year", name: "Birth year" },
+    { key: "eye_color", name: "Eye color" },
+    { key: "gender", name: "Gender" },
+    { key: "hair_color", name: "Hair color" },
+    { key: "skin_color", name: "Skin color" },
   ];
+  const rowsPerPage = 10;
   return (
-    <Table>
-      <Table.Header>
-        <Table.Row>
-          {columns.map(({ id, label }) => (
-            <Table.HeaderCell key={id}>{label}</Table.HeaderCell>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {people.map((person) => (
-          <Table.Row key={person.name}>
-            {columns.map(({ id }) => (
-              <Table.DataCell key={id}>{person[id]}</Table.DataCell>
+    <>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            {columns.map(({ key, name }) => (
+              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
             ))}
           </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
+        </Table.Header>
+        <Table.Body>
+          {people
+            .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+            .map((person) => (
+              <Table.Row key={person.name}>
+                {columns.map(({ key }) => (
+                  <Table.DataCell key={key}>{person[key]}</Table.DataCell>
+                ))}
+              </Table.Row>
+            ))}
+        </Table.Body>
+      </Table>
+      <Pagination
+        page={page}
+        onPageChange={setPage}
+        rowsPerPage={rowsPerPage}
+        count={people.length}
+      />
+    </>
   );
 };
