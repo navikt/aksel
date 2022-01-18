@@ -29,6 +29,7 @@ const Pagination = ({
     </Button>
     {new Array(Math.ceil(count / rowsPerPage)).fill(null).map((_, i) => (
       <Button
+        key={i}
         onClick={() => onPageChange(i)}
         variant={page === i ? "primary" : "secondary"}
       >
