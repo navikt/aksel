@@ -39,10 +39,14 @@ export const Full = () => {
               <Table.HeaderCell
                 key={key}
                 onClick={() =>
-                  setSort((sort) => ({
-                    key,
-                    asc: sort?.key !== key || !sort?.asc,
-                  }))
+                  setSort((sort) =>
+                    sort?.key === key && sort?.asc === false
+                      ? undefined
+                      : {
+                          key,
+                          asc: sort?.key !== key || !sort?.asc,
+                        }
+                  )
                 }
               >
                 {name}
