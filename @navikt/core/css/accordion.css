@@ -8,7 +8,8 @@
   --navds-accordion-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-accordion-color-text-open: var(
+  --navds-accordion-color-text-open: var(--navds-semantic-color-text);
+  --navds-accordion-color-text-open-hover: var(
     --navds-semantic-color-interaction-primary
   );
   --navds-accordion-color-background-open: var(
@@ -49,14 +50,15 @@
   border-color: var(--navds-accordion-color-border-hover);
 }
 
-.navds-accordion__header--open:hover {
-  border-color: transparent;
-}
-
 .navds-accordion__header--open {
   background-color: var(--navds-accordion-color-background-open);
   color: var(--navds-accordion-color-text-open);
   border-color: transparent;
+}
+
+.navds-accordion__header--open:hover {
+  border-color: transparent;
+  color: var(--navds-accordion-color-text-open-hover);
 }
 
 .navds-accordion__content {
