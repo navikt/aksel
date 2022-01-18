@@ -80,3 +80,42 @@
 .navds-table .navds-checkbox .navds-checkbox__label {
   padding: 0;
 }
+
+.navds-table__header-cell[aria-sort] {
+  padding: 0;
+}
+
+.navds-table__sort-button {
+  align-items: center;
+  appearance: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: var(--navds-spacing-4);
+  text-align: left;
+  width: 100%;
+  font-weight: inherit;
+  color: var(--navds-semantic-color-link);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.navds-table__sort-button:hover {
+  background-color: var(--navds-semantic-color-canvas-background);
+}
+
+.navds-table__sort-button:active {
+  background-color: var(--navds-semantic-color-border-inverted);
+  color: var(--navds-semantic-color-interaction-primary-selected);
+}
+
+.navds-table__sort-button:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
+.navds-table__sort-button svg {
+  font-size: 1rem;
+  flex-shrink: 0;
+}

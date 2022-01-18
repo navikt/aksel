@@ -38,19 +38,30 @@ export const Full = () => {
             {columns.map(({ key, name }) => (
               <Table.HeaderCell
                 key={key}
-                onClick={() =>
-                  setSort((sort) =>
-                    sort?.key === key && sort?.asc === false
-                      ? undefined
-                      : {
-                          key,
-                          asc: sort?.key !== key || !sort?.asc,
-                        }
-                  )
+                aria-sort={
+                  sort?.key === key
+                    ? sort.asc
+                      ? "ascending"
+                      : "descending"
+                    : "none"
                 }
               >
-                {name}
-                {sort?.key === key && (sort.asc ? <Down /> : <Up />)}
+                <button
+                  className="navds-table__sort-button"
+                  onClick={() =>
+                    setSort((sort) =>
+                      sort?.key === key && sort?.asc === false
+                        ? undefined
+                        : {
+                            key,
+                            asc: sort?.key !== key || !sort?.asc,
+                          }
+                    )
+                  }
+                >
+                  {name}
+                  {sort?.key === key && (sort.asc ? <Down /> : <Up />)}
+                </button>
               </Table.HeaderCell>
             ))}
           </Table.Row>
