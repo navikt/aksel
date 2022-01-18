@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Hamburger } from "@navikt/ds-icons";
+import { Attachment, Hamburger, Star, System } from "@navikt/ds-icons";
 import { Toggle } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
@@ -48,7 +48,19 @@ export const All = () => {
       </Toggle>
       <h2>Toggle icons</h2>
       <Toggle value={activeValue} onChange={(e) => setActiveValue(e)}>
-        {Buttons(true)}
+        {/* {Buttons(true)} */}
+        <Toggle.Button value={"First"}>
+          <Hamburger style={{ fontSize: "1.5rem" }} />
+        </Toggle.Button>
+        <Toggle.Button value={"Second"}>
+          <Attachment style={{ fontSize: "1.5rem" }} />
+        </Toggle.Button>
+        <Toggle.Button value={"Third"}>
+          <Star style={{ fontSize: "1.5rem" }} />
+        </Toggle.Button>
+        <Toggle.Button value={"Fourth"}>
+          <System style={{ fontSize: "1.5rem" }} />
+        </Toggle.Button>
       </Toggle>
       <h2>Toggle small</h2>
       <Toggle

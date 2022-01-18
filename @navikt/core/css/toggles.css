@@ -1,41 +1,112 @@
-/* :root {
-} */
+:root {
+  --navds-toggle-button-shadow-color: var(--navds-semantic-color-border);
+  --navds-toggle-button-shadow-color-active: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-toggle-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-toggle-button-color-background: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-toggle-button-color-text: var(--navds-semantic-color-text);
+  --navds-toggle-button-color-background-hover: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+  --navds-toggle-button-color-divider: var(
+    --navds-semantic-color-border-inverted
+  );
+  --navds-toggle-button-color-divider-active: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-toggle-button-color-background-active: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-toggle-button-color-background-active-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-toggle-button-color-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
+}
 
 .navds-toggles {
   display: inline-flex;
-  border: 2px solid var(--navds-semantic-color-border);
   border-radius: 4px;
-  gap: 1px;
+  background-color: var(--navds-toggle-color-background);
 }
 
 .navds-toggles__button {
+  --toggle-button-shadow-color: var(--navds-toggle-button-shadow-color);
+
   position: relative;
+  display: inline-flex;
+  margin: 0;
+  padding: var(--navds-spacing-3);
+  min-width: 48px;
   appearance: none;
   background: none;
-  background-color: var(--navds-semantic-color-component-background-light);
-  color: var(--navds-semantic-color-text);
-  display: inline-flex;
   cursor: pointer;
-  margin: 0;
+  background-color: var(--navds-toggle-button-color-background);
+  color: var(--navds-toggle-button-color-text);
   text-align: center;
-  text-decoration: none;
   border: none;
-  min-width: 48px;
-  padding: var(--navds-spacing-3);
-  /* box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary); */
+  box-shadow: inset 0 2px 0 0 var(--toggle-button-shadow-color),
+    inset 0 -2px 0 0 var(--toggle-button-shadow-color);
 }
 
-.navds-toggles__button:not(:first-child)::before {
+.navds-toggles__button:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: inset 0 2px 0 0 var(--toggle-button-shadow-color),
+    inset 0 -2px 0 0 var(--toggle-button-shadow-color),
+    inset 2px 0 0 0 var(--toggle-button-shadow-color);
+}
+
+.navds-toggles__button:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: inset 0 2px 0 0 var(--toggle-button-shadow-color),
+    inset 0 -2px 0 0 var(--toggle-button-shadow-color),
+    inset -2px 0 0 0 var(--toggle-button-shadow-color);
+}
+
+.navds-toggles__button:first-child:last-child {
+  box-shadow: inset 0 0 0 2px var(--toggle-button-shadow-color);
+}
+
+.navds-toggles__button:hover {
+  background-color: var(--navds-toggle-button-color-background-hover);
+}
+
+.navds-toggles__button:focus,
+.navds-toggles__button:first-child:last-child:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+  z-index: 1;
+}
+
+.navds-toggles__button::before {
   content: "";
-  height: 100%;
+  height: 1.5rem;
   width: 2px;
-  background-color: var(--navds-semantic-color-border);
+  background-color: var(--navds-toggle-button-color-divider);
   position: absolute;
-  top: 0;
+  top: 50%;
+  transform: translateY(-50%);
   left: -1px;
+  border-radius: 1rem;
 }
 
-.navds-toggles__button:focus::before {
+.navds-toggles--small > .navds-toggles__button::before {
+  height: 1rem;
+}
+
+.navds-toggles__button:first-child:before,
+.navds-toggles__button:focus::before,
+.navds-toggles__button--active::before,
+.navds-toggles__button--active + .navds-toggles__button::before,
+.navds-toggles__button--active + .navds-toggles__button--active:focus::before {
   visibility: hidden;
 }
 
@@ -57,60 +128,34 @@
   gap: var(--navds-spacing-2);
 }
 
-.navds-toggles--small .navds-toggles__button-inner > svg {
+.navds-toggles__button > .navds-toggles__button-inner > svg {
+  font-size: 1.5rem;
+}
+
+.navds-toggles--small
+  > .navds-toggles__button
+  > .navds-toggles__button-inner
+  > svg {
   font-size: 1rem;
 }
 
-.navds-toggles__button:hover {
-  background-color: var(
-    --navds-semantic-color-interaction-primary-hover-subtle
-  );
-}
-
 .navds-toggles__button--active {
-  background-color: var(--navds-semantic-color-interaction-primary);
-  color: var(--navds-semantic-color-text-inverted);
+  --toggle-button-shadow-color: var(--navds-toggle-button-shadow-color-active);
+
+  background-color: var(--navds-toggle-button-color-background-active);
+  color: var(--navds-toggle-button-color-text-active);
 }
 
 .navds-toggles__button--active:hover {
-  background-color: var(--navds-semantic-color-interaction-primary-selected);
-}
-
-.navds-toggles__button--active::before {
-  visibility: hidden;
+  background-color: var(--navds-toggle-button-color-background-active-hover);
 }
 
 .navds-toggles__button--active + .navds-toggles__button--active::before {
   visibility: visible;
-  background-color: white;
+  background-color: var(--navds-toggle-button-color-divider-active);
 }
 
-.navds-toggles__button--active + .navds-toggles__button--active:focus::before {
-  background-color: var(--navds-semantic-color-interaction-primary);
-}
-
-.navds-toggles__button:first-child {
-  border-top-left-radius: 1.5px;
-  border-bottom-left-radius: 1.5px;
-}
-
-.navds-toggles__button:last-child {
-  border-top-right-radius: 1.5px;
-  border-bottom-right-radius: 1.5px;
-}
-
-.navds-toggles__button:focus {
-  outline: none;
-  box-shadow: inset 0 0 0 1px var(--navds-semantic-color-interaction-primary),
-    0 0 0 2px var(--navds-semantic-color-focus);
-  z-index: 1;
-}
-
-.navds-toggles__button--active:focus {
-  /* box-shadow: inset 0 0 0 1px
-      var(--navds-semantic-color-component-background-light),
-    inset 0 0 0 2px var(--navds-semantic-color-interaction-primary-selected),
-    var(--navds-shadow-focus); */
-  box-shadow: 0 0 0 2px var(--navds-semantic-color-interaction-primary),
-    0 0 0 3px white, 0 0 0 5px var(--navds-semantic-color-focus);
+.navds-toggles__button--active:focus,
+.navds-toggles__button--active:focus:first-child:last-child {
+  box-shadow: inset 0 0 0 1px white, var(--navds-shadow-focus);
 }
