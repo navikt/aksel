@@ -19,24 +19,25 @@ export const Full = () => {
   const [sort, setSort] = useState<SortState>();
 
   const columns = [
-    { key: "name", name: "Name" },
-    { key: "height", name: "Height" },
-    { key: "mass", name: "Mass" },
-    { key: "birth_year", name: "Birth year" },
-    { key: "eye_color", name: "Eye color" },
-    { key: "gender", name: "Gender" },
-    { key: "hair_color", name: "Hair color" },
-    { key: "skin_color", name: "Skin color" },
+    { key: "name", name: "Name", width: 154 },
+    { key: "height", name: "Height", width: 108 },
+    { key: "mass", name: "Mass", width: 95 },
+    { key: "birth_year", name: "Birth year", width: 133 },
+    { key: "eye_color", name: "Eye color", width: 127 },
+    { key: "gender", name: "Gender", width: 113 },
+    { key: "hair_color", name: "Hair color", width: 132 },
+    { key: "skin_color", name: "Skin color", width: 133 },
   ];
   const rowsPerPage = 10;
 
   return (
     <>
-      <Table>
+      <Table style={{ width: "initial" }}>
         <Table.Header>
           <Table.Row>
-            {columns.map(({ key, name }) => (
+            {columns.map(({ key, name, width }) => (
               <Table.HeaderCell
+                style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
                 aria-sort={
                   sort?.key === key
@@ -83,8 +84,21 @@ export const Full = () => {
             .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
             .map((person) => (
               <Table.Row key={person.name}>
-                {columns.map(({ key }) => (
-                  <Table.DataCell key={key}>{person[key]}</Table.DataCell>
+                {columns.map(({ key, width }) => (
+                  <Table.DataCell
+                    style={{
+                      width,
+                      minWidth: width,
+                      maxWidth: width,
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    }}
+                    title={person[key]}
+                    key={key}
+                  >
+                    {person[key]}
+                  </Table.DataCell>
                 ))}
               </Table.Row>
             ))}
