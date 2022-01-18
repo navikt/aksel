@@ -115,7 +115,7 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
       <label htmlFor={inputProps.id} className="navds-switch__label-wrapper">
         <div
           className={cl("navds-switch__content", {
-            "sr-only": hideLabel,
+            "navds-sr-only": hideLabel,
             "navds-switch--with-description": !!description && !hideLabel,
           })}
         >

@@ -96,7 +96,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             size={size}
             as="legend"
             className={cl("navds-fieldset__legend", {
-              "sr-only": !!hideLegend,
+              "navds-sr-only": !!hideLegend,
             })}
           >
             {legend}
@@ -105,7 +105,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             (size === "medium" ? (
               <BodyShort
                 className={cl("navds-fieldset__description", {
-                  "sr-only": !!hideLegend,
+                  "navds-sr-only": !!hideLegend,
                 })}
                 id={inputDescriptionId}
                 size="small"
@@ -116,7 +116,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
             ) : (
               <Detail
                 className={cl("navds-fieldset__description", {
-                  "sr-only": !!hideLegend,
+                  "navds-sr-only": !!hideLegend,
                 })}
                 id={inputDescriptionId}
                 size="small"

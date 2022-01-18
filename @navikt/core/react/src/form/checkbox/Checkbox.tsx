@@ -58,7 +58,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
       <label htmlFor={inputProps.id} className="navds-checkbox__label">
         <div
           className={cl("navds-checkbox__content", {
-            "sr-only": props.hideLabel,
+            "navds-sr-only": props.hideLabel,
           })}
         >
           <BodyShort as="div" size={size}>
