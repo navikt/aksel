@@ -88,13 +88,6 @@ export const All = () => {
         onChange={(e) => setValue(e)}
         onClear={() => setValue("")}
       />
-      <h3>Controlled state no clear</h3>
-      <SearchField
-        value={value}
-        label="Mollit eiusmod"
-        description="Ea cupidatat eu sunt commodo"
-        onChange={(e) => setValue(e)}
-      />
       <h2>No clear button</h2>
       <SearchField
         hideLabel
