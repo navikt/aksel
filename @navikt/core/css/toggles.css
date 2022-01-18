@@ -102,7 +102,7 @@
   height: 1rem;
 }
 
-.navds-toggles__button:first-child:before,
+.navds-toggles__button:first-child::before,
 .navds-toggles__button:focus::before,
 .navds-toggles__button--active::before,
 .navds-toggles__button--active + .navds-toggles__button::before,
