@@ -56,10 +56,6 @@
     "url": "https://github.com/navikt/nav-frontend-moduler.git"
   },
   "dependencies": {
-    "@storybook/addon-storysource": "^6.3.4",
-    "@storybook/addons": "^6.3.4",
-    "@storybook/theming": "^6.3.4",
-    "@storybook/addon-a11y": "^6.3.12",
     "extend": "^3.0.2",
     "gh-pages": "^3.1.0",
     "glob": "^7.1.6",
@@ -72,11 +68,17 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
+    "@storybook/addon-storysource": "^6.4",
+    "@storybook/addons": "^6.4",
+    "@storybook/theming": "^6.4",
+    "@storybook/addon-a11y": "^6.4",
+    "@storybook/builder-webpack5": "^6.4",
+    "@storybook/manager-webpack5": "^6.4",
+    "@storybook/addon-actions": "^6.4",
+    "@storybook/addon-docs": "^6.4",
+    "@storybook/addon-essentials": "^6.4",
+    "@storybook/react": "^6.4",
     "@babel/core": "^7.11.6",
-    "@storybook/addon-actions": "^6.3.4",
-    "@storybook/addon-docs": "^6.3.4",
-    "@storybook/addon-essentials": "^6.3.4",
-    "@storybook/react": "^6.3.4",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
     "babel-eslint": "^10.1.0",
