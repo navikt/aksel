@@ -50,16 +50,16 @@ export const All = () => {
       <Toggle value={activeValue} onChange={(e) => setActiveValue(e)}>
         {/* {Buttons(true)} */}
         <Toggle.Button value={"First"}>
-          <Hamburger style={{ fontSize: "1.5rem" }} />
+          <Hamburger />
         </Toggle.Button>
         <Toggle.Button value={"Second"}>
-          <Attachment style={{ fontSize: "1.5rem" }} />
+          <Attachment />
         </Toggle.Button>
         <Toggle.Button value={"Third"}>
-          <Star style={{ fontSize: "1.5rem" }} />
+          <Star />
         </Toggle.Button>
-        <Toggle.Button value={"Fourth"}>
-          <System style={{ fontSize: "1.5rem" }} />
+        <Toggle.Button value={"Fourth toggle"}>
+          <System />
         </Toggle.Button>
       </Toggle>
       <h2>Toggle small</h2>
