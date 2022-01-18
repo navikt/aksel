@@ -37,7 +37,7 @@ export interface SearchFieldProps
   /**
    * Callback for when user manually clears input with button or Escape
    */
-  onClear?: ({ trigger: string, event: clearEventT }) => void;
+  onClear?: (e: clearEventT) => void;
   /**
    * Callback for value in input after change
    */
@@ -49,8 +49,11 @@ export interface SearchFieldProps
 }
 
 type clearEventT =
-  | React.MouseEvent<HTMLButtonElement, MouseEvent>
-  | React.KeyboardEvent<HTMLDivElement>;
+  | {
+      trigger: "Clear button click";
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
+    }
+  | { trigger: "Escape keydown"; event: React.KeyboardEvent<HTMLDivElement> };
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (props, ref) => {
@@ -86,8 +89,8 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
     );
 
     const handleClear = useCallback(
-      (event: clearEventT, source: string) => {
-        onClear?.({ trigger: source, event });
+      (event: clearEventT) => {
+        onClear?.(event);
         handleChange("");
         if (searchRef.current && value === undefined) {
           searchRef.current.value = "";
@@ -103,7 +106,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
-            handleClear(e, "Escape keydown");
+            handleClear({ trigger: "Escape keydown", event: e });
           }
         },
         [handleClear]
@@ -176,7 +179,9 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           />
           {controlledValue && clearButton && (
             <button
-              onClick={(e) => handleClear(e, "Clear button click")}
+              onClick={(e) =>
+                handleClear({ trigger: "Clear button click", event: e })
+              }
               className="navds-search-field__clear-button"
             >
               <span className="navds-sr-only">
