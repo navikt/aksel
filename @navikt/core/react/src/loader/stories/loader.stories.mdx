@@ -63,25 +63,3 @@ Bakgrunnen kan settes til transparent med `transparent={true}`
 <Canvas>
   <Loader size="2xlarge" transparent />
 </Canvas>
-
-## Bruk av loader i knapper
-
-Husk her å gi brukeren nok informasjon om hvorfor knappen har en Loader. Dette kan gjøres ved å ha god tekst på siden,
-i knappen og i `title`-proppen for `Loader`. Unngå også bruk av `Loader` uten noen tekst som hinter til hva som foregår.
-
-Stylingen er overstyrt for knapper, slik at `transparent` ikke fungerer by-default ved bruk i knapper.
-Størrelsen justeres også automatisk, slik at alt man trenger er å sette Loaderen rett inn i knappen.
-
-```jsx
-<Button>
-  Laster inn nytt innhold...
-  <Loader />
-</Button>
-```
-
-<Canvas>
-  <Button>
-    Laster inn nytt innhold...
-    <Loader />
-  </Button>
-</Canvas>
