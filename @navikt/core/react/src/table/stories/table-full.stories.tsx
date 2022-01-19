@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import people from "./people.json";
 import { Table } from "../index";
 import Pagination from "../Pagination";
-import { Down, Up } from "@navikt/ds-icons";
 
 export default {
   title: "ds-react/table",
@@ -46,6 +45,17 @@ export const Full = () => {
   ];
   const rowsPerPage = 10;
 
+  const data = people
+    .slice()
+    .sort((a, b) =>
+      sort
+        ? sort.asc
+          ? comparator(b, a, sort.key)
+          : comparator(a, b, sort.key)
+        : 1
+    )
+    .slice(page * rowsPerPage, (page + 1) * rowsPerPage);
+
   return (
     <div
       style={{
@@ -54,73 +64,43 @@ export const Full = () => {
         gap: 16,
       }}
     >
-      <Table style={{ width: "initial" }}>
+      <Table style={{ width: "initial" }} onSortChange={setSort} sort={sort}>
         <Table.Header>
           <Table.Row>
             {columns.map(({ key, name, width }) => (
               <Table.HeaderCell
+                allowsSorting
                 scope="row"
                 style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
-                aria-sort={
-                  sort?.key === key
-                    ? sort.asc
-                      ? "ascending"
-                      : "descending"
-                    : "none"
-                }
+                sortKey={key}
               >
-                <button
-                  className="navds-table__sort-button"
-                  onClick={() =>
-                    setSort((sort) =>
-                      sort?.key === key && sort?.asc === false
-                        ? undefined
-                        : {
-                            key,
-                            asc: sort?.key !== key || !sort?.asc,
-                          }
-                    )
-                  }
-                >
-                  {name}
-                  {sort?.key === key && (sort.asc ? <Down /> : <Up />)}
-                </button>
+                {name}
               </Table.HeaderCell>
             ))}
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {people
-            .slice()
-            .sort((a, b) =>
-              sort
-                ? sort.asc
-                  ? comparator(b, a, sort.key)
-                  : comparator(a, b, sort.key)
-                : 1
-            )
-            .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
-            .map((person) => (
-              <Table.Row key={person.name}>
-                {columns.map(({ key, width, value }) => (
-                  <Table.DataCell
-                    style={{
-                      width,
-                      minWidth: width,
-                      maxWidth: width,
-                      overflow: "hidden",
-                      whiteSpace: "nowrap",
-                      textOverflow: "ellipsis",
-                    }}
-                    title={person[key]}
-                    key={key}
-                  >
-                    {value ? value(person) : person[key]}
-                  </Table.DataCell>
-                ))}
-              </Table.Row>
-            ))}
+          {data.map((person) => (
+            <Table.Row key={person.name}>
+              {columns.map(({ key, width, value }) => (
+                <Table.DataCell
+                  style={{
+                    width,
+                    minWidth: width,
+                    maxWidth: width,
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                  }}
+                  title={person[key]}
+                  key={key}
+                >
+                  {value ? value(person) : person[key]}
+                </Table.DataCell>
+              ))}
+            </Table.Row>
+          ))}
         </Table.Body>
       </Table>
       <Pagination

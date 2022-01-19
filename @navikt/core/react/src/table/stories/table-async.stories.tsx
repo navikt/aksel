@@ -78,7 +78,7 @@ export const Async = () => {
         gap: 16,
       }}
     >
-      <Table style={{ width: "initial" }}>
+      <Table style={{ width: "initial" }} sort={sort} onSortChange={setSort}>
         <Table.Header>
           <Table.Row>
             {columns.map(({ key, name, width }) => (
@@ -86,30 +86,10 @@ export const Async = () => {
                 scope="row"
                 style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
-                aria-sort={
-                  sort?.key === key
-                    ? sort.asc
-                      ? "ascending"
-                      : "descending"
-                    : "none"
-                }
+                allowsSorting
+                sortKey={key}
               >
-                <button
-                  className="navds-table__sort-button"
-                  onClick={() =>
-                    setSort((sort) =>
-                      sort?.key === key && sort?.asc === false
-                        ? undefined
-                        : {
-                            key,
-                            asc: sort?.key !== key || !sort?.asc,
-                          }
-                    )
-                  }
-                >
-                  {name}
-                  {sort?.key === key && (sort.asc ? <Down /> : <Up />)}
-                </button>
+                {name}
               </Table.HeaderCell>
             ))}
           </Table.Row>

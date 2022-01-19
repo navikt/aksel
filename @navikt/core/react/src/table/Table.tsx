@@ -6,6 +6,11 @@ import Row, { RowType } from "./Row";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
 
+interface SortState {
+  key: string;
+  asc: boolean;
+}
+
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   /**
    * Changes padding
@@ -17,6 +22,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default false
    */
   zebraStripes?: boolean;
+  onSortChange?: (state?: SortState) => void;
+  sort?: SortState;
 }
 
 export interface TableType
@@ -32,13 +39,25 @@ export interface TableType
 
 export interface TableContextProps {
   size: "medium" | "small";
+  onSortChange?: (state?: SortState) => void;
+  sort?: SortState;
 }
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
 const Table = forwardRef(
-  ({ className, zebraStripes = false, size = "medium", ...rest }, ref) => (
-    <TableContext.Provider value={{ size }}>
+  (
+    {
+      className,
+      zebraStripes = false,
+      size = "medium",
+      onSortChange,
+      sort,
+      ...rest
+    },
+    ref
+  ) => (
+    <TableContext.Provider value={{ size, onSortChange, sort }}>
       <table
         {...rest}
         ref={ref}
