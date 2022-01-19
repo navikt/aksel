@@ -47,6 +47,16 @@
           "format": "javascript/module-flat"
         }
       ]
+    },
+    "ts": {
+      "transformGroup": "js",
+      "buildPath": "tailwind/src/",
+      "files": [
+        {
+          "destination": "tokens.ts",
+          "format": "javascript/es6"
+        }
+      ]
     }
   }
 }
