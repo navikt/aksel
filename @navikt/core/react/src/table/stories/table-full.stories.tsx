@@ -14,6 +14,16 @@ interface SortState {
   asc: boolean;
 }
 
+const comparator = (a, b, orderBy) => {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+};
+
 export const Full = () => {
   const [page, setPage] = useState(0);
   const [sort, setSort] = useState<SortState>();
@@ -85,13 +95,9 @@ export const Full = () => {
             .slice()
             .sort((a, b) =>
               sort
-                ? typeof a[sort.key] === "string"
-                  ? sort.asc
-                    ? a[sort.key].localeCompare(b[sort.key])
-                    : b[sort.key].localeCompare(a[sort.key])
-                  : sort.asc
-                  ? a[sort.key] - b[sort.key]
-                  : b[sort.key] - a[sort.key]
+                ? sort.asc
+                  ? comparator(b, a, sort.key)
+                  : comparator(a, b, sort.key)
                 : 1
             )
             .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
