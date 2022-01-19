@@ -51,6 +51,7 @@
     "@types/faker": "^5.5.8",
     "@types/jest": "^27.0.1",
     "@types/react-modal": "^3.13.1",
+    "@types/rimraf": "3.0.2",
     "@types/styled-components": "^5.1.14",
     "copyfiles": "^2.4.1",
     "faker": "^5.5.3",
