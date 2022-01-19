@@ -99,6 +99,7 @@
   color: var(--navds-semantic-color-link);
   display: flex;
   gap: 0.5rem;
+  line-height: inherit;
 }
 
 .navds-table__sort-button:hover {

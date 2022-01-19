@@ -29,11 +29,13 @@ const HeaderCell: HeaderCellType = forwardRef(
         className={cl("navds-table__header-cell", className)}
         size={context?.size}
         aria-sort={
-          context?.sort?.key === sortKey
-            ? context?.sort?.asc
-              ? "ascending"
-              : "descending"
-            : "none"
+          allowsSorting
+            ? context?.sort?.key === sortKey
+              ? context?.sort?.asc
+                ? "ascending"
+                : "descending"
+              : "none"
+            : undefined
         }
         {...rest}
       >

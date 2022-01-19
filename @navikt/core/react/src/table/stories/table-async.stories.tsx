@@ -4,7 +4,6 @@ import useSWR from "swr";
 import people from "./people.json";
 import { Table } from "../index";
 import Pagination from "../Pagination";
-import { Down, Up } from "@navikt/ds-icons";
 import { Loader } from "../..";
 
 export default {
@@ -65,7 +64,7 @@ export const Async = () => {
       width: 133,
     },
     { key: "eye_color", name: "Eye color", width: 127 },
-    { key: "gender", name: "Gender", width: 113 },
+    { key: "gender", name: "Gender", width: 113, sortable: false },
     { key: "hair_color", name: "Hair color", width: 132 },
     { key: "skin_color", name: "Skin color", width: 133 },
   ];
@@ -81,12 +80,12 @@ export const Async = () => {
       <Table style={{ width: "initial" }} sort={sort} onSortChange={setSort}>
         <Table.Header>
           <Table.Row>
-            {columns.map(({ key, name, width }) => (
+            {columns.map(({ key, name, width, sortable = true }) => (
               <Table.HeaderCell
                 scope="row"
                 style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
-                allowsSorting
+                allowsSorting={sortable}
                 sortKey={key}
               >
                 {name}
