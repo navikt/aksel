@@ -41,3 +41,9 @@ Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/ma
 ## Lisenser
 
 Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENSE)
+    
+## Contributors
+    
+<a href="https://github.com/navikt/nav-frontend-moduler/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=navikt/nav-frontend-moduler" />
+</a>
