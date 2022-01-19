@@ -8,15 +8,15 @@ StyleDictionary.registerTransform({
     kebabCase([options.prefix].concat(prop.path).join(" ")),
 });
 
+/* https://github.com/amzn/style-dictionary/blob/main/examples/advanced/variables-in-outputs/sd.config.js */
 StyleDictionary.registerFormat({
   name: "referenceFormat",
-  formatter: ({ dictionary, platform, file, options }) => {
+  formatter: ({ dictionary, options }) => {
     const newTokens = dictionary.allTokens
       .map((token, i) => {
         let value = JSON.stringify(token.value);
         // new option added to decide whether or not to output references
         if (options.outputReferences) {
-          console.log(dictionary.getReferences(token.original.value));
           // the `dictionary` object now has `usesReference()` and
           // `getReferences()` methods. `usesReference()` will return true if
           // the value has a reference in it. `getReferences()` will return
@@ -25,12 +25,12 @@ StyleDictionary.registerFormat({
           if (dictionary.usesReference(token.original.value)) {
             const refs = dictionary.getReferences(token.original.value);
             refs.forEach((ref) => {
-              value = value.replace(ref.value, `var(${ref.path.join("-")})`);
+              value = value.replace(ref.value, `var(${ref.name})`);
             });
           }
         }
 
-        return `"${kebabCase(token.name).replace("navds-", "")}": ${value}${
+        return `"${token.name.replace("navds-", "")}": ${value}${
           i === dictionary.allTokens.length - 1 ? "" : ","
         }`;
       })

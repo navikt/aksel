@@ -49,7 +49,7 @@ module.exports = {
       ],
     },
     ts: {
-      transformGroup: "js",
+      transformGroup: "css",
       buildPath: "tailwind/src/",
       files: [
         {
