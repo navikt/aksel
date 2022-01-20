@@ -4,18 +4,26 @@ import { Back, Next } from "@navikt/ds-icons";
 import { Button } from "..";
 
 interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Current page
+   */
   page: number;
+  /**
+   * Callback when current page changes
+   */
   onPageChange: (page: number) => void;
-  rowsPerPage: number;
+  /**
+   * Total number of pages
+   */
   count: number;
 }
 
-export const getSteps = ({ current, stepCount }) =>
-  new Array(stepCount)
+export const getSteps = ({ current, count }) =>
+  new Array(count)
     .fill(null)
     .map((_, i) => i)
     .filter((n) => {
-      if (n === stepCount - 1 || n === 0) {
+      if (n === count - 1 || n === 0) {
         return true;
       }
       if (n >= current - 1 && n <= current + 1) {
@@ -24,7 +32,7 @@ export const getSteps = ({ current, stepCount }) =>
       if (current <= 2 && n === 2) {
         return true;
       }
-      if (current >= stepCount - 3 && n === stepCount - 3) {
+      if (current >= count - 3 && n === count - 3) {
         return true;
       }
       return false;
@@ -33,12 +41,9 @@ export const getSteps = ({ current, stepCount }) =>
 const Pagination = ({
   page,
   onPageChange,
-  rowsPerPage,
   count,
   className,
 }: PaginationProps) => {
-  const stepCount = Math.ceil(count / rowsPerPage);
-
   return (
     <div
       className={cl("navds-pagination", className)}
@@ -55,7 +60,7 @@ const Pagination = ({
       >
         <Back />
       </Button>
-      {getSteps({ current: page, stepCount }).map((n, i, a) => (
+      {getSteps({ current: page, count }).map((n, i, a) => (
         <>
           {i !== 0 && a[i - 1] !== n - 1 && (
             <div
@@ -81,7 +86,7 @@ const Pagination = ({
       <Button
         variant="tertiary"
         size="small"
-        disabled={page === stepCount - 1}
+        disabled={page === count - 1}
         onClick={() => onPageChange(page + 1)}
       >
         <Next />

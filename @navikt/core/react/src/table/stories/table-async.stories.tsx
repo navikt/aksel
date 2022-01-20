@@ -105,8 +105,7 @@ export const Async = () => {
       <Pagination
         page={page}
         onPageChange={setPage}
-        rowsPerPage={rowsPerPage}
-        count={count}
+        count={Math.ceil(count / rowsPerPage)}
       />
     </div>
   );
