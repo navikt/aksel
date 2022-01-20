@@ -62,44 +62,46 @@ export const Async = () => {
         gap: 16,
       }}
     >
-      <Table style={{ width: "initial" }} sort={sort} onSortChange={setSort}>
-        <Table.Header>
-          <Table.Row>
-            {columns.map(({ key, name, width, sortable = true }) => (
-              <Table.ColumnHeader
-                style={{ width, minWidth: width, maxWidth: width }}
-                key={key}
-                sortable={sortable}
-                sortKey={key}
-              >
-                {name}
-              </Table.ColumnHeader>
-            ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {people.map((person) => (
-            <Table.Row key={person.name}>
-              {columns.map(({ key, width, value }) => (
-                <Table.DataCell
-                  style={{
-                    width,
-                    minWidth: width,
-                    maxWidth: width,
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  }}
-                  title={person[key]}
+      <div style={{ overflow: "auto" }}>
+        <Table style={{ width: "initial" }} sort={sort} onSortChange={setSort}>
+          <Table.Header>
+            <Table.Row>
+              {columns.map(({ key, name, width, sortable = true }) => (
+                <Table.ColumnHeader
+                  style={{ width, minWidth: width, maxWidth: width }}
                   key={key}
+                  sortable={sortable}
+                  sortKey={key}
                 >
-                  {value ? value(person) : person[key]}
-                </Table.DataCell>
+                  {name}
+                </Table.ColumnHeader>
               ))}
             </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
+          </Table.Header>
+          <Table.Body>
+            {people.map((person) => (
+              <Table.Row key={person.name}>
+                {columns.map(({ key, width, value }) => (
+                  <Table.DataCell
+                    style={{
+                      width,
+                      minWidth: width,
+                      maxWidth: width,
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    }}
+                    title={person[key]}
+                    key={key}
+                  >
+                    {value ? value(person) : person[key]}
+                  </Table.DataCell>
+                ))}
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </Table>
+      </div>
       <Pagination
         page={page}
         onPageChange={setPage}
