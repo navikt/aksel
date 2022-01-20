@@ -3,12 +3,13 @@ import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
 import Row, { RowType } from "./Row";
+import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
 
-interface SortState {
-  key: string;
-  asc: boolean;
+export interface SortState {
+  orderBy: string;
+  direction: "ascending" | "descending";
 }
 
 export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
@@ -22,8 +23,14 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
    * @default false
    */
   zebraStripes?: boolean;
-  onSortChange?: (state?: SortState) => void;
+  /**
+   * Sort state
+   */
   sort?: SortState;
+  /**
+   * Callback whens ort state changes
+   */
+  onSortChange?: (state?: SortState) => void;
 }
 
 export interface TableType
@@ -35,11 +42,12 @@ export interface TableType
   Row: RowType;
   DataCell: DataCellType;
   HeaderCell: HeaderCellType;
+  ColumnHeader: ColumnHeaderType;
 }
 
 export interface TableContextProps {
   size: "medium" | "small";
-  onSortChange?: (state?: SortState) => void;
+  toggleColumnSort?: (sortKey: string) => void;
   sort?: SortState;
 }
 
@@ -57,7 +65,24 @@ const Table = forwardRef(
     },
     ref
   ) => (
-    <TableContext.Provider value={{ size, onSortChange, sort }}>
+    <TableContext.Provider
+      value={{
+        size,
+        toggleColumnSort: (sortKey) =>
+          onSortChange?.(
+            sort?.orderBy === sortKey && sort.direction === "descending"
+              ? undefined
+              : {
+                  orderBy: sortKey,
+                  direction:
+                    sort?.direction === "ascending"
+                      ? "descending"
+                      : "ascending",
+                }
+          ),
+        sort,
+      }}
+    >
       <table
         {...rest}
         ref={ref}
@@ -72,6 +97,7 @@ const Table = forwardRef(
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
+Table.ColumnHeader = ColumnHeader;
 Table.HeaderCell = HeaderCell;
 Table.DataCell = DataCell;
 

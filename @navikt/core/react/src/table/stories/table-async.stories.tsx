@@ -4,29 +4,14 @@ import useSWR from "swr";
 import people from "./people.json";
 import { Table } from "../index";
 import Pagination from "../Pagination";
-import { Loader } from "../..";
+import { Loader, SortState } from "../..";
 
 export default {
   title: "ds-react/table",
   component: Table,
 };
 
-interface SortState {
-  key: string;
-  asc: boolean;
-}
-
 const rowsPerPage = 10;
-
-const comparator = (a, b, orderBy) => {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-};
 
 const queryString = (obj) =>
   Object.keys(obj)
@@ -41,7 +26,7 @@ export const Async = () => {
   const { data } = useSWR(
     `/people?${queryString({
       page,
-      sort: sort ? `${sort.key}:${sort.asc ? "asc" : "desc"}` : undefined,
+      sort: sort ? `${sort.orderBy}:${sort.direction}` : undefined,
     })}`,
     (url) => fetch(url).then((res) => res.json())
   );
@@ -81,15 +66,14 @@ export const Async = () => {
         <Table.Header>
           <Table.Row>
             {columns.map(({ key, name, width, sortable = true }) => (
-              <Table.HeaderCell
-                scope="row"
+              <Table.ColumnHeader
                 style={{ width, minWidth: width, maxWidth: width }}
                 key={key}
-                allowsSorting={sortable}
+                sortable={sortable}
                 sortKey={key}
               >
                 {name}
-              </Table.HeaderCell>
+              </Table.ColumnHeader>
             ))}
           </Table.Row>
         </Table.Header>
@@ -130,6 +114,16 @@ Async.parameters = {
   msw: {
     handlers: [
       rest.get("/people", (req, res, ctx) => {
+        const comparator = (a, b, orderBy) => {
+          if (b[orderBy] < a[orderBy]) {
+            return -1;
+          }
+          if (b[orderBy] > a[orderBy]) {
+            return 1;
+          }
+          return 0;
+        };
+
         const page = Number(req.url.searchParams.get("page"));
         const sort = req.url.searchParams.get("sort");
         return res(
@@ -140,10 +134,10 @@ Async.parameters = {
               .slice()
               .sort((a, b) => {
                 if (sort) {
-                  const [key, dir] = sort.split(":");
-                  return dir === "asc"
-                    ? comparator(b, a, key)
-                    : comparator(a, b, key);
+                  const [orderBy, direction] = sort.split(":");
+                  return direction === "ascending"
+                    ? comparator(b, a, orderBy)
+                    : comparator(a, b, orderBy);
                 }
                 return 1;
               })
