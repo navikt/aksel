@@ -3,8 +3,7 @@ import { rest } from "msw";
 import useSWR from "swr";
 import people from "./people.json";
 import { Table } from "../index";
-import Pagination from "../Pagination";
-import { Loader, SortState } from "../..";
+import { Loader, Pagination, SortState } from "../..";
 
 export default {
   title: "ds-react/table",

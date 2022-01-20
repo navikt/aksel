@@ -48,13 +48,7 @@ const Pagination = ({
   className,
 }: PaginationProps) => {
   return (
-    <div
-      className={cl("navds-pagination", className)}
-      style={{
-        display: "flex",
-        gap: 4,
-      }}
-    >
+    <div className={cl("navds-pagination", className)}>
       <Button
         variant="tertiary"
         size="small"
@@ -66,14 +60,7 @@ const Pagination = ({
       {getSteps({ current: page, count }).map((n, i, a) => (
         <>
           {i !== 0 && a[i - 1] !== n - 1 && (
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: 32,
-              }}
-            >
+            <div className="navds-pagination__ellipsis">
               <span>...</span>
             </div>
           )}

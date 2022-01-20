@@ -1,0 +1,15 @@
+.navds-pagination {
+  display: flex;
+  gap: var(--navds-spacing-1);
+}
+
+.navds-pagination > .navds-button {
+  padding-inline: 0;
+}
+
+.navds-pagination > .navds-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--navds-spacing-8);
+}
