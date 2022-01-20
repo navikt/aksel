@@ -78,6 +78,14 @@ export const All = () => {
           </Button>
         ))}
       </Section>
+      <h2>Xsmall</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} size="xsmall">
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </Section>
       <h2>Button w/icon</h2>
       <Section>
         {variants.map((variant) => (

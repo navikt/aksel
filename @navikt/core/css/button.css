@@ -99,6 +99,14 @@
   min-width: 32px;
 }
 
+.navds-button--xsmall {
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+  padding-right: 0.375rem;
+  padding-left: 0.375rem;
+  min-width: 24;
+}
+
 .navds-button:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
@@ -115,7 +123,8 @@
   font-size: 1.5rem;
 }
 
-.navds-button--small svg {
+.navds-button--small svg,
+.navds-button--xsmall svg {
   font-size: 1.25rem;
 }
 
