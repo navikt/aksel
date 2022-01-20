@@ -23,16 +23,19 @@ export const getSteps = ({ current, count }) =>
     .fill(null)
     .map((_, i) => i)
     .filter((n) => {
+      if (count < 8) {
+        return true;
+      }
       if (n === count - 1 || n === 0) {
         return true;
       }
       if (n >= current - 1 && n <= current + 1) {
         return true;
       }
-      if (current <= 2 && n === 2) {
+      if (current <= 3 && n <= 4) {
         return true;
       }
-      if (current >= count - 3 && n === count - 3) {
+      if (current >= count - 4 && n >= count - 5) {
         return true;
       }
       return false;
@@ -65,9 +68,10 @@ const Pagination = ({
           {i !== 0 && a[i - 1] !== n - 1 && (
             <div
               style={{
-                marginInline: 12,
                 display: "flex",
                 alignItems: "center",
+                justifyContent: "center",
+                width: 32,
               }}
             >
               <span>...</span>
