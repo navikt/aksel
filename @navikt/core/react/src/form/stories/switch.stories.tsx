@@ -91,6 +91,9 @@ export const All = () => {
       <Switch disabled loading>
         Label text
       </Switch>
+      <Switch disabled loading checked>
+        Label text
+      </Switch>
     </div>
   );
 };
