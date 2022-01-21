@@ -1,8 +1,0 @@
-{
-  "extends": "../../utilities/build/tsconfig-pakker.json",
-  "compilerOptions": {
-    "outDir": "./lib",
-    "rootDir": "./src"
-  },
-  "include": ["./src"]
-}

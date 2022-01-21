@@ -1,6 +1,8 @@
-import React, { forwardRef } from "react";
+import React, { useRef, useState, forwardRef } from "react";
+import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { BodyShort, OverridableComponent } from "../";
+import { BodyShort, OverridableComponent, Loader } from "../";
+import { useClientLayoutEffect } from "../util";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,6 +26,11 @@ export interface ButtonProps
    * @default false
    */
   disabled?: boolean;
+  /**
+   * Replaces button content with a Loader component, keeps width
+   * @default false
+   */
+  loading?: boolean;
 }
 
 const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
@@ -34,25 +41,55 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       className,
       children,
       size = "medium",
+      loading = false,
+      disabled,
       ...rest
     },
     ref
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(
-        className,
-        "navds-button",
-        `navds-button--${variant}`,
-        `navds-button--${size}`
-      )}
-    >
-      <BodyShort as="span" className="navds-button__inner" size={size}>
-        {children}
-      </BodyShort>
-    </Component>
-  )
+  ) => {
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const mergedRef = mergeRefs([buttonRef, ref]);
+    const [widthOverride, setWidthOverride] = useState<number>();
+
+    useClientLayoutEffect(() => {
+      if (loading) {
+        const requestID = window.requestAnimationFrame(() => {
+          setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
+        });
+        return () => {
+          setWidthOverride(undefined);
+          cancelAnimationFrame(requestID);
+        };
+      }
+    }, [loading, children]);
+
+    return (
+      <Component
+        {...rest}
+        ref={mergedRef}
+        className={cl(
+          className,
+          "navds-button",
+          `navds-button--${variant}`,
+          `navds-button--${size}`,
+          {
+            "navds-button--loading": widthOverride,
+          }
+        )}
+        style={{ width: widthOverride }}
+        disabled={disabled ?? widthOverride ? true : undefined}
+      >
+        <BodyShort
+          as="span"
+          className="navds-button__inner"
+          size={size}
+          aria-live="polite"
+        >
+          {widthOverride ? <Loader size={size} /> : children}
+        </BodyShort>
+      </Component>
+    );
+  }
 );
 
 export default Button;

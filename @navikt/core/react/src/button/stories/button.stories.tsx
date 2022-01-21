@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../index";
 import { Success } from "@navikt/ds-icons";
 
@@ -37,6 +37,13 @@ const varSwitch = {
 };
 
 export const All = () => {
+  const [loadingState, setLoadingState] = useState(true);
+  const [content, setContent] = useState<string>("");
+
+  const toggleLoading = () => {
+    setLoadingState(!loadingState);
+  };
+
   return (
     <div style={{ paddingLeft: "1rem" }}>
       <h1>Button</h1>
@@ -100,6 +107,37 @@ export const All = () => {
           <Button key={variant} variant={variant} size="small">
             <span className="sr-only">Success ikon</span>
             <Success />
+          </Button>
+        ))}
+      </Section>
+      <h2>Button w/loader</h2>
+      <Button onClick={toggleLoading}>Toggle loaders</Button>
+      <Button onClick={() => setContent((content) => `${content} wat`)}>
+        Change content
+      </Button>
+      <Section>
+        {variants.map((variant) => (
+          <Button
+            key={variant}
+            variant={variant}
+            loading={loadingState}
+            onClick={toggleLoading}
+          >
+            {content || varSwitch[variant]}
+          </Button>
+        ))}
+      </Section>
+      <h2>Small w/loader</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button
+            key={variant}
+            variant={variant}
+            size="small"
+            loading={loadingState}
+            onClick={toggleLoading}
+          >
+            {varSwitch[variant]}
           </Button>
         ))}
       </Section>

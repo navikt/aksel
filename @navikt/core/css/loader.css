@@ -12,8 +12,6 @@
   );
   --navds-loader-color-inverted-background: rgba(255, 255, 255, 0.3);
   --navds-loader-color-transparent-background: transparent;
-  --navds-loader-color-on-button-background: rgba(255, 255, 255, 0.3);
-  --navds-loader-color-on-button-foreground: currentColor;
 }
 
 .navds-loader {
@@ -76,27 +74,6 @@
 
 .navds-loader--xsmall {
   width: 1rem;
-}
-
-/*
- * Button spesific styling
- */
-
-.navds-button .navds-loader .navds-loader__foreground {
-  stroke: var(--navds-loader-color-on-button-foreground);
-}
-
-.navds-button:hover .navds-loader .navds-loader__background {
-  stroke: var(--navds-loader-color-on-button-background);
-}
-
-.navds-button:active .navds-loader .navds-loader__background {
-  stroke: var(--navds-loader-color-on-button-background);
-}
-
-.navds-button--primary .navds-loader .navds-loader__background,
-.navds-button--danger .navds-loader .navds-loader__background {
-  stroke: var(--navds-loader-color-on-button-background);
 }
 
 @keyframes loader-rotate {
