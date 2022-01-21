@@ -1,0 +1,47 @@
+.copy-link {
+  display: flex;
+  align-self: flex-start;
+}
+
+.copy-link__anchor {
+  display: flex;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 0.8rem 0.8rem 0.8rem 0;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.copy-link__anchor:hover {
+  font-weight: 600;
+}
+
+.copy-link__anchor:hover .copy-link__icon {
+  transform: scale(1.2);
+}
+
+.copy-link__icon {
+  margin-right: 0.5rem;
+}
+
+.copy-link__tooltip {
+  display: flex;
+  margin-left: 1rem;
+  visibility: hidden;
+  background-color: var(--navds-global-color-green-100);
+  color: black;
+  padding: 0.5rem 0.75rem;
+  border: 1px var(--navds-global-color-green-400) solid;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition-property: visibility, opacity;
+  transition-duration: 0.15s;
+  transition-timing-function: ease-in;
+  transform: translateY(2px);
+}
+
+.copy-link__tooltip--visible {
+  opacity: 1;
+  visibility: visible;
+}

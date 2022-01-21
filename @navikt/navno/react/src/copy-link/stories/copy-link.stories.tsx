@@ -5,8 +5,12 @@ export default {
   title: "ds-react-navno/copy-link",
 };
 
-interface StoryProps {}
-
 export const CopyLinkStory = () => {
-  return <CopyLink />;
+  return (
+    <CopyLink
+      label="Kopier lenke"
+      confirmationLabel="Lenken er kopiert"
+      anchor="testAnchor"
+    />
+  );
 };
