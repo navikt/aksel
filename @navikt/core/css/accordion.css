@@ -50,13 +50,13 @@
   border-color: var(--navds-accordion-color-border-hover);
 }
 
-.navds-accordion__header--open {
+.navds-accordion__item--open > .navds-accordion__header {
   background-color: var(--navds-accordion-color-background-open);
   color: var(--navds-accordion-color-text-open);
   border-color: transparent;
 }
 
-.navds-accordion__header--open:hover {
+.navds-accordion__item--open > .navds-accordion__header:hover {
   border-color: transparent;
   color: var(--navds-accordion-color-text-open-hover);
 }
@@ -67,7 +67,10 @@
   border-bottom: 2px solid var(--navds-accordion-color-border);
 }
 
-.navds-accordion__header--open:hover + * .navds-accordion__content {
+.navds-accordion__item--open
+  > .navds-accordion__header:hover
+  + *
+  .navds-accordion__content {
   border-color: var(--navds-accordion-color-border-hover);
 }
 

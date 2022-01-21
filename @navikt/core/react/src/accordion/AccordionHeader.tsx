@@ -49,21 +49,20 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-accordion__header",
           className,
           "navds-heading",
-          "navds-heading--small",
-          { "navds-accordion__header--open": context.open }
+          "navds-heading--small"
         )}
         onClick={handleClick}
         {...rest}
       >
         {children}
         <Expand
-          title={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
+          title={context.open ? "lukk panel" : "åpne panel"}
           className={cl("navds-accordion__expand-icon", {
             "navds-accordion__expand-icon--flip": context.open,
           })}
         />
         <ExpandFilled
-          title={context.open ? "Lukk panel ikon" : "Åpne panel ikon"}
+          title={context.open ? "lukk panel" : "åpne panel"}
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",
