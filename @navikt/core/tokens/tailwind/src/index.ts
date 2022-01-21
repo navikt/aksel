@@ -1,3 +1,4 @@
-import * as tokens from "./tokens";
+import Colors from "./colors";
+import * as tokens from "./tokens.json";
 
-console.log(tokens);
+console.log(Colors(tokens));
