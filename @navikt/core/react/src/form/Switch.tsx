@@ -90,14 +90,14 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>((props, ref) => {
         `navds-switch--${position}`,
         {
           "navds-switch--loading": loading,
-          "navds-switch--disabled": inputProps.disabled || loading,
+          "navds-switch--disabled": inputProps.disabled ?? loading,
         }
       )}
     >
       <input
         {...omit(rest, ["size"])}
         {...omit(inputProps, ["aria-invalid", "aria-describedby"])}
-        disabled={inputProps.disabled || loading}
+        disabled={inputProps.disabled ?? loading}
         checked={checkedProp}
         defaultChecked={defaultChecked}
         ref={ref}
