@@ -78,7 +78,7 @@ export const All = () => {
       >
         <SearchField.Button>
           <Search />
-          <span className="sr-only">Søk</span>
+          <span className="navds-sr-only">Søk</span>
         </SearchField.Button>
         <SearchField.Input />
       </SearchField>
@@ -91,7 +91,7 @@ export const All = () => {
         <SearchField.Input />
         <SearchField.Button>
           <Search />
-          <span className="sr-only">Søk</span>
+          <span className="navds-sr-only">Søk</span>
         </SearchField.Button>
       </SearchField>
       <SearchField
@@ -101,7 +101,7 @@ export const All = () => {
       >
         <SearchField.Button>
           <Search />
-          <span className="sr-only">Søk</span>
+          <span className="navds-sr-only">Søk</span>
         </SearchField.Button>
         <SearchField.Clear>
           <Close /> Tøm
@@ -120,7 +120,7 @@ export const All = () => {
         </SearchField.Clear>
         <SearchField.Button>
           <Search />
-          <span className="sr-only">Søk</span>
+          <span className="navds-sr-only">Søk</span>
         </SearchField.Button>
       </SearchField>
 
