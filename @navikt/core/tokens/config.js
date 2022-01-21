@@ -48,6 +48,7 @@ module.exports = {
         },
       ],
     },
+    /* Outputs a easy-to-parse format for tailwind config */
     ts: {
       transformGroup: "css",
       buildPath: "tailwind/src/",
