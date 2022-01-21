@@ -1,7 +1,9 @@
 import * as React from "react";
+import cl from "classnames";
 import { Menu } from "../index";
 import { NavLink, HashRouter as Router } from "react-router-dom";
 import { Button } from "../..";
+import { MenuItemProps } from "../MenuItem";
 
 export default {
   title: "ds-react/menu",
@@ -79,86 +81,61 @@ export const All = () => (
   </div>
 );
 
-export const ReactRouter = () => (
-  <Menu>
-    <Menu.Drawer title="Nivå 1 – 3 rems høy">
-      <Menu.Item
-        as={NavLink}
-        activeClassName="navds-accordion-menu-item--active"
-        to="/1"
-      >
+export const ReactRouter = () => {
+  const MenuItemLink = (props: MenuItemProps & { to: string }) => {
+    const { to } = props;
+
+    const CustomLink = React.useMemo(
+      () => (props: MenuItemProps) => (
+        <NavLink
+          {...props}
+          to={to}
+          className={({ isActive }) =>
+            cl(props.className, {
+              "navds-menu-item--active": isActive,
+            })
+          }
+        />
+      ),
+      [to]
+    );
+
+    return (
+      <Menu.Item {...props} as={CustomLink}>
         Nivå 2 innrykk 2 rems
       </Menu.Item>
-      <Menu.Item
-        as={NavLink}
-        activeClassName="navds-accordion-menu-item--active"
-        to="/2"
-      >
-        Subtitle 3
-      </Menu.Item>
-    </Menu.Drawer>
-    <Menu.Drawer title="Skjema og søknad">
-      <Menu.Drawer title="Satser">
-        <Menu.Item
-          as={NavLink}
-          activeClassName="navds-accordion-menu-item--active"
-          to="/3"
-        >
-          Nivå 3 – 3 rems innrykk Har du rett til dagpenger når du mottar annen
-          økonomisk støtte fra NAV?
-        </Menu.Item>
+    );
+  };
+
+  return (
+    <Menu>
+      <Menu.Drawer title="Nivå 1 - 3 rems høy">
+        <MenuItemLink to="/1">Nivå 2 innrykk 2 rems</MenuItemLink>
+        <MenuItemLink to="/2">Subtitle 3</MenuItemLink>
       </Menu.Drawer>
-      <Menu.Item
-        as={NavLink}
-        activeClassName="navds-accordion-menu-item--active"
-        to="/4"
-      >
-        Subtitle 2
-      </Menu.Item>
-      <Menu.Item
-        as={NavLink}
-        activeClassName="navds-accordion-menu-item--active"
-        to="/5"
-      >
-        Subtitle 3
-      </Menu.Item>
-    </Menu.Drawer>
-    <Menu.Drawer title="Sakbehandlingstider">
-      <Menu.Drawer title="Subtitle 4 Lang tittel på andre nivå lorem ipsum">
-        <Menu.Item
-          as={NavLink}
-          activeClassName="navds-accordion-menu-item--active"
-          to="/6"
-        >
-          Subtitle 5
-        </Menu.Item>
+      <Menu.Drawer title="Skjema og søknad">
+        <Menu.Drawer title="Satser">
+          <MenuItemLink to="/3">
+            Nivå 3 - 3 rems innrykk Har du rett til dagpenger når du mottar
+            annen økonomisk støtte fra NAV?
+          </MenuItemLink>
+        </Menu.Drawer>
+        <MenuItemLink to="/4">Subtitle 2</MenuItemLink>
+        <MenuItemLink to="/5">Subtitle 3</MenuItemLink>
       </Menu.Drawer>
-    </Menu.Drawer>
-    <Menu.Item
-      as={NavLink}
-      activeClassName="navds-accordion-menu-item--active"
-      to="/7"
-    >
-      Internasjonalt
-    </Menu.Item>
-    <Menu.Drawer title="Meld fra om endringer lang tittel på første nivå">
-      <Menu.Item
-        as={NavLink}
-        activeClassName="navds-accordion-menu-item--active"
-        to="/8"
-      >
-        Subtitle 6
-      </Menu.Item>
-    </Menu.Drawer>
-    <Menu.Item
-      as={NavLink}
-      activeClassName="navds-accordion-menu-item--active"
-      to="/9"
-    >
-      Nivå 1
-    </Menu.Item>
-  </Menu>
-);
+      <Menu.Drawer title="Sakbehandlingstider">
+        <Menu.Drawer title="Subtitle 4 Lang tittel på andre nivå lorem ipsum">
+          <MenuItemLink to="/6">Subtitle 5</MenuItemLink>
+        </Menu.Drawer>
+      </Menu.Drawer>
+      <MenuItemLink to="/7">Internasjonalt</MenuItemLink>
+      <Menu.Drawer title="Meld fra om endringer lang tittel på første nivå">
+        <MenuItemLink to="/8">Subtitle 6</MenuItemLink>
+      </Menu.Drawer>
+      <MenuItemLink to="/9">Nivå 1</MenuItemLink>
+    </Menu>
+  );
+};
 
 ReactRouter.decorators = [
   (Story) => (
