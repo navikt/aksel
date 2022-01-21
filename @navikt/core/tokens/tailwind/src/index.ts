@@ -18,3 +18,5 @@ const config = {
 const outputString = `module.exports = ${JSON.stringify(config, null, 2)};`;
 
 writeFileSync("./tailwind/tailwind.config.js", outputString);
+
+console.log("Success: Tailwind config ");
