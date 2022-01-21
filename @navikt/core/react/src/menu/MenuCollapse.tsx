@@ -11,17 +11,17 @@ import MenuItems from "./MenuItems";
 
 export const NestingContext = createContext<{ depth: number }>({ depth: 0 });
 
-export interface MenuDrawerProps extends HTMLAttributes<HTMLDivElement> {
+export interface MenuCollapseProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
   defaultOpen?: boolean;
   children: React.ReactNode;
 }
 
-export type MenuDrawerType = React.ForwardRefExoticComponent<
-  MenuDrawerProps & React.RefAttributes<HTMLDivElement>
+export type MenuCollapseType = React.ForwardRefExoticComponent<
+  MenuCollapseProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const Drawer: MenuDrawerType = forwardRef(
+const Collapse: MenuCollapseType = forwardRef(
   ({ children, defaultOpen = false, title, className, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const context = useContext(NestingContext);
@@ -29,23 +29,23 @@ const Drawer: MenuDrawerType = forwardRef(
     return (
       <div
         ref={ref}
-        className={cl("navds-menu-drawer", className, {
-          "navds-menu-drawer--open": isOpen,
+        className={cl("navds-menu-collapse", className, {
+          "navds-menu-collapse--open": isOpen,
         })}
         {...rest}
       >
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="navds-menu-drawer__button"
+          className="navds-menu-collapse__button"
         >
           {title}
           <Expand
             title={isOpen ? "lukk navigasjons-skuff" : "åpne navigason-skuff"}
-            className="navds-menu-drawer__expand-icon"
+            className="navds-menu-collapse__expand-icon"
           />
           <ExpandFilled
             title={isOpen ? "lukk navigasjons-skuff" : "åpne navigason-skuff"}
-            className="navds-menu-drawer__expand-icon navds-menu-drawer__expand-icon--filled"
+            className="navds-menu-collapse__expand-icon navds-menu-collapse__expand-icon--filled"
           />
         </button>
         <NestingContext.Provider
@@ -67,4 +67,4 @@ const Drawer: MenuDrawerType = forwardRef(
   }
 );
 
-export default Drawer;
+export default Collapse;

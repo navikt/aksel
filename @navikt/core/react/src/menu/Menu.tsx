@@ -1,8 +1,9 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import MenuItems from "./MenuItems";
-import Drawer, { MenuDrawerType } from "./MenuDrawer";
+
 import Item, { MenuItemType } from "./MenuItem";
+import Collapse, { MenuCollapseType } from "./MenuCollapse";
 
 export interface MenuProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode;
@@ -12,7 +13,7 @@ interface MenuComponent
   extends React.ForwardRefExoticComponent<
     MenuProps & React.RefAttributes<HTMLElement>
   > {
-  Drawer: MenuDrawerType;
+  Collapse: MenuCollapseType;
   Item: MenuItemType;
 }
 
@@ -31,7 +32,7 @@ const Menu = forwardRef<HTMLElement, MenuProps>(
   }
 ) as MenuComponent;
 
-Menu.Drawer = Drawer;
+Menu.Collapse = Collapse;
 Menu.Item = Item;
 
 export default Menu;

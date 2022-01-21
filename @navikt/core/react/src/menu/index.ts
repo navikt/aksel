@@ -1,3 +1,3 @@
 export { default as Menu, MenuProps } from "./Menu";
-export { MenuDrawerProps } from "./MenuDrawer";
+export { MenuCollapseProps } from "./MenuCollapse";
 export { MenuItemProps } from "./MenuItem";

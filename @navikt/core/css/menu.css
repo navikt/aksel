@@ -26,7 +26,7 @@
   padding: 0;
 }
 
-.navds-menu-drawer__button {
+.navds-menu-collapse__button {
   cursor: pointer;
   background-color: transparent;
   border: none;
@@ -44,25 +44,25 @@
 }
 
 .navds-menu-item,
-.navds-menu-drawer__button {
+.navds-menu-collapse__button {
   display: flex;
   padding: var(--navds-spacing-3) var(--navds-spacing-2);
   text-decoration: none;
 }
 
 .navds-menu-item:focus,
-.navds-menu-drawer__button:focus {
+.navds-menu-collapse__button:focus {
   outline: 3px solid var(--navds-menu-outline-focus);
   outline-offset: -3px;
   color: var(--navds-menu-color-text-focus);
 }
 
-.navds-menu-drawer__button:focus > .navds-menu-drawer__expand-icon {
+.navds-menu-collapse__button:focus > .navds-menu-collapse__expand-icon {
   color: var(--navds-menu-color-focus);
 }
 
 .navds-menu-item:hover,
-.navds-menu-drawer__button:hover {
+.navds-menu-collapse__button:hover {
   background-color: var(--navds-menu-color-background-hover);
   color: var(--navds-menu-color-text-hover);
 }
@@ -73,41 +73,41 @@
   text-decoration: none;
 }
 
-/* Drawer icon */
-.navds-menu-drawer__expand-icon {
+/* Collapse icon */
+.navds-menu-collapse__expand-icon {
   font-size: 1.5rem;
   color: var(--navds-menu-color);
   flex-shrink: 0;
   margin-left: var(--navds-spacing-2);
 }
 
-.navds-menu-drawer__expand-icon--filled,
-.navds-menu-drawer__button:hover > .navds-menu-drawer__expand-icon {
+.navds-menu-collapse__expand-icon--filled,
+.navds-menu-collapse__button:hover > .navds-menu-collapse__expand-icon {
   display: none;
 }
 
-.navds-menu-drawer__button:hover > .navds-menu-drawer__expand-icon--filled {
+.navds-menu-collapse__button:hover > .navds-menu-collapse__expand-icon--filled {
   display: inherit;
 }
 
-.navds-menu-drawer--open
-  > .navds-menu-drawer__button
-  > .navds-menu-drawer__expand-icon {
+.navds-menu-collapse--open
+  > .navds-menu-collapse__button
+  > .navds-menu-collapse__expand-icon {
   transform: rotate(180deg);
 }
 
 /* Nesting levels */
-[data-depth="1"] .navds-menu-drawer__button,
+[data-depth="1"] .navds-menu-collapse__button,
 [data-depth="1"] .navds-menu-item {
   padding-left: var(--navds-spacing-6);
 }
 
-[data-depth="2"] .navds-menu-drawer__button,
+[data-depth="2"] .navds-menu-collapse__button,
 [data-depth="2"] .navds-menu-item {
   padding-left: var(--navds-spacing-10);
 }
 
-[data-depth="3"] .navds-menu-drawer__button,
+[data-depth="3"] .navds-menu-collapse__button,
 [data-depth="3"] .navds-menu-item {
   padding-left: var(--navds-spacing-14);
 }
