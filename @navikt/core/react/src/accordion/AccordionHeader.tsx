@@ -43,6 +43,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
 
     return (
       <button
+        {...rest}
         ref={ref}
         id={context.buttonId}
         className={cl(
@@ -52,17 +53,17 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-heading--small"
         )}
         onClick={handleClick}
-        {...rest}
+        aria-expanded={context.open}
       >
         {children}
         <Expand
-          title={context.open ? "lukk panel" : "åpne panel"}
+          aria-hidden
           className={cl("navds-accordion__expand-icon", {
             "navds-accordion__expand-icon--flip": context.open,
           })}
         />
         <ExpandFilled
-          title={context.open ? "lukk panel" : "åpne panel"}
+          aria-hidden
           className={cl(
             "navds-accordion__expand-icon",
             "navds-accordion__expand-icon--filled",
