@@ -50,10 +50,10 @@ export interface SearchFieldProps
 
 type clearEventT =
   | {
-      trigger: "Clear button click";
+      trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
     }
-  | { trigger: "Escape keydown"; event: React.KeyboardEvent<HTMLDivElement> };
+  | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
   (props, ref) => {
@@ -106,7 +106,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
         (e) => {
           if (e.key === "Escape") {
             e.preventDefault();
-            handleClear({ trigger: "Escape keydown", event: e });
+            handleClear({ trigger: "Escape", event: e });
           }
         },
         [handleClear]
@@ -179,9 +179,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           />
           {controlledValue && clearButton && (
             <button
-              onClick={(e) =>
-                handleClear({ trigger: "Clear button click", event: e })
-              }
+              onClick={(e) => handleClear({ trigger: "Click", event: e })}
               className="navds-search-field__clear-button"
             >
               <span className="navds-sr-only">
