@@ -7,47 +7,47 @@ import { Menu } from "../../index";
 
 ```jsx
 <Menu>
-  <Menu.item href="#leo">Leo</Menu.item>
-  <Menu.Drawer title="Proin">
-    <Menu.item href="#nulla" active>
+  <Menu.Item href="#leo">Leo</Menu.Item>
+  <Menu.Collapse title="Proin">
+    <Menu.Item href="#nulla" active>
       Nulla
-    </Menu.item>
-    <Menu.item href="#luctus">Luctus</Menu.item>
-  </Menu.Drawer>
-  <Menu.Drawer title="Accumsan">
-    <Menu.item href="#justo" aria-current="page">
+    </Menu.Item>
+    <Menu.Item href="#luctus">Luctus</Menu.Item>
+  </Menu.Collapse>
+  <Menu.Collapse title="Accumsan">
+    <Menu.Item href="#justo" aria-current="page">
       Justo
-    </Menu.item>
-    <Menu.Drawer title="Proin">
-      <Menu.item href="#nulla">Nulla</Menu.item>
-      <Menu.item href="#luctus">Luctus</Menu.item>
-    </Menu.Drawer>
-  </Menu.Drawer>
+    </Menu.Item>
+    <Menu.Collapse title="Proin">
+      <Menu.Item href="#nulla">Nulla</Menu.Item>
+      <Menu.Item href="#luctus">Luctus</Menu.Item>
+    </Menu.Collapse>
+  </Menu.Collapse>
 </Menu>
 ```
 
 <Canvas>
   <Menu>
     <Menu.Item href="#leo">Leo</Menu.Item>
-    <Menu.Drawer title="Proin">
+    <Menu.Collapse title="Proin">
       <Menu.Item href="#nulla" active>
         Nulla
       </Menu.Item>
       <Menu.Item href="#luctus">Luctus</Menu.Item>
-    </Menu.Drawer>
-    <Menu.Drawer title="Accumsan">
+    </Menu.Collapse>
+    <Menu.Collapse title="Accumsan">
       <Menu.Item href="#justo">Justo</Menu.Item>
-      <Menu.Drawer title="Proin">
+      <Menu.Collapse title="Proin">
         <Menu.Item href="#nulla">Nulla</Menu.Item>
         <Menu.Item href="#luctus">Luctus</Menu.Item>
-      </Menu.Drawer>
-    </Menu.Drawer>
+      </Menu.Collapse>
+    </Menu.Collapse>
   </Menu>
 </Canvas>
 
 ## Elementer i menyen
 
-Menyen har tre typer elementer man kan bruke: `Drawer` for nesting, `Item` for navigasjonslenker på siden eller `Link` som vil være vanlige lenker.
+Menyen har to typer elementer man kan bruke: `Collapse` for nesting og `Item` for navigasjonslenker på siden.
 
 <Canvas>
   <div>
@@ -59,31 +59,23 @@ Menyen har tre typer elementer man kan bruke: `Drawer` for nesting, `Item` for n
       <Menu.Item href="#leo">Lenke</Menu.Item>
       <Menu.Item href="#leo">Lenke</Menu.Item>
     </Menu>
-    <h2>Drawers + Item</h2>
+    <h2>Collapses + Item</h2>
     <Menu>
-      <Menu.Drawer title="Proin">
+      <Menu.Collapse title="Proin">
         <Menu.Item href="#nulla" active>
           Nulla
         </Menu.Item>
         <Menu.Item href="#luctus">Luctus</Menu.Item>
-      </Menu.Drawer>
-      <Menu.Drawer title="Accumsan">
+      </Menu.Collapse>
+      <Menu.Collapse title="Accumsan">
         <Menu.Item href="#justo">Justo</Menu.Item>
-        <Menu.Drawer title="Proin">
+        <Menu.Collapse title="Proin">
           <Menu.Item href="#nulla">Nulla</Menu.Item>
           <Menu.Item href="#luctus">Luctus</Menu.Item>
-        </Menu.Drawer>
-      </Menu.Drawer>
+        </Menu.Collapse>
+      </Menu.Collapse>
       <Menu.Item href="#leo">Lenke</Menu.Item>
       <Menu.Item href="#leo">Lenke</Menu.Item>
-    </Menu>
-    <h2>Lenker</h2>
-    <Menu>
-      <Menu.Link href="#leo">Lenke</Menu.Link>
-      <Menu.Link href="#leo">Lenke</Menu.Link>
-      <Menu.Link href="#leo">Lenke</Menu.Link>
-      <Menu.Link href="#leo">Lenke</Menu.Link>
-      <Menu.Link href="#leo">Lenke</Menu.Link>
     </Menu>
   </div>
 </Canvas>
@@ -92,9 +84,9 @@ Menyen har tre typer elementer man kan bruke: `Drawer` for nesting, `Item` for n
 gjør at man kan ta i bruk eks react-router slik:
 
 ```jsx
-<Menu.item as={NavLink} activeClassName="navds-menu-item--active" to="/1">
+<Menu.Item as={NavLink} activeClassName="navds-menu-item--active" to="/1">
   Lenketekst
-</Menu.item>
+</Menu.Item>
 ```
 
 Her er `NavLink` fra `react-router-dom` brukt, og man får da
