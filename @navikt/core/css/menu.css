@@ -111,18 +111,3 @@
 [data-depth="3"] .navds-menu-item {
   padding-left: var(--navds-spacing-14);
 }
-
-/* Menu.Link */
-.navds-menu-link {
-  display: flex;
-  padding: var(--navds-spacing-3) var(--navds-spacing-2);
-}
-
-.navds-menu-link:hover {
-  text-decoration: none;
-}
-
-.navds-menu-link:focus {
-  outline: none;
-  box-shadow: var(--navds-shadow-focus);
-}
