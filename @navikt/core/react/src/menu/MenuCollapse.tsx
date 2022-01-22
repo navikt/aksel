@@ -28,11 +28,11 @@ const Collapse: MenuCollapseType = forwardRef(
 
     return (
       <div
+        {...rest}
         ref={ref}
         className={cl("navds-menu-collapse", className, {
           "navds-menu-collapse--open": isOpen,
         })}
-        {...rest}
       >
         <button
           onClick={() => setIsOpen(!isOpen)}
