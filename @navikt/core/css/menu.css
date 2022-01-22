@@ -89,17 +89,17 @@
 }
 
 /* Nesting levels */
-[data-depth="1"] .navds-menu-collapse__button,
-[data-depth="1"] .navds-menu-item {
+.navds-menu__list[data-depth="1"] .navds-menu-collapse__button,
+.navds-menu__list[data-depth="1"] .navds-menu-item {
   padding-left: var(--navds-spacing-6);
 }
 
-[data-depth="2"] .navds-menu-collapse__button,
-[data-depth="2"] .navds-menu-item {
+.navds-menu__list[data-depth="2"] .navds-menu-collapse__button,
+.navds-menu__list[data-depth="2"] .navds-menu-item {
   padding-left: var(--navds-spacing-10);
 }
 
-[data-depth="3"] .navds-menu-collapse__button,
-[data-depth="3"] .navds-menu-item {
+.navds-menu__list[data-depth="3"] .navds-menu-collapse__button,
+.navds-menu__list[data-depth="3"] .navds-menu-item {
   padding-left: var(--navds-spacing-14);
 }
