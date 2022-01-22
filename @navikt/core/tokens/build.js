@@ -25,7 +25,7 @@ StyleDictionary.registerFormat({
           if (dictionary.usesReference(token.original.value)) {
             const refs = dictionary.getReferences(token.original.value);
             refs.forEach((ref) => {
-              value = value.replace(ref.value, `var(${ref.name})`);
+              value = value.replace(ref.value, `var(--${ref.name})`);
             });
           }
         }
