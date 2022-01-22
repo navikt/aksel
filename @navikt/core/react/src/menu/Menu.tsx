@@ -18,18 +18,16 @@ interface MenuComponent
 }
 
 const Menu = forwardRef<HTMLElement, MenuProps>(
-  ({ children, className, ...rest }, ref) => {
-    return (
+  ({ children, className, ...rest }, ref) => (
       <nav
+        {...rest}
         role="navigation"
         ref={ref}
         className={cl("navds-menu", className)}
-        {...rest}
       >
         <MenuItems>{children}</MenuItems>
       </nav>
-    );
-  }
+    )
 ) as MenuComponent;
 
 Menu.Collapse = Collapse;
