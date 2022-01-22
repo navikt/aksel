@@ -69,7 +69,6 @@
 /* Collapse icon */
 .navds-menu-collapse__expand-icon {
   font-size: 1.5rem;
-  color: var(--navds-menu-color);
   flex-shrink: 0;
   margin-left: var(--navds-spacing-2);
 }
@@ -80,7 +79,7 @@
 }
 
 .navds-menu-collapse__button:hover > .navds-menu-collapse__expand-icon--filled {
-  display: inherit;
+  display: block;
 }
 
 .navds-menu-collapse--open
