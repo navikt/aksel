@@ -86,20 +86,20 @@
 }
 
 .navds-table__sort-button {
-  align-items: center;
   appearance: none;
   background: none;
-  border: 0;
+  color: var(--navds-semantic-color-link);
+  border: none;
   cursor: pointer;
   margin: 0;
   padding: var(--navds-spacing-4);
-  text-align: left;
   width: 100%;
-  font-weight: inherit;
-  color: var(--navds-semantic-color-link);
   display: flex;
   gap: 0.5rem;
+  align-items: center;
   line-height: inherit;
+  font-weight: inherit;
+  text-align: left;
 }
 
 .navds-table__sort-button:hover {
