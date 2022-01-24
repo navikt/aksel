@@ -4,11 +4,16 @@
     ---navds-semantic-color-component-background-light
   );
   --navds-accordion-color-text-hover: var(--navds-semantic-color-link);
+  --navds-accordion-color-border: var(--navds-semantic-color-border-muted);
   --navds-accordion-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-accordion-color-border-focus: var(
-    ---navds-semantic-color-component-background-light
+  --navds-accordion-color-text-open: var(--navds-semantic-color-text);
+  --navds-accordion-color-text-open-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-accordion-color-background-open: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
   );
 }
 
@@ -20,16 +25,53 @@
   background: var(--navds-accordion-color-background);
 }
 
+.navds-accordion__header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--navds-spacing-4);
+  padding: var(--navds-spacing-4) var(--navds-spacing-3);
+  margin: 0;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+  border-bottom: 2px solid var(--navds-accordion-color-border);
+}
+
 .navds-accordion__header:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
-  border-color: var(--navds-accordion-color-border-focus);
 }
 
 .navds-accordion__header:hover {
   color: var(--navds-accordion-color-text-hover);
   border-color: var(--navds-accordion-color-border-hover);
-  text-decoration: underline;
+}
+
+.navds-accordion__item--open > .navds-accordion__header {
+  background-color: var(--navds-accordion-color-background-open);
+  color: var(--navds-accordion-color-text-open);
+  border-color: transparent;
+}
+
+.navds-accordion__item--open > .navds-accordion__header:hover {
+  border-color: transparent;
+  color: var(--navds-accordion-color-text-open-hover);
+}
+
+.navds-accordion__content {
+  color: var(--navds-accordion-color-text);
+  padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10);
+  border-bottom: 2px solid var(--navds-accordion-color-border);
+}
+
+.navds-accordion__item--open
+  > .navds-accordion__header:hover
+  + *
+  .navds-accordion__content {
+  border-color: var(--navds-accordion-color-border-hover);
 }
 
 .navds-accordion__expand-icon {
@@ -40,26 +82,6 @@
 
 .navds-accordion__expand-icon--flip {
   transform: rotateZ(180deg);
-}
-
-.navds-accordion__header {
-  padding: var(--navds-spacing-4) var(--navds-spacing-3);
-  background: transparent;
-  text-align: left;
-  border: none;
-  width: 100%;
-  margin: 0;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid #a0a0a0;
-  gap: var(--navds-spacing-4);
-}
-
-.navds-accordion__content {
-  color: var(--navds-accordion-color-text);
-  padding: var(--navds-spacing-5) var(--navds-spacing-3) var(--navds-spacing-10);
 }
 
 .navds-accordion__expand-icon--filled {
