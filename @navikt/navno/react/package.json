@@ -28,8 +28,9 @@
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
-    "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "clean": "rimraf cjs esm src/card",
+    "build": "yarn run clean && yarn build:cards && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build:cards": "ts-node buildCards.ts",
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
@@ -39,7 +40,10 @@
     "lottie-web": "^5.8.1"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "@types/mustache": "^4.1.2",
+    "rimraf": "^3.0.2",
+    "mustache": "^4.2.0",
+    "ts-node": "^10.4.0"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0"
