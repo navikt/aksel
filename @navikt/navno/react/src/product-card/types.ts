@@ -15,6 +15,8 @@ export enum Interaction {
   touchstart = "touchstart",
   touchmove = "touchmove",
   touchcancel = "touchcancel",
+  focus = "focus",
+  blur = "blur",
 }
 
 export type ProductName = "barnepensjon" | "engangsstonad";

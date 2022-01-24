@@ -1,20 +1,23 @@
-import { useState } from "react";
+import { useState, SyntheticEvent } from "react";
 import { Interaction } from "./types";
 
-type CardInteractionHandler = (event: MouseEvent) => void;
+type CardInteractionHandler = (event: SyntheticEvent) => void;
 
 interface UseCardState {
   isHovering: boolean;
   isActive: boolean;
+  isFocused: boolean;
   handlers: { [key: string]: CardInteractionHandler };
 }
 
 export const useInteractions = (): UseCardState => {
   const [isHovering, setIsHovering] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
-  const cardInteractionHandler = (event: MouseEvent): void => {
+  const cardInteractionHandler = (event: SyntheticEvent): void => {
     const { type } = event;
+    console.log(event);
     if (type === Interaction.mouseenter || type === Interaction.mouseleave) {
       setIsHovering(type === Interaction.mouseenter);
     }
@@ -34,6 +37,14 @@ export const useInteractions = (): UseCardState => {
     if (type === Interaction.touchend || type === Interaction.touchcancel) {
       setIsActive(false);
     }
+
+    if (type === Interaction.focus) {
+      setIsFocused(true);
+    }
+
+    if (type === Interaction.blur) {
+      setIsFocused(false);
+    }
   };
 
   const handlers = {
@@ -45,7 +56,9 @@ export const useInteractions = (): UseCardState => {
     onTouchEnd: cardInteractionHandler,
     onTouchCancel: cardInteractionHandler,
     onTouchMove: cardInteractionHandler,
+    onFocus: cardInteractionHandler,
+    onBlur: cardInteractionHandler,
   };
 
-  return { isHovering, isActive, handlers };
+  return { isHovering, isActive, isFocused, handlers };
 };

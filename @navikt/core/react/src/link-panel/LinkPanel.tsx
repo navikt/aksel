@@ -40,10 +40,7 @@ const LinkPanelComponent: OverridableComponent<
         className={cl("navds-link-panel", className)}
       >
         <div className="navds-link-panel__content">{children}</div>
-        <Next
-          className="navds-link-panel__chevron"
-          aria-label="arrow-icon pointing right"
-        />
+        <Next className="navds-link-panel__chevron" aria-hidden />
       </Panel>
     );
   }

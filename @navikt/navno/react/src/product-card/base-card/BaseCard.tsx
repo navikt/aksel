@@ -26,7 +26,7 @@ export const BaseCard = ({
   category,
 }: BaseCardProps) => {
   if (size === "micro") {
-    return <MicroCard>{title}</MicroCard>;
+    return <MicroCard href={href}>{title}</MicroCard>;
   }
 
   if (size === "mini") {
@@ -34,6 +34,7 @@ export const BaseCard = ({
       <MiniCard
         title={title}
         type="product"
+        href={href}
         hoverAnimation={hoverAnimation}
         activeAnimation={activeAnimation}
       />

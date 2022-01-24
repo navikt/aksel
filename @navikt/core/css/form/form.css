@@ -4,7 +4,7 @@
 }
 
 /* Applied when hideLabel is applied to form-element */
-.navds-form-field > .sr-only + :not(:first-child):not(:empty),
-.navds-form-field > .sr-only + input:not(:first-child) {
+.navds-form-field > .navds-sr-only + :not(:first-child):not(:empty),
+.navds-form-field > .navds-sr-only + input:not(:first-child) {
   margin-top: 0;
 }

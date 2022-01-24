@@ -66,3 +66,9 @@
   outline: none;
   box-shadow: inset 0 0 0 2px var(--navds-dropdown-item-color-focus);
 }
+
+.navdsi-dropdown__item:disabled {
+  opacity: 0.3;
+  background: transparent;
+  cursor: not-allowed;
+}

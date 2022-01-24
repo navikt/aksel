@@ -90,7 +90,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           size={size}
           as="label"
           className={cl("navds-text-field__label", {
-            "sr-only": hideLabel,
+            "navds-sr-only": hideLabel,
           })}
         >
           {label}
@@ -99,7 +99,7 @@ const SearchField = forwardRef<HTMLDivElement, SearchFieldProps>(
           <BodyShort
             as="div"
             className={cl("navds-text-field__description", {
-              "sr-only": hideLabel,
+              "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
