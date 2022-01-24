@@ -12,4 +12,5 @@
   align-items: center;
   justify-content: center;
   width: var(--navds-spacing-8);
+  cursor: default;
 }
