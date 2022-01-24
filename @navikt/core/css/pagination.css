@@ -7,7 +7,7 @@
   padding-inline: 0;
 }
 
-.navds-pagination > .navds-pagination__ellipsis {
+.navds-pagination__ellipsis {
   display: flex;
   align-items: center;
   justify-content: center;
