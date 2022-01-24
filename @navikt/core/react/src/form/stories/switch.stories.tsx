@@ -9,6 +9,7 @@ export default {
 
 export const All = () => {
   const [checked, setChecked] = useState(false);
+  const [loadingState, setLoadingState] = useState(false);
   return (
     <div style={{ width: "fit-content" }}>
       <h1>Switch</h1>
@@ -91,6 +92,13 @@ export const All = () => {
       <Switch disabled loading>
         Label text
       </Switch>
+      <Switch checked loading>
+        Label text
+      </Switch>
+      <button onClick={() => setLoadingState(!loadingState)}>
+        Toggle loading
+      </button>
+      <Switch loading={loadingState}>Label text</Switch>
     </div>
   );
 };

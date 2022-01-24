@@ -40,7 +40,7 @@ Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/ma
 
 ## Lisenser
 
-Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENSE)
+Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENCE)
 
 ## Contributors
 
