@@ -1,0 +1,30 @@
+{
+  "name": "@navikt/ds-tailwind",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Auto-generated tailwind config based on @navikt/ds-tokens",
+  "author": "NAV Designsystem team",
+  "keywords": [
+    "tailwind",
+    "design-tokens"
+  ],
+  "main": "dist/tokens.css",
+  "license": "MIT",
+  "files": [
+    "tailwind.config.js"
+  ],
+  "scripts": {
+    "build": "node ./build.js && ts-node tailwind/src/index.ts",
+    "tailwind": "yarn build && ts-node tailwind/src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/nav-frontend-moduler.git",
+    "directory": "@navikt/core/tailwind"
+  },
+  "devDependencies": {
+    "@navikt/ds-tokens": "^0.7.1",
+    "lodash": "^4.17.21",
+    "ts-node": "^10.3.0"
+  }
+}
