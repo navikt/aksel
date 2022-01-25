@@ -1,28 +1,33 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyShort, OverridableComponent, Link } from "@navikt/ds-react";
+import { OverridableComponent, Link } from "@navikt/ds-react";
+import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
-import { useInteractions } from "../../useInteraction";
+import { useInteractions } from "../useInteraction";
 
-export interface MiniCardProps
+export interface LargeCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  title: string;
-  hoverAnimation?: any;
   activeAnimation?: any;
+  category: string;
+  hoverAnimation?: any;
+  text: string;
+  title: string;
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const MiniCard: OverridableComponent<
-  MiniCardProps,
+const LargeCard: OverridableComponent<
+  LargeCardProps,
   HTMLAnchorElement
 > = forwardRef(
   (
     {
-      activeAnimation,
       as: Component = "article",
       className,
-      hoverAnimation,
       title,
+      text,
+      category,
+      hoverAnimation,
+      activeAnimation,
       type = "general",
       href,
       ...rest
@@ -35,8 +40,6 @@ const MiniCard: OverridableComponent<
     const focusClass = isFocused ? "navds-card--focus" : "";
     const activeClass = isActive ? "navds-card--active" : "";
 
-    console.log(href);
-
     return (
       <Component
         {...rest}
@@ -44,13 +47,18 @@ const MiniCard: OverridableComponent<
         ref={ref}
         className={cl(
           "navds-card",
-          "navds-card-mini",
+          "navds-card-large",
           className,
           focusClass,
           activeClass
         )}
       >
-        <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
+        <div
+          className={cl(
+            "navds-card__bed",
+            `navds-card__bed--general` // LargeCard has white background regardless of type
+          )}
+        >
           {hasAnimation && (
             <Animation
               isHovering={isHovering}
@@ -60,10 +68,14 @@ const MiniCard: OverridableComponent<
               className={cl("navds-card__animation")}
             />
           )}
-          <BodyShort>
+          <Heading level="3" size="medium">
             <Link href={href} className={cl("navds-card__title")}>
               {title}
             </Link>
+          </Heading>
+          <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
+          <BodyShort className={cl("navds-card__category")}>
+            {category}
           </BodyShort>
         </div>
       </Component>
@@ -71,4 +83,4 @@ const MiniCard: OverridableComponent<
   }
 );
 
-export default MiniCard;
+export default LargeCard;

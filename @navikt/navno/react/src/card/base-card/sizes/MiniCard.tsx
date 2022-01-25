@@ -1,33 +1,28 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { OverridableComponent, Link } from "@navikt/ds-react";
-import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
+import { BodyShort, OverridableComponent, Link } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
-import { useInteractions } from "../../useInteraction";
+import { useInteractions } from "../useInteraction";
 
-export interface LargeCardProps
+export interface MiniCardProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-  activeAnimation?: any;
-  category: string;
-  hoverAnimation?: any;
-  text: string;
   title: string;
+  hoverAnimation?: any;
+  activeAnimation?: any;
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const LargeCard: OverridableComponent<
-  LargeCardProps,
+const MiniCard: OverridableComponent<
+  MiniCardProps,
   HTMLAnchorElement
 > = forwardRef(
   (
     {
+      activeAnimation,
       as: Component = "article",
       className,
-      title,
-      text,
-      category,
       hoverAnimation,
-      activeAnimation,
+      title,
       type = "general",
       href,
       ...rest
@@ -47,18 +42,13 @@ const LargeCard: OverridableComponent<
         ref={ref}
         className={cl(
           "navds-card",
-          "navds-card-large",
+          "navds-card-mini",
           className,
           focusClass,
           activeClass
         )}
       >
-        <div
-          className={cl(
-            "navds-card__bed",
-            `navds-card__bed--general` // LargeCard has white background regardless of type
-          )}
-        >
+        <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
           {hasAnimation && (
             <Animation
               isHovering={isHovering}
@@ -68,14 +58,10 @@ const LargeCard: OverridableComponent<
               className={cl("navds-card__animation")}
             />
           )}
-          <Heading level="3" size="medium">
+          <BodyShort>
             <Link href={href} className={cl("navds-card__title")}>
               {title}
             </Link>
-          </Heading>
-          <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
-          <BodyShort className={cl("navds-card__category")}>
-            {category}
           </BodyShort>
         </div>
       </Component>
@@ -83,4 +69,4 @@ const LargeCard: OverridableComponent<
   }
 );
 
-export default LargeCard;
+export default MiniCard;

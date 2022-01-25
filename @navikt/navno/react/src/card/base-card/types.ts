@@ -29,7 +29,7 @@ export type CardLanguage = {
   category: string;
 };
 
-type CardProps = {
+export type CardProps = {
   customText: string;
   href: string;
   language?: Language;

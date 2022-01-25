@@ -1,6 +1,6 @@
 import React from "react";
 
-import { CardSize } from "../types";
+import { CardSize } from "./types";
 
 import LargeCard from "./sizes/LargeCard";
 import MiniCard from "./sizes/MiniCard";

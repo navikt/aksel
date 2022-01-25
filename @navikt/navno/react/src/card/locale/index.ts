@@ -1,4 +1,4 @@
-import { ProductName, Language, CardLanguage } from "../types";
+import { ProductName, Language, CardLanguage } from "../base-card/types";
 
 import LibraryNO from "./locale-no.json";
 import LibraryEN from "./locale-en.json";

@@ -28,9 +28,9 @@
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
-    "clean": "rimraf cjs esm src/card",
+    "clean": "rimraf cjs esm src/card/generated-card",
     "build": "yarn run clean && yarn build:cards && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
-    "build:cards": "ts-node buildCards.ts",
+    "build:cards": "ts-node ./src/card/buildCards.ts",
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {

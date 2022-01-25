@@ -1,0 +1,72 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { BarnepensjonCard } from "../";
+
+<Meta title="ds-react-navno/cards/intro" />
+
+# Slik bruker du produktkortene
+
+Produktkort er ment å brukes som lenker og henvisninger til andre produkter eller livssituasjoner.
+Du kan for eksempel henvise til andre stønader som kan være relevant for leseren eller du kan samle alle relevante
+produkter innenfor én livssituasjon.
+
+## Innholsstrategi og helhetlig opplevelse på nav.no
+
+For å sikre at livssituasjoner, produkter etc blir presentert helhetlig på tvers av nav.no er det ikke mulig å endre tittel
+illustrasjon på kortene. Derimot importerer du det spesifikke produkt- eller livssituasjonskortet som
+du ønsker å bruke og angir hvilken størrelse du vil vise. Hvis du bruker _Stort kort_ kan du i tillegg
+sette din egen ingress-tekst.
+
+## Praktisk bruk
+
+Du importerer de kortene du trenger individuelt. Kortene vil inneholde riktig tittel og illustrasjon, så
+alt du trenger å oppgi er `size` og `href`.
+
+```
+import { BarnepensjonCard } from '@navikt/ds-navno';
+```
+
+## Størrelser
+
+### Mikrokort
+
+Dette brukes dersom dersom du ønsker å henvise til andre produkter eller stønader, men ikke vil at den skal få for mye plass elle frokus. Korter er i prinsippet en lenke med en annen utformin enn ordinære understreket lenke.
+
+```
+<BarnepensjonCard href="/lenke/til/side" size="micro" />
+```
+
+<Canvas>
+  <BarnepensjonCard href="/lenke/til/side" size="micro" />
+</Canvas>
+
+### Minikort
+
+Brukes dersom du ønsker å henvise til et annet produkt / stønad, men på en mer iøyenfallende måte enn
+mikrokort.
+
+```
+<BarnepensjonCard
+  href="/lenke/til/side"
+  size="mini"
+/>
+```
+
+<Canvas>
+  <BarnepensjonCard href="/lenke/til/side" size="mini" />
+</Canvas>
+
+### Stort kort
+
+Dette kortet skal kun brukes på livssituasjonssider og er ment å gi en oversikt over alle produkter/stønader
+som er relevante for den aktuelle livssituasjonen.
+
+```
+<BarnepensjonCard
+  href="/lenke/til/side"
+  size="large"
+/>
+```
+
+<Canvas>
+  <BarnepensjonCard href="/lenke/til/side" size="large" />
+</Canvas>

@@ -17,7 +17,6 @@ export const useInteractions = (): UseCardState => {
 
   const cardInteractionHandler = (event: SyntheticEvent): void => {
     const { type } = event;
-    console.log(event);
     if (type === Interaction.mouseenter || type === Interaction.mouseleave) {
       setIsHovering(type === Interaction.mouseenter);
     }

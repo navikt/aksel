@@ -1,0 +1,12 @@
+[
+  {
+    "title": "Barnepensjon",
+    "cardId": "barnepensjon",
+    "componentName": "Barnepensjon"
+  },
+  {
+    "title": "Engangsstønad",
+    "cardId": "engangsstonad",
+    "componentName": "Engangsstonad"
+  }
+]
