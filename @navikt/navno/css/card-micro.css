@@ -30,15 +30,16 @@
   color: var(--navds-card-micro-color-text);
   display: inline-block;
   font-size: var(--navds-font-size-small);
+  padding: 0 var(--navds-spacing-2);
   text-decoration: none;
   transition: all 0.3s;
-  padding: 0 var(--navds-spacing-2);
   width: auto;
 }
 
-.navds-card-micro:hover:not(:focus) .navds-card__bed {
+.navds-card-micro:hover:not(:focus):not(:active) .navds-card__bed {
   background-color: var(--navds-card-micro-color-background-hover);
   box-shadow: 0 0 0 1px var(--navds-product-card-color-border-hover);
+  color: var(--navds-card-micro-color-text-hover);
 }
 
 .navds-card.navds-card-micro:focus:not(:active) .navds-card__bed {
