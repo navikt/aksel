@@ -7,10 +7,6 @@
   --navds-menu-outline-focus: var(--navds-semantic-color-focus);
 }
 
-.navds-menu {
-  font-weight: var(--navds-font-weight-bold);
-}
-
 .navds-menu__list {
   list-style: none;
   margin: 0;
@@ -38,6 +34,7 @@
 
 .navds-menu-item,
 .navds-menu-collapse__button {
+  font-weight: var(--navds-font-weight-bold);
   display: flex;
   padding: var(--navds-spacing-3) var(--navds-spacing-2);
   text-decoration: none;
