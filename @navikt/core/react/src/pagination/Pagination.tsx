@@ -55,7 +55,7 @@ const Pagination = ({
         disabled={page === 0}
         onClick={() => onPageChange(page - 1)}
       >
-        <Back />
+        <Back  aria-label="gå til forrige side"/>
       </Button>
       {getSteps({ current: page, count }).map((n, i, a) => (
         <>
