@@ -1,0 +1,74 @@
+.themed-page-header {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  padding-bottom: 1.5rem;
+
+  --side-width: calc((100vw - 100%) / 2);
+  --side-width-negative: calc((100vw - 100%) / -2);
+
+  padding-left: var(--side-width);
+  padding-right: var(--side-width);
+  margin-left: var(--side-width-negative);
+  margin-right: var(--side-width-negative);
+}
+
+.situation {
+  box-shadow: 0 -4px 0 var(--navds-global-color-orange-200) inset;
+}
+
+.product {
+  box-shadow: 0 -4px 0 var(--navds-global-color-green-200) inset;
+}
+
+.themed-page-header__illustration {
+  width: 80px;
+  height: 80px;
+
+  /* width: #px-to-rem(80) []; 
+   height: #px-to-rem(80) []; */
+
+  margin-right: 2rem;
+  pointer-events: none;
+}
+
+.themed-page-header__text {
+  width: 100%;
+  max-width: 63.5rem;
+}
+
+.themed-page-header__label {
+  margin-top: -0.75rem;
+}
+
+.themed-page-header__label .divider {
+  padding: 0 1rem;
+}
+
+header .page-modified-info {
+  letter-spacing: 0.004em;
+  color: var(--navds-semantic-color-text-muted);
+}
+
+/* 
+    // Following section is a temp fix until we determine responsive breakpoints
+    // and where the responsibility for this lies (us vs design system)
+    // (2rem is the correct mobile page header size (2xl) according to Figma (12. july))
+    @media @mq-screen-mobile {
+        .page-header {
+            padding-top: 0;
+            .navds-title--2xl {
+                font-size: 2rem;
+            }
+        }
+
+        &__illustration {
+            &--mobile-hidden {
+                .illustration__lottie-container {
+                    display: none;
+                }
+                width: 0;
+                margin-right: 1rem;
+            }
+        }
+    } */
