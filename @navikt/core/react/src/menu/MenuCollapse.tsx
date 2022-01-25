@@ -9,7 +9,21 @@ import cl from "classnames";
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import MenuItems from "./MenuItems";
 
-export const NestingContext = createContext<{ depth: number }>({ depth: 0 });
+export const NestingContext = createContext<{ depth: number }>({ depth: 1 });
+
+const NestingProvider = ({ children }) => {
+  const context = useContext(NestingContext);
+
+  return (
+    <NestingContext.Provider
+      value={{
+        depth: context.depth + 1,
+      }}
+    >
+      {children}
+    </NestingContext.Provider>
+  );
+};
 
 export interface MenuCollapseProps extends HTMLAttributes<HTMLDivElement> {
   title: string;
@@ -48,20 +62,16 @@ const Collapse: MenuCollapseType = forwardRef(
             className="navds-menu-collapse__expand-icon navds-menu-collapse__expand-icon--filled"
           />
         </button>
-        <NestingContext.Provider
-          value={{
-            depth: context.depth + 1,
-          }}
-        >
+        <NestingProvider>
           {isOpen && (
             <MenuItems
-              data-depth={context.depth + 1}
+              data-depth={context.depth}
               className="navds-menu__list--inner"
             >
               {children}
             </MenuItems>
           )}
-        </NestingContext.Provider>
+        </NestingProvider>
       </div>
     );
   }
