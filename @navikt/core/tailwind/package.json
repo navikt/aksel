@@ -8,7 +8,7 @@
     "tailwind",
     "design-tokens"
   ],
-  "main": "dist/tokens.css",
+  "main": "tailwind.config.js",
   "license": "MIT",
   "files": [
     "tailwind.config.js"
