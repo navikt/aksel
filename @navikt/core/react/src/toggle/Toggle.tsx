@@ -53,7 +53,7 @@ interface ToggleComponent
 
 interface ToggleContextProps {
   size: "medium" | "small";
-  activeValue: string[];
+  value: string[];
   handleChange: (val: string) => void;
 }
 
@@ -121,7 +121,7 @@ const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
         <ToggleContext.Provider
           value={{
             size,
-            activeValue: value === undefined ? state : value,
+            value: value === undefined ? state : value,
             handleChange: handleChange,
           }}
         >

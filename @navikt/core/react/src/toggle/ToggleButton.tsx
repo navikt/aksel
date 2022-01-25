@@ -34,12 +34,10 @@ const ToggleButton: ToggleButtonsType = forwardRef(
         {...rest}
         ref={ref}
         className={cl("navds-toggle__button", className, {
-          "navds-toggle__button--active": !!context?.activeValue.includes(
-            value
-          ),
+          "navds-toggle__button--active": !!context?.value.includes(value),
         })}
         onClick={(e) => handleClick(e)}
-        aria-pressed={!!context?.activeValue.includes(value)}
+        aria-pressed={!!context?.value.includes(value)}
       >
         <BodyShort
           as="span"
