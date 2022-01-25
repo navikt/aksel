@@ -50,15 +50,12 @@ module.exports = {
     },
     /* Outputs a easy-to-parse format for tailwind config */
     ts: {
-      transformGroup: "css",
+      transformGroup: "js",
       buildPath: "tailwind/src/",
       files: [
         {
-          destination: "tokens.json",
-          format: "referenceFormat",
-          options: {
-            outputReferences: true,
-          },
+          destination: "tokens.ts",
+          format: "javascript/es6",
         },
       ],
     },

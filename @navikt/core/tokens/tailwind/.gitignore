@@ -1,2 +1,2 @@
-src/tokens.json
+src/tokens.ts
 tailwind.config.js

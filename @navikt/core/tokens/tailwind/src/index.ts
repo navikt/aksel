@@ -1,6 +1,15 @@
 import { writeFileSync } from "fs";
-import * as tokens from "./tokens.json";
+import * as TokensBuild from "./tokens";
 import Reducer from "./reducer";
+import { kebabCase } from "lodash";
+
+const tokens = Object.entries(TokensBuild).reduce(
+  (old, [key, val]) => ({
+    ...old,
+    [kebabCase(key).replace("navds-", "")]: val,
+  }),
+  {}
+);
 
 const config = {
   theme: {
