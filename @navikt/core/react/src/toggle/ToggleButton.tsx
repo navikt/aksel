@@ -34,7 +34,7 @@ const ToggleButton: ToggleButtonsType = forwardRef(
         {...rest}
         ref={ref}
         className={cl("navds-toggle__button", className, {
-          "navds-toggle__button--active": !!context?.value.includes(value),
+          "navds-toggle__button--selected": !!context?.value.includes(value),
         })}
         onClick={(e) => handleClick(e)}
         aria-pressed={!!context?.value.includes(value)}

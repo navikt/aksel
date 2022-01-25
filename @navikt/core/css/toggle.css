@@ -16,16 +16,16 @@
   --navds-toggle-button-color-divider: var(
     --navds-semantic-color-border-inverted
   );
-  --navds-toggle-button-color-divider-active: var(
+  --navds-toggle-button-color-divider-selected: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-toggle-button-color-background-active: var(
+  --navds-toggle-button-color-background-selected: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-toggle-button-color-background-active-hover: var(
+  --navds-toggle-button-color-background-selected-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-toggle-button-color-text-active: var(
+  --navds-toggle-button-color-text-selected: var(
     --navds-semantic-color-text-inverted
   );
 }
@@ -104,9 +104,10 @@
 
 .navds-toggle__button:first-child::before,
 .navds-toggle__button:focus::before,
-.navds-toggle__button--active::before,
-.navds-toggle__button--active + .navds-toggle__button::before,
-.navds-toggle__button--active + .navds-toggle__button--active:focus::before {
+.navds-toggle__button--selected::before,
+.navds-toggle__button--selected + .navds-toggle__button::before,
+.navds-toggle__button--selected
+  + .navds-toggle__button--selected:focus::before {
   visibility: hidden;
 }
 
@@ -139,23 +140,25 @@
   font-size: 1rem;
 }
 
-.navds-toggle__button--active {
-  --toggle-button-shadow-color: var(--navds-toggle-button-shadow-color-active);
+.navds-toggle__button--selected {
+  --toggle-button-shadow-color: var(
+    --navds-toggle-button-shadow-color-selected
+  );
 
-  background-color: var(--navds-toggle-button-color-background-active);
-  color: var(--navds-toggle-button-color-text-active);
+  background-color: var(--navds-toggle-button-color-background-selected);
+  color: var(--navds-toggle-button-color-text-selected);
 }
 
-.navds-toggle__button--active:hover {
-  background-color: var(--navds-toggle-button-color-background-active-hover);
+.navds-toggle__button--selected:hover {
+  background-color: var(--navds-toggle-button-color-background-selected-hover);
 }
 
-.navds-toggle__button--active + .navds-toggle__button--active::before {
+.navds-toggle__button--selected + .navds-toggle__button--selected::before {
   visibility: visible;
-  background-color: var(--navds-toggle-button-color-divider-active);
+  background-color: var(--navds-toggle-button-color-divider-selected);
 }
 
-.navds-toggle__button--active:focus,
-.navds-toggle__button--active:focus:first-child:last-child {
+.navds-toggle__button--selected:focus,
+.navds-toggle__button--selected:focus:first-child:last-child {
   box-shadow: inset 0 0 0 1px white, var(--navds-shadow-focus);
 }

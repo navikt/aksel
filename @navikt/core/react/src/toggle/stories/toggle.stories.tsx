@@ -78,12 +78,20 @@ export const All = () => {
       >
         {Buttons(true)}
       </Toggle>
-      <h2>Toggle fullwidth</h2>
-      <Toggle fullWidth value={activeValue} onChange={(e) => setActiveValue(e)}>
+      <h2>Toggle fullwidth false</h2>
+      <Toggle
+        fullWidth={false}
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
         {Buttons()}
       </Toggle>
-      <h2>Toggle icons fullWidth</h2>
-      <Toggle fullWidth value={activeValue} onChange={(e) => setActiveValue(e)}>
+      <h2>Toggle icons fullWidth false</h2>
+      <Toggle
+        fullWidth={false}
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
         {Buttons(true)}
       </Toggle>
       <h2>Toggle Single</h2>
@@ -98,8 +106,12 @@ export const All = () => {
       >
         <Toggle.Button value="First">First</Toggle.Button>
       </Toggle>
-      <h2>Toggle Single fullwidth</h2>
-      <Toggle fullWidth value={activeValue} onChange={(e) => setActiveValue(e)}>
+      <h2>Toggle Single fullwidth false</h2>
+      <Toggle
+        fullWidth={false}
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+      >
         <Toggle.Button value="First">First</Toggle.Button>
       </Toggle>
       <h2>Toggle defaultValues</h2>

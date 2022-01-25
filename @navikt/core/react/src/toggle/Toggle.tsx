@@ -40,6 +40,7 @@ export interface ToggleProps
   required?: boolean;
   /**
    * uses all avalaible space
+   * @default true
    */
   fullWidth?: boolean;
 }
@@ -70,7 +71,7 @@ const Toggle = forwardRef<HTMLDivElement, ToggleProps>(
       onChange,
       exclusive,
       required,
-      fullWidth,
+      fullWidth = true,
       ...rest
     },
     ref
