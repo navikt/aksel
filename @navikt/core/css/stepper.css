@@ -1,3 +1,7 @@
 .navds-stepper {
   background-color: hotpink;
 }
+
+navds-stepper__step-wrapper {
+  margin: 10px;
+}

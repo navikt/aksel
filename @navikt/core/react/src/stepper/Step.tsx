@@ -1,9 +1,8 @@
-import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { StepContext } from ".";
-import { BodyShort, Label, OverridableComponent } from "..";
+import React, { forwardRef } from "react";
+import { OverridableComponent } from "..";
 
-export interface StepIndicatorStepProps
+export interface StepperStepProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Text content under indicator
@@ -14,66 +13,35 @@ export interface StepIndicatorStepProps
    */
   disabled?: boolean;
   /**
-   * Handled by StepIndicator
+   * Handled by Stepper
    */
   index?: number;
 }
 
-export interface StepIndicatorStepType
-  extends OverridableComponent<StepIndicatorStepProps, HTMLButtonElement> {}
+export interface StepperStepType
+  extends OverridableComponent<StepperStepProps, HTMLButtonElement> {}
 
 const StepComponent: OverridableComponent<
-  StepIndicatorStepProps,
+  StepperStepProps,
   HTMLButtonElement
 > = forwardRef(
   (
     { className, children, as: Component = "button", disabled, index, ...rest },
     ref
   ) => {
-    const context = useContext(StepContext);
-
-    if (context === null) {
-      console.error(
-        "<StepIndicator.Step> has to be used within an <StepIndicator>"
-      );
-      return null;
-    }
-
-    const safeIndex = index ?? 0;
-
-    const Number = context.activeStep === safeIndex ? Label : BodyShort;
-
     return (
       <Component
         {...rest}
         disabled={disabled}
         ref={ref}
-        className={cl("navds-step-indicator__step", className, {
-          "navds-step-indicator__step--disabled": disabled,
-          "navds-step-indicator__step--active":
-            context.activeStep === safeIndex,
-          "navds-step-indicator__step--finished":
-            context.activeStep > safeIndex,
-        })}
-        onClick={(e) => {
-          context.onStepChange(safeIndex);
-          rest.onClick && rest.onClick(e);
-        }}
+        className={cl("navds-stepper__step", className)}
       >
-        <Number className="navds-step-indicator__step-number">
-          {safeIndex + 1}
-        </Number>
-        <div className={cl("navds-step-indicator__step-label")}>
-          {!context.hideLabels && children}
-        </div>
-        {safeIndex !== 0 && (
-          <span aria-hidden className="navds-step-indicator__step-line" />
-        )}
+        {children}
       </Component>
     );
   }
 );
 
-const Step = StepComponent as StepIndicatorStepType;
+const Step = StepComponent as StepperStepType;
 
 export default Step;
