@@ -80,7 +80,7 @@ const Pagination = ({
         disabled={page === count - 1}
         onClick={() => onPageChange(page + 1)}
       >
-        <Next />
+        <Next aria-label="gå til neste side"/>
       </Button>
     </div>
   );
