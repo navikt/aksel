@@ -2,11 +2,13 @@
   {
     "title": "Barnepensjon",
     "cardId": "barnepensjon",
-    "componentName": "Barnepensjon"
+    "componentName": "Barnepensjon",
+    "type": "product"
   },
   {
     "title": "Engangsstønad",
     "cardId": "engangsstonad",
-    "componentName": "Engangsstonad"
+    "componentName": "Engangsstonad",
+    "type": "product"
   }
 ]
