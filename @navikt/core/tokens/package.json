@@ -18,12 +18,11 @@
     "/tailwind"
   ],
   "scripts": {
-    "build": "node ./build.js && ts-node tailwind/src/index.ts",
-    "watch": "nodemon --watch src/index.js --exec \"yarn build && ts-node tailwind/src/index.ts\"",
+    "build": "node ./build.js",
+    "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
     "test": "jest",
-    "update": "ts-node figma/index.ts dotenv/config",
-    "tailwind": "yarn build && ts-node tailwind/src/index.ts"
+    "update": "ts-node figma/index.ts dotenv/config"
   },
   "repository": {
     "type": "git",

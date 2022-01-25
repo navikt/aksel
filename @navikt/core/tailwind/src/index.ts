@@ -1,7 +1,9 @@
 import { writeFileSync } from "fs";
-import * as TokensBuild from "./tokens";
+import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import Reducer from "./reducer";
 import { kebabCase } from "lodash";
+
+console.log(TokensBuild);
 
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
@@ -26,6 +28,6 @@ const config = {
 
 const outputString = `module.exports = ${JSON.stringify(config, null, 2)};`;
 
-writeFileSync("./tailwind/tailwind.config.js", outputString);
+writeFileSync("tailwind.config.js", outputString);
 
 console.log("Success: Tailwind config ");
