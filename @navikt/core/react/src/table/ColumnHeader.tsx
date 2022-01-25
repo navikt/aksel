@@ -53,7 +53,7 @@ const ColumnHeader: ColumnHeaderType = forwardRef(
           >
             {children}
             {context?.sort?.orderBy === sortKey &&
-              (context?.sort?.direction === "ascending" ? <Down /> : <Up />)}
+              (context?.sort?.direction === "ascending" ? <Down aria-label="sorter synkende"/> : <Up aria-label="sorter stigende"/>)}
           </button>
         ) : (
           children
