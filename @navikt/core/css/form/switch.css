@@ -210,7 +210,7 @@
   appearance: none;
 }
 
-.navds-switch--disabled {
+.navds-switch--disabled:not(.navds-switch--loading) {
   opacity: 0.3;
 }
 
