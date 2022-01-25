@@ -48,16 +48,5 @@ module.exports = {
         },
       ],
     },
-    /* Outputs a easy-to-parse format for tailwind config */
-    ts: {
-      transformGroup: "js",
-      buildPath: "tailwind/src/",
-      files: [
-        {
-          destination: "tokens.ts",
-          format: "javascript/es6",
-        },
-      ],
-    },
   },
 };
