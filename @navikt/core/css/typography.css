@@ -24,6 +24,31 @@
   margin-bottom: var(--navds-spacing-4);
 }
 
+/* Mobile scale */
+@media (max-width: 480px) {
+  /* xlarge */
+  .navds-heading--2xlarge {
+    font-size: var(--navds-font-size-heading-xlarge);
+    letter-spacing: -0.008em;
+    line-height: var(--navds-font-line-height-heading-xlarge);
+  }
+
+  .navds-heading--2xlarge.navds-typo--spacing {
+    margin-bottom: var(--navds-spacing-4);
+  }
+
+  /* large */
+  .navds-heading--xlarge {
+    font-size: var(--navds-font-size-heading-large);
+    letter-spacing: -0.004em;
+    line-height: var(--navds-font-line-height-heading-large);
+  }
+
+  .navds-heading--xlarge.navds-typo--spacing {
+    margin-bottom: var(--navds-spacing-3);
+  }
+}
+
 .navds-heading--large {
   font-size: var(--navds-font-size-heading-large);
   letter-spacing: -0.004em;
