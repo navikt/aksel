@@ -48,7 +48,26 @@ export const All = () => {
       </Toggle>
       <h2>Toggle icons</h2>
       <Toggle value={activeValue} onChange={(e) => setActiveValue(e)}>
-        {/* {Buttons(true)} */}
+        <Toggle.Button value={"First"}>
+          <Hamburger />
+        </Toggle.Button>
+        <Toggle.Button value={"Second"}>
+          <Attachment />
+        </Toggle.Button>
+        <Toggle.Button value={"Third"}>
+          <Star />
+        </Toggle.Button>
+        <Toggle.Button value={"Fourth toggle"}>
+          <System />
+        </Toggle.Button>
+      </Toggle>
+      <br />
+      <br />
+      <Toggle
+        value={activeValue}
+        onChange={(e) => setActiveValue(e)}
+        fullWidth={false}
+      >
         <Toggle.Button value={"First"}>
           <Hamburger />
         </Toggle.Button>
