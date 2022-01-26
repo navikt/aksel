@@ -26,11 +26,8 @@
 }
 
 .themed-page-header__illustration {
-  width: 80px;
-  height: 80px;
-
-  /* width: #px-to-rem(80) []; 
-   height: #px-to-rem(80) []; */
+  width: 6rem;
+  height: 6rem;
 
   margin-right: 2rem;
   pointer-events: none;
