@@ -22,7 +22,7 @@ import * as animation from "../../animation/{{cardId}}";
 import { getCardText } from "../locale";
 
 import { BaseCard } from "../base-card/BaseCard";
-import { CardSize, CardProps } from "../base-card/types";
+import { CardProps } from "../base-card/types";
 
 const {{componentName}}Card = ({ size, href, customText, language = "no" }: CardProps) => {
   const { title, text, category } = getCardText("{{cardId}}", language);
