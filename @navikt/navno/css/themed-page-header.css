@@ -21,6 +21,10 @@
   box-shadow: 0 -4px 0 var(--navds-global-color-green-200) inset;
 }
 
+.guide {
+  box-shadow: 0 -4px 0 var(--navds-global-color-lightblue-200) inset;
+}
+
 .themed-page-header__illustration {
   width: 80px;
   height: 80px;

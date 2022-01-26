@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemedPageHeader } from "..";
-import { SocialAid, Money } from "@navikt/ds-icons";
+import { SocialAid, Money, Bandage } from "@navikt/ds-icons";
 
 export default {
   title: "ds-react-navno/themed-page-header",
@@ -29,6 +29,16 @@ export const ThemedPageHeaderStory = () => {
         }
         pageType="product"
         modifiedTime="Oppdatert 20. januar 2022"
+      />
+      <h2>Guide</h2>
+      <ThemedPageHeader
+        title="Meld yrkesskade eller yrkessykdom"
+        subTitle="SLIK GJØR DU"
+        illustration={
+          <Bandage className="themed-page-header__illustration" /> //change
+        }
+        pageType="guide"
+        modifiedTime="Oppdatert 23. januar 2022"
       />
     </>
   );
