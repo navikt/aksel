@@ -58,6 +58,7 @@ const Animation = ({
   useEffect(() => {
     const lottieData = getLottieDataByState();
     updateLottieContainer(lottieData);
+    /* eslint-disable-next-line */
   }, [hoverAnimation, activeAnimation]);
 
   useEffect(() => {
@@ -66,6 +67,7 @@ const Animation = ({
     if (isActive && player) {
       player.play();
     }
+    /* eslint-disable-next-line */
   }, [isActive]);
 
   return (

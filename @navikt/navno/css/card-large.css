@@ -1,6 +1,5 @@
 .navds-card-large {
   display: block;
-  margin-bottom: var(--navds-spacing-7);
   max-width: 18rem;
   outline: 0;
   text-decoration: none;
@@ -9,7 +8,7 @@
 
 .navds-card-large .navds-card__bed {
   background-color: var(--navds-product-card-color-background);
-  border-radius: var(--navds-spacing-1);
+  border-radius: 0.25rem;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -29,14 +28,14 @@
 
 .navds-card-large .navds-card__text {
   color: var(--navds-product-card-color-text);
-  font-weight: 400;
+  font-weight: var(--navds-font-weight-regular);
   margin-bottom: var(--navds-spacing-8);
 }
 
 .navds-card-large .navds-card__category {
   color: var(--navds-product-card-color-category);
   font-size: 0.875rem;
-  font-weight: 400;
+  font-weight: var(--navds-font-weight-regular);
   margin-top: auto;
   text-transform: uppercase;
 }

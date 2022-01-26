@@ -26,7 +26,7 @@
 }
 
 .navds-card-micro .navds-card__bed {
-  border-radius: var(--navds-spacing-4);
+  border-radius: 1rem;
   color: var(--navds-card-micro-color-text);
   display: inline-block;
   font-size: var(--navds-font-size-small);
@@ -44,7 +44,7 @@
 
 .navds-card.navds-card-micro:focus:not(:active) .navds-card__bed {
   background-color: var(--navds-card-micro-color-background-focus);
-  box-shadow: 0 0 0 3px var(--navds-card-micro-color-shadow-focus);
+  box-shadow: var(--navds-shadow-focus);
   color: var(--navds-card-micro-color-text-focus);
   outline: none;
 }
