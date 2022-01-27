@@ -1,6 +1,6 @@
 :root {
   --navds-radio-checkbox-color-background: var(
-    --navds-semantic-color-canvas-background-light
+    --navds-semantic-color-component-background-light
   );
   --navds-radio-checkbox-color-background-hover: var(
     --navds-semantic-color-interaction-primary-hover-subtle
@@ -117,7 +117,7 @@
   position: absolute;
   top: 50%;
   transform: translate(0.375rem, -50%);
-  background-color: var(--navds-global-color-white);
+  background-color: var(--navds-radio-checkbox-color-background);
   width: 0.75rem;
   height: 0.25rem;
   border-radius: 1px;
