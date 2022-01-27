@@ -18,18 +18,20 @@ export const Indeterminate = () => {
       >
         Parent
       </Checkbox>
-      <Checkbox
-        checked={checked[0]}
-        onChange={(e) => setChecked([e.target.checked, checked[1]])}
-      >
-        Child 1
-      </Checkbox>
-      <Checkbox
-        checked={checked[1]}
-        onChange={(e) => setChecked([checked[0], e.target.checked])}
-      >
-        Child 2
-      </Checkbox>
+      <div style={{ paddingLeft: "2rem" }}>
+        <Checkbox
+          checked={checked[0]}
+          onChange={(e) => setChecked([e.target.checked, checked[1]])}
+        >
+          Child 1
+        </Checkbox>
+        <Checkbox
+          checked={checked[1]}
+          onChange={(e) => setChecked([checked[0], e.target.checked])}
+        >
+          Child 2
+        </Checkbox>
+      </div>
     </>
   );
 };
@@ -77,6 +79,13 @@ export const All = () => {
         Apple
       </Checkbox>
       <Checkbox value="Orange" description="Laborum ad" disabled defaultChecked>
+        Orange
+      </Checkbox>
+      <h3>Indeterminate</h3>
+      <Checkbox value="Apple" indeterminate>
+        Apple
+      </Checkbox>
+      <Checkbox value="Orange" indeterminate size="small">
         Orange
       </Checkbox>
 
