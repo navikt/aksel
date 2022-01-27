@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AccordionContent from "../AccordionContent";
-import AccordionHeader from "../AccordionHeader";
-import AccordionItem from "../AccordionItem";
-import { Accordion } from "../index";
+import AccordionContent from "./AccordionContent";
+import AccordionHeader from "./AccordionHeader";
+import AccordionItem from "./AccordionItem";
+import { Accordion } from "./index";
 
 export default {
   title: "ds-react/accordion",
