@@ -3,8 +3,6 @@ import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import Reducer from "./reducer";
 import { kebabCase } from "lodash";
 
-console.log(TokensBuild);
-
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
     ...old,
