@@ -71,8 +71,14 @@ const StepComponent: OverridableComponent<
       >
         {isFinished ? (
           <>
-            <Success className="navds-stepper__step-number" />
-            <SuccessFilled className="navds-stepper__step-number navds-stepper__step-number--filled" />
+            <Success
+              aria-label="finished"
+              className="navds-stepper__step-number"
+            />
+            <SuccessFilled
+              aria-label="active finished"
+              className="navds-stepper__step-number navds-stepper__step-number--filled"
+            />
           </>
         ) : (
           <Label className="navds-stepper__step-number">{index + 1}</Label>
