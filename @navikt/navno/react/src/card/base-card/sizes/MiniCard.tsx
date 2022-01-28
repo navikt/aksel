@@ -4,18 +4,14 @@ import { BodyShort, OverridableComponent, Link } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../useInteraction";
 
-export interface MiniCardProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface MiniCardProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   hoverAnimation?: any;
   activeAnimation?: any;
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const MiniCard: OverridableComponent<
-  MiniCardProps,
-  HTMLAnchorElement
-> = forwardRef(
+const MiniCard: OverridableComponent<MiniCardProps, HTMLElement> = forwardRef(
   (
     {
       activeAnimation,

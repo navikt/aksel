@@ -5,8 +5,7 @@ import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../useInteraction";
 
-export interface LargeCardProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface LargeCardProps extends React.HTMLAttributes<HTMLElement> {
   activeAnimation?: any;
   category: string;
   hoverAnimation?: any;
@@ -15,10 +14,7 @@ export interface LargeCardProps
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const LargeCard: OverridableComponent<
-  LargeCardProps,
-  HTMLAnchorElement
-> = forwardRef(
+const LargeCard: OverridableComponent<LargeCardProps, HTMLElement> = forwardRef(
   (
     {
       as: Component = "article",
