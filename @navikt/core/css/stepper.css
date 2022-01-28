@@ -36,7 +36,12 @@
 .navds-stepper__step-wrapper:focus-within {
   box-shadow: var(--navds-shadow-focus);
 }
-
+.navds-stepper__step-wrapper:last-child:focus-within {
+  box-shadow: none;
+}
+.navds-stepper__step-wrapper:last-child:focus-within > .navds-stepper__step {
+  box-shadow: var(--navds-shadow-focus);
+}
 .navds-stepper__step:focus {
   outline: none;
 }
