@@ -1,5 +1,4 @@
 export * from "./accordion";
-export * from "./accordion-menu";
 export * from "./alert";
 export * from "./button";
 export * from "./form";
@@ -9,6 +8,7 @@ export * from "./guide-panel";
 export * from "./link";
 export * from "./link-panel";
 export * from "./loader";
+export * from "./menu";
 export * from "./modal";
 export * from "./panel";
 export * from "./popover";
