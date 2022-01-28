@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import isChromatic from "chromatic/isChromatic";
 
-import * as Icons from "../src";
+import * as Icons from "./src";
 export default {
   title: "ds-icons/Ikoner",
   argTypes: {
