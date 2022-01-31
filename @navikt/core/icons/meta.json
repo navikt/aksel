@@ -2136,6 +2136,42 @@
     "pageName": "Family"
   },
   {
+    "name": "SizeLarge56Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.044Z",
+    "pageName": "Icon placeholder"
+  },
+  {
+    "name": "SizeLarge64Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.037Z",
+    "pageName": "Icon placeholder"
+  },
+  {
+    "name": "SizeMedium24Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.058Z",
+    "pageName": "Icon placeholder"
+  },
+  {
+    "name": "SizeMedium32Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.052Z",
+    "pageName": "Icon placeholder"
+  },
+  {
+    "name": "SizeSmall16Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.030Z",
+    "pageName": "Icon placeholder"
+  },
+  {
+    "name": "SizeSmall20Px",
+    "description": "",
+    "created_at": "2022-01-24T15:38:18.064Z",
+    "pageName": "Icon placeholder"
+  },
+  {
     "name": "SocialAid",
     "description": "",
     "created_at": "2020-07-01T10:37:42.775Z",
