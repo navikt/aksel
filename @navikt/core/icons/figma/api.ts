@@ -22,9 +22,10 @@ export const getPublishedIcons = async () => {
       throw e;
     });
 
-  return data?.meta?.components?.filter(
-    (component: any) => component?.containing_frame?.pageName !== "🔆Pictogram"
-  );
+  return data?.meta?.components?.filter((component: any) => {
+    const page = component?.containing_frame?.pageName;
+    return page !== "🔆Pictogram" && page !== "🧩Placeholder";
+  });
 };
 
 /**
