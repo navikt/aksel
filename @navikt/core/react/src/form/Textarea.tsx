@@ -77,7 +77,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           size={size}
           as="label"
           className={cl("navds-textarea__label", {
-            "sr-only": hideLabel,
+            "navds-sr-only": hideLabel,
           })}
         >
           {label}
@@ -86,7 +86,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <BodyShort
             as="div"
             className={cl("navds-textarea__description", {
-              "sr-only": hideLabel,
+              "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}
             size={size}
@@ -113,7 +113,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           />
           {hasMaxLength && (
             <>
-              <span id={maxLengthId} className="sr-only">
+              <span id={maxLengthId} className="navds-sr-only">
                 Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
                 {maxLength} signs.
               </span>

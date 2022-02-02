@@ -32,7 +32,6 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
     ...rest,
     inputProps: {
       ...inputProps,
-      type: "checkbox",
       checked: checkboxGroup?.value
         ? checkboxGroup.value.includes(props.value as string)
         : props.checked,

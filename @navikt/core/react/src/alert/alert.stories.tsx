@@ -1,6 +1,6 @@
 import React from "react";
-import { Alert } from "..";
-import { BodyLong, Heading } from "../..";
+import { Alert } from ".";
+import { BodyLong, Heading } from "..";
 
 export default {
   title: "ds-react/alert",
