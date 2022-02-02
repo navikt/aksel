@@ -27,14 +27,14 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
-    const popoverRef = useRef<HTMLDivElement | null>(null);
+    const [popoverRef, setPopoverRef] = useState<HTMLDivElement | null>(null);
     const wrapperRef = useRef<HTMLDivElement | null>(null);
 
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-      open && popoverRef.current?.focus();
-    }, [open]);
+      open && popoverRef?.focus();
+    }, [open, popoverRef]);
 
     const handleClick = (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -59,7 +59,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           <span className="navds-sr-only">{title}</span>
         </button>
         <Popover
-          ref={popoverRef}
+          ref={setPopoverRef}
           onClose={() => setOpen(false)}
           className="navds-help-text__popover"
           open={open}
