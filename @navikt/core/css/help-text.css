@@ -51,7 +51,6 @@
 }
 
 .navds-help-text__button:focus > .navds-help-text__icon {
-  outline: none;
   color: var(--navds-help-text-color-icon-focus);
   background: var(--navds-help-text-color-icon-background-focus);
   box-shadow: 0 0 0 3px var(--navds-help-text-color-icon-shadow-focus);
