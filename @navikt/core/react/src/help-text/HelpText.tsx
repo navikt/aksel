@@ -21,47 +21,35 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       placement = "top",
       strategy = "absolute",
       title = "hjelp",
+      onClick,
       ...rest
     },
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = mergeRefs([buttonRef, ref]);
-    const [popoverRef, setPopoverRef] = useState<HTMLDivElement | null>(null);
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-
     const [open, setOpen] = useState(false);
 
-    useEffect(() => {
-      open && popoverRef?.focus?.();
-    }, [open, popoverRef]);
-
-    const handleClick = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      setOpen((x) => !x);
-      rest.onClick && rest.onClick(e);
-    };
     return (
-      <div className="navds-help-text" ref={wrapperRef}>
+      <div className="navds-help-text">
         <button
           {...rest}
           ref={mergedRef}
-          onClick={(e) => handleClick(e)}
+          onClick={(e) => {
+            setOpen((x) => !x);
+            onClick?.(e);
+          }}
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
-          aria-haspopup="dialog"
           title={title}
         >
           <HelpTextIcon className="navds-help-text__icon" />
         </button>
         <Popover
-          ref={setPopoverRef}
           onClose={() => setOpen(false)}
           className="navds-help-text__popover"
           open={open}
-          role="tooltip"
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
