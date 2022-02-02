@@ -6,19 +6,16 @@
   --navds-help-text-color-focus: var(
     --navds-semantic-color-component-background-light
   );
-
   --navds-help-text-color-background-hover: var(
     --navds-semantic-color-interaction-primary
   );
   --navds-help-text-color-background-focus: var(
     --navds-semantic-color-interaction-primary
   );
-
   --navds-help-text-color-shadow-hover: var(
     --navds-semantic-color-interaction-primary
   );
   --navds-help-text-color-shadow-focus: var(--navds-semantic-color-focus);
-
   --navds-help-text-color-popover-background: var(
     --navds-semantic-color-feedback-info-background
   );

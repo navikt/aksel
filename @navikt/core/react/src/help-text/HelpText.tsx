@@ -1,6 +1,6 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
 import cl from "classnames";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
 import { Popover, PopoverProps } from "..";
 
