@@ -11,6 +11,9 @@ export const All = () => {
   return (
     <>
       <h1>HelpText</h1>
+      <HelpText title="show tooltip">
+        Id ullamco excepteur elit fugiat labore.
+      </HelpText>
       <TextField
         label={
           <div style={{ display: "flex", gap: 8 }}>
