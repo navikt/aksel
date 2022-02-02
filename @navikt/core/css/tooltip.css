@@ -1,0 +1,59 @@
+:root {
+  --navds-tooltip-color-text: var(--navds-semantic-color-text-inverted);
+  --navds-tooltip-color-background: var(
+    --navds-semantic-color-component-background-inverted
+  );
+}
+
+.navds-tooltip {
+  z-index: var(--navds-z-index-popover);
+  background-color: var(--navds-tooltip-color-background);
+  color: var(--navds-tooltip-color-text);
+  border: 1px solid transparent;
+  border-radius: 4px;
+  padding: var(--navds-spacing-2);
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 100ms ease-in-out;
+}
+
+.navds-tooltip--hidden {
+  opacity: 0.5;
+  visibility: hidden;
+}
+
+.navds-tooltip__wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.navds-tooltip__arrow {
+  z-index: -1;
+}
+
+.navds-tooltip__arrow::before {
+  display: block;
+  content: "";
+  transform: rotate(45deg);
+  background-color: var(--navds-tooltip-color-background);
+  width: 0.75rem;
+  height: 0.75rem;
+  top: 0;
+  left: 0;
+}
+
+.navds-tooltip[data-popper-placement^="top"] > .navds-tooltip__arrow {
+  bottom: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="bottom"] > .navds-tooltip__arrow {
+  top: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="left"] > .navds-tooltip__arrow {
+  right: calc(0.75rem / -2);
+}
+
+.navds-tooltip[data-popper-placement^="right"] > .navds-tooltip__arrow {
+  left: calc(0.75rem / -2);
+}
