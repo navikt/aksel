@@ -16,6 +16,7 @@ export * from "./speech-bubble";
 export * from "./step-indicator";
 export * from "./tag";
 export * from "./table";
+export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
 
