@@ -54,7 +54,9 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           placement={placement}
           strategy={strategy}
         >
-          <Popover.Content>{children}</Popover.Content>
+          <Popover.Content className="navds-body-short">
+            {children}
+          </Popover.Content>
         </Popover>
       </div>
     );
