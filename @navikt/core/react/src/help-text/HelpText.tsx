@@ -33,7 +33,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-      open && popoverRef?.focus();
+      open && popoverRef?.focus?.();
     }, [open, popoverRef]);
 
     const handleClick = (
@@ -42,7 +42,6 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
       setOpen((x) => !x);
       rest.onClick && rest.onClick(e);
     };
-
     return (
       <div className="navds-help-text" ref={wrapperRef}>
         <button
