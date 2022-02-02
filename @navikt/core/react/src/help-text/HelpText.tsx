@@ -54,8 +54,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           aria-haspopup="dialog"
           title={title}
         >
-          <HelpTextIcon className="navds-help-text__icon" />
-          <span className="navds-sr-only">{title}</span>
+          <HelpTextIcon className="navds-help-text__icon" title={title} />
         </button>
         <Popover
           ref={setPopoverRef}
