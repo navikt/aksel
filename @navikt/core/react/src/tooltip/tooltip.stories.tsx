@@ -73,7 +73,7 @@ export const All = () => {
               {["center", "start", "end"].map((align) => (
                 <Tooltip
                   key={side + align}
-                  open
+                  defaultOpen
                   content={side + align}
                   side={side as any}
                   align={align as any}

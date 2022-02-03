@@ -1,6 +1,6 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
-import React, { forwardRef, HTMLAttributes, useEffect, useState } from "react";
+import React, { forwardRef, HTMLAttributes } from "react";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -9,9 +9,13 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactElement & React.RefAttributes<HTMLElement>;
   /**
    * Open state for contolled tooltip
-   * @note Will need to handle all events manually if used
    */
   open?: boolean;
+  /**
+   * Tells tooltip to start in open state
+   * @note "open"-prop overwrites this
+   */
+  defaultOpen?: boolean;
   /**
    * Orientation for tooltip
    * @default "top"
@@ -29,7 +33,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   arrow?: boolean;
   /**
    * Distance from anchor to tooltip
-   * @default 6 w/arrow, 2 w/no-arrow
+   * @default 2
    */
   offset?: number;
   /**
@@ -56,6 +60,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       side = "top",
       align = "center",
       open,
+      defaultOpen,
       offset,
       content,
       delay = 150,
@@ -64,27 +69,17 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref
   ) => {
-    const [isOpen, setIsOpen] = useState(open ?? false);
-
-    const handleOpen = () => {
-      open === undefined && setIsOpen(!isOpen);
-      onOpenChange?.(!isOpen);
-    };
-
-    useEffect(() => {
-      open !== undefined && setIsOpen(open);
-    }, [open]);
-
     return (
       <TooltipPrimitive.Root
         delayDuration={delay}
-        open={isOpen}
-        onOpenChange={handleOpen}
+        open={open}
+        defaultOpen={defaultOpen}
+        onOpenChange={onOpenChange}
       >
         <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
           ref={ref}
-          sideOffset={offset ?? arrow ? 6 : 2}
+          sideOffset={offset ?? 2}
           side={side}
           align={align}
           className={cl("navds-tooltip", "navds-detail", className)}
