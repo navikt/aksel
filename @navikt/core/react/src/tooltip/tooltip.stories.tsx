@@ -17,18 +17,8 @@ export const All = () => {
   return (
     <div style={{ margin: "4rem 8rem 4rem 8rem" }}>
       <h2>Controlled</h2>
-      <Tooltip
-        open={open}
-        content="Controlled tooltip example"
-        side="top"
-        id="testid"
-      >
-        <Button
-          aria-describedby="teststring"
-          onClick={() => setOpen((x) => !x)}
-        >
-          Toggle tooltip
-        </Button>
+      <Tooltip open={open} content="Controlled tooltip example" side="top">
+        <Button onClick={() => setOpen((x) => !x)}>Toggle tooltip</Button>
       </Tooltip>
 
       <h2>onOpenChange</h2>

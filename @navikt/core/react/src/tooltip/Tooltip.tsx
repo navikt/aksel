@@ -1,6 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
+import { useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -65,10 +66,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       content,
       delay = 150,
       onOpenChange,
+      id,
       ...rest
     },
     ref
   ) => {
+    const tooltipId = useId();
+
     return (
       <TooltipPrimitive.Root
         delayDuration={delay}
@@ -76,14 +80,20 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         defaultOpen={defaultOpen}
         onOpenChange={onOpenChange}
       >
-        <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+        <TooltipPrimitive.Trigger
+          asChild
+          aria-describedby={id ?? `tooltip-${tooltipId}`}
+        >
+          {children}
+        </TooltipPrimitive.Trigger>
         <TooltipPrimitive.Content
           ref={ref}
+          {...rest}
           sideOffset={offset ?? 2}
           side={side}
           align={align}
           className={cl("navds-tooltip", "navds-detail", className)}
-          {...rest}
+          id={id ?? `tooltip-${tooltipId}`}
         >
           {content}
           {arrow && (
