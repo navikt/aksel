@@ -60,6 +60,24 @@ export const All = () => {
           {Items(true)}
         </ToggleGroup>
       </div>
+      <h2>ToggleGroup label</h2>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <ToggleGroup
+          label="Label msg"
+          value={activeValue}
+          onValueChange={setActiveValue}
+        >
+          {Items()}
+        </ToggleGroup>
+        <ToggleGroup
+          label="Label msg"
+          value={activeValue}
+          onValueChange={setActiveValue}
+          aria-describedby="demo-id"
+        >
+          {Items()}
+        </ToggleGroup>
+      </div>
     </div>
   );
 };

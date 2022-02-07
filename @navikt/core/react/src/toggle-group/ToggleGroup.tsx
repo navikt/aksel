@@ -2,6 +2,7 @@ import cl from "classnames";
 import React, { createContext, forwardRef, HTMLAttributes } from "react";
 import ToggleItem, { ToggleItemType } from "./ToggleItem";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+import { Label, useId } from "..";
 
 export interface ToggleGroupProps
   extends Omit<
@@ -25,6 +26,10 @@ export interface ToggleGroupProps
    * Returns elements that wants to be active
    */
   onValueChange: (value: string) => void;
+  /**
+   * Label describing ToggleGroup
+   */
+  label?: React.ReactNode;
 }
 
 interface ToggleGroupComponent
@@ -43,7 +48,21 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
 );
 
 const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
-  ({ className, children, onValueChange, size = "medium", ...rest }, ref) => {
+  (
+    {
+      className,
+      children,
+      onValueChange,
+      size = "medium",
+      label,
+      id,
+      "aria-describedby": desc,
+      ...rest
+    },
+    ref
+  ) => {
+    const labelId = `toggle-group-label-${useId()}`;
+
     const handleValueChange = (v: string) => {
       v !== "" && onValueChange(v);
     };
@@ -54,20 +73,32 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           size,
         }}
       >
-        <RadixToggleGroup.Root
-          {...rest}
-          onValueChange={handleValueChange}
-          ref={ref}
-          className={cl(
-            "navds-toggle-group",
-            className,
-            `navds-toggle-group--${size}`
+        <div>
+          {label && (
+            <Label
+              size={size}
+              className="navds-toggle-group__label"
+              id={labelId}
+            >
+              {label}
+            </Label>
           )}
-          role="tablist"
-          type="single"
-        >
-          {children}
-        </RadixToggleGroup.Root>
+          <RadixToggleGroup.Root
+            {...rest}
+            onValueChange={handleValueChange}
+            ref={ref}
+            className={cl(
+              "navds-toggle-group",
+              className,
+              `navds-toggle-group--${size}`
+            )}
+            aria-describedby={cl({ [desc ?? ""]: !!desc, [labelId]: !!label })}
+            role="tablist"
+            type="single"
+          >
+            {children}
+          </RadixToggleGroup.Root>
+        </div>
       </ToggleGroupContext.Provider>
     );
   }

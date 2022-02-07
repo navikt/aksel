@@ -85,3 +85,7 @@
   > svg {
   font-size: 1rem;
 }
+
+.navds-toggle-group__label {
+  margin-bottom: 0.5rem;
+}
