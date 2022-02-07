@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "../index";
+import { Button } from "./index";
 import { Success } from "@navikt/ds-icons";
 
 export default {
@@ -89,7 +89,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant}>
-            <span className="sr-only">Success ikon</span>
+            <span className="navds-sr-only">Success ikon</span>
             <Success />
           </Button>
         ))}
@@ -105,7 +105,7 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="small">
-            <span className="sr-only">Success ikon</span>
+            <span className="navds-sr-only">Success ikon</span>
             <Success />
           </Button>
         ))}

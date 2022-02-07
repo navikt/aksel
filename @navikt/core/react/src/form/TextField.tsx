@@ -62,7 +62,9 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
         htmlFor={inputProps.id}
         size={size}
         as="label"
-        className={cl("navds-text-field__label", { "sr-only": hideLabel })}
+        className={cl("navds-text-field__label", {
+          "navds-sr-only": hideLabel,
+        })}
       >
         {label}
       </Label>
@@ -72,7 +74,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           {size === "medium" ? (
             <BodyShort
               className={cl("navds-text-field__description", {
-                "sr-only": hideLabel,
+                "navds-sr-only": hideLabel,
               })}
               id={inputDescriptionId}
               size="small"
@@ -83,7 +85,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>((props, ref) => {
           ) : (
             <Detail
               className={cl("navds-text-field__description", {
-                "sr-only": hideLabel,
+                "navds-sr-only": hideLabel,
               })}
               id={inputDescriptionId}
               size="small"
