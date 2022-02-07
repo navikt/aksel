@@ -16,7 +16,7 @@ const TitleTemplate = ({ level, size, spacing }) => (
 );
 
 export const HeadingStory = TitleTemplate.bind({});
-HeadingStory.args = { level: 1, size: "2xlarge", spacing: false };
+HeadingStory.args = { level: 1, size: "xlarge", spacing: false };
 
 const IngressTemplate = ({ spacing }) => (
   <Ingress spacing={spacing}>{lorem()}</Ingress>
@@ -64,8 +64,8 @@ DetailStory.args = { spacing: false, size: "medium" };
 export const SideInnholdEksempel = () => {
   return (
     <div style={{ maxWidth: 600 }}>
-      <Heading level={"1"} size="2xlarge" spacing>
-        Title lvl 1 2xlarge
+      <Heading level={"1"} size="xlarge" spacing>
+        Title lvl 1 xlarge
       </Heading>
       <BodyLong spacing>
         BodyLong: Aliqua ad et nisi commodo sit excepteur in commodo proident
@@ -87,7 +87,7 @@ export const SideInnholdEksempel = () => {
         sunt proident irure consectetur excepteur.
       </BodyLong>
       <Heading level={"2"} size="xlarge" spacing>
-        Title lvl 2 xlarge
+        Title lvl 2 large
       </Heading>
       <Ingress spacing>
         Ingress: Mollit incididunt incididunt officia amet est et non aliqua
