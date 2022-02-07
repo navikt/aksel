@@ -7,5 +7,5 @@
     "target": "es6",
     "moduleResolution": "node"
   },
-  "exclude": ["**/stories", "**/*.test.ts", "**/*.test.tsx"]
+  "exclude": ["**/stories", "**/*.stories.*", "**/*.test.ts", "**/*.test.tsx"]
 }

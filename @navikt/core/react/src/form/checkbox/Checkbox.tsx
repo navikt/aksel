@@ -24,6 +24,11 @@ export interface CheckboxProps
    * The value of the HTML element.
    */
   value?: string;
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   * @default false
+   */
+  indeterminate?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
@@ -52,8 +57,20 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "hideLabel",
         ])}
         {...inputProps}
+        type="checkbox"
         className="navds-checkbox__input"
-        ref={ref}
+        aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
+        ref={(el) => {
+          if (el) {
+            el.indeterminate = props.indeterminate ?? false;
+          }
+
+          if (typeof ref === "function") {
+            ref(el);
+          } else if (ref != null) {
+            ref.current = el;
+          }
+        }}
       />
       <label htmlFor={inputProps.id} className="navds-checkbox__label">
         <div
