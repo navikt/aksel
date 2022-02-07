@@ -1,8 +1,8 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { BodyShort, ToggleContext } from "..";
+import { BodyShort, ToggleGroupContext } from "..";
 
-export interface ToggleButtonProps
+export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Modal.Content content
@@ -14,13 +14,13 @@ export interface ToggleButtonProps
   value: string;
 }
 
-export type ToggleButtonsType = React.ForwardRefExoticComponent<
-  ToggleButtonProps & React.RefAttributes<HTMLButtonElement>
+export type ToggleItemType = React.ForwardRefExoticComponent<
+  ToggleItemProps & React.RefAttributes<HTMLButtonElement>
 >;
 
-const ToggleButton: ToggleButtonsType = forwardRef(
+const ToggleItem: ToggleItemType = forwardRef(
   ({ className, children, value, ...rest }, ref) => {
-    const context = useContext(ToggleContext);
+    const context = useContext(ToggleGroupContext);
 
     const handleClick = (
       e: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -51,4 +51,4 @@ const ToggleButton: ToggleButtonsType = forwardRef(
   }
 );
 
-export default ToggleButton;
+export default ToggleItem;
