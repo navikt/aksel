@@ -1,6 +1,5 @@
 import React from "react";
 import { Heading, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
-import "./index.css";
 
 export default {
   title: "ds-react/typography",
