@@ -28,11 +28,11 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
         {...rest}
         ref={ref}
         role="tab"
-        className={cl("navds-toggle__button", className)}
+        className={cl("navds-toggle-group__button", className)}
       >
         <BodyShort
           as="span"
-          className="navds-toggle__button-inner"
+          className="navds-toggle-group__button-inner"
           size={context?.size}
         >
           {children}

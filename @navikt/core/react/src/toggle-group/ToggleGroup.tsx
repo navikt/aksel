@@ -58,7 +58,11 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           {...rest}
           onValueChange={handleValueChange}
           ref={ref}
-          className={cl("navds-toggle", className, `navds-toggle--${size}`)}
+          className={cl(
+            "navds-toggle-group",
+            className,
+            `navds-toggle-group--${size}`
+          )}
           role="tablist"
           type="single"
         >
