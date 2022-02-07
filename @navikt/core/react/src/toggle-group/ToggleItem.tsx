@@ -1,6 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { BodyShort, ToggleGroupContext } from "..";
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 
 export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
@@ -18,26 +19,16 @@ export type ToggleItemType = React.ForwardRefExoticComponent<
   ToggleItemProps & React.RefAttributes<HTMLButtonElement>
 >;
 
-const ToggleItem: ToggleItemType = forwardRef(
-  ({ className, children, value, ...rest }, ref) => {
+const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
+  ({ className, children, ...rest }, ref) => {
     const context = useContext(ToggleGroupContext);
 
-    const handleClick = (
-      e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-    ) => {
-      context?.handleChange(value);
-      rest.onClick && rest.onClick(e);
-    };
-
     return (
-      <button
+      <RadixToggleGroup.Item
         {...rest}
         ref={ref}
-        className={cl("navds-toggle__button", className, {
-          "navds-toggle__button--selected": !!context?.value.includes(value),
-        })}
-        onClick={(e) => handleClick(e)}
-        aria-pressed={!!context?.value.includes(value)}
+        role="tab"
+        className={cl("navds-toggle__button", className)}
       >
         <BodyShort
           as="span"
@@ -46,9 +37,9 @@ const ToggleItem: ToggleItemType = forwardRef(
         >
           {children}
         </BodyShort>
-      </button>
+      </RadixToggleGroup.Item>
     );
   }
-);
+) as ToggleItemType;
 
 export default ToggleItem;

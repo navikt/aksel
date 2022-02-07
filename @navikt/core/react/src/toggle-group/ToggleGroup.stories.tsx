@@ -12,30 +12,54 @@ export default {
 
 const Items = (icon?: boolean) => (
   <>
-    <ToggleGroup.Item value={"first"}>
+    <ToggleGroup.Item value="first">
       {icon ? <Hamburger /> : "First"}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value={"second"}>
+    <ToggleGroup.Item value="second">
       {icon ? <Star /> : "Second"}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value={"thrid"}>
+    <ToggleGroup.Item value="thrid">
       {icon ? <Attachment /> : "Thrid"}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value={"fourth"}>
+    <ToggleGroup.Item value="fourth">
       {icon ? <System /> : "Fourth"}
     </ToggleGroup.Item>
   </>
 );
 
 export const All = () => {
-  const [activeValue, setActiveValue] = useState(["First"]);
+  const [activeValue, setActiveValue] = useState("first");
 
   return (
     <div>
-      <h2>Toggle</h2>
-      <ToggleGroup value={activeValue} onChange={(e) => setActiveValue(e)}>
-        {Items()}
-      </ToggleGroup>
+      <h2>ToggleGroup</h2>
+      <h3>{activeValue}</h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <ToggleGroup value={activeValue} onValueChange={setActiveValue}>
+          {Items()}
+        </ToggleGroup>
+        <ToggleGroup value={activeValue} onValueChange={setActiveValue}>
+          {Items(true)}
+        </ToggleGroup>
+      </div>
+      <h2>ToggleGroup Small</h2>
+      <h3>{activeValue}</h3>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <ToggleGroup
+          size="small"
+          value={activeValue}
+          onValueChange={setActiveValue}
+        >
+          {Items()}
+        </ToggleGroup>
+        <ToggleGroup
+          size="small"
+          value={activeValue}
+          onValueChange={setActiveValue}
+        >
+          {Items(true)}
+        </ToggleGroup>
+      </div>
     </div>
   );
 };
