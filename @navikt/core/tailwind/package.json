@@ -23,7 +23,7 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^0.7.1",
+    "@navikt/ds-tokens": "^0.8.1",
     "@types/jest": "^27.0.1",
     "jest": "^27.2.0",
     "lodash": "^4.17.21",

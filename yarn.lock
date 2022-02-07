@@ -2330,11 +2330,6 @@
     call-me-maybe "^1.0.1"
     glob-to-regexp "^0.3.0"
 
-"@navikt/ds-tokens@^0.7.1":
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/@navikt/ds-tokens/-/ds-tokens-0.7.1.tgz#f671f00dc7a5732e7a3c35b7b488a97fca35ad2a"
-  integrity sha512-qdpqFZdNplVrQYHg5u4DSEISNAVOs/0YfrPYNTeyMBDnmqjlPpk6VL2i5lgiNdXYVNqxx+V5Q7RF9RTuHL0QUA==
-
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
