@@ -9,7 +9,7 @@ export interface ToggleGroupProps
     "onChange" | "dir" | "defaultValue"
   > {
   /**
-   * Toggles.Button elements
+   * Toggles.Item elements
    */
   children: React.ReactNode;
   /**

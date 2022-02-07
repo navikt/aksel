@@ -6,11 +6,11 @@ import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
   /**
-   * Modal.Content content
+   * Content
    */
   children: React.ReactNode;
   /**
-   * Button value to keep track of state
+   * Value for state-handling
    */
   value: string;
 }
