@@ -14,7 +14,8 @@
   "license": "MIT",
   "files": [
     "/dist",
-    "/src"
+    "/src",
+    "/tailwind"
   ],
   "scripts": {
     "build": "node ./build.js",
