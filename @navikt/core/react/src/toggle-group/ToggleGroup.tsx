@@ -1,14 +1,16 @@
 import cl from "classnames";
-import React, { createContext, forwardRef, HTMLAttributes } from "react";
+import React, {
+  createContext,
+  forwardRef,
+  HTMLAttributes,
+  useState,
+} from "react";
 import ToggleItem, { ToggleItemType } from "./ToggleItem";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { Label, useId } from "..";
 
 export interface ToggleGroupProps
-  extends Omit<
-    HTMLAttributes<HTMLDivElement>,
-    "onChange" | "dir" | "defaultValue"
-  > {
+  extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
   /**
    * Toggles.Item elements
    */
@@ -21,7 +23,11 @@ export interface ToggleGroupProps
   /**
    * Controlled selected value
    */
-  value: string;
+  value?: string;
+  /**
+   * If not controlled, a default-value needs to be set
+   */
+  defaultValue?: string;
   /**
    * Returns elements that wants to be active
    */
@@ -55,17 +61,27 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       onValueChange,
       size = "medium",
       label,
+      value,
+      defaultValue,
       id,
       "aria-describedby": desc,
       ...rest
     },
     ref
   ) => {
+    const [groupValue, setGroupValue] = useState(defaultValue);
     const labelId = `toggle-group-label-${useId()}`;
 
     const handleValueChange = (v: string) => {
-      v !== "" && onValueChange(v);
+      if (v !== "") {
+        setGroupValue(v);
+        onValueChange(v);
+      }
     };
+
+    if (!value && !defaultValue) {
+      console.error("ToggleGroup without value/defaultvalue is not allowed");
+    }
 
     return (
       <ToggleGroupContext.Provider
@@ -86,13 +102,18 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           <RadixToggleGroup.Root
             {...rest}
             onValueChange={handleValueChange}
+            value={value ?? groupValue}
+            defaultValue={defaultValue}
             ref={ref}
             className={cl(
               "navds-toggle-group",
               className,
               `navds-toggle-group--${size}`
             )}
-            aria-describedby={cl({ [desc ?? ""]: !!desc, [labelId]: !!label })}
+            aria-describedby={cl({
+              [desc ?? ""]: !!desc,
+              [labelId]: !!label,
+            })}
             role="tablist"
             type="single"
           >

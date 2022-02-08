@@ -78,6 +78,12 @@ export const All = () => {
           {Items()}
         </ToggleGroup>
       </div>
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <h2>Uncontrolled</h2>
+        <ToggleGroup onValueChange={setActiveValue} defaultValue="second">
+          {Items()}
+        </ToggleGroup>
+      </div>
     </div>
   );
 };
