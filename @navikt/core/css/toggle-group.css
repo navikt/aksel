@@ -23,8 +23,8 @@
   border-radius: 7px;
   background-color: var(--navds-toggle-group-color-background);
   border: 1px solid var(--navds-toggle-group-color-border);
-  padding: 0.25rem;
-  gap: 0.25rem;
+  padding: var(--navds-spacing-1);
+  gap: var(--navds-spacing-1);
   width: fit-content;
 }
 
