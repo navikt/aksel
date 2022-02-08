@@ -35,28 +35,20 @@ export const All = () => {
       <h2>ToggleGroup</h2>
       <h3>{activeValue}</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <ToggleGroup value={activeValue} onValueChange={setActiveValue}>
+        <ToggleGroup value={activeValue} onChange={setActiveValue}>
           {Items()}
         </ToggleGroup>
-        <ToggleGroup value={activeValue} onValueChange={setActiveValue}>
+        <ToggleGroup value={activeValue} onChange={setActiveValue}>
           {Items(true)}
         </ToggleGroup>
       </div>
       <h2>ToggleGroup Small</h2>
       <h3>{activeValue}</h3>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <ToggleGroup
-          size="small"
-          value={activeValue}
-          onValueChange={setActiveValue}
-        >
+        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
           {Items()}
         </ToggleGroup>
-        <ToggleGroup
-          size="small"
-          value={activeValue}
-          onValueChange={setActiveValue}
-        >
+        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
           {Items(true)}
         </ToggleGroup>
       </div>
@@ -65,14 +57,14 @@ export const All = () => {
         <ToggleGroup
           label="Label msg"
           value={activeValue}
-          onValueChange={setActiveValue}
+          onChange={setActiveValue}
         >
           {Items()}
         </ToggleGroup>
         <ToggleGroup
           label="Label msg"
           value={activeValue}
-          onValueChange={setActiveValue}
+          onChange={setActiveValue}
           aria-describedby="demo-id"
         >
           {Items()}
@@ -80,7 +72,7 @@ export const All = () => {
       </div>
       <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
         <h2>Uncontrolled</h2>
-        <ToggleGroup onValueChange={setActiveValue} defaultValue="second">
+        <ToggleGroup onChange={setActiveValue} defaultValue="second">
           {Items()}
         </ToggleGroup>
       </div>
