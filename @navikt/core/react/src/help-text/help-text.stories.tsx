@@ -1,6 +1,5 @@
 import React from "react";
-import { TextField } from "../..";
-import { HelpText } from "..";
+import { TextField, HelpText } from "..";
 
 export default {
   title: "ds-react/help-text",
