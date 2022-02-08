@@ -53,6 +53,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           anchorEl={buttonRef.current}
           placement={placement}
           strategy={strategy}
+          tabIndex={0}
         >
           <Popover.Content className="navds-body-short">
             {children}
