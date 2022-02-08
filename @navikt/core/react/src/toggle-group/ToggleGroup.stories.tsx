@@ -16,7 +16,7 @@ const Items = (icon?: boolean) => (
       {icon ? <Hamburger /> : "First"}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="second">
-      {icon ? <Star /> : "Second"}
+      {icon ? <Star /> : "Second more txt"}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="thrid">
       {icon ? <Attachment /> : "Thrid"}
