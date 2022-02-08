@@ -30,6 +30,8 @@
 
 .navds-toggle-group__button {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: var(--navds-spacing-3);
   min-width: 48px;
   min-height: 48px;
@@ -57,7 +59,6 @@
 }
 
 .navds-toggle-group__button-inner {
-  margin: auto;
   display: flex;
   align-items: center;
   gap: var(--navds-spacing-2);
