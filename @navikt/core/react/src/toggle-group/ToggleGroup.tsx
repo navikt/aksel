@@ -83,6 +83,11 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       console.error("ToggleGroup without value/defaultvalue is not allowed");
     }
 
+    const describeBy = cl({
+      [desc ?? ""]: !!desc,
+      [labelId]: !!label,
+    });
+
     return (
       <ToggleGroupContext.Provider
         value={{
@@ -110,11 +115,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               className,
               `navds-toggle-group--${size}`
             )}
-            aria-describedby={cl({
-              [desc ?? ""]: !!desc,
-              [labelId]: !!label,
-            })}
-            /* role="tablist" */
+            {...(describeBy && { "aria-describedby": describeBy })}
             type="single"
           >
             {children}
