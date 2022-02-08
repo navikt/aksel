@@ -744,13 +744,13 @@
     "pageName": "Status"
   },
   {
-    "name": "EU",
+    "name": "Eu",
     "description": "",
     "created_at": "2022-02-08T11:45:47.104Z",
     "pageName": "International"
   },
   {
-    "name": "EUFilled",
+    "name": "EuFilled",
     "description": "",
     "created_at": "2022-02-08T11:45:47.109Z",
     "pageName": "International"
