@@ -1,12 +1,22 @@
 import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
-import ReactModal from "react-modal";
+import ReactModal, { Props as ReactModalProps } from "react-modal";
 import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
 import { Button } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
-export interface ModalProps {
+type RecatModalRestProps = Omit<
+  ReactModalProps,
+  | "children"
+  | "isOpen"
+  | "onClose"
+  | "shouldCloseOnOverlayClick"
+  | "className"
+  | "closeButton"
+>;
+
+export interface ModalProps extends RecatModalRestProps {
   /**
    * Modal content
    */
