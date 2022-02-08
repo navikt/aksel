@@ -31,7 +31,7 @@ export interface ToggleGroupProps
   /**
    * Returns elements that wants to be active
    */
-  onValueChange: (value: string) => void;
+  onChange: (value: string) => void;
   /**
    * Label describing ToggleGroup
    */
@@ -58,7 +58,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     {
       className,
       children,
-      onValueChange,
+      onChange,
       size = "medium",
       label,
       value,
@@ -75,7 +75,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     const handleValueChange = (v: string) => {
       if (v !== "") {
         setGroupValue(v);
-        onValueChange(v);
+        onChange?.(v);
       }
     };
 
