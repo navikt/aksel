@@ -19,9 +19,9 @@
 }
 
 .navds-toggle-group {
-  border-radius: 7px;
+  border-radius: 6px;
   background-color: var(--navds-toggle-group-color-background);
-  border: 1px solid var(--navds-toggle-group-color-border);
+  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-border);
   padding: var(--navds-spacing-1);
   gap: var(--navds-spacing-1);
   display: inline-grid;
