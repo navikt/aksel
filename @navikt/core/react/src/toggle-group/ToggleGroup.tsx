@@ -114,7 +114,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               [desc ?? ""]: !!desc,
               [labelId]: !!label,
             })}
-            role="tablist"
+            /* role="tablist" */
             type="single"
           >
             {children}

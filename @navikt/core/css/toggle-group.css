@@ -19,10 +19,10 @@
 }
 
 .navds-toggle-group {
-  border-radius: 6px;
+  border-radius: 7px;
   background-color: var(--navds-toggle-group-color-background);
-  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-border);
-  padding: var(--navds-spacing-1);
+  box-shadow: inset 0 0 0 1px var(--navds-toggle-group-color-border);
+  padding: calc(var(--navds-spacing-1) + 1px);
   gap: var(--navds-spacing-1);
   display: inline-grid;
   grid-auto-flow: column;
