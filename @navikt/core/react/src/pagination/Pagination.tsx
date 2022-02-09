@@ -1,7 +1,7 @@
 import React from "react";
 import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
-import { BodyShort, Button } from "..";
+import { BodyShort } from "..";
 
 interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
