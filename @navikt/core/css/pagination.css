@@ -19,7 +19,7 @@
 }
 
 .navds-pagination__item {
-  display: inline-flex;
+  display: flex;
   cursor: pointer;
   margin: 0;
   text-decoration: none;
@@ -55,7 +55,7 @@
 
 .navds-pagination__previous,
 .navds-pagination__next {
-  display: inline-flex;
+  display: flex;
   cursor: pointer;
   margin: 0;
   padding: 0;
@@ -65,11 +65,6 @@
   color: var(--navds-semantic-color-link);
   align-items: center;
   gap: var(--navds-spacing-1);
-}
-
-.navds-pagination--small .navds-pagination__previous,
-.navds-pagination--small .navds-pagination__next {
-  font-size: 1rem;
 }
 
 .navds-pagination__previous:disabled,
@@ -86,4 +81,5 @@
 .navds-pagination--small .navds-pagination__previous-icon,
 .navds-pagination--small .navds-pagination__next-icon {
   margin: var(--navds-spacing-1);
+  font-size: 1rem;
 }

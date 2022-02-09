@@ -104,7 +104,7 @@ const Pagination = ({
             const n = Number(step);
             return isNaN(n) ? (
               <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
-                <span>...</span>
+                <BodyShort size={size}>...</BodyShort>
               </li>
             ) : (
               <li>
