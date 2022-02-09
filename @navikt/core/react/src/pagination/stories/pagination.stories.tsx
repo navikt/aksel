@@ -7,10 +7,11 @@ export default {
 };
 
 export const All = (props) => {
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(props.page);
   return <Pagination {...props} page={page} onPageChange={setPage} />;
 };
 All.args = {
+  page: 0,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,

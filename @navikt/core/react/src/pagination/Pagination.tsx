@@ -1,7 +1,7 @@
 import React from "react";
 import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
-import { Button } from "..";
+import { BodyShort, Button } from "..";
 
 interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -26,6 +26,16 @@ interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
    * Total number of pages
    */
   count: number;
+  /**
+   * Changes padding, height and font-size
+   * @default "medium"
+   */
+  size?: "medium" | "small";
+  /**
+   * Display text alongside "previous" and "next" icons
+   * @default false
+   */
+  prevNextTexts?: boolean;
 }
 
 export const getSteps = ({
@@ -67,17 +77,21 @@ const Pagination = ({
   siblingCount,
   boundaryCount,
   className,
+  size = "medium",
+  prevNextTexts = false,
 }: PaginationProps) => {
   return (
-    <div className={cl("navds-pagination", className)}>
-      <Button
-        variant="tertiary"
-        size="small"
+    <div
+      className={cl("navds-pagination", `navds-pagination--${size}`, className)}
+    >
+      <button
+        className="navds-pagination__previous"
         disabled={page === 1}
         onClick={() => onPageChange(page - 1)}
       >
-        <Back aria-label="gå til forrige side" />
-      </Button>
+        <Back aria-label={prevNextTexts ? undefined : "Tilbake"} />
+        {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
+      </button>
       {getSteps({ page, count, siblingCount, boundaryCount }).map((step, i) => {
         const n = Number(step);
         return isNaN(n) ? (
@@ -85,24 +99,26 @@ const Pagination = ({
             <span>...</span>
           </div>
         ) : (
-          <Button
+          <BodyShort
+            size={size}
+            as="button"
             key={step}
-            variant={page === n ? "primary" : "tertiary"}
-            size="small"
+            className="navds-pagination__item"
             onClick={() => onPageChange(n)}
+            aria-current={page === n}
           >
             {n}
-          </Button>
+          </BodyShort>
         );
       })}
-      <Button
-        variant="tertiary"
-        size="small"
+      <button
+        className="navds-pagination__next"
         disabled={page === count}
         onClick={() => onPageChange(page + 1)}
       >
-        <Next aria-label="gå til neste side" />
-      </Button>
+        {prevNextTexts && <BodyShort size={size}>Neste</BodyShort>}
+        <Next aria-label={prevNextTexts ? undefined : "Neste"} />
+      </button>
     </div>
   );
 };
