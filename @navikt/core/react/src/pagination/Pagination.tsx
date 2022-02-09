@@ -3,7 +3,7 @@ import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
 import { BodyShort, Button } from "..";
 
-interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
+interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Current page
    */
@@ -81,45 +81,63 @@ const Pagination = ({
   prevNextTexts = false,
 }: PaginationProps) => {
   return (
-    <div
+    <nav
       className={cl("navds-pagination", `navds-pagination--${size}`, className)}
     >
-      <button
-        className="navds-pagination__previous"
-        disabled={page === 1}
-        onClick={() => onPageChange(page - 1)}
-      >
-        <Back aria-label={prevNextTexts ? undefined : "Tilbake"} />
-        {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
-      </button>
-      {getSteps({ page, count, siblingCount, boundaryCount }).map((step, i) => {
-        const n = Number(step);
-        return isNaN(n) ? (
-          <div className="navds-pagination__ellipsis" key={`${step}${i}`}>
-            <span>...</span>
-          </div>
-        ) : (
-          <BodyShort
-            size={size}
-            as="button"
-            key={step}
-            className="navds-pagination__item"
-            onClick={() => onPageChange(n)}
-            aria-current={page === n}
+      <ul className="navds-pagination__list">
+        <li>
+          <button
+            className="navds-pagination__previous"
+            disabled={page === 1}
+            onClick={() => onPageChange(page - 1)}
           >
-            {n}
-          </BodyShort>
-        );
-      })}
-      <button
-        className="navds-pagination__next"
-        disabled={page === count}
-        onClick={() => onPageChange(page + 1)}
-      >
-        {prevNextTexts && <BodyShort size={size}>Neste</BodyShort>}
-        <Next aria-label={prevNextTexts ? undefined : "Neste"} />
-      </button>
-    </div>
+            <Back
+              className="navds-pagination__previous-icon"
+              aria-label={prevNextTexts ? undefined : "Tilbake"}
+              role={prevNextTexts ? "presentation" : undefined}
+            />
+            {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
+          </button>
+        </li>
+        {getSteps({ page, count, siblingCount, boundaryCount }).map(
+          (step, i) => {
+            const n = Number(step);
+            return isNaN(n) ? (
+              <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
+                <span>...</span>
+              </li>
+            ) : (
+              <li>
+                <BodyShort
+                  size={size}
+                  as="button"
+                  key={step}
+                  className="navds-pagination__item"
+                  onClick={() => onPageChange(n)}
+                  aria-current={page === n ? true : undefined}
+                >
+                  {n}
+                </BodyShort>
+              </li>
+            );
+          }
+        )}
+        <li>
+          <button
+            className="navds-pagination__next"
+            disabled={page === count}
+            onClick={() => onPageChange(page + 1)}
+          >
+            {prevNextTexts && <BodyShort size={size}>Neste</BodyShort>}
+            <Next
+              className="navds-pagination__next-icon"
+              title={prevNextTexts ? undefined : "Neste"}
+              role={prevNextTexts ? "presentation" : undefined}
+            />
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

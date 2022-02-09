@@ -1,10 +1,9 @@
-.navds-pagination {
+.navds-pagination__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
-  gap: var(--navds-spacing-1);
-}
-
-.navds-pagination > .navds-button {
-  padding-inline: 0;
+  gap: var(--navds-spacing-3);
 }
 
 .navds-pagination__ellipsis {
@@ -59,6 +58,7 @@
   display: inline-flex;
   cursor: pointer;
   margin: 0;
+  padding: 0;
   text-decoration: none;
   border: none;
   background: none;
@@ -77,4 +77,14 @@
 .navds-pagination__next:disabled {
   cursor: not-allowed;
   opacity: 0.3;
+}
+
+.navds-pagination__previous-icon,
+.navds-pagination__next-icon {
+  margin: 7px;
+}
+
+.navds-pagination--small .navds-pagination__previous-icon,
+.navds-pagination--small .navds-pagination__next-icon {
+  margin: var(--navds-spacing-1);
 }

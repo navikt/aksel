@@ -11,7 +11,7 @@ export const All = (props) => {
   return <Pagination {...props} page={page} onPageChange={setPage} />;
 };
 All.args = {
-  page: 0,
+  page: 1,
   count: 8,
   siblingCount: 1,
   boundaryCount: 1,
