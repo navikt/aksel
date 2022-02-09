@@ -6,10 +6,19 @@ export default {
   component: Pagination,
 };
 
-export const All = ({ count }) => {
-  const [page, setPage] = useState(0);
-  return <Pagination page={page} onPageChange={setPage} count={count} />;
+export const All = (props) => {
+  const [page, setPage] = useState(1);
+  return (
+    <Pagination
+      {...props}
+      key={page + props.count + props.siblingCount + props.boundaryCount}
+      page={page}
+      onPageChange={setPage}
+    />
+  );
 };
 All.args = {
   count: 8,
+  siblingCount: 1,
+  boundaryCount: 1,
 };

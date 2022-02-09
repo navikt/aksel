@@ -9,6 +9,16 @@ interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   page: number;
   /**
+   * Number of always visible pages before and after the current page.
+   * @default 1
+   */
+  siblingCount?: number;
+  /**
+   * Number of always visible pages at the beginning and end.
+   * @default 1
+   */
+  boundaryCount?: number;
+  /**
    * Callback when current page changes
    */
   onPageChange: (page: number) => void;
@@ -18,33 +28,44 @@ interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   count: number;
 }
 
-export const getSteps = ({ current, count }) =>
-  new Array(count)
-    .fill(null)
-    .map((_, i) => i)
-    .filter((n) => {
-      if (count < 8) {
-        return true;
-      }
-      if (n === count - 1 || n === 0) {
-        return true;
-      }
-      if (n >= current - 1 && n <= current + 1) {
-        return true;
-      }
-      if (current <= 3 && n <= 4) {
-        return true;
-      }
-      if (current >= count - 4 && n >= count - 5) {
-        return true;
-      }
-      return false;
-    });
+export const getSteps = ({
+  page,
+  count,
+  boundaryCount = 1,
+  siblingCount = 1,
+}) => {
+  const range = (start: number, end: number) =>
+    Array.from({ length: end - start + 1 }, (_, i) => start + i);
 
+  if (count <= (boundaryCount + siblingCount) * 2 + 3) return range(1, count);
+
+  const startPages = range(1, boundaryCount);
+  const endPages = range(count - boundaryCount + 1, count);
+
+  const siblingsStart = Math.max(
+    Math.min(page - siblingCount, count - boundaryCount - siblingCount * 2 - 1),
+    boundaryCount + 2
+  );
+  const siblingsEnd = siblingsStart + siblingCount * 2;
+
+  return [
+    ...startPages,
+    siblingsStart - (startPages[startPages.length - 1] ?? 0) === 2
+      ? siblingsStart - 1
+      : "ellipsis",
+    ...range(siblingsStart, siblingsEnd),
+    (endPages[0] ?? count + 1) - siblingsEnd === 2
+      ? siblingsEnd + 1
+      : "ellipsis",
+    ...endPages,
+  ];
+};
 const Pagination = ({
   page,
   onPageChange,
   count,
+  siblingCount,
+  boundaryCount,
   className,
 }: PaginationProps) => {
   return (
@@ -52,35 +73,35 @@ const Pagination = ({
       <Button
         variant="tertiary"
         size="small"
-        disabled={page === 0}
+        disabled={page === 1}
         onClick={() => onPageChange(page - 1)}
       >
-        <Back  aria-label="gå til forrige side"/>
+        <Back aria-label="gå til forrige side" />
       </Button>
-      {getSteps({ current: page, count }).map((n, i, a) => (
-        <>
-          {i !== 0 && a[i - 1] !== n - 1 && (
-            <div className="navds-pagination__ellipsis">
-              <span>...</span>
-            </div>
-          )}
+      {getSteps({ page, count, siblingCount, boundaryCount }).map((step) => {
+        const n = Number(step);
+        return isNaN(n) ? (
+          <div className="navds-pagination__ellipsis" key={step}>
+            <span>...</span>
+          </div>
+        ) : (
           <Button
-            key={n}
+            key={step}
             variant={page === n ? "primary" : "tertiary"}
             size="small"
             onClick={() => onPageChange(n)}
           >
-            {n + 1}
+            {n}
           </Button>
-        </>
-      ))}
+        );
+      })}
       <Button
         variant="tertiary"
         size="small"
-        disabled={page === count - 1}
+        disabled={page === count}
         onClick={() => onPageChange(page + 1)}
       >
-        <Next aria-label="gå til neste side"/>
+        <Next aria-label="gå til neste side" />
       </Button>
     </div>
   );
