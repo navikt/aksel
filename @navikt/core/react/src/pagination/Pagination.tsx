@@ -78,10 +78,10 @@ const Pagination = ({
       >
         <Back aria-label="gå til forrige side" />
       </Button>
-      {getSteps({ page, count, siblingCount, boundaryCount }).map((step) => {
+      {getSteps({ page, count, siblingCount, boundaryCount }).map((step, i) => {
         const n = Number(step);
         return isNaN(n) ? (
-          <div className="navds-pagination__ellipsis" key={step}>
+          <div className="navds-pagination__ellipsis" key={`${step}${i}`}>
             <span>...</span>
           </div>
         ) : (

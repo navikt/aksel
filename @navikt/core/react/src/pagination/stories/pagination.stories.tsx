@@ -8,14 +8,7 @@ export default {
 
 export const All = (props) => {
   const [page, setPage] = useState(1);
-  return (
-    <Pagination
-      {...props}
-      key={page + props.count + props.siblingCount + props.boundaryCount}
-      page={page}
-      onPageChange={setPage}
-    />
-  );
+  return <Pagination {...props} page={page} onPageChange={setPage} />;
 };
 All.args = {
   count: 8,
