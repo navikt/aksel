@@ -1,10 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "ds-react/form/checkbox",
   component: Checkbox,
 } as Meta;
+
+export const Indeterminate = () => {
+  const [checked, setChecked] = useState([true, false]);
+
+  return (
+    <>
+      <Checkbox
+        checked={checked[0] && checked[1]}
+        indeterminate={checked[0] !== checked[1]}
+        onChange={(e) => setChecked([e.target.checked, e.target.checked])}
+      >
+        Parent
+      </Checkbox>
+      <div style={{ paddingLeft: "2rem" }}>
+        <Checkbox
+          checked={checked[0]}
+          onChange={(e) => setChecked([e.target.checked, checked[1]])}
+        >
+          Child 1
+        </Checkbox>
+        <Checkbox
+          checked={checked[1]}
+          onChange={(e) => setChecked([checked[0], e.target.checked])}
+        >
+          Child 2
+        </Checkbox>
+      </div>
+    </>
+  );
+};
 
 export const All = () => {
   const Checkboxes = (props) => (
@@ -49,6 +79,13 @@ export const All = () => {
         Apple
       </Checkbox>
       <Checkbox value="Orange" description="Laborum ad" disabled defaultChecked>
+        Orange
+      </Checkbox>
+      <h3>Indeterminate</h3>
+      <Checkbox value="Apple" indeterminate>
+        Apple
+      </Checkbox>
+      <Checkbox value="Orange" indeterminate size="small">
         Orange
       </Checkbox>
 

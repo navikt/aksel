@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button } from "../index";
+import { Button } from "./index";
 import { Success } from "@navikt/ds-icons";
 
 export default {

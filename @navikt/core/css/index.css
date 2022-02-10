@@ -3,7 +3,6 @@
 @import "grid.css";
 
 @import "accordion.css";
-@import "accordion-menu.css";
 @import "alert.css";
 @import "button.css";
 @import "content-container.css";
@@ -12,6 +11,7 @@
 @import "help-text.css";
 @import "link.css";
 @import "loader.css";
+@import "menu.css";
 @import "modal.css";
 @import "pagination.css";
 @import "popover.css";
