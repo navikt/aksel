@@ -5,6 +5,9 @@ import { Success } from "@navikt/ds-icons";
 export default {
   title: "ds-react/button",
   component: Button,
+  parameters: {
+    chromatic: { delay: 300 },
+  },
 };
 
 const Section = ({ children }) => (
