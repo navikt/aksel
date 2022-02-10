@@ -147,7 +147,7 @@ export const All = () => {
 };
 
 export const ThemeExample = () => {
-  const [theme, setTheme] = useState(0);
+  const [theme, setTheme] = useState(3);
 
   const tokens = [
     {
@@ -175,12 +175,12 @@ export const ThemeExample = () => {
     },
     {
       "--navds-button-color-light": "var(--navds-global-color-gray-900)",
-      "--navds-button-color": "var(--navds-global-color-blue-100)",
-      "--navds-button-color-hover": "var(--navds-global-color-blue-200)",
-      "--navds-button-color-active": "var(--navds-global-color-blue-300)",
-      "--navds-checkbox-radio-color": "var(--navds-global-color-blue-100)",
+      "--navds-button-color": "var(--navds-global-color-lightblue-500)",
+      "--navds-button-color-hover": "var(--navds-global-color-lightblue-400)",
+      "--navds-button-color-active": "var(--navds-global-color-lightblue-600)",
+      "--navds-checkbox-radio-color": "var(--navds-global-color-lightblue-500)",
       "--navds-checkbox-radio-color-hover":
-        "var(--navds-global-color-gray-800)",
+        "var(--navds-global-color-lightblue-800)",
       "--navds-checkbox-radio-color-light":
         "var(--navds-global-color-gray-900)",
       "--navds-checkbox-radio-color-offset":
@@ -253,7 +253,6 @@ export const ThemeExample = () => {
           </CheckboxGroup>
         </div>
       </div>
-      Før 35, nå 5/6 tokens
       <pre style={{ color: theme === 3 && "white" }}>
         {JSON.stringify(tokens[theme], null, 2)
           .replaceAll('"', "")
