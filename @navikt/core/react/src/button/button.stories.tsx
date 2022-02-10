@@ -182,7 +182,7 @@ export const ThemeExample = () => {
       case 1:
         return "arbeidsplassen";
       case 2:
-        return "darkmode";
+        return "inverted";
       default:
         break;
     }
