@@ -144,3 +144,54 @@ export const All = () => {
     </div>
   );
 };
+
+export const ThemeExample = () => {
+  const [theme, setTheme] = useState(0);
+
+  const tokens = [
+    {
+      "--navds-button-color": "var(--navds-global-color-blue-500)",
+      "--navds-button-color-hover": "var(--navds-global-color-blue-600)",
+      "--navds-button-color-active": "var(--navds-global-color-blue-700)",
+    },
+    {
+      "--navds-button-color": "var(--navds-global-color-purple-500)",
+      "--navds-button-color-hover": "var(--navds-global-color-purple-600)",
+      "--navds-button-color-active": "var(--navds-global-color-purple-700)",
+    },
+  ];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        alignItems: "center",
+        flexDirection: "column",
+        ...tokens[theme],
+      }}
+    >
+      <Button onClick={() => setTheme(theme === 1 ? 0 : 1)}>
+        Toggle theme
+      </Button>
+      <div
+        style={{
+          display: "flex",
+          gap: "3rem",
+          margin: "4rem 0",
+        }}
+      >
+        <Button>Primary</Button>
+        <Button variant="secondary">Secondary</Button>
+        <Button variant="tertiary">Tertiary</Button>
+      </div>
+      Tokens:
+      <pre>
+        {JSON.stringify(tokens[theme], null, 2)
+          .replaceAll('"', "")
+          .replace("{", "")
+          .replace("}", "")}
+      </pre>
+    </div>
+  );
+};
