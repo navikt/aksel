@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "./index";
 import { Success } from "@navikt/ds-icons";
+import { CheckboxGroup, Checkbox } from "..";
 
 export default {
   title: "ds-react/button",
@@ -153,17 +154,24 @@ export const ThemeExample = () => {
       "--navds-button-color": "var(--navds-global-color-blue-500)",
       "--navds-button-color-hover": "var(--navds-global-color-blue-600)",
       "--navds-button-color-active": "var(--navds-global-color-blue-700)",
+      "--navds-checkbox-radio-color": "var(--navds-global-color-blue-500)",
+      "--navds-checkbox-radio-color-hover": "var(--navds-global-color-blue-50)",
     },
     {
       "--navds-button-color": "var(--navds-global-color-purple-500)",
       "--navds-button-color-hover": "var(--navds-global-color-purple-600)",
       "--navds-button-color-active": "var(--navds-global-color-purple-700)",
       "--navds-button-radii": "28px",
+      "--navds-checkbox-radio-color": "var(--navds-global-color-purple-500)",
+      "--navds-checkbox-radio-color-hover":
+        "var(--navds-global-color-purple-50)",
     },
     {
       "--navds-button-color": "var(--navds-global-color-gray-900)",
       "--navds-button-color-hover": "var(--navds-global-color-gray-800)",
       "--navds-button-color-active": "var(--navds-global-color-gray-900)",
+      "--navds-checkbox-radio-color": "var(--navds-global-color-gray-900)",
+      "--navds-checkbox-radio-color-hover": "var(--navds-global-color-gray-50)",
     },
   ];
 
@@ -191,18 +199,41 @@ export const ThemeExample = () => {
       }}
     >
       <Button onClick={() => setTheme(theme === 2 ? 0 : theme + 1)}>
-        {getName()}
+        Toggle theme: {getName()}
       </Button>
       <div
         style={{
           display: "flex",
           gap: "3rem",
           margin: "4rem 0",
+          flexDirection: "column",
         }}
       >
-        <Button>Primary</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="tertiary">Tertiary</Button>
+        <div
+          style={{
+            display: "flex",
+            gap: "3rem",
+          }}
+        >
+          <Button>Primary</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="tertiary">Tertiary</Button>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            gap: "3rem",
+          }}
+        >
+          <CheckboxGroup legend="Lorem" hideLegend>
+            <Checkbox defaultChecked value="Apple">
+              Apple
+            </Checkbox>
+            <Checkbox defaultChecked value="Orange" description="Laborum ad">
+              Orange
+            </Checkbox>
+          </CheckboxGroup>
+        </div>
       </div>
       Tokens:
       <pre>
