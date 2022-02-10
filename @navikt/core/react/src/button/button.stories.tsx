@@ -146,7 +146,7 @@ export const All = () => {
 };
 
 export const ThemeExample = () => {
-  const [theme, setTheme] = useState(2);
+  const [theme, setTheme] = useState(0);
 
   const tokens = [
     {
