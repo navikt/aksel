@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "0.11.4",
+  "version": "0.11.5",
   "private": false,
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",
@@ -33,8 +33,8 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^0.8.3",
-    "@navikt/ds-react": "^0.16.4",
+    "@navikt/ds-icons": "^0.8.4",
+    "@navikt/ds-react": "^0.16.5",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",
