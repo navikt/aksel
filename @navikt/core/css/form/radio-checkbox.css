@@ -2,6 +2,7 @@
   --navds-radio-checkbox-color-background: var(
     --navds-semantic-color-component-background-light
   );
+  --navds-radio-checkbox-color-text: var(--navds-semantic-color-text);
   --navds-radio-checkbox-color-background-hover: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
@@ -73,7 +74,7 @@
 
 .navds-checkbox__description,
 .navds-radio__description {
-  color: var(--navds-color-text-primary);
+  color: var(--navds-radio-checkbox-color-text);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
