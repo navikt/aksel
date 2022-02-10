@@ -235,7 +235,7 @@ export const ThemeExample = () => {
           </CheckboxGroup>
         </div>
       </div>
-      Tokens:
+      Før 35, nå 5/6 tokens
       <pre>
         {JSON.stringify(tokens[theme], null, 2)
           .replaceAll('"', "")
