@@ -153,11 +153,13 @@ export const ThemeExample = () => {
       "--navds-button-color": "var(--navds-global-color-blue-500)",
       "--navds-button-color-hover": "var(--navds-global-color-blue-600)",
       "--navds-button-color-active": "var(--navds-global-color-blue-700)",
+      "--navds-button-radii": "2px",
     },
     {
       "--navds-button-color": "var(--navds-global-color-purple-500)",
       "--navds-button-color-hover": "var(--navds-global-color-purple-600)",
       "--navds-button-color-active": "var(--navds-global-color-purple-700)",
+      "--navds-button-radii": "28px",
     },
   ];
 
