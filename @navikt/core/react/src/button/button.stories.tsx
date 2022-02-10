@@ -146,14 +146,13 @@ export const All = () => {
 };
 
 export const ThemeExample = () => {
-  const [theme, setTheme] = useState(0);
+  const [theme, setTheme] = useState(2);
 
   const tokens = [
     {
       "--navds-button-color": "var(--navds-global-color-blue-500)",
       "--navds-button-color-hover": "var(--navds-global-color-blue-600)",
       "--navds-button-color-active": "var(--navds-global-color-blue-700)",
-      "--navds-button-radii": "2px",
     },
     {
       "--navds-button-color": "var(--navds-global-color-purple-500)",
@@ -161,7 +160,25 @@ export const ThemeExample = () => {
       "--navds-button-color-active": "var(--navds-global-color-purple-700)",
       "--navds-button-radii": "28px",
     },
+    {
+      "--navds-button-color": "var(--navds-global-color-gray-900)",
+      "--navds-button-color-hover": "var(--navds-global-color-gray-800)",
+      "--navds-button-color-active": "var(--navds-global-color-gray-900)",
+    },
   ];
+
+  const getName = () => {
+    switch (theme) {
+      case 0:
+        return "default";
+      case 1:
+        return "arbeidsplassen";
+      case 2:
+        return "darkmode";
+      default:
+        break;
+    }
+  };
 
   return (
     <div
@@ -173,8 +190,8 @@ export const ThemeExample = () => {
         ...tokens[theme],
       }}
     >
-      <Button onClick={() => setTheme(theme === 1 ? 0 : 1)}>
-        Toggle theme
+      <Button onClick={() => setTheme(theme === 2 ? 0 : theme + 1)}>
+        {getName()}
       </Button>
       <div
         style={{
