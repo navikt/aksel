@@ -9,26 +9,23 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { BodyShort, Label, omit, useEventListener } from "../..";
+import { BodyShort, Button, Label, omit, useEventListener } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useSearchField } from "./useSearchField";
 
 export interface SearchFieldProps
   extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
-  /**
-   * If enabled shows the label and description for screenreaders only
-   */
-  hideLabel?: boolean;
+  children: React.ReactNode;
   /**
    * SearchField label
    */
   label: React.ReactNode;
   /**
-   * Inverts color theme
-   * @default false
+   * If enabled shows the label and description for screenreaders only
+   * @default true
    */
-  inverted?: boolean;
+  hideLabel?: boolean;
   /**
    * Customize aria-label on clear button
    * @default "Slett tekst i felt"
@@ -64,14 +61,14 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
 
     const {
       className,
-      hideLabel,
+      hideLabel = true,
       label,
       description,
       value,
       clearButtonLabel,
       onClear,
-      inverted = false,
       clearButton = true,
+      children,
       ...rest
     } = props;
 
@@ -128,7 +125,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           "navds-search-field",
           {
             "navds-search-field--disabled": !!inputProps.disabled,
-            "navds-search-field--inverted": inverted,
           }
         )}
       >
@@ -158,9 +154,6 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
           data-value={!!controlledValue}
           className="navds-search-field__input-wrapper"
         >
-          <span className="navds-search-field__input-icon">
-            <Search aria-hidden />
-          </span>
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
@@ -188,10 +181,23 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
               <Close aria-hidden />
             </button>
           )}
+          {children && children}
         </div>
       </div>
     );
   }
 );
+
+export const SearchButton = ({ size, variant = "primary" }) => {
+  return (
+    <Button
+      size={size}
+      variant={variant as any}
+      className="navds-search-field__search-button"
+    >
+      <Search />
+    </Button>
+  );
+};
 
 export default SearchField;

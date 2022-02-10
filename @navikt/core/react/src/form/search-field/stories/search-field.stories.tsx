@@ -1,7 +1,8 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
-import { Fieldset } from "../..";
+
 import { SearchField } from "../index";
+import { SearchButton } from "../SearchField";
 export default {
   title: "ds-react/form/search-field",
   component: SearchField,
@@ -10,45 +11,19 @@ export default {
 export const All = () => {
   const [value, setValue] = useState("");
   return (
-    <>
+    <div style={{ maxWidth: 300 }}>
       <h1>SearchField</h1>
       <div>
-        <SearchField label="Mollit eiusmod" />
-        <SearchField
-          label="Mollit eiusmod"
-          description={<div>Ea cupidatat eu sunt commodo</div>}
-        />
-      </div>
-
-      <h2>Hidelabel</h2>
-      <SearchField
-        label="Mollit eiusmod"
-        description="Ea cupidatat eu sunt commodo"
-        hideLabel
-      />
-
-      <h2>Inverted</h2>
-      <div
-        style={{
-          width: 300,
-          padding: "1rem",
-          background: "var(--navds-global-color-gray-900)",
-        }}
-      >
-        <SearchField
-          label="Mollit eiusmod"
-          description="Ea cupidatat eu sunt commodo"
-          hideLabel
-          inverted
-        />
+        <SearchField label="Mollit eiusmod">
+          <SearchButton size="medium" />
+        </SearchField>
         <br />
         <SearchField
           label="Mollit eiusmod"
-          description="Ea cupidatat eu sunt commodo"
-          hideLabel
-          inverted
-          value="Søketekst"
-        />
+          description={<div>Ea cupidatat eu sunt commodo</div>}
+        >
+          <SearchButton size="medium" variant="tertiary" />
+        </SearchField>
       </div>
 
       <h2>SearchField small</h2>
@@ -56,30 +31,23 @@ export const All = () => {
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
         size="small"
-      />
+      >
+        <SearchButton size="small" />
+      </SearchField>
       <br />
       <SearchField
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
         size="small"
         hideLabel
-      />
+      >
+        <SearchButton size="small" />
+      </SearchField>
 
-      <h2>SearchField in Fieldset</h2>
-      <Fieldset legend="Filter" error="Fieldset-error-msg">
-        <SearchField
-          label="Mollit eiusmod"
-          description="Ea cupidatat eu sunt commodo"
-          hideLabel
-        />
-      </Fieldset>
-
-      <h2>Disabled </h2>
-      <SearchField
-        disabled
-        label="Mollit eiusmod"
-        description="Ea cupidatat eu sunt commodo"
-      />
+      <h2>Hidelabel false</h2>
+      <SearchField label="Mollit eiusmod" hideLabel={false}>
+        <SearchButton size="medium" />
+      </SearchField>
       <h2>Controlled state </h2>
       <SearchField
         value={value}
@@ -87,14 +55,18 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         onChange={(e) => setValue(e)}
         onClear={() => setValue("")}
-      />
+      >
+        <SearchButton size="medium" />
+      </SearchField>
       <h2>No clear button</h2>
       <SearchField
         hideLabel
         label="Mollit eiusmod"
         description="Ea cupidatat eu sunt commodo"
         clearButton={false}
-      />
-    </>
+      >
+        <SearchButton size="medium" />
+      </SearchField>
+    </div>
   );
 };
