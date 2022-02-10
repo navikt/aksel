@@ -96,7 +96,7 @@
 
 .navds-button--secondary:hover {
   color: var(--navds-button-color-light);
-  background-color: var(--navds-button-color);
+  background-color: var(--navds-button-color-hover);
   box-shadow: none;
 }
 
