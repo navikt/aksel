@@ -147,7 +147,7 @@ export const All = () => {
 };
 
 export const ThemeExample = () => {
-  const [theme, setTheme] = useState(0);
+  const [theme, setTheme] = useState(3);
 
   const tokens = [
     {
@@ -173,6 +173,20 @@ export const ThemeExample = () => {
       "--navds-checkbox-radio-color": "var(--navds-global-color-gray-900)",
       "--navds-checkbox-radio-color-hover": "var(--navds-global-color-gray-50)",
     },
+    {
+      "--navds-button-color-light": "var(--navds-global-color-gray-900)",
+      "--navds-button-color": "var(--navds-global-color-blue-100)",
+      "--navds-button-color-hover": "var(--navds-global-color-blue-200)",
+      "--navds-button-color-active": "var(--navds-global-color-blue-300)",
+      "--navds-checkbox-radio-color": "var(--navds-global-color-blue-100)",
+      "--navds-checkbox-radio-color-hover":
+        "var(--navds-global-color-gray-800)",
+      "--navds-checkbox-radio-color-light":
+        "var(--navds-global-color-gray-900)",
+      "--navds-checkbox-radio-color-offset":
+        "var(--navds-global-color-gray-200)",
+      "--navds-checkbox-radio-color-text": "var(--navds-global-color-white)",
+    },
   ];
 
   const getName = () => {
@@ -183,6 +197,8 @@ export const ThemeExample = () => {
         return "arbeidsplassen";
       case 2:
         return "inverted";
+      case 3:
+        return "darkmode";
       default:
         break;
     }
@@ -192,13 +208,15 @@ export const ThemeExample = () => {
     <div
       style={{
         display: "flex",
+        padding: "4rem",
         width: "100%",
         alignItems: "center",
         flexDirection: "column",
+        background: theme === 3 && "var(--navds-global-color-gray-900)",
         ...tokens[theme],
       }}
     >
-      <Button onClick={() => setTheme(theme === 2 ? 0 : theme + 1)}>
+      <Button onClick={() => setTheme(theme === 3 ? 0 : theme + 1)}>
         Toggle theme: {getName()}
       </Button>
       <div
@@ -236,7 +254,7 @@ export const ThemeExample = () => {
         </div>
       </div>
       Før 35, nå 5/6 tokens
-      <pre>
+      <pre style={{ color: theme === 3 && "white" }}>
         {JSON.stringify(tokens[theme], null, 2)
           .replaceAll('"', "")
           .replace("{", "")
