@@ -122,6 +122,7 @@ export const All = () => {
             variant={variant}
             loading={loadingState}
             onClick={toggleLoading}
+            aria-label={loadingState ? "laster inn data" : undefined}
           >
             {content || varSwitch[variant]}
           </Button>
@@ -136,6 +137,7 @@ export const All = () => {
             size="small"
             loading={loadingState}
             onClick={toggleLoading}
+            aria-label={loadingState ? "laster inn data" : undefined}
           >
             {varSwitch[variant]}
           </Button>
