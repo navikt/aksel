@@ -141,6 +141,13 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
       value !== undefined && setControlledValue(value);
     }, [value]);
 
+    if (!children) {
+      console.error(
+        "<SearchField/> is required to have a <SearchField.Button/> child"
+      );
+      return null;
+    }
+
     return (
       <form
         role="search"
