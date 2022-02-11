@@ -33,6 +33,9 @@ export interface ModalProps {
    * @default true
    */
   closeButton?: boolean;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-modal"?: boolean;
 }
 
 interface ModalComponent
@@ -56,6 +59,9 @@ const Modal = forwardRef<ReactModal, ModalProps>(
       className,
       shouldCloseOnOverlayClick = true,
       closeButton = true,
+      "aria-describedby": ariaDescribedBy,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-modal": ariaModal,
       ...rest
     },
     ref
@@ -81,6 +87,11 @@ const Modal = forwardRef<ReactModal, ModalProps>(
         overlayClassName="navds-modal__overlay"
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         onRequestClose={(e) => onModalCloseRequest(e)}
+        aria={{
+          describedby: ariaDescribedBy,
+          labelledby: ariaLabelledBy,
+          modal: ariaModal,
+        }}
       >
         {children}
         {closeButton && (
