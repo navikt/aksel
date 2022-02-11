@@ -2,7 +2,6 @@ import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
 
 import { SearchField } from "../index";
-import { SearchButton } from "../SearchField";
 export default {
   title: "ds-react/form/search-field",
   component: SearchField,
@@ -14,15 +13,12 @@ export const All = () => {
     <div style={{ maxWidth: 300 }}>
       <h1>SearchField</h1>
       <div>
-        <SearchField label="Mollit eiusmod">
-          <SearchButton size="medium" />
+        <SearchField label="Mollit eiusmod" onSearch={console.log}>
+          <SearchField.Button />
         </SearchField>
         <br />
-        <SearchField
-          label="Mollit eiusmod"
-          description={<div>Ea cupidatat eu sunt commodo</div>}
-        >
-          <SearchButton size="medium" variant="tertiary" />
+        <SearchField label="Mollit eiusmod" onSearch={console.log}>
+          <SearchField.Button variant="primary" />
         </SearchField>
       </div>
 
@@ -32,7 +28,7 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         size="small"
       >
-        <SearchButton size="small" />
+        <SearchField.Button />
       </SearchField>
       <br />
       <SearchField
@@ -41,12 +37,19 @@ export const All = () => {
         size="small"
         hideLabel
       >
-        <SearchButton size="small" />
+        <SearchField.Button variant="primary" />
       </SearchField>
 
+      <h2>Med knappe-tekst</h2>
+      <SearchField label="Mollit eiusmod" hideLabel={false}>
+        <SearchField.Button>Søk</SearchField.Button>
+      </SearchField>
+      <SearchField label="Mollit eiusmod" hideLabel={false}>
+        <SearchField.Button variant="primary">Søk</SearchField.Button>
+      </SearchField>
       <h2>Hidelabel false</h2>
       <SearchField label="Mollit eiusmod" hideLabel={false}>
-        <SearchButton size="medium" />
+        <SearchField.Button />
       </SearchField>
       <h2>Controlled state </h2>
       <SearchField
@@ -56,7 +59,7 @@ export const All = () => {
         onChange={(e) => setValue(e)}
         onClear={() => setValue("")}
       >
-        <SearchButton size="medium" />
+        <SearchField.Button />
       </SearchField>
       <h2>No clear button</h2>
       <SearchField
@@ -65,7 +68,7 @@ export const All = () => {
         description="Ea cupidatat eu sunt commodo"
         clearButton={false}
       >
-        <SearchButton size="medium" />
+        <SearchField.Button />
       </SearchField>
     </div>
   );
