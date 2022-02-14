@@ -147,3 +147,7 @@ export const All = () => {
     </div>
   );
 };
+
+All.parameters = {
+  chromatic: { delay: 1 },
+};
