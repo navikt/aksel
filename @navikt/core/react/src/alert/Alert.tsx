@@ -36,13 +36,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled {...props} />;
+      return <ErrorFilled title="Error" {...props} />;
     case "warning":
-      return <WarningFilled {...props} />;
+      return <WarningFilled title="Advarsel" {...props} />;
     case "info":
-      return <InformationFilled {...props} />;
+      return <InformationFilled title="Informasjon" {...props} />;
     case "success":
-      return <SuccessFilled {...props} />;
+      return <SuccessFilled title="Suksess" {...props} />;
     default:
       return null;
   }
@@ -76,11 +76,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
       )}
     >
-      <Icon
-        title={`${variant}-ikon`}
-        variant={variant}
-        className="navds-alert__icon"
-      />
+      <Icon variant={variant} className="navds-alert__icon" />
       <BodyLong as="div" size={size} className="navds-alert__wrapper">
         {children}
       </BodyLong>
