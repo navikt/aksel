@@ -1,3 +1,21 @@
+:root {
+  --navds-pagination-color-background-hover: var(
+    --navds-semantic-color-canvas-background
+  );
+  --navds-pagination-color-background-active: var(
+    --navds-semantic-color-interaction-primary-selected
+  );
+  --navds-pagination-color-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
+  --navds-pagination-color-background-selected: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-pagination-color-text-selected: var(
+    --navds-semantic-color-text-inverted
+  );
+}
+
 .navds-pagination__list {
   margin: 0;
   padding: 0;
@@ -34,12 +52,12 @@
 }
 
 .navds-pagination__item:hover {
-  background-color: var(--navds-semantic-color-canvas-background);
+  background-color: var(--navds-pagination-color-background-hover);
 }
 
 .navds-pagination__item:active {
-  background-color: var(--navds-semantic-color-interaction-primary-selected);
-  color: var(--navds-semantic-color-text-inverted);
+  background-color: var(--navds-pagination-color-background-active);
+  color: var(--navds-pagination-color-text-active);
 }
 
 .navds-pagination__item:focus {
@@ -48,8 +66,8 @@
 }
 
 .navds-pagination__item[aria-current="true"] {
-  background-color: var(--navds-semantic-color-interaction-primary);
-  color: var(--navds-semantic-color-text-inverted);
+  background-color: var(--navds-pagination-color-background-selected);
+  color: var(--navds-pagination-color-text-selected);
   font-weight: var(--navds-font-weight-bold);
 }
 
