@@ -2,7 +2,7 @@ import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { Label, TableContext } from "..";
 
-interface HeaderCellProps extends React.HTMLAttributes<HTMLTableCellElement> {
+interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
 }
 
