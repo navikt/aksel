@@ -26,8 +26,12 @@ export const All = () => {
         </Stepper>
       </div>
       <div>
-        <h2>Stepper w/states</h2>
-        <Stepper activeStep={activeStep} onStepChange={setActiveStep}>
+        <h2 id="stepper-states-heading">Stepper w/states</h2>
+        <Stepper
+          aria-labelledby="stepper-states-heading"
+          activeStep={activeStep}
+          onStepChange={setActiveStep}
+        >
           <Stepper.Step finished>Start søknad</Stepper.Step>
           <Stepper.Step disabled>Personopplysninger</Stepper.Step>
           <Stepper.Step disabled finished>
