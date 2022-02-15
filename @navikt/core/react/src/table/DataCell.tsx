@@ -3,7 +3,7 @@ import cl from "classnames";
 import { BodyShort } from "..";
 import { TableContext } from ".";
 
-interface DataCellProps extends React.HTMLAttributes<HTMLTableCellElement> {}
+interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {}
 
 export interface DataCellType
   extends React.ForwardRefExoticComponent<

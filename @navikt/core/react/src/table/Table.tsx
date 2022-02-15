@@ -6,7 +6,8 @@ import Row, { RowType } from "./Row";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
 
-export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
+export interface TableProps
+  extends React.TableHTMLAttributes<HTMLTableElement> {
   /**
    * Changes padding
    * @default "medium"
