@@ -12,8 +12,12 @@ export const All = () => {
   return (
     <div style={{ display: "flex", gap: "10rem" }}>
       <div>
-        <h2>Stepper</h2>
-        <Stepper activeStep={activeStep} onStepChange={setActiveStep}>
+        <h2 id="stepper-heading">Stepper</h2>
+        <Stepper
+          aria-labelledby="stepper-heading"
+          activeStep={activeStep}
+          onStepChange={setActiveStep}
+        >
           <Stepper.Step>Start søknad</Stepper.Step>
           <Stepper.Step>Personopplysninger</Stepper.Step>
           <Stepper.Step>Vedlegg</Stepper.Step>

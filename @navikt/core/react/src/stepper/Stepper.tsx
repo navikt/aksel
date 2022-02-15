@@ -4,6 +4,10 @@ import Step, { StepperStepProps, StepperStepType } from "./Step";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
+   * ID of element that labels the Stepper-element
+   */
+  "aria-labelledby"?: string;
+  /**
    * <Stepper.Step /> elements
    */
   children: React.ReactNode;
@@ -38,7 +42,14 @@ export const StepperContext = createContext<StepperContextProps | null>(null);
 
 const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
   (
-    { children, className, activeStep, onStepChange = () => {}, ...rest },
+    {
+      "aria-labelledby": ariaLabelledby,
+      children,
+      className,
+      activeStep,
+      onStepChange = () => {},
+      ...rest
+    },
     ref
   ) => {
     const stepsWithIndex = React.Children.map(children, (step, index) => {
@@ -55,7 +66,12 @@ const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
     });
 
     return (
-      <ol {...rest} ref={ref} className={cl("navds-stepper", className)}>
+      <ol
+        aria-labelledby={ariaLabelledby}
+        {...rest}
+        ref={ref}
+        className={cl("navds-stepper", className)}
+      >
         <StepperContext.Provider
           value={{
             activeStep,
