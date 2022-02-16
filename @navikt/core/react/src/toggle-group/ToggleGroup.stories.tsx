@@ -79,3 +79,13 @@ export const All = () => {
     </div>
   );
 };
+
+export const UUDemo = () => {
+  const [activeValue, setActiveValue] = useState("uke");
+  <ToggleGroup value={activeValue} onChange={setActiveValue}>
+    <ToggleGroup.Item value="idag">Idag</ToggleGroup.Item>
+    <ToggleGroup.Item value="uke">Forrige uke</ToggleGroup.Item>
+    <ToggleGroup.Item value="manede">Forrige månede</ToggleGroup.Item>
+    <ToggleGroup.Item value="aar">Siste år</ToggleGroup.Item>
+  </ToggleGroup>;
+};
