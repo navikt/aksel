@@ -36,7 +36,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled title="Error" {...props} />;
+      return <ErrorFilled title="Feil" {...props} />;
     case "warning":
       return <WarningFilled title="Advarsel" {...props} />;
     case "info":
