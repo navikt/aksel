@@ -61,12 +61,14 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       size = "medium",
       fullWidth = false,
       inline = false,
+      role = "alert",
       ...rest
     },
     ref
   ) => (
     <div
       {...rest}
+      role={role}
       ref={ref}
       className={cl(
         className,
