@@ -19,7 +19,7 @@ const queryString = (obj) =>
     .join("&");
 
 export const Async = () => {
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [sort, setSort] = useState<SortState>();
 
   const { data } = useSWR(
@@ -141,7 +141,7 @@ Async.parameters = {
                 }
                 return 1;
               })
-              .slice(page * rowsPerPage, (page + 1) * rowsPerPage),
+              .slice((page - 1) * rowsPerPage, page * rowsPerPage),
           })
         );
       }),
