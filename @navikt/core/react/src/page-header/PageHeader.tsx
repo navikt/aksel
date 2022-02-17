@@ -55,11 +55,7 @@ const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(
           <div className="navds-page-header__illustration">{illustration}</div>
         )}
         <div className="navds-page-header__wrapper">
-          <Heading
-            className="navds-page-header__title"
-            size="2xlarge"
-            level="1"
-          >
+          <Heading className="navds-page-header__title" size="xlarge" level="1">
             {children}
           </Heading>
           {description && (
