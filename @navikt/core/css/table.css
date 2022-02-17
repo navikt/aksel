@@ -110,14 +110,14 @@
   background-color: var(--navds-semantic-color-canvas-background);
 }
 
-.navds-table__sort-button:active {
-  background-color: var(--navds-semantic-color-border-inverted);
-  color: var(--navds-semantic-color-interaction-primary-selected);
-}
-
 .navds-table__sort-button:focus {
   outline: none;
   box-shadow: inset 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
+.navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
+.navds-table__header-cell[aria-sort="descending"] .navds-table__sort-button {
+  background-color: var(--navds-global-color-blue-50);
 }
 
 .navds-table__sort-button svg {
