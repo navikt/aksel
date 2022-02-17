@@ -54,7 +54,7 @@
 .navds-table__header-cell,
 .navds-table__data-cell {
   display: table-cell;
-  padding: var(--navds-spacing-4);
+  padding: var(--navds-spacing-4) var(--navds-spacing-3);
   border-bottom: 1px solid var(--navds-table-cell-color-border);
   text-align: left;
 }
@@ -66,7 +66,7 @@
 
 .navds-table--small .navds-table__header-cell,
 .navds-table--small .navds-table__data-cell {
-  padding: var(--navds-spacing-2);
+  padding: var(--navds-spacing-2) var(--navds-spacing-3);
 }
 
 .navds-table .navds-checkbox .navds-checkbox__input {
@@ -92,7 +92,7 @@
   border: none;
   cursor: pointer;
   margin: 0;
-  padding: var(--navds-spacing-4);
+  padding: var(--navds-spacing-4) var(--navds-spacing-3);
   width: 100%;
   display: flex;
   gap: 0.5rem;
@@ -100,6 +100,10 @@
   line-height: inherit;
   font-weight: inherit;
   text-align: left;
+}
+
+.navds-table--small .navds-table__sort-button {
+  padding: var(--navds-spacing-2) var(--navds-spacing-3);
 }
 
 .navds-table__sort-button:hover {
