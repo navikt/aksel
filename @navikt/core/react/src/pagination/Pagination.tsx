@@ -107,11 +107,10 @@ const Pagination = ({
                 <BodyShort size={size}>...</BodyShort>
               </li>
             ) : (
-              <li>
+              <li key={step}>
                 <BodyShort
                   size={size}
                   as="button"
-                  key={step}
                   className="navds-pagination__item"
                   onClick={() => onPageChange(n)}
                   aria-current={page === n ? true : undefined}
