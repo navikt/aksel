@@ -93,7 +93,7 @@ const Pagination = ({
           >
             <Back
               className="navds-pagination__previous-icon"
-              aria-label={prevNextTexts ? undefined : "Tilbake"}
+              title={prevNextTexts ? undefined : "Tilbake"}
               role={prevNextTexts ? "presentation" : undefined}
             />
             {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
