@@ -52,19 +52,6 @@ const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
     },
     ref
   ) => {
-    const stepsWithIndex = React.Children.map(children, (step, index) => {
-      return React.isValidElement<StepperStepProps>(step) ? (
-        <li className={cl("navds-stepper__step-wrapper")} key={index}>
-          {React.cloneElement(step, {
-            ...step.props,
-            index,
-          })}
-        </li>
-      ) : (
-        step
-      );
-    });
-
     return (
       <ol
         aria-labelledby={ariaLabelledby}
@@ -79,7 +66,15 @@ const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
             lastIndex: React.Children.count(children),
           }}
         >
-          {stepsWithIndex}
+          {React.Children.map(children, (step, index) => {
+            return (
+              <li className={cl("navds-stepper__step-wrapper")} key={index}>
+                {React.isValidElement<StepperStepProps>(step)
+                  ? React.cloneElement(step, { ...step.props, index })
+                  : step}
+              </li>
+            );
+          })}
         </StepperContext.Provider>
       </ol>
     );
