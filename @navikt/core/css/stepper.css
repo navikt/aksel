@@ -78,10 +78,6 @@
   background-color: var(--navds-semantic-color-component-background-light);
 }
 
-.navds-stepper__step--finished > .navds-stepper__step-number {
-  box-shadow: none;
-}
-
 .navds-stepper__step-wrapper:hover
   > .navds-stepper__step
   > .navds-stepper__step-number {
@@ -98,23 +94,6 @@
   background-color: var(--navds-semantic-color-interaction-primary);
 }
 
-.navds-stepper__step-number--filled,
-.navds-stepper__step--finished.navds-stepper__step--active
-  > .navds-stepper__step-number {
-  display: none;
-}
-
-.navds-stepper__step--finished.navds-stepper__step--active
-  > .navds-stepper__step-number--filled {
-  display: inherit;
-}
-
-.navds-stepper__step--finished.navds-stepper__step--active
-  > .navds-stepper__step-number {
-  background-color: var(--navds-semantic-color-text-inverted);
-  color: var(--navds-semantic-color-interaction-primary);
-}
-
 .navds-stepper__step-wrapper:hover
   > .navds-stepper__step--disabled
   > .navds-stepper__step-number {
@@ -126,16 +105,6 @@
   > .navds-stepper__step-number {
   background-color: var(--navds-semantic-color-interaction-primary);
   color: var(--navds-semantic-color-text-inverted);
-}
-
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step--active.navds-stepper__step--finished
-  > .navds-stepper__step-number,
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step--active.navds-stepper__step--finished.navds-stepper__step--disabled
-  > .navds-stepper__step-number {
-  color: var(--navds-semantic-color-interaction-primary);
-  background-color: var(--navds-semantic-color-text-inverted);
 }
 
 /* Line */

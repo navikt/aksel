@@ -32,11 +32,9 @@ export const All = () => {
           activeStep={activeStep}
           onStepChange={setActiveStep}
         >
-          <Stepper.Step finished>Start søknad</Stepper.Step>
+          <Stepper.Step>Start søknad</Stepper.Step>
           <Stepper.Step disabled>Personopplysninger</Stepper.Step>
-          <Stepper.Step disabled finished>
-            Vedlegg
-          </Stepper.Step>
+          <Stepper.Step disabled>Vedlegg</Stepper.Step>
           <Stepper.Step>Oppsumering</Stepper.Step>
           <Stepper.Step>Innsending</Stepper.Step>
         </Stepper>

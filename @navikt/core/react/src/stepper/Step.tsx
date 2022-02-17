@@ -1,4 +1,3 @@
-import { Success, SuccessFilled } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
 import { StepperContext } from ".";
@@ -18,10 +17,6 @@ export interface StepperStepProps
    * Handled by Stepper
    */
   index?: number;
-  /**
-   * Manually controlls Finished-stated for Step
-   */
-  finished?: boolean;
 }
 
 export interface StepperStepType
@@ -38,7 +33,6 @@ const StepComponent: OverridableComponent<
       as: Component = "button",
       disabled,
       index = 0,
-      finished,
       ...rest
     },
     ref
@@ -52,8 +46,6 @@ const StepComponent: OverridableComponent<
       return null;
     }
 
-    const isFinished = finished ?? context.activeStep > index;
-
     return (
       <Component
         {...rest}
@@ -62,27 +54,15 @@ const StepComponent: OverridableComponent<
         className={cl("navds-stepper__step", className, {
           "navds-stepper__step--disabled": disabled,
           "navds-stepper__step--active": context.activeStep === index,
-          "navds-stepper__step--finished": isFinished,
         })}
         onClick={(e) => {
           context.onStepChange(index);
           rest?.onClick?.(e);
         }}
       >
-        {isFinished ? (
-          <>
-            <Success
-              aria-label="finished"
-              className="navds-stepper__step-number"
-            />
-            <SuccessFilled
-              aria-label="active finished"
-              className="navds-stepper__step-number navds-stepper__step-number--filled"
-            />
-          </>
-        ) : (
-          <Label className="navds-stepper__step-number">{index + 1}</Label>
-        )}
+        <Label className="navds-stepper__step-number">
+          {context.activeStep === index ? ` ${index + 1}` : index + 1}
+        </Label>
         <Label className="navds-stepper__step-label">{children}</Label>
 
         {index !== context.lastIndex - 1 && (
