@@ -93,7 +93,7 @@ const Pagination = ({
           >
             <Back
               className="navds-pagination__previous-icon"
-              aria-label={prevNextTexts ? undefined : "Tilbake"}
+              title={prevNextTexts ? undefined : "Tilbake"}
               role={prevNextTexts ? "presentation" : undefined}
             />
             {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
@@ -107,11 +107,10 @@ const Pagination = ({
                 <BodyShort size={size}>...</BodyShort>
               </li>
             ) : (
-              <li>
+              <li key={step}>
                 <BodyShort
                   size={size}
                   as="button"
-                  key={step}
                   className="navds-pagination__item"
                   onClick={() => onPageChange(n)}
                   aria-current={page === n ? true : undefined}

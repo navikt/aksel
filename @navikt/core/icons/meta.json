@@ -1020,6 +1020,30 @@
     "pageName": "Fyrstikkalleen"
   },
   {
+    "name": "FullscreenEnter",
+    "description": "",
+    "created_at": "2022-02-10T15:01:12.614Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "FullscreenEnterFilled",
+    "description": "",
+    "created_at": "2022-02-10T15:01:12.604Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "FullscreenExit",
+    "description": "",
+    "created_at": "2022-02-10T15:01:12.597Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "FullscreenExitFilled",
+    "description": "",
+    "created_at": "2022-02-10T15:01:12.608Z",
+    "pageName": "Interface"
+  },
+  {
     "name": "Glass",
     "description": "",
     "created_at": "2020-07-20T10:32:39.043Z",
