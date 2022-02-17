@@ -62,7 +62,23 @@ export const Async = () => {
       }}
     >
       <div style={{ overflow: "auto" }}>
-        <Table style={{ width: "initial" }} sort={sort} onSortChange={setSort}>
+        <Table
+          style={{ width: "initial" }}
+          sort={sort}
+          onSortChange={(sortKey) =>
+            setSort(
+              sort?.orderBy === sortKey && sort.direction === "descending"
+                ? undefined
+                : {
+                    orderBy: sortKey,
+                    direction:
+                      sort?.direction === "ascending"
+                        ? "descending"
+                        : "ascending",
+                  }
+            )
+          }
+        >
           <Table.Header>
             <Table.Row>
               {columns.map(({ key, name, width, sortable = true }) => (
@@ -127,7 +143,7 @@ Async.parameters = {
         const page = Number(req.url.searchParams.get("page"));
         const sort = req.url.searchParams.get("sort");
         return res(
-          ctx.delay(),
+          //ctx.delay(),
           ctx.json({
             count: people.length,
             results: people

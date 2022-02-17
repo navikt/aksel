@@ -47,7 +47,7 @@ const ColumnHeader: ColumnHeaderType = forwardRef(
             className="navds-table__sort-button"
             onClick={
               sortable && sortKey
-                ? () => context?.toggleColumnSort?.(sortKey)
+                ? () => context?.onSortChange?.(sortKey)
                 : undefined
             }
           >

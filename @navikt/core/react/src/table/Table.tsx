@@ -30,7 +30,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
   /**
    * Callback whens ort state changes
    */
-  onSortChange?: (state?: SortState) => void;
+  onSortChange?: (sortKey?: string) => void;
 }
 
 export interface TableType
@@ -47,7 +47,7 @@ export interface TableType
 
 export interface TableContextProps {
   size: "medium" | "small";
-  toggleColumnSort?: (sortKey: string) => void;
+  onSortChange?: (sortKey: string) => void;
   sort?: SortState;
 }
 
@@ -65,24 +65,7 @@ const Table = forwardRef(
     },
     ref
   ) => (
-    <TableContext.Provider
-      value={{
-        size,
-        toggleColumnSort: (sortKey) =>
-          onSortChange?.(
-            sort?.orderBy === sortKey && sort.direction === "descending"
-              ? undefined
-              : {
-                  orderBy: sortKey,
-                  direction:
-                    sort?.direction === "ascending"
-                      ? "descending"
-                      : "ascending",
-                }
-          ),
-        sort,
-      }}
-    >
+    <TableContext.Provider value={{ size, onSortChange, sort }}>
       <table
         {...rest}
         ref={ref}
