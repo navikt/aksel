@@ -75,12 +75,29 @@ const Pagination = ({
   page,
   onPageChange,
   count,
-  siblingCount,
-  boundaryCount,
+  boundaryCount = 1,
+  siblingCount = 1,
   className,
   size = "medium",
   prevNextTexts = false,
 }: PaginationProps) => {
+  if (page < 1) {
+    console.error("page cannot be less than 1");
+    return null;
+  }
+  if (count < 1) {
+    console.error("count cannot be less than 1");
+    return null;
+  }
+  if (boundaryCount < 0) {
+    console.error("boundaryCount cannot be less than 0");
+    return null;
+  }
+  if (siblingCount < 0) {
+    console.error("siblingCount cannot be less than 0");
+    return null;
+  }
+
   return (
     <nav
       className={cl("navds-pagination", `navds-pagination--${size}`, className)}
