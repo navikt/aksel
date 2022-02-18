@@ -27,7 +27,6 @@ const ToggleItem = forwardRef<HTMLButtonElement, ToggleItemProps>(
       <RadixToggleGroup.Item
         {...rest}
         ref={ref}
-        /* role="tab" */
         className={cl("navds-toggle-group__button", className)}
       >
         <Label
