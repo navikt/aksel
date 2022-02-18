@@ -18,8 +18,8 @@ const Items = (icon?: boolean) => (
     <ToggleGroup.Item value="second">
       {icon ? <Star /> : "Second more txt"}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value="thrid">
-      {icon ? <Attachment /> : "Thrid"}
+    <ToggleGroup.Item value="third">
+      {icon ? <Attachment /> : "Third"}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="fourth">
       {icon ? <System /> : "Fourth"}
@@ -77,17 +77,5 @@ export const All = () => {
         </ToggleGroup>
       </div>
     </div>
-  );
-};
-
-export const UUDemo = () => {
-  const [activeValue, setActiveValue] = useState("uke");
-  return (
-    <ToggleGroup value={activeValue} onChange={setActiveValue}>
-      <ToggleGroup.Item value="idag">Idag</ToggleGroup.Item>
-      <ToggleGroup.Item value="uke">Forrige uke</ToggleGroup.Item>
-      <ToggleGroup.Item value="manede">Forrige månede</ToggleGroup.Item>
-      <ToggleGroup.Item value="aar">Siste år</ToggleGroup.Item>
-    </ToggleGroup>
   );
 };
