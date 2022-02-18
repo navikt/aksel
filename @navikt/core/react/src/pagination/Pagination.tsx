@@ -70,6 +70,7 @@ export const getSteps = ({
     ...endPages,
   ];
 };
+
 const Pagination = ({
   page,
   onPageChange,
