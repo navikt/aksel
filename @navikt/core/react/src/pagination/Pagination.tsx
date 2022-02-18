@@ -105,12 +105,12 @@ const Pagination = ({
       <ul className="navds-pagination__list">
         <li>
           <button
-            className="navds-pagination__previous"
+            className="navds-pagination__prev-next"
             disabled={page === 1}
             onClick={() => onPageChange(page - 1)}
           >
             <Back
-              className="navds-pagination__previous-icon"
+              className="navds-pagination__prev-next-icon"
               title={prevNextTexts ? undefined : "Tilbake"}
               role={prevNextTexts ? "presentation" : undefined}
             />
@@ -141,13 +141,13 @@ const Pagination = ({
         )}
         <li>
           <button
-            className="navds-pagination__next"
+            className="navds-pagination__prev-next"
             disabled={page === count}
             onClick={() => onPageChange(page + 1)}
           >
             {prevNextTexts && <BodyShort size={size}>Neste</BodyShort>}
             <Next
-              className="navds-pagination__next-icon"
+              className="navds-pagination__prev-next-icon"
               title={prevNextTexts ? undefined : "Neste"}
               role={prevNextTexts ? "presentation" : undefined}
             />
