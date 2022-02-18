@@ -73,3 +73,25 @@ Bruk egendefinert overskrift med en id og send den til Stepper med `aria-labelle
 <Canvas>
   <Example disabled />
 </Canvas>
+
+## Override tags
+
+`Stepper.Step` er implementert med Overridable-component noe som gjør at du kan endre taggen til
+det du vil med `as`-prop. Merk at det alltid er en `<li>`-wrapper over for tilgjengelighet.
+
+```jsx
+<Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
+  {/* <button> er default */}
+  <Stepper.Step>{`Dette er default, et <button>-element`}</Stepper.Step>
+  <Stepper.Step as="a" href="#">{`Dette er et <a>-element`}</Stepper.Step>
+  <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
+</Stepper>
+```
+
+<Canvas>
+  <Stepper activeStep={1} onStepChange={console.log}>
+    <Stepper.Step>{`Dette er default, et <button>-element`}</Stepper.Step>
+    <Stepper.Step as="a" href="#">{`Dette er et <a>-element`}</Stepper.Step>
+    <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
+  </Stepper>
+</Canvas>
