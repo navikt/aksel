@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import ToggleItem, { ToggleItemType } from "./ToggleItem";
-import * as RadixToggleGroup from "@radix-ui/react-toggle-group/dist/index";
+import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { Label, useId } from "..";
 
 export interface ToggleGroupProps
