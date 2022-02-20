@@ -1,7 +1,8 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { Label, ToggleGroupContext } from "..";
+import { Label } from "..";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
+import { ToggleGroupContext } from "./ToggleGroup";
 
 export interface ToggleItemProps
   extends React.HTMLAttributes<HTMLButtonElement> {
