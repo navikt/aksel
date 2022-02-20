@@ -3,17 +3,13 @@ import lottie, { AnimationItem } from "lottie-web";
 
 interface LottieAnimationProps {
   hoverAnimation: any;
-  activeAnimation: any;
   isHovering: boolean;
-  isActive: boolean;
   className?: string;
 }
 
 const Animation = ({
   hoverAnimation,
-  activeAnimation,
   isHovering,
-  isActive,
   className,
 }: LottieAnimationProps) => {
   const [direction, setDirection] = useState<number>(1);
@@ -42,10 +38,6 @@ const Animation = ({
     return player;
   };
 
-  const getLottieDataByState = () => {
-    return isActive ? activeAnimation : hoverAnimation;
-  };
-
   useEffect(() => {
     const newDirection = isHovering ? 1 : -1;
     if (lottiePlayerRef.current) {
@@ -56,19 +48,9 @@ const Animation = ({
   }, [isHovering, direction]);
 
   useEffect(() => {
-    const lottieData = getLottieDataByState();
-    updateLottieContainer(lottieData);
+    updateLottieContainer(hoverAnimation);
     /* eslint-disable-next-line */
-  }, [hoverAnimation, activeAnimation]);
-
-  useEffect(() => {
-    const lottieData = getLottieDataByState();
-    const player = updateLottieContainer(lottieData);
-    if (isActive && player) {
-      player.play();
-    }
-    /* eslint-disable-next-line */
-  }, [isActive]);
+  }, [hoverAnimation]);
 
   return (
     <div className={className}>

@@ -15,16 +15,22 @@ export const MicroCard: OverridableComponent<
   MicroCardProps,
   HTMLAnchorElement
 > = forwardRef(
-  ({ className, as: Component = "a", children, type, ...rest }, ref) => (
+  (
+    { className, as: Component = "a", children, type = "general", ...rest },
+    ref
+  ) => (
     <Component
       ref={ref}
-      className={cl("navds-card", "navds-card-micro", className)}
+      className={cl(
+        "navds-card",
+        "navds-card-micro",
+        `navds-card--${type}`,
+        className
+      )}
       title={children}
       {...rest}
     >
-      <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
-        {children}
-      </div>
+      <div className={cl("navds-card__bed")}>{children}</div>
     </Component>
   )
 );

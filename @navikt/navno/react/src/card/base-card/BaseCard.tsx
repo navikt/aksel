@@ -7,7 +7,6 @@ import MiniCard from "./sizes/MiniCard";
 import MicroCard from "./sizes/MicroCard";
 
 export interface BaseCardProps {
-  activeAnimation?: any;
   category: string;
   hoverAnimation?: any;
   href: string;
@@ -20,13 +19,16 @@ export const BaseCard = ({
   href,
   size,
   hoverAnimation,
-  activeAnimation,
   title,
   text,
   category,
 }: BaseCardProps) => {
   if (size === "micro") {
-    return <MicroCard href={href}>{title}</MicroCard>;
+    return (
+      <MicroCard href={href} type="product">
+        {title}
+      </MicroCard>
+    );
   }
 
   if (size === "mini") {
@@ -36,7 +38,6 @@ export const BaseCard = ({
         type="product"
         href={href}
         hoverAnimation={hoverAnimation}
-        activeAnimation={activeAnimation}
       />
     );
   }
@@ -49,7 +50,6 @@ export const BaseCard = ({
       text={text}
       category={category}
       hoverAnimation={hoverAnimation}
-      activeAnimation={activeAnimation}
     />
   );
 };

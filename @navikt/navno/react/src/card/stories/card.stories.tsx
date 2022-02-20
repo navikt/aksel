@@ -27,7 +27,7 @@ const Template = ({ card, customText, ...args }) => {
 
   return (
     <>
-      <Heading size="2xlarge">Cards</Heading>
+      <Heading size="xlarge">Cards</Heading>
       <BodyLong spacing>
         Below are the three available card sizes that you may set using{" "}
         <i>size</i> prop. Use the Controls to view a particular card and its
@@ -42,15 +42,30 @@ const Template = ({ card, customText, ...args }) => {
       <Heading size="xlarge" spacing>
         Large
       </Heading>
-      <CardComponent {...args} size="large" customText={customText} />
+      <CardComponent
+        {...args}
+        size="large"
+        href="http://www.nav.no"
+        customText={customText}
+      />
       <Heading size="xlarge" spacing>
         Mini
       </Heading>
-      <CardComponent {...args} size="mini" customText={customText} />
+      <CardComponent
+        {...args}
+        size="mini"
+        href="http://www.nav.no"
+        customText={customText}
+      />
       <Heading size="xlarge" spacing>
         Micro
       </Heading>
-      <CardComponent {...args} size="micro" customText={customText} />
+      <CardComponent
+        {...args}
+        size="micro"
+        href="http://www.nav.no"
+        customText={customText}
+      />
       <Heading size="xlarge" spacing>
         All cards
       </Heading>

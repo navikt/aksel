@@ -1,68 +1,62 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import cl from "classnames";
-import { BodyShort, OverridableComponent, Link } from "@navikt/ds-react";
+import { BodyShort, Link } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../useInteraction";
 
 export interface MiniCardProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
-  hoverAnimation?: any;
-  activeAnimation?: any;
+  hoverAnimation: any;
+  className?: string;
+  href: string;
+  renderLink?: any;
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const MiniCard: OverridableComponent<MiniCardProps, HTMLElement> = forwardRef(
-  (
-    {
-      activeAnimation,
-      as: Component = "article",
-      className,
-      hoverAnimation,
-      title,
-      type = "general",
-      href,
-      ...rest
-    },
-    ref
-  ) => {
-    const { handlers, isHovering, isActive, isFocused } = useInteractions();
-    const hasAnimation = !!(hoverAnimation && activeAnimation);
+const MiniCard = ({
+  className,
+  href,
+  renderLink,
+  hoverAnimation,
+  title,
+  type = "general",
+  ...rest
+}: MiniCardProps) => {
+  const { handlers, isHovering, isFocused, isActive } = useInteractions();
+  const hasAnimation = !!hoverAnimation;
 
-    const focusClass = isFocused ? "navds-card--focus" : "";
-    const activeClass = isActive ? "navds-card--active" : "";
+  const focusClass = isFocused ? "navds-card--focus" : "";
+  const activeClass = isActive ? "navds-card--active" : "";
 
-    return (
-      <Component
-        {...rest}
-        {...handlers}
-        ref={ref}
-        className={cl(
-          "navds-card",
-          "navds-card-mini",
-          className,
-          focusClass,
-          activeClass
+  return (
+    <article
+      {...rest}
+      {...handlers}
+      className={cl(
+        "navds-card",
+        "navds-card-mini",
+        `navds-card--${type}`,
+        className,
+        focusClass,
+        activeClass
+      )}
+    >
+      <div className={cl("navds-card__bed")}>
+        {hasAnimation && (
+          <Animation
+            isHovering={isHovering}
+            hoverAnimation={hoverAnimation}
+            className={cl("navds-card__animation")}
+          />
         )}
-      >
-        <div className={cl("navds-card__bed", `navds-card__bed--${type}`)}>
-          {hasAnimation && (
-            <Animation
-              isHovering={isHovering}
-              isActive={isActive}
-              hoverAnimation={hoverAnimation}
-              activeAnimation={activeAnimation}
-              className={cl("navds-card__animation")}
-            />
-          )}
-          <BodyShort>
-            <Link href={href} className={cl("navds-card__title")}>
-              {title}
-            </Link>
-          </BodyShort>
-        </div>
-      </Component>
-    );
-  }
-);
+        <BodyShort>
+          <Link href={href} className={cl("navds-card__title")}>
+            {title}
+          </Link>
+        </BodyShort>
+      </div>
+    </article>
+  );
+};
 
 export default MiniCard;

@@ -34,9 +34,9 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^0.7.0",
-    "@navikt/ds-react": "^0.14.1",
-    "classnames": "^2.3.1",
+    "@navikt/ds-icons": "^0.8.4",
+    "@navikt/ds-react": "^0.16.7",
+    "classnames": "^2.2.6",
     "lottie-web": "^5.8.1"
   },
   "devDependencies": {
@@ -46,6 +46,7 @@
     "ts-node": "^10.4.0"
   },
   "peerDependencies": {
-    "react": "^16.8.0 || ^17.0.0"
+    "@types/react": "^17.0.30",
+    "react": "^17.0.0"
   }
 }

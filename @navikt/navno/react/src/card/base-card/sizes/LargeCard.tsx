@@ -1,82 +1,68 @@
-import React, { forwardRef } from "react";
+import React from "react";
 import cl from "classnames";
-import { OverridableComponent, Link } from "@navikt/ds-react";
+import { Link } from "@navikt/ds-react";
 import { Heading, BodyLong, BodyShort } from "@navikt/ds-react";
 import { Animation } from "../../../animation";
 import { useInteractions } from "../useInteraction";
 
 export interface LargeCardProps extends React.HTMLAttributes<HTMLElement> {
-  activeAnimation?: any;
   category: string;
-  hoverAnimation?: any;
+  hoverAnimation: any;
   text: string;
+  href: string;
+  className?: string;
+  renderLink?: any;
   title: string;
   type?: "situation" | "product" | "tool" | "general";
 }
 
-const LargeCard: OverridableComponent<LargeCardProps, HTMLElement> = forwardRef(
-  (
-    {
-      as: Component = "article",
-      className,
-      title,
-      text,
-      category,
-      hoverAnimation,
-      activeAnimation,
-      type = "general",
-      href,
-      ...rest
-    },
-    ref
-  ) => {
-    const { handlers, isHovering, isActive, isFocused } = useInteractions();
-    const hasAnimation = !!(hoverAnimation && activeAnimation);
+const LargeCard = ({
+  className = "",
+  title,
+  text,
+  category,
+  hoverAnimation,
+  type = "general",
+  href,
+  ...rest
+}: LargeCardProps) => {
+  const { handlers, isHovering, isFocused, isActive } = useInteractions();
+  const hasAnimation = !!hoverAnimation;
 
-    const focusClass = isFocused ? "navds-card--focus" : "";
-    const activeClass = isActive ? "navds-card--active" : "";
+  const focusClass = isFocused ? "navds-card--focus" : "";
+  const activeClass = isActive ? "navds-card--active" : "";
 
-    return (
-      <Component
-        {...rest}
-        {...handlers}
-        ref={ref}
-        className={cl(
-          "navds-card",
-          "navds-card-large",
-          className,
-          focusClass,
-          activeClass
+  return (
+    <article
+      {...rest}
+      {...handlers}
+      className={cl(
+        "navds-card",
+        "navds-card-large",
+        `navds-card--${type}`,
+        className,
+        focusClass,
+        activeClass
+      )}
+    >
+      <div className={cl("navds-card__bed")}>
+        {hasAnimation && (
+          <Animation
+            isHovering={isHovering}
+            hoverAnimation={hoverAnimation}
+            className={cl("navds-card__animation")}
+          />
         )}
-      >
-        <div
-          className={cl(
-            "navds-card__bed",
-            `navds-card__bed--general` // LargeCard has white background regardless of type
-          )}
-        >
-          {hasAnimation && (
-            <Animation
-              isHovering={isHovering}
-              isActive={isActive}
-              hoverAnimation={hoverAnimation}
-              activeAnimation={activeAnimation}
-              className={cl("navds-card__animation")}
-            />
-          )}
-          <Heading level="3" size="medium">
-            <Link href={href} className={cl("navds-card__title")}>
-              {title}
-            </Link>
-          </Heading>
-          <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
-          <BodyShort className={cl("navds-card__category")}>
-            {category}
-          </BodyShort>
-        </div>
-      </Component>
-    );
-  }
-);
+        <Heading level="3" size="medium">
+          <Link href={href} className={cl("navds-card__title")}>
+            {title}
+          </Link>
+        </Heading>
+        <BodyLong className={cl("navds-card__text")}>{text}</BodyLong>
+        <BodyShort className={cl("navds-card__category")}>{category}</BodyShort>
+      </div>
+    </article>
+  );
+};
 
 export default LargeCard;
