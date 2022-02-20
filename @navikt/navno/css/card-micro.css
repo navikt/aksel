@@ -1,34 +1,13 @@
-:root {
-  --navds-card-micro-color-background-focus: var(--navds-global-color-white);
-  --navds-card-micro-color-background-hover: var(--navds-global-color-white);
-  --navds-card-micro-color-border-hover: var(--navds-global-color-blue-500);
-  --navds-card-micro-color-border-active: var(--navds-global-color-blue-500);
-  --navds-card-micro-color-border: transparent;
-  --navds-card-micro-color-shadow-focus: var(--navds-global-color-blue-800);
-  --navds-card-micro-color-text-active: var(--navds-global-color-white);
-  --navds-card-micro-color-text-focus: var(--navds-global-color-blue-500);
-  --navds-card-micro-color-text-hover: var(--navds-global-color-blue-500);
-  --navds-card-micro-color-text: var(--navds-global-color-gray-900);
-}
-
 .navds-card-micro {
-  display: inline-block;
   padding: var(--navds-spacing-3) 0;
-}
-
-/* Ensure adjecent MicroCards are spaced between */
-.navds-card-micro:not(:last-of-type) {
-  margin: 0 var(--navds-spacing-2) 0 0;
-}
-
-.navds-card-micro:focus {
-  outline: 0;
+  text-decoration: none;
 }
 
 .navds-card-micro .navds-card__bed {
   border-radius: 1rem;
-  color: var(--navds-card-micro-color-text);
-  display: inline-block;
+  border: 1px solid #b0b0b0;
+  color: var(--navds-card-color-text);
+  display: inline-flex;
   font-size: var(--navds-font-size-small);
   padding: 0 var(--navds-spacing-2);
   text-decoration: none;
@@ -36,21 +15,68 @@
   width: auto;
 }
 
-.navds-card-micro:hover:not(:focus):not(:active) .navds-card__bed {
-  background-color: var(--navds-card-micro-color-background-hover);
-  box-shadow: 0 0 0 1px var(--navds-product-card-color-border-hover);
-  color: var(--navds-card-micro-color-text-hover);
+.navds-card-micro .navds-card__bed::before {
+  align-self: center;
+  border-radius: 0.5rem;
+  content: "";
+  display: flex;
+  height: 0.5rem;
+  margin: 0 0.5rem 0 0;
+  position: relative;
+  width: 0.5rem;
 }
 
-.navds-card.navds-card-micro:focus:not(:active) .navds-card__bed {
-  background-color: var(--navds-card-micro-color-background-focus);
-  box-shadow: var(--navds-shadow-focus);
-  color: var(--navds-card-micro-color-text-focus);
-  outline: none;
+.navds-card-micro.navds-card--focus .navds-card__bed,
+.navds-card-micro:hover .navds-card__bed,
+.navds-card-micro.navds-card--active .navds-card__bed {
+  border: 1px solid transparent;
 }
 
+.navds-card-micro.navds-card--situation .navds-card__bed::before {
+  background-color: var(--navds-global-color-orange-500);
+}
+
+.navds-card-micro.navds-card--product .navds-card__bed::before {
+  background-color: var(--navds-global-color-green-500);
+}
+
+.navds-card-micro.navds-card--tool .navds-card__bed::before {
+  background-color: var(--navds-global-color-deepblue-500);
+}
+
+.navds-card-micro.navds-card--guide .navds-card__bed::before {
+  background-color: var(--navds-global-color-gray-600);
+}
+
+.navds-card-micro.navds-card--themedarticle .navds-card__bed::before {
+  background-color: var(--navds-global-color-gray-600);
+}
+
+/* Ensure adjecent MicroCards are spaced between */
+.navds-card-micro:not(:last-of-type) {
+  margin: 0 var(--navds-spacing-2) 0 0;
+}
+
+.navds-card-micro:not(:focus):not(:active) .navds-card__bed {
+  box-shadow: var(--navds-shadow-card);
+}
+
+/* ---- Focus ---- */
+.navds-card-micro:focus,
+.navds-card-micro:active {
+  outline: 0;
+}
+
+.navds-card-micro:focus .navds-card__bed,
 .navds-card-micro:active .navds-card__bed {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px var(--navds-card-micro-color-border-active);
-  color: var(--navds-card-micro-color-text-active);
+  box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
+}
+
+.navds-card-micro:focus .navds-card__bed::after,
+.navds-card-micro:active .navds-card__bed::after {
+  box-shadow: 0 0 0 2px var(--navds-card-inner-active-border);
+  height: calc(100% - 2px);
+  margin: 1px;
+  width: calc(100% - 2px);
+  border-radius: 16px;
 }

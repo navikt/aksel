@@ -8,9 +8,10 @@
 .navds-card-mini .navds-card__bed {
   align-items: center;
   background-color: var(--navds-product-card-color-background);
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   display: flex;
   flex-direction: row;
+  border: 1px solid #b0b0b0;
   height: 100%;
   padding: var(--navds-spacing-3);
   text-decoration: none;
@@ -23,9 +24,15 @@
   box-shadow: var(--navds-shadow-card);
 }
 
+.navds-card-mini.navds-card--focus .navds-card__bed,
+.navds-card-mini:hover .navds-card__bed,
+.navds-card-mini.navds-card--active .navds-card__bed {
+  border: 1px solid transparent;
+}
+
 /* ---- Elements ---- */
 .navds-card-mini .navds-card__title {
-  color: var(--navds-product-card-color-text);
+  color: var(--navds-card-color-text);
   font-weight: var(--navds-font-weight-bold);
   text-decoration: underline;
 }
@@ -36,4 +43,19 @@
   height: var(--navds-spacing-16);
   margin: 0 var(--navds-spacing-4) 0 0;
   width: var(--navds-spacing-16);
+}
+
+/* ---- Focus ---- */
+.navds-card-mini.navds-card--focus .navds-card__bed,
+.navds-card-mini.navds-card--active .navds-card__bed {
+  box-shadow: 0 0 0 3px var(--navds-semantic-color-focus);
+}
+
+.navds-card-mini.navds-card--focus .navds-card__bed::after,
+.navds-card-mini.navds-card--active .navds-card__bed::after {
+  box-shadow: 0 0 0 2px var(--navds-card-inner-active-border);
+  height: calc(100% - 2px);
+  margin: 1px;
+  width: calc(100% - 2px);
+  border-radius: 6px;
 }

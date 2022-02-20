@@ -1,89 +1,93 @@
 :root {
-  --navds-product-card-color-text: var(--navds-global-color-gray-900);
-  --navds-product-card-color-text-active: var(--navds-global-color-white);
-  --navds-product-card-color-text-hover: var(--navds-global-color-blue-500);
-  --navds-product-card-color-category: var(--navds-global-color-gray-800);
-  --navds-product-card-color-border-hover: var(--navds-global-color-blue-500);
-  --navds-product-card-color-shadow-focus: var(--navds-global-color-blue-800);
-  --navds-product-card-color-background-hover: var(--navds-global-color-white);
-  --navds-product-card-color-background-general: var(
-    --navds-global-color-white
-  );
-  --navds-product-card-color-background-situation: var(
-    --navds-global-color-orange-200
-  );
-  --navds-product-card-color-background-product: var(
-    --navds-global-color-green-200
-  );
-  --navds-product-card-color-background-tool: var(
+  --navds-card-color-text: var(--navds-global-color-gray-900);
+  --navds-card-color-category: var(--navds-global-color-gray-600);
+  --navds-card-color-category-active-hover: var(--navds-global-color-gray-900);
+  --navds-card-general-color-background: var(--navds-global-color-white);
+  --navds-card-situation-color-background: var(--navds-global-color-orange-200);
+  --navds-card-product-color-background: var(--navds-global-color-green-200);
+  --navds-card-tool-color-background: var(--navds-global-color-deepblue-200);
+  --navds-card-guide-color-background: var(--navds-global-color-deepblue-200);
+  --navds-card-themedarticle-color-background: var(
     --navds-global-color-deepblue-200
   );
-  --navds-product-card-color-background-active: var(
-    --navds-global-color-blue-700
-  );
+  --navds-card-inner-active-border: var(--navds-global-color-white);
 }
 
 .navds-card {
   cursor: pointer;
 }
 
-.navds-card:not(.navds-card--focus):not(.navds-card--active) .navds-card__bed {
+.navds-card .navds-card__bed {
+  position: relative;
+}
+
+.navds-card:not(.navds-card--focus):not(.navds-card--active):not(:focus):not(:active)
+  .navds-card__bed {
   box-shadow: var(--navds-shadow-card);
-}
-
-.navds-card__bed.navds-card__bed--situation {
-  background-color: var(--navds-product-card-color-background-situation);
-}
-
-.navds-card__bed.navds-card__bed--product {
-  background-color: var(--navds-product-card-color-background-product);
-}
-
-.navds-card__bed.navds-card__bed--tool {
-  background-color: var(--navds-product-card-color-background-tool);
-}
-
-.navds-card__bed.navds-card__bed--general {
-  background-color: var(--navds-product-card-color-background-general);
 }
 
 .navds-card:active .navds-card__title,
 .navds-card:active .navds-card__text,
 .navds-card:active .navds-card__category {
-  color: var(--navds-product-card-color-text-active);
   text-decoration: none;
 }
 
 /* ---- Focus state --------------- */
-.navds-card--focus .navds-card__bed {
-  box-shadow: 0 0 0 4px var(--navds-semantic-color-focus);
-}
 
-.navds-card__title:focus {
-  outline: none;
+.navds-card--focus .navds-card__bed::after,
+.navds-card--active .navds-card__bed::after,
+.navds-card-micro:focus .navds-card__bed::after {
   background-color: transparent;
-  box-shadow: 0 0 0 0;
-  border: 0;
+  content: "";
+  display: block;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
 }
 
-/* ---- Active state --------------- */
-.navds-card:active .navds-card__bed {
-  background-color: var(--navds-product-card-color-background-active);
+.navds-card .navds-link:focus {
+  background-color: transparent;
+  box-shadow: 0 0 0;
 }
 
 /* ---- Hover state --------------- */
-.navds-card:hover:not(:active) .navds-card__bed {
-  box-shadow: 0 0 0 2px var(--navds-product-card-color-border-hover);
-  background-color: var(--navds-product-card-color-background-hover);
+.navds-card:hover *,
+.navds-card--focus * {
+  text-decoration: none;
 }
 
-.navds-card:hover:not(:active) .navds-card__text,
-.navds-card:hover:not(:active) .navds-card__category {
-  text-decoration: none;
-  color: var(--navds-product-card-color-text);
+.navds-card:hover .navds-card__category,
+.navds-card--focus .navds-card__category {
+  color: var(--navds-card-color-category-active-hover);
 }
 
-.navds-card:hover:not(:active) .navds-card__title {
-  text-decoration: none;
-  color: var(--navds-product-card-color-text-hover);
+.navds-card:hover.navds-card--situation .navds-card__bed,
+.navds-card:focus.navds-card--situation .navds-card__bed,
+.navds-card--focus.navds-card--situation .navds-card__bed {
+  background-color: var(--navds-card-situation-color-background);
+}
+
+.navds-card:hover.navds-card--product .navds-card__bed,
+.navds-card:focus.navds-card--product .navds-card__bed,
+.navds-card--focus.navds-card--product .navds-card__bed {
+  background-color: var(--navds-card-product-color-background);
+}
+
+.navds-card:hover.navds-card--tool .navds-card__bed,
+.navds-card:focus.navds-card--tool .navds-card__bed,
+.navds-card--focus.navds-card--tool .navds-card__bed {
+  background-color: var(--navds-card-tool-color-background);
+}
+
+.navds-card:hover.navds-card--guide .navds-card__bed,
+.navds-card:focus.navds-card--tool .navds-card__bed,
+.navds-card--focus.navds-card--guide .navds-card__bed {
+  background-color: var(--navds-card-guide-color-background);
+}
+
+.navds-card:hover.navds-card--themedarticle .navds-card__bed,
+.navds-card:focus.navds-card--themedarticle .navds-card__bed,
+.navds-card--focus.navds-card--themedarticle .navds-card__bed {
+  background-color: var(--navds-card-themedarticle-color-background);
 }
