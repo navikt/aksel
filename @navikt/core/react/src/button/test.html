@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Loading button test</title>
+
+    <script>
+      function f() {
+        let fooButton = document.getElementById("foo");
+
+        fooButton.disabled = true;
+        fooButton.setAttribute("aria-label", "Laster...");
+        fooButton.setAttribute("aria-live", "assertive");
+      }
+
+      function g() {
+        let fooButton = document.getElementById("foo");
+
+        fooButton.removeAttribute("aria-label");
+        fooButton.removeAttribute("aria-live");
+        fooButton.disabled = false;
+      }
+    </script>
+  </head>
+  <body>
+    <a href="#">Dummy link</a><br /><br />
+    <button id="foo" onclick="f()">Loading button</button>
+    <br /><br />
+    <button id="resetter" onclick="g()">Reset loading state</button>
+  </body>
+</html>

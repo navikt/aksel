@@ -53,6 +53,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
 
     useClientLayoutEffect(() => {
       if (loading) {
+        buttonRef?.current?.setAttribute("aria-live", "polite");
         const requestID = window.requestAnimationFrame(() => {
           setWidthOverride(buttonRef?.current?.getBoundingClientRect()?.width);
         });
@@ -60,6 +61,8 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
           setWidthOverride(undefined);
           cancelAnimationFrame(requestID);
         };
+      } else {
+        buttonRef?.current?.removeAttribute("aria-live");
       }
     }, [loading, children]);
 
@@ -78,7 +81,6 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
         )}
         style={{ width: widthOverride }}
         disabled={disabled ?? widthOverride ? true : undefined}
-        /* aria-live={widthOverride ? "polite" : undefined} */
       >
         <BodyShort as="span" className="navds-button__inner" size={size}>
           {widthOverride ? <Loader size={size} /> : children}
