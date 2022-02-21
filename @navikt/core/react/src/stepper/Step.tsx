@@ -64,10 +64,6 @@ const StepComponent: OverridableComponent<
           {context.activeStep === index ? ` ${index + 1}` : index + 1}
         </Label>
         <Label className="navds-stepper__step-label">{children}</Label>
-
-        {index !== context.lastIndex - 1 && (
-          <span aria-hidden className="navds-stepper__step-line" />
-        )}
       </Component>
     );
   }

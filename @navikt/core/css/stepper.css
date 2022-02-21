@@ -109,7 +109,8 @@
 
 /* Line */
 
-.navds-stepper__step-line {
+.navds-stepper__step-wrapper:not(:last-child)::after {
+  content: "";
   position: absolute;
   top: calc(0.5rem + 28px);
   left: 13px;
