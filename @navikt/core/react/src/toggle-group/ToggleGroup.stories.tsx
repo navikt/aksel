@@ -10,19 +10,43 @@ export default {
   },
 } as Meta;
 
-const Items = (icon?: boolean) => (
+const Items = (icon?: boolean, both?: boolean) => (
   <>
     <ToggleGroup.Item value="first">
-      {icon ? <Hamburger /> : "First"}
+      {both ? (
+        <>
+          <Hamburger /> First
+        </>
+      ) : (
+        <>{icon ? <Hamburger /> : "First"}</>
+      )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="second">
-      {icon ? <Star /> : "Second more txt"}
+      {both ? (
+        <>
+          <Star /> Second more txt
+        </>
+      ) : (
+        <>{icon ? <Star /> : "Second more txt"}</>
+      )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="third">
-      {icon ? <Attachment /> : "Third"}
+      {both ? (
+        <>
+          <Attachment /> Thrid
+        </>
+      ) : (
+        <>{icon ? <Attachment /> : "Third"}</>
+      )}
     </ToggleGroup.Item>
     <ToggleGroup.Item value="fourth">
-      {icon ? <System /> : "Fourth"}
+      {both ? (
+        <>
+          <System /> Fourth
+        </>
+      ) : (
+        <>{icon ? <System /> : "Fourth"}</>
+      )}
     </ToggleGroup.Item>
   </>
 );
@@ -41,6 +65,9 @@ export const All = () => {
         <ToggleGroup value={activeValue} onChange={setActiveValue}>
           {Items(true)}
         </ToggleGroup>
+        <ToggleGroup value={activeValue} onChange={setActiveValue}>
+          {Items(true, true)}
+        </ToggleGroup>
       </div>
       <h2>ToggleGroup Small</h2>
       <h3>{activeValue}</h3>
@@ -50,6 +77,9 @@ export const All = () => {
         </ToggleGroup>
         <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
           {Items(true)}
+        </ToggleGroup>
+        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
+          {Items(true, true)}
         </ToggleGroup>
       </div>
       <h2>ToggleGroup label</h2>

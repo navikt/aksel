@@ -34,13 +34,13 @@
   align-items: center;
   justify-content: center;
   padding: var(--navds-spacing-3);
-  min-width: 48px;
   min-height: 48px;
   border: none;
   cursor: pointer;
   background-color: var(--navds-toggle-group-color-background);
   color: var(--navds-toggle-group-color-text);
   border-radius: 2px;
+  min-width: fit-content;
 }
 
 .navds-toggle-group__button:hover {
@@ -65,6 +65,10 @@
   gap: var(--navds-spacing-2);
 }
 
+.navds-toggle-group__button-inner > * {
+  flex-shrink: 0;
+}
+
 .navds-toggle-group__button[aria-pressed="true"] {
   background-color: var(--navds-toggle-group-color-background-pressed);
   color: var(--navds-toggle-group-color-text-pressed);
@@ -72,8 +76,8 @@
 
 .navds-toggle-group--small > .navds-toggle-group__button {
   padding: 0.375rem;
-  min-width: 32px;
   min-height: 32px;
+  min-width: fit-content;
 }
 
 .navds-toggle-group__button > .navds-toggle-group__button-inner > svg {
