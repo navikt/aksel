@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "./index";
-import { Success } from "@navikt/ds-icons";
+import { SaveFile, Success } from "@navikt/ds-icons";
+import { BodyLong, Panel } from "..";
 
 export default {
   title: "ds-react/button",
@@ -143,6 +144,100 @@ export const All = () => {
           </Button>
         ))}
       </Section>
+    </div>
+  );
+};
+
+export const UUDemo = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLoading = () => {
+    setLoading(true);
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timeout);
+  };
+
+  return (
+    <div
+      style={{
+        maxWidth: 400,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: 16,
+      }}
+    >
+      <h1>Button med Aria-live alltid satt</h1>
+      <Panel border>
+        <BodyLong spacing>
+          Lorem incididunt cillum anim incididunt consectetur aute do mollit.
+          Incididunt incididunt qui sunt id. Dolore deserunt nulla do enim in id
+          id cillum voluptate minim ad. Lorem sit sunt minim excepteur elit est
+          adipisicing aute qui qui incididunt.
+        </BodyLong>
+        <BodyLong spacing>
+          Aliquip dolor magna ullamco ad in Lorem adipisicing veniam pariatur.
+          Ut aliqua officia ullamco nulla proident occaecat. Labore sint
+          proident esse pariatur ullamco nostrud ad reprehenderit consectetur
+          minim anim non. Nostrud ad tempor fugiat dolor nostrud proident
+          aliquip eu velit id nulla fugiat laborum.
+        </BodyLong>
+      </Panel>
+      <Button aria-live="polite" onClick={handleLoading} loading={loading}>
+        <SaveFile />
+        Lagre melding
+      </Button>
+    </div>
+  );
+};
+
+export const UUDemo2 = () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLoading = () => {
+    setLoading(true);
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timeout);
+  };
+
+  return (
+    <div
+      style={{
+        maxWidth: 400,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: 16,
+      }}
+    >
+      <h1>Button med Aria-live bare ved loading-state</h1>
+      <Panel border>
+        <BodyLong spacing>
+          Lorem incididunt cillum anim incididunt consectetur aute do mollit.
+          Incididunt incididunt qui sunt id. Dolore deserunt nulla do enim in id
+          id cillum voluptate minim ad. Lorem sit sunt minim excepteur elit est
+          adipisicing aute qui qui incididunt.
+        </BodyLong>
+        <BodyLong spacing>
+          Aliquip dolor magna ullamco ad in Lorem adipisicing veniam pariatur.
+          Ut aliqua officia ullamco nulla proident occaecat. Labore sint
+          proident esse pariatur ullamco nostrud ad reprehenderit consectetur
+          minim anim non. Nostrud ad tempor fugiat dolor nostrud proident
+          aliquip eu velit id nulla fugiat laborum.
+        </BodyLong>
+      </Panel>
+      <Button
+        aria-live={loading ? "polite" : undefined}
+        onClick={handleLoading}
+        loading={loading}
+      >
+        <SaveFile />
+        Lagre melding
+      </Button>
     </div>
   );
 };
