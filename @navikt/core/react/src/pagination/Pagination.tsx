@@ -112,7 +112,7 @@ const Pagination = ({
             role="presentation"
           />
           <BodyShort size={size} className="navds-pagination__prev-text">
-            Tilbake
+            Forrige
           </BodyShort>
         </button>
       )}
@@ -125,7 +125,7 @@ const Pagination = ({
             >
               <Back
                 className="navds-pagination__prev-next-icon"
-                title="Tilbake"
+                title="Forrige"
               />
             </button>
           </li>
