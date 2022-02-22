@@ -102,21 +102,36 @@ const Pagination = ({
     <nav
       className={cl("navds-pagination", `navds-pagination--${size}`, className)}
     >
+      {prevNextTexts && (
+        <button
+          className="navds-pagination__prev-next"
+          disabled={page === 1}
+          onClick={() => onPageChange(page - 1)}
+        >
+          <Back
+            className="navds-pagination__prev-next-icon"
+            role="presentation"
+          />
+          <BodyShort size={size} className="navds-pagination__prev-text">
+            Tilbake
+          </BodyShort>
+        </button>
+      )}
       <ul className="navds-pagination__list">
-        <li>
-          <button
-            className="navds-pagination__prev-next"
-            disabled={page === 1}
-            onClick={() => onPageChange(page - 1)}
-          >
-            <Back
-              className="navds-pagination__prev-next-icon"
-              title={prevNextTexts ? undefined : "Tilbake"}
-              role={prevNextTexts ? "presentation" : undefined}
-            />
-            {prevNextTexts && <BodyShort size={size}>Tilbake</BodyShort>}
-          </button>
-        </li>
+        {!prevNextTexts && (
+          <li>
+            <button
+              className="navds-pagination__prev-next"
+              disabled={page === 1}
+              onClick={() => onPageChange(page - 1)}
+            >
+              <Back
+                className="navds-pagination__prev-next-icon"
+                title="Tilbake"
+              />
+            </button>
+          </li>
+        )}
         {getSteps({ page, count, siblingCount, boundaryCount }).map(
           (step, i) => {
             const n = Number(step);
@@ -139,21 +154,36 @@ const Pagination = ({
             );
           }
         )}
-        <li>
-          <button
-            className="navds-pagination__prev-next"
-            disabled={page === count}
-            onClick={() => onPageChange(page + 1)}
-          >
-            {prevNextTexts && <BodyShort size={size}>Neste</BodyShort>}
-            <Next
-              className="navds-pagination__prev-next-icon"
-              title={prevNextTexts ? undefined : "Neste"}
-              role={prevNextTexts ? "presentation" : undefined}
-            />
-          </button>
-        </li>
+        {!prevNextTexts && (
+          <li>
+            <button
+              className="navds-pagination__prev-next"
+              disabled={page === count}
+              onClick={() => onPageChange(page + 1)}
+            >
+              <Next
+                className="navds-pagination__prev-next-icon"
+                title="Neste"
+              />
+            </button>
+          </li>
+        )}
       </ul>
+      {prevNextTexts && (
+        <button
+          className="navds-pagination__prev-next"
+          disabled={page === count}
+          onClick={() => onPageChange(page + 1)}
+        >
+          <BodyShort size={size} className="navds-pagination__next-text">
+            Neste
+          </BodyShort>
+          <Next
+            className="navds-pagination__prev-next-icon"
+            role="presentation"
+          />
+        </button>
+      )}
     </nav>
   );
 };

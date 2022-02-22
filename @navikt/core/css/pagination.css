@@ -16,6 +16,10 @@
   );
 }
 
+.navds-pagination {
+  display: flex;
+}
+
 .navds-pagination__list {
   margin: 0;
   padding: 0;
@@ -103,4 +107,12 @@
 .navds-pagination--small .navds-pagination__prev-next-icon {
   margin: var(--navds-spacing-1);
   font-size: 1rem;
+}
+
+.navds-pagination__next-text {
+  padding-left: 0.75rem;
+}
+
+.navds-pagination__prev-text {
+  padding-right: 0.75rem;
 }
