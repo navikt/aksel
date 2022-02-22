@@ -39,7 +39,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   ) => {
     const fieldset = useContext(FieldsetContext);
 
-    const [state, setState] = useState<string[]>([]);
+    const [state, setState] = useState<string[]>(defaultValue ?? []);
 
     const handleChange = (v: string) => {
       const newValue = value ? value : state;
