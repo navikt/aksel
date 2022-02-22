@@ -28,19 +28,21 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
     }
   }
 
+  const value = props.value as string | number | boolean;
+
   return {
     ...rest,
     inputProps: {
       ...inputProps,
       checked: checkboxGroup?.value
-        ? checkboxGroup.value.includes(props.value as string)
+        ? checkboxGroup.value.includes(value)
         : props.checked,
       defaultChecked: checkboxGroup?.defaultValue
-        ? checkboxGroup.defaultValue.includes(props.value as string)
+        ? checkboxGroup.defaultValue.includes(value)
         : props.defaultChecked,
       onChange: (e) => {
         props.onChange && props.onChange(e);
-        checkboxGroup && checkboxGroup.toggleValue(props.value as string);
+        checkboxGroup && checkboxGroup.toggleValue(value);
       },
     },
   };
