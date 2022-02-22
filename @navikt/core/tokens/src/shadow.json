@@ -16,9 +16,6 @@
       "xlarge": {
         "value": "0px 8px 10px -6px rgba(0, 0, 0, 0.1), 0px 25px 50px -12px rgba(0, 0, 0, 0.25)"
       },
-      "inner": {
-        "value": "0px 2px 4px 0px rgba(0, 0, 0, 0.05) inset, 0px 1px 0px 0px rgba(0, 0, 0, 0.1) inset"
-      },
       "focus": {
         "value": "0 0 0 3px {navds.semantic.color.focus.@.value}"
       },
