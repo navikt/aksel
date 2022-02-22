@@ -10,6 +10,7 @@ export * from "./link-panel";
 export * from "./loader";
 export * from "./menu";
 export * from "./modal";
+export * from "./pagination";
 export * from "./panel";
 export * from "./popover";
 export * from "./speech-bubble";
