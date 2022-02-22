@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { useId } from "..";
+import { Detail, useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -42,6 +42,11 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   content: string;
   /**
+   * Keyboard shortcuts
+   * List of styled keyboard shortcuts
+   */
+  keys?: string[];
+  /**
    * Adds a delay before opening tooltip
    * @default 150ms
    */
@@ -50,6 +55,11 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * Callback for when Tooltip opens/closes
    */
   onOpenChange?: (state: boolean) => void;
+  /**
+   * Inverts style of tooltip
+   * @default false
+   */
+  inverted?: boolean;
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -67,11 +77,31 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       delay = 150,
       onOpenChange,
       id,
+      inverted = false,
+      keys,
       ...rest
     },
     ref
   ) => {
     const tooltipId = useId();
+
+    const GetKeys = () => {
+      if (!keys) return null;
+      return (
+        <span className="navds-tooltip__keys">
+          {keys.map((k) => (
+            <Detail
+              as="kbd"
+              size="small"
+              key={k}
+              className="navds-tooltip__key"
+            >
+              {k}
+            </Detail>
+          ))}
+        </span>
+      );
+    };
 
     return (
       <TooltipPrimitive.Root
@@ -92,10 +122,18 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           sideOffset={offset ?? 2}
           side={side}
           align={align}
-          className={cl("navds-tooltip", "navds-detail", className)}
+          className={cl(
+            "navds-tooltip",
+            "navds-detail navds-detail--small",
+            className,
+            {
+              "navds-tooltip--inverted": inverted,
+            }
+          )}
           id={id ?? `tooltip-${tooltipId}`}
         >
           {content}
+          {GetKeys()}
           {arrow && (
             <TooltipPrimitive.Arrow
               offset={8}

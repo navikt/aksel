@@ -1,8 +1,13 @@
 :root {
   --navds-tooltip-color-text: var(--navds-semantic-color-text-inverted);
+  --navds-tooltip-color-text-inverted: var(--navds-semantic-color-text);
   --navds-tooltip-color-background: var(
     --navds-semantic-color-component-background-inverted
   );
+  --navds-tooltip-color-background-inverted: var(
+    --navds-semantic-color-component-background-light
+  );
+  --navds-tooltip-color-background-key: var(--navds-global-color-gray-200);
 }
 
 @keyframes slideDown {
@@ -53,10 +58,14 @@
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
   border-radius: 4px;
-  padding: var(--navds-spacing-2);
+  padding: var(--navds-spacing-1) var(--navds-spacing-2);
   white-space: nowrap;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.3s;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  filter: drop-shadow(0 2px 4px var(--navds-global-color-gray-300));
 }
 
 .navds-tooltip[data-side="top"] {
@@ -77,4 +86,37 @@
 
 .navds-tooltip__arrow {
   fill: var(--navds-tooltip-color-background);
+}
+
+.navds-tooltip__keys {
+  display: flex;
+  gap: 2px;
+  height: 16px;
+}
+
+.navds-tooltip__key {
+  font-size: 12px;
+  background-color: var(--navds-global-color-gray-700);
+  border-radius: 2px;
+  padding: 0 0.25rem;
+  font-family: var(--navds-font-family);
+  min-height: 16px;
+  min-width: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.navds-tooltip--inverted {
+  background-color: var(--navds-tooltip-color-background-inverted);
+  color: var(--navds-tooltip-color-text-inverted);
+}
+
+.navds-tooltip--inverted .navds-tooltip__arrow {
+  fill: var(--navds-tooltip-color-background-inverted);
+}
+
+.navds-tooltip--inverted .navds-tooltip__key {
+  background-color: var(--navds-tooltip-color-background-key);
 }

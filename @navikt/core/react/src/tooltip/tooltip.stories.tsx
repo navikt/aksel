@@ -29,6 +29,18 @@ export const All = () => {
       <Tooltip content="no arrow" side="top" arrow={false}>
         <Button>Tooltip</Button>
       </Tooltip>
+      <h2>Keys</h2>
+      <Tooltip content="Shortcuts" side="top" keys={["cmd", "T"]} open>
+        <Button>Tooltip med keys 1</Button>
+      </Tooltip>
+      <Tooltip content="Shortcuts" side="top" keys={["cmd"]} open>
+        <Button>Tooltip med keys 2</Button>
+      </Tooltip>
+
+      <h2>Inverted</h2>
+      <Tooltip inverted content="Shortcuts" side="top" keys={["cmd", "T"]} open>
+        <Button>Tooltip med keys 1</Button>
+      </Tooltip>
 
       <h2>With disabled element</h2>
       <div>
