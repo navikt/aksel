@@ -6,7 +6,7 @@ import { Close } from "@navikt/ds-icons";
 import { Button } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
-export interface ModalProps extends ReactModal {
+export interface ModalProps {
   /**
    * Modal content
    */
