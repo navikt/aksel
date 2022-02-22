@@ -6,7 +6,7 @@ import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
   extends Omit<FormFieldProps, "errorId">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Checkbox has error
    * @default false
@@ -23,7 +23,7 @@ export interface CheckboxProps
   /**
    * The value of the HTML element.
    */
-  value?: any;
+  value?: string | number | boolean;
   /**
    * Specify whether the Checkbox is in an indeterminate state
    * @default false

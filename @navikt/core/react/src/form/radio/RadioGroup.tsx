@@ -5,9 +5,9 @@ import { useId } from "../..";
 
 export interface RadioGroupContextProps {
   name: string;
-  defaultValue?: any;
-  value?: any;
-  onChange: (value: any) => void;
+  defaultValue?: string | number | boolean;
+  value?: string | number | boolean;
+  onChange: (value: string | number | boolean) => void;
   required?: boolean;
 }
 
@@ -16,7 +16,10 @@ export const RadioGroupContext = React.createContext<RadioGroupContextProps | nu
 );
 
 export interface RadioGroupProps
-  extends Omit<FieldsetProps, "onChange" | "errorPropagation"> {
+  extends Omit<
+    FieldsetProps,
+    "onChange" | "errorPropagation" | "defaultValue"
+  > {
   /**
    * Collection of <Radio>-elements
    */
@@ -28,15 +31,15 @@ export interface RadioGroupProps
   /**
    * Default checked radiobutton
    */
-  defaultValue?: any;
+  defaultValue?: string | number | boolean;
   /**
    * Controlled state for Radiobutton
    */
-  value?: any;
+  value?: string | number | boolean;
   /**
    * Returns current checked radiobutton in group
    */
-  onChange?: (value: any) => void;
+  onChange?: (value: string | number | boolean) => void;
   /**
    * Tells Fieldset if group is required
    */

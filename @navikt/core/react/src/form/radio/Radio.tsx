@@ -6,7 +6,7 @@ import { useRadio } from "./useRadio";
 
 export interface RadioProps
   extends Omit<FormFieldProps, "error" | "errorId">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Label for radio
    */
@@ -14,7 +14,7 @@ export interface RadioProps
   /**
    * The value of the HTML element
    */
-  value: any;
+  value: string | number | boolean;
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
