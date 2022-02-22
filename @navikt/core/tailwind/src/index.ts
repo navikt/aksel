@@ -7,9 +7,7 @@ import Reducer from "./reducer";
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
     ...old,
-    [kebabCase(key)
-      .replace("navds-", "")
-      .replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3")]: val,
+    [kebabCase(key).replace("navds-", "")]: val,
   }),
   {}
 );
