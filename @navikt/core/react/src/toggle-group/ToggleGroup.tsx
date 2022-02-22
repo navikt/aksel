@@ -88,6 +88,10 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       [labelId]: !!label,
     });
 
+    if (!value && !defaultValue) {
+      console.error("ToggleGroup needs either a value or defaultValue");
+    }
+
     return (
       <ToggleGroupContext.Provider
         value={{
