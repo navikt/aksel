@@ -14,7 +14,7 @@ export interface RadioProps
   /**
    * The value of the HTML element
    */
-  value: string;
+  value: any;
 }
 
 const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
