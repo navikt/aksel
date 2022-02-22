@@ -116,6 +116,7 @@ const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
               `navds-toggle-group--${size}`
             )}
             {...(describeBy && { "aria-describedby": describeBy })}
+            role="toolbar"
             type="single"
           >
             {children}
