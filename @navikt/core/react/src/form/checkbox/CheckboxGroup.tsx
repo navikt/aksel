@@ -41,8 +41,8 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
 
     const [state, setState] = useState<string[]>(defaultValue ?? []);
 
-    const handleChange = (v: string) => {
-      const newValue = value ? value : state;
+    const toggleValue = (v: string) => {
+      const newValue = value ?? state;
       const newState = newValue.includes(v)
         ? newValue.filter((x) => x !== v)
         : [...newValue, v];
@@ -65,7 +65,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
           value={{
             value,
             defaultValue,
-            toggleValue: (value: string) => handleChange(value),
+            toggleValue,
           }}
         >
           <div className="navds-checkboxes">{children}</div>
