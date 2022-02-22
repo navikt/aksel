@@ -1,13 +1,15 @@
 // @ts-ignore
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
-import { kebabCase } from "lodash";
+import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
     ...old,
-    [kebabCase(key).replace("navds-", "")]: val,
+    [kebabCase(key)
+      .replace("navds-", "")
+      .replace(/(^|-)(\d+)-(x[ls])/g, "$1$2$3")]: val,
   }),
   {}
 );
