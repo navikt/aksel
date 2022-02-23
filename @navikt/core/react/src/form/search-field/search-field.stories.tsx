@@ -76,7 +76,7 @@ export const All = () => {
 
 export const UUDemo = () => {
   return (
-    <SearchField label="Søk på nav.no" onSearch={console.log}>
+    <SearchField label="Søk på nav.no" onSearch={console.log} placeholder="Søk">
       <SearchField.Button />
     </SearchField>
   );
