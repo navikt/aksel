@@ -209,7 +209,7 @@ const SearchField = forwardRef<HTMLInputElement, SearchFieldProps>(
                 className="navds-search-field__clear-button"
               >
                 <span className="navds-sr-only">
-                  {clearButtonLabel ? clearButtonLabel : "Slett tekst i felt"}
+                  {clearButtonLabel ? clearButtonLabel : "Tøm"}
                 </span>
                 <Close aria-hidden />
               </button>

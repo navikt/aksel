@@ -20,7 +20,7 @@
 .navds-form-field--small .navds-search-field__input {
   min-height: 32px;
   padding: 0.15rem;
-  padding-right: 0.25rem;
+  padding-right: var(--navds-spacing-8);
 }
 
 /* Clear Button */
