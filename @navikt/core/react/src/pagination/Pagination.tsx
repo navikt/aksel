@@ -102,10 +102,9 @@ const Pagination = ({
     <nav
       className={cl("navds-pagination", `navds-pagination--${size}`, className)}
     >
-      {prevNextTexts && (
+      {prevNextTexts && page !== 1 && (
         <button
           className="navds-pagination__prev-next"
-          disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
         >
           <Back
@@ -113,21 +112,20 @@ const Pagination = ({
             role="presentation"
           />
           <BodyShort size={size} className="navds-pagination__prev-text">
-            Tilbake
+            Forrige
           </BodyShort>
         </button>
       )}
       <ul className="navds-pagination__list">
-        {!prevNextTexts && (
+        {!prevNextTexts && page !== 1 && (
           <li>
             <button
               className="navds-pagination__prev-next"
-              disabled={page === 1}
               onClick={() => onPageChange(page - 1)}
             >
               <Back
                 className="navds-pagination__prev-next-icon"
-                title="Tilbake"
+                title="Forrige"
               />
             </button>
           </li>
@@ -154,11 +152,10 @@ const Pagination = ({
             );
           }
         )}
-        {!prevNextTexts && (
+        {!prevNextTexts && page !== count && (
           <li>
             <button
               className="navds-pagination__prev-next"
-              disabled={page === count}
               onClick={() => onPageChange(page + 1)}
             >
               <Next
@@ -169,10 +166,9 @@ const Pagination = ({
           </li>
         )}
       </ul>
-      {prevNextTexts && (
+      {prevNextTexts && page !== count && (
         <button
           className="navds-pagination__prev-next"
-          disabled={page === count}
           onClick={() => onPageChange(page + 1)}
         >
           <BodyShort size={size} className="navds-pagination__next-text">
