@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
+import { CheckboxGroupProps } from "..";
 export default {
   title: "ds-react/form/checkbox",
   component: Checkbox,
@@ -37,13 +38,15 @@ export const Indeterminate = () => {
 };
 
 export const All = () => {
-  const Checkboxes = (props) => (
+  const Checkboxes = (
+    props: Omit<CheckboxGroupProps, "legend" | "description" | "children">
+  ) => (
     <CheckboxGroup
       legend="Mollit eiusmod"
       description="Exercitation do labore"
       {...props}
     >
-      <Checkbox value="Apple">Apple</Checkbox>
+      <Checkbox value={1}>Apple</Checkbox>
       <Checkbox value="Orange" description="Laborum ad">
         Orange
       </Checkbox>
@@ -60,7 +63,7 @@ export const All = () => {
       <h2>Single checkbox</h2>
       <Checkbox value="Apple">Apple</Checkbox>
       <h3>Desription</h3>
-      <Checkbox value="Apple" description="Laborum ad" defaultChecked>
+      <Checkbox value={1} description="Laborum ad" defaultChecked>
         Apple
       </Checkbox>
       <h3>Error</h3>
@@ -98,7 +101,7 @@ export const All = () => {
       <h3>Small + error</h3>
       <Checkboxes size="small" error="Dette er en feilmelding" />
       <h3>Default value</h3>
-      <Checkboxes defaultValue={["Orange", "Melon"]} />
+      <Checkboxes defaultValue={[1, "Melon"]} />
       <h3>Disabled</h3>
       <Checkboxes disabled />
     </>

@@ -12,7 +12,8 @@ export interface SortState {
   direction: "ascending" | "descending";
 }
 
-export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
+export interface TableProps
+  extends React.TableHTMLAttributes<HTMLTableElement> {
   /**
    * Changes padding
    * @default "medium"

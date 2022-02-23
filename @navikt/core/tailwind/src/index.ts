@@ -1,7 +1,7 @@
 // @ts-ignore
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
-import { kebabCase } from "lodash";
+import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
 const tokens = Object.entries(TokensBuild).reduce(
