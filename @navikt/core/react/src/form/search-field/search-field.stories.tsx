@@ -73,3 +73,11 @@ export const All = () => {
     </div>
   );
 };
+
+export const UUDemo = () => {
+  return (
+    <SearchField label="Søk på nav.no" onSearch={console.log}>
+      <SearchField.Button />
+    </SearchField>
+  );
+};
