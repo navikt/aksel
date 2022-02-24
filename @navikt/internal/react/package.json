@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.8.4",
-    "@navikt/ds-react": "^0.16.14",
+    "@navikt/ds-react": "^0.16.13",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",

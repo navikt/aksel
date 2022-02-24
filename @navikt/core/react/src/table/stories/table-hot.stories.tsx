@@ -1,6 +1,5 @@
 import { capitalize } from "@material-ui/core";
 import { EllipsisCircleH } from "@navikt/ds-icons";
-import { Dropdown } from "@navikt/ds-react-internal";
 import React, { useState } from "react";
 import { Table } from "../";
 import { Button } from "../..";
@@ -93,25 +92,7 @@ export const Hot = () => {
       key: "menu",
       sortable: false,
       render: (value) => (
-        <span style={{ display: "flex", marginBlock: -2 }}>
-          <Dropdown>
-            <Button
-              variant="tertiary"
-              size="xsmall"
-              as={Dropdown.Toggle}
-              disabled={!value}
-            >
-              <EllipsisCircleH />
-            </Button>
-            <Dropdown.Menu>
-              <Dropdown.Menu.List>
-                <Dropdown.Menu.List.Item>
-                  Fjern tildeling
-                </Dropdown.Menu.List.Item>
-              </Dropdown.Menu.List>
-            </Dropdown.Menu>
-          </Dropdown>
-        </span>
+        <span style={{ display: "flex", marginBlock: -2 }}></span>
       ),
       value: (oppgave) => oppgave.saksbehandler,
     },
