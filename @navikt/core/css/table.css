@@ -16,8 +16,8 @@
 }
 
 .navds-table {
-  border-collapse: collapse;
   width: 100%;
+  border-collapse: collapse;
   display: table;
 }
 

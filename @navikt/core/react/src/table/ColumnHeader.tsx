@@ -5,14 +5,14 @@ import HeaderCell from "./HeaderCell";
 
 interface ColumnHeaderProps extends React.HTMLAttributes<HTMLTableCellElement> {
   /**
+   * Key to sort by
+   */
+  sortKey?: string;
+  /**
    * Column is sortable
    * @default false
    */
   sortable?: boolean;
-  /**
-   * Key to sort by
-   */
-  sortKey?: string;
 }
 
 export interface ColumnHeaderType
