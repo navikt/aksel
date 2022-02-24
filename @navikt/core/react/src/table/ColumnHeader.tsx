@@ -1,9 +1,9 @@
 import React, { forwardRef, useContext } from "react";
-import { TableContext } from "..";
 import { Down, Up } from "@navikt/ds-icons";
-import HeaderCell from "./HeaderCell";
+import { TableContext } from "..";
+import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 
-interface ColumnHeaderProps extends React.HTMLAttributes<HTMLTableCellElement> {
+interface ColumnHeaderProps extends HeaderCellProps {
   /**
    * Key to sort by
    */

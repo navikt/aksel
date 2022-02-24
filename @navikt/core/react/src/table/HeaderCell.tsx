@@ -2,8 +2,14 @@ import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { Label, TableContext } from "..";
 
-interface HeaderCellProps extends React.ThHTMLAttributes<HTMLTableCellElement> {
+export interface HeaderCellProps
+  extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
+  /**
+   * Content alignment
+   * @default "left"
+   */
+  align?: "left" | "center" | "right";
 }
 
 export interface HeaderCellType
@@ -12,14 +18,16 @@ export interface HeaderCellType
   > {}
 
 const HeaderCell: HeaderCellType = forwardRef(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, align, ...rest }, ref) => {
     const context = useContext(TableContext);
 
     return (
       <Label
         as="th"
         ref={ref}
-        className={cl("navds-table__header-cell", className)}
+        className={cl("navds-table__header-cell", className, {
+          [`navds-table__header-cell--align-${align}`]: align,
+        })}
         size={context?.size}
         {...rest}
       >

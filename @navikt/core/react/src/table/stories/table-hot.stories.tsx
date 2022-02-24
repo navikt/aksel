@@ -1,6 +1,5 @@
-import { capitalize } from "@material-ui/core";
-import { EllipsisCircleH } from "@navikt/ds-icons";
 import React, { useState } from "react";
+import { capitalize } from "@material-ui/core";
 import { Table } from "../";
 import { Button } from "../..";
 import { SortState } from "../..";
@@ -10,10 +9,20 @@ export default {
   component: Table,
 };
 
+interface Column {
+  key: string;
+  name?: string;
+  sortable?: boolean;
+  render?: (value: any) => React.ReactElement<any, any> | null;
+  value?: (oppgave: any) => any;
+  width?: number;
+  align?: "left" | "center" | "right";
+}
+
 export const Hot = () => {
   const [sort, setSort] = useState<SortState>();
 
-  const columns = [
+  const columns: Column[] = [
     {
       key: "eier",
       name: "Eier",
@@ -71,6 +80,7 @@ export const Hot = () => {
           6
         )} ${oppgave.personinformasjon.fnr.slice(6)}`,
       width: 124,
+      align: "right",
     },
     {
       key: "bosted",
@@ -121,7 +131,7 @@ export const Hot = () => {
         >
           <Table.Header>
             <Table.Row>
-              {columns.map(({ key, name, width, sortable = true }) => (
+              {columns.map(({ key, name, width, sortable = true, align }) => (
                 <Table.ColumnHeader
                   style={{
                     width,
@@ -131,6 +141,7 @@ export const Hot = () => {
                   key={key}
                   sortable={sortable}
                   sortKey={key}
+                  align={align}
                 >
                   <div
                     style={{
@@ -177,7 +188,13 @@ export const Hot = () => {
               .map((oppgave) => (
                 <Table.Row key={oppgave.saksid}>
                   {columns.map(
-                    ({ key, value, width, render = (value) => value }) => (
+                    ({
+                      key,
+                      value,
+                      width,
+                      render = (value) => value,
+                      align,
+                    }) => (
                       <Table.DataCell
                         style={{
                           width,
@@ -189,8 +206,9 @@ export const Hot = () => {
                         }}
                         title={oppgave[key]}
                         key={key}
+                        align={align}
                       >
-                        {render(value ? value(oppgave) : oppgave[key], oppgave)}
+                        {render(value ? value(oppgave) : oppgave[key])}
                       </Table.DataCell>
                     )
                   )}
