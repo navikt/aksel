@@ -5,9 +5,9 @@ import { useId } from "../..";
 
 export interface RadioGroupContextProps {
   name: string;
-  defaultValue?: string | number | boolean;
-  value?: string | number | boolean;
-  onChange: (value: string | number | boolean) => void;
+  defaultValue?: any;
+  value?: any;
+  onChange: (value: any) => void;
   required?: boolean;
 }
 
@@ -31,15 +31,15 @@ export interface RadioGroupProps
   /**
    * Default checked radiobutton
    */
-  defaultValue?: string | number | boolean;
+  defaultValue?: any;
   /**
    * Controlled state for Radiobutton
    */
-  value?: string | number | boolean;
+  value?: any;
   /**
    * Returns current checked radiobutton in group
    */
-  onChange?: (value: string | number | boolean) => void;
+  onChange?: (value: any) => void;
   /**
    * Tells Fieldset if group is required
    */

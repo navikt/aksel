@@ -3,9 +3,9 @@ import cl from "classnames";
 import { Fieldset, FieldsetProps, FieldsetContext } from "..";
 
 export interface CheckboxGroupState {
-  readonly defaultValue?: ReadonlyArray<string | number | boolean>;
-  readonly value?: ReadonlyArray<string | number | boolean>;
-  toggleValue(value: string | number | boolean): void;
+  readonly defaultValue?: readonly any[];
+  readonly value?: readonly any[];
+  toggleValue(value: any): void;
 }
 
 export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
@@ -24,15 +24,15 @@ export interface CheckboxGroupProps
   /**
    * Controlled state for group
    */
-  value?: Array<string | number | boolean>;
+  value?: any[];
   /**
    * Default checked checkboxes on render
    */
-  defaultValue?: Array<string | number | boolean>;
+  defaultValue?: any[];
   /**
    * Returns current checked checkboxes in group
    */
-  onChange?: (value: Array<string | number | boolean>) => void;
+  onChange?: (value: any[]) => void;
 }
 
 const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
@@ -42,11 +42,9 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   ) => {
     const fieldset = useContext(FieldsetContext);
 
-    const [state, setState] = useState<Array<string | number | boolean>>(
-      defaultValue ?? []
-    );
+    const [state, setState] = useState<any[]>(defaultValue ?? []);
 
-    const toggleValue = (v: string | number | boolean) => {
+    const toggleValue = (v: any) => {
       const newValue = value ?? state;
       const newState = newValue.includes(v)
         ? newValue.filter((x) => x !== v)

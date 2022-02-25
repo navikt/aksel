@@ -23,7 +23,7 @@ export interface CheckboxProps
   /**
    * The value of the HTML element.
    */
-  value?: string | number | boolean;
+  value?: any;
   /**
    * Specify whether the Checkbox is in an indeterminate state
    * @default false
