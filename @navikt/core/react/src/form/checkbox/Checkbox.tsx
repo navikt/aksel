@@ -55,6 +55,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "error",
           "description",
           "hideLabel",
+          "indeterminate",
         ])}
         {...inputProps}
         type="checkbox"
