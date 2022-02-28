@@ -8,6 +8,9 @@ import { Loader, Pagination, SortState } from "../..";
 export default {
   title: "ds-react/table",
   component: Table,
+  parameters: {
+    chromatic: { delay: 500 },
+  },
 };
 
 const rowsPerPage = 10;
