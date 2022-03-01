@@ -14,7 +14,7 @@ import { FormFieldProps } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { useSearch } from "./useSearch";
 
-export type clearEventT =
+export type SearchClearEvent =
   | {
       trigger: "Click";
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>;
@@ -46,7 +46,7 @@ export interface SearchProps
   /**
    * Callback for click on clear-button or Escape keydown
    */
-  onClear?: (e: clearEventT) => void;
+  onClear?: (e: SearchClearEvent) => void;
   /**
    * aria-label on clear button
    * @default "Slett tekst i felt"
@@ -111,7 +111,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   );
 
   const handleClear = useCallback(
-    (event: clearEventT) => {
+    (event: SearchClearEvent) => {
       onClear?.(event);
       handleChange("");
       if (searchRef.current && value === undefined) {
@@ -153,11 +153,12 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
         className,
         "navds-form-field",
         `navds-form-field--${size}`,
-        "navds-search-field",
+        "navds-search",
         {
-          "navds-search-field--disabled": !!inputProps.disabled,
+          "navds-search--disabled": !!inputProps.disabled,
         }
       )}
+      onSubmit={(e) => e.preventDefault()}
     >
       <Label
         htmlFor={inputProps.id}
@@ -181,8 +182,8 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           {description}
         </BodyShort>
       )}
-      <div className="navds-search-field--relative-flex">
-        <div className="navds-search-field--relative-flex">
+      <div className="navds-search--relative-flex">
+        <div className="navds-search--relative-flex">
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
@@ -193,7 +194,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             role="searchbox"
             className={cl(
               className,
-              "navds-search-field__input",
+              "navds-search__input",
               "navds-text-field__input",
               "navds-body-short",
               `navds-body-${size ?? "medium"}`
@@ -203,7 +204,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             <button
               type="button"
               onClick={(e) => handleClear({ trigger: "Click", event: e })}
-              className="navds-search-field__clear-button"
+              className="navds-search__button-clear"
             >
               <span className="navds-sr-only">
                 {clearButtonLabel ? clearButtonLabel : "Tøm"}

@@ -1,8 +1,8 @@
 import { Search } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { SearchContext } from ".";
 import { Button, ButtonProps } from "../..";
+import { SearchContext } from "./Search";
 
 export interface SearchButtonProps
   extends Omit<ButtonProps, "size" | "children"> {
