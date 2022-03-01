@@ -119,7 +119,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         <TooltipPrimitive.Content
           ref={ref}
           {...rest}
-          sideOffset={offset ?? 2}
+          sideOffset={offset}
           side={side}
           align={align}
           className={cl(
