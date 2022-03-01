@@ -58,7 +58,7 @@
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
   border-radius: var(--navds-border-radius-medium);
-  padding: var(--navds-spacing-1) var(--navds-spacing-2);
+  padding: 2px var(--navds-spacing-2);
   white-space: nowrap;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.3s;
