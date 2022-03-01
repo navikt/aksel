@@ -47,8 +47,8 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   keys?: string[];
   /**
-   * Adds a delay before opening tooltip
-   * @default 150ms
+   * Adds a delay in milliseconds before opening tooltip
+   * @default 150
    */
   delay?: number;
   /**
