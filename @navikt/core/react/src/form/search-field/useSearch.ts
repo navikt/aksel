@@ -4,7 +4,7 @@ import { useId } from "../../index";
 import { FieldsetContext } from "../index";
 import { FormFieldProps } from "../useFormField";
 
-export const useSearchField = (props: FormFieldProps, prefix: string) => {
+export const useSearch = (props: FormFieldProps, prefix: string) => {
   const { size } = props;
 
   const fieldset = useContext(FieldsetContext);

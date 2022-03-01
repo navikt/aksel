@@ -1,7 +1,7 @@
 import { Search } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { SearchFieldContext } from ".";
+import { SearchContext } from ".";
 import { Button, ButtonProps } from "../..";
 
 export interface SearchButtonProps
@@ -26,14 +26,14 @@ const SearchButton: SearchButtonType = forwardRef(
     { className, children, variant = "tertiary", disabled, onClick, ...rest },
     ref
   ) => {
-    const searchField = useContext(SearchFieldContext);
+    const context = useContext(SearchContext);
 
-    if (searchField === null) {
-      console.warn("<SearchField.Button> has to be wrapped in <SearchField />");
+    if (context === null) {
+      console.warn("<Search.Button> has to be wrapped in <Search />");
       return null;
     }
 
-    const { size, onSearch } = searchField;
+    const { size, onSearch } = context;
 
     return (
       <Button
@@ -42,8 +42,8 @@ const SearchButton: SearchButtonType = forwardRef(
         ref={ref}
         size={size}
         variant={variant as any}
-        className={cl("navds-search-field__search-button", className)}
-        disabled={searchField?.disabled ?? disabled}
+        className={cl("navds-search__button-search", className)}
+        disabled={context?.disabled ?? disabled}
         onClick={(e) => {
           onSearch();
           onClick?.(e);
