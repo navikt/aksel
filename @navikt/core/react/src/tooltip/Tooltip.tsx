@@ -72,7 +72,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       align = "center",
       open,
       defaultOpen,
-      offset,
+      offset = 2,
       content,
       delay = 150,
       onOpenChange,
