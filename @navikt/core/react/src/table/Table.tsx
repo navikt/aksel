@@ -3,8 +3,14 @@ import cl from "classnames";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
 import Row, { RowType } from "./Row";
+import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
+
+export interface SortState {
+  orderBy: string;
+  direction: "ascending" | "descending";
+}
 
 export interface TableProps
   extends React.TableHTMLAttributes<HTMLTableElement> {
@@ -18,6 +24,14 @@ export interface TableProps
    * @default false
    */
   zebraStripes?: boolean;
+  /**
+   * Sort state
+   */
+  sort?: SortState;
+  /**
+   * Callback whens sort state changes
+   */
+  onSortChange?: (sortKey?: string) => void;
 }
 
 export interface TableType
@@ -29,17 +43,30 @@ export interface TableType
   Row: RowType;
   DataCell: DataCellType;
   HeaderCell: HeaderCellType;
+  ColumnHeader: ColumnHeaderType;
 }
 
 export interface TableContextProps {
   size: "medium" | "small";
+  onSortChange?: (sortKey: string) => void;
+  sort?: SortState;
 }
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
 const Table = forwardRef(
-  ({ className, zebraStripes = false, size = "medium", ...rest }, ref) => (
-    <TableContext.Provider value={{ size }}>
+  (
+    {
+      className,
+      zebraStripes = false,
+      size = "medium",
+      onSortChange,
+      sort,
+      ...rest
+    },
+    ref
+  ) => (
+    <TableContext.Provider value={{ size, onSortChange, sort }}>
       <table
         {...rest}
         ref={ref}
@@ -54,6 +81,7 @@ const Table = forwardRef(
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
+Table.ColumnHeader = ColumnHeader;
 Table.HeaderCell = HeaderCell;
 Table.DataCell = DataCell;
 
