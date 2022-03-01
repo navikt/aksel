@@ -23,7 +23,6 @@
   padding-right: var(--navds-spacing-8);
 }
 
-/* Clear Button */
 .navds-search__button-clear {
   position: absolute;
   right: 0.75rem;
