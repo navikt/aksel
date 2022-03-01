@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { Detail, useId } from "..";
+import { useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -42,11 +42,6 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   content: string;
   /**
-   * Keyboard shortcuts
-   * List of styled keyboard shortcuts
-   */
-  keys?: string[];
-  /**
    * Adds a delay in milliseconds before opening tooltip
    * @default 150
    */
@@ -78,30 +73,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onOpenChange,
       id,
       inverted = false,
-      keys,
       ...rest
     },
     ref
   ) => {
     const tooltipId = useId();
-
-    const GetKeys = () => {
-      if (!keys) return null;
-      return (
-        <span className="navds-tooltip__keys">
-          {keys.map((k) => (
-            <Detail
-              as="kbd"
-              size="small"
-              key={k}
-              className="navds-tooltip__key"
-            >
-              {k}
-            </Detail>
-          ))}
-        </span>
-      );
-    };
 
     return (
       <TooltipPrimitive.Root
@@ -133,7 +109,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           id={id ?? `tooltip-${tooltipId}`}
         >
           {content}
-          {GetKeys()}
           {arrow && (
             <TooltipPrimitive.Arrow
               offset={8}

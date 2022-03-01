@@ -65,7 +65,7 @@
   display: flex;
   gap: var(--navds-spacing-3);
   align-items: center;
-  filter: drop-shadow(0 2px 4px var(--navds-global-color-gray-300));
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.15));
 }
 
 .navds-tooltip[data-side="top"] {
@@ -88,26 +88,6 @@
   fill: var(--navds-tooltip-color-background);
 }
 
-.navds-tooltip__keys {
-  display: flex;
-  gap: 2px;
-  height: 16px;
-}
-
-.navds-tooltip__key {
-  font-size: 12px;
-  background-color: var(--navds-global-color-gray-700);
-  border-radius: 2px;
-  padding: 0 0.25rem;
-  font-family: var(--navds-font-family);
-  min-height: 16px;
-  min-width: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
 .navds-tooltip--inverted {
   background-color: var(--navds-tooltip-color-background-inverted);
   color: var(--navds-tooltip-color-text-inverted);
@@ -115,8 +95,4 @@
 
 .navds-tooltip--inverted .navds-tooltip__arrow {
   fill: var(--navds-tooltip-color-background-inverted);
-}
-
-.navds-tooltip--inverted .navds-tooltip__key {
-  background-color: var(--navds-tooltip-color-background-key);
 }
