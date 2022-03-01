@@ -63,7 +63,7 @@
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.3s;
   display: flex;
-  gap: 0.75rem;
+  gap: var(--navds-spacing-3);
   align-items: center;
   filter: drop-shadow(0 2px 4px var(--navds-global-color-gray-300));
 }
