@@ -16,9 +16,13 @@ export const All = () => {
   return (
     <>
       <button onClick={() => setOpen(true)}>Open modal</button>
-      <Modal open={open} onClose={() => setOpen(false)}>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="header123"
+      >
         <Modal.Content>
-          <h1>Header</h1>
+          <h1 id="header123">Header</h1>
           <h2>subheader</h2>
           <p>Cupidatat irure ipsum veniam ad in esse.</p>
           <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
@@ -32,9 +36,10 @@ export const All = () => {
         shouldCloseOnOverlayClick={false}
         open={openTwo}
         onClose={() => setOpenTwo(false)}
+        aria-labelledby="header123"
       >
         <Modal.Content>
-          <h1>Header</h1>
+          <h1 id="header123">Header</h1>
           <h2>subheader</h2>
           <p>
             Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
@@ -54,10 +59,9 @@ export const All = () => {
         open={openThree}
         closeButton={false}
         onClose={() => setOpenThree(false)}
+        aria-label="Min modal"
       >
         <Modal.Content>
-          <h1>Header</h1>
-          <h2>subheader</h2>
           <p>Cupidatat irure ipsum veniam ad in esse.</p>
           <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
         </Modal.Content>
