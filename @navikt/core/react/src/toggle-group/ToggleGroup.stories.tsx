@@ -51,6 +51,17 @@ const Items = (icon?: boolean, both?: boolean) => (
   </>
 );
 
+export const UUDemo = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+  return (
+    <ToggleGroup value={activeValue} onChange={setActiveValue}>
+      <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
+      <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
+      <ToggleGroup.Item value="sendt">Sendte</ToggleGroup.Item>
+    </ToggleGroup>
+  );
+};
+
 export const All = () => {
   const [activeValue, setActiveValue] = useState("first");
 
