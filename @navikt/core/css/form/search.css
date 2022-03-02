@@ -88,6 +88,12 @@
     0 1px 0 0 var(--navds-search-color-border-hover) inset,
     0 -1px 0 0 var(--navds-search-color-border-hover) inset,
     -1px 0 0 0 var(--navds-search-color-border-hover);
+  z-index: 1;
+}
+
+.navds-search__wrapper-inner:focus-within
+  + .navds-search__button-search.navds-button--tertiary:hover {
+  z-index: auto;
 }
 
 .navds-search__button-search.navds-button--tertiary:focus {
