@@ -182,8 +182,8 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           {description}
         </BodyShort>
       )}
-      <div className="navds-search--relative-flex">
-        <div className="navds-search--relative-flex">
+      <div className="navds-search__wrapper">
+        <div className="navds-search__wrapper-inner">
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
