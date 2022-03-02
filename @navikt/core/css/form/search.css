@@ -62,6 +62,7 @@
   flex-shrink: 0;
   min-width: 64px;
   min-height: 32px;
+  border-radius: 0;
   border-top-right-radius: var(--navds-border-radius-medium);
   border-bottom-right-radius: var(--navds-border-radius-medium);
 }
