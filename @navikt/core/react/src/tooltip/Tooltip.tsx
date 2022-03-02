@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { useId } from "..";
+import { Detail, useId } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -22,11 +22,6 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * @default "top"
    */
   side?: "top" | "right" | "bottom" | "left";
-  /**
-   * Tooltip placement in relation to anchor
-   * @default "center"
-   */
-  align?: "center" | "start" | "end";
   /**
    *  Toggles rendering of arrow
    *  @default true
@@ -55,6 +50,10 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   inverted?: boolean;
+  /**
+   * List of Keyboard-keys for shortcuts
+   */
+  keys?: string[];
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -64,7 +63,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       className,
       arrow = true,
       side = "top",
-      align = "center",
       open,
       defaultOpen,
       offset = 2,
@@ -73,6 +71,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       onOpenChange,
       id,
       inverted = false,
+      keys,
       ...rest
     },
     ref
@@ -97,7 +96,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           {...rest}
           sideOffset={offset}
           side={side}
-          align={align}
           className={cl(
             "navds-tooltip",
             "navds-detail navds-detail--small",
@@ -109,11 +107,27 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           id={id ?? `tooltip-${tooltipId}`}
         >
           {content}
+          {keys && (
+            <span>
+              {keys.map((key) => (
+                <Detail
+                  size="small"
+                  as="kbd"
+                  key={key}
+                  className={cl("navds-tooltip__key", {
+                    "navds-tooltip__key--inverted": inverted,
+                  })}
+                >
+                  {key}
+                </Detail>
+              ))}
+            </span>
+          )}
           {arrow && (
             <TooltipPrimitive.Arrow
-              offset={8}
-              width={12}
-              height={8}
+              offset={6}
+              width={8}
+              height={4}
               className="navds-tooltip__arrow"
             />
           )}

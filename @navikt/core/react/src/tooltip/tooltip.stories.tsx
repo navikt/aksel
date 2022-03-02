@@ -30,6 +30,15 @@ export const All = () => {
         <Button>Tooltip</Button>
       </Tooltip>
 
+      <h2>Keys</h2>
+      <Tooltip content="Inverted!" side="top" open keys={["Cmd", "K"]}>
+        <Button>Inverted tooltip</Button>
+      </Tooltip>
+      <h3>inverted</h3>
+      <Tooltip inverted content="Inverted!" side="top" open keys={["Cmd", "K"]}>
+        <Button>Inverted tooltip</Button>
+      </Tooltip>
+
       <h2>Inverted</h2>
       <Tooltip inverted content="Inverted!" side="top" open>
         <Button>Inverted tooltip</Button>
@@ -45,7 +54,7 @@ export const All = () => {
           </span>
         </Tooltip>
       </div>
-      <h2>all sides + alignments</h2>
+      <h2>all sides</h2>
       <div
         style={{
           display: "flex",
@@ -65,17 +74,9 @@ export const All = () => {
                 gap: "3rem",
               }}
             >
-              {["center", "start", "end"].map((align) => (
-                <Tooltip
-                  key={side + align}
-                  defaultOpen
-                  content={side + align}
-                  side={side as any}
-                  align={align as any}
-                >
-                  <Refresh aria-hidden tabIndex={0} />
-                </Tooltip>
-              ))}
+              <Tooltip key={side} defaultOpen content={side} side={side as any}>
+                <Refresh aria-hidden tabIndex={0} />
+              </Tooltip>
             </div>
           </div>
         ))}
