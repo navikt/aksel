@@ -84,3 +84,19 @@ export const All = () => {
     </div>
   );
 };
+
+export const UUDemo = () => {
+  return (
+    <div>
+      <Button>Placeholder</Button>
+      <br />
+      <br />
+      <Tooltip content="Shortcut" side="right" keys={["Cmd", "S"]}>
+        <Button>Lagre</Button>
+      </Tooltip>
+      <br />
+      <br />
+      <Button>Placeholder</Button>
+    </div>
+  );
+};
