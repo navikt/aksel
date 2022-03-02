@@ -108,7 +108,7 @@
   background-color: var(--navds-tooltip-color-key-background);
   color: var(--navds-tooltip-color-key-text);
   border-radius: 2px;
-  padding: 0px 4px;
+  padding: 0 4px;
   min-width: 18px;
   height: 18px;
   display: inline-flex;
