@@ -69,7 +69,8 @@
   flex-shrink: 0;
 }
 
-.navds-toggle-group__button[aria-pressed="true"] {
+.navds-toggle-group__button[aria-pressed="true"],
+.navds-toggle-group__button[aria-checked="true"] {
   background-color: var(--navds-toggle-group-color-background-pressed);
   color: var(--navds-toggle-group-color-text-pressed);
 }
