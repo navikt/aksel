@@ -49,7 +49,7 @@ export interface SearchProps
   onClear?: (e: SearchClearEvent) => void;
   /**
    * aria-label on clear button
-   * @default "Slett tekst i felt"
+   * @default "Tøm"
    */
   clearButtonLabel?: string;
   /**
