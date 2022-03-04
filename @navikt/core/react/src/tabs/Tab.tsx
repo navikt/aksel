@@ -18,6 +18,10 @@ export interface TriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
    * @default false
    */
   vertical?: boolean;
+  /**
+   * Disables this trigger
+   */
+  disabled?: boolean;
 }
 
 export type TriggerType = React.ForwardRefExoticComponent<

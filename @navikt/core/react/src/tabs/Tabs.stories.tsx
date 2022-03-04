@@ -182,6 +182,23 @@ export const All = () => {
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs>
+      <h2>Disabled</h2>
+      <Tabs defaultValue="test2">
+        <Tabs.List>
+          <Tabs.Trigger value="test1">
+            <Cup />
+            Skap
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test2" disabled>
+            <Dishwasher />
+            Oppvaskmaskin
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test3">
+            <Freezer />
+            Fryser
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>
     </div>
   );
 };

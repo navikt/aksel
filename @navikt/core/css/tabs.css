@@ -65,3 +65,8 @@
 .navds-tabs__tabpanel:focus {
   outline: none;
 }
+
+.navds-tabs__trigger:disabled {
+  opacity: 0.3;
+  box-shadow: inset 0 -1px 0 0 var(--navds-global-color-gray-300);
+}
