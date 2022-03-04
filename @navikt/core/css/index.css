@@ -23,6 +23,7 @@
 @import "speech-bubble.css";
 @import "step-indicator.css";
 @import "table.css";
+@import "tabs.css";
 
 /* Navno spesific packages */
 @import "page-header.css";

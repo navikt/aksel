@@ -13,6 +13,11 @@ export interface TriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
    * Value for state-handling
    */
   value: string;
+  /**
+   * Vertically stacks content in trigger
+   * @default false
+   */
+  vertical?: boolean;
 }
 
 export type TriggerType = React.ForwardRefExoticComponent<
@@ -20,14 +25,22 @@ export type TriggerType = React.ForwardRefExoticComponent<
 >;
 
 const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(
-  ({ className, children, ...rest }, ref) => {
+  ({ className, children, vertical, ...rest }, ref) => {
     const context = useContext(TabsContext);
 
     return (
       <RadixTabs.Trigger
         {...rest}
         ref={ref}
-        className={cl("navds-tabs__trigger", className)}
+        className={cl(
+          "navds-tabs__trigger",
+          `navds-tabs__trigger--${context?.size ?? "medium"}`,
+          className,
+          {
+            "navds-tabs__trigger--vertical": vertical,
+            "navds-tabs__trigger--icon-only": context?.iconOnly,
+          }
+        )}
       >
         <Label
           as="span"
