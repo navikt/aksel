@@ -19,7 +19,15 @@ export const All = () => {
       />
 
       <h2>Inverted</h2>
-      <div style={{ background: "black", padding: 16 }}>
+      <div
+        style={{
+          background: "var(--navds-global-color-gray-900)",
+          padding: 16,
+          display: "flex",
+          flexDirection: "column",
+          gap: 8,
+        }}
+      >
         <SuggestField
           inverted
           label="Søk alle sider om X og Y"
