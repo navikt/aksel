@@ -5,6 +5,11 @@
   );
 }
 
+.navds-search {
+  display: flex;
+  flex-direction: column;
+}
+
 .navds-search__wrapper-inner {
   position: relative;
 }
