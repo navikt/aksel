@@ -24,7 +24,7 @@ export type SearchClearEvent =
 export interface SearchProps
   extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Search label
    * @info Will be hidden by default, is required for accessibility reasons.
@@ -57,6 +57,11 @@ export interface SearchProps
    * @default true
    */
   clearButton?: boolean;
+  /**
+   * Changes button-variant
+   * @default "tertiary"
+   */
+  variant?: "tertiary" | "primary";
 }
 
 interface SearchComponent
@@ -70,6 +75,7 @@ export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
   onSearch: () => void;
+  variant?: "tertiary" | "primary";
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -93,6 +99,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     clearButton = true,
     children,
     onSearch,
+    variant = "tertiary",
     ...rest
   } = props;
 
@@ -139,11 +146,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   useEffect(() => {
     value !== undefined && setControlledValue(value);
   }, [value]);
-
-  if (!children) {
-    console.error("<Search/> is required to have a <Search.Button/> child");
-    return null;
-  }
 
   return (
     <form
@@ -218,9 +220,10 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             size,
             disabled: inputProps.disabled,
             onSearch: () => onSearch?.(controlledValue),
+            variant,
           }}
         >
-          {children}
+          {children ? children : <SearchButton />}
         </SearchContext.Provider>
       </div>
     </form>

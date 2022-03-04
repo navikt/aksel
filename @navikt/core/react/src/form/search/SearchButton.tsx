@@ -5,16 +5,11 @@ import { Button, ButtonProps } from "../..";
 import { SearchContext } from "./Search";
 
 export interface SearchButtonProps
-  extends Omit<ButtonProps, "size" | "children"> {
+  extends Omit<ButtonProps, "size" | "children" | "variant"> {
   /**
    * Text set before <Search/> icon
    */
   children?: React.ReactNode;
-  /**
-   * Changes button-variant
-   * @default "tertiary"
-   */
-  variant?: "tertiary" | "primary";
 }
 
 export type SearchButtonType = React.ForwardRefExoticComponent<
@@ -22,10 +17,7 @@ export type SearchButtonType = React.ForwardRefExoticComponent<
 >;
 
 const SearchButton: SearchButtonType = forwardRef(
-  (
-    { className, children, variant = "tertiary", disabled, onClick, ...rest },
-    ref
-  ) => {
+  ({ className, children, disabled, onClick, ...rest }, ref) => {
     const context = useContext(SearchContext);
 
     if (context === null) {
@@ -33,7 +25,7 @@ const SearchButton: SearchButtonType = forwardRef(
       return null;
     }
 
-    const { size, onSearch } = context;
+    const { size, onSearch, variant } = context;
 
     return (
       <Button
@@ -41,7 +33,7 @@ const SearchButton: SearchButtonType = forwardRef(
         {...rest}
         ref={ref}
         size={size}
-        variant={variant as any}
+        variant={variant}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
         onClick={(e) => {

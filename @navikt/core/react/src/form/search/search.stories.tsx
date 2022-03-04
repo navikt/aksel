@@ -13,13 +13,16 @@ export const All = () => {
     <div style={{ maxWidth: 300 }}>
       <h1>Search</h1>
       <div>
-        <Search label="Søk alle sider om X og Y" onSearch={console.log}>
-          <Search.Button />
-        </Search>
+        <Search
+          label="Søk alle sider om X og Y"
+          onSearch={console.log}
+        ></Search>
         <br />
-        <Search label="Søk alle sider om X og Y" onSearch={console.log}>
-          <Search.Button variant="primary" />
-        </Search>
+        <Search
+          label="Søk alle sider om X og Y"
+          onSearch={console.log}
+          variant="primary"
+        ></Search>
       </div>
 
       <h2>Search small</h2>
@@ -36,16 +39,21 @@ export const All = () => {
         description="Beskrivelse av søket"
         size="small"
         hideLabel
+        variant="primary"
       >
-        <Search.Button variant="primary" />
+        <Search.Button />
       </Search>
 
       <h2>Med knappe-tekst</h2>
       <Search label="Søk alle sider om X og Y" hideLabel={false}>
         <Search.Button>Søk</Search.Button>
       </Search>
-      <Search label="Søk alle sider om X og Y" hideLabel={false}>
-        <Search.Button variant="primary">Søk</Search.Button>
+      <Search
+        label="Søk alle sider om X og Y"
+        hideLabel={false}
+        variant="primary"
+      >
+        <Search.Button>Søk</Search.Button>
       </Search>
       <h2>Hidelabel false</h2>
       <Search label="Søk alle sider om X og Y" hideLabel={false}>
