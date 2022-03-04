@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 export const UUDemo = () => (
-  <Tabs defaultValue="test1">
+  <Tabs defaultValue="test1" autoSwitch>
     <Tabs.List>
       <Tabs.Trigger value="test1">
         <Cup />
