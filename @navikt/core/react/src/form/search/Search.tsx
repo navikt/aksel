@@ -74,7 +74,6 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  onSearch: () => void;
   variant?: "tertiary" | "primary";
 }
 
@@ -222,7 +221,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           value={{
             size,
             disabled: inputProps.disabled,
-            onSearch: () => onSearch?.(controlledValue),
             variant,
           }}
         >
