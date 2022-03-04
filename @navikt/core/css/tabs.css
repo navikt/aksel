@@ -25,7 +25,7 @@
 .navds-tabs__trigger:focus {
   outline: none;
   box-shadow: inset var(--navds-shadow-focus);
-  color: var(--navds-semantic-color-text-muted);
+  color: var(--navds-semantic-color-text);
 }
 
 .navds-tabs__trigger[aria-selected="true"]:focus {
