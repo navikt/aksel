@@ -1,4 +1,4 @@
-import { Close } from "@navikt/ds-icons";
+import { Close, Search } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, {
   forwardRef,
@@ -163,6 +163,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
           </BodyShort>
         )}
         <div className="navds-suggest-field__wrapper">
+          <Search aria-hidden className="navds-suggest-field__icon" />
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
