@@ -1,6 +1,6 @@
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
-import React from "react";
+import React, { useState } from "react";
 import { Tabs } from ".";
 
 export default {
@@ -8,19 +8,45 @@ export default {
   component: Tabs,
 } as Meta;
 
-/* export const UUDemo = () => {
-  const [activeValue, setActiveValue] = useState("ulest");
-  return (
-    <ToggleGroup value={activeValue} onChange={setActiveValue}>
-      <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">Sendte</ToggleGroup.Item>
-    </ToggleGroup>
-  );
-}; */
+export const UUDemo = () => (
+  <Tabs defaultValue="test1">
+    <Tabs.List>
+      <Tabs.Trigger value="test1">
+        <Cup />
+        Skap
+      </Tabs.Trigger>
+      <Tabs.Trigger value="test2">
+        <Dishwasher />
+        Oppvaskmaskin
+      </Tabs.Trigger>
+      <Tabs.Trigger value="test3">
+        <Freezer />
+        Fryser
+      </Tabs.Trigger>
+    </Tabs.List>
+    <Tabs.Panel
+      value="test1"
+      style={{ background: "var(--navds-global-color-gray-50)", height: 300 }}
+    >
+      Innholdspanel for Skap-tab
+    </Tabs.Panel>
+    <Tabs.Panel
+      value="test2"
+      style={{ background: "var(--navds-global-color-green-50)", height: 300 }}
+    >
+      Innholdspanel for Oppvaskmaskin-tab
+    </Tabs.Panel>
+    <Tabs.Panel
+      value="test3"
+      style={{ background: "var(--navds-global-color-red-50)", height: 300 }}
+    >
+      Innholdspanel for Fryser-tab
+    </Tabs.Panel>
+  </Tabs>
+);
 
 export const All = () => {
-  /* const [activeValue, setActiveValue] = useState("first"); */
+  const [activeValue, setActiveValue] = useState("test1");
 
   return (
     <div>
@@ -41,6 +67,42 @@ export const All = () => {
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs>
+      <h2>AutoSwitch</h2>
+      <Tabs defaultValue="test2" autoSwitch>
+        <Tabs.List>
+          <Tabs.Trigger value="test1">
+            <Cup />
+            Skap
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test2">
+            <Dishwasher />
+            Oppvaskmaskin
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test3">
+            <Freezer />
+            Fryser
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>
+      <h2>Controlled</h2>
+
+      <Tabs value={activeValue} onChange={setActiveValue}>
+        <Tabs.List>
+          <Tabs.Trigger value="test1">
+            <Cup />
+            Skap
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test2">
+            <Dishwasher />
+            Oppvaskmaskin
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test3">
+            <Freezer />
+            Fryser
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>
+
       <h2>Tabs vertical</h2>
       <Tabs defaultValue="test2">
         <Tabs.List>
