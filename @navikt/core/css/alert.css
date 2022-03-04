@@ -19,9 +19,7 @@
   --navds-alert-color-error-icon: var(
     --navds-semantic-color-feedback-danger-icon
   );
-  --navds-alert-color-warning-icon: var(
-    --navds-semantic-color-feedback-warning-icon
-  );
+  --navds-alert-color-warning-icon: var(--navds-global-color-orange-600);
   --navds-alert-color-info-icon: var(--navds-semantic-color-feedback-info-icon);
   --navds-alert-color-success-icon: var(
     --navds-semantic-color-feedback-success-icon
