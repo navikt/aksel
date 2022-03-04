@@ -114,7 +114,7 @@
   color: var(--navds-global-color-gray-900);
 }
 
-.navds-suggest-field__button-clear:focus {
+.navds-suggest-field--inverted .navds-suggest-field__button-clear:focus {
   box-shadow: var(--navds-shadow-focus-inverted),
     inset 0 0 0 1px var(--navds-global-color-gray-900);
   outline: none;
