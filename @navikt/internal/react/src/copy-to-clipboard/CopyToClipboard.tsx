@@ -83,7 +83,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           arrow={false}
           className="navdsi-copy-to-clipboard__popover"
         >
-          <BodyShort size={size} as="span">
+          <BodyShort size={size === "medium" ? size : "small"} as="span">
             {popoverText}
           </BodyShort>
         </Popover>
