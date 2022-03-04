@@ -55,6 +55,10 @@ export interface SuggestFieldProps
    * @default true
    */
   clearButton?: boolean;
+  /**
+   * Inverts colors
+   */
+  inverted?: boolean;
 }
 
 const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
@@ -75,6 +79,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
       clearButton = true,
       children,
       onSearch,
+      inverted,
       ...rest
     } = props;
 
@@ -132,6 +137,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
           `navds-form-field--${size}`,
           "navds-suggest-field",
           {
+            "navds-suggest-field--inverted": inverted,
             "navds-suggest-field--disabled": !!inputProps.disabled,
           }
         )}
@@ -139,6 +145,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
           e.preventDefault();
           onSearch?.(controlledValue);
         }}
+        data-active={!!controlledValue}
       >
         <Label
           htmlFor={inputProps.id}

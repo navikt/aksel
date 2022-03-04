@@ -12,8 +12,21 @@ export const All = () => {
   return (
     <div style={{ maxWidth: 300 }}>
       <h1>SuggestField</h1>
-      <SuggestField label="Søk alle sider om X og Y" onSearch={console.log} />
+      <SuggestField
+        label="Søk alle sider om X og Y"
+        onSearch={console.log}
+        placeholder="Søk"
+      />
 
+      <h2>Inverted</h2>
+      <div style={{ background: "black", padding: 16 }}>
+        <SuggestField
+          inverted
+          label="Søk alle sider om X og Y"
+          placeholder="Søk"
+          onSearch={console.log}
+        />
+      </div>
       <h2>Small</h2>
       <SuggestField
         label="Søk alle sider om X og Y"
