@@ -68,6 +68,10 @@
 
 /* Inverted */
 
+.navds-suggest-field--inverted {
+  color: var(--navds-semantic-color-text-inverted);
+}
+
 .navds-suggest-field--inverted .navds-suggest-field__input {
   background-color: var(--navds-global-color-gray-900);
   border-color: var(--navds-global-color-gray-50);

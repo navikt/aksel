@@ -26,6 +26,14 @@ export const All = () => {
           placeholder="Søk"
           onSearch={console.log}
         />
+        <SuggestField
+          inverted
+          label="Søk alle sider om X og Y"
+          description="Non incididunt"
+          placeholder="Søk"
+          onSearch={console.log}
+          hideLabel={false}
+        />
       </div>
       <h2>Small</h2>
       <SuggestField
