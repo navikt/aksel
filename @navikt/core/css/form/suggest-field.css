@@ -55,7 +55,7 @@
 
 .navds-suggest-field__icon {
   position: absolute;
-  left: 0.75rem;
+  left: var(--navds-spacing-3);
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.25rem;
@@ -63,7 +63,7 @@
 
 .navds-form-field--small .navds-suggest-field__icon {
   font-size: 1rem;
-  left: 0.5rem;
+  left: var(--navds-spacing-2);
 }
 
 /* Inverted */
