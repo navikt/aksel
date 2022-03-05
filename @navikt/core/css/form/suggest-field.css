@@ -67,7 +67,6 @@
 }
 
 /* Inverted */
-
 .navds-suggest-field--inverted {
   color: var(--navds-semantic-color-text-inverted);
 }
@@ -89,6 +88,7 @@
 .navds-suggest-field--inverted[data-active="true"] .navds-suggest-field__input {
   background-color: white;
   color: var(--navds-global-color-gray-900);
+  border-color: var(--navds-semantic-color-border);
 }
 
 .navds-suggest-field--inverted[data-active="true"]
