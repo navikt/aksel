@@ -40,7 +40,7 @@ export interface SearchProps
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for <Search.Button/> click with current input-value
+   * Callback for <Search.Button/> click or onSubmit in form
    */
   onSearch?: (value: string | number | readonly string[]) => void;
   /**
@@ -74,7 +74,6 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  onSearch: () => void;
   variant?: "tertiary" | "primary";
 }
 
@@ -160,7 +159,10 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           "navds-search--disabled": !!inputProps.disabled,
         }
       )}
-      onSubmit={(e) => e.preventDefault()}
+      onSubmit={(e) => {
+        e.preventDefault();
+        onSearch?.(controlledValue);
+      }}
     >
       <Label
         htmlFor={inputProps.id}
@@ -219,7 +221,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           value={{
             size,
             disabled: inputProps.disabled,
-            onSearch: () => onSearch?.(controlledValue),
             variant,
           }}
         >
