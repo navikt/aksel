@@ -4,45 +4,34 @@
   padding: 0;
   margin: 0;
   gap: 0.5rem;
+  list-style: none;
 }
 
 /* Step */
-.navds-stepper__step-wrapper {
-  padding: 0;
-  position: relative;
-  list-style: none;
-  min-height: 4rem;
-  height: 4rem;
-  flex: 1 1;
-}
 
 .navds-stepper__step {
+  position: relative;
+  min-height: 4rem;
+  height: 4rem;
   display: flex;
   padding: 0;
   background: none;
   border: none;
   appearance: none;
   width: 100%;
-  height: 100%;
   color: var(--navds-semantic-color-text);
   text-decoration: none;
   cursor: pointer;
   flex-shrink: 0;
 }
-
-.navds-stepper__step-wrapper:focus-within {
-  box-shadow: var(--navds-shadow-focus);
-}
-.navds-stepper__step-wrapper:last-child {
+.navds-stepper__step-wrapper:last-child > .navds-stepper__step {
   min-height: auto;
 }
-.navds-stepper__step-wrapper:last-child:focus-within {
-  box-shadow: none;
-}
-.navds-stepper__step-wrapper:last-child:focus-within > .navds-stepper__step {
-  box-shadow: var(--navds-shadow-focus);
-}
+
+/* Step focus */
+
 .navds-stepper__step:focus {
+  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
@@ -51,15 +40,11 @@
   text-align: start;
 }
 
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step
-  > .navds-stepper__step-label {
+.navds-stepper__step:hover > .navds-stepper__step-label {
   text-decoration: underline;
 }
 
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step:disabled
-  > .navds-stepper__step-label {
+.navds-stepper__step:disabled:hover > .navds-stepper__step-label {
   text-decoration: none;
 }
 
@@ -109,7 +94,7 @@
 
 /* Line */
 
-.navds-stepper__step-wrapper:not(:last-child)::after {
+.navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
   content: "";
   position: absolute;
   top: calc(0.5rem + 28px);
