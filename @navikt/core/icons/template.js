@@ -34,12 +34,12 @@ function defaultTemplate(
   return typeScriptTpl.ast`
   ${imports}
   ${interfaces}
-  function ${componentName}(${props}) {
+  const ${componentName} = React.forwardRef((${props}) => {
     const titleId = _titleId ?? (title ?
       "icon-title-" + v4() : undefined);
     return ${jsx};
-  }
-  ${exports}`;
+  });
+  export default ${componentName}`;
 }
 
 module.exports = defaultTemplate;
