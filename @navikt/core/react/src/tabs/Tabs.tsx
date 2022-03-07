@@ -37,6 +37,7 @@ export interface TabsProps
    * Makes icons larger for better visibility
    */
   iconOnly?: boolean;
+  fontWeight?: "semibold" | "regular";
 }
 
 interface TabsComponent
@@ -51,6 +52,7 @@ interface TabsComponent
 interface TabsContextProps {
   size: "medium" | "small";
   iconOnly?: boolean;
+  fontWeight: "semibold" | "regular";
 }
 
 export const TabsContext = createContext<TabsContextProps | null>(null);
@@ -64,6 +66,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       size = "medium",
       autoSwitch = false,
       iconOnly = false,
+      fontWeight = "semibold",
       ...rest
     },
     ref
@@ -80,6 +83,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
           value={{
             size,
             iconOnly,
+            fontWeight,
           }}
         >
           {children}

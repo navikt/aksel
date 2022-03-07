@@ -199,6 +199,23 @@ export const All = () => {
           </Tabs.Trigger>
         </Tabs.List>
       </Tabs>
+      <h2>Regular font (BodyShort)</h2>
+      <Tabs defaultValue="test2" fontWeight="regular">
+        <Tabs.List>
+          <Tabs.Trigger value="test1">
+            <Cup />
+            Skap
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test2">
+            <Dishwasher />
+            Oppvaskmaskin
+          </Tabs.Trigger>
+          <Tabs.Trigger value="test3">
+            <Freezer />
+            Fryser
+          </Tabs.Trigger>
+        </Tabs.List>
+      </Tabs>
     </div>
   );
 };
