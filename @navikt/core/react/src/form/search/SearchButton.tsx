@@ -25,21 +25,18 @@ const SearchButton: SearchButtonType = forwardRef(
       return null;
     }
 
-    const { size, onSearch, variant } = context;
+    const { size, variant } = context;
 
     return (
       <Button
-        type="button"
+        type="submit"
         {...rest}
         ref={ref}
         size={size}
         variant={variant}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
-        onClick={(e) => {
-          onSearch();
-          onClick?.(e);
-        }}
+        onClick={(e) => onClick?.(e)}
       >
         <Search aria-hidden />
         {children ? children : <span className="navds-sr-only">Søk</span>}
