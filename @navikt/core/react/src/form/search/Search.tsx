@@ -75,6 +75,7 @@ export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
   variant?: "tertiary" | "primary";
+  onSearch?: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -104,7 +105,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
 
   const searchRef = useRef<HTMLInputElement | null>(null);
   const mergedRef = mergeRefs([searchRef, ref]);
-  const [wrapperRef, setWrapperRef] = useState<HTMLFormElement | null>(null);
+  const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
   const [controlledValue, setControlledValue] = useState(value ?? "");
 
@@ -147,8 +148,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   }, [value]);
 
   return (
-    <form
-      role="search"
+    <div
       ref={setWrapperRef}
       className={cl(
         className,
@@ -159,10 +159,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           "navds-search--disabled": !!inputProps.disabled,
         }
       )}
-      onSubmit={(e) => {
-        e.preventDefault();
-        onSearch?.(controlledValue);
-      }}
     >
       <Label
         htmlFor={inputProps.id}
@@ -222,12 +218,13 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             size,
             disabled: inputProps.disabled,
             variant,
+            onSearch: () => onSearch?.(controlledValue),
           }}
         >
           {children ? children : <SearchButton />}
         </SearchContext.Provider>
       </div>
-    </form>
+    </div>
   );
 }) as SearchComponent;
 
