@@ -12,11 +12,7 @@ export const All = () => {
   return (
     <div style={{ maxWidth: 300 }}>
       <h1>SuggestField</h1>
-      <SuggestField
-        label="Søk alle sider om X og Y"
-        onSearch={console.log}
-        placeholder="Søk"
-      />
+      <SuggestField label="Søk alle sider om X og Y" placeholder="Søk" />
 
       <h2>Inverted</h2>
       <div
@@ -32,30 +28,20 @@ export const All = () => {
           inverted
           label="Søk alle sider om X og Y"
           placeholder="Søk"
-          onSearch={console.log}
         />
         <SuggestField
           inverted
           label="Søk alle sider om X og Y"
           description="Non incididunt"
           placeholder="Søk"
-          onSearch={console.log}
           hideLabel={false}
         />
       </div>
       <h2>Small</h2>
-      <SuggestField
-        label="Søk alle sider om X og Y"
-        size="small"
-        onSearch={console.log}
-      />
+      <SuggestField label="Søk alle sider om X og Y" size="small" />
 
       <h2>Hidelabel false</h2>
-      <SuggestField
-        label="Søk alle sider om X og Y"
-        onSearch={console.log}
-        hideLabel={false}
-      />
+      <SuggestField label="Søk alle sider om X og Y" hideLabel={false} />
       <h2>Controlled state </h2>
       <SuggestField
         value={value}
@@ -76,11 +62,5 @@ export const All = () => {
 };
 
 export const UUDemo = () => {
-  return (
-    <SuggestField
-      label="Søk alle sider om X og Y"
-      onSearch={console.log}
-      placeholder="Søk"
-    />
-  );
+  return <SuggestField label="Søk alle sider om X og Y" placeholder="Søk" />;
 };
