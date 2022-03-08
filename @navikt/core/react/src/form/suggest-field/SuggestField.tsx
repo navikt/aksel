@@ -38,10 +38,6 @@ export interface SuggestFieldProps
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for form onSubmit
-   */
-  onSearch?: (value: string | number | readonly string[]) => void;
-  /**
    * Callback for click on clear-button or Escape keydown
    */
   onClear?: (e: SearchClearEvent) => void;
@@ -78,14 +74,13 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
       onClear,
       clearButton = true,
       children,
-      onSearch,
       inverted,
       ...rest
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
     const mergedRef = mergeRefs([searchRef, ref]);
-    const [wrapperRef, setWrapperRef] = useState<HTMLFormElement | null>(null);
+    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const [controlledValue, setControlledValue] = useState(value ?? "");
 
@@ -128,8 +123,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
     }, [value]);
 
     return (
-      <form
-        role="search"
+      <div
         ref={setWrapperRef}
         className={cl(
           className,
@@ -141,10 +135,6 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
             "navds-suggest-field--disabled": !!inputProps.disabled,
           }
         )}
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSearch?.(controlledValue);
-        }}
         data-active={!!controlledValue}
       >
         <Label
@@ -200,7 +190,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
             </button>
           )}
         </div>
-      </form>
+      </div>
     );
   }
 );
