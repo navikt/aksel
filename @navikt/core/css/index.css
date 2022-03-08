@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import "baseline/baseline.css";
 @import "typography.css";
 @import "grid.css";
@@ -13,6 +14,7 @@
 @import "loader.css";
 @import "menu.css";
 @import "modal.css";
+@import "pagination.css";
 @import "popover.css";
 @import "tag.css";
 @import "toggle-group.css";
