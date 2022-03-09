@@ -12,7 +12,6 @@
 .navds-stepper__step {
   position: relative;
   min-height: 4rem;
-  height: 4rem;
   display: flex;
   padding: 0;
   background: none;
