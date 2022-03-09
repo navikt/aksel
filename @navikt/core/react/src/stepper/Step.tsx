@@ -4,15 +4,11 @@ import { StepperContext } from ".";
 import { Label, OverridableComponent } from "..";
 
 export interface StepperStepProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Text content under indicator
    */
   children: React.ReactNode;
-  /**
-   * Disables interaction with element
-   */
-  disabled?: boolean;
   /**
    * Handled by Stepper
    */
@@ -27,14 +23,7 @@ const StepComponent: OverridableComponent<
   HTMLButtonElement
 > = forwardRef(
   (
-    {
-      className,
-      children,
-      as: Component = "button",
-      disabled,
-      index = 0,
-      ...rest
-    },
+    { className, children, as: Component = "button", index = 0, ...rest },
     ref
   ) => {
     const context = useContext(StepperContext);
@@ -49,10 +38,8 @@ const StepComponent: OverridableComponent<
     return (
       <Component
         {...rest}
-        disabled={disabled}
         ref={ref}
         className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--disabled": disabled,
           "navds-stepper__step--active": context.activeStep === index,
         })}
         onClick={(e) => {

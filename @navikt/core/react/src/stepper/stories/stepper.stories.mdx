@@ -53,27 +53,6 @@ Bruk egendefinert overskrift med en id og send den til Stepper med `aria-labelle
   <Example aria-labelledby="stepper-heading" />
 </Canvas>
 
-## disabled
-
-`Step`-komponenter kan være `disabled` slik at brukeren ikke kan bruke steget.
-
-```jsx
-<Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
-  <Stepper.Step>Start</Stepper.Step>
-  <Stepper.Step>Sunt deserunt qui sit sunt culpa nisi</Stepper.Step>
-  <Stepper.Step disabled>
-    Nulla nisi pariatur nulla cupidatat elit.
-  </Stepper.Step>
-  <Stepper.Step>
-    Nulla laborum proident consequat laborum elit et dolore ut sunt.
-  </Stepper.Step>
-</Stepper>
-```
-
-<Canvas>
-  <Example disabled />
-</Canvas>
-
 ## Override tags
 
 `Stepper.Step` er implementert med Overridable-component noe som gjør at du kan endre taggen til
