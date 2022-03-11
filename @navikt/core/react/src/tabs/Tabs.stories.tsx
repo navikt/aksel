@@ -9,17 +9,17 @@ export default {
 } as Meta;
 
 export const UUDemo = () => (
-  <Tabs defaultValue="test1" autoSwitch>
+  <Tabs defaultValue="skap">
     <Tabs.List>
-      <Tabs.Trigger value="test1">
+      <Tabs.Trigger value="skap">
         <Cup aria-hidden />
         Skap
       </Tabs.Trigger>
-      <Tabs.Trigger value="test2">
+      <Tabs.Trigger value="oppvaskmaskin">
         <Dishwasher aria-hidden />
         Oppvaskmaskin
       </Tabs.Trigger>
-      <Tabs.Trigger value="test3">
+      <Tabs.Trigger value="fryser">
         <Freezer aria-hidden />
         Fryser
       </Tabs.Trigger>
