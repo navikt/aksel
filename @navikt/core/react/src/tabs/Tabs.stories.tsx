@@ -25,19 +25,19 @@ export const UUDemo = () => (
       </Tabs.Trigger>
     </Tabs.List>
     <Tabs.Panel
-      value="test1"
+      value="skap"
       style={{ background: "var(--navds-global-color-gray-50)", height: 300 }}
     >
       Innholdspanel for Skap-tab
     </Tabs.Panel>
     <Tabs.Panel
-      value="test2"
+      value="oppvaskmaskin"
       style={{ background: "var(--navds-global-color-green-50)", height: 300 }}
     >
       Innholdspanel for Oppvaskmaskin-tab
     </Tabs.Panel>
     <Tabs.Panel
-      value="test3"
+      value="fryser"
       style={{ background: "var(--navds-global-color-red-50)", height: 300 }}
     >
       Innholdspanel for Fryser-tab
