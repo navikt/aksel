@@ -12,15 +12,15 @@ export const UUDemo = () => (
   <Tabs defaultValue="test1" autoSwitch>
     <Tabs.List>
       <Tabs.Trigger value="test1">
-        <Cup />
+        <Cup aria-hidden />
         Skap
       </Tabs.Trigger>
       <Tabs.Trigger value="test2">
-        <Dishwasher />
+        <Dishwasher aria-hidden />
         Oppvaskmaskin
       </Tabs.Trigger>
       <Tabs.Trigger value="test3">
-        <Freezer />
+        <Freezer aria-hidden />
         Fryser
       </Tabs.Trigger>
     </Tabs.List>
