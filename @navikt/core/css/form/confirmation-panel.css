@@ -1,15 +1,21 @@
 :root {
   --navds-confirmation-panel-color-background: var(
-    --navds-semantic-color-feedback-warning-background
+    --navds-global-color-orange-50
   );
   --navds-confirmation-panel-color-background-checked: var(
-    --navds-semantic-color-feedback-success-background
+    --navds-global-color-green-50
+  );
+  --navds-confirmation-panel-color-border: var(
+    --navds-semantic-color-feedback-warning-border
   );
   --navds-confirmation-panel-color-border-checked: var(
-    --navds-semantic-color-feedback-success-background
+    --navds-semantic-color-feedback-success-border
+  );
+  --navds-confirmation-panel-color-border-error: var(
+    --navds-semantic-color-feedback-danger-background
   );
   --navds-confirmation-panel-color-background-error: var(
-    --navds-semantic-color-feedback-danger-background
+    --navds-global-color-red-50
   );
   --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
     --navds-global-color-green-700
@@ -34,6 +40,7 @@
   gap: var(--navds-spacing-4);
   padding: var(--navds-spacing-4);
   border-radius: 4px;
+  border: 1px solid var(--navds-confirmation-panel-color-border);
   background-color: var(--navds-confirmation-panel-color-background);
   transition: background-color linear 100ms;
 }

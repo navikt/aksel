@@ -5,6 +5,9 @@ import { Success } from "@navikt/ds-icons";
 export default {
   title: "ds-react/button",
   component: Button,
+  parameters: {
+    chromatic: { delay: 300 },
+  },
 };
 
 const Section = ({ children }) => (
@@ -74,6 +77,14 @@ export const All = () => {
       <Section>
         {variants.map((variant) => (
           <Button key={variant} variant={variant} size="small">
+            {varSwitch[variant]}
+          </Button>
+        ))}
+      </Section>
+      <h2>Xsmall</h2>
+      <Section>
+        {variants.map((variant) => (
+          <Button key={variant} variant={variant} size="xsmall">
             {varSwitch[variant]}
           </Button>
         ))}

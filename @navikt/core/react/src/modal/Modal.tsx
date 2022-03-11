@@ -33,6 +33,18 @@ export interface ModalProps {
    * @default true
    */
   closeButton?: boolean;
+  /**
+   * Callback for getting parent element modal will attach to
+   */
+  parentSelector?(): HTMLElement;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-modal"?: boolean;
+  /**
+   * Sets aria-label on modal
+   * @warning This should be set if not using 'aria-labelledby' or 'aria-describedby'
+   */
+  "aria-label"?: string;
 }
 
 interface ModalComponent
@@ -56,6 +68,10 @@ const Modal = forwardRef<ReactModal, ModalProps>(
       className,
       shouldCloseOnOverlayClick = true,
       closeButton = true,
+      "aria-describedby": ariaDescribedBy,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-modal": ariaModal,
+      "aria-label": contentLabel,
       ...rest
     },
     ref
@@ -81,6 +97,12 @@ const Modal = forwardRef<ReactModal, ModalProps>(
         overlayClassName="navds-modal__overlay"
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         onRequestClose={(e) => onModalCloseRequest(e)}
+        aria={{
+          describedby: ariaDescribedBy,
+          labelledby: ariaLabelledBy,
+          modal: ariaModal,
+        }}
+        contentLabel={contentLabel}
       >
         {children}
         {closeButton && (
