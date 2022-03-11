@@ -1,6 +1,7 @@
 .navds-suggest-field {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .navds-suggest-field__wrapper {
@@ -17,40 +18,6 @@
   padding: 0.15rem;
   padding-right: var(--navds-spacing-8);
   padding-left: var(--navds-spacing-8);
-}
-
-.navds-suggest-field__button-clear {
-  position: absolute;
-  right: 0;
-  border-radius: var(--navds-border-radius-medium);
-  color: var(--navds-semantic-color-text);
-  height: 48px;
-  width: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  padding: 0;
-}
-
-.navds-form-field--small .navds-suggest-field__button-clear {
-  height: 32px;
-  width: 32px;
-  font-size: 1rem;
-}
-
-.navds-suggest-field__button-clear:hover {
-  color: var(--navds-global-color-blue-500);
-}
-
-.navds-suggest-field__button-clear:focus {
-  box-shadow: var(--navds-shadow-focus), inset 0 0 0 1px white;
-  outline: none;
 }
 
 .navds-suggest-field__icon {
@@ -112,10 +79,4 @@
 
 .navds-suggest-field--inverted:focus-within .navds-suggest-field__icon {
   color: var(--navds-global-color-gray-900);
-}
-
-.navds-suggest-field--inverted .navds-suggest-field__button-clear:focus {
-  box-shadow: var(--navds-shadow-focus-inverted),
-    inset 0 0 0 1px var(--navds-global-color-gray-900);
-  outline: none;
 }

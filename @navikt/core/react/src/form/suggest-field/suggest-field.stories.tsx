@@ -10,7 +10,9 @@ export default {
 export const All = () => {
   const [value, setValue] = useState("");
   return (
-    <div style={{ maxWidth: 300 }}>
+    <div
+      style={{ display: "flex", alignItems: "center", flexDirection: "column" }}
+    >
       <h1>SuggestField</h1>
       <SuggestField label="Søk alle sider om X og Y" placeholder="Søk" />
 

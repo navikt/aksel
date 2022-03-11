@@ -181,7 +181,7 @@ const SuggestField = forwardRef<HTMLInputElement, SuggestFieldProps>(
             <button
               type="button"
               onClick={(e) => handleClear({ trigger: "Click", event: e })}
-              className="navds-suggest-field__button-clear"
+              className="navds-search__button-clear"
             >
               <span className="navds-sr-only">
                 {clearButtonLabel ? clearButtonLabel : "Tøm"}
