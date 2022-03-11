@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 export const UUDemo = () => (
-  <Tabs defaultValue="skap">
+  <Tabs defaultValue="skap" lang="no">
     <Tabs.List>
       <Tabs.Trigger value="skap">
         <Cup aria-hidden />
