@@ -10,20 +10,23 @@ export default {
 export const All = () => {
   const [value, setValue] = useState("");
   return (
-    <div style={{ maxWidth: 300 }}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        flexDirection: "column",
+        maxWidth: 400,
+      }}
+    >
       <h1>Search</h1>
-      <div>
-        <Search
-          label="Søk alle sider om X og Y"
-          onSearch={console.log}
-        ></Search>
-        <br />
-        <Search
-          label="Søk alle sider om X og Y"
-          onSearch={console.log}
-          variant="primary"
-        ></Search>
-      </div>
+
+      <Search label="Søk alle sider om X og Y" onSearch={console.log}></Search>
+      <h2>Primary search</h2>
+      <Search
+        label="Søk alle sider om X og Y"
+        onSearch={console.log}
+        variant="primary"
+      ></Search>
 
       <h2>Search small</h2>
       <Search
