@@ -44,7 +44,7 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           aria-expanded={open}
           title={title}
         >
-          <HelpTextIcon className="navds-help-text__icon" />
+          <HelpTextIcon className="navds-help-text__icon" aria-hidden/>
         </button>
         <Popover
           onClose={() => setOpen(false)}
