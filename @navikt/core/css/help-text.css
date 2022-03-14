@@ -1,22 +1,21 @@
 :root {
-  --navds-help-text-color-button-background: transparent;
-  --navds-help-text-color-icon: var(--navds-semantic-color-interaction-primary);
-  --navds-help-text-color-icon-hover: var(
+  --navds-help-text-color: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-hover: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-help-text-color-icon-background-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-icon-shadow-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-icon-focus: var(
+  --navds-help-text-color-focus: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-help-text-color-icon-background-focus: var(
+  --navds-help-text-color-background-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-help-text-color-icon-shadow-focus: var(--navds-semantic-color-focus);
+  --navds-help-text-color-background-focus: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-help-text-color-shadow-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-help-text-color-shadow-focus: var(--navds-semantic-color-focus);
   --navds-help-text-color-popover-background: var(
     --navds-semantic-color-feedback-info-background
   );
@@ -27,34 +26,30 @@
   padding: 0;
   border: 0;
   cursor: pointer;
-  background-color: var(--navds-help-text-color-button-background);
+  background-color: transparent;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--navds-help-text-color);
+  font-size: 1.5rem;
+}
+
+.navds-help-text__button:hover {
+  color: var(--navds-help-text-color-hover);
+  background: var(--navds-help-text-color-background-hover);
+  box-shadow: 0 0 0 2px var(--navds-help-text-color-shadow-hover);
 }
 
 .navds-help-text__button:focus {
   outline: none;
+  color: var(--navds-help-text-color-focus);
+  background: var(--navds-help-text-color-background-focus);
+  box-shadow: 0 0 0 3px var(--navds-help-text-color-shadow-focus);
 }
 
 .navds-help-text__icon {
   border-radius: 50%;
-  font-size: 1.5rem;
-  color: var(--navds-help-text-color-icon);
-}
-
-.navds-help-text__button:hover > .navds-help-text__icon {
-  color: var(--navds-help-text-color-icon-hover);
-  background: var(--navds-help-text-color-icon-background-hover);
-  box-shadow: 0 0 0 2px var(--navds-help-text-color-icon-shadow-hover);
-}
-
-.navds-help-text__button:focus > .navds-help-text__icon {
-  outline: none;
-  color: var(--navds-help-text-color-icon-focus);
-  background: var(--navds-help-text-color-icon-background-focus);
-  box-shadow: 0 0 0 3px var(--navds-help-text-color-icon-shadow-focus);
 }
 
 .navds-help-text__popover > .navds-popover__arrow::before {
