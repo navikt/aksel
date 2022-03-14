@@ -8,10 +8,12 @@
 .navds-search {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .navds-search__wrapper-inner {
   position: relative;
+  width: 100%;
 }
 
 .navds-search__wrapper {
