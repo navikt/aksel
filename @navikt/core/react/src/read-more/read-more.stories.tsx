@@ -1,4 +1,3 @@
-import { Close } from "@navikt/ds-icons";
 import React, { useState } from "react";
 import { ReadMore } from ".";
 
