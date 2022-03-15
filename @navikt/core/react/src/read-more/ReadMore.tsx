@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
-import { BodyLong, BodyShort } from "../typography";
+import { BodyLong } from "../typography";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -71,6 +71,7 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
             }
             onClick?.(e);
           }}
+          aria-expanded={isOpened}
           ref={ref}
         >
           <Expand className="navds-read-more__expand-icon" aria-hidden />
