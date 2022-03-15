@@ -1,2 +1,2 @@
 export { default as Tabs, TabsProps } from "./Tabs";
-export { TriggerProps } from "./Tab";
+export { TabProps } from "./Tab";

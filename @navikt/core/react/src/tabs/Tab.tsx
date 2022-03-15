@@ -4,7 +4,7 @@ import React, { forwardRef, useContext } from "react";
 import { Label, BodyShort } from "..";
 import { TabsContext } from "./Tabs";
 
-export interface TriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
   /**
    * Content
    */
@@ -14,17 +14,17 @@ export interface TriggerProps extends React.HTMLAttributes<HTMLButtonElement> {
    */
   value: string;
   /**
-   * Vertically stacks content in trigger
+   * Vertically stacks content in tab
    * @default false
    */
   vertical?: boolean;
 }
 
-export type TriggerType = React.ForwardRefExoticComponent<
-  TriggerProps & React.RefAttributes<HTMLButtonElement>
+export type TabType = React.ForwardRefExoticComponent<
+  TabProps & React.RefAttributes<HTMLButtonElement>
 >;
 
-const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(
+const Tab = forwardRef<HTMLButtonElement, TabProps>(
   ({ className, children, vertical, ...rest }, ref) => {
     const context = useContext(TabsContext);
 
@@ -35,25 +35,21 @@ const Trigger = forwardRef<HTMLButtonElement, TriggerProps>(
         {...rest}
         ref={ref}
         className={cl(
-          "navds-tabs__trigger",
-          `navds-tabs__trigger--${context?.size ?? "medium"}`,
+          "navds-tabs__tab",
+          `navds-tabs__tab--${context?.size ?? "medium"}`,
           className,
           {
-            "navds-tabs__trigger--vertical": vertical,
-            "navds-tabs__trigger--icon-only": context?.iconOnly,
+            "navds-tabs__tab--vertical": vertical,
+            "navds-tabs__tab--icon-only": context?.iconOnly,
           }
         )}
       >
-        <Typo
-          as="span"
-          className="navds-tabs__trigger-inner"
-          size={context?.size}
-        >
+        <Typo as="span" className="navds-tabs__tab-inner" size={context?.size}>
           {children}
         </Typo>
       </RadixTabs.Trigger>
     );
   }
-) as TriggerType;
+) as TabType;
 
-export default Trigger;
+export default Tab;

@@ -1,7 +1,7 @@
 import cl from "classnames";
 import React, { createContext, forwardRef, HTMLAttributes } from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
-import Trigger, { TriggerType } from "./Tab";
+import Tab, { TabType } from "./Tab";
 import List, { ListType } from "./TabList";
 import Panel, { PanelType } from "./TabPanel";
 
@@ -44,7 +44,7 @@ interface TabsComponent
   extends React.ForwardRefExoticComponent<
     TabsProps & React.RefAttributes<HTMLDivElement>
   > {
-  Trigger: TriggerType;
+  Tab: TabType;
   List: ListType;
   Panel: PanelType;
 }
@@ -93,7 +93,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   }
 ) as TabsComponent;
 
-Tabs.Trigger = Trigger;
+Tabs.Tab = Tab;
 Tabs.List = List;
 Tabs.Panel = Panel;
 

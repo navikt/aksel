@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Trigger elements
+   * Tab elements
    */
   children: React.ReactNode;
   /**
