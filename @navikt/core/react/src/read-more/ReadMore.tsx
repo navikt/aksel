@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
+import { BodyLong, BodyShort } from "../typography";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -55,9 +56,15 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       <>
         <button
           {...rest}
-          className={cl("navds-read-more", className, {
-            "navds-read-more--open": isOpened,
-          })}
+          className={cl(
+            "navds-read-more",
+            "navds-body-short",
+            "navds-body-short--small",
+            className,
+            {
+              "navds-read-more--open": isOpened,
+            }
+          )}
           onClick={(e) => {
             if (open === undefined) {
               setInternalOpen((isOpen) => !isOpen);
@@ -70,9 +77,12 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
-          <div className={cl("navds-read-more__content", className)}>
+          <BodyLong
+            className={cl("navds-read-more__content", className)}
+            size="small"
+          >
             {children}
-          </div>
+          </BodyLong>
         </CollapseComponent>
       </>
     );
