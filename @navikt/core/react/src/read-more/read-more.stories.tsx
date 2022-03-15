@@ -1,6 +1,6 @@
-import { Link } from "@navikt/ds-icons";
 import React, { useState } from "react";
 import { ReadMore } from ".";
+import { Link } from "..";
 
 export default {
   title: "ds-react/read-more",
@@ -24,7 +24,8 @@ export const All = () => {
         occaecat nisi qui nostrud sit consectetur consectetur officia nostrud
         ullamco. Est ex duis proident nostrud elit qui laborum anim minim eu
         eiusmod. Veniam in nostrud sunt tempor velit incididunt sint ex dolor
-        qui velit id eu. <Link>Deserunt magna sunt velit in</Link>. Est
+        qui velit id eu.{" "}
+        <Link href="example.com">Deserunt magna sunt velit in</Link>. Est
         exercitation id cillum qui do. Minim adipisicing nostrud commodo
         proident occaecat aliquip nulla anim proident reprehenderit. Magna ipsum
         officia veniam cupidatat duis veniam dolore reprehenderit mollit
