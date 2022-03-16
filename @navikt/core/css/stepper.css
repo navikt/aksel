@@ -98,7 +98,7 @@
   left: 13px;
   height: calc(100% - 28px - 8px);
   display: block;
-  border-left: 2px solid var(--navds-step-indicator-color-step-line);
+  border-left: 2px solid var(--navds-semantic-color-border-muted);
   border-radius: 4px;
   pointer-events: none;
 }
