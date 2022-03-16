@@ -15,6 +15,14 @@
   text-decoration: none;
 }
 
+.navds-read-more:focus {
+  outline: none;
+  color: var(--navds-link-color-text-focus);
+  text-decoration: none;
+  background-color: var(--navds-link-color-background-focus);
+  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
 .navds-read-more__expand-icon {
   font-size: 1.25rem;
 }
