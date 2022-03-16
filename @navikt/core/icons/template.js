@@ -35,7 +35,7 @@ function defaultTemplate(
   ${imports}
   ${interfaces}
   const ${componentName} = React.forwardRef((${props}) => {
-    let titleId = useId(_titleId);
+    let titleId: string | undefined = useId(_titleId);
     titleId = title ? titleId : undefined;
     return ${jsx};
   });
