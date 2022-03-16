@@ -1,7 +1,7 @@
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { Detail, useId } from "..";
+import { Detail } from "..";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -75,66 +75,56 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...rest
     },
     ref
-  ) => {
-    const tooltipId = useId();
-
-    return (
-      <TooltipPrimitive.Root
-        delayDuration={delay}
-        open={open}
-        defaultOpen={defaultOpen}
-        onOpenChange={onOpenChange}
+  ) => (
+    <TooltipPrimitive.Root
+      delayDuration={delay}
+      open={open}
+      defaultOpen={defaultOpen}
+      onOpenChange={onOpenChange}
+    >
+      <TooltipPrimitive.Trigger asChild>{children}</TooltipPrimitive.Trigger>
+      <TooltipPrimitive.Content
+        ref={ref}
+        {...rest}
+        sideOffset={offset}
+        side={side}
+        className={cl(
+          "navds-tooltip",
+          "navds-detail navds-detail--small",
+          className,
+          {
+            "navds-tooltip--inverted": inverted,
+          }
+        )}
       >
-        <TooltipPrimitive.Trigger
-          asChild
-          aria-describedby={id ?? `tooltip-${tooltipId}`}
-        >
-          {children}
-        </TooltipPrimitive.Trigger>
-        <TooltipPrimitive.Content
-          ref={ref}
-          {...rest}
-          sideOffset={offset}
-          side={side}
-          className={cl(
-            "navds-tooltip",
-            "navds-detail navds-detail--small",
-            className,
-            {
-              "navds-tooltip--inverted": inverted,
-            }
-          )}
-          id={id ?? `tooltip-${tooltipId}`}
-        >
-          {content}
-          {keys && (
-            <span>
-              {keys.map((key) => (
-                <Detail
-                  size="small"
-                  as="kbd"
-                  key={key}
-                  className={cl("navds-tooltip__key", {
-                    "navds-tooltip__key--inverted": inverted,
-                  })}
-                >
-                  {key}
-                </Detail>
-              ))}
-            </span>
-          )}
-          {arrow && (
-            <TooltipPrimitive.Arrow
-              offset={6}
-              width={8}
-              height={4}
-              className="navds-tooltip__arrow"
-            />
-          )}
-        </TooltipPrimitive.Content>
-      </TooltipPrimitive.Root>
-    );
-  }
+        {content}
+        {keys && (
+          <span>
+            {keys.map((key) => (
+              <Detail
+                size="small"
+                as="kbd"
+                key={key}
+                className={cl("navds-tooltip__key", {
+                  "navds-tooltip__key--inverted": inverted,
+                })}
+              >
+                {key}
+              </Detail>
+            ))}
+          </span>
+        )}
+        {arrow && (
+          <TooltipPrimitive.Arrow
+            offset={6}
+            width={8}
+            height={4}
+            className="navds-tooltip__arrow"
+          />
+        )}
+      </TooltipPrimitive.Content>
+    </TooltipPrimitive.Root>
+  )
 );
 
 export default Tooltip;
