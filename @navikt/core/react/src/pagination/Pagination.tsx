@@ -113,9 +113,12 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
           className
         )}
       >
-        {prevNextTexts && page !== 1 && (
+        {prevNextTexts && (
           <button
-            className="navds-pagination__prev-next"
+            className={cl("navds-pagination__prev-next", {
+              "navds-pagination--invisible": page === 1,
+            })}
+            disabled={page === 1}
             onClick={() => onPageChange(page - 1)}
           >
             <Back
@@ -128,10 +131,13 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
           </button>
         )}
         <ul className="navds-pagination__list">
-          {!prevNextTexts && page !== 1 && (
+          {!prevNextTexts && (
             <li>
               <button
-                className="navds-pagination__prev-next"
+                className={cl("navds-pagination__prev-next", {
+                  "navds-pagination--invisible": page === 1,
+                })}
+                disabled={page === 1}
                 onClick={() => onPageChange(page - 1)}
               >
                 <Back
@@ -163,10 +169,13 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               );
             }
           )}
-          {!prevNextTexts && page !== count && (
+          {!prevNextTexts && (
             <li>
               <button
-                className="navds-pagination__prev-next"
+                className={cl("navds-pagination__prev-next", {
+                  "navds-pagination--invisible": page === count,
+                })}
+                disabled={page === count}
                 onClick={() => onPageChange(page + 1)}
               >
                 <Next
@@ -177,9 +186,12 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
             </li>
           )}
         </ul>
-        {prevNextTexts && page !== count && (
+        {prevNextTexts && (
           <button
-            className="navds-pagination__prev-next"
+            className={cl("navds-pagination__prev-next", {
+              "navds-pagination--invisible": page === count,
+            })}
+            disabled={page === count}
             onClick={() => onPageChange(page + 1)}
           >
             <BodyShort size={size} className="navds-pagination__next-text">

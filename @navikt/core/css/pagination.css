@@ -116,3 +116,7 @@
 .navds-pagination__prev-text {
   padding-right: 0.75rem;
 }
+
+.navds-pagination--invisible {
+  visibility: hidden;
+}
