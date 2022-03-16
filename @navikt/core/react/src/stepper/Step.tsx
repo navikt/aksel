@@ -38,6 +38,7 @@ const StepComponent: OverridableComponent<
     return (
       <Component
         {...rest}
+        aria-current={Boolean(context.activeStep === index)}
         ref={ref}
         className={cl("navds-stepper__step", className, {
           "navds-stepper__step--active": context.activeStep === index,
