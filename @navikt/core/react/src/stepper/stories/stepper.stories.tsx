@@ -33,7 +33,7 @@ export const All = () => {
           <Stepper.Step>Saksopplysninger</Stepper.Step>
           <Stepper.Step>Søknadstekst</Stepper.Step>
           <Stepper.Step>Vedlegg</Stepper.Step>
-          <Stepper.Step>Oppsumering</Stepper.Step>
+          <Stepper.Step>Oppsummering</Stepper.Step>
           <Stepper.Step>Innsending</Stepper.Step>
         </Stepper>
       </div>

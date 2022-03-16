@@ -33,6 +33,11 @@
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
+.navds-stepper__step--active {
+  cursor: default;
+}
+
+/* Step label */
 
 .navds-stepper__step-label {
   color: var(--navds-semantic-color-interaction-primary);
@@ -41,6 +46,14 @@
 
 .navds-stepper__step:hover > .navds-stepper__step-label {
   text-decoration: underline;
+}
+
+.navds-stepper__step--active > .navds-stepper__step-label {
+  color: black;
+}
+
+.navds-stepper__step--active:hover > .navds-stepper__step-label {
+  text-decoration: none;
 }
 
 .navds-stepper__step-number {
@@ -71,7 +84,9 @@
   > .navds-stepper__step--active
   > .navds-stepper__step-number {
   color: var(--navds-semantic-color-text-inverted);
-  background-color: var(--navds-semantic-color-interaction-primary);
+  background-color: var(--navds-semantic-color-interaction-primary-selected);
+  box-shadow: inset 0 0 0 2px
+    var(--navds-semantic-color-interaction-primary-selected);
 }
 
 /* Line */
