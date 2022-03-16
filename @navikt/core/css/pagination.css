@@ -28,6 +28,10 @@
   gap: var(--navds-spacing-3);
 }
 
+.navds-pagination--large .navds-pagination__list {
+  gap: var(--navds-spacing-1);
+}
+
 .navds-pagination__ellipsis {
   display: flex;
   align-items: center;
@@ -38,6 +42,10 @@
 
 .navds-pagination--small .navds-pagination__ellipsis {
   width: var(--navds-spacing-6);
+}
+
+.navds-pagination--large .navds-pagination__ellipsis {
+  width: var(--navds-spacing-8);
 }
 
 .navds-pagination__item {
@@ -53,6 +61,14 @@
 
 .navds-pagination--small .navds-pagination__item {
   padding: 2px var(--navds-spacing-2);
+}
+
+.navds-pagination--large .navds-pagination__item {
+  padding: var(--navds-spacing-3);
+  min-width: 48px;
+  min-height: 48px;
+  justify-content: center;
+  border-radius: 4px;
 }
 
 .navds-pagination__item:hover {
@@ -88,6 +104,13 @@
   align-items: center;
   gap: var(--navds-spacing-1);
   border-radius: 2px;
+}
+
+.navds-pagination--large .navds-pagination__prev-next {
+  min-width: 48px;
+  min-height: 48px;
+  justify-content: center;
+  border-radius: 4px;
 }
 
 .navds-pagination__prev-next:focus {

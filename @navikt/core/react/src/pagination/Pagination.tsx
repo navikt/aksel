@@ -30,7 +30,7 @@ interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    * Changes padding, height and font-size
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "large" | "medium" | "small";
   /**
    * Display text alongside "previous" and "next" icons
    * @default false
@@ -125,7 +125,10 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               className="navds-pagination__prev-next-icon"
               role="presentation"
             />
-            <BodyShort size={size} className="navds-pagination__prev-text">
+            <BodyShort
+              size={size === "small" ? "small" : "medium"}
+              className="navds-pagination__prev-text"
+            >
               Forrige
             </BodyShort>
           </button>
@@ -152,12 +155,14 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               const n = Number(step);
               return isNaN(n) ? (
                 <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
-                  <BodyShort size={size}>...</BodyShort>
+                  <BodyShort size={size === "small" ? "small" : "medium"}>
+                    ...
+                  </BodyShort>
                 </li>
               ) : (
                 <li key={step}>
                   <BodyShort
-                    size={size}
+                    size={size === "small" ? "small" : "medium"}
                     as="button"
                     className="navds-pagination__item"
                     onClick={() => onPageChange(n)}
@@ -194,7 +199,10 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
             disabled={page === count}
             onClick={() => onPageChange(page + 1)}
           >
-            <BodyShort size={size} className="navds-pagination__next-text">
+            <BodyShort
+              size={size === "small" ? "small" : "medium"}
+              className="navds-pagination__next-text"
+            >
               Neste
             </BodyShort>
             <Next
