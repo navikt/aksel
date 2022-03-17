@@ -48,7 +48,7 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
           `navds-tabs__tab-icon--${iconPosition}`,
           className,
           {
-            "navds-tabs__tab--icon-only": context?.iconOnly,
+            "navds-tabs__tab--icon-only": icon && !label,
           }
         )}
       >

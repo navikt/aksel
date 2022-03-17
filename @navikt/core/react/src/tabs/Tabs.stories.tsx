@@ -53,6 +53,7 @@ export const All = () => {
           <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
         </Tabs.List>
       </Tabs>
+
       <h2>selectionFollowsFocus</h2>
       <Tabs defaultValue="test2" selectionFollowsFocus>
         <Tabs.List>
@@ -61,8 +62,8 @@ export const All = () => {
           <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
         </Tabs.List>
       </Tabs>
-      <h2>Controlled</h2>
 
+      <h2>Controlled</h2>
       <Tabs value={activeValue} onChange={setActiveValue}>
         <Tabs.List>
           <Tabs.List>
@@ -100,6 +101,7 @@ export const All = () => {
           />
         </Tabs.List>
       </Tabs>
+
       <h2>Tabs small</h2>
       <Tabs defaultValue="test2" size="small">
         <Tabs.List>
@@ -132,6 +134,7 @@ export const All = () => {
           />
         </Tabs.List>
       </Tabs>
+
       <h2>Tabs Ikon-only</h2>
       <Tabs defaultValue="test2">
         <Tabs.List>

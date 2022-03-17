@@ -33,10 +33,6 @@
   color: var(--navds-semantic-color-text);
 }
 
-.navds-tabs__tab[aria-selected="true"]:focus {
-  color: var(--navds-global-color-blue-500);
-}
-
 .navds-tabs__tab-inner {
   display: flex;
   align-items: center;

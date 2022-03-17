@@ -33,10 +33,6 @@ export interface TabsProps
    * @default false
    */
   selectionFollowsFocus?: boolean;
-  /**
-   * Makes icons larger for better visibility
-   */
-  iconOnly?: boolean;
 }
 
 interface TabsComponent
@@ -50,7 +46,6 @@ interface TabsComponent
 
 interface TabsContextProps {
   size: "medium" | "small";
-  iconOnly?: boolean;
 }
 
 export const TabsContext = createContext<TabsContextProps | null>(null);
@@ -63,7 +58,6 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange,
       size = "medium",
       selectionFollowsFocus = false,
-      iconOnly = false,
       ...rest
     },
     ref
@@ -79,7 +73,6 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         <TabsContext.Provider
           value={{
             size,
-            iconOnly,
           }}
         >
           {children}
