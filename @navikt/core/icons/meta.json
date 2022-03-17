@@ -43,14 +43,14 @@
   },
   {
     "name": "Attachment",
-    "description": "",
-    "created_at": "2020-07-01T10:37:43.111Z",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.129Z",
     "pageName": "Attachment"
   },
   {
     "name": "AttachmentFilled",
-    "description": "",
-    "created_at": "2021-01-11T13:48:27.872Z",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.124Z",
     "pageName": "Attachment"
   },
   {
@@ -708,15 +708,15 @@
     "pageName": "Communication"
   },
   {
-    "name": "EmailOpen",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.632Z",
+    "name": "EmailOpened",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.018Z",
     "pageName": "Communication"
   },
   {
-    "name": "EmailOpenFilled",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.419Z",
+    "name": "EmailOpenedFilled",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.024Z",
     "pageName": "Communication"
   },
   {
@@ -2397,6 +2397,18 @@
     "name": "Up",
     "description": "Norsk--Til toppen, Alt English-- Scroll up",
     "created_at": "2020-07-01T10:37:42.692Z",
+    "pageName": "Arrow"
+  },
+  {
+    "name": "UpDown",
+    "description": "",
+    "created_at": "2022-03-16T13:47:53.004Z",
+    "pageName": "Arrow"
+  },
+  {
+    "name": "UpDownFilled",
+    "description": "",
+    "created_at": "2022-03-16T13:47:52.999Z",
     "pageName": "Arrow"
   },
   {
