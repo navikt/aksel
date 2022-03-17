@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 0;
   margin: 0;
-  gap: 0.5rem;
+  gap: var(--navds-spacing-2);
   list-style: none;
 }
 
