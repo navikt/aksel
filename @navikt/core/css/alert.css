@@ -83,9 +83,7 @@
 
 .navds-alert--warning > .navds-alert__icon {
   color: var(--navds-alert-color-warning-icon);
-  box-shadow: inset 10px 10px 0 0 var(--navds-alert-color-warning-background),
-    inset 10px -4px 0 0 var(--navds-alert-color-warning-background),
-    inset 14px 0 0 0 var(--navds-alert-color-icon-background);
+background: linear-gradient(white, white) center / 16% 60% no-repeat;
 }
 
 .navds-alert--info {
