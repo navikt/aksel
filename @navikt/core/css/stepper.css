@@ -88,7 +88,6 @@
 }
 
 /* Line */
-
 .navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
   content: "";
   position: absolute;
