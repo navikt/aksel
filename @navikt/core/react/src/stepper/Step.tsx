@@ -48,7 +48,7 @@ const StepComponent: OverridableComponent<
           rest?.onClick?.(e);
         }}
       >
-        <Label className="navds-stepper__step-number">
+        <Label className="navds-stepper__step-number" as="span">
           {context.activeStep === index ? ` ${index + 1}` : index + 1}
         </Label>
         <Label className="navds-stepper__step-label">{children}</Label>
