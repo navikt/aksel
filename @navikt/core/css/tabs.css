@@ -43,7 +43,7 @@
   gap: var(--navds-spacing-1);
 }
 
-.navds-tabs__tab--vertical > .navds-tabs__tab-inner {
+.navds-tabs__tab-icon--top > .navds-tabs__tab-inner {
   flex-direction: column;
   gap: 0;
 }
@@ -53,14 +53,14 @@
   padding: 0.375rem 1rem;
 }
 
-.navds-tabs__tab--vertical,
-.navds-tabs__tab--small.navds-tabs__tab--vertical {
+.navds-tabs__tab-icon--top,
+.navds-tabs__tab--small.navds-tabs__tab-icon--top {
   padding: 0.25rem 1rem;
 }
 
 .navds-tabs__tab svg,
 .navds-tabs__tab--small.navds-tabs__tab--icon-only svg,
-.navds-tabs__tab--small.navds-tabs__tab--vertical svg {
+.navds-tabs__tab--small.navds-tabs__tab-icon--top svg {
   font-size: 1.25rem;
 }
 
@@ -69,7 +69,7 @@
 }
 
 .navds-tabs__tab--icon-only svg,
-.navds-tabs__tab--vertical svg {
+.navds-tabs__tab-icon--top svg {
   font-size: 1.5rem;
 }
 

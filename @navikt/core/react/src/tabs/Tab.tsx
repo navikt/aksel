@@ -4,20 +4,25 @@ import React, { forwardRef, useContext } from "react";
 import { Label } from "..";
 import { TabsContext } from "./Tabs";
 
-export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
+export interface TabProps
+  extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
   /**
    * Content
    */
-  children: React.ReactNode;
+  label?: React.ReactNode;
+  /**
+   * Icon
+   */
+  icon?: React.ReactNode;
   /**
    * Value for state-handling
    */
   value: string;
   /**
-   * Vertically stacks content in tab
-   * @default false
+   * Icon position
+   * @default "start"
    */
-  vertical?: boolean;
+  iconPosition?: "start" | "top";
 }
 
 export type TabType = React.ForwardRefExoticComponent<
@@ -25,8 +30,13 @@ export type TabType = React.ForwardRefExoticComponent<
 >;
 
 const Tab = forwardRef<HTMLButtonElement, TabProps>(
-  ({ className, children, vertical, ...rest }, ref) => {
+  ({ className, label, icon, iconPosition, ...rest }, ref) => {
     const context = useContext(TabsContext);
+
+    if (!label && !icon) {
+      console.error("<Tabs.Tab/> needs label/icon");
+      return null;
+    }
 
     return (
       <RadixTabs.Trigger
@@ -35,15 +45,16 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
         className={cl(
           "navds-tabs__tab",
           `navds-tabs__tab--${context?.size ?? "medium"}`,
+          `navds-tabs__tab-icon--${iconPosition}`,
           className,
           {
-            "navds-tabs__tab--vertical": vertical,
             "navds-tabs__tab--icon-only": context?.iconOnly,
           }
         )}
       >
         <Label as="span" className="navds-tabs__tab-inner" size={context?.size}>
-          {children}
+          {icon}
+          {label}
         </Label>
       </RadixTabs.Trigger>
     );
