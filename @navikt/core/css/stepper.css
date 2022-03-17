@@ -96,6 +96,6 @@
   height: calc(100% - 28px - 8px);
   display: block;
   border-left: 2px solid var(--navds-semantic-color-border-muted);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   pointer-events: none;
 }
