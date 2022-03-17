@@ -33,6 +33,10 @@ export interface ModalProps {
    * @default true
    */
   closeButton?: boolean;
+  /**
+   * Callback for getting parent element modal will attach to
+   */
+  parentSelector?(): HTMLElement;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
   "aria-modal"?: boolean;
