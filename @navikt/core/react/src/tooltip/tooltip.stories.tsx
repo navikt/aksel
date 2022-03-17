@@ -29,6 +29,13 @@ export const Demo = () => {
       <Tooltip content="Controlled tooltip example" side="right">
         <Button>Tooltip</Button>
       </Tooltip>
+      <Tooltip
+        content="Controlled tooltip example"
+        side="bottom"
+        strategy="fixed"
+      >
+        <Button>Tooltip</Button>
+      </Tooltip>
     </div>
   );
 };

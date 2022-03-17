@@ -69,6 +69,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * List of Keyboard-keys for shortcuts
    */
   keys?: string[];
+  strategy?: "absolute" | "fixed";
 }
 
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
@@ -87,6 +88,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       inverted = false,
       keys,
+      strategy: _strategy = "absolute",
       ...rest
     },
     ref
@@ -103,7 +105,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
     } = useFloating({
       placement: side,
-
+      strategy: _strategy,
       middleware: [
         offset(10),
         shift(),
@@ -136,6 +138,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         })}
         <div
           ref={(refs as any).floating}
+          {...rest}
           style={{
             position: strategy,
             top: y ?? "",
@@ -164,7 +167,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 right: "",
                 bottom: "",
                 ...(staticSide ? { [staticSide]: "-4px" } : ""),
-                position: "absolute",
               }}
             />
           )}

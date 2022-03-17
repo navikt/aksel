@@ -64,7 +64,7 @@
   color: var(--navds-tooltip-color-text);
   border-radius: var(--navds-border-radius-medium);
   padding: 2px var(--navds-spacing-2);
-  white-space: nowrap;
+  /* white-space: nowrap; */
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.15s;
   display: flex;
@@ -96,6 +96,7 @@
   transform: rotate(45deg);
   z-index: -1;
   background-color: var(--navds-tooltip-color-background);
+  position: absolute;
 }
 
 .navds-tooltip--inverted {
