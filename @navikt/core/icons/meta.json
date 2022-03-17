@@ -2400,6 +2400,18 @@
     "pageName": "Arrow"
   },
   {
+    "name": "UpDown",
+    "description": "",
+    "created_at": "2022-03-16T13:47:53.004Z",
+    "pageName": "Arrow"
+  },
+  {
+    "name": "UpDownFilled",
+    "description": "",
+    "created_at": "2022-03-16T13:47:52.999Z",
+    "pageName": "Arrow"
+  },
+  {
     "name": "UpFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.748Z",
