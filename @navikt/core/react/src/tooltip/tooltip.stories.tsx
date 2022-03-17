@@ -12,6 +12,27 @@ export default {
   },
 } as Meta;
 
+export const Demo = () => {
+  return (
+    <div
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Tooltip content="Tooltip example text long" side="top">
+        <Button>Tooltip</Button>
+      </Tooltip>
+      <Tooltip content="Controlled tooltip example" side="right">
+        <Button>Tooltip</Button>
+      </Tooltip>
+    </div>
+  );
+};
+
 export const All = () => {
   const [open, setOpen] = useState(false);
   return (

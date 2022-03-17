@@ -1,7 +1,22 @@
-import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import cl from "classnames";
-import React, { forwardRef, HTMLAttributes } from "react";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+} from "react";
 import { Detail } from "..";
+import {
+  useFloating,
+  arrow as flArrow,
+  shift,
+  autoUpdate,
+  offset,
+  flip,
+} from "@floating-ui/react-dom";
+import mergeRefs from "react-merge-refs";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -61,11 +76,11 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     {
       children,
       className,
-      arrow = true,
+      arrow: _arrow = true,
       side = "top",
       open,
       defaultOpen,
-      offset = 2,
+      offset: _offset = 2,
       content,
       delay = 150,
       onOpenChange,
@@ -75,8 +90,94 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ...rest
     },
     ref
-  ) => (
-    <TooltipPrimitive.Root
+  ) => {
+    const arrowRef = useRef<HTMLDivElement | null>(null);
+
+    const {
+      x,
+      y,
+      update,
+      strategy,
+      placement,
+      refs,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+    } = useFloating({
+      placement: side,
+
+      middleware: [
+        offset(10),
+        shift(),
+        flip({ padding: 5, fallbackPlacements: ["bottom", "left"] }),
+        flArrow({ element: arrowRef, padding: 5 }),
+      ],
+    });
+
+    useEffect(() => {
+      if (!refs.reference.current || !refs.floating.current) {
+        return;
+      }
+
+      // Only call this when the floating element is rendered
+      return autoUpdate(refs.reference.current, refs.floating.current, update);
+    }, [refs.reference, refs.floating, update]);
+
+    const staticSide = {
+      top: "bottom",
+      right: "left",
+      bottom: "top",
+      left: "right",
+    }[placement.split("-")[0]];
+
+    return (
+      <>
+        {React.cloneElement(children, {
+          ...children.props,
+          ref: mergeRefs([(children as any).ref, refs.reference]),
+        })}
+        <div
+          ref={(refs as any).floating}
+          style={{
+            position: strategy,
+            top: y ?? "",
+            left: x ?? "",
+          }}
+          className={cl(
+            "navds-tooltip",
+            "navds-detail navds-detail--small",
+            className,
+            {
+              "navds-tooltip--inverted": inverted,
+            }
+          )}
+        >
+          {content}
+          {_arrow && (
+            <div
+              ref={(node) => {
+                arrowRef.current = node;
+                /* update(); */
+              }}
+              className="navds-tooltip__arrow"
+              style={{
+                left: arrowX != null ? `${arrowX}px` : "",
+                top: arrowY != null ? `${arrowY}px` : "",
+                right: "",
+                bottom: "",
+                ...(staticSide ? { [staticSide]: "-4px" } : ""),
+                position: "absolute",
+              }}
+            />
+          )}
+        </div>
+      </>
+    );
+  }
+);
+
+export default Tooltip;
+
+/*
+<TooltipPrimitive.Root
       delayDuration={delay}
       open={open}
       defaultOpen={defaultOpen}
@@ -124,7 +225,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         )}
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Root>
-  )
-);
 
-export default Tooltip;
+
+*/

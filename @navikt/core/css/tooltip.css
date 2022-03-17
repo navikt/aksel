@@ -91,7 +91,11 @@
 }
 
 .navds-tooltip__arrow {
-  fill: var(--navds-tooltip-color-background);
+  height: 0.5rem;
+  width: 0.5rem;
+  transform: rotate(45deg);
+  z-index: -1;
+  background-color: var(--navds-tooltip-color-background);
 }
 
 .navds-tooltip--inverted {

@@ -44,7 +44,7 @@
     "react-modal": "3.14.3",
     "react-popper": "^2.2.5",
     "uuid": "^8.3.2",
-    "@radix-ui/react-tooltip": "^0.1.7"
+    "@floating-ui/react-dom": "0.6.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
