@@ -1,7 +1,7 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { Label, BodyShort } from "..";
+import { Label } from "..";
 import { TabsContext } from "./Tabs";
 
 export interface TabProps extends React.HTMLAttributes<HTMLButtonElement> {
@@ -28,8 +28,6 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
   ({ className, children, vertical, ...rest }, ref) => {
     const context = useContext(TabsContext);
 
-    const Typo = context?.fontWeight === "semibold" ? Label : BodyShort;
-
     return (
       <RadixTabs.Trigger
         {...rest}
@@ -44,9 +42,9 @@ const Tab = forwardRef<HTMLButtonElement, TabProps>(
           }
         )}
       >
-        <Typo as="span" className="navds-tabs__tab-inner" size={context?.size}>
+        <Label as="span" className="navds-tabs__tab-inner" size={context?.size}>
           {children}
-        </Typo>
+        </Label>
       </RadixTabs.Trigger>
     );
   }

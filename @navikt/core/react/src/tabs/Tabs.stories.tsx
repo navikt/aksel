@@ -182,8 +182,8 @@ export const All = () => {
           </Tabs.Tab>
         </Tabs.List>
       </Tabs>
-      <h2>Regular font (BodyShort)</h2>
-      <Tabs defaultValue="test2" fontWeight="regular">
+      {/* <h2>Regular font (BodyShort)</h2>
+      <Tabs defaultValue="test2" >
         <Tabs.List>
           <Tabs.Tab value="test1">
             <Cup />
@@ -198,7 +198,7 @@ export const All = () => {
             Fryser
           </Tabs.Tab>
         </Tabs.List>
-      </Tabs>
+      </Tabs> */}
     </div>
   );
 };
