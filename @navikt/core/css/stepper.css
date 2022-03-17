@@ -28,7 +28,6 @@
 }
 
 /* Step focus */
-
 .navds-stepper__step:focus {
   box-shadow: var(--navds-shadow-focus);
   outline: none;
