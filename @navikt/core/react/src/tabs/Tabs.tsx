@@ -32,7 +32,7 @@ export interface TabsProps
    * Automatically activates tab on fokus/navigation
    * @default false
    */
-  autoSwitch?: boolean;
+  selectionFollowsFocus?: boolean;
   /**
    * Makes icons larger for better visibility
    */
@@ -64,7 +64,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       children,
       onChange,
       size = "medium",
-      autoSwitch = false,
+      selectionFollowsFocus = false,
       iconOnly = false,
       fontWeight = "semibold",
       ...rest
@@ -76,7 +76,7 @@ const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         {...rest}
         ref={ref}
         className={cl("navds-tabs", className, `navds-tabs--${size}`)}
-        activationMode={autoSwitch ? "automatic" : "manual"}
+        activationMode={selectionFollowsFocus ? "automatic" : "manual"}
         onValueChange={onChange}
       >
         <TabsContext.Provider

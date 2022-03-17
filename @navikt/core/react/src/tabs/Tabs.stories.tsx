@@ -67,8 +67,8 @@ export const All = () => {
           </Tabs.Tab>
         </Tabs.List>
       </Tabs>
-      <h2>AutoSwitch</h2>
-      <Tabs defaultValue="test2" autoSwitch>
+      <h2>selectionFollowsFocus</h2>
+      <Tabs defaultValue="test2" selectionFollowsFocus>
         <Tabs.List>
           <Tabs.Tab value="test1">
             <Cup />
