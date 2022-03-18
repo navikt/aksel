@@ -17,21 +17,39 @@ export const Demo = () => {
     <div
       style={{
         width: "100vw",
-        height: "100vh",
+        height: "200vh",
         display: "flex",
+        flexDirection: "column",
+        gap: 32,
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Tooltip content="Tooltip example text long" side="top">
-        <Button>Tooltip</Button>
-      </Tooltip>
-      <Tooltip content="Controlled tooltip example" side="right">
-        <Button>Tooltip</Button>
-      </Tooltip>
       <Tooltip
-        content="Controlled tooltip example"
+        content="Tooltip example with long text"
+        side="top"
+        keys={["Cmd", "K"]}
+      >
+        <Button>Tooltip</Button>
+      </Tooltip>
+
+      <Tooltip content="Tooltip example" side="right" keys={["Cmd", "K"]}>
+        <Button>Tooltip</Button>
+      </Tooltip>
+
+      <Tooltip
+        content="Tooltip example"
+        keys={["Cmd", "K"]}
         side="bottom"
+        strategy="fixed"
+      >
+        <Button>Tooltip</Button>
+      </Tooltip>
+
+      <Tooltip
+        content="Tooltip example"
+        keys={["Cmd", "K"]}
+        side="left"
         strategy="fixed"
       >
         <Button>Tooltip</Button>

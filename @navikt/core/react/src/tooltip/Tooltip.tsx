@@ -154,11 +154,26 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           )}
         >
           {content}
+          {keys && (
+            <span style={{ display: "flex" }}>
+              {keys.map((key) => (
+                <Detail
+                  size="small"
+                  as="kbd"
+                  key={key}
+                  className={cl("navds-tooltip__key", {
+                    "navds-tooltip__key--inverted": inverted,
+                  })}
+                >
+                  {key}
+                </Detail>
+              ))}
+            </span>
+          )}
           {_arrow && (
             <div
               ref={(node) => {
                 arrowRef.current = node;
-                /* update(); */
               }}
               className="navds-tooltip__arrow"
               style={{
