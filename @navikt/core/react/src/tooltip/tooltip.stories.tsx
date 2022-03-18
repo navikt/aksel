@@ -18,7 +18,7 @@ export const Demo = () => {
     <div
       style={{
         width: "100vw",
-        height: "200vh",
+        height: "100vh",
         display: "flex",
         flexDirection: "column",
         gap: 32,
@@ -35,7 +35,7 @@ export const Demo = () => {
       >
         <Button onClick={() => setOpen(!open)}>Tooltip C</Button>
       </Tooltip>
-      <div>
+      {/* <div>
         <Tooltip
           side="top"
           keys={["Cmd", "K"]}
@@ -63,7 +63,7 @@ export const Demo = () => {
 
       <Tooltip side="left" content="Tooltip example with long text" open={open}>
         <Button>Tooltip</Button>
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
 };

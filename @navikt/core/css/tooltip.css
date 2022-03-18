@@ -60,6 +60,11 @@
 }
 
 .navds-tooltip {
+  /* Max z-index */
+  z-index: 2147483647;
+}
+
+.navds-tooltip__inner {
   background-color: var(--navds-tooltip-color-background);
   color: var(--navds-tooltip-color-text);
   border-radius: var(--navds-border-radius-medium);
@@ -72,9 +77,6 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
-
-  /* Max z-index */
-  z-index: 2147483647;
   min-width: 8rem;
 }
 
@@ -82,27 +84,19 @@
   padding-bottom: 0.125rem;
 }
 
-/* .navds-tooltip__inner {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 8px;
-  row-gap: 4px;
-  align-items: center;
-} */
-
-.navds-tooltip[data-side="top"] {
+.navds-tooltip[data-side="top"] > .navds-tooltip__inner {
   animation-name: slideUp;
 }
 
-.navds-tooltip[data-side="bottom"] {
+.navds-tooltip[data-side="bottom"] > .navds-tooltip__inner {
   animation-name: slideDown;
 }
 
-.navds-tooltip[data-side="right"] {
+.navds-tooltip[data-side="right"] > .navds-tooltip__inner {
   animation-name: slideRight;
 }
 
-.navds-tooltip[data-side="left"] {
+.navds-tooltip[data-side="left"] > .navds-tooltip__inner {
   animation-name: slideLeft;
 }
 
