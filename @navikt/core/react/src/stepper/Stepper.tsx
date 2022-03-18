@@ -4,10 +4,6 @@ import Step, { StepperStepProps, StepperStepType } from "./Step";
 
 export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
-   * ID of element that labels the Stepper-element
-   */
-  "aria-labelledby"?: string;
-  /**
    * <Stepper.Step /> elements
    */
   children: React.ReactNode;
@@ -42,23 +38,11 @@ export const StepperContext = createContext<StepperContextProps | null>(null);
 
 const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
   (
-    {
-      "aria-labelledby": ariaLabelledby,
-      children,
-      className,
-      activeStep,
-      onStepChange = () => {},
-      ...rest
-    },
+    { children, className, activeStep, onStepChange = () => {}, ...rest },
     ref
   ) => {
     return (
-      <ol
-        aria-labelledby={ariaLabelledby}
-        {...rest}
-        ref={ref}
-        className={cl("navds-stepper", className)}
-      >
+      <ol {...rest} ref={ref} className={cl("navds-stepper", className)}>
         <StepperContext.Provider
           value={{
             activeStep,
@@ -68,7 +52,10 @@ const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
         >
           {React.Children.map(children, (step, index) => {
             return (
-              <li className={cl("navds-stepper__step-wrapper")} key={index}>
+              <li
+                className={cl("navds-stepper__step-wrapper")}
+                key={index + (children?.toString?.() ?? "")}
+              >
                 {React.isValidElement<StepperStepProps>(step)
                   ? React.cloneElement(step, { ...step.props, index })
                   : step}
