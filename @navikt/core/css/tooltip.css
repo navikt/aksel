@@ -64,15 +64,32 @@
   color: var(--navds-tooltip-color-text);
   border-radius: var(--navds-border-radius-medium);
   padding: 2px var(--navds-spacing-2);
-  /* white-space: nowrap; */
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.15s;
-  display: flex;
   gap: var(--navds-spacing-3);
   align-items: center;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05))
     drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  display: flex;
 }
+
+.navds-tooltip {
+  flex-direction: column;
+  width: max-content;
+  gap: 2px;
+}
+
+.navds-tooltip__keys {
+  padding-bottom: 0.125rem;
+}
+
+/* .navds-tooltip__inner {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+  row-gap: 4px;
+  align-items: center;
+} */
 
 .navds-tooltip[data-side="top"] {
   animation-name: slideUp;

@@ -13,6 +13,7 @@ export default {
 } as Meta;
 
 export const Demo = () => {
+  const [open, setOpen] = useState(true);
   return (
     <div
       style={{
@@ -26,12 +27,31 @@ export const Demo = () => {
       }}
     >
       <Tooltip
-        content="Tooltip example with long text"
-        side="top"
+        content="Tooltip example"
         keys={["Cmd", "K"]}
+        side="right"
+        open={open}
+        onOpenChange={setOpen}
       >
-        <Button>Tooltip</Button>
+        <Button onClick={() => setOpen(!open)}>Tooltip C</Button>
       </Tooltip>
+      <div>
+        <Tooltip
+          side="top"
+          keys={["Cmd", "K"]}
+          content="Tooltip example with long text"
+        >
+          <Button>Tooltip</Button>
+        </Tooltip>
+        <Tooltip
+          content="Tooltip example with long text"
+          side="right"
+          open={open}
+          keys={["Cmd", "K"]}
+        >
+          <Button>Tooltip</Button>
+        </Tooltip>
+      </div>
 
       <Tooltip content="Tooltip example" side="right" keys={["Cmd", "K"]}>
         <Button>Tooltip</Button>
@@ -39,18 +59,18 @@ export const Demo = () => {
 
       <Tooltip
         content="Tooltip example"
-        keys={["Cmd", "K"]}
         side="bottom"
         strategy="fixed"
+        open={open}
       >
         <Button>Tooltip</Button>
       </Tooltip>
 
       <Tooltip
-        content="Tooltip example"
-        keys={["Cmd", "K"]}
         side="left"
         strategy="fixed"
+        content="Tooltip example with long text"
+        open={open}
       >
         <Button>Tooltip</Button>
       </Tooltip>

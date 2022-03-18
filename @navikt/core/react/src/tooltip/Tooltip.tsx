@@ -1,12 +1,5 @@
 import cl from "classnames";
-import React, {
-  forwardRef,
-  HTMLAttributes,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-} from "react";
+import React, { forwardRef, HTMLAttributes, useEffect, useRef } from "react";
 import { Detail } from "..";
 import {
   useFloating,
@@ -15,8 +8,10 @@ import {
   autoUpdate,
   offset,
   flip,
+  hide,
 } from "@floating-ui/react-dom";
 import mergeRefs from "react-merge-refs";
+import Portal from "./portal";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -102,15 +97,19 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       strategy,
       placement,
       refs,
-      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+      middlewareData: {
+        arrow: { x: arrowX, y: arrowY } = {},
+        hide: { referenceHidden } = {},
+      },
     } = useFloating({
       placement: side,
       strategy: _strategy,
       middleware: [
         offset(10),
         shift(),
-        flip({ padding: 5, fallbackPlacements: ["bottom", "left"] }),
+        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
+        hide(),
       ],
     });
 
@@ -121,7 +120,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
       // Only call this when the floating element is rendered
       return autoUpdate(refs.reference.current, refs.floating.current, update);
-    }, [refs.reference, refs.floating, update]);
+    }, [refs.reference, refs.floating, update, open]);
 
     const staticSide = {
       top: "bottom",
@@ -136,56 +135,64 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ...children.props,
           ref: mergeRefs([(children as any).ref, refs.reference]),
         })}
-        <div
-          ref={(refs as any).floating}
-          {...rest}
-          style={{
-            position: strategy,
-            top: y ?? "",
-            left: x ?? "",
-          }}
-          className={cl(
-            "navds-tooltip",
-            "navds-detail navds-detail--small",
-            className,
-            {
-              "navds-tooltip--inverted": inverted,
-            }
-          )}
-        >
-          {content}
-          {keys && (
-            <span style={{ display: "flex" }}>
-              {keys.map((key) => (
-                <Detail
-                  size="small"
-                  as="kbd"
-                  key={key}
-                  className={cl("navds-tooltip__key", {
-                    "navds-tooltip__key--inverted": inverted,
-                  })}
-                >
-                  {key}
-                </Detail>
-              ))}
-            </span>
-          )}
-          {_arrow && (
+        {open && (
+          <Portal>
             <div
-              ref={(node) => {
-                arrowRef.current = node;
-              }}
-              className="navds-tooltip__arrow"
+              ref={(refs as any).floating}
+              {...rest}
               style={{
-                left: arrowX != null ? `${arrowX}px` : "",
-                top: arrowY != null ? `${arrowY}px` : "",
-                right: "",
-                bottom: "",
-                ...(staticSide ? { [staticSide]: "-4px" } : ""),
+                position: strategy,
+                top: y ?? "",
+                left: x ?? "",
+                visibility: referenceHidden ? "hidden" : "visible",
               }}
-            />
-          )}
-        </div>
+              data-side={placement.split("-")[0]}
+              className={cl(
+                "navds-tooltip",
+                "navds-detail navds-detail--small",
+                className,
+                {
+                  "navds-tooltip--inverted": inverted,
+                }
+              )}
+            >
+              {/* <span className="navds-tooltip__inner"> */}
+              {content}
+              {keys && (
+                <span className="navds-tooltip__keys">
+                  {keys.map((key) => (
+                    <Detail
+                      size="small"
+                      as="kbd"
+                      key={key}
+                      className={cl("navds-tooltip__key", {
+                        "navds-tooltip__key--inverted": inverted,
+                      })}
+                    >
+                      {key}
+                    </Detail>
+                  ))}
+                </span>
+              )}
+              {/* </span> */}
+              {_arrow && (
+                <div
+                  ref={(node) => {
+                    arrowRef.current = node;
+                  }}
+                  className="navds-tooltip__arrow"
+                  style={{
+                    left: arrowX != null ? `${arrowX}px` : "",
+                    top: arrowY != null ? `${arrowY}px` : "",
+                    right: "",
+                    bottom: "",
+                    ...(staticSide ? { [staticSide]: "-4px" } : ""),
+                  }}
+                />
+              )}
+            </div>
+          </Portal>
+        )}
       </>
     );
   }
