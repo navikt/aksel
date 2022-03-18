@@ -66,17 +66,16 @@
   padding: 2px var(--navds-spacing-2);
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   animation-duration: 0.15s;
-  gap: var(--navds-spacing-3);
   align-items: center;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05))
     drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
   display: flex;
-}
-
-.navds-tooltip {
   flex-direction: column;
-  width: max-content;
   gap: 2px;
+
+  /* Max z-index */
+  z-index: 2147483647;
+  min-width: 8rem;
 }
 
 .navds-tooltip__keys {

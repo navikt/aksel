@@ -8,7 +8,7 @@ interface PortalProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Portal = React.forwardRef<HTMLDivElement, PortalProps>(
-  ({ containerRef, style, ...rest }, ref) => {
+  ({ containerRef, children, style, ...rest }, ref) => {
     const hostElement = containerRef?.current ?? globalThis?.document?.body;
     const [, forceUpdate] = React.useState({});
 
@@ -21,31 +21,7 @@ const Portal = React.forwardRef<HTMLDivElement, PortalProps>(
     }, []);
 
     if (hostElement) {
-      return ReactDOM.createPortal(
-        <div
-          {...rest}
-          data-tooltip=""
-          ref={ref}
-          style={
-            /**
-             * If the Portal is injected in `body`, we assume we want whatever is portalled
-             * to appear on top of everything. Ideally this would be handled by making sure the
-             * app root creates a new stacking context, however this is quite hard to automate.
-             * For this reason, we have opted for setting the max z-index on the portal itself.
-             */
-            hostElement === document.body
-              ? {
-                  position: "absolute",
-                  top: 0,
-                  left: 0,
-                  zIndex: 2147483647,
-                  ...style,
-                }
-              : undefined
-          }
-        />,
-        hostElement
-      );
+      return ReactDOM.createPortal(children, hostElement);
     }
 
     // bail out of ssr

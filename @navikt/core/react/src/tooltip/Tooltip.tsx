@@ -64,9 +64,11 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * List of Keyboard-keys for shortcuts
    */
   keys?: string[];
-  strategy?: "absolute" | "fixed";
 }
 
+/**
+ * TODO: console.error for lange tekster, egen prop for å justere opp makslengde
+ */
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
@@ -83,7 +85,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       inverted = false,
       keys,
-      strategy: _strategy = "absolute",
       ...rest
     },
     ref
@@ -94,7 +95,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       x,
       y,
       update,
-      strategy,
       placement,
       refs,
       middlewareData: {
@@ -103,7 +103,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       },
     } = useFloating({
       placement: side,
-      strategy: _strategy,
       middleware: [
         offset(10),
         shift(),
@@ -141,7 +140,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               ref={(refs as any).floating}
               {...rest}
               style={{
-                position: strategy,
+                position: "absolute",
                 top: y ?? "",
                 left: x ?? "",
                 visibility: referenceHidden ? "hidden" : "visible",

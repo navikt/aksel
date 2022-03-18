@@ -57,21 +57,11 @@ export const Demo = () => {
         <Button>Tooltip</Button>
       </Tooltip>
 
-      <Tooltip
-        content="Tooltip example"
-        side="bottom"
-        strategy="fixed"
-        open={open}
-      >
+      <Tooltip content="Tooltip example" side="bottom" open={open}>
         <Button>Tooltip</Button>
       </Tooltip>
 
-      <Tooltip
-        side="left"
-        strategy="fixed"
-        content="Tooltip example with long text"
-        open={open}
-      >
+      <Tooltip side="left" content="Tooltip example with long text" open={open}>
         <Button>Tooltip</Button>
       </Tooltip>
     </div>
