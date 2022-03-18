@@ -1,9 +1,11 @@
 import cl from "classnames";
 import React, {
+  cloneElement,
   forwardRef,
   HTMLAttributes,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -19,6 +21,7 @@ import {
 } from "@floating-ui/react-dom";
 import mergeRefs from "react-merge-refs";
 import Portal from "./portal";
+import { useId } from "../util";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -38,7 +41,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    * Orientation for tooltip
    * @default "top"
    */
-  side?: "top" | "right" | "bottom" | "left";
+  placement?: "top" | "right" | "bottom" | "left";
   /**
    *  Toggles rendering of arrow
    *  @default true
@@ -55,13 +58,9 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   content: string;
   /**
    * Adds a delay in milliseconds before opening tooltip
-   * @default 150
+   * @default 300
    */
   delay?: number;
-  /**
-   * Callback for when Tooltip opens/closes
-   */
-  onOpenChange?: (state: boolean) => void;
   /**
    * Inverts style of tooltip
    * @default false
@@ -82,24 +81,26 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       children,
       className,
       arrow: _arrow = true,
-      side = "top",
+      placement: _placement = "top",
       open,
-      defaultOpen,
+      defaultOpen = false,
       offset: _offset = 10,
       content,
-      delay = 150,
-      onOpenChange,
+      delay = 300,
       id,
       inverted = false,
       keys,
+      id: _id,
       ...rest
     },
     ref
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(defaultOpen);
     const openTimerRef = useRef(0);
-    const isMouseDownRef = React.useRef(false);
+    const isMouseDownRef = useRef(false);
+
+    const ariaId = useId(_id);
 
     const {
       x,
@@ -112,7 +113,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         hide: { referenceHidden } = {},
       },
     } = useFloating({
-      placement: side,
+      placement: _placement,
       middleware: [
         offset(0),
         shift(),
@@ -122,6 +123,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       ],
     });
 
+    /* https://floating-ui.com/docs/react-dom#updating */
     useEffect(() => {
       if (!refs.reference.current || !refs.floating.current) {
         return;
@@ -136,17 +138,29 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       setIsOpen(true);
     }, [setIsOpen]);
 
+    const handleDelayedOpen = useCallback(() => {
+      window.clearTimeout(openTimerRef.current);
+      openTimerRef.current = window.setTimeout(() => {
+        setIsOpen(true);
+      }, delay);
+    }, [delay, setIsOpen]);
+
     const handleClose = useCallback(() => {
       window.clearTimeout(openTimerRef.current);
       setIsOpen(false);
     }, [setIsOpen]);
 
-    const handleMouseUp = React.useCallback(
+    const handleMouseUp = useCallback(
       () => (isMouseDownRef.current = false),
       []
     );
 
-    React.useEffect(() => {
+    useEffect(() => {
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      return () => window.clearTimeout(openTimerRef.current);
+    }, []);
+
+    useEffect(() => {
       return () => document.removeEventListener("mouseup", handleMouseUp);
     }, [handleMouseUp]);
 
@@ -156,28 +170,44 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       document
     );
 
+    /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
+    const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [
+      ref,
+      refs.floating,
+    ]);
+
+    if (
+      !children ||
+      children?.type === React.Fragment ||
+      (children as any) === React.Fragment
+    ) {
+      console.error(
+        "<Tooltip> children needs to be a single ReactElement and not <React.Fragment/>/<></>"
+      );
+      return null;
+    }
+    console.log(children);
+
     const staticSide = {
-      top: "bottom",
-      right: "left",
-      bottom: "top",
-      left: "right",
+      top: ["bottom", "marginBottom"],
+      right: ["left", "marginLeft"],
+      bottom: ["top", "marginTop"],
+      left: ["right", "marginRight"],
     }[placement.split("-")[0]];
 
-    const staticMargin = {
-      top: "marginBottom",
-      right: "marginLeft",
-      bottom: "marginTop",
-      left: "marginRight",
-    }[placement.split("-")[0]];
+    const ariaProps = {};
+    ariaProps["aria-describedby"] =
+      open ?? isOpen ? cl(ariaId, children?.props["aria-describedby"]) : null;
 
     return (
       <>
-        {React.cloneElement(children, {
+        {cloneElement(children, {
           ...children.props,
+          ...ariaProps,
           ref: mergeRefs([(children as any).ref, refs.reference]),
           onMouseEnter: composeEventHandlers(
             children.props.onMouseEnter,
-            handleOpen
+            handleDelayedOpen
           ),
           onMouseLeave: composeEventHandlers(
             children.props.onMouseLeave,
@@ -203,13 +233,15 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             }
           ),
         })}
-        {isOpen && (
+        {(open ?? isOpen) && (
           <Portal>
             <div
-              ref={(refs as any).floating}
+              ref={stableRef}
+              {...rest}
               onMouseEnter={handleOpen}
               onMouseLeave={handleClose}
-              {...rest}
+              role="tooltip"
+              id={ariaId}
               style={{
                 position: "absolute",
                 top: y ?? "",
@@ -228,7 +260,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               <div
                 className="navds-tooltip__inner"
-                style={{ ...(staticMargin ? { [staticMargin]: _offset } : "") }}
+                style={{ ...(staticSide ? { [staticSide[1]]: _offset } : "") }}
               >
                 {content}
                 {keys && (
@@ -247,7 +279,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                     ))}
                   </span>
                 )}
-                {/* </span> */}
                 {_arrow && (
                   <div
                     ref={(node) => {
@@ -259,7 +290,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                       top: arrowY != null ? `${arrowY}px` : "",
                       right: "",
                       bottom: "",
-                      ...(staticSide ? { [staticSide]: "-4px" } : ""),
+                      ...(staticSide ? { [staticSide[0]]: "-4px" } : ""),
                     }}
                   />
                 )}

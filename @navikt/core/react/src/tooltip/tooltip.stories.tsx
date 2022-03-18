@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Tooltip } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Refresh } from "@navikt/ds-icons";
@@ -14,6 +14,7 @@ export default {
 
 export const Demo = () => {
   const [open, setOpen] = useState(true);
+  const testRef = useRef(null);
   return (
     <div
       style={{
@@ -29,41 +30,22 @@ export const Demo = () => {
       <Tooltip
         content="Tooltip example"
         keys={["Cmd", "K"]}
-        side="right"
+        placement="right"
         open={open}
-        onOpenChange={setOpen}
+        ref={testRef}
       >
-        <Button onClick={() => setOpen(!open)}>Tooltip C</Button>
+        <Button aria-describedby="test123" onClick={() => setOpen(!open)}>
+          Tooltip C
+        </Button>
       </Tooltip>
-      {/* <div>
-        <Tooltip
-          side="top"
-          keys={["Cmd", "K"]}
-          content="Tooltip example with long text"
-        >
-          <Button>Tooltip</Button>
-        </Tooltip>
-        <Tooltip
-          content="Tooltip example with long text"
-          side="right"
-          open={open}
-          keys={["Cmd", "K"]}
-        >
-          <Button>Tooltip</Button>
-        </Tooltip>
-      </div>
-
-      <Tooltip content="Tooltip example" side="right" keys={["Cmd", "K"]}>
-        <Button>Tooltip</Button>
+      <Tooltip
+        content="Tooltip example"
+        keys={["Cmd", "K"]}
+        placement="right"
+        defaultOpen
+      >
+        <Button onClick={() => console.log(testRef.current)}>Tooltip C</Button>
       </Tooltip>
-
-      <Tooltip content="Tooltip example" side="bottom" open={open}>
-        <Button>Tooltip</Button>
-      </Tooltip>
-
-      <Tooltip side="left" content="Tooltip example with long text" open={open}>
-        <Button>Tooltip</Button>
-      </Tooltip> */}
     </div>
   );
 };
@@ -73,30 +55,31 @@ export const All = () => {
   return (
     <div style={{ margin: "4rem 8rem 4rem 8rem" }}>
       <h2>Controlled</h2>
-      <Tooltip open={open} content="Controlled tooltip example" side="top">
+      <Tooltip open={open} content="Controlled tooltip example" placement="top">
         <Button onClick={() => setOpen((x) => !x)}>Toggle tooltip</Button>
       </Tooltip>
-
-      <h2>onOpenChange</h2>
-      <Tooltip content="onOpenChangeTest" side="top" onOpenChange={console.log}>
-        <Button>Tooltip</Button>
-      </Tooltip>
       <h2>no arrow</h2>
-      <Tooltip content="no arrow" side="top" arrow={false}>
+      <Tooltip content="no arrow" placement="top" arrow={false}>
         <Button>Tooltip</Button>
       </Tooltip>
 
       <h2>Keys</h2>
-      <Tooltip content="Inverted!" side="top" open keys={["Cmd", "K"]}>
+      <Tooltip content="Inverted!" placement="top" open keys={["Cmd", "K"]}>
         <Button>Inverted tooltip</Button>
       </Tooltip>
       <h3>inverted</h3>
-      <Tooltip inverted content="Inverted!" side="top" open keys={["Cmd", "K"]}>
+      <Tooltip
+        inverted
+        content="Inverted!"
+        placement="top"
+        open
+        keys={["Cmd", "K"]}
+      >
         <Button>Inverted tooltip</Button>
       </Tooltip>
 
       <h2>Inverted</h2>
-      <Tooltip inverted content="Inverted!" side="top" open>
+      <Tooltip inverted content="Inverted!" placement="top" open>
         <Button>Inverted tooltip</Button>
       </Tooltip>
 
@@ -110,7 +93,7 @@ export const All = () => {
           </span>
         </Tooltip>
       </div>
-      <h2>all sides</h2>
+      <h2>all placements</h2>
       <div
         style={{
           display: "flex",
@@ -119,9 +102,9 @@ export const All = () => {
           gap: "3rem",
         }}
       >
-        {["top", "left", "bottom", "right"].map((side) => (
-          <div key={side}>
-            <h3>{side}</h3>
+        {["top", "left", "bottom", "right"].map((placement) => (
+          <div key={placement}>
+            <h3>{placement}</h3>
             <div
               style={{
                 display: "flex",
@@ -130,7 +113,12 @@ export const All = () => {
                 gap: "3rem",
               }}
             >
-              <Tooltip key={side} defaultOpen content={side} side={side as any}>
+              <Tooltip
+                key={placement}
+                defaultOpen
+                content={placement}
+                placement={placement as any}
+              >
                 <Refresh aria-hidden tabIndex={0} />
               </Tooltip>
             </div>
@@ -147,7 +135,7 @@ export const UUDemo = () => {
       <Button>Placeholder</Button>
       <br />
       <br />
-      <Tooltip content="Shortcut" side="right" keys={["Cmd", "S"]}>
+      <Tooltip content="Shortcut" placement="right" keys={["Cmd", "S"]}>
         <Button>Lagre</Button>
       </Tooltip>
       <br />
