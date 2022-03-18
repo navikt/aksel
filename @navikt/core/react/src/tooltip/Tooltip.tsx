@@ -1,6 +1,13 @@
 import cl from "classnames";
-import React, { forwardRef, HTMLAttributes, useEffect, useRef } from "react";
-import { Detail } from "..";
+import React, {
+  forwardRef,
+  HTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { composeEventHandlers, Detail, useEventListener } from "..";
 import {
   useFloating,
   arrow as flArrow,
@@ -90,6 +97,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ref
   ) => {
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const [isOpen, setIsOpen] = useState(false);
+    const openTimerRef = useRef(0);
+    const isMouseDownRef = React.useRef(false);
 
     const {
       x,
@@ -119,7 +129,32 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
       // Only call this when the floating element is rendered
       return autoUpdate(refs.reference.current, refs.floating.current, update);
-    }, [refs.reference, refs.floating, update, open]);
+    }, [refs.reference, refs.floating, update, open, isOpen]);
+
+    const handleOpen = useCallback(() => {
+      window.clearTimeout(openTimerRef.current);
+      setIsOpen(true);
+    }, [setIsOpen]);
+
+    const handleClose = useCallback(() => {
+      window.clearTimeout(openTimerRef.current);
+      setIsOpen(false);
+    }, [setIsOpen]);
+
+    const handleMouseUp = React.useCallback(
+      () => (isMouseDownRef.current = false),
+      []
+    );
+
+    React.useEffect(() => {
+      return () => document.removeEventListener("mouseup", handleMouseUp);
+    }, [handleMouseUp]);
+
+    useEventListener(
+      "keydown",
+      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose]),
+      document
+    );
 
     const staticSide = {
       top: "bottom",
@@ -135,17 +170,45 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       left: "marginRight",
     }[placement.split("-")[0]];
 
-    console.log({ ...(staticSide ? { [staticSide]: "-4px" } : "") });
     return (
       <>
         {React.cloneElement(children, {
           ...children.props,
           ref: mergeRefs([(children as any).ref, refs.reference]),
+          onMouseEnter: composeEventHandlers(
+            children.props.onMouseEnter,
+            handleOpen
+          ),
+          onMouseLeave: composeEventHandlers(
+            children.props.onMouseLeave,
+            handleClose
+          ),
+          onMouseDown: composeEventHandlers(children.props.onMouseDown, () => {
+            handleClose();
+            isMouseDownRef.current = true;
+            document.addEventListener("mouseup", handleMouseUp, { once: true });
+          }),
+          onFocus: composeEventHandlers(
+            children.props.onFocus,
+            () => !isMouseDownRef.current && handleOpen()
+          ),
+          onBlur: composeEventHandlers(children.props.onBlur, handleClose),
+          onClick: composeEventHandlers(
+            children.props.onClick,
+            (event: KeyboardEvent | MouseEvent) => {
+              // keyboard click will occur under different conditions for different node
+              // types so we use `onClick` instead of `onKeyDown` to respect that
+              const isKeyboardClick = event.detail === 0;
+              if (isKeyboardClick) handleClose();
+            }
+          ),
         })}
-        {open && (
+        {isOpen && (
           <Portal>
             <div
               ref={(refs as any).floating}
+              onMouseEnter={handleOpen}
+              onMouseLeave={handleClose}
               {...rest}
               style={{
                 position: "absolute",
