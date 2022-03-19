@@ -86,7 +86,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       defaultOpen = false,
       offset: _offset = 10,
       content,
-      delay = 300,
+      delay = 150,
       id,
       inverted = false,
       keys,
@@ -186,7 +186,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       );
       return null;
     }
-    console.log(children);
 
     const staticSide = {
       top: ["bottom", "marginBottom"],
@@ -260,7 +259,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             >
               <div
                 className="navds-tooltip__inner"
-                style={{ ...(staticSide ? { [staticSide[1]]: _offset } : "") }}
+                style={{
+                  ...(staticSide ? { [staticSide[1]]: _offset } : ""),
+                  opacity: 1,
+                }}
               >
                 {content}
                 {keys && (

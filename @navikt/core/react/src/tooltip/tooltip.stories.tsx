@@ -3,6 +3,7 @@ import { Tooltip } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Refresh } from "@navikt/ds-icons";
 import { Button } from "../..";
+import { ToggleGroup } from "../toggle-group";
 
 export default {
   title: "ds-react/tooltip",
@@ -46,6 +47,23 @@ export const Demo = () => {
       >
         <Button onClick={() => console.log(testRef.current)}>Tooltip C</Button>
       </Tooltip>
+      <ToggleGroup onChange={null} defaultValue="321">
+        <Tooltip content="Tooltip" placement="bottom">
+          <ToggleGroup.Item value="123">Tekst</ToggleGroup.Item>
+        </Tooltip>
+        <Tooltip content="Tooltip" placement="bottom">
+          <ToggleGroup.Item value="321">tekst 2</ToggleGroup.Item>
+        </Tooltip>
+        <Tooltip content="Tooltip" placement="bottom">
+          <ToggleGroup.Item value="3212">tekst 2</ToggleGroup.Item>
+        </Tooltip>
+        <Tooltip content="Tooltip" placement="bottom">
+          <ToggleGroup.Item value="3213">tekst 2</ToggleGroup.Item>
+        </Tooltip>
+        <Tooltip content="Tooltip" placement="bottom">
+          <ToggleGroup.Item value="3214">tekst 2</ToggleGroup.Item>
+        </Tooltip>
+      </ToggleGroup>
     </div>
   );
 };
