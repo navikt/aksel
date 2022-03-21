@@ -15,7 +15,6 @@ import {
   arrow as flArrow,
   shift,
   autoUpdate,
-  offset,
   flip,
   hide,
 } from "@floating-ui/react-dom";
@@ -49,13 +48,18 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   arrow?: boolean;
   /**
    * Distance from anchor to tooltip
-   * @default 2
+   * @default 10px with arrow, 2px without arrow
    */
   offset?: number;
   /**
    * Content shown in tooltip
    */
   content: string;
+  /**
+   * Sets max allowed character length
+   * @default 80
+   */
+  maxChar?: number;
   /**
    * Adds a delay in milliseconds before opening tooltip
    * @default 300
@@ -84,13 +88,14 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       placement: _placement = "top",
       open,
       defaultOpen = false,
-      offset: _offset = 10,
+      offset: _offset,
       content,
       delay = 150,
       id,
       inverted = false,
       keys,
       id: _id,
+      maxChar = 80,
       ...rest
     },
     ref
@@ -115,7 +120,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     } = useFloating({
       placement: _placement,
       middleware: [
-        offset(0),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
@@ -183,6 +187,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ) {
       console.error(
         "<Tooltip> children needs to be a single ReactElement and not <React.Fragment/>/<></>"
+      );
+      return null;
+    }
+
+    if (content?.length > maxChar) {
+      console.error(
+        `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop`
       );
       return null;
     }
@@ -260,7 +271,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               <div
                 className="navds-tooltip__inner"
                 style={{
-                  ...(staticSide ? { [staticSide[1]]: _offset } : ""),
+                  ...(staticSide
+                    ? { [staticSide[1]]: _offset ? _offset : _arrow ? 10 : 2 }
+                    : ""),
                   opacity: 1,
                 }}
               >

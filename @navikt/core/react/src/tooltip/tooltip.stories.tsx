@@ -82,7 +82,12 @@ export const All = () => {
       </Tooltip>
 
       <h2>Keys</h2>
-      <Tooltip content="Inverted!" placement="top" open keys={["Cmd", "K"]}>
+      <Tooltip
+        content="Inverted tooltip"
+        placement="top"
+        open
+        keys={["Cmd", "K"]}
+      >
         <Button>Inverted tooltip</Button>
       </Tooltip>
       <h3>inverted</h3>

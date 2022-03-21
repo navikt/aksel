@@ -1,21 +1,4 @@
-:root {
-  --navds-tooltip-color-text: var(--navds-semantic-color-text-inverted);
-  --navds-tooltip-color-text-inverted: var(--navds-semantic-color-text);
-  --navds-tooltip-color-background: var(
-    --navds-semantic-color-component-background-inverted
-  );
-  --navds-tooltip-color-background-inverted: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-tooltip-color-key-background: var(--navds-global-color-gray-700);
-  --navds-tooltip-color-key-background-inverted: var(
-    --navds-global-color-gray-200
-  );
-  --navds-tooltip-color-key-text: var(--navds-semantic-color-text-inverted);
-  --navds-tooltip-color-key-text-inverted: var(--navds-semantic-color-text);
-}
-
-@keyframes fadeIn {
+@keyframes tooltipFadeIn {
   0% {
     opacity: 0;
   }
@@ -25,18 +8,14 @@
 }
 
 .navds-tooltip {
-  /* Max z-index */
   z-index: 2147483647;
 }
 
 .navds-tooltip__inner {
-  background-color: var(--navds-tooltip-color-background);
-  color: var(--navds-tooltip-color-text);
+  background-color: var(--navds-semantic-color-component-background-inverted);
+  color: var(--navds-semantic-color-text-inverted);
   border-radius: var(--navds-border-radius-medium);
   padding: 2px var(--navds-spacing-2);
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  animation-duration: 0.2s;
-  animation-name: fadeIn;
   align-items: center;
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05))
     drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
@@ -44,10 +23,9 @@
   flex-direction: column;
   gap: 2px;
   min-width: 8rem;
-}
-
-.navds-tooltip__keys {
-  padding-bottom: 0.125rem;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-duration: 0.2s;
+  animation-name: tooltipFadeIn;
 }
 
 .navds-tooltip__arrow {
@@ -55,23 +33,27 @@
   width: 0.5rem;
   transform: rotate(45deg);
   z-index: -1;
-  background-color: var(--navds-tooltip-color-background);
+  background-color: var(--navds-semantic-color-component-background-inverted);
   position: absolute;
 }
 
-.navds-tooltip--inverted {
-  background-color: var(--navds-tooltip-color-background-inverted);
-  color: var(--navds-tooltip-color-text-inverted);
+.navds-tooltip--inverted > .navds-tooltip__inner {
+  background-color: var(--navds-semantic-color-component-background-light);
+  color: var(--navds-semantic-color-text);
 }
 
-.navds-tooltip--inverted .navds-tooltip__arrow {
-  fill: var(--navds-tooltip-color-background-inverted);
+.navds-tooltip--inverted > .navds-tooltip__inner .navds-tooltip__arrow {
+  background-color: var(--navds-semantic-color-component-background-light);
+}
+
+.navds-tooltip__keys {
+  padding-bottom: 0.125rem;
 }
 
 .navds-tooltip__key {
   font-family: var(--navds-font-family);
-  background-color: var(--navds-tooltip-color-key-background);
-  color: var(--navds-tooltip-color-key-text);
+  background-color: var(--navds-global-color-gray-700);
+  color: var(--navds-semantic-color-text-inverted);
   border-radius: 2px;
   padding: 0 4px;
   min-width: 18px;
@@ -81,11 +63,11 @@
   justify-content: center;
 }
 
-.navds-tooltip__key--inverted {
-  background-color: var(--navds-tooltip-color-key-background-inverted);
-  color: var(--navds-tooltip-color-key-text-inverted);
-}
-
 .navds-tooltip__key + .navds-tooltip__key {
   margin-left: 0.125rem;
+}
+
+.navds-tooltip__key--inverted {
+  background-color: var(--navds-global-color-gray-200);
+  color: var(--navds-semantic-color-text);
 }
