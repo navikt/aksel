@@ -15,13 +15,13 @@ function defaultTemplate(
         type: "ImportSpecifier",
         imported: {
           type: "Identifier",
-          name: "v4",
+          name: "useId",
         },
       },
     ],
     source: {
       type: "StringLiteral",
-      value: "uuid",
+      value: "./util/useId",
     },
   });
 
@@ -34,12 +34,12 @@ function defaultTemplate(
   return typeScriptTpl.ast`
   ${imports}
   ${interfaces}
-  function ${componentName}(${props}) {
-    const titleId = _titleId ?? (title ?
-      "icon-title-" + v4() : undefined);
+  const ${componentName} = React.forwardRef((${props}) => {
+    let titleId: string | undefined = useId(_titleId);
+    titleId = title ? titleId : undefined;
     return ${jsx};
-  }
-  ${exports}`;
+  });
+  export default ${componentName}`;
 }
 
 module.exports = defaultTemplate;
