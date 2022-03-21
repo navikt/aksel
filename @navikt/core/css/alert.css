@@ -24,7 +24,7 @@
   --navds-alert-color-success-icon: var(
     --navds-semantic-color-feedback-success-icon
   );
-  --navds-alert-color-icon-background: white;
+  --navds-alert-color-icon-background: var(--navds-global-color-white);
 }
 
 .navds-alert {
@@ -83,7 +83,11 @@
 
 .navds-alert--warning > .navds-alert__icon {
   color: var(--navds-alert-color-warning-icon);
-background: linear-gradient(white, white) center / 16% 60% no-repeat;
+  background: linear-gradient(
+      var(--navds-alert-color-icon-background),
+      var(--navds-alert-color-icon-background)
+    )
+    center / 16% 60% no-repeat;
 }
 
 .navds-alert--info {
