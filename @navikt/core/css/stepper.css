@@ -36,7 +36,6 @@
 }
 
 /* Step label */
-
 .navds-stepper__step-label {
   color: var(--navds-semantic-color-interaction-primary);
   text-align: start;
