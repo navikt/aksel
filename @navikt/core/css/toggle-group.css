@@ -19,7 +19,7 @@
 }
 
 .navds-toggle-group {
-  border-radius: 7px;
+  border-radius: 7px; /* Custom value OK */
   background-color: var(--navds-toggle-group-color-background);
   box-shadow: inset 0 0 0 1px var(--navds-toggle-group-color-border);
   padding: calc(var(--navds-spacing-1) + 1px);
@@ -39,7 +39,7 @@
   cursor: pointer;
   background-color: var(--navds-toggle-group-color-background);
   color: var(--navds-toggle-group-color-text);
-  border-radius: 2px;
+  border-radius: var(--navds-border-radius-small);
   min-width: fit-content;
 }
 
