@@ -29,7 +29,6 @@ export type ListType = React.ForwardRefExoticComponent<
 
 const List = forwardRef<HTMLDivElement, ListProps>(
   ({ className, ...rest }, ref) => {
-    /* console.log(getNormalizedScrollLeft()) */
     const listRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = mergeRefs([listRef, ref]);
     const [displayScroll, setDisplayScroll] = useState({
@@ -100,29 +99,39 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       };
     }, [handleTabsScroll]);
 
+    const moveTabsScroll = (dir: 1 | -1) => {
+      if (!listRef.current) return;
+
+      const scroll = dir * 100;
+      listRef.current.scrollLeft += scroll;
+    };
+
+    const ScrollButton = ({ dir }: { dir: 1 | -1 }) => (
+      <div
+        className="navds-tabs__scroll-button"
+        onClick={() => moveTabsScroll(dir)}
+      >
+        {dir === -1 ? (
+          <Back title="scroll tilbake" />
+        ) : (
+          <Next title="scroll neste" />
+        )}
+      </div>
+    );
+
     return (
       <div className="navds-tabs__tablist-wrapper">
-        {displayScroll.start && <ScrollButton dir="start" />}
+        {displayScroll.start && <ScrollButton dir={-1} />}
         <TabsList
           {...rest}
           ref={mergedRef}
           onScroll={handleTabsScroll}
           className={cl("navds-tabs__tablist", className)}
         />
-        {displayScroll.end && <ScrollButton dir="end" />}
+        {displayScroll.end && <ScrollButton dir={1} />}
       </div>
     );
   }
 ) as ListType;
-
-const ScrollButton = ({ dir }: { dir: "start" | "end" }) => (
-  <div className="navds-tabs__scroll-button">
-    {dir === "start" ? (
-      <Back title="scroll tilbake" />
-    ) : (
-      <Next title="scroll neste" />
-    )}
-  </div>
-);
 
 export default List;
