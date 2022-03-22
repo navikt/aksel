@@ -22,7 +22,7 @@ export interface TabProps
    * Icon position
    * @default "start"
    */
-  iconPosition?: "start" | "top";
+  iconPosition?: "left" | "top";
 }
 
 export type TabType = React.ForwardRefExoticComponent<
