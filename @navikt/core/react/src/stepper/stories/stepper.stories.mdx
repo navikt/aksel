@@ -13,10 +13,16 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
 
 ```jsx
 <Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
-  <Stepper.Step>Start</Stepper.Step>
-  <Stepper.Step>Sunt deserunt qui sit sunt culpa nisi</Stepper.Step>
-  <Stepper.Step>Nulla nisi pariatur nulla cupidatat elit.</Stepper.Step>
-  <Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Start
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Sunt deserunt qui sit sunt culpa nisi
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
     Nulla laborum proident consequat laborum elit et dolore ut sunt.
   </Stepper.Step>
 </Stepper>
@@ -26,51 +32,30 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
   <Example />
 </Canvas>
 
-## aria-labelledby
-
-Bruk egendefinert overskrift med en id og send den til Stepper med `aria-labelledby`
-
-```jsx
-<div>
-  <h2 id="stepper-heading">Dette er tittelen til Stepper-komponentet</h2>
-  <Stepper
-    aria-labelledby="stepper-heading"
-    activeStep={activeStep}
-    onStepChange={(x) => setActiveStep(x)}
-  >
-    <Stepper.Step>Start</Stepper.Step>
-    <Stepper.Step>Sunt deserunt qui sit sunt culpa nisi</Stepper.Step>
-    <Stepper.Step>Nulla nisi pariatur nulla cupidatat elit.</Stepper.Step>
-    <Stepper.Step>
-      Nulla laborum proident consequat laborum elit et dolore ut sunt.
-    </Stepper.Step>
-  </Stepper>
-</div>
-```
-
-<Canvas>
-  <h2 id="stepper-heading">Dette er tittelen til Stepper-komponentet</h2>
-  <Example aria-labelledby="stepper-heading" />
-</Canvas>
-
 ## Override tags
 
 `Stepper.Step` er implementert med Overridable-component noe som gjør at du kan endre taggen til
-det du vil med `as`-prop. Merk at det alltid er en `<li>`-wrapper over for tilgjengelighet.
+det du vil med `as`-prop. Merk at Step åakkes inn i en `<li>`-wrapper for tilgjengelighet.
 
 ```jsx
 <Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
   {/* <button> er default */}
-  <Stepper.Step>{`Dette er default, et <button>-element`}</Stepper.Step>
-  <Stepper.Step as="a" href="#">{`Dette er et <a>-element`}</Stepper.Step>
+  <Stepper.Step
+    href=""
+    onClick={(e) => e.preventDefault()}
+  >{`Dette er default, et <a>-element`}</Stepper.Step>
+  <Stepper.Step as="button">{`Dette er et <button>-element`}</Stepper.Step>
   <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
 </Stepper>
 ```
 
 <Canvas>
   <Stepper activeStep={1} onStepChange={console.log}>
-    <Stepper.Step>{`Dette er default, et <button>-element`}</Stepper.Step>
-    <Stepper.Step as="a" href="#">{`Dette er et <a>-element`}</Stepper.Step>
+    <Stepper.Step
+      href=""
+      onClick={(e) => e.preventDefault()}
+    >{`Dette er default, et <a>-element`}</Stepper.Step>
+    <Stepper.Step as="button">{`Dette er et <button>-element`}</Stepper.Step>
     <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
   </Stepper>
 </Canvas>

@@ -6,12 +6,21 @@ export const Example = (props) => {
     props.initialStep ? props.initialStep : 1
   );
 
+  const anchorProps = {
+    href: "",
+    onClick: (e) => e.preventDefault(),
+  };
+
   return (
     <Stepper {...props} activeStep={activeStep} onStepChange={setActiveStep}>
-      <Stepper.Step>Start</Stepper.Step>
-      <Stepper.Step>Sunt deserunt qui sit sunt culpa nisi</Stepper.Step>
-      <Stepper.Step>Nulla nisi pariatur nulla cupidatat elit.</Stepper.Step>
-      <Stepper.Step>
+      <Stepper.Step {...anchorProps}>Start</Stepper.Step>
+      <Stepper.Step {...anchorProps}>
+        Sunt deserunt qui sit sunt culpa nisi
+      </Stepper.Step>
+      <Stepper.Step {...anchorProps}>
+        Nulla nisi pariatur nulla cupidatat elit.
+      </Stepper.Step>
+      <Stepper.Step {...anchorProps}>
         Nulla laborum proident consequat laborum elit et dolore ut sunt.
       </Stepper.Step>
     </Stepper>

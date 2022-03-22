@@ -19,6 +19,12 @@ export const All = () => {
     "Move the needle a loss a day will keep you focus yet can you put it into a banner that is not alarming, but eye catching and not too giant or strategic fit, nor it is all exactly as i said, but i don't like it or streamline. We've bootstrapped the model. This proposal is a win-win situation which will cause a stellar paradigm shift, and produce a multi-fold increase in deliverables the horse is out of the barn usabiltiy, for going forward but going forward.",
   ];
   const [activeStep, setActiveStep] = useState(1);
+
+  const anchorProps = {
+    href: "",
+    onClick: (e) => e.preventDefault(),
+  };
+
   return (
     <div style={{ display: "flex", gap: "10rem" }}>
       <div>
@@ -28,13 +34,13 @@ export const All = () => {
           activeStep={activeStep}
           onStepChange={setActiveStep}
         >
-          <Stepper.Step>Start søknad</Stepper.Step>
-          <Stepper.Step>Personopplysninger</Stepper.Step>
-          <Stepper.Step>Saksopplysninger</Stepper.Step>
-          <Stepper.Step>Søknadstekst</Stepper.Step>
-          <Stepper.Step>Vedlegg</Stepper.Step>
-          <Stepper.Step>Oppsummering</Stepper.Step>
-          <Stepper.Step>Innsending</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Start søknad</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Personopplysninger</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Saksopplysninger</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Søknadstekst</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Vedlegg</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Oppsummering</Stepper.Step>
+          <Stepper.Step {...anchorProps}>Innsending</Stepper.Step>
         </Stepper>
       </div>
       <BodyLong style={{ marginTop: "5rem" }}>

@@ -4,7 +4,7 @@ import { StepperContext } from ".";
 import { Label, OverridableComponent } from "..";
 
 export interface StepperStepProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
    * Text content under indicator
    */
@@ -16,29 +16,29 @@ export interface StepperStepProps
 }
 
 export interface StepperStepType
-  extends OverridableComponent<StepperStepProps, HTMLButtonElement> {}
+  extends OverridableComponent<StepperStepProps, HTMLAnchorElement> {}
 
 const StepComponent: OverridableComponent<
   StepperStepProps,
-  HTMLButtonElement
+  HTMLAnchorElement
 > = forwardRef(
   ({ className, children, as: Component = "a", index = 0, ...rest }, ref) => {
     const context = useContext(StepperContext);
-
     if (context === null) {
       console.error(
         "<StepIndicator.Step> has to be used within an <StepIndicator>"
       );
       return null;
     }
+    const activeStep = context.activeStep === index;
 
     return (
       <Component
         {...rest}
-        aria-current={Boolean(context.activeStep === index)}
+        aria-current={Boolean(activeStep)}
         ref={ref}
         className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": context.activeStep === index,
+          "navds-stepper__step--active": activeStep,
         })}
         onClick={(e) => {
           context.onStepChange(index);
@@ -46,7 +46,7 @@ const StepComponent: OverridableComponent<
         }}
       >
         <Label className="navds-stepper__step-number" as="span">
-          {context.activeStep === index ? `${index + 1}` : index + 1}
+          {activeStep ? `${index + 1}` : index + 1}
         </Label>
         <Label className="navds-stepper__step-label">{children}</Label>
       </Component>
