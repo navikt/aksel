@@ -4,6 +4,7 @@
     "outDir": "./esm",
     "module": "esnext",
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    "noImplicitAny": false
   }
 }

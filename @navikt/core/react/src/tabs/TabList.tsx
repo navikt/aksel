@@ -1,6 +1,14 @@
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
-import React, { forwardRef } from "react";
+import { node } from "prop-types";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import mergeRefs from "react-merge-refs";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,13 +26,107 @@ export type ListType = React.ForwardRefExoticComponent<
 >;
 
 const List = forwardRef<HTMLDivElement, ListProps>(
-  ({ className, ...rest }, ref) => (
-    <TabsList
-      {...rest}
-      ref={ref}
-      className={cl("navds-tabs__tablist", className)}
-    />
-  )
+  ({ className, ...rest }, ref) => {
+    /* console.log(getNormalizedScrollLeft()) */
+    const listRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = mergeRefs([listRef, ref]);
+    const [displayScroll, setDisplayScroll] = useState({
+      start: false,
+      end: false,
+    });
+
+    const updateScrollButtonState = useCallback(() => {
+      if (!listRef?.current) return;
+      const { scrollWidth, clientWidth } = listRef?.current;
+      let showStartScroll;
+      let showEndScroll;
+
+      const scrollLeft = listRef?.current?.scrollLeft;
+      // use 1 for the potential rounding error with browser zooms.
+      showStartScroll = scrollLeft > 1;
+      showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
+
+      if (
+        showStartScroll !== displayScroll.start ||
+        showEndScroll !== displayScroll.end
+      ) {
+        setDisplayScroll({ start: showStartScroll, end: showEndScroll });
+      }
+    }, [displayScroll.end, displayScroll.start]);
+
+    useEffect(() => {
+      const handleResize = debounce(() => {
+        updateScrollButtonState();
+      });
+      const win =
+        (listRef.current && listRef.current.ownerDocument) ||
+        document ||
+        window;
+      win.addEventListener("resize", handleResize);
+
+      let resizeObserver;
+
+      if (typeof ResizeObserver !== "undefined") {
+        resizeObserver = new ResizeObserver(handleResize);
+        resizeObserver.observe(listRef.current);
+      }
+
+      return () => {
+        handleResize.clear();
+        win.removeEventListener("resize", handleResize);
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+        }
+      };
+    }, []);
+
+    return (
+      <TabsList
+        {...rest}
+        ref={mergedRef}
+        className={cl("navds-tabs__tablist", className)}
+      />
+    );
+  }
 ) as ListType;
 
 export default List;
+
+/*   React.useEffect(() => {
+    const handleResize = debounce(() => {
+      updateIndicatorState();
+      updateScrollButtonState();
+    });
+    const win = ownerWindow(tabsRef.current);
+    win.addEventListener('resize', handleResize);
+
+    let resizeObserver;
+
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(handleResize);
+      Array.from(tabListRef.current.children).forEach((child) => {
+        resizeObserver.observe(child);
+      });
+    }
+
+    return () => {
+      handleResize.clear();
+      win.removeEventListener('resize', handleResize);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
+    };
+  }, [updateIndicatorState, updateScrollButtonState]);
+
+  const handleTabsScroll = React.useMemo(
+    () =>
+      debounce(() => {
+        updateScrollButtonState();
+      }),
+    [updateScrollButtonState],
+  ); */
+
+/* React.useEffect(() => {
+    updateIndicatorState();
+    updateScrollButtonState();
+  }); */
