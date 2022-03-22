@@ -1,12 +1,12 @@
 .navds-story-cell {
-  border-radius: 0.25rem;
+  border-radius: var(--navds-border-radius-medium);
   background: white;
   padding: 1rem;
 }
 
 .navds-story-content-container {
   display: flex;
-  border-radius: 0.25rem;
+  border-radius: var(--navds-border-radius-medium);
   justify-content: center;
   align-items: center;
   margin-bottom: 1.5rem;

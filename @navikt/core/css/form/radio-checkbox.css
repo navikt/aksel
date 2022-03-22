@@ -57,12 +57,12 @@
   box-shadow: inset 0 0 0 2px var(--navds-radio-checkbox-color-shadow);
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   flex-shrink: 0;
 }
 
 .navds-radio__label::before {
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
 }
 
 .navds-checkbox__content,
@@ -121,7 +121,7 @@
   background-color: var(--navds-radio-checkbox-color-background);
   width: 0.75rem;
   height: 0.25rem;
-  border-radius: 1px;
+  border-radius: 1px; /* Custom value OK */
   flex-shrink: 0;
 }
 
