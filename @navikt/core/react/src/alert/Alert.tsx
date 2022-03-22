@@ -1,11 +1,11 @@
-import React, { forwardRef } from "react";
-import cl from "classnames";
 import {
   ErrorFilled,
-  WarningFilled,
   InformationFilled,
   SuccessFilled,
+  WarningFilled,
 } from "@navikt/ds-icons";
+import cl from "classnames";
+import React, { forwardRef } from "react";
 import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
