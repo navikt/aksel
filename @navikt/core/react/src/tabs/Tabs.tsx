@@ -29,7 +29,7 @@ export interface TabsProps
    */
   defaultValue?: string;
   /**
-   * Automatically activates tab on fokus/navigation
+   * Automatically activates tab on focus/navigation
    * @default false
    */
   selectionFollowsFocus?: boolean;

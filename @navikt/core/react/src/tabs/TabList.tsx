@@ -8,7 +8,7 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Lopps back to start when navigating past last item
+   * Loops back to start when navigating past last item
    */
   loop?: boolean;
 }
