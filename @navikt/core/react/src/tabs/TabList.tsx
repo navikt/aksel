@@ -1,10 +1,11 @@
+import { debounce } from "@material-ui/core";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
-import { node } from "prop-types";
 import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -57,6 +58,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
     useEffect(() => {
       const handleResize = debounce(() => {
         updateScrollButtonState();
+        console.count("test");
       });
       const win =
         (listRef.current && listRef.current.ownerDocument) ||
@@ -78,12 +80,31 @@ const List = forwardRef<HTMLDivElement, ListProps>(
           resizeObserver.disconnect();
         }
       };
-    }, []);
+    }, [updateScrollButtonState]);
+
+    useEffect(() => {
+      updateScrollButtonState();
+    });
+
+    const handleTabsScroll = useMemo(
+      () =>
+        debounce(() => {
+          updateScrollButtonState();
+        }),
+      [updateScrollButtonState]
+    );
+
+    useEffect(() => {
+      return () => {
+        handleTabsScroll.clear();
+      };
+    }, [handleTabsScroll]);
 
     return (
       <TabsList
         {...rest}
         ref={mergedRef}
+        onScroll={handleTabsScroll}
         className={cl("navds-tabs__tablist", className)}
       />
     );
@@ -91,42 +112,3 @@ const List = forwardRef<HTMLDivElement, ListProps>(
 ) as ListType;
 
 export default List;
-
-/*   React.useEffect(() => {
-    const handleResize = debounce(() => {
-      updateIndicatorState();
-      updateScrollButtonState();
-    });
-    const win = ownerWindow(tabsRef.current);
-    win.addEventListener('resize', handleResize);
-
-    let resizeObserver;
-
-    if (typeof ResizeObserver !== 'undefined') {
-      resizeObserver = new ResizeObserver(handleResize);
-      Array.from(tabListRef.current.children).forEach((child) => {
-        resizeObserver.observe(child);
-      });
-    }
-
-    return () => {
-      handleResize.clear();
-      win.removeEventListener('resize', handleResize);
-      if (resizeObserver) {
-        resizeObserver.disconnect();
-      }
-    };
-  }, [updateIndicatorState, updateScrollButtonState]);
-
-  const handleTabsScroll = React.useMemo(
-    () =>
-      debounce(() => {
-        updateScrollButtonState();
-      }),
-    [updateScrollButtonState],
-  ); */
-
-/* React.useEffect(() => {
-    updateIndicatorState();
-    updateScrollButtonState();
-  }); */
