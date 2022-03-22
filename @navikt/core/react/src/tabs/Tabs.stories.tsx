@@ -40,6 +40,34 @@ export const UUDemo = () => (
   </Tabs>
 );
 
+const Panel = () => {
+  return (
+    <>
+      <Tabs.Panel
+        value="test1"
+        style={{ background: "var(--navds-global-color-gray-50)", height: 100 }}
+      >
+        Innholdspanel for Skap-tab
+      </Tabs.Panel>
+      <Tabs.Panel
+        value="test2"
+        style={{
+          background: "var(--navds-global-color-green-50)",
+          height: 100,
+        }}
+      >
+        Innholdspanel for Oppvaskmaskin-tab
+      </Tabs.Panel>
+      <Tabs.Panel
+        value="test3"
+        style={{ background: "var(--navds-global-color-red-50)", height: 100 }}
+      >
+        Innholdspanel for Fryser-tab
+      </Tabs.Panel>
+    </>
+  );
+};
+
 export const All = () => {
   const [activeValue, setActiveValue] = useState("test1");
 
@@ -52,6 +80,17 @@ export const All = () => {
           <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
           <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
         </Tabs.List>
+        <Panel />
+      </Tabs>
+
+      <h2>Controlled</h2>
+      <Tabs value={activeValue} onChange={setActiveValue}>
+        <Tabs.List>
+          <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
+          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
+          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+        </Tabs.List>
+        <Panel />
       </Tabs>
 
       <h2>selectionFollowsFocus</h2>
@@ -61,21 +100,7 @@ export const All = () => {
           <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
           <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
         </Tabs.List>
-      </Tabs>
-
-      <h2>Controlled</h2>
-      <Tabs value={activeValue} onChange={setActiveValue}>
-        <Tabs.List>
-          <Tabs.List>
-            <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-            <Tabs.Tab
-              value="test2"
-              label="Oppvaskmaskin"
-              icon={<Dishwasher />}
-            />
-            <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
-          </Tabs.List>
-        </Tabs.List>
+        <Panel />
       </Tabs>
 
       <h2>Tabs iconPosition="top"</h2>
@@ -100,6 +125,7 @@ export const All = () => {
             iconPosition="top"
           />
         </Tabs.List>
+        <Panel />
       </Tabs>
 
       <h2>Tabs small</h2>
@@ -109,6 +135,7 @@ export const All = () => {
           <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
           <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
         </Tabs.List>
+        <Panel />
       </Tabs>
       <br />
       <Tabs defaultValue="test2" size="small">
@@ -133,6 +160,7 @@ export const All = () => {
             iconPosition="top"
           />
         </Tabs.List>
+        <Panel />
       </Tabs>
 
       <h2>Tabs Ikon-only</h2>
@@ -142,6 +170,7 @@ export const All = () => {
           <Tabs.Tab value="test2" icon={<Dishwasher />} />
           <Tabs.Tab value="test3" icon={<Freezer />} />
         </Tabs.List>
+        <Panel />
       </Tabs>
       <br />
       <Tabs defaultValue="test2" size="small">
@@ -150,24 +179,8 @@ export const All = () => {
           <Tabs.Tab value="test2" icon={<Dishwasher />} />
           <Tabs.Tab value="test3" icon={<Freezer />} />
         </Tabs.List>
+        <Panel />
       </Tabs>
-      {/* <h2>Regular font (BodyShort)</h2>
-      <Tabs defaultValue="test2" >
-        <Tabs.List>
-          <Tabs.Tab value="test1">
-            <Cup />
-            Skap
-          </Tabs.Tab>
-          <Tabs.Tab value="test2">
-            <Dishwasher />
-            Oppvaskmaskin
-          </Tabs.Tab>
-          <Tabs.Tab value="test3">
-            <Freezer />
-            Fryser
-          </Tabs.Tab>
-        </Tabs.List>
-      </Tabs> */}
     </div>
   );
 };
