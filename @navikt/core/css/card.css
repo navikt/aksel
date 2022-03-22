@@ -27,7 +27,7 @@
 */
 
 .navds-card__micro {
-  border-radius: 1rem;
+  border-radius: var(--navds-border-radius-full);
   color: var(--navds-card-micro-color-text);
   display: inline-flex;
   padding: var(--navds-spacing-1) var(--navds-spacing-2);

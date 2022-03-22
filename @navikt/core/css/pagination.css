@@ -47,7 +47,7 @@
   text-decoration: none;
   border: none;
   background: none;
-  border-radius: 2px;
+  border-radius: var(--navds-border-radius-small);
   padding: var(--navds-spacing-1) var(--navds-spacing-3);
 }
 
@@ -87,7 +87,7 @@
   color: var(--navds-semantic-color-link);
   align-items: center;
   gap: var(--navds-spacing-1);
-  border-radius: 2px;
+  border-radius: var(--navds-border-radius-small);
 }
 
 .navds-pagination__prev-next:focus {

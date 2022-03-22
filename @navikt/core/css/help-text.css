@@ -27,7 +27,7 @@
   border: 0;
   cursor: pointer;
   background-color: transparent;
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -49,7 +49,7 @@
 }
 
 .navds-help-text__icon {
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
 }
 
 .navds-help-text__popover > .navds-popover__arrow::before {
