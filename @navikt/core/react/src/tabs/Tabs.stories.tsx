@@ -163,7 +163,7 @@ export const All = () => {
         <Panel />
       </Tabs>
 
-      <h2>Tabs Ikon-only</h2>
+      <h2>Tabs Icon-only</h2>
       <Tabs defaultValue="test2">
         <Tabs.List>
           <Tabs.Tab value="test1" icon={<Cup />} />
