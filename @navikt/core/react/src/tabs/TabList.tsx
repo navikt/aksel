@@ -1,4 +1,5 @@
 import { debounce } from "@material-ui/core";
+import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
 import React, {
@@ -58,7 +59,6 @@ const List = forwardRef<HTMLDivElement, ListProps>(
     useEffect(() => {
       const handleResize = debounce(() => {
         updateScrollButtonState();
-        console.count("test");
       });
       const win =
         (listRef.current && listRef.current.ownerDocument) ||
@@ -101,14 +101,28 @@ const List = forwardRef<HTMLDivElement, ListProps>(
     }, [handleTabsScroll]);
 
     return (
-      <TabsList
-        {...rest}
-        ref={mergedRef}
-        onScroll={handleTabsScroll}
-        className={cl("navds-tabs__tablist", className)}
-      />
+      <div className="navds-tabs__tablist-wrapper">
+        {displayScroll.start && <ScrollButton dir="start" />}
+        <TabsList
+          {...rest}
+          ref={mergedRef}
+          onScroll={handleTabsScroll}
+          className={cl("navds-tabs__tablist", className)}
+        />
+        {displayScroll.end && <ScrollButton dir="end" />}
+      </div>
     );
   }
 ) as ListType;
+
+const ScrollButton = ({ dir }: { dir: "start" | "end" }) => (
+  <div className="navds-tabs__scroll-button">
+    {dir === "start" ? (
+      <Back title="scroll tilbake" />
+    ) : (
+      <Next title="scroll neste" />
+    )}
+  </div>
+);
 
 export default List;
