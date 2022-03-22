@@ -42,12 +42,11 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
-          title={title}
         >
           <HelpTextIcon
             className="navds-help-text__icon"
             aria-hidden
-            aria-label="hjelp"
+            title={title}
           />
         </button>
         <Popover
