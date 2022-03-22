@@ -3,49 +3,28 @@
   --navds-alert-color-error-border: var(
     --navds-semantic-color-feedback-danger-border
   );
-  --navds-alert-color-error-background: var(
-    --navds-semantic-color-feedback-danger-background
-  );
+  --navds-alert-color-error-background: var(--navds-global-color-red-50);
   --navds-alert-color-warning-border: var(
     --navds-semantic-color-feedback-warning-border
   );
-  --navds-alert-color-warning-background: var(
-    --navds-semantic-color-feedback-warning-background
-  );
+  --navds-alert-color-warning-background: var(--navds-global-color-orange-50);
   --navds-alert-color-info-border: var(
     --navds-semantic-color-feedback-info-border
   );
-  --navds-alert-color-info-background: var(
-    --navds-semantic-color-feedback-info-background
-  );
+  --navds-alert-color-info-background: var(--navds-global-color-lightblue-50);
   --navds-alert-color-success-border: var(
     --navds-semantic-color-feedback-success-border
   );
-  --navds-alert-color-success-background: var(
-    --navds-semantic-color-feedback-success-background
-  );
+  --navds-alert-color-success-background: var(--navds-global-color-green-50);
   --navds-alert-color-error-icon: var(
     --navds-semantic-color-feedback-danger-icon
   );
-  --navds-alert-color-error-icon-background: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-alert-color-warning-icon: var(
-    --navds-semantic-color-feedback-warning-icon
-  );
-  --navds-alert-color-warning-icon-background: var(
-    --navds-semantic-color-component-background-inverted
-  );
+  --navds-alert-color-warning-icon: var(--navds-global-color-orange-600);
   --navds-alert-color-info-icon: var(--navds-semantic-color-feedback-info-icon);
-  --navds-alert-color-info-icon-background: var(
-    --navds-semantic-color-component-background-light
-  );
   --navds-alert-color-success-icon: var(
     --navds-semantic-color-feedback-success-icon
   );
-  --navds-alert-color-success-icon-background: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-alert-color-icon-background: var(--navds-global-color-white);
 }
 
 .navds-alert {
@@ -91,7 +70,7 @@
   color: var(--navds-alert-color-error-icon);
   background: radial-gradient(
     circle,
-    var(--navds-alert-color-error-icon-background) 50%,
+    var(--navds-alert-color-icon-background) 50%,
     0,
     transparent
   );
@@ -104,12 +83,11 @@
 
 .navds-alert--warning > .navds-alert__icon {
   color: var(--navds-alert-color-warning-icon);
-  background: radial-gradient(
-    circle,
-    var(--navds-alert-color-warning-icon-background) 50%,
-    0,
-    transparent
-  );
+  background: linear-gradient(
+      var(--navds-alert-color-icon-background),
+      var(--navds-alert-color-icon-background)
+    )
+    center / 16% 60% no-repeat;
 }
 
 .navds-alert--info {
@@ -121,7 +99,7 @@
   color: var(--navds-alert-color-info-icon);
   background: radial-gradient(
     circle,
-    var(--navds-alert-color-info-icon-background) 50%,
+    var(--navds-alert-color-icon-background) 50%,
     0,
     transparent
   );
@@ -136,7 +114,7 @@
   color: var(--navds-alert-color-success-icon);
   background: radial-gradient(
     circle,
-    var(--navds-alert-color-success-icon-background) 50%,
+    var(--navds-alert-color-icon-background) 50%,
     0,
     transparent
   );
