@@ -8,7 +8,7 @@ export interface StepperStepProps
   /**
    * Text content under indicator
    */
-  children: React.ReactNode;
+  children: string;
   /**
    * Handled by Stepper
    */
@@ -22,10 +22,7 @@ const StepComponent: OverridableComponent<
   StepperStepProps,
   HTMLButtonElement
 > = forwardRef(
-  (
-    { className, children, as: Component = "button", index = 0, ...rest },
-    ref
-  ) => {
+  ({ className, children, as: Component = "a", index = 0, ...rest }, ref) => {
     const context = useContext(StepperContext);
 
     if (context === null) {
