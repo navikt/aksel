@@ -77,8 +77,13 @@ export const All = () => {
       <Tabs defaultValue="test2">
         <Tabs.List>
           <Tabs.Tab value="test1" icon={<Cup />} label="Skap" />
-          <Tabs.Tab value="test2" label="Oppvaskmaskin" icon={<Dishwasher />} />
-          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" />
+          <Tabs.Tab
+            value="test2"
+            label="Oppvaskmaskin"
+            icon={<Dishwasher />}
+            as="a"
+          />
+          <Tabs.Tab value="test3" icon={<Freezer />} label="Fryser" as="a" />
         </Tabs.List>
         <Panel />
       </Tabs>
