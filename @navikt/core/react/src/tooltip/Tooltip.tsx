@@ -199,7 +199,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       right: ["left", "marginLeft"],
       bottom: ["top", "marginTop"],
       left: ["right", "marginRight"],
-    }[placement.split("-")[0]];
+    }[placement];
 
     return (
       <>
@@ -253,7 +253,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 left: x ?? "",
                 visibility: referenceHidden ? "hidden" : "visible",
               }}
-              data-side={placement.split("-")[0]}
+              data-side={placement}
               className={cl(
                 "navds-tooltip",
                 "navds-detail navds-detail--small",
@@ -269,7 +269,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                   ...(staticSide
                     ? { [staticSide[1]]: _offset ? _offset : _arrow ? 10 : 2 }
                     : ""),
-                  opacity: 1,
                 }}
               >
                 {content}
