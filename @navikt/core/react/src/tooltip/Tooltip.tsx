@@ -194,13 +194,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return null;
     }
 
-    const staticSide = {
-      top: ["bottom", "marginBottom"],
-      right: ["left", "marginLeft"],
-      bottom: ["top", "marginTop"],
-      left: ["right", "marginRight"],
-    }[placement];
-
     return (
       <>
         {cloneElement(children, {
@@ -266,8 +259,15 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               <div
                 className="navds-tooltip__inner"
                 style={{
-                  ...(staticSide
-                    ? { [staticSide[1]]: _offset ? _offset : _arrow ? 10 : 2 }
+                  ...(placement
+                    ? {
+                        [{
+                          top: "marginBottom",
+                          right: "marginLeft",
+                          bottom: "marginTop",
+                          left: "marginRight",
+                        }[placement]]: _offset ? _offset : _arrow ? 10 : 2,
+                      }
                     : ""),
                 }}
               >
@@ -297,7 +297,16 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                       top: arrowY != null ? `${arrowY}px` : "",
                       right: "",
                       bottom: "",
-                      ...(staticSide ? { [staticSide[0]]: "-3.5px" } : ""),
+                      ...(placement
+                        ? {
+                            [{
+                              top: "bottom",
+                              right: "left",
+                              bottom: "top",
+                              left: "right",
+                            }[placement]]: "-3.5px",
+                          }
+                        : ""),
                     }}
                   />
                 )}
