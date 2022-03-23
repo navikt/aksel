@@ -91,7 +91,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       id,
       inverted = false,
       keys,
-      id: _id,
       maxChar = 80,
       ...rest
     },
