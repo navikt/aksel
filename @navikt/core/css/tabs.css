@@ -2,6 +2,7 @@
   box-shadow: inset 0 -1px 0 0 var(--navds-global-color-gray-300);
   width: 100%;
   display: flex;
+  position: relative;
 }
 
 .navds-tabs__tablist {
@@ -9,6 +10,7 @@
   overflow-x: auto;
   max-width: 100%;
   width: auto;
+  scroll-behavior: smooth;
 }
 
 .navds-tabs__scroll-button {
@@ -17,6 +19,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.navds-tabs__scroll-button--disabled {
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .navds-tabs__scroll-button svg {
