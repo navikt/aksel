@@ -37,7 +37,10 @@ export const All = () => {
           <Stepper.Step {...anchorProps}>Start søknad</Stepper.Step>
           <Stepper.Step {...anchorProps}>Personopplysninger</Stepper.Step>
           <Stepper.Step {...anchorProps}>Saksopplysninger</Stepper.Step>
-          <Stepper.Step {...anchorProps}>Søknadstekst</Stepper.Step>
+          <Stepper.Step {...anchorProps}>
+            Søknadstekst for en veldig spesifikk prosess i NAV som jeg må skrive
+            om her i denne labelen
+          </Stepper.Step>
           <Stepper.Step {...anchorProps}>Vedlegg</Stepper.Step>
           <Stepper.Step {...anchorProps}>Oppsummering</Stepper.Step>
           <Stepper.Step {...anchorProps}>Innsending</Stepper.Step>
