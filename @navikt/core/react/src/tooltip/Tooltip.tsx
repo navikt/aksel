@@ -208,7 +208,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           "aria-describedby":
             open || isOpen
               ? cl(ariaId, children?.props["aria-describedby"])
-              : children?.props["aria-describedby"] ?? undefined,
+              : children?.props["aria-describedby"],
           ref: mergeRefs([(children as any).ref, refs.reference]),
           onMouseEnter: composeEventHandlers(
             children.props.onMouseEnter,
