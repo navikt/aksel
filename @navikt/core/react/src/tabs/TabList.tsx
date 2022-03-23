@@ -47,21 +47,19 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       showStartScroll = scrollLeft > 1;
       showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
 
-      setDisplayScroll(displayScroll => 
-        showStartScroll === displayScroll.start && showEndScroll === displayScroll.end
+      setDisplayScroll((displayScroll) =>
+        showStartScroll === displayScroll.start &&
+        showEndScroll === displayScroll.end
           ? displayScroll
           : { start: showStartScroll, end: showEndScroll }
-        );
+      );
     }, []);
 
     useEffect(() => {
       const handleResize = debounce(() => {
         updateScrollButtonState();
       });
-      const win =
-        listRef.current?.ownerDocument ??
-        document ??
-        window;
+      const win = listRef.current?.ownerDocument ?? document ?? window;
       win.addEventListener("resize", handleResize);
 
       let resizeObserver;
@@ -98,13 +96,6 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       };
     }, [handleTabsScroll]);
 
-    const moveTabsScroll = (dir: 1 | -1) => {
-      if (!listRef.current) return;
-
-      const scroll = dir * 100;
-      listRef.current.scrollLeft += scroll;
-    };
-
     const ScrollButton = ({
       dir,
       hidden,
@@ -116,7 +107,10 @@ const List = forwardRef<HTMLDivElement, ListProps>(
         className={cl("navds-tabs__scroll-button", {
           "navds-tabs__scroll-button--hidden": hidden,
         })}
-        onClick={() => moveTabsScroll(dir)}
+        onClick={() => {
+          if (!listRef.current) return;
+          listRef.current.scrollLeft &&= listRef.current.scrollLeft + dir * 100;
+        }}
       >
         {dir === -1 ? (
           <Back title="scroll tilbake" />
