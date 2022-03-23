@@ -280,9 +280,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                         size="small"
                         as="kbd"
                         key={key}
-                        className={cl("navds-tooltip__key", {
-                          "navds-tooltip__key--inverted": inverted,
-                        })}
+                        className="navds-tooltip__key"
                       >
                         {key}
                       </Detail>

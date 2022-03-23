@@ -63,7 +63,7 @@
   justify-content: center;
 }
 
-.navds-tooltip__key--inverted {
+.navds-tooltip--inverted .navds-tooltip__key {
   background-color: var(--navds-global-color-gray-200);
   color: var(--navds-semantic-color-text);
 }
