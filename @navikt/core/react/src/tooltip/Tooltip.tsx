@@ -76,9 +76,6 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   keys?: string[];
 }
 
-/**
- * TODO: console.error for lange tekster, egen prop for å justere opp makslengde
- */
 const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
