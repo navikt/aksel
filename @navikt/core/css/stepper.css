@@ -10,10 +10,8 @@
 
 .navds-stepper__step {
   position: relative;
-  min-height: 4rem;
-  align-items: center;
-  overflow-y: hidden;
   cursor: pointer;
+  padding: calc(2.25rem / 2) 0;
   display: flex;
   background: none;
   border: none;
@@ -22,15 +20,6 @@
   color: var(--navds-semantic-color-text);
   text-decoration: none;
   flex-shrink: 0;
-}
-.navds-stepper__step-wrapper:last-child {
-  min-height: auto;
-}
-.navds-stepper__step-wrapper:first-child > .navds-stepper__step {
-  padding-block-start: 0;
-}
-.navds-stepper__step-wrapper:last-child > .navds-stepper__step {
-  padding: 0rem 0 0 0;
 }
 
 .navds-stepper__step-number {
@@ -78,6 +67,7 @@
 
 /* Step label */
 .navds-stepper__step-label {
+  margin-top: 2px;
   color: var(--navds-semantic-color-interaction-primary);
   text-align: start;
 }
@@ -95,27 +85,16 @@
 }
 
 /* Step Horizontal Lines */
-.navds-stepper__step-wrapper:not(:first-child) > .navds-stepper__step::before {
+
+.navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
   content: "";
   position: absolute;
-  bottom: calc(50% + 14px + 8px);
+  top: calc(28px + 8px + (2.25rem / 2));
   left: 13px;
-  height: calc(50%);
+  height: calc(100% - 2.75rem);
   display: block;
   border-left: 2px solid var(--navds-semantic-color-border-muted);
   border-radius: var(--navds-border-radius-medium);
   pointer-events: none;
   z-index: -1;
-}
-
-.navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
-  content: "";
-  position: absolute;
-  top: calc(50% + 14px + 8px);
-  left: 13px;
-  height: calc(50%);
-  display: block;
-  border-left: 2px solid var(--navds-semantic-color-border-muted);
-  border-radius: var(--navds-border-radius-medium);
-  pointer-events: none;
 }
