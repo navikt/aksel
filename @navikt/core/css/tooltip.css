@@ -48,6 +48,8 @@
 
 .navds-tooltip__keys {
   padding-bottom: 0.125rem;
+  display: flex;
+  gap: 0.125rem;
 }
 
 .navds-tooltip__key {
@@ -61,10 +63,6 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.navds-tooltip__key + .navds-tooltip__key {
-  margin-left: 0.125rem;
 }
 
 .navds-tooltip__key--inverted {

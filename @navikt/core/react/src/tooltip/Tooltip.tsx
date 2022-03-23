@@ -203,13 +203,19 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const ariaProps = {};
     ariaProps["aria-describedby"] =
-      open ?? isOpen ? cl(ariaId, children?.props["aria-describedby"]) : null;
+      open || isOpen ? cl(ariaId, children?.props["aria-describedby"]) : null;
 
     return (
       <>
         {cloneElement(children, {
           ...children.props,
           ...ariaProps,
+          "aria-describedby":
+            open || isOpen
+              ? cl(ariaId, children?.props["aria-describedby"])
+              : children?.props["aria-describedby"]
+              ? children?.props["aria-describedby"]
+              : undefined,
           ref: mergeRefs([(children as any).ref, refs.reference]),
           onMouseEnter: composeEventHandlers(
             children.props.onMouseEnter,
