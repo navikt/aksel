@@ -19,7 +19,7 @@ export interface SelectProps
   /**
    * Label for select
    */
-  label: string;
+  label: React.ReactNode;
   /**
    * If enabled shows the label and description for screenreaders only
    */
