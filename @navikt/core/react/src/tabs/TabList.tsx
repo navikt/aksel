@@ -36,24 +36,28 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       end: false,
     });
 
-    const updateScrollButtonState = useCallback(() => {
-      if (!listRef?.current) return;
-      const { scrollWidth, clientWidth } = listRef?.current;
-      let showStartScroll;
-      let showEndScroll;
+    const updateScrollButtonState = useMemo(
+      () =>
+        debounce(() => {
+          if (!listRef?.current) return;
+          const { scrollWidth, clientWidth } = listRef?.current;
+          let showStartScroll;
+          let showEndScroll;
 
-      const scrollLeft = listRef?.current?.scrollLeft;
-      // use 1 for the potential rounding error with browser zooms.
-      showStartScroll = scrollLeft > 1;
-      showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
+          const scrollLeft = listRef?.current?.scrollLeft;
+          // use 1 for the potential rounding error with browser zooms.
+          showStartScroll = scrollLeft > 1;
+          showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
 
-      setDisplayScroll((displayScroll) =>
-        showStartScroll === displayScroll.start &&
-        showEndScroll === displayScroll.end
-          ? displayScroll
-          : { start: showStartScroll, end: showEndScroll }
-      );
-    }, []);
+          setDisplayScroll((displayScroll) =>
+            showStartScroll === displayScroll.start &&
+            showEndScroll === displayScroll.end
+              ? displayScroll
+              : { start: showStartScroll, end: showEndScroll }
+          );
+        }),
+      []
+    );
 
     useEffect(() => {
       const handleResize = debounce(() => {
@@ -82,19 +86,11 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       updateScrollButtonState();
     });
 
-    const handleTabsScroll = useMemo(
-      () =>
-        debounce(() => {
-          updateScrollButtonState();
-        }),
-      [updateScrollButtonState]
-    );
-
     useEffect(() => {
       return () => {
-        handleTabsScroll.clear();
+        updateScrollButtonState.clear();
       };
-    }, [handleTabsScroll]);
+    }, [updateScrollButtonState]);
 
     const ScrollButton = ({
       dir,
@@ -129,7 +125,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
         <TabsList
           {...rest}
           ref={mergedRef}
-          onScroll={handleTabsScroll}
+          onScroll={updateScrollButtonState}
           className={cl("navds-tabs__tablist", className)}
         />
         {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}
