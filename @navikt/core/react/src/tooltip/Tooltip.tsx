@@ -101,7 +101,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const openTimerRef = useRef(0);
     const isMouseDownRef = useRef(false);
 
-    const ariaId = useId(_id);
+    const ariaId = useId(id);
 
     const {
       x,
