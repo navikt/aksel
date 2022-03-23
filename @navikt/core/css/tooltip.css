@@ -55,7 +55,7 @@
   background-color: var(--navds-global-color-gray-700);
   color: var(--navds-semantic-color-text-inverted);
   border-radius: 2px;
-  padding: 0 4px;
+  padding: 0 var(--navds-spacing-1);
   min-width: 18px;
   height: 18px;
   display: inline-flex;
