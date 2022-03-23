@@ -10,7 +10,7 @@ export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
   /**
    * Checkbox label
    */
-  label: string;
+  label: React.ReactNode;
   /**
    * Checked state for checkbox
    */
