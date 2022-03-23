@@ -300,7 +300,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                       top: arrowY != null ? `${arrowY}px` : "",
                       right: "",
                       bottom: "",
-                      ...(staticSide ? { [staticSide[0]]: "-4px" } : ""),
+                      ...(staticSide ? { [staticSide[0]]: "-3.5px" } : ""),
                     }}
                   />
                 )}
