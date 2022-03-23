@@ -47,13 +47,12 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       showStartScroll = scrollLeft > 1;
       showEndScroll = scrollLeft < scrollWidth - clientWidth - 1;
 
-      if (
-        showStartScroll !== displayScroll.start ||
-        showEndScroll !== displayScroll.end
-      ) {
-        setDisplayScroll({ start: showStartScroll, end: showEndScroll });
-      }
-    }, [displayScroll.end, displayScroll.start]);
+      setDisplayScroll(displayScroll => 
+        showStartScroll === displayScroll.start && showEndScroll === displayScroll.end
+          ? displayScroll
+          : { start: showStartScroll, end: showEndScroll }
+        );
+    }, []);
 
     useEffect(() => {
       const handleResize = debounce(() => {
