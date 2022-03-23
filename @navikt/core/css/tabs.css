@@ -7,10 +7,16 @@
 
 .navds-tabs__tablist {
   display: flex;
-  overflow-x: auto;
   max-width: 100%;
   width: auto;
   scroll-behavior: smooth;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-x: scroll;
+}
+
+.navds-tabs__tablist::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
 }
 
 .navds-tabs__scroll-button {
