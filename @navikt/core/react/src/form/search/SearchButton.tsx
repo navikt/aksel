@@ -25,11 +25,11 @@ const SearchButton: SearchButtonType = forwardRef(
       return null;
     }
 
-    const { size, onSearch, variant } = context;
+    const { size, variant, onSearch } = context;
 
     return (
       <Button
-        type="button"
+        type="submit"
         {...rest}
         ref={ref}
         size={size}
@@ -37,7 +37,7 @@ const SearchButton: SearchButtonType = forwardRef(
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
         onClick={(e) => {
-          onSearch();
+          onSearch?.();
           onClick?.(e);
         }}
       >

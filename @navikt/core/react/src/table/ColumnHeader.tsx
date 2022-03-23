@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import { Down, Up } from "@navikt/ds-icons";
+import { Down, Up, UpDown } from "@navikt/ds-icons";
 import { TableContext } from "..";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 
@@ -52,11 +52,14 @@ const ColumnHeader: ColumnHeaderType = forwardRef(
             }
           >
             {children}
-            {context?.sort?.orderBy === sortKey &&
-            context?.sort?.direction === "descending" ? (
-              <Down aria-label="sorter synkende" />
+            {context?.sort?.orderBy === sortKey ? (
+              context?.sort?.direction === "descending" ? (
+                <Down aria-hidden />
+              ) : (
+                <Up aria-hidden />
+              )
             ) : (
-              <Up aria-label="sorter stigende" />
+              <UpDown aria-hidden />
             )}
           </button>
         ) : (

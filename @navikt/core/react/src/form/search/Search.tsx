@@ -40,7 +40,7 @@ export interface SearchProps
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for <Search.Button/> click with current input-value
+   * Callback for <Search.Button/> click or onSubmit in form
    */
   onSearch?: (value: string | number | readonly string[]) => void;
   /**
@@ -74,8 +74,8 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  onSearch: () => void;
   variant?: "tertiary" | "primary";
+  onSearch?: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -105,7 +105,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
 
   const searchRef = useRef<HTMLInputElement | null>(null);
   const mergedRef = mergeRefs([searchRef, ref]);
-  const [wrapperRef, setWrapperRef] = useState<HTMLFormElement | null>(null);
+  const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
   const [controlledValue, setControlledValue] = useState(value ?? "");
 
@@ -148,8 +148,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   }, [value]);
 
   return (
-    <form
-      role="search"
+    <div
       ref={setWrapperRef}
       className={cl(
         className,
@@ -160,7 +159,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           "navds-search--disabled": !!inputProps.disabled,
         }
       )}
-      onSubmit={(e) => e.preventDefault()}
     >
       <Label
         htmlFor={inputProps.id}
@@ -219,14 +217,14 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
           value={{
             size,
             disabled: inputProps.disabled,
-            onSearch: () => onSearch?.(controlledValue),
             variant,
+            onSearch: () => onSearch?.(controlledValue),
           }}
         >
           {children ? children : <SearchButton />}
         </SearchContext.Provider>
       </div>
-    </form>
+    </div>
   );
 }) as SearchComponent;
 

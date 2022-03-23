@@ -29,6 +29,7 @@ export const All = (props) => {
     </div>
   );
 };
+
 All.args = {
   page: 1,
   count: 8,
