@@ -59,8 +59,8 @@ const List = forwardRef<HTMLDivElement, ListProps>(
         updateScrollButtonState();
       });
       const win =
-        (listRef.current && listRef.current.ownerDocument) ||
-        document ||
+        listRef.current?.ownerDocument ??
+        document ??
         window;
       win.addEventListener("resize", handleResize);
 
