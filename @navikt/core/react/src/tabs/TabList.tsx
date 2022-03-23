@@ -108,14 +108,14 @@ const List = forwardRef<HTMLDivElement, ListProps>(
 
     const ScrollButton = ({
       dir,
-      disabled,
+      hidden,
     }: {
       dir: 1 | -1;
-      disabled: boolean;
+      hidden: boolean;
     }) => (
       <div
         className={cl("navds-tabs__scroll-button", {
-          "navds-tabs__scroll-button--disabled": disabled,
+          "navds-tabs__scroll-button--hidden": hidden,
         })}
         onClick={() => moveTabsScroll(dir)}
       >
@@ -131,7 +131,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
     return (
       <div className="navds-tabs__tablist-wrapper">
         {showSteppers && (
-          <ScrollButton dir={-1} disabled={!displayScroll.start} />
+          <ScrollButton dir={-1} hidden={!displayScroll.start} />
         )}
         <TabsList
           {...rest}
@@ -139,7 +139,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
           onScroll={handleTabsScroll}
           className={cl("navds-tabs__tablist", className)}
         />
-        {showSteppers && <ScrollButton dir={1} disabled={!displayScroll.end} />}
+        {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}
       </div>
     );
   }

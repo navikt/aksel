@@ -26,9 +26,8 @@
   align-items: center;
 }
 
-.navds-tabs__scroll-button--disabled {
+.navds-tabs__scroll-button--hidden {
   visibility: hidden;
-  pointer-events: none;
 }
 
 .navds-tabs__scroll-button svg {
