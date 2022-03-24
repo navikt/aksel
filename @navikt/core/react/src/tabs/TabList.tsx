@@ -95,7 +95,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
         })}
         onClick={() => {
           if (!listRef.current) return;
-          listRef.current.scrollLeft &&= listRef.current.scrollLeft + dir * 100;
+          listRef.current.scrollLeft += dir * 100;
         }}
       >
         {dir === -1 ? (
