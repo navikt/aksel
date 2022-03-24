@@ -20,7 +20,7 @@ export interface TabProps
   value: string;
   /**
    * Icon position
-   * @default "start"
+   * @default "left"
    */
   iconPosition?: "left" | "top";
 }
