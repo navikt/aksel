@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * Row is selected
    * @default false
