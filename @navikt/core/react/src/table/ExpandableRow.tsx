@@ -9,11 +9,24 @@ interface ExpandableRowProps extends RowProps {
   /**
    */
   content: React.ReactNode;
-
   /**
    * @default "left"
    */
-  togglePlacement: "left" | "right";
+  togglePlacement?: "left" | "right";
+  /**
+   * Opens component if 'true', closes if 'false'
+   * Using this props removes automatic control of open-state
+   */
+  open?: boolean;
+  /**
+   * Defaults to opened state
+   * @default false
+   */
+  defaultOpen?: boolean;
+  /**
+   * Change handler for open
+   */
+  onOpenChange?: (open: boolean) => void;
 }
 
 export interface ExpandableRowType
@@ -23,33 +36,49 @@ export interface ExpandableRowType
 
 const ExpandableRow: ExpandableRowType = forwardRef(
   (
-    { className, children, content, togglePlacement = "left", ...rest },
+    {
+      className,
+      children,
+      content,
+      togglePlacement = "left",
+      defaultOpen = false,
+      open,
+      onOpenChange,
+      ...rest
+    },
     ref
   ) => {
-    const [open, setOpen] = useState(false);
+    const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
     const id = useId();
+
+    const isOpen = open ?? internalOpen;
 
     const Toggle = () => (
       <DataCell
         className={cl("navds-table__expandable-cell", {
-          "navds-table__expandable-cell--open": open,
+          "navds-table__expandable-cell--open": isOpen,
         })}
       >
         <button
           className="navds-table__expandable-button"
           aria-controls={`expandable-${id}`}
-          aria-expanded={open}
+          aria-expanded={isOpen}
           aria-label="Vis mer"
-          onClick={() => setOpen((open) => !open)}
+          onClick={() => {
+            onOpenChange?.(!isOpen);
+            if (open === undefined) {
+              setInternalOpen((open) => !open);
+            }
+          }}
         >
           <Expand
             className={cl("navds-table__expandable-icon", {
-              "navds-table__expandable-icon--open": open,
+              "navds-table__expandable-icon--open": isOpen,
             })}
           />
           <ExpandFilled
             className={cl("navds-table__expandable-icon--filled", {
-              "navds-table__expandable-icon--open": open,
+              "navds-table__expandable-icon--open": isOpen,
             })}
           />
         </button>
@@ -65,9 +94,9 @@ const ExpandableRow: ExpandableRowType = forwardRef(
         </Row>
         <tr
           className={cl("navds-table__expandable-row", {
-            "navds-table__expandable-row--open": open,
+            "navds-table__expandable-row--open": isOpen,
           })}
-          aria-hidden={!open}
+          aria-hidden={!isOpen}
           id={`expandable-${id}`}
         >
           <td colSpan={999}>

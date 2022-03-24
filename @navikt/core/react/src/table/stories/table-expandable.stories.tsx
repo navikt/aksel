@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table } from "..";
 import { Link } from "../..";
 
@@ -7,31 +7,73 @@ export default {
   component: Table,
 };
 
-export const Expandable = () => (
-  <Table>
-    <Table.Header>
-      <Table.Row>
-        {columns.map(({ key, name }) => (
-          <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
-        ))}
-        <Table.HeaderCell />
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      {data.map((data) => (
-        <Table.ExpandableRow
-          content={data.content}
-          key={data.name}
-          togglePlacement="right"
-        >
-          {columns.map(({ key }) => (
-            <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+export const Expandable = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            {columns.map(({ key, name }) => (
+              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+            ))}
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.map((data) => (
+            <Table.ExpandableRow
+              content={data.content}
+              key={data.name}
+              togglePlacement="right"
+            >
+              {columns.map(({ key }) => (
+                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              ))}
+            </Table.ExpandableRow>
           ))}
-        </Table.ExpandableRow>
-      ))}
-    </Table.Body>
-  </Table>
-);
+        </Table.Body>
+      </Table>
+      <h2>defaultOpen/controlled</h2>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell />
+            {columns.map(({ key, name }) => (
+              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+            ))}
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {data.slice(0, 1).map((data) => (
+            <Table.ExpandableRow
+              content={data.content}
+              key={data.name}
+              defaultOpen
+            >
+              {columns.map(({ key }) => (
+                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              ))}
+            </Table.ExpandableRow>
+          ))}
+          {data.slice(1, 2).map((data) => (
+            <Table.ExpandableRow
+              content={data.content}
+              key={data.name}
+              open={open}
+              onOpenChange={(open) => setOpen(open)}
+            >
+              {columns.map(({ key }) => (
+                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              ))}
+            </Table.ExpandableRow>
+          ))}
+        </Table.Body>
+      </Table>
+    </>
+  );
+};
 
 const columns = [
   {
