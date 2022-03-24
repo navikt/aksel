@@ -32,68 +32,26 @@ export const Expandable = () => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {data.map((data, index) => (
-          <React.Fragment key={data.name}>
+        {data.map((data, index) =>
+          data.isExpandable ? (
+            <Table.Expandable>
+              <Table.Expandable.Row togglePlacement="left">
+                {columns.map(({ key }) => (
+                  <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+                ))}
+              </Table.Expandable.Row>
+              <Table.Expandable.Content columns={columns.length}>
+                {data.content}
+              </Table.Expandable.Content>
+            </Table.Expandable>
+          ) : (
             <Table.Row>
-              <Table.DataCell
-                className={cl("navds-table__expandable-cell", {
-                  "navds-table__expandable-cell--open": openRows.includes(
-                    index
-                  ),
-                })}
-              >
-                <button
-                  className="navds-table__expandable-button"
-                  aria-controls={`expandable-${index}`}
-                  aria-expanded={openRows.includes(index)}
-                  aria-label="Vis mer"
-                  onClick={() => toggleRow(index)}
-                >
-                  <Expand
-                    className={cl("navds-table__expandable-icon", {
-                      "navds-table__expandable-icon--open": openRows.includes(
-                        index
-                      ),
-                    })}
-                  />
-                  <ExpandFilled
-                    className={cl("navds-table__expandable-icon--filled", {
-                      "navds-table__expandable-icon--open": openRows.includes(
-                        index
-                      ),
-                    })}
-                  />
-                </button>
-              </Table.DataCell>
-              <Table.ExpandableToggle
-                open={openRows.includes(index)}
-                onClick={() => {}}
-              />
               {columns.map(({ key }) => (
                 <Table.DataCell key={key}>{data[key]}</Table.DataCell>
               ))}
             </Table.Row>
-            <Table.ExpandableRow
-              colSpan={columns.length + 1}
-              open={openRows.includes(index)}
-            >
-              {data.content}
-            </Table.ExpandableRow>
-            <tr
-              className={cl("navds-table__expandable-row", {
-                "navds-table__expandable-row--open": openRows.includes(index),
-              })}
-              aria-hidden={!openRows.includes(index)}
-              id={`expandable-${index}`}
-            >
-              <td colSpan={columns.length + 1}>
-                <div className={cl("navds-table__expandable-row-content")}>
-                  {data.content}
-                </div>
-              </td>
-            </tr>
-          </React.Fragment>
-        ))}
+          )
+        )}
       </Table.Body>
     </Table>
   );
