@@ -1,0 +1,61 @@
+import { Meta, Canvas } from "@storybook/addon-docs";
+import { Stepper } from "..";
+import { Example } from "./Example";
+
+<Meta title="ds-react/stepper/intro" />
+
+# Hvordan ta i bruk Stepper
+
+Stepper er det vertikale søskenet til step-indicator/stegindikator.
+Du må nå selv styre state med `activeStep` og `onStepChange`.
+
+## Eksempel
+
+```jsx
+<Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Start
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Sunt deserunt qui sit sunt culpa nisi
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Nulla laborum proident consequat laborum elit et dolore ut sunt.
+  </Stepper.Step>
+</Stepper>
+```
+
+<Canvas>
+  <Example />
+</Canvas>
+
+## Override tags
+
+`Stepper.Step` er implementert med Overridable-component noe som gjør at du kan endre taggen til
+det du vil med `as`-prop. Merk at Step åakkes inn i en `<li>`-wrapper for tilgjengelighet.
+
+```jsx
+<Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
+  {/* <button> er default */}
+  <Stepper.Step
+    href=""
+    onClick={(e) => e.preventDefault()}
+  >{`Dette er default, et <a>-element`}</Stepper.Step>
+  <Stepper.Step as="button">{`Dette er et <button>-element`}</Stepper.Step>
+  <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
+</Stepper>
+```
+
+<Canvas>
+  <Stepper activeStep={1} onStepChange={console.log}>
+    <Stepper.Step
+      href=""
+      onClick={(e) => e.preventDefault()}
+    >{`Dette er default, et <a>-element`}</Stepper.Step>
+    <Stepper.Step as="button">{`Dette er et <button>-element`}</Stepper.Step>
+    <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
+  </Stepper>
+</Canvas>
