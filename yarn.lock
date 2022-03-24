@@ -2671,6 +2671,19 @@
     "@babel/runtime" "^7.13.10"
     "@radix-ui/react-compose-refs" "0.1.0"
 
+"@radix-ui/react-tabs@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-tabs/-/react-tabs-0.1.5.tgz#ddcf860cc32e186d76477ae767dbb216d1944252"
+  integrity sha512-ieVQS1TFr0dX1XA8B+CsSFKOE7kcgEaNWWEfItxj9D1GZjn1o3WqPkW+FhQWDAWZLSKCH2PezYF3MNyO41lgJg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@radix-ui/primitive" "0.1.0"
+    "@radix-ui/react-context" "0.1.1"
+    "@radix-ui/react-id" "0.1.5"
+    "@radix-ui/react-primitive" "0.1.4"
+    "@radix-ui/react-roving-focus" "0.1.5"
+    "@radix-ui/react-use-controllable-state" "0.1.0"
+
 "@radix-ui/react-toggle-group@0.1.5":
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-toggle-group/-/react-toggle-group-0.1.5.tgz#9e4d65e22c4fc0ba3a42fbc8d5496c430e5e9852"
@@ -4184,6 +4197,13 @@
   version "6.9.7"
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
+
+"@types/react-collapse@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/react-collapse/-/react-collapse-5.0.1.tgz#078ea1ad15e00ba2063f2e4d8d6760c9375a2023"
+  integrity sha512-Iq3OrqvzCIP0DmAawU4T2VKH6XAplbjo/D7Qk14mcfQ92plU+OrA2SF10r2XrcFg1Wvya/5f8w1vS29RVpdoLQ==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-dom@*":
   version "17.0.13"
