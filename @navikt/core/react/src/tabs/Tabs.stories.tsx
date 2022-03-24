@@ -2,6 +2,7 @@ import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
 import { Tabs } from ".";
+import { Link } from "../link";
 
 export default {
   title: "ds-react/tabs",
@@ -23,19 +24,20 @@ export const UUDemo = () => (
       value="skap"
       style={{ background: "var(--navds-global-color-gray-50)", height: 300 }}
     >
-      Innholdspanel for Skap-tab
+      Innholdspanel for skap med lenke <Link href="#">Dette er en lenke</Link>
     </Tabs.Panel>
     <Tabs.Panel
       value="oppvaskmaskin"
       style={{ background: "var(--navds-global-color-green-50)", height: 300 }}
     >
-      Innholdspanel for Oppvaskmaskin-tab
+      Innholdspanel for oppvaskmaskin med lenke{" "}
+      <Link href="#">Dette er en lenke</Link>
     </Tabs.Panel>
     <Tabs.Panel
       value="fryser"
       style={{ background: "var(--navds-global-color-red-50)", height: 300 }}
     >
-      Innholdspanel for Fryser-tab
+      Innholdspanel for fryser med lenke <Link href="#">Dette er en lenke</Link>
     </Tabs.Panel>
   </Tabs>
 );

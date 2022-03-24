@@ -102,3 +102,7 @@
 .navds-tabs__tab-icon--top svg {
   font-size: 1.5rem;
 }
+
+.navds-tabs__tabpanel:focus {
+  outline: none;
+}
