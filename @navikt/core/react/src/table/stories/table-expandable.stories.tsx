@@ -11,15 +11,19 @@ export const Expandable = () => (
   <Table>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell />
         {columns.map(({ key, name }) => (
           <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
         ))}
+        <Table.HeaderCell />
       </Table.Row>
     </Table.Header>
     <Table.Body>
       {data.map((data) => (
-        <Table.ExpandableRow content={data.content} key={data.name}>
+        <Table.ExpandableRow
+          content={data.content}
+          key={data.name}
+          togglePlacement="right"
+        >
           {columns.map(({ key }) => (
             <Table.DataCell key={key}>{data[key]}</Table.DataCell>
           ))}
