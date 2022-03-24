@@ -49,58 +49,52 @@ const ExpandableRow: ExpandableRowType = forwardRef(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const id = useId();
+    const id = `expandable-${useId()}`;
 
     const isOpen = open ?? internalOpen;
 
-    const Toggle = () => (
-      <DataCell
-        className={cl("navds-table__expandable-cell", {
-          "navds-table__expandable-cell--open": isOpen,
-        })}
-      >
-        <button
-          className="navds-table__expandable-button"
-          aria-controls={`expandable-${id}`}
-          aria-expanded={isOpen}
-          aria-label="Vis mer"
-          onClick={() => {
-            onOpenChange?.(!isOpen);
-            if (open === undefined) {
-              setInternalOpen((open) => !open);
-            }
-          }}
-        >
-          <Expand
-            className={cl("navds-table__expandable-icon", {
-              "navds-table__expandable-icon--open": isOpen,
-            })}
-          />
-          <ExpandFilled
-            className={cl("navds-table__expandable-icon--filled", {
-              "navds-table__expandable-icon--open": isOpen,
-            })}
-          />
-        </button>
-      </DataCell>
-    );
-
     return (
       <>
-        <Row {...rest} ref={ref} className={cl(className)}>
-          {togglePlacement === "left" && <Toggle />}
+        <Row
+          {...rest}
+          ref={ref}
+          className={cl("navds-table__expandable-row", className)}
+        >
+          {togglePlacement === "left" && (
+            <Toggle
+              id={id}
+              isOpen={isOpen}
+              toggleOpen={() => {
+                onOpenChange?.(!isOpen);
+                if (open === undefined) {
+                  setInternalOpen((open) => !open);
+                }
+              }}
+            />
+          )}
           {children}
-          {togglePlacement === "right" && <Toggle />}
+          {togglePlacement === "right" && (
+            <Toggle
+              id={id}
+              isOpen={isOpen}
+              toggleOpen={() => {
+                onOpenChange?.(!isOpen);
+                if (open === undefined) {
+                  setInternalOpen((open) => !open);
+                }
+              }}
+            />
+          )}
         </Row>
         <tr
-          className={cl("navds-table__expandable-row", {
-            "navds-table__expandable-row--open": isOpen,
+          className={cl("navds-table__expanded-row", {
+            "navds-table__expanded-row--open": isOpen,
           })}
           aria-hidden={!isOpen}
-          id={`expandable-${id}`}
+          id={id}
         >
           <td colSpan={999}>
-            <div className={cl("navds-table__expandable-row-content")}>
+            <div className={cl("navds-table__expanded-row-content")}>
               {content}
             </div>
           </td>
@@ -108,6 +102,25 @@ const ExpandableRow: ExpandableRowType = forwardRef(
       </>
     );
   }
+);
+
+const Toggle = ({ id, isOpen, toggleOpen }) => (
+  <DataCell
+    className={cl("navds-table__toggle-expand-cell", {
+      "navds-table__toggle-expand-cell--open": isOpen,
+    })}
+  >
+    <button
+      className="navds-table__toggle-expand-button"
+      aria-controls={id}
+      aria-expanded={isOpen}
+      aria-label="Vis mer"
+      onClick={toggleOpen}
+    >
+      <Expand className="navds-table__expandable-icon" />
+      <ExpandFilled className="navds-table__expandable-icon navds-table__expandable-icon--filled" />
+    </button>
+  </DataCell>
 );
 
 export default ExpandableRow;
