@@ -20,7 +20,6 @@ export type PanelType = React.ForwardRefExoticComponent<
 const Panel = forwardRef<HTMLDivElement, PanelProps>(
   ({ className, ...rest }, ref) => (
     <TabsContent
-      tabIndex={-1}
       {...rest}
       ref={ref}
       className={cl("navds-tabs__tabpanel", className)}

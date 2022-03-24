@@ -9,53 +9,6 @@ export default {
   component: Tabs,
 } as Meta;
 
-export const UUDemoTabIndex = () => {
-  const [active, setActive] = useState("skap");
-  return (
-    <Tabs value={active} onChange={setActive} lang="no">
-      <Tabs.List>
-        <Tabs.Tab value="skap" label="Skap" icon={<Cup aria-hidden />} />
-        <Tabs.Tab
-          value="oppvaskmaskin"
-          label="Oppvaskmaskin"
-          icon={<Dishwasher aria-hidden />}
-        />
-        <Tabs.Tab
-          value="fryser"
-          icon={<Freezer aria-hidden />}
-          label="Fryser"
-        />
-      </Tabs.List>
-      <Tabs.Panel
-        value="skap"
-        tabIndex={active === "skap" ? 0 : -1}
-        style={{ background: "var(--navds-global-color-gray-50)", height: 300 }}
-      >
-        Innholdspanel for skap med lenke <Link href="#">Dette er en lenke</Link>
-      </Tabs.Panel>
-      <Tabs.Panel
-        tabIndex={active === "oppvaskmaskin" ? 0 : -1}
-        value="oppvaskmaskin"
-        style={{
-          background: "var(--navds-global-color-green-50)",
-          height: 300,
-        }}
-      >
-        Innholdspanel for oppvaskmaskin med lenke{" "}
-        <Link href="#">Dette er en lenke</Link>
-      </Tabs.Panel>
-      <Tabs.Panel
-        tabIndex={active === "fryser" ? 0 : -1}
-        value="fryser"
-        style={{ background: "var(--navds-global-color-red-50)", height: 300 }}
-      >
-        Innholdspanel for fryser med lenke{" "}
-        <Link href="#">Dette er en lenke</Link>
-      </Tabs.Panel>
-    </Tabs>
-  );
-};
-
 export const UUDemo = () => (
   <Tabs defaultValue="skap" lang="no">
     <Tabs.List>
