@@ -2,14 +2,7 @@ import { debounce } from "@material-ui/core";
 import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
-import React, {
-  forwardRef,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
 
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -60,9 +53,7 @@ const List = forwardRef<HTMLDivElement, ListProps>(
     );
 
     useEffect(() => {
-      const handleResize = debounce(() => {
-        updateScrollButtonState();
-      });
+      const handleResize = () => updateScrollButtonState();
       const win = listRef.current?.ownerDocument ?? document ?? window;
       win.addEventListener("resize", handleResize);
 
@@ -74,7 +65,6 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       }
 
       return () => {
-        handleResize.clear();
         win.removeEventListener("resize", handleResize);
         if (resizeObserver) {
           resizeObserver.disconnect();
