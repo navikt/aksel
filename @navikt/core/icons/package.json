@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.8.4",
+  "version": "0.8.6",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {
@@ -29,7 +29,7 @@
     "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn clean && copyfiles util/* src && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config"
   },
   "dependencies": {

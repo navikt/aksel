@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
 import { BodyShort } from "..";
@@ -71,117 +71,141 @@ export const getSteps = ({
   ];
 };
 
-const Pagination = ({
-  page,
-  onPageChange,
-  count,
-  boundaryCount = 1,
-  siblingCount = 1,
-  className,
-  size = "medium",
-  prevNextTexts = false,
-}: PaginationProps) => {
-  if (page < 1) {
-    console.error("page cannot be less than 1");
-    return null;
-  }
-  if (count < 1) {
-    console.error("count cannot be less than 1");
-    return null;
-  }
-  if (boundaryCount < 0) {
-    console.error("boundaryCount cannot be less than 0");
-    return null;
-  }
-  if (siblingCount < 0) {
-    console.error("siblingCount cannot be less than 0");
-    return null;
-  }
+const Pagination = forwardRef<HTMLElement, PaginationProps>(
+  (
+    {
+      page,
+      onPageChange,
+      count,
+      boundaryCount = 1,
+      siblingCount = 1,
+      className,
+      size = "medium",
+      prevNextTexts = false,
+      ...rest
+    },
+    ref
+  ) => {
+    if (page < 1) {
+      console.error("page cannot be less than 1");
+      return null;
+    }
+    if (count < 1) {
+      console.error("count cannot be less than 1");
+      return null;
+    }
+    if (boundaryCount < 0) {
+      console.error("boundaryCount cannot be less than 0");
+      return null;
+    }
+    if (siblingCount < 0) {
+      console.error("siblingCount cannot be less than 0");
+      return null;
+    }
 
-  return (
-    <nav
-      className={cl("navds-pagination", `navds-pagination--${size}`, className)}
-    >
-      {prevNextTexts && page !== 1 && (
-        <button
-          className="navds-pagination__prev-next"
-          onClick={() => onPageChange(page - 1)}
-        >
-          <Back
-            className="navds-pagination__prev-next-icon"
-            role="presentation"
-          />
-          <BodyShort size={size} className="navds-pagination__prev-text">
-            Forrige
-          </BodyShort>
-        </button>
-      )}
-      <ul className="navds-pagination__list">
-        {!prevNextTexts && page !== 1 && (
-          <li>
-            <button
-              className="navds-pagination__prev-next"
-              onClick={() => onPageChange(page - 1)}
-            >
-              <Back
-                className="navds-pagination__prev-next-icon"
-                title="Forrige"
-              />
-            </button>
-          </li>
+    return (
+      <nav
+        ref={ref}
+        {...rest}
+        className={cl(
+          "navds-pagination",
+          `navds-pagination--${size}`,
+          className
         )}
-        {getSteps({ page, count, siblingCount, boundaryCount }).map(
-          (step, i) => {
-            const n = Number(step);
-            return isNaN(n) ? (
-              <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
-                <BodyShort size={size}>...</BodyShort>
-              </li>
-            ) : (
-              <li key={step}>
-                <BodyShort
-                  size={size}
-                  as="button"
-                  className="navds-pagination__item"
-                  onClick={() => onPageChange(n)}
-                  aria-current={page === n ? true : undefined}
-                >
-                  {n}
-                </BodyShort>
-              </li>
-            );
-          }
+      >
+        {prevNextTexts && (
+          <button
+            className={cl("navds-pagination__prev-next", {
+              "navds-pagination--invisible": page === 1,
+            })}
+            disabled={page === 1}
+            onClick={() => onPageChange(page - 1)}
+          >
+            <Back
+              className="navds-pagination__prev-next-icon"
+              role="presentation"
+            />
+            <BodyShort size={size} className="navds-pagination__prev-text">
+              Forrige
+            </BodyShort>
+          </button>
         )}
-        {!prevNextTexts && page !== count && (
-          <li>
-            <button
-              className="navds-pagination__prev-next"
-              onClick={() => onPageChange(page + 1)}
-            >
-              <Next
-                className="navds-pagination__prev-next-icon"
-                title="Neste"
-              />
-            </button>
-          </li>
+        <ul className="navds-pagination__list">
+          {!prevNextTexts && (
+            <li>
+              <button
+                className={cl("navds-pagination__prev-next", {
+                  "navds-pagination--invisible": page === 1,
+                })}
+                disabled={page === 1}
+                onClick={() => onPageChange(page - 1)}
+              >
+                <Back
+                  className="navds-pagination__prev-next-icon"
+                  title="Forrige"
+                />
+              </button>
+            </li>
+          )}
+          {getSteps({ page, count, siblingCount, boundaryCount }).map(
+            (step, i) => {
+              const n = Number(step);
+              return isNaN(n) ? (
+                <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
+                  <BodyShort size={size}>...</BodyShort>
+                </li>
+              ) : (
+                <li key={step}>
+                  <BodyShort
+                    size={size}
+                    as="button"
+                    className="navds-pagination__item"
+                    onClick={() => onPageChange(n)}
+                    aria-current={page === n ? true : undefined}
+                  >
+                    {n}
+                  </BodyShort>
+                </li>
+              );
+            }
+          )}
+          {!prevNextTexts && (
+            <li>
+              <button
+                className={cl("navds-pagination__prev-next", {
+                  "navds-pagination--invisible": page === count,
+                })}
+                disabled={page === count}
+                onClick={() => onPageChange(page + 1)}
+              >
+                <Next
+                  className="navds-pagination__prev-next-icon"
+                  title="Neste"
+                />
+              </button>
+            </li>
+          )}
+        </ul>
+        {prevNextTexts && (
+          <button
+            className={cl("navds-pagination__prev-next", {
+              "navds-pagination--invisible": page === count,
+            })}
+            disabled={page === count}
+            onClick={() => onPageChange(page + 1)}
+          >
+            <BodyShort size={size} className="navds-pagination__next-text">
+              Neste
+            </BodyShort>
+            <Next
+              className="navds-pagination__prev-next-icon"
+              role="presentation"
+            />
+          </button>
         )}
-      </ul>
-      {prevNextTexts && page !== count && (
-        <button
-          className="navds-pagination__prev-next"
-          onClick={() => onPageChange(page + 1)}
-        >
-          <BodyShort size={size} className="navds-pagination__next-text">
-            Neste
-          </BodyShort>
-          <Next
-            className="navds-pagination__prev-next-icon"
-            role="presentation"
-          />
-        </button>
-      )}
-    </nav>
-  );
-};
+      </nav>
+    );
+  }
+);
 
 export default Pagination;
