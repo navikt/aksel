@@ -64,34 +64,32 @@ const ExpandableRow: ExpandableRowType = forwardRef(
           className={cl("navds-table__expandable-row", className)}
         >
           {togglePlacement === "right" && children}
-          {togglePlacement === "left" && (
-            <DataCell
-              className={cl("navds-table__toggle-expand-cell", {
-                "navds-table__toggle-expand-cell--open": isOpen,
-              })}
+          <DataCell
+            className={cl("navds-table__toggle-expand-cell", {
+              "navds-table__toggle-expand-cell--open": isOpen,
+            })}
+          >
+            <button
+              className="navds-table__toggle-expand-button"
+              aria-controls={id}
+              aria-expanded={isOpen}
+              onClick={() => {
+                onOpenChange?.(!isOpen);
+                if (open === undefined) {
+                  setInternalOpen((open) => !open);
+                }
+              }}
             >
-              <button
-                className="navds-table__toggle-expand-button"
-                aria-controls={id}
-                aria-expanded={isOpen}
-                onClick={() => {
-                  onOpenChange?.(!isOpen);
-                  if (open === undefined) {
-                    setInternalOpen((open) => !open);
-                  }
-                }}
-              >
-                <Expand
-                  className="navds-table__expandable-icon"
-                  title="Vis mer"
-                />
-                <ExpandFilled
-                  className="navds-table__expandable-icon navds-table__expandable-icon--filled"
-                  title="Vis mindre"
-                />
-              </button>
-            </DataCell>
-          )}
+              <Expand
+                className="navds-table__expandable-icon"
+                title="Vis mer"
+              />
+              <ExpandFilled
+                className="navds-table__expandable-icon navds-table__expandable-icon--filled"
+                title="Vis mindre"
+              />
+            </button>
+          </DataCell>
           {togglePlacement === "left" && children}
         </Row>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
