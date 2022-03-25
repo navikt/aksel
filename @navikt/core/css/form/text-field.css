@@ -32,7 +32,7 @@
 
 .navds-text-field__input {
   appearance: none;
-  padding: 0.5rem;
+  padding: var(--navds-spacing-2);
   background-color: var(--navds-text-field-color-background);
   border-radius: var(--navds-border-radius-medium);
   border: 1px solid var(--navds-text-field-color-border);
@@ -41,7 +41,7 @@
   color: var(--navds-text-field-color-text);
 }
 
-.navds-form-field--small > .navds-text-field__input {
+.navds-form-field--small .navds-text-field__input {
   padding: 0 0.25rem;
   min-height: 32px;
 }

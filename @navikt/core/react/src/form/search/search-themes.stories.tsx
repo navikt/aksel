@@ -16,17 +16,27 @@ export const LightTheme = () => (
     <Heading level="2" size="large">
       size medium
     </Heading>
-    <Search label="hidden label" />
-    <Search label="hidden label" variant="secondary" />
-    <Search label="hidden label" variant="no-button" />
+    <Search label="hidden label" placeholder="Søk" />
+    <Search label="hidden label" variant="secondary" defaultValue="dagpenger" />
+    <Search label="hidden label" variant="no-button" placeholder="Søk" />
     <Search label="with label" hideLabel={false} />
 
     <Heading level="2" size="large">
       size small
     </Heading>
-    <Search label="hidden label" size="small" />
-    <Search label="hidden label" variant="secondary" size="small" />
-    <Search label="hidden label" variant="no-button" size="small" />
+    <Search label="hidden label" size="small" placeholder="Søk" />
+    <Search
+      label="hidden label"
+      variant="secondary"
+      size="small"
+      defaultValue="dagpenger"
+    />
+    <Search
+      label="hidden label"
+      variant="no-button"
+      size="small"
+      placeholder="Søk"
+    />
     <Search label="with label" hideLabel={false} size="small" />
   </div>
 );
