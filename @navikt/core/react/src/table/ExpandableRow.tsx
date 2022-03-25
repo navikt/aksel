@@ -8,9 +8,11 @@ import { useId } from "..";
 
 interface ExpandableRowProps extends RowProps {
   /**
+   * Content of the expanded row
    */
   content: React.ReactNode;
   /**
+   * Placement of toggle button
    * @default "left"
    */
   togglePlacement?: "left" | "right";
@@ -20,7 +22,7 @@ interface ExpandableRowProps extends RowProps {
    */
   open?: boolean;
   /**
-   * Defaults to opened state
+   * Opened state default
    * @default false
    */
   defaultOpen?: boolean;
