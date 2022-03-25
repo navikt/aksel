@@ -8,7 +8,7 @@
 }
 
 .navds-tooltip {
-  z-index: var(--navds-z-index-max);
+  z-index: var(--navds-z-index-tooltip);
 }
 
 .navds-tooltip__inner {
