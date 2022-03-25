@@ -259,16 +259,12 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               <div
                 className="navds-tooltip__inner"
                 style={{
-                  ...(placement
-                    ? {
-                        [{
-                          top: "marginBottom",
-                          right: "marginLeft",
-                          bottom: "marginTop",
-                          left: "marginRight",
-                        }[placement]]: _offset ? _offset : _arrow ? 10 : 2,
-                      }
-                    : ""),
+                  [{
+                    top: "marginBottom",
+                    right: "marginLeft",
+                    bottom: "marginTop",
+                    left: "marginRight",
+                  }[placement]]: _offset ? _offset : _arrow ? 10 : 2,
                 }}
               >
                 {content}
