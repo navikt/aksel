@@ -26,6 +26,7 @@
 @import "step-indicator.css";
 @import "stepper.css";
 @import "table.css";
+@import "tabs.css";
 
 /* Navno spesific packages */
 @import "page-header.css";
