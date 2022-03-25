@@ -161,6 +161,10 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  padding: var(--navds-spacing-4);
+}
+
+.navds-table--small .navds-table__toggle-expand-button {
   padding: var(--navds-spacing-2);
 }
 
