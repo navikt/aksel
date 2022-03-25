@@ -18,7 +18,7 @@ export const LightTheme = () => (
     </Heading>
     <Search label="hidden label" />
     <Search label="hidden label" variant="secondary" />
-    <Search label="hidden label" variant="no button" />
+    <Search label="hidden label" variant="no-button" />
     <Search label="with label" hideLabel={false} />
 
     <Heading level="2" size="large">
@@ -26,7 +26,7 @@ export const LightTheme = () => (
     </Heading>
     <Search label="hidden label" size="small" />
     <Search label="hidden label" variant="secondary" size="small" />
-    <Search label="hidden label" variant="no button" size="small" />
+    <Search label="hidden label" variant="no-button" size="small" />
     <Search label="with label" hideLabel={false} size="small" />
   </div>
 );

@@ -28,6 +28,13 @@
 
 .navds-search__input {
   padding-right: var(--navds-spacing-12);
+}
+
+.navds-search__input--no-button {
+  padding-left: var(--navds-spacing-12);
+}
+
+.navds-search__input:not(.navds-search__input--no-button) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -36,6 +43,14 @@
   min-height: 32px;
   padding: 0.15rem;
   padding-right: var(--navds-spacing-8);
+}
+
+.navds-search__search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 
 .navds-search__button-clear {
@@ -89,13 +104,13 @@
   min-width: 40px;
 }
 
-.navds-search__button-search.navds-button--tertiary {
+.navds-search__button-search.navds-button--secondary {
   box-shadow: -1px 0 0 0 var(--navds-search-color-border) inset,
     0 1px 0 0 var(--navds-search-color-border) inset,
     0 -1px 0 0 var(--navds-search-color-border) inset;
 }
 
-.navds-search__button-search.navds-button--tertiary:hover {
+.navds-search__button-search.navds-button--secondary:hover {
   box-shadow: -1px 0 0 0 var(--navds-search-color-border-hover) inset,
     0 1px 0 0 var(--navds-search-color-border-hover) inset,
     0 -1px 0 0 var(--navds-search-color-border-hover) inset,
@@ -104,21 +119,21 @@
 }
 
 .navds-search__wrapper-inner:focus-within
-  + .navds-search__button-search.navds-button--tertiary:hover {
+  + .navds-search__button-search.navds-button--secondary:hover {
   z-index: auto;
 }
 
-.navds-search__button-search.navds-button--tertiary:focus {
+.navds-search__button-search.navds-button--secondary:focus {
   box-shadow: 0 0 0 1px var(--navds-search-color-border) inset,
     var(--navds-shadow-focus);
 }
 
-.navds-search__button-search.navds-button--tertiary:focus:hover {
+.navds-search__button-search.navds-button--secondary:focus:hover {
   box-shadow: 0 0 0 1px var(--navds-search-color-border-hover) inset,
     var(--navds-shadow-focus);
 }
 
-.navds-search__button-search.navds-button--tertiary:focus:active {
+.navds-search__button-search.navds-button--secondary:focus:active {
   box-shadow: 0 0 0 1px white inset, var(--navds-shadow-focus);
 }
 

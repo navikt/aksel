@@ -1,4 +1,4 @@
-import { Close } from "@navikt/ds-icons";
+import { Close, Search as SearchIcon } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, {
   forwardRef,
@@ -61,7 +61,7 @@ export interface SearchProps
    * Changes button-variant
    * @default "primary"
    */
-  variant?: "primary" | "secondary" | "no button";
+  variant?: "primary" | "secondary" | "no-button";
 }
 
 interface SearchComponent
@@ -74,7 +74,7 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant?: "primary" | "secondary" | "no button";
+  variant?: "primary" | "secondary" | "no-button";
   onSearch?: () => void;
 }
 
@@ -184,6 +184,9 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
       )}
       <div className="navds-search__wrapper">
         <div className="navds-search__wrapper-inner">
+          {variant === "no-button" && (
+            <SearchIcon aria-hidden className="navds-search__search-icon" />
+          )}
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
@@ -195,9 +198,10 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             className={cl(
               className,
               "navds-search__input",
+              `navds-search__input--${variant}`,
               "navds-text-field__input",
               "navds-body-short",
-              `navds-body-${size ?? "medium"}`
+              `navds-body-${size}`
             )}
           />
           {controlledValue && clearButton && (
@@ -221,7 +225,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             onSearch: () => onSearch?.(controlledValue),
           }}
         >
-          {children ? children : variant !== "no button" && <SearchButton />}
+          {children ? children : variant !== "no-button" && <SearchButton />}
         </SearchContext.Provider>
       </div>
     </div>
