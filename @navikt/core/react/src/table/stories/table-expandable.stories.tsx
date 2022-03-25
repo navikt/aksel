@@ -35,8 +35,8 @@ export const Expandable = () => {
           ))}
         </Table.Body>
       </Table>
-      <h2>defaultOpen/controlled</h2>
-      <Table>
+      <h2>defaultOpen/controlled + small</h2>
+      <Table size="small">
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell />
