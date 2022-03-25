@@ -35,7 +35,7 @@
 }
 
 .navds-search__input--no-button {
-  padding-left: var(--navds-spacing-12);
+  padding-left: var(--navds-spacing-11);
 }
 
 .navds-form-field--small .navds-search__input--no-button {
@@ -49,10 +49,16 @@
 
 .navds-search__search-icon {
   position: absolute;
-  left: 0.75rem;
+  left: var(--navds-spacing-3);
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
+  font-size: 1.5rem;
+}
+
+.navds-form-field--small .navds-search__search-icon {
+  left: var(--navds-spacing-2);
+  font-size: 1rem;
 }
 
 .navds-search__button-clear {
