@@ -59,9 +59,9 @@ export interface SearchProps
   clearButton?: boolean;
   /**
    * Changes button-variant
-   * @default "tertiary"
+   * @default "primary"
    */
-  variant?: "tertiary" | "primary";
+  variant?: "primary" | "secondary" | "no button";
 }
 
 interface SearchComponent
@@ -74,7 +74,7 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant?: "tertiary" | "primary";
+  variant?: "primary" | "secondary" | "no button";
   onSearch?: () => void;
 }
 
@@ -99,7 +99,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     clearButton = true,
     children,
     onSearch,
-    variant = "tertiary",
+    variant = "primary",
     ...rest
   } = props;
 
@@ -221,7 +221,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             onSearch: () => onSearch?.(controlledValue),
           }}
         >
-          {children ? children : <SearchButton />}
+          {children ? children : variant !== "no button" && <SearchButton />}
         </SearchContext.Provider>
       </div>
     </div>

@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="light"] {
   --navds-text-field-color-text: var(--navds-semantic-color-text);
   --navds-text-field-color-background: var(
     --navds-semantic-color-component-background-light
@@ -18,6 +19,15 @@
     --navds-semantic-color-component-background-alternate
   );
   --navds-text-field-color-text-disabled: var(--navds-semantic-color-text);
+}
+
+[data-theme="dark"] {
+  --navds-text-field-color-text: var(--navds-semantic-color-text-inverted);
+  --navds-text-field-color-background: var(
+    --navds-semantic-color-component-background-dark
+  );
+  --navds-text-field-color-border: var(--navds-semantic-color-border-inverted);
+  --navds-text-field-color-border-hover: var(--navds-global-color-blue-200);
 }
 
 .navds-text-field__input {

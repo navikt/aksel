@@ -21,11 +21,18 @@ export const All = () => {
       <h1>Search</h1>
 
       <Search label="Søk alle sider om X og Y" onSearch={console.log}></Search>
-      <h2>Primary search</h2>
+      <h2>Secondary</h2>
       <Search
         label="Søk alle sider om X og Y"
         onSearch={console.log}
-        variant="primary"
+        variant="secondary"
+      ></Search>
+
+      <h2>No button</h2>
+      <Search
+        label="Søk alle sider om X og Y"
+        onSearch={console.log}
+        variant="no button"
       ></Search>
 
       <h2>Search small</h2>
@@ -42,7 +49,7 @@ export const All = () => {
         description="Beskrivelse av søket"
         size="small"
         hideLabel
-        variant="primary"
+        variant="secondary"
       >
         <Search.Button />
       </Search>

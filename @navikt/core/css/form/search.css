@@ -1,8 +1,13 @@
-:root {
+:root,
+[data-theme="light"] {
   --navds-search-color-border: var(--navds-semantic-color-border);
   --navds-search-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
+}
+
+[data-theme="dark"] {
+  --navds-search-color-border: var(--navds-semantic-color-border-inverted);
 }
 
 .navds-search {
@@ -37,7 +42,7 @@
   position: absolute;
   right: 0.75rem;
   border-radius: var(--navds-border-radius-medium);
-  color: var(--navds-semantic-color-text);
+  color: var(--navds-color-text);
   height: 32px;
   width: 32px;
   top: 50%;
