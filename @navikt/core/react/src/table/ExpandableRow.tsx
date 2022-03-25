@@ -63,31 +63,31 @@ const ExpandableRow: ExpandableRowType = forwardRef(
           ref={ref}
           className={cl("navds-table__expandable-row", className)}
         >
+          {togglePlacement === "right" && children}
           {togglePlacement === "left" && (
-            <Toggle
-              id={id}
-              isOpen={isOpen}
-              toggleOpen={() => {
-                onOpenChange?.(!isOpen);
-                if (open === undefined) {
-                  setInternalOpen((open) => !open);
-                }
-              }}
-            />
+            <DataCell
+              className={cl("navds-table__toggle-expand-cell", {
+                "navds-table__toggle-expand-cell--open": isOpen,
+              })}
+            >
+              <button
+                className="navds-table__toggle-expand-button"
+                aria-controls={id}
+                aria-expanded={isOpen}
+                aria-label="Vis mer"
+                onClick={() => {
+                  onOpenChange?.(!isOpen);
+                  if (open === undefined) {
+                    setInternalOpen((open) => !open);
+                  }
+                }}
+              >
+                <Expand className="navds-table__expandable-icon" />
+                <ExpandFilled className="navds-table__expandable-icon navds-table__expandable-icon--filled" />
+              </button>
+            </DataCell>
           )}
-          {children}
-          {togglePlacement === "right" && (
-            <Toggle
-              id={id}
-              isOpen={isOpen}
-              toggleOpen={() => {
-                onOpenChange?.(!isOpen);
-                if (open === undefined) {
-                  setInternalOpen((open) => !open);
-                }
-              }}
-            />
-          )}
+          {togglePlacement === "left" && children}
         </Row>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
           <td colSpan={999}>
@@ -105,25 +105,6 @@ const ExpandableRow: ExpandableRowType = forwardRef(
       </>
     );
   }
-);
-
-const Toggle = ({ id, isOpen, toggleOpen }) => (
-  <DataCell
-    className={cl("navds-table__toggle-expand-cell", {
-      "navds-table__toggle-expand-cell--open": isOpen,
-    })}
-  >
-    <button
-      className="navds-table__toggle-expand-button"
-      aria-controls={id}
-      aria-expanded={isOpen}
-      aria-label="Vis mer"
-      onClick={toggleOpen}
-    >
-      <Expand className="navds-table__expandable-icon" />
-      <ExpandFilled className="navds-table__expandable-icon navds-table__expandable-icon--filled" />
-    </button>
-  </DataCell>
 );
 
 export default ExpandableRow;
