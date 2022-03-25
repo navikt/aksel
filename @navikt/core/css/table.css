@@ -193,6 +193,10 @@
   transform: rotate(180deg);
 }
 
+.navds-table__expanded-row > td:empty {
+  display: none;
+}
+
 .navds-table__expanded-row-collapse {
   transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
   border-bottom: 1px solid var(--navds-table-cell-color-border);
