@@ -4,7 +4,6 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -74,8 +73,8 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant?: "primary" | "secondary" | "no-button";
-  onSearch?: () => void;
+  variant: "primary" | "secondary" | "no-button";
+  onSearch: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -100,6 +99,8 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     children,
     onSearch,
     variant = "primary",
+    defaultValue,
+    onChange,
     ...rest
   } = props;
 
@@ -107,26 +108,23 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   const mergedRef = mergeRefs([searchRef, ref]);
   const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
-  const [controlledValue, setControlledValue] = useState(value ?? "");
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
   const handleChange = useCallback(
     (v: string) => {
-      searchRef.current && value === undefined && setControlledValue(v);
-      props?.onChange?.(v);
+      value === undefined && setInternalValue(v);
+      onChange?.(v);
     },
-    [props, value]
+    [onChange, value]
   );
 
   const handleClear = useCallback(
     (event: SearchClearEvent) => {
       onClear?.(event);
       handleChange("");
-      if (searchRef.current && value === undefined) {
-        searchRef.current.value = "";
-      }
       searchRef.current && searchRef.current?.focus?.();
     },
-    [handleChange, onClear, value]
+    [handleChange, onClear]
   );
 
   useEventListener(
@@ -142,10 +140,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     ),
     wrapperRef
   );
-
-  useEffect(() => {
-    value !== undefined && setControlledValue(value);
-  }, [value]);
 
   return (
     <div
@@ -191,7 +185,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             ref={mergedRef}
             {...omit(rest, ["size"])}
             {...inputProps}
-            {...(props.value !== undefined && { value: props.value })}
+            value={value ?? internalValue}
             onChange={(e) => handleChange(e.target.value)}
             type="search"
             role="searchbox"
@@ -204,7 +198,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
               `navds-body-${size}`
             )}
           />
-          {controlledValue && clearButton && (
+          {(value ?? internalValue) && clearButton && (
             <button
               type="button"
               onClick={(e) => handleClear({ trigger: "Click", event: e })}
@@ -222,7 +216,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             size,
             disabled: inputProps.disabled,
             variant,
-            onSearch: () => onSearch?.(controlledValue),
+            onSearch: () => onSearch?.(value ?? internalValue),
           }}
         >
           {children ? children : variant !== "no-button" && <SearchButton />}

@@ -33,7 +33,7 @@ const SearchButton: SearchButtonType = forwardRef(
         {...rest}
         ref={ref}
         size={size}
-        variant={variant}
+        variant={variant === "secondary" ? "secondary" : "primary"}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
         onClick={(e) => {
