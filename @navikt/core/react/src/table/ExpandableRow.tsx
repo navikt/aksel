@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import Row, { RowProps } from "./Row";
 import DataCell from "./DataCell";
+import { UnmountClosed } from "react-collapse";
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import { useId } from "..";
 
@@ -86,17 +87,17 @@ const ExpandableRow: ExpandableRowType = forwardRef(
             />
           )}
         </Row>
-        <tr
-          className={cl("navds-table__expanded-row", {
-            "navds-table__expanded-row--open": isOpen,
-          })}
-          aria-hidden={!isOpen}
-          id={id}
-        >
+        <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
           <td colSpan={999}>
-            <div className={cl("navds-table__expanded-row-content")}>
+            <UnmountClosed
+              isOpened={isOpen}
+              theme={{
+                collapse: "navds-table__expanded-row-collapse",
+                content: "navds-table__expanded-row-content",
+              }}
+            >
               {content}
-            </div>
+            </UnmountClosed>
           </td>
         </tr>
       </>
