@@ -61,7 +61,9 @@ const ExpandableRow: ExpandableRowType = forwardRef(
         <Row
           {...rest}
           ref={ref}
-          className={cl("navds-table__expandable-row", className)}
+          className={cl("navds-table__expandable-row", className, {
+            "navds-table__expandable-row--open": isOpen,
+          })}
         >
           {togglePlacement === "right" && children}
           <DataCell
