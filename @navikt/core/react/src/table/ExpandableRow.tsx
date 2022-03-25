@@ -74,7 +74,6 @@ const ExpandableRow: ExpandableRowType = forwardRef(
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
-                aria-label="Vis mer"
                 onClick={() => {
                   onOpenChange?.(!isOpen);
                   if (open === undefined) {
@@ -82,8 +81,14 @@ const ExpandableRow: ExpandableRowType = forwardRef(
                   }
                 }}
               >
-                <Expand className="navds-table__expandable-icon" />
-                <ExpandFilled className="navds-table__expandable-icon navds-table__expandable-icon--filled" />
+                <Expand
+                  className="navds-table__expandable-icon"
+                  title="Vis mer"
+                />
+                <ExpandFilled
+                  className="navds-table__expandable-icon navds-table__expandable-icon--filled"
+                  title="Vis mindre"
+                />
               </button>
             </DataCell>
           )}
