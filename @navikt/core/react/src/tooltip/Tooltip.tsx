@@ -293,16 +293,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                       top: arrowY != null ? `${arrowY}px` : "",
                       right: "",
                       bottom: "",
-                      ...(placement
-                        ? {
-                            [{
-                              top: "bottom",
-                              right: "left",
-                              bottom: "top",
-                              left: "right",
-                            }[placement]]: "-3.5px",
-                          }
-                        : ""),
+
+                      [{
+                        top: "bottom",
+                        right: "left",
+                        bottom: "top",
+                        left: "right",
+                      }[placement]]: "-3.5px",
                     }}
                   />
                 )}
