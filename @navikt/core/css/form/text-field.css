@@ -19,6 +19,9 @@
     --navds-semantic-color-component-background-alternate
   );
   --navds-text-field-color-text-disabled: var(--navds-semantic-color-text);
+  --navds-text-field-color-placeholder-text: var(
+    --navds-semantic-color-text-muted
+  );
 }
 
 [data-theme="dark"] {
@@ -28,6 +31,7 @@
   );
   --navds-text-field-color-border: var(--navds-semantic-color-border-inverted);
   --navds-text-field-color-border-hover: var(--navds-global-color-blue-200);
+  --navds-text-field-color-placeholder-text: var(--navds-global-color-gray-500);
 }
 
 .navds-text-field__input {
@@ -39,6 +43,10 @@
   min-height: 48px;
   width: 100%;
   color: var(--navds-text-field-color-text);
+}
+
+.navds-text-field__input::placeholder {
+  color: var(--navds-text-field-color-placeholder-text);
 }
 
 .navds-form-field--small .navds-text-field__input {
