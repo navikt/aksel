@@ -19,7 +19,7 @@
     --navds-semantic-color-interaction-primary
   );
   --navds-button-color-secondary-text-hover: var(
-    --navds-semantic-color-text-inverted
+    --navds-semantic-color-interaction-primary
   );
   --navds-button-color-secondary-text-active: var(
     --navds-semantic-color-text-inverted
@@ -34,7 +34,7 @@
     --navds-semantic-color-component-background-light
   );
   --navds-button-color-secondary-background-hover: var(
-    --navds-semantic-color-interaction-primary-hover
+    --navds-semantic-color-interaction-primary-hover-subtle
   );
   --navds-button-color-secondary-background-active: var(
     --navds-semantic-color-interaction-primary-selected
@@ -47,8 +47,8 @@
   --navds-button-color-tertiary-text-active: var(
     --navds-semantic-color-text-inverted
   );
-  --navds-button-color-tertiary-border-hover: var(
-    --navds-semantic-color-interaction-primary
+  --navds-button-color-tertiary-background-hover: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
   );
   --navds-button-color-tertiary-border-focus: var(
     --navds-semantic-color-interaction-primary
@@ -165,7 +165,6 @@
 .navds-button--secondary:hover {
   color: var(--navds-button-color-secondary-text-hover);
   background-color: var(--navds-button-color-secondary-background-hover);
-  box-shadow: none;
 }
 
 .navds-button--secondary:focus {
@@ -179,7 +178,6 @@
   box-shadow: none;
 }
 
-.navds-button--secondary:focus:hover,
 .navds-button--secondary:focus:active {
   box-shadow: inset 0 0 0 1px
       var(--navds-button-color-secondary-border-focus-active-hover),
@@ -202,7 +200,7 @@
 }
 
 .navds-button--tertiary:hover {
-  box-shadow: inset 0 0 0 2px var(--navds-button-color-tertiary-border-hover);
+  background-color: var(--navds-button-color-tertiary-background-hover);
 }
 
 .navds-button--tertiary:focus {
