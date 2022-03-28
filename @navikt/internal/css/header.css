@@ -1,4 +1,5 @@
 :root {
+  --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
   --navdsi-header-color-background: var(
     --navds-semantic-color-component-background-inverted
   );
@@ -28,6 +29,7 @@
   align-items: center;
   text-decoration: none;
   margin: 0;
+  color: var(--navdsi-header-color-text);
 }
 
 button.navdsi-header__title {
@@ -56,7 +58,7 @@ button.navdsi-header__title {
   justify-self: center;
   gap: var(--navds-spacing-2);
   border-left: 1px solid var(--navdsi-header-color-border);
-  color: var(--navds-color-text);
+  color: var(--navdsi-header-color-text);
 }
 
 a.navdsi-header__title:hover,

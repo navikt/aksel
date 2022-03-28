@@ -1,6 +1,5 @@
 /* Heading */
 .navds-heading {
-  color: var(--navds-color-text);
   font-weight: var(--navds-font-weight-bold);
   margin: 0;
 }
@@ -80,7 +79,6 @@
 
 /* Ingress */
 .navds-ingress {
-  color: var(--navds-color-text);
   font-size: var(--navds-font-size-xlarge);
   font-weight: var(--navds-font-weight-regular);
   letter-spacing: -0.001em;
@@ -94,7 +92,6 @@
 
 /* Body */
 .navds-body-long {
-  color: var(--navds-color-text);
   font-size: var(--navds-font-size-large);
   font-weight: var(--navds-font-weight-regular);
   letter-spacing: 0;
@@ -117,7 +114,6 @@
 }
 
 .navds-body-short {
-  color: var(--navds-color-text);
   font-size: var(--navds-font-size-large);
   font-weight: var(--navds-font-weight-regular);
   letter-spacing: 0;
@@ -141,7 +137,6 @@
 
 /* Label */
 .navds-label {
-  color: var(--navds-color-text);
   font-size: var(--navds-font-size-large);
   font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0;
@@ -165,7 +160,6 @@
 
 /* Small text */
 .navds-detail {
-  color: var(--navds-color-text);
   font-size: var(--navds-font-size-small);
   font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0.004em;

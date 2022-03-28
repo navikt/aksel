@@ -39,7 +39,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
       <Popover
         {...rest}
         ref={ref}
-        data-theme="light"
         placement="bottom-end"
         arrow={false}
         className={cl("navdsi-dropdown__menu", className)}

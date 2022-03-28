@@ -1,5 +1,6 @@
 :root,
 [data-theme="light"] {
+  --navds-search-color-text: var(--navds-semantic-color-text);
   --navds-search-color-border: var(--navds-semantic-color-border);
   --navds-search-color-border-hover: var(
     --navds-semantic-color-interaction-primary
@@ -7,6 +8,7 @@
 }
 
 [data-theme="dark"] {
+  --navds-search-color-text: var(--navds-semantic-color-text-inverted);
   --navds-search-color-border: var(--navds-semantic-color-border-inverted);
   --navds-search-color-border-hover: var(--navds-global-color-blue-200);
 }
@@ -55,7 +57,6 @@
   transform: translateY(-50%);
   pointer-events: none;
   font-size: 1.5rem;
-  color: var(--navds-color-text);
 }
 
 .navds-form-field--small .navds-search__search-icon {
@@ -67,7 +68,7 @@
   position: absolute;
   right: 0.75rem;
   border-radius: var(--navds-border-radius-medium);
-  color: var(--navds-color-text);
+  color: var(--navds-search-color-text);
   height: 32px;
   width: 32px;
   top: 50%;
