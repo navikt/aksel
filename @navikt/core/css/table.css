@@ -212,9 +212,9 @@
 }
 
 .navds-table__expanded-row-content {
-  padding: var(--navds-spacing-4) var(--navds-spacing-16);
+  padding: var(--navds-spacing-4) 4.25rem;
 }
 
 .navds-table--small .navds-table__expanded-row-content {
-  padding: var(--navds-spacing-2) var(--navds-spacing-8);
+  padding: var(--navds-spacing-2) var(--navds-spacing-12);
 }
