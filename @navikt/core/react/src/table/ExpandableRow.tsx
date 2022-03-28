@@ -95,7 +95,7 @@ const ExpandableRow: ExpandableRowType = forwardRef(
           {togglePlacement === "left" && children}
         </Row>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
-          <td colSpan={999}>
+          <td colSpan={999} className="navds-table__expanded-row-cell">
             <UnmountClosed
               isOpened={isOpen}
               theme={{

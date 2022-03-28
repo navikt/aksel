@@ -198,7 +198,11 @@
   transform: rotate(180deg);
 }
 
-.navds-table__expanded-row > td:empty {
+.navds-table__expanded-row-cell {
+  padding: 0;
+}
+
+.navds-table__expanded-row-cell:empty {
   display: none;
 }
 
