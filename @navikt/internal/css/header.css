@@ -3,7 +3,6 @@
     --navds-semantic-color-component-background-inverted
   );
   --navdsi-header-color-border: var(--navds-semantic-color-border-muted);
-  --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
   --navdsi-header-focus: inset 0 0 0 2px var(--navds-global-color-blue-100);
   --navdsi-header-color-hover: var(--navds-global-color-gray-800);
   --navdsi-header-color-active: var(--navds-global-color-gray-600);
@@ -29,7 +28,6 @@
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--navdsi-header-color-text);
 }
 
 button.navdsi-header__title {
@@ -37,7 +35,6 @@ button.navdsi-header__title {
 }
 
 .navdsi-header__user {
-  color: var(--navdsi-header-color-text);
   padding: 0 var(--navds-spacing-5);
   border-left: 1px solid var(--navdsi-header-color-border);
   display: flex;
@@ -59,7 +56,7 @@ button.navdsi-header__title {
   justify-self: center;
   gap: var(--navds-spacing-2);
   border-left: 1px solid var(--navdsi-header-color-border);
-  color: var(--navdsi-header-color-text);
+  color: var(--navds-color-text);
 }
 
 a.navdsi-header__title:hover,

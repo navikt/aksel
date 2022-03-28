@@ -117,6 +117,7 @@
 }
 
 .navds-body-short {
+  color: var(--navds-color-text);
   font-size: var(--navds-font-size-large);
   font-weight: var(--navds-font-weight-regular);
   letter-spacing: 0;
