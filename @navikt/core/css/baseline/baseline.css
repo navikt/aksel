@@ -23,11 +23,13 @@ html {
 :root,
 [data-theme="light"] {
   --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
+
   color: var(--navds-semantic-color-text);
 }
 
 [data-theme="dark"] {
   --navds-shadow-focus: var(--navds-shadow-focus-inverted);
+
   color: var(--navds-semantic-color-text-inverted);
 }
 
