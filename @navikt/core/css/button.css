@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="light"] {
   /* Primary */
   --navds-button-color-primary-text: var(--navds-semantic-color-text-inverted);
   --navds-button-color-primary-border-focus: var(
@@ -78,6 +79,39 @@
   /* Loader */
   --navds-loader-color-on-button-background: rgba(255, 255, 255, 0.3);
   --navds-loader-color-on-button-foreground: currentColor;
+}
+
+[data-theme="dark"] {
+  /* Primary */
+  --navds-button-color-primary-text: var(--navds-semantic-color-text);
+  --navds-button-color-primary-border-focus: var(--navds-semantic-color-text);
+  --navds-button-color-primary-background: var(--navds-global-color-blue-200);
+  --navds-button-color-primary-background-hover: var(
+    --navds-global-color-blue-300
+  );
+  --navds-button-color-primary-background-active: var(
+    --navds-global-color-blue-400
+  );
+
+  /* Secondary */
+  --navds-button-color-secondary-text: var(--navds-global-color-blue-200);
+  --navds-button-color-secondary-text-hover: var(--navds-global-color-blue-200);
+  --navds-button-color-secondary-text-active: var(
+    --navds-global-color-blue-200
+  );
+  --navds-button-color-secondary-border: var(--navds-global-color-blue-200);
+  --navds-button-color-secondary-border-focus-active-hover: var(
+    --navds-semantic-color-text
+  );
+  --navds-button-color-secondary-background: var(
+    --navds-semantic-color-component-background-inverted
+  );
+  --navds-button-color-secondary-background-hover: var(
+    --navds-global-color-blue-900
+  );
+  --navds-button-color-secondary-background-active: var(
+    --navds-global-color-blue-800
+  );
 }
 
 .navds-button {

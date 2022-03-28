@@ -8,6 +8,7 @@
 
 [data-theme="dark"] {
   --navds-search-color-border: var(--navds-semantic-color-border-inverted);
+  --navds-search-color-border-hover: var(--navds-global-color-blue-200);
 }
 
 .navds-search {
