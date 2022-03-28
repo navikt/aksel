@@ -84,11 +84,11 @@ const ExpandableRow: ExpandableRowType = forwardRef(
             >
               <Expand
                 className="navds-table__expandable-icon"
-                title="Vis mer"
+                title={isOpen ? "Vis mindre" : "Vis mer"}
               />
               <ExpandFilled
                 className="navds-table__expandable-icon navds-table__expandable-icon--filled"
-                title="Vis mindre"
+                title={isOpen ? "Vis mindre" : "Vis mer"}
               />
             </button>
           </DataCell>
