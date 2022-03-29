@@ -99,6 +99,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     const arrowRef = useRef<HTMLDivElement | null>(null);
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const openTimerRef = useRef(0);
+    const leaveTimerRef = useRef(0);
     const isMouseDownRef = useRef(false);
 
     const ariaId = useId(id);
@@ -135,11 +136,13 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const handleOpen = useCallback(() => {
       window.clearTimeout(openTimerRef.current);
+      window.clearTimeout(leaveTimerRef.current);
       setIsOpen(true);
     }, [setIsOpen]);
 
     const handleDelayedOpen = useCallback(() => {
       window.clearTimeout(openTimerRef.current);
+      window.clearTimeout(leaveTimerRef.current);
       openTimerRef.current = window.setTimeout(() => {
         setIsOpen(true);
       }, delay);
@@ -147,7 +150,9 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     const handleClose = useCallback(() => {
       window.clearTimeout(openTimerRef.current);
-      setIsOpen(false);
+      leaveTimerRef.current = window.setTimeout(() => {
+        setIsOpen(false);
+      }, 50);
     }, [setIsOpen]);
 
     const handleMouseUp = useCallback(
