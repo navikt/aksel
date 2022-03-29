@@ -212,7 +212,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             handleClose
           ),
           onMouseDown: composeEventHandlers(children.props.onMouseDown, () => {
-            handleClose();
             isMouseDownRef.current = true;
             document.addEventListener("mouseup", handleMouseUp, { once: true });
           }),
@@ -221,15 +220,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
             () => !isMouseDownRef.current && handleOpen()
           ),
           onBlur: composeEventHandlers(children.props.onBlur, handleClose),
-          onClick: composeEventHandlers(
-            children.props.onClick,
-            (event: KeyboardEvent | MouseEvent) => {
-              // keyboard click will occur under different conditions for different node
-              // types so we use `onClick` instead of `onKeyDown` to respect that
-              const isKeyboardClick = event.detail === 0;
-              if (isKeyboardClick) handleClose();
-            }
-          ),
         })}
         {(open ?? isOpen) && (
           <Portal>
