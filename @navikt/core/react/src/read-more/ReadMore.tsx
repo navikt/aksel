@@ -55,6 +55,7 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     return (
       <>
         <button
+          type="button"
           {...rest}
           className={cl(
             "navds-read-more",
