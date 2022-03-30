@@ -76,46 +76,21 @@ export const All = () => {
       <Tooltip open={open} content="Controlled tooltip example" placement="top">
         <Button onClick={() => setOpen((x) => !x)}>Toggle tooltip</Button>
       </Tooltip>
+
       <h2>no arrow</h2>
       <Tooltip content="no arrow" placement="top" arrow={false}>
         <Button>Tooltip</Button>
       </Tooltip>
 
       <h2>Keys</h2>
-      <Tooltip
-        content="Inverted tooltip"
-        placement="top"
-        open
-        keys={["Cmd", "K"]}
-      >
-        <Button>Inverted tooltip</Button>
+      <Tooltip content="Tooltip" placement="top" open keys={["Cmd", "K"]}>
+        <Button>Tooltip</Button>
       </Tooltip>
-      <h3>inverted</h3>
-      <Tooltip
-        inverted
-        content="Inverted!"
-        placement="top"
-        open
-        keys={["Cmd", "K"]}
-      >
-        <Button>Inverted tooltip</Button>
+      <h2>more offset</h2>
+      <Tooltip content="Tooltip" placement="top" open offset={20}>
+        <Button>Tooltip</Button>
       </Tooltip>
 
-      <h2>Inverted</h2>
-      <Tooltip inverted content="Inverted!" placement="top" open>
-        <Button>Inverted tooltip</Button>
-      </Tooltip>
-
-      <h2>With disabled element</h2>
-      <div>
-        <Tooltip content="disabled element example">
-          <span tabIndex={0}>
-            <Button style={{ pointerEvents: "none" }} disabled>
-              Tooltip
-            </Button>
-          </span>
-        </Tooltip>
-      </div>
       <h2>all placements</h2>
       <div
         style={{

@@ -36,15 +36,6 @@
   position: absolute;
 }
 
-.navds-tooltip--inverted > .navds-tooltip__inner {
-  background-color: var(--navds-semantic-color-component-background-light);
-  color: var(--navds-semantic-color-text);
-}
-
-.navds-tooltip--inverted > .navds-tooltip__inner .navds-tooltip__arrow {
-  background-color: var(--navds-semantic-color-component-background-light);
-}
-
 .navds-tooltip__keys {
   padding-bottom: var(--navds-spacing-1);
   display: flex;
@@ -62,9 +53,4 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-}
-
-.navds-tooltip--inverted .navds-tooltip__key {
-  background-color: var(--navds-global-color-gray-200);
-  color: var(--navds-semantic-color-text);
 }

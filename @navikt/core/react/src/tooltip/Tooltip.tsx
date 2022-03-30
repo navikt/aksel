@@ -66,11 +66,6 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   delay?: number;
   /**
-   * Inverts style of tooltip
-   * @default false
-   */
-  inverted?: boolean;
-  /**
    * List of Keyboard-keys for shortcuts
    */
   keys?: string[];
@@ -89,7 +84,6 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       content,
       delay = 150,
       id,
-      inverted = false,
       keys,
       maxChar = 80,
       ...rest
@@ -245,10 +239,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
               className={cl(
                 "navds-tooltip",
                 "navds-detail navds-detail--small",
-                className,
-                {
-                  "navds-tooltip--inverted": inverted,
-                }
+                className
               )}
             >
               <div
