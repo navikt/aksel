@@ -5,12 +5,14 @@
   --navds-search-color-border-hover: var(
     --navds-semantic-color-interaction-primary
   );
+  --navds-search-color-clear-hover: var(--navds-global-color-blue-500);
 }
 
 [data-theme="dark"] {
   --navds-search-color-text: var(--navds-semantic-color-text-inverted);
   --navds-search-color-border: var(--navds-semantic-color-border-inverted);
   --navds-search-color-border-hover: var(--navds-global-color-blue-200);
+  --navds-search-color-clear-hover: var(--navds-global-color-blue-200);
 }
 
 .navds-search {
@@ -90,7 +92,7 @@
 }
 
 .navds-search__button-clear:hover {
-  color: var(--navds-global-color-blue-500);
+  color: var(--navds-search-color-clear-hover);
 }
 
 .navds-search__button-clear:focus {
