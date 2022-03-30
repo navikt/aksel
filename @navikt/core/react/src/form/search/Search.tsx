@@ -60,7 +60,7 @@ export interface SearchProps
    * Changes button-variant
    * @default "primary"
    */
-  variant?: "primary" | "secondary" | "no-button";
+  variant?: "primary" | "secondary" | "simple";
 }
 
 interface SearchComponent
@@ -73,7 +73,7 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant: "primary" | "secondary" | "no-button";
+  variant: "primary" | "secondary" | "simple";
   onSearch: () => void;
 }
 
@@ -178,7 +178,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
       )}
       <div className="navds-search__wrapper">
         <div className="navds-search__wrapper-inner">
-          {variant === "no-button" && (
+          {variant === "simple" && (
             <SearchIcon aria-hidden className="navds-search__search-icon" />
           )}
           <input
@@ -219,7 +219,7 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             onSearch: () => onSearch?.(value ?? internalValue),
           }}
         >
-          {children ? children : variant !== "no-button" && <SearchButton />}
+          {children ? children : variant !== "simple" && <SearchButton />}
         </SearchContext.Provider>
       </div>
     </div>

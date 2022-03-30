@@ -18,7 +18,7 @@ export const LightTheme = () => (
     </Heading>
     <Search label="hidden label" placeholder="Søk" />
     <Search label="hidden label" variant="secondary" defaultValue="dagpenger" />
-    <Search label="hidden label" variant="no-button" placeholder="Søk" />
+    <Search label="hidden label" variant="simple" placeholder="Søk" />
     <Search label="with label" hideLabel={false} />
 
     <Heading level="2" size="large">
@@ -33,7 +33,7 @@ export const LightTheme = () => (
     />
     <Search
       label="hidden label"
-      variant="no-button"
+      variant="simple"
       size="small"
       placeholder="Søk"
     />

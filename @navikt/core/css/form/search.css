@@ -39,15 +39,15 @@
   padding-right: var(--navds-spacing-8);
 }
 
-.navds-search__input--no-button {
+.navds-search__input--simple {
   padding-left: var(--navds-spacing-11);
 }
 
-.navds-form-field--small .navds-search__input--no-button {
+.navds-form-field--small .navds-search__input--simple {
   padding-left: var(--navds-spacing-7);
 }
 
-.navds-search__input:not(.navds-search__input--no-button) {
+.navds-search__input:not(.navds-search__input--simple) {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }

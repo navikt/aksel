@@ -32,7 +32,7 @@ export const All = () => {
       <Search
         label="Søk alle sider om X og Y"
         onSearch={console.log}
-        variant="no-button"
+        variant="simple"
       ></Search>
 
       <h2>Search small</h2>
