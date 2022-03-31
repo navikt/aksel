@@ -15,4 +15,6 @@ export const parameters = {
       locales: "",
     },
   },
+  viewMode: "docs",
+  layout: "centered",
 };
