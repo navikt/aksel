@@ -5,9 +5,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# add git commits (SHA1) to ignore with git blame, i.e. mass refactoring.
-.git-blame-ignore-revs
-
 # Runtime data
 pids
 *.pid
