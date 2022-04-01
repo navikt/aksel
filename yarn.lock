@@ -17487,7 +17487,7 @@ yarn-or-npm@^3.0.1:
     cross-spawn "^6.0.5"
     pkg-dir "^4.2.0"
 
-yarn@^1.22.18:
+yarn@^1.22.10:
   version "1.22.18"
   resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.18.tgz#05b822ade8c672987bab8858635145da0850f78a"
   integrity sha512-oFffv6Jp2+BTUBItzx1Z0dpikTX+raRdqupfqzeMKnoh7WD6RuPAxcqDkMUy9vafJkrB0YaV708znpuMhEBKGQ==
