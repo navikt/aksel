@@ -20,10 +20,22 @@ html {
   box-sizing: inherit;
 }
 
+:root,
+[data-theme="light"] {
+  --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
+
+  color: var(--navds-semantic-color-text);
+}
+
+[data-theme="dark"] {
+  --navds-shadow-focus: var(--navds-shadow-focus-inverted);
+
+  color: var(--navds-semantic-color-text-inverted);
+}
+
 body {
   font-family: var(--navds-font-family);
   line-height: 1.333;
-  color: var(--navds-semantic-color-text);
   font-size: 1.125rem;
 }
 
