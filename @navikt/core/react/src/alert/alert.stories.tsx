@@ -3,7 +3,7 @@ import { Alert } from ".";
 import { BodyLong, Heading as DsHeading } from "..";
 
 export default {
-  title: "ds-react/alert",
+  title: "ds-react/Alert",
   component: Alert,
 };
 
