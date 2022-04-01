@@ -1,4 +1,4 @@
-import "@navikt/ds-css/index.css";
+import "@navikt/ds-css/dist/index.css";
 import "@navikt/ds-css-internal/index.css";
 import { initialize, mswDecorator } from "msw-storybook-addon";
 

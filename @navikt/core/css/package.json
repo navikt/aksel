@@ -17,15 +17,15 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import -o dist/index.css index.css --no-map",
-    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
+    "build": "postcss --use postcss-import -o dist/index.css index.css && yarn cleancss",
+    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css",
+    "cleancss": "node ../../../scripts/cleanRootCss.js"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^0.8.5",
     "normalize.css": "^8.0.1",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.2",
-    "css": "3.0.0"
+    "postcss-import": "^14.0.2"
   }
 }

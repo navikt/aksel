@@ -17,8 +17,9 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import -o dist/index.css index.css",
-    "watch": "yarn build --watch"
+    "build": "postcss --use postcss-import -o dist/index.css index.css && yarn cleancss",
+    "watch": "yarn build --watch",
+    "cleancss": "node ../../../scripts/cleanRootCss.js"
   },
   "devDependencies": {
     "postcss": "^8.3.8",
