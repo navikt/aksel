@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "0.16.14",
+  "version": "0.16.15",
   "private": false,
   "description": "Css for NAV Designsystem components",
   "author": "NAV Designsystem team",
@@ -25,7 +25,7 @@
     "normalize.css": "^8.0.1",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
-    "postcss-import": "^14.0.2",
-    "postcss-combine-duplicated-selectors": "10.0.3"
+    "postcss-combine-duplicated-selectors": "10.0.3",
+    "postcss-import": "^14.0.2"
   }
 }
