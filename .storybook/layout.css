@@ -1,0 +1,10 @@
+.rowgap {
+  display: flex;
+  gap: 1rem;
+}
+
+.colgap {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
