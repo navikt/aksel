@@ -18,7 +18,7 @@
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
     "lint:css": "yarn stylelint --syntax css @navikt/**/*.css",
-    "clean:lib": "node utilities/scripts/clean.js"
+    "clean:lib": "node scripts/clean.js"
   },
   "workspaces": [
     "@navikt/core/*",
