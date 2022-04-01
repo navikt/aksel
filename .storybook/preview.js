@@ -8,11 +8,11 @@ initialize();
 export const decorators = [mswDecorator];
 
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  /* actions: { argTypesRegex: "^on[A-Z].*" }, */
   options: {
     storySort: {
       method: "",
-      order: [],
+      order: ["ds-icons", "ds-react", ["Default"]],
       locales: "",
     },
   },
