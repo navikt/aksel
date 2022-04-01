@@ -23,7 +23,12 @@ interface HeaderComponent
 }
 
 const Header = forwardRef(({ className, ...rest }, ref) => (
-  <header {...rest} ref={ref} className={cl("navdsi-header", className)} />
+  <header
+    data-theme="dark"
+    {...rest}
+    ref={ref}
+    className={cl("navdsi-header", className)}
+  />
 )) as HeaderComponent;
 
 Header.Title = HeaderTitle;
