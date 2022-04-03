@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "0.12.16",
+  "version": "0.12.19",
   "private": false,
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",
@@ -27,14 +27,14 @@
     "/src"
   ],
   "scripts": {
-    "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
+    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
     "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^0.8.6",
-    "@navikt/ds-react": "^0.17.16",
+    "@navikt/ds-icons": "^0.8.7",
+    "@navikt/ds-react": "^0.17.19",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",

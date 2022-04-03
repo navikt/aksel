@@ -1,10 +1,9 @@
-import { Close } from "@navikt/ds-icons";
+import { Close, Search as SearchIcon } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, {
   forwardRef,
   InputHTMLAttributes,
   useCallback,
-  useEffect,
   useRef,
   useState,
 } from "react";
@@ -59,9 +58,9 @@ export interface SearchProps
   clearButton?: boolean;
   /**
    * Changes button-variant
-   * @default "tertiary"
+   * @default "primary"
    */
-  variant?: "tertiary" | "primary";
+  variant?: "primary" | "secondary" | "simple";
 }
 
 interface SearchComponent
@@ -74,8 +73,8 @@ interface SearchComponent
 export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
-  variant?: "tertiary" | "primary";
-  onSearch?: () => void;
+  variant: "primary" | "secondary" | "simple";
+  onSearch: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -99,7 +98,9 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     clearButton = true,
     children,
     onSearch,
-    variant = "tertiary",
+    variant = "primary",
+    defaultValue,
+    onChange,
     ...rest
   } = props;
 
@@ -107,26 +108,23 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
   const mergedRef = mergeRefs([searchRef, ref]);
   const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
-  const [controlledValue, setControlledValue] = useState(value ?? "");
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
 
   const handleChange = useCallback(
     (v: string) => {
-      searchRef.current && value === undefined && setControlledValue(v);
-      props?.onChange?.(v);
+      value === undefined && setInternalValue(v);
+      onChange?.(v);
     },
-    [props, value]
+    [onChange, value]
   );
 
   const handleClear = useCallback(
     (event: SearchClearEvent) => {
       onClear?.(event);
       handleChange("");
-      if (searchRef.current && value === undefined) {
-        searchRef.current.value = "";
-      }
       searchRef.current && searchRef.current?.focus?.();
     },
-    [handleChange, onClear, value]
+    [handleChange, onClear]
   );
 
   useEventListener(
@@ -142,10 +140,6 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
     ),
     wrapperRef
   );
-
-  useEffect(() => {
-    value !== undefined && setControlledValue(value);
-  }, [value]);
 
   return (
     <div
@@ -184,23 +178,27 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
       )}
       <div className="navds-search__wrapper">
         <div className="navds-search__wrapper-inner">
+          {variant === "simple" && (
+            <SearchIcon aria-hidden className="navds-search__search-icon" />
+          )}
           <input
             ref={mergedRef}
             {...omit(rest, ["size"])}
             {...inputProps}
-            {...(props.value !== undefined && { value: props.value })}
+            value={value ?? internalValue}
             onChange={(e) => handleChange(e.target.value)}
             type="search"
             role="searchbox"
             className={cl(
               className,
               "navds-search__input",
+              `navds-search__input--${variant}`,
               "navds-text-field__input",
               "navds-body-short",
-              `navds-body-${size ?? "medium"}`
+              `navds-body-${size}`
             )}
           />
-          {controlledValue && clearButton && (
+          {(value ?? internalValue) && clearButton && (
             <button
               type="button"
               onClick={(e) => handleClear({ trigger: "Click", event: e })}
@@ -218,10 +216,10 @@ const Search = forwardRef<HTMLInputElement, SearchProps>((props, ref) => {
             size,
             disabled: inputProps.disabled,
             variant,
-            onSearch: () => onSearch?.(controlledValue),
+            onSearch: () => onSearch?.(value ?? internalValue),
           }}
         >
-          {children ? children : <SearchButton />}
+          {children ? children : variant !== "simple" && <SearchButton />}
         </SearchContext.Provider>
       </div>
     </div>

@@ -32,7 +32,7 @@ Repoet inneholder følgende:
 
 ## Endringslogg
 
-[Alle relevante kode-endringer blir dokumentert her](https://design.nav.no/designsystem/side/endringslogg)
+[Alle relevante kode-endringer blir dokumentert her](https://aksel.nav.no/designsystem/side/changelog)
 
 ## Bidra
 

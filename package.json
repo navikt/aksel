@@ -18,7 +18,7 @@
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
     "lint:css": "yarn stylelint --syntax css @navikt/**/*.css",
-    "clean:lib": "node utilities/scripts/clean.js"
+    "clean:lib": "node scripts/clean.js"
   },
   "workspaces": [
     "@navikt/core/*",
@@ -60,11 +60,11 @@
     "extend": "^3.0.2",
     "gh-pages": "^3.1.0",
     "glob": "^7.1.6",
-    "fast-glob": "^3.2.7",
-    "fs-extra": "^10.0.0",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.0.1",
     "husky": "^5.0.0",
     "lerna": "^4.0.0",
-    "pretty-quick": "^3.1.0",
+    "pretty-quick": "^3.1.3",
     "style-loader": "^1.2.1",
     "yarn": "^1.22.10"
   },
