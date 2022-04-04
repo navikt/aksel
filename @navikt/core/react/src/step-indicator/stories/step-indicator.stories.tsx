@@ -4,7 +4,7 @@ import { Meta } from "@storybook/react/types-6-0";
 import { Link, HashRouter as Router, useLocation } from "react-router-dom";
 
 export default {
-  title: "ds-react/step-indicator",
+  title: "ds-react(deprecated)/step-indicator",
   component: StepIndicator,
 } as Meta;
 
