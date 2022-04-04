@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "0.12.20",
+  "version": "0.12.21",
   "private": false,
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",

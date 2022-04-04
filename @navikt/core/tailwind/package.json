@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tailwind",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "private": false,
   "description": "Auto-generated tailwind config based on @navikt/ds-tokens",
   "author": "NAV Designsystem team",
@@ -23,7 +23,7 @@
     "directory": "@navikt/core/tailwind"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^0.8.6",
+    "@navikt/ds-tokens": "^0.8.7",
     "@types/jest": "^27.0.1",
     "jest": "^27.2.0",
     "lodash": "^4.17.21",
