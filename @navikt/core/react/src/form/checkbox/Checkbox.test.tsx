@@ -6,11 +6,12 @@ import { Checkbox, CheckboxGroup } from ".";
 
 const firstArgumentOfFirstCall = (fn: jest.Mock) => fn.mock.calls[0][0];
 
-test("checkbox group chains onChange calls", () => {
+test("checkbox group chains onChange calls", async () => {
   const onGroupChange = jest.fn();
   const onChange = jest.fn();
   const value = faker.datatype.string();
   const label = faker.datatype.string();
+  const user = userEvent.setup();
 
   render(
     <CheckboxGroup legend="legend" onChange={onGroupChange}>
@@ -20,7 +21,7 @@ test("checkbox group chains onChange calls", () => {
     </CheckboxGroup>
   );
 
-  userEvent.click(screen.getByLabelText(label));
+  await user.click(screen.getByLabelText(label));
 
   expect(onGroupChange).toBeCalledTimes(1);
   expect(onGroupChange).toBeCalledWith([value]);
@@ -36,21 +37,24 @@ describe("Checkbox handles controlled-state correctly", () => {
     </CheckboxGroup>
   );
 
-  test("Checkbox is still checked after click when controlled", () => {
+  test("Checkbox is still checked after click when controlled", async () => {
+    const user = userEvent.setup();
     render(<CheckboxComponent value={["value1", "value2"]} />);
-    userEvent.click(screen.getByLabelText("label1"));
-    userEvent.click(screen.getByLabelText("label2"));
+    await user.click(screen.getByLabelText("label1"));
+    await user.click(screen.getByLabelText("label2"));
 
     expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
       true
     );
+
     expect((screen.getByLabelText("label2") as HTMLInputElement).checked).toBe(
       true
     );
   });
 
-  test("onChange called with expected values", () => {
+  test("onChange called with expected values", async () => {
     const onGroupChange = jest.fn();
+    const user = userEvent.setup();
 
     render(
       <CheckboxComponent
@@ -59,11 +63,11 @@ describe("Checkbox handles controlled-state correctly", () => {
       />
     );
 
-    userEvent.click(screen.getByLabelText("label1"));
+    await user.click(screen.getByLabelText("label1"));
 
     expect(onGroupChange).lastCalledWith(["value2"]);
 
-    userEvent.click(screen.getByLabelText("label2"));
+    await user.click(screen.getByLabelText("label2"));
 
     expect(onGroupChange).lastCalledWith(["value1"]);
   });
