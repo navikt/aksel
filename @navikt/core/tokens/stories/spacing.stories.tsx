@@ -3,10 +3,10 @@ import { Meta } from "@storybook/react/types-6-0";
 import * as tokens from "../dist/tokens.js";
 
 export default {
-  title: "ds-tokens/spacing",
+  title: "ds-tokens/Spacing",
 } as Meta;
 
-export const BorderRadius = () => {
+export const Spacing = () => {
   const allSpacing: { [key: string]: string } = Object.entries(tokens).reduce(
     (old, [key, val]) =>
       key.startsWith("NavdsSpacing") ? { ...old, [key]: val } : { ...old },
