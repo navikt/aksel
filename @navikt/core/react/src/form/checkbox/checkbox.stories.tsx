@@ -60,6 +60,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
+  controlled: false,
   legend: "Legend-tekst",
   checkboxDescription: false,
   hideLegend: false,

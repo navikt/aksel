@@ -37,6 +37,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
+  controlled: false,
   legend: "Legend-tekst",
   radioDescription: false,
   hideLegend: false,
