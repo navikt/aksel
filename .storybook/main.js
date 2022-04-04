@@ -10,7 +10,7 @@ module.exports = {
     return config;
   },
   devServer: { stats: "errors-only" },
-  stories: () => getStories(),
+  stories: () => [...getStories(), "./*.stories.mdx"],
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
