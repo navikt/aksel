@@ -23,7 +23,7 @@
 Repoet inneholder følgende:
 
 - [Felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/)
-- [Storybook](https://5f801fb2aea7820022de2936-rognyzqcpw.chromatic.com/) for komponenter.
+- [Storybook](https://5f801fb2aea7820022de2936-nmhtupciwh.chromatic.com/) for komponenter.
 - [Gammel dokumentasjon](https://old-design-nav.vercel.app) for komponenter.
 
 ## Dokumentasjon
