@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import { Search } from "../index";
 export default {
-  title: "ds-react/form/search",
+  title: "ds-react/Form/Search",
   component: Search,
   argTypes: {
     clearButton: {
