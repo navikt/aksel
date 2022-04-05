@@ -95,5 +95,5 @@
   border-left: 2px solid var(--navds-semantic-color-border-muted);
   border-radius: var(--navds-border-radius-medium);
   pointer-events: none;
-  z-index: -1;
+  z-index: 1;
 }
