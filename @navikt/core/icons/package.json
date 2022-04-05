@@ -37,7 +37,7 @@
   },
   "peerDependencies": {
     "@types/react": "^17.0.30",
-    "react": "^17.0.0 | ^18.0.0"
+    "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "@svgr/cli": "^5.5.0",
