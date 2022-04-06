@@ -1,15 +1,6 @@
-/* import * as reactDocs from "react-docgen";
-import fs from "fs";
-
-const data = fs.readFileSync("src/form/checkbox/Checkbox.tsx").toString();
-
-const componentInfo = reactDocs.parse(data);
-
-console.log(componentInfo);
- */
-
-const fg = require("fast-glob");
-const docgen = require("react-docgen-typescript");
+import { writeFileSync } from "fs";
+import fg from "fast-glob";
+import * as docgen from "react-docgen-typescript";
 
 const options = {
   savePropValueAsString: true,
@@ -44,7 +35,7 @@ const files = fg
   );
 
 const res: any[] = [];
-const fails: any[] = [];
+const fails: string[] = [];
 
 files.forEach((file) => {
   const doc = tsConfigParser.parse(file);
@@ -55,4 +46,18 @@ files.forEach((file) => {
   }
 });
 
-console.log({ n: res.length, fails });
+console.log({ Documented: res.length, fails });
+
+const cleaned = res.flat().reduce(
+  (old, cur) => [
+    ...old,
+    {
+      filePath: cur.filePath,
+      displayName: cur.displayName,
+      props: cur.props,
+    },
+  ],
+  []
+);
+
+writeFileSync("_docs.json", JSON.stringify(cleaned, null, 2));

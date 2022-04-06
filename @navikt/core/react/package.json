@@ -24,14 +24,16 @@
   "files": [
     "/cjs",
     "/esm",
-    "/src"
+    "/src",
+    "_docs.json"
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn docgen",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "jest"
+    "test": "jest",
+    "docgen": "yarn ts-node docgen.ts"
   },
   "dependencies": {
     "@floating-ui/react-dom": "0.6.0",
@@ -66,7 +68,8 @@
     "ts-jest": "^27.1.0",
     "react-docgen": "5.4.0",
     "react-docgen-typescript": "2.2.2",
-    "fast-glob": "3.2.11"
+    "fast-glob": "3.2.11",
+    "ts-node": "10.7.0"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30",
