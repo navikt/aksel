@@ -37,7 +37,7 @@ interface SpeechBubbleComponent
   Bubble: BubbleType;
 }
 
-const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
+export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
   (
     {
       children,

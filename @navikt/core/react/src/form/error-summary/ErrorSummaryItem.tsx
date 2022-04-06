@@ -15,7 +15,7 @@ export type ErrorSummaryItemType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
+export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
       <Component

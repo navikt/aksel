@@ -55,7 +55,7 @@ interface StepContextProps {
 
 export const StepContext = createContext<StepContextProps | null>(null);
 
-const StepIndicator: StepIndicatorComponent = forwardRef<
+export const StepIndicator: StepIndicatorComponent = forwardRef<
   HTMLOListElement,
   StepIndicatorProps
 >(

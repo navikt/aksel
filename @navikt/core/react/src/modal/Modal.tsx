@@ -59,7 +59,7 @@ type ModalLifecycle = {
   setAppElement?: (element: any) => void;
 };
 
-const Modal = forwardRef<ReactModal, ModalProps>(
+export const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,

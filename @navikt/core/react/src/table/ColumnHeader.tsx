@@ -20,7 +20,7 @@ export interface ColumnHeaderType
     ColumnHeaderProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const ColumnHeader: ColumnHeaderType = forwardRef(
+export const ColumnHeader: ColumnHeaderType = forwardRef(
   ({ className, children, sortable = false, sortKey, ...rest }, ref) => {
     const context = useContext(TableContext);
 

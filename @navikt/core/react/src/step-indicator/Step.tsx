@@ -22,7 +22,7 @@ export interface StepIndicatorStepProps
 export interface StepIndicatorStepType
   extends OverridableComponent<StepIndicatorStepProps, HTMLButtonElement> {}
 
-const StepComponent: OverridableComponent<
+export const StepComponent: OverridableComponent<
   StepIndicatorStepProps,
   HTMLButtonElement
 > = forwardRef(

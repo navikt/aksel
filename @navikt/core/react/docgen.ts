@@ -8,21 +8,51 @@ const componentInfo = reactDocs.parse(data);
 console.log(componentInfo);
  */
 
+const fg = require("fast-glob");
 const docgen = require("react-docgen-typescript");
 
 const options = {
   savePropValueAsString: true,
-  componentNameResolver: (exp, source) => {
-    console.log(exp);
-    return "Accordion";
+
+  propFilter: (prop, comp) => {
+    if (prop.name === "className") return true;
+    if (prop.declarations !== undefined && prop.declarations.length > 0) {
+      const hasPropAdditionalDescription = prop.declarations.find(
+        (declaration) => {
+          return (
+            !declaration.fileName.includes("node_modules") ||
+            declaration.name === "RefAttributes"
+          );
+        }
+      );
+
+      return !!hasPropAdditionalDescription;
+    }
+
+    return true;
   },
 };
 
 const tsConfigParser = docgen.withCustomConfig("./tsconfig.esm.json", options);
 
-// Parse a file for docgen info
-/* const res = docgen.parse("src/form/checkbox/Checkbox.tsx", options); */
-const res = tsConfigParser.parse("src/accordion/AccordionItem.tsx");
+const files = fg
+  .sync(["src/**/*.tsx", "!**/*.stories.*", "!**/*.test.*"])
+  .filter(
+    (x) =>
+      !x.toLowerCase().includes("illustration") &&
+      !x.toLowerCase().includes("pictogram")
+  );
 
-console.log(res);
-/* console.log(res[0].props.ref); */
+const res: any[] = [];
+const fails: any[] = [];
+
+files.forEach((file) => {
+  const doc = tsConfigParser.parse(file);
+  if (doc.length > 0) {
+    res.push(doc);
+  } else {
+    fails.push(file);
+  }
+});
+
+console.log({ n: res.length, fails });

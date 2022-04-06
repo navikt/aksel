@@ -27,7 +27,7 @@ export interface TabProps
 
 export type TabType = OverridableComponent<TabProps, HTMLButtonElement>;
 
-const Tab: TabType = forwardRef(
+export const Tab: TabType = forwardRef(
   (
     {
       className,

@@ -26,7 +26,7 @@ interface LinkPanelComponentType
   Description: LinkPanelDescriptionType;
 }
 
-const LinkPanelComponent: OverridableComponent<
+export const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement
 > = forwardRef(

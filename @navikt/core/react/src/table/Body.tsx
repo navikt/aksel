@@ -8,7 +8,7 @@ export interface BodyType
     BodyProps & React.RefAttributes<HTMLTableSectionElement>
   > {}
 
-const Body: BodyType = forwardRef(({ className, ...rest }, ref) => (
+export const Body: BodyType = forwardRef(({ className, ...rest }, ref) => (
   <tbody {...rest} ref={ref} className={cl("navds-table__body", className)} />
 ));
 

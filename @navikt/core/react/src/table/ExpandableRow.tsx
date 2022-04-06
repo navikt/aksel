@@ -37,7 +37,7 @@ export interface ExpandableRowType
     ExpandableRowProps & React.RefAttributes<HTMLTableRowElement>
   > {}
 
-const ExpandableRow: ExpandableRowType = forwardRef(
+export const ExpandableRow: ExpandableRowType = forwardRef(
   (
     {
       className,

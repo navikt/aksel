@@ -31,9 +31,13 @@ export interface ButtonProps
    * @default false
    */
   loading?: boolean;
+  as?: React.ElementType<any>;
 }
 
-const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
+export const Button: OverridableComponent<
+  ButtonProps,
+  HTMLButtonElement
+> = forwardRef(
   (
     {
       as: Component = "button",

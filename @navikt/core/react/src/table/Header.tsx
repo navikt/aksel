@@ -8,7 +8,7 @@ export interface HeaderType
     HeaderProps & React.RefAttributes<HTMLTableSectionElement>
   > {}
 
-const Header: HeaderType = forwardRef(({ className, ...rest }, ref) => (
+export const Header: HeaderType = forwardRef(({ className, ...rest }, ref) => (
   <thead {...rest} ref={ref} className={cl("navds-table__header", className)} />
 ));
 

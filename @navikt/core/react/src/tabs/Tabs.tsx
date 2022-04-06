@@ -50,7 +50,7 @@ interface TabsContextProps {
 
 export const TabsContext = createContext<TabsContextProps | null>(null);
 
-const Tabs = forwardRef<HTMLDivElement, TabsProps>(
+export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
   (
     {
       className,

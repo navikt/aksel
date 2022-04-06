@@ -31,7 +31,7 @@ interface ErrorSummaryComponent
   Item: ErrorSummaryItemType;
 }
 
-const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
+export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
   (
     {
       children,

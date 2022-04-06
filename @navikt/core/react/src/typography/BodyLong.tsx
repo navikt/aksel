@@ -19,7 +19,7 @@ export interface BodyLongProps
   spacing?: boolean;
 }
 
-const BodyLong: OverridableComponent<
+export const BodyLong: OverridableComponent<
   BodyLongProps,
   HTMLParagraphElement
 > = forwardRef(

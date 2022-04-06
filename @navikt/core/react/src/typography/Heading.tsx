@@ -23,7 +23,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   spacing?: boolean;
 }
 
-const Heading: OverridableComponent<
+export const Heading: OverridableComponent<
   HeadingProps,
   HTMLHeadingElement
 > = forwardRef(

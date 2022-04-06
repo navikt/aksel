@@ -10,7 +10,7 @@ export interface LinkProps
   children: React.ReactNode;
 }
 
-const Link: OverridableComponent<
+export const Link: OverridableComponent<
   LinkProps,
   HTMLAnchorElement
 > = forwardRef(({ as: Component = "a", className, ...rest }, ref) => (

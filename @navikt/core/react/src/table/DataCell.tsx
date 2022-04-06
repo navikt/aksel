@@ -16,7 +16,7 @@ export interface DataCellType
     DataCellProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const DataCell: DataCellType = forwardRef(
+export const DataCell: DataCellType = forwardRef(
   ({ className, children = "", align, ...rest }, ref) => {
     const context = useContext(TableContext);
 

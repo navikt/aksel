@@ -1,2 +1,2 @@
 export { default as Table } from "./Table";
-export * from "./Table";
+export { TableProps } from "./Table";

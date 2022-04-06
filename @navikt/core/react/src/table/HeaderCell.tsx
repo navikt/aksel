@@ -17,7 +17,7 @@ export interface HeaderCellType
     HeaderCellProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const HeaderCell: HeaderCellType = forwardRef(
+export const HeaderCell: HeaderCellType = forwardRef(
   ({ className, children, align, ...rest }, ref) => {
     const context = useContext(TableContext);
 
