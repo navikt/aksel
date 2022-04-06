@@ -37,14 +37,7 @@ export interface CheckboxGroupProps
 
 const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
   (
-    {
-      value,
-      defaultValue,
-      onChange = () => {},
-      children,
-      className,
-      ...rest
-    }: CheckboxGroupProps,
+    { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref
   ) => {
     const fieldset = useContext(FieldsetContext);
