@@ -31,7 +31,6 @@ export interface ButtonProps
    * @default false
    */
   loading?: boolean;
-  as?: React.ElementType<any>;
 }
 
 export const Button: OverridableComponent<
