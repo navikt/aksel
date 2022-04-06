@@ -28,7 +28,7 @@ Repoet inneholder følgende:
 
 ## Dokumentasjon
 
-[Dokumentasjon side forvaltes i dette repoet](https://github.com/navikt/aksel-website)
+[Dokumentasjon forvaltes i dette repoet](https://github.com/navikt/aksel-website)
 
 ## Endringslogg
 
