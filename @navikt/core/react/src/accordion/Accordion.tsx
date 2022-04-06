@@ -20,14 +20,16 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
-  ({ className, ...rest }, ref) => (
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+  ({ className, ...rest }: AccordionProps, ref) => (
     <div {...rest} className={cl("navds-accordion", className)} ref={ref} />
   )
-) as AccordionComponent;
+);
 
-Accordion.Header = AccordionHeader;
-Accordion.Content = AccordionContent;
-Accordion.Item = AccordionItem;
+const AccordionComp = Accordion as AccordionComponent;
 
-export default Accordion;
+AccordionComp.Header = AccordionHeader;
+AccordionComp.Content = AccordionContent;
+AccordionComp.Item = AccordionItem;
+
+export default AccordionComp;
