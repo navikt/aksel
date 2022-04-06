@@ -1,7 +1,7 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { BodyShort } from "..";
-import { TableContext } from ".";
+import { TableContext } from "./Table";
 
 interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**

@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import { Down, Up, UpDown } from "@navikt/ds-icons";
-import { TableContext } from "..";
+import { TableContext } from "./Table";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 
 interface ColumnHeaderProps extends HeaderCellProps {

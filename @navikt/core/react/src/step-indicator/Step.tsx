@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { StepContext } from ".";
+import { StepContext } from "./StepIndicator";
 import { BodyShort, Label, OverridableComponent } from "..";
 
 export interface StepIndicatorStepProps

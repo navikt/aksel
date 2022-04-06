@@ -4,6 +4,7 @@ import * as docgen from "react-docgen-typescript";
 
 const options = {
   savePropValueAsString: true,
+  shouldRemoveUndefinedFromOptional: true,
 
   propFilter: (prop, comp) => {
     if (prop.name === "className") return true;
