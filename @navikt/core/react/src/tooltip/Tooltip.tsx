@@ -163,11 +163,23 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => document.removeEventListener("mouseup", handleMouseUp);
     }, [handleMouseUp]);
 
-    useEventListener(
+    /* useEventListener(
       "keydown",
       useCallback((e) => e.key === "Escape" && handleClose(), [handleClose]),
-      document
+      document ?? null
+    ); */
+
+    const handleEscape = useCallback(
+      (e) => e.key === "Escape" && handleClose(),
+      [handleClose]
     );
+
+    useEffect(() => {
+      document?.addEventListener("keydown", handleEscape);
+      return () => {
+        document?.removeEventListener("keydown", handleEscape);
+      };
+    }, [handleEscape]);
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
     const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [

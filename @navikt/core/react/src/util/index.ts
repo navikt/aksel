@@ -40,7 +40,7 @@ export const useEventListener = <T extends ListenerT>(
     }
     target?.addEventListener(name, handler);
     return () => {
-      target?.addEventListener(name, handler);
+      target?.removeEventListener(name, handler);
     };
   }, [name, handler, target]);
 };
