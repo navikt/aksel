@@ -212,7 +212,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ),
           onMouseDown: composeEventHandlers(children.props.onMouseDown, () => {
             isMouseDownRef.current = true;
-            document.addEventListener("mouseup", handleMouseUp, { once: true });
+            document &&
+              document.addEventListener("mouseup", handleMouseUp, {
+                once: true,
+              });
           }),
           onFocus: composeEventHandlers(
             children.props.onFocus,
