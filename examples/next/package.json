@@ -12,6 +12,7 @@
     "next": "12.1.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "@navikt/ds-css": "^0.16.19",
     "@navikt/ds-react": "^0.17.24"
   },
   "devDependencies": {
