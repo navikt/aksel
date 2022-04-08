@@ -165,8 +165,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     useEventListener(
       "keydown",
-      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose]),
-      document
+      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose])
     );
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
