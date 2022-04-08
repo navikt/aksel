@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="flex flex-col gap-4 p-4 m-4 mx-auto bg-white rounded-md max-w-2xl">
       <Accordion>
         <Accordion.Item>
           <Accordion.Header>Accordion header 1</Accordion.Header>
