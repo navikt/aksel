@@ -1,11 +1,3 @@
-import {
-  arrow as flArrow,
-  autoUpdate,
-  flip,
-  hide,
-  shift,
-  useFloating,
-} from "@floating-ui/react-dom";
 import cl from "classnames";
 import React, {
   cloneElement,
@@ -17,10 +9,18 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { composeEventHandlers, Detail, useEventListener } from "..";
+import {
+  useFloating,
+  arrow as flArrow,
+  shift,
+  autoUpdate,
+  flip,
+  hide,
+} from "@floating-ui/react-dom";
 import mergeRefs from "react-merge-refs";
-import { composeEventHandlers, Detail } from "..";
-import { useId } from "../util";
 import Portal from "./portal";
+import { useId } from "../util";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -163,17 +163,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return () => document.removeEventListener("mouseup", handleMouseUp);
     }, [handleMouseUp]);
 
-    const handleEscape = useCallback(
-      (e) => e.key === "Escape" && handleClose(),
-      [handleClose]
+    useEventListener(
+      "keydown",
+      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose])
     );
-
-    useEffect(() => {
-      document?.addEventListener("keydown", handleEscape);
-      return () => {
-        document?.removeEventListener("keydown", handleEscape);
-      };
-    }, [handleEscape]);
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
     const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [
