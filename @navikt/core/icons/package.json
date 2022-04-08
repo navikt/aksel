@@ -36,7 +36,7 @@
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "@types/react": "^17.0.30",
+    "@types/react": "^17.0.30 || ^18.0.0",
     "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
