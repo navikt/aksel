@@ -1,8 +1,8 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, ReactNode } from "react";
 import Toggle, { ToggleType } from "./Toggle";
 import Menu, { MenuType } from "./Menu";
 
-export interface DropdownType extends React.FC {
+export interface DropdownType extends React.FC<{ children: ReactNode }> {
   Toggle: ToggleType;
   Menu: MenuType;
 }
