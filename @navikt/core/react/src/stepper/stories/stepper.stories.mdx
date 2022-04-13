@@ -32,6 +32,33 @@ Du må nå selv styre state med `activeStep` og `onStepChange`.
   <Example />
 </Canvas>
 
+## Horisontal
+
+```jsx
+<Stepper
+  activeStep={activeStep}
+  horisontal
+  onStepChange={(x) => setActiveStep(x)}
+>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Start
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Sunt deserunt qui sit sunt culpa nisi
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Nulla nisi pariatur nulla cupidatat elit.
+  </Stepper.Step>
+  <Stepper.Step href="" onClick={(e) => e.preventDefault()}>
+    Nulla laborum proident consequat laborum elit et dolore ut sunt.
+  </Stepper.Step>
+</Stepper>
+```
+
+<Canvas>
+  <Example horisontal />
+</Canvas>
+
 ## Override tags
 
 `Stepper.Step` er implementert med Overridable-component noe som gjør at du kan endre taggen til

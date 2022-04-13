@@ -20,7 +20,7 @@ export const All = () => {
   ];
   const [activeStep, setActiveStep] = useState(1);
 
-  const anchorProps = {
+  const props = {
     href: "",
     onClick: (e) => e.preventDefault(),
   };
@@ -34,16 +34,16 @@ export const All = () => {
           activeStep={activeStep}
           onStepChange={setActiveStep}
         >
-          <Stepper.Step {...anchorProps}>Start søknad</Stepper.Step>
-          <Stepper.Step {...anchorProps}>Personopplysninger</Stepper.Step>
-          <Stepper.Step {...anchorProps}>Saksopplysninger</Stepper.Step>
-          <Stepper.Step {...anchorProps}>
-            Søknadstekst for en veldig spesifikk prosess i NAV som jeg må skrive
-            om her i denne labelen
+          <Stepper.Step {...props}>Start søknad</Stepper.Step>
+          <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
+          <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
+          <Stepper.Step {...props}>
+            Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives
+            og forklares i sitt fulle i denne labelen
           </Stepper.Step>
-          <Stepper.Step {...anchorProps}>Vedlegg</Stepper.Step>
-          <Stepper.Step {...anchorProps}>Oppsummering</Stepper.Step>
-          <Stepper.Step {...anchorProps}>Innsending</Stepper.Step>
+          <Stepper.Step {...props}>Vedlegg</Stepper.Step>
+          <Stepper.Step {...props}>Oppsummering</Stepper.Step>
+          <Stepper.Step {...props}>Innsending</Stepper.Step>
         </Stepper>
       </div>
       <BodyLong style={{ marginTop: "5rem" }}>

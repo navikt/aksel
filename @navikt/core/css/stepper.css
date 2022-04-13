@@ -6,6 +6,10 @@
   list-style: none;
 }
 
+.navds-stepper.horisontal {
+  flex-direction: row;
+}
+
 /* Step */
 .navds-stepper__step {
   position: relative;
@@ -21,6 +25,11 @@
   flex-shrink: 0;
 }
 
+.navds-stepper__step.horisontal {
+  padding: 0;
+  flex-direction: column;
+}
+
 .navds-stepper__step-number {
   flex-shrink: 0;
   display: flex;
@@ -34,6 +43,11 @@
   color: var(--navds-semantic-color-interaction-primary);
   box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
   background-color: var(--navds-semantic-color-component-background-light);
+}
+
+.navds-stepper__step-number.horisontal {
+  margin-right: var(--navds-spacing-16);
+  margin-left: calc(2px + var(--navds-spacing-8));
 }
 
 /* Step-states: focus, active, hover */
@@ -66,9 +80,16 @@
 
 /* Step label */
 .navds-stepper__step-label {
-  margin-top: 2px;
   color: var(--navds-semantic-color-interaction-primary);
+  margin-top: 0.125rem;
   text-align: start;
+  max-width: 6rem;
+  flex-shrink: 0;
+}
+
+.navds-stepper__step-label.horisontal {
+  margin-top: 0.5rem;
+  text-align: center;
 }
 
 .navds-stepper__step:hover > .navds-stepper__step-label {
@@ -83,10 +104,11 @@
   text-decoration: none;
 }
 
-/* Step Horizontal Lines */
+/* Step Line */
 
-.navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
-  content: "";
+.navds-stepper__step-wrapper:not(:last-child)
+  > .navds-stepper__step
+  > .navds-stepper__step-line {
   position: absolute;
   top: calc(28px + 8px + (2.25rem / 2));
   left: 13px;
@@ -96,4 +118,17 @@
   border-radius: var(--navds-border-radius-medium);
   pointer-events: none;
   z-index: 1;
+}
+
+.navds-stepper__step-wrapper:not(:last-child)
+  > .navds-stepper__step
+  > .navds-stepper__step-line.horisontal {
+  left: calc(4.375rem);
+  top: calc(13px);
+  width: calc(5rem);
+  flex-shrink: 0;
+  height: auto;
+  border-top: 2px solid var(--navds-semantic-color-border-muted);
+  display: block;
+  border-left: none;
 }

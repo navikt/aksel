@@ -25,30 +25,35 @@ const StepComponent: OverridableComponent<
   ({ className, children, as: Component = "a", index = 0, ...rest }, ref) => {
     const context = useContext(StepperContext);
     if (context === null) {
-      console.error(
-        "<StepIndicator.Step> has to be used within an <StepIndicator>"
-      );
+      console.error("<Stepper.Step> has to be used within <Stepper>");
       return null;
     }
-    const activeStep = context.activeStep === index;
+    const { horisontal, activeStep } = context;
+    const horisontalClass = horisontal ? "horisontal" : "";
 
     return (
       <Component
         {...rest}
-        aria-current={Boolean(activeStep)}
+        aria-current={Boolean(activeStep === index)}
         ref={ref}
-        className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": activeStep,
+        className={cl("navds-stepper__step", horisontalClass, className, {
+          "navds-stepper__step--active": activeStep === index,
         })}
         onClick={(e) => {
           context.onStepChange(index);
           rest?.onClick?.(e);
         }}
       >
-        <Label className="navds-stepper__step-number" as="span">
-          {activeStep ? `${index + 1}` : index + 1}
+        <span className={cl(`navds-stepper__step-line`, horisontalClass)} />
+        <Label
+          className={cl("navds-stepper__step-number", horisontalClass)}
+          as="span"
+        >
+          {index + 1}
         </Label>
-        <Label className="navds-stepper__step-label">{children}</Label>
+        <Label className={cl("navds-stepper__step-label", horisontalClass)}>
+          {children}
+        </Label>
       </Component>
     );
   }
