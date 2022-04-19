@@ -39,6 +39,7 @@ import {
   Tooltip,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
+import { Divider, Dropdown } from "@navikt/ds-react-internal";
 
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
@@ -232,6 +233,27 @@ const Home: NextPage = () => {
       <Heading size="xlarge">Heading</Heading>
       <Ingress>Ingress</Ingress>
       <Label>Label</Label>
+      <Dropdown>
+        <Dropdown.Toggle>Toggle</Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Menu.GroupedList>
+            <Dropdown.Menu.GroupedList.Heading>
+              Systemer og oppslagsverk
+            </Dropdown.Menu.GroupedList.Heading>
+            <Dropdown.Menu.GroupedList.Item>
+              Gosys
+            </Dropdown.Menu.GroupedList.Item>
+          </Dropdown.Menu.GroupedList>
+          <Divider />
+          <Dropdown.Menu.List>
+            <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
+            <Dropdown.Menu.List.Item disabled>
+              Infotrygd
+            </Dropdown.Menu.List.Item>
+          </Dropdown.Menu.List>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 };
