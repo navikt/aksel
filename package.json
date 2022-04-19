@@ -22,7 +22,8 @@
   },
   "workspaces": [
     "@navikt/core/*",
-    "@navikt/internal/*"
+    "@navikt/internal/*",
+    "examples/*"
   ],
   "prettier": {},
   "eslintConfig": {
