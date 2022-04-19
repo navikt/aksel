@@ -14,7 +14,8 @@
     "react-dom": "18.0.0",
     "@navikt/ds-css": "^0.16.19",
     "@navikt/ds-icons": "^0.8.10",
-    "@navikt/ds-react": "^0.17.24"
+    "@navikt/ds-react": "^0.17.24",
+    "@navikt/ds-react-internal": "^0.12.27"
   },
   "devDependencies": {
     "@types/node": "17.0.23",
