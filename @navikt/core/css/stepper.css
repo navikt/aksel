@@ -46,8 +46,8 @@
 }
 
 .navds-stepper__step-number.horisontal {
-  margin-right: var(--navds-spacing-16);
-  margin-left: calc(2px + var(--navds-spacing-8));
+  margin-right: var(--navds-spacing-12);
+  margin-left: var(--navds-spacing-12);
 }
 
 /* Step-states: focus, active, hover */
@@ -90,6 +90,7 @@
 .navds-stepper__step-label.horisontal {
   margin-top: 0.5rem;
   text-align: center;
+  align-self: center;
 }
 
 .navds-stepper__step:hover > .navds-stepper__step-label {
@@ -123,9 +124,9 @@
 .navds-stepper__step-wrapper:not(:last-child)
   > .navds-stepper__step
   > .navds-stepper__step-line.horisontal {
-  left: calc(4.375rem);
-  top: calc(13px);
-  width: calc(5rem);
+  left: 5.25rem;
+  top: 13px;
+  width: 5rem;
   flex-shrink: 0;
   height: auto;
   border-top: 2px solid var(--navds-semantic-color-border-muted);
