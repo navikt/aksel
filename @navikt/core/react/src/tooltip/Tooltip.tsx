@@ -165,8 +165,7 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     useEventListener(
       "keydown",
-      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose]),
-      document
+      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose])
     );
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
@@ -212,7 +211,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
           ),
           onMouseDown: composeEventHandlers(children.props.onMouseDown, () => {
             isMouseDownRef.current = true;
-            document.addEventListener("mouseup", handleMouseUp, { once: true });
+            document &&
+              document.addEventListener("mouseup", handleMouseUp, {
+                once: true,
+              });
           }),
           onFocus: composeEventHandlers(
             children.props.onFocus,

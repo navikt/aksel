@@ -1,0 +1,6 @@
+@import "./tailwind.css";
+@import "@navikt/ds-css";
+
+body {
+  background-color: var(--navds-semantic-color-canvas-background);
+}

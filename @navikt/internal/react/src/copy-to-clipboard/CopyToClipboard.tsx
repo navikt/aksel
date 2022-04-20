@@ -26,7 +26,7 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   popoverPlacement?: Placement;
   /**
    * Copy button title attribute
-   * @default `Kopier ${copyText}`
+   * @default children ? undefined : `Kopier ${copyText}`
    */
   title?: string;
 }
@@ -64,6 +64,8 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       setOpenPopover(true);
     };
 
+    const copyTitle = title ?? (children ? undefined : `Kopier ${copyText}`);
+
     return (
       <div>
         <Button
@@ -74,7 +76,8 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           size={size}
           {...rest}
         >
-          <Copy title={title ?? `Kopier ${copyText}`} />
+          <Copy title={copyTitle} aria-hidden={!copyTitle} />
+          {children}
         </Button>
         <Popover
           role="alert"
