@@ -29,6 +29,8 @@ export interface ReadMoreProps
    * @default false
    */
   renderContentWhenClosed?: boolean;
+  /*  */
+  size?: "medium" | "small";
 }
 
 const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
@@ -41,6 +43,7 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       open,
       defaultOpen = false,
       onClick,
+      size = "medium",
       ...rest
     },
     ref
@@ -53,19 +56,14 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     const isOpened = open ?? internalOpen;
 
     return (
-      <>
+      <div>
         <button
           type="button"
           {...rest}
-          className={cl(
-            "navds-read-more",
-            "navds-body-short",
-            "navds-body-short--small",
-            className,
-            {
-              "navds-read-more--open": isOpened,
-            }
-          )}
+          className={cl("navds-read-more", "navds-body-short", className, {
+            "navds-read-more--open": isOpened,
+            "navds-body-short--small": size === "small",
+          })}
           onClick={(e) => {
             if (open === undefined) {
               setInternalOpen((isOpen) => !isOpen);
@@ -80,10 +78,10 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
         </button>
         <CollapseComponent isOpened={isOpened}>
           <div className="navds-read-more__content">
-            <BodyLong size="small">{children}</BodyLong>
+            <BodyLong size={size}>{children}</BodyLong>
           </div>
         </CollapseComponent>
-      </>
+      </div>
     );
   }
 );

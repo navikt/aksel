@@ -1,2 +1,2 @@
-export { default as ReadMore } from "./ReadMore";
-export * from "./ReadMore";
+export { default as ReadMore, default as Details } from "./Details";
+export * from "./Details";
