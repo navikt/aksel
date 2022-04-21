@@ -7,11 +7,11 @@ import { BodyLong } from "../typography";
 export interface DetailsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Content inside read more
+   * Content inside Details
    */
   children: React.ReactNode;
   /**
-   * Read more header content
+   * Details header content
    */
   header: React.ReactNode;
   /**
