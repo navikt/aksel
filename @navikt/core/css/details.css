@@ -2,24 +2,26 @@
   cursor: pointer;
   margin: 0;
   padding: 0;
-  text-decoration: underline;
   border: none;
   background: none;
   display: flex;
   align-items: center;
   gap: var(--navds-spacing-2);
   color: var(--navds-semantic-color-link);
+  border-radius: var(--navds-border-radius-small);
+  padding: 0 var(--navds-spacing-1);
 }
 
 .navds-details:hover {
-  text-decoration: none;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.navds-details:active {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .navds-details:focus {
   outline: none;
-  color: var(--navds-link-color-text-focus);
-  text-decoration: none;
-  background-color: var(--navds-link-color-background-focus);
   box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
 }
 
@@ -40,13 +42,14 @@
   display: flex;
   align-items: stretch;
   gap: var(--navds-spacing-2);
+  padding: 0 var(--navds-spacing-1);
 }
 
 .navds-details__content::before {
   content: "";
   display: block;
   width: 2px;
-  background-color: var(--navds-semantic-color-border-muted);
+  background-color: rgba(0, 0, 0, 0.31);
   margin: 0 9px;
   flex-shrink: 0;
 }
