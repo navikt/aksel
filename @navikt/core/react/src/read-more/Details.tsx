@@ -4,7 +4,7 @@ import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 
-export interface ReadMoreProps
+export interface DetailsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
    * Content inside read more
@@ -29,11 +29,14 @@ export interface ReadMoreProps
    * @default false
    */
   renderContentWhenClosed?: boolean;
-  /*  */
+  /**
+   * Changes fontsize for content
+   * @default false
+   */
   size?: "medium" | "small";
 }
 
-const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
+const Details = forwardRef<HTMLButtonElement, DetailsProps>(
   (
     {
       className,
@@ -60,8 +63,8 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
         <button
           type="button"
           {...rest}
-          className={cl("navds-read-more", "navds-body-short", className, {
-            "navds-read-more--open": isOpened,
+          className={cl("navds-details", "navds-body-short", className, {
+            "navds-details--open": isOpened,
             "navds-body-short--small": size === "small",
           })}
           onClick={(e) => {
@@ -73,11 +76,11 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           aria-expanded={isOpened}
           ref={ref}
         >
-          <Expand className="navds-read-more__expand-icon" aria-hidden />
+          <Expand className="navds-details__expand-icon" aria-hidden />
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
-          <div className="navds-read-more__content">
+          <div className="navds-details__content">
             <BodyLong size={size}>{children}</BodyLong>
           </div>
         </CollapseComponent>
@@ -86,4 +89,4 @@ const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
   }
 );
 
-export default ReadMore;
+export default Details;

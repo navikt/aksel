@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Details } from ".";
-import { Link } from "..";
 
 export default {
   title: "ds-react/Details",
@@ -22,14 +21,11 @@ export const Default = (props) => {
     <Details
       open={props.controlled ? state : undefined}
       onClick={() => setState((x) => !x)}
-      header="ReadMore header text"
+      header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
       {...props}
     >
-      Est ex duis proident nostrud elit qui laborum anim minim eu eiusmod.
-      Veniam in nostrud sunt tempor velit incididunt sint ex dolor qui velit id
-      eu. <Link href="example.com">Deserunt magna sunt velit in</Link>. Est
-      exercitation id cillum qui do. Minim adipisicing nostrud commodo proident
-      occaecat aliquip nulla anim proident reprehenderit.
+      Command station, this is ST 321. Code Clearance Blue. We're starting our
+      approach. Deactivate the security shield.
     </Details>
   );
 };
@@ -40,21 +36,21 @@ Default.args = {
 };
 
 export const Small = () => (
-  <Details header="ReadMore header text" size="small">
-    Est ex duis proident nostrud elit qui laborum anim minim eu eiusmod. Veniam
-    in nostrud sunt tempor velit incididunt sint ex dolor qui velit id eu.{" "}
-    <Link href="example.com">Deserunt magna sunt velit in</Link>. Est
-    exercitation id cillum qui do. Minim adipisicing nostrud commodo proident
-    occaecat aliquip nulla anim proident reprehenderit.
+  <Details
+    header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
+    size="small"
+  >
+    Command station, this is ST 321. Code Clearance Blue. We're starting our
+    approach. Deactivate the security shield.
   </Details>
 );
 
 export const Open = () => (
-  <Details header="ReadMore header text" defaultOpen>
-    Est ex duis proident nostrud elit qui laborum anim minim eu eiusmod. Veniam
-    in nostrud sunt tempor velit incididunt sint ex dolor qui velit id eu.{" "}
-    <Link href="example.com">Deserunt magna sunt velit in</Link>. Est
-    exercitation id cillum qui do. Minim adipisicing nostrud commodo proident
-    occaecat aliquip nulla anim proident reprehenderit.
+  <Details
+    header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
+    defaultOpen
+  >
+    Command station, this is ST 321. Code Clearance Blue. We're starting our
+    approach. Deactivate the security shield.
   </Details>
 );
