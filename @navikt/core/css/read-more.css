@@ -25,6 +25,7 @@
 }
 
 .navds-read-more__expand-icon {
+  flex-shrink: 0;
   font-size: 1.25rem;
 }
 
