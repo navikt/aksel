@@ -63,10 +63,16 @@ const Details = forwardRef<HTMLButtonElement, DetailsProps>(
         <button
           type="button"
           {...rest}
-          className={cl("navds-details", "navds-body-short", className, {
-            "navds-details--open": isOpened,
-            "navds-body-short--small": size === "small",
-          })}
+          className={cl(
+            "navds-details",
+            "navds-body-short",
+            `navds-details--${size}`,
+            className,
+            {
+              "navds-details--open": isOpened,
+              "navds-body-short--small": size === "small",
+            }
+          )}
           onClick={(e) => {
             if (open === undefined) {
               setInternalOpen((isOpen) => !isOpen);

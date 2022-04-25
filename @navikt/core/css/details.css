@@ -8,7 +8,11 @@
   gap: var(--navds-spacing-2);
   color: var(--navds-semantic-color-link);
   border-radius: var(--navds-border-radius-small);
-  padding: 0 var(--navds-spacing-1);
+  padding: var(--navds-spacing-1) var(--navds-spacing-1);
+}
+
+.navds-details--small {
+  padding: var(--navds-spacing-1) var(--navds-spacing-1);
 }
 
 .navds-details:hover {
