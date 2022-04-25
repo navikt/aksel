@@ -70,16 +70,16 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
-    "@storybook/addon-storysource": "^6.4",
-    "@storybook/addons": "^6.4",
-    "@storybook/theming": "^6.4",
-    "@storybook/addon-a11y": "^6.4",
-    "@storybook/builder-webpack5": "^6.4",
-    "@storybook/manager-webpack5": "^6.4",
-    "@storybook/addon-actions": "^6.4",
-    "@storybook/addon-docs": "^6.4",
-    "@storybook/addon-essentials": "^6.4",
-    "@storybook/react": "^6.4",
+    "@storybook/addon-storysource": "^6.5-alpha.64",
+    "@storybook/addons": "^6.5-alpha.64",
+    "@storybook/theming": "^6.5-alpha.64",
+    "@storybook/addon-a11y": "^6.5-alpha.64",
+    "@storybook/builder-webpack5": "^6.5-alpha.64",
+    "@storybook/manager-webpack5": "^6.5-alpha.64",
+    "@storybook/addon-actions": "^6.5-alpha.64",
+    "@storybook/addon-docs": "^6.5-alpha.64",
+    "@storybook/addon-essentials": "^6.5-alpha.64",
+    "@storybook/react": "^6.5-alpha.64",
     "@babel/core": "^7.11.6",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
     "@typescript-eslint/parser": "^4.3.0",
@@ -106,6 +106,6 @@
     "webpack-cli": "^4.2.0",
     "react-dom": "^18.0.0",
     "msw": "^0.36.5",
-    "msw-storybook-addon": "^1.6.0"
+    "msw-storybook-addon": "^1.6.3"
   }
 }

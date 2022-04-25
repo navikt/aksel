@@ -30,8 +30,17 @@ module.exports = {
       },
     },
   ],
-  core: {
-    builder: "webpack5",
-  },
   staticDirs: ["./public"],
+  features: {
+    storyStoreV7: true,
+  },
+  core: {
+    builder: {
+      name: "webpack5",
+      options: {
+        lazyCompilation: true,
+        fsCache: true,
+      },
+    },
+  },
 };
