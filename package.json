@@ -106,6 +106,8 @@
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "react-dom": "^18.0.0",
+    "postcss-import": "^14.0.2",
+    "postcss-combine-duplicated-selectors": "10.0.3",
     "msw": "^0.36.5",
     "msw-storybook-addon": "^1.6.0"
   }
