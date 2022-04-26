@@ -30,6 +30,11 @@ interface ExpandableRowProps extends RowProps {
    * Change handler for open
    */
   onOpenChange?: (open: boolean) => void;
+  /**
+   * Disable expansion
+   * @default false
+   */
+  expansionDisabled?: boolean;
 }
 
 export interface ExpandableRowType
@@ -47,6 +52,7 @@ const ExpandableRow: ExpandableRowType = forwardRef(
       defaultOpen = false,
       open,
       onOpenChange,
+      expansionDisabled = false,
       ...rest
     },
     ref
@@ -71,26 +77,28 @@ const ExpandableRow: ExpandableRowType = forwardRef(
               "navds-table__toggle-expand-cell--open": isOpen,
             })}
           >
-            <button
-              className="navds-table__toggle-expand-button"
-              aria-controls={id}
-              aria-expanded={isOpen}
-              onClick={() => {
-                onOpenChange?.(!isOpen);
-                if (open === undefined) {
-                  setInternalOpen((open) => !open);
-                }
-              }}
-            >
-              <Expand
-                className="navds-table__expandable-icon"
-                title={isOpen ? "Vis mindre" : "Vis mer"}
-              />
-              <ExpandFilled
-                className="navds-table__expandable-icon navds-table__expandable-icon--filled"
-                title={isOpen ? "Vis mindre" : "Vis mer"}
-              />
-            </button>
+            {!expansionDisabled && (
+              <button
+                className="navds-table__toggle-expand-button"
+                aria-controls={id}
+                aria-expanded={isOpen}
+                onClick={() => {
+                  onOpenChange?.(!isOpen);
+                  if (open === undefined) {
+                    setInternalOpen((open) => !open);
+                  }
+                }}
+              >
+                <Expand
+                  className="navds-table__expandable-icon"
+                  title={isOpen ? "Vis mindre" : "Vis mer"}
+                />
+                <ExpandFilled
+                  className="navds-table__expandable-icon navds-table__expandable-icon--filled"
+                  title={isOpen ? "Vis mindre" : "Vis mer"}
+                />
+              </button>
+            )}
           </DataCell>
           {togglePlacement === "left" && children}
         </Row>

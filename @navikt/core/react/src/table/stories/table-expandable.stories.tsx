@@ -12,7 +12,7 @@ export const Expandable = () => {
 
   return (
     <>
-      <Table>
+      <Table zebraStripes>
         <Table.Header>
           <Table.Row>
             {columns.map(({ key, name }) => (
@@ -24,6 +24,7 @@ export const Expandable = () => {
         <Table.Body>
           {data.map((data) => (
             <Table.ExpandableRow
+              expansionDisabled={data.animal === "Sel"}
               content={data.content}
               key={data.name}
               togglePlacement="right"
