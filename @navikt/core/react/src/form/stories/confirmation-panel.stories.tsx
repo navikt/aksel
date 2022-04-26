@@ -57,6 +57,13 @@ export const All = () => {
         onChange={() => setChecked(!checked)}
         label="Checkbox label text"
       ></ConfirmationPanel>
+      <h2>Uncontrolled</h2>
+      <ConfirmationPanel label="Checkbox label text"></ConfirmationPanel>
+      <h3>defaultChecked</h3>
+      <ConfirmationPanel
+        defaultChecked
+        label="Checkbox label text"
+      ></ConfirmationPanel>
     </div>
   );
 };

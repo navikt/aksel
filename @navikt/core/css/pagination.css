@@ -1,0 +1,122 @@
+:root {
+  --navds-pagination-color-background-hover: var(
+    --navds-semantic-color-canvas-background
+  );
+  --navds-pagination-color-background-active: var(
+    --navds-semantic-color-interaction-primary-selected
+  );
+  --navds-pagination-color-text-active: var(
+    --navds-semantic-color-text-inverted
+  );
+  --navds-pagination-color-background-selected: var(
+    --navds-semantic-color-interaction-primary
+  );
+  --navds-pagination-color-text-selected: var(
+    --navds-semantic-color-text-inverted
+  );
+}
+
+.navds-pagination {
+  display: flex;
+}
+
+.navds-pagination__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  gap: var(--navds-spacing-3);
+}
+
+.navds-pagination__ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--navds-spacing-8);
+  cursor: default;
+}
+
+.navds-pagination--small .navds-pagination__ellipsis {
+  width: var(--navds-spacing-6);
+}
+
+.navds-pagination__item {
+  display: flex;
+  cursor: pointer;
+  margin: 0;
+  text-decoration: none;
+  border: none;
+  background: none;
+  border-radius: var(--navds-border-radius-small);
+  padding: var(--navds-spacing-1) var(--navds-spacing-3);
+}
+
+.navds-pagination--small .navds-pagination__item {
+  padding: 2px var(--navds-spacing-2);
+}
+
+.navds-pagination__item:hover {
+  background-color: var(--navds-pagination-color-background-hover);
+}
+
+.navds-pagination__item:active {
+  background-color: var(--navds-pagination-color-background-active);
+  color: var(--navds-pagination-color-text-active);
+}
+
+.navds-pagination__item:focus {
+  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-focus),
+    inset 0 0 0 3px white;
+  outline: none;
+}
+
+.navds-pagination__item[aria-current="true"] {
+  background-color: var(--navds-pagination-color-background-selected);
+  color: var(--navds-pagination-color-text-selected);
+  font-weight: var(--navds-font-weight-bold);
+}
+
+.navds-pagination__prev-next {
+  display: flex;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  text-decoration: underline;
+  color: var(--navds-semantic-color-link);
+  align-items: center;
+  gap: var(--navds-spacing-1);
+  border-radius: var(--navds-border-radius-small);
+}
+
+.navds-pagination__prev-next:focus {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
+.navds-pagination__prev-next:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
+.navds-pagination__prev-next-icon {
+  margin: 7px;
+}
+
+.navds-pagination--small .navds-pagination__prev-next-icon {
+  margin: var(--navds-spacing-1);
+  font-size: 1rem;
+}
+
+.navds-pagination__next-text {
+  padding-left: 0.75rem;
+}
+
+.navds-pagination__prev-text {
+  padding-right: 0.75rem;
+}
+
+.navds-pagination--invisible {
+  visibility: hidden;
+}

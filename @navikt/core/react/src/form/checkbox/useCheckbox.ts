@@ -32,16 +32,15 @@ const useCheckbox = ({ children, ...props }: CheckboxProps) => {
     ...rest,
     inputProps: {
       ...inputProps,
-      type: "checkbox",
       checked: checkboxGroup?.value
-        ? checkboxGroup.value.includes(props.value as string)
+        ? checkboxGroup.value.includes(props.value)
         : props.checked,
       defaultChecked: checkboxGroup?.defaultValue
-        ? checkboxGroup.defaultValue.includes(props.value as string)
+        ? checkboxGroup.defaultValue.includes(props.value)
         : props.defaultChecked,
       onChange: (e) => {
         props.onChange && props.onChange(e);
-        checkboxGroup && checkboxGroup.toggleValue(props.value as string);
+        checkboxGroup && checkboxGroup.toggleValue(props.value);
       },
     },
   };

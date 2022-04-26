@@ -6,7 +6,7 @@ import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
   extends Omit<FormFieldProps, "errorId">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Checkbox has error
    * @default false
@@ -23,7 +23,12 @@ export interface CheckboxProps
   /**
    * The value of the HTML element.
    */
-  value?: string;
+  value?: any;
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   * @default false
+   */
+  indeterminate?: boolean;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
@@ -50,10 +55,23 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
           "error",
           "description",
           "hideLabel",
+          "indeterminate",
         ])}
         {...inputProps}
+        type="checkbox"
         className="navds-checkbox__input"
-        ref={ref}
+        aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
+        ref={(el) => {
+          if (el) {
+            el.indeterminate = props.indeterminate ?? false;
+          }
+
+          if (typeof ref === "function") {
+            ref(el);
+          } else if (ref != null) {
+            ref.current = el;
+          }
+        }}
       />
       <label htmlFor={inputProps.id} className="navds-checkbox__label">
         <div

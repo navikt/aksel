@@ -38,7 +38,7 @@
   align-items: center;
   background: var(--navds-speechbubble-color-illustration-background);
   color: var(--navds-speechbubble-color-illustration);
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
   display: flex;
   flex-shrink: 0;
   justify-content: center;
@@ -59,7 +59,7 @@
   width: fit-content;
   max-width: 37.5rem;
   background-color: var(--navds-speechbubble-color-background);
-  border-radius: 12px;
+  border-radius: var(--navds-border-radius-xlarge);
   border-bottom-left-radius: 2px;
   display: flex;
   flex-direction: column;
@@ -72,7 +72,7 @@
 }
 
 .navds-speechbubble--right .navds-speechbubble__bubble {
-  border-radius: 12px;
+  border-radius: var(--navds-border-radius-xlarge);
   border-bottom-right-radius: 2px;
 }
 

@@ -32,7 +32,7 @@
 .navds-tag {
   border: 1px solid;
   border-color: var(--navds-tag-color-border);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   background-color: var(--navds-tag-color-background);
   display: inline-flex;
   align-items: center;

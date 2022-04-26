@@ -19,7 +19,7 @@ export interface ButtonProps
    * Changes padding, height and font-size
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
   /**
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
    * @note Avoid using if possible for accessibility purposes
@@ -43,6 +43,7 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
       size = "medium",
       loading = false,
       disabled,
+      style,
       ...rest
     },
     ref
@@ -76,13 +77,16 @@ const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
             "navds-button--loading": widthOverride,
           }
         )}
-        style={{ width: widthOverride }}
+        style={{
+          ...style,
+          width: widthOverride,
+        }}
         disabled={disabled ?? widthOverride ? true : undefined}
       >
         <BodyShort
           as="span"
           className="navds-button__inner"
-          size={size}
+          size={size === "medium" ? "medium" : "small"}
           aria-live="polite"
         >
           {widthOverride ? <Loader size={size} /> : children}

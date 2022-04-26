@@ -17,6 +17,7 @@
     "@navikt/core/react",
     "@navikt/core/icons",
     "@navikt/core/tokens",
+    "@navikt/core/tailwind",
     "@navikt/internal/css",
     "@navikt/internal/react",
     "@navikt/navno/react",

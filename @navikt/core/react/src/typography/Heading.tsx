@@ -11,7 +11,7 @@ export interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
   /**
    * Sizes from largest "2xl" to smallest "s"
    */
-  size: "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
+  size: "xlarge" | "large" | "medium" | "small" | "xsmall";
   /**
    * Heading text
    */
