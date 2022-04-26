@@ -6,10 +6,14 @@ const getStories = () => {
 
 module.exports = {
   webpackFinal: async (config, { configType }) => {
-    config.devServer = { stats: "errors-only" };
+    config.devServer = {
+      stats: "errors-only",
+    };
     return config;
   },
-  devServer: { stats: "errors-only" },
+  devServer: {
+    stats: "errors-only",
+  },
   stories: () => [...getStories(), "./*.stories.mdx"],
   addons: [
     "@storybook/addon-docs",
@@ -26,7 +30,9 @@ module.exports = {
       name: "@storybook/addon-essentials",
       options: {
         actions: false,
-        controls: { hideNoControlsWarning: true },
+        controls: {
+          hideNoControlsWarning: true,
+        },
       },
     },
   ],
@@ -43,4 +49,5 @@ module.exports = {
       },
     },
   },
+  framework: "@storybook/react",
 };
