@@ -1,2 +1,1 @@
-export { default as SpeechBubble } from "./SpeechBubble";
-export { SpeechBubbleProps } from "./SpeechBubble";
+export { default as SpeechBubble, SpeechBubbleProps } from "./SpeechBubble";

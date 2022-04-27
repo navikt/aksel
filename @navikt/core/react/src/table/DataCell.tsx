@@ -3,7 +3,8 @@ import cl from "classnames";
 import { BodyShort } from "..";
 import { TableContext } from "./Table";
 
-interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+export interface DataCellProps
+  extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
    * Content alignment
    * @default "left"

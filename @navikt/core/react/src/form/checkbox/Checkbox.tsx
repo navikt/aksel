@@ -31,70 +31,72 @@ export interface CheckboxProps
   indeterminate?: boolean;
 }
 
-const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
-  const { inputProps, hasError, size } = useCheckbox(props);
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+  (props, ref) => {
+    const { inputProps, hasError, size } = useCheckbox(props);
 
-  const Description = size === "medium" ? BodyShort : Detail;
+    const Description = size === "medium" ? BodyShort : Detail;
 
-  return (
-    <div
-      className={cl(
-        props.className,
-        "navds-checkbox",
-        `navds-checkbox--${size}`,
-        {
-          "navds-checkbox--error": hasError,
-          "navds-checkbox--disabled": inputProps.disabled,
-        }
-      )}
-    >
-      <input
-        {...omit(props, [
-          "children",
-          "size",
-          "error",
-          "description",
-          "hideLabel",
-          "indeterminate",
-        ])}
-        {...inputProps}
-        type="checkbox"
-        className="navds-checkbox__input"
-        aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
-        ref={(el) => {
-          if (el) {
-            el.indeterminate = props.indeterminate ?? false;
+    return (
+      <div
+        className={cl(
+          props.className,
+          "navds-checkbox",
+          `navds-checkbox--${size}`,
+          {
+            "navds-checkbox--error": hasError,
+            "navds-checkbox--disabled": inputProps.disabled,
           }
+        )}
+      >
+        <input
+          {...omit(props, [
+            "children",
+            "size",
+            "error",
+            "description",
+            "hideLabel",
+            "indeterminate",
+          ])}
+          {...inputProps}
+          type="checkbox"
+          className="navds-checkbox__input"
+          aria-checked={props.indeterminate ? "mixed" : inputProps.checked}
+          ref={(el) => {
+            if (el) {
+              el.indeterminate = props.indeterminate ?? false;
+            }
 
-          if (typeof ref === "function") {
-            ref(el);
-          } else if (ref != null) {
-            ref.current = el;
-          }
-        }}
-      />
-      <label htmlFor={inputProps.id} className="navds-checkbox__label">
-        <div
-          className={cl("navds-checkbox__content", {
-            "navds-sr-only": props.hideLabel,
-          })}
-        >
-          <BodyShort as="div" size={size}>
-            {props.children}
-          </BodyShort>
-          {props.description && (
-            <Description
-              as="div"
-              size="small"
-              className="navds-checkbox__description"
-            >
-              {props.description}
-            </Description>
-          )}
-        </div>
-      </label>
-    </div>
-  );
-});
+            if (typeof ref === "function") {
+              ref(el);
+            } else if (ref != null) {
+              ref.current = el;
+            }
+          }}
+        />
+        <label htmlFor={inputProps.id} className="navds-checkbox__label">
+          <div
+            className={cl("navds-checkbox__content", {
+              "navds-sr-only": props.hideLabel,
+            })}
+          >
+            <BodyShort as="div" size={size}>
+              {props.children}
+            </BodyShort>
+            {props.description && (
+              <Description
+                as="div"
+                size="small"
+                className="navds-checkbox__description"
+              >
+                {props.description}
+              </Description>
+            )}
+          </div>
+        </label>
+      </div>
+    );
+  }
+);
 
 export default Checkbox;

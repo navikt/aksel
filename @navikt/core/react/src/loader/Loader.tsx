@@ -25,7 +25,7 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
   variant?: "neutral" | "interaction" | "inverted";
 }
 
-const Loader = forwardRef<SVGSVGElement, LoaderProps>(
+export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {
       children,

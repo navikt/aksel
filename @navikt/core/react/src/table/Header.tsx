@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-interface HeaderProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+export interface HeaderProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {}
 
 export interface HeaderType
   extends React.ForwardRefExoticComponent<

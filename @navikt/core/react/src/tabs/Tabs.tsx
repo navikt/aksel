@@ -2,8 +2,8 @@ import cl from "classnames";
 import React, { createContext, forwardRef, HTMLAttributes } from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
 import Tab, { TabType } from "./Tab";
-import List, { ListType } from "./TabList";
-import Panel, { PanelType } from "./TabPanel";
+import TabList, { TabListType } from "./TabList";
+import TabPanel, { TabPanelType } from "./TabPanel";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -40,8 +40,8 @@ interface TabsComponent
     TabsProps & React.RefAttributes<HTMLDivElement>
   > {
   Tab: TabType;
-  List: ListType;
-  Panel: PanelType;
+  List: TabListType;
+  Panel: TabPanelType;
 }
 
 interface TabsContextProps {
@@ -83,7 +83,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
 ) as TabsComponent;
 
 Tabs.Tab = Tab;
-Tabs.List = List;
-Tabs.Panel = Panel;
+Tabs.List = TabList;
+Tabs.Panel = TabPanel;
 
 export default Tabs;

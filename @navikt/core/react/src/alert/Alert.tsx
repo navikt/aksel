@@ -52,7 +52,7 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       children,

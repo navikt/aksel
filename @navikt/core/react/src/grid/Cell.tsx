@@ -25,7 +25,7 @@ export interface CellProps extends HTMLAttributes<HTMLDivElement> {
   lg?: Column;
 }
 
-const Cell = forwardRef<HTMLDivElement, CellProps>(
+export const Cell = forwardRef<HTMLDivElement, CellProps>(
   ({ children, xs, sm, md, lg, className, ...rest }, ref) => {
     return (
       <div

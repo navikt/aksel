@@ -1,7 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-interface BodyProps extends React.HTMLAttributes<HTMLTableSectionElement> {}
+export interface BodyProps
+  extends React.HTMLAttributes<HTMLTableSectionElement> {}
 
 export interface BodyType
   extends React.ForwardRefExoticComponent<

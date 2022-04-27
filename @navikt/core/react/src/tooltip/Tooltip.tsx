@@ -71,7 +71,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   keys?: string[];
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       children,

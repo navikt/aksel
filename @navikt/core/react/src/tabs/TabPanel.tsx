@@ -2,7 +2,7 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import cl from "classnames";
 import React, { forwardRef } from "react";
 
-export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Tab panel
    */
@@ -13,11 +13,11 @@ export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   value: string;
 }
 
-export type PanelType = React.ForwardRefExoticComponent<
-  PanelProps & React.RefAttributes<HTMLDivElement>
+export type TabPanelType = React.ForwardRefExoticComponent<
+  TabPanelProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const Panel = forwardRef<HTMLDivElement, PanelProps>(
+const TabPanel = forwardRef<HTMLDivElement, TabPanelProps>(
   ({ className, ...rest }, ref) => (
     <TabsContent
       {...rest}
@@ -25,6 +25,6 @@ const Panel = forwardRef<HTMLDivElement, PanelProps>(
       className={cl("navds-tabs__tabpanel", className)}
     />
   )
-) as PanelType;
+) as TabPanelType;
 
-export default Panel;
+export default TabPanel;

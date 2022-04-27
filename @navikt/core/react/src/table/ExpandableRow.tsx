@@ -6,7 +6,7 @@ import { UnmountClosed } from "react-collapse";
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
 import { useId } from "..";
 
-interface ExpandableRowProps extends RowProps {
+export interface ExpandableRowProps extends RowProps {
   /**
    * Content of the expanded row
    */

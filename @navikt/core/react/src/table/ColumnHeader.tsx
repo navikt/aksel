@@ -3,7 +3,7 @@ import { Down, Up, UpDown } from "@navikt/ds-icons";
 import { TableContext } from "./Table";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 
-interface ColumnHeaderProps extends HeaderCellProps {
+export interface ColumnHeaderProps extends HeaderCellProps {
   /**
    * Key to sort by
    */
