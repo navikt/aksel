@@ -12,7 +12,7 @@ export interface ItemProps
 
 export type ItemType = OverridableComponent<ItemProps, HTMLButtonElement>;
 
-const Item: ItemType = forwardRef(
+export const Item: ItemType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
     <li className="navdsi-dropdown__list-item">
       <Component

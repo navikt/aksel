@@ -22,7 +22,7 @@ export type HeaderUserButtonType = OverridableComponent<
   HTMLButtonElement
 >;
 
-const HeaderUserButton: HeaderUserButtonType = forwardRef(
+export const HeaderUserButton: HeaderUserButtonType = forwardRef(
   ({ as, name, description, className, ...rest }, ref) => (
     <HeaderButton
       {...rest}

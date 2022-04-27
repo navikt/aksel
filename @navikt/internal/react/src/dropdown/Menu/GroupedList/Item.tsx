@@ -11,7 +11,7 @@ export interface ItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
 
 export type ItemType = OverridableComponent<ItemProps, HTMLButtonElement>;
 
-const Item: ItemType = forwardRef(
+export const Item: ItemType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
     <dd className="navdsi-dropdown__list-item">
       <Component
