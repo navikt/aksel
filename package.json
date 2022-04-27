@@ -18,7 +18,8 @@
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
     "lint:css": "yarn stylelint --syntax css @navikt/**/*.css",
-    "clean:lib": "node scripts/clean.js"
+    "clean:lib": "node scripts/clean.js",
+    "docgen": "yarn ts-node scripts/docgen.ts"
   },
   "workspaces": [
     "@navikt/core/*",

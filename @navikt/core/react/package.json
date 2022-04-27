@@ -30,10 +30,9 @@
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn docgen",
+    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "jest",
-    "docgen": "yarn ts-node docgen.ts"
+    "test": "jest"
   },
   "dependencies": {
     "@floating-ui/react-dom": "0.6.0",
