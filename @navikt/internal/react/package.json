@@ -24,7 +24,8 @@
   "files": [
     "/cjs",
     "/esm",
-    "/src"
+    "/src",
+    "_docs.json"
   ],
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
