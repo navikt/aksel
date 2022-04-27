@@ -29,7 +29,7 @@ const tsConfigParser = docgen.withCustomConfig(`./tsconfig.esm.json`, options);
 
 const genDocs = () => {
   const files = fg
-    .sync([`./src/**/*.tsx`, "!**/*.stories.*", "!**/*.test.*"])
+    .sync([`./src/**/*.tsx`, "!**/*.stories.*", "!**/*.test.*", "!**/stories"])
     .filter(
       (x) =>
         !x.toLowerCase().includes("illustration") &&

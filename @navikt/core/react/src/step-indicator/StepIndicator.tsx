@@ -8,7 +8,10 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import Step, { StepIndicatorStepProps, StepIndicatorStepType } from "./Step";
+import StepIndicatorStep, {
+  StepIndicatorStepProps,
+  StepIndicatorStepType,
+} from "./Step";
 
 export interface StepIndicatorProps
   extends React.HTMLAttributes<HTMLOListElement> {
@@ -140,6 +143,6 @@ export const StepIndicator: StepIndicatorComponent = forwardRef<
   }
 ) as StepIndicatorComponent;
 
-StepIndicator.Step = Step;
+StepIndicator.Step = StepIndicatorStep;
 
 export default StepIndicator;
