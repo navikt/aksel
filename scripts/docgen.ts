@@ -25,11 +25,11 @@ const options = {
   },
 };
 
-/* const tsConfigParser = docgen.withCustomConfig("./tsconfig.esm.json", options); */
+const tsConfigParser = docgen.withCustomConfig(`./tsconfig.esm.json`, options);
 
-const genDocs = (src: string) => {
+const genDocs = () => {
   const files = fg
-    .sync([`${src}/**/*.tsx`, "!**/*.stories.*", "!**/*.test.*"])
+    .sync([`./src/**/*.tsx`, "!**/*.stories.*", "!**/*.test.*"])
     .filter(
       (x) =>
         !x.toLowerCase().includes("illustration") &&
@@ -40,7 +40,7 @@ const genDocs = (src: string) => {
   const fails: string[] = [];
 
   files.forEach((file) => {
-    const doc = docgen.parse(file, options);
+    const doc = tsConfigParser.parse(file);
     if (doc.length > 0) {
       res.push(doc);
     } else {
@@ -62,8 +62,8 @@ const genDocs = (src: string) => {
     []
   );
 
-  writeFileSync(`${src}/_docs.json`, JSON.stringify(cleaned, null, 2));
+  writeFileSync(`_docs.json`, JSON.stringify(cleaned, null, 2));
 };
 
-genDocs("@navikt/core/react/src");
-genDocs("@navikt/internal/react/src");
+genDocs();
+/* genDocs("@navikt/internal/react"); */
