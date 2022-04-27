@@ -17,7 +17,7 @@ export const All = () => {
       <ReadMore
         open={open}
         onClick={() => setOpen(!open)}
-        header="ReadMore header text"
+        header="ReadMore header text ReadMore header text ReadMore header text ReadMore header text ReadMore header text"
       >
         Magna aliquip aliquip fugiat nostrud nostrud velit pariatur veniam
         officia laboris voluptate officia pariatur.Lorem est ex anim velit

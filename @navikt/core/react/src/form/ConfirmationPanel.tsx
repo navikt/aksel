@@ -2,7 +2,8 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyLong, Checkbox, CheckboxProps } from "..";
 
-export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
+export interface ConfirmationPanelProps
+  extends Omit<CheckboxProps, "children"> {
   /**
    * Additional information on panel
    */
@@ -11,10 +12,6 @@ export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
    * Checkbox label
    */
   label: React.ReactNode;
-  /**
-   * Checked state for checkbox
-   */
-  checked: boolean;
 }
 
 export const ConfirmationPanel = forwardRef<

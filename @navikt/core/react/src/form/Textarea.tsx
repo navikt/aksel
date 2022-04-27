@@ -16,8 +16,8 @@ export interface TextareaProps
    * Visually allowed length of content
    */
   maxLength?: number;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
+  value?: string;
+  defaultValue?: string;
   /**
    * Maximum number of rows to display.
    * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
@@ -119,7 +119,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               </span>
               <Counter
                 maxLength={maxLength}
-                currentLength={props.value.length}
+                currentLength={props.value?.length}
                 size={size}
               />
             </>

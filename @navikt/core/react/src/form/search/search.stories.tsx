@@ -3,99 +3,139 @@ import React, { useState } from "react";
 
 import { Search } from "../index";
 export default {
-  title: "ds-react/form/search",
+  title: "ds-react/Form/Search",
   component: Search,
+  argTypes: {
+    clearButton: {
+      control: {
+        type: "boolean",
+      },
+    },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    variant: {
+      control: {
+        type: "radio",
+        options: ["primary", "secondary", "simple"],
+      },
+    },
+  },
 } as Meta;
 
-export const All = () => {
-  const [value, setValue] = useState("");
+export const Default = (props) => {
+  const [state, setState] = useState("");
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        maxWidth: 400,
-      }}
-    >
-      <h1>Search</h1>
-
-      <Search label="Søk alle sider om X og Y" onSearch={console.log}></Search>
-      <h2>Secondary</h2>
+    <div data-theme={props.darkmode ? "dark" : "light"}>
       <Search
-        label="Søk alle sider om X og Y"
-        onSearch={console.log}
-        variant="secondary"
-      ></Search>
-
-      <h2>No button</h2>
-      <Search
-        label="Søk alle sider om X og Y"
-        onSearch={console.log}
-        variant="simple"
-      ></Search>
-
-      <h2>Search small</h2>
-      <Search
-        label="Søk alle sider om X og Y"
-        description="Beskrivelse av søket"
-        size="small"
-      >
-        <Search.Button />
-      </Search>
-      <br />
-      <Search
-        label="Søk alle sider om X og Y"
-        description="Beskrivelse av søket"
-        size="small"
-        hideLabel
-        variant="secondary"
-      >
-        <Search.Button />
-      </Search>
-
-      <h2>Med knappe-tekst</h2>
-      <Search label="Søk alle sider om X og Y" hideLabel={false}>
-        <Search.Button>Søk</Search.Button>
-      </Search>
-      <Search
-        label="Søk alle sider om X og Y"
-        hideLabel={false}
-        variant="primary"
-      >
-        <Search.Button>Søk</Search.Button>
-      </Search>
-      <h2>Hidelabel false</h2>
-      <Search label="Søk alle sider om X og Y" hideLabel={false}>
-        <Search.Button />
-      </Search>
-      <h2>Controlled state </h2>
-      <Search
-        value={value}
-        label="Søk alle sider om X og Y"
-        description="Beskrivelse av søket"
-        onChange={(e) => setValue(e)}
-        onClear={() => setValue("")}
-      >
-        <Search.Button />
-      </Search>
-      <h2>No clear button</h2>
-      <Search
-        hideLabel
-        label="Søk alle sider om X og Y"
-        description="Beskrivelse av søket"
-        clearButton={false}
-      >
-        <Search.Button />
-      </Search>
+        value={props.controlled ? state : undefined}
+        onChange={props.controlled ? setState : null}
+        label="Søk"
+        size={props.size}
+        clearButton={props.clearButton}
+        variant={props.variant}
+        hideLabel={props.hideLabel}
+      />
     </div>
   );
 };
 
-export const UUDemo = () => {
-  return (
-    <Search label="Søk på nav.no" onSearch={console.log} placeholder="Søk">
-      <Search.Button />
-    </Search>
-  );
+Default.args = {
+  controlled: false,
+  darkmode: false,
+  hideLabel: true,
 };
+
+export const Small = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search label="Søk" size="small" />
+      <Search label="Søk" variant="secondary" size="small" />
+      <Search label="Søk" variant="simple" size="small" />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search label="Søk" size="small" />
+      <Search label="Søk" variant="secondary" size="small" />
+      <Search label="Søk" variant="simple" size="small" />
+    </div>
+  </div>
+);
+
+export const Variants = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search label="Søk" />
+      <Search label="Søk" variant="secondary" />
+      <Search label="Søk" variant="simple" />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search label="Søk" />
+      <Search label="Søk" variant="secondary" />
+      <Search label="Søk" variant="simple" />
+    </div>
+  </div>
+);
+
+export const Placeholder = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search label="Søk" placeholder="Søk" />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search label="Søk" placeholder="Søk" />
+    </div>
+  </div>
+);
+
+export const Text = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search label="Søk" value="Søketekst" />
+      <Search label="Søk" variant="secondary" value="Søketekst" />
+      <Search label="Søk" variant="simple" value="Søketekst" />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search label="Søk" value="Søketekst" />
+      <Search label="Søk" variant="secondary" value="Søketekst" />
+      <Search label="Søk" variant="simple" value="Søketekst" />
+    </div>
+  </div>
+);
+
+export const WLabel = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search label="Label søk" variant="simple" hideLabel={false} />
+      <Search
+        label="Label søk"
+        description="Description søk"
+        variant="simple"
+        hideLabel={false}
+      />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search label="Label søk" variant="simple" hideLabel={false} />
+      <Search
+        label="Label søk"
+        description="Description søk"
+        variant="simple"
+        hideLabel={false}
+      />
+    </div>
+  </div>
+);
+
+export const NoClearButton = () => (
+  <div className="colgap">
+    <Search label="Label søk" clearButton={false} value="søketekst" />
+    <Search
+      label="Label søk"
+      variant="simple"
+      clearButton={false}
+      value="søketekst"
+    />
+  </div>
+);

@@ -39,10 +39,6 @@ export interface SearchProps
    */
   onChange?: (value: string) => void;
   /**
-   * Callback for <Search.Button/> click or onSubmit in form
-   */
-  onSearch?: (value: string | number | readonly string[]) => void;
-  /**
    * Callback for click on clear-button or Escape keydown
    */
   onClear?: (e: SearchClearEvent) => void;
@@ -74,7 +70,6 @@ export interface SearchContextProps {
   disabled?: boolean;
   size: "medium" | "small";
   variant: "primary" | "secondary" | "simple";
-  onSearch: () => void;
 }
 
 export const SearchContext = React.createContext<SearchContextProps | null>(
@@ -98,7 +93,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       onClear,
       clearButton = true,
       children,
-      onSearch,
       variant = "primary",
       defaultValue,
       onChange,
@@ -217,7 +211,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
               size,
               disabled: inputProps.disabled,
               variant,
-              onSearch: () => onSearch?.(value ?? internalValue),
             }}
           >
             {children ? children : variant !== "simple" && <SearchButton />}

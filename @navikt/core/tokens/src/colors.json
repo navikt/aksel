@@ -310,7 +310,7 @@
             "value": "{navds.global.color.gray.200.value}"
           },
           "muted": {
-            "value": "{navds.global.color.gray.400.value}"
+            "value": "{navds.global.color.gray.500.value}"
           },
           "@": {
             "value": "{navds.global.color.gray.600.value}"

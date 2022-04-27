@@ -49,6 +49,7 @@
 
 .navds-link svg {
   color: var(--navds-link-color-icon);
+  flex-shrink: 0;
 }
 
 .navds-link:focus svg {

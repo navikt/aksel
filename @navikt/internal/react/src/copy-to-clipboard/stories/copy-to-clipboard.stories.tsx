@@ -17,7 +17,7 @@ export const All = () => {
       <CopyToClipboard popoverText={label} copyText={text} />
 
       <h2>Sammen med tekst</h2>
-      <CopyToClipboard popoverText={label} copyText={text}>
+      <CopyToClipboard popoverText={label} copyText={text} title="wat">
         Kopier tekst
       </CopyToClipboard>
 

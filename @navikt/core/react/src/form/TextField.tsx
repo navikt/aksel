@@ -8,6 +8,14 @@ export interface TextFieldProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
+   * The current value (controlled).
+   */
+  value?: string;
+  /**
+   * The default value (uncontrolled).
+   */
+  defaultValue?: string;
+  /**
    * Expose the HTML size attribute
    */
   htmlSize?: number;
