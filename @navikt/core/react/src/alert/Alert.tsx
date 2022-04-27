@@ -23,7 +23,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "medium" | "small";
   /**
-   * Toggles full-width Alert
+   * Toggles full-width Alert (removes border-radius)
    * @default false
    */
   fullWidth?: boolean;

@@ -4,7 +4,7 @@ import React, { createContext, forwardRef, useState } from "react";
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content inside accordion item
+   * Content inside Accordion.Item
    */
   children: React.ReactNode;
   /**
@@ -13,7 +13,7 @@ export interface AccordionItemProps
    */
   open?: boolean;
   /**
-   * Defaults the accordion to opened state
+   * Defaults the accordion to opened state if not controlled
    * @default false
    */
   defaultOpen?: boolean;

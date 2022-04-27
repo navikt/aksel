@@ -7,11 +7,11 @@ import { useClientLayoutEffect } from "../util";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Component content
+   * Button content
    */
   children: React.ReactNode;
   /**
-   * Changes design and interactions
+   * Changes design and interaction-visuals
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "tertiary" | "danger";
