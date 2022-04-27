@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import Item, { ItemType } from "./Item";
+import ListItem, { ListItemType } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
@@ -13,7 +13,7 @@ export interface ListType
   extends React.ForwardRefExoticComponent<
     ListProps & React.RefAttributes<HTMLUListElement>
   > {
-  Item: ItemType;
+  Item: ListItemType;
 }
 
 export const List = forwardRef(({ className, children, ...rest }, ref) => (
@@ -22,6 +22,6 @@ export const List = forwardRef(({ className, children, ...rest }, ref) => (
   </ul>
 )) as ListType;
 
-List.Item = Item;
+List.Item = ListItem;
 
 export default List;

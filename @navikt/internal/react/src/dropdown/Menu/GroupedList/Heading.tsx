@@ -1,18 +1,19 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLDetailsElement> {
+export interface GroupedHeadingProps
+  extends React.HTMLAttributes<HTMLDetailsElement> {
   /**
    * Heading
    */
   children: React.ReactNode;
 }
 
-export type HeadingType = React.ForwardRefExoticComponent<
-  HeadingProps & React.RefAttributes<HTMLElement>
+export type GroupedHeadingType = React.ForwardRefExoticComponent<
+  GroupedHeadingProps & React.RefAttributes<HTMLElement>
 >;
 
-export const Heading: HeadingType = forwardRef(
+export const GroupedHeading: GroupedHeadingType = forwardRef(
   ({ className, ...rest }, ref) => (
     <dt
       {...rest}
@@ -27,4 +28,4 @@ export const Heading: HeadingType = forwardRef(
   )
 );
 
-export default Heading;
+export default GroupedHeading;

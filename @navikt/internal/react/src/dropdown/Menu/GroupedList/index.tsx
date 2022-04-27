@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import Heading, { HeadingType } from "./Heading";
-import Item, { ItemType } from "./Item";
+import GroupedHeading, { GroupedHeadingType } from "./Heading";
+import GroupedItem, { GroupedItemType } from "./Item";
 
 export interface GroupedListProps
   extends React.HTMLAttributes<HTMLDListElement> {
@@ -15,8 +15,8 @@ export interface GroupedListType
   extends React.ForwardRefExoticComponent<
     GroupedListProps & React.RefAttributes<HTMLDListElement>
   > {
-  Heading: HeadingType;
-  Item: ItemType;
+  Heading: GroupedHeadingType;
+  Item: GroupedItemType;
 }
 
 export const DescriptionList = forwardRef(
@@ -27,7 +27,7 @@ export const DescriptionList = forwardRef(
   )
 ) as GroupedListType;
 
-DescriptionList.Heading = Heading;
-DescriptionList.Item = Item;
+DescriptionList.Heading = GroupedHeading;
+DescriptionList.Item = GroupedItem;
 
 export default DescriptionList;
