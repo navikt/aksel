@@ -6,6 +6,7 @@ import { BodyShort } from "..";
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Current page
+   * @note Pagination indexing starts at 1
    */
   page: number;
   /**

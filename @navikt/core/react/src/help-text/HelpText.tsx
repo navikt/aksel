@@ -1,4 +1,5 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
+import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
@@ -8,9 +9,19 @@ export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     Pick<PopoverProps, "strategy" | "placement"> {
   /**
-   * Component content
+   * Helptext-dialog content
    */
   children: React.ReactNode;
+  /**
+   * Adds a title-tooltip with the given text
+   * @default "hjelp"
+   */
+  title?: string;
+  /**
+   * Default dialog-placement on open
+   * @default "top"
+   */
+  placement?: Placement;
 }
 
 export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
