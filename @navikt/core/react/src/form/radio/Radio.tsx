@@ -17,7 +17,7 @@ export interface RadioProps
   value: any;
 }
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
+export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { inputProps, size, hasError } = useRadio(props);
 
   const Description = size === "medium" ? BodyShort : Detail;

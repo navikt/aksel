@@ -23,7 +23,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "medium" | "small";
   /**
-   * Toggles full-width Alert
+   * Toggles full-width Alert (removes border-radius)
    * @default false
    */
   fullWidth?: boolean;
@@ -52,7 +52,7 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       children,

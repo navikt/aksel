@@ -1,6 +1,6 @@
-export { default as Cell } from "./Cell";
-export * from "./Cell";
-export { default as Grid } from "./Grid";
-export * from "./Grid";
-export { default as ContentContainer } from "./ContentContainer";
-export * from "./ContentContainer";
+export { default as Cell, CellProps } from "./Cell";
+export { default as Grid, GridProps } from "./Grid";
+export {
+  default as ContentContainer,
+  ContentContainerProps,
+} from "./ContentContainer";

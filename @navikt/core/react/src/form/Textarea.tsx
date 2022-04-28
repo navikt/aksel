@@ -37,7 +37,7 @@ export interface TextareaProps
   hideLabel?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
       inputProps,

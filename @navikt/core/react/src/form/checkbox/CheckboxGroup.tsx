@@ -35,7 +35,10 @@ export interface CheckboxGroupProps
   onChange?: (value: any[]) => void;
 }
 
-const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
+export const CheckboxGroup = forwardRef<
+  HTMLFieldSetElement,
+  CheckboxGroupProps
+>(
   (
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref

@@ -67,7 +67,7 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
-const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       className,

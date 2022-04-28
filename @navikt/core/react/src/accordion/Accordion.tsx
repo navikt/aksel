@@ -20,7 +20,7 @@ export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
+export const Accordion = forwardRef<HTMLDivElement, AccordionProps>(
   ({ className, ...rest }, ref) => (
     <div {...rest} className={cl("navds-accordion", className)} ref={ref} />
   )

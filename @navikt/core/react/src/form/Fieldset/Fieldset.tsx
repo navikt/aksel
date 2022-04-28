@@ -24,6 +24,7 @@ export type FieldsetContextProps = {
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
   null
 );
+
 export interface FieldsetProps
   extends FormFieldProps,
     FieldsetHTMLAttributes<HTMLFieldSetElement> {
@@ -46,7 +47,7 @@ export interface FieldsetProps
   errorPropagation?: boolean;
 }
 
-const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
     const {
       inputProps,

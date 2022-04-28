@@ -46,7 +46,7 @@ export interface RadioGroupProps
   required?: boolean;
 }
 
-const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
+export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
     {
       children,

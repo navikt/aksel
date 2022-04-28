@@ -53,7 +53,7 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
   null
 );
 
-const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
+export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {
       className,

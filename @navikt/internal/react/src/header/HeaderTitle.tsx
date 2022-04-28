@@ -15,7 +15,7 @@ export type HeaderTitleType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-const HeaderTitle: HeaderTitleType = forwardRef(
+export const HeaderTitle: HeaderTitleType = forwardRef(
   ({ as: Component = "a", children, className, ...rest }, ref) => (
     <Component
       {...rest}

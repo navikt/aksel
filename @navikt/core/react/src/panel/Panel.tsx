@@ -16,7 +16,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
 
 export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 
-const Panel: PanelType = forwardRef(
+export const Panel: PanelType = forwardRef(
   (
     { children, className, border = false, as: Component = "div", ...rest },
     ref

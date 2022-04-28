@@ -19,7 +19,7 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   size?: "medium" | "small";
 }
 
-const Tag = forwardRef<HTMLSpanElement, TagProps>(
+export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ className, variant, size = "medium", ...rest }, ref) => {
     const Component = size === "medium" ? BodyShort : Detail;
 

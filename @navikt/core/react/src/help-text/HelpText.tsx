@@ -13,7 +13,7 @@ export interface HelpTextProps
   children: React.ReactNode;
 }
 
-const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
+export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
     {
       className,

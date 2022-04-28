@@ -19,7 +19,7 @@ export interface DetailProps
   spacing?: boolean;
 }
 
-const Detail: OverridableComponent<
+export const Detail: OverridableComponent<
   DetailProps,
   HTMLParagraphElement
 > = forwardRef(

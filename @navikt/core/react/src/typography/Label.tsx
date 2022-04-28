@@ -18,7 +18,7 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
   spacing?: boolean;
 }
 
-const Label: OverridableComponent<
+export const Label: OverridableComponent<
   LabelProps,
   HTMLParagraphElement
 > = forwardRef(
