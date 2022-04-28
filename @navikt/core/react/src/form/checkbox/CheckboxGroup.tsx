@@ -18,11 +18,11 @@ export interface CheckboxGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Checkboxes
+   * Collection of <Checkbox/>
    */
   children: React.ReactNode;
   /**
-   * Controlled state for group
+   * Controlled state for checkboxes.
    */
   value?: any[];
   /**
