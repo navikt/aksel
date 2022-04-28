@@ -14,12 +14,12 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Decides what design the alert will have
+   * Changes colors and icon usage when changed
    */
   variant: "error" | "warning" | "info" | "success";
   /**
    * Changes padding and font-sizes
-   * @default "medium"
+   * @default medium
    */
   size?: "medium" | "small";
   /**
@@ -29,6 +29,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   fullWidth?: boolean;
   /**
    * Removes background from Alert
+   * @default false
    */
   inline?: boolean;
 }
