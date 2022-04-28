@@ -4,7 +4,7 @@ import Bubble, { BubbleType } from "./Bubble";
 
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Children of type <Bubble />
+   * Children of type <SpeechBubble.Bubble />
    */
   children: React.ReactNode;
   /**
@@ -12,11 +12,11 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   topText?: React.ReactNode;
   /**
-   * Illustration for messenger
+   * Illustration for messenger. Regular text for initials works to
    */
   illustration: React.ReactNode;
   /**
-   * Background color bubbles
+   * Background color on bubbles
    */
   backgroundColor?: string;
   /**

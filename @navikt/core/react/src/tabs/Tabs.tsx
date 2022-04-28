@@ -7,9 +7,6 @@ import TabPanel, { TabPanelType } from "./TabPanel";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
-  /**
-   * Tabs elements
-   */
   children: React.ReactNode;
   /**
    * Changes padding and font-size
@@ -17,7 +14,7 @@ export interface TabsProps
    */
   size?: "medium" | "small";
   /**
-   * onChange
+   * onChange callback for selected Tab
    */
   onChange?: (value: string) => void;
   /**

@@ -4,16 +4,15 @@ import { BodyShort, Detail } from "..";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
-   * Tag
+   * Tag label
    */
   children: React.ReactNode;
   /**
-   * Changes background-color and border-color
-   *
+   * Changes background and border color
    */
   variant: "warning" | "error" | "info" | "success";
   /**
-   * Changes sizing of tag
+   * Changes padding and font-sizes
    * @default "medium"
    */
   size?: "medium" | "small";

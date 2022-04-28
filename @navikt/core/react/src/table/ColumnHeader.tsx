@@ -9,7 +9,7 @@ export interface ColumnHeaderProps extends HeaderCellProps {
    */
   sortKey?: string;
   /**
-   * Column is sortable
+   * Column is sortable, adds indicators to show sorting
    * @default false
    */
   sortable?: boolean;

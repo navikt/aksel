@@ -7,11 +7,11 @@ import { TabsContext } from "./Tabs";
 export interface TabProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
   /**
-   * Content
+   * Tab label
    */
   label?: React.ReactNode;
   /**
-   * Icon
+   * Tab Icon
    */
   icon?: React.ReactNode;
   /**

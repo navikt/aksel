@@ -31,7 +31,7 @@ export interface ExpandableRowProps extends RowProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Disable expansion
+   * Disable expansio
    * @default false
    */
   expansionDisabled?: boolean;

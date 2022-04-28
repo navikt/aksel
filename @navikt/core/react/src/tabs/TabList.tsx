@@ -7,7 +7,7 @@ import mergeRefs from "react-merge-refs";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Tab elements
+   * <Tabs.Tab /> elements
    */
   children: React.ReactNode;
   /**

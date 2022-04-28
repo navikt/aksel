@@ -7,7 +7,7 @@ export interface HeaderCellProps
   extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
   /**
-   * Content alignment
+   * Content alignment inside cell
    * @default "left"
    */
   align?: "left" | "center" | "right";
