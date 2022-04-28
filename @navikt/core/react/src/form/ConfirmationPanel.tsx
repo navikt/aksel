@@ -3,7 +3,7 @@ import cl from "classnames";
 import { BodyLong, Checkbox, CheckboxProps } from "..";
 
 export interface ConfirmationPanelProps
-  extends Omit<CheckboxProps, "children"> {
+  extends Omit<CheckboxProps, "children" | "indeterminate" | "hideLabel"> {
   /**
    * Additional information on panel
    */
