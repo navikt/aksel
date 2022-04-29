@@ -58,3 +58,29 @@ export const size = () => {
     </div>
   );
 };
+
+export const Toggle = () => {
+  return (
+    <div className="colgap">
+      <Tag.Toggle>Tag</Tag.Toggle>
+      <Tag.Toggle size="small">Tag</Tag.Toggle>
+    </div>
+  );
+};
+
+export const Removable = () => {
+  return (
+    <div className="rowgap">
+      <div className="colgap">
+        <Tag.Removable>Tag</Tag.Removable>
+        <Tag.Removable size="small">Tag</Tag.Removable>
+      </div>
+      <div className="colgap">
+        <Tag.Removable type="strong">Tag</Tag.Removable>
+        <Tag.Removable size="small" type="strong">
+          Tag
+        </Tag.Removable>
+      </div>
+    </div>
+  );
+};

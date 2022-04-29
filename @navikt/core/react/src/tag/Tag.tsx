@@ -1,6 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyShort, Detail } from "..";
+import TagToggle, { TagToggleType } from "./TagToggle";
+import TagRemovable, { TagRemovableType } from "./TagRemovable";
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
@@ -36,7 +38,8 @@ interface TagComponent
   extends React.ForwardRefExoticComponent<
     TagProps & React.RefAttributes<HTMLSpanElement>
   > {
-  /* Item: AccordionItemType; */
+  Toggle: TagToggleType;
+  Removable: TagRemovableType;
 }
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
@@ -60,5 +63,8 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
     );
   }
 ) as TagComponent;
+
+Tag.Toggle = TagToggle;
+Tag.Removable = TagRemovable;
 
 export default Tag;
