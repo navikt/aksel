@@ -3,6 +3,7 @@ import cl from "classnames";
 import { BodyShort, Detail } from "..";
 import TagToggle, { TagToggleType } from "./TagToggle";
 import TagRemovable, { TagRemovableType } from "./TagRemovable";
+import TagWrapper, { TagWrapperType } from "./TagWrapper";
 
 export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
   /**
@@ -40,6 +41,7 @@ interface TagComponent
   > {
   Toggle: TagToggleType;
   Removable: TagRemovableType;
+  Wrapper: TagWrapperType;
 }
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
@@ -66,5 +68,6 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
 
 Tag.Toggle = TagToggle;
 Tag.Removable = TagRemovable;
+Tag.Wrapper = TagWrapper;
 
 export default Tag;

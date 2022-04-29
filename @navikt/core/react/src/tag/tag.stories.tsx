@@ -84,3 +84,20 @@ export const Removable = () => {
     </div>
   );
 };
+
+export const Wrapper = () => {
+  return (
+    <div className="colgap" style={{ maxWidth: 400 }}>
+      <Tag.Wrapper>
+        {vars.map((x: any) => (
+          <Tag.Toggle key={x}>{x}</Tag.Toggle>
+        ))}
+      </Tag.Wrapper>
+      <Tag.Wrapper size="small">
+        {vars.map((x: any) => (
+          <Tag.Toggle key={x}>{x}</Tag.Toggle>
+        ))}
+      </Tag.Wrapper>
+    </div>
+  );
+};

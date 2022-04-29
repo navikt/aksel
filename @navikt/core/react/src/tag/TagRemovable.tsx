@@ -26,10 +26,7 @@ export type TagRemovableType = React.ForwardRefExoticComponent<
 >;
 
 export const TagRemovable: TagRemovableType = forwardRef(
-  (
-    { className, children, onClick, size = "medium", type = "muted", ...rest },
-    ref
-  ) => {
+  ({ className, children, size = "medium", type = "muted", ...rest }, ref) => {
     const Component = size === "medium" ? BodyShort : Detail;
 
     return (

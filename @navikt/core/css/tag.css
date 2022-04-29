@@ -276,6 +276,17 @@
   background-color: var(--navds-global-color-deepblue-700);
 }
 
+/* Tag Wrapper */
+.navds-tag-wrapper {
+  display: flex;
+  gap: var(--navds-spacing-2);
+  flex-wrap: wrap;
+}
+
+.navds-tag-wrapper--small {
+  gap: var(--navds-spacing-1);
+}
+
 /* Utilities */
 .navds-tag__inner {
   margin: auto;
