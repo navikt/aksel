@@ -197,7 +197,7 @@
 }
 
 .navds-tag-toggle:focus {
-  box-shadow: 0 0 0 1px white, var(--navds-shadow-focus);
+  box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
 
@@ -214,6 +214,10 @@
 .navds-tag-toggle[aria-pressed="true"]:hover {
   background-color: var(--navds-global-color-deepblue-700);
   border-color: var(--navds-global-color-deepblue-700);
+}
+
+.navds-tag-toggle[aria-pressed="true"]:focus {
+  box-shadow: 0 0 0 1px white, var(--navds-shadow-focus);
 }
 
 /* Removable Tag */

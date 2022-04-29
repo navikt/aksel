@@ -92,6 +92,12 @@ export const Wrapper = () => {
         {vars.map((x: any) => (
           <Tag.Toggle key={x}>{x}</Tag.Toggle>
         ))}
+        <button>danger</button>
+      </Tag.Wrapper>
+      <Tag.Wrapper>
+        {vars.map((x: any) => (
+          <Tag.Removable key={x}>{x}</Tag.Removable>
+        ))}
       </Tag.Wrapper>
       <Tag.Wrapper size="small">
         {vars.map((x: any) => (
