@@ -67,9 +67,10 @@ export const TagToggle: TagToggleType = forwardRef(
         aria-pressed={isPressed}
       >
         <Component as="span" className="navds-tag__inner" size={size}>
-          {isPressed && (
-            <SuccessStroke aria-hidden className="navds-tag--icon" />
-          )}
+          {/* {isPressed && (
+
+          )} */}
+          <SuccessStroke aria-hidden className="navds-tag--icon" />
           {children}
         </Component>
       </button>

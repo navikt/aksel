@@ -192,6 +192,27 @@
   cursor: pointer;
 }
 
+.navds-tag-toggle .navds-tag--icon {
+  width: 0;
+  transition: width 150ms;
+}
+
+.navds-tag-toggle > .navds-tag__inner {
+  gap: 0;
+}
+
+.navds-tag-toggle[aria-pressed="true"] > .navds-tag__inner {
+  gap: var(--navds-spacing-1);
+}
+
+.navds-tag-toggle[aria-pressed="true"] .navds-tag--icon {
+  width: 1rem;
+}
+
+.navds-tag--small.navds-tag-toggle[aria-pressed="true"] .navds-tag--icon {
+  width: 0.875rem;
+}
+
 .navds-tag-toggle:hover {
   background-color: var(--navds-global-color-gray-200);
 }
