@@ -5,4 +5,4 @@ export { ExpandableRowProps } from "./ExpandableRow";
 export { HeaderProps } from "./Header";
 export { HeaderCellProps } from "./HeaderCell";
 export { RowProps } from "./Row";
-export { default as Table, TableProps } from "./Table";
+export { default as Table, TableProps, SortState } from "./Table";
