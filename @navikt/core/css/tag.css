@@ -222,10 +222,6 @@
   outline: none;
 }
 
-.navds-tag-toggle:hover {
-  background-color: var(--navds-global-color-gray-200);
-}
-
 .navds-tag-toggle[aria-pressed="true"] {
   background-color: var(--navds-global-color-deepblue-500);
   border-color: var(--navds-global-color-deepblue-500);
