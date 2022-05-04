@@ -1008,6 +1008,18 @@
     "pageName": "Fyrstikkalleen"
   },
   {
+    "name": "Forward",
+    "description": "forward, videresend",
+    "created_at": "2022-04-28T10:42:53.765Z",
+    "pageName": "Communication"
+  },
+  {
+    "name": "ForwardFilled",
+    "description": "forward, videresend",
+    "created_at": "2022-04-28T12:21:53.189Z",
+    "pageName": "Communication"
+  },
+  {
     "name": "Freezer",
     "description": "",
     "created_at": "2020-07-20T10:32:39.018Z",
@@ -1710,6 +1722,18 @@
     "pageName": "People"
   },
   {
+    "name": "PeopleDialogFilled",
+    "description": "",
+    "created_at": "2022-03-30T07:30:17.398Z",
+    "pageName": "People"
+  },
+  {
+    "name": "PeopleDialogOutline",
+    "description": "",
+    "created_at": "2022-03-30T07:30:17.392Z",
+    "pageName": "People"
+  },
+  {
     "name": "PeopleFilled",
     "description": "",
     "created_at": "2021-01-12T13:29:09.125Z",
@@ -2206,6 +2230,18 @@
     "description": "",
     "created_at": "2021-01-11T13:37:55.271Z",
     "pageName": "Social media"
+  },
+  {
+    "name": "Stethoscope",
+    "description": "",
+    "created_at": "2022-03-18T08:51:04.695Z",
+    "pageName": "Health"
+  },
+  {
+    "name": "Stethoscope",
+    "description": "",
+    "created_at": "2022-03-18T08:51:04.700Z",
+    "pageName": "Health"
   },
   {
     "name": "StopWatch",
