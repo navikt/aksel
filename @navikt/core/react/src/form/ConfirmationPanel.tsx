@@ -45,7 +45,7 @@ export const ConfirmationPanel = forwardRef<
         "navds-confirmation-panel--checked": !!props.checked,
       })}
     >
-      <div className="navds-confirmation-panel__panel">
+      <div className="navds-confirmation-panel__inner">
         {children && (
           <BodyLong
             size={props.size}

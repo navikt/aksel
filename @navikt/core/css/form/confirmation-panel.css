@@ -34,7 +34,10 @@
   );
 }
 
-.navds-confirmation-panel__panel {
+.navds-confirmation-panel {
+}
+
+.navds-confirmation-panel__inner {
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-4);
@@ -49,17 +52,17 @@
   max-width: 80ch;
 }
 
-.navds-confirmation-panel--small .navds-confirmation-panel__panel {
+.navds-confirmation-panel--small .navds-confirmation-panel__inner {
   padding: var(--navds-spacing-3);
   gap: var(--navds-spacing-2);
 }
 
-.navds-confirmation-panel--checked .navds-confirmation-panel__panel {
+.navds-confirmation-panel--checked .navds-confirmation-panel__inner {
   background-color: var(--navds-confirmation-panel-color-background-checked);
   border-color: var(--navds-confirmation-panel-color-border-checked);
 }
 
-.navds-confirmation-panel--error .navds-confirmation-panel__panel {
+.navds-confirmation-panel--error .navds-confirmation-panel__inner {
   background-color: var(--navds-confirmation-panel-color-background-error);
   border: 1px solid transparent;
 }
