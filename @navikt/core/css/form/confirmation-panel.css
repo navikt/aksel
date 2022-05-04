@@ -34,9 +34,6 @@
   );
 }
 
-.navds-confirmation-panel {
-}
-
 .navds-confirmation-panel__inner {
   display: flex;
   flex-direction: column;
