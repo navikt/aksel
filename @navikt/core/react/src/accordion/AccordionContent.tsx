@@ -6,7 +6,9 @@ import { AccordionItemContext } from "./AccordionItem";
 export interface AccordionContentProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Accordion panel content
+   * Content inside Accordion.Content
+   * If renderContentWhenClosed is false in Accordion.Item,
+   * this will be removed from dom when Accordion is closed
    */
   children: React.ReactNode;
 }

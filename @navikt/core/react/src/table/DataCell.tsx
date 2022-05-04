@@ -6,7 +6,7 @@ import { TableContext } from "./Table";
 export interface DataCellProps
   extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
-   * Content alignment
+   * Content alignment inside cell
    * @default "left"
    */
   align?: "left" | "center" | "right";

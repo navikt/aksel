@@ -21,7 +21,7 @@ export interface RadioGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Collection of <Radio>-elements
+   * Collection of <Radio />-elements
    */
   children: React.ReactNode;
   /**
@@ -29,15 +29,15 @@ export interface RadioGroupProps
    */
   name?: string;
   /**
-   * Default checked radiobutton
+   * Default checked Radio
    */
   defaultValue?: any;
   /**
-   * Controlled state for Radiobutton
+   * Controlled state for Radio
    */
   value?: any;
   /**
-   * Returns current checked radiobutton in group
+   * Returns current checked Radio in group
    */
   onChange?: (value: any) => void;
   /**

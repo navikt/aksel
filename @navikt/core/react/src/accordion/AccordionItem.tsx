@@ -4,21 +4,22 @@ import React, { createContext, forwardRef, useState } from "react";
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content inside Accordion.Item
+   * Content in Accordion.Item
+   * Should include one Accordion.Header and one Accordion.Content
    */
   children: React.ReactNode;
   /**
-   * Opens component if 'true', closes if 'false'
-   * Using this props removes automatic control of open-state
+   * Controlled open-state
+   * Using this removes automatic control of open-state
    */
   open?: boolean;
   /**
-   * Defaults the accordion to opened state if not controlled
+   * Defaults the accordion to open if not controlled
    * @default false
    */
   defaultOpen?: boolean;
   /**
-   * Removes content-element from dom when closed
+   * Removes content inside Accordion.Content if false from dom when closed
    * @default false
    */
   renderContentWhenClosed?: boolean;

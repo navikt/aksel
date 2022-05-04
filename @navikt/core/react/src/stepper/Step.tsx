@@ -6,11 +6,12 @@ import { Label, OverridableComponent } from "..";
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Text content under indicator
+   * Text content by indicator
    */
   children: string;
   /**
    * Handled by Stepper
+   * @private
    */
   index?: number;
 }

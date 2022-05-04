@@ -26,7 +26,7 @@ export interface SearchProps
   children?: React.ReactNode;
   /**
    * Search label
-   * @info Will be hidden by default, is required for accessibility reasons.
+   * @note Will be hidden by default, is required for accessibility reasons.
    */
   label: React.ReactNode;
   /**
@@ -53,7 +53,7 @@ export interface SearchProps
    */
   clearButton?: boolean;
   /**
-   * Changes button-variant
+   * Changes button-variant, "simple" removes button
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "simple";

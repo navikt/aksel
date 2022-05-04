@@ -9,11 +9,11 @@ export interface SelectProps
   extends FormFieldProps,
     Omit<SelectHTMLAttributes<HTMLSelectElement>, "size"> {
   /**
-   * Collection of <option>-elements
+   * Collection of <option />-elements
    */
   children: React.ReactNode;
   /**
-   * Expose the HTML size attribute
+   * Exposes the HTML size attribute
    */
   htmlSize?: number;
   /**

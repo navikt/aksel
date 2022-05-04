@@ -4,7 +4,7 @@ import { useId } from "..";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
-   * Changes sizing
+   * Changes Loader width/height
    * 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
@@ -14,12 +14,13 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * @default "venter..."
    */
   title?: React.ReactNode;
-  /*
-   * Background-circle in svg set to transparent
+  /**
+   * Sets svg-background to transparent
+   * @default false
    */
   transparent?: boolean;
   /**
-   * Colored variants for loader
+   * Colored variants for Loader
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";

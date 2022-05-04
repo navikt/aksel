@@ -47,6 +47,7 @@ export interface SwitchProps
   loading?: boolean;
   /**
    * Positions switch on left/right side of label
+   * @default "left"
    */
   position?: "left" | "right";
 }

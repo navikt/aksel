@@ -4,7 +4,7 @@ import React, { forwardRef } from "react";
 
 export interface TabPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Tab panel
+   * Tab panel content
    */
   children: React.ReactNode;
   /**

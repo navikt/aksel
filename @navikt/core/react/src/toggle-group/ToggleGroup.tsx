@@ -29,7 +29,7 @@ export interface ToggleGroupProps
    */
   defaultValue?: string;
   /**
-   * Returns elements that wants to be active
+   * Callback for selected toggle
    */
   onChange: (value: string) => void;
   /**

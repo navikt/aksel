@@ -8,12 +8,12 @@ export interface CheckboxProps
   extends Omit<FormFieldProps, "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
-   * Checkbox has error
+   * Adds error indication on checkbox
    * @default false
    */
   error?: boolean;
   /**
-   * Label for checkbox
+   * Checkbox label
    */
   children: React.ReactNode;
   /**

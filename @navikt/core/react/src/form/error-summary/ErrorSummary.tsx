@@ -5,7 +5,7 @@ import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * ErrorSummaryItems
+   * Collectipn of ErrorSummary.Item
    */
   children: React.ReactNode;
   /**
@@ -18,7 +18,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    */
   heading?: React.ReactNode;
   /**
-   * Allows setting a different HTML <tag>
+   * Allows setting a different HTML h-tag
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;

@@ -15,7 +15,7 @@ interface AccordionComponent
 
 export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content inside accordion
+   * Instances of Accordion.Item
    */
   children: React.ReactNode;
 }

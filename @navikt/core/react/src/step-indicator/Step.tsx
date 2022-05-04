@@ -11,10 +11,12 @@ export interface StepIndicatorStepProps
   children: React.ReactNode;
   /**
    * Disables interaction with element
+   * @note We recommend not using disabled if possible
    */
   disabled?: boolean;
   /**
    * Handled by StepIndicator
+   * @private
    */
   index?: number;
 }

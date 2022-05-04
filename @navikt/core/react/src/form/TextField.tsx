@@ -8,15 +8,15 @@ export interface TextFieldProps
   extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
-   * The current value (controlled).
+   * Controlled value
    */
   value?: string;
   /**
-   * The default value (uncontrolled).
+   * Defaults input-value without needing controlled-state
    */
   defaultValue?: string;
   /**
-   * Expose the HTML size attribute
+   * Exposes the HTML size attribute
    */
   htmlSize?: number;
   /**
@@ -28,7 +28,7 @@ export interface TextFieldProps
    */
   label: React.ReactNode;
   /**
-   * Type of form control
+   * Type of form control. Picking the correct type helps user fill inn their required information
    * @default "text"
    */
   type?: "email" | "number" | "password" | "tel" | "text" | "url";

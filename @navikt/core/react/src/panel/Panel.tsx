@@ -8,7 +8,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
    */
   children: React.ReactNode;
   /**
-   * Toggles border on panel
+   * Adds a border to panel when true
    * @default false
    */
   border?: boolean;

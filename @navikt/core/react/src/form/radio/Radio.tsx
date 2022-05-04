@@ -8,7 +8,7 @@ export interface RadioProps
   extends Omit<FormFieldProps, "error" | "errorId">,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
-   * Label for radio
+   * Radio label
    */
   children: React.ReactNode;
   /**

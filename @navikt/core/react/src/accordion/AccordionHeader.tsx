@@ -7,7 +7,7 @@ import { useClientLayoutEffect, useId } from "..";
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Accordion button content
+   * Text inside Accordion.Header
    */
   children: React.ReactNode;
 }

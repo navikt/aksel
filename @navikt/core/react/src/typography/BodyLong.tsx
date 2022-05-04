@@ -14,7 +14,7 @@ export interface BodyLongProps
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
