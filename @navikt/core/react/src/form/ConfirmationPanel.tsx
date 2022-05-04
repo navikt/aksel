@@ -1,9 +1,14 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import { BodyLong, Checkbox, CheckboxProps } from "..";
+import ErrorMessage from "./ErrorMessage";
+import { useFormField } from "./useFormField";
 
 export interface ConfirmationPanelProps
-  extends Omit<CheckboxProps, "children" | "indeterminate" | "hideLabel"> {
+  extends Omit<
+    CheckboxProps,
+    "children" | "indeterminate" | "hideLabel" | "error"
+  > {
   /**
    * Additional information on panel
    */
@@ -12,30 +17,50 @@ export interface ConfirmationPanelProps
    * Checkbox label
    */
   label: React.ReactNode;
+  /**
+   * Error message for element
+   */
+  error?: React.ReactNode;
+  /**
+   * Override internal errorId
+   */
+  errorId?: string;
 }
 
 export const ConfirmationPanel = forwardRef<
   HTMLDivElement,
   ConfirmationPanelProps
 >(({ className, children, label, ...props }, ref) => {
+  const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
+    props,
+    "confirmationPanel"
+  );
+
   return (
     <div
       ref={ref}
-      className={cl("navds-confirmation-panel", className, {
-        "navds-confirmation-panel--small": props.size === "small",
-        "navds-confirmation-panel--error": !!props.error,
+      className={cl("navds-confirmation-panel", "navds-form-field", className, {
+        "navds-confirmation-panel--small": size === "small",
+        "navds-confirmation-panel--error": hasError,
         "navds-confirmation-panel--checked": !!props.checked,
       })}
     >
-      {children && (
-        <BodyLong
-          size={props.size}
-          className="navds-confirmation-panel__content"
-        >
-          {children}
-        </BodyLong>
-      )}
-      <Checkbox {...props}>{label}</Checkbox>
+      <div className="navds-confirmation-panel__inner">
+        {children && (
+          <BodyLong
+            size={props.size}
+            className="navds-confirmation-panel__content"
+          >
+            {children}
+          </BodyLong>
+        )}
+        <Checkbox {...props} {...inputProps} error={hasError} size={size}>
+          {label}
+        </Checkbox>
+      </div>
+      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+      </div>
     </div>
   );
 });
