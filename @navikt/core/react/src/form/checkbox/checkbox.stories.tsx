@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
+import { Details } from "../../details";
 
 export default {
   title: "ds-react/Form/Checkbox",
@@ -14,48 +15,74 @@ export const Default = (props) => {
   const [state, setState] = useState(["checkbox1"]);
 
   return (
-    <CheckboxGroup
-      legend={props.legend}
-      description={props.description}
-      value={props.controlled ? state : undefined}
-      onChange={props.controlled ? setState : undefined}
-      hideLegend={props.hideLegend}
-      error={props.errorGroup ? "Errormelding" : undefined}
-      {...props}
-    >
-      <Checkbox
-        value="checkbox1"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
+    <div>
+      <Details header="Non sunt qui nostrud esse elit fugiat.">
+        Min tekst
+      </Details>
+      <CheckboxGroup
+        legend={props.legend}
+        description={props.description}
+        value={props.controlled ? state : undefined}
+        onChange={props.controlled ? setState : undefined}
+        hideLegend={props.hideLegend}
+        error={props.errorGroup ? "Errormelding" : undefined}
+        {...props}
       >
-        {props.children || "Apple"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox2"
-        error={props.errorSingle}
-        description={
-          props.checkboxDescription ? "Orange description" : undefined
-        }
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Orange"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox3"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Banana"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox4"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Melon"}
-      </Checkbox>
-    </CheckboxGroup>
+        <Checkbox
+          value="checkbox1"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+          description={
+            <Details header="Non sunt qui nostrud esse elit fugiat.">
+              Min tekst
+            </Details>
+          }
+        >
+          {props.children || "Apple"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox2"
+          error={props.errorSingle}
+          description={
+            <Details header="Non sunt qui nostrud esse elit fugiat.">
+              Min tekst
+            </Details>
+          }
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+        >
+          {props.children || "Orange"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox3"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+          description={
+            <Details header="Non sunt qui nostrud esse elit fugiat.">
+              Min tekst
+            </Details>
+          }
+        >
+          {props.children || "Banana"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox4"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+          description={
+            <Details header="Non sunt qui nostrud esse elit fugiat.">
+              Min tekst
+            </Details>
+          }
+        >
+          {props.children || "Melon"}
+        </Checkbox>
+      </CheckboxGroup>
+      <Details header="Non sunt qui nostrud esse elit fugiat.">
+        Min tekst
+      </Details>
+      <Checkbox>Min label</Checkbox>
+    </div>
   );
 };
 

@@ -31,10 +31,11 @@
 
 .navds-details__expand-icon {
   font-size: 1.25rem;
+  transform: rotate(-90deg);
 }
 
 .navds-details--open > .navds-details__expand-icon {
-  transform: rotate(-180deg);
+  transform: rotate(0deg);
 }
 
 .navds-details + .ReactCollapse--collapse {
