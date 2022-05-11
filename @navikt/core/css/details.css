@@ -9,6 +9,7 @@
   color: var(--navds-semantic-color-link);
   border-radius: var(--navds-border-radius-small);
   padding: var(--navds-spacing-1) var(--navds-spacing-1);
+  text-align: start;
 }
 
 .navds-details--small {
