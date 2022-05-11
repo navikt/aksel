@@ -30,7 +30,6 @@
 
 .navds-details__expand-icon {
   font-size: 1.25rem;
-  transition: transform 150ms ease-out;
 }
 
 .navds-details--open > .navds-details__expand-icon {
