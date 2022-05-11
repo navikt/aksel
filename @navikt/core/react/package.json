@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.17.26",
+  "version": "0.18.6",
   "private": false,
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
@@ -24,19 +24,21 @@
   "files": [
     "/cjs",
     "/esm",
-    "/src"
+    "/src",
+    "_docs.json"
   ],
   "scripts": {
+    "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm && yarn docgen",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "jest"
   },
   "dependencies": {
     "@floating-ui/react-dom": "0.6.0",
     "@material-ui/core": "^4.12.3",
-    "@navikt/ds-icons": "^0.8.11",
+    "@navikt/ds-icons": "^0.8.12",
     "@popperjs/core": "^2.10.1",
     "@radix-ui/react-tabs": "0.1.5",
     "@radix-ui/react-toggle-group": "0.1.5",
@@ -58,12 +60,15 @@
     "@types/styled-components": "^5.1.14",
     "copyfiles": "^2.4.1",
     "faker": "5.5.3",
+    "fast-glob": "3.2.11",
     "jest": "^27.5.0",
+    "react-docgen-typescript": "2.2.2",
     "react-router-dom": "^6.3.0",
     "rimraf": "3.0.2",
     "styled-components": "^5.3.1",
     "swr": "^1.1.2",
-    "ts-jest": "^27.1.0"
+    "ts-jest": "^27.1.0",
+    "ts-node": "10.7.0"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

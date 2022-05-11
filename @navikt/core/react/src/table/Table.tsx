@@ -56,7 +56,7 @@ export interface TableContextProps {
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
-const Table = forwardRef(
+export const Table = forwardRef(
   (
     {
       className,

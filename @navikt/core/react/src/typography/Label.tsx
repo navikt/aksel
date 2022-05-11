@@ -13,12 +13,12 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const Label: OverridableComponent<
+export const Label: OverridableComponent<
   LabelProps,
   HTMLParagraphElement
 > = forwardRef(

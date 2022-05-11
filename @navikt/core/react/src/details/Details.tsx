@@ -36,7 +36,7 @@ export interface DetailsProps
   size?: "medium" | "small";
 }
 
-const Details = forwardRef<HTMLButtonElement, DetailsProps>(
+export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
   (
     {
       className,

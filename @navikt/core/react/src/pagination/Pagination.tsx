@@ -3,9 +3,10 @@ import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
 import { BodyShort } from "..";
 
-interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
+export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Current page
+   * @note Pagination indexing starts at 1
    */
   page: number;
   /**
@@ -71,7 +72,7 @@ export const getSteps = ({
   ];
 };
 
-const Pagination = forwardRef<HTMLElement, PaginationProps>(
+export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (
     {
       page,

@@ -19,6 +19,14 @@ export const All = () => {
 
       <Textarea label="In anim elit" value={value} onChange={handleChange} />
 
+      <h2>Uncontrolled</h2>
+
+      <Textarea label="In anim elit" />
+
+      <h3>defaultValue</h3>
+
+      <Textarea label="In anim elit" defaultValue="wat" />
+
       <h2>Description</h2>
 
       <Textarea

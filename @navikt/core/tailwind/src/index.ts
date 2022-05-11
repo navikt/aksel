@@ -23,6 +23,7 @@ const config = {
       fontSize: Reducer(tokens, ["font-size"]),
       lineHeight: Reducer(tokens, ["font-line-height"]),
       fontFamily: Reducer(tokens, ["font-family"]),
+      borderRadius: Reducer(tokens, ["border-radius"]),
     },
   },
 };

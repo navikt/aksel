@@ -18,6 +18,7 @@ export interface FormFieldProps {
   size?: "medium" | "small";
   /**
    * Disables element
+   * @note Avoid using if possible for accessibility purposes
    */
   disabled?: boolean;
   /**

@@ -15,7 +15,8 @@ export interface LinkPanelProps
    */
   children?: React.ReactNode;
   /**
-   * Toggles border on panel
+   * Adds border to panel if true
+   * @default true
    */
   border?: boolean;
 }
@@ -26,7 +27,7 @@ interface LinkPanelComponentType
   Description: LinkPanelDescriptionType;
 }
 
-const LinkPanelComponent: OverridableComponent<
+export const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement
 > = forwardRef(

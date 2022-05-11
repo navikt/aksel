@@ -16,11 +16,11 @@ export interface ModalProps {
    */
   open: boolean;
   /**
-   * Called when modal wants to close
+   * Callback for modal wanting to close
    */
   onClose: () => void;
   /**
-   * If modal should close on overlay click
+   * If modal should close on overlay click (click outside Modal)
    * @default true
    */
   shouldCloseOnOverlayClick?: boolean;
@@ -29,12 +29,12 @@ export interface ModalProps {
    */
   className?: string;
   /**
-   * Toggles addition of a X-button on modal
+   * Removes close-button(X) when false
    * @default true
    */
   closeButton?: boolean;
   /**
-   * Callback for getting parent element modal will attach to
+   * Callback for setting parent element modal will attach to
    */
   parentSelector?(): HTMLElement;
   "aria-labelledby"?: string;
@@ -59,7 +59,7 @@ type ModalLifecycle = {
   setAppElement?: (element: any) => void;
 };
 
-const Modal = forwardRef<ReactModal, ModalProps>(
+export const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,

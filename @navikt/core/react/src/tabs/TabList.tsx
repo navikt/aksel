@@ -5,9 +5,9 @@ import cl from "classnames";
 import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
 
-export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Tab elements
+   * <Tabs.Tab /> elements
    */
   children: React.ReactNode;
   /**
@@ -16,11 +16,11 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   loop?: boolean;
 }
 
-export type ListType = React.ForwardRefExoticComponent<
-  ListProps & React.RefAttributes<HTMLDivElement>
+export type TabListType = React.ForwardRefExoticComponent<
+  TabListProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const List = forwardRef<HTMLDivElement, ListProps>(
+export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
     const listRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = mergeRefs([listRef, ref]);
@@ -122,6 +122,6 @@ const List = forwardRef<HTMLDivElement, ListProps>(
       </div>
     );
   }
-) as ListType;
+) as TabListType;
 
-export default List;
+export default TabList;
