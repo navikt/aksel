@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Details } from ".";
+import { ReadMore } from ".";
 
 export default {
-  title: "ds-react/Details",
-  component: Details,
+  title: "ds-react/ReadMore",
+  component: ReadMore,
   argTypes: {
     size: {
       control: {
@@ -18,7 +18,7 @@ export const Default = (props) => {
   const [state, setState] = useState(false);
 
   return (
-    <Details
+    <ReadMore
       open={props.controlled ? state : undefined}
       onClick={() => setState((x) => !x)}
       header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
@@ -26,7 +26,7 @@ export const Default = (props) => {
     >
       Command station, this is ST 321. Code Clearance Blue. We're starting our
       approach. Deactivate the security shield.
-    </Details>
+    </ReadMore>
   );
 };
 
@@ -36,21 +36,21 @@ Default.args = {
 };
 
 export const Small = () => (
-  <Details
+  <ReadMore
     header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
     size="small"
   >
     Command station, this is ST 321. Code Clearance Blue. We're starting our
     approach. Deactivate the security shield.
-  </Details>
+  </ReadMore>
 );
 
 export const Open = () => (
-  <Details
+  <ReadMore
     header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
     defaultOpen
   >
     Command station, this is ST 321. Code Clearance Blue. We're starting our
     approach. Deactivate the security shield.
-  </Details>
+  </ReadMore>
 );

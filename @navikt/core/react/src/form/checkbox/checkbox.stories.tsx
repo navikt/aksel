@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Details } from "../../details";
+import { ReadMore } from "../../";
 
 export default {
   title: "ds-react/Form/Checkbox",
@@ -16,9 +16,9 @@ export const Default = (props) => {
 
   return (
     <div>
-      <Details header="Non sunt qui nostrud esse elit fugiat.">
+      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
         Min tekst
-      </Details>
+      </ReadMore>
       <CheckboxGroup
         legend={props.legend}
         description={props.description}
@@ -33,9 +33,9 @@ export const Default = (props) => {
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
           description={
-            <Details header="Non sunt qui nostrud esse elit fugiat.">
+            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
               Min tekst
-            </Details>
+            </ReadMore>
           }
         >
           {props.children || "Apple"}
@@ -44,9 +44,9 @@ export const Default = (props) => {
           value="checkbox2"
           error={props.errorSingle}
           description={
-            <Details header="Non sunt qui nostrud esse elit fugiat.">
+            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
               Min tekst
-            </Details>
+            </ReadMore>
           }
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
@@ -58,9 +58,9 @@ export const Default = (props) => {
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
           description={
-            <Details header="Non sunt qui nostrud esse elit fugiat.">
+            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
               Min tekst
-            </Details>
+            </ReadMore>
           }
         >
           {props.children || "Banana"}
@@ -70,17 +70,17 @@ export const Default = (props) => {
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
           description={
-            <Details header="Non sunt qui nostrud esse elit fugiat.">
+            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
               Min tekst
-            </Details>
+            </ReadMore>
           }
         >
           {props.children || "Melon"}
         </Checkbox>
       </CheckboxGroup>
-      <Details header="Non sunt qui nostrud esse elit fugiat.">
+      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
         Min tekst
-      </Details>
+      </ReadMore>
       <Checkbox>Min label</Checkbox>
     </div>
   );

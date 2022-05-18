@@ -1,2 +1,2 @@
-export { default as Details } from "./Details";
-export { DetailsProps } from "./Details";
+export { default as ReadMore } from "./ReadMore";
+export { ReadMoreProps } from "./ReadMore";

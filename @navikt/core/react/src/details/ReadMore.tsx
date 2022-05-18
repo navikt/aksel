@@ -5,14 +5,14 @@ import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 import { ExpandFilled } from "@navikt/ds-icons";
 
-export interface DetailsProps
+export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Content inside Details
+   * Content inside ReadMore
    */
   children: React.ReactNode;
   /**
-   * Details header content
+   * ReadMore header content
    */
   header: React.ReactNode;
   /**
@@ -37,7 +37,7 @@ export interface DetailsProps
   size?: "medium" | "small";
 }
 
-export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
+export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
   (
     {
       className,
@@ -65,12 +65,12 @@ export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
           type="button"
           {...rest}
           className={cl(
-            "navds-details",
+            "navds-readmore",
             "navds-body-short",
-            `navds-details--${size}`,
+            `navds-readmore--${size}`,
             className,
             {
-              "navds-details--open": isOpened,
+              "navds-readmore--open": isOpened,
               "navds-body-short--small": size === "small",
             }
           )}
@@ -83,17 +83,17 @@ export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
           aria-expanded={isOpened}
           ref={ref}
         >
-          <Expand className={"navds-details__expand-icon"} aria-hidden />
+          <Expand className={"navds-readmore__expand-icon"} aria-hidden />
           <ExpandFilled
             className={
-              "navds-details__expand-icon navds-details__expand-icon--filled"
+              "navds-readmore__expand-icon navds-readmore__expand-icon--filled"
             }
             aria-hidden
           />
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
-          <div className="navds-details__content">
+          <div className="navds-readmore__content">
             <BodyLong size={size}>{children}</BodyLong>
           </div>
         </CollapseComponent>
@@ -102,4 +102,4 @@ export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
   }
 );
 
-export default Details;
+export default ReadMore;
