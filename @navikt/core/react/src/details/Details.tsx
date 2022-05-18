@@ -3,6 +3,7 @@ import cl from "classnames";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
+import { ExpandFilled } from "@navikt/ds-icons";
 
 export interface DetailsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -82,7 +83,13 @@ export const Details = forwardRef<HTMLButtonElement, DetailsProps>(
           aria-expanded={isOpened}
           ref={ref}
         >
-          <Expand className="navds-details__expand-icon" aria-hidden />
+          <Expand className={"navds-details__expand-icon"} aria-hidden />
+          <ExpandFilled
+            className={
+              "navds-details__expand-icon navds-details__expand-icon--filled"
+            }
+            aria-hidden
+          />
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
