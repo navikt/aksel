@@ -39,7 +39,6 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 
     const Description = size === "medium" ? BodyShort : Detail;
 
-    console.log(typeof props.description);
     return (
       <div
         className={cl(
