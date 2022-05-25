@@ -7,15 +7,6 @@ export default {
   component: LinkPanel,
 };
 
-/* const StyledLinkPanel = styled(LinkPanel)`
-  .navds-link-panel__content {
-    display: grid;
-    grid-auto-flow: column;
-    gap: var(--navds-spacing-8);
-    align-items: center;
-  }
-`; */
-
 export const All = () => (
   <>
     <h1>Link panel</h1>
