@@ -65,16 +65,11 @@
   border-radius: var(--navds-border-radius-full);
 }
 
-.navds-checkbox__content,
-.navds-radio__content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--navds-spacing-1);
-}
-
 .navds-checkbox__description,
 .navds-radio__description {
   color: var(--navds-radio-checkbox-color-text);
+  margin-left: var(--navds-spacing-8);
+  margin-bottom: var(--navds-spacing-2);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,

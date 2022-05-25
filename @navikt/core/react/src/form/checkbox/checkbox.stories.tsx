@@ -16,9 +16,6 @@ export const Default = (props) => {
 
   return (
     <div>
-      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-        Min tekst
-      </ReadMore>
       <CheckboxGroup
         legend={props.legend}
         description={props.description}
@@ -32,22 +29,18 @@ export const Default = (props) => {
           value="checkbox1"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
+          /* description={
             <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
               Min tekst
             </ReadMore>
-          }
+          } */
         >
           {props.children || "Apple"}
         </Checkbox>
         <Checkbox
           value="checkbox2"
           error={props.errorSingle}
-          description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          }
+          description="Quis laborum culpa enim amet cillum veniam."
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
         >
@@ -69,19 +62,10 @@ export const Default = (props) => {
           value="checkbox4"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          }
         >
           {props.children || "Melon"}
         </Checkbox>
       </CheckboxGroup>
-      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-        Min tekst
-      </ReadMore>
-      <Checkbox>Min label</Checkbox>
     </div>
   );
 };

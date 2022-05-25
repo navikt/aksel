@@ -33,10 +33,13 @@ export interface CheckboxProps
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size } = useCheckbox(props);
+    const { inputProps, hasError, size, inputDescriptionId } = useCheckbox(
+      props
+    );
 
     const Description = size === "medium" ? BodyShort : Detail;
 
+    console.log(typeof props.description);
     return (
       <div
         className={cl(
@@ -74,26 +77,30 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }
           }}
         />
-        <label htmlFor={inputProps.id} className="navds-checkbox__label">
-          <div
-            className={cl("navds-checkbox__content", {
-              "navds-sr-only": props.hideLabel,
-            })}
+        <BodyShort
+          as="label"
+          size={size}
+          htmlFor={inputProps.id}
+          className="navds-checkbox__label"
+        >
+          <span className={cl({ "navds-sr-only": props.hideLabel })}>
+            {props.children}
+          </span>
+        </BodyShort>
+        {props.description && (
+          <Description
+            as="div"
+            size="small"
+            className="navds-checkbox__description"
+            id={
+              typeof props.description === "string"
+                ? inputDescriptionId
+                : undefined
+            }
           >
-            <BodyShort as="div" size={size}>
-              {props.children}
-            </BodyShort>
-            {props.description && (
-              <Description
-                as="div"
-                size="small"
-                className="navds-checkbox__description"
-              >
-                {props.description}
-              </Description>
-            )}
-          </div>
-        </label>
+            {props.description}
+          </Description>
+        )}
       </div>
     );
   }
