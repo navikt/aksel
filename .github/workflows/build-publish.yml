@@ -66,6 +66,8 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Boot
         run: yarn boot
+      - name: Generate docs
+        run: yarn docgen
       - name: Setup github connection for auth
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"

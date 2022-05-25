@@ -4,11 +4,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "test": "lerna run test",
+    "clean:lib": "node scripts/clean.js",
+    "test": "yarn workspaces foreach -p run test",
     "postinstall": "husky install",
-    "boot": "yarn clean:lib && yarn build:packages --stream",
+    "boot": "yarn clean:lib && yarn workspaces foreach -ptA --no-private run build",
+    "docgen": "yarn workspaces foreach -p run docgen",
     "storybook": "start-storybook -p 6006",
-    "build:packages": "yarn build:tokens && yarn run --silent lerna run build",
     "build:storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:tokens": "yarn workspace @navikt/ds-tokens build",
@@ -16,9 +17,7 @@
     "update:tokens": "yarn workspace @navikt/ds-tokens update",
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
-    "lint:css": "yarn stylelint --syntax css @navikt/**/*.css",
-    "clean:lib": "node scripts/clean.js",
-    "build-test": "yarn workspaces foreach -ptA --no-private run build "
+    "lint:css": "yarn stylelint --syntax css @navikt/**/*.css"
   },
   "workspaces": [
     "@navikt/core/*",
