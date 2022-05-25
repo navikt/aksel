@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { LinkPanel } from "..";
 import { Illustration } from "./illustration";
 
@@ -8,14 +7,14 @@ export default {
   component: LinkPanel,
 };
 
-const StyledLinkPanel = styled(LinkPanel)`
+/* const StyledLinkPanel = styled(LinkPanel)`
   .navds-link-panel__content {
     display: grid;
     grid-auto-flow: column;
     gap: var(--navds-spacing-8);
     align-items: center;
   }
-`;
+`; */
 
 export const All = () => (
   <>
@@ -37,7 +36,7 @@ export const All = () => (
     </LinkPanel>
 
     <h1>Custom styling</h1>
-    <StyledLinkPanel href="#">
+    <LinkPanel href="#" className="linkpanel">
       {Illustration}
       <div>
         <LinkPanel.Title>
@@ -48,6 +47,14 @@ export const All = () => (
           magna veniam consequat. id aliquip Lorem esse
         </LinkPanel.Description>
       </div>
-    </StyledLinkPanel>
+    </LinkPanel>
+    <style>{`
+      .navds-link-panel__content {
+        display: grid;
+        grid-auto-flow: column;
+        gap: var(--navds-spacing-8);
+        align-items: center;
+      }
+    `}</style>
   </>
 );
