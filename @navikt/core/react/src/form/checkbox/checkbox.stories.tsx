@@ -29,18 +29,24 @@ export const Default = (props) => {
           value="checkbox1"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          /* description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          } */
+          description={
+            props.checkboxDescription ? (
+              <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
+                Min tekst
+              </ReadMore>
+            ) : undefined
+          }
         >
           {props.children || "Apple"}
         </Checkbox>
         <Checkbox
           value="checkbox2"
           error={props.errorSingle}
-          description="Quis laborum culpa enim amet cillum veniam."
+          description={
+            props.checkboxDescription
+              ? "Quis laborum culpa enim amet cillum veniam."
+              : undefined
+          }
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
         >
@@ -50,11 +56,6 @@ export const Default = (props) => {
           value="checkbox3"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          }
         >
           {props.children || "Banana"}
         </Checkbox>
