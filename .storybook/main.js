@@ -44,10 +44,15 @@ module.exports = {
     builder: {
       name: "webpack5",
       options: {
-        lazyCompilation: true,
+        lazyCompilation: false,
         fsCache: true,
       },
     },
   },
   framework: "@storybook/react",
+  typescript: {
+    check: false,
+    checkOptions: {},
+    reactDocgen: false,
+  },
 };
