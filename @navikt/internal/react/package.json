@@ -42,7 +42,8 @@
     "react-merge-refs": "^1.1.0"
   },
   "devDependencies": {
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "ts-node": "10.7.0"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",
