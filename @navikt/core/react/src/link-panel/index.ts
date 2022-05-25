@@ -1,2 +1,2 @@
 export { default as LinkPanel } from "./LinkPanel";
-export * from "./LinkPanel";
+export { LinkPanelProps } from "./LinkPanel";

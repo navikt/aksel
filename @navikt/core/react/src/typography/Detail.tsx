@@ -14,12 +14,12 @@ export interface DetailProps
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const Detail: OverridableComponent<
+export const Detail: OverridableComponent<
   DetailProps,
   HTMLParagraphElement
 > = forwardRef(

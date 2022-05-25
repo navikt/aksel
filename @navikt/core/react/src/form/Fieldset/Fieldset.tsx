@@ -7,7 +7,7 @@ import { useFieldset } from "./useFieldset";
 
 export type FieldsetContextProps = {
   /**
-   * Error message applied to element
+   * Error message applied to element,
    */
   error?: React.ReactNode;
   /**
@@ -18,12 +18,16 @@ export type FieldsetContextProps = {
    * Changes paddings, margins and font-sizes
    */
   size: "medium" | "small";
+  /**
+   * Sets fieldset and all form-children to disabled
+   */
   disabled: boolean;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
   null
 );
+
 export interface FieldsetProps
   extends FormFieldProps,
     FieldsetHTMLAttributes<HTMLFieldSetElement> {
@@ -46,7 +50,7 @@ export interface FieldsetProps
   errorPropagation?: boolean;
 }
 
-const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
     const {
       inputProps,

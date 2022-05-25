@@ -13,18 +13,25 @@ export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Visually allowed length of content
+   * Allowed character-count for content
+   * @note This is just a visual validator, you need to set actual character-limits if needed
    */
   maxLength?: number;
+  /**
+   * Controlled value
+   */
   value?: string;
+  /**
+   * Defaults input-value without needing controlled-state
+   */
   defaultValue?: string;
   /**
-   * Maximum number of rows to display.
+   * Maximum number of character rows to display.
    * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
-   * Minimum number of rows to display.
+   * Minimum number of character-rows to display when empty.
    */
   minRows?: number;
   /**
@@ -37,7 +44,7 @@ export interface TextareaProps
   hideLabel?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
       inputProps,

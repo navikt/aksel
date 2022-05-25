@@ -31,7 +31,7 @@ export interface ReadMoreProps
   renderContentWhenClosed?: boolean;
 }
 
-const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
+export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
   (
     {
       className,

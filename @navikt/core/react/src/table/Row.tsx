@@ -14,7 +14,7 @@ export interface RowType
     RowProps & React.RefAttributes<HTMLTableRowElement>
   > {}
 
-const Row: RowType = forwardRef(
+export const Row: RowType = forwardRef(
   ({ className, selected = false, ...rest }, ref) => (
     <tr
       {...rest}

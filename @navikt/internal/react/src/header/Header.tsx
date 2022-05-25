@@ -22,7 +22,7 @@ interface HeaderComponent
   UserButton: HeaderUserButtonType;
 }
 
-const Header = forwardRef(({ className, ...rest }, ref) => (
+export const Header = forwardRef(({ className, ...rest }, ref) => (
   <header
     data-theme="dark"
     {...rest}

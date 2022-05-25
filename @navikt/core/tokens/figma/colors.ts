@@ -12,7 +12,7 @@ const parseColors = async (figmaColors: FigmaColorsT) => {
   /* Parse name and color into correct format */
   const colors: ColorT[] = Object.entries(figmaColors)
     .map(([key, value]) => ({
-      name: parseName(key),
+      name: parseName(key.replace(/\s/g, "")),
       color: value,
     }))
     .sort((a, b) => a.name.localeCompare(b.name))

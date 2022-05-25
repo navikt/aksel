@@ -35,7 +35,7 @@ export type MenuCollapseType = React.ForwardRefExoticComponent<
   MenuCollapseProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const Collapse: MenuCollapseType = forwardRef(
+export const Collapse: MenuCollapseType = forwardRef(
   ({ children, defaultOpen = false, title, className, ...rest }, ref) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     const context = useContext(NestingContext);

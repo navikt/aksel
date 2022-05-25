@@ -7,23 +7,22 @@ import { useClientLayoutEffect } from "../util";
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Component content
+   * Button content
    */
   children: React.ReactNode;
   /**
-   * Changes design and interactions
+   * Changes design and interaction-visuals
    * @default "primary"
    */
   variant?: "primary" | "secondary" | "tertiary" | "danger";
   /**
    * Changes padding, height and font-size
-   * @default "medium"
+   * @default medium
    */
   size?: "medium" | "small" | "xsmall";
   /**
    * Prevent the user from interacting with the button: it cannot be pressed or focused.
    * @note Avoid using if possible for accessibility purposes
-   * @default false
    */
   disabled?: boolean;
   /**
@@ -33,7 +32,10 @@ export interface ButtonProps
   loading?: boolean;
 }
 
-const Button: OverridableComponent<ButtonProps, HTMLButtonElement> = forwardRef(
+export const Button: OverridableComponent<
+  ButtonProps,
+  HTMLButtonElement
+> = forwardRef(
   (
     {
       as: Component = "button",

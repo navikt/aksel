@@ -14,12 +14,12 @@ export interface BodyShortProps
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const BodyShort: OverridableComponent<
+export const BodyShort: OverridableComponent<
   BodyShortProps,
   HTMLParagraphElement
 > = forwardRef(
