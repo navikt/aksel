@@ -2,6 +2,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -17,8 +18,8 @@
   border-radius: var(--navds-border-radius-small);
   padding: 0 var(--navds-spacing-2);
   align-items: center;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.05))
-    drop-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.05))
+    drop-shadow(0 1px 3px rgb(0 0 0 / 0.1));
   display: flex;
   flex-direction: column;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

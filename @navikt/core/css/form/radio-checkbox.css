@@ -145,6 +145,7 @@
   + .navds-checkbox__label::before {
   background-position: 4px center;
 }
+
 .navds-checkbox__input:indeterminate:focus + .navds-checkbox__label::before,
 .navds-checkbox__input:checked:focus + .navds-checkbox__label::before {
   box-shadow: inset 0 0 0 1px white, var(--navds-shadow-focus);
