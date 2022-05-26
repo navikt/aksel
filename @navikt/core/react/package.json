@@ -30,7 +30,8 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build2": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "jest"
   },
@@ -58,6 +59,7 @@
     "@types/node": "^17.0.35",
     "@types/react-collapse": "^5.0.1",
     "@types/react-modal": "^3.13.1",
+    "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "faker": "5.5.3",
     "fast-glob": "3.2.11",

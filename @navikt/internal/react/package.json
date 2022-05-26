@@ -30,7 +30,7 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@types/node": "^17.0.35",
+    "concurrently": "7.2.1",
     "rimraf": "^3.0.2",
     "ts-node": "10.7.0",
     "typescript": "^4.7.2"
