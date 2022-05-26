@@ -7,7 +7,7 @@
     "clean:lib": "node scripts/clean.js",
     "test": "yarn workspaces foreach -p run test",
     "postinstall": "husky install",
-    "boot": "yarn clean:lib && yarn workspaces foreach -ptA --no-private run build",
+    "boot": "yarn clean:lib && yarn workspaces foreach -pA --topological-dev --no-private run build",
     "docgen": "yarn workspaces foreach -p run docgen",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook",
