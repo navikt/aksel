@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { CheckboxProps } from "../..";
 import { useFormField } from "../useFormField";
 import { CheckboxGroupContext } from "./CheckboxGroup";
-import { omit } from "../..";
 
 /**
  * Handles props for Checkboxes in context with Fieldset and CheckboxGroup
@@ -10,10 +9,7 @@ import { omit } from "../..";
 const useCheckbox = ({ children, ...props }: CheckboxProps) => {
   const checkboxGroup = useContext(CheckboxGroupContext);
 
-  const { inputProps, ...rest } = useFormField(
-    omit(props, ["description"]),
-    "checkbox"
-  );
+  const { inputProps, ...rest } = useFormField(props, "checkbox");
 
   if (checkboxGroup) {
     if (props.checked) {

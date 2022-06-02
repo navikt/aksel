@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Radio, RadioGroup } from "../../index";
+import { Radio, RadioGroup, ReadMore } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
@@ -23,7 +23,18 @@ export const Default = (props) => {
       error={props.errorGroup ? "Errormelding" : undefined}
       {...props}
     >
-      <Radio value="radio1">{props.children || "Apple"}</Radio>
+      <Radio
+        value="radio1"
+        description={
+          props.radioDescription ? (
+            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
+              Min tekst
+            </ReadMore>
+          ) : undefined
+        }
+      >
+        {props.children || "Apple"}
+      </Radio>
       <Radio
         value="radio2"
         description={props.radioDescription ? "Orange description" : undefined}

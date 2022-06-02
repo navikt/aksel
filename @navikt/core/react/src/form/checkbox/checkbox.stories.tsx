@@ -16,9 +16,6 @@ export const Default = (props) => {
 
   return (
     <div>
-      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-        Min tekst
-      </ReadMore>
       <CheckboxGroup
         legend={props.legend}
         description={props.description}
@@ -33,9 +30,11 @@ export const Default = (props) => {
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
           description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
+            props.checkboxDescription ? (
+              <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
+                Min tekst
+              </ReadMore>
+            ) : undefined
           }
         >
           {props.children || "Apple"}
@@ -44,9 +43,9 @@ export const Default = (props) => {
           value="checkbox2"
           error={props.errorSingle}
           description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
+            props.checkboxDescription
+              ? "Quis laborum culpa enim amet cillum veniam."
+              : undefined
           }
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
@@ -57,11 +56,6 @@ export const Default = (props) => {
           value="checkbox3"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          }
         >
           {props.children || "Banana"}
         </Checkbox>
@@ -69,19 +63,10 @@ export const Default = (props) => {
           value="checkbox4"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
-            <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-              Min tekst
-            </ReadMore>
-          }
         >
           {props.children || "Melon"}
         </Checkbox>
       </CheckboxGroup>
-      <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-        Min tekst
-      </ReadMore>
-      <Checkbox>Min label</Checkbox>
     </div>
   );
 };
