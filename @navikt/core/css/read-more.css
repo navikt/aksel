@@ -35,6 +35,10 @@
   padding-top: var(--navds-spacing-2);
 }
 
+.navds-readmore:not(.navds-readmore--open) + .ReactCollapse--collapse {
+  padding: 0;
+}
+
 .navds-readmore__content {
   display: flex;
   align-items: stretch;
