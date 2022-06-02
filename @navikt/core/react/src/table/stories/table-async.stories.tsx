@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-/* import { setTimeout } from "timers/promises"; */
 import useSWR from "swr";
 import people from "./people.json";
 import { Table } from "../index";
