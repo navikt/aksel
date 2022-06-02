@@ -56,6 +56,16 @@ export const Small = () => (
   </Fieldset>
 );
 
+export const Description = () => (
+  <Fieldset
+    legend="Mollit eiusmod"
+    description="Esse cupidatat reprehenderit est culpa consectetur sit dolor esse."
+  >
+    <TextField label="Textfield label" hideLabel />
+    <TextField label="Textfield label" hideLabel />
+  </Fieldset>
+);
+
 export const ErrorPropagation = () => (
   <Fieldset
     legend="Mollit eiusmod"
