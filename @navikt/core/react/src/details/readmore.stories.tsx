@@ -18,18 +18,15 @@ export const Default = (props) => {
   const [state, setState] = useState(false);
 
   return (
-    <>
-      <ReadMore
-        open={props.controlled ? state : undefined}
-        onClick={() => setState((x) => !x)}
-        header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
-        {...props}
-      >
-        Command station, this is ST 321. Code Clearance Blue. We're starting our
-        approach. Deactivate the security shield.
-      </ReadMore>
-      <div>test</div>
-    </>
+    <ReadMore
+      open={props.controlled ? state : undefined}
+      onClick={() => setState((x) => !x)}
+      header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
+      {...props}
+    >
+      Command station, this is ST 321. Code Clearance Blue. We're starting our
+      approach. Deactivate the security shield.
+    </ReadMore>
   );
 };
 
