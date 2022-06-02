@@ -36,7 +36,7 @@ module.exports = {
       },
     },
   ],
-  staticDirs: ["./public"],
+  /* staticDirs: ["./public"], */
   features: {
     storyStoreV7: true,
   },
