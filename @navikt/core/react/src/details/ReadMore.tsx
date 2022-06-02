@@ -42,7 +42,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     {
       className,
       header,
-      renderContentWhenClosed = false,
+      renderContentWhenClosed = true,
       children,
       open,
       defaultOpen = false,
