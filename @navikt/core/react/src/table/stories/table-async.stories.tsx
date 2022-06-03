@@ -35,7 +35,6 @@ const updateData = async (url: string) => {
   const page = Number(newUrl.searchParams.get("page"));
   const sort = newUrl.searchParams.get("sort");
 
-  /* Hacky men funker i guess? */
   await new Promise((resolve) =>
     setTimeout(resolve, Math.round(Math.random() * (1000 - 200) + 200))
   );
