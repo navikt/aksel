@@ -23,7 +23,7 @@
 .navds-page-header__wrapper {
   width: 100%;
   max-width: 56.5rem;
-  text-align: start;
+  text-align: left;
 }
 
 .navds-page-header__title {
@@ -35,7 +35,7 @@
 }
 
 .navds-page-header--left > .navds-page-header__wrapper {
-  text-align: start;
+  text-align: left;
 }
 
 .navds-page-header--center > .navds-page-header__wrapper {
