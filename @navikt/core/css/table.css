@@ -72,6 +72,11 @@
   text-align: left;
 }
 
+.navds-table__header .navds-table__header-cell,
+.navds-table__header .navds-table__data-cell {
+  border-bottom-width: 2px;
+}
+
 .navds-table__header-cell--align-right,
 .navds-table__data-cell--align-right {
   text-align: right;
