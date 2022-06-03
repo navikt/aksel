@@ -40,7 +40,7 @@
     "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@svgr/cli": "^5.5.0",
+    "@svgr/cli": "6.2.1",
     "@types/lodash.startcase": "^4.4.6",
     "@types/rimraf": "3.0.2",
     "@types/uuid": "^8.3.1",
