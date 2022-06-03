@@ -1,7 +1,6 @@
 import React from "react";
 import { Heading } from "@navikt/ds-react";
 import { Dropdown } from "..";
-import { Divider } from "../..";
 
 export default {
   title: "ds-react-internal/dropdown",
@@ -23,7 +22,7 @@ export const All = () => (
           </Dropdown.Menu.GroupedList.Heading>
           <Dropdown.Menu.GroupedList.Item>Gosys</Dropdown.Menu.GroupedList.Item>
         </Dropdown.Menu.GroupedList>
-        <Divider />
+        <Dropdown.Menu.Divider />
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>

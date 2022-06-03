@@ -2,7 +2,7 @@ import React from "react";
 import { BodyLong, BodyShort, Detail, Heading } from "@navikt/ds-react";
 import { Header } from "..";
 import { Expand, System, ExternalLink } from "@navikt/ds-icons";
-import { Divider, Dropdown } from "../..";
+import { Dropdown } from "../..";
 
 export default {
   title: "ds-react-internal/header",
@@ -142,7 +142,7 @@ const Initials = () => (
             <div>Enhet: Skien</div>
           </Detail>
         </div>
-        <Divider />
+        <Dropdown.Menu.Divider />
         <Dropdown.Menu.List>
           <Dropdown.Menu.List.Item as="a" href="/#settings">
             Innstillinger
