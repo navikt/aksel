@@ -40,7 +40,7 @@ export const All = () => (
       </div>
     </LinkPanel>
     <style>{`
-      .navds-link-panel__content {
+      .linkpanel .navds-link-panel__content {
         display: grid;
         grid-auto-flow: column;
         gap: var(--navds-spacing-8);
