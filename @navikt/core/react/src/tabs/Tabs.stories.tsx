@@ -178,3 +178,28 @@ export const Icon = () => {
     </div>
   );
 };
+
+export const Overflow = () => {
+  return (
+    <Tabs defaultValue="test2" size="small" style={{ maxWidth: 300 }}>
+      <Tabs.List>
+        <Tabs.Tab
+          value="test1"
+          icon={<Cup />}
+          label="Skap med ekstra lang label"
+        />
+        <Tabs.Tab
+          value="test2"
+          label="Oppvaskmaskin med ekstra lang label"
+          icon={<Dishwasher />}
+        />
+        <Tabs.Tab
+          value="test3"
+          icon={<Freezer />}
+          label="Fryser med ekstra lang label"
+        />
+      </Tabs.List>
+      <Panel />
+    </Tabs>
+  );
+};
