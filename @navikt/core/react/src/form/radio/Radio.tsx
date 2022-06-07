@@ -15,10 +15,14 @@ export interface RadioProps
    * The value of the HTML element
    */
   value: any;
+  /**
+   * Adds a description to extend labling of a field
+   */
+  description?: string;
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
-  const { inputProps, size, hasError, inputDescriptionId } = useRadio(props);
+  const { inputProps, size, hasError } = useRadio(props);
 
   const Description = size === "medium" ? BodyShort : Detail;
 
@@ -35,28 +39,22 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         className="navds-radio__input"
         ref={ref}
       />
-      <BodyShort
-        as="label"
-        size={size}
-        htmlFor={inputProps.id}
-        className="navds-radio__label"
-      >
-        {props.children}
-      </BodyShort>
-      {props.description && (
-        <Description
-          as="div"
-          size="small"
-          className="navds-radio__description"
-          id={
-            typeof props.description === "string"
-              ? inputDescriptionId
-              : undefined
-          }
-        >
-          {props.description}
-        </Description>
-      )}
+      <label htmlFor={inputProps.id} className="navds-radio__label">
+        <div className="navds-radio__content">
+          <BodyShort as="div" size={size}>
+            {props.children}
+          </BodyShort>
+          {props.description && (
+            <Description
+              as="div"
+              size="small"
+              className="navds-radio__description"
+            >
+              {props.description}
+            </Description>
+          )}
+        </div>
+      </label>
     </div>
   );
 });
