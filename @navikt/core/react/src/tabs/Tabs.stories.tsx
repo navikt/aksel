@@ -60,8 +60,9 @@ export const Default = (props) => {
       defaultValue="test2"
       size={props?.size}
       selectionFollowsFocus={props?.selectionFollowsFocus}
+      loop={props?.loop}
     >
-      <Tabs.List loop={props?.loop}>
+      <Tabs.List>
         <Tabs.Tab
           value="test1"
           icon={<Cup />}
