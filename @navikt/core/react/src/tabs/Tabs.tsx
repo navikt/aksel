@@ -35,6 +35,11 @@ export interface TabsProps
    * @default false
    */
   loop?: boolean;
+  /**
+   * Icon position in Tab
+   * @default "left"
+   */
+  iconPosition?: "left" | "top";
 }
 
 interface TabsComponent
@@ -49,6 +54,7 @@ interface TabsComponent
 interface TabsContextProps {
   size: "medium" | "small";
   loop: boolean;
+  iconPosition: "left" | "top";
 }
 
 export const TabsContext = createContext<TabsContextProps | null>(null);
@@ -62,6 +68,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       size = "medium",
       selectionFollowsFocus = false,
       loop = false,
+      iconPosition = "left",
       ...rest
     },
     ref
@@ -78,6 +85,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
           value={{
             size,
             loop,
+            iconPosition,
           }}
         >
           {children}

@@ -18,11 +18,6 @@ export interface TabProps
    * Value for state-handling
    */
   value: string;
-  /**
-   * Icon position
-   * @default "left"
-   */
-  iconPosition?: "left" | "top";
 }
 
 export type TabType = OverridableComponent<TabProps, HTMLButtonElement>;
@@ -54,7 +49,7 @@ export const Tab: TabType = forwardRef(
           className={cl(
             "navds-tabs__tab",
             `navds-tabs__tab--${context?.size ?? "medium"}`,
-            `navds-tabs__tab-icon--${iconPosition}`,
+            `navds-tabs__tab-icon--${context?.iconPosition}`,
             className,
             {
               "navds-tabs__tab--icon-only": icon && !label,
