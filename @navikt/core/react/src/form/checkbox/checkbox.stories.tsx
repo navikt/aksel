@@ -75,6 +75,7 @@ Default.args = {
   controlled: false,
   legend: "Legend-tekst",
   checkboxDescription: false,
+  hideLabel: false,
   hideLegend: false,
   errorSingle: false,
   children: "",

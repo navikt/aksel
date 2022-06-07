@@ -90,7 +90,9 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <Description
             as="div"
             size="small"
-            className="navds-checkbox__description"
+            className={cl("navds-checkbox__description", {
+              "navds-sr-only": props.hideLabel,
+            })}
             id={
               typeof props.description === "string"
                 ? inputDescriptionId
