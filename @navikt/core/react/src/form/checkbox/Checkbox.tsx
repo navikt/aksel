@@ -29,13 +29,15 @@ export interface CheckboxProps
    * @default false
    */
   indeterminate?: boolean;
+  /**
+   * Adds a description to extend labling of Checkbox
+   */
+  description?: string;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { inputProps, hasError, size, inputDescriptionId } = useCheckbox(
-      props
-    );
+    const { inputProps, hasError, size } = useCheckbox(props);
 
     const Description = size === "medium" ? BodyShort : Detail;
 
@@ -76,32 +78,26 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             }
           }}
         />
-        <BodyShort
-          as="label"
-          size={size}
-          htmlFor={inputProps.id}
-          className="navds-checkbox__label"
-        >
-          <span className={cl({ "navds-sr-only": props.hideLabel })}>
-            {props.children}
-          </span>
-        </BodyShort>
-        {props.description && (
-          <Description
-            as="div"
-            size="small"
-            className={cl("navds-checkbox__description", {
+        <label htmlFor={inputProps.id} className="navds-checkbox__label">
+          <div
+            className={cl("navds-checkbox__content", {
               "navds-sr-only": props.hideLabel,
             })}
-            id={
-              typeof props.description === "string"
-                ? inputDescriptionId
-                : undefined
-            }
           >
-            {props.description}
-          </Description>
-        )}
+            <BodyShort as="div" size={size}>
+              {props.children}
+            </BodyShort>
+            {props.description && (
+              <Description
+                as="div"
+                size="small"
+                className="navds-checkbox__description"
+              >
+                {props.description}
+              </Description>
+            )}
+          </div>
+        </label>
       </div>
     );
   }
