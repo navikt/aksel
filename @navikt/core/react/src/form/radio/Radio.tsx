@@ -16,7 +16,7 @@ export interface RadioProps
    */
   value: any;
   /**
-   * Adds a description to extend labling of a field
+   * Adds a description to extend labling of Radio
    */
   description?: string;
 }

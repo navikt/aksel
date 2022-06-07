@@ -30,7 +30,7 @@ export interface CheckboxProps
    */
   indeterminate?: boolean;
   /**
-   * Adds a description to extend labling of a field
+   * Adds a description to extend labling of Checkbox
    */
   description?: string;
 }
