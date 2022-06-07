@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { rest } from "msw";
 import useSWR from "swr";
 import people from "./people.json";
 import { Table } from "../index";
@@ -21,6 +20,42 @@ const queryString = (obj) =>
     .map((key) => key + "=" + obj[key])
     .join("&");
 
+const updateData = async (url: string) => {
+  const newUrl = new URL(`https://www.example.com/${url}`);
+  const comparator = (a, b, orderBy) => {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  };
+
+  const page = Number(newUrl.searchParams.get("page"));
+  const sort = newUrl.searchParams.get("sort");
+
+  await new Promise((resolve) =>
+    setTimeout(resolve, Math.round(Math.random() * (1000 - 200) + 200))
+  );
+
+  return {
+    count: people.length,
+    results: people
+      .slice()
+      .sort((a, b) => {
+        if (sort) {
+          const [orderBy, direction] = sort.split(":");
+          return direction === "ascending"
+            ? comparator(b, a, orderBy)
+            : comparator(a, b, orderBy);
+        }
+        return 1;
+      })
+      .slice((page - 1) * rowsPerPage, page * rowsPerPage),
+  };
+};
+
 export const Async = () => {
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState<SortState>();
@@ -30,7 +65,7 @@ export const Async = () => {
       page,
       sort: sort ? `${sort.orderBy}:${sort.direction}` : undefined,
     })}`,
-    (url) => fetch(url).then((res) => res.json())
+    (url) => updateData(url)
   );
 
   if (!data) {
@@ -127,43 +162,4 @@ export const Async = () => {
       />
     </div>
   );
-};
-
-Async.parameters = {
-  msw: {
-    handlers: [
-      rest.get("/people", (req, res, ctx) => {
-        const comparator = (a, b, orderBy) => {
-          if (b[orderBy] < a[orderBy]) {
-            return -1;
-          }
-          if (b[orderBy] > a[orderBy]) {
-            return 1;
-          }
-          return 0;
-        };
-
-        const page = Number(req.url.searchParams.get("page"));
-        const sort = req.url.searchParams.get("sort");
-        return res(
-          //ctx.delay(),
-          ctx.json({
-            count: people.length,
-            results: people
-              .slice()
-              .sort((a, b) => {
-                if (sort) {
-                  const [orderBy, direction] = sort.split(":");
-                  return direction === "ascending"
-                    ? comparator(b, a, orderBy)
-                    : comparator(a, b, orderBy);
-                }
-                return 1;
-              })
-              .slice((page - 1) * rowsPerPage, page * rowsPerPage),
-          })
-        );
-      }),
-    ],
-  },
 };
