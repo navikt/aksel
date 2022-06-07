@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Textarea } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
+import React from "react";
+import { Textarea } from "../index";
 export default {
   title: "ds-react/form/Textarea",
   component: Textarea,
