@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.8.12",
+  "version": "0.8.13",
   "private": false,
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {

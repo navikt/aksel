@@ -68,7 +68,7 @@
 .navds-stepper__step-label {
   margin-top: 2px;
   color: var(--navds-semantic-color-interaction-primary);
-  text-align: start;
+  text-align: left;
 }
 
 .navds-stepper__step:hover > .navds-stepper__step-label {
