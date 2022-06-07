@@ -65,12 +65,12 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           type="button"
           {...rest}
           className={cl(
-            "navds-readmore",
+            "navds-read-more",
             "navds-body-short",
-            `navds-readmore--${size}`,
+            `navds-read-more--${size}`,
             className,
             {
-              "navds-readmore--open": isOpened,
+              "navds-read-more--open": isOpened,
               "navds-body-short--small": size === "small",
             }
           )}
@@ -83,17 +83,17 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           aria-expanded={isOpened}
           ref={ref}
         >
-          <Expand className={"navds-readmore__expand-icon"} aria-hidden />
+          <Expand className={"navds-read-more__expand-icon"} aria-hidden />
           <ExpandFilled
             className={
-              "navds-readmore__expand-icon navds-readmore__expand-icon--filled"
+              "navds-read-more__expand-icon navds-read-more__expand-icon--filled"
             }
             aria-hidden
           />
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
-          <div className="navds-readmore__content">
+          <div className="navds-read-more__content">
             <BodyLong size={size}>{children}</BodyLong>
           </div>
         </CollapseComponent>
