@@ -74,6 +74,10 @@
   gap: var(--navds-spacing-1);
 }
 
+.navds-tabs__tab-inner svg {
+  flex-shrink: 0;
+}
+
 .navds-tabs__tab-icon--top > .navds-tabs__tab-inner {
   flex-direction: column;
   gap: 0;
