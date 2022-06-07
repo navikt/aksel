@@ -1,7 +1,7 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { Label, OverridableComponent } from "..";
+import { BodyShort, OverridableComponent } from "..";
 import { TabsContext } from "./Tabs";
 
 export interface TabProps
@@ -62,14 +62,14 @@ export const Tab: TabType = forwardRef(
           )}
           {...rest}
         >
-          <Label
+          <BodyShort
             as="span"
             className="navds-tabs__tab-inner"
             size={context?.size}
           >
             {icon}
             {label}
-          </Label>
+          </BodyShort>
         </Component>
       </RadixTabs.Trigger>
     );
