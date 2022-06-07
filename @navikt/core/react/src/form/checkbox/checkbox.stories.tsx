@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Checkbox, CheckboxGroup } from "../../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { ReadMore } from "../../";
 
 export default {
   title: "ds-react/Form/Checkbox",
@@ -29,13 +28,6 @@ export const Default = (props) => {
           value="checkbox1"
           indeterminate={props.indeterminate}
           hideLabel={props.hideLabel}
-          description={
-            props.checkboxDescription ? (
-              <ReadMore header="Non sunt qui nostrud esse elit fugiat.">
-                Min tekst
-              </ReadMore>
-            ) : undefined
-          }
         >
           {props.children || "Apple"}
         </Checkbox>

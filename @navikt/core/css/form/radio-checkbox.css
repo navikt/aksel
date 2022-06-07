@@ -69,7 +69,7 @@
 .navds-radio__description {
   color: var(--navds-radio-checkbox-color-text);
   margin-left: var(--navds-spacing-8);
-  margin-bottom: var(--navds-spacing-2);
+  margin-bottom: var(--navds-spacing-3);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
