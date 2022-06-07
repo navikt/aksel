@@ -1,36 +1,33 @@
 .navds-read-more {
   cursor: pointer;
   margin: 0;
-  padding: 0;
-  text-decoration: underline;
   border: none;
   background: none;
   display: flex;
   align-items: center;
   gap: var(--navds-spacing-2);
   color: var(--navds-semantic-color-link);
-  text-align: left;
+  border-radius: var(--navds-border-radius-small);
+  padding: var(--navds-spacing-1) var(--navds-spacing-1) var(--navds-spacing-1)
+    2px;
+  text-align: start;
+}
+
+.navds-read-more--small {
+  padding: 2px var(--navds-spacing-1) 2px 2px;
 }
 
 .navds-read-more:hover {
-  text-decoration: none;
+  background-color: rgba(38, 38, 38, 0.06);
+}
+
+.navds-read-more:active {
+  background-color: rgba(38, 38, 38, 0.1);
 }
 
 .navds-read-more:focus {
   outline: none;
-  color: var(--navds-link-color-text-focus);
-  text-decoration: none;
-  background-color: var(--navds-link-color-background-focus);
-  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
-}
-
-.navds-read-more__expand-icon {
-  flex-shrink: 0;
-  font-size: 1.25rem;
-}
-
-.navds-read-more--open > .navds-read-more__expand-icon {
-  transform: rotate(180deg);
+  box-shadow: var(--navds-shadow-focus);
 }
 
 .navds-read-more + .ReactCollapse--collapse {
@@ -38,17 +35,44 @@
   padding-top: var(--navds-spacing-2);
 }
 
+.navds-read-more:not(.navds-read-more--open) + .ReactCollapse--collapse {
+  padding: 0;
+}
+
 .navds-read-more__content {
   display: flex;
   align-items: stretch;
-  gap: var(--navds-spacing-2);
+  gap: 10px;
+  padding: 0 var(--navds-spacing-1);
 }
 
 .navds-read-more__content::before {
   content: "";
   display: block;
   width: 2px;
-  background-color: var(--navds-semantic-color-border-muted);
-  margin: 0 9px;
+  background-color: rgba(38, 38, 38, 0.36);
+  margin: 0 7px;
   flex-shrink: 0;
+}
+
+.navds-read-more__expand-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.navds-read-more--open > .navds-read-more__expand-icon {
+  transform: rotate(-180deg);
+}
+
+.navds-read-more__expand-icon--filled {
+  display: none;
+}
+
+.navds-read-more:hover
+  > .navds-read-more__expand-icon.navds-read-more__expand-icon--filled {
+  display: inherit;
+}
+
+.navds-read-more:hover > .navds-read-more__expand-icon {
+  display: none;
 }
