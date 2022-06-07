@@ -2,9 +2,12 @@ name: Chromatic
 
 on:
   push:
-    branches: [master]
+    branches:
+      - big-one-oh
   pull_request:
-    branches: [master]
+    branches:
+      - master
+      - big-one-oh
 
 jobs:
   chromatic-pr:
