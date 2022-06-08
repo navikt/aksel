@@ -1,6 +1,6 @@
 {
   "npmClient": "yarn",
-  "version": "independent",
+  "version": "0",
   "command": {
     "publish": {
       "registry": "https://registry.npmjs.org/",
