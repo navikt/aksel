@@ -167,7 +167,6 @@
 /* Small text */
 .navds-detail {
   font-size: var(--navds-font-size-small);
-  font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-medium);
   margin: 0;
