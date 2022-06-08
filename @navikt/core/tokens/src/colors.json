@@ -343,7 +343,7 @@
           }
         },
         "divider": {
-          "value": "{navds.global.color.gray.200.value}"
+          "value": "{navds.global.color.gray.300.value}"
         },
         "feedback": {
           "danger": {
