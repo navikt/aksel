@@ -3,7 +3,7 @@
   --navdsi-header-color-background: var(
     --navds-semantic-color-component-background-inverted
   );
-  --navdsi-header-color-border: var(--navds-semantic-color-border-muted);
+  --navdsi-header-color-border: var(--navds-semantic-color-border);
   --navdsi-header-focus: inset 0 0 0 2px var(--navds-global-color-blue-100);
   --navdsi-header-color-hover: var(--navds-global-color-gray-800);
   --navdsi-header-color-active: var(--navds-global-color-gray-600);
@@ -21,6 +21,7 @@
   overflow: visible;
   background: transparent;
   font: inherit;
+  font-weight: var(--navds-font-weight-bold);
   line-height: normal;
   text-align: left;
   padding: 0 var(--navds-spacing-5) 0 var(--navds-spacing-6);

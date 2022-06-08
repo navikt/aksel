@@ -21,12 +21,7 @@ export const HeaderTitle: HeaderTitleType = forwardRef(
       {...rest}
       ref={ref}
       size="xsmall"
-      className={cl(
-        "navdsi-header__title",
-        "navds-heading",
-        `navds-heading--xsmall`,
-        className
-      )}
+      className={cl("navdsi-header__title", "navds-body-short", className)}
     >
       <span>{children}</span>
     </Component>
