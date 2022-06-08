@@ -396,7 +396,7 @@
         },
         "focus": {
           "inverted": {
-            "value": "{navds.global.color.blue.300.value}"
+            "value": "{navds.global.color.blue.100.value}"
           },
           "@": {
             "value": "{navds.global.color.blue.800.value}"
