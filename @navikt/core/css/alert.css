@@ -31,7 +31,7 @@
   border-radius: var(--navds-border-radius-medium);
   border: 1px solid;
   border-color: var(--navds-alert-color-border);
-  padding: calc(var(--navds-spacing-4) + 1px) calc(var(--navds-spacing-4) + 1px);
+  padding: var(--navds-spacing-4);
   display: flex;
   gap: var(--navds-spacing-3);
   align-items: center;
@@ -42,11 +42,17 @@
 }
 
 .navds-alert--small {
-  padding: calc(var(--navds-spacing-1) - 1px) var(--navds-spacing-4);
+  padding: var(--navds-spacing-2);
+  gap: var(--navds-spacing-2);
 }
 
 .navds-alert--full-width {
   border-radius: 0;
+}
+
+.navds-alert--full-width.navds-alert--small {
+  padding-right: var(--navds-spacing-4);
+  padding-left: var(--navds-spacing-4);
 }
 
 .navds-alert > .navds-alert__icon {
