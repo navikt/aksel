@@ -1,8 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label, omit } from "..";
-import ErrorMessage from "./ErrorMessage";
+import { BodyShort, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
 

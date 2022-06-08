@@ -1,3 +1,9 @@
+:root {
+  --navds-error-message-color-text: var(
+    --navds-semantic-color-feedback-danger-text
+  );
+}
+
 /* Heading */
 .navds-heading {
   font-weight: var(--navds-font-weight-bold);
@@ -177,4 +183,8 @@
 
 .navds-detail--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-2);
+}
+
+.navds-error-message {
+  color: var(--navds-error-message-color-text);
 }

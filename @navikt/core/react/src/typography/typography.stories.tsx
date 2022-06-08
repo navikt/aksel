@@ -1,5 +1,13 @@
 import React from "react";
-import { Heading, BodyShort, BodyLong, Detail, Ingress, Label } from "../index";
+import {
+  Heading,
+  BodyShort,
+  BodyLong,
+  Detail,
+  Ingress,
+  Label,
+  ErrorMessage,
+} from "..";
 
 export default {
   title: "ds-react/typography",
@@ -59,6 +67,13 @@ const DetailTemplate = ({ spacing, size }) => (
 
 export const DetailStory = DetailTemplate.bind({});
 DetailStory.args = { spacing: false, size: "medium" };
+
+const ErrorMessageTemplate = ({ size }) => (
+  <ErrorMessage size={size}>{lorem()}</ErrorMessage>
+);
+
+export const ErrorMessageStory = ErrorMessageTemplate.bind({});
+ErrorMessageStory.args = { size: "medium" };
 
 export const SideInnholdEksempel = () => {
   return (

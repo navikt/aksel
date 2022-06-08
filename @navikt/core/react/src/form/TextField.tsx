@@ -1,7 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "classnames";
-import { BodyShort, Detail, Label, omit } from "..";
-import ErrorMessage from "./ErrorMessage";
+import { BodyShort, Detail, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
