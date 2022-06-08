@@ -59,14 +59,14 @@ const LabelTemplate = ({ spacing, size }) => (
 export const LabelStory = LabelTemplate.bind({});
 LabelStory.args = { spacing: false, size: "medium" };
 
-const DetailTemplate = ({ spacing, size }) => (
-  <Detail size={size} spacing={spacing}>
+const DetailTemplate = ({ spacing, size, uppercase }) => (
+  <Detail size={size} spacing={spacing} uppercase={uppercase}>
     {lorem()}
   </Detail>
 );
 
 export const DetailStory = DetailTemplate.bind({});
-DetailStory.args = { spacing: false, size: "medium" };
+DetailStory.args = { spacing: false, uppercase: false, size: "medium" };
 
 const ErrorMessageTemplate = ({ size }) => (
   <ErrorMessage size={size}>{lorem()}</ErrorMessage>

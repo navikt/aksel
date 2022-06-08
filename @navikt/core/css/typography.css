@@ -177,6 +177,10 @@
   margin-bottom: var(--navds-spacing-2);
 }
 
+.navds-detail.navds-typo--uppercase {
+  text-transform: uppercase;
+}
+
 .navds-detail--small {
   font-weight: var(--navds-font-weight-regular);
 }
