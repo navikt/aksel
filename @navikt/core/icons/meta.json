@@ -738,6 +738,12 @@
     "pageName": "Status"
   },
   {
+    "name": "ErrorColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.316Z",
+    "pageName": "Status"
+  },
+  {
     "name": "ErrorFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.499Z",
@@ -1323,6 +1329,12 @@
     "name": "Information",
     "description": "",
     "created_at": "2020-07-01T10:37:43.005Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "InformationColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.292Z",
     "pageName": "Status"
   },
   {
@@ -2274,6 +2286,12 @@
     "pageName": "Status"
   },
   {
+    "name": "SuccessColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.285Z",
+    "pageName": "Status"
+  },
+  {
     "name": "SuccessFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.495Z",
@@ -2541,6 +2559,12 @@
     "name": "Warning",
     "description": "",
     "created_at": "2020-07-01T10:37:42.737Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "WarningColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.299Z",
     "pageName": "Status"
   },
   {
