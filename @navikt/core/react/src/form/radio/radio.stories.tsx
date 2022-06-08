@@ -1,6 +1,6 @@
+import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
 import { Radio, RadioGroup } from "../../index";
-import { Meta } from "@storybook/react/types-6-0";
 
 export default {
   title: "ds-react/Form/Radio",

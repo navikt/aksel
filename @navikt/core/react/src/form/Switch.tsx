@@ -50,6 +50,10 @@ export interface SwitchProps
    * @default "left"
    */
   position?: "left" | "right";
+  /**
+   * Adds a description to extend labling of Switch
+   */
+  description?: string;
 }
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
