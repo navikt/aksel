@@ -52,11 +52,13 @@ export const Default = (props) => {
       </Accordion.Item>
     );
   return (
-    <Accordion>
-      {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
-        <Item key={y} />
-      ))}
-    </Accordion>
+    <div style={{ width: 500 }}>
+      <Accordion>
+        {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
+          <Item key={y} />
+        ))}
+      </Accordion>
+    </div>
   );
 };
 
@@ -71,32 +73,36 @@ export const Controlled = () => {
   const [open2, setOpen2] = useState(false);
 
   return (
-    <Accordion>
-      <Accordion.Item open={open}>
-        <Accordion.Header onClick={() => setOpen(!open)}>
-          Accordion header text
-        </Accordion.Header>
-        <Content />
-      </Accordion.Item>
-      <Accordion.Item open={open2}>
-        <Accordion.Header onClick={() => setOpen2(!open2)}>
-          Accordion header text
-        </Accordion.Header>
-        <Content />
-      </Accordion.Item>
-    </Accordion>
+    <div style={{ width: 500 }}>
+      <Accordion>
+        <Accordion.Item open={open}>
+          <Accordion.Header onClick={() => setOpen(!open)}>
+            Accordion header text
+          </Accordion.Header>
+          <Content />
+        </Accordion.Item>
+        <Accordion.Item open={open2}>
+          <Accordion.Header onClick={() => setOpen2(!open2)}>
+            Accordion header text
+          </Accordion.Header>
+          <Content />
+        </Accordion.Item>
+      </Accordion>
+    </div>
   );
 };
 
 export const Uncontrolled = () => (
-  <Accordion>
-    <Accordion.Item>
-      <Accordion.Header>Accordion header text</Accordion.Header>
-      <Content />
-    </Accordion.Item>
-    <Accordion.Item>
-      <Accordion.Header>Accordion header text</Accordion.Header>
-      <Content />
-    </Accordion.Item>
-  </Accordion>
+  <div style={{ width: 500 }}>
+    <Accordion>
+      <Accordion.Item>
+        <Accordion.Header>Accordion header text</Accordion.Header>
+        <Content />
+      </Accordion.Item>
+      <Accordion.Item>
+        <Accordion.Header>Accordion header text</Accordion.Header>
+        <Content />
+      </Accordion.Item>
+    </Accordion>
+  </div>
 );
