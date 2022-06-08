@@ -10,7 +10,7 @@
   --navds-loader-color-inverted-foreground: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-loader-color-inverted-background: rgba(255, 255, 255, 0.3);
+  --navds-loader-color-inverted-background: rgb(255 255 255 / 0.3);
   --navds-loader-color-transparent-background: transparent;
 }
 
