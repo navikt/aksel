@@ -24,7 +24,6 @@
   --navds-alert-color-success-icon: var(
     --navds-semantic-color-feedback-success-icon
   );
-  --navds-alert-color-icon-background: var(--navds-global-color-white);
 }
 
 .navds-alert {
@@ -74,12 +73,6 @@
 
 .navds-alert--error > .navds-alert__icon {
   color: var(--navds-alert-color-error-icon);
-  background: radial-gradient(
-    circle,
-    var(--navds-alert-color-icon-background) 50%,
-    0,
-    transparent
-  );
 }
 
 .navds-alert--warning {
@@ -89,11 +82,6 @@
 
 .navds-alert--warning > .navds-alert__icon {
   color: var(--navds-alert-color-warning-icon);
-  background: linear-gradient(
-      var(--navds-alert-color-icon-background),
-      var(--navds-alert-color-icon-background)
-    )
-    center / 16% 60% no-repeat;
 }
 
 .navds-alert--info {
@@ -103,12 +91,6 @@
 
 .navds-alert--info > .navds-alert__icon {
   color: var(--navds-alert-color-info-icon);
-  background: radial-gradient(
-    circle,
-    var(--navds-alert-color-icon-background) 50%,
-    0,
-    transparent
-  );
 }
 
 .navds-alert--success {
@@ -118,12 +100,6 @@
 
 .navds-alert--success > .navds-alert__icon {
   color: var(--navds-alert-color-success-icon);
-  background: radial-gradient(
-    circle,
-    var(--navds-alert-color-icon-background) 50%,
-    0,
-    transparent
-  );
 }
 
 .navds-alert--inline {
