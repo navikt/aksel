@@ -72,6 +72,10 @@
   padding: 0.75rem 0 0.75rem 3.25rem;
 }
 
+.navds-switch__description {
+  color: var(--navds-semantic-color-text-muted);
+}
+
 .navds-switch--right > .navds-switch__label-wrapper > .navds-switch__content {
   padding: 0.75rem 3.25rem 0.75rem 0;
 }

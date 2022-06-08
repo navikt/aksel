@@ -15,6 +15,10 @@ export interface RadioProps
    * The value of the HTML element
    */
   value: any;
+  /**
+   * Adds a description to extend labling of Radio
+   */
+  description?: string;
 }
 
 export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {

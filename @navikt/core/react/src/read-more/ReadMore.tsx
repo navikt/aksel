@@ -3,15 +3,16 @@ import cl from "classnames";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
+import { ExpandFilled } from "@navikt/ds-icons";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Content inside read more
+   * Content inside ReadMore
    */
   children: React.ReactNode;
   /**
-   * Read more header content
+   * ReadMore header content
    */
   header: React.ReactNode;
   /**
@@ -29,6 +30,11 @@ export interface ReadMoreProps
    * @default false
    */
   renderContentWhenClosed?: boolean;
+  /**
+   * Changes fontsize for content
+   * @default false
+   */
+  size?: "medium" | "small";
 }
 
 export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
@@ -41,6 +47,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       open,
       defaultOpen = false,
       onClick,
+      size = "medium",
       ...rest
     },
     ref
@@ -53,17 +60,18 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     const isOpened = open ?? internalOpen;
 
     return (
-      <>
+      <div>
         <button
           type="button"
           {...rest}
           className={cl(
             "navds-read-more",
             "navds-body-short",
-            "navds-body-short--small",
+            `navds-read-more--${size}`,
             className,
             {
               "navds-read-more--open": isOpened,
+              "navds-body-short--small": size === "small",
             }
           )}
           onClick={(e) => {
@@ -75,15 +83,21 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           aria-expanded={isOpened}
           ref={ref}
         >
-          <Expand className="navds-read-more__expand-icon" aria-hidden />
+          <Expand className={"navds-read-more__expand-icon"} aria-hidden />
+          <ExpandFilled
+            className={
+              "navds-read-more__expand-icon navds-read-more__expand-icon--filled"
+            }
+            aria-hidden
+          />
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
           <div className="navds-read-more__content">
-            <BodyLong size="small">{children}</BodyLong>
+            <BodyLong size={size}>{children}</BodyLong>
           </div>
         </CollapseComponent>
-      </>
+      </div>
     );
   }
 );

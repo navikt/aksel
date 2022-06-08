@@ -29,6 +29,10 @@ export interface CheckboxProps
    * @default false
    */
   indeterminate?: boolean;
+  /**
+   * Adds a description to extend labling of Checkbox
+   */
+  description?: string;
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(

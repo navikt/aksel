@@ -1,104 +1,117 @@
-import React, { useState } from "react";
-import { Switch } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
-import { Fieldset } from "../..";
+import React from "react";
+import { Switch } from "../index";
+
 export default {
-  title: "ds-react/form/switch",
+  title: "ds-react/form/Switch",
   component: Switch,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    position: {
+      control: {
+        type: "radio",
+        options: ["right", "left"],
+      },
+    },
+    description: {
+      type: "string",
+    },
+    hideLabel: {
+      type: "boolean",
+    },
+    disabled: {
+      type: "boolean",
+    },
+    loading: {
+      type: "boolean",
+    },
+  },
 } as Meta;
 
-export const All = () => {
-  const [checked, setChecked] = useState(false);
-  const [loadingState, setLoadingState] = useState(false);
+export const Default = (props) => {
+  return <Switch {...props}>Label text</Switch>;
+};
+
+Default.args = {
+  checked: false,
+  position: "right",
+};
+
+export const Small = () => {
   return (
-    <div style={{ width: "fit-content" }}>
-      <h1>Switch</h1>
-      <Switch>Label text</Switch>
-      <Switch position="right">Label text</Switch>
-
-      <h2>Switch w/Description</h2>
-      <Switch>Label text</Switch>
-      <Switch description="Switch description">Label text</Switch>
-      <Switch>Label text</Switch>
-
-      <Switch position="right">Label text</Switch>
-      <Switch position="right" description="Switch description">
-        Label text
-      </Switch>
-      <Switch position="right">Label text</Switch>
-
-      <h2>hidelabel</h2>
-      <Switch description="Switch description" hideLabel>
-        Label text
-      </Switch>
-      <Switch description="Switch description" hideLabel>
-        Label text
-      </Switch>
-      <Switch hideLabel size="small">
-        Label text small
-      </Switch>
-      <Switch position="right" description="Switch description" hideLabel>
-        Label text
-      </Switch>
-      <Switch position="right" description="Switch description" hideLabel>
-        Label text
-      </Switch>
-      <Switch position="right" hideLabel size="small">
-        Label text small
-      </Switch>
-
-      <h2>Switch small</h2>
+    <div className="colgap">
       <Switch size="small">Label text</Switch>
-      <Switch description="Switch description" size="small">
+      <Switch size="small" position="right">
         Label text
       </Switch>
-      <Switch size="small">Label text</Switch>
+    </div>
+  );
+};
 
-      <Switch position="right" size="small">
+export const Description = () => {
+  return (
+    <div className="colgap">
+      <Switch size="small" description="Cillum sint exercitation ut cillum.">
         Label text
       </Switch>
-      <Switch position="right" description="Switch description" size="small">
+      <Switch
+        size="small"
+        position="right"
+        description="Cillum sint exercitation ut cillum."
+      >
         Label text
       </Switch>
-      <Switch position="right" size="small">
-        Label text
-      </Switch>
+    </div>
+  );
+};
 
-      <h2>Controlled</h2>
-      <Switch checked={checked} onChange={() => setChecked(!checked)}>
-        Label text
-      </Switch>
+export const Loading = () => {
+  return (
+    <div className="colgap">
+      <div className="colgap">
+        <Switch loading>Label text</Switch>
 
-      <h2>Defaultchecked</h2>
-      <Switch defaultChecked>Label text</Switch>
+        <Switch checked loading>
+          Label text
+        </Switch>
+      </div>
+      <div className="colgap">
+        <Switch loading size="small">
+          Label text
+        </Switch>
+        <Switch checked loading size="small">
+          Label text
+        </Switch>
+      </div>
+    </div>
+  );
+};
 
-      <h2>Disabled</h2>
+export const Disabled = () => {
+  return (
+    <div className="colgap">
       <Switch disabled>Label text</Switch>
-      <Switch disabled defaultChecked>
-        Label text
-      </Switch>
 
-      <h2>With fieldset error</h2>
-      <Fieldset legend="Fieldset legend" error="Errormsg">
-        <Switch defaultChecked>Label text</Switch>
-        <Switch>Label text</Switch>
-      </Fieldset>
+      <Switch checked disabled>
+        Label text
+      </Switch>
+    </div>
+  );
+};
 
-      <h2>loading prop</h2>
-      <Switch loading>Label text</Switch>
-      <Switch size="small" loading>
+export const HideLabel = () => {
+  return (
+    <div className="colgap">
+      <Switch hideLabel>Label text</Switch>
+
+      <Switch checked hideLabel>
         Label text
       </Switch>
-      <Switch disabled loading>
-        Label text
-      </Switch>
-      <Switch checked loading>
-        Label text
-      </Switch>
-      <button onClick={() => setLoadingState(!loadingState)}>
-        Toggle loading
-      </button>
-      <Switch loading={loadingState}>Label text</Switch>
     </div>
   );
 };
