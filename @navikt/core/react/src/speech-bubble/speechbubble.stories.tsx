@@ -48,7 +48,7 @@ Default.args = {
   avatar: "ON",
 };
 
-export const Farger = (props) => {
+export const Farger = () => {
   return (
     <SpeechBubble
       avatar={"ON"}
@@ -71,7 +71,7 @@ export const Farger = (props) => {
   );
 };
 
-export const Avatar = (props) => {
+export const Avatar = () => {
   return (
     <SpeechBubble
       avatar={<Illustration />}
