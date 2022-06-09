@@ -17,25 +17,35 @@ export interface DetailProps
    * Adds margin-bottom
    */
   spacing?: boolean;
+  /**
+   * All caps
+   */
+  uppercase?: boolean;
 }
 
-export const Detail: OverridableComponent<
-  DetailProps,
-  HTMLParagraphElement
-> = forwardRef(
-  (
-    { className, size = "medium", spacing, as: Component = "p", ...rest },
-    ref
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(className, "navds-detail", {
-        "navds-detail--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
-    />
-  )
-);
+export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
+  forwardRef(
+    (
+      {
+        className,
+        size = "medium",
+        spacing,
+        uppercase,
+        as: Component = "p",
+        ...rest
+      },
+      ref
+    ) => (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(className, "navds-detail", {
+          "navds-detail--small": size === "small",
+          "navds-typo--spacing": !!spacing,
+          "navds-typo--uppercase": !!uppercase,
+        })}
+      />
+    )
+  );
 
 export default Detail;
