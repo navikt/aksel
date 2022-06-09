@@ -1,13 +1,10 @@
 :root {
   --navds-speech-bubble-color-background: var(
-    --navds-semantic-color-component-background-alternate
+    --navds-semantic-color-canvas-background
   );
   --navds-speech-bubble-color-illustration: var(--navds-semantic-color-text);
   --navds-speech-bubble-color-illustration-background: var(
     --navds-semantic-color-canvas-background
-  );
-  --navds-speech-bubble-color-detail-text: var(
-    --navds-semantic-color-text-muted
   );
 }
 
@@ -77,9 +74,15 @@
 }
 
 .navds-speech-bubble__top-text {
-  color: var(--navds-speech-bubble-color-detail-text);
+  color: var(--navds-semantic-color-text-muted);
+  display: flex;
+  gap: var(--navds-spacing-2);
 }
 
 .navds-speech-bubble--right .navds-speech-bubble__top-text {
   align-self: flex-end;
+}
+
+.navds-speech-bubble__sender {
+  font-weight: var(--navds-font-weight-bold);
 }

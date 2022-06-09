@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import Chat, { ChatType } from "./Bubble";
+import Chat, { ChatType } from "./Chat";
+import { BodyLong, BodyShort } from "..";
 
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -8,9 +9,13 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Top text for personalia and date
+   * Chat-message sender
    */
-  topText?: React.ReactNode;
+  sender: string;
+  /**
+   * Timestamp for sent message
+   */
+  timestamp?: string;
   /**
    * Illustration for messenger. Regular text for initials works to
    */
@@ -42,7 +47,8 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     {
       children,
       className,
-      topText,
+      sender,
+      timestamp,
       illustration,
       position = "left",
       illustrationBgColor,
@@ -57,28 +63,29 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
         className={cl(
           "navds-speech-bubble",
           className,
-          `navds-speech-bubble--${position}`,
-          "navds-body-long"
+          `navds-speech-bubble--${position}`
         )}
         {...rest}
       >
-        <div
+        <BodyShort
+          as="div"
           className="navds-speech-bubble__illustration"
           style={{ backgroundColor: illustrationBgColor }}
         >
           {illustration}
-        </div>
+        </BodyShort>
         <ol className="navds-speech-bubble__chat-wrapper">
           {React.Children.map(children, (child, i) => {
             if (React.isValidElement(child)) {
               return (
-                <li>
+                <BodyLong as="li">
                   {React.cloneElement(child, {
-                    topText: topText && i === 0 ? topText : undefined,
+                    sender: sender && i === 0 ? sender : undefined,
+                    timestamp: timestamp && i === 0 ? timestamp : undefined,
                     backgroundColor,
                     ...child.props,
                   })}
-                </li>
+                </BodyLong>
               );
             }
           })}

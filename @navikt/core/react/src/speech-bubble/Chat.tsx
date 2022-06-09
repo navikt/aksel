@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
+import { Detail } from "../typography";
 
 export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -7,9 +8,13 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * User defined toptext, normally "name + date"
+   * Chat-message sender
    */
-  topText?: React.ReactNode;
+  sender?: string;
+  /**
+   * Timestamp for sent message
+   */
+  timestamp?: string;
   /**
    * Background color chat
    */
@@ -21,24 +26,28 @@ export type ChatType = React.ForwardRefExoticComponent<
 >;
 
 const Chat: ChatType = forwardRef(
-  ({ children, className, topText, backgroundColor, ...rest }, ref) => {
+  (
+    { children, className, sender, timestamp, backgroundColor, ...rest },
+    ref
+  ) => {
     return (
       <div
         ref={ref}
-        className={cl(
-          "navds-speech-bubble__chat",
-          className,
-          "navds-body-long"
-        )}
+        className={cl("navds-speech-bubble__chat", className)}
         style={{ backgroundColor: backgroundColor }}
         tabIndex={0}
         {...rest}
       >
-        {topText && (
-          <span className="navds-speech-bubble__top-text navds-detail">
-            {topText}
-          </span>
-        )}
+        <div className="navds-speech-bubble__top-text">
+          {sender && (
+            <Detail className="navds-speech-bubble__sender">{sender}</Detail>
+          )}
+          {timestamp && (
+            <Detail className="navds-speech-bubble__timestamp">
+              {timestamp}
+            </Detail>
+          )}
+        </div>
         {children}
       </div>
     );
