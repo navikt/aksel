@@ -74,6 +74,16 @@ export const XSmall = () => (
   </div>
 );
 
+export const Link = () => (
+  <div className="rowgap">
+    {variants.map((variant) => (
+      <Button key={variant} variant={variant} as="a" href="#thecakeisalie">
+        {varSwitch[variant]}
+      </Button>
+    ))}
+  </div>
+);
+
 export const Loading = () => (
   <div className="colgap">
     <div className="rowgap">
@@ -105,21 +115,24 @@ export const Icon = () => (
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant}>
-          <Star />
+          <Star aria-hidden />
+          <span className="navds-sr-only">Stjerne</span>
         </Button>
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant} size="small">
-          <Star />
+          <Star aria-hidden />
+          <span className="navds-sr-only">Stjerne</span>
         </Button>
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant} size="xsmall">
-          <Star />
+          <Star aria-hidden />
+          <span className="navds-sr-only">Stjerne</span>
         </Button>
       ))}
     </div>
@@ -131,39 +144,29 @@ export const IconWText = () => (
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant}>
-          <Star />
+          <Star aria-hidden />
           {varSwitch[variant]}
-          <Star />
+          <Star aria-hidden />
         </Button>
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant} size="small">
-          <Star />
+          <Star aria-hidden />
           {varSwitch[variant]}
-          <Star />
+          <Star aria-hidden />
         </Button>
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
         <Button key={variant} variant={variant} size="xsmall">
-          <Star />
+          <Star aria-hidden />
           {varSwitch[variant]}
-          <Star />
+          <Star aria-hidden />
         </Button>
       ))}
     </div>
-  </div>
-);
-
-export const Link = () => (
-  <div className="rowgap">
-    {variants.map((variant) => (
-      <Button key={variant} variant={variant} as="a" href="#thecakeisalie">
-        {varSwitch[variant]}
-      </Button>
-    ))}
   </div>
 );
