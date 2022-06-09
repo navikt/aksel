@@ -39,7 +39,7 @@ import {
   Tooltip,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
-import { Divider, Dropdown } from "@navikt/ds-react-internal";
+import { Dropdown } from "@navikt/ds-react-internal";
 
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
@@ -58,17 +58,21 @@ const Home: NextPage = () => {
           <Accordion.Content>Accordion content 2</Accordion.Content>
         </Accordion.Item>
       </Accordion>
-      {(["error", "warning", "info", "success"] as Array<
-        "error" | "warning" | "info" | "success"
-      >).map((variant) => (
+      {(
+        ["error", "warning", "info", "success"] as Array<
+          "error" | "warning" | "info" | "success"
+        >
+      ).map((variant) => (
         <Alert key={variant} variant={variant}>
           Id elit esse enim reprehenderit enim nisi veniam nostrud.
         </Alert>
       ))}
       <div className="flex gap-2">
-        {(["primary", "secondary", "tertiary", "danger"] as Array<
-          "primary" | "secondary" | "tertiary" | "danger"
-        >).map((variant) => (
+        {(
+          ["primary", "secondary", "tertiary", "danger"] as Array<
+            "primary" | "secondary" | "tertiary" | "danger"
+          >
+        ).map((variant) => (
           <Button key={variant} variant={variant}>
             {variant}
           </Button>
@@ -211,9 +215,11 @@ const Home: NextPage = () => {
         </Tabs.Panel>
       </Tabs>
       <div className="flex gap-2">
-        {(["info", "warning", "success", "error"] as Array<
-          "info" | "warning" | "success" | "error"
-        >).map((variant) => (
+        {(
+          ["info", "warning", "success", "error"] as Array<
+            "info" | "warning" | "success" | "error"
+          >
+        ).map((variant) => (
           <Tag key={variant} variant={variant}>
             {variant}
           </Tag>
@@ -244,7 +250,7 @@ const Home: NextPage = () => {
               Gosys
             </Dropdown.Menu.GroupedList.Item>
           </Dropdown.Menu.GroupedList>
-          <Divider />
+          <Dropdown.Menu.Divider />
           <Dropdown.Menu.List>
             <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
             <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>

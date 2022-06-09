@@ -30,6 +30,16 @@ export interface TabsProps
    * @default false
    */
   selectionFollowsFocus?: boolean;
+  /**
+   * Loops back to start when navigating past last item
+   * @default false
+   */
+  loop?: boolean;
+  /**
+   * Icon position in Tab
+   * @default "left"
+   */
+  iconPosition?: "left" | "top";
 }
 
 interface TabsComponent
@@ -43,6 +53,8 @@ interface TabsComponent
 
 interface TabsContextProps {
   size: "medium" | "small";
+  loop: boolean;
+  iconPosition: "left" | "top";
 }
 
 export const TabsContext = createContext<TabsContextProps | null>(null);
@@ -55,6 +67,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       onChange,
       size = "medium",
       selectionFollowsFocus = false,
+      loop = false,
+      iconPosition = "left",
       ...rest
     },
     ref
@@ -70,6 +84,8 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
         <TabsContext.Provider
           value={{
             size,
+            loop,
+            iconPosition,
           }}
         >
           {children}
