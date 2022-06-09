@@ -1,9 +1,9 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 
-export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Bubble text
+   * Chat text
    */
   children: React.ReactNode;
   /**
@@ -11,22 +11,22 @@ export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   topText?: React.ReactNode;
   /**
-   * Background color bubble
+   * Background color chat
    */
   backgroundColor?: string;
 }
 
-export type BubbleType = React.ForwardRefExoticComponent<
-  BubbleProps & React.RefAttributes<HTMLDivElement>
+export type ChatType = React.ForwardRefExoticComponent<
+  ChatProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const Bubble: BubbleType = forwardRef(
+const Chat: ChatType = forwardRef(
   ({ children, className, topText, backgroundColor, ...rest }, ref) => {
     return (
       <div
         ref={ref}
         className={cl(
-          "navds-speechbubble__bubble",
+          "navds-speech-bubble__chat",
           className,
           "navds-body-long"
         )}
@@ -35,7 +35,7 @@ const Bubble: BubbleType = forwardRef(
         {...rest}
       >
         {topText && (
-          <span className="navds-speechbubble__top-text navds-detail">
+          <span className="navds-speech-bubble__top-text navds-detail">
             {topText}
           </span>
         )}
@@ -45,4 +45,4 @@ const Bubble: BubbleType = forwardRef(
   }
 );
 
-export default Bubble;
+export default Chat;

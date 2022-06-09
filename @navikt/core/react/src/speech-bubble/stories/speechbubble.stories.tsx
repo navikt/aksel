@@ -16,16 +16,16 @@ export const All = () => {
         topText="Ola Normann 01.01.21 14:00"
         backgroundColor="var(--navds-global-color-lightblue-200)"
       >
-        <SpeechBubble.Bubble>
+        <SpeechBubble.Chat>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Adipisicing laborum est eu laborum est sit in commodo enim sint
           laboris labore nisi ut.
-        </SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
       </SpeechBubble>
       <SpeechBubble
         illustration={<div>KAJ</div>}
@@ -44,60 +44,60 @@ export const All = () => {
         position="right"
         backgroundColor="var(--navds-global-color-gray-100)"
       >
-        <SpeechBubble.Bubble>
+        <SpeechBubble.Chat>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Adipisicing laborum est eu laborum est sit in commodo enim sint
           laboris labore nisi ut.
-        </SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
       </SpeechBubble>
       <SpeechBubble
         illustration={<div>KAJ</div>}
         topText="Ola Normann 01.01.21 14:00"
         position="left"
       >
-        <SpeechBubble.Bubble>
+        <SpeechBubble.Chat>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Adipisicing laborum est eu laborum est sit in commodo enim sint
           laboris labore nisi ut.
-        </SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
       </SpeechBubble>
       <SpeechBubble
         illustration={<div>KAJ</div>}
         topText="Ola Normann 01.01.21 14:00"
         position="right"
       >
-        <SpeechBubble.Bubble>
+        <SpeechBubble.Chat>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Bubble>
-        <SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
+        <SpeechBubble.Chat>
           Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
       </SpeechBubble>
       <SpeechBubble
         illustration={<div>KAJ</div>}
         topText="Ola Normann 01.01.21 14:00"
         position="left"
       >
-        <SpeechBubble.Bubble>
+        <SpeechBubble.Chat>
           Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Bubble>
+        </SpeechBubble.Chat>
       </SpeechBubble>
       <SpeechBubble
         illustration={<div>KAJ</div>}
         topText="Ola Normann 01.01.21 14:00"
         position="right"
       >
-        <SpeechBubble.Bubble>Per skriver....</SpeechBubble.Bubble>
+        <SpeechBubble.Chat>Per skriver....</SpeechBubble.Chat>
       </SpeechBubble>
     </div>
   );

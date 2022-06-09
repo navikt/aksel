@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import Bubble, { BubbleType } from "./Bubble";
+import Chat, { ChatType } from "./Bubble";
 
 export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -34,7 +34,7 @@ interface SpeechBubbleComponent
   extends React.ForwardRefExoticComponent<
     SpeechBubbleProps & React.RefAttributes<HTMLDivElement>
   > {
-  Bubble: BubbleType;
+  Chat: ChatType;
 }
 
 export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
@@ -55,20 +55,20 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
       <div
         ref={ref}
         className={cl(
-          "navds-speechbubble",
+          "navds-speech-bubble",
           className,
-          `navds-speechbubble--${position}`,
+          `navds-speech-bubble--${position}`,
           "navds-body-long"
         )}
         {...rest}
       >
         <div
-          className="navds-speechbubble__illustration"
+          className="navds-speech-bubble__illustration"
           style={{ backgroundColor: illustrationBgColor }}
         >
           {illustration}
         </div>
-        <ol className="navds-speechbubble__bubble-list">
+        <ol className="navds-speech-bubble__chat-wrapper">
           {React.Children.map(children, (child, i) => {
             if (React.isValidElement(child)) {
               return (
@@ -88,6 +88,6 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
   }
 ) as SpeechBubbleComponent;
 
-SpeechBubble.Bubble = Bubble;
+SpeechBubble.Chat = Chat;
 
 export default SpeechBubble;
