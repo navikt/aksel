@@ -15,18 +15,13 @@ export type HeaderTitleType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-const HeaderTitle: HeaderTitleType = forwardRef(
+export const HeaderTitle: HeaderTitleType = forwardRef(
   ({ as: Component = "a", children, className, ...rest }, ref) => (
     <Component
       {...rest}
       ref={ref}
       size="xsmall"
-      className={cl(
-        "navdsi-header__title",
-        "navds-heading",
-        `navds-heading--xsmall`,
-        className
-      )}
+      className={cl("navdsi-header__title", "navds-body-short", className)}
     >
       <span>{children}</span>
     </Component>

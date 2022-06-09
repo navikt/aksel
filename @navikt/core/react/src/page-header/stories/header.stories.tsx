@@ -3,7 +3,7 @@ import { PageHeader } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { illustrationPictogram } from "./pictogram";
 export default {
-  title: "ds-react/page-header",
+  title: "ds-react(deprecated)/page-header",
   component: PageHeader,
 } as Meta;
 

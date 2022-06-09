@@ -11,9 +11,8 @@ export interface RadioGroupContextProps {
   required?: boolean;
 }
 
-export const RadioGroupContext = React.createContext<RadioGroupContextProps | null>(
-  null
-);
+export const RadioGroupContext =
+  React.createContext<RadioGroupContextProps | null>(null);
 
 export interface RadioGroupProps
   extends Omit<
@@ -21,7 +20,7 @@ export interface RadioGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Collection of <Radio>-elements
+   * Collection of <Radio />-elements
    */
   children: React.ReactNode;
   /**
@@ -29,15 +28,15 @@ export interface RadioGroupProps
    */
   name?: string;
   /**
-   * Default checked radiobutton
+   * Default checked Radio
    */
   defaultValue?: any;
   /**
-   * Controlled state for Radiobutton
+   * Controlled state for Radio
    */
   value?: any;
   /**
-   * Returns current checked radiobutton in group
+   * Returns current checked Radio in group
    */
   onChange?: (value: any) => void;
   /**
@@ -46,7 +45,7 @@ export interface RadioGroupProps
   required?: boolean;
 }
 
-const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
+export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
     {
       children,

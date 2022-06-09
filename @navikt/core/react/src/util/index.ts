@@ -32,7 +32,7 @@ export interface ListenerT {
 export const useEventListener = <T extends ListenerT>(
   name: Parameters<ListenerT["addEventListener"]>[0],
   handler: Parameters<ListenerT["addEventListener"]>[1],
-  target: null | T | Window = window
+  target: null | T | Window = typeof window !== "undefined" ? window : null
 ): void => {
   useEffect(() => {
     if (!target) {
@@ -40,7 +40,21 @@ export const useEventListener = <T extends ListenerT>(
     }
     target?.addEventListener(name, handler);
     return () => {
-      target?.addEventListener(name, handler);
+      target?.removeEventListener(name, handler);
     };
   }, [name, handler, target]);
+};
+
+/* https://github.com/radix-ui/primitives/blob/main/packages/core/primitive/src/primitive.tsx */
+export const composeEventHandlers = <E>(
+  originalEventHandler?: (event: E) => void,
+  ourEventHandler?: (event: E) => void
+) => {
+  return function handleEvent(event: E) {
+    originalEventHandler?.(event);
+
+    if (!(event as unknown as Event).defaultPrevented) {
+      return ourEventHandler?.(event);
+    }
+  };
 };

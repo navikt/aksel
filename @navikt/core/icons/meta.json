@@ -43,14 +43,14 @@
   },
   {
     "name": "Attachment",
-    "description": "",
-    "created_at": "2020-07-01T10:37:43.111Z",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.129Z",
     "pageName": "Attachment"
   },
   {
     "name": "AttachmentFilled",
-    "description": "",
-    "created_at": "2021-01-11T13:48:27.872Z",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.124Z",
     "pageName": "Attachment"
   },
   {
@@ -708,15 +708,15 @@
     "pageName": "Communication"
   },
   {
-    "name": "EmailOpen",
-    "description": "",
-    "created_at": "2020-07-01T10:37:42.632Z",
+    "name": "EmailOpened",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.018Z",
     "pageName": "Communication"
   },
   {
-    "name": "EmailOpenFilled",
-    "description": "",
-    "created_at": "2021-01-11T13:37:55.419Z",
+    "name": "EmailOpenedFilled",
+    "description": "2px-Original size",
+    "created_at": "2022-02-18T10:41:36.024Z",
     "pageName": "Communication"
   },
   {
@@ -735,6 +735,12 @@
     "name": "Error",
     "description": "",
     "created_at": "2020-07-01T10:37:43.021Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "ErrorColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.316Z",
     "pageName": "Status"
   },
   {
@@ -1006,6 +1012,18 @@
     "description": "",
     "created_at": "2021-01-28T14:00:38.562Z",
     "pageName": "Fyrstikkalleen"
+  },
+  {
+    "name": "Forward",
+    "description": "forward, videresend",
+    "created_at": "2022-04-28T10:42:53.765Z",
+    "pageName": "Communication"
+  },
+  {
+    "name": "ForwardFilled",
+    "description": "forward, videresend",
+    "created_at": "2022-04-28T12:21:53.189Z",
+    "pageName": "Communication"
   },
   {
     "name": "Freezer",
@@ -1311,6 +1329,12 @@
     "name": "Information",
     "description": "",
     "created_at": "2020-07-01T10:37:43.005Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "InformationColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.292Z",
     "pageName": "Status"
   },
   {
@@ -1707,6 +1731,18 @@
     "name": "People",
     "description": "",
     "created_at": "2020-07-01T10:37:42.850Z",
+    "pageName": "People"
+  },
+  {
+    "name": "PeopleDialogFilled",
+    "description": "",
+    "created_at": "2022-03-30T07:30:17.398Z",
+    "pageName": "People"
+  },
+  {
+    "name": "PeopleDialogOutline",
+    "description": "",
+    "created_at": "2022-03-30T07:30:17.392Z",
     "pageName": "People"
   },
   {
@@ -2208,6 +2244,18 @@
     "pageName": "Social media"
   },
   {
+    "name": "Stethoscope",
+    "description": "",
+    "created_at": "2022-03-18T08:51:04.695Z",
+    "pageName": "Health"
+  },
+  {
+    "name": "Stethoscope",
+    "description": "",
+    "created_at": "2022-03-18T08:51:04.700Z",
+    "pageName": "Health"
+  },
+  {
     "name": "StopWatch",
     "description": "",
     "created_at": "2021-04-28T10:15:22.558Z",
@@ -2235,6 +2283,12 @@
     "name": "Success",
     "description": "",
     "created_at": "2020-07-01T10:37:42.940Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "SuccessColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.285Z",
     "pageName": "Status"
   },
   {
@@ -2400,6 +2454,18 @@
     "pageName": "Arrow"
   },
   {
+    "name": "UpDown",
+    "description": "",
+    "created_at": "2022-03-16T13:47:53.004Z",
+    "pageName": "Arrow"
+  },
+  {
+    "name": "UpDownFilled",
+    "description": "",
+    "created_at": "2022-03-16T13:47:52.999Z",
+    "pageName": "Arrow"
+  },
+  {
     "name": "UpFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.748Z",
@@ -2493,6 +2559,12 @@
     "name": "Warning",
     "description": "",
     "created_at": "2020-07-01T10:37:42.737Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "WarningColored",
+    "description": "",
+    "created_at": "2022-05-25T11:08:13.299Z",
     "pageName": "Status"
   },
   {

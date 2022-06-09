@@ -2,7 +2,11 @@ import React, { createContext, useState } from "react";
 import Toggle, { ToggleType } from "./Toggle";
 import Menu, { MenuType } from "./Menu";
 
-export interface DropdownType extends React.FC {
+export interface DropdownProps {
+  children: React.ReactNode;
+}
+
+export interface DropdownType extends React.FC<DropdownProps> {
   Toggle: ToggleType;
   Menu: MenuType;
 }
@@ -16,7 +20,7 @@ export interface DropdownContextType {
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
-const Dropdown = (({ children }) => {
+export const Dropdown = (({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 

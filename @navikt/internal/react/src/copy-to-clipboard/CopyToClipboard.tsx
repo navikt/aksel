@@ -16,7 +16,7 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    */
   copyText: string;
   /**
-   * Description of text, examples: "personnummer", "navn", "epost" etc.
+   * Description of text. Example: "Kopierte personnummer til clipboard"
    */
   popoverText: string;
   /**
@@ -24,9 +24,17 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * @default "right"
    */
   popoverPlacement?: Placement;
+  /**
+   * Copy button title attribute
+   * @default children ? undefined : `Kopier ${copyText}`
+   */
+  title?: string;
 }
 
-const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
+export const CopyToClipboard = forwardRef<
+  HTMLButtonElement,
+  CopyToClipboardProps
+>(
   (
     {
       children,
@@ -35,6 +43,7 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       className,
       size = "medium",
       popoverPlacement = "right",
+      title,
       ...rest
     },
     ref
@@ -53,26 +62,25 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       };
     }, [openPopover]);
 
-    const title = `Kopier ${copyText}`;
-
     const handleClick = () => {
       copy(copyText);
       setOpenPopover(true);
     };
+
+    const copyTitle = title ?? (children ? undefined : `Kopier ${copyText}`);
 
     return (
       <div>
         <Button
           ref={mergedRef}
           variant="secondary"
-          title={title}
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
           {...rest}
         >
-          <Copy title="Fil ikon for kopiering" />
-          {children ? children : <span className="navds-sr-only">{title}</span>}
+          <Copy title={copyTitle} aria-hidden={!copyTitle} />
+          {children}
         </Button>
         <Popover
           role="alert"

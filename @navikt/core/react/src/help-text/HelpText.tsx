@@ -1,4 +1,5 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
+import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useRef, useState } from "react";
 import mergeRefs from "react-merge-refs";
@@ -8,12 +9,22 @@ export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     Pick<PopoverProps, "strategy" | "placement"> {
   /**
-   * Component content
+   * Helptext-dialog content
    */
   children: React.ReactNode;
+  /**
+   * Adds a title-tooltip with the given text
+   * @default "hjelp"
+   */
+  title?: string;
+  /**
+   * Default dialog-placement on open
+   * @default "top"
+   */
+  placement?: Placement;
 }
 
-const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
+export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
   (
     {
       className,
@@ -42,9 +53,8 @@ const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
           className={cl(className, "navds-help-text__button")}
           type="button"
           aria-expanded={open}
-          title={title}
         >
-          <HelpTextIcon className="navds-help-text__icon" aria-hidden/>
+          <HelpTextIcon className="navds-help-text__icon" title={title} />
         </button>
         <Popover
           onClose={() => setOpen(false)}

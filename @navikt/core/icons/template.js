@@ -1,13 +1,5 @@
-function defaultTemplate(
-  { template },
-  opts,
-  { imports, interfaces, componentName, props, jsx, exports }
-) {
-  const plugins = ["jsx"];
-  if (opts.typescript) {
-    plugins.push("typescript");
-  }
-
+const template = (variables, { tpl }) => {
+  const imports = variables.imports;
   imports.push({
     type: "ImportDeclaration",
     specifiers: [
@@ -15,31 +7,35 @@ function defaultTemplate(
         type: "ImportSpecifier",
         imported: {
           type: "Identifier",
-          name: "v4",
+          name: "useId",
         },
       },
     ],
     source: {
       type: "StringLiteral",
-      value: "uuid",
+      value: "./util/useId",
     },
   });
 
-  props[0].properties.find((prop) => prop.key.name === "titleId").value = {
+  variables.props[0].properties.find(
+    (prop) => prop.key.name === "titleId"
+  ).value = {
     type: "Identifier",
     name: "_titleId",
   };
 
-  const typeScriptTpl = template.smart({ plugins });
-  return typeScriptTpl.ast`
-  ${imports}
-  ${interfaces}
-  function ${componentName}(${props}) {
-    const titleId = _titleId ?? (title ?
-      "icon-title-" + v4() : undefined);
-    return ${jsx};
-  }
-  ${exports}`;
-}
+  return tpl`
+${imports};
 
-module.exports = defaultTemplate;
+${variables.interfaces};
+
+const ${variables.componentName} = forwardRef((${variables.props}) => {
+  let titleId: string | undefined = useId();
+  titleId = title ? _titleId ? _titleId : "title-" + titleId : undefined;
+  return ${variables.jsx};
+});
+export default ${variables.componentName}
+`;
+};
+
+module.exports = template;

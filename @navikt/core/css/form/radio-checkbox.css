@@ -3,6 +3,9 @@
     --navds-semantic-color-component-background-light
   );
   --navds-radio-checkbox-color-text: var(--navds-semantic-color-text);
+  --navds-radio-checkbox-color-description: var(
+    --navds-semantic-color-text-muted
+  );
   --navds-radio-checkbox-color-background-hover: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
@@ -57,12 +60,12 @@
   box-shadow: inset 0 0 0 2px var(--navds-radio-checkbox-color-shadow);
   width: 1.5rem;
   height: 1.5rem;
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   flex-shrink: 0;
 }
 
 .navds-radio__label::before {
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
 }
 
 .navds-checkbox__content,
@@ -74,7 +77,7 @@
 
 .navds-checkbox__description,
 .navds-radio__description {
-  color: var(--navds-radio-checkbox-color-text);
+  color: var(--navds-radio-checkbox-color-description);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
@@ -121,7 +124,7 @@
   background-color: var(--navds-radio-checkbox-color-background);
   width: 0.75rem;
   height: 0.25rem;
-  border-radius: 1px;
+  border-radius: 1px; /* Custom value OK */
   flex-shrink: 0;
 }
 
@@ -145,6 +148,7 @@
   + .navds-checkbox__label::before {
   background-position: 4px center;
 }
+
 .navds-checkbox__input:indeterminate:focus + .navds-checkbox__label::before,
 .navds-checkbox__input:checked:focus + .navds-checkbox__label::before {
   box-shadow: inset 0 0 0 1px white, var(--navds-shadow-focus);

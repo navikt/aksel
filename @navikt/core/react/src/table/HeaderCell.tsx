@@ -1,12 +1,13 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { Label, TableContext } from "..";
+import { Label } from "..";
+import { TableContext } from "./Table";
 
 export interface HeaderCellProps
   extends React.ThHTMLAttributes<HTMLTableCellElement> {
   scope?: string;
   /**
-   * Content alignment
+   * Content alignment inside cell
    * @default "left"
    */
   align?: "left" | "center" | "right";
@@ -17,7 +18,7 @@ export interface HeaderCellType
     HeaderCellProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const HeaderCell: HeaderCellType = forwardRef(
+export const HeaderCell: HeaderCellType = forwardRef(
   ({ className, children, align, ...rest }, ref) => {
     const context = useContext(TableContext);
 

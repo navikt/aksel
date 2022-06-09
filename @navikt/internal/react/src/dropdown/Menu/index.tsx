@@ -24,7 +24,7 @@ export interface MenuType<Props = MenuProps>
   GroupedList: GroupedListType;
 }
 
-const Menu = forwardRef<HTMLDivElement, MenuProps>(
+export const Menu = forwardRef<HTMLDivElement, MenuProps>(
   ({ className, onClose, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 

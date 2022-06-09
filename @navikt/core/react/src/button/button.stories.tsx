@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import { Star } from "@navikt/ds-icons";
+import React from "react";
 import { Button } from "./index";
-import { Success } from "@navikt/ds-icons";
 
 export default {
-  title: "ds-react/button",
+  title: "ds-react/Button",
   component: Button,
   parameters: {
     chromatic: { delay: 300 },
   },
+  argTypes: {
+    variant: {
+      control: {
+        type: "radio",
+        options: ["primary", "secondary", "tertiary", "danger"],
+      },
+    },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+  },
 };
-
-const Section = ({ children }) => (
-  <div
-    style={{
-      display: "flex",
-      gap: 16,
-      gridAutoFlow: "column",
-      justifyContent: "start",
-      padding: 24,
-      paddingLeft: 0,
-    }}
-  >
-    {children}
-  </div>
-);
 
 const variants: Array<"primary" | "secondary" | "tertiary" | "danger"> = [
   "primary",
@@ -39,119 +38,132 @@ const varSwitch = {
   danger: "Danger",
 };
 
-export const All = () => {
-  const [loadingState, setLoadingState] = useState(true);
-  const [content, setContent] = useState<string>("");
-
-  const toggleLoading = () => {
-    setLoadingState(!loadingState);
-  };
-
+export const Default = (props) => {
   return (
-    <div style={{ paddingLeft: "1rem" }}>
-      <h1>Button</h1>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant}>
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>disabled</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} disabled>
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>As link</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button as="a" key={variant} variant={variant} href="the-link">
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>Small</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small">
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>Xsmall</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="xsmall">
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>Button w/icon</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant}>
-            {variant} <Success />
-          </Button>
-        ))}
-      </Section>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant}>
-            <span className="navds-sr-only">Success ikon</span>
-            <Success />
-          </Button>
-        ))}
-      </Section>
-      <h2>Small w/icon</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small">
-            <Success /> {variant}
-          </Button>
-        ))}
-      </Section>
-      <Section>
-        {variants.map((variant) => (
-          <Button key={variant} variant={variant} size="small">
-            <span className="navds-sr-only">Success ikon</span>
-            <Success />
-          </Button>
-        ))}
-      </Section>
-      <h2>Button w/loader</h2>
-      <Button onClick={toggleLoading}>Toggle loaders</Button>
-      <Button onClick={() => setContent((content) => `${content} wat`)}>
-        Change content
-      </Button>
-      <Section>
-        {variants.map((variant) => (
-          <Button
-            key={variant}
-            variant={variant}
-            loading={loadingState}
-            onClick={toggleLoading}
-          >
-            {content || varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-      <h2>Small w/loader</h2>
-      <Section>
-        {variants.map((variant) => (
-          <Button
-            key={variant}
-            variant={variant}
-            size="small"
-            loading={loadingState}
-            onClick={toggleLoading}
-          >
-            {varSwitch[variant]}
-          </Button>
-        ))}
-      </Section>
-    </div>
+    <Button variant={props.variant} size={props.size} loading={props.loading}>
+      {props.icon ? <Star /> : null}
+      {props.children}
+      {props.icon ? <Star /> : null}
+    </Button>
   );
 };
+
+Default.args = {
+  icon: false,
+  loading: false,
+  children: "Knapp",
+};
+
+export const Small = () => (
+  <div className="rowgap">
+    {variants.map((variant) => (
+      <Button key={variant} variant={variant} size="small">
+        {varSwitch[variant]}
+      </Button>
+    ))}
+  </div>
+);
+
+export const XSmall = () => (
+  <div className="rowgap">
+    {variants.map((variant) => (
+      <Button key={variant} variant={variant} size="xsmall">
+        {varSwitch[variant]}
+      </Button>
+    ))}
+  </div>
+);
+
+export const Loading = () => (
+  <div className="colgap">
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} loading>
+          {varSwitch[variant]}
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} loading size="small">
+          {varSwitch[variant]}
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} loading size="xsmall">
+          {varSwitch[variant]}
+        </Button>
+      ))}
+    </div>
+  </div>
+);
+
+export const Icon = () => (
+  <div className="colgap">
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant}>
+          <Star />
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} size="small">
+          <Star />
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} size="xsmall">
+          <Star />
+        </Button>
+      ))}
+    </div>
+  </div>
+);
+
+export const IconWText = () => (
+  <div className="colgap">
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant}>
+          <Star />
+          {varSwitch[variant]}
+          <Star />
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} size="small">
+          <Star />
+          {varSwitch[variant]}
+          <Star />
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} size="xsmall">
+          <Star />
+          {varSwitch[variant]}
+          <Star />
+        </Button>
+      ))}
+    </div>
+  </div>
+);
+
+export const Link = () => (
+  <div className="rowgap">
+    {variants.map((variant) => (
+      <Button key={variant} variant={variant} as="a" href="#thecakeisalie">
+        {varSwitch[variant]}
+      </Button>
+    ))}
+  </div>
+);

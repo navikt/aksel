@@ -1,0 +1,17 @@
+.rowgap {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.colgap {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.colgap[data-theme="dark"],
+.rowgap[data-theme="dark"] {
+  background-color: #262626;
+}

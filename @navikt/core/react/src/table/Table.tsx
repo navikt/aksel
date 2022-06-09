@@ -6,6 +6,7 @@ import Row, { RowType } from "./Row";
 import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
+import ExpandableRow, { ExpandableRowType } from "./ExpandableRow";
 
 export interface SortState {
   orderBy: string;
@@ -44,6 +45,7 @@ export interface TableType
   DataCell: DataCellType;
   HeaderCell: HeaderCellType;
   ColumnHeader: ColumnHeaderType;
+  ExpandableRow: ExpandableRowType;
 }
 
 export interface TableContextProps {
@@ -54,7 +56,7 @@ export interface TableContextProps {
 
 export const TableContext = createContext<TableContextProps | null>(null);
 
-const Table = forwardRef(
+export const Table = forwardRef(
   (
     {
       className,
@@ -84,5 +86,6 @@ Table.Row = Row;
 Table.ColumnHeader = ColumnHeader;
 Table.HeaderCell = HeaderCell;
 Table.DataCell = DataCell;
+Table.ExpandableRow = ExpandableRow;
 
 export default Table;

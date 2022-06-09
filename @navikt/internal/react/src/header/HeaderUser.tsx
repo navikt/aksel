@@ -17,7 +17,7 @@ export type HeaderUserType = React.ForwardRefExoticComponent<
   HeaderUserProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
+export const HeaderUser = forwardRef<HTMLDivElement, HeaderUserProps>(
   ({ className, name, description, ...rest }, ref) => (
     <div {...rest} ref={ref} className={cl("navdsi-header__user", className)}>
       <span>

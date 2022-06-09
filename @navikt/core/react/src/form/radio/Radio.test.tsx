@@ -31,7 +31,9 @@ describe("Controlled RadioGroup", () => {
 });
 
 describe("Uncontrolled RadioGroup", () => {
-  test("handles state correctly", () => {
+  test("handles state correctly", async () => {
+    const user = userEvent.setup();
+
     render(<Group />);
 
     const input1 = screen.getByLabelText(label1) as HTMLInputElement;
@@ -40,13 +42,14 @@ describe("Uncontrolled RadioGroup", () => {
     expect(input1.checked).toBe(false);
     expect(input2.checked).toBe(false);
 
-    userEvent.click(screen.getByLabelText(label2));
+    await user.click(screen.getByLabelText(label2));
 
     expect(input1.checked).toBe(false);
     expect(input2.checked).toBe(true);
   });
 
-  test("handles defaultValue correctly", () => {
+  test("handles defaultValue correctly", async () => {
+    const user = userEvent.setup();
     render(<Group defaultValue={value1} />);
 
     const input1 = screen.getByLabelText(label1) as HTMLInputElement;
@@ -55,7 +58,7 @@ describe("Uncontrolled RadioGroup", () => {
     expect(input1.checked).toBe(true);
     expect(input2.checked).toBe(false);
 
-    userEvent.click(screen.getByLabelText(label2));
+    await user.click(screen.getByLabelText(label2));
 
     expect(input1.checked).toBe(false);
     expect(input2.checked).toBe(true);

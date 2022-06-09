@@ -14,6 +14,10 @@ import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
+   * Popover content
+   */
+  children: React.ReactNode;
+  /**
    * Element popover anchors to
    */
   anchorEl: Element | null;
@@ -26,17 +30,14 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   onClose: () => void;
   /**
-   * Popover content
-   */
-  children: React.ReactNode;
-  /**
    * Orientation for popover
+   * @note Try to keep general usage to "top", "bottom", "left", "right"
    * @default "right"
    */
   placement?: Placement;
   /**
-   *  Toggles rendering of arrow
-   *  @default true
+   * Adds a arrow from dialog to anchor when true
+   * @default true
    */
   arrow?: boolean;
   /**
@@ -67,7 +68,7 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
-const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       className,

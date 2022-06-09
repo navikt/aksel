@@ -1,11 +1,12 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
 import { BodyShort } from "..";
-import { TableContext } from ".";
+import { TableContext } from "./Table";
 
-interface DataCellProps extends React.TdHTMLAttributes<HTMLTableCellElement> {
+export interface DataCellProps
+  extends React.TdHTMLAttributes<HTMLTableCellElement> {
   /**
-   * Content alignment
+   * Content alignment inside cell
    * @default "left"
    */
   align?: "left" | "center" | "right";
@@ -16,7 +17,7 @@ export interface DataCellType
     DataCellProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const DataCell: DataCellType = forwardRef(
+export const DataCell: DataCellType = forwardRef(
   ({ className, children = "", align, ...rest }, ref) => {
     const context = useContext(TableContext);
 

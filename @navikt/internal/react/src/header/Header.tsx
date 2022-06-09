@@ -22,8 +22,13 @@ interface HeaderComponent
   UserButton: HeaderUserButtonType;
 }
 
-const Header = forwardRef(({ className, ...rest }, ref) => (
-  <header {...rest} ref={ref} className={cl("navdsi-header", className)} />
+export const Header = forwardRef(({ className, ...rest }, ref) => (
+  <header
+    data-theme="dark"
+    {...rest}
+    ref={ref}
+    className={cl("navdsi-header", className)}
+  />
 )) as HeaderComponent;
 
 Header.Title = HeaderTitle;

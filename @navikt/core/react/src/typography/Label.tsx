@@ -13,28 +13,26 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const Label: OverridableComponent<
-  LabelProps,
-  HTMLParagraphElement
-> = forwardRef(
-  (
-    { className, size = "medium", spacing, as: Component = "p", ...rest },
-    ref
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(className, "navds-label", {
-        "navds-label--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
-    />
-  )
-);
+export const Label: OverridableComponent<LabelProps, HTMLParagraphElement> =
+  forwardRef(
+    (
+      { className, size = "medium", spacing, as: Component = "p", ...rest },
+      ref
+    ) => (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(className, "navds-label", {
+          "navds-label--small": size === "small",
+          "navds-typo--spacing": !!spacing,
+        })}
+      />
+    )
+  );
 
 export default Label;

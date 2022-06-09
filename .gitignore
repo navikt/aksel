@@ -117,3 +117,12 @@ react-docgen-docs.json
 cjs
 esm
 .vercel
+_docs.json
+
+.yarn/*
+.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions

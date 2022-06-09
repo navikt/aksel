@@ -17,7 +17,7 @@ export type MenuItemType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-const Item: MenuItemType = forwardRef(
+export const Item: MenuItemType = forwardRef(
   (
     { children, as: Component = "a", active = false, className, ...rest },
     ref

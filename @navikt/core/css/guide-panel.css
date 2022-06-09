@@ -18,7 +18,7 @@
 
 .navds-guide-panel__content {
   background-color: var(--navds-guide-panel-color-background);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   border: 2px solid var(--navds-guide-panel-color-border);
   min-height: 7.25rem;
   padding: 1.5rem;
@@ -58,7 +58,7 @@
 /* Guide illustration frame */
 .navds-guide__illustration {
   background: var(--navds-guide-panel-color-illustration-background);
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
   overflow: hidden;
 }
 

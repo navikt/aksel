@@ -72,7 +72,7 @@
   width: 2rem;
   height: 2rem;
   margin: 0.5rem;
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 0 1px var(--navds-step-indicator-color-step-number-shadow);
@@ -107,7 +107,7 @@
   left: calc(-50% + 2rem);
   display: block;
   border-top: 2px solid var(--navds-step-indicator-color-step-line);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   pointer-events: none;
 }
 

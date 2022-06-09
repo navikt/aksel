@@ -18,11 +18,11 @@ export interface CheckboxGroupProps
     "onChange" | "errorPropagation" | "defaultValue"
   > {
   /**
-   * Checkboxes
+   * Collection of <Checkbox/>
    */
   children: React.ReactNode;
   /**
-   * Controlled state for group
+   * Controlled state for checkboxes.
    */
   value?: any[];
   /**
@@ -35,7 +35,10 @@ export interface CheckboxGroupProps
   onChange?: (value: any[]) => void;
 }
 
-const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
+export const CheckboxGroup = forwardRef<
+  HTMLFieldSetElement,
+  CheckboxGroupProps
+>(
   (
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref

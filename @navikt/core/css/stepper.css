@@ -1,0 +1,99 @@
+.navds-stepper {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* Step */
+.navds-stepper__step {
+  position: relative;
+  cursor: pointer;
+  padding: calc(2.25rem / 2) 0;
+  display: flex;
+  background: none;
+  border: none;
+  appearance: none;
+  width: 100%;
+  color: var(--navds-semantic-color-text);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navds-stepper__step-number {
+  flex-shrink: 0;
+  display: flex;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  margin-right: var(--navds-spacing-3);
+  border-radius: var(--navds-border-radius-full);
+  align-items: center;
+  justify-content: center;
+  color: var(--navds-semantic-color-interaction-primary);
+  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
+  background-color: var(--navds-semantic-color-component-background-light);
+}
+
+/* Step-states: focus, active, hover */
+.navds-stepper__step-wrapper:hover
+  > .navds-stepper__step
+  > .navds-stepper__step-number {
+  background-color: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+}
+
+.navds-stepper__step--active > .navds-stepper__step-number,
+.navds-stepper__step-wrapper:hover
+  > .navds-stepper__step--active
+  > .navds-stepper__step-number {
+  color: var(--navds-semantic-color-text-inverted);
+  background-color: var(--navds-semantic-color-interaction-primary-selected);
+  box-shadow: inset 0 0 0 2px
+    var(--navds-semantic-color-interaction-primary-selected);
+}
+
+.navds-stepper__step:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-stepper__step--active {
+  cursor: default;
+}
+
+/* Step label */
+.navds-stepper__step-label {
+  margin-top: 2px;
+  color: var(--navds-semantic-color-interaction-primary);
+  text-align: left;
+}
+
+.navds-stepper__step:hover > .navds-stepper__step-label {
+  text-decoration: underline;
+}
+
+.navds-stepper__step--active > .navds-stepper__step-label {
+  color: black;
+}
+
+.navds-stepper__step--active:hover > .navds-stepper__step-label {
+  text-decoration: none;
+}
+
+/* Step Horizontal Lines */
+
+.navds-stepper__step-wrapper:not(:last-child) > .navds-stepper__step::after {
+  content: "";
+  position: absolute;
+  top: calc(28px + 8px + (2.25rem / 2));
+  left: 13px;
+  height: calc(100% - 2.75rem);
+  display: block;
+  border-left: 2px solid var(--navds-semantic-color-border-muted);
+  border-radius: var(--navds-border-radius-medium);
+  pointer-events: none;
+  z-index: 1;
+}

@@ -1,2 +1,1 @@
-export { default as StepIndicator } from "./StepIndicator";
-export * from "./StepIndicator";
+export { default as StepIndicator, StepIndicatorProps } from "./StepIndicator";

@@ -1,11 +1,10 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "0.8.4",
-  "private": false,
+  "version": "0.8.16",
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-icons"
+    "url": "git+https://github.com/navikt/Designsystemet.git"
   },
   "keywords": [
     "NAV",
@@ -26,32 +25,34 @@
     "/meta.json"
   ],
   "scripts": {
-    "create-package-json-pointers-to-esm": "node ../../../utilities/scripts/createPackageJsonsWithESMPointers.js",
+    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "yarn clean && yarn create-icons && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn clean && copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config"
   },
   "dependencies": {
     "uuid": "^8.3.2"
   },
   "peerDependencies": {
-    "@types/react": "^17.0.30",
-    "react": "^17.0.0"
+    "@types/react": "^17.0.30 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@svgr/cli": "^5.5.0",
+    "@svgr/cli": "6.2.1",
     "@types/lodash.startcase": "^4.4.6",
+    "@types/node": "^17.0.35",
     "@types/rimraf": "3.0.2",
     "@types/uuid": "^8.3.1",
     "axios": "^0.21.3",
+    "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "dotenv": "^10.0.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.startcase": "4.4.0",
-    "react": "^16.8.0 || ^17.0.0",
+    "react": "^18.0.0",
     "rimraf": "3.0.2",
-    "sharp": "0.29.1",
-    "ts-node": "^10.4.0"
+    "ts-node": "^10.4.0",
+    "typescript": "^4.7.2"
   }
 }

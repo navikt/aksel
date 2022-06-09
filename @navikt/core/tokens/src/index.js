@@ -43,6 +43,7 @@ module.exports = {
       modal: { value: 2000 },
       popover: { value: 1000 },
       focus: { value: 10 },
+      tooltip: { value: 3000 },
     },
   },
 };
