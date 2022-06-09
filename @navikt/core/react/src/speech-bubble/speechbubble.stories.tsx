@@ -5,11 +5,29 @@ import { Meta } from "@storybook/react/types-6-0";
 export default {
   title: "ds-react/SpeechBubble",
   component: SpeechBubble,
+  argTypes: {
+    backgroundColor: {
+      control: {
+        type: "text",
+      },
+    },
+    avatarBgColor: {
+      control: {
+        type: "text",
+      },
+    },
+  },
 } as Meta;
 
-export const Default = () => {
+export const Default = (props) => {
   return (
-    <SpeechBubble avatar="KAJ" name="Ola Normann" timestamp="01.01.21 14:00">
+    <SpeechBubble
+      avatar={props?.avatar ?? "ON"}
+      name={props?.name ?? "Ola Normann"}
+      timestamp={props?.timestamp ?? "01.01.21 14:00"}
+      avatarBgColor={props?.avatarBgColor}
+      backgroundColor={props?.backgroundColor}
+    >
       <SpeechBubble.Chat>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </SpeechBubble.Chat>
@@ -22,6 +40,12 @@ export const Default = () => {
       </SpeechBubble.Chat>
     </SpeechBubble>
   );
+};
+
+Default.args = {
+  name: "Ola Normann",
+  timestamp: "01.01.21 14:00",
+  avatar: "ON",
 };
 
 export const All = () => {

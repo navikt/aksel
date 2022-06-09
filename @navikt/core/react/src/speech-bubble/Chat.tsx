@@ -35,16 +35,18 @@ const Chat: ChatType = forwardRef(
         tabIndex={0}
         {...rest}
       >
-        <div className="navds-speech-bubble__top-text">
-          {name && (
-            <Detail className="navds-speech-bubble__name">{name}</Detail>
-          )}
-          {timestamp && (
-            <Detail className="navds-speech-bubble__timestamp">
-              {timestamp}
-            </Detail>
-          )}
-        </div>
+        {(timestamp || name) && (
+          <div className="navds-speech-bubble__top-text">
+            {name && (
+              <Detail className="navds-speech-bubble__name">{name}</Detail>
+            )}
+            {timestamp && (
+              <Detail className="navds-speech-bubble__timestamp">
+                {timestamp}
+              </Detail>
+            )}
+          </div>
+        )}
         {children}
       </div>
     );
