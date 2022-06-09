@@ -48,93 +48,47 @@ Default.args = {
   avatar: "ON",
 };
 
-export const All = () => {
+export const Farger = (props) => {
   return (
-    <div style={{ rowGap: "2rem", display: "flex", flexDirection: "column" }}>
-      <SpeechBubble
-        avatar={<Illustration />}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        backgroundColor="var(--navds-global-color-lightblue-200)"
-      >
-        <SpeechBubble.Chat>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </SpeechBubble.Chat>
-      </SpeechBubble>
-      <SpeechBubble
-        avatar={<div>KAJ</div>}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        position="right"
-        backgroundColor="var(--navds-global-color-gray-100)"
-      >
-        <SpeechBubble.Chat>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </SpeechBubble.Chat>
-      </SpeechBubble>
-      <SpeechBubble
-        avatar={<div>KAJ</div>}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        position="left"
-      >
-        <SpeechBubble.Chat>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Adipisicing laborum est eu laborum est sit in commodo enim sint
-          laboris labore nisi ut.
-        </SpeechBubble.Chat>
-      </SpeechBubble>
-      <SpeechBubble
-        avatar={<div>KAJ</div>}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        position="right"
-      >
-        <SpeechBubble.Chat>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Chat>
-        <SpeechBubble.Chat>
-          Tempor fugiat amet eu sint in in ullamco.
-        </SpeechBubble.Chat>
-      </SpeechBubble>
-      <SpeechBubble
-        avatar={<div>KAJ</div>}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        position="left"
-      >
-        <SpeechBubble.Chat>
-          Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-        </SpeechBubble.Chat>
-      </SpeechBubble>
-      <SpeechBubble
-        avatar={<div>KAJ</div>}
-        name="Ola Normann"
-        timestamp="01.01.21 14:00"
-        position="right"
-      >
-        <SpeechBubble.Chat>Per skriver....</SpeechBubble.Chat>
-      </SpeechBubble>
-    </div>
+    <SpeechBubble
+      avatar={"ON"}
+      name={"Ola Normann"}
+      timestamp={"01.01.21 14:00"}
+      avatarBgColor={"var(--navds-global-color-lightblue-200)"}
+      backgroundColor={"var(--navds-global-color-lightblue-100)"}
+    >
+      <SpeechBubble.Chat>
+        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+      </SpeechBubble.Chat>
+      <SpeechBubble.Chat>
+        Tempor fugiat amet eu sint in in ullamco.
+      </SpeechBubble.Chat>
+      <SpeechBubble.Chat>
+        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+        labore nisi ut.
+      </SpeechBubble.Chat>
+    </SpeechBubble>
+  );
+};
+
+export const Avatar = (props) => {
+  return (
+    <SpeechBubble
+      avatar={<Illustration />}
+      name={"Ola Normann"}
+      timestamp={"01.01.21 14:00"}
+    >
+      <SpeechBubble.Chat>
+        Aute minim nisi sunt mollit duis sunt nulla minim non proident.
+      </SpeechBubble.Chat>
+      <SpeechBubble.Chat>
+        Tempor fugiat amet eu sint in in ullamco.
+      </SpeechBubble.Chat>
+      <SpeechBubble.Chat>
+        Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
+        labore nisi ut.
+      </SpeechBubble.Chat>
+    </SpeechBubble>
   );
 };
 
