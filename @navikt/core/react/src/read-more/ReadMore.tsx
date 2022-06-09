@@ -93,9 +93,9 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           <span>{header}</span>
         </button>
         <CollapseComponent isOpened={isOpened}>
-          <div className="navds-read-more__content">
-            <BodyLong size={size}>{children}</BodyLong>
-          </div>
+          <BodyLong as="div" className="navds-read-more__content" size={size}>
+            {children}
+          </BodyLong>
         </CollapseComponent>
       </div>
     );

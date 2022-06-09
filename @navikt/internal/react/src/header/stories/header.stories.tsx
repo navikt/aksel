@@ -126,10 +126,16 @@ const Initials = () => (
   <Header>
     <Header.Title href="/#home">NAV Sykepenger</Header.Title>
     <Dropdown>
-      <Header.Button as={Dropdown.Toggle} style={{ marginLeft: "auto" }}>
-        <BodyShort size="small" title="Kong Harald">
-          KH
-        </BodyShort>
+      <Header.Button
+        as={Dropdown.Toggle}
+        style={{
+          marginLeft: "auto",
+          paddingRight: "1.5rem",
+          paddingLeft: "1.5rem",
+          gap: "1rem",
+        }}
+      >
+        <BodyShort title="Kong Harald">KH</BodyShort>
         <Expand />
       </Header.Button>
       <Dropdown.Menu>

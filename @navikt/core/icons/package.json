@@ -4,7 +4,7 @@
   "description": "NAVs egne ikoner i SVG og React format",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-icons"
+    "url": "git+https://github.com/navikt/Designsystemet.git"
   },
   "keywords": [
     "NAV",

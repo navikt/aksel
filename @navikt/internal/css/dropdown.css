@@ -17,6 +17,7 @@
   width: 27ch;
   max-height: 616px;
   overflow-y: auto;
+  border-color: var(--navds-global-color-gray-300);
 }
 
 .navdsi-dropdown__divider {

@@ -33,7 +33,7 @@ const AccordionContent: AccordionContentType = forwardRef(
       : UnmountClosed;
 
     return (
-      <div ref={ref} role="region" aria-labelledby={context.buttonId} {...rest}>
+      <div ref={ref} aria-labelledby={context.buttonId} {...rest}>
         <CollapseComponent isOpened={context.open}>
           <div className={cl("navds-accordion__content", className)}>
             {children}
