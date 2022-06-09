@@ -9,27 +9,27 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Chat-message sender
+   * Chat-message name
    */
-  sender: string;
+  name: string;
   /**
    * Timestamp for sent message
    */
   timestamp?: string;
   /**
-   * Illustration for messenger. Regular text for initials works to
+   * Avatar for messenger. Regular text for initials works to
    */
-  illustration: React.ReactNode;
+  avatar: React.ReactNode;
   /**
    * Background color on bubbles
    */
   backgroundColor?: string;
   /**
-   * Background color for illustration
+   * Background color for avatar
    */
-  illustrationBgColor?: string;
+  avatarBgColor?: string;
   /**
-   * Positions illustration and Speechbubbles
+   * Positions avatar and Speechbubbles
    * @default "left"
    */
   position?: "left" | "right";
@@ -47,11 +47,11 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     {
       children,
       className,
-      sender,
+      name,
       timestamp,
-      illustration,
+      avatar,
       position = "left",
-      illustrationBgColor,
+      avatarBgColor,
       backgroundColor,
       ...rest
     },
@@ -69,10 +69,10 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
       >
         <BodyShort
           as="div"
-          className="navds-speech-bubble__illustration"
-          style={{ backgroundColor: illustrationBgColor }}
+          className="navds-speech-bubble__avatar"
+          style={{ backgroundColor: avatarBgColor }}
         >
-          {illustration}
+          {avatar}
         </BodyShort>
         <ol className="navds-speech-bubble__chat-wrapper">
           {React.Children.map(children, (child, i) => {
@@ -80,7 +80,7 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
               return (
                 <BodyLong as="li">
                   {React.cloneElement(child, {
-                    sender: sender && i === 0 ? sender : undefined,
+                    name: name && i === 0 ? name : undefined,
                     timestamp: timestamp && i === 0 ? timestamp : undefined,
                     backgroundColor,
                     ...child.props,

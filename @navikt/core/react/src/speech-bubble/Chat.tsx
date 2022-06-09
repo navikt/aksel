@@ -8,9 +8,9 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Chat-message sender
+   * Chat-message name
    */
-  sender?: string;
+  name?: string;
   /**
    * Timestamp for sent message
    */
@@ -26,10 +26,7 @@ export type ChatType = React.ForwardRefExoticComponent<
 >;
 
 const Chat: ChatType = forwardRef(
-  (
-    { children, className, sender, timestamp, backgroundColor, ...rest },
-    ref
-  ) => {
+  ({ children, className, name, timestamp, backgroundColor, ...rest }, ref) => {
     return (
       <div
         ref={ref}
@@ -39,8 +36,8 @@ const Chat: ChatType = forwardRef(
         {...rest}
       >
         <div className="navds-speech-bubble__top-text">
-          {sender && (
-            <Detail className="navds-speech-bubble__sender">{sender}</Detail>
+          {name && (
+            <Detail className="navds-speech-bubble__name">{name}</Detail>
           )}
           {timestamp && (
             <Detail className="navds-speech-bubble__timestamp">

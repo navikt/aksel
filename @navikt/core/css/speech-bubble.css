@@ -2,8 +2,8 @@
   --navds-speech-bubble-color-background: var(
     --navds-semantic-color-canvas-background
   );
-  --navds-speech-bubble-color-illustration: var(--navds-semantic-color-text);
-  --navds-speech-bubble-color-illustration-background: var(
+  --navds-speech-bubble-color-avatar: var(--navds-semantic-color-text);
+  --navds-speech-bubble-color-avatar-background: var(
     --navds-semantic-color-canvas-background
   );
 }
@@ -12,10 +12,13 @@
   display: flex;
   align-items: flex-end;
   gap: var(--navds-spacing-4);
+  padding-right: var(--navds-spacing-16);
 }
 
 .navds-speech-bubble--right {
   flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: var(--navds-spacing-16);
 }
 
 .navds-speech-bubble__chat-wrapper {
@@ -31,10 +34,10 @@
   align-items: flex-end;
 }
 
-.navds-speech-bubble__illustration {
+.navds-speech-bubble__avatar {
   align-items: center;
-  background: var(--navds-speech-bubble-color-illustration-background);
-  color: var(--navds-speech-bubble-color-illustration);
+  background: var(--navds-speech-bubble-color-avatar-background);
+  color: var(--navds-speech-bubble-color-avatar);
   border-radius: var(--navds-border-radius-full);
   display: flex;
   flex-shrink: 0;
@@ -44,7 +47,7 @@
   width: 3rem;
 }
 
-.navds-speech-bubble__illustration svg {
+.navds-speech-bubble__avatar svg {
   align-self: center;
   height: 100%;
   width: 100%;
@@ -77,12 +80,13 @@
   color: var(--navds-semantic-color-text-muted);
   display: flex;
   gap: var(--navds-spacing-2);
+  align-items: baseline;
 }
 
 .navds-speech-bubble--right .navds-speech-bubble__top-text {
   align-self: flex-end;
 }
 
-.navds-speech-bubble__sender {
+.navds-speech-bubble__name {
   font-weight: var(--navds-font-weight-bold);
 }
