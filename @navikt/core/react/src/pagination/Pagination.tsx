@@ -2,6 +2,10 @@ import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
 import { BodyShort, Button } from "..";
+import PaginationItem, {
+  PaginationItemProps,
+  PaginationItemType,
+} from "./PaginationItem";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -37,6 +41,15 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    * @default false
    */
   prevNextTexts?: boolean;
+
+  renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
+}
+
+interface PaginationType
+  extends React.ForwardRefExoticComponent<
+    PaginationProps & React.RefAttributes<HTMLElement>
+  > {
+  Item: PaginationItemType;
 }
 
 export const getSteps = ({
@@ -83,6 +96,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       className,
       size = "medium",
       prevNextTexts = false,
+      renderItem,
       ...rest
     },
     ref
@@ -104,6 +118,10 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       return null;
     }
 
+    const Item =
+      renderItem ??
+      ((item: PaginationItemProps) => <PaginationItem {...item} size={size} />);
+
     return (
       <nav
         ref={ref}
@@ -116,14 +134,13 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       >
         <ul className="navds-pagination__list">
           <li>
-            <Button
+            <Item
               className={cl("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === 1,
               })}
-              variant="tertiary"
-              size={size}
               disabled={page === 1}
               onClick={() => onPageChange(page - 1)}
+              page={page - 1}
             >
               <Back
                 className="navds-pagination__prev-next-icon"
@@ -137,7 +154,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   Forrige
                 </BodyShort>
               )}
-            </Button>
+            </Item>
           </li>
           {getSteps({ page, count, siblingCount, boundaryCount }).map(
             (step, i) => {
@@ -150,30 +167,27 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 </li>
               ) : (
                 <li key={step}>
-                  <Button
-                    className="navds-pagination__item"
-                    variant="tertiary"
-                    size={size}
+                  <Item
                     onClick={() => onPageChange(n)}
-                    aria-current={page === n ? true : undefined}
+                    selected={page === n}
+                    page={n}
                   >
                     <BodyShort size={size === "xsmall" ? "small" : size}>
                       {n}
                     </BodyShort>
-                  </Button>
+                  </Item>
                 </li>
               );
             }
           )}
           <li>
-            <Button
+            <Item
               className={cl("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === count,
               })}
-              variant="tertiary"
-              size={size}
               disabled={page === count}
               onClick={() => onPageChange(page + 1)}
+              page={page + 1}
             >
               {prevNextTexts && (
                 <BodyShort
@@ -187,12 +201,14 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 className="navds-pagination__prev-next-icon"
                 title="Neste"
               />
-            </Button>
+            </Item>
           </li>
         </ul>
       </nav>
     );
   }
-);
+) as PaginationType;
+
+Pagination.Item = PaginationItem;
 
 export default Pagination;

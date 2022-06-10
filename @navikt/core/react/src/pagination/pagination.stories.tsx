@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, HashRouter as Router } from "react-router-dom";
 import Pagination from "./Pagination";
 
 export default {
@@ -18,6 +19,15 @@ export const All = (props) => {
 
       <h2>xsmall</h2>
       <Pagination size="xsmall" {...props} page={page} onPageChange={setPage} />
+
+      <h2>Render as links</h2>
+      <Pagination
+        {...props}
+        page={page}
+        renderItem={(item) => (
+          <Pagination.Item {...item} as={Link} to={`?page=${item.page}`} />
+        )}
+      />
 
       <h2>prevNextTexts</h2>
       <Pagination prevNextTexts {...props} page={page} onPageChange={setPage} />
@@ -47,3 +57,11 @@ All.args = {
   siblingCount: 1,
   boundaryCount: 1,
 };
+
+All.decorators = [
+  (Story) => (
+    <Router>
+      <Story />
+    </Router>
+  ),
+];

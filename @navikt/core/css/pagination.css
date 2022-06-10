@@ -46,7 +46,6 @@
 }
 
 .navds-pagination__prev-next {
-  color: var(--navds-semantic-color-text);
   display: flex;
   align-items: center;
   gap: var(--navds-spacing-1);
