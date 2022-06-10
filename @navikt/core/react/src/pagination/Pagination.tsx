@@ -88,7 +88,7 @@ export const getSteps = ({
   ];
 };
 
-const Pagination = forwardRef<HTMLElement, PaginationProps>(
+export const Pagination = forwardRef<HTMLElement, PaginationProps>(
   (
     {
       page,
