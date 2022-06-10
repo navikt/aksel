@@ -26,7 +26,7 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
    * Callback when current page changes
    */
-  onPageChange: (page: number) => void;
+  onPageChange?: (page: number) => void;
   /**
    * Total number of pages
    */
