@@ -21,7 +21,7 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   popoverText: string;
   /**
    * Allows extending popover properties like "placement"
-   * @default "right"
+   * @default "bottom"
    */
   popoverPlacement?: Placement;
   /**
@@ -29,6 +29,11 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * @default children ? undefined : `Kopier ${copyText}`
    */
   title?: string;
+  /**
+   * Placement of icon
+   * @default "left"
+   */
+  iconPlacement?: "left" | "right";
 }
 
 export const CopyToClipboard = forwardRef<
@@ -42,7 +47,8 @@ export const CopyToClipboard = forwardRef<
       popoverText,
       className,
       size = "medium",
-      popoverPlacement = "right",
+      popoverPlacement = "bottom",
+      iconPlacement = "left",
       title,
       ...rest
     },
@@ -73,14 +79,19 @@ export const CopyToClipboard = forwardRef<
       <div>
         <Button
           ref={mergedRef}
-          variant="secondary"
+          variant="tertiary"
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
           {...rest}
         >
-          <Copy title={copyTitle} aria-hidden={!copyTitle} />
+          {iconPlacement === "left" && (
+            <Copy title={copyTitle} aria-hidden={!copyTitle} />
+          )}
           {children}
+          {iconPlacement === "right" && (
+            <Copy title={copyTitle} aria-hidden={!copyTitle} />
+          )}
         </Button>
         <Popover
           role="alert"
@@ -88,7 +99,6 @@ export const CopyToClipboard = forwardRef<
           open={openPopover}
           onClose={() => setOpenPopover(false)}
           placement={popoverPlacement}
-          arrow={false}
           className="navdsi-copy-to-clipboard__popover"
         >
           <BodyShort size={size === "medium" ? size : "small"} as="span">
