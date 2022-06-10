@@ -11,9 +11,8 @@ export interface RadioGroupContextProps {
   required?: boolean;
 }
 
-export const RadioGroupContext = React.createContext<RadioGroupContextProps | null>(
-  null
-);
+export const RadioGroupContext =
+  React.createContext<RadioGroupContextProps | null>(null);
 
 export interface RadioGroupProps
   extends Omit<

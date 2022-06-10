@@ -37,9 +37,8 @@ export interface AccordionItemContextProps {
   renderContentWhenClosed: boolean;
 }
 
-export const AccordionItemContext = createContext<AccordionItemContextProps | null>(
-  null
-);
+export const AccordionItemContext =
+  createContext<AccordionItemContextProps | null>(null);
 
 const AccordionItem: AccordionItemType = forwardRef(
   (

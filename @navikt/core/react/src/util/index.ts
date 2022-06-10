@@ -53,7 +53,7 @@ export const composeEventHandlers = <E>(
   return function handleEvent(event: E) {
     originalEventHandler?.(event);
 
-    if (!((event as unknown) as Event).defaultPrevented) {
+    if (!(event as unknown as Event).defaultPrevented) {
       return ourEventHandler?.(event);
     }
   };
