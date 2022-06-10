@@ -23,6 +23,12 @@ export default {
     disabled: {
       type: "boolean",
     },
+    maxRows: {
+      type: "number",
+    },
+    minRows: {
+      type: "number",
+    },
   },
 } as Meta;
 
@@ -95,7 +101,7 @@ export const MaxLength = () => {
 };
 
 export const MinRows = () => {
-  return <Textarea minRows={5} label="Ipsum enim quis culpa" />;
+  return <Textarea minRows={2} label="Ipsum enim quis culpa" />;
 };
 
 export const MaxRows = () => {
@@ -108,4 +114,8 @@ export const MaxRows = () => {
       label="Ipsum enim quis culpa"
     />
   );
+};
+
+export const Resize = () => {
+  return <Textarea resize label="Ipsum enim quis culpa" />;
 };

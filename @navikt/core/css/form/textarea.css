@@ -38,7 +38,7 @@
   width: 100%;
   transition: height 0.1s ease-out;
   display: block;
-  min-height: 3rem;
+  min-height: 48px;
 }
 
 .navds-textarea--counter {
@@ -55,8 +55,7 @@
 }
 
 .navds-form-field--small .navds-textarea__input {
-  padding: var(--navds-spacing-1);
-  min-height: 2rem;
+  padding: 6px;
 }
 
 .navds-form-field--small .navds-textarea--counter.navds-textarea__input {
@@ -68,14 +67,18 @@
   color: var(--navds-textarea-color-counter-text);
   font-style: italic;
   position: absolute;
-  text-align: right;
-  left: var(--navds-spacing-3);
-  right: var(--navds-spacing-3);
-  bottom: var(--navds-spacing-2);
+  text-align: left;
+  left: 1px;
+  bottom: 1px;
+  padding: var(--navds-spacing-1) var(--navds-spacing-2);
 }
 
 .navds-textarea__counter--error {
   color: var(--navds-textarea-color-counter-text-error);
+}
+
+.navds-textarea--resize .navds-textarea__input {
+  resize: both;
 }
 
 /**
