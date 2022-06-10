@@ -1,8 +1,13 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyLong, Checkbox, CheckboxProps } from "..";
+import { BodyLong, Checkbox, CheckboxProps, ErrorMessage } from "..";
+import { useFormField } from "./useFormField";
 
-export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
+export interface ConfirmationPanelProps
+  extends Omit<
+    CheckboxProps,
+    "children" | "indeterminate" | "hideLabel" | "error"
+  > {
   /**
    * Additional information on panel
    */
@@ -12,22 +17,34 @@ export interface ConfirmationPanelProps extends Partial<CheckboxProps> {
    */
   label: React.ReactNode;
   /**
-   * Checked state for checkbox
+   * Error message for element
    */
-  checked: boolean;
+  error?: React.ReactNode;
+  /**
+   * Override internal errorId
+   */
+  errorId?: string;
 }
 
-const ConfirmationPanel = forwardRef<HTMLDivElement, ConfirmationPanelProps>(
-  ({ className, children, label, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cl("navds-confirmation-panel", className, {
-          "navds-confirmation-panel--small": props.size === "small",
-          "navds-confirmation-panel--error": !!props.error,
-          "navds-confirmation-panel--checked": !!props.checked,
-        })}
-      >
+export const ConfirmationPanel = forwardRef<
+  HTMLDivElement,
+  ConfirmationPanelProps
+>(({ className, children, label, ...props }, ref) => {
+  const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
+    props,
+    "confirmationPanel"
+  );
+
+  return (
+    <div
+      ref={ref}
+      className={cl("navds-confirmation-panel", "navds-form-field", className, {
+        "navds-confirmation-panel--small": size === "small",
+        "navds-confirmation-panel--error": hasError,
+        "navds-confirmation-panel--checked": !!props.checked,
+      })}
+    >
+      <div className="navds-confirmation-panel__inner">
         {children && (
           <BodyLong
             size={props.size}
@@ -36,10 +53,15 @@ const ConfirmationPanel = forwardRef<HTMLDivElement, ConfirmationPanelProps>(
             {children}
           </BodyLong>
         )}
-        <Checkbox {...props}>{label}</Checkbox>
+        <Checkbox {...props} {...inputProps} error={hasError} size={size}>
+          {label}
+        </Checkbox>
       </div>
-    );
-  }
-);
+      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+        {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
+      </div>
+    </div>
+  );
+});
 
 export default ConfirmationPanel;

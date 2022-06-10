@@ -1,7 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "0.17.25",
-  "private": false,
+  "version": "0.19.7",
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -12,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler/tree/master/%40navikt/ds-react"
+    "url": "git+https://github.com/navikt/Designsystemet.git"
   },
   "sideEffects": false,
   "main": "./cjs/index.js",
@@ -24,19 +23,21 @@
   "files": [
     "/cjs",
     "/esm",
-    "/src"
+    "/src",
+    "_docs.json"
   ],
   "scripts": {
+    "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "yarn run clean && tsc && tsc -p tsconfig.esm.json && yarn create-package-json-pointers-to-esm",
+    "build": "yarn run clean && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "jest"
   },
   "dependencies": {
     "@floating-ui/react-dom": "0.6.0",
     "@material-ui/core": "^4.12.3",
-    "@navikt/ds-icons": "^0.8.11",
+    "@navikt/ds-icons": "^0.8.16",
     "@popperjs/core": "^2.10.1",
     "@radix-ui/react-tabs": "0.1.5",
     "@radix-ui/react-toggle-group": "0.1.5",
@@ -48,22 +49,28 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@testing-library/dom": "8.13.0",
     "@testing-library/jest-dom": "^5.16.0",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.0",
     "@types/faker": "5.5.8",
     "@types/jest": "^27.0.1",
+    "@types/node": "^17.0.35",
     "@types/react-collapse": "^5.0.1",
     "@types/react-modal": "^3.13.1",
-    "@types/styled-components": "^5.1.14",
+    "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "faker": "5.5.3",
+    "fast-glob": "3.2.11",
     "jest": "^27.5.0",
+    "react-docgen-typescript": "2.2.2",
+    "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
     "rimraf": "3.0.2",
-    "styled-components": "^5.3.1",
     "swr": "^1.1.2",
-    "ts-jest": "^27.1.0"
+    "ts-jest": "^27.1.0",
+    "ts-node": "10.7.0",
+    "typescript": "^4.7.2"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

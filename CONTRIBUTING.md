@@ -16,16 +16,6 @@ yarn storybook
 
 [http://localhost:6006](http://localhost:6006) (port auto-incrementeres hvis den allerede er i bruk av en annen server)
 
-### Yarn install med Mac M1 chip
-
-For at `yarn install` skal funke på Mac med M1 chip krever sharp-pakken at du har "libvps" installert globalt. Libvps krever også gcc og xcode build tools CLI. Dette kan installeres med følgende kommandoer:
-
-```sh
-xcode-select --install
-brew install gcc
-brew reinstall vips
-```
-
 ## Utviklingsmiljø
 
 Vi bruker storybook [https://storybook.js.org/](https://storybook.js.org/) som utviklermiljø.

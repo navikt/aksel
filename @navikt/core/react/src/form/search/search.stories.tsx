@@ -33,7 +33,6 @@ export const Default = (props) => {
       <Search
         value={props.controlled ? state : undefined}
         onChange={props.controlled ? setState : null}
-        onSearch={(v) => console.log({ onSearch: v })}
         label="Søk"
         size={props.size}
         clearButton={props.clearButton}

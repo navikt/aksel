@@ -1,7 +1,6 @@
 {
   "name": "@navikt/ds-css",
-  "version": "0.16.19",
-  "private": false,
+  "version": "0.18.7",
   "description": "Css for NAV Designsystem components",
   "author": "NAV Designsystem team",
   "keywords": [
@@ -13,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/navikt/nav-frontend-moduler.git"
+    "url": "git+https://github.com/navikt/Designsystemet.git"
   },
   "main": "./dist/index.css",
   "scripts": {
@@ -21,7 +20,7 @@
     "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
-    "@navikt/ds-tokens": "^0.8.7",
+    "@navikt/ds-tokens": "^0.9.5",
     "normalize.css": "^8.0.1",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",

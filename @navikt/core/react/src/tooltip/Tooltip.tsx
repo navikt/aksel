@@ -25,6 +25,7 @@ import { useId } from "../util";
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Element tooltip anchors to
+   * @note Needs to be React.ReactElement, does not support multiple children/react fragment
    */
   children: React.ReactElement & React.RefAttributes<HTMLElement>;
   /**
@@ -32,7 +33,8 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   open?: boolean;
   /**
-   * Tells tooltip to start in open state
+   * Tells tooltip to start in open state.
+   * Use sparingly synce hover/focus on other elements will close it
    * @note "open"-prop overwrites this
    */
   defaultOpen?: boolean;
@@ -42,8 +44,8 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   placement?: "top" | "right" | "bottom" | "left";
   /**
-   *  Toggles rendering of arrow
-   *  @default true
+   * Toggles rendering of arrow
+   * @default true
    */
   arrow?: boolean;
   /**
@@ -52,17 +54,17 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
    */
   offset?: number;
   /**
-   * Content shown in tooltip
+   * Text-content inside tooltip
    */
   content: string;
   /**
-   * Sets max allowed character length
+   * Sets max allowed character length.
    * @default 80
    */
   maxChar?: number;
   /**
    * Adds a delay in milliseconds before opening tooltip
-   * @default 300
+   * @default 150
    */
   delay?: number;
   /**
@@ -71,7 +73,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   keys?: string[];
 }
 
-const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
+export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   (
     {
       children,
@@ -169,10 +171,10 @@ const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
-    const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [
-      ref,
-      refs.floating,
-    ]);
+    const stableRef = useMemo(
+      () => mergeRefs([ref, refs.floating]),
+      [ref, refs.floating]
+    );
 
     if (
       !children ||

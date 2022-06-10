@@ -1,3 +1,2 @@
-export { default as GuidePanel } from "./GuidePanel";
-export * from "./GuidePanel";
+export { default as GuidePanel, GuidePanelProps } from "./GuidePanel";
 export { GuideProps } from "./Guide";

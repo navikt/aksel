@@ -41,7 +41,10 @@ interface StepperContextProps {
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
 
-const Stepper: StepperComponent = forwardRef<HTMLOListElement, StepperProps>(
+export const Stepper: StepperComponent = forwardRef<
+  HTMLOListElement,
+  StepperProps
+>(
   (
     {
       children,

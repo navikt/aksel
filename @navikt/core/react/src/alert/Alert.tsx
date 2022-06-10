@@ -1,8 +1,8 @@
 import {
-  ErrorFilled,
-  InformationFilled,
-  SuccessFilled,
-  WarningFilled,
+  ErrorColored,
+  InformationColored,
+  SuccessColored,
+  WarningColored,
 } from "@navikt/ds-icons";
 import cl from "classnames";
 import React, { forwardRef } from "react";
@@ -14,21 +14,22 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Decides what design the alert will have
+   * Changes colors and icon usage when changed
    */
   variant: "error" | "warning" | "info" | "success";
   /**
    * Changes padding and font-sizes
-   * @default "medium"
+   * @default medium
    */
   size?: "medium" | "small";
   /**
-   * Toggles full-width Alert
+   * Toggles full-width Alert (removes border-radius)
    * @default false
    */
   fullWidth?: boolean;
   /**
    * Removes background from Alert
+   * @default false
    */
   inline?: boolean;
 }
@@ -36,13 +37,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled title="Feil" {...props} />;
+      return <ErrorColored title="Feil" {...props} />;
     case "warning":
-      return <WarningFilled title="Advarsel" {...props} />;
+      return <WarningColored title="Advarsel" {...props} />;
     case "info":
-      return <InformationFilled title="Informasjon" {...props} />;
+      return <InformationColored title="Informasjon" {...props} />;
     case "success":
-      return <SuccessFilled title="Suksess" {...props} />;
+      return <SuccessColored title="Suksess" {...props} />;
     default:
       return null;
   }
@@ -52,7 +53,7 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       children,

@@ -1,8 +1,7 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label, omit } from "..";
-import ErrorMessage from "./ErrorMessage";
+import { BodyShort, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
 
@@ -13,18 +12,25 @@ export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Visually allowed length of content
+   * Allowed character-count for content
+   * @note This is just a visual validator, you need to set actual character-limits if needed
    */
   maxLength?: number;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
-   * Maximum number of rows to display.
+   * Controlled value
+   */
+  value?: string;
+  /**
+   * Defaults input-value without needing controlled-state
+   */
+  defaultValue?: string;
+  /**
+   * Maximum number of character rows to display.
    * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
-   * Minimum number of rows to display.
+   * Minimum number of character-rows to display when empty.
    */
   minRows?: number;
   /**
@@ -37,7 +43,7 @@ export interface TextareaProps
   hideLabel?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
       inputProps,
@@ -59,6 +65,10 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 
     const maxLengthId = `TextareaMaxLength-${useId()}`;
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
+
+    const [controlledValue, setControlledValue] = useState<string>(
+      props?.defaultValue ?? ""
+    );
 
     return (
       <div
@@ -98,6 +108,11 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <TextareaAutosize
             {...omit(rest, ["error", "errorId", "size"])}
             {...inputProps}
+            onChange={(e) =>
+              props.onChange
+                ? props.onChange(e)
+                : setControlledValue(e.target.value)
+            }
             ref={ref}
             className={cl(
               "navds-textarea__input",
@@ -119,7 +134,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               </span>
               <Counter
                 maxLength={maxLength}
-                currentLength={props.value.length}
+                currentLength={props.value?.length ?? controlledValue?.length}
                 size={size}
               />
             </>

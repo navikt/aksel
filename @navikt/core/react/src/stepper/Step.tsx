@@ -1,16 +1,17 @@
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
-import { StepperContext } from ".";
+import { StepperContext } from "./Stepper";
 import { Label, OverridableComponent } from "..";
 
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   /**
-   * Text content under indicator
+   * Text content by indicator
    */
   children: string;
   /**
    * Handled by Stepper
+   * @private
    */
   index?: number;
 }
@@ -18,7 +19,7 @@ export interface StepperStepProps
 export interface StepperStepType
   extends OverridableComponent<StepperStepProps, HTMLAnchorElement> {}
 
-const StepComponent: OverridableComponent<
+export const StepComponent: OverridableComponent<
   StepperStepProps,
   HTMLAnchorElement
 > = forwardRef(

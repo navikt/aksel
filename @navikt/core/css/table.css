@@ -47,7 +47,20 @@
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__row:nth-of-type(odd):not(:hover):not(.navds-table__row--selected) {
+  .navds-table__row:nth-child(odd):not(:hover):not(.navds-table__row--selected) {
+  background-color: var(--navds-table-row-color-background-zebra);
+}
+
+.navds-table--zebra-stripes
+  .navds-table__body
+  .navds-table__expandable-row:nth-child(4n
+    + 1):not(:hover):not(.navds-table__row--selected) {
+  background-color: transparent;
+}
+
+.navds-table--zebra-stripes
+  .navds-table__body
+  .navds-table__expanded-row:nth-child(4n) {
   background-color: var(--navds-table-row-color-background-zebra);
 }
 
@@ -57,6 +70,11 @@
   padding: var(--navds-spacing-4) var(--navds-spacing-3);
   border-bottom: 1px solid var(--navds-table-cell-color-border);
   text-align: left;
+}
+
+.navds-table__header .navds-table__header-cell,
+.navds-table__header .navds-table__data-cell {
+  border-bottom-width: 2px;
 }
 
 .navds-table__header-cell--align-right,

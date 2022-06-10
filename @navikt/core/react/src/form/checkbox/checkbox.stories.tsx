@@ -14,48 +14,52 @@ export const Default = (props) => {
   const [state, setState] = useState(["checkbox1"]);
 
   return (
-    <CheckboxGroup
-      legend={props.legend}
-      description={props.description}
-      value={props.controlled ? state : undefined}
-      onChange={props.controlled ? setState : undefined}
-      hideLegend={props.hideLegend}
-      error={props.errorGroup ? "Errormelding" : undefined}
-      {...props}
-    >
-      <Checkbox
-        value="checkbox1"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
+    <div>
+      <CheckboxGroup
+        legend={props.legend}
+        description={props.description}
+        value={props.controlled ? state : undefined}
+        onChange={props.controlled ? setState : undefined}
+        hideLegend={props.hideLegend}
+        error={props.errorGroup ? "Errormelding" : undefined}
+        {...props}
       >
-        {props.children || "Apple"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox2"
-        error={props.errorSingle}
-        description={
-          props.checkboxDescription ? "Orange description" : undefined
-        }
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Orange"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox3"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Banana"}
-      </Checkbox>
-      <Checkbox
-        value="checkbox4"
-        indeterminate={props.indeterminate}
-        hideLabel={props.hideLabel}
-      >
-        {props.children || "Melon"}
-      </Checkbox>
-    </CheckboxGroup>
+        <Checkbox
+          value="checkbox1"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+        >
+          {props.children || "Apple"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox2"
+          error={props.errorSingle}
+          description={
+            props.checkboxDescription
+              ? "Quis laborum culpa enim amet cillum veniam."
+              : undefined
+          }
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+        >
+          {props.children || "Orange"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox3"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+        >
+          {props.children || "Banana"}
+        </Checkbox>
+        <Checkbox
+          value="checkbox4"
+          indeterminate={props.indeterminate}
+          hideLabel={props.hideLabel}
+        >
+          {props.children || "Melon"}
+        </Checkbox>
+      </CheckboxGroup>
+    </div>
   );
 };
 
@@ -63,6 +67,7 @@ Default.args = {
   controlled: false,
   legend: "Legend-tekst",
   checkboxDescription: false,
+  hideLabel: false,
   hideLegend: false,
   errorSingle: false,
   children: "",

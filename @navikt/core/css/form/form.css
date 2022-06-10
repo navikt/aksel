@@ -8,3 +8,14 @@
 .navds-form-field > .navds-sr-only + input:not(:first-child) {
   margin-top: 0;
 }
+
+.navds-form-field .navds-error-message,
+.navds-fieldset .navds-error-message {
+  display: flex;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-form-field .navds-error-message::before,
+.navds-fieldset .navds-error-message::before {
+  content: "•";
+}

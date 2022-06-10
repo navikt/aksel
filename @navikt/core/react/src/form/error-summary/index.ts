@@ -1,2 +1,2 @@
 export { default as ErrorSummary } from "./ErrorSummary";
-export * from "./ErrorSummary";
+export { ErrorSummaryProps } from "./ErrorSummary";

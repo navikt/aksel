@@ -25,6 +25,10 @@
   background: var(--navds-accordion-color-background);
 }
 
+.navds-accordion__item:focus-within {
+  position: relative;
+}
+
 .navds-accordion__header {
   width: 100%;
   display: flex;

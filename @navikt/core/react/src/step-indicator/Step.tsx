@@ -1,6 +1,6 @@
 import React, { forwardRef, useContext } from "react";
 import cl from "classnames";
-import { StepContext } from ".";
+import { StepContext } from "./StepIndicator";
 import { BodyShort, Label, OverridableComponent } from "..";
 
 export interface StepIndicatorStepProps
@@ -11,10 +11,12 @@ export interface StepIndicatorStepProps
   children: React.ReactNode;
   /**
    * Disables interaction with element
+   * @note We recommend not using disabled if possible
    */
   disabled?: boolean;
   /**
    * Handled by StepIndicator
+   * @private
    */
   index?: number;
 }
@@ -22,7 +24,7 @@ export interface StepIndicatorStepProps
 export interface StepIndicatorStepType
   extends OverridableComponent<StepIndicatorStepProps, HTMLButtonElement> {}
 
-const StepComponent: OverridableComponent<
+export const StepIndicatorStepComponent: OverridableComponent<
   StepIndicatorStepProps,
   HTMLButtonElement
 > = forwardRef(
@@ -74,6 +76,6 @@ const StepComponent: OverridableComponent<
   }
 );
 
-const Step = StepComponent as StepIndicatorStepType;
+const Step = StepIndicatorStepComponent as StepIndicatorStepType;
 
 export default Step;

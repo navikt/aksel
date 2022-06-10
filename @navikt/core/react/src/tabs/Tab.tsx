@@ -7,11 +7,11 @@ import { TabsContext } from "./Tabs";
 export interface TabProps
   extends Omit<React.HTMLAttributes<HTMLButtonElement>, "children"> {
   /**
-   * Content
+   * Tab label
    */
   label?: React.ReactNode;
   /**
-   * Icon
+   * Tab Icon
    */
   icon?: React.ReactNode;
   /**
@@ -27,7 +27,7 @@ export interface TabProps
 
 export type TabType = OverridableComponent<TabProps, HTMLButtonElement>;
 
-const Tab: TabType = forwardRef(
+export const Tab: TabType = forwardRef(
   (
     {
       className,

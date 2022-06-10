@@ -8,14 +8,15 @@ export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
-  ({ className, ...rest }, ref) => (
-    <div
-      ref={ref}
-      className={cl("navds-content-container", className)}
-      {...rest}
-    />
-  )
-);
+export const ContentContainer = forwardRef<
+  HTMLDivElement,
+  ContentContainerProps
+>(({ className, ...rest }, ref) => (
+  <div
+    ref={ref}
+    className={cl("navds-content-container", className)}
+    {...rest}
+  />
+));
 
 export default ContentContainer;

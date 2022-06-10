@@ -1,15 +1,15 @@
 import React, { forwardRef, useContext } from "react";
 import { Down, Up, UpDown } from "@navikt/ds-icons";
-import { TableContext } from "..";
+import { TableContext } from "./Table";
 import HeaderCell, { HeaderCellProps } from "./HeaderCell";
 
-interface ColumnHeaderProps extends HeaderCellProps {
+export interface ColumnHeaderProps extends HeaderCellProps {
   /**
    * Key to sort by
    */
   sortKey?: string;
   /**
-   * Column is sortable
+   * Column is sortable, adds indicators to show sorting
    * @default false
    */
   sortable?: boolean;
@@ -20,7 +20,7 @@ export interface ColumnHeaderType
     ColumnHeaderProps & React.RefAttributes<HTMLTableCellElement>
   > {}
 
-const ColumnHeader: ColumnHeaderType = forwardRef(
+export const ColumnHeader: ColumnHeaderType = forwardRef(
   ({ className, children, sortable = false, sortKey, ...rest }, ref) => {
     const context = useContext(TableContext);
 

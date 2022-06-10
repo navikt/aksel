@@ -29,7 +29,7 @@ export interface ToggleGroupProps
    */
   defaultValue?: string;
   /**
-   * Returns elements that wants to be active
+   * Callback for selected toggle
    */
   onChange: (value: string) => void;
   /**
@@ -53,7 +53,7 @@ export const ToggleGroupContext = createContext<ToggleContextProps | null>(
   null
 );
 
-const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
+export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   (
     {
       className,

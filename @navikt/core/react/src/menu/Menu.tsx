@@ -17,7 +17,7 @@ interface MenuComponent
   Item: MenuItemType;
 }
 
-const Menu = forwardRef<HTMLElement, MenuProps>(
+export const Menu = forwardRef<HTMLElement, MenuProps>(
   ({ children, className, ...rest }, ref) => (
     <nav
       {...rest}

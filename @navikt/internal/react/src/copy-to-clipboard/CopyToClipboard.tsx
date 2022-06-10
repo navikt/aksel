@@ -31,7 +31,10 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   title?: string;
 }
 
-const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
+export const CopyToClipboard = forwardRef<
+  HTMLButtonElement,
+  CopyToClipboardProps
+>(
   (
     {
       children,
