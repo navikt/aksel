@@ -2,13 +2,13 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import { Detail } from "../typography";
 
-export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
+export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Chat text
+   * Bubble text
    */
   children: React.ReactNode;
   /**
-   * Chat-message name
+   * name/sender on bubble
    */
   name?: string;
   /**
@@ -16,34 +16,30 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
    */
   timestamp?: string;
   /**
-   * Background color chat
+   * Background color on bubble
    */
   backgroundColor?: string;
 }
 
-export type ChatType = React.ForwardRefExoticComponent<
-  ChatProps & React.RefAttributes<HTMLDivElement>
+export type BubbleType = React.ForwardRefExoticComponent<
+  BubbleProps & React.RefAttributes<HTMLDivElement>
 >;
 
-const Chat: ChatType = forwardRef(
+const Bubble: BubbleType = forwardRef(
   ({ children, className, name, timestamp, backgroundColor, ...rest }, ref) => {
     return (
       <div
         ref={ref}
-        className={cl("navds-speech-bubble__chat", className)}
+        className={cl("navds-chat__bubble", className)}
         style={{ backgroundColor: backgroundColor }}
         tabIndex={0}
         {...rest}
       >
         {(timestamp || name) && (
-          <div className="navds-speech-bubble__top-text">
-            {name && (
-              <Detail className="navds-speech-bubble__name">{name}</Detail>
-            )}
+          <div className="navds-chat__top-text">
+            {name && <Detail className="navds-chat__name">{name}</Detail>}
             {timestamp && (
-              <Detail className="navds-speech-bubble__timestamp">
-                {timestamp}
-              </Detail>
+              <Detail className="navds-chat__timestamp">{timestamp}</Detail>
             )}
           </div>
         )}
@@ -53,4 +49,4 @@ const Chat: ChatType = forwardRef(
   }
 );
 
-export default Chat;
+export default Bubble;

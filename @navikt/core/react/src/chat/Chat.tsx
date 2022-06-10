@@ -1,11 +1,11 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
-import Chat, { ChatType } from "./Chat";
+import Bubble, { BubbleType } from "./Bubble";
 import { BodyLong, BodyShort } from "..";
 
-export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Children of type <SpeechBubble.Bubble />
+   * Children of type <Chat.Bubble />
    */
   children: React.ReactNode;
   /**
@@ -29,20 +29,20 @@ export interface SpeechBubbleProps extends HTMLAttributes<HTMLDivElement> {
    */
   avatarBgColor?: string;
   /**
-   * Positions avatar and Speechbubbles
+   * Positions avatar and Bubbles
    * @default "left"
    */
   position?: "left" | "right";
 }
 
-interface SpeechBubbleComponent
+interface ChatComponent
   extends React.ForwardRefExoticComponent<
-    SpeechBubbleProps & React.RefAttributes<HTMLDivElement>
+    ChatProps & React.RefAttributes<HTMLDivElement>
   > {
-  Chat: ChatType;
+  Bubble: BubbleType;
 }
 
-export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
+export const Chat = forwardRef<HTMLDivElement, ChatProps>(
   (
     {
       children,
@@ -60,21 +60,17 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
     return (
       <div
         ref={ref}
-        className={cl(
-          "navds-speech-bubble",
-          className,
-          `navds-speech-bubble--${position}`
-        )}
+        className={cl("navds-chat", className, `navds-chat--${position}`)}
         {...rest}
       >
         <BodyShort
           as="div"
-          className="navds-speech-bubble__avatar"
+          className="navds-chat__avatar"
           style={{ backgroundColor: avatarBgColor }}
         >
           {avatar}
         </BodyShort>
-        <ol className="navds-speech-bubble__chat-wrapper">
+        <ol className="navds-chat__bubble-wrapper">
           {React.Children.map(children, (child, i) => {
             if (React.isValidElement(child)) {
               return (
@@ -93,8 +89,8 @@ export const SpeechBubble = forwardRef<HTMLDivElement, SpeechBubbleProps>(
       </div>
     );
   }
-) as SpeechBubbleComponent;
+) as ChatComponent;
 
-SpeechBubble.Chat = Chat;
+Chat.Bubble = Bubble;
 
-export default SpeechBubble;
+export default Chat;

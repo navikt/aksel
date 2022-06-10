@@ -1,10 +1,10 @@
 import React from "react";
-import { SpeechBubble } from "../index";
+import { Chat } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 
 export default {
-  title: "ds-react/SpeechBubble",
-  component: SpeechBubble,
+  title: "ds-react/Chat",
+  component: Chat,
   argTypes: {
     backgroundColor: {
       control: {
@@ -21,24 +21,22 @@ export default {
 
 export const Default = (props) => {
   return (
-    <SpeechBubble
+    <Chat
       avatar={props?.avatar ?? "ON"}
       name={props?.name ?? "Ola Normann"}
       timestamp={props?.timestamp ?? "01.01.21 14:00"}
       avatarBgColor={props?.avatarBgColor}
       backgroundColor={props?.backgroundColor}
     >
-      <SpeechBubble.Chat>
+      <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
-        Tempor fugiat amet eu sint in in ullamco.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
+      </Chat.Bubble>
+      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+      <Chat.Bubble>
         Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
         labore nisi ut.
-      </SpeechBubble.Chat>
-    </SpeechBubble>
+      </Chat.Bubble>
+    </Chat>
   );
 };
 
@@ -50,45 +48,41 @@ Default.args = {
 
 export const Farger = () => {
   return (
-    <SpeechBubble
+    <Chat
       avatar={"ON"}
       name={"Ola Normann"}
       timestamp={"01.01.21 14:00"}
       avatarBgColor={"var(--navds-global-color-lightblue-200)"}
       backgroundColor={"var(--navds-global-color-lightblue-100)"}
     >
-      <SpeechBubble.Chat>
+      <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
-        Tempor fugiat amet eu sint in in ullamco.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
+      </Chat.Bubble>
+      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+      <Chat.Bubble>
         Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
         labore nisi ut.
-      </SpeechBubble.Chat>
-    </SpeechBubble>
+      </Chat.Bubble>
+    </Chat>
   );
 };
 
 export const Avatar = () => {
   return (
-    <SpeechBubble
+    <Chat
       avatar={<Illustration />}
       name={"Ola Normann"}
       timestamp={"01.01.21 14:00"}
     >
-      <SpeechBubble.Chat>
+      <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
-        Tempor fugiat amet eu sint in in ullamco.
-      </SpeechBubble.Chat>
-      <SpeechBubble.Chat>
+      </Chat.Bubble>
+      <Chat.Bubble>Tempor fugiat amet eu sint in in ullamco.</Chat.Bubble>
+      <Chat.Bubble>
         Adipisicing laborum est eu laborum est sit in commodo enim sint laboris
         labore nisi ut.
-      </SpeechBubble.Chat>
-    </SpeechBubble>
+      </Chat.Bubble>
+    </Chat>
   );
 };
 
