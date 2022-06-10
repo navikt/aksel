@@ -6,7 +6,7 @@
   list-style: none;
 }
 
-.navds-stepper.horizontal {
+.navds-stepper--horizontal {
   flex-direction: row;
 }
 
@@ -25,7 +25,7 @@
   flex-shrink: 0;
 }
 
-.navds-stepper__step.horizontal {
+.navds-stepper--horizontal .navds-stepper__step {
   padding: 0;
   flex-direction: column;
 }
@@ -45,7 +45,7 @@
   background-color: var(--navds-semantic-color-component-background-light);
 }
 
-.navds-stepper__step-number.horizontal {
+.navds-stepper--horizontal .navds-stepper__step-number {
   margin-right: var(--navds-spacing-12);
   margin-left: var(--navds-spacing-12);
 }
@@ -87,7 +87,7 @@
   flex-shrink: 0;
 }
 
-.navds-stepper__step-label.horizontal {
+.navds-stepper--horizontal .navds-stepper__step-label {
   margin-top: 0.5rem;
   text-align: center;
   align-self: center;
@@ -121,9 +121,10 @@
   z-index: 1;
 }
 
-.navds-stepper__step-wrapper:not(:last-child)
+.navds-stepper--horizontal
+  .navds-stepper__step-wrapper:not(:last-child)
   > .navds-stepper__step
-  > .navds-stepper__step-line.horizontal {
+  > .navds-stepper__step-line {
   left: 5.25rem;
   top: 13px;
   width: 5rem;

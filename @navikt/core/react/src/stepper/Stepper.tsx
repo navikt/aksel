@@ -56,12 +56,15 @@ export const Stepper: StepperComponent = forwardRef<
     },
     ref
   ) => {
-    const horizontalClass = horizontal ? "horizontal" : "";
     return (
       <ol
         {...rest}
         ref={ref}
-        className={cl("navds-stepper", horizontalClass, className)}
+        className={cl(
+          "navds-stepper",
+          horizontal ? "navds-stepper--horizontal" : "",
+          className
+        )}
       >
         <StepperContext.Provider
           value={{
@@ -74,7 +77,7 @@ export const Stepper: StepperComponent = forwardRef<
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__step-wrapper", horizontalClass)}
+                className={cl("navds-stepper__step-wrapper")}
                 key={index + (children?.toString?.() ?? "")}
               >
                 {React.isValidElement<StepperStepProps>(step)
