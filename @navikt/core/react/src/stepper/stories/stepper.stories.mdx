@@ -31,7 +31,7 @@ Du styrer selv state med `activeStep` og `onStepChange`.
 ```jsx
 <Stepper
   activeStep={activeStep}
-  horizontal
+  orientation="horizontal"
   onStepChange={(x) => setActiveStep(x)}
 >
   <Stepper.Step>Start</Stepper.Step>
@@ -44,7 +44,7 @@ Du styrer selv state med `activeStep` og `onStepChange`.
 ```
 
 <Canvas>
-  <Example horizontal />
+  <Example orientation="horizontal" />
 </Canvas>
 
 ## Override tags

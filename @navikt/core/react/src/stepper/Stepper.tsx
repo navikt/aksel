@@ -12,9 +12,10 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   className?: string;
   /**
-   * The direction the component grows. Default is "vertical".
+   * The direction the component grows.
+   * @default"vertical"
    */
-  horizontal?: boolean;
+  orientation?: "horizontal" | "vertical";
   /**
    * Current active step. NOTE: starts with 1, not 0
    */
@@ -36,7 +37,7 @@ interface StepperContextProps {
   activeStep: number;
   onStepChange: (step: number) => void;
   lastIndex: number;
-  horizontal?: boolean;
+  orientation: "horizontal" | "vertical";
 }
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
@@ -50,7 +51,7 @@ export const Stepper: StepperComponent = forwardRef<
       children,
       className,
       activeStep,
-      horizontal = false,
+      orientation = "vertical",
       onStepChange = () => {},
       ...rest
     },
@@ -63,7 +64,7 @@ export const Stepper: StepperComponent = forwardRef<
         ref={ref}
         className={cl(
           "navds-stepper",
-          horizontal ? "navds-stepper--horizontal" : "",
+          orientation === "horizontal" ? "navds-stepper--horizontal" : "",
           className
         )}
       >
@@ -72,7 +73,7 @@ export const Stepper: StepperComponent = forwardRef<
             activeStep,
             onStepChange,
             lastIndex: React.Children.count(children),
-            horizontal,
+            orientation,
           }}
         >
           {React.Children.map(children, (step, index) => {

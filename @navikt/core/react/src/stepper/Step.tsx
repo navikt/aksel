@@ -29,8 +29,8 @@ export const StepComponent: OverridableComponent<
       console.error("<Stepper.Step> has to be used within <Stepper>");
       return null;
     }
-    const { horizontal, activeStep } = context;
-    const horizontalClass = horizontal ? "horizontal" : "";
+    const { orientation, activeStep } = context;
+    const horizontalClass = orientation === "horizontal" ? "horizontal" : "";
 
     return (
       <Component
