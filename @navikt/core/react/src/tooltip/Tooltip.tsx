@@ -171,10 +171,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
-    const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [
-      ref,
-      refs.floating,
-    ]);
+    const stableRef = useMemo(
+      () => mergeRefs([ref, refs.floating]),
+      [ref, refs.floating]
+    );
 
     if (
       !children ||

@@ -78,10 +78,11 @@ export const SearchContext = React.createContext<SearchContextProps | null>(
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
   (props, ref) => {
-    const { inputProps, size = "medium", inputDescriptionId } = useSearch(
-      props,
-      "searchfield"
-    );
+    const {
+      inputProps,
+      size = "medium",
+      inputDescriptionId,
+    } = useSearch(props, "searchfield");
 
     const {
       className,

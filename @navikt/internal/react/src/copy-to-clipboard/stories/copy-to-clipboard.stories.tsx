@@ -21,6 +21,16 @@ export const All = () => {
         Kopier tekst
       </CopyToClipboard>
 
+      <h2>Ikon til høyre</h2>
+      <CopyToClipboard
+        popoverText={label}
+        copyText={text}
+        title="wat"
+        iconPlacement="right"
+      >
+        Kopier tekst
+      </CopyToClipboard>
+
       <h2>Small size</h2>
       <CopyToClipboard popoverText={label} copyText={text} size="small">
         Kopier tekst
