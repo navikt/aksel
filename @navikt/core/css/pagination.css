@@ -35,6 +35,10 @@
   color: var(--navds-semantic-color-text);
 }
 
+.navds-pagination--medium .navds-pagination__item {
+  border-radius: var(--navds-border-radius-medium);
+}
+
 .navds-pagination__item[aria-current="true"] {
   background-color: var(--navds-pagination-color-background-selected);
   color: var(--navds-pagination-color-text-selected);
