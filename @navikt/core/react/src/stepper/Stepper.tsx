@@ -16,7 +16,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   horizontal?: boolean;
   /**
-   * Current active step index
+   * Current active step. NOTE: starts with 1, not 0
    */
   activeStep: number;
   /**
