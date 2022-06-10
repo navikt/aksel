@@ -16,8 +16,8 @@ export const All = (props) => {
       <h2>Small</h2>
       <Pagination size="small" {...props} page={page} onPageChange={setPage} />
 
-      <h2>large</h2>
-      <Pagination {...props} page={page} onPageChange={setPage} size="large" />
+      <h2>xsmall</h2>
+      <Pagination size="xsmall" {...props} page={page} onPageChange={setPage} />
 
       <h2>prevNextTexts</h2>
       <Pagination prevNextTexts {...props} page={page} onPageChange={setPage} />
@@ -29,10 +29,10 @@ export const All = (props) => {
         page={page}
         onPageChange={setPage}
       />
-      <h3>prevNextTexts large</h3>
+      <h3>prevNextTexts xsmall</h3>
       <Pagination
         prevNextTexts
-        size="large"
+        size="xsmall"
         {...props}
         page={page}
         onPageChange={setPage}
