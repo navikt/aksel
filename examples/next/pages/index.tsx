@@ -39,7 +39,7 @@ import {
   Tooltip,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
-import { Divider, Dropdown } from "@navikt/ds-react-internal";
+import { Dropdown } from "@navikt/ds-react-internal";
 
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
@@ -250,7 +250,7 @@ const Home: NextPage = () => {
               Gosys
             </Dropdown.Menu.GroupedList.Item>
           </Dropdown.Menu.GroupedList>
-          <Divider />
+          <Dropdown.Menu.Divider />
           <Dropdown.Menu.List>
             <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
             <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
