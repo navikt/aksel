@@ -10,9 +10,15 @@ export interface PaginationItemProps
    * @default false
    */
   selected?: boolean;
-  onClick;
-  page;
-  size?;
+  /**
+   * The page the item represents
+   */
+  page: number;
+  /**
+   * Changes padding, height and font-size
+   * @default medium
+   */
+  size?: "medium" | "small" | "xsmall";
 }
 
 export type PaginationItemType = OverridableComponent<

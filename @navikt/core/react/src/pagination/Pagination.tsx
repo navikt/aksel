@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "classnames";
 import { Back, Next } from "@navikt/ds-icons";
-import { BodyShort, Button } from "..";
+import { BodyShort } from "..";
 import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
@@ -41,7 +41,10 @@ export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
    * @default false
    */
   prevNextTexts?: boolean;
-
+  /**
+   * Override pagination item rendering
+   * @default (item: PaginationItemProps) => <PaginationItem {...item} />
+   */
   renderItem?: (item: PaginationItemProps) => ReturnType<React.FC>;
 }
 
@@ -96,7 +99,9 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       className,
       size = "medium",
       prevNextTexts = false,
-      renderItem,
+      renderItem: Item = (item: PaginationItemProps) => (
+        <PaginationItem {...item} />
+      ),
       ...rest
     },
     ref
@@ -118,10 +123,6 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
       return null;
     }
 
-    const Item =
-      renderItem ??
-      ((item: PaginationItemProps) => <PaginationItem {...item} size={size} />);
-
     return (
       <nav
         ref={ref}
@@ -141,6 +142,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               disabled={page === 1}
               onClick={() => onPageChange(page - 1)}
               page={page - 1}
+              size={size}
             >
               <Back
                 className="navds-pagination__prev-next-icon"
@@ -171,6 +173,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
                     onClick={() => onPageChange(n)}
                     selected={page === n}
                     page={n}
+                    size={size}
                   >
                     <BodyShort size={size === "xsmall" ? "small" : size}>
                       {n}
@@ -188,6 +191,7 @@ const Pagination = forwardRef<HTMLElement, PaginationProps>(
               disabled={page === count}
               onClick={() => onPageChange(page + 1)}
               page={page + 1}
+              size={size}
             >
               {prevNextTexts && (
                 <BodyShort
