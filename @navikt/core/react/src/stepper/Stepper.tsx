@@ -14,7 +14,7 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
    * The direction the component grows. Default is "vertical".
    */
-  horisontal?: boolean;
+  horizontal?: boolean;
   /**
    * Current active step index
    */
@@ -36,7 +36,7 @@ interface StepperContextProps {
   activeStep: number;
   onStepChange: (step: number) => void;
   lastIndex: number;
-  horisontal?: boolean;
+  horizontal?: boolean;
 }
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
@@ -50,31 +50,31 @@ export const Stepper: StepperComponent = forwardRef<
       children,
       className,
       activeStep,
-      horisontal = false,
+      horizontal = false,
       onStepChange = () => {},
       ...rest
     },
     ref
   ) => {
-    const horisontalClass = horisontal ? "horisontal" : "";
+    const horizontalClass = horizontal ? "horizontal" : "";
     return (
       <ol
         {...rest}
         ref={ref}
-        className={cl("navds-stepper", horisontalClass, className)}
+        className={cl("navds-stepper", horizontalClass, className)}
       >
         <StepperContext.Provider
           value={{
             activeStep,
             onStepChange,
             lastIndex: React.Children.count(children),
-            horisontal,
+            horizontal,
           }}
         >
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__step-wrapper", horisontalClass)}
+                className={cl("navds-stepper__step-wrapper", horizontalClass)}
                 key={index + (children?.toString?.() ?? "")}
               >
                 {React.isValidElement<StepperStepProps>(step)

@@ -29,15 +29,15 @@ export const StepComponent: OverridableComponent<
       console.error("<Stepper.Step> has to be used within <Stepper>");
       return null;
     }
-    const { horisontal, activeStep } = context;
-    const horisontalClass = horisontal ? "horisontal" : "";
+    const { horizontal, activeStep } = context;
+    const horizontalClass = horizontal ? "horizontal" : "";
 
     return (
       <Component
         {...rest}
         aria-current={Boolean(activeStep === index)}
         ref={ref}
-        className={cl("navds-stepper__step", horisontalClass, className, {
+        className={cl("navds-stepper__step", horizontalClass, className, {
           "navds-stepper__step--active": activeStep === index,
         })}
         onClick={(e) => {
@@ -45,14 +45,14 @@ export const StepComponent: OverridableComponent<
           rest?.onClick?.(e);
         }}
       >
-        <span className={cl(`navds-stepper__step-line`, horisontalClass)} />
+        <span className={cl(`navds-stepper__step-line`, horizontalClass)} />
         <Label
-          className={cl("navds-stepper__step-number", horisontalClass)}
+          className={cl("navds-stepper__step-number", horizontalClass)}
           as="span"
         >
           {index + 1}
         </Label>
-        <Label className={cl("navds-stepper__step-label", horisontalClass)}>
+        <Label className={cl("navds-stepper__step-label", horizontalClass)}>
           {children}
         </Label>
       </Component>
