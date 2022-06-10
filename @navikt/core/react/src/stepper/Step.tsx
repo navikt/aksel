@@ -41,7 +41,7 @@ export const StepComponent: OverridableComponent<
           "navds-stepper__step--active": activeStep === index,
         })}
         onClick={(e) => {
-          context.onStepChange(index);
+          context.onStepChange(index + 1);
           rest?.onClick?.(e);
         }}
       >

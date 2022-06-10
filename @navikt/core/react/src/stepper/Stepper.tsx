@@ -56,6 +56,7 @@ export const Stepper: StepperComponent = forwardRef<
     },
     ref
   ) => {
+    activeStep = activeStep - 1;
     return (
       <ol
         {...rest}
