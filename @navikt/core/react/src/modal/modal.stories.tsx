@@ -5,7 +5,7 @@ export default {
   title: "ds-react/Modal",
   component: Modal,
   parameters: {
-    chromatic: { delay: 300 },
+    chromatic: { delay: 1000 },
   },
 };
 
@@ -45,7 +45,7 @@ Default.args = {
 };
 
 export const Open = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(null);
 
   useEffect(() => {
     Modal.setAppElement("#root");
@@ -55,7 +55,7 @@ export const Open = () => {
     <>
       <Button onClick={() => setOpen(true)}>Open</Button>
       <Modal
-        open={open}
+        open={open ?? true}
         onClose={() => setOpen(false)}
         aria-labelledby="header123"
       >
