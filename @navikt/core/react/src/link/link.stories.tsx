@@ -1,8 +1,7 @@
+import { Add } from "@navikt/ds-icons";
 import React from "react";
-import { Link } from "..";
-import { Add, Send } from "@navikt/ds-icons";
+import { ConfirmationPanel as DsConfirmationPanel, Link } from "..";
 import { Alert as DsAlert, BodyLong } from "../..";
-import { ConfirmationPanel as DsConfirmationPanel } from "..";
 export default {
   title: "ds-react/link",
   component: Link,
