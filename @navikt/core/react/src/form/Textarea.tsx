@@ -41,6 +41,10 @@ export interface TextareaProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * Enables resizing of field
+   */
+  resize?: boolean;
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
@@ -60,6 +64,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       description,
       maxLength,
       hideLabel = false,
+      resize,
       ...rest
     } = props;
 
@@ -70,6 +75,14 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       props?.defaultValue ?? ""
     );
 
+    const getMinRows = () => {
+      let rows = rest?.minRows && rest?.minRows >= 3 ? rest?.minRows : 3;
+      if (size === "small") {
+        rows = rest?.minRows && rest?.minRows >= 2 ? rest?.minRows : 2;
+      }
+      return rows;
+    };
+
     return (
       <div
         className={cl(
@@ -79,6 +92,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {
             "navds-textarea--error": hasError,
             "navds-textarea--disabled": !!inputProps.disabled,
+            "navds-textarea--resize": resize,
           }
         )}
       >
@@ -113,6 +127,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 ? props.onChange(e)
                 : setControlledValue(e.target.value)
             }
+            minRows={getMinRows()}
             ref={ref}
             className={cl(
               "navds-textarea__input",
@@ -162,8 +177,8 @@ export const Counter = ({ maxLength, currentLength, size }) => {
       size={size}
     >
       {difference < 0
-        ? `Du har ${Math.abs(difference)} tegn for mye`
-        : `Du har ${difference} tegn igjen`}
+        ? `Antall tegn for mye ${Math.abs(difference)}`
+        : `Antall tegn igjen ${difference}`}
     </BodyShort>
   );
 };
