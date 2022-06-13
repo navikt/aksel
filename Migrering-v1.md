@@ -43,3 +43,21 @@ Selve boblene har nå bedre padding slik at `Chat` med position `left` og `right
 ## Tokens (BREAKING)
 
 - `--navds-shadow-popover` er fjernet. Bruk `navds-shadow-medium` som erstattning
+
+## Deprecated komponenter
+
+### MicroCard
+
+Denne komponenten blir i dag brukt på nav.no sine sidemaler, men med et nyere og mer oppdatert design. Vi håper å på sikt få til en løsning for å lettere kunne ta i bruk kompoentene brukt på sidemalene.
+
+### PageHeader
+
+Samme som MicroCard.
+
+### Menu
+
+Samme som MicroCard.
+
+### StepIndicator
+
+Erstattes av `<Stepper />`-komponmenten sin horisontale variant.
