@@ -5,6 +5,15 @@ import { BodyLong, Heading as DsHeading } from "..";
 export default {
   title: "ds-react/Alert",
   component: Alert,
+  argTypes: {
+    variant: {
+      defaultValue: "info",
+      control: {
+        type: "radio",
+        options: ["error", "warning", "info", "success"],
+      },
+    },
+  },
 };
 
 const variants: Array<"error" | "warning" | "info" | "success"> = [
@@ -26,7 +35,6 @@ export const Default = (props) => (
 );
 
 Default.args = {
-  variant: "info",
   children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
 };
 

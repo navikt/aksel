@@ -1,69 +1,102 @@
-import React, { useState } from "react";
-import { Modal } from "../..";
+import React, { useEffect, useState } from "react";
+import { BodyLong, Button, Heading, Modal } from "../..";
 
 export default {
-  title: "ds-react/modal",
+  title: "ds-react/Modal",
   component: Modal,
+  parameters: {
+    chromatic: { delay: 1000 },
+  },
 };
 
-Modal.setAppElement("#root");
+export const Default = (props) => {
+  const [open, setOpen] = useState(false);
 
-export const All = () => {
-  const [open, setOpen] = useState(true);
-  const [openTwo, setOpenTwo] = useState(false);
-  const [openThree, setOpenThree] = useState(false);
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Open modal</button>
+      <Button onClick={() => setOpen(true)}>Open</Button>
       <Modal
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="header123"
+        {...props}
       >
         <Modal.Content>
-          <h1 id="header123">Header</h1>
-          <h2>subheader</h2>
-          <p>Cupidatat irure ipsum veniam ad in esse.</p>
-          <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
+          <Heading spacing id="header123" level="1" size="large">
+            Header
+          </Heading>
+          <Heading spacing level="2" size="medium">
+            Header
+          </Heading>
+          <BodyLong>Voluptate laboris mollit dolore qui. Magna elit.</BodyLong>
         </Modal.Content>
       </Modal>
+    </>
+  );
+};
 
-      <button onClick={() => setOpenTwo(true)}>
-        Open modal,shouldCloseOnOverlayClick false{" "}
-      </button>
+Default.args = {
+  shouldCloseOnOverlayClick: true,
+  closeButton: true,
+};
+
+export const Open = () => {
+  const [open, setOpen] = useState(null);
+
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open</Button>
       <Modal
-        shouldCloseOnOverlayClick={false}
-        open={openTwo}
-        onClose={() => setOpenTwo(false)}
+        open={open ?? true}
+        onClose={() => setOpen(false)}
         aria-labelledby="header123"
       >
         <Modal.Content>
-          <h1 id="header123">Header</h1>
-          <h2>subheader</h2>
-          <p>
-            Cupidatat irure ipsum veniam ad in esse. Voluptate do nulla amet
-            laboris ea ex aliquip. Dolore dolore reprehenderit sint esse commodo
-            aliqua cupidatat incididunt proident laborum qui. Officia fugiat non
-            anim cupidatat. Adipisicing ut aliqua cillum nulla elit. Mollit et
-            id duis cupidatat labore magna consectetur et veniam tempor. In
-            minim exercitation id irure velit sit dolor aliquip velit esse.
-            Excepteur sint non minim nulla excepteur labore non magna eu.
-          </p>
+          <Heading spacing id="header123" level="1" size="large">
+            Header
+          </Heading>
+          <Heading spacing level="2" size="medium">
+            Header
+          </Heading>
+          <BodyLong>Voluptate laboris mollit dolore qui. Magna elit.</BodyLong>
         </Modal.Content>
       </Modal>
-      <button onClick={() => setOpenThree(true)}>
-        Open modal without x-button
-      </button>
+    </>
+  );
+};
+
+export const CloseButton = () => {
+  const [open, setOpen] = useState(true);
+
+  useEffect(() => {
+    Modal.setAppElement("#root");
+  }, []);
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>Open</Button>
       <Modal
-        open={openThree}
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="header123"
         closeButton={false}
-        onClose={() => setOpenThree(false)}
-        aria-label="Min modal"
       >
         <Modal.Content>
-          <p>Cupidatat irure ipsum veniam ad in esse.</p>
-          <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
+          <Heading spacing id="header123" level="1" size="large">
+            Header
+          </Heading>
+          <Heading spacing level="2" size="medium">
+            Header
+          </Heading>
+          <BodyLong>Voluptate laboris mollit dolore qui. Magna elit.</BodyLong>
         </Modal.Content>
       </Modal>
     </>
