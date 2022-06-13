@@ -8,7 +8,6 @@ export * from "./guide-panel";
 export * from "./link";
 export * from "./link-panel";
 export * from "./loader";
-export * from "./menu";
 export * from "./modal";
 export * from "./pagination";
 export * from "./panel";
