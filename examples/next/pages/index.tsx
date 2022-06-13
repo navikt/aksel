@@ -27,7 +27,7 @@ import {
   ReadMore,
   Search,
   Select,
-  SpeechBubble,
+  Chat,
   Stepper,
   Switch,
   Table,
