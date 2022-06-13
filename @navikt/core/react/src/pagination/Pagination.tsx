@@ -140,7 +140,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 "navds-pagination--invisible": page === 1,
               })}
               disabled={page === 1}
-              onClick={() => onPageChange(page - 1)}
+              onClick={() => onPageChange?.(page - 1)}
               page={page - 1}
               size={size}
             >
@@ -170,7 +170,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               ) : (
                 <li key={step}>
                   <Item
-                    onClick={() => onPageChange(n)}
+                    onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}
                     size={size}
@@ -189,7 +189,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                 "navds-pagination--invisible": page === count,
               })}
               disabled={page === count}
-              onClick={() => onPageChange(page + 1)}
+              onClick={() => onPageChange?.(page + 1)}
               page={page + 1}
               size={size}
             >
