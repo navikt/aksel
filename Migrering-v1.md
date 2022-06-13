@@ -42,7 +42,8 @@ Selve boblene har nå bedre padding slik at `Chat` med position `left` og `right
 
 ## Tokens (BREAKING)
 
-- `--navds-shadow-popover` er fjernet. Bruk `navds-shadow-medium` som erstattning
+- `--navds-shadow-popover` er fjernet. Bruk `navds-shadow-medium` som erstattning.
+- `--navds-shadow-card` er fjernet. Bruk `navds-shadow-medium` som erstattning
 
 ## Deprecated komponenter
 
