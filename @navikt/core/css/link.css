@@ -48,10 +48,6 @@
 }
 
 .navds-link svg {
-  color: var(--navds-link-color-icon);
+  color: inherit;
   flex-shrink: 0;
-}
-
-.navds-link:focus svg {
-  color: var(--navds-link-color-icon-focus);
 }
