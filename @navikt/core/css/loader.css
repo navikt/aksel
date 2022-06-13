@@ -52,6 +52,10 @@
   stroke: var(--navds-loader-color-transparent-background);
 }
 
+.navds-loader--3xlarge {
+  width: 5.5rem;
+}
+
 .navds-loader--2xlarge {
   width: 4rem;
 }

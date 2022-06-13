@@ -8,7 +8,15 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["2xlarge", "xlarge", "large", "medium", "small", "xsmall"],
+        options: [
+          "3xlarge",
+          "2xlarge",
+          "xlarge",
+          "large",
+          "medium",
+          "small",
+          "xsmall",
+        ],
       },
     },
     variant: {
@@ -30,6 +38,7 @@ Default.args = {
 
 export const Size = () => (
   <div>
+    <Loader size="3xlarge" />
     <Loader size="2xlarge" />
     <Loader size="xlarge" />
     <Loader size="large" />
@@ -42,14 +51,14 @@ export const Size = () => (
 export const Variant = () => (
   <div className="colgap">
     <div>
-      <Loader size="2xlarge" variant="neutral" />
-      <Loader size="2xlarge" variant="inverted" />
-      <Loader size="2xlarge" variant="interaction" />
+      <Loader size="3xlarge" variant="neutral" />
+      <Loader size="3xlarge" variant="inverted" />
+      <Loader size="3xlarge" variant="interaction" />
     </div>
     <div style={{ backgroundColor: "#292929" }}>
-      <Loader size="2xlarge" variant="neutral" />
-      <Loader size="2xlarge" variant="inverted" />
-      <Loader size="2xlarge" variant="interaction" />
+      <Loader size="3xlarge" variant="neutral" />
+      <Loader size="3xlarge" variant="inverted" />
+      <Loader size="3xlarge" variant="interaction" />
     </div>
   </div>
 );
@@ -57,14 +66,14 @@ export const Variant = () => (
 export const Transparent = () => (
   <div className="colgap">
     <div>
-      <Loader size="2xlarge" transparent variant="neutral" />
-      <Loader size="2xlarge" transparent variant="inverted" />
-      <Loader size="2xlarge" transparent variant="interaction" />
+      <Loader size="3xlarge" transparent variant="neutral" />
+      <Loader size="3xlarge" transparent variant="inverted" />
+      <Loader size="3xlarge" transparent variant="interaction" />
     </div>
     <div style={{ backgroundColor: "#292929" }}>
-      <Loader size="2xlarge" transparent variant="neutral" />
-      <Loader size="2xlarge" transparent variant="inverted" />
-      <Loader size="2xlarge" transparent variant="interaction" />
+      <Loader size="3xlarge" transparent variant="neutral" />
+      <Loader size="3xlarge" transparent variant="inverted" />
+      <Loader size="3xlarge" transparent variant="interaction" />
     </div>
   </div>
 );

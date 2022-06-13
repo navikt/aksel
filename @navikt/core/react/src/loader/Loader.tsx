@@ -8,7 +8,14 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
-  size?: "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
+  size?:
+    | "3xlarge"
+    | "2xlarge"
+    | "xlarge"
+    | "large"
+    | "medium"
+    | "small"
+    | "xsmall";
   /**
    * Title prop on svg
    * @default "venter..."
