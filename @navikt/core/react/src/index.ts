@@ -24,7 +24,3 @@ export * from "./tabs";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
-
-/* Navno spesific packages */
-export * from "./card";
-export * from "./page-header";
