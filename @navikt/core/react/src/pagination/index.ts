@@ -1,2 +1,1 @@
-export { default as Pagination } from "./Pagination";
-export { PaginationProps } from "./Pagination";
+export { default as Pagination, PaginationProps } from "./Pagination";

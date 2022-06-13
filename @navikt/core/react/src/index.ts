@@ -14,7 +14,7 @@ export * from "./pagination";
 export * from "./panel";
 export * from "./popover";
 export * from "./read-more";
-export * from "./speech-bubble";
+export * from "./chat";
 export * from "./step-indicator";
 export * from "./stepper";
 export * from "./tag";

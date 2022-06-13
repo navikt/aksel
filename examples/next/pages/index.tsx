@@ -156,13 +156,34 @@ const Home: NextPage = () => {
         <Popover.Content>Popover content</Popover.Content>
       </Popover>
       <ReadMore header="ReadMore header">ReadMore body</ReadMore>
-      <SpeechBubble
-        illustration={<div>KAJ</div>}
-        topText="Ola Normann 01.01.21 14:00"
-        position="right"
-      >
-        <SpeechBubble.Bubble>Per skriver....</SpeechBubble.Bubble>
-      </SpeechBubble>
+      <div>
+        <Chat
+          avatar=""
+          name="Kari Normann"
+          timestamp="02.01.21 14:00"
+          position="right"
+        >
+          <Chat.Bubble>
+            Ut culpa consequat pariatur sint irure cupidatat laborum culpa elit
+            cillum commodo dolore.
+          </Chat.Bubble>
+          <Chat.Bubble>
+            Pariatur cillum laboris ut consectetur cillum sit nulla.
+          </Chat.Bubble>
+        </Chat>
+        <Chat
+          avatar={<div>ON</div>}
+          name="Ola Normann"
+          timestamp="01.01.21 14:00"
+          position="left"
+        >
+          <Chat.Bubble>
+            Ut culpa consequat pariatur sint irure cupidatat laborum culpa elit
+            cillum commodo dolore.
+          </Chat.Bubble>
+          <Chat.Bubble>Ola skriver....</Chat.Bubble>
+        </Chat>
+      </div>
       <Stepper activeStep={1} aria-labelledby="stepper-heading">
         <Stepper.Step>Start søknad</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
