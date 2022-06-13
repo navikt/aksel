@@ -36,7 +36,6 @@
   border: 1px solid var(--navds-textarea-color-border);
   resize: none;
   width: 100%;
-  transition: height 0.1s ease-out;
   display: block;
   min-height: 48px;
 }
