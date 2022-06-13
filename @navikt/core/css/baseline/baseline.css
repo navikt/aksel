@@ -45,7 +45,7 @@ a {
 
 /* https://web.dev/prefers-reduced-motion/ */
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.navds-loader *):not(.navds-loader),
   ::before,
   ::after {
     animation-delay: -1ms !important;
