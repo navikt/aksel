@@ -101,7 +101,7 @@ export const MaxLength = () => {
 };
 
 export const MinRows = () => {
-  return <Textarea minRows={2} label="Ipsum enim quis culpa" />;
+  return <Textarea minRows={5} label="Ipsum enim quis culpa" />;
 };
 
 export const MaxRows = () => {
