@@ -34,7 +34,7 @@ Default.args = {
 
 export const Small = () => {
   return (
-    <div className="colgap">
+    <div className="rowgap">
       {variants.map((variant, i) => (
         <Tag key={variant} variant={variant} size="small">
           {new Array(i + 1).fill("Id elit esse")}
