@@ -5,7 +5,7 @@ import { Table } from "../index";
 import { Loader, Pagination, SortState } from "../..";
 
 export default {
-  title: "ds-react/table",
+  title: "ds-react/Table",
   component: Table,
   parameters: {
     chromatic: { delay: 500 },
