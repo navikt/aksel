@@ -19,7 +19,6 @@ import {
   Link,
   LinkPanel,
   Loader,
-  Menu,
   Modal,
   Pagination,
   Popover,
@@ -122,19 +121,6 @@ const Home: NextPage = () => {
         </LinkPanel>
       </NextLink>
       <Loader />
-      <Menu>
-        <NextLink href="/linkTarget" passHref>
-          <Menu.Item>Leo</Menu.Item>
-        </NextLink>
-        <Menu.Collapse title="Proin">
-          <NextLink href="/" passHref>
-            <Menu.Item active>Nulla</Menu.Item>
-          </NextLink>
-          <NextLink href="/linkTarget" passHref>
-            <Menu.Item>Luctus</Menu.Item>
-          </NextLink>
-        </Menu.Collapse>
-      </Menu>
       <Button onClick={() => setOpen(true)}>Open modal</Button>
       <Modal
         open={open}
