@@ -3,7 +3,7 @@ import React from "react";
 import { ConfirmationPanel as DsConfirmationPanel, Link } from "..";
 import { Alert as DsAlert, BodyLong } from "../..";
 export default {
-  title: "ds-react/link",
+  title: "ds-react/Link",
   component: Link,
 };
 
