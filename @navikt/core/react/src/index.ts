@@ -15,7 +15,6 @@ export * from "./panel";
 export * from "./popover";
 export * from "./read-more";
 export * from "./chat";
-export * from "./step-indicator";
 export * from "./stepper";
 export * from "./tag";
 export * from "./toggle-group";
