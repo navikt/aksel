@@ -75,7 +75,6 @@ export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           cy="25"
           r="20"
           fill="none"
-          strokeWidth="5"
         />
         <circle
           className="navds-loader__foreground"
@@ -84,9 +83,7 @@ export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           r="20"
           stroke={"var(--navds-global-color-gray-400)"}
           fill="none"
-          strokeWidth="5"
           strokeDasharray="50 155"
-          strokeLinecap="round"
         />
       </svg>
     );
