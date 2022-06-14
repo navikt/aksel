@@ -11,6 +11,7 @@ module.exports = {
     };
     return config;
   },
+  staticDirs: ["./public"],
   devServer: {
     stats: "errors-only",
   },

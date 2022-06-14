@@ -7,10 +7,27 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["ds-icons", "ds-react", ["Default"]],
+      order: ["Intro", "ds-icons", "ds-react", ["Default"]],
       locales: "",
     },
   },
   viewMode: "docs",
   layout: "centered",
+  backgrounds: {
+    default: "Canvas",
+    values: [
+      {
+        name: "Canvas",
+        value: "#ffffff",
+      },
+      {
+        name: "Alternate",
+        value: "#f7f7f7",
+      },
+      {
+        name: "Inverted",
+        value: "#292929",
+      },
+    ],
+  },
 };
