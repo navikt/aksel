@@ -1,21 +1,17 @@
 import React from "react";
-import { Heading } from "@navikt/ds-react";
 import { Dropdown } from "..";
+import { Meta } from "@storybook/react";
 
 export default {
-  title: "ds-react-internal/dropdown",
+  title: "ds-react-internal/Dropdown",
   component: Dropdown,
-};
+} as Meta;
 
-export const All = () => (
-  <>
-    <Heading level="1" size="xlarge">
-      Dropdown menu
-    </Heading>
+export const Default = () => {
+  return (
     <Dropdown>
       <Dropdown.Toggle>Toggle</Dropdown.Toggle>
-
-      <Dropdown.Menu>
+      <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.GroupedList>
           <Dropdown.Menu.GroupedList.Heading>
             Systemer og oppslagsverk
@@ -30,5 +26,5 @@ export const All = () => (
         </Dropdown.Menu.List>
       </Dropdown.Menu>
     </Dropdown>
-  </>
-);
+  );
+};

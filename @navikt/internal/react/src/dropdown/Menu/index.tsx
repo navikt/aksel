@@ -15,6 +15,11 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
    * onClose callback
    */
   onClose?: () => void;
+  /**
+   * Popover positionion strategy
+   * @default "absolute"
+   */
+  strategy?: "fixed" | "absolute";
 }
 
 export interface MenuType<Props = MenuProps>
