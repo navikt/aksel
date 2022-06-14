@@ -13,4 +13,21 @@ export const parameters = {
   },
   viewMode: "docs",
   layout: "centered",
+  backgrounds: {
+    default: "Canvas",
+    values: [
+      {
+        name: "Canvas",
+        value: "#ffffff",
+      },
+      {
+        name: "Alternate",
+        value: "#f7f7f7",
+      },
+      {
+        name: "Inverted",
+        value: "#292929",
+      },
+    ],
+  },
 };
