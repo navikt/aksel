@@ -67,7 +67,7 @@ Default.args = {
   label: false,
 };
 
-export const Options = () => {
+export const Compositions = () => {
   const [activeValue, setActiveValue] = useState("ulest");
 
   return (
