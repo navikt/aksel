@@ -3,76 +3,73 @@ import { Table } from "..";
 import { Link } from "../..";
 
 export default {
-  title: "ds-react/table",
+  title: "ds-react/Table",
   component: Table,
 };
 
 export const Expandable = () => {
-  const [open, setOpen] = useState(false);
-
   return (
-    <>
-      <Table zebraStripes>
-        <Table.Header>
-          <Table.Row>
-            {columns.map(({ key, name }) => (
-              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+    <Table zebraStripes>
+      <Table.Header>
+        <Table.Row>
+          {columns.map(({ key, name }) => (
+            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+          ))}
+          <Table.HeaderCell />
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.map((data) => (
+          <Table.ExpandableRow
+            expansionDisabled={data.animal === "Sel"}
+            content={data.content}
+            key={data.name}
+            togglePlacement="right"
+          >
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
             ))}
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {data.map((data) => (
-            <Table.ExpandableRow
-              expansionDisabled={data.animal === "Sel"}
-              content={data.content}
-              key={data.name}
-              togglePlacement="right"
-            >
-              {columns.map(({ key }) => (
-                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
-              ))}
-            </Table.ExpandableRow>
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table>
+  );
+};
+
+export const ExpandableSmall = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Table size="small">
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell />
+          {columns.map(({ key, name }) => (
+            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
           ))}
-        </Table.Body>
-      </Table>
-      <h2>defaultOpen/controlled + small</h2>
-      <Table size="small">
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell />
-            {columns.map(({ key, name }) => (
-              <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.slice(0, 1).map((data) => (
+          <Table.ExpandableRow content={data.content} key={data.name}>
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
             ))}
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {data.slice(0, 1).map((data) => (
-            <Table.ExpandableRow
-              content={data.content}
-              key={data.name}
-              defaultOpen
-            >
-              {columns.map(({ key }) => (
-                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
-              ))}
-            </Table.ExpandableRow>
-          ))}
-          {data.slice(1, 2).map((data) => (
-            <Table.ExpandableRow
-              content={data.content}
-              key={data.name}
-              open={open}
-              onOpenChange={(open) => setOpen(open)}
-            >
-              {columns.map(({ key }) => (
-                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
-              ))}
-            </Table.ExpandableRow>
-          ))}
-        </Table.Body>
-      </Table>
-    </>
+          </Table.ExpandableRow>
+        ))}
+        {data.slice(1, 2).map((data) => (
+          <Table.ExpandableRow
+            content={data.content}
+            key={data.name}
+            open={open}
+            onOpenChange={(open) => setOpen(open)}
+          >
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+            ))}
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table>
   );
 };
 
@@ -200,3 +197,33 @@ const data = [
     ),
   },
 ];
+
+export const ExpandableOpen = () => {
+  return (
+    <Table zebraStripes>
+      <Table.Header>
+        <Table.Row>
+          {columns.map(({ key, name }) => (
+            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+          ))}
+          <Table.HeaderCell />
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.map((data) => (
+          <Table.ExpandableRow
+            expansionDisabled={data.animal === "Sel"}
+            content={data.content}
+            key={data.name}
+            togglePlacement="right"
+            defaultOpen
+          >
+            {columns.map(({ key }) => (
+              <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+            ))}
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table>
+  );
+};
