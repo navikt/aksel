@@ -8,7 +8,14 @@ export interface LoaderProps extends SVGProps<SVGSVGElement> {
    * 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
-  size?: "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
+  size?:
+    | "3xlarge"
+    | "2xlarge"
+    | "xlarge"
+    | "large"
+    | "medium"
+    | "small"
+    | "xsmall";
   /**
    * Title prop on svg
    * @default "venter..."
@@ -68,7 +75,6 @@ export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           cy="25"
           r="20"
           fill="none"
-          strokeWidth="5"
         />
         <circle
           className="navds-loader__foreground"
@@ -77,9 +83,7 @@ export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           r="20"
           stroke={"var(--navds-global-color-gray-400)"}
           fill="none"
-          strokeWidth="5"
           strokeDasharray="50 155"
-          strokeLinecap="round"
         />
       </svg>
     );
