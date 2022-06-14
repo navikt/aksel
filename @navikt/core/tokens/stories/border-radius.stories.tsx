@@ -1,42 +1,30 @@
 import React from "react";
 import { Meta } from "@storybook/react/types-6-0";
-import * as tokens from "../dist/tokens.js";
 
 export default {
   title: "ds-tokens/Border-radius",
 } as Meta;
 
-export const BorderRadius = () => {
-  const allRadius: { [key: string]: string } = Object.entries(tokens).reduce(
-    (old, [key, val]) =>
-      key.startsWith("NavdsBorderRadius") ? { ...old, [key]: val } : { ...old },
-    {}
-  );
+const Border = ({ token }) => (
+  <>
+    <div className="border" style={{ borderRadius: token }} />
+    <style>{`
+    .border {
+      width: 4rem;
+      height: 4rem;
+      background: #f7f7f7;
+      border: 2px solid #292929;
+    }
+    `}</style>
+  </>
+);
 
-  const sortObject = Object.fromEntries(
-    Object.entries(allRadius).sort(
-      (a, b) => Number(a[1].replace("px", "")) - Number(b[1].replace("px", ""))
-    )
-  );
-
-  return (
-    <div className="colgap">
-      {Object.entries(sortObject).map(([key, val]) => (
-        <div
-          key={key}
-          style={{
-            width: 600,
-            height: 40,
-            backgroundColor: "thistle",
-            borderRadius: val,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          {key}
-        </div>
-      ))}
-    </div>
-  );
-};
+export const Small = () => <Border token="var(--navds-border-radius-small)" />;
+export const Medium = () => (
+  <Border token="var(--navds-border-radius-medium)" />
+);
+export const Large = () => <Border token="var(--navds-border-radius-large)" />;
+export const xLarge = () => (
+  <Border token="var(--navds-border-radius-xlarge)" />
+);
+export const Full = () => <Border token="var(--navds-border-radius-full)" />;
