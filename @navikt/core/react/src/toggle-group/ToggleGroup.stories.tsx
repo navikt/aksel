@@ -1,122 +1,104 @@
-import React, { useState } from "react";
-import { Attachment, Hamburger, Star, System } from "@navikt/ds-icons";
-import { ToggleGroup } from "../index";
+import { Email, EmailOpened, Send } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
+import React, { useState } from "react";
+import { ToggleGroup } from "../index";
 export default {
-  title: "ds-react/toggle-group",
+  title: "ds-react/ToggleGroup",
   component: ToggleGroup,
-  parameters: {
-    chromatic: { disable: true },
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
   },
 } as Meta;
 
 const Items = (icon?: boolean, both?: boolean) => (
   <>
-    <ToggleGroup.Item value="first">
+    <ToggleGroup.Item value="ulest">
       {both ? (
         <>
-          <Hamburger /> First
+          <Email /> Uleste
         </>
       ) : (
-        <>{icon ? <Hamburger /> : "First"}</>
+        <>{icon ? <Email /> : "Uleste"}</>
       )}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value="second">
+    <ToggleGroup.Item value="lest">
       {both ? (
         <>
-          <Star /> Second more txt
+          <EmailOpened /> Leste
         </>
       ) : (
-        <>{icon ? <Star /> : "Second more txt"}</>
+        <>{icon ? <EmailOpened /> : "Leste"}</>
       )}
     </ToggleGroup.Item>
-    <ToggleGroup.Item value="third">
+    <ToggleGroup.Item value="sendt">
       {both ? (
         <>
-          <Attachment /> Thrid
+          <Send /> Sendte
         </>
       ) : (
-        <>{icon ? <Attachment /> : "Third"}</>
-      )}
-    </ToggleGroup.Item>
-    <ToggleGroup.Item value="fourth">
-      {both ? (
-        <>
-          <System /> Fourth
-        </>
-      ) : (
-        <>{icon ? <System /> : "Fourth"}</>
+        <>{icon ? <Send /> : "Sendte"}</>
       )}
     </ToggleGroup.Item>
   </>
 );
 
-export const UUDemo = () => {
+export const Default = (props) => {
   const [activeValue, setActiveValue] = useState("ulest");
   return (
-    <ToggleGroup value={activeValue} onChange={setActiveValue}>
-      <ToggleGroup.Item value="ulest">Ulest</ToggleGroup.Item>
-      <ToggleGroup.Item value="lest">Leste</ToggleGroup.Item>
-      <ToggleGroup.Item value="sendt">Sendte</ToggleGroup.Item>
+    <ToggleGroup
+      size={props?.size}
+      value={activeValue}
+      onChange={setActiveValue}
+      label={props.label ? "Proident minim dolor pariatur." : undefined}
+    >
+      {Items(!!props?.icon, !!props?.text && props.icon)}
     </ToggleGroup>
   );
 };
 
-export const All = () => {
-  const [activeValue, setActiveValue] = useState("first");
+Default.args = {
+  icon: true,
+  text: true,
+  label: false,
+};
+
+export const Options = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
 
   return (
-    <div>
-      <h2>ToggleGroup</h2>
-      <h3>{activeValue}</h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <ToggleGroup value={activeValue} onChange={setActiveValue}>
-          {Items()}
-        </ToggleGroup>
-        <ToggleGroup value={activeValue} onChange={setActiveValue}>
-          {Items(true)}
-        </ToggleGroup>
-        <ToggleGroup value={activeValue} onChange={setActiveValue}>
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <h2>ToggleGroup Small</h2>
-      <h3>{activeValue}</h3>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
-          {Items()}
-        </ToggleGroup>
-        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
-          {Items(true)}
-        </ToggleGroup>
-        <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
-          {Items(true, true)}
-        </ToggleGroup>
-      </div>
-      <h2>ToggleGroup label</h2>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <ToggleGroup
-          label="Label msg"
-          value={activeValue}
-          onChange={setActiveValue}
-        >
-          {Items()}
-        </ToggleGroup>
-        <ToggleGroup
-          label="Label msg"
-          value={activeValue}
-          onChange={setActiveValue}
-          aria-describedby="demo-id"
-        >
-          {Items()}
-        </ToggleGroup>
-      </div>
-      <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
-        <h2>Uncontrolled</h2>
-        <ToggleGroup onChange={setActiveValue} defaultValue="second">
-          {Items()}
-        </ToggleGroup>
-      </div>
+    <div className="colgap">
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items(true, true)}
+      </ToggleGroup>
+      <ToggleGroup value={activeValue} onChange={setActiveValue}>
+        {Items(true)}
+      </ToggleGroup>
+    </div>
+  );
+};
+
+export const Small = () => {
+  const [activeValue, setActiveValue] = useState("ulest");
+
+  return (
+    <div className="colgap">
+      <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
+        {Items()}
+      </ToggleGroup>
+      <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
+        {Items(true, true)}
+      </ToggleGroup>
+      <ToggleGroup size="small" value={activeValue} onChange={setActiveValue}>
+        {Items(true)}
+      </ToggleGroup>
     </div>
   );
 };
