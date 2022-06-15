@@ -105,6 +105,7 @@ export const CopyToClipboard = forwardRef<
           onClose={() => setOpenPopover(false)}
           placement={popoverPlacement}
           className="navdsi-copy-to-clipboard__popover"
+          strategy="fixed"
         >
           <BodyShort size={size === "medium" ? size : "small"} as="span">
             {popoverText}

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-tokens",
-  "version": "0.9.5",
+  "version": "1.0.0",
   "description": "Auto-generated design-tokens for NAV design-systems framework",
   "author": "NAV Designsystem team",
   "keywords": [

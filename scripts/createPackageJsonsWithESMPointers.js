@@ -39,22 +39,19 @@ const createPackageJsonsWithESMPointers = async () => {
 };
 
 const checkPaths = async (packageJsonPath, packageJson) => {
-  const [
-    typingsEntryExist,
-    moduleEntryExists,
-    mainEntryExists,
-  ] = await Promise.all([
-    fse.pathExists(
-      path.resolve(path.dirname(packageJsonPath), packageJson.types)
-    ),
-    fse.pathExists(
-      path.resolve(path.dirname(packageJsonPath), packageJson.module)
-    ),
-    fse.pathExists(
-      path.resolve(path.dirname(packageJsonPath), packageJson.main)
-    ),
-    fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
-  ]).catch((_) => null);
+  const [typingsEntryExist, moduleEntryExists, mainEntryExists] =
+    await Promise.all([
+      fse.pathExists(
+        path.resolve(path.dirname(packageJsonPath), packageJson.types)
+      ),
+      fse.pathExists(
+        path.resolve(path.dirname(packageJsonPath), packageJson.module)
+      ),
+      fse.pathExists(
+        path.resolve(path.dirname(packageJsonPath), packageJson.main)
+      ),
+      fse.writeFile(packageJsonPath, JSON.stringify(packageJson, null, 2)),
+    ]).catch((_) => null);
 
   const errorMessages = [];
   !typingsEntryExist &&

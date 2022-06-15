@@ -7,12 +7,12 @@
 @import "alert.css";
 @import "button.css";
 @import "content-container.css";
+@import "chat.css";
 @import "guide-panel.css";
 @import "form/index.css";
 @import "help-text.css";
 @import "link.css";
 @import "loader.css";
-@import "menu.css";
 @import "modal.css";
 @import "pagination.css";
 @import "popover.css";
@@ -22,12 +22,6 @@
 @import "panel.css";
 @import "link-panel.css";
 @import "read-more.css";
-@import "speech-bubble.css";
-@import "step-indicator.css";
 @import "stepper.css";
 @import "table.css";
 @import "tabs.css";
-
-/* Navno spesific packages */
-@import "page-header.css";
-@import "card.css";

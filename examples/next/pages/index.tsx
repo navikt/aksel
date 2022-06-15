@@ -19,7 +19,6 @@ import {
   Link,
   LinkPanel,
   Loader,
-  Menu,
   Modal,
   Pagination,
   Popover,
@@ -28,7 +27,7 @@ import {
   ReadMore,
   Search,
   Select,
-  SpeechBubble,
+  Chat,
   Stepper,
   Switch,
   Table,
@@ -39,7 +38,7 @@ import {
   Tooltip,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
-import { Divider, Dropdown } from "@navikt/ds-react-internal";
+import { Dropdown } from "@navikt/ds-react-internal";
 
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
@@ -123,19 +122,6 @@ const Home: NextPage = () => {
         </LinkPanel>
       </NextLink>
       <Loader />
-      <Menu>
-        <NextLink href="/linkTarget" passHref>
-          <Menu.Item>Leo</Menu.Item>
-        </NextLink>
-        <Menu.Collapse title="Proin">
-          <NextLink href="/" passHref>
-            <Menu.Item active>Nulla</Menu.Item>
-          </NextLink>
-          <NextLink href="/linkTarget" passHref>
-            <Menu.Item>Luctus</Menu.Item>
-          </NextLink>
-        </Menu.Collapse>
-      </Menu>
       <Button onClick={() => setOpen(true)}>Open modal</Button>
       <Modal
         open={open}
@@ -157,13 +143,34 @@ const Home: NextPage = () => {
         <Popover.Content>Popover content</Popover.Content>
       </Popover>
       <ReadMore header="ReadMore header">ReadMore body</ReadMore>
-      <SpeechBubble
-        illustration={<div>KAJ</div>}
-        topText="Ola Normann 01.01.21 14:00"
-        position="right"
-      >
-        <SpeechBubble.Bubble>Per skriver....</SpeechBubble.Bubble>
-      </SpeechBubble>
+      <div>
+        <Chat
+          avatar=""
+          name="Kari Normann"
+          timestamp="02.01.21 14:00"
+          position="right"
+        >
+          <Chat.Bubble>
+            Ut culpa consequat pariatur sint irure cupidatat laborum culpa elit
+            cillum commodo dolore.
+          </Chat.Bubble>
+          <Chat.Bubble>
+            Pariatur cillum laboris ut consectetur cillum sit nulla.
+          </Chat.Bubble>
+        </Chat>
+        <Chat
+          avatar={<div>ON</div>}
+          name="Ola Normann"
+          timestamp="01.01.21 14:00"
+          position="left"
+        >
+          <Chat.Bubble>
+            Ut culpa consequat pariatur sint irure cupidatat laborum culpa elit
+            cillum commodo dolore.
+          </Chat.Bubble>
+          <Chat.Bubble>Ola skriver....</Chat.Bubble>
+        </Chat>
+      </div>
       <Stepper activeStep={1} aria-labelledby="stepper-heading">
         <Stepper.Step>Start søknad</Stepper.Step>
         <Stepper.Step>Oppsummering</Stepper.Step>
@@ -251,7 +258,7 @@ const Home: NextPage = () => {
               Gosys
             </Dropdown.Menu.GroupedList.Item>
           </Dropdown.Menu.GroupedList>
-          <Divider />
+          <Dropdown.Menu.Divider />
           <Dropdown.Menu.List>
             <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
             <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>

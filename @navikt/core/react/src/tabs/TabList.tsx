@@ -2,18 +2,22 @@ import { debounce } from "@material-ui/core";
 import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
-import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { mergeRefs } from "..";
+import { TabsContext } from "./Tabs";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * <Tabs.Tab /> elements
    */
   children: React.ReactNode;
-  /**
-   * Loops back to start when navigating past last item
-   */
-  loop?: boolean;
 }
 
 export type TabListType = React.ForwardRefExoticComponent<
@@ -22,6 +26,7 @@ export type TabListType = React.ForwardRefExoticComponent<
 
 export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
+    const context = useContext(TabsContext);
     const listRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = mergeRefs([listRef, ref]);
     const [displayScroll, setDisplayScroll] = useState({
@@ -116,6 +121,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
           {...rest}
           ref={mergedRef}
           onScroll={updateScrollButtonState}
+          loop={context?.loop}
           className={cl("navds-tabs__tablist", className)}
         />
         {showSteppers && <ScrollButton dir={1} hidden={!displayScroll.end} />}

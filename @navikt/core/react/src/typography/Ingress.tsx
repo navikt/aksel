@@ -14,17 +14,15 @@ export interface IngressProps
   spacing?: boolean;
 }
 
-export const Ingress: OverridableComponent<
-  IngressProps,
-  HTMLParagraphElement
-> = forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => (
-  <Component
-    {...rest}
-    ref={ref}
-    className={cl(className, "navds-ingress", {
-      "navds-typo--spacing": !!spacing,
-    })}
-  />
-));
+export const Ingress: OverridableComponent<IngressProps, HTMLParagraphElement> =
+  forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => (
+    <Component
+      {...rest}
+      ref={ref}
+      className={cl(className, "navds-ingress", {
+        "navds-typo--spacing": !!spacing,
+      })}
+    />
+  ));
 
 export default Ingress;
