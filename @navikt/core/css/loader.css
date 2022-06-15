@@ -15,12 +15,12 @@
 }
 
 .navds-loader {
+  --navds-loader-background-stroke-width: 5.9;
   width: 1.5rem;
   display: inline-block;
   position: relative;
   animation: loader-rotate 20s linear infinite;
   stroke-width: 6;
-  --navds-loader-background-stroke-width: 5.9;
 }
 
 .navds-loader__foreground {
@@ -56,45 +56,52 @@
 }
 
 .navds-loader--3xlarge {
-  --navds-loader-background-stroke-width: 4.8;
   width: 5.5rem;
   stroke-width: 5;
+
+  --navds-loader-background-stroke-width: 4.8;
 }
 
 .navds-loader--2xlarge {
-  --navds-loader-background-stroke-width: 5.8;
   width: 4rem;
   stroke-width: 6;
+
+  --navds-loader-background-stroke-width: 5.8;
 }
 
 .navds-loader--xlarge {
-  --navds-loader-background-stroke-width: 5.8;
   width: 2.5rem;
   stroke-width: 6;
+
+  --navds-loader-background-stroke-width: 5.8;
 }
 
 .navds-loader--large {
-  --navds-loader-background-stroke-width: 6.8;
   width: 2rem;
   stroke-width: 7;
+
+  --navds-loader-background-stroke-width: 6.8;
 }
 
 .navds-loader--medium {
-  --navds-loader-background-stroke-width: 6.8;
   width: 1.5rem;
   stroke-width: 7;
+
+  --navds-loader-background-stroke-width: 6.8;
 }
 
 .navds-loader--small {
-  --navds-loader-background-stroke-width: 7.8;
   width: 1.25rem;
   stroke-width: 8;
+
+  --navds-loader-background-stroke-width: 7.8;
 }
 
 .navds-loader--xsmall {
-  --navds-loader-background-stroke-width: 7.8;
   width: 1rem;
   stroke-width: 8;
+
+  --navds-loader-background-stroke-width: 7.8;
 }
 
 @keyframes loader-rotate {
