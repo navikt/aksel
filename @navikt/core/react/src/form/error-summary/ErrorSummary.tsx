@@ -2,6 +2,7 @@ import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "classnames";
 import { Heading, BodyShort } from "../..";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
+import { useId } from "../../util";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -43,8 +44,10 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     },
     ref
   ) => {
+    const headingId = useId();
+
     return (
-      <div
+      <section
         ref={ref}
         {...rest}
         className={cl(
@@ -53,12 +56,15 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           `navds-error-summary--${size}`
         )}
         tabIndex={-1}
-        role="region"
+        aria-live="polite"
+        aria-relevant="all"
+        aria-labelledby={`error-summary-${headingId}`}
       >
         <Heading
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
+          id={`error-summary-${headingId}`}
         >
           {heading}
         </Heading>
@@ -67,7 +73,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
             return <li key={child?.toString()}>{child}</li>;
           })}
         </BodyShort>
-      </div>
+      </section>
     );
   }
 ) as ErrorSummaryComponent;
