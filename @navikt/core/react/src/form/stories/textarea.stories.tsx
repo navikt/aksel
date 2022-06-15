@@ -44,6 +44,7 @@ export const Default = (props) => {
 
 Default.args = {
   maxLength: 100,
+  resize: false,
 };
 
 export const Small = () => {

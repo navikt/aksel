@@ -89,13 +89,6 @@
   border-color: var(--navds-textarea-color-border-error);
 }
 
-/*
-  Disabled handling
- */
-.navds-textarea--disabled {
-  opacity: 0.3;
-}
-
 .navds-textarea__input:disabled {
   background-color: var(--navds-textarea-color-background);
   border-color: var(--navds-textarea-color-border);

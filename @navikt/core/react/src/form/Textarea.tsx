@@ -1,7 +1,7 @@
 import React, { forwardRef, useState } from "react";
 import cl from "classnames";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label, ErrorMessage, omit } from "..";
+import { BodyShort, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
 
@@ -90,8 +90,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           "navds-form-field",
           `navds-form-field--${size}`,
           {
+            "navds-form-field--disabled": !!inputProps.disabled,
             "navds-textarea--error": hasError,
-            "navds-textarea--disabled": !!inputProps.disabled,
             "navds-textarea--resize": resize,
           }
         )}
@@ -100,23 +100,38 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           htmlFor={inputProps.id}
           size={size}
           as="label"
-          className={cl("navds-textarea__label", {
+          className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
           {label}
         </Label>
         {!!description && (
-          <BodyShort
-            as="div"
-            className={cl("navds-textarea__description", {
-              "navds-sr-only": hideLabel,
-            })}
-            id={inputDescriptionId}
-            size={size}
-          >
-            {description}
-          </BodyShort>
+          <>
+            {size === "medium" ? (
+              <BodyShort
+                className={cl("navds-form-field__description", {
+                  "navds-sr-only": hideLabel,
+                })}
+                id={inputDescriptionId}
+                size="small"
+                as="div"
+              >
+                {description}
+              </BodyShort>
+            ) : (
+              <Detail
+                className={cl("navds-form-field__description", {
+                  "navds-sr-only": hideLabel,
+                })}
+                id={inputDescriptionId}
+                size="small"
+                as="div"
+              >
+                {description}
+              </Detail>
+            )}
+          </>
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize

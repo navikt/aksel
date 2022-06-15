@@ -63,6 +63,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           {
             "navds-text-field--error": hasError,
             "navds-text-field--disabled": !!inputProps.disabled,
+            "navds-form-field--disabled": !!inputProps.disabled,
           }
         )}
       >
@@ -70,7 +71,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           htmlFor={inputProps.id}
           size={size}
           as="label"
-          className={cl("navds-text-field__label", {
+          className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
@@ -81,7 +82,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           <>
             {size === "medium" ? (
               <BodyShort
-                className={cl("navds-text-field__description", {
+                className={cl("navds-form-field__description", {
                   "navds-sr-only": hideLabel,
                 })}
                 id={inputDescriptionId}
@@ -92,7 +93,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               </BodyShort>
             ) : (
               <Detail
-                className={cl("navds-text-field__description", {
+                className={cl("navds-form-field__description", {
                   "navds-sr-only": hideLabel,
                 })}
                 id={inputDescriptionId}
