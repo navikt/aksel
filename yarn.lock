@@ -1681,32 +1681,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/core@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "@floating-ui/core@npm:0.6.2"
-  checksum: b3e1844da852fe141cfa4163026a7c5ffb4399a96105340dffdd5b76dcafea72c6221a06b4674c2b500bc776adc9d9e4ed39dba55e7d844d9507d994c0af743a
+"@floating-ui/core@npm:^0.7.3":
+  version: 0.7.3
+  resolution: "@floating-ui/core@npm:0.7.3"
+  checksum: f48f9fb0d19dcbe7a68c38e8de7fabb11f0c0e6e0ef215ae60b5004900bacb1386e7b89cb377d91a90ff7d147ea1f06c2905136ecf34dea162d9696d8f448d5f
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^0.4.0":
-  version: 0.4.5
-  resolution: "@floating-ui/dom@npm:0.4.5"
+"@floating-ui/dom@npm:^0.5.0":
+  version: 0.5.3
+  resolution: "@floating-ui/dom@npm:0.5.3"
   dependencies:
-    "@floating-ui/core": ^0.6.2
-  checksum: 3024aba55fe7ee78b429a6a5d61f5719a6bb2acc79c8a33304b9d30c443efba3a5288acaf9003402e31ee97a533eda97c30a0f2c97e9e54c697df9b80a23dad8
+    "@floating-ui/core": ^0.7.3
+  checksum: 1c74f48c2baff45db24403028f5936f7121cf2daf27d912be2d5796910ccf8290e53ef41873a862ef527a4274b195085e4c5c59911dae7cc638e71a95bc45aca
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom@npm:0.6.0":
-  version: 0.6.0
-  resolution: "@floating-ui/react-dom@npm:0.6.0"
+"@floating-ui/react-dom@npm:0.7.0":
+  version: 0.7.0
+  resolution: "@floating-ui/react-dom@npm:0.7.0"
   dependencies:
-    "@floating-ui/dom": ^0.4.0
+    "@floating-ui/dom": ^0.5.0
     use-isomorphic-layout-effect: ^1.1.1
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: f9cc86570675be2ea3250b22a8a3ed315bd21df71e1c9d9d5fe5110d24b3cc463b2917f7af01e5cfdf1565852529dbc95be832a1a2a21306fed93e940347ca0e
+  checksum: 46282409a0c69ba993f39f38bb05e173420b819c27f27cf76639a4abf0ac3c3e325cd9f00ff2f8791fe6b2e100e7113f35ef1f82b517fa498c6c3df1a557c373
   languageName: node
   linkType: hard
 
@@ -3096,7 +3096,7 @@ __metadata:
   dependencies:
     "@navikt/ds-icons": ^0.8.17
     "@navikt/ds-react": ^0.19.12
-    "@popperjs/core": ^2.10.1
+    "@popperjs/core": ^2.11.5
     "@types/node": ^17.0.35
     classnames: ^2.3.1
     concurrently: 7.2.1
@@ -3115,10 +3115,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
-    "@floating-ui/react-dom": 0.6.0
+    "@floating-ui/react-dom": 0.7.0
     "@material-ui/core": ^4.12.3
     "@navikt/ds-icons": ^0.8.17
-    "@popperjs/core": ^2.10.1
+    "@popperjs/core": ^2.11.5
     "@radix-ui/react-tabs": 0.1.5
     "@radix-ui/react-toggle-group": 0.1.5
     "@testing-library/dom": 8.13.0
@@ -3140,8 +3140,8 @@ __metadata:
     react-docgen-typescript: 2.2.2
     react-dom: ^18.0.0
     react-merge-refs: ^1.1.0
-    react-modal: 3.14.3
-    react-popper: ^2.2.5
+    react-modal: 3.15.1
+    react-popper: ^2.3.0
     react-router-dom: ^6.3.0
     rimraf: 3.0.2
     swr: ^1.1.2
@@ -3611,7 +3611,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.10.1":
+"@popperjs/core@npm:^2.11.5":
   version: 2.11.5
   resolution: "@popperjs/core@npm:2.11.5"
   checksum: fd7f9dca3fb716d7426332b6ee283f88d2724c0ab342fb678865a640bad403dfb9eeebd8204a406986162f7e2b33394f104320008b74d0e9066d7322f70ea35d
@@ -18789,22 +18789,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-modal@npm:3.14.3":
-  version: 3.14.3
-  resolution: "react-modal@npm:3.14.3"
+"react-modal@npm:3.15.1":
+  version: 3.15.1
+  resolution: "react-modal@npm:3.15.1"
   dependencies:
     exenv: ^1.2.0
     prop-types: ^15.7.2
     react-lifecycles-compat: ^3.0.0
     warning: ^4.0.3
   peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16 || ^17
-    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17
-  checksum: 025605ad33c6eb743522d9e3f935bb7b1aef6b5b54dea3daa63c8599266c00d16993839c8d3f4bfcc959595e1391b78c0786e2579e272c165fe8057d5c1cebe4
+    react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
+  checksum: ee99ca312c35bcec9ef0868babf970ce03c52801731e29be336bb6bdc867a1ecf00a73e1fb5bc3b1b1ef66ceb0c9b4a0199fadb85b1b9829f731409951b018f0
   languageName: node
   linkType: hard
 
-"react-popper@npm:^2.2.5":
+"react-popper@npm:^2.3.0":
   version: 2.3.0
   resolution: "react-popper@npm:2.3.0"
   dependencies:
