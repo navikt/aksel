@@ -81,7 +81,6 @@ export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           cx="25"
           cy="25"
           r="20"
-          stroke={"var(--navds-global-color-gray-400)"}
           fill="none"
           strokeDasharray="50 155"
         />
