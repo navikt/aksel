@@ -35,17 +35,16 @@
     "test": "jest"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "0.6.0",
+    "@floating-ui/react-dom": "0.7.0",
     "@material-ui/core": "^4.12.3",
     "@navikt/ds-icons": "^1.0.0",
-    "@popperjs/core": "^2.10.1",
+    "@popperjs/core": "^2.11.5",
     "@radix-ui/react-tabs": "0.1.5",
     "@radix-ui/react-toggle-group": "0.1.5",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
-    "react-merge-refs": "^1.1.0",
-    "react-modal": "3.14.3",
-    "react-popper": "^2.2.5",
+    "react-modal": "3.15.1",
+    "react-popper": "^2.3.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

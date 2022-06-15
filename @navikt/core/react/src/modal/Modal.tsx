@@ -1,9 +1,8 @@
 import React, { forwardRef, useRef } from "react";
 import cl from "classnames";
 import ReactModal from "react-modal";
-import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
-import { Button } from "..";
+import { Button, mergeRefs } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
 export interface ModalProps {

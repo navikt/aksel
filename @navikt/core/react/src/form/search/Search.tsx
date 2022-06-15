@@ -7,8 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, Label, omit, useEventListener } from "../..";
+import { BodyShort, Label, omit, useEventListener, mergeRefs } from "../..";
 import { FormFieldProps } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { useSearch } from "./useSearch";

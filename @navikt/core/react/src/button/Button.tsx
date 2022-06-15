@@ -1,7 +1,6 @@
 import React, { useRef, useState, forwardRef } from "react";
-import mergeRefs from "react-merge-refs";
 import cl from "classnames";
-import { BodyShort, OverridableComponent, Loader } from "../";
+import { BodyShort, OverridableComponent, Loader, mergeRefs } from "../";
 import { useClientLayoutEffect } from "../util";
 
 export interface ButtonProps

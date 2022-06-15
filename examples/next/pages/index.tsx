@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Accordion,
   Alert,
@@ -43,7 +43,8 @@ import { Dropdown } from "@navikt/ds-react-internal";
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(2);
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+
+  const anchorEl = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="flex flex-col gap-4 p-4 m-4 mx-auto bg-white rounded-md max-w-2xl items-start">
@@ -135,10 +136,10 @@ const Home: NextPage = () => {
         </Modal.Content>
       </Modal>
       <Pagination page={page} count={8} onPageChange={setPage} />
-      <div className="bg-gray-600 text-white p-4" ref={(el) => setAnchorEl(el)}>
+      <div className="bg-gray-600 text-white p-4" ref={anchorEl}>
         Popover anchor
       </div>
-      <Popover anchorEl={anchorEl} onClose={() => {}} open>
+      <Popover anchorEl={anchorEl.current} onClose={() => {}} open>
         <Popover.Content>Popover content</Popover.Content>
       </Popover>
       <ReadMore header="ReadMore header">ReadMore body</ReadMore>

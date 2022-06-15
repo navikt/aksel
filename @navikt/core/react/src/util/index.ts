@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 export * from "./OverridableComponent";
 export * from "./useId";
+export { default as mergeRefs } from "./mergeRefs";
 
 export const omit = (obj: object, props: string[]) =>
   Object.entries(obj)
