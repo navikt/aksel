@@ -10,7 +10,7 @@
   --navds-loader-color-inverted-foreground: var(
     --navds-semantic-color-component-background-light
   );
-  --navds-loader-color-inverted-background: rgb(255 255 255 / 0.3);
+  --navds-loader-color-inverted-background: var(--navds-global-color-gray-600);
   --navds-loader-color-transparent-background: transparent;
 }
 
@@ -18,8 +18,9 @@
   width: 1.5rem;
   display: inline-block;
   position: relative;
-  animation: loader-rotate 1.8s linear infinite;
+  animation: loader-rotate 20s linear infinite;
   stroke-width: 6;
+  --navds-loader-background-stroke-width: 5.9;
 }
 
 .navds-loader__foreground {
@@ -31,6 +32,7 @@
 
 .navds-loader__background {
   stroke: var(--navds-loader-color-background);
+  stroke-width: var(--navds-loader-background-stroke-width);
 }
 
 .navds-loader--neutral .navds-loader__foreground {
@@ -56,36 +58,43 @@
 .navds-loader--3xlarge {
   width: 5.5rem;
   stroke-width: 5;
+  --navds-loader-background-stroke-width: 4.8;
 }
 
 .navds-loader--2xlarge {
   width: 4rem;
   stroke-width: 6;
+  --navds-loader-background-stroke-width: 5.8;
 }
 
 .navds-loader--xlarge {
   width: 2.5rem;
   stroke-width: 6;
+  --navds-loader-background-stroke-width: 5.8;
 }
 
 .navds-loader--large {
   width: 2rem;
   stroke-width: 7;
+  --navds-loader-background-stroke-width: 6.8;
 }
 
 .navds-loader--medium {
   width: 1.5rem;
   stroke-width: 7;
+  --navds-loader-background-stroke-width: 6.8;
 }
 
 .navds-loader--small {
   width: 1.25rem;
   stroke-width: 8;
+  --navds-loader-background-stroke-width: 7.8;
 }
 
 .navds-loader--xsmall {
   width: 1rem;
   stroke-width: 8;
+  --navds-loader-background-stroke-width: 7.8;
 }
 
 @keyframes loader-rotate {
