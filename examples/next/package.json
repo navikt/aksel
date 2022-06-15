@@ -1,7 +1,6 @@
 {
   "name": "next",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,15 +12,15 @@
     "@navikt/ds-icons": "*",
     "@navikt/ds-react": "*",
     "@navikt/ds-react-internal": "*",
-    "next": "12.1.4",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "next": "12.1.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@navikt/ds-tailwind": "*",
     "@types/node": "17.0.23",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
     "autoprefixer": "^10.4.4",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",

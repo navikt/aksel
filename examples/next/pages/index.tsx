@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   Accordion,
   Alert,
@@ -44,7 +44,8 @@ import { Divider, Dropdown } from "@navikt/ds-react-internal";
 const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(2);
-  const [anchorEl, setAnchorEl] = useState<Element | null>(null);
+
+  const anchorEl = useRef<HTMLDivElement | null>(null);
 
   return (
     <div className="flex flex-col gap-4 p-4 m-4 mx-auto bg-white rounded-md max-w-2xl items-start">
@@ -58,17 +59,21 @@ const Home: NextPage = () => {
           <Accordion.Content>Accordion content 2</Accordion.Content>
         </Accordion.Item>
       </Accordion>
-      {(["error", "warning", "info", "success"] as Array<
-        "error" | "warning" | "info" | "success"
-      >).map((variant) => (
+      {(
+        ["error", "warning", "info", "success"] as Array<
+          "error" | "warning" | "info" | "success"
+        >
+      ).map((variant) => (
         <Alert key={variant} variant={variant}>
           Id elit esse enim reprehenderit enim nisi veniam nostrud.
         </Alert>
       ))}
       <div className="flex gap-2">
-        {(["primary", "secondary", "tertiary", "danger"] as Array<
-          "primary" | "secondary" | "tertiary" | "danger"
-        >).map((variant) => (
+        {(
+          ["primary", "secondary", "tertiary", "danger"] as Array<
+            "primary" | "secondary" | "tertiary" | "danger"
+          >
+        ).map((variant) => (
           <Button key={variant} variant={variant}>
             {variant}
           </Button>
@@ -145,10 +150,10 @@ const Home: NextPage = () => {
         </Modal.Content>
       </Modal>
       <Pagination page={page} count={8} onPageChange={setPage} />
-      <div className="bg-gray-600 text-white p-4" ref={(el) => setAnchorEl(el)}>
+      <div className="bg-gray-600 text-white p-4" ref={anchorEl}>
         Popover anchor
       </div>
-      <Popover anchorEl={anchorEl} onClose={() => {}} open>
+      <Popover anchorEl={anchorEl.current} onClose={() => {}} open>
         <Popover.Content>Popover content</Popover.Content>
       </Popover>
       <ReadMore header="ReadMore header">ReadMore body</ReadMore>
@@ -211,9 +216,11 @@ const Home: NextPage = () => {
         </Tabs.Panel>
       </Tabs>
       <div className="flex gap-2">
-        {(["info", "warning", "success", "error"] as Array<
-          "info" | "warning" | "success" | "error"
-        >).map((variant) => (
+        {(
+          ["info", "warning", "success", "error"] as Array<
+            "info" | "warning" | "success" | "error"
+          >
+        ).map((variant) => (
           <Tag key={variant} variant={variant}>
             {variant}
           </Tag>
