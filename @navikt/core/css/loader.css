@@ -15,12 +15,13 @@
 }
 
 .navds-loader {
-  --navds-loader-background-stroke-width: 5.9;
   width: 1.5rem;
   display: inline-block;
   position: relative;
   animation: loader-rotate 1.8s linear infinite;
   stroke-width: 6;
+
+  --navds-loader-background-stroke-width: 5.9;
 }
 
 .navds-loader__foreground {
