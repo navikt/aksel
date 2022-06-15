@@ -36,6 +36,7 @@ import {
   TextField,
   ToggleGroup,
   Tooltip,
+  Textarea,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Dropdown } from "@navikt/ds-react-internal";
@@ -105,6 +106,9 @@ const Home: NextPage = () => {
         </Select>
         <Switch>Switch</Switch>
         <TextField label="Text field" />
+        <Textarea label="Text area" />
+        <Textarea label="Text area 5 rows" minRows={5} />
+        <Textarea label="Text area maxLength" maxLength={10} />
       </form>
       <GuidePanel>
         Sit sint eu dolore reprehenderit exercitation labore aute anim

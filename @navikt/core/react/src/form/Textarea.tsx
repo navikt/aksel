@@ -1,8 +1,9 @@
 import React, { forwardRef, useState } from "react";
 import cl from "classnames";
-import { BodyShort, Label, ErrorMessage, omit, TextareaAutosize } from "..";
+import { BodyShort, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
+import TextareaAutosize from "../util/TextareaAutoSize";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
