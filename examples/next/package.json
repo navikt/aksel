@@ -13,8 +13,8 @@
     "@navikt/ds-react": "*",
     "@navikt/ds-react-internal": "*",
     "next": "12.1.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@navikt/ds-tailwind": "*",
