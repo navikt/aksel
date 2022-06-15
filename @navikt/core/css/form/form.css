@@ -23,3 +23,7 @@
   opacity: 0.3;
   cursor: not-allowed;
 }
+
+.navds-form-field__error--hidden {
+  display: none;
+}

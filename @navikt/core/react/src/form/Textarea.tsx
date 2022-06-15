@@ -170,7 +170,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             </>
           )}
         </div>
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+        <div
+          className={cl({ "navds-form-field__error--hidden": !hasError })}
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
           {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )}
