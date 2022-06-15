@@ -3,7 +3,7 @@ import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
 import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
-import mergeRefs from "react-merge-refs";
+import { mergeRefs } from "..";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

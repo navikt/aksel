@@ -43,7 +43,6 @@
     "@radix-ui/react-toggle-group": "0.1.5",
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
-    "react-merge-refs": "^1.1.0",
     "react-modal": "3.15.1",
     "react-popper": "^2.3.0",
     "uuid": "^8.3.2"

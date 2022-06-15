@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import mergeRefs from "react-merge-refs";
+import { mergeRefs } from "..";
 import StepIndicatorStep, {
   StepIndicatorStepProps,
   StepIndicatorStepType,

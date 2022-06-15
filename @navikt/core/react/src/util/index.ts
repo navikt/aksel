@@ -2,6 +2,7 @@ import { useEffect } from "react";
 
 export * from "./OverridableComponent";
 export * from "./useId";
+export { default as mergeRefs } from "./mergeRefs";
 
 export const omit = (obj: object, props: string[]) =>
   Object.entries(obj)
@@ -53,7 +54,7 @@ export const composeEventHandlers = <E>(
   return function handleEvent(event: E) {
     originalEventHandler?.(event);
 
-    if (!((event as unknown) as Event).defaultPrevented) {
+    if (!(event as unknown as Event).defaultPrevented) {
       return ourEventHandler?.(event);
     }
   };

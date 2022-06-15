@@ -1,3 +1,11 @@
+import {
+  arrow as flArrow,
+  autoUpdate,
+  flip,
+  hide,
+  shift,
+  useFloating,
+} from "@floating-ui/react-dom";
 import cl from "classnames";
 import React, {
   cloneElement,
@@ -9,18 +17,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { composeEventHandlers, Detail, useEventListener } from "..";
-import {
-  useFloating,
-  arrow as flArrow,
-  shift,
-  autoUpdate,
-  flip,
-  hide,
-} from "@floating-ui/react-dom";
-import mergeRefs from "react-merge-refs";
-import Portal from "./portal";
+import { composeEventHandlers, Detail, mergeRefs, useEventListener } from "..";
 import { useId } from "../util";
+import Portal from "./portal";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -171,10 +170,10 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
 
     /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
-    const stableRef = useMemo(() => mergeRefs([ref, refs.floating]), [
-      ref,
-      refs.floating,
-    ]);
+    const stableRef = useMemo(
+      () => mergeRefs([ref, refs.floating]),
+      [ref, refs.floating]
+    );
 
     if (
       !children ||

@@ -2,8 +2,13 @@ import { Copy } from "@navikt/ds-icons";
 import cl from "classnames";
 import copy from "copy-to-clipboard";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, Button, ButtonProps, Popover } from "@navikt/ds-react";
+import {
+  BodyShort,
+  Button,
+  ButtonProps,
+  Popover,
+  mergeRefs,
+} from "@navikt/ds-react";
 import { Placement } from "@popperjs/core";
 
 export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {

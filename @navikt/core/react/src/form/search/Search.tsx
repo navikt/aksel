@@ -7,8 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, Label, omit, useEventListener } from "../..";
+import { BodyShort, Label, omit, useEventListener, mergeRefs } from "../..";
 import { FormFieldProps } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 import { useSearch } from "./useSearch";
@@ -78,10 +77,11 @@ export const SearchContext = React.createContext<SearchContextProps | null>(
 
 export const Search = forwardRef<HTMLInputElement, SearchProps>(
   (props, ref) => {
-    const { inputProps, size = "medium", inputDescriptionId } = useSearch(
-      props,
-      "searchfield"
-    );
+    const {
+      inputProps,
+      size = "medium",
+      inputDescriptionId,
+    } = useSearch(props, "searchfield");
 
     const {
       className,
