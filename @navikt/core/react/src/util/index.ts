@@ -3,6 +3,8 @@ import { useEffect } from "react";
 export * from "./OverridableComponent";
 export * from "./useId";
 export { default as mergeRefs } from "./mergeRefs";
+export { default as debounce } from "./debounce";
+export { default as TextareaAutosize } from "./TextareaAutoSize";
 
 export const omit = (obj: object, props: string[]) =>
   Object.entries(obj)

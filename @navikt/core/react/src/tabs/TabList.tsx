@@ -1,4 +1,3 @@
-import { debounce } from "@material-ui/core";
 import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
 import cl from "classnames";
@@ -10,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { mergeRefs } from "..";
+import { mergeRefs, debounce } from "..";
 import { TabsContext } from "./Tabs";
 
 export interface TabListProps extends React.HTMLAttributes<HTMLDivElement> {
