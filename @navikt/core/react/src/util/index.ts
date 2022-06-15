@@ -1,9 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 export * from "./OverridableComponent";
 export * from "./useId";
 export { default as mergeRefs } from "./mergeRefs";
 export { default as debounce } from "./debounce";
+
+const canUseDOM = (): boolean => {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.document !== "undefined" &&
+    typeof window.document.createElement !== "undefined"
+  );
+};
+
+export const useClientLayoutEffect = canUseDOM() ? useLayoutEffect : () => {};
 
 export const omit = (obj: object, props: string[]) =>
   Object.entries(obj)

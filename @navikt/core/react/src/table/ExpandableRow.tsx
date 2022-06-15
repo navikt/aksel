@@ -58,7 +58,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const id = `expandable-${useId()}`;
+    const id = useId();
 
     const isOpen = open ?? internalOpen;
 

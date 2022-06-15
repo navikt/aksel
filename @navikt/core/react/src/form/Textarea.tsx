@@ -68,7 +68,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
-    const maxLengthId = `TextareaMaxLength-${useId()}`;
+    const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     const [controlledValue, setControlledValue] = useState<string>(
@@ -135,7 +135,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               }
             )}
             aria-describedby={cl(inputProps["aria-describedby"], {
-              [maxLengthId]: hasMaxLength,
+              [maxLengthId ?? ""]: hasMaxLength,
             })}
           />
           {hasMaxLength && (
