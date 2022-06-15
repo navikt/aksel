@@ -24,6 +24,6 @@
   cursor: not-allowed;
 }
 
-.navds-form-field__error--hidden {
+.navds-form-field__error:empty {
   display: none;
 }
