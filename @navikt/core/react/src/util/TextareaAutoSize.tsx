@@ -1,3 +1,4 @@
+/* https://github.com/mui/material-ui/blob/master/packages/mui-base/src/TextareaAutosize/TextareaAutosize.js */
 import React, {
   forwardRef,
   useCallback,
@@ -78,11 +79,11 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
         getStyleValue(computedStyle, "border-top-width");
 
       // The height of the inner content
-      const innerHeight = inputShallow.scrollHeight;
+      const innerHeight = inputShallow.scrollHeight - padding;
 
       // Measure height of a textarea with a single row
       inputShallow.value = "x";
-      const singleRowHeight = inputShallow.scrollHeight;
+      const singleRowHeight = inputShallow.scrollHeight - padding;
 
       // The height of the outer content
       let outerHeight = innerHeight;
@@ -191,6 +192,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
             ...style,
           }}
           {...other}
+          className={className}
         />
         <textarea
           aria-hidden
@@ -210,7 +212,9 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
             left: 0,
             // Create a new layer, increase the isolation of the computed values
             transform: "translateZ(0)",
-            padding: 0,
+            ...style,
+            /* minHeight: "inherit", */
+            /* padding: 0, */
           }}
         />
       </>
