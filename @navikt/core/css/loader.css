@@ -19,7 +19,7 @@
   width: 1.5rem;
   display: inline-block;
   position: relative;
-  animation: loader-rotate 20s linear infinite;
+  animation: loader-rotate 1.8s linear infinite;
   stroke-width: 6;
 }
 
