@@ -20,6 +20,23 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "absolute"
    */
   strategy?: "fixed" | "absolute";
+  /*
+   * Default dialog-placement on open
+   * @default "bottom-end"
+   */
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
 }
 
 export interface MenuType<Props = MenuProps>
@@ -32,7 +49,7 @@ export interface MenuType<Props = MenuProps>
 }
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(
-  ({ className, onClose, ...rest }, ref) => {
+  ({ className, onClose, placement = "bottom-end", ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
     if (!context) {
@@ -45,8 +62,8 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
     return (
       <Popover
         {...rest}
+        placement={placement}
         ref={ref}
-        placement="bottom-end"
         arrow={false}
         className={cl("navdsi-dropdown__menu", className)}
         offset={-4}
