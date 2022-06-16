@@ -37,13 +37,14 @@
   gap: var(--navds-spacing-2);
 }
 
-.navds-alert--full-width {
+.navds-alert--banner {
   border-radius: 0;
 }
 
-.navds-alert--full-width.navds-alert--small {
+.navds-alert--banner.navds-alert--small {
   padding-right: var(--navds-spacing-4);
   padding-left: var(--navds-spacing-4);
+  gap: var(--navds-spacing-3);
 }
 
 .navds-alert > .navds-alert__icon {
