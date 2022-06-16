@@ -142,7 +142,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
     }, [open, update, anchorEl]);
 
     useEffect(() => {
-      if (!refs.reference.current || !refs.floating.current) return;
+      if (!refs.reference.current || !refs.floating.current || !open) return;
       const cleanup = autoUpdate(
         refs.reference.current,
         refs.floating.current,
@@ -183,11 +183,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
               arrowRef.current = node;
             }}
             style={{
-              left: arrowX != null ? arrowX : "",
-              top: arrowY != null ? arrowY : "",
-              right: "",
-              bottom: "",
-              [staticSide ?? ""]: "-0.5rem",
+              ...(arrowX != null ? { left: arrowX } : {}),
+              ...(arrowY != null ? { top: arrowY } : {}),
+              ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
             }}
             className="navds-popover__arrow"
           />
