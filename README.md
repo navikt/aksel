@@ -1,6 +1,6 @@
 <h1 align="center">
     <img src="https://avatars.githubusercontent.com/u/11848947?s=200&v=4" />
-    <br/>Aksel
+    <br/>Designsystemet
 </h1>
 
 <div align="center">
