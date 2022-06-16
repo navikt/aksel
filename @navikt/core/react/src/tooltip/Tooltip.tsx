@@ -130,7 +130,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     );
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
-      useHover(context, { handleClose: safePolygon(), delay }),
+      useHover(context, { handleClose: safePolygon(), restMs: delay }),
       useFocus(context),
       useDismiss(context),
     ]);
