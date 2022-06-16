@@ -35,7 +35,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@floating-ui/react-dom": "0.7.0",
     "@floating-ui/react-dom-interactions": "0.6.4",
     "@navikt/ds-icons": "^1.0.0",
     "@radix-ui/react-tabs": "0.1.5",

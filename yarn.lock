@@ -1681,7 +1681,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/dom@npm:^0.5.0, @floating-ui/dom@npm:^0.5.3":
+"@floating-ui/dom@npm:^0.5.3":
   version: 0.5.3
   resolution: "@floating-ui/dom@npm:0.5.3"
   dependencies:
@@ -1701,19 +1701,6 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
   checksum: f454f14c5ff00ef738777a7e3c6f57a3528b2d7d4c24a3df0969fc902f8a897793e22565a2e02b7ddbb30e5bf8e4ebf2f4c8bde81c25fb11779ccc93eab972bc
-  languageName: node
-  linkType: hard
-
-"@floating-ui/react-dom@npm:0.7.0":
-  version: 0.7.0
-  resolution: "@floating-ui/react-dom@npm:0.7.0"
-  dependencies:
-    "@floating-ui/dom": ^0.5.0
-    use-isomorphic-layout-effect: ^1.1.1
-  peerDependencies:
-    react: ">=16.8.0"
-    react-dom: ">=16.8.0"
-  checksum: 46282409a0c69ba993f39f38bb05e173420b819c27f27cf76639a4abf0ac3c3e325cd9f00ff2f8791fe6b2e100e7113f35ef1f82b517fa498c6c3df1a557c373
   languageName: node
   linkType: hard
 
@@ -3030,7 +3017,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
-    "@floating-ui/react-dom": 0.7.0
     "@floating-ui/react-dom-interactions": 0.6.4
     "@navikt/ds-icons": ^1.0.0
     "@radix-ui/react-tabs": 0.1.5
