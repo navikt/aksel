@@ -28,6 +28,7 @@
   flex-direction: column;
   gap: var(--navds-spacing-3);
   padding-left: var(--navds-spacing-6);
+  list-style: inherit;
 }
 
 .navds-error-summary__list > * {
