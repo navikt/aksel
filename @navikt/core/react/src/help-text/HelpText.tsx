@@ -1,8 +1,8 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
-import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps, mergeRefs } from "..";
+import { Placement } from "@floating-ui/react-dom-interactions";
 
 export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,

@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { Popover } from "../index";
-import { placements } from "@popperjs/core";
 import { Button } from "../button";
 
+const placements = [
+  "top",
+  "bottom",
+  "right",
+  "left",
+  "top-start",
+  "top-end",
+  "bottom-start",
+  "bottom-end",
+  "right-start",
+  "right-end",
+  "left-start",
+  "left-end",
+];
 export default {
   title: "ds-react/Popover",
   component: Popover,
@@ -36,19 +49,7 @@ export default {
       defaultValue: "right",
       control: {
         type: "radio",
-        options: [
-          "bottom",
-          "right",
-          "left",
-          "top-start",
-          "top-end",
-          "bottom-start",
-          "bottom-end",
-          "right-start",
-          "right-end",
-          "left-start",
-          "left-end",
-        ],
+        options: placements,
       },
     },
   },

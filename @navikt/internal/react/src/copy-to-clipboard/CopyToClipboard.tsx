@@ -9,7 +9,6 @@ import {
   Popover,
   mergeRefs,
 } from "@navikt/ds-react";
-import { Placement } from "@popperjs/core";
 
 export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   /**
@@ -28,7 +27,19 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * Allows extending popover properties like "placement"
    * @default "bottom"
    */
-  popoverPlacement?: Placement;
+  popoverPlacement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
   /**
    * Copy button title attribute
    * @default children ? undefined : `Kopier ${copyText}`

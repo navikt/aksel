@@ -3,7 +3,6 @@ import {
   autoUpdate,
   flip,
   offset as flOffset,
-  Placement,
   shift,
   useClick,
   useDismiss,
@@ -44,7 +43,19 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    * @note Try to keep general usage to "top", "bottom", "left", "right"
    * @default "right"
    */
-  placement?: Placement;
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
   /**
    * Adds a arrow from dialog to anchor when true
    * @default true
