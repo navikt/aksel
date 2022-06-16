@@ -213,8 +213,6 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
             // Create a new layer, increase the isolation of the computed values
             transform: "translateZ(0)",
             ...style,
-            /* minHeight: "inherit", */
-            /* padding: 0, */
           }}
         />
       </>
