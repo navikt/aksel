@@ -76,7 +76,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
 
     const getMinRows = () => {
-      let rows = rest?.minRows && rest?.minRows >= 2 ? rest?.minRows : 2;
+      let rows = rest?.minRows ? rest?.minRows : 3;
+      if (size === "small") {
+        rows = rest?.minRows ? rest?.minRows : 2;
+      }
       return rows;
     };
 
