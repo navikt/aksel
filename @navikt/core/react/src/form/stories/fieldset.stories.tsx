@@ -61,8 +61,14 @@ export const Description = () => (
     legend="Mollit eiusmod"
     description="Esse cupidatat reprehenderit est culpa consectetur sit dolor esse."
   >
-    <TextField label="Textfield label" hideLabel />
-    <TextField label="Textfield label" hideLabel />
+    <TextField
+      label="Textfield label"
+      description="Amet quis cillum incididunt "
+    />
+    <TextField
+      label="Textfield label"
+      description="Enim et occaecat voluptate labore sit do exercitation laborum non "
+    />
   </Fieldset>
 );
 

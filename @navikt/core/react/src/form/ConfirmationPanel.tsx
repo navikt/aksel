@@ -57,7 +57,12 @@ export const ConfirmationPanel = forwardRef<
           {label}
         </Checkbox>
       </div>
-      <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+      <div
+        className="navds-form-field__error"
+        id={errorId}
+        aria-relevant="additions removals"
+        aria-live="polite"
+      >
         {showErrorMsg && <ErrorMessage size={size}>{props.error}</ErrorMessage>}
       </div>
     </div>
