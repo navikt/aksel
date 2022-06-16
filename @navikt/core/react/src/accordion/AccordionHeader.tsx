@@ -24,7 +24,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
     const setButtonId = context && context.setButtonId;
 
     useClientLayoutEffect(() => {
-      setButtonId && setButtonId(id ? newId : `accordionContent-${newId}`);
+      setButtonId && setButtonId((id ? newId : newId) ?? "");
     }, [setButtonId, newId]);
 
     if (context === null) {

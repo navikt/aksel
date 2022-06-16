@@ -70,7 +70,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     ref
   ) => {
     const [groupValue, setGroupValue] = useState(defaultValue);
-    const labelId = `toggle-group-label-${useId()}`;
+    const labelId = useId();
 
     const handleValueChange = (v: string) => {
       if (v !== "") {
@@ -85,7 +85,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
 
     const describeBy = cl({
       [desc ?? ""]: !!desc,
-      [labelId]: !!label,
+      [labelId ?? ""]: !!label,
     });
 
     if (!value && !defaultValue) {

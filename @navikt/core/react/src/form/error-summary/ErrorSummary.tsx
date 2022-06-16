@@ -58,13 +58,13 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         tabIndex={-1}
         aria-live="polite"
         aria-relevant="all"
-        aria-labelledby={`error-summary-${headingId}`}
+        aria-labelledby={headingId}
       >
         <Heading
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
-          id={`error-summary-${headingId}`}
+          id={headingId}
         >
           {heading}
         </Heading>

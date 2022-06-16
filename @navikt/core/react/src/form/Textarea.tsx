@@ -68,7 +68,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
-    const maxLengthId = `TextareaMaxLength-${useId()}`;
+    const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     const [controlledValue, setControlledValue] = useState<string>(
@@ -76,7 +76,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
 
     const getMinRows = () => {
-      let rows = rest?.minRows && rest?.minRows >= 2 ? rest?.minRows : 2;
+      let rows = rest?.minRows ? rest?.minRows : 3;
+      if (size === "small") {
+        rows = rest?.minRows ? rest?.minRows : 2;
+      }
       return rows;
     };
 
@@ -150,7 +153,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               }
             )}
             aria-describedby={cl(inputProps["aria-describedby"], {
-              [maxLengthId]: hasMaxLength,
+              [maxLengthId ?? ""]: hasMaxLength,
             })}
           />
           {hasMaxLength && (
