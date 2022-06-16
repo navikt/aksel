@@ -26,14 +26,14 @@ export default {
       },
     },
     strategy: {
-      defaultValue: "fixed",
+      defaultValue: "absolute",
       control: {
         type: "radio",
         options: ["fixed", "absolute"],
       },
     },
     placement: {
-      defaultValue: "bottom",
+      defaultValue: "right",
       control: {
         type: "radio",
         options: [
@@ -48,9 +48,6 @@ export default {
           "right-end",
           "left-start",
           "left-end",
-          "auto",
-          "auto-start",
-          "auto-end",
         ],
       },
     },
@@ -61,7 +58,7 @@ export const Default = (props: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <>
+    <div style={{ height: 4000 }}>
       <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>
@@ -69,14 +66,11 @@ export const Default = (props: any) => {
         {...props}
         open={props.open ?? open}
         anchorEl={anchorEl}
-        onClose={() => setOpen(false)}
+        onClose={(e) => setOpen(e)}
       >
-        <Popover.Content>
-          Velit in consequat Lorem sunt ut deserunt nostrud enim enim sint
-          cillum ad veniam.
-        </Popover.Content>
+        <Popover.Content>Velit in consequat</Popover.Content>
       </Popover>
-    </>
+    </div>
   );
 };
 
@@ -90,7 +84,7 @@ const Template = (props) => {
         <Popover.Content>
           Velit in consequat Lorem
           <br />
-          sunt Pariatur ullamco ullamco
+          {props.placement}
         </Popover.Content>
       </Popover>
     </>

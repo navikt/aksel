@@ -17,11 +17,12 @@ import React, {
   cloneElement,
   forwardRef,
   HTMLAttributes,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { Detail } from "..";
-import { useId } from "../util";
+import { mergeRefs, useId } from "../util";
 import Portal from "./portal";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
@@ -123,6 +124,11 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       whileElementsMounted: autoUpdate,
     });
 
+    const mergedRef = useMemo(
+      () => mergeRefs([reference, ref]),
+      [reference, ref]
+    );
+
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(context, { handleClose: safePolygon(), restMs: delay }),
       useFocus(context),
@@ -154,7 +160,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         {cloneElement(
           children,
           getReferenceProps({
-            ref: reference,
+            ref: mergedRef,
             ...children.props,
             "aria-describedby":
               userOpen ?? open
