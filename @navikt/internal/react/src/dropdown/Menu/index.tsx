@@ -55,6 +55,7 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
     return (
       <Popover
         {...rest}
+        placement={placement}
         ref={ref}
         arrow={false}
         className={cl("navdsi-dropdown__menu", className)}
