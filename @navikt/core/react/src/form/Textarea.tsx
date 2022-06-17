@@ -159,8 +159,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           {hasMaxLength && (
             <>
               <span id={maxLengthId} className="navds-sr-only">
-                Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
-                {maxLength} signs.
+                Tekstområde med plass til {maxLength} tegn.
               </span>
               <Counter
                 maxLength={maxLength}

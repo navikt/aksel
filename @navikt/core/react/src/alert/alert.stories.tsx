@@ -13,6 +13,12 @@ export default {
         options: ["error", "warning", "info", "success"],
       },
     },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
   },
 };
 
@@ -27,7 +33,7 @@ export const Default = (props) => (
   <Alert
     variant={props.variant}
     size={props.size}
-    fullWidth={props.fullWidth}
+    banner={props.banner}
     inline={props.inline}
   >
     {props.children}
@@ -36,6 +42,7 @@ export const Default = (props) => (
 
 Default.args = {
   children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+  banner: false,
 };
 
 export const Small = () => {
@@ -52,18 +59,18 @@ export const Small = () => {
   );
 };
 
-export const FullWidth = () => {
+export const Banner = () => {
   return (
     <div className="colgap">
       {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} fullWidth>
+        <Alert key={variant} variant={variant} banner>
           {new Array(i + 1).fill(
             "Id elit esse enim reprehenderit enim nisi veniam nostrud."
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} fullWidth size="small">
+        <Alert key={variant} variant={variant} banner size="small">
           {new Array(i + 1).fill(
             "Id elit esse enim reprehenderit enim nisi veniam nostrud."
           )}

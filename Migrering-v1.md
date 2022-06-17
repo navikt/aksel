@@ -40,6 +40,16 @@ Selve boblene har nå bedre padding slik at `Chat` med position `left` og `right
 
 - Detail er nå default font-weight `400`. Har fått prop Uppercase
 
+## Alert
+
+### Props
+
+- `fullWidth` er nå renamet til `banner` for å bedre indikere bruk og funksjonalitet.
+
+### Stilendringer
+
+- Small variant har fått mer padding
+
 ## Tokens (BREAKING)
 
 - `--navds-shadow-popover` er fjernet. Bruk `navds-shadow-medium` som erstattning.
@@ -62,3 +72,15 @@ Samme som MicroCard.
 ### StepIndicator
 
 Erstattes av `<Stepper />`-komponmenten sin horisontale variant.
+
+## Teknsike forbedringer
+
+### Dependencies
+
+Har fjernet oss med en del dependencies som forhåpentligvis skal
+gjøre det lettere å ta i bruk pakken gjennom eks skypack.
+
+- Depender ikke lengre på `@material/ui`.
+- Depender ikke lengre på `react-popper` og `@popperjs/core`
+- Byttet ut `classnames` med `clsx`
+- Bruker nå `@floating-ui/react-dom-interactive` for popover/tooltip handling
