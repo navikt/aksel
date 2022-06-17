@@ -21,7 +21,7 @@
 }
 
 .navds-link-panel:hover {
-  box-shadow: var(--navds-shadow-card);
+  box-shadow: var(--navds-shadow-medium);
   border-color: var(--navds-link-panel-color-border-hover);
 }
 
