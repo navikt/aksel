@@ -8,7 +8,7 @@
 .navds-popover {
   z-index: var(--navds-z-index-popover);
   background-color: var(--navds-popover-color-background);
-  box-shadow: var(--navds-shadow-popover);
+  box-shadow: var(--navds-shadow-medium);
   border: 1px solid;
   border-color: var(--navds-popover-color-border);
   border-radius: var(--navds-border-radius-medium);
