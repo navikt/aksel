@@ -3021,7 +3021,7 @@ __metadata:
     "@radix-ui/react-toggle-group": 0.1.5
     "@testing-library/dom": 8.13.0
     "@testing-library/jest-dom": ^5.16.0
-    "@testing-library/react": ^13.0.0
+    "@testing-library/react": ^13.3.0
     "@testing-library/user-event": ^14.2.0
     "@types/faker": 5.5.8
     "@types/jest": ^27.0.1
@@ -5289,7 +5289,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^13.0.0":
+"@testing-library/react@npm:^13.3.0":
   version: 13.3.0
   resolution: "@testing-library/react@npm:13.3.0"
   dependencies:

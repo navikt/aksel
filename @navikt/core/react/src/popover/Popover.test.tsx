@@ -2,22 +2,65 @@ import { act, cleanup, fireEvent, render } from "@testing-library/react";
 import React from "react";
 import { focusVisible, simulatePointerDown } from "../../tests/utils";
 import userEvent from "@testing-library/user-event";
-import Tooltip from "./Tooltip";
+import Popover from "./Popover";
 
-describe("Tooltip", () => {
-  test("controlled open", () => {
-    const { getByRole } = render(
-      <Tooltip content="Hello World" open>
-        <button id="testChild" type="submit">
-          Hello World
-        </button>
-      </Tooltip>
+describe("Popover", () => {
+  test("open", () => {
+    const { getByTestId } = render(
+      <Popover
+        open
+        anchorEl={document.createElement("div")}
+        onClose={() => null}
+        data-testid="popover-id"
+      >
+        <div />
+      </Popover>
     );
 
-    expect(getByRole("tooltip")).toBeVisible();
+    expect(getByTestId("popover-id")).toBeVisible();
     cleanup();
   });
-  test("default open", () => {
+  test("open", () => {
+    const { getByTestId } = render(
+      <Popover
+        open={false}
+        anchorEl={document.createElement("div")}
+        onClose={() => null}
+        data-testid="popover-id"
+      >
+        <div />
+      </Popover>
+    );
+
+    expect(getByTestId("popover-id")).toBeVisible();
+    cleanup();
+  });
+  it("outsideClick", async () => {
+    const fn = jest.fn();
+    const { getByRole, getByTestId } = render(
+      <div>
+        <Popover
+          open={true}
+          anchorEl={document.createElement("div")}
+          onClose={fn}
+          data-testid="popover-id"
+        >
+          <div />
+        </Popover>
+        <a href="/#">link</a>
+      </div>
+    );
+
+    await act(async () => {
+      expect(getByTestId("popover-id")).toBeVisible();
+      getByRole("link").focus();
+    });
+
+    expect(fn).toHaveBeenCalled();
+
+    cleanup();
+  });
+  /* test("default open", () => {
     const { getByRole } = render(
       <Tooltip content="Hello World" defaultOpen>
         <button id="testChild" type="submit">
@@ -86,29 +129,5 @@ describe("Tooltip", () => {
 
     expect(getByRole("tooltip")).toBeVisible();
     cleanup();
-  });
-  it("outsideClick", async () => {
-    const { queryByRole, getByRole } = render(
-      <div>
-        <Tooltip content="Hello World">
-          <button id="testChild" type="submit">
-            Hello World
-          </button>
-        </Tooltip>
-        <a href="/#">link</a>
-      </div>
-    );
-
-    simulatePointerDown(getByRole("button"));
-    focusVisible(getByRole("button"));
-
-    await act(async () => {
-      expect(getByRole("tooltip")).toBeVisible();
-      getByRole("link").focus();
-    });
-
-    expect(queryByRole("tooltip")).toBeNull();
-
-    cleanup();
-  });
+  }); */
 });

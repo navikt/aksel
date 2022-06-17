@@ -59,7 +59,8 @@ export const Default = (props: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <div style={{ height: 4000 }}>
+    <div>
+      <Button>test</Button>
       <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>

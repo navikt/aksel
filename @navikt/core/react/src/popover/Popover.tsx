@@ -13,12 +13,13 @@ import cl from "classnames";
 import React, {
   forwardRef,
   HTMLAttributes,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
 } from "react";
 import { mergeRefs } from "..";
-import { useClientLayoutEffect } from "../util";
+import { useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
@@ -41,7 +42,7 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Orientation for popover
    * @note Try to keep general usage to "top", "bottom", "left", "right"
-   * @default "right"
+   * @default "top"
    */
   placement?:
     | "top"
@@ -90,7 +91,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       arrow = true,
       open,
       onClose,
-      placement = "right",
+      placement = "top",
       offset,
       strategy: userStrategy = "absolute",
       ...rest
@@ -150,6 +151,22 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       );
       return () => cleanup();
     }, [refs.floating, refs.reference, update, open, anchorEl]);
+
+    useEventListener(
+      "focusin",
+      useCallback(
+        (e: FocusEvent) => {
+          if (
+            ![anchorEl, refs?.floating?.current].some((element) =>
+              element?.contains(e.target as Node)
+            )
+          ) {
+            open && onClose();
+          }
+        },
+        [anchorEl, refs, open, onClose]
+      )
+    );
 
     const staticSide = {
       top: "bottom",
