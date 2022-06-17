@@ -37,6 +37,7 @@
   resize: none;
   width: 100%;
   display: block;
+  color: var(--navds-text-field-color-text);
 }
 
 .navds-textarea--counter {
