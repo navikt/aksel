@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "0.14.14",
+  "version": "0.14.15",
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@navikt/ds-icons": "^0.8.17",
-    "@navikt/ds-react": "^0.19.13",
+    "@navikt/ds-react": "^0.19.14",
     "@popperjs/core": "^2.10.1",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",
