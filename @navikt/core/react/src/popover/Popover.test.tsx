@@ -90,4 +90,54 @@ describe("Popover", () => {
 
     cleanup();
   });
+
+  it("keep open on popover-focus", async () => {
+    const fn = jest.fn();
+    const { getByTestId } = render(
+      <div>
+        <Popover
+          open={true}
+          anchorEl={document.createElement("div")}
+          onClose={fn}
+          data-testid="popover-id"
+        >
+          <div />
+        </Popover>
+      </div>
+    );
+
+    await act(async () => {
+      expect(getByTestId("popover-id")).toBeVisible();
+      getByTestId("popover-id").focus();
+    });
+
+    expect(fn).toHaveBeenCalledTimes(0);
+
+    cleanup();
+  });
+
+  it("keep open on popover-click", async () => {
+    const fn = jest.fn();
+    const { getByTestId } = render(
+      <div>
+        <Popover
+          open={true}
+          anchorEl={document.createElement("div")}
+          onClose={fn}
+          data-testid="popover-id"
+        >
+          <div />
+        </Popover>
+      </div>
+    );
+
+    await act(async () => {
+      expect(getByTestId("popover-id")).toBeVisible();
+      fireEvent.click(getByTestId("popover-id"));
+    });
+
+    expect(fn).toHaveBeenCalledTimes(0);
+
+    cleanup();
+  });
 });
