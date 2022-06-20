@@ -1,4 +1,4 @@
-import { act, cleanup } from "@testing-library/react";
+import { act, cleanup, fireEvent } from "@testing-library/react";
 import React from "react";
 import { renderWithStyles as render } from "../../tests/utils";
 import Popover from "./Popover";
@@ -20,7 +20,7 @@ describe("Popover", () => {
     cleanup();
   });
 
-  test("opentest", () => {
+  test("should be hidden", () => {
     const { getByTestId } = render(
       <Popover
         open={false}
@@ -61,74 +61,33 @@ describe("Popover", () => {
 
     cleanup();
   });
-  /* test("default open", () => {
-    const { getByRole } = render(
-      <Tooltip content="Hello World" defaultOpen>
-        <button id="testChild" type="submit">
-          Hello World
-        </button>
-      </Tooltip>
-    );
 
-    expect(getByRole("tooltip")).toBeVisible();
-    cleanup();
-  });
-
-  test("Focus", async () => {
-    const { getByRole } = render(
-      <Tooltip content="Hello World">
-        <button id="testChild" type="submit">
-          Hello World
-        </button>
-      </Tooltip>
-    );
-    simulatePointerDown();
-
-    focusVisible(getByRole("button"));
-    expect(getByRole("tooltip")).toBeVisible();
-
-    cleanup();
-  });
-  test("Escape", async () => {
-    const { queryByRole, getByRole } = render(
-      <Tooltip content="Hello World">
-        <button id="testChild" type="submit">
-          Hello World
-        </button>
-      </Tooltip>
-    );
-    simulatePointerDown();
-
-    focusVisible(getByRole("button"));
-    expect(getByRole("tooltip")).toBeVisible();
-
-    act(() => {
-      fireEvent.keyDown(document, { key: "Escape" });
-    });
-    expect(queryByRole("tooltip")).toBeNull();
-
-    cleanup();
-  });
-
-  it("delay", async () => {
-    const user = userEvent.setup();
-
-    const { queryByRole, getByRole } = render(
-      <Tooltip content="Hello World" delay={300}>
-        <button id="testChild" type="submit">
-          Hello World
-        </button>
-      </Tooltip>
+  it("escape", async () => {
+    const fn = jest.fn();
+    const { container, getByTestId } = render(
+      <div>
+        <Popover
+          open={true}
+          anchorEl={document.createElement("div")}
+          onClose={fn}
+          data-testid="popover-id"
+        >
+          <div />
+        </Popover>
+      </div>
     );
 
     await act(async () => {
-      await user.hover(getByRole("button"));
-      await new Promise((r) => setTimeout(r, 250));
-      expect(queryByRole("tooltip")).toBeNull();
-      await new Promise((r) => setTimeout(r, 600));
+      expect(getByTestId("popover-id")).toBeVisible();
+      fireEvent.keyDown(
+        // Should work anywhere
+        container,
+        { key: "Escape" }
+      );
     });
 
-    expect(getByRole("tooltip")).toBeVisible();
+    expect(fn).toHaveBeenCalled();
+
     cleanup();
-  }); */
+  });
 });
