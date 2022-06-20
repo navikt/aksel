@@ -1,8 +1,9 @@
-import { act, cleanup, fireEvent, render } from "@testing-library/react";
+import { act, cleanup, fireEvent } from "@testing-library/react";
 import React from "react";
 import { focusVisible, simulatePointerDown } from "../../tests/utils";
 import userEvent from "@testing-library/user-event";
 import Tooltip from "./Tooltip";
+import { renderWithStyles as render } from "../../tests/utils";
 
 describe("Tooltip", () => {
   test("controlled open", () => {

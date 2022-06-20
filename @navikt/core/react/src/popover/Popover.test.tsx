@@ -1,7 +1,6 @@
-import { act, cleanup, fireEvent, render } from "@testing-library/react";
+import { act, cleanup } from "@testing-library/react";
 import React from "react";
-import { focusVisible, simulatePointerDown } from "../../tests/utils";
-import userEvent from "@testing-library/user-event";
+import { renderWithStyles as render } from "../../tests/utils";
 import Popover from "./Popover";
 
 describe("Popover", () => {
@@ -20,7 +19,8 @@ describe("Popover", () => {
     expect(getByTestId("popover-id")).toBeVisible();
     cleanup();
   });
-  test("open", () => {
+
+  test("opentest", () => {
     const { getByTestId } = render(
       <Popover
         open={false}
@@ -32,9 +32,10 @@ describe("Popover", () => {
       </Popover>
     );
 
-    expect(getByTestId("popover-id")).toBeVisible();
+    expect(getByTestId("popover-id")).not.toBeVisible();
     cleanup();
   });
+
   it("outsideClick", async () => {
     const fn = jest.fn();
     const { getByRole, getByTestId } = render(
