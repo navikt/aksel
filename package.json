@@ -7,11 +7,12 @@
     "clean:lib": "node scripts/clean.js",
     "test": "yarn workspaces foreach -p run test",
     "postinstall": "husky install",
-    "boot": "yarn clean:lib && yarn workspaces foreach -pA --topological-dev --no-private run build",
+    "boot": "yarn clean:lib && yarn build:codemod && yarn workspaces foreach -pA --topological-dev --no-private run build",
     "docgen": "yarn workspaces foreach -p run docgen",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
+    "build:codemod": "yarn workspace @navikt/ds-codemod build",
     "build:tokens": "yarn workspace @navikt/ds-tokens build",
     "update:icons": "yarn workspace @navikt/ds-icons update",
     "update:tokens": "yarn workspace @navikt/ds-tokens update",
@@ -22,6 +23,7 @@
   "workspaces": [
     "@navikt/core/*",
     "@navikt/internal/*",
+    "@navikt/codemod",
     "examples/*"
   ],
   "prettier": {},
@@ -43,7 +45,8 @@
       "public",
       "examples",
       "esm",
-      "cjs"
+      "cjs",
+      "**/codemod/**/*.js"
     ]
   },
   "stylelint": {
