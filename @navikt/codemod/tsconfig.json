@@ -5,8 +5,9 @@
     "esModuleInterop": true,
     "target": "es2015",
     "downlevelIteration": true,
-    "preserveWatchOutput": true
+    "preserveWatchOutput": true,
+    "declaration": false
   },
   "include": ["**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "jest.config.js"]
 }

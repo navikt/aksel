@@ -17,8 +17,8 @@
     "lib/cra-to-next/gitignore"
   ],
   "scripts": {
-    "build": "tsc -d -p tsconfig.json",
-    "dev": "tsc -d -w -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p --watch tsconfig.json",
     "test": "jest",
     "test:watch": "jest --watch"
   },

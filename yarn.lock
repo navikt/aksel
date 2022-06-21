@@ -3097,6 +3097,7 @@ __metadata:
     "@types/jscodeshift": 0.11.5
     chalk: 4.1.0
     cheerio: 1.0.0-rc.9
+    copyfiles: 2.4.1
     execa: 4.0.3
     globby: 11.0.1
     inquirer: 7.3.3
@@ -9361,7 +9362,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copyfiles@npm:^2.4.1":
+"copyfiles@npm:2.4.1, copyfiles@npm:^2.4.1":
   version: 2.4.1
   resolution: "copyfiles@npm:2.4.1"
   dependencies:
