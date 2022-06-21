@@ -41,7 +41,9 @@
     "meow": "7.0.1"
   },
   "devDependencies": {
-    "@types/jscodeshift": "0.11.5"
+    "@types/jscodeshift": "0.11.5",
+    "@types/react": "^18.0.0",
+    "typescript": "^4.7.2"
   },
   "sideEffects": false,
   "engines": {
