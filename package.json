@@ -44,7 +44,8 @@
       "public",
       "examples",
       "esm",
-      "cjs"
+      "cjs",
+      "**/codemod/**/*.js"
     ]
   },
   "stylelint": {
