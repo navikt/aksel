@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Copyright 2015-present, Facebook, Inc.
  *
