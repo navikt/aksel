@@ -10,16 +10,20 @@
   padding-left: 0;
   margin: 0;
 }
+
 .navds-stepper--horizontal {
   display: flex;
   text-align: center;
 }
+
 .navds-stepper__item {
   flex: 1 1 100%;
 }
+
 .navds-stepper__item:focus-within {
   isolation: isolate;
 }
+
 .navds-stepper__step {
   display: inline-grid;
   grid-template-rows: auto var(--navds-stepper-number-size) auto;
@@ -29,6 +33,7 @@
   justify-content: start;
   text-decoration: none;
 }
+
 button.navds-stepper__step {
   appearance: none;
   border: none;
@@ -38,10 +43,12 @@ button.navds-stepper__step {
   font: inherit;
   color: inherit;
 }
+
 .navds-stepper__step:focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
 }
+
 .navds-stepper__line {
   background-color: var(--navds-semantic-color-border-muted);
   width: 2px;
@@ -49,16 +56,19 @@ button.navds-stepper__step {
   min-height: var(--navds-stepper-line);
   justify-self: center;
 }
+
 :where(.navds-stepper__line):last-of-type {
   grid-row: 3;
   grid-column: 1;
 }
+
 :where(.navds-stepper__item:first-of-type)
   :where(.navds-stepper__line:first-of-type),
 :where(.navds-stepper__item:last-of-type)
   :where(.navds-stepper__line:last-of-type) {
   visibility: hidden;
 }
+
 .navds-stepper__number {
   display: inline-grid;
   place-items: center;
@@ -70,6 +80,7 @@ button.navds-stepper__step {
   grid-column: 1;
   flex-shrink: 0;
 }
+
 .navds-stepper__label {
   min-width: fit-content;
   line-height: 1.5;
@@ -80,17 +91,20 @@ button.navds-stepper__step {
 :where(.navds-stepper__step--active) .navds-stepper__label {
   color: var(--navds-semantic-color-interaction-primary-selected);
 }
+
 :where(.navds-stepper__step--active) .navds-stepper__number {
   background-color: var(--navds-semantic-color-interaction-primary-selected);
   border-color: var(--navds-semantic-color-interaction-primary-selected);
   color: var(--navds-semantic-color-text-inverted);
 }
+
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
   .navds-stepper__number {
   background-color: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
 }
+
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
   .navds-stepper__label {
   text-decoration: underline;
@@ -103,24 +117,29 @@ button.navds-stepper__step {
   align-items: center;
   display: grid;
 }
+
 :where(.navds-stepper--horizontal) .navds-stepper__label {
   grid-row: 2;
   grid-column: 1 / span 3;
   margin-inline: var(--navds-spacing-4);
 }
+
 :where(.navds-stepper--horizontal) .navds-stepper__line {
   height: 0.125rem;
   width: 100%;
   min-height: auto;
   grid-row-start: 1;
 }
+
 :where(.navds-stepper--horizontal) .navds-stepper__line:last-of-type {
   grid-row: 1;
   grid-column: 3;
 }
+
 :where(.navds-stepper--horizontal) .navds-stepper__step {
   grid-template-columns: 1fr var(--navds-stepper-number-size) 1fr;
 }
+
 :where(.navds-stepper--horizontal) .navds-stepper__number {
   grid-column: 2;
   grid-row: 1;
