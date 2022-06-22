@@ -95,8 +95,8 @@ export function runTransform({ files, flags, transformer }) {
 
 const TRANSFORMER_INQUIRER_CHOICES = [
   {
-    name: "v1-chat: Fixes breaking API-changes to <SpeechBubble /> (now <Chat/>) component",
-    value: "v1-chat",
+    name: "v1.0.0/chat: Fixes breaking API-changes from <SpeechBubble /> (now <Chat/>) component",
+    value: "v1.0.0/chat",
   },
 ];
 

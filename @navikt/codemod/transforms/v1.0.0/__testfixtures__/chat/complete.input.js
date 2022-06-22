@@ -1,3 +1,5 @@
+import { SpeechBubble, Button } from "@navikt/ds-react";
+
 /* eslint-disable react/jsx-no-undef */
 export const Page = () => {
   return (
@@ -11,7 +13,8 @@ export const Page = () => {
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </SpeechBubble.Bubble>
       <SpeechBubble.Bubble>
-        Tempor fugiat amet eu sint in in ullamco.
+        Eu fugiat esse fugiat Lorem culpa nulla mollit tempor incididunt aute
+        do.
       </SpeechBubble.Bubble>
       <SpeechBubble.Bubble>
         Adipisicing laborum est eu laborum est sit in commodo enim sint laboris

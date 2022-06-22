@@ -1,3 +1,5 @@
+export {};
+
 jest.autoMockOff();
 const defineTest = require("jscodeshift/dist/testUtils").defineTest;
 

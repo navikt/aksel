@@ -6,7 +6,8 @@
     "target": "es2015",
     "downlevelIteration": true,
     "preserveWatchOutput": true,
-    "declaration": false
+    "declaration": false,
+    "types": ["@types/jscodeshift", "node", "jest"]
   },
   "include": ["**/*.ts"],
   "exclude": ["node_modules", "dist", "jest.config.js"]
