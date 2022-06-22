@@ -51,6 +51,7 @@ export default function transformer(file, api, options) {
               }
             });
 
+            /* Find and move iconPosition-prop to <Tabs/> */
             el.children.forEach((tab) => {
               const tabEl = tab.openingElement;
               if (tabEl?.name && tabEl.name.type === "JSXMemberExpression") {
