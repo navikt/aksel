@@ -1,6 +1,4 @@
 import renameProps from "../utils/rename-props";
-import addImports from "jscodeshift-add-imports";
-import { stringLiteral } from "jscodeshift";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -8,48 +6,32 @@ import { stringLiteral } from "jscodeshift";
  */
 export default function transformer(file, api, options) {
   const j = api.jscodeshift;
+  let localName = "SpeechBubble";
 
   const root = j(file.source);
 
-  const t = (r) =>
-    r
-      .find(j.ImportDeclaration)
-      .filter((path) => path.node.source.value === "@navikt/ds-react")
-      .find(j.ImportSpecifier, {
-        local: {
-          type: "Identifier",
-          name: "SpeechBubble",
-        },
-      })
-      .remove();
+  /* Finds and replaces import from SpeechBubble -> Chat */
+  root
+    .find(j.ImportDeclaration)
+    .filter((path) => path.node.source.value === "@navikt/ds-react")
+    .forEach((imp) => {
+      imp.value.specifiers.forEach((x) => {
+        if (x.imported.name === "SpeechBubble") {
+          if (x.local.name !== x.imported.name) {
+            localName = x.local.name;
+            x.imported.name = "Chat";
+          } else {
+            x.imported.name = "Chat";
+            x.local.name = "Chat";
+          }
+        }
+      });
+    });
 
-  t(root);
-
-  const hasChat = (r) =>
-    r
-      .find(j.ImportDeclaration)
-      .filter((path) => path.node.source.value === "@navikt/ds-react")
-      .find(j.ImportSpecifier, {
-        local: {
-          type: "Identifier",
-          name: "SpeechBubble",
-        },
-      }).length > 0;
-
-  if (!hasChat(root)) {
-    addImports(
-      root,
-      j.importDeclaration(
-        [j.importSpecifier(j.identifier("Chat"), j.identifier("Chat"))],
-        j.stringLiteral("@navikt/ds-react")
-      )
-    );
-  }
-
-  if (!!j(file.source).findJSXElements("SpeechBubble")) {
+  if (!!j(file.source).findJSXElements(localName)) {
     renameProps({
       root,
-      componentName: "SpeechBubble",
+      componentName: localName,
       props: {
         illustrationBgColor: "avatarBgColor",
         illustration: "avatar",
@@ -57,68 +39,29 @@ export default function transformer(file, api, options) {
       },
     });
 
-    const update = (path, name) => {
-      path.node.openingElement.name.name = name;
-      path.node.closingElement.name.name = name;
-    };
-
-    // find and update all merge calls
-    const w = root.find(j.JSXElement, {
-      openingElement: { name: { name: "SpeechBubble" } },
+    /* Find and replace name of all <SpeechBubble />*/
+    const compRoot = root.find(j.JSXElement, {
+      openingElement: { name: { name: localName } },
     });
 
-    const child = root.find(
-      j.JSXElement /* , {
-      type: "JSXMemberExpression",
-    } */
-    );
+    compRoot.forEach((x) => {
+      if (localName !== "SpeechBubble") return;
+      x.node.openingElement.name.name = "Chat";
+      x.node.closingElement.name.name = "Chat";
+    });
 
-    w.forEach((x) => update(x, "Chat"));
+    /* Need to handle dot-notations differently */
+    const child = root.find(j.JSXElement);
 
     child.forEach((x) => {
-      if (x.value.openingElement.name.type === "JSXMemberExpression") {
+      if (
+        x.value.openingElement.name.type === "JSXMemberExpression" &&
+        x.value.openingElement.name.object.name === "SpeechBubble"
+      ) {
         x.value.openingElement.name.object.name = "Chat";
         x.value.closingElement.name.object.name = "Chat";
       }
     });
   }
-
-  /* root
-    .find(j.JSXElement)
-    .forEach((x) => console.log(x.node.openingElement.name)); */
-  /* console.log(root.find(j.JSXElement)); */
-
   return root.toSource(options.printOptions);
-
-  /* return j(file.source)
-    .findJSXElements("SpeechBubble")
-
-    .forEach((path) => {
-      const attributes = path.node.openingElement.attributes;
-      attributes.forEach((node, index) => {
-        if (
-          node.type === "JSXAttribute" &&
-          node.name.name === "color" &&
-          (node.value.value === "default" ||
-            node.value.expression?.value === "default")
-        ) {
-          delete attributes[index];
-        }
-      });
-    })
-    .toSource(printOptions); */
-
-  /* const root = j(file.source); */
-
-  /*
-  const specifiers = root
-    .find(j.ImportDeclaration)
-    .filter((path) => {
-      console.log(path.node.source.value);
-      return path.node.source.value === "@fancylib/button";
-    })
-    .find(j.ImportDefaultSpecifier);
-  if (specifiers.length === 0) {
-    return;
-  } */
 }
