@@ -79,7 +79,7 @@ export const Stepper: StepperComponent = forwardRef<
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__step-wrapper")}
+                className={cl("navds-stepper__item")}
                 key={index + (children?.toString?.() ?? "")}
               >
                 {React.isValidElement<StepperStepProps>(step)

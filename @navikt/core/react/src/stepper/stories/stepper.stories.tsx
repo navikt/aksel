@@ -26,13 +26,14 @@ export const All = () => {
   };
 
   return (
-    <div style={{ display: "flex", gap: "10rem" }}>
+    <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <div>
         <h2 id="stepper-heading">Stepper</h2>
         <Stepper
           aria-labelledby="stepper-heading"
           activeStep={activeStep}
           onStepChange={setActiveStep}
+          orientation="horizontal"
         >
           <Stepper.Step {...props}>Start søknad</Stepper.Step>
           <Stepper.Step {...props}>Personopplysninger</Stepper.Step>

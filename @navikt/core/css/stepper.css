@@ -1,136 +1,127 @@
 .navds-stepper {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+  --navds-stepper-number-size: 1.75rem;
+  --navds-stepper-number-border: 2px;
+  --navds-stepper-line: 1rem;
 
-.navds-stepper--horizontal {
-  flex-direction: row;
-}
-
-/* Step */
-.navds-stepper__step {
-  position: relative;
-  cursor: pointer;
-  padding: calc(2.25rem / 2) 0;
-  display: flex;
-  background: none;
-  border: none;
-  appearance: none;
-  width: 100%;
-  color: var(--navds-semantic-color-text);
-  text-decoration: none;
-  flex-shrink: 0;
-}
-
-.navds-stepper--horizontal .navds-stepper__step {
-  padding: 0;
-  flex-direction: column;
-}
-
-.navds-stepper__step-number {
-  flex-shrink: 0;
-  display: flex;
-  width: 28px;
-  height: 28px;
-  margin: 0;
-  margin-right: var(--navds-spacing-3);
-  border-radius: var(--navds-border-radius-full);
-  align-items: center;
-  justify-content: center;
   color: var(--navds-semantic-color-interaction-primary);
-  box-shadow: inset 0 0 0 2px var(--navds-semantic-color-interaction-primary);
-  background-color: var(--navds-semantic-color-component-background-light);
+  font-weight: 600;
+  line-height: 1;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+.navds-stepper--horizontal {
+  display: flex;
+  text-align: center;
+}
+.navds-stepper__item {
+  flex: 1 1 100%;
+}
+.navds-stepper__item:focus-within {
+  isolation: isolate;
+}
+.navds-stepper__step {
+  display: inline-grid;
+  grid-template-rows: auto var(--navds-stepper-number-size) auto;
+  grid-template-columns: var(--navds-stepper-number-size) auto;
+  gap: var(--navds-spacing-2);
+  align-items: baseline;
+  justify-content: start;
+  text-decoration: none;
+}
+button.navds-stepper__step {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+.navds-stepper__step:focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+}
+.navds-stepper__line {
+  background-color: var(--navds-semantic-color-border-muted);
+  width: 2px;
+  height: 100%;
+  min-height: var(--navds-stepper-line);
+  justify-self: center;
+}
+:where(.navds-stepper__line):last-of-type {
+  grid-row: 3;
+  grid-column: 1;
+}
+:where(.navds-stepper__item:first-of-type)
+  :where(.navds-stepper__line:first-of-type),
+:where(.navds-stepper__item:last-of-type)
+  :where(.navds-stepper__line:last-of-type) {
+  visibility: hidden;
+}
+.navds-stepper__number {
+  display: inline-grid;
+  place-items: center;
+  width: var(--navds-stepper-number-size);
+  height: var(--navds-stepper-number-size);
+  border: var(--navds-stepper-number-border) solid currentColor;
+  border-radius: var(--navds-border-radius-full);
+  grid-row: 2;
+  grid-column: 1;
+  flex-shrink: 0;
+}
+.navds-stepper__label {
+  min-width: fit-content;
+  line-height: 1.5;
+  grid-row: 2 / span 2;
 }
 
-.navds-stepper--horizontal .navds-stepper__step-number {
-  margin-right: var(--navds-spacing-12);
-  margin-left: var(--navds-spacing-12);
+/* Active step */
+:where(.navds-stepper__step--active) .navds-stepper__label {
+  color: var(--navds-semantic-color-interaction-primary-selected);
 }
-
-/* Step-states: focus, active, hover */
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step
-  > .navds-stepper__step-number {
+:where(.navds-stepper__step--active) .navds-stepper__number {
+  background-color: var(--navds-semantic-color-interaction-primary-selected);
+  border-color: var(--navds-semantic-color-interaction-primary-selected);
+  color: var(--navds-semantic-color-text-inverted);
+}
+:where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
+  .navds-stepper__number {
   background-color: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
 }
-
-.navds-stepper__step--active > .navds-stepper__step-number,
-.navds-stepper__step-wrapper:hover
-  > .navds-stepper__step--active
-  > .navds-stepper__step-number {
-  color: var(--navds-semantic-color-text-inverted);
-  background-color: var(--navds-semantic-color-interaction-primary-selected);
-  box-shadow: inset 0 0 0 2px
-    var(--navds-semantic-color-interaction-primary-selected);
-}
-
-.navds-stepper__step:focus {
-  box-shadow: var(--navds-shadow-focus);
-  outline: none;
-}
-
-.navds-stepper__step--active {
-  cursor: default;
-}
-
-/* Step label */
-.navds-stepper__step-label {
-  color: var(--navds-semantic-color-interaction-primary);
-  margin-top: 0.125rem;
-  text-align: left;
-  max-width: 6rem;
-  flex-shrink: 0;
-}
-
-.navds-stepper--horizontal .navds-stepper__step-label {
-  margin-top: 0.5rem;
-  text-align: center;
-  align-self: center;
-}
-
-.navds-stepper__step:hover > .navds-stepper__step-label {
+:where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
+  .navds-stepper__label {
   text-decoration: underline;
 }
 
-.navds-stepper__step--active > .navds-stepper__step-label {
-  color: black;
+/* Horizontal */
+:where(.navds-stepper--horizontal) .navds-stepper__step {
+  grid-template-rows: var(--navds-stepper-number-size) auto;
+  grid-template-columns: auto var(--navds-stepper-number-size) auto;
+  align-items: center;
+  display: grid;
 }
-
-.navds-stepper__step--active:hover > .navds-stepper__step-label {
-  text-decoration: none;
+:where(.navds-stepper--horizontal) .navds-stepper__label {
+  grid-row: 2;
+  grid-column: 1 / span 3;
+  margin-inline: var(--navds-spacing-4);
 }
-
-/* Step Line */
-
-.navds-stepper__step-wrapper:not(:last-child)
-  > .navds-stepper__step
-  > .navds-stepper__step-line {
-  position: absolute;
-  top: calc(28px + 8px + (2.25rem / 2));
-  left: 13px;
-  height: calc(100% - 2.75rem);
-  display: block;
-  border-left: 2px solid var(--navds-semantic-color-border-muted);
-  border-radius: var(--navds-border-radius-medium);
-  pointer-events: none;
-  z-index: 1;
+:where(.navds-stepper--horizontal) .navds-stepper__line {
+  height: 0.125rem;
+  width: 100%;
+  min-height: auto;
+  grid-row-start: 1;
 }
-
-.navds-stepper--horizontal
-  .navds-stepper__step-wrapper:not(:last-child)
-  > .navds-stepper__step
-  > .navds-stepper__step-line {
-  left: 5.25rem;
-  top: 13px;
-  width: 5rem;
-  flex-shrink: 0;
-  height: auto;
-  border-top: 2px solid var(--navds-semantic-color-border-muted);
-  display: block;
-  border-left: none;
+:where(.navds-stepper--horizontal) .navds-stepper__line:last-of-type {
+  grid-row: 1;
+  grid-column: 3;
+}
+:where(.navds-stepper--horizontal) .navds-stepper__step {
+  grid-template-columns: 1fr var(--navds-stepper-number-size) 1fr;
+}
+:where(.navds-stepper--horizontal) .navds-stepper__number {
+  grid-column: 2;
+  grid-row: 1;
 }

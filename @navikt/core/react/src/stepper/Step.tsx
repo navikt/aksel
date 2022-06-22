@@ -30,14 +30,13 @@ export const StepComponent: OverridableComponent<
       return null;
     }
     const { orientation, activeStep } = context;
-    const horizontalClass = orientation === "horizontal" ? "horizontal" : "";
 
     return (
       <Component
         {...rest}
         aria-current={Boolean(activeStep === index)}
         ref={ref}
-        className={cl("navds-stepper__step", horizontalClass, className, {
+        className={cl("navds-stepper__step", className, {
           "navds-stepper__step--active": activeStep === index,
         })}
         onClick={(e) => {
@@ -45,16 +44,12 @@ export const StepComponent: OverridableComponent<
           rest?.onClick?.(e);
         }}
       >
-        <span className={cl(`navds-stepper__step-line`, horizontalClass)} />
-        <Label
-          className={cl("navds-stepper__step-number", horizontalClass)}
-          as="span"
-        >
+        <span className="navds-stepper__line" />
+        <Label className="navds-stepper__number" as="span" aria-hidden="true">
           {index + 1}
         </Label>
-        <Label className={cl("navds-stepper__step-label", horizontalClass)}>
-          {children}
-        </Label>
+        <Label className="navds-stepper__label">{children}</Label>
+        <span className="navds-stepper__line" />
       </Component>
     );
   }
