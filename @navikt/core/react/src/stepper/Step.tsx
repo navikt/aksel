@@ -29,7 +29,7 @@ export const StepComponent: OverridableComponent<
       console.error("<Stepper.Step> has to be used within <Stepper>");
       return null;
     }
-    const { orientation, activeStep } = context;
+    const { activeStep } = context;
 
     return (
       <Component
