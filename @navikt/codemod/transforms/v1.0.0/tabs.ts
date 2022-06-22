@@ -77,6 +77,7 @@ export default function transformer(file, api, options) {
       });
       iconPositionProp &&
         parent.value.openingElement.attributes.push(iconPositionProp);
+      iconPositionProp = null;
     });
   }
 
