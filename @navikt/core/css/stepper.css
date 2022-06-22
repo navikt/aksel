@@ -113,7 +113,7 @@ button.navds-stepper__step {
 /* Horizontal */
 :where(.navds-stepper--horizontal) .navds-stepper__step {
   grid-template-rows: var(--navds-stepper-number-size) auto;
-  grid-template-columns: auto var(--navds-stepper-number-size) auto;
+  grid-template-columns: 1fr var(--navds-stepper-number-size) 1fr;
   align-items: center;
   display: grid;
 }
@@ -134,10 +134,6 @@ button.navds-stepper__step {
 :where(.navds-stepper--horizontal) .navds-stepper__line:last-of-type {
   grid-row: 1;
   grid-column: 3;
-}
-
-:where(.navds-stepper--horizontal) .navds-stepper__step {
-  grid-template-columns: 1fr var(--navds-stepper-number-size) 1fr;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__number {
