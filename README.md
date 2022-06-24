@@ -5,7 +5,7 @@
 
 <div align="center">
     <p>
-        Monorepo for Frontend-komponenter til Aksel.
+        Monorepo for Frontend-komponenter brukt i NAV.
     </p>
     <p>
       <a href="https://github.com/navikt/Designsystemet/pulls">
