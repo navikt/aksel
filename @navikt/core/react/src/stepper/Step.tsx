@@ -44,12 +44,10 @@ export const StepComponent: OverridableComponent<
           rest?.onClick?.(e);
         }}
       >
-        <span className="navds-stepper__line" />
-        <Label className="navds-stepper__number" as="span" aria-hidden="true">
+        <Label className="navds-stepper__circle" as="span" aria-hidden="true">
           {index + 1}
         </Label>
-        <Label className="navds-stepper__label">{children}</Label>
-        <span className="navds-stepper__line" />
+        <Label className="navds-stepper__content">{children}</Label>
       </Component>
     );
   }

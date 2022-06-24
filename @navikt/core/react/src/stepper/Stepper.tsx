@@ -82,9 +82,11 @@ export const Stepper: StepperComponent = forwardRef<
                 className={cl("navds-stepper__item")}
                 key={index + (children?.toString?.() ?? "")}
               >
+                <span className="navds-stepper__line navds-stepper__line--1" />
                 {React.isValidElement<StepperStepProps>(step)
                   ? React.cloneElement(step, { ...step.props, index })
                   : step}
+                <span className="navds-stepper__line navds-stepper__line--2" />
               </li>
             );
           })}
