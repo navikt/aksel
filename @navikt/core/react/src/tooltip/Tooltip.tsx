@@ -3,22 +3,26 @@ import {
   autoUpdate,
   flip,
   hide,
+  offset,
+  safePolygon,
   shift,
+  useDismiss,
   useFloating,
-} from "@floating-ui/react-dom";
+  useFocus,
+  useHover,
+  useInteractions,
+} from "@floating-ui/react-dom-interactions";
 import cl from "classnames";
 import React, {
   cloneElement,
   forwardRef,
   HTMLAttributes,
-  useCallback,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { composeEventHandlers, Detail, mergeRefs, useEventListener } from "..";
-import { useId } from "../util";
+import { Detail } from "..";
+import { mergeRefs, useId } from "../util";
 import Portal from "./portal";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
@@ -79,7 +83,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       className,
       arrow: _arrow = true,
       placement: _placement = "top",
-      open,
+      open: userOpen,
       defaultOpen = false,
       offset: _offset,
       content,
@@ -91,89 +95,47 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     },
     ref
   ) => {
+    const [open, setOpen] = useState(defaultOpen);
     const arrowRef = useRef<HTMLDivElement | null>(null);
-    const [isOpen, setIsOpen] = useState(defaultOpen);
-    const openTimerRef = useRef(0);
-    const leaveTimerRef = useRef(0);
-    const isMouseDownRef = useRef(false);
-
-    const ariaId = useId(id);
 
     const {
       x,
       y,
-      update,
+      reference,
+      floating,
+      strategy,
+      context,
       placement,
-      refs,
       middlewareData: {
         arrow: { x: arrowX, y: arrowY } = {},
         hide: { referenceHidden } = {},
       },
     } = useFloating({
       placement: _placement,
+      open: userOpen ?? open,
+      onOpenChange: setOpen,
       middleware: [
+        offset(_offset ? _offset : _arrow ? 10 : 2),
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
         hide(),
       ],
+      whileElementsMounted: autoUpdate,
     });
 
-    /* https://floating-ui.com/docs/react-dom#updating */
-    useEffect(() => {
-      if (!refs.reference.current || !refs.floating.current) {
-        return;
-      }
-
-      // Only call this when the floating element is rendered
-      return autoUpdate(refs.reference.current, refs.floating.current, update);
-    }, [refs.reference, refs.floating, update, open, isOpen]);
-
-    const handleOpen = useCallback(() => {
-      window.clearTimeout(openTimerRef.current);
-      window.clearTimeout(leaveTimerRef.current);
-      setIsOpen(true);
-    }, [setIsOpen]);
-
-    const handleDelayedOpen = useCallback(() => {
-      window.clearTimeout(openTimerRef.current);
-      window.clearTimeout(leaveTimerRef.current);
-      openTimerRef.current = window.setTimeout(() => {
-        setIsOpen(true);
-      }, delay);
-    }, [delay, setIsOpen]);
-
-    const handleClose = useCallback(() => {
-      window.clearTimeout(openTimerRef.current);
-      leaveTimerRef.current = window.setTimeout(() => {
-        setIsOpen(false);
-      }, 50);
-    }, [setIsOpen]);
-
-    const handleMouseUp = useCallback(
-      () => (isMouseDownRef.current = false),
-      []
+    const mergedRef = useMemo(
+      () => mergeRefs([reference, ref]),
+      [reference, ref]
     );
 
-    useEffect(() => {
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      return () => window.clearTimeout(openTimerRef.current);
-    }, []);
+    const { getReferenceProps, getFloatingProps } = useInteractions([
+      useHover(context, { handleClose: safePolygon(), restMs: delay }),
+      useFocus(context),
+      useDismiss(context),
+    ]);
 
-    useEffect(() => {
-      return () => document.removeEventListener("mouseup", handleMouseUp);
-    }, [handleMouseUp]);
-
-    useEventListener(
-      "keydown",
-      useCallback((e) => e.key === "Escape" && handleClose(), [handleClose])
-    );
-
-    /* https://floating-ui.com/docs/react-dom#stable-ref-prop */
-    const stableRef = useMemo(
-      () => mergeRefs([ref, refs.floating]),
-      [ref, refs.floating]
-    );
+    const ariaId = useId(id);
 
     if (
       !children ||
@@ -195,49 +157,32 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
 
     return (
       <>
-        {cloneElement(children, {
-          ...children.props,
-          "aria-describedby":
-            open || isOpen
-              ? cl(ariaId, children?.props["aria-describedby"])
-              : children?.props["aria-describedby"],
-          ref: mergeRefs([(children as any).ref, refs.reference]),
-          onMouseEnter: composeEventHandlers(
-            children.props.onMouseEnter,
-            handleDelayedOpen
-          ),
-          onMouseLeave: composeEventHandlers(
-            children.props.onMouseLeave,
-            handleClose
-          ),
-          onMouseDown: composeEventHandlers(children.props.onMouseDown, () => {
-            isMouseDownRef.current = true;
-            document &&
-              document.addEventListener("mouseup", handleMouseUp, {
-                once: true,
-              });
-          }),
-          onFocus: composeEventHandlers(
-            children.props.onFocus,
-            () => !isMouseDownRef.current && handleOpen()
-          ),
-          onBlur: composeEventHandlers(children.props.onBlur, handleClose),
-        })}
-        {(open ?? isOpen) && (
+        {cloneElement(
+          children,
+          getReferenceProps({
+            ref: mergedRef,
+            ...children.props,
+            "aria-describedby":
+              userOpen ?? open
+                ? cl(ariaId, children?.props["aria-describedby"])
+                : children?.props["aria-describedby"],
+          })
+        )}
+        {(userOpen ?? open) && (
           <Portal>
             <div
-              ref={stableRef}
+              {...getFloatingProps({
+                ref: floating,
+                style: {
+                  position: strategy,
+                  top: y ?? 0,
+                  left: x ?? 0,
+                  visibility: referenceHidden ? "hidden" : "visible",
+                },
+              })}
               {...rest}
-              onMouseEnter={handleOpen}
-              onMouseLeave={handleClose}
               role="tooltip"
               id={ariaId}
-              style={{
-                position: "absolute",
-                top: y ?? "",
-                left: x ?? "",
-                visibility: referenceHidden ? "hidden" : "visible",
-              }}
               data-side={placement}
               className={cl(
                 "navds-tooltip",
@@ -245,54 +190,41 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 className
               )}
             >
-              <div
-                className="navds-tooltip__inner"
-                style={{
-                  [{
-                    top: "marginBottom",
-                    right: "marginLeft",
-                    bottom: "marginTop",
-                    left: "marginRight",
-                  }[placement]]: _offset ? _offset : _arrow ? 10 : 2,
-                }}
-              >
-                {content}
-                {keys && (
-                  <span className="navds-tooltip__keys">
-                    {keys.map((key) => (
-                      <Detail
-                        size="small"
-                        as="kbd"
-                        key={key}
-                        className="navds-tooltip__key"
-                      >
-                        {key}
-                      </Detail>
-                    ))}
-                  </span>
-                )}
-                {_arrow && (
-                  <div
-                    ref={(node) => {
-                      arrowRef.current = node;
-                    }}
-                    className="navds-tooltip__arrow"
-                    style={{
-                      left: arrowX != null ? `${arrowX}px` : "",
-                      top: arrowY != null ? `${arrowY}px` : "",
-                      right: "",
-                      bottom: "",
-
-                      [{
-                        top: "bottom",
-                        right: "left",
-                        bottom: "top",
-                        left: "right",
-                      }[placement]]: "-3.5px",
-                    }}
-                  />
-                )}
-              </div>
+              {content}
+              {keys && (
+                <span className="navds-tooltip__keys">
+                  {keys.map((key) => (
+                    <Detail
+                      size="small"
+                      as="kbd"
+                      key={key}
+                      className="navds-tooltip__key"
+                    >
+                      {key}
+                    </Detail>
+                  ))}
+                </span>
+              )}
+              {_arrow && (
+                <div
+                  ref={(node) => {
+                    arrowRef.current = node;
+                  }}
+                  className="navds-tooltip__arrow"
+                  style={{
+                    left: arrowX != null ? `${arrowX}px` : "",
+                    top: arrowY != null ? `${arrowY}px` : "",
+                    right: "",
+                    bottom: "",
+                    [{
+                      top: "bottom",
+                      right: "left",
+                      bottom: "top",
+                      left: "right",
+                    }[placement]]: "-3.5px",
+                  }}
+                />
+              )}
             </div>
           </Portal>
         )}

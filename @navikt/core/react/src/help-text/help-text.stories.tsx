@@ -9,6 +9,7 @@ export default {
       control: {
         type: "radio",
         options: [
+          "top",
           "bottom",
           "right",
           "left",
@@ -20,9 +21,6 @@ export default {
           "right-end",
           "left-start",
           "left-end",
-          "auto",
-          "auto-start",
-          "auto-end",
         ],
       },
     },

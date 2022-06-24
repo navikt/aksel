@@ -41,6 +41,12 @@ Selve boblene har nå bedre padding slik at `Chat` med position `left` og `right
 
 - Detail er nå default font-weight `400`. Har fått prop Uppercase
 
+## Popover/Helptext
+
+### Props
+
+- `placement` auto, auto-end og auto-start er ikke tilgjenglige lengre. Disse ble ikke brukt og vi anbefaler å alltid ha en bevist tanke hvor popover skal dukke opp for brukeren.
+
 ## Alert
 
 ### Props

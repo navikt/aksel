@@ -1,5 +1,4 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
-import { Placement } from "@popperjs/core";
 import cl from "classnames";
 import React, { forwardRef, useRef, useState } from "react";
 import { Popover, PopoverProps, mergeRefs } from "..";
@@ -20,7 +19,19 @@ export interface HelpTextProps
    * Default dialog-placement on open
    * @default "top"
    */
-  placement?: Placement;
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
 }
 
 export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(

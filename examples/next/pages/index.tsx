@@ -45,7 +45,7 @@ const Home: NextPage = () => {
   const [open, setOpen] = useState(false);
   const [page, setPage] = useState(2);
 
-  const anchorEl = useRef<HTMLDivElement | null>(null);
+  const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
 
   return (
     <div className="p-4 m-4 mx-auto bg-white rounded-md max-w-2xl w-full">
@@ -69,87 +69,76 @@ const Home: NextPage = () => {
             Id elit esse enim reprehenderit enim nisi veniam nostrud.
           </Alert>
         ))}
-        <div className="flex gap-2">
-          {(
-            ["primary", "secondary", "tertiary", "danger"] as Array<
-              "primary" | "secondary" | "tertiary" | "danger"
-            >
-          ).map((variant) => (
-            <Button key={variant} variant={variant}>
-              {variant}
-            </Button>
-          ))}
-        </div>
-        <form className="flex flex-col gap-4 w-full">
-          <ErrorSummary heading="Feiloppsummering komponent">
-            <NextLink href="/linkTarget" passHref>
-              <ErrorSummary.Item>Checkbox må fylles ut</ErrorSummary.Item>
-            </NextLink>
-            <NextLink href="/linkTarget" passHref>
-              <ErrorSummary.Item>
-                Tekstfeltet må ha en godkjent e-mail
-              </ErrorSummary.Item>
-            </NextLink>
-          </ErrorSummary>
-          <CheckboxGroup legend="Checkbox group" defaultValue={["checkbox2"]}>
-            <Checkbox value="checkbox1">Checkbox 1</Checkbox>
-            <Checkbox value="checkbox2">Checkbox 2</Checkbox>
-          </CheckboxGroup>
-          <RadioGroup legend="Radio group" defaultValue={"radio2"}>
-            <Radio value="radio1">Radio 1</Radio>
-            <Radio value="radio2">Radio 2</Radio>
-          </RadioGroup>
-          <Search label="Søk" />
-          <Select label="Select">
-            <option value="">Velg land</option>
-            <option value="norge">Norge</option>
-            <option value="sverige">Sverige</option>
-          </Select>
-          <Switch>Switch</Switch>
-          <TextField label="Text field" htmlSize={11} />
-          <Textarea label="Text area" />
-          <Textarea label="Text area 5 rows" minRows={5} />
-          <Textarea label="Text area maxLength" maxLength={10} />
-        </form>
-        <GuidePanel>
-          Sit sint eu dolore reprehenderit exercitation labore aute anim
-        </GuidePanel>
-        <HelpText title="show tooltip">
-          Id ullamco excepteur elit fugiat labore.
-        </HelpText>
-        <NextLink href="/linkTarget" passHref>
-          <Link>Dette er en tekstlenke</Link>
-        </NextLink>
-        <NextLink href="/linkTarget" passHref>
-          <LinkPanel>
-            <LinkPanel.Title>Link panel title</LinkPanel.Title>
-            <LinkPanel.Description>
-              Link panel description
-            </LinkPanel.Description>
-          </LinkPanel>
-        </NextLink>
-        <Loader />
-        <Button onClick={() => setOpen(true)}>Open modal</Button>
-        <Modal
-          open={open}
-          onClose={() => setOpen(false)}
-          aria-labelledby="header123"
-        >
-          <Modal.Content>
-            <h1 id="header123">Header</h1>
-            <h2>subheader</h2>
-            <p>Cupidatat irure ipsum veniam ad in esse.</p>
-            <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
-          </Modal.Content>
-        </Modal>
-        <Pagination page={page} count={8} onPageChange={setPage} />
-        <div className="bg-gray-600 text-white p-4" ref={anchorEl}>
-          Popover anchor
-        </div>
-        <Popover anchorEl={anchorEl.current} onClose={() => {}} open>
-          <Popover.Content>Popover content</Popover.Content>
-        </Popover>
-        <ReadMore header="ReadMore header">ReadMore body</ReadMore>
+      </div>
+      <form className="flex flex-col gap-4">
+        <ErrorSummary heading="Feiloppsummering komponent">
+          <NextLink href="/linkTarget" passHref>
+            <ErrorSummary.Item>Checkbox må fylles ut</ErrorSummary.Item>
+          </NextLink>
+          <NextLink href="/linkTarget" passHref>
+            <ErrorSummary.Item>
+              Tekstfeltet må ha en godkjent e-mail
+            </ErrorSummary.Item>
+          </NextLink>
+        </ErrorSummary>
+        <CheckboxGroup legend="Checkbox group" defaultValue={["checkbox2"]}>
+          <Checkbox value="checkbox1">Checkbox 1</Checkbox>
+          <Checkbox value="checkbox2">Checkbox 2</Checkbox>
+        </CheckboxGroup>
+        <RadioGroup legend="Radio group" defaultValue={"radio2"}>
+          <Radio value="radio1">Radio 1</Radio>
+          <Radio value="radio2">Radio 2</Radio>
+        </RadioGroup>
+        <Search label="Søk" />
+        <Select label="Select">
+          <option value="">Velg land</option>
+          <option value="norge">Norge</option>
+          <option value="sverige">Sverige</option>
+        </Select>
+        <Switch>Switch</Switch>
+        <TextField label="Text field" />
+        <Textarea label="Text area" />
+        <Textarea label="Text area 5 rows" minRows={5} />
+        <Textarea label="Text area maxLength" maxLength={10} />
+      </form>
+      <GuidePanel>
+        Sit sint eu dolore reprehenderit exercitation labore aute anim
+      </GuidePanel>
+      <HelpText title="show tooltip">
+        Id ullamco excepteur elit fugiat labore.
+      </HelpText>
+      <NextLink href="/linkTarget" passHref>
+        <Link>Dette er en tekstlenke</Link>
+      </NextLink>
+      <NextLink href="/linkTarget" passHref>
+        <LinkPanel>
+          <LinkPanel.Title>Link panel title</LinkPanel.Title>
+          <LinkPanel.Description>Link panel description</LinkPanel.Description>
+        </LinkPanel>
+      </NextLink>
+      <Loader />
+      <Button onClick={() => setOpen(true)}>Open modal</Button>
+      <Modal
+        open={open}
+        onClose={() => setOpen(false)}
+        aria-labelledby="header123"
+      >
+        <Modal.Content>
+          <h1 id="header123">Header</h1>
+          <h2>subheader</h2>
+          <p>Cupidatat irure ipsum veniam ad in esse.</p>
+          <p>Cillum tempor pariatur amet ut laborum Lorem enim enim.</p>
+        </Modal.Content>
+      </Modal>
+      <Pagination page={page} count={8} onPageChange={setPage} />
+      <div className="bg-gray-600 text-white p-4" ref={(el) => setAnchorEl(el)}>
+        Popover anchor
+      </div>
+      <Popover anchorEl={anchorEl} onClose={() => {}} open>
+        <Popover.Content>Popover content</Popover.Content>
+      </Popover>
+      <ReadMore header="ReadMore header">ReadMore body</ReadMore>
+      <div>
         <Chat
           avatar=""
           name="Kari Normann"

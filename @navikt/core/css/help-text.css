@@ -52,7 +52,7 @@
   border-radius: var(--navds-border-radius-full);
 }
 
-.navds-help-text__popover > .navds-popover__arrow::before {
+.navds-help-text__popover > .navds-popover__arrow {
   background-color: var(--navds-help-text-color-popover-background);
 }
 
