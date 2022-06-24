@@ -19,6 +19,7 @@
     "@navikt/core/tokens",
     "@navikt/core/tailwind",
     "@navikt/internal/css",
-    "@navikt/internal/react"
+    "@navikt/internal/react",
+    "@navikt/codemod"
   ]
 }

@@ -27,6 +27,7 @@ Selve boblene har nå bedre padding slik at `Chat` med position `left` og `right
 ### Props
 
 - `illustration` -> `avatar`
+- `illustrationBgColor` -> `avatarBgColor`
 - `topText` -> `name` og `timestamp`
 
 ## Pagination (BREAKING)
