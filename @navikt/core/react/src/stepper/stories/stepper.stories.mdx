@@ -53,16 +53,15 @@ Du styrer selv state med `activeStep` og `onStepChange`.
 Endre taggen til det du trenger med `as`-proppen. Se eksempelet under.
 Merk at Step uansett wrappes i et `<li>`-element for tilgjengelighet.
 
-<!-- ```jsx
+```jsx
 <Stepper activeStep={activeStep} onStepChange={(x) => setActiveStep(x)}>
-  <Stepper.Step
-    href=""
-    onClick={(e) => e.preventDefault()}
-  >{`Dette er default, et <a>-element`}</Stepper.Step>
-  <Stepper.Step as="button">{`Dette er et <button>-element`}</Stepper.Step>
-  <Stepper.Step as="span">{`Dette er et <span>-element`}</Stepper.Step>
+  <Stepper.Step as="button">Start</Stepper.Step>
+  <Stepper.Step as="button">Sunt deserunt qui sit sunt culpa nisi</Stepper.Step>
+  <Stepper.Step as="button">
+    Nulla nisi pariatur nulla cupidatat elit.
+  </Stepper.Step>
 </Stepper>
-``` -->
+```
 
 <Canvas>
   <Example as="button" />
