@@ -19,9 +19,9 @@
 
 .navds-stepper__item {
   display: grid;
-  grid-template-rows: [line-1] auto [step-start] var(
-      --navds-stepper-circle-size
-    ) [line-2 step-end] auto;
+  grid-template-rows:
+    [line-1] auto [step-start] var(--navds-stepper-circle-size)
+    [line-2 step-end] auto;
   grid-template-columns: var(--navds-stepper-circle-size) auto;
   justify-items: start;
   gap: 0.5rem;
@@ -98,9 +98,11 @@ button.navds-stepper__step {
 /* Horizontal */
 :where(.navds-stepper--horizontal) .navds-stepper__item {
   flex: 1 1 100%;
-  grid-template-columns: [line-1-start] 1fr [step-start] auto [line-1-end] var(
+  grid-template-columns:
+    [line-1-start] 1fr [step-start] auto [line-1-end] var(
       --navds-stepper-circle-size
-    ) [line-2-start] auto [step-end] 1fr [line-2-end];
+    )
+    [line-2-start] auto [step-end] 1fr [line-2-end];
   grid-template-rows: var(--navds-stepper-circle-size) auto;
 }
 
@@ -133,25 +135,21 @@ button.navds-stepper__step {
   grid-column: step;
   display: grid;
   grid-template-rows: [circle] var(--navds-stepper-circle-size) [content] auto;
-  grid-template-columns: [content-start] auto [circle] var(
-      --navds-stepper-circle-size
-    ) [content-end] auto;
+  grid-template-columns:
+    [content-start] auto [circle] var(--navds-stepper-circle-size)
+    [content-end] auto;
   justify-items: center;
   align-items: center;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__circle {
   grid-row: circle;
+  grid-column: 2;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__content {
   grid-row: content;
   grid-column: 1 / -1;
-}
-
-:where(.navds-stepper--horizontal) .navds-stepper__circle {
-  grid-column: 2;
-  grid-row: 1;
 }
 
 /* Active step */
