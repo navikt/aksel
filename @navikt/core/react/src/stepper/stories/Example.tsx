@@ -6,19 +6,20 @@ export const Example = (props) => {
     props.initialStep ? props.initialStep : 1
   );
 
-  const { as = "a" } = props;
+  const { as = "a", ...rest } = props;
+  const stepProps = { ...(as === "a" ? { href: "#" } : {}) };
   return (
-    <Stepper {...props} activeStep={activeStep} onStepChange={setActiveStep}>
-      <Stepper.Step as={as} href="" onClick={(e) => e.preventDefault()}>
+    <Stepper {...rest} activeStep={activeStep} onStepChange={setActiveStep}>
+      <Stepper.Step as={as} {...stepProps} onClick={(e) => e.preventDefault()}>
         Start
       </Stepper.Step>
-      <Stepper.Step as={as} href="" onClick={(e) => e.preventDefault()}>
+      <Stepper.Step as={as} {...stepProps} onClick={(e) => e.preventDefault()}>
         Sunt deserunt qui sit sunt culpa nisi
       </Stepper.Step>
-      <Stepper.Step as={as} href="" onClick={(e) => e.preventDefault()}>
+      <Stepper.Step as={as} {...stepProps} onClick={(e) => e.preventDefault()}>
         Nulla nisi pariatur nulla cupidatat elit.
       </Stepper.Step>
-      <Stepper.Step as={as} href="" onClick={(e) => e.preventDefault()}>
+      <Stepper.Step as={as} {...stepProps} onClick={(e) => e.preventDefault()}>
         Nulla laborum proident consequat laborum elit et dolore ut sunt.
       </Stepper.Step>
     </Stepper>
