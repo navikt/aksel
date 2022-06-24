@@ -3097,7 +3097,6 @@ __metadata:
     "@types/faker": 5.5.8
     "@types/jest": ^27.0.1
     "@types/node": ^17.0.35
-    "@types/react-collapse": ^5.0.1
     "@types/react-modal": ^3.13.1
     classnames: ^2.2.6
     concurrently: 7.2.1
@@ -5795,15 +5794,6 @@ __metadata:
   version: 6.9.7
   resolution: "@types/qs@npm:6.9.7"
   checksum: 7fd6f9c25053e9b5bb6bc9f9f76c1d89e6c04f7707a7ba0e44cc01f17ef5284adb82f230f542c2d5557d69407c9a40f0f3515e8319afd14e1e16b5543ac6cdba
-  languageName: node
-  linkType: hard
-
-"@types/react-collapse@npm:^5.0.1":
-  version: 5.0.1
-  resolution: "@types/react-collapse@npm:5.0.1"
-  dependencies:
-    "@types/react": "*"
-  checksum: 8fb28c98ba49710fdd95601786ec4a5e1fca043de470446081152f8681128a12bc2db1544dfbb3cc38fe434e47922ee660e5a9e21f24fa7913e729730b8bc03d
   languageName: node
   linkType: hard
 
