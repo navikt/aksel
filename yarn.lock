@@ -5834,7 +5834,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*, @types/react@npm:^18.0.12":
+"@types/react@npm:*":
   version: 18.0.12
   resolution: "@types/react@npm:18.0.12"
   dependencies:
@@ -16492,7 +16492,7 @@ __metadata:
     "@navikt/ds-react-internal": "*"
     "@navikt/ds-tailwind": "*"
     "@types/node": 17.0.23
-    "@types/react": ^18.0.12
+    "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.5
     autoprefixer: ^10.4.4
     eslint: 8.12.0
