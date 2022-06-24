@@ -1564,7 +1564,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/traverse@npm:^7.1.6, @babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.12.9, @babel/traverse@npm:^7.13.0, @babel/traverse@npm:^7.16.8, @babel/traverse@npm:^7.18.0, @babel/traverse@npm:^7.18.2, @babel/traverse@npm:^7.18.5, @babel/traverse@npm:^7.7.0, @babel/traverse@npm:^7.7.2":
+"@babel/traverse@npm:^7.1.6, @babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.12.9, @babel/traverse@npm:^7.13.0, @babel/traverse@npm:^7.16.8, @babel/traverse@npm:^7.18.0, @babel/traverse@npm:^7.18.2, @babel/traverse@npm:^7.18.5, @babel/traverse@npm:^7.4.5, @babel/traverse@npm:^7.7.0, @babel/traverse@npm:^7.7.2":
   version: 7.18.5
   resolution: "@babel/traverse@npm:7.18.5"
   dependencies:
@@ -2977,6 +2977,7 @@ __metadata:
     is-git-clean: 1.1.0
     jest: ^27.5.0
     jscodeshift: 0.13.1
+    jscodeshift-add-imports: 1.0.10
     meow: 7.0.1
     typescript: ^4.7.2
   bin:
@@ -14714,6 +14715,27 @@ __metadata:
   version: 0.1.1
   resolution: "jsbn@npm:0.1.1"
   checksum: e5ff29c1b8d965017ef3f9c219dacd6e40ad355c664e277d31246c90545a02e6047018c16c60a00f36d561b3647215c41894f5d869ada6908a2e0ce4200c88f2
+  languageName: node
+  linkType: hard
+
+"jscodeshift-add-imports@npm:1.0.10":
+  version: 1.0.10
+  resolution: "jscodeshift-add-imports@npm:1.0.10"
+  dependencies:
+    "@babel/traverse": ^7.4.5
+    jscodeshift-find-imports: ^2.0.2
+  peerDependencies:
+    jscodeshift: ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
+  checksum: ecc64f24bea38864c56364236d9e78fe63930ee2c2a9e3ab9444fd62e013e80f1e21cbf854455aa1939be6bd58ce9054acc06bf9d4f327f99446c64503301de6
+  languageName: node
+  linkType: hard
+
+"jscodeshift-find-imports@npm:^2.0.2":
+  version: 2.0.4
+  resolution: "jscodeshift-find-imports@npm:2.0.4"
+  peerDependencies:
+    jscodeshift: ^0.7.0 || ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0
+  checksum: b57e6f6ca7c94a528d8dd6ea888765ccae03d4005026ea4423f2c8572c7abb1bff5fab96ad0f04c6cb80628ecd6944386b450dc8d231905d2cb17a34129d9b86
   languageName: node
   linkType: hard
 
