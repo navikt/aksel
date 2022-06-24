@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Back, Next } from "@navikt/ds-icons";
 import { BodyShort } from "..";
 import PaginationItem, {

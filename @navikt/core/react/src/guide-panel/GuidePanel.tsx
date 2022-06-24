@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import Guide from "./Guide";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**

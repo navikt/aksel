@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort, Detail } from "@navikt/ds-react";
 
 export interface HeaderUserProps extends HTMLAttributes<HTMLDivElement> {

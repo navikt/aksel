@@ -1,5 +1,5 @@
 import React, { forwardRef, useRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import ReactModal from "react-modal";
 import { Close } from "@navikt/ds-icons";
 import { Button, mergeRefs } from "..";

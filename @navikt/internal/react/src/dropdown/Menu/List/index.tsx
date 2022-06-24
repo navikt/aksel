@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import ListItem, { ListItemType } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {

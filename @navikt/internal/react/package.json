@@ -36,7 +36,7 @@
   "dependencies": {
     "@navikt/ds-icons": "^1.0.0",
     "@navikt/ds-react": "^1.0.0",
-    "classnames": "^2.3.1",
+    "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1"
   },
   "devDependencies": {

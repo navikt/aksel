@@ -1,5 +1,5 @@
 import { Close, Search as SearchIcon } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, {
   forwardRef,
   InputHTMLAttributes,

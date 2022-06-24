@@ -1,5 +1,5 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import useCheckbox from "./useCheckbox";
 import { FormFieldProps } from "../useFormField";
 import { BodyShort, Detail, omit } from "../..";

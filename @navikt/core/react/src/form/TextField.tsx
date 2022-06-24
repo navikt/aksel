@@ -1,5 +1,5 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort, Detail, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 

@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import Row, { RowProps } from "./Row";
 import DataCell from "./DataCell";
 import { UnmountClosed } from "react-collapse";

@@ -12,7 +12,7 @@ import {
   useHover,
   useInteractions,
 } from "@floating-ui/react-dom-interactions";
-import cl from "classnames";
+import cl from "clsx";
 import React, {
   cloneElement,
   forwardRef,

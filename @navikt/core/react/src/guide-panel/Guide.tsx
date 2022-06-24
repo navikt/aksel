@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { DefaultIllustration } from "./Illustration";
 export interface GuideProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {

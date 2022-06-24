@@ -1,5 +1,5 @@
 import React, { useRef, useState, forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort, OverridableComponent, Loader, mergeRefs } from "../";
 import { useClientLayoutEffect } from "../util";
 

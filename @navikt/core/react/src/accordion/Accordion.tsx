@@ -1,4 +1,4 @@
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import AccordionItem, { AccordionItemType } from "./AccordionItem";
 import AccordionContent, { AccordionContentType } from "./AccordionContent";
