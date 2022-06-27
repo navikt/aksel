@@ -154,7 +154,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           htmlFor={inputProps.id}
           size={size}
           as="label"
-          className={cl("navds-text-field__label", {
+          className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
@@ -163,7 +163,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         {!!description && (
           <BodyShort
             as="div"
-            className={cl("navds-text-field__description", {
+            className={cl("navds-form-field__description", {
               "navds-sr-only": hideLabel,
             })}
             id={inputDescriptionId}

@@ -12,7 +12,7 @@
 
 .navdsi-dropdown__menu {
   overflow: hidden;
-  padding: var(--navds-spacing-4) 0;
+  padding: var(--navds-spacing-2) 0;
   color: var(--navds-dropdown-menu-color);
   width: 27ch;
   max-height: 616px;
@@ -35,7 +35,7 @@
 }
 
 .navdsi-dropdown__list-heading {
-  margin: 0 var(--navds-spacing-4) var(--navds-spacing-4);
+  margin: var(--navds-spacing-1) var(--navds-spacing-4) var(--navds-spacing-3);
 }
 
 .navdsi-dropdown__item {

@@ -2,27 +2,62 @@ import React from "react";
 import { TextField, HelpText } from "..";
 
 export default {
-  title: "ds-react/help-text",
+  title: "ds-react/HelpText",
   component: HelpText,
+  argTypes: {
+    placement: {
+      control: {
+        type: "radio",
+        options: [
+          "bottom",
+          "right",
+          "left",
+          "top-start",
+          "top-end",
+          "bottom-start",
+          "bottom-end",
+          "right-start",
+          "right-end",
+          "left-start",
+          "left-end",
+          "auto",
+          "auto-start",
+          "auto-end",
+        ],
+      },
+    },
+    strategy: {
+      control: {
+        type: "radio",
+        options: ["fixed", "absolute"],
+      },
+    },
+  },
 };
 
-export const All = () => {
+export const Default = (props: any) => {
   return (
-    <>
-      <h1>HelpText</h1>
-      <HelpText title="show tooltip">
-        Id ullamco excepteur elit fugiat labore.
-      </HelpText>
-      <TextField
-        label={
-          <div style={{ display: "flex", gap: 8 }}>
-            Text field label
-            <HelpText title="show tooltip">
-              Id ullamco excepteur elit fugiat labore.
-            </HelpText>
-          </div>
-        }
-      ></TextField>
-    </>
+    <HelpText title="show tooltip" strategy="fixed" {...props}>
+      Id ullamco excepteur elit fugiat labore.
+    </HelpText>
+  );
+};
+
+Default.args = {
+  title: "show tooltip",
+};
+
+export const Inline = () => {
+  return (
+    <TextField
+      label={
+        <div style={{ display: "flex", gap: 8 }}>
+          Text field label
+          <HelpText title="show tooltip">
+            Id ullamco excepteur elit fugiat labore.
+          </HelpText>
+        </div>
+      }
+    />
   );
 };

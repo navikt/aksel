@@ -70,13 +70,6 @@
   border-color: var(--navds-select-color-border-error);
 }
 
-/*
-  Disabled handling
- */
-.navds-select--disabled {
-  opacity: 0.3;
-}
-
 .navds-select__input:disabled {
   background-color: var(--navds-select-color-background);
   border-color: var(--navds-select-color-border);

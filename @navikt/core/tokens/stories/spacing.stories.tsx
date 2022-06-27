@@ -25,13 +25,12 @@ export const Spacing = () => {
     <div className="colgap">
       {Object.entries(sortObject).map(([key, val]) => (
         <div>
-          {key}
           <div
             key={key}
             style={{
               width: val,
               height: 40,
-              backgroundColor: "thistle",
+              backgroundColor: "var(--navds-global-color-lightblue-200)",
               display: "flex",
               alignItems: "center",
             }}

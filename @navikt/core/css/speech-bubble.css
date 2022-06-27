@@ -55,7 +55,7 @@
 
 .navds-speechbubble__bubble {
   padding: 1rem;
-  box-shadow: var(--navds-shadow-popover);
+  box-shadow: var(--navds-shadow-small);
   width: fit-content;
   max-width: 37.5rem;
   background-color: var(--navds-speechbubble-color-background);

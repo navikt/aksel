@@ -1,7 +1,7 @@
 :root {
   --navds-accordion-color-text: var(--navds-semantic-color-text);
   --navds-accordion-color-background: var(
-    ---navds-semantic-color-component-background-light
+    --navds-semantic-color-component-background-light
   );
   --navds-accordion-color-text-hover: var(--navds-semantic-color-link);
   --navds-accordion-color-border: var(--navds-semantic-color-border-muted);
