@@ -47,7 +47,9 @@ export const StepComponent: OverridableComponent<
         <Label className="navds-stepper__circle" as="span" aria-hidden="true">
           {index + 1}
         </Label>
-        <Label className="navds-stepper__content">{children}</Label>
+        <Label as="span" className="navds-stepper__content">
+          {children}
+        </Label>
       </Component>
     );
   }
