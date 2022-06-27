@@ -13,12 +13,6 @@ export default {
         options: ["horizontal", "vertical"],
       },
     },
-    /* size: {
-      control: {
-        type: "radio",
-        options: ["medium", "small"],
-      },
-    }, */
   },
 } as Meta;
 
