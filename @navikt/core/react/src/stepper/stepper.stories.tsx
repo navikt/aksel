@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
-import Stepper from "../Stepper";
-import { BodyLong } from "../../typography";
+import Stepper from "./Stepper";
+import { BodyLong } from "..";
 
 export default {
   title: "ds-react/Stepper",
