@@ -152,6 +152,7 @@ button.navds-stepper__step {
 :where(.navds-stepper--horizontal) .navds-stepper__content {
   grid-row: content;
   grid-column: 1 / -1;
+  max-width: 24ch;
 }
 
 /* Active step */
