@@ -64,3 +64,70 @@ export const Default = ({ asButton, ...props }) => {
 Default.args = {
   asButton: false,
 };
+
+export const Horizontal = () => {
+  const [activeStep, setActiveStep] = useState(2);
+  const props = { onClick: (e) => e.preventDefault(), href: "#" };
+  return (
+    <Stepper
+      aria-labelledby="stepper-heading"
+      activeStep={activeStep}
+      onStepChange={setActiveStep}
+      orientation="horizontal"
+    >
+      <Stepper.Step {...props}>Start søknad</Stepper.Step>
+      <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>
+        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+      </Stepper.Step>
+      <Stepper.Step {...props}>Vedlegg</Stepper.Step>
+      <Stepper.Step {...props}>Oppsummering</Stepper.Step>
+      <Stepper.Step {...props}>Innsending</Stepper.Step>
+    </Stepper>
+  );
+};
+
+export const Vertical = () => {
+  const [activeStep, setActiveStep] = useState(2);
+  const props = { onClick: (e) => e.preventDefault(), href: "#" };
+  return (
+    <Stepper
+      aria-labelledby="stepper-heading"
+      activeStep={activeStep}
+      onStepChange={setActiveStep}
+      orientation="vertical"
+    >
+      <Stepper.Step {...props}>Start søknad</Stepper.Step>
+      <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>
+        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+      </Stepper.Step>
+      <Stepper.Step {...props}>Vedlegg</Stepper.Step>
+      <Stepper.Step {...props}>Oppsummering</Stepper.Step>
+      <Stepper.Step {...props}>Innsending</Stepper.Step>
+    </Stepper>
+  );
+};
+
+export const DisplayOnly = () => {
+  const props = { as: "div" };
+  return (
+    <Stepper
+      aria-labelledby="stepper-heading"
+      activeStep={2}
+      orientation="vertical"
+    >
+      <Stepper.Step {...props}>Start søknad</Stepper.Step>
+      <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
+      <Stepper.Step {...props}>
+        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+      </Stepper.Step>
+      <Stepper.Step {...props}>Vedlegg</Stepper.Step>
+      <Stepper.Step {...props}>Oppsummering</Stepper.Step>
+      <Stepper.Step {...props}>Innsending</Stepper.Step>
+    </Stepper>
+  );
+};
