@@ -69,6 +69,7 @@ button.navds-stepper__step {
   padding: 0;
   font: inherit;
   color: inherit;
+  text-align: inherit;
 }
 
 :where(.navds-stepper__step):focus {
