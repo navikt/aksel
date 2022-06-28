@@ -23,6 +23,10 @@ export interface SelectProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * Sets inline-style on select wrapper
+   */
+  style?: React.CSSProperties;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
@@ -43,6 +47,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
       description,
       htmlSize,
       hideLabel = false,
+      style,
       ...rest
     } = props;
 
@@ -95,7 +100,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
             )}
           </>
         )}
-        <div className="navds-select__container">
+        <div className="navds-select__container" style={style}>
           <select
             {...omit(rest, ["error", "errorId", "size"])}
             {...inputProps}
