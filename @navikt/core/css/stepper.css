@@ -172,8 +172,6 @@ button.navds-stepper__step {
 }
 
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
-  .navds-stepper__circle,
-:where(.navds-stepper__step:not(.navds-stepper__step--active):focus)
   .navds-stepper__circle {
   background-color: var(
     --navds-semantic-color-interaction-primary-hover-subtle
