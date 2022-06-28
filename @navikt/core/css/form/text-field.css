@@ -27,7 +27,7 @@
 [data-theme="dark"] {
   --navds-text-field-color-text: var(--navds-semantic-color-text-inverted);
   --navds-text-field-color-background: var(
-    --navds-semantic-color-component-background-dark
+    --navds-semantic-color-component-background-inverted
   );
   --navds-text-field-color-border: var(--navds-semantic-color-border-inverted);
   --navds-text-field-color-border-hover: var(--navds-global-color-blue-200);
