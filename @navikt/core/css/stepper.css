@@ -142,6 +142,7 @@ button.navds-stepper__step {
     [content-end] auto;
   justify-items: center;
   align-items: center;
+  margin-bottom: 0;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__circle {
