@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Detail } from "../typography";
 
 export interface BubbleProps extends HTMLAttributes<HTMLDivElement> {

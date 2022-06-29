@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Panel, OverridableComponent } from "..";
 import { Next } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
 import {
   LinkPanelDescription,

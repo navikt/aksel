@@ -1,4 +1,4 @@
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { StepperContext } from "./Stepper";
 import { Label, OverridableComponent } from "..";

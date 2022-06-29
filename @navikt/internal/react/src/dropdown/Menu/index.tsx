@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Popover } from "@navikt/ds-react";
 import List, { ListType } from "./List";
 import GroupedList, { GroupedListType } from "./GroupedList";

@@ -3043,7 +3043,7 @@ __metadata:
     "@navikt/ds-icons": ^1.0.0
     "@navikt/ds-react": ^1.0.0
     "@types/node": ^17.0.35
-    classnames: ^2.3.1
+    clsx: ^1.1.1
     concurrently: 7.2.1
     copy-to-clipboard: ^3.3.1
     rimraf: ^3.0.2
@@ -3074,7 +3074,7 @@ __metadata:
     "@types/jest": ^27.0.1
     "@types/node": ^17.0.35
     "@types/react-modal": ^3.13.1
-    classnames: ^2.2.6
+    clsx: ^1.1.1
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     faker: 5.5.3
@@ -8580,13 +8580,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.6, classnames@npm:^2.3.1":
-  version: 2.3.1
-  resolution: "classnames@npm:2.3.1"
-  checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
-  languageName: node
-  linkType: hard
-
 "clean-css@npm:^4.2.3":
   version: 4.2.4
   resolution: "clean-css@npm:4.2.4"
@@ -8699,6 +8692,13 @@ __metadata:
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
   checksum: d06418b7335897209e77bdd430d04f882189582e67bd1f75a04565f3f07f5b3f119a9d670c943b6697d0afb100f03b866b3b8a1f91d4d02d72c4ecf2bb64b5dd
+  languageName: node
+  linkType: hard
+
+"clsx@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "clsx@npm:1.1.1"
+  checksum: ff052650329773b9b245177305fc4c4dc3129f7b2be84af4f58dc5defa99538c61d4207be7419405a5f8f3d92007c954f4daba5a7b74e563d5de71c28c830063
   languageName: node
   linkType: hard
 

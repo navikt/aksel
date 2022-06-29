@@ -1,6 +1,6 @@
 import { Back, Next } from "@navikt/ds-icons";
 import { TabsList } from "@radix-ui/react-tabs";
-import cl from "classnames";
+import cl from "clsx";
 import React, {
   forwardRef,
   useContext,

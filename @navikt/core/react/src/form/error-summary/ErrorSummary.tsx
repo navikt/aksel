@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Heading, BodyShort } from "../..";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 import { useId } from "../../util";

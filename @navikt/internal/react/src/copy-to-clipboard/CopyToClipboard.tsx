@@ -1,5 +1,5 @@
 import { Copy } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import copy from "copy-to-clipboard";
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import {

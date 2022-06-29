@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Collapse, UnmountClosed } from "react-collapse";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";

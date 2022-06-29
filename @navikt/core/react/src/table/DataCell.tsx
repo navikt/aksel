@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort } from "..";
 import { TableContext } from "./Table";
 

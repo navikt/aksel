@@ -1,5 +1,5 @@
 import * as RadixTabs from "@radix-ui/react-tabs";
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { BodyShort, OverridableComponent } from "..";
 import { TabsContext } from "./Tabs";

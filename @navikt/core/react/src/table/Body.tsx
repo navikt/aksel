@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface BodyProps
   extends React.HTMLAttributes<HTMLTableSectionElement> {}

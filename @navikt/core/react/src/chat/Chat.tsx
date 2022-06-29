@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import Bubble, { BubbleType } from "./Bubble";
 import { BodyLong, BodyShort } from "..";
 

@@ -1,5 +1,5 @@
 import React, { forwardRef, SVGProps } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { useId } from "..";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {

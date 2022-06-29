@@ -1,4 +1,4 @@
-import cl from "classnames";
+import cl from "clsx";
 import { useContext } from "react";
 import { useId } from "../../index";
 import { FieldsetContext } from "../index";

@@ -1,5 +1,5 @@
 import React, { createContext, forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import Header, { HeaderType } from "./Header";
 import Body, { BodyType } from "./Body";
 import Row, { RowType } from "./Row";

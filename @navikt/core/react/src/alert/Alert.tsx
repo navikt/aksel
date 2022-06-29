@@ -4,7 +4,7 @@ import {
   SuccessColored,
   WarningColored,
 } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "..";
 

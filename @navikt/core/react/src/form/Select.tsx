@@ -1,5 +1,5 @@
 import React, { forwardRef, SelectHTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Expand } from "@navikt/ds-icons";
 import { BodyShort, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";

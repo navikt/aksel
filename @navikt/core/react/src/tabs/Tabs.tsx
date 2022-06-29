@@ -1,4 +1,4 @@
-import cl from "classnames";
+import cl from "clsx";
 import React, { createContext, forwardRef, HTMLAttributes } from "react";
 import * as RadixTabs from "@radix-ui/react-tabs";
 import Tab, { TabType } from "./Tab";

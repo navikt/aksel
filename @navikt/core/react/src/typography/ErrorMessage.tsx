@@ -1,5 +1,5 @@
 import React from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Label } from "..";
 
 export interface ErrorMessageProps

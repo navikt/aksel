@@ -3,7 +3,7 @@ import HeaderTitle, { HeaderTitleType } from "./HeaderTitle";
 import HeaderUser, { HeaderUserType } from "./HeaderUser";
 import HeaderButton, { HeaderButtonType } from "./HeaderButton";
 import HeaderUserButton, { HeaderUserButtonType } from "./HeaderUserButton";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface HeaderProps extends HTMLAttributes<HTMLElement> {
   /**
