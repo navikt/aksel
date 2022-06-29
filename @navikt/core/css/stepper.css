@@ -58,6 +58,7 @@
   align-items: baseline;
   justify-content: start;
   text-decoration: none;
+  cursor: pointer;
   padding: var(--navds-stepper-border-width);
   margin: calc(var(--navds-stepper-border-width) * -1)
     calc(var(--navds-stepper-border-width) * -1) 1.75rem;
@@ -67,7 +68,6 @@ button.navds-stepper__step {
   appearance: none;
   border: none;
   background-color: transparent;
-  cursor: pointer;
   font: inherit;
   color: inherit;
   text-align: inherit;
