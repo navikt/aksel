@@ -13,11 +13,12 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
   className?: string;
   /**
    * The direction the component grows.
-   * @default"vertical"
+   * @default "vertical"
    */
   orientation?: "horizontal" | "vertical";
   /**
-   * Current active step. NOTE: starts with 1, not 0
+   * Current active step.
+   * @note Stepper index starts at 1, not 0
    */
   activeStep: number;
   /**
