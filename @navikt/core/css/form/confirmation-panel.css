@@ -28,6 +28,7 @@
   border: 1px solid var(--navds-confirmation-panel-color-border);
   background-color: var(--navds-confirmation-panel-color-background);
   transition: background-color linear 100ms;
+  justify-self: stretch;
 }
 
 .navds-confirmation-panel__content {

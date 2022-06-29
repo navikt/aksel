@@ -23,6 +23,11 @@ export default {
         options: ["primary", "secondary", "simple"],
       },
     },
+    error: {
+      control: {
+        type: "text",
+      },
+    },
   },
 } as Meta;
 
@@ -38,6 +43,7 @@ export const Default = (props) => {
         clearButton={props.clearButton}
         variant={props.variant}
         hideLabel={props.hideLabel}
+        error={props.error}
       />
     </div>
   );
@@ -75,6 +81,21 @@ export const Variants = () => (
       <Search label="Søk" />
       <Search label="Søk" variant="secondary" />
       <Search label="Søk" variant="simple" />
+    </div>
+  </div>
+);
+
+export const ErrorVariants = () => (
+  <div className="rowgap">
+    <div className="colgap">
+      <Search error="errormsg" label="Søk" />
+      <Search error="errormsg" label="Søk" variant="secondary" />
+      <Search error="errormsg" label="Søk" variant="simple" />
+    </div>
+    <div className="colgap" data-theme="dark">
+      <Search error="errormsg" label="Søk" />
+      <Search error="errormsg" label="Søk" variant="secondary" />
+      <Search error="errormsg" label="Søk" variant="simple" />
     </div>
   </div>
 );

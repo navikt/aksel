@@ -6,6 +6,7 @@
     --navds-semantic-color-interaction-primary
   );
   --navds-search-color-clear-hover: var(--navds-global-color-blue-500);
+  --navds-search-color-border-error: var(--navds-global-color-red-500);
 }
 
 [data-theme="dark"] {
@@ -13,6 +14,7 @@
   --navds-search-color-border: var(--navds-semantic-color-border-inverted);
   --navds-search-color-border-hover: var(--navds-global-color-blue-200);
   --navds-search-color-clear-hover: var(--navds-global-color-blue-200);
+  --navds-search-color-border-error: var(--navds-global-color-red-300);
 }
 
 .navds-search {
@@ -148,6 +150,17 @@
 
 .navds-search__button-search.navds-button--secondary:focus:active {
   box-shadow: 0 0 0 1px white inset, var(--navds-shadow-focus);
+}
+
+/* Error-handling */
+.navds-search--error .navds-search__input:not(:hover):not(:disabled) {
+  border-color: var(--navds-search-color-border-error);
+  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error);
+}
+
+.navds-search--error .navds-search__input:focus:not(:hover):not(:disabled) {
+  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error),
+    var(--navds-shadow-focus);
 }
 
 /* Focus layering */

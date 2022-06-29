@@ -10,10 +10,10 @@ export interface StepperStepProps
    */
   children: string;
   /**
-   * Handled by Stepper
+   * Handled by Stepper, overwriting may break component logic
    * @private
    */
-  index?: number;
+  unsafe_index?: number;
 }
 
 export interface StepperStepType
@@ -23,33 +23,36 @@ export const StepComponent: OverridableComponent<
   StepperStepProps,
   HTMLAnchorElement
 > = forwardRef(
-  ({ className, children, as: Component = "a", index = 0, ...rest }, ref) => {
+  (
+    { className, children, as: Component = "a", unsafe_index = 0, ...rest },
+    ref
+  ) => {
     const context = useContext(StepperContext);
     if (context === null) {
-      console.error(
-        "<StepIndicator.Step> has to be used within an <StepIndicator>"
-      );
+      console.error("<Stepper.Step> has to be used within <Stepper>");
       return null;
     }
-    const activeStep = context.activeStep === index;
+    const { activeStep } = context;
 
     return (
       <Component
         {...rest}
-        aria-current={Boolean(activeStep)}
+        aria-current={activeStep === unsafe_index}
         ref={ref}
         className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": activeStep,
+          "navds-stepper__step--active": activeStep === unsafe_index,
         })}
         onClick={(e) => {
-          context.onStepChange(index);
+          context.onStepChange(unsafe_index + 1);
           rest?.onClick?.(e);
         }}
       >
-        <Label className="navds-stepper__step-number" as="span">
-          {activeStep ? `${index + 1}` : index + 1}
+        <Label className="navds-stepper__circle" as="span" aria-hidden="true">
+          {unsafe_index + 1}
         </Label>
-        <Label className="navds-stepper__step-label">{children}</Label>
+        <Label as="span" className="navds-stepper__content">
+          {children}
+        </Label>
       </Component>
     );
   }
