@@ -1,7 +1,12 @@
-:root {
+:root,
+[data-theme="light"] {
   --navds-error-message-color-text: var(
     --navds-semantic-color-feedback-danger-text
   );
+}
+
+[data-theme="dark"] {
+  --navds-error-message-color-text: var(--navds-global-color-red-300);
 }
 
 /* Heading */
