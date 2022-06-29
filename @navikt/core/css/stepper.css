@@ -13,7 +13,7 @@
 
 .navds-stepper--horizontal {
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   text-align: center;
 }
 
@@ -23,7 +23,7 @@
     [line-1] auto [step-start] var(--navds-stepper-circle-size)
     [line-2 step-end] auto;
   grid-template-columns: var(--navds-stepper-circle-size) auto;
-  justify-items: start;
+  justify-items: flex-start;
   gap: 0.5rem;
 }
 
@@ -56,7 +56,7 @@
   grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
   gap: var(--navds-spacing-2);
   align-items: baseline;
-  justify-content: start;
+  justify-content: flex-start;
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
