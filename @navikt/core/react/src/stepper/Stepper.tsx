@@ -8,15 +8,18 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactNode;
   /**
-   * Adds classname to wrapper
+   * The direction the component grows.
+   * @default "vertical"
    */
-  className?: string;
+  orientation?: "horizontal" | "vertical";
   /**
-   * Current active step index
+   * Current active step.
+   * @note Stepper index starts at 1, not 0
    */
   activeStep: number;
   /**
-   * Callback for clicked step index
+   * Callback for next activeStep
+   * @note Stepper index starts at 1, not 0
    */
   onStepChange?: (step: number) => void;
 }
@@ -32,6 +35,7 @@ interface StepperContextProps {
   activeStep: number;
   onStepChange: (step: number) => void;
   lastIndex: number;
+  orientation: "horizontal" | "vertical";
 }
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
@@ -41,27 +45,49 @@ export const Stepper: StepperComponent = forwardRef<
   StepperProps
 >(
   (
-    { children, className, activeStep, onStepChange = () => {}, ...rest },
+    {
+      children,
+      className,
+      activeStep,
+      orientation = "vertical",
+      onStepChange = () => {},
+      ...rest
+    },
     ref
   ) => {
+    activeStep = activeStep - 1;
     return (
-      <ol {...rest} ref={ref} className={cl("navds-stepper", className)}>
+      <ol
+        {...rest}
+        ref={ref}
+        className={cl(
+          "navds-stepper",
+          orientation === "horizontal" ? "navds-stepper--horizontal" : "",
+          className
+        )}
+      >
         <StepperContext.Provider
           value={{
             activeStep,
             onStepChange,
             lastIndex: React.Children.count(children),
+            orientation,
           }}
         >
           {React.Children.map(children, (step, index) => {
             return (
               <li
-                className={cl("navds-stepper__step-wrapper")}
+                className={cl("navds-stepper__item")}
                 key={index + (children?.toString?.() ?? "")}
               >
+                <span className="navds-stepper__line navds-stepper__line--1" />
                 {React.isValidElement<StepperStepProps>(step)
-                  ? React.cloneElement(step, { ...step.props, index })
+                  ? React.cloneElement(step, {
+                      ...step.props,
+                      unsafe_index: index,
+                    })
                   : step}
+                <span className="navds-stepper__line navds-stepper__line--2" />
               </li>
             );
           })}
