@@ -8,10 +8,9 @@ import React, {
   useState,
 } from "react";
 import mergeRefs from "react-merge-refs";
-import { BodyShort, Label, omit, useEventListener } from "../..";
-import { FormFieldProps } from "../useFormField";
+import { BodyShort, ErrorMessage, Label, omit, useEventListener } from "../..";
+import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
-import { useSearch } from "./useSearch";
 
 export type SearchClearEvent =
   | {
@@ -21,7 +20,7 @@ export type SearchClearEvent =
   | { trigger: "Escape"; event: React.KeyboardEvent<HTMLDivElement> };
 
 export interface SearchProps
-  extends Omit<FormFieldProps, "error" | "errorId">,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
   children?: React.ReactNode;
   /**
@@ -82,7 +81,10 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
       inputProps,
       size = "medium",
       inputDescriptionId,
-    } = useSearch(props, "searchfield");
+      errorId,
+      showErrorMsg,
+      hasError,
+    } = useFormField(props, "searchfield");
 
     const {
       className,
@@ -146,6 +148,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           `navds-form-field--${size}`,
           "navds-search",
           {
+            "navds-search--error": hasError,
             "navds-search--disabled": !!inputProps.disabled,
           }
         )}
@@ -179,7 +182,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
             )}
             <input
               ref={mergedRef}
-              {...omit(rest, ["size"])}
+              {...omit(rest, ["error", "errorId", "size"])}
               {...inputProps}
               value={value ?? internalValue}
               onChange={(e) => handleChange(e.target.value)}
@@ -216,6 +219,16 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
           >
             {children ? children : variant !== "simple" && <SearchButton />}
           </SearchContext.Provider>
+        </div>
+        <div
+          className="navds-form-field__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {showErrorMsg && (
+            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+          )}
         </div>
       </div>
     );
