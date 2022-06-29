@@ -8,10 +8,6 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   children: React.ReactNode;
   /**
-   * Adds classname to wrapper
-   */
-  className?: string;
-  /**
    * The direction the component grows.
    * @default "vertical"
    */
@@ -22,7 +18,8 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    */
   activeStep: number;
   /**
-   * Callback for clicked step index
+   * Callback for next activeStep
+   * @note Stepper index starts at 1, not 0
    */
   onStepChange?: (step: number) => void;
 }
