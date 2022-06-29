@@ -148,7 +148,7 @@
 }
 
 .navds-table__header-cell--align-right .navds-table__sort-button {
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 .navds-table__header-cell--align-center .navds-table__sort-button {

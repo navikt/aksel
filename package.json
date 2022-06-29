@@ -64,6 +64,16 @@
       "function-url-quotes": null,
       "property-no-vendor-prefix": null,
       "alpha-value-notation": "number",
+      "declaration-property-value-disallowed-list": {
+        "justify-content": [
+          "start",
+          "end"
+        ],
+        "align-items": [
+          "start",
+          "end"
+        ]
+      },
       "value-keyword-case": [
         "lower",
         {
