@@ -10,10 +10,10 @@ export interface StepperStepProps
    */
   children: string;
   /**
-   * Handled by Stepper
+   * Handled by Stepper, overwriting may break component logic
    * @private
    */
-  index?: number;
+  unsafe_index?: number;
 }
 
 export interface StepperStepType
@@ -23,7 +23,10 @@ export const StepComponent: OverridableComponent<
   StepperStepProps,
   HTMLAnchorElement
 > = forwardRef(
-  ({ className, children, as: Component = "a", index = 0, ...rest }, ref) => {
+  (
+    { className, children, as: Component = "a", unsafe_index = 0, ...rest },
+    ref
+  ) => {
     const context = useContext(StepperContext);
     if (context === null) {
       console.error("<Stepper.Step> has to be used within <Stepper>");
@@ -34,18 +37,18 @@ export const StepComponent: OverridableComponent<
     return (
       <Component
         {...rest}
-        aria-current={Boolean(activeStep === index)}
+        aria-current={activeStep === unsafe_index}
         ref={ref}
         className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": activeStep === index,
+          "navds-stepper__step--active": activeStep === unsafe_index,
         })}
         onClick={(e) => {
-          context.onStepChange(index + 1);
+          context.onStepChange(unsafe_index + 1);
           rest?.onClick?.(e);
         }}
       >
         <Label className="navds-stepper__circle" as="span" aria-hidden="true">
-          {index + 1}
+          {unsafe_index + 1}
         </Label>
         <Label as="span" className="navds-stepper__content">
           {children}
