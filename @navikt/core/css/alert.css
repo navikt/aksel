@@ -33,16 +33,11 @@
 }
 
 .navds-alert--small {
-  gap: var(--navds-spacing-2);
+  padding: var(--navds-spacing-2) var(--navds-spacing-4);
 }
 
-.navds-alert--banner {
+.navds-alert--full-width {
   border-radius: 0;
-}
-
-.navds-alert--small.navds-alert--banner,
-.navds-alert--small.navds-alert--inline {
-  gap: var(--navds-spacing-3);
 }
 
 .navds-alert > .navds-alert__icon {

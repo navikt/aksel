@@ -33,7 +33,7 @@ export const Default = (props) => (
   <Alert
     variant={props.variant}
     size={props.size}
-    banner={props.banner}
+    fullWidth={props.fullWidth}
     inline={props.inline}
   >
     {props.children}
@@ -42,7 +42,7 @@ export const Default = (props) => (
 
 Default.args = {
   children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
-  banner: false,
+  fullWidth: false,
 };
 
 export const Small = () => {
@@ -59,18 +59,18 @@ export const Small = () => {
   );
 };
 
-export const Banner = () => {
+export const FullWidth = () => {
   return (
     <div className="colgap">
       {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} banner>
+        <Alert key={variant} variant={variant} fullWidth>
           {new Array(i + 1).fill(
             "Id elit esse enim reprehenderit enim nisi veniam nostrud."
           )}
         </Alert>
       ))}
       {variants.map((variant, i) => (
-        <Alert key={variant} variant={variant} banner size="small">
+        <Alert key={variant} variant={variant} fullWidth size="small">
           {new Array(i + 1).fill(
             "Id elit esse enim reprehenderit enim nisi veniam nostrud."
           )}
