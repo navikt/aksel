@@ -157,8 +157,6 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return null;
     }
 
-    console.log("ran");
-
     return (
       <>
         {cloneElement(
