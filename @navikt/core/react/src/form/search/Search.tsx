@@ -4,6 +4,7 @@ import React, {
   forwardRef,
   InputHTMLAttributes,
   useCallback,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -109,7 +110,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = mergeRefs([searchRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");

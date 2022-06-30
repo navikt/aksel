@@ -2,7 +2,7 @@ import {
   arrow as flArrow,
   autoUpdate,
   flip,
-  hide,
+  FloatingPortal,
   offset,
   safePolygon,
   shift,
@@ -23,7 +23,6 @@ import React, {
 } from "react";
 import { Detail } from "..";
 import { mergeRefs, useId } from "../util";
-import Portal from "./portal";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -119,15 +118,9 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
         shift(),
         flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
         flArrow({ element: arrowRef, padding: 5 }),
-        hide(),
       ],
       whileElementsMounted: autoUpdate,
     });
-
-    const mergedRef = useMemo(
-      () => mergeRefs([reference, ref]),
-      [reference, ref]
-    );
 
     const { getReferenceProps, getFloatingProps } = useInteractions([
       useHover(context, { handleClose: safePolygon(), restMs: delay }),
@@ -136,6 +129,15 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     ]);
 
     const ariaId = useId(id);
+
+    const mergedRef = useMemo(
+      () => mergeRefs([ref, floating]),
+      [floating, ref]
+    );
+    const childMergedRef = useMemo(
+      () => mergeRefs([(children as any).ref, reference]),
+      [children, reference]
+    );
 
     if (
       !children ||
@@ -155,40 +157,42 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       return null;
     }
 
+    console.log("ran");
+
     return (
       <>
         {cloneElement(
           children,
           getReferenceProps({
-            ref: mergedRef,
             ...children.props,
+            ref: childMergedRef,
             "aria-describedby":
               userOpen ?? open
                 ? cl(ariaId, children?.props["aria-describedby"])
                 : children?.props["aria-describedby"],
           })
         )}
-        {(userOpen ?? open) && (
-          <Portal>
+        <FloatingPortal>
+          {(userOpen ?? open) && (
             <div
               {...getFloatingProps({
-                ref: floating,
+                ...rest,
+                ref: mergedRef,
                 style: {
                   position: strategy,
                   top: y ?? 0,
                   left: x ?? 0,
                   visibility: referenceHidden ? "hidden" : "visible",
                 },
+                role: "tooltip",
+                id: ariaId,
+                className: cl(
+                  "navds-tooltip",
+                  "navds-detail navds-detail--small",
+                  className
+                ),
               })}
-              {...rest}
-              role="tooltip"
-              id={ariaId}
               data-side={placement}
-              className={cl(
-                "navds-tooltip",
-                "navds-detail navds-detail--small",
-                className
-              )}
             >
               {content}
               {keys && (
@@ -226,8 +230,8 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 />
               )}
             </div>
-          </Portal>
-        )}
+          )}
+        </FloatingPortal>
       </>
     );
   }

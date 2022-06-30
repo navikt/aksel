@@ -1,4 +1,4 @@
-import React, { useRef, useState, forwardRef } from "react";
+import React, { useRef, useState, forwardRef, useMemo } from "react";
 import cl from "clsx";
 import { BodyShort, OverridableComponent, Loader, mergeRefs } from "../";
 import { useClientLayoutEffect } from "../util";
@@ -48,8 +48,9 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       ref
     ) => {
       const buttonRef = useRef<HTMLButtonElement | null>(null);
-      const mergedRef = mergeRefs([buttonRef, ref]);
       const [widthOverride, setWidthOverride] = useState<number>();
+
+      const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
 
       useClientLayoutEffect(() => {
         if (loading) {
