@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   useCallback,
   useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -44,7 +45,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
   ) => {
     const { current: isControlled } = useRef(value != null);
     const inputRef = useRef<HTMLTextAreaElement | null>(null);
-    const handleRef = mergeRefs([ref, inputRef]);
+    const handleRef = useMemo(() => mergeRefs([inputRef, ref]), [ref]);
     const shadowRef = useRef<HTMLTextAreaElement | null>(null);
     const renders = useRef(0);
     const [state, setState] = useState<any>({});

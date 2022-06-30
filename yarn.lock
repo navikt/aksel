@@ -1700,9 +1700,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@floating-ui/react-dom-interactions@npm:0.6.4":
-  version: 0.6.4
-  resolution: "@floating-ui/react-dom-interactions@npm:0.6.4"
+"@floating-ui/react-dom-interactions@npm:0.6.6":
+  version: 0.6.6
+  resolution: "@floating-ui/react-dom-interactions@npm:0.6.6"
   dependencies:
     "@floating-ui/react-dom": ^0.7.2
     aria-hidden: ^1.1.3
@@ -1710,7 +1710,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
-  checksum: f454f14c5ff00ef738777a7e3c6f57a3528b2d7d4c24a3df0969fc902f8a897793e22565a2e02b7ddbb30e5bf8e4ebf2f4c8bde81c25fb11779ccc93eab972bc
+  checksum: 3c6cf848c0d9cee6a4f68817a2b32a9addf6f3057f9f120e4d537efe1d2935cdf8a368d9b599b49b97c8cbcf9f25c8da1683f41c563754dd5eca47b622a74cc5
   languageName: node
   linkType: hard
 
@@ -3062,7 +3062,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
-    "@floating-ui/react-dom-interactions": 0.6.4
+    "@floating-ui/react-dom-interactions": 0.6.6
     "@navikt/ds-icons": ^1.0.0
     "@radix-ui/react-tabs": 0.1.5
     "@radix-ui/react-toggle-group": 0.1.5

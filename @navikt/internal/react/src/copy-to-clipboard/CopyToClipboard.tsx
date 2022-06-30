@@ -1,7 +1,7 @@
 import { Copy } from "@navikt/ds-icons";
 import cl from "clsx";
 import copy from "copy-to-clipboard";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import {
   BodyShort,
   Button,
@@ -71,7 +71,7 @@ export const CopyToClipboard = forwardRef<
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const mergedRef = mergeRefs([buttonRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
     const timeoutRef = useRef<number | null>();
     const [openPopover, setOpenPopover] = useState(false);
 

@@ -27,7 +27,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
   ({ className, ...rest }, ref) => {
     const context = useContext(TabsContext);
     const listRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = mergeRefs([listRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([listRef, ref]), [ref]);
     const [displayScroll, setDisplayScroll] = useState({
       start: false,
       end: false,

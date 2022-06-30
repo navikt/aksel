@@ -1,6 +1,6 @@
 import { Helptext as HelpTextIcon } from "@navikt/ds-icons";
 import cl from "clsx";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useMemo, useRef, useState } from "react";
 import { Popover, PopoverProps, mergeRefs } from "..";
 
 export interface HelpTextProps
@@ -48,7 +48,7 @@ export const HelpText = forwardRef<HTMLButtonElement, HelpTextProps>(
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const mergedRef = mergeRefs([buttonRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
     const [open, setOpen] = useState(false);
 
     return (

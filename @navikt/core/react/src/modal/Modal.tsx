@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from "react";
+import React, { forwardRef, useMemo, useRef } from "react";
 import cl from "clsx";
 import ReactModal from "react-modal";
 import { Close } from "@navikt/ds-icons";
@@ -76,7 +76,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     ref
   ) => {
     const modalRef = useRef<ReactModal | null>(null);
-    const mergedRef = mergeRefs([modalRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const onModalCloseRequest = (e) => {
