@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--navds-spacing-2);
+  gap: var(--navds-spacing-4);
 }
 
 .navds-link-panel:hover .navds-link-panel__title {
@@ -42,5 +42,5 @@
 }
 
 .navds-link-panel__description {
-  margin-top: var(--navds-spacing-2);
+  margin-top: var(--navds-spacing-1);
 }
