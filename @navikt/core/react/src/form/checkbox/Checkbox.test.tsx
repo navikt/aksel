@@ -1,6 +1,5 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import faker from "faker";
 import { Checkbox, CheckboxGroup } from ".";
 
@@ -11,9 +10,8 @@ test("checkbox group chains onChange calls", async () => {
   const onChange = jest.fn();
   const value = faker.datatype.string();
   const label = faker.datatype.string();
-  const user = userEvent.setup();
 
-  render(
+  const { getByLabelText } = render(
     <CheckboxGroup legend="legend" onChange={onGroupChange}>
       <Checkbox onChange={onChange} value={value}>
         {label}
@@ -21,7 +19,9 @@ test("checkbox group chains onChange calls", async () => {
     </CheckboxGroup>
   );
 
-  await user.click(screen.getByLabelText(label));
+  await act(async () => {
+    fireEvent.click(getByLabelText(label));
+  });
 
   expect(onGroupChange).toBeCalledTimes(1);
   expect(onGroupChange).toBeCalledWith([value]);
@@ -38,10 +38,14 @@ describe("Checkbox handles controlled-state correctly", () => {
   );
 
   test("Checkbox is still checked after click when controlled", async () => {
-    const user = userEvent.setup();
-    render(<CheckboxComponent value={["value1", "value2"]} />);
-    await user.click(screen.getByLabelText("label1"));
-    await user.click(screen.getByLabelText("label2"));
+    const { getByLabelText } = render(
+      <CheckboxComponent value={["value1", "value2"]} />
+    );
+
+    await act(async () => {
+      fireEvent.click(getByLabelText("label1"));
+      fireEvent.click(getByLabelText("label2"));
+    });
 
     expect((screen.getByLabelText("label1") as HTMLInputElement).checked).toBe(
       true
@@ -54,22 +58,21 @@ describe("Checkbox handles controlled-state correctly", () => {
 
   test("onChange called with expected values", async () => {
     const onGroupChange = jest.fn();
-    const user = userEvent.setup();
 
-    render(
+    const { getByLabelText } = render(
       <CheckboxComponent
         onChange={onGroupChange}
         value={["value1", "value2"]}
       />
     );
 
-    await user.click(screen.getByLabelText("label1"));
+    await act(async () => {
+      fireEvent.click(getByLabelText("label1"));
+      expect(onGroupChange).lastCalledWith(["value2"]);
 
-    expect(onGroupChange).lastCalledWith(["value2"]);
-
-    await user.click(screen.getByLabelText("label2"));
-
-    expect(onGroupChange).lastCalledWith(["value1"]);
+      fireEvent.click(getByLabelText("label2"));
+      expect(onGroupChange).lastCalledWith(["value1"]);
+    });
   });
 
   test("Checkboxes updates after value-prop change", () => {
