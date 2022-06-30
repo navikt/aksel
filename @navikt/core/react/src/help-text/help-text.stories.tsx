@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { TextField, HelpText } from "..";
+import { HelpText } from "..";
 
 export default {
   title: "ds-react/HelpText",
