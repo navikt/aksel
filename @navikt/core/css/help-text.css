@@ -15,7 +15,6 @@
   --navds-help-text-color-shadow-hover: var(
     --navds-semantic-color-interaction-primary
   );
-  --navds-help-text-color-shadow-focus: var(--navds-semantic-color-focus);
   --navds-help-text-color-popover-background: var(
     --navds-semantic-color-feedback-info-background
   );
@@ -35,17 +34,10 @@
   font-size: 1.5rem;
 }
 
-.navds-help-text__button:hover {
-  color: var(--navds-help-text-color-hover);
-  background: var(--navds-help-text-color-background-hover);
-  box-shadow: 0 0 0 2px var(--navds-help-text-color-shadow-hover);
-}
-
 .navds-help-text__button:focus {
   outline: none;
-  color: var(--navds-help-text-color-focus);
-  background: var(--navds-help-text-color-background-focus);
-  box-shadow: 0 0 0 3px var(--navds-help-text-color-shadow-focus);
+  box-shadow: 0 0 0 1px var(--navds-global-color-white),
+    0 0 0 4px var(--navds-semantic-color-focus);
 }
 
 .navds-help-text__icon {
@@ -60,4 +52,18 @@
   background-color: var(--navds-help-text-color-popover-background);
 
   --navds-popover-color-border: rgba(38 38 38 / 0.22);
+}
+
+.navds-help-text__icon--filled {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"])
+  > .navds-help-text__icon {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"])
+  > .navds-help-text__icon--filled {
+  display: inherit;
 }
