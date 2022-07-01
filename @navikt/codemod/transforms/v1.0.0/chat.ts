@@ -62,12 +62,6 @@ export default function transformer(file, api, options) {
         x.value.closingElement.name.object.name = "Chat";
       }
     });
-    file.path.includes("styled") &&
-      console.log(
-        root.find(j.JSXElement).forEach((x) => {
-          console.log(x.value.openingElement.name);
-        })
-      );
   }
 
   return root.toSource(options.printOptions);
