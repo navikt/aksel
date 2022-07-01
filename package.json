@@ -64,6 +64,16 @@
       "function-url-quotes": null,
       "property-no-vendor-prefix": null,
       "alpha-value-notation": "number",
+      "declaration-property-value-disallowed-list": {
+        "justify-content": [
+          "start",
+          "end"
+        ],
+        "align-items": [
+          "start",
+          "end"
+        ]
+      },
       "value-keyword-case": [
         "lower",
         {
@@ -93,6 +103,7 @@
     "@storybook/theming": "6.5.5",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
+    "@whitespace/storybook-addon-html": "^5.0.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "chromatic": "6.5.4",
@@ -118,6 +129,7 @@
     "prop-types": "^15.5.10",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "storybook-addon-css-user-preferences": "^0.0.3",
     "style-loader": "^1.2.1",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
