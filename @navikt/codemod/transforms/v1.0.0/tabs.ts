@@ -11,7 +11,7 @@ export default function transformer(file, api, options) {
 
   const root = j(file.source);
 
-  /* Finds and replaces import from SpeechBubble -> Chat */
+  /* Finds used name for Tabs component */
   root
     .find(j.ImportDeclaration)
     .filter((path) => path.node.source.value === "@navikt/ds-react")
@@ -29,9 +29,6 @@ export default function transformer(file, api, options) {
       componentName: `${localName}.List`,
       props: {
         loop: "null",
-        /* illustrationBgColor: "avatarBgColor",
-        illustration: "avatar",
-        topText: "name", */
       },
     });
 
