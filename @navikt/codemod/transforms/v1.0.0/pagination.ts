@@ -10,6 +10,20 @@ export default function transformer(file, api, options) {
 
   const root = j(file.source);
 
+  /* https://github.com/mui/material-ui/blob/master/packages/mui-codemod/src/v5.0.0/variant-prop.js */
+  function addExplicitStandardProp(node) {
+    const attributes = node.openingElement.attributes;
+    const variant = attributes.find(
+      (node) => node.type === "JSXAttribute" && node.name.name === "size"
+    );
+
+    if (!variant) {
+      attributes.unshift(
+        j.jsxAttribute(j.jsxIdentifier("size"), j.literal("small"))
+      );
+    }
+  }
+
   /* Finds locally used name for Pagination */
   root
     .find(j.ImportDeclaration)
@@ -26,14 +40,21 @@ export default function transformer(file, api, options) {
     });
 
   if (!!j(file.source).findJSXElements(localName)) {
-    renameProps({
-      root,
-      componentName: localName,
-      props: {
-        illustrationBgColor: "avatarBgColor",
-        illustration: "avatar",
-        topText: "name",
-      },
+    root.findJSXElements(`${localName}`).forEach((parent) => {
+      const skip = !!parent.value.openingElement?.attributes.find(
+        (x) => x.name.name === "data-version" && x.value.value === "v1"
+      );
+      parent.value.openingElement?.attributes.forEach((x, index) => {
+        if (x.name?.name === "size" && x.type === "JSXAttribute" && !skip) {
+          /* addExplicitStandardProp */
+          if (x.value.value === "medium") {
+            x.value = j.literal("small");
+          } else if (x.value.value === "small") {
+            x.value = j.literal("xsmall");
+          }
+        }
+      });
+      addExplicitStandardProp(parent.value);
     });
   }
 
