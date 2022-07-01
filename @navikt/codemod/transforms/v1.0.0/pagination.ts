@@ -1,5 +1,3 @@
-import renameProps from "../utils/rename-props";
-
 /**
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
