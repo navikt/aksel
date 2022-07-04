@@ -1,6 +1,7 @@
 import cl from "classnames";
 import React, { forwardRef, useContext } from "react";
 import { Collapse, UnmountClosed } from "react-collapse";
+import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
 export interface AccordionContentProps
@@ -35,9 +36,12 @@ const AccordionContent: AccordionContentType = forwardRef(
     return (
       <div ref={ref} aria-labelledby={context.buttonId} {...rest}>
         <CollapseComponent isOpened={context.open}>
-          <div className={cl("navds-accordion__content", className)}>
+          <BodyLong
+            as="div"
+            className={cl("navds-accordion__content", className)}
+          >
             {children}
-          </div>
+          </BodyLong>
         </CollapseComponent>
       </div>
     );
