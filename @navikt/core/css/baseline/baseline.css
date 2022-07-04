@@ -43,6 +43,10 @@ a {
   color: var(--navds-semantic-color-link);
 }
 
+button {
+  color: inherit;
+}
+
 /* https://web.dev/prefers-reduced-motion/ */
 @media (prefers-reduced-motion: reduce) {
   *:not(.navds-loader *):not(.navds-loader),
