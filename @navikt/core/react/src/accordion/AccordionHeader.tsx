@@ -55,22 +55,11 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
         onClick={handleClick}
         aria-expanded={context.open}
       >
-        {children}
-        <Expand
-          aria-hidden
-          className={cl("navds-accordion__expand-icon", {
-            "navds-accordion__expand-icon--flip": context.open,
-          })}
-        />
+        <span className="navds-accordion__header-content">{children}</span>
+        <Expand aria-hidden className="navds-accordion__expand-icon" />
         <ExpandFilled
           aria-hidden
-          className={cl(
-            "navds-accordion__expand-icon",
-            "navds-accordion__expand-icon--filled",
-            {
-              "navds-accordion__expand-icon--flip": context.open,
-            }
-          )}
+          className="navds-accordion__expand-icon navds-accordion__expand-icon--filled"
         />
       </button>
     );
