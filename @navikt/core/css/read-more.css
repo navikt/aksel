@@ -32,7 +32,7 @@
 
 .navds-read-more + .ReactCollapse--collapse {
   transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  padding-top: var(--navds-spacing-2);
+  padding-top: var(--navds-spacing-1);
 }
 
 .navds-read-more:not(.navds-read-more--open) + .ReactCollapse--collapse {
@@ -40,19 +40,9 @@
 }
 
 .navds-read-more__content {
-  display: flex;
-  align-items: stretch;
-  gap: 10px;
-  padding: 0 var(--navds-spacing-1);
-}
-
-.navds-read-more__content::before {
-  content: "";
-  display: block;
-  width: 2px;
-  background-color: rgba(38 38 38 / 0.36);
-  margin: 0 7px;
-  flex-shrink: 0;
+  border-left: 2px solid rgba(38 38 38 / 0.36);
+  margin-left: 11px;
+  padding-left: 15px;
 }
 
 .navds-read-more__expand-icon {
