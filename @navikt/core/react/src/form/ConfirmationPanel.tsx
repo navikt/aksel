@@ -1,6 +1,6 @@
-import React, { forwardRef } from "react";
 import cl from "classnames";
-import { BodyLong, Checkbox, CheckboxProps, ErrorMessage, omit } from "..";
+import React, { forwardRef } from "react";
+import { BodyLong, Checkbox, CheckboxProps, ErrorMessage } from "..";
 import { useFormField } from "./useFormField";
 
 export interface ConfirmationPanelProps
@@ -53,12 +53,7 @@ export const ConfirmationPanel = forwardRef<
             {children}
           </BodyLong>
         )}
-        <Checkbox
-          {...omit(props, ["errorId"])}
-          {...inputProps}
-          error={hasError}
-          size={size}
-        >
+        <Checkbox {...props} {...inputProps} error={hasError} size={size}>
           {label}
         </Checkbox>
       </div>
