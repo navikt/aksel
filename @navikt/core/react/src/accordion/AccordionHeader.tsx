@@ -52,6 +52,7 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
           "navds-heading",
           "navds-heading--small"
         )}
+        type="button"
         onClick={handleClick}
         aria-expanded={context.open}
       >
