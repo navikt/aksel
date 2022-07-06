@@ -32,28 +32,30 @@ const Content = () => (
   </Accordion.Content>
 );
 
-export const Default = (props) => {
+const Item = (props) => {
   const [open, setOpen] = useState(false);
 
-  const Item = () =>
-    props.controlled ? (
-      <Accordion.Item open={open}>
-        <Accordion.Header onClick={() => setOpen(!open)}>
-          Accordion header text
-        </Accordion.Header>
-        <Content />
-      </Accordion.Item>
-    ) : (
-      <Accordion.Item>
-        <Accordion.Header>Accordion header text</Accordion.Header>
-        <Content />
-      </Accordion.Item>
-    );
+  return props.controlled ? (
+    <Accordion.Item open={open}>
+      <Accordion.Header onClick={() => setOpen(!open)}>
+        Accordion header text
+      </Accordion.Header>
+      <Content />
+    </Accordion.Item>
+  ) : (
+    <Accordion.Item>
+      <Accordion.Header>Accordion header text</Accordion.Header>
+      <Content />
+    </Accordion.Item>
+  );
+};
+
+export const Default = (props) => {
   return (
     <div style={{ width: 500 }}>
       <Accordion>
         {[...Array(props.nItems ? props.nItems : 2)].map((_, y) => (
-          <Item key={y} />
+          <Item key={y} {...props} />
         ))}
       </Accordion>
     </div>
