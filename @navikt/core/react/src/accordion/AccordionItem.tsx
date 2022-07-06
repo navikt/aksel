@@ -18,11 +18,6 @@ export interface AccordionItemProps
    * @default false
    */
   defaultOpen?: boolean;
-  /**
-   * Removes content inside Accordion.Content if false from dom when closed
-   * @default false
-   */
-  renderContentWhenClosed?: boolean;
 }
 
 export type AccordionItemType = React.ForwardRefExoticComponent<
@@ -32,9 +27,6 @@ export type AccordionItemType = React.ForwardRefExoticComponent<
 export interface AccordionItemContextProps {
   open: boolean;
   toggleOpen: () => void;
-  setButtonId: (id: string) => void;
-  buttonId: string;
-  renderContentWhenClosed: boolean;
 }
 
 export const AccordionItemContext =
@@ -42,20 +34,10 @@ export const AccordionItemContext =
 
 const AccordionItem: AccordionItemType = forwardRef(
   (
-    {
-      children,
-      className,
-      open,
-      defaultOpen = false,
-      renderContentWhenClosed = false,
-      onClick,
-      id,
-      ...rest
-    },
+    { children, className, open, defaultOpen = false, onClick, id, ...rest },
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const [buttonId, setButtonId] = useState("");
 
     return (
       <div
@@ -73,9 +55,6 @@ const AccordionItem: AccordionItemType = forwardRef(
                 setInternalOpen((iOpen) => !iOpen);
               }
             },
-            renderContentWhenClosed,
-            setButtonId,
-            buttonId,
           }}
         >
           {children}
