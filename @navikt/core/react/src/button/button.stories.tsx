@@ -128,7 +128,7 @@ export const Icon = () => (
         <Button
           key={variant}
           variant={variant}
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
         />
       ))}
     </div>
@@ -138,7 +138,7 @@ export const Icon = () => (
           key={variant}
           variant={variant}
           size="small"
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
         />
       ))}
     </div>
@@ -148,7 +148,7 @@ export const Icon = () => (
           key={variant}
           variant={variant}
           size="xsmall"
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
         />
       ))}
     </div>
@@ -162,7 +162,7 @@ export const IconWText = () => (
         <Button
           key={variant}
           variant={variant}
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
@@ -175,7 +175,7 @@ export const IconWText = () => (
           key={variant}
           variant={variant}
           size="small"
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
@@ -188,7 +188,7 @@ export const IconWText = () => (
           key={variant}
           variant={variant}
           size="xsmall"
-          icon={<Star aria-label="Stjerne" />}
+          icon={<Star title="Stjerne" />}
           iconPosition={i % 2 ? "left" : "right"}
         >
           {varSwitch[variant]}
