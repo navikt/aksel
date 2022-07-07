@@ -18,7 +18,13 @@ export default {
     size: {
       control: {
         type: "radio",
-        options: ["medium", "small"],
+        options: ["medium", "small", "xsmall"],
+      },
+    },
+    iconPosition: {
+      control: {
+        type: "radio",
+        options: ["left", "right"],
       },
     },
   },
@@ -40,10 +46,14 @@ const varSwitch = {
 
 export const Default = (props) => {
   return (
-    <Button variant={props.variant} size={props.size} loading={props.loading}>
-      {props.icon ? <Star /> : null}
+    <Button
+      variant={props.variant}
+      size={props.size}
+      loading={props.loading}
+      icon={props.icon ? <Star /> : undefined}
+      iconPosition={props.iconPosition}
+    >
       {props.children}
-      {props.icon ? <Star /> : null}
     </Button>
   );
 };
@@ -51,6 +61,7 @@ export const Default = (props) => {
 Default.args = {
   icon: false,
   loading: false,
+  iconPosition: "left",
   children: "Knapp",
 };
 
@@ -114,26 +125,31 @@ export const Icon = () => (
   <div className="colgap">
     <div className="rowgap">
       {variants.map((variant) => (
-        <Button key={variant} variant={variant}>
-          <Star aria-hidden />
-          <span className="navds-sr-only">Stjerne</span>
-        </Button>
+        <Button
+          key={variant}
+          variant={variant}
+          icon={<Star aria-label="Stjerne" />}
+        />
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
-        <Button key={variant} variant={variant} size="small">
-          <Star aria-hidden />
-          <span className="navds-sr-only">Stjerne</span>
-        </Button>
+        <Button
+          key={variant}
+          variant={variant}
+          size="small"
+          icon={<Star aria-label="Stjerne" />}
+        />
       ))}
     </div>
     <div className="rowgap">
       {variants.map((variant) => (
-        <Button key={variant} variant={variant} size="xsmall">
-          <Star aria-hidden />
-          <span className="navds-sr-only">Stjerne</span>
-        </Button>
+        <Button
+          key={variant}
+          variant={variant}
+          size="xsmall"
+          icon={<Star aria-label="Stjerne" />}
+        />
       ))}
     </div>
   </div>
@@ -142,29 +158,40 @@ export const Icon = () => (
 export const IconWText = () => (
   <div className="colgap">
     <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant}>
-          <Star aria-hidden />
+      {variants.map((variant, i) => (
+        <Button
+          key={variant}
+          variant={variant}
+          icon={<Star aria-label="Stjerne" />}
+          iconPosition={i % 2 ? "left" : "right"}
+        >
           {varSwitch[variant]}
-          <Star aria-hidden />
         </Button>
       ))}
     </div>
     <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} size="small">
-          <Star aria-hidden />
+      {variants.map((variant, i) => (
+        <Button
+          key={variant}
+          variant={variant}
+          size="small"
+          icon={<Star aria-label="Stjerne" />}
+          iconPosition={i % 2 ? "left" : "right"}
+        >
           {varSwitch[variant]}
-          <Star aria-hidden />
         </Button>
       ))}
     </div>
     <div className="rowgap">
-      {variants.map((variant) => (
-        <Button key={variant} variant={variant} size="xsmall">
-          <Star aria-hidden />
+      {variants.map((variant, i) => (
+        <Button
+          key={variant}
+          variant={variant}
+          size="xsmall"
+          icon={<Star aria-label="Stjerne" />}
+          iconPosition={i % 2 ? "left" : "right"}
+        >
           {varSwitch[variant]}
-          <Star aria-hidden />
         </Button>
       ))}
     </div>
