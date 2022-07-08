@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import AnimateHeight from "react-animate-height";
+import AnimateHeight from "../util/AnimateHeight";
 import { BodyLong } from "../typography";
 import { AccordionItemContext } from "./AccordionItem";
 
