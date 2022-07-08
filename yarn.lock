@@ -3083,7 +3083,6 @@ __metadata:
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^27.5.0
-    react-collapse: ^5.1.0
     react-docgen-typescript: 2.2.2
     react-dom: ^18.0.0
     react-modal: 3.15.1
@@ -18862,15 +18861,6 @@ __metadata:
   bin:
     rc: ./cli.js
   checksum: 2e26e052f8be2abd64e6d1dabfbd7be03f80ec18ccbc49562d31f617d0015fbdbcf0f9eed30346ea6ab789e0fdfe4337f033f8016efdbee0df5354751842080e
-  languageName: node
-  linkType: hard
-
-"react-collapse@npm:^5.1.0":
-  version: 5.1.1
-  resolution: "react-collapse@npm:5.1.1"
-  peerDependencies:
-    react: ">=16.3.0"
-  checksum: 3c215cf38782bfce2b2a9fccac22d77ce945ceb5b4866bfb9abf33eecb9d1e40555c4d076ae6648d7f1765164e083e1f74a458aeb7f8e74c23ce1bf7bf20d996
   languageName: node
   linkType: hard
 
