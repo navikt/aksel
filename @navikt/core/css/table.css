@@ -224,8 +224,7 @@
   display: none;
 }
 
-.navds-table__expanded-row-collapse {
-  transition: height 250ms cubic-bezier(0.4, 0, 0.2, 1);
+.navds-table__expanded-row-collapse:not([style*="height: 0px;"]) {
   border-bottom: 1px solid var(--navds-table-cell-color-border);
 }
 

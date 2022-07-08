@@ -45,11 +45,13 @@ interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
   duration?: number;
   easing?: string;
   height: Height;
+  innerClassName?: string;
 }
 
 const AnimateHeight: React.FC<AnimateHeightProps> = ({
   children,
-  className = "",
+  className,
+  innerClassName,
   duration: userDuration = 250,
   easing = "ease",
   height,
@@ -217,8 +219,6 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
     componentStyle.WebkitTransition = componentStyle.transition;
   }
 
-  const contentStyle: CSSProperties = {};
-
   // Check if user passed aria-hidden prop
   const hasAriaHiddenProp = typeof props["aria-hidden"] !== "undefined";
   const ariaHidden = hasAriaHiddenProp ? props["aria-hidden"] : height === 0;
@@ -230,7 +230,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
       className={className}
       style={componentStyle}
     >
-      <div style={contentStyle} ref={contentElement}>
+      <div className={innerClassName} ref={contentElement}>
         {children}
       </div>
     </div>
