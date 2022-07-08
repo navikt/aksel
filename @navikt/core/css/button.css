@@ -132,6 +132,7 @@
 
 .navds-button--xsmall {
   padding: 0.125rem var(--navds-spacing-2);
+  gap: var(--navds-spacing-1);
 }
 
 .navds-button--icon-only {
