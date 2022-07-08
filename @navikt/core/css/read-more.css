@@ -44,9 +44,7 @@
 }
 
 .navds-read-more--small .navds-read-more__expand-icon {
-  font-size: 1.25rem;
   height: 1.25rem;
-  flex-shrink: 0;
 }
 
 .navds-read-more--open
