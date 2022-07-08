@@ -5,13 +5,17 @@ import { FormFieldProps } from "../useFormField";
 import { BodyShort, Detail, omit } from "../..";
 
 export interface CheckboxProps
-  extends Omit<FormFieldProps, "errorId">,
+  extends FormFieldProps,
     Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
    * Adds error indication on checkbox
    * @default false
    */
   error?: boolean;
+  /**
+   * Id for error resulting in checkbox having error
+   */
+  errorId?: string;
   /**
    * Checkbox label
    */
@@ -61,6 +65,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             "description",
             "hideLabel",
             "indeterminate",
+            "errorId",
           ])}
           {...inputProps}
           type="checkbox"

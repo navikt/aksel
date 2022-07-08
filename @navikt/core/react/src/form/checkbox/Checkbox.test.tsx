@@ -5,6 +5,10 @@ import { Checkbox, CheckboxGroup } from ".";
 
 const firstArgumentOfFirstCall = (fn: jest.Mock) => fn.mock.calls[0][0];
 
+test("checkbox with error id does not give type error", () => {
+  <Checkbox errorId="wat">child</Checkbox>;
+});
+
 test("checkbox group chains onChange calls", async () => {
   const onGroupChange = jest.fn();
   const onChange = jest.fn();

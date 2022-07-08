@@ -74,6 +74,6 @@
 
 .navds-alert--inline {
   background-color: transparent;
-  border-color: transparent;
+  border: none;
   padding: 0;
 }
