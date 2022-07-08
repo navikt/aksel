@@ -1,23 +1,11 @@
+/* https://github.com/Stanko/react-animate-height/blob/v3/src/index.tsx */
 import React, { CSSProperties, useEffect, useRef, useState } from "react";
-import classNames from "classnames";
 
 // ------------------ Types
 
 export type Height = "auto" | number | `${number}%`;
 type Timeout = ReturnType<typeof setTimeout>;
 type Overflow = "auto" | "visible" | "hidden" | undefined;
-type AnimationStateClasses = {
-  animating: string;
-  animatingUp: string;
-  animatingDown: string;
-  animatingToHeightZero: string;
-  animatingToHeightAuto: string;
-  animatingToHeightSpecific: string;
-  static: string;
-  staticHeightZero: string;
-  staticHeightAuto: string;
-  staticHeightSpecific: string;
-};
 
 // ------------------ Helpers
 
@@ -51,31 +39,6 @@ function showContent(element: HTMLDivElement | null, height: Height) {
   }
 }
 
-const ANIMATION_STATE_CLASSES: AnimationStateClasses = {
-  animating: "rah-animating",
-  animatingUp: "rah-animating--up",
-  animatingDown: "rah-animating--down",
-  animatingToHeightZero: "rah-animating--to-height-zero",
-  animatingToHeightAuto: "rah-animating--to-height-auto",
-  animatingToHeightSpecific: "rah-animating--to-height-specific",
-  static: "rah-static",
-  staticHeightZero: "rah-static--height-zero",
-  staticHeightAuto: "rah-static--height-auto",
-  staticHeightSpecific: "rah-static--height-specific",
-};
-
-function getStaticStateClasses(
-  animationStateClasses: AnimationStateClasses,
-  height: Height
-) {
-  return classNames({
-    [animationStateClasses.static]: true,
-    [animationStateClasses.staticHeightZero]: height === 0,
-    [animationStateClasses.staticHeightSpecific]: height > 0,
-    [animationStateClasses.staticHeightAuto]: height === "auto",
-  });
-}
-
 // ------------------ Component
 
 interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -87,7 +50,7 @@ interface AnimateHeightProps extends React.HTMLAttributes<HTMLDivElement> {
 const AnimateHeight: React.FC<AnimateHeightProps> = ({
   children,
   className = "",
-  duration: userDuration = 500,
+  duration: userDuration = 250,
   easing = "ease",
   height,
   ...props
@@ -98,10 +61,6 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
 
   const animationClassesTimeoutID = useRef<Timeout>();
   const timeoutID = useRef<Timeout>();
-
-  const stateClasses = useRef<AnimationStateClasses>({
-    ...ANIMATION_STATE_CLASSES,
-  });
 
   const isBrowser = typeof window !== "undefined";
 
@@ -129,8 +88,6 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const [currentHeight, setCurrentHeight] = useState<Height>(initHeight);
   const [overflow, setOverflow] = useState<Overflow>(initOverflow);
   const [useTransitions, setUseTransitions] = useState<boolean>(false);
-  const [animationStateClassNames, setAnimationStateClassNames] =
-    useState<string>(getStaticStateClasses(stateClasses.current, height));
 
   // ------------------ Did mount
   useEffect(() => {
@@ -186,31 +143,12 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
         newHeight = contentHeight;
       }
 
-      // Animation classes
-      const newAnimationStateClassNames = classNames({
-        [stateClasses.current.animating]: true,
-        [stateClasses.current.animatingUp]:
-          prevHeight.current === "auto" || height < prevHeight.current,
-        [stateClasses.current.animatingDown]:
-          height === "auto" || height > prevHeight.current,
-        [stateClasses.current.animatingToHeightZero]: timeoutHeight === 0,
-        [stateClasses.current.animatingToHeightAuto]: timeoutHeight === "auto",
-        [stateClasses.current.animatingToHeightSpecific]: timeoutHeight > 0,
-      });
-
-      // Animation classes to be put after animation is complete
-      const timeoutAnimationStateClasses = getStaticStateClasses(
-        stateClasses.current,
-        timeoutHeight
-      );
-
       // Set starting height and animating classes
       // When animating from 'auto' we first need to set fixed height
       // that change should be animated
       setCurrentHeight(newHeight);
       setOverflow("hidden");
       setUseTransitions(!isCurrentHeightAuto);
-      setAnimationStateClassNames(newAnimationStateClassNames);
 
       // Clear timeouts
       clearTimeout(timeoutID.current as Timeout);
@@ -231,7 +169,6 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
         // Set static classes and remove transitions when animation ends
         animationClassesTimeoutID.current = setTimeout(() => {
           setUseTransitions(false);
-          setAnimationStateClassNames(timeoutAnimationStateClasses);
 
           // ANIMATION ENDS
           // Hide content if height is 0 (to prevent tabbing into it)
@@ -243,7 +180,6 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
           setCurrentHeight(timeoutHeight);
           setOverflow(timeoutOverflow);
           setUseTransitions(false);
-          setAnimationStateClassNames(timeoutAnimationStateClasses);
 
           // ANIMATION ENDS
           // If height is auto, don't hide the content
@@ -291,7 +227,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
     <div
       {...props}
       aria-hidden={ariaHidden}
-      className={`${animationStateClassNames} ${className}`}
+      className={className}
       style={componentStyle}
     >
       <div style={contentStyle} ref={contentElement}>

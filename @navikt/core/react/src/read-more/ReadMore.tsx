@@ -3,7 +3,7 @@ import cl from "clsx";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 import { ExpandFilled } from "@navikt/ds-icons";
-import AnimateHeight from "react-animate-height";
+import AnimateHeight from "../util/AnimateHeight";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
