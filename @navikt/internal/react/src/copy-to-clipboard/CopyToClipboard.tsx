@@ -49,7 +49,7 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * Placement of icon
    * @default "left"
    */
-  iconPlacement?: "left" | "right";
+  iconPosition?: "left" | "right";
 }
 
 export const CopyToClipboard = forwardRef<
@@ -64,7 +64,7 @@ export const CopyToClipboard = forwardRef<
       className,
       size = "medium",
       popoverPlacement = "bottom",
-      iconPlacement = "left",
+      iconPosition = "left",
       title,
       ...rest
     },
@@ -99,15 +99,11 @@ export const CopyToClipboard = forwardRef<
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
+          icon={<Copy title={copyTitle} aria-hidden={!copyTitle} />}
+          iconPosition={iconPosition}
           {...rest}
         >
-          {iconPlacement === "left" && (
-            <Copy title={copyTitle} aria-hidden={!copyTitle} />
-          )}
           {children}
-          {iconPlacement === "right" && (
-            <Copy title={copyTitle} aria-hidden={!copyTitle} />
-          )}
         </Button>
         <Popover
           role="alert"

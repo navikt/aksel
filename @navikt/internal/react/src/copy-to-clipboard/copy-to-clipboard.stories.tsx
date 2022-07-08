@@ -17,7 +17,7 @@ export default {
         type: "text",
       },
     },
-    iconPlacement: {
+    iconPosition: {
       control: {
         type: "radio",
         options: ["right", "left"],
@@ -37,7 +37,7 @@ export const Default = (props) => {
     <CopyToClipboard
       popoverText={props.popoverText}
       copyText={props?.copyText}
-      iconPlacement={props?.iconPlacement}
+      iconPosition={props?.iconPosition}
       size={props?.size}
       popoverPlacement={props?.popoverPlacement}
     >
@@ -60,14 +60,14 @@ export const WithText = () => (
 export const IconPlacement = () => (
   <div className="colgap">
     <CopyToClipboard
-      iconPlacement="right"
+      iconPosition="right"
       popoverText="Kopierte PI til clipboard"
       copyText="3.14"
     >
       Right
     </CopyToClipboard>
     <CopyToClipboard
-      iconPlacement="left"
+      iconPosition="left"
       popoverText="Kopierte PI til clipboard"
       copyText="3.14"
     >
@@ -79,13 +79,13 @@ export const IconPlacement = () => (
 export const Small = () => (
   <div className="rowgap">
     <CopyToClipboard
-      iconPlacement="right"
+      iconPosition="right"
       popoverText="Kopierte PI til clipboard"
       copyText="3.14"
       size="small"
     />
     <CopyToClipboard
-      iconPlacement="left"
+      iconPosition="left"
       popoverText="Kopierte PI til clipboard"
       copyText="3.14"
       size="small"

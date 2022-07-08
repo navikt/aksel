@@ -24,15 +24,7 @@ export type TabType = OverridableComponent<TabProps, HTMLButtonElement>;
 
 export const Tab: TabType = forwardRef(
   (
-    {
-      className,
-      as: Component = "button",
-      label,
-      icon,
-      iconPosition,
-      value,
-      ...rest
-    },
+    { className, as: Component = "button", label, icon, value, ...rest },
     ref
   ) => {
     const context = useContext(TabsContext);

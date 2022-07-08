@@ -113,9 +113,8 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
             variant="tertiary"
             ref={buttonRef}
             onClick={onClose}
-          >
-            <Close title="Lukk modalvindu" />
-          </Button>
+            icon={<Close title="Lukk modalvindu" />}
+          />
         )}
       </ReactModal>
     );

@@ -143,11 +143,16 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               onClick={() => onPageChange?.(page - 1)}
               page={page - 1}
               size={size}
+              prev
+              icon={
+                <Back
+                  className="navds-pagination__prev-next-icon"
+                  {...(prevNextTexts
+                    ? { "aria-hidden": true }
+                    : { title: "Forrige" })}
+                />
+              }
             >
-              <Back
-                className="navds-pagination__prev-next-icon"
-                title="Forrige"
-              />
               {prevNextTexts && (
                 <BodyShort
                   size={size === "xsmall" ? "small" : size}
@@ -192,6 +197,16 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               onClick={() => onPageChange?.(page + 1)}
               page={page + 1}
               size={size}
+              next
+              icon={
+                <Next
+                  className="navds-pagination__prev-next-icon"
+                  {...(prevNextTexts
+                    ? { "aria-hidden": true }
+                    : { title: "Neste" })}
+                />
+              }
+              iconPosition="right"
             >
               {prevNextTexts && (
                 <BodyShort
@@ -201,10 +216,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                   Neste
                 </BodyShort>
               )}
-              <Next
-                className="navds-pagination__prev-next-icon"
-                title="Neste"
-              />
             </Item>
           </li>
         </ul>

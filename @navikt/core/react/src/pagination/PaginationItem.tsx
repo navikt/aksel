@@ -1,9 +1,8 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
-import { Button, OverridableComponent } from "..";
+import { Button, ButtonProps, OverridableComponent } from "..";
 
-export interface PaginationItemProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface PaginationItemProps extends ButtonProps {
   children: React.ReactNode;
   /**
    * Sets selected styling if true
@@ -19,6 +18,16 @@ export interface PaginationItemProps
    * @default medium
    */
   size?: "medium" | "small" | "xsmall";
+  /**
+   * true for the "previous" button
+   * @default false
+   */
+  prev?: boolean;
+  /**
+   * true for the "next" button
+   * * @default false
+   */
+  next?: boolean;
 }
 
 export type PaginationItemType = OverridableComponent<

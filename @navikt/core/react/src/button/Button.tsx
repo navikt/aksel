@@ -1,6 +1,6 @@
 import React, { useRef, useState, forwardRef, useMemo } from "react";
 import cl from "clsx";
-import { BodyShort, OverridableComponent, Loader, mergeRefs } from "../";
+import { OverridableComponent, Loader, mergeRefs, Label } from "../";
 import { useClientLayoutEffect } from "../util";
 
 export interface ButtonProps
@@ -8,7 +8,7 @@ export interface ButtonProps
   /**
    * Button content
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Changes design and interaction-visuals
    * @default "primary"
@@ -29,6 +29,15 @@ export interface ButtonProps
    * @default false
    */
   loading?: boolean;
+  /**
+   * Button Icon
+   */
+  icon?: React.ReactNode;
+  /**
+   * Icon position in Button
+   * @default "left"
+   */
+  iconPosition?: "left" | "right";
 }
 
 export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
@@ -43,6 +52,8 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         loading = false,
         disabled,
         style,
+        icon,
+        iconPosition = "left",
         ...rest
       },
       ref
@@ -77,6 +88,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             `navds-button--${size}`,
             {
               "navds-button--loading": widthOverride,
+              "navds-button--icon-only": !!icon && !children,
             }
           )}
           style={{
@@ -85,14 +97,27 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           }}
           disabled={disabled ?? widthOverride ? true : undefined}
         >
-          <BodyShort
-            as="span"
-            className="navds-button__inner"
-            size={size === "medium" ? "medium" : "small"}
-            aria-live="polite"
-          >
-            {widthOverride ? <Loader size={size} /> : children}
-          </BodyShort>
+          {widthOverride ? (
+            <Loader size={size} />
+          ) : (
+            <>
+              {icon && iconPosition === "left" && (
+                <span className="navds-button__icon">{icon}</span>
+              )}
+              {children && (
+                <Label
+                  as="span"
+                  size={size === "medium" ? "medium" : "small"}
+                  aria-live="polite"
+                >
+                  {children}
+                </Label>
+              )}
+              {icon && iconPosition === "right" && (
+                <span className="navds-button__icon">{icon}</span>
+              )}
+            </>
+          )}
         </Component>
       );
     }
