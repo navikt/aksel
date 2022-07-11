@@ -21,7 +21,7 @@ export const Default = (props) => {
         value={props.controlled ? state : undefined}
         onChange={props.controlled ? setState : undefined}
         hideLegend={props.hideLegend}
-        error={props.errorGroup ? "Errormelding" : undefined}
+        error={props.errorGroup ? "Errormelding for checkboxgruppe" : undefined}
         {...props}
       >
         <Checkbox
@@ -70,6 +70,7 @@ Default.args = {
   hideLabel: false,
   hideLegend: false,
   errorSingle: false,
+  errorGroup: false,
   children: "",
   description: "",
 };
