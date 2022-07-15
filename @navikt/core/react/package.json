@@ -44,7 +44,7 @@
     "classnames": "^2.2.6",
     "react-collapse": "^5.1.0",
     "react-merge-refs": "^1.1.0",
-    "react-modal": "3.14.3",
+    "react-modal": "3.15.1",
     "react-popper": "^2.2.5",
     "uuid": "^8.3.2"
   },
