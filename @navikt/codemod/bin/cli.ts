@@ -35,7 +35,7 @@ export function checkGitStatus(force) {
     if (force) {
       console.log(`WARNING: ${errorMessage}. Forcibly continuing.`);
     } else {
-      console.log("Thank you for using @@navikt/ds-codemod");
+      console.log("Thank you for using @navikt/ds-codemod");
       console.log(
         chalk.yellow(
           "\nBut before we continue, please stash or commit your git changes."
