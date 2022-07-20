@@ -24,7 +24,7 @@ path - files or directory to transform
 
 ## Beta (0.19.x) -> v1.0.0
 
-`npx @next/codemod v1.0.0/preset src`
+`npx @navikt/ds-codemod v1.0.0/preset src`
 
 ### preset
 
@@ -38,7 +38,7 @@ Includes these transforms
 
 ### tabs
 
-`npx @next/codemod v1.0.0/tabs src`
+`npx @navikt/ds-codemod v1.0.0/tabs src`
 
 ```diff
 <Tabs
@@ -62,7 +62,7 @@ Includes these transforms
 
 ### chat
 
-`npx @next/ds-codemod v1.0.0/chat src`
+`npx @navikt/ds-codemodmod v1.0.0/chat src`
 
 ```diff
 -<SpeechBubble
@@ -86,7 +86,7 @@ Includes these transforms
 
 ### pagination
 
-`npx @next/codemod v1.0.0/pagination src`
+`npx @navikt/ds-codemod v1.0.0/pagination src`
 
 This codemod should only be ran once, since the size-scale will keep decreasing for each subsequent iteration.
 
