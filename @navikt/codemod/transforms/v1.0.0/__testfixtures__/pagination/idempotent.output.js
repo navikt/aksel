@@ -6,6 +6,8 @@ export const Demo = () => {
       <Pagination size="small" onPageChange={setPage} data-version="v1" />
       <Pagination size="small" onPageChange={setPage} data-version="v1" />
       <Pagination size="xsmall" onPageChange={setPage} data-version="v1" />
+      <Pagination size="small" onPageChange={setPage} data-version="v1" />
+      <Pagination size="xsmall" onPageChange={setPage} data-version="v1" />
     </div>
   );
 };
