@@ -10,7 +10,7 @@
     "jscodeshift"
   ],
   "files": [
-    "transforms/*.js",
+    "transforms/**/*.js",
     "bin/*.js",
     "lib/**/*.js",
     "lib/cra-to-next/gitignore"
