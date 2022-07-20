@@ -143,7 +143,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               onClick={() => onPageChange?.(page - 1)}
               page={page - 1}
               size={size}
-              prev
               icon={
                 <Back
                   className="navds-pagination__prev-next-icon"
@@ -197,7 +196,6 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               onClick={() => onPageChange?.(page + 1)}
               page={page + 1}
               size={size}
-              next
               icon={
                 <Next
                   className="navds-pagination__prev-next-icon"

@@ -18,16 +18,6 @@ export interface PaginationItemProps extends ButtonProps {
    * @default medium
    */
   size?: "medium" | "small" | "xsmall";
-  /**
-   * true for the "previous" button
-   * @default false
-   */
-  prev?: boolean;
-  /**
-   * true for the "next" button
-   * * @default false
-   */
-  next?: boolean;
 }
 
 export type PaginationItemType = OverridableComponent<
