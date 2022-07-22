@@ -8,8 +8,9 @@ export const Page = () => {
       name="Ola Normann 01.01.21 14:00"
       backgroundColor="red"
       avatarBgColor="blue"
+      {...testProps}
     >
-      <Chat.Bubble>
+      <Chat.Bubble {...testProps}>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </Chat.Bubble>
       <Chat.Bubble>

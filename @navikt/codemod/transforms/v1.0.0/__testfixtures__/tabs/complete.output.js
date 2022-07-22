@@ -7,10 +7,11 @@ const TabComp = () => {
       <Tabs
         defaultValue="logg"
         onChange={(x) => console.log(x)}
+        {...testProps}
         loop={false}
         iconPosition={props.left}>
-        <Tabs.List>
-          <Tabs.Tab value="logg" label="logg" />
+        <Tabs.List {...testProps}>
+          <Tabs.Tab value="logg" label="logg" {...testProps} />
           <Tabs.Tab value="logg2" label="logg2medlangtekst" />
         </Tabs.List>
         <Tabs.Panel value="logg">TabPanel for Logg-tab</Tabs.Panel>

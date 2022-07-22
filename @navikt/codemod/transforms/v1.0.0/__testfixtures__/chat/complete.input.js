@@ -8,8 +8,9 @@ export const Page = () => {
       topText="Ola Normann 01.01.21 14:00"
       backgroundColor="red"
       illustrationBgColor="blue"
+      {...testProps}
     >
-      <SpeechBubble.Bubble>
+      <SpeechBubble.Bubble {...testProps}>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </SpeechBubble.Bubble>
       <SpeechBubble.Bubble>
