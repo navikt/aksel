@@ -3,9 +3,6 @@
     --navds-semantic-color-component-background-light
   );
   --navds-radio-checkbox-color-text: var(--navds-semantic-color-text);
-  --navds-radio-checkbox-color-description: var(
-    --navds-semantic-color-text-muted
-  );
   --navds-radio-checkbox-color-background-hover: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
@@ -73,11 +70,6 @@
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-1);
-}
-
-.navds-checkbox__description,
-.navds-radio__description {
-  color: var(--navds-radio-checkbox-color-description);
 }
 
 .navds-checkbox--small > .navds-checkbox__input,
