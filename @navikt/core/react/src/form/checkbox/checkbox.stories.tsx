@@ -8,6 +8,9 @@ export default {
   subcomponents: {
     CheckboxGroup,
   },
+  argTypes: {
+    size: { control: { type: "select", options: ["medium", "small"] } },
+  },
 } as Meta;
 
 export const Default = (props) => {
