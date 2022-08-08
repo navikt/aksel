@@ -99,7 +99,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          as="label"
           className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
