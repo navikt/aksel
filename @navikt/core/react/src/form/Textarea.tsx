@@ -1,6 +1,6 @@
 import React, { forwardRef, useState } from "react";
 import cl from "clsx";
-import { BodyShort, Label, ErrorMessage, omit, Detail } from "..";
+import { BodyShort, BodyLong, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
 import TextareaAutosize from "../util/TextareaAutoSize";
@@ -109,7 +109,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {!!description && (
           <>
             {size === "medium" ? (
-              <BodyShort
+              <BodyLong
                 className={cl("navds-form-field__description", {
                   "navds-sr-only": hideLabel,
                 })}
@@ -118,7 +118,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 as="div"
               >
                 {description}
-              </BodyShort>
+              </BodyLong>
             ) : (
               <Detail
                 className={cl("navds-form-field__description", {

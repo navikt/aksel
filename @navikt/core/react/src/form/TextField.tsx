@@ -1,6 +1,6 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
 import cl from "clsx";
-import { BodyShort, Detail, Label, ErrorMessage, omit } from "..";
+import { BodyLong, Detail, Label, ErrorMessage, omit } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 
 export interface TextFieldProps
@@ -81,7 +81,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         {!!description && (
           <>
             {size === "medium" ? (
-              <BodyShort
+              <BodyLong
                 className={cl("navds-form-field__description", {
                   "navds-sr-only": hideLabel,
                 })}
@@ -90,7 +90,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 as="div"
               >
                 {description}
-              </BodyShort>
+              </BodyLong>
             ) : (
               <Detail
                 className={cl("navds-form-field__description", {
