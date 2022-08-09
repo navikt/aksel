@@ -9,7 +9,7 @@ export interface HelpTextProps
   /**
    * Helptext-dialog content
    */
-  children: React.ReactNode;
+  children: string;
   /**
    * Adds a title-tooltip with the given text
    * @default "hjelp"
