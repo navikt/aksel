@@ -3222,7 +3222,7 @@ __metadata:
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
     "@navikt/ds-icons": ^0.8.20
-    "@navikt/ds-react": ^0.19.25
+    "@navikt/ds-react": ^0.19.26
     "@popperjs/core": ^2.10.1
     "@types/node": ^17.0.35
     classnames: ^2.3.1
@@ -3238,7 +3238,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^0.19.25, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^0.19.26, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
