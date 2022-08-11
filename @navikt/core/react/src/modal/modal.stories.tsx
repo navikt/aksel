@@ -28,7 +28,7 @@ export const Default = (props) => {
         open={open}
         onClose={() => setOpen(false)}
         aria-labelledby="header123"
-        reactModalStyle={{
+        style={{
           overlay: { backgroundColor: "#ff0000aa" },
         }}
         {...props}
