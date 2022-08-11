@@ -34,6 +34,10 @@ export interface ModalProps {
    */
   closeButton?: boolean;
   /**
+   * Allows custom styling of ReactModal, in accordance with their typing
+   */
+  style?: ReactModal.Styles;
+  /**
    * Callback for setting parent element modal will attach to
    */
   parentSelector?(): HTMLElement;
@@ -72,6 +76,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       "aria-labelledby": ariaLabelledBy,
       "aria-modal": ariaModal,
       "aria-label": contentLabel,
+      style,
       ...rest
     },
     ref
@@ -91,6 +96,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
+        style={style}
         isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
