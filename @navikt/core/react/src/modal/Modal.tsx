@@ -36,7 +36,7 @@ export interface ModalProps {
   /**
    * Allows custom styling of ReactModal, in accordance with their typing
    */
-  reactModalStyle?: ReactModal.Styles;
+  style?: ReactModal.Styles;
   /**
    * Callback for setting parent element modal will attach to
    */
@@ -76,7 +76,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       "aria-labelledby": ariaLabelledBy,
       "aria-modal": ariaModal,
       "aria-label": contentLabel,
-      reactModalStyle,
+      style,
       ...rest
     },
     ref
@@ -96,7 +96,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
-        style={reactModalStyle}
+        style={style}
         isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
