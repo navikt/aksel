@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "1.0.0-rc.7",
+  "version": "1.0.0-rc.8",
   "description": "NAV designsystem codemods",
   "author": "NAV Designsystem team",
   "license": "MIT",
