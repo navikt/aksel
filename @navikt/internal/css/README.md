@@ -1,4 +1,4 @@
-# NAV designsystem styling forn internal-components
+# NAV designsystem styling for internal-components
 
 CSS-package containing design for @navikt/ds-react-internal.
 
