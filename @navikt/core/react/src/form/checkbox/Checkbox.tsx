@@ -84,24 +84,24 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           }}
         />
         <label htmlFor={inputProps.id} className="navds-checkbox__label">
-          <div
+          <span
             className={cl("navds-checkbox__content", {
               "navds-sr-only": props.hideLabel,
             })}
           >
-            <BodyShort as="div" size={size}>
+            <BodyShort as="span" size={size}>
               {props.children}
             </BodyShort>
             {props.description && (
               <Description
-                as="div"
+                as="span"
                 size="small"
                 className="navds-checkbox__description"
               >
                 {props.description}
               </Description>
             )}
-          </div>
+          </span>
         </label>
       </div>
     );
