@@ -16526,7 +16526,6 @@ __metadata:
     prop-types: ^15.5.10
     react: ^18.0.0
     react-dom: ^18.0.0
-    storybook-addon-css-user-preferences: ^0.0.3
     style-loader: ^1.2.1
     stylelint: ^14.8.5
     stylelint-config-prettier: ^9.0.3
@@ -20667,26 +20666,6 @@ __metadata:
   version: 2.13.2
   resolution: "store2@npm:2.13.2"
   checksum: 9e760ea2a7f56eae47d5bafe507511b25ad983bba901e1e0c5f65713e631c15aafb8e031c658047af53c2008a5d21cb6c43f2383673b3493144e8e1ead5c8f91
-  languageName: node
-  linkType: hard
-
-"storybook-addon-css-user-preferences@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "storybook-addon-css-user-preferences@npm:0.0.3"
-  peerDependencies:
-    "@storybook/addons": ^6.4.0
-    "@storybook/api": ^6.4.0
-    "@storybook/components": ^6.4.0
-    "@storybook/core-events": ^6.4.0
-    "@storybook/theming": ^6.4.0
-    react: ^16.8.0 || ^17.0.0
-    react-dom: ^16.8.0 || ^17.0.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-    react-dom:
-      optional: true
-  checksum: d7378227c79e1615fd659e7eb2704f7aabdb12ff246940dea5e606f783e17a8b47f432180b9d102e01c066b7be09d7afaeb3b63a06a930dc6fbb0aada4616f7e
   languageName: node
   linkType: hard
 
