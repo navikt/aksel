@@ -3,14 +3,13 @@ name: Bug Report
 about: Meld inn bugs eller feil
 title: "[BUG]"
 labels: "bug \U0001F41B"
-assignees: ''
-
+assignees: ""
 ---
 
-## Hvilken av tjenestene våre gjelder det?
+## Hvilken løsning gjelder det?
 
 <!--
-  Sett en x i type pakke det gjelder:
+  Sett en x i type løsning det gjelder:
 - [x] type
 -->
 
@@ -19,9 +18,9 @@ assignees: ''
 - [ ] `Ikoner`
 - [ ] `Annet`
 
-## Beskriv feilen/problemet
+## Hva er feilen/problemet?
 
-<!-- 
+<!--
 > Beskriv hva slags problem(er) som oppstår
 
 > Hva forventet du skulle oppstå?
@@ -31,7 +30,7 @@ assignees: ''
 
 (skriv her.)
 
-## Steg for å reprodusere problemet
+## Steg for å reprodusere problemet (valgfri)
 
 <!--
 1. Steg en
@@ -41,11 +40,11 @@ assignees: ''
 
 (skriv her.)
 
-## Eksempel/Tilleggsinformasjon
+## Eksempel/Tilleggsinformasjon (valgfri)
 
 <!--
 Screenshots eller kodesnippets
-Legg gjerne ved ekstrainfo som nettleser, desktop/mobil etc
+Legg gjerne ved ekstrainfo som nettleser eller desktop/mobil hvis det er relevant.
 -->
 
 ```
