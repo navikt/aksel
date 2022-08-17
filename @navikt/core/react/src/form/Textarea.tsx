@@ -83,6 +83,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       return rows;
     };
 
+    const describedBy = cl(inputProps["aria-describedby"], {
+      [maxLengthId ?? ""]: hasMaxLength,
+    });
+
     return (
       <div
         className={cl(
@@ -151,9 +155,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 "navds-textarea--counter": hasMaxLength,
               }
             )}
-            aria-describedby={cl(inputProps["aria-describedby"], {
-              [maxLengthId ?? ""]: hasMaxLength,
-            })}
+            {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
           {hasMaxLength && (
             <>
