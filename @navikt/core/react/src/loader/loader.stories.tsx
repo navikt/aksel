@@ -55,7 +55,7 @@ export const Variant = () => (
       <Loader size="3xlarge" variant="inverted" />
       <Loader size="3xlarge" variant="interaction" />
     </div>
-    <div style={{ backgroundColor: "#292929" }}>
+    <div style={{ backgroundColor: "#262626" }}>
       <Loader size="3xlarge" variant="neutral" />
       <Loader size="3xlarge" variant="inverted" />
       <Loader size="3xlarge" variant="interaction" />
@@ -70,7 +70,7 @@ export const Transparent = () => (
       <Loader size="3xlarge" transparent variant="inverted" />
       <Loader size="3xlarge" transparent variant="interaction" />
     </div>
-    <div style={{ backgroundColor: "#292929" }}>
+    <div style={{ backgroundColor: "#262626" }}>
       <Loader size="3xlarge" transparent variant="neutral" />
       <Loader size="3xlarge" transparent variant="inverted" />
       <Loader size="3xlarge" transparent variant="interaction" />

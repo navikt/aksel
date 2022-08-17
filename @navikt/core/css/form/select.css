@@ -16,7 +16,6 @@
   --navds-select-color-background-disabled: var(
     --navds-semantic-color-component-background-alternate
   );
-  --navds-select-color-text-disabled: var(--navds-semantic-color-text);
 }
 
 .navds-select__input {
@@ -47,6 +46,7 @@
   display: flex;
   width: 100%;
   align-items: center;
+  color: var(--navds-semantic-color-text);
 }
 
 .navds-select__chevron {
