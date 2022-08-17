@@ -24,7 +24,7 @@ export const Default = (props) => {
       onChange={props.controlled ? setState : undefined}
       hideLegend={props.hideLegend}
       error={props.errorGroup ? "Errormelding" : undefined}
-      {...props}
+      size={props?.size}
     >
       <Radio value="radio1">{props.children || "Apple"}</Radio>
       <Radio
