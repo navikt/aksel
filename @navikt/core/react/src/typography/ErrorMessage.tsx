@@ -19,7 +19,7 @@ export interface ErrorMessageProps
   spacing?: boolean;
 }
 
-const ErrorMessage: OverridableComponent<
+export const ErrorMessage: OverridableComponent<
   ErrorMessageProps,
   HTMLParagraphElement
 > = forwardRef(
