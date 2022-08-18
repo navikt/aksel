@@ -1,8 +1,9 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Popover } from "@navikt/ds-react";
 import List, { ListType } from "./List";
 import GroupedList, { GroupedListType } from "./GroupedList";
+import Divider, { DividerType } from "./Divider";
 import { DropdownContext } from "../Dropdown";
 
 interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -15,6 +16,11 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onClose?: () => void;
   /**
+   * Popover positionion strategy
+   * @default "absolute"
+   */
+  strategy?: "fixed" | "absolute";
+  /*
    * Default dialog-placement on open
    * @default "bottom-end"
    */
@@ -39,6 +45,7 @@ export interface MenuType<Props = MenuProps>
   > {
   List: ListType;
   GroupedList: GroupedListType;
+  Divider: DividerType;
 }
 
 export const Menu = forwardRef<HTMLDivElement, MenuProps>(
@@ -73,5 +80,6 @@ export const Menu = forwardRef<HTMLDivElement, MenuProps>(
 
 Menu.List = List;
 Menu.GroupedList = GroupedList;
+Menu.Divider = Divider;
 
 export default Menu;

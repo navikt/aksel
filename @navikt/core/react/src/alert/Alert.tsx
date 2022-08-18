@@ -4,7 +4,7 @@ import {
   SuccessColored,
   WarningColored,
 } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "..";
 
@@ -23,7 +23,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   size?: "medium" | "small";
   /**
-   * Toggles full-width Alert (removes border-radius)
+   * Removes border-radius
    * @default false
    */
   fullWidth?: boolean;

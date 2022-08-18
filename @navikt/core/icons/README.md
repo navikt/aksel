@@ -1,28 +1,42 @@
-# @navikt/ds-icons
+# NAV icons
 
-Leverer [NAVs ikoner](https://design.nav.no/resources/icons) i React og SVG.
+All of NAVs own icons (400+ and counting)
 
-## Installering
+- As just SVG
+- As React-components
 
-```sh
-// yarn
-yarn add @navikt/ds-icons
+## Installation
 
-// npm
-npm install @navikt/ds-icons
+Install `@navikt/ds-icons` with yarn
+
+```bash
+  yarn add @navikt/ds-icons
 ```
 
-## Bruk
+Install `@navikt/ds-icons` with npm
 
-```jsx
-/* ESM (anbefalt for tree-shaking)*/
-import { Down } from "@navikt/ds-icons";
-/* CJS */
-import { Down } from "@navikt/cjs/ds-icons";
-
-<Down aria-label="Åpne meny" />;
+```bash
+  npm install @navikt/ds-icons
 ```
 
-## Dokumentasjon
+## Usage
 
-- [Ikonsøk](https://design.nav.no/resources/icons)
+Use as a regular React-component
+
+```javascript
+import { Star } from "@navikt/ds-icons";
+
+function App() {
+  return <Star title="star" />;
+}
+```
+
+## Learn more
+
+- [Designsystem documentation](https://aksel.nav.no/designsystem)
+- [Storybook](https://master--5f801fb2aea7820022de2936.chromatic.com/)
+- [Icon-search](https://aksel.nav.no/designsystem/side/ikoner)
+
+## License
+
+[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)

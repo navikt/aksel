@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Fieldset, FieldsetContext, FieldsetProps } from "..";
 import { useId } from "../..";
 

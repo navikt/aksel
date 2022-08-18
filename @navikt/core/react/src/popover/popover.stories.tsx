@@ -1,8 +1,21 @@
 import React, { useState } from "react";
 import { Popover } from "../index";
-import { placements } from "@popperjs/core";
 import { Button } from "../button";
 
+const placements = [
+  "top",
+  "bottom",
+  "right",
+  "left",
+  "top-start",
+  "top-end",
+  "bottom-start",
+  "bottom-end",
+  "right-start",
+  "right-end",
+  "left-start",
+  "left-end",
+];
 export default {
   title: "ds-react/Popover",
   component: Popover,
@@ -26,32 +39,17 @@ export default {
       },
     },
     strategy: {
-      defaultValue: "fixed",
+      defaultValue: "absolute",
       control: {
         type: "radio",
         options: ["fixed", "absolute"],
       },
     },
     placement: {
-      defaultValue: "bottom",
+      defaultValue: "right",
       control: {
         type: "radio",
-        options: [
-          "bottom",
-          "right",
-          "left",
-          "top-start",
-          "top-end",
-          "bottom-start",
-          "bottom-end",
-          "right-start",
-          "right-end",
-          "left-start",
-          "left-end",
-          "auto",
-          "auto-start",
-          "auto-end",
-        ],
+        options: placements,
       },
     },
   },
@@ -61,7 +59,7 @@ export const Default = (props: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [open, setOpen] = useState<boolean>(false);
   return (
-    <>
+    <div>
       <Button ref={(el) => setAnchorEl(el)} onClick={() => setOpen((x) => !x)}>
         Open
       </Button>
@@ -69,14 +67,11 @@ export const Default = (props: any) => {
         {...props}
         open={props.open ?? open}
         anchorEl={anchorEl}
-        onClose={() => setOpen(false)}
+        onClose={(e) => setOpen(e)}
       >
-        <Popover.Content>
-          Velit in consequat Lorem sunt ut deserunt nostrud enim enim sint
-          cillum ad veniam.
-        </Popover.Content>
+        <Popover.Content>Velit in consequat</Popover.Content>
       </Popover>
-    </>
+    </div>
   );
 };
 
@@ -90,7 +85,7 @@ const Template = (props) => {
         <Popover.Content>
           Velit in consequat Lorem
           <br />
-          sunt Pariatur ullamco ullamco
+          {props.placement}
         </Popover.Content>
       </Popover>
     </>

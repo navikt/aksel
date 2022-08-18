@@ -1,8 +1,8 @@
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
+import { Heading } from "..";
 import { AccordionItemContext } from "./AccordionItem";
-import { useClientLayoutEffect, useId } from "..";
 
 export interface AccordionHeaderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -17,15 +17,8 @@ export type AccordionHeaderType = React.ForwardRefExoticComponent<
 >;
 
 const AccordionHeader: AccordionHeaderType = forwardRef(
-  ({ children, className, id, onClick, ...rest }, ref) => {
+  ({ children, className, onClick, ...rest }, ref) => {
     const context = useContext(AccordionItemContext);
-    const newId = useId(id);
-
-    const setButtonId = context && context.setButtonId;
-
-    useClientLayoutEffect(() => {
-      setButtonId && setButtonId(id ? newId : `accordionContent-${newId}`);
-    }, [setButtonId, newId]);
 
     if (context === null) {
       console.error(
@@ -45,18 +38,18 @@ const AccordionHeader: AccordionHeaderType = forwardRef(
       <button
         {...rest}
         ref={ref}
-        id={context.buttonId}
-        className={cl(
-          "navds-accordion__header",
-          className,
-          "navds-heading",
-          "navds-heading--small"
-        )}
+        className={cl("navds-accordion__header", className)}
         type="button"
         onClick={handleClick}
         aria-expanded={context.open}
       >
-        <span className="navds-accordion__header-content">{children}</span>
+        <Heading
+          size="small"
+          as="span"
+          className="navds-accordion__header-content"
+        >
+          {children}
+        </Heading>
         <Expand aria-hidden className="navds-accordion__expand-icon" />
         <ExpandFilled
           aria-hidden

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "0.14.28",
+  "version": "1.0.0",
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -34,12 +34,10 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^0.8.20",
-    "@navikt/ds-react": "^0.19.27",
-    "@popperjs/core": "^2.10.1",
-    "classnames": "^2.3.1",
-    "copy-to-clipboard": "^3.3.1",
-    "react-merge-refs": "^1.1.0"
+    "@navikt/ds-icons": "^1.0.0",
+    "@navikt/ds-react": "^1.0.0",
+    "clsx": "^1.1.1",
+    "copy-to-clipboard": "^3.3.1"
   },
   "devDependencies": {
     "@types/node": "^17.0.35",
@@ -51,5 +49,10 @@
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",
     "react": "^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
   }
 }

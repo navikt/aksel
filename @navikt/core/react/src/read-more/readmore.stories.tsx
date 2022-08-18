@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { ReadMore } from ".";
-import { BodyShort } from "..";
 
 export default {
   title: "ds-react/ReadMore",
@@ -23,16 +22,10 @@ export const Default = (props) => {
       open={props.controlled ? state : undefined}
       onClick={() => setState((x) => !x)}
       header="Grunnen til at vi spør om dette og i tillegg ber om vedlegg"
-      {...props}
+      size={props.size}
     >
-      <BodyShort>
-        Command station, this is ST 321. Code Clearance Blue. We're starting our
-        approach. Deactivate the security shield.
-      </BodyShort>
-      <BodyShort>
-        Command station, this is ST 321. Code Clearance Blue. We're starting our
-        approach. Deactivate the security shield.
-      </BodyShort>
+      Command station, this is ST 321. Code Clearance Blue. We're starting our
+      approach. Deactivate the security shield.
     </ReadMore>
   );
 };

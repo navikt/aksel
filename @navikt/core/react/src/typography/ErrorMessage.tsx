@@ -1,9 +1,9 @@
-import React from "react";
-import cl from "classnames";
-import { Label } from "..";
+import React, { forwardRef } from "react";
+import cl from "clsx";
+import { OverridableComponent } from "..";
 
 export interface ErrorMessageProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -13,14 +13,26 @@ export interface ErrorMessageProps
    * Error text
    */
   children: React.ReactNode;
+  /**
+   * Adds margin-bottom
+   */
+  spacing?: boolean;
 }
 
-const ErrorMessage = (props) => (
-  <Label
-    {...props}
-    as="div"
-    className={cl("navds-error-message", props.className)}
-  />
+const ErrorMessage: OverridableComponent<
+  ErrorMessageProps,
+  HTMLParagraphElement
+> = forwardRef(
+  ({ className, size, spacing, as: Component = "p", ...rest }, ref) => (
+    <Component
+      {...rest}
+      ref={ref}
+      className={cl("navds-error-message", "navds-label", className, {
+        "navds-label--small": size === "small",
+        "navds-typo--spacing": !!spacing,
+      })}
+    />
+  )
 );
 
 export default ErrorMessage;

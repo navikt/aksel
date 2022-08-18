@@ -10,9 +10,6 @@
 
 .navds-tooltip {
   z-index: var(--navds-z-index-tooltip);
-}
-
-.navds-tooltip__inner {
   background-color: var(--navds-semantic-color-component-background-inverted);
   color: var(--navds-semantic-color-text-inverted);
   border-radius: var(--navds-border-radius-small);

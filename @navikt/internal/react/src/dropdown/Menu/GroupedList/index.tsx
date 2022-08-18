@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import GroupedHeading, { GroupedHeadingType } from "./Heading";
 import GroupedItem, { GroupedItemType } from "./Item";
 

@@ -1,10 +1,14 @@
 import { Copy } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import copy from "copy-to-clipboard";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, Button, ButtonProps, Popover } from "@navikt/ds-react";
-import { Placement } from "@popperjs/core";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import {
+  BodyShort,
+  Button,
+  ButtonProps,
+  Popover,
+  mergeRefs,
+} from "@navikt/ds-react";
 
 export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
   /**
@@ -23,7 +27,19 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * Allows extending popover properties like "placement"
    * @default "bottom"
    */
-  popoverPlacement?: Placement;
+  popoverPlacement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
   /**
    * Copy button title attribute
    * @default children ? undefined : `Kopier ${copyText}`
@@ -33,7 +49,7 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    * Placement of icon
    * @default "left"
    */
-  iconPlacement?: "left" | "right";
+  iconPosition?: "left" | "right";
 }
 
 export const CopyToClipboard = forwardRef<
@@ -48,14 +64,14 @@ export const CopyToClipboard = forwardRef<
       className,
       size = "medium",
       popoverPlacement = "bottom",
-      iconPlacement = "left",
+      iconPosition = "left",
       title,
       ...rest
     },
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const mergedRef = mergeRefs([buttonRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
     const timeoutRef = useRef<number | null>();
     const [openPopover, setOpenPopover] = useState(false);
 
@@ -83,15 +99,11 @@ export const CopyToClipboard = forwardRef<
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
+          icon={<Copy title={copyTitle} aria-hidden={!copyTitle} />}
+          iconPosition={iconPosition}
           {...rest}
         >
-          {iconPlacement === "left" && (
-            <Copy title={copyTitle} aria-hidden={!copyTitle} />
-          )}
           {children}
-          {iconPlacement === "right" && (
-            <Copy title={copyTitle} aria-hidden={!copyTitle} />
-          )}
         </Button>
         <Popover
           role="alert"

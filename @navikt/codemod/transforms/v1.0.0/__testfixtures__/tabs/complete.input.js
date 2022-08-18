@@ -4,9 +4,9 @@ const TabComp = () => {
   return (
     /* prettier-ignore */
     <div>
-      <Tabs defaultValue="logg" onChange={(x) => console.log(x)}>
-        <Tabs.List loop={false}>
-          <Tabs.Tab value="logg" iconPosition={props.left} label="logg" />
+      <Tabs defaultValue="logg" onChange={(x) => console.log(x)} {...testProps}>
+        <Tabs.List loop={false} {...testProps}>
+          <Tabs.Tab value="logg" iconPosition={props.left} label="logg" {...testProps}/>
           <Tabs.Tab value="logg2" iconPosition="top" label="logg2medlangtekst" />
         </Tabs.List>
         <Tabs.Panel value="logg">TabPanel for Logg-tab</Tabs.Panel>

@@ -1,5 +1,5 @@
 import { Search } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Button, ButtonProps } from "../..";
 import { SearchContext } from "./Search";
@@ -7,7 +7,7 @@ import { SearchContext } from "./Search";
 export interface SearchButtonProps
   extends Omit<ButtonProps, "size" | "children" | "variant"> {
   /**
-   * Text set before <Search/> icon
+   * Text set after <Search/> icon
    */
   children?: React.ReactNode;
 }
@@ -36,9 +36,13 @@ const SearchButton: SearchButtonType = forwardRef(
         variant={variant === "secondary" ? "secondary" : "primary"}
         className={cl("navds-search__button-search", className)}
         disabled={context?.disabled ?? disabled}
+        icon={
+          <Search
+            {...(children ? { "aria-hidden": true } : { title: "Søk" })}
+          />
+        }
       >
-        <Search aria-hidden />
-        {children ? children : <span className="navds-sr-only">Søk</span>}
+        {children}
       </Button>
     );
   }

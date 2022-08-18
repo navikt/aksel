@@ -1,9 +1,9 @@
 import React, { forwardRef, useState } from "react";
-import cl from "classnames";
-import { Collapse, UnmountClosed } from "react-collapse";
+import cl from "clsx";
 import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 import { ExpandFilled } from "@navikt/ds-icons";
+import AnimateHeight from "../util/AnimateHeight";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -26,11 +26,6 @@ export interface ReadMoreProps
    */
   defaultOpen?: boolean;
   /**
-   * Removes content-element from dom when closed
-   * @default false
-   */
-  renderContentWhenClosed?: boolean;
-  /**
    * Changes fontsize for content
    * @default false
    */
@@ -42,7 +37,6 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     {
       className,
       header,
-      renderContentWhenClosed = false,
       children,
       open,
       defaultOpen = false,
@@ -53,27 +47,25 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const CollapseComponent = renderContentWhenClosed
-      ? Collapse
-      : UnmountClosed;
 
     const isOpened = open ?? internalOpen;
 
     return (
-      <div>
+      <div
+        className={cl(
+          "navds-read-more",
+          `navds-read-more--${size}`,
+          className,
+          { "navds-read-more--open": isOpened }
+        )}
+      >
         <button
-          type="button"
           {...rest}
-          className={cl(
-            "navds-read-more",
-            "navds-body-short",
-            `navds-read-more--${size}`,
-            className,
-            {
-              "navds-read-more--open": isOpened,
-              "navds-body-short--small": size === "small",
-            }
-          )}
+          ref={ref}
+          type="button"
+          className={cl("navds-read-more__button", "navds-body-short", {
+            "navds-body-short--small": size === "small",
+          })}
           onClick={(e) => {
             if (open === undefined) {
               setInternalOpen((isOpen) => !isOpen);
@@ -81,22 +73,19 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
             onClick?.(e);
           }}
           aria-expanded={isOpened}
-          ref={ref}
         >
-          <Expand className={"navds-read-more__expand-icon"} aria-hidden />
+          <Expand className="navds-read-more__expand-icon" aria-hidden />
           <ExpandFilled
-            className={
-              "navds-read-more__expand-icon navds-read-more__expand-icon--filled"
-            }
+            className="navds-read-more__expand-icon navds-read-more__expand-icon--filled"
             aria-hidden
           />
           <span>{header}</span>
         </button>
-        <CollapseComponent isOpened={isOpened}>
+        <AnimateHeight height={isOpened ? "auto" : 0} duration={250}>
           <BodyLong as="div" className="navds-read-more__content" size={size}>
             {children}
           </BodyLong>
-        </CollapseComponent>
+        </AnimateHeight>
       </div>
     );
   }

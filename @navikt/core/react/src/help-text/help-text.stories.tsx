@@ -1,5 +1,5 @@
-import React from "react";
-import { TextField, HelpText } from "..";
+import React, { useEffect, useRef } from "react";
+import { HelpText } from "..";
 
 export default {
   title: "ds-react/HelpText",
@@ -9,6 +9,7 @@ export default {
       control: {
         type: "radio",
         options: [
+          "top",
           "bottom",
           "right",
           "left",
@@ -20,9 +21,6 @@ export default {
           "right-end",
           "left-start",
           "left-end",
-          "auto",
-          "auto-start",
-          "auto-end",
         ],
       },
     },
@@ -47,17 +45,15 @@ Default.args = {
   title: "show tooltip",
 };
 
-export const Inline = () => {
+export const Open = () => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  useEffect(() => {
+    ref.current && ref.current.click();
+  }, []);
+
   return (
-    <TextField
-      label={
-        <div style={{ display: "flex", gap: 8 }}>
-          Text field label
-          <HelpText title="show tooltip">
-            Id ullamco excepteur elit fugiat labore.
-          </HelpText>
-        </div>
-      }
-    />
+    <HelpText ref={ref} title="show tooltip" strategy="fixed">
+      Id ullamco excepteur elit fugiat labore.
+    </HelpText>
   );
 };

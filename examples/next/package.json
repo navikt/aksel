@@ -1,7 +1,6 @@
 {
   "name": "next",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,16 +8,16 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@navikt/ds-css": "*",
-    "@navikt/ds-icons": "*",
-    "@navikt/ds-react": "*",
-    "@navikt/ds-react-internal": "*",
-    "next": "12.1.4",
+    "@navikt/ds-css": "^1.0.0",
+    "@navikt/ds-icons": "^1.0.0",
+    "@navikt/ds-react": "^1.0.0",
+    "@navikt/ds-react-internal": "^1.0.0",
+    "next": "12.1.6",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
   "devDependencies": {
-    "@navikt/ds-tailwind": "*",
+    "@navikt/ds-tailwind": "^1.0.0",
     "@types/node": "17.0.23",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",

@@ -1,9 +1,8 @@
-import React, { forwardRef, useRef } from "react";
-import cl from "classnames";
+import React, { forwardRef, useMemo, useRef } from "react";
+import cl from "clsx";
 import ReactModal from "react-modal";
-import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
-import { Button } from "..";
+import { Button, mergeRefs } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
 export interface ModalProps {
@@ -82,7 +81,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     ref
   ) => {
     const modalRef = useRef<ReactModal | null>(null);
-    const mergedRef = mergeRefs([modalRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const onModalCloseRequest = (e) => {
@@ -120,9 +119,8 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
             variant="tertiary"
             ref={buttonRef}
             onClick={onClose}
-          >
-            <Close title="Lukk modalvindu" />
-          </Button>
+            icon={<Close title="Lukk modalvindu" />}
+          />
         )}
       </ReactModal>
     );

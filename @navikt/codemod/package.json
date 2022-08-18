@@ -1,7 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "1.0.2",
-  "private": true,
+  "version": "1.0.0",
   "description": "NAV designsystem codemods",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -11,7 +10,7 @@
     "jscodeshift"
   ],
   "files": [
-    "transforms/*.js",
+    "transforms/**/*.js",
     "bin/*.js",
     "lib/**/*.js",
     "lib/cra-to-next/gitignore"
@@ -49,5 +48,8 @@
   "sideEffects": false,
   "engines": {
     "node": ">=12.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

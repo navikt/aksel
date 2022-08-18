@@ -13,6 +13,12 @@ export default {
         options: ["error", "warning", "info", "success"],
       },
     },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
   },
 };
 
@@ -36,6 +42,7 @@ export const Default = (props) => (
 
 Default.args = {
   children: "Id elit esse enim reprehenderit enim nisi veniam nostrud.",
+  fullWidth: false,
 };
 
 export const Small = () => {

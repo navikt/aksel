@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**

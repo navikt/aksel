@@ -1,10 +1,10 @@
-import React, { forwardRef, useState } from "react";
-import cl from "classnames";
-import Row, { RowProps } from "./Row";
-import DataCell from "./DataCell";
-import { UnmountClosed } from "react-collapse";
 import { Expand, ExpandFilled } from "@navikt/ds-icons";
+import cl from "clsx";
+import React, { forwardRef, useState } from "react";
 import { useId } from "..";
+import AnimateHeight from "../util/AnimateHeight";
+import DataCell from "./DataCell";
+import Row, { RowProps } from "./Row";
 
 export interface ExpandableRowProps extends RowProps {
   /**
@@ -58,7 +58,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const id = `expandable-${useId()}`;
+    const id = useId();
 
     const isOpen = open ?? internalOpen;
 
@@ -104,15 +104,14 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         </Row>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
           <td colSpan={999} className="navds-table__expanded-row-cell">
-            <UnmountClosed
-              isOpened={isOpen}
-              theme={{
-                collapse: "navds-table__expanded-row-collapse",
-                content: "navds-table__expanded-row-content",
-              }}
+            <AnimateHeight
+              className="navds-table__expanded-row-collapse"
+              innerClassName="navds-table__expanded-row-content"
+              height={isOpen ? "auto" : 0}
+              duration={250}
             >
               {content}
-            </UnmountClosed>
+            </AnimateHeight>
           </td>
         </tr>
       </>

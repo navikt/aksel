@@ -8,6 +8,9 @@ export default {
   subcomponents: {
     RadioGroup,
   },
+  argTypes: {
+    size: { control: { type: "select", options: ["medium", "small"] } },
+  },
 } as Meta;
 
 export const Default = (props) => {
@@ -21,7 +24,7 @@ export const Default = (props) => {
       onChange={props.controlled ? setState : undefined}
       hideLegend={props.hideLegend}
       error={props.errorGroup ? "Errormelding" : undefined}
-      {...props}
+      size={props?.size}
     >
       <Radio value="radio1">{props.children || "Apple"}</Radio>
       <Radio
@@ -38,6 +41,7 @@ export const Default = (props) => {
 
 Default.args = {
   controlled: false,
+  size: "medium",
   legend: "Legend-tekst",
   radioDescription: false,
   hideLegend: false,

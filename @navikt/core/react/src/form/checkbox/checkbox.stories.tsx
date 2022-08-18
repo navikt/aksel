@@ -8,6 +8,9 @@ export default {
   subcomponents: {
     CheckboxGroup,
   },
+  argTypes: {
+    size: { control: { type: "select", options: ["medium", "small"] } },
+  },
 } as Meta;
 
 export const Default = (props) => {
@@ -22,7 +25,7 @@ export const Default = (props) => {
         onChange={props.controlled ? setState : undefined}
         hideLegend={props.hideLegend}
         error={props.errorGroup ? "Errormelding for checkboxgruppe" : undefined}
-        {...props}
+        size={props?.size}
       >
         <Checkbox
           value="checkbox1"

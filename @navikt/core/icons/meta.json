@@ -1956,6 +1956,30 @@
     "pageName": "Arrow"
   },
   {
+    "name": "RotateLeft",
+    "description": "",
+    "created_at": "2022-08-03T12:27:13.304Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "RotateLeftFilled",
+    "description": "",
+    "created_at": "2022-08-03T12:27:13.309Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "RotateRight",
+    "description": "",
+    "created_at": "2022-08-03T12:27:13.299Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "RotateRightFilled",
+    "description": "",
+    "created_at": "2022-08-03T12:27:13.294Z",
+    "pageName": "Interface"
+  },
+  {
     "name": "Ruler",
     "description": "",
     "created_at": "2021-04-07T12:13:28.134Z",

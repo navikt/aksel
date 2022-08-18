@@ -34,16 +34,10 @@
 
 .navds-alert--small {
   padding: var(--navds-spacing-2) var(--navds-spacing-4);
-  gap: var(--navds-spacing-3);
 }
 
 .navds-alert--full-width {
   border-radius: 0;
-}
-
-.navds-alert--full-width.navds-alert--small {
-  padding-right: var(--navds-spacing-4);
-  padding-left: var(--navds-spacing-4);
 }
 
 .navds-alert > .navds-alert__icon {

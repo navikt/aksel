@@ -1,8 +1,9 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "..";
 
-export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
+export interface LabelProps
+  extends React.LabelHTMLAttributes<HTMLLabelElement> {
   /**
    * medium: 18px, small: 16px
    * @default "medium"
@@ -18,10 +19,10 @@ export interface LabelProps extends React.HTMLAttributes<HTMLParagraphElement> {
   spacing?: boolean;
 }
 
-export const Label: OverridableComponent<LabelProps, HTMLParagraphElement> =
+export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
   forwardRef(
     (
-      { className, size = "medium", spacing, as: Component = "p", ...rest },
+      { className, size = "medium", spacing, as: Component = "label", ...rest },
       ref
     ) => (
       <Component

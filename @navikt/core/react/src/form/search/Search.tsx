@@ -1,14 +1,21 @@
 import { Close, Search as SearchIcon } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import React, {
   forwardRef,
   InputHTMLAttributes,
   useCallback,
+  useMemo,
   useRef,
   useState,
 } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, ErrorMessage, Label, omit, useEventListener } from "../..";
+import {
+  BodyShort,
+  ErrorMessage,
+  Label,
+  mergeRefs,
+  omit,
+  useEventListener,
+} from "../..";
 import { FormFieldProps, useFormField } from "../useFormField";
 import SearchButton, { SearchButtonType } from "./SearchButton";
 
@@ -103,7 +110,7 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
     } = props;
 
     const searchRef = useRef<HTMLInputElement | null>(null);
-    const mergedRef = mergeRefs([searchRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([searchRef, ref]), [ref]);
     const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
 
     const [internalValue, setInternalValue] = useState(defaultValue ?? "");
@@ -156,7 +163,6 @@ export const Search = forwardRef<HTMLInputElement, SearchProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          as="label"
           className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}

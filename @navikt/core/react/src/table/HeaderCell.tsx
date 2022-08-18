@@ -1,6 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
-import { Label } from "..";
+import cl from "clsx";
 import { TableContext } from "./Table";
 
 export interface HeaderCellProps
@@ -23,17 +22,16 @@ export const HeaderCell: HeaderCellType = forwardRef(
     const context = useContext(TableContext);
 
     return (
-      <Label
-        as="th"
+      <th
         ref={ref}
-        className={cl("navds-table__header-cell", className, {
+        className={cl("navds-table__header-cell", "navds-label", className, {
           [`navds-table__header-cell--align-${align}`]: align,
+          "navds-label--small": context?.size === "small",
         })}
-        size={context?.size}
         {...rest}
       >
         {children}
-      </Label>
+      </th>
     );
   }
 );

@@ -35,7 +35,7 @@ export function checkGitStatus(force) {
     if (force) {
       console.log(`WARNING: ${errorMessage}. Forcibly continuing.`);
     } else {
-      console.log("Thank you for using @@navikt/ds-codemod");
+      console.log("Thank you for using @navikt/ds-codemod");
       console.log(
         chalk.yellow(
           "\nBut before we continue, please stash or commit your git changes."
@@ -94,6 +94,18 @@ export function runTransform({ files, flags, transformer }) {
 }
 
 const TRANSFORMER_INQUIRER_CHOICES = [
+  {
+    name: "v1.0.0/preset: Runs all codemods for beta to v1 migration",
+    value: "v1.0.0/preset",
+  },
+  {
+    name: "v1.0.0/pagination: Fixes breaking API-changes from <Pagination /> component",
+    value: "v1.0.0/pagination",
+  },
+  {
+    name: "v1.0.0/tabs: Fixes breaking API-changes from <Tabs /> component",
+    value: "v1.0.0/tabs",
+  },
   {
     name: "v1.0.0/chat: Fixes breaking API-changes from <SpeechBubble /> (now <Chat/>) component",
     value: "v1.0.0/chat",

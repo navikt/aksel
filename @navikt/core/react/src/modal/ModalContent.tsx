@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface ModalContentProps
   extends React.HTMLAttributes<HTMLDivElement> {

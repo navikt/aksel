@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
-import { Button } from "../..";
+import { Alert, Button, Search } from "../..";
 import { Tooltip } from "../index";
 
 export default {
@@ -28,6 +28,20 @@ export default {
     },
   },
 } as Meta;
+
+export const Demo = () => (
+  <div>
+    <Tooltip content="Tooltip example" placement="top">
+      <Alert variant="info">test</Alert>
+    </Tooltip>
+    <Tooltip content="Tooltip example" placement="top">
+      <Search label="søk" />
+    </Tooltip>
+    <Tooltip content="Tooltip example" placement="top">
+      <Button aria-describedby="test123">Tooltip</Button>
+    </Tooltip>
+  </div>
+);
 
 export const Default = (props) => {
   return (

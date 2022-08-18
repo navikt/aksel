@@ -37,7 +37,6 @@
   resize: none;
   width: 100%;
   display: block;
-  min-height: 48px;
   color: var(--navds-text-field-color-text);
 }
 

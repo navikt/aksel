@@ -1,5 +1,5 @@
-import cl from "classnames";
 import React, { forwardRef } from "react";
+import cl from "clsx";
 import { BodyLong, Checkbox, CheckboxProps, ErrorMessage } from "..";
 import { useFormField } from "./useFormField";
 
@@ -27,7 +27,7 @@ export interface ConfirmationPanelProps
 }
 
 export const ConfirmationPanel = forwardRef<
-  HTMLDivElement,
+  HTMLInputElement,
   ConfirmationPanelProps
 >(({ className, children, label, ...props }, ref) => {
   const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
@@ -37,7 +37,6 @@ export const ConfirmationPanel = forwardRef<
 
   return (
     <div
-      ref={ref}
       className={cl("navds-confirmation-panel", "navds-form-field", className, {
         "navds-confirmation-panel--small": size === "small",
         "navds-confirmation-panel--error": hasError,
@@ -53,7 +52,13 @@ export const ConfirmationPanel = forwardRef<
             {children}
           </BodyLong>
         )}
-        <Checkbox {...props} {...inputProps} error={hasError} size={size}>
+        <Checkbox
+          ref={ref}
+          {...props}
+          {...inputProps}
+          error={hasError}
+          size={size}
+        >
           {label}
         </Checkbox>
       </div>

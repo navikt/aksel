@@ -1,9 +1,9 @@
 import React, { forwardRef, useState } from "react";
-import cl from "classnames";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label, ErrorMessage, omit, Detail } from "..";
+import cl from "clsx";
+import { BodyShort, BodyLong, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
+import TextareaAutosize from "../util/TextareaAutoSize";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -68,7 +68,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       ...rest
     } = props;
 
-    const maxLengthId = `TextareaMaxLength-${useId()}`;
+    const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
 
     const [controlledValue, setControlledValue] = useState<string>(
@@ -76,12 +76,16 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
 
     const getMinRows = () => {
-      let rows = rest?.minRows && rest?.minRows >= 3 ? rest?.minRows : 3;
+      let rows = rest?.minRows ? rest?.minRows : 3;
       if (size === "small") {
-        rows = rest?.minRows && rest?.minRows >= 2 ? rest?.minRows : 2;
+        rows = rest?.minRows ? rest?.minRows : 2;
       }
       return rows;
     };
+
+    const describedBy = cl(inputProps["aria-describedby"], {
+      [maxLengthId ?? ""]: hasMaxLength,
+    });
 
     return (
       <div
@@ -99,7 +103,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <Label
           htmlFor={inputProps.id}
           size={size}
-          as="label"
           className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
@@ -109,7 +112,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         {!!description && (
           <>
             {size === "medium" ? (
-              <BodyShort
+              <BodyLong
                 className={cl("navds-form-field__description", {
                   "navds-sr-only": hideLabel,
                 })}
@@ -118,7 +121,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 as="div"
               >
                 {description}
-              </BodyShort>
+              </BodyLong>
             ) : (
               <Detail
                 className={cl("navds-form-field__description", {
@@ -152,9 +155,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 "navds-textarea--counter": hasMaxLength,
               }
             )}
-            aria-describedby={cl(inputProps["aria-describedby"], {
-              [maxLengthId]: hasMaxLength,
-            })}
+            {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
           {hasMaxLength && (
             <>

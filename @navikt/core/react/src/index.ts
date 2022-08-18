@@ -8,14 +8,12 @@ export * from "./guide-panel";
 export * from "./link";
 export * from "./link-panel";
 export * from "./loader";
-export * from "./menu";
 export * from "./modal";
 export * from "./pagination";
 export * from "./panel";
 export * from "./popover";
 export * from "./read-more";
-export * from "./speech-bubble";
-export * from "./step-indicator";
+export * from "./chat";
 export * from "./stepper";
 export * from "./tag";
 export * from "./toggle-group";
@@ -24,7 +22,3 @@ export * from "./tabs";
 export * from "./tooltip";
 export * from "./typography";
 export * from "./util";
-
-/* Navno spesific packages */
-export * from "./card";
-export * from "./page-header";
