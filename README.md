@@ -26,6 +26,8 @@ Repoet inneholder følgende:
 - [Storybook](https://master--5f801fb2aea7820022de2936.chromatic.com/) for komponenter.
 - [Gammel dokumentasjon](https://old-design-nav.vercel.app) for komponenter.
 
+[Migrering fra Beta til v1](https://aksel.nav.no/designsystem/side/migrering#beta-til-v1)
+
 ## Dokumentasjon
 
 [Dokumentasjon forvaltes i dette repoet](https://github.com/navikt/aksel-website)
