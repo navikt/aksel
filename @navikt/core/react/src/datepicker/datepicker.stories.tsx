@@ -14,6 +14,8 @@ export default {
   },
 };
 
-export const Default = (props) => <DatePicker size={props.size} />;
+export const Default = (props) => (
+  <DatePicker label="Velg dato" size={props.size} />
+);
 
 Default.args = {};

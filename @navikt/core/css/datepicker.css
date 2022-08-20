@@ -1,3 +1,51 @@
+:root,
+[data-theme="light"] {
+  --navds-datepicker-color-text: var(--navds-semantic-color-text);
+  --navds-datepicker-color-border: var(--navds-semantic-color-border);
+  --navds-datepicker-color-border-hover: var(
+    --navds-semantic-color-interaction-primary
+  );
+}
+
 .navds-datepicker {
-  --tmp: 123;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navds-datepicker__wrapper-inner {
+  position: relative;
+  width: 100%;
+}
+
+.navds-datepicker__wrapper {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navds-datepicker__input {
+  padding-right: var(--navds-spacing-12);
+}
+
+.navds-form-field--small .navds-datepicker__input {
+  padding-right: var(--navds-spacing-8);
+}
+
+.navds-datepicker__input-button {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navds-form-field--small .navds-datepicker__input-button {
+  right: 0.5rem;
+  height: 24px;
+  width: 24px;
+}
+
+/* Focus layering */
+.navds-datepicker__input:focus,
+.navds-datepicker__input-button {
+  z-index: 1;
 }
