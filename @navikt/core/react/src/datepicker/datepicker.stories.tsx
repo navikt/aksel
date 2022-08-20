@@ -15,7 +15,9 @@ export default {
 };
 
 export const Default = (props) => (
-  <DatePicker label="Velg dato" size={props.size} />
+  <div style={{ height: "30rem" }}>
+    <DatePicker label="Velg dato" size={props.size} />
+  </div>
 );
 
 Default.args = {};

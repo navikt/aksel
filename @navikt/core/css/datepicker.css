@@ -11,6 +11,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  position: relative;
 }
 
 .navds-datepicker__wrapper-inner {
@@ -48,4 +49,24 @@
 .navds-datepicker__input:focus,
 .navds-datepicker__input-button {
   z-index: 1;
+}
+
+/* Panel */
+
+.navds-datepicker-panel {
+  display: none;
+  aspect-ratio: 1/1;
+  width: 20rem;
+  height: 20rem;
+  position: absolute;
+  top: 6rem;
+  border-radius: 4px;
+  box-shadow: var(--navds-shadow-large);
+
+  /* tmp */
+  border: 1px solid black;
+}
+
+.navds-datepicker-panel--open {
+  display: block;
 }

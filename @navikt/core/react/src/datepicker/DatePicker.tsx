@@ -1,10 +1,11 @@
 import { Calender } from "@navikt/ds-icons";
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useState } from "react";
 import { Button } from "../button";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
+import DatePickerPanel from "./Panel";
 
 export interface DatePickerProps
   extends FormFieldProps,
@@ -27,6 +28,8 @@ export interface DatePickerProps
 
 export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
   (props, ref) => {
+    const [open, setOpen] = useState(true);
+
     const {
       inputProps,
       size = "medium",
@@ -105,6 +108,7 @@ export const DatePicker = forwardRef<HTMLInputElement, DatePickerProps>(
             />
           </div>
         </div>
+        <DatePickerPanel open={open} />
         <div
           className="navds-form-field__error"
           id={errorId}
