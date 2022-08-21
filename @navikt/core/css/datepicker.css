@@ -53,20 +53,56 @@
 
 /* Panel */
 
-.navds-datepicker-panel {
+.navds-datepicker__panel {
   display: none;
-  aspect-ratio: 1/1;
-  width: 20rem;
-  height: 20rem;
   position: absolute;
   top: 6rem;
   border-radius: 4px;
   box-shadow: var(--navds-shadow-large);
+  width: 20rem;
+  padding: 0.25rem;
 
   /* tmp */
   border: 1px solid black;
 }
 
-.navds-datepicker-panel--open {
+.navds-datepicker__panel--open {
   display: block;
+}
+
+.navds-datepicker__table {
+  display: table;
+  border-collapse: collapse;
+  width: 100%;
+  border-spacing: 0;
+}
+
+.navds-datepicker__td {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.navds-datepicker__td-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  background: none;
+  border: none;
+  /* background-color: aqua; */
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.navds-datepicker__td-button:hover {
+  background-color: var(--navds-global-color-blue-50);
+}
+
+.navds-datepicker__td-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
 }
