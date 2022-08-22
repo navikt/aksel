@@ -7,47 +7,44 @@
   );
 }
 
-.navds-datepicker {
+.navds-datepicker__field {
   display: flex;
   flex-direction: column;
   width: 100%;
   position: relative;
 }
 
-.navds-datepicker__wrapper-inner {
+.navds-datepicker__field-wrapper {
+  display: inline-flex;
+  align-items: center;
   position: relative;
   width: 100%;
 }
 
-.navds-datepicker__wrapper {
-  display: inline-flex;
-  align-items: center;
-}
-
-.navds-datepicker__input {
+.navds-datepicker__field-input {
   padding-right: var(--navds-spacing-12);
 }
 
-.navds-form-field--small .navds-datepicker__input {
+.navds-form-field--small .navds-datepicker__field-input {
   padding-right: var(--navds-spacing-8);
 }
 
-.navds-datepicker__input-button {
+.navds-datepicker__field-input-button {
   position: absolute;
   right: 0.75rem;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.navds-form-field--small .navds-datepicker__input-button {
+.navds-form-field--small .navds-datepicker__field-input-button {
   right: 0.5rem;
   height: 24px;
   width: 24px;
 }
 
 /* Focus layering */
-.navds-datepicker__input:focus,
-.navds-datepicker__input-button {
+.navds-datepicker__field-input:focus,
+.navds-datepicker__field-input-button {
   z-index: 1;
 }
 
