@@ -1,7 +1,7 @@
 {
   "name": "nav-ds",
   "description": "Repository for NAV Designsystem",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "scripts": {
     "clean:lib": "node scripts/clean.js",
@@ -19,10 +19,9 @@
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
     "lint:css": "yarn stylelint @navikt/**/*.css",
-    "bump:patch": "yarn workspaces foreach run bump:patch",
-    "bump:minor": "yarn workspaces foreach run bump:minor",
-    "bump:major": "yarn workspaces foreach run bump:major",
-    "bump:test": "yarn workspaces foreach run yarn version -i patch"
+    "bump:patch": "yarn workspaces foreach run bump patch",
+    "bump:minor": "yarn workspaces foreach run bump minor",
+    "bump:major": "yarn workspaces foreach run bump major"
   },
   "workspaces": [
     "@navikt/core/*",
