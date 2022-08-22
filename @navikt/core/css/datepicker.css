@@ -103,3 +103,39 @@
   box-shadow: var(--navds-shadow-focus);
   outline: none;
 }
+
+/* Caption */
+.navds-datepicker__caption-button {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.navds-datepicker__caption-button:hover {
+  background-color: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+}
+
+.navds-datepicker__caption-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-datepicker-calendar {
+  --rdp-cell-size: 44px;
+  --rdp-accent-color: #0000ff;
+  --rdp-background-color: #e7edff;
+  --rdp-accent-color-dark: #3003e1;
+  --rdp-background-color-dark: #180270;
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+  margin: var(--navds-spacing-5);
+}

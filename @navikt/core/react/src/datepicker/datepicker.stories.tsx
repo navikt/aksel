@@ -16,7 +16,9 @@ export default {
 
 export const Default = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker label="Velg dato" size={props.size} />
+    <DatePicker>
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
   </div>
 );
 

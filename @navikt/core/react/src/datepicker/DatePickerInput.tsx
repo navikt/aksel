@@ -1,10 +1,11 @@
 import { Calender } from "@navikt/ds-icons";
 import cl from "clsx";
-import React, { forwardRef, InputHTMLAttributes } from "react";
+import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import { Button } from "../button";
 import { FormFieldProps, useFormField } from "../form/useFormField";
 import { BodyShort, ErrorMessage, Label } from "../typography";
 import { omit } from "../util";
+import { DatePickerContext } from "./DatePicker";
 
 export interface DatePickerInputProps
   extends FormFieldProps,
@@ -33,6 +34,8 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
 >((props, ref) => {
+  const { onOpen } = useContext(DatePickerContext);
+
   const {
     inputProps,
     size = "medium",
@@ -91,6 +94,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           ref={ref}
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
+          autoComplete="off"
           /* onChange={(e) => handleChange(e.target.value)} */
           className={cl(
             className,
@@ -104,7 +108,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           variant="tertiary"
           type="button"
           size="small"
-          /* onClick={(e) => handleClear({ trigger: "Click", event: e })} */
+          onClick={() => onOpen()}
           className="navds-datepicker__field-input-button"
           icon={<Calender title="åpne datovelger" />}
         />
