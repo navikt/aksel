@@ -18,7 +18,7 @@
   "scripts": {
     "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
     "watch": "yarn build --watch",
-    "bump": "yarn version -i"
+    "bump": "yarn version"
   },
   "devDependencies": {
     "postcss": "^8.3.8",

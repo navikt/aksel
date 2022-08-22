@@ -33,7 +33,7 @@
     "build": "yarn run clean && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
     "test": "jest",
-    "bump": "yarn version -i"
+    "bump": "yarn version"
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "0.9.2",

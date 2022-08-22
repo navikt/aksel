@@ -22,7 +22,7 @@
     "token": "style-dictionary build",
     "test": "jest",
     "update": "ts-node figma/index.ts dotenv/config",
-    "bump": "yarn version -i"
+    "bump": "yarn version"
   },
   "repository": {
     "type": "git",

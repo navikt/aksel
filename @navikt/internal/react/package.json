@@ -32,7 +32,7 @@
     "clean": "rimraf cjs esm",
     "build": "yarn run clean && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "bump": "yarn version -i"
+    "bump": "yarn version"
   },
   "dependencies": {
     "@navikt/ds-icons": "^1.0.2",
