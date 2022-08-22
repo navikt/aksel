@@ -21,7 +21,8 @@
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
     "test": "jest",
-    "update": "ts-node figma/index.ts dotenv/config"
+    "update": "ts-node figma/index.ts dotenv/config",
+    "bump": "yarn version -i"
   },
   "repository": {
     "type": "git",

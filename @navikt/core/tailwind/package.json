@@ -14,7 +14,8 @@
   ],
   "scripts": {
     "build": "ts-node ./src",
-    "test": "jest"
+    "test": "jest",
+    "bump": "yarn version -i"
   },
   "repository": {
     "type": "git",

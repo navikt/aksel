@@ -29,7 +29,8 @@
     "create-icons": "svgr --out-dir src svg",
     "clean": "rimraf src cjs esm",
     "build": "yarn clean && copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
-    "update": "ts-node figma/index.ts dotenv/config"
+    "update": "ts-node figma/index.ts dotenv/config",
+    "bump": "yarn version -i"
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

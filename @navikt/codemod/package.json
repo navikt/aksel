@@ -19,7 +19,8 @@
     "build": "tsc -p tsconfig.json",
     "dev": "tsc --watch -p tsconfig.json",
     "test": "jest",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "bump": "yarn version -i"
   },
   "bin": "./bin/ds-codemod.js",
   "repository": {
