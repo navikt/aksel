@@ -21,7 +21,8 @@
     "lint:css": "yarn stylelint @navikt/**/*.css",
     "bump:patch": "yarn workspaces foreach run bump:patch",
     "bump:minor": "yarn workspaces foreach run bump:minor",
-    "bump:major": "yarn workspaces foreach run bump:major"
+    "bump:major": "yarn workspaces foreach run bump:major",
+    "bump:test": "yarn workspaces foreach run yarn version -i patch"
   },
   "workspaces": [
     "@navikt/core/*",
