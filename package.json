@@ -18,7 +18,10 @@
     "update:tokens": "yarn workspace @navikt/ds-tokens update",
     "lint": "yarn lint:jsts && yarn lint:css",
     "lint:jsts": "yarn eslint .",
-    "lint:css": "yarn stylelint @navikt/**/*.css"
+    "lint:css": "yarn stylelint @navikt/**/*.css",
+    "bump:patch": "yarn workspaces foreach run bump:patch",
+    "bump:minor": "yarn workspaces foreach run bump:minor",
+    "bump:major": "yarn workspaces foreach run bump:major"
   },
   "workspaces": [
     "@navikt/core/*",
