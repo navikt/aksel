@@ -9,7 +9,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Dropdown>
+    <Dropdown onElementChosen={(element) => console.log(element)}>
       <Dropdown.Toggle>Toggle</Dropdown.Toggle>
       <Dropdown.Menu strategy="fixed">
         <Dropdown.Menu.GroupedList>
