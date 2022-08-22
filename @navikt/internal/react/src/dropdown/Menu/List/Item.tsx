@@ -24,8 +24,8 @@ export const ListItem: ListItemType = forwardRef(
         <Component
           {...rest}
           value={rest.children}
-          onClick={(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
-            context?.onElementChosen?.(event.currentTarget.value)
+          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) =>
+            context?.onSelect?.(event)
           }
           ref={ref}
           className={cl(
