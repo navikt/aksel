@@ -7,8 +7,8 @@ Lyst på en ny kul feature på en komponent? Prøv deg på en løsning selv elle
 Vi bruker yarn pga yarn workspaces. Har du ikke yarn? `npm i -g yarn`
 
 ```sh
-git clone git@github.com:navikt/nav-frontend-moduler.git
-cd nav-frontend-moduler
+git clone git@github.com:navikt/Designsystemet.git
+cd Designsystemet
 yarn install
 yarn boot
 yarn storybook
@@ -56,9 +56,9 @@ For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver 
 
 ## Byggemiljø
 
-Det er satt opp [Github actions](https://github.com/navikt/nav-frontend-moduler/actions) for repoet.
+Det er satt opp [Github actions](https://github.com/navikt/Designsystemet/actions) for repoet.
 Pull-requests bygges og testes derfor automatisk med en gang de pushes til remote.
 
 ### Byggesteg
 
-Se [build-publish.yml](https://github.com/navikt/nav-frontend-moduler/blob/master/.github/workflows/build-publish.yml).
+Se [build-publish.yml](https://github.com/navikt/Designsystemet/blob/master/.github/workflows/build-publish.yml).
