@@ -22,8 +22,4 @@ export const Default = (props) => (
   </div>
 );
 
-export const Test123 = () => {
-  return <button onClick={(x) => console.log(x)}>123</button>;
-};
-
 Default.args = {};
