@@ -77,14 +77,14 @@ jobs:
           NAV_DS_TOKEN: ${{secrets.GIT_REPO}}
 
       - name: Update changed packages with PATCH
-        if: "contains(github.event.head_commit.message, '[fix]')"
-        run: yarn lerna version patch --include-merged-tags --yes
+        if: contains(fromJson('["fix", "patch"]'), github.event.head_commit.message)
+        run: yarn lerna version patch --force-publish --include-merged-tags --yes
       - name: Update changed packages with MINOR
-        if: "contains(github.event.head_commit.message, '[feature]')"
-        run: yarn lerna version minor --include-merged-tags --yes
+        if: contains(fromJson('["feature", "minor"]'), github.event.head_commit.message)
+        run: yarn lerna version minor --force-publish --include-merged-tags --yes
       - name: Update changed packages with MAJOR
-        if: "contains(github.event.head_commit.message, '[breaking]')"
-        run: yarn lerna version major --include-merged-tags --yes
+        if: contains(fromJson('["breaking", "major"]'), github.event.head_commit.message)
+        run: yarn lerna version major --force-publish --include-merged-tags --yes
       - name: Publish to NPM registry
         run: yarn lerna publish --no-verify-access from-package --yes
 
