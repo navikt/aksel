@@ -17,8 +17,7 @@
   "main": "./dist/index.css",
   "scripts": {
     "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
-    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css",
-    "bump": "yarn version"
+    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^1.0.2",
