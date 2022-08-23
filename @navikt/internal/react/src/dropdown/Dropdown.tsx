@@ -2,11 +2,17 @@ import React, { createContext, useState } from "react";
 import Toggle, { ToggleType } from "./Toggle";
 import Menu, { MenuType } from "./Menu";
 
-type DropdownElementChosenHandler = (element: React.MouseEvent) => void;
-
 export interface DropdownProps {
   children: React.ReactNode;
-  onSelect?: DropdownElementChosenHandler;
+  /**
+   * Handler that is called when an item is selected.
+   */
+  onSelect?: (element: React.MouseEvent) => void;
+  /**
+   * Whether the Menu closes when a selection is made.
+   * @default true
+   */
+  closeOnSelect?: boolean;
 }
 
 export interface DropdownType extends React.FC<DropdownProps> {
@@ -19,12 +25,12 @@ export interface DropdownContextType {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   readonly anchorEl: Element | null;
   setAnchorEl: React.Dispatch<React.SetStateAction<Element | null>>;
-  onSelect: DropdownElementChosenHandler;
+  onSelect: (element: React.MouseEvent) => void;
 }
 
 export const DropdownContext = createContext<DropdownContextType | null>(null);
 
-export const Dropdown = (({ children, onSelect }) => {
+export const Dropdown = (({ children, onSelect, closeOnSelect = true }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<Element | null>(null);
 
@@ -37,7 +43,7 @@ export const Dropdown = (({ children, onSelect }) => {
         setAnchorEl,
         onSelect: (event) => {
           onSelect?.(event);
-          setIsOpen(false);
+          closeOnSelect && setIsOpen(false);
         },
       }}
     >
