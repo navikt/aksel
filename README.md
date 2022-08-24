@@ -11,7 +11,7 @@
       <a href="https://github.com/navikt/Designsystemet/pulls">
           <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
       </a>
-        <img src="https://github.com/navikt/Designsystemet/actions/workflows/build-publish.yml/badge.svg" />
+        <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/navikt/Designsystemet/Build%20-%3E%20Test%20-%3E%20Publish?label=CI%2FCD">
     </div>
     <br/>
     <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/Designsystemet/issues">Bug-rapport</a>
