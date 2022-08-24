@@ -9,7 +9,7 @@
     </p>
     <div align="center">
       <a href="https://github.com/navikt/Designsystemet/pulls">
-          <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+          <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
       </a>
         <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/navikt/Designsystemet/Build%20-%3E%20Test%20-%3E%20Publish?label=CI%2FCD">
     </div>
