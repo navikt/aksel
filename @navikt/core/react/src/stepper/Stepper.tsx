@@ -22,6 +22,11 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    * @note Stepper index starts at 1, not 0
    */
   onStepChange?: (step: number) => void;
+  /**
+   * Makes stepper non-interactive if false
+   * @default true
+   */
+  interactive?: boolean;
 }
 
 interface StepperComponent

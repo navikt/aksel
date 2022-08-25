@@ -91,6 +91,18 @@ button.navds-stepper__step {
   line-height: 1;
 }
 
+.navds-stepper__circle--success {
+  border: none;
+  background: none;
+  grid-column: circle;
+}
+
+.navds-stepper__circle--success > svg {
+  display: inline;
+  width: var(--navds-stepper-circle-size);
+  height: var(--navds-stepper-circle-size);
+}
+
 .navds-stepper__content {
   min-width: fit-content;
   line-height: 1.5;

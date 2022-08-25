@@ -131,3 +131,38 @@ export const DisplayOnly = () => {
     </Stepper>
   );
 };
+
+export const CompletedSteps = () => {
+  const props = {};
+  const [activeStep, setActiveStep] = useState(2);
+  return (
+    <Stepper
+      aria-labelledby="stepper-heading"
+      activeStep={activeStep}
+      orientation="vertical"
+      onStepChange={(step) => setActiveStep(step)}
+    >
+      <Stepper.Step {...props} completed={activeStep > 1}>
+        Start søknad
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 2}>
+        Personopplysninger
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 3}>
+        Saksopplysninger
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 4}>
+        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 5}>
+        Vedlegg
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 6}>
+        Oppsummering
+      </Stepper.Step>
+      <Stepper.Step {...props} completed={activeStep > 7}>
+        Innsending
+      </Stepper.Step>
+    </Stepper>
+  );
+};
