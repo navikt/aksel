@@ -170,7 +170,6 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       left: "right",
     }[flPlacement.split("-")[0]];
 
-    console.log({ x, y });
     return (
       <div
         className={cl("navds-popover", className, {
