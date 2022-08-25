@@ -97,8 +97,8 @@ button.navds-stepper__step {
   font-size: 28px;
 }
 
-.navds-stepper__circle--success > svg {
-}
+/* .navds-stepper__circle--success > svg {
+} */
 
 .navds-stepper__content {
   min-width: fit-content;
