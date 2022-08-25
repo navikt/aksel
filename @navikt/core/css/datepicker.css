@@ -139,3 +139,43 @@
   --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
   margin: var(--navds-spacing-5);
 }
+
+.navds-datepicker-month * > .rdp-head,
+.navds-datepicker-month * > .rdp-tbody {
+  display: none;
+}
+
+.rdp-table {
+  width: 100%;
+}
+
+.navds-datepicker__months {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  justify-items: center;
+  margin-top: 0.5rem;
+  gap: 0.25rem;
+}
+
+.navds-datepicker__month {
+  all: unset;
+  height: 44px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: inherit;
+}
+
+.navds-datepicker__month:hover {
+  background-color: var(--navds-global-color-blue-50);
+}
+
+.navds-datepicker__month::first-letter {
+  text-transform: capitalize;
+}
+
+.navds-datepicker__month--hidden {
+  visibility: hidden;
+}

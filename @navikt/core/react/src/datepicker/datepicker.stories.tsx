@@ -1,5 +1,6 @@
 import React from "react";
 import DatePicker from "./DatePicker";
+import MonthPicker from "./MonthPicker";
 
 export default {
   title: "ds-react/Datepicker",
@@ -19,6 +20,12 @@ export const Default = (props) => (
     <DatePicker>
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
+  </div>
+);
+
+export const MonthPickerDemo = (props) => (
+  <div style={{ height: "30rem" }}>
+    <MonthPicker />
   </div>
 );
 
