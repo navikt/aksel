@@ -133,7 +133,7 @@ export const DisplayOnly = () => {
 };
 
 export const CompletedSteps = () => {
-  const props = {};
+  const props = { as: "button" };
   const [activeStep, setActiveStep] = useState(2);
   return (
     <Stepper

@@ -2,7 +2,7 @@ import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { StepperContext } from "./Stepper";
 import { Label, OverridableComponent } from "..";
-import { Success } from "@navikt/ds-icons";
+import { Success, SuccessStroke } from "@navikt/ds-icons";
 
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -61,12 +61,10 @@ export const StepComponent: OverridableComponent<
         }}
       >
         {completed ? (
-          <span
-            aria-hidden="true"
+          <SuccessStroke
+            aria-hidden
             className="navds-stepper__circle navds-stepper__circle--success"
-          >
-            <Success aria-hidden />
-          </span>
+          />
         ) : (
           <Label className="navds-stepper__circle" as="span" aria-hidden="true">
             {unsafe_index + 1}

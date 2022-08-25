@@ -94,13 +94,10 @@ button.navds-stepper__step {
 .navds-stepper__circle--success {
   border: none;
   background: none;
-  grid-column: circle;
+  font-size: 28px;
 }
 
 .navds-stepper__circle--success > svg {
-  display: inline;
-  width: var(--navds-stepper-circle-size);
-  height: var(--navds-stepper-circle-size);
 }
 
 .navds-stepper__content {
