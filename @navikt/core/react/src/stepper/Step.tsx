@@ -1,8 +1,8 @@
+import { SuccessStroke } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { StepperContext } from "./Stepper";
 import { Label, OverridableComponent } from "..";
-import { Success, SuccessStroke } from "@navikt/ds-icons";
+import { StepperContext } from "./Stepper";
 
 export interface StepperStepProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
