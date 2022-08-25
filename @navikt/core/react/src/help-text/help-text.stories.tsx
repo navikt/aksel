@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { HelpText } from "..";
-import { Select } from "../form";
 
 export default {
   title: "ds-react/HelpText",
@@ -56,20 +55,5 @@ export const Open = () => {
     <HelpText ref={ref} title="show tooltip" strategy="fixed">
       Id ullamco excepteur elit fugiat labore.
     </HelpText>
-  );
-};
-
-export const BugHunt = () => {
-  return (
-    <div style={{ display: "flex" }}>
-      <Select label="123">
-        <option value="1">test1</option>
-        <option value="2">test2</option>
-        <option value="3">test3</option>
-      </Select>
-      <HelpText title="show tooltip" placement="bottom">
-        Id ullamco excepteur elit fugiat labore.
-      </HelpText>
-    </div>
   );
 };
