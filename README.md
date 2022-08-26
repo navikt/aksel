@@ -7,15 +7,33 @@
     <p>
         Monorepo for Frontend-komponenter brukt i NAV.
     </p>
-    <p>
+    <div align="center">
       <a href="https://github.com/navikt/Designsystemet/pulls">
-          <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+          <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
       </a>
-         <img src="https://github.com/navikt/Designsystemet/actions/workflows/build-publish.yml/badge.svg" />
-        <img src="https://github.com/navikt/Designsystemet/actions/workflows/chromatic.yml/badge.svg" />
-    </p>
-   <img src="https://img.shields.io/endpoint?style=for-the-badge&url=https://runkit.io/fezvrasta/combined-npm-downloads/1.0.0?packages=@navikt/ds-react,@navikt/ds-css,@navikt/ds-icons,@navikt/ds-tokens,@navikt/ds-react-internal,@navikt/ds-css-internal,nav-frontend-alertstriper-style,nav-frontend-alertstriper,nav-frontend-chevron-style,nav-frontend-chevron,nav-frontend-core,nav-frontend-ekspanderbartpanel-style,nav-frontend-ekspanderbartpanel,nav-frontend-etiketter-style,nav-frontend-etiketter,nav-frontend-fullbreddeknapp-style,nav-frontend-grid-style,nav-frontend-grid,nav-frontend-hjelpetekst-style,nav-frontend-hjelpetekst,nav-frontend-ikoner-assets,nav-frontend-ikonknapper,nav-frontend-js-utils,nav-frontend-knapper-style,nav-frontend-knapper,nav-frontend-lenkepanel-style,nav-frontend-lenkepanel,nav-frontend-lenker-style,nav-frontend-lenker,nav-frontend-lesmerpanel-style,nav-frontend-lesmerpanel,nav-frontend-lukknapp-style,nav-frontend-lukknapp,nav-frontend-modal-style,nav-frontend-modal,nav-frontend-paneler-style,nav-frontend-paneler,nav-frontend-popover-style,nav-frontend-popover,nav-frontend-skjema-style,nav-frontend-skjema,nav-frontend-snakkeboble-style,nav-frontend-snakkeboble,nav-frontend-spinner-style,nav-frontend-spinner,nav-frontend-stegindikator-style,nav-frontend-stegindikator,nav-frontend-tabell-style,nav-frontend-tabs-style,nav-frontend-tabs,nav-frontend-tekstomrade,nav-frontend-toggle-style,nav-frontend-toggle,nav-frontend-typografi-style,nav-frontend-typografi,nav-frontend-veileder-style,nav-frontend-veileder,nav-frontend-veilederpanel-style,nav-frontend-veilederpanel" />
-    <h4><a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/Designsystemet/issues">Bug-rapport</a>
+        <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/navikt/Designsystemet/Build%20-%3E%20Test%20-%3E%20Publish?label=CI%2FCD">
+    </div>
+    <br/>
+    <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/Designsystemet/issues">Bug-rapport</a>
+<br/>
+<h2>Pakker</h2>
+<div>
+<a href="https://www.npmjs.com/package/@navikt/ds-react"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-react?label=%40navikt%2Fds-react"></a>
+<a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-css"></a>
+</div>
+<div>
+<a href="https://www.npmjs.com/package/@navikt/ds-icons"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-icons?label=%40navikt%2Fds-icons"></a>
+<a href="https://www.npmjs.com/package/@navikt/ds-tokens"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-tokens?label=%40navikt%2Fds-tokens"></a>
+</div>
+<div>
+<a href="https://www.npmjs.com/package/@navikt/ds-react-internal"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-react-internal?label=%40navikt%2Fds-react-internal"></a>
+<a href="https://www.npmjs.com/package/@navikt/ds-css-internal"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css-internal?label=%40navikt%2Fds-css-internal"></a>
+</div>
+<div>
+<a href="https://www.npmjs.com/package/@navikt/ds-tailwind"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-tailwind?label=%40navikt%2Fds-tailwind"></a>
+<a href="https://www.npmjs.com/package/@navikt/ds-codemod"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-codemod?label=%40navikt%2Fds-codemod"></a>
+</div>
+
 </div>
 
 ## Innhold i repo
