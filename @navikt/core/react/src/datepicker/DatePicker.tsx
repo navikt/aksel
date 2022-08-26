@@ -17,7 +17,7 @@ import React, {
   useState,
 } from "react";
 import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
-import { mergeRefs, Popover, Select } from "..";
+import { mergeRefs, Popover, Select, Button } from "..";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -75,23 +75,27 @@ const DatePickerCaption = (props) => {
   }
 
   return (
-    <div style={{ display: "flex", gap: "0.5rem" }}>
-      <button
-        className="navds-datepicker__caption-button"
+    <div className="navds-datepicker__caption">
+      <Button
+        variant={"tertiary"}
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-      >
-        <Left aria-hidden />
-      </button>
+        icon={<Left aria-hidden />}
+        className="navds-datepicker__caption-button"
+      />
 
-      <Select label="velg månede" hideLabel style={{ width: "14ch" }}>
+      <Select
+        label="velg månede"
+        hideLabel
+        className="navds-datepicker__caption__month"
+      >
         {dropdownMonths.map((m) => (
           <option key={m.getMonth()} value={m.getMonth()}>
             {formatMonthCaption(m, { locale })}
           </option>
         ))}
       </Select>
-      <Select label="velg år" hideLabel style={{ width: "12ch" }}>
+      <Select label="velg år" hideLabel>
         {years.map((year) => (
           <option key={year.getFullYear()} value={year.getFullYear()}>
             {formatYearCaption(year, { locale })}
@@ -99,13 +103,13 @@ const DatePickerCaption = (props) => {
         ))}
       </Select>
 
-      <button
-        className="navds-datepicker__caption-button"
-        disabled={!nextMonth}
+      <Button
+        icon={<Right aria-hidden />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
-      >
-        <Right aria-hidden />
-      </button>
+        disabled={!nextMonth}
+        variant={"tertiary"}
+        className="navds-datepicker__caption-button"
+      />
     </div>
   );
 };
