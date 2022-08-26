@@ -121,12 +121,22 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
-    const [selected, setSelected] = React.useState<Date>(new Date());
+    const [selected, setSelected] = React.useState<Date | undefined>(
+      new Date()
+    );
 
     /* TMP for dev */
     useEffect(() => {
       setOpen(true);
     }, []);
+
+    /* TMP for dev */
+    const disabledDays = [
+      new Date("Aug 28 2022"),
+      new Date("Aug 29 2022"),
+      new Date("Aug 30 2022"),
+      new Date("Aug 31 2022"),
+    ];
 
     return (
       <DatePickerContext.Provider
@@ -146,14 +156,17 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 locale={NB}
                 mode="single"
                 selected={selected}
-                onSelect={setSelected}
+                onSelect={(selectedDate: Date | undefined) => {
+                  selected !== undefined && setSelected(selectedDate);
+                }}
                 components={{
                   Caption: DatePickerCaption,
                 }}
                 className="navds-date__calendar"
                 toYear={2022}
-                fromMonth={new Date("Aug 23 2019")}
+                fromDate={new Date("Aug 23 2019")}
                 classNames={{ vhidden: "navds-sr-only" }}
+                disabled={disabledDays}
               />
             </Popover>
           )}

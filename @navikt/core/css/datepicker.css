@@ -90,7 +90,7 @@
   width: 48px;
 }
 
-.navds-datepicker__caption__month .navds-select__container > select {
+.navds-datepicker__caption__month .navds-select__container select {
   text-transform: capitalize;
 }
 
@@ -113,8 +113,22 @@
   border-radius: 4px;
 }
 
+.rdp-button:not(.rdp-day_selected):not([disabled]):hover {
+  background: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  cursor: pointer;
+}
+
 .rdp-day_today {
   border: 1px solid var(--navds-global-color-deepblue-500);
+}
+
+.rdp-day_selected {
+  color: var(--navds-semantic-color-text-inverted);
+  background: var(--navds-global-color-deepblue-500);
+}
+
+.rdp-day_disabled {
+  color: var(--navds-semantic-color-text-muted);
 }
 
 /* .navds-date-month * > .rdp-head,
