@@ -78,7 +78,6 @@
   display: flex;
   justify-content: center;
   gap: 0.5rem;
-  margin-bottom: var(--navds-spacing-5);
 }
 
 .navds-datepicker__caption-button {
@@ -93,6 +92,29 @@
 
 .navds-datepicker__caption__month .navds-select__container > select {
   text-transform: capitalize;
+}
+
+.rdp-month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-5);
+}
+
+.rdp-head_cell {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+.rdp-button {
+  all: unset;
+  width: 44px;
+  height: 44px;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.rdp-day_today {
+  border: 1px solid var(--navds-global-color-deepblue-500);
 }
 
 /* .navds-date-month * > .rdp-head,

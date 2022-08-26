@@ -121,7 +121,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
-    const [selected, setSelected] = React.useState<Date>();
+    const [selected, setSelected] = React.useState<Date>(new Date());
 
     /* TMP for dev */
     useEffect(() => {
@@ -153,6 +153,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 className="navds-date__calendar"
                 toYear={2022}
                 fromMonth={new Date("Aug 23 2019")}
+                classNames={{ vhidden: "navds-sr-only" }}
               />
             </Popover>
           )}
