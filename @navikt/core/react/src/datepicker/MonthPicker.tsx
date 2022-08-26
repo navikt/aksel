@@ -1,29 +1,22 @@
-import { Left, Right } from "@navikt/ds-icons";
+/* import { Left, Right } from "@navikt/ds-icons";
+import cl from "clsx";
 import {
+  compareAsc,
+  format,
   isSameYear,
   setMonth,
   setYear,
   startOfMonth,
   startOfYear,
-  format,
-  compareAsc,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
-import {
-  DayPicker,
-  useDayPicker,
-  useNavigation,
-  RootProvider,
-} from "react-day-picker";
-import { BodyShort, Select } from "..";
-import cl from "clsx";
+import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
+import { BodyShort, Select } from ".."; */
 
+/*
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
-  /**
-   * @default "month"
-   */
   mode?: "month";
 }
 
@@ -34,11 +27,11 @@ const TestCaption = ({
   selected: Date;
   onSelect: (m: Date) => void;
 }) => {
-  const { goToMonth, nextMonth, previousMonth } = useNavigation();
+  const { nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
     toDate,
-    formatters: { formatYearCaption, formatMonthCaption },
+    formatters: { formatYearCaption },
     locale,
   } = useDayPicker();
 
@@ -101,7 +94,6 @@ const TestCaption = ({
         ))}
       </Select>
 
-      {/* {format(props.displayMonth, "MMM yyy")} */}
 
       <button
         className="navds-datepicker__caption-button"
@@ -115,8 +107,9 @@ const TestCaption = ({
       </button>
     </div>
   );
-};
+}; */
 
+/*
 const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
   const months: Date[] = [];
   const {
@@ -129,16 +122,13 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
   if (!fromDate) return <></>;
   if (!toDate) return <></>;
 
-  /* Vet ikke hvilket år man står på nå */
   if (isSameYear(fromDate, toDate)) {
-    // only display the months included in the range
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
       months.push(setMonth(date, month));
     }
   } else {
-    // display all the 12 months
-    const date = startOfMonth(new Date()); // Any date should be OK, as we just need the year
+    const date = startOfMonth(new Date());
     for (let month = 0; month <= 11; month++) {
       months.push(setMonth(date, month));
     }
@@ -164,8 +154,9 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
       ))}
     </BodyShort>
   );
-};
+}; */
 
+/*
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   ({ children, mode = "month" }, ref) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
@@ -174,7 +165,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       <RootProvider
         locale={NB}
         selected={selected}
-        /* onSelect={setSelected} */
         className="navds-datepicker-month"
         toYear={2022}
         fromMonth={new Date("Aug 23 2019")}
@@ -190,3 +180,5 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 );
 
 export default MonthPicker;
+ */
+export const F = "";

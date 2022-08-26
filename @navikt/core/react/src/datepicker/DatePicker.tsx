@@ -1,17 +1,24 @@
+import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import { Left, Right } from "@navikt/ds-icons";
 import {
-  format,
   isSameYear,
   setMonth,
   setYear,
   startOfMonth,
   startOfYear,
 } from "date-fns";
-import React, { createContext, forwardRef, useState } from "react";
-import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
-import { Popover, Select } from "..";
-import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import NB from "date-fns/locale/nb";
-import { Back, Left, Next, Right } from "@navikt/ds-icons";
+import React, {
+  createContext,
+  forwardRef,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { DayPicker, useDayPicker, useNavigation } from "react-day-picker";
+import { mergeRefs, Popover, Select } from "..";
+import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -32,17 +39,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
   onOpen: () => null,
 });
 
-const TestDropdown = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <Select label="velg månede" hideLabel style={{ width: "14ch" }}>
-        {props.children}
-      </Select>
-    </div>
-  );
-};
-const TestCaption = (props) => {
+const DatePickerCaption = (props) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
@@ -53,6 +50,7 @@ const TestCaption = (props) => {
 
   if (!fromDate) return <></>;
   if (!toDate) return <></>;
+
   const years: Date[] = [];
   const fromYear = fromDate.getFullYear();
   const toYear = toDate.getFullYear();
@@ -101,8 +99,6 @@ const TestCaption = (props) => {
         ))}
       </Select>
 
-      {/* {format(props.displayMonth, "MMM yyy")} */}
-
       <button
         className="navds-datepicker__caption-button"
         disabled={!nextMonth}
@@ -116,36 +112,47 @@ const TestCaption = (props) => {
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ({ children }, ref) => {
-    const [open, setOpen] = useState(true);
-    const [wrapperRef, setWrapperRef] = useState<HTMLDivElement | null>(null);
+    const [open, setOpen] = useState(false);
+
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selected, setSelected] = React.useState<Date>();
+
+    /* TMP for dev */
+    useEffect(() => {
+      setOpen(true);
+    }, []);
 
     return (
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x) }}
       >
-        <div ref={setWrapperRef}>{children}</div>
-        <Popover
-          arrow={false}
-          anchorEl={wrapperRef}
-          open={open}
-          onClose={() => null}
-          placement="bottom-start"
-        >
-          <DayPicker
-            locale={NB}
-            mode="single"
-            selected={selected}
-            onSelect={setSelected}
-            components={{
-              Caption: TestCaption,
-            }}
-            className="navds-datepicker-calendar"
-            toYear={2022}
-            fromMonth={new Date("Aug 23 2019")}
-          />
-        </Popover>
+        <div ref={mergedRef}>{children}</div>
+        <FloatingPortal>
+          {open && (
+            <Popover
+              arrow={false}
+              anchorEl={wrapperRef.current}
+              open={open}
+              onClose={() => null}
+              placement="bottom-start"
+            >
+              <DayPicker
+                locale={NB}
+                mode="single"
+                selected={selected}
+                onSelect={setSelected}
+                components={{
+                  Caption: DatePickerCaption,
+                }}
+                className="navds-date__calendar"
+                toYear={2022}
+                fromMonth={new Date("Aug 23 2019")}
+              />
+            </Popover>
+          )}
+        </FloatingPortal>
       </DatePickerContext.Provider>
     );
   }

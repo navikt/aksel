@@ -61,10 +61,10 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
         className,
         "navds-form-field",
         `navds-form-field--${size}`,
-        "navds-datepicker__field",
+        "navds-date__field",
         {
-          "navds-datepicker__field--error": hasError,
-          "navds-datepicker__field--disabled": !!inputProps.disabled,
+          "navds-date__field--error": hasError,
+          "navds-date__field--disabled": !!inputProps.disabled,
         }
       )}
     >
@@ -89,7 +89,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           {description}
         </BodyShort>
       )}
-      <div className="navds-datepicker__field-wrapper">
+      <div className="navds-date__field-wrapper">
         <input
           ref={ref}
           {...omit(rest, ["error", "errorId", "size"])}
@@ -98,7 +98,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           /* onChange={(e) => handleChange(e.target.value)} */
           className={cl(
             className,
-            "navds-datepicker__field-input",
+            "navds-date__field-input",
             "navds-text-field__input",
             "navds-body-short",
             `navds-body-${size}`
@@ -109,7 +109,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           type="button"
           size="small"
           onClick={() => onOpen()}
-          className="navds-datepicker__field-input-button"
+          className="navds-date__field-button"
           icon={<Calender title="åpne datovelger" />}
         />
       </div>
