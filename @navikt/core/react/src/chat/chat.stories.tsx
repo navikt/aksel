@@ -118,11 +118,7 @@ export const Position = () => {
 
 export const Avatar = () => {
   return (
-    <Chat
-      avatar={<Illustration />}
-      name={"Ola Normann"}
-      timestamp={"01.01.21 14:00"}
-    >
+    <Chat avatar={<Illustration />} timestamp={"01.01.21 14:00"}>
       <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </Chat.Bubble>
