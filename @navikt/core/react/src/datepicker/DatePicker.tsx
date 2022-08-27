@@ -12,9 +12,15 @@ import { DayPicker } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
 import DatePickerCaption from "./Caption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
+import { getLocale } from "./util";
 
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  /**
+   * Changes datepicker locale
+   * @default "nb" (norsk bokmål)
+   */
+  locale?: "nb" | "nn" | "en";
 }
 
 interface DatePickerComponent
@@ -33,7 +39,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children }, ref) => {
+  ({ children, locale }, ref) => {
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -71,7 +77,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               placement="bottom-start"
             >
               <DayPicker
-                locale={NB}
+                locale={getLocale(locale)}
                 mode="single"
                 selected={selected}
                 onSelect={(selectedDate: Date | undefined) => {
