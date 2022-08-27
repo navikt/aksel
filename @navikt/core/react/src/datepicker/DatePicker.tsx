@@ -1,5 +1,4 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
-import NB from "date-fns/locale/nb";
 import React, {
   createContext,
   forwardRef,
@@ -91,6 +90,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 fromDate={new Date("Aug 23 2019")}
                 classNames={{ vhidden: "navds-sr-only" }}
                 disabled={disabledDays}
+                weekStartsOn={1}
               />
             </Popover>
           )}
