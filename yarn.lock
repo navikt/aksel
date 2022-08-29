@@ -3079,6 +3079,7 @@ __metadata:
     concurrently: 7.2.1
     copyfiles: ^2.4.1
     date-fns: 2.29.2
+    date-fns-tz: 1.3.6
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^27.5.0
@@ -9729,6 +9730,15 @@ __metadata:
     whatwg-mimetype: ^2.3.0
     whatwg-url: ^8.0.0
   checksum: 97caf828aac25e25e04ba6869db0f99c75e6859bb5b424ada28d3e7841941ebf08ddff3c1b1bb4585986bd507a5d54c2a716853ea6cb98af877400e637393e71
+  languageName: node
+  linkType: hard
+
+"date-fns-tz@npm:1.3.6":
+  version: 1.3.6
+  resolution: "date-fns-tz@npm:1.3.6"
+  peerDependencies:
+    date-fns: ">=2.0.0"
+  checksum: b706097dea9b5fbf15011aab781a6733eeb7c593a6e8dc07e5b8e2c3c1cdf243754ec321431de72cec1b9c7e4adfa03fb612ca2a3fcaafe0788ffdff76cf773f
   languageName: node
   linkType: hard
 
