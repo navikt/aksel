@@ -38,7 +38,7 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * @default false
    */
-  haveDropdown?: boolean;
+  yearSelector?: boolean;
   /**
    * Apply the disabled modifier to the matching days.
    */
@@ -61,7 +61,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale, haveDropdown, disabled = [], ...rest }, ref) => {
+  ({ children, locale, yearSelector, disabled = [], ...rest }, ref) => {
     const [open, setOpen] = useState(false);
     const initialDate = !disabled.includes(new Date()) ? undefined : new Date();
 
@@ -107,7 +107,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   setSelected(selectedDate);
                 }}
                 components={{
-                  Caption: haveDropdown ? DropdownCaption : Caption,
+                  Caption: yearSelector ? DropdownCaption : Caption,
                 }}
                 className="navds-date__calendar"
                 toYear={2022}
