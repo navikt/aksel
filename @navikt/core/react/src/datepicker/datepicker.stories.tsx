@@ -29,4 +29,12 @@ export const Default = (props) => (
   </div>
 );
 
+export const Dropdown = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker haveDropdown>
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
 Default.args = {};
