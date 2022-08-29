@@ -35,11 +35,14 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * `today` modifier to style the day.
    */
   today?: Date;
-
   /**
    * @default false
    */
   haveDropdown?: boolean;
+  /**
+   * Apply the disabled modifier to the matching days.
+   */
+  disabled?: Array<Date>;
 }
 
 interface DatePickerComponent
@@ -58,14 +61,15 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale, haveDropdown, ...rest }, ref) => {
+  ({ children, locale, haveDropdown, disabled = [], ...rest }, ref) => {
     const [open, setOpen] = useState(false);
+    const initialDate = !disabled.includes(new Date()) ? undefined : new Date();
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selected, setSelected] = React.useState<Date | undefined>(
-      new Date()
+      initialDate
     );
 
     /* TMP for dev */
@@ -100,7 +104,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 mode="single"
                 selected={selected}
                 onSelect={(selectedDate: Date | undefined) => {
-                  selected !== undefined && setSelected(selectedDate);
+                  setSelected(selectedDate);
                 }}
                 components={{
                   Caption: haveDropdown ? DropdownCaption : Caption,
