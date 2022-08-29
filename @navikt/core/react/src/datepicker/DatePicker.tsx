@@ -52,7 +52,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale }, ref) => {
+  ({ children, locale, ...rest }, ref) => {
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -105,6 +105,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 classNames={{ vhidden: "navds-sr-only" }}
                 disabled={disabledDays}
                 weekStartsOn={1}
+                {...rest}
               />
             </Popover>
           )}
