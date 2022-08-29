@@ -34,6 +34,11 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * `today` modifier to style the day.
    */
   today?: Date;
+
+  /**
+   * @default false
+   */
+  haveDropdown?: boolean;
 }
 
 interface DatePickerComponent
@@ -51,8 +56,10 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
   onOpen: () => null,
 });
 
+const DefaultCaption = () => <div>Test</div>;
+
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale, ...rest }, ref) => {
+  ({ children, locale, haveDropdown, ...rest }, ref) => {
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -97,7 +104,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   selected !== undefined && setSelected(selectedDate);
                 }}
                 components={{
-                  Caption: DatePickerCaption,
+                  Caption: haveDropdown ? DatePickerCaption : DefaultCaption,
                 }}
                 className="navds-date__calendar"
                 toYear={2022}
