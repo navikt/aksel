@@ -37,4 +37,28 @@ export const Dropdown = (props) => (
   </div>
 );
 
+export const LocaleNB = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker yearSelector locale="nb">
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const LocaleNN = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker yearSelector locale="nn">
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const LocaleEN = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker yearSelector locale="en">
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
 Default.args = {};
