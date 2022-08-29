@@ -68,7 +68,14 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
-    { children, locale, yearSelector, focusOnOpen, disabled = [], ...rest },
+    {
+      children,
+      locale = "nb",
+      yearSelector,
+      focusOnOpen,
+      disabled = [],
+      ...rest
+    },
     ref
   ) => {
     const [open, setOpen] = useState(false);

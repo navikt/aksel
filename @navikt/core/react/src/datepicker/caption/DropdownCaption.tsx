@@ -31,7 +31,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
         variant={"tertiary"}
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-        icon={<Left aria-hidden />}
+        icon={<Left title="velg forrige månede" />}
         className="navds-datepicker__caption-button"
       />
 
@@ -62,7 +62,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
       </Select>
 
       <Button
-        icon={<Right aria-hidden />}
+        icon={<Right title="velg neste månede" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
         variant={"tertiary"}
