@@ -9,8 +9,8 @@ import React, {
 } from "react";
 import { DayPicker } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
-import DropdownCaption from "./caption/DropdownCaption";
 import Caption from "./caption/Caption";
+import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 
@@ -105,7 +105,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               arrow={false}
               anchorEl={wrapperRef.current}
               open={open}
-              onClose={() => null}
+              onClose={() => setOpen(false)}
               placement="bottom-start"
             >
               <DayPicker
