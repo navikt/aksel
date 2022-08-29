@@ -43,6 +43,12 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Apply the disabled modifier to the matching days.
    */
   disabled?: Array<Date>;
+  /**
+   * Sets focus on selected date or todays date if not selected.
+   * @warning If selected/todays date is disabled, this will focus first visible day.
+   * @default false
+   */
+  focusOnOpen?: boolean;
 }
 
 interface DatePickerComponent
@@ -61,7 +67,10 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale, yearSelector, disabled = [], ...rest }, ref) => {
+  (
+    { children, locale, yearSelector, focusOnOpen, disabled = [], ...rest },
+    ref
+  ) => {
     const [open, setOpen] = useState(false);
     const initialDate = !disabled.includes(new Date()) ? undefined : new Date();
 
@@ -80,7 +89,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     /* TMP for dev */
     const disabledDays = [
       new Date("Aug 28 2022"),
-      new Date("Aug 29 2022"),
+      new Date("Aug 30 2022"),
       new Date("Aug 31 2022"),
       { from: new Date("Sept 05 2022"), to: new Date("Sept 09 2022") },
     ];
@@ -114,8 +123,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 fromDate={new Date("Aug 23 2019")}
                 classNames={{ vhidden: "navds-sr-only" }}
                 disabled={disabledDays}
-                /* weekStartsOn={1} */
-                initialFocus
+                weekStartsOn={1}
+                initialFocus={focusOnOpen}
                 {...rest}
               />
             </Popover>
