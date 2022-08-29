@@ -13,6 +13,7 @@ import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
+import { labels } from "./utils/labels";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -132,6 +133,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 disabled={disabledDays}
                 weekStartsOn={1}
                 initialFocus={focusOnOpen}
+                labels={labels as any}
                 {...rest}
               />
             </Popover>

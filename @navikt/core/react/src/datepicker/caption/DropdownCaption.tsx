@@ -4,6 +4,7 @@ import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Select } from "../..";
 import { getMonths, getYears } from "../utils/get-dates";
+import { labelMonthDropdown, labelYearDropdown } from "../utils/labels";
 
 export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -11,6 +12,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
     fromDate,
     toDate,
     formatters: { formatYearCaption, formatMonthCaption },
+    labels: { labelPrevious, labelNext },
     locale,
   } = useDayPicker();
 
@@ -25,9 +27,15 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
   const years = getYears(fromDate, toDate);
   const months = getMonths(fromDate, toDate, displayMonth);
 
+  const previousLabel = labelPrevious(previousMonth, { locale });
+  const nextLabel = labelNext(nextMonth, { locale });
+  const yearDropdownLabel = labelYearDropdown(locale);
+  const MonthDropdownLabel = labelMonthDropdown(locale);
+
   return (
     <div className="navds-datepicker__caption">
       <Button
+        aria-label={previousLabel}
         variant={"tertiary"}
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
@@ -36,7 +44,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
       />
 
       <Select
-        label="velg månede"
+        label={MonthDropdownLabel}
         hideLabel
         className="navds-datepicker__caption__month"
         value={displayMonth.getMonth()}
@@ -49,7 +57,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
         ))}
       </Select>
       <Select
-        label="velg år"
+        label={yearDropdownLabel}
         hideLabel
         value={displayMonth.getFullYear()}
         onChange={handleYearChange}
@@ -62,6 +70,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
       </Select>
 
       <Button
+        aria-label={nextLabel}
         icon={<Right title="velg neste månede" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
