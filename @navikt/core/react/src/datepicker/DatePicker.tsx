@@ -13,6 +13,7 @@ import DatePickerCaption from "./Caption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 
+//github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   /**
@@ -20,6 +21,14 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "nb" (norsk bokmål)
    */
   locale?: "nb" | "nn" | "en";
+  /**
+   * The earliest day to start the month navigation.
+   */
+  fromDate?: Date;
+  /**
+   * The latest day to end the month navigation.
+   */
+  toDate?: Date;
 }
 
 interface DatePickerComponent
@@ -38,7 +47,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale }, ref) => {
+  ({ children, locale, footer }, ref) => {
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
