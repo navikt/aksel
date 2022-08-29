@@ -114,7 +114,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 fromDate={new Date("Aug 23 2019")}
                 classNames={{ vhidden: "navds-sr-only" }}
                 disabled={disabledDays}
-                weekStartsOn={1}
+                /* weekStartsOn={1} */
+                initialFocus
                 {...rest}
               />
             </Popover>
