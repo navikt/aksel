@@ -61,6 +61,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
     goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
 
   console.log(displayMonth);
+  console.log(new Date(2019, 0, 1));
 
   return (
     <div className="navds-datepicker__caption">

@@ -1,16 +1,25 @@
-import { isSameYear, setMonth, startOfMonth } from "date-fns";
+import {
+  isSameYear,
+  setMonth,
+  setYear,
+  startOfMonth,
+  startOfYear,
+} from "date-fns";
 
-export const getMonths = (start: Date, end: Date): Date[] => {
+export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
   const dropdownMonths: Date[] = [];
 
   if (isSameYear(start, end)) {
-    // only display the months included in the range
     const date = startOfMonth(start);
     for (let month = start.getMonth(); month <= end.getMonth(); month++) {
       dropdownMonths.push(setMonth(date, month));
     }
+  } else if (isSameYear(current, end)) {
+    const date = startOfMonth(new Date());
+    for (let month = 0; month <= end.getMonth(); month++) {
+      dropdownMonths.push(setMonth(date, month));
+    }
   } else {
-    // display all the 12 months
     const date = startOfMonth(new Date());
     for (let month = 0; month <= 11; month++) {
       dropdownMonths.push(setMonth(date, month));
@@ -20,5 +29,11 @@ export const getMonths = (start: Date, end: Date): Date[] => {
 };
 
 export const getYears = (start: Date, end: Date): Date[] => {
-  return [];
+  const years: Date[] = [];
+  const fromYear = start.getFullYear();
+  const toYear = end.getFullYear();
+  for (let year = fromYear; year <= toYear; year++) {
+    years.push(setYear(startOfYear(new Date()), year));
+  }
+  return years;
 };
