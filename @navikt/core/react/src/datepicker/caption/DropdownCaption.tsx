@@ -8,9 +8,9 @@ import {
 } from "date-fns";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
-import { Button, Select } from "..";
+import { Button, Select } from "../..";
 
-export const DatePickerCaption = (props: CaptionProps) => {
+export const DropdownCaption = (props: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
@@ -85,4 +85,4 @@ export const DatePickerCaption = (props: CaptionProps) => {
   );
 };
 
-export default DatePickerCaption;
+export default DropdownCaption;

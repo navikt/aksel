@@ -9,7 +9,8 @@ import React, {
 } from "react";
 import { DayPicker } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
-import DatePickerCaption from "./Caption";
+import DropdownCaption from "./caption/DropdownCaption";
+import Caption from "./caption/Caption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 
@@ -55,8 +56,6 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
   open: false,
   onOpen: () => null,
 });
-
-const DefaultCaption = () => <div>Test</div>;
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   ({ children, locale, haveDropdown, ...rest }, ref) => {
@@ -104,7 +103,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   selected !== undefined && setSelected(selectedDate);
                 }}
                 components={{
-                  Caption: haveDropdown ? DatePickerCaption : DefaultCaption,
+                  Caption: haveDropdown ? DropdownCaption : Caption,
                 }}
                 className="navds-date__calendar"
                 toYear={2022}
