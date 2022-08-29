@@ -48,6 +48,15 @@ describe("Extracts correct months", () => {
     };
     expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
   });
+  test("Tail part of 2019, including starting month (12)", () => {
+    const t = {
+      start: new Date(2019, 5, 22),
+      end: new Date(2022, 7, 22),
+      current: new Date(2019, 6, 22),
+      res: 7,
+    };
+    expect(getMonths(t.start, t.end, t.current).length).toEqual(t.res);
+  });
 });
 
 describe("Extracts correct years", () => {

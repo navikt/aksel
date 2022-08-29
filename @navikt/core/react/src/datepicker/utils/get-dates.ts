@@ -19,6 +19,11 @@ export const getMonths = (start: Date, end: Date, current: Date): Date[] => {
     for (let month = 0; month <= end.getMonth(); month++) {
       dropdownMonths.push(setMonth(date, month));
     }
+  } else if (isSameYear(current, start)) {
+    const date = startOfMonth(start);
+    for (let month = date.getMonth(); month <= 11; month++) {
+      dropdownMonths.push(setMonth(date, month));
+    }
   } else {
     const date = startOfMonth(new Date());
     for (let month = 0; month <= 11; month++) {

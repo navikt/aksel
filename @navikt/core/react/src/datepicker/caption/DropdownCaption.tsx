@@ -9,6 +9,7 @@ import {
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Select } from "../..";
+import { getMonths, getYears } from "../utils/get-dates";
 
 export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -21,47 +22,21 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
 
   if (!fromDate || !toDate) return <></>;
 
-  const getYears = () => {
-    const years: Date[] = [];
-    const fromYear = fromDate.getFullYear();
-    const toYear = toDate.getFullYear();
-    for (let year = fromYear; year <= toYear; year++) {
-      years.push(setYear(startOfYear(new Date()), year));
-    }
-    return years;
-  };
-
-  const getMonths = () => {
-    const dropdownMonths: Date[] = [];
-
-    if (isSameYear(fromDate, toDate)) {
-      // only display the months included in the range
-      const date = startOfMonth(fromDate);
-      for (
-        let month = fromDate.getMonth();
-        month <= toDate.getMonth();
-        month++
-      ) {
-        dropdownMonths.push(setMonth(date, month));
-      }
-    } else {
-      // display all the 12 months
-      const date = startOfMonth(new Date()); // Any date should be OK, as we just need the year
-      for (let month = 0; month <= 11; month++) {
-        dropdownMonths.push(setMonth(date, month));
-      }
-    }
-    return dropdownMonths;
-  };
-
   const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setYear(startOfMonth(displayMonth), Number(e.target.value)));
 
   const handleMonthChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setMonth(startOfMonth(displayMonth), Number(e.target.value)));
 
-  console.log(displayMonth);
-  console.log(new Date(2019, 0, 1));
+  const years = getYears(fromDate, toDate);
+  const months = getMonths(fromDate, toDate, displayMonth);
+
+  console.table(months.map((x) => x.toLocaleDateString()));
+  console.table({
+    display: displayMonth.toLocaleDateString(),
+    from: fromDate.toLocaleDateString(),
+    to: toDate.toLocaleDateString(),
+  });
 
   return (
     <div className="navds-datepicker__caption">
@@ -80,7 +55,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
         value={displayMonth.getMonth()}
         onChange={handleMonthChange}
       >
-        {getMonths().map((m) => (
+        {months.map((m) => (
           <option key={m.getMonth()} value={m.getMonth()}>
             {formatMonthCaption(m, { locale })}
           </option>
@@ -92,7 +67,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
         value={displayMonth.getFullYear()}
         onChange={handleYearChange}
       >
-        {getYears().map((year) => (
+        {years.map((year) => (
           <option key={year.getFullYear()} value={year.getFullYear()}>
             {formatYearCaption(year, { locale })}
           </option>
