@@ -82,7 +82,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       new Date("Aug 28 2022"),
       new Date("Aug 29 2022"),
       new Date("Aug 30 2022"),
-      new Date("Aug 31 2022"),
     ];
 
     return (

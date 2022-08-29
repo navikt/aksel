@@ -122,8 +122,9 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.rdp-button[disabled]:focus {
-  box-shadow: var(--navds-shadow-focus);
+.rdp-button.rdp-day_selected:not([disabled]):focus {
+  box-shadow: inset 0 0 0 1px white,
+    0 0 0 3px var(--navds-global-color-blue-800);
 }
 
 .rdp-day_today {
