@@ -14,6 +14,7 @@ import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 import { labels } from "./utils/labels";
+import { isSunday, isSameDay } from "date-fns";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -50,6 +51,11 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   focusOnOpen?: boolean;
+  /**
+   * Disable sundays.
+   * @default false
+   */
+  disableSundays?: boolean;
 }
 
 interface DatePickerComponent
@@ -75,6 +81,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       yearSelector,
       focusOnOpen,
       disabled = [],
+      disableSundays = true,
       ...rest
     },
     ref
@@ -130,10 +137,19 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 toYear={2022}
                 fromDate={new Date("Aug 23 2019")}
                 classNames={{ vhidden: "navds-sr-only" }}
-                disabled={disabledDays}
+                disabled={(day) => {
+                  return (
+                    (disableSundays && isSunday(day)) ||
+                    disabled.some((date) => isSameDay(date, day))
+                  );
+                }}
                 weekStartsOn={1}
                 initialFocus={focusOnOpen}
                 labels={labels as any}
+                modifiers={{
+                  sunday: (day) => disableSundays && isSunday(day),
+                }}
+                modifiersClassNames={{ sunday: "rdp-day_sunday" }}
                 {...rest}
               />
             </Popover>

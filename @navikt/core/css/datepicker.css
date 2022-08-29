@@ -140,6 +140,10 @@
   color: var(--navds-semantic-color-text-muted);
 }
 
+.rdp-day_sunday {
+  color: red;
+}
+
 /* .navds-date-month * > .rdp-head,
 .navds-date-month * > .rdp-tbody {
   display: none;

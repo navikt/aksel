@@ -2,6 +2,13 @@ import React from "react";
 import DatePicker from "./DatePicker";
 /* import MonthPicker from "./MonthPicker"; */
 
+const disabledDays = [
+  new Date("Aug 28 2022"),
+  new Date("Aug 29 2022"),
+  new Date("Aug 30 2022"),
+  new Date("Aug 31 2022"),
+];
+
 export default {
   title: "ds-react/Datepicker",
   component: DatePicker,
@@ -56,6 +63,14 @@ export const LocaleNN = (props) => (
 export const LocaleEN = (props) => (
   <div style={{ height: "30rem" }}>
     <DatePicker yearSelector locale="en">
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const DisabledDays = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker disabled={disabledDays} disableSundays locale="en">
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
