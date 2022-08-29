@@ -25,13 +25,6 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
   const years = getYears(fromDate, toDate);
   const months = getMonths(fromDate, toDate, displayMonth);
 
-  console.table(months.map((x) => x.toLocaleDateString()));
-  console.table({
-    display: displayMonth.toLocaleDateString(),
-    from: fromDate.toLocaleDateString(),
-    to: toDate.toLocaleDateString(),
-  });
-
   return (
     <div className="navds-datepicker__caption">
       <Button
