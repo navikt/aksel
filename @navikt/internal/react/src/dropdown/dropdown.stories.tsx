@@ -16,11 +16,17 @@ export const Default = () => {
           <Dropdown.Menu.GroupedList.Heading>
             Systemer og oppslagsverk
           </Dropdown.Menu.GroupedList.Heading>
-          <Dropdown.Menu.GroupedList.Item>Gosys</Dropdown.Menu.GroupedList.Item>
+          <Dropdown.Menu.GroupedList.Item
+            onClick={() => console.log("GroupedList.Item-click")}
+          >
+            Gosys
+          </Dropdown.Menu.GroupedList.Item>
         </Dropdown.Menu.GroupedList>
         <Dropdown.Menu.Divider />
         <Dropdown.Menu.List>
-          <Dropdown.Menu.List.Item>Gosys</Dropdown.Menu.List.Item>
+          <Dropdown.Menu.List.Item onClick={() => console.log("Item-click")}>
+            Gosys
+          </Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item>Psys</Dropdown.Menu.List.Item>
           <Dropdown.Menu.List.Item disabled>Infotrygd</Dropdown.Menu.List.Item>
         </Dropdown.Menu.List>

@@ -24,9 +24,10 @@ export const GroupedItem: GroupedItemType = forwardRef(
         <Component
           {...rest}
           value={rest.children}
-          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) =>
-            context?.onSelect?.(event)
-          }
+          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+            context?.onSelect?.(event);
+            rest?.onClick?.(event);
+          }}
           ref={ref}
           className={cl(
             "navdsi-dropdown__item",
