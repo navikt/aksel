@@ -29,6 +29,11 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * The latest day to end the month navigation.
    */
   toDate?: Date;
+  /**
+   * The today’s date. Default is the current date. This Date will get the
+   * `today` modifier to style the day.
+   */
+  today?: Date;
 }
 
 interface DatePickerComponent
@@ -47,7 +52,7 @@ export const DatePickerContext = createContext<DatePickerContextProps>({
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
-  ({ children, locale, footer }, ref) => {
+  ({ children, locale }, ref) => {
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
