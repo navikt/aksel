@@ -1,5 +1,6 @@
 import React from "react";
 import DatePicker from "./DatePicker";
+import { useDatepicker } from "./useDatepicker";
 /* import MonthPicker from "./MonthPicker"; */
 
 const disabledDays = [
@@ -106,13 +107,26 @@ export const ShowWeekNumber = (props) => (
   </div>
 );
 
-export const FromTo = () => (
-  <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
-    <DatePicker showWeekNumber>
-      <DatePicker.Input label="Fra"></DatePicker.Input>
-    </DatePicker>
-    <DatePicker showWeekNumber>
-      <DatePicker.Input label="Til"></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
+export const FromTo = () => {
+  return (
+    <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
+      <DatePicker showWeekNumber>
+        <DatePicker.Input label="Fra"></DatePicker.Input>
+      </DatePicker>
+      <DatePicker showWeekNumber>
+        <DatePicker.Input label="Til"></DatePicker.Input>
+      </DatePicker>
+    </div>
+  );
+};
+
+export const UseDatepicker = () => {
+  const ctx = useDatepicker();
+  return (
+    <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
+      <DatePicker>
+        <DatePicker.Input label="Velg dato"></DatePicker.Input>
+      </DatePicker>
+    </div>
+  );
+};
