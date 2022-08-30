@@ -99,7 +99,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       yearSelector,
       focusOnOpen = true,
       disabled = [],
-      disableWeekends = true,
+      disableWeekends = false,
       showWeekNumber = false,
       mode = "single",
       ...rest
