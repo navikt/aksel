@@ -84,6 +84,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
       <div className="navds-date__field-wrapper">
         <input
           ref={ref}
+          size={14}
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
