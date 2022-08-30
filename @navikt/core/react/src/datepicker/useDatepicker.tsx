@@ -52,7 +52,6 @@ export const useDatepicker = (
   } = opt;
 
   const locale = getLocaleFromString(_locale);
-  console.log(locale);
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
