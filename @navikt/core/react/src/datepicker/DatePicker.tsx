@@ -92,7 +92,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       yearSelector,
       focusOnOpen = true,
       disabled = [],
-      disableWeekends = false,
+      disableWeekends = true,
       showWeekNumber = false,
       mode = "single",
       ...rest
@@ -126,6 +126,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       { from: new Date("Sept 05 2022"), to: new Date("Sept 09 2022") },
     ]; */
 
+    const handleSelect = (selectedDate?: Date) => {
+      setSelected(selectedDate);
+      selectedDate && setOpen(false);
+    };
+
     return (
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x) }}
@@ -146,9 +151,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 locale={getLocaleFromString(locale)}
                 mode={mode}
                 selected={selected}
-                onSelect={(selectedDate: Date | undefined) => {
-                  setSelected(selectedDate);
-                }}
+                onSelect={handleSelect}
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
                 }}
