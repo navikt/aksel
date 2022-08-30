@@ -14,7 +14,7 @@ import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 import { labels } from "./utils/labels";
-import { isSunday, isSameDay } from "date-fns";
+import { isSunday, isSameDay, isWeekend } from "date-fns";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -52,10 +52,10 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   focusOnOpen?: boolean;
   /**
-   * Disable sundays.
+   * Disable saturday and sunday.
    * @default false
    */
-  disableSundays?: boolean;
+  disableWeekends?: boolean;
 }
 
 interface DatePickerComponent
@@ -81,7 +81,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       yearSelector,
       focusOnOpen,
       disabled = [],
-      disableSundays = true,
+      disableWeekends = false,
       ...rest
     },
     ref
@@ -139,7 +139,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 classNames={{ vhidden: "navds-sr-only" }}
                 disabled={(day) => {
                   return (
-                    (disableSundays && isSunday(day)) ||
+                    (disableWeekends && isWeekend(day)) ||
                     disabled.some((date) => isSameDay(date, day))
                   );
                 }}
@@ -147,9 +147,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 initialFocus={focusOnOpen}
                 labels={labels as any}
                 modifiers={{
-                  sunday: (day) => disableSundays && isSunday(day),
+                  weekend: (day) => disableWeekends && isWeekend(day),
                 }}
-                modifiersClassNames={{ sunday: "rdp-day_sunday" }}
+                modifiersClassNames={{ weekend: "rdp-day__weekend" }}
                 {...rest}
               />
             </Popover>

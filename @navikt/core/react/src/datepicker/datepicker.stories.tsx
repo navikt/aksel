@@ -70,7 +70,7 @@ export const LocaleEN = (props) => (
 
 export const DisabledDays = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker disabled={disabledDays} disableSundays locale="en">
+    <DatePicker disabled={disabledDays} disableWeekends locale="en">
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
