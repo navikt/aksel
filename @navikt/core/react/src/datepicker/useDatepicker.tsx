@@ -1,12 +1,13 @@
-import { differenceInCalendarDays, parse } from "date-fns";
-import { useState } from "react";
-import { DatePickerProps } from "./DatePicker";
+import { differenceInCalendarDays } from "date-fns";
 import _format from "date-fns/format";
-import { getLocaleFromString, isValidDate } from "./utils/util";
+import { useState } from "react";
 import {
   DayClickEventHandler,
   MonthChangeEventHandler,
 } from "react-day-picker";
+import { DatePickerProps } from "./DatePicker";
+import { INPUT_DATE_STRING_FORMAT, parseDate } from "./utils/parse-date";
+import { getLocaleFromString, isValidDate } from "./utils/util";
 
 interface useDatepickerProps
   extends Pick<
@@ -35,7 +36,6 @@ export const useDatepicker = (
   const {
     locale: _locale = "nb",
     required,
-    format = "PP",
     defaultSelected,
     today = new Date(),
     fromDate,
@@ -44,17 +44,12 @@ export const useDatepicker = (
 
   const locale = getLocaleFromString(_locale);
 
-  // Shortcut to the DateFns functions
-  const parseValue = (value: string) => parse(value, format, today, { locale });
-  const parseFallbackValue = (value: string) =>
-    parse(value, "P", today, { locale });
-
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
 
   const defaultInputValue = defaultSelected
-    ? _format(defaultSelected, format, { locale })
+    ? _format(defaultSelected, INPUT_DATE_STRING_FORMAT, { locale })
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
@@ -67,7 +62,9 @@ export const useDatepicker = (
   const setSelected = (date: Date | undefined) => {
     setSelectedDay(date);
     setMonth(date ?? today);
-    setInputValue(date ? _format(date, format, { locale }) : "");
+    setInputValue(
+      date ? _format(date, INPUT_DATE_STRING_FORMAT, { locale }) : ""
+    );
   };
 
   const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
@@ -79,15 +76,10 @@ export const useDatepicker = (
       reset();
       return;
     }
-    let day = parseValue(e.target.value);
-    let isFallback = false;
-    if (!isValidDate(day)) {
-      day = parseFallbackValue(e.target.value);
-      isFallback = true;
-    }
+    let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
       setMonth(day);
-      isFallback && setInputValue(_format(day, format, { locale }));
+      setInputValue(_format(day, INPUT_DATE_STRING_FORMAT, { locale }));
     }
   };
 
@@ -98,20 +90,17 @@ export const useDatepicker = (
       return;
     }
     setSelectedDay(day);
-    setInputValue(day ? _format(day, format, { locale }) : "");
+    setInputValue(
+      day ? _format(day, INPUT_DATE_STRING_FORMAT, { locale }) : ""
+    );
   };
 
   // When changing the input field, save its value in state and check if the
   // string is a valid date. If it is a valid day, set it as selected and update
   // the calendar’s month.
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    console.log(parseFallbackValue(e.target.value));
     setInputValue(e.target.value);
-    let day = parseValue(e.target.value);
-
-    if (!isValidDate(day)) {
-      day = parseFallbackValue(e.target.value);
-    }
+    const day = parseDate(e.target.value, today, locale);
 
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
