@@ -1,3 +1,4 @@
+import { isSameDay } from "date-fns";
 import React from "react";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
@@ -121,11 +122,19 @@ export const FromTo = () => {
 };
 
 export const UseDatepicker = () => {
-  const ctx = useDatepicker();
+  const ctx = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+  });
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
       <DatePicker {...ctx?.dayPickerProps}>
-        <DatePicker.Input {...ctx?.inputProps} label="Velg dato" />
+        <DatePicker.Input
+          error={
+            isSameDay(ctx.selectedDay, new Date()) ? "Invalid date" : undefined
+          }
+          {...ctx?.inputProps}
+          label="Velg dato"
+        />
       </DatePicker>
     </div>
   );

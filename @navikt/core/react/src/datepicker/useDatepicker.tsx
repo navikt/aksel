@@ -141,5 +141,5 @@ export const useDatepicker = (
     value: inputValue,
   };
 
-  return { dayPickerProps, inputProps, reset, setSelected };
+  return { dayPickerProps, inputProps, reset, selectedDay, setSelected };
 };
