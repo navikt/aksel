@@ -1,4 +1,5 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import { isSameDay, isWeekend } from "date-fns";
 import React, {
   createContext,
   forwardRef,
@@ -14,7 +15,6 @@ import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocale } from "./util";
 import { labels } from "./utils/labels";
-import { isSunday, isSameDay, isWeekend } from "date-fns";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
