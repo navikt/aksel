@@ -13,7 +13,7 @@ export const disableDate = (
       const selection = disabledSelection[i];
       if (isDateRange(selection)) {
         if (selection.from && selection.to) {
-          result = date >= selection?.from && date <= selection.to;
+          result = date >= selection.from && date <= selection.to;
         }
       } else if (selection instanceof Date) {
         result = isSameDay(selection, date);
