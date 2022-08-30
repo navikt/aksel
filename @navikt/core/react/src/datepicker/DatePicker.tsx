@@ -1,4 +1,5 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import FocusTrap from "focus-trap-react";
 import { isSameDay, isWeekend } from "date-fns";
 import React, {
   createContext,
@@ -48,7 +49,7 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Sets focus on selected date or todays date if not selected.
    * @warning If selected/todays date is disabled, this will focus first visible day.
-   * @default false
+   * @default true
    */
   focusOnOpen?: boolean;
   /**
@@ -84,7 +85,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       children,
       locale = "nb",
       yearSelector,
-      focusOnOpen,
+      focusOnOpen = true,
       disabled = [],
       disableWeekends = false,
       mode = "single",
@@ -122,43 +123,52 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         <div ref={mergedRef}>{children}</div>
         <FloatingPortal>
           {open && (
-            <Popover
-              arrow={false}
-              anchorEl={wrapperRef.current}
-              open={open}
-              onClose={() => setOpen(false)}
-              placement="bottom-start"
+            <FocusTrap
+              active={true}
+              focusTrapOptions={{
+                clickOutsideDeactivates: true,
+                onDeactivate: () => setOpen(false),
+                fallbackFocus: "body",
+              }}
             >
-              <DayPicker
-                locale={getLocale(locale)}
-                mode={mode}
-                selected={selected}
-                onSelect={(selectedDate: Date | undefined) => {
-                  setSelected(selectedDate);
-                }}
-                components={{
-                  Caption: yearSelector ? DropdownCaption : Caption,
-                }}
-                className="navds-date__calendar"
-                toYear={2022}
-                fromDate={new Date("Aug 23 2019")}
-                classNames={{ vhidden: "navds-sr-only" }}
-                disabled={(day) => {
-                  return (
-                    (disableWeekends && isWeekend(day)) ||
-                    disabled.some((date) => isSameDay(date, day))
-                  );
-                }}
-                weekStartsOn={1}
-                initialFocus={focusOnOpen}
-                labels={labels as any}
-                modifiers={{
-                  weekend: (day) => disableWeekends && isWeekend(day),
-                }}
-                modifiersClassNames={{ weekend: "rdp-day__weekend" }}
-                {...rest}
-              />
-            </Popover>
+              <Popover
+                arrow={false}
+                anchorEl={wrapperRef.current}
+                open={open}
+                onClose={() => setOpen(false)}
+                placement="bottom-start"
+              >
+                <DayPicker
+                  locale={getLocale(locale)}
+                  mode={mode}
+                  selected={selected}
+                  onSelect={(selectedDate: Date | undefined) => {
+                    setSelected(selectedDate);
+                  }}
+                  components={{
+                    Caption: yearSelector ? DropdownCaption : Caption,
+                  }}
+                  className="navds-date__calendar"
+                  toYear={2022}
+                  fromDate={new Date("Aug 23 2019")}
+                  classNames={{ vhidden: "navds-sr-only" }}
+                  disabled={(day) => {
+                    return (
+                      (disableWeekends && isWeekend(day)) ||
+                      disabled.some((date) => isSameDay(date, day))
+                    );
+                  }}
+                  weekStartsOn={1}
+                  initialFocus={focusOnOpen}
+                  labels={labels as any}
+                  modifiers={{
+                    weekend: (day) => disableWeekends && isWeekend(day),
+                  }}
+                  modifiersClassNames={{ weekend: "rdp-day__weekend" }}
+                  {...rest}
+                />
+              </Popover>
+            </FocusTrap>
           )}
         </FloatingPortal>
       </DatePickerContext.Provider>

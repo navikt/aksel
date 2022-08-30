@@ -35,6 +35,7 @@ export const Default = (props) => {
         locale={props?.locale}
         yearSelector={props?.yearSelector}
         disableWeekends={props?.disableWeekends}
+        focusOnOpen={props?.focusOnOpen}
       >
         <DatePicker.Input label="Velg dato" size={props?.size} />
       </DatePicker>
@@ -45,6 +46,7 @@ export const Default = (props) => {
 Default.args = {
   yearSelector: false,
   disableWeekends: false,
+  focusOnOpen: true,
 };
 
 export const Dropdown = (props) => (
