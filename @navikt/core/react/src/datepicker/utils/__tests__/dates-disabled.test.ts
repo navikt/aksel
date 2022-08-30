@@ -28,4 +28,21 @@ describe("Returns if date should be disabled", () => {
     ];
     expect(disableDate(dateToDisable, new Date("Jul 18 2018"))).toBe(false);
   });
+
+  test("Should be disabled using Array with range (true)", () => {
+    const dateToDisable = [
+      { from: new Date("Jul 05 2018"), to: new Date("Sept 09 2020") },
+      { from: new Date("Sep 18 2020"), to: new Date("Des 09 2020") },
+      new Date("Nov 2 2019"),
+    ];
+    expect(disableDate(dateToDisable, new Date("Jul 18 2018"))).toBe(true);
+  });
+
+  test("Should not be disabled using Array with range (false)", () => {
+    const dateToDisable = [
+      { from: new Date("Jul 05 2018"), to: new Date("Sept 09 2020") },
+      new Date("Nov 2 2019"),
+    ];
+    expect(disableDate(dateToDisable, new Date("Jul 4 2018"))).toBe(false);
+  });
 });
