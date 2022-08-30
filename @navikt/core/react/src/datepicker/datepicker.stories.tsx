@@ -44,6 +44,14 @@ export const Dropdown = (props) => (
   </div>
 );
 
+export const NoDropdown = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker>
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
 export const LocaleNB = (props) => (
   <div style={{ height: "30rem" }}>
     <DatePicker yearSelector locale="nb">

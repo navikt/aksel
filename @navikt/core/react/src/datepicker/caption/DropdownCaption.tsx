@@ -33,7 +33,7 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
   const MonthDropdownLabel = labelMonthDropdown(locale);
 
   return (
-    <div className="navds-datepicker__caption">
+    <div className="navds-datepicker__caption-dropdown">
       <Button
         aria-label={previousLabel}
         variant={"tertiary"}

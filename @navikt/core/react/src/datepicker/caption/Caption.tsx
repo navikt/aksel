@@ -1,81 +1,44 @@
 import { Left, Right } from "@navikt/ds-icons";
-import {
-  isSameYear,
-  setMonth,
-  setYear,
-  startOfMonth,
-  startOfYear,
-} from "date-fns";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
-import { Button, Select } from "../..";
+import { Button, Label } from "../..";
 
-export const DatePickerCaption = (props: CaptionProps) => {
+export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
     toDate,
-    formatters: { formatYearCaption, formatMonthCaption },
+    labels: { labelPrevious, labelNext },
+    formatters: { formatCaption },
     locale,
   } = useDayPicker();
 
-  if (!fromDate) return <></>;
-  if (!toDate) return <></>;
+  if (!fromDate || !toDate) return <></>;
 
-  const years: Date[] = [];
-  const fromYear = fromDate.getFullYear();
-  const toYear = toDate.getFullYear();
-  for (let year = fromYear; year <= toYear; year++) {
-    years.push(setYear(startOfYear(new Date()), year));
-  }
-
-  const dropdownMonths: Date[] = [];
-
-  if (isSameYear(fromDate, toDate)) {
-    // only display the months included in the range
-    const date = startOfMonth(fromDate);
-    for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
-      dropdownMonths.push(setMonth(date, month));
-    }
-  } else {
-    // display all the 12 months
-    const date = startOfMonth(new Date()); // Any date should be OK, as we just need the year
-    for (let month = 0; month <= 11; month++) {
-      dropdownMonths.push(setMonth(date, month));
-    }
-  }
+  const previousLabel = labelPrevious(previousMonth, { locale });
+  const nextLabel = labelNext(nextMonth, { locale });
 
   return (
     <div className="navds-datepicker__caption">
       <Button
+        aria-label={previousLabel}
         variant={"tertiary"}
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-        icon={<Left aria-hidden />}
+        icon={<Left title="velg forrige månede" />}
         className="navds-datepicker__caption-button"
       />
-
-      <Select
-        label="velg månede"
-        hideLabel
-        className="navds-datepicker__caption__month"
+      <Label
+        as="span"
+        aria-live="polite"
+        aria-atomic="true"
+        className="navds-datepicker__caption-label"
       >
-        {dropdownMonths.map((m) => (
-          <option key={m.getMonth()} value={m.getMonth()}>
-            {formatMonthCaption(m, { locale })}
-          </option>
-        ))}
-      </Select>
-      <Select label="velg år" hideLabel>
-        {years.map((year) => (
-          <option key={year.getFullYear()} value={year.getFullYear()}>
-            {formatYearCaption(year, { locale })}
-          </option>
-        ))}
-      </Select>
-
+        {formatCaption(displayMonth, { locale })}
+      </Label>
       <Button
-        icon={<Right aria-hidden />}
+        aria-label={nextLabel}
+        icon={<Right title="velg neste månede" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
         variant={"tertiary"}
