@@ -56,6 +56,11 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   disableWeekends?: boolean;
+  /**
+   * Three selection modes to display days as selected.
+   * @default "single"
+   */
+  mode?: "single" | "multiple" | "range";
 }
 
 interface DatePickerComponent
@@ -82,6 +87,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       focusOnOpen,
       disabled = [],
       disableWeekends = false,
+      mode = "single",
       ...rest
     },
     ref
@@ -125,7 +131,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             >
               <DayPicker
                 locale={getLocale(locale)}
-                mode="single"
+                mode={mode}
                 selected={selected}
                 onSelect={(selectedDate: Date | undefined) => {
                   setSelected(selectedDate);
