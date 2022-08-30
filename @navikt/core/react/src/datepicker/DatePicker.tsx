@@ -1,5 +1,4 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
-import FocusTrap from "focus-trap-react";
 import { isSameDay, isWeekend } from "date-fns";
 import React, {
   createContext,
@@ -115,12 +114,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     }, []);
 
     /* TMP for dev */
-    const disabledDays = [
+    /* const disabledDays = [
       new Date("Aug 28 2022"),
       new Date("Aug 30 2022"),
       new Date("Aug 31 2022"),
       { from: new Date("Sept 05 2022"), to: new Date("Sept 09 2022") },
-    ];
+    ]; */
 
     return (
       <DatePickerContext.Provider
