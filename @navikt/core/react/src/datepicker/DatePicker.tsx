@@ -104,14 +104,14 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
-    /* const [selected, setSelected] = React.useState<Date | undefined>(
+    const [selected, setSelected] = React.useState<Date | undefined>(
       initialDate
-    ); */
+    );
 
     /* TMP for dev */
-    /* useEffect(() => {
+    useEffect(() => {
       setOpen(true);
-    }, []); */
+    }, []);
 
     /* TMP for dev */
     /* const disabledDays = [
@@ -140,10 +140,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <DayPicker
                 locale={getLocaleFromString(locale)}
                 mode={mode}
-                /* selected={selected}
+                selected={selected}
                 onSelect={(selectedDate: Date | undefined) => {
                   setSelected(selectedDate);
-                }} */
+                }}
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
                 }}
