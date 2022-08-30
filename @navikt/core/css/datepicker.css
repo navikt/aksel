@@ -176,6 +176,12 @@
   color: red;
 }
 
+/* Left-side weeknumbers */
+.rdp-weeknumber {
+  color: var(--navds-global-color-gray-600);
+  font-size: 14px;
+}
+
 /* .navds-date-month * > .rdp-head,
 .navds-date-month * > .rdp-tbody {
   display: none;

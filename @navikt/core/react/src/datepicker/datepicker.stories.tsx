@@ -47,6 +47,7 @@ Default.args = {
   yearSelector: false,
   disableWeekends: false,
   focusOnOpen: true,
+  showWeekNumber: false,
 };
 
 export const Dropdown = (props) => (
@@ -92,6 +93,14 @@ export const LocaleEN = (props) => (
 export const DisabledDays = (props) => (
   <div style={{ height: "30rem" }}>
     <DatePicker disabled={disabledDays} disableWeekends locale="en">
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const ShowWeekNumber = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker showWeekNumber>
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>

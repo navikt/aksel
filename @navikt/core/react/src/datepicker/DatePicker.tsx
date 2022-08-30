@@ -62,6 +62,11 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "single"
    */
   mode?: "single" | "multiple" | "range";
+  /**
+   * Shows week numbers on left-column
+   * @default false
+   */
+  showWeekNumber?: boolean;
 }
 
 interface DatePickerComponent
@@ -88,6 +93,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       focusOnOpen = true,
       disabled = [],
       disableWeekends = false,
+      showWeekNumber = false,
       mode = "single",
       ...rest
     },
@@ -165,6 +171,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     weekend: (day) => disableWeekends && isWeekend(day),
                   }}
                   modifiersClassNames={{ weekend: "rdp-day__weekend" }}
+                  showWeekNumber={showWeekNumber}
                   {...rest}
                 />
               </Popover>
