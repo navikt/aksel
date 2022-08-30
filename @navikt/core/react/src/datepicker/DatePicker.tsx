@@ -170,6 +170,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 disabled={(day) => {
                   return (
                     (disableWeekends && isWeekend(day)) ||
+                    (disablePublicHolidays &&
+                      !!isNorwegianPublicHoliday(day)) ||
                     disableDate(disabled, day)
                   );
                 }}
