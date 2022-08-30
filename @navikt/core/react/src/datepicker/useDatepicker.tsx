@@ -28,7 +28,16 @@ interface useDatepickerProps
   required?: boolean;
 }
 
-interface useDatepickerValue {}
+interface DatepickerHookProps {}
+interface DatepickerInputHookProps {}
+
+interface useDatepickerValue {
+  dayPickerProps: DatepickerHookProps;
+  inputProps: DatepickerInputHookProps;
+  reset: () => void;
+  selectedDay?: Date;
+  setSelected: (date?: Date) => void;
+}
 
 export const useDatepicker = (
   opt: useDatepickerProps = {}
@@ -43,7 +52,7 @@ export const useDatepicker = (
   } = opt;
 
   const locale = getLocaleFromString(_locale);
-
+  console.log(locale);
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
@@ -112,20 +121,19 @@ export const useDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps = {
+  const dayPickerProps: DatepickerHookProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onDayClick: handleDayClick,
     selected: selectedDay,
-    locale,
+    locale: _locale,
     fromDate,
     toDate,
     today,
   };
 
-  const inputProps = {
+  const inputProps: DatepickerInputHookProps = {
     onChange: handleChange,
-    /* onBlur: handleBlur, */
     onFocus: handleFocus,
     value: inputValue,
   };

@@ -120,17 +120,18 @@ export const FromTo = () => {
 };
 
 export const UseDatepicker = () => {
-  const ctx = useDatepicker({
+  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    locale: "en",
   });
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
-      <DatePicker {...ctx?.dayPickerProps}>
+      <DatePicker {...dayPickerProps}>
         <DatePicker.Input
           error={
-            isSameDay(ctx.selectedDay, new Date()) ? "Invalid date" : undefined
+            isSameDay(selectedDay, new Date()) ? "Invalid date" : undefined
           }
-          {...ctx?.inputProps}
+          {...inputProps}
           label="Velg dato"
         />
       </DatePicker>
