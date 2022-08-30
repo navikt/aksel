@@ -1,5 +1,5 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
-import { isSameDay, isWeekend } from "date-fns";
+import { isWeekend } from "date-fns";
 import React, {
   createContext,
   forwardRef,
