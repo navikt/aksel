@@ -126,7 +126,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x) }}
       >
-        <div ref={mergedRef} style={{ height: "fit-content" }}>
+        <div ref={mergedRef} className="navds-date__wrapper">
           {children}
         </div>
         <FloatingPortal>
