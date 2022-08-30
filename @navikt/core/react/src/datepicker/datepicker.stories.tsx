@@ -1,5 +1,5 @@
 import { isSameDay } from "date-fns";
-import React, { useRef } from "react";
+import React from "react";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
 /* import MonthPicker from "./MonthPicker"; */
@@ -120,18 +120,15 @@ export const FromTo = () => {
 };
 
 export const UseDatepicker = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
   const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
-    inputRef,
   });
 
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
         <DatePicker.Input
-          ref={inputRef}
           error={
             isSameDay(selectedDay, new Date()) ? "Invalid date" : undefined
           }

@@ -72,10 +72,6 @@ export interface DatePickerProps
    * @default false
    */
   showWeekNumber?: boolean;
-  /**
-   * Element to return focus to when closing datepicker
-   */
-  focusElementOnClose?: React.MutableRefObject<HTMLInputElement>;
 }
 
 interface DatePickerComponent
@@ -86,11 +82,13 @@ interface DatePickerComponent
 interface DatePickerContextProps {
   open: boolean;
   onOpen: () => void;
+  buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
 }
 
 export const DatePickerContext = createContext<DatePickerContextProps>({
   open: false,
   onOpen: () => null,
+  buttonRef: null,
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
@@ -104,7 +102,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disableWeekends = true,
       showWeekNumber = false,
       mode = "single",
-      focusElementOnClose,
       ...rest
     },
     ref
@@ -117,6 +114,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         : new Date();
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selected, setSelected] = React.useState<Date | undefined>(
@@ -139,12 +137,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const handleSelect = (selectedDate?: Date) => {
       setSelected(selectedDate);
       selectedDate && setOpen(false);
-      focusElementOnClose && focusElementOnClose?.current?.focus();
+      buttonRef && buttonRef?.current?.focus();
     };
 
     return (
       <DatePickerContext.Provider
-        value={{ open, onOpen: () => setOpen((x) => !x) }}
+        value={{ open, onOpen: () => setOpen((x) => !x), buttonRef }}
       >
         <div ref={mergedRef} className="navds-date__wrapper">
           {children}

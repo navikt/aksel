@@ -34,7 +34,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
 >((props, ref) => {
-  const { onOpen } = useContext(DatePickerContext);
+  const { onOpen, buttonRef } = useContext(DatePickerContext);
 
   const {
     inputProps,
@@ -97,6 +97,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           )}
         />
         <Button
+          ref={buttonRef}
           variant="tertiary"
           type="button"
           size="small"

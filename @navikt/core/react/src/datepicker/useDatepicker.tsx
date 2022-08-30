@@ -43,7 +43,6 @@ interface DatepickerHookProps
     | "locale"
     | "toDate"
     | "today"
-    | "focusElementOnClose"
   > {}
 
 interface DatepickerInputHookProps {}
@@ -66,7 +65,6 @@ export const useDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
-    inputRef,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -147,7 +145,6 @@ export const useDatepicker = (
     fromDate,
     toDate,
     today,
-    focusElementOnClose: inputRef,
   };
 
   const inputProps: DatepickerInputHookProps = {
