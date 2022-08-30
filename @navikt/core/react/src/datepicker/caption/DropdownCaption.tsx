@@ -43,31 +43,33 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
         className="navds-datepicker__caption-button"
       />
 
-      <Select
-        label={MonthDropdownLabel}
-        hideLabel
-        className="navds-datepicker__caption__month"
-        value={displayMonth.getMonth()}
-        onChange={handleMonthChange}
-      >
-        {months.map((m) => (
-          <option key={m.getMonth()} value={m.getMonth()}>
-            {formatMonthCaption(m, { locale })}
-          </option>
-        ))}
-      </Select>
-      <Select
-        label={yearDropdownLabel}
-        hideLabel
-        value={displayMonth.getFullYear()}
-        onChange={handleYearChange}
-      >
-        {years.map((year) => (
-          <option key={year.getFullYear()} value={year.getFullYear()}>
-            {formatYearCaption(year, { locale })}
-          </option>
-        ))}
-      </Select>
+      <div className="navds-datepicker__caption__month-wrapper">
+        <Select
+          label={MonthDropdownLabel}
+          hideLabel
+          className="navds-datepicker__caption__month"
+          value={displayMonth.getMonth()}
+          onChange={handleMonthChange}
+        >
+          {months.map((m) => (
+            <option key={m.getMonth()} value={m.getMonth()}>
+              {formatMonthCaption(m, { locale })}
+            </option>
+          ))}
+        </Select>
+        <Select
+          label={yearDropdownLabel}
+          hideLabel
+          value={displayMonth.getFullYear()}
+          onChange={handleYearChange}
+        >
+          {years.map((year) => (
+            <option key={year.getFullYear()} value={year.getFullYear()}>
+              {formatYearCaption(year, { locale })}
+            </option>
+          ))}
+        </Select>
+      </div>
 
       <Button
         aria-label={nextLabel}

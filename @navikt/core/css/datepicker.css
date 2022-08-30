@@ -87,6 +87,13 @@
 
 .navds-datepicker__caption-dropdown {
   display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navds-datepicker__caption__month-wrapper {
+  display: flex;
   justify-content: center;
   gap: 0.5rem;
   align-items: center;

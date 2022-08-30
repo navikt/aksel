@@ -19,22 +19,33 @@ export default {
         options: ["medium", "small"],
       },
     },
+    locale: {
+      control: {
+        type: "radio",
+        options: ["nb", "nn", "en"],
+      },
+    },
   },
 };
 
-/* export const MonthPickerDemo = (props) => (
-  <div style={{ height: "30rem" }}>
-    <MonthPicker />
-  </div>
-); */
+export const Default = (props) => {
+  return (
+    <div style={{ height: "30rem" }}>
+      <DatePicker
+        locale={props?.locale}
+        yearSelector={props?.yearSelector}
+        disableWeekends={props?.disableWeekends}
+      >
+        <DatePicker.Input label="Velg dato" size={props?.size} />
+      </DatePicker>
+    </div>
+  );
+};
 
-export const Default = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker>
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
+Default.args = {
+  yearSelector: false,
+  disableWeekends: false,
+};
 
 export const Dropdown = (props) => (
   <div style={{ height: "30rem" }}>
@@ -83,5 +94,3 @@ export const DisabledDays = (props) => (
     </DatePicker>
   </div>
 );
-
-Default.args = {};
