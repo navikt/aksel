@@ -8,13 +8,14 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { DayPicker } from "react-day-picker";
+import { DayPicker, DateRange } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocaleFromString } from "./utils/util";
 import { labels } from "./utils/labels";
+import { disableDate } from "./utils/dates-disabled";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -44,7 +45,7 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Apply the disabled modifier to the matching days.
    */
-  disabled?: Array<Date>;
+  disabled?: Array<Date | DateRange>;
   /**
    * Sets focus on selected date or todays date if not selected.
    * @warning If selected/todays date is disabled, this will focus first visible day.
@@ -99,7 +100,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     ref
   ) => {
     const [open, setOpen] = useState(false);
-    const initialDate = !disabled.includes(new Date()) ? undefined : new Date();
+    const initialDate =
+      disableDate(disabled, new Date()) ||
+      (disableWeekends && isWeekend(new Date()))
+        ? undefined
+        : new Date();
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
@@ -154,7 +159,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 disabled={(day) => {
                   return (
                     (disableWeekends && isWeekend(day)) ||
-                    disabled.some((date) => isSameDay(date, day))
+                    disableDate(disabled, day)
                   );
                 }}
                 weekStartsOn={1}

@@ -5,10 +5,8 @@ import { useDatepicker } from "./useDatepicker";
 /* import MonthPicker from "./MonthPicker"; */
 
 const disabledDays = [
-  new Date("Aug 28 2022"),
-  new Date("Aug 29 2022"),
-  new Date("Aug 30 2022"),
-  new Date("Aug 31 2022"),
+  new Date("Aug 10 2022"),
+  { from: new Date("Aug 31 2022"), to: new Date("Sep 8 2022") },
 ];
 
 export default {
