@@ -16,10 +16,7 @@ import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocaleFromString } from "./utils/util";
 import { labels } from "./utils/labels";
 import { disableDate } from "./utils/dates-disabled";
-import {
-  getNorwegianHolidays,
-  isNorwegianPublicHoliday,
-} from "./utils/holidays";
+import { isNorwegianPublicHoliday } from "./utils/holidays";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps
@@ -135,14 +132,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     useEffect(() => {
       setOpen(true);
     }, []);
-
-    /* TMP for dev */
-    /* const disabledDays = [
-        new Date("Aug 28 2022"),
-        new Date("Aug 30 2022"),
-        new Date("Aug 31 2022"),
-      { from: new Date("Sept 05 2022"), to: new Date("Sept 09 2022") },
-    ]; */
 
     const handleSelect = (selectedDate?: Date) => {
       setSelected(selectedDate);
