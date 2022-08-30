@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { DayPicker, DateRange } from "react-day-picker";
+import { DayPicker, DateRange, DayPickerBase } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
@@ -18,7 +18,12 @@ import { labels } from "./utils/labels";
 import { disableDate } from "./utils/dates-disabled";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
-export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface DatePickerProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    Pick<
+      DayPickerBase,
+      "month" | "onMonthChange" | "today" | "selected" | "onDayClick"
+    > {
   children?: React.ReactNode;
   /**
    * Changes datepicker locale
@@ -67,6 +72,10 @@ export interface DatePickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   showWeekNumber?: boolean;
+  /**
+   * Element to return focus to when closing datepicker
+   */
+  focusElementOnClose?: React.MutableRefObject<HTMLInputElement>;
 }
 
 interface DatePickerComponent
@@ -95,6 +104,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disableWeekends = true,
       showWeekNumber = false,
       mode = "single",
+      focusElementOnClose,
       ...rest
     },
     ref
@@ -129,6 +139,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const handleSelect = (selectedDate?: Date) => {
       setSelected(selectedDate);
       selectedDate && setOpen(false);
+      focusElementOnClose && focusElementOnClose?.current?.focus();
     };
 
     return (

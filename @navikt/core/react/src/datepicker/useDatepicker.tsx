@@ -26,9 +26,26 @@ interface useDatepickerProps
   format?: string;
   /** Make the selection required. */
   required?: boolean;
+  /**
+   *
+   */
+  inputRef?: React.MutableRefObject<HTMLInputElement>;
 }
 
-interface DatepickerHookProps {}
+interface DatepickerHookProps
+  extends Pick<
+    DatePickerProps,
+    | "month"
+    | "onMonthChange"
+    | "onDayClick"
+    | "selected"
+    | "fromDate"
+    | "locale"
+    | "toDate"
+    | "today"
+    | "focusElementOnClose"
+  > {}
+
 interface DatepickerInputHookProps {}
 
 interface useDatepickerValue {
@@ -49,6 +66,7 @@ export const useDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
+    inputRef,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -129,6 +147,7 @@ export const useDatepicker = (
     fromDate,
     toDate,
     today,
+    focusElementOnClose: inputRef,
   };
 
   const inputProps: DatepickerInputHookProps = {
