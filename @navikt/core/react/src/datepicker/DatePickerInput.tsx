@@ -43,17 +43,9 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
     errorId,
     showErrorMsg,
     hasError,
-  } = useFormField(props, "datepicker");
+  } = useFormField(props, "datepicker-input");
 
-  const {
-    className,
-    hideLabel = false,
-    label,
-    description,
-    value,
-    defaultValue,
-    ...rest
-  } = props;
+  const { className, hideLabel = false, label, description, ...rest } = props;
 
   return (
     <div
@@ -95,7 +87,6 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
-          /* onChange={(e) => handleChange(e.target.value)} */
           className={cl(
             className,
             "navds-date__field-input",

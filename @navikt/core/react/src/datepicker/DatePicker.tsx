@@ -13,7 +13,7 @@ import { mergeRefs, Popover } from "..";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
-import { getLocale } from "./util";
+import { getLocaleFromString } from "./utils/util";
 import { labels } from "./utils/labels";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
@@ -104,14 +104,14 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
-    const [selected, setSelected] = React.useState<Date | undefined>(
+    /* const [selected, setSelected] = React.useState<Date | undefined>(
       initialDate
-    );
+    ); */
 
     /* TMP for dev */
-    useEffect(() => {
+    /* useEffect(() => {
       setOpen(true);
-    }, []);
+    }, []); */
 
     /* TMP for dev */
     /* const disabledDays = [
@@ -138,12 +138,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               placement="bottom-start"
             >
               <DayPicker
-                locale={getLocale(locale)}
+                locale={getLocaleFromString(locale)}
                 mode={mode}
-                selected={selected}
+                /* selected={selected}
                 onSelect={(selectedDate: Date | undefined) => {
                   setSelected(selectedDate);
-                }}
+                }} */
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
                 }}

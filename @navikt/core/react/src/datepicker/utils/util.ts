@@ -2,7 +2,8 @@ import enGB from "date-fns/locale/en-GB";
 import nb from "date-fns/locale/nb";
 import nn from "date-fns/locale/nn";
 
-export const getLocale = (locale: "nb" | "nn" | "en" = "nb") => {
+/** @private */
+export const getLocaleFromString = (locale: "nb" | "nn" | "en" = "nb") => {
   switch (locale) {
     case "nn":
       return nn;
@@ -12,3 +13,8 @@ export const getLocale = (locale: "nb" | "nn" | "en" = "nb") => {
       return nb;
   }
 };
+
+/** @private */
+export function isValidDate(day: Date): boolean {
+  return !isNaN(day.getTime());
+}

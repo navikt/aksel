@@ -124,8 +124,8 @@ export const UseDatepicker = () => {
   const ctx = useDatepicker();
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
-      <DatePicker>
-        <DatePicker.Input label="Velg dato"></DatePicker.Input>
+      <DatePicker {...ctx?.dayPickerProps}>
+        <DatePicker.Input {...ctx?.inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );
