@@ -126,56 +126,49 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x) }}
       >
-        <div ref={mergedRef}>{children}</div>
+        <div ref={mergedRef} style={{ height: "fit-content" }}>
+          {children}
+        </div>
         <FloatingPortal>
           {open && (
-            <FocusTrap
-              active={true}
-              focusTrapOptions={{
-                clickOutsideDeactivates: true,
-                onDeactivate: () => setOpen(false),
-                fallbackFocus: "body",
-              }}
+            <Popover
+              arrow={false}
+              anchorEl={wrapperRef.current}
+              open={open}
+              onClose={() => setOpen(false)}
+              placement="bottom-start"
             >
-              <Popover
-                arrow={false}
-                anchorEl={wrapperRef.current}
-                open={open}
-                onClose={() => setOpen(false)}
-                placement="bottom-start"
-              >
-                <DayPicker
-                  locale={getLocale(locale)}
-                  mode={mode}
-                  selected={selected}
-                  onSelect={(selectedDate: Date | undefined) => {
-                    setSelected(selectedDate);
-                  }}
-                  components={{
-                    Caption: yearSelector ? DropdownCaption : Caption,
-                  }}
-                  className="navds-date__calendar"
-                  toYear={2022}
-                  fromDate={new Date("Aug 23 2019")}
-                  classNames={{ vhidden: "navds-sr-only" }}
-                  disabled={(day) => {
-                    return (
-                      (disableWeekends && isWeekend(day)) ||
-                      disabled.some((date) => isSameDay(date, day))
-                    );
-                  }}
-                  weekStartsOn={1}
-                  initialFocus={focusOnOpen}
-                  labels={labels as any}
-                  modifiers={{
-                    weekend: (day) => disableWeekends && isWeekend(day),
-                  }}
-                  modifiersClassNames={{ weekend: "rdp-day__weekend" }}
-                  showWeekNumber={showWeekNumber}
-                  {...rest}
-                />
-              </Popover>
-            </FocusTrap>
+              <DayPicker
+                locale={getLocale(locale)}
+                mode={mode}
+                selected={selected}
+                onSelect={(selectedDate: Date | undefined) => {
+                  setSelected(selectedDate);
+                }}
+                components={{
+                  Caption: yearSelector ? DropdownCaption : Caption,
+                }}
+                className="navds-date__calendar"
+                toYear={2022}
+                fromDate={new Date("Aug 23 2019")}
+                classNames={{ vhidden: "navds-sr-only" }}
+                disabled={(day) => {
+                  return (
+                    (disableWeekends && isWeekend(day)) ||
+                    disabled.some((date) => isSameDay(date, day))
+                  );
+                }}
+                weekStartsOn={1}
+                initialFocus={focusOnOpen}
+                labels={labels as any}
+                modifiers={{
+                  weekend: (day) => disableWeekends && isWeekend(day),
+                }}
+                modifiersClassNames={{ weekend: "rdp-day__weekend" }}
+                showWeekNumber={showWeekNumber}
+                {...rest}
+              />
+            </Popover>
           )}
         </FloatingPortal>
       </DatePickerContext.Provider>

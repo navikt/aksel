@@ -105,3 +105,14 @@ export const ShowWeekNumber = (props) => (
     </DatePicker>
   </div>
 );
+
+export const FromTo = () => (
+  <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
+    <DatePicker showWeekNumber>
+      <DatePicker.Input label="Fra"></DatePicker.Input>
+    </DatePicker>
+    <DatePicker showWeekNumber>
+      <DatePicker.Input label="Til"></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
