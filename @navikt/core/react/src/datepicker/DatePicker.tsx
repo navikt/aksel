@@ -39,11 +39,6 @@ export interface DatePickerProps
    */
   toDate?: Date;
   /**
-   * The today’s date. Default is the current date. This Date will get the
-   * `today` modifier to style the day.
-   */
-  today?: Date;
-  /**
    * @default false
    */
   yearSelector?: boolean;
