@@ -127,6 +127,7 @@ export const useRangeDatepicker = (
   // string is a valid date. If it is a valid day, set it as selected and update
   // the calendar’s month.
   const handleChange = (e, src: "start" | "end") => {
+    console.log(e.target.value);
     src === "start"
       ? setFromInputValue(e.target.value)
       : setToInputValue(e.target.value);
@@ -135,8 +136,21 @@ export const useRangeDatepicker = (
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (!isValidDate(day) || isBefore || isAfter) {
-      /* setSelectedDay(undefined); */
+      /* setSelectedRange(undefined);
+      console.log("here 2"); */
       return;
+    }
+
+    /* TODO: Lage samme fiks for hvis start blir satt etter end */
+    /* TODO: Switche innhold i start/end input hvis dette skjer */
+    /* Made end-date before start-date */
+    if (
+      src === "end" &&
+      selectedRange?.from &&
+      differenceInCalendarDays(day, selectedRange?.from) >= 0
+    ) {
+      /* console.log("here"); */
+      setSelectedRange({ from: day, to: selectedRange?.from });
     }
 
     src === "start" && setSelectedRange((x) => ({ ...x, from: day }));
