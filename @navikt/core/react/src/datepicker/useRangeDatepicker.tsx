@@ -76,7 +76,7 @@ export const useRangeDatepicker = (
 
   const setSelected = (range?: DateRange) => {
     setSelectedRange(range);
-    setMonth(range?.from ?? today);
+    /* setMonth(range?.from ?? today); */
     setFromInputValue(
       range?.from ? formatDateForInput(range.from, locale) : ""
     );
@@ -98,7 +98,7 @@ export const useRangeDatepicker = (
       setMonth(day);
       src === "start"
         ? setFromInputValue(formatDateForInput(day, locale))
-        : setFromInputValue(formatDateForInput(day, locale));
+        : setToInputValue(formatDateForInput(day, locale));
     }
   };
 
