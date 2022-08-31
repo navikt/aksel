@@ -4,54 +4,29 @@ import {
   DayClickEventHandler,
   MonthChangeEventHandler,
 } from "react-day-picker";
-import { DatePickerProps } from "./DatePicker";
+import { DatepickerHookProps, useDatepickerProps } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
 
-export interface useDatepickerProps
-  extends Pick<
-    DatePickerProps,
-    | "locale"
-    | "fromDate"
-    | "toDate"
-    | "today"
-    | "toDate"
-    | "fromDate"
-    | "toDate"
-  > {
-  /** The initially selected date */
-  defaultSelected?: Date;
-  /** Make the selection required. */
-  required?: boolean;
-}
+interface useRangeDatepickerProps extends useDatepickerProps {}
 
-export interface DatepickerHookProps
-  extends Pick<
-    DatePickerProps,
-    | "month"
-    | "onMonthChange"
-    | "onDayClick"
-    | "selected"
-    | "fromDate"
-    | "locale"
-    | "toDate"
-    | "today"
-  > {}
+interface DatepickerRangeHookProps extends DatepickerHookProps {}
 
-interface DatepickerInputHookProps {}
+interface DatepickerInputRangeHookProps {}
 
-interface useDatepickerValue {
-  dayPickerProps: DatepickerHookProps;
-  inputProps: DatepickerInputHookProps;
+interface useRangeDatepickerValue {
+  /* dayPickerProps: DatepickerHookProps;
+  startInputProps: DatepickerInputHookProps;
+  endInputProps: DatepickerInputHookProps;
   reset: () => void;
   selectedDay?: Date;
-  setSelected: (date?: Date) => void;
+  setSelected: (date?: Date) => void; */
 }
 
-export const useDatepicker = (
-  opt: useDatepickerProps = {}
-): useDatepickerValue => {
+export const useRangeDatepicker = (
+  opt: useRangeDatepickerProps = {}
+): useRangeDatepickerValue => {
   const {
     locale: _locale = "nb",
     required,
@@ -62,6 +37,7 @@ export const useDatepicker = (
   } = opt;
 
   const locale = getLocaleFromString(_locale);
+
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
@@ -126,7 +102,7 @@ export const useDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps: DatepickerHookProps = {
+  const dayPickerProps: DatepickerRangeHookProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onDayClick: handleDayClick,
@@ -137,11 +113,24 @@ export const useDatepicker = (
     today,
   };
 
-  const inputProps: DatepickerInputHookProps = {
+  const startInputProps: DatepickerInputRangeHookProps = {
     onChange: handleChange,
     onFocus: handleFocus,
     value: inputValue,
   };
 
-  return { dayPickerProps, inputProps, reset, selectedDay, setSelected };
+  const endInputProps: DatepickerInputRangeHookProps = {
+    onChange: handleChange,
+    onFocus: handleFocus,
+    value: inputValue,
+  };
+
+  return {
+    dayPickerProps,
+    startInputProps,
+    endInputProps,
+    reset,
+    selectedDay,
+    setSelected,
+  };
 };
