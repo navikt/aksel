@@ -107,19 +107,6 @@ export const ShowWeekNumber = (props) => (
   </div>
 );
 
-export const FromTo = () => {
-  return (
-    <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
-      <DatePicker showWeekNumber>
-        <DatePicker.Input label="Fra"></DatePicker.Input>
-      </DatePicker>
-      <DatePicker showWeekNumber>
-        <DatePicker.Input label="Til"></DatePicker.Input>
-      </DatePicker>
-    </div>
-  );
-};
-
 export const UseDatepicker = () => {
   const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
