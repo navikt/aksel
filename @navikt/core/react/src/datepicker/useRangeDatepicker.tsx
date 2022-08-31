@@ -2,8 +2,8 @@ import { differenceInCalendarDays } from "date-fns";
 import { FocusEvent, useState } from "react";
 import {
   DateRange,
-  DayClickEventHandler,
   MonthChangeEventHandler,
+  SelectRangeEventHandler,
 } from "react-day-picker";
 import { DatepickerHookProps, useDatepickerProps } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
@@ -18,6 +18,7 @@ interface useRangeDatepickerProps
 
 interface DatepickerRangeHookProps extends DatepickerHookProps {
   mode: "range";
+  onSelect: SelectRangeEventHandler;
 }
 
 interface DatepickerInputRangeHookProps {}
@@ -107,17 +108,19 @@ export const useRangeDatepicker = (
   const handleToFocus: React.FocusEventHandler<HTMLInputElement> = (e) =>
     handleFocus(e, "end");
 
-  /* TODO:  */
-
-  const handleDayClick: DayClickEventHandler = (day, { selected }) => {
-    console.log(day);
-    /* if (!required && selected) {
-      setSelectedDay(undefined);
-      setInputValue("");
-      return;
-    }
-    setSelectedDay(day);
-    setInputValue(day ? formatDateForInput(day, locale) : ""); */
+  const handleSelect: SelectRangeEventHandler = (
+    range
+    /* selectedDay,
+    activeModifiers,
+    e */
+  ) => {
+    setSelectedRange(range);
+    range?.from
+      ? setFromInputValue(formatDateForInput(range?.from, locale))
+      : setFromInputValue("");
+    range?.to
+      ? setToInputValue(formatDateForInput(range?.to, locale))
+      : setToInputValue("");
   };
 
   // When changing the input field, save its value in state and check if the
@@ -135,7 +138,9 @@ export const useRangeDatepicker = (
       /* setSelectedDay(undefined); */
       return;
     }
-    /* setSelectedDay(day); */
+
+    src === "start" && setSelectedRange((x) => ({ ...x, from: day }));
+    src === "end" && setSelectedRange((x) => ({ from: x?.from, to: day }));
     setMonth(day);
   };
 
@@ -148,7 +153,7 @@ export const useRangeDatepicker = (
   const dayPickerProps: DatepickerRangeHookProps = {
     month: month,
     onMonthChange: handleMonthChange,
-    onDayClick: handleDayClick,
+    onSelect: handleSelect,
     selected: selectedRange,
     locale: _locale,
     fromDate,
