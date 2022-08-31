@@ -16,7 +16,6 @@ import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocaleFromString } from "./utils/util";
 import { labels } from "./utils/labels";
 import { disableDate } from "./utils/dates-disabled";
-import { isNorwegianPublicHoliday } from "./utils/holidays";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps
@@ -73,11 +72,6 @@ export interface DatePickerProps
    * @default false
    */
   showWeekNumber?: boolean;
-  /**
-   * Disable saturday and sunday.
-   * @default false
-   */
-  disablePublicHolidays?: boolean;
 }
 
 interface DatePickerComponent
@@ -108,7 +102,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disableWeekends = false,
       showWeekNumber = false,
       mode = "single",
-      disablePublicHolidays = false,
       ...rest
     },
     ref
@@ -170,8 +163,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 disabled={(day) => {
                   return (
                     (disableWeekends && isWeekend(day)) ||
-                    (disablePublicHolidays &&
-                      !!isNorwegianPublicHoliday(day)) ||
                     disableDate(disabled, day)
                   );
                 }}
@@ -180,12 +171,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 labels={labels as any}
                 modifiers={{
                   weekend: (day) => disableWeekends && isWeekend(day),
-                  publicHoliday: (day) =>
-                    disablePublicHolidays && !!isNorwegianPublicHoliday(day),
                 }}
                 modifiersClassNames={{
                   weekend: "rdp-day__weekend",
-                  publicHoliday: "rdp-day__holiday",
                 }}
                 showWeekNumber={showWeekNumber}
                 {...rest}

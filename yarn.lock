@@ -3080,7 +3080,6 @@ __metadata:
     copyfiles: ^2.4.1
     date-fns: 2.29.2
     date-fns-tz: 1.3.6
-    date-holidays: ^3.16.5
     faker: 5.5.3
     fast-glob: 3.2.11
     focus-trap-react: ^10.0.0
@@ -7339,13 +7338,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astronomia@npm:^4.1.0":
-  version: 4.1.1
-  resolution: "astronomia@npm:4.1.1"
-  checksum: ec80faf6e0195f82e434e1822eddf98eb85e99e4d42a426a7eb09c17c1063456ddf3cbe38bbe4cfa3f778e57b2654fd2994cc6bc06be3cee597ddd7c5949e2f9
-  languageName: node
-  linkType: hard
-
 "async-each@npm:^1.0.1":
   version: 1.0.3
   resolution: "async-each@npm:1.0.3"
@@ -8281,15 +8273,6 @@ __metadata:
     normalize-url: ^4.1.0
     responselike: ^1.0.2
   checksum: b510b237b18d17e89942e9ee2d2a077cb38db03f12167fd100932dfa8fc963424bfae0bfa1598df4ae16c944a5484e43e03df8f32105b04395ee9495e9e4e9f1
-  languageName: node
-  linkType: hard
-
-"caldate@npm:^2.0.3":
-  version: 2.0.3
-  resolution: "caldate@npm:2.0.3"
-  dependencies:
-    moment-timezone: ^0.5.34
-  checksum: d7bf63649fe7ef31d556927242d12587c96d63964c60179c4562ed90664d4686c0a3f09b5122dac3f8c02c74470f11cafe72435899f77abf57645a40f8c44cf9
   languageName: node
   linkType: hard
 
@@ -9751,29 +9734,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-bengali-revised@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "date-bengali-revised@npm:2.0.2"
-  checksum: 23f5e03b20a2334de5e8b7c42925ff4ebf24db3404e1ec272c66b0deab6bfc3cbc1fb9581d06ab72a0c3fe338c618b1f94062147a74c4544217e9a7fc70a62aa
-  languageName: node
-  linkType: hard
-
-"date-chinese@npm:^2.1.4":
-  version: 2.1.4
-  resolution: "date-chinese@npm:2.1.4"
-  dependencies:
-    astronomia: ^4.1.0
-  checksum: 1f1957f5a61d136a98342f56ba8ceb49a6663d9411c850157af0a41c2396b3201ac08069c7a2ce7ba14a7f6a0183e3a2d50547c698830443d19950355f4ece21
-  languageName: node
-  linkType: hard
-
-"date-easter@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "date-easter@npm:1.0.2"
-  checksum: 62409168c79ded4ee7be8f365aa825d058a1371c7579dabdd2202dd5a606f0e327d7db3d88505d9a0cc91be8f6dc958194170e944e70818816d692f67ed6c225
-  languageName: node
-  linkType: hard
-
 "date-fns-tz@npm:1.3.6":
   version: 1.3.6
   resolution: "date-fns-tz@npm:1.3.6"
@@ -9794,37 +9754,6 @@ __metadata:
   version: 2.28.0
   resolution: "date-fns@npm:2.28.0"
   checksum: a0516b2e4f99b8bffc6cc5193349f185f195398385bdcaf07f17c2c4a24473c99d933eb0018be4142a86a6d46cb0b06be6440ad874f15e795acbedd6fd727a1f
-  languageName: node
-  linkType: hard
-
-"date-holidays-parser@npm:^3.4.1":
-  version: 3.4.1
-  resolution: "date-holidays-parser@npm:3.4.1"
-  dependencies:
-    astronomia: ^4.1.0
-    caldate: ^2.0.3
-    date-bengali-revised: ^2.0.2
-    date-chinese: ^2.1.4
-    date-easter: ^1.0.2
-    deepmerge: ^4.2.2
-    jalaali-js: ^1.2.6
-    moment-timezone: ^0.5.34
-  checksum: 9d2fe1a005e82cef580b37226a065b651361d386d2d288953d2589bfeef84deb68519459f99df71ed54b00d4a2c1554b53634297c45e59cf5dfab1795ecbcfb7
-  languageName: node
-  linkType: hard
-
-"date-holidays@npm:^3.16.5":
-  version: 3.16.5
-  resolution: "date-holidays@npm:3.16.5"
-  dependencies:
-    date-holidays-parser: ^3.4.1
-    js-yaml: ^4.1.0
-    lodash.omit: ^4.5.0
-    lodash.pick: ^4.4.0
-    prepin: ^1.0.3
-  bin:
-    holidays2json: scripts/holidays2json.cjs
-  checksum: a9bc57ea61e8656435ae71aa3079bed838da8b32c2cbc8560cece596f05fcda0755ce3ec81de374a174fea3ec745d4555418efbac27adf806801b789784c6481
   languageName: node
   linkType: hard
 
@@ -14291,13 +14220,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jalaali-js@npm:^1.2.6":
-  version: 1.2.6
-  resolution: "jalaali-js@npm:1.2.6"
-  checksum: 586083f23c59c2ce08bcf0309a86ef81980d1aa862fc2c86615183772cbd20e95f6712081a5f5d451068a9e24fce6a2fe630c715f3b7dec6b856bf88fc29588d
-  languageName: node
-  linkType: hard
-
 "jest-changed-files@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-changed-files@npm:27.5.1"
@@ -15525,20 +15447,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.omit@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.omit@npm:4.5.0"
-  checksum: 434645e49fe84ab315719bd5a9a3a585a0f624aa4160bc09157dd041a414bcc287c15840365c1379476a3f3eda41fbe838976c3f7bdecbbf4c5478e86c471a30
-  languageName: node
-  linkType: hard
-
-"lodash.pick@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.pick@npm:4.4.0"
-  checksum: 2c36cab7da6b999a20bd3373b40e31a3ef81fa264f34a6979c852c5bc8ac039379686b27380f0cb8e3781610844fafec6949c6fbbebc059c98f8fa8570e3675f
-  languageName: node
-  linkType: hard
-
 "lodash.startcase@npm:4.4.0":
   version: 4.4.0
   resolution: "lodash.startcase@npm:4.4.0"
@@ -16435,22 +16343,6 @@ __metadata:
   version: 1.0.1
   resolution: "modify-values@npm:1.0.1"
   checksum: 8296610c608bc97b03c2cf889c6cdf4517e32fa2d836440096374c2209f6b7b3e256c209493a0b32584b9cb32d528e99d0dd19dcd9a14d2d915a312d391cc7e9
-  languageName: node
-  linkType: hard
-
-"moment-timezone@npm:^0.5.34":
-  version: 0.5.37
-  resolution: "moment-timezone@npm:0.5.37"
-  dependencies:
-    moment: ">= 2.9.0"
-  checksum: b3fc24848a396ee3801331a4b5511591df0e22241e59f55200a475603f23a8429f01887294c7a0c005dae25b8e4bef20472fbc875ff20080f26fded066559f1a
-  languageName: node
-  linkType: hard
-
-"moment@npm:>= 2.9.0":
-  version: 2.29.4
-  resolution: "moment@npm:2.29.4"
-  checksum: 0ec3f9c2bcba38dc2451b1daed5daded747f17610b92427bebe1d08d48d8b7bdd8d9197500b072d14e326dd0ccf3e326b9e3d07c5895d3d49e39b6803b76e80e
   languageName: node
   linkType: hard
 
@@ -18549,15 +18441,6 @@ __metadata:
   version: 2.0.0
   resolution: "prepend-http@npm:2.0.0"
   checksum: 7694a9525405447662c1ffd352fcb41b6410c705b739b6f4e3a3e21cf5fdede8377890088e8934436b8b17ba55365a615f153960f30877bf0d0392f9e93503ea
-  languageName: node
-  linkType: hard
-
-"prepin@npm:^1.0.3":
-  version: 1.0.3
-  resolution: "prepin@npm:1.0.3"
-  bin:
-    prepin: ./bin/prepin.js
-  checksum: b43f1e3b5f0d7da5e97ef707e6eebf44f88e54bbac7d87ad011c01e03f7e5ce40e02288c4df0d7853570aa3d492e10bb3c885502f9db99a905635c2f1733cd5c
   languageName: node
   linkType: hard
 
