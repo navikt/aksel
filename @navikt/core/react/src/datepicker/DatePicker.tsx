@@ -67,6 +67,10 @@ export interface DatePickerProps
    * @default false
    */
   showWeekNumber?: boolean;
+  /**
+   * Pre selected dates.
+   */
+  selected?: Date | Date[] | DateRange;
 }
 
 interface DatePickerComponent
