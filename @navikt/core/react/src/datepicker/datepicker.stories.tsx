@@ -139,3 +139,11 @@ export const UseDatepicker = () => {
     </div>
   );
 };
+
+export const MultipleSelection = () => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker mode="multiple">
+      <DatePicker.Input label="Velg datoer"></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
