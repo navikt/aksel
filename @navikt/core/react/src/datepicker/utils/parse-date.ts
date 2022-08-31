@@ -7,15 +7,12 @@ const ALLOWED_INPUT_FORMATS = [
   "ddMMyy",
   "d.M.yy",
   "dd.MM.yy",
-  "dd.MMM.yy",
   "dd/MM/yy",
   "dd-MM-yy",
-  "dd-MMM-yy",
   INPUT_DATE_STRING_FORMAT,
   "ddMMyyyy",
   "dd/MM/yyyy",
   "dd-MM-yyyy",
-  "dd-MMM-yyyy",
   "d.M.yyyy",
 ];
 
