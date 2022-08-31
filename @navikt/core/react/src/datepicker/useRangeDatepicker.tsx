@@ -1,6 +1,7 @@
 import { differenceInCalendarDays } from "date-fns";
-import { useState } from "react";
+import { FocusEvent, useState } from "react";
 import {
+  DateRange,
   DayClickEventHandler,
   MonthChangeEventHandler,
 } from "react-day-picker";
@@ -9,19 +10,25 @@ import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
 
-interface useRangeDatepickerProps extends useDatepickerProps {}
+interface useRangeDatepickerProps
+  extends Omit<useDatepickerProps, "defaultSelected"> {
+  /** The initially selected date-range */
+  defaultSelected?: DateRange;
+}
 
-interface DatepickerRangeHookProps extends DatepickerHookProps {}
+interface DatepickerRangeHookProps extends DatepickerHookProps {
+  mode: "range";
+}
 
 interface DatepickerInputRangeHookProps {}
 
 interface useRangeDatepickerValue {
-  /* dayPickerProps: DatepickerHookProps;
-  startInputProps: DatepickerInputHookProps;
-  endInputProps: DatepickerInputHookProps;
+  dayPickerProps: DatepickerHookProps;
+  startInputProps: DatepickerInputRangeHookProps;
+  endInputProps: DatepickerInputRangeHookProps;
   reset: () => void;
-  selectedDay?: Date;
-  setSelected: (date?: Date) => void; */
+  selectedRange?: DateRange;
+  setSelected: (date?: DateRange) => void;
 }
 
 export const useRangeDatepicker = (
@@ -29,7 +36,6 @@ export const useRangeDatepicker = (
 ): useRangeDatepickerValue => {
   const {
     locale: _locale = "nb",
-    required,
     defaultSelected,
     today = new Date(),
     fromDate,
@@ -39,31 +45,49 @@ export const useRangeDatepicker = (
   const locale = getLocaleFromString(_locale);
 
   // Initialize states
-  const [month, setMonth] = useState(defaultSelected ?? today);
-  const [selectedDay, setSelectedDay] = useState(defaultSelected);
+  const [month, setMonth] = useState(
+    defaultSelected ? defaultSelected.from : today
+  );
+  const [selectedRange, setSelectedRange] = useState(defaultSelected);
 
-  const defaultInputValue = defaultSelected
-    ? formatDateForInput(defaultSelected, locale)
-    : "";
-  const [inputValue, setInputValue] = useState(defaultInputValue);
+  const [fromInputValue, setFromInputValue] = useState(
+    defaultSelected?.from
+      ? formatDateForInput(defaultSelected.from, locale)
+      : ""
+  );
+
+  const [toInputValue, setToInputValue] = useState(
+    defaultSelected?.to ? formatDateForInput(defaultSelected.to, locale) : ""
+  );
 
   const reset = () => {
-    setSelectedDay(defaultSelected);
-    setMonth(defaultSelected ?? today);
-    setInputValue(defaultInputValue ?? "");
+    setSelectedRange(defaultSelected);
+    setMonth(defaultSelected ? defaultSelected.from : today);
+    setFromInputValue(
+      defaultSelected?.from
+        ? formatDateForInput(defaultSelected.from, locale)
+        : ""
+    );
+    setToInputValue(
+      defaultSelected?.to ? formatDateForInput(defaultSelected.to, locale) : ""
+    );
   };
 
-  const setSelected = (date: Date | undefined) => {
-    setSelectedDay(date);
-    setMonth(date ?? today);
-    setInputValue(date ? formatDateForInput(date, locale) : "");
+  const setSelected = (range?: DateRange) => {
+    setSelectedRange(range);
+    setMonth(range?.from ?? today);
+    setFromInputValue(
+      range?.from ? formatDateForInput(range.from, locale) : ""
+    );
+    setToInputValue(range?.to ? formatDateForInput(range?.to, locale) : "");
   };
 
   const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
 
-  // When focusing, make sure DayPicker visualizes the month of the date in the
-  // input field.
-  const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+  const handleFocus = (
+    e: FocusEvent<HTMLInputElement, Element>,
+    src: "start" | "end"
+  ) => {
     if (!e.target.value) {
       reset();
       return;
@@ -71,58 +95,78 @@ export const useRangeDatepicker = (
     let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
       setMonth(day);
-      setInputValue(formatDateForInput(day, locale));
+      src === "start"
+        ? setFromInputValue(formatDateForInput(day, locale))
+        : setFromInputValue(formatDateForInput(day, locale));
     }
   };
 
+  const handleFromFocus: React.FocusEventHandler<HTMLInputElement> = (e) =>
+    handleFocus(e, "start");
+
+  const handleToFocus: React.FocusEventHandler<HTMLInputElement> = (e) =>
+    handleFocus(e, "end");
+
+  /* TODO:  */
+
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
-    if (!required && selected) {
+    console.log(day);
+    /* if (!required && selected) {
       setSelectedDay(undefined);
       setInputValue("");
       return;
     }
     setSelectedDay(day);
-    setInputValue(day ? formatDateForInput(day, locale) : "");
+    setInputValue(day ? formatDateForInput(day, locale) : ""); */
   };
 
   // When changing the input field, save its value in state and check if the
   // string is a valid date. If it is a valid day, set it as selected and update
   // the calendar’s month.
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputValue(e.target.value);
+  const handleChange = (e, src: "start" | "end") => {
+    src === "start"
+      ? setFromInputValue(e.target.value)
+      : setToInputValue(e.target.value);
     const day = parseDate(e.target.value, today, locale);
 
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (!isValidDate(day) || isBefore || isAfter) {
-      setSelectedDay(undefined);
+      /* setSelectedDay(undefined); */
       return;
     }
-    setSelectedDay(day);
+    /* setSelectedDay(day); */
     setMonth(day);
   };
+
+  const handleFromChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange(e, "start");
+
+  const handleToChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    handleChange(e, "end");
 
   const dayPickerProps: DatepickerRangeHookProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onDayClick: handleDayClick,
-    selected: selectedDay,
+    selected: selectedRange,
     locale: _locale,
     fromDate,
     toDate,
     today,
+    mode: "range",
   };
 
   const startInputProps: DatepickerInputRangeHookProps = {
-    onChange: handleChange,
-    onFocus: handleFocus,
-    value: inputValue,
+    onChange: handleFromChange,
+    onFocus: handleFromFocus,
+    value: fromInputValue,
   };
 
   const endInputProps: DatepickerInputRangeHookProps = {
-    onChange: handleChange,
-    onFocus: handleFocus,
-    value: inputValue,
+    onChange: handleToChange,
+    onFocus: handleToFocus,
+    value: toInputValue,
   };
 
   return {
@@ -130,7 +174,7 @@ export const useRangeDatepicker = (
     startInputProps,
     endInputProps,
     reset,
-    selectedDay,
+    selectedRange,
     setSelected,
   };
 };
