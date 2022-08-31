@@ -1,17 +1,14 @@
 import { parseDate } from "../parse-date";
-import { isValidDate } from "../util";
 import nb from "date-fns/locale/nb";
-import { getMonth } from "date-fns";
-
-const check = (inp: string) =>
-  expect(isValidDate(parseDate(inp, new Date(), nb)));
+import { formatDateForInput } from "../format-date";
 
 const parse = (inp: string) => parseDate(inp, new Date(), nb);
 
-describe("Parse date-inputs to correct month", () => {
-  test("No spaces", () => {
-    expect(getMonth(parse("150522"))).toEqual(4);
-    expect(getMonth(parse("11052022"))).toEqual(4);
-    expect(getMonth(parse("15052022"))).toEqual(4);
+describe("Format date to correct output", () => {
+  test("formatDateForInput", () => {
+    expect(formatDateForInput(parse("15/05/22"), nb)).toEqual("15.05.2022");
+    expect(formatDateForInput(parse("1/5/22"), nb)).toEqual("01.05.2022");
+    expect(formatDateForInput(parse("1/05/22"), nb)).toEqual("01.05.2022");
+    expect(formatDateForInput(parse("15/5/22"), nb)).toEqual("15.05.2022");
   });
 });
