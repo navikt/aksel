@@ -212,6 +212,7 @@ export const ExpandableOpen = () => {
       <Table.Body>
         {data.map((data) => (
           <Table.ExpandableRow
+            openOnRowClick={true}
             expansionDisabled={data.animal === "Sel"}
             content={data.content}
             key={data.name}

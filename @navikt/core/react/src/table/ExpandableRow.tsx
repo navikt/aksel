@@ -31,10 +31,15 @@ export interface ExpandableRowProps extends RowProps {
    */
   onOpenChange?: (open: boolean) => void;
   /**
-   * Disable expansio
+   * Disable expansion
    * @default false
    */
   expansionDisabled?: boolean;
+  /**
+   * Expand and close by clicking <Row>
+   * @default false
+   */
+  openOnRowClick?: boolean;
 }
 
 export interface ExpandableRowType
@@ -53,6 +58,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       open,
       onOpenChange,
       expansionDisabled = false,
+      openOnRowClick = false,
       ...rest
     },
     ref
@@ -62,13 +68,23 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
 
     const isOpen = open ?? internalOpen;
 
+    const handleOnClick = () => {
+      onOpenChange?.(!isOpen);
+      if (open === undefined) {
+        setInternalOpen((open) => !open);
+      }
+    };
     return (
       <>
         <Row
           {...rest}
           ref={ref}
+          onClick={() => {
+            if (openOnRowClick && !getSelection().toString()) handleOnClick();
+          }}
           className={cl("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": isOpen,
+            "navds-table__expandable-row--clickable-row": openOnRowClick,
           })}
         >
           {togglePlacement === "right" && children}
@@ -82,11 +98,9 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
                 className="navds-table__toggle-expand-button"
                 aria-controls={id}
                 aria-expanded={isOpen}
-                onClick={() => {
-                  onOpenChange?.(!isOpen);
-                  if (open === undefined) {
-                    setInternalOpen((open) => !open);
-                  }
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleOnClick();
                 }}
               >
                 <Expand

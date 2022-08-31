@@ -169,6 +169,10 @@
   border-color: transparent;
 }
 
+.navds-table__expandable-row--clickable-row {
+  cursor: pointer;
+}
+
 .navds-table__toggle-expand-cell {
   padding: 0;
   width: 56px;
