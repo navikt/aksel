@@ -150,7 +150,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <DayPicker
                 locale={getLocaleFromString(locale)}
                 mode={mode}
-                /* selected={selectedDates} */
+                selected={selectedDates}
                 onSelect={handleSelect}
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
