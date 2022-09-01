@@ -146,3 +146,33 @@ export const UseRangedDatepicker = () => {
     </div>
   );
 };
+
+export const SelectedDate = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker selected={new Date("Aug 8 2022")}>
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const SelectedMultiple = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker
+      selected={[new Date(), new Date("Aug 5 2022"), new Date("Aug 14 2022")]}
+      mode="multiple"
+    >
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);
+
+export const SelectedRange = (props) => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker
+      selected={{ from: new Date("Aug 3 2022"), to: new Date("Aug 11 2022") }}
+      mode="range"
+    >
+      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
+    </DatePicker>
+  </div>
+);

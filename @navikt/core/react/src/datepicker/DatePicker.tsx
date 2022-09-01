@@ -16,6 +16,7 @@ import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { getLocaleFromString } from "./utils/util";
 import { labels } from "./utils/labels";
 import { disableDate } from "./utils/dates-disabled";
+import { getInitialSelected } from "./utils/handle-mode";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps
@@ -101,24 +102,20 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disableWeekends = false,
       showWeekNumber = false,
       mode = "single",
+      selected,
       ...rest
     },
     ref
   ) => {
     const [open, setOpen] = useState(false);
-    const initialDate =
-      disableDate(disabled, new Date()) ||
-      (disableWeekends && isWeekend(new Date()))
-        ? undefined
-        : new Date();
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
     const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
-    const [selected, setSelected] = React.useState<Date | undefined>(
-      initialDate
-    );
+    const [selectedDates, setSelectedDates] = React.useState<
+      Date | Date[] | DateRange | undefined
+    >(getInitialSelected(mode, selected));
 
     /* TMP for dev */
     useEffect(() => {
@@ -126,9 +123,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     }, []);
 
     const handleSelect = (selectedDate?: Date) => {
-      setSelected(selectedDate);
-      selectedDate && setOpen(false);
-      buttonRef && buttonRef?.current?.focus();
+      // TMP until multiple and range is implemented
+      if (mode === "single") {
+        setSelectedDates(selectedDate);
+        selectedDate && setOpen(false);
+        buttonRef && buttonRef?.current?.focus();
+      }
     };
 
     return (
@@ -150,7 +150,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <DayPicker
                 locale={getLocaleFromString(locale)}
                 mode={mode}
-                selected={selected}
+                selected={selectedDates}
                 onSelect={handleSelect}
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
