@@ -131,8 +131,8 @@
 
 .rdp-button {
   all: unset;
-  width: 44px;
-  height: 44px;
+  width: 2.5rem;
+  height: 2.5rem;
   text-align: center;
   border-radius: 4px;
 }
@@ -184,8 +184,14 @@
 
 /* Left-side weeknumbers */
 .rdp-weeknumber {
-  color: var(--navds-global-color-gray-600);
+  color: white;
+  background: var(--navds-global-color-gray-800);
   font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.125rem 0.25rem;
+  border-radius: 2px;
 }
 
 /* .navds-date-month * > .rdp-head,
