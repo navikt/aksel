@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import { FocusEvent, useState } from "react";
+import React, { useState } from "react";
 import {
   DateRange,
   MonthChangeEventHandler,
@@ -85,10 +85,8 @@ export const useRangeDatepicker = (
 
   const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
 
-  const handleFocus = (
-    e: FocusEvent<HTMLInputElement, Element>,
-    src: "start" | "end"
-  ) => {
+  const handleFocus = (e, src: "start" | "end") => {
+    // TODO: Bør denne resettes?
     if (!e.target.value) {
       reset();
       return;
@@ -102,11 +100,19 @@ export const useRangeDatepicker = (
     }
   };
 
-  const handleFromFocus: React.FocusEventHandler<HTMLInputElement> = (e) =>
-    handleFocus(e, "start");
-
-  const handleToFocus: React.FocusEventHandler<HTMLInputElement> = (e) =>
-    handleFocus(e, "end");
+  const handleBlur = (e, src: "start" | "end") => {
+    /*   if (!e.target.value) {
+      reset();
+      return;
+    }
+    let day = parseDate(e.target.value, today, locale);
+    if (isValidDate(day)) {
+      setMonth(day);
+      src === "start"
+        ? setFromInputValue(formatDateForInput(day, locale))
+        : setToInputValue(formatDateForInput(day, locale));
+    } */
+  };
 
   const handleSelect: SelectRangeEventHandler = (
     range
@@ -123,11 +129,8 @@ export const useRangeDatepicker = (
       : setToInputValue("");
   };
 
-  // When changing the input field, save its value in state and check if the
-  // string is a valid date. If it is a valid day, set it as selected and update
-  // the calendar’s month.
+  /* live-update datepicker based on changes in inputfields */
   const handleChange = (e, src: "start" | "end") => {
-    console.log(e.target.value);
     src === "start"
       ? setFromInputValue(e.target.value)
       : setToInputValue(e.target.value);
@@ -136,33 +139,35 @@ export const useRangeDatepicker = (
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (!isValidDate(day) || isBefore || isAfter) {
-      /* setSelectedRange(undefined);
-      console.log("here 2"); */
+      /* TODO: Skal bare slette den rage-verdien som faktsik er invalid */
+      /* setSelectedRange(undefined); */
       return;
     }
 
-    /* TODO: Lage samme fiks for hvis start blir satt etter end */
-    /* TODO: Switche innhold i start/end input hvis dette skjer */
-    /* Made end-date before start-date */
     if (
       src === "end" &&
       selectedRange?.from &&
-      differenceInCalendarDays(day, selectedRange?.from) >= 0
+      differenceInCalendarDays(selectedRange?.from, day) >= 0
     ) {
-      /* console.log("here"); */
       setSelectedRange({ from: day, to: selectedRange?.from });
+      setMonth(day);
+      return;
+    }
+
+    if (
+      src === "start" &&
+      selectedRange?.to &&
+      differenceInCalendarDays(day, selectedRange?.to) >= 0
+    ) {
+      setSelectedRange({ to: day, from: selectedRange?.to });
+      setMonth(day);
+      return;
     }
 
     src === "start" && setSelectedRange((x) => ({ ...x, from: day }));
     src === "end" && setSelectedRange((x) => ({ from: x?.from, to: day }));
     setMonth(day);
   };
-
-  const handleFromChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    handleChange(e, "start");
-
-  const handleToChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    handleChange(e, "end");
 
   const dayPickerProps: DatepickerRangeHookProps = {
     month: month,
@@ -177,14 +182,22 @@ export const useRangeDatepicker = (
   };
 
   const startInputProps: DatepickerInputRangeHookProps = {
-    onChange: handleFromChange,
-    onFocus: handleFromFocus,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      handleChange(e, "start"),
+    onFocus: (e: React.FocusEventHandler<HTMLInputElement>) =>
+      handleFocus(e, "start"),
+    onBlur: (e: React.FocusEventHandler<HTMLInputElement>) =>
+      handleBlur(e, "start"),
     value: fromInputValue,
   };
 
   const endInputProps: DatepickerInputRangeHookProps = {
-    onChange: handleToChange,
-    onFocus: handleToFocus,
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+      handleChange(e, "end"),
+    onFocus: (e: React.FocusEventHandler<HTMLInputElement>) =>
+      handleFocus(e, "end"),
+    onBlur: (e: React.FocusEventHandler<HTMLInputElement>) =>
+      handleBlur(e, "start"),
     value: toInputValue,
   };
 
