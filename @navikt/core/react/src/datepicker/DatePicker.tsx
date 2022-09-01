@@ -117,11 +117,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Date | Date[] | DateRange | undefined
     >(/* getInitialSelected(mode, selected) */);
 
-    /* TMP for dev */
-    useEffect(() => {
-      setOpen(true);
-    }, []);
-
     const handleSelect = (selectedDate?: Date) => {
       // TMP until multiple and range is implemented
       if (mode === "single") {

@@ -28,8 +28,8 @@ export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
       >
         {formatCaption(displayMonth, { locale })}
       </Label>
-      {/* TODO: Lage egen klasse på dette */}
-      <div style={{ display: "flex" }}>
+
+      <div className="navds-datepicker__caption__month-wrapper">
         <Button
           aria-label={previousLabel}
           variant={"tertiary"}
