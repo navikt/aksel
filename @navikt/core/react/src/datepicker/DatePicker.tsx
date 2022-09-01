@@ -175,7 +175,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   weekend: "rdp-day__weekend",
                 }}
                 showWeekNumber={showWeekNumber}
-                selected={selected}
+                /* selected={selected} */
                 {...rest}
               />
             </Popover>
