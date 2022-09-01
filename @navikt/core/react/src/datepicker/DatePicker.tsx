@@ -115,7 +115,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
-    >(getInitialSelected(mode, selected));
+    >(/* getInitialSelected(mode, selected) */);
 
     /* TMP for dev */
     useEffect(() => {
@@ -150,7 +150,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               <DayPicker
                 locale={getLocaleFromString(locale)}
                 mode={mode}
-                selected={selectedDates}
+                /* selected={selectedDates} */
                 onSelect={handleSelect}
                 components={{
                   Caption: yearSelector ? DropdownCaption : Caption,
@@ -175,6 +175,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   weekend: "rdp-day__weekend",
                 }}
                 showWeekNumber={showWeekNumber}
+                selected={selected}
                 {...rest}
               />
             </Popover>
