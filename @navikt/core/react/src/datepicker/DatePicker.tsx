@@ -172,8 +172,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }}
         showWeekNumber={showWeekNumber}
         /* selected={selected} */
-        aria-roledescription={locale === "en" ? "datepicker" : "datovelger"}
-        role="dialog"
         {...rest}
       />
     );
@@ -199,6 +197,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   onClose={() => setOpen(false)}
                   placement="bottom-start"
                   id={ariaId}
+                  aria-roledescription={
+                    locale === "en" ? "datepicker" : "datovelger"
+                  }
+                  role="dialog"
                 >
                   <Calendar />
                 </Popover>
