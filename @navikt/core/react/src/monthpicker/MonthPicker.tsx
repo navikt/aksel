@@ -1,4 +1,4 @@
-/* import { Left, Right } from "@navikt/ds-icons";
+import { Left, Right } from "@navikt/ds-icons";
 import cl from "clsx";
 import {
   compareAsc,
@@ -12,9 +12,8 @@ import {
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
 import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
-import { BodyShort, Select } from ".."; */
+import { BodyShort, Select } from "..";
 
-/*
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   mode?: "month";
@@ -94,7 +93,6 @@ const TestCaption = ({
         ))}
       </Select>
 
-
       <button
         className="navds-datepicker__caption-button"
         disabled={!nextMonth}
@@ -107,9 +105,8 @@ const TestCaption = ({
       </button>
     </div>
   );
-}; */
+};
 
-/*
 const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
   const months: Date[] = [];
   const {
@@ -154,9 +151,8 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
       ))}
     </BodyShort>
   );
-}; */
+};
 
-/*
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   ({ children, mode = "month" }, ref) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
@@ -180,5 +176,5 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
 );
 
 export default MonthPicker;
- */
+
 export const F = "";

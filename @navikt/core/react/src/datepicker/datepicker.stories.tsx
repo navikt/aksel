@@ -3,7 +3,6 @@ import React from "react";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
 import { useRangeDatepicker } from "./useRangeDatepicker";
-/* import MonthPicker from "./MonthPicker"; */
 
 const disabledDays = [
   new Date("Aug 10 2022"),
