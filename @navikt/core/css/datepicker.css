@@ -200,6 +200,10 @@
   border-radius: 2px 12px 12px 2px;
 }
 
+.rdp-day_range_start.rdp-day_range_end {
+  border-radius: 12px;
+}
+
 /* .navds-date-month * > .rdp-head,
 .navds-date-month * > .rdp-tbody {
   display: none;
