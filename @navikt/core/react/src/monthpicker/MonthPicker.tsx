@@ -133,34 +133,39 @@ const MonthSelector = ({
   }
 
   const hideMonth = (month: Date) => {
-    console.log({ comp: compareAsc(month, fromDate), month });
     return compareAsc(month, fromDate) === -1;
   };
-  console.log(months[0]);
-  console.log(selected);
-
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
-      {months.map((x: Date, y) => (
-        <button
-          key={x.toDateString()}
-          onClick={() => onSelect(x)}
-          className={cl("navds-monthpicker__month", {
-            "navds-monthpicker__month--hidden": hideMonth(x),
-            "navds-monthpicker__month--current": isThisMonth(x),
-            "navds-monthpicker__month--selected": isSameMonth(x, selected),
-          })}
-        >
-          <span aria-hidden="true">
-            {format(new Date(x), "LLL", { locale })
-              .replace(".", "")
-              .substring(0, 3)}
-          </span>
-          <span className="navds-sr-only">
-            {format(new Date(x), "LLLL", { locale })}
-          </span>
-        </button>
-      ))}
+      {months.map((x: Date, y) => {
+        return (
+          <button
+            key={x.toDateString()}
+            onClick={() =>
+              onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
+            }
+            className={cl("navds-monthpicker__month", {
+              "navds-monthpicker__month--hidden": hideMonth(x),
+              "navds-monthpicker__month--current": isThisMonth(
+                setYear(x, Number(selected.getFullYear()))
+              ),
+              "navds-monthpicker__month--selected": isSameMonth(
+                setYear(x, Number(selected.getFullYear())),
+                selected
+              ),
+            })}
+          >
+            <span aria-hidden="true">
+              {format(new Date(x), "LLL", { locale })
+                .replace(".", "")
+                .substring(0, 3)}
+            </span>
+            <span className="navds-sr-only">
+              {format(new Date(x), "LLLL", { locale })}
+            </span>
+          </button>
+        );
+      })}
     </BodyShort>
   );
 };

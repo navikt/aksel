@@ -35,11 +35,12 @@
   height: 44px;
   cursor: pointer;
   text-transform: capitalize;
+  border: 1px solid transparent;
   border-radius: var(--navds-border-radius-medium);
 }
 
 .navds-monthpicker__month--current {
-  border: 1px solid var(--navds-global-color-deepblue-500);
+  border-color: var(--navds-global-color-deepblue-500);
 }
 
 .navds-monthpicker__month--selected {
