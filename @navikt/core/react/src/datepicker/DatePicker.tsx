@@ -191,6 +191,16 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       popoverProps?.usePopover === false
     );
 
+    /* Hack for typer */
+    const overrideProps = {
+      onSelect:
+        mode === "single"
+          ? handleSingleSelect
+          : mode === "multiple"
+          ? handleMultipleSelect
+          : handleRangeSelect,
+    };
+
     return (
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
@@ -200,14 +210,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <DayPicker
               locale={getLocaleFromString(locale)}
               mode={mode}
+              {...overrideProps}
               selected={selected ?? selectedDates}
-              onSelect={
-                mode === "single"
-                  ? handleSingleSelect
-                  : mode === "multiple"
-                  ? handleMultipleSelect
-                  : handleRangeSelect
-              }
               components={{
                 Caption: yearSelector ? DropdownCaption : Caption,
               }}
@@ -254,14 +258,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   <DayPicker
                     locale={getLocaleFromString(locale)}
                     mode={mode}
+                    {...overrideProps}
                     selected={selected ?? selectedDates}
-                    onSelect={
-                      mode === "single"
-                        ? handleSingleSelect
-                        : mode === "multiple"
-                        ? handleMultipleSelect
-                        : handleRangeSelect
-                    }
                     components={{
                       Caption: yearSelector ? DropdownCaption : Caption,
                     }}
