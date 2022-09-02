@@ -3,20 +3,18 @@ import { isWeekend } from "date-fns";
 import React, {
   createContext,
   forwardRef,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { DayPicker, DateRange, DayPickerBase } from "react-day-picker";
+import { DateRange, DayPicker, DayPickerBase } from "react-day-picker";
 import { mergeRefs, Popover } from "..";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
-import { getLocaleFromString } from "./utils/util";
-import { labels } from "./utils/labels";
 import { disableDate } from "./utils/dates-disabled";
-import { getInitialSelected } from "./utils/handle-mode";
+import { labels } from "./utils/labels";
+import { getLocaleFromString } from "./utils/util";
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerProps
@@ -132,50 +130,50 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       >
         <div ref={mergedRef} className="navds-date__wrapper">
           {children}
+          <FloatingPortal>
+            {open && (
+              <Popover
+                arrow={false}
+                anchorEl={wrapperRef.current}
+                open={open}
+                onClose={() => setOpen(false)}
+                placement="bottom-start"
+              >
+                <DayPicker
+                  locale={getLocaleFromString(locale)}
+                  mode={mode}
+                  selected={selectedDates}
+                  onSelect={handleSelect}
+                  components={{
+                    Caption: yearSelector ? DropdownCaption : Caption,
+                  }}
+                  className="navds-date__calendar"
+                  toYear={2022}
+                  fromDate={new Date("Aug 23 2019")}
+                  classNames={{ vhidden: "navds-sr-only" }}
+                  disabled={(day) => {
+                    return (
+                      (disableWeekends && isWeekend(day)) ||
+                      disableDate(disabled, day)
+                    );
+                  }}
+                  weekStartsOn={1}
+                  initialFocus={focusOnOpen}
+                  labels={labels as any}
+                  modifiers={{
+                    weekend: (day) => disableWeekends && isWeekend(day),
+                  }}
+                  modifiersClassNames={{
+                    weekend: "rdp-day__weekend",
+                  }}
+                  showWeekNumber={showWeekNumber}
+                  /* selected={selected} */
+                  {...rest}
+                />
+              </Popover>
+            )}
+          </FloatingPortal>
         </div>
-        <FloatingPortal>
-          {open && (
-            <Popover
-              arrow={false}
-              anchorEl={wrapperRef.current}
-              open={open}
-              onClose={() => setOpen(false)}
-              placement="bottom-start"
-            >
-              <DayPicker
-                locale={getLocaleFromString(locale)}
-                mode={mode}
-                selected={selectedDates}
-                onSelect={handleSelect}
-                components={{
-                  Caption: yearSelector ? DropdownCaption : Caption,
-                }}
-                className="navds-date__calendar"
-                toYear={2022}
-                fromDate={new Date("Aug 23 2019")}
-                classNames={{ vhidden: "navds-sr-only" }}
-                disabled={(day) => {
-                  return (
-                    (disableWeekends && isWeekend(day)) ||
-                    disableDate(disabled, day)
-                  );
-                }}
-                weekStartsOn={1}
-                initialFocus={focusOnOpen}
-                labels={labels as any}
-                modifiers={{
-                  weekend: (day) => disableWeekends && isWeekend(day),
-                }}
-                modifiersClassNames={{
-                  weekend: "rdp-day__weekend",
-                }}
-                showWeekNumber={showWeekNumber}
-                /* selected={selected} */
-                {...rest}
-              />
-            </Popover>
-          )}
-        </FloatingPortal>
       </DatePickerContext.Provider>
     );
   }

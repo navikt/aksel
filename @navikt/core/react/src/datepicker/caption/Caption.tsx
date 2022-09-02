@@ -32,7 +32,7 @@ export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
       <div className="navds-datepicker__caption__month-wrapper">
         <Button
           aria-label={previousLabel}
-          variant={"tertiary"}
+          variant="tertiary"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<Left title="velg forrige månede" />}
@@ -43,7 +43,7 @@ export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
           icon={<Right title="velg neste månede" />}
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
-          variant={"tertiary"}
+          variant="tertiary"
           className="navds-datepicker__caption-button"
         />
       </div>
