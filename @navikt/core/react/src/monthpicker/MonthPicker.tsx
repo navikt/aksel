@@ -8,6 +8,7 @@ import {
   setYear,
   startOfMonth,
   startOfYear,
+  isThisMonth,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
@@ -137,9 +138,12 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
           onClick={() => onSelect(x)}
           className={cl("navds-monthpicker__month", {
             "navds-monthpicker__month--hidden": hideMonth(x),
+            "navds-monthpicker__month--current": isThisMonth(x),
           })}
         >
-          {format(new Date(x), "LLL", { locale }).replace(".", "")}
+          {format(new Date(x), "LLL", { locale })
+            .replace(".", "")
+            .substring(0, 3)}
         </button>
       ))}
     </BodyShort>
