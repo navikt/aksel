@@ -78,11 +78,6 @@ export const useRangeDatepicker = (
   const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
 
   const handleFocus = (e, src: "start" | "end") => {
-    // TODO: Bør denne resettes?
-    if (!e.target.value) {
-      reset();
-      return;
-    }
     let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
       setMonth(day);
@@ -107,13 +102,16 @@ export const useRangeDatepicker = (
   };
 
   const handleSelect = (range) => {
-    setSelectedRange(range);
+    const prevToRange =
+      !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
+
     range?.from
       ? setFromInputValue(formatDateForInput(range?.from, locale))
       : setFromInputValue("");
-    range?.to
-      ? setToInputValue(formatDateForInput(range?.to, locale))
+    prevToRange
+      ? setToInputValue(formatDateForInput(prevToRange, locale))
       : setToInputValue("");
+    setSelectedRange({ from: range?.from, to: prevToRange });
   };
 
   /* live-update datepicker based on changes in inputfields */
@@ -126,8 +124,9 @@ export const useRangeDatepicker = (
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (!isValidDate(day) || isBefore || isAfter) {
-      /* TODO: Skal bare slette den rage-verdien som faktsik er invalid */
-      /* setSelectedRange(undefined); */
+      src === "start"
+        ? setSelectedRange((x) => ({ ...x, from: undefined }))
+        : setSelectedRange((x) => ({ from: x?.from, to: undefined }));
       return;
     }
 
