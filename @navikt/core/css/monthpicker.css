@@ -14,6 +14,14 @@
   justify-content: space-between;
 }
 
+.navds-monthpicker__caption-button {
+  all: unset;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .navds-monthpicker__months {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

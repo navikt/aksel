@@ -77,7 +77,7 @@ const TestCaption = ({
         hideLabel
         value={selected?.getFullYear()}
         onChange={handleYearChange}
-        style={{ width: "12ch" }}
+        style={{ width: "79px" }}
       >
         {years.map((year) => (
           <option key={year.getFullYear()} value={year.getFullYear()}>
