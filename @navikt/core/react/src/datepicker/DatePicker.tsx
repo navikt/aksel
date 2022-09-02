@@ -27,19 +27,19 @@ import { getLocaleFromString } from "./utils/util";
 type ConditionalModeProps =
   | {
       mode?: "single";
-      onSelect?: SelectSingleEventHandler;
+      onSelect?: (val?: Date | Date[] | DateRange) => void;
       selected?: Date;
       defaultSelected?: Date;
     }
   | {
       mode?: "multiple";
-      onSelect?: SelectMultipleEventHandler;
+      onSelect?: (val?: Date | Date[] | DateRange) => void;
       selected?: Date[];
       defaultSelected?: Date[];
     }
   | {
       mode?: "range";
-      onSelect?: SelectRangeEventHandler;
+      onSelect?: (val?: Date | Date[] | DateRange) => void;
       selected?: DateRange;
       defaultSelected?: DateRange;
     };
@@ -156,34 +156,22 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       Date | Date[] | DateRange | undefined
     >(defaultSelected);
 
-    const handleSingleSelect: SelectSingleEventHandler = (
-      selectedDay,
-      ...spread
-    ) => {
+    const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
       setSelectedDates(selectedDay);
       selectedDay && setOpen(false);
-      buttonRef && buttonRef?.current?.focus();
-      rest?.onSelect &&
-        (rest?.onSelect as SelectSingleEventHandler)(selectedDay, ...spread);
+      selectedDay && buttonRef && buttonRef?.current?.focus();
+      rest?.onSelect && rest?.onSelect(selectedDay);
     };
 
-    const handleMultipleSelect: SelectMultipleEventHandler = (
-      selectedDays,
-      ...spread
-    ) => {
+    const handleMultipleSelect: SelectMultipleEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
-      rest?.onSelect &&
-        (rest?.onSelect as SelectMultipleEventHandler)(selectedDays, ...spread);
+      rest?.onSelect && rest?.onSelect(selectedDays);
     };
 
-    const handleRangeSelect: SelectRangeEventHandler = (
-      selectedDays,
-      ...spread
-    ) => {
+    const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
       selectedDays?.from && selectedDays?.to && setOpen(false);
-      rest?.onSelect &&
-        (rest?.onSelect as SelectRangeEventHandler)(selectedDays, ...spread);
+      rest?.onSelect && rest?.onSelect(selectedDays);
     };
 
     const usePopover = !(

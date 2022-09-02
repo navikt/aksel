@@ -1,8 +1,9 @@
 import { isSameDay } from "date-fns";
-import React from "react";
+import React, { useEffect } from "react";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
 import { useRangeDatepicker } from "./useRangeDatepicker";
+import { isValidDate } from "./utils/util";
 
 const disabledDays = [
   new Date("Aug 10 2022"),
@@ -112,6 +113,10 @@ export const UseDatepicker = () => {
     locale: "en",
   });
 
+  useEffect(() => {
+    selectedDay && isValidDate(selectedDay) && console.log(selectedDay);
+  }, [selectedDay]);
+
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
@@ -128,11 +133,14 @@ export const UseDatepicker = () => {
 };
 
 export const UseRangedDatepicker = () => {
-  const { dayPickerProps, startInputProps, endInputProps } = useRangeDatepicker(
-    {
+  const { dayPickerProps, startInputProps, endInputProps, selectedRange } =
+    useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
-    }
-  );
+    });
+
+  useEffect(() => {
+    selectedRange && console.log(selectedRange);
+  }, [selectedRange]);
 
   return (
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
@@ -148,7 +156,10 @@ export const UseRangedDatepicker = () => {
 
 export const SelectedDate = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker selected={new Date("Aug 8 2022")}>
+    <DatePicker
+      defaultSelected={new Date("Sept 8 2022")}
+      onSelect={console.log}
+    >
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
@@ -157,7 +168,12 @@ export const SelectedDate = (props) => (
 export const SelectedMultiple = (props) => (
   <div style={{ height: "30rem" }}>
     <DatePicker
-      selected={[new Date(), new Date("Aug 5 2022"), new Date("Aug 14 2022")]}
+      defaultSelected={[
+        new Date(),
+        new Date("Sept 5 2022"),
+        new Date("Sept 14 2022"),
+      ]}
+      onSelect={console.log}
       mode="multiple"
     >
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
@@ -167,7 +183,11 @@ export const SelectedMultiple = (props) => (
 
 export const SelectedRange = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker selected={{ from: new Date(), to: undefined }} mode="range">
+    <DatePicker
+      onSelect={console.log}
+      defaultSelected={{ from: new Date(), to: undefined }}
+      mode="range"
+    >
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>

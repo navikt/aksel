@@ -1,10 +1,6 @@
 import { differenceInCalendarDays } from "date-fns";
 import React, { useState } from "react";
-import {
-  DateRange,
-  MonthChangeEventHandler,
-  SelectRangeEventHandler,
-} from "react-day-picker";
+import { DateRange, MonthChangeEventHandler } from "react-day-picker";
 import { DatePickerProps } from "./DatePicker";
 import { useDatepickerProps } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
@@ -110,12 +106,7 @@ export const useRangeDatepicker = (
     } */
   };
 
-  const handleSelect: SelectRangeEventHandler = (
-    range
-    /* selectedDay,
-    activeModifiers,
-    e */
-  ) => {
+  const handleSelect = (range) => {
     setSelectedRange(range);
     range?.from
       ? setFromInputValue(formatDateForInput(range?.from, locale))
