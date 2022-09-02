@@ -9,7 +9,7 @@ import { DatePickerContext } from "./DatePicker";
 
 export interface DatePickerInputProps
   extends FormFieldProps,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "onChange"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
   /**
    * Input label
    */

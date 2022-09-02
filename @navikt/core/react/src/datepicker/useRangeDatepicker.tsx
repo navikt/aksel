@@ -5,7 +5,8 @@ import {
   MonthChangeEventHandler,
   SelectRangeEventHandler,
 } from "react-day-picker";
-import { DatepickerHookProps, useDatepickerProps } from "./useDatepicker";
+import { DatePickerProps } from "./DatePicker";
+import { useDatepickerProps } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
@@ -16,15 +17,10 @@ interface useRangeDatepickerProps
   defaultSelected?: DateRange;
 }
 
-interface DatepickerRangeHookProps extends DatepickerHookProps {
-  mode: "range";
-  onSelect: SelectRangeEventHandler;
-}
-
 interface DatepickerInputRangeHookProps {}
 
 interface useRangeDatepickerValue {
-  dayPickerProps: DatepickerHookProps;
+  dayPickerProps: DatePickerProps;
   startInputProps: DatepickerInputRangeHookProps;
   endInputProps: DatepickerInputRangeHookProps;
   reset: () => void;
@@ -169,7 +165,7 @@ export const useRangeDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps: DatepickerRangeHookProps = {
+  const dayPickerProps: DatePickerProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onSelect: handleSelect,

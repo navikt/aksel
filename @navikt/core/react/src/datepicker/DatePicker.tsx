@@ -7,8 +7,16 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { DateRange, DayPicker, DayPickerBase } from "react-day-picker";
+import {
+  DateRange,
+  DayPicker,
+  DayPickerBase,
+  SelectMultipleEventHandler,
+  SelectRangeEventHandler,
+  SelectSingleEventHandler,
+} from "react-day-picker";
 import { mergeRefs, Popover, useId } from "..";
+import { omit } from "../util";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
@@ -16,9 +24,29 @@ import { disableDate } from "./utils/dates-disabled";
 import { labels } from "./utils/labels";
 import { getLocaleFromString } from "./utils/util";
 
+type ConditionalModeProps =
+  | {
+      mode?: "single";
+      onSelect?: SelectSingleEventHandler;
+      selected?: Date;
+      defaultSelected?: Date;
+    }
+  | {
+      mode?: "multiple";
+      onSelect?: SelectMultipleEventHandler;
+      selected?: Date[];
+      defaultSelected?: Date[];
+    }
+  | {
+      mode?: "range";
+      onSelect?: SelectRangeEventHandler;
+      selected?: DateRange;
+      defaultSelected?: DateRange;
+    };
+
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
-export interface DatePickerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+export interface DatePickerDefaultProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
     Pick<
       DayPickerBase,
       "month" | "onMonthChange" | "today" | "selected" | "onDayClick"
@@ -57,19 +85,10 @@ export interface DatePickerProps
    */
   disableWeekends?: boolean;
   /**
-   * Three selection modes to display days as selected.
-   * @default "single"
-   */
-  mode?: "single" | "multiple" | "range";
-  /**
    * Shows week numbers on left-column
    * @default false
    */
   showWeekNumber?: boolean;
-  /**
-   * Pre selected dates.
-   */
-  selected?: Date | Date[] | DateRange;
   /**
    *
    */
@@ -85,6 +104,8 @@ export interface DatePickerProps
     open?: boolean;
   };
 }
+
+export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 
 interface DatePickerComponent
   extends React.ForwardRefExoticComponent<DatePickerProps> {
@@ -119,6 +140,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       selected,
       id,
       popoverProps,
+      defaultSelected,
       ...rest
     },
     ref
@@ -132,14 +154,36 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
-    >(selected);
+    >(defaultSelected);
 
-    const handleSelect = (selectedDate?: Date) => {
-      setSelectedDates(selectedDate);
-      if (mode === "single") {
-        selectedDate && setOpen(false);
-        buttonRef && buttonRef?.current?.focus();
-      }
+    const handleSingleSelect: SelectSingleEventHandler = (
+      selectedDay,
+      ...spread
+    ) => {
+      setSelectedDates(selectedDay);
+      selectedDay && setOpen(false);
+      buttonRef && buttonRef?.current?.focus();
+      rest?.onSelect &&
+        (rest?.onSelect as SelectSingleEventHandler)(selectedDay, ...spread);
+    };
+
+    const handleMultipleSelect: SelectMultipleEventHandler = (
+      selectedDays,
+      ...spread
+    ) => {
+      setSelectedDates(selectedDays);
+      rest?.onSelect &&
+        (rest?.onSelect as SelectMultipleEventHandler)(selectedDays, ...spread);
+    };
+
+    const handleRangeSelect: SelectRangeEventHandler = (
+      selectedDays,
+      ...spread
+    ) => {
+      setSelectedDates(selectedDays);
+      selectedDays?.from && selectedDays?.to && setOpen(false);
+      rest?.onSelect &&
+        (rest?.onSelect as SelectRangeEventHandler)(selectedDays, ...spread);
     };
 
     const usePopover = !(
@@ -156,9 +200,13 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             <DayPicker
               locale={getLocaleFromString(locale)}
               mode={mode}
-              selected={selectedDates}
-              onSelect={(selectedDate: Date | undefined) =>
-                handleSelect(selectedDate)
+              selected={selected ?? selectedDates}
+              onSelect={
+                mode === "single"
+                  ? handleSingleSelect
+                  : mode === "multiple"
+                  ? handleMultipleSelect
+                  : handleRangeSelect
               }
               components={{
                 Caption: yearSelector ? DropdownCaption : Caption,
@@ -183,7 +231,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 weekend: "rdp-day__weekend",
               }}
               showWeekNumber={showWeekNumber}
-              {...rest}
+              {...omit(rest, ["onSelect"])}
             />
           </div>
         ) : (
@@ -206,9 +254,13 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   <DayPicker
                     locale={getLocaleFromString(locale)}
                     mode={mode}
-                    selected={selectedDates}
-                    onSelect={(selectedDate: Date | undefined) =>
-                      handleSelect(selectedDate)
+                    selected={selected ?? selectedDates}
+                    onSelect={
+                      mode === "single"
+                        ? handleSingleSelect
+                        : mode === "multiple"
+                        ? handleMultipleSelect
+                        : handleRangeSelect
                     }
                     components={{
                       Caption: yearSelector ? DropdownCaption : Caption,
@@ -233,7 +285,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                       weekend: "rdp-day__weekend",
                     }}
                     showWeekNumber={showWeekNumber}
-                    {...rest}
+                    {...omit(rest, ["onSelect"])}
                   />
                 </Popover>
               )}

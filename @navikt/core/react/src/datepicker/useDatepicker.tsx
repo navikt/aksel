@@ -1,10 +1,11 @@
 import { differenceInCalendarDays } from "date-fns";
-import { InputHTMLAttributes, useState } from "react";
+import { useState } from "react";
 import {
   DayClickEventHandler,
   MonthChangeEventHandler,
 } from "react-day-picker";
 import { DatePickerProps } from "./DatePicker";
+import { DatePickerInputProps } from "./DatePickerInput";
 import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
@@ -26,27 +27,10 @@ export interface useDatepickerProps
   required?: boolean;
 }
 
-export interface DatepickerHookProps
-  extends Pick<
-      DatePickerProps,
-      | "month"
-      | "onMonthChange"
-      | "onDayClick"
-      | "selected"
-      | "fromDate"
-      | "locale"
-      | "toDate"
-      | "today"
-    >,
-    Pick<
-      InputHTMLAttributes<HTMLInputElement>,
-      "aria-haspopup" | "autoComplete"
-    > {}
-
-interface DatepickerInputHookProps {}
+interface DatepickerInputHookProps extends Partial<DatePickerInputProps> {}
 
 interface useDatepickerValue {
-  dayPickerProps: DatepickerHookProps;
+  dayPickerProps: DatePickerProps;
   inputProps: DatepickerInputHookProps;
   reset: () => void;
   selectedDay?: Date;
@@ -130,7 +114,7 @@ export const useDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps: DatepickerHookProps = {
+  const dayPickerProps: DatePickerProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onDayClick: handleDayClick,
