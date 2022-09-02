@@ -34,7 +34,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
 >((props, ref) => {
-  const { onOpen, buttonRef } = useContext(DatePickerContext);
+  const { onOpen, buttonRef, ariaId } = useContext(DatePickerContext);
 
   const {
     inputProps,
@@ -88,6 +88,8 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           {...omit(rest, ["error", "errorId", "size"])}
           {...inputProps}
           autoComplete="off"
+          aria-controls={ariaId}
+          aria-haspopup="grid"
           className={cl(
             className,
             "navds-date__field-input",

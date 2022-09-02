@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import {
   DayClickEventHandler,
   MonthChangeEventHandler,
@@ -28,16 +28,20 @@ export interface useDatepickerProps
 
 export interface DatepickerHookProps
   extends Pick<
-    DatePickerProps,
-    | "month"
-    | "onMonthChange"
-    | "onDayClick"
-    | "selected"
-    | "fromDate"
-    | "locale"
-    | "toDate"
-    | "today"
-  > {}
+      DatePickerProps,
+      | "month"
+      | "onMonthChange"
+      | "onDayClick"
+      | "selected"
+      | "fromDate"
+      | "locale"
+      | "toDate"
+      | "today"
+    >,
+    Pick<
+      InputHTMLAttributes<HTMLInputElement>,
+      "aria-haspopup" | "autoComplete"
+    > {}
 
 interface DatepickerInputHookProps {}
 

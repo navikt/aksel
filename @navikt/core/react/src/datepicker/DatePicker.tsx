@@ -8,7 +8,7 @@ import React, {
   useState,
 } from "react";
 import { DateRange, DayPicker, DayPickerBase } from "react-day-picker";
-import { mergeRefs, Popover } from "..";
+import { mergeRefs, Popover, useId } from "..";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
@@ -81,12 +81,14 @@ interface DatePickerContextProps {
   open: boolean;
   onOpen: () => void;
   buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
+  ariaId?: string;
 }
 
 export const DatePickerContext = createContext<DatePickerContextProps>({
   open: false,
   onOpen: () => null,
   buttonRef: null,
+  ariaId: undefined,
 });
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
@@ -101,10 +103,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       showWeekNumber = false,
       mode = "single",
       selected,
+      id,
       ...rest
     },
     ref
   ) => {
+    const ariaId = useId(id);
     const [open, setOpen] = useState(false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -126,7 +130,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     return (
       <DatePickerContext.Provider
-        value={{ open, onOpen: () => setOpen((x) => !x), buttonRef }}
+        value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
         <div ref={mergedRef} className="navds-date__wrapper">
           {children}
@@ -138,6 +142,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 open={open}
                 onClose={() => setOpen(false)}
                 placement="bottom-start"
+                id={ariaId}
               >
                 <DayPicker
                   locale={getLocaleFromString(locale)}
