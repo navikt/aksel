@@ -180,12 +180,6 @@
   background-size: 7.07px 7.07px;
 }
 
-/* Placeholder color until we get final design for holidays */
-.rdp-day__weekend,
-.rdp-day__holiday {
-  color: red;
-}
-
 /* Left-side weeknumbers */
 .rdp-weeknumber {
   color: white;
