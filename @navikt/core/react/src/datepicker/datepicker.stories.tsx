@@ -176,3 +176,9 @@ export const SelectedRange = (props) => (
     </DatePicker>
   </div>
 );
+
+export const NoPopover = () => (
+  <div style={{ height: "30rem" }}>
+    <DatePicker popoverProps={{ usePopover: false }} />
+  </div>
+);

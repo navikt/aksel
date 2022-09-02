@@ -70,6 +70,20 @@ export interface DatePickerProps
    * Pre selected dates.
    */
   selected?: Date | Date[] | DateRange;
+  /**
+   *
+   */
+  popoverProps?: {
+    /**
+     * @default true
+     */
+    usePopover: boolean;
+    /**
+     *
+     * @default false
+     */
+    open?: boolean;
+  };
 }
 
 interface DatePickerComponent
@@ -104,6 +118,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       mode = "single",
       selected,
       id,
+      popoverProps,
       ...rest
     },
     ref
@@ -128,57 +143,67 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       }
     };
 
+    const Calendar = () => (
+      <DayPicker
+        locale={getLocaleFromString(locale)}
+        mode={mode}
+        selected={selectedDates}
+        onSelect={handleSelect}
+        components={{
+          Caption: yearSelector ? DropdownCaption : Caption,
+        }}
+        className="navds-date__calendar"
+        toYear={2022}
+        fromDate={new Date("Aug 23 2019")}
+        classNames={{ vhidden: "navds-sr-only" }}
+        disabled={(day) => {
+          return (
+            (disableWeekends && isWeekend(day)) || disableDate(disabled, day)
+          );
+        }}
+        weekStartsOn={1}
+        initialFocus={focusOnOpen}
+        labels={labels as any}
+        modifiers={{
+          weekend: (day) => disableWeekends && isWeekend(day),
+        }}
+        modifiersClassNames={{
+          weekend: "rdp-day__weekend",
+        }}
+        showWeekNumber={showWeekNumber}
+        /* selected={selected} */
+        {...rest}
+      />
+    );
+
     return (
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
-        <div ref={mergedRef} className="navds-date__wrapper">
-          {children}
-          <FloatingPortal>
-            {open && (
-              <Popover
-                arrow={false}
-                anchorEl={wrapperRef.current}
-                open={open}
-                onClose={() => setOpen(false)}
-                placement="bottom-start"
-                id={ariaId}
-              >
-                <DayPicker
-                  locale={getLocaleFromString(locale)}
-                  mode={mode}
-                  selected={selectedDates}
-                  onSelect={handleSelect}
-                  components={{
-                    Caption: yearSelector ? DropdownCaption : Caption,
-                  }}
-                  className="navds-date__calendar"
-                  toYear={2022}
-                  fromDate={new Date("Aug 23 2019")}
-                  classNames={{ vhidden: "navds-sr-only" }}
-                  disabled={(day) => {
-                    return (
-                      (disableWeekends && isWeekend(day)) ||
-                      disableDate(disabled, day)
-                    );
-                  }}
-                  weekStartsOn={1}
-                  initialFocus={focusOnOpen}
-                  labels={labels as any}
-                  modifiers={{
-                    weekend: (day) => disableWeekends && isWeekend(day),
-                  }}
-                  modifiersClassNames={{
-                    weekend: "rdp-day__weekend",
-                  }}
-                  showWeekNumber={showWeekNumber}
-                  /* selected={selected} */
-                  {...rest}
-                />
-              </Popover>
-            )}
-          </FloatingPortal>
-        </div>
+        {typeof popoverProps?.usePopover === "boolean" &&
+        popoverProps?.usePopover === false ? (
+          <div ref={mergedRef} className="navds-date__wrapper">
+            <Calendar />
+          </div>
+        ) : (
+          <div ref={mergedRef} className="navds-date__wrapper">
+            {children}
+            <FloatingPortal>
+              {open && (
+                <Popover
+                  arrow={false}
+                  anchorEl={wrapperRef.current}
+                  open={open}
+                  onClose={() => setOpen(false)}
+                  placement="bottom-start"
+                  id={ariaId}
+                >
+                  <Calendar />
+                </Popover>
+              )}
+            </FloatingPortal>
+          </div>
+        )}
       </DatePickerContext.Provider>
     );
   }
