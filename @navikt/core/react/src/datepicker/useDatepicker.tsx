@@ -87,6 +87,11 @@ export const useDatepicker = (
     }
   };
 
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    let day = parseDate(e.target.value, today, locale);
+    isValidDate(day) && setInputValue(formatDateForInput(day, locale));
+  };
+
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (!required && selected) {
       setSelectedDay(undefined);
@@ -128,6 +133,7 @@ export const useDatepicker = (
   const inputProps: DatepickerInputHookProps = {
     onChange: handleChange,
     onFocus: handleFocus,
+    onBlur: handleBlur,
     value: inputValue,
   };
 
