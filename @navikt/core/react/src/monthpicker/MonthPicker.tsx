@@ -9,6 +9,7 @@ import {
   startOfMonth,
   startOfYear,
   isThisMonth,
+  isSameMonth,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
@@ -101,7 +102,13 @@ const TestCaption = ({
   );
 };
 
-const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
+const MonthSelector = ({
+  onSelect,
+  selected,
+}: {
+  onSelect: (m: Date) => void;
+  selected: Date;
+}) => {
   const months: Date[] = [];
   const {
     fromDate,
@@ -129,6 +136,8 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
     console.log({ comp: compareAsc(month, fromDate), month });
     return compareAsc(month, fromDate) === -1;
   };
+  console.log(months[0]);
+  console.log(selected);
 
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
@@ -139,6 +148,7 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
           className={cl("navds-monthpicker__month", {
             "navds-monthpicker__month--hidden": hideMonth(x),
             "navds-monthpicker__month--current": isThisMonth(x),
+            "navds-monthpicker__month--selected": isSameMonth(x, selected),
           })}
         >
           {format(new Date(x), "LLL", { locale })
@@ -164,7 +174,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       >
         <div className="navds-monthpicker__wrapper">
           <TestCaption selected={selected} onSelect={setSelected} />
-          <MonthSelector onSelect={setSelected} />
+          <MonthSelector onSelect={setSelected} selected={selected} />
           {selected && selected.toDateString()}
         </div>
       </RootProvider>
