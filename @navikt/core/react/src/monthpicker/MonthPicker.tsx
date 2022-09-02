@@ -69,7 +69,7 @@ const TestCaption = ({
       }}
     >
       <button
-        className="navds-datepicker__caption-button"
+        className="navds-monthpicker__caption-button"
         disabled={!previousMonth}
         onClick={() =>
           years.some((x) => yearState.getFullYear() - 1 === x.getFullYear()) &&
@@ -94,7 +94,7 @@ const TestCaption = ({
       </Select>
 
       <button
-        className="navds-datepicker__caption-button"
+        className="navds-monthpicker__caption-button"
         disabled={!nextMonth}
         onClick={() =>
           years.some((x) => yearState.getFullYear() + 1 === x.getFullYear()) &&
@@ -137,13 +137,13 @@ const MonthSelector = ({ onSelect }: { onSelect: (m: Date) => void }) => {
   };
 
   return (
-    <BodyShort as="div" className="navds-datepicker__months">
+    <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((x: Date, y) => (
         <button
           key={x.toDateString()}
           onClick={() => onSelect(x)}
-          className={cl("navds-datepicker__month", {
-            "navds-datepicker__month--hidden": hideMonth(x),
+          className={cl("navds-monthpicker__month", {
+            "navds-monthpicker__month--hidden": hideMonth(x),
           })}
         >
           {format(new Date(x), "LLL", { locale }).replace(".", "")}
@@ -161,7 +161,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       <RootProvider
         locale={NB}
         selected={selected}
-        className="navds-datepicker-month"
+        className="navds-monthpicker-month"
         toYear={2022}
         fromMonth={new Date("Aug 23 2019")}
       >
