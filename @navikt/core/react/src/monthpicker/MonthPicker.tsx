@@ -151,9 +151,14 @@ const MonthSelector = ({
             "navds-monthpicker__month--selected": isSameMonth(x, selected),
           })}
         >
-          {format(new Date(x), "LLL", { locale })
-            .replace(".", "")
-            .substring(0, 3)}
+          <span aria-hidden="true">
+            {format(new Date(x), "LLL", { locale })
+              .replace(".", "")
+              .substring(0, 3)}
+          </span>
+          <span className="navds-sr-only">
+            {format(new Date(x), "LLLL", { locale })}
+          </span>
         </button>
       ))}
     </BodyShort>
@@ -175,7 +180,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         <div className="navds-monthpicker__wrapper">
           <TestCaption selected={selected} onSelect={setSelected} />
           <MonthSelector onSelect={setSelected} selected={selected} />
-          {selected && selected.toDateString()}
         </div>
       </RootProvider>
     );
