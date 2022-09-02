@@ -148,46 +148,43 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       popoverProps?.usePopover === false
     );
 
-    const Calendar = () => (
-      <DayPicker
-        locale={getLocaleFromString(locale)}
-        mode={mode}
-        selected={selectedDates}
-        onSelect={handleSelect}
-        components={{
-          Caption: yearSelector ? DropdownCaption : Caption,
-        }}
-        className="navds-date__calendar"
-        toYear={2022}
-        fromDate={new Date("Aug 23 2019")}
-        classNames={{ vhidden: "navds-sr-only" }}
-        disabled={(day) => {
-          return (
-            (disableWeekends && isWeekend(day)) || disableDate(disabled, day)
-          );
-        }}
-        weekStartsOn={1}
-        initialFocus={usePopover ? focusOnOpen : false}
-        labels={labels as any}
-        modifiers={{
-          weekend: (day) => disableWeekends && isWeekend(day),
-        }}
-        modifiersClassNames={{
-          weekend: "rdp-day__weekend",
-        }}
-        showWeekNumber={showWeekNumber}
-        /* selected={selected} */
-        {...rest}
-      />
-    );
-
     return (
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
         {!usePopover ? (
           <div ref={mergedRef} className="navds-date__wrapper">
-            <Calendar />
+            <DayPicker
+              locale={getLocaleFromString(locale)}
+              mode={mode}
+              selected={selectedDates}
+              onSelect={handleSelect}
+              components={{
+                Caption: yearSelector ? DropdownCaption : Caption,
+              }}
+              className="navds-date__calendar"
+              toYear={2022}
+              fromDate={new Date("Aug 23 2019")}
+              classNames={{ vhidden: "navds-sr-only" }}
+              disabled={(day) => {
+                return (
+                  (disableWeekends && isWeekend(day)) ||
+                  disableDate(disabled, day)
+                );
+              }}
+              weekStartsOn={1}
+              initialFocus={usePopover ? focusOnOpen : false}
+              labels={labels as any}
+              modifiers={{
+                weekend: (day) => disableWeekends && isWeekend(day),
+              }}
+              modifiersClassNames={{
+                weekend: "rdp-day__weekend",
+              }}
+              showWeekNumber={showWeekNumber}
+              /* selected={selected} */
+              {...rest}
+            />
           </div>
         ) : (
           <div ref={mergedRef} className="navds-date__wrapper">
@@ -206,7 +203,37 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   }
                   role="dialog"
                 >
-                  <Calendar />
+                  <DayPicker
+                    locale={getLocaleFromString(locale)}
+                    mode={mode}
+                    selected={selectedDates}
+                    onSelect={handleSelect}
+                    components={{
+                      Caption: yearSelector ? DropdownCaption : Caption,
+                    }}
+                    className="navds-date__calendar"
+                    toYear={2022}
+                    fromDate={new Date("Aug 23 2019")}
+                    classNames={{ vhidden: "navds-sr-only" }}
+                    disabled={(day) => {
+                      return (
+                        (disableWeekends && isWeekend(day)) ||
+                        disableDate(disabled, day)
+                      );
+                    }}
+                    weekStartsOn={1}
+                    initialFocus={usePopover ? focusOnOpen : false}
+                    labels={labels as any}
+                    modifiers={{
+                      weekend: (day) => disableWeekends && isWeekend(day),
+                    }}
+                    modifiersClassNames={{
+                      weekend: "rdp-day__weekend",
+                    }}
+                    showWeekNumber={showWeekNumber}
+                    /* selected={selected} */
+                    {...rest}
+                  />
                 </Popover>
               )}
             </FloatingPortal>
