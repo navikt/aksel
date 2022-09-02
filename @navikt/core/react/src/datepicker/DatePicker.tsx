@@ -143,6 +143,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       }
     };
 
+    const usePopover = !(
+      typeof popoverProps?.usePopover === "boolean" &&
+      popoverProps?.usePopover === false
+    );
+
     const Calendar = () => (
       <DayPicker
         locale={getLocaleFromString(locale)}
@@ -162,7 +167,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           );
         }}
         weekStartsOn={1}
-        initialFocus={focusOnOpen}
+        initialFocus={usePopover ? focusOnOpen : false}
         labels={labels as any}
         modifiers={{
           weekend: (day) => disableWeekends && isWeekend(day),
@@ -180,8 +185,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
-        {typeof popoverProps?.usePopover === "boolean" &&
-        popoverProps?.usePopover === false ? (
+        {!usePopover ? (
           <div ref={mergedRef} className="navds-date__wrapper">
             <Calendar />
           </div>

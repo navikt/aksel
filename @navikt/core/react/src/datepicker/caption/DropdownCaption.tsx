@@ -6,12 +6,12 @@ import { Button, Select } from "../..";
 import { getMonths, getYears } from "../utils/get-dates";
 import { labelMonthDropdown, labelYearDropdown } from "../utils/labels";
 
-export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
+export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
     toDate,
-    formatters: { formatYearCaption, formatMonthCaption },
+    formatters: { formatYearCaption, formatMonthCaption, formatCaption },
     labels: { labelPrevious, labelNext },
     locale,
   } = useDayPicker();
@@ -34,6 +34,14 @@ export const DropdownCaption = ({ displayMonth }: CaptionProps) => {
 
   return (
     <div className="navds-datepicker__caption-dropdown">
+      <span
+        aria-live="polite"
+        aria-atomic="true"
+        id={id}
+        className="navds-sr-only"
+      >
+        {formatCaption(displayMonth, { locale })}
+      </span>
       <Button
         aria-label={previousLabel}
         variant={"tertiary"}

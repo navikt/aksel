@@ -3,7 +3,7 @@ import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Label } from "../..";
 
-export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
+export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
@@ -24,6 +24,7 @@ export const DatePickerCaption = ({ displayMonth }: CaptionProps) => {
         as="span"
         aria-live="polite"
         aria-atomic="true"
+        id={id}
         className="navds-datepicker__caption-label"
       >
         {formatCaption(displayMonth, { locale })}
