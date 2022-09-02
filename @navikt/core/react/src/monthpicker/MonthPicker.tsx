@@ -60,14 +60,7 @@ const TestCaption = ({
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "0.5rem",
-        width: "100%",
-        justifyContent: "space-between",
-      }}
-    >
+    <div className="navds-monthpicker__caption">
       <button
         className="navds-monthpicker__caption-button"
         disabled={!previousMonth}
@@ -165,11 +158,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         toYear={2022}
         fromMonth={new Date("Aug 23 2019")}
       >
-        <>
+        <div className="navds-monthpicker__wrapper">
           <TestCaption selected={selected} onSelect={setSelected} />
           <MonthSelector onSelect={setSelected} />
           {selected && selected.toDateString()}
-        </>
+        </div>
       </RootProvider>
     );
   }

@@ -16,7 +16,7 @@ export default {
 
 export const Default = (props) => {
   return (
-    <div style={{ height: "30rem" }}>
+    <div style={{ height: "20rem" }}>
       <MonthPicker />
     </div>
   );

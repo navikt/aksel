@@ -2,3 +2,19 @@
 [data-theme="light"] {
   --navds-date-color-: #123123;
 }
+
+.navds-monthpicker__wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+}
+
+.navds-monthpicker__caption {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navds-monthpicker__months {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
