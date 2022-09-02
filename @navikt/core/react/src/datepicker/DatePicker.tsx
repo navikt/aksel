@@ -172,6 +172,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }}
         showWeekNumber={showWeekNumber}
         /* selected={selected} */
+        aria-roledescription={locale === "en" ? "datepicker" : "datovelger"}
+        role="dialog"
         {...rest}
       />
     );
