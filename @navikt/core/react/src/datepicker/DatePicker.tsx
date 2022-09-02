@@ -132,12 +132,11 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
-    >(/* getInitialSelected(mode, selected) */);
+    >(selected);
 
     const handleSelect = (selectedDate?: Date) => {
-      // TMP until multiple and range is implemented
+      setSelectedDates(selectedDate);
       if (mode === "single") {
-        setSelectedDates(selectedDate);
         selectedDate && setOpen(false);
         buttonRef && buttonRef?.current?.focus();
       }
@@ -158,7 +157,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               locale={getLocaleFromString(locale)}
               mode={mode}
               selected={selectedDates}
-              onSelect={handleSelect}
+              onSelect={(selectedDate: Date | undefined) =>
+                handleSelect(selectedDate)
+              }
               components={{
                 Caption: yearSelector ? DropdownCaption : Caption,
               }}
@@ -182,7 +183,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 weekend: "rdp-day__weekend",
               }}
               showWeekNumber={showWeekNumber}
-              /* selected={selected} */
               {...rest}
             />
           </div>
@@ -207,7 +207,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     locale={getLocaleFromString(locale)}
                     mode={mode}
                     selected={selectedDates}
-                    onSelect={handleSelect}
+                    onSelect={(selectedDate: Date | undefined) =>
+                      handleSelect(selectedDate)
+                    }
                     components={{
                       Caption: yearSelector ? DropdownCaption : Caption,
                     }}
@@ -231,7 +233,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                       weekend: "rdp-day__weekend",
                     }}
                     showWeekNumber={showWeekNumber}
-                    /* selected={selected} */
                     {...rest}
                   />
                 </Popover>

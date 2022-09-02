@@ -168,10 +168,7 @@ export const SelectedMultiple = (props) => (
 
 export const SelectedRange = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker
-      selected={{ from: new Date("Aug 3 2022"), to: new Date("Aug 11 2022") }}
-      mode="range"
-    >
+    <DatePicker selected={{ from: new Date(), to: undefined }} mode="range">
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
