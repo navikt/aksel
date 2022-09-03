@@ -180,6 +180,11 @@
   background-size: 7.07px 7.07px;
 }
 
+.rdp-day_range_middle.rdp-day_disabled {
+  color: var(--navds-semantic-color-text-inverted);
+  background: var(--navds-global-color-deepblue-500);
+}
+
 /* Left-side weeknumbers */
 .rdp-weeknumber {
   color: white;
