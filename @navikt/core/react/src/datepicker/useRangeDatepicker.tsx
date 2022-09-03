@@ -3,18 +3,18 @@ import { useState } from "react";
 import { DateRange, MonthChangeEventHandler } from "react-day-picker";
 import { DatePickerProps } from "./DatePicker";
 import { DatePickerInputProps } from "./DatePickerInput";
-import { useDatepickerProps } from "./useDatepicker";
+import { UseDatepickerOptions } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
 
-interface UseRangeDatePickerOptions
-  extends Omit<useDatepickerProps, "defaultSelected"> {
+interface UseRangeDatepickerOptions
+  extends Omit<UseDatepickerOptions, "defaultSelected"> {
   /** The initially selected date-range */
   defaultSelected?: DateRange;
 }
 
-interface UseRangeDatePickerValue {
+interface UseRangeDatepickerValue {
   dayPickerProps: DatePickerProps;
   fromInputProps: Pick<
     DatePickerInputProps,
@@ -37,8 +37,8 @@ const RANGE = {
 type RangeT = typeof RANGE[keyof typeof RANGE];
 
 export const useRangeDatepicker = (
-  opt: UseRangeDatePickerOptions = {}
-): UseRangeDatePickerValue => {
+  opt: UseRangeDatepickerOptions = {}
+): UseRangeDatepickerValue => {
   const {
     locale: _locale = "nb",
     defaultSelected,

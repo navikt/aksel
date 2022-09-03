@@ -10,7 +10,7 @@ import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
 
-export interface useDatepickerProps
+export interface UseDatepickerOptions
   extends Pick<
     DatePickerProps,
     | "locale"
@@ -27,19 +27,20 @@ export interface useDatepickerProps
   required?: boolean;
 }
 
-interface DatepickerInputHookProps extends Partial<DatePickerInputProps> {}
-
-interface useDatepickerValue {
+interface UseDatepickerValue {
   dayPickerProps: DatePickerProps;
-  inputProps: DatepickerInputHookProps;
+  inputProps: Pick<
+    DatePickerInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  >;
   reset: () => void;
   selectedDay?: Date;
   setSelected: (date?: Date) => void;
 }
 
 export const useDatepicker = (
-  opt: useDatepickerProps = {}
-): useDatepickerValue => {
+  opt: UseDatepickerOptions = {}
+): UseDatepickerValue => {
   const {
     locale: _locale = "nb",
     required,
@@ -119,7 +120,7 @@ export const useDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps: DatePickerProps = {
+  const dayPickerProps = {
     month: month,
     onMonthChange: handleMonthChange,
     onDayClick: handleDayClick,
@@ -130,7 +131,7 @@ export const useDatepicker = (
     today,
   };
 
-  const inputProps: DatepickerInputHookProps = {
+  const inputProps = {
     onChange: handleChange,
     onFocus: handleFocus,
     onBlur: handleBlur,
