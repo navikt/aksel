@@ -213,7 +213,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               components={{
                 Caption: yearSelector ? DropdownCaption : Caption,
               }}
-              className="navds-date__calendar"
+              className="navds-date"
               classNames={{ vhidden: "navds-sr-only" }}
               disabled={(day) => {
                 return (
@@ -259,8 +259,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     components={{
                       Caption: yearSelector ? DropdownCaption : Caption,
                     }}
-                    className="navds-date__calendar"
-                    classNames={{ vhidden: "navds-sr-only" }}
+                    className="navds-date"
+                    classNames={{
+                      vhidden: "navds-sr-only",
+                    }}
                     disabled={(day) => {
                       return (
                         (disableWeekends && isWeekend(day)) ||

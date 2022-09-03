@@ -79,7 +79,7 @@
   outline: none;
 }
 
-.navds-date__calendar {
+.navds-date {
   padding: var(--navds-spacing-3);
 }
 
@@ -122,18 +122,18 @@
   text-transform: capitalize;
 }
 
-.rdp-month {
+.navds-date .rdp-month {
   display: flex;
   flex-direction: column;
   gap: var(--navds-spacing-5);
 }
 
-.rdp-head_cell {
+.navds-date .rdp-head_cell {
   text-transform: capitalize;
   font-size: 14px;
 }
 
-.rdp-button {
+.navds-date .rdp-button {
   all: unset;
   width: 2.5rem;
   height: 2.5rem;
@@ -141,31 +141,31 @@
   border-radius: 4px;
 }
 
-.rdp-button:not(.rdp-day_selected):not([disabled]):hover {
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
   cursor: pointer;
 }
 
-.rdp-button:not(.rdp-day_selected):not([disabled]):focus {
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus {
   box-shadow: var(--navds-shadow-focus);
 }
 
-.rdp-button.rdp-day_selected:not([disabled]):focus {
+.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus {
   box-shadow: inset 0 0 0 1px white,
     0 0 0 3px var(--navds-global-color-blue-800);
 }
 
-.rdp-day_today {
+.navds-date .rdp-day_today {
   border: 1px solid var(--navds-global-color-deepblue-500);
 }
 
-.rdp-day_selected {
+.navds-date .rdp-day_selected {
   color: var(--navds-semantic-color-text-inverted);
   background: var(--navds-global-color-deepblue-500);
 }
 
 /* Design uses image as background, so created bg with css. Need to get a token for the stripes. */
-.rdp-day_disabled {
+.navds-date .rdp-day_disabled {
   color: var(--navds-semantic-color-text-muted);
   background-image: linear-gradient(
     135deg,
@@ -180,13 +180,13 @@
   background-size: 7.07px 7.07px;
 }
 
-.rdp-day_range_middle.rdp-day_disabled {
+.navds-date .rdp-day_range_middle.rdp-day_disabled {
   color: var(--navds-semantic-color-text-inverted);
   background: var(--navds-global-color-deepblue-500);
 }
 
 /* Left-side weeknumbers */
-.rdp-weeknumber {
+.navds-date .rdp-weeknumber {
   color: white;
   background: var(--navds-global-color-gray-800);
   font-size: 14px;
@@ -197,15 +197,15 @@
   border-radius: 2px;
 }
 
-.rdp-day_range_start {
+.navds-date .rdp-day_range_start {
   border-radius: 12px 2px 2px 12px;
 }
 
-.rdp-day_range_end:not(.rdp-day_range_start) {
+.navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
   border-radius: 2px 12px 12px 2px;
 }
 
-.rdp-day_range_start.rdp-day_range_end {
+.navds-date .rdp-day_range_start.rdp-day_range_end {
   border-radius: 12px;
 }
 
