@@ -214,8 +214,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 Caption: yearSelector ? DropdownCaption : Caption,
               }}
               className="navds-date__calendar"
-              toYear={2022}
-              fromDate={new Date("Aug 23 2019")}
               classNames={{ vhidden: "navds-sr-only" }}
               disabled={(day) => {
                 return (
@@ -262,8 +260,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                       Caption: yearSelector ? DropdownCaption : Caption,
                     }}
                     className="navds-date__calendar"
-                    toYear={2022}
-                    fromDate={new Date("Aug 23 2019")}
                     classNames={{ vhidden: "navds-sr-only" }}
                     disabled={(day) => {
                       return (

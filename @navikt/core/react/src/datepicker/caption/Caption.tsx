@@ -6,14 +6,10 @@ import { Button, Label } from "../..";
 export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
   const {
-    fromDate,
-    toDate,
     labels: { labelPrevious, labelNext },
     formatters: { formatCaption },
     locale,
   } = useDayPicker();
-
-  if (!fromDate || !toDate) return <></>;
 
   const previousLabel = labelPrevious(previousMonth, { locale });
   const nextLabel = labelNext(nextMonth, { locale });
