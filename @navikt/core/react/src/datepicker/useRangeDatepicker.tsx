@@ -87,18 +87,51 @@ export const useRangeDatepicker = (
     }
   };
 
+  const handleInputs = (day: Date, src: "start" | "end") => {
+    if (src === "start") {
+      const isAfter =
+        toInputValue &&
+        differenceInCalendarDays(day, parseDate(toInputValue, today, locale)) >
+          0;
+
+      if (isAfter) {
+        console.log("after");
+        setFromInputValue(
+          formatDateForInput(parseDate(toInputValue, today, locale), locale)
+        );
+        setToInputValue(formatDateForInput(day, locale));
+      } else {
+        console.log("after2");
+        setFromInputValue(formatDateForInput(day, locale));
+      }
+    } else if (src === "end") {
+      const isBefore =
+        fromInputValue &&
+        differenceInCalendarDays(
+          parseDate(fromInputValue, today, locale),
+          day
+        ) > 0;
+
+      if (isBefore) {
+        console.log("before");
+        setToInputValue(
+          formatDateForInput(parseDate(fromInputValue, today, locale), locale)
+        );
+        setFromInputValue(formatDateForInput(day, locale));
+      } else {
+        console.log("before2");
+        setToInputValue(formatDateForInput(day, locale));
+      }
+    }
+  };
+
   const handleBlur = (e, src: "start" | "end") => {
-    /*   if (!e.target.value) {
-      reset();
+    let day = parseDate(e.target.value, today, locale);
+    if (!isValidDate(day)) {
       return;
     }
-    let day = parseDate(e.target.value, today, locale);
-    if (isValidDate(day)) {
-      setMonth(day);
-      src === "start"
-        ? setFromInputValue(formatDateForInput(day, locale))
-        : setToInputValue(formatDateForInput(day, locale));
-    } */
+
+    handleInputs(day, src);
   };
 
   const handleSelect = (range) => {
@@ -183,7 +216,7 @@ export const useRangeDatepicker = (
     onFocus: (e: React.FocusEventHandler<HTMLInputElement>) =>
       handleFocus(e, "end"),
     onBlur: (e: React.FocusEventHandler<HTMLInputElement>) =>
-      handleBlur(e, "start"),
+      handleBlur(e, "end"),
     value: toInputValue,
   };
 
