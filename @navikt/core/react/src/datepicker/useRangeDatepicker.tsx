@@ -2,23 +2,28 @@ import { differenceInCalendarDays } from "date-fns";
 import { useState } from "react";
 import { DateRange, MonthChangeEventHandler } from "react-day-picker";
 import { DatePickerProps } from "./DatePicker";
+import { DatePickerInputProps } from "./DatePickerInput";
 import { useDatepickerProps } from "./useDatepicker";
 import { formatDateForInput } from "./utils/format-date";
 import { parseDate } from "./utils/parse-date";
 import { getLocaleFromString, isValidDate } from "./utils/util";
 
-interface useRangeDatepickerProps
+interface UseRangeDatePickerOptions
   extends Omit<useDatepickerProps, "defaultSelected"> {
   /** The initially selected date-range */
   defaultSelected?: DateRange;
 }
 
-interface DatepickerInputRangeHookProps {}
-
-interface useRangeDatepickerValue {
+interface UseRangeDatePickerValue {
   dayPickerProps: DatePickerProps;
-  fromInputProps: DatepickerInputRangeHookProps;
-  toInputProps: DatepickerInputRangeHookProps;
+  fromInputProps: Pick<
+    DatePickerInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  >;
+  toInputProps: Pick<
+    DatePickerInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value"
+  >;
   reset: () => void;
   selectedRange?: DateRange;
   setSelected: (date?: DateRange) => void;
@@ -32,8 +37,8 @@ const RANGE = {
 type RangeT = typeof RANGE[keyof typeof RANGE];
 
 export const useRangeDatepicker = (
-  opt: useRangeDatepickerProps = {}
-): useRangeDatepickerValue => {
+  opt: UseRangeDatePickerOptions = {}
+): UseRangeDatePickerValue => {
   const {
     locale: _locale = "nb",
     defaultSelected,
@@ -75,7 +80,6 @@ export const useRangeDatepicker = (
 
   const setSelected = (range?: DateRange) => {
     setSelectedRange(range);
-    /* setMonth(range?.from ?? today); */
     setFromInputValue(
       range?.from ? formatDateForInput(range.from, locale) : ""
     );
@@ -203,14 +207,14 @@ export const useRangeDatepicker = (
     mode: "range",
   };
 
-  const fromInputProps: DatepickerInputRangeHookProps = {
+  const fromInputProps = {
     onChange: (e) => handleChange(e, RANGE.FROM),
     onFocus: (e) => handleFocus(e, RANGE.FROM),
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
   };
 
-  const toInputProps: DatepickerInputRangeHookProps = {
+  const toInputProps = {
     onChange: (e) => handleChange(e, RANGE.TO),
     onFocus: (e) => handleFocus(e, RANGE.TO),
     onBlur: (e) => handleBlur(e, RANGE.TO),
