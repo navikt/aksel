@@ -23,10 +23,13 @@ import { omit } from "../util";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
+import DatePickerStandalone, {
+  DatePickerStandaloneType,
+} from "./DatePickerStandalone";
 import { labels } from "./utils/labels";
 import { getLocaleFromString } from "./utils/util";
 
-type ConditionalModeProps =
+export type ConditionalModeProps =
   | {
       mode?: "single";
       onSelect?: (val?: Date) => void;
@@ -123,6 +126,7 @@ export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 interface DatePickerComponent
   extends React.ForwardRefExoticComponent<DatePickerProps> {
   Input: DatePickerInputType;
+  Standalone: DatePickerStandaloneType;
 }
 
 interface DatePickerContextProps {
@@ -308,5 +312,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 ) as DatePickerComponent;
 
 DatePicker.Input = DatePickerInput;
+DatePicker.Standalone = DatePickerStandalone;
 
 export default DatePicker;
