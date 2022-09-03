@@ -95,13 +95,11 @@ export const useRangeDatepicker = (
           0;
 
       if (isAfter) {
-        console.log("after");
         setFromInputValue(
           formatDateForInput(parseDate(toInputValue, today, locale), locale)
         );
         setToInputValue(formatDateForInput(day, locale));
       } else {
-        console.log("after2");
         setFromInputValue(formatDateForInput(day, locale));
       }
     } else if (src === "end") {
@@ -113,13 +111,11 @@ export const useRangeDatepicker = (
         ) > 0;
 
       if (isBefore) {
-        console.log("before");
         setToInputValue(
           formatDateForInput(parseDate(fromInputValue, today, locale), locale)
         );
         setFromInputValue(formatDateForInput(day, locale));
       } else {
-        console.log("before2");
         setToInputValue(formatDateForInput(day, locale));
       }
     }
