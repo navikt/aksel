@@ -268,7 +268,7 @@ export const SelectedRange = (props) => (
 
 export const NoPopover = () => (
   <div style={{ height: "30rem" }}>
-    <DatePicker popoverOptions={{ usePopover: false }} />
+    <DatePicker.Standalone />
   </div>
 );
 
@@ -280,10 +280,8 @@ export const UserControlled = () => {
     <div style={{ height: "30rem" }}>
       <DatePicker
         mode="multiple"
-        popoverOptions={{
-          open,
-          onClose: () => setOpen(false),
-        }}
+        open={open}
+        onClose={() => setOpen(false)}
         id={id}
       >
         <Button

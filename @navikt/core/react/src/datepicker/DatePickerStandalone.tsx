@@ -18,7 +18,7 @@ import { getLocaleFromString } from "./utils/util";
 interface DatePickerStandaloneDefaultProps
   extends Omit<
     DatePickerDefaultProps,
-    "focusOnOpen" | "popoverOptions" | "classNames"
+    "focusOnOpen" | "open" | "onClose" | "classNames"
   > {
   className?: string;
 }

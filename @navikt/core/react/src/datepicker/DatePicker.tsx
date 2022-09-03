@@ -96,22 +96,14 @@ export interface DatePickerDefaultProps
    */
   showWeekNumber?: boolean;
   /**
-   *
+   * Open state
+   * @remark Controlled by component by default
    */
-  popoverOptions?: {
-    /**
-     * @default true
-     */
-    usePopover?: boolean;
-    /**
-     * Open state
-     */
-    open?: boolean;
-    /**
-     * onClose callback
-     */
-    onClose?: () => void;
-  };
+  open?: boolean;
+  /**
+   * onClose callback
+   */
+  onClose?: () => void;
   /**
    *
    */
@@ -156,15 +148,16 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       mode = "single",
       selected,
       id,
-      popoverOptions,
       defaultSelected,
       classNames,
+      open: _open,
+      onClose,
       ...rest
     },
     ref
   ) => {
     const ariaId = useId(id);
-    const [open, setOpen] = useState(popoverOptions?.open ?? false);
+    const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -176,7 +169,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
       setSelectedDates(selectedDay);
-      selectedDay && (popoverOptions?.onClose?.() ?? setOpen(false));
+      selectedDay && (onClose?.() ?? setOpen(false));
       selectedDay && buttonRef && buttonRef?.current?.focus();
       rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
     };
@@ -189,9 +182,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
-      selectedDays?.from &&
-        selectedDays?.to &&
-        (popoverOptions?.onClose?.() ?? setOpen(false));
+      selectedDays?.from && selectedDays?.to && (onClose?.() ?? setOpen(false));
       selectedDays?.from &&
         selectedDays?.to &&
         buttonRef &&
@@ -199,11 +190,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       rest?.onSelect &&
         (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
     };
-
-    const usePopover = !(
-      typeof popoverOptions?.usePopover === "boolean" &&
-      popoverOptions?.usePopover === false
-    );
 
     const overrideProps = {
       onSelect:
@@ -218,94 +204,59 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       <DatePickerContext.Provider
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
-        {!usePopover ? (
-          <div
-            ref={mergedRef}
-            className={cl("navds-date__wrapper", classNames?.wrapper)}
-          >
-            <DayPicker
-              locale={getLocaleFromString(locale)}
-              mode={mode}
-              {...overrideProps}
-              selected={selected ?? selectedDates}
-              components={{
-                Caption: yearSelector ? DropdownCaption : Caption,
-              }}
-              className={cl("navds-date", classNames?.datepicker)}
-              classNames={{ vhidden: "navds-sr-only" }}
-              disabled={(day) => {
-                return (
-                  (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
-                );
-              }}
-              weekStartsOn={1}
-              initialFocus={usePopover ? focusOnOpen : false}
-              labels={labels as any}
-              modifiers={{
-                weekend: (day) => disableWeekends && isWeekend(day),
-              }}
-              modifiersClassNames={{
-                weekend: "rdp-day__weekend",
-              }}
-              showWeekNumber={showWeekNumber}
-              {...omit(rest, ["onSelect"])}
-            />
-          </div>
-        ) : (
-          <div
-            ref={mergedRef}
-            className={cl("navds-date__wrapper", classNames?.wrapper)}
-          >
-            {children}
-            <FloatingPortal>
-              {(popoverOptions?.open ?? open) && (
-                <Popover
-                  arrow={false}
-                  anchorEl={wrapperRef.current}
-                  open={popoverOptions?.open ?? open}
-                  onClose={() => popoverOptions?.onClose?.() ?? setOpen(false)}
-                  placement="bottom-start"
-                  id={ariaId}
-                  aria-roledescription={
-                    locale === "en" ? "datepicker" : "datovelger"
-                  }
-                  role="dialog"
-                >
-                  <DayPicker
-                    locale={getLocaleFromString(locale)}
-                    mode={mode}
-                    {...overrideProps}
-                    selected={selected ?? selectedDates}
-                    components={{
-                      Caption: yearSelector ? DropdownCaption : Caption,
-                    }}
-                    className={cl("navds-date", classNames?.datepicker)}
-                    classNames={{
-                      vhidden: "navds-sr-only",
-                    }}
-                    disabled={(day) => {
-                      return (
-                        (disableWeekends && isWeekend(day)) ||
-                        isMatch(day, disabled)
-                      );
-                    }}
-                    weekStartsOn={1}
-                    initialFocus={usePopover ? focusOnOpen : false}
-                    labels={labels as any}
-                    modifiers={{
-                      weekend: (day) => disableWeekends && isWeekend(day),
-                    }}
-                    modifiersClassNames={{
-                      weekend: "rdp-day__weekend",
-                    }}
-                    showWeekNumber={showWeekNumber}
-                    {...omit(rest, ["onSelect"])}
-                  />
-                </Popover>
-              )}
-            </FloatingPortal>
-          </div>
-        )}
+        <div
+          ref={mergedRef}
+          className={cl("navds-date__wrapper", classNames?.wrapper)}
+        >
+          {children}
+          <FloatingPortal>
+            {(_open ?? open) && (
+              <Popover
+                arrow={false}
+                anchorEl={wrapperRef.current}
+                open={_open ?? open}
+                onClose={() => onClose?.() ?? setOpen(false)}
+                placement="bottom-start"
+                id={ariaId}
+                aria-roledescription={
+                  locale === "en" ? "datepicker" : "datovelger"
+                }
+                role="dialog"
+              >
+                <DayPicker
+                  locale={getLocaleFromString(locale)}
+                  mode={mode}
+                  {...overrideProps}
+                  selected={selected ?? selectedDates}
+                  components={{
+                    Caption: yearSelector ? DropdownCaption : Caption,
+                  }}
+                  className={cl("navds-date", classNames?.datepicker)}
+                  classNames={{
+                    vhidden: "navds-sr-only",
+                  }}
+                  disabled={(day) => {
+                    return (
+                      (disableWeekends && isWeekend(day)) ||
+                      isMatch(day, disabled)
+                    );
+                  }}
+                  weekStartsOn={1}
+                  initialFocus={focusOnOpen}
+                  labels={labels as any}
+                  modifiers={{
+                    weekend: (day) => disableWeekends && isWeekend(day),
+                  }}
+                  modifiersClassNames={{
+                    weekend: "rdp-day__weekend",
+                  }}
+                  showWeekNumber={showWeekNumber}
+                  {...omit(rest, ["onSelect"])}
+                />
+              </Popover>
+            )}
+          </FloatingPortal>
+        </div>
       </DatePickerContext.Provider>
     );
   }
