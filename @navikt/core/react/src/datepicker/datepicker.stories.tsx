@@ -27,10 +27,40 @@ export default {
         options: ["nb", "nn", "en"],
       },
     },
+    mode: {
+      control: {
+        type: "radio",
+        options: ["single", "multiple", "range"],
+      },
+    },
   },
 };
 
 export const Default = (props) => {
+  const [open, setOpen] = useState(false);
+
+  const rangeCtx = useRangeDatepicker({
+    fromDate: new Date("Aug 23 2020"),
+    toDate: new Date("Aug 23 2023"),
+  });
+
+  const singleCtx = useDatepicker({
+    fromDate: new Date("Aug 23 2020"),
+    toDate: new Date("Aug 23 2023"),
+  });
+
+  const newProps = {
+    ...(!props.inputfield || props.mode === "multiple"
+      ? {
+          popoverOptions: {
+            open,
+            onClose: () => setOpen(false),
+            usePopover: props.usePopover,
+          },
+        }
+      : { popoverOptions: { usePopover: props.usePopover } }),
+  };
+
   return (
     <div style={{ height: "30rem" }}>
       <DatePicker
@@ -38,8 +68,48 @@ export const Default = (props) => {
         yearSelector={props?.yearSelector}
         disableWeekends={props?.disableWeekends}
         focusOnOpen={props?.focusOnOpen}
+        mode={props.mode}
+        {...newProps}
+        {...(props.mode === "single"
+          ? singleCtx.dayPickerProps
+          : props.mode === "range"
+          ? rangeCtx.dayPickerProps
+          : {})}
       >
-        <DatePicker.Input label="Velg dato" size={props?.size} />
+        {props.usePopover && (
+          <>
+            {props.inputfield && props.mode !== "multiple" ? (
+              <>
+                {props.mode === "range" ? (
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <DatePicker.Input
+                      label="Fra"
+                      size={props?.size}
+                      {...rangeCtx.fromInputProps}
+                    />
+                    <DatePicker.Input
+                      label="Til"
+                      size={props?.size}
+                      {...rangeCtx.toInputProps}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <DatePicker.Input
+                      label="Velg dato"
+                      size={props?.size}
+                      {...singleCtx.inputProps}
+                    />
+                  </>
+                )}
+              </>
+            ) : (
+              <Button onClick={() => setOpen((x) => !x)}>
+                Åpne datovelger
+              </Button>
+            )}
+          </>
+        )}
       </DatePicker>
     </div>
   );
@@ -50,6 +120,8 @@ Default.args = {
   disableWeekends: false,
   focusOnOpen: true,
   showWeekNumber: false,
+  inputfield: true,
+  usePopover: true,
 };
 
 export const Dropdown = (props) => (
