@@ -27,19 +27,19 @@ import { getLocaleFromString } from "./utils/util";
 type ConditionalModeProps =
   | {
       mode?: "single";
-      onSelect?: (val?: Date | Date[] | DateRange) => void;
+      onSelect?: (val?: Date) => void;
       selected?: Date;
       defaultSelected?: Date;
     }
   | {
       mode?: "multiple";
-      onSelect?: (val?: Date | Date[] | DateRange) => void;
+      onSelect?: (val?: Date[]) => void;
       selected?: Date[];
       defaultSelected?: Date[];
     }
   | {
       mode?: "range";
-      onSelect?: (val?: Date | Date[] | DateRange) => void;
+      onSelect?: (val?: DateRange) => void;
       selected?: DateRange;
       defaultSelected?: DateRange;
     };
@@ -47,10 +47,10 @@ type ConditionalModeProps =
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
-    Pick<
-      DayPickerBase,
-      "month" | "onMonthChange" | "today" | "selected" | "onDayClick"
-    > {
+    Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
+  /**
+   * Wraps datepicker anchor around children if usePopover: true
+   */
   children?: React.ReactNode;
   /**
    * Changes datepicker locale
@@ -92,16 +92,11 @@ export interface DatePickerDefaultProps
   /**
    *
    */
-  popoverProps?: {
+  popoverOptions?: {
     /**
      * @default true
      */
     usePopover: boolean;
-    /**
-     *
-     * @default false
-     */
-    open?: boolean;
   };
 }
 
@@ -139,7 +134,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       mode = "single",
       selected,
       id,
-      popoverProps,
+      popoverOptions,
       defaultSelected,
       ...rest
     },
@@ -160,12 +155,13 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       setSelectedDates(selectedDay);
       selectedDay && setOpen(false);
       selectedDay && buttonRef && buttonRef?.current?.focus();
-      rest?.onSelect && rest?.onSelect(selectedDay);
+      rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
     };
 
     const handleMultipleSelect: SelectMultipleEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
-      rest?.onSelect && rest?.onSelect(selectedDays);
+      rest?.onSelect &&
+        (rest?.onSelect as (val?: Date[]) => void)(selectedDays);
     };
 
     const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
@@ -175,15 +171,15 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         selectedDays?.to &&
         buttonRef &&
         buttonRef?.current?.focus();
-      rest?.onSelect && rest?.onSelect(selectedDays);
+      rest?.onSelect &&
+        (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
     };
 
     const usePopover = !(
-      typeof popoverProps?.usePopover === "boolean" &&
-      popoverProps?.usePopover === false
+      typeof popoverOptions?.usePopover === "boolean" &&
+      popoverOptions?.usePopover === false
     );
 
-    /* Hack for typer */
     const overrideProps = {
       onSelect:
         mode === "single"
