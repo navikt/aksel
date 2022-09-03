@@ -1,6 +1,7 @@
 import { isSameDay } from "date-fns";
 import { isDateRange } from "react-day-picker";
 
+// TODO: ((date: Date) => boolean)
 export const disableDate = (
   disabledSelection: Date | Array<any>,
   date: Date

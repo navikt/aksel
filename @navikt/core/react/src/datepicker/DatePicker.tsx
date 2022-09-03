@@ -1,4 +1,5 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, {
   createContext,
@@ -11,6 +12,8 @@ import {
   DateRange,
   DayPicker,
   DayPickerBase,
+  isMatch,
+  Matcher,
   SelectMultipleEventHandler,
   SelectRangeEventHandler,
   SelectSingleEventHandler,
@@ -20,10 +23,8 @@ import { omit } from "../util";
 import Caption from "./caption/Caption";
 import DropdownCaption from "./caption/DropdownCaption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
-import { disableDate } from "./utils/dates-disabled";
 import { labels } from "./utils/labels";
 import { getLocaleFromString } from "./utils/util";
-import cl from "clsx";
 
 type ConditionalModeProps =
   | {
@@ -72,8 +73,9 @@ export interface DatePickerDefaultProps
   yearSelector?: boolean;
   /**
    * Apply the disabled modifier to the matching days.
+   * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
    */
-  disabled?: Array<Date | DateRange>;
+  disabled?: Matcher[];
   /**
    * Sets focus on selected date or todays date if not selected.
    * @warning If selected/todays date is disabled, this will focus first visible day.
@@ -229,8 +231,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               classNames={{ vhidden: "navds-sr-only" }}
               disabled={(day) => {
                 return (
-                  (disableWeekends && isWeekend(day)) ||
-                  disableDate(disabled, day)
+                  (disableWeekends && isWeekend(day)) || isMatch(day, disabled)
                 );
               }}
               weekStartsOn={1}
@@ -281,7 +282,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     disabled={(day) => {
                       return (
                         (disableWeekends && isWeekend(day)) ||
-                        disableDate(disabled, day)
+                        isMatch(day, disabled)
                       );
                     }}
                     weekStartsOn={1}
