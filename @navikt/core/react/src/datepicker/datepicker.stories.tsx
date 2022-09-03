@@ -133,7 +133,7 @@ export const UseDatepicker = () => {
 };
 
 export const UseRangedDatepicker = () => {
-  const { dayPickerProps, startInputProps, endInputProps, selectedRange } =
+  const { dayPickerProps, fromInputProps, toInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
     });
@@ -146,8 +146,8 @@ export const UseRangedDatepicker = () => {
     <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
-          <DatePicker.Input {...startInputProps} label="Fra" />
-          <DatePicker.Input {...endInputProps} label="Til" />
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
         </div>
       </DatePicker>
     </div>

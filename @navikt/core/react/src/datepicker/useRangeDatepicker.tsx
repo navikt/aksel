@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import React, { useState } from "react";
+import { useState } from "react";
 import { DateRange, MonthChangeEventHandler } from "react-day-picker";
 import { DatePickerProps } from "./DatePicker";
 import { useDatepickerProps } from "./useDatepicker";
@@ -17,12 +17,19 @@ interface DatepickerInputRangeHookProps {}
 
 interface useRangeDatepickerValue {
   dayPickerProps: DatePickerProps;
-  startInputProps: DatepickerInputRangeHookProps;
-  endInputProps: DatepickerInputRangeHookProps;
+  fromInputProps: DatepickerInputRangeHookProps;
+  toInputProps: DatepickerInputRangeHookProps;
   reset: () => void;
   selectedRange?: DateRange;
   setSelected: (date?: DateRange) => void;
 }
+
+const RANGE = {
+  FROM: "FROM",
+  TO: "TO",
+} as const;
+
+type RangeT = typeof RANGE[keyof typeof RANGE];
 
 export const useRangeDatepicker = (
   opt: useRangeDatepickerProps = {}
@@ -77,18 +84,18 @@ export const useRangeDatepicker = (
 
   const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
 
-  const handleFocus = (e, src: "start" | "end") => {
+  const handleFocus = (e, src: RangeT) => {
     let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
       setMonth(day);
-      src === "start"
+      src === RANGE.FROM
         ? setFromInputValue(formatDateForInput(day, locale))
         : setToInputValue(formatDateForInput(day, locale));
     }
   };
 
-  const handleInputs = (day: Date, src: "start" | "end") => {
-    if (src === "start") {
+  const handleInputs = (day: Date, src: RangeT) => {
+    if (src === RANGE.FROM) {
       const isAfter =
         toInputValue &&
         differenceInCalendarDays(day, parseDate(toInputValue, today, locale)) >
@@ -102,7 +109,7 @@ export const useRangeDatepicker = (
       } else {
         setFromInputValue(formatDateForInput(day, locale));
       }
-    } else if (src === "end") {
+    } else if (src === RANGE.TO) {
       const isBefore =
         fromInputValue &&
         differenceInCalendarDays(
@@ -121,7 +128,7 @@ export const useRangeDatepicker = (
     }
   };
 
-  const handleBlur = (e, src: "start" | "end") => {
+  const handleBlur = (e, src: RangeT) => {
     let day = parseDate(e.target.value, today, locale);
     if (!isValidDate(day)) {
       return;
@@ -144,8 +151,8 @@ export const useRangeDatepicker = (
   };
 
   /* live-update datepicker based on changes in inputfields */
-  const handleChange = (e, src: "start" | "end") => {
-    src === "start"
+  const handleChange = (e, src: RangeT) => {
+    src === RANGE.FROM
       ? setFromInputValue(e.target.value)
       : setToInputValue(e.target.value);
     const day = parseDate(e.target.value, today, locale);
@@ -153,14 +160,14 @@ export const useRangeDatepicker = (
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (!isValidDate(day) || isBefore || isAfter) {
-      src === "start"
+      src === RANGE.FROM
         ? setSelectedRange((x) => ({ ...x, from: undefined }))
         : setSelectedRange((x) => ({ from: x?.from, to: undefined }));
       return;
     }
 
     if (
-      src === "end" &&
+      src === RANGE.TO &&
       selectedRange?.from &&
       differenceInCalendarDays(selectedRange?.from, day) >= 0
     ) {
@@ -170,7 +177,7 @@ export const useRangeDatepicker = (
     }
 
     if (
-      src === "start" &&
+      src === RANGE.FROM &&
       selectedRange?.to &&
       differenceInCalendarDays(day, selectedRange?.to) >= 0
     ) {
@@ -179,8 +186,8 @@ export const useRangeDatepicker = (
       return;
     }
 
-    src === "start" && setSelectedRange((x) => ({ ...x, from: day }));
-    src === "end" && setSelectedRange((x) => ({ from: x?.from, to: day }));
+    src === RANGE.FROM && setSelectedRange((x) => ({ ...x, from: day }));
+    src === RANGE.TO && setSelectedRange((x) => ({ from: x?.from, to: day }));
     setMonth(day);
   };
 
@@ -196,30 +203,24 @@ export const useRangeDatepicker = (
     mode: "range",
   };
 
-  const startInputProps: DatepickerInputRangeHookProps = {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-      handleChange(e, "start"),
-    onFocus: (e: React.FocusEventHandler<HTMLInputElement>) =>
-      handleFocus(e, "start"),
-    onBlur: (e: React.FocusEventHandler<HTMLInputElement>) =>
-      handleBlur(e, "start"),
+  const fromInputProps: DatepickerInputRangeHookProps = {
+    onChange: (e) => handleChange(e, RANGE.FROM),
+    onFocus: (e) => handleFocus(e, RANGE.FROM),
+    onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
   };
 
-  const endInputProps: DatepickerInputRangeHookProps = {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-      handleChange(e, "end"),
-    onFocus: (e: React.FocusEventHandler<HTMLInputElement>) =>
-      handleFocus(e, "end"),
-    onBlur: (e: React.FocusEventHandler<HTMLInputElement>) =>
-      handleBlur(e, "end"),
+  const toInputProps: DatepickerInputRangeHookProps = {
+    onChange: (e) => handleChange(e, RANGE.TO),
+    onFocus: (e) => handleFocus(e, RANGE.TO),
+    onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
   };
 
   return {
     dayPickerProps,
-    startInputProps,
-    endInputProps,
+    fromInputProps,
+    toInputProps,
     reset,
     selectedRange,
     setSelected,
