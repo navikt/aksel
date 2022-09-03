@@ -4,11 +4,11 @@ import {
   DayClickEventHandler,
   MonthChangeEventHandler,
 } from "react-day-picker";
-import { DatePickerProps } from "./DatePicker";
-import { DatePickerInputProps } from "./DatePickerInput";
-import { formatDateForInput } from "./utils/format-date";
-import { parseDate } from "./utils/parse-date";
-import { getLocaleFromString, isValidDate } from "./utils/util";
+import { DatePickerProps } from "../DatePicker";
+import { DatePickerInputProps } from "../DatePickerInput";
+import { formatDateForInput } from "../utils/format-date";
+import { parseDate } from "../utils/parse-date";
+import { getLocaleFromString, isValidDate } from "../utils/util";
 
 export interface UseDatepickerOptions
   extends Pick<

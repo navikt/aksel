@@ -3,7 +3,7 @@ import React, { useEffect, useId, useState } from "react";
 import { Button } from "../button";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
-import { useRangeDatepicker } from "./useRangeDatepicker";
+import { useRangeDatepicker } from "./hooks";
 import { isValidDate } from "./utils/util";
 
 const disabledDays = [
