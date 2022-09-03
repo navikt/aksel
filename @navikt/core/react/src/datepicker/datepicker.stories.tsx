@@ -1,5 +1,5 @@
 import { isSameDay } from "date-fns";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import { Button } from "../button";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
@@ -202,6 +202,7 @@ export const NoPopover = () => (
 
 export const UserControlled = () => {
   const [open, setOpen] = useState(false);
+  const id = useId();
 
   return (
     <div style={{ height: "30rem" }}>
@@ -211,8 +212,15 @@ export const UserControlled = () => {
           open,
           onClose: () => setOpen(false),
         }}
+        id={id}
       >
-        <Button onClick={() => setOpen((x) => !x)}>Legg til dager</Button>
+        <Button
+          aria-controls={id}
+          aria-haspopup="grid"
+          onClick={() => setOpen((x) => !x)}
+        >
+          Legg til dager
+        </Button>
       </DatePicker>
     </div>
   );
