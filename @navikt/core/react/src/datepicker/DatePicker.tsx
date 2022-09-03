@@ -96,7 +96,15 @@ export interface DatePickerDefaultProps
     /**
      * @default true
      */
-    usePopover: boolean;
+    usePopover?: boolean;
+    /**
+     * Open state
+     */
+    open?: boolean;
+    /**
+     * onClose callback
+     */
+    onClose?: () => void;
   };
 }
 
@@ -141,7 +149,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     ref
   ) => {
     const ariaId = useId(id);
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(popoverOptions?.open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
@@ -153,7 +161,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
       setSelectedDates(selectedDay);
-      selectedDay && setOpen(false);
+      selectedDay && (popoverOptions?.onClose?.() ?? setOpen(false));
       selectedDay && buttonRef && buttonRef?.current?.focus();
       rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
     };
@@ -166,7 +174,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
-      selectedDays?.from && selectedDays?.to && setOpen(false);
+      selectedDays?.from &&
+        selectedDays?.to &&
+        (popoverOptions?.onClose?.() ?? setOpen(false));
       selectedDays?.from &&
         selectedDays?.to &&
         buttonRef &&
@@ -230,12 +240,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           <div ref={mergedRef} className="navds-date__wrapper">
             {children}
             <FloatingPortal>
-              {open && (
+              {(popoverOptions?.open ?? open) && (
                 <Popover
                   arrow={false}
                   anchorEl={wrapperRef.current}
-                  open={open}
-                  onClose={() => setOpen(false)}
+                  open={popoverOptions?.open ?? open}
+                  onClose={() => popoverOptions?.onClose?.() ?? setOpen(false)}
                   placement="bottom-start"
                   id={ariaId}
                   aria-roledescription={

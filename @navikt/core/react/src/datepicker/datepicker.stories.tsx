@@ -1,5 +1,6 @@
 import { isSameDay } from "date-fns";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Button } from "../button";
 import DatePicker from "./DatePicker";
 import { useDatepicker } from "./useDatepicker";
 import { useRangeDatepicker } from "./useRangeDatepicker";
@@ -198,3 +199,21 @@ export const NoPopover = () => (
     <DatePicker popoverOptions={{ usePopover: false }} />
   </div>
 );
+
+export const UserControlled = () => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div style={{ height: "30rem" }}>
+      <DatePicker
+        mode="multiple"
+        popoverOptions={{
+          open,
+          onClose: () => setOpen(false),
+        }}
+      >
+        <Button onClick={() => setOpen((x) => !x)}>Legg til dager</Button>
+      </DatePicker>
+    </div>
+  );
+};
