@@ -23,6 +23,7 @@ import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import { disableDate } from "./utils/dates-disabled";
 import { labels } from "./utils/labels";
 import { getLocaleFromString } from "./utils/util";
+import cl from "clsx";
 
 type ConditionalModeProps =
   | {
@@ -46,7 +47,7 @@ type ConditionalModeProps =
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect" | "className">,
     Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
   /**
    * Wraps datepicker anchor around children if usePopover: true
@@ -106,6 +107,13 @@ export interface DatePickerDefaultProps
      */
     onClose?: () => void;
   };
+  /**
+   *
+   */
+  classNames?: {
+    wrapper?: string;
+    datepicker?: string;
+  };
 }
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -144,6 +152,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       id,
       popoverOptions,
       defaultSelected,
+      classNames,
       ...rest
     },
     ref
@@ -204,7 +213,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
       >
         {!usePopover ? (
-          <div ref={mergedRef} className="navds-date__wrapper">
+          <div
+            ref={mergedRef}
+            className={cl("navds-date__wrapper", classNames?.wrapper)}
+          >
             <DayPicker
               locale={getLocaleFromString(locale)}
               mode={mode}
@@ -213,7 +225,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               components={{
                 Caption: yearSelector ? DropdownCaption : Caption,
               }}
-              className="navds-date"
+              className={cl("navds-date", classNames?.datepicker)}
               classNames={{ vhidden: "navds-sr-only" }}
               disabled={(day) => {
                 return (
@@ -235,7 +247,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             />
           </div>
         ) : (
-          <div ref={mergedRef} className="navds-date__wrapper">
+          <div
+            ref={mergedRef}
+            className={cl("navds-date__wrapper", classNames?.wrapper)}
+          >
             {children}
             <FloatingPortal>
               {(popoverOptions?.open ?? open) && (
@@ -259,7 +274,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     components={{
                       Caption: yearSelector ? DropdownCaption : Caption,
                     }}
-                    className="navds-date"
+                    className={cl("navds-date", classNames?.datepicker)}
                     classNames={{
                       vhidden: "navds-sr-only",
                     }}
