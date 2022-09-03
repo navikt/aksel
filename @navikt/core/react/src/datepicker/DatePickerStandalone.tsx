@@ -9,11 +9,9 @@ import {
   SelectRangeEventHandler,
   SelectSingleEventHandler,
 } from "react-day-picker";
-import Caption from "./caption/Caption";
-import DropdownCaption from "./caption/DropdownCaption";
+import { Caption, DropdownCaption } from "./caption";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./DatePicker";
-import { labels } from "./utils/labels";
-import { getLocaleFromString } from "./utils/util";
+import { getLocaleFromString, labels } from "./utils";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<

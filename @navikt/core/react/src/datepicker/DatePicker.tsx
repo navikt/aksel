@@ -20,14 +20,12 @@ import {
 } from "react-day-picker";
 import { mergeRefs, Popover, useId } from "..";
 import { omit } from "../util";
-import Caption from "./caption/Caption";
-import DropdownCaption from "./caption/DropdownCaption";
+import { Caption, DropdownCaption } from "./caption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
-import { labels } from "./utils/labels";
-import { getLocaleFromString } from "./utils/util";
+import { getLocaleFromString, labels } from "./utils";
 
 export type ConditionalModeProps =
   | {
