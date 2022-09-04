@@ -124,7 +124,11 @@ Default.args = {
 
 export const Dropdown = (props) => (
   <div style={{ height: "30rem" }}>
-    <DatePicker yearSelector>
+    <DatePicker
+      yearSelector
+      fromDate={new Date("Aug 23 2018")}
+      toDate={new Date("Aug 23 2022")}
+    >
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
