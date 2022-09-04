@@ -89,7 +89,6 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           {...inputProps}
           autoComplete="off"
           aria-controls={ariaId}
-          aria-haspopup="grid"
           className={cl(
             className,
             "navds-date__field-input",
@@ -106,6 +105,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           onClick={() => onOpen()}
           className="navds-date__field-button"
           icon={<Calender title="åpne datovelger" />}
+          aria-haspopup="grid"
         />
       </div>
       <div
