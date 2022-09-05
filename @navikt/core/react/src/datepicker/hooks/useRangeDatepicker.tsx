@@ -18,17 +18,35 @@ interface UseRangeDatepickerOptions
 }
 
 interface UseRangeDatepickerValue {
+  /**
+   * Use: <DatePicker {...dayPickerProps}/>
+   */
   dayPickerProps: DatePickerProps;
+  /**
+   * Use: <DatePicker.Input label="from" {...fromInputProps}/>
+   */
   fromInputProps: Pick<
     DatePickerInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
+  /**
+   * Use: <DatePicker.Input label="to" {...toInputProps}/>
+   */
   toInputProps: Pick<
     DatePickerInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
+  /**
+   * Resets all states
+   */
   reset: () => void;
+  /**
+   * Selected range-callback
+   */
   selectedRange?: DateRange;
+  /**
+   * Manually set selected range if needed
+   */
   setSelected: (date?: DateRange) => void;
 }
 

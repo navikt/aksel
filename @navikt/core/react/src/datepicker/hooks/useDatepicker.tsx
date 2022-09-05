@@ -24,13 +24,28 @@ export interface UseDatepickerOptions
 }
 
 interface UseDatepickerValue {
+  /**
+   * Use: <DatePicker {...dayPickerProps}/>
+   */
   dayPickerProps: DatePickerProps;
+  /**
+   * Use: <DatePicker.Input {...inputProps}/>
+   */
   inputProps: Pick<
     DatePickerInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
+  /**
+   * Resets all states
+   */
   reset: () => void;
+  /**
+   * Selected Date callback
+   */
   selectedDay?: Date;
+  /**
+   * Manually set selected day if needed
+   */
   setSelected: (date?: Date) => void;
 }
 
