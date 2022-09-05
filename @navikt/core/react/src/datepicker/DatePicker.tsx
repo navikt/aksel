@@ -1,13 +1,7 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
 import { isWeekend } from "date-fns";
-import React, {
-  createContext,
-  forwardRef,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { createContext, forwardRef, useRef, useState } from "react";
 import {
   DateRange,
   DayPicker,
@@ -18,7 +12,7 @@ import {
   SelectRangeEventHandler,
   SelectSingleEventHandler,
 } from "react-day-picker";
-import { mergeRefs, Popover, useId } from "..";
+import { Popover, useId } from "..";
 import { omit } from "../util";
 import { Caption, DropdownCaption } from "./caption";
 import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
