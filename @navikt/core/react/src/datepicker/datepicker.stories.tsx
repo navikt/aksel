@@ -1,7 +1,7 @@
-import { isSameDay } from "date-fns";
+import { isSaturday } from "date-fns";
 import React, { useEffect, useId, useState } from "react";
+import { DatePicker, useDatepicker, useRangeDatepicker } from "..";
 import { Button } from "../..";
-import { useDatepicker, useRangeDatepicker, DatePicker } from "..";
 import { isValidDate } from "./utils";
 
 const disabledDays = [
@@ -168,13 +168,7 @@ export const UseDatepicker = () => {
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
-        <DatePicker.Input
-          error={
-            isSameDay(selectedDay, new Date()) ? "Invalid date" : undefined
-          }
-          {...inputProps}
-          label="Velg dato"
-        />
+        <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
   );
@@ -228,6 +222,35 @@ export const UserControlled = () => {
         >
           Legg til dager
         </Button>
+      </DatePicker>
+    </div>
+  );
+};
+
+export const Validering = () => {
+  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+  });
+
+  const [errorState, setErrorState] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedDay || !isValidDate(selectedDay)) return;
+    isSaturday(selectedDay)
+      ? setErrorState(
+          "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
+        )
+      : setErrorState(null);
+  }, [selectedDay]);
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...dayPickerProps}>
+        <DatePicker.Input
+          error={errorState}
+          {...inputProps}
+          label="Velg dato"
+        />
       </DatePicker>
     </div>
   );

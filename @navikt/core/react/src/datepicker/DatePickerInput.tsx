@@ -24,9 +24,8 @@ export interface DatePickerInputProps
    * @default medium
    */
   size?: "medium" | "small";
-
   /**
-   *
+   * @private
    */
   wrapperRef?: React.RefObject<HTMLDivElement>;
 }
@@ -90,7 +89,6 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
       <div className="navds-date__field-wrapper">
         <input
           ref={ref}
-          size={14}
           {...omit(rest, ["error", "errorId", "size", "wrapperRef"])}
           {...inputProps}
           autoComplete="off"
@@ -102,6 +100,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
             "navds-body-short",
             `navds-body-${size}`
           )}
+          size={14}
         />
         <Button
           ref={buttonRef}

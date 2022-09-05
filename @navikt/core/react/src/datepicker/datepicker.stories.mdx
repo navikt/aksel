@@ -162,6 +162,39 @@ DatePicker har innebygd støtte for nb, nn og en(gb)
 </DatePicker>
 ```
 
+## Validering
+
+```jsx
+export const Validering = () => {
+  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+  });
+
+  const [errorState, setErrorState] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!selectedDay || !isValidDate(selectedDay)) return;
+    isSaturday(selectedDay) <- Utility-funksjon i date-fns
+      ? setErrorState(
+          "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
+        )
+      : setErrorState(null);
+  }, [selectedDay]);
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...dayPickerProps}>
+        <DatePicker.Input
+          error={errorState}
+          {...inputProps}
+          label="Velg dato"
+        />
+      </DatePicker>
+    </div>
+  );
+};
+```
+
 ## Typer
 
 ### Datepicker
@@ -196,12 +229,6 @@ yearSelector?: boolean;
  * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
  */
 disabled?: Matcher[];
-/**
- * Sets focus on selected date, or todays date if not selected.
- * @warning If selected/todays date is disabled, this will focus first visible day.
- * @default true
- */
-focusOnOpen?: boolean;
 /**
  * Disable saturday and sunday.
  * @default false
@@ -323,6 +350,10 @@ hideLabel?: boolean;
  * @default medium
  */
 size?: "medium" | "small";
+/**
+ * @private
+ */
+wrapperRef: React.RefObject<HTMLDivElement>
 ```
 
 ### useDatepicker
@@ -343,6 +374,11 @@ export interface UseDatepickerOptions
   defaultSelected?: Date;
   /** Make the selection required. */
   required?: boolean;
+  /**
+   * Opens datepicker on input-focus
+   * @default true
+   */
+  openOnFocus?: boolean;
 }
 interface UseDatepickerValue {
   /**
@@ -389,6 +425,11 @@ export interface UseRangeDatepickerOptions
   defaultSelected?: DateRange;
   /** Make the selection required. */
   required?: boolean;
+  /**
+   * Opens datepicker on input-focus
+   * @default true
+   */
+  openOnFocus?: boolean;
 }
 
 interface UseRangeDatepickerValue {

@@ -20,7 +20,7 @@
   display: inline-flex;
   align-items: center;
   position: relative;
-  width: 100%;
+  width: fit-content;
 }
 
 .navds-date__field-input {
