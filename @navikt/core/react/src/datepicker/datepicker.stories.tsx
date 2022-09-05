@@ -62,7 +62,7 @@ export const Default = (props) => {
   const Comp = props.usePopover ? DatePicker : DatePicker.Standalone;
 
   return (
-    <div style={{ height: "30rem" }}>
+    <div>
       <Comp
         locale={props?.locale}
         yearSelector={props?.yearSelector}
@@ -126,7 +126,7 @@ Default.args = {
 };
 
 export const YearSelector = (props) => (
-  <div style={{ height: "30rem" }}>
+  <div>
     <DatePicker
       yearSelector
       fromDate={new Date("Aug 23 2018")}
@@ -138,7 +138,7 @@ export const YearSelector = (props) => (
 );
 
 export const DisabledDays = (props) => (
-  <div style={{ height: "30rem" }}>
+  <div>
     <DatePicker disabled={disabledDays} disableWeekends locale="en">
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
@@ -146,7 +146,7 @@ export const DisabledDays = (props) => (
 );
 
 export const ShowWeekNumber = (props) => (
-  <div style={{ height: "30rem" }}>
+  <div>
     <DatePicker showWeekNumber>
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
@@ -164,7 +164,7 @@ export const UseDatepicker = () => {
   }, [selectedDay]);
 
   return (
-    <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
+    <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
         <DatePicker.Input
           error={
@@ -189,7 +189,7 @@ export const UseRangedDatepicker = () => {
   }, [selectedRange]);
 
   return (
-    <div style={{ height: "30rem", display: "flex", gap: "1rem" }}>
+    <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
@@ -201,7 +201,7 @@ export const UseRangedDatepicker = () => {
 };
 
 export const NoPopover = () => (
-  <div style={{ height: "30rem" }}>
+  <div>
     <DatePicker.Standalone />
   </div>
 );
@@ -211,7 +211,7 @@ export const UserControlled = () => {
   const id = useId();
 
   return (
-    <div style={{ height: "30rem" }}>
+    <div>
       <DatePicker
         mode="multiple"
         open={open}

@@ -16,7 +16,7 @@ import { getLocaleFromString, labels } from "./utils";
 interface DatePickerStandaloneDefaultProps
   extends Omit<
     DatePickerDefaultProps,
-    "focusOnOpen" | "open" | "onClose" | "classNames"
+    "focusOnOpen" | "open" | "onClose" | "classNames" | "onOpenToggle"
   > {
   /**
    * Wrapper className
