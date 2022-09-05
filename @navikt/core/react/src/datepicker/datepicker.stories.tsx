@@ -59,7 +59,7 @@ export const Default = (props) => {
       : {}),
   };
 
-  const Comp = props.usePopover ? DatePicker : DatePicker.Standalone;
+  const Comp = props.standalone ? DatePicker : DatePicker.Standalone;
 
   return (
     <div>
@@ -77,7 +77,7 @@ export const Default = (props) => {
           ? rangeCtx.dayPickerProps
           : {})}
       >
-        {props.usePopover && (
+        {props.standalone && (
           <>
             {props.inputfield && props.mode !== "multiple" ? (
               <>
@@ -122,7 +122,7 @@ Default.args = {
   focusOnOpen: true,
   showWeekNumber: false,
   inputfield: true,
-  usePopover: true,
+  standalone: true,
 };
 
 export const YearSelector = (props) => (

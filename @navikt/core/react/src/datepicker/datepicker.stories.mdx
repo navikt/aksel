@@ -4,7 +4,7 @@ import { Canvas, Meta, Story } from "@storybook/addon-docs";
 
 # DatePicker
 
-Datepicker er nå klar for testing! Komponenten har ikke blitt ordentlig testet enda, da både kode og UU så bør ikke brukes i PROD
+Datepicker er nå klar for testing (Men fortsatt veldig WIP)! Komponenten har ikke blitt ordentlig testet enda, da både kode og UU så bør ikke brukes i prod.
 
 ## Single
 
@@ -29,6 +29,7 @@ bør lukke/åpne interaksjonen ikke være `<DatePicker.Input />`
 <DatePicker
   mode="multiple"
   open={toggleOpen}
+  onClose={() => setToggleOpen(false)}
   onSelect={(dates?: Date[]) => handleDates(dates)}
   min={2}
   max={5}
@@ -53,6 +54,8 @@ bør lukke/åpne interaksjonen ikke være `<DatePicker.Input />`
 For at du ikke skal måtte styre all logikken med date-formatering, fokus, onChange etc har vi egne hooks for dette.
 
 `useDatepicker` håndterer alt av Dato-formatering, onChange i input-felter og alle nødvendige datepicker og input-props
+
+obs! Du må selv validere valget, evt legge til feilmeldinger i input.
 
 ```jsx
 export const demo = () => {
@@ -88,11 +91,12 @@ export const demo = () => {
   }, [selectedRange]);
 
   return (
-    <DatePicker {...dayPickerProps}>
-      <div style={{ display: "flex", gap: "1rem" }}>
-        <DatePicker.Input {...fromInputProps} label="Fra" />
-        <DatePicker.Input {...toInputProps} label="Til" />
-      </div>
+    <DatePicker
+      {...dayPickerProps}
+      classNames={{ wrapper: "input-wrapper-styling" }}
+    >
+      <DatePicker.Input {...fromInputProps} label="Fra" />
+      <DatePicker.Input {...toInputProps} label="Til" />
     </DatePicker>
   );
 };
@@ -133,6 +137,8 @@ Gir muligheten til å velge år + månede i en `<Select/>`. Vises bare hvis `fro
 ## disable-dager
 
 Disabled-prop bruker en [Matcher](https://react-day-picker.js.org/api/types/Matcher), som gir mye fleksibilitet når man skal disable dager
+
+Kan også sette `disableWeekends`-prop for å sette lørdag + søndag som disabled
 
 ```jsx
 const disabledDays = [
