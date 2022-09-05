@@ -26,6 +26,7 @@ export default {
       },
     },
     mode: {
+      defaultValue: "single",
       control: {
         type: "radio",
         options: ["single", "multiple", "range"],
@@ -50,18 +51,17 @@ export const Default = (props) => {
   const newProps = {
     ...(!props.inputfield || props.mode === "multiple"
       ? {
-          popoverOptions: {
-            open,
-            onClose: () => setOpen(false),
-            usePopover: props.usePopover,
-          },
+          open,
+          onClose: () => setOpen(false),
         }
-      : { popoverOptions: { usePopover: props.usePopover } }),
+      : {}),
   };
+
+  const Comp = props.usePopover ? DatePicker : DatePicker.Standalone;
 
   return (
     <div style={{ height: "30rem" }}>
-      <DatePicker
+      <Comp
         locale={props?.locale}
         yearSelector={props?.yearSelector}
         disableWeekends={props?.disableWeekends}
@@ -108,7 +108,7 @@ export const Default = (props) => {
             )}
           </>
         )}
-      </DatePicker>
+      </Comp>
     </div>
   );
 };
