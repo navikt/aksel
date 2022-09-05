@@ -14,7 +14,7 @@ import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
 import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
 import { BodyShort, Select } from "..";
-import { dateIsInCurrentMonth } from "./utils/check-dates";
+import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -163,10 +163,7 @@ const MonthSelector = ({
                 x,
                 selected
               ),
-              "navds-monthpicker__month--selected": isSameMonth(
-                setYear(x, Number(selected.getFullYear())),
-                selected
-              ),
+              "navds-monthpicker__month--selected": dateIsSelected(x, selected),
             })}
           >
             <span aria-hidden="true">
