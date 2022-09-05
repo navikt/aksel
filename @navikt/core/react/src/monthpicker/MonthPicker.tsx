@@ -8,7 +8,6 @@ import {
   setYear,
   startOfMonth,
   startOfYear,
-  isSameMonth,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState } from "react";
@@ -190,7 +189,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         locale={NB}
         selected={selected}
         className="navds-monthpicker-month"
-        toYear={2022}
+        toYear={2024}
         fromMonth={new Date("Aug 23 2019")}
       >
         <div className="navds-monthpicker__wrapper">
