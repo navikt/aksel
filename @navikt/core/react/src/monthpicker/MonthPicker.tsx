@@ -19,6 +19,19 @@ import { BodyShort, Select } from "..";
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
   mode?: "month";
+  /**
+   * The earliest day to start the month navigation.
+   */
+  fromDate?: Date;
+  /**
+   * The latest day to end the month navigation.
+   */
+  toDate?: Date;
+  /**
+   * Changes monthpicker locale
+   * @default "nb" (norsk bokmål)
+   */
+  locale?: "nb" | "nn" | "en";
 }
 
 const TestCaption = ({
