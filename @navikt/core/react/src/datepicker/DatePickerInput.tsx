@@ -101,6 +101,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
             `navds-body-${size}`
           )}
           size={14}
+          aria-haspopup="grid"
         />
         <Button
           ref={buttonRef}
