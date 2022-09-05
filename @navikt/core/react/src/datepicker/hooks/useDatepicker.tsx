@@ -1,13 +1,10 @@
 import { differenceInCalendarDays } from "date-fns";
 import { useState } from "react";
-import {
-  DayClickEventHandler,
-  MonthChangeEventHandler,
-} from "react-day-picker";
+import { DayClickEventHandler } from "react-day-picker";
 import { DatePickerProps } from "../DatePicker";
 import { DatePickerInputProps } from "../DatePickerInput";
+import { formatDateForInput, getLocaleFromString, isValidDate } from "../utils";
 import { parseDate } from "../utils/parse-date";
-import { getLocaleFromString, isValidDate, formatDateForInput } from "../utils";
 
 export interface UseDatepickerOptions
   extends Pick<
@@ -50,6 +47,7 @@ export const useDatepicker = (
   } = opt;
 
   const locale = getLocaleFromString(_locale);
+
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
@@ -71,10 +69,6 @@ export const useDatepicker = (
     setInputValue(date ? formatDateForInput(date, locale) : "");
   };
 
-  const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
-
-  // When focusing, make sure DayPicker visualizes the month of the date in the
-  // input field.
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     if (!e.target.value) {
       reset();
@@ -92,6 +86,7 @@ export const useDatepicker = (
     isValidDate(day) && setInputValue(formatDateForInput(day, locale));
   };
 
+  /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
     if (!required && selected) {
       setSelectedDay(undefined);
@@ -120,8 +115,8 @@ export const useDatepicker = (
   };
 
   const dayPickerProps = {
-    month: month,
-    onMonthChange: handleMonthChange,
+    month,
+    onMonthChange: (month) => setMonth(month),
     onDayClick: handleDayClick,
     selected: selectedDay,
     locale: _locale,

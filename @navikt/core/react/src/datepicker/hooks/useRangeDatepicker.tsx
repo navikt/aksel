@@ -1,6 +1,6 @@
 import { differenceInCalendarDays } from "date-fns";
 import { useState } from "react";
-import { DateRange, MonthChangeEventHandler } from "react-day-picker";
+import { DateRange } from "react-day-picker";
 import { DatePickerProps } from "../DatePicker";
 import { DatePickerInputProps } from "../DatePickerInput";
 import {
@@ -89,8 +89,6 @@ export const useRangeDatepicker = (
     setToInputValue(range?.to ? formatDateForInput(range?.to, locale) : "");
   };
 
-  const handleMonthChange: MonthChangeEventHandler = (month) => setMonth(month);
-
   const handleFocus = (e, src: RangeT) => {
     let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
@@ -173,6 +171,7 @@ export const useRangeDatepicker = (
       return;
     }
 
+    /* If to-value < from-value, switch places in state */
     if (
       src === RANGE.TO &&
       selectedRange?.from &&
@@ -183,6 +182,7 @@ export const useRangeDatepicker = (
       return;
     }
 
+    /* If from-value > to-value  , switch places in state */
     if (
       src === RANGE.FROM &&
       selectedRange?.to &&
@@ -200,7 +200,7 @@ export const useRangeDatepicker = (
 
   const dayPickerProps: DatePickerProps = {
     month: month,
-    onMonthChange: handleMonthChange,
+    onMonthChange: (month) => setMonth(month),
     onSelect: handleSelect,
     selected: selectedRange,
     locale: _locale,

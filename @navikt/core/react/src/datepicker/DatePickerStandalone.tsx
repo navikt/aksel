@@ -18,6 +18,9 @@ interface DatePickerStandaloneDefaultProps
     DatePickerDefaultProps,
     "focusOnOpen" | "open" | "onClose" | "classNames"
   > {
+  /**
+   * Wrapper className
+   */
   className?: string;
 }
 
