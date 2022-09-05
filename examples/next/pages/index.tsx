@@ -37,6 +37,7 @@ import {
   ToggleGroup,
   Tooltip,
   Textarea,
+  DatePicker,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Dropdown } from "@navikt/ds-react-internal";
@@ -266,6 +267,9 @@ const Home: NextPage = () => {
             </Dropdown.Menu.List>
           </Dropdown.Menu>
         </Dropdown>
+        <DatePicker>
+          <DatePicker.Input label="velg dato" />
+        </DatePicker>
       </div>
     </div>
   );
