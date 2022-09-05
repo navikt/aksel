@@ -21,3 +21,15 @@ export const Default = (props) => {
     </div>
   );
 };
+
+export const YearSelector = (props) => {
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker
+        yearSelector
+        fromDate={new Date()}
+        toDate={new Date("Sep 27 2032")}
+      />
+    </div>
+  );
+};

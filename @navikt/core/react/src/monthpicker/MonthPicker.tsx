@@ -31,14 +31,22 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default "nb" (norsk bokmål)
    */
   locale?: "nb" | "nn" | "en";
+  /**
+   * Adds a `Select` for picking Year
+   * Needs `fromDate` + `toDate` to be set!
+   * @default false
+   */
+  yearSelector?: boolean;
 }
 
 const TestCaption = ({
   selected,
   onSelect,
+  yearSelector,
 }: {
   selected: Date;
   onSelect: (m: Date) => void;
+  yearSelector: boolean;
 }) => {
   const { nextMonth, previousMonth } = useNavigation();
   const {
@@ -128,6 +136,7 @@ const MonthSelector = ({
     formatters: { formatYearCaption, formatMonthCaption },
     locale,
   } = useDayPicker();
+  console.log(fromDate, toDate);
 
   if (!fromDate) return <></>;
   if (!toDate) return <></>;
@@ -181,7 +190,15 @@ const MonthSelector = ({
 };
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
-  ({ children, mode = "month" }, ref) => {
+  (
+    {
+      children,
+      yearSelector = false,
+      fromDate = new Date(),
+      toDate = new Date("Sep 27 2032"),
+    },
+    ref
+  ) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
 
     return (
@@ -189,11 +206,15 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         locale={NB}
         selected={selected}
         className="navds-monthpicker-month"
-        toYear={2024}
-        fromMonth={new Date("Aug 23 2019")}
+        toDate={toDate}
+        fromDate={fromDate}
       >
         <div className="navds-monthpicker__wrapper">
-          <TestCaption selected={selected} onSelect={setSelected} />
+          <TestCaption
+            yearSelector={yearSelector}
+            selected={selected}
+            onSelect={setSelected}
+          />
           <MonthSelector onSelect={setSelected} selected={selected} />
         </div>
       </RootProvider>
