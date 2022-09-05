@@ -66,6 +66,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 2px;
+  color: var(--navds-global-color-gray-900);
 }
 
 .navds-date__caption-button:hover {
@@ -106,16 +107,6 @@
   justify-content: center;
   gap: 0.5rem;
   align-items: center;
-}
-
-.navds-date__caption-button {
-  color: var(--navds-global-color-gray-900);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  height: 48px;
-  width: 48px;
 }
 
 .navds-date__caption__month .navds-select__container select {
