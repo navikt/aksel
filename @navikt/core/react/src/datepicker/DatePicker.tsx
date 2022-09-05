@@ -103,6 +103,10 @@ export interface DatePickerDefaultProps
    */
   onClose?: () => void;
   /**
+   * onOpenToggle callback
+   */
+  onOpenToggle?: () => void;
+  /**
    *
    */
   classNames?: {
@@ -150,6 +154,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       classNames,
       open: _open,
       onClose,
+      onOpenToggle,
       ...rest
     },
     ref
@@ -200,7 +205,15 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     return (
       <DatePickerContext.Provider
-        value={{ open, onOpen: () => setOpen((x) => !x), buttonRef, ariaId }}
+        value={{
+          open: _open ?? open,
+          onOpen: () => {
+            setOpen((x) => !x);
+            onOpenToggle?.();
+          },
+          buttonRef,
+          ariaId,
+        }}
       >
         <div
           ref={mergedRef}

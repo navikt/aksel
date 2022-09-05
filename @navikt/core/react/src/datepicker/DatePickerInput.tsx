@@ -34,7 +34,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
   HTMLInputElement,
   DatePickerInputProps
 >((props, ref) => {
-  const { onOpen, buttonRef, ariaId } = useContext(DatePickerContext);
+  const { onOpen, buttonRef, ariaId, open } = useContext(DatePickerContext);
 
   const {
     inputProps,
@@ -104,7 +104,9 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           size="small"
           onClick={() => onOpen()}
           className="navds-date__field-button"
-          icon={<Calender title="åpne datovelger" />}
+          icon={
+            <Calender title={open ? "Lukk datovelger" : "Åpne datovelger"} />
+          }
           aria-haspopup="grid"
         />
       </div>
