@@ -49,10 +49,11 @@ export type ConditionalModeProps =
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect" | "className">,
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
     Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
   /**
-   * Wraps datepicker anchor around children if usePopover: true
+   * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle,
+   * or make your own with the open/onClose props
    */
   children?: React.ReactNode;
   /**
@@ -61,14 +62,16 @@ export interface DatePickerDefaultProps
    */
   locale?: "nb" | "nn" | "en";
   /**
-   * The earliest day to start the month navigation.
+   * The earliest Date available for the user to pick from
    */
   fromDate?: Date;
   /**
-   * The latest day to end the month navigation.
+   * The latest Date available for the user to pick from
    */
   toDate?: Date;
   /**
+   * Adds a `Select` for picking Year and Month
+   * Needs `fromDate` + `toDate` to be set!
    * @default false
    */
   yearSelector?: boolean;
@@ -78,7 +81,7 @@ export interface DatePickerDefaultProps
    */
   disabled?: Matcher[];
   /**
-   * Sets focus on selected date or todays date if not selected.
+   * Sets focus on selected date, or todays date if not selected.
    * @warning If selected/todays date is disabled, this will focus first visible day.
    * @default true
    */
@@ -89,28 +92,36 @@ export interface DatePickerDefaultProps
    */
   disableWeekends?: boolean;
   /**
-   * Shows week numbers on left-column
+   * Shows week numbers in left-column
+   * Use with caution, takes up valuable screenspace in small screens!
    * @default false
    */
   showWeekNumber?: boolean;
   /**
-   * Open state
+   * Open state for user-controlled state
    * @remark Controlled by component by default
    */
   open?: boolean;
   /**
-   * onClose callback
+   * onClose callback for user-controlled state
    */
   onClose?: () => void;
   /**
-   * onOpenToggle callback
+   * onOpenToggle callback for user-controlled-state
+   * @remark only called if `<DatePicker.Input />` is used
    */
   onOpenToggle?: () => void;
   /**
-   *
+   * Classnames for adding classes
    */
   classNames?: {
+    /**
+     * Children wrapper
+     */
     wrapper?: string;
+    /**
+     * DatePicker-wrapper
+     */
     datepicker?: string;
   };
 }
