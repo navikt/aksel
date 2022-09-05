@@ -33,7 +33,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
   const MonthDropdownLabel = labelMonthDropdown(locale);
 
   return (
-    <div className="navds-datepicker__caption-dropdown">
+    <div className="navds-date__caption-dropdown">
       <span
         aria-live="polite"
         aria-atomic="true"
@@ -48,14 +48,14 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
         icon={<Left title="velg forrige månede" />}
-        className="navds-datepicker__caption-button"
+        className="navds-date__caption-button"
       />
 
-      <div className="navds-datepicker__caption__month-wrapper">
+      <div className="navds-date__caption__month-wrapper">
         <Select
           label={MonthDropdownLabel}
           hideLabel
-          className="navds-datepicker__caption__month"
+          className="navds-date__caption__month"
           value={displayMonth.getMonth()}
           onChange={handleMonthChange}
         >
@@ -85,7 +85,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
         variant={"tertiary"}
-        className="navds-datepicker__caption-button"
+        className="navds-date__caption-button"
       />
     </div>
   );

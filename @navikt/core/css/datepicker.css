@@ -83,32 +83,32 @@
   padding: var(--navds-spacing-3);
 }
 
-.navds-datepicker__caption {
+.navds-date__caption {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
 }
 
-.navds-datepicker__caption-label {
+.navds-date__caption-label {
   text-transform: capitalize;
 }
 
-.navds-datepicker__caption-dropdown {
+.navds-date__caption-dropdown {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
   align-items: center;
 }
 
-.navds-datepicker__caption__month-wrapper {
+.navds-date__caption__month-wrapper {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
   align-items: center;
 }
 
-.navds-datepicker__caption-button {
+.navds-date__caption-button {
   color: var(--navds-global-color-gray-900);
   display: flex;
   align-items: center;
@@ -118,7 +118,7 @@
   width: 48px;
 }
 
-.navds-datepicker__caption__month .navds-select__container select {
+.navds-date__caption__month .navds-select__container select {
   text-transform: capitalize;
 }
 

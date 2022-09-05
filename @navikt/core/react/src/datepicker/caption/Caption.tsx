@@ -15,25 +15,25 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
   const nextLabel = labelNext(nextMonth, { locale });
 
   return (
-    <div className="navds-datepicker__caption">
+    <div className="navds-date__caption">
       <Label
         as="span"
         aria-live="polite"
         aria-atomic="true"
         id={id}
-        className="navds-datepicker__caption-label"
+        className="navds-date__caption-label"
       >
         {formatCaption(displayMonth, { locale })}
       </Label>
 
-      <div className="navds-datepicker__caption__month-wrapper">
+      <div className="navds-date__caption__month-wrapper">
         <Button
           aria-label={previousLabel}
           variant="tertiary"
           disabled={!previousMonth}
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<Left title="velg forrige månede" />}
-          className="navds-datepicker__caption-button"
+          className="navds-date__caption-button"
         />
         <Button
           aria-label={nextLabel}
@@ -41,7 +41,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           onClick={() => nextMonth && goToMonth(nextMonth)}
           disabled={!nextMonth}
           variant="tertiary"
-          className="navds-datepicker__caption-button"
+          className="navds-date__caption-button"
         />
       </div>
     </div>
