@@ -85,12 +85,6 @@ export interface DatePickerDefaultProps
    */
   disabled?: Matcher[];
   /**
-   * Sets focus on selected date, or todays date if not selected.
-   * @warning If selected/todays date is disabled, this will focus first visible day.
-   * @default true
-   */
-  focusOnOpen?: boolean;
-  /**
    * Disable saturday and sunday.
    * @default false
    */
@@ -158,7 +152,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       children,
       locale = "nb",
       yearSelector,
-      focusOnOpen = true,
       disabled = [],
       disableWeekends = false,
       showWeekNumber = false,
@@ -179,7 +172,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
-    const mergedRef = useMemo(() => mergeRefs([wrapperRef, ref]), [ref]);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -231,7 +223,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
         }}
       >
         <div
-          ref={mergedRef}
+          ref={wrapperRef}
           className={cl("navds-date__wrapper", classNames?.wrapper)}
         >
           {children}
@@ -248,6 +240,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   locale === "en" ? "datepicker" : "datovelger"
                 }
                 role="dialog"
+                ref={ref}
               >
                 <DayPicker
                   locale={getLocaleFromString(locale)}
@@ -268,7 +261,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                     );
                   }}
                   weekStartsOn={1}
-                  initialFocus={focusOnOpen}
+                  initialFocus={false}
                   labels={labels as any}
                   modifiers={{
                     weekend: (day) => disableWeekends && isWeekend(day),

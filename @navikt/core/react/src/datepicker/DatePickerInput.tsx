@@ -24,6 +24,11 @@ export interface DatePickerInputProps
    * @default medium
    */
   size?: "medium" | "small";
+
+  /**
+   *
+   */
+  wrapperRef?: React.RefObject<HTMLDivElement>;
 }
 
 export type DatePickerInputType = React.ForwardRefExoticComponent<
@@ -59,6 +64,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
           "navds-date__field--disabled": !!inputProps.disabled,
         }
       )}
+      ref={props?.wrapperRef}
     >
       <Label
         htmlFor={inputProps.id}
@@ -85,7 +91,7 @@ export const DatePickerInput: DatePickerInputType = forwardRef<
         <input
           ref={ref}
           size={14}
-          {...omit(rest, ["error", "errorId", "size"])}
+          {...omit(rest, ["error", "errorId", "size", "wrapperRef"])}
           {...inputProps}
           autoComplete="off"
           aria-controls={ariaId}

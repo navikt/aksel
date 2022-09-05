@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import { useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DayClickEventHandler } from "react-day-picker";
 import { DatePickerProps } from "../DatePicker";
 import { DatePickerInputProps } from "../DatePickerInput";
@@ -21,6 +21,11 @@ export interface UseDatepickerOptions
   defaultSelected?: Date;
   /** Make the selection required. */
   required?: boolean;
+  /**
+   * Opens datepicker on input-focus
+   * @default true
+   */
+  openOnFocus?: boolean;
 }
 
 interface UseDatepickerValue {
@@ -33,7 +38,7 @@ interface UseDatepickerValue {
    */
   inputProps: Pick<
     DatePickerInputProps,
-    "onChange" | "onFocus" | "onBlur" | "value"
+    "onChange" | "onFocus" | "onBlur" | "value" | "wrapperRef"
   >;
   /**
    * Resets all states
@@ -59,18 +64,37 @@ export const useDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
+    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
 
+  const inputRef = useRef<HTMLDivElement>(null);
+  const daypickerRef = useRef<HTMLDivElement>(null);
+
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
+  const [open, setOpen] = useState(false);
 
   const defaultInputValue = defaultSelected
     ? formatDateForInput(defaultSelected, locale)
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
+
+  const handleFocusOut = useCallback(
+    (e) =>
+      ![daypickerRef.current, inputRef.current].some((element) =>
+        element?.contains(e.relatedTarget)
+      ) && setOpen(false),
+    []
+  );
+
+  useEffect(() => {
+    const el = inputRef.current;
+    el?.addEventListener("focusout", handleFocusOut);
+    return () => el?.removeEventListener?.("focusout", handleFocusOut);
+  }, [handleFocusOut]);
 
   const reset = () => {
     setSelectedDay(defaultSelected);
@@ -85,6 +109,7 @@ export const useDatepicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    !open && openOnFocus && setOpen(true);
     if (!e.target.value) {
       reset();
       return;
@@ -138,6 +163,10 @@ export const useDatepicker = (
     fromDate,
     toDate,
     today,
+    open,
+    onClose: () => setOpen(false),
+    onOpenToggle: () => setOpen((x) => !x),
+    ref: daypickerRef,
   };
 
   const inputProps = {
@@ -145,6 +174,7 @@ export const useDatepicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
+    wrapperRef: inputRef,
   };
 
   return { dayPickerProps, inputProps, reset, selectedDay, setSelected };

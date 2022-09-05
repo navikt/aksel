@@ -1,5 +1,5 @@
 import { differenceInCalendarDays } from "date-fns";
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { DatePickerProps } from "../DatePicker";
 import { DatePickerInputProps } from "../DatePickerInput";
@@ -66,9 +66,14 @@ export const useRangeDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
+    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
+
+  const inputRefTo = useRef<HTMLDivElement>(null);
+  const inputRefFrom = useRef<HTMLDivElement>(null);
+  const datePickerRef = useRef<HTMLDivElement | null>(null);
 
   // Initialize states
   const [month, setMonth] = useState(
@@ -85,6 +90,26 @@ export const useRangeDatepicker = (
   const [toInputValue, setToInputValue] = useState(
     defaultSelected?.to ? formatDateForInput(defaultSelected.to, locale) : ""
   );
+  const [open, setOpen] = useState(false);
+
+  const handleFocusOut = useCallback(
+    (e) =>
+      ![datePickerRef.current, inputRefTo.current, inputRefFrom.current].some(
+        (element) => element?.contains(e.relatedTarget)
+      ) && setOpen(false),
+    []
+  );
+
+  useEffect(() => {
+    const from = inputRefFrom.current;
+    const to = inputRefTo.current;
+    from?.addEventListener("focusout", handleFocusOut);
+    to?.addEventListener("focusout", handleFocusOut);
+    return () => {
+      from?.removeEventListener?.("focusout", handleFocusOut);
+      to?.removeEventListener?.("focusout", handleFocusOut);
+    };
+  }, [handleFocusOut]);
 
   const reset = () => {
     setSelectedRange(defaultSelected);
@@ -108,6 +133,7 @@ export const useRangeDatepicker = (
   };
 
   const handleFocus = (e, src: RangeT) => {
+    !open && openOnFocus && setOpen(true);
     let day = parseDate(e.target.value, today, locale);
     if (isValidDate(day)) {
       setMonth(day);
@@ -216,7 +242,7 @@ export const useRangeDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps: DatePickerProps = {
+  const dayPickerProps = {
     month: month,
     onMonthChange: (month) => setMonth(month),
     onSelect: handleSelect,
@@ -225,7 +251,11 @@ export const useRangeDatepicker = (
     fromDate,
     toDate,
     today,
-    mode: "range",
+    mode: "range" as const,
+    open,
+    onClose: () => setOpen(false),
+    onOpenToggle: () => setOpen((x) => !x),
+    ref: datePickerRef,
   };
 
   const fromInputProps = {
@@ -233,6 +263,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.FROM),
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
+    wrapperRef: inputRefFrom,
   };
 
   const toInputProps = {
@@ -240,6 +271,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.TO),
     onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
+    wrapperRef: inputRefTo,
   };
 
   return {

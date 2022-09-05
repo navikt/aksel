@@ -41,11 +41,13 @@ export const Default = (props) => {
   const rangeCtx = useRangeDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
+    openOnFocus: props.openOnFocus,
   });
 
   const singleCtx = useDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
+    openOnFocus: props.openOnFocus,
   });
 
   const newProps = {
@@ -68,7 +70,6 @@ export const Default = (props) => {
         yearSelector={props?.yearSelector}
         disableWeekends={props?.disableWeekends}
         showWeekNumber={props.showWeekNumber}
-        focusOnOpen={props?.focusOnOpen}
         mode={props.mode}
         {...newProps}
         {...(props.mode === "single"
@@ -119,10 +120,10 @@ export const Default = (props) => {
 Default.args = {
   yearSelector: false,
   disableWeekends: false,
-  focusOnOpen: true,
   showWeekNumber: false,
   inputfield: true,
   standalone: true,
+  openOnFocus: true,
 };
 
 export const YearSelector = (props) => (
@@ -157,6 +158,7 @@ export const UseDatepicker = () => {
   const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
+    openOnFocus: true,
   });
 
   useEffect(() => {
@@ -182,6 +184,7 @@ export const UseRangedDatepicker = () => {
   const { dayPickerProps, fromInputProps, toInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
+      openOnFocus: true,
     });
 
   useEffect(() => {
