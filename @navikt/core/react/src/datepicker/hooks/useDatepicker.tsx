@@ -103,7 +103,6 @@ export const useDatepicker = (
 
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
-    console.log("a");
     if (!required && selected) {
       setSelectedDay(undefined);
       setInputValue("");

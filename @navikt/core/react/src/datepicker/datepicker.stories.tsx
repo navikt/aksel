@@ -53,6 +53,8 @@ export const Default = (props) => {
       ? {
           open,
           onClose: () => setOpen(false),
+          fromDate: new Date("Aug 23 2020"),
+          toDate: new Date("Aug 23 2023"),
         }
       : {}),
   };
@@ -65,6 +67,7 @@ export const Default = (props) => {
         locale={props?.locale}
         yearSelector={props?.yearSelector}
         disableWeekends={props?.disableWeekends}
+        showWeekNumber={props.showWeekNumber}
         focusOnOpen={props?.focusOnOpen}
         mode={props.mode}
         {...newProps}
