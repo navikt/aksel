@@ -1,5 +1,5 @@
 import { parseDate } from "../parse-date";
-import { isValidDate } from "../util";
+import { isValidDate } from "../valid-date";
 import nb from "date-fns/locale/nb";
 import { getMonth, getYear } from "date-fns";
 
