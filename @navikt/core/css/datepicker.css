@@ -147,7 +147,7 @@
 }
 
 .navds-date .rdp-day_today {
-  border: 1px solid var(--navds-global-color-deepblue-500);
+  box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
 }
 
 .navds-date .rdp-day_selected {
