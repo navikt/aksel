@@ -39,12 +39,16 @@ export type ConditionalModeProps =
       onSelect?: (val?: Date[]) => void;
       selected?: Date[];
       defaultSelected?: Date[];
+      min?: number;
+      max?: number;
     }
   | {
       mode?: "range";
       onSelect?: (val?: DateRange) => void;
       selected?: DateRange;
       defaultSelected?: DateRange;
+      min?: number;
+      max?: number;
     };
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139

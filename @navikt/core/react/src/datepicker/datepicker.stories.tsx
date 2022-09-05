@@ -122,45 +122,13 @@ Default.args = {
   usePopover: true,
 };
 
-export const Dropdown = (props) => (
+export const YearSelector = (props) => (
   <div style={{ height: "30rem" }}>
     <DatePicker
       yearSelector
       fromDate={new Date("Aug 23 2018")}
       toDate={new Date("Aug 23 2022")}
     >
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const NoDropdown = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker>
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const LocaleNB = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker yearSelector locale="nb">
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const LocaleNN = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker yearSelector locale="nn">
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const LocaleEN = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker yearSelector locale="en">
       <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
     </DatePicker>
   </div>
@@ -228,45 +196,6 @@ export const UseRangedDatepicker = () => {
     </div>
   );
 };
-
-export const SelectedDate = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker
-      defaultSelected={new Date("Sept 8 2022")}
-      onSelect={console.log}
-    >
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const SelectedMultiple = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker
-      defaultSelected={[
-        new Date(),
-        new Date("Sept 5 2022"),
-        new Date("Sept 14 2022"),
-      ]}
-      onSelect={console.log}
-      mode="multiple"
-    >
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
-
-export const SelectedRange = (props) => (
-  <div style={{ height: "30rem" }}>
-    <DatePicker
-      onSelect={console.log}
-      defaultSelected={{ from: new Date(), to: undefined }}
-      mode="range"
-    >
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
-);
 
 export const NoPopover = () => (
   <div style={{ height: "30rem" }}>
