@@ -2,7 +2,6 @@ export * from "./accordion";
 export * from "./alert";
 export * from "./button";
 export * from "./datepicker";
-export * from "./monthpicker";
 export * from "./form";
 export * from "./grid";
 export * from "./help-text";
