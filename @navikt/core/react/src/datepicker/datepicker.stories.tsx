@@ -232,22 +232,15 @@ export const Validering = () => {
     fromDate: new Date("Aug 23 2019"),
   });
 
-  const [errorState, setErrorState] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!selectedDay || !isValidDate(selectedDay)) return;
-    isSaturday(selectedDay)
-      ? setErrorState(
-          "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
-        )
-      : setErrorState(null);
-  }, [selectedDay]);
-
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...dayPickerProps}>
         <DatePicker.Input
-          error={errorState}
+          error={
+            selectedDay && isSaturday(selectedDay)
+              ? "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
+              : undefined
+          }
           {...inputProps}
           label="Velg dato"
         />
