@@ -61,7 +61,7 @@ export const Default = (props) => {
       : {}),
   };
 
-  const Comp = props.standalone ? DatePicker : DatePicker.Standalone;
+  const Comp = !props.standalone ? DatePicker : DatePicker.Standalone;
 
   return (
     <div>
@@ -71,14 +71,14 @@ export const Default = (props) => {
         disableWeekends={props?.disableWeekends}
         showWeekNumber={props.showWeekNumber}
         mode={props.mode}
-        {...newProps}
         {...(props.mode === "single"
           ? singleCtx.dayPickerProps
           : props.mode === "range"
           ? rangeCtx.dayPickerProps
           : {})}
+        {...newProps}
       >
-        {props.standalone && (
+        {!props.standalone && (
           <>
             {props.inputfield && props.mode !== "multiple" ? (
               <>
@@ -122,7 +122,7 @@ Default.args = {
   disableWeekends: false,
   showWeekNumber: false,
   inputfield: true,
-  standalone: true,
+  standalone: false,
   openOnFocus: true,
 };
 
