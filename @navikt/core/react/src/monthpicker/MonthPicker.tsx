@@ -10,7 +10,7 @@ import {
   startOfYear,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useRef } from "react";
 import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
 import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
@@ -147,6 +147,7 @@ const MonthSelector = ({
     formatters: { formatYearCaption, formatMonthCaption },
     locale,
   } = useDayPicker();
+  const monthRefs = useRef(new Array<HTMLButtonElement>());
 
   if (!fromDate) return <></>;
   if (!toDate) return <></>;
@@ -169,9 +170,12 @@ const MonthSelector = ({
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((x: Date, y) => {
+        const currentRef = (x: any) => monthRefs.current.push(x);
         return (
           <button
+            ref={currentRef}
             key={x.toDateString()}
+            data-index={y}
             onClick={() =>
               onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
             }
@@ -183,6 +187,24 @@ const MonthSelector = ({
               ),
               "navds-monthpicker__month--selected": dateIsSelected(x, selected),
             })}
+            onKeyDown={(e) => {
+              if (e.key === "ArrowDown") {
+                monthRefs.current[y + 4] && monthRefs.current[y + 4].focus();
+              }
+              if (e.key === "ArrowUp") {
+                monthRefs.current[y - 4] && monthRefs.current[y - 4].focus();
+              }
+              if (e.key === "ArrowRight") {
+                e.currentTarget.nextSibling &&
+                  (e.currentTarget.nextSibling as HTMLButtonElement).focus();
+              }
+              if (e.key === "ArrowLeft") {
+                e.currentTarget.previousSibling &&
+                  (
+                    e.currentTarget.previousSibling as HTMLButtonElement
+                  ).focus();
+              }
+            }}
           >
             <span aria-hidden="true">
               {format(new Date(x), "LLL", { locale })
