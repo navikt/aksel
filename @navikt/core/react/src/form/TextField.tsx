@@ -9,11 +9,11 @@ export interface TextFieldProps
   /**
    * Controlled value
    */
-  value?: string;
+  value?: string | number;
   /**
    * Defaults input-value without needing controlled-state
    */
-  defaultValue?: string;
+  defaultValue?: string | number;
   /**
    * Exposes the HTML size attribute
    */
