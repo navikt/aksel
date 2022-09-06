@@ -11,7 +11,7 @@ export interface ChatProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Chat-message name
    */
-  name: string;
+  name?: string;
   /**
    * Timestamp for sent message
    */

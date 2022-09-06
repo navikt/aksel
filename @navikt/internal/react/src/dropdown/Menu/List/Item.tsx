@@ -3,8 +3,7 @@ import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 import { DropdownContext } from "../../Dropdown";
 
-export interface ListItemProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ListItemProps extends React.ButtonHTMLAttributes<HTMLElement> {
   /**
    * Menu item content
    */
@@ -17,16 +16,17 @@ export type ListItemType = OverridableComponent<
 >;
 
 export const ListItem: ListItemType = forwardRef(
-  ({ as: Component = "button", className, onClick, ...rest }, ref) => {
+  ({ as: Component = "button", className, ...rest }, ref) => {
     const context = useContext(DropdownContext);
     return (
       <li className="navdsi-dropdown__list-item">
         <Component
           {...rest}
           value={rest.children}
-          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) =>
-            context?.onSelect?.(event)
-          }
+          onClick={(event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+            context?.onSelect?.(event);
+            rest?.onClick?.(event);
+          }}
           ref={ref}
           className={cl(
             "navdsi-dropdown__item",

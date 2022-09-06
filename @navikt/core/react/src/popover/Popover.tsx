@@ -14,7 +14,6 @@ import React, {
   forwardRef,
   HTMLAttributes,
   useCallback,
-  useEffect,
   useMemo,
   useRef,
 } from "react";
@@ -138,11 +137,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       [floating, ref]
     );
 
-    useEffect(() => {
-      update();
-    }, [open, update, anchorEl]);
-
-    useEffect(() => {
+    useClientLayoutEffect(() => {
       if (!refs.reference.current || !refs.floating.current || !open) return;
       const cleanup = autoUpdate(
         refs.reference.current,
