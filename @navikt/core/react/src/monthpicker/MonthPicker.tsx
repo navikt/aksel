@@ -97,7 +97,7 @@ const TestCaption = ({
     <div className="navds-monthpicker__caption">
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!previousMonth}
+        disabled={!isValidYearSelector ? false : !!previousMonth}
         onClick={() => handleButtonClick(-1)}
       >
         <Left aria-hidden />
@@ -124,7 +124,7 @@ const TestCaption = ({
       )}
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!nextMonth}
+        disabled={!isValidYearSelector ? false : !nextMonth}
         onClick={() => handleButtonClick(1)}
       >
         <Right aria-hidden />
