@@ -1,4 +1,4 @@
-import { SuccessStroke } from "@navikt/ds-icons";
+import { Success } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label, OverridableComponent } from "..";
@@ -20,6 +20,10 @@ export interface StepperStepProps
    * @default false
    */
   completed?: boolean;
+  /**
+   * Makes step non-interactive if false
+   */
+  interactive?: boolean;
 }
 
 export interface StepperStepType
@@ -36,6 +40,7 @@ export const StepComponent: OverridableComponent<
       as: Component = "a",
       unsafe_index = 0,
       completed = false,
+      interactive,
       ...rest
     },
     ref
@@ -47,21 +52,26 @@ export const StepComponent: OverridableComponent<
     }
     const { activeStep } = context;
 
+    const isInteractive = interactive ?? context?.interactive;
+
+    const Comp = isInteractive ? Component : "div";
+
     return (
-      <Component
+      <Comp
         {...rest}
         aria-current={activeStep === unsafe_index}
         ref={ref}
         className={cl("navds-stepper__step", className, {
           "navds-stepper__step--active": activeStep === unsafe_index,
+          "navds-stepper__step--non-interactive": !isInteractive,
         })}
         onClick={(e) => {
-          context.onStepChange(unsafe_index + 1);
+          isInteractive && context.onStepChange(unsafe_index + 1);
           rest?.onClick?.(e);
         }}
       >
         {completed ? (
-          <SuccessStroke
+          <Success
             aria-hidden
             className="navds-stepper__marker navds-stepper__marker--success"
           />
@@ -73,7 +83,7 @@ export const StepComponent: OverridableComponent<
         <Label as="span" className="navds-stepper__content">
           {children}
         </Label>
-      </Component>
+      </Comp>
     );
   }
 );

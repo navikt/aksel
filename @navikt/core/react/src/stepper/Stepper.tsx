@@ -41,6 +41,7 @@ interface StepperContextProps {
   onStepChange: (step: number) => void;
   lastIndex: number;
   orientation: "horizontal" | "vertical";
+  interactive: boolean;
 }
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
@@ -56,6 +57,7 @@ export const Stepper: StepperComponent = forwardRef<
       activeStep,
       orientation = "vertical",
       onStepChange = () => {},
+      interactive = true,
       ...rest
     },
     ref
@@ -77,6 +79,7 @@ export const Stepper: StepperComponent = forwardRef<
             onStepChange,
             lastIndex: React.Children.count(children),
             orientation,
+            interactive,
           }}
         >
           {React.Children.map(children, (step, index) => {

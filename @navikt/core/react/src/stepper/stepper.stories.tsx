@@ -118,6 +118,7 @@ export const DisplayOnly = () => {
       aria-labelledby="stepper-heading"
       activeStep={2}
       orientation="vertical"
+      interactive={false}
     >
       <Stepper.Step {...props}>Start søknad</Stepper.Step>
       <Stepper.Step {...props}>Personopplysninger</Stepper.Step>

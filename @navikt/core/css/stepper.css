@@ -67,6 +67,11 @@ button.navds-stepper__step {
   cursor: pointer;
 }
 
+.navds-stepper__step--non-interactive {
+  color: var(--navds-global-color-gray-900);
+  cursor: default;
+}
+
 :where(.navds-stepper__step):focus {
   outline: none;
   box-shadow: var(--navds-shadow-focus);
@@ -160,7 +165,7 @@ button.navds-stepper__step {
   color: var(--navds-semantic-color-interaction-primary-selected);
 }
 
-:where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
+:where(.navds-stepper__step:not(.navds-stepper__step--active):not(.navds-stepper__step--non-interactive):hover)
   .navds-stepper__content {
   text-decoration: underline;
 }
@@ -176,4 +181,24 @@ button.navds-stepper__step {
   background-color: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
+}
+
+:where(.navds-stepper__step--non-interactive) .navds-stepper__content {
+  color: var(--navds-global-color-gray-900);
+}
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
+  .navds-stepper__circle {
+  background-color: var(--navds-global-color-gray-900);
+  border-color: var(--navds-global-color-gray-900);
+  color: var(--navds-global-color-white);
+}
+
+:where(.navds-stepper__step--non-interactive:hover) .navds-stepper__circle {
+  background-color: transparent;
+}
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active:hover)
+  .navds-stepper__circle {
+  background-color: var(--navds-global-color-gray-900);
 }
