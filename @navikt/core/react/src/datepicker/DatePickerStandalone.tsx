@@ -40,7 +40,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       children,
       className,
       locale = "nb",
-      yearSelector,
+      dropdownCaption,
       disabled = [],
       disableWeekends = false,
       showWeekNumber = false,
@@ -92,7 +92,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           {...overrideProps}
           selected={selected ?? selectedDates}
           components={{
-            Caption: yearSelector ? DropdownCaption : Caption,
+            Caption: dropdownCaption ? DropdownCaption : Caption,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}

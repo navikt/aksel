@@ -69,10 +69,10 @@ export interface DatePickerDefaultProps
   toDate?: Date;
   /**
    * Adds a `Select` for picking Year and Month
-   * Needs `fromDate` + `toDate` to be set!
+   * Needs `fromDate` + `toDate` to be shown!
    * @default false
    */
-  yearSelector?: boolean;
+  dropdownCaption?: boolean;
   /**
    * Apply the disabled modifier to the matching days.
    * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
@@ -145,7 +145,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     {
       children,
       locale = "nb",
-      yearSelector,
+      dropdownCaption,
       disabled = [],
       disableWeekends = false,
       showWeekNumber = false,
@@ -242,7 +242,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   {...overrideProps}
                   selected={selected ?? selectedDates}
                   components={{
-                    Caption: yearSelector ? DropdownCaption : Caption,
+                    Caption: dropdownCaption ? DropdownCaption : Caption,
                   }}
                   className={cl("navds-date", classNames?.datepicker)}
                   classNames={{

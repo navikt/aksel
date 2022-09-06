@@ -67,7 +67,7 @@ export const Default = (props) => {
     <div>
       <Comp
         locale={props?.locale}
-        yearSelector={props?.yearSelector}
+        dropdownCaption={props?.dropdownCaption}
         disableWeekends={props?.disableWeekends}
         showWeekNumber={props.showWeekNumber}
         mode={props.mode}
@@ -118,7 +118,7 @@ export const Default = (props) => {
 };
 
 Default.args = {
-  yearSelector: false,
+  dropdownCaption: false,
   disableWeekends: false,
   showWeekNumber: false,
   inputfield: true,
@@ -126,10 +126,10 @@ Default.args = {
   openOnFocus: true,
 };
 
-export const YearSelector = (props) => (
+export const DropdownCaption = (props) => (
   <div>
     <DatePicker
-      yearSelector
+      dropdownCaption
       fromDate={new Date("Aug 23 2018")}
       toDate={new Date("Aug 23 2022")}
     >

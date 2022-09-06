@@ -22,11 +22,11 @@ export const Default = (props) => {
   );
 };
 
-export const YearSelector = (props) => {
+export const dropdownCaption = (props) => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker
-        yearSelector
+        dropdownCaption
         fromDate={new Date()}
         toDate={new Date("Sep 27 2032")}
       />

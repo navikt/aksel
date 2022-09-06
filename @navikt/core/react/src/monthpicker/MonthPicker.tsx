@@ -37,11 +37,11 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   locale?: "nb" | "nn" | "en";
   /**
-   * Adds a `Select` for picking Year
-   * Needs `fromDate` + `toDate` to be set!
+   * Adds a `Select` for picking Year and Month
+   * Needs `fromDate` + `toDate` to be shown!
    * @default false
    */
-  yearSelector?: boolean;
+  dropdownCaption?: boolean;
 }
 
 const TestCaption = ({
@@ -167,6 +167,7 @@ const MonthSelector = ({
   const hideMonth = (month: Date) => {
     return compareAsc(month, fromDate) === -1;
   };
+
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((x: Date, y) => {
@@ -225,7 +226,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
     {
       children,
-      yearSelector = false,
+      dropdownCaption = false,
       fromDate = new Date(),
       toDate = new Date("Sep 27 2032"),
     },
@@ -234,7 +235,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const [selected, setSelected] = React.useState<Date>(new Date());
 
     const isValidYearSelector =
-      yearSelector && fromDate && toDate ? true : false;
+      dropdownCaption && fromDate && toDate ? true : false;
 
     return (
       <RootProvider
@@ -248,7 +249,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           <TestCaption
             selected={selected}
             onSelect={setSelected}
-            yearSelector={yearSelector}
+            yearSelector={dropdownCaption}
             isValidYearSelector={isValidYearSelector}
           />
           <MonthSelector onSelect={setSelected} selected={selected} />
