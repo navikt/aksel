@@ -14,6 +14,11 @@ import React, { forwardRef, useState } from "react";
 import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
 import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
+import {
+  hasNextYear,
+  updateWithoutYearSelector,
+  updateWithYearSelector,
+} from "./utils/handle-selected";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -76,12 +81,16 @@ const TestCaption = ({
   };
 
   const handleButtonClick = (val) => {
-    const newMonth = setYear(
-      startOfMonth(selected),
-      yearState.getFullYear() + val
-    );
-    setYearState(newMonth);
-    onSelect(newMonth);
+    let newMonth: Date;
+    if (isValidYearSelector && hasNextYear(yearState, years, val)) {
+      newMonth = updateWithYearSelector(yearState, selected, years, val);
+      setYearState(newMonth);
+      onSelect(newMonth);
+    } else if (!isValidYearSelector) {
+      newMonth = updateWithoutYearSelector(yearState, val);
+      setYearState(newMonth);
+      onSelect(newMonth);
+    }
   };
 
   return (
@@ -89,10 +98,7 @@ const TestCaption = ({
       <button
         className="navds-monthpicker__caption-button"
         disabled={!previousMonth}
-        onClick={() =>
-          years.some((x) => yearState.getFullYear() - 1 === x.getFullYear()) &&
-          handleButtonClick(-1)
-        }
+        onClick={() => handleButtonClick(-1)}
       >
         <Left aria-hidden />
       </button>
@@ -119,10 +125,7 @@ const TestCaption = ({
       <button
         className="navds-monthpicker__caption-button"
         disabled={!nextMonth}
-        onClick={() =>
-          years.some((x) => yearState.getFullYear() + 1 === x.getFullYear()) &&
-          handleButtonClick(1)
-        }
+        onClick={() => handleButtonClick(1)}
       >
         <Right aria-hidden />
       </button>
