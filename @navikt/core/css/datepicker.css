@@ -3,7 +3,8 @@
   --navds-date-color: #123123;
 } */
 
-.navds-date__wrapper {
+.navds-date__wrapper,
+.navds-date__standalone-wrapper {
   height: fit-content;
   width: fit-content;
 }
