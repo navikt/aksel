@@ -8,8 +8,6 @@ export default {
 };
 
 export const Expandable = () => {
-  const [open, setOpen] = useState({});
-
   return (
     <Table zebraStripes>
       <Table.Header>
