@@ -116,12 +116,16 @@ export const DisplayOnly = () => {
   return (
     <Stepper
       aria-labelledby="stepper-heading"
-      activeStep={2}
+      activeStep={3}
       orientation="vertical"
       interactive={false}
     >
-      <Stepper.Step {...props}>Start søknad</Stepper.Step>
-      <Stepper.Step {...props}>Personopplysninger</Stepper.Step>
+      <Stepper.Step {...props} completed>
+        Start søknad
+      </Stepper.Step>
+      <Stepper.Step {...props} completed>
+        Personopplysninger
+      </Stepper.Step>
       <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
       <Stepper.Step {...props}>
         Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
@@ -134,7 +138,7 @@ export const DisplayOnly = () => {
 };
 
 export const CompletedSteps = () => {
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(3);
   return (
     <Stepper
       aria-labelledby="stepper-heading"
@@ -144,8 +148,8 @@ export const CompletedSteps = () => {
     >
       <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
       <Stepper.Step completed={activeStep > 2}>Personopplysninger</Stepper.Step>
-      <Stepper.Step completed={activeStep >= 3}>Saksopplysninger</Stepper.Step>
-      <Stepper.Step completed={activeStep > 4}>
+      <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
+      <Stepper.Step completed={activeStep >= 4}>
         Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
       </Stepper.Step>
       <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>

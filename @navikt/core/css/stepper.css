@@ -40,7 +40,8 @@
   grid-column: marker;
 }
 
-.navds-stepper__step--behind + .navds-stepper__line {
+.navds-stepper__step--behind.navds-stepper__step--completed
+  + .navds-stepper__line {
   background-color: var(--navds-global-color-blue-500);
 }
 
@@ -185,11 +186,13 @@ button.navds-stepper__step {
 }
 
 /* Non-interactive */
-:where(.navds-stepper__step--non-interactive) .navds-stepper__content {
-  color: var(--navds-global-color-gray-600);
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
+  .navds-stepper__content {
+  color: var(--navds-global-color-gray-900);
 }
 
-.navds-stepper__step--non-interactive.navds-stepper__step--behind
+.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed
   + .navds-stepper__line {
   background-color: var(--navds-global-color-gray-900);
 }
@@ -210,10 +213,14 @@ button.navds-stepper__step {
   background-color: var(--navds-global-color-gray-900);
 }
 
-/* :where(.navds-stepper__step--completed.navds-stepper__step--active)
-  .navds-stepper__circle
-  path {
-  fill: var(--navds-global-color-deepblue-600);
-  color: var(--navds-global-color-deepblue-600);
+:where(.navds-stepper__step--completed.navds-stepper__step--active)
+  .navds-stepper__circle {
+  background-color: inherit;
+  color: var(--navds-global-color-deepblue-500);
 }
- */
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--completed)
+  .navds-stepper__circle {
+  background-color: inherit;
+  color: var(--navds-global-color-gray-900);
+}

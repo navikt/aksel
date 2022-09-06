@@ -1,4 +1,4 @@
-import { Success } from "@navikt/ds-icons";
+import { Success, SuccessFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label, OverridableComponent } from "..";
@@ -73,7 +73,7 @@ export const StepComponent: OverridableComponent<
         }}
       >
         {completed ? (
-          <Success
+          <SuccessFilled
             aria-hidden
             className="navds-stepper__marker navds-stepper__marker--success"
           />
