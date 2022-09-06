@@ -42,10 +42,12 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
 const TestCaption = ({
   selected,
   onSelect,
+  isValidYearSelector,
   yearSelector,
 }: {
   selected: Date;
   onSelect: (m: Date) => void;
+  isValidYearSelector: boolean;
   yearSelector: boolean;
 }) => {
   const { nextMonth, previousMonth } = useNavigation();
@@ -57,13 +59,14 @@ const TestCaption = ({
   } = useDayPicker();
 
   const [yearState, setYearState] = useState<Date>(selected);
-  if (!fromDate) return <></>;
-  if (!toDate) return <></>;
   const years: Date[] = [];
-  const fromYear = fromDate.getFullYear();
-  const toYear = toDate.getFullYear();
-  for (let year = fromYear; year <= toYear; year++) {
-    years.push(setYear(startOfYear(new Date()), year));
+
+  if (yearSelector && fromDate && toDate) {
+    const fromYear = fromDate.getFullYear();
+    const toYear = toDate.getFullYear();
+    for (let year = fromYear; year <= toYear; year++) {
+      years.push(setYear(startOfYear(new Date()), year));
+    }
   }
 
   const handleYearChange = (e) => {
@@ -94,20 +97,25 @@ const TestCaption = ({
         <Left aria-hidden />
       </button>
 
-      <Select
-        label="velg år"
-        hideLabel
-        value={selected?.getFullYear()}
-        onChange={handleYearChange}
-        style={{ width: "79px" }}
-      >
-        {years.map((year) => (
-          <option key={year.getFullYear()} value={year.getFullYear()}>
-            {formatYearCaption(year, { locale })}
-          </option>
-        ))}
-      </Select>
-
+      {isValidYearSelector ? (
+        <Select
+          label="velg år"
+          hideLabel
+          value={selected?.getFullYear()}
+          onChange={handleYearChange}
+          style={{ width: "79px" }}
+        >
+          {years.map((year) => (
+            <option key={year.getFullYear()} value={year.getFullYear()}>
+              {formatYearCaption(year, { locale })}
+            </option>
+          ))}
+        </Select>
+      ) : (
+        <span className="navds-monthpicker__year-label" aria-live="polite">
+          {yearState.getFullYear()}
+        </span>
+      )}
       <button
         className="navds-monthpicker__caption-button"
         disabled={!nextMonth}
@@ -136,7 +144,6 @@ const MonthSelector = ({
     formatters: { formatYearCaption, formatMonthCaption },
     locale,
   } = useDayPicker();
-  console.log(fromDate, toDate);
 
   if (!fromDate) return <></>;
   if (!toDate) return <></>;
@@ -201,6 +208,9 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   ) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
 
+    const isValidYearSelector =
+      yearSelector && fromDate && toDate ? true : false;
+
     return (
       <RootProvider
         locale={NB}
@@ -211,9 +221,10 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       >
         <div className="navds-monthpicker__wrapper">
           <TestCaption
-            yearSelector={yearSelector}
             selected={selected}
             onSelect={setSelected}
+            yearSelector={yearSelector}
+            isValidYearSelector={isValidYearSelector}
           />
           <MonthSelector onSelect={setSelected} selected={selected} />
         </div>
