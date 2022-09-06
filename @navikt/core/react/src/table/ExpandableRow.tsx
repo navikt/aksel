@@ -74,14 +74,15 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
         setInternalOpen((open) => !open);
       }
     };
+
     return (
       <>
         <Row
           {...rest}
           ref={ref}
-          onClick={() => {
-            if (openOnRowClick && !getSelection().toString()) handleOnClick();
-          }}
+          onClick={() =>
+            openOnRowClick && !getSelection?.()?.toString?.() && handleOnClick()
+          }
           className={cl("navds-table__expandable-row", className, {
             "navds-table__expandable-row--open": isOpen,
             "navds-table__expandable-row--clickable-row": openOnRowClick,

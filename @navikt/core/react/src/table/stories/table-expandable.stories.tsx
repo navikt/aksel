@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table } from "..";
-import { Link } from "../..";
+import { Checkbox, Link } from "../..";
 
 export default {
   title: "ds-react/Table",
@@ -8,6 +8,8 @@ export default {
 };
 
 export const Expandable = () => {
+  const [open, setOpen] = useState({});
+
   return (
     <Table zebraStripes>
       <Table.Header>
@@ -222,6 +224,42 @@ export const ExpandableOpen = () => {
             {columns.map(({ key }) => (
               <Table.DataCell key={key}>{data[key]}</Table.DataCell>
             ))}
+          </Table.ExpandableRow>
+        ))}
+      </Table.Body>
+    </Table>
+  );
+};
+
+export const ExpandableOnRowClick = () => {
+  return (
+    <Table zebraStripes>
+      <Table.Header>
+        <Table.Row>
+          {columns.map(({ key, name }) => (
+            <Table.HeaderCell key={key}>{name}</Table.HeaderCell>
+          ))}
+          <Table.HeaderCell />
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {data.map((data) => (
+          <Table.ExpandableRow
+            openOnRowClick
+            expansionDisabled={data.animal === "Sel"}
+            content={data.content}
+            key={data.name}
+            togglePlacement="right"
+          >
+            {columns.map(({ key }, y) =>
+              y === 0 ? (
+                <Table.DataCell key={key}>
+                  {<Checkbox hideLabel> </Checkbox>}
+                </Table.DataCell>
+              ) : (
+                <Table.DataCell key={key}>{data[key]}</Table.DataCell>
+              )
+            )}
           </Table.ExpandableRow>
         ))}
       </Table.Body>
