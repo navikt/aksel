@@ -19,9 +19,9 @@ interface UseRangeDatepickerOptions
 
 interface UseRangeDatepickerValue {
   /**
-   * Use: <DatePicker {...dayPickerProps}/>
+   * Use: <DatePicker {...datepickerProps}/>
    */
-  dayPickerProps: DatePickerProps;
+  datepickerProps: DatePickerProps;
   /**
    * Use: <DatePicker.Input label="from" {...fromInputProps}/>
    */
@@ -242,7 +242,7 @@ export const useRangeDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps = {
+  const datepickerProps = {
     month: month,
     onMonthChange: (month) => setMonth(month),
     onSelect: handleSelect,
@@ -275,7 +275,7 @@ export const useRangeDatepicker = (
   };
 
   return {
-    dayPickerProps,
+    datepickerProps,
     fromInputProps,
     toInputProps,
     reset,

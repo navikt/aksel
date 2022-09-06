@@ -59,7 +59,7 @@ obs! Du må selv validere valget, evt legge til feilmeldinger i input.
 
 ```jsx
 export const demo = () => {
-  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
   });
 
@@ -68,7 +68,7 @@ export const demo = () => {
   }, [selectedDay]);
 
   return (
-    <DatePicker {...dayPickerProps}>
+    <DatePicker {...datepickerProps}>
       <DatePicker.Input {...inputProps} label="Velg dato" />
     </DatePicker>
   );
@@ -81,7 +81,7 @@ export const demo = () => {
 
 ```jsx
 export const demo = () => {
-  const { dayPickerProps, fromInputProps, toInputProps, selectedRange } =
+  const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
     });
@@ -92,7 +92,7 @@ export const demo = () => {
 
   return (
     <DatePicker
-      {...dayPickerProps}
+      {...datepickerProps}
       classNames={{ wrapper: "input-wrapper-styling" }}
     >
       <DatePicker.Input {...fromInputProps} label="Fra" />
@@ -166,13 +166,13 @@ DatePicker har innebygd støtte for nb, nn og en(gb)
 
 ```jsx
 export const Validering = () => {
-  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...dayPickerProps}>
+      <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
             selectedDay && isSaturday(selectedDay)
@@ -375,9 +375,9 @@ export interface UseDatepickerOptions
 }
 interface UseDatepickerValue {
   /**
-   * Use: <DatePicker {...dayPickerProps}/>
+   * Use: <DatePicker {...datepickerProps}/>
    */
-  dayPickerProps: DatePickerProps;
+  datepickerProps: DatePickerProps;
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
@@ -427,9 +427,9 @@ export interface UseRangeDatepickerOptions
 
 interface UseRangeDatepickerValue {
   /**
-   * Use: <DatePicker {...dayPickerProps}/>
+   * Use: <DatePicker {...datepickerProps}/>
    */
-  dayPickerProps: DatePickerProps;
+  datepickerProps: DatePickerProps;
   /**
    * Use: <DatePicker.Input label="from" {...fromInputProps}/>
    */

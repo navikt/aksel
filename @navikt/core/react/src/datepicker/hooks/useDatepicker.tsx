@@ -30,9 +30,9 @@ export interface UseDatepickerOptions
 
 interface UseDatepickerValue {
   /**
-   * Use: <DatePicker {...dayPickerProps}/>
+   * Use: <DatePicker {...datepickerProps}/>
    */
-  dayPickerProps: DatePickerProps;
+  datepickerProps: DatePickerProps;
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
@@ -154,7 +154,7 @@ export const useDatepicker = (
     setMonth(day);
   };
 
-  const dayPickerProps = {
+  const datepickerProps = {
     month,
     onMonthChange: (month) => setMonth(month),
     onDayClick: handleDayClick,
@@ -177,5 +177,5 @@ export const useDatepicker = (
     wrapperRef: inputRef,
   };
 
-  return { dayPickerProps, inputProps, reset, selectedDay, setSelected };
+  return { datepickerProps, inputProps, reset, selectedDay, setSelected };
 };

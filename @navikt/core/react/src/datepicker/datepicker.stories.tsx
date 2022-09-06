@@ -72,9 +72,9 @@ export const Default = (props) => {
         showWeekNumber={props.showWeekNumber}
         mode={props.mode}
         {...(props.mode === "single"
-          ? singleCtx.dayPickerProps
+          ? singleCtx.datepickerProps
           : props.mode === "range"
-          ? rangeCtx.dayPickerProps
+          ? rangeCtx.datepickerProps
           : {})}
         {...newProps}
       >
@@ -155,7 +155,7 @@ export const ShowWeekNumber = (props) => (
 );
 
 export const UseDatepicker = () => {
-  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
     openOnFocus: true,
@@ -167,7 +167,7 @@ export const UseDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...dayPickerProps}>
+      <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
     </div>
@@ -175,7 +175,7 @@ export const UseDatepicker = () => {
 };
 
 export const UseRangedDatepicker = () => {
-  const { dayPickerProps, fromInputProps, toInputProps, selectedRange } =
+  const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
       openOnFocus: true,
@@ -187,7 +187,7 @@ export const UseRangedDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...dayPickerProps}>
+      <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
@@ -228,13 +228,13 @@ export const UserControlled = () => {
 };
 
 export const Validering = () => {
-  const { dayPickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <DatePicker {...dayPickerProps}>
+      <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
             selectedDay && isSaturday(selectedDay)
