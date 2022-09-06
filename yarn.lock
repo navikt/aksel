@@ -3121,7 +3121,7 @@ __metadata:
     faker: 5.5.3
     fast-glob: 3.2.11
     jest: ^27.5.0
-    react-day-picker: 8.2.0
+    react-day-picker: ^8.1.4
     react-docgen-typescript: 2.2.2
     react-dom: ^18.0.0
     react-modal: 3.15.1
@@ -18980,7 +18980,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-day-picker@npm:8.2.0":
+"react-day-picker@npm:^8.1.4":
   version: 8.2.0
   resolution: "react-day-picker@npm:8.2.0"
   peerDependencies:
