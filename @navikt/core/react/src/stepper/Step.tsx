@@ -63,7 +63,9 @@ export const StepComponent: OverridableComponent<
         ref={ref}
         className={cl("navds-stepper__step", className, {
           "navds-stepper__step--active": activeStep === unsafe_index,
+          "navds-stepper__step--behind": activeStep > unsafe_index,
           "navds-stepper__step--non-interactive": !isInteractive,
+          "navds-stepper__step--completed": completed,
         })}
         onClick={(e) => {
           isInteractive && context.onStepChange(unsafe_index + 1);

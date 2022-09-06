@@ -1,7 +1,7 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
 import Stepper from "./Stepper";
-import { BodyLong } from "..";
+import { BodyLong, Button } from "..";
 
 export default {
   title: "ds-react/Stepper",
@@ -134,7 +134,6 @@ export const DisplayOnly = () => {
 };
 
 export const CompletedSteps = () => {
-  const props = { as: "button" };
   const [activeStep, setActiveStep] = useState(2);
   return (
     <Stepper
@@ -143,27 +142,59 @@ export const CompletedSteps = () => {
       orientation="vertical"
       onStepChange={(step) => setActiveStep(step)}
     >
-      <Stepper.Step {...props} completed={activeStep > 1}>
-        Start søknad
-      </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 2}>
-        Personopplysninger
-      </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 3}>
-        Saksopplysninger
-      </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 4}>
+      <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
+      <Stepper.Step completed={activeStep > 2}>Personopplysninger</Stepper.Step>
+      <Stepper.Step completed={activeStep >= 3}>Saksopplysninger</Stepper.Step>
+      <Stepper.Step completed={activeStep > 4}>
         Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
       </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 5}>
-        Vedlegg
-      </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 6}>
-        Oppsummering
-      </Stepper.Step>
-      <Stepper.Step {...props} completed={activeStep > 7}>
-        Innsending
-      </Stepper.Step>
+      <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+      <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
+      <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
     </Stepper>
+  );
+};
+
+export const CompletedNonInteractiveSteps = () => {
+  const [activeStep, setActiveStep] = useState(1);
+  const [progress, setProgress] = useState(1);
+  return (
+    <>
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={activeStep}
+        orientation="vertical"
+        onStepChange={(step) => setActiveStep(step)}
+      >
+        <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
+        <Stepper.Step completed={activeStep > 2} interactive={progress > 1}>
+          Personopplysninger
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep >= 3} interactive={progress > 2}>
+          Saksopplysninger
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 4} interactive={progress > 3}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 5} interactive={progress > 4}>
+          Vedlegg
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 6} interactive={progress > 5}>
+          Oppsummering
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 7} interactive={progress > 6}>
+          Innsending
+        </Stepper.Step>
+      </Stepper>
+      <Button
+        onClick={() => {
+          const step = progress + 1;
+          setProgress(step);
+          setActiveStep(step);
+        }}
+      >
+        Neste
+      </Button>
+    </>
   );
 };

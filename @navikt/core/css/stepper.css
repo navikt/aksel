@@ -40,6 +40,10 @@
   grid-column: marker;
 }
 
+.navds-stepper__step--behind + .navds-stepper__line {
+  background-color: var(--navds-global-color-blue-500);
+}
+
 .navds-stepper__line--1 {
   grid-row: line-1;
   display: none;
@@ -68,7 +72,7 @@ button.navds-stepper__step {
 }
 
 .navds-stepper__step--non-interactive {
-  color: var(--navds-global-color-gray-900);
+  color: var(--navds-global-color-gray-600);
   cursor: default;
 }
 
@@ -96,9 +100,6 @@ button.navds-stepper__step {
   background: none;
   font-size: 28px;
 }
-
-/* .navds-stepper__marker--success > svg {
-} */
 
 .navds-stepper__content {
   grid-column: content;
@@ -183,8 +184,14 @@ button.navds-stepper__step {
   );
 }
 
+/* Non-interactive */
 :where(.navds-stepper__step--non-interactive) .navds-stepper__content {
-  color: var(--navds-global-color-gray-900);
+  color: var(--navds-global-color-gray-600);
+}
+
+.navds-stepper__step--non-interactive.navds-stepper__step--behind
+  + .navds-stepper__line {
+  background-color: var(--navds-global-color-gray-900);
 }
 
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
@@ -202,3 +209,11 @@ button.navds-stepper__step {
   .navds-stepper__circle {
   background-color: var(--navds-global-color-gray-900);
 }
+
+/* :where(.navds-stepper__step--completed.navds-stepper__step--active)
+  .navds-stepper__circle
+  path {
+  fill: var(--navds-global-color-deepblue-600);
+  color: var(--navds-global-color-deepblue-600);
+}
+ */
