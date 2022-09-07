@@ -112,27 +112,22 @@ export const Vertical = () => {
 };
 
 export const DisplayOnly = () => {
-  const props = { as: "div" };
   return (
     <Stepper
       aria-labelledby="stepper-heading"
-      activeStep={3}
+      activeStep={2}
       orientation="vertical"
       interactive={false}
     >
-      <Stepper.Step {...props} completed>
-        Start søknad
-      </Stepper.Step>
-      <Stepper.Step {...props} completed>
-        Personopplysninger
-      </Stepper.Step>
-      <Stepper.Step {...props}>Saksopplysninger</Stepper.Step>
-      <Stepper.Step {...props}>
+      <Stepper.Step completed>Start søknad</Stepper.Step>
+      <Stepper.Step completed>Personopplysninger</Stepper.Step>
+      <Stepper.Step>Saksopplysninger</Stepper.Step>
+      <Stepper.Step>
         Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
       </Stepper.Step>
-      <Stepper.Step {...props}>Vedlegg</Stepper.Step>
-      <Stepper.Step {...props}>Oppsummering</Stepper.Step>
-      <Stepper.Step {...props}>Innsending</Stepper.Step>
+      <Stepper.Step>Vedlegg</Stepper.Step>
+      <Stepper.Step>Oppsummering</Stepper.Step>
+      <Stepper.Step>Innsending</Stepper.Step>
     </Stepper>
   );
 };

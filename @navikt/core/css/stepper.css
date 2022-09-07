@@ -61,7 +61,6 @@
   grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
   gap: var(--navds-spacing-2);
   justify-content: flex-start;
-  /* align-items: baseline; */
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
@@ -208,7 +207,7 @@ button.navds-stepper__step {
 
 .navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed
   + .navds-stepper__line {
-  background-color: var(--navds-global-color-gray-900);
+  background-color: var(--navds-global-color-gray-600);
 }
 
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
@@ -233,8 +232,13 @@ button.navds-stepper__step {
   color: var(--navds-global-color-deepblue-500);
 }
 
-:where(.navds-stepper__step--non-interactive.navds-stepper__step--completed)
+:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive)
+  .navds-stepper__circle {
+  color: var(--navds-global-color-gray-900);
+}
+
+/* :where(.navds-stepper__step--non-interactive.navds-stepper__step--completed)
   .navds-stepper__circle {
   background-color: inherit;
   color: var(--navds-global-color-gray-900);
-}
+} */
