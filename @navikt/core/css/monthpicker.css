@@ -32,7 +32,6 @@
   text-align: center;
   width: 47px;
   height: 44px;
-  cursor: pointer;
   text-transform: capitalize;
   padding: 1px;
   border: 1px solid transparent;
@@ -59,9 +58,21 @@
 }
 
 .navds-monthpicker__month:disabled {
-  text-decoration: line-through;
+  color: var(--navds-semantic-color-text-muted);
+  background-image: linear-gradient(
+    135deg,
+    #e8e8e8 10%,
+    var(--navds-global-color-white) 10%,
+    var(--navds-global-color-white) 50%,
+    #e8e8e8 50%,
+    #e8e8e8 60%,
+    var(--navds-global-color-white) 60%,
+    var(--navds-global-color-white) 100%
+  );
+  background-size: 7.07px 7.07px;
 }
 
-.navds-monthpicker__month:not(.navds-monthpicker__month--selected):hover {
+.navds-monthpicker__month:not(.navds-monthpicker__month--selected):not([disabled]):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  cursor: pointer;
 }
