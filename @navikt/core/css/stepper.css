@@ -1,5 +1,5 @@
 .navds-stepper {
-  --navds-stepper-marker-size: 1.75rem;
+  --navds-stepper-circle-size: 1.75rem;
   --navds-stepper-border-width: 2px;
   --navds-stepper-line-length: 1rem;
 
@@ -20,13 +20,9 @@
 .navds-stepper__item {
   display: grid;
   grid-template-rows:
-    [line-1] auto
-    [content-start marker] var(--navds-stepper-marker-size)
-    [line-2] auto
-    [content-end];
-  grid-template-columns:
-    [marker] var(--navds-stepper-marker-size)
-    [content] auto;
+    [line-1] auto [step-start] var(--navds-stepper-circle-size)
+    [line-2 step-end] auto;
+  grid-template-columns: var(--navds-stepper-circle-size) auto;
   justify-items: flex-start;
   gap: 0.5rem;
 }
@@ -37,7 +33,7 @@
   height: 100%;
   min-height: var(--navds-stepper-line-length);
   justify-self: center;
-  grid-column: marker;
+  grid-column: 1;
 }
 
 .navds-stepper__step--behind.navds-stepper__step--completed
@@ -59,7 +55,18 @@
 }
 
 .navds-stepper__step {
-  display: contents;
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
+  gap: var(--navds-spacing-2);
+  align-items: baseline;
+  justify-content: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+  padding: var(--navds-stepper-border-width);
+  margin: calc(var(--navds-stepper-border-width) * -1)
+    calc(var(--navds-stepper-border-width) * -1) 1.75rem;
 }
 
 button.navds-stepper__step {
@@ -69,7 +76,6 @@ button.navds-stepper__step {
   font: inherit;
   color: inherit;
   text-align: inherit;
-  cursor: pointer;
 }
 
 .navds-stepper__step--non-interactive {
@@ -83,48 +89,39 @@ button.navds-stepper__step {
   isolation: isolate;
 }
 
-.navds-stepper__marker {
-  grid-column: marker;
-  grid-row: marker;
+.navds-stepper__circle {
+  grid-column: circle;
   display: inline-grid;
   place-items: center;
   flex-shrink: 0;
-  width: var(--navds-stepper-marker-size);
-  height: var(--navds-stepper-marker-size);
+  width: var(--navds-stepper-circle-size);
+  height: var(--navds-stepper-circle-size);
   border: var(--navds-stepper-border-width) solid currentColor;
   border-radius: var(--navds-border-radius-full);
   line-height: 1;
 }
 
-.navds-stepper__marker--success {
+.navds-stepper__circle--success {
   border: none;
   background: none;
   font-size: 28px;
 }
 
 .navds-stepper__content {
-  grid-column: content;
-  grid-row: content;
-  display: block;
-  width: fit-content;
-  max-width: 44ch;
+  min-width: fit-content;
   line-height: 1.5;
-  margin-bottom: 1.25rem;
+  grid-column: content;
 }
 
 /* Horizontal */
 :where(.navds-stepper--horizontal) .navds-stepper__item {
   flex: 1 1 100%;
   grid-template-columns:
-    [line-1-start] minmax(0.5rem, 1fr)
-    [content-start] auto
-    [line-1-end marker] var(--navds-stepper-marker-size)
-    [line-2-start] auto
-    [content-end] minmax(0.5rem, 1fr)
-    [line-2-end];
-  grid-template-rows:
-    [marker] var(--navds-stepper-marker-size)
-    [content] auto;
+    [line-1-start] 1fr [step-start] auto [line-1-end] var(
+      --navds-stepper-circle-size
+    )
+    [line-2-start] auto [step-end] 1fr [line-2-end];
+  grid-template-rows: var(--navds-stepper-circle-size) auto;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__line {
@@ -151,14 +148,27 @@ button.navds-stepper__step {
   visibility: hidden;
 }
 
-:where(.navds-stepper--horizontal) .navds-stepper__marker {
-  grid-column: marker;
-  grid-row: marker;
+:where(.navds-stepper--horizontal) .navds-stepper__step {
+  grid-row: 1 / -1;
+  grid-column: step;
+  display: grid;
+  grid-template-rows: [circle] var(--navds-stepper-circle-size) [content] auto;
+  grid-template-columns:
+    [content-start] auto [circle] var(--navds-stepper-circle-size)
+    [content-end] auto;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__circle {
+  grid-row: circle;
+  grid-column: 2;
 }
 
 :where(.navds-stepper--horizontal) .navds-stepper__content {
   grid-row: content;
-  grid-column: content;
+  grid-column: 1 / -1;
   max-width: 24ch;
 }
 
@@ -172,14 +182,14 @@ button.navds-stepper__step {
   text-decoration: underline;
 }
 
-:where(.navds-stepper__step--active) .navds-stepper__marker {
+:where(.navds-stepper__step--active) .navds-stepper__circle {
   background-color: var(--navds-semantic-color-interaction-primary-selected);
   border-color: var(--navds-semantic-color-interaction-primary-selected);
   color: var(--navds-semantic-color-text-inverted);
 }
 
 :where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
-  .navds-stepper__marker {
+  .navds-stepper__circle {
   background-color: var(
     --navds-semantic-color-interaction-primary-hover-subtle
   );
