@@ -45,6 +45,8 @@ export type ConditionalModeProps =
       max?: number;
     };
 
+// TODO: Hva skjer hvis et helt år/månede er disabled og man har dropdown?
+
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
