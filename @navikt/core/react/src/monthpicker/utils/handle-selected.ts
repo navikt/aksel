@@ -1,6 +1,6 @@
 import { startOfMonth, setYear } from "date-fns";
 
-export const updateWithoutYearSelector = (
+export const updateWithoutDropdownCaption = (
   yearState: Date,
   val: number
 ): Date => {
@@ -8,7 +8,7 @@ export const updateWithoutYearSelector = (
   return setYear(yearState, newYear);
 };
 
-export const updateWithYearSelector = (
+export const updateWithDropdownCaption = (
   yearState: Date,
   selected: Date,
   years: Date[],

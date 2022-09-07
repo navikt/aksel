@@ -16,8 +16,8 @@ import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
 import {
   hasNextYear,
-  updateWithoutYearSelector,
-  updateWithYearSelector,
+  updateWithoutDropdownCaption,
+  updateWithDropdownCaption,
 } from "./utils/handle-selected";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -47,13 +47,13 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
 const TestCaption = ({
   selected,
   onSelect,
-  isValidYearSelector,
-  yearSelector,
+  isValidDropdownCaption,
+  dropdownCaption,
 }: {
   selected: Date;
   onSelect: (m: Date) => void;
-  isValidYearSelector: boolean;
-  yearSelector: boolean;
+  isValidDropdownCaption: boolean;
+  dropdownCaption: boolean;
 }) => {
   const { nextMonth, previousMonth } = useNavigation();
   const {
@@ -66,7 +66,7 @@ const TestCaption = ({
   const [yearState, setYearState] = useState<Date>(selected);
   const years: Date[] = [];
 
-  if (yearSelector && fromDate && toDate) {
+  if (dropdownCaption && fromDate && toDate) {
     const fromYear = fromDate.getFullYear();
     const toYear = toDate.getFullYear();
     for (let year = fromYear; year <= toYear; year++) {
@@ -82,12 +82,12 @@ const TestCaption = ({
 
   const handleButtonClick = (val) => {
     let newMonth: Date;
-    if (isValidYearSelector && hasNextYear(yearState, years, val)) {
-      newMonth = updateWithYearSelector(yearState, selected, years, val);
+    if (isValidDropdownCaption && hasNextYear(yearState, years, val)) {
+      newMonth = updateWithDropdownCaption(yearState, selected, years, val);
       setYearState(newMonth);
       onSelect(newMonth);
-    } else if (!isValidYearSelector) {
-      newMonth = updateWithoutYearSelector(yearState, val);
+    } else if (!isValidDropdownCaption) {
+      newMonth = updateWithoutDropdownCaption(yearState, val);
       setYearState(newMonth);
       onSelect(newMonth);
     }
@@ -97,13 +97,13 @@ const TestCaption = ({
     <div className="navds-monthpicker__caption">
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!isValidYearSelector ? false : !!previousMonth}
+        disabled={!isValidDropdownCaption ? false : !!previousMonth}
         onClick={() => handleButtonClick(-1)}
       >
         <Left aria-hidden />
       </button>
 
-      {isValidYearSelector ? (
+      {isValidDropdownCaption ? (
         <Select
           label="velg år"
           hideLabel
@@ -124,7 +124,7 @@ const TestCaption = ({
       )}
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!isValidYearSelector ? false : !nextMonth}
+        disabled={!isValidDropdownCaption ? false : !nextMonth}
         onClick={() => handleButtonClick(1)}
       >
         <Right aria-hidden />
@@ -136,11 +136,11 @@ const TestCaption = ({
 const MonthSelector = ({
   onSelect,
   selected,
-  yearSelector,
+  dropdownCaption,
 }: {
   onSelect: (m: Date) => void;
   selected: Date;
-  yearSelector: boolean;
+  dropdownCaption: boolean;
 }) => {
   const months: Date[] = [];
   const {
@@ -151,7 +151,7 @@ const MonthSelector = ({
   } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
 
-  if (yearSelector && fromDate && toDate && isSameYear(fromDate, toDate)) {
+  if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
       months.push(setMonth(date, month));
@@ -164,7 +164,7 @@ const MonthSelector = ({
   }
 
   const hideMonth = (month: Date) => {
-    if (yearSelector && fromDate) return compareAsc(month, fromDate) === -1;
+    if (dropdownCaption && fromDate) return compareAsc(month, fromDate) === -1;
   };
 
   return (
@@ -225,7 +225,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   ({ children, dropdownCaption = false, fromDate, toDate }, ref) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
 
-    const isValidYearSelector =
+    const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
 
     return (
@@ -240,11 +240,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           <TestCaption
             selected={selected}
             onSelect={setSelected}
-            yearSelector={dropdownCaption}
-            isValidYearSelector={isValidYearSelector}
+            dropdownCaption={dropdownCaption}
+            isValidDropdownCaption={isValidDropdownCaption}
           />
           <MonthSelector
-            yearSelector={dropdownCaption}
+            dropdownCaption={dropdownCaption}
             onSelect={setSelected}
             selected={selected}
           />

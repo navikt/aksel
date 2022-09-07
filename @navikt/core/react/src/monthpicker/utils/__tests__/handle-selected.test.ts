@@ -1,6 +1,6 @@
 import {
-  updateWithoutYearSelector,
-  updateWithYearSelector,
+  updateWithoutDropdownCaption,
+  updateWithDropdownCaption,
   hasNextYear,
 } from "../handle-selected";
 
@@ -17,12 +17,12 @@ const years = [
 
 describe("Returns date with updated year without selector", () => {
   test("Date should be incremented with 1 year (Date)", () => {
-    expect(updateWithoutYearSelector(new Date(), 1).getFullYear()).toEqual(
+    expect(updateWithoutDropdownCaption(new Date(), 1).getFullYear()).toEqual(
       2023
     );
   });
   test("Date should be decremented with 1 year (Date)", () => {
-    expect(updateWithoutYearSelector(new Date(), -1).getFullYear()).toEqual(
+    expect(updateWithoutDropdownCaption(new Date(), -1).getFullYear()).toEqual(
       2021
     );
   });
@@ -31,7 +31,7 @@ describe("Returns date with updated year without selector", () => {
 describe("Returns updated sekected date with selector", () => {
   test("Date should be incremented with 1 years (2024)", () => {
     expect(
-      updateWithYearSelector(
+      updateWithDropdownCaption(
         new Date("Aug 5 2023"),
         new Date("Aug 5 2023"),
         years,
@@ -41,7 +41,7 @@ describe("Returns updated sekected date with selector", () => {
   });
   test("Date should be incremented with 5 years (2028)", () => {
     expect(
-      updateWithYearSelector(
+      updateWithDropdownCaption(
         new Date("Aug 5 2023"),
         new Date("Aug 5 2023"),
         years,
@@ -51,7 +51,7 @@ describe("Returns updated sekected date with selector", () => {
   });
   test("Date should be decremented with 5 years (Date)", () => {
     expect(
-      updateWithYearSelector(
+      updateWithDropdownCaption(
         new Date("Aug 5 2028"),
         new Date("Aug 5 2023"),
         years,
@@ -61,7 +61,7 @@ describe("Returns updated sekected date with selector", () => {
   });
   test("Date should be incremented with 1 years (Date)", () => {
     expect(
-      updateWithYearSelector(
+      updateWithDropdownCaption(
         new Date("Aug 5 2023"),
         new Date("Aug 5 2023"),
         years,
