@@ -146,15 +146,27 @@ export const CompletedSteps = () => {
       orientation="vertical"
       onStepChange={(step) => setActiveStep(step)}
     >
-      <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
-      <Stepper.Step completed={activeStep > 2}>Personopplysninger</Stepper.Step>
-      <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
-      <Stepper.Step completed={activeStep >= 4}>
+      <Stepper.Step completed={activeStep > 1} as="button">
+        Start søknad
+      </Stepper.Step>
+      <Stepper.Step completed={activeStep > 2} as="button">
+        Personopplysninger
+      </Stepper.Step>
+      <Stepper.Step completed={activeStep > 3} href="#">
+        Saksopplysninger
+      </Stepper.Step>
+      <Stepper.Step completed={activeStep >= 4} href="#">
         Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
       </Stepper.Step>
-      <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
-      <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
-      <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
+      <Stepper.Step completed={activeStep > 5} href="#">
+        Vedlegg
+      </Stepper.Step>
+      <Stepper.Step completed={activeStep > 6} href="#">
+        Oppsummering
+      </Stepper.Step>
+      <Stepper.Step completed={activeStep > 7} href="#">
+        Innsending
+      </Stepper.Step>
     </Stepper>
   );
 };
@@ -170,23 +182,49 @@ export const CompletedNonInteractiveSteps = () => {
         orientation="vertical"
         onStepChange={(step) => setActiveStep(step)}
       >
-        <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
-        <Stepper.Step completed={activeStep > 2} interactive={progress > 1}>
+        <Stepper.Step completed={activeStep > 1} href="#">
+          Start søknad
+        </Stepper.Step>
+        <Stepper.Step
+          completed={activeStep > 2}
+          href="#"
+          interactive={progress > 1}
+        >
           Personopplysninger
         </Stepper.Step>
-        <Stepper.Step completed={activeStep >= 3} interactive={progress > 2}>
+        <Stepper.Step
+          completed={activeStep >= 3}
+          href="#"
+          interactive={progress > 2}
+        >
           Saksopplysninger
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 4} interactive={progress > 3}>
+        <Stepper.Step
+          completed={activeStep > 4}
+          href="#"
+          interactive={progress > 3}
+        >
           Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 5} interactive={progress > 4}>
+        <Stepper.Step
+          completed={activeStep > 5}
+          href="#"
+          interactive={progress > 4}
+        >
           Vedlegg
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 6} interactive={progress > 5}>
+        <Stepper.Step
+          completed={activeStep > 6}
+          href="#"
+          interactive={progress > 5}
+        >
           Oppsummering
         </Stepper.Step>
-        <Stepper.Step completed={activeStep > 7} interactive={progress > 6}>
+        <Stepper.Step
+          completed={activeStep > 7}
+          href="#"
+          interactive={progress > 6}
+        >
           Innsending
         </Stepper.Step>
       </Stepper>
