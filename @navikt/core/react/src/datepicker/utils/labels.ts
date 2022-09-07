@@ -3,26 +3,26 @@ import { Labels, NavButtonLabel } from "react-day-picker";
 const labelNext: NavButtonLabel = (date, options) => {
   switch (options?.locale?.code) {
     case "nb":
-      return "Gå til neste månede";
+      return "Gå til neste måned";
     case "nn":
-      return "Gå til neste månede";
+      return "Gå til neste måned";
     case "en":
       return "Go to next month";
     default:
-      return "Gå til neste månede";
+      return "Gå til neste måned";
   }
 };
 
 const labelPrevious: NavButtonLabel = (date, options) => {
   switch (options?.locale?.code) {
     case "nb":
-      return "Gå til forrige månede";
+      return "Gå til forrige måned";
     case "nn":
-      return "Gå til forrige månede";
+      return "Gå til forrige måned";
     case "en":
       return "Go to previous month";
     default:
-      return "Gå til forrige månede";
+      return "Gå til forrige måned";
   }
 };
 
