@@ -136,9 +136,11 @@ const TestCaption = ({
 const MonthSelector = ({
   onSelect,
   selected,
+  yearSelector,
 }: {
   onSelect: (m: Date) => void;
   selected: Date;
+  yearSelector: boolean;
 }) => {
   const months: Date[] = [];
   const {
@@ -149,10 +151,7 @@ const MonthSelector = ({
   } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
 
-  if (!fromDate) return <></>;
-  if (!toDate) return <></>;
-
-  if (isSameYear(fromDate, toDate)) {
+  if (yearSelector && fromDate && toDate && isSameYear(fromDate, toDate)) {
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
       months.push(setMonth(date, month));
@@ -165,7 +164,7 @@ const MonthSelector = ({
   }
 
   const hideMonth = (month: Date) => {
-    return compareAsc(month, fromDate) === -1;
+    if (yearSelector && fromDate) return compareAsc(month, fromDate) === -1;
   };
 
   return (
@@ -223,15 +222,7 @@ const MonthSelector = ({
 };
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
-  (
-    {
-      children,
-      dropdownCaption = false,
-      fromDate = new Date(),
-      toDate = new Date("Sep 27 2032"),
-    },
-    ref
-  ) => {
+  ({ children, dropdownCaption = false, fromDate, toDate }, ref) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
 
     const isValidYearSelector =
@@ -252,7 +243,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             yearSelector={dropdownCaption}
             isValidYearSelector={isValidYearSelector}
           />
-          <MonthSelector onSelect={setSelected} selected={selected} />
+          <MonthSelector
+            yearSelector={dropdownCaption}
+            onSelect={setSelected}
+            selected={selected}
+          />
         </div>
       </RootProvider>
     );
