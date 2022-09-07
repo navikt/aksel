@@ -1,4 +1,4 @@
-import { Success, SuccessFilled } from "@navikt/ds-icons";
+import { SuccessFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
 import { Label, OverridableComponent } from "..";
