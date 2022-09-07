@@ -218,14 +218,10 @@ const MonthSelector = ({
               "navds-monthpicker__month--selected": dateIsSelected(x, selected),
             })}
             onKeyDown={(e) => {
-              if (e.key === "ArrowRight") {
-                const index = nextEnabled(monthRefs, y, e.key);
-                monthRefs.current[index] && monthRefs.current[index].focus();
-              }
-              if (e.key === "ArrowLeft") {
-                const index = nextEnabled(monthRefs, y, e.key);
-                monthRefs.current[index] && monthRefs.current[index].focus();
-              }
+              const index = nextEnabled(monthRefs, y, e.key);
+              index !== y &&
+                monthRefs.current[index] &&
+                monthRefs.current[index].focus();
             }}
           >
             <span aria-hidden="true">
