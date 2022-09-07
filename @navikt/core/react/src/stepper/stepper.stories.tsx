@@ -13,6 +13,11 @@ export default {
         options: ["horizontal", "vertical"],
       },
     },
+    activeStep: {
+      control: {
+        type: "number",
+      },
+    },
   },
 } as Meta;
 
@@ -40,13 +45,17 @@ export const Default = ({ asButton, ...props }) => {
         aria-labelledby="stepper-heading"
         activeStep={activeStep}
         onStepChange={setActiveStep}
-        orientation="horizontal"
+        orientation="vertical"
         {...props}
       >
-        <Stepper.Step {...newProps}>Start søknad</Stepper.Step>
+        <Stepper.Step {...newProps} completed={props.completed}>
+          Start søknad
+        </Stepper.Step>
         <Stepper.Step {...newProps}>Personopplysninger</Stepper.Step>
-        <Stepper.Step {...newProps}>Saksopplysninger</Stepper.Step>
-        <Stepper.Step {...newProps}>
+        <Stepper.Step {...newProps} completed={props.completed}>
+          Saksopplysninger
+        </Stepper.Step>
+        <Stepper.Step {...newProps} completed={props.completed}>
           Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives og
           forklares i sitt fulle i denne labelen
         </Stepper.Step>
@@ -63,6 +72,8 @@ export const Default = ({ asButton, ...props }) => {
 
 Default.args = {
   asButton: false,
+  interactive: true,
+  completed: false,
 };
 
 export const Horizontal = () => {
