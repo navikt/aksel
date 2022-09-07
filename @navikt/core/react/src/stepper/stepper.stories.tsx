@@ -113,56 +113,84 @@ export const Vertical = () => {
 
 export const DisplayOnly = () => {
   return (
-    <Stepper
-      aria-labelledby="stepper-heading"
-      activeStep={2}
-      orientation="vertical"
-      interactive={false}
-    >
-      <Stepper.Step completed>Start søknad</Stepper.Step>
-      <Stepper.Step completed>Personopplysninger</Stepper.Step>
-      <Stepper.Step>Saksopplysninger</Stepper.Step>
-      <Stepper.Step>
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
-      </Stepper.Step>
-      <Stepper.Step>Vedlegg</Stepper.Step>
-      <Stepper.Step>Oppsummering</Stepper.Step>
-      <Stepper.Step>Innsending</Stepper.Step>
-    </Stepper>
+    <div className="colgap">
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={2}
+        orientation="vertical"
+        interactive={false}
+      >
+        <Stepper.Step completed>Start søknad</Stepper.Step>
+        <Stepper.Step completed>Personopplysninger</Stepper.Step>
+        <Stepper.Step>Saksopplysninger</Stepper.Step>
+        <Stepper.Step>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </Stepper.Step>
+        <Stepper.Step>Vedlegg</Stepper.Step>
+        <Stepper.Step>Oppsummering</Stepper.Step>
+        <Stepper.Step>Innsending</Stepper.Step>
+      </Stepper>
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={3}
+        orientation="vertical"
+        interactive={false}
+      >
+        <Stepper.Step completed>Start søknad</Stepper.Step>
+        <Stepper.Step completed>Personopplysninger</Stepper.Step>
+        <Stepper.Step>Saksopplysninger</Stepper.Step>
+        <Stepper.Step>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </Stepper.Step>
+        <Stepper.Step>Vedlegg</Stepper.Step>
+        <Stepper.Step>Oppsummering</Stepper.Step>
+        <Stepper.Step>Innsending</Stepper.Step>
+      </Stepper>
+    </div>
   );
 };
 
 export const CompletedSteps = () => {
   const [activeStep, setActiveStep] = useState(3);
   return (
-    <Stepper
-      aria-labelledby="stepper-heading"
-      activeStep={activeStep}
-      orientation="vertical"
-      onStepChange={(step) => setActiveStep(step)}
-    >
-      <Stepper.Step completed={activeStep > 1} as="button">
-        Start søknad
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep > 2} as="button">
-        Personopplysninger
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep > 3} href="#">
-        Saksopplysninger
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep >= 4} href="#">
-        Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep > 5} href="#">
-        Vedlegg
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep > 6} href="#">
-        Oppsummering
-      </Stepper.Step>
-      <Stepper.Step completed={activeStep > 7} href="#">
-        Innsending
-      </Stepper.Step>
-    </Stepper>
+    <div className="colgap">
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={activeStep}
+        orientation="vertical"
+        onStepChange={(step) => setActiveStep(step)}
+      >
+        <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
+        <Stepper.Step completed={activeStep > 2}>
+          Personopplysninger
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
+        <Stepper.Step completed={activeStep >= 4}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+        <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
+        <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
+      </Stepper>
+      <Stepper
+        aria-labelledby="stepper-heading"
+        activeStep={activeStep - 1}
+        orientation="vertical"
+        onStepChange={(step) => setActiveStep(step)}
+      >
+        <Stepper.Step completed={activeStep > 1}>Start søknad</Stepper.Step>
+        <Stepper.Step completed={activeStep > 2}>
+          Personopplysninger
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 3}>Saksopplysninger</Stepper.Step>
+        <Stepper.Step completed={activeStep >= 4}>
+          Søknadstekst for en veldig spesifikk prosess i NAV som har lang tekst
+        </Stepper.Step>
+        <Stepper.Step completed={activeStep > 5}>Vedlegg</Stepper.Step>
+        <Stepper.Step completed={activeStep > 6}>Oppsummering</Stepper.Step>
+        <Stepper.Step completed={activeStep > 7}>Innsending</Stepper.Step>
+      </Stepper>
+    </div>
   );
 };
 
