@@ -34,16 +34,14 @@ export const dropdownCaption = (props) => {
   );
 };
 
-/**
- * 
- export const DisabledMonths = (props) => {
-   return (
-     <div style={{ height: "20rem" }}>
-       <MonthPicker
-         disabled={[new Date("Feb 3 2022"), new Date("Mar 4 2022")]}
-       />
-     </div>
-   );
- };
- 
- */
+export const DisabledMonths = (props) => {
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker
+        disabled={[
+          { from: new Date("Jan 1 2022"), to: new Date("May 6 2022") },
+        ]}
+      />
+    </div>
+  );
+};

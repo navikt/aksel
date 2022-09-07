@@ -58,6 +58,10 @@
   background: var(--navds-global-color-deepblue-500);
 }
 
+.navds-monthpicker__month:disabled {
+  text-decoration: line-through;
+}
+
 .navds-monthpicker__month:not(.navds-monthpicker__month--selected):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
 }

@@ -11,7 +11,13 @@ import {
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState, useRef } from "react";
-import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
+import {
+  RootProvider,
+  useDayPicker,
+  useNavigation,
+  Matcher,
+  isMatch,
+} from "react-day-picker";
 import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
 import {
@@ -42,6 +48,11 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * @default false
    */
   dropdownCaption?: boolean;
+  /**
+   * Apply the disabled modifier to the matching days.
+   * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
+   */
+  disabled?: Matcher[];
 }
 
 const TestCaption = ({
@@ -137,10 +148,12 @@ const MonthSelector = ({
   onSelect,
   selected,
   dropdownCaption,
+  disabled,
 }: {
   onSelect: (m: Date) => void;
   selected: Date;
   dropdownCaption: boolean;
+  disabled: Matcher[];
 }) => {
   const months: Date[] = [];
   const {
@@ -179,6 +192,7 @@ const MonthSelector = ({
             onClick={() =>
               onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
             }
+            disabled={isMatch(x, disabled)}
             className={cl("navds-monthpicker__month", {
               "navds-monthpicker__month--hidden": hideMonth(x),
               "navds-monthpicker__month--current": dateIsInCurrentMonth(
@@ -222,7 +236,10 @@ const MonthSelector = ({
 };
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
-  ({ children, dropdownCaption = false, fromDate, toDate }, ref) => {
+  (
+    { children, dropdownCaption = false, fromDate, toDate, disabled = [] },
+    ref
+  ) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
 
     const isValidDropdownCaption =
@@ -247,6 +264,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             dropdownCaption={dropdownCaption}
             onSelect={setSelected}
             selected={selected}
+            disabled={disabled}
           />
         </div>
       </RootProvider>
