@@ -178,9 +178,13 @@ button.navds-stepper__step {
   color: var(--navds-semantic-color-interaction-primary-selected);
 }
 
-:where(.navds-stepper__step:not(.navds-stepper__step--active):not(.navds-stepper__step--non-interactive):hover)
-  .navds-stepper__content {
+:where(.navds-stepper__step:hover) .navds-stepper__content {
   text-decoration: underline;
+}
+
+:where(.navds-stepper__step--non-interactive:hover, .navds-stepper__step--active:hover)
+  .navds-stepper__content {
+  text-decoration: none;
 }
 
 :where(.navds-stepper__step--active) .navds-stepper__circle {
@@ -197,7 +201,6 @@ button.navds-stepper__step {
 }
 
 /* Non-interactive */
-
 :where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
   .navds-stepper__content {
   color: var(--navds-global-color-gray-900);
