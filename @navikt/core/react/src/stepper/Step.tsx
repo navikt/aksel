@@ -63,10 +63,10 @@ export const StepComponent: OverridableComponent<
         {completed ? (
           <SuccessStroke
             aria-hidden
-            className="navds-stepper__circle navds-stepper__circle--success"
+            className="navds-stepper__marker navds-stepper__marker--success"
           />
         ) : (
-          <Label className="navds-stepper__circle" as="span" aria-hidden="true">
+          <Label className="navds-stepper__marker" as="span" aria-hidden="true">
             {unsafe_index + 1}
           </Label>
         )}
