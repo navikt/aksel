@@ -98,7 +98,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
           size,
         }}
       >
-        <div>
+        <div className={cl("navds-toggle-group__wrapper", className)}>
           {label && (
             <Label
               size={size}
@@ -114,11 +114,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             value={value ?? groupValue}
             defaultValue={defaultValue}
             ref={ref}
-            className={cl(
-              "navds-toggle-group",
-              className,
-              `navds-toggle-group--${size}`
-            )}
+            className={cl("navds-toggle-group", `navds-toggle-group--${size}`)}
             {...(describeBy && { "aria-describedby": describeBy })}
             role="radiogroup"
             type="single"
