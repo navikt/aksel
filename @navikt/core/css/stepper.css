@@ -60,8 +60,8 @@
   display: grid;
   grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
   gap: var(--navds-spacing-2);
-  align-items: baseline;
   justify-content: flex-start;
+  /* align-items: baseline; */
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
@@ -111,6 +111,7 @@ button.navds-stepper__step {
   min-width: fit-content;
   line-height: 1.5;
   grid-column: content;
+  padding-top: 0.035rem;
 }
 
 /* Horizontal */
