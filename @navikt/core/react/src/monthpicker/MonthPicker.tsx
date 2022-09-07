@@ -3,6 +3,7 @@ import cl from "clsx";
 import {
   compareAsc,
   format,
+  isSameMonth,
   isSameYear,
   setMonth,
   setYear,
@@ -10,6 +11,7 @@ import {
   startOfYear,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
+import { instanceOf } from "prop-types";
 import React, { forwardRef, useState, useRef } from "react";
 import {
   RootProvider,
@@ -199,10 +201,14 @@ const MonthSelector = ({
             onClick={() =>
               onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
             }
-            disabled={isMatch(
-              setYear(x, Number(yearState.getFullYear())),
-              disabled
-            )}
+            disabled={
+              isMatch(setYear(x, Number(yearState.getFullYear())), disabled) ||
+              disabled.some(
+                (e) =>
+                  e instanceof Date &&
+                  isSameMonth(e, setYear(x, Number(yearState.getFullYear())))
+              )
+            }
             className={cl("navds-monthpicker__month", {
               "navds-monthpicker__month--hidden": hideMonth(x),
               "navds-monthpicker__month--current": dateIsInCurrentMonth(

@@ -40,6 +40,7 @@ export const DisabledMonths = (props) => {
       <MonthPicker
         disabled={[
           { from: new Date("Jan 1 2022"), to: new Date("May 6 2022") },
+          new Date("Nov 5 2022"),
         ]}
       />
     </div>
