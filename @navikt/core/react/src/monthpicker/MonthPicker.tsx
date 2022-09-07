@@ -11,7 +11,6 @@ import {
   startOfYear,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
-import { instanceOf } from "prop-types";
 import React, { forwardRef, useState, useRef } from "react";
 import {
   RootProvider,
@@ -27,6 +26,7 @@ import {
   updateWithoutDropdownCaption,
   updateWithDropdownCaption,
 } from "./utils/handle-selected";
+import { nextEnabled } from "./utils/navigation";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -218,21 +218,13 @@ const MonthSelector = ({
               "navds-monthpicker__month--selected": dateIsSelected(x, selected),
             })}
             onKeyDown={(e) => {
-              if (e.key === "ArrowDown") {
-                monthRefs.current[y + 4] && monthRefs.current[y + 4].focus();
-              }
-              if (e.key === "ArrowUp") {
-                monthRefs.current[y - 4] && monthRefs.current[y - 4].focus();
-              }
               if (e.key === "ArrowRight") {
-                e.currentTarget.nextSibling &&
-                  (e.currentTarget.nextSibling as HTMLButtonElement).focus();
+                const index = nextEnabled(monthRefs, y, e.key);
+                monthRefs.current[index] && monthRefs.current[index].focus();
               }
               if (e.key === "ArrowLeft") {
-                e.currentTarget.previousSibling &&
-                  (
-                    e.currentTarget.previousSibling as HTMLButtonElement
-                  ).focus();
+                const index = nextEnabled(monthRefs, y, e.key);
+                monthRefs.current[index] && monthRefs.current[index].focus();
               }
             }}
           >
