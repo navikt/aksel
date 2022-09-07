@@ -236,9 +236,3 @@ button.navds-stepper__step {
   .navds-stepper__circle {
   color: var(--navds-global-color-gray-900);
 }
-
-/* :where(.navds-stepper__step--non-interactive.navds-stepper__step--completed)
-  .navds-stepper__circle {
-  background-color: inherit;
-  color: var(--navds-global-color-gray-900);
-} */
