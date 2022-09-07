@@ -60,11 +60,15 @@ const TestCaption = ({
   onSelect,
   isValidDropdownCaption,
   dropdownCaption,
+  yearState,
+  setYearState,
 }: {
   selected: Date;
   onSelect: (m: Date) => void;
   isValidDropdownCaption: boolean;
   dropdownCaption: boolean;
+  yearState: Date;
+  setYearState: Function;
 }) => {
   const { nextMonth, previousMonth } = useNavigation();
   const {
@@ -74,7 +78,6 @@ const TestCaption = ({
     locale,
   } = useDayPicker();
 
-  const [yearState, setYearState] = useState<Date>(selected);
   const years: Date[] = [];
 
   if (dropdownCaption && fromDate && toDate) {
@@ -149,11 +152,15 @@ const MonthSelector = ({
   selected,
   dropdownCaption,
   disabled,
+  yearState,
+  setYearState,
 }: {
   onSelect: (m: Date) => void;
   selected: Date;
   dropdownCaption: boolean;
   disabled: Matcher[];
+  yearState: Date;
+  setYearState: Function;
 }) => {
   const months: Date[] = [];
   const {
@@ -192,7 +199,10 @@ const MonthSelector = ({
             onClick={() =>
               onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
             }
-            disabled={isMatch(x, disabled)}
+            disabled={isMatch(
+              setYear(x, Number(yearState.getFullYear())),
+              disabled
+            )}
             className={cl("navds-monthpicker__month", {
               "navds-monthpicker__month--hidden": hideMonth(x),
               "navds-monthpicker__month--current": dateIsInCurrentMonth(
@@ -241,6 +251,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     ref
   ) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
+    const [yearState, setYearState] = useState<Date>(selected);
 
     const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
@@ -259,12 +270,16 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             onSelect={setSelected}
             dropdownCaption={dropdownCaption}
             isValidDropdownCaption={isValidDropdownCaption}
+            yearState={yearState}
+            setYearState={setYearState}
           />
           <MonthSelector
             dropdownCaption={dropdownCaption}
             onSelect={setSelected}
             selected={selected}
             disabled={disabled}
+            yearState={yearState}
+            setYearState={setYearState}
           />
         </div>
       </RootProvider>
