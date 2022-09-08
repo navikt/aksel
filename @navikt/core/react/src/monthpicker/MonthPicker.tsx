@@ -45,7 +45,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   dropdownCaption?: boolean;
   /**
-   * Apply the disabled modifier to the matching days. Uses a subset of React Day Picker Matcher.
+   * Apply the disabled modifier to the matching days. Uses a subset of React Day Picker Matcher type.
    * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
    */
   disabled?: Matcher[];
@@ -143,6 +143,66 @@ const MonthCaption = ({
   );
 };
 
+const Month = ({
+  selected,
+  month,
+  yearState,
+  disabled,
+  onSelect,
+  locale,
+  monthRefs,
+  currentRef,
+  y,
+  hideMonth,
+}: {
+  selected: Date;
+  month: Date;
+  yearState: Date;
+  disabled: Matcher[];
+  onSelect: Function;
+  locale: any;
+  monthRefs: any;
+  currentRef: any;
+  y: number;
+  hideMonth: Function;
+}) => {
+  return (
+    <button
+      ref={currentRef}
+      onClick={() =>
+        onSelect(setYear(startOfMonth(month), Number(selected.getFullYear())))
+      }
+      disabled={isMatch(
+        setYear(month, Number(yearState.getFullYear())),
+        disabled
+      )}
+      className={cl("navds-monthpicker__month", {
+        "navds-monthpicker__month--hidden": hideMonth(month),
+        "navds-monthpicker__month--current": dateIsInCurrentMonth(
+          month,
+          selected
+        ),
+        "navds-monthpicker__month--selected": dateIsSelected(month, selected),
+      })}
+      onKeyDown={(e) => {
+        const index = nextEnabled(monthRefs, y, e.key);
+        index !== y &&
+          monthRefs.current[index] &&
+          monthRefs.current[index].focus();
+      }}
+    >
+      <span aria-hidden="true">
+        {format(new Date(month), "LLL", { locale })
+          .replace(".", "")
+          .substring(0, 3)}
+      </span>
+      <span className="navds-sr-only">
+        {format(new Date(month), "LLLL", { locale })}
+      </span>
+    </button>
+  );
+};
+
 const MonthSelector = ({
   onSelect,
   selected,
@@ -180,44 +240,22 @@ const MonthSelector = ({
 
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
-      {months.map((x: Date, y) => {
-        const currentRef = (x: any) => monthRefs.current.push(x);
+      {months.map((month: Date, y) => {
+        const currentRef = (month: any) => monthRefs.current.push(month);
         return (
-          <button
-            ref={currentRef}
-            key={x.toDateString()}
-            data-index={y}
-            onClick={() =>
-              onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
-            }
-            disabled={isMatch(
-              setYear(x, Number(yearState.getFullYear())),
-              disabled
-            )}
-            className={cl("navds-monthpicker__month", {
-              "navds-monthpicker__month--hidden": hideMonth(x),
-              "navds-monthpicker__month--current": dateIsInCurrentMonth(
-                x,
-                selected
-              ),
-              "navds-monthpicker__month--selected": dateIsSelected(x, selected),
-            })}
-            onKeyDown={(e) => {
-              const index = nextEnabled(monthRefs, y, e.key);
-              index !== y &&
-                monthRefs.current[index] &&
-                monthRefs.current[index].focus();
-            }}
-          >
-            <span aria-hidden="true">
-              {format(new Date(x), "LLL", { locale })
-                .replace(".", "")
-                .substring(0, 3)}
-            </span>
-            <span className="navds-sr-only">
-              {format(new Date(x), "LLLL", { locale })}
-            </span>
-          </button>
+          <Month
+            key={month.toDateString()}
+            y={y}
+            locale={locale}
+            selected={selected}
+            month={month}
+            yearState={yearState}
+            disabled={disabled}
+            onSelect={onSelect}
+            monthRefs={monthRefs}
+            currentRef={currentRef}
+            hideMonth={hideMonth}
+          />
         );
       })}
     </BodyShort>
