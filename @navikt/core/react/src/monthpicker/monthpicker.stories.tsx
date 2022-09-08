@@ -41,6 +41,8 @@ export const DisabledMonths = (props) => {
         disabled={[
           { from: new Date("Mar 1 2022"), to: new Date("Jun  6 2022") },
           new Date("Oct 5 2022"),
+          new Date("Jan 5 2023"),
+          new Date("feb 5 2023"),
         ]}
       />
     </div>

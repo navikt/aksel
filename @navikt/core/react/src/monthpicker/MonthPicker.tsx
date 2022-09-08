@@ -16,7 +16,6 @@ import {
   RootProvider,
   useDayPicker,
   useNavigation,
-  Matcher,
   isMatch,
 } from "react-day-picker";
 import { BodyShort, Select } from "..";
@@ -26,6 +25,7 @@ import {
   updateWithoutDropdownCaption,
   updateWithDropdownCaption,
 } from "./utils/handle-selected";
+import { Matcher } from "./utils/is-match";
 import { nextEnabled } from "./utils/navigation";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
