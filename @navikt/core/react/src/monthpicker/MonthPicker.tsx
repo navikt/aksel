@@ -51,7 +51,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   dropdownCaption?: boolean;
   /**
-   * Apply the disabled modifier to the matching days.
+   * Apply the disabled modifier to the matching days. Uses a subset of React Day Picker Matcher.
    * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
    */
   disabled?: Matcher[];
