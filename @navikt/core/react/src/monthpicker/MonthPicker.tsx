@@ -157,6 +157,7 @@ const Month = ({
   hideMonth,
   focus,
   setFocus,
+  setYearState,
 }: {
   selected: Date;
   month: Date;
@@ -170,6 +171,7 @@ const Month = ({
   hideMonth: Function;
   focus: Date | undefined;
   setFocus: Function;
+  setYearState: Function;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -198,7 +200,17 @@ const Month = ({
         "navds-monthpicker__month--selected": dateIsSelected(month, selected),
       })}
       onKeyDown={(e) => {
-        setFocus(nextEnabled(months, y, e.key, disabled, month));
+        setFocus(
+          nextEnabled(
+            months,
+            y,
+            e.key,
+            disabled,
+            month,
+            setYearState,
+            yearState
+          )
+        );
       }}
     >
       <span aria-hidden="true">
@@ -268,6 +280,7 @@ const MonthSelector = ({
             hideMonth={hideMonth}
             focus={focus}
             setFocus={setFocus}
+            setYearState={setYearState}
           />
         );
       })}
