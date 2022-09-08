@@ -26,6 +26,18 @@ export const nextEnabled = (
       }
     }
   }
+  if (key === "ArrowDown") {
+    if (!isMatch(months[currentIndex + 4], disabled))
+      focusDate = months[currentIndex + 4];
+    else if (!isMatch(months[currentIndex + 8], disabled))
+      focusDate = months[currentIndex + 8];
+  }
+  if (key === "ArrowUp") {
+    if (!isMatch(months[currentIndex - 4], disabled))
+      focusDate = months[currentIndex - 4];
+    else if (!isMatch(months[currentIndex - 8], disabled))
+      focusDate = months[currentIndex - 8];
+  }
 
   return focusDate;
 };
