@@ -1,39 +1,31 @@
+import { isMatch, Matcher } from "./is-match";
+
 export const nextEnabled = (
   months,
   currentIndex: number,
-  key: string
-): number => {
-  let newIndex = currentIndex;
+  key: string,
+  disabled: Matcher[],
+  currentMonth: Date
+): Date => {
+  let focusDate: Date = currentMonth;
   if (key === "ArrowRight") {
-    for (let i = currentIndex + 1; i < months.current.length; i++) {
-      const month = months.current[i];
-      if (!month.disabled) {
-        newIndex = i;
+    for (let i = currentIndex + 1; i < months.length; i++) {
+      const month = months[i];
+      if (!isMatch(month, disabled)) {
+        focusDate = month;
         break;
       }
     }
-  } else if (key === "ArrowLeft") {
+  }
+  if (key === "ArrowLeft") {
     for (let i = currentIndex - 1; i >= 0; i--) {
-      const month = months.current[i];
-      if (!month.disabled) {
-        newIndex = i;
+      const month = months[i];
+      if (!isMatch(month, disabled)) {
+        focusDate = month;
         break;
       }
-    }
-  } else if (key === "ArrowUp" || key === "ArrowDown") {
-    const steps = key === "ArrowDown" ? 4 : -4;
-    if (
-      months.current[currentIndex + steps] &&
-      !months.current[currentIndex + steps].disabled
-    ) {
-      newIndex = currentIndex + steps;
-    } else if (
-      months.current[currentIndex + steps * 2] &&
-      !months.current[currentIndex + steps * 2].disabled
-    ) {
-      newIndex = currentIndex + steps * 2;
     }
   }
 
-  return newIndex;
+  return focusDate;
 };

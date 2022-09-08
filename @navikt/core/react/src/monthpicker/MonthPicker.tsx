@@ -3,6 +3,7 @@ import cl from "clsx";
 import {
   compareAsc,
   format,
+  isSameMonth,
   isSameYear,
   setMonth,
   setYear,
@@ -10,7 +11,7 @@ import {
   startOfYear,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
-import React, { forwardRef, useState, useRef } from "react";
+import React, { forwardRef, useState, useRef, useEffect } from "react";
 import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
 import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
@@ -150,10 +151,12 @@ const Month = ({
   disabled,
   onSelect,
   locale,
-  monthRefs,
+  months,
   currentRef,
   y,
   hideMonth,
+  focus,
+  setFocus,
 }: {
   selected: Date;
   month: Date;
@@ -161,14 +164,24 @@ const Month = ({
   disabled: Matcher[];
   onSelect: Function;
   locale: any;
-  monthRefs: any;
+  months: Date[];
   currentRef: any;
   y: number;
   hideMonth: Function;
+  focus: Date | undefined;
+  setFocus: Function;
 }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (focus) {
+      isSameMonth(month, focus) && ref.current && ref.current.focus();
+    }
+  }, [focus, month]);
+
   return (
     <button
-      ref={currentRef}
+      ref={ref}
       onClick={() =>
         onSelect(setYear(startOfMonth(month), Number(selected.getFullYear())))
       }
@@ -185,10 +198,7 @@ const Month = ({
         "navds-monthpicker__month--selected": dateIsSelected(month, selected),
       })}
       onKeyDown={(e) => {
-        const index = nextEnabled(monthRefs, y, e.key);
-        index !== y &&
-          monthRefs.current[index] &&
-          monthRefs.current[index].focus();
+        setFocus(nextEnabled(months, y, e.key, disabled, month));
       }}
     >
       <span aria-hidden="true">
@@ -221,6 +231,7 @@ const MonthSelector = ({
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
+  const [focus, setFocus] = useState<Date>();
 
   if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
     const date = startOfMonth(fromDate);
@@ -248,13 +259,15 @@ const MonthSelector = ({
             y={y}
             locale={locale}
             selected={selected}
-            month={month}
+            month={setYear(month, Number(yearState.getFullYear()))}
             yearState={yearState}
             disabled={disabled}
             onSelect={onSelect}
-            monthRefs={monthRefs}
+            months={months}
             currentRef={currentRef}
             hideMonth={hideMonth}
+            focus={focus}
+            setFocus={setFocus}
           />
         );
       })}
