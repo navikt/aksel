@@ -1,12 +1,15 @@
-import { isDate, isSameDay, differenceInCalendarDays } from "date-fns";
+import {
+  isDate,
+  isSameDay,
+  differenceInCalendarDays,
+  isSameMonth,
+} from "date-fns";
 import {
   DateAfter,
   DateBefore,
-  DateInterval,
   DateRange,
   isDateAfterType,
   isDateBeforeType,
-  isDateInterval,
   isDateRange,
 } from "react-day-picker";
 
@@ -16,8 +19,7 @@ export type Matcher =
   | Date[]
   | DateRange
   | DateBefore
-  | DateAfter
-  | DateInterval;
+  | DateAfter;
 
 function isDateType(value: unknown): value is Date {
   return isDate(value);
@@ -30,24 +32,27 @@ function isArrayOfDates(value: unknown): value is Date[] {
 export function isMatch(day: Date, matchers: Matcher[]): boolean {
   return matchers.some((matcher: Matcher) => {
     if (isDateType(matcher)) {
-      return isSameDay(day, matcher);
+      return isSameMonth(day, matcher);
     }
     if (isArrayOfDates(matcher)) {
-      return matcher.includes(day);
+      return matcher.some((matcherDay) => {
+        return isSameMonth(matcherDay, day);
+      });
     }
     if (isDateRange(matcher)) {
       return isDateInRange(day, matcher);
     }
-    if (isDateInterval(matcher)) {
-      const isBefore = differenceInCalendarDays(matcher.before, day) > 0;
-      const isAfter = differenceInCalendarDays(day, matcher.after) > 0;
-      return isBefore && isAfter;
-    }
     if (isDateAfterType(matcher)) {
-      return differenceInCalendarDays(day, matcher.after) > 0;
+      return (
+        isSameMonth(day, matcher.after) ||
+        differenceInCalendarDays(day, matcher.after) > 0
+      );
     }
     if (isDateBeforeType(matcher)) {
-      return differenceInCalendarDays(matcher.before, day) > 0;
+      return (
+        isSameMonth(day, matcher.before) ||
+        differenceInCalendarDays(matcher.before, day) > 0
+      );
     }
     if (typeof matcher === "function") {
       return matcher(day);
@@ -70,6 +75,10 @@ export function isDateInRange(date: Date, range: DateRange): boolean {
   const isToBeforeFrom = differenceInCalendarDays(to, from) < 0;
   if (to && isToBeforeFrom) {
     [from, to] = [to, from];
+  }
+
+  if (isSameMonth(from, date) || isSameMonth(to, date)) {
+    return true;
   }
 
   return (

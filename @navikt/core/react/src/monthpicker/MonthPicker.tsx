@@ -3,7 +3,6 @@ import cl from "clsx";
 import {
   compareAsc,
   format,
-  isSameMonth,
   isSameYear,
   setMonth,
   setYear,
@@ -12,12 +11,7 @@ import {
 } from "date-fns";
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState, useRef } from "react";
-import {
-  RootProvider,
-  useDayPicker,
-  useNavigation,
-  isMatch,
-} from "react-day-picker";
+import { RootProvider, useDayPicker, useNavigation } from "react-day-picker";
 import { BodyShort, Select } from "..";
 import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
 import {
@@ -25,7 +19,7 @@ import {
   updateWithoutDropdownCaption,
   updateWithDropdownCaption,
 } from "./utils/handle-selected";
-import { Matcher } from "./utils/is-match";
+import { Matcher, isMatch } from "./utils/is-match";
 import { nextEnabled } from "./utils/navigation";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -57,7 +51,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   disabled?: Matcher[];
 }
 
-const TestCaption = ({
+const MonthCaption = ({
   selected,
   onSelect,
   isValidDropdownCaption,
@@ -165,12 +159,7 @@ const MonthSelector = ({
   setYearState: Function;
 }) => {
   const months: Date[] = [];
-  const {
-    fromDate,
-    toDate,
-    formatters: { formatYearCaption, formatMonthCaption },
-    locale,
-  } = useDayPicker();
+  const { fromDate, toDate, locale } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
 
   if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
@@ -201,14 +190,10 @@ const MonthSelector = ({
             onClick={() =>
               onSelect(setYear(startOfMonth(x), Number(selected.getFullYear())))
             }
-            disabled={
-              isMatch(setYear(x, Number(yearState.getFullYear())), disabled) ||
-              disabled.some(
-                (e) =>
-                  e instanceof Date &&
-                  isSameMonth(e, setYear(x, Number(yearState.getFullYear())))
-              )
-            }
+            disabled={isMatch(
+              setYear(x, Number(yearState.getFullYear())),
+              disabled
+            )}
             className={cl("navds-monthpicker__month", {
               "navds-monthpicker__month--hidden": hideMonth(x),
               "navds-monthpicker__month--current": dateIsInCurrentMonth(
@@ -259,7 +244,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
         fromDate={fromDate}
       >
         <div className="navds-monthpicker__wrapper">
-          <TestCaption
+          <MonthCaption
             selected={selected}
             onSelect={setSelected}
             dropdownCaption={dropdownCaption}
