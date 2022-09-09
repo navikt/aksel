@@ -52,14 +52,6 @@ export const nextEnabled = (
       )
     )
       return months[currentIndex + 4];
-    const fallbackPrev = loopBack(
-      currentIndex,
-      months,
-      currentYear,
-      disabled,
-      focusDate
-    );
-    if (fallbackPrev) return fallbackPrev;
     const fallbackNextIndex = loopForward(
       currentIndex,
       months,
@@ -76,28 +68,30 @@ export const nextEnabled = (
         months[fallbackNextIndex],
         Number(currentYear.getFullYear())
       );
-    if (
-      !isMatch(
-        setYear(months[currentIndex + 8], Number(currentYear.getFullYear())),
-        disabled
-      )
-    )
-      return months[currentIndex + 8];
-    if (fallbackNextIndex)
-      return setYear(
-        months[fallbackNextIndex],
-        Number(currentYear.getFullYear())
-      );
     return focusDate;
   }
 
   if (key === "ArrowUp") {
-    if (!isMatch(months[currentIndex - 4], disabled))
-      focusDate = months[currentIndex - 4];
-    else if (!isMatch(months[currentIndex - 8], disabled))
-      focusDate = months[currentIndex - 8];
+    if (
+      !isMatch(
+        setYear(months[currentIndex - 4], Number(currentYear.getFullYear())),
+        disabled
+      )
+    )
+      return months[currentIndex - 4];
+    const fallbackPrevIndex = loopBack(
+      currentIndex,
+      months,
+      currentYear,
+      disabled,
+      focusDate
+    );
+    if (fallbackPrevIndex)
+      return setYear(
+        months[fallbackPrevIndex],
+        Number(currentYear.getFullYear())
+      );
   }
-
   return focusDate;
 };
 
@@ -107,14 +101,15 @@ const loopBack = (
   currentYear: Date,
   disabled: Matcher[],
   focusDate: Date
-): Date | undefined => {
-  for (let i = currentIndex + 4; i >= 0; i--) {
+): number | undefined => {
+  for (let i = currentIndex; i >= 0; i--) {
     const month = months[i];
     if (
       !isMatch(setYear(month, Number(currentYear.getFullYear())), disabled) &&
       getRow(i) !== getRow(currentIndex)
     ) {
-      return setYear(month, Number(currentYear.getFullYear()));
+      console.log(i);
+      return i;
     }
   }
 };
@@ -126,7 +121,7 @@ const loopForward = (
   setYearState: Function,
   currentYear: Date,
   disabled: Matcher[]
-) => {
+): number | undefined => {
   for (let i = currentIndex + 1; i < months.length + 1; i++) {
     const month = months[i];
     if (
