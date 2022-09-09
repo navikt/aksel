@@ -1,7 +1,6 @@
-import { SuccessFilled } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, useContext } from "react";
-import { Label } from "..";
+import { BodyLong, Label } from "..";
 import { TimelineContext } from "./Timeline";
 
 export interface TimelineStepProps
@@ -15,6 +14,10 @@ export interface TimelineStepProps
    * @private
    */
   unsafe_index?: number;
+  /**
+   *
+   */
+  icon: React.ElementType;
 }
 
 export interface TimelineStepType
@@ -23,7 +26,10 @@ export interface TimelineStepType
   > {}
 
 export const StepComponent = forwardRef<HTMLDivElement, TimelineStepProps>(
-  ({ className, children, unsafe_index = 0, ...rest }, ref) => {
+  (
+    { className, children, unsafe_index = 0, icon: Icon, title, ...rest },
+    ref
+  ) => {
     const context = useContext(TimelineContext);
 
     if (context === null) {
@@ -41,13 +47,17 @@ export const StepComponent = forwardRef<HTMLDivElement, TimelineStepProps>(
           "navds-timeline__step--active": activeStep === unsafe_index,
         })}
       >
-        <SuccessFilled
-          aria-hidden
-          className="navds-timeline__circle navds-timeline__circle--success"
-        />
-        <Label as="span" className="navds-timeline__content">
-          {children}
-        </Label>
+        <div className="navds-timeline__icon">
+          <Icon aria-hidden />
+        </div>
+        <div className="navds-timeline__content">
+          <Label as="div" className="navds-timeline__content-label">
+            {title}
+          </Label>
+          <BodyLong as="div" className="navds-timeline__content-description">
+            {children}
+          </BodyLong>
+        </div>
       </div>
     );
   }

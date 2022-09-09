@@ -1,3 +1,12 @@
+import {
+  AutomaticSystem,
+  Calculator,
+  Laptop,
+  Money,
+  Notes,
+  Office1,
+  Reception,
+} from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
 import { Timeline } from ".";
@@ -30,16 +39,37 @@ export const Default = ({ asButton, ...props }) => {
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Timeline aria-labelledby="Timeline-heading" activeStep={3} {...props}>
-        <Timeline.Step>Start søknad</Timeline.Step>
-        <Timeline.Step>Personopplysninger</Timeline.Step>
-        <Timeline.Step>Saksopplysninger</Timeline.Step>
-        <Timeline.Step>
-          Søknadstekst for en veldig spesifikk prosess i NAV som må beskrives og
-          forklares i sitt fulle i denne labelen
+        <Timeline.Step
+          icon={AutomaticSystem}
+          title="Tittel på del av prosessen"
+        >
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
         </Timeline.Step>
-        <Timeline.Step>Vedlegg</Timeline.Step>
-        <Timeline.Step>Oppsummering</Timeline.Step>
-        <Timeline.Step>Innsending</Timeline.Step>
+        <Timeline.Step icon={Notes} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
+        <Timeline.Step icon={Calculator} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
+        <Timeline.Step icon={Office1} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
+        <Timeline.Step icon={Laptop} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
+        <Timeline.Step icon={Reception} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
+        <Timeline.Step icon={Money} title="Tittel på del av prosessen">
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Step>
       </Timeline>
     </div>
   );
