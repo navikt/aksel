@@ -16,12 +16,13 @@ export interface StepperStepProps
    */
   unsafe_index?: number;
   /**
-   *
+   * Makes step-indicator a checkmark
    * @default false
    */
   completed?: boolean;
   /**
-   * Makes step non-interactive if false
+   * Makes step non-interactive if false. Step will be set to a <div>, overriding `as`-prop
+   * @default true
    */
   interactive?: boolean;
 }
