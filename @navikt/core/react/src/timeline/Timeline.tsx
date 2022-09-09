@@ -33,7 +33,7 @@ export const Timeline: TimelineComponent = forwardRef<
   TimelineProps
 >(({ children, className, activeStep, ...rest }, ref) => {
   return (
-    <ol {...rest} ref={ref} className={cl("navds-stepper", className)}>
+    <ol {...rest} ref={ref} className={cl("navds-timeline", className)}>
       <TimelineContext.Provider
         value={{
           activeStep: activeStep - 1,
@@ -43,17 +43,17 @@ export const Timeline: TimelineComponent = forwardRef<
         {React.Children.map(children, (step, index) => {
           return (
             <li
-              className={cl("navds-stepper__item")}
+              className={cl("navds-timeline__item")}
               key={index + (children?.toString?.() ?? "")}
             >
-              <span className="navds-stepper__line navds-stepper__line--1" />
+              <span className="navds-timeline__line navds-timeline__line--1" />
               {React.isValidElement<TimelineStepProps>(step)
                 ? React.cloneElement(step, {
                     ...step.props,
                     unsafe_index: index,
                   })
                 : step}
-              <span className="navds-stepper__line navds-stepper__line--2" />
+              <span className="navds-timeline__line navds-timeline__line--2" />
             </li>
           );
         })}

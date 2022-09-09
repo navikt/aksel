@@ -11,7 +11,7 @@ export interface TimelineStepProps
    */
   children: string;
   /**
-   * Handled by Stepper, overwriting may break component logic
+   * Handled by Timeline, overwriting may break component logic
    * @private
    */
   unsafe_index?: number;
@@ -37,15 +37,15 @@ export const StepComponent = forwardRef<HTMLDivElement, TimelineStepProps>(
         {...rest}
         aria-current={activeStep === unsafe_index}
         ref={ref}
-        className={cl("navds-stepper__step", className, {
-          "navds-stepper__step--active": activeStep === unsafe_index,
+        className={cl("navds-timeline__step", className, {
+          "navds-timeline__step--active": activeStep === unsafe_index,
         })}
       >
         <SuccessFilled
           aria-hidden
-          className="navds-stepper__circle navds-stepper__circle--success"
+          className="navds-timeline__circle navds-timeline__circle--success"
         />
-        <Label as="span" className="navds-stepper__content">
+        <Label as="span" className="navds-timeline__content">
           {children}
         </Label>
       </div>
