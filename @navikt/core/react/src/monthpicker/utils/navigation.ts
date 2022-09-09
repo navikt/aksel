@@ -1,4 +1,4 @@
-import { setYear } from "date-fns";
+import { setYear, startOfMonth } from "date-fns";
 import { isMatch, Matcher } from "./is-match";
 
 export const nextEnabled = (
@@ -8,7 +8,10 @@ export const nextEnabled = (
   disabled: Matcher[],
   currentMonth: Date,
   setYearState: Function,
-  yearState: Date
+  yearState: Date,
+  dropdownCaption: boolean,
+  fromDate?: Date,
+  toDate?: Date
 ): Date => {
   if (key === "ArrowRight") {
     const nextMonth = loopForward(
@@ -17,7 +20,10 @@ export const nextEnabled = (
       yearState,
       setYearState,
       disabled,
-      false
+      false,
+      dropdownCaption,
+      fromDate,
+      toDate
     );
     if (nextMonth) return setYear(months[nextMonth.index], nextMonth.year);
   }
@@ -28,7 +34,10 @@ export const nextEnabled = (
       disabled,
       yearState,
       setYearState,
-      false
+      false,
+      dropdownCaption,
+      fromDate,
+      toDate
     );
     if (prevMonth) return setYear(months[prevMonth.index], prevMonth.year);
   }
@@ -47,7 +56,10 @@ export const nextEnabled = (
       yearState,
       setYearState,
       disabled,
-      true
+      true,
+      dropdownCaption,
+      fromDate,
+      toDate
     );
     if (fallbackNext && getRow(fallbackNext.index) !== getRow(currentIndex + 8))
       return setYear(months[fallbackNext.index], fallbackNext.year);
@@ -68,7 +80,10 @@ export const nextEnabled = (
       disabled,
       yearState,
       setYearState,
-      true
+      true,
+      dropdownCaption,
+      fromDate,
+      toDate
     );
     if (fallbackPrev)
       return setYear(months[fallbackPrev.index], fallbackPrev.year);
@@ -82,11 +97,23 @@ const loopBack = (
   disabled: Matcher[],
   yearState: Date,
   setYearState: Function,
-  rowCheck: boolean
+  rowCheck: boolean,
+  dropdownCaption: boolean,
+  fromDate?: Date,
+  toDate?: Date
 ): { index: number; year: number } | undefined => {
   let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   for (let i = currentIndex; i >= -1; i--) {
     if (i === -1) {
+      if (
+        isOutOfRange(
+          dropdownCaption,
+          setYear(currentYear, Number(currentYear.getFullYear() - 1)),
+          fromDate,
+          toDate
+        )
+      )
+        return;
       currentYear = setYear(currentYear, Number(currentYear.getFullYear() - 1));
       setYearState(currentYear);
       i = 11;
@@ -114,11 +141,23 @@ const loopForward = (
   yearState: Date,
   setYearState: Function,
   disabled: Matcher[],
-  rowCheck: boolean
+  rowCheck: boolean,
+  dropdownCaption: boolean,
+  fromDate?: Date,
+  toDate?: Date
 ): { index: number; year: number } | undefined => {
   let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   for (let i = currentIndex + 1; i < months.length + 1; i++) {
     if (i === 12) {
+      if (
+        isOutOfRange(
+          dropdownCaption,
+          setYear(currentYear, Number(currentYear.getFullYear() + 1)),
+          fromDate,
+          toDate
+        )
+      )
+        return;
       currentYear = setYear(currentYear, Number(currentYear.getFullYear() + 1));
       setYearState(currentYear);
       i = 0;
@@ -144,4 +183,23 @@ const getRow = (index: number): number => {
   if (index >= 0 && index <= 3) return 1;
   if (index >= 4 && index <= 7) return 2;
   return 3;
+};
+
+const isOutOfRange = (
+  dropdownCaption: boolean,
+  year: Date,
+  fromDate?: Date,
+  toDate?: Date
+): boolean => {
+  if (
+    dropdownCaption &&
+    fromDate &&
+    toDate &&
+    (year.getFullYear() < fromDate?.getFullYear() ||
+      year.getFullYear() > toDate?.getFullYear())
+  ) {
+    return true;
+  }
+
+  return false;
 };

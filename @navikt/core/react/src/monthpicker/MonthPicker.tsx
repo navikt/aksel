@@ -88,7 +88,6 @@ const MonthCaption = ({
   const handleYearChange = (e) => {
     const newMonth = setYear(startOfMonth(selected), Number(e.target.value));
     setYearState(newMonth);
-    onSelect(newMonth);
   };
 
   const handleButtonClick = (val) => {
@@ -118,7 +117,7 @@ const MonthCaption = ({
         <Select
           label="velg år"
           hideLabel
-          value={selected?.getFullYear()}
+          value={yearState?.getFullYear()}
           onChange={handleYearChange}
           style={{ width: "79px" }}
         >
@@ -152,12 +151,14 @@ const Month = ({
   onSelect,
   locale,
   months,
-  currentRef,
   y,
   hideMonth,
   focus,
   setFocus,
   setYearState,
+  dropdownCaption,
+  fromDate,
+  toDate,
 }: {
   selected: Date;
   month: Date;
@@ -172,6 +173,9 @@ const Month = ({
   focus: Date | undefined;
   setFocus: Function;
   setYearState: Function;
+  dropdownCaption: boolean;
+  fromDate?: Date;
+  toDate?: Date;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
 
@@ -195,7 +199,7 @@ const Month = ({
         "navds-monthpicker__month--hidden": hideMonth(month),
         "navds-monthpicker__month--current": dateIsInCurrentMonth(
           month,
-          selected
+          yearState
         ),
         "navds-monthpicker__month--selected": dateIsSelected(month, selected),
       })}
@@ -208,7 +212,10 @@ const Month = ({
             disabled,
             month,
             setYearState,
-            yearState
+            yearState,
+            dropdownCaption,
+            fromDate,
+            toDate
           )
         );
       }}
@@ -281,6 +288,9 @@ const MonthSelector = ({
             focus={focus}
             setFocus={setFocus}
             setYearState={setYearState}
+            dropdownCaption={dropdownCaption}
+            fromDate={fromDate}
+            toDate={toDate}
           />
         );
       })}
@@ -295,6 +305,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   ) => {
     const [selected, setSelected] = React.useState<Date>(new Date());
     const [yearState, setYearState] = useState<Date>(selected);
+
+    if (dropdownCaption && (!fromDate || !toDate)) return <></>;
 
     const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
