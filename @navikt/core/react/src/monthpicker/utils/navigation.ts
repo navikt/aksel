@@ -10,106 +10,100 @@ export const nextEnabled = (
   setYearState: Function,
   yearState: Date
 ): Date => {
-  let focusDate: Date = currentMonth;
-  let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   if (key === "ArrowRight") {
-    for (let i = currentIndex + 1; i < months.length + 1; i++) {
-      if (i === 12) {
-        currentYear = setYear(yearState, Number(yearState.getFullYear() + 1));
-        setYearState(currentYear);
-        i = 0;
-      }
-      const month = months[i];
-      if (
-        !isMatch(setYear(month, Number(currentYear.getFullYear())), disabled)
-      ) {
-        focusDate = setYear(month, Number(currentYear.getFullYear()));
-        break;
-      }
-    }
-  }
-  if (key === "ArrowLeft") {
-    for (let i = currentIndex - 1; i >= -1; i--) {
-      if (i === -1) {
-        currentYear = setYear(yearState, Number(yearState.getFullYear() - 1));
-        setYearState(currentYear);
-        i = 11;
-      }
-      const month = months[i];
-      if (
-        !isMatch(setYear(month, Number(currentYear.getFullYear())), disabled)
-      ) {
-        focusDate = setYear(month, Number(currentYear.getFullYear()));
-        break;
-      }
-    }
-  }
-  if (key === "ArrowDown") {
-    if (
-      !isMatch(
-        setYear(months[currentIndex + 4], Number(currentYear.getFullYear())),
-        disabled
-      )
-    )
-      return months[currentIndex + 4];
-    const fallbackNextIndex = loopForward(
+    const nextMonth = loopForward(
       currentIndex,
       months,
       yearState,
       setYearState,
-      currentYear,
-      disabled
+      disabled,
+      false
     );
+    if (nextMonth) return setYear(months[nextMonth.index], nextMonth.year);
+  }
+  if (key === "ArrowLeft") {
+    const prevMonth = loopBack(
+      currentIndex - 1,
+      months,
+      disabled,
+      yearState,
+      setYearState,
+      false
+    );
+    if (prevMonth) return setYear(months[prevMonth.index], prevMonth.year);
+  }
+  if (key === "ArrowDown") {
     if (
-      fallbackNextIndex &&
-      getRow(fallbackNextIndex) !== getRow(currentIndex + 8)
+      months[currentIndex + 4] &&
+      !isMatch(
+        setYear(months[currentIndex + 4], Number(yearState.getFullYear())),
+        disabled
+      )
     )
-      return setYear(
-        months[fallbackNextIndex],
-        Number(currentYear.getFullYear())
-      );
-    return focusDate;
+      return setYear(months[currentIndex + 4], Number(yearState.getFullYear()));
+    const fallbackNext = loopForward(
+      currentIndex,
+      months,
+      yearState,
+      setYearState,
+      disabled,
+      true
+    );
+    if (fallbackNext && getRow(fallbackNext.index) !== getRow(currentIndex + 8))
+      return setYear(months[fallbackNext.index], fallbackNext.year);
   }
 
   if (key === "ArrowUp") {
     if (
+      months[currentIndex - 4] &&
       !isMatch(
-        setYear(months[currentIndex - 4], Number(currentYear.getFullYear())),
+        setYear(months[currentIndex - 4], Number(yearState.getFullYear())),
         disabled
       )
     )
-      return months[currentIndex - 4];
-    const fallbackPrevIndex = loopBack(
+      return setYear(months[currentIndex - 4], Number(yearState.getFullYear()));
+    const fallbackPrev = loopBack(
       currentIndex,
       months,
-      currentYear,
       disabled,
-      focusDate
+      yearState,
+      setYearState,
+      true
     );
-    if (fallbackPrevIndex)
-      return setYear(
-        months[fallbackPrevIndex],
-        Number(currentYear.getFullYear())
-      );
+    if (fallbackPrev)
+      return setYear(months[fallbackPrev.index], fallbackPrev.year);
   }
-  return focusDate;
+  return currentMonth;
 };
 
 const loopBack = (
   currentIndex: number,
   months: Date[],
-  currentYear: Date,
   disabled: Matcher[],
-  focusDate: Date
-): number | undefined => {
-  for (let i = currentIndex; i >= 0; i--) {
+  yearState: Date,
+  setYearState: Function,
+  rowCheck: boolean
+): { index: number; year: number } | undefined => {
+  let currentYear = setYear(yearState, Number(yearState.getFullYear()));
+  for (let i = currentIndex; i >= -1; i--) {
+    if (i === -1) {
+      currentYear = setYear(currentYear, Number(currentYear.getFullYear() - 1));
+      setYearState(currentYear);
+      i = 11;
+    }
     const month = months[i];
-    if (
-      !isMatch(setYear(month, Number(currentYear.getFullYear())), disabled) &&
-      getRow(i) !== getRow(currentIndex)
-    ) {
-      console.log(i);
-      return i;
+    const isDisabled = !isMatch(
+      setYear(month, Number(currentYear.getFullYear())),
+      disabled
+    );
+    if (rowCheck) {
+      if (isDisabled && getRow(i) !== getRow(currentIndex)) {
+        return { index: i, year: Number(currentYear.getFullYear()) };
+      }
+    } else {
+      if (isDisabled) {
+        return { index: i, year: Number(currentYear.getFullYear()) };
+      }
     }
   }
 };
@@ -119,16 +113,29 @@ const loopForward = (
   months: Date[],
   yearState: Date,
   setYearState: Function,
-  currentYear: Date,
-  disabled: Matcher[]
-): number | undefined => {
+  disabled: Matcher[],
+  rowCheck: boolean
+): { index: number; year: number } | undefined => {
+  let currentYear = setYear(yearState, Number(yearState.getFullYear()));
   for (let i = currentIndex + 1; i < months.length + 1; i++) {
+    if (i === 12) {
+      currentYear = setYear(currentYear, Number(currentYear.getFullYear() + 1));
+      setYearState(currentYear);
+      i = 0;
+    }
     const month = months[i];
-    if (
-      !isMatch(setYear(month, Number(currentYear.getFullYear())), disabled) &&
-      getRow(i) !== getRow(currentIndex)
-    ) {
-      return i;
+    const isDisabled = !isMatch(
+      setYear(month, Number(currentYear.getFullYear())),
+      disabled
+    );
+    if (rowCheck) {
+      if (isDisabled && getRow(i) !== getRow(currentIndex)) {
+        return { index: i, year: Number(currentYear.getFullYear()) };
+      }
+    } else {
+      if (isDisabled) {
+        return { index: i, year: Number(currentYear.getFullYear()) };
+      }
     }
   }
 };
