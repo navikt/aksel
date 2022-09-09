@@ -39,7 +39,7 @@ export const DisabledMonths = (props) => {
     <div style={{ height: "20rem" }}>
       <MonthPicker
         disabled={[
-          { from: new Date("Mar 1 2022"), to: new Date("Jun  6 2022") },
+          { from: new Date("Apr 1 2022"), to: new Date("Aug  6 2022") },
           new Date("Oct 5 2022"),
           new Date("Jan 5 2023"),
           new Date("feb 5 2023"),
