@@ -3,6 +3,7 @@ import cl from "clsx";
 import { Heading, BodyShort } from "../..";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 import { useId } from "../../util";
+import { useSizeManager } from "../../app-provider/hooks";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -33,18 +34,9 @@ interface ErrorSummaryComponent
 }
 
 export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
-  (
-    {
-      children,
-      className,
-      size = "medium",
-      headingTag = "h2",
-      heading,
-      ...rest
-    },
-    ref
-  ) => {
+  ({ children, className, size, headingTag = "h2", heading, ...rest }, ref) => {
     const headingId = useId();
+    const sizeCtx = useSizeManager<ErrorSummaryProps["size"]>(size);
 
     return (
       <section
@@ -53,7 +45,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         className={cl(
           className,
           "navds-error-summary",
-          `navds-error-summary--${size}`
+          `navds-error-summary--${sizeCtx}`
         )}
         tabIndex={-1}
         aria-live="polite"
@@ -68,7 +60,7 @@ export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
         >
           {heading}
         </Heading>
-        <BodyShort as="ul" size={size} className="navds-error-summary__list">
+        <BodyShort as="ul" size={sizeCtx} className="navds-error-summary__list">
           {React.Children.map(children, (child) => {
             return <li key={child?.toString()}>{child}</li>;
           })}

@@ -2,6 +2,7 @@ import { useContext } from "react";
 import cl from "clsx";
 import { FieldsetContext } from "./index";
 import { useId } from "../index";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface FormFieldProps {
   /**
@@ -38,6 +39,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
   const { size, error, errorId: propErrorId } = props;
 
   const fieldset = useContext(FieldsetContext);
+  const sizeCtx = useSizeManager<FormFieldProps["size"]>(size);
 
   const genId = useId();
 
@@ -54,7 +56,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
     hasError,
     errorId,
     inputDescriptionId,
-    size: size ?? fieldset?.size ?? "medium",
+    size: sizeCtx ?? fieldset?.size ?? "medium",
     inputProps: {
       id,
       "aria-invalid": hasError,
