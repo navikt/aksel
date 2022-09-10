@@ -1,2 +1,2 @@
-export { default as Alert } from "./Alert";
-export { AlertProps } from "./Alert";
+export { default as AppProvider } from "./AppProvider";
+export { AppProviderProps } from "./AppProvider";
