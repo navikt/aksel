@@ -4,6 +4,7 @@ import * as RadixTabs from "@radix-ui/react-tabs";
 import Tab, { TabType } from "./Tab";
 import TabList, { TabListType } from "./TabList";
 import TabPanel, { TabPanelType } from "./TabPanel";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -65,7 +66,7 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
       className,
       children,
       onChange,
-      size = "medium",
+      size,
       selectionFollowsFocus = false,
       loop = false,
       iconPosition = "left",
@@ -73,17 +74,19 @@ export const Tabs = forwardRef<HTMLDivElement, TabsProps>(
     },
     ref
   ) => {
+    const sizeCtx = useSizeManager<TabsProps["size"]>(size);
+
     return (
       <RadixTabs.Root
         {...rest}
         ref={ref}
-        className={cl("navds-tabs", className, `navds-tabs--${size}`)}
+        className={cl("navds-tabs", className, `navds-tabs--${sizeCtx}`)}
         activationMode={selectionFollowsFocus ? "automatic" : "manual"}
         onValueChange={onChange}
       >
         <TabsContext.Provider
           value={{
-            size,
+            size: sizeCtx,
             loop,
             iconPosition,
           }}

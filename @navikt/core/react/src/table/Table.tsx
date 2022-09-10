@@ -7,6 +7,7 @@ import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
 import ExpandableRow, { ExpandableRowType } from "./ExpandableRow";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface SortState {
   orderBy: string;
@@ -58,26 +59,22 @@ export const TableContext = createContext<TableContextProps | null>(null);
 
 export const Table = forwardRef(
   (
-    {
-      className,
-      zebraStripes = false,
-      size = "medium",
-      onSortChange,
-      sort,
-      ...rest
-    },
+    { className, zebraStripes = false, size, onSortChange, sort, ...rest },
     ref
-  ) => (
-    <TableContext.Provider value={{ size, onSortChange, sort }}>
-      <table
-        {...rest}
-        ref={ref}
-        className={cl("navds-table", `navds-table--${size}`, className, {
-          "navds-table--zebra-stripes": zebraStripes,
-        })}
-      />
-    </TableContext.Provider>
-  )
+  ) => {
+    const sizeCtx = useSizeManager<TableProps["size"]>(size);
+    return (
+      <TableContext.Provider value={{ size: sizeCtx, onSortChange, sort }}>
+        <table
+          {...rest}
+          ref={ref}
+          className={cl("navds-table", `navds-table--${sizeCtx}`, className, {
+            "navds-table--zebra-stripes": zebraStripes,
+          })}
+        />
+      </TableContext.Provider>
+    );
+  }
 ) as TableType;
 
 Table.Header = Header;

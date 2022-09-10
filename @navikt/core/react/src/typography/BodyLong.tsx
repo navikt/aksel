@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface BodyLongProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -23,19 +24,19 @@ export const BodyLong: OverridableComponent<
   BodyLongProps,
   HTMLParagraphElement
 > = forwardRef(
-  (
-    { className, size = "medium", spacing, as: Component = "p", ...rest },
-    ref
-  ) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl(className, "navds-body-long", {
-        "navds-body-long--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
-    />
-  )
+  ({ className, size, spacing, as: Component = "p", ...rest }, ref) => {
+    const sizeCtx = useSizeManager<BodyLongProps["size"]>(size);
+    return (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl(className, "navds-body-long", {
+          "navds-body-long--small": sizeCtx === "small",
+          "navds-typo--spacing": !!spacing,
+        })}
+      />
+    );
+  }
 );
 
 export default BodyLong;

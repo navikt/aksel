@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface DetailProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -26,26 +27,22 @@ export interface DetailProps
 export const Detail: OverridableComponent<DetailProps, HTMLParagraphElement> =
   forwardRef(
     (
-      {
-        className,
-        size = "medium",
-        spacing,
-        uppercase,
-        as: Component = "p",
-        ...rest
-      },
+      { className, size, spacing, uppercase, as: Component = "p", ...rest },
       ref
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(className, "navds-detail", {
-          "navds-detail--small": size === "small",
-          "navds-typo--spacing": !!spacing,
-          "navds-typo--uppercase": !!uppercase,
-        })}
-      />
-    )
+    ) => {
+      const sizeCtx = useSizeManager<DetailProps["size"]>(size);
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cl(className, "navds-detail", {
+            "navds-detail--small": sizeCtx === "small",
+            "navds-typo--spacing": !!spacing,
+            "navds-typo--uppercase": !!uppercase,
+          })}
+        />
+      );
+    }
   );
 
 export default Detail;

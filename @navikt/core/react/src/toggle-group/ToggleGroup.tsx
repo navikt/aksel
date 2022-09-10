@@ -8,6 +8,7 @@ import React, {
 import ToggleItem, { ToggleItemType } from "./ToggleItem";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { Label, useId } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
@@ -59,7 +60,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
       className,
       children,
       onChange,
-      size = "medium",
+      size,
       label,
       value,
       defaultValue,
@@ -71,6 +72,7 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
   ) => {
     const [groupValue, setGroupValue] = useState(defaultValue);
     const labelId = useId();
+    const sizeCtx = useSizeManager<ToggleGroupProps["size"]>(size);
 
     const handleValueChange = (v: string) => {
       if (v !== "") {
@@ -95,13 +97,13 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
     return (
       <ToggleGroupContext.Provider
         value={{
-          size,
+          size: sizeCtx,
         }}
       >
         <div className={cl("navds-toggle-group__wrapper", className)}>
           {label && (
             <Label
-              size={size}
+              size={sizeCtx}
               className="navds-toggle-group__label"
               id={labelId}
             >
@@ -114,7 +116,10 @@ export const ToggleGroup = forwardRef<HTMLDivElement, ToggleGroupProps>(
             value={value ?? groupValue}
             defaultValue={defaultValue}
             ref={ref}
-            className={cl("navds-toggle-group", `navds-toggle-group--${size}`)}
+            className={cl(
+              "navds-toggle-group",
+              `navds-toggle-group--${sizeCtx}`
+            )}
             {...(describeBy && { "aria-describedby": describeBy })}
             role="radiogroup"
             type="single"

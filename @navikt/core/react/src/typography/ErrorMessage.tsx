@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface ErrorMessageProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
@@ -23,16 +24,19 @@ export const ErrorMessage: OverridableComponent<
   ErrorMessageProps,
   HTMLParagraphElement
 > = forwardRef(
-  ({ className, size, spacing, as: Component = "p", ...rest }, ref) => (
-    <Component
-      {...rest}
-      ref={ref}
-      className={cl("navds-error-message", "navds-label", className, {
-        "navds-label--small": size === "small",
-        "navds-typo--spacing": !!spacing,
-      })}
-    />
-  )
+  ({ className, size, spacing, as: Component = "p", ...rest }, ref) => {
+    const sizeCtx = useSizeManager<ErrorMessageProps["size"]>(size);
+    return (
+      <Component
+        {...rest}
+        ref={ref}
+        className={cl("navds-error-message", "navds-label", className, {
+          "navds-label--small": sizeCtx === "small",
+          "navds-typo--spacing": !!spacing,
+        })}
+      />
+    );
+  }
 );
 
 export default ErrorMessage;

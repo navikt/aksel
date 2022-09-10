@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface LabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement> {
@@ -21,19 +22,19 @@ export interface LabelProps
 
 export const Label: OverridableComponent<LabelProps, HTMLLabelElement> =
   forwardRef(
-    (
-      { className, size = "medium", spacing, as: Component = "label", ...rest },
-      ref
-    ) => (
-      <Component
-        {...rest}
-        ref={ref}
-        className={cl(className, "navds-label", {
-          "navds-label--small": size === "small",
-          "navds-typo--spacing": !!spacing,
-        })}
-      />
-    )
+    ({ className, size, spacing, as: Component = "label", ...rest }, ref) => {
+      const sizeCtx = useSizeManager<LabelProps["size"]>(size);
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cl(className, "navds-label", {
+            "navds-label--small": sizeCtx === "small",
+            "navds-typo--spacing": !!spacing,
+          })}
+        />
+      );
+    }
   );
 
 export default Label;

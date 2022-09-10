@@ -4,6 +4,7 @@ import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 import { ExpandFilled } from "@navikt/ds-icons";
 import AnimateHeight from "../util/AnimateHeight";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -41,11 +42,12 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       open,
       defaultOpen = false,
       onClick,
-      size = "medium",
+      size,
       ...rest
     },
     ref
   ) => {
+    const sizeCtx = useSizeManager<ReadMoreProps["size"]>(size);
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
 
     const isOpened = open ?? internalOpen;
@@ -54,7 +56,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
       <div
         className={cl(
           "navds-read-more",
-          `navds-read-more--${size}`,
+          `navds-read-more--${sizeCtx}`,
           className,
           { "navds-read-more--open": isOpened }
         )}
@@ -64,7 +66,7 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           ref={ref}
           type="button"
           className={cl("navds-read-more__button", "navds-body-short", {
-            "navds-body-short--small": size === "small",
+            "navds-body-short--small": sizeCtx === "small",
           })}
           onClick={(e) => {
             if (open === undefined) {
@@ -82,7 +84,11 @@ export const ReadMore = forwardRef<HTMLButtonElement, ReadMoreProps>(
           <span>{header}</span>
         </button>
         <AnimateHeight height={isOpened ? "auto" : 0} duration={250}>
-          <BodyLong as="div" className="navds-read-more__content" size={size}>
+          <BodyLong
+            as="div"
+            className="navds-read-more__content"
+            size={sizeCtx}
+          >
             {children}
           </BodyLong>
         </AnimateHeight>
