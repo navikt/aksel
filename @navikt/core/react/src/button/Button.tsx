@@ -2,6 +2,7 @@ import React, { useRef, useState, forwardRef, useMemo } from "react";
 import cl from "clsx";
 import { OverridableComponent, Loader, mergeRefs, Label } from "../";
 import { useClientLayoutEffect } from "../util";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -48,7 +49,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         variant = "primary",
         className,
         children,
-        size = "medium",
+        size,
         loading = false,
         disabled,
         style,
@@ -58,6 +59,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
       },
       ref
     ) => {
+      const sizeCtx = useSizeManager<ButtonProps["size"]>(size);
       const buttonRef = useRef<HTMLButtonElement | null>(null);
       const [widthOverride, setWidthOverride] = useState<number>();
 
@@ -85,7 +87,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             className,
             "navds-button",
             `navds-button--${variant}`,
-            `navds-button--${size}`,
+            `navds-button--${sizeCtx}`,
             {
               "navds-button--loading": widthOverride,
               "navds-button--icon-only": !!icon && !children,
@@ -98,7 +100,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
           disabled={disabled ?? widthOverride ? true : undefined}
         >
           {widthOverride ? (
-            <Loader size={size} />
+            <Loader size={sizeCtx} />
           ) : (
             <>
               {icon && iconPosition === "left" && (
@@ -107,7 +109,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
               {children && (
                 <Label
                   as="span"
-                  size={size === "medium" ? "medium" : "small"}
+                  size={sizeCtx === "medium" ? "medium" : "small"}
                   aria-live="polite"
                 >
                   {children}

@@ -1,6 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
 import { BodyShort, Detail } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -19,20 +20,22 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
 }
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
-  ({ className, variant, size = "medium", ...rest }, ref) => {
-    const Component = size === "medium" ? BodyShort : Detail;
+  ({ className, variant, size, ...rest }, ref) => {
+    const sizeCtx = useSizeManager<TagProps["size"]>(size);
+
+    const Component = sizeCtx === "medium" ? BodyShort : Detail;
 
     return (
       <Component
         {...rest}
         ref={ref}
         as="span"
-        size={size}
+        size={sizeCtx}
         className={cl(
           "navds-tag",
           className,
           `navds-tag--${variant}`,
-          `navds-tag--${size}`
+          `navds-tag--${sizeCtx}`
         )}
       />
     );

@@ -17,8 +17,10 @@ export default {
 
 export const Default = (props) => (
   <AppProvider options={{ size: props.size }}>
-    <Button>Knapp</Button>
-    <Alert variant="info">Alert</Alert>
-    <Tag variant="info">Tag</Tag>
+    <div className="colgap">
+      <Button>Knapp</Button>
+      <Alert variant="info">Alert</Alert>
+      <Tag variant="info">Tag</Tag>
+    </div>
   </AppProvider>
 );

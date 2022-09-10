@@ -7,6 +7,7 @@ import {
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "..";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -59,30 +60,36 @@ export const Alert = forwardRef<HTMLDivElement, AlertProps>(
       children,
       className,
       variant,
-      size = "medium",
+      size,
       fullWidth = false,
       inline = false,
       ...rest
     },
     ref
-  ) => (
-    <div
-      {...rest}
-      ref={ref}
-      className={cl(
-        className,
-        "navds-alert",
-        `navds-alert--${variant}`,
-        `navds-alert--${size}`,
-        { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
-      )}
-    >
-      <Icon variant={variant} className="navds-alert__icon" />
-      <BodyLong as="div" size={size} className="navds-alert__wrapper">
-        {children}
-      </BodyLong>
-    </div>
-  )
+  ) => {
+    const sizeCtx = useSizeManager<AlertProps["size"]>(size);
+    return (
+      <div
+        {...rest}
+        ref={ref}
+        className={cl(
+          className,
+          "navds-alert",
+          `navds-alert--${variant}`,
+          `navds-alert--${sizeCtx}`,
+          {
+            "navds-alert--full-width": fullWidth,
+            "navds-alert--inline": inline,
+          }
+        )}
+      >
+        <Icon variant={variant} className="navds-alert__icon" />
+        <BodyLong as="div" size={sizeCtx} className="navds-alert__wrapper">
+          {children}
+        </BodyLong>
+      </div>
+    );
+  }
 );
 
 export default Alert;
