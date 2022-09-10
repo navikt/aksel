@@ -6,6 +6,7 @@ import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
 } from "./PaginationItem";
+import { useSizeManager } from "../app-provider/hooks";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**
@@ -97,7 +98,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
       boundaryCount = 1,
       siblingCount = 1,
       className,
-      size = "medium",
+      size,
       prevNextTexts = false,
       renderItem: Item = (item: PaginationItemProps) => (
         <PaginationItem {...item} />
@@ -106,6 +107,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     },
     ref
   ) => {
+    const sizeCtx = useSizeManager<PaginationProps["size"]>(size);
+
     if (page < 1) {
       console.error("page cannot be less than 1");
       return null;
@@ -129,7 +132,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
         {...rest}
         className={cl(
           "navds-pagination",
-          `navds-pagination--${size}`,
+          `navds-pagination--${sizeCtx}`,
           className
         )}
       >
@@ -142,7 +145,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               disabled={page === 1}
               onClick={() => onPageChange?.(page - 1)}
               page={page - 1}
-              size={size}
+              size={sizeCtx}
               icon={
                 <Back
                   className="navds-pagination__prev-next-icon"
@@ -154,7 +157,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             >
               {prevNextTexts && (
                 <BodyShort
-                  size={size === "xsmall" ? "small" : size}
+                  size={sizeCtx === "xsmall" ? "small" : sizeCtx}
                   className="navds-pagination__prev-text"
                 >
                   Forrige
@@ -167,7 +170,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               const n = Number(step);
               return isNaN(n) ? (
                 <li className="navds-pagination__ellipsis" key={`${step}${i}`}>
-                  <BodyShort size={size === "xsmall" ? "small" : size}>
+                  <BodyShort size={sizeCtx === "xsmall" ? "small" : sizeCtx}>
                     ...
                   </BodyShort>
                 </li>
@@ -177,9 +180,9 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
                     onClick={() => onPageChange?.(n)}
                     selected={page === n}
                     page={n}
-                    size={size}
+                    size={sizeCtx}
                   >
-                    <BodyShort size={size === "xsmall" ? "small" : size}>
+                    <BodyShort size={sizeCtx === "xsmall" ? "small" : sizeCtx}>
                       {n}
                     </BodyShort>
                   </Item>
@@ -195,7 +198,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
               disabled={page === count}
               onClick={() => onPageChange?.(page + 1)}
               page={page + 1}
-              size={size}
+              size={sizeCtx}
               icon={
                 <Next
                   className="navds-pagination__prev-next-icon"
@@ -208,7 +211,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             >
               {prevNextTexts && (
                 <BodyShort
-                  size={size === "xsmall" ? "small" : size}
+                  size={sizeCtx === "xsmall" ? "small" : sizeCtx}
                   className="navds-pagination__next-text"
                 >
                   Neste
