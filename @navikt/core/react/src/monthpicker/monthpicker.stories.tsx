@@ -55,3 +55,11 @@ export const DisabledMonths = (props) => {
     </div>
   );
 };
+
+export const Standalone = (props) => {
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker.Standalone />
+    </div>
+  );
+};

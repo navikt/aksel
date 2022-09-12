@@ -1,3 +1,4 @@
+import cl from "clsx";
 import {
   compareAsc,
   isSameYear,
@@ -6,55 +7,25 @@ import {
   startOfMonth,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
-import React, { forwardRef, useState, useRef } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
+import { Matcher } from "./utils/is-match";
 import { BodyShort } from "..";
 import Month from "./Month";
-import MonthCaption from "./MonthCaption";
-import MonthPickerStandalone, {
-  MonthPickerStandaloneType,
-} from "./MonthPickerStandalone";
 import { getDefaultSelected } from "./utils/get-initial-month";
-import { Matcher } from "./utils/is-match";
+import MonthCaption from "./MonthCaption";
+import { MonthPickerDefaultProps } from "./MonthPicker";
 
-export interface MonthPickerDefaultProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-  mode?: "month";
+interface MonthPickerStandaloneDefaultProps extends MonthPickerDefaultProps {
   /**
-   * The earliest day to start the month navigation.
+   * Wrapper className
    */
-  fromDate?: Date;
-  /**
-   * The latest day to end the month navigation.
-   */
-  toDate?: Date;
-  /**
-   * Changes monthpicker locale
-   * @default "nb" (norsk bokmål)
-   */
-  locale?: "nb" | "nn" | "en";
-  /**
-   * Adds a `Select` for picking Year and Month
-   * Needs `fromDate` + `toDate` to be shown!
-   * @default false
-   */
-  dropdownCaption?: boolean;
-  /**
-   * Apply the disabled modifier to the matching days. Uses a subset of React Day Picker Matcher type.
-   * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
-   */
-  disabled?: Matcher[];
-  /**
-   * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
-   */
-  defaultSelected?: Date;
+  className?: string;
 }
 
-interface MonthPickerComponent
-  extends React.ForwardRefExoticComponent<MonthPickerDefaultProps> {
-  Standalone: MonthPickerStandaloneType;
-}
+export type MonthPickerStandaloneType = React.ForwardRefExoticComponent<
+  MonthPickerStandaloneDefaultProps & React.RefAttributes<HTMLDivElement>
+>;
 
 const MonthSelector = ({
   onSelect,
@@ -122,15 +93,18 @@ const MonthSelector = ({
   );
 };
 
-export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
+export const MonthPicker = forwardRef<
+  HTMLDivElement,
+  MonthPickerStandaloneDefaultProps
+>(
   (
     {
-      children,
       dropdownCaption = false,
       fromDate = new Date(),
       toDate,
       disabled = [],
       defaultSelected,
+      className,
     },
     ref
   ) => {
@@ -151,35 +125,39 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       dropdownCaption && fromDate && toDate ? true : false;
 
     return (
-      <RootProvider
-        locale={NB}
-        selected={selected}
-        className="navds-monthpicker-month"
-        toDate={toDate}
-        fromDate={fromDate}
+      <div
+        ref={ref}
+        className={cl("navds-date__standalone-wrapper", className)}
       >
-        <div className="navds-monthpicker__wrapper">
-          <MonthCaption
-            selected={selected}
-            onSelect={setSelected}
-            dropdownCaption={dropdownCaption}
-            isValidDropdownCaption={isValidDropdownCaption}
-            yearState={yearState}
-            setYearState={setYearState}
-          />
-          <MonthSelector
-            dropdownCaption={dropdownCaption}
-            onSelect={setSelected}
-            selected={selected}
-            disabled={disabled}
-            yearState={yearState}
-            setYearState={setYearState}
-          />
-        </div>
-      </RootProvider>
+        <RootProvider
+          locale={NB}
+          selected={selected}
+          className="navds-monthpicker-month"
+          toDate={toDate}
+          fromDate={fromDate}
+        >
+          <div className="navds-monthpicker__wrapper">
+            <MonthCaption
+              selected={selected}
+              onSelect={setSelected}
+              dropdownCaption={dropdownCaption}
+              isValidDropdownCaption={isValidDropdownCaption}
+              yearState={yearState}
+              setYearState={setYearState}
+            />
+            <MonthSelector
+              dropdownCaption={dropdownCaption}
+              onSelect={setSelected}
+              selected={selected}
+              disabled={disabled}
+              yearState={yearState}
+              setYearState={setYearState}
+            />
+          </div>
+        </RootProvider>
+      </div>
     );
   }
-) as MonthPickerComponent;
+);
 
 export default MonthPicker;
-MonthPicker.Standalone = MonthPickerStandalone;
