@@ -40,6 +40,10 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
    */
   disabled?: Matcher[];
+  /**
+   * The initial selected month. Defaults to todays month.
+   */
+  defaultSelected?: Date;
 }
 
 const MonthSelector = ({
@@ -110,10 +114,19 @@ const MonthSelector = ({
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
-    { children, dropdownCaption = false, fromDate, toDate, disabled = [] },
+    {
+      children,
+      dropdownCaption = false,
+      fromDate,
+      toDate,
+      disabled = [],
+      defaultSelected,
+    },
     ref
   ) => {
-    const [selected, setSelected] = React.useState<Date>(new Date());
+    const [selected, setSelected] = React.useState<Date>(
+      defaultSelected || new Date()
+    );
     const [yearState, setYearState] = useState<Date>(selected);
 
     if (dropdownCaption && (!fromDate || !toDate)) return <></>;

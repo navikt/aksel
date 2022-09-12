@@ -17,7 +17,7 @@ export default {
 export const Default = (props) => {
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker />
+      <MonthPicker defaultSelected={new Date("Jun 4 2022")} />
     </div>
   );
 };
@@ -27,14 +27,14 @@ export const dropdownCaption = (props) => {
     <div style={{ height: "20rem" }}>
       <MonthPicker
         dropdownCaption
-        fromDate={new Date()}
+        fromDate={new Date("Jan 1 2019")}
         toDate={new Date("Sep 27 2032")}
         disabled={[
           { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
           { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
           { from: new Date("Jan 2 2032"), to: new Date("Aug 4 2032") },
           new Date("Sep 5 2022"),
-          new Date("Jan 5 2023"),
+          new Date("Jan 5 2019"),
         ]}
       />
     </div>
