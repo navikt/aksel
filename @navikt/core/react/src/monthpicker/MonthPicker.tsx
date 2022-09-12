@@ -11,6 +11,7 @@ import { RootProvider, useDayPicker } from "react-day-picker";
 import { BodyShort } from "..";
 import Month from "./Month";
 import MonthCaption from "./MonthCaption";
+import { getDefaultSelected } from "./utils/get-initial-month";
 import { Matcher } from "./utils/is-match";
 
 export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -41,7 +42,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   disabled?: Matcher[];
   /**
-   * The initial selected month. Defaults to todays month.
+   * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
    */
   defaultSelected?: Date;
 }
@@ -117,7 +118,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     {
       children,
       dropdownCaption = false,
-      fromDate,
+      fromDate = new Date(),
       toDate,
       disabled = [],
       defaultSelected,
@@ -125,7 +126,13 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     ref
   ) => {
     const [selected, setSelected] = React.useState<Date>(
-      defaultSelected || new Date()
+      getDefaultSelected(
+        disabled,
+        dropdownCaption,
+        fromDate,
+        defaultSelected,
+        toDate
+      )
     );
     const [yearState, setYearState] = useState<Date>(selected);
 
