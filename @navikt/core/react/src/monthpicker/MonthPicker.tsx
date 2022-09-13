@@ -22,6 +22,10 @@ import { Matcher } from "./utils/is-match";
 
 export interface MonthPickerDefaultProps
   extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Element monthpicker anchors to. Use <MonthPicker.Input /> for built-in toggle,
+   * or make your own with the open/onClose props
+   */
   children?: React.ReactNode;
   mode?: "month";
   /**
@@ -70,6 +74,15 @@ export interface MonthPickerDefaultProps
    * @remark Controlled by component by default
    */
   open?: boolean;
+  /**
+   * onClose callback for user-controlled state
+   */
+  onClose?: () => void;
+  /**
+   * onOpenToggle callback for user-controlled-state
+   * @remark only called if `<MONTHPicker.Input />` is used
+   */
+  onOpenToggle?: () => void;
 }
 
 interface MonthPickerComponent
@@ -170,6 +183,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       classNames,
       open: _open,
       id,
+      onClose,
+      onOpenToggle,
     },
     ref
   ) => {
@@ -201,6 +216,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
           open: _open ?? open,
           onOpen: () => {
             setOpen((x) => !x);
+            onOpenToggle?.();
           },
           buttonRef,
           ariaId,
@@ -217,7 +233,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 arrow={false}
                 anchorEl={wrapperRef.current}
                 open={_open ?? open}
-                onClose={() => setOpen(false)}
+                onClose={() => onClose?.() ?? setOpen(false)}
                 placement="bottom-start"
                 role="dialog"
                 ref={ref}

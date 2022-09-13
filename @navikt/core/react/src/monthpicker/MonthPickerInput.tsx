@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { MonthPickerContext } from "./MonthPicker";
 import { BodyShort, ErrorMessage, Label } from "..";
 import { FormFieldProps, useFormField } from "../form/useFormField";
+import { omit } from "../util";
 
 export interface MonthPickerInputProps
   extends FormFieldProps,
@@ -48,7 +49,7 @@ export const MonthPickerInput: MonthPickerInputType = forwardRef<
     hasError,
   } = useFormField(props, "monthpicker-input");
 
-  const { className, label, description, hideLabel = false } = props;
+  const { className, label, description, hideLabel = false, ...rest } = props;
 
   return (
     <div
@@ -88,6 +89,8 @@ export const MonthPickerInput: MonthPickerInputType = forwardRef<
       <div className="navds-date__field-wrapper">
         <input
           ref={ref}
+          {...omit(rest, ["error", "errorId", "size", "wrapperRef"])}
+          {...inputProps}
           autoComplete="off"
           className={cl(
             className,
