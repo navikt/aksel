@@ -83,3 +83,17 @@
   height: fit-content;
   width: fit-content;
 }
+
+.navds-month__field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.navds-month__field-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}

@@ -18,7 +18,7 @@ export const Default = (props) => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker defaultSelected={new Date("Jun 4 2022")}>
-        <MonthPicker.Input />
+        <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
     </div>
   );
@@ -39,7 +39,7 @@ export const dropdownCaption = (props) => {
           new Date("Jan 5 2019"),
         ]}
       >
-        <MonthPicker.Input />
+        <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
     </div>
   );
@@ -56,7 +56,7 @@ export const DisabledMonths = (props) => {
           new Date("Jan 5 2023"),
         ]}
       >
-        <MonthPicker.Input />
+        <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
     </div>
   );
@@ -74,7 +74,7 @@ export const PopoverWIP = (props) => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker defaultSelected={new Date("Jun 4 2022")}>
-        <MonthPicker.Input />
+        <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
     </div>
   );

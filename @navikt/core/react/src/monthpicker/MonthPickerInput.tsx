@@ -1,9 +1,23 @@
+import cl from "clsx";
 import { Calender } from "@navikt/ds-icons";
-import React, { forwardRef, useContext } from "react";
+import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
 import { Button } from "../button";
 import { MonthPickerContext } from "./MonthPicker";
+import { BodyShort, ErrorMessage, Label } from "..";
+import { FormFieldProps, useFormField } from "../form/useFormField";
 
-export interface DatePickerInputProps {
+export interface MonthPickerInputProps
+  extends FormFieldProps,
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /**
+   * Input label
+   */
+  label: React.ReactNode;
+  /**
+   * Shows label and description for screenreaders-only
+   * @default false
+   */
+  hideLabel?: boolean;
   /**
    * Changes padding and font-sizes
    * @default medium
@@ -16,29 +30,100 @@ export interface DatePickerInputProps {
 }
 
 export type MonthPickerInputType = React.ForwardRefExoticComponent<
-  DatePickerInputProps & React.RefAttributes<HTMLInputElement>
+  MonthPickerInputProps & React.RefAttributes<HTMLInputElement>
 >;
 
 export const MonthPickerInput: MonthPickerInputType = forwardRef<
   HTMLInputElement,
-  DatePickerInputProps
+  MonthPickerInputProps
 >((props, ref) => {
   const { onOpen, buttonRef, open } = useContext(MonthPickerContext);
 
+  const {
+    inputProps,
+    size = "medium",
+    inputDescriptionId,
+    errorId,
+    showErrorMsg,
+    hasError,
+  } = useFormField(props, "monthpicker-input");
+
+  const { className, label, description, hideLabel = false } = props;
+
   return (
-    <div ref={props?.wrapperRef}>
-      <Button
-        ref={buttonRef}
-        variant="tertiary"
-        type="button"
-        size="small"
-        onClick={() => onOpen()}
-        className="navds-month__field-button"
-        icon={
-          <Calender title={open ? "Lukk månedsvelger" : "Åpne månedsvelger"} />
+    <div
+      className={cl(
+        className,
+        "navds-form-field",
+        `navds-form-field--${size}`,
+        "navds-date__field",
+        {
+          "navds-date__field--error": hasError,
+          "navds-date__field--disabled": !!inputProps.disabled,
         }
-        aria-haspopup="grid"
-      />
+      )}
+      ref={props?.wrapperRef}
+    >
+      <Label
+        htmlFor={inputProps.id}
+        size={size}
+        className={cl("navds-form-field__label", {
+          "navds-sr-only": hideLabel,
+        })}
+      >
+        {label}
+      </Label>
+      {!!description && (
+        <BodyShort
+          as="div"
+          className={cl("navds-form-field__description", {
+            "navds-sr-only": hideLabel,
+          })}
+          size={size}
+          id={inputDescriptionId}
+        >
+          {description}
+        </BodyShort>
+      )}
+      <div className="navds-date__field-wrapper">
+        <input
+          ref={ref}
+          autoComplete="off"
+          className={cl(
+            className,
+            "navds-date__field-input",
+            "navds-text-field__input",
+            "navds-body-short",
+            `navds-body-${size}`
+          )}
+          size={14}
+          aria-haspopup="grid"
+        />
+        <Button
+          ref={buttonRef}
+          variant="tertiary"
+          type="button"
+          size="small"
+          onClick={() => onOpen()}
+          className="navds-month__field-button"
+          icon={
+            <Calender
+              title={open ? "Lukk månedsvelger" : "Åpne månedsvelger"}
+            />
+          }
+          aria-haspopup="grid"
+        />
+        <div
+          className="navds-form-field__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
+          {showErrorMsg && (
+            <ErrorMessage size={size}>{props.error}</ErrorMessage>
+          )}
+        </div>
+      </div>
     </div>
   );
 });
