@@ -10,7 +10,7 @@ import {
 import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState, useRef, createContext } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
-import { BodyShort, Popover } from "..";
+import { BodyShort, Popover, useId } from "..";
 import Month from "./Month";
 import MonthCaption from "./MonthCaption";
 import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
@@ -169,9 +169,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       defaultSelected,
       classNames,
       open: _open,
+      id,
     },
     ref
   ) => {
+    const ariaId = useId(id);
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -201,6 +203,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
             setOpen((x) => !x);
           },
           buttonRef,
+          ariaId,
         }}
       >
         <div
@@ -218,6 +221,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 placement="bottom-start"
                 role="dialog"
                 ref={ref}
+                id={ariaId}
               >
                 <RootProvider
                   locale={NB}

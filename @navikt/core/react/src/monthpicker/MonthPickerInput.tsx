@@ -37,7 +37,7 @@ export const MonthPickerInput: MonthPickerInputType = forwardRef<
   HTMLInputElement,
   MonthPickerInputProps
 >((props, ref) => {
-  const { onOpen, buttonRef, open } = useContext(MonthPickerContext);
+  const { onOpen, buttonRef, open, ariaId } = useContext(MonthPickerContext);
 
   const {
     inputProps,
@@ -98,6 +98,7 @@ export const MonthPickerInput: MonthPickerInputType = forwardRef<
           )}
           size={14}
           aria-haspopup="grid"
+          aria-controls={ariaId}
         />
         <Button
           ref={buttonRef}
