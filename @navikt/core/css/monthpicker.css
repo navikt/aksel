@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 1.5rem;
+  padding: var(--navds-spacing-3);
 }
 
 .navds-monthpicker__caption {
@@ -75,4 +76,10 @@
 .navds-monthpicker__month:not(.navds-monthpicker__month--selected):not([disabled]):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
   cursor: pointer;
+}
+
+.navds-month__standalone-wrapper,
+.navds-month__wrapper {
+  height: fit-content;
+  width: fit-content;
 }

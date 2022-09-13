@@ -4,8 +4,7 @@
 } */
 
 .navds-date__wrapper,
-.navds-date__standalone-wrapper,
-.navds-month__standalone-wrapper {
+.navds-date__standalone-wrapper {
   height: fit-content;
   width: fit-content;
 }

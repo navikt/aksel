@@ -1,3 +1,5 @@
+import { FloatingPortal } from "@floating-ui/react-dom-interactions";
+import cl from "clsx";
 import {
   compareAsc,
   isSameYear,
@@ -6,11 +8,12 @@ import {
   startOfMonth,
 } from "date-fns";
 import NB from "date-fns/locale/nb";
-import React, { forwardRef, useState, useRef } from "react";
+import React, { forwardRef, useState, useRef, createContext } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
-import { BodyShort } from "..";
+import { BodyShort, Popover } from "..";
 import Month from "./Month";
 import MonthCaption from "./MonthCaption";
+import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
 import MonthPickerStandalone, {
   MonthPickerStandaloneType,
 } from "./MonthPickerStandalone";
@@ -49,12 +52,45 @@ export interface MonthPickerDefaultProps
    * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
    */
   defaultSelected?: Date;
+  /**
+   * Classnames for adding classes
+   */
+  classNames?: {
+    /**
+     * Children wrapper
+     */
+    wrapper?: string;
+    /**
+     * DatePicker-wrapper
+     */
+    datepicker?: string;
+  };
+  /**
+   * Open state for user-controlled state
+   * @remark Controlled by component by default
+   */
+  open?: boolean;
 }
 
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerDefaultProps> {
   Standalone: MonthPickerStandaloneType;
+  Input: MonthPickerInputType;
 }
+
+interface MonthickerContextProps {
+  open: boolean;
+  onOpen: () => void;
+  buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
+  ariaId?: string;
+}
+
+export const MonthPickerContext = createContext<MonthickerContextProps>({
+  open: false,
+  onOpen: () => null,
+  buttonRef: null,
+  ariaId: undefined,
+});
 
 const MonthSelector = ({
   onSelect,
@@ -131,9 +167,16 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       toDate,
       disabled = [],
       defaultSelected,
+      classNames,
+      open: _open,
     },
     ref
   ) => {
+    const [open, setOpen] = useState(_open ?? false);
+
+    const wrapperRef = useRef<HTMLDivElement | null>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+
     const [selected, setSelected] = React.useState<Date>(
       getDefaultSelected(
         disabled,
@@ -151,35 +194,66 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       dropdownCaption && fromDate && toDate ? true : false;
 
     return (
-      <RootProvider
-        locale={NB}
-        selected={selected}
-        className="navds-monthpicker-month"
-        toDate={toDate}
-        fromDate={fromDate}
+      <MonthPickerContext.Provider
+        value={{
+          open: _open ?? open,
+          onOpen: () => {
+            setOpen((x) => !x);
+          },
+          buttonRef,
+        }}
       >
-        <div className="navds-monthpicker__wrapper">
-          <MonthCaption
-            selected={selected}
-            onSelect={setSelected}
-            dropdownCaption={dropdownCaption}
-            isValidDropdownCaption={isValidDropdownCaption}
-            yearState={yearState}
-            setYearState={setYearState}
-          />
-          <MonthSelector
-            dropdownCaption={dropdownCaption}
-            onSelect={setSelected}
-            selected={selected}
-            disabled={disabled}
-            yearState={yearState}
-            setYearState={setYearState}
-          />
+        <div
+          ref={wrapperRef}
+          className={cl("navds-month__wrapper", classNames?.wrapper)}
+        >
+          {children}
+          <FloatingPortal>
+            {(_open ?? open) && (
+              <Popover
+                arrow={false}
+                anchorEl={wrapperRef.current}
+                open={_open ?? open}
+                onClose={() => setOpen(false)}
+                placement="bottom-start"
+                role="dialog"
+                ref={ref}
+              >
+                <RootProvider
+                  locale={NB}
+                  selected={selected}
+                  className="navds-monthpicker-month"
+                  toDate={toDate}
+                  fromDate={fromDate}
+                >
+                  <div className="navds-monthpicker__wrapper">
+                    <MonthCaption
+                      selected={selected}
+                      onSelect={setSelected}
+                      dropdownCaption={dropdownCaption}
+                      isValidDropdownCaption={isValidDropdownCaption}
+                      yearState={yearState}
+                      setYearState={setYearState}
+                    />
+                    <MonthSelector
+                      dropdownCaption={dropdownCaption}
+                      onSelect={setSelected}
+                      selected={selected}
+                      disabled={disabled}
+                      yearState={yearState}
+                      setYearState={setYearState}
+                    />
+                  </div>
+                </RootProvider>
+              </Popover>
+            )}
+          </FloatingPortal>
         </div>
-      </RootProvider>
+      </MonthPickerContext.Provider>
     );
   }
 ) as MonthPickerComponent;
 
 export default MonthPicker;
 MonthPicker.Standalone = MonthPickerStandalone;
+MonthPicker.Input = MonthPickerInput;
