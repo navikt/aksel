@@ -7,10 +7,10 @@ import {
   setYear,
   startOfMonth,
 } from "date-fns";
-import NB from "date-fns/locale/nb";
 import React, { forwardRef, useState, useRef, createContext } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
 import { BodyShort, Popover, useId } from "..";
+import { getLocaleFromString } from "../datepicker/utils";
 import Month from "./Month";
 import MonthCaption from "./MonthCaption";
 import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
@@ -27,7 +27,6 @@ export interface MonthPickerDefaultProps
    * or make your own with the open/onClose props
    */
   children?: React.ReactNode;
-  mode?: "month";
   /**
    * The earliest day to start the month navigation.
    */
@@ -122,6 +121,7 @@ const MonthSelector = ({
 }) => {
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
+  console.log(locale);
   const monthRefs = useRef(new Array<HTMLButtonElement>());
   const [focus, setFocus] = useState<Date>();
 
@@ -185,6 +185,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       id,
       onClose,
       onOpenToggle,
+      locale = "nb",
     },
     ref
   ) => {
@@ -203,6 +204,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
         toDate
       )
     );
+
     const [yearState, setYearState] = useState<Date>(selected);
 
     if (dropdownCaption && (!fromDate || !toDate)) return <></>;
@@ -240,7 +242,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 id={ariaId}
               >
                 <RootProvider
-                  locale={NB}
+                  locale={getLocaleFromString(locale)}
                   selected={selected}
                   className="navds-monthpicker-month"
                   toDate={toDate}

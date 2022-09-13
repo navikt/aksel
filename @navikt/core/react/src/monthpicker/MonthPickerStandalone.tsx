@@ -6,7 +6,6 @@ import {
   setYear,
   startOfMonth,
 } from "date-fns";
-import NB from "date-fns/locale/nb";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
 import { Matcher } from "./utils/is-match";
@@ -15,6 +14,7 @@ import Month from "./Month";
 import { getDefaultSelected } from "./utils/get-initial-month";
 import MonthCaption from "./MonthCaption";
 import { MonthPickerDefaultProps } from "./MonthPicker";
+import { getLocaleFromString } from "../datepicker/utils";
 
 interface MonthPickerStandaloneDefaultProps extends MonthPickerDefaultProps {
   /**
@@ -46,7 +46,7 @@ const MonthSelector = ({
   const { fromDate, toDate, locale } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
   const [focus, setFocus] = useState<Date>();
-
+  console.log(locale);
   if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
@@ -105,6 +105,7 @@ export const MonthPicker = forwardRef<
       disabled = [],
       defaultSelected,
       className,
+      locale = "nb",
     },
     ref
   ) => {
@@ -130,7 +131,7 @@ export const MonthPicker = forwardRef<
         className={cl("navds-date__standalone-wrapper", className)}
       >
         <RootProvider
-          locale={NB}
+          locale={getLocaleFromString(locale)}
           selected={selected}
           className="navds-monthpicker-month"
           toDate={toDate}
