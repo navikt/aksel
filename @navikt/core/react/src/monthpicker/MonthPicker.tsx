@@ -121,7 +121,7 @@ const MonthSelector = ({
 }) => {
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
-  console.log(locale);
+
   const monthRefs = useRef(new Array<HTMLButtonElement>());
   const [focus, setFocus] = useState<Date>();
 

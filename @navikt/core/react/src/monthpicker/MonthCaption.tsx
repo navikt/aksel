@@ -8,6 +8,7 @@ import {
   updateWithoutDropdownCaption,
   updateWithDropdownCaption,
 } from "./utils/handle-selected";
+import { labelPrev, labelNext } from "./utils/labels";
 
 export const MonthCaption = ({
   selected,
@@ -66,6 +67,7 @@ export const MonthCaption = ({
         className="navds-monthpicker__caption-button"
         disabled={!isValidDropdownCaption ? false : !!previousMonth}
         onClick={() => handleButtonClick(-1)}
+        aria-label={labelPrev(locale?.code)}
       >
         <Left aria-hidden />
       </button>
@@ -93,6 +95,7 @@ export const MonthCaption = ({
         className="navds-monthpicker__caption-button"
         disabled={!isValidDropdownCaption ? false : !nextMonth}
         onClick={() => handleButtonClick(1)}
+        aria-label={labelNext(locale?.code)}
       >
         <Right aria-hidden />
       </button>

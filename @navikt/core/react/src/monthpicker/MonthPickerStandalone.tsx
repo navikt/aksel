@@ -46,7 +46,7 @@ const MonthSelector = ({
   const { fromDate, toDate, locale } = useDayPicker();
   const monthRefs = useRef(new Array<HTMLButtonElement>());
   const [focus, setFocus] = useState<Date>();
-  console.log(locale);
+
   if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
