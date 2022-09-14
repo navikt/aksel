@@ -77,6 +77,7 @@ export const UseMonthPicker = (props) => {
     locale: "en",
     openOnFocus: true,
     defaultSelected: new Date(),
+    disabled: [new Date("Apr 1 2022")],
   });
 
   useEffect(() => {

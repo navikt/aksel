@@ -7,7 +7,13 @@ import {
   setYear,
   startOfMonth,
 } from "date-fns";
-import React, { forwardRef, useState, useRef, createContext } from "react";
+import React, {
+  forwardRef,
+  useState,
+  useRef,
+  createContext,
+  useEffect,
+} from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
 import { BodyShort, Popover, useId } from "..";
 import { getLocaleFromString } from "../datepicker/utils";
@@ -197,7 +203,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const [selected, setSelected] = React.useState<Date>(
+    const [selected, setSelected] = useState<Date>(
       getDefaultSelected(
         disabled,
         dropdownCaption,
@@ -206,8 +212,12 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
         toDate
       )
     );
-
     const [yearState, setYearState] = useState<Date>(selected);
+
+    useEffect(() => {
+      defaultSelected && setYearState(defaultSelected);
+      defaultSelected && setSelected(defaultSelected);
+    }, [defaultSelected]);
 
     if (dropdownCaption && (!fromDate || !toDate)) return <></>;
 

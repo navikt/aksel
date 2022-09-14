@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { DayClickEventHandler } from "react-day-picker";
+import { useRef, useState } from "react";
+import { isValidDate } from "../../datepicker/utils";
 import { getLocaleFromString } from "../../datepicker/utils/locale";
 import { MonthPickerProps } from "../MonthPicker";
 import { MonthPickerInputProps } from "../MonthPickerInput";
 import { getDefaultSelected } from "../utils/get-initial-month";
+import { isMatch } from "../utils/is-match";
+import { parseDate } from "../utils/parse-date";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -104,6 +106,12 @@ export const useMonthPicker = (
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.target.value);
+    let month = parseDate(e.target.value, selectedMonth, locale);
+    if (!isValidDate(month) || isMatch(month, disabled)) {
+      return;
+    }
+    setSelectedMonth(month);
+    setYear(month);
   };
 
   const inputProps = {
@@ -114,7 +122,7 @@ export const useMonthPicker = (
 
   const monthpickerProps = {
     year,
-    selected: selectedMonth,
+    defaultSelected: selectedMonth,
     locale: _locale,
     fromDate,
     toDate,
@@ -122,6 +130,7 @@ export const useMonthPicker = (
     onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
     ref: monthpickerRef,
+    disabled,
   };
 
   return { setSelected, selectedMonth, inputProps, monthpickerProps };
