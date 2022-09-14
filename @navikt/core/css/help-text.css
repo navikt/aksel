@@ -50,6 +50,7 @@
 
 .navds-help-text__popover.navds-popover {
   background-color: var(--navds-help-text-color-popover-background);
+  max-width: 65ch;
 
   --navds-popover-color-border: rgba(38 38 38 / 0.22);
 }
