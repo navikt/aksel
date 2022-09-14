@@ -83,6 +83,8 @@ export const useMonthPicker = (
     date && setYear(date);
   };
 
+  const [inputValue, setInputValue] = useState("");
+
   const reset = () => {
     setSelectedMonth(initialMonth);
     setYear(initialMonth);
@@ -100,13 +102,18 @@ export const useMonthPicker = (
     console.log("Month click!");
   };
 
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setInputValue(e.target.value);
+  };
+
   const inputProps = {
     onFocus: handleFocus,
+    value: inputValue,
+    onChange: handleChange,
   };
 
   const monthpickerProps = {
     year,
-    onDayClick: handleMonthClick,
     selected: selectedMonth,
     locale: _locale,
     fromDate,
