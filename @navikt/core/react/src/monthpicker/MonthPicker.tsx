@@ -84,6 +84,8 @@ export interface MonthPickerDefaultProps
   onOpenToggle?: () => void;
 }
 
+export type MonthPickerProps = MonthPickerDefaultProps;
+
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerDefaultProps> {
   Standalone: MonthPickerStandaloneType;

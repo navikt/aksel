@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { DayClickEventHandler } from "react-day-picker";
 import { getLocaleFromString } from "../../datepicker/utils/locale";
-import { MonthPickerDefaultProps } from "../MonthPicker";
+import { MonthPickerProps } from "../MonthPicker";
 import { MonthPickerInputProps } from "../MonthPickerInput";
 import { getDefaultSelected } from "../utils/get-initial-month";
 
 export interface UseMonthPickerOptions
   extends Pick<
-    MonthPickerDefaultProps,
+    MonthPickerProps,
     | "locale"
     | "fromDate"
     | "toDate"
@@ -25,6 +26,17 @@ export interface UseMonthPickerOptions
 
 interface UseMonthPickerValue {
   /**
+   * Use: <MonthPicker {...monthpickerProps}/>
+   */
+  monthpickerProps: MonthPickerProps;
+  /**
+   * Use: <MonthPicker.Input {...inputProps}/>
+   */
+  inputProps: Pick<
+    MonthPickerInputProps,
+    "onChange" | "onFocus" | "onBlur" | "value" | "wrapperRef"
+  >;
+  /**
    * Selected month callback
    */
   selectedMonth?: Date;
@@ -34,7 +46,7 @@ interface UseMonthPickerValue {
   setSelected: (date?: Date) => void;
 }
 
-export const useDatepicker = (
+export const useMonthPicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
   const {
@@ -71,5 +83,39 @@ export const useDatepicker = (
     date && setYear(date);
   };
 
-  return { setSelected, selectedMonth };
+  const reset = () => {
+    setSelectedMonth(initialMonth);
+    setYear(initialMonth);
+  };
+
+  const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    !open && openOnFocus && setOpen(true);
+    if (!e.target.value) {
+      reset();
+      return;
+    }
+  };
+
+  const handleMonthClick = () => {
+    console.log("Month click!");
+  };
+
+  const inputProps = {
+    onFocus: handleFocus,
+  };
+
+  const monthpickerProps = {
+    year,
+    onDayClick: handleMonthClick,
+    selected: selectedMonth,
+    locale: _locale,
+    fromDate,
+    toDate,
+    open,
+    onClose: () => setOpen(false),
+    onOpenToggle: () => setOpen((x) => !x),
+    ref: monthpickerRef,
+  };
+
+  return { setSelected, selectedMonth, inputProps, monthpickerProps };
 };

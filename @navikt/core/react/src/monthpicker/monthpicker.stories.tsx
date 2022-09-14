@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MonthPicker from "./MonthPicker";
+import { useMonthPicker } from "./hooks/useMonthPicker";
+import { isValidDate } from "../datepicker/utils";
 
 export default {
   title: "ds-react/Monthpicker",
@@ -70,11 +72,21 @@ export const Standalone = (props) => {
   );
 };
 
-export const PopoverWIP = (props) => {
+export const UseMonthPicker = (props) => {
+  const { selectedMonth, inputProps, monthpickerProps } = useMonthPicker({
+    locale: "en",
+    openOnFocus: true,
+    defaultSelected: new Date(),
+  });
+
+  useEffect(() => {
+    selectedMonth && isValidDate(selectedMonth) && console.log(selectedMonth);
+  }, [selectedMonth]);
+
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker defaultSelected={new Date("Jun 4 2022")}>
-        <MonthPicker.Input label="Velg måned" />
+      <MonthPicker {...monthpickerProps}>
+        <MonthPicker.Input {...inputProps} label="Velg måned" />
       </MonthPicker>
     </div>
   );
