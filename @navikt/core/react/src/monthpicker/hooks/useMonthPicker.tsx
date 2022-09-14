@@ -110,6 +110,9 @@ export const useMonthPicker = (
     if (!isValidDate(month) || isMatch(month, disabled)) {
       return;
     }
+    if (dropdownCaption && !isMatch(month, [{ from: fromDate, to: toDate }])) {
+      return;
+    }
     setSelectedMonth(month);
     setYear(month);
   };
@@ -131,6 +134,7 @@ export const useMonthPicker = (
     onOpenToggle: () => setOpen((x) => !x),
     ref: monthpickerRef,
     disabled,
+    dropdownCaption,
   };
 
   return { setSelected, selectedMonth, inputProps, monthpickerProps };

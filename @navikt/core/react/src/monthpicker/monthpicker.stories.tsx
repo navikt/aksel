@@ -92,3 +92,26 @@ export const UseMonthPicker = (props) => {
     </div>
   );
 };
+
+export const UseMonthPickerWithDropdownCaption = (props) => {
+  const { selectedMonth, inputProps, monthpickerProps } = useMonthPicker({
+    locale: "en",
+    openOnFocus: true,
+    disabled: [new Date("Apr 1 2022")],
+    dropdownCaption: true,
+    fromDate: new Date(),
+    toDate: new Date("Aug 5 2024"),
+  });
+
+  useEffect(() => {
+    selectedMonth && isValidDate(selectedMonth) && console.log(selectedMonth);
+  }, [selectedMonth]);
+
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker {...monthpickerProps}>
+        <MonthPicker.Input {...inputProps} label="Velg måned" />
+      </MonthPicker>
+    </div>
+  );
+};
