@@ -40,7 +40,7 @@ export const Month = ({
   toDate?: Date;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
-
+  const isSelected = isSameMonth(month, selected);
   useEffect(() => {
     if (focus) {
       isSameMonth(month, focus) && ref.current && ref.current.focus();
@@ -63,8 +63,9 @@ export const Month = ({
           month,
           yearState
         ),
-        "navds-monthpicker__month--selected": isSameMonth(month, selected),
+        "navds-monthpicker__month--selected": isSelected,
       })}
+      tabIndex={!isSelected ? -1 : 0}
       onKeyDown={(e) => {
         setFocus(
           nextEnabled(
