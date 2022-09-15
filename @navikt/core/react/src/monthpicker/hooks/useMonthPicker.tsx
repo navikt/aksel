@@ -79,6 +79,9 @@ export const useMonthPicker = (
   const [selectedMonth, setSelectedMonth] = useState(initialMonth);
   const [year, setYear] = useState(selectedMonth);
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(
+    initialMonth ? formatDateForInput(initialMonth, locale) : ""
+  );
 
   const setSelected = (date: Date | undefined) => {
     date && setSelectedMonth(date);
@@ -86,8 +89,6 @@ export const useMonthPicker = (
     setInputValue(date ? formatDateForInput(date, locale) : "");
     console.log(date);
   };
-
-  const [inputValue, setInputValue] = useState("");
 
   const handleFocusOut = useCallback(
     (e) =>
