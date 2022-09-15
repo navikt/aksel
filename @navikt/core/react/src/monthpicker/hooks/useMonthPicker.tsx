@@ -6,6 +6,7 @@ import { MonthPickerInputProps } from "../MonthPickerInput";
 import { getDefaultSelected } from "../utils/get-initial-month";
 import { isMatch } from "../utils/is-match";
 import { parseDate } from "../utils/parse-date";
+import { formatDateForInput } from "../utils/format-date";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -13,12 +14,11 @@ export interface UseMonthPickerOptions
     | "locale"
     | "fromDate"
     | "toDate"
-    | "defaultSelected"
+    | "selected"
     | "disabled"
     | "dropdownCaption"
+    | "onMonthClick"
   > {
-  /** Make the selection required. */
-  required?: boolean;
   /**
    * Opens monthpicker on input-focus
    * @default true
@@ -53,20 +53,20 @@ export const useMonthPicker = (
 ): UseMonthPickerValue => {
   const {
     locale: _locale = "nb",
-    required,
-    defaultSelected,
+    selected,
     fromDate = new Date(),
     toDate,
     openOnFocus = true,
     disabled = [],
     dropdownCaption = false,
+    onMonthClick,
   } = opt;
 
   const initialMonth = getDefaultSelected(
     disabled,
     dropdownCaption,
     fromDate,
-    defaultSelected,
+    selected,
     toDate
   );
 
@@ -100,8 +100,11 @@ export const useMonthPicker = (
     }
   };
 
-  const handleMonthClick = () => {
-    console.log("Month click!");
+  const handleMonthClick = (month?: Date) => {
+    onMonthClick && onMonthClick();
+    month && setSelectedMonth(month);
+    month && setInputValue(formatDateForInput(month, locale));
+    return { useMonthpicker: true };
   };
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -125,16 +128,18 @@ export const useMonthPicker = (
 
   const monthpickerProps = {
     year,
-    defaultSelected: selectedMonth,
+    selected: selectedMonth,
     locale: _locale,
     fromDate,
     toDate,
+    handleMonthClick: handleMonthClick,
     open,
     onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
     ref: monthpickerRef,
     disabled,
     dropdownCaption,
+    onMonthClick: handleMonthClick,
   };
 
   return { setSelected, selectedMonth, inputProps, monthpickerProps };

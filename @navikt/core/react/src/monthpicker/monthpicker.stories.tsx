@@ -19,7 +19,7 @@ export default {
 export const Default = (props) => {
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker defaultSelected={new Date("Jun 4 2022")}>
+      <MonthPicker selected={new Date("Jun 4 2022")}>
         <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
     </div>
@@ -76,7 +76,7 @@ export const UseMonthPicker = (props) => {
   const { selectedMonth, inputProps, monthpickerProps } = useMonthPicker({
     locale: "en",
     openOnFocus: true,
-    defaultSelected: new Date(),
+    selected: new Date(),
     disabled: [new Date("Apr 1 2022")],
   });
 
@@ -102,10 +102,6 @@ export const UseMonthPickerWithDropdownCaption = (props) => {
     fromDate: new Date(),
     toDate: new Date("Aug 5 2024"),
   });
-
-  useEffect(() => {
-    selectedMonth && isValidDate(selectedMonth) && console.log(selectedMonth);
-  }, [selectedMonth]);
 
   return (
     <div style={{ height: "20rem" }}>

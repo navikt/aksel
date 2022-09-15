@@ -60,7 +60,7 @@ export interface MonthPickerDefaultProps
   /**
    * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
    */
-  defaultSelected?: Date;
+  selected?: Date;
   /**
    * Classnames for adding classes
    */
@@ -85,9 +85,13 @@ export interface MonthPickerDefaultProps
   onClose?: () => void;
   /**
    * onOpenToggle callback for user-controlled-state
-   * @remark only called if `<MONTHPicker.Input />` is used
+   * @remark only called if `<MonthPicker.Input />` is used
    */
   onOpenToggle?: () => void;
+  /**
+   * onMonthClick callback for user-controlled-state
+   */
+  onMonthClick?: Function;
 }
 
 export type MonthPickerProps = MonthPickerDefaultProps;
@@ -187,13 +191,14 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       fromDate = new Date(),
       toDate,
       disabled = [],
-      defaultSelected,
+      selected,
       classNames,
       open: _open,
       id,
       onClose,
       onOpenToggle,
       locale = "nb",
+      onMonthClick,
     },
     ref
   ) => {
@@ -203,26 +208,27 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const [selected, setSelected] = useState<Date>(
-      getDefaultSelected(
-        disabled,
-        dropdownCaption,
-        fromDate,
-        defaultSelected,
-        toDate
-      )
+    const [selectedMonth, setSelectedMonth] = useState<Date>(
+      getDefaultSelected(disabled, dropdownCaption, fromDate, selected, toDate)
     );
-    const [yearState, setYearState] = useState<Date>(selected);
+    const [yearState, setYearState] = useState<Date>(selectedMonth);
 
     useEffect(() => {
-      defaultSelected && setYearState(defaultSelected);
-      defaultSelected && setSelected(defaultSelected);
-    }, [defaultSelected]);
+      selected && setYearState(selected);
+      selected && setSelectedMonth(selected);
+    }, [selected]);
 
     if (dropdownCaption && (!fromDate || !toDate)) return <></>;
 
     const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
+
+    const handleSelect = (selectedDay: Date) => {
+      onMonthClick && onMonthClick?.(selectedDay);
+      if (!onMonthClick?.()?.useMonthPicker) {
+        setSelectedMonth(selectedDay);
+      }
+    };
 
     return (
       <MonthPickerContext.Provider
@@ -262,8 +268,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 >
                   <div className="navds-monthpicker__wrapper">
                     <MonthCaption
-                      selected={selected}
-                      onSelect={setSelected}
+                      selected={selectedMonth}
+                      onSelect={setSelectedMonth}
                       dropdownCaption={dropdownCaption}
                       isValidDropdownCaption={isValidDropdownCaption}
                       yearState={yearState}
@@ -271,8 +277,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                     />
                     <MonthSelector
                       dropdownCaption={dropdownCaption}
-                      onSelect={setSelected}
-                      selected={selected}
+                      onSelect={handleSelect}
+                      selected={selectedMonth}
                       disabled={disabled}
                       yearState={yearState}
                       setYearState={setYearState}
