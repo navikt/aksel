@@ -1,7 +1,7 @@
 import { Left, Right } from "@navikt/ds-icons";
-import { setYear, startOfMonth, startOfYear } from "date-fns";
+import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
 import React from "react";
-import { useDayPicker, useNavigation } from "react-day-picker";
+import { useDayPicker } from "react-day-picker";
 import { Select } from "..";
 import {
   hasNextYear,
@@ -25,7 +25,6 @@ export const MonthCaption = ({
   yearState: Date;
   setYearState: Function;
 }) => {
-  const { nextMonth, previousMonth } = useNavigation();
   const {
     fromDate,
     toDate,
@@ -61,11 +60,17 @@ export const MonthCaption = ({
     }
   };
 
+  const hasFollowingYear = (value: number) => {
+    return years.some((y) =>
+      isSameYear(y, setYear(yearState, Number(yearState.getFullYear() + value)))
+    );
+  };
+
   return (
     <div className="navds-monthpicker__caption">
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!isValidDropdownCaption ? false : !!previousMonth}
+        disabled={!isValidDropdownCaption ? false : !hasFollowingYear(-1)}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrev(locale?.code)}
       >
@@ -93,7 +98,7 @@ export const MonthCaption = ({
       )}
       <button
         className="navds-monthpicker__caption-button"
-        disabled={!isValidDropdownCaption ? false : !nextMonth}
+        disabled={!isValidDropdownCaption ? false : !hasFollowingYear(1)}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNext(locale?.code)}
       >
