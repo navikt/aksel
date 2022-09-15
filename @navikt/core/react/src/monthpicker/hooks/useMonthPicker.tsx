@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { isValidDate } from "../../datepicker/utils";
 import { getLocaleFromString } from "../../datepicker/utils/locale";
 import { MonthPickerProps } from "../MonthPicker";
@@ -83,9 +83,25 @@ export const useMonthPicker = (
   const setSelected = (date: Date | undefined) => {
     date && setSelectedMonth(date);
     date && setYear(date);
+    setInputValue(date ? formatDateForInput(date, locale) : "");
+    console.log(date);
   };
 
   const [inputValue, setInputValue] = useState("");
+
+  const handleFocusOut = useCallback(
+    (e) =>
+      ![monthpickerRef.current, inputRef.current].some((element) =>
+        element?.contains(e.relatedTarget)
+      ) && setOpen(false),
+    []
+  );
+
+  useEffect(() => {
+    const el = inputRef.current;
+    el?.addEventListener("focusout", handleFocusOut);
+    return () => el?.removeEventListener?.("focusout", handleFocusOut);
+  }, [handleFocusOut]);
 
   const reset = () => {
     setSelectedMonth(initialMonth);
@@ -124,6 +140,7 @@ export const useMonthPicker = (
     onFocus: handleFocus,
     value: inputValue,
     onChange: handleChange,
+    wrapperRef: inputRef,
   };
 
   const monthpickerProps = {
