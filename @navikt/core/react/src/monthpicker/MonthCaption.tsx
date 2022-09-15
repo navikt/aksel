@@ -2,7 +2,7 @@ import { Left, Right } from "@navikt/ds-icons";
 import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
-import { Select } from "..";
+import { Button, Select } from "..";
 import {
   hasNextYear,
   updateWithoutDropdownCaption,
@@ -68,14 +68,14 @@ export const MonthCaption = ({
 
   return (
     <div className="navds-monthpicker__caption">
-      <button
-        className="navds-monthpicker__caption-button"
+      <Button
+        className="navds-monthpicker__caption-button navds-button"
         disabled={!isValidDropdownCaption ? false : !hasFollowingYear(-1)}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrev(locale?.code)}
-      >
-        <Left aria-hidden />
-      </button>
+        icon={<Left aria-hidden />}
+        variant={"tertiary"}
+      />
 
       {isValidDropdownCaption ? (
         <Select
@@ -96,14 +96,14 @@ export const MonthCaption = ({
           {yearState.getFullYear()}
         </span>
       )}
-      <button
+      <Button
         className="navds-monthpicker__caption-button"
         disabled={!isValidDropdownCaption ? false : !hasFollowingYear(1)}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNext(locale?.code)}
-      >
-        <Right aria-hidden />
-      </button>
+        icon={<Right aria-hidden />}
+        variant={"tertiary"}
+      />
     </div>
   );
 };
