@@ -103,22 +103,16 @@ export const MonthPicker = forwardRef<
       fromDate = new Date(),
       toDate,
       disabled = [],
-      defaultSelected,
+      selected,
       className,
       locale = "nb",
     },
     ref
   ) => {
-    const [selected, setSelected] = React.useState<Date>(
-      getDefaultSelected(
-        disabled,
-        dropdownCaption,
-        fromDate,
-        defaultSelected,
-        toDate
-      )
+    const [selectedMonth, setSelectedMonth] = React.useState<Date>(
+      getDefaultSelected(disabled, dropdownCaption, fromDate, selected, toDate)
     );
-    const [yearState, setYearState] = useState<Date>(selected);
+    const [yearState, setYearState] = useState<Date>(selectedMonth);
 
     if (dropdownCaption && (!fromDate || !toDate)) return <></>;
 
@@ -139,8 +133,8 @@ export const MonthPicker = forwardRef<
         >
           <div className="navds-monthpicker__wrapper">
             <MonthCaption
-              selected={selected}
-              onSelect={setSelected}
+              selected={selectedMonth}
+              onSelect={setSelectedMonth}
               dropdownCaption={dropdownCaption}
               isValidDropdownCaption={isValidDropdownCaption}
               yearState={yearState}
@@ -148,8 +142,8 @@ export const MonthPicker = forwardRef<
             />
             <MonthSelector
               dropdownCaption={dropdownCaption}
-              onSelect={setSelected}
-              selected={selected}
+              onSelect={setSelectedMonth}
+              selected={selectedMonth}
               disabled={disabled}
               yearState={yearState}
               setYearState={setYearState}

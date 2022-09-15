@@ -1,7 +1,7 @@
 import cl from "clsx";
 import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
 import React, { useRef, useEffect } from "react";
-import { dateIsInCurrentMonth, dateIsSelected } from "./utils/check-dates";
+import { dateIsInCurrentMonth } from "./utils/check-dates";
 import { Matcher, isMatch } from "./utils/is-match";
 import { nextEnabled } from "./utils/navigation";
 
@@ -51,7 +51,7 @@ export const Month = ({
     <button
       ref={ref}
       onClick={() =>
-        onSelect(setYear(startOfMonth(month), Number(selected.getFullYear())))
+        onSelect(setYear(startOfMonth(month), Number(yearState.getFullYear())))
       }
       disabled={isMatch(
         setYear(month, Number(yearState.getFullYear())),
@@ -63,7 +63,7 @@ export const Month = ({
           month,
           yearState
         ),
-        "navds-monthpicker__month--selected": dateIsSelected(month, selected),
+        "navds-monthpicker__month--selected": isSameMonth(month, selected),
       })}
       onKeyDown={(e) => {
         setFocus(

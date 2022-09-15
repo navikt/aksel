@@ -52,11 +52,9 @@ export const MonthCaption = ({
     if (isValidDropdownCaption && hasNextYear(yearState, years, val)) {
       newMonth = updateWithDropdownCaption(yearState, selected, years, val);
       setYearState(newMonth);
-      onSelect(newMonth);
     } else if (!isValidDropdownCaption) {
       newMonth = updateWithoutDropdownCaption(yearState, val);
       setYearState(newMonth);
-      onSelect(newMonth);
     }
   };
 
