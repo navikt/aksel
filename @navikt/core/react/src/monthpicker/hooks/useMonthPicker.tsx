@@ -87,7 +87,6 @@ export const useMonthPicker = (
     date && setSelectedMonth(date);
     date && setYear(date);
     setInputValue(date ? formatDateForInput(date, locale) : "");
-    console.log(date);
   };
 
   const handleFocusOut = useCallback(
