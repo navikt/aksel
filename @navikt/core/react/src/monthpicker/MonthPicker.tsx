@@ -90,9 +90,9 @@ export interface MonthPickerDefaultProps
    */
   onOpenToggle?: () => void;
   /**
-   * onMonthClick callback for user-controlled-state
+   * onSelect callback for user-controlled-state
    */
-  onMonthClick?: Function;
+  onSelect?: Function;
 }
 
 export type MonthPickerProps = MonthPickerDefaultProps;
@@ -217,7 +217,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       onClose,
       onOpenToggle,
       locale = "nb",
-      onMonthClick,
+      onSelect,
     },
     ref
   ) => {
@@ -243,8 +243,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       dropdownCaption && fromDate && toDate ? true : false;
 
     const handleSelect = (selectedDay: Date) => {
-      onMonthClick && onMonthClick?.(selectedDay);
-      if (!onMonthClick?.()?.useMonthPicker) {
+      onSelect && onSelect?.(selectedDay);
+      if (!onSelect?.()?.useMonthPicker) {
         setSelectedMonth(selectedDay);
       }
     };
