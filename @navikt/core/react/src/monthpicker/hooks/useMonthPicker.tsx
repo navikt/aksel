@@ -17,7 +17,7 @@ export interface UseMonthPickerOptions
     | "selected"
     | "disabled"
     | "dropdownCaption"
-    | "onSelect"
+    | "onMonthSelect"
   > {
   /**
    * Opens monthpicker on input-focus
@@ -59,7 +59,7 @@ export const useMonthPicker = (
     openOnFocus = true,
     disabled = [],
     dropdownCaption = false,
-    onSelect,
+    onMonthSelect,
   } = opt;
 
   const initialMonth = getDefaultSelected(
@@ -117,7 +117,7 @@ export const useMonthPicker = (
   };
 
   const handleMonthClick = (month?: Date) => {
-    onSelect && onSelect();
+    onMonthSelect && onMonthSelect();
     month && setSelectedMonth(month);
     month && setInputValue(formatDateForInput(month, locale));
     return { useMonthpicker: true };
@@ -156,7 +156,7 @@ export const useMonthPicker = (
     ref: monthpickerRef,
     disabled,
     dropdownCaption,
-    onSelect: handleMonthClick,
+    onMonthSelect: handleMonthClick,
   };
 
   return { setSelected, selectedMonth, inputProps, monthpickerProps };
