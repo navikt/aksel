@@ -1,6 +1,7 @@
 import cl from "clsx";
 import {
   compareAsc,
+  isSameMonth,
   isSameYear,
   setMonth,
   setYear,
@@ -8,7 +9,7 @@ import {
 } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
-import { Matcher } from "./utils/is-match";
+import { isMatch, Matcher } from "./utils/is-match";
 import { BodyShort } from "..";
 import Month from "./Month";
 import { getDefaultSelected } from "./utils/get-initial-month";
@@ -63,6 +64,23 @@ const MonthSelector = ({
     if (dropdownCaption && fromDate) return compareAsc(month, fromDate) === -1;
   };
 
+  const hasSelected = months.some((m) =>
+    isSameMonth(setYear(m, Number(yearState.getFullYear())), selected)
+  );
+
+  const rootFallback = () => {
+    for (let i = 0; i < months.length; i++) {
+      const m = months[i];
+      console.log(m);
+      if (!isMatch(setYear(m, Number(yearState.getFullYear())), disabled)) {
+        return m;
+      }
+    }
+  };
+  const [tabRoot, setTabRoot] = useState(
+    hasSelected ? selected : rootFallback()
+  );
+
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((month: Date, y) => {
@@ -86,6 +104,8 @@ const MonthSelector = ({
             dropdownCaption={dropdownCaption}
             fromDate={fromDate}
             toDate={toDate}
+            tabRoot={tabRoot}
+            setTabRoot={setTabRoot}
           />
         );
       })}

@@ -66,7 +66,7 @@ export const DisabledMonths = (props) => {
 export const Standalone = (props) => {
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker.Standalone />
+      <MonthPicker.Standalone disabled={[new Date("Jan 3 2023")]} />
     </div>
   );
 };

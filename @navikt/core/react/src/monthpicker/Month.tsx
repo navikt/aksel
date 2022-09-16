@@ -21,6 +21,8 @@ export const Month = ({
   dropdownCaption,
   fromDate,
   toDate,
+  tabRoot,
+  setTabRoot,
 }: {
   selected: Date;
   month: Date;
@@ -38,6 +40,8 @@ export const Month = ({
   dropdownCaption: boolean;
   fromDate?: Date;
   toDate?: Date;
+  tabRoot?: Date;
+  setTabRoot: Function;
 }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const isSelected = isSameMonth(month, selected);
@@ -65,7 +69,12 @@ export const Month = ({
         ),
         "navds-monthpicker__month--selected": isSelected,
       })}
-      tabIndex={!isSelected ? -1 : 0}
+      tabIndex={
+        tabRoot &&
+        isSameMonth(month, setYear(tabRoot, Number(yearState.getFullYear())))
+          ? 0
+          : -1
+      }
       onKeyDown={(e) => {
         setFocus(
           nextEnabled(
@@ -81,6 +90,9 @@ export const Month = ({
             toDate
           )
         );
+      }}
+      onFocus={() => {
+        setTabRoot(focus);
       }}
     >
       <span aria-hidden="true">
