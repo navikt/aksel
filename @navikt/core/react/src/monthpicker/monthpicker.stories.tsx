@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useId, useState } from "react";
 import MonthPicker from "./MonthPicker";
 import { useMonthPicker } from "./hooks/useMonthPicker";
+import { Button } from "../..";
 
 export default {
   title: "ds-react/Monthpicker",
@@ -10,6 +11,12 @@ export default {
       control: {
         type: "radio",
         options: ["medium", "small"],
+      },
+    },
+    locale: {
+      control: {
+        type: "radio",
+        options: ["nb", "nn", "en"],
       },
     },
   },
@@ -76,6 +83,25 @@ export const UseMonthPicker = (props) => {
     <div style={{ height: "20rem" }}>
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input {...inputProps} label="Velg måned" />
+      </MonthPicker>
+    </div>
+  );
+};
+
+export const UserControlled = () => {
+  const [open, setOpen] = useState(false);
+  const id = useId();
+
+  return (
+    <div>
+      <MonthPicker open={open} onClose={() => setOpen(false)} id={id}>
+        <Button
+          aria-controls={id}
+          aria-haspopup="grid"
+          onClick={() => setOpen((x) => !x)}
+        >
+          Velg måned
+        </Button>
       </MonthPicker>
     </div>
   );
