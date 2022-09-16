@@ -32,13 +32,6 @@ export const dropdownCaption = (props) => {
         dropdownCaption
         fromDate={new Date("Jan 1 2019")}
         toDate={new Date("Sep 27 2032")}
-        disabled={[
-          { from: new Date("Jan 1 2022"), to: new Date("Jul  6 2022") },
-          { from: new Date("Apr 2 2023"), to: new Date("Dec 4 2023") },
-          { from: new Date("Jan 2 2032"), to: new Date("Aug 4 2032") },
-          new Date("Sep 5 2022"),
-          new Date("Jan 5 2019"),
-        ]}
       >
         <MonthPicker.Input label="Velg måned" />
       </MonthPicker>
@@ -66,7 +59,7 @@ export const DisabledMonths = (props) => {
 export const Standalone = (props) => {
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker.Standalone disabled={[new Date("Jan 3 2023")]} />
+      <MonthPicker.Standalone />
     </div>
   );
 };
@@ -77,25 +70,6 @@ export const UseMonthPicker = (props) => {
     openOnFocus: true,
     selected: new Date(),
     disabled: [new Date("Apr 1 2022")],
-  });
-
-  return (
-    <div style={{ height: "20rem" }}>
-      <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input {...inputProps} label="Velg måned" />
-      </MonthPicker>
-    </div>
-  );
-};
-
-export const UseMonthPickerWithDropdownCaption = (props) => {
-  const { inputProps, monthpickerProps } = useMonthPicker({
-    locale: "en",
-    openOnFocus: true,
-    disabled: [new Date("Apr 1 2022")],
-    dropdownCaption: true,
-    fromDate: new Date(),
-    toDate: new Date("Aug 5 2024"),
   });
 
   return (
