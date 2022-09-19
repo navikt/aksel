@@ -53,7 +53,10 @@ export const Open = () => {
 
   return (
     <HelpText ref={ref} title="show tooltip" strategy="fixed">
-      Id ullamco excepteur elit fugiat labore.
+      Incididunt laborum eiusmod ullamco id aliquip officia ex irure aliqua
+      laboris id ea do nisi. Ex esse ad duis culpa non aliquip exercitation eu
+      culpa cupidatat nisi. Deserunt voluptate consectetur cillum elit qui ad
+      voluptate pariatur.
     </HelpText>
   );
 };
