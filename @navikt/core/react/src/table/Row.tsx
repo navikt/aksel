@@ -7,6 +7,11 @@ export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
    * @default false
    */
   selected?: boolean;
+  /**
+   * Shade the table row  on hover.
+   * @default true
+   */
+  hover?: boolean;
 }
 
 export interface RowType
@@ -15,12 +20,13 @@ export interface RowType
   > {}
 
 export const Row: RowType = forwardRef(
-  ({ className, selected = false, ...rest }, ref) => (
+  ({ className, selected = false, hover = true, ...rest }, ref) => (
     <tr
       {...rest}
       ref={ref}
       className={cl("navds-table__row", className, {
         "navds-table__row--selected": selected,
+        "navds-table__row--hover": hover,
       })}
     />
   )
