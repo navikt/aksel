@@ -19,7 +19,7 @@ const TableComponent = (props) => (
       </Table.Row>
     </Table.Header>
     <Table.Body>
-      <Table.Row hover={props.hover}>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
         {props.button && (
           <Table.DataCell
             style={{
@@ -35,7 +35,7 @@ const TableComponent = (props) => (
         <Table.DataCell>Picard</Table.DataCell>
         <Table.DataCell>Kaptein</Table.DataCell>
       </Table.Row>
-      <Table.Row hover={props.hover}>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
         {props.button && (
           <Table.DataCell
             style={{
@@ -51,7 +51,7 @@ const TableComponent = (props) => (
         <Table.DataCell>Riker</Table.DataCell>
         <Table.DataCell>Kommandør</Table.DataCell>
       </Table.Row>
-      <Table.Row hover={props.hover}>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
         {props.button && (
           <Table.DataCell
             style={{
@@ -73,8 +73,10 @@ const TableComponent = (props) => (
 
 export const Default = () => <TableComponent />;
 export const Zebra = () => <TableComponent zebraStripes />;
-export const NoHover = () => <TableComponent hover={false} />;
-export const ZebraNoHover = () => <TableComponent zebraStripes hover={false} />;
+export const NoShadeOnHover = () => <TableComponent shadeOnHover={false} />;
+export const ZebraNoShadeOnHover = () => (
+  <TableComponent zebraStripes shadeOnHover={false} />
+);
 export const Small = () => <TableComponent size="small" />;
 export const Buttons = () => <TableComponent size="small" button />;
 
