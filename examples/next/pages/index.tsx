@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import type { NextPage } from "next";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Accordion,
   Alert,
@@ -37,7 +37,6 @@ import {
   ToggleGroup,
   Tooltip,
   Textarea,
-  DatePicker,
 } from "@navikt/ds-react";
 import { Cup, Dishwasher, Freezer } from "@navikt/ds-icons";
 import { Dropdown } from "@navikt/ds-react-internal";
@@ -47,6 +46,10 @@ const Home: NextPage = () => {
   const [page, setPage] = useState(2);
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    Modal?.setAppElement?.("#__next");
+  }, []);
 
   return (
     <div className="p-4 m-4 mx-auto bg-white rounded-md max-w-2xl w-full">
@@ -267,9 +270,6 @@ const Home: NextPage = () => {
             </Dropdown.Menu.List>
           </Dropdown.Menu>
         </Dropdown>
-        <DatePicker>
-          <DatePicker.Input label="velg dato" />
-        </DatePicker>
       </div>
     </div>
   );
