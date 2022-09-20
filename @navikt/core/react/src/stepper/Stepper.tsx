@@ -22,6 +22,11 @@ export interface StepperProps extends React.HTMLAttributes<HTMLOListElement> {
    * @note Stepper index starts at 1, not 0
    */
   onStepChange?: (step: number) => void;
+  /**
+   * Makes stepper non-interactive if false
+   * @default true
+   */
+  interactive?: boolean;
 }
 
 interface StepperComponent
@@ -36,6 +41,7 @@ interface StepperContextProps {
   onStepChange: (step: number) => void;
   lastIndex: number;
   orientation: "horizontal" | "vertical";
+  interactive: boolean;
 }
 
 export const StepperContext = createContext<StepperContextProps | null>(null);
@@ -51,6 +57,7 @@ export const Stepper: StepperComponent = forwardRef<
       activeStep,
       orientation = "vertical",
       onStepChange = () => {},
+      interactive = true,
       ...rest
     },
     ref
@@ -72,6 +79,7 @@ export const Stepper: StepperComponent = forwardRef<
             onStepChange,
             lastIndex: React.Children.count(children),
             orientation,
+            interactive,
           }}
         >
           {React.Children.map(children, (step, index) => {

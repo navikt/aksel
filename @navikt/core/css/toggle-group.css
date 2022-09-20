@@ -18,6 +18,12 @@
   );
 }
 
+.navds-toggle-group__wrapper {
+  display: grid;
+  justify-items: start;
+  gap: var(--navds-spacing-2);
+}
+
 .navds-toggle-group {
   border-radius: 7px; /* Custom value OK */
   background-color: var(--navds-toggle-group-color-background);
@@ -90,8 +96,4 @@
   > .navds-toggle-group__button-inner
   > svg {
   font-size: 1.125rem;
-}
-
-.navds-toggle-group__label {
-  margin-bottom: 0.5rem;
 }

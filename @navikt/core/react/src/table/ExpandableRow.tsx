@@ -35,6 +35,11 @@ export interface ExpandableRowProps extends RowProps {
    * @default false
    */
   expansionDisabled?: boolean;
+  /**
+   * The width of the expanded row's internal cell
+   * @default 999
+   */
+  colSpan?: number;
 }
 
 export interface ExpandableRowType
@@ -53,6 +58,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
       open,
       onOpenChange,
       expansionDisabled = false,
+      colSpan = 999,
       ...rest
     },
     ref
@@ -103,7 +109,7 @@ export const ExpandableRow: ExpandableRowType = forwardRef(
           {togglePlacement === "left" && children}
         </Row>
         <tr className="navds-table__expanded-row" aria-hidden={!isOpen} id={id}>
-          <td colSpan={999} className="navds-table__expanded-row-cell">
+          <td colSpan={colSpan} className="navds-table__expanded-row-cell">
             <AnimateHeight
               className="navds-table__expanded-row-collapse"
               innerClassName="navds-table__expanded-row-content"
