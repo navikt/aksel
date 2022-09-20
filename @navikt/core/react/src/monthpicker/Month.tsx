@@ -5,25 +5,7 @@ import { dateIsInCurrentMonth } from "./utils/check-dates";
 import { Matcher, isMatch } from "./utils/is-match";
 import { nextEnabled } from "./utils/navigation";
 
-export const Month = ({
-  selected,
-  month,
-  yearState,
-  disabled,
-  onSelect,
-  locale,
-  months,
-  y,
-  hideMonth,
-  focus,
-  setFocus,
-  setYearState,
-  dropdownCaption,
-  fromDate,
-  toDate,
-  tabRoot,
-  setTabRoot,
-}: {
+interface MonthType {
   selected: Date;
   month: Date;
   yearState: Date;
@@ -42,7 +24,27 @@ export const Month = ({
   toDate?: Date;
   tabRoot?: Date;
   setTabRoot: Function;
-}) => {
+}
+
+export const Month = ({
+  selected,
+  month,
+  yearState,
+  disabled,
+  onSelect,
+  locale,
+  months,
+  y,
+  hideMonth,
+  focus,
+  setFocus,
+  setYearState,
+  dropdownCaption,
+  fromDate,
+  toDate,
+  tabRoot,
+  setTabRoot,
+}: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
   const isSelected = isSameMonth(month, selected);
   useEffect(() => {
