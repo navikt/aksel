@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react-internal",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "NAV internal designsystem react components",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -34,8 +34,8 @@
     "watch": "tsc --watch -p tsconfig.esm.json"
   },
   "dependencies": {
-    "@navikt/ds-icons": "^1.3.1",
-    "@navikt/ds-react": "^1.3.1",
+    "@navikt/ds-icons": "^1.3.2",
+    "@navikt/ds-react": "^1.3.2",
     "clsx": "^1.1.1",
     "copy-to-clipboard": "^3.3.1"
   },
