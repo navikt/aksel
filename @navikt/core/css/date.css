@@ -152,7 +152,6 @@
 }
 
 .navds-date .rdp-day_disabled,
-.navds-monthpicker__month:disabled,
 .navds-monthpicker__month:disabled {
   color: var(--navds-semantic-color-text-muted);
   background-image: linear-gradient(
