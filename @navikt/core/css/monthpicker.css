@@ -97,3 +97,15 @@
   top: 50%;
   transform: translateY(-50%);
 }
+
+.navds-date__field-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+}
+
+.navds-month__field-input:focus,
+.navds-month__field-button {
+  z-index: 1;
+}
