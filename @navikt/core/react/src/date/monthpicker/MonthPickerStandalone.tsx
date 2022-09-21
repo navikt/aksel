@@ -68,23 +68,26 @@ const MonthSelector = ({
     isSameMonth(setYear(m, Number(yearState.getFullYear())), selected)
   );
 
-  const rootFallback = () => {
+  const getRootFallback = () => {
     for (let i = 0; i < months.length; i++) {
       const m = months[i];
-      console.log(m);
       if (!isMatch(setYear(m, Number(yearState.getFullYear())), disabled)) {
-        return m;
+        return setYear(m, Number(yearState.getFullYear()));
       }
     }
   };
   const [tabRoot, setTabRoot] = useState(
-    hasSelected ? selected : rootFallback()
+    hasSelected ? selected : getRootFallback()
   );
+  if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
+    setTabRoot(hasSelected ? selected : getRootFallback());
+  }
 
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((month: Date, y) => {
         const currentRef = (month: any) => monthRefs.current.push(month);
+
         return (
           <Month
             key={month.toDateString()}

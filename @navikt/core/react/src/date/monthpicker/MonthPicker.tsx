@@ -170,6 +170,10 @@ const MonthSelector = ({
     hasSelected ? selected : getRootFallback()
   );
 
+  if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
+    setTabRoot(hasSelected ? selected : getRootFallback());
+  }
+
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((month: Date, y) => {
