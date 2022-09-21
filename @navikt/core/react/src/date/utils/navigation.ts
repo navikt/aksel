@@ -13,6 +13,20 @@ export const nextEnabled = (
   fromDate?: Date,
   toDate?: Date
 ): Date => {
+  if (key === "Home") {
+    if (
+      !dropdownCaption ||
+      (fromDate && yearState.getFullYear() - 1 >= fromDate?.getFullYear())
+    )
+      setYearState(setYear(yearState, Number(yearState.getFullYear() - 1)));
+  }
+  if (key === "End") {
+    if (
+      !dropdownCaption ||
+      (toDate && yearState.getFullYear() + 1 <= toDate?.getFullYear())
+    )
+      setYearState(setYear(yearState, Number(yearState.getFullYear() + 1)));
+  }
   if (key === "ArrowRight") {
     const nextMonth = loopForward(
       currentIndex,
