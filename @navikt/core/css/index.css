@@ -2,7 +2,6 @@
 @import "baseline/baseline.css";
 @import "typography.css";
 @import "grid.css";
-
 @import "accordion.css";
 @import "alert.css";
 @import "button.css";
@@ -10,8 +9,7 @@
 @import "chat.css";
 @import "guide-panel.css";
 @import "form/index.css";
-@import "datepicker.css";
-@import "monthpicker.css";
+@import "date.css";
 @import "help-text.css";
 @import "link.css";
 @import "loader.css";

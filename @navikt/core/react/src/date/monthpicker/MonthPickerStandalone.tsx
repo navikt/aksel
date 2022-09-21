@@ -143,10 +143,7 @@ export const MonthPicker = forwardRef<
       dropdownCaption && fromDate && toDate ? true : false;
 
     return (
-      <div
-        ref={ref}
-        className={cl("navds-date__standalone-wrapper", className)}
-      >
+      <div ref={ref} className={cl("navds-date__wrapper", className)}>
         <RootProvider
           locale={getLocaleFromString(locale)}
           selected={selected}
@@ -154,7 +151,7 @@ export const MonthPicker = forwardRef<
           toDate={toDate}
           fromDate={fromDate}
         >
-          <div className="navds-monthpicker__wrapper">
+          <div className="navds-date navds-monthpicker__wrapper">
             <MonthCaption
               selected={selectedMonth}
               onSelect={setSelectedMonth}

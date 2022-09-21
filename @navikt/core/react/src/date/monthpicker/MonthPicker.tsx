@@ -267,7 +267,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       >
         <div
           ref={wrapperRef}
-          className={cl("navds-month__wrapper", classNames?.wrapper)}
+          className={cl("navds-date__wrapper", classNames?.wrapper)}
         >
           {children}
           <FloatingPortal>
@@ -289,7 +289,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                   toDate={toDate}
                   fromDate={fromDate}
                 >
-                  <div className="navds-monthpicker__wrapper">
+                  <div className="navds-date navds-monthpicker__wrapper">
                     <MonthCaption
                       selected={selectedMonth}
                       onSelect={setSelectedMonth}

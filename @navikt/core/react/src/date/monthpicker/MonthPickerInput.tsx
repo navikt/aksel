@@ -109,7 +109,7 @@ export const MonthPickerInput: MonthPickerInputType = forwardRef<
           type="button"
           size="small"
           onClick={() => onOpen()}
-          className="navds-month__field-button"
+          className="navds-date__field-button"
           icon={
             <Calender
               title={open ? "Lukk månedsvelger" : "Åpne månedsvelger"}

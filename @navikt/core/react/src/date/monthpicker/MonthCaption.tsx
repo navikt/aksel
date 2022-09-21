@@ -65,9 +65,9 @@ export const MonthCaption = ({
   };
 
   return (
-    <div className="navds-monthpicker__caption">
+    <div className="navds-date__caption">
       <Button
-        className="navds-monthpicker__caption-button navds-button"
+        className="navds-date__caption-button navds-button"
         disabled={!isValidDropdownCaption ? false : !hasFollowingYear(-1)}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
@@ -95,7 +95,7 @@ export const MonthCaption = ({
         </span>
       )}
       <Button
-        className="navds-monthpicker__caption-button"
+        className="navds-date__caption-button navds-button"
         disabled={!isValidDropdownCaption ? false : !hasFollowingYear(1)}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}

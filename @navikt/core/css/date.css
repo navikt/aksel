@@ -1,0 +1,237 @@
+/* Datepicker */
+.navds-date .rdp-day_range_middle.rdp-day_disabled {
+  color: var(--navds-semantic-color-text-inverted);
+  background: var(--navds-global-color-deepblue-500);
+}
+
+.navds-date .rdp-month {
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-5);
+}
+
+.navds-date__caption-label {
+  text-transform: capitalize;
+}
+
+.navds-date .rdp-head_cell {
+  text-transform: capitalize;
+  font-size: 14px;
+}
+
+/* Left-side weeknumbers */
+.navds-date .rdp-weeknumber {
+  color: white;
+  background: var(--navds-global-color-gray-800);
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.125rem 0.25rem;
+  border-radius: 2px;
+}
+
+.navds-date .rdp-day_range_start {
+  border-radius: 12px 2px 2px 12px;
+}
+
+.navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-radius: 2px 12px 12px 2px;
+}
+
+.navds-date .rdp-day_range_start.rdp-day_range_end {
+  border-radius: 12px;
+}
+
+.navds-date__caption-dropdown {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navds-date__caption__month-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.navds-date__caption__month .navds-select__container select {
+  text-transform: capitalize;
+}
+
+.navds-date .rdp-button {
+  all: unset;
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  border-radius: 4px;
+}
+
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus {
+  box-shadow: var(--navds-shadow-focus);
+}
+
+.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus {
+  box-shadow: inset 0 0 0 1px white,
+    0 0 0 3px var(--navds-global-color-blue-800);
+}
+
+/* Monthpicker */
+.navds-monthpicker__month {
+  all: unset;
+  text-align: center;
+  width: 47px;
+  height: 44px;
+  text-transform: capitalize;
+  padding: 1px;
+  border: 1px solid transparent;
+  border-radius: var(--navds-border-radius-medium);
+}
+
+.navds-monthpicker__year-label {
+  display: flex;
+  align-items: center;
+}
+
+.navds-monthpicker__month:focus,
+.navds-monthpicker__caption-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  z-index: 1;
+}
+
+.navds-monthpicker__wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
+  padding: var(--navds-spacing-3);
+}
+
+.navds-monthpicker__months {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+/* Shared */
+.navds-date {
+  padding: var(--navds-spacing-3);
+}
+
+.navds-date__wrapper,
+.navds-date__standalone-wrapper {
+  height: fit-content;
+  width: fit-content;
+}
+
+.navds-date .navds-date__field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.navds-date__field-wrapper {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  width: fit-content;
+}
+
+/* Focus layering */
+.navds-date__field-input:focus,
+.navds-date__field-button {
+  z-index: 1;
+}
+
+.navds-date .rdp-day_selected,
+.navds-monthpicker__month--selected {
+  color: var(--navds-semantic-color-text-inverted);
+  background: var(--navds-global-color-deepblue-500);
+}
+
+.navds-date .rdp-day_disabled,
+.navds-monthpicker__month:disabled,
+.navds-monthpicker__month:disabled {
+  color: var(--navds-semantic-color-text-muted);
+  background-image: linear-gradient(
+    135deg,
+    #e8e8e8 10%,
+    var(--navds-global-color-white) 10%,
+    var(--navds-global-color-white) 50%,
+    #e8e8e8 50%,
+    #e8e8e8 60%,
+    var(--navds-global-color-white) 60%,
+    var(--navds-global-color-white) 100%
+  );
+  background-size: 7.07px 7.07px;
+}
+
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):hover,
+.navds-monthpicker__month:not(.navds-monthpicker__month--selected):not([disabled]):hover {
+  background: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  cursor: pointer;
+}
+
+.navds-date .rdp-day_today,
+.navds-monthpicker__month--current {
+  box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
+}
+
+.navds-date__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navds-date__caption-button {
+  width: 3rem;
+  height: 3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  color: var(--navds-global-color-gray-900);
+}
+
+.navds-date__caption-button:hover {
+  background-color: var(
+    --navds-semantic-color-interaction-primary-hover-subtle
+  );
+}
+
+.navds-date__caption-button:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-date__field-input {
+  padding-right: var(--navds-spacing-12);
+}
+
+.navds-form-field--small .navds-date__field-input {
+  padding-right: var(--navds-spacing-8);
+}
+
+.navds-date__field-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.navds-form-field--small .navds-date__field-button {
+  right: 0.5rem;
+  height: 24px;
+  width: 24px;
+}
+
+.navds-form-field--small .navds-date__field-button svg {
+  font-size: 16px;
+}
