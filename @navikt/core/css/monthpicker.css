@@ -25,7 +25,7 @@
 .navds-monthpicker__months {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 2px;
+  gap: 4px;
 }
 
 .navds-monthpicker__month {
@@ -47,6 +47,7 @@
 .navds-monthpicker__month:focus,
 .navds-monthpicker__caption-button:focus {
   box-shadow: var(--navds-shadow-focus);
+  z-index: 1;
 }
 
 .navds-monthpicker__month--current {
