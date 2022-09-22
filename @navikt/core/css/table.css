@@ -33,7 +33,7 @@
   display: table-row;
 }
 
-.navds-table__body .navds-table__row:hover {
+.navds-table__body .navds-table__row--shade-on-hover:hover {
   background-color: var(--navds-table-row-color-background-hover);
 }
 
@@ -41,20 +41,21 @@
   background-color: var(--navds-table-row-color-background-selected);
 }
 
-.navds-table__body .navds-table__row--selected:hover {
+.navds-table__body
+  .navds-table__row--shade-on-hover.navds-table__row--selected:hover {
   background-color: var(--navds-table-row-color-background-selected-hover);
 }
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__row:nth-child(odd):not(:hover):not(.navds-table__row--selected) {
+  :where(.navds-table__row:nth-child(odd):not(.navds-table__row--selected)) {
   background-color: var(--navds-table-row-color-background-zebra);
 }
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__expandable-row:nth-child(4n
-    + 1):not(:hover):not(.navds-table__row--selected) {
+  :where(.navds-table__expandable-row:nth-child(4n
+      + 1):not(.navds-table__row--selected)) {
   background-color: transparent;
 }
 
@@ -87,8 +88,12 @@
   text-align: center;
 }
 
-.navds-table__body .navds-table__row:hover .navds-table__header-cell,
-.navds-table__body .navds-table__row:hover .navds-table__data-cell {
+.navds-table__body
+  .navds-table__row--shade-on-hover:hover
+  .navds-table__header-cell,
+.navds-table__body
+  .navds-table__row--shade-on-hover:hover
+  .navds-table__data-cell {
   border-color: var(--navds-table-cell-color-border-hover);
 }
 
