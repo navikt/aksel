@@ -5,12 +5,7 @@
     "publish": {
       "registry": "https://registry.npmjs.org/",
       "npmClient": "npm",
-      "ignoreChanges": [
-        "*.md",
-        "*.mdx",
-        "*.story.tsx",
-        "*.stories.tsx"
-      ],
+      "ignoreChanges": ["*.md", "*.mdx", "*.story.tsx", "*.stories.tsx"],
       "message": "Lerna versionbump [ci skip]"
     },
     "bootstrap": {
