@@ -14,13 +14,33 @@ export const nextEnabled = (
   toDate?: Date
 ): Date => {
   if (key === "Home") {
+    const nextEnabled = nextOnRow(
+      currentIndex,
+      months,
+      yearState,
+      disabled,
+      "home"
+    );
+    if (nextEnabled) return nextEnabled;
+  }
+  if (key === "End") {
+    const nextEnabled = nextOnRow(
+      currentIndex,
+      months,
+      yearState,
+      disabled,
+      "end"
+    );
+    if (nextEnabled) return nextEnabled;
+  }
+  if (key === "PageUp") {
     if (
       !dropdownCaption ||
       (fromDate && yearState.getFullYear() - 1 >= fromDate?.getFullYear())
     )
       setYearState(setYear(yearState, Number(yearState.getFullYear() - 1)));
   }
-  if (key === "End") {
+  if (key === "PageDown") {
     if (
       !dropdownCaption ||
       (toDate && yearState.getFullYear() + 1 <= toDate?.getFullYear())
@@ -216,4 +236,39 @@ const isOutOfRange = (
   }
 
   return false;
+};
+
+const nextOnRow = (
+  currentIndex: number,
+  months,
+  yearState: Date,
+  disabled: Matcher[],
+  mode: "home" | "end"
+) => {
+  const row = getRow(currentIndex);
+  let monthsOfRow;
+
+  switch (row) {
+    case 1:
+      monthsOfRow = months.slice(0, 4);
+      break;
+    case 2:
+      monthsOfRow = months.slice(4, 8);
+      break;
+    case 3:
+      monthsOfRow = months.slice(8, 12);
+      break;
+    default:
+      break;
+  }
+
+  if (mode === "end") monthsOfRow = monthsOfRow.reverse();
+
+  for (let i = 0; i < monthsOfRow.length; i++) {
+    const month = monthsOfRow[i];
+
+    if (!isMatch(setYear(month, Number(yearState.getFullYear())), disabled)) {
+      return setYear(month, Number(yearState.getFullYear()));
+    }
+  }
 };
