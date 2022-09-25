@@ -21,7 +21,9 @@ export const nextEnabled = (
       disabled,
       "home"
     );
-    if (nextEnabled) return nextEnabled;
+    if (nextEnabled) {
+      return nextEnabled;
+    }
   }
   if (key === "End") {
     const nextEnabled = nextOnRow(

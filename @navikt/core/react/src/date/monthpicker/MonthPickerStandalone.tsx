@@ -61,7 +61,9 @@ const MonthSelector = ({
   }
 
   const hideMonth = (month: Date) => {
-    if (dropdownCaption && fromDate) return compareAsc(month, fromDate) === -1;
+    if (dropdownCaption && fromDate) {
+      return compareAsc(month, fromDate) === -1;
+    }
   };
 
   const hasSelected = months.some((m) =>
@@ -76,9 +78,11 @@ const MonthSelector = ({
       }
     }
   };
+
   const [tabRoot, setTabRoot] = useState(
     hasSelected ? selected : getRootFallback()
   );
+
   if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
     setTabRoot(hasSelected ? selected : getRootFallback());
   }
@@ -137,7 +141,9 @@ export const MonthPicker = forwardRef<
     );
     const [yearState, setYearState] = useState<Date>(selectedMonth);
 
-    if (dropdownCaption && (!fromDate || !toDate)) return <></>;
+    if (dropdownCaption && (!fromDate || !toDate)) {
+      return null;
+    }
 
     const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
