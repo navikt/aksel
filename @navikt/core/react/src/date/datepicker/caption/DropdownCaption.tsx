@@ -44,7 +44,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
       </span>
       <Button
         aria-label={previousLabel}
-        variant={"tertiary"}
+        variant="tertiary"
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
         icon={<Left title="velg forrige månede" />}
@@ -84,7 +84,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         icon={<Right title="velg neste månede" />}
         onClick={() => nextMonth && goToMonth(nextMonth)}
         disabled={!nextMonth}
-        variant={"tertiary"}
+        variant="tertiary"
         className="navds-date__caption-button"
       />
     </div>

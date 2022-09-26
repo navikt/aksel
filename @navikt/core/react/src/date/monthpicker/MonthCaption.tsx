@@ -72,7 +72,7 @@ export const MonthCaption = ({
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
         icon={<Left aria-hidden />}
-        variant={"tertiary"}
+        variant="tertiary"
       />
 
       {isValidDropdownCaption ? (
@@ -100,7 +100,7 @@ export const MonthCaption = ({
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}
         icon={<Right aria-hidden />}
-        variant={"tertiary"}
+        variant="tertiary"
       />
     </div>
   );

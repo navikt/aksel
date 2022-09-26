@@ -36,8 +36,8 @@ test("checkbox group chains onChange calls", async () => {
 describe("Checkbox handles controlled-state correctly", () => {
   const CheckboxComponent = ({ onChange = () => null, value }) => (
     <CheckboxGroup legend="legend" onChange={onChange} value={value}>
-      <Checkbox value={"value1"}>label1</Checkbox>
-      <Checkbox value={"value2"}>label2</Checkbox>
+      <Checkbox value="value1">label1</Checkbox>
+      <Checkbox value="value2">label2</Checkbox>
     </CheckboxGroup>
   );
 
