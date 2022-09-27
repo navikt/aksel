@@ -7,7 +7,7 @@ import {
   setYear,
   startOfMonth,
 } from "date-fns";
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
 import { isMatch, Matcher } from "../utils";
 import { BodyShort } from "../..";
@@ -45,7 +45,6 @@ const MonthSelector = ({
 }) => {
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
-  const monthRefs = useRef(new Array<HTMLButtonElement>());
   const [focus, setFocus] = useState<Date>();
 
   if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
@@ -90,8 +89,6 @@ const MonthSelector = ({
   return (
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((month: Date, y) => {
-        const currentRef = (month: any) => monthRefs.current.push(month);
-
         return (
           <Month
             key={month.toDateString()}
@@ -103,7 +100,6 @@ const MonthSelector = ({
             disabled={disabled}
             onSelect={onSelect}
             months={months}
-            currentRef={currentRef}
             hideMonth={hideMonth}
             focus={focus}
             setFocus={setFocus}
