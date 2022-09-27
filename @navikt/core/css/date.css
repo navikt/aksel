@@ -234,3 +234,7 @@
 .navds-form-field--small .navds-date__field-button svg {
   font-size: 16px;
 }
+
+.navds-date__caption__year {
+  width: 5rem;
+}

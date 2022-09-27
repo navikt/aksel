@@ -81,7 +81,7 @@ export const MonthCaption = ({
           hideLabel
           value={yearState?.getFullYear()}
           onChange={handleYearChange}
-          style={{ width: "79px" }}
+          className="navds-date__caption__year"
         >
           {years.map((year) => (
             <option key={year.getFullYear()} value={year.getFullYear()}>

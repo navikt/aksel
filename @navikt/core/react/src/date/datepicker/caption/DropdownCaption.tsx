@@ -70,6 +70,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
           hideLabel
           value={displayMonth.getFullYear()}
           onChange={handleYearChange}
+          className="navds-date__caption__year"
         >
           {years.map((year) => (
             <option key={year.getFullYear()} value={year.getFullYear()}>
