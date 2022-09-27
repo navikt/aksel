@@ -1,13 +1,5 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
-import {
-  compareAsc,
-  isSameMonth,
-  isSameYear,
-  setMonth,
-  setYear,
-  startOfMonth,
-} from "date-fns";
 import React, {
   createContext,
   forwardRef,
@@ -15,20 +7,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { RootProvider, useDayPicker } from "react-day-picker";
-import { BodyShort, Popover, useId } from "../..";
-import {
-  getDefaultSelected,
-  getLocaleFromString,
-  isMatch,
-  Matcher,
-} from "../utils";
-import Month from "./Month";
+import { RootProvider } from "react-day-picker";
+import { Popover, useId } from "../..";
+import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
 import MonthPickerStandalone, {
   MonthPickerStandaloneType,
 } from "./MonthPickerStandalone";
+import MonthSelector from "./MonthSelector";
 
 export interface MonthPickerDefaultProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -119,92 +106,6 @@ export const MonthPickerContext = createContext<MonthickerContextProps>({
   buttonRef: null,
   ariaId: undefined,
 });
-
-const MonthSelector = ({
-  onSelect,
-  selected,
-  dropdownCaption,
-  disabled,
-  yearState,
-  setYearState,
-}: {
-  onSelect: (m: Date) => void;
-  selected: Date;
-  dropdownCaption: boolean;
-  disabled: Matcher[];
-  yearState: Date;
-  setYearState: Function;
-}) => {
-  const months: Date[] = [];
-  const { fromDate, toDate, locale } = useDayPicker();
-
-  const [focus, setFocus] = useState<Date>();
-
-  if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
-    const date = startOfMonth(fromDate);
-    for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
-      months.push(setMonth(date, month));
-    }
-  } else {
-    const date = startOfMonth(new Date());
-    for (let month = 0; month <= 11; month++) {
-      months.push(setMonth(date, month));
-    }
-  }
-
-  const hideMonth = (month: Date) => {
-    if (dropdownCaption && fromDate) return compareAsc(month, fromDate) === -1;
-  };
-
-  const hasSelected = months.some((m) =>
-    isSameMonth(setYear(m, Number(yearState.getFullYear())), selected)
-  );
-
-  const getRootFallback = () => {
-    for (let i = 0; i < months.length; i++) {
-      const m = months[i];
-      if (!isMatch(setYear(m, Number(yearState.getFullYear())), disabled)) {
-        return setYear(m, Number(yearState.getFullYear()));
-      }
-    }
-  };
-  const [tabRoot, setTabRoot] = useState(
-    hasSelected ? selected : getRootFallback()
-  );
-
-  if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
-    setTabRoot(hasSelected ? selected : getRootFallback());
-  }
-
-  return (
-    <BodyShort as="div" className="navds-monthpicker__months">
-      {months.map((month: Date, y) => {
-        return (
-          <Month
-            key={month.toDateString()}
-            y={y}
-            locale={locale}
-            selected={selected}
-            month={setYear(month, Number(yearState.getFullYear()))}
-            yearState={yearState}
-            disabled={disabled}
-            onSelect={onSelect}
-            months={months}
-            hideMonth={hideMonth}
-            focus={focus}
-            setFocus={setFocus}
-            setYearState={setYearState}
-            dropdownCaption={dropdownCaption}
-            fromDate={fromDate}
-            toDate={toDate}
-            tabRoot={tabRoot}
-            setTabRoot={setTabRoot}
-          />
-        );
-      })}
-    </BodyShort>
-  );
-};
 
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
   (
