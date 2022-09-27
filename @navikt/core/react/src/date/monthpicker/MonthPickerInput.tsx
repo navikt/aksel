@@ -1,11 +1,11 @@
-import cl from "clsx";
 import { Calender } from "@navikt/ds-icons";
+import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
-import { Button } from "../../button";
-import { MonthPickerContext } from "./MonthPicker";
 import { BodyShort, ErrorMessage, Label } from "../..";
+import { Button } from "../../button";
 import { FormFieldProps, useFormField } from "../../form/useFormField";
 import { omit } from "../../util";
+import { MonthPickerContext } from "./MonthPicker";
 
 export interface MonthPickerInputProps
   extends FormFieldProps,

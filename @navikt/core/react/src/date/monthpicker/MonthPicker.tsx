@@ -9,23 +9,26 @@ import {
   startOfMonth,
 } from "date-fns";
 import React, {
-  forwardRef,
-  useState,
-  useRef,
   createContext,
+  forwardRef,
   useEffect,
+  useRef,
+  useState,
 } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
 import { BodyShort, Popover, useId } from "../..";
-import { getLocaleFromString } from "../utils";
+import {
+  getDefaultSelected,
+  getLocaleFromString,
+  isMatch,
+  Matcher,
+} from "../utils";
 import Month from "./Month";
 import MonthCaption from "./MonthCaption";
 import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
 import MonthPickerStandalone, {
   MonthPickerStandaloneType,
 } from "./MonthPickerStandalone";
-import { getDefaultSelected } from "../utils";
-import { isMatch, Matcher } from "../utils";
 
 export interface MonthPickerDefaultProps
   extends React.HTMLAttributes<HTMLDivElement> {

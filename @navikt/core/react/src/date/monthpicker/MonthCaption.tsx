@@ -3,12 +3,12 @@ import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
+import { labelNextYear, labelPrevYear } from "../utils";
 import {
   hasNextYear,
-  updateWithoutDropdownCaption,
   updateWithDropdownCaption,
+  updateWithoutDropdownCaption,
 } from "../utils/handle-selected";
-import { labelPrevYear, labelNextYear } from "../utils";
 
 export const MonthCaption = ({
   selected,

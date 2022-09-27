@@ -9,13 +9,16 @@ import {
 } from "date-fns";
 import React, { forwardRef, useState } from "react";
 import { RootProvider, useDayPicker } from "react-day-picker";
-import { isMatch, Matcher } from "../utils";
 import { BodyShort } from "../..";
+import {
+  getDefaultSelected,
+  getLocaleFromString,
+  isMatch,
+  Matcher,
+} from "../utils";
 import Month from "./Month";
-import { getDefaultSelected } from "../utils";
 import MonthCaption from "./MonthCaption";
 import { MonthPickerDefaultProps } from "./MonthPicker";
-import { getLocaleFromString } from "../utils";
 
 interface MonthPickerStandaloneDefaultProps extends MonthPickerDefaultProps {
   /**

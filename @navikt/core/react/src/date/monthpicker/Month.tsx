@@ -1,8 +1,8 @@
 import cl from "clsx";
 import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
-import React, { useRef, useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { dateIsInCurrentMonth } from "../utils/check-dates";
-import { Matcher, isMatch } from "../utils/is-match";
+import { isMatch, Matcher } from "../utils/is-match";
 import { nextEnabled } from "../utils/navigation";
 
 interface MonthType {
