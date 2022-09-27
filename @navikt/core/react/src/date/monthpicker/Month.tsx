@@ -13,7 +13,6 @@ interface MonthType {
   onSelect: Function;
   locale: any;
   months: Date[];
-  currentRef: any;
   y: number;
   hideMonth: Function;
   focus: Date | undefined;
