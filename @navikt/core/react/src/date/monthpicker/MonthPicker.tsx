@@ -314,6 +314,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
   }
 ) as MonthPickerComponent;
 
-export default MonthPicker;
 MonthPicker.Standalone = MonthPickerStandalone;
 MonthPicker.Input = MonthPickerInput;
+
+export default MonthPicker;
