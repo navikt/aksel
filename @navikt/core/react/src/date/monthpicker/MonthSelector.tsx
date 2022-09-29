@@ -9,13 +9,13 @@ import {
 import React, { useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { BodyShort } from "../..";
+import { useMonthSelectorContext } from "../hooks/useSharedMonthContext";
 import { isMatch, Matcher } from "../utils";
 import Month from "./Month";
 
 interface MonthSelectorType {
   onSelect: (m: Date) => void;
   selected: Date;
-  dropdownCaption: boolean;
   disabled: Matcher[];
   yearState: Date;
   setYearState: Function;
@@ -24,7 +24,6 @@ interface MonthSelectorType {
 export const MonthSelector = ({
   onSelect,
   selected,
-  dropdownCaption,
   disabled,
   yearState,
   setYearState,
@@ -33,7 +32,14 @@ export const MonthSelector = ({
   const { fromDate, toDate, locale } = useDayPicker();
   const [focus, setFocus] = useState<Date>();
 
-  if (dropdownCaption && fromDate && toDate && isSameYear(fromDate, toDate)) {
+  const { isValidDropdownCaption } = useMonthSelectorContext();
+
+  if (
+    isValidDropdownCaption &&
+    fromDate &&
+    toDate &&
+    isSameYear(fromDate, toDate)
+  ) {
     const date = startOfMonth(fromDate);
     for (let month = fromDate.getMonth(); month <= toDate.getMonth(); month++) {
       months.push(setMonth(date, month));
@@ -46,7 +52,7 @@ export const MonthSelector = ({
   }
 
   const hideMonth = (month: Date) => {
-    if (dropdownCaption && fromDate) {
+    if (isValidDropdownCaption && fromDate) {
       return compareAsc(month, fromDate) === -1;
     }
   };
@@ -90,7 +96,6 @@ export const MonthSelector = ({
             focus={focus}
             setFocus={setFocus}
             setYearState={setYearState}
-            dropdownCaption={dropdownCaption}
             fromDate={fromDate}
             toDate={toDate}
             tabRoot={tabRoot}

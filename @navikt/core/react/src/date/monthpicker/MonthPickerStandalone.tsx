@@ -1,6 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
+import { SharedMonthContext } from "../hooks/useSharedMonthContext";
 import { getDefaultSelected, getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import { MonthPickerDefaultProps } from "./MonthPicker";
@@ -55,22 +56,23 @@ export const MonthPicker = forwardRef<
           fromDate={fromDate}
         >
           <div className="navds-date navds-monthpicker__wrapper">
-            <MonthCaption
-              selected={selectedMonth}
-              onSelect={setSelectedMonth}
-              dropdownCaption={dropdownCaption}
-              isValidDropdownCaption={isValidDropdownCaption}
-              yearState={yearState}
-              setYearState={setYearState}
-            />
-            <MonthSelector
-              dropdownCaption={dropdownCaption}
-              onSelect={setSelectedMonth}
-              selected={selectedMonth}
-              disabled={disabled}
-              yearState={yearState}
-              setYearState={setYearState}
-            />
+            <SharedMonthContext.Provider value={{ isValidDropdownCaption }}>
+              <MonthCaption
+                selected={selectedMonth}
+                onSelect={setSelectedMonth}
+                dropdownCaption={dropdownCaption}
+                isValidDropdownCaption={isValidDropdownCaption}
+                yearState={yearState}
+                setYearState={setYearState}
+              />
+              <MonthSelector
+                onSelect={setSelectedMonth}
+                selected={selectedMonth}
+                disabled={disabled}
+                yearState={yearState}
+                setYearState={setYearState}
+              />
+            </SharedMonthContext.Provider>
           </div>
         </RootProvider>
       </div>

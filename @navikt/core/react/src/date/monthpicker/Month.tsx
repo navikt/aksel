@@ -1,6 +1,7 @@
 import cl from "clsx";
 import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
 import React, { useEffect, useRef } from "react";
+import { useMonthSelectorContext } from "../hooks/useSharedMonthContext";
 import { dateIsInCurrentMonth } from "../utils/check-dates";
 import { isMatch, Matcher } from "../utils/is-match";
 import { nextEnabled } from "../utils/navigation";
@@ -18,7 +19,6 @@ interface MonthType {
   focus: Date | undefined;
   setFocus: Function;
   setYearState: Function;
-  dropdownCaption: boolean;
   fromDate?: Date;
   toDate?: Date;
   tabRoot?: Date;
@@ -38,7 +38,6 @@ export const Month = ({
   focus,
   setFocus,
   setYearState,
-  dropdownCaption,
   fromDate,
   toDate,
   tabRoot,
@@ -46,6 +45,9 @@ export const Month = ({
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
   const isSelected = isSameMonth(month, selected);
+
+  const { isValidDropdownCaption } = useMonthSelectorContext();
+
   useEffect(() => {
     if (focus) {
       isSameMonth(month, focus) && ref.current && ref.current.focus();
@@ -86,7 +88,7 @@ export const Month = ({
             month,
             setYearState,
             yearState,
-            dropdownCaption,
+            isValidDropdownCaption,
             fromDate,
             toDate
           )
