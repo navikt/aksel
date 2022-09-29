@@ -4,12 +4,13 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
-import { labelNextYear, labelPrevYear } from "../utils";
 import {
   hasNextYear,
+  labelNextYear,
+  labelPrevYear,
   updateWithDropdownCaption,
   updateWithoutDropdownCaption,
-} from "../utils/handle-selected";
+} from "../utils";
 
 export const MonthCaption = ({
   dropdownCaption,
