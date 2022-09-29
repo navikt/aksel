@@ -13,12 +13,8 @@ import {
 
 export const MonthCaption = ({
   dropdownCaption,
-  yearState,
-  setYearState,
 }: {
   dropdownCaption: boolean;
-  yearState: Date;
-  setYearState: Function;
 }) => {
   const {
     fromDate,
@@ -27,7 +23,8 @@ export const MonthCaption = ({
     locale,
   } = useDayPicker();
 
-  const { isValidDropdownCaption, selectedMonth } = useSharedMonthContext();
+  const { isValidDropdownCaption, selectedMonth, yearState, setYearState } =
+    useSharedMonthContext();
 
   const years: Date[] = [];
 

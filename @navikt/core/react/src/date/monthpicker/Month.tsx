@@ -8,7 +8,6 @@ import { nextEnabled } from "../utils/navigation";
 
 interface MonthType {
   month: Date;
-  yearState: Date;
   disabled: Matcher[];
   locale: any;
   months: Date[];
@@ -16,7 +15,6 @@ interface MonthType {
   hideMonth: Function;
   focus: Date | undefined;
   setFocus: Function;
-  setYearState: Function;
   fromDate?: Date;
   toDate?: Date;
   tabRoot?: Date;
@@ -25,7 +23,6 @@ interface MonthType {
 
 export const Month = ({
   month,
-  yearState,
   disabled,
   locale,
   months,
@@ -33,15 +30,19 @@ export const Month = ({
   hideMonth,
   focus,
   setFocus,
-  setYearState,
   fromDate,
   toDate,
   tabRoot,
   setTabRoot,
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const { isValidDropdownCaption, selectedMonth, onSelect } =
-    useSharedMonthContext();
+  const {
+    isValidDropdownCaption,
+    selectedMonth,
+    onSelect,
+    yearState,
+    setYearState,
+  } = useSharedMonthContext();
   const isSelected = isSameMonth(month, selectedMonth);
 
   useEffect(() => {

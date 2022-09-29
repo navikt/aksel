@@ -199,18 +199,12 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                         onSelect: (date) => {
                           onSelect(date);
                         },
+                        yearState,
+                        setYearState,
                       }}
                     >
-                      <MonthCaption
-                        dropdownCaption={dropdownCaption}
-                        yearState={yearState}
-                        setYearState={setYearState}
-                      />
-                      <MonthSelector
-                        disabled={disabled}
-                        yearState={yearState}
-                        setYearState={setYearState}
-                      />
+                      <MonthCaption dropdownCaption={dropdownCaption} />
+                      <MonthSelector disabled={disabled} />
                     </SharedMonthContext.Provider>
                   </div>
                 </RootProvider>

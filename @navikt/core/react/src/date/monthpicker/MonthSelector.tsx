@@ -15,20 +15,15 @@ import Month from "./Month";
 
 interface MonthSelectorType {
   disabled: Matcher[];
-  yearState: Date;
-  setYearState: Function;
 }
 
-export const MonthSelector = ({
-  disabled,
-  yearState,
-  setYearState,
-}: MonthSelectorType) => {
+export const MonthSelector = ({ disabled }: MonthSelectorType) => {
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
   const [focus, setFocus] = useState<Date>();
 
-  const { isValidDropdownCaption, selectedMonth } = useSharedMonthContext();
+  const { isValidDropdownCaption, selectedMonth, yearState, setYearState } =
+    useSharedMonthContext();
 
   if (
     isValidDropdownCaption &&
@@ -83,13 +78,11 @@ export const MonthSelector = ({
             y={y}
             locale={locale}
             month={setYear(month, Number(yearState.getFullYear()))}
-            yearState={yearState}
             disabled={disabled}
             months={months}
             hideMonth={hideMonth}
             focus={focus}
             setFocus={setFocus}
-            setYearState={setYearState}
             fromDate={fromDate}
             toDate={toDate}
             tabRoot={tabRoot}
