@@ -3,12 +3,11 @@ import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { dateIsInCurrentMonth } from "../utils/check-dates";
-import { isMatch, Matcher } from "../utils/is-match";
+import { isMatch } from "../utils/is-match";
 import { nextEnabled } from "../utils/navigation";
 
 interface MonthType {
   month: Date;
-  disabled: Matcher[];
   locale: any;
   months: Date[];
   y: number;
@@ -23,7 +22,6 @@ interface MonthType {
 
 export const Month = ({
   month,
-  disabled,
   locale,
   months,
   y,
@@ -42,6 +40,7 @@ export const Month = ({
     onSelect,
     yearState,
     setYearState,
+    disabled,
   } = useSharedMonthContext();
   const isSelected = isSameMonth(month, selectedMonth);
 

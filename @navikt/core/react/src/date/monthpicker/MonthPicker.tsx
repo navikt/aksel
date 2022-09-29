@@ -201,10 +201,11 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                         },
                         yearState,
                         setYearState,
+                        disabled,
                       }}
                     >
                       <MonthCaption dropdownCaption={dropdownCaption} />
-                      <MonthSelector disabled={disabled} />
+                      <MonthSelector />
                     </SharedMonthContext.Provider>
                   </div>
                 </RootProvider>

@@ -1,4 +1,5 @@
 import { createContext, useContext } from "react";
+import { Matcher } from "../utils";
 
 export type SharedMonthContextType = {
   isValidDropdownCaption: boolean;
@@ -6,6 +7,7 @@ export type SharedMonthContextType = {
   onSelect: (date: Date) => void;
   yearState: Date;
   setYearState: (date: Date) => void;
+  disabled: Matcher[];
 };
 
 export const SharedMonthContext = createContext<SharedMonthContextType>({
@@ -14,6 +16,7 @@ export const SharedMonthContext = createContext<SharedMonthContextType>({
   onSelect: () => {},
   yearState: new Date(),
   setYearState: () => {},
+  disabled: [],
 });
 
 export const useSharedMonthContext = () => useContext(SharedMonthContext);

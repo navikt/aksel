@@ -10,19 +10,15 @@ import React, { useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { BodyShort } from "../..";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
-import { isMatch, Matcher } from "../utils";
+import { isMatch } from "../utils";
 import Month from "./Month";
 
-interface MonthSelectorType {
-  disabled: Matcher[];
-}
-
-export const MonthSelector = ({ disabled }: MonthSelectorType) => {
+export const MonthSelector = () => {
   const months: Date[] = [];
   const { fromDate, toDate, locale } = useDayPicker();
   const [focus, setFocus] = useState<Date>();
 
-  const { isValidDropdownCaption, selectedMonth, yearState, setYearState } =
+  const { isValidDropdownCaption, selectedMonth, yearState, disabled } =
     useSharedMonthContext();
 
   if (
@@ -78,7 +74,6 @@ export const MonthSelector = ({ disabled }: MonthSelectorType) => {
             y={y}
             locale={locale}
             month={setYear(month, Number(yearState.getFullYear()))}
-            disabled={disabled}
             months={months}
             hideMonth={hideMonth}
             focus={focus}

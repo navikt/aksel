@@ -65,10 +65,11 @@ export const MonthPicker = forwardRef<
                 },
                 yearState,
                 setYearState,
+                disabled,
               }}
             >
               <MonthCaption dropdownCaption={dropdownCaption} />
-              <MonthSelector disabled={disabled} />
+              <MonthSelector />
             </SharedMonthContext.Provider>
           </div>
         </RootProvider>
