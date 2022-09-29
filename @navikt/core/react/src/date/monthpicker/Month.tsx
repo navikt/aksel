@@ -1,17 +1,15 @@
 import cl from "clsx";
 import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
 import React, { useEffect, useRef } from "react";
-import { useMonthSelectorContext } from "../hooks/useSharedMonthContext";
+import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { dateIsInCurrentMonth } from "../utils/check-dates";
 import { isMatch, Matcher } from "../utils/is-match";
 import { nextEnabled } from "../utils/navigation";
 
 interface MonthType {
-  selected: Date;
   month: Date;
   yearState: Date;
   disabled: Matcher[];
-  onSelect: Function;
   locale: any;
   months: Date[];
   y: number;
@@ -26,11 +24,9 @@ interface MonthType {
 }
 
 export const Month = ({
-  selected,
   month,
   yearState,
   disabled,
-  onSelect,
   locale,
   months,
   y,
@@ -44,9 +40,9 @@ export const Month = ({
   setTabRoot,
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const isSelected = isSameMonth(month, selected);
-
-  const { isValidDropdownCaption } = useMonthSelectorContext();
+  const { isValidDropdownCaption, selectedMonth, onSelect } =
+    useSharedMonthContext();
+  const isSelected = isSameMonth(month, selectedMonth);
 
   useEffect(() => {
     if (focus) {

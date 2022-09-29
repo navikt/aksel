@@ -3,6 +3,7 @@ import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
+import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { labelNextYear, labelPrevYear } from "../utils";
 import {
   hasNextYear,
@@ -11,16 +12,10 @@ import {
 } from "../utils/handle-selected";
 
 export const MonthCaption = ({
-  selected,
-  onSelect,
-  isValidDropdownCaption,
   dropdownCaption,
   yearState,
   setYearState,
 }: {
-  selected: Date;
-  onSelect: (m: Date) => void;
-  isValidDropdownCaption: boolean;
   dropdownCaption: boolean;
   yearState: Date;
   setYearState: Function;
@@ -31,6 +26,8 @@ export const MonthCaption = ({
     formatters: { formatYearCaption },
     locale,
   } = useDayPicker();
+
+  const { isValidDropdownCaption, selectedMonth } = useSharedMonthContext();
 
   const years: Date[] = [];
 
@@ -43,14 +40,22 @@ export const MonthCaption = ({
   }
 
   const handleYearChange = (e) => {
-    const newMonth = setYear(startOfMonth(selected), Number(e.target.value));
+    const newMonth = setYear(
+      startOfMonth(selectedMonth),
+      Number(e.target.value)
+    );
     setYearState(newMonth);
   };
 
   const handleButtonClick = (val) => {
     let newMonth: Date;
     if (isValidDropdownCaption && hasNextYear(yearState, years, val)) {
-      newMonth = updateWithDropdownCaption(yearState, selected, years, val);
+      newMonth = updateWithDropdownCaption(
+        yearState,
+        selectedMonth,
+        years,
+        val
+      );
       setYearState(newMonth);
     } else if (!isValidDropdownCaption) {
       newMonth = updateWithoutDropdownCaption(yearState, val);

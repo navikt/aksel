@@ -9,21 +9,17 @@ import {
 import React, { useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { BodyShort } from "../..";
-import { useMonthSelectorContext } from "../hooks/useSharedMonthContext";
+import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { isMatch, Matcher } from "../utils";
 import Month from "./Month";
 
 interface MonthSelectorType {
-  onSelect: (m: Date) => void;
-  selected: Date;
   disabled: Matcher[];
   yearState: Date;
   setYearState: Function;
 }
 
 export const MonthSelector = ({
-  onSelect,
-  selected,
   disabled,
   yearState,
   setYearState,
@@ -32,7 +28,7 @@ export const MonthSelector = ({
   const { fromDate, toDate, locale } = useDayPicker();
   const [focus, setFocus] = useState<Date>();
 
-  const { isValidDropdownCaption } = useMonthSelectorContext();
+  const { isValidDropdownCaption, selectedMonth } = useSharedMonthContext();
 
   if (
     isValidDropdownCaption &&
@@ -58,7 +54,7 @@ export const MonthSelector = ({
   };
 
   const hasSelected = months.some((m) =>
-    isSameMonth(setYear(m, Number(yearState.getFullYear())), selected)
+    isSameMonth(setYear(m, Number(yearState.getFullYear())), selectedMonth)
   );
 
   const getRootFallback = () => {
@@ -71,11 +67,11 @@ export const MonthSelector = ({
   };
 
   const [tabRoot, setTabRoot] = useState(
-    hasSelected ? selected : getRootFallback()
+    hasSelected ? selectedMonth : getRootFallback()
   );
 
   if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
-    setTabRoot(hasSelected ? selected : getRootFallback());
+    setTabRoot(hasSelected ? selectedMonth : getRootFallback());
   }
 
   return (
@@ -86,11 +82,9 @@ export const MonthSelector = ({
             key={month.toDateString()}
             y={y}
             locale={locale}
-            selected={selected}
             month={setYear(month, Number(yearState.getFullYear()))}
             yearState={yearState}
             disabled={disabled}
-            onSelect={onSelect}
             months={months}
             hideMonth={hideMonth}
             focus={focus}

@@ -56,18 +56,21 @@ export const MonthPicker = forwardRef<
           fromDate={fromDate}
         >
           <div className="navds-date navds-monthpicker__wrapper">
-            <SharedMonthContext.Provider value={{ isValidDropdownCaption }}>
+            <SharedMonthContext.Provider
+              value={{
+                isValidDropdownCaption,
+                selectedMonth,
+                onSelect: (date) => {
+                  setSelectedMonth(date);
+                },
+              }}
+            >
               <MonthCaption
-                selected={selectedMonth}
-                onSelect={setSelectedMonth}
                 dropdownCaption={dropdownCaption}
-                isValidDropdownCaption={isValidDropdownCaption}
                 yearState={yearState}
                 setYearState={setYearState}
               />
               <MonthSelector
-                onSelect={setSelectedMonth}
-                selected={selectedMonth}
                 disabled={disabled}
                 yearState={yearState}
                 setYearState={setYearState}

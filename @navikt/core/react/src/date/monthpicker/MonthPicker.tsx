@@ -148,7 +148,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     const isValidDropdownCaption =
       dropdownCaption && fromDate && toDate ? true : false;
 
-    const handleSelect = (selectedDay: Date) => {
+    const onSelect = (selectedDay: Date) => {
       onMonthSelect && onMonthSelect?.(selectedDay);
       if (!onMonthSelect?.()?.useMonthPicker) {
         setSelectedMonth(selectedDay);
@@ -193,19 +193,20 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 >
                   <div className="navds-date navds-monthpicker__wrapper">
                     <SharedMonthContext.Provider
-                      value={{ isValidDropdownCaption }}
+                      value={{
+                        isValidDropdownCaption,
+                        selectedMonth,
+                        onSelect: (date) => {
+                          onSelect(date);
+                        },
+                      }}
                     >
                       <MonthCaption
-                        selected={selectedMonth}
-                        onSelect={setSelectedMonth}
                         dropdownCaption={dropdownCaption}
-                        isValidDropdownCaption={isValidDropdownCaption}
                         yearState={yearState}
                         setYearState={setYearState}
                       />
                       <MonthSelector
-                        onSelect={handleSelect}
-                        selected={selectedMonth}
                         disabled={disabled}
                         yearState={yearState}
                         setYearState={setYearState}
