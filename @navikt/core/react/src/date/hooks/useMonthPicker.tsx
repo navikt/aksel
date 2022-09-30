@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { isValidDate } from "../utils";
-import { getLocaleFromString } from "../utils";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
-import { MonthPickerInputProps } from "../monthpicker/MonthPickerInput";
+import { DateInputProps } from "../shared/DateInput";
+import { getLocaleFromString, isValidDate } from "../utils";
+import { formatDateForInput } from "../utils/format-date";
 import { getDefaultSelected } from "../utils/get-initial-month";
 import { isMatch } from "../utils/is-match";
 import { parseDate } from "../utils/parse-date";
-import { formatDateForInput } from "../utils/format-date";
 
 export interface UseMonthPickerOptions
   extends Pick<
@@ -35,7 +34,7 @@ interface UseMonthPickerValue {
    * Use: <MonthPicker.Input {...inputProps}/>
    */
   inputProps: Pick<
-    MonthPickerInputProps,
+    DateInputProps,
     "onChange" | "onFocus" | "value" | "wrapperRef"
   >;
   /**

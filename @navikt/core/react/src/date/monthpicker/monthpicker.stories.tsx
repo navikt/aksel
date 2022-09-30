@@ -26,7 +26,7 @@ export const Default = (props) => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker selected={new Date("Jun 4 2022")}>
-        <MonthPicker.Input label="Velg måned" />
+        <MonthPicker.Input label="Velg måned" variant="monthpicker" />
       </MonthPicker>
     </div>
   );
@@ -40,7 +40,7 @@ export const dropdownCaption = (props) => {
         fromDate={new Date("Jan 1 2019")}
         toDate={new Date("Sep 27 2032")}
       >
-        <MonthPicker.Input label="Velg måned" />
+        <MonthPicker.Input label="Velg måned" variant="monthpicker" />
       </MonthPicker>
     </div>
   );
@@ -57,7 +57,7 @@ export const DisabledMonths = (props) => {
           new Date("Jan 5 2023"),
         ]}
       >
-        <MonthPicker.Input label="Velg måned" />
+        <MonthPicker.Input label="Velg måned" variant="monthpicker" />
       </MonthPicker>
     </div>
   );
@@ -82,7 +82,11 @@ export const UseMonthPicker = (props) => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker {...monthpickerProps}>
-        <MonthPicker.Input {...inputProps} label="Velg måned" />
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg måned"
+          variant="monthpicker"
+        />
       </MonthPicker>
     </div>
   );

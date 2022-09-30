@@ -10,9 +10,9 @@ import React, {
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { SharedMonthContext } from "../hooks/useSharedMonthContext";
+import DateInput, { DateInputType } from "../shared/DateInput";
 import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
-import MonthPickerInput, { MonthPickerInputType } from "./MonthPickerInput";
 import MonthPickerStandalone, {
   MonthPickerStandaloneType,
 } from "./MonthPickerStandalone";
@@ -91,7 +91,7 @@ export type MonthPickerProps = MonthPickerDefaultProps;
 interface MonthPickerComponent
   extends React.ForwardRefExoticComponent<MonthPickerDefaultProps> {
   Standalone: MonthPickerStandaloneType;
-  Input: MonthPickerInputType;
+  Input: DateInputType;
 }
 
 interface MonthickerContextProps {
@@ -219,6 +219,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
 ) as MonthPickerComponent;
 
 MonthPicker.Standalone = MonthPickerStandalone;
-MonthPicker.Input = MonthPickerInput;
+MonthPicker.Input = DateInput;
 
 export default MonthPicker;
