@@ -1,16 +1,11 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
-import React, {
-  createContext,
-  forwardRef,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
+import { DateInputType, MonthPickerInput } from "../DateInput";
 import { SharedMonthContext } from "../hooks/useSharedMonthContext";
-import DateInput, { DateInputType } from "../shared/DateInput";
+import { DateContext } from "../useDate";
 import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone, {
@@ -94,20 +89,6 @@ interface MonthPickerComponent
   Input: DateInputType;
 }
 
-interface MonthickerContextProps {
-  open: boolean;
-  onOpen: () => void;
-  buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
-  ariaId?: string;
-}
-
-export const MonthPickerContext = createContext<MonthickerContextProps>({
-  open: false,
-  onOpen: () => null,
-  buttonRef: null,
-  ariaId: undefined,
-});
-
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
   (
     {
@@ -156,7 +137,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     };
 
     return (
-      <MonthPickerContext.Provider
+      <DateContext.Provider
         value={{
           open: _open ?? open,
           onOpen: () => {
@@ -213,12 +194,12 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
             )}
           </FloatingPortal>
         </div>
-      </MonthPickerContext.Provider>
+      </DateContext.Provider>
     );
   }
 ) as MonthPickerComponent;
 
 MonthPicker.Standalone = MonthPickerStandalone;
-MonthPicker.Input = DateInput;
+MonthPicker.Input = MonthPickerInput;
 
 export default MonthPicker;

@@ -1,12 +1,11 @@
 import { Calender } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef, InputHTMLAttributes, useContext } from "react";
-import { Button } from "../../button";
-import { FormFieldProps, useFormField } from "../../form/useFormField";
-import { BodyShort, ErrorMessage, Label } from "../../typography";
-import { omit } from "../../util";
-import { DatePickerContext } from "../datepicker/DatePicker";
-import { MonthPickerContext } from "../monthpicker/MonthPicker";
+import { Button } from "../button";
+import { FormFieldProps, useFormField } from "../form/useFormField";
+import { BodyShort, ErrorMessage, Label } from "../typography";
+import { omit } from "../util";
+import { DateContext } from "./useDate";
 
 export interface DateInputProps
   extends FormFieldProps,
@@ -54,7 +53,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
     const isDatepickerVariant = variant === "datepicker";
 
     const conditionalVariables = {
-      context: isDatepickerVariant ? DatePickerContext : MonthPickerContext,
       prefix: isDatepickerVariant ? "datepicker-input" : "monthpicker-input",
       iconTitle: {
         open: isDatepickerVariant ? "Åpne datovelger" : "Åpne månedsvelger",
@@ -62,9 +60,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
       },
     };
 
-    const { onOpen, buttonRef, ariaId, open } = useContext(
-      conditionalVariables.context
-    );
+    const { onOpen, buttonRef, ariaId, open } = useContext(DateContext);
 
     const {
       inputProps,
@@ -161,4 +157,12 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
   }
 );
 
-export default DateInput;
+export const DatePickerInput: DateInputType = forwardRef<
+  HTMLInputElement,
+  DateInputProps
+>((props, ref) => <DateInput {...props} ref={ref} />);
+
+export const MonthPickerInput: DateInputType = forwardRef<
+  HTMLInputElement,
+  DateInputProps
+>((props, ref) => <DateInput {...props} variant="monthpicker" ref={ref} />);

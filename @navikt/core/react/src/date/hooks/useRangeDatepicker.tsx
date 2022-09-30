@@ -1,8 +1,8 @@
 import { differenceInCalendarDays } from "date-fns";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DateRange } from "react-day-picker";
+import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
-import { DatePickerInputProps } from "../datepicker/DatePickerInput";
 import {
   formatDateForInput,
   getLocaleFromString,
@@ -26,14 +26,14 @@ interface UseRangeDatepickerValue {
    * Use: <DatePicker.Input label="from" {...fromInputProps}/>
    */
   fromInputProps: Pick<
-    DatePickerInputProps,
+    DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
   /**
    * Use: <DatePicker.Input label="to" {...toInputProps}/>
    */
   toInputProps: Pick<
-    DatePickerInputProps,
+    DateInputProps,
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
   /**

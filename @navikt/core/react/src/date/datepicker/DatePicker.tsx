@@ -1,7 +1,7 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
 import { isWeekend } from "date-fns";
-import React, { createContext, forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import {
   DateRange,
   DayPicker,
@@ -14,12 +14,13 @@ import {
 } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { omit } from "../../util";
+import { DateInputType, DatePickerInput } from "../DateInput";
+import { DateContext } from "../useDate";
+import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
-import DatePickerInput, { DatePickerInputType } from "./DatePickerInput";
 import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
-import { getLocaleFromString, labels } from "../utils";
 
 export type ConditionalModeProps =
   | {
@@ -124,23 +125,9 @@ export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
 
 interface DatePickerComponent
   extends React.ForwardRefExoticComponent<DatePickerProps> {
-  Input: DatePickerInputType;
   Standalone: DatePickerStandaloneType;
+  Input: DateInputType;
 }
-
-interface DatePickerContextProps {
-  open: boolean;
-  onOpen: () => void;
-  buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
-  ariaId?: string;
-}
-
-export const DatePickerContext = createContext<DatePickerContextProps>({
-  open: false,
-  onOpen: () => null,
-  buttonRef: null,
-  ariaId: undefined,
-});
 
 export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
   (
@@ -207,7 +194,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     };
 
     return (
-      <DatePickerContext.Provider
+      <DateContext.Provider
         value={{
           open: _open ?? open,
           onOpen: () => {
@@ -272,12 +259,12 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             )}
           </FloatingPortal>
         </div>
-      </DatePickerContext.Provider>
+      </DateContext.Provider>
     );
   }
 ) as DatePickerComponent;
 
-DatePicker.Input = DatePickerInput;
 DatePicker.Standalone = DatePickerStandalone;
+DatePicker.Input = DatePickerInput;
 
 export default DatePicker;
