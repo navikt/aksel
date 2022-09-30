@@ -46,6 +46,11 @@ export interface CopyToClipboardProps
    * @default children ? undefined : `Kopier ${copyText}`
    */
   title?: string;
+  /**
+   * Components i tertiary by default. Will be removed in v2.0.0
+   * @breaking v2
+   */
+  variant?: "tertiary";
 }
 
 export const CopyToClipboard = forwardRef<
