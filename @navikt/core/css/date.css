@@ -160,8 +160,8 @@
   background-size: 7.07px 7.07px;
 }
 
-.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):hover,
-.navds-monthpicker__month:not(.navds-monthpicker__month--selected):not([disabled]):hover {
+.navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,
+.navds-monthpicker__month:where(:not(.navds-monthpicker__month--selected):not([disabled])):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
   cursor: pointer;
 }
@@ -179,28 +179,7 @@
 }
 
 .navds-date__caption-button {
-  width: 3rem;
-  height: 3rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 2px;
   color: var(--navds-global-color-gray-900);
-}
-
-.navds-date__caption-button:hover {
-  background-color: var(
-    --navds-semantic-color-interaction-primary-hover-subtle
-  );
-}
-
-.navds-date__caption-button:focus {
-  box-shadow: var(--navds-shadow-focus);
-  outline: none;
 }
 
 .navds-date__field-input {

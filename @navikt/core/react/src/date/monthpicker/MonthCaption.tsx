@@ -76,6 +76,7 @@ export const MonthCaption = ({
         aria-label={labelPrevYear(locale?.code)}
         icon={<Left aria-hidden />}
         variant="tertiary"
+        type="button"
       />
 
       {isValidDropdownCaption ? (
@@ -104,6 +105,7 @@ export const MonthCaption = ({
         aria-label={labelNextYear(locale?.code)}
         icon={<Right aria-hidden />}
         variant="tertiary"
+        type="button"
       />
     </div>
   );
