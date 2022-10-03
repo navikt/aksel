@@ -1,6 +1,14 @@
 import cl from "clsx";
-import { format, isSameMonth, setYear, startOfMonth } from "date-fns";
+import {
+  compareAsc,
+  compareDesc,
+  format,
+  isSameMonth,
+  setYear,
+  startOfMonth,
+} from "date-fns";
 import React, { useEffect, useRef } from "react";
+import { useDayPicker } from "react-day-picker";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { dateIsInCurrentMonth } from "../utils/check-dates";
 import { isMatch } from "../utils/is-match";
@@ -8,28 +16,34 @@ import { nextEnabled } from "../utils/navigation";
 
 interface MonthType {
   month: Date;
-  locale: any;
   months: Date[];
   y: number;
-  hideMonth: Function;
   focus: Date | undefined;
   setFocus: Function;
-  fromDate?: Date;
-  toDate?: Date;
   tabRoot?: Date;
   setTabRoot: Function;
 }
 
+// TODO: fikse dette
+const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
+  if (fromDate && toDate) {
+    return (
+      compareAsc(month, fromDate) === -1 || compareDesc(month, toDate) === -1
+    );
+  } else if (fromDate) {
+    return compareAsc(month, fromDate) === -1;
+  } else if (toDate) {
+    return compareDesc(month, toDate) === -1;
+  }
+  return false;
+};
+
 export const MonthButton = ({
   month,
-  locale,
   months,
   y,
-  hideMonth,
   focus,
   setFocus,
-  fromDate,
-  toDate,
   tabRoot,
   setTabRoot,
 }: MonthType) => {
@@ -42,6 +56,7 @@ export const MonthButton = ({
     setYearState,
     disabled,
   } = useSharedMonthContext();
+  const { fromDate, toDate, locale } = useDayPicker();
   const isSelected = isSameMonth(month, selectedMonth);
 
   useEffect(() => {
@@ -53,15 +68,15 @@ export const MonthButton = ({
   return (
     <button
       ref={ref}
+      type="button"
       onClick={() =>
         onSelect(setYear(startOfMonth(month), Number(yearState.getFullYear())))
       }
-      disabled={isMatch(
-        setYear(month, Number(yearState.getFullYear())),
-        disabled
-      )}
+      disabled={
+        isMatch(setYear(month, Number(yearState.getFullYear())), disabled) ||
+        disableMonth(month, fromDate, toDate)
+      }
       className={cl("navds-monthpicker__month", {
-        "navds-monthpicker__month--hidden": hideMonth(month),
         "navds-monthpicker__month--current": dateIsInCurrentMonth(
           month,
           yearState
