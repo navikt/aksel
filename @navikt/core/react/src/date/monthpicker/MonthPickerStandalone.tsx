@@ -1,5 +1,5 @@
 import cl from "clsx";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { SharedMonthProvider } from "../hooks/useSharedMonthContext";
 import { getLocaleFromString } from "../utils";
@@ -31,9 +31,20 @@ export const MonthPicker = forwardRef<
       selected,
       className,
       locale = "nb",
+      onMonthSelect,
+      defaultSelected,
     },
     ref
   ) => {
+    const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
+      defaultSelected
+    );
+
+    const handleSelect = (month?: Date) => {
+      setSelectedMonth(month);
+      onMonthSelect?.(month);
+    };
+
     if (dropdownCaption && (!fromDate || !toDate)) {
       console.warn("Using dropdownCaption required fromDate and toDate");
       return null;
@@ -43,7 +54,7 @@ export const MonthPicker = forwardRef<
       <div ref={ref} className={cl("navds-date__wrapper", className)}>
         <RootProvider
           locale={getLocaleFromString(locale)}
-          selected={selected}
+          selected={selected ?? selectedMonth}
           toDate={toDate}
           fromDate={fromDate}
         >
@@ -51,7 +62,8 @@ export const MonthPicker = forwardRef<
             <SharedMonthProvider
               dropdownCaption={dropdownCaption}
               disabled={disabled}
-              selected={selected}
+              selected={selected ?? selectedMonth}
+              onSelect={handleSelect}
             >
               <MonthCaption />
               <MonthSelector />

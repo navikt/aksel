@@ -53,7 +53,7 @@ export const useMonthPicker = (
   const {
     locale: _locale = "nb",
     selected,
-    fromDate = new Date(),
+    fromDate,
     toDate,
     openOnFocus = true,
     disabled = [],

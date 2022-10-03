@@ -1,15 +1,12 @@
 import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { DateInputType, MonthPickerInput } from "../DateInput";
-import {
-  SharedMonthContext,
-  SharedMonthProvider,
-} from "../hooks/useSharedMonthContext";
 import { DateContext } from "../hooks/useDateInputContext";
-import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
+import { SharedMonthProvider } from "../hooks/useSharedMonthContext";
+import { getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone, {
   MonthPickerStandaloneType,
@@ -51,6 +48,7 @@ export interface MonthPickerDefaultProps
    * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
    */
   selected?: Date;
+  defaultSelected?: Date;
   /**
    * Open state for user-controlled state
    * @remark Controlled by component by default
@@ -87,7 +85,6 @@ interface MonthPickerComponent
   Input: DateInputType;
 }
 
-/* TODO: Gjøre at man ikke har en defaultselected ved start */
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
   (
     {
@@ -105,6 +102,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       onMonthSelect,
       className,
       wrapperClassName,
+      defaultSelected,
     },
     ref
   ) => {
@@ -114,27 +112,20 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const [selectedMonth, setSelectedMonth] = useState<Date>(
-      getDefaultSelected(disabled, dropdownCaption, selected, toDate, fromDate)
+    const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
+      defaultSelected
     );
-    const [yearState, setYearState] = useState<Date>(selectedMonth);
 
-    useEffect(() => {
-      selected && setYearState(selected);
-      selected && setSelectedMonth(selected);
-    }, [selected]);
+    const handleSelect = (month?: Date) => {
+      setSelectedMonth(month);
+      onMonthSelect?.(month);
+      month && (onClose?.() ?? setOpen(false));
+    };
 
     if (dropdownCaption && (!fromDate || !toDate)) {
       console.warn("Using dropdownCaption required fromDate and toDate");
       return null;
     }
-
-    const onSelect = (selectedDay: Date) => {
-      onMonthSelect && onMonthSelect?.(selectedDay);
-      if (!onMonthSelect?.()?.useMonthPicker) {
-        setSelectedMonth(selectedDay);
-      }
-    };
 
     return (
       <DateContext.Provider
@@ -176,7 +167,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                     <SharedMonthProvider
                       dropdownCaption={dropdownCaption}
                       disabled={disabled}
-                      selected={selected}
+                      selected={selected ?? selectedMonth}
+                      onSelect={handleSelect}
                     >
                       <MonthCaption />
                       <MonthSelector />

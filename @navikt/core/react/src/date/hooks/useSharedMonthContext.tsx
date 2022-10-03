@@ -10,7 +10,7 @@ export type SharedMonthContextType = {
   toYear: (date: Date) => void;
   disabled: Matcher[];
   selected?: Date;
-  onSelect: (v: Date) => void;
+  onSelect: (v?: Date) => void;
 };
 
 export const SharedMonthContext = createContext<SharedMonthContextType>({
@@ -27,18 +27,14 @@ export const SharedMonthProvider = ({
   children,
   dropdownCaption,
   disabled,
-  selected: _selected,
+  selected,
+  onSelect,
 }) => {
   const context = useDayPicker();
-  const [selected, setSelected] = useState<Date | undefined>(_selected);
 
   const [year, toYear] = useState<Date>(getInitialMonth(context));
 
   const hasDropdown = !!(dropdownCaption && context.fromDate && context.toDate);
-
-  const handleSelect = (v: Date) => {
-    setSelected(setYear(startOfMonth(v), year.getFullYear()));
-  };
 
   return (
     <SharedMonthContext.Provider
@@ -48,7 +44,10 @@ export const SharedMonthProvider = ({
         hasDropdown,
         disabled,
         selected,
-        onSelect: handleSelect,
+        onSelect: (v?: Date) =>
+          v
+            ? onSelect(setYear(startOfMonth(v), year.getFullYear()))
+            : undefined,
       }}
     >
       {children}

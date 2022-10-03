@@ -64,7 +64,7 @@ export const MonthButton = ({
     <button
       ref={ref}
       type="button"
-      onClick={() => onSelect(month)}
+      onClick={() => onSelect(isSelected ? undefined : month)}
       disabled={isDisabled}
       className={cl("navds-date__month-button", {
         "rdp-day_today": dateIsInCurrentMonth(month, year),
