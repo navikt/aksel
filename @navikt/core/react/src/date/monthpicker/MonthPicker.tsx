@@ -75,6 +75,14 @@ export interface MonthPickerDefaultProps
    * Classname for wrapper
    */
   wrapperClassName?: string;
+  /**
+   * Used to set visible year programmatically
+   */
+  year?: Date;
+  /**
+   * Event fired when the user navigates between years.
+   */
+  onYearChange?: (y?: Date) => void;
 }
 
 export type MonthPickerProps = MonthPickerDefaultProps;
@@ -103,6 +111,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       className,
       wrapperClassName,
       defaultSelected,
+      year,
+      onYearChange,
     },
     ref
   ) => {
@@ -169,6 +179,8 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                       disabled={disabled}
                       selected={selected ?? selectedMonth}
                       onSelect={handleSelect}
+                      year={year}
+                      onYearChange={onYearChange}
                     >
                       <MonthCaption />
                       <MonthSelector />

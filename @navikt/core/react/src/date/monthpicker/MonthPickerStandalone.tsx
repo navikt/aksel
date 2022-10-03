@@ -33,6 +33,8 @@ export const MonthPicker = forwardRef<
       locale = "nb",
       onMonthSelect,
       defaultSelected,
+      year,
+      onYearChange,
     },
     ref
   ) => {
@@ -64,6 +66,8 @@ export const MonthPicker = forwardRef<
               disabled={disabled}
               selected={selected ?? selectedMonth}
               onSelect={handleSelect}
+              year={year}
+              onYearChange={onYearChange}
             >
               <MonthCaption />
               <MonthSelector />

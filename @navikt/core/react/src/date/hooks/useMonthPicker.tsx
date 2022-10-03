@@ -1,4 +1,3 @@
-import { differenceInMonths } from "date-fns";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
@@ -71,6 +70,7 @@ export const useMonthPicker = (
   const monthpickerRef = useRef<HTMLDivElement>(null);
 
   // Initialize states
+  const [year, setYear] = useState(defaultSelected ?? today);
   const [selectedMonth, setSelectedMonth] = useState(defaultSelected);
   const [open, setOpen] = useState(false);
 
@@ -96,11 +96,13 @@ export const useMonthPicker = (
 
   const reset = () => {
     setSelectedMonth(defaultSelected);
+    setYear(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
   };
 
   const setSelected = (date: Date | undefined) => {
     setSelectedMonth(date);
+    setYear(date ?? today);
     setInputValue(date ? formatDateForInput(date, locale, "month") : "");
   };
 
@@ -112,6 +114,7 @@ export const useMonthPicker = (
     }
     let day = parseDate(e.target.value, today, locale, "month");
     if (isValidDate(day)) {
+      setYear(day);
       setInputValue(formatDateForInput(day, locale, "month"));
     }
   };
@@ -139,29 +142,38 @@ export const useMonthPicker = (
     setInputValue(e.target.value);
     const month = parseDate(e.target.value, today, locale, "month");
 
-    console.log(
-      differenceInMonths(new Date("Oct 2 2032"), new Date("Sep 10 2032"))
-    );
-
-    /* TODO: Skal fungere for xor from/to */
-    /*     const isBefore = fromDate &&  */
+    /* setMonth(month).getMonth() - 1 >= fromDate?.getFullYear(); */
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
       setSelectedMonth(undefined);
       return;
     }
-    if (
+
+    const isBefore =
       fromDate &&
+      (fromDate.getFullYear() > month.getFullYear() ||
+        (fromDate.getFullYear() === month.getFullYear() &&
+          fromDate.getMonth() > month.getMonth()));
+    const isAfter =
       toDate &&
-      !isMatch(month, [{ from: fromDate, to: toDate }])
+      (toDate.getFullYear() < month.getFullYear() ||
+        (toDate.getFullYear() === month.getFullYear() &&
+          toDate.getMonth() < month.getMonth()));
+
+    if (
+      isAfter ||
+      isBefore ||
+      (fromDate && toDate && !isMatch(month, [{ from: fromDate, to: toDate }]))
     ) {
       setSelectedMonth(undefined);
       return;
     }
     setSelectedMonth(month);
-    console.log(month);
+    setYear(month);
   };
 
   const monthpickerProps = {
+    year,
+    onYearChange: (y?: Date) => setYear(y ?? today),
     onMonthSelect: handleMonthClick,
     selected: selectedMonth,
     locale: _locale,

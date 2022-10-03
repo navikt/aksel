@@ -34,21 +34,25 @@ export const nextEnabled = (
       disabled,
       "end"
     );
-    if (nextEnabled) return nextEnabled;
+    if (nextEnabled) {
+      return nextEnabled;
+    }
   }
   if (key === "PageUp") {
     if (
       !dropdownCaption ||
       (fromDate && yearState.getFullYear() - 1 >= fromDate?.getFullYear())
-    )
+    ) {
       setYearState(setYear(yearState, Number(yearState.getFullYear() - 1)));
+    }
   }
   if (key === "PageDown") {
     if (
       !dropdownCaption ||
       (toDate && yearState.getFullYear() + 1 <= toDate?.getFullYear())
-    )
+    ) {
       setYearState(setYear(yearState, Number(yearState.getFullYear() + 1)));
+    }
   }
   if (key === "ArrowRight") {
     const nextMonth = loopForward(
@@ -62,7 +66,9 @@ export const nextEnabled = (
       fromDate,
       toDate
     );
-    if (nextMonth) return setYear(months[nextMonth.index], nextMonth.year);
+    if (nextMonth) {
+      return setYear(months[nextMonth.index], nextMonth.year);
+    }
   }
   if (key === "ArrowLeft") {
     const prevMonth = loopBack(
@@ -76,17 +82,21 @@ export const nextEnabled = (
       fromDate,
       toDate
     );
-    if (prevMonth) return setYear(months[prevMonth.index], prevMonth.year);
+    if (prevMonth) {
+      return setYear(months[prevMonth.index], prevMonth.year);
+    }
   }
   if (key === "ArrowDown") {
     if (
       months[currentIndex + 4] &&
       !isMatch(
-        setYear(months[currentIndex + 4], Number(yearState.getFullYear())),
+        setYear(months[currentIndex + 4], yearState.getFullYear()),
         disabled
       )
-    )
-      return setYear(months[currentIndex + 4], Number(yearState.getFullYear()));
+    ) {
+      return setYear(months[currentIndex + 4], yearState.getFullYear());
+    }
+
     const fallbackNext = loopForward(
       currentIndex,
       months,
@@ -98,8 +108,13 @@ export const nextEnabled = (
       fromDate,
       toDate
     );
-    if (fallbackNext && getRow(fallbackNext.index) !== getRow(currentIndex + 8))
+
+    if (
+      fallbackNext &&
+      getRow(fallbackNext.index) !== getRow(currentIndex + 8)
+    ) {
       return setYear(months[fallbackNext.index], fallbackNext.year);
+    }
   }
 
   if (key === "ArrowUp") {

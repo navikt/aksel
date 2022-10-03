@@ -1,4 +1,4 @@
-import { setYear, startOfMonth } from "date-fns";
+import { setYear, startOfMonth, startOfYear } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { Matcher } from "../utils";
@@ -29,24 +29,29 @@ export const SharedMonthProvider = ({
   disabled,
   selected,
   onSelect,
+  year: _year,
+  onYearChange,
 }) => {
   const context = useDayPicker();
 
-  const [year, toYear] = useState<Date>(getInitialMonth(context));
+  const [year, toYear] = useState<Date>(startOfYear(getInitialMonth(context)));
 
   const hasDropdown = !!(dropdownCaption && context.fromDate && context.toDate);
 
   return (
     <SharedMonthContext.Provider
       value={{
-        year,
-        toYear,
+        year: _year ?? year,
+        toYear: (y) => {
+          toYear(y);
+          onYearChange(y);
+        },
         hasDropdown,
         disabled,
         selected,
         onSelect: (v?: Date) =>
           v
-            ? onSelect(setYear(startOfMonth(v), year.getFullYear()))
+            ? onSelect(setYear(startOfMonth(v), (_year ?? year).getFullYear()))
             : onSelect(undefined),
       }}
     >
