@@ -91,6 +91,7 @@
   padding: 1px;
   border: 1px solid transparent;
   border-radius: var(--navds-border-radius-medium);
+  cursor: pointer;
 }
 
 .navds-date__month-button:focus,
@@ -153,6 +154,7 @@
     var(--navds-global-color-white) 100%
   );
   background-size: 7.07px 7.07px;
+  cursor: not-allowed;
 }
 
 .navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,

@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { differenceInMonths } from "date-fns";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
-import { getLocaleFromString, isValidDate } from "../utils";
-import { formatDateForInput } from "../utils/format-date";
-import { getDefaultSelected } from "../utils/get-initial-month";
+import { formatDateForInput, getLocaleFromString, isValidDate } from "../utils";
 import { isMatch } from "../utils/is-match";
 import { parseDate } from "../utils/parse-date";
 
@@ -13,11 +12,13 @@ export interface UseMonthPickerOptions
     | "locale"
     | "fromDate"
     | "toDate"
-    | "selected"
     | "disabled"
     | "dropdownCaption"
     | "onMonthSelect"
+    | "defaultSelected"
   > {
+  /** Make the selection required. */
+  required?: boolean;
   /**
    * Opens monthpicker on input-focus
    * @default true
@@ -45,48 +46,39 @@ interface UseMonthPickerValue {
    * Manually set selected month if needed
    */
   setSelected: (date?: Date) => void;
+  /**
+   * Resets all states
+   */
+  reset: () => void;
 }
 
 export const useMonthPicker = (
-  opt: UseMonthPickerOptions
+  opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
   const {
     locale: _locale = "nb",
-    selected,
+    defaultSelected,
     fromDate,
     toDate,
     openOnFocus = true,
-    disabled = [],
-    dropdownCaption = false,
-    onMonthSelect,
+    disabled,
   } = opt;
 
-  const initialMonth = getDefaultSelected(
-    disabled,
-    dropdownCaption,
-    fromDate,
-    selected,
-    toDate
-  );
-
+  const today = new Date();
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLDivElement>(null);
   const monthpickerRef = useRef<HTMLDivElement>(null);
 
   // Initialize states
-  const [selectedMonth, setSelectedMonth] = useState(initialMonth);
-  const [year, setYear] = useState(selectedMonth);
+  const [selectedMonth, setSelectedMonth] = useState(defaultSelected);
   const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState(
-    initialMonth ? formatDateForInput(initialMonth, locale, "month") : ""
-  );
 
-  const setSelected = (date: Date | undefined) => {
-    date && setSelectedMonth(date);
-    date && setYear(date);
-    setInputValue(date ? formatDateForInput(date, locale, "month") : "");
-  };
+  const defaultInputValue = defaultSelected
+    ? formatDateForInput(defaultSelected, locale, "month")
+    : "";
+
+  const [inputValue, setInputValue] = useState(defaultInputValue);
 
   const handleFocusOut = useCallback(
     (e) =>
@@ -103,8 +95,13 @@ export const useMonthPicker = (
   }, [handleFocusOut]);
 
   const reset = () => {
-    setSelectedMonth(initialMonth);
-    setYear(initialMonth);
+    setSelectedMonth(defaultSelected);
+    setInputValue(defaultInputValue ?? "");
+  };
+
+  const setSelected = (date: Date | undefined) => {
+    setSelectedMonth(date);
+    setInputValue(date ? formatDateForInput(date, locale, "month") : "");
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
@@ -113,50 +110,77 @@ export const useMonthPicker = (
       reset();
       return;
     }
-  };
-
-  const handleMonthClick = (month?: Date) => {
-    onMonthSelect && onMonthSelect();
-    month && setSelectedMonth(month);
-    month && setInputValue(formatDateForInput(month, locale, "month"));
-    return { useMonthpicker: true };
-  };
-
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputValue(e.target.value);
-    let month = parseDate(e.target.value, selectedMonth, locale, "month");
-    if (!isValidDate(month) || isMatch(month, disabled)) {
-      return;
+    let day = parseDate(e.target.value, today, locale, "month");
+    if (isValidDate(day)) {
+      setInputValue(formatDateForInput(day, locale, "month"));
     }
-    if (dropdownCaption && !isMatch(month, [{ from: fromDate, to: toDate }])) {
+  };
+
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
+    let day = parseDate(e.target.value, today, locale, "month");
+    isValidDate(day) && setInputValue(formatDateForInput(day, locale, "month"));
+  };
+
+  /* Only allow de-selecting if not required */
+  const handleMonthClick = (month?: Date) => {
+    if (/* !required &&  */ !month) {
+      setSelectedMonth(undefined);
+      setInputValue("");
       return;
     }
     setSelectedMonth(month);
-    setYear(month);
+    setInputValue(month ? formatDateForInput(month, locale, "month") : "");
   };
 
-  const inputProps = {
-    onFocus: handleFocus,
-    value: inputValue,
-    onChange: handleChange,
-    wrapperRef: inputRef,
+  // When changing the input field, save its value in state and check if the
+  // string is a valid date. If it is a valid day, set it as selected and update
+  // the calendar’s month.
+  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setInputValue(e.target.value);
+    const month = parseDate(e.target.value, today, locale, "month");
+
+    console.log(
+      differenceInMonths(new Date("Oct 2 2032"), new Date("Sep 10 2032"))
+    );
+
+    /* TODO: Skal fungere for xor from/to */
+    /*     const isBefore = fromDate &&  */
+    if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
+      setSelectedMonth(undefined);
+      return;
+    }
+    if (
+      fromDate &&
+      toDate &&
+      !isMatch(month, [{ from: fromDate, to: toDate }])
+    ) {
+      setSelectedMonth(undefined);
+      return;
+    }
+    setSelectedMonth(month);
+    console.log(month);
   };
 
   const monthpickerProps = {
-    year,
+    onMonthSelect: handleMonthClick,
     selected: selectedMonth,
     locale: _locale,
     fromDate,
     toDate,
-    handleMonthClick: handleMonthClick,
     open,
     onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
-    ref: monthpickerRef,
     disabled,
-    dropdownCaption,
-    onMonthSelect: handleMonthClick,
+    ref: monthpickerRef,
   };
 
-  return { setSelected, selectedMonth, inputProps, monthpickerProps };
+  const inputProps = {
+    onChange: handleChange,
+    onFocus: handleFocus,
+    onBlur: handleBlur,
+    value: inputValue,
+    wrapperRef: inputRef,
+  };
+
+  return { monthpickerProps, inputProps, reset, selectedMonth, setSelected };
 };

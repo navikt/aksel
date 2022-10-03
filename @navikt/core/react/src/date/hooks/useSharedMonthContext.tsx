@@ -47,7 +47,7 @@ export const SharedMonthProvider = ({
         onSelect: (v?: Date) =>
           v
             ? onSelect(setYear(startOfMonth(v), year.getFullYear()))
-            : undefined,
+            : onSelect(undefined),
       }}
     >
       {children}

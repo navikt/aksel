@@ -22,7 +22,7 @@ export default {
   },
 };
 
-export const Default = (props) => {
+export const Default = () => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker selected={new Date("Jun 4 2022")}>
@@ -32,7 +32,7 @@ export const Default = (props) => {
   );
 };
 
-export const dropdownCaption = (props) => {
+export const dropdownCaption = () => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker
@@ -76,7 +76,7 @@ export const DisabledMonths = (props) => {
   );
 };
 
-export const Standalone = (props) => {
+export const Standalone = () => {
   return (
     <div style={{ height: "20rem" }}>
       <MonthPicker.Standalone />
@@ -84,12 +84,12 @@ export const Standalone = (props) => {
   );
 };
 
-export const UseMonthPicker = (props) => {
+export const UseMonthPicker = () => {
   const { inputProps, monthpickerProps } = useMonthPicker({
     locale: "en",
-    openOnFocus: true,
-    selected: new Date(),
+    defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],
+    fromDate: new Date("Feb 1 2022"),
   });
 
   return (
