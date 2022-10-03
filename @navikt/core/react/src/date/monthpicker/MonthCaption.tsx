@@ -12,11 +12,7 @@ import {
   updateWithoutDropdownCaption,
 } from "../utils";
 
-export const MonthCaption = ({
-  dropdownCaption,
-}: {
-  dropdownCaption: boolean;
-}) => {
+export const MonthCaption = () => {
   const {
     fromDate,
     toDate,
@@ -24,12 +20,11 @@ export const MonthCaption = ({
     locale,
   } = useDayPicker();
 
-  const { isValidDropdownCaption, selectedMonth, yearState, setYearState } =
-    useSharedMonthContext();
+  const { hasDropdown, year, toYear } = useSharedMonthContext();
 
   const years: Date[] = [];
 
-  if (dropdownCaption && fromDate && toDate) {
+  if (hasDropdown && fromDate && toDate) {
     const fromYear = fromDate.getFullYear();
     const toYear = toDate.getFullYear();
     for (let year = fromYear; year <= toYear; year++) {
@@ -37,33 +32,23 @@ export const MonthCaption = ({
     }
   }
 
-  const handleYearChange = (e) => {
-    const newMonth = setYear(
-      startOfMonth(selectedMonth),
-      Number(e.target.value)
-    );
-    setYearState(newMonth);
-  };
+  const handleYearChange = (e) =>
+    toYear(setYear(startOfMonth(new Date()), Number(e.target.value)));
 
-  const handleButtonClick = (val) => {
+  const handleButtonClick = (val: number) => {
     let newMonth: Date;
-    if (isValidDropdownCaption && hasNextYear(yearState, years, val)) {
-      newMonth = updateWithDropdownCaption(
-        yearState,
-        selectedMonth,
-        years,
-        val
-      );
-      setYearState(newMonth);
-    } else if (!isValidDropdownCaption) {
-      newMonth = updateWithoutDropdownCaption(yearState, val);
-      setYearState(newMonth);
+    if (hasDropdown && hasNextYear(year, years, val)) {
+      newMonth = updateWithDropdownCaption(year, val);
+      toYear(newMonth);
+    } else if (!hasDropdown) {
+      newMonth = updateWithoutDropdownCaption(year, val);
+      toYear(newMonth);
     }
   };
 
   const hasFollowingYear = (value: number) => {
     return years.some((y) =>
-      isSameYear(y, setYear(yearState, Number(yearState.getFullYear() + value)))
+      isSameYear(y, setYear(year, Number(year.getFullYear() + value)))
     );
   };
 
@@ -71,7 +56,7 @@ export const MonthCaption = ({
     <div className="navds-date__caption">
       <Button
         className="navds-date__caption-button"
-        disabled={!isValidDropdownCaption ? false : !hasFollowingYear(-1)}
+        disabled={!hasDropdown ? false : !hasFollowingYear(-1)}
         onClick={() => handleButtonClick(-1)}
         aria-label={labelPrevYear(locale?.code)}
         icon={<Left aria-hidden />}
@@ -79,11 +64,11 @@ export const MonthCaption = ({
         type="button"
       />
 
-      {isValidDropdownCaption ? (
+      {hasDropdown ? (
         <Select
           label="velg år"
           hideLabel
-          value={yearState?.getFullYear()}
+          value={year?.getFullYear()}
           onChange={handleYearChange}
           className="navds-date__caption__year"
         >
@@ -95,12 +80,12 @@ export const MonthCaption = ({
         </Select>
       ) : (
         <span className="navds-date__year-label" aria-live="polite">
-          {yearState.getFullYear()}
+          {year.getFullYear()}
         </span>
       )}
       <Button
         className="navds-date__caption-button"
-        disabled={!isValidDropdownCaption ? false : !hasFollowingYear(1)}
+        disabled={!hasDropdown ? false : !hasFollowingYear(1)}
         onClick={() => handleButtonClick(1)}
         aria-label={labelNextYear(locale?.code)}
         icon={<Right aria-hidden />}

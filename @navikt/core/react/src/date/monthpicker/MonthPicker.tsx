@@ -4,7 +4,10 @@ import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { DateInputType, MonthPickerInput } from "../DateInput";
-import { SharedMonthContext } from "../hooks/useSharedMonthContext";
+import {
+  SharedMonthContext,
+  SharedMonthProvider,
+} from "../hooks/useSharedMonthContext";
 import { DateContext } from "../hooks/useDateInputContext";
 import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
@@ -121,10 +124,10 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       selected && setSelectedMonth(selected);
     }, [selected]);
 
-    if (dropdownCaption && (!fromDate || !toDate)) return <></>;
-
-    const isValidDropdownCaption =
-      dropdownCaption && fromDate && toDate ? true : false;
+    if (dropdownCaption && (!fromDate || !toDate)) {
+      console.warn("Using dropdownCaption required fromDate and toDate");
+      return null;
+    }
 
     const onSelect = (selectedDay: Date) => {
       onMonthSelect && onMonthSelect?.(selectedDay);
@@ -170,21 +173,14 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                   fromDate={fromDate}
                 >
                   <div className={cl("rdp-month", className)}>
-                    <SharedMonthContext.Provider
-                      value={{
-                        isValidDropdownCaption,
-                        selectedMonth,
-                        onSelect: (date) => {
-                          onSelect(date);
-                        },
-                        yearState,
-                        setYearState,
-                        disabled,
-                      }}
+                    <SharedMonthProvider
+                      dropdownCaption={dropdownCaption}
+                      disabled={disabled}
+                      selected={selected}
                     >
-                      <MonthCaption dropdownCaption={dropdownCaption} />
+                      <MonthCaption />
                       <MonthSelector />
-                    </SharedMonthContext.Provider>
+                    </SharedMonthProvider>
                   </div>
                 </RootProvider>
               </Popover>

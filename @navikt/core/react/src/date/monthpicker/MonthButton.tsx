@@ -5,7 +5,6 @@ import {
   format,
   isSameMonth,
   setYear,
-  startOfMonth,
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
@@ -24,17 +23,13 @@ interface MonthType {
 }
 
 const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
-  console.log(fromDate);
   if (fromDate && toDate) {
-    console.log("here2");
     return (
       compareAsc(month, fromDate) === -1 || compareDesc(month, toDate) === -1
     );
   } else if (fromDate) {
-    console.log("here3");
     return compareAsc(month, fromDate) === -1;
   } else if (toDate) {
-    console.log("here4");
     return compareDesc(month, toDate) === -1;
   }
   return false;
@@ -49,16 +44,11 @@ export const MonthButton = ({
   setTabRoot,
 }: MonthType) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const {
-    isValidDropdownCaption,
-    selectedMonth,
-    onSelect,
-    yearState,
-    setYearState,
-    disabled,
-  } = useSharedMonthContext();
+  const { hasDropdown, selected, onSelect, year, toYear, disabled } =
+    useSharedMonthContext();
+
   const { fromDate, toDate, locale } = useDayPicker();
-  const isSelected = isSameMonth(month, selectedMonth);
+  const isSelected = selected && isSameMonth(month, selected);
 
   useEffect(() => {
     if (focus) {
@@ -67,26 +57,22 @@ export const MonthButton = ({
   }, [focus, month]);
 
   const isDisabled =
-    isMatch(setYear(month, yearState.getFullYear()), disabled) ||
+    isMatch(setYear(month, year.getFullYear()), disabled) ||
     disableMonth(month, fromDate, toDate);
 
-  console.log(isDisabled);
   return (
     <button
       ref={ref}
       type="button"
-      onClick={() =>
-        onSelect(setYear(startOfMonth(month), Number(yearState.getFullYear())))
-      }
+      onClick={() => onSelect(month)}
       disabled={isDisabled}
       className={cl("navds-date__month-button", {
-        "rdp-day_today": dateIsInCurrentMonth(month, yearState),
+        "rdp-day_today": dateIsInCurrentMonth(month, year),
         "rdp-day_selected": isSelected,
         "rdp-day_disabled": isDisabled,
       })}
       tabIndex={
-        tabRoot &&
-        isSameMonth(month, setYear(tabRoot, Number(yearState.getFullYear())))
+        tabRoot && isSameMonth(month, setYear(tabRoot, year.getFullYear()))
           ? 0
           : -1
       }
@@ -97,9 +83,9 @@ export const MonthButton = ({
             e.key,
             disabled,
             month,
-            setYearState,
-            yearState,
-            isValidDropdownCaption,
+            toYear,
+            year,
+            hasDropdown,
             fromDate,
             toDate
           )

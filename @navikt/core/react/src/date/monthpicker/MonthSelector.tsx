@@ -17,29 +17,37 @@ const getAllMonths = () => {
 export const MonthSelector = () => {
   const [focus, setFocus] = useState<Date>();
 
-  const { selectedMonth, yearState, disabled } = useSharedMonthContext();
+  const { selected, year, disabled } = useSharedMonthContext();
 
   const months: Date[] = getAllMonths();
 
-  const hasSelected = months.some((m) =>
-    isSameMonth(setYear(m, yearState.getFullYear()), selectedMonth)
-  );
+  const hasSelected =
+    selected &&
+    months.some((m) => isSameMonth(setYear(m, year.getFullYear()), selected));
 
   const getRootFallback = () => {
+    const today = startOfMonth(new Date());
+    if (
+      year?.getFullYear() === today.getFullYear() &&
+      !isMatch(today, disabled)
+    ) {
+      return today;
+    }
+
     for (let i = 0; i < months.length; i++) {
       const m = months[i];
-      if (!isMatch(setYear(m, yearState.getFullYear()), disabled)) {
-        return setYear(m, yearState.getFullYear());
+      if (!isMatch(setYear(m, year.getFullYear()), disabled)) {
+        return setYear(m, year.getFullYear());
       }
     }
   };
 
   const [tabRoot, setTabRoot] = useState(
-    hasSelected ? selectedMonth : getRootFallback()
+    hasSelected ? selected : getRootFallback()
   );
 
-  if (tabRoot?.getFullYear() !== yearState.getFullYear()) {
-    setTabRoot(hasSelected ? selectedMonth : getRootFallback());
+  if (tabRoot?.getFullYear() !== year.getFullYear()) {
+    setTabRoot(hasSelected ? selected : getRootFallback());
   }
 
   const tableMonths = [
@@ -57,7 +65,7 @@ export const MonthSelector = () => {
               return (
                 <td key={month.toDateString()} className="rdp-cell">
                   <MonthButton
-                    month={setYear(month, yearState.getFullYear())}
+                    month={setYear(month, year.getFullYear())}
                     months={months}
                     focus={focus}
                     setFocus={setFocus}

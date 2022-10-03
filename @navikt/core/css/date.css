@@ -69,7 +69,9 @@
   border-radius: 4px;
 }
 
-.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus {
+.navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
+.navds-date
+  .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus {
   box-shadow: var(--navds-shadow-focus);
 }
 

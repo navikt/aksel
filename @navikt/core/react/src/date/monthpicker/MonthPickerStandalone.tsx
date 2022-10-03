@@ -1,8 +1,8 @@
 import cl from "clsx";
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { RootProvider } from "react-day-picker";
-import { SharedMonthContext } from "../hooks/useSharedMonthContext";
-import { getDefaultSelected, getLocaleFromString } from "../utils";
+import { SharedMonthProvider } from "../hooks/useSharedMonthContext";
+import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import { MonthPickerDefaultProps } from "./MonthPicker";
 import MonthSelector from "./MonthSelector";
@@ -25,7 +25,7 @@ export const MonthPicker = forwardRef<
   (
     {
       dropdownCaption = false,
-      fromDate = new Date(),
+      fromDate,
       toDate,
       disabled = [],
       selected,
@@ -34,17 +34,10 @@ export const MonthPicker = forwardRef<
     },
     ref
   ) => {
-    const [selectedMonth, setSelectedMonth] = React.useState<Date>(
-      getDefaultSelected(disabled, dropdownCaption, fromDate, selected, toDate)
-    );
-    const [yearState, setYearState] = useState<Date>(selectedMonth);
-
     if (dropdownCaption && (!fromDate || !toDate)) {
+      console.warn("Using dropdownCaption required fromDate and toDate");
       return null;
     }
-
-    const isValidDropdownCaption =
-      dropdownCaption && fromDate && toDate ? true : false;
 
     return (
       <div ref={ref} className={cl("navds-date__wrapper", className)}>
@@ -55,21 +48,14 @@ export const MonthPicker = forwardRef<
           fromDate={fromDate}
         >
           <div className="navds-date rdp-month">
-            <SharedMonthContext.Provider
-              value={{
-                isValidDropdownCaption,
-                selectedMonth,
-                onSelect: (date) => {
-                  setSelectedMonth(date);
-                },
-                yearState,
-                setYearState,
-                disabled,
-              }}
+            <SharedMonthProvider
+              dropdownCaption={dropdownCaption}
+              disabled={disabled}
+              selected={selected}
             >
-              <MonthCaption dropdownCaption={dropdownCaption} />
+              <MonthCaption />
               <MonthSelector />
-            </SharedMonthContext.Provider>
+            </SharedMonthProvider>
           </div>
         </RootProvider>
       </div>
