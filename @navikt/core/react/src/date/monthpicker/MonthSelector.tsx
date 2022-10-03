@@ -11,7 +11,7 @@ import { useDayPicker } from "react-day-picker";
 import { BodyShort } from "../..";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { isMatch } from "../utils";
-import Month from "./Month";
+import MonthButton from "./MonthButton";
 
 export const MonthSelector = () => {
   const months: Date[] = [];
@@ -69,7 +69,7 @@ export const MonthSelector = () => {
     <BodyShort as="div" className="navds-monthpicker__months">
       {months.map((month: Date, y) => {
         return (
-          <Month
+          <MonthButton
             key={month.toDateString()}
             y={y}
             locale={locale}

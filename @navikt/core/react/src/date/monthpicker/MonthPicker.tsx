@@ -49,18 +49,9 @@ export interface MonthPickerDefaultProps
    */
   selected?: Date;
   /**
-   * Classnames for adding classes
+   * Classname
    */
-  classNames?: {
-    /**
-     * Children wrapper
-     */
-    wrapper?: string;
-    /**
-     * DatePicker-wrapper
-     */
-    datepicker?: string;
-  };
+  className?: string;
   /**
    * Open state for user-controlled state
    * @remark Controlled by component by default
@@ -98,13 +89,13 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       toDate,
       disabled = [],
       selected,
-      classNames,
       open: _open,
       id,
       onClose,
       onOpenToggle,
       locale = "nb",
       onMonthSelect,
+      className,
     },
     ref
   ) => {
@@ -148,10 +139,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
           ariaId,
         }}
       >
-        <div
-          ref={wrapperRef}
-          className={cl("navds-date__wrapper", classNames?.wrapper)}
-        >
+        <div ref={wrapperRef} className={cl("navds-date__wrapper", className)}>
           {children}
           <FloatingPortal>
             {(_open ?? open) && (

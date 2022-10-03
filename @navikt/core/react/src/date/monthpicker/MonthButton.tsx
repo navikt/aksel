@@ -20,7 +20,7 @@ interface MonthType {
   setTabRoot: Function;
 }
 
-export const Month = ({
+export const MonthButton = ({
   month,
   locale,
   months,
@@ -106,4 +106,4 @@ export const Month = ({
   );
 };
 
-export default Month;
+export default MonthButton;
