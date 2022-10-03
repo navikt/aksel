@@ -15,7 +15,7 @@ import {
 import { Popover, useId } from "../..";
 import { omit } from "../../util";
 import { DateInputType, DatePickerInput } from "../DateInput";
-import { DateContext } from "../useDate";
+import { DateContext } from "../hooks/useDateInputContext";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import DatePickerStandalone, {

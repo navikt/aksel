@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 interface DateContextContextProps {
   open: boolean;
@@ -13,3 +13,5 @@ export const DateContext = createContext<DateContextContextProps>({
   buttonRef: null,
   ariaId: undefined,
 });
+
+export const useDateInputContext = () => useContext(DateContext);

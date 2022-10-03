@@ -5,7 +5,7 @@ import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { DateInputType, MonthPickerInput } from "../DateInput";
 import { SharedMonthContext } from "../hooks/useSharedMonthContext";
-import { DateContext } from "../useDate";
+import { DateContext } from "../hooks/useDateInputContext";
 import { getDefaultSelected, getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone, {
