@@ -3,7 +3,6 @@ import { isMatch, Matcher } from "./is-match";
 
 export const nextEnabled = (
   months,
-  currentIndex: number,
   key: string,
   disabled: Matcher[],
   currentMonth: Date,
@@ -13,6 +12,8 @@ export const nextEnabled = (
   fromDate?: Date,
   toDate?: Date
 ): Date => {
+  const currentIndex = currentMonth.getMonth();
+
   if (key === "Home") {
     const nextEnabled = nextOnRow(
       currentIndex,

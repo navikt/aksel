@@ -73,13 +73,14 @@
   box-shadow: var(--navds-shadow-focus);
 }
 
-.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus {
+.navds-date .rdp-button.rdp-day_selected:not([disabled]):focus,
+.navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus {
   box-shadow: inset 0 0 0 1px white,
     0 0 0 3px var(--navds-global-color-blue-800);
 }
 
 /* Monthpicker */
-.navds-monthpicker__month {
+.navds-date__month-button {
   all: unset;
   text-align: center;
   width: 47px;
@@ -90,24 +91,17 @@
   border-radius: var(--navds-border-radius-medium);
 }
 
-.navds-monthpicker__year-label {
-  display: flex;
-  align-items: center;
-}
-
-.navds-monthpicker__month:focus,
+.navds-date__month-button:focus,
 .navds-monthpicker__caption-button:focus {
   box-shadow: var(--navds-shadow-focus);
   z-index: 1;
 }
 
-.navds-monthpicker__months {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--navds-spacing-1);
+.navds-date__year-label {
+  display: flex;
+  align-items: center;
 }
 
-/* Shared */
 .navds-date {
   padding: var(--navds-spacing-3);
 }
@@ -144,8 +138,7 @@
   background: var(--navds-global-color-deepblue-500);
 }
 
-.navds-date .rdp-day_disabled,
-.navds-monthpicker__month:disabled {
+.navds-date .rdp-day_disabled {
   color: var(--navds-semantic-color-text-muted);
   background-image: linear-gradient(
     135deg,
@@ -161,13 +154,12 @@
 }
 
 .navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,
-.navds-monthpicker__month:where(:not(.navds-monthpicker__month--selected):not([disabled])):hover {
+.navds-date__month-button:where(:not(.rdp-day_selected):not([disabled])):hover {
   background: var(--navds-semantic-color-interaction-primary-hover-subtle);
   cursor: pointer;
 }
 
-.navds-date .rdp-day_today,
-.navds-monthpicker__month--current {
+.navds-date .rdp-day_today {
   box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
 }
 

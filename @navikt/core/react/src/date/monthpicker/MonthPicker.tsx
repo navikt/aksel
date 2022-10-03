@@ -84,12 +84,13 @@ interface MonthPickerComponent
   Input: DateInputType;
 }
 
+/* TODO: Gjøre at man ikke har en defaultselected ved start */
 export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
   (
     {
       children,
       dropdownCaption = false,
-      fromDate = new Date(),
+      fromDate,
       toDate,
       disabled = [],
       selected,
@@ -111,7 +112,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     const [selectedMonth, setSelectedMonth] = useState<Date>(
-      getDefaultSelected(disabled, dropdownCaption, fromDate, selected, toDate)
+      getDefaultSelected(disabled, dropdownCaption, selected, toDate, fromDate)
     );
     const [yearState, setYearState] = useState<Date>(selectedMonth);
 

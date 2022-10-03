@@ -3,18 +3,19 @@ import { isMatch, Matcher } from "./is-match";
 export const getDefaultSelected = (
   disabled: Matcher[],
   dropdownCaption: boolean,
-  fromDate: Date,
   defaultSelected?: Date,
-  toDate?: Date
+  toDate?: Date,
+  fromDate?: Date
 ): Date => {
-  let selectedMonth = dropdownCaption
-    ? defaultSelected || new Date() || fromDate
-    : defaultSelected || new Date();
+  let selectedMonth = defaultSelected || new Date();
+
   if (
     dropdownCaption &&
+    fromDate &&
     !isMatch(selectedMonth, [{ from: fromDate, to: toDate }])
-  )
+  ) {
     selectedMonth = fromDate;
+  }
   return getNextActiveMonth(selectedMonth, disabled);
 };
 

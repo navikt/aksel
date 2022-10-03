@@ -94,7 +94,7 @@ export const MonthCaption = ({
           ))}
         </Select>
       ) : (
-        <span className="navds-monthpicker__year-label" aria-live="polite">
+        <span className="navds-date__year-label" aria-live="polite">
           {yearState.getFullYear()}
         </span>
       )}

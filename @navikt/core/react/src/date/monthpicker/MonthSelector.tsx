@@ -1,6 +1,5 @@
 import { isSameMonth, setMonth, setYear, startOfMonth } from "date-fns";
 import React, { useState } from "react";
-import { useDayPicker } from "react-day-picker";
 import { BodyShort } from "../..";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
 import { isMatch } from "../utils";
@@ -23,14 +22,14 @@ export const MonthSelector = () => {
   const months: Date[] = getAllMonths();
 
   const hasSelected = months.some((m) =>
-    isSameMonth(setYear(m, Number(yearState.getFullYear())), selectedMonth)
+    isSameMonth(setYear(m, yearState.getFullYear()), selectedMonth)
   );
 
   const getRootFallback = () => {
     for (let i = 0; i < months.length; i++) {
       const m = months[i];
-      if (!isMatch(setYear(m, Number(yearState.getFullYear())), disabled)) {
-        return setYear(m, Number(yearState.getFullYear()));
+      if (!isMatch(setYear(m, yearState.getFullYear()), disabled)) {
+        return setYear(m, yearState.getFullYear());
       }
     }
   };
@@ -43,24 +42,34 @@ export const MonthSelector = () => {
     setTabRoot(hasSelected ? selectedMonth : getRootFallback());
   }
 
-  /* console.log(months); */
+  const tableMonths = [
+    months.slice(0, 4),
+    months.slice(4, 8),
+    months.slice(8, 12),
+  ];
 
   return (
-    <BodyShort as="div" className="navds-monthpicker__months">
-      {months.map((month: Date, y) => {
-        return (
-          <MonthButton
-            key={month.toDateString()}
-            y={y}
-            month={setYear(month, Number(yearState.getFullYear()))}
-            months={months}
-            focus={focus}
-            setFocus={setFocus}
-            tabRoot={tabRoot}
-            setTabRoot={setTabRoot}
-          />
-        );
-      })}
+    <BodyShort as="table" className="rdp-table">
+      <tbody className="rdp-tbody">
+        {tableMonths.map((x, y) => (
+          <tr className="rdp-row" key={y}>
+            {x.map((month: Date, y) => {
+              return (
+                <td key={month.toDateString()} className="rdp-cell">
+                  <MonthButton
+                    month={setYear(month, yearState.getFullYear())}
+                    months={months}
+                    focus={focus}
+                    setFocus={setFocus}
+                    tabRoot={tabRoot}
+                    setTabRoot={setTabRoot}
+                  />
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
     </BodyShort>
   );
 };

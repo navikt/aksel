@@ -17,22 +17,24 @@ import { nextEnabled } from "../utils/navigation";
 interface MonthType {
   month: Date;
   months: Date[];
-  y: number;
   focus: Date | undefined;
   setFocus: Function;
   tabRoot?: Date;
   setTabRoot: Function;
 }
 
-// TODO: fikse dette
 const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
+  console.log(fromDate);
   if (fromDate && toDate) {
+    console.log("here2");
     return (
       compareAsc(month, fromDate) === -1 || compareDesc(month, toDate) === -1
     );
   } else if (fromDate) {
+    console.log("here3");
     return compareAsc(month, fromDate) === -1;
   } else if (toDate) {
+    console.log("here4");
     return compareDesc(month, toDate) === -1;
   }
   return false;
@@ -41,7 +43,6 @@ const disableMonth = (month: Date, fromDate?: Date, toDate?: Date) => {
 export const MonthButton = ({
   month,
   months,
-  y,
   focus,
   setFocus,
   tabRoot,
@@ -65,6 +66,11 @@ export const MonthButton = ({
     }
   }, [focus, month]);
 
+  const isDisabled =
+    isMatch(setYear(month, yearState.getFullYear()), disabled) ||
+    disableMonth(month, fromDate, toDate);
+
+  console.log(isDisabled);
   return (
     <button
       ref={ref}
@@ -72,16 +78,11 @@ export const MonthButton = ({
       onClick={() =>
         onSelect(setYear(startOfMonth(month), Number(yearState.getFullYear())))
       }
-      disabled={
-        isMatch(setYear(month, Number(yearState.getFullYear())), disabled) ||
-        disableMonth(month, fromDate, toDate)
-      }
-      className={cl("navds-monthpicker__month", {
-        "navds-monthpicker__month--current": dateIsInCurrentMonth(
-          month,
-          yearState
-        ),
-        "navds-monthpicker__month--selected": isSelected,
+      disabled={isDisabled}
+      className={cl("navds-date__month-button", {
+        "rdp-day_today": dateIsInCurrentMonth(month, yearState),
+        "rdp-day_selected": isSelected,
+        "rdp-day_disabled": isDisabled,
       })}
       tabIndex={
         tabRoot &&
@@ -93,7 +94,6 @@ export const MonthButton = ({
         setFocus(
           nextEnabled(
             months,
-            y,
             e.key,
             disabled,
             month,

@@ -49,16 +49,14 @@ export const dropdownCaption = (props) => {
 export const fromToSelected = () => {
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker
-        dropdownCaption
-        fromDate={new Date("Feb 1 2021")}
-        toDate={new Date("Sep 27 2021")}
-        onMonthSelect={console.log}
-      >
+      <MonthPicker onMonthSelect={console.log}>
         <MonthPicker.Input label="Velg måned" variant="monthpicker" />
       </MonthPicker>
     </div>
   );
+  /* dropdownCaption
+        fromDate={new Date("Feb 1 2021")}
+        toDate={new Date("Sep 27 2021")} */
 };
 
 export const DisabledMonths = (props) => {
