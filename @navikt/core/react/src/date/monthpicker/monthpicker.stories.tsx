@@ -46,6 +46,20 @@ export const dropdownCaption = (props) => {
   );
 };
 
+export const fromToSelected = () => {
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker
+        /* dropdownCaption */
+        fromDate={new Date("Jan 1 2019")}
+        toDate={new Date("Sep 27 2032")}
+      >
+        <MonthPicker.Input label="Velg måned" variant="monthpicker" />
+      </MonthPicker>
+    </div>
+  );
+};
+
 export const DisabledMonths = (props) => {
   return (
     <div style={{ height: "20rem" }}>

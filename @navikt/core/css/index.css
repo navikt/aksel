@@ -9,13 +9,13 @@
 @import "chat.css";
 @import "guide-panel.css";
 @import "form/index.css";
-@import "date.css";
 @import "help-text.css";
 @import "link.css";
 @import "loader.css";
 @import "modal.css";
 @import "pagination.css";
 @import "popover.css";
+@import "date.css";
 @import "tag.css";
 @import "tooltip.css";
 @import "toggle-group.css";

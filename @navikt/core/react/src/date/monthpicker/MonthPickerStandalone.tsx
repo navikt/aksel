@@ -51,11 +51,10 @@ export const MonthPicker = forwardRef<
         <RootProvider
           locale={getLocaleFromString(locale)}
           selected={selected}
-          className="navds-monthpicker-month"
           toDate={toDate}
           fromDate={fromDate}
         >
-          <div className="navds-date navds-monthpicker__wrapper">
+          <div className="navds-date rdp-month">
             <SharedMonthContext.Provider
               value={{
                 isValidDropdownCaption,

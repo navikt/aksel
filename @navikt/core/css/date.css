@@ -4,9 +4,9 @@
   background: var(--navds-global-color-deepblue-500);
 }
 
-.navds-date .rdp-month {
-  display: flex;
-  flex-direction: column;
+.navds-date .rdp-month,
+.navds-date.rdp-month {
+  display: grid;
   gap: var(--navds-spacing-5);
 }
 
@@ -101,17 +101,10 @@
   z-index: 1;
 }
 
-.navds-monthpicker__wrapper {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1.5rem;
-  padding: var(--navds-spacing-3);
-}
-
 .navds-monthpicker__months {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
+  gap: var(--navds-spacing-1);
 }
 
 /* Shared */

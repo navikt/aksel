@@ -8,7 +8,7 @@ export const getDefaultSelected = (
   toDate?: Date
 ): Date => {
   let selectedMonth = dropdownCaption
-    ? defaultSelected || fromDate || new Date()
+    ? defaultSelected || new Date() || fromDate
     : defaultSelected || new Date();
   if (
     dropdownCaption &&

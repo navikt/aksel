@@ -110,6 +110,10 @@ export interface DatePickerDefaultProps
    * Classname
    */
   className?: string;
+  /**
+   * Classname for wrapper
+   */
+  wrapperClassName?: string;
 }
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -134,6 +138,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       id,
       defaultSelected,
       className,
+      wrapperClassName,
       open: _open,
       onClose,
       onOpenToggle,
@@ -196,7 +201,10 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           ariaId,
         }}
       >
-        <div ref={wrapperRef} className={cl("navds-date__wrapper", className)}>
+        <div
+          ref={wrapperRef}
+          className={cl("navds-date__wrapper", wrapperClassName)}
+        >
           {children}
           <FloatingPortal>
             {(_open ?? open) && (
@@ -221,7 +229,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   components={{
                     Caption: dropdownCaption ? DropdownCaption : Caption,
                   }}
-                  className="navds-date"
+                  className={cl("navds-date", className)}
                   classNames={{
                     vhidden: "navds-sr-only",
                   }}

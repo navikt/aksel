@@ -49,10 +49,6 @@ export interface MonthPickerDefaultProps
    */
   selected?: Date;
   /**
-   * Classname
-   */
-  className?: string;
-  /**
    * Open state for user-controlled state
    * @remark Controlled by component by default
    */
@@ -70,6 +66,14 @@ export interface MonthPickerDefaultProps
    * onMonthSelect callback for user-controlled-state
    */
   onMonthSelect?: Function;
+  /**
+   * Classname
+   */
+  className?: string;
+  /**
+   * Classname for wrapper
+   */
+  wrapperClassName?: string;
 }
 
 export type MonthPickerProps = MonthPickerDefaultProps;
@@ -96,6 +100,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
       locale = "nb",
       onMonthSelect,
       className,
+      wrapperClassName,
     },
     ref
   ) => {
@@ -139,7 +144,10 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
           ariaId,
         }}
       >
-        <div ref={wrapperRef} className={cl("navds-date__wrapper", className)}>
+        <div
+          ref={wrapperRef}
+          className={cl("navds-date__wrapper", wrapperClassName)}
+        >
           {children}
           <FloatingPortal>
             {(_open ?? open) && (
@@ -152,15 +160,15 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                 role="dialog"
                 ref={ref}
                 id={ariaId}
+                className="navds-date"
               >
                 <RootProvider
                   locale={getLocaleFromString(locale)}
                   selected={selected}
-                  className="navds-monthpicker-month"
                   toDate={toDate}
                   fromDate={fromDate}
                 >
-                  <div className="navds-date navds-monthpicker__wrapper">
+                  <div className={cl("rdp-month", className)}>
                     <SharedMonthContext.Provider
                       value={{
                         isValidDropdownCaption,
