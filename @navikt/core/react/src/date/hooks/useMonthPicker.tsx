@@ -75,19 +75,20 @@ export const useMonthPicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  const handleFocusOut = useCallback(
+  const handleFocusIn = useCallback(
     (e) =>
       ![monthpickerRef.current, inputRef.current].some((element) =>
-        element?.contains(e.relatedTarget)
-      ) && setOpen(false),
-    []
+        element?.contains(e.target)
+      ) &&
+      open &&
+      setOpen(false),
+    [open]
   );
 
   useEffect(() => {
-    const el = inputRef.current;
-    el?.addEventListener("focusout", handleFocusOut);
-    return () => el?.removeEventListener?.("focusout", handleFocusOut);
-  }, [handleFocusOut]);
+    window?.addEventListener("focusin", handleFocusIn);
+    return () => window?.removeEventListener?.("focusin", handleFocusIn);
+  }, [handleFocusIn]);
 
   const reset = () => {
     setSelectedMonth(defaultSelected);
@@ -121,6 +122,11 @@ export const useMonthPicker = (
 
   /* Only allow de-selecting if not required */
   const handleMonthClick = (month?: Date) => {
+    if (month) {
+      setOpen(false);
+      inputRef.current && inputRef.current.focus();
+    }
+
     if (/* !required &&  */ !month) {
       setSelectedMonth(undefined);
       setInputValue("");
@@ -166,6 +172,24 @@ export const useMonthPicker = (
     setYear(month);
   };
 
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    inputRef.current && inputRef.current.focus();
+  }, []);
+
+  const escape = useCallback(
+    (e) => open && e.key === "Escape" && handleClose(),
+    [handleClose, open]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", escape, false);
+
+    return () => {
+      window.removeEventListener("keydown", escape, false);
+    };
+  }, [escape]);
+
   const monthpickerProps = {
     year,
     onYearChange: (y?: Date) => setYear(y ?? today),
@@ -175,7 +199,6 @@ export const useMonthPicker = (
     fromDate,
     toDate,
     open,
-    onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
     disabled,
     ref: monthpickerRef,
@@ -186,7 +209,7 @@ export const useMonthPicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    wrapperRef: inputRef,
+    ref: inputRef,
   };
 
   return { monthpickerProps, inputProps, reset, selectedMonth, setSelected };

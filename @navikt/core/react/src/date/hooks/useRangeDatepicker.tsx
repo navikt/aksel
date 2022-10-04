@@ -98,7 +98,7 @@ export const useRangeDatepicker = (
   );
   const [open, setOpen] = useState(false);
 
-  const handleFocusOut = useCallback(
+  const handleFocusIn = useCallback(
     (e) =>
       ![datePickerRef.current, inputRefTo.current, inputRefFrom.current].some(
         (element) => element?.contains(e.target)
@@ -109,11 +109,11 @@ export const useRangeDatepicker = (
   );
 
   useEffect(() => {
-    window?.addEventListener("focusin", handleFocusOut);
+    window?.addEventListener("focusin", handleFocusIn);
     return () => {
-      window?.removeEventListener?.("focusin", handleFocusOut);
+      window?.removeEventListener?.("focusin", handleFocusIn);
     };
-  }, [handleFocusOut]);
+  }, [handleFocusIn]);
 
   const reset = () => {
     setSelectedRange(defaultSelected);

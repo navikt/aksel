@@ -85,18 +85,15 @@ export const Standalone = () => {
 };
 
 export const UseMonthPicker = () => {
-  const { inputProps, monthpickerProps, selectedMonth } = useMonthPicker({
+  const { inputProps, monthpickerProps } = useMonthPicker({
     locale: "nb",
     defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],
-    fromDate: new Date("Feb 1 2020"),
-    toDate: new Date("Feb 1 2022"),
   });
-
-  console.log(selectedMonth);
 
   return (
     <div style={{ height: "20rem" }}>
+      <button>a</button>
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           {...inputProps}
@@ -104,6 +101,7 @@ export const UseMonthPicker = () => {
           variant="monthpicker"
         />
       </MonthPicker>
+      <button>b</button>
     </div>
   );
 };

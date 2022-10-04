@@ -86,7 +86,7 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  const handleFocusOut = useCallback(
+  const handleFocusIn = useCallback(
     (e) => {
       ![daypickerRef.current, inputRef.current].some((element) =>
         element?.contains(e.target)
@@ -98,9 +98,9 @@ export const useDatepicker = (
   );
 
   useEffect(() => {
-    window.addEventListener("focusin", handleFocusOut);
-    return () => window?.removeEventListener?.("focusin", handleFocusOut);
-  }, [handleFocusOut]);
+    window.addEventListener("focusin", handleFocusIn);
+    return () => window?.removeEventListener?.("focusin", handleFocusIn);
+  }, [handleFocusIn]);
 
   const reset = () => {
     setSelectedDay(defaultSelected);

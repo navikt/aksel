@@ -1,4 +1,3 @@
-import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
 import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
@@ -126,7 +125,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     const [selectedMonth, setSelectedMonth] = useState<Date | undefined>(
       defaultSelected
@@ -151,7 +149,6 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
             setOpen((x) => !x);
             onOpenToggle?.();
           },
-          buttonRef,
           ariaId,
         }}
       >
@@ -160,43 +157,41 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
           className={cl("navds-date__wrapper", wrapperClassName)}
         >
           {children}
-          <FloatingPortal>
-            {(_open ?? open) && (
-              <Popover
-                arrow={false}
-                anchorEl={wrapperRef.current}
-                open={_open ?? open}
-                onClose={() => onClose?.() ?? setOpen(false)}
-                placement="bottom-start"
-                role="dialog"
-                ref={ref}
-                id={ariaId}
-                className="navds-date"
+          {(_open ?? open) && (
+            <Popover
+              arrow={false}
+              anchorEl={wrapperRef.current}
+              open={_open ?? open}
+              onClose={() => onClose?.() ?? setOpen(false)}
+              placement="bottom-start"
+              role="dialog"
+              ref={ref}
+              id={ariaId}
+              className="navds-date"
+            >
+              <RootProvider
+                locale={getLocaleFromString(locale)}
+                selected={selected}
+                toDate={toDate}
+                fromDate={fromDate}
+                month={selected ?? selectedMonth}
               >
-                <RootProvider
-                  locale={getLocaleFromString(locale)}
-                  selected={selected}
-                  toDate={toDate}
-                  fromDate={fromDate}
-                  month={selected ?? selectedMonth}
-                >
-                  <div className={cl("rdp-month", className)}>
-                    <SharedMonthProvider
-                      dropdownCaption={dropdownCaption}
-                      disabled={disabled}
-                      selected={selected ?? selectedMonth}
-                      onSelect={handleSelect}
-                      year={year}
-                      onYearChange={onYearChange}
-                    >
-                      <MonthCaption />
-                      <MonthSelector />
-                    </SharedMonthProvider>
-                  </div>
-                </RootProvider>
-              </Popover>
-            )}
-          </FloatingPortal>
+                <div className={cl("rdp-month", className)}>
+                  <SharedMonthProvider
+                    dropdownCaption={dropdownCaption}
+                    disabled={disabled}
+                    selected={selected ?? selectedMonth}
+                    onSelect={handleSelect}
+                    year={year}
+                    onYearChange={onYearChange}
+                  >
+                    <MonthCaption />
+                    <MonthSelector />
+                  </SharedMonthProvider>
+                </div>
+              </RootProvider>
+            </Popover>
+          )}
         </div>
       </DateContext.Provider>
     );
