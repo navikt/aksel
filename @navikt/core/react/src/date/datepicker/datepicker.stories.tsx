@@ -164,9 +164,11 @@ export const UseDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
+      <button>a</button>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
+      <button>b</button>
     </div>
   );
 };

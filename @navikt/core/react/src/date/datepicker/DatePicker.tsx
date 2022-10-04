@@ -1,4 +1,3 @@
-import { FloatingPortal } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
 import { isWeekend } from "date-fns";
 import React, { forwardRef, useRef, useState } from "react";
@@ -198,51 +197,49 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
           className={cl("navds-date__wrapper", wrapperClassName)}
         >
           {children}
-          <FloatingPortal>
-            {(_open ?? open) && (
-              <Popover
-                arrow={false}
-                anchorEl={wrapperRef.current}
-                open={_open ?? open}
-                onClose={() => onClose?.() ?? setOpen(false)}
-                placement="bottom-start"
-                id={ariaId}
-                role="dialog"
-                ref={ref}
-              >
-                <DayPicker
-                  locale={getLocaleFromString(locale)}
-                  mode={mode}
-                  {...overrideProps}
-                  selected={selected ?? selectedDates}
-                  components={{
-                    Caption: dropdownCaption ? DropdownCaption : Caption,
-                  }}
-                  className={cl("navds-date", className)}
-                  classNames={{
-                    vhidden: "navds-sr-only",
-                  }}
-                  disabled={(day) => {
-                    return (
-                      (disableWeekends && isWeekend(day)) ||
-                      isMatch(day, disabled)
-                    );
-                  }}
-                  weekStartsOn={1}
-                  initialFocus={false}
-                  labels={labels as any}
-                  modifiers={{
-                    weekend: (day) => disableWeekends && isWeekend(day),
-                  }}
-                  modifiersClassNames={{
-                    weekend: "rdp-day__weekend",
-                  }}
-                  showWeekNumber={showWeekNumber}
-                  {...omit(rest, ["onSelect"])}
-                />
-              </Popover>
-            )}
-          </FloatingPortal>
+          {(_open ?? open) && (
+            <Popover
+              arrow={false}
+              anchorEl={wrapperRef.current}
+              open={_open ?? open}
+              onClose={() => onClose?.() ?? setOpen(false)}
+              placement="bottom-start"
+              id={ariaId}
+              role="dialog"
+              ref={ref}
+            >
+              <DayPicker
+                locale={getLocaleFromString(locale)}
+                mode={mode}
+                {...overrideProps}
+                selected={selected ?? selectedDates}
+                components={{
+                  Caption: dropdownCaption ? DropdownCaption : Caption,
+                }}
+                className={cl("navds-date", className)}
+                classNames={{
+                  vhidden: "navds-sr-only",
+                }}
+                disabled={(day) => {
+                  return (
+                    (disableWeekends && isWeekend(day)) ||
+                    isMatch(day, disabled)
+                  );
+                }}
+                weekStartsOn={1}
+                initialFocus={false}
+                labels={labels as any}
+                modifiers={{
+                  weekend: (day) => disableWeekends && isWeekend(day),
+                }}
+                modifiersClassNames={{
+                  weekend: "rdp-day__weekend",
+                }}
+                showWeekNumber={showWeekNumber}
+                {...omit(rest, ["onSelect"])}
+              />
+            </Popover>
+          )}
         </div>
       </DateContext.Provider>
     );

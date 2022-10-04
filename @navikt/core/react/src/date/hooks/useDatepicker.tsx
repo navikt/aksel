@@ -90,17 +90,19 @@ export const useDatepicker = (
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
   const handleFocusOut = useCallback(
-    (e) =>
+    (e) => {
       ![daypickerRef.current, inputRef.current].some((element) =>
-        element?.contains(e.relatedTarget)
-      ) && setOpen(false),
-    []
+        element?.contains(e.target)
+      ) &&
+        open &&
+        setOpen(false);
+    },
+    [open]
   );
 
   useEffect(() => {
-    const el = inputRef.current;
-    el?.addEventListener("focusout", handleFocusOut);
-    return () => el?.removeEventListener?.("focusout", handleFocusOut);
+    window.addEventListener("focusin", handleFocusOut);
+    return () => window?.removeEventListener?.("focusin", handleFocusOut);
   }, [handleFocusOut]);
 
   const reset = () => {
@@ -135,6 +137,11 @@ export const useDatepicker = (
 
   /* Only allow de-selecting if not required */
   const handleDayClick: DayClickEventHandler = (day, { selected }) => {
+    if (day && !selected) {
+      setOpen(false);
+      inputRef.current && inputRef.current.focus();
+    }
+
     if (!required && selected) {
       setSelectedDay(undefined);
       setInputValue("");
@@ -170,6 +177,24 @@ export const useDatepicker = (
     setMonth(day);
   };
 
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    inputRef.current && inputRef.current.focus();
+  }, []);
+
+  const escape = useCallback(
+    (e) => open && e.key === "Escape" && handleClose(),
+    [handleClose, open]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", escape, false);
+
+    return () => {
+      window.removeEventListener("keydown", escape, false);
+    };
+  }, [escape]);
+
   const datepickerProps = {
     month,
     onMonthChange: (month) => setMonth(month),
@@ -180,7 +205,6 @@ export const useDatepicker = (
     toDate,
     today,
     open,
-    onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
     ref: daypickerRef,
   };
@@ -190,7 +214,7 @@ export const useDatepicker = (
     onFocus: handleFocus,
     onBlur: handleBlur,
     value: inputValue,
-    wrapperRef: inputRef,
+    ref: inputRef,
   };
 
   return { datepickerProps, inputProps, reset, selectedDay, setSelected };
