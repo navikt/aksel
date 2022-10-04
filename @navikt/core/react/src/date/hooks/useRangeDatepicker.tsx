@@ -13,7 +13,9 @@ import { UseDatepickerOptions } from "./useDatepicker";
 
 interface UseRangeDatepickerOptions
   extends Omit<UseDatepickerOptions, "defaultSelected"> {
-  /** The initially selected date-range */
+  /**
+   * The initially selected DateRange
+   */
   defaultSelected?: DateRange;
 }
 
@@ -37,15 +39,16 @@ interface UseRangeDatepickerValue {
     "onChange" | "onFocus" | "onBlur" | "value"
   >;
   /**
-   * Resets all states
+   * Resets all states (callback)
    */
   reset: () => void;
   /**
-   * Selected range-callback
+   * Currently selected DateRange
+   * Up to user to validate values
    */
   selectedRange?: DateRange;
   /**
-   * Manually set selected range if needed
+   * Manually override currently selected day
    */
   setSelected: (date?: DateRange) => void;
 }
@@ -66,7 +69,6 @@ export const useRangeDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
-    openOnFocus = true,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -139,7 +141,7 @@ export const useRangeDatepicker = (
   };
 
   const handleFocus = (e, src: RangeT) => {
-    !open && openOnFocus && setOpen(true);
+    !open && setOpen(true);
     let day = parseDate(e.target.value, today, locale, "date");
     if (isValidDate(day)) {
       setMonth(day);

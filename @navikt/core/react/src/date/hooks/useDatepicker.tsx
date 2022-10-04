@@ -1,6 +1,6 @@
-import { differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays, isWeekend } from "date-fns";
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { DayClickEventHandler } from "react-day-picker";
+import { DayClickEventHandler, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import {
@@ -20,16 +20,17 @@ export interface UseDatepickerOptions
     | "toDate"
     | "fromDate"
     | "toDate"
+    | "disabled"
+    | "disableWeekends"
   > {
-  /** The initially selected date */
-  defaultSelected?: Date;
-  /** Make the selection required. */
-  required?: boolean;
   /**
-   * Opens datepicker on input-focus
-   * @default true
+   * The initially selected Date
    */
-  openOnFocus?: boolean;
+  defaultSelected?: Date;
+  /**
+   * Make selection of Date required
+   */
+  required?: boolean;
 }
 
 interface UseDatepickerValue {
@@ -45,15 +46,16 @@ interface UseDatepickerValue {
     "onChange" | "onFocus" | "onBlur" | "value" | "wrapperRef"
   >;
   /**
-   * Resets all states
+   * Resets all states (callback)
    */
   reset: () => void;
   /**
-   * Selected Date callback
+   * Currently selected date
+   * Up to user to validate date
    */
   selectedDay?: Date;
   /**
-   * Manually set selected day if needed
+   * Manually override currently selected day
    */
   setSelected: (date?: Date) => void;
 }
@@ -68,7 +70,8 @@ export const useDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
-    openOnFocus = true,
+    disabled,
+    disableWeekends,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -113,7 +116,7 @@ export const useDatepicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && setOpen(true);
     if (!e.target.value) {
       reset();
       return;
@@ -148,9 +151,18 @@ export const useDatepicker = (
     setInputValue(e.target.value);
     const day = parseDate(e.target.value, today, locale, "date");
 
+    if (
+      !isValidDate(day) ||
+      (disabled &&
+        ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
+    ) {
+      setSelectedDay(undefined);
+      return;
+    }
+
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
-    if (!isValidDate(day) || isBefore || isAfter) {
+    if (isBefore || isAfter) {
       setSelectedDay(undefined);
       return;
     }

@@ -12,37 +12,29 @@ import {
 export interface UseMonthPickerOptions
   extends Pick<
     MonthPickerProps,
-    | "locale"
-    | "fromDate"
-    | "toDate"
-    | "disabled"
-    | "dropdownCaption"
-    | "onMonthSelect"
-    | "defaultSelected"
+    "locale" | "fromDate" | "toDate" | "disabled" | "defaultSelected"
   > {
-  /** Make the selection required. */
-  required?: boolean;
   /**
-   * Opens monthpicker on input-focus
-   * @default true
+   * Make Date-selection required
    */
-  openOnFocus?: boolean;
+  required?: boolean;
 }
 
 interface UseMonthPickerValue {
   /**
-   * Use: <MonthPicker {...monthpickerProps}/>
+   * Use: <MonthPicker {...monthpickerProps} />
    */
   monthpickerProps: MonthPickerProps;
   /**
-   * Use: <MonthPicker.Input {...inputProps}/>
+   * Use: <MonthPicker.Input {...inputProps} />
    */
   inputProps: Pick<
     DateInputProps,
     "onChange" | "onFocus" | "value" | "wrapperRef"
   >;
   /**
-   * Selected month callback
+   * Currently selected Date
+   * Up to user to validate value and extract month
    */
   selectedMonth?: Date;
   /**
@@ -63,7 +55,6 @@ export const useMonthPicker = (
     defaultSelected,
     fromDate,
     toDate,
-    openOnFocus = true,
     disabled,
   } = opt;
 
@@ -111,7 +102,7 @@ export const useMonthPicker = (
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
-    !open && openOnFocus && setOpen(true);
+    !open && setOpen(true);
     if (!e.target.value) {
       reset();
       return;
@@ -146,7 +137,6 @@ export const useMonthPicker = (
     setInputValue(e.target.value);
     const month = parseDate(e.target.value, today, locale, "month");
 
-    /* setMonth(month).getMonth() - 1 >= fromDate?.getFullYear(); */
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
       setSelectedMonth(undefined);
       return;
@@ -157,6 +147,7 @@ export const useMonthPicker = (
       (fromDate.getFullYear() > month.getFullYear() ||
         (fromDate.getFullYear() === month.getFullYear() &&
           fromDate.getMonth() > month.getMonth()));
+
     const isAfter =
       toDate &&
       (toDate.getFullYear() < month.getFullYear() ||
