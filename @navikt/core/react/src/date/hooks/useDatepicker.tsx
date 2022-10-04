@@ -3,8 +3,12 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DayClickEventHandler } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
-import { formatDateForInput, getLocaleFromString, isValidDate } from "../utils";
-import { parseDate } from "../utils/parse-date";
+import {
+  formatDateForInput,
+  getLocaleFromString,
+  isValidDate,
+  parseDate,
+} from "../utils";
 
 export interface UseDatepickerOptions
   extends Pick<

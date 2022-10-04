@@ -1,9 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { DateInputProps } from "../DateInput";
 import { MonthPickerProps } from "../monthpicker/MonthPicker";
-import { formatDateForInput, getLocaleFromString, isValidDate } from "../utils";
-import { isMatch } from "../utils/is-match";
-import { parseDate } from "../utils/parse-date";
+import {
+  formatDateForInput,
+  getLocaleFromString,
+  isMatch,
+  isValidDate,
+  parseDate,
+} from "../utils";
 
 export interface UseMonthPickerOptions
   extends Pick<

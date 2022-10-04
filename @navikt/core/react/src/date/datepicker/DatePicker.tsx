@@ -12,10 +12,9 @@ import {
   SelectRangeEventHandler,
   SelectSingleEventHandler,
 } from "react-day-picker";
-import { Popover, useId } from "../..";
-import { omit } from "../../util";
+import { omit, Popover, useId } from "../..";
 import { DateInputType, DatePickerInput } from "../DateInput";
-import { DateContext } from "../hooks/useDateInputContext";
+import { DateContext } from "../hooks";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import DatePickerStandalone, {
@@ -45,8 +44,6 @@ export type ConditionalModeProps =
       min?: number;
       max?: number;
     };
-
-// TODO: Hva skjer hvis et helt år/månede er disabled og man har dropdown?
 
 //github.com/gpbl/react-day-picker/blob/50b6dba/packages/react-day-picker/src/types/DayPickerBase.ts#L139
 export interface DatePickerDefaultProps
