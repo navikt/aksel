@@ -3,7 +3,7 @@ import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
-import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
+import { useSharedMonthContext } from "../hooks";
 import { hasNextYear, labelNextYear, labelPrevYear } from "../utils";
 
 export const MonthCaption = () => {

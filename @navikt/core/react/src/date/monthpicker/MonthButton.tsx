@@ -8,10 +8,8 @@ import {
 } from "date-fns";
 import React, { useEffect, useRef } from "react";
 import { useDayPicker } from "react-day-picker";
-import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
-import { dateIsInCurrentMonth } from "../utils/check-dates";
-import { isMatch } from "../utils/is-match";
-import { nextEnabled } from "../utils/navigation";
+import { useSharedMonthContext } from "../hooks";
+import { dateIsInCurrentMonth, isMatch, nextEnabled } from "../utils";
 
 interface MonthType {
   month: Date;

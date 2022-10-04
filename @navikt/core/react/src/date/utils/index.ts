@@ -13,11 +13,9 @@ export {
   parseDate,
 } from "./parse-date";
 export { getLocaleFromString } from "./locale";
-export { isValidDate } from "./valid-date";
 export { disableDate } from "./dates-disabled";
 
-export { dateIsInCurrentMonth } from "./check-dates";
+export { dateIsInCurrentMonth, isValidDate, hasNextYear } from "./check-dates";
 export { getInitialYear } from "./get-initial-year";
-export { hasNextYear } from "./handle-selected";
 export { isMatch, isDateInRange, Matcher } from "./is-match";
 export { nextEnabled } from "./navigation";

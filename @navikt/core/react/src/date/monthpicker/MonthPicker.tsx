@@ -4,8 +4,7 @@ import React, { forwardRef, useRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
 import { Popover, useId } from "../..";
 import { DateInputType, MonthPickerInput } from "../DateInput";
-import { DateContext } from "../hooks/useDateInputContext";
-import { SharedMonthProvider } from "../hooks/useSharedMonthContext";
+import { DateContext, SharedMonthProvider } from "../hooks";
 import { getLocaleFromString, Matcher } from "../utils";
 import MonthCaption from "./MonthCaption";
 import MonthPickerStandalone, {

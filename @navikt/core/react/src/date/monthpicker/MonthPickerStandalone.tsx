@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, useState } from "react";
 import { RootProvider } from "react-day-picker";
-import { SharedMonthProvider } from "../hooks/useSharedMonthContext";
+import { SharedMonthProvider } from "../hooks";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
 import { MonthPickerDefaultProps } from "./MonthPicker";
