@@ -2,7 +2,6 @@ import { isSaturday } from "date-fns";
 import React, { useEffect, useId, useState } from "react";
 import { DatePicker, useDatepicker, useRangeDatepicker } from "..";
 import { Button } from "../..";
-import { isValidDate } from "../utils";
 
 const disabledDays = [
   new Date("Aug 10 2022"),
@@ -159,7 +158,7 @@ export const UseDatepicker = () => {
   });
 
   useEffect(() => {
-    selectedDay && isValidDate(selectedDay) && console.log(selectedDay);
+    /* selectedDay && isValidDate(selectedDay) && console.log(selectedDay); */
   }, [selectedDay]);
 
   return (
@@ -180,17 +179,19 @@ export const UseRangedDatepicker = () => {
     });
 
   useEffect(() => {
-    selectedRange && console.log(selectedRange);
+    /* selectedRange && console.log(selectedRange); */
   }, [selectedRange]);
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
+      <button>a</button>
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
       </DatePicker>
+      <button>b</button>
     </div>
   );
 };
@@ -198,6 +199,12 @@ export const UseRangedDatepicker = () => {
 export const NoPopover = () => (
   <div>
     <DatePicker.Standalone />
+  </div>
+);
+
+export const NoPopoverRanged = () => (
+  <div>
+    <DatePicker.Standalone mode="range" />
   </div>
 );
 

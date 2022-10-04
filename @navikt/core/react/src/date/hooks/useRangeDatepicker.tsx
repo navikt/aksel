@@ -1,6 +1,6 @@
-import { differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays, isWeekend } from "date-fns";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DateRange } from "react-day-picker";
+import { DateRange, isMatch } from "react-day-picker";
 import { DateInputProps } from "../DateInput";
 import { DatePickerProps } from "../datepicker/DatePicker";
 import {
@@ -69,6 +69,8 @@ export const useRangeDatepicker = (
     today = new Date(),
     fromDate,
     toDate,
+    disabled,
+    disableWeekends,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -99,19 +101,17 @@ export const useRangeDatepicker = (
   const handleFocusOut = useCallback(
     (e) =>
       ![datePickerRef.current, inputRefTo.current, inputRefFrom.current].some(
-        (element) => element?.contains(e.relatedTarget)
-      ) && setOpen(false),
-    []
+        (element) => element?.contains(e.target)
+      ) &&
+      open &&
+      setOpen(false),
+    [open]
   );
 
   useEffect(() => {
-    const from = inputRefFrom.current;
-    const to = inputRefTo.current;
-    from?.addEventListener("focusout", handleFocusOut);
-    to?.addEventListener("focusout", handleFocusOut);
+    window?.addEventListener("focusin", handleFocusOut);
     return () => {
-      from?.removeEventListener?.("focusout", handleFocusOut);
-      to?.removeEventListener?.("focusout", handleFocusOut);
+      window?.removeEventListener?.("focusin", handleFocusOut);
     };
   }, [handleFocusOut]);
 
@@ -205,6 +205,10 @@ export const useRangeDatepicker = (
   };
 
   const handleSelect = (range) => {
+    if (range.from && range.to) {
+      setOpen(false);
+      // TODO: fokus på en av input-feltene?
+    }
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
 
@@ -224,9 +228,22 @@ export const useRangeDatepicker = (
       : setToInputValue(e.target.value);
     const day = parseDate(e.target.value, today, locale, "date");
 
+    if (
+      !isValidDate(day) ||
+      (disabled &&
+        ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
+    ) {
+      setSelectedRange((x) =>
+        src === RANGE.FROM
+          ? { ...x, from: undefined }
+          : { from: x?.from, to: undefined }
+      );
+      return;
+    }
+
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
-    if (!isValidDate(day) || isBefore || isAfter) {
+    if (isBefore || isAfter) {
       src === RANGE.FROM
         ? setSelectedRange((x) => ({ ...x, from: undefined }))
         : setSelectedRange((x) => ({ from: x?.from, to: undefined }));
@@ -260,6 +277,29 @@ export const useRangeDatepicker = (
     setMonth(day);
   };
 
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    if (selectedRange?.from && !selectedRange?.to) {
+      inputRefTo?.current?.focus();
+    } else {
+      console.log(inputRefFrom);
+      inputRefFrom?.current?.focus();
+    }
+  }, [selectedRange]);
+
+  const escape = useCallback(
+    (e) => open && e.key === "Escape" && handleClose(),
+    [handleClose, open]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", escape, false);
+
+    return () => {
+      window.removeEventListener("keydown", escape, false);
+    };
+  }, [escape]);
+
   const datepickerProps = {
     month: month,
     onMonthChange: (month) => setMonth(month),
@@ -271,7 +311,6 @@ export const useRangeDatepicker = (
     today,
     mode: "range" as const,
     open,
-    onClose: () => setOpen(false),
     onOpenToggle: () => setOpen((x) => !x),
     ref: datePickerRef,
   };
@@ -281,7 +320,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.FROM),
     onBlur: (e) => handleBlur(e, RANGE.FROM),
     value: fromInputValue,
-    wrapperRef: inputRefFrom,
+    ref: inputRefFrom,
   };
 
   const toInputProps = {
@@ -289,7 +328,7 @@ export const useRangeDatepicker = (
     onFocus: (e) => handleFocus(e, RANGE.TO),
     onBlur: (e) => handleBlur(e, RANGE.TO),
     value: toInputValue,
-    wrapperRef: inputRefTo,
+    ref: inputRefTo,
   };
 
   return {

@@ -166,9 +166,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const handleRangeSelect: SelectRangeEventHandler = (selectedDays) => {
       setSelectedDates(selectedDays);
       selectedDays?.from && selectedDays?.to && (onClose?.() ?? setOpen(false));
-      selectedDays?.from &&
-        selectedDays?.to &&
-        rest?.onSelect &&
+      rest?.onSelect &&
         (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
     };
 

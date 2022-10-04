@@ -31,18 +31,6 @@
   border-radius: 2px;
 }
 
-.navds-date .rdp-day_range_start {
-  border-radius: 12px 2px 2px 12px;
-}
-
-.navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
-  border-radius: 2px 12px 12px 2px;
-}
-
-.navds-date .rdp-day_range_start.rdp-day_range_end {
-  border-radius: 12px;
-}
-
 .navds-date__caption-dropdown {
   display: flex;
   justify-content: space-between;
@@ -67,6 +55,18 @@
   height: 2.5rem;
   text-align: center;
   border-radius: 4px;
+}
+
+.navds-date .rdp-day_range_start {
+  border-radius: 12px 2px 2px 12px;
+}
+
+.navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-radius: 2px 12px 12px 2px;
+}
+
+.navds-date .rdp-day_range_start.rdp-day_range_end {
+  border-radius: 12px;
 }
 
 .navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,

@@ -41,10 +41,7 @@ interface UseDatepickerValue {
   /**
    * Use: <DatePicker.Input {...inputProps}/>
    */
-  inputProps: Pick<
-    DateInputProps,
-    "onChange" | "onFocus" | "onBlur" | "value" | "wrapperRef"
-  >;
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "onBlur" | "value">;
   /**
    * Resets all states (callback)
    */
