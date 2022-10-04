@@ -145,6 +145,7 @@ export const useDatepicker = (
       return;
     }
     setSelectedDay(day);
+    setMonth(day);
     setInputValue(day ? formatDateForInput(day, locale, "date") : "");
   };
 

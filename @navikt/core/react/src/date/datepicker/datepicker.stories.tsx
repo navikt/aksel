@@ -163,11 +163,9 @@ export const UseDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <button>a</button>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input {...inputProps} label="Velg dato" />
       </DatePicker>
-      <button>b</button>
     </div>
   );
 };
@@ -184,14 +182,12 @@ export const UseRangedDatepicker = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <button>a</button>
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
           <DatePicker.Input {...fromInputProps} label="Fra" />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
       </DatePicker>
-      <button>b</button>
     </div>
   );
 };

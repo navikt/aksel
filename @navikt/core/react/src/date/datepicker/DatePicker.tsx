@@ -19,6 +19,7 @@ import { Caption, DropdownCaption } from "./caption";
 import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
+import { DayButton } from "./DayButton";
 
 export type ConditionalModeProps =
   | {
@@ -213,6 +214,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 selected={selected ?? selectedDates}
                 components={{
                   Caption: dropdownCaption ? DropdownCaption : Caption,
+                  Day: DayButton,
                 }}
                 className={cl("navds-date", className)}
                 classNames={{

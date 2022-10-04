@@ -23,10 +23,18 @@ export default {
 };
 
 export const Default = () => {
+  const { inputProps, monthpickerProps } = useMonthPicker({
+    disabled: [new Date("Apr 1 2022")],
+  });
+
   return (
     <div style={{ height: "20rem" }}>
-      <MonthPicker selected={new Date("Jun 4 2022")}>
-        <MonthPicker.Input label="Velg måned" variant="monthpicker" />
+      <MonthPicker {...monthpickerProps}>
+        <MonthPicker.Input
+          label="Velg måned"
+          variant="monthpicker"
+          {...inputProps}
+        />
       </MonthPicker>
     </div>
   );
@@ -54,9 +62,6 @@ export const fromToSelected = () => {
       </MonthPicker>
     </div>
   );
-  /* dropdownCaption
-        fromDate={new Date("Feb 1 2021")}
-        toDate={new Date("Sep 27 2021")} */
 };
 
 export const DisabledMonths = (props) => {
@@ -93,7 +98,6 @@ export const UseMonthPicker = () => {
 
   return (
     <div style={{ height: "20rem" }}>
-      <button>a</button>
       <MonthPicker {...monthpickerProps}>
         <MonthPicker.Input
           {...inputProps}
@@ -101,7 +105,6 @@ export const UseMonthPicker = () => {
           variant="monthpicker"
         />
       </MonthPicker>
-      <button>b</button>
     </div>
   );
 };
