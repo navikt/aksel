@@ -172,6 +172,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
                   selected={selected}
                   toDate={toDate}
                   fromDate={fromDate}
+                  month={selected ?? selectedMonth}
                 >
                   <div className={cl("rdp-month", className)}>
                     <SharedMonthProvider

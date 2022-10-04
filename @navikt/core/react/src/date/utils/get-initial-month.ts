@@ -1,23 +1,25 @@
-import { addMonths, differenceInCalendarMonths, startOfMonth } from "date-fns";
+import { startOfYear } from "date-fns";
 import { DayPickerContextValue } from "react-day-picker";
 import { isMatch, Matcher } from "./is-match";
 
-export function getInitialMonth(context: Partial<DayPickerContextValue>): Date {
-  const { month, defaultMonth } = context;
+export function getInitialYear(context: Partial<DayPickerContextValue>): Date {
+  const { month, defaultMonth, toDate, fromDate } = context;
+
   let initialMonth = month || defaultMonth || new Date();
 
-  const { toDate, fromDate, numberOfMonths = 1 } = context;
+  const isAfter = toDate && toDate.getFullYear() < initialMonth.getFullYear();
 
-  // Fix the initialMonth if is after the to-date
-  if (toDate && differenceInCalendarMonths(toDate, initialMonth) < 0) {
-    const offset = -1 * (numberOfMonths - 1);
-    initialMonth = addMonths(toDate, offset);
+  const isBefore =
+    fromDate && fromDate.getFullYear() > initialMonth.getFullYear();
+
+  if (isAfter) {
+    initialMonth = toDate;
   }
-  // Fix the initialMonth if is before the from-date
-  if (fromDate && differenceInCalendarMonths(initialMonth, fromDate) < 0) {
+  if (isBefore) {
     initialMonth = fromDate;
   }
-  return startOfMonth(initialMonth);
+
+  return startOfYear(initialMonth);
 }
 
 export const getDefaultSelected = (

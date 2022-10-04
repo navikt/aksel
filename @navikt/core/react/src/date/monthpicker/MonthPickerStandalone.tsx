@@ -59,6 +59,7 @@ export const MonthPicker = forwardRef<
           selected={selected ?? selectedMonth}
           toDate={toDate}
           fromDate={fromDate}
+          month={selected ?? selectedMonth}
         >
           <div className="navds-date rdp-month">
             <SharedMonthProvider
