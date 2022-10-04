@@ -4,23 +4,27 @@ import { RootProvider } from "react-day-picker";
 import { SharedMonthProvider } from "../hooks";
 import { getLocaleFromString } from "../utils";
 import MonthCaption from "./MonthCaption";
-import { MonthPickerDefaultProps } from "./MonthPicker";
+import { MonthPickerProps } from "./MonthPicker";
 import MonthSelector from "./MonthSelector";
 
-interface MonthPickerStandaloneDefaultProps extends MonthPickerDefaultProps {
+export interface MonthPickerStandaloneProps
+  extends Omit<
+    MonthPickerProps,
+    "open" | "onClose" | "onOpenToggle" | "wrapperClassName"
+  > {
   /**
-   * Wrapper className
+   * Monthpicker classname
    */
   className?: string;
 }
 
 export type MonthPickerStandaloneType = React.ForwardRefExoticComponent<
-  MonthPickerStandaloneDefaultProps & React.RefAttributes<HTMLDivElement>
+  MonthPickerStandaloneProps & React.RefAttributes<HTMLDivElement>
 >;
 
-export const MonthPicker = forwardRef<
+export const MonthPickerStandalone = forwardRef<
   HTMLDivElement,
-  MonthPickerStandaloneDefaultProps
+  MonthPickerStandaloneProps
 >(
   (
     {
@@ -80,4 +84,4 @@ export const MonthPicker = forwardRef<
   }
 );
 
-export default MonthPicker;
+export default MonthPickerStandalone;

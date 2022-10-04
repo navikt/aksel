@@ -99,7 +99,7 @@ export interface DatePickerDefaultProps
   showWeekNumber?: boolean;
   /**
    * Open state for user-controlled state
-   * Controlled by component by default
+   * Component controlled by default
    */
   open?: boolean;
   /**

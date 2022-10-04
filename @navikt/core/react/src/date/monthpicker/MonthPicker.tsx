@@ -12,19 +12,26 @@ import MonthPickerStandalone, {
 } from "./MonthPickerStandalone";
 import MonthSelector from "./MonthSelector";
 
-export interface MonthPickerDefaultProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Element monthpicker anchors to. Use <MonthPicker.Input /> for built-in toggle,
    * or make your own with the open/onClose props
    */
   children?: React.ReactNode;
   /**
-   * The earliest day to start the month navigation.
+   * Classname for datepicker in popover
+   */
+  className?: string;
+  /**
+   * Classname for wrapper
+   */
+  wrapperClassName?: string;
+  /**
+   * The earliest month to start navigation.
    */
   fromDate?: Date;
   /**
-   * The latest day to end the month navigation.
+   * The latest day to end  navigation.
    */
   toDate?: Date;
   /**
@@ -33,24 +40,27 @@ export interface MonthPickerDefaultProps
    */
   locale?: "nb" | "nn" | "en";
   /**
-   * Adds a `Select` for picking Year and Month
-   * Needs `fromDate` + `toDate` to be shown!
+   * Display dropdown for choosing year.
+   * Needs `fromDate` + `toDate` to work.
    * @default false
    */
   dropdownCaption?: boolean;
   /**
-   * Apply the disabled modifier to the matching days. Uses a subset of React Day Picker Matcher type.
+   * Apply the disabled modifier to the matching months. Uses a subset of React Day Picker Matcher type.
    * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
    */
   disabled?: Matcher[];
   /**
-   * The initial selected month. Defaults to fromDate when using dropdownCaption, and todays month without dropdownCaption.
+   * Controlled selected-month
    */
   selected?: Date;
+  /**
+   * Default selected month.
+   */
   defaultSelected?: Date;
   /**
    * Open state for user-controlled state
-   * @remark Controlled by component by default
+   * Component controlled by default
    */
   open?: boolean;
   /**
@@ -59,23 +69,16 @@ export interface MonthPickerDefaultProps
   onClose?: () => void;
   /**
    * onOpenToggle callback for user-controlled-state
-   * @remark only called if `<MonthPicker.Input />` is used
+   * only called if `<MonthPicker.Input />` is used
    */
   onOpenToggle?: () => void;
   /**
-   * onMonthSelect callback for user-controlled-state
+   * Callback for user-controlled state
    */
   onMonthSelect?: Function;
   /**
-   * Classname
-   */
-  className?: string;
-  /**
-   * Classname for wrapper
-   */
-  wrapperClassName?: string;
-  /**
    * Used to set visible year programmatically
+   * Component controlled by default
    */
   year?: Date;
   /**
@@ -84,15 +87,19 @@ export interface MonthPickerDefaultProps
   onYearChange?: (y?: Date) => void;
 }
 
-export type MonthPickerProps = MonthPickerDefaultProps;
-
 interface MonthPickerComponent
-  extends React.ForwardRefExoticComponent<MonthPickerDefaultProps> {
+  extends React.ForwardRefExoticComponent<MonthPickerProps> {
+  /**
+   * Variant without popover
+   */
   Standalone: MonthPickerStandaloneType;
+  /**
+   * Built-in Inputfield
+   */
   Input: DateInputType;
 }
 
-export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerDefaultProps>(
+export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
   (
     {
       children,

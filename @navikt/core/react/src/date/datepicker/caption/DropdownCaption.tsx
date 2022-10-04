@@ -16,7 +16,10 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
     locale,
   } = useDayPicker();
 
-  if (!fromDate || !toDate) return null;
+  if (!fromDate || !toDate) {
+    console.warn("Using dropdownCaption required fromDate and toDate");
+    return null;
+  }
 
   const handleYearChange: React.ChangeEventHandler<HTMLSelectElement> = (e) =>
     goToMonth(setYear(startOfMonth(displayMonth), Number(e.target.value)));

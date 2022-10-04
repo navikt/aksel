@@ -17,7 +17,12 @@ interface DatePickerStandaloneDefaultProps
   extends Omit<
     DatePickerDefaultProps,
     "open" | "onClose" | "onOpenToggle" | "wrapperClassName"
-  > {}
+  > {
+  /**
+   * Datepicker classname
+   */
+  className?: string;
+}
 
 export type DatePickerStandaloneProps = DatePickerStandaloneDefaultProps &
   ConditionalModeProps;
