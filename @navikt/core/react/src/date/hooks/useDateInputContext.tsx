@@ -10,10 +10,6 @@ interface DateContextContextProps {
    */
   onOpen: () => void;
   /**
-   * Connected toggle-button in input
-   */
-  buttonRef: React.MutableRefObject<HTMLButtonElement | null> | null;
-  /**
    * Aria-connected ID
    */
   ariaId?: string;
@@ -22,7 +18,6 @@ interface DateContextContextProps {
 export const DateContext = createContext<DateContextContextProps>({
   open: false,
   onOpen: () => null,
-  buttonRef: null,
   ariaId: undefined,
 });
 

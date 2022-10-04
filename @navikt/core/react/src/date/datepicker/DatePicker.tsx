@@ -147,7 +147,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const [open, setOpen] = useState(_open ?? false);
 
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const buttonRef = useRef<HTMLButtonElement | null>(null);
 
     const [selectedDates, setSelectedDates] = React.useState<
       Date | Date[] | DateRange | undefined
@@ -156,7 +155,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     const handleSingleSelect: SelectSingleEventHandler = (selectedDay) => {
       setSelectedDates(selectedDay);
       selectedDay && (onClose?.() ?? setOpen(false));
-      selectedDay && buttonRef && buttonRef?.current?.focus();
       rest?.onSelect && (rest?.onSelect as (val?: Date) => void)(selectedDay);
     };
 
@@ -171,9 +169,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       selectedDays?.from && selectedDays?.to && (onClose?.() ?? setOpen(false));
       selectedDays?.from &&
         selectedDays?.to &&
-        buttonRef &&
-        buttonRef?.current?.focus();
-      rest?.onSelect &&
+        rest?.onSelect &&
         (rest?.onSelect as (val?: DateRange) => void)(selectedDays);
     };
 
@@ -194,7 +190,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             setOpen((x) => !x);
             onOpenToggle?.();
           },
-          buttonRef,
           ariaId,
         }}
       >

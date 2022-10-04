@@ -58,7 +58,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
       },
     };
 
-    const { onOpen, buttonRef, ariaId, open } = useDateInputContext();
+    const { onOpen, ariaId, open } = useDateInputContext();
 
     const {
       inputProps,
@@ -122,7 +122,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             aria-haspopup="grid"
           />
           <Button
-            ref={buttonRef}
             variant="tertiary"
             type="button"
             size="small"

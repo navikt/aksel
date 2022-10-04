@@ -41,13 +41,11 @@ export const Default = (props) => {
   const rangeCtx = useRangeDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
-    openOnFocus: props.openOnFocus,
   });
 
   const singleCtx = useDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
-    openOnFocus: props.openOnFocus,
   });
 
   const newProps = {
@@ -158,7 +156,6 @@ export const UseDatepicker = () => {
   const { datepickerProps, selectedDay, inputProps } = useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
-    openOnFocus: true,
   });
 
   useEffect(() => {
@@ -178,7 +175,6 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
     useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
-      openOnFocus: true,
     });
 
   useEffect(() => {
