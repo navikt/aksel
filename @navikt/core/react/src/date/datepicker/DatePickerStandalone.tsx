@@ -16,13 +16,8 @@ import { getLocaleFromString, labels } from "../utils";
 interface DatePickerStandaloneDefaultProps
   extends Omit<
     DatePickerDefaultProps,
-    "focusOnOpen" | "open" | "onClose" | "classNames" | "onOpenToggle"
-  > {
-  /**
-   * Wrapper className
-   */
-  className?: string;
-}
+    "open" | "onClose" | "onOpenToggle" | "wrapperClassName"
+  > {}
 
 export type DatePickerStandaloneProps = DatePickerStandaloneDefaultProps &
   ConditionalModeProps;

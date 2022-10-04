@@ -55,21 +55,29 @@ export interface DatePickerDefaultProps
    */
   children?: React.ReactNode;
   /**
+   * Classname for datepicker in popover
+   */
+  className?: string;
+  /**
+   * Classname for wrapper
+   */
+  wrapperClassName?: string;
+  /**
    * Changes datepicker locale
    * @default "nb" (norsk bokmål)
    */
   locale?: "nb" | "nn" | "en";
   /**
-   * The earliest Date available for the user to pick from
+   * The earliest day to start navigation.
    */
   fromDate?: Date;
   /**
-   * The latest Date available for the user to pick from
+   * The latests day to end navigation.
    */
   toDate?: Date;
   /**
-   * Adds a `Select` for picking Year and Month
-   * Needs `fromDate` + `toDate` to be shown!
+   * Display dropdown for choosing the month and the year.
+   * Needs `fromDate` + `toDate` to work.
    * @default false
    */
   dropdownCaption?: boolean;
@@ -85,13 +93,13 @@ export interface DatePickerDefaultProps
   disableWeekends?: boolean;
   /**
    * Shows week numbers in left-column
-   * Use with caution, takes up valuable screenspace in small screens!
+   * Use with caution, takes up valuable screenspace for small screens.
    * @default false
    */
   showWeekNumber?: boolean;
   /**
    * Open state for user-controlled state
-   * @remark Controlled by component by default
+   * Controlled by component by default
    */
   open?: boolean;
   /**
@@ -99,18 +107,10 @@ export interface DatePickerDefaultProps
    */
   onClose?: () => void;
   /**
-   * onOpenToggle callback for user-controlled-state
-   * @remark only called if `<DatePicker.Input />` is used
+   * onOpenToggle callback for user-controlled state
+   * only called if `<DatePicker.Input />` is used
    */
   onOpenToggle?: () => void;
-  /**
-   * Classname
-   */
-  className?: string;
-  /**
-   * Classname for wrapper
-   */
-  wrapperClassName?: string;
 }
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
