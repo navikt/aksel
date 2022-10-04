@@ -42,13 +42,13 @@ export const labelYearDropdown = (locale: Locale) => {
 export const labelMonthDropdown = (locale: Locale) => {
   switch (locale?.code) {
     case "nb":
-      return "Månede";
+      return "måned";
     case "nn":
-      return "Månede";
+      return "måned";
     case "en":
       return "Month";
     default:
-      return "Månede";
+      return "måned";
   }
 };
 

@@ -212,9 +212,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 onClose={() => onClose?.() ?? setOpen(false)}
                 placement="bottom-start"
                 id={ariaId}
-                aria-roledescription={
-                  locale === "en" ? "datepicker" : "datovelger"
-                }
                 role="dialog"
                 ref={ref}
               >
