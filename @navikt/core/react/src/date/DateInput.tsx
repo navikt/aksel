@@ -128,6 +128,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             size="small"
             onClick={() => onOpen()}
             className="navds-date__field-button"
+            tabIndex={open ? -1 : 0}
             icon={
               <Calender
                 title={
