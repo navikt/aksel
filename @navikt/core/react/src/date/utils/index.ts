@@ -17,11 +17,7 @@ export { isValidDate } from "./valid-date";
 export { disableDate } from "./dates-disabled";
 
 export { dateIsInCurrentMonth } from "./check-dates";
-export { getDefaultSelected } from "./get-initial-month";
-export {
-  updateWithoutDropdownCaption,
-  updateWithDropdownCaption,
-  hasNextYear,
-} from "./handle-selected";
+export { getInitialYear } from "./get-initial-year";
+export { hasNextYear } from "./handle-selected";
 export { isMatch, isDateInRange, Matcher } from "./is-match";
 export { nextEnabled } from "./navigation";

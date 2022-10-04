@@ -4,13 +4,7 @@ import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";
 import { useSharedMonthContext } from "../hooks/useSharedMonthContext";
-import {
-  hasNextYear,
-  labelNextYear,
-  labelPrevYear,
-  updateWithDropdownCaption,
-  updateWithoutDropdownCaption,
-} from "../utils";
+import { hasNextYear, labelNextYear, labelPrevYear } from "../utils";
 
 export const MonthCaption = () => {
   const {
@@ -38,10 +32,11 @@ export const MonthCaption = () => {
   const handleButtonClick = (val: number) => {
     let newMonth: Date;
     if (hasDropdown && hasNextYear(year, years, val)) {
-      newMonth = updateWithDropdownCaption(year, val);
+      newMonth = setYear(new Date(), year.getFullYear() + val);
       toYear(newMonth);
     } else if (!hasDropdown) {
-      newMonth = updateWithoutDropdownCaption(year, val);
+      const newYear = Number(year.getFullYear() + val);
+      newMonth = setYear(year, newYear);
       toYear(newMonth);
     }
   };

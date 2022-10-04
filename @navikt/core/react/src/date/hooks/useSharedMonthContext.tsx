@@ -2,7 +2,7 @@ import { setYear, startOfMonth } from "date-fns";
 import React, { createContext, useContext, useState } from "react";
 import { useDayPicker } from "react-day-picker";
 import { Matcher } from "../utils";
-import { getInitialYear } from "../utils/get-initial-month";
+import { getInitialYear } from "../utils/get-initial-year";
 
 export type SharedMonthContextType = {
   hasDropdown: boolean;
@@ -37,6 +37,14 @@ export const SharedMonthProvider = ({
   const [year, toYear] = useState<Date>(getInitialYear(context));
 
   const hasDropdown = !!(dropdownCaption && context.fromDate && context.toDate);
+
+  if (
+    context.fromDate &&
+    context.toDate &&
+    context?.fromDate >= context?.toDate
+  ) {
+    console.warn("fromDate needs to be before toDate - MonthPicker");
+  }
 
   return (
     <SharedMonthContext.Provider

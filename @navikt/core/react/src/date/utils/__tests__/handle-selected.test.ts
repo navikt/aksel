@@ -1,8 +1,4 @@
-import {
-  updateWithoutDropdownCaption,
-  updateWithDropdownCaption,
-  hasNextYear,
-} from "..";
+import { hasNextYear } from "..";
 
 const years = [
   new Date(),
@@ -14,62 +10,6 @@ const years = [
   new Date("Aug 5 2028"),
   new Date("Aug 5 2029"),
 ];
-
-describe("Returns date with updated year without selector", () => {
-  test("Date should be incremented with 1 year (Date)", () => {
-    expect(updateWithoutDropdownCaption(new Date(), 1).getFullYear()).toEqual(
-      2023
-    );
-  });
-  test("Date should be decremented with 1 year (Date)", () => {
-    expect(updateWithoutDropdownCaption(new Date(), -1).getFullYear()).toEqual(
-      2021
-    );
-  });
-});
-
-describe("Returns updated sekected date with selector", () => {
-  test("Date should be incremented with 1 years (2024)", () => {
-    expect(
-      updateWithDropdownCaption(
-        new Date("Aug 5 2023"),
-        new Date("Aug 5 2023"),
-        years,
-        1
-      ).getFullYear()
-    ).toEqual(2024);
-  });
-  test("Date should be incremented with 5 years (2028)", () => {
-    expect(
-      updateWithDropdownCaption(
-        new Date("Aug 5 2023"),
-        new Date("Aug 5 2023"),
-        years,
-        5
-      ).getFullYear()
-    ).toEqual(2028);
-  });
-  test("Date should be decremented with 5 years (Date)", () => {
-    expect(
-      updateWithDropdownCaption(
-        new Date("Aug 5 2028"),
-        new Date("Aug 5 2023"),
-        years,
-        -5
-      ).getFullYear()
-    ).toEqual(2023);
-  });
-  test("Date should be incremented with 1 years (Date)", () => {
-    expect(
-      updateWithDropdownCaption(
-        new Date("Aug 5 2023"),
-        new Date("Aug 5 2023"),
-        years,
-        -1
-      ).getFullYear()
-    ).toEqual(2022);
-  });
-});
 
 describe("Returns if year is at start or end of range", () => {
   test("Should have next year (true)", () => {
