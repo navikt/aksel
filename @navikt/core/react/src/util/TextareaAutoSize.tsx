@@ -123,7 +123,7 @@ const TextareaAutosize = forwardRef<HTMLTextAreaElement, TextareaAutosizeProps>(
           if (renders.current === 20) {
             console.error(
               [
-                "MUI: Too many re-renders. The layout is unstable.",
+                "Textarea: Too many re-renders. The layout is unstable.",
                 "TextareaAutosize limits the number of renders to prevent an infinite loop.",
               ].join("\n")
             );
