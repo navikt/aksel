@@ -1,12 +1,12 @@
 import { format } from "date-fns";
 import React, { useRef } from "react";
-import { DayProps, useDayRender, useDayPicker, Button } from "react-day-picker";
+import { Button, DayProps, useDayPicker, useDayRender } from "react-day-picker";
 
 export const DayButton = (props: DayProps) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const dayRender = useDayRender(props.date, props.displayMonth, buttonRef);
   const { locale } = useDayPicker();
-  const dateTime = format(props.date, "cccc c", { locale });
+  const dateTime = format(props.date, "cccc d", { locale });
 
   if (dayRender.isHidden) {
     return <></>;
@@ -14,6 +14,7 @@ export const DayButton = (props: DayProps) => {
   if (!dayRender.isButton) {
     return <div {...dayRender.divProps} />;
   }
+
   return (
     <Button
       name="day"
