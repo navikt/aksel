@@ -68,7 +68,9 @@
   flex-shrink: 0;
 }
 
-.navds-accordion__item--open .navds-accordion__expand-icon {
+.navds-accordion__item--open
+  > .navds-accordion__header
+  > .navds-accordion__expand-icon {
   transform: rotateZ(180deg);
 }
 
