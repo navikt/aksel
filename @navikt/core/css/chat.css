@@ -75,7 +75,7 @@
 }
 
 .navds-chat__top-text {
-  color: var(--navds-semantic-color-text-muted);
+  color: var(--navds-semantic-color-text);
   display: flex;
   gap: var(--navds-spacing-2);
   align-items: baseline;
