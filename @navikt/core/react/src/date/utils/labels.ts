@@ -5,7 +5,7 @@ const labelNext: NavButtonLabel = (date, options) => {
     case "nb":
       return "Gå til neste måned";
     case "nn":
-      return "Gå til neste måned";
+      return "Gå til neste månad";
     case "en":
       return "Go to next month";
     default:
@@ -18,7 +18,7 @@ const labelPrevious: NavButtonLabel = (date, options) => {
     case "nb":
       return "Gå til forrige måned";
     case "nn":
-      return "Gå til forrige måned";
+      return "Gå til førre månad";
     case "en":
       return "Go to previous month";
     default:
@@ -42,13 +42,13 @@ export const labelYearDropdown = (locale: Locale) => {
 export const labelMonthDropdown = (locale: Locale) => {
   switch (locale?.code) {
     case "nb":
-      return "måned";
+      return "Måned";
     case "nn":
-      return "måned";
+      return "Månad";
     case "en":
       return "Month";
     default:
-      return "måned";
+      return "Måned";
   }
 };
 
@@ -70,7 +70,7 @@ export const labelPrevYear = (localeCode: string | undefined): string => {
     case "nb":
       return "Gå til forrige år";
     case "nn":
-      return "Gå til forrige år";
+      return "Gå til førre år";
     case "en-GB":
       return "Go to next year";
     default:
