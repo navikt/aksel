@@ -116,11 +116,7 @@ export const UserControlled = () => {
   return (
     <div>
       <MonthPicker open={open} onClose={() => setOpen(false)} id={id}>
-        <Button
-          aria-controls={id}
-          aria-haspopup="grid"
-          onClick={() => setOpen((x) => !x)}
-        >
+        <Button aria-controls={id} onClick={() => setOpen((x) => !x)}>
           Velg måned
         </Button>
       </MonthPicker>

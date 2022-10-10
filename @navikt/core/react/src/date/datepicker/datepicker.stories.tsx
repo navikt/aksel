@@ -216,11 +216,7 @@ export const UserControlled = () => {
         onClose={() => setOpen(false)}
         id={id}
       >
-        <Button
-          aria-controls={id}
-          aria-haspopup="grid"
-          onClick={() => setOpen((x) => !x)}
-        >
+        <Button aria-controls={id} onClick={() => setOpen((x) => !x)}>
           Legg til dager
         </Button>
       </DatePicker>

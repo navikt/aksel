@@ -119,7 +119,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
               `navds-body-${size}`
             )}
             size={14}
-            aria-haspopup="grid"
           />
           <Button
             variant="tertiary"
@@ -137,7 +136,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
                 }
               />
             }
-            aria-haspopup="grid"
           />
         </div>
         <div
