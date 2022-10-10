@@ -100,18 +100,24 @@ export const useRangeDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) =>
-      ![datePickerRef.current, inputRefTo.current, inputRefFrom.current].some(
-        (element) => element?.contains(e.target)
-      ) &&
+      ![
+        datePickerRef.current,
+        inputRefTo.current,
+        inputRefFrom.current,
+        inputRefTo.current?.nextSibling,
+        inputRefFrom.current?.nextSibling,
+      ].some((element) => element?.contains(e.target)) &&
       open &&
       setOpen(false),
     [open]
   );
 
   useEffect(() => {
-    window?.addEventListener("focusin", handleFocusIn);
+    window.addEventListener("focusin", handleFocusIn);
+    window.addEventListener("click", handleFocusIn);
     return () => {
       window?.removeEventListener?.("focusin", handleFocusIn);
+      window?.removeEventListener?.("click", handleFocusIn);
     };
   }, [handleFocusIn]);
 

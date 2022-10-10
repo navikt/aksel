@@ -88,9 +88,11 @@ export const useDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) => {
-      ![daypickerRef.current, inputRef.current].some((element) =>
-        element?.contains(e.target)
-      ) &&
+      ![
+        daypickerRef.current,
+        inputRef.current,
+        inputRef.current?.nextSibling,
+      ].some((element) => element?.contains(e.target)) &&
         open &&
         setOpen(false);
     },
@@ -99,7 +101,11 @@ export const useDatepicker = (
 
   useEffect(() => {
     window.addEventListener("focusin", handleFocusIn);
-    return () => window?.removeEventListener?.("focusin", handleFocusIn);
+    window.addEventListener("click", handleFocusIn);
+    return () => {
+      window?.removeEventListener?.("focusin", handleFocusIn);
+      window?.removeEventListener?.("click", handleFocusIn);
+    };
   }, [handleFocusIn]);
 
   const reset = () => {

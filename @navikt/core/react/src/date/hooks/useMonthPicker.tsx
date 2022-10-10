@@ -77,17 +77,23 @@ export const useMonthPicker = (
 
   const handleFocusIn = useCallback(
     (e) =>
-      ![monthpickerRef.current, inputRef.current].some((element) =>
-        element?.contains(e.target)
-      ) &&
+      ![
+        monthpickerRef.current,
+        inputRef.current,
+        inputRef.current?.nextSibling,
+      ].some((element) => element?.contains(e.target)) &&
       open &&
       setOpen(false),
     [open]
   );
 
   useEffect(() => {
-    window?.addEventListener("focusin", handleFocusIn);
-    return () => window?.removeEventListener?.("focusin", handleFocusIn);
+    window.addEventListener("focusin", handleFocusIn);
+    window.addEventListener("click", handleFocusIn);
+    return () => {
+      window?.removeEventListener?.("focusin", handleFocusIn);
+      window?.removeEventListener?.("click", handleFocusIn);
+    };
   }, [handleFocusIn]);
 
   const reset = () => {

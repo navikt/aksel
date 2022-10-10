@@ -201,7 +201,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               arrow={false}
               anchorEl={wrapperRef.current}
               open={_open ?? open}
-              onClose={() => onClose?.() ?? setOpen(false)}
+              onClose={() => {
+                onClose?.() ?? setOpen(false);
+              }}
               placement="bottom-start"
               id={ariaId}
               role="dialog"
