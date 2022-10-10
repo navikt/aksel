@@ -24,7 +24,7 @@ html {
 [data-theme="light"] {
   --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
 
-  font-family: var(--navds-font-family);
+  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
   color: var(--navds-semantic-color-text);
 }
 
