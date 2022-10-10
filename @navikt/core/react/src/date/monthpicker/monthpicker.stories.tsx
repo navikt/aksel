@@ -91,6 +91,27 @@ export const UseMonthPicker = () => {
   );
 };
 
+export const Required = () => {
+  const { inputProps, monthpickerProps } = UNSAFE_useMonthPicker({
+    locale: "nb",
+    defaultSelected: new Date(),
+    disabled: [new Date("Apr 1 2022")],
+    required: true,
+  });
+
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker {...monthpickerProps}>
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg måned"
+          variant="monthpicker"
+        />
+      </MonthPicker>
+    </div>
+  );
+};
+
 export const UserControlled = () => {
   const [open, setOpen] = useState(false);
   const id = useId();

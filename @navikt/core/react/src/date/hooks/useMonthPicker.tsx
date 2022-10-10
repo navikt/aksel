@@ -56,6 +56,7 @@ export const useMonthPicker = (
     fromDate,
     toDate,
     disabled,
+    required,
   } = opt;
 
   const today = new Date();
@@ -133,7 +134,7 @@ export const useMonthPicker = (
       inputRef.current && inputRef.current.focus();
     }
 
-    if (/* !required &&  */ !month) {
+    if (!required && !month) {
       setSelectedMonth(undefined);
       setInputValue("");
       return;
