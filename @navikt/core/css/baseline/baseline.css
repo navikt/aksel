@@ -24,7 +24,6 @@ html {
 [data-theme="light"] {
   --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
 
-  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
   color: var(--navds-semantic-color-text);
 }
 
@@ -35,6 +34,7 @@ html {
 }
 
 body {
+  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
   line-height: 1.333;
   font-size: 1.125rem;
 }
