@@ -224,13 +224,12 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   const ariaHidden = hasAriaHiddenProp ? props["aria-hidden"] : height === 0;
 
   return (
-    <div
-      {...props}
-      aria-hidden={ariaHidden}
-      className={className}
-      style={componentStyle}
-    >
-      <div className={innerClassName} ref={contentElement}>
+    <div {...props} className={className} style={componentStyle}>
+      <div
+        aria-hidden={ariaHidden}
+        className={innerClassName}
+        ref={contentElement}
+      >
         {children}
       </div>
     </div>
