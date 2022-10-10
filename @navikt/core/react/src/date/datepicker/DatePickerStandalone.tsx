@@ -9,9 +9,10 @@ import {
   SelectRangeEventHandler,
   SelectSingleEventHandler,
 } from "react-day-picker";
+import { omit } from "../..";
+import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./DatePicker";
-import { getLocaleFromString, labels } from "../utils";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -44,7 +45,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       disabled = [],
       disableWeekends = false,
       showWeekNumber = false,
-      mode = "single",
       selected,
       id,
       defaultSelected,
@@ -74,9 +74,9 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
 
     const overrideProps = {
       onSelect:
-        mode === "single"
+        rest?.mode === "single"
           ? handleSingleSelect
-          : mode === "multiple"
+          : rest?.mode === "multiple"
           ? handleMultipleSelect
           : handleRangeSelect,
     };
@@ -88,7 +88,6 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
       >
         <DayPicker
           locale={getLocaleFromString(locale)}
-          mode={mode}
           {...overrideProps}
           selected={selected ?? selectedDates}
           components={{
@@ -111,7 +110,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
-          {...rest}
+          {...omit(rest, ["onSelect"])}
         />
       </div>
     );

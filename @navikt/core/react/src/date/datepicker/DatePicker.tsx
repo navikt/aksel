@@ -130,7 +130,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       disabled = [],
       disableWeekends = false,
       showWeekNumber = false,
-      mode = "single",
       selected,
       id,
       defaultSelected,
@@ -173,9 +172,9 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
 
     const overrideProps = {
       onSelect:
-        mode === "single"
+        rest?.mode === "single"
           ? handleSingleSelect
-          : mode === "multiple"
+          : rest?.mode === "multiple"
           ? handleMultipleSelect
           : handleRangeSelect,
     };
@@ -211,7 +210,6 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}
-                mode={mode}
                 {...overrideProps}
                 selected={selected ?? selectedDates}
                 components={{
