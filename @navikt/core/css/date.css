@@ -1,6 +1,9 @@
-/* Datepicker */
+.navds-date {
+  padding: var(--navds-spacing-3);
+}
+
 .navds-date .rdp-day_range_middle.rdp-day_disabled {
-  color: var(--navds-semantic-color-text-inverted);
+  color: var(--navds-global-color-white);
   background: var(--navds-global-color-deepblue-500);
 }
 
@@ -16,32 +19,31 @@
 
 .navds-date .rdp-head_cell {
   text-transform: capitalize;
-  font-size: 14px;
+  font-size: var(--navds-font-size-small);
 }
 
-/* Left-side weeknumbers */
 .navds-date .rdp-weeknumber {
-  color: white;
+  color: var(--navds-global-color-white);
   background: var(--navds-global-color-gray-800);
-  font-size: 14px;
+  font-size: var(--navds-font-size-small);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.125rem 0.25rem;
-  border-radius: 2px;
+  padding: 0.125rem var(--navds-spacing-1);
+  border-radius: var(--navds-border-radius-small);
 }
 
 .navds-date__caption-dropdown {
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--navds-spacing-2);
   align-items: center;
 }
 
 .navds-date__caption__month-wrapper {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--navds-spacing-2);
   align-items: center;
 }
 
@@ -54,19 +56,24 @@
   width: 2.5rem;
   height: 2.5rem;
   text-align: center;
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
 }
 
 .navds-date .rdp-day_range_start {
   border-radius: 12px 2px 2px 12px;
+  border-radius: var(--navds-border-radius-xlarge)
+    var(--navds-border-radius-small) var(--navds-border-radius-small)
+    var(--navds-border-radius-xlarge);
 }
 
 .navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
-  border-radius: 2px 12px 12px 2px;
+  border-radius: var(--navds-border-radius-small)
+    var(--navds-border-radius-xlarge) var(--navds-border-radius-xlarge)
+    var(--navds-border-radius-small);
 }
 
 .navds-date .rdp-day_range_start.rdp-day_range_end {
-  border-radius: 12px;
+  border-radius: var(--navds-border-radius-xlarge);
 }
 
 .navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
@@ -77,7 +84,7 @@
 
 .navds-date .rdp-button.rdp-day_selected:not([disabled]):focus,
 .navds-date .navds-date__month-button.rdp-day_selected:not([disabled]):focus {
-  box-shadow: inset 0 0 0 1px white,
+  box-shadow: inset 0 0 0 1px var(--navds-global-color-white),
     0 0 0 3px var(--navds-global-color-blue-800);
 }
 
@@ -85,11 +92,9 @@
 .navds-date__month-button {
   all: unset;
   text-align: center;
-  width: 47px;
-  height: 44px;
+  width: 3rem;
+  height: 2.75rem;
   text-transform: capitalize;
-  padding: 1px;
-  border: 1px solid transparent;
   border-radius: var(--navds-border-radius-medium);
   cursor: pointer;
 }
@@ -103,10 +108,6 @@
 .navds-date__year-label {
   display: flex;
   align-items: center;
-}
-
-.navds-date {
-  padding: var(--navds-spacing-3);
 }
 
 .navds-date__wrapper,
@@ -137,29 +138,18 @@
 
 .navds-date .rdp-day_selected,
 .navds-monthpicker__month--selected {
-  color: var(--navds-semantic-color-text-inverted);
+  color: var(--navds-global-color-white);
   background: var(--navds-global-color-deepblue-500);
 }
 
 .navds-date .rdp-day_disabled {
-  color: var(--navds-semantic-color-text-muted);
-  background-image: linear-gradient(
-    135deg,
-    #e8e8e8 10%,
-    var(--navds-global-color-white) 10%,
-    var(--navds-global-color-white) 50%,
-    #e8e8e8 50%,
-    #e8e8e8 60%,
-    var(--navds-global-color-white) 60%,
-    var(--navds-global-color-white) 100%
-  );
-  background-size: 7.07px 7.07px;
+  opacity: 0.7;
   cursor: not-allowed;
 }
 
 .navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,
 .navds-date__month-button:where(:not(.rdp-day_selected):not([disabled])):hover {
-  background: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  background: var(--navds-global-color-blue-50);
   cursor: pointer;
 }
 
@@ -171,7 +161,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--navds-spacing-2);
 }
 
 .navds-date__caption-button {
@@ -188,19 +178,19 @@
 
 .navds-date__field-button {
   position: absolute;
-  right: 0.5rem;
+  right: var(--navds-spacing-2);
   top: 50%;
   transform: translateY(-50%);
 }
 
 .navds-form-field--small .navds-date__field-button {
-  right: 0.5rem;
-  height: 24px;
-  width: 24px;
+  right: var(--navds-spacing-2);
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .navds-form-field--small .navds-date__field-button svg {
-  font-size: 16px;
+  font-size: var(--navds-font-size-medium);
 }
 
 .navds-date__caption__year {
