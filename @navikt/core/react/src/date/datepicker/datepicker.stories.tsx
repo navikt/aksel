@@ -1,7 +1,8 @@
 import { isSaturday } from "date-fns";
 import React, { useEffect, useId, useState } from "react";
-import { DatePicker, useDatepicker, useRangeDatepicker } from "..";
+import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
+import DatePicker from "./DatePicker";
 
 const disabledDays = [
   new Date("Aug 10 2022"),
@@ -37,12 +38,12 @@ export default {
 export const Default = (props) => {
   const [open, setOpen] = useState(false);
 
-  const rangeCtx = useRangeDatepicker({
+  const rangeCtx = UNSAFE_useRangeDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
   });
 
-  const singleCtx = useDatepicker({
+  const singleCtx = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2020"),
     toDate: new Date("Aug 23 2023"),
   });
@@ -123,36 +124,24 @@ Default.args = {
   openOnFocus: true,
 };
 
-export const DropdownCaption = (props) => (
-  <div>
-    <DatePicker
-      dropdownCaption
-      fromDate={new Date("Aug 23 2018")}
-      toDate={new Date("Aug 23 2022")}
-    >
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
+export const DropdownCaption = () => (
+  <DatePicker.Standalone
+    dropdownCaption
+    fromDate={new Date("Aug 23 2018")}
+    toDate={new Date("Aug 23 2022")}
+  />
 );
 
 export const DisabledDays = (props) => (
-  <div>
-    <DatePicker disabled={disabledDays} disableWeekends locale="en">
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
+  <DatePicker.Standalone disabled={disabledDays} disableWeekends />
 );
 
 export const ShowWeekNumber = (props) => (
-  <div>
-    <DatePicker showWeekNumber>
-      <DatePicker.Input label="Velg dato" size={props.size}></DatePicker.Input>
-    </DatePicker>
-  </div>
+  <DatePicker.Standalone showWeekNumber />
 );
 
 export const UseDatepicker = () => {
-  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
   });
@@ -172,7 +161,7 @@ export const UseDatepicker = () => {
 
 export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
-    useRangeDatepicker({
+    UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
     });
 
@@ -192,16 +181,15 @@ export const UseRangedDatepicker = () => {
   );
 };
 
-export const NoPopover = () => (
+export const Standalone = () => (
   <div>
     <DatePicker.Standalone />
   </div>
 );
 
-export const NoPopoverRanged = () => (
-  <div>
-    <DatePicker.Standalone mode="range" />
-  </div>
+export const StandaloneRange = () => <DatePicker.Standalone mode="range" />;
+export const StandaloneMultiple = () => (
+  <DatePicker.Standalone mode="multiple" />
 );
 
 export const UserControlled = () => {
@@ -225,12 +213,13 @@ export const UserControlled = () => {
 };
 
 export const Validering = () => {
-  const { datepickerProps, selectedDay, inputProps } = useDatepicker({
+  const { datepickerProps, selectedDay, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
   });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
+      <button>a</button>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
