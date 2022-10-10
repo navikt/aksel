@@ -77,8 +77,10 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
           `navds-form-field--${size}`,
           "navds-date__field",
           {
+            "navds-text-field--error": hasError,
             "navds-date__field--error": hasError,
-            "navds-date__field--disabled": !!inputProps.disabled,
+            "navds-form-field--disabled": !!inputProps.disabled,
+            "navds-text-field--disabled": !!inputProps.disabled,
           }
         )}
         ref={props?.wrapperRef}
@@ -127,6 +129,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             onClick={() => onOpen()}
             className="navds-date__field-button"
             tabIndex={open ? -1 : 0}
+            disabled={inputProps.disabled}
             icon={
               <Calender
                 title={

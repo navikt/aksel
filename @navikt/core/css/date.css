@@ -193,6 +193,10 @@
   font-size: var(--navds-font-size-medium);
 }
 
+.navds-form-field--disabled .navds-date__field-button {
+  opacity: 1;
+}
+
 .navds-date__caption__year {
   width: 5rem;
 }

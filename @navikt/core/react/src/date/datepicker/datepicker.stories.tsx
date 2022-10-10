@@ -209,7 +209,6 @@ export const Validering = () => {
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
-      <button>a</button>
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
@@ -220,6 +219,16 @@ export const Validering = () => {
           {...inputProps}
           label="Velg dato"
         />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const DisabledInput = () => {
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker>
+        <DatePicker.Input disabled label="Velg dato" />
       </DatePicker>
     </div>
   );

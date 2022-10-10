@@ -324,7 +324,7 @@
   cursor: not-allowed;
 }
 
-.navds-button:disabled:not(.navds-button--loading) {
+.navds-button:where(:disabled:not(.navds-button--loading)) {
   opacity: 0.3;
 }
 
