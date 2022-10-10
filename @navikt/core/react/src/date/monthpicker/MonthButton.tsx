@@ -51,8 +51,9 @@ export const MonthButton = ({
   useEffect(() => {
     if (focus) {
       isSameMonth(month, focus) && ref.current && ref.current.focus();
+      setFocus();
     }
-  }, [focus, month]);
+  }, [focus, month, setFocus]);
 
   const isDisabled =
     isMatch(setYear(month, year.getFullYear()), disabled) ||
@@ -75,19 +76,19 @@ export const MonthButton = ({
           : -1
       }
       onKeyDown={(e) => {
-        setFocus(
-          nextEnabled(
-            months,
-            e.key,
-            disabled,
-            month,
-            toYear,
-            year,
-            hasDropdown,
-            fromDate,
-            toDate
-          )
+        const next = nextEnabled(
+          months,
+          e.key,
+          disabled,
+          month,
+          toYear,
+          year,
+          hasDropdown,
+          fromDate,
+          toDate
         );
+        setFocus(next);
+        setTabRoot(next);
       }}
       onFocus={() => {
         setTabRoot(focus);
