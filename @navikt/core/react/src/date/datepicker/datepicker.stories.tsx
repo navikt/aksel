@@ -1,11 +1,11 @@
 import { isSaturday } from "date-fns";
-import React, { useEffect, useId, useState } from "react";
+import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
 import DatePicker from "./DatePicker";
 
 const disabledDays = [
-  new Date("Aug 10 2022"),
+  new Date("Oct 10 2022"),
   { from: new Date("Aug 31 2022"), to: new Date("Sep 8 2022") },
 ];
 
@@ -132,23 +132,17 @@ export const DropdownCaption = () => (
   />
 );
 
-export const DisabledDays = (props) => (
+export const DisabledDays = () => (
   <DatePicker.Standalone disabled={disabledDays} disableWeekends />
 );
 
-export const ShowWeekNumber = (props) => (
-  <DatePicker.Standalone showWeekNumber />
-);
+export const ShowWeekNumber = () => <DatePicker.Standalone showWeekNumber />;
 
 export const UseDatepicker = () => {
-  const { datepickerProps, selectedDay, inputProps } = UNSAFE_useDatepicker({
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     locale: "en",
   });
-
-  useEffect(() => {
-    /* selectedDay && isValidDate(selectedDay) && console.log(selectedDay); */
-  }, [selectedDay]);
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
@@ -160,14 +154,10 @@ export const UseDatepicker = () => {
 };
 
 export const UseRangedDatepicker = () => {
-  const { datepickerProps, fromInputProps, toInputProps, selectedRange } =
+  const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
     });
-
-  useEffect(() => {
-    /* selectedRange && console.log(selectedRange); */
-  }, [selectedRange]);
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
@@ -181,11 +171,11 @@ export const UseRangedDatepicker = () => {
   );
 };
 
-export const Standalone = () => (
-  <div>
-    <DatePicker.Standalone />
-  </div>
-);
+export const NB = () => <DatePicker.Standalone locale="nb" />;
+export const NN = () => <DatePicker.Standalone locale="nn" />;
+export const EN = () => <DatePicker.Standalone locale="en" />;
+
+export const Standalone = () => <DatePicker.Standalone />;
 
 export const StandaloneRange = () => <DatePicker.Standalone mode="range" />;
 export const StandaloneMultiple = () => (
