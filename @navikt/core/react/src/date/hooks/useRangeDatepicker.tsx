@@ -288,7 +288,6 @@ export const useRangeDatepicker = (
     if (selectedRange?.from && !selectedRange?.to) {
       inputRefTo?.current?.focus();
     } else {
-      console.log(inputRefFrom);
       inputRefFrom?.current?.focus();
     }
   }, [selectedRange]);
