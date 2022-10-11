@@ -39,14 +39,12 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   locale?: "nb" | "nn" | "en";
   /**
-   * Display dropdown for choosing year.
-   * Needs `fromDate` + `toDate` to work.
+   * Display dropdown for choosing year. Needs `fromDate` + `toDate` to work.
    * @default false
    */
   dropdownCaption?: boolean;
   /**
-   * Apply the disabled modifier to the matching months. Uses a subset of React Day Picker Matcher type.
-   * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
+   * Apply the disabled modifier to the matching months. Uses a subset of React Day Picker Matcher type. https://react-day-picker.js.org/api/types/Matcher
    */
   disabled?: Matcher[];
   /**
@@ -58,8 +56,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   defaultSelected?: Date;
   /**
-   * Open state for user-controlled state
-   * Component controlled by default
+   * Open state for user-controlled state. Component controlled by default
    */
   open?: boolean;
   /**
@@ -67,8 +64,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onClose?: () => void;
   /**
-   * onOpenToggle callback for user-controlled-state
-   * only called if `<MonthPicker.Input />` is used
+   * onOpenToggle callback for user-controlled-state. Only called if `<MonthPicker.Input />` is used
    */
   onOpenToggle?: () => void;
   /**
@@ -76,8 +72,7 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   onMonthSelect?: Function;
   /**
-   * Used to set visible year programmatically
-   * Component controlled by default
+   * Used to set visible year programmatically. Component controlled by default
    */
   year?: Date;
   /**

@@ -28,10 +28,7 @@ interface UseMonthPickerValue {
   /**
    * Use: <MonthPicker.Input {...inputProps} />
    */
-  inputProps: Pick<
-    DateInputProps,
-    "onChange" | "onFocus" | "value" | "wrapperRef"
-  >;
+  inputProps: Pick<DateInputProps, "onChange" | "onFocus" | "value">;
   /**
    * Currently selected Date
    * Up to user to validate value and extract month

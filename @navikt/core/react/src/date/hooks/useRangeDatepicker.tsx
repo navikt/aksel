@@ -213,7 +213,6 @@ export const useRangeDatepicker = (
   const handleSelect = (range) => {
     if (range.from && range.to) {
       setOpen(false);
-      // TODO: fokus på en av input-feltene?
     }
     const prevToRange =
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;

@@ -50,8 +50,7 @@ export interface DatePickerDefaultProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "onSelect">,
     Pick<DayPickerBase, "month" | "onMonthChange" | "today" | "onDayClick"> {
   /**
-   * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle,
-   * or make your own with the open/onClose props
+   * Element datepicker anchors to. Use <DatePicker.Input /> for built-in toggle, or make your own with the open/onClose props
    */
   children?: React.ReactNode;
   /**
@@ -76,14 +75,13 @@ export interface DatePickerDefaultProps
    */
   toDate?: Date;
   /**
-   * Display dropdown for choosing the month and the year.
-   * Needs `fromDate` + `toDate` to work.
+   * Display dropdown for choosing the month and the year. Needs `fromDate` + `toDate` to work.
    * @default false
    */
   dropdownCaption?: boolean;
   /**
    * Apply the disabled modifier to the matching days.
-   * {@link https://react-day-picker.js.org/api/types/Matcher | Matcher type-definition}
+   * https://react-day-picker.js.org/api/types/Matcher
    */
   disabled?: Matcher[];
   /**
@@ -92,14 +90,12 @@ export interface DatePickerDefaultProps
    */
   disableWeekends?: boolean;
   /**
-   * Shows week numbers in left-column
-   * Use with caution, takes up valuable screenspace for small screens.
+   * Shows week numbers in left-column. Use with caution, takes up valuable screenspace for small screens.
    * @default false
    */
   showWeekNumber?: boolean;
   /**
-   * Open state for user-controlled state
-   * Component controlled by default
+   * Open state for user-controlled state. Component controlled by default
    */
   open?: boolean;
   /**
@@ -107,8 +103,7 @@ export interface DatePickerDefaultProps
    */
   onClose?: () => void;
   /**
-   * onOpenToggle callback for user-controlled state
-   * only called if `<DatePicker.Input />` is used
+   * onOpenToggle callback for user-controlled state. Only called if `<DatePicker.Input />` is used
    */
   onOpenToggle?: () => void;
 }

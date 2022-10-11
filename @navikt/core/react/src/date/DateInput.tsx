@@ -25,11 +25,6 @@ export interface DateInputProps
   /**
    * @private
    */
-  wrapperRef?: React.RefObject<HTMLDivElement>;
-  /**
-   * Defines usage for date or month picker.
-   * @default "datepicker"
-   */
   variant?: "datepicker" | "monthpicker";
 }
 
@@ -83,7 +78,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             "navds-text-field--disabled": !!inputProps.disabled,
           }
         )}
-        ref={props?.wrapperRef}
       >
         <Label
           htmlFor={inputProps.id}
@@ -109,7 +103,7 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
         <div className="navds-date__field-wrapper">
           <input
             ref={ref}
-            {...omit(rest, ["error", "errorId", "size", "wrapperRef"])}
+            {...omit(rest, ["error", "errorId", "size"])}
             {...inputProps}
             autoComplete="off"
             aria-controls={ariaId}
