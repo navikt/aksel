@@ -1,6 +1,6 @@
 import React, { useId, useState } from "react";
 import { Button } from "../..";
-import { UNSAFE_useMonthPicker } from "../hooks";
+import { UNSAFE_useMonthpicker } from "../hooks";
 import MonthPicker from "./MonthPicker";
 
 export default {
@@ -23,7 +23,7 @@ export default {
 };
 
 export const Default = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthPicker({
+  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
     disabled: [new Date("Apr 1 2022")],
   });
 
@@ -71,8 +71,8 @@ export const Standalone = () => {
   return <MonthPicker.Standalone />;
 };
 
-export const UseMonthPicker = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthPicker({
+export const UseMonthpicker = () => {
+  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
     locale: "nb",
     defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],
@@ -92,7 +92,7 @@ export const UseMonthPicker = () => {
 };
 
 export const Required = () => {
-  const { inputProps, monthpickerProps } = UNSAFE_useMonthPicker({
+  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
     locale: "nb",
     defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],

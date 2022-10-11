@@ -7,7 +7,7 @@ export { DatePickerStandaloneProps } from "./datepicker/DatePickerStandalone";
 export { MonthPickerStandaloneProps } from "./monthpicker/MonthPickerStandalone";
 export {
   UNSAFE_useDatepicker,
-  UNSAFE_useMonthPicker,
+  UNSAFE_useMonthpicker,
   UNSAFE_useRangeDatepicker,
 } from "./hooks";
 export {

@@ -47,7 +47,7 @@ interface UseMonthPickerValue {
   reset: () => void;
 }
 
-export const useMonthPicker = (
+export const useMonthpicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
   const {
