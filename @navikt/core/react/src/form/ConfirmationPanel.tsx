@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useId } from "react";
 import cl from "clsx";
 import { BodyLong, Checkbox, CheckboxProps, ErrorMessage } from "..";
 import { useFormField } from "./useFormField";
@@ -32,8 +32,10 @@ export const ConfirmationPanel = forwardRef<
 >(({ className, children, label, ...props }, ref) => {
   const { errorId, showErrorMsg, hasError, size, inputProps } = useFormField(
     props,
-    "confirmationPanel"
+    "confirmation-panel"
   );
+
+  const id = useId();
 
   return (
     <div
@@ -48,6 +50,7 @@ export const ConfirmationPanel = forwardRef<
           <BodyLong
             size={props.size}
             className="navds-confirmation-panel__content"
+            id={`confirmation-panel-${id}`}
           >
             {children}
           </BodyLong>
@@ -56,6 +59,10 @@ export const ConfirmationPanel = forwardRef<
           ref={ref}
           {...props}
           {...inputProps}
+          aria-describedby={cl(
+            inputProps["aria-describedby"],
+            children && `confirmation-panel-${id}`
+          )}
           error={hasError}
           size={size}
         >
