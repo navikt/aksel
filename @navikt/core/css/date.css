@@ -140,6 +140,7 @@
 .navds-monthpicker__month--selected {
   color: var(--navds-global-color-white);
   background: var(--navds-global-color-deepblue-500);
+  cursor: pointer;
 }
 
 .navds-date .rdp-day_disabled {
