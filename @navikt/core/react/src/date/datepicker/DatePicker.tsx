@@ -171,6 +171,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
     };
 
     const overrideProps = {
+      mode: rest.mode ?? ("single" as any),
       onSelect:
         rest?.mode === "single"
           ? handleSingleSelect

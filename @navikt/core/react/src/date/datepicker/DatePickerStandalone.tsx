@@ -73,6 +73,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
     };
 
     const overrideProps = {
+      mode: rest.mode ?? ("single" as any),
       onSelect:
         rest?.mode === "single"
           ? handleSingleSelect
