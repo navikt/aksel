@@ -4,6 +4,9 @@ import { HelpText } from "..";
 export default {
   title: "ds-react/HelpText",
   component: HelpText,
+  parameters: {
+    chromatic: { delay: 300 },
+  },
   argTypes: {
     placement: {
       control: {
