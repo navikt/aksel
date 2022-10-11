@@ -1,2 +1,44 @@
 .navds-stack {
+  --a-stack-spacing: var(--navds-spacing-4);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: var(--a-stack-spacing);
+}
+
+.navds-stack--no-wrap {
+  flex-wrap: nowrap;
+}
+
+.navds-stack--vertical {
+  flex-direction: column;
+}
+
+.navds-stack--spacing-0 {
+  --a-stack-spacing: 0;
+}
+
+.navds-stack--spacing-1 {
+  --a-stack-spacing: var(--navds-spacing-1);
+}
+
+.navds-stack--spacing-2 {
+  --a-stack-spacing: var(--navds-spacing-2);
+}
+
+.navds-stack--spacing-3 {
+  --a-stack-spacing: var(--navds-spacing-3);
+}
+
+.navds-stack--spacing-4 {
+  --a-stack-spacing: var(--navds-spacing-4);
+}
+
+.navds-stack--spacing-5 {
+  --a-stack-spacing: var(--navds-spacing-5);
+}
+
+.navds-stack--spacing-8 {
+  --a-stack-spacing: var(--navds-spacing-8);
 }

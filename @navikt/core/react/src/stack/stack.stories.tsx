@@ -1,10 +1,11 @@
 import React from "react";
-import { Tag } from ".";
+import { Tag } from "..";
+import { Stack } from ".";
 
 export default {
-  title: "ds-react/Tag",
-  component: Tag,
-  argTypes: {
+  title: "ds-react/Stack",
+  component: Stack,
+  /* argTypes: {
     variant: {
       defaultValue: "info",
       control: {
@@ -12,34 +13,31 @@ export default {
         options: ["error", "warning", "info", "success"],
       },
     },
-  },
+  }, */
 };
 
-const variants: Array<"error" | "warning" | "info" | "success"> = [
-  "error",
-  "warning",
-  "info",
-  "success",
-];
-
-export const Default = (props) => (
-  <Tag variant={props.variant} size={props.size}>
-    {props.children}
-  </Tag>
+const elements = (
+  <>
+    <Tag variant="info">Info</Tag>
+    <Tag variant="success">success</Tag>
+    <Tag variant="error">error</Tag>
+    <Tag variant="warning">warning</Tag>
+  </>
 );
 
-Default.args = {
-  children: "Id elit esse",
-};
+export const Default = (props) => <Stack>{elements}</Stack>;
 
-export const Small = () => {
-  return (
-    <div className="rowgap">
-      {variants.map((variant, i) => (
-        <Tag key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill("Id elit esse")}
-        </Tag>
-      ))}
-    </div>
-  );
-};
+export const NoWrap = () => <Stack wrap={false}>{elements}</Stack>;
+export const Vertical = () => <Stack vertical>{elements}</Stack>;
+
+export const Spacing = () => (
+  <div className="colgap">
+    <Stack spacing="0">{elements}</Stack>
+    <Stack spacing="1">{elements}</Stack>
+    <Stack spacing="2">{elements}</Stack>
+    <Stack spacing="3">{elements}</Stack>
+    <Stack spacing="4">{elements}</Stack>
+    <Stack spacing="5">{elements}</Stack>
+    <Stack spacing="8">{elements}</Stack>
+  </div>
+);

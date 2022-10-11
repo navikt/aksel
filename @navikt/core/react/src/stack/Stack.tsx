@@ -1,5 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
+import { OverridableComponent } from "../util";
 
 export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -7,20 +8,51 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Changes background and border color
+   *
+   * @default false
    */
-  variant: "warning" | "error" | "info" | "success";
+  vertical?: boolean;
   /**
-   * Changes padding and font-sizes
-   * @default "medium"
+   *
+   * @default true
    */
-  size?: "medium" | "small";
+  wrap?: boolean;
+  /**
+   *
+   * @default "4"
+   */
+  spacing?: "0" | "1" | "2" | "3" | "4" | "5" | "8";
 }
 
-export const Stack = forwardRef<HTMLDivElement, StackProps>(
-  ({ className, ...rest }, ref) => {
-    return <div {...rest} ref={ref} className={cl("navds-tag", className)} />;
-  }
-);
+export const Stack: OverridableComponent<StackProps, HTMLDivElement> =
+  forwardRef(
+    (
+      {
+        className,
+        as: Component = "div",
+        vertical = false,
+        wrap = true,
+        spacing = "4",
+        ...rest
+      },
+      ref
+    ) => {
+      return (
+        <Component
+          {...rest}
+          ref={ref}
+          className={cl(
+            "navds-stack",
+            className,
+            `navds-stack--spacing-${spacing}`,
+            {
+              "navds-stack--vertical": vertical,
+              "navds-stack--no-wrap": !wrap,
+            }
+          )}
+        />
+      );
+    }
+  );
 
 export default Stack;
