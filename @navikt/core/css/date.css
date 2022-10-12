@@ -182,6 +182,7 @@
   right: var(--navds-spacing-2);
   top: 50%;
   transform: translateY(-50%);
+  color: var(--navds-global-color-gray-900);
 }
 
 .navds-form-field--small .navds-date__field-button {
