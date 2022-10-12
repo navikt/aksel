@@ -5,7 +5,7 @@
 
 <div align="center">
     <p>
-        Monorepo for Frontend-komponenter brukt i NAV.
+        Frontend-komponenter brukt i NAV.
     </p>
     <div align="center">
       <a href="https://github.com/navikt/Designsystemet/pulls">
