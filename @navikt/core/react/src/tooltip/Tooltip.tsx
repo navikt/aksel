@@ -13,7 +13,6 @@ import {
   useInteractions,
 } from "@floating-ui/react-dom-interactions";
 import cl from "clsx";
-import { open } from "fs";
 import React, {
   cloneElement,
   forwardRef,
