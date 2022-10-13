@@ -72,12 +72,12 @@
   grid-column: content;
   padding-top: 0.035rem;
   color: var(--navds-global-color-gray-900);
+  display: grid;
 }
 
 .navds-timeline__content-label {
-  height: 32px;
   display: flex;
-  align-items: center;
+  margin-top: var(--navds-spacing-1);
 }
 
 .navds-timeline__content-description {

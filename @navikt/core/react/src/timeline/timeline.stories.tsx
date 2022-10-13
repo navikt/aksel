@@ -54,9 +54,17 @@ export const Default = ({ asButton, ...props }) => {
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
         </Timeline.Step>
-        <Timeline.Step icon={Office1} title="Tittel på del av prosessen">
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
+        <Timeline.Step
+          icon={Office1}
+          title="In ea tempor nulla consequat sunt deserunt ullamco aliqua elit excepteur. Anim et fugiat esse enim irure est pariatur pariatur"
+        >
+          Esse cillum labore dolore pariatur anim exercitation aute tempor. Do
+          elit fugiat culpa esse elit ut pariatur et amet qui minim cupidatat
+          pariatur id. Amet id est aliqua id. Sit reprehenderit enim occaecat
+          deserunt quis est incididunt sunt non. Et nostrud voluptate duis
+          consectetur Lorem ullamco veniam fugiat. Consequat ea aliquip nisi
+          incididunt magna in ex deserunt fugiat occaecat et. Labore consequat
+          esse labore sint eiusmod ut.
         </Timeline.Step>
         <Timeline.Step icon={Laptop} title="Tittel på del av prosessen">
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
