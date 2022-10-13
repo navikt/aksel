@@ -27,38 +27,27 @@ const elements = (
 
 export const Default = (props) => <Stack>{elements}</Stack>;
 
-export const NoWrap = () => <Stack wrap={false}>{elements}</Stack>;
-export const Vertical = () => <Stack vertical>{elements}</Stack>;
-
 export const Spacing = () => (
-  <div className="colgap">
-    <Stack spacing="0">{elements}</Stack>
+  <div className="rowgap">
     <Stack spacing="1">{elements}</Stack>
     <Stack spacing="2">{elements}</Stack>
     <Stack spacing="3">{elements}</Stack>
     <Stack spacing="4">{elements}</Stack>
-    <Stack spacing="5">{elements}</Stack>
-    <Stack spacing="8">{elements}</Stack>
   </div>
 );
 
-export const AlignCenter = () => (
-  <Stack align="center">
-    <span>Text</span>
-    {elements}
-  </Stack>
+export const align = () => (
+  <div className="rowgap">
+    <Stack align="start">{elements}</Stack>
+    <Stack align="center">{elements}</Stack>
+    <Stack align="end">{elements}</Stack>
+  </div>
 );
 
-export const DistributeFill = () => (
-  <Stack distribute="fill">
-    <span>message</span>
-    {elements}
-  </Stack>
-);
-
-export const DistributeEvenly = () => (
-  <Stack distribute="fillEvenly">
-    <span>message</span>
-    {elements}
-  </Stack>
+export const fullWidth = () => (
+  <div style={{ width: "10rem" }}>
+    <Stack align="start" fullWidth>
+      {elements}
+    </Stack>
+  </div>
 );

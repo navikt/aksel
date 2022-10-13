@@ -1,0 +1,14 @@
+.navds-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: var(--navdsc-stack-align);
+  gap: var(--navdsc-stack-spacing);
+}
+
+.navds-stack > * {
+  max-width: 100%;
+}
+
+.navds-stack--fullwidth > * {
+  width: 100%;
+}
