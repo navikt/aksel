@@ -41,3 +41,24 @@ export const Spacing = () => (
     <Stack spacing="8">{elements}</Stack>
   </div>
 );
+
+export const AlignCenter = () => (
+  <Stack align="center">
+    <span>Text</span>
+    {elements}
+  </Stack>
+);
+
+export const DistributeFill = () => (
+  <Stack distribute="fill">
+    <span>message</span>
+    {elements}
+  </Stack>
+);
+
+export const DistributeEvenly = () => (
+  <Stack distribute="fillEvenly">
+    <span>message</span>
+    {elements}
+  </Stack>
+);
