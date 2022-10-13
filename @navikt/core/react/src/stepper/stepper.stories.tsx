@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React, { useState } from "react";
-import { BodyLong } from "..";
+import { BodyLong, Button } from "..";
 import Stepper from "./Stepper";
 
 export default {
