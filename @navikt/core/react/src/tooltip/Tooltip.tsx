@@ -153,7 +153,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
     if (content?.length > maxChar) {
       (userOpen ?? open) &&
         console.warn(
-          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop`
+          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop\n\nLength:${content.length}\nTooltip-content: ${content}`
         );
     }
 
