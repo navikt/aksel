@@ -5,12 +5,9 @@ import { TimelineContext } from "./Timeline";
 
 export interface TimelineStepProps
   extends React.AnchorHTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
   /**
-   * Text content by indicator
-   */
-  children: string;
-  /**
-   * Handled by Timeline, overwriting may break component logic
+   * Handled by Timeline, overwriting breaks component logic
    * @private
    */
   unsafe_index?: number;
