@@ -11,6 +11,7 @@ export const AppProviderContext = createContext<
 export interface AppProviderProps {
   /** Inner content of the application */
   children?: React.ReactNode;
+  /** Options */
   options?: { size?: "medium" | "small" };
 }
 

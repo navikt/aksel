@@ -56,7 +56,7 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
     hasError,
     errorId,
     inputDescriptionId,
-    size: sizeCtx ?? fieldset?.size ?? "medium",
+    size: fieldset?.size ?? sizeCtx ?? "medium",
     inputProps: {
       id,
       "aria-invalid": hasError,
