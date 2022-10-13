@@ -1,2 +1,2 @@
-export { default as AppProvider } from "./AppProvider";
+export { default as UNSAFE_AppProvider } from "./AppProvider";
 export { AppProviderProps } from "./AppProvider";

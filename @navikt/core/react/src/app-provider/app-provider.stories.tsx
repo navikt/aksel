@@ -1,5 +1,5 @@
 import React from "react";
-import { AppProvider } from ".";
+import { UNSAFE_AppProvider as AppProvider } from ".";
 import {
   Alert,
   Button,

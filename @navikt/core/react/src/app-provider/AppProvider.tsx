@@ -15,7 +15,7 @@ export interface AppProviderProps {
   options?: { size?: "medium" | "small" };
 }
 
-export const AppProvider = ({ children, options }: AppProviderProps) => {
+export const UNSAFE_AppProvider = ({ children, options }: AppProviderProps) => {
   return (
     <AppProviderContext.Provider value={{ size: options?.size ?? "medium" }}>
       {children}
@@ -23,4 +23,4 @@ export const AppProvider = ({ children, options }: AppProviderProps) => {
   );
 };
 
-export default AppProvider;
+export default UNSAFE_AppProvider;
