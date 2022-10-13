@@ -10,7 +10,8 @@ import {
   mergeRefs,
 } from "@navikt/ds-react";
 
-export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
+export interface CopyToClipboardProps
+  extends Omit<ButtonProps, "children" | "variant" | "loading"> {
   /**
    * Button text
    */
@@ -46,10 +47,10 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    */
   title?: string;
   /**
-   * Placement of icon
-   * @default "left"
+   * Components i tertiary by default. Will be removed in v2.0.0
+   * @breaking v2
    */
-  iconPosition?: "left" | "right";
+  variant?: "tertiary";
 }
 
 export const CopyToClipboard = forwardRef<

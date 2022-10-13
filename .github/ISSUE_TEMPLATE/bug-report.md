@@ -6,18 +6,6 @@ labels: "bug \U0001F41B"
 assignees: ""
 ---
 
-## Hvilken løsning gjelder det?
-
-<!--
-  Sett en x i type løsning det gjelder:
-- [x] type
--->
-
-- [ ] `Komponenter`
-- [ ] `Stiler`
-- [ ] `Ikoner`
-- [ ] `Annet`
-
 ## Hva er feilen/problemet?
 
 <!--

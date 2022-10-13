@@ -28,6 +28,10 @@ export interface ModalProps {
    */
   className?: string;
   /**
+   * User defined classname for modal
+   */
+  overlayClassName?: string;
+  /**
    * Removes close-button(X) when false
    * @default true
    */
@@ -69,6 +73,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       open,
       onClose,
       className,
+      overlayClassName,
       shouldCloseOnOverlayClick = true,
       closeButton = true,
       "aria-describedby": ariaDescribedBy,
@@ -99,7 +104,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
         isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
-        overlayClassName="navds-modal__overlay"
+        overlayClassName={cl("navds-modal__overlay", overlayClassName)}
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         onRequestClose={(e) => onModalCloseRequest(e)}
         aria={{

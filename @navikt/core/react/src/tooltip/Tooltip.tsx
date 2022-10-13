@@ -145,16 +145,16 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
       (children as any) === React.Fragment
     ) {
       console.error(
-        "<Tooltip> children needs to be a single ReactElement and not <React.Fragment/>/<></>"
+        "<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>"
       );
       return null;
     }
 
     if (content?.length > maxChar) {
-      console.error(
-        `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop`
-      );
-      return null;
+      (userOpen ?? open) &&
+        console.warn(
+          `Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop`
+        );
     }
 
     return (

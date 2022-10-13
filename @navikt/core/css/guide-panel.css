@@ -13,7 +13,7 @@
  */
 .navds-guide-panel {
   position: relative;
-  padding-left: 2.5rem;
+  padding-left: var(--navds-spacing-10);
 }
 
 .navds-guide-panel__content {
@@ -21,23 +21,23 @@
   border-radius: var(--navds-border-radius-medium);
   border: 2px solid var(--navds-guide-panel-color-border);
   min-height: 7.25rem;
-  padding: 1.5rem;
-  padding-left: 3.5rem;
+  padding: var(--navds-spacing-6);
+  padding-left: var(--navds-spacing-14);
 }
 
 .navds-guide-panel--poster {
   padding-left: 0;
-  padding-top: 3.125rem;
+  padding-top: var(--navds-spacing-12);
 }
 
 .navds-guide-panel--poster .navds-guide-panel__content {
-  padding: 2rem;
-  padding-top: 4.25rem;
+  padding: var(--navds-spacing-8);
+  padding-top: var(--navds-spacing-16);
 }
 
 .navds-guide-panel .navds-guide {
   position: absolute;
-  top: 1rem;
+  top: var(--navds-spacing-4);
   transform: translateX(-50%);
 }
 
@@ -75,6 +75,6 @@
 }
 
 .navds-guide__illustration--medium {
-  height: 6.25rem;
-  width: 6.25rem;
+  height: 6rem;
+  width: 6rem;
 }

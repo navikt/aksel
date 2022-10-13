@@ -55,12 +55,16 @@
   gap: var(--navds-spacing-1);
 }
 
-.navds-pagination--small .navds-pagination__prev-next {
-  padding: 0.375rem;
+.navds-pagination--small
+  .navds-pagination__prev-next:where(.navds-pagination--prev-next--with-text) {
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
 }
 
-.navds-pagination--xsmall .navds-pagination__prev-next {
-  padding: 0.125rem;
+.navds-pagination--xsmall
+  .navds-pagination__prev-next:where(.navds-pagination--prev-next--with-text) {
+  padding-left: 0.125rem;
+  padding-right: 0.125rem;
 }
 
 .navds-pagination--invisible {

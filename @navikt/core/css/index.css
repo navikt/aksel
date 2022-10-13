@@ -2,7 +2,6 @@
 @import "baseline/baseline.css";
 @import "typography.css";
 @import "grid.css";
-
 @import "accordion.css";
 @import "alert.css";
 @import "button.css";
@@ -16,6 +15,7 @@
 @import "modal.css";
 @import "pagination.css";
 @import "popover.css";
+@import "date.css";
 @import "tag.css";
 @import "tooltip.css";
 @import "toggle-group.css";

@@ -15,14 +15,14 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0 # Required to retrieve git history
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v3
         with:
           node-version: 14
       - name: Node-modules cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: node-cache
         with:
           path: "**/node_modules"
@@ -47,16 +47,16 @@ jobs:
       NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
     if: github.event_name == 'push' && contains(github.event.head_commit.message, '[fix]') || contains(github.event.head_commit.message, '[feature]') || contains(github.event.head_commit.message, '[breaking]')
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: "0"
           token: ${{secrets.GIT_REPO}}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           registry-url: https://registry.npmjs.org
           node-version: 14
       - name: Node-modules cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: node-cache
         with:
           path: "**/node_modules"

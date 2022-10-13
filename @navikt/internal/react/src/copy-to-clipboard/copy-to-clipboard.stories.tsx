@@ -1,5 +1,6 @@
 import { Meta } from "@storybook/react";
 import * as React from "react";
+import { Link } from "@navikt/ds-icons";
 
 import { CopyToClipboard } from "../index";
 
@@ -91,6 +92,25 @@ export const Small = () => (
       size="small"
     >
       Kopier Pi
+    </CopyToClipboard>
+  </div>
+);
+
+export const Ikon = () => (
+  <div className="rowgap">
+    <CopyToClipboard
+      iconPosition="right"
+      popoverText="Kopierte lenke"
+      copyText="3.14"
+      icon={<Link />}
+    />
+    <CopyToClipboard
+      iconPosition="left"
+      popoverText="Kopierte lenke"
+      copyText="3.14"
+      icon={<Link />}
+    >
+      Kopier lenke
     </CopyToClipboard>
   </div>
 );

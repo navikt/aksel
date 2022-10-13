@@ -34,7 +34,7 @@ html {
 }
 
 body {
-  font-family: var(--navds-font-family);
+  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
   line-height: 1.333;
   font-size: 1.125rem;
 }
