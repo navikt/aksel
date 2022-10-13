@@ -6,7 +6,7 @@ import { useSizeManager } from "../app-provider/hooks";
 export interface DetailProps
   extends React.HTMLAttributes<HTMLParagraphElement> {
   /**
-   * medium: 14px bold, small: 14px
+   * medium: 14px, small: 14px
    * @default "medium"
    */
   size?: "medium" | "small";

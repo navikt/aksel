@@ -1,6 +1,6 @@
 import NextLink from "next/link";
 import type { NextPage } from "next";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Accordion,
   Alert,
@@ -46,6 +46,10 @@ const Home: NextPage = () => {
   const [page, setPage] = useState(2);
 
   const [anchorEl, setAnchorEl] = useState<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    Modal?.setAppElement?.("#__next");
+  }, []);
 
   return (
     <div className="p-4 m-4 mx-auto bg-white rounded-md max-w-2xl w-full">

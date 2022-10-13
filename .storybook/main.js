@@ -19,7 +19,6 @@ module.exports = {
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
-    "@whitespace/storybook-addon-html",
     {
       name: "@storybook/addon-storysource",
       options: {

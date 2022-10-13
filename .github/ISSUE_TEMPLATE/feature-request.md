@@ -1,24 +1,23 @@
 ---
 name: Feature Request
-about: Foreslå noe nytt for designsystemet
+about: Foreslå noe nytt!
 title: "[NEW]"
 labels: new ✨
-assignees: ''
-
+assignees: ""
 ---
 
-## Beskriv forespørselen
+## Hva?
 
 (skriv her.)
 
-## Hvilken funksjon vil dette har for bruker?
+## Hva løser dette?
 
 (skriv her.)
 
-## Eksempler/Tilleggsinformasjon 
+## Eksempler/Info
 
 <!--
-Del gjerne eksempel av lignende løsninger som er i bruk idag, URL/Screenshots etc. 
+Del gjerne eksempel av lignende løsninger som er i bruk idag, URL/Screenshots etc.
 Link gjerne til relaterte issues her også.
 -->
 

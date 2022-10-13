@@ -49,11 +49,11 @@ Default.args = {
 export const Farger = () => {
   return (
     <Chat
-      avatar={"ON"}
-      name={"Ola Normann"}
-      timestamp={"01.01.21 14:00"}
-      avatarBgColor={"var(--navds-global-color-lightblue-200)"}
-      backgroundColor={"var(--navds-global-color-lightblue-100)"}
+      avatar="ON"
+      name="Ola Normann"
+      timestamp="01.01.21 14:00"
+      avatarBgColor="var(--navds-global-color-lightblue-200)"
+      backgroundColor="var(--navds-global-color-lightblue-100)"
     >
       <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
@@ -71,9 +71,9 @@ export const Position = () => {
   return (
     <div className="colgap">
       <Chat
-        avatar={"ON"}
-        name={"Ola Normann"}
-        timestamp={"01.01.21 14:00"}
+        avatar="ON"
+        name="Ola Normann"
+        timestamp="01.01.21 14:00"
         backgroundColor="rgba(255, 249, 240, 1)"
         avatarBgColor="rgba(255, 236, 204, 1)"
       >
@@ -83,9 +83,9 @@ export const Position = () => {
         </Chat.Bubble>
       </Chat>
       <Chat
-        avatar={"KH"}
-        name={"Kari Høyli"}
-        timestamp={"01.01.21 14:32"}
+        avatar="KH"
+        name="Kari Høyli"
+        timestamp="01.01.21 14:32"
         position="right"
         backgroundColor="rgba(230, 240, 255, 1)"
         avatarBgColor="rgba(204, 225, 255, 1)"
@@ -99,9 +99,9 @@ export const Position = () => {
         </Chat.Bubble>
       </Chat>
       <Chat
-        avatar={"ON"}
-        name={"Ola Normann"}
-        timestamp={"01.01.21 15:00"}
+        avatar="ON"
+        name="Ola Normann"
+        timestamp="01.01.21 15:00"
         backgroundColor="rgba(255, 249, 240, 1)"
         avatarBgColor="rgba(255, 236, 204, 1)"
       >
@@ -118,7 +118,7 @@ export const Position = () => {
 
 export const Avatar = () => {
   return (
-    <Chat avatar={<Illustration />} timestamp={"01.01.21 14:00"}>
+    <Chat avatar={<Illustration />} timestamp="01.01.21 14:00">
       <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
       </Chat.Bubble>

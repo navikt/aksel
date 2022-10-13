@@ -141,6 +141,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             <Item
               className={cl("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === 1,
+                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === 1}
               onClick={() => onPageChange?.(page - 1)}
@@ -194,6 +195,7 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
             <Item
               className={cl("navds-pagination__prev-next", {
                 "navds-pagination--invisible": page === count,
+                "navds-pagination--prev-next--with-text": prevNextTexts,
               })}
               disabled={page === count}
               onClick={() => onPageChange?.(page + 1)}

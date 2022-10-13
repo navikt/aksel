@@ -37,6 +37,12 @@
         {
           "allowObject": true
         }
+      ],
+      "react/jsx-curly-brace-presence": [
+        "error",
+        {
+          "props": "never"
+        }
       ]
     },
     "ignorePatterns": [
@@ -103,7 +109,6 @@
     "@storybook/theming": "6.5.5",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
-    "@whitespace/storybook-addon-html": "^5.0.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "chromatic": "6.5.4",

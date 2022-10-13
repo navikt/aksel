@@ -33,7 +33,7 @@
   display: table-row;
 }
 
-.navds-table__body .navds-table__row:hover {
+.navds-table__body .navds-table__row--shade-on-hover:hover {
   background-color: var(--navds-table-row-color-background-hover);
 }
 
@@ -41,20 +41,21 @@
   background-color: var(--navds-table-row-color-background-selected);
 }
 
-.navds-table__body .navds-table__row--selected:hover {
+.navds-table__body
+  .navds-table__row--shade-on-hover.navds-table__row--selected:hover {
   background-color: var(--navds-table-row-color-background-selected-hover);
 }
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__row:nth-child(odd):not(:hover):not(.navds-table__row--selected) {
+  :where(.navds-table__row:nth-child(odd):not(.navds-table__row--selected)) {
   background-color: var(--navds-table-row-color-background-zebra);
 }
 
 .navds-table--zebra-stripes
   .navds-table__body
-  .navds-table__expandable-row:nth-child(4n
-    + 1):not(:hover):not(.navds-table__row--selected) {
+  :where(.navds-table__expandable-row:nth-child(4n
+      + 1):not(.navds-table__row--selected)) {
   background-color: transparent;
 }
 
@@ -87,9 +88,15 @@
   text-align: center;
 }
 
-.navds-table__body .navds-table__row:hover .navds-table__header-cell,
-.navds-table__body .navds-table__row:hover .navds-table__data-cell {
+:where(.navds-table__body .navds-table__row--shade-on-hover:hover)
+  .navds-table__header-cell,
+:where(.navds-table__body .navds-table__row--shade-on-hover:hover)
+  .navds-table__data-cell {
   border-color: var(--navds-table-cell-color-border-hover);
+}
+
+:where(.navds-table__expandable-row--open:hover) .navds-table__data-cell {
+  border-bottom-color: transparent;
 }
 
 .navds-table--small .navds-table__header-cell,
@@ -160,8 +167,16 @@
   flex-shrink: 0;
 }
 
-.navds-table__expandable-row--open .navds-table__header-cell,
+.navds-table__expandable-row:not(.navds-table__expandable-row--open)
+  .navds-table__data-cell {
+  transition: border-bottom-color 190ms cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+
 .navds-table__expandable-row--open .navds-table__data-cell {
+  border-bottom-color: transparent;
+}
+
+.navds-table__expandable-row--open .navds-table__header-cell {
   border-color: var(--navds-semantic-color-border-muted);
 }
 

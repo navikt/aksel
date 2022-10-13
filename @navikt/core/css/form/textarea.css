@@ -12,7 +12,7 @@
   --navds-textarea-color-shadow-error: var(
     --navds-semantic-color-interaction-danger
   );
-  --navds-textarea-color-counter-text: var(--navds-global-color-gray-400);
+  --navds-textarea-color-counter-text: var(--navds-semantic-color-text-muted);
   --navds-textarea-color-counter-text-error: var(
     --navds-semantic-color-interaction-danger
   );
