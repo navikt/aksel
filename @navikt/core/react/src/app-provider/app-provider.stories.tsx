@@ -47,3 +47,59 @@ export const Default = (props) => (
     </div>
   </AppProvider>
 );
+
+export const Small = () => (
+  <AppProvider options={{ size: "small" }}>
+    <div className="colgap">
+      <Button>Knapp</Button>
+      <Alert variant="info">Alert</Alert>
+      <Tag variant="info">Tag</Tag>
+      <CheckboxGroup legend="Group legend" defaultValue={["tekst2"]}>
+        <Checkbox value="tekst">Checkboxtekst</Checkbox>
+        <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+      </CheckboxGroup>
+      <ErrorSummary heading="Feiloppsummering komponent">
+        <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
+        <ErrorSummary.Item href="#2">
+          Tekstfeltet må ha en godkjent e-mail
+        </ErrorSummary.Item>
+      </ErrorSummary>
+      <Switch checked loading>
+        Label text
+      </Switch>
+      <TextField label="Ipsum enim quis culpa" />
+    </div>
+  </AppProvider>
+);
+
+export const NoOverwrites = () => (
+  <AppProvider options={{ size: "medium" }}>
+    <div className="colgap">
+      <Button size="small">Knapp</Button>
+      <Alert size="small" variant="info">
+        Alert
+      </Alert>
+      <Tag size="small" variant="info">
+        Tag
+      </Tag>
+      <CheckboxGroup
+        size="small"
+        legend="Group legend"
+        defaultValue={["tekst2"]}
+      >
+        <Checkbox value="tekst">Checkboxtekst</Checkbox>
+        <Checkbox value="tekst2">Checkboxtekst</Checkbox>
+      </CheckboxGroup>
+      <ErrorSummary size="small" heading="Feiloppsummering komponent">
+        <ErrorSummary.Item href="#1">Checkbox må fylles ut</ErrorSummary.Item>
+        <ErrorSummary.Item href="#2">
+          Tekstfeltet må ha en godkjent e-mail
+        </ErrorSummary.Item>
+      </ErrorSummary>
+      <Switch checked loading size="small">
+        Label text
+      </Switch>
+      <TextField size="small" label="Ipsum enim quis culpa" />
+    </div>
+  </AppProvider>
+);
