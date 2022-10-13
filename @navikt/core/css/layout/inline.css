@@ -1,0 +1,7 @@
+.navds-inline {
+  display: flex;
+  gap: var(--navdsc-inline-spacing);
+  flex-wrap: var(--navdsc-inline-wrap);
+  align-items: var(--navdsc-inline-align);
+  justify-content: var(--navdsc-inline-justify);
+}

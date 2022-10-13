@@ -3,17 +3,16 @@ import { Tag } from "..";
 import { Stack } from ".";
 
 export default {
-  title: "ds-react/Stack",
+  title: "ds-react/layout/Stack",
   component: Stack,
-  /* argTypes: {
-    variant: {
-      defaultValue: "info",
+  argTypes: {
+    align: {
       control: {
         type: "radio",
-        options: ["error", "warning", "info", "success"],
+        options: ["start", "end", "center", "baseline"],
       },
     },
-  }, */
+  },
 };
 
 const elements = (
@@ -25,7 +24,16 @@ const elements = (
   </>
 );
 
-export const Default = (props) => <Stack>{elements}</Stack>;
+export const Default = (props) => (
+  <div style={{ width: "10rem" }}>
+    <Stack {...props}>{elements}</Stack>
+  </div>
+);
+
+Default.args = {
+  spacing: "4",
+  fullWidth: false,
+};
 
 export const Spacing = () => (
   <div className="rowgap">
