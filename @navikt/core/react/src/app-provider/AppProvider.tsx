@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React, { createContext, useContext } from "react";
 
 export interface AppProviderContextType {
   size: "medium" | "small";
@@ -16,6 +16,14 @@ export interface AppProviderProps {
 }
 
 export const UNSAFE_AppProvider = ({ children, options }: AppProviderProps) => {
+  const ctx = useContext(AppProviderContext);
+
+  if (ctx) {
+    console.warn(
+      "AppProvider should not be nested. Can lead to unknown sideeffects and bugs."
+    );
+  }
+
   return (
     <AppProviderContext.Provider value={{ size: options?.size ?? "medium" }}>
       {children}
