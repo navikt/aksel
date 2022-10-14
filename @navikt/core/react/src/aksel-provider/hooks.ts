@@ -1,10 +1,10 @@
 import { useContext } from "react";
-import { AppProviderContext } from "./AppProvider";
+import { AkselProviderContext } from "./AkselProvider";
 
 export function useSizeManager<
   T extends "medium" | "small" | "xsmall" | undefined
 >(size: T): "medium" | "small" | NonNullable<T> {
-  const ctx = useContext(AppProviderContext);
+  const ctx = useContext(AkselProviderContext);
 
   return size ?? ctx?.size ?? "medium";
 }

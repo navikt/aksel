@@ -1,5 +1,5 @@
 import React from "react";
-import { UNSAFE_AppProvider as AppProvider } from ".";
+import { UNSAFE_AkselProvider as AkselProvider } from ".";
 import {
   Alert,
   Button,
@@ -12,8 +12,8 @@ import {
 } from "..";
 
 export default {
-  title: "ds-react/AppProvider",
-  component: AppProvider,
+  title: "ds-react/AkselProvider",
+  component: AkselProvider,
   argTypes: {
     size: {
       control: {
@@ -25,7 +25,7 @@ export default {
 };
 
 export const Default = (props) => (
-  <AppProvider options={{ size: props.size }}>
+  <AkselProvider options={{ size: props.size }}>
     <div className="colgap">
       <Button>Knapp</Button>
       <Alert variant="info">Alert</Alert>
@@ -45,11 +45,11 @@ export const Default = (props) => (
       </Switch>
       <TextField label="Ipsum enim quis culpa" />
     </div>
-  </AppProvider>
+  </AkselProvider>
 );
 
 export const Small = () => (
-  <AppProvider options={{ size: "small" }}>
+  <AkselProvider options={{ size: "small" }}>
     <div className="colgap">
       <Button>Knapp</Button>
       <Alert variant="info">Alert</Alert>
@@ -69,11 +69,11 @@ export const Small = () => (
       </Switch>
       <TextField label="Ipsum enim quis culpa" />
     </div>
-  </AppProvider>
+  </AkselProvider>
 );
 
 export const NoOverwrites = () => (
-  <AppProvider options={{ size: "medium" }}>
+  <AkselProvider options={{ size: "medium" }}>
     <div className="colgap">
       <Button size="small">Knapp</Button>
       <Alert size="small" variant="info">
@@ -101,5 +101,5 @@ export const NoOverwrites = () => (
       </Switch>
       <TextField size="small" label="Ipsum enim quis culpa" />
     </div>
-  </AppProvider>
+  </AkselProvider>
 );
