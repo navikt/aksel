@@ -4,15 +4,7 @@ import { Chips } from ".";
 export default {
   title: "ds-react/Chips",
   component: Chips,
-  argTypes: {
-    variant: {
-      defaultValue: "filter",
-      control: {
-        type: "radio",
-        options: ["link", "filter", "input"],
-      },
-    },
-  },
+  argTypes: {},
 };
 
 export const Filter = () => {
