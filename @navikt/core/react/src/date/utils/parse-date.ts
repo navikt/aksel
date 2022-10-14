@@ -1,4 +1,4 @@
-import { parse } from "date-fns";
+import parse from "date-fns/parse";
 import { isValidDate } from ".";
 
 export const INPUT_DATE_STRING_FORMAT_DATE = "dd.MM.yyyy";

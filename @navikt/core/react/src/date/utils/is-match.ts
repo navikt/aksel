@@ -1,9 +1,8 @@
-import {
-  isDate,
-  isSameDay,
-  differenceInCalendarDays,
-  isSameMonth,
-} from "date-fns";
+import isSameDay from "date-fns/isSameDay";
+import isDate from "date-fns/isDate";
+import differenceInCalendarDays from "date-fns/differenceInCalendarDays";
+import isSameMonth from "date-fns/isSameMonth";
+
 import {
   DateAfter,
   DateBefore,

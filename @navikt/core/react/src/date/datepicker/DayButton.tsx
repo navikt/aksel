@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import format from "date-fns/format";
 import React, { useRef } from "react";
 import { Button, DayProps, useDayPicker, useDayRender } from "react-day-picker";
 

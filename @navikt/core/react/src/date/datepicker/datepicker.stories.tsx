@@ -1,4 +1,4 @@
-import { isSaturday } from "date-fns";
+import isSaturday from "date-fns/isSaturday";
 import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
