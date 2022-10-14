@@ -125,7 +125,7 @@
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
-    "husky": "^5.0.0",
+    "husky": "^8.0.0",
     "lerna": "^4.0.0",
     "msw": "^0.36.5",
     "msw-storybook-addon": "^1.6.3",
