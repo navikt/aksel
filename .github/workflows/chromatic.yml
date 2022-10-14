@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - master
-      - big-one-oh
 
 jobs:
   chromatic-pr:
@@ -76,7 +75,7 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :white_check_mark: SUCCESS :white_check_mark:
+            - :white_check_mark: No changes detected :white_check_mark:
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
@@ -92,7 +91,7 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :no_entry_sign: FAILED :no_entry_sign:, review endringer.
+            - :no_entry_sign: Changes detected :no_entry_sign:, review endringer.
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace

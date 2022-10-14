@@ -6,7 +6,7 @@ export default {
   title: "ds-react/Button",
   component: Button,
   parameters: {
-    chromatic: { delay: 300 },
+    chromatic: { delay: 600 },
   },
   argTypes: {
     variant: {
