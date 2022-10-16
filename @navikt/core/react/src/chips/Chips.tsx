@@ -1,10 +1,10 @@
-import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
-import { BodyShort, Detail } from "..";
-import FilterChips, { FilterChipsType } from "./Filter";
+import React, { forwardRef, HTMLAttributes } from "react";
+import { OverridableComponent } from "..";
+import FilterChips, { FilterChipsProps } from "./Filter";
 import InputChips, { InputChipsType } from "./Input";
 
-export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
+export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
   /**
    * Changes padding and font-sizes
@@ -15,24 +15,27 @@ export interface ChipsProps extends HTMLAttributes<HTMLDivElement> {
 
 interface ChipsComponent
   extends React.ForwardRefExoticComponent<
-    ChipsProps & React.RefAttributes<HTMLDivElement>
+    ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
-  Filter: FilterChipsType;
+  Filter: OverridableComponent<FilterChipsProps, HTMLButtonElement>;
   Input: InputChipsType;
 }
 
-export const Chips: ChipsComponent = forwardRef<HTMLDivElement, ChipsProps>(
-  ({ className, size = "medium", ...rest }, ref) => {
-    const Component = size === "medium" ? BodyShort : Detail;
-
+export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
+  ({ className, size = "medium", children, ...rest }, ref) => {
     return (
-      <Component
+      <ul
         {...rest}
         ref={ref}
-        as="div"
-        size="small"
-        className={cl("navds-chips", className, `navds-chips--${size}`)}
-      />
+        className={cl("navds-chips", className, `navds-chips--${size}`, {
+          "navds-body-short navds-body-short--small": size === "medium",
+          "navds-detail navds-detail--small": size === "small",
+        })}
+      >
+        {React.Children.map(children, (chip, index) => {
+          return <li key={index + (chip?.toString() ?? "")}>{chip}</li>;
+        })}
+      </ul>
     );
   }
 ) as ChipsComponent;

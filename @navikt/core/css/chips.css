@@ -4,6 +4,12 @@
   align-items: center;
 }
 
+.navds-chips :where(ul, li) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .navds-chips__chip {
   all: unset;
   display: inline-flex;

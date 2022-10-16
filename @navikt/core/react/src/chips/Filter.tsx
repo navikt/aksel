@@ -8,9 +8,6 @@ export interface FilterChipsProps
   children: string;
 }
 
-export interface FilterChipsType
-  extends OverridableComponent<FilterChipsProps, HTMLButtonElement> {}
-
 export const FilterChips: OverridableComponent<
   FilterChipsProps,
   HTMLButtonElement
@@ -31,6 +28,6 @@ export const FilterChips: OverridableComponent<
       </Component>
     );
   }
-) as FilterChipsType;
+);
 
 export default FilterChips;
