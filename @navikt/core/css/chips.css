@@ -2,9 +2,12 @@
   display: flex;
   gap: var(--navds-spacing-2);
   align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.navds-chips :where(ul, li) {
+.navds-chips :where(li) {
   margin: 0;
   padding: 0;
   list-style: none;
