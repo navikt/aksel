@@ -50,13 +50,14 @@
 .navds-chips__input {
   background-color: var(--navds-global-color-deepblue-500);
   color: var(--navds-global-color-white);
-}
-
-.navds-chips__input:hover {
-  background-color: var(--navds-global-color-deepblue-400);
+  position: relative;
 }
 
 .navds-chips__input:focus {
   box-shadow: inset 0 0 0 1px var(--navds-global-color-white),
     0 0 0 2px var(--navds-global-color-blue-800);
+}
+
+.navds-chips__input:hover {
+  background-color: var(--navds-global-color-deepblue-400);
 }

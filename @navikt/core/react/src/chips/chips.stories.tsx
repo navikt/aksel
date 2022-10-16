@@ -30,12 +30,12 @@ export const Input = () => {
 export const Small = () => {
   return (
     <div className="colgap">
-      <Chips>
+      <Chips size="small">
         {new Array(4).fill(1).map((_, y) => (
           <Chips.Input key={y}>Input</Chips.Input>
         ))}
       </Chips>
-      <Chips>
+      <Chips size="small">
         {new Array(4).fill(1).map((_, y) => (
           <Chips.Filter key={y}>Filter</Chips.Filter>
         ))}
