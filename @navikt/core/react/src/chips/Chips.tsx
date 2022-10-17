@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import { OverridableComponent } from "..";
-import FilterChips, { FilterChipsProps } from "./Filter";
+import FilterChips, { FilterChipsType } from "./Filter";
 import InputChips, { InputChipsType } from "./Input";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
@@ -17,7 +16,7 @@ interface ChipsComponent
   extends React.ForwardRefExoticComponent<
     ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
-  Filter: OverridableComponent<FilterChipsProps, HTMLButtonElement>;
+  Filter: FilterChipsType;
   Input: InputChipsType;
 }
 

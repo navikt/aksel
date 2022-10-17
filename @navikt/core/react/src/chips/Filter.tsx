@@ -16,10 +16,10 @@ export interface FilterChipsProps
   selected?: boolean;
 }
 
-export const FilterChips: OverridableComponent<
-  FilterChipsProps,
-  HTMLButtonElement
-> = forwardRef(
+export interface FilterChipsType
+  extends OverridableComponent<FilterChipsProps, HTMLButtonElement> {}
+
+export const FilterChips: FilterChipsType = forwardRef(
   (
     { className, children, selected, as: Component = "button", ...rest },
     ref
