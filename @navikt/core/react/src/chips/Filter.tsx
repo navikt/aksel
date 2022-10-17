@@ -31,8 +31,12 @@ export const FilterChips: FilterChipsType = forwardRef(
         className={cl("navds-chips__chip navds-chips__filter", className)}
         aria-pressed={selected}
       >
-        {selected && <SuccessStroke aria-hidden />}
-        {children}
+        {selected && (
+          <span className="navds-chips__icon">
+            <SuccessStroke aria-hidden />
+          </span>
+        )}
+        <span className="navds-chips__chip-text">{children}</span>
       </Component>
     );
   }

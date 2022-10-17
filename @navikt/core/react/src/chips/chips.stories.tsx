@@ -33,11 +33,20 @@ export const Filter = () => {
 
 export const Removable = () => {
   return (
-    <Chips>
-      {new Array(4).fill(1).map((_, y) => (
-        <Chips.Removable key={y}>Removable</Chips.Removable>
-      ))}
-    </Chips>
+    <div className="colgap">
+      <Chips>
+        {new Array(4).fill(1).map((_, y) => (
+          <Chips.Removable key={y}>Removable</Chips.Removable>
+        ))}
+      </Chips>
+      <Chips>
+        {new Array(4).fill(1).map((_, y) => (
+          <Chips.Removable variant="neutral" key={y}>
+            Removable
+          </Chips.Removable>
+        ))}
+      </Chips>
+    </div>
   );
 };
 

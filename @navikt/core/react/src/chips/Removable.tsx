@@ -6,6 +6,7 @@ import { OverridableComponent } from "..";
 export interface RemovableChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
+  variant?: "action" | "neutral";
 }
 
 export interface RemovableChipsType
@@ -15,15 +16,30 @@ export const RemovableChips: OverridableComponent<
   RemovableChipsProps,
   HTMLButtonElement
 > = forwardRef(
-  ({ className, children, as: Component = "button", ...rest }, ref) => {
+  (
+    {
+      className,
+      children,
+      variant = "action",
+      as: Component = "button",
+      ...rest
+    },
+    ref
+  ) => {
     return (
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-chips__chip navds-chips__removable", className)}
+        className={cl(
+          "navds-chips__chip navds-chips__removable",
+          className,
+          `navds-chips__removable--${variant}`
+        )}
       >
-        {children}
-        <Close aria-hidden />
+        <span className="navds-chips__chip-text">{children}</span>
+        <span className="navds-chips__icon">
+          <Close aria-hidden />
+        </span>
       </Component>
     );
   }
