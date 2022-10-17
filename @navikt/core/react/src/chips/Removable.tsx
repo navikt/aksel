@@ -3,16 +3,16 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "..";
 
-export interface InputChipsProps
+export interface RemovableChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
 }
 
-export interface InputChipsType
-  extends OverridableComponent<InputChipsProps, HTMLButtonElement> {}
+export interface RemovableChipsType
+  extends OverridableComponent<RemovableChipsProps, HTMLButtonElement> {}
 
-export const InputChips: OverridableComponent<
-  InputChipsProps,
+export const RemovableChips: OverridableComponent<
+  RemovableChipsProps,
   HTMLButtonElement
 > = forwardRef(
   ({ className, children, as: Component = "button", ...rest }, ref) => {
@@ -20,13 +20,13 @@ export const InputChips: OverridableComponent<
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-chips__chip navds-chips__input", className)}
+        className={cl("navds-chips__chip navds-chips__removable", className)}
       >
         {children}
         <Close aria-hidden />
       </Component>
     );
   }
-) as InputChipsType;
+) as RemovableChipsType;
 
-export default InputChips;
+export default RemovableChips;

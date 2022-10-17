@@ -31,11 +31,11 @@ export const Filter = () => {
   );
 };
 
-export const Input = () => {
+export const Removable = () => {
   return (
     <Chips>
       {new Array(4).fill(1).map((_, y) => (
-        <Chips.Input key={y}>Input</Chips.Input>
+        <Chips.Removable key={y}>Removable</Chips.Removable>
       ))}
     </Chips>
   );
@@ -47,7 +47,7 @@ export const Small = () => {
     <div className="colgap">
       <Chips size="small">
         {new Array(4).fill(1).map((_, y) => (
-          <Chips.Input key={y}>Input</Chips.Input>
+          <Chips.Removable key={y}>Input</Chips.Removable>
         ))}
       </Chips>
       <Chips size="small">

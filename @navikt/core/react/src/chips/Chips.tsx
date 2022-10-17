@@ -1,7 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
 import FilterChips, { FilterChipsType } from "./Filter";
-import InputChips, { InputChipsType } from "./Input";
+import RemovableChips, { RemovableChipsType } from "./Removable";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
   children: React.ReactNode;
@@ -17,7 +17,7 @@ interface ChipsComponent
     ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
   Filter: FilterChipsType;
-  Input: InputChipsType;
+  Removable: RemovableChipsType;
 }
 
 export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
@@ -40,6 +40,6 @@ export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
 ) as ChipsComponent;
 
 Chips.Filter = FilterChips;
-Chips.Input = InputChips;
+Chips.Removable = RemovableChips;
 
 export default Chips;
