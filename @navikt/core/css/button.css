@@ -5,7 +5,9 @@
   --navds-button-color-primary-border-focus: var(
     --navds-semantic-color-text-inverted
   );
-  --navds-button-color-primary-background: red;
+  --navds-button-color-primary-background: var(
+    --navds-semantic-color-interaction-primary
+  );
   --navds-button-color-primary-background-hover: var(
     --navds-semantic-color-interaction-primary-hover
   );
