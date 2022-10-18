@@ -13,11 +13,15 @@ import {
 import { UseDatepickerOptions } from "./useDatepicker";
 
 interface UseRangeDatepickerOptions
-  extends Omit<UseDatepickerOptions, "defaultSelected"> {
+  extends Omit<UseDatepickerOptions, "defaultSelected" | "onDateChange"> {
   /**
    * The initially selected DateRange
    */
   defaultSelected?: DateRange;
+  /**
+   * Callback for changed state
+   */
+  onRangeChange?: (val?: DateRange) => void;
 }
 
 interface UseRangeDatepickerValue {
@@ -72,6 +76,7 @@ export const useRangeDatepicker = (
     toDate,
     disabled,
     disableWeekends,
+    onRangeChange,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -82,9 +87,11 @@ export const useRangeDatepicker = (
 
   // Initialize states
   const [month, setMonth] = useState(
-    defaultSelected ? defaultSelected.from : today
+    defaultSelected ? defaultSelected?.from : today
   );
-  const [selectedRange, setSelectedRange] = useState(defaultSelected);
+  const [selectedRange, setSelectedRange] = useState<DateRange | undefined>(
+    defaultSelected ?? { from: undefined, to: undefined }
+  );
 
   const [fromInputValue, setFromInputValue] = useState(
     defaultSelected?.from
@@ -98,6 +105,11 @@ export const useRangeDatepicker = (
       : ""
   );
   const [open, setOpen] = useState(false);
+
+  const getSelectedRange = (range?: DateRange) => {
+    onRangeChange?.(range);
+    return range;
+  };
 
   const handleFocusIn = useCallback(
     (e) =>
@@ -123,8 +135,10 @@ export const useRangeDatepicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedRange(defaultSelected);
-    setMonth(defaultSelected ? defaultSelected.from : today);
+    setSelectedRange(
+      getSelectedRange(defaultSelected ?? { from: undefined, to: undefined })
+    );
+    setMonth(defaultSelected ? defaultSelected?.from : today);
     setFromInputValue(
       defaultSelected?.from
         ? formatDateForInput(defaultSelected.from, locale, "date")
@@ -138,7 +152,7 @@ export const useRangeDatepicker = (
   };
 
   const setSelected = (range?: DateRange) => {
-    setSelectedRange(range);
+    setSelectedRange(getSelectedRange(range));
     setFromInputValue(
       range?.from ? formatDateForInput(range.from, locale, "date") : ""
     );
@@ -212,7 +226,7 @@ export const useRangeDatepicker = (
   };
 
   const handleSelect = (range) => {
-    if (range.from && range.to) {
+    if (range?.from && range?.to) {
       setOpen(false);
     }
     const prevToRange =
@@ -224,7 +238,7 @@ export const useRangeDatepicker = (
     prevToRange
       ? setToInputValue(formatDateForInput(prevToRange, locale, "date"))
       : setToInputValue("");
-    setSelectedRange({ from: range?.from, to: prevToRange });
+    setSelectedRange(getSelectedRange({ from: range?.from, to: prevToRange }));
   };
 
   /* live-update datepicker based on changes in inputfields */
@@ -240,9 +254,11 @@ export const useRangeDatepicker = (
         ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
     ) {
       setSelectedRange((x) =>
-        src === RANGE.FROM
-          ? { ...x, from: undefined }
-          : { from: x?.from, to: undefined }
+        getSelectedRange(
+          src === RANGE.FROM
+            ? { ...x, from: undefined }
+            : { from: x?.from, to: undefined }
+        )
       );
       return;
     }
@@ -251,8 +267,10 @@ export const useRangeDatepicker = (
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (isBefore || isAfter) {
       src === RANGE.FROM
-        ? setSelectedRange((x) => ({ ...x, from: undefined }))
-        : setSelectedRange((x) => ({ from: x?.from, to: undefined }));
+        ? setSelectedRange((x) => getSelectedRange({ ...x, from: undefined }))
+        : setSelectedRange((x) =>
+            getSelectedRange({ from: x?.from, to: undefined })
+          );
       return;
     }
 
@@ -262,7 +280,9 @@ export const useRangeDatepicker = (
       selectedRange?.from &&
       differenceInCalendarDays(selectedRange?.from, day) >= 0
     ) {
-      setSelectedRange({ from: day, to: selectedRange?.from });
+      setSelectedRange(
+        getSelectedRange({ from: day, to: selectedRange?.from })
+      );
       setMonth(day);
       return;
     }
@@ -273,13 +293,15 @@ export const useRangeDatepicker = (
       selectedRange?.to &&
       differenceInCalendarDays(day, selectedRange?.to) >= 0
     ) {
-      setSelectedRange({ to: day, from: selectedRange?.to });
+      setSelectedRange(getSelectedRange({ to: day, from: selectedRange?.to }));
       setMonth(day);
       return;
     }
 
-    src === RANGE.FROM && setSelectedRange((x) => ({ ...x, from: day }));
-    src === RANGE.TO && setSelectedRange((x) => ({ from: x?.from, to: day }));
+    src === RANGE.FROM &&
+      setSelectedRange((x) => getSelectedRange({ ...x, from: day }));
+    src === RANGE.TO &&
+      setSelectedRange((x) => getSelectedRange({ from: x?.from, to: day }));
     setMonth(day);
   };
 

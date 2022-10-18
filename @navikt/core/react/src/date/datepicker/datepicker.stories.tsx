@@ -141,6 +141,7 @@ export const ShowWeekNumber = () => <DatePicker.Standalone showWeekNumber />;
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
     locale: "en",
   });
 
@@ -157,6 +158,7 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
+      onRangeChange: console.log,
     });
 
   return (
