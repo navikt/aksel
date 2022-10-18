@@ -68,7 +68,7 @@ export const useDatepicker = (
   const {
     locale: _locale = "nb",
     required,
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     today = new Date(),
     fromDate,
     toDate,
@@ -81,6 +81,8 @@ export const useDatepicker = (
 
   const inputRef = useRef<HTMLDivElement>(null);
   const daypickerRef = useRef<HTMLDivElement>(null);
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
@@ -123,6 +125,7 @@ export const useDatepicker = (
     setSelectedDay(getSelectedDate(defaultSelected));
     setMonth(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {

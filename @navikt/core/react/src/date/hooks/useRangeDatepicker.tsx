@@ -70,7 +70,7 @@ export const useRangeDatepicker = (
 ): UseRangeDatepickerValue => {
   const {
     locale: _locale = "nb",
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     today = new Date(),
     fromDate,
     toDate,
@@ -84,6 +84,8 @@ export const useRangeDatepicker = (
   const inputRefTo = useRef<HTMLDivElement>(null);
   const inputRefFrom = useRef<HTMLDivElement>(null);
   const datePickerRef = useRef<HTMLDivElement | null>(null);
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
   const [month, setMonth] = useState(
@@ -149,6 +151,7 @@ export const useRangeDatepicker = (
         ? formatDateForInput(defaultSelected.to, locale, "date")
         : ""
     );
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (range?: DateRange) => {

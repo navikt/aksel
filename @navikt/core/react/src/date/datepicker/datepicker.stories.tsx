@@ -165,7 +165,11 @@ export const UseRangedDatepicker = () => {
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
-          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input
+            {...fromInputProps}
+            label="Fra"
+            onFocus={(e) => e.preventDefault()}
+          />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
       </DatePicker>

@@ -53,13 +53,15 @@ export const useMonthpicker = (
 ): UseMonthPickerValue => {
   const {
     locale: _locale = "nb",
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     fromDate,
     toDate,
     disabled,
     required,
     onMonthChange,
   } = opt;
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   const today = new Date();
   const locale = getLocaleFromString(_locale);
@@ -108,6 +110,7 @@ export const useMonthpicker = (
     setSelectedMonth(getMonth(defaultSelected));
     setYear(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
