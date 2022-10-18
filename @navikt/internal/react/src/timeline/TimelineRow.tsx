@@ -4,6 +4,10 @@ export interface TimelineRowProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
 }
 
+export type TimelineRowType = React.ForwardRefExoticComponent<
+  TimelineRowProps & React.RefAttributes<HTMLDivElement>
+>;
+
 export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
   ({ children, label, ...rest }, ref) => {
     return (

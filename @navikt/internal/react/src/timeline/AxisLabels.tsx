@@ -8,9 +8,5 @@ interface AxisLabelsProps {
 
 export const AxisLabels = ({ start, end }: AxisLabelsProps) => {
   const { startDate } = useTimelineContext();
-  return (
-    <div className="navdsi-timeline__axislabels">
-      {startDate.toDateString()}
-    </div>
-  );
+  return <div className="navdsi-timeline__axislabels">axis</div>;
 };

@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
+import TimelineRow, { TimelineRowType } from "./TimelineRow";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -12,6 +13,14 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
    Decides the end-date for the timeline. Defaults to the latest date among the timeline periods.
    */
   endDate?: Date;
+}
+
+interface TimelineComponent
+  extends React.ForwardRefExoticComponent<TimelineProps> {
+  /**
+   * Built-in timeline row
+   */
+  Row: TimelineRowType;
 }
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
@@ -30,6 +39,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       </TimelineContext.Provider>
     );
   }
-);
+) as TimelineComponent;
+
+Timeline.Row = TimelineRow;
 
 export default Timeline;
