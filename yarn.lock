@@ -3215,7 +3215,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@^1.0.0, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@^1.0.0, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
@@ -3277,7 +3277,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@^1.0.0, @navikt/ds-react@^1.3.21, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^1.0.0, @navikt/ds-react@^1.3.21, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
@@ -20506,6 +20506,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shadow-dom@workspace:examples/shadow-dom"
   dependencies:
+    "@navikt/ds-css": "*"
+    "@navikt/ds-react": "*"
     "@types/react": ^18.0.17
     "@types/react-dom": ^18.0.6
     "@vitejs/plugin-react": ^2.1.0
