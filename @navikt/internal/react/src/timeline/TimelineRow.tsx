@@ -13,6 +13,7 @@ export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
     return (
       <div {...rest} ref={ref} className="navdsi-timeline__row">
         {label}
+        {children}
       </div>
     );
   }

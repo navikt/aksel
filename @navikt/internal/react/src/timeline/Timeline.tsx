@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
+import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,10 +22,16 @@ interface TimelineComponent
    * Built-in timeline row
    */
   Row: TimelineRowType;
+  /**
+   * Built-in row period
+   */
+  Period: PeriodType;
 }
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, ...rest }, ref) => {
+    console.log(children);
+
     return (
       <TimelineContext.Provider
         value={{
@@ -42,5 +49,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 ) as TimelineComponent;
 
 Timeline.Row = TimelineRow;
+Timeline.Period = Period;
 
 export default Timeline;

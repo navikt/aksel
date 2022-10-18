@@ -11,7 +11,9 @@ export default {
 export const Default = () => {
   return (
     <Timeline startDate={new Date("Jan 1 2022")} endDate={new Date()}>
-      <Timeline.Row label="Row 1" />
+      <Timeline.Row label="Row 1">
+        <Timeline.Period start={new Date("Feb 2 2022")} end={new Date()} />
+      </Timeline.Row>
       <Timeline.Row label="Row 2" />
       <Timeline.Row label="Row 3" />
     </Timeline>
