@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-confirmation-panel-color-background: var(
     --navds-global-color-orange-50
   );

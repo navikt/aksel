@@ -10,7 +10,8 @@
 
 /* @import "smooth-scroll.css"; */
 
-html {
+html,
+:host {
   box-sizing: border-box;
 }
 
@@ -21,6 +22,7 @@ html {
 }
 
 :root,
+:host,
 [data-theme="light"] {
   --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
 
@@ -33,7 +35,8 @@ html {
   color: var(--navds-semantic-color-text-inverted);
 }
 
-body {
+body,
+:host {
   font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
   line-height: 1.333;
   font-size: 1.125rem;

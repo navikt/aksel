@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-switch-color-label: var(--navds-semantic-color-text);
   --navds-switch-color-label-hover: var(
     --navds-semantic-color-interaction-primary
