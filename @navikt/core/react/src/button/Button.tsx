@@ -89,6 +89,7 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
             {
               "navds-button--loading": widthOverride,
               "navds-button--icon-only": !!icon && !children,
+              "navds-button--disabled": disabled ?? widthOverride,
             }
           )}
           style={{
