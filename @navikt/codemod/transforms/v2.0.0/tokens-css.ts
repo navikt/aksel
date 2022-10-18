@@ -7,7 +7,7 @@ export default function transformer(file, api, options) {
   const root = j(file.source);
 
   // TODO: Map over all old -> new for file
-  const rgx = new RegExp(/(--navds-[a-z-0-9,\s]+)/gim);
+  const rgx = new RegExp(/(--navds-[a-z-0-9\s]+)/gm);
   console.log(file.source.replace(rgx, "--a-test"));
 
   // Regex var:
