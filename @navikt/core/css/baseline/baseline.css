@@ -6,10 +6,6 @@
 @import "print.css";
 @import "utility.css";
 
-/* Disabled because of UU concerns */
-
-/* @import "smooth-scroll.css"; */
-
 html,
 :host {
   box-sizing: border-box;
