@@ -1,4 +1,5 @@
 import React from "react";
+import { useTimelineContext } from "./hooks/useTimelineContext";
 
 interface AxisLabelsProps {
   start?: Date;
@@ -6,5 +7,10 @@ interface AxisLabelsProps {
 }
 
 export const AxisLabels = ({ start, end }: AxisLabelsProps) => {
-  return <div className="navdsi-timeline__axislabels">labels</div>;
+  const { startDate } = useTimelineContext();
+  return (
+    <div className="navdsi-timeline__axislabels">
+      {startDate.toDateString()}
+    </div>
+  );
 };

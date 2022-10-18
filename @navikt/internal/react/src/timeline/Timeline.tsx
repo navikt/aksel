@@ -1,5 +1,6 @@
 import React, { forwardRef } from "react";
 import { AxisLabels } from "./AxisLabels";
+import { TimelineContext } from "./hooks/useTimelineContext";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
@@ -16,10 +17,17 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, ...rest }, ref) => {
     return (
-      <div {...rest} ref={ref} className="navdsi-timeline">
-        <AxisLabels start={startDate} end={endDate} />
-        {children}
-      </div>
+      <TimelineContext.Provider
+        value={{
+          startDate: startDate || new Date(),
+          endDate: endDate || new Date(),
+        }}
+      >
+        <div {...rest} ref={ref} className="navdsi-timeline">
+          <AxisLabels start={startDate} end={endDate} />
+          {children}
+        </div>
+      </TimelineContext.Provider>
     );
   }
 );

@@ -9,5 +9,9 @@ export default {
 } as Meta;
 
 export const Default = () => {
-  return <Timeline>abc</Timeline>;
+  return (
+    <Timeline startDate={new Date("Jan 1 2022")} endDate={new Date()}>
+      abc
+    </Timeline>
+  );
 };
