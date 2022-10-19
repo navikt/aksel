@@ -5,7 +5,7 @@ import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
+  children: React.ReactNode;
   /**
    * Decides the startingpoint for the timeline. Defaults to the earliest date among the timeline periods.
    */
@@ -30,8 +30,6 @@ interface TimelineComponent
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, ...rest }, ref) => {
-    console.log(children);
-
     return (
       <TimelineContext.Provider
         value={{
