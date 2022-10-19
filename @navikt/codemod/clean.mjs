@@ -5,5 +5,6 @@ deleteSync([
   "bin/**/*.js",
   "transforms/**/*.js",
   "!transforms/**/__testfixtures__",
-  "!transforms/**/tests",
+  "!transforms/**/tests/*.input.*",
+  "!transforms/**/tests/*.output.*",
 ]);
