@@ -1,4 +1,5 @@
 :root,
+:host,
 [data-theme="light"] {
   --navds-text-field-color-text: var(--navds-semantic-color-text);
   --navds-text-field-color-background: var(

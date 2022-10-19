@@ -1,4 +1,5 @@
 :root,
+:host,
 [data-theme="light"] {
   /* Primary */
   --navds-button-color-primary-text: var(--navds-semantic-color-text-inverted);

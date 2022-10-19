@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-accordion-color-text-hover: var(
     --navds-semantic-color-interaction-primary
   );
