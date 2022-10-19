@@ -147,6 +147,7 @@ export const ShowWeekNumber = () => (
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
     locale: "en",
   });
 
@@ -163,13 +164,18 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
+      onRangeChange: console.log,
     });
 
   return (
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker {...datepickerProps}>
         <div style={{ display: "flex", gap: "1rem" }}>
-          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input
+            {...fromInputProps}
+            label="Fra"
+            onFocus={(e) => e.preventDefault()}
+          />
           <DatePicker.Input {...toInputProps} label="Til" />
         </div>
       </DatePicker>
