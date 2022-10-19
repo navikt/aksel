@@ -52,7 +52,7 @@ const AnimateHeight: React.FC<AnimateHeightProps> = ({
   children,
   className,
   innerClassName,
-  duration: userDuration = 250,
+  duration: userDuration = 190,
   easing = "ease",
   height,
   ...props
