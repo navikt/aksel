@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-link-panel-color-text: var(--navds-semantic-color-text);
   --navds-link-panel-color-border-hover: var(
     --navds-semantic-color-interaction-primary

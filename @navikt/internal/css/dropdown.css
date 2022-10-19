@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-dropdown-menu-color: var(--navds-semantic-color-text);
   --navdsi-dropdown-item-color-text: var(--navds-semantic-color-link);
   --navdsi-dropdown-item-color-background-hover: var(

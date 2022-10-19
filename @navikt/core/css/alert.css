@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-alert-color-border: var(--navds-semantic-color-border-muted);
   --navds-alert-color-error-border: var(
     --navds-semantic-color-feedback-danger-border

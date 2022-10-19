@@ -2352,6 +2352,18 @@
     "pageName": "Status"
   },
   {
+    "name": "Sun",
+    "description": "",
+    "created_at": "2022-10-18T11:04:04.614Z",
+    "pageName": "Interface"
+  },
+  {
+    "name": "SunFilled",
+    "description": "",
+    "created_at": "2022-10-18T11:04:04.607Z",
+    "pageName": "Interface"
+  },
+  {
     "name": "System",
     "description": "",
     "created_at": "2020-07-01T10:37:42.766Z",
@@ -2374,6 +2386,12 @@
     "description": "",
     "created_at": "2021-01-11T13:37:55.639Z",
     "pageName": "Settings"
+  },
+  {
+    "name": "Table",
+    "description": "",
+    "created_at": "2022-09-16T10:02:07.689Z",
+    "pageName": "Interface"
   },
   {
     "name": "TalkingRoom",

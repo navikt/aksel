@@ -32,6 +32,10 @@ export interface UseDatepickerOptions
    * Make selection of Date required
    */
   required?: boolean;
+  /**
+   * Callback for changed state
+   */
+  onDateChange?: (val?: Date) => void;
 }
 
 interface UseDatepickerValue {
@@ -64,18 +68,21 @@ export const useDatepicker = (
   const {
     locale: _locale = "nb",
     required,
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     today = new Date(),
     fromDate,
     toDate,
     disabled,
     disableWeekends,
+    onDateChange,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
 
   const inputRef = useRef<HTMLDivElement>(null);
   const daypickerRef = useRef<HTMLDivElement>(null);
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
@@ -86,6 +93,11 @@ export const useDatepicker = (
     ? formatDateForInput(defaultSelected, locale, "date")
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
+
+  const getSelectedDate = (date?: Date) => {
+    onDateChange?.(date);
+    return date;
+  };
 
   const handleFocusIn = useCallback(
     (e) => {
@@ -110,23 +122,21 @@ export const useDatepicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedDay(defaultSelected);
+    setSelectedDay(getSelectedDate(defaultSelected));
     setMonth(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
-    setSelectedDay(date);
+    setSelectedDay(getSelectedDate(date));
     setMonth(date ?? today);
     setInputValue(date ? formatDateForInput(date, locale, "date") : "");
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-    if (!e.target.value) {
-      reset();
-      return;
-    }
+
     let day = parseDate(e.target.value, today, locale, "date");
     if (isValidDate(day)) {
       setMonth(day);
@@ -147,11 +157,11 @@ export const useDatepicker = (
     }
 
     if (!required && selected) {
-      setSelectedDay(undefined);
+      setSelectedDay(getSelectedDate(undefined));
       setInputValue("");
       return;
     }
-    setSelectedDay(day);
+    setSelectedDay(getSelectedDate(day));
     setMonth(day);
     setInputValue(day ? formatDateForInput(day, locale, "date") : "");
   };
@@ -168,17 +178,17 @@ export const useDatepicker = (
       (disabled &&
         ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
     ) {
-      setSelectedDay(undefined);
+      setSelectedDay(getSelectedDate(undefined));
       return;
     }
 
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (isBefore || isAfter) {
-      setSelectedDay(undefined);
+      setSelectedDay(getSelectedDate(undefined));
       return;
     }
-    setSelectedDay(day);
+    setSelectedDay(getSelectedDate(day));
     setMonth(day);
   };
 
