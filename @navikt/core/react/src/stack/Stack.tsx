@@ -25,9 +25,7 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
     | "4"
     | "3"
     | "2"
-    | "1"
-    | "05"
-    | "0";
+    | "1";
   /**
    * Vertical alignment
    * @default "start"
