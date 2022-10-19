@@ -7,7 +7,14 @@ export const parameters = {
   options: {
     storySort: {
       method: "",
-      order: ["Intro", "ds-icons", "ds-react", ["form"], ["Default"]],
+      order: [
+        "Intro",
+        "ds-icons",
+        "ds-react",
+        ["form"],
+        ["layout"],
+        ["Default"],
+      ],
       locales: "",
     },
   },

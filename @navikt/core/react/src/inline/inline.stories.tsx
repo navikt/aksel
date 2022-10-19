@@ -3,19 +3,21 @@ import { Tag } from "..";
 import { Inline } from ".";
 
 export default {
-  title: "ds-react/layout/Inline",
+  title: "ds-react/Layout/Inline",
   component: Inline,
   argTypes: {
     align: {
+      defaultValue: "center",
       control: {
         type: "radio",
-        options: ["start", "end", "center", "baseline"],
+        options: ["start", "end", "center", "baseline", "stretch"],
       },
     },
     justify: {
+      defaultValue: "center",
       control: {
         type: "radio",
-        options: ["start", "end", "center", "between"],
+        options: ["start", "end", "center", "between", "evenly"],
       },
     },
   },
@@ -31,7 +33,7 @@ const elements = (
 );
 
 export const Default = (props) => (
-  <div style={{ width: "40rem" }}>
+  <div style={{ width: "40rem", height: "4rem", display: "grid" }}>
     <Inline {...props}>
       <span>text</span>
       {elements}
@@ -56,18 +58,36 @@ export const Spacing = () => (
 
 export const align = () => (
   <div className="colgap">
-    <Inline align="start">
-      <span>text</span>
-      {elements}
-    </Inline>
-    <Inline align="center">
-      <span>text</span>
-      {elements}
-    </Inline>
-    <Inline align="end">
-      <span>text</span>
-      {elements}
-    </Inline>
+    <div style={{ height: "4rem", display: "grid" }}>
+      <Inline align="start">
+        <span>start</span>
+        {elements}
+      </Inline>
+    </div>
+    <div style={{ height: "4rem", display: "grid" }}>
+      <Inline align="center">
+        <span>center</span>
+        {elements}
+      </Inline>
+    </div>
+    <div style={{ height: "4rem", display: "grid" }}>
+      <Inline align="end">
+        <span>end</span>
+        {elements}
+      </Inline>
+    </div>
+    <div style={{ height: "4rem", display: "grid" }}>
+      <Inline align="baseline">
+        <span>baseline</span>
+        {elements}
+      </Inline>
+    </div>
+    <div style={{ height: "4rem", display: "grid" }}>
+      <Inline align="stretch">
+        <span>stretch</span>
+        {elements}
+      </Inline>
+    </div>
   </div>
 );
 
@@ -77,5 +97,6 @@ export const justify = () => (
     <Inline justify="center">{elements}</Inline>
     <Inline justify="end">{elements}</Inline>
     <Inline justify="between">{elements}</Inline>
+    <Inline justify="evenly">{elements}</Inline>
   </div>
 );

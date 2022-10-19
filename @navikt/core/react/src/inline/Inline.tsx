@@ -25,21 +25,19 @@ export interface InlineProps extends HTMLAttributes<HTMLDivElement> {
     | "4"
     | "3"
     | "2"
-    | "1"
-    | "05"
-    | "0";
+    | "1";
   /**
    * Vertical alignment
    */
-  align?: "start" | "end" | "center" | "baseline";
+  align?: "start" | "end" | "center" | "baseline" | "stretch";
   /**
    * Horizontal alignment
    * @default "start"
    */
-  justify?: "start" | "end" | "center" | "between";
+  justify?: "start" | "end" | "center" | "between" | "evenly";
   /**
-   * @default true
    * Wraps elements when needed
+   * @default true
    */
   wrap?: boolean;
 }
@@ -49,6 +47,7 @@ const justifyT = {
   end: "flex-end",
   center: "center",
   between: "space-between",
+  evenly: "space-evenly",
 };
 
 const alignT = {
@@ -56,6 +55,7 @@ const alignT = {
   end: "flex-end",
   center: "center",
   baseline: "baseline",
+  stretch: "stretch",
 };
 
 export const Inline = forwardRef<HTMLDivElement, InlineProps>(

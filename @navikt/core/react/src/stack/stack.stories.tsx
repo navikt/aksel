@@ -3,7 +3,7 @@ import { Tag } from "..";
 import { Stack } from ".";
 
 export default {
-  title: "ds-react/layout/Stack",
+  title: "ds-react/Layout/Stack",
   component: Stack,
   argTypes: {
     align: {
