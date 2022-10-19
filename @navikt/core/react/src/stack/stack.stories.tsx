@@ -9,7 +9,7 @@ export default {
     align: {
       control: {
         type: "radio",
-        options: ["start", "end", "center", "baseline"],
+        options: ["start", "end", "center"],
       },
     },
   },
