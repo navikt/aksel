@@ -8,6 +8,7 @@ export default function transformer(file, api, options) {
 
   // TODO: Map over all old -> new for file
   const rgx = new RegExp(/(--navds-[a-z-0-9\s]+)/gm);
+  /* const rgx = new RegExp(/(--navds-global-color-red-100\s+)/gm); */
   console.log(file.source.replace(rgx, "--a-test"));
 
   // Regex var:
