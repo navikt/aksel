@@ -3,6 +3,7 @@ import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
+import { getFirstDate, getLastDate } from "./utils/filter";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode[];
@@ -30,20 +31,26 @@ interface TimelineComponent
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, ...rest }, ref) => {
+    //console.log(children);
     const allPeriods = useMemo(() => {
       let periods: any = [];
       for (let i = 0; i < children.length; i++) {
         const row = children[i];
         if (React.isValidElement(row) && row?.props?.children) {
-          const rowPeriods = row?.props?.children.map(
-            (period: ReactElement) => {
-              return {
-                start: period.props.start,
-                end: period.props.end,
-              };
-            }
-          );
-          periods = [...periods, ...rowPeriods];
+          const isArray = Array.isArray(row?.props?.children);
+          if (isArray) {
+            const rowPeriods = row?.props?.children.map(
+              (period: ReactElement) => {
+                return {
+                  start: period.props.start,
+                  end: period.props.end,
+                };
+              }
+            );
+            periods = [...periods, ...rowPeriods];
+          } else {
+            periods = [...periods, row.props.children];
+          }
         }
       }
       return periods;
@@ -52,8 +59,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     return (
       <TimelineContext.Provider
         value={{
-          startDate: startDate || new Date(),
-          endDate: endDate || new Date(),
+          startDate: startDate || getFirstDate(allPeriods),
+          endDate: endDate || getLastDate(allPeriods),
           periods: allPeriods,
         }}
       >
