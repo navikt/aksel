@@ -33,8 +33,14 @@ export function check(
       });
 
       // Format output and expected with prettier for white spaces and line breaks consistency
-      expect(prettier.format(output, { parser })).toBe(
-        prettier.format(expected, { parser })
+      expect(
+        prettier.format(output, {
+          parser: parser === "js" ? "typescript" : parser,
+        })
+      ).toBe(
+        prettier.format(expected, {
+          parser: parser === "js" ? "typescript" : parser,
+        })
       );
     });
   });

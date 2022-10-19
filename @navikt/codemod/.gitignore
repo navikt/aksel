@@ -3,4 +3,5 @@
 bin/*.js
 *.js.map
 !transforms/**/__testfixtures__/**/*.js
+!transforms/**/tests/**/*.js
 !jest.config.js
