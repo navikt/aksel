@@ -38,7 +38,9 @@
     "jest": "^27.5.0",
     "jscodeshift": "0.13.1",
     "jscodeshift-add-imports": "1.0.10",
-    "meow": "7.0.1"
+    "lodash": "4.17.21",
+    "meow": "7.0.1",
+    "prettier": "2.7.1"
   },
   "devDependencies": {
     "@types/jscodeshift": "0.11.5",

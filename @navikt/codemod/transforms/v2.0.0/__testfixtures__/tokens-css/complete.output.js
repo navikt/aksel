@@ -1,16 +1,16 @@
 const StyledDiv = styled`
---navds-global-color-red-100: var(--navds-global-color-green-100);
---navds-global-color-blue-100: red;
+--a-red-100: var(--a-green-100);
+--a-blue-100: red;
 
 .test{
-  color: var(--navds-global-color-blue-100);
+  color: var(--a-blue-100);
 }
 `;
 
 <style>
   {`
   .test{
-    color: var(--navds-global-color-blue-100);
+    color: var(--a-blue-100);
   }
   `}
 </style>;

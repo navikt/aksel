@@ -1,17 +1,26 @@
+// TODO: Hent utenfra
+export const tokens = [
+  ["--navds-global-color-red-100", "--a-red-100"],
+  ["--navds-global-color-green-100", "--a-green-100"],
+  ["--navds-global-color-blue-100", "--a-blue-100"],
+  ["--navds-global-color-blue-200", "--a-blue-200"],
+  ["--navds-global-color-green-100", "--a-green-100"],
+  ["--navds-global-color-green-500", "--a-green-500"],
+  ["--navds-semantic-color-link", "--a-link"],
+  ["--navds-global-color-gray-600", "--a-gray-600"],
+];
+
 /**
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
 export default function transformer(file, api, options) {
-  const j = api.jscodeshift;
-  const root = j(file.source);
+  let src = file.source;
 
-  // TODO: Map over all old -> new for file
-  const rgx = new RegExp(/(--navds-[a-z-0-9\s]+)/gm);
-  /* const rgx = new RegExp(/(--navds-global-color-red-100\s+)/gm); */
-  console.log(file.source.replace(rgx, "--a-test"));
+  tokens.forEach((tok) => {
+    const rgx = new RegExp("(" + tok[0] + ")", "gm");
+    src = src.replace(rgx, tok[1]);
+  });
 
-  // Regex var:
-
-  return root.toSource(options.printOptions);
+  return src;
 }
