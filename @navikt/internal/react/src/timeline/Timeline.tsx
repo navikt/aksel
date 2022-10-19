@@ -1,11 +1,11 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, ReactElement, useMemo } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
+  children: React.ReactNode[];
   /**
    * Decides the startingpoint for the timeline. Defaults to the earliest date among the timeline periods.
    */
@@ -30,11 +30,31 @@ interface TimelineComponent
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, ...rest }, ref) => {
+    const allPeriods = useMemo(() => {
+      let periods: any = [];
+      for (let i = 0; i < children.length; i++) {
+        const row = children[i];
+        if (React.isValidElement(row) && row?.props?.children) {
+          const rowPeriods = row?.props?.children.map(
+            (period: ReactElement) => {
+              return {
+                start: period.props.start,
+                end: period.props.end,
+              };
+            }
+          );
+          periods = [...periods, ...rowPeriods];
+        }
+      }
+      return periods;
+    }, [children]);
+
     return (
       <TimelineContext.Provider
         value={{
           startDate: startDate || new Date(),
           endDate: endDate || new Date(),
+          periods: allPeriods,
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">

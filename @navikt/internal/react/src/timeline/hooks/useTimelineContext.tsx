@@ -1,13 +1,16 @@
 import { createContext, useContext } from "react";
+import { PeriodType } from "../Period";
 
 interface TimelineContextProps {
   startDate: Date;
   endDate: Date;
+  periods: PeriodType[];
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
   startDate: new Date(),
   endDate: new Date(),
+  periods: [],
 });
 
 export const useTimelineContext = () => {

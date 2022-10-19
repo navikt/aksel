@@ -20,6 +20,7 @@ export const Default = () => {
       </Timeline.Row>
       <Timeline.Row label="Row 2" />
       <Timeline.Row label="Row 3" />
+      <Timeline.Row />
     </Timeline>
   );
 };

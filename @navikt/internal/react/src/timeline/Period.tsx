@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactNode } from "react";
 
-interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
   start: Date;
   end: Date;
   icon?: ReactNode;
