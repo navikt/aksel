@@ -25,6 +25,7 @@ const ALLOWED_INPUT_FORMATS_MONTH = [
   "MM-yyyy",
   "MM.yyyy",
   INPUT_DATE_STRING_FORMAT_MONTH,
+  ...ALLOWED_INPUT_FORMATS_DATE,
 ];
 
 export const parseDate = (
