@@ -1,4 +1,4 @@
-import { translateToken } from "../utils/translate-token";
+import { translateToken } from "../translate-token";
 
 export {};
 
