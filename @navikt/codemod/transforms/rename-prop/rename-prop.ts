@@ -1,4 +1,4 @@
-import renameProps from "./utils/rename-props";
+import renameProps from "../utils/rename-props";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
