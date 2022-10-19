@@ -1,1 +1,1 @@
-export { getFirstDate, getLastDate } from "./filter";
+export { getFirstDate, getLastDate, isVisible, Positioned } from "./filter";
