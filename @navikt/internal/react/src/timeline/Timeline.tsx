@@ -65,7 +65,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
-          <AxisLabels start={startDate} end={endDate} />
+          <AxisLabels />
           {children}
         </div>
       </TimelineContext.Provider>
