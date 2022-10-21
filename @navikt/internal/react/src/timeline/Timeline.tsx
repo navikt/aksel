@@ -36,67 +36,44 @@ interface TimelineComponent
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
+    const parsePeriods = (row: React.ReactNode) => {
+      let periods: any = [];
+      if (React.isValidElement(row) && row?.props?.children) {
+        const isArray = Array.isArray(row?.props?.children);
+        if (isArray) {
+          const rowPeriods = row?.props?.children.map(
+            (period: ReactElement) => {
+              return {
+                start: period.props.start,
+                end: period.props.end,
+              };
+            }
+          );
+          periods = rowPeriods;
+        } else {
+          periods = [
+            {
+              start: row?.props?.children?.props?.start,
+              end: row?.props?.children?.props?.end,
+            },
+          ];
+        }
+      }
+      return periods;
+    };
+
     const allPeriods = useMemo(() => {
       let periods: any = [];
-      console.log("children", children);
-
       if (Array.isArray(children)) {
         for (let i = 0; i < children.length; i++) {
           const row = children[i];
-
-          if (React.isValidElement(row) && row?.props?.children) {
-            const isArray = Array.isArray(row?.props?.children);
-            if (isArray) {
-              const rowPeriods = row?.props?.children.map(
-                (period: ReactElement) => {
-                  return {
-                    start: period.props.start,
-                    end: period.props.end,
-                  };
-                }
-              );
-              periods = [...periods, ...rowPeriods];
-            } else {
-              periods = [
-                ...periods,
-                {
-                  start: row?.props?.children?.props?.start,
-                  end: row?.props?.children?.props?.start,
-                },
-              ];
-            }
-          }
+          periods = [...periods, ...parsePeriods(row)];
         }
       } else {
-        console.log("no arr");
-        if (React.isValidElement(children) && children?.props?.children) {
-          const isArray = Array.isArray(children?.props?.children);
-          if (isArray) {
-            const rowPeriods = children?.props?.children.map(
-              (period: ReactElement) => {
-                return {
-                  start: period.props.start,
-                  end: period.props.end,
-                };
-              }
-            );
-            periods = [...periods, ...rowPeriods];
-          } else {
-            periods = [
-              ...periods,
-              {
-                start: children?.props?.children?.props?.start,
-                end: children?.props?.children?.props?.start,
-              },
-            ];
-          }
-        }
+        periods = parsePeriods(children);
       }
-
       return periods;
     }, [children]);
-
-    console.log(allPeriods);
 
     // const rows = children.map((r) => {
     //   if (React.isValidElement(r) && r?.props?.children) {

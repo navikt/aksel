@@ -1,4 +1,5 @@
 import {
+  addDays,
   addMonths,
   addYears,
   differenceInDays,
@@ -7,14 +8,46 @@ import {
   endOfMonth,
   endOfYear,
   format,
+  startOfDay,
   startOfMonth,
   startOfYear,
+  subDays,
 } from "date-fns";
 import React from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
 import { AxisLabel } from "./utils/types.external";
+
+export const dayLabels = (
+  start: Date,
+  end: Date,
+  totalDays: number,
+  direction: "left" | "right"
+): AxisLabel[] => {
+  const increment = Math.ceil(totalDays / 10);
+  const lastDay = startOfDay(end);
+  return new Array(totalDays)
+    .fill(lastDay)
+    .map((thisDay, i) => {
+      if (i % increment !== 0) return null;
+      const day: Date = subDays(thisDay, i);
+      const { horizontalPosition, width } = horizontalPositionAndWidth(
+        day,
+        addDays(day, 1),
+        start,
+        end
+      );
+      return {
+        direction: direction,
+        horizontalPosition: horizontalPosition,
+        label: format(day, "MM.dd"),
+        date: day,
+        width: width,
+      };
+    })
+    .filter((label) => label !== null) as AxisLabel[];
+};
 
 export const monthLabels = (
   start: Date,
@@ -74,9 +107,9 @@ const axisLabels = (
   direction: "left" | "right"
 ): AxisLabel[] => {
   const totalDays = differenceInDays(end, start);
-  console.log(totalDays);
-
-  if (totalDays < 370) {
+  if (totalDays < 40) {
+    return dayLabels(start, end, totalDays, direction);
+  } else if (totalDays < 370) {
     return monthLabels(start, end, direction);
   } else {
     return yearLabels(start, end, direction);
