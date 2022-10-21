@@ -23,7 +23,6 @@
 .navds-accordion__header {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
   gap: var(--navds-spacing-2);
   padding: var(--navds-spacing-3);
