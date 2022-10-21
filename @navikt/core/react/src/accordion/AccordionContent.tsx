@@ -27,17 +27,17 @@ const AccordionContent: AccordionContentType = forwardRef(
       return null;
     }
 
+    /* <AnimateHeight height={context.open ? "auto" : 0} duration={250}> */
+    /* </AnimateHeight> */
     return (
-      <AnimateHeight height={context.open ? "auto" : 0} duration={250}>
-        <BodyLong
-          {...rest}
-          as="div"
-          ref={ref}
-          className={cl("navds-accordion__content", className)}
-        >
-          {children}
-        </BodyLong>
-      </AnimateHeight>
+      <BodyLong
+        {...rest}
+        as="div"
+        ref={ref}
+        className={cl("navds-accordion__content", className)}
+      >
+        {children}
+      </BodyLong>
     );
   }
 );
