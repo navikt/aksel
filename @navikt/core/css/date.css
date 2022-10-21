@@ -144,8 +144,10 @@
 }
 
 .navds-date .rdp-day_disabled {
-  opacity: 0.7;
   cursor: not-allowed;
+  text-decoration: line-through;
+  background-color: var(--navds-global-color-gray-100);
+  color: var(--navds-global-color-gray-600);
 }
 
 .navds-date .rdp-button:where(:not(.rdp-day_selected):not([disabled])):hover,
