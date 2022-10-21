@@ -59,6 +59,23 @@
   border-radius: var(--navds-border-radius-medium);
 }
 
+.navds-date .rdp-day_range_start {
+  border-radius: 12px 2px 2px 12px;
+  border-radius: var(--navds-border-radius-xlarge)
+    var(--navds-border-radius-small) var(--navds-border-radius-small)
+    var(--navds-border-radius-xlarge);
+}
+
+.navds-date .rdp-day_range_end:not(.rdp-day_range_start) {
+  border-radius: var(--navds-border-radius-small)
+    var(--navds-border-radius-xlarge) var(--navds-border-radius-xlarge)
+    var(--navds-border-radius-small);
+}
+
+.navds-date .rdp-day_range_start.rdp-day_range_end {
+  border-radius: var(--navds-border-radius-xlarge);
+}
+
 .navds-date .rdp-button:not(.rdp-day_selected):not([disabled]):focus,
 .navds-date
   .navds-date__month-button:not(.rdp-day_selected):not([disabled]):focus {
@@ -135,20 +152,6 @@
 .navds-date__month-button:where(:not(.rdp-day_selected):not([disabled])):hover {
   background: var(--navds-global-color-blue-50);
   cursor: pointer;
-}
-
-.navds-date .rdp-day_range_middle {
-  background: var(--navds-global-color-deepblue-100);
-  color: var(--navds-global-color-gray-900);
-}
-
-.navds-date .rdp-day_selected:where(:not([disabled])):hover,
-.navds-monthpicker__month--selected:where(:not([disabled])):hover {
-  background: var(--navds-global-color-deepblue-600);
-}
-
-.navds-date .rdp-day_range_middle:where(:not([disabled])):hover {
-  background: var(--navds-global-color-deepblue-200);
 }
 
 .navds-date .rdp-day_today {
