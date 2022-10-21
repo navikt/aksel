@@ -1,7 +1,7 @@
 import React, { useRef, useState, forwardRef, useMemo } from "react";
 import cl from "clsx";
 import { OverridableComponent, Loader, mergeRefs, Label } from "../";
-import { useClientLayoutEffect } from "../util";
+import { omit, useClientLayoutEffect } from "../util";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -77,9 +77,12 @@ export const Button: OverridableComponent<ButtonProps, HTMLButtonElement> =
         }
       }, [loading, children]);
 
+      const filterProps =
+        disabled ?? widthOverride ? omit(rest, ["href"]) : rest;
+
       return (
         <Component
-          {...rest}
+          {...filterProps}
           ref={mergedRef}
           className={cl(
             className,

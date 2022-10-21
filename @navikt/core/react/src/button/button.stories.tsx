@@ -216,3 +216,29 @@ export const Disabled = () => (
     </div>
   </div>
 );
+
+export const LoadingWithAs = () => (
+  <div className="colgap">
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button key={variant} variant={variant} loading size="small">
+          {varSwitch[variant]}
+        </Button>
+      ))}
+    </div>
+    <div className="rowgap">
+      {variants.map((variant) => (
+        <Button
+          key={variant}
+          variant={variant}
+          loading
+          size="small"
+          as="a"
+          href="#"
+        >
+          {varSwitch[variant]}
+        </Button>
+      ))}
+    </div>
+  </div>
+);
