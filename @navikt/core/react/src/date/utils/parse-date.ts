@@ -3,7 +3,7 @@ import { isValidDate } from ".";
 
 export const INPUT_DATE_STRING_FORMAT_DATE = "dd.MM.yyyy";
 
-export const INPUT_DATE_STRING_FORMAT_MONTH = "MM.yyyy";
+export const INPUT_DATE_STRING_FORMAT_MONTH = "MMMM yyyy";
 
 const ALLOWED_INPUT_FORMATS_DATE = [
   "ddMMyy",
@@ -25,6 +25,7 @@ const ALLOWED_INPUT_FORMATS_MONTH = [
   "MM-yyyy",
   "MM.yyyy",
   INPUT_DATE_STRING_FORMAT_MONTH,
+  ...ALLOWED_INPUT_FORMATS_DATE,
 ];
 
 export const parseDate = (

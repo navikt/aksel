@@ -74,6 +74,7 @@ export const MonthButton = ({
           : -1
       }
       onKeyDown={(e) => {
+        e.preventDefault();
         const next = nextEnabled(
           months,
           e.key,

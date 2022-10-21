@@ -156,6 +156,7 @@
 
 .navds-date .rdp-day_today {
   box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
+  text-decoration: underline;
 }
 
 .navds-date__caption {
@@ -201,4 +202,9 @@
 
 .navds-date__caption__year {
   width: 5rem;
+}
+
+.navds-date .rdp-day_outside {
+  visibility: hidden;
+  pointer-events: none;
 }
