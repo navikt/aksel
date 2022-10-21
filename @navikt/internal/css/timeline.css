@@ -1,3 +1,22 @@
 .navdsi-timeline {
-  display: grid;
+  position: relative;
+  padding: 0.75rem 0;
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+}
+
+.navdsi-timeline__axislabels {
+  position: relative;
+  width: 100%;
+  height: 1rem;
+  box-sizing: content-box;
+  margin-bottom: 16px;
+}
+
+.navdsi-timeline__axislabels > * {
+  position: absolute;
+  font-size: 14px;
 }

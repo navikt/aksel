@@ -15,6 +15,11 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
    Decides the end-date for the timeline. Defaults to the latest date among the timeline periods.
    */
   endDate?: Date;
+  /**
+   * Decides the direction which the periods are sorted. "Left" equals ascending fro left.
+   * @default "left"
+   */
+  direction?: "left" | "right";
 }
 
 interface TimelineComponent
@@ -30,12 +35,12 @@ interface TimelineComponent
 }
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
-  ({ children, startDate, endDate, ...rest }, ref) => {
-    //console.log(children);
+  ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
     const allPeriods = useMemo(() => {
       let periods: any = [];
       for (let i = 0; i < children.length; i++) {
         const row = children[i];
+
         if (React.isValidElement(row) && row?.props?.children) {
           const isArray = Array.isArray(row?.props?.children);
           if (isArray) {
@@ -55,6 +60,21 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
       return periods;
     }, [children]);
+
+    // const rows = children.map((r) => {
+    //   if (React.isValidElement(r) && r?.props?.children) {
+    //     let periods = [];
+    //     for (let i = 0; i < r.props.children.length; i++) {
+    //       const p = r.props.children[i];
+    //       periods.push({ start: p?.props?.start, end: p?.props?.end });
+    //     }
+    //     return periods;
+    //   }
+    //   return [];
+    // });
+    // const start = startOfDay(useEarliestDate({ startDate, rows }));
+    // const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
+    // const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
     return (
       <TimelineContext.Provider

@@ -1,4 +1,6 @@
+import { differenceInDays } from "date-fns";
 import { PeriodProps } from "../Period";
+import { Spatial } from "./types.internal";
 
 export interface Positioned {
   horizontalPosition: number;
@@ -19,3 +21,12 @@ export const getLastDate = (periods: any) => {
     (a: PeriodProps, b: PeriodProps) => a.end.getTime() - b.end.getTime()
   )[periods.length - 1].end;
 };
+
+export const withinADay = (date1: Date, date2: Date): boolean =>
+  Math.abs(differenceInDays(date1, date2)) <= 1;
+
+export const invisiblePeriods = ({
+  horizontalPosition,
+  width,
+}: Positioned & Spatial) =>
+  horizontalPosition >= 0 && horizontalPosition <= 100 && width > 0;

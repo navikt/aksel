@@ -9,7 +9,7 @@ import React from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
-import { AxisLabel } from "./utils/types";
+import { AxisLabel } from "./utils/types.external";
 
 export const månedsetiketter = (
   start: Date,
@@ -30,7 +30,7 @@ export const månedsetiketter = (
     return {
       direction: direction,
       horizontalPosition: horizontalPosition,
-      label: format(month, "MM yy"),
+      label: format(month, "MMM yy"),
       date: month,
       width: width,
     };
@@ -45,9 +45,26 @@ const axisLabels = (
   return månedsetiketter(start, end, direction);
 };
 
-export const AxisLabels = () => {
+export const AxisLabels = ({ direction = "left" }) => {
   const { endDate, startDate } = useTimelineContext();
   const labels = axisLabels(startDate, endDate, "left").filter(isVisible);
   console.log(labels);
-  return <div className="navdsi-timeline__axislabels">axis</div>;
+
+  return (
+    <div className="navdsi-timeline__axislabels">
+      {labels.map((etikett) => (
+        <div
+          key={etikett.label}
+          style={{
+            display: "flex",
+            justifyContent: direction === "left" ? "flex-start" : "flex-end",
+            [direction]: `${etikett.horizontalPosition}%`,
+            width: `${etikett.width}%`,
+          }}
+        >
+          {etikett.label}
+        </div>
+      ))}
+    </div>
+  );
 };

@@ -21,7 +21,7 @@ export interface Period {
 export interface PositionedPeriod extends Period, Positioned {
   id: string;
   width: number;
-  status: PeriodStatus;
+  //status: PeriodStatus;
   active?: boolean;
   cropped?: "left" | "right" | "both";
   disabled?: boolean;
