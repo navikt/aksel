@@ -15,12 +15,16 @@ export default {
   },
 };
 
-const variants: Array<"error" | "warning" | "info" | "success"> = [
-  "error",
-  "warning",
-  "info",
-  "success",
-];
+const variants: Array<
+  | "error"
+  | "warning"
+  | "info"
+  | "success"
+  | "neutral"
+  | "alt1"
+  | "alt2"
+  | "alt3"
+> = ["error", "warning", "info", "success", "neutral", "alt1", "alt2", "alt3"];
 
 export const Default = (props) => (
   <Tag variant={props.variant} size={props.size}>
@@ -37,7 +41,31 @@ export const Small = () => {
     <div className="rowgap">
       {variants.map((variant, i) => (
         <Tag key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill("Id elit esse")}
+          {variant}
+        </Tag>
+      ))}
+    </div>
+  );
+};
+
+export const xSmall = () => {
+  return (
+    <div className="rowgap">
+      {variants.map((variant, i) => (
+        <Tag key={variant} variant={variant} size="xsmall">
+          {variant}
+        </Tag>
+      ))}
+    </div>
+  );
+};
+
+export const Variants = () => {
+  return (
+    <div className="rowgap">
+      {variants.map((variant, i) => (
+        <Tag key={variant} variant={variant}>
+          {variant}
         </Tag>
       ))}
     </div>

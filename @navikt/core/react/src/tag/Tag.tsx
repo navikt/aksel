@@ -10,12 +10,20 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
    * Changes background and border color
    */
-  variant: "warning" | "error" | "info" | "success";
+  variant:
+    | "warning"
+    | "error"
+    | "info"
+    | "success"
+    | "neutral"
+    | "alt1"
+    | "alt2"
+    | "alt3";
   /**
    * Changes padding and font-sizes
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
 }
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
@@ -27,7 +35,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         {...rest}
         ref={ref}
         as="span"
-        size={size}
+        size={size === "medium" ? "medium" : "small"}
         className={cl(
           "navds-tag",
           className,
