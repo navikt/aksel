@@ -33,8 +33,6 @@
 .navds-tag {
   border: 1px solid;
   border-radius: var(--navds-border-radius-small);
-  border-color: var(--ac-tag-border, --navds-global-color-gray-500);
-  background-color: var(--ac-tag-bg, --navds-global-color-gray-100);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -56,6 +54,7 @@
 .navds-tag--error {
   border-color: var(--ac-tag-error-border, var(--navds-global-color-red-500));
   background-color: var(--ac-tag-error-bg, var(--navds-global-color-red-50));
+  color: var(--ac-tag-error-text);
 }
 
 .navds-tag--error-filled {
@@ -76,6 +75,7 @@
     --ac-tag-success-bg,
     var(--navds-global-color-green-50)
   );
+  color: var(--ac-tag-success-text);
 }
 
 .navds-tag--success-filled {
@@ -96,6 +96,7 @@
     --ac-tag-warning-bg,
     var(--navds-global-color-orange-50)
   );
+  color: var(--ac-tag-warning-text);
 }
 
 .navds-tag--warning-filled {
@@ -104,17 +105,19 @@
     --ac-tag-warning-filled-bg,
     var(--navds-global-color-orange-500)
   );
+  color: var(--ac-tag-warning-filled-text);
 }
 
 .navds-tag--info {
   border-color: var(
-    --ac-tag-error-border,
+    --ac-tag-info-border,
     var(--navds-global-color-lightblue-700)
   );
   background-color: var(
-    --ac-tag-error-bg,
+    --ac-tag-info-bg,
     var(--navds-global-color-lightblue-50)
   );
+  color: var(--ac-tag-info-text);
 }
 
 .navds-tag--info-filled {
@@ -123,6 +126,7 @@
     --ac-tag-info-filled-bg,
     var(--navds-global-color-lightblue-500)
   );
+  color: var(--ac-tag-info-filled-text);
 }
 
 .navds-tag--neutral {
@@ -134,6 +138,7 @@
     --ac-tag-neutral-bg,
     var(--navds-global-color-gray-100)
   );
+  color: var(--ac-tag-neutral-text);
 }
 
 .navds-tag--neutral-filled {
@@ -154,20 +159,22 @@
     --ac-tag-alt1-bg,
     var(--navds-global-color-deepblue-100)
   );
+  color: var(--ac-tag-alt1-text);
 }
 
 .navds-tag--alt1-filled {
   border-color: transparent;
   background-color: var(
-    --ac-tag-error-filled-bg,
+    --ac-tag-alt1-filled-bg,
     var(--navds-global-color-deepblue-500)
   );
-  color: var(--ac-tag-error-filled-text, var(--navds-global-color-white));
+  color: var(--ac-tag-alt1-filled-text, var(--navds-global-color-white));
 }
 
 .navds-tag--alt2 {
   border-color: var(--ac-tag-alt2-border, var(--navds-global-color-purple-400));
   background-color: var(--ac-tag-alt2-bg, var(--navds-global-color-purple-100));
+  color: var(--ac-tag-alt2-text);
 }
 
 .navds-tag--alt2-filled {
@@ -188,6 +195,7 @@
     --ac-tag-alt3-bg,
     var(--navds-global-color-limegreen-100)
   );
+  color: var(--ac-tag-alt3-text);
 }
 
 .navds-tag--alt3-filled {
@@ -196,4 +204,5 @@
     --ac-tag-alt3-filled-bg,
     var(--navds-global-color-limegreen-400)
   );
+  color: var(--ac-tag-alt3-filled-text);
 }
