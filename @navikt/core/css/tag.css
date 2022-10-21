@@ -43,12 +43,12 @@
 
 .navds-tag--small {
   min-height: 24px;
-  padding: 0.0625rem 0.375rem 0.1875rem;
+  padding: 0 0.375rem;
 }
 
 .navds-tag--xsmall {
   min-height: 20px;
-  padding: 0 var(--navds-spacing-1) 0.125rem;
+  padding: 0 var(--navds-spacing-1);
 }
 
 .navds-tag--error {
