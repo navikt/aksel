@@ -12,13 +12,21 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
    */
   variant:
     | "warning"
+    | "warning-filled"
     | "error"
+    | "error-filled"
     | "info"
+    | "info-filled"
     | "success"
+    | "success-filled"
     | "neutral"
+    | "neutral-filled"
     | "alt1"
+    | "alt1-filled"
     | "alt2"
-    | "alt3";
+    | "alt2-filled"
+    | "alt3"
+    | "alt3-filled";
   /**
    * Changes padding and font-sizes
    * @default "medium"
