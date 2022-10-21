@@ -1,0 +1,30 @@
+.filtersMenu {
+  box-shadow: common.$a-blue-200 inset 0 0 0 8px;
+  border-radius: 0.2em;
+  background-color: white;
+}
+
+.filterExplanationHighlight {
+  background-color: common.$a-green-100;
+  border: 1px solid common.$a-green-500;
+  transition: all 0.4s linear;
+}
+
+.lenkepanelNavno {
+  &:global(.navds-link-panel) {
+    border: 1px solid common.$a-link;
+  }
+
+  :global {
+    .navds-link-panel__content {
+      display: flex;
+    }
+
+    .navds-link-panel__title,
+    .navds-link-panel__chevron {
+      color: common.$a-link;
+    }
+  }
+
+  background-color: common.$a-gray-600;
+}
