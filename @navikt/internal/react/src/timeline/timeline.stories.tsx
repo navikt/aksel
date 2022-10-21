@@ -34,3 +34,18 @@ export const Default = () => {
     </div>
   );
 };
+
+export const PG = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1">
+          <Timeline.Period
+            start={new Date("May 2 2022")}
+            end={new Date("May 28 1 2022")}
+          />
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};

@@ -6,7 +6,7 @@ import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { getFirstDate, getLastDate } from "./utils/filter";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode[];
+  children: React.ReactNode | React.ReactNode[];
   /**
    * Decides the startingpoint for the timeline. Defaults to the earliest date among the timeline periods.
    */
@@ -38,13 +38,41 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
     const allPeriods = useMemo(() => {
       let periods: any = [];
-      for (let i = 0; i < children.length; i++) {
-        const row = children[i];
+      console.log("children", children);
 
-        if (React.isValidElement(row) && row?.props?.children) {
-          const isArray = Array.isArray(row?.props?.children);
+      if (Array.isArray(children)) {
+        for (let i = 0; i < children.length; i++) {
+          const row = children[i];
+
+          if (React.isValidElement(row) && row?.props?.children) {
+            const isArray = Array.isArray(row?.props?.children);
+            if (isArray) {
+              const rowPeriods = row?.props?.children.map(
+                (period: ReactElement) => {
+                  return {
+                    start: period.props.start,
+                    end: period.props.end,
+                  };
+                }
+              );
+              periods = [...periods, ...rowPeriods];
+            } else {
+              periods = [
+                ...periods,
+                {
+                  start: row?.props?.children?.props?.start,
+                  end: row?.props?.children?.props?.start,
+                },
+              ];
+            }
+          }
+        }
+      } else {
+        console.log("no arr");
+        if (React.isValidElement(children) && children?.props?.children) {
+          const isArray = Array.isArray(children?.props?.children);
           if (isArray) {
-            const rowPeriods = row?.props?.children.map(
+            const rowPeriods = children?.props?.children.map(
               (period: ReactElement) => {
                 return {
                   start: period.props.start,
@@ -54,12 +82,21 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             );
             periods = [...periods, ...rowPeriods];
           } else {
-            periods = [...periods, row.props.children];
+            periods = [
+              ...periods,
+              {
+                start: children?.props?.children?.props?.start,
+                end: children?.props?.children?.props?.start,
+              },
+            ];
           }
         }
       }
+
       return periods;
     }, [children]);
+
+    console.log(allPeriods);
 
     // const rows = children.map((r) => {
     //   if (React.isValidElement(r) && r?.props?.children) {
