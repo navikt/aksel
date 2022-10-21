@@ -54,6 +54,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         onClick={() => previousMonth && goToMonth(previousMonth)}
         icon={<Left title="velg forrige måned" />}
         className="navds-date__caption-button"
+        type="button"
       />
 
       <div className="navds-date__caption__month-wrapper">
@@ -92,6 +93,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         disabled={!nextMonth}
         variant="tertiary"
         className="navds-date__caption-button"
+        type="button"
       />
     </div>
   );
