@@ -1,9 +1,14 @@
 import {
   addMonths,
+  addYears,
+  differenceInDays,
   differenceInMonths,
+  differenceInYears,
   endOfMonth,
+  endOfYear,
   format,
   startOfMonth,
+  startOfYear,
 } from "date-fns";
 import React from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -11,7 +16,7 @@ import { isVisible } from "./utils";
 import { horizontalPositionAndWidth } from "./utils/calc";
 import { AxisLabel } from "./utils/types.external";
 
-export const månedsetiketter = (
+export const monthLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right"
@@ -37,12 +42,45 @@ export const månedsetiketter = (
   });
 };
 
+export const yearLabels = (
+  start: Date,
+  end: Date,
+  direction: "left" | "right"
+): AxisLabel[] => {
+  const firstYear = startOfYear(start);
+  const lastYear = endOfYear(end);
+  const yearCount = differenceInYears(lastYear, start) + 1;
+  return new Array(yearCount).fill(firstYear).map((thisYear, i) => {
+    const year: Date = addYears(thisYear, i);
+    const { horizontalPosition, width } = horizontalPositionAndWidth(
+      year,
+      addYears(year, 1),
+      start,
+      end
+    );
+    return {
+      direction: direction,
+      horizontalPosition: horizontalPosition,
+      label: year.getFullYear().toString(),
+      date: year,
+      width: width,
+    };
+  });
+};
+
 const axisLabels = (
   start: Date,
   end: Date,
   direction: "left" | "right"
 ): AxisLabel[] => {
-  return månedsetiketter(start, end, direction);
+  const totalDays = differenceInDays(end, start);
+  console.log(totalDays);
+
+  if (totalDays < 370) {
+    return monthLabels(start, end, direction);
+  } else {
+    return yearLabels(start, end, direction);
+  }
 };
 
 export const AxisLabels = ({ direction = "left" }) => {
