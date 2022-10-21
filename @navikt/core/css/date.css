@@ -203,3 +203,7 @@
 .navds-date__caption__year {
   width: 5rem;
 }
+
+.navds-date .rdp-day_outside {
+  visibility: hidden;
+}

@@ -21,6 +21,7 @@ export const DayButton = (props: DayProps) => {
       ref={buttonRef}
       {...dayRender.buttonProps}
       aria-label={dateTime}
+      aria-hidden={dayRender.activeModifiers.outside}
     />
   );
 };

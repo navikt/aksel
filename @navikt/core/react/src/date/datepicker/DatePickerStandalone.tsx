@@ -113,6 +113,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
+          fixedWeeks
+          showOutsideDays
           {...omit(rest, ["onSelect"])}
         />
       </div>
