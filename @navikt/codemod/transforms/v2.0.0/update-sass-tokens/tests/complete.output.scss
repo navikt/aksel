@@ -12,7 +12,7 @@
 
 .lenkepanelNavno {
   &:global(.navds-link-panel) {
-    border: 1px solid common.$a-link;
+    border: 1px solid common.$a-text-action;
   }
 
   :global {
@@ -22,7 +22,7 @@
 
     .navds-link-panel__title,
     .navds-link-panel__chevron {
-      color: common.$a-link;
+      color: common.$a-text-action;
     }
   }
 

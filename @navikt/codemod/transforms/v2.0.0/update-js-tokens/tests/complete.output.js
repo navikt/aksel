@@ -3,7 +3,7 @@ import {
   ABlue400,
   AGray100,
   AGray400,
-  ALink,
+  ATextAction,
 } from "@navikt/ds-tokens/dist/tokens";
 import { BodyShort } from "@navikt/ds-react";
 
@@ -23,12 +23,12 @@ const StyledNavLink = styled(NavLink)`
   :hover {
     border-bottom: 5px solid ${ABlue400};
     p {
-      color: ${ALink};
+      color: ${ATextAction};
     }
   }
   &.active {
     background-color: ${AGray100};
-    border-bottom: 5px solid ${ALink};
+    border-bottom: 5px solid ${ATextAction};
 
     .typo-normal {
       font-weight: bold;

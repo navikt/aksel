@@ -7,10 +7,15 @@ export const tokens = [
   ["--navds-global-color-blue-400", "--a-blue-400"],
   ["--navds-global-color-green-100", "--a-green-100"],
   ["--navds-global-color-green-500", "--a-green-500"],
-  ["--navds-semantic-color-link", "--a-link"],
+  ["--navds-semantic-color-link", "--a-text-action"],
   ["--navds-global-color-gray-100", "--a-gray-100"],
   ["--navds-global-color-gray-400", "--a-gray-400"],
   ["--navds-global-color-gray-600", "--a-gray-600"],
+  [
+    "--navds-semantic-color-interaction-primary-hover-subtle",
+    "--a-surface-action-subtle",
+  ],
+  ["--navds-semantic-color-canvas-background-inverted", "--a-surface-inverted"],
 ];
 
 /**
