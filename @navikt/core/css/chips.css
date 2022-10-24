@@ -21,12 +21,11 @@
   justify-content: center;
   gap: var(--navds-spacing-1);
   margin: 0;
-  padding: var(--navds-spacing-1) var(--navds-spacing-3);
+  padding: 6px var(--navds-spacing-3);
   text-decoration: none;
   border-radius: var(--navds-border-radius-full);
   background-color: var(--navdsc-chip-bg);
   color: var(--navdsc-chip-color);
-  box-shadow: inset 0 0 0 1px var(--navdsc-chip-border-color);
 }
 
 .navds-chips--small .navds-chips__chip {
@@ -42,29 +41,43 @@
 }
 
 .navds-chips__filter {
-  --navdsc-chip-border-color: var(--navds-global-color-gray-500);
-  --navdsc-chip-bg: var(--navds-global-color-gray-100);
+  box-shadow: inset 0 0 0 1px
+    var(--a-chip-filter-border, var(--navds-global-color-gray-500));
+  background-color: var(--a-chip-filter-bg, var(--navds-global-color-gray-100));
 }
 
 .navds-chips__filter:hover {
-  --navdsc-chip-border-color: var(--navds-global-color-gray-700);
-  --navdsc-chip-bg: var(--navds-global-color-gray-200);
+  box-shadow: inset 0 0 0 1px
+    var(--a-chip-filter-border-hover, var(--navds-global-color-gray-700));
+  background-color: var(
+    --a-chip-filter-bg-hover,
+    var(--navds-global-color-gray-200)
+  );
 }
 
 .navds-chips__filter[aria-pressed="true"] {
-  --navdsc-chip-border-color: var(--navds-global-color-deepblue-500);
-  --navdsc-chip-bg: var(--navds-global-color-deepblue-500);
-  --navdsc-chip-color: var(--navds-global-color-white);
-
+  box-shadow: inset 0 0 0 1px
+    var(--a-chip-filter-border-pressed, var(--navds-global-color-deepblue-500));
+  background-color: var(
+    --a-chip-filter-bg-pressed,
+    var(--navds-global-color-deepblue-500)
+  );
+  color: var(--a-chip-filter-text-pressed, var(--navds-global-color-white));
   padding-left: var(--navds-spacing-1);
 }
 
 .navds-chips__filter[aria-pressed="true"]:hover {
-  --navdsc-chip-bg: var(--navds-global-color-deepblue-600);
+  background-color: var(
+    --a-chip-filter-bg-pressed-hover,
+    var(--navds-global-color-deepblue-600)
+  );
 }
 
 .navds-chips__filter[aria-pressed="true"]:active {
-  --navdsc-chip-bg: var(--navds-global-color-deepblue-700);
+  background-color: var(
+    --a-chip-filter-bg-pressed-active,
+    var(--navds-global-color-deepblue-700)
+  );
 }
 
 .navds-chips__filter:focus {
@@ -82,14 +95,24 @@
 }
 
 .navds-chips__removable--action {
-  --navdsc-chip-bg: var(--navds-global-color-deepblue-500);
-  --navdsc-chip-color: var(--navds-global-color-white);
+  background-color: var(
+    --a-chip-removable-action-bg,
+    var(--navds-global-color-deepblue-500)
+  );
+  color: var(--a-chip-removable-action-text, var(--navds-global-color-white));
 }
 
 .navds-chips__removable--neutral {
-  --navdsc-chip-bg: var(--navds-global-color-gray-100);
-  --navdsc-chip-color: var(--navds-global-color-gray-900);
-  --navdsc-chip-border-color: var(--navds-global-color-gray-500);
+  color: var(
+    --a-chip-removable-neutral-text,
+    var(--navds-global-color-gray-900)
+  );
+  background-color: var(
+    --a-chip-removable-neutral-bg,
+    --navds-global-color-gray-100
+  );
+  box-shadow: inset 0 0 0 1px
+    var(--a-chip-removable-neutral-border, var(--navds-global-color-gray-500));
 }
 
 .navds-chips--small .navds-chips__removable {
@@ -124,11 +147,24 @@
 }
 
 .navds-chips__removable--action:hover {
-  --navdsc-chip-bg: var(--navds-global-color-deepblue-500);
-  --navdsc-chip-icon-bg: var(--navds-global-color-deepblue-700);
+  --navdsc-chip-icon-bg: var(
+    --a-chip-removable-action-icon-hover,
+    var(--navds-global-color-deepblue-700)
+  );
+
+  background-color: var(
+    --a-chip-removable-action-bg-hover,
+    var(--navds-global-color-deepblue-500)
+  );
 }
 
 .navds-chips__removable--neutral:hover {
-  --navdsc-chip-bg: var(--navds-global-color-gray-200);
-  --navdsc-chip-icon-bg: var(--navds-global-color-gray-400);
+  --navdsc-chip-icon-bg: var(
+    --a-chip-removable-neutral-icon-hover,
+    var(--navds-global-color-gray-400)
+  );
+  background-color: var(
+    --a-chip-removable-action-bg-hover,
+    var(--navds-global-color-gray-200)
+  );
 }
