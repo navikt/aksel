@@ -41,39 +41,42 @@
 
 .navds-chips__filter {
   box-shadow: inset 0 0 0 1px
-    var(--a-chip-filter-border, var(--navds-global-color-gray-500));
-  background-color: var(--a-chip-filter-bg, var(--navds-global-color-gray-100));
+    var(--ac-chip-filter-border, var(--navds-global-color-gray-500));
+  background-color: var(
+    --ac-chip-filter-bg,
+    var(--navds-global-color-gray-100)
+  );
 }
 
 .navds-chips__filter:hover {
   box-shadow: inset 0 0 0 1px
-    var(--a-chip-filter-border-hover, var(--navds-global-color-gray-700));
+    var(--ac-chip-filter-border-hover, var(--navds-global-color-gray-700));
   background-color: var(
-    --a-chip-filter-bg-hover,
+    --ac-chip-filter-bg-hover,
     var(--navds-global-color-gray-200)
   );
 }
 
 .navds-chips__filter[aria-pressed="true"] {
   box-shadow: inset 0 0 0 1px
-    var(--a-chip-filter-border-pressed, var(--navds-global-color-deepblue-500));
+    var(--ac-chip-filter-border-pressed, var(--navds-global-color-deepblue-500));
   background-color: var(
-    --a-chip-filter-bg-pressed,
+    --ac-chip-filter-bg-pressed,
     var(--navds-global-color-deepblue-500)
   );
-  color: var(--a-chip-filter-text-pressed, var(--navds-global-color-white));
+  color: var(--ac-chip-filter-text-pressed, var(--navds-global-color-white));
 }
 
 .navds-chips__filter[aria-pressed="true"]:hover {
   background-color: var(
-    --a-chip-filter-bg-pressed-hover,
+    --ac-chip-filter-bg-pressed-hover,
     var(--navds-global-color-deepblue-600)
   );
 }
 
 .navds-chips__filter[aria-pressed="true"]:active {
   background-color: var(
-    --a-chip-filter-bg-pressed-active,
+    --ac-chip-filter-bg-pressed-active,
     var(--navds-global-color-deepblue-700)
   );
 }
@@ -93,23 +96,23 @@
 
 .navds-chips__removable--action {
   background-color: var(
-    --a-chip-removable-action-bg,
+    --ac-chip-removable-action-bg,
     var(--navds-global-color-deepblue-500)
   );
-  color: var(--a-chip-removable-action-text, var(--navds-global-color-white));
+  color: var(--ac-chip-removable-action-text, var(--navds-global-color-white));
 }
 
 .navds-chips__removable--neutral {
   color: var(
-    --a-chip-removable-neutral-text,
+    --ac-chip-removable-neutral-text,
     var(--navds-global-color-gray-900)
   );
   background-color: var(
-    --a-chip-removable-neutral-bg,
+    --ac-chip-removable-neutral-bg,
     --navds-global-color-gray-100
   );
   box-shadow: inset 0 0 0 1px
-    var(--a-chip-removable-neutral-border, var(--navds-global-color-gray-500));
+    var(--ac-chip-removable-neutral-border, var(--navds-global-color-gray-500));
 }
 
 .navds-chips__icon {
@@ -118,7 +121,7 @@
   display: grid;
   place-items: center;
   border-radius: var(--navds-border-radius-full);
-  background-color: var(--__a-chip-icon-bg);
+  background-color: var(--__ac-chip-icon-bg);
 }
 
 .navds-chips--small .navds-chips__icon {
@@ -140,25 +143,25 @@
 }
 
 .navds-chips__removable--action:hover {
-  --__a-chip-icon-bg: var(
-    --a-chip-removable-action-icon-hover,
+  --__ac-chip-icon-bg: var(
+    --ac-chip-removable-action-icon-hover,
     var(--navds-global-color-deepblue-700)
   );
 
   background-color: var(
-    --a-chip-removable-action-bg-hover,
+    --ac-chip-removable-action-bg-hover,
     var(--navds-global-color-deepblue-500)
   );
 }
 
 .navds-chips__removable--neutral:hover {
-  --__a-chip-icon-bg: var(
-    --a-chip-removable-neutral-icon-hover,
+  --__ac-chip-icon-bg: var(
+    --ac-chip-removable-neutral-icon-hover,
     var(--navds-global-color-gray-400)
   );
 
   background-color: var(
-    --a-chip-removable-action-bg-hover,
+    --ac-chip-removable-action-bg-hover,
     var(--navds-global-color-gray-200)
   );
 }
