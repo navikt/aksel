@@ -1,9 +1,7 @@
 :root,
 :host {
   --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
-  --navdsi-header-color-background: var(
-    --navds-semantic-color-component-background-inverted
-  );
+  --navdsi-header-color-background: var(--navds-semantic-color-component-background-inverted);
   --navdsi-header-color-border: var(--navds-semantic-color-border);
   --navdsi-header-focus: inset 0 0 0 2px var(--navds-global-color-blue-100);
   --navdsi-header-color-hover: var(--navds-global-color-gray-800);
