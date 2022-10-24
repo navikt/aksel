@@ -57,9 +57,17 @@
   );
 }
 
+.navds-chips__filter:active {
+  box-shadow: none;
+  background-color: var(
+    --ac-chip-filter-bg-active,
+    var(--navds-global-color-deepblue-500)
+  );
+  color: var(--ac-chip-filter-text-active, var(--navds-global-color-white));
+}
+
 .navds-chips__filter[aria-pressed="true"] {
-  box-shadow: inset 0 0 0 1px
-    var(--ac-chip-filter-border-pressed, var(--navds-global-color-deepblue-500));
+  box-shadow: none;
   background-color: var(
     --ac-chip-filter-bg-pressed,
     var(--navds-global-color-deepblue-500)
@@ -85,7 +93,8 @@
   box-shadow: 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
-.navds-chips__filter[aria-pressed="true"]:focus {
+.navds-chips__filter[aria-pressed="true"]:focus,
+.navds-chips__filter:active:focus {
   box-shadow: inset 0 0 0 1px var(--navds-global-color-white),
     0 0 0 2px var(--navds-global-color-blue-800);
 }
