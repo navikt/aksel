@@ -1,8 +1,6 @@
 :root,
 :host {
-  --navds-popover-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-popover-color-background: var(--navds-semantic-color-component-background-light);
   --navds-popover-color-border: var(--navds-semantic-color-border-muted);
 }
 

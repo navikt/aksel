@@ -26,7 +26,16 @@
     "@navikt/codemod",
     "examples/*"
   ],
-  "prettier": {},
+  "prettier": {
+    "overrides": [
+      {
+        "files": "**/*.css",
+        "options": {
+          "printWidth": 130
+        }
+      }
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app"
