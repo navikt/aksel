@@ -3,9 +3,7 @@
 [data-theme="light"] {
   --navds-search-color-text: var(--navds-semantic-color-text);
   --navds-search-color-border: var(--navds-semantic-color-border);
-  --navds-search-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
+  --navds-search-color-border-hover: var(--navds-semantic-color-interaction-primary);
   --navds-search-color-clear-hover: var(--navds-global-color-blue-500);
   --navds-search-color-border-error: var(--navds-global-color-red-500);
 }
@@ -121,32 +119,26 @@
 }
 
 .navds-search__button-search.navds-button--secondary {
-  box-shadow: -1px 0 0 0 var(--navds-search-color-border) inset,
-    0 1px 0 0 var(--navds-search-color-border) inset,
+  box-shadow: -1px 0 0 0 var(--navds-search-color-border) inset, 0 1px 0 0 var(--navds-search-color-border) inset,
     0 -1px 0 0 var(--navds-search-color-border) inset;
 }
 
 .navds-search__button-search.navds-button--secondary:hover {
-  box-shadow: -1px 0 0 0 var(--navds-search-color-border-hover) inset,
-    0 1px 0 0 var(--navds-search-color-border-hover) inset,
-    0 -1px 0 0 var(--navds-search-color-border-hover) inset,
-    -1px 0 0 0 var(--navds-search-color-border-hover);
+  box-shadow: -1px 0 0 0 var(--navds-search-color-border-hover) inset, 0 1px 0 0 var(--navds-search-color-border-hover) inset,
+    0 -1px 0 0 var(--navds-search-color-border-hover) inset, -1px 0 0 0 var(--navds-search-color-border-hover);
   z-index: 1;
 }
 
-.navds-search__wrapper-inner:focus-within
-  + .navds-search__button-search.navds-button--secondary:hover {
+.navds-search__wrapper-inner:focus-within + .navds-search__button-search.navds-button--secondary:hover {
   z-index: auto;
 }
 
 .navds-search__button-search.navds-button--secondary:focus {
-  box-shadow: 0 0 0 1px var(--navds-search-color-border) inset,
-    var(--navds-shadow-focus);
+  box-shadow: 0 0 0 1px var(--navds-search-color-border) inset, var(--navds-shadow-focus);
 }
 
 .navds-search__button-search.navds-button--secondary:focus:hover {
-  box-shadow: 0 0 0 1px var(--navds-search-color-border-hover) inset,
-    var(--navds-shadow-focus);
+  box-shadow: 0 0 0 1px var(--navds-search-color-border-hover) inset, var(--navds-shadow-focus);
 }
 
 .navds-search__button-search.navds-button--secondary:focus:active {
@@ -160,8 +152,7 @@
 }
 
 .navds-search--error .navds-search__input:focus:not(:hover):not(:disabled) {
-  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error),
-    var(--navds-shadow-focus);
+  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error), var(--navds-shadow-focus);
 }
 
 /* Focus layering */

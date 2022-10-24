@@ -1,22 +1,12 @@
 :root,
 :host {
-  --navds-select-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-select-color-background: var(--navds-semantic-color-component-background-light);
   --navds-select-color-border: var(--navds-semantic-color-border);
-  --navds-select-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-select-color-border-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-select-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-select-color-border-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-select-color-border-error: var(--navds-semantic-color-interaction-danger);
+  --navds-select-color-shadow-error: var(--navds-semantic-color-interaction-danger);
   --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-select-color-background-disabled: var(
-    --navds-semantic-color-component-background-alternate
-  );
+  --navds-select-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
 }
 
 .navds-select__input {

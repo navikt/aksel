@@ -8,8 +8,7 @@
   gap: 0.125rem;
   color: var(--navds-semantic-color-link);
   border-radius: var(--navds-border-radius-small);
-  padding: var(--navds-spacing-1) var(--navds-spacing-1) var(--navds-spacing-1)
-    2px;
+  padding: var(--navds-spacing-1) var(--navds-spacing-1) var(--navds-spacing-1) 2px;
   text-align: start;
 }
 
@@ -47,9 +46,7 @@
   height: 1.25rem;
 }
 
-.navds-read-more--open
-  > .navds-read-more__button
-  > .navds-read-more__expand-icon {
+.navds-read-more--open > .navds-read-more__button > .navds-read-more__expand-icon {
   transform: rotate(-180deg);
 }
 
@@ -57,8 +54,7 @@
   display: none;
 }
 
-.navds-read-more__button:hover
-  > .navds-read-more__expand-icon.navds-read-more__expand-icon--filled {
+.navds-read-more__button:hover > .navds-read-more__expand-icon.navds-read-more__expand-icon--filled {
   display: inherit;
 }
 
