@@ -19,8 +19,8 @@ const spatialPeriod = (
   timelineEndInclusive: Date,
   direction: "left" | "right" = "left"
 ): PositionedPeriod => {
-  const start = period.fom;
-  const endInclusive = period.tom;
+  const start = period.start;
+  const endInclusive = period.end;
   const { horizontalPosition, width } = horizontalPositionAndWidth(
     startOfDay(start),
     endOfDay(endInclusive),
@@ -109,8 +109,8 @@ export const useTimelineRows = (
     [rows, startDate, endDate, direction]
   );
 
-const earliestDate = (tidligst: Date, periode: Period) =>
-  periode.fom < tidligst ? periode.fom : tidligst;
+const earliestDate = (earliest: Date, period: Period) =>
+  period.start < earliest ? period.start : earliest;
 
 const earliestFomDate = (rader: Period[][]) =>
   rader.flat().reduce(earliestDate, new Date());
@@ -121,8 +121,8 @@ export const useEarliestDate = ({ startDate, rows }: any) =>
     [startDate, rows]
   );
 
-const latestDate = (senest: Date, periode: Period) =>
-  periode.tom > senest ? periode.tom : senest;
+const latestDate = (latest: Date, period: Period) =>
+  period.end > latest ? period.end : latest;
 
 const latestTomDate = (rader: Period[][]) =>
   rader.flat().reduce(latestDate, new Date(0));

@@ -48,11 +48,11 @@ export interface SimplePeriod {
   /**
    * Startdato for perioden, mao. periodens høyre kant.
    */
-  fom: Date;
+  start: Date;
   /**
    * Sluttdato for perioden, mao. periodens venstre kant.
    */
-  tom: Date;
+  end: Date;
 }
 
 export interface Period extends SimplePeriod {

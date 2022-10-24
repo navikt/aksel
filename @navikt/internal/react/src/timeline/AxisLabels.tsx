@@ -119,7 +119,6 @@ const axisLabels = (
 export const AxisLabels = ({ direction = "left" }) => {
   const { endDate, startDate } = useTimelineContext();
   const labels = axisLabels(startDate, endDate, "left").filter(isVisible);
-  console.log(labels);
 
   return (
     <div className="navdsi-timeline__axislabels">

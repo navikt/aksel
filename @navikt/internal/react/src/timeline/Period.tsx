@@ -34,17 +34,18 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
       default:
         break;
     }
-
-    const styles = {
-      height: "3rem",
-      background: statusColor,
-      width: `${width}%`,
-      left: `${left}%`,
-      position: "absolute",
-      border: "1px solid black",
-    };
     return (
-      <div className="navdsi-timeline__period" style={styles}>
+      <div
+        className="navdsi-timeline__period"
+        style={{
+          height: "3rem",
+          background: statusColor,
+          width: `${width}%`,
+          left: `${left}%`,
+          position: "absolute",
+          border: "1px solid black",
+        }}
+      >
         period
       </div>
     );

@@ -51,6 +51,13 @@ export const PG = () => {
             status="warning"
           />
         </Timeline.Row>
+        <Timeline.Row label="Row 1">
+          <Timeline.Period
+            start={new Date("May 13 2022")}
+            end={new Date("May 25 2022")}
+            status="warning"
+          />
+        </Timeline.Row>
       </Timeline>
     </div>
   );

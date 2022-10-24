@@ -1,6 +1,12 @@
-import React, { forwardRef, ReactElement, useMemo } from "react";
+import { endOfDay, startOfDay } from "date-fns";
+import React, { forwardRef, ReactElement, ReactNode, useMemo } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
+import {
+  useEarliestDate,
+  useLatestDate,
+  useTimelineRows,
+} from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { getFirstDate, getLastDate } from "./utils/filter";
@@ -79,20 +85,30 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return periods;
     }, [children]);
 
-    // const rows = children?.map((r: ReactNode) => {
-    //   if (React.isValidElement(r) && r?.props?.children) {
-    //     let periods = [];
-    //     for (let i = 0; i < r.props.children.length; i++) {
-    //       const p = r.props.children[i];
-    //       periods.push({ start: p?.props?.start, end: p?.props?.end });
-    //     }
-    //     return periods;
-    //   }
-    //   return [];
-    // });
-    //const start = startOfDay(useEarliestDate({ startDate, rows }));
-    //const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
-    //const processedRows = useTimelineRows(rows, start, endInclusive, direction);
+    //@ts-ignore
+    const rows = children?.map((r: ReactNode) => {
+      let periods = [];
+      if (React.isValidElement(r) && r?.props?.children) {
+        if (Array.isArray(r.props.children)) {
+          for (let i = 0; i < r.props.children.length; i++) {
+            const p = r.props.children[i];
+            periods.push({ start: p?.props?.start, end: p?.props?.end });
+          }
+        } else {
+          periods.push({
+            start: r.props.children.props.start,
+            end: r.props.children.props.end,
+          });
+        }
+        return periods;
+      }
+      return [];
+    });
+    console.log(rows);
+    const start = startOfDay(useEarliestDate({ startDate, rows }));
+
+    const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
+    const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
     return (
       <TimelineContext.Provider
