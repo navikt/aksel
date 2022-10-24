@@ -24,8 +24,6 @@
   padding: 6px var(--navds-spacing-3);
   text-decoration: none;
   border-radius: var(--navds-border-radius-full);
-  background-color: var(--navdsc-chip-bg);
-  color: var(--navdsc-chip-color);
 }
 
 .navds-chips--small .navds-chips__chip {
@@ -125,7 +123,7 @@
   display: grid;
   place-items: center;
   border-radius: var(--navds-border-radius-full);
-  background-color: var(--navdsc-chip-icon-bg);
+  background-color: var(--__a-chip-icon-bg);
 }
 
 .navds-chips--small .navds-chips__icon {
@@ -147,7 +145,7 @@
 }
 
 .navds-chips__removable--action:hover {
-  --navdsc-chip-icon-bg: var(
+  --__a-chip-icon-bg: var(
     --a-chip-removable-action-icon-hover,
     var(--navds-global-color-deepblue-700)
   );
@@ -159,10 +157,11 @@
 }
 
 .navds-chips__removable--neutral:hover {
-  --navdsc-chip-icon-bg: var(
+  --__a-chip-icon-bg: var(
     --a-chip-removable-neutral-icon-hover,
     var(--navds-global-color-gray-400)
   );
+
   background-color: var(
     --a-chip-removable-action-bg-hover,
     var(--navds-global-color-gray-200)
