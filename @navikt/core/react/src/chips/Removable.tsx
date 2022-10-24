@@ -31,7 +31,7 @@ export const RemovableChips: OverridableComponent<
         {...rest}
         ref={ref}
         className={cl(
-          "navds-chips__chip navds-chips__removable",
+          "navds-chips__chip navds-chips__removable navds-chips--icon-right",
           className,
           `navds-chips__removable--${variant}`
         )}

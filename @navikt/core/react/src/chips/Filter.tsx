@@ -28,7 +28,9 @@ export const FilterChips: FilterChipsType = forwardRef(
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-chips__chip navds-chips__filter", className)}
+        className={cl("navds-chips__chip navds-chips__filter", className, {
+          "navds-chips--icon-left": selected,
+        })}
         aria-pressed={selected}
       >
         {selected && (
