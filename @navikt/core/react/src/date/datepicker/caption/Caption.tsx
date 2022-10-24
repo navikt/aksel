@@ -34,6 +34,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           onClick={() => previousMonth && goToMonth(previousMonth)}
           icon={<Left title="velg forrige måned" />}
           className="navds-date__caption-button"
+          type="button"
         />
         <Button
           aria-label={nextLabel}
@@ -42,6 +43,7 @@ export const DatePickerCaption = ({ displayMonth, id }: CaptionProps) => {
           disabled={!nextMonth}
           variant="tertiary"
           className="navds-date__caption-button"
+          type="button"
         />
       </div>
     </div>

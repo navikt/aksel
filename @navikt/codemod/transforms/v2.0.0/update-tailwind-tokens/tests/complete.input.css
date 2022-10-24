@@ -1,0 +1,3 @@
+.test {
+  @apply bg-canvas-background-inverted text-interaction-primary-hover-subtle/20;
+}
