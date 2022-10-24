@@ -36,6 +36,10 @@ interface TimelineComponent
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
   ({ children, startDate, endDate, direction = "left", ...rest }, ref) => {
+    const isMultipleRows = Array.isArray(children);
+    if (!isMultipleRows) {
+      children = [children];
+    }
     const parsePeriods = (row: React.ReactNode) => {
       let periods: any = [];
       if (React.isValidElement(row) && row?.props?.children) {
@@ -75,7 +79,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return periods;
     }, [children]);
 
-    // const rows = children.map((r) => {
+    // const rows = children?.map((r: ReactNode) => {
     //   if (React.isValidElement(r) && r?.props?.children) {
     //     let periods = [];
     //     for (let i = 0; i < r.props.children.length; i++) {
@@ -86,9 +90,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     //   }
     //   return [];
     // });
-    // const start = startOfDay(useEarliestDate({ startDate, rows }));
-    // const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
-    // const processedRows = useTimelineRows(rows, start, endInclusive, direction);
+    //const start = startOfDay(useEarliestDate({ startDate, rows }));
+    //const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
+    //const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
     return (
       <TimelineContext.Provider
