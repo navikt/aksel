@@ -1,26 +1,15 @@
-:root {
-  --navds-textarea-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-textarea-color-background: var(--navds-semantic-color-component-background-light);
   --navds-textarea-color-border: var(--navds-semantic-color-border);
-  --navds-textarea-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-textarea-color-border-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-textarea-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-textarea-color-border-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-textarea-color-border-error: var(--navds-semantic-color-interaction-danger);
+  --navds-textarea-color-shadow-error: var(--navds-semantic-color-interaction-danger);
   --navds-textarea-color-counter-text: var(--navds-semantic-color-text-muted);
-  --navds-textarea-color-counter-text-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-textarea-color-counter-text-error: var(--navds-semantic-color-interaction-danger);
   --navds-textarea-color-text-disabled: var(--navds-semantic-color-text);
   --navds-textarea-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-textarea-color-background-disabled: var(
-    --navds-semantic-color-component-background-alternate
-  );
+  --navds-textarea-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
 }
 
 .navds-textarea__wrapper {
@@ -83,8 +72,7 @@
 /**
   Error handling
 */
-.navds-textarea--error
-  .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
+.navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-textarea-color-shadow-error);
   border-color: var(--navds-textarea-color-border-error);
 }

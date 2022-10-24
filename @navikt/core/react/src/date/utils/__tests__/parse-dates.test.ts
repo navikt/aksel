@@ -1,7 +1,8 @@
 import { parseDate } from "..";
 import { isValidDate } from "..";
 import nb from "date-fns/locale/nb";
-import { getMonth, getYear } from "date-fns";
+import getMonth from "date-fns/getMonth";
+import getYear from "date-fns/getYear";
 
 const check = (inp: string) =>
   expect(isValidDate(parseDate(inp, new Date(), nb, "date")));

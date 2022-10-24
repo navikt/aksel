@@ -1,11 +1,8 @@
-:root {
-  --navds-guide-panel-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-guide-panel-color-background: var(--navds-semantic-color-component-background-light);
   --navds-guide-panel-color-border: var(--navds-global-color-blue-400);
-  --navds-guide-panel-color-illustration-background: var(
-    --navds-global-color-blue-200
-  );
+  --navds-guide-panel-color-illustration-background: var(--navds-global-color-blue-200);
 }
 
 /**

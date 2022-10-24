@@ -1,7 +1,6 @@
-:root {
-  --navds-panel-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-panel-color-background: var(--navds-semantic-color-component-background-light);
   --navds-panel-color-border: var(--navds-semantic-color-border-muted);
 }
 

@@ -26,7 +26,16 @@
     "@navikt/codemod",
     "examples/*"
   ],
-  "prettier": {},
+  "prettier": {
+    "overrides": [
+      {
+        "files": "**/*.css",
+        "options": {
+          "printWidth": 130
+        }
+      }
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app"
@@ -121,24 +130,22 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "extend": "^3.0.2",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
-    "husky": "^5.0.0",
-    "lerna": "^4.0.0",
-    "msw": "^0.36.5",
-    "msw-storybook-addon": "^1.6.3",
+    "husky": "^8.0.0",
+    "lerna": "^6.0.0",
     "prettier": "2.6.2",
     "pretty-quick": "^3.1.3",
     "prop-types": "^15.5.10",
     "react": "^18.0.0",
+    "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.0.0",
     "style-loader": "^1.2.1",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
-    "typescript": "^4.7.2",
+    "typescript": "^4.8.0",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "yarn": "^1.22.10"

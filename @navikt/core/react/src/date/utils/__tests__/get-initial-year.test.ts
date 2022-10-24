@@ -1,4 +1,4 @@
-import { isSameYear } from "date-fns";
+import isSameYear from "date-fns/isSameYear";
 import { getInitialYear } from "..";
 
 describe("Returns initial year for monthpicker", () => {

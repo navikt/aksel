@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import format from "date-fns/format";
 import React, { useRef } from "react";
 import { Button, DayProps, useDayPicker, useDayRender } from "react-day-picker";
 
@@ -21,6 +21,7 @@ export const DayButton = (props: DayProps) => {
       ref={buttonRef}
       {...dayRender.buttonProps}
       aria-label={dateTime}
+      aria-hidden={dayRender.activeModifiers.outside}
     />
   );
 };

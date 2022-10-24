@@ -1,4 +1,4 @@
-import { isSaturday } from "date-fns";
+import isSaturday from "date-fns/isSaturday";
 import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
@@ -133,14 +133,21 @@ export const DropdownCaption = () => (
 );
 
 export const DisabledDays = () => (
-  <DatePicker.Standalone disabled={disabledDays} disableWeekends />
+  <DatePicker.Standalone
+    disabled={disabledDays}
+    disableWeekends
+    today={new Date("2006-07-01")}
+  />
 );
 
-export const ShowWeekNumber = () => <DatePicker.Standalone showWeekNumber />;
+export const ShowWeekNumber = () => (
+  <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
+);
 
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
     locale: "en",
   });
 
@@ -157,6 +164,7 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
+      onRangeChange: console.log,
     });
 
   return (
@@ -171,15 +179,25 @@ export const UseRangedDatepicker = () => {
   );
 };
 
-export const NB = () => <DatePicker.Standalone locale="nb" />;
-export const NN = () => <DatePicker.Standalone locale="nn" />;
-export const EN = () => <DatePicker.Standalone locale="en" />;
+export const NB = () => (
+  <DatePicker.Standalone locale="nb" today={new Date("2006-07-01")} />
+);
+export const NN = () => (
+  <DatePicker.Standalone locale="nn" today={new Date("2006-07-01")} />
+);
+export const EN = () => (
+  <DatePicker.Standalone locale="en" today={new Date("2006-07-01")} />
+);
 
-export const Standalone = () => <DatePicker.Standalone />;
+export const Standalone = () => (
+  <DatePicker.Standalone today={new Date("2006-07-01")} />
+);
 
-export const StandaloneRange = () => <DatePicker.Standalone mode="range" />;
+export const StandaloneRange = () => (
+  <DatePicker.Standalone mode="range" today={new Date("2006-07-01")} />
+);
 export const StandaloneMultiple = () => (
-  <DatePicker.Standalone mode="multiple" />
+  <DatePicker.Standalone mode="multiple" today={new Date("2006-07-01")} />
 );
 
 export const UserControlled = () => {

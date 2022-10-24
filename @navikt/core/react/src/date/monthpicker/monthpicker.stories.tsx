@@ -73,9 +73,8 @@ export const Standalone = () => {
 
 export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
-    locale: "nb",
-    defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],
+    onMonthChange: console.log,
   });
 
   return (

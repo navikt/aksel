@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { isWeekend } from "date-fns";
+import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef, useRef, useState } from "react";
 import {
   DateRange,
@@ -20,6 +20,7 @@ import DatePickerStandalone, {
   DatePickerStandaloneType,
 } from "./DatePickerStandalone";
 import { DayButton } from "./DayButton";
+import { Head } from "./Head";
 
 export type ConditionalModeProps =
   | {
@@ -211,6 +212,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                 components={{
                   Caption: dropdownCaption ? DropdownCaption : Caption,
                   Day: DayButton,
+                  Head: Head,
                 }}
                 className={cl("navds-date", className)}
                 classNames={{
@@ -232,6 +234,8 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
                   weekend: "rdp-day__weekend",
                 }}
                 showWeekNumber={showWeekNumber}
+                fixedWeeks
+                showOutsideDays
                 {...omit(rest, ["onSelect"])}
               />
             </Popover>

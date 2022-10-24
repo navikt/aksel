@@ -1,5 +1,5 @@
 const customJestConfig = {
-  testMatch: ["**/__tests__/**/*.js"],
+  testMatch: ["**/__tests__/**/*.js", "**/tests/*.test.js"],
   verbose: true,
   rootDir: "./transforms",
 };

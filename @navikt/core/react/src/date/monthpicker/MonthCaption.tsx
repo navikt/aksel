@@ -1,5 +1,8 @@
 import { Left, Right } from "@navikt/ds-icons";
-import { isSameYear, setYear, startOfMonth, startOfYear } from "date-fns";
+import isSameYear from "date-fns/isSameYear";
+import setYear from "date-fns/setYear";
+import startOfMonth from "date-fns/startOfMonth";
+import startOfYear from "date-fns/startOfYear";
 import React from "react";
 import { useDayPicker } from "react-day-picker";
 import { Button, Select } from "../..";

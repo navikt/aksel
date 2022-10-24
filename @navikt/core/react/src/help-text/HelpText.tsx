@@ -6,10 +6,7 @@ import { Popover, PopoverProps, mergeRefs } from "..";
 export interface HelpTextProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     Pick<PopoverProps, "strategy" | "placement"> {
-  /**
-   * Helptext-dialog content
-   */
-  children: string;
+  children: React.ReactNode;
   /**
    * Adds a title-tooltip with the given text
    * @default "hjelp"

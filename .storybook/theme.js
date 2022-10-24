@@ -18,5 +18,5 @@ export default create({
   barTextColor: "rgba(0, 91, 130, 1)",
   barSelectedColor: "rgba(0, 36, 58, 1)",
 
-  brandTitle: "NAV Designsystem",
+  brandTitle: "Aksel",
 });

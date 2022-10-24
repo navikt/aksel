@@ -1,5 +1,5 @@
 import cl from "clsx";
-import { isWeekend } from "date-fns";
+import isWeekend from "date-fns/isWeekend";
 import React, { forwardRef } from "react";
 import {
   DateRange,
@@ -13,6 +13,7 @@ import { omit } from "../..";
 import { getLocaleFromString, labels } from "../utils";
 import { Caption, DropdownCaption } from "./caption";
 import { ConditionalModeProps, DatePickerDefaultProps } from "./DatePicker";
+import { Head } from "./Head";
 
 interface DatePickerStandaloneDefaultProps
   extends Omit<
@@ -93,6 +94,7 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
           selected={selected ?? selectedDates}
           components={{
             Caption: dropdownCaption ? DropdownCaption : Caption,
+            Head: Head,
           }}
           className="navds-date"
           classNames={{ vhidden: "navds-sr-only" }}
@@ -111,6 +113,8 @@ export const DatePickerStandalone: DatePickerStandaloneType = forwardRef<
             weekend: "rdp-day__weekend",
           }}
           showWeekNumber={showWeekNumber}
+          fixedWeeks
+          showOutsideDays
           {...omit(rest, ["onSelect"])}
         />
       </div>

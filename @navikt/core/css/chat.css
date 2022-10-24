@@ -1,9 +1,8 @@
-:root {
+:root,
+:host {
   --navds-chat-color-background: var(--navds-semantic-color-canvas-background);
   --navds-chat-color-avatar: var(--navds-semantic-color-text);
-  --navds-chat-color-avatar-background: var(
-    --navds-semantic-color-canvas-background
-  );
+  --navds-chat-color-avatar-background: var(--navds-semantic-color-canvas-background);
 }
 
 .navds-chat {
