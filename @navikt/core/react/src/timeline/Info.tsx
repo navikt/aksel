@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong, Label } from "..";
+import { BodyLong, Detail, Label } from "..";
 
 export interface TimelineInfoStepProps
   extends React.AnchorHTMLAttributes<HTMLDivElement> {
@@ -10,9 +10,13 @@ export interface TimelineInfoStepProps
    */
   icon: React.ElementType;
   /**
-   *
+   *  When in the process is this
    */
   time: "present" | "future" | "past";
+  /**
+   * Short description of date. Example: DU ER HER 23. OKTOBER 2022
+   */
+  description?: string;
 }
 
 export interface TimelineInfoStepType
@@ -21,7 +25,10 @@ export interface TimelineInfoStepType
   > {}
 
 export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
-  ({ className, children, icon: Icon, time, title, ...rest }, ref) => {
+  (
+    { className, children, icon: Icon, time, description, title, ...rest },
+    ref
+  ) => {
     return (
       <div
         {...rest}
@@ -40,6 +47,7 @@ export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
           <Label as="div" className="navds-timeline__content-label">
             {title}
           </Label>
+          {description && <Detail>{description}</Detail>}
           <BodyLong as="div" className="navds-timeline__content-description">
             {children}
           </BodyLong>

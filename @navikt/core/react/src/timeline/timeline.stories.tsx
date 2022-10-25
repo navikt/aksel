@@ -43,6 +43,7 @@ export const Default = ({ asButton, ...props }) => {
           icon={AutomaticSystem}
           title="Tittel på del av prosessen"
           time="future"
+          description="OM OMTRENT 2 DAGER"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
@@ -51,6 +52,7 @@ export const Default = ({ asButton, ...props }) => {
           time="future"
           icon={Notes}
           title="Tittel på del av prosessen"
+          description="OM OMTRENT 2 DAGER"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
@@ -59,6 +61,7 @@ export const Default = ({ asButton, ...props }) => {
           time="present"
           icon={Calculator}
           title="Tittel på del av prosessen"
+          description="29. OKTOBER 2022"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
@@ -67,6 +70,7 @@ export const Default = ({ asButton, ...props }) => {
           time="past"
           icon={Office1}
           title="In ea tempor nulla consequat sunt deserunt ullamco aliqua elit excepteur. Anim et fugiat esse enim irure est pariatur pariatur"
+          description="23. OKTOBER 2022"
         >
           Esse cillum labore dolore pariatur anim exercitation aute tempor. Do
           elit fugiat culpa esse elit ut pariatur et amet qui minim cupidatat
@@ -80,6 +84,7 @@ export const Default = ({ asButton, ...props }) => {
           time="past"
           icon={Laptop}
           title="Tittel på del av prosessen"
+          description="For 4 dager siden"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
@@ -88,6 +93,7 @@ export const Default = ({ asButton, ...props }) => {
           time="past"
           icon={Reception}
           title="Tittel på del av prosessen"
+          description="For 4 dager siden"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
@@ -96,6 +102,7 @@ export const Default = ({ asButton, ...props }) => {
           time="past"
           icon={Money}
           title="Tittel på del av prosessen"
+          description="For 4 dager siden"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.

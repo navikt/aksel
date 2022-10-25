@@ -88,13 +88,16 @@
   color: var(--navds-global-color-gray-900);
 }
 
+:where(.navds-timeline__step--present) .navds-timeline__icon {
+  color: var(--navds-global-color-gray-900);
+}
+
 .navds-timeline__item--present {
-  background-color: var(--navds-global-color-gray-50);
+  background-color: var(--navds-global-color-gray-100);
 }
 
 .navds-timeline__item--future > .navds-timeline__line {
   background-color: transparent;
-  border: 1px dashed red;
-  border-spacing: 6px;
-  border-radius: 16px;
+  background-image: linear-gradient(gray 60%, transparent 0%);
+  background-size: 2px 1.25rem;
 }
