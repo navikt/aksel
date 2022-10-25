@@ -11,11 +11,6 @@ export interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {
    * <Timeline.Step /> elements
    */
   children: React.ReactNode;
-  /**
-   * Current active step.
-   * @note Timeline index starts at 1, not 0
-   */
-  activeStep: number;
 }
 
 interface TimelineComponent
@@ -31,7 +26,7 @@ type StepsT = TimelineInfoStepProps | TimelineStatusStepProps;
 export const Timeline: TimelineComponent = forwardRef<
   HTMLOListElement,
   TimelineProps
->(({ children, className, activeStep, ...rest }, ref) => {
+>(({ children, className, ...rest }, ref) => {
   return (
     <dl {...rest} ref={ref} className={cl("navds-timeline", className)}>
       {React.Children.map(children, (step, index) => {
