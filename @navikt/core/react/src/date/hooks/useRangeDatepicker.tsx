@@ -114,7 +114,10 @@ export const useRangeDatepicker = (
   };
 
   const handleFocusIn = useCallback(
-    (e) =>
+    (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         datePickerRef.current,
         inputRefTo.current,
@@ -122,8 +125,9 @@ export const useRangeDatepicker = (
         inputRefTo.current?.nextSibling,
         inputRefFrom.current?.nextSibling,
       ].some((element) => element?.contains(e.target)) &&
-      open &&
-      setOpen(false),
+        open &&
+        setOpen(false);
+    },
     [open]
   );
 
