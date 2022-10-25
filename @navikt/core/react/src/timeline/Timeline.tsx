@@ -50,7 +50,7 @@ export const Timeline: TimelineComponent = forwardRef<
               {React.isValidElement<TimelineStepProps>(step)
                 ? React.cloneElement(step, {
                     ...step.props,
-                    unsafe_index: index,
+                    __unsafe_index: index,
                   })
                 : step}
               <span className="navds-timeline__line navds-timeline__line--2" />

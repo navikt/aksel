@@ -10,7 +10,7 @@ export interface TimelineStepProps
    * Handled by Timeline, overwriting breaks component logic
    * @private
    */
-  unsafe_index?: number;
+  __unsafe_index?: number;
   /**
    *
    */
@@ -24,7 +24,7 @@ export interface TimelineStepType
 
 export const StepComponent = forwardRef<HTMLDivElement, TimelineStepProps>(
   (
-    { className, children, unsafe_index = 0, icon: Icon, title, ...rest },
+    { className, children, __unsafe_index = 0, icon: Icon, title, ...rest },
     ref
   ) => {
     const context = useContext(TimelineContext);
@@ -38,10 +38,10 @@ export const StepComponent = forwardRef<HTMLDivElement, TimelineStepProps>(
     return (
       <div
         {...rest}
-        aria-current={activeStep === unsafe_index}
+        aria-current={activeStep === __unsafe_index}
         ref={ref}
         className={cl("navds-timeline__step", className, {
-          "navds-timeline__step--active": activeStep === unsafe_index,
+          "navds-timeline__step--active": activeStep === __unsafe_index,
         })}
       >
         <div className="navds-timeline__icon">
