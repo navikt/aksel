@@ -3,7 +3,7 @@
   --navds-timeline-border-width: 2px;
   --navds-timeline-line-length: 1rem;
 
-  color: var(--navds-global-color-gray-600);
+  color: var(--ac-timeline-text, var(--navds-global-color-gray-600));
   line-height: 1;
   list-style: none;
   padding-left: 0;
@@ -17,11 +17,11 @@
     [line-2 step-end] auto;
   grid-template-columns: var(--navds-timeline-circle-size) auto;
   justify-items: flex-start;
-  gap: 0.5rem;
+  gap: var(--navds-spacing-2);
 }
 
 .navds-timeline__line {
-  background-color: var(--navds-semantic-color-border-muted);
+  background-color: var(--navds-global-color-gray-500);
   width: var(--navds-timeline-border-width);
   height: 100%;
   min-height: var(--navds-timeline-line-length);
@@ -62,7 +62,7 @@
   width: var(--navds-timeline-circle-size);
   height: var(--navds-timeline-circle-size);
   line-height: 1;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .navds-timeline__content {
@@ -70,8 +70,8 @@
   line-height: 1.5;
   grid-column: content;
   padding-top: 0.035rem;
-  color: var(--navds-global-color-gray-900);
   display: grid;
+  color: var(--navds-global-color-gray-900);
 }
 
 .navds-timeline__content-label {
@@ -98,6 +98,6 @@
 
 .navds-timeline__item--future > .navds-timeline__line {
   background-color: transparent;
-  background-image: linear-gradient(gray 60%, transparent 0%);
+  background-image: linear-gradient(var(--navds-global-color-gray-500) 60%, transparent 0%);
   background-size: 2px 1.25rem;
 }
