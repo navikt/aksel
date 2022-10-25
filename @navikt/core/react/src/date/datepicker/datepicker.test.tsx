@@ -20,11 +20,6 @@ const App = () => {
 describe("Render datepicker", () => {
   it("Should not crash when e.target is window", async () => {
     const utils = render(<App />);
-    expect(await screen.findByText("textfield")).toBeInTheDocument();
-    await userEvent.type(
-      utils.getByLabelText("textfield"),
-      "Dette er en vurdering"
-    );
-    await userEvent.click(screen.getByText("Velg din aldersgruppe"));
+    await userEvent.click(utils.getByText("Velg dato"));
   });
 });
