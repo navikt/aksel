@@ -1,9 +1,6 @@
-# NAV icons
+# Aksel icons
 
-All of NAVs own icons (400+ and counting)
-
-- As just SVG
-- As React-components
+Icons created and used by NAV
 
 ## Installation
 
