@@ -1,5 +1,5 @@
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {
@@ -12,17 +12,12 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`navds-id-${globalId}`);
+      setDefaultId(`aksel-id-${globalId}`);
     }
   }, [defaultId]);
   return id;
 }
 
-// eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
-const maybeReactUseId: undefined | (() => string) = (React as any)[
-  // eslint-disable-next-line no-useless-concat
-  "useId" + ""
-];
 /**
  *
  * @example <div id={useId()} />
@@ -30,10 +25,6 @@ const maybeReactUseId: undefined | (() => string) = (React as any)[
  * @returns {string}
  */
 export function useId(idOverride?: string): string | undefined {
-  if (maybeReactUseId !== undefined) {
-    const reactId = maybeReactUseId();
-    return idOverride ?? reactId;
-  }
   // eslint-disable-next-line react-hooks/rules-of-hooks -- `useId` is invariant at runtime.
   return useGlobalId(idOverride);
 }
