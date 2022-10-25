@@ -15,7 +15,7 @@
   "packages": [
     "@navikt/core/css",
     "@navikt/core/react",
-    "@navikt/core/icons",
+    "@navikt/icons",
     "@navikt/core/tokens",
     "@navikt/core/tailwind",
     "@navikt/internal/css",

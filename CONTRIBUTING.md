@@ -50,7 +50,7 @@ For å sikre kodekvalitet er det satt opp både `prettier` som kjører for hver 
 
 ## Ikoner
 
-> Krever at man har lagt til en .env fil under `@navikt/core/icons` med en Figma auth-token i format FIGMA_TOKEN="[TOKEN]"
+> Krever at man har lagt til en .env fil under `@navikt/icons` med en Figma auth-token i format FIGMA_TOKEN="[TOKEN]"
 
 - `yarn lerna:icons` - Oppdaterer ikonpakken med de nyeste ikonene fra Figma-biblioteket
 
