@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import React from "react";
 import { UNSAFE_DatePicker, UNSAFE_useDatepicker } from "..";
