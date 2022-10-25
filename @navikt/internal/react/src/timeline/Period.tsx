@@ -1,5 +1,13 @@
 import { differenceInDays } from "date-fns";
-import React, { forwardRef, ReactNode } from "react";
+import React, {
+  forwardRef,
+  ReactNode,
+  RefObject,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
@@ -9,6 +17,7 @@ export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
   end: Date;
   icon?: ReactNode;
   status?: "success" | "warning" | "error" | "default";
+  onSelectPeriod?: () => void;
 }
 
 export type PeriodType = React.ForwardRefExoticComponent<
@@ -16,22 +25,37 @@ export type PeriodType = React.ForwardRefExoticComponent<
 >;
 
 export const Period = forwardRef<HTMLDivElement, PeriodProps>(
-  ({ end, icon, status = "default", ...rest }, ref) => {
+  ({ end, icon, status = "default", onSelectPeriod, ...rest }, ref) => {
+    const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
+    const [isMini, setIsMini] = useState(false);
     const { endDate, startDate } = useTimelineContext();
     const { periods } = useRowContext();
     const { periodId } = usePeriodContext();
 
+    useLayoutEffect(() => {
+      console.log(periodRef);
+      const currentWidth = periodRef?.current?.offsetWidth;
+      if (currentWidth && currentWidth < 30) {
+        setIsMini(true);
+      }
+    }, [periodRef]);
+
     const period = periods.find((p) => p.id === periodId);
+    useEffect(() => {
+      if (period?.active) periodRef.current?.focus();
+    }, [period?.active]);
 
     if (!period) {
       return <></>;
     }
+    const { start, endInclusive, width, horizontalPosition, active } = period;
 
-    const { start, endInclusive, width, horizontalPosition } = period;
+    console.log(period);
 
     const totalDays = differenceInDays(endDate, startDate);
     //const width = (differenceInDays(end, start) / totalDays) * 100;
     const left = (differenceInDays(start, startDate) / totalDays) * 100;
+    console.log(periodRef);
 
     let statusColor = "grey";
     switch (status) {
@@ -50,6 +74,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
     return (
       <div
         className="navdsi-timeline__period"
+        ref={periodRef as RefObject<HTMLDivElement>}
         style={{
           height: "3rem",
           background: statusColor,

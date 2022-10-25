@@ -37,7 +37,7 @@ const spatialPeriod = (
     className: period.className,
     disabled: period.disabled,
     status: period.status,
-    active: period.active,
+    active: period.active || false,
     infoPin: period.infoPin,
     width: width,
     end: endInclusive,
