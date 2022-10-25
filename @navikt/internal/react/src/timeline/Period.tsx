@@ -1,4 +1,5 @@
-import { differenceInDays } from "date-fns";
+import cl from "clsx";
+import { format } from "date-fns";
 import React, {
   forwardRef,
   ReactNode,
@@ -12,7 +13,8 @@ import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 
-export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PeriodPropsWrapper
+  extends React.HTMLAttributes<HTMLDivElement> {
   start: Date;
   end: Date;
   icon?: ReactNode;
@@ -20,11 +22,31 @@ export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
   onSelectPeriod?: () => void;
 }
 
+interface PeriodProps {
+  start: Date;
+  end: Date;
+  status: String;
+  cropped: String;
+  direction: String;
+  width: Number;
+  statusColor: string;
+  left: Number;
+}
+
+interface NonClickablePeriodProps extends PeriodProps {
+  divRef: RefObject<HTMLDivElement>;
+}
+
+interface ClickablePeriodProps extends PeriodProps {
+  buttonRef: RefObject<HTMLButtonElement>;
+  onSelectPeriod?: () => void;
+}
+
 export type PeriodType = React.ForwardRefExoticComponent<
-  PeriodProps & React.RefAttributes<HTMLDivElement>
+  PeriodPropsWrapper & React.RefAttributes<HTMLDivElement>
 >;
 
-export const Period = forwardRef<HTMLDivElement, PeriodProps>(
+export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
   ({ end, icon, ...rest }, ref) => {
     const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
     const [isMini, setIsMini] = useState(false);
@@ -55,12 +77,11 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
       active,
       status,
       onSelectPeriod,
+      cropped,
+      direction,
     } = period;
 
     console.log(period);
-
-    const totalDays = differenceInDays(endDate, startDate);
-    const left = (differenceInDays(start, startDate) / totalDays) * 100;
 
     let statusColor = "grey";
     switch (status) {
@@ -76,23 +97,110 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
       default:
         break;
     }
-    return (
-      <div
-        className="navdsi-timeline__period"
-        ref={periodRef as RefObject<HTMLDivElement>}
-        style={{
-          height: "3rem",
-          background: statusColor,
-          width: `${width}%`,
-          left: `${left}%`,
-          position: "absolute",
-          border: "1px solid black",
-        }}
-      >
-        period
-      </div>
+
+    return onSelectPeriod ? (
+      <ClickablePeriod
+        buttonRef={ref as RefObject<HTMLButtonElement>}
+        start={start}
+        end={end}
+        status={status || "default"}
+        onSelectPeriod={onSelectPeriod}
+        cropped={cropped || ""}
+        direction={direction}
+        statusColor={statusColor}
+        width={width}
+        left={horizontalPosition}
+      />
+    ) : (
+      <NonClickablePeriod
+        divRef={ref as RefObject<HTMLDivElement>}
+        start={start}
+        end={end}
+        status={status || "default"}
+        cropped={cropped || ""}
+        direction={direction}
+        statusColor={statusColor}
+        width={width}
+        left={horizontalPosition}
+      />
     );
   }
 );
+
+const ariaLabel = (startDate: Date, endDate: Date, status: String): string => {
+  const start = format(startDate, "dd.MM.yyyy");
+  const end = format(endDate, "dd.MM.yyyy");
+  return `${status} fra ${start} til og med ${end}`;
+};
+
+const ClickablePeriod = React.memo(
+  ({
+    buttonRef,
+    onSelectPeriod,
+    start,
+    end,
+    status,
+    cropped,
+    direction,
+    statusColor,
+    left,
+    width,
+  }: ClickablePeriodProps) => {
+    return (
+      <button
+        ref={buttonRef}
+        onClick={() => onSelectPeriod && onSelectPeriod()}
+        aria-label={ariaLabel(start, end, status)}
+        className={cl("navdsi-timeline__period", {
+          "navdsi-timeline__period--connectedBoth": cropped === "both",
+          "navdsi-timeline__period--connectedRight":
+            (cropped === "right" && direction === "left") ||
+            (cropped === "left" && direction === "right"),
+          "navdsi-timeline__period--connectedLeft":
+            (cropped === "left" && direction === "left") ||
+            (cropped === "right" && direction === "right"),
+        })}
+        style={{
+          backgroundColor: statusColor,
+          width: `${width}%`,
+          left: `${left}%`,
+        }}
+      ></button>
+    );
+  }
+);
+
+const NonClickablePeriod = ({
+  divRef,
+  start,
+  end,
+  status,
+  cropped,
+  direction,
+  statusColor,
+  left,
+  width,
+}: NonClickablePeriodProps) => {
+  return (
+    <div
+      ref={divRef}
+      className={cl("navdsi-timeline__period", {
+        "navdsi-timeline__period--connectedBoth": cropped === "both",
+        "navdsi-timeline__period--connectedRight":
+          (cropped === "right" && direction === "left") ||
+          (cropped === "left" && direction === "right"),
+        "navdsi-timeline__period--connectedLeft":
+          (cropped === "left" && direction === "left") ||
+          (cropped === "right" && direction === "right"),
+      })}
+      aria-label={ariaLabel(start, end, status)}
+      style={{
+        background: statusColor,
+        width: `${width}%`,
+        left: `${left}%`,
+      }}
+    ></div>
+  );
+};
 
 export default Period;

@@ -3,20 +3,21 @@ import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import Period from "./Period";
 
-export interface TimelineRowProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TimelineRowProps
+  extends React.HTMLAttributes<HTMLOListElement> {
   label?: string;
 }
 
 export type TimelineRowType = React.ForwardRefExoticComponent<
-  TimelineRowProps & React.RefAttributes<HTMLDivElement>
+  TimelineRowProps & React.RefAttributes<HTMLOListElement>
 >;
 
-export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
+export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, ...rest }, ref) => {
     const { periods } = useRowContext();
 
     return (
-      <div {...rest} ref={ref} className="navdsi-timeline__row">
+      <ol {...rest} ref={ref} className="navdsi-timeline__row">
         {periods &&
           periods.map((period) => {
             return (
@@ -30,7 +31,7 @@ export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
               </PeriodContext.Provider>
             );
           })}
-      </div>
+      </ol>
     );
   }
 );

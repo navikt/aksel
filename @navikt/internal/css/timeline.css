@@ -20,3 +20,25 @@
   position: absolute;
   font-size: 14px;
 }
+
+.navdsi-timeline__period {
+  height: 1.5rem;
+  border-radius: 1.5rem;
+  position: absolute;
+  border: 1px solid #59514b;
+  padding-left: 1rem;
+}
+
+.navdsi-timeline__period--connectedBoth {
+  border-radius: 0;
+}
+
+.navdsi-timeline__period--connectedRight {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.navdsi-timeline__period--connectedLeft {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
