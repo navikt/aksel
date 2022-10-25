@@ -1,6 +1,11 @@
 import { ReactNode } from "react";
 
-export type PeriodStatus = "success" | "warning" | "error" | "inactive";
+export type PeriodStatus =
+  | "success"
+  | "warning"
+  | "danger"
+  | "information"
+  | "default";
 export type Percentage = number;
 
 export interface Positioned {

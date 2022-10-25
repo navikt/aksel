@@ -16,7 +16,7 @@ export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
   start: Date;
   end: Date;
   icon?: ReactNode;
-  status?: "success" | "warning" | "error" | "default";
+  status?: "success" | "warning" | "danger" | "information" | "default";
   onSelectPeriod?: () => void;
 }
 
@@ -25,7 +25,7 @@ export type PeriodType = React.ForwardRefExoticComponent<
 >;
 
 export const Period = forwardRef<HTMLDivElement, PeriodProps>(
-  ({ end, icon, status = "default", onSelectPeriod, ...rest }, ref) => {
+  ({ end, icon, onSelectPeriod, ...rest }, ref) => {
     const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
     const [isMini, setIsMini] = useState(false);
     const { endDate, startDate } = useTimelineContext();
@@ -48,7 +48,8 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
     if (!period) {
       return <></>;
     }
-    const { start, endInclusive, width, horizontalPosition, active } = period;
+    const { start, endInclusive, width, horizontalPosition, active, status } =
+      period;
 
     console.log(period);
 
@@ -65,7 +66,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
       case "warning":
         statusColor = "yellow";
         break;
-      case "error":
+      case "danger":
         statusColor = "red";
         break;
       default:

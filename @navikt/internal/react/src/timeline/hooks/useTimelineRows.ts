@@ -36,11 +36,11 @@ const spatialPeriod = (
     direction: direction,
     className: period.className,
     disabled: period.disabled,
-    status: period.status,
     active: period.active || false,
     infoPin: period.infoPin,
     width: width,
     end: endInclusive,
+    status: period.status,
   };
 };
 

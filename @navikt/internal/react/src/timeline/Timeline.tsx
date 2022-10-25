@@ -54,12 +54,17 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         if (Array.isArray(r.props.children)) {
           for (let i = 0; i < r.props.children.length; i++) {
             const p = r.props.children[i];
-            periods.push({ start: p?.props?.start, end: p?.props?.end });
+            periods.push({
+              start: p?.props?.start,
+              end: p?.props?.end,
+              status: p?.props?.status,
+            });
           }
         } else {
           periods.push({
             start: r.props.children.props.start,
             end: r.props.children.props.end,
+            status: r.props.children.props?.status || "default",
           });
         }
         return periods;
