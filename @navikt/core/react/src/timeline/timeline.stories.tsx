@@ -39,22 +39,32 @@ export const Default = ({ asButton, ...props }) => {
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Timeline aria-labelledby="Timeline-heading" activeStep={3} {...props}>
-        <Timeline.Step
+        <Timeline.Info
           icon={AutomaticSystem}
+          title="Tittel på del av prosessen"
+          time="future"
+        >
+          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
+          av hva som skjer.
+        </Timeline.Info>
+        <Timeline.Info
+          time="future"
+          icon={Notes}
           title="Tittel på del av prosessen"
         >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
-        </Timeline.Step>
-        <Timeline.Step icon={Notes} title="Tittel på del av prosessen">
+        </Timeline.Info>
+        <Timeline.Info
+          time="present"
+          icon={Calculator}
+          title="Tittel på del av prosessen"
+        >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
-        </Timeline.Step>
-        <Timeline.Step icon={Calculator} title="Tittel på del av prosessen">
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Step>
-        <Timeline.Step
+        </Timeline.Info>
+        <Timeline.Info
+          time="past"
           icon={Office1}
           title="In ea tempor nulla consequat sunt deserunt ullamco aliqua elit excepteur. Anim et fugiat esse enim irure est pariatur pariatur"
         >
@@ -65,19 +75,31 @@ export const Default = ({ asButton, ...props }) => {
           consectetur Lorem ullamco veniam fugiat. Consequat ea aliquip nisi
           incididunt magna in ex deserunt fugiat occaecat et. Labore consequat
           esse labore sint eiusmod ut.
-        </Timeline.Step>
-        <Timeline.Step icon={Laptop} title="Tittel på del av prosessen">
+        </Timeline.Info>
+        <Timeline.Info
+          time="past"
+          icon={Laptop}
+          title="Tittel på del av prosessen"
+        >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
-        </Timeline.Step>
-        <Timeline.Step icon={Reception} title="Tittel på del av prosessen">
+        </Timeline.Info>
+        <Timeline.Info
+          time="past"
+          icon={Reception}
+          title="Tittel på del av prosessen"
+        >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
-        </Timeline.Step>
-        <Timeline.Step icon={Money} title="Tittel på del av prosessen">
+        </Timeline.Info>
+        <Timeline.Info
+          time="past"
+          icon={Money}
+          title="Tittel på del av prosessen"
+        >
           Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
           av hva som skjer.
-        </Timeline.Step>
+        </Timeline.Info>
       </Timeline>
     </div>
   );

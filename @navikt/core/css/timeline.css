@@ -51,8 +51,7 @@
   justify-content: flex-start;
   text-decoration: none;
   padding: var(--navds-timeline-border-width);
-  margin: calc(var(--navds-timeline-border-width) * -1)
-    calc(var(--navds-timeline-border-width) * -1) 1.75rem;
+  margin: calc(var(--navds-timeline-border-width) * -1) calc(var(--navds-timeline-border-width) * -1) 1.75rem;
 }
 
 .navds-timeline__icon {
@@ -84,11 +83,18 @@
   margin-top: 0.5rem;
 }
 
-/* Active step */
-:where(.navds-timeline__step--active) .navds-timeline__content {
+/* present step */
+:where(.navds-timeline__step--present) .navds-timeline__content {
   color: var(--navds-global-color-gray-900);
 }
 
-:where(.navds-timeline__step--active) .navds-timeline__icon {
-  color: var(--navds-global-color-gray-900);
+.navds-timeline__item--present {
+  background-color: var(--navds-global-color-gray-50);
+}
+
+.navds-timeline__item--future > .navds-timeline__line {
+  background-color: transparent;
+  border: 1px dashed red;
+  border-spacing: 6px;
+  border-radius: 16px;
 }
