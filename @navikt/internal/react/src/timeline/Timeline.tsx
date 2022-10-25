@@ -1,6 +1,7 @@
 import { endOfDay, startOfDay } from "date-fns";
 import React, { forwardRef, ReactNode } from "react";
 import { AxisLabels } from "./AxisLabels";
+import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import {
   useEarliestDate,
@@ -82,7 +83,16 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
           {processedRows.map((row) => {
             console.log(row.periods);
-            return <TimelineRow key={`row-${row.id}`} periods={row.periods} />;
+            return (
+              <RowContext.Provider
+                key={`row-${row.id}`}
+                value={{
+                  id: row.id,
+                }}
+              >
+                <TimelineRow periods={row.periods} />;
+              </RowContext.Provider>
+            );
           })}
         </div>
       </TimelineContext.Provider>

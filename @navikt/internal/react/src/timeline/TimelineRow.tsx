@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { useRowContext } from "./hooks/useRowContext";
 import Period from "./Period";
 import { PositionedPeriod } from "./utils/types.external";
 
@@ -13,6 +14,8 @@ export type TimelineRowType = React.ForwardRefExoticComponent<
 
 export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
   ({ periods, label, ...rest }, ref) => {
+    const { id } = useRowContext();
+    console.log(id);
     return (
       <div {...rest} ref={ref} className="navdsi-timeline__row">
         {label}
