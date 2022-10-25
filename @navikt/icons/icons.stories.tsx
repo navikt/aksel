@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as Icons from "../src";
+import * as Icons from "./src";
 export default {
   title: "ds-icons/Ikoner",
   argTypes: {
