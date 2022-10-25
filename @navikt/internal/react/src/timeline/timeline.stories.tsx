@@ -25,7 +25,7 @@ export const Default = () => {
             end={new Date("Dec 1 2028")}
           />
           <Timeline.Period
-            start={new Date("May 2 1994")}
+            start={new Date("May 2 2014")}
             end={new Date("Dec 1 2022")}
           />
         </Timeline.Row>

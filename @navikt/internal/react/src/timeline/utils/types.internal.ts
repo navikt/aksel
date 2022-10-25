@@ -1,11 +1,6 @@
 import { ReactNode } from "react";
 
-export type PeriodStatus =
-  | "suksess"
-  | "advarsel"
-  | "feil"
-  | "inaktiv"
-  | "ukjent";
+export type PeriodStatus = "success" | "warning" | "error" | "inactive";
 export type Percentage = number;
 
 export interface Positioned {
@@ -16,18 +11,19 @@ export interface Positioned {
 export interface Period {
   start: Date;
   endInclusive: Date;
+  status?: PeriodStatus;
 }
 
 export interface PositionedPeriod extends Period, Positioned {
   id: string;
   width: number;
-  //status: PeriodStatus;
   active?: boolean;
   cropped?: "left" | "right" | "both";
   disabled?: boolean;
   className?: string;
   hoverLabel?: ReactNode;
   infoPin?: boolean;
+  end: Date;
 }
 
 export interface Spatial {

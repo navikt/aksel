@@ -1,5 +1,5 @@
 import { endOfDay, startOfDay } from "date-fns";
-import React, { forwardRef, ReactElement, ReactNode, useMemo } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { TimelineContext } from "./hooks/useTimelineContext";
 import {
@@ -9,7 +9,6 @@ import {
 } from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
-import { getFirstDate, getLastDate } from "./utils/filter";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode | React.ReactNode[];
@@ -46,44 +45,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     if (!isMultipleRows) {
       children = [children];
     }
-    const parsePeriods = (row: React.ReactNode) => {
-      let periods: any = [];
-      if (React.isValidElement(row) && row?.props?.children) {
-        const isArray = Array.isArray(row?.props?.children);
-        if (isArray) {
-          const rowPeriods = row?.props?.children.map(
-            (period: ReactElement) => {
-              return {
-                start: period.props.start,
-                end: period.props.end,
-              };
-            }
-          );
-          periods = rowPeriods;
-        } else {
-          periods = [
-            {
-              start: row?.props?.children?.props?.start,
-              end: row?.props?.children?.props?.end,
-            },
-          ];
-        }
-      }
-      return periods;
-    };
-
-    const allPeriods = useMemo(() => {
-      let periods: any = [];
-      if (Array.isArray(children)) {
-        for (let i = 0; i < children.length; i++) {
-          const row = children[i];
-          periods = [...periods, ...parsePeriods(row)];
-        }
-      } else {
-        periods = parsePeriods(children);
-      }
-      return periods;
-    }, [children]);
 
     //@ts-ignore
     const rows = children?.map((r: ReactNode) => {
@@ -104,23 +65,25 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
       return [];
     });
-    console.log(rows);
-    const start = startOfDay(useEarliestDate({ startDate, rows }));
 
+    const start = startOfDay(useEarliestDate({ startDate, rows }));
     const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
     const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
     return (
       <TimelineContext.Provider
         value={{
-          startDate: startDate || getFirstDate(allPeriods),
-          endDate: endDate || getLastDate(allPeriods),
-          periods: allPeriods,
+          startDate: start,
+          endDate: endInclusive,
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
           <AxisLabels />
-          {children}
+
+          {processedRows.map((row) => {
+            console.log(row.periods);
+            return <TimelineRow key={`row-${row.id}`} periods={row.periods} />;
+          })}
         </div>
       </TimelineContext.Provider>
     );

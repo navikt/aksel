@@ -1,7 +1,10 @@
 import React, { forwardRef } from "react";
+import Period from "./Period";
+import { PositionedPeriod } from "./utils/types.external";
 
 export interface TimelineRowProps extends React.HTMLAttributes<HTMLDivElement> {
   label?: string;
+  periods?: PositionedPeriod[];
 }
 
 export type TimelineRowType = React.ForwardRefExoticComponent<
@@ -9,11 +12,20 @@ export type TimelineRowType = React.ForwardRefExoticComponent<
 >;
 
 export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
-  ({ children, label, ...rest }, ref) => {
+  ({ periods, label, ...rest }, ref) => {
     return (
       <div {...rest} ref={ref} className="navdsi-timeline__row">
         {label}
-        {children}
+        {periods &&
+          periods.map((period) => {
+            return (
+              <Period
+                key={`period-${period.id}`}
+                start={period.start}
+                end={period.endInclusive}
+              />
+            );
+          })}
       </div>
     );
   }
