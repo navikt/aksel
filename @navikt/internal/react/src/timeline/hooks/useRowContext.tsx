@@ -1,11 +1,12 @@
 import { createContext, useContext } from "react";
+import { PositionedPeriod } from "../utils/types.internal";
 
 interface RowContextProps {
-  id: String;
+  periods: PositionedPeriod[];
 }
 
 export const RowContext = createContext<RowContextProps>({
-  id: "",
+  periods: [],
 });
 
 export const useRowContext = () => {

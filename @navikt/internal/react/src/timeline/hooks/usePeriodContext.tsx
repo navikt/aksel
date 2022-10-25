@@ -1,11 +1,11 @@
 import { createContext, useContext } from "react";
 
 interface PeriodContextProps {
-  id: String;
+  periodId: String;
 }
 
 export const PeriodContext = createContext<PeriodContextProps>({
-  id: "",
+  periodId: "",
 });
 
 export const usePeriodContext = () => {

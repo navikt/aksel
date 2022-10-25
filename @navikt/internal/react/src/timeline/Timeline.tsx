@@ -82,15 +82,14 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           <AxisLabels />
 
           {processedRows.map((row) => {
-            console.log(row.periods);
             return (
               <RowContext.Provider
                 key={`row-${row.id}`}
                 value={{
-                  id: row.id,
+                  periods: row.periods,
                 }}
               >
-                <TimelineRow periods={row.periods} />;
+                <TimelineRow />
               </RowContext.Provider>
             );
           })}
