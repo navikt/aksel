@@ -11,7 +11,6 @@ import React, {
 } from "react";
 import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
-import { useTimelineContext } from "./hooks/useTimelineContext";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -50,7 +49,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
   ({ end, icon, ...rest }, ref) => {
     const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
     const [isMini, setIsMini] = useState(false);
-    const { endDate, startDate } = useTimelineContext();
     const { periods } = useRowContext();
     const { periodId } = usePeriodContext();
 
@@ -74,7 +72,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       endInclusive,
       width,
       horizontalPosition,
-      active,
       status,
       onSelectPeriod,
       cropped,
@@ -102,7 +99,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       <ClickablePeriod
         buttonRef={ref as RefObject<HTMLButtonElement>}
         start={start}
-        end={end}
+        end={endInclusive}
         status={status || "default"}
         onSelectPeriod={onSelectPeriod}
         cropped={cropped || ""}
@@ -115,7 +112,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       <NonClickablePeriod
         divRef={ref as RefObject<HTMLDivElement>}
         start={start}
-        end={end}
+        end={endInclusive}
         status={status || "default"}
         cropped={cropped || ""}
         direction={direction}
@@ -181,6 +178,7 @@ const NonClickablePeriod = ({
   left,
   width,
 }: NonClickablePeriodProps) => {
+  console.log(cropped);
   return (
     <div
       ref={divRef}

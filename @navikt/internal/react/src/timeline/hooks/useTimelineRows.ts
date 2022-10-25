@@ -51,10 +51,10 @@ const adjustedEdges = (
   allPeriods: PositionedPeriod[]
 ): PositionedPeriod => {
   const left =
-    i > 0 && withinADay(allPeriods[i - 1].endInclusive, period.start);
+    i > 0 && withinADay(period.start, allPeriods[i - 1].endInclusive);
   const right =
     i < allPeriods.length - 1 &&
-    withinADay(period.endInclusive, allPeriods[i + 1].start);
+    withinADay(allPeriods[i + 1].start, period.endInclusive);
   return left && right
     ? { ...period, cropped: "both" }
     : left
