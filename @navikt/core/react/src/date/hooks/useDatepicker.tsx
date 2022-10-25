@@ -79,7 +79,7 @@ export const useDatepicker = (
 
   const locale = getLocaleFromString(_locale);
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const daypickerRef = useRef<HTMLDivElement>(null);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -101,6 +101,9 @@ export const useDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         daypickerRef.current,
         inputRef.current,

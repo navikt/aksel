@@ -12,11 +12,12 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`navds-id-${globalId}`);
+      setDefaultId(`aksel-id-${globalId}`);
     }
   }, [defaultId]);
   return id;
 }
+
 /**
  *
  * @example <div id={useId()} />

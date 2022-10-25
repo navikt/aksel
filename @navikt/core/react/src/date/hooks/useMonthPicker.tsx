@@ -86,14 +86,18 @@ export const useMonthpicker = (
   };
 
   const handleFocusIn = useCallback(
-    (e) =>
+    (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         monthpickerRef.current,
         inputRef.current,
         inputRef.current?.nextSibling,
       ].some((element) => element?.contains(e.target)) &&
-      open &&
-      setOpen(false),
+        open &&
+        setOpen(false);
+    },
     [open]
   );
 
