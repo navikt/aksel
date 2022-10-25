@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import Period from "./Period";
 import { PositionedPeriod } from "./utils/types.external";
@@ -22,11 +23,14 @@ export const TimelineRow = forwardRef<HTMLDivElement, TimelineRowProps>(
         {periods &&
           periods.map((period) => {
             return (
-              <Period
+              <PeriodContext.Provider
                 key={`period-${period.id}`}
-                start={period.start}
-                end={period.endInclusive}
-              />
+                value={{
+                  id: `period-${period.id}`,
+                }}
+              >
+                <Period start={period.start} end={period.endInclusive} />
+              </PeriodContext.Provider>
             );
           })}
       </div>

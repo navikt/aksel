@@ -1,5 +1,6 @@
 import { differenceInDays } from "date-fns";
 import React, { forwardRef, ReactNode } from "react";
+import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 
 export interface PeriodProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -16,6 +17,8 @@ export type PeriodType = React.ForwardRefExoticComponent<
 export const Period = forwardRef<HTMLDivElement, PeriodProps>(
   ({ start, end, icon, status = "default", ...rest }, ref) => {
     const { endDate, startDate } = useTimelineContext();
+    const { id } = usePeriodContext();
+    console.log(id);
     const totalDays = differenceInDays(endDate, startDate);
     const width = (differenceInDays(end, start) / totalDays) * 100;
     const left = (differenceInDays(start, startDate) / totalDays) * 100;
