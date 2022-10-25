@@ -126,3 +126,5 @@ _docs.json
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+*/icons/src
+*/icons/png
