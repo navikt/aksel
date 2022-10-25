@@ -17,6 +17,7 @@ export interface Period {
   start: Date;
   endInclusive: Date;
   status?: PeriodStatus;
+  onSelectPeriod?: () => void;
 }
 
 export interface PositionedPeriod extends Period, Positioned {

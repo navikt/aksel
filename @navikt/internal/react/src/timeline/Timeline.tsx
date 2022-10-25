@@ -57,7 +57,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             periods.push({
               start: p?.props?.start,
               end: p?.props?.end,
-              status: p?.props?.status,
+              status: p?.props?.status || "default",
+              onSelectPeriod: p.props?.onSelectPeriod,
             });
           }
         } else {
@@ -65,6 +66,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             start: r.props.children.props.start,
             end: r.props.children.props.end,
             status: r.props.children.props?.status || "default",
+            onSelectPeriod: r.props.children.props?.onSelectPeriod,
           });
         }
         return periods;

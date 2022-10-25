@@ -25,7 +25,7 @@ export type PeriodType = React.ForwardRefExoticComponent<
 >;
 
 export const Period = forwardRef<HTMLDivElement, PeriodProps>(
-  ({ end, icon, onSelectPeriod, ...rest }, ref) => {
+  ({ end, icon, ...rest }, ref) => {
     const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
     const [isMini, setIsMini] = useState(false);
     const { endDate, startDate } = useTimelineContext();
@@ -48,15 +48,20 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
     if (!period) {
       return <></>;
     }
-    const { start, endInclusive, width, horizontalPosition, active, status } =
-      period;
-
-    console.log(period);
+    const {
+      start,
+      endInclusive,
+      width,
+      horizontalPosition,
+      active,
+      status,
+      onSelectPeriod,
+    } = period;
 
     const totalDays = differenceInDays(endDate, startDate);
     //const width = (differenceInDays(end, start) / totalDays) * 100;
     const left = (differenceInDays(start, startDate) / totalDays) * 100;
-    console.log(periodRef);
+    //console.log(periodRef);
 
     let statusColor = "grey";
     switch (status) {

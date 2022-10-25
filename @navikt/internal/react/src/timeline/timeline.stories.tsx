@@ -56,6 +56,7 @@ export const PG = () => {
             start={new Date("May 13 2022")}
             end={new Date("May 25 2022")}
             status="warning"
+            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
           />
         </Timeline.Row>
       </Timeline>

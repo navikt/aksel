@@ -41,6 +41,7 @@ const spatialPeriod = (
     width: width,
     end: endInclusive,
     status: period.status,
+    onSelectPeriod: period.onSelectPeriod,
   };
 };
 
