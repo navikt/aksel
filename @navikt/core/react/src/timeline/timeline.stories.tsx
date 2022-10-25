@@ -1,15 +1,9 @@
-import {
-  AutomaticSystem,
-  Calculator,
-  Laptop,
-  Money,
-  Notes,
-  Office1,
-  Reception,
-} from "@navikt/ds-icons";
+import { Caseworker, ExternalLink, Money, Telephone } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
 import { Timeline } from ".";
+import { Link, Tag } from "..";
+import { BodyShort } from "../typography";
 
 export default {
   title: "ds-react/Timeline",
@@ -39,77 +33,57 @@ export const Default = ({ asButton, ...props }) => {
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Timeline aria-labelledby="Timeline-heading" activeStep={3} {...props}>
+        <Timeline.Status
+          title="Du har søkt om dagpenger"
+          time="past"
+          description="1 uke siden"
+          variant="success"
+        />
         <Timeline.Info
-          icon={AutomaticSystem}
-          title="Tittel på del av prosessen"
-          time="future"
-          description="OM OMTRENT 2 DAGER"
-        >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Info>
-        <Timeline.Info
-          time="future"
-          icon={Notes}
-          title="Tittel på del av prosessen"
-          description="OM OMTRENT 2 DAGER"
-        >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Info>
-        <Timeline.Info
+          time="past"
+          icon={Caseworker}
+          title="Veileder gikk gjennom søknaden"
+          description="For 3 dager siden"
+        />
+        <Timeline.Status
+          title="Søkanden mangler dokumenter"
           time="present"
-          icon={Calculator}
-          title="Tittel på del av prosessen"
-          description="29. OKTOBER 2022"
+          description="Du er her 23. Oktober 2022"
+          variant="warning"
         >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Info>
+          <BodyShort spacing>
+            Du mangler fortsatt noen dokumenter til søknaden
+          </BodyShort>
+          <BodyShort spacing>
+            <Link href="#">
+              Gå til oversikt over dokumenter <ExternalLink aria-hidden />
+            </Link>
+          </BodyShort>
+          <Tag variant="warning">Mangler dokumenter</Tag>
+        </Timeline.Status>
         <Timeline.Info
-          time="past"
-          icon={Office1}
-          title="In ea tempor nulla consequat sunt deserunt ullamco aliqua elit excepteur. Anim et fugiat esse enim irure est pariatur pariatur"
-          description="23. OKTOBER 2022"
-        >
-          Esse cillum labore dolore pariatur anim exercitation aute tempor. Do
-          elit fugiat culpa esse elit ut pariatur et amet qui minim cupidatat
-          pariatur id. Amet id est aliqua id. Sit reprehenderit enim occaecat
-          deserunt quis est incididunt sunt non. Et nostrud voluptate duis
-          consectetur Lorem ullamco veniam fugiat. Consequat ea aliquip nisi
-          incididunt magna in ex deserunt fugiat occaecat et. Labore consequat
-          esse labore sint eiusmod ut.
-        </Timeline.Info>
+          time="future"
+          icon={Telephone}
+          title="Du vil få en telefon fra en veileder"
+          description="Om omtrent 2 dager"
+        />
         <Timeline.Info
-          time="past"
-          icon={Laptop}
-          title="Tittel på del av prosessen"
-          description="For 4 dager siden"
-        >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Info>
-        <Timeline.Info
-          time="past"
-          icon={Reception}
-          title="Tittel på del av prosessen"
-          description="For 4 dager siden"
-        >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
-        </Timeline.Info>
-        <Timeline.Info
-          time="past"
+          time="future"
           icon={Money}
-          title="Tittel på del av prosessen"
-          description="For 4 dager siden"
+          title="Du vil få utbetalt dagpenger"
+          description="Når søknaden er godkjent"
         >
-          Beskrivelse av delen av prosessen. Gi brukeren følelse av forståelse
-          av hva som skjer.
+          <BodyShort spacing>
+            Utbetaling vil gjennomføres til kontonummer lagret under "Mine
+            opplysninger"
+          </BodyShort>
+          <BodyShort spacing>
+            <Link href="#">
+              Se mine opplysninger <ExternalLink aria-hidden />
+            </Link>
+          </BodyShort>
         </Timeline.Info>
       </Timeline>
     </div>
   );
 };
-
-Default.args = {};

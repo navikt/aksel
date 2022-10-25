@@ -1,14 +1,11 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong, BodyShort, Label } from "..";
+import { Error, Success, Warning } from "@navikt/ds-icons";
 
-export interface TimelineInfoStepProps
+export interface TimelineStatusStepProps
   extends React.AnchorHTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
-  /**
-   *
-   */
-  icon: React.ElementType;
   /**
    *  When in the process is this
    */
@@ -17,16 +14,51 @@ export interface TimelineInfoStepProps
    * Short description of date. Example: DU ER HER 23. OKTOBER 2022
    */
   description?: string;
+  /**
+   * Status symbol
+   */
+  variant: "success" | "warning" | "error";
 }
 
-export interface TimelineInfoStepType
+export interface TimelineStatusStepType
   extends React.ForwardRefExoticComponent<
-    TimelineInfoStepProps & React.RefAttributes<HTMLDivElement>
+    TimelineStatusStepProps & React.RefAttributes<HTMLDivElement>
   > {}
 
-export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
+const getIcon = (variant: "success" | "warning" | "error") => {
+  switch (variant) {
+    case "success":
+      return (
+        <Success
+          aria-hidden
+          title="feil"
+          color="var(--navds-global-color-green-600)"
+        />
+      );
+    case "warning":
+      return (
+        <Warning
+          aria-hidden
+          color="var(--navds-global-color-orange-600)"
+          title="advarsel"
+        />
+      );
+    case "error":
+      return (
+        <Error
+          aria-hidden
+          title="suksess"
+          color="var(--navds-global-color-red-500)"
+        />
+      );
+    default:
+      return null;
+  }
+};
+
+export const StatusStep = forwardRef<HTMLDivElement, TimelineStatusStepProps>(
   (
-    { className, children, icon: Icon, time, description, title, ...rest },
+    { className, children, time, description, variant, title, ...rest },
     ref
   ) => {
     return (
@@ -40,9 +72,7 @@ export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
           className
         )}
       >
-        <div className="navds-timeline__icon">
-          <Icon aria-hidden />
-        </div>
+        <div className="navds-timeline__icon">{getIcon(variant)}</div>
         <div className="navds-timeline__content">
           <Label as="dt" className="navds-timeline__content-label">
             {title}
@@ -61,6 +91,6 @@ export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
       </div>
     );
   }
-) as TimelineInfoStepType;
+) as TimelineStatusStepType;
 
-export default InfoStep;
+export default StatusStep;
