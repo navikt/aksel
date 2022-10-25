@@ -23,7 +23,7 @@ export const getLastDate = (periods: any) => {
 };
 
 export const withinADay = (date1: Date, date2: Date): boolean =>
-  Math.abs(differenceInDays(date1, date2)) <= 1;
+  differenceInDays(date1, date2) <= 1;
 
 export const invisiblePeriods = ({
   horizontalPosition,

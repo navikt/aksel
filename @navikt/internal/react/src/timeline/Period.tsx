@@ -33,7 +33,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
     const { periodId } = usePeriodContext();
 
     useLayoutEffect(() => {
-      console.log(periodRef);
       const currentWidth = periodRef?.current?.offsetWidth;
       if (currentWidth && currentWidth < 30) {
         setIsMini(true);
@@ -58,10 +57,10 @@ export const Period = forwardRef<HTMLDivElement, PeriodProps>(
       onSelectPeriod,
     } = period;
 
+    console.log(period);
+
     const totalDays = differenceInDays(endDate, startDate);
-    //const width = (differenceInDays(end, start) / totalDays) * 100;
     const left = (differenceInDays(start, startDate) / totalDays) * 100;
-    //console.log(periodRef);
 
     let statusColor = "grey";
     switch (status) {

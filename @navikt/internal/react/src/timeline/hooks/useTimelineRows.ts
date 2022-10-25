@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 import { addDays, endOfDay, startOfDay } from "date-fns";
 
-import { sistePeriode } from "../utils/sort";
+import { lastPeriod } from "../utils/sort";
 import { Period } from "../utils/types.external";
 import {
   InternalSimpleTimeline,
@@ -75,6 +75,7 @@ const trimmedPeriods = (period: PositionedPeriod) => {
     horizontalPosition = 0;
     cropped = cropped === "right" || cropped === "both" ? "both" : "left";
   }
+
   return {
     ...period,
     width: width,
@@ -96,7 +97,7 @@ export const useTimelineRows = (
           .map((periode: Period) =>
             spatialPeriod(periode, startDate, endDate, direction)
           )
-          .sort(sistePeriode)
+          .sort(lastPeriod)
           .map(adjustedEdges)
           .map(trimmedPeriods)
           .filter(invisiblePeriods);
