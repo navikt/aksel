@@ -25,7 +25,7 @@
   height: 1.5rem;
   border-radius: 1.5rem;
   position: absolute;
-  border: 1px solid #59514b;
+  border: 1px solid;
 }
 
 .navdsi-timeline__period--connectedBoth {

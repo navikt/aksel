@@ -1,4 +1,3 @@
-import cl from "clsx";
 import { format } from "date-fns";
 import React, {
   forwardRef,
@@ -11,6 +10,11 @@ import React, {
 } from "react";
 import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
+import {
+  getBgColor,
+  getBorderColor,
+  getConditionalClasses,
+} from "./utils/period";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -24,11 +28,10 @@ export interface PeriodPropsWrapper
 export interface PeriodProps {
   start: Date;
   end: Date;
-  status: String;
-  cropped: String;
-  direction: String;
+  status: string;
+  cropped: string;
+  direction: string;
   width: Number;
-  statusColor: string;
   left: Number;
 }
 
@@ -104,7 +107,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         onSelectPeriod={onSelectPeriod}
         cropped={cropped || ""}
         direction={direction}
-        statusColor={statusColor}
         width={width}
         left={horizontalPosition}
       />
@@ -116,7 +118,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         status={status || "default"}
         cropped={cropped || ""}
         direction={direction}
-        statusColor={statusColor}
         width={width}
         left={horizontalPosition}
       />
@@ -139,7 +140,6 @@ const ClickablePeriod = React.memo(
     status,
     cropped,
     direction,
-    statusColor,
     left,
     width,
   }: ClickablePeriodProps) => {
@@ -148,17 +148,9 @@ const ClickablePeriod = React.memo(
         ref={buttonRef}
         onClick={() => onSelectPeriod && onSelectPeriod()}
         aria-label={ariaLabel(start, end, status)}
-        className={cl("navdsi-timeline__period", {
-          "navdsi-timeline__period--connectedBoth": cropped === "both",
-          "navdsi-timeline__period--connectedRight":
-            (cropped === "right" && direction === "left") ||
-            (cropped === "left" && direction === "right"),
-          "navdsi-timeline__period--connectedLeft":
-            (cropped === "left" && direction === "left") ||
-            (cropped === "right" && direction === "right"),
-        })}
+        className={getConditionalClasses(cropped, direction)}
         style={{
-          backgroundColor: statusColor,
+          backgroundColor: getBgColor(status),
           width: `${width}%`,
           left: `${left}%`,
         }}
@@ -174,7 +166,6 @@ const NonClickablePeriod = ({
   status,
   cropped,
   direction,
-  statusColor,
   left,
   width,
 }: NonClickablePeriodProps) => {
@@ -182,18 +173,11 @@ const NonClickablePeriod = ({
   return (
     <div
       ref={divRef}
-      className={cl("navdsi-timeline__period", {
-        "navdsi-timeline__period--connectedBoth": cropped === "both",
-        "navdsi-timeline__period--connectedRight":
-          (cropped === "right" && direction === "left") ||
-          (cropped === "left" && direction === "right"),
-        "navdsi-timeline__period--connectedLeft":
-          (cropped === "left" && direction === "left") ||
-          (cropped === "right" && direction === "right"),
-      })}
+      className={getConditionalClasses(cropped, direction)}
       aria-label={ariaLabel(start, end, status)}
       style={{
-        background: statusColor,
+        background: getBgColor(status),
+        borderColor: getBorderColor(status),
         width: `${width}%`,
         left: `${left}%`,
       }}
