@@ -41,23 +41,33 @@ export const PG = () => {
       <Timeline>
         <Timeline.Row label="Row 1">
           <Timeline.Period
-            start={new Date("May 1 2022")}
-            end={new Date("May 2 2022")}
+            start={new Date("Jan 1 2022")}
+            end={new Date("Jan 31 2022")}
             status="success"
           />
           <Timeline.Period
-            start={new Date("May 2 2022")}
-            end={new Date("May 25 2022")}
-            status="warning"
+            start={new Date("Feb 1 2022")}
+            end={new Date("Feb 29 2022")}
+            status="danger"
           />
           <Timeline.Period
             start={new Date("May 2 2022")}
             end={new Date("May 25 2022")}
+            status="success"
+          />
+          <Timeline.Period
+            start={new Date("Mar 1 2022")}
+            end={new Date("Mar 31 2022")}
+            status="success"
+          />
+          <Timeline.Period
+            start={new Date("Jul 1 2022")}
+            end={new Date("Jul 31 2022")}
             status="warning"
           />
           <Timeline.Period
-            start={new Date("May 3 2022")}
-            end={new Date("May 25 2022")}
+            start={new Date("Aug 1 2022")}
+            end={new Date("Aug 31 2022")}
             status="warning"
           />
         </Timeline.Row>

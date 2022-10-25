@@ -22,7 +22,7 @@ export interface PeriodPropsWrapper
   onSelectPeriod?: () => void;
 }
 
-interface PeriodProps {
+export interface PeriodProps {
   start: Date;
   end: Date;
   status: String;
@@ -130,7 +130,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
 const ariaLabel = (startDate: Date, endDate: Date, status: String): string => {
   const start = format(startDate, "dd.MM.yyyy");
   const end = format(endDate, "dd.MM.yyyy");
-  return `${status} fra ${start} til og med ${end}`;
+  return `${status} fra ${start} til ${end}`;
 };
 
 const ClickablePeriod = React.memo(
