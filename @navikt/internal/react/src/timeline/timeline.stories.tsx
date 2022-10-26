@@ -46,7 +46,7 @@ export const Default = () => {
             status="warning"
           />
         </Timeline.Row>
-        <Timeline.Row label="Navn på rad">
+        <Timeline.Row label="Navn på rad navn">
           <Timeline.Period
             start={new Date("May 13 2022")}
             end={new Date("May 25 2022")}

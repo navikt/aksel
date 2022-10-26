@@ -19,6 +19,16 @@
   font-size: 14px;
 }
 
+.navdsi-timeline__row {
+  display: flex;
+}
+
+.navdsi-timeline__row__label {
+  width: 126px;
+  margin-right: 18px;
+  text-align: right;
+}
+
 .navdsi-timeline__row__periods {
   background: var(--navds-global-color-gray-50);
   height: var(--navds-font-line-height-large);

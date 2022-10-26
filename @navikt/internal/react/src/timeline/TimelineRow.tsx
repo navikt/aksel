@@ -18,9 +18,6 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
 
     return (
       <div className="navdsi-timeline__row">
-        <div aria-label="etikett" className="navdsi-timeline__row__label">
-          {label}
-        </div>
         <ol {...rest} ref={ref} className="navdsi-timeline__row__periods">
           {periods &&
             periods.map((period) => {
