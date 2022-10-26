@@ -55,7 +55,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Delete .npmrc
-      - run: rm -f .npmrc
+        run: rm -f .npmrc
 
       - name: Publish to NPM
         if: steps.changesets.outputs.published == 'true'
