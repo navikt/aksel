@@ -1,0 +1,66 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    name: "Release packages"
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+          cache: yarn
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-test
+
+      - name: Create a .npmrc file for GPR
+        uses: FerLuisxd/create-npmrc@3
+        with:
+          org_name: navikt
+        env:
+          AUTH_TOKEN: ${{secrets.GIT_REPO}}
+
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: yarn version
+          publish: yarn release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+
+      - name: Remove File
+        uses: JesseTG/rm@v1.0.3
+        with:
+          path: ./.npmrc
+
+      - name: Publish to NPM
+        if: steps.changesets.outputs.published == 'true'
+        id: changesets-npm
+        uses: changesets/action@v1
+        with:
+          publish: yarn release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
