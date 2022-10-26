@@ -21,14 +21,15 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
         {periods &&
           periods.map((period) => {
             return (
-              <PeriodContext.Provider
-                key={`period-${period.id}`}
-                value={{
-                  periodId: period.id,
-                }}
-              >
-                <Period start={period.start} end={period.endInclusive} />
-              </PeriodContext.Provider>
+              <li key={`period-${period.id}`}>
+                <PeriodContext.Provider
+                  value={{
+                    periodId: period.id,
+                  }}
+                >
+                  <Period start={period.start} end={period.endInclusive} />
+                </PeriodContext.Provider>
+              </li>
             );
           })}
       </ol>

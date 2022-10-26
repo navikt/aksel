@@ -13,33 +13,6 @@ export const Default = () => {
     <div style={{ width: "80vw" }}>
       <Timeline>
         <Timeline.Row label="Row 1">
-          <Timeline.Period start={new Date("Feb 2 2022")} end={new Date()} />
-          <Timeline.Period
-            start={new Date("May 2 2022")}
-            end={new Date("Dec 1 2022")}
-          />
-        </Timeline.Row>
-        <Timeline.Row label="Row 2">
-          <Timeline.Period
-            start={new Date("May 2 2001")}
-            end={new Date("Dec 1 2028")}
-          />
-          <Timeline.Period
-            start={new Date("May 2 2014")}
-            end={new Date("Dec 1 2022")}
-          />
-        </Timeline.Row>
-        <Timeline.Row label="Row 3" />
-      </Timeline>
-    </div>
-  );
-};
-
-export const PG = () => {
-  return (
-    <div style={{ width: "80vw" }}>
-      <Timeline>
-        <Timeline.Row label="Row 1">
           <Timeline.Period
             start={new Date("Jan 1 2022")}
             end={new Date("Jan 31 2022")}
@@ -67,7 +40,7 @@ export const PG = () => {
           />
           <Timeline.Period
             start={new Date("Aug 1 2022")}
-            end={new Date("Aug 31 2022")}
+            end={new Date("Aug 30 2022")}
             status="warning"
           />
         </Timeline.Row>
@@ -92,6 +65,33 @@ export const PG = () => {
             status="information"
           />
         </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
+export const PG = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1">
+          <Timeline.Period start={new Date("Feb 2 2022")} end={new Date()} />
+          <Timeline.Period
+            start={new Date("May 2 2022")}
+            end={new Date("Dec 1 2022")}
+          />
+        </Timeline.Row>
+        <Timeline.Row label="Row 2">
+          <Timeline.Period
+            start={new Date("May 2 2001")}
+            end={new Date("Dec 1 2028")}
+          />
+          <Timeline.Period
+            start={new Date("May 2 2014")}
+            end={new Date("Dec 1 2022")}
+          />
+        </Timeline.Row>
+        <Timeline.Row label="Row 3" />
       </Timeline>
     </div>
   );

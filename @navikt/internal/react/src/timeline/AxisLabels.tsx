@@ -121,7 +121,7 @@ export const AxisLabels = ({ direction = "left" }) => {
   const labels = axisLabels(startDate, endDate, "left").filter(isVisible);
 
   return (
-    <div className="navdsi-timeline__axislabels">
+    <div className="navdsi-timeline__axislabels" aria-hidden="true">
       {labels.map((etikett) => (
         <div
           key={etikett.label}
