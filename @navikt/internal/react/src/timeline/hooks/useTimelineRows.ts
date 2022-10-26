@@ -128,8 +128,8 @@ export const useEarliestDate = ({ startDate, rows }: any) =>
 const latestDate = (latest: Date, period: Period) =>
   period.end > latest ? period.end : latest;
 
-const latestTomDate = (rader: Period[][]) =>
-  rader.flat().reduce(latestDate, new Date(0));
+const latestTomDate = (rows: Period[][]) =>
+  rows.flat().reduce(latestDate, new Date(0));
 
 export const useLatestDate = ({ endDate, rows }: any) =>
   useMemo(
