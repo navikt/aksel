@@ -17,11 +17,13 @@ export const getBgColor = (status: string) => {
     case "success":
       return "var(--navds-global-color-green-50)";
     case "warning":
-      return "yellow";
+      return "var(--navds-global-color-orange-50)";
     case "danger":
       return "var(--navds-global-color-red-50)";
+    case "information":
+      return "var(--navds-global-color-lightblue-50)";
     default:
-      return "grey";
+      return "var(--navds-global-color-gray-50)";
   }
 };
 
@@ -30,10 +32,12 @@ export const getBorderColor = (status: string) => {
     case "success":
       return "var(--navds-global-color-green-500)";
     case "warning":
-      return "yellow";
+      return "var(--navds-global-color-orange-600)";
     case "danger":
       return "var(--navds-global-color-red-500)";
+    case "information":
+      return "var(--navds-global-color-lightblue-700)";
     default:
-      return "grey";
+      return "var(--navds-global-color-gray-600)";
   }
 };

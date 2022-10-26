@@ -81,23 +81,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       direction,
     } = period;
 
-    console.log(period);
-
-    let statusColor = "grey";
-    switch (status) {
-      case "success":
-        statusColor = "green";
-        break;
-      case "warning":
-        statusColor = "yellow";
-        break;
-      case "danger":
-        statusColor = "red";
-        break;
-      default:
-        break;
-    }
-
     return onSelectPeriod ? (
       <ClickablePeriod
         buttonRef={ref as RefObject<HTMLButtonElement>}
@@ -151,6 +134,7 @@ const ClickablePeriod = React.memo(
         className={getConditionalClasses(cropped, direction)}
         style={{
           backgroundColor: getBgColor(status),
+          borderColor: getBorderColor(status),
           width: `${width}%`,
           left: `${left}%`,
         }}
@@ -169,7 +153,6 @@ const NonClickablePeriod = ({
   left,
   width,
 }: NonClickablePeriodProps) => {
-  console.log(cropped);
   return (
     <div
       ref={divRef}
