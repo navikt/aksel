@@ -57,7 +57,7 @@ jobs:
       - name: Remove File
         uses: JesseTG/rm@v1.0.3
         with:
-          path: ./.npmrc
+          path: "$HOME/.npmrc"
 
       - name: Publish to NPM
         if: steps.changesets.outputs.published == 'true'
