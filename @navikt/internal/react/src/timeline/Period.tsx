@@ -29,6 +29,7 @@ export interface PeriodProps {
   direction: string;
   width: Number;
   left: Number;
+  icon?: ReactNode;
 }
 
 interface NonClickablePeriodProps extends PeriodProps {
@@ -50,7 +51,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
     const [isMini, setIsMini] = useState(false);
     const { periods } = useRowContext();
     const { periodId } = usePeriodContext();
-
     useLayoutEffect(() => {
       const currentWidth = periodRef?.current?.offsetWidth;
       if (currentWidth && currentWidth < 30) {
@@ -88,6 +88,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         direction={direction}
         width={width}
         left={horizontalPosition}
+        icon={icon}
       />
     ) : (
       <NonClickablePeriod
@@ -99,6 +100,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         direction={direction}
         width={width}
         left={horizontalPosition}
+        icon={icon}
       />
     );
   }
@@ -121,6 +123,7 @@ const ClickablePeriod = React.memo(
     direction,
     left,
     width,
+    icon,
   }: ClickablePeriodProps) => {
     return (
       <button
@@ -133,7 +136,9 @@ const ClickablePeriod = React.memo(
           width: `${width}%`,
           left: `${left}%`,
         }}
-      ></button>
+      >
+        {icon}
+      </button>
     );
   }
 );
@@ -147,6 +152,7 @@ const NonClickablePeriod = ({
   direction,
   left,
   width,
+  icon,
 }: NonClickablePeriodProps) => {
   return (
     <div
@@ -157,7 +163,9 @@ const NonClickablePeriod = ({
         width: `${width}%`,
         left: `${left}%`,
       }}
-    ></div>
+    >
+      {icon}
+    </div>
   );
 };
 

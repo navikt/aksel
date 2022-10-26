@@ -28,7 +28,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                       periodId: period.id,
                     }}
                   >
-                    <Period start={period.start} end={period.endInclusive} />
+                    <Period
+                      start={period.start}
+                      end={period.endInclusive}
+                      icon={period.icon}
+                    />
                   </PeriodContext.Provider>
                 </li>
               );

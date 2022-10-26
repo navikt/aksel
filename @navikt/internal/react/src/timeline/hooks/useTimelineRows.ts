@@ -27,6 +27,7 @@ const spatialPeriod = (
     timelineStart,
     timelineEndInclusive
   );
+
   return {
     id: period.id || nanoid(),
     start: start,
@@ -42,6 +43,7 @@ const spatialPeriod = (
     end: endInclusive,
     status: period.status,
     onSelectPeriod: period.onSelectPeriod,
+    icon: period.icon,
   };
 };
 
