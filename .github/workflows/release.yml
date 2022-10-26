@@ -31,12 +31,24 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-test
 
+      - name: Install dependencies
+        run: yarn
+
       - name: Create a .npmrc file for GPR
         uses: FerLuisxd/create-npmrc@3
         with:
           org_name: navikt
         env:
           AUTH_TOKEN: ${{secrets.GIT_REPO}}
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            @navikt:registry=https://npm.pkg.github.com
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Create release Pull Request or publish to NPM
         id: changesets
