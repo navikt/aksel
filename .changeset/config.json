@@ -22,6 +22,8 @@
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
   "ignore": ["nextjs-demo", "shadow-dom"],
+  "bumpVersionsWithWorkspaceProtocolOnly": true,
+
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"
   }
