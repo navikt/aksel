@@ -151,5 +151,8 @@
     "webpack-cli": "^4.2.0",
     "yarn": "^1.22.10"
   },
-  "packageManager": "yarn@3.2.1"
+  "packageManager": "yarn@3.2.1",
+  "dependencies": {
+    "@changesets/cli": "^2.25.0"
+  }
 }
