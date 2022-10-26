@@ -26,6 +26,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
 
   const Description = size === "medium" ? BodyShort : Detail;
 
+  console.log(inputProps.id);
   return (
     <div
       className={cl(props.className, "navds-radio", `navds-radio--${size}`, {

@@ -1,5 +1,5 @@
 //https://github.com/mui/material-ui/blob/master/packages/mui-utils/src/useId.ts
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 let globalId = 0;
 function useGlobalId(idOverride?: string): string | undefined {
@@ -17,6 +17,12 @@ function useGlobalId(idOverride?: string): string | undefined {
   }, [defaultId]);
   return id;
 }
+
+// eslint-disable-next-line no-useless-concat -- Workaround for https://github.com/webpack/webpack/issues/14814
+const maybeReactUseId: undefined | (() => string) = (React as any)[
+  // eslint-disable-next-line no-useless-concat
+  "useId" + ""
+];
 /**
  *
  * @example <div id={useId()} />
@@ -24,6 +30,10 @@ function useGlobalId(idOverride?: string): string | undefined {
  * @returns {string}
  */
 export function useId(idOverride?: string): string | undefined {
+  if (maybeReactUseId !== undefined) {
+    const reactId = maybeReactUseId();
+    return idOverride ?? reactId.replace(/(:)/g, "");
+  }
   // eslint-disable-next-line react-hooks/rules-of-hooks -- `useId` is invariant at runtime.
-  return useGlobalId(idOverride);
+  return useGlobalId(idOverride) ?? "";
 }
