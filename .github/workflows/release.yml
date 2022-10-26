@@ -64,7 +64,8 @@ jobs:
         id: changesets-npm
         uses: changesets/action@v1
         with:
-          publish: yarn release
+          publish: yarn changeset publish
+          createGithubReleases: false
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
