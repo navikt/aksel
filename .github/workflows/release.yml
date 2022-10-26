@@ -54,10 +54,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
-      - name: Remove File
-        uses: JesseTG/rm@v1.0.3
-        with:
-          path: "$HOME/.npmrc"
+      - name: Delete .npmrc
+      - run: rm -f .npmrc
 
       - name: Publish to NPM
         if: steps.changesets.outputs.published == 'true'
