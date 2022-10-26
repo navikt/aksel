@@ -21,11 +21,19 @@
   font-size: 14px;
 }
 
+.navdsi-timeline__row {
+  background: var(--navds-global-color-gray-50);
+  height: var(--navds-font-line-height-large);
+  position: relative;
+  margin: 0 0 var(--navds-spacing-5);
+}
+
 .navdsi-timeline__period {
-  height: 1.5rem;
-  border-radius: 1.5rem;
+  height: 100%;
+  border-radius: 20px;
   position: absolute;
   border: 1px solid;
+  padding: var(--navds-spacing-1) var(--navds-spacing-2);
 }
 
 .navdsi-timeline__period--connectedBoth {
