@@ -1954,7 +1954,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@changesets/cli@npm:^2.25.0":
+"@changesets/changelog-github@npm:0.4.7":
+  version: 0.4.7
+  resolution: "@changesets/changelog-github@npm:0.4.7"
+  dependencies:
+    "@changesets/get-github-info": ^0.5.1
+    "@changesets/types": ^5.2.0
+    dotenv: ^8.1.0
+  checksum: 911b2ca3fc52d9f883001d2aa6122208ca9daa884201eae77d2a5f4cce34df685e443ee49aa88f89a913bf8ac6b0129a12d18f36517b118962f18ba9c5163173
+  languageName: node
+  linkType: hard
+
+"@changesets/cli@npm:2.25.0":
   version: 2.25.0
   resolution: "@changesets/cli@npm:2.25.0"
   dependencies:
@@ -2031,6 +2042,16 @@ __metadata:
     fs-extra: ^7.0.1
     semver: ^5.4.1
   checksum: 584852e17fd102271dea520f851c85130605f232f7f52126d202b0041269af12d5681744bfa7fecf41048e5fd62a71da726be471207832060408d9cfb35ec3fb
+  languageName: node
+  linkType: hard
+
+"@changesets/get-github-info@npm:^0.5.1":
+  version: 0.5.1
+  resolution: "@changesets/get-github-info@npm:0.5.1"
+  dependencies:
+    dataloader: ^1.4.0
+    node-fetch: ^2.5.0
+  checksum: e995274c4f5c021e5a7df0867816b86abeff136746dd91f33feb3368b175c1d1513db81282dc4d89a33cad61cfcc835f676cfa9d694a9c1631af35dad3057c69
   languageName: node
   linkType: hard
 
@@ -10453,6 +10474,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dataloader@npm:^1.4.0":
+  version: 1.4.0
+  resolution: "dataloader@npm:1.4.0"
+  checksum: e2c93d43afde68980efc0cd9ff48e9851116e27a9687f863e02b56d46f7e7868cc762cd6dcbaf4197e1ca850a03651510c165c2ae24b8e9843fd894002ad0e20
+  languageName: node
+  linkType: hard
+
 "date-fns@npm:2.29.3":
   version: 2.29.3
   resolution: "date-fns@npm:2.29.3"
@@ -11018,7 +11046,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv@npm:^8.0.0":
+"dotenv@npm:^8.0.0, dotenv@npm:^8.1.0":
   version: 8.6.0
   resolution: "dotenv@npm:8.6.0"
   checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
@@ -17506,7 +17534,8 @@ __metadata:
   resolution: "nav-ds@workspace:."
   dependencies:
     "@babel/core": ^7.11.6
-    "@changesets/cli": ^2.25.0
+    "@changesets/changelog-github": 0.4.7
+    "@changesets/cli": 2.25.0
     "@storybook/addon-a11y": 6.5.5
     "@storybook/addon-actions": 6.5.5
     "@storybook/addon-docs": 6.5.5
@@ -17697,7 +17726,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
+"node-fetch@npm:^2.5.0, node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.7":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
