@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.3.35
+
+### Patch Changes
+
+- [`dd92454d0`](https://github.com/navikt/Designsystemet/commit/dd92454d052386582cfbae28c3248886d70f6367) Thanks [@KenAJoh](https://github.com/KenAJoh)! - demo-bump
+
+- Updated dependencies [[`dd92454d0`](https://github.com/navikt/Designsystemet/commit/dd92454d052386582cfbae28c3248886d70f6367)]:
+  - @navikt/ds-icons@1.3.35
+
 ## 1.3.34
 
 ### Patch Changes
