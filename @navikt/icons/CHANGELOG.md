@@ -1,5 +1,11 @@
 # @navikt/ds-icons
 
+## 1.3.37
+
+### Patch Changes
+
+- [`b95fc3364`](https://github.com/navikt/Designsystemet/commit/b95fc336490b7da4a0a2ba4a8a8a2bfceb691402) Thanks [@KenAJoh](https://github.com/KenAJoh)! - changeset-demo
+
 ## 1.3.36
 
 ### Patch Changes
