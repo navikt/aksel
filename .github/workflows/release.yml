@@ -34,15 +34,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Creating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            @navikt:registry=https://npm.pkg.github.com
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.GIT_REPO }}
-
       - name: Create release Pull Request or publish to NPM
         id: changesets
         uses: changesets/action@v1
@@ -54,12 +45,18 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
-      - name: Delete .npmrc
-        run: rm -f .npmrc
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            @navikt:registry=https://npm.pkg.github.com
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.GIT_REPO }}
 
-      - name: Publish to NPM
+      - name: Publish to GPR
         if: steps.changesets.outputs.published == 'true'
-        id: changesets-npm
+        id: changesets-gpr
         uses: changesets/action@v1
         with:
           publish: yarn changeset publish
