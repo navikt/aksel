@@ -17,22 +17,27 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     const { periods } = useRowContext();
 
     return (
-      <ol {...rest} ref={ref} className="navdsi-timeline__row">
-        {periods &&
-          periods.map((period) => {
-            return (
-              <li key={`period-${period.id}`}>
-                <PeriodContext.Provider
-                  value={{
-                    periodId: period.id,
-                  }}
-                >
-                  <Period start={period.start} end={period.endInclusive} />
-                </PeriodContext.Provider>
-              </li>
-            );
-          })}
-      </ol>
+      <div className="navdsi-timeline__row">
+        <div aria-label="etikett" className="navdsi-timeline__row__label">
+          {label}
+        </div>
+        <ol {...rest} ref={ref} className="navdsi-timeline__row__periods">
+          {periods &&
+            periods.map((period) => {
+              return (
+                <li key={`period-${period.id}`}>
+                  <PeriodContext.Provider
+                    value={{
+                      periodId: period.id,
+                    }}
+                  >
+                    <Period start={period.start} end={period.endInclusive} />
+                  </PeriodContext.Provider>
+                </li>
+              );
+            })}
+        </ol>
+      </div>
     );
   }
 );

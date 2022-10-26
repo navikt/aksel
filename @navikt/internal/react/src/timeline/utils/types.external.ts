@@ -14,6 +14,7 @@ export interface Positioned {
 }
 
 export interface Period {
+  label?: string;
   start: Date;
   endInclusive: Date;
   status?: PeriodStatus;

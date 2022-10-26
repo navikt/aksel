@@ -59,6 +59,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               end: p?.props?.end,
               status: p?.props?.status || "default",
               onSelectPeriod: p.props?.onSelectPeriod,
+              label: r.props.label,
             });
           }
         } else {
@@ -67,6 +68,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             end: r.props.children.props.end,
             status: r.props.children.props?.status || "default",
             onSelectPeriod: r.props.children.props?.onSelectPeriod,
+            label: r.props.label,
           });
         }
         return periods;
@@ -89,6 +91,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           <AxisLabels />
 
           {processedRows.map((row) => {
+            console.log(row);
             return (
               <RowContext.Provider
                 key={`row-${row.id}`}
@@ -96,7 +99,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                   periods: row.periods,
                 }}
               >
-                <TimelineRow />
+                <TimelineRow label={row.label} />
               </RowContext.Provider>
             );
           })}
