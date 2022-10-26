@@ -34,13 +34,6 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: Create a .npmrc file for GPR
-        uses: FerLuisxd/create-npmrc@3
-        with:
-          org_name: navikt
-        env:
-          AUTH_TOKEN: ${{secrets.GIT_REPO}}
-
       - name: Creating .npmrc
         run: |
           cat << EOF > "$HOME/.npmrc"
@@ -48,7 +41,7 @@ jobs:
             //npm.pkg.github.com/:_authToken=$NPM_TOKEN
           EOF
         env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          NPM_TOKEN: ${{ secrets.GIT_REPO }}
 
       - name: Create release Pull Request or publish to NPM
         id: changesets
