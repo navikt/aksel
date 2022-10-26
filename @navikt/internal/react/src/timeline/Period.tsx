@@ -128,6 +128,7 @@ const ClickablePeriod = React.memo(
         onClick={() => onSelectPeriod && onSelectPeriod()}
         aria-label={ariaLabel(start, end, status)}
         className={getConditionalClasses(cropped, direction, status)}
+        data-clickable
         style={{
           width: `${width}%`,
           left: `${left}%`,

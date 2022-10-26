@@ -24,7 +24,6 @@
   height: var(--navds-font-line-height-large);
   position: relative;
   margin: 0 0 var(--navds-spacing-5);
-  padding-left: 38px;
 }
 
 .navdsi-timeline__row li {
@@ -36,6 +35,7 @@
   border-radius: 20px;
   position: absolute;
   border: 1px solid;
+  padding: 0;
 }
 
 .navdsi-timeline__period--success {
@@ -43,9 +43,17 @@
   border-color: var(--navds-global-color-green-500);
 }
 
+.navdsi-timeline__period--success[data-clickable]:hover {
+  background: var(--navds-global-color-green-100);
+}
+
 .navdsi-timeline__period--warning {
   background: var(--navds-global-color-orange-50);
   border-color: var(--navds-global-color-orange-600);
+}
+
+.navdsi-timeline__period--warning[data-clickable]:hover {
+  background: var(--navds-global-color-orange-100);
 }
 
 .navdsi-timeline__period--danger {
@@ -53,14 +61,30 @@
   border-color: var(--navds-global-color-red-500);
 }
 
+.navdsi-timeline__period--danger[data-clickable]:hover {
+  background: var(--navds-global-color-red-100);
+}
+
 .navdsi-timeline__period--information {
   background: var(--navds-global-color-lightblue-50);
   border-color: var(--navds-global-color-lightblue-700);
 }
 
+.navdsi-timeline__period--information[data-clickable]:hover {
+  background: var(--navds-global-color-lightblue-100);
+}
+
 .navdsi-timeline__period--default {
   background: var(--navds-global-color-gray-50);
   border-color: var(--navds-global-color-gray-600);
+}
+
+.navdsi-timeline__period--default[data-clickable]:hover {
+  background: var(--navds-global-color-gray-100);
+}
+
+.navdsi-timeline__period[data-clickable]:hover {
+  cursor: pointer;
 }
 
 .navdsi-timeline__period--connectedBoth {
