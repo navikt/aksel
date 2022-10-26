@@ -38,6 +38,31 @@
   border: 1px solid;
 }
 
+.navdsi-timeline__period--success {
+  background: var(--navds-global-color-green-50);
+  border-color: var(--navds-global-color-green-500);
+}
+
+.navdsi-timeline__period--warning {
+  background: var(--navds-global-color-orange-50);
+  border-color: var(--navds-global-color-orange-600);
+}
+
+.navdsi-timeline__period--danger {
+  background: var(--navds-global-color-red-50);
+  border-color: var(--navds-global-color-red-500);
+}
+
+.navdsi-timeline__period--information {
+  background: var(--navds-global-color-lightblue-50);
+  border-color: var(--navds-global-color-lightblue-700);
+}
+
+.navdsi-timeline__period--default {
+  background: var(--navds-global-color-gray-50);
+  border-color: var(--navds-global-color-gray-600);
+}
+
 .navdsi-timeline__period--connectedBoth {
   border-radius: 0;
 }

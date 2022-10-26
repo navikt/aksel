@@ -10,11 +10,7 @@ import React, {
 } from "react";
 import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
-import {
-  getBgColor,
-  getBorderColor,
-  getConditionalClasses,
-} from "./utils/period";
+import { getConditionalClasses } from "./utils/period";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -131,10 +127,8 @@ const ClickablePeriod = React.memo(
         ref={buttonRef}
         onClick={() => onSelectPeriod && onSelectPeriod()}
         aria-label={ariaLabel(start, end, status)}
-        className={getConditionalClasses(cropped, direction)}
+        className={getConditionalClasses(cropped, direction, status)}
         style={{
-          backgroundColor: getBgColor(status),
-          borderColor: getBorderColor(status),
           width: `${width}%`,
           left: `${left}%`,
         }}
@@ -156,11 +150,9 @@ const NonClickablePeriod = ({
   return (
     <div
       ref={divRef}
-      className={getConditionalClasses(cropped, direction)}
+      className={getConditionalClasses(cropped, direction, status)}
       aria-label={ariaLabel(start, end, status)}
       style={{
-        background: getBgColor(status),
-        borderColor: getBorderColor(status),
         width: `${width}%`,
         left: `${left}%`,
       }}
