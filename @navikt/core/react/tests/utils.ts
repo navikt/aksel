@@ -1,6 +1,5 @@
 // https://github.com/mui/material-ui/blob/d14be1cb1e4c7275a1f356dec98667c7ad491983/test/utils/focusVisible.ts#L3
 import { act, fireEvent } from "@testing-library/react";
-import { UserEvent } from "@testing-library/user-event/dist/types/setup";
 import { render } from "@testing-library/react";
 import fs from "fs";
 import path from "path";
@@ -20,7 +19,7 @@ export function simulatePointerDown(element?: HTMLElement) {
   fireEvent.pointerDown(element ?? document.body);
 }
 
-export async function simulateHover(el: HTMLElement, user: UserEvent) {
+export async function simulateHover(el: HTMLElement, user: any) {
   await user.hover(el);
 }
 
