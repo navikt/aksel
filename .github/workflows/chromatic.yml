@@ -54,6 +54,7 @@ jobs:
           STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
       - name: replace storybook url
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         uses: frabert/replace-string-action@v2.0
         id: storybook_url
         with:
@@ -62,12 +63,14 @@ jobs:
           replace-with: ""
 
       - name: Get commit sha
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Find Comment
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         uses: peter-evans/find-comment@v1
         id: fc
         with:
@@ -76,7 +79,7 @@ jobs:
           body-includes: Chromatic build-output
 
       - name: Create or update comment
-        if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name == 'push'
+        if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -92,7 +95,7 @@ jobs:
           edit-mode: replace
 
       - name: Create or update failed comment
-        if: steps.chromatic_tests.outcome != 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name == 'push'
+        if: steps.chromatic_tests.outcome != 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
