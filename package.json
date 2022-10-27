@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "postinstall": "husky install",
-    "boot": "yarn clean && yarn build:codemod && yarn workspaces foreach -pA --topological-dev --no-private run build",
-    "clean": "node scripts/clean.js",
+    "boot": "yarn clean && yarn workspace @navikt/ds-codemod build && yarn workspaces foreach -pA --topological-dev --no-private run build",
+    "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
     "dev": "yarn storybook",
     "docgen": "yarn workspaces foreach -p run docgen",
