@@ -32,7 +32,7 @@ export const Default = ({ asButton, ...props }) => {
 
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
-      <Timeline aria-labelledby="Timeline-heading" activeStep={3} {...props}>
+      <Timeline aria-labelledby="Timeline-heading" {...props}>
         <Timeline.Status
           title="Du har søkt om dagpenger"
           time="past"
@@ -60,7 +60,19 @@ export const Default = ({ asButton, ...props }) => {
             </Link>
           </BodyShort>
           <Tag variant="warning">Mangler dokumenter</Tag>
+          <Timeline.Cont time="present">
+            <BodyShort spacing>
+              Aliqua sunt anim cupidatat consequat ipsum officia fugiat occaecat
+              laborum commodo exercitation reprehenderit.
+            </BodyShort>
+            <BodyShort spacing>
+              Est pariatur adipisicing est nisi adipisicing officia dolor et
+              culpa id dolore irure eu ea. Minim veniam proident et sit sit ea
+              cillum. Anim proident cupidatat minim elit sint commodo non ipsum.
+            </BodyShort>
+          </Timeline.Cont>
         </Timeline.Status>
+
         <Timeline.Info
           time="future"
           icon={Telephone}
@@ -82,6 +94,17 @@ export const Default = ({ asButton, ...props }) => {
               Se mine opplysninger <ExternalLink aria-hidden />
             </Link>
           </BodyShort>
+          <Timeline.Cont time="future">
+            <BodyShort spacing>
+              Aliqua sunt anim cupidatat consequat ipsum officia fugiat occaecat
+              laborum commodo exercitation reprehenderit.
+            </BodyShort>
+            <BodyShort spacing>
+              Est pariatur adipisicing est nisi adipisicing officia dolor et
+              culpa id dolore irure eu ea. Minim veniam proident et sit sit ea
+              cillum. Anim proident cupidatat minim elit sint commodo non ipsum.
+            </BodyShort>
+          </Timeline.Cont>
         </Timeline.Info>
       </Timeline>
     </div>

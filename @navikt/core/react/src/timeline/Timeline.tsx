@@ -1,5 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
+import ContStep, { TimelineContStepType } from "./Cont";
 import InfoStep, { TimelineInfoStepType } from "./Info";
 import StatusStep, { TimelineStatusStepType } from "./Status";
 
@@ -16,6 +17,7 @@ interface TimelineComponent
   > {
   Info: TimelineInfoStepType;
   Status: TimelineStatusStepType;
+  Cont: TimelineContStepType;
 }
 
 export const Timeline: TimelineComponent = forwardRef<
@@ -31,5 +33,6 @@ export const Timeline: TimelineComponent = forwardRef<
 
 Timeline.Info = InfoStep;
 Timeline.Status = StatusStep;
+Timeline.Cont = ContStep;
 
 export default Timeline;

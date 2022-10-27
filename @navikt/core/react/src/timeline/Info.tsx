@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong, BodyShort, Label } from "..";
+import { BodyLong, BodyShort, Heading } from "..";
 
 export interface TimelineInfoStepProps
   extends React.AnchorHTMLAttributes<HTMLLIElement> {
@@ -43,10 +43,10 @@ export const InfoStep = forwardRef<HTMLLIElement, TimelineInfoStepProps>(
         <div className="navds-timeline__marker">
           <Icon aria-hidden />
         </div>
-        <Label as="div" className="navds-timeline__title">
+        <Heading size="small" as="div" className="navds-timeline__title">
           {title}
           {description && <BodyShort size="small">{description}</BodyShort>}
-        </Label>
+        </Heading>
         <div className="navds-timeline__content">
           {children && (
             <BodyLong className="navds-timeline__content-inner">
