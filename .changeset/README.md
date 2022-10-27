@@ -1,34 +1,33 @@
 # Changesets
 
-To handle versioning and released, we use [Changesets](https://github.com/changesets/changesets) to [version](https://semver.org/) and publish our packages.
+For versjonering bruker vi løsningen [Changesets](https://github.com/changesets/changesets) for å [versjonering](https://semver.org/) og publisering av pakker.
 
 ## Howto
 
-- To create a new version, run `yarn changeset`
-- select versions to change with arrowkeys + spacebar
+- For å lage en ny versjons-entry: `yarn changeset`
+- Velg pakkene som skal versjoneres med `arrowkeys` + `Space`
 
 `🦋 Which packages would you like to include?`
 
-- Press the `Space` key to select `changed packages`, then press `Enter` to move to the next question.
+Trykk `Space` for å velge pakkene som skal versjoneres, for så trykke `Enter` for å gå videre.
 
 `🦋 Which packages should have a major bump?`
 
-- Press the `Enter` key to select none and move to the next question, _*or*_ navigate packages using the arrow keys and press the `Space` key to select the packages with changes that should target a major version.
+Trykk `Enter` for å gå videre _*eller*_ velg pakkene som skal marjor-bumpes med `arrowkeys` + `Space`
 
 `🦋 Which packages should have a minor bump?`
 
-- Press the `Enter` key to select none so that your changes automatically target a patch bump, _*or*_ select packages using the up and down arrow keys and space if your changes should target a minor version.
+Trykk `Enter` for å gå videre _*eller*_ velg pakkene som skal marjor-bumpes med `arrowkeys` + `Space`
 
-- Commit and push up.
+Hvis du ikke velger major eller minor, så blir pakkene få en patch-bump
 
-## Fixed versioning
+- Commit og push.
 
-All our "base"-packages are has fixed versioning. This means a semver-bump on any of them will bump all of them. Take
+## Fixed versjonering
 
-Current fixed packages
+Alle base-pakkene våre har `fixed versjonering`. Dette tilsier at en bump på en av disse vil bumpe alle til samme versjon
 
-```
-[
+```sh
   "@navikt/ds-react",
   "@navikt/ds-css",
   "@navikt/ds-icons",
@@ -37,5 +36,4 @@ Current fixed packages
   "@navikt/ds-css-internal",
   "@navikt/ds-react-internal",
   "@navikt/ds-codemod"
-]
 ```

@@ -68,6 +68,12 @@ Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsyst
 
 [MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
 
+## Codeowners
+
+Løsningen forvaltes av team Aksel/Designsystemet
+
+[Slack](https://nav-it.slack.com/archives/C7NE7A8UF)
+
 ## Contributors
 
 <a href="https://github.com/navikt/Designsystemet/graphs/contributors">
