@@ -108,7 +108,6 @@
     "@changesets/cli": "2.25.0",
     "@storybook/addon-a11y": "6.5.5",
     "@storybook/addon-actions": "6.5.5",
-    "@storybook/addon-docs": "6.5.5",
     "@storybook/addon-essentials": "6.5.5",
     "@storybook/addon-storysource": "6.5.5",
     "@storybook/addons": "6.5.5",
