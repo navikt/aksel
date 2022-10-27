@@ -8,10 +8,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { usePeriodContext } from "./hooks/usePeriodContext";
-import { useRowContext } from "./hooks/useRowContext";
-import ClickablePeriod from "./period/ClickablePeriod";
-import { getConditionalClasses } from "./utils/period";
+import { usePeriodContext } from "../hooks/usePeriodContext";
+import { useRowContext } from "../hooks/useRowContext";
+import { getConditionalClasses } from "../utils/period";
+import ClickablePeriod from "./ClickablePeriod";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {

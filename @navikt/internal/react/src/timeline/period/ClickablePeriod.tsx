@@ -1,6 +1,6 @@
 import React, { RefObject } from "react";
-import { PeriodProps } from "../Period";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
+import { PeriodProps } from "./Period";
 
 interface ClickablePeriodProps extends PeriodProps {
   buttonRef: RefObject<HTMLButtonElement>;

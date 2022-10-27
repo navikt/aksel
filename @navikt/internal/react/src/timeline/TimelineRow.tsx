@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
-import Period from "./Period";
+import Period from "./period/Period";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {

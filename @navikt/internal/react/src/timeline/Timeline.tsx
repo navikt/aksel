@@ -8,7 +8,7 @@ import {
   useLatestDate,
   useTimelineRows,
 } from "./hooks/useTimelineRows";
-import Period, { PeriodType } from "./Period";
+import Period, { PeriodType } from "./period/Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
