@@ -45,7 +45,11 @@ export const InfoStep = forwardRef<HTMLLIElement, TimelineInfoStepProps>(
         </div>
         <Heading size="small" as="div" className="navds-timeline__title">
           {title}
-          {description && <BodyShort size="small">{description}</BodyShort>}
+          {description && (
+            <BodyShort size="small" className="navds-timeline__description">
+              {description}
+            </BodyShort>
+          )}
         </Heading>
         <div className="navds-timeline__content">
           {children && (

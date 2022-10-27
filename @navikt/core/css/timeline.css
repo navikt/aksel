@@ -16,6 +16,7 @@
   grid-template-rows: [kicker] auto [title-start] auto auto [title-end content] auto;
   grid-auto-flow: column;
   min-height: 6rem;
+  padding: 0 0.5rem;
 }
 
 .navds-timeline__line {
@@ -38,10 +39,10 @@
   grid-row: title-start / content-end;
 }
 
-/* :where(.navds-timeline__item:last-of-type) .navds-timeline__line--2 {
+:where(.navds-timeline__item:last-of-type) .navds-timeline__line--2 {
   display: none;
 }
- */
+
 .navds-timeline__marker {
   background-color: var(--navds-global-color-white);
   width: 2.5rem;
@@ -54,7 +55,7 @@
   place-items: center;
   display: grid;
   font-size: 1.5rem;
-  outline: 4px solid white;
+  outline: 4px solid var(--navds-global-color-white);
 }
 
 .navds-timeline__content {
@@ -71,7 +72,11 @@
 .navds-timeline__title {
   grid-row: title;
   grid-column: content;
-  margin-top: var(--navds-spacing-1);
+  margin-top: 6px;
+}
+
+.navds-timeline__description {
+  color: var(--navds-global-color-gray-700);
 }
 
 .navds-timeline__cont {
@@ -88,6 +93,7 @@
   margin-bottom: 1rem;
   margin-top: 0.25rem;
   box-shadow: 0 0 0 1px rgb(0 0 0 / 0.1);
+  padding: 0.5rem;
 }
 
 .navds-timeline__item--present > .navds-timeline__marker {
@@ -96,31 +102,8 @@
   border-top-left-radius: 15px;
 }
 
-.navds-timeline__bullet {
-  position: absolute;
-  box-sizing: content-box;
-  left: calc(0.375rem + 5px);
-  width: 0.375rem;
-  height: 0.375rem;
-  border-radius: 99px;
-  background: var(--navds-global-color-gray-500);
-  border: 0.375rem solid var(--navds-global-color-gray-100);
-  outline: 0.25rem solid white;
-  grid-column: track;
-  margin-block-start: 0.325rem;
-  margin-inline: auto;
-  z-index: 1;
-  margin-top: 1rem;
-}
-
-.navds-timeline__item--present .navds-timeline__bullet {
-  border: 0.375rem solid var(--navds-global-color-gray-200);
-  outline: 0.25rem solid var(--navds-global-color-gray-300);
-  background: var(--navds-global-color-gray-600);
-}
-
-.navds-timeline__item--present > .navds-timeline__line--2 {
-  margin-bottom: 4px;
+.navds-timeline__item--present .navds-timeline__description {
+  color: var(--navds-global-color-gray-900);
 }
 
 :where(.navds-timeline__item--future, .navds-timeline__item--present) > .navds-timeline__line {

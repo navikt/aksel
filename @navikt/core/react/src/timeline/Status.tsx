@@ -75,7 +75,11 @@ export const StatusStep = forwardRef<HTMLLIElement, TimelineStatusStepProps>(
         <div className="navds-timeline__marker">{getIcon(variant)}</div>
         <Heading size="small" as="div" className="navds-timeline__title">
           {title}
-          {description && <BodyShort size="small">{description}</BodyShort>}
+          {description && (
+            <BodyShort size="small" className="navds-timeline__description">
+              {description}
+            </BodyShort>
+          )}
         </Heading>
         <div className="navds-timeline__content">
           {children && (

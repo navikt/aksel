@@ -60,17 +60,6 @@ export const Default = ({ asButton, ...props }) => {
             </Link>
           </BodyShort>
           <Tag variant="warning">Mangler dokumenter</Tag>
-          <Timeline.Cont time="present">
-            <BodyShort spacing>
-              Aliqua sunt anim cupidatat consequat ipsum officia fugiat occaecat
-              laborum commodo exercitation reprehenderit.
-            </BodyShort>
-            <BodyShort spacing>
-              Est pariatur adipisicing est nisi adipisicing officia dolor et
-              culpa id dolore irure eu ea. Minim veniam proident et sit sit ea
-              cillum. Anim proident cupidatat minim elit sint commodo non ipsum.
-            </BodyShort>
-          </Timeline.Cont>
         </Timeline.Status>
 
         <Timeline.Info
@@ -94,17 +83,6 @@ export const Default = ({ asButton, ...props }) => {
               Se mine opplysninger <ExternalLink aria-hidden />
             </Link>
           </BodyShort>
-          <Timeline.Cont time="future">
-            <BodyShort spacing>
-              Aliqua sunt anim cupidatat consequat ipsum officia fugiat occaecat
-              laborum commodo exercitation reprehenderit.
-            </BodyShort>
-            <BodyShort spacing>
-              Est pariatur adipisicing est nisi adipisicing officia dolor et
-              culpa id dolore irure eu ea. Minim veniam proident et sit sit ea
-              cillum. Anim proident cupidatat minim elit sint commodo non ipsum.
-            </BodyShort>
-          </Timeline.Cont>
         </Timeline.Info>
       </Timeline>
     </div>
