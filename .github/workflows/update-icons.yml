@@ -39,4 +39,4 @@ jobs:
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           signoff: false
           delete-branch: true
-          title: "[FIX] Ikonsynk Figma"
+          title: "Ikonsynk Figma"

@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: figma-tokens-sync
           delete-branch: true
-          title: "[FEATURE] Tokens sync Figma"
+          title: "Tokens sync Figma"
           commit-message: "Tokens synket fra figma"
           committer: GitHub <noreply@github.com>
           signoff: false
