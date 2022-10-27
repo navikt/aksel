@@ -4,29 +4,37 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "clean:lib": "node scripts/clean.js",
-    "test": "yarn workspaces foreach -p run test",
     "postinstall": "husky install",
-    "boot": "yarn clean:lib && yarn build:codemod && yarn workspaces foreach -pA --topological-dev --no-private run build",
-    "docgen": "yarn workspaces foreach -p run docgen",
+    "boot": "yarn clean && yarn workspace @navikt/ds-codemod build && yarn workspaces foreach -pA --topological-dev --no-private run build",
+    "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook",
+    "dev": "yarn storybook",
+    "docgen": "yarn workspaces foreach -p run docgen",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
-    "build:codemod": "yarn workspace @navikt/ds-codemod build",
-    "build:tokens": "yarn workspace @navikt/ds-tokens build",
-    "update:icons": "yarn workspace @navikt/ds-icons update",
-    "update:tokens": "yarn workspace @navikt/ds-tokens update",
-    "lint": "yarn lint:jsts && yarn lint:css",
-    "lint:jsts": "yarn eslint .",
-    "lint:css": "yarn stylelint @navikt/**/*.css"
+    "build:storybook": "build-storybook",
+    "test": "yarn workspaces foreach -p run test",
+    "lint": "yarn eslint . && yarn stylelint @navikt/**/*.css",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "yarn boot && yarn docgen && changeset publish"
   },
   "workspaces": [
     "@navikt/core/*",
     "@navikt/internal/*",
     "@navikt/codemod",
+    "@navikt/icons",
     "examples/*"
   ],
-  "prettier": {},
+  "prettier": {
+    "overrides": [
+      {
+        "files": "**/*.css",
+        "options": {
+          "printWidth": 130
+        }
+      }
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app"
@@ -97,6 +105,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@changesets/changelog-github": "0.4.7",
+    "@changesets/cli": "2.25.0",
     "@storybook/addon-a11y": "6.5.5",
     "@storybook/addon-actions": "6.5.5",
     "@storybook/addon-docs": "6.5.5",
@@ -121,24 +131,21 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
-    "extend": "^3.0.2",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
-    "husky": "^5.0.0",
-    "lerna": "^4.0.0",
-    "msw": "^0.36.5",
-    "msw-storybook-addon": "^1.6.3",
+    "husky": "^8.0.0",
     "prettier": "2.6.2",
     "pretty-quick": "^3.1.3",
     "prop-types": "^15.5.10",
     "react": "^18.0.0",
+    "react-docgen-typescript": "2.2.2",
     "react-dom": "^18.0.0",
     "style-loader": "^1.2.1",
     "stylelint": "^14.8.5",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^25.0.0",
-    "typescript": "^4.7.2",
+    "typescript": "^4.8.0",
     "webpack": "^5.4.0",
     "webpack-cli": "^4.2.0",
     "yarn": "^1.22.10"

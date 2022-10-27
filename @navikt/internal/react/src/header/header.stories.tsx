@@ -2,8 +2,7 @@ import { Expand, ExternalLink, System } from "@navikt/ds-icons";
 import { BodyLong, BodyShort, Detail } from "@navikt/ds-react";
 import { Meta } from "@storybook/react";
 import React from "react";
-import { Header } from "..";
-import { Dropdown } from "../..";
+import { Header, Dropdown } from "..";
 
 export default {
   title: "ds-react-internal/Header",

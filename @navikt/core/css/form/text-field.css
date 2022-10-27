@@ -1,34 +1,21 @@
 :root,
+:host,
 [data-theme="light"] {
   --navds-text-field-color-text: var(--navds-semantic-color-text);
-  --navds-text-field-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-text-field-color-background: var(--navds-semantic-color-component-background-light);
   --navds-text-field-color-border: var(--navds-semantic-color-border);
-  --navds-text-field-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-text-field-color-border-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-text-field-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-text-field-color-border-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-text-field-color-border-error: var(--navds-semantic-color-interaction-danger);
+  --navds-text-field-color-shadow-error: var(--navds-semantic-color-interaction-danger);
   --navds-text-field-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-text-field-color-background-disabled: var(
-    --navds-semantic-color-component-background-alternate
-  );
+  --navds-text-field-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
   --navds-text-field-color-text-disabled: var(--navds-semantic-color-text);
-  --navds-text-field-color-placeholder-text: var(
-    --navds-semantic-color-text-muted
-  );
+  --navds-text-field-color-placeholder-text: var(--navds-semantic-color-text-muted);
 }
 
 [data-theme="dark"] {
   --navds-text-field-color-text: var(--navds-semantic-color-text-inverted);
-  --navds-text-field-color-background: var(
-    --navds-semantic-color-component-background-inverted
-  );
+  --navds-text-field-color-background: var(--navds-semantic-color-component-background-inverted);
   --navds-text-field-color-border: var(--navds-semantic-color-border-inverted);
   --navds-text-field-color-border-hover: var(--navds-global-color-blue-200);
   --navds-text-field-color-placeholder-text: var(--navds-global-color-gray-500);
@@ -75,10 +62,8 @@
   box-shadow: 0 0 0 1px var(--navds-text-field-color-border-error);
 }
 
-.navds-text-field--error
-  > .navds-text-field__input:focus:not(:hover):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-text-field-color-border-error),
-    var(--navds-shadow-focus);
+.navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
+  box-shadow: 0 0 0 1px var(--navds-text-field-color-border-error), var(--navds-shadow-focus);
 }
 
 /* Disabled handling */

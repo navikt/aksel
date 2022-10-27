@@ -15,8 +15,7 @@
   border-radius: var(--navds-border-radius-small);
   padding: 0 var(--navds-spacing-2);
   align-items: center;
-  filter: drop-shadow(0 2px 4px rgba(0 0 0 / 0.1))
-    drop-shadow(0 4px 6px rgba(0 0 0 / 0.1));
+  filter: drop-shadow(0 2px 4px rgba(0 0 0 / 0.1)) drop-shadow(0 4px 6px rgba(0 0 0 / 0.1));
   display: flex;
   flex-direction: column;
   animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);

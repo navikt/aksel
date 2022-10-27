@@ -18,6 +18,10 @@ export interface UseMonthPickerOptions
    * Make Date-selection required
    */
   required?: boolean;
+  /**
+   * Callback for month-change
+   */
+  onMonthChange?: (date?: Date) => void;
 }
 
 interface UseMonthPickerValue {
@@ -49,12 +53,15 @@ export const useMonthpicker = (
 ): UseMonthPickerValue => {
   const {
     locale: _locale = "nb",
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     fromDate,
     toDate,
     disabled,
     required,
+    onMonthChange,
   } = opt;
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   const today = new Date();
   const locale = getLocaleFromString(_locale);
@@ -73,15 +80,24 @@ export const useMonthpicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
+  const updateMonth = (date?: Date) => {
+    onMonthChange?.(date);
+    setSelectedMonth(date);
+  };
+
   const handleFocusIn = useCallback(
-    (e) =>
+    (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         monthpickerRef.current,
         inputRef.current,
         inputRef.current?.nextSibling,
       ].some((element) => element?.contains(e.target)) &&
-      open &&
-      setOpen(false),
+        open &&
+        setOpen(false);
+    },
     [open]
   );
 
@@ -95,23 +111,20 @@ export const useMonthpicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedMonth(defaultSelected);
+    updateMonth(defaultSelected);
     setYear(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
-    setSelectedMonth(date);
+    updateMonth(date);
     setYear(date ?? today);
     setInputValue(date ? formatDateForInput(date, locale, "month") : "");
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-    if (!e.target.value) {
-      reset();
-      return;
-    }
     let day = parseDate(e.target.value, today, locale, "month");
     if (isValidDate(day)) {
       setYear(day);
@@ -132,11 +145,11 @@ export const useMonthpicker = (
     }
 
     if (!required && !month) {
-      setSelectedMonth(undefined);
+      updateMonth(undefined);
       setInputValue("");
       return;
     }
-    setSelectedMonth(month);
+    updateMonth(month);
     setInputValue(month ? formatDateForInput(month, locale, "month") : "");
   };
 
@@ -148,7 +161,7 @@ export const useMonthpicker = (
     const month = parseDate(e.target.value, today, locale, "month");
 
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
-      setSelectedMonth(undefined);
+      updateMonth(undefined);
       return;
     }
 
@@ -169,10 +182,10 @@ export const useMonthpicker = (
       isBefore ||
       (fromDate && toDate && !isMatch(month, [{ from: fromDate, to: toDate }]))
     ) {
-      setSelectedMonth(undefined);
+      updateMonth(undefined);
       return;
     }
-    setSelectedMonth(month);
+    updateMonth(month);
     setYear(month);
   };
 

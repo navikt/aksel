@@ -1,20 +1,13 @@
-:root {
+:root,
+:host {
   --navds-alert-color-border: var(--navds-semantic-color-border-muted);
-  --navds-alert-color-error-border: var(
-    --navds-semantic-color-feedback-danger-border
-  );
+  --navds-alert-color-error-border: var(--navds-semantic-color-feedback-danger-border);
   --navds-alert-color-error-background: var(--navds-global-color-red-50);
-  --navds-alert-color-warning-border: var(
-    --navds-semantic-color-feedback-warning-border
-  );
+  --navds-alert-color-warning-border: var(--navds-semantic-color-feedback-warning-border);
   --navds-alert-color-warning-background: var(--navds-global-color-orange-50);
-  --navds-alert-color-info-border: var(
-    --navds-semantic-color-feedback-info-border
-  );
+  --navds-alert-color-info-border: var(--navds-semantic-color-feedback-info-border);
   --navds-alert-color-info-background: var(--navds-global-color-lightblue-50);
-  --navds-alert-color-success-border: var(
-    --navds-semantic-color-feedback-success-border
-  );
+  --navds-alert-color-success-border: var(--navds-semantic-color-feedback-success-border);
   --navds-alert-color-success-background: var(--navds-global-color-green-50);
 }
 

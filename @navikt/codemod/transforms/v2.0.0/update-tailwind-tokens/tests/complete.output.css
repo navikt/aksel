@@ -1,0 +1,3 @@
+.test {
+  @apply bg-surface-inverted text-surface-action-subtle/20;
+}

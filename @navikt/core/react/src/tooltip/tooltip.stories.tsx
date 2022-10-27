@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
-import { Alert, Button, Search } from "../..";
-import { Tooltip } from "../index";
+import { Tooltip, Alert, Button, Search } from "..";
 
 export default {
   title: "ds-react/Tooltip",
@@ -86,7 +85,11 @@ export const Placement = () => {
 
 export const Keys = () => {
   return (
-    <Tooltip content="Tooltip example" open={true} keys={["CMD", "K"]}>
+    <Tooltip
+      content="Tooltip example Laboris reprehenderit sit sunt nisi velit mollit esse excepteur. Consectetur ullamco quis laboris enim nulla amet proident proident deserunt laborum. Aliqua adipisicing ipsum nisi ipsum nisi pariatur tempor amet aute labore laboris eiusmod adipisicing eu. Et cillum ipsum voluptate ea irure aliquip laboris mollit in. Voluptate tempor do voluptate reprehenderit ea dolor velit ullamco et magna enim ut sit. Pariatur culpa nulla consectetur voluptate id Lorem incididunt magna aliqua sunt ut Lorem. Laborum est quis aute enim et fugiat aute."
+      open={true}
+      keys={["CMD", "K"]}
+    >
       <div>Element</div>
     </Tooltip>
   );

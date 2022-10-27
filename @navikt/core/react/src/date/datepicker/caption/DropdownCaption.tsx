@@ -1,5 +1,7 @@
 import { Left, Right } from "@navikt/ds-icons";
-import { setMonth, setYear, startOfMonth } from "date-fns";
+import setMonth from "date-fns/setMonth";
+import setYear from "date-fns/setYear";
+import startOfMonth from "date-fns/startOfMonth";
 import React from "react";
 import { CaptionProps, useDayPicker, useNavigation } from "react-day-picker";
 import { Button, Select } from "../../..";
@@ -52,6 +54,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         onClick={() => previousMonth && goToMonth(previousMonth)}
         icon={<Left title="velg forrige måned" />}
         className="navds-date__caption-button"
+        type="button"
       />
 
       <div className="navds-date__caption__month-wrapper">
@@ -90,6 +93,7 @@ export const DropdownCaption = ({ displayMonth, id }: CaptionProps) => {
         disabled={!nextMonth}
         variant="tertiary"
         className="navds-date__caption-button"
+        type="button"
       />
     </div>
   );

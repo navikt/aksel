@@ -1,49 +1,59 @@
-name: Chromatic
+name: Visual Regression Tests
 
 on:
   push:
     branches:
-      - master
+      - "master"
+      - "next"
+    paths:
+      - "@navikt/**"
   pull_request:
-    branches:
-      - master
-      - big-one-oh
+    branches: [master]
+    paths:
+      - "@navikt/**"
 
 jobs:
-  chromatic-pr:
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
+  visual_regression_test:
+    name: "visual regression test (chromatic)"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v3
         with:
-          node-version: 14
-      - name: Node-modules cache
+          node-version: 16.13.0
+          cache: yarn
+
+      - name: Restore cache
         uses: actions/cache@v3
-        id: node-cache
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: install
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: postinstall
-        if: steps.node-cache.outputs.cache-hit == 'true'
-        run: yarn postinstall
-      - name: Boot
+          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-visual-regression-test-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build packages
         run: yarn boot
-      - name: run chromatic
+
+      - name: Chromatic
         uses: chromaui/action@v1
         id: chromatic_tests
         continue-on-error: true
         with:
+          autoAcceptChanges: "master"
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: x3xqdfgkujg
           exitZeroOnChanges: false
+        env:
+          STORYBOOK_GITHUB_SHA: ${{ github.sha }}
 
       - name: replace storybook url
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         uses: frabert/replace-string-action@v2.0
         id: storybook_url
         with:
@@ -52,12 +62,14 @@ jobs:
           replace-with: ""
 
       - name: Get commit sha
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         id: vars
         shell: bash
         run: |
           echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Find Comment
+        if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'"
         uses: peter-evans/find-comment@v1
         id: fc
         with:
@@ -66,7 +78,7 @@ jobs:
           body-includes: Chromatic build-output
 
       - name: Create or update comment
-        if: steps.chromatic_tests.outcome == 'success'
+        if: steps.chromatic_tests.outcome == 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -76,13 +88,13 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :white_check_mark: SUCCESS :white_check_mark:
+            - :white_check_mark: No changes detected :white_check_mark:
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
 
       - name: Create or update failed comment
-        if: steps.chromatic_tests.outcome != 'success'
+        if: steps.chromatic_tests.outcome != 'success' && !contains(github.event.head_commit.message, '[ci skip]') && github.event_name != 'push'
         uses: peter-evans/create-or-update-comment@v1
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
@@ -92,38 +104,7 @@ jobs:
 
             - :clipboard: [Review](${{steps.chromatic_tests.outputs.url}})
             - :tada: [Storybook preview](${{steps.storybook_url.outputs.replaced}})
-            - :no_entry_sign: FAILED :no_entry_sign:, review endringer.
+            - :no_entry_sign: Changes detected :no_entry_sign:, review endringer.
 
             commit: `${{ steps.vars.outputs.sha_short }}`
           edit-mode: replace
-
-  chromatic-push:
-    if: "!contains(github.event.head_commit.message, '[ci skip]') && github.event_name == 'push'"
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
-      - name: Node-modules cache
-        uses: actions/cache@v3
-        id: node-cache
-        with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-      - name: install
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install
-      - name: postinstall
-        if: steps.node-cache.outputs.cache-hit == 'true'
-        run: yarn postinstall
-      - name: Boot
-        run: yarn boot
-      - name: run chromatic
-        uses: chromaui/action@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          projectToken: x3xqdfgkujg
-          autoAcceptChanges: true

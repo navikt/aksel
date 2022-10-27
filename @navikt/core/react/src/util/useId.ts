@@ -12,7 +12,7 @@ function useGlobalId(idOverride?: string): string | undefined {
       // We can't use it server-side.
       // If you want to use random values please consider the Birthday Problem: https://en.wikipedia.org/wiki/Birthday_problem
       globalId += 1;
-      setDefaultId(`navds-id-${globalId}`);
+      setDefaultId(`aksel-id-${globalId}`);
     }
   }, [defaultId]);
   return id;
@@ -32,8 +32,8 @@ const maybeReactUseId: undefined | (() => string) = (React as any)[
 export function useId(idOverride?: string): string | undefined {
   if (maybeReactUseId !== undefined) {
     const reactId = maybeReactUseId();
-    return idOverride ?? reactId;
+    return idOverride ?? reactId.replace(/(:)/g, "");
   }
   // eslint-disable-next-line react-hooks/rules-of-hooks -- `useId` is invariant at runtime.
-  return useGlobalId(idOverride);
+  return useGlobalId(idOverride) ?? "";
 }

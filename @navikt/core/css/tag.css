@@ -1,32 +1,15 @@
-:root {
+:root,
+:host {
   --navds-tag-color-border: var(--navds-semantic-color-border-muted);
-  --navds-tag-color-background: var(
-    --navds-semantic-color-component-background-alternate
-  );
-  --navds-tag-color-info-background: var(
-    --navds-semantic-color-feedback-info-background
-  );
-  --navds-tag-color-info-border: var(
-    --navds-semantic-color-feedback-info-border
-  );
-  --navds-tag-color-warning-background: var(
-    --navds-semantic-color-feedback-warning-background
-  );
-  --navds-tag-color-warning-border: var(
-    --navds-semantic-color-feedback-warning-border
-  );
-  --navds-tag-color-success-background: var(
-    --navds-semantic-color-feedback-success-background
-  );
-  --navds-tag-color-success-border: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-tag-color-error-background: var(
-    --navds-semantic-color-feedback-danger-background
-  );
-  --navds-tag-color-error-border: var(
-    --navds-semantic-color-feedback-danger-border
-  );
+  --navds-tag-color-background: var(--navds-semantic-color-component-background-alternate);
+  --navds-tag-color-info-background: var(--navds-semantic-color-feedback-info-background);
+  --navds-tag-color-info-border: var(--navds-semantic-color-feedback-info-border);
+  --navds-tag-color-warning-background: var(--navds-semantic-color-feedback-warning-background);
+  --navds-tag-color-warning-border: var(--navds-semantic-color-feedback-warning-border);
+  --navds-tag-color-success-background: var(--navds-semantic-color-feedback-success-background);
+  --navds-tag-color-success-border: var(--navds-semantic-color-feedback-success-border);
+  --navds-tag-color-error-background: var(--navds-semantic-color-feedback-danger-background);
+  --navds-tag-color-error-border: var(--navds-semantic-color-feedback-danger-border);
 }
 
 .navds-tag {
