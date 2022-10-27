@@ -7,7 +7,6 @@ export const AkselProviderContext = createContext<
 >(undefined);
 
 export interface AkselProviderProps {
-  /** Inner content of the application */
   children?: React.ReactNode;
   /** Options */
   options?: {};
