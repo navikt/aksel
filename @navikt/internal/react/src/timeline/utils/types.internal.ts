@@ -19,6 +19,7 @@ export interface Period {
   status?: PeriodStatus;
   onSelectPeriod?: () => void;
   icon?: ReactNode;
+  children?: ReactNode;
 }
 
 export interface PositionedPeriod extends Period, Positioned {

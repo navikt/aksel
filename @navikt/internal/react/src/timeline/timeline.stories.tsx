@@ -68,7 +68,9 @@ export const Default = () => {
             status="default"
             onSelectPeriod={() => console.log("PERIOD SELECTED!")}
             icon={<SuccessFilled />}
-          />
+          >
+            <p>This i a p</p>
+          </Timeline.Period>
         </Timeline.Row>
         <Timeline.Row>
           <Timeline.Period

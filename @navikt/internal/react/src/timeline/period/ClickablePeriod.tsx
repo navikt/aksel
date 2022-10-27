@@ -1,4 +1,5 @@
-import React, { RefObject } from "react";
+import { Popover } from "@navikt/ds-react";
+import React, { RefObject, useState } from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
 
@@ -19,11 +20,17 @@ const ClickablePeriod = React.memo(
     left,
     width,
     icon,
+    children,
   }: ClickablePeriodProps) => {
+    const [openState, setOpenState] = useState(false);
+    console.log(children);
     return (
       <button
         ref={buttonRef}
-        onClick={() => onSelectPeriod && onSelectPeriod()}
+        onClick={() => {
+          setOpenState(!openState);
+          onSelectPeriod && onSelectPeriod();
+        }}
         aria-label={ariaLabel(start, end, status)}
         className={getConditionalClasses(cropped, direction, status)}
         data-clickable
@@ -33,6 +40,15 @@ const ClickablePeriod = React.memo(
         }}
       >
         {icon}
+        {children && (
+          <Popover
+            open={openState}
+            onClose={() => setOpenState(false)}
+            anchorEl={buttonRef.current}
+          >
+            <Popover.Content>{children}</Popover.Content>
+          </Popover>
+        )}
       </button>
     );
   }

@@ -62,6 +62,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               onSelectPeriod: p.props?.onSelectPeriod,
               label: r.props.label,
               icon: p.props.icon,
+              children: p.props.children,
             });
           }
         } else {
@@ -72,6 +73,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             onSelectPeriod: r.props.children.props?.onSelectPeriod,
             label: r.props.label,
             icon: r.props.children.props?.icon,
+            children: r.props.children.props?.children,
           });
         }
         return periods;

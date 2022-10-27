@@ -30,6 +30,10 @@ export interface PeriodProps {
   width: Number;
   left: Number;
   icon?: ReactNode;
+  /**
+   * Popover content when clicking on the period.
+   */
+  children?: ReactNode;
 }
 
 export type PeriodType = React.ForwardRefExoticComponent<
@@ -66,11 +70,12 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       onSelectPeriod,
       cropped,
       direction,
+      children,
     } = period;
 
-    return onSelectPeriod ? (
+    return onSelectPeriod || children ? (
       <ClickablePeriod
-        buttonRef={ref as RefObject<HTMLButtonElement>}
+        buttonRef={periodRef as RefObject<HTMLButtonElement>}
         start={start}
         end={endInclusive}
         status={status || "default"}
@@ -80,10 +85,11 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         width={width}
         left={horizontalPosition}
         icon={icon}
+        children={children}
       />
     ) : (
       <NonClickablePeriod
-        divRef={ref as RefObject<HTMLDivElement>}
+        divRef={periodRef as RefObject<HTMLDivElement>}
         start={start}
         end={endInclusive}
         status={status || "default"}
