@@ -114,7 +114,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/navikt/nav-frontend-moduler.git"
+    "url": "https://github.com/navikt/Designsystemet.git"
   },
   "devDependencies": {
     "@changesets/changelog-github": "0.4.7",
