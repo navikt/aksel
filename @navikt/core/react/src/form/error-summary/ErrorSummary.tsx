@@ -3,7 +3,7 @@ import cl from "clsx";
 import { Heading, BodyShort } from "../..";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
 import { useId } from "../../util";
-import { useSizeManager } from "../../app-provider/hooks";
+import { useSizeManager } from "../../aksel-provider/hooks";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**

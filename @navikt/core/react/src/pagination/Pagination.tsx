@@ -6,7 +6,7 @@ import PaginationItem, {
   PaginationItemProps,
   PaginationItemType,
 } from "./PaginationItem";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLElement> {
   /**

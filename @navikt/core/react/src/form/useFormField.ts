@@ -2,7 +2,7 @@ import { useContext } from "react";
 import cl from "clsx";
 import { FieldsetContext } from "./index";
 import { useId } from "../index";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface FormFieldProps {
   /**

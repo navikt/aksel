@@ -7,7 +7,7 @@ import {
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong } from "..";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
   /**

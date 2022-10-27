@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import cl from "clsx";
 import { OverridableComponent } from "..";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface LabelProps
   extends React.LabelHTMLAttributes<HTMLLabelElement> {

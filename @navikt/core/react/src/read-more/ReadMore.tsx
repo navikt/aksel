@@ -4,7 +4,7 @@ import { Expand } from "@navikt/ds-icons";
 import { BodyLong } from "../typography";
 import { ExpandFilled } from "@navikt/ds-icons";
 import AnimateHeight from "../util/AnimateHeight";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface ReadMoreProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

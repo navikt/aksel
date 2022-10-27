@@ -1,7 +1,7 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import cl from "clsx";
 import { BodyShort, Detail } from "..";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**

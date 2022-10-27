@@ -7,7 +7,7 @@ import ColumnHeader, { ColumnHeaderType } from "./ColumnHeader";
 import HeaderCell, { HeaderCellType } from "./HeaderCell";
 import DataCell, { DataCellType } from "./DataCell";
 import ExpandableRow, { ExpandableRowType } from "./ExpandableRow";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface SortState {
   orderBy: string;

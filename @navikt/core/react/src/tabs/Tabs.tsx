@@ -4,7 +4,7 @@ import * as RadixTabs from "@radix-ui/react-tabs";
 import Tab, { TabType } from "./Tab";
 import TabList, { TabListType } from "./TabList";
 import TabPanel, { TabPanelType } from "./TabPanel";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface TabsProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {

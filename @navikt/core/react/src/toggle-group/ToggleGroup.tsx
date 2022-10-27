@@ -8,7 +8,7 @@ import React, {
 import ToggleItem, { ToggleItemType } from "./ToggleItem";
 import * as RadixToggleGroup from "@radix-ui/react-toggle-group";
 import { Label, useId } from "..";
-import { useSizeManager } from "../app-provider/hooks";
+import { useSizeManager } from "../aksel-provider/hooks";
 
 export interface ToggleGroupProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onChange" | "dir"> {
