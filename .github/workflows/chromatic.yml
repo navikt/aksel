@@ -40,6 +40,7 @@ jobs:
         run: |
           yarn workspace @navikt/ds-tokens build
           yarn workspace @navikt/ds-css build
+          yarn workspace @navikt/ds-icons build
 
       - name: Chromatic
         uses: chromaui/action@v1
