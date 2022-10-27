@@ -61,7 +61,20 @@ export const Default = () => {
             status="warning"
             onSelectPeriod={() => console.log("PERIOD SELECTED!")}
             icon={<SuccessFilled />}
-          />
+          >
+            <div
+              style={{
+                width: "239px",
+                margin: 0,
+                textAlign: "left",
+                fontSize: "14px",
+              }}
+            >
+              <p>Periode: 15.07.2019 - 25.07.2019</p>
+              <p>Utbetalt: 12 345,00 kr</p>
+              <p style={{ color: "red" }}>Dager igjen: 0</p>
+            </div>
+          </Timeline.Period>
           <Timeline.Period
             start={new Date("Feb 1 2022")}
             end={new Date("May 2 2022")}
@@ -69,7 +82,7 @@ export const Default = () => {
             onSelectPeriod={() => console.log("PERIOD SELECTED!")}
             icon={<SuccessFilled />}
           >
-            <p>This i a p</p>
+            <p>This is some content right here</p>
           </Timeline.Period>
         </Timeline.Row>
         <Timeline.Row>

@@ -43,4 +43,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   }
 );
 
+//@ts-ignore
+TimelineRow.componentType = "row";
+
 export default TimelineRow;

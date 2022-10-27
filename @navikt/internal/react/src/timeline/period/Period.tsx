@@ -103,4 +103,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
   }
 );
 
+//@ts-ignore
+Period.componentType = "period";
+
 export default Period;

@@ -1,5 +1,5 @@
 import { endOfDay, startOfDay } from "date-fns";
-import React, { forwardRef, ReactNode } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
@@ -10,6 +10,7 @@ import {
 } from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./period/Period";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
+import { parseRows } from "./utils/timeline";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode | React.ReactNode[];
@@ -46,40 +47,13 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     if (!isMultipleRows) {
       children = [children];
     }
+    const rowChildren = React.Children.toArray(children).filter(
+      (c: any) => c?.type?.componentType === "row"
+    );
 
-    //@ts-ignore
-    const rows = children?.map((r: ReactNode) => {
-      let periods = [];
-      if (React.isValidElement(r) && r?.props?.children) {
-        if (Array.isArray(r.props.children)) {
-          for (let i = 0; i < r.props.children.length; i++) {
-            const p = r.props.children[i];
-
-            periods.push({
-              start: p?.props?.start,
-              end: p?.props?.end,
-              status: p?.props?.status || "default",
-              onSelectPeriod: p.props?.onSelectPeriod,
-              label: r.props.label,
-              icon: p.props.icon,
-              children: p.props.children,
-            });
-          }
-        } else {
-          periods.push({
-            start: r.props.children.props.start,
-            end: r.props.children.props.end,
-            status: r.props.children.props?.status || "default",
-            onSelectPeriod: r.props.children.props?.onSelectPeriod,
-            label: r.props.label,
-            icon: r.props.children.props?.icon,
-            children: r.props.children.props?.children,
-          });
-        }
-        return periods;
-      }
-      return [];
-    });
+    const rows = useMemo(() => {
+      return parseRows(rowChildren);
+    }, [rowChildren]);
 
     const start = startOfDay(useEarliestDate({ startDate, rows }));
     const endInclusive = endOfDay(useLatestDate({ endDate, rows }));

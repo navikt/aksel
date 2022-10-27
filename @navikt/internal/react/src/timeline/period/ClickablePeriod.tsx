@@ -23,7 +23,6 @@ const ClickablePeriod = React.memo(
     children,
   }: ClickablePeriodProps) => {
     const [openState, setOpenState] = useState(false);
-    console.log(children);
     return (
       <button
         ref={buttonRef}
