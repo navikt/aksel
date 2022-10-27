@@ -36,8 +36,12 @@
     ]
   },
   "eslintConfig": {
+    "plugins": [
+      "jest"
+    ],
     "extends": [
-      "react-app"
+      "react-app",
+      "eslint:recommended"
     ],
     "rules": {
       "import/no-anonymous-default-export": [
@@ -52,6 +56,10 @@
           "props": "never"
         }
       ]
+    },
+    "globals": {
+      "Locale": "readonly",
+      "JSX": "readonly"
     },
     "ignorePatterns": [
       "node_modules",
@@ -119,7 +127,6 @@
     "css-loader": "^5.0.1",
     "eslint": "^8.16.0",
     "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-flowtype": "^8.0.3",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
     "eslint-plugin-jsx-a11y": "^6.5.1",

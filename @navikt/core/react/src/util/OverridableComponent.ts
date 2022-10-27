@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface OverridableComponent<Component, Element extends HTMLElement> {
   (props: Component & React.RefAttributes<Element>): ReturnType<React.FC>;
 

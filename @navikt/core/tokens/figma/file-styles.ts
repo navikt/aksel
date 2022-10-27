@@ -13,7 +13,7 @@ const styleFieldNames = {
 
 const findNodeWithStyle = (node: Node<any>, styleId: StyleId): Node<any> => {
   if (
-    node.hasOwnProperty("styles") &&
+    "styles" in node &&
     styleFieldNames[styleId.styleType]?.some(
       (name) => node.styles[name] === styleId.id
     )
@@ -31,8 +31,6 @@ const findNodeWithStyle = (node: Node<any>, styleId: StyleId): Node<any> => {
 
 const findStyleValue = (document: DOCUMENT, styleId: StyleId) => {
   const node = findNodeWithStyle(document, styleId);
-  if (styleId.id === "5249:11258") {
-  }
 
   switch (styleId.styleType) {
     case "FILL":

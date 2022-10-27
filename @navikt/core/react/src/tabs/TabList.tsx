@@ -37,7 +37,7 @@ export const TabList = forwardRef<HTMLDivElement, TabListProps>(
       () =>
         debounce(() => {
           if (!listRef?.current) return;
-          const { scrollWidth, clientWidth } = listRef?.current;
+          const { scrollWidth, clientWidth } = listRef.current;
           let showStartScroll;
           let showEndScroll;
 

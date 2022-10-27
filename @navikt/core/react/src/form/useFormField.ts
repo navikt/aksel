@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import cl from "clsx";
 import { FieldsetContext } from "./index";
 import { useId } from "../index";
