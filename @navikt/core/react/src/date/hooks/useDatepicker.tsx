@@ -79,7 +79,7 @@ export const useDatepicker = (
 
   const locale = getLocaleFromString(_locale);
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const daypickerRef = useRef<HTMLDivElement>(null);
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -94,13 +94,16 @@ export const useDatepicker = (
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  const getSelectedDate = (date?: Date) => {
+  const updateDate = (date?: Date) => {
     onDateChange?.(date);
-    return date;
+    setSelectedDay(date);
   };
 
   const handleFocusIn = useCallback(
     (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         daypickerRef.current,
         inputRef.current,
@@ -122,14 +125,14 @@ export const useDatepicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedDay(getSelectedDate(defaultSelected));
+    updateDate(defaultSelected);
     setMonth(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
     setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
-    setSelectedDay(getSelectedDate(date));
+    updateDate(date);
     setMonth(date ?? today);
     setInputValue(date ? formatDateForInput(date, locale, "date") : "");
   };
@@ -157,11 +160,11 @@ export const useDatepicker = (
     }
 
     if (!required && selected) {
-      setSelectedDay(getSelectedDate(undefined));
+      updateDate(undefined);
       setInputValue("");
       return;
     }
-    setSelectedDay(getSelectedDate(day));
+    updateDate(day);
     setMonth(day);
     setInputValue(day ? formatDateForInput(day, locale, "date") : "");
   };
@@ -178,17 +181,17 @@ export const useDatepicker = (
       (disabled &&
         ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
     ) {
-      setSelectedDay(getSelectedDate(undefined));
+      updateDate(undefined);
       return;
     }
 
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (isBefore || isAfter) {
-      setSelectedDay(getSelectedDate(undefined));
+      updateDate(undefined);
       return;
     }
-    setSelectedDay(getSelectedDate(day));
+    updateDate(day);
     setMonth(day);
   };
 
