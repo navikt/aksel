@@ -38,12 +38,11 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          setupGituser: "github-actions[bot]"
           version: yarn version
           publish: yarn release
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
-          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Creating .npmrc
