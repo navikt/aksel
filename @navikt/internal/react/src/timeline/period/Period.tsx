@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import React, {
   forwardRef,
   ReactNode,
@@ -10,8 +9,8 @@ import React, {
 } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
-import { getConditionalClasses } from "../utils/period";
 import ClickablePeriod from "./ClickablePeriod";
+import NonClickablePeriod from "./NonClickablePeriod";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,15 +30,6 @@ export interface PeriodProps {
   width: Number;
   left: Number;
   icon?: ReactNode;
-}
-
-interface NonClickablePeriodProps extends PeriodProps {
-  divRef: RefObject<HTMLDivElement>;
-}
-
-interface ClickablePeriodProps extends PeriodProps {
-  buttonRef: RefObject<HTMLButtonElement>;
-  onSelectPeriod?: () => void;
 }
 
 export type PeriodType = React.ForwardRefExoticComponent<
@@ -106,37 +96,5 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
     );
   }
 );
-
-const ariaLabel = (startDate: Date, endDate: Date, status: String): string => {
-  const start = format(startDate, "dd.MM.yyyy");
-  const end = format(endDate, "dd.MM.yyyy");
-  return `${status} fra ${start} til ${end}`;
-};
-
-const NonClickablePeriod = ({
-  divRef,
-  start,
-  end,
-  status,
-  cropped,
-  direction,
-  left,
-  width,
-  icon,
-}: NonClickablePeriodProps) => {
-  return (
-    <div
-      ref={divRef}
-      className={getConditionalClasses(cropped, direction, status)}
-      aria-label={ariaLabel(start, end, status)}
-      style={{
-        width: `${width}%`,
-        left: `${left}%`,
-      }}
-    >
-      {icon}
-    </div>
-  );
-};
 
 export default Period;
