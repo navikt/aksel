@@ -32,7 +32,6 @@ const Bubble: BubbleType = forwardRef(
         ref={ref}
         className={cl("navds-chat__bubble", className)}
         style={{ backgroundColor: backgroundColor }}
-        tabIndex={0}
         {...rest}
       >
         {(timestamp || name) && (

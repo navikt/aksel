@@ -37,13 +37,18 @@
   },
   "eslintConfig": {
     "plugins": [
-      "jest"
+      "jest",
+      "jsx-a11y"
     ],
     "extends": [
       "react-app",
-      "eslint:recommended"
+      "eslint:recommended",
+      "plugin:jsx-a11y/recommended",
+      "plugin:react-hooks/recommended"
     ],
     "rules": {
+      "jsx-a11y/click-events-have-key-events": 0,
+      "jsx-a11y/no-static-element-interactions": 0,
       "import/no-anonymous-default-export": [
         "error",
         {
@@ -130,8 +135,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.30.0",
-    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
