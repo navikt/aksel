@@ -1,9 +1,8 @@
-import React, { forwardRef, useRef } from "react";
-import cl from "classnames";
+import React, { forwardRef, useMemo, useRef } from "react";
+import cl from "clsx";
 import ReactModal from "react-modal";
-import mergeRefs from "react-merge-refs";
 import { Close } from "@navikt/ds-icons";
-import { Button } from "..";
+import { Button, mergeRefs } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
 export interface ModalProps {
@@ -16,11 +15,11 @@ export interface ModalProps {
    */
   open: boolean;
   /**
-   * Called when modal wants to close
+   * Callback for modal wanting to close
    */
   onClose: () => void;
   /**
-   * If modal should close on overlay click
+   * If modal should close on overlay click (click outside Modal)
    * @default true
    */
   shouldCloseOnOverlayClick?: boolean;
@@ -29,10 +28,30 @@ export interface ModalProps {
    */
   className?: string;
   /**
-   * Toggles addition of a X-button on modal
+   * User defined classname for modal
+   */
+  overlayClassName?: string;
+  /**
+   * Removes close-button(X) when false
    * @default true
    */
   closeButton?: boolean;
+  /**
+   * Allows custom styling of ReactModal, in accordance with their typing
+   */
+  style?: ReactModal.Styles;
+  /**
+   * Callback for setting parent element modal will attach to
+   */
+  parentSelector?(): HTMLElement;
+  "aria-labelledby"?: string;
+  "aria-describedby"?: string;
+  "aria-modal"?: boolean;
+  /**
+   * Sets aria-label on modal
+   * @warning This should be set if not using 'aria-labelledby' or 'aria-describedby'
+   */
+  "aria-label"?: string;
 }
 
 interface ModalComponent
@@ -47,21 +66,27 @@ type ModalLifecycle = {
   setAppElement?: (element: any) => void;
 };
 
-const Modal = forwardRef<ReactModal, ModalProps>(
+export const Modal = forwardRef<ReactModal, ModalProps>(
   (
     {
       children,
       open,
       onClose,
       className,
+      overlayClassName,
       shouldCloseOnOverlayClick = true,
       closeButton = true,
+      "aria-describedby": ariaDescribedBy,
+      "aria-labelledby": ariaLabelledBy,
+      "aria-modal": ariaModal,
+      "aria-label": contentLabel,
+      style,
       ...rest
     },
     ref
   ) => {
     const modalRef = useRef<ReactModal | null>(null);
-    const mergedRef = mergeRefs([modalRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const onModalCloseRequest = (e) => {
@@ -75,12 +100,19 @@ const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
+        style={style}
         isOpen={open}
         ref={mergedRef}
         className={cl("navds-modal", className)}
-        overlayClassName="navds-modal__overlay"
+        overlayClassName={cl("navds-modal__overlay", overlayClassName)}
         shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
         onRequestClose={(e) => onModalCloseRequest(e)}
+        aria={{
+          describedby: ariaDescribedBy,
+          labelledby: ariaLabelledBy,
+          modal: ariaModal,
+        }}
+        contentLabel={contentLabel}
       >
         {children}
         {closeButton && (
@@ -92,9 +124,8 @@ const Modal = forwardRef<ReactModal, ModalProps>(
             variant="tertiary"
             ref={buttonRef}
             onClick={onClose}
-          >
-            <Close title="Lukk modalvindu" />
-          </Button>
+            icon={<Close title="Lukk modalvindu" />}
+          />
         )}
       </ReactModal>
     );

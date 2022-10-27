@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { FieldsetContext } from "./index";
 import { useId } from "../index";
 
@@ -18,6 +18,7 @@ export interface FormFieldProps {
   size?: "medium" | "small";
   /**
    * Disables element
+   * @note Avoid using if possible for accessibility purposes
    */
   disabled?: boolean;
   /**
@@ -59,7 +60,8 @@ export const useFormField = (props: FormFieldProps, prefix: string) => {
       "aria-invalid": hasError,
       "aria-describedby":
         cl(props["aria-describedby"], {
-          [inputDescriptionId]: !!props?.description,
+          [inputDescriptionId]:
+            !!props?.description && typeof props?.description === "string",
           [errorId]: showErrorMsg,
           [fieldset?.errorId ?? ""]: hasError && !!fieldset?.error,
         }) || undefined,

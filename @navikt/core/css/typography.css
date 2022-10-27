@@ -1,3 +1,13 @@
+:root,
+:host,
+[data-theme="light"] {
+  --navds-error-message-color-text: var(--navds-semantic-color-feedback-danger-text);
+}
+
+[data-theme="dark"] {
+  --navds-error-message-color-text: var(--navds-global-color-red-300);
+}
+
 /* Heading */
 .navds-heading {
   font-weight: var(--navds-font-weight-bold);
@@ -161,7 +171,6 @@
 /* Small text */
 .navds-detail {
   font-size: var(--navds-font-size-small);
-  font-weight: var(--navds-font-weight-bold);
   letter-spacing: 0.004em;
   line-height: var(--navds-font-line-height-medium);
   margin: 0;
@@ -171,10 +180,18 @@
   margin-bottom: var(--navds-spacing-2);
 }
 
+.navds-detail.navds-typo--uppercase {
+  text-transform: uppercase;
+}
+
 .navds-detail--small {
   font-weight: var(--navds-font-weight-regular);
 }
 
 .navds-detail--small.navds-typo--spacing {
   margin-bottom: var(--navds-spacing-2);
+}
+
+.navds-error-message {
+  color: var(--navds-error-message-color-text);
 }

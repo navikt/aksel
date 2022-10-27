@@ -1,11 +1,12 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Heading, BodyShort } from "../..";
 import ErrorSummaryItem, { ErrorSummaryItemType } from "./ErrorSummaryItem";
+import { useId } from "../../util";
 
 export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * ErrorSummaryItems
+   * Collectipn of ErrorSummary.Item
    */
   children: React.ReactNode;
   /**
@@ -18,7 +19,7 @@ export interface ErrorSummaryProps extends HTMLAttributes<HTMLDivElement> {
    */
   heading?: React.ReactNode;
   /**
-   * Allows setting a different HTML <tag>
+   * Allows setting a different HTML h-tag
    * @default "h2"
    */
   headingTag?: React.ElementType<any>;
@@ -31,7 +32,7 @@ interface ErrorSummaryComponent
   Item: ErrorSummaryItemType;
 }
 
-const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
+export const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
   (
     {
       children,
@@ -43,8 +44,10 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
     },
     ref
   ) => {
+    const headingId = useId();
+
     return (
-      <div
+      <section
         ref={ref}
         {...rest}
         className={cl(
@@ -53,12 +56,15 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
           `navds-error-summary--${size}`
         )}
         tabIndex={-1}
-        role="region"
+        aria-live="polite"
+        aria-relevant="all"
+        aria-labelledby={headingId}
       >
         <Heading
           className="navds-error-summary__heading"
           as={headingTag}
           size="small"
+          id={headingId}
         >
           {heading}
         </Heading>
@@ -67,7 +73,7 @@ const ErrorSummary = forwardRef<HTMLDivElement, ErrorSummaryProps>(
             return <li key={child?.toString()}>{child}</li>;
           })}
         </BodyShort>
-      </div>
+      </section>
     );
   }
 ) as ErrorSummaryComponent;

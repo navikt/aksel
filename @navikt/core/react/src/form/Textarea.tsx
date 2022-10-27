@@ -1,10 +1,9 @@
-import React, { forwardRef } from "react";
-import cl from "classnames";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
-import { BodyShort, Label, omit } from "..";
-import ErrorMessage from "./ErrorMessage";
+import React, { forwardRef, useState } from "react";
+import cl from "clsx";
+import { BodyShort, BodyLong, Label, ErrorMessage, omit, Detail } from "..";
 import { FormFieldProps, useFormField } from "./useFormField";
 import { useId } from "..";
+import TextareaAutosize from "../util/TextareaAutoSize";
 
 /**
  * TODO: Mulighet for lokalisering av sr-only/counter text
@@ -13,18 +12,25 @@ export interface TextareaProps
   extends FormFieldProps,
     React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   /**
-   * Visually allowed length of content
+   * Allowed character-count for content
+   * @note This is just a visual validator, you need to set actual character-limits if needed
    */
   maxLength?: number;
-  value: string;
-  onChange: React.ChangeEventHandler<HTMLTextAreaElement>;
   /**
-   * Maximum number of rows to display.
+   * Controlled value
+   */
+  value?: string;
+  /**
+   * Defaults input-value without needing controlled-state
+   */
+  defaultValue?: string;
+  /**
+   * Maximum number of character rows to display.
    * @bug Internal scrolling with `maxLength` scrolls over maxLength-text
    */
   maxRows?: number;
   /**
-   * Minimum number of rows to display.
+   * Minimum number of character-rows to display when empty.
    */
   minRows?: number;
   /**
@@ -35,9 +41,13 @@ export interface TextareaProps
    * If enabled shows the label and description for screenreaders only
    */
   hideLabel?: boolean;
+  /**
+   * Enables resizing of field
+   */
+  resize?: boolean;
 }
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
       inputProps,
@@ -54,11 +64,28 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
       description,
       maxLength,
       hideLabel = false,
+      resize,
       ...rest
     } = props;
 
-    const maxLengthId = `TextareaMaxLength-${useId()}`;
+    const maxLengthId = useId();
     const hasMaxLength = maxLength !== undefined && maxLength > 0;
+
+    const [controlledValue, setControlledValue] = useState<string>(
+      props?.defaultValue ?? ""
+    );
+
+    const getMinRows = () => {
+      let rows = rest?.minRows ? rest?.minRows : 3;
+      if (size === "small") {
+        rows = rest?.minRows ? rest?.minRows : 2;
+      }
+      return rows;
+    };
+
+    const describedBy = cl(inputProps["aria-describedby"], {
+      [maxLengthId ?? ""]: hasMaxLength,
+    });
 
     return (
       <div
@@ -67,37 +94,58 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           "navds-form-field",
           `navds-form-field--${size}`,
           {
+            "navds-form-field--disabled": !!inputProps.disabled,
             "navds-textarea--error": hasError,
-            "navds-textarea--disabled": !!inputProps.disabled,
+            "navds-textarea--resize": resize,
           }
         )}
       >
         <Label
           htmlFor={inputProps.id}
           size={size}
-          as="label"
-          className={cl("navds-textarea__label", {
+          className={cl("navds-form-field__label", {
             "navds-sr-only": hideLabel,
           })}
         >
           {label}
         </Label>
         {!!description && (
-          <BodyShort
-            as="div"
-            className={cl("navds-textarea__description", {
-              "navds-sr-only": hideLabel,
-            })}
-            id={inputDescriptionId}
-            size={size}
-          >
-            {description}
-          </BodyShort>
+          <>
+            {size === "medium" ? (
+              <BodyLong
+                className={cl("navds-form-field__description", {
+                  "navds-sr-only": hideLabel,
+                })}
+                id={inputDescriptionId}
+                size="small"
+                as="div"
+              >
+                {description}
+              </BodyLong>
+            ) : (
+              <Detail
+                className={cl("navds-form-field__description", {
+                  "navds-sr-only": hideLabel,
+                })}
+                id={inputDescriptionId}
+                size="small"
+                as="div"
+              >
+                {description}
+              </Detail>
+            )}
+          </>
         )}
         <div className="navds-textarea__wrapper">
           <TextareaAutosize
             {...omit(rest, ["error", "errorId", "size"])}
             {...inputProps}
+            onChange={(e) =>
+              props.onChange
+                ? props.onChange(e)
+                : setControlledValue(e.target.value)
+            }
+            minRows={getMinRows()}
             ref={ref}
             className={cl(
               "navds-textarea__input",
@@ -107,25 +155,27 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
                 "navds-textarea--counter": hasMaxLength,
               }
             )}
-            aria-describedby={cl(inputProps["aria-describedby"], {
-              [maxLengthId]: hasMaxLength,
-            })}
+            {...(describedBy ? { "aria-describedby": describedBy } : {})}
           />
           {hasMaxLength && (
             <>
               <span id={maxLengthId} className="navds-sr-only">
-                Tekstområde med plass til {maxLength} tegn., Textarea can have{" "}
-                {maxLength} signs.
+                Tekstområde med plass til {maxLength} tegn.
               </span>
               <Counter
                 maxLength={maxLength}
-                currentLength={props.value.length}
+                currentLength={props.value?.length ?? controlledValue?.length}
                 size={size}
               />
             </>
           )}
         </div>
-        <div id={errorId} aria-relevant="additions removals" aria-live="polite">
+        <div
+          className="navds-form-field__error"
+          id={errorId}
+          aria-relevant="additions removals"
+          aria-live="polite"
+        >
           {showErrorMsg && (
             <ErrorMessage size={size}>{props.error}</ErrorMessage>
           )}
@@ -147,8 +197,8 @@ export const Counter = ({ maxLength, currentLength, size }) => {
       size={size}
     >
       {difference < 0
-        ? `Du har ${Math.abs(difference)} tegn for mye`
-        : `Du har ${difference} tegn igjen`}
+        ? `Antall tegn for mye ${Math.abs(difference)}`
+        : `Antall tegn igjen ${difference}`}
     </BodyShort>
   );
 };

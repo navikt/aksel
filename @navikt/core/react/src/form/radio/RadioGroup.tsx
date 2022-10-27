@@ -1,24 +1,26 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Fieldset, FieldsetContext, FieldsetProps } from "..";
 import { useId } from "../..";
 
 export interface RadioGroupContextProps {
   name: string;
-  defaultValue?: string;
-  value?: string;
-  onChange: (value: string) => void;
+  defaultValue?: any;
+  value?: any;
+  onChange: (value: any) => void;
   required?: boolean;
 }
 
-export const RadioGroupContext = React.createContext<RadioGroupContextProps | null>(
-  null
-);
+export const RadioGroupContext =
+  React.createContext<RadioGroupContextProps | null>(null);
 
 export interface RadioGroupProps
-  extends Omit<FieldsetProps, "onChange" | "errorPropagation"> {
+  extends Omit<
+    FieldsetProps,
+    "onChange" | "errorPropagation" | "defaultValue"
+  > {
   /**
-   * Collection of <Radio>-elements
+   * Collection of <Radio />-elements
    */
   children: React.ReactNode;
   /**
@@ -26,24 +28,24 @@ export interface RadioGroupProps
    */
   name?: string;
   /**
-   * Default checked radiobutton
+   * Default checked Radio
    */
-  defaultValue?: string;
+  defaultValue?: any;
   /**
-   * Controlled state for Radiobutton
+   * Controlled state for Radio
    */
-  value?: string;
+  value?: any;
   /**
-   * Returns current checked radiobutton in group
+   * Returns current checked Radio in group
    */
-  onChange?: (value: string) => void;
+  onChange?: (value: any) => void;
   /**
    * Tells Fieldset if group is required
    */
   required?: boolean;
 }
 
-const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
+export const RadioGroup = forwardRef<HTMLFieldSetElement, RadioGroupProps>(
   (
     {
       children,

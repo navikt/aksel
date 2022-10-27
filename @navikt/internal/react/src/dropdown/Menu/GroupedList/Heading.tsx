@@ -1,28 +1,31 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
-export interface HeadingProps extends React.HTMLAttributes<HTMLDetailsElement> {
+export interface GroupedHeadingProps
+  extends React.HTMLAttributes<HTMLDetailsElement> {
   /**
    * Heading
    */
   children: React.ReactNode;
 }
 
-export type HeadingType = React.ForwardRefExoticComponent<
-  HeadingProps & React.RefAttributes<HTMLElement>
+export type GroupedHeadingType = React.ForwardRefExoticComponent<
+  GroupedHeadingProps & React.RefAttributes<HTMLElement>
 >;
 
-const Heading: HeadingType = forwardRef(({ className, ...rest }, ref) => (
-  <dt
-    {...rest}
-    ref={ref}
-    className={cl(
-      "navdsi-dropdown__list-heading",
-      "navds-heading",
-      "navds-heading--xsmall",
-      className
-    )}
-  />
-));
+export const GroupedHeading: GroupedHeadingType = forwardRef(
+  ({ className, ...rest }, ref) => (
+    <dt
+      {...rest}
+      ref={ref}
+      className={cl(
+        "navdsi-dropdown__list-heading",
+        "navds-heading",
+        "navds-heading--xsmall",
+        className
+      )}
+    />
+  )
+);
 
-export default Heading;
+export default GroupedHeading;

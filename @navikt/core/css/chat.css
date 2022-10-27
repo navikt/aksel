@@ -1,0 +1,89 @@
+:root,
+:host {
+  --navds-chat-color-background: var(--navds-semantic-color-canvas-background);
+  --navds-chat-color-avatar: var(--navds-semantic-color-text);
+  --navds-chat-color-avatar-background: var(--navds-semantic-color-canvas-background);
+}
+
+.navds-chat {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--navds-spacing-4);
+  padding-right: var(--navds-spacing-16);
+}
+
+.navds-chat--right {
+  flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: var(--navds-spacing-16);
+}
+
+.navds-chat__bubble-wrapper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-3);
+}
+
+.navds-chat--right .navds-chat__bubble-wrapper {
+  align-items: flex-end;
+}
+
+.navds-chat__avatar {
+  align-items: center;
+  background: var(--navds-chat-color-avatar-background);
+  color: var(--navds-chat-color-avatar);
+  border-radius: var(--navds-border-radius-full);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  overflow: hidden;
+  height: 3rem;
+  width: 3rem;
+}
+
+.navds-chat__avatar svg {
+  align-self: center;
+  height: 100%;
+  width: 100%;
+}
+
+.navds-chat__bubble {
+  padding: 1rem;
+  box-shadow: var(--navds-shadow-small);
+  width: fit-content;
+  max-width: 37.5rem;
+  background-color: var(--navds-chat-color-background);
+  border-radius: var(--navds-border-radius-xlarge);
+  border-bottom-left-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-chat__bubble:focus {
+  box-shadow: var(--navds-shadow-focus);
+  outline: none;
+}
+
+.navds-chat--right .navds-chat__bubble {
+  border-radius: var(--navds-border-radius-xlarge);
+  border-bottom-right-radius: 2px;
+}
+
+.navds-chat__top-text {
+  color: var(--navds-semantic-color-text);
+  display: flex;
+  gap: var(--navds-spacing-2);
+  align-items: baseline;
+}
+
+.navds-chat--right .navds-chat__top-text {
+  align-self: flex-end;
+}
+
+.navds-chat__name {
+  font-weight: var(--navds-font-weight-bold);
+}

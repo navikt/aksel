@@ -1,54 +1,88 @@
 import React, { useState } from "react";
-import { Table } from "../index";
-import { Alert, Checkbox, Link } from "@navikt/ds-react";
+import { Table } from "../";
+import { Alert, Button, Checkbox, Link } from "../..";
 
 export default {
-  title: "ds-react/table",
+  title: "ds-react/Table",
   component: Table,
 };
 
-export const All = () => {
-  const TableComponent = (props) => (
-    <Table {...props}>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell>ID</Table.HeaderCell>
-          <Table.HeaderCell>Fornavn</Table.HeaderCell>
-          <Table.HeaderCell>Etternavn</Table.HeaderCell>
-          <Table.HeaderCell>Rolle</Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Table.Row>
-          <Table.HeaderCell>1</Table.HeaderCell>
-          <Table.DataCell>Jean-Luc</Table.DataCell>
-          <Table.DataCell>Picard</Table.DataCell>
-          <Table.DataCell>Kaptein</Table.DataCell>
-        </Table.Row>
-        <Table.Row>
-          <Table.HeaderCell>2</Table.HeaderCell>
-          <Table.DataCell>William</Table.DataCell>
-          <Table.DataCell>Riker</Table.DataCell>
-          <Table.DataCell>Kommandør</Table.DataCell>
-        </Table.Row>
-        <Table.Row>
-          <Table.HeaderCell>3</Table.HeaderCell>
-          <Table.DataCell>Geordi</Table.DataCell>
-          <Table.DataCell>La Forge</Table.DataCell>
-          <Table.DataCell>Sjefsingeniør</Table.DataCell>
-        </Table.Row>
-      </Table.Body>
-    </Table>
-  );
+const TableComponent = (props) => (
+  <Table {...props}>
+    <Table.Header>
+      <Table.Row>
+        {props.button && <Table.HeaderCell>Action</Table.HeaderCell>}
+        <Table.HeaderCell>ID</Table.HeaderCell>
+        <Table.HeaderCell>Fornavn</Table.HeaderCell>
+        <Table.HeaderCell>Etternavn</Table.HeaderCell>
+        <Table.HeaderCell>Rolle</Table.HeaderCell>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
+        {props.button && (
+          <Table.DataCell
+            style={{
+              paddingTop: 6,
+              paddingBottom: 6,
+            }}
+          >
+            <Button size="xsmall">Click me!</Button>
+          </Table.DataCell>
+        )}
+        <Table.HeaderCell>1</Table.HeaderCell>
+        <Table.DataCell>Jean-Luc</Table.DataCell>
+        <Table.DataCell>Picard</Table.DataCell>
+        <Table.DataCell>Kaptein</Table.DataCell>
+      </Table.Row>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
+        {props.button && (
+          <Table.DataCell
+            style={{
+              paddingTop: 6,
+              paddingBottom: 6,
+            }}
+          >
+            <Button size="xsmall">Click me!</Button>
+          </Table.DataCell>
+        )}
+        <Table.HeaderCell>2</Table.HeaderCell>
+        <Table.DataCell>William</Table.DataCell>
+        <Table.DataCell>Riker</Table.DataCell>
+        <Table.DataCell>Kommandør</Table.DataCell>
+      </Table.Row>
+      <Table.Row shadeOnHover={props.shadeOnHover}>
+        {props.button && (
+          <Table.DataCell
+            style={{
+              paddingTop: 6,
+              paddingBottom: 6,
+            }}
+          >
+            <Button size="xsmall">Click me!</Button>
+          </Table.DataCell>
+        )}
+        <Table.HeaderCell>3</Table.HeaderCell>
+        <Table.DataCell>Geordi</Table.DataCell>
+        <Table.DataCell>La Forge</Table.DataCell>
+        <Table.DataCell>Sjefsingeniør</Table.DataCell>
+      </Table.Row>
+    </Table.Body>
+  </Table>
+);
+
+export const Default = () => <TableComponent />;
+export const Zebra = () => <TableComponent zebraStripes />;
+export const NoShadeOnHover = () => <TableComponent shadeOnHover={false} />;
+export const ZebraNoShadeOnHover = () => (
+  <TableComponent zebraStripes shadeOnHover={false} />
+);
+export const Small = () => <TableComponent size="small" />;
+export const Buttons = () => <TableComponent size="small" button />;
+
+export const WithDivs = () => {
   return (
     <>
-      <h1>Table</h1>
-      <TableComponent />
-      <h2>Zebra</h2>
-      <TableComponent zebraStripes />
-      <h2>Small Table</h2>
-      <TableComponent size="small" />
-      <h2>Table with divs</h2>
       <Alert variant="warning">
         Obs! Hvis man skal bygge tabeller uten å bruke vanlig {"<tabell> "}
         -markup er det svært viktig at man supplerer elementene med{" "}
@@ -114,15 +148,8 @@ export const All = () => {
   );
 };
 
-export const Selection = () => (
-  <>
-    <h1>Selection</h1>
-    <h2>Medium</h2>
-    <SelectionTable />
-    <h2>Small</h2>
-    <SelectionTable size="small" />
-  </>
-);
+export const Selection = () => <SelectionTable />;
+export const SelectionSmall = () => <SelectionTable size="small" />;
 
 const SelectionTable = ({ size = "medium" }: { size?: "small" | "medium" }) => {
   const useToggleList = (initialState) => {

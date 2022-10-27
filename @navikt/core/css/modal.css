@@ -1,8 +1,7 @@
-:root {
-  --navds-modal-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-modal-color-overlay: rgba(38, 38, 38, 0.7);
+:root,
+:host {
+  --navds-modal-color-background: var(--navds-semantic-color-component-background-light);
+  --navds-modal-color-overlay: rgb(38 38 38 / 0.7);
 }
 
 .ReactModal__Body--open {
@@ -11,7 +10,7 @@
 
 .navds-modal {
   background-color: var(--navds-modal-color-background);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   display: block;
   position: relative;
   overflow: auto;

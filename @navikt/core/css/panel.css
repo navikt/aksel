@@ -1,14 +1,13 @@
-:root {
-  --navds-panel-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-panel-color-background: var(--navds-semantic-color-component-background-light);
   --navds-panel-color-border: var(--navds-semantic-color-border-muted);
 }
 
 .navds-panel {
   background-color: var(--navds-panel-color-background);
   padding: var(--navds-spacing-4);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-small);
   border: 1px solid transparent;
 }
 

@@ -1,13 +1,12 @@
-import cl from "classnames";
+import cl from "clsx";
 import React, { FieldsetHTMLAttributes, forwardRef, useContext } from "react";
-import { BodyShort, Detail, Label, omit } from "../..";
-import ErrorMessage from "../ErrorMessage";
+import { BodyLong, Detail, Label, ErrorMessage, omit } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useFieldset } from "./useFieldset";
 
 export type FieldsetContextProps = {
   /**
-   * Error message applied to element
+   * Error message applied to element,
    */
   error?: React.ReactNode;
   /**
@@ -18,12 +17,16 @@ export type FieldsetContextProps = {
    * Changes paddings, margins and font-sizes
    */
   size: "medium" | "small";
+  /**
+   * Sets fieldset and all form-children to disabled
+   */
   disabled: boolean;
 };
 
 export const FieldsetContext = React.createContext<FieldsetContextProps | null>(
   null
 );
+
 export interface FieldsetProps
   extends FormFieldProps,
     FieldsetHTMLAttributes<HTMLFieldSetElement> {
@@ -46,7 +49,7 @@ export interface FieldsetProps
   errorPropagation?: boolean;
 }
 
-const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
+export const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
   (props, ref) => {
     const {
       inputProps,
@@ -103,7 +106,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
           </Label>
           {!!description &&
             (size === "medium" ? (
-              <BodyShort
+              <BodyLong
                 className={cl("navds-fieldset__description", {
                   "navds-sr-only": !!hideLegend,
                 })}
@@ -112,7 +115,7 @@ const Fieldset = forwardRef<HTMLFieldSetElement, FieldsetProps>(
                 as="div"
               >
                 {props.description}
-              </BodyShort>
+              </BodyLong>
             ) : (
               <Detail
                 className={cl("navds-fieldset__description", {

@@ -1,2 +1,4 @@
-export { default as CopyToClipboard } from "./CopyToClipboard";
-export * from "./CopyToClipboard";
+export {
+  CopyToClipboardProps,
+  default as CopyToClipboard,
+} from "./CopyToClipboard";

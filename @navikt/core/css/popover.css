@@ -1,17 +1,16 @@
-:root {
-  --navds-popover-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-popover-color-background: var(--navds-semantic-color-component-background-light);
   --navds-popover-color-border: var(--navds-semantic-color-border-muted);
 }
 
 .navds-popover {
   z-index: var(--navds-z-index-popover);
   background-color: var(--navds-popover-color-background);
-  box-shadow: var(--navds-shadow-popover);
+  box-shadow: var(--navds-shadow-medium);
   border: 1px solid;
   border-color: var(--navds-popover-color-border);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
 }
 
 .navds-popover__content {
@@ -28,55 +27,33 @@
 }
 
 .navds-popover__arrow {
+  position: absolute;
   z-index: -1;
-}
-
-.navds-popover__arrow::before {
-  display: block;
-  content: "";
   transform: rotate(45deg);
   background-color: var(--navds-popover-color-background);
   border: 1px solid;
   border-color: var(--navds-popover-color-border);
   width: 1rem;
   height: 1rem;
-  top: 0;
-  left: 0;
 }
 
-.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow {
-  bottom: calc(1rem / -2);
-}
-
-.navds-popover[data-popper-placement^="top"] > .navds-popover__arrow::before {
+.navds-popover[data-placement^="top"] > .navds-popover__arrow {
   border-left-color: transparent;
   border-top-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow {
-  top: calc(1rem / -2);
-}
-
 /* prettier-ignore */
-.navds-popover[data-popper-placement^="bottom"] > .navds-popover__arrow::before {
+.navds-popover[data-placement^="bottom"] > .navds-popover__arrow {
   border-bottom-color: transparent;
   border-right-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow {
-  right: calc(1rem / -2);
-}
-
-.navds-popover[data-popper-placement^="left"] > .navds-popover__arrow::before {
+.navds-popover[data-placement^="left"] > .navds-popover__arrow {
   border-left-color: transparent;
   border-bottom-color: transparent;
 }
 
-.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow {
-  left: calc(1rem / -2);
-}
-
-.navds-popover[data-popper-placement^="right"] > .navds-popover__arrow::before {
+.navds-popover[data-placement^="right"] > .navds-popover__arrow {
   border-right-color: transparent;
   border-top-color: transparent;
 }

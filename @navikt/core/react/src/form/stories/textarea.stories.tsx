@@ -1,96 +1,120 @@
-import React, { useState } from "react";
-import { Textarea } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
+import React from "react";
+import { Textarea } from "../index";
 export default {
-  title: "ds-react/form/textarea",
+  title: "ds-react/form/Textarea",
   component: Textarea,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    description: {
+      type: "string",
+    },
+    error: {
+      type: "string",
+    },
+    hideLabel: {
+      type: "boolean",
+    },
+    disabled: {
+      type: "boolean",
+    },
+    maxRows: {
+      type: "number",
+    },
+    minRows: {
+      type: "number",
+    },
+  },
 } as Meta;
 
-export const All = () => {
-  const [value, setValue] = useState("");
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
+export const Default = (props) => {
   return (
-    <div style={{ maxWidth: 400 }}>
-      <h1>Textarea</h1>
+    <Textarea
+      {...props}
+      maxLength={props?.maxLength ?? 100}
+      label="Ipsum enim quis culpa"
+    />
+  );
+};
 
-      <Textarea label="In anim elit" value={value} onChange={handleChange} />
+Default.args = {
+  maxLength: 100,
+  resize: false,
+};
 
-      <h2>Description</h2>
+export const Small = () => {
+  return <Textarea size="small" label="Ipsum enim quis culpa" />;
+};
 
+export const Description = () => {
+  return (
+    <div className="colgap">
       <Textarea
-        label="In anim elit"
-        description={<div>Reprehenderit esse proident</div>}
-        value={value}
-        onChange={handleChange}
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
       />
-
-      <h2>maxLength</h2>
-
       <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        maxLength={400}
-        value={value}
-        onChange={handleChange}
-      />
-
-      <h2>Errors</h2>
-
-      <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        error="Textarea error"
-        maxLength={400}
-        value={value}
-        onChange={handleChange}
-      />
-
-      <h2>Sizing</h2>
-
-      <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        maxLength={400}
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
-        value={value}
-        onChange={handleChange}
-      />
-
-      <h2>hideLabel</h2>
-
-      <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        maxLength={400}
-        hideLabel
-        value={value}
-        onChange={handleChange}
-      />
-
-      <h2>Disabled</h2>
-
-      <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        maxLength={400}
-        disabled
-        value="Consectetur commodo mollit voluptate esse minim elit deserunt fugiat consectetur laboris."
-        onChange={handleChange}
-      />
-      <h2>Readonly</h2>
-
-      <Textarea
-        label="In anim elit"
-        description="Reprehenderit esse proident"
-        maxLength={400}
-        readOnly
-        value="Consectetur commodo mollit voluptate esse minim elit deserunt fugiat consectetur laboris."
-        onChange={handleChange}
       />
     </div>
   );
+};
+
+export const Error = () => {
+  return (
+    <div className="colgap">
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      />
+
+      <Textarea
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        size="small"
+      />
+    </div>
+  );
+};
+
+export const Disabled = () => {
+  return (
+    <div className="colgap">
+      <Textarea label="Ipsum enim quis culpa" disabled />
+      <Textarea label="Ipsum enim quis culpa" disabled size="small" />
+    </div>
+  );
+};
+
+export const HideLabel = () => {
+  return <Textarea label="Ipsum enim quis culpa" hideLabel />;
+};
+
+export const MaxLength = () => {
+  return <Textarea maxLength={200} label="Ipsum enim quis culpa" />;
+};
+
+export const MinRows = () => {
+  return <Textarea minRows={5} label="Ipsum enim quis culpa" />;
+};
+
+export const MaxRows = () => {
+  return (
+    <Textarea
+      maxRows={3}
+      value="Aute fugiat ut culpa enim ad culpa proident adipisicing anim proident ipsum elit. Cillum Lorem magna nisi cupidatat consequat culpa. Veniam ex quis elit dolore ea cupidatat fugiat in. Sint proident magna duis consequat velit ea velit pariatur in dolore ad. Aliqua officia nostrud veniam pariatur eu sint elit qui amet."
+      label="Ipsum enim quis culpa"
+    />
+  );
+};
+
+export const Resize = () => {
+  return <Textarea resize label="Ipsum enim quis culpa" />;
 };

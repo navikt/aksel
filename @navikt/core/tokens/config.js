@@ -30,7 +30,18 @@ module.exports = {
           format: "css/variables",
           options: {
             outputReferences: true,
+            selector: ":root, :host",
           },
+        },
+      ],
+    },
+    ts: {
+      transformGroup: "js",
+      buildPath: "dist/",
+      files: [
+        {
+          destination: "tokens.d.ts",
+          format: "typescript/es6-declarations",
         },
       ],
     },

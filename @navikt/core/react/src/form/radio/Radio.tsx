@@ -1,23 +1,27 @@
 import React, { forwardRef, InputHTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort, Detail, omit } from "../..";
 import { FormFieldProps } from "../useFormField";
 import { useRadio } from "./useRadio";
 
 export interface RadioProps
   extends Omit<FormFieldProps, "error" | "errorId">,
-    Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+    Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "value"> {
   /**
-   * Label for radio
+   * Radio label
    */
   children: React.ReactNode;
   /**
    * The value of the HTML element
    */
-  value: string;
+  value: any;
+  /**
+   * Adds a description to extend labling of Radio
+   */
+  description?: string;
 }
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
+export const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
   const { inputProps, size, hasError } = useRadio(props);
 
   const Description = size === "medium" ? BodyShort : Detail;
@@ -36,20 +40,20 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>((props, ref) => {
         ref={ref}
       />
       <label htmlFor={inputProps.id} className="navds-radio__label">
-        <div className="navds-radio__content">
-          <BodyShort as="div" size={size}>
+        <span className="navds-radio__content">
+          <BodyShort as="span" size={size}>
             {props.children}
           </BodyShort>
           {props.description && (
             <Description
-              as="div"
+              as="span"
               size="small"
               className="navds-radio__description"
             >
               {props.description}
             </Description>
           )}
-        </div>
+        </span>
       </label>
     </div>
   );

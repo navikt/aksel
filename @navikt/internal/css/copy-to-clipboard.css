@@ -1,3 +1,7 @@
+.navdsi-copy-to-clipboard:not(:hover):not(:active) {
+  color: var(--navds-semantic-color-text);
+}
+
 .navdsi-copy-to-clipboard__popover {
   padding: var(--navds-spacing-1);
 }

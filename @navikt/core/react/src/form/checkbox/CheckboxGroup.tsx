@@ -1,11 +1,11 @@
 import React, { createContext, forwardRef, useContext, useState } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Fieldset, FieldsetProps, FieldsetContext } from "..";
 
 export interface CheckboxGroupState {
-  readonly defaultValue?: readonly string[];
-  readonly value?: readonly string[];
-  toggleValue(value: string): void;
+  readonly defaultValue?: readonly any[];
+  readonly value?: readonly any[];
+  toggleValue(value: any): void;
 }
 
 export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
@@ -13,36 +13,42 @@ export const CheckboxGroupContext = createContext<CheckboxGroupState | null>(
 );
 
 export interface CheckboxGroupProps
-  extends Omit<FieldsetProps, "onChange" | "errorPropagation"> {
+  extends Omit<
+    FieldsetProps,
+    "onChange" | "errorPropagation" | "defaultValue"
+  > {
   /**
-   * Checkboxes
+   * Collection of <Checkbox/>
    */
   children: React.ReactNode;
   /**
-   * Controlled state for group
+   * Controlled state for checkboxes.
    */
-  value?: string[];
+  value?: any[];
   /**
    * Default checked checkboxes on render
    */
-  defaultValue?: string[];
+  defaultValue?: any[];
   /**
    * Returns current checked checkboxes in group
    */
-  onChange?: (value: string[]) => void;
+  onChange?: (value: any[]) => void;
 }
 
-const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
+export const CheckboxGroup = forwardRef<
+  HTMLFieldSetElement,
+  CheckboxGroupProps
+>(
   (
     { value, defaultValue, onChange = () => {}, children, className, ...rest },
     ref
   ) => {
     const fieldset = useContext(FieldsetContext);
 
-    const [state, setState] = useState<string[]>([]);
+    const [state, setState] = useState<any[]>(defaultValue ?? []);
 
-    const handleChange = (v: string) => {
-      const newValue = value ? value : state;
+    const toggleValue = (v: any) => {
+      const newValue = value ?? state;
       const newState = newValue.includes(v)
         ? newValue.filter((x) => x !== v)
         : [...newValue, v];
@@ -65,7 +71,7 @@ const CheckboxGroup = forwardRef<HTMLFieldSetElement, CheckboxGroupProps>(
           value={{
             value,
             defaultValue,
-            toggleValue: (value: string) => handleChange(value),
+            toggleValue,
           }}
         >
           <div className="navds-checkboxes">{children}</div>

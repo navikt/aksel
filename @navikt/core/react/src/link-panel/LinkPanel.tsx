@@ -1,7 +1,7 @@
 import React, { forwardRef } from "react";
 import { Panel, OverridableComponent } from "..";
 import { Next } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import { LinkPanelTitle, LinkPanelTitleType } from "./LinkPanelTitle";
 import {
   LinkPanelDescription,
@@ -15,7 +15,8 @@ export interface LinkPanelProps
    */
   children?: React.ReactNode;
   /**
-   * Toggles border on panel
+   * Adds border to panel if true
+   * @default true
    */
   border?: boolean;
 }
@@ -26,7 +27,7 @@ interface LinkPanelComponentType
   Description: LinkPanelDescriptionType;
 }
 
-const LinkPanelComponent: OverridableComponent<
+export const LinkPanelComponent: OverridableComponent<
   LinkPanelProps,
   HTMLAnchorElement
 > = forwardRef(

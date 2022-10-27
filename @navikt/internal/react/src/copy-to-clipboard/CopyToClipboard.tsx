@@ -1,12 +1,17 @@
 import { Copy } from "@navikt/ds-icons";
-import cl from "classnames";
+import cl from "clsx";
 import copy from "copy-to-clipboard";
-import React, { forwardRef, useEffect, useRef, useState } from "react";
-import mergeRefs from "react-merge-refs";
-import { BodyShort, Button, ButtonProps, Popover } from "@navikt/ds-react";
-import { Placement } from "@popperjs/core";
+import React, { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import {
+  BodyShort,
+  Button,
+  ButtonProps,
+  Popover,
+  mergeRefs,
+} from "@navikt/ds-react";
 
-export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
+export interface CopyToClipboardProps
+  extends Omit<ButtonProps, "children" | "variant" | "loading"> {
   /**
    * Button text
    */
@@ -16,17 +21,42 @@ export interface CopyToClipboardProps extends Omit<ButtonProps, "children"> {
    */
   copyText: string;
   /**
-   * Description of text, examples: "personnummer", "navn", "epost" etc.
+   * Description of text. Example: "Kopierte personnummer til clipboard"
    */
   popoverText: string;
   /**
    * Allows extending popover properties like "placement"
-   * @default "right"
+   * @default "bottom"
    */
-  popoverPlacement?: Placement;
+  popoverPlacement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
+  /**
+   * Copy button title attribute
+   * @default children ? undefined : `Kopier ${copyText}`
+   */
+  title?: string;
+  /**
+   * Components i tertiary by default. Will be removed in v2.0.0
+   * @breaking v2
+   */
+  variant?: "tertiary";
 }
 
-const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
+export const CopyToClipboard = forwardRef<
+  HTMLButtonElement,
+  CopyToClipboardProps
+>(
   (
     {
       children,
@@ -34,13 +64,15 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       popoverText,
       className,
       size = "medium",
-      popoverPlacement = "right",
+      popoverPlacement = "bottom",
+      iconPosition = "left",
+      title,
       ...rest
     },
     ref
   ) => {
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const mergedRef = mergeRefs([buttonRef, ref]);
+    const mergedRef = useMemo(() => mergeRefs([buttonRef, ref]), [ref]);
     const timeoutRef = useRef<number | null>();
     const [openPopover, setOpenPopover] = useState(false);
 
@@ -53,26 +85,26 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
       };
     }, [openPopover]);
 
-    const title = `Kopier ${copyText}`;
-
     const handleClick = () => {
       copy(copyText);
       setOpenPopover(true);
     };
 
+    const copyTitle = title ?? (children ? undefined : `Kopier ${copyText}`);
+
     return (
       <div>
         <Button
           ref={mergedRef}
-          variant="secondary"
-          title={title}
+          variant="tertiary"
           className={cl("navdsi-copy-to-clipboard", className)}
           onClick={handleClick}
           size={size}
+          icon={<Copy title={copyTitle} aria-hidden={!copyTitle} />}
+          iconPosition={iconPosition}
           {...rest}
         >
-          <Copy title="Fil ikon for kopiering" />
-          {children ? children : <span className="navds-sr-only">{title}</span>}
+          {children}
         </Button>
         <Popover
           role="alert"
@@ -80,10 +112,9 @@ const CopyToClipboard = forwardRef<HTMLButtonElement, CopyToClipboardProps>(
           open={openPopover}
           onClose={() => setOpenPopover(false)}
           placement={popoverPlacement}
-          arrow={false}
           className="navdsi-copy-to-clipboard__popover"
         >
-          <BodyShort size={size} as="span">
+          <BodyShort size={size === "medium" ? size : "small"} as="span">
             {popoverText}
           </BodyShort>
         </Popover>

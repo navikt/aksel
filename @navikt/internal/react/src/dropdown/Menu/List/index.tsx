@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
-import Item, { ItemType } from "./Item";
+import cl from "clsx";
+import ListItem, { ListItemType } from "./Item";
 
 export interface ListProps extends React.HTMLAttributes<HTMLUListElement> {
   /**
@@ -13,15 +13,15 @@ export interface ListType
   extends React.ForwardRefExoticComponent<
     ListProps & React.RefAttributes<HTMLUListElement>
   > {
-  Item: ItemType;
+  Item: ListItemType;
 }
 
-const List = forwardRef(({ className, children, ...rest }, ref) => (
+export const List = forwardRef(({ className, children, ...rest }, ref) => (
   <ul {...rest} ref={ref} className={cl("navdsi-dropdown__list", className)}>
     {children}
   </ul>
 )) as ListType;
 
-List.Item = Item;
+List.Item = ListItem;
 
 export default List;

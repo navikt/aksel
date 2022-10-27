@@ -1,28 +1,18 @@
-:root {
-  --navds-select-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-select-color-background: var(--navds-semantic-color-component-background-light);
   --navds-select-color-border: var(--navds-semantic-color-border);
-  --navds-select-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-select-color-border-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-select-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-select-color-border-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-select-color-border-error: var(--navds-semantic-color-interaction-danger);
+  --navds-select-color-shadow-error: var(--navds-semantic-color-interaction-danger);
   --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-select-color-background-disabled: var(
-    --navds-semantic-color-component-background-alternate
-  );
-  --navds-select-color-text-disabled: var(--navds-semantic-color-text);
+  --navds-select-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
 }
 
 .navds-select__input {
   appearance: none;
   background-color: var(--navds-select-color-background);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   border: 1px solid var(--navds-select-color-border);
   width: 100%;
   box-sizing: border-box;
@@ -30,7 +20,7 @@
   display: inline-block;
   position: relative;
   padding: 0.5rem;
-  padding-right: 2.5rem;
+  padding-right: 2rem;
 }
 
 .navds-select__input:hover {
@@ -47,6 +37,7 @@
   display: flex;
   width: 100%;
   align-items: center;
+  color: var(--navds-semantic-color-text);
 }
 
 .navds-select__chevron {
@@ -68,13 +59,6 @@
 .navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-select-color-shadow-error);
   border-color: var(--navds-select-color-border-error);
-}
-
-/*
-  Disabled handling
- */
-.navds-select--disabled {
-  opacity: 0.3;
 }
 
 .navds-select__input:disabled {

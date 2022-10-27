@@ -1,26 +1,15 @@
-:root {
-  --navds-textarea-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-textarea-color-background: var(--navds-semantic-color-component-background-light);
   --navds-textarea-color-border: var(--navds-semantic-color-border);
-  --navds-textarea-color-border-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-textarea-color-border-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-textarea-color-shadow-error: var(
-    --navds-semantic-color-interaction-danger
-  );
-  --navds-textarea-color-counter-text: var(--navds-global-color-gray-400);
-  --navds-textarea-color-counter-text-error: var(
-    --navds-semantic-color-interaction-danger
-  );
+  --navds-textarea-color-border-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-textarea-color-border-error: var(--navds-semantic-color-interaction-danger);
+  --navds-textarea-color-shadow-error: var(--navds-semantic-color-interaction-danger);
+  --navds-textarea-color-counter-text: var(--navds-semantic-color-text-muted);
+  --navds-textarea-color-counter-text-error: var(--navds-semantic-color-interaction-danger);
   --navds-textarea-color-text-disabled: var(--navds-semantic-color-text);
   --navds-textarea-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-textarea-color-background-disabled: var(
-    --navds-semantic-color-component-background-alternate
-  );
+  --navds-textarea-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
 }
 
 .navds-textarea__wrapper {
@@ -32,13 +21,12 @@
   appearance: none;
   padding: var(--navds-spacing-2);
   background-color: var(--navds-textarea-color-background);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   border: 1px solid var(--navds-textarea-color-border);
   resize: none;
   width: 100%;
-  transition: height 0.1s ease-out;
   display: block;
-  min-height: 3rem;
+  color: var(--navds-text-field-color-text);
 }
 
 .navds-textarea--counter {
@@ -55,8 +43,7 @@
 }
 
 .navds-form-field--small .navds-textarea__input {
-  padding: var(--navds-spacing-1);
-  min-height: 2rem;
+  padding: 6px;
 }
 
 .navds-form-field--small .navds-textarea--counter.navds-textarea__input {
@@ -68,30 +55,26 @@
   color: var(--navds-textarea-color-counter-text);
   font-style: italic;
   position: absolute;
-  text-align: right;
-  left: var(--navds-spacing-3);
-  right: var(--navds-spacing-3);
-  bottom: var(--navds-spacing-2);
+  text-align: left;
+  left: 1px;
+  bottom: 1px;
+  padding: var(--navds-spacing-1) var(--navds-spacing-2);
 }
 
 .navds-textarea__counter--error {
   color: var(--navds-textarea-color-counter-text-error);
 }
 
+.navds-textarea--resize .navds-textarea__input {
+  resize: both;
+}
+
 /**
   Error handling
 */
-.navds-textarea--error
-  .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
+.navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
   box-shadow: 0 0 0 1px var(--navds-textarea-color-shadow-error);
   border-color: var(--navds-textarea-color-border-error);
-}
-
-/*
-  Disabled handling
- */
-.navds-textarea--disabled {
-  opacity: 0.3;
 }
 
 .navds-textarea__input:disabled {

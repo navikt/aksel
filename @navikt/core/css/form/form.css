@@ -1,10 +1,29 @@
-.navds-form-field > :not(:first-child):not(:empty),
-.navds-form-field > input:not(:first-child) {
-  margin-top: var(--navds-spacing-2);
+.navds-form-field {
+  display: grid;
+  justify-items: start;
+  gap: var(--navds-spacing-2);
 }
 
-/* Applied when hideLabel is applied to form-element */
-.navds-form-field > .navds-sr-only + :not(:first-child):not(:empty),
-.navds-form-field > .navds-sr-only + input:not(:first-child) {
-  margin-top: 0;
+.navds-form-field__description {
+  margin-top: -4px;
+}
+
+.navds-form-field .navds-error-message,
+.navds-fieldset .navds-error-message {
+  display: flex;
+  gap: var(--navds-spacing-2);
+}
+
+.navds-form-field .navds-error-message::before,
+.navds-fieldset .navds-error-message::before {
+  content: "•";
+}
+
+.navds-form-field--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.navds-form-field__error:empty {
+  display: none;
 }

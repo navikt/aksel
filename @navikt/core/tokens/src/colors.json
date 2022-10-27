@@ -310,7 +310,7 @@
             "value": "{navds.global.color.gray.200.value}"
           },
           "muted": {
-            "value": "{navds.global.color.gray.400.value}"
+            "value": "{navds.global.color.gray.500.value}"
           },
           "@": {
             "value": "{navds.global.color.gray.600.value}"
@@ -343,12 +343,12 @@
           }
         },
         "divider": {
-          "value": "{navds.global.color.gray.200.value}"
+          "value": "{navds.global.color.gray.300.value}"
         },
         "feedback": {
           "danger": {
             "background": {
-              "value": "{navds.global.color.red.100.value}"
+              "value": "{navds.global.color.red.50.value}"
             },
             "border": {
               "value": "{navds.global.color.red.500.value}"
@@ -362,7 +362,7 @@
           },
           "info": {
             "background": {
-              "value": "{navds.global.color.lightblue.100.value}"
+              "value": "{navds.global.color.lightblue.50.value}"
             },
             "border": {
               "value": "{navds.global.color.lightblue.700.value}"
@@ -373,7 +373,7 @@
           },
           "success": {
             "background": {
-              "value": "{navds.global.color.green.100.value}"
+              "value": "{navds.global.color.green.50.value}"
             },
             "border": {
               "value": "{navds.global.color.green.500.value}"
@@ -384,13 +384,13 @@
           },
           "warning": {
             "background": {
-              "value": "{navds.global.color.orange.100.value}"
+              "value": "{navds.global.color.orange.50.value}"
             },
             "border": {
               "value": "{navds.global.color.orange.600.value}"
             },
             "icon": {
-              "value": "{navds.global.color.orange.500.value}"
+              "value": "{navds.global.color.orange.600.value}"
             }
           }
         },

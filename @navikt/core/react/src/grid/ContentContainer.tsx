@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -8,14 +8,15 @@ export interface ContentContainerProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-const ContentContainer = forwardRef<HTMLDivElement, ContentContainerProps>(
-  ({ className, ...rest }, ref) => (
-    <div
-      ref={ref}
-      className={cl("navds-content-container", className)}
-      {...rest}
-    />
-  )
-);
+export const ContentContainer = forwardRef<
+  HTMLDivElement,
+  ContentContainerProps
+>(({ className, ...rest }, ref) => (
+  <div
+    ref={ref}
+    className={cl("navds-content-container", className)}
+    {...rest}
+  />
+));
 
 export default ContentContainer;

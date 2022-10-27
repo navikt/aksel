@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "../..";
 
 export interface ErrorSummaryItemProps
@@ -15,7 +15,7 @@ export type ErrorSummaryItemType = OverridableComponent<
   HTMLAnchorElement
 >;
 
-const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
+export const ErrorSummaryItem: ErrorSummaryItemType = forwardRef(
   ({ children, as: Component = "a", className, ...rest }, ref) => {
     return (
       <Component

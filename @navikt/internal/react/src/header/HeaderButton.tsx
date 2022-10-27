@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "@navikt/ds-react";
 
 export interface HeaderButtonProps
@@ -15,7 +15,7 @@ export type HeaderButtonType = OverridableComponent<
   HTMLButtonElement
 >;
 
-const HeaderButton: HeaderButtonType = forwardRef(
+export const HeaderButton: HeaderButtonType = forwardRef(
   ({ as: Component = "button", className, ...rest }, ref) => (
     <Component
       {...rest}

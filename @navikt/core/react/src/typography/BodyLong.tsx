@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "..";
 
 export interface BodyLongProps
@@ -14,12 +14,12 @@ export interface BodyLongProps
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const BodyLong: OverridableComponent<
+export const BodyLong: OverridableComponent<
   BodyLongProps,
   HTMLParagraphElement
 > = forwardRef(

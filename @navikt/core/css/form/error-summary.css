@@ -1,20 +1,17 @@
-:root {
-  --navds-error-summary-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-error-summary-color-border: var(
-    --navds-semantic-color-feedback-danger-border
-  );
+:root,
+:host {
+  --navds-error-summary-color-background: var(--navds-semantic-color-component-background-light);
+  --navds-error-summary-color-border: var(--navds-semantic-color-feedback-danger-border);
 }
 
 .navds-error-summary {
   background-color: var(--navds-error-summary-color-background);
-  padding: var(--navds-spacing-4);
+  padding: var(--navds-spacing-5);
   border: 4px solid var(--navds-error-summary-color-border);
 }
 
 .navds-error-summary--small {
-  padding: var(--navds-spacing-2);
+  padding: var(--navds-spacing-3);
 }
 
 .navds-error-summary:focus {
@@ -23,12 +20,20 @@
 }
 
 .navds-error-summary__list {
-  margin: 1rem 0;
+  margin: var(--navds-spacing-3) 0;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--navds-spacing-3);
+  padding-left: var(--navds-spacing-6);
+  list-style: inherit;
+}
+
+.navds-error-summary__list > * {
+  color: var(--navds-global-color-blue-500);
 }
 
 .navds-error-summary--small > .navds-error-summary__list {
-  margin: 0.5rem 0;
+  margin: var(--navds-spacing-2) 0;
+  gap: var(--navds-spacing-2);
+  padding-left: var(--navds-spacing-5);
 }

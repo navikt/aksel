@@ -2,69 +2,113 @@ import React from "react";
 import { Select } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
-  title: "ds-react/form/select",
+  title: "ds-react/form/Select",
   component: Select,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    description: {
+      type: "string",
+    },
+    error: {
+      type: "string",
+    },
+    hideLabel: {
+      type: "boolean",
+    },
+    disabled: {
+      type: "boolean",
+    },
+  },
 } as Meta;
 
-export const All = () => {
+const content = (
+  <>
+    <option value="">Velg land</option>
+    <option value="norge">Norge</option>
+    <option value="sverige">Sverige</option>
+  </>
+);
+
+export const Default = (props) => {
   return (
-    <div>
-      <h1>Select</h1>
+    <Select {...props} label="Ipsum enim quis culpa">
+      {content}
+    </Select>
+  );
+};
 
-      <Select label="Ipsum enim quis culpa">
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-      </Select>
+Default.args = {};
 
-      <h2>Description</h2>
+export const Small = () => {
+  return (
+    <Select size="small" label="Ipsum enim quis culpa">
+      {content}
+    </Select>
+  );
+};
 
-      <Select label="Ipsum enim quis culpa" description={<div>Aute enim</div>}>
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-      </Select>
-
-      <h2>Errors</h2>
-
+export const Description = () => {
+  return (
+    <div className="colgap">
       <Select
         label="Ipsum enim quis culpa"
-        description="Aute enim"
-        error="Select error message"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
       >
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
+        {content}
       </Select>
-
-      <h2>Sizing</h2>
-
       <Select
         label="Ipsum enim quis culpa"
-        description="Aute enim"
-        error="Select error message"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
       >
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-      </Select>
-
-      <h2>hideLabel</h2>
-
-      <Select label="Ipsum enim quis culpa" description="Aute enim" hideLabel>
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
-      </Select>
-
-      <h2>Disabled</h2>
-
-      <Select label="Ipsum enim quis culpa" description="Aute enim" disabled>
-        <option value="">Velg land</option>
-        <option value="norge">Norge</option>
-        <option value="sverige">Sverige</option>
+        {content}
       </Select>
     </div>
+  );
+};
+
+export const Error = () => {
+  return (
+    <div className="colgap">
+      <Select
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      >
+        {content}
+      </Select>
+      <Select
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        size="small"
+      >
+        {content}
+      </Select>
+    </div>
+  );
+};
+
+export const Disabled = () => {
+  return (
+    <div className="colgap">
+      <Select label="Ipsum enim quis culpa" disabled>
+        {content}
+      </Select>
+      <Select label="Ipsum enim quis culpa" disabled size="small">
+        {content}
+      </Select>
+    </div>
+  );
+};
+
+export const HideLabel = () => {
+  return (
+    <Select label="Ipsum enim quis culpa" hideLabel>
+      {content}
+    </Select>
   );
 };

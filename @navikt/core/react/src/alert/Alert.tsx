@@ -1,11 +1,11 @@
-import React, { forwardRef } from "react";
-import cl from "classnames";
 import {
-  ErrorFilled,
-  WarningFilled,
-  InformationFilled,
-  SuccessFilled,
+  ErrorColored,
+  InformationColored,
+  SuccessColored,
+  WarningColored,
 } from "@navikt/ds-icons";
+import cl from "clsx";
+import React, { forwardRef } from "react";
 import { BodyLong } from "..";
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,21 +14,22 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   children: React.ReactNode;
   /**
-   * Decides what design the alert will have
+   * Changes colors and icon usage when changed
    */
   variant: "error" | "warning" | "info" | "success";
   /**
    * Changes padding and font-sizes
-   * @default "medium"
+   * @default medium
    */
   size?: "medium" | "small";
   /**
-   * Toggles full-width Alert
+   * Removes border-radius
    * @default false
    */
   fullWidth?: boolean;
   /**
    * Removes background from Alert
+   * @default false
    */
   inline?: boolean;
 }
@@ -36,13 +37,13 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
 const Icon = ({ variant, ...props }) => {
   switch (variant) {
     case "error":
-      return <ErrorFilled {...props} />;
+      return <ErrorColored title="Feil" {...props} />;
     case "warning":
-      return <WarningFilled {...props} />;
+      return <WarningColored title="Advarsel" {...props} />;
     case "info":
-      return <InformationFilled {...props} />;
+      return <InformationColored title="Informasjon" {...props} />;
     case "success":
-      return <SuccessFilled {...props} />;
+      return <SuccessColored title="Suksess" {...props} />;
     default:
       return null;
   }
@@ -52,7 +53,7 @@ export interface AlertContextProps {
   size: "medium" | "small";
 }
 
-const Alert = forwardRef<HTMLDivElement, AlertProps>(
+export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
     {
       children,
@@ -76,11 +77,7 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
         { "navds-alert--full-width": fullWidth, "navds-alert--inline": inline }
       )}
     >
-      <Icon
-        title={`${variant}-ikon`}
-        variant={variant}
-        className="navds-alert__icon"
-      />
+      <Icon variant={variant} className="navds-alert__icon" />
       <BodyLong as="div" size={size} className="navds-alert__wrapper">
         {children}
       </BodyLong>

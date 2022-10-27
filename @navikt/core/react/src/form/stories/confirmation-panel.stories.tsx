@@ -3,60 +3,92 @@ import { ConfirmationPanel } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 import { Link } from "../..";
 export default {
-  title: "ds-react/form/confirmation-panel",
+  title: "ds-react/form/ConfirmationPanel",
   component: ConfirmationPanel,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    error: {
+      type: "string",
+    },
+  },
 } as Meta;
 
-export const All = () => {
+const content = (
+  <>
+    Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
+    minim ut mollit voluptate exercitation nulla mollit.
+  </>
+);
+
+export const Default = (props) => {
+  return (
+    <ConfirmationPanel
+      error={props?.error}
+      size={props?.size}
+      checked={props?.checked ?? undefined}
+      label={props?.label ?? "Checkbox label text"}
+    >
+      {content}
+    </ConfirmationPanel>
+  );
+};
+
+Default.args = {
+  label: "Checkbox label text",
+  checked: false,
+};
+
+export const Small = () => {
   const [checked, setChecked] = useState(false);
   return (
-    <div>
-      <h1>ConfirmationPanel</h1>
+    <ConfirmationPanel
+      checked={checked}
+      onChange={() => setChecked(!checked)}
+      label="Checkbox label text"
+      size="small"
+    >
+      {content}
+    </ConfirmationPanel>
+  );
+};
+
+export const NoContent = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ConfirmationPanel
+      checked={checked}
+      onChange={() => setChecked(!checked)}
+      label="Checkbox label text"
+    />
+  );
+};
+
+export const Error = () => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <div className="colgap">
       <ConfirmationPanel
         checked={checked}
         onChange={() => setChecked(!checked)}
         label="Checkbox label text"
+        error="Adipisicing sint aute quis veniam incididunt duis est sint aute cillum."
       >
-        Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
-        minim ut mollit voluptate exercitation nulla mollit.
+        {content}
       </ConfirmationPanel>
-      <h2>size small</h2>
       <ConfirmationPanel
         checked={checked}
         onChange={() => setChecked(!checked)}
         label="Checkbox label text"
+        error="Adipisicing sint aute quis veniam incididunt duis est sint aute cillum."
         size="small"
       >
-        Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
-        minim ut mollit voluptate exercitation nulla mollit.
+        {content}
       </ConfirmationPanel>
-      <h3>error</h3>
-      <ConfirmationPanel
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        label="Checkbox label text"
-        error="Ex cupidatat do do do"
-      >
-        Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
-        minim ut mollit voluptate exercitation nulla mollit.
-      </ConfirmationPanel>
-      <h3>error small</h3>
-      <ConfirmationPanel
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        label="Checkbox label text"
-        error="Ex cupidatat do do do"
-        size="small"
-      >
-        Ipsum voluptate pariatur <Link href="#123">testlink</Link> anim officia
-        minim ut mollit voluptate exercitation nulla mollit.
-      </ConfirmationPanel>
-      <h2>Empty</h2>
-      <ConfirmationPanel
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        label="Checkbox label text"
-      ></ConfirmationPanel>
     </div>
   );
 };

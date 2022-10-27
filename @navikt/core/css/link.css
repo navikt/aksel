@@ -1,4 +1,5 @@
-:root {
+:root,
+:host {
   --navds-link-color-text: var(--navds-semantic-color-link);
   --navds-link-color-text-focus: var(--navds-semantic-color-text-inverted);
   --navds-link-color-text-active: var(--navds-semantic-color-text-inverted);
@@ -48,9 +49,6 @@
 }
 
 .navds-link svg {
-  color: var(--navds-link-color-icon);
-}
-
-.navds-link:focus svg {
-  color: var(--navds-link-color-icon-focus);
+  color: inherit;
+  flex-shrink: 0;
 }

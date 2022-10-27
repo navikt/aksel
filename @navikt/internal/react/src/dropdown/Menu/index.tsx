@@ -1,8 +1,9 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { Popover } from "@navikt/ds-react";
 import List, { ListType } from "./List";
 import GroupedList, { GroupedListType } from "./GroupedList";
+import Divider, { DividerType } from "./Divider";
 import { DropdownContext } from "../Dropdown";
 
 interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -14,6 +15,28 @@ interface MenuProps extends React.HTMLAttributes<HTMLDivElement> {
    * onClose callback
    */
   onClose?: () => void;
+  /**
+   * Popover positionion strategy
+   * @default "absolute"
+   */
+  strategy?: "fixed" | "absolute";
+  /*
+   * Default dialog-placement on open
+   * @default "bottom-end"
+   */
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
 }
 
 export interface MenuType<Props = MenuProps>
@@ -22,10 +45,11 @@ export interface MenuType<Props = MenuProps>
   > {
   List: ListType;
   GroupedList: GroupedListType;
+  Divider: DividerType;
 }
 
-const Menu = forwardRef<HTMLDivElement, MenuProps>(
-  ({ className, onClose, ...rest }, ref) => {
+export const Menu = forwardRef<HTMLDivElement, MenuProps>(
+  ({ className, onClose, placement = "bottom-end", ...rest }, ref) => {
     const context = useContext(DropdownContext);
 
     if (!context) {
@@ -38,8 +62,8 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
     return (
       <Popover
         {...rest}
+        placement={placement}
         ref={ref}
-        placement="bottom-end"
         arrow={false}
         className={cl("navdsi-dropdown__menu", className)}
         offset={-4}
@@ -56,5 +80,6 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(
 
 Menu.List = List;
 Menu.GroupedList = GroupedList;
+Menu.Divider = Divider;
 
 export default Menu;

@@ -1,22 +1,18 @@
 export {
   Checkbox,
-  CheckboxProps,
   CheckboxGroup,
   CheckboxGroupProps,
+  CheckboxProps,
 } from "./checkbox";
 export {
-  default as Fieldset,
-  FieldsetContext,
-  FieldsetProps,
-} from "./Fieldset";
+  ConfirmationPanelProps,
+  default as ConfirmationPanel,
+} from "./ConfirmationPanel";
+export { ErrorSummary, ErrorSummaryProps } from "./error-summary";
+export { Fieldset, FieldsetContext, FieldsetProps } from "./Fieldset";
 export { Radio, RadioGroup, RadioGroupProps, RadioProps } from "./radio";
-export { SearchField, SearchFieldProps } from "./search-field";
+export { Search, SearchClearEvent, SearchProps } from "./search";
 export { default as Select, SelectProps } from "./Select";
 export { default as Switch, SwitchProps } from "./Switch";
-export { ErrorSummary, ErrorSummaryProps } from "./error-summary";
 export { Counter, default as Textarea, TextareaProps } from "./Textarea";
 export { default as TextField, TextFieldProps } from "./TextField";
-export {
-  default as ConfirmationPanel,
-  ConfirmationPanelProps,
-} from "./ConfirmationPanel";

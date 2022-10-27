@@ -1,12 +1,17 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
-interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
+export interface RowProps extends React.HTMLAttributes<HTMLTableRowElement> {
   /**
    * Row is selected
    * @default false
    */
   selected?: boolean;
+  /**
+   * Shade the table row on hover.
+   * @default true
+   */
+  shadeOnHover?: boolean;
 }
 
 export interface RowType
@@ -14,13 +19,14 @@ export interface RowType
     RowProps & React.RefAttributes<HTMLTableRowElement>
   > {}
 
-const Row: RowType = forwardRef(
-  ({ className, selected = false, ...rest }, ref) => (
+export const Row: RowType = forwardRef(
+  ({ className, selected = false, shadeOnHover = true, ...rest }, ref) => (
     <tr
       {...rest}
       ref={ref}
       className={cl("navds-table__row", className, {
         "navds-table__row--selected": selected,
+        "navds-table__row--shade-on-hover": shadeOnHover,
       })}
     />
   )

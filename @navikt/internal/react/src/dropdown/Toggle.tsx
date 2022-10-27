@@ -1,5 +1,5 @@
 import React, { forwardRef, useContext } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { DropdownContext } from ".";
 
 export interface ToggleProps
@@ -14,7 +14,7 @@ export type ToggleType = React.ForwardRefExoticComponent<
   ToggleProps & React.RefAttributes<HTMLButtonElement>
 >;
 
-const Toggle: ToggleType = forwardRef(
+export const Toggle: ToggleType = forwardRef(
   ({ className, onClick, ...rest }, ref) => {
     const context = useContext(DropdownContext);
 

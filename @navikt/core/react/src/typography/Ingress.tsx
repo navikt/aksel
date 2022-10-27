@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "..";
 
 export interface IngressProps
@@ -9,22 +9,20 @@ export interface IngressProps
    */
   children: React.ReactNode;
   /**
-   * Adds margins to typo
+   * Adds margin-bottom
    */
   spacing?: boolean;
 }
 
-const Ingress: OverridableComponent<
-  IngressProps,
-  HTMLParagraphElement
-> = forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => (
-  <Component
-    {...rest}
-    ref={ref}
-    className={cl(className, "navds-ingress", {
-      "navds-typo--spacing": !!spacing,
-    })}
-  />
-));
+export const Ingress: OverridableComponent<IngressProps, HTMLParagraphElement> =
+  forwardRef(({ className, spacing, as: Component = "p", ...rest }, ref) => (
+    <Component
+      {...rest}
+      ref={ref}
+      className={cl(className, "navds-ingress", {
+        "navds-typo--spacing": !!spacing,
+      })}
+    />
+  ));
 
 export default Ingress;

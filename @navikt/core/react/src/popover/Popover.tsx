@@ -1,18 +1,31 @@
-import { Placement } from "@popperjs/core";
-import cl from "classnames";
+import {
+  arrow as flArrow,
+  autoUpdate,
+  flip,
+  offset as flOffset,
+  shift,
+  useClick,
+  useDismiss,
+  useFloating,
+  useInteractions,
+} from "@floating-ui/react-dom-interactions";
+import cl from "clsx";
 import React, {
   forwardRef,
   HTMLAttributes,
   useCallback,
-  useEffect,
+  useMemo,
   useRef,
 } from "react";
-import mergeRefs from "react-merge-refs";
-import { usePopper } from "react-popper";
-import { useClientLayoutEffect } from "..";
+import { mergeRefs } from "..";
+import { useClientLayoutEffect, useEventListener } from "../util";
 import PopoverContent, { PopoverContentType } from "./PopoverContent";
 
 export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Popover content
+   */
+  children: React.ReactNode;
   /**
    * Element popover anchors to
    */
@@ -26,17 +39,26 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
    */
   onClose: () => void;
   /**
-   * Popover content
-   */
-  children: React.ReactNode;
-  /**
    * Orientation for popover
-   * @default "right"
+   * @note Try to keep general usage to "top", "bottom", "left", "right"
+   * @default "top"
    */
-  placement?: Placement;
+  placement?:
+    | "top"
+    | "bottom"
+    | "right"
+    | "left"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "right-start"
+    | "right-end"
+    | "left-start"
+    | "left-end";
   /**
-   *  Toggles rendering of arrow
-   *  @default true
+   * Adds a arrow from dialog to anchor when true
+   * @default true
    */
   arrow?: boolean;
   /**
@@ -52,14 +74,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   strategy?: "absolute" | "fixed";
 }
 
-const useEventLister = (event: string, callback) =>
-  useEffect(() => {
-    document.addEventListener(event, callback);
-    return () => {
-      document.removeEventListener(event, callback);
-    };
-  }, [event, callback]);
-
 interface PopoverComponent
   extends React.ForwardRefExoticComponent<
     PopoverProps & React.RefAttributes<HTMLDivElement>
@@ -67,7 +81,7 @@ interface PopoverComponent
   Content: PopoverContentType;
 }
 
-const Popover = forwardRef<HTMLDivElement, PopoverProps>(
+export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
   (
     {
       className,
@@ -76,99 +90,115 @@ const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       arrow = true,
       open,
       onClose,
-      placement = "right",
+      placement = "top",
       offset,
-      strategy = "absolute",
+      strategy: userStrategy = "absolute",
       ...rest
     },
     ref
   ) => {
-    const popoverRef = useRef<HTMLDivElement | null>(null);
-    const mergedRef = mergeRefs([popoverRef, ref]);
+    const arrowRef = useRef<HTMLDivElement | null>(null);
 
-    const close = useCallback(() => open && onClose(), [open, onClose]);
+    const {
+      x,
+      y,
+      reference,
+      floating,
+      strategy,
+      context,
+      update,
+      refs,
+      placement: flPlacement,
+      middlewareData: { arrow: { x: arrowX, y: arrowY } = {} },
+    } = useFloating({
+      strategy: userStrategy,
+      placement,
+      open: open,
+      onOpenChange: onClose,
+      middleware: [
+        flOffset(offset ?? (arrow ? 16 : 4)),
+        shift(),
+        flip({ padding: 5, fallbackPlacements: ["bottom", "top"] }),
+        flArrow({ element: arrowRef, padding: 8 }),
+      ],
+    });
 
-    useEventLister(
-      "click",
-      useCallback(
-        (e: MouseEvent) => {
-          if (
-            ![anchorEl, popoverRef.current].some((element) =>
-              element?.contains(e.target as Node)
-            )
-          ) {
-            close();
-          }
-        },
-        [anchorEl, close]
-      )
+    const { getFloatingProps } = useInteractions([
+      useClick(context),
+      useDismiss(context),
+    ]);
+
+    useClientLayoutEffect(() => {
+      reference(anchorEl);
+    }, [anchorEl]);
+
+    const floatingRef = useMemo(
+      () => mergeRefs([floating, ref]),
+      [floating, ref]
     );
 
-    useEventLister(
-      "keydown",
-      useCallback((e: KeyboardEvent) => e.key === "Escape" && close(), [close])
-    );
+    useClientLayoutEffect(() => {
+      if (!refs.reference.current || !refs.floating.current || !open) return;
+      const cleanup = autoUpdate(
+        refs.reference.current,
+        refs.floating.current,
+        update
+      );
+      return () => cleanup();
+    }, [refs.floating, refs.reference, update, open, anchorEl]);
 
-    useEventLister(
+    useEventListener(
       "focusin",
       useCallback(
         (e: FocusEvent) => {
           if (
-            ![anchorEl, popoverRef.current].some((element) =>
+            ![anchorEl, refs?.floating?.current].some((element) =>
               element?.contains(e.target as Node)
             )
           ) {
-            close();
+            open && onClose();
           }
         },
-        [anchorEl, close]
+        [anchorEl, refs, open, onClose]
       )
     );
 
-    const { styles, attributes, update } = usePopper(
-      anchorEl,
-      popoverRef.current,
-      {
-        placement,
-        modifiers: [
-          {
-            name: "offset",
-            options: {
-              offset: [0, offset ?? (arrow ? 16 : 4)],
-            },
-          },
-          {
-            name: "arrow",
-            options: {
-              padding: 8,
-            },
-          },
-        ],
-        strategy,
-      }
-    );
-
-    useClientLayoutEffect(() => {
-      open && update && update();
-    }, [open, update]);
+    const staticSide = {
+      top: "bottom",
+      right: "left",
+      bottom: "top",
+      left: "right",
+    }[flPlacement.split("-")[0]];
 
     return (
       <div
-        ref={mergedRef}
         className={cl("navds-popover", className, {
           "navds-popover--hidden": !open || !anchorEl,
         })}
+        data-placement={flPlacement}
         aria-hidden={!open || !anchorEl}
         tabIndex={-1}
-        {...attributes.popper}
+        {...getFloatingProps({
+          ref: floatingRef,
+          style: {
+            position: strategy,
+            top: y ?? 0,
+            left: x ?? 0,
+          },
+        })}
         {...rest}
-        style={styles.popper}
       >
         {children}
         {arrow && (
           <div
-            data-popper-arrow
-            style={styles.arrow}
+            ref={(node) => {
+              arrowRef.current = node;
+            }}
+            style={{
+              ...(arrowX != null ? { left: arrowX } : {}),
+              ...(arrowY != null ? { top: arrowY } : {}),
+              ...(staticSide ? { [staticSide]: "-0.5rem" } : {}),
+            }}
             className="navds-popover__arrow"
           />
         )}

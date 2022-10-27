@@ -1,25 +1,12 @@
-:root {
-  --navds-help-text-color-button-background: transparent;
-  --navds-help-text-color-icon: var(--navds-semantic-color-interaction-primary);
-  --navds-help-text-color-icon-hover: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-help-text-color-icon-background-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-icon-shadow-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-icon-focus: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-help-text-color-icon-background-focus: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-icon-shadow-focus: var(--navds-semantic-color-focus);
-  --navds-help-text-color-popover-background: var(
-    --navds-semantic-color-feedback-info-background
-  );
+:root,
+:host {
+  --navds-help-text-color: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-hover: var(--navds-semantic-color-component-background-light);
+  --navds-help-text-color-focus: var(--navds-semantic-color-component-background-light);
+  --navds-help-text-color-background-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-background-focus: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-shadow-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-popover-background: var(--navds-semantic-color-feedback-info-background);
 }
 
 .navds-help-text__button {
@@ -27,40 +14,43 @@
   padding: 0;
   border: 0;
   cursor: pointer;
-  background-color: var(--navds-help-text-color-button-background);
-  border-radius: 50%;
+  background-color: transparent;
+  border-radius: var(--navds-border-radius-full);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--navds-help-text-color);
+  font-size: 1.5rem;
 }
 
 .navds-help-text__button:focus {
   outline: none;
+  box-shadow: 0 0 0 1px var(--navds-global-color-white), 0 0 0 4px var(--navds-semantic-color-focus);
 }
 
 .navds-help-text__icon {
-  border-radius: 50%;
-  font-size: 1.5rem;
-  color: var(--navds-help-text-color-icon);
+  border-radius: var(--navds-border-radius-full);
 }
 
-.navds-help-text__button:hover > .navds-help-text__icon {
-  color: var(--navds-help-text-color-icon-hover);
-  background: var(--navds-help-text-color-icon-background-hover);
-  box-shadow: 0 0 0 2px var(--navds-help-text-color-icon-shadow-hover);
-}
-
-.navds-help-text__button:focus > .navds-help-text__icon {
-  outline: none;
-  color: var(--navds-help-text-color-icon-focus);
-  background: var(--navds-help-text-color-icon-background-focus);
-  box-shadow: 0 0 0 3px var(--navds-help-text-color-icon-shadow-focus);
-}
-
-.navds-help-text__popover > .navds-popover__arrow::before {
+.navds-help-text__popover > .navds-popover__arrow {
   background-color: var(--navds-help-text-color-popover-background);
 }
 
 .navds-help-text__popover.navds-popover {
   background-color: var(--navds-help-text-color-popover-background);
+  max-width: 65ch;
+
+  --navds-popover-color-border: rgba(38 38 38 / 0.22);
+}
+
+.navds-help-text__icon--filled {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon {
+  display: none;
+}
+
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon--filled {
+  display: inherit;
 }

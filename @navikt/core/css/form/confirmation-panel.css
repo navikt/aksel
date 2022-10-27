@@ -1,98 +1,35 @@
-:root {
-  --navds-confirmation-panel-color-background: var(
-    --navds-semantic-color-feedback-warning-background
-  );
-  --navds-confirmation-panel-color-background-checked: var(
-    --navds-semantic-color-feedback-success-background
-  );
-  --navds-confirmation-panel-color-border-checked: var(
-    --navds-semantic-color-feedback-success-background
-  );
-  --navds-confirmation-panel-color-background-error: var(
-    --navds-semantic-color-feedback-danger-background
-  );
-  --navds-confirmation-panel-color-checkbox-background-checked-hover: var(
-    --navds-global-color-green-700
-  );
-  --navds-confirmation-panel-color-checkbox-border-checked-hover: var(
-    --navds-global-color-green-700
-  );
-  --navds-confirmation-panel-color-checkbox-background-checked: var(
-    --navds-global-color-green-500
-  );
-  --navds-confirmation-panel-color-checkbox-border-checked: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-confirmation-panel-color-checkbox-label-checked: var(
-    --navds-semantic-color-text
-  );
+:root,
+:host {
+  --navds-confirmation-panel-color-background: var(--navds-global-color-orange-50);
+  --navds-confirmation-panel-color-background-checked: var(--navds-global-color-green-50);
+  --navds-confirmation-panel-color-background-error: var(--navds-global-color-red-50);
+  --navds-confirmation-panel-color-border: var(--navds-semantic-color-feedback-warning-border);
+  --navds-confirmation-panel-color-border-checked: var(--navds-semantic-color-feedback-success-border);
+  --navds-confirmation-panel-color-border-error: var(--navds-semantic-color-feedback-danger-border);
 }
 
-.navds-confirmation-panel {
+.navds-confirmation-panel__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--navds-spacing-4);
+  gap: var(--navds-spacing-3);
   padding: var(--navds-spacing-4);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
+  border: 1px solid var(--navds-confirmation-panel-color-border);
   background-color: var(--navds-confirmation-panel-color-background);
   transition: background-color linear 100ms;
+  justify-self: stretch;
 }
 
 .navds-confirmation-panel__content {
   max-width: 80ch;
 }
 
-.navds-confirmation-panel--small {
-  padding: var(--navds-spacing-3);
-  gap: var(--navds-spacing-2);
-}
-
-.navds-confirmation-panel--checked {
+.navds-confirmation-panel--checked .navds-confirmation-panel__inner {
   background-color: var(--navds-confirmation-panel-color-background-checked);
   border-color: var(--navds-confirmation-panel-color-border-checked);
 }
 
-.navds-confirmation-panel--error {
+.navds-confirmation-panel--error .navds-confirmation-panel__inner {
   background-color: var(--navds-confirmation-panel-color-background-error);
-  border: 1px solid transparent;
-}
-
-.navds-confirmation-panel
-  .navds-checkbox__input:hover
-  + .navds-checkbox__label {
-  text-decoration: underline;
-}
-
-.navds-confirmation-panel--checked
-  .navds-checkbox__input:hover
-  + .navds-checkbox__label {
-  color: var(--navds-confirmation-panel-color-checkbox-label-checked);
-}
-
-.navds-confirmation-panel--checked
-  .navds-checkbox__input
-  + .navds-checkbox__label::before {
-  transition: none;
-  background-color: var(
-    --navds-confirmation-panel-color-checkbox-background-checked
-  );
-  border-color: var(--navds-confirmation-panel-color-checkbox-border-checked);
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
-}
-
-.navds-confirmation-panel--checked
-  .navds-checkbox__input:hover
-  + .navds-checkbox__label::before {
-  background-color: var(
-    --navds-confirmation-panel-color-checkbox-background-checked-hover
-  );
-  border-color: var(
-    --navds-confirmation-panel-color-checkbox-border-checked-hover
-  );
-}
-
-.navds-confirmation-panel--checked
-  .navds-checkbox__input:focus:hover
-  + .navds-checkbox__label::before {
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMyAxMCI+ICAgIDxnPiAgICA8cGF0aCBmaWxsPSIjRkZGRkZGIiBkPSJNNCwxMGMtMC40LDAtMC44LTAuMS0xLjEtMC40TDAuNCw3LjFDMC4xLDYuOCwwLDYuNCwwLDZzMC4yLTAuOCwwLjUtMS4xQzEsNC40LDIsNC40LDIuNSw0LjlMNCw2LjRsNi40LTYgICAgQzEwLjgsMC4xLDExLjEsMCwxMS41LDBjMC40LDAsMC44LDAuMiwxLDAuNWMwLjYsMC42LDAuNSwxLjYtMC4xLDIuMXYwTDUsOS42QzQuNyw5LjksNC40LDEwLDQsMTB6IE0xMS44LDEuOUwxMS44LDEuOSAgICBDMTEuOCwxLjksMTEuOCwxLjksMTEuOCwxLjl6IE0xMS4yLDEuMUMxMS4yLDEuMSwxMS4yLDEuMSwxMS4yLDEuMUwxMS4yLDEuMXoiLz4gICAgPC9nPjwvc3ZnPg==);
+  border-color: var(--navds-confirmation-panel-color-border-error);
 }

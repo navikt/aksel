@@ -1,6 +1,6 @@
 import React, { forwardRef, HTMLAttributes } from "react";
 import Guide from "./Guide";
-import cl from "classnames";
+import cl from "clsx";
 
 export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   /**
@@ -18,7 +18,7 @@ export interface GuidePanelProps extends HTMLAttributes<HTMLDivElement> {
   poster?: boolean;
 }
 
-const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
+export const GuidePanel = forwardRef<HTMLDivElement, GuidePanelProps>(
   (
     { children, className, illustration, poster = false, color, ...rest },
     ref

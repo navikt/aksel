@@ -1,27 +1,23 @@
-import cl from "classnames";
+import cl from "clsx";
 import React, { createContext, forwardRef, useState } from "react";
 
 export interface AccordionItemProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /**
-   * Content inside accordion item
+   * Content in Accordion.Item
+   * Should include one Accordion.Header and one Accordion.Content
    */
   children: React.ReactNode;
   /**
-   * Opens component if 'true', closes if 'false'
-   * Using this props removes automatic control of open-state
+   * Controlled open-state
+   * Using this removes automatic control of open-state
    */
   open?: boolean;
   /**
-   * Defaults the accordion to opened state
+   * Defaults the accordion to open if not controlled
    * @default false
    */
   defaultOpen?: boolean;
-  /**
-   * Removes content-element from dom when closed
-   * @default false
-   */
-  renderContentWhenClosed?: boolean;
 }
 
 export type AccordionItemType = React.ForwardRefExoticComponent<
@@ -31,31 +27,17 @@ export type AccordionItemType = React.ForwardRefExoticComponent<
 export interface AccordionItemContextProps {
   open: boolean;
   toggleOpen: () => void;
-  setButtonId: (id: string) => void;
-  buttonId: string;
-  renderContentWhenClosed: boolean;
 }
 
-export const AccordionItemContext = createContext<AccordionItemContextProps | null>(
-  null
-);
+export const AccordionItemContext =
+  createContext<AccordionItemContextProps | null>(null);
 
 const AccordionItem: AccordionItemType = forwardRef(
   (
-    {
-      children,
-      className,
-      open,
-      defaultOpen = false,
-      renderContentWhenClosed = false,
-      onClick,
-      id,
-      ...rest
-    },
+    { children, className, open, defaultOpen = false, onClick, id, ...rest },
     ref
   ) => {
     const [internalOpen, setInternalOpen] = useState<boolean>(defaultOpen);
-    const [buttonId, setButtonId] = useState("");
 
     return (
       <div
@@ -73,9 +55,6 @@ const AccordionItem: AccordionItemType = forwardRef(
                 setInternalOpen((iOpen) => !iOpen);
               }
             },
-            renderContentWhenClosed,
-            setButtonId,
-            buttonId,
           }}
         >
           {children}

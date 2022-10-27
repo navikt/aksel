@@ -1,5 +1,5 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 
 type Column = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export interface CellProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,7 +25,7 @@ export interface CellProps extends HTMLAttributes<HTMLDivElement> {
   lg?: Column;
 }
 
-const Cell = forwardRef<HTMLDivElement, CellProps>(
+export const Cell = forwardRef<HTMLDivElement, CellProps>(
   ({ children, xs, sm, md, lg, className, ...rest }, ref) => {
     return (
       <div

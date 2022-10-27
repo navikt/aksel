@@ -1,11 +1,8 @@
-:root {
-  --navds-guide-panel-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+:root,
+:host {
+  --navds-guide-panel-color-background: var(--navds-semantic-color-component-background-light);
   --navds-guide-panel-color-border: var(--navds-global-color-blue-400);
-  --navds-guide-panel-color-illustration-background: var(
-    --navds-global-color-blue-200
-  );
+  --navds-guide-panel-color-illustration-background: var(--navds-global-color-blue-200);
 }
 
 /**
@@ -13,31 +10,31 @@
  */
 .navds-guide-panel {
   position: relative;
-  padding-left: 2.5rem;
+  padding-left: var(--navds-spacing-10);
 }
 
 .navds-guide-panel__content {
   background-color: var(--navds-guide-panel-color-background);
-  border-radius: 4px;
+  border-radius: var(--navds-border-radius-medium);
   border: 2px solid var(--navds-guide-panel-color-border);
   min-height: 7.25rem;
-  padding: 1.5rem;
-  padding-left: 3.5rem;
+  padding: var(--navds-spacing-6);
+  padding-left: var(--navds-spacing-14);
 }
 
 .navds-guide-panel--poster {
   padding-left: 0;
-  padding-top: 3.125rem;
+  padding-top: var(--navds-spacing-12);
 }
 
 .navds-guide-panel--poster .navds-guide-panel__content {
-  padding: 2rem;
-  padding-top: 4.25rem;
+  padding: var(--navds-spacing-8);
+  padding-top: var(--navds-spacing-16);
 }
 
 .navds-guide-panel .navds-guide {
   position: absolute;
-  top: 1rem;
+  top: var(--navds-spacing-4);
   transform: translateX(-50%);
 }
 
@@ -58,7 +55,7 @@
 /* Guide illustration frame */
 .navds-guide__illustration {
   background: var(--navds-guide-panel-color-illustration-background);
-  border-radius: 50%;
+  border-radius: var(--navds-border-radius-full);
   overflow: hidden;
 }
 
@@ -75,6 +72,6 @@
 }
 
 .navds-guide__illustration--medium {
-  height: 6.25rem;
-  width: 6.25rem;
+  height: 6rem;
+  width: 6rem;
 }

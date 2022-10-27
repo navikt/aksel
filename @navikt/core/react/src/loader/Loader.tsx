@@ -1,31 +1,39 @@
 import React, { forwardRef, SVGProps } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { useId } from "..";
 
 export interface LoaderProps extends SVGProps<SVGSVGElement> {
   /**
-   * Changes sizing
+   * Changes Loader width/height
    * 64px | 40px | 32px | 24px | 20px | 16px
    * @default "medium"
    */
-  size?: "2xlarge" | "xlarge" | "large" | "medium" | "small" | "xsmall";
+  size?:
+    | "3xlarge"
+    | "2xlarge"
+    | "xlarge"
+    | "large"
+    | "medium"
+    | "small"
+    | "xsmall";
   /**
    * Title prop on svg
    * @default "venter..."
    */
   title?: React.ReactNode;
-  /*
-   * Background-circle in svg set to transparent
+  /**
+   * Sets svg-background to transparent
+   * @default false
    */
   transparent?: boolean;
   /**
-   * Colored variants for loader
+   * Colored variants for Loader
    * @default "neutral"
    */
   variant?: "neutral" | "interaction" | "inverted";
 }
 
-const Loader = forwardRef<SVGSVGElement, LoaderProps>(
+export const Loader = forwardRef<SVGSVGElement, LoaderProps>(
   (
     {
       children,
@@ -67,18 +75,14 @@ const Loader = forwardRef<SVGSVGElement, LoaderProps>(
           cy="25"
           r="20"
           fill="none"
-          strokeWidth="5"
         />
         <circle
           className="navds-loader__foreground"
           cx="25"
           cy="25"
           r="20"
-          stroke={"var(--navds-global-color-gray-400)"}
           fill="none"
-          strokeWidth="5"
           strokeDasharray="50 155"
-          strokeLinecap="round"
         />
       </svg>
     );

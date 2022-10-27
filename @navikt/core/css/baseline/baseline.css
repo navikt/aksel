@@ -6,11 +6,8 @@
 @import "print.css";
 @import "utility.css";
 
-/* Disabled because of UU concerns */
-
-/* @import "smooth-scroll.css"; */
-
-html {
+html,
+:host {
   box-sizing: border-box;
 }
 
@@ -20,10 +17,24 @@ html {
   box-sizing: inherit;
 }
 
-body {
-  font-family: var(--navds-font-family);
-  line-height: 1.333;
+:root,
+:host,
+[data-theme="light"] {
+  --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
+
   color: var(--navds-semantic-color-text);
+}
+
+[data-theme="dark"] {
+  --navds-shadow-focus: var(--navds-shadow-focus-inverted);
+
+  color: var(--navds-semantic-color-text-inverted);
+}
+
+body,
+:host {
+  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
+  line-height: 1.333;
   font-size: 1.125rem;
 }
 
@@ -31,9 +42,13 @@ a {
   color: var(--navds-semantic-color-link);
 }
 
+button {
+  color: inherit;
+}
+
 /* https://web.dev/prefers-reduced-motion/ */
 @media (prefers-reduced-motion: reduce) {
-  *,
+  *:not(.navds-loader *):not(.navds-loader),
   ::before,
   ::after {
     animation-delay: -1ms !important;

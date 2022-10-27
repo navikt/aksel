@@ -1,9 +1,0 @@
-:root {
-  --navdsi-divider-color-border: var(--navds-semantic-color-divider);
-}
-
-.navdsi-divider {
-  margin: var(--navds-spacing-3) 0;
-  border: none;
-  border-bottom: 1px solid var(--navdsi-divider-color-border);
-}

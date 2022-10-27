@@ -1,0 +1,13 @@
+{
+  "navds": {
+    "border": {
+      "radius": {
+        "small": { "value": "2px" },
+        "medium": { "value": "4px" },
+        "large": { "value": "8px" },
+        "xlarge": { "value": "12px" },
+        "full": { "value": "9999px" }
+      }
+    }
+  }
+}

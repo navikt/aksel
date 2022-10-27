@@ -1,25 +1,24 @@
 import React, { forwardRef, HTMLAttributes } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { BodyShort, Detail } from "..";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
   /**
-   * Tag
+   * Tag label
    */
   children: React.ReactNode;
   /**
-   * Changes background-color and border-color
-   *
+   * Changes background and border color
    */
   variant: "warning" | "error" | "info" | "success";
   /**
-   * Changes sizing of tag
+   * Changes padding and font-sizes
    * @default "medium"
    */
   size?: "medium" | "small";
 }
 
-const Tag = forwardRef<HTMLSpanElement, TagProps>(
+export const Tag = forwardRef<HTMLSpanElement, TagProps>(
   ({ className, variant, size = "medium", ...rest }, ref) => {
     const Component = size === "medium" ? BodyShort : Detail;
 

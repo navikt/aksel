@@ -1,49 +1,81 @@
 <h1 align="center">
-    <img src="https://avatars.githubusercontent.com/u/11848947?s=200&v=4" />
-    <br/>Designsystemet
+    <img src="https://user-images.githubusercontent.com/26967723/164701858-e8237611-1285-4c68-b9e3-e047499b94cf.svg" />
+    <br/>Aksel
 </h1>
 
 <div align="center">
     <p>
-        Monorepo for alle felleskomponenter i NAVs frontend-rammeverk.
+        NAVs designsystem og felleskomponenter
     </p>
-    <p>
-      <a href="https://github.com/navikt/nav-frontend-moduler/pulls">
-          <img src="https://img.shields.io/badge/PRs-welcome-green.svg" />
+    <div align="center">
+      <a href="https://master--5f801fb2aea7820022de2936.chromatic.com/">
+          <img src="https://shields.io/badge/storybook-white?logo=storybook&style=flat"" />
       </a>
-         <img src="https://github.com/navikt/nav-frontend-moduler/actions/workflows/build-publish.yml/badge.svg" />
-        <img src="https://github.com/navikt/nav-frontend-moduler/actions/workflows/chromatic.yml/badge.svg" />    
-    </p>
-   <img src="https://img.shields.io/endpoint?style=for-the-badge&url=https://runkit.io/fezvrasta/combined-npm-downloads/1.0.0?packages=@navikt/ds-react,@navikt/ds-css,@navikt/ds-icons,@navikt/ds-tokens,@navikt/ds-react-internal,@navikt/ds-css-internal,nav-frontend-alertstriper-style,nav-frontend-alertstriper,nav-frontend-chevron-style,nav-frontend-chevron,nav-frontend-core,nav-frontend-ekspanderbartpanel-style,nav-frontend-ekspanderbartpanel,nav-frontend-etiketter-style,nav-frontend-etiketter,nav-frontend-fullbreddeknapp-style,nav-frontend-grid-style,nav-frontend-grid,nav-frontend-hjelpetekst-style,nav-frontend-hjelpetekst,nav-frontend-ikoner-assets,nav-frontend-ikonknapper,nav-frontend-js-utils,nav-frontend-knapper-style,nav-frontend-knapper,nav-frontend-lenkepanel-style,nav-frontend-lenkepanel,nav-frontend-lenker-style,nav-frontend-lenker,nav-frontend-lesmerpanel-style,nav-frontend-lesmerpanel,nav-frontend-lukknapp-style,nav-frontend-lukknapp,nav-frontend-modal-style,nav-frontend-modal,nav-frontend-paneler-style,nav-frontend-paneler,nav-frontend-popover-style,nav-frontend-popover,nav-frontend-skjema-style,nav-frontend-skjema,nav-frontend-snakkeboble-style,nav-frontend-snakkeboble,nav-frontend-spinner-style,nav-frontend-spinner,nav-frontend-stegindikator-style,nav-frontend-stegindikator,nav-frontend-tabell-style,nav-frontend-tabs-style,nav-frontend-tabs,nav-frontend-tekstomrade,nav-frontend-toggle-style,nav-frontend-toggle,nav-frontend-typografi-style,nav-frontend-typografi,nav-frontend-veileder-style,nav-frontend-veileder,nav-frontend-veilederpanel-style,nav-frontend-veilederpanel" />
-    <h4><a href="https://design.nav.no">Nettside</a> | <a href="https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md">Bidra</a> | <a href="https://github.com/navikt/nav-frontend-moduler/issues">Bug-rapport</a>
+      <a href="https://github.com/navikt/Designsystemet/pulls">
+          <img src="https://img.shields.io/badge/PRs-welcome-green.svg?color=%23262626"" />
+      </a>
+      <a href="https://github.com/navikt/Designsystemet/actions/workflows/ci.yml">
+          <img src="https://github.com/navikt/Designsystemet/actions/workflows/ci.yml/badge.svg "" />
+      </a>
+    </div>
+    <div><a href="https://www.npmjs.com/package/@navikt/ds-css"><img alt="npm" src="https://img.shields.io/npm/v/@navikt/ds-css?label=%40navikt%2Fds-*"></a></div>
+    <br/>
+    <a href="https://aksel.nav.no">Nettside</a> | <a href="https://github.com/navikt/Designsystemet/issues">Issues</a>
+<br/>
 </div>
 
-## Innhold i repo
+## Innhold
 
-Repoet inneholder følgende:
+```sh
+@navikt/
+├── core/react      # @navikt/ds-react, kjernekomponenter
+├── core/css        # @navikt/ds-css, css kjernekomponenter
+├── core/tokens     # @navikt/ds-tokens, tokens
+├── core/tailwind   # @navikt/ds-tailwind, tailwind-config
+├── internal/react  # @navikt/ds-react-internal, komponenter interne flater
+├── internal/css    # @navikt/ds-css-internal, css interne flater
+├── icons           # @navikt/ds-icons, ikonpakke
+└── codemod         # @navikt/ds-codemod, migrerings-scripts
+```
 
-- [Felleskomponenter](https://github.com/navikt/nav-frontend-moduler/tree/master/@navikt/)
-- [Storybook](https://5f801fb2aea7820022de2936-rognyzqcpw.chromatic.com/) for komponenter.
-- [Gammel dokumentasjon](https://old-design-nav.vercel.app) for komponenter.
+## Commands
 
- ## Dokumentasjon
-    
-[Dokumentasjon side forvaltes i dette repoet](https://github.com/navikt/verktoykassen)
+Installer dependencies og bygg workspace
 
-## Endringslogg
+```sh
+yarn && yarn boot
+```
 
-[Alle relevante kode-endringer blir dokumentert her](https://design.nav.no/designsystem/side/endringslogg)
+| Command          | Script                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------ |
+| `yarn changeset` | Ny versjon-entry [(how-to)](https://github.com/navikt/Designsystemet/blob/master/.changeset/README.md) |
+| `yarn lint`      | Lints react and css workspaces                                                                         |
+| `yarn test`      | Runs tests                                                                                             |
+| `yarn clean`     | Fjerner genererte filer                                                                                |
+| `yarn docgen`    | Generer ts-docs                                                                                        |
+
+## Dokumentasjon
+
+[Dokumentasjon forvaltes i navikt/aksel-website](https://github.com/navikt/aksel-website)
+
+[Migreringer](https://aksel.nav.no/designsystem/side/migrering#beta-til-v1)
 
 ## Bidra
 
-Gå til [CONTRIBUTING.md](https://github.com/navikt/nav-frontend-moduler/blob/master/CONTRIBUTING.md)
+Vi tar gjerne i mot PR-er [CONTRIBUTING.md](https://github.com/navikt/Designsystemet/blob/master/CONTRIBUTING.md)
 
 ## Lisenser
 
-Gå til [LICENSE](https://github.com/navikt/nav-frontend-moduler/blob/master/LICENCE)
-    
+[MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+
+## Codeowners
+
+Løsningen forvaltes av team Aksel/Designsystemet
+
+[Slack](https://nav-it.slack.com/archives/C7NE7A8UF)
+
 ## Contributors
-    
-<a href="https://github.com/navikt/nav-frontend-moduler/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=navikt/nav-frontend-moduler" />
+
+<a href="https://github.com/navikt/Designsystemet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=navikt/Designsystemet" />
 </a>

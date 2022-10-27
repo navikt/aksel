@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import cl from "classnames";
+import cl from "clsx";
 import { OverridableComponent } from "..";
 
 export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
@@ -8,7 +8,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
    */
   children: React.ReactNode;
   /**
-   * Toggles border on panel
+   * Adds a border to panel when true
    * @default false
    */
   border?: boolean;
@@ -16,7 +16,7 @@ export interface PanelProps extends React.HTMLAttributes<HTMLElement> {
 
 export type PanelType = OverridableComponent<PanelProps, HTMLElement>;
 
-const Panel: PanelType = forwardRef(
+export const Panel: PanelType = forwardRef(
   (
     { children, className, border = false, as: Component = "div", ...rest },
     ref

@@ -1,1 +1,5 @@
-export { default, FieldsetProps, FieldsetContext } from "./Fieldset";
+export {
+  default as Fieldset,
+  FieldsetProps,
+  FieldsetContext,
+} from "./Fieldset";

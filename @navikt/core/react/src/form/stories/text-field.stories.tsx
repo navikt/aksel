@@ -2,78 +2,82 @@ import React from "react";
 import { TextField } from "../index";
 import { Meta } from "@storybook/react/types-6-0";
 export default {
-  title: "ds-react/form/text-field",
+  title: "ds-react/form/TextField",
   component: TextField,
+  argTypes: {
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
+    description: {
+      type: "string",
+    },
+    error: {
+      type: "string",
+    },
+    hideLabel: {
+      type: "boolean",
+    },
+    disabled: {
+      type: "boolean",
+    },
+  },
 } as Meta;
 
-export const All = () => {
+export const Default = (props) => {
+  return <TextField {...props} label="Ipsum enim quis culpa" />;
+};
+
+Default.args = {};
+
+export const Small = () => {
+  return <TextField size="small" label="Ipsum enim quis culpa" />;
+};
+
+export const Description = () => {
   return (
-    <div style={{ maxWidth: 400 }}>
-      <h1>TextField</h1>
-
-      <TextField label="Laborum excepteur" />
-
-      <h2>Description</h2>
-
+    <div className="colgap">
       <TextField
-        label="Laborum excepteur"
-        description={<div>Cillum mollit</div>}
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
       />
-
-      <h2>Passord-type</h2>
-      <TextField label="Passord" type="password" />
-
-      <h2>Errors</h2>
-
       <TextField
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        error="TextField error"
-      />
-
-      <h2>Sizing</h2>
-
-      <TextField
+        label="Ipsum enim quis culpa"
+        description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
         size="small"
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        error="TextField error"
-      />
-
-      <h2>hideLabel</h2>
-
-      <TextField
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        hideLabel
-      />
-
-      <h2>Disabled</h2>
-
-      <TextField
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        disabled
-      />
-      <TextField
-        size="small"
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        disabled
-      />
-      <h2>Readonly</h2>
-
-      <TextField
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        readOnly
-      />
-      <TextField
-        label="Laborum excepteur"
-        description="Cillum mollit"
-        size="small"
-        readOnly
       />
     </div>
   );
+};
+
+export const Error = () => {
+  return (
+    <div className="colgap">
+      <TextField
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+      />
+
+      <TextField
+        label="Ipsum enim quis culpa"
+        error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
+        size="small"
+      />
+    </div>
+  );
+};
+
+export const Disabled = () => {
+  return (
+    <div className="colgap">
+      <TextField label="Ipsum enim quis culpa" disabled />
+      <TextField label="Ipsum enim quis culpa" disabled size="small" />
+    </div>
+  );
+};
+
+export const HideLabel = () => {
+  return <TextField label="Ipsum enim quis culpa" hideLabel />;
 };

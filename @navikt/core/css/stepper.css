@@ -1,0 +1,222 @@
+.navds-stepper {
+  --navds-stepper-circle-size: 1.75rem;
+  --navds-stepper-border-width: 2px;
+  --navds-stepper-line-length: 1rem;
+
+  color: var(--navds-semantic-color-interaction-primary);
+  font-weight: 600;
+  line-height: 1;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.navds-stepper--horizontal {
+  display: flex;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.navds-stepper__item {
+  display: grid;
+  grid-template-rows:
+    [line-1] auto [step-start] var(--navds-stepper-circle-size)
+    [line-2 step-end] auto;
+  grid-template-columns: var(--navds-stepper-circle-size) auto;
+  justify-items: flex-start;
+  gap: 0.5rem;
+}
+
+.navds-stepper__line {
+  background-color: var(--navds-semantic-color-border-muted);
+  width: var(--navds-stepper-border-width);
+  height: 100%;
+  min-height: var(--navds-stepper-line-length);
+  justify-self: center;
+  grid-column: 1;
+}
+
+.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
+  background-color: var(--navds-global-color-blue-500);
+}
+
+.navds-stepper__line--1 {
+  grid-row: line-1;
+  display: none;
+}
+
+.navds-stepper__line--2 {
+  grid-row: line-2;
+}
+
+:where(.navds-stepper__item:last-of-type) .navds-stepper__line--2 {
+  display: none;
+}
+
+.navds-stepper__step {
+  grid-row: 2 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: [circle] var(--navds-stepper-circle-size) [content] auto;
+  gap: var(--navds-spacing-2);
+  justify-content: flex-start;
+  text-decoration: none;
+  cursor: pointer;
+  padding: var(--navds-stepper-border-width);
+  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
+}
+
+button.navds-stepper__step {
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+}
+
+.navds-stepper__step--non-interactive {
+  color: var(--navds-global-color-gray-600);
+  cursor: default;
+}
+
+:where(.navds-stepper__step):focus {
+  outline: none;
+  box-shadow: var(--navds-shadow-focus);
+  isolation: isolate;
+}
+
+.navds-stepper__circle {
+  grid-column: circle;
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--navds-stepper-circle-size);
+  height: var(--navds-stepper-circle-size);
+  border: var(--navds-stepper-border-width) solid currentColor;
+  border-radius: var(--navds-border-radius-full);
+  line-height: 1;
+}
+
+.navds-stepper__circle--success {
+  border: none;
+  background: none;
+  font-size: 28px;
+}
+
+.navds-stepper__content {
+  min-width: fit-content;
+  line-height: 1.5;
+  grid-column: content;
+  padding-top: 0.035rem;
+}
+
+/* Horizontal */
+:where(.navds-stepper--horizontal) .navds-stepper__item {
+  flex: 1 1 100%;
+  grid-template-columns:
+    [line-1-start] 1fr [step-start] auto [line-1-end] var(--navds-stepper-circle-size)
+    [line-2-start] auto [step-end] 1fr [line-2-end];
+  grid-template-rows: var(--navds-stepper-circle-size) auto;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__line {
+  height: var(--navds-stepper-border-width);
+  width: 100%;
+  min-height: auto;
+  grid-row: 1;
+  display: block;
+  align-self: center;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__line--1 {
+  grid-column: line-1;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__line--2 {
+  grid-column: line-2;
+}
+
+:where(.navds-stepper--horizontal .navds-stepper__item:first-of-type) .navds-stepper__line--1,
+:where(.navds-stepper--horizontal .navds-stepper__item:last-of-type) .navds-stepper__line--2 {
+  visibility: hidden;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__step {
+  grid-row: 1 / -1;
+  grid-column: step;
+  display: grid;
+  grid-template-rows: [circle] var(--navds-stepper-circle-size) [content] auto;
+  grid-template-columns:
+    [content-start] auto [circle] var(--navds-stepper-circle-size)
+    [content-end] auto;
+  justify-items: center;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__circle {
+  grid-row: circle;
+  grid-column: 2;
+}
+
+:where(.navds-stepper--horizontal) .navds-stepper__content {
+  grid-row: content;
+  grid-column: 1 / -1;
+  max-width: 24ch;
+}
+
+/* Active step */
+:where(.navds-stepper__step--active) .navds-stepper__content {
+  color: var(--navds-semantic-color-interaction-primary-selected);
+}
+
+:where(.navds-stepper__step:hover) .navds-stepper__content {
+  text-decoration: underline;
+}
+
+:where(.navds-stepper__step--non-interactive:hover, .navds-stepper__step--active:hover) .navds-stepper__content {
+  text-decoration: none;
+}
+
+:where(.navds-stepper__step--active) .navds-stepper__circle {
+  background-color: var(--navds-semantic-color-interaction-primary-selected);
+  border-color: var(--navds-semantic-color-interaction-primary-selected);
+  color: var(--navds-semantic-color-text-inverted);
+}
+
+:where(.navds-stepper__step:not(.navds-stepper__step--active):hover) .navds-stepper__circle {
+  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
+}
+
+/* Non-interactive */
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__content {
+  color: var(--navds-global-color-gray-900);
+}
+
+.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
+  background-color: var(--navds-global-color-gray-600);
+}
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__circle {
+  background-color: var(--navds-global-color-gray-900);
+  border-color: var(--navds-global-color-gray-900);
+  color: var(--navds-global-color-white);
+}
+
+:where(.navds-stepper__step--non-interactive:hover) .navds-stepper__circle {
+  background-color: transparent;
+}
+
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active:hover) .navds-stepper__circle {
+  background-color: var(--navds-global-color-gray-900);
+}
+
+:where(.navds-stepper__step--completed.navds-stepper__step--active) .navds-stepper__circle {
+  background-color: inherit;
+  color: var(--navds-global-color-deepblue-500);
+}
+
+:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive) .navds-stepper__circle {
+  color: var(--navds-global-color-gray-900);
+}
