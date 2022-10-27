@@ -42,7 +42,7 @@ jobs:
           publish: yarn release
         env:
           NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.RELEASE_KEY }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
 
       - name: Creating .npmrc
