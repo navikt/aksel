@@ -1,4 +1,5 @@
 import cl from "clsx";
+import { format } from "date-fns";
 
 export const getConditionalClasses = (
   cropped: string,
@@ -14,4 +15,14 @@ export const getConditionalClasses = (
       (cropped === "left" && direction === "left") ||
       (cropped === "right" && direction === "right"),
   });
+};
+
+export const ariaLabel = (
+  startDate: Date,
+  endDate: Date,
+  status: String
+): string => {
+  const start = format(startDate, "dd.MM.yyyy");
+  const end = format(endDate, "dd.MM.yyyy");
+  return `${status} fra ${start} til ${end}`;
 };

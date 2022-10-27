@@ -10,6 +10,7 @@ import React, {
 } from "react";
 import { usePeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
+import ClickablePeriod from "./period/ClickablePeriod";
 import { getConditionalClasses } from "./utils/period";
 
 export interface PeriodPropsWrapper
@@ -111,37 +112,6 @@ const ariaLabel = (startDate: Date, endDate: Date, status: String): string => {
   const end = format(endDate, "dd.MM.yyyy");
   return `${status} fra ${start} til ${end}`;
 };
-
-const ClickablePeriod = React.memo(
-  ({
-    buttonRef,
-    onSelectPeriod,
-    start,
-    end,
-    status,
-    cropped,
-    direction,
-    left,
-    width,
-    icon,
-  }: ClickablePeriodProps) => {
-    return (
-      <button
-        ref={buttonRef}
-        onClick={() => onSelectPeriod && onSelectPeriod()}
-        aria-label={ariaLabel(start, end, status)}
-        className={getConditionalClasses(cropped, direction, status)}
-        data-clickable
-        style={{
-          width: `${width}%`,
-          left: `${left}%`,
-        }}
-      >
-        {icon}
-      </button>
-    );
-  }
-);
 
 const NonClickablePeriod = ({
   divRef,
