@@ -1,10 +1,7 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import InfoStep, { TimelineInfoStepProps, TimelineInfoStepType } from "./Info";
-import StatusStep, {
-  TimelineStatusStepProps,
-  TimelineStatusStepType,
-} from "./Status";
+import InfoStep, { TimelineInfoStepType } from "./Info";
+import StatusStep, { TimelineStatusStepType } from "./Status";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -21,41 +18,14 @@ interface TimelineComponent
   Status: TimelineStatusStepType;
 }
 
-type StepsT = TimelineInfoStepProps | TimelineStatusStepProps;
-
 export const Timeline: TimelineComponent = forwardRef<
   HTMLOListElement,
   TimelineProps
 >(({ children, className, ...rest }, ref) => {
   return (
-    <dl {...rest} ref={ref} className={cl("navds-timeline", className)}>
-      {React.Children.map(children, (step, index) => {
-        return (
-          <div
-            className={cl("navds-timeline__item", {
-              "navds-timeline__item--present":
-                React.isValidElement<StepsT>(step) &&
-                step.props.time === "present",
-              "navds-timeline__item--future":
-                React.isValidElement<StepsT>(step) &&
-                step.props.time === "future",
-              "navds-timeline__item--past":
-                React.isValidElement<StepsT>(step) &&
-                step.props.time === "past",
-            })}
-            key={index + (children?.toString?.() ?? "")}
-          >
-            <span className="navds-timeline__line navds-timeline__line--1" />
-            {React.isValidElement<TimelineInfoStepProps>(step)
-              ? React.cloneElement(step, {
-                  ...step.props,
-                })
-              : step}
-            <span className="navds-timeline__line navds-timeline__line--2" />
-          </div>
-        );
-      })}
-    </dl>
+    <ul {...rest} ref={ref} className={cl("navds-timeline", className)}>
+      {children}
+    </ul>
   );
 }) as TimelineComponent;
 

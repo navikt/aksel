@@ -1,10 +1,10 @@
+import { Error, Success, Warning } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import { BodyLong, BodyShort, Label } from "..";
-import { Error, Success, Warning } from "@navikt/ds-icons";
+import { BodyLong, BodyShort, Heading } from "..";
 
 export interface TimelineStatusStepProps
-  extends React.AnchorHTMLAttributes<HTMLDivElement> {
+  extends React.AnchorHTMLAttributes<HTMLLIElement> {
   children?: React.ReactNode;
   /**
    *  When in the process is this
@@ -22,7 +22,7 @@ export interface TimelineStatusStepProps
 
 export interface TimelineStatusStepType
   extends React.ForwardRefExoticComponent<
-    TimelineStatusStepProps & React.RefAttributes<HTMLDivElement>
+    TimelineStatusStepProps & React.RefAttributes<HTMLLIElement>
   > {}
 
 const getIcon = (variant: "success" | "warning" | "error") => {
@@ -56,39 +56,37 @@ const getIcon = (variant: "success" | "warning" | "error") => {
   }
 };
 
-export const StatusStep = forwardRef<HTMLDivElement, TimelineStatusStepProps>(
+export const StatusStep = forwardRef<HTMLLIElement, TimelineStatusStepProps>(
   (
     { className, children, time, description, variant, title, ...rest },
     ref
   ) => {
     return (
-      <div
+      <li
         {...rest}
         aria-current={time === "present"}
         ref={ref}
         className={cl(
-          "navds-timeline__step",
-          `navds-timeline__step--${time}`,
+          "navds-timeline__item",
+          `navds-timeline__item--${time}`,
           className
         )}
       >
-        <div className="navds-timeline__icon">{getIcon(variant)}</div>
+        <div className="navds-timeline__marker">{getIcon(variant)}</div>
+        <Heading size="small" as="div" className="navds-timeline__title">
+          {title}
+          {description && <BodyShort size="small">{description}</BodyShort>}
+        </Heading>
         <div className="navds-timeline__content">
-          <Label as="dt" className="navds-timeline__content-label">
-            {title}
-          </Label>
-          {description && (
-            <BodyShort as="dt" size="small">
-              {description}
-            </BodyShort>
-          )}
           {children && (
-            <BodyLong as="dd" className="navds-timeline__content-description">
+            <BodyLong className="navds-timeline__content-inner">
               {children}
             </BodyLong>
           )}
         </div>
-      </div>
+        <span className="navds-timeline__line navds-timeline__line--1" />
+        <span className="navds-timeline__line navds-timeline__line--2" />
+      </li>
     );
   }
 ) as TimelineStatusStepType;

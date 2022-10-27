@@ -3,7 +3,7 @@ import React, { forwardRef } from "react";
 import { BodyLong, BodyShort, Label } from "..";
 
 export interface TimelineInfoStepProps
-  extends React.AnchorHTMLAttributes<HTMLDivElement> {
+  extends React.AnchorHTMLAttributes<HTMLLIElement> {
   children?: React.ReactNode;
   /**
    *
@@ -21,44 +21,42 @@ export interface TimelineInfoStepProps
 
 export interface TimelineInfoStepType
   extends React.ForwardRefExoticComponent<
-    TimelineInfoStepProps & React.RefAttributes<HTMLDivElement>
+    TimelineInfoStepProps & React.RefAttributes<HTMLLIElement>
   > {}
 
-export const InfoStep = forwardRef<HTMLDivElement, TimelineInfoStepProps>(
+export const InfoStep = forwardRef<HTMLLIElement, TimelineInfoStepProps>(
   (
     { className, children, icon: Icon, time, description, title, ...rest },
     ref
   ) => {
     return (
-      <div
+      <li
         {...rest}
         aria-current={time === "present"}
         ref={ref}
         className={cl(
-          "navds-timeline__step",
-          `navds-timeline__step--${time}`,
+          "navds-timeline__item",
+          `navds-timeline__item--${time}`,
           className
         )}
       >
-        <div className="navds-timeline__icon">
+        <div className="navds-timeline__marker">
           <Icon aria-hidden />
         </div>
+        <Label as="div" className="navds-timeline__title">
+          {title}
+          {description && <BodyShort size="small">{description}</BodyShort>}
+        </Label>
         <div className="navds-timeline__content">
-          <Label as="dt" className="navds-timeline__content-label">
-            {title}
-          </Label>
-          {description && (
-            <BodyShort as="dt" size="small">
-              {description}
-            </BodyShort>
-          )}
           {children && (
-            <BodyLong as="dd" className="navds-timeline__content-description">
+            <BodyLong className="navds-timeline__content-inner">
               {children}
             </BodyLong>
           )}
         </div>
-      </div>
+        <span className="navds-timeline__line navds-timeline__line--1" />
+        <span className="navds-timeline__line navds-timeline__line--2" />
+      </li>
     );
   }
 ) as TimelineInfoStepType;
