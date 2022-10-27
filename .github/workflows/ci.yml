@@ -6,7 +6,6 @@ on:
       - master
       - next
   pull_request:
-    types: [opened, edited]
   workflow_dispatch:
 
 jobs:
