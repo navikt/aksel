@@ -24,7 +24,7 @@ jobs:
         if: steps.node-cache.outputs.cache-hit == 'true'
         run: yarn postinstall
       - name: Update tokens
-        run: yarn update:tokens
+        run: yarn workspace @navikt/ds-tokens update
         env:
           FIGMA_TOKEN: ${{ secrets.FIGMA_IKONER_API }}
       - name: Create Pull Request
