@@ -130,3 +130,10 @@ _docs.json
 */icons/png
 */core/icons
 /storybook-static
+
+.next
+out
+*/cypress/test-urls.json
+*/cypress/videos
+sanity/scripts/renameField.js
+tmp.json

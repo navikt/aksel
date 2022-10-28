@@ -23,7 +23,8 @@
     "@navikt/internal/*",
     "@navikt/codemod",
     "@navikt/icons",
-    "examples/*"
+    "examples/*",
+    "aksel.nav.no"
   ],
   "prettier": {
     "overrides": [
