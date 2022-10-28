@@ -17,7 +17,7 @@ class CustomComponent extends HTMLElement {
     rootElement.appendChild(appElement);
     this.attachShadow({ mode: "closed" }).appendChild(rootElement);
 
-    ReactDOM.createRoot(rootElement).render(
+    ReactDOM.createRoot(appElement).render(
       <Provider rootElement={rootElement} appElement={appElement}>
         <style>{styles}</style>
         <Button>Click me!</Button>
