@@ -1,0 +1,70 @@
+{
+  "root": true,
+  "project": {
+    "name": "Aksel"
+  },
+  "api": {
+    "projectId": "hnbe3yhs",
+    "dataset": "production"
+  },
+  "env": {
+    "development": {
+      "api": {
+        "dataset": "production"
+      },
+      "plugins": ["@sanity/vision"]
+    }
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "@sanity/code-input",
+    "@sanity/dashboard",
+    "dashboard-widget-document-list",
+    "outdated-documents-widget",
+    "media",
+    "power-table",
+    "asset-source-unsplash"
+  ],
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./client/desk-structure/deskStructure.tsx"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./client/dashboardConfig.tsx"
+    },
+    {
+      "name": "part:@sanity/base/initial-value-templates",
+      "path": "./client/initialValueTemplates.tsx"
+    },
+    {
+      "name": "part:@sanity/base/new-document-structure",
+      "path": "./client/newDocumentStructure.tsx"
+    },
+    {
+      "implements": "part:@sanity/base/absolutes",
+      "path": "./client/bundleCheck.tsx"
+    },
+    {
+      "implements": "part:@sanity/form-builder/input/image/asset-sources",
+      "path": "./client/assetSources.ts"
+    },
+    {
+      "implements": "part:@sanity/form-builder/input/file/asset-sources",
+      "path": "./client/assetSources.ts"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./client/resolveDocumentActions.tsx"
+    }
+  ]
+}

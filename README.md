@@ -36,6 +36,10 @@
 ├── internal/css    # @navikt/ds-css-internal, css interne flater
 ├── icons           # @navikt/ds-icons, ikonpakke
 └── codemod         # @navikt/ds-codemod, migrerings-scripts
+
+aksel.nav.no/
+├── /website        # NEXT.JS app (v12)
+└── /sanity         # Sanity CMS-app (v2)
 ```
 
 ## Commands
@@ -53,12 +57,6 @@ yarn && yarn boot
 | `yarn test`      | Runs tests                                                                                             |
 | `yarn clean`     | Fjerner genererte filer                                                                                |
 | `yarn docgen`    | Generer ts-docs                                                                                        |
-
-## Dokumentasjon
-
-[Dokumentasjon forvaltes i navikt/aksel-website](https://github.com/navikt/aksel-website)
-
-[Migreringer](https://aksel.nav.no/designsystem/side/migrering#beta-til-v1)
 
 ## Bidra
 

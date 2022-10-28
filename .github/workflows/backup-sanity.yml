@@ -27,7 +27,7 @@ jobs:
         run: yarn
 
       - name: Export dataset
-        run: SANITY_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn sanity:backup
+        run: SANITY_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn workspace aksel.nav.no sanity:backup
       - name: Upload GCP bucket
         uses: "google-github-actions/auth@v0"
         with:

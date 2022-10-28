@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["dom", "dom.iterable", "esnext", "ES2021.String"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "incremental": true,
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom",
+      "@sanity-codegen/types"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "@/components": ["components/index.ts"],
+      "@/lib": ["lib/index.ts"],
+      "@/pages/*": ["pages/*"],
+      "@/sanity-block": ["components/SanityBlockContent.tsx"],
+      "@/utils": ["components/website-modules/utils/index.ts"],
+      "@/layout": ["components/layout/index.ts"],
+      "@/error-boundary": ["components/website-modules/ErrorBoundary.tsx"],
+      "@/sanity-client": ["lib/sanity/sanity.server"],
+      "@/mockdata": ["lib/testing/mockdata.ts"]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "lib": ["dom", "dom.iterable", "esnext", "ES2021.String"]
+    }
+  },
+  "include": ["next-env.d.ts", "lib/types/schema.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "e2e"]
+}

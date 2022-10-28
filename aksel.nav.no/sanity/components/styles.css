@@ -1,0 +1,83 @@
+@import "part:@sanity/base/theme/variables-style";
+
+.link {
+  composes: item from "part:@sanity/base/theme/layout/selectable-style";
+  display: block;
+  color: inherit;
+  text-decoration: inherit;
+  outline: none;
+  padding: 0.5rem 0;
+  height: 100%;
+}
+
+.profileDetails details {
+  border-radius: 1px;
+}
+
+.profileDetails details summary {
+  cursor: pointer;
+  padding: 0.5rem;
+  padding-left: 0.66rem;
+  margin-bottom: 0;
+  border-radius: 1px;
+  position: relative;
+  list-style: none;
+}
+
+.profileDetails details summary > p {
+  margin-left: 1.35rem;
+}
+
+.profileDetails > * > svg {
+  margin-right: 0.5rem;
+  font-size: 1.5rem;
+}
+
+.profileDetails details summary:hover {
+  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle, rgba(230, 240, 255, 1));
+}
+
+.profileDetails details summary:focus {
+  outline: none;
+}
+
+.profileDetails details summary:focus-visible {
+  box-shadow: var(--navds-shadow-focus, 0 0 0 3px rgba(0, 52, 125, 1));
+}
+
+.profileDetails details summary > * {
+  display: inline;
+}
+
+.profileDetails details summary::marker {
+  display: none;
+  content: "";
+}
+
+.profileDetails details summary::before {
+  color: #3b3b3b;
+  content: "+";
+  font-size: 1.5rem;
+  display: block;
+  position: absolute;
+  left: 0.27rem;
+  top: 6px;
+}
+
+.profileDetails details[open] summary::before {
+  content: "-";
+}
+
+.profileDetails details[open] summary {
+  margin-bottom: 0.75rem;
+}
+
+.headings {
+  margin-top: 1rem !important;
+  display: flex;
+}
+
+p.detailsContent {
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}

@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - "master"
-      - "next"
     paths:
       - "@navikt/**"
   pull_request:
-    branches: [master]
+    branches: [master, next]
     paths:
       - "@navikt/**"
 

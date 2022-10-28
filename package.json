@@ -1,6 +1,6 @@
 {
-  "name": "nav-ds",
-  "description": "Repository for NAV Designsystem",
+  "name": "aksel",
+  "description": "NAV designystem + Aksel.nav.no",
   "version": "1.1.0",
   "private": true,
   "scripts": {
@@ -8,7 +8,7 @@
     "boot": "yarn clean && yarn workspace @navikt/ds-codemod build && yarn workspaces foreach -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
-    "dev": "yarn storybook",
+    "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "build-storybook",
@@ -38,18 +38,24 @@
   },
   "eslintConfig": {
     "plugins": [
-      "jest",
-      "jsx-a11y"
+      "jest"
     ],
     "extends": [
       "react-app",
       "eslint:recommended",
-      "plugin:jsx-a11y/recommended",
       "plugin:react-hooks/recommended"
     ],
     "rules": {
-      "jsx-a11y/click-events-have-key-events": 0,
-      "jsx-a11y/no-static-element-interactions": 0,
+      "react/no-unknown-property": [
+        2,
+        {
+          "ignore": [
+            "jsx",
+            "global"
+          ]
+        }
+      ],
+      "react/jsx-pascal-case": 0,
       "import/no-anonymous-default-export": [
         "error",
         {
@@ -63,6 +69,47 @@
         }
       ]
     },
+    "overrides": [
+      {
+        "env": {
+          "browser": true,
+          "es2021": true
+        },
+        "extends": [
+          "plugin:@next/next/recommended",
+          "plugin:@typescript-eslint/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "ecmaFeatures": {
+            "jsx": true
+          },
+          "ecmaVersion": 12,
+          "sourceType": "module"
+        },
+        "settings": {
+          "react": {
+            "version": "detect"
+          }
+        },
+        "files": [
+          "aksel.nav.no/website/**"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "jsx-a11y/anchor-is-valid": "off",
+          "react/react-in-jsx-scope": "off",
+          "@typescript-eslint/no-explicit-any": "off",
+          "react/display-name": "off",
+          "@typescript-eslint/explicit-function-return-type": "off",
+          "@typescript-eslint/explicit-module-boundary-types": "off",
+          "@next/next/no-html-link-for-pages": [
+            "error",
+            "aksel.nav.no/website/pages/"
+          ]
+        }
+      }
+    ],
     "globals": {
       "Locale": "readonly",
       "JSX": "readonly"
@@ -74,7 +121,8 @@
       "examples",
       "esm",
       "cjs",
-      "**/codemod/**/*.js"
+      "**/codemod/**/*.js",
+      "**/aksel.nav.no/sanity/**"
     ]
   },
   "stylelint": {
@@ -110,7 +158,8 @@
       ]
     },
     "ignoreFiles": [
-      "**/dist/**"
+      "**/dist/**",
+      "**/aksel.nav.no/sanity/dist**"
     ]
   },
   "repository": {
@@ -129,19 +178,19 @@
     "@storybook/manager-webpack5": "6.5.5",
     "@storybook/react": "6.5.5",
     "@storybook/theming": "6.5.5",
+    "@typescript-eslint/parser": "^5.41.0",
     "chromatic": "6.5.4",
     "css-loader": "^5.0.1",
     "eslint": "^8.16.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jest": "^26.2.2",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "fast-glob": "^3.2.11",
+    "fast-glob": "3.2.11",
     "fs-extra": "^10.0.1",
     "glob": "^7.1.6",
     "husky": "^8.0.0",
-    "prettier": "2.6.2",
+    "prettier": "2.7.1",
     "pretty-quick": "^3.1.3",
     "react": "^18.0.0",
     "react-docgen-typescript": "2.2.2",

@@ -1,0 +1,11 @@
+.bilde {
+  @apply rounded;
+}
+
+:global(.aksel-artikkel) .bilde {
+  @apply rounded-lg;
+}
+
+:global(.aksel-artikkel) .figure {
+  @apply mx-auto;
+}
