@@ -6,7 +6,6 @@ const oldRedirects = require("./redirects.json");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
-/* const { withSentryConfig } = require("@sentry/nextjs"); */
 
 const hotjar = `http://*.hotjar.com https://*.hotjar.com http://*.hotjar.io https://*.hotjar.io`;
 const ContentSecurityPolicy = `
