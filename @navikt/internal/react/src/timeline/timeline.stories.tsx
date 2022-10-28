@@ -15,7 +15,7 @@ export const Default = () => {
       <Timeline>
         <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
         <Timeline.Pin date={new Date("Jun 12 2022")}>Pin 2</Timeline.Pin>
-        <Timeline.Pin date={new Date("Aug 1 2022")}>Pin 3</Timeline.Pin>
+        <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
         <Timeline.Row label="Row 1">
           <Timeline.Period
             start={new Date("Jan 1 2022")}
