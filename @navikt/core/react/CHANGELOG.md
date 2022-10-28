@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 1.4.0
+
+### Minor Changes
+
+- [`1bdb7e377`](https://github.com/navikt/Designsystemet/commit/1bdb7e3777ece28d153991b78dbdd289366fca57) Thanks [@KenAJoh](https://github.com/KenAJoh)! - [#1702](https://github.com/navikt/Designsystemet/pull/1702) [`20bcc28cb`](https://github.com/navikt/Designsystemet/commit/20bcc28cb0a886aa40d2c1b042fb2706a144c014) Thanks [@andnorda](https://github.com/andnorda)! - Global Provider komponent for håndtering av global config
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.0
+
 ## 1.3.39
 
 ### Patch Changes
