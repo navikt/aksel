@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext } from "react";
 
 export interface AkselProviderContextType {}
 
@@ -13,12 +13,6 @@ export interface AkselProviderProps {
 }
 
 export const AkselProvider = ({ children, options }: AkselProviderProps) => {
-  const ctx = useContext(AkselProviderContext);
-
-  if (ctx) {
-    console.warn("AkselProvider should not be nested.");
-  }
-
   return (
     <AkselProviderContext.Provider value={{}}>
       {children}
