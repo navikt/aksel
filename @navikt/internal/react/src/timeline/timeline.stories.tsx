@@ -14,6 +14,8 @@ export const Default = () => {
     <div style={{ width: "80vw" }}>
       <Timeline>
         <Timeline.Row label="Row 1">
+          <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
+          <Timeline.Pin date={new Date("Aug 1 2022")}>Pin 2</Timeline.Pin>
           <Timeline.Period
             start={new Date("Jan 1 2022")}
             end={new Date("Jan 31 2022")}

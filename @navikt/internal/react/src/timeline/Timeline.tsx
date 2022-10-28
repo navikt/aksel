@@ -9,6 +9,7 @@ import {
   useTimelineRows,
 } from "./hooks/useTimelineRows";
 import Period, { PeriodType } from "./period/Period";
+import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
 
@@ -39,6 +40,10 @@ interface TimelineComponent
    * Built-in row period
    */
   Period: PeriodType;
+  /**
+   * Built-in timeline pin
+   */
+  Pin: PinType;
 }
 
 export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
@@ -89,5 +94,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
 Timeline.Row = TimelineRow;
 Timeline.Period = Period;
+Timeline.Pin = Pin;
 
 export default Timeline;
