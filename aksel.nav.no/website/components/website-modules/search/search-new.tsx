@@ -21,7 +21,7 @@ const searchClient = algoliasearch(
 const SearchBox = () => {
   const { query, refine, clear } = useSearchBox();
   const [value, setValue] = useState(query);
-  const debouncedValue = useDebounce(value, 200);
+  const debouncedValue = useDebounce(value);
 
   useEffect(() => {
     /* debouncedValue && */ refine(debouncedValue);

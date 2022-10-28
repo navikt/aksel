@@ -1,10 +1,10 @@
+import nbLocale from "date-fns/locale/nb";
+import { format } from "date-fns";
+
 export * from "./util";
 export * from "./amplitude";
 export * from "./hooks";
 export * from "./contexts";
-
-import nbLocale from "date-fns/locale/nb";
-import { format } from "date-fns";
 
 export const dateStr = (date: string) =>
   format(new Date(date), "d. MMM YYY", { locale: nbLocale });

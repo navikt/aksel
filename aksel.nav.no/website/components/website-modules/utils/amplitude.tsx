@@ -2,6 +2,18 @@ import amplitude from "amplitude-js";
 import { isTest } from ".";
 import { isDevelopment } from "@/lib";
 
+export enum AmplitudeEvents {
+  "sidevisning" = "sidevisning",
+  "navigasjon" = "navigasjon",
+  "notfound" = "notfound",
+  "error" = "error",
+  "ikonklikk" = "ikonklikk",
+  "ikonsok" = "ikonsok",
+  "fargeklikk" = "fargeklikk",
+  "ikonnedlastning" = "ikonnedlastning",
+  "feedbackinteraksjon" = "feedbackinteraksjon",
+}
+
 export const initAmplitude = () => {
   if (amplitude) {
     amplitude.getInstance().init("default", "", {
@@ -38,16 +50,4 @@ export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });
-}
-
-export enum AmplitudeEvents {
-  "sidevisning" = "sidevisning",
-  "navigasjon" = "navigasjon",
-  "notfound" = "notfound",
-  "error" = "error",
-  "ikonklikk" = "ikonklikk",
-  "ikonsok" = "ikonsok",
-  "fargeklikk" = "fargeklikk",
-  "ikonnedlastning" = "ikonnedlastning",
-  "feedbackinteraksjon" = "feedbackinteraksjon",
 }
