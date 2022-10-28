@@ -41,6 +41,13 @@ const Filter = ({
               toggle,
             });
           }}
+          onClear={() => {
+            setValue("");
+            onFilterChange({
+              value: "",
+              toggle,
+            });
+          }}
           autoComplete="off"
         />
       </form>

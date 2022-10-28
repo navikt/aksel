@@ -115,7 +115,7 @@ const IconSearch = () => {
       (x) => filter.toggle === getTag(x.name).toLowerCase()
     );
 
-    if (filter.value) {
+    if (filter.value && filter.value !== "") {
       metaIcons = metaIcons.filter(
         (x) =>
           x?.name.toLowerCase().includes(filter.value) ||
