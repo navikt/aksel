@@ -23,8 +23,8 @@ const customJestConfig = {
     ...pathsToModuleNameMapper(compilerOptions.paths, {
       prefix: "<rootDir>/website/",
     }),
-    jose: "<rootDir>/node_modules/jose/dist/node/cjs",
-    uuid: "<rootDir>/node_modules/uuid/dist",
+    /* jose: "<rootDir>/website/node_modules/jose/dist/node/cjs", */
+    /* uuid: "<rootDir>/website/node_modules/uuid/dist", */
   },
   setupFilesAfterEnv: ["<rootDir>/website/jest.setup.js"],
   /* testPathIgnorePatterns: ["<rootDir>/node_modules/jose/*"], */
