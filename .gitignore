@@ -138,3 +138,6 @@ videos
 */cypress/videos
 sanity/scripts/renameField.js
 tmp.json
+/test-results/
+/playwright-report/
+/playwright/.cache/
