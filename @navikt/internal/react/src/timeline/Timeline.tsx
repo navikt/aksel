@@ -56,6 +56,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       (c: any) => c?.type?.componentType === "row"
     );
 
+    const pins = React.Children.toArray(children).filter(
+      (c: any) => c?.type?.componentType === "pin"
+    );
+
     const rows = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
@@ -69,10 +73,15 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
         value={{
           startDate: start,
           endDate: endInclusive,
+          direction: direction,
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
           <AxisLabels />
+
+          {pins.map((pin) => {
+            return pin;
+          })}
 
           {processedRows.map((row) => {
             return (

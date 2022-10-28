@@ -1,4 +1,6 @@
 import React, { forwardRef, ReactNode } from "react";
+import { useTimelineContext } from "./hooks/useTimelineContext";
+import { position } from "./utils/calc";
 
 export interface PinProps {
   /**
@@ -17,10 +19,14 @@ export type PinType = React.ForwardRefExoticComponent<
 
 export const Pin = forwardRef<HTMLSpanElement, PinProps>(
   ({ date, children, ...rest }, ref) => {
+    const { startDate, endDate, direction } = useTimelineContext();
     return (
-      <span {...rest} ref={ref} className="navdsi-timeline__row">
-        {children}
-      </span>
+      <span
+        {...rest}
+        ref={ref}
+        className="navdsi-timeline__pin"
+        style={{ [direction]: `${position(date, startDate, endDate)}%` }}
+      ></span>
     );
   }
 );

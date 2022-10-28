@@ -3,11 +3,13 @@ import { createContext, useContext } from "react";
 interface TimelineContextProps {
   startDate: Date;
   endDate: Date;
+  direction: string;
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
   startDate: new Date(),
   endDate: new Date(),
+  direction: "left",
 });
 
 export const useTimelineContext = () => {

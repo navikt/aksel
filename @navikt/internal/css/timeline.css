@@ -50,6 +50,7 @@
   display: flex;
   align-items: center;
   padding-left: var(--navds-spacing-2);
+  z-index: 2;
 }
 
 .navdsi-timeline__period--success {
@@ -113,4 +114,13 @@
 .navdsi-timeline__period--connectedLeft {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
+}
+
+.navdsi-timeline__pin {
+  position: absolute;
+  height: calc(100% - 1rem);
+  top: 1rem;
+  width: 1px;
+  background: #000000;
+  z-index: 1;
 }
