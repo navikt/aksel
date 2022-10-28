@@ -133,7 +133,8 @@ _docs.json
 
 .next
 out
-*/cypress/test-urls.json
+test-urls.json
+videos
 */cypress/videos
 sanity/scripts/renameField.js
 tmp.json
