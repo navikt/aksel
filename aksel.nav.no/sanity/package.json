@@ -35,8 +35,6 @@
     "@sanity/react-hooks": "^2.35.0",
     "@sanity/vision": "^2.35.0",
     "moment": "2.29.4",
-    "react": "^17.0",
-    "react-dom": "^17.0",
     "sanity-codegen": "1.0.0-alpha.26",
     "sanity-plugin-asset-source-unsplash": "^0.1.5",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.13",

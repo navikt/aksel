@@ -9,7 +9,6 @@ import {
 import { Provider } from "@navikt/ds-react";
 import Head from "next/head";
 import React, { useEffect } from "react";
-/* import { hotjar } from "react-hotjar"; */
 import "../styles/index.css";
 
 function App({
