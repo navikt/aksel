@@ -35,7 +35,7 @@ export const RemovableChips: OverridableComponent<
       children,
       variant = "action",
       as: Component = "button",
-      removeAriaLabel = "slett filter",
+      removeAriaLabel = "slett",
       onDelete,
       ...rest
     },
@@ -50,7 +50,6 @@ export const RemovableChips: OverridableComponent<
           className,
           `navds-chips__removable--${variant}`
         )}
-        aria-hidden
         aria-label={`${children} ${removeAriaLabel}`}
         onClick={(e) => {
           onDelete?.();
