@@ -18,7 +18,7 @@ jobs:
           node-version: "14"
       - uses: actions/checkout@v2
         with:
-          ref: "NEXT"
+          ref: "next"
       - name: add tokens to .env
         run: |
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> website/.env
@@ -34,9 +34,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
+          key: ${{ runner.os }}-dev-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-visual-regression-test-
+            ${{ runner.os }}-dev-
 
       - name: Install dependencies
         run: yarn

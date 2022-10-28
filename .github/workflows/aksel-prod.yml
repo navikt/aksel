@@ -33,9 +33,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
+          key: ${{ runner.os }}-prod-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-visual-regression-test-
+            ${{ runner.os }}-prod-
 
       - name: Install dependencies
         run: yarn
