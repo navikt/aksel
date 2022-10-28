@@ -125,6 +125,6 @@
   height: calc(100% - 1rem);
   top: 1rem;
   width: 1px;
-  background: #000000;
+  background: #000;
   z-index: 1;
 }
