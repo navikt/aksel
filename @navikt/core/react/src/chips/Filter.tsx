@@ -34,9 +34,7 @@ export const FilterChips: FilterChipsType = forwardRef(
         aria-pressed={selected}
       >
         {selected && (
-          <span className="navds-chips__icon">
-            <SuccessStroke aria-hidden />
-          </span>
+          <SuccessStroke aria-hidden className="navds-chips__filter-icon" />
         )}
         <span className="navds-chips__chip-text">{children}</span>
       </Component>

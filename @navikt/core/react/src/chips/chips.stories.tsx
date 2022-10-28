@@ -50,6 +50,36 @@ export const Removable = () => {
   );
 };
 
+export const Regular = () => {
+  const [selected, setSelected] = useState<number[]>([]);
+  return (
+    <div className="colgap">
+      <Chips>
+        {new Array(4).fill(1).map((_, y) => (
+          <Chips.Removable key={y}>Input</Chips.Removable>
+        ))}
+      </Chips>
+      <Chips>
+        {new Array(4).fill(1).map((_, y) => (
+          <Chips.Filter
+            selected={selected.includes(y)}
+            onClick={() =>
+              setSelected(
+                selected.includes(y)
+                  ? selected.filter((x) => x !== y)
+                  : [...selected, y]
+              )
+            }
+            key={y}
+          >
+            Filter
+          </Chips.Filter>
+        ))}
+      </Chips>
+    </div>
+  );
+};
+
 export const Small = () => {
   const [selected, setSelected] = useState<number[]>([]);
   return (
