@@ -1,9 +1,9 @@
-name: Deploy NEXT to gcp
+name: Deploy aksel.dev.nav.no
 on:
   workflow_dispatch:
   push:
     branches:
-      - NEXT
+      - next
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}
@@ -30,11 +30,19 @@ jobs:
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> website/.env
 
-      - name: Install deps
-        if: steps.node-cache.outputs.cache-hit != 'true'
-        run: yarn install --immutable
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-visual-regression-test-
+
+      - name: Install dependencies
+        run: yarn
+
       - name: Build application
-        run: yarn build:next
+        run: yarn workspace aksel.nav.no build:next
       - name: Login to GitHub Container Registry
         uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
         with:
