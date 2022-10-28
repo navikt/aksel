@@ -54,7 +54,7 @@ export default function transformer(file, api, options) {
       });
     });
 
-  if (!!j(file.source).findJSXElements(localName)) {
+  if (j(file.source).findJSXElements(localName)) {
     root.findJSXElements(`${localName}`).forEach((parent) => {
       const skip = !!parent.value.openingElement?.attributes.find(
         (x) => x.name.name === "data-version" && x.value.value === "v1"
