@@ -8,7 +8,7 @@
     "boot": "yarn clean && yarn workspace @navikt/ds-codemod build && yarn workspaces foreach -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
-    "dev": "yarn storybook",
+    "dev": "yarn workspace aksel.nav.no dev",
     "docgen": "yarn workspaces foreach -p run docgen",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "build-storybook",

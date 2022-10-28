@@ -1,14 +1,8 @@
-<h1 align="center">
-    <img src="https://user-images.githubusercontent.com/26967723/164701858-e8237611-1285-4c68-b9e3-e047499b94cf.svg" />
-    <br/>Aksel
-</h1>
-
 CMS og nettside for [aksel.nav.no](https://aksel.nav.no/)
 
 ```sh
-Aksel-website
-├── /website         # NEXT.JS app (v12)
-└── /sanity          # Sanity CMS-app (v2)
+├── /website    # NEXT.JS app (v12)
+└── /sanity     # Sanity CMS-app (v2)
 ```
 
 ### /website
@@ -30,14 +24,13 @@ Det publiserte studioet finner man på [aksel.nav.no/studio](https://aksel.nav.n
 
 ### Bidrag
 
-Branch `main` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features brukes branch `NEXT` som
-ved push publiseres til devmiljø aksel.dev.nav.no (krever naisdevice).
+Branch `master` blir pusher rett til prod -> aksel.nav.no. For å utvikle nye features brukes branch `next` som ved push publiseres til devmiljø aksel.dev.nav.no (krever naisdevice).
 
 ### Nettside (localhost:3000)
 
 ```
 yarn install
-yarn dev
+yarn workspace aksel.nav.no dev
 ```
 
 **Rettigheter**
@@ -57,13 +50,13 @@ Husk at alle endringer i datasettet lokalt også gjøres i prod. Bytt derfor til
 
 ```
 yarn install
-yarn sanity
+yarn workspace aksel.nav.no sanity
 ```
 
 **Deploy av ny sanity-oppdatering**
 
 ```
-yarn sanity:deploy
+yarn workspace aksel.nav.no sanity:deploy
 ```
 
 ### .env
