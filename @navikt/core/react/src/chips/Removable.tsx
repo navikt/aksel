@@ -6,7 +6,20 @@ import { OverridableComponent } from "..";
 export interface RemovableChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
+  /**
+   * Chip-variants
+   * @default "action"
+   */
   variant?: "action" | "neutral";
+  /**
+   * Replaces label read for screen-readers
+   * @default "slett filter"
+   */
+  removeAriaLabel?: string;
+  /**
+   * Click callback
+   */
+  onDelete?: () => void;
 }
 
 export interface RemovableChipsType
@@ -22,6 +35,8 @@ export const RemovableChips: OverridableComponent<
       children,
       variant = "action",
       as: Component = "button",
+      removeAriaLabel = "slett filter",
+      onDelete,
       ...rest
     },
     ref
@@ -36,7 +51,11 @@ export const RemovableChips: OverridableComponent<
           `navds-chips__removable--${variant}`
         )}
         aria-hidden
-        aria-label={`${children} - slett`}
+        aria-label={`${children} ${removeAriaLabel}`}
+        onClick={(e) => {
+          onDelete?.();
+          rest?.onClick?.(e);
+        }}
       >
         <span className="navds-chips__chip-text">{children}</span>
         <span className="navds-chips__removable-icon">
