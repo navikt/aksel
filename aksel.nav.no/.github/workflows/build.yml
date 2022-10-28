@@ -1,0 +1,70 @@
+name: Build and deploy to prod-gcp
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy to prod-gcp
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - uses: actions/checkout@v2
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> website/.env
+          echo "ALGOLIA_ADMIN=${{ secrets.ALGOLIA_ADMIN }}" >> website/.env
+          echo "ALGOLIA_ID=${{ secrets.ALGOLIA_ID}}" >> website/.env
+          echo "HOOK_SECRET=${{ secrets.SANITY_INDEXING_HOOK }}" >> website/.env
+          echo "TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }}" >> website/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> website/.env
+          echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> website/.env
+          echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> website/.env
+
+      - name: Install deps
+        run: yarn install --immutable
+      - name: Jest tests
+        run: yarn test
+      - name: Run tests
+        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e:ci
+      - name: Update sanity sync
+        run: yarn sanity:update
+      - name: Build application
+        run: yarn build:next
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get complete tag
+        run: echo "TAG=$( date +%s )" >> $GITHUB_ENV
+      - name: Create docker image tags
+        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
+      - name: Build docker image
+        run: docker build -t ${{ env.DOCKER_TAG }} . -f aksel.nav.no/Dockerfile
+      - name: Push docker image
+        run: |
+          docker push ${{ env.DOCKER_TAG }}
+      - name: Create tag and release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG }}
+          release_name: ${{ env.TAG }}
+          commitish: ${{ github.sha }}
+      - name: Deploy to prod-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: aksel.nav.no/nais-prod.yaml
+          CLUSTER: prod-gcp
+          IMAGE: ${{ env.DOCKER_TAG }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
