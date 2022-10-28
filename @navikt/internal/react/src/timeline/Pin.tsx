@@ -24,7 +24,6 @@ export const Pin = forwardRef<HTMLSpanElement, PinProps>(
       <span
         {...rest}
         ref={ref}
-        tabIndex={1}
         className="navdsi-timeline__pin"
         style={{ [direction]: `${position(date, startDate, endDate)}%` }}
       ></span>

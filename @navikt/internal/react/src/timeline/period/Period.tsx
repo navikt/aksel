@@ -3,9 +3,7 @@ import React, {
   ReactNode,
   RefObject,
   useEffect,
-  useLayoutEffect,
   useRef,
-  useState,
 } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
@@ -43,15 +41,16 @@ export type PeriodType = React.ForwardRefExoticComponent<
 export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
   ({ end, icon, ...rest }, ref) => {
     const periodRef = useRef<HTMLButtonElement | HTMLDivElement>(null);
-    const [isMini, setIsMini] = useState(false);
+    //const [isMini, setIsMini] = useState(false);
     const { periods } = useRowContext();
     const { periodId } = usePeriodContext();
-    useLayoutEffect(() => {
-      const currentWidth = periodRef?.current?.offsetWidth;
-      if (currentWidth && currentWidth < 30) {
-        setIsMini(true);
-      }
-    }, [periodRef]);
+
+    // useLayoutEffect(() => {
+    //   const currentWidth = periodRef?.current?.offsetWidth;
+    //   if (currentWidth && currentWidth < 30) {
+    //     setIsMini(true);
+    //   }
+    // }, [periodRef]);
 
     const period = periods.find((p) => p.id === periodId);
     useEffect(() => {
