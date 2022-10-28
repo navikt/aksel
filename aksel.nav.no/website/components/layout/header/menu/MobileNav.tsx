@@ -36,45 +36,43 @@ const MobileNavigation = () => {
 
   const headingMenu = pageProps?.navigation?.headings && (
     <>
-      {
-        <ul className="hidden animate-fadeIn text-text md:block lg:hidden">
-          {pageProps?.navigation?.headings.map(
-            (heading: DsNavigationHeadingT) => (
-              <li
-                key={heading._key}
-                className={cl(
-                  "first-of-type:rounded-t last-of-type:rounded-b focus-within:shadow-focus-inset hover:bg-canvas-background",
-                  {
-                    "border-l-[6px] border-l-canvas-background-inverted bg-canvas-background":
-                      pageProps?.activeHeading?.title === heading.title,
-                  }
-                )}
+      <ul className="hidden animate-fadeIn text-text md:block lg:hidden">
+        {pageProps?.navigation?.headings.map(
+          (heading: DsNavigationHeadingT) => (
+            <li
+              key={heading._key}
+              className={cl(
+                "first-of-type:rounded-t last-of-type:rounded-b focus-within:shadow-focus-inset hover:bg-canvas-background",
+                {
+                  "border-l-[6px] border-l-canvas-background-inverted bg-canvas-background":
+                    pageProps?.activeHeading?.title === heading.title,
+                }
+              )}
+            >
+              <NextLink
+                href={`/${heading?.link_ref?.slug?.current ?? "#"}`}
+                passHref
               >
-                <NextLink
-                  href={`/${heading?.link_ref?.slug?.current ?? "#"}`}
-                  passHref
+                <a
+                  className={cl(
+                    "flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 text-text no-underline focus:outline-none",
+                    {
+                      "pl-[26px] font-semibold":
+                        pageProps?.activeHeading?.title === heading.title,
+                    }
+                  )}
+                  onClick={() => {
+                    setHeading(heading);
+                    setOpen(false);
+                  }}
                 >
-                  <a
-                    className={cl(
-                      "flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 text-text no-underline focus:outline-none",
-                      {
-                        "pl-[26px] font-semibold":
-                          pageProps?.activeHeading?.title === heading.title,
-                      }
-                    )}
-                    onClick={() => {
-                      setHeading(heading);
-                      setOpen(false);
-                    }}
-                  >
-                    {heading?.title}
-                  </a>
-                </NextLink>
-              </li>
-            )
-          )}
-        </ul>
-      }
+                  {heading?.title}
+                </a>
+              </NextLink>
+            </li>
+          )
+        )}
+      </ul>
       <ul
         className={cl({
           "block animate-fadeIn md:hidden lg:block": !heading || level === 0,

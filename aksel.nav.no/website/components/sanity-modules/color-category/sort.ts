@@ -16,7 +16,7 @@ export function compare(
   if (two.color_index === undefined) {
     return OneBeforeTwo;
   }
-  if (one.color_index == two.color_index) {
+  if (one.color_index === two.color_index) {
     return one.title?.localeCompare(two.title, "no", { numeric: true });
   }
   return one.color_index > two.color_index ? TwoBeforeOne : OneBeforeTwo;

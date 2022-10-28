@@ -18,18 +18,21 @@ const ColorCategory = ({
   const [selectedColor, setSelectedColor] = useState<any>(null);
   const router = useRouter();
 
-  const setQuery = useCallback((color: string) => {
-    const query = router.query;
-    query.color = color;
-    router.replace(
-      {
-        pathname: router.pathname,
-        query,
-      },
-      undefined,
-      { shallow: true }
-    );
-  }, []);
+  const setQuery = useCallback(
+    (color: string) => {
+      const query = router.query;
+      query.color = color;
+      router.replace(
+        {
+          pathname: router.pathname,
+          query,
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
 
   const logColorClick = useCallback((c: any) => {
     logAmplitudeEvent(AmplitudeEvents.fargeklikk, {
@@ -48,19 +51,16 @@ const ColorCategory = ({
       setOpen(true);
       setQuery(c.full_title.slice(2));
     },
-    [logColorClick]
+    [logColorClick, setQuery]
   );
 
-  const handlePageEntry = useCallback(
-    (c: any) => {
-      if (!c) {
-        return;
-      }
-      setSelectedColor(c);
-      setOpen(true);
-    },
-    [logColorClick]
-  );
+  const handlePageEntry = useCallback((c: any) => {
+    if (!c) {
+      return;
+    }
+    setSelectedColor(c);
+    setOpen(true);
+  }, []);
 
   const handleClose = () => {
     setOpen(false);
@@ -88,7 +88,7 @@ const ColorCategory = ({
       handlePageEntry(
         node.colors.find((x) => x.full_title === `--${router.query.color}`)
       );
-  }, [router.query]);
+  }, [handlePageEntry, node.colors, router.query]);
 
   node.colors.sort(compare);
 

@@ -43,10 +43,19 @@
     "extends": [
       "react-app",
       "eslint:recommended",
-      "plugin:react-hooks/recommended",
-      "plugin:@next/next/recommended"
+      "plugin:react-hooks/recommended"
     ],
     "rules": {
+      "react/no-unknown-property": [
+        2,
+        {
+          "ignore": [
+            "jsx",
+            "global"
+          ]
+        }
+      ],
+      "react/jsx-pascal-case": 0,
       "import/no-anonymous-default-export": [
         "error",
         {
@@ -60,6 +69,47 @@
         }
       ]
     },
+    "overrides": [
+      {
+        "env": {
+          "browser": true,
+          "es2021": true
+        },
+        "extends": [
+          "plugin:@next/next/recommended",
+          "plugin:@typescript-eslint/recommended"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "ecmaFeatures": {
+            "jsx": true
+          },
+          "ecmaVersion": 12,
+          "sourceType": "module"
+        },
+        "settings": {
+          "react": {
+            "version": "detect"
+          }
+        },
+        "files": [
+          "aksel.nav.no/website/**"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "jsx-a11y/anchor-is-valid": "off",
+          "react/react-in-jsx-scope": "off",
+          "@typescript-eslint/no-explicit-any": "off",
+          "react/display-name": "off",
+          "@typescript-eslint/explicit-function-return-type": "off",
+          "@typescript-eslint/explicit-module-boundary-types": "off",
+          "@next/next/no-html-link-for-pages": [
+            "error",
+            "aksel.nav.no/website/pages/"
+          ]
+        }
+      }
+    ],
     "globals": {
       "Locale": "readonly",
       "JSX": "readonly"
@@ -71,7 +121,9 @@
       "examples",
       "esm",
       "cjs",
-      "**/codemod/**/*.js"
+      "**/codemod/**/*.js",
+      "**/aksel.nav.no/sanity/**",
+      "**/cypress/**"
     ]
   },
   "stylelint": {
@@ -107,7 +159,8 @@
       ]
     },
     "ignoreFiles": [
-      "**/dist/**"
+      "**/dist/**",
+      "**/aksel.nav.no/sanity/dist**"
     ]
   },
   "repository": {
@@ -126,6 +179,7 @@
     "@storybook/manager-webpack5": "6.5.5",
     "@storybook/react": "6.5.5",
     "@storybook/theming": "6.5.5",
+    "@typescript-eslint/parser": "^5.41.0",
     "chromatic": "6.5.4",
     "css-loader": "^5.0.1",
     "eslint": "^8.16.0",

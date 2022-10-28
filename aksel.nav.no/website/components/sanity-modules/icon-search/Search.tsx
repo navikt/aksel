@@ -34,19 +34,22 @@ const IconSearch = () => {
   const router = useRouter();
   const [visibleIcons, setVisibleIcons] = useState<IconMetaT[]>([]);
 
-  const setQuery = useCallback((icon: string) => {
-    const query = router.query;
-    query.icon = icon;
+  const setQuery = useCallback(
+    (icon: string) => {
+      const query = router.query;
+      query.icon = icon;
 
-    router.replace(
-      {
-        pathname: router.pathname,
-        query,
-      },
-      undefined,
-      { shallow: true }
-    );
-  }, []);
+      router.replace(
+        {
+          pathname: router.pathname,
+          query,
+        },
+        undefined,
+        { shallow: true }
+      );
+    },
+    [router]
+  );
 
   const logIconClick = useCallback((icon: string) => {
     logAmplitudeEvent(AmplitudeEvents.ikonklikk, {
@@ -61,16 +64,13 @@ const IconSearch = () => {
       setQuery(icon);
       logIconClick(icon);
     },
-    [logIconClick]
+    [logIconClick, setQuery]
   );
 
-  const handlePageEntry = useCallback(
-    (icon: string) => {
-      setSelectedIcon(icon);
-      setOpen(true);
-    },
-    [logIconClick]
-  );
+  const handlePageEntry = useCallback((icon: string) => {
+    setSelectedIcon(icon);
+    setOpen(true);
+  }, []);
 
   useEffect(() => {
     Modal.setAppElement("#__next");
@@ -79,7 +79,7 @@ const IconSearch = () => {
 
   useEffect(() => {
     router.query.icon && handlePageEntry(router.query.icon as string);
-  }, [router.query]);
+  }, [handlePageEntry, router.query]);
 
   const handleClose = () => {
     setOpen(false);

@@ -8331,7 +8331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.12, @typescript-eslint/parser@npm:^5.21.0, @typescript-eslint/parser@npm:^5.5.0":
+"@typescript-eslint/parser@npm:^5.12, @typescript-eslint/parser@npm:^5.21.0, @typescript-eslint/parser@npm:^5.41.0, @typescript-eslint/parser@npm:^5.5.0":
   version: 5.41.0
   resolution: "@typescript-eslint/parser@npm:5.41.0"
   dependencies:
@@ -22995,6 +22995,7 @@ __metadata:
     "@storybook/manager-webpack5": 6.5.5
     "@storybook/react": 6.5.5
     "@storybook/theming": 6.5.5
+    "@typescript-eslint/parser": ^5.41.0
     chromatic: 6.5.4
     css-loader: ^5.0.1
     eslint: ^8.16.0

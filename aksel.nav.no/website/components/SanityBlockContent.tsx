@@ -52,6 +52,7 @@ const serializers = {
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
 
     block: ({ node, children }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const context: BlockContextT = useContext(BlockContext);
       const style = node.style;
       if (children && children.length === 1 && children[0] === "") return null;
@@ -130,8 +131,9 @@ const serializers = {
     },
   },
   list: (props: any) => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const context: BlockContextT = useContext(BlockContext);
-    if (props?.type == "number") {
+    if (props?.type === "number") {
       return (
         <ol
           type="1"

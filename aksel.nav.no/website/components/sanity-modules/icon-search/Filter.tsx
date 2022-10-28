@@ -16,20 +16,6 @@ const Filter = ({
   const [toggle, setToggle] = useState("outline");
 
   useEffect(() => {
-    onFilterChange({
-      value: value.toLowerCase(),
-      toggle,
-    });
-  }, [value]);
-
-  useEffect(() => {
-    onFilterChange({
-      value: value.toLowerCase(),
-      toggle,
-    });
-  }, [toggle]);
-
-  useEffect(() => {
     if (toggle === "outline" && value === "") return;
     logAmplitudeEvent(AmplitudeEvents.ikonsok, {
       toggle,
@@ -48,11 +34,27 @@ const Filter = ({
           variant="simple"
           label="Søk i alle NAV-ikoner"
           value={value}
-          onChange={(e) => setValue(e)}
+          onChange={(e) => {
+            setValue(e);
+            onFilterChange({
+              value: value.toLowerCase(),
+              toggle,
+            });
+          }}
           autoComplete="off"
         />
       </form>
-      <ToggleGroup onChange={setToggle} size="small" defaultValue="outline">
+      <ToggleGroup
+        onChange={(v) => {
+          setToggle(v);
+          onFilterChange({
+            value: value.toLowerCase(),
+            toggle: v,
+          });
+        }}
+        size="small"
+        defaultValue="outline"
+      >
         <ToggleGroup.Item value="outline">Outline</ToggleGroup.Item>
         <ToggleGroup.Item value="filled">Filled</ToggleGroup.Item>
         <ToggleGroup.Item value="ny">Nye ikoner</ToggleGroup.Item>

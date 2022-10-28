@@ -31,7 +31,7 @@ const Example = () => {
                 }}
                 hideLabel
               >
-                {"Velg alle rader"}
+                Velg alle rader
               </Checkbox>
             </Table.DataCell>
 

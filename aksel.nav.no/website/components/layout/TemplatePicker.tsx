@@ -93,7 +93,7 @@ const TemplatePicker = ({
     return (
       <Error
         statusCode={404}
-        title={`Sanity-side mangler template, kontakt utvikler`}
+        title="Sanity-side mangler template, kontakt utvikler"
       />
     );
   }

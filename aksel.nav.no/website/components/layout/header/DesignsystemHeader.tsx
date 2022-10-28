@@ -13,7 +13,7 @@ const DesignsystemHeader = (): JSX.Element => {
 
   const nonMobile = (
     <>
-      <PortalNavigation title={"Designsystemet"} />
+      <PortalNavigation title="Designsystemet" />
       <div className="z-[1050] mr-auto flex">
         {pageProps?.navigation?.headings.map(
           (heading: DsNavigationHeadingT) => (
@@ -58,7 +58,7 @@ const DesignsystemHeader = (): JSX.Element => {
 
   const mobile = (
     <>
-      <PortalNavigation title={"Designsystemet"} />
+      <PortalNavigation title="Designsystemet" />
       <div className="ml-auto flex">
         <ProfileDropdown dark />
         <Search />

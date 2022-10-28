@@ -133,24 +133,23 @@ const Menu = ({
   heading?: DsNavigationHeadingT;
   onClick?: () => void;
 }): JSX.Element => {
-  const groups = () => {
-    if (!heading.menu || heading.menu.length === 0) return;
-
-    const list = [];
-    let last = 0;
-    heading.menu.forEach((x, y) => {
-      if (x._type === "subheading") {
-        list.push(heading.menu.slice(last, y));
-        last = y;
-      } else if (y === heading.menu.length - 1) {
-        list.push(heading.menu.slice(last, heading.menu.length));
-      }
-    });
-
-    return list.filter((x) => x.length > 0);
-  };
-
   const lists = useMemo(() => {
+    const groups = () => {
+      if (!heading.menu || heading.menu.length === 0) return;
+
+      const list = [];
+      let last = 0;
+      heading.menu.forEach((x, y) => {
+        if (x._type === "subheading") {
+          list.push(heading.menu.slice(last, y));
+          last = y;
+        } else if (y === heading.menu.length - 1) {
+          list.push(heading.menu.slice(last, heading.menu.length));
+        }
+      });
+
+      return list.filter((x) => x.length > 0);
+    };
     const menulist = groups();
 
     return (
@@ -169,7 +168,7 @@ const Menu = ({
           : null}
       </ul>
     );
-  }, [heading.menu]);
+  }, [heading.menu, onClick]);
 
   return (
     <nav aria-label={heading.title} className={cl("overflow-x-auto")}>

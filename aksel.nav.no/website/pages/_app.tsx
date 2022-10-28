@@ -35,7 +35,7 @@ function App({
     return () => {
       router.events.off("routeChangeComplete", t);
     };
-  }, []);
+  }, [router.events]);
 
   /* useEffect(() => {
     hotjar.initialize(148751, 6);
