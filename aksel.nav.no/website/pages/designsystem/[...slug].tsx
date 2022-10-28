@@ -40,14 +40,14 @@ const Page = (props: {
       }}
     >
       <DsHeader />
-      <div className="flex w-full flex-col items-center bg-canvas-background-light">
+      <div className="bg-canvas-background-light flex w-full flex-col items-center">
         <div className="flex w-full max-w-screen-2xl">
           <DsSidebar />
           <div className="relative w-full">
             <main
               tabIndex={-1}
               id="hovedinnhold"
-              className="relative min-h-screen-header w-full focus:outline-none md:max-w-screen-sidebar"
+              className="min-h-screen-header md:max-w-screen-sidebar relative w-full focus:outline-none"
             >
               <LayoutPicker title="Aksel" data={page} />
             </main>

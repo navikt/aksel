@@ -131,12 +131,12 @@ export function TableOfContents({
   return (
     <aside
       className={cl(
-        "algolia-ignore-index sticky right-0 top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
+        "algolia-ignore-index sticky top-20 z-[1] order-1 my-0 mb-16 hidden w-72 flex-col items-start pl-4",
         {
           hidden: !renderToc,
           "col-start-3 max-w-prose md:sticky md:top-20 lg:flex":
             aksel && renderToc,
-          "mt-12 h-full xl:flex": !aksel && renderToc,
+          "mt-12 mr-auto h-full xl:flex": !aksel && renderToc,
         }
       )}
     >
@@ -207,7 +207,7 @@ export function TableOfContents({
                               className={cl(
                                 "block w-56 overflow-hidden text-ellipsis whitespace-pre py-1 no-underline hover:underline",
                                 {
-                                  "font-semibold text-deepblue-700":
+                                  "text-deepblue-700 font-semibold":
                                     x.id === activeSubId && aksel,
                                   "font-semibold text-gray-900":
                                     x.id === activeSubId && !aksel,
