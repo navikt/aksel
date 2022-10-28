@@ -251,3 +251,13 @@ export const DisabledInput = () => {
     </div>
   );
 };
+
+export const ErrorInput = () => {
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker>
+        <DatePicker.Input error="feilmelding" label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};

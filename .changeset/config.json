@@ -1,0 +1,29 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@2.2.0/schema.json",
+  "changelog": [
+    "@changesets/changelog-github",
+    { "repo": "navikt/Designsystemet" }
+  ],
+  "commit": false,
+  "fixed": [
+    [
+      "@navikt/ds-react",
+      "@navikt/ds-css",
+      "@navikt/ds-icons",
+      "@navikt/ds-tokens",
+      "@navikt/ds-tailwind",
+      "@navikt/ds-css-internal",
+      "@navikt/ds-react-internal",
+      "@navikt/ds-codemod"
+    ]
+  ],
+  "linked": [],
+  "access": "public",
+  "baseBranch": "master",
+  "updateInternalDependencies": "patch",
+  "ignore": ["nextjs-demo", "shadow-dom"],
+
+  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
+    "updateInternalDependents": "always"
+  }
+}

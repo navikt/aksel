@@ -80,20 +80,24 @@ export const useMonthpicker = (
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
-  const getMonth = (date?: Date) => {
+  const updateMonth = (date?: Date) => {
     onMonthChange?.(date);
-    return date;
+    setSelectedMonth(date);
   };
 
   const handleFocusIn = useCallback(
-    (e) =>
+    (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         monthpickerRef.current,
         inputRef.current,
         inputRef.current?.nextSibling,
       ].some((element) => element?.contains(e.target)) &&
-      open &&
-      setOpen(false),
+        open &&
+        setOpen(false);
+    },
     [open]
   );
 
@@ -107,14 +111,14 @@ export const useMonthpicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedMonth(getMonth(defaultSelected));
+    updateMonth(defaultSelected);
     setYear(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
     setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
-    setSelectedMonth(getMonth(date));
+    updateMonth(date);
     setYear(date ?? today);
     setInputValue(date ? formatDateForInput(date, locale, "month") : "");
   };
@@ -141,11 +145,11 @@ export const useMonthpicker = (
     }
 
     if (!required && !month) {
-      setSelectedMonth(getMonth(undefined));
+      updateMonth(undefined);
       setInputValue("");
       return;
     }
-    setSelectedMonth(getMonth(month));
+    updateMonth(month);
     setInputValue(month ? formatDateForInput(month, locale, "month") : "");
   };
 
@@ -157,7 +161,7 @@ export const useMonthpicker = (
     const month = parseDate(e.target.value, today, locale, "month");
 
     if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
-      setSelectedMonth(getMonth(undefined));
+      updateMonth(undefined);
       return;
     }
 
@@ -178,10 +182,10 @@ export const useMonthpicker = (
       isBefore ||
       (fromDate && toDate && !isMatch(month, [{ from: fromDate, to: toDate }]))
     ) {
-      setSelectedMonth(getMonth(undefined));
+      updateMonth(undefined);
       return;
     }
-    setSelectedMonth(getMonth(month));
+    updateMonth(month);
     setYear(month);
   };
 

@@ -176,6 +176,16 @@
   padding-right: var(--navds-spacing-8);
 }
 
+/* Error-handling */
+.navds-date__field--error .navds-date__field-input:not(:hover):not(:disabled) {
+  border-color: var(--navds-search-color-border-error);
+  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error);
+}
+
+.navds-date__field--error .navds-date__field-input:focus:not(:hover):not(:disabled) {
+  box-shadow: inset 0 0 0 1px var(--navds-search-color-border-error), var(--navds-shadow-focus);
+}
+
 .navds-date__field-button {
   position: absolute;
   right: var(--navds-spacing-2);
