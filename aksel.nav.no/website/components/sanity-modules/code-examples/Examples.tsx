@@ -72,6 +72,7 @@ const ComponentExamples = ({
           id={node?.title ?? exampleIframeId}
           aria-label="Komponent eksempler"
           className="block w-full min-w-80 max-w-full resize-x overflow-auto bg-white shadow-[20px_0_20px_-20px_rgba(0,0,0,0.22)]"
+          title="Kode-eksempler"
         />
       </div>
       <div className="mb-2 flex justify-center gap-2 rounded-b border border-gray-300 px-2 py-1 text-base xs:justify-end ">
