@@ -37,7 +37,7 @@ const Filter = ({
           onChange={(e) => {
             setValue(e);
             onFilterChange({
-              value: value.toLowerCase(),
+              value: e.toLowerCase(),
               toggle,
             });
           }}
