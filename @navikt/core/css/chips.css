@@ -42,12 +42,6 @@
   background-color: var(--ac-chip-filter-bg-hover, var(--navds-global-color-gray-200));
 }
 
-.navds-chips__filter:active {
-  box-shadow: none;
-  background-color: var(--ac-chip-filter-bg-active, var(--navds-global-color-deepblue-500));
-  color: var(--ac-chip-filter-text-active, var(--navds-global-color-white));
-}
-
 .navds-chips__filter[aria-pressed="true"] {
   box-shadow: none;
   background-color: var(--ac-chip-filter-bg-pressed, var(--navds-global-color-deepblue-500));
@@ -58,16 +52,12 @@
   background-color: var(--ac-chip-filter-bg-pressed-hover, var(--navds-global-color-deepblue-600));
 }
 
-.navds-chips__filter[aria-pressed="true"]:active {
-  background-color: var(--ac-chip-filter-bg-pressed-active, var(--navds-global-color-deepblue-700));
-}
-
-.navds-chips__filter:focus {
+.navds-chips__filter:focus-visible {
   box-shadow: 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
-.navds-chips__filter[aria-pressed="true"]:focus,
-.navds-chips__filter:active:focus {
+.navds-chips__filter[aria-pressed="true"]:focus-visible,
+.navds-chips__filter:active:focus-visible {
   box-shadow: inset 0 0 0 1px var(--navds-global-color-white), 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
@@ -101,11 +91,11 @@
   width: 0.75rem;
 }
 
-.navds-chips__removable--action:focus {
+.navds-chips__removable--action:focus-visible {
   box-shadow: inset 0 0 0 1px var(--navds-global-color-white), 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
-.navds-chips__removable--neutral:focus {
+.navds-chips__removable--neutral:focus-visible {
   box-shadow: 0 0 0 2px var(--navds-global-color-blue-800);
 }
 

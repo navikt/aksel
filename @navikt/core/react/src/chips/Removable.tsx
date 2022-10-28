@@ -35,6 +35,8 @@ export const RemovableChips: OverridableComponent<
           className,
           `navds-chips__removable--${variant}`
         )}
+        aria-hidden
+        aria-label={`${children} - slett`}
       >
         <span className="navds-chips__chip-text">{children}</span>
         <span className="navds-chips__removable-icon">
