@@ -23,6 +23,10 @@
   display: flex;
 }
 
+.navdsi-timeline__row:last-of-type > ol {
+  margin-bottom: 0;
+}
+
 .navdsi-timeline__row__label {
   width: 126px;
   margin-right: 18px;
