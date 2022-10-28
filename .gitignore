@@ -138,3 +138,4 @@ videos
 */cypress/videos
 sanity/scripts/renameField.js
 tmp.json
+cypress/plugins
