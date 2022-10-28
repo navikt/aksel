@@ -1,7 +1,13 @@
 import React, { createContext, useContext } from "react";
 
 export interface ProviderContextType {
+  /**
+   * Global root-element to attach portals to (Modal, Tooltip)
+   */
   rootElement?: HTMLElement;
+  /**
+   * Global config for appElement (Modal)
+   */
   appElement?: HTMLElement;
 }
 
