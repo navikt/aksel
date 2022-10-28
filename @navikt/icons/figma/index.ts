@@ -78,8 +78,4 @@ const main = async () => {
   console.log("\nDownloaded all icons from Figma!\n");
 };
 
-try {
-  main();
-} catch (e) {
-  throw e;
-}
+main();
