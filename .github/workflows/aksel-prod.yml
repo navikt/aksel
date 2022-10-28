@@ -1,8 +1,10 @@
-name: Build and deploy to prod-gcp
+name: Deploy aksel.nav.no
 on:
   push:
     branches:
       - main
+    paths:
+      - "aksel.nav.no/**"
 
 env:
   IMAGE: ghcr.io/${{ github.repository }}
@@ -27,16 +29,29 @@ jobs:
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> website/.env
           echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> website/.env
 
-      - name: Install deps
-        run: yarn install --immutable
-      - name: Jest tests
-        run: yarn test
-      - name: Run tests
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-visual-regression-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-visual-regression-test-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Tests
+        run: yarn workspace aksel.nav.no test
+
+      - name: E2E
         run: NEXT_PUBLIC_TEST=true yarn workspace website e2e:ci
+
       - name: Update sanity sync
-        run: yarn sanity:update
+        run: yarn workspace aksel.nav.no sanity:update
+
       - name: Build application
-        run: yarn build:next
+        run: yarn workspace aksel.nav.no build:next
+
       - name: Login to GitHub Container Registry
         uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
         with:
@@ -67,4 +82,3 @@ jobs:
           RESOURCE: aksel.nav.no/nais-prod.yaml
           CLUSTER: prod-gcp
           IMAGE: ${{ env.DOCKER_TAG }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}

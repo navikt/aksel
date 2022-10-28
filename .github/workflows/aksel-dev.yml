@@ -73,4 +73,3 @@ jobs:
           RESOURCE: aksel.nav.no/nais-dev.yaml
           CLUSTER: dev-gcp
           IMAGE: ${{ env.DOCKER_TAG }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}

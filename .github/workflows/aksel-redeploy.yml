@@ -1,4 +1,4 @@
-name: Redeploy image to prod-gcp
+name: Redeploy image to for aksel.nav.no
 on:
   workflow_dispatch:
     inputs:
@@ -39,4 +39,3 @@ jobs:
           CLUSTER: prod-gcp
           IMAGE: ${{ env.DOCKER_TAG }}
           DRY_RUN: ${{ github.event.inputs.dry }}
-          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}

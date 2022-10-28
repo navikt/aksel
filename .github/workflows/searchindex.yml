@@ -7,16 +7,16 @@ on:
 
 jobs:
   searchcrawl:
-    name: Crawler nettside for søk-indeksering
+    name: Search-indexing aksel.nav.no
     runs-on: ubuntu-latest
     env:
       APPLICATION_ID: ${{ secrets.ALGOLIA_ID}}
       API_KEY: ${{ secrets.ALGOLIA_ADMIN }}
     steps:
       - uses: actions/checkout@v2
-      - name: Get the content of crawler.json as config
+      - name: Read crawler.json
         id: algolia_config
-        run: echo "::set-output name=config::$(cat ./crawler.json | jq -r tostring)"
+        run: echo "::set-output name=config::$(cat ./aksel.nav.no/crawler.json | jq -r tostring)"
       - name: Push indices to Algolia
         uses: signcl/docsearch-scraper-action@master
         env:
