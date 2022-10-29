@@ -1,15 +1,17 @@
-FROM node:14-alpine
+FROM node:16-alpine
+RUN apk add --no-cache libc6-compat
 
 ENV NODE_ENV production
 
 WORKDIR /app
-COPY website/package.json .
-COPY website/.next/ .next/
-COPY website/public/ public
-COPY website/.env .
-COPY website/redirects.json .
-COPY website/next.config.js .
+COPY aksel.nav.no/website/package.json .
+COPY aksel.nav.no/website/.next/ .next/
+COPY aksel.nav.no/website/public/ public
+COPY aksel.nav.no/website/.env .
+COPY aksel.nav.no/website/redirects.json .
+COPY aksel.nav.no/website/next.config.js .
 COPY node_modules/ node_modules/
+COPY @navikt/ @navikt/
 
 EXPOSE 3000
 CMD yarn start

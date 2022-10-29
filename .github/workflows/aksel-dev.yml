@@ -57,7 +57,7 @@ jobs:
       - name: Create docker image tags
         run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ env.TAG }}" >> $GITHUB_ENV
       - name: Build docker image
-        run: docker build -t ${{ env.DOCKER_TAG }} aksel.nav.no -f aksel.nav.no/Dockerfile
+        run: docker build -t ${{ env.DOCKER_TAG }} . -f aksel.nav.no/Dockerfile
       - name: Push docker image
         run: |
           docker push ${{ env.DOCKER_TAG }}

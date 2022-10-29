@@ -2037,7 +2037,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.0, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.10.4, @babel/runtime@npm:^7.12.0, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.15.4, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.18.9, @babel/runtime@npm:^7.19.4, @babel/runtime@npm:^7.2.0, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.3.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.2":
   version: 7.20.0
   resolution: "@babel/runtime@npm:7.20.0"
   dependencies:
@@ -3864,18 +3864,18 @@ __metadata:
   linkType: hard
 
 "@oclif/command@npm:^1.8.0, @oclif/command@npm:^1.8.15":
-  version: 1.8.18
-  resolution: "@oclif/command@npm:1.8.18"
+  version: 1.8.19
+  resolution: "@oclif/command@npm:1.8.19"
   dependencies:
     "@oclif/config": ^1.18.2
     "@oclif/errors": ^1.3.6
     "@oclif/help": ^1.0.1
     "@oclif/parser": ^3.8.8
     debug: ^4.1.1
-    semver: ^7.3.7
+    semver: ^7.3.8
   peerDependencies:
     "@oclif/config": ^1
-  checksum: 35f94893ff5cd479c8b99ae9deda35afd2192b857711730315570d739c3315e2bae7a091246d148c12d9dbce6c80743b965667064d017130cff8810217eb17c6
+  checksum: 7668d2ac4017d62a23b0bd530195456e7858e599850d770b969e33222b171e137b37153db50c1f464c959b403407bd1f937cbc956da44acdd0e130a20b7fb0c6
   languageName: node
   linkType: hard
 
@@ -7302,15 +7302,15 @@ __metadata:
   linkType: hard
 
 "@tanem/react-nprogress@npm:^5.0.0":
-  version: 5.0.15
-  resolution: "@tanem/react-nprogress@npm:5.0.15"
+  version: 5.0.16
+  resolution: "@tanem/react-nprogress@npm:5.0.16"
   dependencies:
-    "@babel/runtime": ^7.19.0
+    "@babel/runtime": ^7.19.4
     hoist-non-react-statics: ^3.3.2
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  checksum: 1dec11948d36829118b50fea77272d3746b53d3e7e0e03cf407103a3938904a9e51a4de5dd8472ed74c303175db7b6c6dc9b5d77145be9f12ade7d6cc42094d3
+  checksum: 80cfd0751b1163de46a02d5614105f8746ba4a8a177948db75e9c2d651e7500cfc368cf15ff1879ec4cc0b43562fef5cde7e0df63bdf3c57d138a8f6a1381d86
   languageName: node
   linkType: hard
 
@@ -28277,7 +28277,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.x, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7":
+"semver@npm:7.x, semver@npm:^7.3.2, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
