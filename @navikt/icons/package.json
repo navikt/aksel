@@ -30,7 +30,7 @@
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
-    "create-icons": "svgr --out-dir src svg",
+    "create-icons": "svgr --silent --out-dir src svg",
     "clean": "rimraf src cjs esm",
     "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config",
