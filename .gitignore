@@ -135,6 +135,7 @@ _docs.json
 .next
 !*/website/lib/
 !*/website/public/
+!aksel.nav.no/**/*.d.ts
 !*/sanity/lib/
 !*/sanity/static/
 out
