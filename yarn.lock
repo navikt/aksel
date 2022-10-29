@@ -3166,7 +3166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@^1.4.0, @navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:
@@ -8341,6 +8341,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
+    "@navikt/ds-codemod": ^1.4.0
+    "@navikt/ds-css": ^1.4.0
+    "@navikt/ds-css-internal": ^1.4.0
+    "@navikt/ds-icons": ^1.4.0
+    "@navikt/ds-react": ^1.4.0
+    "@navikt/ds-react-internal": ^1.4.0
+    "@navikt/ds-tailwind": ^1.4.0
+    "@navikt/ds-tokens": ^1.4.0
     prettier-plugin-tailwindcss: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -26289,11 +26297,6 @@ __metadata:
     "@babel/preset-env": ^7.0.0
     "@babel/preset-react": ^7.0.0
     "@babel/preset-typescript": ^7.0.0
-    "@navikt/ds-css": ^1.4.0
-    "@navikt/ds-css-internal": ^1.4.0
-    "@navikt/ds-icons": ^1.4.0
-    "@navikt/ds-react": ^1.4.0
-    "@navikt/ds-react-internal": ^1.4.0
     "@sanity-codegen/schema-codegen": 1.0.0-alpha.13
     "@sanity/base": ^2.35.0
     "@sanity/cli": ^2.35.0
@@ -30214,13 +30217,6 @@ __metadata:
     "@babel/core": ^7.19.0
     "@docsearch/css": 3.3.0
     "@docsearch/react": 3.3.0
-    "@navikt/ds-css": ^1.4.0
-    "@navikt/ds-css-internal": ^1.4.0
-    "@navikt/ds-icons": ^1.4.0
-    "@navikt/ds-react": ^1.4.0
-    "@navikt/ds-react-internal": ^1.4.0
-    "@navikt/ds-tailwind": ^1.4.0
-    "@navikt/ds-tokens": ^1.4.0
     "@next/bundle-analyzer": ^12.1.0
     "@next/eslint-plugin-next": ^12.2.0
     "@playwright/test": ^1.27.0
