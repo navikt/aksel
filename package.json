@@ -4,7 +4,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "husky install && playwright install --with-deps",
     "boot": "yarn clean && yarn workspace @navikt/ds-codemod build && yarn workspaces foreach -pA --topological-dev --no-private run build",
     "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
