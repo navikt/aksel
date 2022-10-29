@@ -15,7 +15,12 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "types": ["node", "jest", "@testing-library/jest-dom"],
+    "types": [
+      "node",
+      "jest",
+      "@testing-library/jest-dom",
+      "@sanity-codegen/types"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/components": ["components/index.ts"],
