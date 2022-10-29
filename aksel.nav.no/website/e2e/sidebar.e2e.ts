@@ -8,21 +8,6 @@ test("Go to /designsystem and navigate sidebar", async ({ page }) => {
     "http://localhost:3000/designsystem/side/oversikt-komponenter"
   );
 
-  await page.getByRole("link", { name: "Endringslogg" }).click();
-  await expect(page).toHaveURL(
-    "http://localhost:3000/designsystem/side/changelog"
-  );
-
-  await page.getByRole("link", { name: "Accordion" }).click();
-  await expect(page).toHaveURL(
-    "http://localhost:3000/designsystem/komponenter/accordion"
-  );
-
-  await page.getByRole("link", { name: "Ikoner" }).click();
-  await expect(page).toHaveURL(
-    "http://localhost:3000/designsystem/side/ikoner"
-  );
-
   await expect(page.getByRole("button", { name: "Core" })).toHaveAttribute(
     "aria-expanded",
     "true"
