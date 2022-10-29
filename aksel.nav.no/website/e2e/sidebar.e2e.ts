@@ -1,19 +1,9 @@
 import { test, expect } from "@playwright/test";
 
 test("Go to /designsystem and navigate sidebar", async ({ page }) => {
-  await page.goto("http://localhost:3000/");
-
-  await page
-    .getByRole("link", { name: "Designsystemet Åpen for alle" })
-    .click();
-  await expect(page).toHaveURL("http://localhost:3000/designsystem");
-
-  await page
-    .locator(
-      'main:has-text("DesignsystemetGjør det enkelt å lage produkter i NAVHva er nytt?Vi er endelig ut")'
-    )
-    .getByRole("link", { name: "Komponenter" })
-    .click();
+  await page.goto(
+    "http://localhost:3000/designsystem/side/oversikt-komponenter"
+  );
   await expect(page).toHaveURL(
     "http://localhost:3000/designsystem/side/oversikt-komponenter"
   );
