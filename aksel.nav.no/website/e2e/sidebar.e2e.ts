@@ -40,9 +40,4 @@ test("Go to /designsystem and navigate sidebar", async ({ page }) => {
     "aria-expanded",
     "true"
   );
-
-  await page.getByRole("link", { name: "CopyToClipboard" }).click();
-  await expect(page).toHaveURL(
-    "http://localhost:3000/designsystem/komponenter/copytoclipboard"
-  );
 });
