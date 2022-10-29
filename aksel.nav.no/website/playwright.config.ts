@@ -53,7 +53,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices["Desktop Chrome"],
       },
-      testMatch: [/.*\.spec\.(ts|tsx)/, /smoketest.ts/],
+      testMatch: [/.*\.e2e\.(ts|tsx)/, /smoketest.test.ts/],
     },
 
     {
@@ -61,7 +61,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices["Desktop Firefox"],
       },
-      testMatch: /.*\.spec\.(ts|tsx)/,
+      testMatch: /.*\.e2e\.(ts|tsx)/,
     },
 
     {
@@ -69,7 +69,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices["Desktop Safari"],
       },
-      testMatch: /.*\.spec\.(ts|tsx)/,
+      testMatch: /.*\.e2e\.(ts|tsx)/,
     },
 
     /* Test against mobile viewports. */
