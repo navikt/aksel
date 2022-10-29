@@ -24,7 +24,8 @@
     "/cjs",
     "/esm",
     "/src",
-    "_docs.json"
+    "_docs.json",
+    "!**/*.tsbuildinfo"
   ],
   "scripts": {
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",

@@ -25,13 +25,14 @@
     "/esm",
     "/src",
     "/svg",
-    "/meta.json"
+    "/meta.json",
+    "!**/*.tsbuildinfo"
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "yarn clean && copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config",
     "test": "jest"
   },

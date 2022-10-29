@@ -4,7 +4,8 @@
     "strict": true,
     "esModuleInterop": true,
     "target": "es6",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "incremental": true
   },
   "exclude": ["**/stories", "**/*.stories.*", "**/*.test.ts", "**/*.test.tsx"]
 }
