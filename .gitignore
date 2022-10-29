@@ -135,7 +135,6 @@ _docs.json
 out
 test-urls.json
 videos
-*/cypress/videos
 sanity/scripts/renameField.js
 tmp.json
 /test-results/

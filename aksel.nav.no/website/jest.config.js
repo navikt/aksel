@@ -18,7 +18,7 @@ const customJestConfig = {
     "<rootDir>/website/",
   ],
   testEnvironment: "node",
-  modulePathIgnorePatterns: ["cypress", "mockdata.ts"],
+  modulePathIgnorePatterns: ["e2e", "mockdata.ts"],
   moduleNameMapper: {
     ...pathsToModuleNameMapper(compilerOptions.paths, {
       prefix: "<rootDir>/website/",

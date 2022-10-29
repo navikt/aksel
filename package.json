@@ -122,8 +122,7 @@
       "esm",
       "cjs",
       "**/codemod/**/*.js",
-      "**/aksel.nav.no/sanity/**",
-      "**/cypress/**"
+      "**/aksel.nav.no/sanity/**"
     ]
   },
   "stylelint": {

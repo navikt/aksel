@@ -36,5 +36,5 @@
     }
   },
   "include": ["next-env.d.ts", "lib/types/schema.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules", "cypress"]
+  "exclude": ["node_modules", "e2e"]
 }
