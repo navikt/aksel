@@ -4,9 +4,9 @@
   "private": true,
   "description": "Nextjs page for sanity docs",
   "scripts": {
+    "postinstall": "playwright install --with-deps",
     "dev": "next",
     "build": "next build",
-    "export": "next export",
     "start": "next start",
     "e2e": "yarn generate:testurls && yarn build && yarn start-server-and-test start http://localhost:3000 playwright",
     "update:colors": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/update-color-examples",
