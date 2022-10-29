@@ -10,7 +10,7 @@ on:
       - "aksel.nav.no/**"
 
 jobs:
-  test:
+  playwright:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

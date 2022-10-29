@@ -131,7 +131,12 @@ _docs.json
 */core/icons
 /storybook-static
 
+# Aksel.nav.no
 .next
+!*/website/lib/
+!*/website/public/
+!*/sanity/lib/
+!*/sanity/static/
 out
 test-urls.json
 videos
