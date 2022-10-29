@@ -8,10 +8,7 @@
     "build": "next build",
     "export": "next export",
     "start": "next start",
-    "cypress": "yarn generate:testurls && cypress open",
-    "cypress:ci": "yarn generate:testurls && cypress run",
-    "e2e": "yarn generate:testurls && yarn build && yarn start-server-and-test start http://localhost:3000 cypress",
-    "e2e:ci": "yarn generate:testurls && yarn build && yarn start-server-and-test start http://localhost:3000 cypress:ci",
+    "e2e": "yarn generate:testurls && yarn build && yarn start-server-and-test start http://localhost:3000 playwright",
     "update:colors": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/update-color-examples",
     "update:props": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/update-props",
     "update:tokens": "npx ts-node --project tsconfig.tsnode.json ./lib/update-documents/tokens",
@@ -21,6 +18,7 @@
     "generate:testurls": "npx ts-node --project tsconfig.tsnode.json ./lib/testing/generateTestUrls",
     "analyze": "cross-env ANALYZE=true next build",
     "test": "jest",
+    "playwright": "playwright test",
     "test:watch": "jest --watch"
   },
   "dependencies": {
