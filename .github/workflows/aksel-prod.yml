@@ -71,14 +71,7 @@ jobs:
       - name: Push docker image
         run: |
           docker push ${{ env.DOCKER_TAG }}
-      - name: Create tag and release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.TAG }}
-          release_name: ${{ env.TAG }}
-          commitish: ${{ github.sha }}
+
       - name: Deploy to prod-gcp
         uses: nais/deploy/actions/deploy@master
         env:

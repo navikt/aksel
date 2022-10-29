@@ -114,7 +114,7 @@ describe("Popover", () => {
     expect(fn).toHaveBeenCalledTimes(0);
 
     cleanup();
-  });
+  }, 20000);
 
   it("keep open on popover-click", async () => {
     const fn = jest.fn();
