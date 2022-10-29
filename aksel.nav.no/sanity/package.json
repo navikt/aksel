@@ -35,16 +35,16 @@
     "@sanity/react-hooks": "^2.35.0",
     "@sanity/vision": "^2.35.0",
     "moment": "2.29.4",
-    "sanity-codegen": "1.0.0-alpha.26",
+    "sanity-codegen": "0.9.8",
     "sanity-plugin-asset-source-unsplash": "^0.1.5",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.13",
     "sanity-plugin-media": "^1.4.4",
     "sanity-plugin-power-table": "^0.0.14",
     "sanity-super-pane": "^1.0.0-alpha.11",
-    "semver": "^7.3.5",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.19.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.0.0",

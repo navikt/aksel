@@ -62,14 +62,14 @@
     "validator": "^13.7.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.18.2",
+    "@babel/core": "^7.19.0",
     "@next/bundle-analyzer": "^12.1.0",
     "@playwright/test": "^1.27.1",
     "@sanity-codegen/types": "1.0.0-alpha.13",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@types/jest": "^29.0.0",
-    "@types/node": "17.0.35",
+    "@types/node": "^17.0.35",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "autoprefixer": "^10.4.7",
@@ -82,13 +82,12 @@
     "json5": "2.2.1",
     "nanoid": "3.0.0",
     "next-transpile-modules": "^9.0.0",
-    "postcss": "^8.4.14",
+    "postcss": "^8.4.0",
     "postcss-import": "^14.1.0",
     "postcss-loader": "7.0.0",
-    "sanity-codegen": "^0.9.8",
+    "sanity-codegen": "0.9.8",
     "start-server-and-test": "^1.14.0",
     "ts-jest": "^29.0.0",
-    "tsconfig-paths-webpack-plugin": "3.5.2",
     "typescript": "^4.8.0"
   }
 }
