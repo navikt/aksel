@@ -12,7 +12,7 @@ on:
         default: "false"
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}
+  IMAGE: ghcr.io/navikt/designsystemet
 
 jobs:
   redeploy:

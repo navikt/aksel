@@ -6,7 +6,7 @@ on:
       - next
 
 env:
-  IMAGE: ghcr.io/${{ github.repository }}
+  IMAGE: ghcr.io/navikt/designsystemet
 
 jobs:
   build_and_deploy:
