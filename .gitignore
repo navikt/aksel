@@ -142,3 +142,4 @@ tmp.json
 /playwright-report/
 /playwright/.cache/
 playwright-report/
+/test-results/

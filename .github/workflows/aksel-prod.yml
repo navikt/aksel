@@ -44,7 +44,7 @@ jobs:
         run: yarn workspace aksel.nav.no test
 
       - name: E2E
-        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e:ci
+        run: NEXT_PUBLIC_TEST=true yarn workspace website e2e
 
       - name: Update sanity sync
         run: yarn workspace aksel.nav.no sanity:update
