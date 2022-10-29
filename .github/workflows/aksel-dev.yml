@@ -24,7 +24,6 @@ jobs:
           echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
           echo "ALGOLIA_ADMIN=${{ secrets.ALGOLIA_ADMIN }}" >> aksel.nav.no/website/.env
           echo "ALGOLIA_ID=${{ secrets.ALGOLIA_ID}}" >> aksel.nav.no/website/.env
-          echo "HOOK_SECRET=${{ secrets.SANITY_INDEXING_HOOK }}" >> aksel.nav.no/website/.env
           echo "TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
           echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
