@@ -2375,22 +2375,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cspotcode/source-map-consumer@npm:0.8.0":
-  version: 0.8.0
-  resolution: "@cspotcode/source-map-consumer@npm:0.8.0"
-  checksum: c0c16ca3d2f58898f1bd74c4f41a189dbcc202e642e60e489cbcc2e52419c4e89bdead02c886a12fb13ea37798ede9e562b2321df997ebc210ae9bd881561b4e
-  languageName: node
-  linkType: hard
-
-"@cspotcode/source-map-support@npm:0.7.0":
-  version: 0.7.0
-  resolution: "@cspotcode/source-map-support@npm:0.7.0"
-  dependencies:
-    "@cspotcode/source-map-consumer": 0.8.0
-  checksum: 9faddda7757cd778b5fd6812137b2cc265810043680d6399acc20441668fafcdc874053be9dccd0d9110087287bfad27eb3bf342f72bceca9aa9059f5d0c4be8
-  languageName: node
-  linkType: hard
-
 "@cspotcode/source-map-support@npm:^0.8.0":
   version: 0.8.1
   resolution: "@cspotcode/source-map-support@npm:0.8.1"
@@ -3227,7 +3211,7 @@ __metadata:
     "@navikt/ds-tokens": ^1.4.0
     normalize.css: ^8.0.1
     postcss: ^8.4.0
-    postcss-cli: ^8.3.1
+    postcss-cli: ^9.0.0
     postcss-combine-duplicated-selectors: 10.0.3
     postcss-import: ^14.1.0
   languageName: unknown
@@ -3252,7 +3236,7 @@ __metadata:
     react: ^18.0.0
     rimraf: 3.0.2
     ts-jest: ^29.0.0
-    ts-node: ^10.4.0
+    ts-node: 10.9.0
     typescript: ^4.8.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
@@ -3274,7 +3258,7 @@ __metadata:
     concurrently: 7.2.1
     copy-to-clipboard: ^3.3.1
     rimraf: ^3.0.2
-    ts-node: 10.7.0
+    ts-node: 10.9.0
     typescript: ^4.8.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
@@ -3316,7 +3300,7 @@ __metadata:
     rimraf: 3.0.2
     swr: ^1.1.2
     ts-jest: ^29.0.0
-    ts-node: 10.7.0
+    ts-node: 10.9.0
     typescript: ^4.8.0
   peerDependencies:
     "@types/react": ^17.0.30 || ^18.0.0
@@ -3337,7 +3321,7 @@ __metadata:
     jest: ^29.0.0
     lodash: ^4.17.21
     ts-jest: ^29.0.0
-    ts-node: ^10.3.0
+    ts-node: 10.9.0
     typescript: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3357,7 +3341,7 @@ __metadata:
     nodemon: ^2.0.12
     style-dictionary: ^3.0.2
     ts-jest: ^29.0.0
-    ts-node: ^10.3.0
+    ts-node: 10.9.0
     typescript: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -3552,7 +3536,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@playwright/test@npm:^1.27.1":
+"@playwright/test@npm:^1.27.0":
   version: 1.27.1
   resolution: "@playwright/test@npm:1.27.1"
   dependencies:
@@ -3670,22 +3654,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-collection@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@radix-ui/react-collection@npm:1.0.1"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@radix-ui/react-compose-refs": 1.0.0
-    "@radix-ui/react-context": 1.0.0
-    "@radix-ui/react-primitive": 1.0.1
-    "@radix-ui/react-slot": 1.0.1
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-    react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 4922b358baf54aa343da5235fd061a289bedef9488254696bb4eb09b320da9da91bf55e148d89f07df80afa5429804f8a203159978cddeea423e58fdea703cd0
-  languageName: node
-  linkType: hard
-
 "@radix-ui/react-compose-refs@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-compose-refs@npm:1.0.0"
@@ -3758,19 +3726,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-primitive@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@radix-ui/react-primitive@npm:1.0.1"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@radix-ui/react-slot": 1.0.1
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-    react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: 1cc86b72f926be4a42122e7e456e965de0906f16b0dc244b8448bac05905f208598c984a0dd40026f654b4a71d0235335d48a18e377b07b0ec6c6917576a8080
-  languageName: node
-  linkType: hard
-
 "@radix-ui/react-roving-focus@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-roving-focus@npm:1.0.0"
@@ -3792,27 +3747,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-roving-focus@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@radix-ui/react-roving-focus@npm:1.0.1"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 1.0.0
-    "@radix-ui/react-collection": 1.0.1
-    "@radix-ui/react-compose-refs": 1.0.0
-    "@radix-ui/react-context": 1.0.0
-    "@radix-ui/react-direction": 1.0.0
-    "@radix-ui/react-id": 1.0.0
-    "@radix-ui/react-primitive": 1.0.1
-    "@radix-ui/react-use-callback-ref": 1.0.0
-    "@radix-ui/react-use-controllable-state": 1.0.0
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-    react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: a8f1d22086622d7439b36ee5d38c6eb412bb99e71fa6986c25ed4506528ac48f32cbc06ed329bc7844fc9c9d402dec06e749b6272bef3ea26688620ad6b11fad
-  languageName: node
-  linkType: hard
-
 "@radix-ui/react-slot@npm:1.0.0":
   version: 1.0.0
   resolution: "@radix-ui/react-slot@npm:1.0.0"
@@ -3822,18 +3756,6 @@ __metadata:
   peerDependencies:
     react: ^16.8 || ^17.0 || ^18.0
   checksum: 60c0190ebdca21785b4f8b58a0c52717600c98953fc49da9580870519c60f52d5cf873dffa05446f4bb539066326ccec0827f4ca252b02ec4ff1a4ae203f59d7
-  languageName: node
-  linkType: hard
-
-"@radix-ui/react-slot@npm:1.0.1":
-  version: 1.0.1
-  resolution: "@radix-ui/react-slot@npm:1.0.1"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@radix-ui/react-compose-refs": 1.0.0
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-  checksum: a20693f8ce532bd6cbff12ba543dfcf90d451f22923bd60b57dc9e639f6e53348915e182002b33444feb6ab753434e78e2a54085bf7092aadda4418f0423763f
   languageName: node
   linkType: hard
 
@@ -3854,26 +3776,6 @@ __metadata:
     react: ^16.8 || ^17.0 || ^18.0
     react-dom: ^16.8 || ^17.0 || ^18.0
   checksum: 162413906c80a1fd2a3dddc9ac7f951b5e789cd69cc829f309735ac4ce6a21a9832c2abf71295a176a042fa6deb8a70dc597e219966d268d125e08d3a39f0596
-  languageName: node
-  linkType: hard
-
-"@radix-ui/react-tabs@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "@radix-ui/react-tabs@npm:1.0.1"
-  dependencies:
-    "@babel/runtime": ^7.13.10
-    "@radix-ui/primitive": 1.0.0
-    "@radix-ui/react-context": 1.0.0
-    "@radix-ui/react-direction": 1.0.0
-    "@radix-ui/react-id": 1.0.0
-    "@radix-ui/react-presence": 1.0.0
-    "@radix-ui/react-primitive": 1.0.1
-    "@radix-ui/react-roving-focus": 1.0.1
-    "@radix-ui/react-use-controllable-state": 1.0.0
-  peerDependencies:
-    react: ^16.8 || ^17.0 || ^18.0
-    react-dom: ^16.8 || ^17.0 || ^18.0
-  checksum: d5e8ac40d40b6c795bb0e1d1b942fd133b9c1978b21f07d06352159182e229b2bb2d0d3b9a04d288692d41cff3ba90f128a5e95995e0cc59352cc82d1ee72599
   languageName: node
   linkType: hard
 
@@ -6816,7 +6718,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.16.0, @testing-library/jest-dom@npm:^5.16.4":
+"@testing-library/jest-dom@npm:^5.16.0":
   version: 5.16.5
   resolution: "@testing-library/jest-dom@npm:5.16.5"
   dependencies:
@@ -8457,7 +8359,7 @@ __metadata:
     eslint-plugin-import: ^2.26.0
     eslint-plugin-jest: ^26.2.2
     eslint-plugin-react-hooks: ^4.6.0
-    fast-glob: ^3.2.11
+    fast-glob: 3.2.11
     fs-extra: ^10.0.1
     glob: ^7.1.6
     husky: ^8.0.0
@@ -9164,7 +9066,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.4, autoprefixer@npm:^10.4.7":
+"autoprefixer@npm:^10.4.0":
   version: 10.4.13
   resolution: "autoprefixer@npm:10.4.13"
   dependencies:
@@ -9306,7 +9208,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-loader@npm:^8.0.0, babel-loader@npm:^8.0.6, babel-loader@npm:^8.2.5":
+"babel-loader@npm:^8.0.0, babel-loader@npm:^8.0.6, babel-loader@npm:^8.2.0":
   version: 8.2.5
   resolution: "babel-loader@npm:8.2.5"
   dependencies:
@@ -11254,7 +11156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:4.2.3, color@npm:^4.0.2":
+"color@npm:4.2.3":
   version: 4.2.3
   resolution: "color@npm:4.2.3"
   dependencies:
@@ -11845,7 +11747,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^7.0.3":
+"cross-env@npm:^7.0.0":
   version: 7.0.3
   resolution: "cross-env@npm:7.0.3"
   dependencies:
@@ -12470,7 +12372,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:2.29.3, date-fns@npm:^2.16.1, date-fns@npm:^2.27.0, date-fns@npm:^2.28.0":
+"date-fns@npm:2.29.3, date-fns@npm:^2.16.1, date-fns@npm:^2.27.0":
   version: 2.29.3
   resolution: "date-fns@npm:2.29.3"
   checksum: e01cf5b62af04e05dfff921bb9c9933310ed0e1ae9a81eb8653452e64dc841acf7f6e01e1a5ae5644d0337e9a7f936175fd2cb6819dc122fdd9c5e86c56be484
@@ -12789,13 +12691,6 @@ __metadata:
   version: 0.11.0
   resolution: "dependency-graph@npm:0.11.0"
   checksum: 477204beaa9be69e642bc31ffe7a8c383d0cf48fa27acbc91c5df01431ab913e65c154213d2ef83d034c98d77280743ec85e5da018a97a18dd43d3c0b78b28cd
-  languageName: node
-  linkType: hard
-
-"dependency-graph@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "dependency-graph@npm:0.9.0"
-  checksum: c5238b2453ab44bd8c2eaffb08d187f16273e199c1321f6e476e9a085f19ac598beda4f389ef4a8fc3686ee2f6bdbc1ea968281607cc34ec8da085b1701b79dc
   languageName: node
   linkType: hard
 
@@ -15864,13 +15759,6 @@ __metadata:
   version: 4.0.1
   resolution: "get-stdin@npm:4.0.1"
   checksum: 4f73d3fe0516bc1f3dc7764466a68ad7c2ba809397a02f56c2a598120e028430fcff137a648a01876b2adfb486b4bc164119f98f1f7d7c0abd63385bdaa0113f
-  languageName: node
-  linkType: hard
-
-"get-stdin@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "get-stdin@npm:8.0.0"
-  checksum: 40128b6cd25781ddbd233344f1a1e4006d4284906191ed0a7d55ec2c1a3e44d650f280b2c9eeab79c03ac3037da80257476c0e4e5af38ddfb902d6ff06282d77
   languageName: node
   linkType: hard
 
@@ -21157,12 +21045,12 @@ __metadata:
     "@types/node": ^17.0.35
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
-    autoprefixer: ^10.4.4
+    autoprefixer: ^10.4.0
     next: ^12.2.0
     postcss: ^8.4.0
     react: ^18.0.0
     react-dom: ^18.0.0
-    tailwindcss: ^3.0.23
+    tailwindcss: ^3.2.0
     typescript: ^4.8.0
   languageName: unknown
   linkType: soft
@@ -22773,30 +22661,6 @@ __metadata:
     postcss-selector-parser: ^6.0.2
     postcss-value-parser: ^4.0.2
   checksum: 03640d493fb0e557634ab23e5d1eb527b014fb491ac3e62b45e28f5a6ef57e25a209f82040ce54c40d5a1a7307597a55d3fa6e8cece0888261a66bc75e39a68b
-  languageName: node
-  linkType: hard
-
-"postcss-cli@npm:^8.3.1":
-  version: 8.3.1
-  resolution: "postcss-cli@npm:8.3.1"
-  dependencies:
-    chalk: ^4.0.0
-    chokidar: ^3.3.0
-    dependency-graph: ^0.9.0
-    fs-extra: ^9.0.0
-    get-stdin: ^8.0.0
-    globby: ^11.0.0
-    postcss-load-config: ^3.0.0
-    postcss-reporter: ^7.0.0
-    pretty-hrtime: ^1.0.3
-    read-cache: ^1.0.0
-    slash: ^3.0.0
-    yargs: ^16.0.0
-  peerDependencies:
-    postcss: ^8.0.0
-  bin:
-    postcss: bin/postcss
-  checksum: 0fb771d9b2a5c5b091d12839aeb75bbfc6c911c89b5053e6f925f89988731c15a37d5aec61b8c904d8799baf06d9a4aa0348d1a77cac6d2a94b434e3d3554912
   languageName: node
   linkType: hard
 
@@ -24866,21 +24730,6 @@ __metadata:
     react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
     react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
   checksum: ee99ca312c35bcec9ef0868babf970ce03c52801731e29be336bb6bdc867a1ecf00a73e1fb5bc3b1b1ef66ceb0c9b4a0199fadb85b1b9829f731409951b018f0
-  languageName: node
-  linkType: hard
-
-"react-modal@npm:3.16.1":
-  version: 3.16.1
-  resolution: "react-modal@npm:3.16.1"
-  dependencies:
-    exenv: ^1.2.0
-    prop-types: ^15.7.2
-    react-lifecycles-compat: ^3.0.0
-    warning: ^4.0.3
-  peerDependencies:
-    react: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-    react-dom: ^0.14.0 || ^15.0.0 || ^16 || ^17 || ^18
-  checksum: 978936e9320fad839c039b9ee4de55d40888156cb40e093615d6fbc2ff07139d5db06f14782cb7767f780bd5fb57956778669426c535ebc0068a7a03882c7e75
   languageName: node
   linkType: hard
 
@@ -28181,7 +28030,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.0.23, tailwindcss@npm:^3.1.2":
+"tailwindcss@npm:^3.2.0":
   version: 3.2.1
   resolution: "tailwindcss@npm:3.2.1"
   dependencies:
@@ -28816,47 +28665,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-node@npm:10.7.0":
-  version: 10.7.0
-  resolution: "ts-node@npm:10.7.0"
-  dependencies:
-    "@cspotcode/source-map-support": 0.7.0
-    "@tsconfig/node10": ^1.0.7
-    "@tsconfig/node12": ^1.0.7
-    "@tsconfig/node14": ^1.0.0
-    "@tsconfig/node16": ^1.0.2
-    acorn: ^8.4.1
-    acorn-walk: ^8.1.1
-    arg: ^4.1.0
-    create-require: ^1.1.0
-    diff: ^4.0.1
-    make-error: ^1.1.1
-    v8-compile-cache-lib: ^3.0.0
-    yn: 3.1.1
-  peerDependencies:
-    "@swc/core": ">=1.2.50"
-    "@swc/wasm": ">=1.2.50"
-    "@types/node": "*"
-    typescript: ">=2.7"
-  peerDependenciesMeta:
-    "@swc/core":
-      optional: true
-    "@swc/wasm":
-      optional: true
-  bin:
-    ts-node: dist/bin.js
-    ts-node-cwd: dist/bin-cwd.js
-    ts-node-esm: dist/bin-esm.js
-    ts-node-script: dist/bin-script.js
-    ts-node-transpile-only: dist/bin-transpile.js
-    ts-script: dist/bin-script-deprecated.js
-  checksum: 2a379e43f7478d0b79e1e63af91fe222d83857727957df4bd3bdf3c0a884de5097b12feb9bbf530074526b8874c0338b0e6328cf334f3a5e2c49c71e837273f7
-  languageName: node
-  linkType: hard
-
-"ts-node@npm:^10.3.0, ts-node@npm:^10.4.0":
-  version: 10.9.1
-  resolution: "ts-node@npm:10.9.1"
+"ts-node@npm:10.9.0":
+  version: 10.9.0
+  resolution: "ts-node@npm:10.9.0"
   dependencies:
     "@cspotcode/source-map-support": ^0.8.0
     "@tsconfig/node10": ^1.0.7
@@ -28888,7 +28699,7 @@ __metadata:
     ts-node-script: dist/bin-script.js
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
-  checksum: 090adff1302ab20bd3486e6b4799e90f97726ed39e02b39e566f8ab674fd5bd5f727f43615debbfc580d33c6d9d1c6b1b3ce7d8e3cca3e20530a145ffa232c35
+  checksum: 2d75769e595a2ee1b7382c0d9a1cd5fbff14245b3022c3701f52146e148d91c495d71f0e2ba810e92482a36b88efb5e8c487d1fbeeb7fa75dd509c1e98894029
   languageName: node
   linkType: hard
 
@@ -29801,7 +29612,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"v8-compile-cache-lib@npm:^3.0.0, v8-compile-cache-lib@npm:^3.0.1":
+"v8-compile-cache-lib@npm:^3.0.1":
   version: 3.0.1
   resolution: "v8-compile-cache-lib@npm:3.0.1"
   checksum: 78089ad549e21bcdbfca10c08850022b22024cdcc2da9b168bcf5a73a6ed7bf01a9cebb9eac28e03cd23a684d81e0502797e88f3ccd27a32aeab1cfc44c39da0
@@ -30388,14 +30199,14 @@ __metadata:
     "@navikt/ds-tailwind": ^1.4.0
     "@navikt/ds-tokens": ^1.4.0
     "@next/bundle-analyzer": ^12.1.0
-    "@playwright/test": ^1.27.1
-    "@radix-ui/react-tabs": ^1.0.0
+    "@playwright/test": ^1.27.0
+    "@radix-ui/react-tabs": 1.0.0
     "@sanity-codegen/types": 1.0.0-alpha.13
     "@sanity/block-content-to-react": ^3.0.0
     "@sanity/client": ^3.3.0
     "@sanity/image-url": 1.0.1
     "@svgr/webpack": ^5.5.0
-    "@testing-library/jest-dom": ^5.16.4
+    "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^13.3.0
     "@types/jest": ^29.0.0
     "@types/node": ^17.0.35
@@ -30403,15 +30214,15 @@ __metadata:
     "@types/react-dom": ^18.0.0
     algoliasearch: 4.12.2
     amplitude-js: ^8.8.0
-    autoprefixer: ^10.4.7
-    babel-loader: ^8.2.5
+    autoprefixer: ^10.4.0
+    babel-loader: ^8.2.0
     classnames: ^2.3.1
     codesandbox: ^2.2.3
-    color: ^4.0.2
+    color: 4.2.3
     copy-to-clipboard: ^3.3.1
-    cross-env: ^7.0.3
+    cross-env: ^7.0.0
     css: ^3.0.0
-    date-fns: ^2.28.0
+    date-fns: 2.29.3
     dotenv: ^10.0.0
     elevator.js: 1.0.1
     jest: ^29.0.0
@@ -30434,11 +30245,11 @@ __metadata:
     react: ^18.0.0
     react-dom: ^18.0.0
     react-instantsearch-hooks-web: ^6.26.0
-    react-modal: 3.16.1
+    react-modal: 3.15.1
     sanity-codegen: 0.9.8
     sitemap: ^7.0.0
     start-server-and-test: ^1.14.0
-    tailwindcss: ^3.1.2
+    tailwindcss: ^3.2.0
     ts-jest: ^29.0.0
     typescript: ^4.8.0
     validator: ^13.7.0
@@ -30950,7 +30761,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yargs@npm:^16.0.0, yargs@npm:^16.1.0, yargs@npm:^16.2.0":
+"yargs@npm:^16.1.0, yargs@npm:^16.2.0":
   version: 16.2.0
   resolution: "yargs@npm:16.2.0"
   dependencies:

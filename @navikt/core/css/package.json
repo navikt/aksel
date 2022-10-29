@@ -23,7 +23,7 @@
     "@navikt/ds-tokens": "^1.4.0",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.0",
-    "postcss-cli": "^8.3.1",
+    "postcss-cli": "^9.0.0",
     "postcss-combine-duplicated-selectors": "10.0.3",
     "postcss-import": "^14.1.0"
   }
