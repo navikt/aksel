@@ -14,6 +14,7 @@ export interface Positioned {
 }
 
 export interface Period {
+  id: string;
   label?: string;
   start: Date;
   endInclusive: Date;
@@ -21,10 +22,10 @@ export interface Period {
   onSelectPeriod?: () => void;
   icon?: ReactNode;
   children?: ReactNode;
+  end: Date;
 }
 
 export interface PositionedPeriod extends Period, Positioned {
-  id: string;
   width: number;
   active?: boolean;
   cropped?: "left" | "right" | "both";
