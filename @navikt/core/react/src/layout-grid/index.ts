@@ -1,1 +1,1 @@
-export * from "./LayoutGrid";
+export { default as LayoutGrid } from "./LayoutGrid";

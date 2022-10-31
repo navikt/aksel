@@ -1,21 +1,17 @@
-import React, { forwardRef } from "react";
-import cl from "clsx";
-import { OverridableComponent } from "../";
+import React from "react";
+import { LayoutGrid } from "./LayoutGrid";
 
-export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-}
+export default {
+  title: "ds-react/LayoutGrid",
+  component: LayoutGrid,
+  argTypes: {},
+};
 
-interface LayoutGridComponentType
-  extends OverridableComponent<LayoutGridProps, HTMLDivElement> {}
-
-export const LayoutGrid: OverridableComponent<LayoutGridProps, HTMLDivElement> =
-  forwardRef(({ className, as: Component = "div", children }, ref) => {
-    return (
-      <Component ref={ref} className={cl("navds-layout-grid", className)}>
-        {children}
-      </Component>
-    );
-  }) as LayoutGridComponentType;
-
-export default LayoutGrid;
+export const Default = () => {
+  return (
+    <LayoutGrid>
+      <LayoutGrid.Cell>Cell 1</LayoutGrid.Cell>
+      <LayoutGrid.Cell>Cell 2</LayoutGrid.Cell>
+    </LayoutGrid>
+  );
+};
