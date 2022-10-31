@@ -1,4 +1,4 @@
-import { endOfDay, startOfDay } from "date-fns";
+import { endOfDay, isSameDay, startOfDay } from "date-fns";
 import React, { forwardRef, useMemo, useState } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { RowContext } from "./hooks/useRowContext";
@@ -73,12 +73,21 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return parseRows(rowChildren);
     }, [rowChildren]);
 
-    const [start, setStart] = useState(
-      startOfDay(useEarliestDate({ startDate, rows }))
-    );
+    const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
+
+    const [start, setStart] = useState(initialStartDate);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows }))
     );
+
+    const handleZoomChange = (zoomStart: Date) => {
+      if (isSameDay(zoomStart, start)) {
+        console.log("hit");
+        setStart(initialStartDate);
+        return;
+      }
+      setStart(zoomStart);
+    };
 
     const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
@@ -88,7 +97,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           startDate: start,
           endDate: endInclusive,
           direction: direction,
-          setStart: (d) => setStart(d),
+          setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
         }}
       >
