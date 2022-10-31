@@ -25,13 +25,14 @@
     "/esm",
     "/src",
     "/svg",
-    "/meta.json"
+    "/meta.json",
+    "!**/*.tsbuildinfo"
   ],
   "scripts": {
     "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
-    "create-icons": "svgr --out-dir src svg",
+    "create-icons": "svgr --silent --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "yarn clean && copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "update": "ts-node figma/index.ts dotenv/config",
     "test": "jest"
   },
@@ -46,7 +47,7 @@
   },
   "devDependencies": {
     "@svgr/cli": "6.2.1",
-    "@types/jest": "^27.0.1",
+    "@types/jest": "^29.0.0",
     "@types/lodash.startcase": "^4.4.6",
     "@types/node": "^17.0.35",
     "@types/rimraf": "3.0.2",
@@ -54,13 +55,13 @@
     "concurrently": "7.2.1",
     "copyfiles": "^2.4.1",
     "dotenv": "^10.0.0",
-    "jest": "^27.5.0",
+    "jest": "^29.0.0",
     "lodash.kebabcase": "^4.1.1",
     "lodash.startcase": "4.4.0",
     "react": "^18.0.0",
     "rimraf": "3.0.2",
-    "ts-jest": "^27.1.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.7.2"
+    "ts-jest": "^29.0.0",
+    "ts-node": "10.9.0",
+    "typescript": "^4.8.0"
   }
 }

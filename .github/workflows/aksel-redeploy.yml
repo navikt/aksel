@@ -1,0 +1,41 @@
+name: Redeploy image to for aksel.nav.no
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Docker image tag"
+        required: true
+        default: ""
+      dry:
+        description: "Dry-run"
+        required: true
+        default: "false"
+
+env:
+  IMAGE: ghcr.io/navikt/designsystemet
+
+jobs:
+  redeploy:
+    name: Redeploy image
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@ab80d026d4753220c4243394c07c7d80f9638d06 # Use commit-sha1 instead of tag for security concerns
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create docker image tag
+        run: echo "DOCKER_TAG=${{ env.IMAGE }}:${{ github.event.inputs.tag }}" >> $GITHUB_ENV
+      - name: Deploy to prod-gcp
+        uses: nais/deploy/actions/deploy@master
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          RESOURCE: aksel.nav.no/nais-prod.yaml
+          CLUSTER: prod-gcp
+          IMAGE: ${{ env.DOCKER_TAG }}
+          DRY_RUN: ${{ github.event.inputs.dry }}

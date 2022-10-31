@@ -1,0 +1,53 @@
+{
+  "name": "sanity",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Sanity løsning for Aksel",
+  "license": "MIT",
+  "scripts": {
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "yarn typegen && sanity deploy",
+    "backup": "node scripts/backup.js",
+    "typegen": "sanity exec typegen.ts"
+  },
+  "main": "package.json",
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^2.35.0",
+    "@sanity/cli": "^2.35.0",
+    "@sanity/code-input": "^2.35.0",
+    "@sanity/components": "^2.14.0",
+    "@sanity/core": "^2.35.0",
+    "@sanity/dashboard": "^2.35.0",
+    "@sanity/default-layout": "^2.35.0",
+    "@sanity/default-login": "^2.35.0",
+    "@sanity/desk-tool": "^2.35.0",
+    "@sanity/export": "^2.30.3",
+    "@sanity/production-preview": "^2.29.3",
+    "@sanity/react-hooks": "^2.35.0",
+    "@sanity/vision": "^2.35.0",
+    "moment": "2.29.4",
+    "sanity-codegen": "0.9.8",
+    "sanity-plugin-asset-source-unsplash": "^0.1.5",
+    "sanity-plugin-dashboard-widget-document-list": "^0.0.13",
+    "sanity-plugin-media": "^1.4.4",
+    "sanity-plugin-power-table": "^0.0.14",
+    "sanity-super-pane": "^1.0.0-alpha.11",
+    "styled-components": "^5.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.0.0",
+    "@sanity-codegen/schema-codegen": "1.0.0-alpha.13",
+    "babel-plugin-mock-imports": "1.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/navikt/aksel-website.git"
+  }
+}

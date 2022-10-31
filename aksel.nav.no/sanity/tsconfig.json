@@ -1,0 +1,19 @@
+{
+  "include": [
+    "./node_modules/@sanity/base/types/**/*.ts",
+    "../node_modules/@sanity/base/types/**/*.ts",
+    "./**/*.ts",
+    "./**/*.tsx",
+    "./**/*.js",
+    "./**/*.jsx"
+  ],
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@/lib": ["lib/index.ts"]
+    }
+  }
+}
