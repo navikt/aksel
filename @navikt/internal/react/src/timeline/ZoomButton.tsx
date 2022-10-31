@@ -1,4 +1,4 @@
-import { format, subMonths } from "date-fns";
+import { format, isSameDay, subMonths } from "date-fns";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 
@@ -23,21 +23,28 @@ export type ZoomButtonType = React.ForwardRefExoticComponent<
 
 export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
   ({ label, interval, count, ...rest }, ref) => {
-    const { setStart, endDate } = useTimelineContext();
+    const { setStart, endDate, startDate } = useTimelineContext();
     const startOfRange = subMonths(endDate, count);
+
+    const currentZoom = isSameDay(startDate, startOfRange);
 
     return (
       <button
-        aria-label={`Zoom tidslinjen ${format(
-          startOfRange,
-          "dd.MM.yyyy"
-        )} til ${format(endDate, "dd.MM.yyyy")}`}
+        aria-label={
+          !currentZoom
+            ? `Zoom tidslinjen ${format(
+                startOfRange,
+                "dd.MM.yyyy"
+              )} til ${format(endDate, "dd.MM.yyyy")}`
+            : "Tilbakestill til initiell tidsperspektiv"
+        }
         ref={ref}
         {...rest}
         className="navdsi-timeline__zoom__button"
         onClick={() => {
           setStart(startOfRange);
         }}
+        data-current-zoom={currentZoom}
       >
         {label}
       </button>

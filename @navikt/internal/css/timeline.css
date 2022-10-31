@@ -175,3 +175,16 @@
 .navdsi-timeline__zoom__button:only-child {
   border-radius: var(--navds-border-radius-medium);
 }
+
+.navdsi-timeline__zoom__button:not([data-current-zoom="true"]):hover {
+  background: var(--navds-global-color-gray-100);
+}
+
+.navdsi-timeline__zoom__button[data-current-zoom="true"] {
+  background: var(--navds-global-color-gray-900);
+  color: #fff;
+}
+
+.navdsi-timeline__zoom__button:focus {
+  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+}
