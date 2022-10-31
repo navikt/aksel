@@ -158,7 +158,7 @@
   padding: 6px 8px;
   font-size: var(--navds-font-size-small);
   border: 1px solid var(--navds-global-color-gray-500);
-  border-width: 1px 0px 1px 1px;
+  border-width: 1px 0 1px 1px;
 }
 
 .navdsi-timeline__zoom__button:first-child {
