@@ -97,13 +97,8 @@ export const Default = () => {
             icon={<SuccessFilled />}
           />
         </Timeline.Row>
-        <Timeline.ZoomButton
-          label="1 mnd"
-          dateRange={{
-            from: new Date("May 1 2022"),
-            to: new Date("Sep 1 2022"),
-          }}
-        />
+        <Timeline.ZoomButton label="3 mnd" interval="month" count={3} />
+        <Timeline.ZoomButton label="7 mnd" interval="month" count={7} />
       </Timeline>
     </div>
   );

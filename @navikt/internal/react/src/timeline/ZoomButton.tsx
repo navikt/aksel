@@ -1,11 +1,6 @@
-import { format } from "date-fns";
+import { format, subMonths } from "date-fns";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
-
-type DateRange = {
-  from: Date;
-  to: Date;
-};
 
 export interface ZoomButtonProps {
   /**
@@ -13,9 +8,13 @@ export interface ZoomButtonProps {
    */
   label: string;
   /**
-   * Timeline date range when clicking button
+   * If the zoom value should be in months or years
    */
-  dateRange: DateRange;
+  interval: "month" | "year";
+  /**
+   * How many units of the interval that will be applied
+   */
+  count: number;
 }
 
 export type ZoomButtonType = React.ForwardRefExoticComponent<
@@ -23,21 +22,21 @@ export type ZoomButtonType = React.ForwardRefExoticComponent<
 >;
 
 export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
-  ({ label, dateRange, ...rest }, ref) => {
-    const { setStart, setEndInclusive } = useTimelineContext();
+  ({ label, interval, count, ...rest }, ref) => {
+    const { setStart, endDate } = useTimelineContext();
+    const startOfRange = subMonths(endDate, count);
 
     return (
       <button
         aria-label={`Zoom tidslinjen ${format(
-          dateRange.from,
+          startOfRange,
           "dd.MM.yyyy"
-        )} til ${format(dateRange.to, "dd.MM.yyyy")}`}
+        )} til ${format(endDate, "dd.MM.yyyy")}`}
         ref={ref}
         {...rest}
         className="navdsi-timeline__zoom"
         onClick={() => {
-          setStart(dateRange.from);
-          setEndInclusive(dateRange.to);
+          setStart(startOfRange);
         }}
       >
         {label}
