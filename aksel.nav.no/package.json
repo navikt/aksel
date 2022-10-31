@@ -1,0 +1,33 @@
+{
+  "name": "aksel.nav.no",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nettside for Aksel",
+  "scripts": {
+    "dev": "yarn workspace website dev",
+    "build:next": "yarn workspace website build",
+    "serve:next": "yarn workspace website start",
+    "sanity": "yarn workspace sanity start",
+    "sanity:deploy": "yarn workspace sanity deploy",
+    "sanity:backup": "yarn workspace sanity backup",
+    "sanity:update": "yarn workspace website update:sanity",
+    "test": "yarn workspace website test"
+  },
+  "workspaces": [
+    "sanity",
+    "website"
+  ],
+  "dependencies": {
+    "@navikt/ds-codemod": "^1.4.0",
+    "@navikt/ds-css": "^1.4.0",
+    "@navikt/ds-css-internal": "^1.4.0",
+    "@navikt/ds-icons": "^1.4.0",
+    "@navikt/ds-react": "^1.4.0",
+    "@navikt/ds-react-internal": "^1.4.0",
+    "@navikt/ds-tailwind": "^1.4.0",
+    "@navikt/ds-tokens": "^1.4.0"
+  },
+  "devDependencies": {
+    "prettier-plugin-tailwindcss": "^0.1.13"
+  }
+}

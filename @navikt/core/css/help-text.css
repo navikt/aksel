@@ -1,24 +1,12 @@
 :root,
 :host {
   --navds-help-text-color: var(--navds-semantic-color-interaction-primary);
-  --navds-help-text-color-hover: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-help-text-color-focus: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-help-text-color-background-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-background-focus: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-shadow-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-help-text-color-popover-background: var(
-    --navds-semantic-color-feedback-info-background
-  );
+  --navds-help-text-color-hover: var(--navds-semantic-color-component-background-light);
+  --navds-help-text-color-focus: var(--navds-semantic-color-component-background-light);
+  --navds-help-text-color-background-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-background-focus: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-shadow-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-help-text-color-popover-background: var(--navds-semantic-color-feedback-info-background);
 }
 
 .navds-help-text__button {
@@ -37,8 +25,7 @@
 
 .navds-help-text__button:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--navds-global-color-white),
-    0 0 0 4px var(--navds-semantic-color-focus);
+  box-shadow: 0 0 0 1px var(--navds-global-color-white), 0 0 0 4px var(--navds-semantic-color-focus);
 }
 
 .navds-help-text__icon {
@@ -60,12 +47,10 @@
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"])
-  > .navds-help-text__icon {
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon {
   display: none;
 }
 
-.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"])
-  > .navds-help-text__icon--filled {
+.navds-help-text__button:where(:hover, :focus, [aria-expanded="true"]) > .navds-help-text__icon--filled {
   display: inherit;
 }

@@ -1,3 +1,4 @@
+import React from "react";
 // https://github.com/gregberge/react-merge-refs
 export default function mergeRefs<T = any>(
   refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>

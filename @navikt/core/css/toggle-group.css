@@ -1,22 +1,12 @@
 :root,
 :host {
-  --navds-toggle-group-color-background: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-toggle-group-color-background: var(--navds-semantic-color-component-background-light);
   --navds-toggle-group-color-text: var(--navds-semantic-color-text);
   --navds-toggle-group-color-border: var(--navds-semantic-color-divider);
-  --navds-toggle-group-color-background-hover: var(
-    --navds-semantic-color-interaction-primary-hover-subtle
-  );
-  --navds-toggle-group-color-text-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
-  --navds-toggle-group-color-background-pressed: var(
-    --navds-semantic-color-interaction-primary-selected
-  );
-  --navds-toggle-group-color-text-pressed: var(
-    --navds-semantic-color-text-inverted
-  );
+  --navds-toggle-group-color-background-hover: var(--navds-semantic-color-interaction-primary-hover-subtle);
+  --navds-toggle-group-color-text-hover: var(--navds-semantic-color-interaction-primary);
+  --navds-toggle-group-color-background-pressed: var(--navds-semantic-color-interaction-primary-selected);
+  --navds-toggle-group-color-text-pressed: var(--navds-semantic-color-text-inverted);
 }
 
 .navds-toggle-group__wrapper {
@@ -57,13 +47,11 @@
 
 .navds-toggle-group__button:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background),
-    0 0 0 4px var(--navds-semantic-color-focus);
+  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background), 0 0 0 4px var(--navds-semantic-color-focus);
 }
 
 .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
-  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background-hover),
-    0 0 0 4px var(--navds-semantic-color-focus);
+  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background-hover), 0 0 0 4px var(--navds-semantic-color-focus);
 }
 
 .navds-toggle-group__button-inner {
@@ -92,9 +80,6 @@
   font-size: 1.5rem;
 }
 
-.navds-toggle-group--small
-  > .navds-toggle-group__button
-  > .navds-toggle-group__button-inner
-  > svg {
+.navds-toggle-group--small > .navds-toggle-group__button > .navds-toggle-group__button-inner > svg {
   font-size: 1.125rem;
 }

@@ -36,7 +36,7 @@ Promise.all([
   getGlobFiles("./@navikt/**/lib", { dot: true }),
   getGlobFiles("./@navikt/**/esm", { dot: true }),
   getGlobFiles("./@navikt/**/cjs", { dot: true }),
-  getGlobFiles("./@navikt/core/icons/src", { dot: true }),
+  getGlobFiles("./@navikt/icons/src", { dot: true }),
 ]).then(([dist, libvnext, esmvnext, cjsvnext, iconsrc]) => {
   const folders = [
     ...dist,

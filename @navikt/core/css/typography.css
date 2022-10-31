@@ -1,9 +1,7 @@
 :root,
 :host,
 [data-theme="light"] {
-  --navds-error-message-color-text: var(
-    --navds-semantic-color-feedback-danger-text
-  );
+  --navds-error-message-color-text: var(--navds-semantic-color-feedback-danger-text);
 }
 
 [data-theme="dark"] {

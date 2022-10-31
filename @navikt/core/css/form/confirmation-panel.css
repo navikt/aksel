@@ -1,23 +1,11 @@
 :root,
 :host {
-  --navds-confirmation-panel-color-background: var(
-    --navds-global-color-orange-50
-  );
-  --navds-confirmation-panel-color-background-checked: var(
-    --navds-global-color-green-50
-  );
-  --navds-confirmation-panel-color-background-error: var(
-    --navds-global-color-red-50
-  );
-  --navds-confirmation-panel-color-border: var(
-    --navds-semantic-color-feedback-warning-border
-  );
-  --navds-confirmation-panel-color-border-checked: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-confirmation-panel-color-border-error: var(
-    --navds-semantic-color-feedback-danger-border
-  );
+  --navds-confirmation-panel-color-background: var(--navds-global-color-orange-50);
+  --navds-confirmation-panel-color-background-checked: var(--navds-global-color-green-50);
+  --navds-confirmation-panel-color-background-error: var(--navds-global-color-red-50);
+  --navds-confirmation-panel-color-border: var(--navds-semantic-color-feedback-warning-border);
+  --navds-confirmation-panel-color-border-checked: var(--navds-semantic-color-feedback-success-border);
+  --navds-confirmation-panel-color-border-error: var(--navds-semantic-color-feedback-danger-border);
 }
 
 .navds-confirmation-panel__inner {

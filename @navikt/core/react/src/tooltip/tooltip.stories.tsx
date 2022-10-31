@@ -1,7 +1,6 @@
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
-import { Alert, Button, Search } from "../..";
-import { Tooltip } from "../index";
+import { Tooltip, Alert, Button, Search } from "..";
 
 export default {
   title: "ds-react/Tooltip",

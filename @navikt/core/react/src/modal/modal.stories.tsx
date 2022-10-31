@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { BodyLong, Button, Heading } from "../..";
+import { BodyLong, Button, Heading } from "..";
 import Modal from "./Modal";
 
 export default {
