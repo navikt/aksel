@@ -9,6 +9,7 @@ export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
    * Grid gap
+   * @default {xs: 1rem, sm: 1.5rem, md: 1.5rem, lg: 1.5rem}
    */
   gap?: {
     xs?: string;
@@ -18,6 +19,7 @@ export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
   };
   /**
    * Overrides columns at breakpoints
+   * @default {xs: 6, sm: 8, md: 12, lg: 12}
    */
   columns?: {
     xs?: number;
@@ -66,6 +68,10 @@ export const LayoutGridComp: OverridableComponent<
   ) => {
     const styles = {
       ...rest?.style,
+      "--ac-l-grid-areas-xs": formatAreas(areas?.xs),
+      "--ac-l-grid-areas-sm": formatAreas(areas?.sm),
+      "--ac-l-grid-areas-md": formatAreas(areas?.md),
+      "--ac-l-grid-areas-lg": formatAreas(areas?.lg),
       "--ac-l-grid-gap-xs": gap?.xs,
       "--ac-l-grid-gap-sm": gap?.sm,
       "--ac-l-grid-gap-md": gap?.md,
@@ -74,10 +80,6 @@ export const LayoutGridComp: OverridableComponent<
       "--ac-l-grid-columns-sm": columns?.sm,
       "--ac-l-grid-columns-md": columns?.md,
       "--ac-l-grid-columns-lg": columns?.lg,
-      "--ac-l-grid-areas-xs": formatAreas(areas?.xs),
-      "--ac-l-grid-areas-sm": formatAreas(areas?.sm),
-      "--ac-l-grid-areas-md": formatAreas(areas?.md),
-      "--ac-l-grid-areas-lg": formatAreas(areas?.lg),
     } as React.CSSProperties;
 
     return (
