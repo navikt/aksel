@@ -2,6 +2,14 @@ const baseFontSize = 16;
 const getFontSize = (size) => `${size / baseFontSize}rem`;
 
 module.exports = {
+  a: {
+    breakpoint: {
+      xs: { value: "30rem" },
+      sm: { value: "48rem" },
+      md: { value: "64rem" },
+      lg: { value: "80rem" },
+    },
+  },
   navds: {
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },

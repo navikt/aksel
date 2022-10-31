@@ -3,8 +3,6 @@ import cl from "clsx";
 import { OverridableComponent } from "../";
 import LayoutGridCell, { LayoutGridCellComponentType } from "./Cell";
 
-// type Breakpoints = "xs" | "sm" | "md" | "lg";
-
 export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
