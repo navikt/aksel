@@ -97,6 +97,7 @@ export const Default = () => {
             icon={<SuccessFilled />}
           />
         </Timeline.Row>
+        <Timeline.ZoomButton label="1 mnd" />
       </Timeline>
     </div>
   );
