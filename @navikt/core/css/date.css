@@ -13,10 +13,6 @@
   gap: var(--navds-spacing-5);
 }
 
-.navds-date__caption-label {
-  text-transform: capitalize;
-}
-
 .navds-date .rdp-head_cell {
   text-transform: capitalize;
   font-size: var(--navds-font-size-small);
@@ -90,7 +86,6 @@
   text-align: center;
   width: 3rem;
   height: 2.75rem;
-  text-transform: capitalize;
   border-radius: var(--navds-border-radius-medium);
   cursor: pointer;
 }
