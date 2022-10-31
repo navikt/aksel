@@ -5,11 +5,11 @@ export interface LayoutGridCellProps
   extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   /**
-   *
+   * Grid-area cell should use
    */
   area?: string;
   /**
-   *
+   * at what column cell starts at (grid-column)
    */
   column?: {
     xs?: string;
@@ -18,7 +18,7 @@ export interface LayoutGridCellProps
     lg?: string;
   };
   /**
-   *
+   * How many columns should cell span?
    */
   colSpan?: {
     xs?: 1 | 2 | 3 | 4 | 5 | 6;
@@ -27,7 +27,7 @@ export interface LayoutGridCellProps
     lg?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   };
   /**
-   *
+   * define a row to override stack-order
    */
   row?: {
     xs?: string;
