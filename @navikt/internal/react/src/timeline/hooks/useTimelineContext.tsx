@@ -4,12 +4,16 @@ interface TimelineContextProps {
   startDate: Date;
   endDate: Date;
   direction: string;
+  setStart: (d: Date) => void;
+  setEndInclusive: (d: Date) => void;
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
   startDate: new Date(),
   endDate: new Date(),
   direction: "left",
+  setStart: () => null,
+  setEndInclusive: () => null,
 });
 
 export const useTimelineContext = () => {

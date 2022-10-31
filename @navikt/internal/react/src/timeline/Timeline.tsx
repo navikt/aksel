@@ -1,5 +1,5 @@
 import { endOfDay, startOfDay } from "date-fns";
-import React, { forwardRef, useMemo } from "react";
+import React, { forwardRef, useMemo, useState } from "react";
 import { AxisLabels } from "./AxisLabels";
 import { RowContext } from "./hooks/useRowContext";
 import { TimelineContext } from "./hooks/useTimelineContext";
@@ -73,8 +73,13 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return parseRows(rowChildren);
     }, [rowChildren]);
 
-    const start = startOfDay(useEarliestDate({ startDate, rows }));
-    const endInclusive = endOfDay(useLatestDate({ endDate, rows }));
+    const [start, setStart] = useState(
+      startOfDay(useEarliestDate({ startDate, rows }))
+    );
+    const [endInclusive, setEndInclusive] = useState(
+      endOfDay(useLatestDate({ endDate, rows }))
+    );
+
     const processedRows = useTimelineRows(rows, start, endInclusive, direction);
 
     return (
@@ -83,6 +88,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           startDate: start,
           endDate: endInclusive,
           direction: direction,
+          setStart: (d) => setStart(d),
+          setEndInclusive: (d) => setEndInclusive(d),
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
