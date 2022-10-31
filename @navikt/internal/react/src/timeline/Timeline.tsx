@@ -82,7 +82,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const handleZoomChange = (zoomStart: Date) => {
       if (isSameDay(zoomStart, start)) {
-        console.log("hit");
         setStart(initialStartDate);
         return;
       }
@@ -121,9 +120,13 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             );
           })}
         </div>
-        {zoomButtons.map((zoom) => {
-          return zoom;
-        })}
+        {zoomButtons.length && (
+          <div className="navdsi-timeline__zoom">
+            {zoomButtons.map((zoom) => {
+              return zoom;
+            })}
+          </div>
+        )}
       </TimelineContext.Provider>
     );
   }

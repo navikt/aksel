@@ -34,7 +34,7 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
         )} til ${format(endDate, "dd.MM.yyyy")}`}
         ref={ref}
         {...rest}
-        className="navdsi-timeline__zoom"
+        className="navdsi-timeline__zoom__button"
         onClick={() => {
           setStart(startOfRange);
         }}
