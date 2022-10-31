@@ -43,9 +43,10 @@ export interface LayoutGridCellComponentType
   > {}
 
 export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
-  ({ className, colSpan, column, row, children, area }, ref) => {
+  ({ className, colSpan, column, row, children, area, ...rest }, ref) => {
     const styles = {
-      area,
+      ...rest?.style,
+      gridArea: area,
       "--ac-l-grid-column-xs": column?.xs,
       "--ac-l-grid-column-sm": column?.sm,
       "--ac-l-grid-column-md": column?.md,
@@ -59,6 +60,7 @@ export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
     return (
       <div
         ref={ref}
+        {...rest}
         style={styles}
         className={cl(
           "navds-layout-grid__cell",
@@ -69,7 +71,6 @@ export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
           colSpan?.lg && `navds-layout-grid__cell-column-lg-${colSpan?.lg}`
         )}
       >
-        {/* demo navds-layout-grid__cell--column-lg-3 */}
         {children}
       </div>
     );

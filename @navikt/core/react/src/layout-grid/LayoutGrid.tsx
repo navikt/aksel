@@ -41,15 +41,31 @@ interface LayoutGridComponentType
   Cell: LayoutGridCellComponentType;
 }
 
+export const formatAreas = (areas?: string[]) => {
+  if (!areas) {
+    return;
+  }
+  return `'${areas?.join(`' '`)}'`;
+};
+
 export const LayoutGridComp: OverridableComponent<
   LayoutGridProps,
   HTMLDivElement
 > = forwardRef(
   (
-    { className, as: Component = "div", children, gap, columns, areas },
+    {
+      className,
+      as: Component = "div",
+      children,
+      gap,
+      columns,
+      areas,
+      ...rest
+    },
     ref
   ) => {
     const styles = {
+      ...rest?.style,
       "--ac-l-grid-gap-xs": gap?.xs,
       "--ac-l-grid-gap-sm": gap?.sm,
       "--ac-l-grid-gap-md": gap?.md,
@@ -58,15 +74,16 @@ export const LayoutGridComp: OverridableComponent<
       "--ac-l-grid-columns-sm": columns?.sm,
       "--ac-l-grid-columns-md": columns?.md,
       "--ac-l-grid-columns-lg": columns?.lg,
-      "--ac-l-grid-areas-xs": areas?.xs,
-      "--ac-l-grid-areas-sm": areas?.sm,
-      "--ac-l-grid-areas-md": areas?.md,
-      "--ac-l-grid-areas-lg": areas?.lg,
+      "--ac-l-grid-areas-xs": formatAreas(areas?.xs),
+      "--ac-l-grid-areas-sm": formatAreas(areas?.sm),
+      "--ac-l-grid-areas-md": formatAreas(areas?.md),
+      "--ac-l-grid-areas-lg": formatAreas(areas?.lg),
     } as React.CSSProperties;
 
     return (
       <Component
         ref={ref}
+        {...rest}
         style={styles}
         className={cl("navds-layout-grid", className)}
       >
