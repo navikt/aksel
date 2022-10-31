@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 1.4.1
+
+### Patch Changes
+
+- [`3c08651df`](https://github.com/navikt/Designsystemet/commit/3c08651df28c3e19dd8c8a7a1d0032200bec473d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Date-komponenter følger språkrådets dato-formatering for måneder.
+
 ## 1.4.0
 
 ## 1.3.39
