@@ -25,10 +25,9 @@ export const Default = () => {
           />
           <Timeline.Period
             start={new Date("Feb 1 2022")}
-            end={new Date("Feb 29 2022")}
+            end={new Date("Mar 15 2022")}
             status="danger"
             onSelectPeriod={() => console.log("PERIOD SELECTED!")}
-            icon={<SuccessFilled />}
           />
           <Timeline.Period
             start={new Date("May 2 2022")}

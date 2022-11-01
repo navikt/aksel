@@ -1,4 +1,4 @@
-import { format, isSameDay, subMonths } from "date-fns";
+import { format, isSameDay, subMonths, subYears } from "date-fns";
 import React, { forwardRef } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 
@@ -24,7 +24,13 @@ export type ZoomButtonType = React.ForwardRefExoticComponent<
 export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
   ({ label, interval, count, ...rest }, ref) => {
     const { setStart, endDate, startDate } = useTimelineContext();
-    const startOfRange = subMonths(endDate, count);
+    let startOfRange: Date;
+
+    if (interval === "month") {
+      startOfRange = subMonths(endDate, count);
+    } else {
+      startOfRange = subYears(endDate, count);
+    }
 
     const currentZoom = isSameDay(startDate, startOfRange);
 
