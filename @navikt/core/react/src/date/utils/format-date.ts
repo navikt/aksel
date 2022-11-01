@@ -7,11 +7,13 @@ import {
 export const formatDateForInput = (
   date: Date,
   locale: Locale,
-  type: "date" | "month"
+  type: "date" | "month",
+  inputFormat?: string
 ) => {
   const INPUT_DATE_STRING_FORMAT =
-    type === "date"
+    inputFormat ??
+    (type === "date"
       ? INPUT_DATE_STRING_FORMAT_DATE
-      : INPUT_DATE_STRING_FORMAT_MONTH;
+      : INPUT_DATE_STRING_FORMAT_MONTH);
   return format(date, INPUT_DATE_STRING_FORMAT, { locale });
 };

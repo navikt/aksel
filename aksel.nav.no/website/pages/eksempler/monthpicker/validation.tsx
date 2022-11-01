@@ -3,12 +3,14 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 import { useState } from "react";
 
 const Example = () => {
-  const [month, setMonth] = useState<Date | undefined>();
-
+  const [hasError, setHasError] = useState(false);
   const { monthpickerProps, inputProps } = UNSAFE_useMonthpicker({
     fromDate: new Date("Aug 23 2019"),
     toDate: new Date("Aug 23 2025"),
-    onMonthChange: setMonth,
+    onValidate: (val) => {
+      setHasError(val.isValidMonth);
+      console.log(val);
+    },
   });
 
   return (
@@ -18,7 +20,7 @@ const Example = () => {
           <UNSAFE_MonthPicker.Input
             {...inputProps}
             label="Velg månede"
-            error={!month && "Du må velge månede"}
+            error={hasError && "Du må velge månede"}
           />
         </div>
       </UNSAFE_MonthPicker>
@@ -30,5 +32,5 @@ export default withDsExample(Example);
 
 export const args = {
   index: 5,
-  desc: "Vi anbefaler å bruke UNSAFE_useMonthpicker-hook hvis man har et input-felt",
+  desc: "Bruk onValidate-callback for å håndtere validering.",
 };
