@@ -80,15 +80,24 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       endOfDay(useLatestDate({ endDate, rows }))
     );
 
-    const handleZoomChange = (zoomStart: Date) => {
-      if (isSameDay(zoomStart, start)) {
-        setStart(initialStartDate);
-        return;
-      }
-      setStart(zoomStart);
-    };
-
+    const initialEndDate = endOfDay(useLatestDate({ endDate, rows }));
     const processedRows = useTimelineRows(rows, start, endInclusive, direction);
+
+    const handleZoomChange = (zoomStart: Date) => {
+      if (direction === "left") {
+        if (isSameDay(zoomStart, start)) {
+          setStart(initialStartDate);
+          return;
+        }
+        setStart(zoomStart);
+      } else {
+        if (isSameDay(zoomStart, endInclusive)) {
+          setEndInclusive(initialEndDate);
+          return;
+        }
+        setEndInclusive(zoomStart);
+      }
+    };
 
     return (
       <TimelineContext.Provider
