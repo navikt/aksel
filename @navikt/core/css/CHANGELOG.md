@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 1.4.3
+
+### Patch Changes
+
+- :sparkles: Validering og inputFormat i Date-komponenter
+
 ## 1.4.2
 
 ## 1.4.1

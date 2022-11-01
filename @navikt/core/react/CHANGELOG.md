@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.4.3
+
+### Patch Changes
+
+- :sparkles: Validering og inputFormat i Date-komponenter
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.3
+
 ## 1.4.2
 
 ### Patch Changes
