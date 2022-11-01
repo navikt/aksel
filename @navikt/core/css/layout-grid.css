@@ -8,7 +8,6 @@
   --ac-l-grid-columns-md: 12;
   --ac-l-grid-columns-lg: var(--ac-l-grid-columns-md);
 
-  margin: 0;
   padding: 0;
   display: grid;
   grid-template-areas: var(--ac-l-grid-areas-xs);
