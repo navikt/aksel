@@ -35,7 +35,7 @@ const ClickablePeriod = React.memo(
         data-clickable
         style={{
           width: `${width}%`,
-          left: `${left}%`,
+          [direction]: `${left}%`,
         }}
       >
         {icon}

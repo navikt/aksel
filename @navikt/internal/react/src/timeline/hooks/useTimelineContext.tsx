@@ -3,7 +3,7 @@ import { createContext, useContext } from "react";
 interface TimelineContextProps {
   startDate: Date;
   endDate: Date;
-  direction: string;
+  direction: "left" | "right";
   setStart: (d: Date) => void;
   setEndInclusive: (d: Date) => void;
 }

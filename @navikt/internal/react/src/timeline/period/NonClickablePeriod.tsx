@@ -24,7 +24,7 @@ const NonClickablePeriod = ({
       aria-label={ariaLabel(start, end, status)}
       style={{
         width: `${width}%`,
-        left: `${left}%`,
+        [direction]: `${left}%`,
       }}
     >
       {icon}
