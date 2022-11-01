@@ -1,5 +1,11 @@
 # @navikt/ds-css-internal
 
+## 1.4.2
+
+### Patch Changes
+
+- :bug: Dropdown-link ikke i synk med Figma
+
 ## 1.4.1
 
 ## 1.4.0

@@ -21,9 +21,9 @@ const NavItem = ({
     <li
       className={cl(
         style.item,
-        "peer relative rounded-sm before:absolute before:left-0 before:z-[-1] focus-within:shadow-focus",
+        "focus-within:shadow-focus peer relative rounded-sm before:absolute before:left-0 before:z-[-1]",
         {
-          "before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[8px] before:border-l-deepblue-300":
+          "before:border-l-deepblue-300 before:top-1/2 before:h-6 before:-translate-y-1/2 before:border-l-[8px]":
             pageProps?.page?.slug === item?.link?.slug?.current,
           "before:h-full before:border-l before:border-l-gray-200 hover:before:border-l-2 hover:before:border-l-gray-500":
             pageProps?.page?.slug !== item?.link?.slug?.current && inDropdown,
@@ -45,9 +45,9 @@ const NavItem = ({
             );
           }}
           className={cl(
-            "relative flex overflow-hidden px-2 py-[6px] no-underline hover:text-deepblue-800 focus:outline-none",
+            "hover:text-deepblue-800 relative flex overflow-hidden px-2 py-[6px] no-underline focus:outline-none",
             {
-              "font-semibold text-deepblue-800":
+              "text-deepblue-800 font-semibold":
                 pageProps?.page?.slug === item?.link?.slug?.current,
               "text-text-muted": !(
                 pageProps?.page?.slug === item?.link?.slug?.current
@@ -63,11 +63,11 @@ const NavItem = ({
             ["deprecated", "beta"].includes(item.link.status?.tag) && (
               <Detail
                 className={cl(
-                  "ml-2 rounded-full border-none px-2 font-regular capitalize",
+                  "font-regular ml-2 rounded-full border-none px-2 capitalize",
                   {
-                    "bg-gray-200 capitalize text-text ring-1 ring-inset ring-gray-900/10":
+                    "text-text bg-gray-200 capitalize ring-1 ring-inset ring-gray-900/10":
                       item.link.status?.tag === "deprecated",
-                    "bg-purple-50 text-text ring-1 ring-inset ring-purple-900/10":
+                    "text-text bg-purple-50 ring-1 ring-inset ring-purple-900/10":
                       item.link.status?.tag === "beta",
                   }
                 )}
@@ -99,12 +99,12 @@ const Dropdown = ({
     >
       <button
         onClick={() => setOpen((x) => !x)}
-        className="group z-10 flex min-h-8 w-full cursor-pointer items-center justify-between pr-2 text-text-muted hover:text-deepblue-800 focus:outline-none"
+        className="min-h-8 text-text-muted hover:text-deepblue-800 group z-10 flex w-full cursor-pointer items-center justify-between pr-2 focus:outline-none"
         aria-expanded={open}
       >
         <Detail
           as="span"
-          className="mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold first:mt-0 group-hover:bg-[rgba(0,0,0,0.06)] group-focus-visible:shadow-focus group-active:bg-[rgba(0,0,0,0.10)]"
+          className="group-focus-visible:shadow-focus mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold first:mt-0 group-hover:bg-[rgba(0,0,0,0.06)] group-active:bg-[rgba(0,0,0,0.10)]"
         >
           {heading.title}
           <span className="flex h-6 w-6 items-center justify-center rounded">
