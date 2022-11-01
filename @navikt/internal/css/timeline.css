@@ -16,7 +16,8 @@
 
 .navdsi-timeline__axislabels > * {
   position: absolute;
-  font-size: 14px;
+  font-size: var(--navds-font-size-small);
+  color: var(--navds-global-color-gray-600);
 }
 
 .navdsi-timeline__row {
