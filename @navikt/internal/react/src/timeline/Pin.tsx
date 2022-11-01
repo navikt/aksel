@@ -15,9 +15,12 @@ export interface PinProps {
   children?: ReactNode;
 }
 
-export type PinType = React.ForwardRefExoticComponent<
-  PinProps & React.RefAttributes<HTMLButtonElement>
->;
+export interface PinType
+  extends React.ForwardRefExoticComponent<
+    PinProps & React.RefAttributes<HTMLButtonElement>
+  > {
+  componentType: string;
+}
 
 export const Pin = forwardRef<HTMLButtonElement, PinProps>(
   ({ date, children, ...rest }, ref) => {
@@ -48,9 +51,8 @@ export const Pin = forwardRef<HTMLButtonElement, PinProps>(
       </div>
     );
   }
-);
+) as PinType;
 
-//@ts-ignore
 Pin.componentType = "pin";
 
 export default Pin;

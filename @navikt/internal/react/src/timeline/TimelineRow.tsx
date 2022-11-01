@@ -8,9 +8,12 @@ export interface TimelineRowProps
   label?: string;
 }
 
-export type TimelineRowType = React.ForwardRefExoticComponent<
-  TimelineRowProps & React.RefAttributes<HTMLOListElement>
->;
+export interface TimelineRowType
+  extends React.ForwardRefExoticComponent<
+    TimelineRowProps & React.RefAttributes<HTMLOListElement>
+  > {
+  componentType: string;
+}
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, ...rest }, ref) => {
@@ -41,9 +44,8 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
       </div>
     );
   }
-);
+) as TimelineRowType;
 
-//@ts-ignore
 TimelineRow.componentType = "row";
 
 export default TimelineRow;

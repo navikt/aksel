@@ -69,6 +69,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       (c: any) => c?.type?.componentType === "zoom"
     );
 
+    //TO-DO: Selected period.
+
     const rows = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
