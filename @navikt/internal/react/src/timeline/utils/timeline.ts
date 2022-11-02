@@ -32,8 +32,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
       return { label: r.props.label, icon: r.props.icon, periods: periods };
     }
     if (React.isValidElement(r)) {
-      return { label: r?.props?.label, icon: r?.props?.icon, periods: [] };
+      return { periods: [] };
     }
-    return null;
   });
 };
