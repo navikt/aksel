@@ -113,21 +113,29 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
           <AxisLabels />
-
-          {pins.map((pin) => {
-            return pin;
-          })}
+          <div className="navdsi-timeline__pins">
+            {pins.map((pin) => {
+              return pin;
+            })}
+          </div>
 
           {processedRows.map((row) => {
             return (
-              <RowContext.Provider
-                key={`row-${row.id}`}
-                value={{
-                  periods: row.periods,
-                }}
-              >
-                <TimelineRow label={row.label} />
-              </RowContext.Provider>
+              <>
+                {row.label && (
+                  <span className="navdsi-timeline__row__label">
+                    {row.label}
+                  </span>
+                )}
+                <RowContext.Provider
+                  key={`row-${row.id}`}
+                  value={{
+                    periods: row.periods,
+                  }}
+                >
+                  <TimelineRow label={row.label} />
+                </RowContext.Provider>
+              </>
             );
           })}
         </div>

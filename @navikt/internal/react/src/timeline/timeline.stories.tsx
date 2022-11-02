@@ -56,7 +56,7 @@ export const Default = () => {
             icon={<SuccessFilled />}
           />
         </Timeline.Row>
-        <Timeline.Row label="Navn på rad navn">
+        <Timeline.Row label="Navn på rad">
           <Timeline.Period
             start={new Date("May 13 2022")}
             end={new Date("May 25 2022")}

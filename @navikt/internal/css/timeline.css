@@ -1,17 +1,32 @@
 .navdsi-timeline {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  display: inline-grid;
+  grid-template-columns: auto minmax(0, 1fr);
   width: 100%;
 }
 
 .navdsi-timeline__axislabels {
   position: relative;
-  width: 100%;
   height: 1rem;
   box-sizing: content-box;
   margin-bottom: 16px;
+  grid-column: 2;
+  margin-left: 2.375rem;
+}
+
+.navdsi-timeline__pins {
+  grid-column: 2;
+  position: relative;
+  z-index: 3;
+  height: 100%;
+}
+
+.navdsi-timeline__row__label {
+  white-space: nowrap;
+  width: auto;
+  margin-right: 1.125rem;
+  grid-column: 1;
+  font-size: var(--navds-font-size-medium);
 }
 
 .navdsi-timeline__axislabels > * {
@@ -22,24 +37,21 @@
 
 .navdsi-timeline__row {
   display: flex;
+  background: var(--navds-global-color-gray-50);
+  margin: 0 0 var(--navds-spacing-5);
+  padding-left: 2.375rem;
+  grid-column: 2;
 }
 
 .navdsi-timeline__row:last-of-type > ol {
   margin-bottom: 0;
 }
 
-.navdsi-timeline__row__label {
-  width: 126px;
-  margin-right: 18px;
-  text-align: right;
-}
-
 .navdsi-timeline__row__periods {
-  background: var(--navds-global-color-gray-50);
   height: var(--navds-font-line-height-large);
   position: relative;
-  margin: 0 0 var(--navds-spacing-5);
   width: 100%;
+  margin: 0;
 }
 
 .navdsi-timeline__row__periods li {
