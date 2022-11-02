@@ -94,37 +94,37 @@
 }
 
 .navds-tag--alt1 {
-  border-color: var(--ac-tag-alt1-border, var(--navds-global-color-deepblue-400));
-  background-color: var(--ac-tag-alt1-bg, var(--navds-global-color-deepblue-100));
+  border-color: var(--ac-tag-alt1-border, var(--navds-global-color-purple-400));
+  background-color: var(--ac-tag-alt1-bg, var(--navds-global-color-purple-100));
   color: var(--ac-tag-alt1-text, var(--navds-global-color-gray-900));
 }
 
 .navds-tag--alt1-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt1-filled-bg, var(--navds-global-color-deepblue-500));
+  background-color: var(--ac-tag-alt1-filled-bg, var(--navds-global-color-purple-400));
   color: var(--ac-tag-alt1-filled-text, var(--navds-global-color-white));
 }
 
 .navds-tag--alt2 {
-  border-color: var(--ac-tag-alt2-border, var(--navds-global-color-purple-400));
-  background-color: var(--ac-tag-alt2-bg, var(--navds-global-color-purple-100));
+  border-color: var(--ac-tag-alt2-border, var(--navds-global-color-limegreen-500));
+  background-color: var(--ac-tag-alt2-bg, var(--navds-global-color-limegreen-100));
   color: var(--ac-tag-alt2-text, var(--navds-global-color-gray-900));
 }
 
 .navds-tag--alt2-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt2-filled-bg, var(--navds-global-color-purple-400));
-  color: var(--ac-tag-alt2-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-alt2-filled-bg, var(--navds-global-color-limegreen-400));
+  color: var(--ac-tag-alt2-filled-text, var(--navds-global-color-gray-900));
 }
 
 .navds-tag--alt3 {
-  border-color: var(--ac-tag-alt3-border, var(--navds-global-color-limegreen-500));
-  background-color: var(--ac-tag-alt3-bg, var(--navds-global-color-limegreen-100));
+  border-color: var(--ac-tag-alt3-border, var(--navds-global-color-deepblue-400));
+  background-color: var(--ac-tag-alt3-bg, var(--navds-global-color-deepblue-100));
   color: var(--ac-tag-alt3-text, var(--navds-global-color-gray-900));
 }
 
 .navds-tag--alt3-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt3-filled-bg, var(--navds-global-color-limegreen-400));
-  color: var(--ac-tag-alt3-filled-text, var(--navds-global-color-gray-900));
+  background-color: var(--ac-tag-alt3-filled-bg, var(--navds-global-color-deepblue-500));
+  color: var(--ac-tag-alt3-filled-text, var(--navds-global-color-white));
 }

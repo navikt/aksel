@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 1.5.3
+
+### Patch Changes
+
+- Byttet om på alt-farge rekkefølge
+
 ## 1.5.2
 
 ### Patch Changes
