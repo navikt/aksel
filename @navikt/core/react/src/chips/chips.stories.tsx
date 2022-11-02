@@ -60,7 +60,7 @@ export const Filter = () => {
   const [selected, setSelected] = useState<number[]>([]);
   return (
     <Chips>
-      {new Array(4).fill(1).map((_, y) => (
+      {options.map((c, y) => (
         <Chips.Filter
           selected={selected.includes(y)}
           onClick={() =>
@@ -72,7 +72,7 @@ export const Filter = () => {
           }
           key={y}
         >
-          Filter
+          {c}
         </Chips.Filter>
       ))}
     </Chips>
@@ -83,14 +83,14 @@ export const Removable = () => {
   return (
     <div className="colgap">
       <Chips>
-        {new Array(4).fill(1).map((_, y) => (
-          <Chips.Removable key={y}>Removable</Chips.Removable>
+        {options.map((c, y) => (
+          <Chips.Removable key={y}>{c}</Chips.Removable>
         ))}
       </Chips>
       <Chips>
-        {new Array(4).fill(1).map((_, y) => (
+        {options.map((c, y) => (
           <Chips.Removable variant="neutral" key={y}>
-            Removable
+            {c}
           </Chips.Removable>
         ))}
       </Chips>
@@ -103,12 +103,12 @@ export const Regular = () => {
   return (
     <div className="colgap">
       <Chips>
-        {new Array(4).fill(1).map((_, y) => (
-          <Chips.Removable key={y}>Input</Chips.Removable>
+        {options.map((c, y) => (
+          <Chips.Removable key={y}>{c}</Chips.Removable>
         ))}
       </Chips>
       <Chips>
-        {new Array(4).fill(1).map((_, y) => (
+        {options.map((c, y) => (
           <Chips.Filter
             selected={selected.includes(y)}
             onClick={() =>
@@ -120,7 +120,7 @@ export const Regular = () => {
             }
             key={y}
           >
-            Filter
+            {c}
           </Chips.Filter>
         ))}
       </Chips>
@@ -133,12 +133,12 @@ export const Small = () => {
   return (
     <div className="colgap">
       <Chips size="small">
-        {new Array(4).fill(1).map((_, y) => (
-          <Chips.Removable key={y}>Input</Chips.Removable>
+        {options.map((c, y) => (
+          <Chips.Removable key={y}>{c}</Chips.Removable>
         ))}
       </Chips>
       <Chips size="small">
-        {new Array(4).fill(1).map((_, y) => (
+        {options.map((c, y) => (
           <Chips.Filter
             selected={selected.includes(y)}
             onClick={() =>
@@ -150,7 +150,7 @@ export const Small = () => {
             }
             key={y}
           >
-            Filter
+            {c}
           </Chips.Filter>
         ))}
       </Chips>
