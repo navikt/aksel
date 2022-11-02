@@ -1,10 +1,10 @@
 export const demo = () => (
   <div
     className={cl(
-      "bg-white text-text shadow-small ring-gray-900/10 hover:shadow-medium active:text-text-action",
+      "text-text-default shadow-small hover:shadow-medium active:text-text-action bg-white ring-gray-900/10",
       className
     )}
   >
-    <div className="bg-surface-inverted text-surface-action-subtle"></div>
+    <div className="bg-surface-inverted text-surface-action-subtle-hover"></div>
   </div>
 );

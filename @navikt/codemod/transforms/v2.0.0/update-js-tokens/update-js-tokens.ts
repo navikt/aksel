@@ -5,7 +5,7 @@ import {
   renameImportSpecifier,
 } from "../../../utils/imports";
 import { translateToken } from "../../../utils/translate-token";
-import { tokens } from "../update-css-tokens/update-css-tokens";
+import { tokens } from "../../../tokens-map.mjs";
 
 /**
  * @param {import('jscodeshift').FileInfo} file

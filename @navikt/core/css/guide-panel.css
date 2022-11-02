@@ -1,8 +1,7 @@
 :root,
 :host {
   --navds-guide-panel-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-guide-panel-color-border: var(--navds-global-color-blue-400);
-  --navds-guide-panel-color-illustration-background: var(--navds-global-color-blue-200);
+  --navds-guide-panel-color-illustration-background: var(--a-surface-action-subtle);
 }
 
 /**
@@ -16,7 +15,7 @@
 .navds-guide-panel__content {
   background-color: var(--navds-guide-panel-color-background);
   border-radius: var(--navds-border-radius-medium);
-  border: 2px solid var(--navds-guide-panel-color-border);
+  border: 2px solid var(--ac-guide-panel-border, var(--a-border-action));
   min-height: 7.25rem;
   padding: var(--navds-spacing-6);
   padding-left: var(--navds-spacing-14);
@@ -36,6 +35,7 @@
   position: absolute;
   top: var(--navds-spacing-4);
   transform: translateX(-50%);
+  border: 2px solid var(--ac-guide-panel-border, var(--a-border-action));
 }
 
 .navds-guide-panel--poster .navds-guide {
@@ -54,7 +54,7 @@
 
 /* Guide illustration frame */
 .navds-guide__illustration {
-  background: var(--navds-guide-panel-color-illustration-background);
+  background: var(--ac-guide-panel-illustration-bg, var(--a-surface-action-subtle));
   border-radius: var(--navds-border-radius-full);
   overflow: hidden;
 }

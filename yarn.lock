@@ -3166,7 +3166,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-codemod@^1.5.2, @navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@npm:^1.5.2":
+  version: 1.5.3
+  resolution: "@navikt/ds-codemod@npm:1.5.3"
+  dependencies:
+    chalk: 4.1.0
+    cheerio: 1.0.0-rc.9
+    execa: 4.0.3
+    globby: 11.0.1
+    inquirer: 7.3.3
+    is-git-clean: 1.1.0
+    jest: ^29.0.0
+    jscodeshift: 0.13.1
+    jscodeshift-add-imports: 1.0.10
+    lodash: 4.17.21
+    meow: 7.0.1
+    prettier: 2.7.1
+  bin:
+    ds-codemod: bin/ds-codemod.js
+  checksum: 08e768a1b569f2d7827dc616cc5aa4eab4e5387d2e4aea6b28b109d6a8d56ff70aa4f88864b471c954d19f5ea6b1aed90fe193f966699faf216a2ee9b2ca7b88
+  languageName: node
+  linkType: hard
+
+"@navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:

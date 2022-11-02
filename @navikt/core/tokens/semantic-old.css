@@ -1,0 +1,45 @@
+.css {
+  --navds-semantic-color-text: var(--navds-global-color-gray-900);
+  --navds-semantic-color-text-muted: var(--navds-global-color-gray-600);
+  --navds-semantic-color-text-inverted: var(--navds-global-color-white);
+  --navds-semantic-color-link: var(--navds-global-color-blue-500);
+  --navds-semantic-color-link-visited: var(--navds-global-color-purple-500);
+
+  --navds-semantic-color-interaction-primary: var(--navds-global-color-blue-500);
+  --navds-semantic-color-interaction-primary-selected: var(--navds-global-color-deepblue-500);
+  --navds-semantic-color-interaction-primary-hover: var(--navds-global-color-blue-600);
+  --navds-semantic-color-interaction-primary-hover-subtle: var(--navds-global-color-blue-50);
+  --navds-semantic-color-interaction-danger: var(--navds-global-color-red-500);
+  --navds-semantic-color-interaction-danger-selected: var(--navds-global-color-red-700);
+  --navds-semantic-color-interaction-danger-hover: var(--navds-global-color-red-600);
+
+  --navds-semantic-color-focus: var(--navds-global-color-blue-800);
+  --navds-semantic-color-focus-inverted: var(--navds-global-color-blue-200);
+  --navds-semantic-color-feedback-warning-icon: var(--navds-global-color-orange-600);
+  --navds-semantic-color-feedback-warning-border: var(--navds-global-color-orange-600);
+  --navds-semantic-color-feedback-warning-background: var(--navds-global-color-orange-50);
+
+  --navds-semantic-color-feedback-success-icon: var(--navds-global-color-green-600);
+  --navds-semantic-color-feedback-success-border: var(--navds-global-color-green-500);
+  --navds-semantic-color-feedback-success-background: var(--navds-global-color-green-50);
+  --navds-semantic-color-feedback-info-icon: var(--navds-global-color-lightblue-700);
+  --navds-semantic-color-feedback-info-border: var(--navds-global-color-lightblue-700);
+  --navds-semantic-color-feedback-info-background: var(--navds-global-color-lightblue-50);
+
+  --navds-semantic-color-feedback-danger-text: var(--navds-global-color-red-500);
+  --navds-semantic-color-feedback-danger-icon: var(--navds-global-color-red-500);
+  --navds-semantic-color-feedback-danger-border: var(--navds-global-color-red-500);
+  --navds-semantic-color-feedback-danger-background: var(--navds-global-color-red-50);
+  --navds-semantic-color-divider: var(--navds-global-color-gray-300);
+  --navds-semantic-color-border-inverted: var(--navds-global-color-gray-200);
+  --navds-semantic-color-border: var(--navds-global-color-gray-600);
+  --navds-semantic-color-border-muted: var(--navds-global-color-gray-500);
+  --navds-semantic-color-canvas-background: var(--navds-global-color-gray-100);
+  --navds-semantic-color-canvas-background-light: var(--navds-global-color-white);
+  --navds-semantic-color-canvas-background-inverted: var(--navds-global-color-gray-900);
+  --navds-semantic-color-component-background-light: var(--navds-global-color-white);
+  --navds-semantic-color-component-background-inverted: var(--navds-global-color-gray-900);
+  --navds-semantic-color-component-background-alternate: var(--navds-global-color-gray-50);
+
+  /* done */
+}

@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "1.5.2",
+  "version": "1.5.2-next.10",
   "description": "NAV designsystem codemods",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -11,13 +11,16 @@
   ],
   "files": [
     "transforms/**/*.js",
+    "utils/**/*.js",
     "bin/*.js",
     "lib/**/*.js",
-    "lib/cra-to-next/gitignore"
+    "lib/cra-to-next/gitignore",
+    "tokens-map.mjs"
   ],
   "scripts": {
     "build": "yarn clean && tsc -p tsconfig.json",
     "dev": "yarn clean && tsc --watch -p tsconfig.json",
+    "start": "./bin/cli.js",
     "test": "yarn build && jest",
     "test:watch": "jest --watch",
     "clean": "node clean.mjs"
