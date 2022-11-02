@@ -123,7 +123,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             return (
               <>
                 {row.label && (
-                  <span className="navdsi-timeline__row__label">
+                  <span
+                    id={`label-${row.id}`}
+                    className="navdsi-timeline__row__label"
+                  >
                     {row.label}
                   </span>
                 )}
@@ -131,6 +134,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                   key={`row-${row.id}`}
                   value={{
                     periods: row.periods,
+                    id: row.id,
                   }}
                 >
                   <TimelineRow label={row.label} />

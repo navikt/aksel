@@ -17,11 +17,16 @@ export interface TimelineRowType
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, ...rest }, ref) => {
-    const { periods } = useRowContext();
+    const { periods, id } = useRowContext();
 
     return (
       <div className="navdsi-timeline__row">
-        <ol {...rest} ref={ref} className="navdsi-timeline__row__periods">
+        <ol
+          {...rest}
+          ref={ref}
+          aria-describedby={`label-${id}`}
+          className="navdsi-timeline__row__periods"
+        >
           {periods &&
             periods.map((period) => {
               return (
