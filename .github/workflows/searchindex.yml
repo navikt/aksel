@@ -1,0 +1,25 @@
+name: Indexing search
+on:
+  workflow_dispatch:
+  schedule:
+    # 01.00 & 12.00 every day
+    - cron: "00 01,12 * * *"
+
+jobs:
+  searchcrawl:
+    name: Search-indexing aksel.nav.no
+    runs-on: ubuntu-latest
+    env:
+      APPLICATION_ID: ${{ secrets.ALGOLIA_ID}}
+      API_KEY: ${{ secrets.ALGOLIA_ADMIN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Read crawler.json
+        id: algolia_config
+        run: echo "::set-output name=config::$(cat ./aksel.nav.no/crawler.json | jq -r tostring)"
+      - name: Push indices to Algolia
+        uses: signcl/docsearch-scraper-action@master
+        env:
+          APPLICATION_ID: ${{ secrets.ALGOLIA_ID}}
+          API_KEY: ${{ secrets.ALGOLIA_ADMIN }}
+          CONFIG: ${{ steps.algolia_config.outputs.config }}

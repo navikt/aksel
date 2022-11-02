@@ -27,9 +27,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/node_modules"
-          key: ${{ runner.os }}-test-${{ github.sha }}
+          key: ${{ runner.os }}-prod-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-test
+            ${{ runner.os }}-prod
 
       - name: Install dependencies
         run: yarn

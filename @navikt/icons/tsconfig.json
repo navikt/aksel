@@ -4,5 +4,6 @@
     "outDir": "./cjs",
     "module": "commonjs"
   },
-  "exclude": ["./figma", "./util", "./tests", "./scripts", "**/*.stories.*"]
+  "exclude": ["./figma", "./util", "./tests", "./scripts", "**/*.stories.*"],
+  "include": ["./src"]
 }

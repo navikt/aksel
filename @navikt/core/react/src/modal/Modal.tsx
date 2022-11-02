@@ -1,8 +1,8 @@
-import React, { forwardRef, useMemo, useRef } from "react";
+import React, { forwardRef, useEffect, useMemo, useRef } from "react";
 import cl from "clsx";
 import ReactModal from "react-modal";
 import { Close } from "@navikt/ds-icons";
-import { Button, mergeRefs } from "..";
+import { Button, mergeRefs, useProvider } from "..";
 import ModalContent, { ModalContentType } from "./ModalContent";
 
 export interface ModalProps {
@@ -63,7 +63,7 @@ interface ModalComponent
 }
 
 type ModalLifecycle = {
-  setAppElement?: (element: any) => void;
+  setAppElement: (element: any) => void;
 };
 
 export const Modal = forwardRef<ReactModal, ModalProps>(
@@ -81,6 +81,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       "aria-modal": ariaModal,
       "aria-label": contentLabel,
       style,
+      parentSelector,
       ...rest
     },
     ref
@@ -88,6 +89,12 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     const modalRef = useRef<ReactModal | null>(null);
     const mergedRef = useMemo(() => mergeRefs([modalRef, ref]), [ref]);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const rootElement = useProvider()?.rootElement;
+    const appElement = useProvider()?.appElement;
+
+    useEffect(() => {
+      appElement && Modal.setAppElement(appElement);
+    }, [appElement]);
 
     const onModalCloseRequest = (e) => {
       if (shouldCloseOnOverlayClick || e.type === "keydown") {
@@ -100,6 +107,11 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
+        parentSelector={
+          parentSelector ?? rootElement !== undefined
+            ? () => rootElement as HTMLElement
+            : undefined
+        }
         style={style}
         isOpen={open}
         ref={mergedRef}
