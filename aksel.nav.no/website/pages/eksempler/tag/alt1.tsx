@@ -4,8 +4,8 @@ import { withDsExample } from "components/website-modules/examples/withDsExample
 const Example = () => {
   return (
     <div className="flex gap-2">
-      <Tag variant="warning">Warning</Tag>
-      <Tag variant="warning-filled">Warning</Tag>
+      <Tag variant="alt1">Alt1</Tag>
+      <Tag variant="alt1-filled">Alt1</Tag>
     </div>
   );
 };
@@ -13,6 +13,6 @@ const Example = () => {
 export default withDsExample(Example);
 
 export const args = {
-  index: 3,
-  desc: "Beskriver noe som er en advarsel, usikkert, noe som må utbedres, etc.",
+  index: 5,
+  desc: "Har ingen global betydning. Tjenesten/produktet kan bestemme hva de symboliserer.",
 };
