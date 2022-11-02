@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 1.5.1
+
+### Patch Changes
+
+- Flex-wrap chips.css
+
 ## 1.5.0
 
 ### Minor Changes

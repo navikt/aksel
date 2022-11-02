@@ -3,12 +3,9 @@ import cl from "clsx";
 import { BodyShort, Detail } from "..";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
-  /**
-   * Tag label
-   */
   children: React.ReactNode;
   /**
-   * Changes background and border color
+   * Changes visual profile of tag
    */
   variant:
     | "warning"
@@ -28,7 +25,6 @@ export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
     | "alt3"
     | "alt3-filled";
   /**
-   * Changes padding and font-sizes
    * @default "medium"
    */
   size?: "medium" | "small" | "xsmall";

@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.5.1
+
+### Patch Changes
+
+- Flex-wrap chips.css
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.1
+
 ## 1.5.0
 
 ### Minor Changes
