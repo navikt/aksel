@@ -1,7 +1,15 @@
 import React, { ReactNode } from "react";
+import { Period } from "./types.external";
+
+type ParsedChild = {
+  label?: string;
+  icon?: ReactNode;
+  periods: Omit<Period, "id" | "endInclusive">[];
+};
 
 export const parseRows = (rowChildren: ReactNode[]) => {
-  return rowChildren?.map((r: ReactNode) => {
+  let parsedChildren: ParsedChild[] = [];
+  rowChildren?.forEach((r: ReactNode) => {
     let periods = [];
     if (React.isValidElement(r) && r?.props?.children) {
       if (Array.isArray(r.props.children)) {
@@ -29,10 +37,13 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           children: r.props.children.props?.children,
         });
       }
-      return { label: r.props.label, icon: r.props.icon, periods: periods };
-    }
-    if (React.isValidElement(r)) {
-      return { periods: [] };
+      parsedChildren.push({
+        label: r.props.label,
+        icon: r.props.icon,
+        periods: periods,
+      });
     }
   });
+
+  return parsedChildren;
 };

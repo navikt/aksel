@@ -82,8 +82,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return [];
     });
 
-    console.log(rowsRaw);
-
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
 
     const [start, setStart] = useState(initialStartDate);
