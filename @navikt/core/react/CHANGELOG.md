@@ -1,5 +1,18 @@
 # @navikt/ds-react
 
+## 1.5.0
+
+### Minor Changes
+
+- [#1684](https://github.com/navikt/Designsystemet/pull/1684) [`e19bf67b3`](https://github.com/navikt/Designsystemet/commit/e19bf67b337dea39989c68b5e9c2591cf0d5b40f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Oppdaterte tag-varianter
+
+- [#1668](https://github.com/navikt/Designsystemet/pull/1668) [`97c5f60e9`](https://github.com/navikt/Designsystemet/commit/97c5f60e9111da7e08f55c8d0aa29581f0a9b1ca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Chips komponent :sparkles:
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.0
+
 ## 1.4.4
 
 ### Patch Changes
