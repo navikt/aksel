@@ -34,8 +34,8 @@ describe("Writing in input sets correct values", () => {
     const res = utils.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
-        from: "2022-08-02T22:00:00.000Z",
-        to: "2022-08-02T22:00:00.000Z",
+        from: "2022-08-03T00:00:00.000Z",
+        to: "2022-08-03T00:00:00.000Z",
       })
     );
   });
@@ -52,7 +52,7 @@ describe("Writing in input sets correct values", () => {
     const res = utils.getByTitle("res");
     expect(res.innerHTML).toEqual(
       JSON.stringify({
-        from: "2022-08-02T22:00:00.000Z",
+        from: "2022-08-03T00:00:00.000Z",
       })
     );
   });

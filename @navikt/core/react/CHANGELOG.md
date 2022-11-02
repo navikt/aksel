@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.4.4
+
+### Patch Changes
+
+- Eksponerer validation-typer
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.4
+
 ## 1.4.3
 
 ### Patch Changes
