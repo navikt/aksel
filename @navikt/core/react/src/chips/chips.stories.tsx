@@ -11,6 +11,12 @@ export default {
         options: ["filter", "removable"],
       },
     },
+    size: {
+      control: {
+        type: "radio",
+        options: ["medium", "small"],
+      },
+    },
   },
 };
 
@@ -22,7 +28,7 @@ export const Default = (props) => {
 
   if (props.type === "filter") {
     return (
-      <Chips>
+      <Chips size={props.size ?? "medium"}>
         {options.map((c) => (
           <Chips.Filter
             selected={selected.includes(c)}
@@ -43,7 +49,7 @@ export const Default = (props) => {
   }
 
   return (
-    <Chips>
+    <Chips size={props.size ?? "medium"}>
       {filter.map((c) => (
         <Chips.Removable
           key={c}

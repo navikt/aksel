@@ -15,7 +15,7 @@ export interface RemovableChipsProps
    * Replaces label read for screen-readers
    * @default "slett filter"
    */
-  removeAriaLabel?: string;
+  removeLabel?: string;
   /**
    * Click callback
    */
@@ -35,7 +35,7 @@ export const RemovableChips: OverridableComponent<
       children,
       variant = "action",
       as: Component = "button",
-      removeAriaLabel = "slett",
+      removeLabel = "slett",
       onDelete,
       ...rest
     },
@@ -50,7 +50,7 @@ export const RemovableChips: OverridableComponent<
           className,
           `navds-chips__removable--${variant}`
         )}
-        aria-label={`${children} ${removeAriaLabel}`}
+        aria-label={`${children} ${removeLabel}`}
         onClick={(e) => {
           onDelete?.();
           rest?.onClick?.(e);
