@@ -47,4 +47,5 @@ export interface InternalSimpleTimeline {
   label?: string;
   id: string;
   periods: PositionedPeriod[];
+  icon?: ReactNode;
 }

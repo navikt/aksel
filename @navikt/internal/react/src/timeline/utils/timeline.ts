@@ -29,8 +29,11 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           children: r.props.children.props?.children,
         });
       }
-      return periods;
+      return { label: r.props.label, icon: r.props.icon, periods: periods };
     }
-    return [];
+    if (React.isValidElement(r)) {
+      return { label: r?.props?.label, icon: r?.props?.icon, periods: [] };
+    }
+    return null;
   });
 };

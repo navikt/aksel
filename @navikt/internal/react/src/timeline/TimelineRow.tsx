@@ -1,11 +1,18 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, ReactNode } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import Period from "./period/Period";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
+  /**
+   * label for the timeline row
+   */
   label?: string;
+  /**
+   * Icon which will be displayed next to label
+   */
+  icon?: ReactNode;
 }
 
 export interface TimelineRowType

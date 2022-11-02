@@ -90,8 +90,8 @@ export const useTimelineRows = (
 ): InternalSimpleTimeline[] =>
   useMemo(
     () =>
-      rows.map((periods: Period[]) => {
-        const timelinePeriods = periods
+      rows.map((periods: InternalSimpleTimeline) => {
+        const timelinePeriods = periods.periods
           .map((period: Period) =>
             spatialPeriod(period, startDate, endDate, direction)
           )
@@ -101,7 +101,8 @@ export const useTimelineRows = (
           .filter(invisiblePeriods);
         return {
           id: nanoid(),
-          label: periods?.[0]?.label,
+          label: periods.label,
+          icon: periods.icon,
           periods:
             direction === "left" ? timelinePeriods : timelinePeriods.reverse(),
         };

@@ -71,9 +71,18 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     //TO-DO: Selected period.
 
-    const rows = useMemo(() => {
+    const rowsRaw = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
+
+    const rows = rowsRaw.map((r) => {
+      if (r?.periods) {
+        return r.periods;
+      }
+      return [];
+    });
+
+    console.log(rowsRaw);
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
 
@@ -83,7 +92,12 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     );
 
     const initialEndDate = endOfDay(useLatestDate({ endDate, rows }));
-    const processedRows = useTimelineRows(rows, start, endInclusive, direction);
+    const processedRows = useTimelineRows(
+      rowsRaw,
+      start,
+      endInclusive,
+      direction
+    );
 
     const handleZoomChange = (zoomStart: Date) => {
       if (direction === "left") {
@@ -121,7 +135,13 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
           {processedRows.map((row) => {
             return (
-              <>
+              <RowContext.Provider
+                key={`row-${row.id}`}
+                value={{
+                  periods: row.periods,
+                  id: row.id,
+                }}
+              >
                 {row.label && (
                   <span
                     id={`label-${row.id}`}
@@ -130,16 +150,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                     {row.label}
                   </span>
                 )}
-                <RowContext.Provider
-                  key={`row-${row.id}`}
-                  value={{
-                    periods: row.periods,
-                    id: row.id,
-                  }}
-                >
-                  <TimelineRow label={row.label} />
-                </RowContext.Provider>
-              </>
+                <TimelineRow label={row.label} />
+              </RowContext.Provider>
             );
           })}
         </div>
