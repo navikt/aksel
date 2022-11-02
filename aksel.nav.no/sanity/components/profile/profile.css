@@ -1,0 +1,35 @@
+/* ./cms/styles/ReferringDocumentsList.css */
+
+@import "part:@sanity/base/theme/variables-style";
+
+.root {
+  composes: root from "part:@sanity/components/lists/default-style";
+}
+
+.item {
+  composes: lineBetween from "part:@sanity/components/lists/default-item-style";
+  background: var(--white);
+  border-radius: var(--border-radius-base);
+  color: inherit;
+  margin-bottom: var(--small-padding);
+  border: 1px solid var(--list-border-color);
+}
+
+.item:hover {
+  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle, rgba(230, 240, 255, 1));
+}
+
+.link {
+  padding: var(--small-padding);
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link:focus {
+  border-radius: 2px;
+  outline: none;
+  box-shadow: var(--navds-shadow-focus, var(--navds-shadow-focus, 0 0 0 3px rgba(0, 52, 125, 1)));
+}

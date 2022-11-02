@@ -130,3 +130,21 @@ _docs.json
 */icons/png
 */core/icons
 /storybook-static
+
+# Aksel.nav.no
+.next
+!*/website/lib/
+!*/website/public/
+!aksel.nav.no/**/*.d.ts
+!*/sanity/lib/
+!*/sanity/static/
+out
+test-urls.json
+videos
+sanity/scripts/renameField.js
+tmp.json
+/test-results/
+/playwright-report/
+/playwright/.cache/
+playwright-report/
+/test-results/

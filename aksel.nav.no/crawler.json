@@ -1,0 +1,48 @@
+{
+  "index_name": "aksel_docsearch",
+  "start_urls": [
+    "https://aksel.nav.no/",
+    {
+      "url": "https://aksel.nav.no/designsystem",
+      "tags": ["designsystem", "docs"]
+    },
+    {
+      "url": "https://aksel.nav.no/artikkel/",
+      "tags": ["aksel"],
+      "selectors_key": "aksel"
+    },
+    {
+      "url": "https://aksel.nav.no/blogg/",
+      "tags": ["aksel"],
+      "selectors_key": "aksel"
+    }
+  ],
+  "selectors": {
+    "default": {
+      "lvl0": {
+        "selector": "h1.algolia-index-lvl1",
+        "global": true
+      },
+      "lvl1": ".algolia-index-tabs--active",
+      "lvl2": "h2.algolia-index-lvl2",
+      "lvl3": "h3.algolia-index-lvl3",
+      "text": "p.algolia-index-body, p.algolia-index-ingress"
+    },
+    "aksel": {
+      "lvl0": {
+        "selector": "h1.algolia-index-lvl1",
+        "global": true
+      },
+      "lvl1": "h2.algolia-index-lvl2",
+      "lvl2": "h3.algolia-index-lvl3",
+      "text": "p.algolia-index-body, p.algolia-index-ingress"
+    }
+  },
+  "selectors_exclude": [".algolia-ignore-index"],
+  "stop_urls": [
+    "https://aksel.nav.no/preview",
+    "https://old-design-nav.vercel.app"
+  ],
+  "sitemap_urls": ["https://aksel.nav.no/api/sitemap"],
+  "js_render": true
+}

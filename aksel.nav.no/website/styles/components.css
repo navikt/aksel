@@ -1,0 +1,22 @@
+.skiplink {
+  @apply z-modal bg-focus text-text-inverted absolute left-0 -translate-y-full p-4 no-underline focus-within:translate-y-0 focus-within:shadow-[inset_0_0_0_2px_white] focus-within:outline-none;
+}
+
+.inline-code {
+  border-radius: 0.25rem;
+  background-color: rgb(226 232 240);
+  padding: 0.125em 0.25em;
+  font-size: calc(16em / 18); /* scale font-size with parent */
+  line-height: 1.5;
+}
+
+.inline-kbd {
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  background-color: rgb(255, 255, 255);
+  padding: 0.125rem 0.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  box-shadow: 0 0 0 1px rgb(38, 38, 38);
+  @apply text-text;
+}

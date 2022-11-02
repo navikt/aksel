@@ -1,0 +1,89 @@
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.navds-body-long.navds-typo--spacing + .list-margin {
+  @apply -mt-4;
+}
+
+.svg-color-reset.navds-link svg {
+  color: inherit;
+}
+
+.override-text-700 p {
+  max-width: 700px;
+}
+
+p.override-text-no-max {
+  max-width: none;
+}
+
+.dynamic-wrapper {
+  @apply max-w-aksel xs:w-[90%] mx-auto;
+}
+
+.dynamic-wrapper-prose {
+  @apply xs:w-[90%] mx-auto max-w-prose;
+}
+
+.dynamic-wrapper-left {
+  @apply xs:w-[90%] max-w-prose;
+}
+
+.dynamic-wrapper-2xl {
+  @apply xs:w-[90%] mx-auto max-w-2xl;
+}
+
+.card-grid-3-1 {
+  @apply grid gap-3 sm:grid-cols-2 md:gap-6 lg:grid-cols-3;
+}
+
+.aksel-artikkel .aksel-list-ul li::before {
+  content: url("/images/list-dot.svg");
+  position: absolute;
+  left: 0;
+}
+
+.aksel-artikkel .aksel-list-ul li::marker,
+.aksel-artikkel .aksel-list-ol li::marker {
+  content: none;
+}
+
+.aksel-artikkel .aksel-list-ol {
+  counter-reset: li;
+}
+
+.aksel-artikkel .aksel-list-ol li::before {
+  counter-increment: li;
+}
+
+.aksel-artikkel .aksel-list-ol li::before {
+  content: counter(li) ". ";
+  color: var(--navds-global-color-deepblue-800);
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+.component-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
+  gap: 1.5rem;
+}
+
+.clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.hyphen {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
