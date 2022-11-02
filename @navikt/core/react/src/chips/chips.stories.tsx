@@ -1,11 +1,59 @@
-import { List, Root, TabsTrigger } from "@radix-ui/react-tabs";
 import React, { useState } from "react";
 import { Chips } from ".";
 
 export default {
   title: "ds-react/Chips",
   component: Chips,
-  argTypes: {},
+  argTypes: {
+    type: {
+      control: {
+        type: "radio",
+        options: ["filter", "removable"],
+      },
+    },
+  },
+};
+
+const options = ["Norsk", "Dansk", "Svensk", "Tysk", "Spansk"];
+
+export const Default = (props) => {
+  const [selected, setSelected] = useState(["Dansk", "Svensk"]);
+  const [filter, setFilter] = useState(options);
+
+  if (props.type === "filter") {
+    return (
+      <Chips>
+        {options.map((c) => (
+          <Chips.Filter
+            selected={selected.includes(c)}
+            key={c}
+            onClick={() =>
+              setSelected(
+                selected.includes(c)
+                  ? selected.filter((x) => x !== c)
+                  : [...selected, c]
+              )
+            }
+          >
+            {c}
+          </Chips.Filter>
+        ))}
+      </Chips>
+    );
+  }
+
+  return (
+    <Chips>
+      {filter.map((c) => (
+        <Chips.Removable
+          key={c}
+          onClick={() => setFilter((x) => x.filter((y) => y !== c))}
+        >
+          {c}
+        </Chips.Removable>
+      ))}
+    </Chips>
+  );
 };
 
 export const Filter = () => {
@@ -107,26 +155,5 @@ export const Small = () => {
         ))}
       </Chips>
     </div>
-  );
-};
-
-export const AsTabs = () => {
-  const [selected, setSelected] = useState("chip1");
-  return (
-    <Root onValueChange={setSelected}>
-      <List asChild>
-        <Chips>
-          <TabsTrigger asChild value="chip1">
-            <Chips.Filter selected={selected === "chip1"}>Chip1</Chips.Filter>
-          </TabsTrigger>
-          <TabsTrigger asChild value="chip2">
-            <Chips.Filter selected={selected === "chip2"}>Chip2</Chips.Filter>
-          </TabsTrigger>
-          <TabsTrigger asChild value="chip3">
-            <Chips.Filter selected={selected === "chip3"}>Chip3</Chips.Filter>
-          </TabsTrigger>
-        </Chips>
-      </List>
-    </Root>
   );
 };
