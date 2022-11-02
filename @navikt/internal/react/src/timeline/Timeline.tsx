@@ -147,6 +147,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                     id={`label-${row.id}`}
                     className="navdsi-timeline__row__label"
                   >
+                    {row.icon}
                     {row.label}
                   </span>
                 )}

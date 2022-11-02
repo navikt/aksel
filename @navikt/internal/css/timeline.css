@@ -20,6 +20,10 @@
   margin-right: 1.125rem;
   grid-column: 1;
   font-size: var(--navds-font-size-medium);
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: var(--navds-spacing-4);
 }
 
 .navdsi-timeline__axislabels > * {
