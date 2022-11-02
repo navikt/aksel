@@ -12,7 +12,7 @@ const Example = () => {
     <div className="grid gap-4">
       <Chips size="small">
         {options.map((c) => (
-          <Chips.Filter
+          <Chips.Toggle
             selected={selected.includes(c)}
             key={c}
             onClick={() =>
@@ -24,7 +24,7 @@ const Example = () => {
             }
           >
             {c}
-          </Chips.Filter>
+          </Chips.Toggle>
         ))}
       </Chips>
       <Chips size="small">

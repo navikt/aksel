@@ -111,14 +111,14 @@ const ComponentExamples = ({
         <Chips>
           {node.dir.filer.map((fil) => {
             return (
-              <Chips.Filter
+              <Chips.Toggle
                 key={fil._key}
                 value={fil.navn}
                 selected={active === fil.navn}
                 onClick={() => setActiveExample(fil.navn)}
               >
                 {fixName(fil.navn)}
-              </Chips.Filter>
+              </Chips.Toggle>
             );
           })}
         </Chips>

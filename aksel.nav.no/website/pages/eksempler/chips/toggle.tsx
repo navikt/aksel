@@ -10,7 +10,7 @@ const Example = () => {
   return (
     <Chips>
       {options.map((c) => (
-        <Chips.Filter
+        <Chips.Toggle
           selected={selected.includes(c)}
           key={c}
           onClick={() =>
@@ -22,7 +22,7 @@ const Example = () => {
           }
         >
           {c}
-        </Chips.Filter>
+        </Chips.Toggle>
       ))}
     </Chips>
   );

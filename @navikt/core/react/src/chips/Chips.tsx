@@ -1,6 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef, HTMLAttributes } from "react";
-import FilterChips, { FilterChipsType } from "./Filter";
+import ToggleChips, { ToggleChipsType } from "./Toggle";
 import RemovableChips, { RemovableChipsType } from "./Removable";
 
 export interface ChipsProps extends HTMLAttributes<HTMLUListElement> {
@@ -16,7 +16,7 @@ interface ChipsComponent
   extends React.ForwardRefExoticComponent<
     ChipsProps & React.RefAttributes<HTMLUListElement>
   > {
-  Filter: FilterChipsType;
+  Toggle: ToggleChipsType;
   Removable: RemovableChipsType;
 }
 
@@ -39,7 +39,7 @@ export const Chips: ChipsComponent = forwardRef<HTMLUListElement, ChipsProps>(
   }
 ) as ChipsComponent;
 
-Chips.Filter = FilterChips;
+Chips.Toggle = ToggleChips;
 Chips.Removable = RemovableChips;
 
 export default Chips;

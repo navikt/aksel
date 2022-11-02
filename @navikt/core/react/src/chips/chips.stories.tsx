@@ -8,7 +8,7 @@ export default {
     type: {
       control: {
         type: "radio",
-        options: ["filter", "removable"],
+        options: ["toggle", "removable"],
       },
     },
     size: {
@@ -26,11 +26,11 @@ export const Default = (props) => {
   const [selected, setSelected] = useState(["Dansk", "Svensk"]);
   const [filter, setFilter] = useState(options);
 
-  if (props.type === "filter") {
+  if (props.type === "toggle") {
     return (
       <Chips size={props.size ?? "medium"}>
         {options.map((c) => (
-          <Chips.Filter
+          <Chips.Toggle
             selected={selected.includes(c)}
             key={c}
             onClick={() =>
@@ -42,7 +42,7 @@ export const Default = (props) => {
             }
           >
             {c}
-          </Chips.Filter>
+          </Chips.Toggle>
         ))}
       </Chips>
     );
@@ -62,12 +62,12 @@ export const Default = (props) => {
   );
 };
 
-export const Filter = () => {
+export const Toggle = () => {
   const [selected, setSelected] = useState<number[]>([]);
   return (
     <Chips>
       {options.map((c, y) => (
-        <Chips.Filter
+        <Chips.Toggle
           selected={selected.includes(y)}
           onClick={() =>
             setSelected(
@@ -79,7 +79,7 @@ export const Filter = () => {
           key={y}
         >
           {c}
-        </Chips.Filter>
+        </Chips.Toggle>
       ))}
     </Chips>
   );
@@ -115,7 +115,7 @@ export const Regular = () => {
       </Chips>
       <Chips>
         {options.map((c, y) => (
-          <Chips.Filter
+          <Chips.Toggle
             selected={selected.includes(y)}
             onClick={() =>
               setSelected(
@@ -127,7 +127,7 @@ export const Regular = () => {
             key={y}
           >
             {c}
-          </Chips.Filter>
+          </Chips.Toggle>
         ))}
       </Chips>
     </div>
@@ -145,7 +145,7 @@ export const Small = () => {
       </Chips>
       <Chips size="small">
         {options.map((c, y) => (
-          <Chips.Filter
+          <Chips.Toggle
             selected={selected.includes(y)}
             onClick={() =>
               setSelected(
@@ -157,7 +157,7 @@ export const Small = () => {
             key={y}
           >
             {c}
-          </Chips.Filter>
+          </Chips.Toggle>
         ))}
       </Chips>
     </div>

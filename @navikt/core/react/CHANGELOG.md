@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.5.2
+
+### Patch Changes
+
+- :memo: Rename FilterChips to ToggleChips
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.2
+
 ## 1.5.1
 
 ### Patch Changes

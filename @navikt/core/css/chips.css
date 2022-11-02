@@ -33,32 +33,32 @@
   padding: 0 var(--navds-spacing-2);
 }
 
-.navds-chips__filter {
-  box-shadow: inset 0 0 0 1px var(--ac-chip-filter-border, var(--navds-global-color-gray-500));
-  background-color: var(--ac-chip-filter-bg, rgb(0 0 0 / 0.055));
+.navds-chips__toggle {
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-border, var(--navds-global-color-gray-500));
+  background-color: var(--ac-chip-toggle-bg, rgb(0 0 0 / 0.055));
 }
 
-.navds-chips__filter:hover {
-  box-shadow: inset 0 0 0 1px var(--ac-chip-filter-border-hover, var(--navds-global-color-gray-600));
-  background-color: var(--ac-chip-filter-bg-hover, rgb(0 0 0 / 0.1));
+.navds-chips__toggle:hover {
+  box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-border-hover, var(--navds-global-color-gray-600));
+  background-color: var(--ac-chip-toggle-bg-hover, rgb(0 0 0 / 0.1));
 }
 
-.navds-chips__filter[aria-pressed="true"] {
+.navds-chips__toggle[aria-pressed="true"] {
   box-shadow: none;
-  background-color: var(--ac-chip-filter-bg-pressed, var(--navds-global-color-deepblue-500));
-  color: var(--ac-chip-filter-text-pressed, var(--navds-global-color-white));
+  background-color: var(--ac-chip-toggle-bg-pressed, var(--navds-global-color-deepblue-500));
+  color: var(--ac-chip-toggle-text-pressed, var(--navds-global-color-white));
 }
 
-.navds-chips__filter[aria-pressed="true"]:hover {
-  background-color: var(--ac-chip-filter-bg-pressed-hover, var(--navds-global-color-deepblue-600));
+.navds-chips__toggle[aria-pressed="true"]:hover {
+  background-color: var(--ac-chip-toggle-bg-pressed-hover, var(--navds-global-color-deepblue-600));
 }
 
-.navds-chips__filter:focus-visible {
+.navds-chips__toggle:focus-visible {
   box-shadow: 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
-.navds-chips__filter[aria-pressed="true"]:focus-visible,
-.navds-chips__filter:active:focus-visible {
+.navds-chips__toggle[aria-pressed="true"]:focus-visible,
+.navds-chips__toggle:active:focus-visible {
   box-shadow: inset 0 0 0 1px var(--navds-global-color-white), 0 0 0 2px var(--navds-global-color-blue-800);
 }
 
@@ -74,7 +74,7 @@
 }
 
 .navds-chips__removable-icon,
-.navds-chips__filter-icon {
+.navds-chips__toggle-icon {
   width: 1.5rem;
   height: 1.5rem;
   display: grid;

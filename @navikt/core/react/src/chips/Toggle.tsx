@@ -3,23 +3,19 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { OverridableComponent } from "..";
 
-export interface FilterChipsProps
+export interface ToggleChipsProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: string;
   /**
-   *
-   */
-  onSelect?: () => void;
-  /**
-   *
+   * Toggles aria-pressed and visual-changes
    */
   selected?: boolean;
 }
 
-export interface FilterChipsType
-  extends OverridableComponent<FilterChipsProps, HTMLButtonElement> {}
+export interface ToggleChipsType
+  extends OverridableComponent<ToggleChipsProps, HTMLButtonElement> {}
 
-export const FilterChips: FilterChipsType = forwardRef(
+export const ToggleChips: ToggleChipsType = forwardRef(
   (
     { className, children, selected, as: Component = "button", ...rest },
     ref
@@ -28,13 +24,13 @@ export const FilterChips: FilterChipsType = forwardRef(
       <Component
         {...rest}
         ref={ref}
-        className={cl("navds-chips__chip navds-chips__filter", className, {
+        className={cl("navds-chips__chip navds-chips__toggle", className, {
           "navds-chips--icon-left": selected,
         })}
         aria-pressed={selected}
       >
         {selected && (
-          <SuccessStroke aria-hidden className="navds-chips__filter-icon" />
+          <SuccessStroke aria-hidden className="navds-chips__toggle-icon" />
         )}
         <span className="navds-chips__chip-text">{children}</span>
       </Component>
@@ -42,4 +38,4 @@ export const FilterChips: FilterChipsType = forwardRef(
   }
 );
 
-export default FilterChips;
+export default ToggleChips;
