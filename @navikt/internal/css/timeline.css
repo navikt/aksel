@@ -63,8 +63,11 @@
   padding: 0;
   display: flex;
   align-items: center;
-  padding-left: var(--navds-spacing-2);
   z-index: 2;
+}
+
+.navdsi-timeline__period > * {
+  padding-left: var(--navds-spacing-2);
 }
 
 .navdsi-timeline__period--success {
@@ -133,6 +136,9 @@
 .navdsi-timeline__period--selected {
   box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
   border-color: var(--navds-global-color-deepblue-500);
+  height: calc(100% - 4px);
+  transform: translateY(1px);
+  z-index: 4;
 }
 
 .navdsi-timeline__pins {

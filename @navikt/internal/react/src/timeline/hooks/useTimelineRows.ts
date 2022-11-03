@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 import { useMemo } from "react";
 
-import { addDays, endOfDay, startOfDay } from "date-fns";
+import { addDays, endOfDay, isAfter, startOfDay, subDays } from "date-fns";
 
 import { lastPeriod } from "../utils/sort";
 import { Period } from "../utils/types.external";
@@ -17,13 +17,19 @@ const spatialPeriod = (
   period: Period,
   timelineStart: Date,
   timelineEndInclusive: Date,
-  direction: "left" | "right" = "left"
+  direction: "left" | "right" = "left",
+  i: number,
+  periods: PositionedPeriod[]
 ): PositionedPeriod => {
   const start = period.start;
   const endInclusive = period.end;
+
+  const rightOverlap =
+    i < periods.length - 1 && !isAfter(periods[i + 1].start, endInclusive);
+
   const { horizontalPosition, width } = horizontalPositionAndWidth(
     startOfDay(start),
-    endOfDay(endInclusive),
+    endOfDay(rightOverlap ? subDays(periods[i + 1].start, 1) : endInclusive),
     timelineStart,
     timelineEndInclusive
   );
@@ -53,6 +59,7 @@ const adjustedEdges = (
   const right =
     i < allPeriods.length - 1 &&
     withinADay(allPeriods[i + 1].start, period.endInclusive);
+
   return left && right
     ? { ...period, cropped: "both" }
     : left
@@ -92,8 +99,16 @@ export const useTimelineRows = (
     () =>
       rows.map((periods: InternalSimpleTimeline) => {
         const timelinePeriods = periods.periods
-          .map((period: Period) =>
-            spatialPeriod(period, startDate, endDate, direction)
+          .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
+          .map((period: Period, i) =>
+            spatialPeriod(
+              period,
+              startDate,
+              endDate,
+              direction,
+              i,
+              periods.periods
+            )
           )
           .sort(lastPeriod)
           .map(adjustedEdges)

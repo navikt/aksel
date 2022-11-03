@@ -47,6 +47,7 @@ export const Default = () => {
             end={new Date("Jul 31 2022")}
             status="warning"
             icon={<SuccessFilled />}
+            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
           />
 
           <Timeline.Period
@@ -54,6 +55,7 @@ export const Default = () => {
             end={new Date("Aug 30 2022")}
             status="warning"
             icon={<SuccessFilled />}
+            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
           />
         </Timeline.Row>
         <Timeline.Row label="Navn på rad">
