@@ -130,6 +130,11 @@
   border-top-left-radius: 0;
 }
 
+.navdsi-timeline__period--selected {
+  box-shadow: 0 0 0 1px var(--navds-global-color-deepblue-500);
+  border-color: var(--navds-global-color-deepblue-500);
+}
+
 .navdsi-timeline__pins {
   grid-column: 2;
   position: absolute;

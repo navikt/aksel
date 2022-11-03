@@ -22,16 +22,18 @@ const ClickablePeriod = React.memo(
     icon,
     children,
   }: ClickablePeriodProps) => {
-    const [openState, setOpenState] = useState(false);
+    const [selected, setSelected] = useState(false);
     return (
       <button
         ref={buttonRef}
         onClick={() => {
-          setOpenState(!openState);
+          setSelected(!selected);
           onSelectPeriod && onSelectPeriod();
         }}
         aria-label={ariaLabel(start, end, status)}
-        className={getConditionalClasses(cropped, direction, status)}
+        className={`${
+          selected && "navdsi-timeline__period--selected"
+        } ${getConditionalClasses(cropped, direction, status)}`}
         data-clickable
         style={{
           width: `${width}%`,
@@ -41,8 +43,8 @@ const ClickablePeriod = React.memo(
         {icon}
         {children && (
           <Popover
-            open={openState}
-            onClose={() => setOpenState(false)}
+            open={selected}
+            onClose={() => setSelected(false)}
             anchorEl={buttonRef.current}
           >
             <Popover.Content>{children}</Popover.Content>
