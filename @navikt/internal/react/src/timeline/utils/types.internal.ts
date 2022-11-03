@@ -49,3 +49,18 @@ export interface InternalSimpleTimeline {
   periods: PositionedPeriod[];
   icon?: ReactNode;
 }
+
+export interface SelectedPeriod {
+  /**
+   * Start of the period.
+   */
+  start: Date;
+  /**
+   * End of the period.
+   */
+  end: Date;
+  /**
+   * Index of the row the period belongs to.
+   */
+  rowIndex: number;
+}
