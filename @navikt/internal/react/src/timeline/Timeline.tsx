@@ -12,7 +12,6 @@ import Period, { PeriodType } from "./period/Period";
 import Pin, { PinType } from "./Pin";
 import TimelineRow, { TimelineRowType } from "./TimelineRow";
 import { parseRows } from "./utils/timeline";
-import { SelectedPeriod } from "./utils/types.internal";
 import ZoomButton, { ZoomButtonType } from "./ZoomButton";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -83,11 +82,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       return [];
     });
 
-    const [selectedPeriod, setSelectedPeriod] = useState<SelectedPeriod | null>(
-      null
-    );
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
-
     const [start, setStart] = useState(initialStartDate);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows }))
@@ -125,8 +120,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           direction: direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
-          selectedPeriod: selectedPeriod,
-          setSelectedPeriod: (p) => setSelectedPeriod(p),
         }}
       >
         <div {...rest} ref={ref} className="navdsi-timeline">

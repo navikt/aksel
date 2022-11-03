@@ -1,5 +1,4 @@
 import { createContext, useContext } from "react";
-import { SelectedPeriod } from "../utils/types.internal";
 
 interface TimelineContextProps {
   startDate: Date;
@@ -7,8 +6,6 @@ interface TimelineContextProps {
   direction: "left" | "right";
   setStart: (d: Date) => void;
   setEndInclusive: (d: Date) => void;
-  selectedPeriod: SelectedPeriod | null;
-  setSelectedPeriod: (p: SelectedPeriod) => void;
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
@@ -17,8 +14,6 @@ export const TimelineContext = createContext<TimelineContextProps>({
   direction: "left",
   setStart: () => null,
   setEndInclusive: () => null,
-  selectedPeriod: null,
-  setSelectedPeriod: () => null,
 });
 
 export const useTimelineContext = () => {
