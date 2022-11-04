@@ -66,18 +66,18 @@ export const LayoutGridComp: OverridableComponent<
   ) => {
     const styles = {
       ...rest?.style,
-      "--ac-l-grid-areas-xs": formatAreas(areas?.xs),
-      "--ac-l-grid-areas-sm": formatAreas(areas?.sm),
-      "--ac-l-grid-areas-md": formatAreas(areas?.md),
-      "--ac-l-grid-areas-lg": formatAreas(areas?.lg),
-      "--ac-l-grid-gap-xs": gap?.xs,
-      "--ac-l-grid-gap-sm": gap?.sm,
-      "--ac-l-grid-gap-md": gap?.md,
-      "--ac-l-grid-gap-lg": gap?.lg,
-      "--ac-l-grid-columns-xs": columns?.xs,
-      "--ac-l-grid-columns-sm": columns?.sm,
-      "--ac-l-grid-columns-md": columns?.md,
-      "--ac-l-grid-columns-lg": columns?.lg,
+      "--ac-layout-grid-areas-xs": formatAreas(areas?.xs),
+      "--ac-layout-grid-areas-sm": formatAreas(areas?.sm),
+      "--ac-layout-grid-areas-md": formatAreas(areas?.md),
+      "--ac-layout-grid-areas-lg": formatAreas(areas?.lg),
+      "--ac-layout-grid-gap-xs": gap?.xs,
+      "--ac-layout-grid-gap-sm": gap?.sm,
+      "--ac-layout-grid-gap-md": gap?.md,
+      "--ac-layout-grid-gap-lg": gap?.lg,
+      "--ac-layout-grid-columns-xs": columns?.xs,
+      "--ac-layout-grid-columns-sm": columns?.sm,
+      "--ac-layout-grid-columns-md": columns?.md,
+      "--ac-layout-grid-columns-lg": columns?.lg,
     } as React.CSSProperties;
 
     return (

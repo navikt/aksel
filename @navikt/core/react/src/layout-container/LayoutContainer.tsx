@@ -24,10 +24,10 @@ export const LayoutContainer: OverridableComponent<
   ({ className, as: Component = "div", children, padding, ...rest }, ref) => {
     const styles = {
       ...rest?.style,
-      "--ac-l-container-padding-xs": padding?.xs,
-      "--ac-l-container-padding-sm": padding?.sm,
-      "--ac-l-container-padding-md": padding?.md,
-      "--ac-l-container-padding-lg": padding?.lg,
+      "--ac-layout-container-padding-xs": padding?.xs,
+      "--ac-layout-container-padding-sm": padding?.sm,
+      "--ac-layout-container-padding-md": padding?.md,
+      "--ac-layout-container-padding-lg": padding?.lg,
     } as React.CSSProperties;
 
     return (

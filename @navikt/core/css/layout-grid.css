@@ -1,76 +1,76 @@
 .navds-layout-grid {
-  --ac-l-grid-areas-xs: initial;
-  --ac-l-grid-areas-sm: var(--ac-l-grid-areas-xs);
-  --ac-l-grid-areas-md: var(--ac-l-grid-areas-sm);
-  --ac-l-grid-areas-lg: var(--ac-l-grid-areas-md);
-  --ac-l-grid-columns-xs: 6;
-  --ac-l-grid-columns-sm: 8;
-  --ac-l-grid-columns-md: 12;
-  --ac-l-grid-columns-lg: var(--ac-l-grid-columns-md);
+  --ac-layout-grid-areas-xs: initial;
+  --ac-layout-grid-areas-sm: var(--ac-layout-grid-areas-xs);
+  --ac-layout-grid-areas-md: var(--ac-layout-grid-areas-sm);
+  --ac-layout-grid-areas-lg: var(--ac-layout-grid-areas-md);
+  --ac-layout-grid-columns-xs: 6;
+  --ac-layout-grid-columns-sm: 8;
+  --ac-layout-grid-columns-md: 12;
+  --ac-layout-grid-columns-lg: var(--ac-layout-grid-columns-md);
 
   display: grid;
-  grid-template-areas: var(--ac-l-grid-areas-xs);
+  grid-template-areas: var(--ac-layout-grid-areas-xs);
   grid-template-columns: repeat(var(--ac-grid-columns-xs), minmax(0, 1fr));
-  gap: var(--ac-l-grid-gap-xs, var(--navds-spacing-4));
+  gap: var(--ac-layout-grid-gap-xs, var(--navds-spacing-4));
 }
 
 @media (min-width: 48rem) {
   .navds-layout-grid {
-    gap: var(--ac-l-grid-gap-sm, var(--navds-spacing-6));
-    grid-template-areas: var(--ac-l-grid-areas-sm);
-    grid-template-columns: repeat(var(--ac-l-grid-columns-sm), minmax(0, 1fr));
+    gap: var(--ac-layout-grid-gap-sm, var(--navds-spacing-6));
+    grid-template-areas: var(--ac-layout-grid-areas-sm);
+    grid-template-columns: repeat(var(--ac-layout-grid-columns-sm), minmax(0, 1fr));
   }
 }
 
 @media (min-width: 64rem) {
   .navds-layout-grid {
-    gap: var(--ac-l-grid-gap-md, var(--navds-spacing-6));
-    grid-template-areas: var(--ac-l-grid-areas-md);
-    grid-template-columns: repeat(var(--ac-l-grid-columns-md), minmax(0, 1fr));
+    gap: var(--ac-layout-grid-gap-md, var(--navds-spacing-6));
+    grid-template-areas: var(--ac-layout-grid-areas-md);
+    grid-template-columns: repeat(var(--ac-layout-grid-columns-md), minmax(0, 1fr));
   }
 }
 
 @media (min-width: 80rem) {
   .navds-layout-grid {
-    gap: var(--ac-l-grid-gap-lg, var(--navds-spacing-6));
-    grid-template-areas: var(--ac-l-grid-areas-lg);
-    grid-template-columns: repeat(var(--ac-l-grid-columns-lg), minmax(0, 1fr));
+    gap: var(--ac-layout-grid-gap-lg, var(--navds-spacing-6));
+    grid-template-areas: var(--ac-layout-grid-areas-lg);
+    grid-template-columns: repeat(var(--ac-layout-grid-columns-lg), minmax(0, 1fr));
   }
 }
 
 .navds-layout-grid__cell {
-  --ac-l-grid-column-xs: initial;
-  --ac-l-grid-column-sm: var(--ac-l-grid-column-xs);
-  --ac-l-grid-column-md: var(--ac-l-grid-column-sm);
-  --ac-l-grid-column-lg: var(--ac-l-grid-column-md);
-  --ac-l-grid-row-xs: initial;
-  --ac-l-grid-row-sm: var(--ac-l-grid-row-xs);
-  --ac-l-grid-row-md: var(--ac-l-grid-row-sm);
-  --ac-l-grid-row-lg: var(--ac-l-grid-row-md);
+  --ac-layout-grid-column-xs: initial;
+  --ac-layout-grid-column-sm: var(--ac-layout-grid-column-xs);
+  --ac-layout-grid-column-md: var(--ac-layout-grid-column-sm);
+  --ac-layout-grid-column-lg: var(--ac-layout-grid-column-md);
+  --ac-layout-grid-row-xs: initial;
+  --ac-layout-grid-row-sm: var(--ac-layout-grid-row-xs);
+  --ac-layout-grid-row-md: var(--ac-layout-grid-row-sm);
+  --ac-layout-grid-row-lg: var(--ac-layout-grid-row-md);
 
   min-width: 0;
-  grid-row: var(--ac-l-grid-row-xs);
-  grid-column: var(--ac-l-grid-column-xs);
+  grid-row: var(--ac-layout-grid-row-xs);
+  grid-column: var(--ac-layout-grid-column-xs);
 }
 
 @media (min-width: 48rem) {
   .navds-layout-grid__cell {
-    grid-row: var(--ac-l-grid-row-sm);
-    grid-column: var(--ac-l-grid-column-sm);
+    grid-row: var(--ac-layout-grid-row-sm);
+    grid-column: var(--ac-layout-grid-column-sm);
   }
 }
 
 @media (min-width: 64rem) {
   .navds-layout-grid__cell {
-    grid-row: var(--ac-l-grid-row-md);
-    grid-column: var(--ac-l-grid-column-md);
+    grid-row: var(--ac-layout-grid-row-md);
+    grid-column: var(--ac-layout-grid-column-md);
   }
 }
 
 @media (min-width: 80rem) {
   .navds-layout-grid__cell {
-    grid-row: var(--ac-l-grid-row-lg);
-    grid-column: var(--ac-l-grid-column-lg);
+    grid-row: var(--ac-layout-grid-row-lg);
+    grid-column: var(--ac-layout-grid-column-lg);
   }
 }
 

@@ -47,14 +47,14 @@ export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
     const styles = {
       ...rest?.style,
       gridArea: area,
-      "--ac-l-grid-column-xs": column?.xs,
-      "--ac-l-grid-column-sm": column?.sm,
-      "--ac-l-grid-column-md": column?.md,
-      "--ac-l-grid-column-lg": column?.lg,
-      "--ac-l-grid-row-xs": row?.xs,
-      "--ac-l-grid-row-sm": row?.sm,
-      "--ac-l-grid-row-md": row?.md,
-      "--ac-l-grid-row-lg": row?.lg,
+      "--ac-layout-grid-column-xs": column?.xs,
+      "--ac-layout-grid-column-sm": column?.sm,
+      "--ac-layout-grid-column-md": column?.md,
+      "--ac-layout-grid-column-lg": column?.lg,
+      "--ac-layout-grid-row-xs": row?.xs,
+      "--ac-layout-grid-row-sm": row?.sm,
+      "--ac-layout-grid-row-md": row?.md,
+      "--ac-layout-grid-row-lg": row?.lg,
     } as React.CSSProperties;
 
     return (
