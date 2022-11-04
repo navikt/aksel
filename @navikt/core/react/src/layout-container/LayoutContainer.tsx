@@ -15,13 +15,27 @@ export interface LayoutContainerProps
     md?: string;
     lg?: string;
   };
+  /**
+   * @default true
+   */
+  fluid?: boolean;
 }
 
 export const LayoutContainer: OverridableComponent<
   LayoutContainerProps,
   HTMLDivElement
 > = forwardRef(
-  ({ className, as: Component = "div", children, padding, ...rest }, ref) => {
+  (
+    {
+      className,
+      as: Component = "div",
+      children,
+      padding,
+      fluid = true,
+      ...rest
+    },
+    ref
+  ) => {
     const styles = {
       ...rest?.style,
       "--ac-layout-container-padding-xs": padding?.xs,
@@ -35,7 +49,9 @@ export const LayoutContainer: OverridableComponent<
         ref={ref}
         {...rest}
         style={styles}
-        className={cl("navds-layout-container", className)}
+        className={cl("navds-layout-container", className, {
+          "navds-layout-container--fluid": fluid,
+        })}
       >
         {children}
       </Component>

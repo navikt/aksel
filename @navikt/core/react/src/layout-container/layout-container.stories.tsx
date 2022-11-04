@@ -90,3 +90,69 @@ export const DemoLayout = () => {
 DemoLayout.parameters = {
   layout: "fullscreen",
 };
+
+export const DemoLayout2 = () => {
+  return (
+    <>
+      <div className="wrapper">
+        <header className="header">
+          <LayoutContainer fluid padding={{ sm: "0", md: "0", lg: "0" }}>
+            Home
+          </LayoutContainer>
+        </header>
+        <LayoutContainer fluid padding={{ sm: "0", md: "0", lg: "0" }}>
+          <LayoutGrid
+            columns={{ xs: 1, sm: 1, md: 4, lg: 4 }}
+            areas={{
+              xs: ["content"],
+              md: ["sidebar content content content"],
+            }}
+            className="spacer"
+          >
+            <LayoutGrid.Cell className="sidebar" area="sidebar">
+              Sidebar
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell className="content" area="content">
+              Content
+            </LayoutGrid.Cell>
+          </LayoutGrid>
+        </LayoutContainer>
+        <style>{`
+      .wrapper{
+        background: #f7f7f7;
+        min-height: 100vh;
+      }
+      .header{
+        background: #262626;
+        color: white;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+      }
+      .spacer{
+        margin-top: 4rem;
+      }
+      .content{
+        background: blanchedalmond;
+        height: 100vh;
+        max-width: 600px;
+      }
+      .sidebar {
+        background: blanchedalmond;
+        height: 100vh;
+        display: none;
+      }
+      @media (min-width: 64rem){
+        .sidebar {
+          display: block;
+        }
+      }
+      `}</style>
+      </div>
+    </>
+  );
+};
+
+DemoLayout2.parameters = {
+  layout: "fullscreen",
+};

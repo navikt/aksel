@@ -6,10 +6,18 @@
   max-width: var(--ac-layout-container-max-width, var(--a-breakpoint-lg));
 }
 
+.navds-layout-container--fluid {
+  width: 100%;
+}
+
 @media (min-width: 48rem) {
   .navds-layout-container {
     padding-left: var(--ac-layout-container-padding-sm, var(--navds-spacing-6));
     padding-right: var(--ac-layout-container-padding-sm, var(--navds-spacing-6));
+  }
+
+  .navds-layout-container--fluid {
+    width: 90%;
   }
 }
 
