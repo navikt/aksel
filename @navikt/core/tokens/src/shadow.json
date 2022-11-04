@@ -17,10 +17,10 @@
         "value": "0 8px 10px -6px rgba(0, 0, 0, 0.1), 0 25px 50px -5px rgba(0, 0, 0, 0.1)"
       },
       "focus": {
-        "@": "0 0 0 3px {a.border.focus.@.value}",
         "inverted": {
           "value": "0 0 0 3px {a.border.focus.on.inverted.value}"
-        }
+        },
+        "@": { "value": "0 0 0 3px {a.border.focus.@.value}" }
       }
     }
   }
