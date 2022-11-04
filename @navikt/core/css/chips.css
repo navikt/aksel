@@ -1,6 +1,6 @@
 .navds-chips {
   display: flex;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,15 +22,15 @@
   justify-content: center;
   gap: 0.125rem;
   margin: 0;
-  padding: 0 var(--navds-spacing-3);
+  padding: 0 var(--a-spacing-3);
   text-decoration: none;
-  border-radius: var(--navds-border-radius-full);
+  border-radius: var(--a-border-radius-full);
   min-height: 32px;
 }
 
 .navds-chips--small .navds-chips__chip {
   min-height: 24px;
-  padding: 0 var(--navds-spacing-2);
+  padding: 0 var(--a-spacing-2);
 }
 
 .navds-chips__toggle {
@@ -64,7 +64,7 @@
 
 .navds-chips__removable--action {
   background-color: var(--ac-chip-removable-action-bg, var(--a-surface-action-selected));
-  color: var(--ac-chip-removable-action-text, var(--navds-global-color-white));
+  color: var(--ac-chip-removable-action-text, var(--a-global-color-white));
 }
 
 .navds-chips__removable--neutral {
@@ -79,7 +79,7 @@
   height: 1.5rem;
   display: grid;
   place-items: center;
-  border-radius: var(--navds-border-radius-full);
+  border-radius: var(--a-border-radius-full);
 }
 
 .navds-chips--small .navds-chips__removable-icon {
@@ -109,11 +109,11 @@
 }
 
 .navds-chips--icon-left {
-  padding-left: var(--navds-spacing-1);
+  padding-left: var(--a-spacing-1);
 }
 
 .navds-chips--icon-right {
-  padding-right: var(--navds-spacing-1);
+  padding-right: var(--a-spacing-1);
 }
 
 .navds-chips--small .navds-chips--icon-right {
