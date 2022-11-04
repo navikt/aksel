@@ -8,21 +8,21 @@
 
 @media (min-width: 48rem) {
   .navds-layout-container {
-    padding-left: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
-    padding-right: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
+    padding-left: var(--ac-l-container-padding-sm, var(--navds-spacing-6));
+    padding-right: var(--ac-l-container-padding-sm, var(--navds-spacing-6));
   }
 }
 
 @media (min-width: 64rem) {
   .navds-layout-container {
-    padding-left: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
-    padding-right: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
+    padding-left: var(--ac-l-container-padding-md, var(--navds-spacing-6));
+    padding-right: var(--ac-l-container-padding-md, var(--navds-spacing-6));
   }
 }
 
 @media (min-width: 80rem) {
   .navds-layout-container {
-    padding-left: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
-    padding-right: var(--ac-l-container-padding-xs, var(--navds-spacing-6));
+    padding-left: var(--ac-l-container-padding-lg, var(--navds-spacing-6));
+    padding-right: var(--ac-l-container-padding-lg, var(--navds-spacing-6));
   }
 }
