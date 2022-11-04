@@ -29,7 +29,9 @@ const spatialPeriod = (
 
   const { horizontalPosition, width } = horizontalPositionAndWidth(
     startOfDay(start),
-    endOfDay(rightOverlap ? subDays(periods[i + 1].start, 1) : endInclusive),
+    endOfDay(
+      rightOverlap ? startOfDay(subDays(periods[i + 1].start, 1)) : endInclusive
+    ),
     timelineStart,
     timelineEndInclusive
   );

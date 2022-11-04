@@ -124,11 +124,10 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       >
         <div {...rest} ref={ref} className="navdsi-timeline">
           <AxisLabels />
-          <div className="navdsi-timeline__pins">
-            {pins.map((pin) => {
-              return pin;
-            })}
-          </div>
+
+          {pins.map((pin) => {
+            return pin;
+          })}
 
           {processedRows.map((row) => {
             return (

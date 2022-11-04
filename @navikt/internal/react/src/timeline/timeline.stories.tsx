@@ -116,7 +116,6 @@ export const Default = () => {
                     ? () => {
                         setActivePeriod(p);
                         p.onSelectPeriod();
-                        console.log(activePeriod);
                       }
                     : undefined
                 }

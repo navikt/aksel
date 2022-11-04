@@ -27,23 +27,31 @@ const ClickablePeriod = React.memo(
     const [selected, setSelected] = useState(false);
 
     return (
-      <button
-        ref={buttonRef}
-        onClick={() => {
-          setSelected(!selected);
-          onSelectPeriod && onSelectPeriod();
-        }}
-        aria-label={ariaLabel(start, end, status)}
-        className={`${
-          isActive && "navdsi-timeline__period--selected"
-        } ${getConditionalClasses(cropped, direction, status)}`}
-        data-clickable
-        style={{
-          width: `${width}%`,
-          [direction]: `${left}%`,
-        }}
-      >
-        {icon}
+      <>
+        <button
+          ref={buttonRef}
+          onClick={() => {
+            setSelected(!selected);
+            onSelectPeriod && onSelectPeriod();
+          }}
+          aria-label={ariaLabel(start, end, status)}
+          className={`${
+            isActive && "navdsi-timeline__period--selected"
+          } ${getConditionalClasses(cropped, direction, status)}`}
+          data-clickable
+          onMouseEnter={() => {
+            setSelected(true);
+          }}
+          onMouseLeave={() => {
+            setSelected(false);
+          }}
+          style={{
+            width: `${width}%`,
+            [direction]: `${left}%`,
+          }}
+        >
+          {icon}
+        </button>
         {children && (
           <Popover
             open={selected}
@@ -53,7 +61,7 @@ const ClickablePeriod = React.memo(
             <Popover.Content>{children}</Popover.Content>
           </Popover>
         )}
-      </button>
+      </>
     );
   }
 );

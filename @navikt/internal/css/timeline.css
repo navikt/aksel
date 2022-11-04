@@ -138,19 +138,13 @@
   border-color: var(--navds-global-color-deepblue-500);
   height: calc(100% - 4px);
   transform: translateY(1px);
-  z-index: 4;
-}
-
-.navdsi-timeline__pins {
-  grid-column: 2;
-  position: absolute;
-  z-index: 2;
-  height: 100%;
-  width: 100%;
+  margin-right: -2px;
+  z-index: 3;
 }
 
 .navdsi-timeline__pin__wrapper {
   position: absolute;
+  grid-column: 2;
   top: 0;
   z-index: 1;
   height: 100%;
