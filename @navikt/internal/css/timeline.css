@@ -212,5 +212,11 @@
 .navdsi-timeline__zoom__button:focus,
 .navdsi-timeline__period:focus {
   outline: none;
+  z-index: 4;
   box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
+.navdsi-timeline__zoom__button:not(:last-child):focus {
+  margin-right: 2px;
+  padding-right: 6px;
 }
