@@ -1,5 +1,4 @@
 [data-theme="dark"] {
-  /* Primary */
   --ac-button-primary-text: var(--a-gray-900);
   --ac-button-primary-bg: var(--a-blue-200);
   --ac-button-primary-focus-border: var(--a-gray-900);
