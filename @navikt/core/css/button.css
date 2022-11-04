@@ -1,43 +1,3 @@
-:root,
-:host,
-[data-theme="light"] {
-  /* Primary */
-  --v2-migration__navds-button-color-primary-text: var(--a-text-on-inverted);
-  --v2-migration__navds-button-color-primary-border-focus: var(--a-text-on-inverted);
-  --v2-migration__navds-button-color-primary-background: var(--a-surface-action);
-  --v2-migration__navds-button-color-primary-background-hover: var(--a-surface-action-hover);
-  --v2-migration__navds-button-color-primary-background-active: var(--a-surface-action-selected);
-
-  /* Secondary */
-  --v2-migration__navds-button-color-secondary-text: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-text-hover: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-text-active: var(--a-text-on-inverted);
-  --v2-migration__navds-button-color-secondary-border: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-border-focus-active-hover: var(--a-surface-default);
-  --v2-migration__navds-button-color-secondary-background: var(--a-surface-default);
-  --v2-migration__navds-button-color-secondary-background-hover: var(--a-surface-action-subtle-hover);
-  --v2-migration__navds-button-color-secondary-background-active: var(--a-surface-action-selected);
-
-  /* Tertiary */
-  --v2-migration__navds-button-color-tertiary-text: var(--a-surface-action);
-  --v2-migration__navds-button-color-tertiary-text-active: var(--a-text-on-inverted);
-  --v2-migration__navds-button-color-tertiary-background-hover: var(--a-surface-action-subtle-hover);
-  --v2-migration__navds-button-color-tertiary-border-focus: var(--a-surface-action);
-  --v2-migration__navds-button-color-tertiary-border-active: var(--a-surface-default);
-  --v2-migration__navds-button-color-tertiary-background-active: var(--a-surface-action-selected);
-
-  /* Danger */
-  --v2-migration__navds-button-color-danger-text: var(--a-text-on-inverted);
-  --v2-migration__navds-button-color-danger-background: var(--a-surface-danger);
-  --v2-migration__navds-button-color-danger-background-hover: var(--a-surface-danger-hover);
-  --v2-migration__navds-button-color-danger-background-active: var(--a-surface-danger-active);
-  --v2-migration__navds-button-color-danger-border-focus: var(--a-surface-default);
-
-  /* Loader */
-  --navds-loader-color-on-button-background: rgb(255 255 255 / 0.3);
-  --navds-loader-color-on-button-foreground: currentColor;
-}
-
 [data-theme="dark"] {
   /* Primary */
   --v2-migration__navds-button-color-primary-text: var(--a-text-default);
@@ -170,7 +130,7 @@
 }
 
 .navds-button--secondary:focus {
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--a-border-action)), var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border-focus, var(--a-border-action)), var(--a-shadow-focus);
 }
 
 .navds-button--secondary:active {
@@ -195,25 +155,25 @@
  ****************************/
 
 .navds-button--tertiary {
-  color: var(--a-text-action);
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
 }
 
 .navds-button--tertiary:hover {
-  background-color: var(--a-surface-action-subtle-hover);
+  background-color: var(--ac-button-tertiary-bg-hover, var(--a-surface-action-subtle-hover));
 }
 
 .navds-button--tertiary:focus {
-  box-shadow: inset 0 0 0 2px var(--a-border-action), var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-border-focus, var(--a-border-action)), var(--a-shadow-focus);
 }
 
 .navds-button--tertiary:active {
-  color: var(--a-text-on-action);
-  background-color: var(--a-surface-action-active);
+  color: var(--ac-button-tertiary-active-text, var(--a-text-on-action));
+  background-color: var(--ac-button-tertiary-active-bg, var(--a-surface-action-active));
   box-shadow: inset 0 0 0 1px var(--a-surface-default);
 }
 
 .navds-button--tertiary:active:hover {
-  background-color: var(--a-surface-action-active);
+  background-color: var(--ac-button-tertiary-active-hover-bg, var(--a-surface-action-active));
 }
 
 .navds-button--tertiary:active:focus {
@@ -224,7 +184,7 @@
 .navds-button--tertiary:hover:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:where(:disabled, .navds-button--disabled),
 .navds-button--tertiary:active:hover:where(:disabled, .navds-button--disabled) {
-  color: var(--a-text-action);
+  color: var(--ac-button-tertiary-text, var(--a-text-action));
   background: none;
   box-shadow: none;
 }
@@ -234,16 +194,16 @@
  *************************/
 
 .navds-button--danger {
-  background-color: var(--a-surface-danger);
-  color: var(--a-text-on-danger);
+  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
+  color: var(--ac-button-danger-text, var(--a-text-on-danger));
 }
 
 .navds-button--danger:hover {
-  background-color: var(--a-surface-danger-hover);
+  background-color: var(--ac-button-danger-hover-bg, var(--a-surface-danger-hover));
 }
 
 .navds-button--danger:active {
-  background-color: var(--a-surface-danger-active);
+  background-color: var(--ac-button-danger-active-bg, var(--a-surface-danger-active));
 }
 
 .navds-button--danger:focus {
@@ -252,7 +212,7 @@
 
 .navds-button--danger:active:where(:disabled, .navds-button--disabled),
 .navds-button--danger:hover:where(:disabled, .navds-button--disabled) {
-  background-color: var(--a-surface-danger);
+  background-color: var(--ac-button-danger-bg, var(--a-surface-danger));
 }
 
 /**************************
@@ -268,10 +228,10 @@
 }
 
 .navds-button .navds-loader .navds-loader__foreground {
-  stroke: var(--navds-loader-color-on-button-foreground);
+  stroke: var(--ac-button-loader-stroke, currentColor);
 }
 
 .navds-button--primary .navds-loader .navds-loader__background,
 .navds-button--danger .navds-loader .navds-loader__background {
-  stroke: var(--navds-loader-color-on-button-background);
+  stroke: var(--ac-button-primary-loader-stroke-bg, rgb(255 255 255 / 0.3));
 }
