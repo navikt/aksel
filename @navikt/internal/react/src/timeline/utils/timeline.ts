@@ -17,6 +17,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           const p = r.props.children[i];
 
           periods.push({
+            id: p.props.id,
             start: p?.props?.start,
             end: p?.props?.end,
             status: p?.props?.status || "default",
@@ -28,6 +29,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
         }
       } else {
         periods.push({
+          id: r.props.children.props.id,
           start: r.props.children.props.start,
           end: r.props.children.props.end,
           status: r.props.children.props?.status || "default",

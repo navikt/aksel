@@ -17,6 +17,7 @@ export interface PeriodPropsWrapper
   icon?: ReactNode;
   status?: "success" | "warning" | "danger" | "information" | "default";
   onSelectPeriod?: () => void;
+  id: string;
 }
 
 export interface PeriodProps {

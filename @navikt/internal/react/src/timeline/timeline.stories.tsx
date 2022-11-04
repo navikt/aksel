@@ -9,26 +9,47 @@ export default {
   argTypes: {},
 } as Meta;
 
+const DummyLabel = () => {
+  return (
+    <div
+      style={{
+        width: "239px",
+        margin: 0,
+        textAlign: "left",
+        fontSize: "14px",
+      }}
+    >
+      <p>Periode: 15.07.2019 - 25.07.2019</p>
+      <p>Utbetalt: 12 345,00 kr</p>
+      <p style={{ color: "red" }}>Dager igjen: 0</p>
+    </div>
+  );
+};
+
 const row1 = [
   {
+    id: "1",
     start: new Date("Jan 1 2022"),
     end: new Date("Jan 31 2022"),
     status: "success",
     icon: <SuccessFilled />,
   },
   {
+    id: "2",
     start: new Date("Feb 1 2022"),
     end: new Date("Mar 15 2022"),
     status: "danger",
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
   },
   {
+    id: "3",
     start: new Date("May 2 2022"),
     end: new Date("May 25 2022"),
     status: "success",
     icon: <SuccessFilled />,
   },
   {
+    id: "4",
     start: new Date("Mar 1 2022"),
     end: new Date("Mar 31 2022"),
     status: "success",
@@ -36,6 +57,7 @@ const row1 = [
     icon: <SuccessFilled />,
   },
   {
+    id: "5",
     start: new Date("Jul 1 2022"),
     end: new Date("Jul 31 2022"),
     status: "warning",
@@ -43,11 +65,33 @@ const row1 = [
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
   },
   {
+    id: "6",
     start: new Date("Aug 1 2022"),
     end: new Date("Aug 30 2022"),
     status: "warning",
     icon: <SuccessFilled />,
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+  },
+];
+
+const row2 = [
+  {
+    id: "7",
+    start: new Date("May 13 2022"),
+    end: new Date("May 25 2022"),
+    status: "warning",
+    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    icon: <SuccessFilled />,
+    children: <DummyLabel />,
+  },
+  {
+    id: "8",
+    start: new Date("Feb 1 2022"),
+    end: new Date("May 2 2022"),
+    status: "default",
+    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    icon: <SuccessFilled />,
+    children: <DummyLabel />,
   },
 ];
 
@@ -62,49 +106,37 @@ export const Default = () => {
           {row1.map((p: any, i) => {
             return (
               <Timeline.Period
+                id={p.id}
                 key={i}
                 start={p.start}
                 end={p.end}
-                status={p.status || "default"}
+                status={p.status}
                 onSelectPeriod={p.onSelectPeriod}
                 icon={p.icon}
+                children={p.children}
               />
             );
           })}
         </Timeline.Row>
         <Timeline.Row label="Navn på rad">
-          <Timeline.Period
-            start={new Date("May 13 2022")}
-            end={new Date("May 25 2022")}
-            status="warning"
-            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
-            icon={<SuccessFilled />}
-          >
-            <div
-              style={{
-                width: "239px",
-                margin: 0,
-                textAlign: "left",
-                fontSize: "14px",
-              }}
-            >
-              <p>Periode: 15.07.2019 - 25.07.2019</p>
-              <p>Utbetalt: 12 345,00 kr</p>
-              <p style={{ color: "red" }}>Dager igjen: 0</p>
-            </div>
-          </Timeline.Period>
-          <Timeline.Period
-            start={new Date("Feb 1 2022")}
-            end={new Date("May 2 2022")}
-            status="default"
-            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
-            icon={<SuccessFilled />}
-          >
-            <p>This is some content right here</p>
-          </Timeline.Period>
+          {row2.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                id={p.id}
+                key={i}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                onSelectPeriod={p.onSelectPeriod}
+                icon={p.icon}
+                children={p.children}
+              />
+            );
+          })}
         </Timeline.Row>
         <Timeline.Row>
           <Timeline.Period
+            id="9"
             start={new Date("Jan 1 2022")}
             end={new Date("Aug 20 2022")}
             status="information"

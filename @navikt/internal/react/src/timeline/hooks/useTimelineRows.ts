@@ -35,7 +35,7 @@ const spatialPeriod = (
   );
 
   return {
-    id: period.id || nanoid(),
+    id: period.id,
     start: start,
     endInclusive: endInclusive,
     horizontalPosition: horizontalPosition,
