@@ -96,6 +96,41 @@ const row2 = [
 ];
 
 export const Default = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1" icon={<SuccessFilled />}>
+          {row1.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Row 2" icon={<SuccessFilled />}>
+          {row2.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
+export const PG = () => {
   const [activePeriod, setActivePeriod] = useState(row1[0]);
   return (
     <div style={{ width: "80vw" }}>
