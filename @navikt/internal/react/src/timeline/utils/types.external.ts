@@ -23,6 +23,7 @@ export interface Period {
   icon?: ReactNode;
   children?: ReactNode;
   end: Date;
+  isActive?: boolean;
 }
 
 export interface PositionedPeriod extends Period, Positioned {

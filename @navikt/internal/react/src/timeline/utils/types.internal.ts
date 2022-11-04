@@ -21,6 +21,7 @@ export interface Period {
   onSelectPeriod?: () => void;
   icon?: ReactNode;
   children?: ReactNode;
+  isActive?: boolean;
 }
 
 export interface PositionedPeriod extends Period, Positioned {
@@ -60,7 +61,7 @@ export interface SelectedPeriod {
    */
   end: Date;
   /**
-   * Index of the row the period belongs to.
+   * Period id
    */
-  rowIndex: number;
+  id: string;
 }

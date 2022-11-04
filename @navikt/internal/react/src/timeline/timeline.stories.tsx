@@ -1,4 +1,5 @@
 import { SuccessFilled } from "@navikt/ds-icons";
+import { useState } from "@storybook/addons";
 import { Meta } from "@storybook/react";
 import * as React from "react";
 import Timeline from "./Timeline";
@@ -70,7 +71,6 @@ const row1 = [
     end: new Date("Aug 30 2022"),
     status: "warning",
     icon: <SuccessFilled />,
-    onSelectPeriod: () => console.log("PERIOD SELECTED!"),
   },
 ];
 
@@ -96,6 +96,7 @@ const row2 = [
 ];
 
 export const Default = () => {
+  const [activePeriod, setActivePeriod] = useState(row1[0]);
   return (
     <div style={{ width: "80vw" }}>
       <Timeline>
@@ -106,15 +107,24 @@ export const Default = () => {
           {row1.map((p: any, i) => {
             return (
               <Timeline.Period
-                id={p.id}
-                key={i}
+                key={p.id}
                 start={p.start}
                 end={p.end}
                 status={p.status}
-                onSelectPeriod={p.onSelectPeriod}
+                onSelectPeriod={
+                  p.onSelectPeriod
+                    ? () => {
+                        setActivePeriod(p);
+                        p.onSelectPeriod();
+                        console.log(activePeriod);
+                      }
+                    : undefined
+                }
                 icon={p.icon}
-                children={p.children}
-              />
+                isActive={activePeriod.id === p.id}
+              >
+                {p.children}
+              </Timeline.Period>
             );
           })}
         </Timeline.Row>
@@ -122,25 +132,32 @@ export const Default = () => {
           {row2.map((p: any, i) => {
             return (
               <Timeline.Period
-                id={p.id}
-                key={i}
+                key={p.id}
                 start={p.start}
                 end={p.end}
                 status={p.status}
-                onSelectPeriod={p.onSelectPeriod}
+                onSelectPeriod={
+                  p.onSelectPeriod
+                    ? () => {
+                        setActivePeriod(p);
+                        p.onSelectPeriod();
+                        console.log(activePeriod);
+                      }
+                    : undefined
+                }
                 icon={p.icon}
-                children={p.children}
-              />
+                isActive={activePeriod.id === p.id}
+              >
+                {p.children}
+              </Timeline.Period>
             );
           })}
         </Timeline.Row>
         <Timeline.Row>
           <Timeline.Period
-            id="9"
             start={new Date("Jan 1 2022")}
             end={new Date("Aug 20 2022")}
             status="information"
-            onSelectPeriod={() => console.log("PERIOD SELECTED!")}
             icon={<SuccessFilled />}
           />
         </Timeline.Row>

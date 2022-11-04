@@ -1,10 +1,4 @@
-import React, {
-  forwardRef,
-  ReactNode,
-  RefObject,
-  useEffect,
-  useRef,
-} from "react";
+import React, { forwardRef, ReactNode, RefObject, useRef } from "react";
 import { usePeriodContext } from "../hooks/usePeriodContext";
 import { useRowContext } from "../hooks/useRowContext";
 import ClickablePeriod from "./ClickablePeriod";
@@ -12,12 +6,35 @@ import NonClickablePeriod from "./NonClickablePeriod";
 
 export interface PeriodPropsWrapper
   extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Period start date.
+   */
   start: Date;
+  /**
+   * Period end date.
+   */
   end: Date;
+  /**
+   * Icon displayed in the left side of the period.
+   */
   icon?: ReactNode;
+  /**
+   * Period status.
+   * @default "default"
+   */
   status?: "success" | "warning" | "danger" | "information" | "default";
+  /**
+   * Callback when selecting a period.
+   */
   onSelectPeriod?: () => void;
-  id: string;
+  /**
+   * Popover content when clicking on the period.
+   */
+  children?: ReactNode;
+  /**
+   * Period is active
+   */
+  isActive?: boolean;
 }
 
 export interface PeriodProps {
@@ -29,9 +46,6 @@ export interface PeriodProps {
   width: Number;
   left: Number;
   icon?: ReactNode;
-  /**
-   * Popover content when clicking on the period.
-   */
   children?: ReactNode;
 }
 
@@ -49,9 +63,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
     const { periodId } = usePeriodContext();
 
     const period = periods.find((p) => p.id === periodId);
-    useEffect(() => {
-      if (period?.active) periodRef.current?.focus();
-    }, [period?.active]);
 
     if (!period) {
       return <></>;
@@ -66,6 +77,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       cropped,
       direction,
       children,
+      isActive,
     } = period;
 
     return onSelectPeriod || children ? (
@@ -81,6 +93,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         left={horizontalPosition}
         icon={icon}
         children={children}
+        isActive={isActive}
       />
     ) : (
       <NonClickablePeriod

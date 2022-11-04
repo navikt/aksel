@@ -35,7 +35,7 @@ const spatialPeriod = (
   );
 
   return {
-    id: period.id,
+    id: nanoid(),
     start: start,
     endInclusive: endInclusive,
     horizontalPosition: horizontalPosition,
@@ -46,6 +46,7 @@ const spatialPeriod = (
     onSelectPeriod: period.onSelectPeriod,
     icon: period.icon,
     children: period.children,
+    isActive: period.isActive,
   };
 };
 

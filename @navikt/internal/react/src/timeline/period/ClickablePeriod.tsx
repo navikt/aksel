@@ -6,6 +6,7 @@ import { PeriodProps } from "./Period";
 interface ClickablePeriodProps extends PeriodProps {
   buttonRef: RefObject<HTMLButtonElement>;
   onSelectPeriod?: () => void;
+  isActive?: boolean;
 }
 
 const ClickablePeriod = React.memo(
@@ -21,8 +22,10 @@ const ClickablePeriod = React.memo(
     width,
     icon,
     children,
+    isActive,
   }: ClickablePeriodProps) => {
     const [selected, setSelected] = useState(false);
+
     return (
       <button
         ref={buttonRef}
@@ -32,7 +35,7 @@ const ClickablePeriod = React.memo(
         }}
         aria-label={ariaLabel(start, end, status)}
         className={`${
-          selected && "navdsi-timeline__period--selected"
+          isActive && "navdsi-timeline__period--selected"
         } ${getConditionalClasses(cropped, direction, status)}`}
         data-clickable
         style={{
