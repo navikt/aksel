@@ -130,6 +130,44 @@ export const Default = () => {
   );
 };
 
+export const WithPins = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Pin date={new Date("Apr 15 2022")}>Pin 1</Timeline.Pin>
+        <Timeline.Pin date={new Date("Jun 12 2022")}>Pin 2</Timeline.Pin>
+        <Timeline.Pin date={new Date("Jul 28 2022")}>Pin 3</Timeline.Pin>
+        <Timeline.Row label="Row 1" icon={<SuccessFilled />}>
+          {row1.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Row 2" icon={<SuccessFilled />}>
+          {row2.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
+
 export const PG = () => {
   const [activePeriod, setActivePeriod] = useState(row1[0]);
   return (
