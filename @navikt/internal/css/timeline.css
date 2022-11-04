@@ -209,6 +209,8 @@
   color: #fff;
 }
 
-.navdsi-timeline__zoom__button:focus {
+.navdsi-timeline__zoom__button:focus,
+.navdsi-timeline__period:focus {
+  outline: none;
   box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
 }
