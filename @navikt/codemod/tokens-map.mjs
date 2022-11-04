@@ -413,6 +413,17 @@ const tokens = [
 ["--navds-text-field-color-text", "--a-text-default"],
 ["--navds-text-field-color-background", "--a-surface-default"],
 ["--navds-text-field-color-border", "--a-border-default"],
+
+["--navds-dropdown-menu-color", "--a-text-default"],
+["--navdsi-dropdown-item-color-text", "--text-action"],
+["--navdsi-dropdown-item-color-background-hover", "--a-surface-action-subtle-hover"],
+["--navdsi-dropdown-item-color-background-active", "--a-surface-action-active"],
+["--navds-dropdown-item-color-focus", "--a-border-focus"],
+["--navdsi-header-color-text", "--a-text-on-inverted"],
+["--navdsi-header-color-background", "--a-surface-inverted"],
+["--navdsi-header-color-border", "--a-gray-600"],
+["--navdsi-header-color-hover", "--a-surface-inverted-hover"],
+["--navdsi-header-color-active", "--a-surface-inverted-active"],
 ]
 
 module.exports = { tokens };
