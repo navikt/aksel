@@ -168,7 +168,45 @@ export const WithPins = () => {
   );
 };
 
-export const PG = () => {
+export const WithZoom = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1" icon={<SuccessFilled />}>
+          {row1.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.Row label="Row 2" icon={<SuccessFilled />}>
+          {row2.map((p: any, i) => {
+            return (
+              <Timeline.Period
+                key={p.id}
+                start={p.start}
+                end={p.end}
+                status={p.status}
+                icon={p.icon}
+              />
+            );
+          })}
+        </Timeline.Row>
+        <Timeline.ZoomButton label="3 mnd" interval="month" count={3} />
+        <Timeline.ZoomButton label="7 mnd" interval="month" count={7} />
+        <Timeline.ZoomButton label="9 mnd" interval="month" count={9} />
+      </Timeline>
+    </div>
+  );
+};
+
+export const ActivePeriod = () => {
   const [activePeriod, setActivePeriod] = useState(row1[0]);
   return (
     <div style={{ width: "80vw" }}>
@@ -233,9 +271,6 @@ export const PG = () => {
             icon={<SuccessFilled />}
           />
         </Timeline.Row>
-        <Timeline.ZoomButton label="3 mnd" interval="month" count={3} />
-        <Timeline.ZoomButton label="7 mnd" interval="month" count={7} />
-        <Timeline.ZoomButton label="9 mnd" interval="month" count={9} />
       </Timeline>
     </div>
   );
