@@ -1,0 +1,28 @@
+name: "push-to-cdn"
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: "read"
+      id-token: "write"
+
+    steps:
+      - uses: "actions/checkout@v3"
+
+      - id: upload
+        uses: nais/frontend-plattform-cdn-upload-action@main
+        with:
+          cdn-environment: cdn.nav.no
+          cdn-team-name: aksel
+          source: ./fonts
+          destination: "" # uploads folder to team root
+
+      - run: echo uploaded file ${{ steps.upload.outputs.uploaded }}
+        shell: bash
