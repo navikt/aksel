@@ -49,6 +49,7 @@ const ClickablePeriod = React.memo(
             width: `${width}%`,
             [direction]: `${left}%`,
           }}
+          onFocus={() => setSelected(true)}
         >
           {icon}
         </button>
