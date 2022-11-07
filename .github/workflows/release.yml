@@ -1,0 +1,67 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  build:
+    name: "Release packages"
+    if: "!contains(github.event.head_commit.message, '[ci skip]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.0
+          cache: yarn
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-prod-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-prod
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Create release Pull Request or publish to NPM
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: yarn version
+          publish: yarn release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+
+      - name: Creating .npmrc
+        run: |
+          cat << EOF > "$HOME/.npmrc"
+            @navikt:registry=https://npm.pkg.github.com
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.GIT_REPO }}
+
+      - name: Publish to GPR
+        if: steps.changesets.outputs.published == 'true'
+        id: changesets-gpr
+        uses: changesets/action@v1
+        with:
+          publish: yarn changeset publish
+          createGithubReleases: false
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_AUTOMATION }}
+          GITHUB_TOKEN: ${{ secrets.GIT_REPO }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTOMATION }}

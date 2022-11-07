@@ -2,7 +2,7 @@ import { Meta, Canvas } from "@storybook/addon-docs";
 
 <Meta title="Intro/Velkommen" />
 
-# NAV designsystem
+# Aksel, NAVs designsystem
 
 - [Dokumentasjon](https://aksel.nav.no/designsystem)
 - [Komponenter](https://aksel.nav.no/designsystem/side/oversikt-komponenter)
@@ -12,10 +12,10 @@ import { Meta, Canvas } from "@storybook/addon-docs";
 ### Kjernepakke
 
 ```bash
-yarn add @navikt/ds-react @navikt/ds-css @navikt/ds-icons
+yarn add @navikt/ds-react @navikt/ds-css
 ```
 
-### Pakke for interne-flater
+### Interne-flater
 
 ```bash
 yarn add @navikt/ds-react-internal @navikt/ds-css-internal
@@ -31,14 +31,9 @@ yarn add @navikt/ds-icons
 
 ```jsx
 import { Heading } from "@navikt/ds-react";
+import "@navikt/ds-css";
 
 <Heading level="1" size="xlarge">
   Sidetitel
 </Heading>;
 ```
-
-## Bidra
-
-Hjelp oss med å forbedre designsystemet med feedback eller kode-hjelp
-
-- [Kode](https://github.com/navikt/Designsystemet/tree/master/%40navikt)

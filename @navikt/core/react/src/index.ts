@@ -1,5 +1,6 @@
 export * from "./accordion";
 export * from "./alert";
+export * from "./provider";
 export * from "./button";
 export * from "./date";
 export * from "./form";
@@ -15,6 +16,7 @@ export * from "./panel";
 export * from "./popover";
 export * from "./read-more";
 export * from "./chat";
+export * from "./chips";
 export * from "./stepper";
 export * from "./tag";
 export * from "./toggle-group";

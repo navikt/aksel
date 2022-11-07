@@ -32,6 +32,19 @@ export interface UseDatepickerOptions
    * Make selection of Date required
    */
   required?: boolean;
+  /**
+   * Callback for changed state
+   */
+  onDateChange?: (val?: Date) => void;
+  /**
+   * Input-format
+   * @default "dd.MM.yyyy"
+   */
+  inputFormat?: string;
+  /**
+   * validation-callback
+   */
+  onValidate?: (val: DateValidationT) => void;
 }
 
 interface UseDatepickerValue {
@@ -58,24 +71,50 @@ interface UseDatepickerValue {
   setSelected: (date?: Date) => void;
 }
 
+export type DateValidationT = {
+  isDisabled: boolean;
+  isWeekend: boolean;
+  isEmpty: boolean;
+  isInvalid: boolean;
+  isValidDate: boolean;
+  isBefore: boolean;
+  isAfter: boolean;
+};
+
+const getValidationMessage = (val = {}): DateValidationT => ({
+  isDisabled: false,
+  isWeekend: false,
+  isEmpty: false,
+  isInvalid: false,
+  isBefore: false,
+  isAfter: false,
+  isValidDate: true,
+  ...val,
+});
+
 export const useDatepicker = (
   opt: UseDatepickerOptions = {}
 ): UseDatepickerValue => {
   const {
     locale: _locale = "nb",
     required,
-    defaultSelected,
+    defaultSelected: _defaultSelected,
     today = new Date(),
     fromDate,
     toDate,
     disabled,
     disableWeekends,
+    onDateChange,
+    inputFormat,
+    onValidate,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
 
-  const inputRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const daypickerRef = useRef<HTMLDivElement>(null);
+
+  const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
   const [month, setMonth] = useState(defaultSelected ?? today);
@@ -83,12 +122,25 @@ export const useDatepicker = (
   const [open, setOpen] = useState(false);
 
   const defaultInputValue = defaultSelected
-    ? formatDateForInput(defaultSelected, locale, "date")
+    ? formatDateForInput(defaultSelected, locale, "date", inputFormat)
     : "";
   const [inputValue, setInputValue] = useState(defaultInputValue);
 
+  const updateDate = (date?: Date) => {
+    onDateChange?.(date);
+    setSelectedDay(date);
+  };
+
+  const updateValidation = (val: Partial<DateValidationT> = {}) => {
+    const msg = getValidationMessage(val);
+    onValidate?.(msg);
+  };
+
   const handleFocusIn = useCallback(
     (e) => {
+      if (!e?.target || !e?.target?.nodeType) {
+        return;
+      }
       ![
         daypickerRef.current,
         inputRef.current,
@@ -110,33 +162,34 @@ export const useDatepicker = (
   }, [handleFocusIn]);
 
   const reset = () => {
-    setSelectedDay(defaultSelected);
+    updateDate(defaultSelected);
     setMonth(defaultSelected ?? today);
     setInputValue(defaultInputValue ?? "");
+    setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
-    setSelectedDay(date);
+    updateDate(date);
     setMonth(date ?? today);
-    setInputValue(date ? formatDateForInput(date, locale, "date") : "");
+    setInputValue(
+      date ? formatDateForInput(date, locale, "date", inputFormat) : ""
+    );
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-    if (!e.target.value) {
-      reset();
-      return;
-    }
+
     let day = parseDate(e.target.value, today, locale, "date");
     if (isValidDate(day)) {
       setMonth(day);
-      setInputValue(formatDateForInput(day, locale, "date"));
+      setInputValue(formatDateForInput(day, locale, "date", inputFormat));
     }
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
     let day = parseDate(e.target.value, today, locale, "date");
-    isValidDate(day) && setInputValue(formatDateForInput(day, locale, "date"));
+    isValidDate(day) &&
+      setInputValue(formatDateForInput(day, locale, "date", inputFormat));
   };
 
   /* Only allow de-selecting if not required */
@@ -147,13 +200,17 @@ export const useDatepicker = (
     }
 
     if (!required && selected) {
-      setSelectedDay(undefined);
+      updateDate(undefined);
       setInputValue("");
+      updateValidation({ isValidDate: false, isEmpty: true });
       return;
     }
-    setSelectedDay(day);
+    updateDate(day);
+    updateValidation();
     setMonth(day);
-    setInputValue(day ? formatDateForInput(day, locale, "date") : "");
+    setInputValue(
+      day ? formatDateForInput(day, locale, "date", inputFormat) : ""
+    );
   };
 
   // When changing the input field, save its value in state and check if the
@@ -163,22 +220,39 @@ export const useDatepicker = (
     setInputValue(e.target.value);
     const day = parseDate(e.target.value, today, locale, "date");
 
+    const isBefore =
+      fromDate && day && differenceInCalendarDays(fromDate, day) > 0;
+    const isAfter = toDate && day && differenceInCalendarDays(day, toDate) > 0;
+
     if (
       !isValidDate(day) ||
-      (disabled &&
-        ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
+      (disableWeekends && isWeekend(day)) ||
+      (disabled && isMatch(day, disabled))
     ) {
-      setSelectedDay(undefined);
+      updateDate(undefined);
+      updateValidation({
+        isInvalid: isValidDate(day),
+        isWeekend: disableWeekends && isWeekend(day),
+        isDisabled: disabled && isMatch(day, disabled),
+        isValidDate: false,
+        isEmpty: !e.target.value,
+        isBefore: isBefore ?? false,
+        isAfter: isAfter ?? false,
+      });
       return;
     }
 
-    const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
-    const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
     if (isBefore || isAfter) {
-      setSelectedDay(undefined);
+      updateDate(undefined);
+      updateValidation({
+        isValidDate: false,
+        isBefore: isBefore ?? false,
+        isAfter: isAfter ?? false,
+      });
       return;
     }
-    setSelectedDay(day);
+    updateDate(day);
+    updateValidation();
     setMonth(day);
   };
 
@@ -204,13 +278,15 @@ export const useDatepicker = (
     month,
     onMonthChange: (month) => setMonth(month),
     onDayClick: handleDayClick,
-    selected: selectedDay,
+    selected: selectedDay ?? new Date("Invalid date"),
     locale: _locale,
     fromDate,
     toDate,
     today,
     open,
     onOpenToggle: () => setOpen((x) => !x),
+    disabled,
+    disableWeekends,
     ref: daypickerRef,
   };
 

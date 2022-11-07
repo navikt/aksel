@@ -1,31 +1,16 @@
-:root {
+:root,
+:host {
   --navds-switch-color-label: var(--navds-semantic-color-text);
-  --navds-switch-color-label-hover: var(
-    --navds-semantic-color-interaction-primary
-  );
+  --navds-switch-color-label-hover: var(--navds-semantic-color-interaction-primary);
   --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
-  --navds-switch-color-track-background-checked: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-switch-color-track-background-hover: var(
-    --navds-global-color-gray-800
-  );
-  --navds-switch-color-track-background-hover-checked: var(
-    --navds-semantic-color-feedback-success-icon
-  );
-  --navds-switch-color-track-shadow-inner-focus: var(
-    --navds-semantic-color-component-background-light
-  );
-  --navds-switch-color-thumb: var(
-    --navds-semantic-color-component-background-light
-  );
+  --navds-switch-color-track-background-checked: var(--navds-semantic-color-feedback-success-border);
+  --navds-switch-color-track-background-hover: var(--navds-global-color-gray-800);
+  --navds-switch-color-track-background-hover-checked: var(--navds-semantic-color-feedback-success-icon);
+  --navds-switch-color-track-shadow-inner-focus: var(--navds-semantic-color-component-background-light);
+  --navds-switch-color-thumb: var(--navds-semantic-color-component-background-light);
   --navds-switch-color-thumb-icon: var(--navds-semantic-color-text-muted);
-  --navds-switch-color-thumb-icon-checked: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-switch-color-thumb-loader-checked: var(
-    --navds-semantic-color-feedback-success-border
-  );
+  --navds-switch-color-thumb-icon-checked: var(--navds-semantic-color-feedback-success-border);
+  --navds-switch-color-thumb-loader-checked: var(--navds-semantic-color-feedback-success-border);
 }
 
 .navds-switch {
@@ -77,21 +62,15 @@
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--navds-spacing-2) - 2px) 0
-    calc(var(--navds-spacing-2) - 2px) 3.25rem;
+  padding: calc(var(--navds-spacing-2) - 2px) 0 calc(var(--navds-spacing-2) - 2px) 3.25rem;
 }
 
-.navds-switch--right.navds-switch--small
-  > .navds-switch__label-wrapper
-  > .navds-switch__content {
-  padding: calc(var(--navds-spacing-2) - 2px) 3.25rem
-    calc(var(--navds-spacing-2) - 2px) 0;
+.navds-switch--right.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
+  padding: calc(var(--navds-spacing-2) - 2px) 3.25rem calc(var(--navds-spacing-2) - 2px) 0;
 }
 
 .navds-switch--with-description,
-.navds-switch--small
-  > .navds-switch__label-wrapper
-  > .navds-switch--with-description {
+.navds-switch--small > .navds-switch__label-wrapper > .navds-switch--with-description {
   padding-bottom: 0;
 }
 
@@ -147,8 +126,7 @@
 }
 
 .navds-switch__input:focus ~ .navds-switch__track {
-  box-shadow: 0 0 0 1px var(--navds-switch-color-track-shadow-inner-focus),
-    var(--navds-shadow-focus);
+  box-shadow: 0 0 0 1px var(--navds-switch-color-track-shadow-inner-focus), var(--navds-shadow-focus);
 }
 
 /* Thumb */
@@ -178,30 +156,21 @@
     transform: translateX(2px);
   }
 
-  .navds-switch__input:checked:hover
-    ~ .navds-switch__track
-    > .navds-switch__thumb {
+  .navds-switch__input:checked:hover ~ .navds-switch__track > .navds-switch__thumb {
     transform: translateX(18px);
   }
 }
 
-.navds-switch__input:disabled:hover
-  ~ .navds-switch__track
-  > .navds-switch__thumb {
+.navds-switch__input:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(0);
 }
 
-.navds-switch__input:checked:disabled:hover
-  ~ .navds-switch__track
-  > .navds-switch__thumb {
+.navds-switch__input:checked:disabled:hover ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(20px);
 }
 
 /* Loader */
-.navds-switch__input:checked
-  ~ .navds-switch__track
-  > .navds-switch__thumb
-  .navds-loader__foreground {
+.navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb .navds-loader__foreground {
   stroke: var(--navds-switch-color-thumb-loader-checked);
 }
 

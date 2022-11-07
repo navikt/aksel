@@ -1,10 +1,9 @@
-:root {
+:root,
+:host {
   --navds-loader-color-foreground: var(--navds-global-color-gray-400);
   --navds-loader-color-background: rgb(0 0 0 / 0.05);
   --navds-loader-color-neutral-foreground: var(--navds-global-color-gray-400);
-  --navds-loader-color-interaction-foreground: var(
-    --navds-global-color-blue-500
-  );
+  --navds-loader-color-interaction-foreground: var(--navds-global-color-blue-500);
   --navds-loader-color-inverted-foreground: var(--navds-global-color-white);
   --navds-loader-color-inverted-background: rgb(255 255 255 / 0.25);
   --navds-loader-color-transparent-background: transparent;

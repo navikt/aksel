@@ -1,4 +1,4 @@
-import renameProps from "../utils/rename-props";
+import renameProps from "../../utils/rename-props";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
@@ -28,7 +28,7 @@ export default function transformer(file, api, options) {
       });
     });
 
-  if (!!j(file.source).findJSXElements(localName)) {
+  if (j(file.source).findJSXElements(localName)) {
     renameProps({
       root,
       componentName: localName,

@@ -36,8 +36,7 @@
   grid-column: 1;
 }
 
-.navds-stepper__step--behind.navds-stepper__step--completed
-  + .navds-stepper__line {
+.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
   background-color: var(--navds-global-color-blue-500);
 }
 
@@ -64,8 +63,7 @@
   text-decoration: none;
   cursor: pointer;
   padding: var(--navds-stepper-border-width);
-  margin: calc(var(--navds-stepper-border-width) * -1)
-    calc(var(--navds-stepper-border-width) * -1) 1.75rem;
+  margin: calc(var(--navds-stepper-border-width) * -1) calc(var(--navds-stepper-border-width) * -1) 1.75rem;
 }
 
 button.navds-stepper__step {
@@ -117,9 +115,7 @@ button.navds-stepper__step {
 :where(.navds-stepper--horizontal) .navds-stepper__item {
   flex: 1 1 100%;
   grid-template-columns:
-    [line-1-start] 1fr [step-start] auto [line-1-end] var(
-      --navds-stepper-circle-size
-    )
+    [line-1-start] 1fr [step-start] auto [line-1-end] var(--navds-stepper-circle-size)
     [line-2-start] auto [step-end] 1fr [line-2-end];
   grid-template-rows: var(--navds-stepper-circle-size) auto;
 }
@@ -141,10 +137,8 @@ button.navds-stepper__step {
   grid-column: line-2;
 }
 
-:where(.navds-stepper--horizontal .navds-stepper__item:first-of-type)
-  .navds-stepper__line--1,
-:where(.navds-stepper--horizontal .navds-stepper__item:last-of-type)
-  .navds-stepper__line--2 {
+:where(.navds-stepper--horizontal .navds-stepper__item:first-of-type) .navds-stepper__line--1,
+:where(.navds-stepper--horizontal .navds-stepper__item:last-of-type) .navds-stepper__line--2 {
   visibility: hidden;
 }
 
@@ -181,8 +175,7 @@ button.navds-stepper__step {
   text-decoration: underline;
 }
 
-:where(.navds-stepper__step--non-interactive:hover, .navds-stepper__step--active:hover)
-  .navds-stepper__content {
+:where(.navds-stepper__step--non-interactive:hover, .navds-stepper__step--active:hover) .navds-stepper__content {
   text-decoration: none;
 }
 
@@ -192,26 +185,20 @@ button.navds-stepper__step {
   color: var(--navds-semantic-color-text-inverted);
 }
 
-:where(.navds-stepper__step:not(.navds-stepper__step--active):hover)
-  .navds-stepper__circle {
-  background-color: var(
-    --navds-semantic-color-interaction-primary-hover-subtle
-  );
+:where(.navds-stepper__step:not(.navds-stepper__step--active):hover) .navds-stepper__circle {
+  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle);
 }
 
 /* Non-interactive */
-:where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
-  .navds-stepper__content {
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__content {
   color: var(--navds-global-color-gray-900);
 }
 
-.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed
-  + .navds-stepper__line {
+.navds-stepper__step--non-interactive.navds-stepper__step--behind.navds-stepper__step--completed + .navds-stepper__line {
   background-color: var(--navds-global-color-gray-600);
 }
 
-:where(.navds-stepper__step--non-interactive.navds-stepper__step--active)
-  .navds-stepper__circle {
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active) .navds-stepper__circle {
   background-color: var(--navds-global-color-gray-900);
   border-color: var(--navds-global-color-gray-900);
   color: var(--navds-global-color-white);
@@ -221,18 +208,15 @@ button.navds-stepper__step {
   background-color: transparent;
 }
 
-:where(.navds-stepper__step--non-interactive.navds-stepper__step--active:hover)
-  .navds-stepper__circle {
+:where(.navds-stepper__step--non-interactive.navds-stepper__step--active:hover) .navds-stepper__circle {
   background-color: var(--navds-global-color-gray-900);
 }
 
-:where(.navds-stepper__step--completed.navds-stepper__step--active)
-  .navds-stepper__circle {
+:where(.navds-stepper__step--completed.navds-stepper__step--active) .navds-stepper__circle {
   background-color: inherit;
   color: var(--navds-global-color-deepblue-500);
 }
 
-:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive)
-  .navds-stepper__circle {
+:where(.navds-stepper__step--completed.navds-stepper__step--active.navds-stepper__step--non-interactive) .navds-stepper__circle {
   color: var(--navds-global-color-gray-900);
 }

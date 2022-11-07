@@ -1,0 +1,56 @@
+name: E2E / Playwright Tests
+on:
+  push:
+    branches: [master, next]
+    paths:
+      - "aksel.nav.no/**"
+  pull_request:
+    branches: [master, next]
+    paths:
+      - "aksel.nav.no/**"
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: add tokens to .env
+        run: |
+          echo "SANITY_WRITE_KEY=${{ secrets.SANITY_FEEDBACK_WRITE_KEY }}" >> aksel.nav.no/website/.env
+          echo "ALGOLIA_ADMIN=${{ secrets.ALGOLIA_ADMIN }}" >> aksel.nav.no/website/.env
+          echo "ALGOLIA_ID=${{ secrets.ALGOLIA_ID}}" >> aksel.nav.no/website/.env
+          echo "TRELLO_TOKEN=${{ secrets.TRELLO_TOKEN }}" >> aksel.nav.no/website/.env
+          echo "SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}" >> aksel.nav.no/website/.env
+          echo "SANITY_PREVIEW_TOKEN=${{ secrets.SANITY_PREVIEW_TOKEN }}" >> aksel.nav.no/website/.env
+          echo "SANITY_PRIVATE_NO_DRAFTS=${{ secrets.SANITY_PRIVATE_NO_DRAFTS }}" >> aksel.nav.no/website/.env
+
+      - name: Restore cache
+        uses: actions/cache@v3
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-e2e-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-e2e-
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: build packages
+        run: |
+          yarn boot
+          yarn docgen
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run Playwright tests
+        run: yarn workspace website e2e
+      - uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: playwright-report
+          path: aksel.nav.no/website/playwright-report/
+          retention-days: 10

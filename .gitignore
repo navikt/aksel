@@ -107,8 +107,8 @@ utilities/**/css
 
 */static/*.zip
 */static/png
-@navikt/core/icons/NAV-ikonpakke-png.zip
-@navikt/core/icons/NAV-ikonpakke-svg.zip
+@navikt/icons/NAV-ikonpakke-png.zip
+@navikt/icons/NAV-ikonpakke-svg.zip
 */**/NAV-ikonpakke-png.zip
 */**/NAV-ikonpakke-svg.zip
 
@@ -126,3 +126,25 @@ _docs.json
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+*/icons/src
+*/icons/png
+*/core/icons
+/storybook-static
+
+# Aksel.nav.no
+.next
+!*/website/lib/
+!*/website/public/
+!aksel.nav.no/**/*.d.ts
+!*/sanity/lib/
+!*/sanity/static/
+out
+test-urls.json
+videos
+sanity/scripts/renameField.js
+tmp.json
+/test-results/
+/playwright-report/
+/playwright/.cache/
+playwright-report/
+/test-results/

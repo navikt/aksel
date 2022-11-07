@@ -1,68 +1,130 @@
-:root {
+:root,
+:host {
   --navds-tag-color-border: var(--navds-semantic-color-border-muted);
-  --navds-tag-color-background: var(
-    --navds-semantic-color-component-background-alternate
-  );
-  --navds-tag-color-info-background: var(
-    --navds-semantic-color-feedback-info-background
-  );
-  --navds-tag-color-info-border: var(
-    --navds-semantic-color-feedback-info-border
-  );
-  --navds-tag-color-warning-background: var(
-    --navds-semantic-color-feedback-warning-background
-  );
-  --navds-tag-color-warning-border: var(
-    --navds-semantic-color-feedback-warning-border
-  );
-  --navds-tag-color-success-background: var(
-    --navds-semantic-color-feedback-success-background
-  );
-  --navds-tag-color-success-border: var(
-    --navds-semantic-color-feedback-success-border
-  );
-  --navds-tag-color-error-background: var(
-    --navds-semantic-color-feedback-danger-background
-  );
-  --navds-tag-color-error-border: var(
-    --navds-semantic-color-feedback-danger-border
-  );
+  --navds-tag-color-background: var(--navds-semantic-color-component-background-alternate);
+  --navds-tag-color-info-background: var(--navds-semantic-color-feedback-info-background);
+  --navds-tag-color-info-border: var(--navds-semantic-color-feedback-info-border);
+  --navds-tag-color-warning-background: var(--navds-semantic-color-feedback-warning-background);
+  --navds-tag-color-warning-border: var(--navds-semantic-color-feedback-warning-border);
+  --navds-tag-color-success-background: var(--navds-semantic-color-feedback-success-background);
+  --navds-tag-color-success-border: var(--navds-semantic-color-feedback-success-border);
+  --navds-tag-color-error-background: var(--navds-semantic-color-feedback-danger-background);
+  --navds-tag-color-error-border: var(--navds-semantic-color-feedback-danger-border);
 }
 
 .navds-tag {
   border: 1px solid;
-  border-color: var(--navds-tag-color-border);
-  border-radius: var(--navds-border-radius-medium);
-  background-color: var(--navds-tag-color-background);
+  border-radius: var(--navds-border-radius-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.125rem var(--navds-spacing-3);
+  padding: 0.125rem var(--navds-spacing-2);
   min-height: 32px;
+  line-height: 1;
 }
 
 .navds-tag--small {
   min-height: 24px;
-  padding-right: var(--navds-spacing-1);
-  padding-left: var(--navds-spacing-1);
+  padding: 0 0.375rem;
+}
+
+.navds-tag--xsmall {
+  min-height: 20px;
+  padding: 0 var(--navds-spacing-1);
 }
 
 .navds-tag--error {
-  background-color: var(--navds-tag-color-error-background);
-  border-color: var(--navds-tag-color-error-border);
+  border-color: var(--ac-tag-error-border, var(--navds-global-color-red-500));
+  background-color: var(--ac-tag-error-bg, var(--navds-global-color-red-50));
+  color: var(--ac-tag-error-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--error-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-error-filled-bg, var(--navds-global-color-red-500));
+  color: var(--ac-tag-error-filled-text, var(--navds-global-color-white));
 }
 
 .navds-tag--success {
-  background-color: var(--navds-tag-color-success-background);
-  border-color: var(--navds-tag-color-success-border);
+  border-color: var(--ac-tag-success-border, var(--navds-global-color-green-500));
+  background-color: var(--ac-tag-success-bg, var(--navds-global-color-green-50));
+  color: var(--ac-tag-success-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--success-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-success-filled-bg, var(--navds-global-color-green-500));
+  color: var(--ac-tag-success-filled-text, var(--navds-global-color-white));
 }
 
 .navds-tag--warning {
-  background-color: var(--navds-tag-color-warning-background);
-  border-color: var(--navds-tag-color-warning-border);
+  border-color: var(--ac-tag-warning-border, var(--navds-global-color-orange-600));
+  background-color: var(--ac-tag-warning-bg, var(--navds-global-color-orange-50));
+  color: var(--ac-tag-warning-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--warning-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-warning-filled-bg, var(--navds-global-color-orange-500));
+  color: var(--ac-tag-warning-filled-text, var(--navds-global-color-gray-900));
 }
 
 .navds-tag--info {
-  background-color: var(--navds-tag-color-info-background);
-  border-color: var(--navds-tag-color-info-border);
+  border-color: var(--ac-tag-info-border, var(--navds-global-color-lightblue-700));
+  background-color: var(--ac-tag-info-bg, var(--navds-global-color-lightblue-50));
+  color: var(--ac-tag-info-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--info-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-info-filled-bg, var(--navds-global-color-lightblue-500));
+  color: var(--ac-tag-info-filled-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--neutral {
+  border-color: var(--ac-tag-neutral-border, var(--navds-global-color-gray-500));
+  background-color: var(--ac-tag-neutral-bg, var(--navds-global-color-gray-100));
+  color: var(--ac-tag-neutral-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--neutral-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-neutral-filled-bg, var(--navds-global-color-gray-800));
+  color: var(--ac-tag-neutral-filled-text, var(--navds-global-color-white));
+}
+
+.navds-tag--alt1 {
+  border-color: var(--ac-tag-alt1-border, var(--navds-global-color-purple-400));
+  background-color: var(--ac-tag-alt1-bg, var(--navds-global-color-purple-100));
+  color: var(--ac-tag-alt1-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--alt1-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt1-filled-bg, var(--navds-global-color-purple-400));
+  color: var(--ac-tag-alt1-filled-text, var(--navds-global-color-white));
+}
+
+.navds-tag--alt2 {
+  border-color: var(--ac-tag-alt2-border, var(--navds-global-color-limegreen-500));
+  background-color: var(--ac-tag-alt2-bg, var(--navds-global-color-limegreen-100));
+  color: var(--ac-tag-alt2-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--alt2-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt2-filled-bg, var(--navds-global-color-limegreen-400));
+  color: var(--ac-tag-alt2-filled-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--alt3 {
+  border-color: var(--ac-tag-alt3-border, var(--navds-global-color-deepblue-400));
+  background-color: var(--ac-tag-alt3-bg, var(--navds-global-color-deepblue-100));
+  color: var(--ac-tag-alt3-text, var(--navds-global-color-gray-900));
+}
+
+.navds-tag--alt3-filled {
+  border-color: transparent;
+  background-color: var(--ac-tag-alt3-filled-bg, var(--navds-global-color-deepblue-500));
+  color: var(--ac-tag-alt3-filled-text, var(--navds-global-color-white));
 }

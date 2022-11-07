@@ -1,4 +1,3 @@
-import isSaturday from "date-fns/isSaturday";
 import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
@@ -133,14 +132,21 @@ export const DropdownCaption = () => (
 );
 
 export const DisabledDays = () => (
-  <DatePicker.Standalone disabled={disabledDays} disableWeekends />
+  <DatePicker.Standalone
+    disabled={disabledDays}
+    disableWeekends
+    today={new Date("2006-07-01")}
+  />
 );
 
-export const ShowWeekNumber = () => <DatePicker.Standalone showWeekNumber />;
+export const ShowWeekNumber = () => (
+  <DatePicker.Standalone showWeekNumber today={new Date("2006-07-01")} />
+);
 
 export const UseDatepicker = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
     locale: "en",
   });
 
@@ -157,6 +163,7 @@ export const UseRangedDatepicker = () => {
   const { datepickerProps, fromInputProps, toInputProps } =
     UNSAFE_useRangeDatepicker({
       fromDate: new Date("Aug 23 2019"),
+      onRangeChange: console.log,
     });
 
   return (
@@ -171,15 +178,25 @@ export const UseRangedDatepicker = () => {
   );
 };
 
-export const NB = () => <DatePicker.Standalone locale="nb" />;
-export const NN = () => <DatePicker.Standalone locale="nn" />;
-export const EN = () => <DatePicker.Standalone locale="en" />;
+export const NB = () => (
+  <DatePicker.Standalone locale="nb" today={new Date("2006-07-01")} />
+);
+export const NN = () => (
+  <DatePicker.Standalone locale="nn" today={new Date("2006-07-01")} />
+);
+export const EN = () => (
+  <DatePicker.Standalone locale="en" today={new Date("2006-07-01")} />
+);
 
-export const Standalone = () => <DatePicker.Standalone />;
+export const Standalone = () => (
+  <DatePicker.Standalone today={new Date("2006-07-01")} />
+);
 
-export const StandaloneRange = () => <DatePicker.Standalone mode="range" />;
+export const StandaloneRange = () => (
+  <DatePicker.Standalone mode="range" today={new Date("2006-07-01")} />
+);
 export const StandaloneMultiple = () => (
-  <DatePicker.Standalone mode="multiple" />
+  <DatePicker.Standalone mode="multiple" today={new Date("2006-07-01")} />
 );
 
 export const UserControlled = () => {
@@ -203,8 +220,13 @@ export const UserControlled = () => {
 };
 
 export const Validering = () => {
-  const { datepickerProps, selectedDay, inputProps } = UNSAFE_useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
+  const [error, setError] = useState(false);
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    fromDate: new Date("Aug 2 2019"),
+    onValidate: (val) => setError(val.isWeekend),
+    defaultSelected: new Date("Nov 26 2022"),
+    disableWeekends: true,
+    onDateChange: console.log,
   });
 
   return (
@@ -212,8 +234,8 @@ export const Validering = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
-            selectedDay && isSaturday(selectedDay)
-              ? "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
+            error
+              ? "NAV-kontoret er ikke åpent i helger. Velg en annen dag."
               : undefined
           }
           {...inputProps}
@@ -229,6 +251,37 @@ export const DisabledInput = () => {
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker>
         <DatePicker.Input disabled label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const ErrorInput = () => {
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker>
+        <DatePicker.Input error="feilmelding" label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const UseRangedDatepickerValidation = () => {
+  const { datepickerProps, fromInputProps, toInputProps } =
+    UNSAFE_useRangeDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      disableWeekends: true,
+      disabled: [new Date("Oct 10 2022")],
+      onValidate: console.table,
+    });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps}>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
+        </div>
       </DatePicker>
     </div>
   );

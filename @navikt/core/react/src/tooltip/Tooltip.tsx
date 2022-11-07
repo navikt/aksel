@@ -21,7 +21,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Detail } from "..";
+import { Detail, useProvider } from "..";
 import { mergeRefs, useId } from "../util";
 
 export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
@@ -96,6 +96,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
   ) => {
     const [open, setOpen] = useState(defaultOpen);
     const arrowRef = useRef<HTMLDivElement | null>(null);
+    const rootElement = useProvider()?.rootElement;
 
     const {
       x,
@@ -170,7 +171,7 @@ export const Tooltip = forwardRef<HTMLDivElement, TooltipProps>(
                 : children?.props["aria-describedby"],
           })
         )}
-        <FloatingPortal>
+        <FloatingPortal root={rootElement}>
           {(userOpen ?? open) && (
             <div
               {...getFloatingProps({

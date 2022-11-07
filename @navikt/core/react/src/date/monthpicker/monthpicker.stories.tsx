@@ -73,9 +73,28 @@ export const Standalone = () => {
 
 export const UseMonthpicker = () => {
   const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
-    locale: "nb",
-    defaultSelected: new Date(),
     disabled: [new Date("Apr 1 2022")],
+    onMonthChange: console.log,
+  });
+
+  return (
+    <div style={{ height: "20rem" }}>
+      <MonthPicker {...monthpickerProps}>
+        <MonthPicker.Input
+          {...inputProps}
+          label="Velg måned"
+          variant="monthpicker"
+        />
+      </MonthPicker>
+    </div>
+  );
+};
+
+export const UseMonthpickerFormat = () => {
+  const { inputProps, monthpickerProps } = UNSAFE_useMonthpicker({
+    disabled: [new Date("Apr 1 2022")],
+    onMonthChange: console.log,
+    inputFormat: "MM.yyyy",
   });
 
   return (

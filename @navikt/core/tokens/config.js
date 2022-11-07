@@ -30,6 +30,7 @@ module.exports = {
           format: "css/variables",
           options: {
             outputReferences: true,
+            selector: ":root, :host",
           },
         },
       ],

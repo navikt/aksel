@@ -1,0 +1,49 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: verktoykasse
+  namespace: designsystem
+  labels:
+    team: designsystem
+spec:
+  image: {{ image }}
+  port: 3000
+  ingresses:
+    - "https://aksel.dev.nav.no"
+  liveness:
+    path: /api/isAlive
+    initialDelay: 20
+    timeout: 1
+    periodSeconds: 5
+    failureThreshold: 10
+  readiness:
+    path: /api/isAlive
+    initialDelay: 20
+    timeout: 1
+  replicas:
+    min: 1
+    max: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 200m
+      memory: 256Mi
+  accessPolicy:
+    outbound:
+      external:
+        - host: api.sanity.io
+        - host: hnbe3yhs.api.sanity.io
+        - host: apicdn.sanity.io
+        - host: hnbe3yhs.apicdn.sanity.io
+        - host: cdn.sanity.io
+      rules: []
+      env:
+  azure:
+    application:
+      enabled: true
+      allowAllUsers: true
+      tenant: nav.no
+    sidecar:
+      enabled: true
