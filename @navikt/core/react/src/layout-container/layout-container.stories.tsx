@@ -110,10 +110,53 @@ export const DemoLayout2 = () => {
             className="spacer"
           >
             <LayoutGrid.Cell className="sidebar" area="sidebar">
-              Sidebar
+              <ul>
+                <li>link</li>
+                <li>link</li>
+                <li>link</li>
+                <li>link</li>
+                <li>link</li>
+                <li>link</li>
+                <li>link</li>
+              </ul>
             </LayoutGrid.Cell>
             <LayoutGrid.Cell className="content" area="content">
-              Content
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
+              <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                Molestiae doloremque harum optio rerum ad quasi asperiores
+                voluptates pariatur ratione magni quas labore consequatur culpa
+                dolorum laborum quod sequi, obcaecati cumque.
+              </p>
             </LayoutGrid.Cell>
           </LayoutGrid>
         </LayoutContainer>
@@ -136,11 +179,13 @@ export const DemoLayout2 = () => {
         background: blanchedalmond;
         height: 100vh;
         max-width: 600px;
+        padding:2rem;
       }
       .sidebar {
         background: blanchedalmond;
         height: 100vh;
         display: none;
+        padding:2rem;
       }
       @media (min-width: 64rem){
         .sidebar {
