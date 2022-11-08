@@ -44,7 +44,7 @@
 }
 
 .navdsi-timeline__row-periods {
-  height: var(--navds-font-line-height-large);
+  height: 1.5rem;
   position: relative;
   width: 100%;
   margin: 0;
