@@ -38,9 +38,7 @@ const ClickablePeriod = React.memo(
             onSelectPeriod?.();
           }}
           aria-label={ariaLabel(start, end, status)}
-          className={`${
-            isActive && "navdsi-timeline__period--selected"
-          } ${getConditionalClasses(cropped, direction, status)}`}
+          className={cl(getConditionalClasses(cropped, direction, status),{"navdsi-timeline__period--selected": isActive})}
           data-clickable
           onMouseEnter={() => {
             setSelected(true);
