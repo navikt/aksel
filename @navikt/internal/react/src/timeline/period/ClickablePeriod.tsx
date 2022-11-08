@@ -53,6 +53,7 @@ const ClickablePeriod = React.memo(
             [direction]: `${left}%`,
           }}
           onFocus={() => setSelected(true)}
+          aria-expanded={selected}
         >
           {icon}
         </button>
