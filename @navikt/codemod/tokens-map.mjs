@@ -183,7 +183,11 @@ const tokens = [
   ["--navds-semantic-color-border", "--a-border-strong"],
   ["--navds-shadow-focus-inverted", "--a-shadow-focus-inverted"],
   ["--navds-shadow-focus", "--a-shadow-focus"],
-
+  ["--navds-shadow-xsmall", "--a-shadow-xsmall"],
+  ["--navds-shadow-small", "--a-shadow-small"],
+  ["--navds-shadow-medium", "--a-shadow-medium"],
+  ["--navds-shadow-large", "--a-shadow-large"],
+  ["--navds-shadow-xlarge", "--a-shadow-xlarge"],
 
   /* Not used */
   /* ["", "--a-icon-on-info"],
@@ -317,13 +321,13 @@ const tokens = [
 ["--navds-textarea-color-background-disabled", "--a-surface-subtle"],
 ["--navds-textarea-color-background", "--a-surface-default"],
 ["--navds-textarea-color-border", "--a-border-strong"],
-["--navds-help-text-color", "--a-surface-action"],
 ["--navds-help-text-color-popover-background", "--a-surface-info-subtle"],
 ["--navds-help-text-color-background-hover", "--a-surface-action"],
 ["--navds-help-text-color-background-focus", "--a-surface-action"],
 ["--navds-help-text-color-shadow-hover", "--a-surface-action"],
 ["--navds-help-text-color-hover", "--a-surface-default"],
 ["--navds-help-text-color-focus", "--a-surface-default"],
+["--navds-help-text-color", "--a-surface-action"],
 ["--navds-link-color-text-focus", "--a-text-on-action"],
 ["--navds-link-color-text-active", "--a-text-on-action"],
 ["--navds-link-color-text", "--a-text-action"],
