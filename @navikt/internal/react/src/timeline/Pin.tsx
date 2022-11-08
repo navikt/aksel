@@ -38,6 +38,7 @@ export const Pin = forwardRef<HTMLButtonElement, PinProps>(
           className="navdsi-timeline__pin__button"
           onClick={() => setOpen(!open)}
           aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
+          aria-expanded={open}
         />
         {children && (
           <Popover
