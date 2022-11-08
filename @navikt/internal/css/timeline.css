@@ -118,16 +118,16 @@
   cursor: pointer;
 }
 
-.navdsi-timeline__period--connectedBoth {
+.navdsi-timeline__period--connected-both {
   border-radius: 0;
 }
 
-.navdsi-timeline__period--connectedRight {
+.navdsi-timeline__period--connected-right {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.navdsi-timeline__period--connectedLeft {
+.navdsi-timeline__period--connected-left {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
