@@ -1,4 +1,5 @@
 import { Popover } from "@navikt/ds-react";
+import cl from "clsx";
 import React, { RefObject, useEffect, useState } from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
@@ -38,7 +39,9 @@ const ClickablePeriod = React.memo(
             onSelectPeriod?.();
           }}
           aria-label={ariaLabel(start, end, status)}
-          className={cl(getConditionalClasses(cropped, direction, status),{"navdsi-timeline__period--selected": isActive})}
+          className={cl(getConditionalClasses(cropped, direction, status), {
+            "navdsi-timeline__period--selected": isActive,
+          })}
           data-clickable
           onMouseEnter={() => {
             setSelected(true);
