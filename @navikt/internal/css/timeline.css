@@ -26,9 +26,8 @@
   gap: var(--navds-spacing-4);
 }
 
-.navdsi-timeline__axislabels > * {
+.navdsi-timeline__axislabels .navds-detail {
   position: absolute;
-  font-size: var(--navds-font-size-small);
   color: var(--navds-global-color-gray-600);
 }
 
@@ -186,14 +185,12 @@
 }
 
 .navdsi-timeline__zoom__button:first-child {
-  border-radius: var(--navds-border-radius-medium) 0 0
-    var(--navds-border-radius-medium);
+  border-radius: var(--navds-border-radius-medium) 0 0 var(--navds-border-radius-medium);
 }
 
 .navdsi-timeline__zoom__button:last-child {
   border-width: 1px;
-  border-radius: 0 var(--navds-border-radius-medium)
-    var(--navds-border-radius-medium) 0;
+  border-radius: 0 var(--navds-border-radius-medium) var(--navds-border-radius-medium) 0;
 }
 
 .navdsi-timeline__zoom__button:only-child {

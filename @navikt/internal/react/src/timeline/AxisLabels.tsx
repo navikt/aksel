@@ -1,3 +1,4 @@
+import { Detail } from "@navikt/ds-react";
 import {
   addDays,
   addMonths,
@@ -123,17 +124,17 @@ export const AxisLabels = () => {
   return (
     <div className="navdsi-timeline__axislabels" aria-hidden="true">
       {labels.map((etikett) => (
-        <div
+        <Detail
+          as="div"
           key={etikett.label}
           style={{
-            display: "flex",
             justifyContent: direction === "left" ? "flex-start" : "flex-end",
             [direction]: `${etikett.horizontalPosition}%`,
             width: `${etikett.width}%`,
           }}
         >
           {etikett.label}
-        </div>
+        </Detail>
       ))}
     </div>
   );
