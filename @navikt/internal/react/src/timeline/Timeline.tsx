@@ -120,43 +120,45 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           setEndInclusive: (d) => setEndInclusive(d),
         }}
       >
-        <div {...rest} ref={ref} className="navdsi-timeline">
-          <AxisLabels />
+        <div {...rest} ref={ref}>
+          <div className="navdsi-timeline">
+            <AxisLabels />
 
-          {pins.map((pin) => {
-            return pin;
-          })}
-
-          {processedRows.map((row) => {
-            return (
-              <RowContext.Provider
-                key={`row-${row.id}`}
-                value={{
-                  periods: row.periods,
-                  id: row.id,
-                }}
-              >
-                {row.label && (
-                  <span
-                    id={`label-${row.id}`}
-                    className="navdsi-timeline__row-label"
-                  >
-                    {row.icon}
-                    {row.label}
-                  </span>
-                )}
-                <TimelineRow label={row.label} />
-              </RowContext.Provider>
-            );
-          })}
-        </div>
-        {zoomButtons && (
-          <ul className="navdsi-timeline__zoom">
-            {zoomButtons.map((zoom) => {
-              return zoom;
+            {pins.map((pin) => {
+              return pin;
             })}
-          </ul>
-        )}
+
+            {processedRows.map((row) => {
+              return (
+                <RowContext.Provider
+                  key={`row-${row.id}`}
+                  value={{
+                    periods: row.periods,
+                    id: row.id,
+                  }}
+                >
+                  {row.label && (
+                    <span
+                      id={`label-${row.id}`}
+                      className="navdsi-timeline__row-label"
+                    >
+                      {row.icon}
+                      {row.label}
+                    </span>
+                  )}
+                  <TimelineRow label={row.label} />
+                </RowContext.Provider>
+              );
+            })}
+          </div>
+          {zoomButtons && (
+            <ul className="navdsi-timeline__zoom">
+              {zoomButtons.map((zoom) => {
+                return zoom;
+              })}
+            </ul>
+          )}
+        </div>
       </TimelineContext.Provider>
     );
   }
