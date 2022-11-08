@@ -6,10 +6,6 @@ export interface TimelineInfoStepProps
   extends React.AnchorHTMLAttributes<HTMLLIElement> {
   children?: React.ReactNode;
   /**
-   *
-   */
-  icon: React.ElementType;
-  /**
    *  When in the process is this
    */
   time: "present" | "future" | "past";
@@ -17,6 +13,10 @@ export interface TimelineInfoStepProps
    * Short description of date. Example: DU ER HER 23. OKTOBER 2022
    */
   description?: string;
+  /**
+   * Icon element, had to be JSX or made via React.createElement.
+   */
+  icon: React.ElementType;
 }
 
 export interface TimelineInfoStepType

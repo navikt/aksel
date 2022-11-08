@@ -1,7 +1,6 @@
 import cl from "clsx";
 import React, { forwardRef } from "react";
-import InfoStep, { TimelineInfoStepType } from "./Info";
-import StatusStep, { TimelineStatusStepType } from "./Status";
+import TimelineStep, { TimelineStepType } from "./TimelineStep";
 
 export interface TimelineProps extends React.HTMLAttributes<HTMLOListElement> {
   /**
@@ -14,8 +13,7 @@ interface TimelineComponent
   extends React.ForwardRefExoticComponent<
     TimelineProps & React.RefAttributes<HTMLOListElement>
   > {
-  Info: TimelineInfoStepType;
-  Status: TimelineStatusStepType;
+  Step: TimelineStepType;
 }
 
 export const Timeline: TimelineComponent = forwardRef<
@@ -29,7 +27,6 @@ export const Timeline: TimelineComponent = forwardRef<
   );
 }) as TimelineComponent;
 
-Timeline.Info = InfoStep;
-Timeline.Status = StatusStep;
+Timeline.Step = TimelineStep;
 
 export default Timeline;

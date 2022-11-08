@@ -1,9 +1,10 @@
 import { Caseworker, ExternalLink, Money, Telephone } from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
-import { Timeline } from ".";
 import { Link, Tag } from "..";
 import { BodyShort } from "../typography";
+import { Timeline } from ".";
+const { Step } = Timeline;
 
 export default {
   title: "ds-react/Timeline",
@@ -28,28 +29,26 @@ export default {
 ]; */
 
 export const Default = ({ asButton, ...props }) => {
-  /* const [activeStep, setActiveStep] = useState(1); */
-
   return (
     <div style={{ display: "flex", gap: "10rem", flexDirection: "column" }}>
       <Timeline aria-labelledby="Timeline-heading" {...props}>
-        <Timeline.Status
+        <Step
           title="Du har søkt om dagpenger"
           time="past"
           description="1 uke siden"
-          variant="success"
+          icon="success"
         />
-        <Timeline.Info
+        <Step
           time="past"
           icon={Caseworker}
           title="Veileder gikk gjennom søknaden"
           description="For 3 dager siden"
         />
-        <Timeline.Status
+        <Step
           title="Søkanden mangler dokumenter"
           time="present"
           description="Du er her 23. Oktober 2022"
-          variant="warning"
+          icon="warning"
         >
           <BodyShort spacing>
             Du mangler fortsatt noen dokumenter til søknaden
@@ -60,15 +59,15 @@ export const Default = ({ asButton, ...props }) => {
             </Link>
           </BodyShort>
           <Tag variant="warning">Mangler dokumenter</Tag>
-        </Timeline.Status>
+        </Step>
 
-        <Timeline.Info
+        <Step
           time="future"
           icon={Telephone}
           title="Du vil få en telefon fra en veileder"
           description="Om omtrent 2 dager"
         />
-        <Timeline.Info
+        <Step
           time="future"
           icon={Money}
           title="Du vil få utbetalt dagpenger"
@@ -83,7 +82,7 @@ export const Default = ({ asButton, ...props }) => {
               Se mine opplysninger <ExternalLink aria-hidden />
             </Link>
           </BodyShort>
-        </Timeline.Info>
+        </Step>
       </Timeline>
     </div>
   );

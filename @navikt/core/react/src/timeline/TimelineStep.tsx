@@ -3,7 +3,8 @@ import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong, BodyShort, Heading } from "..";
 
-export interface TimelineStatusStepProps
+type iconType = "success" | "warning" | "error" | React.ElementType;
+export interface TimelineStepProps
   extends React.AnchorHTMLAttributes<HTMLLIElement> {
   children?: React.ReactNode;
   /**
@@ -15,18 +16,19 @@ export interface TimelineStatusStepProps
    */
   description?: string;
   /**
-   * Status symbol
+   * TimelineStep icon, accepts string or icon-element
    */
-  variant: "success" | "warning" | "error";
+  icon: iconType;
 }
+// consider: a "variant" prop thats just an alias of "icon", if people want variant
 
-export interface TimelineStatusStepType
+export interface TimelineStepType
   extends React.ForwardRefExoticComponent<
-    TimelineStatusStepProps & React.RefAttributes<HTMLLIElement>
+    TimelineStepProps & React.RefAttributes<HTMLLIElement>
   > {}
 
-const getIcon = (variant: "success" | "warning" | "error") => {
-  switch (variant) {
+const Icon = ({ icon }: { icon: iconType }) => {
+  switch (icon) {
     case "success":
       return (
         <Success
@@ -39,8 +41,8 @@ const getIcon = (variant: "success" | "warning" | "error") => {
       return (
         <Warning
           aria-hidden
-          color="var(--navds-global-color-orange-600)"
           title="advarsel"
+          color="var(--navds-global-color-orange-600)"
         />
       );
     case "error":
@@ -51,16 +53,15 @@ const getIcon = (variant: "success" | "warning" | "error") => {
           color="var(--navds-global-color-red-500)"
         />
       );
-    default:
-      return null;
+    default: {
+      const CustomIcon = icon;
+      return <CustomIcon aria-hidden />;
+    }
   }
 };
 
-export const StatusStep = forwardRef<HTMLLIElement, TimelineStatusStepProps>(
-  (
-    { className, children, time, description, variant, title, ...rest },
-    ref
-  ) => {
+export const TimelineStep = forwardRef<HTMLLIElement, TimelineStepProps>(
+  ({ className, children, time, description, icon, title, ...rest }, ref) => {
     return (
       <li
         {...rest}
@@ -72,7 +73,9 @@ export const StatusStep = forwardRef<HTMLLIElement, TimelineStatusStepProps>(
           className
         )}
       >
-        <div className="navds-timeline__marker">{getIcon(variant)}</div>
+        <div className="navds-timeline__marker">
+          <Icon icon={icon} />
+        </div>
         <Heading size="small" as="div" className="navds-timeline__title">
           {title}
           {description && (
@@ -93,6 +96,6 @@ export const StatusStep = forwardRef<HTMLLIElement, TimelineStatusStepProps>(
       </li>
     );
   }
-) as TimelineStatusStepType;
+) as TimelineStepType;
 
-export default StatusStep;
+export default TimelineStep;
