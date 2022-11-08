@@ -1,5 +1,5 @@
 import { Popover } from "@navikt/ds-react";
-import React, { RefObject, useState } from "react";
+import React, { RefObject, useEffect, useState } from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
 
@@ -26,13 +26,16 @@ const ClickablePeriod = React.memo(
   }: ClickablePeriodProps) => {
     const [selected, setSelected] = useState(false);
 
+    useEffect(() => {
+      isActive && buttonRef.current?.focus();
+    }, [isActive, buttonRef]);
+
     return (
       <>
         <button
           ref={buttonRef}
           onClick={() => {
-            setSelected(!selected);
-            onSelectPeriod && onSelectPeriod();
+            onSelectPeriod?.();
           }}
           aria-label={ariaLabel(start, end, status)}
           className={`${

@@ -222,14 +222,10 @@ export const ActivePeriod = () => {
                 start={p.start}
                 end={p.end}
                 status={p.status}
-                onSelectPeriod={
-                  p.onSelectPeriod
-                    ? () => {
-                        setActivePeriod(p);
-                        p.onSelectPeriod();
-                      }
-                    : undefined
-                }
+                onSelectPeriod={() => {
+                  setActivePeriod(p);
+                  p?.onSelectPeriod?.();
+                }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
               >
@@ -246,15 +242,10 @@ export const ActivePeriod = () => {
                 start={p.start}
                 end={p.end}
                 status={p.status}
-                onSelectPeriod={
-                  p.onSelectPeriod
-                    ? () => {
-                        setActivePeriod(p);
-                        p.onSelectPeriod();
-                        console.log(activePeriod);
-                      }
-                    : undefined
-                }
+                onSelectPeriod={() => {
+                  setActivePeriod(p);
+                  p?.onSelectPeriod?.();
+                }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
               >
