@@ -42,6 +42,15 @@
         },
         "info": {
           "value": "{a.gray.900.value}"
+        },
+        "alt1": {
+          "inverted": { "value": "{a.white.value}" }
+        },
+        "alt2": {
+          "inverted": { "value": "{a.white.value}" }
+        },
+        "alt3": {
+          "inverted": { "value": "{a.white.value}" }
         }
       }
     },
@@ -71,6 +80,9 @@
       },
       "transparent": {
         "value": "{a.transparent.value}"
+      },
+      "backdrop": {
+        "value": "{a.grayalpha.700.value}"
       },
       "inverted": {
         "hover": {
@@ -229,6 +241,15 @@
       },
       "on": {
         "inverted": { "value": "{a.white.value}" }
+      },
+      "alt1": {
+        "inverted": { "value": "{a.purple.400.value}" }
+      },
+      "alt2": {
+        "inverted": { "value": "{a.limegreen.400.value}" }
+      },
+      "alt3": {
+        "inverted": { "value": "{a.deepblue.500.value}" }
       }
     },
     "icon": {
@@ -242,7 +263,6 @@
         "selected": { "value": "{a.deepblue.500.value}" },
         "@": "{a.blue.500.value}"
       },
-
       "success": {
         "value": "{a.green.500.value}"
       },
