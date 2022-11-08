@@ -1,5 +1,5 @@
 import { Expand } from "@navikt/ds-icons";
-import { BodyShort, Detail } from "@navikt/ds-react";
+import { BodyShort, Detail, Tag } from "@navikt/ds-react";
 import cl from "classnames";
 import NextLink from "next/link";
 import React, { useContext, useMemo, useState } from "react";
@@ -59,22 +59,23 @@ const NavItem = ({
           )}
         >
           {item.title}
-          {item?.link?.status &&
-            ["deprecated", "beta"].includes(item.link.status?.tag) && (
-              <Detail
-                className={cl(
-                  "font-regular ml-2 rounded-full border-none px-2 capitalize",
-                  {
-                    "text-text bg-gray-200 capitalize ring-1 ring-inset ring-gray-900/10":
-                      item.link.status?.tag === "deprecated",
-                    "text-text bg-purple-50 ring-1 ring-inset ring-purple-900/10":
-                      item.link.status?.tag === "beta",
+          <span className="ml-2 capitalize">
+            {item?.link?.status &&
+              ["deprecated", "beta", "new"].includes(item.link.status?.tag) && (
+                <Tag
+                  size="xsmall"
+                  variant={
+                    item.link.status?.tag === "beta"
+                      ? "alt1"
+                      : item.link.status?.tag === "deprecated"
+                      ? "neutral"
+                      : "info"
                   }
-                )}
-              >
-                {item.link.status?.tag}
-              </Detail>
-            )}
+                >
+                  {item.link.status?.tag}
+                </Tag>
+              )}
+          </span>
         </BodyShort>
       </NextLink>
     </li>

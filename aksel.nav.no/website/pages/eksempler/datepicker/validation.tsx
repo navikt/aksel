@@ -7,7 +7,7 @@ const Example = () => {
   const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
     fromDate: new Date("Aug 23 2019"),
     onValidate: (val) => {
-      setHasError(val.isValidDate);
+      setHasError(!val.isValidDate);
       console.log(val);
     },
   });
