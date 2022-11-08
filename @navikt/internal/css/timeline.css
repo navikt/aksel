@@ -34,7 +34,7 @@
 .navdsi-timeline__row {
   display: flex;
   background: var(--navds-global-color-gray-50);
-  margin: 0 0 var(--navds-spacing-5);
+  margin: 0 0 var(--navds-spacing-8);
   padding-left: 2.375rem;
   grid-column: 2;
 }
