@@ -7,5 +7,5 @@ export const lastDate = (a: Date, b: Date): number =>
 export const lastPeriod = (a: PositionedPeriod, b: PositionedPeriod): number =>
   a.horizontalPosition - b.horizontalPosition;
 
-export const sisteEnklePeriode = (a: Period, b: Period): number =>
+export const lastSinglePeriod = (a: Period, b: Period): number =>
   differenceInMilliseconds(b.endInclusive, a.endInclusive);
