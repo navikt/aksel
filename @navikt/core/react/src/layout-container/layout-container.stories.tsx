@@ -201,3 +201,192 @@ export const DemoLayout2 = () => {
 DemoLayout2.parameters = {
   layout: "fullscreen",
 };
+
+export const MoteDemo = () => {
+  return (
+    <>
+      <div className="wrapper">
+        <LayoutContainer fluid={false}>
+          <LayoutGrid>
+            <LayoutGrid.Cell
+              className="sidebar"
+              colSpan={{ xs: 6, sm: 8, md: 4, lg: 3 }}
+            >
+              Sidebar
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 6, sm: 8, md: 8, lg: 6 }}
+            >
+              Innhold
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="sidebar2"
+              colSpan={{ xs: 6, sm: 8, md: 8, lg: 3 }}
+              column={{ md: "5", lg: "0" }}
+            >
+              sidebar 2
+            </LayoutGrid.Cell>
+          </LayoutGrid>
+        </LayoutContainer>
+        <style>{`
+      .wrapper{
+        background: #f7f7f7;
+        min-height: 100vh;
+      }
+      .content{
+        background: blanchedalmond;
+        height: 40vh;
+        padding:2rem;
+      }
+      .sidebar {
+        background: LightSlateGrey;
+        height: 300px;
+        padding:2rem;
+      }
+      @media (min-width: 48rem){
+        .sidebar {
+          height: 40vh;
+          background: blanchedalmond;
+        }
+      }
+      .sidebar2 {
+        background: LightSlateGrey;
+        height: 300px;
+        padding:2rem;
+      }
+      @media (min-width: 64rem){
+        .sidebar2 {
+          height: 40vh;
+          background: blanchedalmond;
+        }
+      }
+      `}</style>
+      </div>
+    </>
+  );
+};
+
+MoteDemo.parameters = {
+  layout: "fullscreen",
+};
+
+export const MoteDemo2 = () => {
+  return (
+    <>
+      <div className="wrapper">
+        <LayoutContainer fluid={false}>
+          <LayoutGrid>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+            <LayoutGrid.Cell
+              className="content"
+              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
+            >
+              {" "}
+            </LayoutGrid.Cell>
+          </LayoutGrid>
+        </LayoutContainer>
+        <style>{`
+      .wrapper{
+        background: #f7f7f7;
+        min-height: 100vh;
+      }
+      .content{
+        background: #A69CAC;
+        height: 100vh;
+        width: 100%;
+      }
+      @media (min-width: 48rem) {
+        .content{
+          /* 768px */
+          background: #474973;
+        }
+      }
+
+      @media (min-width: 64rem) {
+        .content{
+          /* 1024px */
+          background: #ffb30f;
+        }
+      }
+
+      @media (min-width: 80rem) {
+        .content{
+          /* 1280px */
+          background: #2c666e;
+        }
+      }
+      `}</style>
+      </div>
+    </>
+  );
+};
+
+MoteDemo2.parameters = {
+  layout: "fullscreen",
+};

@@ -3,18 +3,20 @@
   --ac-layout-grid-areas-sm: var(--ac-layout-grid-areas-xs);
   --ac-layout-grid-areas-md: var(--ac-layout-grid-areas-sm);
   --ac-layout-grid-areas-lg: var(--ac-layout-grid-areas-md);
+  --ac-layout-grid-areas-xl: var(--ac-layout-grid-areas-lg);
   --ac-layout-grid-columns-xs: 6;
   --ac-layout-grid-columns-sm: 8;
   --ac-layout-grid-columns-md: 12;
   --ac-layout-grid-columns-lg: var(--ac-layout-grid-columns-md);
+  --ac-layout-grid-columns-xl: var(--ac-layout-grid-columns-lg);
 
   display: grid;
   grid-template-areas: var(--ac-layout-grid-areas-xs);
-  grid-template-columns: repeat(var(--ac-grid-columns-xs), minmax(0, 1fr));
+  grid-template-columns: repeat(var(--ac-layout-grid-columns-xs), minmax(0, 1fr));
   gap: var(--ac-layout-grid-gap-xs, var(--navds-spacing-4));
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 30rem) {
   .navds-layout-grid {
     gap: var(--ac-layout-grid-gap-sm, var(--navds-spacing-6));
     grid-template-areas: var(--ac-layout-grid-areas-sm);
@@ -22,7 +24,7 @@
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .navds-layout-grid {
     gap: var(--ac-layout-grid-gap-md, var(--navds-spacing-6));
     grid-template-areas: var(--ac-layout-grid-areas-md);
@@ -30,11 +32,19 @@
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 64rem) {
   .navds-layout-grid {
     gap: var(--ac-layout-grid-gap-lg, var(--navds-spacing-6));
     grid-template-areas: var(--ac-layout-grid-areas-lg);
     grid-template-columns: repeat(var(--ac-layout-grid-columns-lg), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 80rem) {
+  .navds-layout-grid {
+    gap: var(--ac-layout-grid-gap-xl, var(--navds-spacing-6));
+    grid-template-areas: var(--ac-layout-grid-areas-xl);
+    grid-template-columns: repeat(var(--ac-layout-grid-columns-xl), minmax(0, 1fr));
   }
 }
 
@@ -43,34 +53,43 @@
   --ac-layout-grid-column-sm: var(--ac-layout-grid-column-xs);
   --ac-layout-grid-column-md: var(--ac-layout-grid-column-sm);
   --ac-layout-grid-column-lg: var(--ac-layout-grid-column-md);
+  --ac-layout-grid-column-xl: var(--ac-layout-grid-column-lg);
   --ac-layout-grid-row-xs: initial;
   --ac-layout-grid-row-sm: var(--ac-layout-grid-row-xs);
   --ac-layout-grid-row-md: var(--ac-layout-grid-row-sm);
   --ac-layout-grid-row-lg: var(--ac-layout-grid-row-md);
+  --ac-layout-grid-row-xl: var(--ac-layout-grid-row-lg);
 
   min-width: 0;
   grid-row: var(--ac-layout-grid-row-xs);
   grid-column: var(--ac-layout-grid-column-xs);
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 30rem) {
   .navds-layout-grid__cell {
     grid-row: var(--ac-layout-grid-row-sm);
     grid-column: var(--ac-layout-grid-column-sm);
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .navds-layout-grid__cell {
     grid-row: var(--ac-layout-grid-row-md);
     grid-column: var(--ac-layout-grid-column-md);
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 64rem) {
   .navds-layout-grid__cell {
     grid-row: var(--ac-layout-grid-row-lg);
     grid-column: var(--ac-layout-grid-column-lg);
+  }
+}
+
+@media (min-width: 80rem) {
+  .navds-layout-grid__cell {
+    grid-row: var(--ac-layout-grid-row-xl);
+    grid-column: var(--ac-layout-grid-column-xl);
   }
 }
 
@@ -98,7 +117,7 @@
   grid-column-end: span 6;
 }
 
-@media (min-width: 48rem) {
+@media (min-width: 30rem) {
   .navds-layout-grid__cell-column-sm-1 {
     grid-column-end: span 1;
   }
@@ -132,7 +151,7 @@
   }
 }
 
-@media (min-width: 64rem) {
+@media (min-width: 48rem) {
   .navds-layout-grid__cell-column-md-1 {
     grid-column-end: span 1;
   }
@@ -182,7 +201,7 @@
   }
 }
 
-@media (min-width: 80rem) {
+@media (min-width: 64rem) {
   .navds-layout-grid__cell-column-lg-1 {
     grid-column-end: span 1;
   }
@@ -228,6 +247,56 @@
   }
 
   .navds-layout-grid__cell-column-lg-12 {
+    grid-column-end: span 12;
+  }
+}
+
+@media (min-width: 80rem) {
+  .navds-layout-grid__cell-column-xl-1 {
+    grid-column-end: span 1;
+  }
+
+  .navds-layout-grid__cell-column-xl-2 {
+    grid-column-end: span 2;
+  }
+
+  .navds-layout-grid__cell-column-xl-3 {
+    grid-column-end: span 3;
+  }
+
+  .navds-layout-grid__cell-column-xl-4 {
+    grid-column-end: span 4;
+  }
+
+  .navds-layout-grid__cell-column-xl-5 {
+    grid-column-end: span 5;
+  }
+
+  .navds-layout-grid__cell-column-xl-6 {
+    grid-column-end: span 6;
+  }
+
+  .navds-layout-grid__cell-column-xl-7 {
+    grid-column-end: span 7;
+  }
+
+  .navds-layout-grid__cell-column-xl-8 {
+    grid-column-end: span 8;
+  }
+
+  .navds-layout-grid__cell-column-xl-9 {
+    grid-column-end: span 9;
+  }
+
+  .navds-layout-grid__cell-column-xl-10 {
+    grid-column-end: span 10;
+  }
+
+  .navds-layout-grid__cell-column-xl-11 {
+    grid-column-end: span 11;
+  }
+
+  .navds-layout-grid__cell-column-xl-12 {
     grid-column-end: span 12;
   }
 }

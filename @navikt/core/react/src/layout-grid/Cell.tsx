@@ -16,6 +16,7 @@ export interface LayoutGridCellProps
     sm?: string;
     md?: string;
     lg?: string;
+    xl?: string;
   };
   /**
    * How many columns should cell span?
@@ -25,6 +26,7 @@ export interface LayoutGridCellProps
     sm?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
     md?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
     lg?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+    xl?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
   };
   /**
    * define a row to override stack-order
@@ -34,6 +36,7 @@ export interface LayoutGridCellProps
     sm?: string;
     md?: string;
     lg?: string;
+    xl?: string;
   };
 }
 
@@ -51,10 +54,12 @@ export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
       "--ac-layout-grid-column-sm": column?.sm,
       "--ac-layout-grid-column-md": column?.md,
       "--ac-layout-grid-column-lg": column?.lg,
+      "--ac-layout-grid-column-xl": column?.xl,
       "--ac-layout-grid-row-xs": row?.xs,
       "--ac-layout-grid-row-sm": row?.sm,
       "--ac-layout-grid-row-md": row?.md,
       "--ac-layout-grid-row-lg": row?.lg,
+      "--ac-layout-grid-row-xl": row?.xl,
     } as React.CSSProperties;
 
     return (
@@ -68,7 +73,8 @@ export const LayoutGridCell: LayoutGridCellComponentType = forwardRef(
           colSpan?.xs && `navds-layout-grid__cell-column-xs-${colSpan?.xs}`,
           colSpan?.sm && `navds-layout-grid__cell-column-sm-${colSpan?.sm}`,
           colSpan?.md && `navds-layout-grid__cell-column-md-${colSpan?.md}`,
-          colSpan?.lg && `navds-layout-grid__cell-column-lg-${colSpan?.lg}`
+          colSpan?.lg && `navds-layout-grid__cell-column-lg-${colSpan?.lg}`,
+          colSpan?.xl && `navds-layout-grid__cell-column-xl-${colSpan?.xl}`
         )}
       >
         {children}

@@ -7,13 +7,14 @@ export interface LayoutContainerProps
   children: React.ReactNode;
   /**
    * horizontal padding
-   * @default {xs: 1rem, sm: 1.5rem, md: 1.5rem, lg: 1.5rem}
+   * @default {xs: 1rem, sm: 1.5rem, md: 1.5rem, lg: 1.5rem, xl: 1.5rem}
    */
   padding?: {
     xs?: string;
     sm?: string;
     md?: string;
     lg?: string;
+    xl?: string;
   };
   /**
    * @default true
@@ -31,7 +32,7 @@ export const LayoutContainer: OverridableComponent<
       as: Component = "div",
       children,
       padding,
-      fluid = true,
+      fluid = false,
       ...rest
     },
     ref
@@ -42,6 +43,7 @@ export const LayoutContainer: OverridableComponent<
       "--ac-layout-container-padding-sm": padding?.sm,
       "--ac-layout-container-padding-md": padding?.md,
       "--ac-layout-container-padding-lg": padding?.lg,
+      "--ac-layout-container-padding-xl": padding?.xl,
     } as React.CSSProperties;
 
     return (

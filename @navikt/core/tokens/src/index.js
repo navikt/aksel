@@ -4,10 +4,11 @@ const getFontSize = (size) => `${size / baseFontSize}rem`;
 module.exports = {
   a: {
     breakpoint: {
-      xs: { value: "30rem" },
-      sm: { value: "48rem" },
-      md: { value: "64rem" },
-      lg: { value: "80rem" },
+      xs: { value: "0" },
+      sm: { value: "30rem" },
+      md: { value: "48rem" },
+      lg: { value: "64rem" },
+      xl: { value: "80rem" },
     },
   },
   navds: {

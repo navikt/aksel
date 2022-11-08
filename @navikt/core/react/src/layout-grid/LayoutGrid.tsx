@@ -14,6 +14,7 @@ export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
     sm?: string;
     md?: string;
     lg?: string;
+    xl?: string;
   };
   /**
    * Overrides columns at breakpoints
@@ -24,6 +25,7 @@ export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
     sm?: number;
     md?: number;
     lg?: number;
+    xl?: number;
   };
   /**
    * defines grid-areas
@@ -33,6 +35,7 @@ export interface LayoutGridProps extends React.HTMLAttributes<HTMLDivElement> {
     sm?: string[];
     md?: string[];
     lg?: string[];
+    xl?: string[];
   };
 }
 
@@ -70,14 +73,17 @@ export const LayoutGridComp: OverridableComponent<
       "--ac-layout-grid-areas-sm": formatAreas(areas?.sm),
       "--ac-layout-grid-areas-md": formatAreas(areas?.md),
       "--ac-layout-grid-areas-lg": formatAreas(areas?.lg),
+      "--ac-layout-grid-areas-xl": formatAreas(areas?.xl),
       "--ac-layout-grid-gap-xs": gap?.xs,
       "--ac-layout-grid-gap-sm": gap?.sm,
       "--ac-layout-grid-gap-md": gap?.md,
       "--ac-layout-grid-gap-lg": gap?.lg,
+      "--ac-layout-grid-gap-xl": gap?.xl,
       "--ac-layout-grid-columns-xs": columns?.xs,
       "--ac-layout-grid-columns-sm": columns?.sm,
       "--ac-layout-grid-columns-md": columns?.md,
       "--ac-layout-grid-columns-lg": columns?.lg,
+      "--ac-layout-grid-columns-xl": columns?.xl,
     } as React.CSSProperties;
 
     return (
