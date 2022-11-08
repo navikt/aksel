@@ -66,7 +66,7 @@ const NavItem = ({
                   size="xsmall"
                   variant={
                     item.link.status?.tag === "beta"
-                      ? "alt2"
+                      ? "alt1"
                       : item.link.status?.tag === "deprecated"
                       ? "neutral"
                       : "info"

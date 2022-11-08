@@ -25,10 +25,11 @@ class CustomComponent extends HTMLElement {
           <Checkbox value="tekst">Checkboxtekst</Checkbox>
           <Checkbox value="tekst2">Checkboxtekst</Checkbox>
         </CheckboxGroup>
-        <ModalWrapper />
         <Tooltip content="Skriv ut dokument">
-          <Button>yo!</Button>
+          <Button>Tooltip</Button>
         </Tooltip>
+        <ModalWrapper />
+        <br />
       </Provider>
     );
   }

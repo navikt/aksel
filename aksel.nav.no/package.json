@@ -18,14 +18,14 @@
     "website"
   ],
   "dependencies": {
-    "@navikt/ds-codemod": "^1.5.2",
-    "@navikt/ds-css": "^1.5.2",
-    "@navikt/ds-css-internal": "^1.5.2",
-    "@navikt/ds-icons": "^1.5.2",
-    "@navikt/ds-react": "^1.5.2",
-    "@navikt/ds-react-internal": "^1.5.2",
-    "@navikt/ds-tailwind": "^1.5.2",
-    "@navikt/ds-tokens": "^1.5.2"
+    "@navikt/ds-codemod": "^1.5.6",
+    "@navikt/ds-css": "^1.5.6",
+    "@navikt/ds-css-internal": "^1.5.6",
+    "@navikt/ds-icons": "^1.5.6",
+    "@navikt/ds-react": "^1.5.6",
+    "@navikt/ds-react-internal": "^1.5.6",
+    "@navikt/ds-tailwind": "^1.5.6",
+    "@navikt/ds-tokens": "^1.5.6"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.1.13"

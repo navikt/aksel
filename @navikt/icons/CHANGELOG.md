@@ -1,5 +1,21 @@
 # @navikt/ds-icons
 
+## 1.5.6
+
+## 1.5.5
+
+### Patch Changes
+
+- Error-ikon hadde avrundede kanter
+
+## 1.5.4
+
+### Patch Changes
+
+- [#1709](https://github.com/navikt/Designsystemet/pull/1709) [`77302a30b`](https://github.com/navikt/Designsystemet/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Oppdatert ikoner
+
+## 1.5.3
+
 ## 1.5.2
 
 ## 1.5.1
