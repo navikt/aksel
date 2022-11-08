@@ -149,7 +149,7 @@
 
 .navdsi-timeline__pin__button {
   cursor: pointer;
-  background: #fff;
+  background: var(--navds-global-color-white);
   border: 3px solid var(--navds-global-color-red-500);
   z-index: 2;
   border-radius: var(--navds-border-radius-full);
