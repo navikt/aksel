@@ -43,14 +43,14 @@
   margin-bottom: 0;
 }
 
-.navdsi-timeline__row__periods {
+.navdsi-timeline__row-periods {
   height: var(--navds-font-line-height-large);
   position: relative;
   width: 100%;
   margin: 0;
 }
 
-.navdsi-timeline__row__periods li {
+.navdsi-timeline__row-periods li {
   all: unset;
 }
 

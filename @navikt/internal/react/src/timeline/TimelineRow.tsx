@@ -32,7 +32,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           {...rest}
           ref={ref}
           aria-describedby={`label-${id}`}
-          className="navdsi-timeline__row__periods"
+          className="navdsi-timeline__row-periods"
         >
           {periods &&
             periods.map((period) => {
