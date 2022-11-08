@@ -1,4 +1,3 @@
-import isSaturday from "date-fns/isSaturday";
 import React, { useId, useState } from "react";
 import { UNSAFE_useDatepicker, UNSAFE_useRangeDatepicker } from "..";
 import { Button } from "../..";
@@ -221,8 +220,13 @@ export const UserControlled = () => {
 };
 
 export const Validering = () => {
-  const { datepickerProps, selectedDay, inputProps } = UNSAFE_useDatepicker({
-    fromDate: new Date("Aug 23 2019"),
+  const [error, setError] = useState(false);
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    fromDate: new Date("Aug 2 2019"),
+    onValidate: (val) => setError(val.isWeekend),
+    defaultSelected: new Date("Nov 26 2022"),
+    disableWeekends: true,
+    onDateChange: console.log,
   });
 
   return (
@@ -230,8 +234,8 @@ export const Validering = () => {
       <DatePicker {...datepickerProps}>
         <DatePicker.Input
           error={
-            selectedDay && isSaturday(selectedDay)
-              ? "NAV-kontoret er ikke åpent på lørdager. Velg en annen dag."
+            error
+              ? "NAV-kontoret er ikke åpent i helger. Velg en annen dag."
               : undefined
           }
           {...inputProps}
@@ -257,6 +261,27 @@ export const ErrorInput = () => {
     <div style={{ display: "flex", gap: "1rem" }}>
       <DatePicker>
         <DatePicker.Input error="feilmelding" label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};
+
+export const UseRangedDatepickerValidation = () => {
+  const { datepickerProps, fromInputProps, toInputProps } =
+    UNSAFE_useRangeDatepicker({
+      fromDate: new Date("Aug 23 2019"),
+      disableWeekends: true,
+      disabled: [new Date("Oct 10 2022")],
+      onValidate: console.table,
+    });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps}>
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <DatePicker.Input {...fromInputProps} label="Fra" />
+          <DatePicker.Input {...toInputProps} label="Til" />
+        </div>
       </DatePicker>
     </div>
   );

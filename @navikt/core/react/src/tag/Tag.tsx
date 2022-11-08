@@ -3,19 +3,31 @@ import cl from "clsx";
 import { BodyShort, Detail } from "..";
 
 export interface TagProps extends HTMLAttributes<HTMLSpanElement> {
-  /**
-   * Tag label
-   */
   children: React.ReactNode;
   /**
-   * Changes background and border color
+   * Changes visual profile of tag
    */
-  variant: "warning" | "error" | "info" | "success";
+  variant:
+    | "warning"
+    | "warning-filled"
+    | "error"
+    | "error-filled"
+    | "info"
+    | "info-filled"
+    | "success"
+    | "success-filled"
+    | "neutral"
+    | "neutral-filled"
+    | "alt1"
+    | "alt1-filled"
+    | "alt2"
+    | "alt2-filled"
+    | "alt3"
+    | "alt3-filled";
   /**
-   * Changes padding and font-sizes
    * @default "medium"
    */
-  size?: "medium" | "small";
+  size?: "medium" | "small" | "xsmall";
 }
 
 export const Tag = forwardRef<HTMLSpanElement, TagProps>(
@@ -27,7 +39,7 @@ export const Tag = forwardRef<HTMLSpanElement, TagProps>(
         {...rest}
         ref={ref}
         as="span"
-        size={size}
+        size={size === "medium" ? "medium" : "small"}
         className={cl(
           "navds-tag",
           className,

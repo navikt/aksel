@@ -1,9 +1,7 @@
 import { capitalize, Snippet } from "@/components";
 import { withErrorBoundary } from "@/error-boundary";
 import { SanityT } from "@/lib";
-import { SuccessStroke } from "@navikt/ds-icons";
-import { BodyLong, Link } from "@navikt/ds-react";
-import * as Tabs from "@radix-ui/react-tabs";
+import { BodyLong, Link, Chips } from "@navikt/ds-react";
 import cl from "classnames";
 import { useEffect, useState } from "react";
 import { CodeSandbox } from "./CodeSandbox";
@@ -57,8 +55,6 @@ const ComponentExamples = ({
       str
         .replace(/[^\w]|_/g, " ")
         .replace(/\s+/g, " ")
-        .match(/\D/g)
-        .join("")
         .trim()
     ) ?? str;
 
@@ -107,51 +103,46 @@ const ComponentExamples = ({
     );
   }
 
+  const active = activeExample ?? node?.dir?.filer?.[0]?.navn;
+
   return (
-    <>
-      <Tabs.Root
-        defaultValue={node.dir.filer[0].navn}
-        onValueChange={(v) => setActiveExample(v)}
-      >
-        <Tabs.List className="mb-5 flex max-w-xl flex-wrap gap-2">
+    <div>
+      <div className="mb-5 max-w-xl">
+        <Chips>
           {node.dir.filer.map((fil) => {
             return (
-              <Tabs.Trigger
+              <Chips.Toggle
                 key={fil._key}
                 value={fil.navn}
-                className={cl(
-                  "flex h-8 items-center justify-center rounded-full text-base ring-inset ring-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-800",
-                  {
-                    "gap-1 bg-gray-200 pr-3 pl-[10px] ring-2 hover:bg-gray-100":
-                      activeExample === fil.navn,
-                    "bg-white px-3 ring-1 hover:bg-gray-100":
-                      activeExample !== fil.navn,
-                  }
-                )}
+                selected={active === fil.navn}
+                onClick={() => setActiveExample(fil.navn)}
               >
-                {activeExample === fil.navn && (
-                  <SuccessStroke aria-hidden className="h-6 w-6" />
-                )}
                 {fixName(fil.navn)}
-              </Tabs.Trigger>
+              </Chips.Toggle>
             );
           })}
-        </Tabs.List>
-        {node.dir.filer.map((fil) => {
-          return (
-            <Tabs.Content key={fil._key} value={fil.navn} tabIndex={-1}>
-              {fil?.description && (
-                <BodyLong className="mb-2">{fil.description}</BodyLong>
-              )}
-              {element(
-                `/eksempler/${node.dir.title}/${fil.navn.replace(".tsx", "")}`,
-                fil.innhold
-              )}
-            </Tabs.Content>
-          );
-        })}
-      </Tabs.Root>
-    </>
+        </Chips>
+      </div>
+      {node.dir.filer.map((fil) => {
+        return (
+          <div
+            key={fil._key}
+            className={cl({
+              visible: active === fil.navn,
+              hidden: active !== fil.navn,
+            })}
+          >
+            {fil?.description && (
+              <BodyLong className="mb-2">{fil.description}</BodyLong>
+            )}
+            {element(
+              `/eksempler/${node.dir.title}/${fil.navn.replace(".tsx", "")}`,
+              fil.innhold
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 };
 
