@@ -253,7 +253,9 @@ export const useRangeDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) => {
-      if (!e?.target || !e?.target?.nodeType) {
+      /* Workaround for shadow-dom users (open) */
+      const composed = e.composedPath?.()?.[0];
+      if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
       ![
@@ -262,7 +264,9 @@ export const useRangeDatepicker = (
         inputRefFrom.current,
         inputRefTo.current?.nextSibling,
         inputRefFrom.current?.nextSibling,
-      ].some((element) => element?.contains(e.target)) &&
+      ].some(
+        (element) => element?.contains(e.target) || element?.contains(composed)
+      ) &&
         open &&
         setOpen(false);
     },

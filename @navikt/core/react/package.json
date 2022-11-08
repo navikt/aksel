@@ -1,6 +1,6 @@
 {
   "name": "@navikt/ds-react",
-  "version": "1.5.5",
+  "version": "1.5.6",
   "description": "NAV designsystem react components",
   "author": "NAV Designsystem team",
   "license": "MIT",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "0.9.2",
-    "@navikt/ds-icons": "^1.5.5",
+    "@navikt/ds-icons": "^1.5.6",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",
