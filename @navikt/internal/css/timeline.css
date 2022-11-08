@@ -114,7 +114,7 @@
   background: var(--navds-global-color-gray-100);
 }
 
-.navdsi-timeline__period[data-clickable]:hover {
+.navdsi-timeline__period[data-clickable] {
   cursor: pointer;
 }
 
