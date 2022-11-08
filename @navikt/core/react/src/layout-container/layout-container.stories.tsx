@@ -91,117 +91,6 @@ DemoLayout.parameters = {
   layout: "fullscreen",
 };
 
-export const DemoLayout2 = () => {
-  return (
-    <>
-      <div className="wrapper">
-        <header className="header">
-          <LayoutContainer fluid padding={{ sm: "0", md: "0", lg: "0" }}>
-            Home
-          </LayoutContainer>
-        </header>
-        <LayoutContainer fluid padding={{ sm: "0", md: "0", lg: "0" }}>
-          <LayoutGrid
-            columns={{ xs: 1, sm: 1, md: 4, lg: 4 }}
-            areas={{
-              xs: ["content"],
-              md: ["sidebar content content content"],
-            }}
-            className="spacer"
-          >
-            <LayoutGrid.Cell className="sidebar" area="sidebar">
-              <ul>
-                <li>link</li>
-                <li>link</li>
-                <li>link</li>
-                <li>link</li>
-                <li>link</li>
-                <li>link</li>
-                <li>link</li>
-              </ul>
-            </LayoutGrid.Cell>
-            <LayoutGrid.Cell className="content" area="content">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Molestiae doloremque harum optio rerum ad quasi asperiores
-                voluptates pariatur ratione magni quas labore consequatur culpa
-                dolorum laborum quod sequi, obcaecati cumque.
-              </p>
-            </LayoutGrid.Cell>
-          </LayoutGrid>
-        </LayoutContainer>
-        <style>{`
-      .wrapper{
-        background: #f7f7f7;
-        min-height: 100vh;
-      }
-      .header{
-        background: #262626;
-        color: white;
-        height: 3rem;
-        display: flex;
-        align-items: center;
-      }
-      .spacer{
-        margin-top: 4rem;
-      }
-      .content{
-        background: blanchedalmond;
-        height: 100vh;
-        max-width: 600px;
-        padding:2rem;
-      }
-      .sidebar {
-        background: blanchedalmond;
-        height: 100vh;
-        display: none;
-        padding:2rem;
-      }
-      @media (min-width: 64rem){
-        .sidebar {
-          display: block;
-        }
-      }
-      `}</style>
-      </div>
-    </>
-  );
-};
-
-DemoLayout2.parameters = {
-  layout: "fullscreen",
-};
-
 export const MoteDemo = () => {
   return (
     <>
@@ -271,82 +160,53 @@ MoteDemo.parameters = {
   layout: "fullscreen",
 };
 
-export const MoteDemo2 = () => {
+export const CellDemo = () => {
   return (
     <>
       <div className="wrapper">
+        <div className="desc desc-xs">xs: 0-30rem (0 - 479px)</div>
+        <div className="desc desc-sm">sm: 30-48rem (480 - 767px)</div>
+        <div className="desc desc-md">md: 48-64rem (768 - 1023px)</div>
+        <div className="desc desc-lg">lg: 64-80rem (1024 - 1279px)</div>
+        <div className="desc desc-xl">
+          xl: 80rem-Infinity (1280px - Infinity)
+        </div>
         <LayoutContainer fluid={false}>
           <LayoutGrid>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
-            <LayoutGrid.Cell
-              className="content"
-              colSpan={{ xs: 1, sm: 1, md: 1, lg: 1 }}
-            >
+            <LayoutGrid.Cell className="content" colSpan={{ xs: 1 }}>
               {" "}
             </LayoutGrid.Cell>
           </LayoutGrid>
@@ -356,29 +216,72 @@ export const MoteDemo2 = () => {
         background: #f7f7f7;
         min-height: 100vh;
       }
+      .desc {
+        padding: 0.25rem 1rem;
+      }
       .content{
         background: #A69CAC;
         height: 100vh;
         width: 100%;
       }
+      .desc-sm,.desc-md,.desc-lg,.desc-xl {
+        display: none;
+      }
+
+      @media (min-width: 30rem) {
+        .content{
+          background: #49dcb1;
+        }
+        .desc-xs {
+          display: none;
+        }
+        .desc-sm {
+          display: block;
+        }
+      }
+
       @media (min-width: 48rem) {
         .content{
-          /* 768px */
           background: #474973;
+        }
+        .desc-sm {
+          display: none;
+        }
+        .desc-md {
+          display: block;
         }
       }
 
       @media (min-width: 64rem) {
         .content{
-          /* 1024px */
           background: #ffb30f;
+        }
+        .desc-sm {
+          display: none;
+        }
+        .desc-md {
+          display: none;
+        }
+        .desc-lg {
+          display: block;
         }
       }
 
       @media (min-width: 80rem) {
         .content{
-          /* 1280px */
           background: #2c666e;
+        }
+        .desc-sm {
+          display: none;
+        }
+        .desc-md {
+          display: none;
+        }
+        .desc-lg {
+          display: none;
+        }
+        .desc-xl {
+          display: block;
         }
       }
       `}</style>
@@ -387,6 +290,6 @@ export const MoteDemo2 = () => {
   );
 };
 
-MoteDemo2.parameters = {
+CellDemo.parameters = {
   layout: "fullscreen",
 };
