@@ -6,7 +6,7 @@ import {
   subMonths,
   subYears,
 } from "date-fns";
-import React, { forwardRef } from "react";
+import React, { forwardRef, useState } from "react";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 
 export interface ZoomButtonProps {
@@ -32,6 +32,7 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
   ({ label, interval, count, ...rest }, ref) => {
     const { setStart, endDate, startDate, direction } = useTimelineContext();
     let startOfRange: Date;
+    const [focused, setFocused] = useState(false);
 
     if (interval === "month") {
       startOfRange =
@@ -51,7 +52,7 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
         : isSameDay(endDate, startOfRange);
 
     return (
-      <li>
+      <li data-focused={focused}>
         <button
           aria-label={
             !currentZoom
@@ -69,6 +70,12 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
           }}
           data-current-zoom={currentZoom}
           aria-pressed={currentZoom}
+          onFocus={() => {
+            setFocused(true);
+          }}
+          onBlur={() => {
+            setFocused(false);
+          }}
         >
           {label}
         </button>

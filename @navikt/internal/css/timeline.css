@@ -175,7 +175,7 @@
 .navdsi-timeline__zoom__button {
   all: unset;
   cursor: pointer;
-  padding: 6px 8px;
+  padding: 6px 9px 6px 8px;
   font-size: var(--navds-font-size-small);
   border: 1px solid var(--navds-global-color-gray-500);
   border-width: 1px 0 1px 1px;
@@ -204,11 +204,19 @@
   color: #fff;
 }
 
-.navdsi-timeline__zoom__button:focus,
 .navdsi-timeline__period:focus {
   outline: none;
   z-index: 4;
   box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+}
+
+.navdsi-timeline__zoom li[data-focused="true"] {
+  z-index: var(--navds-z-index-focus);
+}
+
+.navdsi-timeline__zoom__button:focus {
+  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background-hover), 0 0 0 4px var(--navds-semantic-color-focus);
+  border-width: 1px;
 }
 
 .navdsi-timeline__zoom li:not(:last-child) .navdsi-timeline__zoom__button:focus {
