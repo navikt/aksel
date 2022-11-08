@@ -50,7 +50,7 @@
   margin: 0;
 }
 
-.navdsi-timeline__row-periods li {
+.navdsi-timeline__row-periods > li {
   all: unset;
 }
 
