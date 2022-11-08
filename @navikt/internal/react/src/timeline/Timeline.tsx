@@ -151,11 +151,11 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           })}
         </div>
         {zoomButtons && (
-          <div className="navdsi-timeline__zoom">
+          <ul className="navdsi-timeline__zoom">
             {zoomButtons.map((zoom) => {
               return zoom;
             })}
-          </div>
+          </ul>
         )}
       </TimelineContext.Provider>
     );

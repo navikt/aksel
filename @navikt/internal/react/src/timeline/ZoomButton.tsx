@@ -51,25 +51,28 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
         : isSameDay(endDate, startOfRange);
 
     return (
-      <button
-        aria-label={
-          !currentZoom
-            ? `Zoom tidslinjen ${format(
-                startOfRange,
-                "dd.MM.yyyy"
-              )} til ${format(endDate, "dd.MM.yyyy")}`
-            : "Tilbakestill til initiell tidsperspektiv"
-        }
-        ref={ref}
-        {...rest}
-        className="navdsi-timeline__zoom__button"
-        onClick={() => {
-          setStart(startOfRange);
-        }}
-        data-current-zoom={currentZoom}
-      >
-        {label}
-      </button>
+      <li>
+        <button
+          aria-label={
+            !currentZoom
+              ? `Zoom tidslinjen ${format(
+                  startOfRange,
+                  "dd.MM.yyyy"
+                )} til ${format(endDate, "dd.MM.yyyy")}`
+              : "Tilbakestill til initiell tidsperspektiv"
+          }
+          ref={ref}
+          {...rest}
+          className="navdsi-timeline__zoom__button"
+          onClick={() => {
+            setStart(startOfRange);
+          }}
+          data-current-zoom={currentZoom}
+          aria-pressed={currentZoom}
+        >
+          {label}
+        </button>
+      </li>
     );
   }
 );
