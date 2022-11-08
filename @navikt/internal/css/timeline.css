@@ -105,12 +105,12 @@
   background: var(--navds-global-color-lightblue-100);
 }
 
-.navdsi-timeline__period--default {
+.navdsi-timeline__period--neutral {
   background: var(--navds-global-color-gray-50);
   box-shadow: inset 0 0 0 1px var(--navds-global-color-gray-600);
 }
 
-.navdsi-timeline__period--default[data-clickable]:hover {
+.navdsi-timeline__period--neutral[data-clickable]:hover {
   background: var(--navds-global-color-gray-100);
 }
 

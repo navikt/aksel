@@ -20,9 +20,9 @@ export interface PeriodPropsWrapper
   icon?: ReactNode;
   /**
    * Period status.
-   * @default "default"
+   * @default "neutral"
    */
-  status?: "success" | "warning" | "danger" | "information" | "default";
+  status?: "success" | "warning" | "danger" | "information" | "neutral";
   /**
    * Callback when selecting a period.
    */
@@ -85,7 +85,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         buttonRef={periodRef as RefObject<HTMLButtonElement>}
         start={start}
         end={endInclusive}
-        status={status || "default"}
+        status={status || "neutral"}
         onSelectPeriod={onSelectPeriod}
         cropped={cropped || ""}
         direction={direction}
@@ -100,7 +100,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         divRef={periodRef as RefObject<HTMLDivElement>}
         start={start}
         end={endInclusive}
-        status={status || "default"}
+        status={status || "neutral"}
         cropped={cropped || ""}
         direction={direction}
         width={width}

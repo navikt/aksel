@@ -88,7 +88,7 @@ const row2 = [
     id: "8",
     start: new Date("Feb 1 2022"),
     end: new Date("May 2 2022"),
-    status: "default",
+    status: "neutral",
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
     icon: <SuccessFilled aria-hidden />,
     children: <DummyLabel />,

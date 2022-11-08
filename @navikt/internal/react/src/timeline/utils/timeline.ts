@@ -19,7 +19,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           periods.push({
             start: p?.props?.start,
             end: p?.props?.end,
-            status: p?.props?.status || "default",
+            status: p?.props?.status || "neutral",
             onSelectPeriod: p.props?.onSelectPeriod,
             label: r.props.label,
             icon: p.props.icon,
@@ -31,7 +31,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
         periods.push({
           start: r.props.children.props.start,
           end: r.props.children.props.end,
-          status: r.props.children.props?.status || "default",
+          status: r.props.children.props?.status || "neutral",
           onSelectPeriod: r.props.children.props?.onSelectPeriod,
           label: r.props.label,
           icon: r.props.children.props?.icon,

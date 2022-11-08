@@ -5,7 +5,7 @@ export type PeriodStatus =
   | "warning"
   | "danger"
   | "information"
-  | "default";
+  | "neutral";
 export type Percentage = number;
 
 export interface Positioned {
