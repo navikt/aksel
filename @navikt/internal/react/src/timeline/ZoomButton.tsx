@@ -68,7 +68,6 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
           onClick={() => {
             setStart(startOfRange);
           }}
-          data-current-zoom={currentZoom}
           aria-pressed={currentZoom}
           onFocus={() => {
             setFocused(true);
