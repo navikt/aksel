@@ -69,8 +69,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       (c: any) => c?.type?.componentType === "zoom"
     );
 
-    //TO-DO: Selected period.
-
     const rowsRaw = useMemo(() => {
       return parseRows(rowChildren);
     }, [rowChildren]);
@@ -141,7 +139,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                 {row.label && (
                   <span
                     id={`label-${row.id}`}
-                    className="navdsi-timeline__row__label"
+                    className="navdsi-timeline__row-label"
                   >
                     {row.icon}
                     {row.label}
