@@ -1,3 +1,8 @@
 .test {
   @apply bg-surface-inverted text-surface-action-subtle-hover/20;
 }
+
+.test2 {
+  color: var(--a-text-subtle);
+  border: 1px solid var(--a-border-focus);
+}

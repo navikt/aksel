@@ -25,19 +25,19 @@ p.override-text-no-max {
 }
 
 .dynamic-wrapper {
-  @apply mx-auto max-w-aksel xs:w-[90%];
+  @apply max-w-aksel xs:w-[90%] mx-auto;
 }
 
 .dynamic-wrapper-prose {
-  @apply mx-auto max-w-prose xs:w-[90%];
+  @apply xs:w-[90%] mx-auto max-w-prose;
 }
 
 .dynamic-wrapper-left {
-  @apply max-w-prose xs:w-[90%];
+  @apply xs:w-[90%] max-w-prose;
 }
 
 .dynamic-wrapper-2xl {
-  @apply mx-auto max-w-2xl xs:w-[90%];
+  @apply xs:w-[90%] mx-auto max-w-2xl;
 }
 
 .card-grid-3-1 {
@@ -61,11 +61,8 @@ p.override-text-no-max {
 
 .aksel-artikkel .aksel-list-ol li::before {
   counter-increment: li;
-}
-
-.aksel-artikkel .aksel-list-ol li::before {
   content: counter(li) ". ";
-  color: var(--navds-global-color-deepblue-800);
+  color: var(--a-deepblue-800);
   display: inline-block;
   width: 1em;
   margin-left: -1em;

@@ -27,8 +27,10 @@ export default function transformer(file, api) {
 
   [...duplicateText, ...colors].forEach((tok) => {
     const rgx = new RegExp("(" + tok[0] + ")", "gm");
-    console.log(tok);
-    src = src.replace(rgx, tok[1]);
+    const rgxNested = new RegExp("(" + tok[0] + "[-])", "gm");
+    if (!src.match(rgxNested)) {
+      src = src.replace(rgx, tok[1]);
+    }
   });
 
   return src;

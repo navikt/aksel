@@ -12,13 +12,13 @@ pre {
 }
 
 .navds-alert code {
-  color: var(--navds-global-color-red-500);
+  color: var(--a-red-500);
   background-color: transparent;
   padding: 0;
 }
 
 p {
-  @apply max-w-text;
+  @apply max-w-text-default;
 }
 
 .aksel-artikkel p {
