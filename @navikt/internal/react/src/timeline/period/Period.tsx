@@ -51,6 +51,7 @@ export interface PeriodProps {
   left: Number;
   icon?: ReactNode;
   children?: ReactNode;
+  statusLabel?: string;
 }
 
 export interface PeriodType
@@ -82,7 +83,9 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       direction,
       children,
       isActive,
+      statusLabel,
     } = period;
+    console.log(statusLabel);
 
     return onSelectPeriod || children ? (
       <ClickablePeriod

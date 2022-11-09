@@ -24,6 +24,7 @@ export interface Period {
   children?: ReactNode;
   end: Date;
   isActive?: boolean;
+  statusLabel?: string;
 }
 
 export interface PositionedPeriod extends Period, Positioned {

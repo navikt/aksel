@@ -49,6 +49,7 @@ const spatialPeriod = (
     icon: period.icon,
     children: period.children,
     isActive: period.isActive,
+    statusLabel: period.statusLabel,
   };
 };
 

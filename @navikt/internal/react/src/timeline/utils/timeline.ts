@@ -25,6 +25,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
             icon: p.props.icon,
             children: p.props.children,
             isActive: p.props.isActive,
+            statusLabel: p.props.statusLabel,
           });
         }
       } else {
@@ -36,6 +37,7 @@ export const parseRows = (rowChildren: ReactNode[]) => {
           label: r.props.label,
           icon: r.props.children.props?.icon,
           children: r.props.children.props?.children,
+          statusLabel: r.props.children.props?.statusLabel,
         });
       }
       parsedChildren.push({

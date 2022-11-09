@@ -33,6 +33,7 @@ export interface PositionedPeriod extends Period, Positioned {
   hoverLabel?: ReactNode;
   infoPin?: boolean;
   end: Date;
+  statusLabel?: string;
 }
 
 export interface Spatial {
