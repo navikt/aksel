@@ -24,6 +24,7 @@ const ClickablePeriod = React.memo(
     icon,
     children,
     isActive,
+    statusLabel,
   }: ClickablePeriodProps) => {
     const [selected, setSelected] = useState(false);
 
@@ -38,7 +39,7 @@ const ClickablePeriod = React.memo(
           onClick={() => {
             onSelectPeriod?.();
           }}
-          aria-label={ariaLabel(start, end, status)}
+          aria-label={ariaLabel(start, end, status, statusLabel)}
           className={cl(getConditionalClasses(cropped, direction, status), {
             "navdsi-timeline__period--selected": isActive,
           })}

@@ -101,6 +101,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         icon={icon}
         children={children}
         isActive={isActive}
+        statusLabel={statusLabel}
       />
     ) : (
       <NonClickablePeriod
@@ -113,6 +114,7 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
         width={width}
         left={horizontalPosition}
         icon={icon}
+        statusLabel={statusLabel}
       />
     );
   }

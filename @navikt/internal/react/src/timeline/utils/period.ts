@@ -20,9 +20,10 @@ export const getConditionalClasses = (
 export const ariaLabel = (
   startDate: Date,
   endDate: Date,
-  status: String
+  status: String,
+  statusLabel?: string
 ): string => {
   const start = format(startDate, "dd.MM.yyyy");
   const end = format(endDate, "dd.MM.yyyy");
-  return `${status} fra ${start} til ${end}`;
+  return `${status}, ${statusLabel && statusLabel} fra ${start} til ${end}`;
 };
