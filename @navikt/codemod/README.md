@@ -2,7 +2,7 @@
 
 Collection of Codemods for easier migration between breaking changes.
 
-Highly inspired by both MUI and NEXT
+Inspired by both MUI and NEXT
 
 - [NEXT](https://nextjs.org/docs/advanced-features/codemods)
 - [MUI](https://github.com/mui/material-ui/tree/master/packages/mui-codemod)
@@ -11,34 +11,35 @@ Highly inspired by both MUI and NEXT
 
 Codemod transformations runs code-transformations programmatically in your project. This helps when migrating lots of breaking changes without spending hours doing it manually.
 
-NOTE: This codemod only supports fairly "default" usage of components. Components used with dynamic imports, styled-components, non-default imports (example `import * as DS from "@navikt/ds-react"` or `from "@navikt/ds-react/cjs"`) will not work as expected.
+NOTE: This codemod only supports fairly "default" usage of components. Components used with dynamic imports, styled-components, non-default imports (example `import * as DS from "@navikt/ds-react"` or `from "@navikt/ds-react/cjs"`) can lead to bugs when using codemod.
 
 ```javascript
-npx @navikt/ds-codemod <transform> <path>
+npx @navikt/ds-codemod <migration> <path>
 ```
 
 transform - name of transform, see available transforms below.
 path - files or directory to transform
 --dry Do a dry-run, no code will be edited
 --print Prints the changed output for comparison
+--force Runs even if there are uncommited changes
 
-## Beta (0.19.x) -> v1.0.0
+## Beta (0.19.x) -> v1
 
-`npx @navikt/ds-codemod v1.0.0/preset src`
+`npx @navikt/ds-codemod v1/preset src`
 
 ### preset
 
-Combines all avaliable codemods for migrating from beta -> v1.0.0. This transform should only be ran once.
+Combines all avaliable codemods for migrating from beta -> v1. This transform should only be ran once.
 
 Includes these transforms
 
-- v1.0.0/tabs
-- v1.0.0/chat
-- v1.0.0/pagination
+- v1/tabs
+- v1/chat
+- v1/pagination
 
 ### tabs
 
-`npx @navikt/ds-codemod v1.0.0/tabs src`
+`npx @navikt/ds-codemod v1/tabs src`
 
 ```diff
 <Tabs
@@ -62,7 +63,7 @@ Includes these transforms
 
 ### chat
 
-`npx @navikt/ds-codemodmod v1.0.0/chat src`
+`npx @navikt/ds-codemodmod v1/chat src`
 
 ```diff
 -<SpeechBubble
@@ -86,7 +87,7 @@ Includes these transforms
 
 ### pagination
 
-`npx @navikt/ds-codemod v1.0.0/pagination src`
+`npx @navikt/ds-codemod v1/pagination src`
 
 This codemod should only be ran once, since the size-scale will keep decreasing for each subsequent iteration.
 

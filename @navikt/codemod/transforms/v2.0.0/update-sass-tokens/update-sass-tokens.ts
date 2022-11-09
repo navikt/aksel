@@ -1,11 +1,11 @@
 import { translateToken } from "../../../utils/translate-token";
-import { tokens } from "../update-css-tokens/update-css-tokens";
+import { tokens } from "../../../tokens-map.mjs";
 
 /**
  * @param {import('jscodeshift').FileInfo} file
  * @param {import('jscodeshift').API} api
  */
-export default function transformer(file) {
+export default function transformer(file, api) {
   let src = file.source;
 
   tokens.forEach((tok) => {

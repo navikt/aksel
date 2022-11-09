@@ -20,26 +20,26 @@ html,
 :root,
 :host,
 [data-theme="light"] {
-  --navds-shadow-focus: 0 0 0 3px var(--navds-semantic-color-focus);
+  --a-shadow-focus: 0 0 0 3px var(--a-border-focus);
 
-  color: var(--navds-semantic-color-text);
+  color: var(--a-text-default);
 }
 
 [data-theme="dark"] {
-  --navds-shadow-focus: var(--navds-shadow-focus-inverted);
+  --a-shadow-focus: var(--a-shadow-focus-inverted);
 
-  color: var(--navds-semantic-color-text-inverted);
+  color: var(--a-text-on-inverted);
 }
 
 body,
 :host {
-  font-family: var(--navds-font-family, "Source Sans Pro", Arial, sans-serif);
+  font-family: var(--a-font-family, "Source Sans Pro", Arial, sans-serif);
   line-height: 1.333;
   font-size: 1.125rem;
 }
 
 a {
-  color: var(--navds-semantic-color-link);
+  color: var(--a-semantic-color-link);
 }
 
 button {

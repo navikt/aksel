@@ -4,7 +4,7 @@ Design-tokens used when implementing @navikt/ds-css. This package is consumed by
 
 Formats
 
-- CSS-variables <- @navikt/ds-css uses this
+- CSS-variables <- Used in `@navikt/ds-css`
 - Commonjs
 - ESM
 - Less
@@ -27,8 +27,8 @@ Install `@navikt/ds-tokens` with npm
 ## Usage
 
 ```css
-color: var(--navds-global-color-gray-900);
-backgroundcolor: var(--navds-global-color-gray-50);
+color: var(--a-text-default);
+backgroundcolor: var(--a-surface-default);
 ```
 
 ## Learn more

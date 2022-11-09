@@ -9,11 +9,11 @@
 }
 
 .navds-tooltip {
-  z-index: var(--navds-z-index-tooltip);
-  background-color: var(--navds-semantic-color-component-background-inverted);
-  color: var(--navds-semantic-color-text-inverted);
-  border-radius: var(--navds-border-radius-small);
-  padding: 0 var(--navds-spacing-2);
+  z-index: var(--a-z-index-tooltip);
+  background-color: var(--ac-tooltip-bg, var(--a-surface-inverted));
+  color: var(--ac-tooltip-text, var(--a-text-on-inverted));
+  border-radius: var(--a-border-radius-small);
+  padding: 0 var(--a-spacing-2);
   align-items: center;
   filter: drop-shadow(0 2px 4px rgba(0 0 0 / 0.1)) drop-shadow(0 4px 6px rgba(0 0 0 / 0.1));
   display: flex;
@@ -29,22 +29,22 @@
   width: 7px;
   transform: rotate(45deg);
   z-index: -1;
-  background-color: var(--navds-semantic-color-component-background-inverted);
+  background-color: var(--ac-tooltip-bg, var(--a-surface-inverted));
   position: absolute;
 }
 
 .navds-tooltip__keys {
-  padding-bottom: var(--navds-spacing-1);
+  padding-bottom: var(--a-spacing-1);
   display: flex;
-  gap: var(--navds-spacing-1);
+  gap: var(--a-spacing-1);
 }
 
 .navds-tooltip__key {
-  font-family: var(--navds-font-family);
-  background-color: var(--navds-global-color-gray-700);
-  color: var(--navds-semantic-color-text-inverted);
-  border-radius: var(--navds-border-radius-small);
-  padding: 0 var(--navds-spacing-1);
+  font-family: var(--a-font-family);
+  background-color: var(--ac-tooltip-key-bg, var(--a-surface-neutral));
+  color: var(--ac-tooltip-key-text, var(--a-text-on-inverted));
+  border-radius: var(--a-border-radius-small);
+  padding: 0 var(--a-spacing-1);
   min-width: 18px;
   height: 18px;
   display: inline-flex;

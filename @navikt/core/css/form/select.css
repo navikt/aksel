@@ -1,19 +1,8 @@
-:root,
-:host {
-  --navds-select-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-select-color-border: var(--navds-semantic-color-border);
-  --navds-select-color-border-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-select-color-border-error: var(--navds-semantic-color-interaction-danger);
-  --navds-select-color-shadow-error: var(--navds-semantic-color-interaction-danger);
-  --navds-select-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-select-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
-}
-
 .navds-select__input {
   appearance: none;
-  background-color: var(--navds-select-color-background);
-  border-radius: var(--navds-border-radius-medium);
-  border: 1px solid var(--navds-select-color-border);
+  background-color: var(--ac-select-bg, var(--a-surface-default));
+  border-radius: var(--a-border-radius-medium);
+  border: 1px solid var(--ac-select-border, var(--a-border-strong));
   width: 100%;
   box-sizing: border-box;
   min-height: 48px;
@@ -24,12 +13,12 @@
 }
 
 .navds-select__input:hover {
-  border-color: var(--navds-select-color-border-hover);
+  border-color: var(--ac-select-hover-bg, var(--a-border-action));
 }
 
 .navds-select__input:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-select__container {
@@ -37,7 +26,7 @@
   display: flex;
   width: 100%;
   align-items: center;
-  color: var(--navds-semantic-color-text);
+  color: var(--a-text-default);
 }
 
 .navds-select__chevron {
@@ -57,13 +46,13 @@
   Error handling
 */
 .navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-select-color-shadow-error);
-  border-color: var(--navds-select-color-border-error);
+  box-shadow: 0 0 0 1px var(--ac-select-error-border, var(--a-surface-danger));
+  border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
 
 .navds-select__input:disabled {
-  background-color: var(--navds-select-color-background);
-  border-color: var(--navds-select-color-border);
+  background-color: var(--ac-select-bg, var(--a-surface-default));
+  border: 1px solid var(--ac-select-border, var(--a-border-strong));
   box-shadow: none;
   cursor: not-allowed;
 }

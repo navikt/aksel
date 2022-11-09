@@ -2,7 +2,7 @@ const baseFontSize = 16;
 const getFontSize = (size) => `${size / baseFontSize}rem`;
 
 module.exports = {
-  navds: {
+  a: {
     font: {
       family: { value: '"Source Sans Pro", Arial, sans-serif' },
       line: {

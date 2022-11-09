@@ -19,12 +19,8 @@ const Border = ({ token }) => (
   </>
 );
 
-export const Small = () => <Border token="var(--navds-border-radius-small)" />;
-export const Medium = () => (
-  <Border token="var(--navds-border-radius-medium)" />
-);
-export const Large = () => <Border token="var(--navds-border-radius-large)" />;
-export const xLarge = () => (
-  <Border token="var(--navds-border-radius-xlarge)" />
-);
-export const Full = () => <Border token="var(--navds-border-radius-full)" />;
+export const Small = () => <Border token="var(--a-border-radius-small)" />;
+export const Medium = () => <Border token="var(--a-border-radius-medium)" />;
+export const Large = () => <Border token="var(--a-border-radius-large)" />;
+export const xLarge = () => <Border token="var(--a-border-radius-xlarge)" />;
+export const Full = () => <Border token="var(--a-border-radius-full)" />;

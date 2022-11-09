@@ -52,8 +52,8 @@ export const Farger = () => {
       avatar="ON"
       name="Ola Normann"
       timestamp="01.01.21 14:00"
-      avatarBgColor="var(--navds-global-color-lightblue-200)"
-      backgroundColor="var(--navds-global-color-lightblue-100)"
+      avatarBgColor="var(--a-lightblue-200)"
+      backgroundColor="var(--a-lightblue-100)"
     >
       <Chat.Bubble>
         Aute minim nisi sunt mollit duis sunt nulla minim non proident.
