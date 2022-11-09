@@ -44,13 +44,13 @@
           "value": "{a.gray.900.value}"
         },
         "alt1": {
-          "inverted": { "value": "{a.white.value}" }
+          "value": "{a.white.value}"
         },
         "alt2": {
-          "inverted": { "value": "{a.white.value}" }
+          "value": "{a.gray.900.value}"
         },
         "alt3": {
-          "inverted": { "value": "{a.white.value}" }
+          "value": "{a.white.value}"
         }
       }
     },
@@ -247,13 +247,13 @@
         }
       },
       "alt1": {
-        "inverted": { "value": "{a.purple.400.value}" }
+        "value": "{a.purple.400.value}"
       },
       "alt2": {
-        "inverted": { "value": "{a.limegreen.400.value}" }
+        "value": "{a.limegreen.400.value}"
       },
       "alt3": {
-        "inverted": { "value": "{a.deepblue.500.value}" }
+        "value": "{a.deepblue.500.value}"
       }
     },
     "icon": {
