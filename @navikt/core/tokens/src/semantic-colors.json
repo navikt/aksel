@@ -242,7 +242,7 @@
       },
       "on": {
         "inverted": {
-          "@": { "value": "{a.white.value}" },
+          "@": { "value": "{a.gray.200.value}" },
           "subtle": { "value": "{a.gray.700.value}" }
         }
       },
