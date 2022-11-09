@@ -11,7 +11,7 @@
   box-sizing: content-box;
   margin-bottom: var(--navds-spacing-4);
   grid-column: 2;
-  margin-left: 2.375rem;
+  margin-left: var(--navds-spacing-8);
 }
 
 .navdsi-timeline__row-label {
@@ -35,7 +35,7 @@
   display: flex;
   background: var(--navds-global-color-gray-50);
   margin: 0 0 var(--navds-spacing-8);
-  padding-left: 2.375rem;
+  padding-left: var(--navds-spacing-8);
   grid-column: 2;
 }
 
