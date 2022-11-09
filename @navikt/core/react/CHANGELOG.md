@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.5.6
+
+### Patch Changes
+
+- Datepicker fungerte ikke med open shadow-dom
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.6
+
 ## 1.5.5
 
 ### Patch Changes
