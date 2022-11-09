@@ -8,7 +8,7 @@ import Reducer from "./reducer";
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
     ...old,
-    [kebabCase(key).replace("a-", "")]: val,
+    [kebabCase(key).replace("a-", "").replace("az-index-", "z-index-")]: val,
   }),
   {}
 );
