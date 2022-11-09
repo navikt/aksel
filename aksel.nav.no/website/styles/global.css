@@ -2,6 +2,7 @@ html {
   /* Remove horizontal jump caused by scrollbar presens on long or short pages */
   overflow-y: scroll;
 }
+
 code,
 pre {
   @apply !font-mono;
@@ -18,7 +19,7 @@ pre {
 }
 
 p {
-  @apply max-w-text-default;
+  @apply max-w-text;
 }
 
 .aksel-artikkel p {
