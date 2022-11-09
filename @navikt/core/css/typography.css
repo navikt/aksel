@@ -1,11 +1,5 @@
-:root,
-:host,
-[data-theme="light"] {
-  --v2-migration__navds-error-message-color-text: var(--a-text-danger);
-}
-
 [data-theme="dark"] {
-  --v2-migration__navds-error-message-color-text: var(--a-red-300);
+  --ac-typo-error-text: var(--a-red-300);
 }
 
 /* Heading */
@@ -193,5 +187,5 @@
 }
 
 .navds-error-message {
-  color: var(--a-text-danger);
+  color: var(--ac-typo-error-text, var(--a-text-danger));
 }
