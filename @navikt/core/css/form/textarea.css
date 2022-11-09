@@ -1,15 +1,15 @@
 :root,
 :host {
-  --navds-textarea-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-textarea-color-border: var(--navds-semantic-color-border);
-  --navds-textarea-color-border-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-textarea-color-border-error: var(--navds-semantic-color-interaction-danger);
-  --navds-textarea-color-shadow-error: var(--navds-semantic-color-interaction-danger);
-  --navds-textarea-color-counter-text: var(--navds-semantic-color-text-muted);
-  --navds-textarea-color-counter-text-error: var(--navds-semantic-color-interaction-danger);
-  --navds-textarea-color-text-disabled: var(--navds-semantic-color-text);
-  --navds-textarea-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-textarea-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
+  --v2-migration__navds-textarea-color-background: var(--a-surface-default);
+  --v2-migration__navds-textarea-color-border: var(--a-border-strong);
+  --v2-migration__navds-textarea-color-border-hover: var(--a-surface-action);
+  --v2-migration__navds-textarea-color-border-error: var(--a-surface-danger);
+  --v2-migration__navds-textarea-color-shadow-error: var(--a-surface-danger);
+  --v2-migration__navds-textarea-color-counter-text: var(--a-text-subtle);
+  --v2-migration__navds-textarea-color-counter-text-error: var(--a-surface-danger);
+  --v2-migration__navds-textarea-color-text-disabled: var(--a-text-default);
+  --v2-migration__navds-textarea-color-border-disabled: var(--a-gray-400);
+  --v2-migration__navds-textarea-color-background-disabled: var(--a-surface-subtle);
 }
 
 .navds-textarea__wrapper {
@@ -19,27 +19,27 @@
 
 .navds-textarea__input {
   appearance: none;
-  padding: var(--navds-spacing-2);
-  background-color: var(--navds-textarea-color-background);
-  border-radius: var(--navds-border-radius-medium);
-  border: 1px solid var(--navds-textarea-color-border);
+  padding: var(--a-spacing-2);
+  background-color: var(--a-surface-default);
+  border-radius: var(--a-border-radius-medium);
+  border: 1px solid var(--a-border-strong);
   resize: none;
   width: 100%;
   display: block;
-  color: var(--navds-text-field-color-text);
+  color: var(--a-text-default);
 }
 
 .navds-textarea--counter {
-  padding-bottom: var(--navds-spacing-8);
+  padding-bottom: var(--a-spacing-8);
 }
 
 .navds-textarea__input:hover {
-  border-color: var(--navds-textarea-color-border-hover);
+  border-color: var(--a-surface-action);
 }
 
 .navds-textarea__input:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-form-field--small .navds-textarea__input {
@@ -47,22 +47,22 @@
 }
 
 .navds-form-field--small .navds-textarea--counter.navds-textarea__input {
-  padding-bottom: var(--navds-spacing-7);
+  padding-bottom: var(--a-spacing-7);
 }
 
 .navds-textarea__counter {
   pointer-events: none;
-  color: var(--navds-textarea-color-counter-text);
+  color: var(--a-text-subtle);
   font-style: italic;
   position: absolute;
   text-align: left;
   left: 1px;
   bottom: 1px;
-  padding: var(--navds-spacing-1) var(--navds-spacing-2);
+  padding: var(--a-spacing-1) var(--a-spacing-2);
 }
 
 .navds-textarea__counter--error {
-  color: var(--navds-textarea-color-counter-text-error);
+  color: var(--a-surface-danger);
 }
 
 .navds-textarea--resize .navds-textarea__input {
@@ -73,20 +73,20 @@
   Error handling
 */
 .navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-textarea-color-shadow-error);
-  border-color: var(--navds-textarea-color-border-error);
+  box-shadow: 0 0 0 1px var(--a-surface-danger);
+  border-color: var(--a-surface-danger);
 }
 
 .navds-textarea__input:disabled {
-  background-color: var(--navds-textarea-color-background);
-  border-color: var(--navds-textarea-color-border);
+  background-color: var(--a-surface-default);
+  border-color: var(--a-border-strong);
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .navds-textarea__input[readonly] {
-  background-color: var(--navds-textarea-color-background);
-  border-color: var(--navds-textarea-color-border);
+  background-color: var(--a-surface-default);
+  border-color: var(--a-border-strong);
   box-shadow: none;
   cursor: not-allowed;
 }

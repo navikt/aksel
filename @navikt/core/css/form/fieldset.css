@@ -6,11 +6,11 @@
 }
 
 .navds-fieldset > :not(:first-child):not(:empty) {
-  margin-top: var(--navds-spacing-2);
+  margin-top: var(--a-spacing-2);
 }
 
 .navds-fieldset > .navds-fieldset__description:not(:empty) {
-  margin-top: var(--navds-spacing-1);
+  margin-top: var(--a-spacing-1);
 }
 
 /* Applied when hideLegend is applied to fieldset */

@@ -1,16 +1,16 @@
 :root,
 :host {
-  --navds-switch-color-label: var(--navds-semantic-color-text);
-  --navds-switch-color-label-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-switch-color-track-background: var(--navds-semantic-color-text-muted);
-  --navds-switch-color-track-background-checked: var(--navds-semantic-color-feedback-success-border);
-  --navds-switch-color-track-background-hover: var(--navds-global-color-gray-800);
-  --navds-switch-color-track-background-hover-checked: var(--navds-semantic-color-feedback-success-icon);
-  --navds-switch-color-track-shadow-inner-focus: var(--navds-semantic-color-component-background-light);
-  --navds-switch-color-thumb: var(--navds-semantic-color-component-background-light);
-  --navds-switch-color-thumb-icon: var(--navds-semantic-color-text-muted);
-  --navds-switch-color-thumb-icon-checked: var(--navds-semantic-color-feedback-success-border);
-  --navds-switch-color-thumb-loader-checked: var(--navds-semantic-color-feedback-success-border);
+  --v2-migration__navds-switch-color-label: var(--a-text-default);
+  --v2-migration__navds-switch-color-label-hover: var(--a-surface-action);
+  --v2-migration__navds-switch-color-track-background: var(--a-text-subtle);
+  --v2-migration__navds-switch-color-track-background-checked: var(--a-border-success);
+  --v2-migration__navds-switch-color-track-background-hover: var(--a-gray-800);
+  --v2-migration__navds-switch-color-track-background-hover-checked: var(--a-icon-success);
+  --v2-migration__navds-switch-color-track-shadow-inner-focus: var(--a-surface-default);
+  --v2-migration__navds-switch-color-thumb: var(--a-surface-default);
+  --v2-migration__navds-switch-color-thumb-icon: var(--a-text-subtle);
+  --v2-migration__navds-switch-color-thumb-icon-checked: var(--a-border-success);
+  --v2-migration__navds-switch-color-thumb-loader-checked: var(--a-border-success);
 }
 
 .navds-switch {
@@ -47,13 +47,13 @@
 /* Label */
 .navds-switch__label-wrapper {
   cursor: pointer;
-  color: var(--navds-switch-color-label);
+  color: var(--a-text-default);
 }
 
 .navds-switch__content {
   display: flex;
   flex-direction: column;
-  gap: var(--navds-spacing-1);
+  gap: var(--a-spacing-1);
   padding: 0.75rem 0 0.75rem 3.25rem;
 }
 
@@ -62,11 +62,11 @@
 }
 
 .navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--navds-spacing-2) - 2px) 0 calc(var(--navds-spacing-2) - 2px) 3.25rem;
+  padding: calc(var(--a-spacing-2) - 2px) 0 calc(var(--a-spacing-2) - 2px) 3.25rem;
 }
 
 .navds-switch--right.navds-switch--small > .navds-switch__label-wrapper > .navds-switch__content {
-  padding: calc(var(--navds-spacing-2) - 2px) 3.25rem calc(var(--navds-spacing-2) - 2px) 0;
+  padding: calc(var(--a-spacing-2) - 2px) 3.25rem calc(var(--a-spacing-2) - 2px) 0;
 }
 
 .navds-switch--with-description,
@@ -76,7 +76,7 @@
 
 .navds-switch__input:hover ~ .navds-switch__label-wrapper,
 .navds-switch__label-wrapper:hover {
-  color: var(--navds-switch-color-label-hover);
+  color: var(--a-surface-action);
 }
 
 .navds-switch__input:disabled:hover ~ .navds-switch__label-wrapper {
@@ -87,16 +87,16 @@
 .navds-switch__track {
   width: 44px;
   height: 24px;
-  background-color: var(--navds-switch-color-track-background);
+  background-color: var(--a-surface-neutral);
   position: absolute;
-  top: var(--navds-spacing-3);
+  top: var(--a-spacing-3);
   left: 0;
-  border-radius: var(--navds-border-radius-medium);
+  border-radius: var(--a-border-radius-medium);
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .navds-switch--small > .navds-switch__track {
-  top: var(--navds-spacing-1);
+  top: var(--a-spacing-1);
 }
 
 .navds-switch--right > .navds-switch__input,
@@ -106,34 +106,34 @@
 }
 
 .navds-switch__input:checked ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-checked);
+  background-color: var(--a-border-success);
 }
 
 .navds-switch__input:hover ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-hover);
+  background-color: var(--a-surface-neutral-hover);
 }
 
 .navds-switch__input:hover:checked ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-hover-checked);
+  background-color: var(--a-icon-success);
 }
 
 .navds-switch__input:disabled ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background);
+  background-color: var(--a-surface-neutral);
 }
 
 .navds-switch__input:checked:disabled ~ .navds-switch__track {
-  background-color: var(--navds-switch-color-track-background-checked);
+  background-color: var(--a-border-success);
 }
 
 .navds-switch__input:focus ~ .navds-switch__track {
-  box-shadow: 0 0 0 1px var(--navds-switch-color-track-shadow-inner-focus), var(--navds-shadow-focus);
+  box-shadow: 0 0 0 1px var(--a-surface-default), var(--a-shadow-focus);
 }
 
 /* Thumb */
 .navds-switch__thumb {
-  background-color: var(--navds-switch-color-thumb);
-  color: var(--navds-switch-color-thumb-icon);
-  border-radius: var(--navds-border-radius-small);
+  background-color: var(--a-surface-default);
+  color: var(--a-icon-subtle);
+  border-radius: var(--a-border-radius-small);
   width: 20px;
   height: 20px;
   position: absolute;
@@ -148,7 +148,7 @@
 
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb {
   transform: translateX(20px);
-  color: var(--navds-switch-color-thumb-icon-checked);
+  color: var(--a-border-success);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -171,7 +171,7 @@
 
 /* Loader */
 .navds-switch__input:checked ~ .navds-switch__track > .navds-switch__thumb .navds-loader__foreground {
-  stroke: var(--navds-switch-color-thumb-loader-checked);
+  stroke: var(--a-border-success);
 }
 
 /* Disabled */
