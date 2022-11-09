@@ -34,11 +34,11 @@ const DesignsystemHeader = (): JSX.Element => {
                   )
                 }
                 className={cl(
-                  "algolia-index-heading 2lg:px-4 flex min-w-header cursor-pointer items-center justify-center whitespace-nowrap py-0 px-2 focus:outline-none",
+                  "algolia-index-heading 2lg:px-4 min-w-header flex cursor-pointer items-center justify-center whitespace-nowrap py-0 px-2 focus:outline-none",
                   {
-                    "text-text-inverted hover:bg-gray-800 focus-visible:shadow-[inset_0_0_0_1px_var(--navds-global-color-gray-900),inset_0_0_0_3px_var(--navds-global-color-blue-200)]":
+                    "text-text-on-inverted hover:bg-gray-800 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_3px_var(--a-border-focus-on-inverted)]":
                       !(pageProps?.activeHeading?.title === heading.title),
-                    "algolia-index-heading--active bg-white text-text  hover:bg-gray-50 focus-visible:shadow-[inset_0_0_0_1px_var(--navds-global-color-gray-900),inset_0_0_0_2px_var(--navds-global-color-white)_,inset_0_0_0_4px_var(--navds-global-color-gray-900)]":
+                    "algolia-index-heading--active text-text bg-white  hover:bg-gray-50 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_2px_var(--a-white)_,inset_0_0_0_4px_var(--a-gray-900)]":
                       pageProps?.activeHeading?.title === heading.title,
                   }
                 )}
@@ -74,13 +74,13 @@ const DesignsystemHeader = (): JSX.Element => {
       </a>
       <Header className="z-[1050] justify-center">
         <div
-          className="hidden h-header w-full max-w-screen-2xl lg:flex"
+          className="h-header hidden w-full max-w-screen-2xl lg:flex"
           data-theme="light"
         >
           {nonMobile}
         </div>
         <div
-          className="flex h-header w-full max-w-screen-2xl lg:hidden"
+          className="h-header flex w-full max-w-screen-2xl lg:hidden"
           data-theme="light"
         >
           {mobile}
