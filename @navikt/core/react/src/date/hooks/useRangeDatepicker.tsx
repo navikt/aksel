@@ -10,10 +10,42 @@ import {
   isValidDate,
   parseDate,
 } from "../utils";
-import { UseDatepickerOptions } from "./useDatepicker";
+import { DateValidationT, UseDatepickerOptions } from "./useDatepicker";
+
+export type RangeValidationT = {
+  from: DateValidationT;
+  to: DateValidationT & { isBeforeFrom?: boolean };
+};
+
+const getValidationMessage = (from = {}, to = {}): RangeValidationT => ({
+  from: {
+    isDisabled: false,
+    isWeekend: false,
+    isEmpty: false,
+    isInvalid: false,
+    isBefore: false,
+    isAfter: false,
+    isValidDate: true,
+    ...from,
+  },
+  to: {
+    isDisabled: false,
+    isWeekend: false,
+    isEmpty: false,
+    isInvalid: false,
+    isBefore: false,
+    isAfter: false,
+    isBeforeFrom: false,
+    isValidDate: true,
+    ...to,
+  },
+});
 
 interface UseRangeDatepickerOptions
-  extends Omit<UseDatepickerOptions, "defaultSelected" | "onDateChange"> {
+  extends Omit<
+    UseDatepickerOptions,
+    "defaultSelected" | "onDateChange" | "onValidate"
+  > {
   /**
    * The initially selected DateRange
    */
@@ -22,6 +54,10 @@ interface UseRangeDatepickerOptions
    * Callback for changed state
    */
   onRangeChange?: (val?: DateRange) => void;
+  /**
+   * validation-callback
+   */
+  onValidate?: (val: RangeValidationT) => void;
 }
 
 interface UseRangeDatepickerValue {
@@ -65,6 +101,92 @@ const RANGE = {
 
 type RangeT = typeof RANGE[keyof typeof RANGE];
 
+const fromValidation = (day: Date, opt?: UseRangeDatepickerOptions) => {
+  const isBefore =
+    opt?.fromDate && day && differenceInCalendarDays(opt?.fromDate, day) > 0;
+  const isAfter =
+    opt?.toDate && day && differenceInCalendarDays(day, opt?.toDate) > 0;
+
+  if (
+    isValidDate(day) &&
+    !(opt?.disableWeekends && isWeekend(day)) &&
+    !(opt?.disabled && isMatch(day, opt.disabled))
+  ) {
+    return {
+      isValidDate: false,
+      isInvalid: !isValidDate(day),
+      isWeekend: opt?.disableWeekends && isWeekend(day),
+      isDisabled: opt?.disabled && isMatch(day, opt.disabled),
+      isBefore: isBefore,
+      isAfter: isAfter,
+    };
+  }
+  if (isBefore || isAfter) {
+    return {
+      isValidDate: false,
+      isBefore: isBefore,
+      isAfter: isAfter,
+    };
+  }
+};
+
+const toValidation = (
+  day: Date,
+  from: Date,
+  opt?: UseRangeDatepickerOptions
+) => {
+  const isBefore =
+    opt?.fromDate && day && differenceInCalendarDays(opt?.fromDate, day) > 0;
+  const isAfter =
+    opt?.toDate && day && differenceInCalendarDays(day, opt?.toDate) > 0;
+
+  const isBeforeFrom =
+    (from && differenceInCalendarDays(from, day) > 0) ?? false;
+
+  if (
+    isValidDate(day) &&
+    !(opt?.disableWeekends && isWeekend(day)) &&
+    !(opt?.disabled && isMatch(day, opt.disabled))
+  ) {
+    return {
+      isValidDate: false,
+      isInvalid: !isValidDate(day),
+      isWeekend: opt?.disableWeekends && isWeekend(day),
+      isDisabled: opt?.disabled && isMatch(day, opt.disabled),
+      isBefore,
+      isAfter,
+      isBeforeFrom,
+    };
+  }
+  if (isBefore || isAfter || isBeforeFrom) {
+    return {
+      isValidDate: false,
+      isBefore,
+      isAfter,
+      isBeforeFrom,
+    };
+  }
+};
+
+const initialValidation = (
+  range?: DateRange,
+  opt?: UseRangeDatepickerOptions
+): RangeValidationT => {
+  if (!range || !range?.from) {
+    return getValidationMessage(
+      { isEmpty: true, isValidDate: false },
+      { isEmpty: true, isValidDate: false }
+    );
+  }
+
+  const fromVal = fromValidation(range.from, opt);
+  const toVal = range.to
+    ? toValidation(range.to, range.from, opt)
+    : { isEmpty: true, isValidDate: false };
+
+  return getValidationMessage({ ...fromVal }, { ...toVal });
+};
+
 export const useRangeDatepicker = (
   opt: UseRangeDatepickerOptions = {}
 ): UseRangeDatepickerValue => {
@@ -77,6 +199,8 @@ export const useRangeDatepicker = (
     disabled,
     disableWeekends,
     onRangeChange,
+    inputFormat,
+    onValidate,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -97,15 +221,20 @@ export const useRangeDatepicker = (
 
   const [fromInputValue, setFromInputValue] = useState(
     defaultSelected?.from
-      ? formatDateForInput(defaultSelected.from, locale, "date")
+      ? formatDateForInput(defaultSelected.from, locale, "date", inputFormat)
       : ""
   );
 
   const [toInputValue, setToInputValue] = useState(
     defaultSelected?.to
-      ? formatDateForInput(defaultSelected.to, locale, "date")
+      ? formatDateForInput(defaultSelected.to, locale, "date", inputFormat)
       : ""
   );
+
+  const [validation, setValidation] = useState<RangeValidationT>(
+    initialValidation(selectedRange, opt)
+  );
+
   const [open, setOpen] = useState(false);
 
   const updateRange = (range?: DateRange) => {
@@ -113,9 +242,20 @@ export const useRangeDatepicker = (
     setSelectedRange(range);
   };
 
+  const updateValidation = (
+    from: Partial<RangeValidationT["from"]> = {},
+    to: Partial<RangeValidationT["to"]> = {}
+  ) => {
+    const msg = getValidationMessage(from, to);
+    setValidation(msg);
+    onValidate?.(msg);
+  };
+
   const handleFocusIn = useCallback(
     (e) => {
-      if (!e?.target || !e?.target?.nodeType) {
+      /* Workaround for shadow-dom users (open) */
+      const composed = e.composedPath?.()?.[0];
+      if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
       ![
@@ -124,7 +264,9 @@ export const useRangeDatepicker = (
         inputRefFrom.current,
         inputRefTo.current?.nextSibling,
         inputRefFrom.current?.nextSibling,
-      ].some((element) => element?.contains(e.target)) &&
+      ].some(
+        (element) => element?.contains(e.target) || element?.contains(composed)
+      ) &&
         open &&
         setOpen(false);
     },
@@ -143,14 +285,20 @@ export const useRangeDatepicker = (
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
     setMonth(defaultSelected ? defaultSelected?.from : today);
+    setValidation(
+      initialValidation(
+        defaultSelected ?? { from: undefined, to: undefined },
+        opt
+      )
+    );
     setFromInputValue(
       defaultSelected?.from
-        ? formatDateForInput(defaultSelected.from, locale, "date")
+        ? formatDateForInput(defaultSelected.from, locale, "date", inputFormat)
         : ""
     );
     setToInputValue(
       defaultSelected?.to
-        ? formatDateForInput(defaultSelected.to, locale, "date")
+        ? formatDateForInput(defaultSelected.to, locale, "date", inputFormat)
         : ""
     );
     setDefaultSelected(_defaultSelected);
@@ -159,11 +307,16 @@ export const useRangeDatepicker = (
   const setSelected = (range?: DateRange) => {
     updateRange(range);
     setFromInputValue(
-      range?.from ? formatDateForInput(range.from, locale, "date") : ""
+      range?.from
+        ? formatDateForInput(range.from, locale, "date", inputFormat)
+        : ""
     );
     setToInputValue(
-      range?.to ? formatDateForInput(range?.to, locale, "date") : ""
+      range?.to
+        ? formatDateForInput(range?.to, locale, "date", inputFormat)
+        : ""
     );
+    setValidation(initialValidation(range, opt));
   };
 
   const handleFocus = (e, src: RangeT) => {
@@ -172,52 +325,10 @@ export const useRangeDatepicker = (
     if (isValidDate(day)) {
       setMonth(day);
       src === RANGE.FROM
-        ? setFromInputValue(formatDateForInput(day, locale, "date"))
-        : setToInputValue(formatDateForInput(day, locale, "date"));
-    }
-  };
-
-  const handleInputs = (day: Date, src: RangeT) => {
-    if (src === RANGE.FROM) {
-      const isAfter =
-        toInputValue &&
-        differenceInCalendarDays(
-          day,
-          parseDate(toInputValue, today, locale, "date")
-        ) > 0;
-
-      if (isAfter) {
-        setFromInputValue(
-          formatDateForInput(
-            parseDate(toInputValue, today, locale, "date"),
-            locale,
-            "date"
+        ? setFromInputValue(
+            formatDateForInput(day, locale, "date", inputFormat)
           )
-        );
-        setToInputValue(formatDateForInput(day, locale, "date"));
-      } else {
-        setFromInputValue(formatDateForInput(day, locale, "date"));
-      }
-    } else if (src === RANGE.TO) {
-      const isBefore =
-        fromInputValue &&
-        differenceInCalendarDays(
-          parseDate(fromInputValue, today, locale, "date"),
-          day
-        ) > 0;
-
-      if (isBefore) {
-        setToInputValue(
-          formatDateForInput(
-            parseDate(fromInputValue, today, locale, "date"),
-            locale,
-            "date"
-          )
-        );
-        setFromInputValue(formatDateForInput(day, locale, "date"));
-      } else {
-        setToInputValue(formatDateForInput(day, locale, "date"));
-      }
+        : setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
     }
   };
 
@@ -227,7 +338,19 @@ export const useRangeDatepicker = (
       return;
     }
 
-    handleInputs(day, src);
+    if (src === RANGE.FROM) {
+      setFromInputValue(formatDateForInput(day, locale, "date", inputFormat));
+    } else if (src === RANGE.TO) {
+      setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
+    }
+  };
+
+  const validateDay = (day: any) => {
+    return (
+      isValidDate(day) &&
+      !(disableWeekends && isWeekend(day)) &&
+      !(disabled && isMatch(day, disabled))
+    );
   };
 
   const handleSelect = (range) => {
@@ -238,68 +361,140 @@ export const useRangeDatepicker = (
       !selectedRange?.from && selectedRange?.to ? selectedRange?.to : range?.to;
 
     range?.from
-      ? setFromInputValue(formatDateForInput(range?.from, locale, "date"))
+      ? setFromInputValue(
+          formatDateForInput(range?.from, locale, "date", inputFormat)
+        )
       : setFromInputValue("");
     prevToRange
-      ? setToInputValue(formatDateForInput(prevToRange, locale, "date"))
+      ? setToInputValue(
+          formatDateForInput(prevToRange, locale, "date", inputFormat)
+        )
       : setToInputValue("");
+    updateValidation(
+      { isValidDate: !!range?.from, isEmpty: !range?.from },
+      { isValidDate: !!range?.to, isEmpty: !prevToRange }
+    );
     updateRange({ from: range?.from, to: prevToRange });
   };
 
-  /* live-update datepicker based on changes in inputfields */
-  const handleChange = (e, src: RangeT) => {
-    src === RANGE.FROM
-      ? setFromInputValue(e.target.value)
-      : setToInputValue(e.target.value);
-    const day = parseDate(e.target.value, today, locale, "date");
-
-    if (
-      !isValidDate(day) ||
-      (disabled &&
-        ((disableWeekends && isWeekend(day)) || isMatch(day, disabled)))
-    ) {
-      updateRange(
-        src === RANGE.FROM
-          ? { ...selectedRange, from: undefined }
-          : { from: selectedRange?.from, to: undefined }
+  const fromChange = (
+    val: string = "",
+    day: Date,
+    isBefore = false,
+    isAfter = false
+  ) => {
+    setFromInputValue(val);
+    if (!validateDay(day)) {
+      updateRange({ ...selectedRange, from: undefined });
+      updateValidation(
+        {
+          isEmpty: !val,
+          isValidDate: false,
+          isInvalid: !isValidDate(day),
+          isWeekend: disableWeekends && isWeekend(day),
+          isDisabled: disabled && isMatch(day, disabled),
+          isBefore,
+          isAfter,
+        },
+        validation.to
+      );
+      return;
+    }
+    if (isBefore || isAfter) {
+      updateRange({ ...selectedRange, from: undefined });
+      updateValidation(
+        {
+          isValidDate: false,
+          isBefore,
+          isAfter,
+        },
+        validation.to
       );
       return;
     }
 
+    if (
+      selectedRange?.to &&
+      differenceInCalendarDays(day, selectedRange?.to) > 0
+    ) {
+      updateRange({ to: day, from: day });
+      setToInputValue(formatDateForInput(day, locale, "date", inputFormat));
+      setMonth(day);
+      updateValidation();
+      return;
+    }
+
+    if (toInputValue && !selectedRange?.to) {
+      const toDay = parseDate(toInputValue, today, locale, "date");
+      if (validateDay(toDay)) {
+        updateRange({ from: day, to: toDay });
+        setMonth(day);
+        updateValidation();
+        return;
+      }
+    }
+    updateRange({ ...selectedRange, from: day });
+    updateValidation({}, validation.to);
+    setMonth(day);
+  };
+
+  const toChange = (
+    val: string = "",
+    day: Date,
+    isBefore = false,
+    isAfter = false
+  ) => {
+    setToInputValue(val);
+    if (!validateDay(day)) {
+      updateRange({ from: selectedRange?.from, to: undefined });
+      updateValidation(validation.from, {
+        isEmpty: !val,
+        isValidDate: false,
+        isInvalid: !isValidDate(day),
+        isWeekend: disableWeekends && isWeekend(day),
+        isDisabled: disabled && isMatch(day, disabled),
+        isBefore,
+        isAfter,
+      });
+      return;
+    }
+
+    if (isBefore || isAfter) {
+      updateRange({ from: selectedRange?.from, to: undefined });
+      updateValidation(validation.from, {
+        isValidDate: false,
+        isBefore,
+        isAfter,
+      });
+      return;
+    }
+
+    /* If to-value < from-value */
+    if (
+      selectedRange?.from &&
+      differenceInCalendarDays(selectedRange?.from, day) > 0
+    ) {
+      updateRange({ from: selectedRange?.from, to: undefined });
+      updateValidation(validation.from, {
+        isValidDate: false,
+        isBeforeFrom: true,
+      });
+      return;
+    }
+    updateRange({ from: selectedRange?.from, to: day });
+    updateValidation(validation.from, {});
+    setMonth(day);
+  };
+
+  /* live-update datepicker based on changes in inputfields */
+  const handleChange = (e, src: RangeT) => {
+    const day = parseDate(e.target.value, today, locale, "date");
     const isBefore = fromDate && differenceInCalendarDays(fromDate, day) > 0;
     const isAfter = toDate && differenceInCalendarDays(day, toDate) > 0;
-    if (isBefore || isAfter) {
-      src === RANGE.FROM
-        ? updateRange({ ...selectedRange, from: undefined })
-        : updateRange({ from: selectedRange?.from, to: undefined });
-      return;
-    }
 
-    /* If to-value < from-value, switch places in state */
-    if (
-      src === RANGE.TO &&
-      selectedRange?.from &&
-      differenceInCalendarDays(selectedRange?.from, day) >= 0
-    ) {
-      updateRange({ from: day, to: selectedRange?.from });
-      setMonth(day);
-      return;
-    }
-
-    /* If from-value > to-value  , switch places in state */
-    if (
-      src === RANGE.FROM &&
-      selectedRange?.to &&
-      differenceInCalendarDays(day, selectedRange?.to) >= 0
-    ) {
-      updateRange({ to: day, from: selectedRange?.to });
-      setMonth(day);
-      return;
-    }
-
-    src === RANGE.FROM && updateRange({ ...selectedRange, from: day });
-    src === RANGE.TO && updateRange({ from: selectedRange?.from, to: day });
-    setMonth(day);
+    return src === RANGE.FROM
+      ? fromChange(e.target.value, day, isBefore, isAfter)
+      : toChange(e.target.value, day, isBefore, isAfter);
   };
 
   const handleClose = useCallback(() => {
@@ -336,6 +531,8 @@ export const useRangeDatepicker = (
     mode: "range" as const,
     open,
     onOpenToggle: () => setOpen((x) => !x),
+    disabled,
+    disableWeekends,
     ref: datePickerRef,
   };
 

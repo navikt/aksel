@@ -312,6 +312,102 @@
     "pageName": "People"
   },
   {
+    "name": "ChevronDownCircle",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.965Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronDownCircleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.048Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronDownDouble",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.957Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronDownDoubleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.949Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronLeftCircle",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.938Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronLeftCircleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.930Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronLeftDouble",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.040Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronLeftDoubleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.922Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronRightCircle",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.993Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronRightCircleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.985Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronRightDouble",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.003Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronRightDoubleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.013Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronUpCircle",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.906Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronUpCircleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.021Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronUpDouble",
+    "description": "",
+    "created_at": "2022-11-02T08:31:55.031Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "ChevronUpDoubleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.914Z",
+    "pageName": "Arrows"
+  },
+  {
     "name": "Child",
     "description": "",
     "created_at": "2020-07-01T10:37:42.678Z",
@@ -759,6 +855,12 @@
     "name": "ErrorFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.499Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "ErrorStroke",
+    "description": "",
+    "created_at": "2022-10-27T14:42:57.018Z",
     "pageName": "Status"
   },
   {
@@ -1356,6 +1458,12 @@
     "pageName": "Status"
   },
   {
+    "name": "InformationStroke",
+    "description": "",
+    "created_at": "2022-10-27T14:42:57.034Z",
+    "pageName": "Status"
+  },
+  {
     "name": "Laptop",
     "description": "",
     "created_at": "2020-07-01T10:37:42.660Z",
@@ -1611,6 +1719,18 @@
     "name": "Next",
     "description": "",
     "created_at": "2020-07-01T10:37:42.664Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "NextDouble",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.896Z",
+    "pageName": "Arrows"
+  },
+  {
+    "name": "NextDoubleFilled",
+    "description": "",
+    "created_at": "2022-11-02T08:31:54.975Z",
     "pageName": "Arrows"
   },
   {
@@ -2649,6 +2769,12 @@
     "name": "WarningFilled",
     "description": "",
     "created_at": "2021-01-11T13:37:55.590Z",
+    "pageName": "Status"
+  },
+  {
+    "name": "WarningStroke",
+    "description": "",
+    "created_at": "2022-10-27T14:42:57.027Z",
     "pageName": "Status"
   },
   {

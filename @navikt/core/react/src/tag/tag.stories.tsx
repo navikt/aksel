@@ -9,17 +9,70 @@ export default {
       defaultValue: "info",
       control: {
         type: "radio",
-        options: ["error", "warning", "info", "success"],
+        options: [
+          "warning",
+          "error",
+          "info",
+          "success",
+          "neutral",
+          "alt1",
+          "alt2",
+          "alt3",
+          "warning-filled",
+          "error-filled",
+          "info-filled",
+          "success-filled",
+          "neutral-filled",
+          "alt1-filled",
+          "alt2-filled",
+          "alt3-filled",
+        ],
+      },
+    },
+    size: {
+      defaultValue: "medium",
+      control: {
+        type: "radio",
+        options: ["xsmall", "small", "medium"],
       },
     },
   },
 };
 
-const variants: Array<"error" | "warning" | "info" | "success"> = [
-  "error",
+const variants: Array<
+  | "warning"
+  | "warning-filled"
+  | "error"
+  | "error-filled"
+  | "info"
+  | "info-filled"
+  | "success"
+  | "success-filled"
+  | "neutral"
+  | "neutral-filled"
+  | "alt1"
+  | "alt1-filled"
+  | "alt2"
+  | "alt2-filled"
+  | "alt3"
+  | "alt3-filled"
+> = [
   "warning",
+  "error",
   "info",
   "success",
+  "neutral",
+  "alt1",
+  "alt2",
+  "alt3",
+  "warning-filled",
+  "error-filled",
+  "info-filled",
+  "success-filled",
+  "neutral-filled",
+  "alt1-filled",
+  "alt2-filled",
+  "alt3-filled",
 ];
 
 export const Default = (props) => (
@@ -34,10 +87,34 @@ Default.args = {
 
 export const Small = () => {
   return (
-    <div className="rowgap">
+    <div className="rowgap rowgap-wrap">
       {variants.map((variant, i) => (
         <Tag key={variant} variant={variant} size="small">
-          {new Array(i + 1).fill("Id elit esse")}
+          {variant}
+        </Tag>
+      ))}
+    </div>
+  );
+};
+
+export const xSmall = () => {
+  return (
+    <div className="rowgap rowgap-wrap">
+      {variants.map((variant, i) => (
+        <Tag key={variant} variant={variant} size="xsmall">
+          {variant}
+        </Tag>
+      ))}
+    </div>
+  );
+};
+
+export const Variants = () => {
+  return (
+    <div className="rowgap rowgap-wrap">
+      {variants.map((variant, i) => (
+        <Tag key={variant} variant={variant}>
+          {variant}
         </Tag>
       ))}
     </div>

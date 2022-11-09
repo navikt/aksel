@@ -22,6 +22,15 @@ export interface UseMonthPickerOptions
    * Callback for month-change
    */
   onMonthChange?: (date?: Date) => void;
+  /**
+   * Input-format
+   * @default "MMMM yyyy"
+   */
+  inputFormat?: string;
+  /**
+   * validation-callback
+   */
+  onValidate?: (val: MonthValidationT) => void;
 }
 
 interface UseMonthPickerValue {
@@ -48,6 +57,25 @@ interface UseMonthPickerValue {
   reset: () => void;
 }
 
+export type MonthValidationT = {
+  isDisabled: boolean;
+  isEmpty: boolean;
+  isInvalid: boolean;
+  isValidMonth: boolean;
+  isBefore: boolean;
+  isAfter: boolean;
+};
+
+const getValidationMessage = (val = {}): MonthValidationT => ({
+  isDisabled: false,
+  isEmpty: false,
+  isInvalid: false,
+  isBefore: false,
+  isAfter: false,
+  isValidMonth: true,
+  ...val,
+});
+
 export const useMonthpicker = (
   opt: UseMonthPickerOptions = {}
 ): UseMonthPickerValue => {
@@ -59,6 +87,8 @@ export const useMonthpicker = (
     disabled,
     required,
     onMonthChange,
+    inputFormat,
+    onValidate,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -75,7 +105,7 @@ export const useMonthpicker = (
   const [open, setOpen] = useState(false);
 
   const defaultInputValue = defaultSelected
-    ? formatDateForInput(defaultSelected, locale, "month")
+    ? formatDateForInput(defaultSelected, locale, "month", inputFormat)
     : "";
 
   const [inputValue, setInputValue] = useState(defaultInputValue);
@@ -85,16 +115,25 @@ export const useMonthpicker = (
     setSelectedMonth(date);
   };
 
+  const updateValidation = (val: Partial<MonthValidationT> = {}) => {
+    const msg = getValidationMessage(val);
+    onValidate?.(msg);
+  };
+
   const handleFocusIn = useCallback(
     (e) => {
-      if (!e?.target || !e?.target?.nodeType) {
+      /* Workaround for shadow-dom users (open) */
+      const composed = e.composedPath?.()?.[0];
+      if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
       ![
         monthpickerRef.current,
         inputRef.current,
         inputRef.current?.nextSibling,
-      ].some((element) => element?.contains(e.target)) &&
+      ].some(
+        (element) => element?.contains(e.target) || element?.contains(composed)
+      ) &&
         open &&
         setOpen(false);
     },
@@ -120,7 +159,9 @@ export const useMonthpicker = (
   const setSelected = (date: Date | undefined) => {
     updateMonth(date);
     setYear(date ?? today);
-    setInputValue(date ? formatDateForInput(date, locale, "month") : "");
+    setInputValue(
+      date ? formatDateForInput(date, locale, "month", inputFormat) : ""
+    );
   };
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
@@ -128,13 +169,14 @@ export const useMonthpicker = (
     let day = parseDate(e.target.value, today, locale, "month");
     if (isValidDate(day)) {
       setYear(day);
-      setInputValue(formatDateForInput(day, locale, "month"));
+      setInputValue(formatDateForInput(day, locale, "month", inputFormat));
     }
   };
 
   const handleBlur: React.FocusEventHandler<HTMLInputElement> = (e) => {
     let day = parseDate(e.target.value, today, locale, "month");
-    isValidDate(day) && setInputValue(formatDateForInput(day, locale, "month"));
+    isValidDate(day) &&
+      setInputValue(formatDateForInput(day, locale, "month", inputFormat));
   };
 
   /* Only allow de-selecting if not required */
@@ -146,11 +188,15 @@ export const useMonthpicker = (
 
     if (!required && !month) {
       updateMonth(undefined);
+      updateValidation({ isValidMonth: false, isEmpty: true });
       setInputValue("");
       return;
     }
     updateMonth(month);
-    setInputValue(month ? formatDateForInput(month, locale, "month") : "");
+    updateValidation();
+    setInputValue(
+      month ? formatDateForInput(month, locale, "month", inputFormat) : ""
+    );
   };
 
   // When changing the input field, save its value in state and check if the
@@ -160,22 +206,32 @@ export const useMonthpicker = (
     setInputValue(e.target.value);
     const month = parseDate(e.target.value, today, locale, "month");
 
-    if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
-      updateMonth(undefined);
-      return;
-    }
-
     const isBefore =
       fromDate &&
+      month &&
       (fromDate.getFullYear() > month.getFullYear() ||
         (fromDate.getFullYear() === month.getFullYear() &&
           fromDate.getMonth() > month.getMonth()));
 
     const isAfter =
       toDate &&
+      month &&
       (toDate.getFullYear() < month.getFullYear() ||
         (toDate.getFullYear() === month.getFullYear() &&
           toDate.getMonth() < month.getMonth()));
+
+    if (!isValidDate(month) || (disabled && isMatch(month, disabled))) {
+      updateMonth(undefined);
+      updateValidation({
+        isInvalid: isValidDate(month),
+        isDisabled: disabled && isMatch(month, disabled),
+        isValidMonth: false,
+        isEmpty: !e.target.value,
+        isBefore: isBefore ?? false,
+        isAfter: isAfter ?? false,
+      });
+      return;
+    }
 
     if (
       isAfter ||
@@ -183,9 +239,15 @@ export const useMonthpicker = (
       (fromDate && toDate && !isMatch(month, [{ from: fromDate, to: toDate }]))
     ) {
       updateMonth(undefined);
+      updateValidation({
+        isValidMonth: false,
+        isBefore: isBefore ?? false,
+        isAfter: isAfter ?? false,
+      });
       return;
     }
     updateMonth(month);
+    updateValidation();
     setYear(month);
   };
 

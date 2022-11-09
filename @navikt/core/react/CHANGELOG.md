@@ -1,5 +1,100 @@
 # @navikt/ds-react
 
+## 1.5.6
+
+### Patch Changes
+
+- Datepicker fungerte ikke med open shadow-dom
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.6
+
+## 1.5.5
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.5
+
+## 1.5.4
+
+### Patch Changes
+
+- Updated dependencies [[`77302a30b`](https://github.com/navikt/Designsystemet/commit/77302a30b8eef8dc00b2d2e9c904a3f57da81a11)]:
+  - @navikt/ds-icons@1.5.4
+
+## 1.5.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.3
+
+## 1.5.2
+
+### Patch Changes
+
+- :memo: Rename FilterChips to ToggleChips
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.2
+
+## 1.5.1
+
+### Patch Changes
+
+- Flex-wrap chips.css
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.1
+
+## 1.5.0
+
+### Minor Changes
+
+- [#1684](https://github.com/navikt/Designsystemet/pull/1684) [`e19bf67b3`](https://github.com/navikt/Designsystemet/commit/e19bf67b337dea39989c68b5e9c2591cf0d5b40f) Thanks [@KenAJoh](https://github.com/KenAJoh)! - :sparkles: Oppdaterte tag-varianter
+
+- [#1668](https://github.com/navikt/Designsystemet/pull/1668) [`97c5f60e9`](https://github.com/navikt/Designsystemet/commit/97c5f60e9111da7e08f55c8d0aa29581f0a9b1ca) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Chips komponent :sparkles:
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.0
+
+## 1.4.4
+
+### Patch Changes
+
+- Eksponerer validation-typer
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.4
+
+## 1.4.3
+
+### Patch Changes
+
+- :sparkles: Validering og inputFormat i Date-komponenter
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.3
+
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.2
+
+## 1.4.1
+
+### Patch Changes
+
+- [`3c08651df`](https://github.com/navikt/Designsystemet/commit/3c08651df28c3e19dd8c8a7a1d0032200bec473d) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Date-komponenter følger språkrådets dato-formatering for måneder.
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.4.1
+
 ## 1.4.0
 
 ### Minor Changes

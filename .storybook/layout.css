@@ -15,3 +15,7 @@
 .rowgap[data-theme="dark"] {
   background-color: #262626;
 }
+
+.rowgap-wrap {
+  flex-wrap: wrap;
+}
