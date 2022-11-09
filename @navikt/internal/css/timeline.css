@@ -9,7 +9,7 @@
   position: relative;
   height: 1rem;
   box-sizing: content-box;
-  margin-bottom: 16px;
+  margin-bottom: var(--navds-spacing-4);
   grid-column: 2;
   margin-left: 2.375rem;
 }
