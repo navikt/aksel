@@ -172,7 +172,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-2 ring-inset ring-deepblue-800 focus-visible:shadow-focus focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.JA,
             })}
             onClick={() =>
@@ -186,7 +186,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-2 ring-inset ring-deepblue-800 focus-visible:shadow-focus focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.NEI,
             })}
             onClick={() =>
@@ -200,7 +200,7 @@ const Feedback = ({
           <Button
             variant="secondary"
             className={cl({
-              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-2 ring-inset ring-deepblue-800 focus-visible:shadow-focus focus-visible:ring-1 focus-visible:ring-white":
+              "override-secondary-button-active bg-deepblue-800 text-text-inverted ring-deepblue-800 focus-visible:shadow-focus ring-2 ring-inset focus-visible:ring-1 focus-visible:ring-white":
                 activeState === HelpfulArticleEnum.MISC,
             })}
             onClick={() =>
@@ -215,7 +215,7 @@ const Feedback = ({
         {activeState !== null && (
           <form
             className={cl(
-              "mt-4 flex w-full max-w-sm animate-fadeIn flex-col gap-4",
+              "animate-fadeIn mt-4 flex w-full max-w-sm flex-col gap-4",
               {
                 "override-primary-button": akselFeedback,
               }
@@ -229,6 +229,7 @@ const Feedback = ({
               onChange={(e) => setTextValue(e.target.value)}
               maxLength={600}
               minRows={3}
+              description="Ikke skriv inn navn eller andre personopplysninger"
             />
             <Button className="mr-auto" onClick={handleSend}>
               Send inn svar
