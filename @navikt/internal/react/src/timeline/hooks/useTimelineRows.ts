@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import { useMemo } from "react";
 
 import { addDays, endOfDay, isAfter, startOfDay, subDays } from "date-fns";
@@ -19,7 +18,8 @@ const spatialPeriod = (
   timelineEndInclusive: Date,
   direction: "left" | "right" = "left",
   i: number,
-  periods: PositionedPeriod[]
+  periods: PositionedPeriod[],
+  rowIndex: number
 ): PositionedPeriod => {
   const start = period.start;
   const endInclusive = period.end;
@@ -37,7 +37,7 @@ const spatialPeriod = (
   );
 
   return {
-    id: nanoid(),
+    id: `r-${rowIndex}-p-${i}`,
     start: start,
     endInclusive: endInclusive,
     horizontalPosition: horizontalPosition,
@@ -100,7 +100,8 @@ export const useTimelineRows = (
 ): InternalSimpleTimeline[] =>
   useMemo(
     () =>
-      rows.map((periods: InternalSimpleTimeline) => {
+      rows.map((periods: InternalSimpleTimeline, i: number) => {
+        const rowIndex = i;
         const timelinePeriods = periods.periods
           .sort((a: Period, b: Period) => a.start.valueOf() - b.start.valueOf())
           .map((period: Period, i) =>
@@ -110,7 +111,8 @@ export const useTimelineRows = (
               endDate,
               direction,
               i,
-              periods.periods
+              periods.periods,
+              rowIndex
             )
           )
           .sort(lastPeriod)
@@ -118,7 +120,7 @@ export const useTimelineRows = (
           .map(trimmedPeriods)
           .filter(invisiblePeriods);
         return {
-          id: nanoid(),
+          id: `tl-row-${rowIndex}`,
           label: periods.label,
           icon: periods.icon,
           periods:
