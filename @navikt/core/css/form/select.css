@@ -1,19 +1,8 @@
-:root,
-:host {
-  --v2-migration__navds-select-color-background: var(--a-surface-default);
-  --v2-migration__navds-select-color-border: var(--a-border-strong);
-  --v2-migration__navds-select-color-border-hover: var(--a-surface-action);
-  --v2-migration__navds-select-color-border-error: var(--a-surface-danger);
-  --v2-migration__navds-select-color-shadow-error: var(--a-surface-danger);
-  --v2-migration__navds-select-color-border-disabled: var(--a-gray-400);
-  --v2-migration__navds-select-color-background-disabled: var(--a-surface-subtle);
-}
-
 .navds-select__input {
   appearance: none;
-  background-color: var(--a-surface-default);
+  background-color: var(--ac-select-bg, var(--a-surface-default));
   border-radius: var(--a-border-radius-medium);
-  border: 1px solid var(--a-border-strong);
+  border: 1px solid var(--ac-select-border, var(--a-border-strong));
   width: 100%;
   box-sizing: border-box;
   min-height: 48px;
@@ -24,7 +13,7 @@
 }
 
 .navds-select__input:hover {
-  border-color: var(--a-surface-action);
+  border-color: var(--ac-select-hover-bg, var(--a-border-action));
 }
 
 .navds-select__input:focus {
@@ -57,13 +46,13 @@
   Error handling
 */
 .navds-select--error > * select:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--a-surface-danger);
-  border-color: var(--a-surface-danger);
+  box-shadow: 0 0 0 1px var(--ac-select-error-border, var(--a-surface-danger));
+  border-color: var(--ac-select-error-border, var(--a-surface-danger));
 }
 
 .navds-select__input:disabled {
-  background-color: var(--a-surface-default);
-  border-color: var(--a-border-strong);
+  background-color: var(--ac-select-bg, var(--a-surface-default));
+  border: 1px solid var(--ac-select-border, var(--a-border-strong));
   box-shadow: none;
   cursor: not-allowed;
 }
