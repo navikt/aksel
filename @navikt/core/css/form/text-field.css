@@ -4,6 +4,7 @@
   --ac-textfield-border: var(--a-border-on-inverted);
   --ac-textfield-hover-border: var(--a-blue-200);
   --ac-textfield-placeholder: var(--a-gray-500);
+  --ac-textfield-error-border: var(--a-red-300);
 }
 
 .navds-text-field__input {

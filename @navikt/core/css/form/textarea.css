@@ -1,15 +1,12 @@
-:root,
-:host {
-  --v2-migration__navds-textarea-color-background: var(--a-surface-default);
-  --v2-migration__navds-textarea-color-border: var(--a-border-strong);
-  --v2-migration__navds-textarea-color-border-hover: var(--a-surface-action);
-  --v2-migration__navds-textarea-color-border-error: var(--a-surface-danger);
-  --v2-migration__navds-textarea-color-shadow-error: var(--a-surface-danger);
-  --v2-migration__navds-textarea-color-counter-text: var(--a-text-subtle);
-  --v2-migration__navds-textarea-color-counter-text-error: var(--a-surface-danger);
-  --v2-migration__navds-textarea-color-text-disabled: var(--a-text-default);
-  --v2-migration__navds-textarea-color-border-disabled: var(--a-gray-400);
-  --v2-migration__navds-textarea-color-background-disabled: var(--a-surface-subtle);
+[data-theme="dark"] {
+  --ac-textarea-text: var(--a-text-on-inverted);
+  --ac-textarea-bg: var(--a-transparent);
+  --ac-textarea-border: var(--a-border-on-inverted);
+  --ac-textarea-hover-border: var(--a-blue-200);
+  --ac-textarea-placeholder: var(--a-gray-500);
+  --ac-textarea-error-border: var(--a-red-300);
+  --ac-textarea-counter-text: var(--a-gray-300);
+  --ac-textarea-counter-error-text: var(--a-red-300);
 }
 
 .navds-textarea__wrapper {
@@ -20,21 +17,25 @@
 .navds-textarea__input {
   appearance: none;
   padding: var(--a-spacing-2);
-  background-color: var(--a-surface-default);
+  background-color: var(--ac-textarea-bg, var(--a-surface-default));
   border-radius: var(--a-border-radius-medium);
-  border: 1px solid var(--a-border-strong);
+  border: 1px solid var(--ac-textarea-border, var(--a-border-default));
   resize: none;
   width: 100%;
   display: block;
-  color: var(--a-text-default);
+  color: var(--ac-textarea-text, var(--a-text-default));
 }
 
 .navds-textarea--counter {
   padding-bottom: var(--a-spacing-8);
 }
 
+.navds-textarea__input::placeholder {
+  color: var(--ac-textarea-placeholder, var(--a-text-subtle));
+}
+
 .navds-textarea__input:hover {
-  border-color: var(--a-surface-action);
+  border-color: var(--ac-textarea-hover-border, var(--a-border-action));
 }
 
 .navds-textarea__input:focus {
@@ -52,7 +53,7 @@
 
 .navds-textarea__counter {
   pointer-events: none;
-  color: var(--a-text-subtle);
+  color: var(--ac-textarea-counter-text, var(--a-text-subtle));
   font-style: italic;
   position: absolute;
   text-align: left;
@@ -62,7 +63,7 @@
 }
 
 .navds-textarea__counter--error {
-  color: var(--a-surface-danger);
+  color: var(--ac-textarea-counter-error-text, var(--a-surface-danger));
 }
 
 .navds-textarea--resize .navds-textarea__input {
@@ -73,20 +74,20 @@
   Error handling
 */
 .navds-textarea--error .navds-textarea__input:not(:hover):not(:focus):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--a-surface-danger);
-  border-color: var(--a-surface-danger);
+  box-shadow: 0 0 0 1px var(--ac-textarea-error-border, var(--a-border-danger));
+  border-color: var(--ac-textarea-error-border, var(--a-border-danger));
 }
 
 .navds-textarea__input:disabled {
-  background-color: var(--a-surface-default);
-  border-color: var(--a-border-strong);
+  background-color: var(--ac-textarea-bg, var(--a-surface-default));
+  border-color: var(--ac-textarea-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .navds-textarea__input[readonly] {
-  background-color: var(--a-surface-default);
-  border-color: var(--a-border-strong);
+  background-color: var(--ac-textarea-bg, var(--a-surface-default));
+  border-color: var(--ac-textarea-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
 }
