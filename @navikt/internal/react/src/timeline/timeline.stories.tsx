@@ -34,6 +34,7 @@ const row1 = [
     end: new Date("Jan 31 2022"),
     status: "success",
     icon: <SuccessFilled aria-hidden />,
+    statusLabel: "Sykemeldt",
   },
   {
     id: "2",
@@ -41,6 +42,7 @@ const row1 = [
     end: new Date("Mar 15 2022"),
     status: "danger",
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    statusLabel: "Sykemeldt",
   },
   {
     id: "3",
@@ -48,6 +50,7 @@ const row1 = [
     end: new Date("May 25 2022"),
     status: "success",
     icon: <SuccessFilled aria-hidden />,
+    statusLabel: "Sykemeldt",
   },
   {
     id: "4",
@@ -56,6 +59,7 @@ const row1 = [
     status: "success",
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
     icon: <SuccessFilled aria-hidden />,
+    statusLabel: "Sykemeldt",
   },
   {
     id: "5",
@@ -64,6 +68,7 @@ const row1 = [
     status: "warning",
     icon: <SuccessFilled aria-hidden />,
     onSelectPeriod: () => console.log("PERIOD SELECTED!"),
+    statusLabel: "Sykemeldt",
   },
   {
     id: "6",
@@ -71,6 +76,7 @@ const row1 = [
     end: new Date("Aug 30 2022"),
     status: "warning",
     icon: <SuccessFilled aria-hidden />,
+    statusLabel: "Sykemeldt",
   },
 ];
 
@@ -228,6 +234,7 @@ export const ActivePeriod = () => {
                 }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
+                statusLabel={p.statusLabel}
               >
                 {p.children}
               </Timeline.Period>
@@ -248,6 +255,7 @@ export const ActivePeriod = () => {
                 }}
                 icon={p.icon}
                 isActive={activePeriod.id === p.id}
+                statusLabel={p.statusLabel}
               >
                 {p.children}
               </Timeline.Period>

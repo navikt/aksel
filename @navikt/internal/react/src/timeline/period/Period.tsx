@@ -24,6 +24,10 @@ export interface PeriodPropsWrapper
    */
   status?: "success" | "warning" | "danger" | "information" | "neutral";
   /**
+   * Status label
+   */
+  statusLabel?: string;
+  /**
    * Callback when selecting a period.
    */
   onSelectPeriod?: () => void;
