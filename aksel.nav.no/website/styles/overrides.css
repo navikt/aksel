@@ -2,60 +2,17 @@ html.overflow-hidden > body.ReactModal__Body--open {
   overflow: unset;
 }
 
-/* [data-theme="aksel"] {
-  --ac-button-primary-bg: --a-surface-action;
-  --ac-button-primary-text-default: --a-text-default-on-action;
-  --ac-button-primary-hover-bg: --a-surface-action-hover;
-  --ac-button-primary-active-bg: --a-surface-action-active;
-  --ac-button-primary-border-strong-focus-border-strong: --a-surface-default;
-  --ac-button-secondary-text-default: --a-text-default-action;
-  --ac-button-secondary-bg: --a-surface-default;
-  --ac-button-secondary-border-strong: --a-border-strong-action;
-  --ac-button-secondary-hover-text-default: --a-text-default-action;
-  --ac-button-secondary-hover-bg: --a-surface-action-subtle-hover;
-  --ac-button-secondary-border-strong-focus-border-strong: --a-border-strong-actio;
-  --ac-button-secondary-active-text-default: --a-text-default-on-action;
-  --ac-button-secondary-active-bg: --a-surface-action-active;
-  --ac-button-secondary-active-border-strong-focus-border-strong: --a-surface-default;
-  --ac-button-tertiary-text-default: --a-text-default-action;
-  --ac-button-tertiary-hover-bg: --a-surface-action-subtle-hover;
-  --ac-button-tertiary-border-strong-focus-border-strong: --a-border-strong-actio;
-  --ac-button-tertiary-active-text-default: --a-text-default-on-action;
-  --ac-button-tertiary-active-bg: --a-surface-action-active;
-  --ac-button-tertiary-active-hover-bg: --a-surface-action-active;
-  --ac-button-danger-bg: --a-surface-danger;
-  --ac-button-danger-text-default: --a-text-default-on-danger;
-  --ac-button-danger-hover-bg: --a-surface-danger-hover;
-  --ac-button-danger-active-bg: --a-surface-danger-active;
-  --ac-button-loader-stroke: currentColor;
-  --ac-button-primary-loader-stroke-bg: rgb(255 255 255 / 0.3);
-} */
-
 .override-secondary-button {
-  --v2-migration__navds-semantic-color-surface-action: var(--a-deepblue-500);
-  --v2-migration__navds-button-color-secondary-text-default: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-text-default-hover: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-border-strong: var(--a-surface-action);
-  --v2-migration__navds-button-color-secondary-background-hover: var(--a-deepblue-50);
+  --ac-button-secondary-text: var(--a-deepblue-500);
+  --ac-button-secondary-bg: var(--a-surface-default);
+  --ac-button-secondary-border: var(--a-deepblue-500);
+  --ac-button-secondary-hover-text: var(--a-deepblue-500);
+  --ac-button-secondary-hover-bg: var(--a-deepblue-50);
+  --ac-button-secondary-focus-border: var(--a-deepblue-500);
 }
 
 .override-secondary-button-active {
-  --v2-migration__navds-button-color-secondary-background-hover: var(--a-deepblue-700);
-  --v2-migration__navds-button-color-secondary-text-default-hover: var(--a-text-default-on-inverted);
-}
-
-.override-primary-button {
-  --v2-migration__navds-semantic-color-surface-action: var(--a-deepblue-500);
-
-  --v2-migration__navds-button-color-primary-background: var(--a-surface-action);
-  --v2-migration__navds-button-color-primary-background-hover: var(--a-deepblue-600);
-  --v2-migration__navds-button-color-primary-background-active: var(--a-deepblue-800);
-}
-
-.override-primary-button-dark {
-  --v2-migration__navds-semantic-color-surface-action: var(--a-deepblue-100);
-
-  --v2-migration__navds-button-color-primary-background: var(--a-surface-action);
-  --v2-migration__navds-button-color-primary-background-hover: var(--a-deepblue-200);
-  --v2-migration__navds-button-color-primary-background-active: var(--a-deepblue-300);
+  --ac-button-secondary-text: var(--a-text-on-action);
+  --ac-button-secondary-hover-bg: var(--a-deepblue-700);
+  --ac-button-secondary-hover-text: var(--a-text-on-action);
 }
