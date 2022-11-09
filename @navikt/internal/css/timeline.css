@@ -17,7 +17,7 @@
 .navdsi-timeline__row-label {
   white-space: nowrap;
   width: auto;
-  margin-right: 1.125rem;
+  margin-right: var(--navds-spacing-4);
   grid-column: 1;
   font-size: var(--navds-font-size-medium);
   height: 1.5rem;
