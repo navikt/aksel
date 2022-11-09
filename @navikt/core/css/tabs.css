@@ -1,5 +1,5 @@
 .navds-tabs__tablist-wrapper {
-  box-shadow: inset 0 -1px 0 0 var(--a-border-divider);
+  box-shadow: inset 0 -1px 0 0 var(--ac-tabs-border, var(--a-border-divider));
   width: 100%;
   display: flex;
 }
@@ -54,7 +54,7 @@
 }
 
 .navds-tabs__tab:hover {
-  box-shadow: inset 0 -3px 0 0 var(--a-border-divider);
+  box-shadow: inset 0 -3px 0 0 var(--ac-tabs-hover-border, var(--a-border-subtle-hover));
 }
 
 .navds-tabs__tab[aria-selected="true"] {

@@ -210,14 +210,15 @@
         "value": "{a.grayalpha.300.value}"
       },
       "subtle": {
-        "value": "{a.grayalpha.200.value}"
+        "hover": { "value": "{a.grayalpha.300.value}" },
+        "@": { "value": "{a.grayalpha.200.value}" }
       },
       "action": {
         "value": "{a.blue.500.value}"
       },
       "selected": {
         "selected": { "value": "{a.deepblue.500.value}" },
-        "@": "{a.blue.500.value}"
+        "@": { "value": "{a.blue.500.value}" }
       },
       "success": {
         "value": "{a.green.500.value}"
@@ -261,7 +262,7 @@
       },
       "action": {
         "selected": { "value": "{a.deepblue.500.value}" },
-        "@": "{a.blue.500.value}"
+        "@": { "value": "{a.blue.500.value}" }
       },
       "success": {
         "value": "{a.green.500.value}"
