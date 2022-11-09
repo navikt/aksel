@@ -45,7 +45,7 @@
 
 .navds-chat__bubble {
   padding: 1rem;
-  box-shadow: var(--navds-shadow-small);
+  box-shadow: var(--a-shadow-small);
   width: fit-content;
   max-width: 37.5rem;
   background-color: var(--ac-chat-bubble-bg, var(--a-bg-subtle));
