@@ -24,9 +24,12 @@ export interface ZoomButtonProps {
   count: number;
 }
 
-export type ZoomButtonType = React.ForwardRefExoticComponent<
-  ZoomButtonProps & React.RefAttributes<HTMLButtonElement>
->;
+export interface ZoomButtonType
+  extends React.ForwardRefExoticComponent<
+    ZoomButtonProps & React.RefAttributes<HTMLButtonElement>
+  > {
+  componentType: string;
+}
 
 export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
   ({ label, interval, count, ...rest }, ref) => {
@@ -81,9 +84,8 @@ export const ZoomButton = forwardRef<HTMLButtonElement, ZoomButtonProps>(
       </li>
     );
   }
-);
+) as ZoomButtonType;
 
-//@ts-ignore
 ZoomButton.componentType = "zoom";
 
 export default ZoomButton;
