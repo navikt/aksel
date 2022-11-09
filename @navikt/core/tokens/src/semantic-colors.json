@@ -133,14 +133,8 @@
         "hover": {
           "value": "{a.gray.700.value}"
         },
-        "active": {
-          "value": "{a.deepblue.500.value}"
-        },
         "selected": {
-          "hover": {
-            "value": "{a.deepblue.600.value}"
-          },
-          "@": { "value": "{a.gray.700.value}" }
+          "value": "{a.gray.700.value}"
         },
         "@": {
           "value": "{a.gray.600.value}"
@@ -215,11 +209,11 @@
         "@": { "value": "{a.grayalpha.200.value}" }
       },
       "action": {
-        "value": "{a.blue.500.value}"
-      },
-      "selected": {
         "selected": { "value": "{a.deepblue.500.value}" },
         "@": { "value": "{a.blue.500.value}" }
+      },
+      "selected": {
+        "value": "{a.blue.500.value}"
       },
       "success": {
         "value": "{a.green.500.value}"
