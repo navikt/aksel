@@ -53,7 +53,7 @@ export const Small = () => {
 
 export const Description = () => {
   return (
-    <div className="colgap" data-theme="dark">
+    <div className="colgap">
       <Textarea
         label="Ipsum enim quis culpa"
         description="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
@@ -69,11 +69,10 @@ export const Description = () => {
 
 export const Error = () => {
   return (
-    <div className="colgap" data-theme="dark">
+    <div className="colgap">
       <Textarea
         label="Ipsum enim quis culpa"
         error="Consectetur labore velit eiusmod Lorem ut nostrud mollit labore ullamco laboris laboris in."
-        maxLength={20}
       />
 
       <Textarea
