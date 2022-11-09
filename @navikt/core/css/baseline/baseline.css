@@ -20,7 +20,7 @@ html,
 :root,
 :host,
 [data-theme="light"] {
-  --navds-shadow-focus: 0 0 0 3px var(--a-border-focus);
+  --a-shadow-focus: 0 0 0 3px var(--a-border-focus);
 
   color: var(--a-text-default);
 }

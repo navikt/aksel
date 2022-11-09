@@ -39,7 +39,7 @@
 }
 
 .navds-chips--small .navds-chips__toggle {
-  gap: var(--navds-spacing-1);
+  gap: var(--a-spacing-1);
 }
 
 .navds-chips__toggle:hover {
@@ -68,7 +68,7 @@
 
 .navds-chips__removable--action {
   background-color: var(--ac-chip-removable-action-bg, var(--a-surface-action-selected));
-  color: var(--ac-chip-removable-action-text, var(--a-global-color-white));
+  color: var(--ac-chip-removable-action-text, var(--a-text-on-action));
 }
 
 .navds-chips__removable--neutral {
@@ -90,7 +90,7 @@
   height: 1.25rem;
   display: grid;
   place-items: center;
-  border-radius: var(--navds-border-radius-full);
+  border-radius: var(--a-border-radius-full);
 }
 
 .navds-chips--small .navds-chips__toggle-icon {
