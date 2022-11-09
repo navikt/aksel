@@ -152,7 +152,8 @@
           "hover": { "value": "{a.green.100.value}" },
           "@": { "value": "{a.green.50.value}" }
         },
-        "@": { "value": "{a.green.500.value}" }
+        "@": { "value": "{a.green.500.value}" },
+        "hover": { "value": "{a.green.600.value}" }
       },
 
       "danger": {
