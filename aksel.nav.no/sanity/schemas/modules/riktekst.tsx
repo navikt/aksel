@@ -14,8 +14,8 @@ export const TitleRenderer = (props, size, level) => (
 );
 
 export const ScCode = styled.code`
-  color: var(--navds-global-color-deepblue-500);
-  background-color: var(--navds-global-color-deepblue-50);
+  color: var(--a-deepblue-500);
+  background-color: var(--a-deepblue-50);
   border-radius: 6px;
   font-size: 1rem;
   padding: 2px 0.5rem;
