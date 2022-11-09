@@ -241,7 +241,10 @@
         "@": { "value": "{a.blue.800.value}" }
       },
       "on": {
-        "inverted": { "value": "{a.white.value}" }
+        "inverted": {
+          "@": { "value": "{a.white.value}" },
+          "subtle": { "value": "{a.gray.700.value}" }
+        }
       },
       "alt1": {
         "inverted": { "value": "{a.purple.400.value}" }

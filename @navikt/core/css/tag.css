@@ -1,24 +1,10 @@
-:root,
-:host {
-  --navds-tag-color-border: var(--navds-semantic-color-border-muted);
-  --navds-tag-color-background: var(--navds-semantic-color-component-background-alternate);
-  --navds-tag-color-info-background: var(--navds-semantic-color-feedback-info-background);
-  --navds-tag-color-info-border: var(--navds-semantic-color-feedback-info-border);
-  --navds-tag-color-warning-background: var(--navds-semantic-color-feedback-warning-background);
-  --navds-tag-color-warning-border: var(--navds-semantic-color-feedback-warning-border);
-  --navds-tag-color-success-background: var(--navds-semantic-color-feedback-success-background);
-  --navds-tag-color-success-border: var(--navds-semantic-color-feedback-success-border);
-  --navds-tag-color-error-background: var(--navds-semantic-color-feedback-danger-background);
-  --navds-tag-color-error-border: var(--navds-semantic-color-feedback-danger-border);
-}
-
 .navds-tag {
   border: 1px solid;
-  border-radius: var(--navds-border-radius-small);
+  border-radius: var(--a-border-radius-small);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.125rem var(--navds-spacing-2);
+  padding: 0.125rem var(--a-spacing-2);
   min-height: 32px;
   line-height: 1;
 }
@@ -30,101 +16,101 @@
 
 .navds-tag--xsmall {
   min-height: 20px;
-  padding: 0 var(--navds-spacing-1);
+  padding: 0 var(--a-spacing-1);
 }
 
 .navds-tag--error {
-  border-color: var(--ac-tag-error-border, var(--navds-global-color-red-500));
-  background-color: var(--ac-tag-error-bg, var(--navds-global-color-red-50));
-  color: var(--ac-tag-error-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-error-border, var(--a-red-500));
+  background-color: var(--ac-tag-error-bg, var(--a-red-50));
+  color: var(--ac-tag-error-text, var(--a-gray-900));
 }
 
 .navds-tag--error-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-error-filled-bg, var(--navds-global-color-red-500));
-  color: var(--ac-tag-error-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-error-filled-bg, var(--a-red-500));
+  color: var(--ac-tag-error-filled-text, var(--a-white));
 }
 
 .navds-tag--success {
-  border-color: var(--ac-tag-success-border, var(--navds-global-color-green-500));
-  background-color: var(--ac-tag-success-bg, var(--navds-global-color-green-50));
-  color: var(--ac-tag-success-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-success-border, var(--a-green-500));
+  background-color: var(--ac-tag-success-bg, var(--a-green-50));
+  color: var(--ac-tag-success-text, var(--a-gray-900));
 }
 
 .navds-tag--success-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-success-filled-bg, var(--navds-global-color-green-500));
-  color: var(--ac-tag-success-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-success-filled-bg, var(--a-green-500));
+  color: var(--ac-tag-success-filled-text, var(--a-white));
 }
 
 .navds-tag--warning {
-  border-color: var(--ac-tag-warning-border, var(--navds-global-color-orange-600));
-  background-color: var(--ac-tag-warning-bg, var(--navds-global-color-orange-50));
-  color: var(--ac-tag-warning-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-warning-border, var(--a-orange-600));
+  background-color: var(--ac-tag-warning-bg, var(--a-orange-50));
+  color: var(--ac-tag-warning-text, var(--a-gray-900));
 }
 
 .navds-tag--warning-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-warning-filled-bg, var(--navds-global-color-orange-500));
-  color: var(--ac-tag-warning-filled-text, var(--navds-global-color-gray-900));
+  background-color: var(--ac-tag-warning-filled-bg, var(--a-orange-500));
+  color: var(--ac-tag-warning-filled-text, var(--a-gray-900));
 }
 
 .navds-tag--info {
-  border-color: var(--ac-tag-info-border, var(--navds-global-color-lightblue-700));
-  background-color: var(--ac-tag-info-bg, var(--navds-global-color-lightblue-50));
-  color: var(--ac-tag-info-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-info-border, var(--a-lightblue-700));
+  background-color: var(--ac-tag-info-bg, var(--a-lightblue-50));
+  color: var(--ac-tag-info-text, var(--a-gray-900));
 }
 
 .navds-tag--info-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-info-filled-bg, var(--navds-global-color-lightblue-500));
-  color: var(--ac-tag-info-filled-text, var(--navds-global-color-gray-900));
+  background-color: var(--ac-tag-info-filled-bg, var(--a-lightblue-500));
+  color: var(--ac-tag-info-filled-text, var(--a-gray-900));
 }
 
 .navds-tag--neutral {
-  border-color: var(--ac-tag-neutral-border, var(--navds-global-color-gray-500));
-  background-color: var(--ac-tag-neutral-bg, var(--navds-global-color-gray-100));
-  color: var(--ac-tag-neutral-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-neutral-border, var(--a-gray-500));
+  background-color: var(--ac-tag-neutral-bg, var(--a-gray-100));
+  color: var(--ac-tag-neutral-text, var(--a-gray-900));
 }
 
 .navds-tag--neutral-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-neutral-filled-bg, var(--navds-global-color-gray-800));
-  color: var(--ac-tag-neutral-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-neutral-filled-bg, var(--a-gray-800));
+  color: var(--ac-tag-neutral-filled-text, var(--a-white));
 }
 
 .navds-tag--alt1 {
-  border-color: var(--ac-tag-alt1-border, var(--navds-global-color-purple-400));
-  background-color: var(--ac-tag-alt1-bg, var(--navds-global-color-purple-100));
-  color: var(--ac-tag-alt1-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-alt1-border, var(--a-purple-400));
+  background-color: var(--ac-tag-alt1-bg, var(--a-purple-100));
+  color: var(--ac-tag-alt1-text, var(--a-gray-900));
 }
 
 .navds-tag--alt1-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt1-filled-bg, var(--navds-global-color-purple-400));
-  color: var(--ac-tag-alt1-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-alt1-filled-bg, var(--a-purple-400));
+  color: var(--ac-tag-alt1-filled-text, var(--a-white));
 }
 
 .navds-tag--alt2 {
-  border-color: var(--ac-tag-alt2-border, var(--navds-global-color-limegreen-500));
-  background-color: var(--ac-tag-alt2-bg, var(--navds-global-color-limegreen-100));
-  color: var(--ac-tag-alt2-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-alt2-border, var(--a-limegreen-500));
+  background-color: var(--ac-tag-alt2-bg, var(--a-limegreen-100));
+  color: var(--ac-tag-alt2-text, var(--a-gray-900));
 }
 
 .navds-tag--alt2-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt2-filled-bg, var(--navds-global-color-limegreen-400));
-  color: var(--ac-tag-alt2-filled-text, var(--navds-global-color-gray-900));
+  background-color: var(--ac-tag-alt2-filled-bg, var(--a-limegreen-400));
+  color: var(--ac-tag-alt2-filled-text, var(--a-gray-900));
 }
 
 .navds-tag--alt3 {
-  border-color: var(--ac-tag-alt3-border, var(--navds-global-color-deepblue-400));
-  background-color: var(--ac-tag-alt3-bg, var(--navds-global-color-deepblue-100));
-  color: var(--ac-tag-alt3-text, var(--navds-global-color-gray-900));
+  border-color: var(--ac-tag-alt3-border, var(--a-deepblue-400));
+  background-color: var(--ac-tag-alt3-bg, var(--a-deepblue-100));
+  color: var(--ac-tag-alt3-text, var(--a-gray-900));
 }
 
 .navds-tag--alt3-filled {
   border-color: transparent;
-  background-color: var(--ac-tag-alt3-filled-bg, var(--navds-global-color-deepblue-500));
-  color: var(--ac-tag-alt3-filled-text, var(--navds-global-color-white));
+  background-color: var(--ac-tag-alt3-filled-bg, var(--a-deepblue-500));
+  color: var(--ac-tag-alt3-filled-text, var(--a-white));
 }

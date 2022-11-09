@@ -25,15 +25,15 @@
 }
 
 .navds-loader--interaction .navds-loader__foreground {
-  stroke: var(--ac-loader-interaction-stroke, var(--a-surface-action));
+  stroke: var(--ac-loader-interaction-stroke, var(--a-border-action));
 }
 
 .navds-loader--inverted .navds-loader__foreground {
-  stroke: var(--ac-loader-inverted-stroke, var(--a-surface-default));
+  stroke: var(--ac-loader-inverted-stroke, var(--a-border-on-inverted));
 }
 
 .navds-loader--inverted .navds-loader__background {
-  stroke: var(--ac-loader-inverted-stroke-bg, var(--a-border-on-inverted));
+  stroke: var(--ac-loader-inverted-stroke-bg, var(--a-border-on-inverted-subtle));
 }
 
 .navds-loader--transparent .navds-loader__background {
