@@ -419,7 +419,7 @@ const tokens = [
 ["--navds-text-field-color-border", "--a-border-default"],
 
 ["--navds-dropdown-menu-color", "--a-text-default"],
-["--navdsi-dropdown-item-color-text", "--text-action"],
+["--navdsi-dropdown-item-color-text", "--a-text-action"],
 ["--navdsi-dropdown-item-color-background-hover", "--a-surface-action-subtle-hover"],
 ["--navdsi-dropdown-item-color-background-active", "--a-surface-action-active"],
 ["--navds-dropdown-item-color-focus", "--a-border-focus"],
