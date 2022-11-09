@@ -1,6 +1,7 @@
 [data-theme="dark"] {
   --ac-search-button-border: var(--a-border-on-inverted);
   --ac-search-button-border-hover: var(--a-blue-200);
+  --ac-search-clear-icon: var(--a-white);
   --ac-search-clear-icon-hover: var(--a-blue-200);
   --ac-search-error-border: var(--a-red-300);
 }
