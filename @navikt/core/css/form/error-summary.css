@@ -1,13 +1,7 @@
-:root,
-:host {
-  --v2-migration__navds-error-summary-color-background: var(--a-surface-default);
-  --v2-migration__navds-error-summary-color-border: var(--a-border-danger);
-}
-
 .navds-error-summary {
-  background-color: var(--a-surface-default);
+  background-color: var(--ac-error-summary-bg, var(--a-surface-default));
   padding: var(--a-spacing-5);
-  border: 4px solid var(--a-border-danger);
+  border: 4px solid var(--ac-error-summary-border, var(--a-border-danger));
 }
 
 .navds-error-summary--small {

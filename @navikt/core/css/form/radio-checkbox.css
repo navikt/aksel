@@ -1,16 +1,3 @@
-:root,
-:host {
-  --v2-migration__navds-radio-checkbox-color-background: var(--a-surface-default);
-  --v2-migration__navds-radio-checkbox-color-text: var(--a-text-default);
-  --v2-migration__navds-radio-checkbox-color-background-hover: var(--a-surface-action-subtle-hover);
-  --v2-migration__navds-radio-checkbox-color-background-checked: var(--a-surface-action);
-  --v2-migration__navds-radio-checkbox-color-shadow: var(--a-border-strong);
-  --v2-migration__navds-radio-checkbox-color-shadow-hover: var(--a-surface-action);
-  --v2-migration__navds-radio-checkbox-color-shadow-checked: var(--a-surface-action);
-  --v2-migration__navds-radio-checkbox-color-shadow-error: var(--a-surface-danger);
-  --v2-migration__navds-radio-checkbox-color-label-hover: var(--a-surface-action);
-}
-
 .navds-checkbox,
 .navds-radio {
   position: relative;
