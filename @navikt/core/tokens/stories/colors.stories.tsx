@@ -19,13 +19,14 @@ const globalColor = (
     | "lightblue"
     | "purple"
 ): { [key: string]: string } => {
-  return Object.entries(tokens).reduce(
-    (old, [key, val]) =>
-      key.toLowerCase().startsWith(`a${color}`)
-        ? { ...old, [key]: val }
-        : { ...old },
-    {}
-  );
+  return Object.entries(tokens).reduce((old, [key, val]) => {
+    if (color === "gray" && key.toLowerCase().includes("alpha")) {
+      return { ...old };
+    }
+    return key.toLowerCase().startsWith(`a${color}`)
+      ? { ...old, [key]: val }
+      : { ...old };
+  }, {});
 };
 
 const RenderGlobal = ({ color }) => (
