@@ -49,7 +49,7 @@ const NavItem = ({
             {
               "text-deepblue-800 font-semibold":
                 pageProps?.page?.slug === item?.link?.slug?.current,
-              "text-text-muted": !(
+              "text-text-subtle": !(
                 pageProps?.page?.slug === item?.link?.slug?.current
               ),
               "pl-4":
@@ -100,12 +100,12 @@ const Dropdown = ({
     >
       <button
         onClick={() => setOpen((x) => !x)}
-        className="min-h-8 text-text-muted hover:text-deepblue-800 group z-10 flex w-full cursor-pointer items-center justify-between pr-2 focus:outline-none"
+        className="min-h-8 text-text-subtle hover:text-deepblue-800 group z-10 flex w-full cursor-pointer items-center justify-between pr-2 focus:outline-none"
         aria-expanded={open}
       >
         <Detail
           as="span"
-          className="group-focus-visible:shadow-focus mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold first:mt-0 group-hover:bg-[rgba(0,0,0,0.06)] group-active:bg-[rgba(0,0,0,0.10)]"
+          className="group-focus-visible:shadow-focus group-hover:bg-surface-neutral-subtle group-active:bg-bg-surface-neutral-subtle-hover mt-6 flex w-full items-center justify-between rounded-sm pl-2 font-semibold first:mt-0"
         >
           {heading.title}
           <span className="flex h-6 w-6 items-center justify-center rounded">
