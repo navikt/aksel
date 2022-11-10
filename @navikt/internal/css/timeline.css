@@ -145,6 +145,8 @@
   height: 100%;
   display: flex;
   flex-direction: column-reverse;
+
+  --navdsc-timeline-pin-size: 1.5rem;
 }
 
 .navdsi-timeline__pin__button {
@@ -158,8 +160,8 @@
 
 .navdsi-timeline__pin__wrapper::before {
   content: " ";
-  top: 13px;
-  height: calc(100% - 13px);
+  top: var(--navdsc-timeline-pin-size);
+  height: calc(100% - var(--navdsc-timeline-pin-size));
   width: 1px;
   margin: 0 auto;
   background: var(--navds-global-color-gray-900);
