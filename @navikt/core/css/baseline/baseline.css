@@ -1,8 +1,6 @@
 @import "@navikt/ds-tokens";
 @import "normalize.css";
-@import "Source-Sans-Pro-regular.css";
-@import "Source-Sans-Pro-italic.css";
-@import "Source-Sans-Pro-600.css";
+@import "fonts.css";
 @import "print.css";
 @import "utility.css";
 
