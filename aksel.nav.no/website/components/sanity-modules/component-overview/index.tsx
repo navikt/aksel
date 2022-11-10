@@ -61,7 +61,7 @@ const ComponentOverview = ({
       <ul className="component-card-grid">
         {sorted.map((x) => (
           <li key={x._id}>
-            <div className="group relative rounded shadow-small ring-1 ring-gray-900/10 focus-within:shadow-focus hover:shadow-medium">
+            <div className="shadow-small focus-within:shadow-focus hover:shadow-medium group relative rounded ring-1 ring-gray-900/10">
               <div
                 className={cl(
                   "flex max-h-64 items-center justify-center overflow-hidden rounded-t bg-gray-50",
@@ -87,20 +87,11 @@ const ComponentOverview = ({
                     aria-hidden
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="-11.5 -10.23174 23 20.46348"
-                    className="aspect-[1.25/1] h-auto max-h-64 min-h-40 p-4"
+                    className="min-h-40 aspect-[1.25/1] h-auto max-h-64 p-4"
                   >
                     <title>React Logo</title>
-                    <circle
-                      cx="0"
-                      cy="0"
-                      r="2.05"
-                      fill="var(--navds-global-color-gray-300)"
-                    />
-                    <g
-                      stroke="var(--navds-global-color-gray-300)"
-                      strokeWidth="1"
-                      fill="none"
-                    >
+                    <circle cx="0" cy="0" r="2.05" fill="var(--a-gray-300)" />
+                    <g stroke="var(--a-gray-300)" strokeWidth="1" fill="none">
                       <ellipse rx="11" ry="4.2" />
                       <ellipse rx="11" ry="4.2" transform="rotate(60)" />
                       <ellipse rx="11" ry="4.2" transform="rotate(120)" />

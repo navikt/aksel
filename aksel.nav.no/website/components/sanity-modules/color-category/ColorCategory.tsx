@@ -96,7 +96,7 @@ const ColorCategory = ({
     <div className="mb-8">
       {node?.description && <SanityBlockContent blocks={node?.description} />}
       {node.colors[0].color_type === "global" ? (
-        <div className="flex w-auto max-w-[calc(theme(spacing.text)_-_2rem)] flex-col rounded shadow-[0_0_0_1px] shadow-border-muted">
+        <div className="shadow-border-default flex w-auto max-w-[calc(theme(spacing.text)_-_2rem)] flex-col rounded shadow-[0_0_0_1px]">
           {node.colors?.map((color, i) => (
             <GlobalTableRow
               onClick={() => handleSelect(color)}
@@ -112,11 +112,11 @@ const ColorCategory = ({
           <Table className="min-w-[400px] table-fixed">
             <Table.Header>
               <Table.Row>
-                <Table.HeaderCell className="text-text-muted">
+                <Table.HeaderCell className="text-text-subtle">
                   Token
                 </Table.HeaderCell>
                 {node.colors[0].color_type === "semantic" && (
-                  <Table.HeaderCell className="text-text-muted">
+                  <Table.HeaderCell className="text-text-subtle">
                     Rolle
                   </Table.HeaderCell>
                 )}

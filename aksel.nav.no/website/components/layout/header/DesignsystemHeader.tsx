@@ -38,7 +38,7 @@ const DesignsystemHeader = (): JSX.Element => {
                   {
                     "text-text-on-inverted hover:bg-gray-800 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_3px_var(--a-border-focus-on-inverted)]":
                       !(pageProps?.activeHeading?.title === heading.title),
-                    "algolia-index-heading--active text-text bg-white  hover:bg-gray-50 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_2px_var(--a-white)_,inset_0_0_0_4px_var(--a-gray-900)]":
+                    "algolia-index-heading--active text-text-default bg-white hover:bg-gray-50 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_2px_var(--a-white)_,inset_0_0_0_4px_var(--a-gray-900)]":
                       pageProps?.activeHeading?.title === heading.title,
                   }
                 )}

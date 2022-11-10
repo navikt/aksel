@@ -16,7 +16,7 @@ const Card = ({ node, tag, href, className, ...rest }: CardProps) => {
   return (
     <div
       className={cl(
-        "group relative flex aspect-[21/22] w-[18rem] flex-col rounded bg-white p-6 pt-8 text-text shadow-small ring-1 ring-gray-900/10 focus-within:outline-none hover:shadow-medium  active:text-link lg:aspect-[18/22] lg:p-8 lg:pt-12",
+        "text-text-default shadow-small hover:shadow-medium active:text-text-action group relative flex aspect-[21/22] w-[18rem] flex-col rounded bg-white p-6 pt-8 ring-1 ring-gray-900/10  focus-within:outline-none lg:aspect-[18/22] lg:p-8 lg:pt-12",
         className
       )}
     >
@@ -37,7 +37,7 @@ const Card = ({ node, tag, href, className, ...rest }: CardProps) => {
               e.currentTarget.getAttribute("href")
             )
           }
-          className="navds-heading--medium navds-heading navds-typo--spacing no-underline after:absolute after:inset-0 after:rounded focus:outline-none focus-visible:after:shadow-focus group-hover:underline"
+          className="navds-heading--medium navds-heading navds-typo--spacing focus-visible:after:shadow-focus no-underline after:absolute after:inset-0 after:rounded focus:outline-none group-hover:underline"
           {...rest}
         >
           {node.title}

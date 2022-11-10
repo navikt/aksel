@@ -133,9 +133,9 @@ const Portaler = () => {
               <NextLink href={x.href} passHref>
                 <a
                   onClick={(e) => logPortalCard(e)}
-                  className="group flex items-center gap-2 py-1 focus:outline-none focus-visible:shadow-focus-inverted md:w-auto xl:gap-3"
+                  className="focus-visible:shadow-focus-inverted group flex items-center gap-2 py-1 focus:outline-none md:w-auto xl:gap-3"
                 >
-                  <div className="grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white group-hover:text-deepblue-900">
+                  <div className="group-hover:text-deepblue-900 grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white">
                     {x.icon}
                   </div>
                   <div className="pr-8 text-white">
@@ -209,14 +209,14 @@ const Page = (props: PageProps): JSX.Element => {
       <div className="bg-deepblue-900">
         <AkselHeader variant="forside" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
-          <div className="relative bg-deepblue-900 bg-gradient-to-b from-deepblue-900 via-deepblue-900/50 to-deepblue-700 px-4 pt-16 pb-24 text-white">
+          <div className="bg-deepblue-900 from-deepblue-900 via-deepblue-900/50 to-deepblue-700 relative bg-gradient-to-b px-4 pt-16 pb-24 text-white">
             <div className="dynamic-wrapper">
               <div className="gap-6 lg:grid lg:grid-cols-3">
                 <div className="max-w-prose pr-6 lg:col-span-2">
                   <Heading level="1" size="xlarge">
                     {tekster.title}
                   </Heading>
-                  <div className="mt-6 text-deepblue-100/95">
+                  <div className="text-deepblue-100/95 mt-6">
                     <SanityBlockContent blocks={tekster.beskrivelse} />
                   </div>
                 </div>
@@ -227,7 +227,7 @@ const Page = (props: PageProps): JSX.Element => {
 
           {/* Temaseksjon */}
           {filteredTemas && filteredTemas.length > 0 && (
-            <section className="relative bg-deepblue-50 px-4 pt-16 pb-24">
+            <section className="bg-deepblue-50 relative px-4 pt-16 pb-24">
               {/* Separator */}
               <svg
                 className="absolute inset-x-0 top-0 w-full"
@@ -244,7 +244,7 @@ const Page = (props: PageProps): JSX.Element => {
                 <Heading
                   level="2"
                   size="small"
-                  className="uppercase text-text-inverted"
+                  className="text-text-on-inverted uppercase"
                 >
                   Temaer
                 </Heading>
@@ -256,7 +256,7 @@ const Page = (props: PageProps): JSX.Element => {
                 </div>
                 {filteredTemas.length > 6 && (
                   <NextLink href="/tema">
-                    <a className="mt-6 inline-block text-text underline hover:text-deepblue-700 hover:no-underline">
+                    <a className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline">
                       Utforsk alle temaer
                     </a>
                   </NextLink>
@@ -296,7 +296,7 @@ const Page = (props: PageProps): JSX.Element => {
                           passHref
                           key={x.slug.current}
                         >
-                          <a className="flex w-full items-center justify-between gap-4 rounded-md bg-white px-6 py-4 leading-tight shadow hover:bg-deepblue-200/60 hover:shadow-md focus:outline-none focus-visible:shadow-focus sm:w-auto">
+                          <a className="hover:bg-deepblue-200/60 focus-visible:shadow-focus flex w-full items-center justify-between gap-4 rounded-md bg-white px-6 py-4 leading-tight shadow hover:shadow-md focus:outline-none sm:w-auto">
                             <span className="font-semibold">{x.heading}</span>{" "}
                             <Next
                               className="-mr-1 sm:hidden"
@@ -337,7 +337,7 @@ const Page = (props: PageProps): JSX.Element => {
               <div className="gap-6 2xl:grid 2xl:grid-cols-3 2xl:items-start">
                 {/* Redaksjons-kort */}
                 <div className="mx-auto grid max-w-lg  rounded-lg shadow 2xl:sticky 2xl:top-24">
-                  <div className="rounded-t-lg bg-deepblue-700 px-6 py-6 text-white">
+                  <div className="bg-deepblue-700 rounded-t-lg px-6 py-6 text-white">
                     <Heading size="medium" level="2">
                       Aksel trenger deg!
                     </Heading>
@@ -348,7 +348,7 @@ const Page = (props: PageProps): JSX.Element => {
                     </BodyLong>
                   </div>
                   <a
-                    className="group flex items-center justify-between rounded-b-lg bg-deepblue-300/60 px-6 py-4 leading-snug hover:bg-deepblue-200 hover:underline focus:outline-none focus-visible:rounded-lg focus-visible:shadow-focus"
+                    className="bg-deepblue-300/60 hover:bg-deepblue-200 focus-visible:shadow-focus group flex items-center justify-between rounded-b-lg px-6 py-4 leading-snug hover:underline focus:outline-none focus-visible:rounded-lg"
                     href="https://nav-it.slack.com/archives/C0370ADS0HX"
                     target="_blank"
                     rel="noreferrer"
@@ -378,7 +378,7 @@ const Page = (props: PageProps): JSX.Element => {
                     {bloggs?.length > 6 && (
                       <NextLink href="/blogg" passHref>
                         <a
-                          className="mt-6 inline-block text-text underline hover:text-deepblue-700 hover:no-underline"
+                          className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline"
                           href="#"
                         >
                           Flere bloggposter

@@ -37,9 +37,9 @@ const ColorModal = ({ color }: { color: SanityT.Schema.ds_color }) => {
         <div>
           <div
             className={cl("flex items-center rounded-lg py-4 pr-8 pl-2", {
-              "text-text-inverted": Color(color.color_value).isDark(),
-              "text-text": !Color(color.color_value).isDark(),
-              "shadow:[0_0_0_1px_theme(colors.border-muted)]":
+              "text-text-on-inverted": Color(color.color_value).isDark(),
+              "text-text-default": !Color(color.color_value).isDark(),
+              "shadow:[0_0_0_1px_theme(colors.border-default)]":
                 Color(color.color_value).luminosity() > 0.9,
             })}
             style={{ backgroundColor: `var(${color.full_title})` }}
@@ -50,7 +50,7 @@ const ColorModal = ({ color }: { color: SanityT.Schema.ds_color }) => {
       )}
       {color.color_roles && (
         <div>
-          <BodyShort className="text-text-muted" spacing>
+          <BodyShort className="text-text-subtle" spacing>
             Roller
           </BodyShort>
           {color?.color_roles.map((role) => (
@@ -60,14 +60,14 @@ const ColorModal = ({ color }: { color: SanityT.Schema.ds_color }) => {
       )}
       {color.color_type === "semantic" && (
         <div>
-          <BodyShort className="text-text-muted" spacing>
+          <BodyShort className="text-text-subtle" spacing>
             Global farge
           </BodyShort>
           <div
             className={cl("flex items-center rounded-lg py-4 pr-8 pl-2", {
-              "text-text-inverted": Color(color.color_value).isDark(),
-              "text-text": !Color(color.color_value).isDark(),
-              "shadow:[0_0_0_1px_theme(colors.border-muted)]":
+              "text-text-on-inverted": Color(color.color_value).isDark(),
+              "text-text-default": !Color(color.color_value).isDark(),
+              "shadow:[0_0_0_1px_theme(colors.border-default)]":
                 Color(color.color_value).luminosity() > 0.9,
             })}
             style={{ backgroundColor: `var(${color.full_title})` }}

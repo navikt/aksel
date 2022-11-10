@@ -27,14 +27,14 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
             <BodyShort as="ul" className="mt-5 grid gap-2">
               <li>
                 <NextLink href="/artikkel/om-aksel" passHref>
-                  <Link className="text-text-on-inverted focus:text-text focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
+                  <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Om Aksel
                   </Link>
                 </NextLink>
               </li>
               <li>
                 <NextLink href="/artikkel/skriv-for-aksel" passHref>
-                  <Link className="text-text-on-inverted focus:text-text focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
+                  <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Skriv for Aksel
                   </Link>
                 </NextLink>
@@ -42,7 +42,7 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
               {variant === "aksel" && (
                 <li>
                   <Link
-                    className="text-text-on-inverted focus:text-text focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                    className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
                     href="https://nav-it.slack.com/archives/C0370ADS0HX"
                   >
                     Aksel på Slack
@@ -52,7 +52,7 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
               {variant === "ds" && (
                 <li>
                   <Link
-                    className="text-text-on-inverted focus:text-text focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
+                    className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200"
                     href="https://nav-it.slack.com/archives/C7NE7A8UF"
                   >
                     Designsystemet på Slack
@@ -96,7 +96,7 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
           <div className="hidden self-end xl:block">
             <p>&copy; 2022 NAV</p>
             <NextLink href="/side/personvernerklaering" passHref>
-              <a className="focus:bg-border-focus-on-inverted focus:text-text focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
+              <a className="focus:bg-border-focus-on-inverted focus:text-text-default focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
                 Personvernerklæring og informasjonskapsler
               </a>
             </NextLink>
@@ -104,7 +104,7 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
           <div className="block self-end xl:hidden">
             &copy; 2022 NAV |{" "}
             <NextLink href="/side/personvernerklaering" passHref>
-              <a className="focus:bg-border-focus-on-inverted focus:text-text focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
+              <a className="focus:bg-border-focus-on-inverted focus:ring-border-focus-on-inverted outline-none hover:underline focus:no-underline focus:ring">
                 Personvernerklæring og informasjonskapsler
               </a>
             </NextLink>

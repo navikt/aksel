@@ -12,7 +12,7 @@ const RadiusBlock = ({ token }: { token: SanityT.Schema.ds_tokens }) => {
     <div className="flex w-full gap-6">
       <div
         style={{ borderRadius: token.token }}
-        className="relative h-20 w-20 min-w-20 rounded border border-border-muted"
+        className="min-w-20 border-border-default relative h-20 w-20 rounded border"
       ></div>
       <div className="w-32">
         <Label size="small" spacing className="mt-1 break-words" as="p">
@@ -29,7 +29,7 @@ const ShadowBlock = ({ token }: { token: SanityT.Schema.ds_tokens }) => {
     <div className="flex w-full gap-6">
       <div
         style={{ boxShadow: token.raw ?? token.token }}
-        className="relative h-24 w-24 min-w-24 rounded"
+        className="min-w-24 relative h-24 w-24 rounded"
       ></div>
       <div>
         <Label size="small" spacing className="mt-1 break-words" as="p">
@@ -76,7 +76,7 @@ const SemanticColorBlock = ({ token }: { token: SanityT.Schema.ds_tokens }) => {
       {!isText && (
         <div
           style={{ background: token.raw }}
-          className="relative h-32 w-32 min-w-32 rounded border border-gray-900/20"
+          className="min-w-32 relative h-32 w-32 rounded border border-gray-900/20"
         >
           <button
             onClick={() => copy(`var(--navds-${token.title});`)}

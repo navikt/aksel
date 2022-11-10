@@ -61,7 +61,7 @@ const AkselBloggTemplate = ({
       <main
         tabIndex={-1}
         id="hovedinnhold"
-        className="aksel-artikkel bg-orange-50 pt-[8vw] pb-16 focus:outline-none xs:pb-32"
+        className="aksel-artikkel xs:pb-32 bg-orange-50 pt-[8vw] pb-16 focus:outline-none"
       >
         <div className="px-4">
           <div className="dynamic-wrapper-prose text-center">
@@ -83,14 +83,14 @@ const AkselBloggTemplate = ({
                   </BodyShort>
                   <BodyShort
                     size="small"
-                    className="text-text-muted/40"
+                    className="text-text-subtle"
                     as="span"
                   >
                     —
                   </BodyShort>
                 </>
               )}
-              <BodyShort size="small" as="span" className="text-text-muted">
+              <BodyShort size="small" as="span" className="text-text-subtle">
                 {dateStr(data?.publishedAt ?? data._createdAt)}
               </BodyShort>
             </div>
@@ -109,14 +109,14 @@ const AkselBloggTemplate = ({
         <div className="mt-16 px-4">
           <div className="dynamic-wrapper-prose">
             {authors?.length > 0 && (
-              <Label className="mb-2 text-deepblue-700" as="p">
+              <Label className="text-deepblue-700 mb-2" as="p">
                 Bidragsytere
               </Label>
             )}
             {authors?.length > 0 && (
               <BodyShort
                 as="div"
-                className="mb-1 flex flex-wrap gap-1 text-text/80"
+                className="text-text-subtle mb-1 flex flex-wrap gap-1"
               >
                 {authors.map(abbrName).map((x, y) => (
                   <address className="not-italic" key={x}>
@@ -126,7 +126,7 @@ const AkselBloggTemplate = ({
                 ))}
               </BodyShort>
             )}
-            <BodyShort as="span" className="whitespace-nowrap text-text/80">
+            <BodyShort as="span" className="text-text-subtle whitespace-nowrap">
               Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
             </BodyShort>
           </div>

@@ -40,7 +40,7 @@ const Page = (props: {
       }}
     >
       <DsHeader />
-      <div className="bg-canvas-background-light flex w-full flex-col items-center">
+      <div className="bg-bg-default flex w-full flex-col items-center">
         <div className="flex w-full max-w-screen-2xl">
           <DsSidebar />
           <div className="relative w-full">

@@ -45,7 +45,7 @@ const ArtikkelTemplate = ({
           <BodyShort
             size="small"
             as="span"
-            className="flex items-center text-text-muted"
+            className="text-text-subtle flex items-center"
           >
             {`Oppdatert ${dateStr(data._updatedAt)}`}
           </BodyShort>

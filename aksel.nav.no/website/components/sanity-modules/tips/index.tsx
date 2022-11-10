@@ -17,11 +17,11 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
       <div
         className={cl(
           style.tips,
-          "linear my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4 xs:px-8"
+          "linear xs:px-8 my-8 max-w-2xl rounded-r border-l-[6px] border-l-green-200 bg-white px-4 py-4"
         )}
       >
         <Detail
-          className="flex items-center gap-1 font-semibold uppercase text-text-muted"
+          className="text-text-subtle flex items-center gap-1 font-semibold uppercase"
           spacing
         >
           <svg
@@ -47,7 +47,7 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
         <SanityBlockContent blocks={node.body} noLastMargin />
         <Link
           as="button"
-          className="svg-color-reset mt-3 flex w-fit gap-2 text-text"
+          className="svg-color-reset text-text-default mt-3 flex w-fit gap-2"
           onClick={() => {
             const el = document.getElementById("feedback-forbedringer-button");
             if (el) {
@@ -71,11 +71,11 @@ const Tips = ({ node }: { node: SanityT.Schema.tips }): JSX.Element => {
     <div
       className={cl(
         style.tips,
-        "my-7 max-w-2xl px-4 py-3 shadow-[inset_5px_0_0_0_var(--navds-global-color-gray-500),inset_0_0_0_1px_var(--navds-global-color-gray-200)] xs:px-6"
+        "xs:px-6 my-7 max-w-2xl px-4 py-3 shadow-[inset_5px_0_0_0_var(--a-gray-500),inset_0_0_0_1px_var(--a-gray-200)]"
       )}
     >
       <Detail
-        className="override-text-no-max -ml-[2px] flex items-center gap-1 font-semibold text-text-muted"
+        className="override-text-no-max text-text-subtle -ml-[2px] flex items-center gap-1 font-semibold"
         spacing
       >
         <LightBulb className="text-large" title="tips" aria-hidden />

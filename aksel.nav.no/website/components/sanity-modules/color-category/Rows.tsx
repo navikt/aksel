@@ -20,8 +20,8 @@ const ColorBox = ({
         className={cl(
           "flex h-16 w-full min-w-[10rem] flex-col justify-center border-none px-4",
           {
-            "text-text": !color.isDark(),
-            "text-text-inverted": color.isDark(),
+            "text-text-default": !color.isDark(),
+            "text-text-on-inverted": color.isDark(),
             "rounded-b": last,
             "rounded-t": first,
           }
@@ -37,8 +37,8 @@ const ColorBox = ({
       className={cl(
         "flex h-[66px] min-w-[10rem] flex-col justify-center rounded px-4",
         {
-          "border border-divider": color.luminosity() > 0.8,
-          "text-text-inverted": color.isDark(),
+          "border-border-divider border": color.luminosity() > 0.8,
+          "text-text-on-inverted": color.isDark(),
         }
       )}
       style={{ background: color.hex() }}
@@ -61,7 +61,7 @@ export const GlobalTableRow = ({
 }) => (
   <button
     {...rest}
-    className="z-[1] max-w-text whitespace-nowrap text-left align-top first:rounded-t last:rounded-b focus:z-[2] focus:outline-none focus-visible:shadow-focus"
+    className="max-w-text focus-visible:shadow-focus z-[1] whitespace-nowrap text-left align-top first:rounded-t last:rounded-b focus:z-[2] focus:outline-none"
   >
     <ColorBox prop={prop} first={first} last={last} />
   </button>
@@ -78,7 +78,7 @@ export const SemanticTableRow = ({
     <Table.Row
       tabIndex={0}
       {...rest}
-      className="w-full text-medium hover:cursor-pointer focus:z-[1] focus:outline-none focus-visible:shadow-focus-inset"
+      className="text-medium focus-visible:shadow-focus-inset w-full hover:cursor-pointer focus:z-[1] focus:outline-none"
     >
       <Table.DataCell>
         <ColorBox prop={prop} />

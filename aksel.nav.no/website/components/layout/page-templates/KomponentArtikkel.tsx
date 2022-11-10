@@ -75,7 +75,7 @@ const KomponentArtikkelTemplate = ({
             <BodyShort
               size="small"
               as="span"
-              className="text-text-muted flex items-center"
+              className="text-text-subtle flex items-center"
             >
               {`Oppdatert ${dateStr(data._updatedAt)}`}
             </BodyShort>
@@ -83,7 +83,7 @@ const KomponentArtikkelTemplate = ({
           <BodyShort
             as="span"
             size="small"
-            className="text-text-muted flex gap-4"
+            className="text-text-subtle flex gap-4"
           >
             {pack && (
               <>
@@ -91,7 +91,7 @@ const KomponentArtikkelTemplate = ({
                   target="_blank"
                   rel="noreferrer noopener"
                   href={`https://yarnpkg.com/package/${pack.title}`}
-                  className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                  className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
                 >
                   Yarn
                   <ExternalLink title="Gå til yarn pakke" />
@@ -100,7 +100,7 @@ const KomponentArtikkelTemplate = ({
                   target="_blank"
                   rel="noreferrer noopener"
                   href={pack.git}
-                  className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                  className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
                 >
                   Kode
                   <ExternalLink title="Gå til github-kode" />
@@ -113,7 +113,7 @@ const KomponentArtikkelTemplate = ({
                 target="_blank"
                 rel="noreferrer noopener"
                 href={data.figma_link}
-                className="hover:text-text focus:text-text-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
+                className="hover:text-text-default focus:text-text-on-inverted focus:shadow-focus flex items-center gap-1 underline hover:no-underline focus:bg-blue-800 focus:no-underline focus:outline-none"
               >
                 Figma
                 <ExternalLink title="Åpne i Figma" />

@@ -42,9 +42,9 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
         className={cl(style.copybutton, "navds-body-short group z-10", {
           "flex w-16 items-center justify-center hover:bg-blue-50 focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_theme(colors.focus)]":
             inTabs,
-          "absolute top-2 right-2 rounded bg-gray-100 px-2 py-1 text-text hover:bg-gray-900/10 hover:underline focus-visible:outline-2 focus-visible:outline-focus":
+          "text-text-default focus-visible:outline-focus absolute top-2 right-2 rounded bg-gray-100 px-2 py-1 hover:bg-gray-900/10 hover:underline focus-visible:outline-2":
             !inTabs && inverted,
-          "absolute top-2 right-2 flex h-10 w-10 items-center justify-center rounded bg-gray-900 text-text-inverted hover:bg-gray-800 focus:outline-none focus-visible:shadow-focus-inverted":
+          "text-text-on-inverted focus-visible:shadow-focus-inverted absolute top-2 right-2 flex h-10 w-10 items-center justify-center rounded bg-gray-900 hover:bg-gray-800 focus:outline-none":
             !inTabs && !inverted,
         })}
         onClick={handleCopy}

@@ -68,14 +68,14 @@ const Page = (props: PageProps): JSX.Element => {
               <Heading
                 level="1"
                 size="xlarge"
-                className="algolia-index-lvl1 hidden text-5xl text-deepblue-700 md:block"
+                className="algolia-index-lvl1 text-deepblue-700 hidden text-5xl md:block"
               >
                 {page.title}
               </Heading>
               <Heading
                 level="1"
                 size="large"
-                className="algolia-index-lvl1 block text-deepblue-700 md:hidden"
+                className="algolia-index-lvl1 text-deepblue-700 block md:hidden"
               >
                 {page.title}
               </Heading>
@@ -89,7 +89,7 @@ const Page = (props: PageProps): JSX.Element => {
                 />
                 <div
                   className={cl(
-                    "max-w relative z-10 h-fit rounded-lg xs:w-96 xl:mt-[10px]",
+                    "max-w xs:w-96 relative z-10 h-fit rounded-lg xl:mt-[10px]",
                     { invisible: !hasAnsvarlig }
                   )}
                   aria-hidden={!hasAnsvarlig}
@@ -97,11 +97,11 @@ const Page = (props: PageProps): JSX.Element => {
                   <Label
                     as="div"
                     size="small"
-                    className="flex rounded-t-lg bg-deepblue-700 px-4 pt-4 pb-3 uppercase text-text-inverted md:px-6 md:pt-6 md:pb-4"
+                    className="bg-deepblue-700 text-text-on-inverted flex rounded-t-lg px-4 pt-4 pb-3 uppercase md:px-6 md:pt-6 md:pb-4"
                   >
                     Ansvarlig for tema
                   </Label>
-                  <div className="grid gap-2 rounded-b-lg bg-deepblue-100 px-4 py-3 md:px-6 md:py-4">
+                  <div className="bg-deepblue-100 grid gap-2 rounded-b-lg px-4 py-3 md:px-6 md:py-4">
                     <div>
                       <Label as="div">
                         {page?.ansvarlig?.title

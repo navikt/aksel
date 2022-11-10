@@ -22,30 +22,30 @@ const format = (
 const ColorFormats = ({ color }: { color: SanityT.Schema.ds_color }) => {
   return (
     <div className="flex flex-wrap gap-4">
-      <div className="relative h-24 w-52 bg-canvas-background">
+      <div className="bg-bg-subtle relative h-24 w-52">
         <BodyShort className="p-4" size="small">
           HEX:
         </BodyShort>
         <CopyButton content={format("hex", color)} inverted />
-        <code className="absolute bottom-4 left-4 text-medium">
+        <code className="text-medium absolute bottom-4 left-4">
           {format("hex", color)}
         </code>
       </div>
-      <div className="relative h-24 w-52 bg-canvas-background">
+      <div className="bg-bg-subtle relative h-24 w-52">
         <BodyShort className="p-4" size="small">
           RGB:
         </BodyShort>
         <CopyButton content={format("rgb", color)} inverted />
-        <code className="absolute bottom-4 left-4 text-medium">
+        <code className="text-medium absolute bottom-4 left-4">
           {format("rgb", color)}
         </code>
       </div>
-      <div className="relative h-24 w-52 bg-canvas-background">
+      <div className="bg-bg-subtle relative h-24 w-52">
         <BodyShort className="p-4" size="small">
           HSL:
         </BodyShort>
         <CopyButton content={format("hsla", color)} inverted />
-        <code className="absolute bottom-4 left-4 text-medium">
+        <code className="text-medium absolute bottom-4 left-4">
           {format("hsla", color)}
         </code>
       </div>
