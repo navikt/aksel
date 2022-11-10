@@ -34,6 +34,11 @@ const migrationsMap = [
     path: "v1.0.0/chat",
   },
   {
+    name: "v2/preset: Fixes css,sass,less and js-variables",
+    value: "v2/preset",
+    path: "v2.0.0/preset",
+  },
+  {
     name: "v2/css: Fixes css-variables",
     value: "v2/css",
     path: "v2.0.0/update-css-tokens/update-css-tokens",
@@ -52,11 +57,6 @@ const migrationsMap = [
     name: "v2/less: Fixes less-variables",
     value: "v2/less",
     path: "v2.0.0/update-less-tokens/update-less-tokens",
-  },
-  {
-    name: "v2/tailwind: Fixes tailwind styling with tokens",
-    value: "v2/tailwind",
-    path: "v2.0.0/update-tailwind-tokens/update-tailwind-tokens",
   },
 ];
 
