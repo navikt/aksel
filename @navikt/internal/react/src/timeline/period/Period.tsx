@@ -85,7 +85,6 @@ export const Period = forwardRef<HTMLDivElement, PeriodPropsWrapper>(
       isActive,
       statusLabel,
     } = period;
-    console.log(statusLabel);
 
     return onSelectPeriod || children ? (
       <ClickablePeriod

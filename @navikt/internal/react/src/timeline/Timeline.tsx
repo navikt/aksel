@@ -110,8 +110,6 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
     };
 
-    console.log(zoomButtons);
-
     return (
       <TimelineContext.Provider
         value={{
