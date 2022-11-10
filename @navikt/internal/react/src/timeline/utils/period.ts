@@ -20,10 +20,29 @@ export const getConditionalClasses = (
 export const ariaLabel = (
   startDate: Date,
   endDate: Date,
-  status: String,
+  status: string,
   statusLabel?: string
 ): string => {
   const start = format(startDate, "dd.MM.yyyy");
   const end = format(endDate, "dd.MM.yyyy");
-  return `${status}, ${statusLabel && statusLabel} fra ${start} til ${end}`;
+  return `${translateStatus(status)}, ${
+    statusLabel ? statusLabel : ""
+  } fra ${start} til ${end}`;
+};
+
+const translateStatus = (status: string): string => {
+  switch (status) {
+    case "success":
+      return "Suksess";
+    case "warning":
+      return "Advarsel";
+    case "danger":
+      return "Fare";
+    case "information":
+      return "Informasjon";
+    case "neutral":
+      return "Nøytral";
+    default:
+      return status;
+  }
 };
