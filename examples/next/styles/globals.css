@@ -3,5 +3,5 @@
 @import "@navikt/ds-css-internal";
 
 body {
-  background-color: var(--navds-semantic-color-canvas-background);
+  background-color: var(--a-bg-default);
 }
