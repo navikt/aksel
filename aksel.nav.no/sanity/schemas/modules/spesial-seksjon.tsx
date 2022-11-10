@@ -1,5 +1,6 @@
 import { Star } from "@navikt/ds-icons";
 import React from "react";
+import docs from "@navikt/ds-tokens/docs.json";
 
 export default {
   title: "Sidemodul",
@@ -18,6 +19,10 @@ export default {
           { title: "Ikonsøk", value: "ikonsok" },
           { title: "Endringslogg", value: "endringslogg" },
           { title: "Komponentoversikt", value: "komponentoversikt" },
+          ...Object.keys(docs).map((x) => ({
+            title: `Tokenvisning: ${x}`,
+            value: `tokens_${x}`,
+          })),
         ],
         layout: "radio",
       },
@@ -37,7 +42,7 @@ export default {
     prepare(s) {
       return {
         title: s.modul,
-        subtitle: "Spesial seksjon",
+        subtitle: "Sidemodul",
         media: () => <Star />,
       };
     },

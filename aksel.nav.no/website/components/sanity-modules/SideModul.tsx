@@ -3,6 +3,7 @@ import { withErrorBoundary } from "@/error-boundary";
 import ComponentOverview from "./component-overview";
 import { ColorCategory } from "./color-category";
 import dynamic from "next/dynamic";
+import TokenView from "./token-view";
 
 const IconSearch = dynamic(() => import("./icon-search"), {
   loading: () => <div className="h-screen w-full" />,
@@ -12,13 +13,24 @@ const IconSearch = dynamic(() => import("./icon-search"), {
 type SpesialT = {
   _key: string;
   _type: "spesial_seksjon";
-  modul?: "farge_kategori" | "ikonsok" | "endringslogg" | "komponentoversikt";
+  modul?:
+    | "farge_kategori"
+    | "ikonsok"
+    | "endringslogg"
+    | "komponentoversikt"
+    | "tokens_font"
+    | "tokens_global-color"
+    | "tokens_semantic-color"
+    | "tokens_radius"
+    | "tokens_shadow"
+    | "tokens_spacing"
+    | "tokens_z-index";
   logs?: any[];
   komponenter?: any;
   farge?: any;
 };
 
-const SpesialSeksjon = ({ node }: { node: SpesialT }): JSX.Element => {
+const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
   if (!node || !node.modul) {
     return null;
   }
@@ -31,12 +43,16 @@ const SpesialSeksjon = ({ node }: { node: SpesialT }): JSX.Element => {
         return <ComponentOverview node={node.komponenter} />;
       case "ikonsok":
         return <IconSearch />;
-      default:
+      default: {
+        if (node.modul.startsWith("tokens_")) {
+          return <TokenView cat={node.modul.replace("tokens_", "")} />;
+        }
         return null;
+      }
     }
   };
 
   return <div className="mb-16">{GetModule()}</div>;
 };
 
-export default withErrorBoundary(SpesialSeksjon, "SpesialSeksjon");
+export default withErrorBoundary(SideModul, "SideModul");

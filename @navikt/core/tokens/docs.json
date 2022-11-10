@@ -26,10 +26,12 @@
     { "name": "--a-font-weight-bold", "value": "600" },
     { "name": "--a-font-weight-regular", "value": "400" }
   ],
-  "global-color": [
+  "global-base": [
     { "name": "--a-transparent", "value": "rgba(255, 255, 255, 0)" },
     { "name": "--a-white", "value": "rgba(255, 255, 255, 1)" },
-    { "name": "--a-nav-red", "value": "rgba(195, 0, 0, 1)" },
+    { "name": "--a-nav-red", "value": "rgba(195, 0, 0, 1)" }
+  ],
+  "global-gray": [
     { "name": "--a-gray-50", "value": "rgba(247, 247, 247, 1)" },
     { "name": "--a-gray-100", "value": "rgba(241, 241, 241, 1)" },
     { "name": "--a-gray-200", "value": "rgba(229, 229, 229, 1)" },
@@ -39,7 +41,9 @@
     { "name": "--a-gray-600", "value": "rgba(112, 112, 112, 1)" },
     { "name": "--a-gray-700", "value": "rgba(89, 89, 89, 1)" },
     { "name": "--a-gray-800", "value": "rgba(64, 64, 64, 1)" },
-    { "name": "--a-gray-900", "value": "rgba(38, 38, 38, 1)" },
+    { "name": "--a-gray-900", "value": "rgba(38, 38, 38, 1)" }
+  ],
+  "global-grayalpha": [
     { "name": "--a-grayalpha-50", "value": "rgba(0, 0, 0, 0.03)" },
     { "name": "--a-grayalpha-100", "value": "rgba(0, 0, 0, 0.05)" },
     { "name": "--a-grayalpha-200", "value": "rgba(0, 0, 0, 0.1)" },
@@ -49,7 +53,9 @@
     { "name": "--a-grayalpha-600", "value": "rgba(0, 0, 0, 0.56)" },
     { "name": "--a-grayalpha-700", "value": "rgba(0, 0, 0, 0.65)" },
     { "name": "--a-grayalpha-800", "value": "rgba(0, 0, 0, 0.75)" },
-    { "name": "--a-grayalpha-900", "value": "rgba(0, 0, 0, 0.85)" },
+    { "name": "--a-grayalpha-900", "value": "rgba(0, 0, 0, 0.85)" }
+  ],
+  "global-blue": [
     { "name": "--a-blue-50", "value": "rgba(230, 240, 255, 1)" },
     { "name": "--a-blue-100", "value": "rgba(204, 225, 255, 1)" },
     { "name": "--a-blue-200", "value": "rgba(153, 195, 255, 1)" },
@@ -59,7 +65,9 @@
     { "name": "--a-blue-600", "value": "rgba(0, 86, 180, 1)" },
     { "name": "--a-blue-700", "value": "rgba(0, 69, 156, 1)" },
     { "name": "--a-blue-800", "value": "rgba(0, 52, 125, 1)" },
-    { "name": "--a-blue-900", "value": "rgba(0, 34, 82, 1)" },
+    { "name": "--a-blue-900", "value": "rgba(0, 34, 82, 1)" }
+  ],
+  "global-red": [
     { "name": "--a-red-50", "value": "rgba(253, 232, 230, 1)" },
     { "name": "--a-red-100", "value": "rgba(249, 210, 204, 1)" },
     { "name": "--a-red-200", "value": "rgba(239, 168, 157, 1)" },
@@ -69,7 +77,9 @@
     { "name": "--a-red-600", "value": "rgba(163, 42, 23, 1)" },
     { "name": "--a-red-700", "value": "rgba(136, 29, 12, 1)" },
     { "name": "--a-red-800", "value": "rgba(106, 18, 4, 1)" },
-    { "name": "--a-red-900", "value": "rgba(72, 9, 0, 1)" },
+    { "name": "--a-red-900", "value": "rgba(72, 9, 0, 1)" }
+  ],
+  "global-deepblue": [
     { "name": "--a-deepblue-50", "value": "rgba(230, 241, 248, 1)" },
     { "name": "--a-deepblue-100", "value": "rgba(204, 226, 240, 1)" },
     { "name": "--a-deepblue-200", "value": "rgba(153, 196, 221, 1)" },
@@ -79,7 +89,9 @@
     { "name": "--a-deepblue-600", "value": "rgba(0, 80, 119, 1)" },
     { "name": "--a-deepblue-700", "value": "rgba(0, 67, 103, 1)" },
     { "name": "--a-deepblue-800", "value": "rgba(0, 52, 83, 1)" },
-    { "name": "--a-deepblue-900", "value": "rgba(0, 36, 58, 1)" },
+    { "name": "--a-deepblue-900", "value": "rgba(0, 36, 58, 1)" }
+  ],
+  "global-green": [
     { "name": "--a-green-50", "value": "rgba(243, 252, 245, 1)" },
     { "name": "--a-green-100", "value": "rgba(204, 241, 214, 1)" },
     { "name": "--a-green-200", "value": "rgba(153, 222, 173, 1)" },
@@ -89,7 +101,9 @@
     { "name": "--a-green-600", "value": "rgba(0, 124, 46, 1)" },
     { "name": "--a-green-700", "value": "rgba(0, 106, 35, 1)" },
     { "name": "--a-green-800", "value": "rgba(0, 85, 25, 1)" },
-    { "name": "--a-green-900", "value": "rgba(0, 59, 15, 1)" },
+    { "name": "--a-green-900", "value": "rgba(0, 59, 15, 1)" }
+  ],
+  "global-lightblue": [
     { "name": "--a-lightblue-50", "value": "rgba(235, 252, 255, 1)" },
     { "name": "--a-lightblue-100", "value": "rgba(216, 249, 255, 1)" },
     { "name": "--a-lightblue-200", "value": "rgba(181, 241, 255, 1)" },
@@ -99,7 +113,9 @@
     { "name": "--a-lightblue-600", "value": "rgba(76, 173, 205, 1)" },
     { "name": "--a-lightblue-700", "value": "rgba(54, 141, 168, 1)" },
     { "name": "--a-lightblue-800", "value": "rgba(35, 107, 125, 1)" },
-    { "name": "--a-lightblue-900", "value": "rgba(19, 72, 82, 1)" },
+    { "name": "--a-lightblue-900", "value": "rgba(19, 72, 82, 1)" }
+  ],
+  "global-limegreen": [
     { "name": "--a-limegreen-50", "value": "rgba(253, 255, 230, 1)" },
     { "name": "--a-limegreen-100", "value": "rgba(249, 252, 204, 1)" },
     { "name": "--a-limegreen-200", "value": "rgba(236, 243, 153, 1)" },
@@ -109,7 +125,9 @@
     { "name": "--a-limegreen-600", "value": "rgba(147, 158, 0, 1)" },
     { "name": "--a-limegreen-700", "value": "rgba(127, 137, 0, 1)" },
     { "name": "--a-limegreen-800", "value": "rgba(102, 110, 0, 1)" },
-    { "name": "--a-limegreen-900", "value": "rgba(71, 78, 0, 1)" },
+    { "name": "--a-limegreen-900", "value": "rgba(71, 78, 0, 1)" }
+  ],
+  "global-orange": [
     { "name": "--a-orange-50", "value": "rgba(255, 249, 240, 1)" },
     { "name": "--a-orange-100", "value": "rgba(255, 236, 204, 1)" },
     { "name": "--a-orange-200", "value": "rgba(255, 215, 153, 1)" },
@@ -119,7 +137,9 @@
     { "name": "--a-orange-600", "value": "rgba(212, 123, 0, 1)" },
     { "name": "--a-orange-700", "value": "rgba(168, 100, 0, 1)" },
     { "name": "--a-orange-800", "value": "rgba(125, 76, 0, 1)" },
-    { "name": "--a-orange-900", "value": "rgba(82, 51, 0, 1)" },
+    { "name": "--a-orange-900", "value": "rgba(82, 51, 0, 1)" }
+  ],
+  "global-purple": [
     { "name": "--a-purple-50", "value": "rgba(239, 236, 244, 1)" },
     { "name": "--a-purple-100", "value": "rgba(224, 216, 233, 1)" },
     { "name": "--a-purple-200", "value": "rgba(192, 178, 210, 1)" },
@@ -131,6 +151,7 @@
     { "name": "--a-purple-800", "value": "rgba(48, 31, 70, 1)" },
     { "name": "--a-purple-900", "value": "rgba(31, 20, 47, 1)" }
   ],
+
   "semantic-color": [
     { "name": "--a-border-default", "value": "rgba(0, 0, 0, 0.44)" },
     { "name": "--a-border-strong", "value": "rgba(0, 0, 0, 0.56)" },

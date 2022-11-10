@@ -84,3 +84,32 @@ p.override-text-no-max {
   -webkit-hyphens: auto;
   hyphens: auto;
 }
+
+.component-token-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+.component-checkered-bg {
+  background-color: var(--a-white);
+  opacity: 0.8;
+  background-image: repeating-linear-gradient(
+      45deg,
+      var(--a-gray-200) 25%,
+      transparent 25%,
+      transparent 75%,
+      var(--a-gray-200) 75%,
+      var(--a-gray-200)
+    ),
+    repeating-linear-gradient(
+      45deg,
+      var(--a-gray-200) 25%,
+      var(--a-white) 25%,
+      var(--a-white) 75%,
+      var(--a-gray-200) 75%,
+      var(--a-gray-200)
+    );
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
+}

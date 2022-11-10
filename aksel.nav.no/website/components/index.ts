@@ -11,7 +11,7 @@ export { default as IntroKomponent } from "./sanity-modules/IntroSeksjon";
 export { default as Kode } from "./sanity-modules/Kode";
 export { default as PropsSeksjon } from "./sanity-modules/props/PropsSeksjon";
 export { default as PropTable } from "./sanity-modules/props/PropTabell";
-export { default as SpesialSeksjon } from "./sanity-modules/SpesialSeksjon";
+export { default as SideModul } from "./sanity-modules/SideModul";
 export { default as Tabell } from "./sanity-modules/Tabell";
 export { default as TastaturModul } from "./sanity-modules/tastatur";
 export { default as Tips } from "./sanity-modules/tips";

@@ -1298,7 +1298,24 @@ Legg til en eller flere elementer
         | "farge_kategori"
         | "ikonsok"
         | "endringslogg"
-        | "komponentoversikt";
+        | "komponentoversikt"
+        | "tokens_font"
+        | "tokens_global-base"
+        | "tokens_global-gray"
+        | "tokens_global-grayalpha"
+        | "tokens_global-blue"
+        | "tokens_global-red"
+        | "tokens_global-deepblue"
+        | "tokens_global-green"
+        | "tokens_global-lightblue"
+        | "tokens_global-limegreen"
+        | "tokens_global-orange"
+        | "tokens_global-purple"
+        | "tokens_semantic-color"
+        | "tokens_radius"
+        | "tokens_shadow"
+        | "tokens_spacing"
+        | "tokens_z-index";
 
       /**
        * Farge kategori - `Reference`
