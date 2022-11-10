@@ -110,6 +110,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
     };
 
+    console.log(zoomButtons);
+
     return (
       <TimelineContext.Provider
         value={{
@@ -151,7 +153,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               );
             })}
           </div>
-          {zoomButtons && (
+          {zoomButtons.length > 0 && (
             <ul className="navdsi-timeline__zoom">
               {zoomButtons.map((zoom) => {
                 return zoom;
