@@ -152,7 +152,7 @@ export function TableOfContents({
       </Heading>
       <div
         id="toc-scroll"
-        className="flex max-h-[80vh] flex-col overflow-y-scroll"
+        className="flex max-h-[80vh] flex-col overflow-y-auto"
       >
         <nav aria-labelledby="toc-heading">
           <ul>
