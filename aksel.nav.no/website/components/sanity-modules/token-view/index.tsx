@@ -1,4 +1,5 @@
-import GlobalView from "./global";
+import GlobalView from "./Global";
+import SemanticView from "./Semantic";
 
 const TokenView = ({ cat }: { cat: string }) => {
   switch (true) {
@@ -6,8 +7,8 @@ const TokenView = ({ cat }: { cat: string }) => {
       break;
     case cat.startsWith("global"):
       return <GlobalView cat={cat} />;
-    case cat === "semantic-color":
-      break;
+    case cat.startsWith("semantic"):
+      return <SemanticView cat={cat} />;
     case cat === "radius":
       break;
     case cat === "shadow":
