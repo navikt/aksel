@@ -1,4 +1,4 @@
-const kebabCase = require("./kebabCase");
+const kebabCase = require("../kebabCase");
 
 describe("kebabCase", () => {
   [

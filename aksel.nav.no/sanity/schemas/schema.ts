@@ -24,7 +24,7 @@ export default createSchema({
     Designsystem.Color,
     Designsystem.ds_header_heading,
     Designsystem.ColorCategories,
-    Designsystem.Tokens,
+    Designsystem.TokensOld,
     Designsystem.KodeEksempler,
     Designsystem.Props,
     Designsystem.ComponentTemplate,
