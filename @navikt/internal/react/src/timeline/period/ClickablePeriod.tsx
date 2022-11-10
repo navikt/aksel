@@ -32,6 +32,8 @@ const ClickablePeriod = React.memo(
       isActive && buttonRef.current?.focus();
     }, [isActive, buttonRef]);
 
+    console.log(children);
+
     return (
       <>
         <button
@@ -49,7 +51,7 @@ const ClickablePeriod = React.memo(
             width: `${width}%`,
             [direction]: `${left}%`,
           }}
-          aria-expanded={selected}
+          aria-expanded={children ? selected : undefined}
         >
           {icon}
         </button>
