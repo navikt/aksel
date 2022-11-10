@@ -1,6 +1,6 @@
 import { Popover } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { RefObject, useEffect, useState } from "react";
+import React, { RefObject, useState } from "react";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
 
@@ -27,12 +27,6 @@ const ClickablePeriod = React.memo(
     statusLabel,
   }: ClickablePeriodProps) => {
     const [selected, setSelected] = useState(false);
-
-    useEffect(() => {
-      isActive && buttonRef.current?.focus();
-    }, [isActive, buttonRef]);
-
-    console.log(children);
 
     return (
       <>
