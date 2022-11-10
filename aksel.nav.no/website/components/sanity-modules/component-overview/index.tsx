@@ -7,18 +7,25 @@ import cl from "classnames";
 const getStatus = (status?: SanityT.Schema.komponent_artikkel["status"]) => {
   switch (status?.tag) {
     case "beta":
-      return <Tag variant="alt1">Beta</Tag>;
+      return (
+        <Tag variant="alt1" size="small">
+          Beta
+        </Tag>
+      );
     case "new":
-      return <Tag variant="info">New</Tag>;
+      return (
+        <Tag variant="info" size="small">
+          New
+        </Tag>
+      );
     case "ready":
       return null;
     case "deprecated":
       return (
-        <span className="ml-2 rounded bg-gray-200 px-1 text-sm text-gray-900">
+        <Tag variant="neutral" size="small">
           Deprecated
-        </span>
+        </Tag>
       );
-
     default:
       return null;
   }
