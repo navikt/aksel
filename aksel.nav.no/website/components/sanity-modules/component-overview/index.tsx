@@ -1,23 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
 import { SanityT, urlFor } from "@/lib";
-import { Heading } from "@navikt/ds-react";
+import { Heading, Tag } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "classnames";
 
 const getStatus = (status?: SanityT.Schema.komponent_artikkel["status"]) => {
   switch (status?.tag) {
     case "beta":
-      return (
-        <span className="ml-2 rounded bg-purple-400 px-1 text-sm text-white">
-          Beta
-        </span>
-      );
+      return <Tag variant="alt1">Beta</Tag>;
     case "new":
-      return (
-        <span className="ml-2 rounded bg-green-300 px-1 text-sm text-gray-900">
-          Ready
-        </span>
-      );
+      return <Tag variant="info">New</Tag>;
     case "ready":
       return null;
     case "deprecated":
@@ -61,7 +53,7 @@ const ComponentOverview = ({
       <ul className="component-card-grid">
         {sorted.map((x) => (
           <li key={x._id}>
-            <div className="group relative rounded shadow-small ring-1 ring-gray-900/10 focus-within:shadow-focus hover:shadow-medium">
+            <div className="shadow-small focus-within:shadow-focus hover:shadow-medium group relative rounded ring-1 ring-gray-900/10">
               <div
                 className={cl(
                   "flex max-h-64 items-center justify-center overflow-hidden rounded-t bg-gray-50",
@@ -87,7 +79,7 @@ const ComponentOverview = ({
                     aria-hidden
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="-11.5 -10.23174 23 20.46348"
-                    className="aspect-[1.25/1] h-auto max-h-64 min-h-40 p-4"
+                    className="min-h-40 aspect-[1.25/1] h-auto max-h-64 p-4"
                   >
                     <title>React Logo</title>
                     <circle
