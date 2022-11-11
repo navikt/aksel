@@ -22,13 +22,13 @@ const NonClickablePeriod = ({
     <div
       ref={divRef}
       className={getConditionalClasses(cropped, direction, status)}
-      aria-label={ariaLabel(start, end, status, statusLabel)}
       style={{
         width: `${width}%`,
         [direction]: `${left}%`,
       }}
     >
       {icon}
+      <p className="sr-only">{ariaLabel(start, end, status, statusLabel)}</p>
     </div>
   );
 };
