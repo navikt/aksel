@@ -9,7 +9,7 @@ export const CopyToken = ({ val }: { val: string }) => {
   const [copyTimer, setCopyTimer] = useState(false);
   const [done, setDone] = useState(true);
 
-  const copyToken = (e) => {
+  const copyToken = () => {
     copystring(`var(${val})`);
 
     if (done) {
@@ -29,7 +29,7 @@ export const CopyToken = ({ val }: { val: string }) => {
 
   return (
     <button
-      onClick={(e) => copyToken(e)}
+      onClick={() => copyToken()}
       className="bg-surface-action-subtle z-1000 hover:text-text-subtle focus-visible:border-border-focus border-surface-default group relative h-8 w-full overflow-x-hidden overflow-y-hidden whitespace-nowrap rounded border-2 font-mono text-sm focus-visible:outline-none"
       aria-label={
         copyTimer ? "kopierte token" : `kopier ${val.replace("--a-", "")}`
@@ -44,7 +44,7 @@ export const CopyToken = ({ val }: { val: string }) => {
 
         <span className="text-text-subtle bg-surface-action-subtle group-hover:text-text-default absolute right-2 flex h-7 translate-x-3/4 items-center gap-1 px-1 text-sm shadow-[-7px_0_8px_0px_var(--a-surface-action-subtle)] transition-transform duration-200 group-hover:translate-x-0">
           <Copy aria-hidden className="h-4 w-4 flex-shrink-0" />
-          <span className="opacity-0 transition-opacity group-hover:opacity-100">
+          <span className="opacity-0 transition-opacity duration-300 group-hover:opacity-100">
             Kopier
           </span>
         </span>
