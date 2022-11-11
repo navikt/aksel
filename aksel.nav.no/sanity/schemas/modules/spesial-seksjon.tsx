@@ -1,6 +1,5 @@
 import { Star } from "@navikt/ds-icons";
 import React from "react";
-import docs from "@navikt/ds-tokens/docs.json";
 
 export default {
   title: "Sidemodul",
@@ -16,13 +15,14 @@ export default {
       options: {
         list: [
           { title: "Farge kategori", value: "farge_kategori" },
+          { title: "Token kategori", value: "token_kategori" },
           { title: "Ikonsøk", value: "ikonsok" },
           { title: "Endringslogg", value: "endringslogg" },
           { title: "Komponentoversikt", value: "komponentoversikt" },
-          ...Object.keys(docs).map((x) => ({
+          /* ...Object.keys(docs).map((x) => ({
             title: `Tokenvisning: ${x}`,
             value: `tokens_${x}`,
-          })),
+          })), */
         ],
         layout: "radio",
       },
@@ -33,6 +33,13 @@ export default {
       name: "farge_ref",
       hidden: ({ parent }) => parent.modul !== "farge_kategori",
       to: [{ type: "ds_color_categories" }],
+    },
+    {
+      title: "Token kategori",
+      type: "reference",
+      name: "token_ref",
+      hidden: ({ parent }) => parent.modul !== "token_kategori",
+      to: [{ type: "token_kategori" }],
     },
   ],
   preview: {

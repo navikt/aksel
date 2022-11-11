@@ -1,6 +1,6 @@
 export default {
   title: "Tokens",
-  name: "token_kateogri",
+  name: "token_kategori",
   type: "document",
   fields: [
     {
