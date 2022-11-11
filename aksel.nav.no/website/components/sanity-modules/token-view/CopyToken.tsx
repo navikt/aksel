@@ -4,7 +4,7 @@ import copystring from "copy-to-clipboard";
 
 export const CopyToken = ({ val }: { val: string }) => {
   return (
-    <div className="bg-surface-action-subtle">
+    <div className="bg-surface-action-subtle rounded">
       <button
         onClick={() => copystring(val)}
         className=" hover:bg-surface-hover focus-visible:shadow-focus group flex h-8 w-full items-center justify-between overflow-x-hidden whitespace-nowrap rounded px-2 font-mono text-sm focus:outline-none"

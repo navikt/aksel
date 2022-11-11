@@ -40,7 +40,7 @@ const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
         aria-live={active ? "polite" : "off"}
         role={active ? "alert" : undefined}
         className={cl(style.copybutton, "navds-body-short group z-10", {
-          "flex w-16 items-center justify-center hover:bg-blue-50 focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_theme(colors.focus)]":
+          "flex w-16 items-center justify-center hover:bg-blue-50 focus:outline-none focus-visible:shadow-[inset_0_0_0_2px_var(--a-border-focus)]":
             inTabs,
           "text-text-default focus-visible:outline-focus absolute top-2 right-2 rounded bg-gray-100 px-2 py-1 hover:bg-gray-900/10 hover:underline focus-visible:outline-2":
             !inTabs && inverted,
