@@ -1,5 +1,5 @@
-import GlobalView from "./Global";
-import SemanticView from "./Semantic";
+import { GlobalView } from "./categories/Global";
+import { SemanticView } from "./categories/Semantic";
 
 const TokenView = ({ cat }: { cat: string }) => {
   switch (true) {

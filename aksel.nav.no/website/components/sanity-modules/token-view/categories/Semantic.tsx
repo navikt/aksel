@@ -1,9 +1,9 @@
 import { PeopleInCircle } from "@navikt/ds-icons";
 import docs from "@navikt/ds-tokens/docs.json";
 import color from "color";
-import { Frame } from "./Frame";
+import { Frame } from "../Frame";
 
-const SemanticView = ({ cat }: { cat: string }) => {
+export const SemanticView = ({ cat }: { cat: string }) => {
   const colors = docs[cat];
 
   if (cat === "semantic-text") {
@@ -94,5 +94,3 @@ const SemanticView = ({ cat }: { cat: string }) => {
   }
   return <Frame tokens={colors} styles="background" />;
 };
-
-export default SemanticView;
