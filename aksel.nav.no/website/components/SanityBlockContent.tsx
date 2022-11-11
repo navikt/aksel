@@ -20,6 +20,7 @@ import {
   TastaturModul,
   Tips,
   TokensSeksjon,
+  TokenTable,
   Video,
 } from ".";
 
@@ -46,6 +47,7 @@ const serializers = {
     accordion: ({ node }) => <Accordion node={node} />,
     props_seksjon: ({ node }) => <PropsSeksjon node={node} />,
     spesial_seksjon: ({ node }) => <SideModul node={node} />,
+    token_kategori: ({ node }) => <TokenTable node={node} />,
     video: ({ node }) => <Video node={node} />,
     tokens: ({ node }) => <TokensSeksjon node={node} />,
     tips: ({ node }) => <Tips node={node} />,

@@ -176,7 +176,13 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
     "video",
   ];
 
-  const comp = ["props_seksjon", "tastatur_modul", "tokens", "kode_eksempler"];
+  const comp = [
+    "props_seksjon",
+    "tastatur_modul",
+    "tokens",
+    "kode_eksempler",
+    "token_ref",
+  ];
 
   const ds_artikkel = ["tokens", "spesial_seksjon"];
 

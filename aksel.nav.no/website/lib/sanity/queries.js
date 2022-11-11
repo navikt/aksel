@@ -145,9 +145,12 @@ const propsSeksjon = `_type == "props_seksjon" =>{
   },
 }`;
 
+const tokenRef = `_type == "token_ref"=>@->`;
+
 const deRefs = `
 ${alert},
 ${tips},
+${tokenRef},
 ${markDef},
 ${introSeksjon},
 ${relatertInnhold},

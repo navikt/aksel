@@ -177,6 +177,23 @@ Linker eller dropdowns med linker. Maks dybde på 2 dropdowns er støttet. Sider
     }
 
     /**
+     * Tokens
+     */
+    interface token_kategori extends Sanity.Document {
+      _type: "token_kategori";
+
+      /**
+       * Navn - `String`
+       */
+      title?: string;
+
+      /**
+       * Kategori - `String`
+       */
+      kategori?: string;
+    }
+
+    /**
      * Dir/filnavn for kode eksempler
      */
     interface kode_eksempler_fil extends Sanity.Document {
@@ -968,6 +985,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<tastatur_modul>
       | Sanity.Keyed<tokens>
       | Sanity.Keyed<kode_eksempler>
+      | Sanity.Keyed<token_ref>
     >;
 
     type riktekst_tabell = Array<Sanity.Keyed<Sanity.Block>>;
@@ -1296,31 +1314,20 @@ Legg til en eller flere elementer
        */
       modul?:
         | "farge_kategori"
+        | "token_kategori"
         | "ikonsok"
         | "endringslogg"
-        | "komponentoversikt"
-        | "tokens_font"
-        | "tokens_global-base"
-        | "tokens_global-gray"
-        | "tokens_global-grayalpha"
-        | "tokens_global-blue"
-        | "tokens_global-red"
-        | "tokens_global-deepblue"
-        | "tokens_global-green"
-        | "tokens_global-lightblue"
-        | "tokens_global-limegreen"
-        | "tokens_global-orange"
-        | "tokens_global-purple"
-        | "tokens_semantic-color"
-        | "tokens_radius"
-        | "tokens_shadow"
-        | "tokens_spacing"
-        | "tokens_z-index";
+        | "komponentoversikt";
 
       /**
        * Farge kategori - `Reference`
        */
       farge_ref?: Sanity.Reference<ds_color_categories>;
+
+      /**
+       * Token kategori - `Reference`
+       */
+      token_ref?: Sanity.Reference<token_kategori>;
     };
 
     type video = {
@@ -1447,6 +1454,8 @@ Vis bare et spesfikt eksempel
       filnavn?: Sanity.Reference<kode_eksempler_fil>;
     };
 
+    type token_ref = Sanity.Reference<token_kategori>;
+
     type navigation_link = {
       _type: "navigation_link";
 
@@ -1565,6 +1574,7 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
       | navigation
       | ds_color_categories
       | ds_tokens
+      | token_kategori
       | kode_eksempler_fil
       | ds_props
       | ds_component_template

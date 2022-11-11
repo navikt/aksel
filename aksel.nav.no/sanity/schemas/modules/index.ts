@@ -9,6 +9,7 @@ import Props from "./props";
 import RelatertInnhold from "./relatert-innhold";
 import Innholdskort from "./innholdskort";
 import KodeEksempler from "./kode-eksempler";
+import TokenRef from "./token-tabell";
 import {
   RiktekstAksel,
   RiktekstDsArtikkel,
@@ -53,6 +54,7 @@ const v2Blocks = [
   Tips,
   Tastatur,
   KodeEksempler,
+  TokenRef,
 ];
 
 export default v2Blocks;

@@ -1,10 +1,11 @@
+import { withErrorBoundary } from "@/error-boundary";
+import { FontView } from "./categories/Font";
 import { GlobalView } from "./categories/Global";
 import { SemanticView } from "./categories/Semantic";
 import { ShadowView } from "./categories/Shadow";
-import { SpacingView } from "./categories/Spacing";
 import { ShapesView } from "./categories/Shapes";
+import { SpacingView } from "./categories/Spacing";
 import { ZindexView } from "./categories/Zindex";
-import { FontView } from "./categories/Font";
 
 const TokenView = ({
   token,
@@ -31,4 +32,4 @@ const TokenView = ({
   }
 };
 
-export default TokenView;
+export default withErrorBoundary(TokenView, "TokenView");
