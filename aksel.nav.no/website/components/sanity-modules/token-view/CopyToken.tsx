@@ -1,5 +1,5 @@
 import { Copy, SuccessStroke } from "@navikt/ds-icons";
-
+import cl from "classnames";
 import copystring from "copy-to-clipboard";
 import { useEffect, useRef, useState } from "react";
 
@@ -7,13 +7,20 @@ export const CopyToken = ({ val }: { val: string }) => {
   const timerRef = useRef(null);
 
   const [copyTimer, setCopyTimer] = useState(false);
+  const [done, setDone] = useState(true);
 
   const copyToken = (e) => {
-    e.preventDefault();
     copystring(`var(${val})`);
-    setCopyTimer(true);
-    clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setCopyTimer(false), 2000);
+
+    if (done) {
+      clearTimeout(timerRef.current);
+      setCopyTimer(true);
+      setDone(false);
+      timerRef.current = setTimeout(() => {
+        setCopyTimer(false);
+        setDone(true);
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -22,31 +29,42 @@ export const CopyToken = ({ val }: { val: string }) => {
 
   return (
     <button
-      onClick={copyToken}
-      className="hover:bg-surface-neutral-subtle-hover bg-surface-neutral-subtle focus-visible:outline-border-focus group flex h-8 w-full items-center justify-between overflow-x-hidden whitespace-nowrap rounded px-2 font-mono text-sm focus-visible:outline-2 "
+      onClick={(e) => copyToken(e)}
+      className="bg-surface-action-subtle z-1000 hover:text-text-subtle focus-visible:border-border-focus border-surface-default group relative h-8 w-full overflow-x-hidden overflow-y-hidden whitespace-nowrap rounded border-2 font-mono text-sm focus-visible:outline-none"
       aria-label={
         copyTimer ? "kopierte token" : `kopier ${val.replace("--a-", "")}`
       }
     >
-      {copyTimer ? (
-        <span aria-hidden className="font-sans">
-          Kopiert!
-        </span>
-      ) : (
+      <span
+        className={cl("flex h-7 w-full items-center justify-between px-2", {
+          "animate-popout -translate-y-full": copyTimer,
+        })}
+      >
         <span aria-hidden>{val}</span>
-      )}
 
-      {copyTimer ? (
-        <SuccessStroke
-          aria-hidden
-          className="text-text-default h-5 w-5 flex-shrink-0"
-        />
-      ) : (
-        <Copy
-          aria-hidden
-          className="text-text-subtle group-hover:text-text-default h-4 w-4 flex-shrink-0"
-        />
-      )}
+        <span className="text-text-subtle bg-surface-action-subtle group-hover:text-text-default absolute right-2 flex h-7 translate-x-3/4 items-center gap-1 px-1 text-sm shadow-[-7px_0_8px_0px_var(--a-surface-action-subtle)] transition-transform duration-200 group-hover:translate-x-0">
+          <Copy aria-hidden className="h-4 w-4 flex-shrink-0" />
+          <span className="opacity-0 transition-opacity group-hover:opacity-100">
+            Kopier
+          </span>
+        </span>
+      </span>
+
+      <span
+        className={cl(
+          "bg-surface-action-selected text-md text-text-on-action flex h-7 w-full px-2 font-sans text-sm",
+          { "animate-popup translate-y-[-100%]": copyTimer }
+        )}
+      >
+        <span
+          className={cl("flex w-full items-center justify-center gap-1", {
+            "animate-textbounce": copyTimer,
+          })}
+        >
+          <SuccessStroke aria-hidden className="h-5 w-5 flex-shrink-0" />
+          Kopiert
+        </span>
+      </span>
     </button>
   );
 };
