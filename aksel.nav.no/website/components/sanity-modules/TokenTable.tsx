@@ -5,6 +5,8 @@ import internal from "@navikt/ds-css-internal/tokens.json";
 import { useState } from "react";
 import { Expand } from "@navikt/ds-icons";
 import cl from "classnames";
+import { Link, BodyLong, Label } from "@navikt/ds-react";
+import NextLink from "next/link";
 
 const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
   const [open, setOpen] = useState(false);
@@ -30,14 +32,14 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
             !open && showMore,
         })}
       >
-        <table className="border-border-divider w-full border-separate border-spacing-0 rounded border">
+        <table className="border-border-divider w-full border-separate border-spacing-0 rounded-t border">
           <thead>
             <tr className="rounded-t">
               <td className="rounded-tl bg-gray-50 p-2 ">Token</td>
               <td className="rounded-tr bg-gray-50 p-2 ">Fallback</td>
             </tr>
           </thead>
-          <tbody className="">
+          <tbody>
             {Object.entries(tokens).map(([key, val]) => (
               <tr
                 key={key}
@@ -49,6 +51,21 @@ const TokenTable = ({ node }: { node: SanityT.Schema.token_kategori }) => {
             ))}
           </tbody>
         </table>
+        {(open || !showMore) && (
+          <div className="border-border-divider bg-surface-neutral-subtle w-full rounded-b border border-t-0 p-2">
+            <Label size="small" as="span" spacing>
+              Hva er dette?
+            </Label>
+            <BodyLong size="small">
+              Komponent-tokens gir deg muligheten til å sette opp theming eller
+              justere styling uten å måtte overskrive css-klasser. Les gjennom{" "}
+              <NextLink href="#" passHref>
+                <Link>guiden vår</Link>
+              </NextLink>{" "}
+              for mer info.
+            </BodyLong>
+          </div>
+        )}
       </div>
       {!open && showMore && (
         <button
