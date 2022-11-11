@@ -38,7 +38,6 @@ export const Default = (props) => {
 };
 
 Default.args = {
-  checked: false,
   position: "right",
 };
 
