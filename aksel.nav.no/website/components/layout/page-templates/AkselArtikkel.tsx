@@ -35,7 +35,7 @@ const AkselArtikkelTemplate = ({
       <FooterSlope />
       <div className="relative bg-gray-100 pt-12 pb-16">
         <div className="dynamic-wrapper">
-          <Heading level="2" size="medium" className="px-4 text-deepblue-700">
+          <Heading level="2" size="medium" className="text-deepblue-700 px-4">
             {data?.relevante_artikler?.length === 1
               ? `Les også`
               : `Relevante artikler`}
@@ -85,7 +85,7 @@ const AkselArtikkelTemplate = ({
           <Heading
             level="1"
             size="large"
-            className="algolia-index-lvl1 mt-4 text-deepblue-700 md:text-5xl"
+            className="algolia-index-lvl1 text-deepblue-700 mt-4 md:text-5xl"
           >
             {data.heading}
           </Heading>
@@ -98,7 +98,7 @@ const AkselArtikkelTemplate = ({
             <BodyShort
               size="small"
               as="span"
-              className="whitespace-nowrap text-text-muted"
+              className="text-text-muted whitespace-nowrap"
             >
               {dateStr(data?._updatedAt)}
             </BodyShort>
@@ -120,7 +120,7 @@ const AkselArtikkelTemplate = ({
                     <BodyShort
                       size="small"
                       as="a"
-                      className="algolia-index-lvl5 flex min-h-8 items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize text-deepblue-800 no-underline hover:bg-gray-100 hover:underline focus:outline-none focus-visible:shadow-focus"
+                      className="algolia-index-lvl5 min-h-8 text-deepblue-800 focus-visible:shadow-focus flex items-center justify-center gap-[2px] rounded-full bg-gray-200 pl-4 pr-1 capitalize no-underline hover:underline focus:outline-none"
                     >
                       {title}
                       <Next aria-hidden />
@@ -141,14 +141,14 @@ const AkselArtikkelTemplate = ({
             <SanityBlockContent blocks={data?.content ?? []} variant="aksel" />
             <div className="mt-12">
               {authors?.length > 0 && (
-                <Label className="mb-2 text-deepblue-700" as="p">
+                <Label className="text-deepblue-700 mb-2" as="p">
                   Bidragsytere
                 </Label>
               )}
               {authors?.length > 0 && (
                 <BodyShort
                   as="div"
-                  className="mb-1 flex flex-wrap gap-1 text-text/80"
+                  className="text-text/80 mb-1 flex flex-wrap gap-1"
                 >
                   {authors.map(abbrName).map((x, y) => (
                     <address className="not-italic" key={x}>
@@ -158,7 +158,7 @@ const AkselArtikkelTemplate = ({
                   ))}
                 </BodyShort>
               )}
-              <BodyShort as="span" className="whitespace-nowrap text-text/80">
+              <BodyShort as="span" className="text-text/80 whitespace-nowrap">
                 Publisert: {dateStr(data?.publishedAt ?? data?._updatedAt)}
               </BodyShort>
             </div>
