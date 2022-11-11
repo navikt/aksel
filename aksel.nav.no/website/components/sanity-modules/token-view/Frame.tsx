@@ -25,7 +25,7 @@ export const Frame = ({
         {tokens.map((c) => (
           <tr
             key={c.name}
-            className="shadow-small ring-border-subtle grid rounded-md p-3 ring-1"
+            className="shadow-small ring-border-subtle flex flex-col justify-start rounded-md p-3 align-top ring-1"
           >
             <td className="component-checkered-bg rounded-md p-0">
               {Element ? (
@@ -33,7 +33,7 @@ export const Frame = ({
               ) : (
                 <div
                   style={{ [styles]: c.value }}
-                  className="min-h-16 h-full w-full rounded-md"
+                  className="min-h-16 shadow-small h-full w-full rounded-md"
                   aria-hidden
                 />
               )}
@@ -41,7 +41,7 @@ export const Frame = ({
             <td className="mt-3 w-full overflow-x-hidden">
               <CopyToken val={c.name} />
             </td>
-            <td className="mt-1 font-mono text-sm tracking-tighter">
+            <td className="mt-2 font-mono text-sm tracking-tighter">
               {c.value}
             </td>
             <Detail as="td" className="mt-1">

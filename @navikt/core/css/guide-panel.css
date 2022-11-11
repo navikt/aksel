@@ -1,9 +1,3 @@
-:root,
-:host {
-  --v2-migration__navds-guide-panel-color-background: var(--a-surface-default);
-  --v2-migration__navds-guide-panel-color-illustration-background: var(--a-surface-action-subtle);
-}
-
 /**
  * GuidePanel component
  */
