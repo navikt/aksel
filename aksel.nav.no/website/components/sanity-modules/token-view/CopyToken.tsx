@@ -10,7 +10,7 @@ export const CopyToken = ({ val }: { val: string }) => {
 
   const copyToken = (e) => {
     e.preventDefault();
-    copystring(val);
+    copystring(`var(${val})`);
     setCopyTimer(true);
     clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => setCopyTimer(false), 2000);

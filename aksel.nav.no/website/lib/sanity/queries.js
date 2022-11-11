@@ -131,7 +131,10 @@ const spesialSeksjon = `_type == "spesial_seksjon" =>{
         ${markDef}
       }
     }
-  }
+  },
+  modul == "token_kategori" =>{
+    "token": token_ref->{...}
+}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{

@@ -8,7 +8,7 @@ export const Frame = ({
 }: {
   tokens: { name: string; value: string; description?: string }[];
   styles: string;
-  element?: ({ token }: { token: string }) => JSX.Element;
+  element?: ({ token, name }: { token: string; name?: string }) => JSX.Element;
 }) => {
   const hasDescription = !!tokens.find((x) => x?.description);
   return (
@@ -29,7 +29,7 @@ export const Frame = ({
           >
             <td className="component-checkered-bg rounded-md p-0">
               {Element ? (
-                <Element token={c.value} />
+                <Element token={c.value} name={c.name} />
               ) : (
                 <div
                   style={{ [styles]: c.value }}

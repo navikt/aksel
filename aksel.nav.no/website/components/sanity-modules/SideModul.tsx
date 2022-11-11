@@ -18,16 +18,11 @@ type SpesialT = {
     | "ikonsok"
     | "endringslogg"
     | "komponentoversikt"
-    | "tokens_font"
-    | "tokens_global-color"
-    | "tokens_semantic-color"
-    | "tokens_radius"
-    | "tokens_shadow"
-    | "tokens_spacing"
-    | "tokens_z-index";
+    | "token_kategori";
   logs?: any[];
   komponenter?: any;
   farge?: any;
+  token?: { title: string; kategori: string };
 };
 
 const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
@@ -43,10 +38,9 @@ const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
         return <ComponentOverview node={node.komponenter} />;
       case "ikonsok":
         return <IconSearch />;
+      case "token_kategori":
+        return <TokenView token={node.token} />;
       default: {
-        if (node.modul.startsWith("tokens_")) {
-          return <TokenView cat={node.modul.replace("tokens_", "")} />;
-        }
         return null;
       }
     }
