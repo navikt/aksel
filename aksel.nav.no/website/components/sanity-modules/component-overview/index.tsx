@@ -115,9 +115,6 @@ const ComponentOverview = ({
                   </Nextlink>
                   {getStatus(x.status)}
                 </span>
-                {/* <span className="clamp-3 mt-1 overflow-hidden">
-                  {<SanityBlockContent noLastMargin blocks={x?.ingress} />}
-                </span> */}
               </div>
             </div>
           </li>
