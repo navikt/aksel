@@ -19,8 +19,6 @@ export default function SetAndPublishAction(props) {
     }
   }, [props.draft]);
 
-  console.log(markers);
-
   return {
     disabled:
       publish.disabled ||
