@@ -22,7 +22,6 @@ import SpesialSeksjon from "./spesial-seksjon";
 import Tabell, { TabellSchema } from "./tabell";
 import Tastatur from "./tastatur";
 import Tips from "./tips";
-import Tokens from "./tokens";
 import Video from "./video";
 
 const v2Blocks = [
@@ -50,7 +49,6 @@ const v2Blocks = [
   Accordion,
   SpesialSeksjon,
   Video,
-  Tokens,
   Tips,
   Tastatur,
   KodeEksempler,

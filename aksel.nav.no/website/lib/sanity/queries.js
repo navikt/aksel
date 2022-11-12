@@ -89,10 +89,6 @@ const defaultBlock = `
     ...,
     "ref": ref->{...},
  },
- _type == "tokens" =>{
-    ...,
-    tokenlist[]->
- },
  _type == "kode_eksempler" =>{
     ...,
     dir->,

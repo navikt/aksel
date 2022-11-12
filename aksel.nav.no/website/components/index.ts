@@ -15,7 +15,6 @@ export { default as SideModul } from "./sanity-modules/SideModul";
 export { default as Tabell } from "./sanity-modules/Tabell";
 export { default as TastaturModul } from "./sanity-modules/tastatur";
 export { default as Tips } from "./sanity-modules/tips";
-export { default as TokensSeksjon } from "./sanity-modules/Tokens";
 export { default as TokenTable } from "./sanity-modules/TokenTable";
 export { default as Video } from "./sanity-modules/video";
 export * from "./website-modules/BreadCrumbs";

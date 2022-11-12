@@ -179,12 +179,11 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
   const comp = [
     "props_seksjon",
     "tastatur_modul",
-    "tokens",
     "kode_eksempler",
     "token_ref",
   ];
 
-  const ds_artikkel = ["tokens", "spesial_seksjon"];
+  const ds_artikkel = ["spesial_seksjon"];
 
   fields.push(...standard);
 

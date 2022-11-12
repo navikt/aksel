@@ -19,7 +19,6 @@ import {
   Tabell,
   TastaturModul,
   Tips,
-  TokensSeksjon,
   TokenTable,
   Video,
 } from ".";
@@ -49,7 +48,6 @@ const serializers = {
     spesial_seksjon: ({ node }) => <SideModul node={node} />,
     token_kategori: ({ node }) => <TokenTable node={node} />,
     video: ({ node }) => <Video node={node} />,
-    tokens: ({ node }) => <TokensSeksjon node={node} />,
     tips: ({ node }) => <Tips node={node} />,
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { withErrorBoundary } from "@/error-boundary";
 import ComponentOverview from "./component-overview";
-import { ColorCategory } from "./color-category";
 import dynamic from "next/dynamic";
 import TokenView from "./token-view";
 
@@ -33,7 +32,7 @@ const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
   const GetModule = () => {
     switch (node.modul) {
       case "farge_kategori":
-        return <ColorCategory node={node.farge} />;
+        return null;
       case "komponentoversikt":
         return <ComponentOverview node={node.komponenter} />;
       case "ikonsok":
