@@ -19,5 +19,6 @@ export const adminPanel = async (roles) =>
           S.listItem()
             .title("Standalone-sider")
             .child(S.documentTypeList("aksel_standalone")),
+          S.listItem().title("Redirects").child(S.documentTypeList("redirect")),
         ])
     );
