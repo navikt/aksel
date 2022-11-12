@@ -6,6 +6,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import editors from "./documents/editors";
 import navigation, { dropdown, link } from "./documents/navigation";
 import frontpage from "./documents/frontpage";
+import redirect from "./documents/redirects";
 
 import * as Designsystem from "./documents/designsystem";
 import * as Aksel from "./documents/aksel";
@@ -20,6 +21,7 @@ export default createSchema({
     navigation,
     link,
     dropdown,
+    redirect,
 
     Designsystem.Color,
     Designsystem.ds_header_heading,
