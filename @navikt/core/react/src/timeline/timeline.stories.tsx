@@ -1,4 +1,10 @@
-import { Caseworker, ExternalLink, Money, Telephone } from "@navikt/ds-icons";
+import {
+  Caseworker,
+  ExternalLink,
+  Money,
+  Add,
+  Applicant,
+} from "@navikt/ds-icons";
 import { Meta } from "@storybook/react/types-6-0";
 import React from "react";
 import { Link, Tag } from "..";
@@ -36,7 +42,7 @@ export const Default = ({ asButton, ...props }) => {
           title="Du har søkt om dagpenger"
           time="past"
           description="1 uke siden"
-          icon="success"
+          icon={Add}
         />
         <Step
           time="past"
@@ -48,7 +54,7 @@ export const Default = ({ asButton, ...props }) => {
           title="Søkanden mangler dokumenter"
           time="present"
           description="Du er her 23. Oktober 2022"
-          icon="warning"
+          icon={Applicant}
         >
           <BodyShort spacing>
             Du mangler fortsatt noen dokumenter til søknaden
@@ -63,7 +69,6 @@ export const Default = ({ asButton, ...props }) => {
 
         <Step
           time="future"
-          icon={Telephone}
           title="Du vil få en telefon fra en veileder"
           description="Om omtrent 2 dager"
         />

@@ -12,15 +12,21 @@
 
 .navds-timeline__item {
   display: grid;
-  grid-template-columns: [track] 2.5rem [gap] var(--navds-timeline-marker-gap) [content] auto;
-  grid-template-rows: [kicker] auto [title-start] auto auto [title-end content] auto;
+  grid-template-columns: [track] var(--navds-spacing-10) [gap] var(--navds-timeline-marker-gap) [content] auto;
   grid-auto-flow: column;
   min-height: 6rem;
   padding: 0 0.5rem;
+  grid-template-rows: [kicker] var(--navds-spacing-5) [title-start] auto auto [title-end content] auto [gutter] var(
+      --navds-spacing-7
+    );
+}
+
+.navds-timeline__item--present {
+  background-color: var(--navds-global-color-gray-100);
 }
 
 .navds-timeline__line {
-  --_line-color: var(--navds-global-color-gray-400);
+  --_line-color: var(--navds-global-color-gray-200);
   --_dash-size: 7px;
   --_dash-gap: 4px;
 
@@ -37,14 +43,19 @@
 
 .navds-timeline__line--2 {
   grid-row: title-start / content-end;
+  grid-row: kicker / content-end;
+}
+
+:where(.navds-timeline__item:first-of-type) .navds-timeline__line--2 {
+  grid-row: title-start / content-end;
 }
 
 :where(.navds-timeline__item:last-of-type) .navds-timeline__line--2 {
-  display: none;
+  grid-row: kicker / title-start;
 }
 
 .navds-timeline__marker {
-  background-color: var(--navds-global-color-white);
+  background-color: var(--navds-global-color-gray-200);
   width: 2.5rem;
   height: 2.5rem;
   grid-column: track;
@@ -54,8 +65,16 @@
   z-index: 1;
   place-items: center;
   display: grid;
+  border-radius: var(--navds-border-radius-full);
   font-size: 1.5rem;
-  outline: 4px solid var(--navds-global-color-white);
+}
+
+.navds-timeline__marker .navds-timeline__marker--iconless {
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--navds-global-color-gray-200);
+  display: flex;
 }
 
 .navds-timeline__content {
@@ -87,31 +106,6 @@
   grid-column: content;
 }
 
-.navds-timeline__item--present {
-  background-color: var(--navds-global-color-gray-50);
-  margin-bottom: 1rem;
-  margin-top: 0.25rem;
-  box-shadow: 0 0 0 1px rgb(0 0 0 / 0.1);
-  padding: 0.5rem;
-}
-
-.navds-timeline__item--present > .navds-timeline__marker {
-  outline: none;
-  background-color: var(--navds-global-color-gray-50);
-  border-top-left-radius: 15px;
-}
-
 .navds-timeline__item--present .navds-timeline__description {
   color: var(--navds-global-color-gray-900);
-}
-
-:where(.navds-timeline__item--future) > .navds-timeline__line {
-  background-color: transparent;
-  background-image: repeating-linear-gradient(
-    var(--_line-color),
-    var(--_line-color) var(--_dash-size),
-    transparent var(--_dash-size),
-    transparent calc(var(--_dash-size) + var(--_dash-gap))
-  );
-  background-size: calc(var(--_dash-size) + var(--_dash-gap));
 }

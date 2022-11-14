@@ -1,9 +1,7 @@
-import { Error, Success, Warning } from "@navikt/ds-icons";
 import cl from "clsx";
 import React, { forwardRef } from "react";
 import { BodyLong, BodyShort, Heading } from "..";
 
-type iconType = "success" | "warning" | "error" | React.ElementType;
 export interface TimelineStepProps
   extends React.AnchorHTMLAttributes<HTMLLIElement> {
   children?: React.ReactNode;
@@ -18,50 +16,19 @@ export interface TimelineStepProps
   /**
    * TimelineStep icon, accepts string or icon-element
    */
-  icon: iconType;
+  icon?: React.ElementType;
 }
-// consider: a "variant" prop thats just an alias of "icon", if people want variant
 
 export interface TimelineStepType
   extends React.ForwardRefExoticComponent<
     TimelineStepProps & React.RefAttributes<HTMLLIElement>
   > {}
 
-const Icon = ({ icon }: { icon: iconType }) => {
-  switch (icon) {
-    case "success":
-      return (
-        <Success
-          aria-hidden
-          title="feil"
-          color="var(--navds-global-color-green-600)"
-        />
-      );
-    case "warning":
-      return (
-        <Warning
-          aria-hidden
-          title="advarsel"
-          color="var(--navds-global-color-orange-600)"
-        />
-      );
-    case "error":
-      return (
-        <Error
-          aria-hidden
-          title="suksess"
-          color="var(--navds-global-color-red-500)"
-        />
-      );
-    default: {
-      const CustomIcon = icon;
-      return <CustomIcon aria-hidden />;
-    }
-  }
-};
-
 export const TimelineStep = forwardRef<HTMLLIElement, TimelineStepProps>(
-  ({ className, children, time, description, icon, title, ...rest }, ref) => {
+  (
+    { className, children, time, description, icon: Icon, title, ...rest },
+    ref
+  ) => {
     return (
       <li
         {...rest}
@@ -73,8 +40,12 @@ export const TimelineStep = forwardRef<HTMLLIElement, TimelineStepProps>(
           className
         )}
       >
-        <div className="navds-timeline__marker">
-          <Icon icon={icon} />
+        <div className="navds-timeline__marker navds-timeline__marker--iconless">
+          {Icon ? (
+            <Icon aria-hidden />
+          ) : (
+            <div className="navds-timeline__marker--iconless" />
+          )}
         </div>
         <Heading size="small" as="div" className="navds-timeline__title">
           {title}
