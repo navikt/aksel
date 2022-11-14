@@ -229,6 +229,7 @@ const Feedback = ({
               onChange={(e) => setTextValue(e.target.value)}
               maxLength={600}
               minRows={3}
+              description="Ikke skriv inn navn eller andre personopplysninger"
             />
             <Button className="mr-auto" onClick={handleSend}>
               Send inn svar

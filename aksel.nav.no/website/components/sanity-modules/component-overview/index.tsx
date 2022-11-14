@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { SanityT, urlFor } from "@/lib";
-import { Heading } from "@navikt/ds-react";
+import { Heading, Tag } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "classnames";
 
@@ -8,25 +8,24 @@ const getStatus = (status?: SanityT.Schema.komponent_artikkel["status"]) => {
   switch (status?.tag) {
     case "beta":
       return (
-        <span className="ml-2 rounded bg-purple-400 px-1 text-sm text-white">
+        <Tag variant="alt1" size="small">
           Beta
-        </span>
+        </Tag>
       );
     case "new":
       return (
-        <span className="ml-2 rounded bg-green-300 px-1 text-sm text-gray-900">
-          Ready
-        </span>
+        <Tag variant="info" size="small">
+          New
+        </Tag>
       );
     case "ready":
       return null;
     case "deprecated":
       return (
-        <span className="ml-2 rounded bg-gray-200 px-1 text-sm text-gray-900">
+        <Tag variant="neutral" size="small">
           Deprecated
-        </span>
+        </Tag>
       );
-
     default:
       return null;
   }
