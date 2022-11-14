@@ -297,3 +297,26 @@ export const WithDayLabels = () => {
     </div>
   );
 };
+
+export const WithYearLabels = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1" icon={<SuccessFilled aria-hidden />}>
+          <Timeline.Period
+            start={new Date("Feb 4 2022")}
+            end={new Date("Feb 13 2028")}
+            status="success"
+          />
+        </Timeline.Row>
+        <Timeline.Row label="Row 2" icon={<SuccessFilled aria-hidden />}>
+          <Timeline.Period
+            start={new Date("Feb 17 2024")}
+            end={new Date("Feb 22 2031")}
+            status="warning"
+          />
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
