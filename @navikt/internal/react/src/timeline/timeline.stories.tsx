@@ -274,3 +274,26 @@ export const ActivePeriod = () => {
     </div>
   );
 };
+
+export const WithDayLabels = () => {
+  return (
+    <div style={{ width: "80vw" }}>
+      <Timeline>
+        <Timeline.Row label="Row 1" icon={<SuccessFilled aria-hidden />}>
+          <Timeline.Period
+            start={new Date("Feb 4 2022")}
+            end={new Date("Feb 13 2022")}
+            status="success"
+          />
+        </Timeline.Row>
+        <Timeline.Row label="Row 2" icon={<SuccessFilled aria-hidden />}>
+          <Timeline.Period
+            start={new Date("Feb 17 2022")}
+            end={new Date("Feb 22 2022")}
+            status="warning"
+          />
+        </Timeline.Row>
+      </Timeline>
+    </div>
+  );
+};
