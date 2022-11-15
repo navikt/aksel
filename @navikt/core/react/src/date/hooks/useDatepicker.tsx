@@ -29,6 +29,10 @@ export interface UseDatepickerOptions
    */
   defaultSelected?: Date;
   /**
+   * Default shown month
+   */
+  defaultMonth?: Date;
+  /**
    * Make selection of Date required
    */
   required?: boolean;
@@ -107,6 +111,7 @@ export const useDatepicker = (
     onDateChange,
     inputFormat,
     onValidate,
+    defaultMonth,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -117,7 +122,7 @@ export const useDatepicker = (
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
-  const [month, setMonth] = useState(defaultSelected ?? today);
+  const [month, setMonth] = useState(defaultSelected ?? defaultMonth ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
   const [open, setOpen] = useState(false);
 
@@ -168,14 +173,14 @@ export const useDatepicker = (
 
   const reset = () => {
     updateDate(defaultSelected);
-    setMonth(defaultSelected ?? today);
+    setMonth(defaultSelected ?? defaultMonth ?? today);
     setInputValue(defaultInputValue ?? "");
     setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
     updateDate(date);
-    setMonth(date ?? today);
+    setMonth(date ?? defaultMonth ?? today);
     setInputValue(
       date ? formatDateForInput(date, locale, "date", inputFormat) : ""
     );
@@ -257,7 +262,7 @@ export const useDatepicker = (
     }
     updateDate(day);
     updateValidation();
-    setMonth(day);
+    setMonth(defaultMonth ?? day);
   };
 
   const handleClose = useCallback(() => {
@@ -277,6 +282,9 @@ export const useDatepicker = (
       window.removeEventListener("keydown", escape, false);
     };
   }, [escape]);
+
+  /* console.log(month); */
+  console.log(month);
 
   const datepickerProps = {
     month,
