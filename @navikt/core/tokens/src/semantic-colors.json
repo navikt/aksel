@@ -17,6 +17,9 @@
         "selected": {
           "value": "{a.deepblue.500.value}"
         },
+        "hover": {
+          "value": "{a.blue.800.value}"
+        },
         "@": {
           "value": "{a.blue.500.value}"
         }
@@ -98,7 +101,7 @@
       "action": {
         "subtle": {
           "hover": {
-            "value": "{a.blue.50.value}"
+            "value": "{a.blue.100.value}"
           },
           "@": {
             "value": "{a.blue.50.value}"

@@ -123,7 +123,7 @@
 }
 
 .navds-button--secondary:hover {
-  color: var(--ac-button-secondary-hover-text, var(--a-text-action));
+  color: var(--ac-button-secondary-hover-text, var(--a-text-action-hover));
   background-color: var(--ac-button-secondary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
