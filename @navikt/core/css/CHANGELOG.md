@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 1.5.9
+
+### Patch Changes
+
+- 4px -> 2px gap chips-toggle active
+
 ## 1.5.8
 
 ## 1.5.7

@@ -19,13 +19,13 @@
   ],
   "dependencies": {
     "@navikt/ds-codemod": "1.5.2-next.13",
-    "@navikt/ds-css": "^1.5.8",
-    "@navikt/ds-css-internal": "^1.5.8",
-    "@navikt/ds-icons": "^1.5.8",
-    "@navikt/ds-react": "^1.5.8",
-    "@navikt/ds-react-internal": "^1.5.8",
-    "@navikt/ds-tailwind": "^1.5.8",
-    "@navikt/ds-tokens": "^1.5.8"
+    "@navikt/ds-css": "^1.5.9",
+    "@navikt/ds-css-internal": "^1.5.9",
+    "@navikt/ds-icons": "^1.5.9",
+    "@navikt/ds-react": "^1.5.9",
+    "@navikt/ds-react-internal": "^1.5.9",
+    "@navikt/ds-tailwind": "^1.5.9",
+    "@navikt/ds-tokens": "^1.5.9"
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.1.13"

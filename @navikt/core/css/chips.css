@@ -38,10 +38,6 @@
   background-color: var(--ac-chip-toggle-bg, var(--a-surface-neutral-subtle));
 }
 
-.navds-chips--small .navds-chips__toggle {
-  gap: var(--a-spacing-1);
-}
-
 .navds-chips__toggle:hover {
   box-shadow: inset 0 0 0 1px var(--ac-chip-toggle-hover-border, var(--a-border-strong));
   background-color: var(--ac-chip-toggle-hover-bg, var(--a-surface-neutral-subtle-hover));
