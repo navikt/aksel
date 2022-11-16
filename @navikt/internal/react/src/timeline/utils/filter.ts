@@ -8,7 +8,7 @@ export interface Positioned {
 }
 
 export const isVisible = ({ horizontalPosition }: Positioned): boolean =>
-  horizontalPosition <= 100 && horizontalPosition >= 0;
+  horizontalPosition <= 98 && horizontalPosition >= 0;
 
 export const getFirstDate = (periods: any) => {
   return periods.sort(

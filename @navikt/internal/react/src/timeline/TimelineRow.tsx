@@ -8,7 +8,7 @@ export interface TimelineRowProps
   /**
    * label for the timeline row
    */
-  label?: string;
+  label: string;
   /**
    * Icon which will be displayed next to label
    */
