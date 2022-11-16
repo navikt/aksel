@@ -46,7 +46,7 @@ export interface AxisLabel extends Positioned, Spatial {
 }
 
 export interface InternalSimpleTimeline {
-  label?: string;
+  label: string;
   id: string;
   periods: PositionedPeriod[];
   icon?: ReactNode;
