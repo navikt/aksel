@@ -1,6 +1,9 @@
 import { Popover } from "@navikt/ds-react";
 import cl from "clsx";
-import React, { RefObject, useState } from "react";
+import React, { RefObject, useEffect, useState } from "react";
+import { usePeriodContext } from "../hooks/usePeriodContext";
+import { useRowContext } from "../hooks/useRowContext";
+import { useTimelineContext } from "../hooks/useTimelineContext";
 import { ariaLabel, getConditionalClasses } from "../utils/period";
 import { PeriodProps } from "./Period";
 
@@ -27,6 +30,13 @@ const ClickablePeriod = React.memo(
     statusLabel,
   }: ClickablePeriodProps) => {
     const [selected, setSelected] = useState(false);
+    const { active, index } = useRowContext();
+    const { firstFocus } = usePeriodContext();
+    const { activeRow, initiate } = useTimelineContext();
+
+    useEffect(() => {
+      active && firstFocus && buttonRef.current?.focus();
+    }, [active, buttonRef, firstFocus]);
 
     return (
       <>
@@ -46,6 +56,7 @@ const ClickablePeriod = React.memo(
             [direction]: `${left}%`,
           }}
           aria-expanded={children ? selected : undefined}
+          onFocus={() => !activeRow && initiate(index)}
         >
           {icon}
         </button>

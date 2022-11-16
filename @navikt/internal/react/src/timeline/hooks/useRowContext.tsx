@@ -4,11 +4,15 @@ import { PositionedPeriod } from "../utils/types.internal";
 interface RowContextProps {
   periods: PositionedPeriod[];
   id: string;
+  active: boolean;
+  index: number;
 }
 
 export const RowContext = createContext<RowContextProps>({
   periods: [],
   id: "",
+  active: false,
+  index: 0,
 });
 
 export const useRowContext = () => {

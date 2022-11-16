@@ -82,7 +82,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
     const [start, setStart] = useState(initialStartDate);
-    const [activeRow, setActiveRow] = useState(0);
+    const [activeRow, setActiveRow] = useState<number | null>(null);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows }))
     );
@@ -111,6 +111,31 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
       }
     };
 
+    const handleActiveRowChange = (key: string) => {
+      console.log(activeRow);
+      if (activeRow !== null && key === "ArrowDown") {
+        for (let i = activeRow + 1; i < processedRows.length; i++) {
+          const row = processedRows[i];
+          console.log(row);
+          if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
+            setActiveRow(i);
+            break;
+          }
+        }
+        return;
+      }
+      if (activeRow !== null && key === "ArrowUp") {
+        for (let i = activeRow - 1; i >= 0; i--) {
+          const row = processedRows[i];
+          if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
+            setActiveRow(i);
+            break;
+          }
+        }
+        return;
+      }
+    };
+
     return (
       <TimelineContext.Provider
         value={{
@@ -120,7 +145,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
           activeRow: activeRow,
-          setActiveRow: (i) => setActiveRow(i),
+          setActiveRow: (key) => handleActiveRowChange(key),
+          initiate: (i) => setActiveRow(i),
         }}
       >
         <div {...rest} ref={ref}>
@@ -131,13 +157,15 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
               return pin;
             })}
 
-            {processedRows.map((row) => {
+            {processedRows.map((row, i) => {
               return (
                 <RowContext.Provider
                   key={`row-${row.id}`}
                   value={{
                     periods: row.periods,
                     id: row.id,
+                    active: activeRow === i,
+                    index: i,
                   }}
                 >
                   {row.label && (

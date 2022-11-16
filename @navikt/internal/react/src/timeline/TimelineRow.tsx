@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import React, { forwardRef, ReactNode } from "react";
 import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
+import { useTimelineContext } from "./hooks/useTimelineContext";
 import Period from "./period/Period";
 
 export interface TimelineRowProps
@@ -26,6 +27,7 @@ export interface TimelineRowType
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
   ({ label, ...rest }, ref) => {
     const { periods, id } = useRowContext();
+    const { setActiveRow } = useTimelineContext();
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
@@ -34,6 +36,10 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
     const earliest = periods.reduce((a, b) => {
       return a.end < b.end ? a : b;
     });
+
+    const firstFocusable = periods.find(
+      (p) => !!p.children || !!p.onSelectPeriod
+    );
 
     return (
       <div className="navdsi-timeline__row">
@@ -46,6 +52,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
             "dd.MM.yyyy"
           )}`}
           className="navdsi-timeline__row-periods"
+          onKeyDown={(e) => {
+            if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+              setActiveRow(e.key);
+            }
+          }}
         >
           {periods &&
             periods.map((period) => {
@@ -54,6 +65,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
                   <PeriodContext.Provider
                     value={{
                       periodId: period.id,
+                      firstFocus: firstFocusable?.id === period.id,
                     }}
                   >
                     <Period

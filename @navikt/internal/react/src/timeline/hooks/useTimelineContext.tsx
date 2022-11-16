@@ -6,8 +6,9 @@ interface TimelineContextProps {
   direction: "left" | "right";
   setStart: (d: Date) => void;
   setEndInclusive: (d: Date) => void;
-  activeRow: number;
-  setActiveRow: (i: number) => void;
+  activeRow: number | null;
+  setActiveRow: (i: string) => void;
+  initiate: (i: number) => void;
 }
 
 export const TimelineContext = createContext<TimelineContextProps>({
@@ -18,6 +19,7 @@ export const TimelineContext = createContext<TimelineContextProps>({
   setEndInclusive: () => null,
   activeRow: 0,
   setActiveRow: () => null,
+  initiate: () => null,
 });
 
 export const useTimelineContext = () => {
