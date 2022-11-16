@@ -45,4 +45,5 @@ export default {
       initialValue: () => true,
     },
   ],
+  __experimental_omnisearch_visibility: false,
 };

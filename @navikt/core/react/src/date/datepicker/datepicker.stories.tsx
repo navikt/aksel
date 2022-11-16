@@ -286,3 +286,19 @@ export const UseRangedDatepickerValidation = () => {
     </div>
   );
 };
+
+export const defaultShownMonth = () => {
+  const { datepickerProps, inputProps } = UNSAFE_useDatepicker({
+    fromDate: new Date("Aug 23 2019"),
+    onDateChange: console.log,
+    defaultMonth: new Date("Oct 23 2022"),
+  });
+
+  return (
+    <div style={{ display: "flex", gap: "1rem" }}>
+      <DatePicker {...datepickerProps}>
+        <DatePicker.Input {...inputProps} label="Velg dato" />
+      </DatePicker>
+    </div>
+  );
+};

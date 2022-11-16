@@ -201,6 +201,7 @@ export const useRangeDatepicker = (
     onRangeChange,
     inputFormat,
     onValidate,
+    defaultMonth,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -213,7 +214,7 @@ export const useRangeDatepicker = (
 
   // Initialize states
   const [month, setMonth] = useState(
-    defaultSelected ? defaultSelected?.from : today
+    defaultSelected ? defaultSelected?.from : defaultMonth ?? today
   );
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>(
     defaultSelected ?? { from: undefined, to: undefined }
@@ -284,7 +285,7 @@ export const useRangeDatepicker = (
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
-    setMonth(defaultSelected ? defaultSelected?.from : today);
+    setMonth(defaultSelected ? defaultSelected?.from : defaultMonth ?? today);
     setValidation(
       initialValidation(
         defaultSelected ?? { from: undefined, to: undefined },

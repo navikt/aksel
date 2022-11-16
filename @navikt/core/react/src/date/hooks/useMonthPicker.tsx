@@ -31,6 +31,10 @@ export interface UseMonthPickerOptions
    * validation-callback
    */
   onValidate?: (val: MonthValidationT) => void;
+  /**
+   * Default shown year
+   */
+  defaultYear?: Date;
 }
 
 interface UseMonthPickerValue {
@@ -89,6 +93,7 @@ export const useMonthpicker = (
     onMonthChange,
     inputFormat,
     onValidate,
+    defaultYear,
   } = opt;
 
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
@@ -100,7 +105,7 @@ export const useMonthpicker = (
   const monthpickerRef = useRef<HTMLDivElement>(null);
 
   // Initialize states
-  const [year, setYear] = useState(defaultSelected ?? today);
+  const [year, setYear] = useState(defaultSelected ?? defaultYear ?? today);
   const [selectedMonth, setSelectedMonth] = useState(defaultSelected);
   const [open, setOpen] = useState(false);
 
@@ -151,14 +156,14 @@ export const useMonthpicker = (
 
   const reset = () => {
     updateMonth(defaultSelected);
-    setYear(defaultSelected ?? today);
+    setYear(defaultSelected ?? defaultYear ?? today);
     setInputValue(defaultInputValue ?? "");
     setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
     updateMonth(date);
-    setYear(date ?? today);
+    setYear(date ?? defaultYear ?? today);
     setInputValue(
       date ? formatDateForInput(date, locale, "month", inputFormat) : ""
     );

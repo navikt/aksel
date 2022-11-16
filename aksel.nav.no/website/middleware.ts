@@ -12,7 +12,8 @@ export async function middleware(req) {
 `);
 
     const redirect = redirects.find(
-      (redirect) => req.nextUrl.pathname === redirect?.source
+      (redirect) =>
+        decodeURIComponent(req.nextUrl.pathname) === redirect?.source
     );
 
     if (redirect) {

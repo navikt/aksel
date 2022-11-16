@@ -118,6 +118,28 @@ Linker eller dropdowns med linker. Maks dybde på 2 dropdowns er støttet. Sider
     }
 
     /**
+     * Redirect
+     */
+    interface redirect extends Sanity.Document {
+      _type: "redirect";
+
+      /**
+       * Fra - `String`
+       */
+      source?: string;
+
+      /**
+       * Til - `String`
+       */
+      destination?: string;
+
+      /**
+       * Permanent - `Boolean`
+       */
+      permanent?: boolean;
+    }
+
+    /**
      * Fargekategori
      */
     interface ds_color_categories extends Sanity.Document {
@@ -1572,6 +1594,7 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
       | vk_frontpage
       | editor
       | navigation
+      | redirect
       | ds_color_categories
       | ds_tokens
       | token_kategori
