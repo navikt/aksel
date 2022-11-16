@@ -20,7 +20,7 @@
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: 0.125rem;
+  gap: var(--a-spacing-05);
   margin: 0;
   padding: 0 var(--a-spacing-3);
   text-decoration: none;
@@ -129,7 +129,7 @@
 }
 
 .navds-chips--small .navds-chips--icon-right {
-  padding-right: 0.125rem;
+  padding-right: var(--a-spacing-05);
 }
 
 .navds-chips--small .navds-chips--icon-left {
