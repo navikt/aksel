@@ -283,9 +283,6 @@ export const useDatepicker = (
     };
   }, [escape]);
 
-  /* console.log(month); */
-  console.log(month);
-
   const datepickerProps = {
     month,
     onMonthChange: (month) => setMonth(month),
