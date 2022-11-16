@@ -82,6 +82,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
 
     const initialStartDate = startOfDay(useEarliestDate({ startDate, rows }));
     const [start, setStart] = useState(initialStartDate);
+    const [activeRow, setActiveRow] = useState(0);
     const [endInclusive, setEndInclusive] = useState(
       endOfDay(useLatestDate({ endDate, rows }))
     );
@@ -118,6 +119,8 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
           direction: direction,
           setStart: (d) => handleZoomChange(d),
           setEndInclusive: (d) => setEndInclusive(d),
+          activeRow: activeRow,
+          setActiveRow: (i) => setActiveRow(i),
         }}
       >
         <div {...rest} ref={ref}>
