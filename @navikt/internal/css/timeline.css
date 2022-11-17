@@ -15,6 +15,7 @@
 }
 
 .navdsi-timeline__row-label {
+  all: unset;
   white-space: nowrap;
   width: auto;
   margin-right: var(--navds-spacing-4);

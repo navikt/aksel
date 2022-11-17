@@ -8,9 +8,14 @@ import Period from "./period/Period";
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
   /**
-   * label for the timeline row
+   * Label for the timeline row
    */
   label: string;
+  /**
+   * Heading level for the label e.g h1, h2, h3...
+   * @default "h3"
+   */
+  headingLevel?: "h2" | "h3" | "h4" | "h5" | "h6";
   /**
    * Icon which will be displayed next to label
    */
@@ -25,9 +30,11 @@ export interface TimelineRowType
 }
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
-  ({ label, ...rest }, ref) => {
+  ({ label, headingLevel, ...rest }, ref) => {
     const { periods, id } = useRowContext();
     const { setActiveRow } = useTimelineContext();
+
+    console.log(headingLevel);
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
