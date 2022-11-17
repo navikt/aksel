@@ -123,7 +123,7 @@ export const useTimelineRows = (
         return {
           id: `tl-row-${rowIndex}`,
           label: periods.label,
-          headingLevel: periods.headingLevel || "h3",
+          headingTag: periods.headingTag || "h3",
           icon: periods.icon,
           periods:
             direction === "left" ? timelinePeriods : timelinePeriods.reverse(),
