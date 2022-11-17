@@ -119,7 +119,7 @@
 .navds-button--secondary {
   color: var(--ac-button-secondary-text, var(--a-text-action));
   background-color: var(--ac-button-secondary-bg, var(--a-surface-default));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--a-border-action));
+  box-shadow: inset 0 0 0 1.5px var(--ac-button-secondary-border, var(--a-border-action));
 }
 
 .navds-button--secondary:hover {
@@ -128,7 +128,7 @@
 }
 
 .navds-button--secondary:focus {
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 1.5px var(--ac-button-secondary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
 }
 
 .navds-button--secondary:active {
@@ -145,7 +145,7 @@
 .navds-button--secondary:hover:where(:disabled, .navds-button--disabled) {
   color: var(--ac-button-secondary-text, var(--a-text-action));
   background-color: var(--ac-button-secondary-bg, var(--a-surface-default));
-  box-shadow: inset 0 0 0 2px var(--ac-button-secondary-border, var(--a-border-action));
+  box-shadow: inset 0 0 0 1.5px var(--ac-button-secondary-border, var(--a-border-action));
 }
 
 /****************************
@@ -157,11 +157,12 @@
 }
 
 .navds-button--tertiary:hover {
+  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-hover));
   background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
 .navds-button--tertiary:focus {
-  box-shadow: inset 0 0 0 2px var(--ac-button-tertiary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
+  box-shadow: inset 0 0 0 1.5px var(--ac-button-tertiary-focus-border, var(--a-border-action)), var(--a-shadow-focus);
 }
 
 .navds-button--tertiary:active {
