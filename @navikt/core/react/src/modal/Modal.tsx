@@ -108,7 +108,9 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       <ReactModal
         {...rest}
         parentSelector={
-          parentSelector ?? rootElement !== undefined
+          parentSelector
+            ? parentSelector
+            : rootElement !== undefined
             ? () => rootElement as HTMLElement
             : undefined
         }
