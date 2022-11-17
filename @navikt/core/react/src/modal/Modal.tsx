@@ -104,16 +104,19 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       }
     };
 
+    const parentSelectorFunc = () => {
+      if (parentSelector) {
+        return parentSelector;
+      }
+      return rootElement !== undefined
+        ? () => rootElement as HTMLElement
+        : undefined;
+    };
+
     return (
       <ReactModal
         {...rest}
-        parentSelector={
-          parentSelector
-            ? parentSelector
-            : rootElement !== undefined
-            ? () => rootElement as HTMLElement
-            : undefined
-        }
+        parentSelector={parentSelectorFunc()}
         style={style}
         isOpen={open}
         ref={mergedRef}
