@@ -29,6 +29,10 @@ export interface UseDatepickerOptions
    */
   defaultSelected?: Date;
   /**
+   * Default shown month
+   */
+  defaultMonth?: Date;
+  /**
    * Make selection of Date required
    */
   required?: boolean;
@@ -107,6 +111,7 @@ export const useDatepicker = (
     onDateChange,
     inputFormat,
     onValidate,
+    defaultMonth,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -117,7 +122,7 @@ export const useDatepicker = (
   const [defaultSelected, setDefaultSelected] = useState(_defaultSelected);
 
   // Initialize states
-  const [month, setMonth] = useState(defaultSelected ?? today);
+  const [month, setMonth] = useState(defaultSelected ?? defaultMonth ?? today);
   const [selectedDay, setSelectedDay] = useState(defaultSelected);
   const [open, setOpen] = useState(false);
 
@@ -138,14 +143,19 @@ export const useDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) => {
-      if (!e?.target || !e?.target?.nodeType) {
+      /* Workaround for shadow-dom users (open) */
+      const composed = e.composedPath?.()?.[0];
+      if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
+
       ![
         daypickerRef.current,
         inputRef.current,
         inputRef.current?.nextSibling,
-      ].some((element) => element?.contains(e.target)) &&
+      ].some(
+        (element) => element?.contains(e.target) || element?.contains(composed)
+      ) &&
         open &&
         setOpen(false);
     },
@@ -163,14 +173,14 @@ export const useDatepicker = (
 
   const reset = () => {
     updateDate(defaultSelected);
-    setMonth(defaultSelected ?? today);
+    setMonth(defaultSelected ?? defaultMonth ?? today);
     setInputValue(defaultInputValue ?? "");
     setDefaultSelected(_defaultSelected);
   };
 
   const setSelected = (date: Date | undefined) => {
     updateDate(date);
-    setMonth(date ?? today);
+    setMonth(date ?? defaultMonth ?? today);
     setInputValue(
       date ? formatDateForInput(date, locale, "date", inputFormat) : ""
     );
@@ -178,7 +188,6 @@ export const useDatepicker = (
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = (e) => {
     !open && setOpen(true);
-
     let day = parseDate(e.target.value, today, locale, "date");
     if (isValidDate(day)) {
       setMonth(day);
@@ -253,7 +262,7 @@ export const useDatepicker = (
     }
     updateDate(day);
     updateValidation();
-    setMonth(day);
+    setMonth(defaultMonth ?? day);
   };
 
   const handleClose = useCallback(() => {

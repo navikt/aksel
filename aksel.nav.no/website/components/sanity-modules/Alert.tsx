@@ -12,7 +12,13 @@ const Alert = ({
     <div className="mb-7 max-w-2xl">
       <DsAlert variant={node.variant}>
         {node.heading && (
-          <Heading spacing size="small" as={node.heading_level} id={node._key}>
+          <Heading
+            spacing
+            size="small"
+            as={node.heading_level}
+            id={node._key}
+            className="scroll-m-20"
+          >
             {node.heading}
           </Heading>
         )}

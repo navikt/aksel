@@ -201,6 +201,7 @@ export const useRangeDatepicker = (
     onRangeChange,
     inputFormat,
     onValidate,
+    defaultMonth,
   } = opt;
 
   const locale = getLocaleFromString(_locale);
@@ -213,7 +214,7 @@ export const useRangeDatepicker = (
 
   // Initialize states
   const [month, setMonth] = useState(
-    defaultSelected ? defaultSelected?.from : today
+    defaultSelected ? defaultSelected?.from : defaultMonth ?? today
   );
   const [selectedRange, setSelectedRange] = useState<DateRange | undefined>(
     defaultSelected ?? { from: undefined, to: undefined }
@@ -253,7 +254,9 @@ export const useRangeDatepicker = (
 
   const handleFocusIn = useCallback(
     (e) => {
-      if (!e?.target || !e?.target?.nodeType) {
+      /* Workaround for shadow-dom users (open) */
+      const composed = e.composedPath?.()?.[0];
+      if (!e?.target || !e?.target?.nodeType || !composed) {
         return;
       }
       ![
@@ -262,7 +265,9 @@ export const useRangeDatepicker = (
         inputRefFrom.current,
         inputRefTo.current?.nextSibling,
         inputRefFrom.current?.nextSibling,
-      ].some((element) => element?.contains(e.target)) &&
+      ].some(
+        (element) => element?.contains(e.target) || element?.contains(composed)
+      ) &&
         open &&
         setOpen(false);
     },
@@ -280,7 +285,7 @@ export const useRangeDatepicker = (
 
   const reset = () => {
     updateRange(defaultSelected ?? { from: undefined, to: undefined });
-    setMonth(defaultSelected ? defaultSelected?.from : today);
+    setMonth(defaultSelected ? defaultSelected?.from : defaultMonth ?? today);
     setValidation(
       initialValidation(
         defaultSelected ?? { from: undefined, to: undefined },

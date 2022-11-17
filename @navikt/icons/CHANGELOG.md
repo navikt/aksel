@@ -1,5 +1,19 @@
 # @navikt/ds-icons
 
+## 1.5.9
+
+## 1.5.8
+
+## 1.5.7
+
+## 1.5.6
+
+## 1.5.5
+
+### Patch Changes
+
+- Error-ikon hadde avrundede kanter
+
 ## 1.5.4
 
 ### Patch Changes
