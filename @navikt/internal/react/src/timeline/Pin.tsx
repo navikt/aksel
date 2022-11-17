@@ -45,6 +45,7 @@ export const Pin = forwardRef<HTMLButtonElement, PinProps>(
             open={open}
             onClose={() => setOpen(false)}
             anchorEl={buttonRef.current}
+            offset={18}
           >
             <Popover.Content>{children}</Popover.Content>
           </Popover>

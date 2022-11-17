@@ -9,8 +9,8 @@
   position: relative;
   height: 1rem;
   box-sizing: content-box;
-  margin-bottom: var(--navds-spacing-4);
   grid-column: 2;
+  margin-bottom: var(--navds-spacing-4);
   margin-left: var(--navds-spacing-8);
 }
 
@@ -151,12 +151,32 @@
 }
 
 .navdsi-timeline__pin__button {
+  border: none;
   cursor: pointer;
   background: var(--navds-global-color-white);
-  border: 3px solid var(--navds-global-color-red-500);
+  box-shadow: 0 0 0 3px var(--navds-global-color-red-500);
   z-index: 2;
   border-radius: var(--navds-border-radius-full);
-  padding: 2.5px;
+  padding: 3.5px;
+  position: relative;
+}
+
+.navdsi-timeline__pin__button::before {
+  content: "";
+  inset: 0;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: var(--navds-border-radius-full);
+  left: calc(-12.5px + 3.5px);
+  top: calc(-12.5px + 3.5px);
+  opacity: 0.4;
+}
+
+.navdsi-timeline__pin__button:focus {
+  box-shadow: 0 0 0 3px var(--navds-global-color-red-500), 0 0 0 4px var(--navds-global-color-white),
+    0 0 0 6px var(--navds-global-color-blue-800);
+  outline: none;
 }
 
 .navdsi-timeline__pin__wrapper::before {
