@@ -64,6 +64,7 @@
   align-items: center;
   z-index: 2;
   border: none;
+  font-size: 1rem;
 }
 
 .navdsi-timeline__period > * {
@@ -147,14 +148,15 @@
   display: flex;
   flex-direction: column-reverse;
 
-  --navdsc-timeline-pin-size: 1.7rem;
+  --navdsc-timeline-pin-size: 0.9rem;
 }
 
 .navdsi-timeline__pin-button {
   border: none;
   cursor: pointer;
   background: var(--navds-global-color-white);
-  box-shadow: 0 0 0 3px var(--navds-global-color-red-500);
+  box-shadow: inset 0 0 0 1px var(--navds-global-color-red-500), 0 0 0 4px var(--navds-global-color-red-500),
+    0 0 0 6px var(--navds-global-color-white);
   z-index: 2;
   border-radius: var(--navds-border-radius-full);
   padding: 3.5px;
@@ -170,7 +172,6 @@
   border-radius: var(--navds-border-radius-full);
   left: calc(-12.5px + 3.5px);
   top: calc(-12.5px + 3.5px);
-  opacity: 0.4;
 }
 
 .navdsi-timeline__pin-button:focus {

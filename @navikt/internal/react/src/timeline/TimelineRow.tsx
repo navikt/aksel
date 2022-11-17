@@ -63,6 +63,7 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           }
           className="navdsi-timeline__row-periods"
           onKeyDown={(e) => {
+            e.preventDefault();
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {
               setActiveRow(e.key);
             }
