@@ -1,5 +1,13 @@
 # @navikt/ds-react-internal
 
+## 2.0.0-next.0
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-react@2.0.0-next.0
+  - @navikt/ds-icons@2.0.0-next.0
+
 ## 1.5.9
 
 ### Patch Changes

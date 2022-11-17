@@ -1,5 +1,11 @@
 # @navikt/ds-css-internal
 
+## 2.0.0-next.0
+
+### Major Changes
+
+- v2: Tokens update and font-loading
+
 ## 1.5.9
 
 ## 1.5.8

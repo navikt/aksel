@@ -1,5 +1,16 @@
 # @navikt/ds-react
 
+## 2.0.0-next.0
+
+### Major Changes
+
+- v2: Tokens update and font-loading
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.0-next.0
+
 ## 1.5.9
 
 ### Patch Changes

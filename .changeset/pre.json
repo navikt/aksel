@@ -1,0 +1,18 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@navikt/ds-codemod": "1.5.9",
+    "@navikt/ds-css": "1.5.9",
+    "@navikt/ds-react": "1.5.9",
+    "@navikt/ds-tailwind": "1.5.9",
+    "@navikt/ds-tokens": "1.5.9",
+    "@navikt/ds-icons": "1.5.9",
+    "@navikt/ds-css-internal": "1.5.9",
+    "@navikt/ds-react-internal": "1.5.9",
+    "aksel.nav.no": "1.0.0",
+    "nextjs-demo": "0.1.0",
+    "shadow-dom": "0.0.0"
+  },
+  "changesets": ["breezy-pianos-promise"]
+}
