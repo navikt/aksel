@@ -18,7 +18,7 @@
     "website"
   ],
   "dependencies": {
-    "@navikt/ds-codemod": "1.5.2-next.13",
+    "@navikt/ds-codemod": "1.5.9",
     "@navikt/ds-css": "^1.5.9",
     "@navikt/ds-css-internal": "^1.5.9",
     "@navikt/ds-icons": "^1.5.9",
