@@ -3166,7 +3166,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-codemod@^1.5.8, @navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@1.5.2-next.13, @navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:
@@ -3193,7 +3193,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css-internal@^1.5.8, @navikt/ds-css-internal@workspace:@navikt/internal/css":
+"@navikt/ds-css-internal@^1.5.9, @navikt/ds-css-internal@workspace:@navikt/internal/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css-internal@workspace:@navikt/internal/css"
   dependencies:
@@ -3204,11 +3204,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@*, @navikt/ds-css@^1.5.8, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@*, @navikt/ds-css@^1.5.9, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^1.5.8
+    "@navikt/ds-tokens": ^1.5.9
     normalize.css: ^8.0.1
     postcss: ^8.4.0
     postcss-cli: ^9.0.0
@@ -3217,7 +3217,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-icons@^1.5.8, @navikt/ds-icons@workspace:@navikt/icons":
+"@navikt/ds-icons@^1.5.9, @navikt/ds-icons@workspace:@navikt/icons":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-icons@workspace:@navikt/icons"
   dependencies:
@@ -3247,12 +3247,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react-internal@^1.5.8, @navikt/ds-react-internal@workspace:@navikt/internal/react":
+"@navikt/ds-react-internal@^1.5.9, @navikt/ds-react-internal@workspace:@navikt/internal/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
-    "@navikt/ds-icons": ^1.5.8
-    "@navikt/ds-react": ^1.5.8
+    "@navikt/ds-icons": ^1.5.9
+    "@navikt/ds-react": ^1.5.9
     "@types/node": ^17.0.35
     clsx: ^1.1.1
     concurrently: 7.2.1
@@ -3269,12 +3269,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@*, @navikt/ds-react@^1.5.8, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@*, @navikt/ds-react@^1.5.9, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react-dom-interactions": 0.9.2
-    "@navikt/ds-icons": ^1.5.8
+    "@navikt/ds-icons": ^1.5.9
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3311,13 +3311,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^1.5.8, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^1.5.9, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^1.5.8
+    "@navikt/ds-tokens": ^1.5.9
     "@types/jest": ^29.0.0
     "@types/node": ^17.0.35
+    color: 4.2.3
     jest: ^29.0.0
     lodash: ^4.17.21
     ts-jest: ^29.0.0
@@ -3326,16 +3327,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^1.5.8, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^1.5.9, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@types/jest": ^29.0.0
     "@types/node": ^17.0.35
-    axios: ^0.21.3
     color: 4.2.3
-    dotenv: ^10.0.0
-    figma-api: ^1.7.0
     jest: ^29.0.0
     lodash: ^4.17.21
     nodemon: ^2.0.12
@@ -7162,13 +7160,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:12.0.2":
-  version: 12.0.2
-  resolution: "@types/node@npm:12.0.2"
-  checksum: 487823401195692e6319c7adbd75432a5493dbbb55e846c11452f80a0bccfc94101cb06b52101b5f4704d808adb094f1f81efd472d1b417d38221765b321d1a6
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^12.7.1":
   version: 12.20.55
   resolution: "@types/node@npm:12.20.55"
@@ -8341,14 +8332,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/ds-codemod": ^1.5.8
-    "@navikt/ds-css": ^1.5.8
-    "@navikt/ds-css-internal": ^1.5.8
-    "@navikt/ds-icons": ^1.5.8
-    "@navikt/ds-react": ^1.5.8
-    "@navikt/ds-react-internal": ^1.5.8
-    "@navikt/ds-tailwind": ^1.5.8
-    "@navikt/ds-tokens": ^1.5.8
+    "@navikt/ds-codemod": 1.5.2-next.13
+    "@navikt/ds-css": ^1.5.9
+    "@navikt/ds-css-internal": ^1.5.9
+    "@navikt/ds-icons": ^1.5.9
+    "@navikt/ds-react": ^1.5.9
+    "@navikt/ds-react-internal": ^1.5.9
+    "@navikt/ds-tailwind": ^1.5.9
+    "@navikt/ds-tokens": ^1.5.9
     prettier-plugin-tailwindcss: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -14777,16 +14768,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"figma-api@npm:^1.7.0":
-  version: 1.11.0
-  resolution: "figma-api@npm:1.11.0"
-  dependencies:
-    "@types/node": 12.0.2
-    axios: ^0.21.1
-  checksum: 77aa6d98a8f2aaa12cc2f92fdf048efd701e01d015969750353c7cae933e0e265c9c65d9ecdea03c44411a291a9dc9719927813b7231cdf450a830c1a7403af0
-  languageName: node
-  linkType: hard
-
 "figures@npm:^2.0.0":
   version: 2.0.0
   resolution: "figures@npm:2.0.0"
@@ -21068,11 +21049,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "nextjs-demo@workspace:examples/next"
   dependencies:
-    "@navikt/ds-css": ^1.5.8
-    "@navikt/ds-icons": ^1.5.8
-    "@navikt/ds-react": ^1.5.8
-    "@navikt/ds-react-internal": ^1.5.8
-    "@navikt/ds-tailwind": ^1.5.8
+    "@navikt/ds-css": ^1.5.9
+    "@navikt/ds-icons": ^1.5.9
+    "@navikt/ds-react": ^1.5.9
+    "@navikt/ds-react-internal": ^1.5.9
+    "@navikt/ds-tailwind": ^1.5.9
     "@types/node": ^17.0.35
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
