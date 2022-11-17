@@ -4,6 +4,7 @@ import { PeriodContext } from "./hooks/usePeriodContext";
 import { useRowContext } from "./hooks/useRowContext";
 import { useTimelineContext } from "./hooks/useTimelineContext";
 import Period from "./period/Period";
+import { PositionedPeriod } from "./utils/types.internal";
 
 export interface TimelineRowProps
   extends React.HTMLAttributes<HTMLOListElement> {
@@ -36,11 +37,11 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
-    });
+    }, {} as PositionedPeriod);
 
     const earliest = periods.reduce((a, b) => {
       return a.end < b.end ? a : b;
-    });
+    }, {} as PositionedPeriod);
 
     const firstFocusable = periods.find(
       (p) => !!p.children || !!p.onSelectPeriod
@@ -52,10 +53,14 @@ export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
           {...rest}
           ref={ref}
           aria-describedby={label ? `label-${id}` : undefined}
-          aria-label={`${format(earliest.start, "dd.MM.yyyy")} til ${format(
-            latest.end,
-            "dd.MM.yyyy"
-          )}`}
+          aria-label={
+            periods.length === 0
+              ? "Ingen perioder"
+              : `${format(earliest.start, "dd.MM.yyyy")} til ${format(
+                  latest.end,
+                  "dd.MM.yyyy"
+                )}`
+          }
           className="navdsi-timeline__row-periods"
           onKeyDown={(e) => {
             if (e.key === "ArrowDown" || e.key === "ArrowUp") {

@@ -112,11 +112,9 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
     };
 
     const handleActiveRowChange = (key: string) => {
-      console.log(activeRow);
       if (activeRow !== null && key === "ArrowDown") {
         for (let i = activeRow + 1; i < processedRows.length; i++) {
           const row = processedRows[i];
-          console.log(row);
           if (row.periods.find((p) => !!p.children || !!p.onSelectPeriod)) {
             setActiveRow(i);
             break;
