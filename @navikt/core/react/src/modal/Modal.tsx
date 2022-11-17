@@ -43,7 +43,7 @@ export interface ModalProps {
   /**
    * Callback for setting parent element modal will attach to
    */
-  parentSelector?(): HTMLElement;
+  parentSelector?: () => HTMLElement;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
   "aria-modal"?: boolean;
