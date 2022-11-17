@@ -158,7 +158,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
             })}
 
             {processedRows.map((row, i) => {
-              const Label = row.headingLevel;
+              const Label = row.headingTag;
               return (
                 <RowContext.Provider
                   key={`row-${row.id}`}
@@ -178,10 +178,7 @@ export const Timeline = forwardRef<HTMLDivElement, TimelineProps>(
                       {row.label}
                     </Label>
                   )}
-                  <TimelineRow
-                    label={row.label}
-                    headingLevel={row.headingLevel}
-                  />
+                  <TimelineRow label={row.label} headingTag={row.headingTag} />
                 </RowContext.Provider>
               );
             })}

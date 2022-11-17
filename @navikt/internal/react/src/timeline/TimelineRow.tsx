@@ -15,7 +15,7 @@ export interface TimelineRowProps
    * Heading level for the label e.g h1, h2, h3...
    * @default "h3"
    */
-  headingLevel?: "h2" | "h3" | "h4" | "h5" | "h6";
+  headingTag?: "h2" | "h3" | "h4" | "h5" | "h6";
   /**
    * Icon which will be displayed next to label
    */
@@ -30,11 +30,9 @@ export interface TimelineRowType
 }
 
 export const TimelineRow = forwardRef<HTMLOListElement, TimelineRowProps>(
-  ({ label, headingLevel, ...rest }, ref) => {
+  ({ label, headingTag, ...rest }, ref) => {
     const { periods, id } = useRowContext();
     const { setActiveRow } = useTimelineContext();
-
-    console.log(headingLevel);
 
     const latest = periods.reduce((a, b) => {
       return a.end > b.end ? a : b;
