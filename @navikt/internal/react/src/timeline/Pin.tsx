@@ -29,13 +29,13 @@ export const Pin = forwardRef<HTMLButtonElement, PinProps>(
     const buttonRef = useRef<HTMLButtonElement>(null);
     return (
       <div
-        className="navdsi-timeline__pin__wrapper"
+        className="navdsi-timeline__pin-wrapper"
         style={{ [direction]: `${position(date, startDate, endDate)}%` }}
       >
         <button
           {...rest}
           ref={buttonRef}
-          className="navdsi-timeline__pin__button"
+          className="navdsi-timeline__pin-button"
           onClick={() => setOpen(!open)}
           aria-label={`pin:${format(date, "dd.MM.yyyy")}`}
           aria-expanded={open}

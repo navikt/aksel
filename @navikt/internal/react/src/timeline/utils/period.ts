@@ -17,19 +17,6 @@ export const getConditionalClasses = (
   });
 };
 
-export const ariaLabel = (
-  startDate: Date,
-  endDate: Date,
-  status: string,
-  statusLabel?: string
-): string => {
-  const start = format(startDate, "dd.MM.yyyy");
-  const end = format(endDate, "dd.MM.yyyy");
-  return `${translateStatus(status)}, ${
-    statusLabel ? statusLabel : ""
-  } fra ${start} til ${end}`;
-};
-
 const translateStatus = (status: string): string => {
   switch (status) {
     case "success":
@@ -38,11 +25,24 @@ const translateStatus = (status: string): string => {
       return "Advarsel";
     case "danger":
       return "Fare";
-    case "information":
-      return "Informasjon";
+    case "info":
+      return "Info";
     case "neutral":
       return "Nøytral";
     default:
       return status;
   }
+};
+
+export const ariaLabel = (
+  startDate: Date,
+  endDate: Date,
+  status: string,
+  statusLabel?: string
+): string => {
+  const start = format(startDate, "dd.MM.yyyy");
+  const end = format(endDate, "dd.MM.yyyy");
+  return `${
+    statusLabel ? statusLabel : translateStatus(status)
+  } fra ${start} til ${end}`;
 };

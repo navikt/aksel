@@ -266,7 +266,7 @@ export const ActivePeriod = () => {
           <Timeline.Period
             start={new Date("Jan 1 2022")}
             end={new Date("Aug 20 2022")}
-            status="information"
+            status="info"
             icon={<SuccessFilled aria-hidden />}
           />
         </Timeline.Row>

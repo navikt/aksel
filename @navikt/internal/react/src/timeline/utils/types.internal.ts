@@ -4,8 +4,9 @@ export type PeriodStatus =
   | "success"
   | "warning"
   | "danger"
-  | "information"
+  | "info"
   | "neutral";
+
 export type Percentage = number;
 
 export interface Positioned {

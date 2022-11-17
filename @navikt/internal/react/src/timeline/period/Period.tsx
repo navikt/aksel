@@ -22,7 +22,7 @@ export interface PeriodPropsWrapper
    * Period status.
    * @default "neutral"
    */
-  status?: "success" | "warning" | "danger" | "information" | "neutral";
+  status?: "success" | "warning" | "danger" | "info" | "neutral";
   /**
    * Status label
    */

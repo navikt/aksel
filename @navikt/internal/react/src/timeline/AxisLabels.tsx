@@ -125,6 +125,7 @@ export const AxisLabels = () => {
     <div className="navdsi-timeline__axislabels" aria-hidden="true">
       {labels.map((etikett) => (
         <Detail
+          className="navdsi-timeline__axislabels-label"
           as="div"
           key={etikett.label}
           style={{
