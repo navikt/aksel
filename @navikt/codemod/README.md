@@ -9,7 +9,7 @@ Inspired by both MUI and NEXT
 
 ## Usage
 
-Codemod transformations runs code-transformations programmatically in your project. This helps when migrating lots of breaking changes without spending hours doing it manually.
+Codemod runs code-transformations programmatically in your project. This helps when migrating lots of breaking changes without spending hours doing it manually.
 
 NOTE: This codemod only supports fairly "default" usage of components. Components used with dynamic imports, styled-components, non-default imports (example `import * as DS from "@navikt/ds-react"` or `from "@navikt/ds-react/cjs"`) can lead to bugs when using codemod.
 
@@ -22,6 +22,61 @@ path - files or directory to transform
 --dry Do a dry-run, no code will be edited
 --print Prints the changed output for comparison
 --force Runs even if there are uncommited changes
+
+## V1 -> V2
+
+### css-tokens (--navds format)
+
+`npx @navikt/ds-codemod v2/css src`
+
+When having redefined a token, you will need to manually find and replace these instances after the codemod-run. A global search for `--v2-migration__` will show all found instances where you had redefined a token.
+
+```diff
+.example{
+- color: var(--navds-global-color-gray-900);
++ color: var(--a-gray-900);
+
+- --navds-semantic-color-text: red;
++ --v2-migration__navds-semantic-color-text: red;
+}
+```
+
+### sass/scss-tokens ($navds format)
+
+`npx @navikt/ds-codemod v2/sass src`
+
+```diff
+.example{
+- color: $navds-global-color-gray-900;
++ color: $a-gray-900;
+}
+```
+
+### less-tokens (@navds format)
+
+`npx @navikt/ds-codemod v2/less src`
+
+```diff
+.example{
+- color: @navds-global-color-gray-900;
++ color: @a-gray-900;
+}
+```
+
+### js-tokens
+
+`npx @navikt/ds-codemod v2/js src`
+
+```diff
+
+- import { NavdsGlobalColorGray900 } from "@navikt/ds-tokens";
++ import { AGray900 } from "@navikt/ds-tokens";
+
+const styled = styled.p`
+- color: ${NavdsGlobalColorGray900};
++ color: ${AGray900};
+`
+```
 
 ## Beta (0.19.x) -> v1
 
