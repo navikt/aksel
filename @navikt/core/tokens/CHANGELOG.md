@@ -1,5 +1,15 @@
 # @navikt/ds-tokens
 
+## 2.0.0
+
+### Major Changes
+
+- [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+
+### Patch Changes
+
+- [`161b21256`](https://github.com/navikt/Designsystemet/commit/161b21256fc389e65fbef6a5b005ed5c413e9605) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Fonter: Latin-extended, synket tokens med figma
+
 ## 2.0.0-next.1
 
 ### Patch Changes
