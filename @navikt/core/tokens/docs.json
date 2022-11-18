@@ -182,8 +182,11 @@
     { "name": "--a-text-visited", "value": "rgba(99, 70, 137, 1)" },
     { "name": "--a-text-danger", "value": "rgba(195, 0, 0, 1)" },
     { "name": "--a-text-action", "value": "rgba(0, 103, 197, 1)" },
-    { "name": "--a-text-action-hover", "value": "rgba(0, 103, 197, 1)" },
     { "name": "--a-text-action-selected", "value": "rgba(0, 91, 130, 1)" },
+    {
+      "name": "--a-text-action-on-action-subtle",
+      "value": "rgba(0, 86, 180, 1)"
+    },
     { "name": "--a-text-on-inverted", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-text-on-neutral", "value": "rgba(255, 255, 255, 1)" },
     { "name": "--a-text-on-action", "value": "rgba(255, 255, 255, 1)" },

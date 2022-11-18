@@ -98,7 +98,7 @@
 .navds-table__sort-button {
   appearance: none;
   background: none;
-  color: var(--ac-table-sort-button-text, var(--a-text-action));
+  color: var(--ac-table-sort-button-text, var(--a-text-action-on-action-subtle));
   border: none;
   cursor: pointer;
   margin: 0;

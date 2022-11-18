@@ -123,7 +123,7 @@
 }
 
 .navds-button--secondary:hover {
-  color: var(--ac-button-secondary-hover-text, var(--a-text-action-hover));
+  color: var(--ac-button-secondary-hover-text, var(--a-text-action-on-action-subtle));
   background-color: var(--ac-button-secondary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 
@@ -157,7 +157,7 @@
 }
 
 .navds-button--tertiary:hover {
-  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-hover));
+  color: var(--ac-button-tertiary-hover-text, var(--a-text-action-on-action-subtle));
   background-color: var(--ac-button-tertiary-hover-bg, var(--a-surface-action-subtle-hover));
 }
 

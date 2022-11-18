@@ -17,8 +17,12 @@
         "selected": {
           "value": "{a.deepblue.500.value}"
         },
-        "hover": {
-          "value": "{a.blue.500.value}"
+        "on": {
+          "action": {
+            "subtle": {
+              "value": "{a.blue.600.value}"
+            }
+          }
         },
         "@": {
           "value": "{a.blue.500.value}"

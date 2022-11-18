@@ -31,7 +31,7 @@
 
 .navds-toggle-group__button:hover {
   background-color: var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle));
-  color: var(--ac-toggle-group-button-hover-text, var(--a-text-action));
+  color: var(--ac-toggle-group-button-hover-text, var(--a-text-action-on-action-subtle));
 }
 
 .navds-toggle-group__button:focus {
