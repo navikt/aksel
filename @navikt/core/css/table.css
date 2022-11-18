@@ -98,14 +98,14 @@
 .navds-table__sort-button {
   appearance: none;
   background: none;
-  color: var(--ac-table-sort-button-text, var(--a-text-action-on-action-subtle));
+  color: var(--ac-table-sort-button-text, var(--a-text-action));
   border: none;
   cursor: pointer;
   margin: 0;
   padding: var(--a-spacing-4) var(--a-spacing-3);
   width: 100%;
   display: flex;
-  gap: 0.5rem;
+  gap: var(--a-spacing-2);
   align-items: center;
   line-height: inherit;
   font-weight: inherit;
@@ -127,6 +127,7 @@
 .navds-table__header-cell[aria-sort="ascending"] .navds-table__sort-button,
 .navds-table__header-cell[aria-sort="descending"] .navds-table__sort-button {
   background-color: var(--ac-table-sort-button-sorted-bg, var(--a-surface-selected));
+  color: var(--a-table-sort-button-sorted-text, var(--a-text-action-on-action-subtle));
 }
 
 .navds-table__header-cell--align-right .navds-table__sort-button {
