@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.0.0-next.1
+
+### Patch Changes
+
+- Fonter: Latin-extended, synket tokens med figma
+
 ## 2.0.0-next.0
 
 ### Major Changes
