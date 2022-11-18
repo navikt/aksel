@@ -139,7 +139,6 @@ _docs.json
 !*/sanity/lib/
 !*/sanity/static/
 out
-test-urls.json
 videos
 sanity/scripts/renameField.js
 tmp.json
