@@ -1,9 +1,8 @@
 import React from "react";
 import { Alert } from ".";
-import { BodyLong, Heading as DsHeading } from "..";
 
 export default {
-  title: "ds-react/Alert",
+  title: "ds-navno/Alert",
   component: Alert,
   argTypes: {
     variant: {
@@ -97,33 +96,6 @@ export const Inline = () => {
           )}
         </Alert>
       ))}
-    </div>
-  );
-};
-
-export const Heading = () => {
-  return (
-    <div className="colgap">
-      <Alert variant="info">
-        <DsHeading spacing size="small" level="3">
-          Aliquip duis est in commodo pariatur
-        </DsHeading>
-        <BodyLong>
-          Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
-          laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
-          sint commodo consequat eu aute.
-        </BodyLong>
-      </Alert>
-      <Alert variant="info" size="small">
-        <DsHeading spacing size="xsmall" level="3">
-          Aliquip duis est in commodo pariatur
-        </DsHeading>
-        <BodyLong>
-          Ullamco ullamco laborum et commodo sint culpa cupidatat culpa qui
-          laboris ex. Labore ex occaecat proident qui qui fugiat magna. Fugiat
-          sint commodo consequat eu aute.
-        </BodyLong>
-      </Alert>
     </div>
   );
 };

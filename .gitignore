@@ -116,6 +116,7 @@ react-docgen.json
 react-docgen-docs.json
 cjs
 esm
+@navikt/**/css
 .vercel
 _docs.json
 
