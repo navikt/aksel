@@ -9,6 +9,7 @@
     "clean": "node scripts/clean.js && yarn workspace @navikt/ds-codemod clean",
     "storybook": "start-storybook -p 6006",
     "dev": "yarn workspace aksel.nav.no dev",
+    "sanity": "yarn workspace aksel.nav.no sanity",
     "docgen": "yarn workspaces foreach -p run docgen",
     "chromatic": "npx chromatic --project-token x3xqdfgkujg --build-script-name build:storybook",
     "build:storybook": "build-storybook",
