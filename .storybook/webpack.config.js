@@ -6,6 +6,7 @@ module.exports = (baseConfig) => {
     use: ["style-loader", "css-loader"],
     include: [
       path.resolve(__dirname, "../node_modules/@navikt/core/css/index.css"),
+      path.resolve(__dirname, "../node_modules/@navikt/internal/css/index.css"),
     ],
   });
   baseConfig.config.resolve.alias = {
