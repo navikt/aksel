@@ -16,9 +16,8 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css && yarn postbuild",
-    "watch": "yarn build --watch",
-    "postbuild": "node -e \"console.log('Done: @navikt/ds-css-internal')\""
+    "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
+    "watch": "yarn build --watch"
   },
   "devDependencies": {
     "postcss": "^8.4.0",

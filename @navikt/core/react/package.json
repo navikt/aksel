@@ -31,10 +31,9 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm && yarn postbuild",
+    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
     "watch": "tsc --watch -p tsconfig.esm.json",
-    "test": "TZ=UTC jest",
-    "postbuild": "node -e \"console.log('Done: @navikt/ds-react')\""
+    "test": "TZ=UTC jest"
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "0.9.2",

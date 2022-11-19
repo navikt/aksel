@@ -16,9 +16,8 @@
   },
   "main": "./dist/index.css",
   "scripts": {
-    "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css && yarn postbuild",
-    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css",
-    "postbuild": "node -e \"console.log('Done: @navikt/ds-css')\""
+    "build": "postcss --use postcss-import postcss-combine-duplicated-selectors -o dist/index.css index.css",
+    "watch": "postcss --watch --use postcss-import -o dist/index.css index.css"
   },
   "devDependencies": {
     "@navikt/ds-tokens": "^1.5.9",
