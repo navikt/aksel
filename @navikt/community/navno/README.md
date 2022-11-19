@@ -1,34 +1,29 @@
-# NAV React-components
-
-All of NAVs core React-components
-
-- Uses styling from `@navikt/ds-css`
-- All components implemented with React.forwardRef!
-- Most components extend native html-elements.
+# NAV React-components for nav.no
 
 ## Installation
 
-Install `@navikt/ds-react` with yarn
+Install `@navikt/ds-navno` with yarn
 
 ```bash
-  yarn add @navikt/ds-react
+  yarn add @navikt/ds-navno
 ```
 
-Install `@navikt/ds-react` with npm
+Install `@navikt/ds-navno` with npm
 
 ```bash
-  npm install @navikt/ds-react
+  npm install @navikt/ds-navno
 ```
 
 ## Usage
 
-Remember to also import @navikt/ds-css to apply styling! See README-link under "learn more"-section below.
+Remember to also import @navikt/ds-navno/css to apply styling!
 
 ```javascript
-import { Button } from "@navikt/ds-react";
+import "@navikt/ds-navno/css";
+import { PageHeader } from "@navikt/ds-navno";
 
 function App() {
-  return <Button variant="secondary">Click me!</Button>;
+  return <PageHeader />;
 }
 ```
 
@@ -37,7 +32,6 @@ function App() {
 - [Designsystem documentation](https://aksel.nav.no/designsystem)
 - [Component-docs](https://aksel.nav.no/designsystem/side/oversikt-komponenter)
 - [Storybook](https://master--5f801fb2aea7820022de2936.chromatic.com/)
-- [ds-css README](https://github.com/navikt/Designsystemet/blob/master/%40navikt/core/css/README.md)
 
 ## License
 
