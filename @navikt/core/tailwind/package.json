@@ -13,8 +13,9 @@
     "tailwind.config.js"
   ],
   "scripts": {
-    "build": "ts-node ./src",
-    "test": "jest"
+    "build": "ts-node ./src && yarn postbuild",
+    "test": "jest",
+    "postbuild": "node -e \"console.log('Done: @navikt/ds-tailwind')\""
   },
   "repository": {
     "type": "git",

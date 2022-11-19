@@ -32,9 +32,10 @@
     "create-package-json-pointers-to-esm": "node ../../scripts/createPackageJsonsWithESMPointers.js",
     "create-icons": "svgr --silent --out-dir src svg",
     "clean": "rimraf src cjs esm",
-    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "build": "copyfiles util/* src && yarn create-icons && concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm && yarn postbuild",
     "update": "ts-node figma/index.ts dotenv/config",
-    "test": "jest"
+    "test": "jest",
+    "postbuild": "node -e \"console.log('Done: @navikt/ds-icons')\""
   },
   "peerDependencies": {
     "@types/react": "^17.0.30 || ^18.0.0",

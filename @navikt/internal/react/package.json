@@ -31,8 +31,9 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm",
-    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
-    "watch": "tsc --watch -p tsconfig.esm.json"
+    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm && yarn postbuild",
+    "watch": "tsc --watch -p tsconfig.esm.json",
+    "postbuild": "node -e \"console.log('Done: @navikt/ds-react-internal')\""
   },
   "dependencies": {
     "@navikt/ds-icons": "^1.5.9",

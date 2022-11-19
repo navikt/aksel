@@ -16,11 +16,12 @@
     "lib/cra-to-next/gitignore"
   ],
   "scripts": {
-    "build": "yarn clean && tsc -p tsconfig.json",
+    "build": "yarn clean && tsc -p tsconfig.json && yarn postbuild",
     "dev": "yarn clean && tsc --watch -p tsconfig.json",
     "test": "yarn build && jest",
     "test:watch": "jest --watch",
-    "clean": "node clean.mjs"
+    "clean": "node clean.mjs",
+    "postbuild": "node -e \"console.log('Done: @navikt/ds-codemod')\""
   },
   "bin": "./bin/ds-codemod.js",
   "repository": {

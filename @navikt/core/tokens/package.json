@@ -17,11 +17,12 @@
     "/tailwind"
   ],
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./build.js && yarn postbuild",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
     "test": "jest",
-    "update": "ts-node figma/index.ts dotenv/config"
+    "update": "ts-node figma/index.ts dotenv/config",
+    "postbuild": "node -e \"console.log('Done: @navikt/ds-tokens')\""
   },
   "repository": {
     "type": "git",
