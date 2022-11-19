@@ -1,0 +1,59 @@
+{
+  "name": "@navikt/ds-navno",
+  "version": "0.0.1",
+  "description": "nav.no spesific components",
+  "author": "NAV Designsystem team",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "typescript",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navikt/Designsystemet.git"
+  },
+  "sideEffects": false,
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
+  "typings": "./esm/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "/cjs",
+    "/esm",
+    "/src",
+    "_docs.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "scripts": {
+    "docgen": "yarn ts-node ../../../scripts/docgen.ts",
+    "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
+    "clean": "rimraf cjs esm",
+    "build": "concurrently \"tsc\" \"tsc -p tsconfig.esm.json\" && yarn create-package-json-pointers-to-esm",
+    "watch": "tsc --watch -p tsconfig.esm.json",
+    "test": "TZ=UTC jest"
+  },
+  "dependencies": {
+    "@navikt/ds-icons": "^1.5.9",
+    "@navikt/ds-react": "^1.5.9",
+    "clsx": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "concurrently": "7.2.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "10.9.0",
+    "typescript": "^4.8.0"
+  },
+  "peerDependencies": {
+    "@types/react": "^17.0.30 || ^18.0.0",
+    "react": "^17.0.0 || ^18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@types/react": {
+      "optional": true
+    }
+  }
+}
