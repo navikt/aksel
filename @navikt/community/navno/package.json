@@ -33,9 +33,10 @@
     "docgen": "yarn ts-node ../../../scripts/docgen.ts",
     "create-package-json-pointers-to-esm": "node ../../../scripts/createPackageJsonsWithESMPointers.js",
     "clean": "rimraf cjs esm css",
-    "build": "concurrently \"tsc -b\" \"rollup -c\" && yarn css && yarn create-package-json-pointers-to-esm",
+    "build": "yarn build-pict && concurrently \"tsc -b\" \"rollup -c\" && yarn css && yarn create-package-json-pointers-to-esm",
     "css": "copyfiles -f esm/index.css css/ && rimraf esm/*.css cjs/*.css",
-    "test": "TZ=UTC jest"
+    "test": "TZ=UTC jest",
+    "build-pict": "svgr --silent --out-dir src/pictograms pictograms"
   },
   "dependencies": {
     "@navikt/ds-icons": "^1.5.9",
@@ -49,6 +50,7 @@
     "@rollup/plugin-babel": "6.0.2",
     "@rollup/plugin-commonjs": "23.0.2",
     "@rollup/plugin-node-resolve": "^15.0.1",
+    "@svgr/cli": "6.2.1",
     "@types/node": "^17.0.35",
     "concurrently": "7.2.1",
     "copyfiles": "2.4.1",

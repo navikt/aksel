@@ -4,7 +4,6 @@
     "noImplicitAny": false,
     "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationMap": true,
     "noEmitHelpers": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
