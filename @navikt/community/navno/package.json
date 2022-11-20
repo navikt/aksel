@@ -36,7 +36,7 @@
     "build": "yarn build-pict && concurrently \"tsc -b\" \"rollup -c\" && yarn css && yarn create-package-json-pointers-to-esm",
     "css": "copyfiles -f esm/index.css css/ && rimraf esm/*.css cjs/*.css",
     "test": "TZ=UTC jest",
-    "build-pict": "svgr --silent --out-dir src/pictograms pictograms"
+    "build-pict": "svgr --silent --index-template index-template.js --out-dir src/pictograms pictograms"
   },
   "dependencies": {
     "@navikt/ds-icons": "^1.5.9",

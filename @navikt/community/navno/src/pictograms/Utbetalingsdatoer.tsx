@@ -4,9 +4,8 @@ const SvgUtbetalingsdatoer = forwardRef(
   (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => {
     return (
       <svg
-        width="1em"
-        height="1em"
-        viewBox="0 0 96 96"
+        width={96}
+        height={96}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         focusable={false}

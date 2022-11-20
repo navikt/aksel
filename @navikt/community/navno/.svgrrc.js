@@ -3,7 +3,7 @@ const template = require("./template");
 module.exports = {
   typescript: true,
   ref: true,
-  icon: true,
+  icon: false,
   titleProp: false,
   svgProps: {
     focusable: false,
