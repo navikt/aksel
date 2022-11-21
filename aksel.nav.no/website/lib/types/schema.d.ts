@@ -988,7 +988,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
       | Sanity.Keyed<video>
-      | Sanity.Keyed<tokens>
       | Sanity.Keyed<spesial_seksjon>
     >;
 
@@ -1005,7 +1004,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<video>
       | Sanity.Keyed<props_seksjon>
       | Sanity.Keyed<tastatur_modul>
-      | Sanity.Keyed<tokens>
       | Sanity.Keyed<kode_eksempler>
       | Sanity.Keyed<token_ref>
     >;
@@ -1397,20 +1395,6 @@ Kort beskrivelse som vises rett under videon
 Hvis videoen inneholder lyd, anbelfaler vi å skrive en transkripsjon som kan leses under videoen.
        */
       transkripsjon?: string;
-    };
-
-    type tokens = {
-      _type: "tokens";
-
-      /**
-       * Tittel/beskrivelse - `String`
-       */
-      title?: string;
-
-      /**
-       * Tokens - `Array`
-       */
-      tokenlist?: Array<Sanity.KeyedReference<ds_tokens>>;
     };
 
     type tips = {
