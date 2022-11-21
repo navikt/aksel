@@ -20,7 +20,7 @@ export const BloggCard = ({
       <Detail
         as="time"
         size="small"
-        className="col-span-2 uppercase tracking-wide text-text-muted xs:col-span-1"
+        className="text-text-subtle xs:col-span-1 col-span-2 uppercase tracking-wide"
         dateTime={dateTimeStr(blog?.publishedAt ?? blog._createdAt)}
       >
         {dateStr(blog?.publishedAt ?? blog._createdAt)}
@@ -28,7 +28,7 @@ export const BloggCard = ({
       <Heading
         level="3"
         size="large"
-        className="col-span-2 col-start-1 text-gray-800 xs:col-span-1"
+        className="xs:col-span-1 col-span-2 col-start-1 text-gray-800"
       >
         <NextLink href={`/${blog.slug}`} passHref>
           <Link
@@ -48,7 +48,7 @@ export const BloggCard = ({
       <BodyLong className="col-start-1 mt-1 text-gray-800">
         {blog?.ingress}
       </BodyLong>
-      <div className="col-start-2 row-span-3 row-start-3 xs:row-start-1">
+      <div className="xs:row-start-1 col-start-2 row-span-3 row-start-3">
         {/* <img
   className="mt-3 aspect-square w-24 bg-gray-200 sm:mt-0 sm:w-32"
   src=""

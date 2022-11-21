@@ -1,20 +1,21 @@
 // @ts-ignore
 import * as TokensBuild from "@navikt/ds-tokens/dist/tokens";
 import { writeFileSync } from "fs";
+import { getColors } from "./colors";
 import kebabCase from "./kebabCase";
 import Reducer from "./reducer";
 
 const tokens = Object.entries(TokensBuild).reduce(
   (old, [key, val]) => ({
     ...old,
-    [kebabCase(key).replace("navds-", "")]: val,
+    [kebabCase(key).replace("a-", "").replace("az-index-", "z-index-")]: val,
   }),
   {}
 );
 
 const config = {
   theme: {
-    colors: Reducer(tokens, ["semantic-color", "global-color"]),
+    colors: getColors(tokens),
     extend: {
       spacing: Reducer(tokens, ["spacing"]),
       zIndex: Reducer(tokens, ["z-index"]),

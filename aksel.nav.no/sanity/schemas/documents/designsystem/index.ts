@@ -3,7 +3,8 @@ export { default as Artikkel } from "./articles/artikkel";
 export { default as ComponentTemplate } from "./component-template";
 
 export { default as Props } from "./automated/props";
-export { default as Tokens } from "./automated/tokens";
+export { default as TokensOld } from "./automated/tokens.old";
+export { default as TokenKategori } from "./automated/tokens";
 export { default as KodeEksempler } from "./automated/kode-eksempler";
 export {
   Color,

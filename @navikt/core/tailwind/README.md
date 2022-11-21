@@ -1,18 +1,11 @@
-# NAV tailwind-preset
+# Aksel tailwind-preset
 
-Custom tailwind-preset based on @navikt/ds-tokens.
+Custom tailwind-preset based on `@navikt/ds-tokens`.
 
 ## Installation
 
-Install `@navikt/ds-tailwind` with yarn
-
 ```bash
   yarn add @navikt/ds-tailwind
-```
-
-Install `@navikt/ds-tailwind` with npm
-
-```bash
   npm install @navikt/ds-tailwind
 ```
 

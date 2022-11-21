@@ -57,7 +57,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
 
   return (
     <div className="flex min-w-[300px] max-w-xl shrink flex-col">
-      <div className="mr-16 inline-flex flex-col justify-between gap-4 xs:flex-row">
+      <div className="xs:flex-row mr-16 inline-flex flex-col justify-between gap-4">
         <div>
           <Heading
             spacing
@@ -68,7 +68,7 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
             {icon}
             {isNew(doc?.created_at) && (
               <Detail
-                className="h-full rounded bg-lightblue-200 py-1 px-2 font-semibold"
+                className="bg-lightblue-200 h-full rounded py-1 px-2 font-semibold"
                 as="span"
               >
                 Ny!
@@ -77,8 +77,8 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
           </Heading>
           {doc && (
             <>
-              <BodyShort className="text-text-muted">{doc.pageName}</BodyShort>
-              <BodyShort className="text-text-muted" spacing>{`${
+              <BodyShort className="text-text-subtle">{doc.pageName}</BodyShort>
+              <BodyShort className="text-text-subtle" spacing>{`${
                 doc.description && `${doc.description}`
               }`}</BodyShort>
             </>
@@ -111,10 +111,10 @@ import ${icon} from "@navikt/ds-icons/svg/${icon}.svg";`,
       </Heading>
       <Snippet node={svgSnippet} />
       <div className="mt-auto flex">
-        <div className="flex h-36 flex-1 items-center justify-center bg-white text-[6rem] text-text">
+        <div className="text-text-default flex h-36 flex-1 items-center justify-center bg-white text-[6rem]">
           <Icon />
         </div>
-        <div className="flex h-36 flex-1 items-center justify-center bg-gray-900 text-[6rem] text-text-inverted">
+        <div className="text-text-on-inverted flex h-36 flex-1 items-center justify-center bg-gray-900 text-[6rem]">
           <Icon />
         </div>
       </div>

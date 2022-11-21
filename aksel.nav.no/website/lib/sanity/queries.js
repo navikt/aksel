@@ -89,10 +89,6 @@ const defaultBlock = `
     ...,
     "ref": ref->{...},
  },
- _type == "tokens" =>{
-    ...,
-    tokenlist[]->
- },
  _type == "kode_eksempler" =>{
     ...,
     dir->,
@@ -131,7 +127,10 @@ const spesialSeksjon = `_type == "spesial_seksjon" =>{
         ${markDef}
       }
     }
-  }
+  },
+  modul == "token_kategori" =>{
+    "token": token_ref->{...}
+}
 }`;
 
 const propsSeksjon = `_type == "props_seksjon" =>{
@@ -142,9 +141,12 @@ const propsSeksjon = `_type == "props_seksjon" =>{
   },
 }`;
 
+const tokenRef = `_type == "token_ref"=>@->`;
+
 const deRefs = `
 ${alert},
 ${tips},
+${tokenRef},
 ${markDef},
 ${introSeksjon},
 ${relatertInnhold},

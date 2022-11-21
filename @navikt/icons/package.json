@@ -1,7 +1,8 @@
 {
   "name": "@navikt/ds-icons",
-  "version": "1.5.10",
-  "description": "Aksel icons",
+  "version": "2.0.0",
+  "description": "Aksel icons for NAV",
+  "author": "Aksel | NAV designsystem team",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/navikt/Designsystemet.git"
@@ -15,7 +16,6 @@
     "svg"
   ],
   "license": "MIT",
-  "author": "Aksel NAV",
   "sideEffects": false,
   "main": "./cjs/index.js",
   "module": "./esm/index.js",

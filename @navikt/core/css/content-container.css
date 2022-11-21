@@ -7,11 +7,11 @@
   margin-left: auto;
   margin-right: auto;
   max-width: var(--navds-content-container-max-width);
-  padding: var(--navds-spacing-4);
+  padding: var(--a-spacing-4);
 }
 
 @media (min-width: 448px) {
   .navds-content-container {
-    padding: var(--navds-spacing-6);
+    padding: var(--a-spacing-6);
   }
 }

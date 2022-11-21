@@ -15,10 +15,8 @@ export const Default = (props) => {
   const newProps = props?.colorOverride
     ? {
         style: {
-          ["--navds-guide-panel-color-illustration-background" as any]:
-            "var(--navds-global-color-purple-200)",
-          ["--navds-guide-panel-color-border" as any]:
-            "var(--navds-global-color-purple-400)",
+          ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
+          ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
         },
       }
     : {};
@@ -40,10 +38,8 @@ export const Poster = () => <GuidePanel poster>{panelText}</GuidePanel>;
 export const ColorOverride = () => (
   <GuidePanel
     style={{
-      ["--navds-guide-panel-color-illustration-background" as any]:
-        "var(--navds-global-color-purple-200)",
-      ["--navds-guide-panel-color-border" as any]:
-        "var(--navds-global-color-purple-400)",
+      ["--ac-guide-panel-illustration-bg" as any]: "var(--a-purple-200)",
+      ["--ac-guide-panel-border" as any]: "var(--a-purple-400)",
     }}
   >
     {panelText}

@@ -19,12 +19,12 @@ const Shadow = ({ token }) => (
   </>
 );
 
-export const XSmall = () => <Shadow token="var(--navds-shadow-xsmall)" />;
-export const Small = () => <Shadow token="var(--navds-shadow-small)" />;
-export const Medium = () => <Shadow token="var(--navds-shadow-medium)" />;
-export const Large = () => <Shadow token="var(--navds-shadow-large)" />;
-export const XxLarge = () => <Shadow token="var(--navds-shadow-xlarge)" />;
-export const Focus = () => <Shadow token="var(--navds-shadow-focus)" />;
+export const XSmall = () => <Shadow token="var(--a-shadow-xsmall)" />;
+export const Small = () => <Shadow token="var(--a-shadow-small)" />;
+export const Medium = () => <Shadow token="var(--a-shadow-medium)" />;
+export const Large = () => <Shadow token="var(--a-shadow-large)" />;
+export const XxLarge = () => <Shadow token="var(--a-shadow-xlarge)" />;
+export const Focus = () => <Shadow token="var(--a-shadow-focus)" />;
 export const FocusInverted = () => (
-  <Shadow token="var(--navds-shadow-focus-inverted)" />
+  <Shadow token="var(--a-shadow-focus-inverted)" />
 );

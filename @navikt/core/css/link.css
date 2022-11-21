@@ -1,31 +1,18 @@
-:root,
-:host {
-  --navds-link-color-text: var(--navds-semantic-color-link);
-  --navds-link-color-text-focus: var(--navds-semantic-color-text-inverted);
-  --navds-link-color-text-active: var(--navds-semantic-color-text-inverted);
-  --navds-link-color-background-focus: var(--navds-semantic-color-focus);
-  --navds-link-color-background-active: var(--navds-semantic-color-focus);
-  --navds-link-color-icon: var(--navds-semantic-color-link);
-  --navds-link-color-icon-focus: var(--navds-semantic-color-text-inverted);
-  --navds-link-color-on-info-background: var(--navds-semantic-color-text);
-  --navds-link-color-on-error-background: var(--navds-semantic-color-text);
-}
-
 .navds-link {
-  color: var(--navds-link-color-text);
+  color: var(--ac-link-text, var(--a-text-action));
   text-decoration: underline;
   display: inline-flex;
   align-items: center;
-  gap: var(--navds-spacing-1);
+  gap: var(--a-spacing-1);
 }
 
 .navds-alert--info .navds-link {
-  color: var(--navds-link-color-on-info-background);
+  color: var(--a-text-default);
 }
 
 .navds-alert--error .navds-link,
 .navds-confirmation-panel--error .navds-link {
-  color: var(--navds-link-color-on-error-background);
+  color: var(--a-text-default);
 }
 
 .navds-link:hover {
@@ -34,18 +21,18 @@
 
 .navds-link:focus {
   outline: none;
-  color: var(--navds-link-color-text-focus);
+  color: var(--ac-link-focus-text, var(--a-text-on-action));
   text-decoration: none;
-  background-color: var(--navds-link-color-background-focus);
-  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+  background-color: var(--ac-link-focus-bg, var(--a-border-focus));
+  box-shadow: 0 0 0 2px var(--ac-link-focus-border, var(--a-border-focus));
 }
 
 .navds-link:active {
   outline: none;
-  color: var(--navds-link-color-text-active);
+  color: var(--ac-link-active-text, var(--a-text-on-action));
   text-decoration: none;
-  background-color: var(--navds-link-color-background-active);
-  box-shadow: 0 0 0 2px var(--navds-semantic-color-focus);
+  background-color: var(--ac-link-active-bg, var(--a-border-focus));
+  box-shadow: 0 0 0 2px var(--ac-link-active-border, var(--a-border-focus));
 }
 
 .navds-link svg {

@@ -1,6 +1,6 @@
-# NAV React-components for internal-solutions
+# Aksel React-components for "internal"-solutions
 
-NAVs internal React-components used for more internal facing surfaces.
+NAVs designsystem React-components used for more internal facing surfaces.
 
 - Uses styling from `@navikt/ds-css` and `@navikt/ds-internal-css`
 - All components implemented with React.forwardRef!
@@ -8,15 +8,8 @@ NAVs internal React-components used for more internal facing surfaces.
 
 ## Installation
 
-Install `@navikt/ds-react-internal` with yarn
-
 ```bash
   yarn add @navikt/ds-react-internal
-```
-
-Install `@navikt/ds-react-internal` with npm
-
-```bash
   npm install @navikt/ds-react-internal
 ```
 

@@ -13,15 +13,15 @@ const AkselHeader = ({
   return (
     <header
       className={cl(
-        "group sticky top-0 z-20 w-full shadow-header backdrop-blur transition-colors duration-200 ease-out",
+        "shadow-header group sticky top-0 z-20 w-full backdrop-blur transition-colors duration-200 ease-out",
         {
-          "header-aksel-forside bg-deepblue-900/90 text-white hover:bg-deepblue-900":
+          "header-aksel-forside bg-deepblue-900/90 hover:bg-deepblue-900 text-white":
             variant === "forside",
-          "header-aksel-artikkel bg-gray-50/80 text-deepblue-800":
+          "header-aksel-artikkel text-deepblue-800 bg-gray-50/80":
             variant === "artikkel",
-          "header-aksel-artikkel bg-white/80 text-deepblue-800":
+          "header-aksel-artikkel text-deepblue-800 bg-white/80":
             variant === "inngang",
-          "header-aksel-artikkel bg-orange-50/80 text-deepblue-800 ":
+          "header-aksel-artikkel text-deepblue-800 bg-orange-50/80 ":
             variant === "blogg",
         }
       )}
@@ -34,9 +34,9 @@ const AkselHeader = ({
         <NextLink href="/" passHref>
           <a
             className={cl("flex gap-3 px-4 py-3 focus:outline-none", {
-              "hover:bg-gray-100/10 focus-visible:shadow-focus-inverted-inset":
+              "focus-visible:shadow-focus-inverted-inset hover:bg-gray-100/10":
                 variant === "forside",
-              "hover:bg-gray-900/10 focus-visible:shadow-focus-inset":
+              "focus-visible:shadow-focus-inset hover:bg-gray-900/10":
                 variant === "artikkel" || variant === "blogg",
             })}
             onClick={(e) =>
@@ -60,11 +60,11 @@ const AkselHeader = ({
       </div>
       <style jsx global>{`
         .search-open .header-aksel-forside {
-          background-color: var(--navds-global-color-deepblue-900);
+          background-color: var(--a-deepblue-900);
         }
 
         .search-open .header-aksel-artikkel {
-          background-color: var(--navds-global-color-gray-50);
+          background-color: var(--a-gray-50);
         }
       `}</style>
     </header>

@@ -1,31 +1,24 @@
-:root,
-:host {
-  --navds-link-panel-color-text: var(--navds-semantic-color-text);
-  --navds-link-panel-color-border-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-link-panel-color-title-hover: var(--navds-semantic-color-link);
-}
-
 .navds-link-panel {
   text-decoration: none;
-  color: var(--navds-link-panel-color-text);
+  color: var(--ac-link-panel-text, var(--a-text-default));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--navds-spacing-4);
+  gap: var(--a-spacing-4);
 }
 
 .navds-link-panel:hover .navds-link-panel__title {
   text-decoration: underline;
-  color: var(--navds-link-panel-color-title-hover);
+  color: var(--ac-link-panel-hover-text, var(--a-text-action));
 }
 
 .navds-link-panel:hover {
-  box-shadow: var(--navds-shadow-medium);
-  border-color: var(--navds-link-panel-color-border-hover);
+  box-shadow: var(--a-shadow-medium);
+  border-color: var(--ac-link-panel-hover-border, var(--a-border-action));
 }
 
 .navds-link-panel:focus {
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
   outline: none;
 }
 
@@ -41,5 +34,5 @@
 }
 
 .navds-link-panel__description {
-  margin-top: var(--navds-spacing-1);
+  margin-top: var(--a-spacing-1);
 }

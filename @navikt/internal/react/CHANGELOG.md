@@ -1,5 +1,7 @@
 # @navikt/ds-react-internal
 
+## 2.0.0
+
 ## 1.5.10
 
 ### Patch Changes

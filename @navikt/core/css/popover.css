@@ -1,20 +1,14 @@
-:root,
-:host {
-  --navds-popover-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-popover-color-border: var(--navds-semantic-color-border-muted);
-}
-
 .navds-popover {
-  z-index: var(--navds-z-index-popover);
-  background-color: var(--navds-popover-color-background);
-  box-shadow: var(--navds-shadow-medium);
+  z-index: var(--a-z-index-popover);
+  background-color: var(--ac-popover-bg, var(--a-surface-default));
+  box-shadow: var(--a-shadow-medium);
   border: 1px solid;
-  border-color: var(--navds-popover-color-border);
-  border-radius: var(--navds-border-radius-medium);
+  border-color: var(--ac-popover-border, var(--a-border-default));
+  border-radius: var(--a-border-radius-medium);
 }
 
 .navds-popover__content {
-  padding: var(--navds-spacing-4);
+  padding: var(--a-spacing-4);
 }
 
 .navds-popover--hidden {
@@ -23,16 +17,16 @@
 
 .navds-popover:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 .navds-popover__arrow {
   position: absolute;
   z-index: -1;
   transform: rotate(45deg);
-  background-color: var(--navds-popover-color-background);
+  background-color: var(--ac-popover-bg, var(--a-surface-default));
   border: 1px solid;
-  border-color: var(--navds-popover-color-border);
+  border-color: var(--ac-popover-border, var(--a-border-default));
   width: 1rem;
   height: 1rem;
 }

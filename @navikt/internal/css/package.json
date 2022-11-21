@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-css-internal",
-  "version": "1.5.10",
-  "description": "Css for NAV internal Designsystem components",
-  "author": "NAV Designsystem team",
+  "version": "2.0.0",
+  "description": "CSS for NAV internal Designsystem-components",
+  "author": "Aksel | NAV designsystem team",
   "keywords": [
     "css"
   ],

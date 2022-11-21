@@ -2,6 +2,7 @@ html {
   /* Remove horizontal jump caused by scrollbar presens on long or short pages */
   overflow-y: scroll;
 }
+
 code,
 pre {
   @apply !font-mono;
@@ -12,7 +13,7 @@ pre {
 }
 
 .navds-alert code {
-  color: var(--navds-global-color-red-500);
+  color: var(--a-red-500);
   background-color: transparent;
   padding: 0;
 }

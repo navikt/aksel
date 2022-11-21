@@ -2,7 +2,8 @@
   "name": "sanity",
   "private": true,
   "version": "0.1.0",
-  "description": "Sanity løsning for Aksel",
+  "description": "Sanity setup (v2) for Aksel.nav.no",
+  "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "scripts": {
     "start": "sanity start",

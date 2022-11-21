@@ -61,7 +61,7 @@ function Search({
           ref={searchButtonRef}
           onClick={onOpen}
           as="button"
-          className="group relative w-full max-w-[28rem] rounded border border-border bg-white py-4 pr-4 pl-16 text-left hover:border-link focus:outline-none focus-visible:shadow-focus"
+          className="border-border-default hover:border-border-action focus-visible:shadow-focus group relative w-full max-w-[28rem] rounded border bg-white py-4 pr-4 pl-16 text-left focus:outline-none"
         >
           <SearchIcon
             aria-hidden
@@ -74,13 +74,13 @@ function Search({
           ref={searchButtonRef}
           onClick={onOpen}
           className={cl(
-            "z-[1050] ml-auto flex w-header shrink-0 items-center justify-center focus:outline-none",
+            "w-header z-[1050] ml-auto flex shrink-0 items-center justify-center focus:outline-none",
             {
-              " text-text-inverted hover:bg-gray-100/10 focus-visible:shadow-focus-inverted-inset":
+              "text-text-on-inverted focus-visible:shadow-focus-inverted-inset hover:bg-gray-100/10":
                 variant === "aksel-inverted",
-              "hover:bg-gray-800/10 focus-visible:shadow-focus-inset":
+              "focus-visible:shadow-focus-inset hover:bg-gray-800/10":
                 variant === "aksel",
-              "text-text-inverted hover:bg-gray-800 focus-visible:shadow-[inset_0_0_0_1px_var(--navds-global-color-gray-900),inset_0_0_0_3px_var(--navds-global-color-blue-200)]":
+              "text-text-on-inverted hover:bg-gray-800 focus-visible:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_3px_var(--a-border-focus-on-inverted)]":
                 variant === "ds",
             }
           )}

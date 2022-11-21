@@ -1,41 +1,35 @@
-:root,
-:host {
-  --navds-guide-panel-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-guide-panel-color-border: var(--navds-global-color-blue-400);
-  --navds-guide-panel-color-illustration-background: var(--navds-global-color-blue-200);
-}
-
 /**
  * GuidePanel component
  */
 .navds-guide-panel {
   position: relative;
-  padding-left: var(--navds-spacing-10);
+  padding-left: var(--a-spacing-10);
 }
 
 .navds-guide-panel__content {
-  background-color: var(--navds-guide-panel-color-background);
-  border-radius: var(--navds-border-radius-medium);
-  border: 2px solid var(--navds-guide-panel-color-border);
+  background-color: var(--ac-guide-panel-bg, var(--a-surface-default));
+  border-radius: var(--a-border-radius-medium);
+  border: 2px solid var(--ac-guide-panel-border, var(--a-border-action));
   min-height: 7.25rem;
-  padding: var(--navds-spacing-6);
-  padding-left: var(--navds-spacing-14);
+  padding: var(--a-spacing-6);
+  padding-left: var(--a-spacing-14);
 }
 
 .navds-guide-panel--poster {
   padding-left: 0;
-  padding-top: var(--navds-spacing-12);
+  padding-top: var(--a-spacing-12);
 }
 
 .navds-guide-panel--poster .navds-guide-panel__content {
-  padding: var(--navds-spacing-8);
-  padding-top: var(--navds-spacing-16);
+  padding: var(--a-spacing-8);
+  padding-top: var(--a-spacing-16);
 }
 
 .navds-guide-panel .navds-guide {
   position: absolute;
-  top: var(--navds-spacing-4);
+  top: var(--a-spacing-4);
   transform: translateX(-50%);
+  border: 2px solid var(--ac-guide-panel-border, var(--a-border-action));
 }
 
 .navds-guide-panel--poster .navds-guide {
@@ -50,12 +44,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--a-border-radius-full);
 }
 
 /* Guide illustration frame */
 .navds-guide__illustration {
-  background: var(--navds-guide-panel-color-illustration-background);
-  border-radius: var(--navds-border-radius-full);
+  background: var(--ac-guide-panel-illustration-bg, var(--a-surface-action-subtle));
+  border-radius: var(--a-border-radius-full);
   overflow: hidden;
 }
 

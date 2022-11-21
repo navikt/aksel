@@ -96,7 +96,7 @@ const Hits = () => {
   ) {
     return (
       <div className="mx-auto w-full max-w-lg text-white sm:w-[90%]">
-        <ul className="mt-10 divide-y divide-gray-300 text-3xl text-text-inverted md:mt-24">
+        <ul className="text-text-on-inverted mt-10 divide-y divide-gray-300 text-3xl md:mt-24">
           <li>
             <a className="inline-block py-3" href="/topic">
               Tema
@@ -122,7 +122,7 @@ const Hits = () => {
       <Heading level="2" size="large">
         Søketreff: {hits.length}
       </Heading>
-      <ul className="mt-3 divide-y divide-gray-300/30 overflow-auto  text-3xl text-text-inverted ">
+      <ul className="text-text-on-inverted mt-3 divide-y divide-gray-300/30  overflow-auto text-3xl ">
         {hits.map((x, i) => (
           <Hit key={i} hit={x} />
         ))}
@@ -155,13 +155,13 @@ const SearchNew = ({
       <button
         onClick={() => setOpen((x) => !x)}
         className={cl(
-          "z-[1050] ml-auto flex w-header shrink-0 items-center justify-center focus:outline-none",
+          "w-header z-[1050] ml-auto flex shrink-0 items-center justify-center focus:outline-none",
           {
-            " text-text-inverted hover:bg-gray-100/10 focus:shadow-focus-inverted-inset":
+            " text-text-on-inverted focus:shadow-focus-inverted-inset hover:bg-gray-100/10":
               variant === "aksel-inverted",
-            "hover:bg-gray-800/10 focus:shadow-focus-inset":
+            "focus:shadow-focus-inset hover:bg-gray-800/10":
               variant === "aksel",
-            "text-text-inverted hover:bg-gray-800 focus:shadow-[inset_0_0_0_1px_var(--navds-global-color-gray-900),inset_0_0_0_3px_var(--navds-global-color-blue-200)]":
+            "text-text-on-inverted hover:bg-gray-800 focus:shadow-[inset_0_0_0_1px_var(--a-gray-900),inset_0_0_0_3px_var(--a-blue-200)]":
               variant === "ds",
           }
         )}

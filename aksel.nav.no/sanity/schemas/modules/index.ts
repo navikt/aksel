@@ -9,6 +9,7 @@ import Props from "./props";
 import RelatertInnhold from "./relatert-innhold";
 import Innholdskort from "./innholdskort";
 import KodeEksempler from "./kode-eksempler";
+import TokenRef from "./token-tabell";
 import {
   RiktekstAksel,
   RiktekstDsArtikkel,
@@ -21,7 +22,6 @@ import SpesialSeksjon from "./spesial-seksjon";
 import Tabell, { TabellSchema } from "./tabell";
 import Tastatur from "./tastatur";
 import Tips from "./tips";
-import Tokens from "./tokens";
 import Video from "./video";
 
 const v2Blocks = [
@@ -49,10 +49,10 @@ const v2Blocks = [
   Accordion,
   SpesialSeksjon,
   Video,
-  Tokens,
   Tips,
   Tastatur,
   KodeEksempler,
+  TokenRef,
 ];
 
 export default v2Blocks;

@@ -14,8 +14,8 @@ export const TitleRenderer = (props, size, level) => (
 );
 
 export const ScCode = styled.code`
-  color: var(--navds-global-color-deepblue-500);
-  background-color: var(--navds-global-color-deepblue-50);
+  color: var(--a-deepblue-500);
+  background-color: var(--a-deepblue-50);
   border-radius: 6px;
   font-size: 1rem;
   padding: 2px 0.5rem;
@@ -176,9 +176,14 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
     "video",
   ];
 
-  const comp = ["props_seksjon", "tastatur_modul", "tokens", "kode_eksempler"];
+  const comp = [
+    "props_seksjon",
+    "tastatur_modul",
+    "kode_eksempler",
+    "token_ref",
+  ];
 
-  const ds_artikkel = ["tokens", "spesial_seksjon"];
+  const ds_artikkel = ["spesial_seksjon"];
 
   fields.push(...standard);
 
