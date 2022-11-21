@@ -6,13 +6,7 @@
 
 - [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
 
-## 2.0.0-next.1
-
-## 2.0.0-next.0
-
-### Major Changes
-
-- v2: Tokens update and font-loading
+## 1.5.10
 
 ## 1.5.9
 
