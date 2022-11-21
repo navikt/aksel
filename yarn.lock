@@ -8015,6 +8015,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@whitespace/storybook-addon-html@npm:^5.0.3":
+  version: 5.0.3
+  resolution: "@whitespace/storybook-addon-html@npm:5.0.3"
+  peerDependencies:
+    "@storybook/addons": ^6.5.8
+    "@storybook/api": ^6.5.8
+    "@storybook/components": ^6.5.8
+    "@storybook/core-events": ^6.5.8
+    "@storybook/theming": ^6.5.8
+    prettier: ^2.0.0
+    react: ^16.8.0 || ^17.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    react-syntax-highlighter: ^15.0.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+    react-dom:
+      optional: true
+  checksum: 5f2c57751cc84a8a351d3d06a8c8aadf21c2219ab8de39c0cecf7f717bc88d6504c285fcd3992871286ee862de9e772d38d60b606dc80c43cadb0064b6f18a0d
+  languageName: node
+  linkType: hard
+
 "@xtuc/ieee754@npm:^1.2.0":
   version: 1.2.0
   resolution: "@xtuc/ieee754@npm:1.2.0"
@@ -8360,6 +8382,7 @@ __metadata:
     "@storybook/react": 6.5.5
     "@storybook/theming": 6.5.5
     "@typescript-eslint/parser": ^5.41.0
+    "@whitespace/storybook-addon-html": ^5.0.3
     chromatic: 6.5.4
     css-loader: ^5.0.1
     eslint: ^8.16.0
