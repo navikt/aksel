@@ -2,7 +2,8 @@
   "name": "website",
   "version": "0.1.0",
   "private": true,
-  "description": "Nextjs page for sanity docs",
+  "description": "Aksel.nav.no website",
+  "author": "Aksel | NAV designsystem team",
   "scripts": {
     "postinstall": "playwright install --with-deps",
     "dev": "next",

@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-react-internal",
   "version": "2.0.0",
-  "description": "NAV internal designsystem react components",
-  "author": "NAV Designsystem team",
+  "description": "Aksel react components for internal UIs in NAV",
+  "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "keywords": [
     "react",

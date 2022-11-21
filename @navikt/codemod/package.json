@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-codemod",
   "version": "2.0.0",
-  "description": "NAV designsystem codemods",
-  "author": "NAV Designsystem team",
+  "description": "Aksel codemods for NAVs designsystem",
+  "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "keywords": [
     "react",
