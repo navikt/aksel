@@ -1,6 +1,8 @@
-# NAV tokens
+# Aksel tokens
 
-Design-tokens used when implementing @navikt/ds-css. This package is consumed by @navikt/ds-css at buildtime, so not needed separately for regular use of css-variables.
+Design-tokens for NAVs designsystem and used when implementing @navikt/ds-css.
+
+Node: This package is consumed by `@navikt/ds-css`, so not needed separately for regular use of css-variables.
 
 Formats
 
@@ -12,15 +14,8 @@ Formats
 
 ## Installation
 
-Install `@navikt/ds-tokens` with yarn
-
 ```bash
   yarn add @navikt/ds-tokens
-```
-
-Install `@navikt/ds-tokens` with npm
-
-```bash
   npm install @navikt/ds-tokens
 ```
 

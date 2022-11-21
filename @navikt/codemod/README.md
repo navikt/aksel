@@ -1,29 +1,30 @@
-# NAV designsystem Codemods
+# Aksel Codemods
 
-Collection of Codemods for easier migration between breaking changes.
-
-Inspired by both MUI and NEXT
-
-- [NEXT](https://nextjs.org/docs/advanced-features/codemods)
-- [MUI](https://github.com/mui/material-ui/tree/master/packages/mui-codemod)
+Collection of Codemods for easier migration between breaking changes in NAVs designsystem-packages.
 
 ## Usage
 
-Codemod runs code-transformations programmatically in your project. This helps when migrating lots of breaking changes without spending hours doing it manually.
+Codemod runs code-transformations programmatically in your project. This helps when migrating breaking changes without spending hours doing it manually.
 
-NOTE: This codemod only supports fairly "default" usage of components. Components used with dynamic imports, styled-components, non-default imports (example `import * as DS from "@navikt/ds-react"` or `from "@navikt/ds-react/cjs"`) can lead to bugs when using codemod.
+NOTE: This codemod only supports fairly "default" usage of components. Components used with dynamic imports, styled-components, non-default imports (ex `import * as DS from "@navikt/ds-react"` or `from "@navikt/ds-react/cjs"`) can lead to bugs when using codemod.
 
 ```javascript
 npx @navikt/ds-codemod <migration> <path>
 ```
 
-transform - name of transform, see available transforms below.
+migraton - name of migraton, see available migraton below.
+
 path - files or directory to transform
+
+```sh
 --dry Do a dry-run, no code will be edited
 --print Prints the changed output for comparison
---force Runs even if there are uncommited changes
+--force Runs even if there are uncommited changes (use with caution)
+```
 
 ## V1 -> V2
+
+V2.0.0 updated the token-prefix of all tokens + names of all semantic-colors. The migrations below helps when migrating from the formats css, scss, less and js.
 
 ### css-tokens (--navds format)
 
@@ -160,3 +161,10 @@ This codemod should only be ran once, since the size-scale will keep decreasing 
 ## License
 
 [MIT](https://github.com/navikt/Designsystemet/blob/master/LICENCE)
+
+#
+
+Inspired by both MUI and NEXT
+
+- [NEXT](https://nextjs.org/docs/advanced-features/codemods)
+- [MUI](https://github.com/mui/material-ui/tree/master/packages/mui-codemod)

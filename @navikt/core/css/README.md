@@ -1,29 +1,22 @@
-# NAV designsystem styling
+# Aksel styling
 
-CSS-package containing design for @navikt/ds-react and more.
+CSS for NAVs designsystem.
 
-- All our tokens (Colors, border, shadows etc)
+- Css tokens (Colors, border, shadows etc)
 - Component-styling for `@navikt/ds-react` packages
 - Normalize.css v8
-- Fonts
+- Font-loading
 
 ## Installation
 
-Install `@navikt/ds-css` with yarn
-
 ```bash
   yarn add @navikt/ds-css
-```
-
-Install `@navikt/ds-css` with npm
-
-```bash
   npm install @navikt/ds-css
 ```
 
 ## Usage
 
-You can import these styles once to make it accessible in your entire project. Typically you will add the following line to your root .js or .ts files.
+Import styles once to make it accessible for your entire project. Typically you will add the following line to your root .tsx file.
 
 ```javascript
 import "@navikt/ds-css";
@@ -33,7 +26,7 @@ function App() {
 }
 ```
 
-But you can also import it in a .css-file like this
+But you can import it in a .css-file
 
 ```css
 @import "@navikt/ds-css";
