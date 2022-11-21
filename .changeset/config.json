@@ -21,7 +21,7 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["nextjs-demo", "shadow-dom", "aksel.nav.no"],
+  "ignore": ["shadow-dom", "aksel.nav.no"],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

@@ -17,7 +17,7 @@
     "/tailwind"
   ],
   "scripts": {
-    "build": "node ./build.js",
+    "build": "node ./build.js > /dev/null",
     "watch": "nodemon --watch src/index.js --exec \"yarn build\"",
     "token": "style-dictionary build",
     "test": "jest",

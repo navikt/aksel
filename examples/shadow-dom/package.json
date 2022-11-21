@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "example:shadow-dom": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

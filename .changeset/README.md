@@ -1,6 +1,6 @@
 # Changesets
 
-For versjonering bruker vi løsningen [Changesets](https://github.com/changesets/changesets) for å [versjonering](https://semver.org/) og publisering av pakker.
+For versjonering bruker vi løsningen [Changesets](https://github.com/changesets/changesets) for [versjonering](https://semver.org/) og publisering av pakker.
 
 ## Howto
 
