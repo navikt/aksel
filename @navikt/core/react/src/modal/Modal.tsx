@@ -43,7 +43,7 @@ export interface ModalProps {
   /**
    * Callback for setting parent element modal will attach to
    */
-  parentSelector?: () => HTMLElement;
+  parentSelector?(): HTMLElement;
   "aria-labelledby"?: string;
   "aria-describedby"?: string;
   "aria-modal"?: boolean;
@@ -104,7 +104,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
       }
     };
 
-    const parentSelectorFunc = () => {
+    const getParentSelector = () => {
       if (parentSelector) {
         return parentSelector;
       }
@@ -116,7 +116,7 @@ export const Modal = forwardRef<ReactModal, ModalProps>(
     return (
       <ReactModal
         {...rest}
-        parentSelector={parentSelectorFunc()}
+        parentSelector={getParentSelector()}
         style={style}
         isOpen={open}
         ref={mergedRef}
