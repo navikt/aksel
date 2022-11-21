@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 1.5.10
+
+### Patch Changes
+
+- [#1717](https://github.com/navikt/Designsystemet/pull/1717) [`d9352982d`](https://github.com/navikt/Designsystemet/commit/d9352982d42d5d12a9c5fc345e546f57c753738d) Thanks [@vebnor](https://github.com/vebnor)! - Fikset parentSelector prop i Modal
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.10
+
 ## 1.5.9
 
 ### Patch Changes
