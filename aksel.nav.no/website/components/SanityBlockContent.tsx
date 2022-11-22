@@ -15,11 +15,11 @@ import {
   LevelTwoHeading,
   PropsSeksjon,
   RelatertInnhold,
-  SpesialSeksjon,
+  SideModul,
   Tabell,
   TastaturModul,
   Tips,
-  TokensSeksjon,
+  TokenTable,
   Video,
 } from ".";
 
@@ -45,9 +45,9 @@ const serializers = {
     tabell: ({ node }) => <Tabell node={node} />,
     accordion: ({ node }) => <Accordion node={node} />,
     props_seksjon: ({ node }) => <PropsSeksjon node={node} />,
-    spesial_seksjon: ({ node }) => <SpesialSeksjon node={node} />,
+    spesial_seksjon: ({ node }) => <SideModul node={node} />,
+    token_kategori: ({ node }) => <TokenTable node={node} />,
     video: ({ node }) => <Video node={node} />,
-    tokens: ({ node }) => <TokensSeksjon node={node} />,
     tips: ({ node }) => <Tips node={node} />,
     kode_eksempler: ({ node }) => <CodeExamples node={node} />,
 
@@ -93,7 +93,7 @@ const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 mt-8 max-w-text scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="3"
               size="medium"
@@ -105,7 +105,7 @@ const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 mt-6 max-w-text"
+              className="algolia-index-lvl4 max-w-text mt-6"
               spacing
               level="4"
               size="small"
@@ -138,7 +138,7 @@ const serializers = {
         <ol
           type="1"
           className={cl(
-            "aksel-list-ol list-margin mb-7 max-w-text list-decimal",
+            "aksel-list-ol list-margin max-w-text mb-7 list-decimal",
             {
               "last:mb-0": context.noLastMargin,
             }
@@ -151,7 +151,7 @@ const serializers = {
     return (
       <ul
         className={cl(
-          "aksel-list-ul list-margin relative mb-7 max-w-text list-disc",
+          "aksel-list-ul list-margin max-w-text relative mb-7 list-disc",
           {
             "last:mb-0": context.noLastMargin,
           }

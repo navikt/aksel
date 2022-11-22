@@ -40,7 +40,7 @@ const Menu = ({
                 as="li"
                 size="small"
                 key={item.title + x}
-                className="relative mt-6 pt-7 pr-4 pb-[14px] pl-8 uppercase text-text before:absolute before:top-0 before:left-auto before:right-auto before:h-[1px] before:w-9/12 before:bg-divider first:mt-0 first:pt-[14px] first:before:bg-transparent"
+                className="text-text-default before:bg-border-divider relative mt-6 pt-7 pr-4 pb-[14px] pl-8 uppercase before:absolute before:top-0 before:left-auto before:right-auto before:h-[1px] before:w-9/12 first:mt-0 first:pt-[14px] first:before:bg-transparent"
               >
                 {item.title}
               </Detail>
@@ -50,10 +50,10 @@ const Menu = ({
             <li
               key={item.title + x}
               className={cl(
-                "focus-within:shadow-focus-inset hover:bg-canvas-background",
+                "focus-within:shadow-focus-inset hover:bg-bg-subtle last-of-type:rounded-b",
                 {
                   "rounded-b": inCategory,
-                  "bg-canvas-background":
+                  "bg-surface-neutral-subtle":
                     pageProps?.page?.slug === item?.link?.slug?.current,
                 }
               )}
@@ -69,11 +69,11 @@ const Menu = ({
                     );
                   }}
                   className={cl(
-                    "flex py-3 pr-4 no-underline hover:text-text focus:outline-none",
+                    "hover:text-text-default flex py-3 pr-4 no-underline focus:outline-none",
                     {
-                      "border-l-[6px] border-l-gray-900 pl-[26px] font-semibold text-text":
+                      "text-text-default border-l-[6px] border-l-gray-900 pl-[26px] font-semibold":
                         pageProps?.page?.slug === item?.link?.slug?.current,
-                      "pl-8 text-text-muted": !(
+                      "text-text-subtle pl-8": !(
                         pageProps?.page?.slug === item?.link?.slug?.current
                       ),
                     }

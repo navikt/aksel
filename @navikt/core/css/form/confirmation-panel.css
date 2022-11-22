@@ -1,21 +1,11 @@
-:root,
-:host {
-  --navds-confirmation-panel-color-background: var(--navds-global-color-orange-50);
-  --navds-confirmation-panel-color-background-checked: var(--navds-global-color-green-50);
-  --navds-confirmation-panel-color-background-error: var(--navds-global-color-red-50);
-  --navds-confirmation-panel-color-border: var(--navds-semantic-color-feedback-warning-border);
-  --navds-confirmation-panel-color-border-checked: var(--navds-semantic-color-feedback-success-border);
-  --navds-confirmation-panel-color-border-error: var(--navds-semantic-color-feedback-danger-border);
-}
-
 .navds-confirmation-panel__inner {
   display: flex;
   flex-direction: column;
-  gap: var(--navds-spacing-3);
-  padding: var(--navds-spacing-4);
-  border-radius: var(--navds-border-radius-medium);
-  border: 1px solid var(--navds-confirmation-panel-color-border);
-  background-color: var(--navds-confirmation-panel-color-background);
+  gap: var(--a-spacing-3);
+  padding: var(--a-spacing-4);
+  border-radius: var(--a-border-radius-medium);
+  border: 1px solid var(--ac-confirmation-panel-border, var(--a-border-warning));
+  background-color: var(--ac-confirmation-panel-bg, var(--a-surface-warning-subtle));
   transition: background-color linear 100ms;
   justify-self: stretch;
 }
@@ -25,11 +15,11 @@
 }
 
 .navds-confirmation-panel--checked .navds-confirmation-panel__inner {
-  background-color: var(--navds-confirmation-panel-color-background-checked);
-  border-color: var(--navds-confirmation-panel-color-border-checked);
+  border-color: var(--ac-confirmation-panel-checked-border, var(--a-border-success));
+  background-color: var(--ac-confirmation-panel-checked-bg, var(--a-surface-success-subtle));
 }
 
 .navds-confirmation-panel--error .navds-confirmation-panel__inner {
-  background-color: var(--navds-confirmation-panel-color-background-error);
-  border-color: var(--navds-confirmation-panel-color-border-error);
+  border-color: var(--ac-confirmation-panel-error-border, var(--a-border-danger));
+  background-color: var(--ac-confirmation-panel-error-bg, var(--a-surface-danger-subtle));
 }

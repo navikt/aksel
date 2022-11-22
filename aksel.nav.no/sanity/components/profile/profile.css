@@ -16,7 +16,7 @@
 }
 
 .item:hover {
-  background-color: var(--navds-semantic-color-interaction-primary-hover-subtle, rgba(230, 240, 255, 1));
+  background-color: var(--a-surface-action-subtle-hover, rgba(230, 240, 255, 1));
 }
 
 .link {
@@ -31,5 +31,5 @@
 .link:focus {
   border-radius: 2px;
   outline: none;
-  box-shadow: var(--navds-shadow-focus, var(--navds-shadow-focus, 0 0 0 3px rgba(0, 52, 125, 1)));
+  box-shadow: var(--a-shadow-focus, var(--a-shadow-focus, 0 0 0 3px rgba(0, 52, 125, 1)));
 }

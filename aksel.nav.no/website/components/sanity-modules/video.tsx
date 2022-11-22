@@ -46,7 +46,7 @@ const Video = ({
         <>
           {isLoggedIn ? (
             <div
-              className="iframe-parent border border-divider"
+              className="iframe-parent border-border-divider border"
               dangerouslySetInnerHTML={{ __html: getVideo() }}
             />
           ) : (
@@ -77,7 +77,7 @@ const Video = ({
         </>
       ) : (
         <video
-          className="focus:outline-none focus-visible:shadow-focus-gap"
+          className="focus-visible:shadow-focus-gap focus:outline-none"
           title={node.alt}
           playsInline
           controls

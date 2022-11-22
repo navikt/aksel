@@ -1,18 +1,10 @@
-:root,
-:host {
-  --navdsi-header-color-text: var(--navds-semantic-color-text-inverted);
-  --navdsi-header-color-background: var(--navds-semantic-color-component-background-inverted);
-  --navdsi-header-color-border: var(--navds-semantic-color-border);
-  --navdsi-header-focus: inset 0 0 0 2px var(--navds-global-color-blue-100);
-  --navdsi-header-color-hover: var(--navds-global-color-gray-800);
-  --navdsi-header-color-active: var(--navds-global-color-gray-600);
-}
-
 .navdsi-header {
   display: flex;
   align-self: stretch;
-  background: var(--navdsi-header-color-background);
-  min-height: var(--navds-spacing-12);
+  background: var(--ac-header-bg, var(--a-surface-inverted));
+  min-height: var(--a-spacing-12);
+
+  --navdsi-header-focus: inset 0 0 0 2px var(--a-border-focus-on-inverted);
 }
 
 .navdsi-header__title {
@@ -20,16 +12,16 @@
   overflow: visible;
   background: transparent;
   font: inherit;
-  font-weight: var(--navds-font-weight-bold);
+  font-weight: var(--a-font-weight-bold);
   line-height: normal;
   text-align: left;
-  padding: 0 var(--navds-spacing-5) 0 var(--navds-spacing-6);
-  border-right: 1px solid var(--navdsi-header-color-border);
+  padding: 0 var(--a-spacing-5) 0 var(--a-spacing-6);
+  border-right: 1px solid var(--ac-header-divider, var(--a-gray-600));
   display: flex;
   align-items: center;
   text-decoration: none;
   margin: 0;
-  color: var(--navdsi-header-color-text);
+  color: var(--ac-header-text, var(--a-text-on-inverted));
 }
 
 button.navdsi-header__title {
@@ -37,8 +29,8 @@ button.navdsi-header__title {
 }
 
 .navdsi-header__user {
-  padding: 0 var(--navds-spacing-5);
-  border-left: 1px solid var(--navdsi-header-color-border);
+  padding: 0 var(--a-spacing-5);
+  border-left: 1px solid var(--ac-header-divider, var(--a-gray-600));
   display: flex;
   align-items: center;
 }
@@ -46,7 +38,7 @@ button.navdsi-header__title {
 .navdsi-header__button {
   border: none;
   margin: 0;
-  padding: 0 var(--navds-spacing-3);
+  padding: 0 var(--a-spacing-3);
   overflow: visible;
   background: transparent;
   font: inherit;
@@ -56,15 +48,15 @@ button.navdsi-header__title {
   display: flex;
   align-items: center;
   justify-self: center;
-  gap: var(--navds-spacing-2);
-  border-left: 1px solid var(--navdsi-header-color-border);
-  color: var(--navdsi-header-color-text);
+  gap: var(--a-spacing-2);
+  border-left: 1px solid var(--ac-header-divider, var(--a-gray-600));
+  color: var(--ac-header-text, var(--a-text-on-inverted));
 }
 
 a.navdsi-header__title:hover,
 button.navdsi-header__title:hover,
 .navdsi-header__button:hover {
-  background-color: var(--navdsi-header-color-hover);
+  background-color: var(--ac-header-hover-bg, var(--a-surface-inverted-hover));
 }
 
 .navdsi-header__title:focus,
@@ -76,10 +68,10 @@ button.navdsi-header__title:hover,
 a.navdsi-header__title:active,
 button.navdsi-header__title:active,
 .navdsi-header__button:active {
-  background-color: var(--navdsi-header-color-active);
+  background-color: var(--ac-header-active-bg, var(--a-surface-inverted-active));
 }
 
 .navdsi-header__user-button {
-  padding-left: var(--navds-spacing-5);
-  gap: var(--navds-spacing-4);
+  padding-left: var(--a-spacing-5);
+  gap: var(--a-spacing-4);
 }

@@ -199,6 +199,23 @@ Linker eller dropdowns med linker. Maks dybde på 2 dropdowns er støttet. Sider
     }
 
     /**
+     * Tokens
+     */
+    interface token_kategori extends Sanity.Document {
+      _type: "token_kategori";
+
+      /**
+       * Navn - `String`
+       */
+      title?: string;
+
+      /**
+       * Kategori - `String`
+       */
+      kategori?: string;
+    }
+
+    /**
      * Dir/filnavn for kode eksempler
      */
     interface kode_eksempler_fil extends Sanity.Document {
@@ -971,7 +988,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
       | Sanity.Keyed<video>
-      | Sanity.Keyed<tokens>
       | Sanity.Keyed<spesial_seksjon>
     >;
 
@@ -988,8 +1004,8 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<video>
       | Sanity.Keyed<props_seksjon>
       | Sanity.Keyed<tastatur_modul>
-      | Sanity.Keyed<tokens>
       | Sanity.Keyed<kode_eksempler>
+      | Sanity.Keyed<token_ref>
     >;
 
     type riktekst_tabell = Array<Sanity.Keyed<Sanity.Block>>;
@@ -1318,6 +1334,7 @@ Legg til en eller flere elementer
        */
       modul?:
         | "farge_kategori"
+        | "token_kategori"
         | "ikonsok"
         | "endringslogg"
         | "komponentoversikt";
@@ -1326,6 +1343,11 @@ Legg til en eller flere elementer
        * Farge kategori - `Reference`
        */
       farge_ref?: Sanity.Reference<ds_color_categories>;
+
+      /**
+       * Token kategori - `Reference`
+       */
+      token_ref?: Sanity.Reference<token_kategori>;
     };
 
     type video = {
@@ -1373,20 +1395,6 @@ Kort beskrivelse som vises rett under videon
 Hvis videoen inneholder lyd, anbelfaler vi å skrive en transkripsjon som kan leses under videoen.
        */
       transkripsjon?: string;
-    };
-
-    type tokens = {
-      _type: "tokens";
-
-      /**
-       * Tittel/beskrivelse - `String`
-       */
-      title?: string;
-
-      /**
-       * Tokens - `Array`
-       */
-      tokenlist?: Array<Sanity.KeyedReference<ds_tokens>>;
     };
 
     type tips = {
@@ -1451,6 +1459,8 @@ Vis bare et spesfikt eksempel
        */
       filnavn?: Sanity.Reference<kode_eksempler_fil>;
     };
+
+    type token_ref = Sanity.Reference<token_kategori>;
 
     type navigation_link = {
       _type: "navigation_link";
@@ -1571,6 +1581,7 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
       | redirect
       | ds_color_categories
       | ds_tokens
+      | token_kategori
       | kode_eksempler_fil
       | ds_props
       | ds_component_template

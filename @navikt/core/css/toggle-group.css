@@ -1,26 +1,15 @@
-:root,
-:host {
-  --navds-toggle-group-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-toggle-group-color-text: var(--navds-semantic-color-text);
-  --navds-toggle-group-color-border: var(--navds-semantic-color-divider);
-  --navds-toggle-group-color-background-hover: var(--navds-semantic-color-interaction-primary-hover-subtle);
-  --navds-toggle-group-color-text-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-toggle-group-color-background-pressed: var(--navds-semantic-color-interaction-primary-selected);
-  --navds-toggle-group-color-text-pressed: var(--navds-semantic-color-text-inverted);
-}
-
 .navds-toggle-group__wrapper {
   display: grid;
   justify-items: start;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
 }
 
 .navds-toggle-group {
-  border-radius: 7px; /* Custom value OK */
-  background-color: var(--navds-toggle-group-color-background);
-  box-shadow: inset 0 0 0 1px var(--navds-toggle-group-color-border);
-  padding: calc(var(--navds-spacing-1) + 1px);
-  gap: var(--navds-spacing-1);
+  border-radius: 9px;
+  background-color: var(--ac-toggle-group-bg, var(--a-surface-default));
+  box-shadow: inset 0 0 0 1px var(--ac-toggle-group-border, var(--a-border-default));
+  padding: calc(var(--a-spacing-1) + 1px);
+  gap: var(--a-spacing-1);
   display: inline-grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
@@ -30,34 +19,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: var(--navds-spacing-3);
+  padding: var(--a-spacing-3);
   min-height: 48px;
   border: none;
   cursor: pointer;
-  background-color: var(--navds-toggle-group-color-background);
-  color: var(--navds-toggle-group-color-text);
-  border-radius: var(--navds-border-radius-small);
+  background-color: var(--ac-toggle-group-button-bg, var(--a-surface-default));
+  color: var(--ac-toggle-group-button-text, var(--a-text-default));
+  border-radius: var(--a-border-radius-medium);
   min-width: fit-content;
 }
 
 .navds-toggle-group__button:hover {
-  background-color: var(--navds-toggle-group-color-background-hover);
-  color: var(--navds-toggle-group-color-text-hover);
+  background-color: var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle));
+  color: var(--ac-toggle-group-button-hover-text, var(--a-text-action-on-action-subtle));
 }
 
 .navds-toggle-group__button:focus {
   outline: none;
-  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background), 0 0 0 4px var(--navds-semantic-color-focus);
+  box-shadow: 0 0 0 1px var(--a-surface-default), 0 0 0 4px var(--a-border-focus);
 }
 
 .navds-toggle-group__button:focus:hover[aria-pressed="false"] {
-  box-shadow: 0 0 0 1px var(--navds-toggle-group-color-background-hover), 0 0 0 4px var(--navds-semantic-color-focus);
+  box-shadow: 0 0 0 1px var(--ac-toggle-group-button-hover-bg, var(--a-surface-action-subtle)), 0 0 0 4px var(--a-border-focus);
 }
 
 .navds-toggle-group__button-inner {
   display: flex;
   align-items: center;
-  gap: var(--navds-spacing-2);
+  gap: var(--a-spacing-2);
 }
 
 .navds-toggle-group__button-inner > * {
@@ -66,8 +55,8 @@
 
 .navds-toggle-group__button[aria-pressed="true"],
 .navds-toggle-group__button[aria-checked="true"] {
-  background-color: var(--navds-toggle-group-color-background-pressed);
-  color: var(--navds-toggle-group-color-text-pressed);
+  background-color: var(--ac-toggle-group-selected-bg, var(--a-surface-action-selected));
+  color: var(--ac-toggle-group-selected-text, var(--a-text-on-action));
 }
 
 .navds-toggle-group--small > .navds-toggle-group__button {

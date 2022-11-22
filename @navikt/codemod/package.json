@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-codemod",
-  "version": "1.5.9",
-  "description": "NAV designsystem codemods",
-  "author": "NAV Designsystem team",
+  "version": "2.0.0",
+  "description": "Aksel codemods for NAVs designsystem",
+  "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "keywords": [
     "react",
@@ -11,13 +11,16 @@
   ],
   "files": [
     "transforms/**/*.js",
+    "utils/**/*.js",
     "bin/*.js",
     "lib/**/*.js",
-    "lib/cra-to-next/gitignore"
+    "lib/cra-to-next/gitignore",
+    "tokens-map.mjs"
   ],
   "scripts": {
     "build": "yarn clean && tsc -p tsconfig.json",
     "dev": "yarn clean && tsc --watch -p tsconfig.json",
+    "start": "./bin/cli.js",
     "test": "yarn build && jest",
     "test:watch": "jest --watch",
     "clean": "node clean.mjs"

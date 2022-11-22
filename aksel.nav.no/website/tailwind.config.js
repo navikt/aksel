@@ -47,9 +47,9 @@ module.exports = {
       }),
 
       boxShadow: {
-        "focus-inverted-inset": "inset var(--navds-shadow-focus-inverted)",
-        "focus-inset": "inset var(--navds-shadow-focus)",
-        "focus-gap": "0 0 0 1px white, var(--navds-shadow-focus)",
+        "focus-inverted-inset": "inset var(--a-shadow-focus-inverted)",
+        "focus-inset": "inset var(--a-shadow-focus)",
+        "focus-gap": "0 0 0 1px white, var(--a-shadow-focus)",
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
@@ -89,6 +89,57 @@ module.exports = {
             width: "500px",
           },
         },
+        popup: {
+          "0%": {
+            transform: "translateY(0)",
+          },
+          "10%": {
+            background: "var(--a-deepblue-500)",
+          },
+          "15%": {
+            transform: "translateY(-100%)",
+          },
+          "20%": {
+            background: "var(--a-deepblue-600)",
+          },
+          "50%": {
+            background: "var(--a-deepblue-500)",
+          },
+          "90%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(0)",
+          },
+        },
+        textbounce: {
+          "8%": {
+            transform: "translateY(0)",
+          },
+          "17%": {
+            transform: "translateY(-10%)",
+          },
+          "25%": {
+            transform: "translateY(2%)",
+          },
+          "30%": {
+            transform: "translateY(0)",
+          },
+        },
+        popout: {
+          "0%": {
+            transform: "translateY(0px)",
+          },
+          "15%": {
+            transform: "translateY(-100%)",
+          },
+          "90%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(0px)",
+          },
+        },
       },
       animation: {
         shimmerBg: "shimmerBg 15s ease infinite",
@@ -96,6 +147,9 @@ module.exports = {
         fadeIn: "fadeIn 0.15s cubic-bezier(0.65, 0, 0.35, 1)",
         expand: "expand 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
         expandLg: "expandLg 0.15s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        popup: "popup 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        popout: "popout 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
+        textbounce: "textbounce 2s cubic-bezier(0.215, 0.61, 0.355, 1)",
       },
     },
   },

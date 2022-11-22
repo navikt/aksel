@@ -28,7 +28,7 @@ const Panel = () => {
       <Tabs.Panel
         value="test1"
         className="panel"
-        style={{ background: "var(--navds-global-color-gray-50)", height: 100 }}
+        style={{ background: "var(--a-gray-50)", height: 100 }}
       >
         Innholdspanel for Skap-tab
       </Tabs.Panel>
@@ -36,7 +36,7 @@ const Panel = () => {
         value="test2"
         className="panel"
         style={{
-          background: "var(--navds-global-color-green-50)",
+          background: "var(--a-green-50)",
           height: 100,
         }}
       >
@@ -45,7 +45,7 @@ const Panel = () => {
       <Tabs.Panel
         value="test3"
         className="panel"
-        style={{ background: "var(--navds-global-color-red-50)", height: 100 }}
+        style={{ background: "var(--a-red-50)", height: 100 }}
       >
         Innholdspanel for Fryser-tab
       </Tabs.Panel>

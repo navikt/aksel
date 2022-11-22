@@ -1,28 +1,19 @@
-# NAV designsystem styling for internal-components
+# Aksel styling for "internal"-components
 
-CSS-package containing design for @navikt/ds-react-internal.
-
-- Component-styling for `@navikt/ds-react-internal` packages
+CSS-package with styling for `@navikt/ds-react-internal`.
 
 Remember to use with `@navikt/ds-css`!
 
 ## Installation
 
-Install `@navikt/ds-css-internal` with yarn
-
 ```bash
   yarn add @navikt/ds-css-internal
-```
-
-Install `@navikt/ds-css-internal` with npm
-
-```bash
   npm install @navikt/ds-css-internal
 ```
 
 ## Usage
 
-Import styling for make it accessible. Only need to do this one place.
+Import styling for make it accessible. Only need to do this once.
 
 ```javascript
 import "@navikt/ds-css-internal";

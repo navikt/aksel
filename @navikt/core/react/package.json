@@ -1,8 +1,8 @@
 {
   "name": "@navikt/ds-react",
-  "version": "1.5.9",
-  "description": "NAV designsystem react components",
-  "author": "NAV Designsystem team",
+  "version": "2.0.0",
+  "description": "Aksel react-components for NAV designsystem",
+  "author": "Aksel | NAV designsystem team",
   "license": "MIT",
   "keywords": [
     "react",
@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@floating-ui/react-dom-interactions": "0.9.2",
-    "@navikt/ds-icons": "^1.5.9",
+    "@navikt/ds-icons": "^2.0.0",
     "@radix-ui/react-tabs": "1.0.0",
     "@radix-ui/react-toggle-group": "1.0.0",
     "clsx": "^1.2.1",

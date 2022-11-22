@@ -49,7 +49,7 @@ export const Contentcontainer = () => {
       </ContentContainer>
       <style>{`.container {
   display: flex;
-  border-radius: var(--navds-border-radius-medium);
+  border-radius: var(--a-border-radius-medium);
   justify-content: center;
   align-items: center;
   margin-bottom: 1.5rem;

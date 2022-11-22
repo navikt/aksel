@@ -18,6 +18,7 @@ module.exports = {
   stories: () => [...getStories(), "./*.stories.mdx"],
   addons: [
     "@storybook/addon-a11y",
+    "@whitespace/storybook-addon-html",
     {
       name: "@storybook/addon-storysource",
       options: {

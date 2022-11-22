@@ -36,15 +36,15 @@ const MobileNavigation = () => {
 
   const headingMenu = pageProps?.navigation?.headings && (
     <>
-      <ul className="hidden animate-fadeIn text-text md:block lg:hidden">
+      <ul className="animate-fadeIn text-text-default hidden md:block lg:hidden">
         {pageProps?.navigation?.headings.map(
           (heading: DsNavigationHeadingT) => (
             <li
               key={heading._key}
               className={cl(
-                "first-of-type:rounded-t last-of-type:rounded-b focus-within:shadow-focus-inset hover:bg-canvas-background",
+                "focus-within:shadow-focus-inset hover:bg-surface-hover first-of-type:rounded-t last-of-type:rounded-b",
                 {
-                  "border-l-[6px] border-l-canvas-background-inverted bg-canvas-background":
+                  "border-l-surface-inverted bg-surface-neutral-subtle border-l-[6px]":
                     pageProps?.activeHeading?.title === heading.title,
                 }
               )}
@@ -55,7 +55,7 @@ const MobileNavigation = () => {
               >
                 <a
                   className={cl(
-                    "flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 text-text no-underline focus:outline-none",
+                    "text-text-default flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 no-underline focus:outline-none",
                     {
                       "pl-[26px] font-semibold":
                         pageProps?.activeHeading?.title === heading.title,
@@ -75,7 +75,7 @@ const MobileNavigation = () => {
       </ul>
       <ul
         className={cl({
-          "block animate-fadeIn md:hidden lg:block": !heading || level === 0,
+          "animate-fadeIn block md:hidden lg:block": !heading || level === 0,
           hidden: level === 1,
         })}
       >
@@ -83,16 +83,16 @@ const MobileNavigation = () => {
           <li
             key={heading._key}
             className={cl(
-              "first-of-type:rounded-t last-of-type:rounded-b focus-within:shadow-focus-inset hover:bg-canvas-background",
+              "focus-within:shadow-focus-inset hover:bg-surface-neutral-subtle first-of-type:rounded-t last-of-type:rounded-b",
               {
-                "border-l-[6px] border-l-canvas-background-inverted bg-canvas-background":
+                "border-l-surface-inverted bg-surface-neutral-subtle border-l-[6px]":
                   pageProps?.activeHeading?.title === heading.title,
               }
             )}
           >
             <button
               className={cl(
-                "flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 text-text no-underline focus:outline-none",
+                "text-text-default flex min-h-[48px] w-full items-center justify-between bg-none py-3 pr-4 pl-8 no-underline focus:outline-none",
                 {
                   "pl-[26px] font-semibold":
                     pageProps?.activeHeading?.title === heading.title,
@@ -116,20 +116,22 @@ const MobileNavigation = () => {
     <>
       {heading && (
         <div
-          className={cl("animate-fadeIn text-text", { hidden: level === 0 })}
+          className={cl("animate-fadeIn text-text-default", {
+            hidden: level === 0,
+          })}
         >
           <Heading
             onClick={() => setLevel(0)}
             as="button"
             size="xsmall"
-            className="flex w-full items-center gap-2 rounded-t-[4px] border-none bg-none px-2 py-4 text-text hover:bg-canvas-background hover:underline focus:outline-none focus-visible:shadow-focus-inset"
+            className="text-text-default hover:bg-surface-neutral-subtle focus-visible:shadow-focus-inset flex w-full items-center gap-2 rounded-t-[4px] border-none bg-none px-2 py-4 hover:underline focus:outline-none"
           >
             <Back aria-hidden aria-label="tilbake til hovedmeny" />
             Tilbake
           </Heading>
           <Detail
             size="small"
-            className="heading--active bg-component-background-alternate p-2 uppercase"
+            className="heading--active bg-surface-subtle p-2 uppercase"
           >
             {heading.title}
           </Detail>
@@ -137,7 +139,7 @@ const MobileNavigation = () => {
             inCategory={level === 0}
             heading={heading}
             onClick={() => setOpen(false)}
-            className="mt-0 max-h-[512px] animate-fadeIn overflow-y-auto"
+            className="animate-fadeIn mt-0 max-h-[512px] overflow-y-auto"
           />
         </div>
       )}

@@ -89,17 +89,8 @@ const ComponentOverview = ({
                     className="min-h-40 aspect-[1.25/1] h-auto max-h-64 p-4"
                   >
                     <title>React Logo</title>
-                    <circle
-                      cx="0"
-                      cy="0"
-                      r="2.05"
-                      fill="var(--navds-global-color-gray-300)"
-                    />
-                    <g
-                      stroke="var(--navds-global-color-gray-300)"
-                      strokeWidth="1"
-                      fill="none"
-                    >
+                    <circle cx="0" cy="0" r="2.05" fill="var(--a-gray-300)" />
+                    <g stroke="var(--a-gray-300)" strokeWidth="1" fill="none">
                       <ellipse rx="11" ry="4.2" />
                       <ellipse rx="11" ry="4.2" transform="rotate(60)" />
                       <ellipse rx="11" ry="4.2" transform="rotate(120)" />
@@ -124,9 +115,6 @@ const ComponentOverview = ({
                   </Nextlink>
                   {getStatus(x.status)}
                 </span>
-                {/* <span className="clamp-3 mt-1 overflow-hidden">
-                  {<SanityBlockContent noLastMargin blocks={x?.ingress} />}
-                </span> */}
               </div>
             </div>
           </li>

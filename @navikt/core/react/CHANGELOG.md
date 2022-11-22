@@ -1,5 +1,20 @@
 # @navikt/ds-react
 
+## 2.0.0
+
+### Major Changes
+
+- [`6b96e4833`](https://github.com/navikt/Designsystemet/commit/6b96e48330c2e013a1acee85cefccd9ccc1aece4) Thanks [@KenAJoh](https://github.com/KenAJoh)! - v2: Tokens update and font-loading
+
+## 1.5.10
+
+### Patch Changes
+
+- [#1717](https://github.com/navikt/Designsystemet/pull/1717) [`d9352982d`](https://github.com/navikt/Designsystemet/commit/d9352982d42d5d12a9c5fc345e546f57c753738d) Thanks [@vebnor](https://github.com/vebnor)! - Fikset parentSelector prop i Modal
+
+- Updated dependencies []:
+  - @navikt/ds-icons@1.5.10
+
 ## 1.5.9
 
 ### Patch Changes

@@ -32,9 +32,9 @@ const Toggle = ({
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           className={cl({
-            "ml-auto flex min-w-header items-center justify-center border-r-0 hover:bg-gray-800/10 focus:outline-none focus-visible:shadow-focus-inset":
+            "min-w-header focus-visible:shadow-focus-inset ml-auto flex items-center justify-center border-r-0 hover:bg-gray-800/10 focus:outline-none":
               inverted,
-            "navdsi-dropdown__toggle navdsi-header__button min-w-header justify-center gap-4 border-none focus-visible:shadow-[inset_0_0_0_1px_var(--navds-semantic-color-component-background-inverted),inset_0_0_0_3px_var(--navds-global-color-blue-200)]":
+            "navdsi-dropdown__toggle navdsi-header__button min-w-header justify-center gap-4 border-none focus-visible:shadow-[inset_0_0_0_1px_var(--a-surface-inverted),inset_0_0_0_3px_var(--a-border-focus-on-inverted)]":
               !inverted,
           })}
         >
@@ -47,7 +47,7 @@ const Toggle = ({
           arrow={false}
           placement="bottom-start"
           offset={8}
-          className="z-[1100] w-80 max-w-full animate-fadeIn rounded border-none bg-component-background-light shadow-large"
+          className="animate-fadeIn bg-surface-default shadow-large z-[1100] w-80 max-w-full rounded border-none"
         >
           {menu}
         </Popover>

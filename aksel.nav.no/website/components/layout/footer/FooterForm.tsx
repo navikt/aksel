@@ -62,7 +62,6 @@ const FooterForm = () => {
                 Gi en tilbakemelding
               </Heading>
               <Textarea
-                className="inverted-textarea"
                 error={contentError.content}
                 autoComplete="off"
                 label="Melding"
@@ -81,11 +80,7 @@ const FooterForm = () => {
                 minRows={2}
               />
             </div>
-            {contactForm.hasWritten && (
-              <Button className="override-primary-button-dark">
-                Send melding
-              </Button>
-            )}
+            {contactForm.hasWritten && <Button>Send melding</Button>}
           </form>
         )}
       </div>

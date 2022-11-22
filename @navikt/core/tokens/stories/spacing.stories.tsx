@@ -9,15 +9,15 @@ export default {
 export const Spacing = () => {
   const allSpacing: { [key: string]: string } = Object.entries(tokens).reduce(
     (old, [key, val]) =>
-      key.startsWith("NavdsSpacing") ? { ...old, [key]: val } : { ...old },
+      key.startsWith("ASpacing") ? { ...old, [key]: val } : { ...old },
     {}
   );
 
   const sortObject = Object.fromEntries(
     Object.entries(allSpacing).sort(
       (a, b) =>
-        Number(a[0].replace("NavdsSpacing", "")) -
-        Number(b[0].replace("NavdsSpacing", ""))
+        Number(a[0].replace("ASpacing", "")) -
+        Number(b[0].replace("ASpacing", ""))
     )
   );
 
@@ -30,7 +30,7 @@ export const Spacing = () => {
             style={{
               width: val,
               height: 40,
-              backgroundColor: "var(--navds-global-color-lightblue-200)",
+              backgroundColor: "var(--a-lightblue-200)",
               display: "flex",
               alignItems: "center",
             }}

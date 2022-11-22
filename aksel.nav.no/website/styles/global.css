@@ -2,6 +2,7 @@ html {
   /* Remove horizontal jump caused by scrollbar presens on long or short pages */
   overflow-y: scroll;
 }
+
 code,
 pre {
   @apply !font-mono;
@@ -12,7 +13,7 @@ pre {
 }
 
 .navds-alert code {
-  color: var(--navds-global-color-red-500);
+  color: var(--a-red-500);
   background-color: transparent;
   padding: 0;
 }
@@ -31,9 +32,11 @@ a {
 }
 
 /* Improves rendering of images for chrome on Windows */
+/* stylelint-disable-next-line media-feature-name-no-vendor-prefix */
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   img {
     transform: translateZ(0);
+    /* stylelint-disable-next-line value-no-vendor-prefix */
     image-rendering: -webkit-optimize-contrast !important;
   }
 }

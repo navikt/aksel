@@ -95,71 +95,47 @@ const IntroPage = React.forwardRef<HTMLDivElement, Props>((props, ref) => {
           const unpublished = getUnpublished(referringDocuments);
 
           return (
-            <Stack space={2} className={styles.profileDetails}>
+            <Stack space={2}>
               <Heading level="3" size="xsmall" style={{ display: "flex" }}>
                 <Upload />
                 Publiserte sider
               </Heading>
-              <details>
-                <Label size="small" as="summary">
-                  <BodyShort size="small">
-                    Oppdaterte: {published.length}
-                  </BodyShort>
-                </Label>
+
+              <ReadMore header={`Oppdaterte: ${published.length}`}>
                 {published ? (
                   <ReferringDocumentsList documents={published} />
                 ) : (
                   <EmptyState />
                 )}
-              </details>
-              <details>
-                <Label size="small" as="summary">
-                  <BodyShort size="small">
-                    Med upubliserte endringer: {drafts.length}
-                  </BodyShort>
-                </Label>
+              </ReadMore>
+              <ReadMore header={`Med upubliserte endringer: ${drafts.length}`}>
                 {drafts ? (
                   <ReferringDocumentsList documents={drafts} />
                 ) : (
                   <EmptyState />
                 )}
-              </details>
+              </ReadMore>
               <Heading level="3" size="xsmall" className={styles.headings}>
                 <Wrench />
                 Under arbeid
               </Heading>
-              <details>
-                <Label size="small" as="summary">
-                  <BodyShort size="small">
-                    Sider: {unpublished.length}
-                  </BodyShort>
-                </Label>
+              <ReadMore header={`Sider: ${unpublished.length}`}>
                 {unpublished ? (
                   <ReferringDocumentsList documents={unpublished} />
                 ) : (
                   <EmptyState />
                 )}
-              </details>
+              </ReadMore>
               <Heading level="3" size="xsmall" className={styles.headings}>
                 <Sandglass />
                 Utdaterte sider
               </Heading>
-              <details>
-                <Label size="small" as="summary">
-                  <BodyShort size="small">
-                    Ikke oppdatert på over 90 dager: 0
-                  </BodyShort>
-                </Label>
+              <ReadMore header={`Ikke oppdatert på over 90 dager: 0`}>
                 <EmptyState />
-              </details>
-              <details>
-                <Label size="small" as="summary">
-                  <BodyShort size="small">
-                    Ikke oppdatert på over 180 dager: 0
-                  </BodyShort>
-                </Label>
+              </ReadMore>
+              <ReadMore header={`Ikke oppdatert på over 180 dager: 0`}>
                 <EmptyState />
-              </details>
+              </ReadMore>
             </Stack>
           );
         }}

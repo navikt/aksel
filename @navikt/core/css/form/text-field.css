@@ -1,35 +1,21 @@
-:root,
-:host,
-[data-theme="light"] {
-  --navds-text-field-color-text: var(--navds-semantic-color-text);
-  --navds-text-field-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-text-field-color-border: var(--navds-semantic-color-border);
-  --navds-text-field-color-border-hover: var(--navds-semantic-color-interaction-primary);
-  --navds-text-field-color-border-error: var(--navds-semantic-color-interaction-danger);
-  --navds-text-field-color-shadow-error: var(--navds-semantic-color-interaction-danger);
-  --navds-text-field-color-border-disabled: var(--navds-global-color-gray-400);
-  --navds-text-field-color-background-disabled: var(--navds-semantic-color-component-background-alternate);
-  --navds-text-field-color-text-disabled: var(--navds-semantic-color-text);
-  --navds-text-field-color-placeholder-text: var(--navds-semantic-color-text-muted);
-}
-
 [data-theme="dark"] {
-  --navds-text-field-color-text: var(--navds-semantic-color-text-inverted);
-  --navds-text-field-color-background: var(--navds-semantic-color-component-background-inverted);
-  --navds-text-field-color-border: var(--navds-semantic-color-border-inverted);
-  --navds-text-field-color-border-hover: var(--navds-global-color-blue-200);
-  --navds-text-field-color-placeholder-text: var(--navds-global-color-gray-500);
+  --ac-textfield-text: var(--a-text-on-inverted);
+  --ac-textfield-bg: var(--a-surface-inverted);
+  --ac-textfield-border: var(--a-border-on-inverted);
+  --ac-textfield-hover-border: var(--a-blue-200);
+  --ac-textfield-placeholder: var(--a-gray-500);
+  --ac-textfield-error-border: var(--a-red-300);
 }
 
 .navds-text-field__input {
   appearance: none;
-  padding: var(--navds-spacing-2);
-  background-color: var(--navds-text-field-color-background);
-  border-radius: var(--navds-border-radius-medium);
-  border: 1px solid var(--navds-text-field-color-border);
+  padding: var(--a-spacing-2);
+  background-color: var(--ac-textfield-bg, var(--a-surface-default));
+  border-radius: var(--a-border-radius-medium);
+  border: 1px solid var(--ac-textfield-border, var(--a-border-default));
   min-height: 48px;
   width: 100%;
-  color: var(--navds-text-field-color-text);
+  color: var(--ac-textfield-text, var(--a-text-default));
 }
 
 .navds-text-field__input[size] {
@@ -37,7 +23,7 @@
 }
 
 .navds-text-field__input::placeholder {
-  color: var(--navds-text-field-color-placeholder-text);
+  color: var(--ac-textfield-placeholder, var(--a-text-subtle));
 }
 
 .navds-form-field--small .navds-text-field__input {
@@ -46,37 +32,37 @@
 }
 
 .navds-text-field__input:hover {
-  border-color: var(--navds-text-field-color-border-hover);
+  border-color: var(--ac-textfield-hover-border, var(--a-border-action));
 }
 
 .navds-text-field__input:focus {
   outline: none;
-  box-shadow: var(--navds-shadow-focus);
+  box-shadow: var(--a-shadow-focus);
 }
 
 /**
   Error handling
 */
 .navds-text-field--error > .navds-text-field__input:not(:hover):not(:disabled) {
-  border-color: var(--navds-text-field-color-border-error);
-  box-shadow: 0 0 0 1px var(--navds-text-field-color-border-error);
+  border-color: var(--ac-textfield-error-border, var(--a-border-danger));
+  box-shadow: 0 0 0 1px var(--ac-textfield-error-border, var(--a-border-danger));
 }
 
 .navds-text-field--error > .navds-text-field__input:focus:not(:hover):not(:disabled) {
-  box-shadow: 0 0 0 1px var(--navds-text-field-color-border-error), var(--navds-shadow-focus);
+  box-shadow: 0 0 0 1px var(--a-border-danger), var(--a-shadow-focus);
 }
 
 /* Disabled handling */
 .navds-text-field__input:disabled {
-  background-color: var(--navds-text-field-color-background);
-  border-color: var(--navds-text-field-color-border);
+  background-color: var(--ac-textfield-bg, var(--a-surface-default));
+  border-color: var(--ac-textfield-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
 }
 
 .navds-text-field__input[readonly] {
-  background-color: var(--navds-text-field-color-background);
-  border-color: var(--navds-text-field-color-border);
+  background-color: var(--ac-textfield-bg, var(--a-surface-default));
+  border-color: var(--ac-textfield-border, var(--a-border-default));
   box-shadow: none;
   cursor: not-allowed;
 }

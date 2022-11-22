@@ -36,7 +36,7 @@ export const ArtikkelCard = ({
             e.currentTarget.getAttribute("href")
           )
         }
-        className="group relative rounded bg-white p-5 pb-16 shadow-small ring-1 ring-gray-900/10 hover:shadow-medium focus:outline-none focus-visible:shadow-focus "
+        className="shadow-small hover:shadow-medium focus-visible:shadow-focus group relative rounded bg-white p-5 pb-16 ring-1 ring-gray-900/10 focus:outline-none "
       >
         <Heading
           level="2"
@@ -49,11 +49,11 @@ export const ArtikkelCard = ({
         <span className="absolute bottom-5 flex gap-2">
           {contributor && <Detail as="span">{abbrName(contributor)}</Detail>}
           {contributor && (
-            <Detail as="span" className="text-text-muted">
+            <Detail as="span" className="text-text-subtle">
               —
             </Detail>
           )}
-          <Detail as="span" className="text-text-muted">
+          <Detail as="span" className="text-text-subtle">
             {dateStr(_updatedAt)}
           </Detail>
         </span>

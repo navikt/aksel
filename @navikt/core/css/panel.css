@@ -1,16 +1,10 @@
-:root,
-:host {
-  --navds-panel-color-background: var(--navds-semantic-color-component-background-light);
-  --navds-panel-color-border: var(--navds-semantic-color-border-muted);
-}
-
 .navds-panel {
-  background-color: var(--navds-panel-color-background);
-  padding: var(--navds-spacing-4);
-  border-radius: var(--navds-border-radius-small);
+  background-color: var(--ac-panel-bg, var(--a-surface-default));
+  padding: var(--a-spacing-4);
+  border-radius: var(--a-border-radius-small);
   border: 1px solid transparent;
 }
 
 .navds-panel--border {
-  border-color: var(--navds-panel-color-border);
+  border-color: var(--ac-panel-border, var(--a-border-default));
 }
