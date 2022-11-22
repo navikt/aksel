@@ -1,11 +1,8 @@
 import { NextStudio } from "next-sanity/studio";
-import { defineConfig } from "sanity";
-import { config } from "../../sanity/sanity.config";
-
-const studioConfig = defineConfig(config);
+import { workspaceConfig } from "../../sanity/sanity.config";
 
 const StudioPage = () => {
-  return <NextStudio config={studioConfig} />;
+  return <NextStudio config={workspaceConfig} />;
 };
 
 export default StudioPage;

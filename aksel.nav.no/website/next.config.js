@@ -18,6 +18,7 @@ const ContentSecurityPolicy = `
   frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
   media-src 'self' cdn.sanity.io;
   frame-src 'self' https://web.microsoftstream.com localhost:3000;
+  manifest-src 'self' https://next.sanity.build.manifest.webmanifest;
 `;
 
 const securityHeaders = [
