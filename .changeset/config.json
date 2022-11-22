@@ -21,7 +21,7 @@
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["shadow-dom", "aksel.nav.no"],
+  "ignore": ["shadow-dom", "aksel.nav.no", "@navikt/ds-navno"],
 
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "updateInternalDependents": "always"

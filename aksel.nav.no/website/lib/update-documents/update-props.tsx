@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { noCdnClient } from "../sanity/sanity.server";
 import CoreDocs from "@navikt/ds-react/_docs.json";
 import InternalDocs from "@navikt/ds-react-internal/_docs.json";
+import NavnoDocs from "@navikt/ds-navno/_docs.json";
 import { SanityT } from "..";
 
 dotenv.config();
@@ -48,6 +49,9 @@ const updateProps = async () => {
     transactionClient.createOrReplace(x)
   );
   propList(InternalDocs, "internal").forEach((x) =>
+    transactionClient.createOrReplace(x)
+  );
+  propList(NavnoDocs, "navno").forEach((x) =>
     transactionClient.createOrReplace(x)
   );
 

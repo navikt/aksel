@@ -24,6 +24,7 @@
     "@navikt/internal/*",
     "@navikt/codemod",
     "@navikt/icons",
+    "@navikt/community/*",
     "examples/*",
     "aksel.nav.no"
   ],
@@ -180,7 +181,7 @@
     },
     "ignoreFiles": [
       "**/dist/**",
-      "**/aksel.nav.no/sanity/dist**",
+      "**/aksel.nav.no/sanity/**",
       "**/@navikt/codemod/**"
     ]
   },
