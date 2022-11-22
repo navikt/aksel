@@ -10,6 +10,7 @@ pre[class*="language-"] {
   max-width: calc(100% - 4.5rem);
   color: var(--a-gray-50);
   background: none;
+  /* stylelint-disable-next-line color-function-notation */
   text-shadow: 0 1px rgba(0, 0, 0, 0.3);
   text-align: left;
   white-space: pre;
@@ -38,7 +39,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: var(---a-surface-inverted);
+  background: var(--a-surface-inverted);
 }
 
 /* Inline code */
