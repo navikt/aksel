@@ -8404,6 +8404,7 @@ __metadata:
     stylelint: ^14.8.5
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^25.0.0
+    stylelint-declaration-block-no-ignored-properties: ^2.6.0
     stylelint-value-no-unknown-custom-properties: ^4.0.0
     typescript: ^4.8.0
     webpack: ^5.4.0
@@ -28056,6 +28057,15 @@ __metadata:
   peerDependencies:
     stylelint: ^14.4.0
   checksum: bfd5773f47ea7fcddba972037d6dd32d1fb900c2ca592a313fe1a28df054ef465b11e6e53fe6e87bbf0c356ab33a7a4eecc447cf7a1bd39c9b50c7b4bfb48d81
+  languageName: node
+  linkType: hard
+
+"stylelint-declaration-block-no-ignored-properties@npm:^2.6.0":
+  version: 2.6.0
+  resolution: "stylelint-declaration-block-no-ignored-properties@npm:2.6.0"
+  peerDependencies:
+    stylelint: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0
+  checksum: 6fc38ec4bd471443c486f647a82cc001c455eb5654cbcb1e631f2d5fe920586775c0bc90a6d9ad8be254e37ba5f67584d0baa1409fc8a8d18dae74f558292190
   languageName: node
   linkType: hard
 
