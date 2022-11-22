@@ -4694,7 +4694,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/groq-store@npm:^1.1.4":
+"@sanity/groq-store@npm:^1.1.0, @sanity/groq-store@npm:^1.1.4":
   version: 1.1.4
   resolution: "@sanity/groq-store@npm:1.1.4"
   dependencies:
@@ -5379,16 +5379,6 @@ __metadata:
     react-dom: ^16.9 || ^17
     styled-components: ^5.2.0
   checksum: 45ee8d213ea9c495ba68de21e1f9ca235a1105e72705c427db9b0cb33a283f67997c16762e5b92d28103a9557778b539272220d666813d01f1db29135b614dfc
-  languageName: node
-  linkType: hard
-
-"@sanity/webhook@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "@sanity/webhook@npm:2.0.0"
-  dependencies:
-    base64url: ^3.0.1
-    tslib: ^2.3.1
-  checksum: 172ea6a886e3a07e4f1fddf0b82b64c9b4da1c7f024d5bff0e5a51fe7a2f727882dbb1e49e6e68451e18fbb1f3ddda3bc335faa2abf1f31519b3cf22902c03fd
   languageName: node
   linkType: hard
 
@@ -10053,13 +10043,6 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 669632eb3745404c2f822a18fc3a0122d2f9a7a13f7fb8b5823ee19d1d2ff9ee5b52c53367176ea4ad093c332fd5ab4bd0ebae5a8e27917a4105a4cfc86b1005
-  languageName: node
-  linkType: hard
-
-"base64url@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "base64url@npm:3.0.1"
-  checksum: a77b2a3a526b3343e25be424de3ae0aa937d78f6af7c813ef9020ef98001c0f4e2323afcd7d8b2d2978996bf8c42445c3e9f60c218c622593e5fdfd54a3d6e18
   languageName: node
   linkType: hard
 
@@ -21867,28 +21850,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "next-sanity@npm:2.1.0"
+"next-sanity@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "next-sanity@npm:1.1.0"
   dependencies:
     "@sanity/client": ^3.4.1
-    "@sanity/preview-kit": ^1.2.8
-    "@sanity/webhook": ^2.0.0
+    "@sanity/groq-store": ^1.1.0
     groq: ^2.33.2
   peerDependencies:
-    "@sanity/types": "*"
     next: ^12 || ^13
     react: ^16.3 || ^17 || ^18
     sanity: "*"
     styled-components: ^5.2
   peerDependenciesMeta:
-    "@sanity/types":
-      optional: true
     sanity:
       optional: true
     styled-components:
       optional: true
-  checksum: 3be6772da4b128512cc32f498272c832235814d3303e0e35bf99edb2ab191406e5a85d9aaa75374b73114e23a64e15a73799a05be708b1c0f3bf3d6e5b1ae0a1
+  checksum: 3ef4f0d96f8d9123e667255db35110fcf570d63596726bab0ad1e37ed2852cf19b91a940517e47698140a580ce4e0a58397c00f949d639b05458c149f29977ab
   languageName: node
   linkType: hard
 
@@ -31467,6 +31446,7 @@ __metadata:
     "@sanity/block-content-to-react": ^3.0.0
     "@sanity/client": ^3.3.0
     "@sanity/image-url": 1.0.1
+    "@sanity/preview-kit": ^1.2.8
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^13.3.0
@@ -31496,7 +31476,7 @@ __metadata:
     lodash: ^4.17.21
     nanoid: 3.0.0
     next: ^12.2.0
-    next-sanity: ^2.1.0
+    next-sanity: ^1.1.0
     next-transpile-modules: ^9.0.0
     postcss: ^8.4.0
     postcss-import: ^14.1.0
