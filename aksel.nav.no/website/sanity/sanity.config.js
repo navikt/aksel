@@ -1,11 +1,12 @@
-import { defineConfig, createAuthStore } from "sanity";
+import { codeInput } from "@sanity/code-input";
+import { createAuthStore, defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import schemas from "./schema";
 
 const sharedConfig = {
   projectId: "hnbe3yhs",
   apiVersion: "2021-10-21",
-  plugins: [deskTool()],
+  plugins: [deskTool(), codeInput()],
   schema: schemas,
   auth: createAuthStore({
     redirectOnSingle: false,

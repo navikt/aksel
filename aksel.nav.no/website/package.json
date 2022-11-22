@@ -26,6 +26,7 @@
     "@radix-ui/react-tabs": "1.0.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^3.3.0",
+    "@sanity/code-input": "studio-v3",
     "@sanity/image-url": "1.0.1",
     "@sanity/preview-kit": "^1.2.8",
     "@svgr/webpack": "^5.5.0",
