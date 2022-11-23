@@ -24,7 +24,7 @@
 
 .navds-accordion__header:hover {
   color: var(--ac-accordion-header-text-hover, var(--a-text-action-on-action-subtle));
-  border-color: var(--ac-accordion-header-border-hover, var(--a-border-strong-hover));
+  border-color: var(--ac-accordion-header-border-hover, var(--a-border-strong));
 }
 
 .navds-accordion__header-content {
@@ -43,7 +43,7 @@
 }
 
 .navds-accordion__item--open > .navds-accordion__header:hover + * .navds-accordion__content {
-  border-color: var(--ac-accordion-content-border-open, var(--a-border-strong-hover));
+  border-color: var(--ac-accordion-content-border-open, var(--a-border-strong));
 }
 
 .navds-accordion__expand-icon {

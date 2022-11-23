@@ -32,9 +32,11 @@ a {
 }
 
 /* Improves rendering of images for chrome on Windows */
+/* stylelint-disable-next-line media-feature-name-no-vendor-prefix */
 @media screen and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
   img {
     transform: translateZ(0);
+    /* stylelint-disable-next-line value-no-vendor-prefix */
     image-rendering: -webkit-optimize-contrast !important;
   }
 }

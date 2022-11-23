@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.0.1
+
+### Patch Changes
+
+- [`e8007328d`](https://github.com/navikt/Designsystemet/commit/e8007328db3f6d5be696cf24f03304c79be0f3f7) Thanks [@KenAJoh](https://github.com/KenAJoh)! - Bugfixer ved bruk av tokens
+
 ## 2.0.0
 
 ### Major Changes

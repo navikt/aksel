@@ -37,7 +37,7 @@ body,
 }
 
 a {
-  color: var(--a-semantic-color-link);
+  color: var(--a-text-action);
 }
 
 button {

@@ -1,3 +1,5 @@
+/* stylelint-disable color-function-notation */
+
 /**
  * Dracula Theme originally by Zeno Rocha [@zenorocha]
  * https://draculatheme.com/
@@ -38,7 +40,7 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-  background: var(---a-surface-inverted);
+  background: var(--a-surface-inverted);
 }
 
 /* Inline code */
