@@ -1,11 +1,9 @@
 import { codeInput } from "@sanity/code-input";
 import { visionTool } from "@sanity/vision";
-import { createAuthStore, defineConfig, isDev } from "sanity";
+import { createAuthStore, defineConfig } from "sanity";
 import { deskTool } from "sanity/desk";
 import schemas from "./schema";
 import { media } from "sanity-plugin-media";
-
-const devOnlyPlugins = [visionTool()];
 
 const projectId = "hnbe3yhs";
 
@@ -20,7 +18,7 @@ const sharedConfig = {
       dataset: "production",
     }),
     codeInput(),
-    ...(isDev ? devOnlyPlugins : []),
+    visionTool(),
   ],
   auth: createAuthStore({
     redirectOnSingle: false,
