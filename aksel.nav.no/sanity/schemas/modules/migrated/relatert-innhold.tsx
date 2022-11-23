@@ -1,4 +1,6 @@
-import { allDocumentTypes } from "../../config";
+// MIGRERT
+
+import { allDocumentTypes } from "../../../config";
 import { Link } from "@navikt/ds-icons";
 import React from "react";
 

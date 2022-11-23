@@ -3,9 +3,9 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 
 /* Schemas */
 /* Documents */
-import editors from "./documents/editors";
+import editors from "./documents/migrated/editors";
 import navigation, { dropdown, link } from "./documents/navigation";
-import frontpage from "./documents/frontpage";
+import frontpage from "./documents/migrated/frontpage";
 import redirect from "./documents/redirects";
 
 import * as Designsystem from "./documents/designsystem";

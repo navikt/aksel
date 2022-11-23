@@ -6,7 +6,7 @@ import userStore from "part:@sanity/base/user"; */
 import { defineType, defineField } from "sanity";
 
 export const Editors = defineType({
-  title: "Redaktører",
+  title: "Forfattere",
   name: "editor",
   type: "document",
   fields: [

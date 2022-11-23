@@ -32711,6 +32711,7 @@ __metadata:
     "@sanity/code-input": studio-v3
     "@sanity/image-url": 1.0.1
     "@sanity/preview-kit": ^1.2.8
+    "@sanity/ui": 1.0.0-beta.32
     "@sanity/vision": dev-preview
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.16.0

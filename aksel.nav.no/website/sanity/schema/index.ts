@@ -5,8 +5,12 @@ export default {
   types: [
     /* Documents */
     document.Editors,
+    document.Forside,
+
     /* Objects */
-    /* object.PropsSeksjon, */
+    object.PropsSeksjon,
     object.RelatertInnhold,
+    object.Kode,
+    object.SEOFields,
   ],
 };
