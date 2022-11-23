@@ -26066,6 +26066,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-photo-album@npm:^1.16.1":
+  version: 1.16.1
+  resolution: "react-photo-album@npm:1.16.1"
+  peerDependencies:
+    react: ">=16.14.0"
+  checksum: ceefc8231245b438eb67c79352012cbb204e1d22867dc957740587394d8eee59b7179d191ccff3f74440e0d676f4d624ed371b5cb47e4c6f12ad7667f9d696bf
+  languageName: node
+  linkType: hard
+
 "react-photo-gallery@npm:^8.0.0":
   version: 8.0.0
   resolution: "react-photo-gallery@npm:8.0.0"
@@ -27421,7 +27430,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rxjs@npm:^7.1.0, rxjs@npm:^7.5.5":
+"rxjs@npm:^7.1.0, rxjs@npm:^7.5.5, rxjs@npm:^7.5.7":
   version: 7.5.7
   resolution: "rxjs@npm:7.5.7"
   dependencies:
@@ -27556,6 +27565,25 @@ __metadata:
     rxjs: ">=6.5.2"
     styled-components: ^5.2.0
   checksum: 8156e87a7d971e5508f8dbb99d3792ce0a567619162786bd4b36d9a0b531542f137c42f03e8581f49167e2f3c5be6bc3ba95ccb9e3fdddbfb8c7d257b05224d1
+  languageName: node
+  linkType: hard
+
+"sanity-plugin-asset-source-unsplash@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "sanity-plugin-asset-source-unsplash@npm:1.0.0"
+  dependencies:
+    "@sanity/incompatible-plugin": ^1.0.4
+    "@sanity/ui": 1.0.0-beta.32
+    lodash: ^4.17.21
+    react-infinite-scroll-component: ^6.1.0
+    react-photo-album: ^1.16.1
+    rxjs: ^7.5.7
+  peerDependencies:
+    react: ^18
+    react-dom: ^18
+    sanity: "*"
+    styled-components: ^5.2
+  checksum: b100fa8f3053bf1beeb4e9ac6fe2412b74db7d544d85e3f47f5b9d3e725de9dd4f51f4ca091516a6f41d60dd43c4b546e8d8de3628b461d416aabc1433717774
   languageName: node
   linkType: hard
 
@@ -31937,6 +31965,7 @@ __metadata:
     react-modal: 3.15.1
     sanity: dev-preview
     sanity-codegen: 0.9.8
+    sanity-plugin-asset-source-unsplash: ^1.0.0
     sanity-plugin-media: studio-v3
     sitemap: ^7.0.0
     start-server-and-test: ^1.14.0
