@@ -6,6 +6,7 @@ export default {
     /* Documents */
     document.Editors,
     document.Forside,
+    document.Redirect,
 
     /* Objects */
     object.PropsSeksjon,

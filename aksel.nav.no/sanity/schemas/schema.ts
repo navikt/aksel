@@ -4,9 +4,8 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 /* Schemas */
 /* Documents */
 import editors from "./documents/migrated/editors";
-import navigation, { dropdown, link } from "./documents/navigation";
 import frontpage from "./documents/migrated/frontpage";
-import redirect from "./documents/redirects";
+import redirect from "./documents/migrated/redirects";
 
 import * as Designsystem from "./documents/designsystem";
 import * as Aksel from "./documents/aksel";
@@ -18,13 +17,9 @@ export default createSchema({
     ...v2Blocks,
     frontpage,
     editors,
-    navigation,
-    link,
-    dropdown,
     redirect,
 
     Designsystem.Color,
-    Designsystem.ds_header_heading,
     Designsystem.ColorCategories,
     Designsystem.TokensOld,
     Designsystem.TokenKategori,
@@ -32,9 +27,10 @@ export default createSchema({
     Designsystem.Props,
     Designsystem.ComponentTemplate,
     Designsystem.Frontpage,
-    Designsystem.Navigation,
     Designsystem.KomponentArtikkel,
     Designsystem.Artikkel,
+    Designsystem.Navigation,
+    Designsystem.ds_header_heading,
 
     Aksel.Artikkel,
     Aksel.Blogg,
