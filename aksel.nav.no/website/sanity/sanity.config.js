@@ -1,12 +1,15 @@
 import { codeInput } from "@sanity/code-input";
-import { createAuthStore, defineConfig } from "sanity";
+import { visionTool } from "@sanity/vision";
+import { createAuthStore, defineConfig, isDev } from "sanity";
 import { deskTool } from "sanity/desk";
 import schemas from "./schema";
+
+const devOnlyPlugins = [visionTool()];
 
 const sharedConfig = {
   projectId: "hnbe3yhs",
   apiVersion: "2021-10-21",
-  plugins: [deskTool(), codeInput()],
+  plugins: [deskTool(), codeInput(), ...(isDev ? devOnlyPlugins : [])],
   schema: schemas,
   auth: createAuthStore({
     redirectOnSingle: false,
