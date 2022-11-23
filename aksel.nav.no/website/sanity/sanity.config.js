@@ -3,18 +3,30 @@ import { visionTool } from "@sanity/vision";
 import { createAuthStore, defineConfig, isDev } from "sanity";
 import { deskTool } from "sanity/desk";
 import schemas from "./schema";
+import { media } from "sanity-plugin-media";
 
 const devOnlyPlugins = [visionTool()];
 
+const projectId = "hnbe3yhs";
+
 const sharedConfig = {
-  projectId: "hnbe3yhs",
+  projectId,
   apiVersion: "2021-10-21",
-  plugins: [deskTool(), codeInput(), ...(isDev ? devOnlyPlugins : [])],
   schema: schemas,
+  plugins: [
+    deskTool(),
+    media({
+      projectId,
+      dataset: "production",
+    }),
+    codeInput(),
+    ...(isDev ? devOnlyPlugins : []),
+  ],
   auth: createAuthStore({
     redirectOnSingle: false,
     mode: "replace",
-    projectId: "hnbe3yhs",
+    projectId,
+    dataset: "production",
     providers: [
       {
         name: "saml",
