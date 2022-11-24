@@ -1,28 +1,28 @@
 import Accordion from "./accordion";
 import Alert from "./alert";
-import Bilde from "./bilde";
-import HeroBilde from "./hero-bilde";
-import DoDont, { doDontBlock } from "./do-dont";
-import introKomponent from "./intro-komponent";
+import Innholdskort from "./innholdskort";
+import Bilde from "./migrated/bilde";
+import DoDont, { doDontBlock } from "./migrated/do-dont";
+import HeroBilde from "./migrated/hero-bilde";
+import introKomponent from "./migrated/intro-komponent";
 import Kode from "./migrated/kode";
+import KodeEksempler from "./migrated/kode-eksempler";
 import Props from "./migrated/props";
 import RelatertInnhold from "./migrated/relatert-innhold";
-import Innholdskort from "./innholdskort";
-import KodeEksempler from "./kode-eksempler";
-import TokenRef from "./token-tabell";
+import { tmpTabell, tmpTabellRow } from "./migrated/tabellv2";
 import {
   RiktekstAksel,
   RiktekstDsArtikkel,
   RiktekstEnkel,
   RiktekstKomponent,
-  RiktekstTabell,
   RiktekstPrinsipp,
+  RiktekstTabell,
 } from "./riktekst";
 import SpesialSeksjon from "./spesial-seksjon";
-import Tastatur from "./tastatur";
+import Tastatur from "./migrated/tastatur";
 import Tips from "./tips";
-import Video from "./video";
-import { tmpTabell, tmpTabellRow } from "./tabellv2";
+import TokenRef from "./migrated/token-tabell";
+import Video from "./migrated/video";
 
 const v2Blocks = [
   tmpTabell,

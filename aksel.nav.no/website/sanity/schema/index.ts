@@ -9,10 +9,23 @@ export default {
     document.Redirect,
 
     /* Objects */
-    object.PropsSeksjon,
     object.RelatertInnhold,
     object.Kode,
     object.SEOFields,
     object.Tabell,
+    object.Bilde,
+    object.DoDont,
+    object.DoDontBlock,
+    object.Video,
+
+    /* Komponentsider */
+    object.PropsSeksjon,
+    object.KomponentIntro,
+    object.KodeEksempler,
+    object.TastaturUU,
+    object.TokenTabell,
+
+    /* Prinsipper */
+    object.HeroBilde,
   ],
 };

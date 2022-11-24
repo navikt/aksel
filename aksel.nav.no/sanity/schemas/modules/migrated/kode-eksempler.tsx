@@ -22,7 +22,7 @@ export default {
       initialValue: false,
     },
     {
-      title: "Installasjon-snippet",
+      title: "Eksempel-navn",
       name: "dir",
       type: "reference",
       to: [{ type: "kode_eksempler_fil" }],
