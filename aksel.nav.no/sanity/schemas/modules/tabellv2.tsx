@@ -23,7 +23,7 @@ export const tmpTabell = {
 export const tmpTabellRow = {
   type: "object",
   name: "tableRow",
-  title: "ROW2",
+  title: "Rad",
   fields: [{ type: "array", name: "cells", of: [{ type: "string" }] }],
   preview: {
     select: {

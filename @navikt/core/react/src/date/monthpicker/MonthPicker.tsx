@@ -79,6 +79,13 @@ export interface MonthPickerProps extends React.HTMLAttributes<HTMLDivElement> {
    * Event fired when the user navigates between years.
    */
   onYearChange?: (y?: Date) => void;
+  /**
+   * Avoid using if possible!
+   * Changes what CSS position property to use
+   * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
+   * @default "absolute"
+   */
+  strategy?: "absolute" | "fixed";
 }
 
 interface MonthPickerComponent
@@ -113,6 +120,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
       defaultSelected,
       year,
       onYearChange,
+      strategy = "absolute",
     },
     ref
   ) => {
@@ -163,6 +171,7 @@ export const MonthPicker = forwardRef<HTMLDivElement, MonthPickerProps>(
               ref={ref}
               id={ariaId}
               className="navds-date"
+              strategy={strategy}
             >
               <RootProvider
                 locale={getLocaleFromString(locale)}

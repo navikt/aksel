@@ -10,7 +10,7 @@ import MonthSelector from "./MonthSelector";
 export interface MonthPickerStandaloneProps
   extends Omit<
     MonthPickerProps,
-    "open" | "onClose" | "onOpenToggle" | "wrapperClassName"
+    "open" | "onClose" | "onOpenToggle" | "wrapperClassName" | "strategy"
   > {
   /**
    * Monthpicker classname

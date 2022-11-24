@@ -42,7 +42,7 @@ const serializers = {
     bilde: ({ node }) => <Bilde node={node} />,
     alert: ({ node }) => <Alert node={node} />,
     kode: ({ node }) => <Kode node={node} />,
-    tabell: ({ node }) => <Tabell node={node} />,
+    tabell_v2: ({ node }) => <Tabell node={node} />,
     accordion: ({ node }) => <Accordion node={node} />,
     props_seksjon: ({ node }) => <PropsSeksjon node={node} />,
     spesial_seksjon: ({ node }) => <SideModul node={node} />,
