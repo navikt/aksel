@@ -18,7 +18,11 @@ const TableComponent = ({
         <Table.Header>
           <Table.Row>
             {node?.rows[0].cells?.map((cell, y) => (
-              <Table.HeaderCell key={y} className="text-gray-800" scope="col">
+              <Table.HeaderCell
+                key={y}
+                className="text-text-subtle"
+                scope="col"
+              >
                 {cell}
               </Table.HeaderCell>
             ))}
