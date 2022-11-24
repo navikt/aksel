@@ -6,7 +6,7 @@ import React from "react";
 const Tabell = {
   type: "object",
   name: "tabell",
-  title: "Tabell",
+  title: "Tabell (IKKE BRUK)",
   icon: Data,
   fields: [
     {

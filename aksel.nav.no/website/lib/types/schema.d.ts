@@ -962,6 +962,24 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       isMigrated?: boolean;
     }
 
+    type tabell_v2 = {
+      _type: "tabell_v2";
+
+      /**
+       * Rows - `Array`
+       */
+      rows?: Array<Sanity.Keyed<tableRow>>;
+    };
+
+    type tableRow = {
+      _type: "tableRow";
+
+      /**
+       * Cells - `Array`
+       */
+      cells?: Array<Sanity.Keyed<string>>;
+    };
+
     type riktekst_enkel = Array<Sanity.Keyed<Sanity.Block>>;
 
     type riktekst_aksel = Array<
@@ -974,6 +992,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
     >;
 
@@ -987,6 +1006,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<spesial_seksjon>
     >;
@@ -1001,6 +1021,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<props_seksjon>
       | Sanity.Keyed<tastatur_modul>
@@ -1020,6 +1041,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<innholdskort>
     >;

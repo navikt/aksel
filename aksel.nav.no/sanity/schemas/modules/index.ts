@@ -23,8 +23,11 @@ import Tabell, { TabellSchema } from "./tabell";
 import Tastatur from "./tastatur";
 import Tips from "./tips";
 import Video from "./video";
+import { tmpTabell, tmpTabellRow } from "./tabellv2";
 
 const v2Blocks = [
+  tmpTabell,
+  tmpTabellRow,
   /* Blocks */
   RiktekstEnkel,
   RiktekstAksel,
