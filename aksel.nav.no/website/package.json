@@ -29,6 +29,7 @@
     "@sanity/code-input": "studio-v3",
     "@sanity/image-url": "1.0.1",
     "@sanity/preview-kit": "^1.2.8",
+    "@sanity/table": "1.0.0",
     "@sanity/vision": "dev-preview",
     "@svgr/webpack": "^5.5.0",
     "algoliasearch": "4.12.2",

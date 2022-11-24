@@ -98,26 +98,6 @@ eks: Utvikler, Webanalytiker, uu-spesialist
     }
 
     /**
-     * Navigation
-     */
-    interface navigation extends Sanity.Document {
-      _type: "navigation";
-
-      /**
-       * Tittel - `String`
-       */
-      title?: string;
-
-      /**
-       * Sidemeny - `Array`
-Linker eller dropdowns med linker. Maks dybde på 2 dropdowns er støttet. Sider må være publisert før de kan linkes her.
-       */
-      sidemenu?: Array<
-        Sanity.Keyed<navigation_dropdown> | Sanity.Keyed<navigation_link>
-      >;
-    }
-
-    /**
      * Redirect
      */
     interface redirect extends Sanity.Document {
@@ -441,23 +421,6 @@ Beskriv bildet for skjermlesere
     }
 
     /**
-     * Navigation
-     */
-    interface ds_navigation extends Sanity.Document {
-      _type: "ds_navigation";
-
-      /**
-       * Designsystem navigajsons-struktur - `String`
-       */
-      title?: string;
-
-      /**
-       * Header linker - `Array`
-       */
-      headings?: Array<Sanity.Keyed<ds_navigation_heading>>;
-    }
-
-    /**
      * Komponentartikkel
      */
     interface komponent_artikkel extends Sanity.Document {
@@ -612,6 +575,23 @@ Gjemmer <<Var denne artikkelen til hjelp?>> modulen.
        */
         hide_feedback?: boolean;
       };
+    }
+
+    /**
+     * Navigation
+     */
+    interface ds_navigation extends Sanity.Document {
+      _type: "ds_navigation";
+
+      /**
+       * Designsystem navigajsons-struktur - `String`
+       */
+      title?: string;
+
+      /**
+       * Header linker - `Array`
+       */
+      headings?: Array<Sanity.Keyed<ds_navigation_heading>>;
     }
 
     /**
@@ -962,6 +942,24 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       isMigrated?: boolean;
     }
 
+    type tabell_v2 = {
+      _type: "tabell_v2";
+
+      /**
+       * Rows - `Array`
+       */
+      rows?: Array<Sanity.Keyed<tableRow>>;
+    };
+
+    type tableRow = {
+      _type: "tableRow";
+
+      /**
+       * Cells - `Array`
+       */
+      cells?: Array<Sanity.Keyed<string>>;
+    };
+
     type riktekst_enkel = Array<Sanity.Keyed<Sanity.Block>>;
 
     type riktekst_aksel = Array<
@@ -974,6 +972,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
     >;
 
@@ -987,6 +986,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<spesial_seksjon>
     >;
@@ -1001,6 +1001,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<props_seksjon>
       | Sanity.Keyed<tastatur_modul>
@@ -1020,6 +1021,7 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
       | Sanity.Keyed<tabell>
+      | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<innholdskort>
     >;
@@ -1462,36 +1464,6 @@ Vis bare et spesfikt eksempel
 
     type token_ref = Sanity.Reference<token_kategori>;
 
-    type navigation_link = {
-      _type: "navigation_link";
-
-      /**
-       * Tittel - `String`
-       */
-      title?: string;
-
-      /**
-       * Link - `Reference`
-       */
-      link_ref?: Sanity.Reference<komponent_artikkel | ds_artikkel>;
-    };
-
-    type navigation_dropdown = {
-      _type: "navigation_dropdown";
-
-      /**
-       * Tittel - `String`
-       */
-      title?: string;
-
-      /**
-       * Meny - `Array`
-       */
-      dropdown?: Array<
-        Sanity.Keyed<navigation_link> | Sanity.Keyed<navigation_dropdown>
-      >;
-    };
-
     type ds_color = {
       _type: "ds_color";
 
@@ -1577,7 +1549,6 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
     type Document =
       | vk_frontpage
       | editor
-      | navigation
       | redirect
       | ds_color_categories
       | ds_tokens
@@ -1586,9 +1557,9 @@ Husk å legge denne til i menyen også, hvis ikke blir den bare tilgjengelig via
       | ds_props
       | ds_component_template
       | ds_frontpage
-      | ds_navigation
       | komponent_artikkel
       | ds_artikkel
+      | ds_navigation
       | aksel_artikkel
       | aksel_blogg
       | aksel_tema

@@ -13,5 +13,6 @@ export default {
     object.RelatertInnhold,
     object.Kode,
     object.SEOFields,
+    object.Tabell,
   ],
 };

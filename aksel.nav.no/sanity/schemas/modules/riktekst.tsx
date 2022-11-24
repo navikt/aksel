@@ -173,6 +173,7 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
     "accordion",
     "alert",
     "tabell",
+    "tabell_v2",
     "video",
   ];
 
