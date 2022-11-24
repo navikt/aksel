@@ -17,13 +17,9 @@ const TableComponent = ({
       <Table>
         <Table.Header>
           <Table.Row>
-            {node?.rows[0].cells?.map((cell) => (
-              <Table.HeaderCell
-                key={cell}
-                className="text-gray-800"
-                scope="col"
-              >
-                cell
+            {node?.rows[0].cells?.map((cell, y) => (
+              <Table.HeaderCell key={y} className="text-gray-800" scope="col">
+                {cell}
               </Table.HeaderCell>
             ))}
           </Table.Row>
@@ -31,8 +27,8 @@ const TableComponent = ({
         <Table.Body>
           {node?.rows?.slice?.(1)?.map((row) => (
             <Table.Row key={row?._key}>
-              {row?.cells?.map((cell) => (
-                <Table.DataCell key={cell}>{cell}</Table.DataCell>
+              {row?.cells?.map((cell, y) => (
+                <Table.DataCell key={y}>{cell}</Table.DataCell>
               ))}
             </Table.Row>
           ))}
