@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.2
+
+### Patch Changes
+
+- :bug: Fikset click-event for datepicker
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.2
+
 ## 2.0.1
 
 ### Patch Changes
