@@ -991,7 +991,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<do_dont>
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
-      | Sanity.Keyed<tabell>
       | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
     >;
@@ -1005,7 +1004,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<do_dont>
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
-      | Sanity.Keyed<tabell>
       | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<spesial_seksjon>
@@ -1020,7 +1018,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<do_dont>
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
-      | Sanity.Keyed<tabell>
       | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<props_seksjon>
@@ -1040,7 +1037,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       | Sanity.Keyed<do_dont>
       | Sanity.Keyed<accordion>
       | Sanity.Keyed<alert>
-      | Sanity.Keyed<tabell>
       | Sanity.Keyed<tabell_v2>
       | Sanity.Keyed<video>
       | Sanity.Keyed<innholdskort>
@@ -1268,21 +1264,6 @@ Ikke bruk lenker inne i selve kortet
        * Vurder noe annet: (optional) - `Array`
        */
       brukes_ikke_til?: Array<Sanity.Keyed<string>>;
-    };
-
-    type tabell = {
-      _type: "tabell";
-
-      /**
-       * Tittel (optional) - `String`
-Gi tabellen et navn for å lettere finne den
-       */
-      title?: string;
-
-      /**
-       * Tabell - `RegistryReference`
-       */
-      powerTable?: any;
     };
 
     type props_seksjon = {
