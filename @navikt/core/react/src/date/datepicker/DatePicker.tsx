@@ -107,6 +107,13 @@ export interface DatePickerDefaultProps
    * onOpenToggle callback for user-controlled state. Only called if `<DatePicker.Input />` is used
    */
   onOpenToggle?: () => void;
+  /**
+   * Avoid using if possible!
+   * Changes what CSS position property to use
+   * You want to use "fixed" if parent wrapper has position relative, but you want popover to escape
+   * @default "absolute"
+   */
+  strategy?: "absolute" | "fixed";
 }
 
 export type DatePickerProps = DatePickerDefaultProps & ConditionalModeProps;
@@ -134,6 +141,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
       open: _open,
       onClose,
       onOpenToggle,
+      strategy = "absolute",
       ...rest
     },
     ref
@@ -204,6 +212,7 @@ export const DatePicker = forwardRef<HTMLDivElement, DatePickerProps>(
               id={ariaId}
               role="dialog"
               ref={ref}
+              strategy={strategy}
             >
               <DayPicker
                 locale={getLocaleFromString(locale)}

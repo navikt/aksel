@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.3
+
+### Patch Changes
+
+- :sparkles: La til muligheten til å velge layout-strategi for datepicker-popover
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.3
+
 ## 2.0.2
 
 ### Patch Changes
