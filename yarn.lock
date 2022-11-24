@@ -2454,19 +2454,19 @@ __metadata:
   linkType: hard
 
 "@codemirror/autocomplete@npm:^6.0.0, @codemirror/autocomplete@npm:^6.1.0":
-  version: 6.3.3
-  resolution: "@codemirror/autocomplete@npm:6.3.3"
+  version: 6.3.4
+  resolution: "@codemirror/autocomplete@npm:6.3.4"
   dependencies:
     "@codemirror/language": ^6.0.0
     "@codemirror/state": ^6.0.0
-    "@codemirror/view": ^6.5.0
+    "@codemirror/view": ^6.6.0
     "@lezer/common": ^1.0.0
   peerDependencies:
     "@codemirror/language": ^6.0.0
     "@codemirror/state": ^6.0.0
     "@codemirror/view": ^6.0.0
     "@lezer/common": ^1.0.0
-  checksum: 90b2f7eb3b01a37dcb7213bd963b141633ce9d940fd94da156a5a8192aa84646bdd23bc07b4e530b069d01e688f371e39a6684c01fa552e36979df468338c3b6
+  checksum: dafb6b3dee11551ed7a2ec1d20fa05641abefe2e0b5da045d4a3383146bb04f0b9650448a378a5921cc183944d626482a608b71f3da5a036a881a873006b8dbf
   languageName: node
   linkType: hard
 
@@ -2552,14 +2552,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.1.1, @codemirror/view@npm:^6.5.0":
-  version: 6.5.1
-  resolution: "@codemirror/view@npm:6.5.1"
+"@codemirror/view@npm:^6.0.0, @codemirror/view@npm:^6.1.1, @codemirror/view@npm:^6.6.0":
+  version: 6.6.0
+  resolution: "@codemirror/view@npm:6.6.0"
   dependencies:
     "@codemirror/state": ^6.1.4
     style-mod: ^4.0.0
     w3c-keyname: ^2.2.4
-  checksum: 1bd66b4f174642c559a521b546e80a67556fdc1b7cc7d1c7baf1cac37fed83e0e63d7a9ff6a88f3991a82d11bbbcfcca6e7b3491dcdd536c4c114de142b0300d
+  checksum: 9b007eedcf13e94ec7d9c30ee302e1a1fcd382bef2481bd9afa3a116458652983e745b40494eb29d80df1dca8f99e91dcb1e4eba37670c2553ffc90bef0933e7
   languageName: node
   linkType: hard
 
@@ -3482,7 +3482,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ds-codemod@^2.0.2, @navikt/ds-codemod@workspace:@navikt/codemod":
+"@navikt/ds-codemod@^2.0.3, @navikt/ds-codemod@workspace:@navikt/codemod":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-codemod@workspace:@navikt/codemod"
   dependencies:
@@ -3509,7 +3509,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css-internal@^2.0.2, @navikt/ds-css-internal@workspace:@navikt/internal/css":
+"@navikt/ds-css-internal@^2.0.3, @navikt/ds-css-internal@workspace:@navikt/internal/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css-internal@workspace:@navikt/internal/css"
   dependencies:
@@ -3520,11 +3520,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-css@2.0.2, @navikt/ds-css@^2.0.2, @navikt/ds-css@workspace:@navikt/core/css":
+"@navikt/ds-css@2.0.3, @navikt/ds-css@^2.0.3, @navikt/ds-css@workspace:@navikt/core/css":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-css@workspace:@navikt/core/css"
   dependencies:
-    "@navikt/ds-tokens": ^2.0.2
+    "@navikt/ds-tokens": ^2.0.3
     normalize.css: ^8.0.1
     postcss: ^8.4.0
     postcss-cli: ^9.0.0
@@ -3533,7 +3533,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-icons@^2.0.2, @navikt/ds-icons@workspace:@navikt/icons":
+"@navikt/ds-icons@^2.0.3, @navikt/ds-icons@workspace:@navikt/icons":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-icons@workspace:@navikt/icons"
   dependencies:
@@ -3570,8 +3570,8 @@ __metadata:
     "@babel/preset-env": 7.19.4
     "@babel/preset-react": 7.18.6
     "@babel/preset-typescript": 7.18.6
-    "@navikt/ds-icons": ^2.0.2
-    "@navikt/ds-react": ^2.0.2
+    "@navikt/ds-icons": ^2.0.3
+    "@navikt/ds-react": ^2.0.3
     "@rollup/plugin-babel": 6.0.2
     "@rollup/plugin-commonjs": 23.0.2
     "@rollup/plugin-node-resolve": ^15.0.1
@@ -3597,12 +3597,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react-internal@^2.0.2, @navikt/ds-react-internal@workspace:@navikt/internal/react":
+"@navikt/ds-react-internal@^2.0.3, @navikt/ds-react-internal@workspace:@navikt/internal/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react-internal@workspace:@navikt/internal/react"
   dependencies:
-    "@navikt/ds-icons": ^2.0.2
-    "@navikt/ds-react": ^2.0.2
+    "@navikt/ds-icons": ^2.0.3
+    "@navikt/ds-react": ^2.0.3
     "@types/node": ^17.0.35
     clsx: ^1.1.1
     concurrently: 7.2.1
@@ -3619,12 +3619,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-react@2.0.2, @navikt/ds-react@^2.0.2, @navikt/ds-react@workspace:@navikt/core/react":
+"@navikt/ds-react@2.0.3, @navikt/ds-react@^2.0.3, @navikt/ds-react@workspace:@navikt/core/react":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-react@workspace:@navikt/core/react"
   dependencies:
     "@floating-ui/react-dom-interactions": 0.9.2
-    "@navikt/ds-icons": ^2.0.2
+    "@navikt/ds-icons": ^2.0.3
     "@radix-ui/react-tabs": 1.0.0
     "@radix-ui/react-toggle-group": 1.0.0
     "@testing-library/dom": 8.13.0
@@ -3661,11 +3661,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tailwind@^2.0.2, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
+"@navikt/ds-tailwind@^2.0.3, @navikt/ds-tailwind@workspace:@navikt/core/tailwind":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tailwind@workspace:@navikt/core/tailwind"
   dependencies:
-    "@navikt/ds-tokens": ^2.0.2
+    "@navikt/ds-tokens": ^2.0.3
     "@types/jest": ^29.0.0
     "@types/node": ^17.0.35
     color: 4.2.3
@@ -3677,7 +3677,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ds-tokens@^2.0.2, @navikt/ds-tokens@workspace:@navikt/core/tokens":
+"@navikt/ds-tokens@^2.0.3, @navikt/ds-tokens@workspace:@navikt/core/tokens":
   version: 0.0.0-use.local
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
@@ -3906,8 +3906,8 @@ __metadata:
   linkType: hard
 
 "@pmmmwh/react-refresh-webpack-plugin@npm:^0.5.3":
-  version: 0.5.9
-  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.9"
+  version: 0.5.10
+  resolution: "@pmmmwh/react-refresh-webpack-plugin@npm:0.5.10"
   dependencies:
     ansi-html-community: ^0.0.8
     common-path-prefix: ^3.0.0
@@ -3915,7 +3915,7 @@ __metadata:
     error-stack-parser: ^2.0.6
     find-up: ^5.0.0
     html-entities: ^2.1.0
-    loader-utils: ^2.0.3
+    loader-utils: ^2.0.4
     schema-utils: ^3.0.0
     source-map: ^0.7.3
   peerDependencies:
@@ -3940,7 +3940,7 @@ __metadata:
       optional: true
     webpack-plugin-serve:
       optional: true
-  checksum: 446c0add9ecf17ed9911bf310bf22ab64f4b3d0ce334e68a3fcac5efee782ef4d7b6260997efaf720c7a2ea39086db89629e4aa07fb18558387d8dc8f0f31da2
+  checksum: c45beded9c56fbbdc7213a2c36131ace5db360ed704d462cc39d6678f980173a91c9a3f691e6bd3a026f25486644cd0027e8a12a0a4eced8e8b886a0472e7d34
   languageName: node
   linkType: hard
 
@@ -3951,7 +3951,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@popperjs/core@npm:^2.10.2, @popperjs/core@npm:^2.11.5, @popperjs/core@npm:^2.5.4, @popperjs/core@npm:^2.9.2":
+"@popperjs/core@npm:^2.10.2, @popperjs/core@npm:^2.11.5, @popperjs/core@npm:^2.5.4":
   version: 2.11.6
   resolution: "@popperjs/core@npm:2.11.6"
   checksum: 47fb328cec1924559d759b48235c78574f2d71a8a6c4c03edb6de5d7074078371633b91e39bbf3f901b32aa8af9b9d8f82834856d2f5737a23475036b16817f0
@@ -4217,19 +4217,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reach/auto-id@npm:^0.15.3":
-  version: 0.15.3
-  resolution: "@reach/auto-id@npm:0.15.3"
-  dependencies:
-    "@reach/utils": 0.15.3
-    tslib: ^2.3.0
-  peerDependencies:
-    react: ^16.8.0 || 17.x
-    react-dom: ^16.8.0 || 17.x
-  checksum: 52f7915970f8de51b923274964bb18e61adf147845e2cb65ff93f17ebf4179f3cc743d6f791da64801447de5965b10e3a2c48c1debbcb5ab85bb1fd73a5fa61a
-  languageName: node
-  linkType: hard
-
 "@reach/auto-id@npm:^0.16.0":
   version: 0.16.0
   resolution: "@reach/auto-id@npm:0.16.0"
@@ -4261,19 +4248,6 @@ __metadata:
     react: ^16.8.0 || 17.x
     react-dom: ^16.8.0 || 17.x
   checksum: 63b4f505c53c1043c8566b6c4f648dc84d9e1c33876783c0a5a5c8e51a90dcabdda06df98d1532b657905b24d4590ca51db7f2fd39dc336842c7cf80dbbbc6e2
-  languageName: node
-  linkType: hard
-
-"@reach/utils@npm:0.15.3":
-  version: 0.15.3
-  resolution: "@reach/utils@npm:0.15.3"
-  dependencies:
-    tiny-warning: ^1.0.3
-    tslib: ^2.3.0
-  peerDependencies:
-    react: ^16.8.0 || 17.x
-    react-dom: ^16.8.0 || 17.x
-  checksum: 387f0ddc5375590ced9d6a90a84d39a30bd11b8d39eaff6cbb005415b44c011861c897111e7734562916172b2ec2114111d3f0952b5795faf43822bc44ae3f14
   languageName: node
   linkType: hard
 
@@ -4683,7 +4657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/color@npm:^2.1.11, @sanity/color@npm:^2.1.14, @sanity/color@npm:^2.1.4, @sanity/color@npm:^2.1.6":
+"@sanity/color@npm:^2.1.11, @sanity/color@npm:^2.1.14, @sanity/color@npm:^2.1.6":
   version: 2.1.20
   resolution: "@sanity/color@npm:2.1.20"
   checksum: 9b53fbf1004ac0eef79c9b2715e5c75945de0538dfdc901dc3cb99cb2a6db137ff0c14c2d1a43ac1c9c7ccee013305f0d299a23f47e0c4ad7cabee1dfb8d9802
@@ -5087,7 +5061,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/icons@npm:^1.1.4, @sanity/icons@npm:^1.2.2, @sanity/icons@npm:^1.2.8, @sanity/icons@npm:^1.3, @sanity/icons@npm:^1.3.1, @sanity/icons@npm:^1.3.4":
+"@sanity/icons@npm:^1.2.2, @sanity/icons@npm:^1.2.8, @sanity/icons@npm:^1.3, @sanity/icons@npm:^1.3.1, @sanity/icons@npm:^1.3.4":
   version: 1.3.10
   resolution: "@sanity/icons@npm:1.3.10"
   peerDependencies:
@@ -5595,28 +5569,6 @@ __metadata:
     react-is: ^18
     styled-components: ^5.2
   checksum: 8ef23669e40bc9442897176965784d5469ab093c4fa3838f18cf42b91770813e57fc5adea6f8f079769cefffd9444374745d996cfb59273c94b9e5c351dab36a
-  languageName: node
-  linkType: hard
-
-"@sanity/ui@npm:^0.34.1":
-  version: 0.34.8
-  resolution: "@sanity/ui@npm:0.34.8"
-  dependencies:
-    "@juggle/resize-observer": ^3.3.1
-    "@popperjs/core": ^2.9.2
-    "@reach/auto-id": ^0.15.3
-    "@sanity/color": ^2.1.4
-    "@sanity/icons": ^1.1.4
-    framer-motion: ^4.1.17
-    popper-max-size-modifier: ^0.2.0
-    react-is: ^17.0.2
-    react-popper: ^2.2.5
-    react-refractor: ^2.1.4
-  peerDependencies:
-    react: ^16.9 || ^17
-    react-dom: ^16.9 || ^17
-    styled-components: ^5.2
-  checksum: 45840033cd341b1b3a30c1e56a595819a9ec104fd44218dbba1565ffafe4ca96cfde9e9f35dbca08e88dddb4c4c6fae160e77fe53312fbb0c439ad9629422d55
   languageName: node
   linkType: hard
 
@@ -9242,14 +9194,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "aksel.nav.no@workspace:aksel.nav.no"
   dependencies:
-    "@navikt/ds-codemod": ^2.0.2
-    "@navikt/ds-css": ^2.0.2
-    "@navikt/ds-css-internal": ^2.0.2
-    "@navikt/ds-icons": ^2.0.2
-    "@navikt/ds-react": ^2.0.2
-    "@navikt/ds-react-internal": ^2.0.2
-    "@navikt/ds-tailwind": ^2.0.2
-    "@navikt/ds-tokens": ^2.0.2
+    "@navikt/ds-codemod": ^2.0.3
+    "@navikt/ds-css": ^2.0.3
+    "@navikt/ds-css-internal": ^2.0.3
+    "@navikt/ds-icons": ^2.0.3
+    "@navikt/ds-react": ^2.0.3
+    "@navikt/ds-react-internal": ^2.0.3
+    "@navikt/ds-tailwind": ^2.0.3
+    "@navikt/ds-tokens": ^2.0.3
     prettier-plugin-tailwindcss: ^0.1.13
   languageName: unknown
   linkType: soft
@@ -11702,9 +11654,9 @@ __metadata:
   linkType: hard
 
 "ci-info@npm:^3.1.0, ci-info@npm:^3.2.0":
-  version: 3.6.2
-  resolution: "ci-info@npm:3.6.2"
-  checksum: fd8fc172f925208d17ca8473e05e9e5709c796d31ee23fa0b53f418bc449c237e9c031a55c161102afb4e69ef34ce6f6a5d421886ce087478b222a5c7b9ae1f3
+  version: 3.7.0
+  resolution: "ci-info@npm:3.7.0"
+  checksum: 6e5df0250382ff3732703b36b958d2d892dd3c481f9671666f96c2ab7888be744bc4dca81395be958dcb828502d94f18fa9aa8901c5a3c9923cda212df02724c
   languageName: node
   linkType: hard
 
@@ -16689,26 +16641,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^4.1.17":
-  version: 4.1.17
-  resolution: "framer-motion@npm:4.1.17"
-  dependencies:
-    "@emotion/is-prop-valid": ^0.8.2
-    framesync: 5.3.0
-    hey-listen: ^1.0.8
-    popmotion: 9.3.6
-    style-value-types: 4.1.4
-    tslib: ^2.1.0
-  peerDependencies:
-    react: ">=16.8 || ^17.0.0"
-    react-dom: ">=16.8 || ^17.0.0"
-  dependenciesMeta:
-    "@emotion/is-prop-valid":
-      optional: true
-  checksum: f6b5fc8f189e6760353aa5b67515b6576ebaa164d8df73118780a09d1d4a162e54dfeb126a05c6a28727af88f4a80f8b94900ff9510be44dada6496a99273fde
-  languageName: node
-  linkType: hard
-
 "framer-motion@npm:^5.3.3":
   version: 5.6.0
   resolution: "framer-motion@npm:5.6.0"
@@ -16760,8 +16692,8 @@ __metadata:
   linkType: hard
 
 "framer-motion@npm:^7.5.3":
-  version: 7.6.10
-  resolution: "framer-motion@npm:7.6.10"
+  version: 7.6.12
+  resolution: "framer-motion@npm:7.6.12"
   dependencies:
     "@emotion/is-prop-valid": ^0.8.2
     "@motionone/dom": 10.13.1
@@ -16776,16 +16708,7 @@ __metadata:
   dependenciesMeta:
     "@emotion/is-prop-valid":
       optional: true
-  checksum: 02cb3954d21c6a997bac8c8e155900d41536dbb8d5064256098f9d16d2f12360d233aa578974a4a4e2ed252cddc8c044087b32f48478093b2324d9213adc8d79
-  languageName: node
-  linkType: hard
-
-"framesync@npm:5.3.0":
-  version: 5.3.0
-  resolution: "framesync@npm:5.3.0"
-  dependencies:
-    tslib: ^2.1.0
-  checksum: 9ebbb2863e6a1cfd2e9dd1b73af427d23caa03c92dd49ea767ebdd208c3a573bba4a1026f67068d856a21704f79adcdf2f750cc852ff73bc1f0e80edaaecded8
+  checksum: 928980cff35360bc962c74d7d2cf7e88ec5e4dd3303352f3f8b60097445c28c770dcf262a73ccf942ce5e409b534cb8874c03e284b770977eb88bd937c5b6831
   languageName: node
   linkType: hard
 
@@ -21050,7 +20973,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.3":
+"loader-utils@npm:^2.0.0, loader-utils@npm:^2.0.3, loader-utils@npm:^2.0.4":
   version: 2.0.4
   resolution: "loader-utils@npm:2.0.4"
   dependencies:
@@ -24263,18 +24186,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"popmotion@npm:9.3.6":
-  version: 9.3.6
-  resolution: "popmotion@npm:9.3.6"
-  dependencies:
-    framesync: 5.3.0
-    hey-listen: ^1.0.8
-    style-value-types: 4.1.4
-    tslib: ^2.1.0
-  checksum: 551446ec3763790efde7a3bb8c43189122f9b559985be2efa79842138257c4e331efcff606732a4bd5ac82d9bde1b236258d69a435f4bb5e9fc5908241b5ba3f
-  languageName: node
-  linkType: hard
-
 "popper-max-size-modifier@npm:^0.2.0":
   version: 0.2.0
   resolution: "popper-max-size-modifier@npm:0.2.0"
@@ -26605,15 +26516,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-icons@npm:^4.2.0":
-  version: 4.6.0
-  resolution: "react-icons@npm:4.6.0"
-  peerDependencies:
-    react: "*"
-  checksum: a08375d4563e381e156d826a8d551dd26c1bf7c424a79139173bf4c8df71e884badd7d4f5fe9faa0d73d18ace265bcc89891b65fd8f808812b1011b612ebbc53
-  languageName: node
-  linkType: hard
-
 "react-infinite-scroll-component@npm:^6.1.0":
   version: 6.1.0
   resolution: "react-infinite-scroll-component@npm:6.1.0"
@@ -26815,7 +26717,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-refractor@npm:^2.1.4, react-refractor@npm:^2.1.5, react-refractor@npm:^2.1.6, react-refractor@npm:^2.1.7":
+"react-refractor@npm:^2.1.5, react-refractor@npm:^2.1.6, react-refractor@npm:^2.1.7":
   version: 2.1.7
   resolution: "react-refractor@npm:2.1.7"
   dependencies:
@@ -26936,21 +26838,6 @@ __metadata:
     react: ^0.14.0 || ^15.0.0 || ^16.0.0
     react-dom: ^0.14.0 || ^15.0.0 || ^16.0.0
   checksum: 0e700baa10272a32b4281fafe5d1f86b82fa0af7d4f193e07bcc2764109b1682d3ecf8b917d8656e1fe04be944f0e597be74c9c93591340da044172283c9e130
-  languageName: node
-  linkType: hard
-
-"react-sortable-hoc@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "react-sortable-hoc@npm:2.0.0"
-  dependencies:
-    "@babel/runtime": ^7.2.0
-    invariant: ^2.2.4
-    prop-types: ^15.5.7
-  peerDependencies:
-    prop-types: ^15.5.7
-    react: ^16.3.0 || ^17.0.0
-    react-dom: ^16.3.0 || ^17.0.0
-  checksum: c4930856eb8e9be638220423d452ddaab834aa43ff76069eeb057c6a5f1d0538f9e43c17bedd34bfd2a66ff4aa1e289557821d792db73a42ebf061bd1c92a423
   languageName: node
   linkType: hard
 
@@ -28385,36 +28272,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-power-table@npm:^0.0.14":
-  version: 0.0.14
-  resolution: "sanity-plugin-power-table@npm:0.0.14"
-  dependencies:
-    "@sanity/ui": ^0.34.1
-    "@sanity/uuid": ^3.0.1
-    react-icons: ^4.2.0
-    react-sortable-hoc: ^2.0.0
-  peerDependencies:
-    react: ^17
-    react-dom: ^17
-    styled-components: ^5.3.0
-  checksum: 0a47840c19c4c8b9e22c1764700e806268611e358db17c743e49b125bcd2c88c7129cd4d9750fb39538c27df2e057c12905ccd5c91a6f3ec0af84c6e7bff921f
-  languageName: node
-  linkType: hard
-
-"sanity-plugin-table@npm:2.3.0":
-  version: 2.3.0
-  resolution: "sanity-plugin-table@npm:2.3.0"
-  peerDependencies:
-    "@sanity/icons": ^1.0.1
-    "@sanity/ui": ^0.33.10
-    "@sanity/uuid": ^3.0.1
-    react: ^17.0.1
-    react-dom: ^17.0.1
-    styled-components: ^5.2.1
-  checksum: a905aa08797fe8f869a687a14118a0d9b84876cd6ceea19847f37ffe53281fda99a0dc553747d3f2d3731fd5c96d3c9951aae069fb853778f87f68b2f3238421
-  languageName: node
-  linkType: hard
-
 "sanity-super-pane@npm:^1.0.0-alpha.11":
   version: 1.0.0-alpha.11
   resolution: "sanity-super-pane@npm:1.0.0-alpha.11"
@@ -28575,8 +28432,6 @@ __metadata:
     sanity-plugin-asset-source-unsplash: ^0.1.5
     sanity-plugin-dashboard-widget-document-list: ^0.0.13
     sanity-plugin-media: ^1.4.4
-    sanity-plugin-power-table: ^0.0.14
-    sanity-plugin-table: 2.3.0
     sanity-super-pane: ^1.0.0-alpha.11
     styled-components: ^5.3.1
   languageName: unknown
@@ -28899,8 +28754,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shadow-dom@workspace:examples/shadow-dom"
   dependencies:
-    "@navikt/ds-css": 2.0.2
-    "@navikt/ds-react": 2.0.2
+    "@navikt/ds-css": 2.0.3
+    "@navikt/ds-react": 2.0.3
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": ^2.1.0
@@ -30044,16 +29899,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"style-value-types@npm:4.1.4":
-  version: 4.1.4
-  resolution: "style-value-types@npm:4.1.4"
-  dependencies:
-    hey-listen: ^1.0.8
-    tslib: ^2.1.0
-  checksum: 96189770076a2717bf579f7d73a49953f0c3d633b90fed9b44b8285cbbe7facd19d6d7a0d2802fb493b45995791f62b87983c3d3c24128818a69e593b6d77aed
-  languageName: node
-  linkType: hard
-
 "style-value-types@npm:5.0.0":
   version: 5.0.0
   resolution: "style-value-types@npm:5.0.0"
@@ -30706,8 +30551,8 @@ __metadata:
   linkType: hard
 
 "terser@npm:^5.10.0, terser@npm:^5.14.1, terser@npm:^5.14.2, terser@npm:^5.3.4":
-  version: 5.15.1
-  resolution: "terser@npm:5.15.1"
+  version: 5.16.0
+  resolution: "terser@npm:5.16.0"
   dependencies:
     "@jridgewell/source-map": ^0.3.2
     acorn: ^8.5.0
@@ -30715,7 +30560,7 @@ __metadata:
     source-map-support: ~0.5.20
   bin:
     terser: bin/terser
-  checksum: 9880a1e0956983a1ce5de204ea35121c0009fa41d582a6904ae850e1953a1a2cc021168439565280c5a8eee67c85a874175627e24989b046c7a72589b81c3979
+  checksum: d035672bd28bd40ff80d83bea6bc6c85bddf41c18060e49c8b36a3aa45a0a6b4a59c6a56bdf52f9d3350587684d664f8ca26656c6084abeb951b85edf34e47ae
   languageName: node
   linkType: hard
 
