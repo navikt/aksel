@@ -13,7 +13,6 @@ export { default as PropsSeksjon } from "./sanity-modules/props/PropsSeksjon";
 export { default as PropTable } from "./sanity-modules/props/PropTabell";
 export { default as SideModul } from "./sanity-modules/SideModul";
 export { default as Tabell } from "./sanity-modules/Tabell";
-export { default as Tabellv2 } from "./sanity-modules/Tabellv2";
 export { default as TastaturModul } from "./sanity-modules/tastatur";
 export { default as Tips } from "./sanity-modules/tips";
 export { default as TokenTable } from "./sanity-modules/TokenTable";

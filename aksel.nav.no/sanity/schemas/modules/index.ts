@@ -19,7 +19,6 @@ import {
   RiktekstPrinsipp,
 } from "./riktekst";
 import SpesialSeksjon from "./spesial-seksjon";
-import Tabell, { TabellSchema } from "./tabell";
 import Tastatur from "./tastatur";
 import Tips from "./tips";
 import Video from "./video";
@@ -46,8 +45,6 @@ const v2Blocks = [
   RelatertInnhold,
   Innholdskort,
   introKomponent,
-  Tabell,
-  ...TabellSchema,
   Props,
   Accordion,
   SpesialSeksjon,

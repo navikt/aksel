@@ -35,7 +35,6 @@
     "sanity-plugin-asset-source-unsplash": "^0.1.5",
     "sanity-plugin-dashboard-widget-document-list": "^0.0.13",
     "sanity-plugin-media": "^1.4.4",
-    "sanity-plugin-power-table": "^0.0.14",
     "sanity-super-pane": "^1.0.0-alpha.11",
     "styled-components": "^5.3.1"
   },
