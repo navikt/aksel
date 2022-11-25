@@ -9,6 +9,11 @@ export default {
     document.Redirect,
     document.TestDoc,
 
+    /* Komponentsider */
+    document.KodeEksempelDoc,
+    document.Tokens,
+    document.Props,
+
     /* Objects */
     object.RelatertInnhold,
     object.Kode,
@@ -21,10 +26,10 @@ export default {
 
     /* Komponentsider */
     object.PropsSeksjon,
-    /* object.KodeEksempler, */
-    /* object.TastaturUU, */
-    /* object.TokenTabell, */
-    /* object.KomponentIntro, */
+    object.KodeEksempler,
+    object.TastaturUU,
+    object.TokenTabell,
+    object.KomponentIntro,
 
     /* Prinsipper */
     object.HeroBilde,

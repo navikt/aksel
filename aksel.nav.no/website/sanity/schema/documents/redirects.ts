@@ -10,7 +10,7 @@ const limits = [
 
 export const Redirect = defineType({
   name: "redirect",
-  title: "Redirect",
+  title: "Redirects",
   type: "document",
   fields: [
     defineField({

@@ -37,13 +37,12 @@ export const PropsSeksjon = defineType({
               name: "overridable",
               initialValue: false,
             },
-            //TODO: Uncommnet etter ds_props er lagt inn
-            /* {
+            {
               name: "propref",
               title: "Komponent referanse",
               type: "reference",
               to: [{ type: "ds_props" }],
-            }, */
+            },
           ],
         },
       ],

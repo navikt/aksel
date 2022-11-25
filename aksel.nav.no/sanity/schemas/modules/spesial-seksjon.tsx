@@ -28,13 +28,6 @@ export default {
       },
     },
     {
-      title: "Farge kategori",
-      type: "reference",
-      name: "farge_ref",
-      hidden: ({ parent }) => parent.modul !== "farge_kategori",
-      to: [{ type: "ds_color_categories" }],
-    },
-    {
       title: "Token kategori",
       type: "reference",
       name: "token_ref",

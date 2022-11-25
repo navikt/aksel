@@ -2,7 +2,7 @@ import { groups } from "./presets";
 import { defineField, defineType } from "sanity";
 
 export const Forside = defineType({
-  title: "Forside",
+  title: "Forside Aksel",
   name: "vk_frontpage",
   type: "document",
   groups,

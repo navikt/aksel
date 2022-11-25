@@ -1,5 +1,4 @@
 import { Ruler } from "@navikt/ds-icons";
-import React from "react";
 import { defineField, defineType } from "sanity";
 
 export const KodeEksempler = defineType({
@@ -25,7 +24,7 @@ export const KodeEksempler = defineType({
       },
     }),
   ],
-  icon: () => <Ruler />,
+  icon: Ruler,
   preview: {
     select: {
       dir: "dir.title",
@@ -34,7 +33,7 @@ export const KodeEksempler = defineType({
       return {
         title: "Komponent-demo",
         subtitle: dir ?? "",
-        media: () => <Ruler />,
+        media: Ruler,
       };
     },
   },
