@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Stack, Text, TextInput } from "@sanity/ui";
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import { set, StringInputProps, unset } from "sanity";
 
 export function StringInputSmall(props: StringInputProps) {
@@ -19,6 +19,7 @@ export function StringInputSmall(props: StringInputProps) {
       ),
     [onChange]
   );
+
   return (
     <Stack space={3}>
       <TextInput
