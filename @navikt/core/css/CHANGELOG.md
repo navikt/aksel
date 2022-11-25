@@ -1,5 +1,11 @@
 # @navikt/ds-css
 
+## 2.0.5
+
+### Patch Changes
+
+- Reverserte border-width endrind i button
+
 ## 2.0.4
 
 ## 2.0.3
