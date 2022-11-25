@@ -24,6 +24,9 @@ export default {
     object.DoDontBlock,
     object.Video,
 
+    /* Riktekst */
+    object.RiktekstKomponent,
+
     /* Komponentsider */
     object.PropsSeksjon,
     object.KodeEksempler,

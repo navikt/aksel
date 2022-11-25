@@ -15,5 +15,6 @@ export const TestDoc = defineType({
         input: StringInputSmall,
       },
     }),
+    defineField({ type: "riktekst_komponent", name: "content" }),
   ],
 });

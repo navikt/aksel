@@ -17,7 +17,7 @@ import {
   RiktekstKomponent,
   RiktekstPrinsipp,
   RiktekstTabell,
-} from "./riktekst";
+} from "./migrated/riktekst";
 import SpesialSeksjon from "./spesial-seksjon";
 import Tastatur from "./migrated/tastatur";
 import Tips from "./tips";

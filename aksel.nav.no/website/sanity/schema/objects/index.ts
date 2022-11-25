@@ -11,3 +11,4 @@ export * from "./shared/tabell";
 export * from "./shared/bilde";
 export * from "./shared/dodont";
 export * from "./shared/video";
+export * from "./shared/riktekst";
