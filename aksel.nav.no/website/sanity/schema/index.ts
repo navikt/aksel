@@ -24,10 +24,12 @@ export default {
     object.DoDontBlock,
     object.Video,
     object.Accordion,
+    object.Alert,
 
     /* Riktekst */
     object.RiktekstKomponent,
     object.RiktekstAksel,
+    object.RiktekstEnkel,
 
     /* Komponentsider */
     object.PropsSeksjon,

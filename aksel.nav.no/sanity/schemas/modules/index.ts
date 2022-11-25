@@ -1,5 +1,5 @@
 import Accordion from "./migrated/accordion";
-import Alert from "./alert";
+import Alert from "./migrated/alert";
 import Innholdskort from "./innholdskort";
 import Bilde from "./migrated/bilde";
 import DoDont, { doDontBlock } from "./migrated/do-dont";

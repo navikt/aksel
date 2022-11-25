@@ -13,3 +13,4 @@ export * from "./shared/riktekst";
 export * from "./shared/seo";
 export * from "./shared/tabell";
 export * from "./shared/video";
+export * from "./shared/alert";
