@@ -55,6 +55,7 @@ export const CopyToken = ({ val }: { val: string }) => {
           "bg-surface-action-selected text-md text-text-on-action flex h-7 w-full px-2 font-sans text-sm",
           { "animate-popup translate-y-[-100%]": copyTimer }
         )}
+        aria-hidden
       >
         <span
           className={cl("flex w-full items-center justify-center gap-1", {
