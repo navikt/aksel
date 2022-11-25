@@ -3,6 +3,7 @@ import { SanityT, urlFor } from "@/lib";
 import { Heading, Tag } from "@navikt/ds-react";
 import Nextlink from "next/link";
 import cl from "classnames";
+import Image from "next/image";
 
 const getStatus = (status?: SanityT.Schema.komponent_artikkel["status"]) => {
   switch (status?.tag) {
@@ -55,6 +56,14 @@ const ComponentOverview = ({
     })
     .sort((a, b) => a?.heading?.localeCompare(b?.heading));
 
+  {
+    /* <img
+      alt={x?.heading + " thumbnail"}
+      decoding="async"
+      src={urlFor(x.status?.bilde).auto("format").url()}
+      className="object-contain transition-transform"
+    /> */
+  }
   return (
     <div className="mb-8">
       <ul className="component-card-grid">
@@ -75,11 +84,14 @@ const ComponentOverview = ({
                 )}
               >
                 {x.status?.bilde ? (
-                  <img
-                    alt={x?.heading + " thumbnail"}
-                    decoding="async"
+                  <Image
                     src={urlFor(x.status?.bilde).auto("format").url()}
-                    className="object-contain transition-transform"
+                    decoding="async"
+                    width="320px"
+                    height="256px"
+                    layout="fixed"
+                    objectFit="contain"
+                    alt={x?.heading + " thumbnail"}
                   />
                 ) : (
                   <svg
