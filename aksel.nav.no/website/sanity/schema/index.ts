@@ -1,5 +1,5 @@
-import * as object from "./objects";
 import * as document from "./documents";
+import * as object from "./objects";
 
 export default {
   types: [
@@ -7,6 +7,7 @@ export default {
     document.Editors,
     document.Forside,
     document.Redirect,
+    document.TestDoc,
 
     /* Objects */
     object.RelatertInnhold,

@@ -5,7 +5,7 @@ import { set, StringInputProps, unset } from "sanity";
 export function StringInputSmall(props: StringInputProps) {
   const { onChange, value = "", elementProps } = props;
 
-  console.log(elementProps);
+  console.log(props);
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
       onChange(
@@ -15,7 +15,12 @@ export function StringInputSmall(props: StringInputProps) {
   );
   return (
     <Stack space={3}>
-      <TextInput {...elementProps} onChange={handleChange} value={value} />
+      <TextInput
+        {...elementProps}
+        onChange={handleChange}
+        value={value}
+        maxLength={60}
+      />
       <Text size={1}>{value?.length || 0} av 60 tegn brukt</Text>
     </Stack>
   );
