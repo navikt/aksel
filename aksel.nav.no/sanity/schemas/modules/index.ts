@@ -1,4 +1,4 @@
-import Accordion from "./accordion";
+import Accordion from "./migrated/accordion";
 import Alert from "./alert";
 import Innholdskort from "./innholdskort";
 import Bilde from "./migrated/bilde";

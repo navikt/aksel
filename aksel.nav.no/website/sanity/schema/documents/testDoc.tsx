@@ -20,6 +20,6 @@ export const TestDoc = defineType({
         maxLength: 10,
       },
     }),
-    defineField({ type: "riktekst_komponent", name: "content" }),
+    defineField({ type: "riktekst_aksel", name: "content" }),
   ],
 });

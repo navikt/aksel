@@ -23,9 +23,11 @@ export default {
     object.DoDont,
     object.DoDontBlock,
     object.Video,
+    object.Accordion,
 
     /* Riktekst */
     object.RiktekstKomponent,
+    object.RiktekstAksel,
 
     /* Komponentsider */
     object.PropsSeksjon,

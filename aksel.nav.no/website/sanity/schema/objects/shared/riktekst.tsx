@@ -42,7 +42,6 @@ export const block = {
         },
       },
     ],
-    // Annotations can be any object structure – e.g. a link or a footnote.
     annotations: [
       {
         title: "Link til sanity-side",
@@ -80,7 +79,7 @@ export const block = {
             type: "url",
             validation: (Rule) =>
               Rule.uri({
-                scheme: ["https", "mailto", "tel"],
+                scheme: ["https", "mailto"],
               }),
           },
         ],
@@ -108,31 +107,33 @@ export const headingStyles = [
 const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
   const fields: string[] = [];
   const standard = [
-    "relatert_innhold",
+    /* "relatert_innhold",
     "bilde",
     "kode",
     "tips",
-    "do_dont",
+    "do_dont", */
     "accordion",
-    "alert",
+    /* "alert",
     "tabell_v2",
-    "video",
+    "video", */
   ];
 
-  const comp = [
-    "props_seksjon",
+  const komponent = [
+    /* "props_seksjon",
     "tastatur_modul",
     "kode_eksempler",
-    "token_ref",
+    "token_ref", */
   ];
 
-  const ds_artikkel = ["spesial_seksjon"];
+  const ds_artikkel = [
+    /* "spesial_seksjon" */
+  ];
 
   fields.push(...standard);
 
   switch (type) {
     case "komponent":
-      fields.push(...comp);
+      fields.push(...komponent);
       break;
     case "ds":
       fields.push(...ds_artikkel);
@@ -151,7 +152,7 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
       ...block,
       styles: [...headingStyles],
     },
-    /* ...uniq.map((x) => ({ type: x })), */
+    ...uniq.map((x) => ({ type: x })),
   ];
 };
 
