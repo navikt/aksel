@@ -20,10 +20,10 @@ export default {
 
     /* Komponentsider */
     object.PropsSeksjon,
-    object.KomponentIntro,
-    object.KodeEksempler,
-    object.TastaturUU,
-    object.TokenTabell,
+    /* object.KodeEksempler, */
+    /* object.TastaturUU, */
+    /* object.TokenTabell, */
+    /* object.KomponentIntro, */
 
     /* Prinsipper */
     object.HeroBilde,
