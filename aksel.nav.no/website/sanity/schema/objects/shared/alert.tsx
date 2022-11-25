@@ -1,7 +1,5 @@
 import { Warning } from "@navikt/ds-icons";
-import React from "react";
 import { defineField, defineType } from "sanity";
-import { Alert as DsAlert } from "@navikt/ds-react";
 import { toPlainText } from "../../../util";
 
 export const Alert = defineType({

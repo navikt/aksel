@@ -25,6 +25,7 @@ export default {
     object.Video,
     object.Accordion,
     object.Alert,
+    object.Tips,
 
     /* Riktekst */
     object.RiktekstKomponent,

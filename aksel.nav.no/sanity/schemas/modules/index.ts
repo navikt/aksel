@@ -20,7 +20,7 @@ import {
 } from "./migrated/riktekst";
 import SpesialSeksjon from "./spesial-seksjon";
 import Tastatur from "./migrated/tastatur";
-import Tips from "./tips";
+import Tips from "./migrated/tips";
 import TokenRef from "./migrated/token-tabell";
 import Video from "./migrated/video";
 

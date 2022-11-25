@@ -2,7 +2,6 @@ export const toPlainText = (blocks) => {
   if (!blocks || blocks.length === 0) {
     return "";
   }
-  console.log(blocks);
 
   return blocks
     .map((block) => {
