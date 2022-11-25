@@ -7,13 +7,30 @@ import React, { useCallback, useEffect, useState } from "react";
 import Filter, { FilterT } from "./Filter";
 import { categorizeIcons, CategoryT, IconMetaT } from "./iconCategories";
 
+const SkeletonElement = () => (
+  <div className="vk-icon_button bg-surface-subtle h-32 w-48 shrink rounded" />
+);
+
+const ModalPlaceholder = () => (
+  <div className="min-h-96 w-[600px] max-w-[90%]" />
+);
+
 const IconView = dynamic(() => import("./IconView"), {
-  loading: () => <div className="min-h-screen w-full" />,
+  loading: () => (
+    <div className="min-h-screen w-full pt-8">
+      <div className="bg-surface-subtle mb-3 h-5 w-48 rounded-full" />
+      <div className="grid content-start justify-start gap-x-4 gap-y-6 pb-8 [grid-template-columns:repeat(auto-fit,12rem)]">
+        {[...Array(24)].map((_, y) => (
+          <SkeletonElement key={y} />
+        ))}
+      </div>
+    </div>
+  ),
   ssr: false,
 });
 
 const ModalContent = dynamic(() => import("./ModalContent"), {
-  loading: () => <div className="min-h-[90vw] w-[600px] max-w-[90%]" />,
+  loading: () => <ModalPlaceholder />,
   ssr: false,
 });
 
@@ -150,7 +167,11 @@ const IconSearch = () => {
       </BodyLong>
       <Modal open={open} onClose={() => handleClose()}>
         <Modal.Content>
-          {selectedIcon && <ModalContent icon={selectedIcon} />}
+          {selectedIcon ? (
+            <ModalContent icon={selectedIcon} />
+          ) : (
+            <ModalPlaceholder />
+          )}
         </Modal.Content>
       </Modal>
     </div>
