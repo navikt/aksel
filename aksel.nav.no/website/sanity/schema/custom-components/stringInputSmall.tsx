@@ -1,11 +1,17 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { Stack, Text, TextInput } from "@sanity/ui";
 import { useCallback } from "react";
 import { set, StringInputProps, unset } from "sanity";
 
 export function StringInputSmall(props: StringInputProps) {
-  const { onChange, value = "", elementProps } = props;
+  const { onChange, value = "", elementProps, schemaType } = props;
 
-  console.log(props);
+  //@ts-ignore
+  const maxLength = schemaType?.options?.maxLength
+    ? //@ts-ignore
+      schemaType?.options?.maxLength
+    : 60;
+
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
       onChange(
@@ -19,9 +25,12 @@ export function StringInputSmall(props: StringInputProps) {
         {...elementProps}
         onChange={handleChange}
         value={value}
-        maxLength={60}
+        maxLength={maxLength}
+        size={1}
       />
-      <Text size={1}>{value?.length || 0} av 60 tegn brukt</Text>
+      <Text size={1}>
+        {value?.length || 0} av {maxLength} tegn brukt
+      </Text>
     </Stack>
   );
 }

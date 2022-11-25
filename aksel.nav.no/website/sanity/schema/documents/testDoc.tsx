@@ -14,6 +14,11 @@ export const TestDoc = defineType({
       components: {
         input: StringInputSmall,
       },
+      options: {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        maxLength: 10,
+      },
     }),
     defineField({ type: "riktekst_komponent", name: "content" }),
   ],
