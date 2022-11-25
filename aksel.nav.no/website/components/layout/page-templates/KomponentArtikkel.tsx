@@ -133,8 +133,9 @@ const KomponentArtikkelTemplate = ({
                 </Heading>
                 <BodyLong className="override-text-no-max mb-2">
                   Komponenten er under utvikling. Dette kan medføre
-                  breaking-changes i patch/minor versjon av kodepakker. Vær
-                  forsiktig ved bruk og unngå production om mulig.
+                  breaking-changes i patch/minor versjon av kodepakker. Teamet
+                  ditt må selv ta stilling til om dere ønsker å bruke denne i
+                  produksjon.
                 </BodyLong>
                 <BodyLong className="override-text-no-max">
                   Har du innspill eller funnet en bug? Send oss en melding her
