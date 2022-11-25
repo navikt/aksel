@@ -56,14 +56,6 @@ const ComponentOverview = ({
     })
     .sort((a, b) => a?.heading?.localeCompare(b?.heading));
 
-  {
-    /* <img
-      alt={x?.heading + " thumbnail"}
-      decoding="async"
-      src={urlFor(x.status?.bilde).auto("format").url()}
-      className="object-contain transition-transform"
-    /> */
-  }
   return (
     <div className="mb-8">
       <ul className="component-card-grid">
