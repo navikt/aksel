@@ -107,28 +107,25 @@ export const headingStyles = [
 const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
   const fields: string[] = [];
   const standard = [
-    /* "relatert_innhold",
+    "relatert_innhold",
     "bilde",
     "kode",
     "tips",
-    "do_dont", */
+    "do_dont",
     "alert",
     "accordion",
-    /*
     "tabell_v2",
-    "video", */
+    "video",
   ];
 
   const komponent = [
-    /* "props_seksjon",
+    "props_seksjon",
     "tastatur_modul",
     "kode_eksempler",
-    "token_ref", */
+    "token_ref",
   ];
 
-  const ds_artikkel = [
-    /* "spesial_seksjon" */
-  ];
+  const ds_artikkel = ["spesial_seksjon"];
 
   fields.push(...standard);
 

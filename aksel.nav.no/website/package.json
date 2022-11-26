@@ -53,7 +53,7 @@
     "react-dom": "^18.0.0",
     "react-instantsearch-hooks-web": "^6.26.0",
     "react-modal": "3.15.1",
-    "sanity": "dev-preview",
+    "sanity": "3.0.0-rc.3",
     "sanity-plugin-asset-source-unsplash": "^1.0.0",
     "sanity-plugin-media": "studio-v3",
     "sitemap": "^7.0.0",

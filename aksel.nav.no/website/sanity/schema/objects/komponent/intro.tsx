@@ -7,14 +7,13 @@ export const KomponentIntro = defineType({
   name: "intro_komponent",
   type: "object",
   fields: [
-    // TODO: Fiks når riktekst er på plass
-    /* defineField({
+    defineField({
       title: "Intro-tekst",
       name: "body",
       type: "riktekst_enkel",
       validation: (Rule) =>
         Rule.required().error("Komponentintro må ha en intro"),
-    }), */
+    }),
     defineField({
       type: "array",
       name: "brukes_til",

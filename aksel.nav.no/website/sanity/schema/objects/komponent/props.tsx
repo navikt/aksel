@@ -20,7 +20,7 @@ export const PropsSeksjon = defineType({
       type: "array",
       name: "komponenter",
       of: [
-        {
+        defineField({
           title: "Komponent",
           type: "object",
           name: "komponent",
@@ -44,7 +44,7 @@ export const PropsSeksjon = defineType({
               to: [{ type: "ds_props" }],
             },
           ],
-        },
+        }),
       ],
     }),
   ],

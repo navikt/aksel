@@ -13,12 +13,12 @@ export const Forside = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
-    /* defineField({
+    defineField({
       title: "Beskrivelse",
       name: "beskrivelse",
       type: "riktekst_enkel",
       validation: (Rule) => Rule.required(),
-    }), */
+    }),
     defineField({
       title: "Brukeropplevelse",
       name: "prinsipp_1",
