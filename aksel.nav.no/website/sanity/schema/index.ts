@@ -26,6 +26,7 @@ export default {
     object.Accordion,
     object.Alert,
     object.Tips,
+    object.UnikSidemodul,
 
     /* Riktekst */
     object.RiktekstKomponent,

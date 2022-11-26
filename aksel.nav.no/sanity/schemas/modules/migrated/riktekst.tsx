@@ -5,7 +5,7 @@ import { BodyLong, Heading } from "@navikt/ds-react/cjs";
 import { KBD } from "@sanity/ui";
 import React from "react";
 import styled from "styled-components";
-import { allDocumentTypes } from "../../config";
+import { allDocumentTypes } from "../../../config";
 
 export const TitleRenderer = (props, size, level) => (
   <Heading size={size} level={level}>

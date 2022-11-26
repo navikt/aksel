@@ -15,3 +15,4 @@ export * from "./shared/tabell";
 export * from "./shared/video";
 export * from "./shared/alert";
 export * from "./shared/tips";
+export * from "./shared/unik-sidemodul";

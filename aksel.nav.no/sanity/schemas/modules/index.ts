@@ -18,7 +18,7 @@ import {
   RiktekstPrinsipp,
   RiktekstTabell,
 } from "./migrated/riktekst";
-import SpesialSeksjon from "./spesial-seksjon";
+import SpesialSeksjon from "./migrated/spesial-seksjon";
 import Tastatur from "./migrated/tastatur";
 import Tips from "./migrated/tips";
 import TokenRef from "./migrated/token-tabell";
