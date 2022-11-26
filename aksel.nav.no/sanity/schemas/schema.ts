@@ -9,6 +9,9 @@ import redirect from "./documents/migrated/redirects";
 import KodeEksempler from "./documents/migrated/kode-eksempler";
 import Tokens from "./documents/migrated/tokens";
 import Props from "./documents/migrated/props";
+import DsFrontpage from "./documents/migrated/ds-frontpage";
+import DsCompTemplate from "./documents/migrated/component-template";
+import Navigation, { ds_header_heading } from "./documents/migrated/navigation";
 
 import * as Designsystem from "./documents/designsystem";
 import * as Aksel from "./documents/aksel";
@@ -21,16 +24,16 @@ export default createSchema({
     frontpage,
     editors,
     redirect,
+    Navigation,
+    ds_header_heading,
 
     KodeEksempler,
     Tokens,
     Props,
-    Designsystem.ComponentTemplate,
-    Designsystem.Frontpage,
+    DsFrontpage,
+    DsCompTemplate,
     Designsystem.KomponentArtikkel,
     Designsystem.Artikkel,
-    Designsystem.Navigation,
-    Designsystem.ds_header_heading,
 
     Aksel.Artikkel,
     Aksel.Blogg,
