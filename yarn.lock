@@ -3540,7 +3540,6 @@ __metadata:
     "@svgr/cli": 6.2.1
     "@types/jest": ^29.0.0
     "@types/lodash.startcase": ^4.4.6
-    "@types/node": ^17.0.35
     "@types/rimraf": 3.0.2
     axios: ^0.21.3
     concurrently: 7.2.1
@@ -3576,7 +3575,6 @@ __metadata:
     "@rollup/plugin-commonjs": 23.0.2
     "@rollup/plugin-node-resolve": ^15.0.1
     "@svgr/cli": 6.2.1
-    "@types/node": ^17.0.35
     clsx: ^1.1.1
     concurrently: 7.2.1
     copyfiles: 2.4.1
@@ -3603,7 +3601,6 @@ __metadata:
   dependencies:
     "@navikt/ds-icons": ^2.0.5
     "@navikt/ds-react": ^2.0.5
-    "@types/node": ^17.0.35
     clsx: ^1.1.1
     concurrently: 7.2.1
     copy-to-clipboard: ^3.3.1
@@ -3633,7 +3630,6 @@ __metadata:
     "@testing-library/user-event": ^14.2.0
     "@types/faker": 5.5.8
     "@types/jest": ^29.0.0
-    "@types/node": ^17.0.35
     "@types/react-modal": ^3.13.1
     clsx: ^1.2.1
     concurrently: 7.2.1
@@ -3667,7 +3663,6 @@ __metadata:
   dependencies:
     "@navikt/ds-tokens": ^2.0.5
     "@types/jest": ^29.0.0
-    "@types/node": ^17.0.35
     color: 4.2.3
     jest: ^29.0.0
     lodash: ^4.17.21
@@ -3682,7 +3677,6 @@ __metadata:
   resolution: "@navikt/ds-tokens@workspace:@navikt/core/tokens"
   dependencies:
     "@types/jest": ^29.0.0
-    "@types/node": ^17.0.35
     color: 4.2.3
     jest: ^29.0.0
     lodash: ^4.17.21
@@ -7948,7 +7942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^17.0.35, @types/node@npm:^17.0.5":
+"@types/node@npm:^17.0.5":
   version: 17.0.45
   resolution: "@types/node@npm:17.0.45"
   checksum: aa04366b9103b7d6cfd6b2ef64182e0eaa7d4462c3f817618486ea0422984c51fc69fd0d436eae6c9e696ddfdbec9ccaa27a917f7c2e8c75c5d57827fe3d95e8
@@ -32538,7 +32532,6 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^13.3.0
     "@types/jest": ^29.0.0
-    "@types/node": ^17.0.35
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     algoliasearch: 4.12.2

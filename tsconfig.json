@@ -5,8 +5,7 @@
     "esModuleInterop": true,
     "target": "es6",
     "moduleResolution": "node",
-    "incremental": true,
-    "skipLibCheck": true
+    "incremental": true
   },
   "exclude": [
     "**/stories",

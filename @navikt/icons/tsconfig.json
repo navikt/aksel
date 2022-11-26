@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./cjs",
-    "module": "commonjs",
-    "skipLibCheck": true
+    "module": "commonjs"
   },
   "exclude": ["./figma", "./util", "./tests", "./scripts", "**/*.stories.*"],
   "include": ["./src"]

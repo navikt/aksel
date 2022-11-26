@@ -7,7 +7,6 @@
     "downlevelIteration": true,
     "preserveWatchOutput": true,
     "declaration": false,
-    "skipLibCheck": true,
     "types": ["@types/jscodeshift", "node", "jest"]
   },
   "include": ["**/*.ts"],
