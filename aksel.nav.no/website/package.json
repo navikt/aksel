@@ -30,7 +30,7 @@
     "@sanity/image-url": "1.0.1",
     "@sanity/preview-kit": "^1.2.8",
     "@sanity/table": "1.0.0",
-    "@sanity/vision": "dev-preview",
+    "@sanity/vision": "3.0.0-rc.3",
     "@svgr/webpack": "^5.5.0",
     "algoliasearch": "4.12.2",
     "amplitude-js": "^8.8.0",
@@ -55,7 +55,7 @@
     "react-modal": "3.15.1",
     "sanity": "3.0.0-rc.3",
     "sanity-plugin-asset-source-unsplash": "^1.0.0",
-    "sanity-plugin-media": "studio-v3",
+    "sanity-plugin-media": "^2.0.2",
     "sitemap": "^7.0.0",
     "tailwindcss": "^3.2.0",
     "validator": "^13.7.0"

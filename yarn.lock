@@ -5712,36 +5712,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/vision@npm:^2.35.0":
-  version: 2.35.2
-  resolution: "@sanity/vision@npm:2.35.2"
-  dependencies:
-    "@juggle/resize-observer": ^3.3.1
-    "@sanity/icons": ^1.3.4
-    "@sanity/ui": ^0.37.22
-    classnames: ^2.2.5
-    codemirror: ^5.47.0
-    is-hotkey: ^0.1.6
-    json5: ^1.0.1
-    lodash: ^4.17.15
-    query-string: ^4.3.2
-    react-codemirror2: ^6.0.0
-    react-json-view: ^1.21.3
-    react-spinner: ^0.2.6
-    react-split-pane: ^0.1.84
-  peerDependencies:
-    "@sanity/base": ^2.21.0
-    prop-types: ^15.6 || ^16
-    react: ^16.9 || ^17
-    react-dom: ^16.9 || ^17
-    styled-components: ^5.2.0
-  checksum: 52273c9613aafe69da07020c1ef6712f3af22861cd2f4426cbe5fd5faf6982130d2b121e6aac99eef518a0bfb40ad76229dd3900a49bfd151df75e49216a3ba6
-  languageName: node
-  linkType: hard
-
-"@sanity/vision@npm:dev-preview":
-  version: 3.0.0
-  resolution: "@sanity/vision@npm:3.0.0"
+"@sanity/vision@npm:3.0.0-rc.3":
+  version: 3.0.0-rc.3
+  resolution: "@sanity/vision@npm:3.0.0-rc.3"
   dependencies:
     "@codemirror/autocomplete": ^6.1.0
     "@codemirror/commands": ^6.0.1
@@ -5766,7 +5739,34 @@ __metadata:
     react: ^18
     rxjs: ^6.5.3
     styled-components: ^5.2
-  checksum: 29e4780bfb3e877c87415411088c6885956bcce719bd302c307d72dfae99c45facf48c1dde74820ea0ccc32aadd80b6d38e89ea94a710526e6226c224502153e
+  checksum: f3c67889d6a92ed6b7b1426832c3bbc50d42f243e31b0b9927e4fdb23206a50dc6dfd2cd2918f5e1bcf539fbb7f98fc3482bbddd288bdea491ad8035a3bf1fe1
+  languageName: node
+  linkType: hard
+
+"@sanity/vision@npm:^2.35.0":
+  version: 2.35.2
+  resolution: "@sanity/vision@npm:2.35.2"
+  dependencies:
+    "@juggle/resize-observer": ^3.3.1
+    "@sanity/icons": ^1.3.4
+    "@sanity/ui": ^0.37.22
+    classnames: ^2.2.5
+    codemirror: ^5.47.0
+    is-hotkey: ^0.1.6
+    json5: ^1.0.1
+    lodash: ^4.17.15
+    query-string: ^4.3.2
+    react-codemirror2: ^6.0.0
+    react-json-view: ^1.21.3
+    react-spinner: ^0.2.6
+    react-split-pane: ^0.1.84
+  peerDependencies:
+    "@sanity/base": ^2.21.0
+    prop-types: ^15.6 || ^16
+    react: ^16.9 || ^17
+    react-dom: ^16.9 || ^17
+    styled-components: ^5.2.0
+  checksum: 52273c9613aafe69da07020c1ef6712f3af22861cd2f4426cbe5fd5faf6982130d2b121e6aac99eef518a0bfb40ad76229dd3900a49bfd151df75e49216a3ba6
   languageName: node
   linkType: hard
 
@@ -28257,14 +28257,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sanity-plugin-media@npm:studio-v3":
-  version: 2.0.0-v3-studio.3
-  resolution: "sanity-plugin-media@npm:2.0.0-v3-studio.3"
+"sanity-plugin-media@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "sanity-plugin-media@npm:2.0.2"
   dependencies:
     "@hookform/resolvers": 2.0.0-beta.3
     "@reduxjs/toolkit": ^1.9.0
     "@sanity/incompatible-plugin": ^1.0.4
-    "@sanity/ui": 1.0.0-beta.32
+    "@sanity/ui": ^1.0.0
     "@tanem/react-nprogress": ^5.0.0
     copy-to-clipboard: ^3.3.1
     date-fns: ^2.27.0
@@ -28284,13 +28284,13 @@ __metadata:
     rxjs: ^6.5.3
     yup: ^0.32.11
   peerDependencies:
-    "@sanity/color": ^2.1.8
-    "@sanity/icons": ^1.2.8
+    "@sanity/color": ^2.1.20
+    "@sanity/icons": ^2.0.0
     react: ^18
     react-dom: ^18
-    sanity: "*"
+    sanity: ^3.0.0
     styled-components: ^5.3.3
-  checksum: f0f3f6d875b78bb3253123ea0492641ec36fb198ea6422fb044fc604982137a8540527c902b7dc762b0aac3002eeeb886c054d233b50af6a60453068a1f0692e
+  checksum: f578d93fa60f65edae542a92549a1e22fc75923cef1d7015acffa9eaba20b6d5b0c04e4d9b8414ff064223e34a4c8f229b44f173b450a9411748f6013b999336
   languageName: node
   linkType: hard
 
@@ -32527,7 +32527,7 @@ __metadata:
     "@sanity/image-url": 1.0.1
     "@sanity/preview-kit": ^1.2.8
     "@sanity/table": 1.0.0
-    "@sanity/vision": dev-preview
+    "@sanity/vision": 3.0.0-rc.3
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.16.0
     "@testing-library/react": ^13.3.0
@@ -32571,7 +32571,7 @@ __metadata:
     sanity: 3.0.0-rc.3
     sanity-codegen: 0.9.8
     sanity-plugin-asset-source-unsplash: ^1.0.0
-    sanity-plugin-media: studio-v3
+    sanity-plugin-media: ^2.0.2
     sitemap: ^7.0.0
     start-server-and-test: ^1.14.0
     tailwindcss: ^3.2.0
