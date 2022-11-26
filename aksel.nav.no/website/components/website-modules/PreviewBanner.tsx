@@ -4,7 +4,6 @@
 import { useCurrentUser } from "@/lib";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
 import { useRouter } from "next/router";
-import * as React from "react";
 
 function PreviewBanner(): JSX.Element {
   const { asPath } = useRouter();

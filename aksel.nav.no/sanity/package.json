@@ -29,6 +29,7 @@
     "@sanity/export": "^2.30.3",
     "@sanity/production-preview": "^2.29.3",
     "@sanity/react-hooks": "^2.35.0",
+    "@sanity/ui": "^0.37.22",
     "@sanity/vision": "^2.35.0",
     "moment": "2.29.4",
     "sanity-codegen": "0.9.8",

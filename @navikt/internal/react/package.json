@@ -41,7 +41,6 @@
     "copy-to-clipboard": "^3.3.1"
   },
   "devDependencies": {
-    "@types/node": "^17.0.35",
     "concurrently": "7.2.1",
     "rimraf": "^3.0.2",
     "ts-node": "10.9.0",

@@ -122,8 +122,9 @@ function Search({
               noResultsScreen: {
                 noResultsText: "Ingen resultater for",
                 suggestedQueryText: "Prøv disse søkene",
-                openIssueText: "Bør søket gi et resultat?",
-                openIssueLinkText: "Send oss en melding, så fikser vi",
+                reportMissingResultsText: "Bør søket gi et resultat?",
+                reportMissingResultsLinkText:
+                  "Send oss en melding, så fikser vi",
               },
             }}
             appId="J64I2SIG7K"

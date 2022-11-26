@@ -1,25 +1,26 @@
 import { List } from "@navikt/ds-icons";
 import React from "react";
+import { defineType, defineField } from "sanity";
 
-export default {
+export const PropsSeksjon = defineType({
   title: "Props",
   name: "props_seksjon",
   type: "object",
   icon: List,
   fields: [
-    {
+    defineField({
       title: "Tittel (h2)",
       name: "title",
       type: "string",
       initialValue: "Props",
       readOnly: true,
-    },
-    {
+    }),
+    defineField({
       title: "Props",
       type: "array",
       name: "komponenter",
       of: [
-        {
+        defineField({
           title: "Komponent",
           type: "object",
           name: "komponent",
@@ -43,9 +44,9 @@ export default {
               to: [{ type: "ds_props" }],
             },
           ],
-        },
+        }),
       ],
-    },
+    }),
   ],
   preview: {
     prepare() {
@@ -55,4 +56,4 @@ export default {
       };
     },
   },
-};
+});

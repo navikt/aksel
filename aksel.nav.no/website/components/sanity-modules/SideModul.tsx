@@ -12,12 +12,7 @@ const IconSearch = dynamic(() => import("./icon-search"), {
 type SpesialT = {
   _key: string;
   _type: "spesial_seksjon";
-  modul?:
-    | "farge_kategori"
-    | "ikonsok"
-    | "endringslogg"
-    | "komponentoversikt"
-    | "token_kategori";
+  modul?: "ikonsok" | "komponentoversikt" | "token_kategori";
   logs?: any[];
   komponenter?: any;
   farge?: any;
@@ -31,8 +26,6 @@ const SideModul = ({ node }: { node: SpesialT }): JSX.Element => {
 
   const GetModule = () => {
     switch (node.modul) {
-      case "farge_kategori":
-        return null;
       case "komponentoversikt":
         return <ComponentOverview node={node.komponenter} />;
       case "ikonsok":

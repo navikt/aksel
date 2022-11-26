@@ -1,3 +1,5 @@
+// Usikker på om skal være med videre
+
 import { FileContent } from "@navikt/ds-icons";
 import React from "react";
 

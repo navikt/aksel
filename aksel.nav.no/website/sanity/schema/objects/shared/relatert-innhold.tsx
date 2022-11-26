@@ -1,14 +1,15 @@
-import { allDocumentTypes } from "../../config";
+import { allArticleDocsRef } from "../../../config";
 import { Link } from "@navikt/ds-icons";
 import React from "react";
+import { defineType, defineField } from "sanity";
 
-export default {
+export const RelatertInnhold = defineType({
   name: "relatert_innhold",
   title: "Relatert Innhold",
   type: "object",
   icon: Link,
   fields: [
-    {
+    defineField({
       title: "Lenker til innhold",
       name: "lenker",
       type: "array",
@@ -20,7 +21,7 @@ export default {
           name: "lenke",
           type: "object",
           fields: [
-            {
+            defineField({
               title: "Tittel",
               name: "title",
               type: "string",
@@ -28,31 +29,32 @@ export default {
                 Rule.required()
                   .max(40)
                   .error("Tittelen kan være på maks 35 tegn"),
-            },
-            {
+            }),
+            defineField({
               title: "Intern side i Sanity",
               name: "intern",
               type: "boolean",
-              option: {
+              options: {
                 layout: "checkbox",
               },
               validation: (Rule) => Rule.required(),
               initialValue: false,
-            },
-            {
+            }),
+            // TODO: allArticleDocsRef fungerer bare med dokument-typer som finnes i schema
+            /* defineField({
               title: "Lenke til Intern sanity-side",
               name: "intern_lenke",
               type: "reference",
-              to: [...allDocumentTypes.map((x) => ({ type: x }))],
+              to: [...allArticleDocsRef],
               hidden: ({ parent }) => !parent?.intern,
-            },
-            {
+            }), */
+            defineField({
               title: "Lenke til ekstern side",
               name: "ekstern_link",
               type: "url",
               hidden: ({ parent }) => parent?.intern,
-            },
-            {
+            }),
+            defineField({
               title: "Linker til et eksternt domene",
               description:
                 "Sett denne hvis lenken går til en side utenfor aksel.nav.no",
@@ -60,11 +62,11 @@ export default {
               type: "boolean",
               initialValue: false,
               hidden: ({ parent }) => parent?.intern,
-            },
+            }),
           ],
         },
       ],
-    },
+    }),
   ],
   preview: {
     select: {
@@ -74,4 +76,4 @@ export default {
       return { title: "Relatert innhold kort", media: () => <Link /> };
     },
   },
-};
+});

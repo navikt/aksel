@@ -121,13 +121,6 @@ const spesialSeksjon = `_type == "spesial_seksjon" =>{
       slug,
     }
   },
-  modul == "farge_kategori" =>{
-      "farge": farge_ref->{..., description[]{
-        ...,
-        ${markDef}
-      }
-    }
-  },
   modul == "token_kategori" =>{
     "token": token_ref->{...}
 }

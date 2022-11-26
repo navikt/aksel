@@ -10,11 +10,11 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 const ContentSecurityPolicy = `
   default-src 'self' 'unsafe-inline';
   font-src 'self' https://cdn.nav.no data:;
-  img-src 'self' cdn.sanity.io data:;
+  img-src 'self' cdn.sanity.io https://avatars.githubusercontent.com data:;
   script-src 'self' 'unsafe-eval';
   style-src 'self' 'unsafe-inline';
   report-uri https://sentry.gc.nav.no/api/113/envelope/?sentry_key=d35bd60e413c489ca0f2fd389b4e6e5e&sentry_version=7;
-  connect-src 'self' cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://*.algolia.net https://*.algolianet.com;
+  connect-src 'self' wss://hnbe3yhs.api.sanity.io cdn.sanity.io *.api.sanity.io https://amplitude.nav.no https://sentry.gc.nav.no https://*.algolia.net https://*.algolianet.com;
   frame-ancestors localhost:3333 'self' localhost:3000 https://verktoykasse.sanity.studio/;
   media-src 'self' cdn.sanity.io;
   frame-src 'self' https://web.microsoftstream.com localhost:3000;

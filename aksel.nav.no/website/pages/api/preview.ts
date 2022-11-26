@@ -16,6 +16,10 @@ export default async function preview(req, res) {
     return redirectToPreview(res, "/");
   }
 
+  if (!process.env.SANITY_PREVIEW_TOKEN) {
+    return res.status(401).json({ message: "Invalid preview-token" });
+  }
+
   // Check if the article with the given `slug` exists
   const article = await previewClient.fetch(
     "*[slug.current == $slug][0].slug.current",

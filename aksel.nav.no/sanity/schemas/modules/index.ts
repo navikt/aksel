@@ -1,28 +1,28 @@
-import Accordion from "./accordion";
-import Alert from "./alert";
-import Bilde from "./bilde";
-import HeroBilde from "./hero-bilde";
-import DoDont, { doDontBlock } from "./do-dont";
-import introKomponent from "./intro-komponent";
-import Kode from "./kode";
-import Props from "./props";
-import RelatertInnhold from "./relatert-innhold";
+import Accordion from "./migrated/accordion";
+import Alert from "./migrated/alert";
 import Innholdskort from "./innholdskort";
-import KodeEksempler from "./kode-eksempler";
-import TokenRef from "./token-tabell";
+import Bilde from "./migrated/bilde";
+import DoDont, { doDontBlock } from "./migrated/do-dont";
+import HeroBilde from "./migrated/hero-bilde";
+import introKomponent from "./migrated/intro-komponent";
+import Kode from "./migrated/kode";
+import KodeEksempler from "./migrated/kode-eksempler";
+import Props from "./migrated/props";
+import RelatertInnhold from "./migrated/relatert-innhold";
+import { tmpTabell, tmpTabellRow } from "./migrated/tabellv2";
 import {
   RiktekstAksel,
   RiktekstDsArtikkel,
   RiktekstEnkel,
   RiktekstKomponent,
-  RiktekstTabell,
   RiktekstPrinsipp,
-} from "./riktekst";
-import SpesialSeksjon from "./spesial-seksjon";
-import Tastatur from "./tastatur";
-import Tips from "./tips";
-import Video from "./video";
-import { tmpTabell, tmpTabellRow } from "./tabellv2";
+  RiktekstTabell,
+} from "./migrated/riktekst";
+import SpesialSeksjon from "./migrated/spesial-seksjon";
+import Tastatur from "./migrated/tastatur";
+import Tips from "./migrated/tips";
+import TokenRef from "./migrated/token-tabell";
+import Video from "./migrated/video";
 
 const v2Blocks = [
   tmpTabell,
@@ -36,6 +36,7 @@ const v2Blocks = [
   RiktekstPrinsipp,
 
   /* Moduler */
+  /* Tabellv2, */
   DoDont,
   doDontBlock,
   Bilde,

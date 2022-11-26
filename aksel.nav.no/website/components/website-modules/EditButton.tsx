@@ -4,10 +4,9 @@
 import { useCurrentUser } from "@/lib";
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
-import * as React from "react";
+import cl from "classnames";
 import { useContext } from "react";
 import { IdContext } from "./utils";
-import cl from "classnames";
 
 function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
   const { data } = useCurrentUser();
