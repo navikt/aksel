@@ -58,8 +58,7 @@ export const workspaceConfig = defineConfig([
       ],
     }),
   },
-  {
-    // /admin defaults to first in list
+  /* {
     name: "default",
     title: "Live",
     dataset: "production",
@@ -89,7 +88,7 @@ export const workspaceConfig = defineConfig([
         },
       ],
     }),
-  },
+  }, */
 ]);
 
 /*

@@ -13,6 +13,7 @@ export default {
     document.KodeEksempelDoc,
     document.Tokens,
     document.Props,
+    document.KomponentArtikkel,
 
     /* Objects */
     object.RelatertInnhold,
