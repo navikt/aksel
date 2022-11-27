@@ -1,15 +1,15 @@
-import {
-  AuthProvider,
-  IdContext,
-  initAmplitude,
-  logPageView,
-  PreviewBanner,
-  useScrollToHashOnPageLoad,
-} from "@/components";
 import { Provider } from "@navikt/ds-react";
 import Head from "next/head";
 import React, { useEffect } from "react";
 import "../styles/index.css";
+import { AuthProvider } from "../components/website-modules/utils/contexts/authprovider";
+import { IdContext } from "../components/website-modules/utils/contexts/id-context";
+import PreviewBanner from "components/website-modules/PreviewBanner";
+import {
+  initAmplitude,
+  logPageView,
+} from "components/website-modules/utils/amplitude";
+import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
 
 function App({
   Component,

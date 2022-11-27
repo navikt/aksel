@@ -1,8 +1,5 @@
 import imageUrlBuilder from "@sanity/image-url";
-import {
-  createCurrentUserHook,
-  createPreviewSubscriptionHook,
-} from "next-sanity";
+import { createPreviewSubscriptionHook } from "next-sanity";
 import { SanityT } from "..";
 import { config } from "./config";
 import { akselDocumentsByType, akselTemaNames, dsDocuments } from "./queries";
@@ -11,8 +8,6 @@ import { getClient, noCdnClient, sanityClient } from "./sanity.server";
 const imageBuilder = imageUrlBuilder(sanityClient);
 
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);
-
-export const useCurrentUser = createCurrentUserHook(config);
 
 export function urlFor(source: any) {
   return imageBuilder.image(source);

@@ -1,6 +1,4 @@
 import amplitude from "amplitude-js";
-import { isTest } from ".";
-import { isDevelopment } from "@/lib";
 
 export enum AmplitudeEvents {
   "sidevisning" = "sidevisning",
@@ -43,10 +41,13 @@ export const logNav = (kilde: string, fra: string, til: string) => {
 
 const isPreview = () => !!document.getElementById("exit-preview-id");
 
+const isDevelopment = process.env.NODE_ENV === "development";
+const isTest = process.env.NEXT_PUBLIC_TEST === "true";
+
 export function logAmplitudeEvent(eventName: string, data?: any): Promise<any> {
   return new Promise(function (resolve: any) {
     const eventData = data ? { ...data } : {};
-    if (amplitude && !(isDevelopment() || isTest() || isPreview())) {
+    if (amplitude && !(isDevelopment || isTest || isPreview())) {
       amplitude.getInstance().logEvent(eventName, eventData, resolve);
     }
   });

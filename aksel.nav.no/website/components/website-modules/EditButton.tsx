@@ -1,10 +1,10 @@
 /**
  * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
  */
-import { useCurrentUser } from "@/lib";
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
 import cl from "classnames";
+import { useCurrentUser } from "lib/sanity/useCurrentUser";
 import { useContext } from "react";
 import { IdContext } from "./utils";
 

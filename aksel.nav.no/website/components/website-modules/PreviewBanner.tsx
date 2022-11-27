@@ -1,8 +1,8 @@
 /**
  * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
  */
-import { useCurrentUser } from "@/lib";
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
+import { useCurrentUser } from "lib/sanity/useCurrentUser";
 import { useRouter } from "next/router";
 
 function PreviewBanner(): JSX.Element {
