@@ -40,6 +40,7 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
         .slice(0, 200)
         .trim()
         .replace(/\s+/g, "-")
+        .replace(/-+/gm, "-")
         .replace(/æ/g, "a")
         .replace(/å/g, "a")
         .replace(/ø/g, "o")
