@@ -100,16 +100,16 @@ const main = async () => {
     }
   });
 
-  for (const data of newData) {
+  /* for (const data of newData) {
     const id = data._id;
     delete data._id;
-    transactionClient.patch(id, (p) => p.set({ ...data }));
+    transactionClient.patch(id, (p) => p.set({ ...data }).unset(["bruk_tab"]));
   }
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
     .then(() => console.log(`Updated!`))
-    .catch((e) => console.error(e.message));
+    .catch((e) => console.error(e.message)); */
 };
 
 main();

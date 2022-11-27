@@ -290,13 +290,6 @@ export const dsSlugQuery = `{
         ...,
         ${deRefs}
       },
-      content_tabs[]{
-        ...,
-        content[]{
-          ...,
-          ${deRefs}
-        }
-      },
   },
   ${dsNavQuery}
 }`;

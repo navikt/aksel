@@ -4,7 +4,6 @@ import { SanityT } from "@/lib";
 import AkselArtikkelTemplate from "./page-templates/AkselArtikkel";
 import AkselBloggTemplate from "./page-templates/AkselBlogg";
 import ArtikkelTemplate from "./page-templates/Artikkel";
-import ArtikkelTabbedTemplate from "./page-templates/ArtikkelTabbed";
 import KomponentArtikkelTemplate from "./page-templates/KomponentArtikkel";
 import AkselPrinsippTemplate from "./page-templates/AkselPrinsipp";
 import AkselStandaloneTemplate from "./page-templates/AkselStandalone";
@@ -61,12 +60,7 @@ type templateT =
 
 const templates: templateT = {
   komponent_artikkel: (props) => <KomponentArtikkelTemplate {...props} />,
-  ds_artikkel: (props) =>
-    props.data.artikkel_type ? (
-      <ArtikkelTabbedTemplate {...props} />
-    ) : (
-      <ArtikkelTemplate {...props} />
-    ),
+  ds_artikkel: (props) => <ArtikkelTemplate {...props} />,
   aksel_artikkel: (props) => <AkselArtikkelTemplate {...props} />,
   aksel_blogg: (props) => <AkselBloggTemplate {...props} />,
   aksel_prinsipp: (props) => <AkselPrinsippTemplate {...props} />,

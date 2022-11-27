@@ -80,33 +80,7 @@ export const getDsPaths = async (token?: string): Promise<string[][]> => {
       return null;
     }
     const slug = page.slug.split("/");
-
-    const defaultPush = () => paths.push(slug);
-
-    switch (page._type) {
-      case "ds_artikkel": {
-        if (!page?.artikkel_type) {
-          defaultPush();
-          break;
-        }
-        if (!page.content_tabs) break;
-        const tabbedArticleTabs = page.content_tabs
-          .map((tab) => {
-            return tab.content && tab.title
-              ? tab.title?.toLowerCase().replace(/\s+/g, "-")
-              : null;
-          })
-          .filter((x) => !!x);
-        tabbedArticleTabs.forEach((tab) => {
-          paths.push([...slug, tab]);
-        });
-        defaultPush();
-        break;
-      }
-      default:
-        defaultPush();
-        break;
-    }
+    paths.push(slug);
   });
   return paths;
 };
@@ -122,14 +96,7 @@ export const validateDsPath = (
 
   if (slug.length === 2) return true;
   switch (doc._type) {
-    case "ds_artikkel":
-      return (
-        isLvl2 &&
-        doc.content_tabs &&
-        doc.content_tabs.find(
-          (x) => x.title?.toLowerCase().replace(/\s+/g, "-") === slug[2]
-        )
-      );
+    /* Støtte gamle url-er */
     case "komponent_artikkel":
       return slug?.[2] === "kode";
     default:

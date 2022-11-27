@@ -4,7 +4,6 @@ export const mockArtikkel = {
   _rev: "p611vx-xfw-51n-25p-djs2hyal8",
   _type: "ds_artikkel",
   _updatedAt: "2022-05-13T14:00:57Z",
-  artikkel_type: false,
   contributors: [
     { title: "Ola Normann" },
     { title: "Petter Pettersen" },
