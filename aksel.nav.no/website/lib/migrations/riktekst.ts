@@ -58,12 +58,19 @@ const transform = (src: any, type?: string) => {
   return newData;
 };
 
+/*
+
+const docs = await noCdnClient(token).fetch(
+    `*[_type in ["komponent_artikkel","ds_artikkel","aksel_artikkel","aksel_prinsipp","aksel_blogg","aksel_standalone"]]`
+  );
+*/
+
 const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const transactionClient = noCdnClient(token).transaction();
 
   const docs = await noCdnClient(token).fetch(
-    `*[_type in ["komponent_artikkel","ds_artikkel","aksel_artikkel","aksel_prinsipp","aksel_blogg","aksel_standalone"]]`
+    `*[_type in ["komponent_artikkel"]]`
   );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -72,8 +79,6 @@ const main = async () => {
   docs.forEach((data) => {
     switch (data._type) {
       case "aksel_artikkel":
-        /* data.innhold &&
-          newData.push({ _id: data._id, content: transform(data.innhold) }); */
         break;
       case "aksel_prinsipp":
         break;
@@ -84,21 +89,27 @@ const main = async () => {
       case "ds_artikkel":
         break;
       case "komponent_artikkel":
+        data.bruk_tab &&
+          newData.push({
+            _id: data._id,
+            content: data.bruk_tab.map((x) => ({ ...x, _key: randKey() })),
+          });
         break;
       default:
         break;
     }
   });
 
-  /* for (const data of newData) {
+  for (const data of newData) {
     const id = data._id;
     delete data._id;
     transactionClient.patch(id, (p) => p.set({ ...data }));
-  } */
-  /* await transactionClient
+  }
+
+  await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
     .then(() => console.log(`Updated!`))
-    .catch((e) => console.error(e.message)); */
+    .catch((e) => console.error(e.message));
 };
 
 main();
