@@ -1,4 +1,5 @@
-import {
+export const prefix = "designsystem/komponenter/";
+/* import {
   defaultDocPreview,
   editorField,
   groups,
@@ -9,7 +10,7 @@ import {
   titleField,
 } from "@/lib";
 
-const prefix = "designsystem/komponenter/";
+
 
 export default {
   title: "Komponentartikkel",
@@ -63,7 +64,7 @@ export default {
     {
       ...innholdFieldNew,
       type: "riktekst_komponent",
-      name: "bruk_tab",
+      name: "content",
       title: "Innhold",
     },
     {
@@ -91,3 +92,4 @@ export default {
     },
   ],
 };
+ */

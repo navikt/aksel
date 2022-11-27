@@ -1,4 +1,4 @@
-import { KomponentArtikkel } from "./index";
+import KomponentArtikkel from "./komponent";
 
 export default {
   ...KomponentArtikkel,

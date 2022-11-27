@@ -11,6 +11,7 @@ import Tokens from "./documents/migrated/tokens";
 import Props from "./documents/migrated/props";
 import DsFrontpage from "./documents/migrated/ds-frontpage";
 import DsCompTemplate from "./documents/migrated/component-template";
+import KompArtikkel from "./documents/migrated/komponent";
 import Navigation, { ds_header_heading } from "./documents/migrated/navigation";
 
 import * as Designsystem from "./documents/designsystem";
@@ -26,13 +27,13 @@ export default createSchema({
     redirect,
     Navigation,
     ds_header_heading,
+    KompArtikkel,
 
     KodeEksempler,
     Tokens,
     Props,
     DsFrontpage,
     DsCompTemplate,
-    Designsystem.KomponentArtikkel,
     Designsystem.Artikkel,
 
     Aksel.Artikkel,
