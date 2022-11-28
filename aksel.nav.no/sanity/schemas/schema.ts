@@ -14,9 +14,9 @@ import DsCompTemplate from "./documents/migrated/component-template";
 import KompArtikkel from "./documents/migrated/komponent";
 import AkselTema from "./documents/migrated/tema";
 import AkselArtikkel from "./documents/migrated/aksel-artikkel";
+import DsArtikkel from "./documents/migrated/ds-artikkel";
 import Navigation, { ds_header_heading } from "./documents/migrated/navigation";
 
-import * as Designsystem from "./documents/designsystem";
 import * as Aksel from "./documents/aksel";
 import v2Blocks from "./modules";
 
@@ -36,7 +36,7 @@ export default createSchema({
     Props,
     DsFrontpage,
     DsCompTemplate,
-    Designsystem.Artikkel,
+    DsArtikkel,
 
     AkselArtikkel,
     Aksel.Blogg,

@@ -104,7 +104,9 @@ export const headingStyles = [
   },
 ];
 
-const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
+const Riktekst = (
+  type: "god-praksis" | "grunnleggende" | "komponent" | "prinsipp" | "standard"
+) => {
   const fields: string[] = [];
   const standard = [
     "relatert_innhold",
@@ -125,7 +127,7 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
     "token_ref",
   ];
 
-  const ds_artikkel = ["spesial_seksjon"];
+  const grunnleggende = ["spesial_seksjon"];
 
   fields.push(...standard);
 
@@ -133,8 +135,8 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
     case "komponent":
       fields.push(...komponent);
       break;
-    case "ds":
-      fields.push(...ds_artikkel);
+    case "grunnleggende":
+      fields.push(...grunnleggende);
       break;
     case "prinsipp":
       fields.push("innholdskort");
@@ -154,11 +156,19 @@ const Riktekst = (type: "aksel" | "ds" | "komponent" | "prinsipp") => {
   ];
 };
 
-export const RiktekstAksel = {
-  title: "Riktekst Aksel",
-  name: "riktekst_aksel",
+export const RiktekstGodPraksis = {
+  title: "Riktekst God praksis",
+  name: "riktekst_god_praksis",
   type: "array",
-  of: Riktekst("aksel"),
+  of: Riktekst("god-praksis"),
+  icon: FileContent,
+};
+
+export const RiktekstStandard = {
+  title: "Riktekst Standard",
+  name: "riktekst_standard",
+  type: "array",
+  of: Riktekst("standard"),
   icon: FileContent,
 };
 
@@ -170,11 +180,11 @@ export const RiktekstPrinsipp = {
   icon: FileContent,
 };
 
-export const RiktekstDsArtikkel = {
-  title: "Riktekst Aksel",
-  name: "riktekst_ds_artikkel",
+export const RiktekstGrunnleggende = {
+  title: "Riktekst Grunnleggende",
+  name: "riktekst_grunnleggende",
   type: "array",
-  of: Riktekst("ds"),
+  of: Riktekst("grunnleggende"),
   icon: FileContent,
 };
 

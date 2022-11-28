@@ -29,7 +29,7 @@ export const Accordion = defineType({
             {
               title: "Innhold",
               name: "content",
-              type: "riktekst_aksel",
+              type: "riktekst_standard",
             },
           ],
         },

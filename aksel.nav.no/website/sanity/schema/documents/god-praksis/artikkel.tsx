@@ -35,7 +35,7 @@ export const GodPraksisArtikkel = defineType({
     defineField({
       title: "Innhold",
       name: "content",
-      type: "riktekst_aksel",
+      type: "riktekst_god_praksis",
       group: "innhold",
     }),
     relevanteArtiklerField,

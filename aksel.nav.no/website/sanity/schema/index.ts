@@ -33,8 +33,10 @@ export default {
 
     /* Riktekst */
     object.RiktekstKomponent,
-    object.RiktekstAksel,
+    object.RiktekstGodPraksis,
     object.RiktekstEnkel,
+    object.RiktekstGrunnleggende,
+    object.RiktekstStandard,
 
     /* Komponentsider */
     object.PropsSeksjon,
