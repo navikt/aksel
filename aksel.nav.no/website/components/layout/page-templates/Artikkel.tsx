@@ -3,6 +3,7 @@ import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading } from "@navikt/ds-react";
 import cl from "classnames";
 import Head from "next/head";
+import Script from "next/script";
 import { dateStr, Feedback, TableOfContents } from "../..";
 
 const ArtikkelTemplate = ({
@@ -31,6 +32,11 @@ const ArtikkelTemplate = ({
           </>
         )}
       </Head>
+      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
+      <Script id="task-analytics" nonce="4e1aa203a32e">
+        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
+          window.TA('start', '03346')`}
+      </Script>
       <div className="content-box">
         <div className="pt-8 pb-6">
           <Heading

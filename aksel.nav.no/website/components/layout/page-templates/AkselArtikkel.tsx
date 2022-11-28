@@ -5,6 +5,7 @@ import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import { FooterSlope } from "components/website-modules/Slope";
 import Head from "next/head";
 import NextLink from "next/link";
+import Script from "next/script";
 import {
   abbrName,
   ArtikkelCard,
@@ -79,6 +80,11 @@ const AkselArtikkelTemplate = ({
           key="ogimage"
         />
       </Head>
+      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
+      <Script id="task-analytics" nonce="4e1aa203a32e">
+        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
+          window.TA('start', '03346')`}
+      </Script>
       <NoSidebarLayout aside={aside}>
         <div className="mx-auto mb-16 max-w-prose lg:ml-0">
           <BreadCrumbs auto />

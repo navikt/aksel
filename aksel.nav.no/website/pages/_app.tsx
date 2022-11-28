@@ -10,7 +10,6 @@ import {
   logPageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
-import Script from "next/script";
 
 function App({
   Component,
@@ -59,11 +58,7 @@ function App({
         />
         <meta property="og:site_name" content="Aksel" key="ogsitename" />
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
+
       {pageProps?.preview && <PreviewBanner />}
 
       <Provider>
