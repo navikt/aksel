@@ -89,11 +89,11 @@ const main = async () => {
       case "ds_artikkel":
         break;
       case "komponent_artikkel":
-        data.bruk_tab &&
+        /* data.bruk_tab &&
           newData.push({
             _id: data._id,
             content: data.bruk_tab.map((x) => ({ ...x, _key: randKey() })),
-          });
+          }); */
         break;
       default:
         break;

@@ -63,12 +63,6 @@ export default {
     {
       ...innholdFieldNew,
       type: "riktekst_komponent",
-      name: "bruk_tab",
-      title: "Innhold",
-    },
-    {
-      ...innholdFieldNew,
-      type: "riktekst_komponent",
       name: "content",
       title: "Innhold",
     },

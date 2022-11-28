@@ -123,10 +123,7 @@ const KomponentArtikkelTemplate = ({
         </div>
       </div>
       <div className="relative flex max-w-full md:max-w-7xl">
-        <TableOfContents
-          changedState={data["content"] ?? data["bruk_tab"]}
-          hideToc={false}
-        />
+        <TableOfContents changedState={data["content"]} hideToc={false} />
         <div className="content-box">
           <div className="mt-12">
             {data?.status && data.status?.tag === "beta" && (
@@ -148,7 +145,7 @@ const KomponentArtikkelTemplate = ({
               </div>
             )}
             <IntroSeksjon node={data.intro} />
-            <SanityBlockContent blocks={data["content"] ?? data["bruk_tab"]} />
+            <SanityBlockContent blocks={data["content"]} />
           </div>
           <Feedback docId={data?._id} docType={data?._type} />
         </div>

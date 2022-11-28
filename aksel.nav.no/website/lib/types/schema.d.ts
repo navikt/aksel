@@ -195,11 +195,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       /**
        * Innhold - `RegistryReference`
        */
-      bruk_tab?: riktekst_komponent;
-
-      /**
-       * Innhold - `RegistryReference`
-       */
       content?: riktekst_komponent;
 
       /**
@@ -438,11 +433,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
        * Intro - `RegistryReference`
        */
       intro?: intro_komponent;
-
-      /**
-       * Innhold - `RegistryReference`
-       */
-      bruk_tab?: riktekst_komponent;
 
       /**
        * Innhold - `RegistryReference`
