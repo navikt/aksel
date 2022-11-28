@@ -111,19 +111,3 @@ export const innholdFieldNewNested = (name?: string, type?: string) => {
   delete fields.group;
   return fields;
 };
-
-export const hidePageFeedback = {
-  title: "Tilbakemeldinger",
-  name: "metadata_feedback",
-  type: "object",
-  group: "settings",
-  fields: [
-    {
-      title: "Skjul artikkel feedback modul",
-      description: "Gjemmer <<Var denne artikkelen til hjelp?>> modulen.",
-      name: "hide_feedback",
-      type: "boolean",
-      initialValue: false,
-    },
-  ],
-};
