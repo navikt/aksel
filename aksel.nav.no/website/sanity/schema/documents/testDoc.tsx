@@ -1,11 +1,19 @@
 import { defineField, defineType } from "sanity";
-import { StringInputSmall } from "../custom-components";
+import { StringInputSmall, UpdateInfo } from "../custom-components";
 
 export const TestDoc = defineType({
   title: "Test",
   name: "testDoc",
   type: "document",
   fields: [
+    defineField({
+      name: "updateInfo",
+      type: "string",
+      title: " ",
+      components: {
+        field: UpdateInfo,
+      },
+    }),
     defineField({
       name: "testInput",
       title: "Test input",
@@ -21,5 +29,7 @@ export const TestDoc = defineType({
       },
     }),
     defineField({ type: "riktekst_god_praksis", name: "content" }),
+    defineField({ type: "riktekst_aksel", name: "content" }),
+    defineField({ type: "date", name: "dato" }),
   ],
 });
