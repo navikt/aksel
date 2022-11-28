@@ -1,9 +1,8 @@
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading } from "@navikt/ds-react";
-import cl from "classnames";
 import Head from "next/head";
-import Script from "next/script";
+
 import { dateStr, Feedback, TableOfContents } from "../..";
 
 const ArtikkelTemplate = ({
@@ -17,11 +16,6 @@ const ArtikkelTemplate = ({
     return null;
   }
 
-  const layout = cl({
-    "content-box--full": data.layout === "full",
-    "content-box": data.layout !== "full",
-  });
-
   return (
     <>
       <Head>
@@ -32,11 +26,7 @@ const ArtikkelTemplate = ({
           </>
         )}
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
+
       <div className="content-box">
         <div className="pt-8 pb-6">
           <Heading
@@ -59,7 +49,7 @@ const ArtikkelTemplate = ({
       </div>
       <div className="relative flex max-w-full md:max-w-7xl">
         <TableOfContents changedState={data.content} hideToc={false} />
-        <div className={layout}>
+        <div className="content-box">
           <SanityBlockContent className="mt-12" blocks={data.content} />
           <Feedback docId={data?._id} docType={data?._type} />
         </div>

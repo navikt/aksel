@@ -10,6 +10,9 @@ import {
   logPageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
+import Script from "next/script";
+import { Router, useRouter } from "next/router";
+import { AppProps } from "next/app";
 
 function App({
   Component,
@@ -18,7 +21,7 @@ function App({
 }: {
   Component: any;
   pageProps: any;
-  router: any;
+  router: Router;
 }): JSX.Element {
   useScrollToHashOnPageLoad();
 
@@ -35,10 +38,6 @@ function App({
       router.events.off("routeChangeComplete", t);
     };
   }, [router.events]);
-
-  /* useEffect(() => {
-    hotjar.initialize(148751, 6);
-  }, []); */
 
   return (
     <>
@@ -58,7 +57,15 @@ function App({
         />
         <meta property="og:site_name" content="Aksel" key="ogsitename" />
       </Head>
-
+      {!router.asPath.startsWith("/eksempler") && (
+        <>
+          <Script src="https://in2.taskanalytics.com/tm.js"></Script>
+          <Script id="task-analytics" nonce="4e1aa203a32e">
+            {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
+          window.TA('start', '03346')`}
+          </Script>
+        </>
+      )}
       {pageProps?.preview && <PreviewBanner />}
 
       <Provider>

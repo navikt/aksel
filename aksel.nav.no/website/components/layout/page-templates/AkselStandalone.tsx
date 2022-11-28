@@ -3,7 +3,6 @@ import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Heading } from "@navikt/ds-react";
 import Head from "next/head";
-import Script from "next/script";
 import Footer from "../footer/Footer";
 import AkselHeader from "../header/AkselHeader";
 
@@ -28,11 +27,7 @@ const AkselStandaloneTemplate = ({
           key="ogtitle"
         />
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
+
       <AkselHeader variant="artikkel" />
       <main
         tabIndex={-1}

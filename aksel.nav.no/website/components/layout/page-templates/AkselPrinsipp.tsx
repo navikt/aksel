@@ -3,7 +3,6 @@ import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "classnames";
 import Head from "next/head";
-import Script from "next/script";
 import { AkselHeader, Footer } from "..";
 import {
   abbrName,
@@ -58,11 +57,6 @@ const AkselPrinsippTemplate = ({
           key="ogimage"
         />
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
       <AkselHeader variant={mainPage ? "inngang" : "artikkel"} />
       <main
         tabIndex={-1}

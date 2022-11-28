@@ -4,7 +4,6 @@ import { ExternalLink } from "@navikt/ds-icons";
 import { BodyLong, BodyShort, Heading } from "@navikt/ds-react";
 import IntroSeksjon from "components/sanity-modules/IntroSeksjon";
 import Head from "next/head";
-import Script from "next/script";
 import { dateStr, Feedback, TableOfContents } from "../..";
 
 const kodepakker = {
@@ -56,11 +55,6 @@ const KomponentArtikkelTemplate = ({
           content={`${data.heading} - Designsystemet`}
         />
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
       <div className="content-box">
         <div className="pt-8">
           <div className="flex flex-wrap gap-2"></div>

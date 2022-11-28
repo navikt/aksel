@@ -2,7 +2,7 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import Head from "next/head";
-import Script from "next/script";
+
 import { abbrName, dateStr, Feedback, TableOfContents } from "../..";
 import Footer from "../footer/Footer";
 import AkselHeader from "../header/AkselHeader";
@@ -57,11 +57,7 @@ const AkselBloggTemplate = ({
           key="ogimage"
         />
       </Head>
-      <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-      <Script id="task-analytics" nonce="4e1aa203a32e">
-        {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
-          window.TA('start', '03346')`}
-      </Script>
+
       <AkselHeader variant="blogg" />
       <main
         tabIndex={-1}
