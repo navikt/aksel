@@ -682,12 +682,6 @@ Legg til redaktør som har forvaltningsansvaret for temaet
       ansvarlig?: Sanity.Reference<editor>;
 
       /**
-       * Bruk seksjonsinndeling - `Boolean`
-Vil ikke vise artikler som ikke er lagt til i seksjoner hvis valgt!
-       */
-      bruk_seksjoner?: boolean;
-
-      /**
        * Seksjonering - `Array`
 Del inn artiklene i flere seksjoner (vises ikke i preview før publisering desverre)
        */

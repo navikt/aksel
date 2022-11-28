@@ -1,18 +1,17 @@
 import { Provider } from "@navikt/ds-react";
-import Head from "next/head";
-import React, { useEffect } from "react";
-import "../styles/index.css";
-import { AuthProvider } from "../components/website-modules/utils/contexts/authprovider";
-import { IdContext } from "../components/website-modules/utils/contexts/id-context";
 import PreviewBanner from "components/website-modules/PreviewBanner";
 import {
   initAmplitude,
   logPageView,
 } from "components/website-modules/utils/amplitude";
 import { useScrollToHashOnPageLoad } from "components/website-modules/utils/util";
+import Head from "next/head";
+import { Router } from "next/router";
 import Script from "next/script";
-import { Router, useRouter } from "next/router";
-import { AppProps } from "next/app";
+import { useEffect } from "react";
+import { AuthProvider } from "../components/website-modules/utils/contexts/authprovider";
+import { IdContext } from "../components/website-modules/utils/contexts/id-context";
+import "../styles/index.css";
 
 function App({
   Component,
