@@ -14,6 +14,8 @@ export default {
     document.Tokens,
     document.Props,
     document.KomponentArtikkel,
+    document.Tema,
+    document.GodPraksisArtikkel,
 
     /* Objects */
     object.RelatertInnhold,

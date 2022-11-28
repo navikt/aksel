@@ -42,11 +42,11 @@
 
 /*  */
 export const allArticleDocuments = [
-  /* "komponent_artikkel",
-  "ds_artikkel",
+  "komponent_artikkel",
+  /* "ds_artikkel", */
   "aksel_artikkel",
-  "aksel_blogg",
-  "aksel_prinsipp", */
+  /* "aksel_blogg", */
+  /* "aksel_prinsipp", */
 ];
 
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));

@@ -488,26 +488,9 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
-       * Layout - `String`
-'Full' bruker hele bredden, men fjerner table of content (bruk bare for eks ikonside eller komponentvisning)
-       */
-      layout?: "full" | "default";
-
-      /**
        * Innhold - `RegistryReference`
        */
       content?: riktekst_ds_artikkel;
-
-      /**
-       * Tilbakemeldinger - `Object`
-       */
-      metadata_feedback?: {
-        /**
-       * Skjul artikkel feedback modul - `Boolean`
-Gjemmer <<Var denne artikkelen til hjelp?>> modulen.
-       */
-        hide_feedback?: boolean;
-      };
     }
 
     /**
