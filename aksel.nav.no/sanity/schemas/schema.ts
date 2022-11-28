@@ -3,22 +3,23 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 
 /* Schemas */
 /* Documents */
-import editors from "./documents/migrated/editors";
-import frontpage from "./documents/migrated/frontpage";
-import redirect from "./documents/migrated/redirects";
-import KodeEksempler from "./documents/migrated/kode-eksempler";
-import Tokens from "./documents/migrated/tokens";
-import Props from "./documents/migrated/props";
-import DsFrontpage from "./documents/migrated/ds-frontpage";
-import DsCompTemplate from "./documents/migrated/component-template";
-import KompArtikkel from "./documents/migrated/komponent";
-import AkselTema from "./documents/migrated/tema";
-import AkselArtikkel from "./documents/migrated/aksel-artikkel";
-import DsArtikkel from "./documents/migrated/ds-artikkel";
-import Blogg from "./documents/migrated/blogg";
-import Navigation, { ds_header_heading } from "./documents/migrated/navigation";
+import editors from "./documents/editors";
+import frontpage from "./documents/frontpage";
+import redirect from "./documents/redirects";
+import KodeEksempler from "./documents/kode-eksempler";
+import Tokens from "./documents/tokens";
+import Props from "./documents/props";
+import DsFrontpage from "./documents/ds-frontpage";
+import DsCompTemplate from "./documents/component-template";
+import KompArtikkel from "./documents/komponent";
+import AkselTema from "./documents/tema";
+import AkselArtikkel from "./documents/aksel-artikkel";
+import DsArtikkel from "./documents/ds-artikkel";
+import Blogg from "./documents/blogg";
+import Prinsipp from "./documents/prinsipp";
+import Standalone from "./documents/standalone";
+import Navigation, { ds_header_heading } from "./documents/navigation";
 
-import * as Aksel from "./documents/aksel";
 import v2Blocks from "./modules";
 
 export default createSchema({
@@ -42,7 +43,7 @@ export default createSchema({
     AkselArtikkel,
     Blogg,
     AkselTema,
-    Aksel.Prinsipp,
-    Aksel.Standalone,
+    Prinsipp,
+    Standalone,
   ]),
 });

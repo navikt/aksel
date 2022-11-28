@@ -9,3 +9,5 @@ export * from "./komponenter/artikkel";
 export * from "./god-praksis/tema";
 export * from "./god-praksis/artikkel";
 export * from "./blogg/artikkel";
+export * from "./prinsipper/artikkel";
+export * from "./standalone-artikkel";

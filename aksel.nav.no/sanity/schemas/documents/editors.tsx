@@ -2,7 +2,7 @@
 
 import { People } from "@navikt/ds-icons";
 import React from "react";
-import profilePage from "../../../components/profile/profile-page";
+import profilePage from "../../components/profile/profile-page";
 import { isEditorUnique } from "@/lib";
 import userStore from "part:@sanity/base/user";
 

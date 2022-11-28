@@ -22,6 +22,12 @@ export default {
     /* Blogg */
     document.Blogg,
 
+    /* Prinsipper */
+    document.Prinsipp,
+
+    /* Standalone */
+    document.Standalone,
+
     /* Objects */
     object.RelatertInnhold,
     object.Kode,
@@ -41,6 +47,7 @@ export default {
     object.RiktekstEnkel,
     object.RiktekstGrunnleggende,
     object.RiktekstStandard,
+    object.RiktekstPrinsipp,
 
     /* Komponentsider */
     object.PropsSeksjon,
@@ -51,5 +58,6 @@ export default {
 
     /* Prinsipper */
     object.HeroBilde,
+    object.InnholdsKort,
   ],
 };
