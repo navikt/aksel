@@ -29,6 +29,5 @@ export const TestDoc = defineType({
       },
     }),
     defineField({ type: "riktekst_god_praksis", name: "content" }),
-    defineField({ type: "riktekst_aksel", name: "content" }),
   ],
 });
