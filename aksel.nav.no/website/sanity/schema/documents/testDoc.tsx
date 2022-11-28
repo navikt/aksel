@@ -28,6 +28,6 @@ export const TestDoc = defineType({
         maxLength: 10,
       },
     }),
-    defineField({ type: "riktekst_god_praksis", name: "content" }),
+    defineField({ type: "riktekst_standard", name: "content" }),
   ],
 });

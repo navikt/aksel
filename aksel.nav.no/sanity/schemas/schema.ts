@@ -15,6 +15,7 @@ import KompArtikkel from "./documents/migrated/komponent";
 import AkselTema from "./documents/migrated/tema";
 import AkselArtikkel from "./documents/migrated/aksel-artikkel";
 import DsArtikkel from "./documents/migrated/ds-artikkel";
+import Blogg from "./documents/migrated/blogg";
 import Navigation, { ds_header_heading } from "./documents/migrated/navigation";
 
 import * as Aksel from "./documents/aksel";
@@ -39,7 +40,7 @@ export default createSchema({
     DsArtikkel,
 
     AkselArtikkel,
-    Aksel.Blogg,
+    Blogg,
     AkselTema,
     Aksel.Prinsipp,
     Aksel.Standalone,

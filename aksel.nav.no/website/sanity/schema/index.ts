@@ -14,8 +14,13 @@ export default {
     document.Tokens,
     document.Props,
     document.KomponentArtikkel,
+
+    /* God-praksis */
     document.Tema,
     document.GodPraksisArtikkel,
+
+    /* Blogg */
+    document.Blogg,
 
     /* Objects */
     object.RelatertInnhold,
@@ -33,7 +38,6 @@ export default {
 
     /* Riktekst */
     object.RiktekstKomponent,
-    object.RiktekstGodPraksis,
     object.RiktekstEnkel,
     object.RiktekstGrunnleggende,
     object.RiktekstStandard,

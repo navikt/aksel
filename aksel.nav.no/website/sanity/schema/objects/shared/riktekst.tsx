@@ -156,14 +156,6 @@ const Riktekst = (
   ];
 };
 
-export const RiktekstGodPraksis = {
-  title: "Riktekst God praksis",
-  name: "riktekst_god_praksis",
-  type: "array",
-  of: Riktekst("god-praksis"),
-  icon: FileContent,
-};
-
 export const RiktekstStandard = {
   title: "Riktekst Standard",
   name: "riktekst_standard",

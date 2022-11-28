@@ -6,14 +6,13 @@ import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
 import { ingressField } from "../presets/ingress";
 import { SEOFields } from "../presets/seo";
-import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import { sanitySlug } from "../presets/slug";
 
-const prefix = "artikkel/";
+const prefix = "blogg/";
 
-export const GodPraksisArtikkel = defineType({
-  title: "Aksel Artikkel",
-  name: "aksel_artikkel",
+export const Blogg = defineType({
+  title: "Blogg",
+  name: "aksel_blogg",
   type: "document",
   groups,
   ...artikkelPreview,
@@ -22,15 +21,6 @@ export const GodPraksisArtikkel = defineType({
     editorField,
     titleField,
     sanitySlug(prefix, 2),
-    defineField({
-      title: "Tema",
-      description: "Legg til de viktigeste temaene",
-      name: "tema",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
-      group: "innhold",
-    }),
-
     ingressField,
     defineField({
       title: "Innhold",
@@ -38,7 +28,7 @@ export const GodPraksisArtikkel = defineType({
       type: "riktekst_standard",
       group: "innhold",
     }),
-    relevanteArtiklerField,
+
     SEOFields,
   ],
 });
