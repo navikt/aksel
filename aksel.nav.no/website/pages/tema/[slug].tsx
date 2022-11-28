@@ -123,63 +123,45 @@ const Page = (props: PageProps): JSX.Element => {
             <Slope />
           </div>
 
-          {!page?.bruk_seksjoner || page?.seksjoner?.length === 0 ? (
-            <div className="relative bg-gray-100 px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
-              <div className="dynamic-wrapper">
-                <div className="card-grid-3-1">
-                  {page.artikler.map((x) => (
-                    <ArtikkelCard {...x} source={page.title} key={x._id} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          ) : (
-            <>
-              <div className="relative bg-gray-100 px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
-                <div className="dynamic-wrapper grid gap-16">
-                  {page.seksjoner.map((seksjon) => (
-                    <div key={seksjon._key}>
-                      <Heading
-                        level="2"
-                        size="large"
-                        spacing
-                        className="hidden md:block"
-                      >
-                        {seksjon.title}
-                      </Heading>
-                      <Heading
-                        level="2"
-                        size="medium"
-                        spacing
-                        className="block md:hidden"
-                      >
-                        {seksjon.title}
-                      </Heading>
-                      {seksjon.beskrivelse && (
-                        <div className="mt-2 mb-5 max-w-prose">
-                          <SanityBlockContent
-                            blocks={seksjon.beskrivelse}
-                            noLastMargin
-                          />
-                        </div>
-                      )}
-                      <div className="card-grid-3-1">
-                        {(seksjon.sider as unknown as ArtiklerT[]).map(
-                          (x: ArtiklerT) => (
-                            <ArtikkelCard
-                              {...x}
-                              source={page.title}
-                              key={x._id}
-                            />
-                          )
-                        )}
-                      </div>
+          <div className="relative bg-gray-100 px-4 pt-8 pb-24 md:pt-16 xl:pt-8 ">
+            <div className="dynamic-wrapper grid gap-16">
+              {page.seksjoner.map((seksjon) => (
+                <div key={seksjon._key}>
+                  <Heading
+                    level="2"
+                    size="large"
+                    spacing
+                    className="hidden md:block"
+                  >
+                    {seksjon.title}
+                  </Heading>
+                  <Heading
+                    level="2"
+                    size="medium"
+                    spacing
+                    className="block md:hidden"
+                  >
+                    {seksjon.title}
+                  </Heading>
+                  {seksjon.beskrivelse && (
+                    <div className="mt-2 mb-5 max-w-prose">
+                      <SanityBlockContent
+                        blocks={seksjon.beskrivelse}
+                        noLastMargin
+                      />
                     </div>
-                  ))}
+                  )}
+                  <div className="card-grid-3-1">
+                    {(seksjon.sider as unknown as ArtiklerT[]).map(
+                      (x: ArtiklerT) => (
+                        <ArtikkelCard {...x} source={page.title} key={x._id} />
+                      )
+                    )}
+                  </div>
                 </div>
-              </div>
-            </>
-          )}
+              ))}
+            </div>
+          </div>
         </main>
         <Footer variant="aksel" />
       </div>
