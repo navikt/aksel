@@ -4,13 +4,7 @@
 export const structure = (S, context) =>
   S.list()
     .title("Innhold")
-    .items([
-      S.documentListItem()
-        .title(`Kategorier`)
-        .schemaType(`kategorier_komponent`)
-        .id(`kategorier_komponent_id1`),
-      ...S.documentTypeListItems(),
-    ]);
+    .items([...S.documentTypeListItems()]);
 
 /* export const defaultDocumentNode = (S, { schemaType }) => {
   if (schemaType === "post") {

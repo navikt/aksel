@@ -14,7 +14,6 @@ export default {
     document.Tokens,
     document.Props,
     document.KomponentArtikkel,
-    document.KomponentKategorier,
 
     /* God-praksis */
     document.Tema,

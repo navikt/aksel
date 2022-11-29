@@ -19,6 +19,7 @@ export const KomponentArtikkel = defineType({
     editorField,
     titleField,
     sanitySlug(prefix, 3),
+
     defineField({
       title: "Metadata",
       name: "status",

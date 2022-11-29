@@ -4,7 +4,6 @@ export const groups = [
   {
     name: "innhold",
     title: "Innhold",
-    default: true,
   },
   {
     name: "metadata",

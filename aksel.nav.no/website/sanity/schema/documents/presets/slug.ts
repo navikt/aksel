@@ -45,6 +45,6 @@ export const sanitySlug = (prefix: string, depth: number, source?: string) => ({
         .replace(/å/g, "a")
         .replace(/ø/g, "o")
         // eslint-disable-next-line no-useless-escape
-        .replace(/[&\/\\#,+()$~%.'"¨:*?<>{}]/g, ""),
+        .replace(/[&\\#,+()$~%.'"¨:*?<>{}]/g, ""),
   },
 });
