@@ -7,6 +7,8 @@ export * from "./komponenter/tokens";
 export * from "./komponenter/props";
 export * from "./komponenter/artikkel";
 export * from "./komponenter/landings-side";
+export * from "./grunnleggende/artikkel";
+export * from "./grunnleggende/landings-side";
 export * from "./god-praksis/tema";
 export * from "./god-praksis/artikkel";
 export * from "./blogg/artikkel";

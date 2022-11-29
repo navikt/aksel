@@ -5,7 +5,7 @@ import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
 import { kategoriSlug, sanitySlug } from "../presets/slug";
-import { kategorier } from "./landings-side";
+import { komponentKategorier } from "../../../config";
 
 const prefixOld = "designsystem/komponenter/";
 const prefix = "komponenter/";
@@ -26,7 +26,7 @@ export const KomponentArtikkel = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: kategorier.map((x) => ({ title: x, value: x })),
+        list: komponentKategorier.map((x) => ({ title: x, value: x })),
         layout: "radio",
       },
     }),

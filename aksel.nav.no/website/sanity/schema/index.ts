@@ -16,6 +16,10 @@ export default {
     document.KomponentArtikkel,
     document.KomponentLandingSide,
 
+    /* Grunnleggende */
+    document.GrunnleggendeLandingSide,
+    document.GrunnleggendeArtikkel,
+
     /* God-praksis */
     document.Tema,
     document.GodPraksisArtikkel,

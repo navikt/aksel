@@ -50,3 +50,7 @@ export const allArticleDocuments = [
 ];
 
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
+
+export const komponentKategorier = ["core", "internal"];
+export const grunnleggendeKategorier = ["styling", "staesj", "guider"];
+export const monsterKategorier = [];
