@@ -11,7 +11,7 @@ const Page = (props: {
   preview: boolean;
 }): JSX.Element => {
   const { data } = usePreviewSubscription(akselBloggBySlug, {
-    params: { slug: `blogg/${props.slug}`, valid: "true" },
+    params: { slug: `produktbloggen/${props.slug}`, valid: "true" },
     initialData: props.page,
     enabled: props?.preview,
   });
@@ -39,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (
   /* const isValidUser = await isValidated(context); */
 
   const page = await getClient().fetch(akselBloggBySlug, {
-    slug: `blogg/${context.params.slug}`,
+    slug: `produktbloggen/${context.params.slug}`,
     valid: "true" /* `${isValidUser}` */,
   });
 

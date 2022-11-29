@@ -9,7 +9,7 @@ import { SEOFields } from "../presets/seo";
 import { sanitySlug } from "../presets/slug";
 import { bloggKategorier } from "../../../config";
 
-const prefix = "blogg/";
+const prefix = "produktbloggen/";
 
 export const Blogg = defineType({
   title: "Blogg",
@@ -39,7 +39,6 @@ export const Blogg = defineType({
       type: "riktekst_standard",
       group: "innhold",
     }),
-
     SEOFields,
   ],
 });
