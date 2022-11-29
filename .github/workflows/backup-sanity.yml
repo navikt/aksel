@@ -36,4 +36,4 @@ jobs:
         with:
           path: ./aksel.nav.no/sanity
           destination: "aksel-website-prod/backups"
-          glob: "**/backup-*.tar.gz"
+          glob: "./aksel.nav.no/sanity/backup-*.tar.gz"
