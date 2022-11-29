@@ -27,7 +27,7 @@ const createWrappedPublishAction = (publishAction: DocumentActionComponent) => {
                 {
                   set: {
                     updateInfo: {
-                      initialPublish: format(new Date(), "yyyy-MM-dd"),
+                      lastVerified: format(new Date(), "yyyy-MM-dd"),
                     },
                   },
                 },

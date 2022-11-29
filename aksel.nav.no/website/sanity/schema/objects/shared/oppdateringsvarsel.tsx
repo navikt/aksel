@@ -16,7 +16,7 @@ export const Oppdateringsvarsel = defineType({
     }),
     defineField({
       type: "date",
-      name: "initialPublish",
+      name: "lastVerified",
       readOnly: true,
     }),
   ],
