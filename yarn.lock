@@ -10676,6 +10676,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"boring-avatars@npm:1.7.0":
+  version: 1.7.0
+  resolution: "boring-avatars@npm:1.7.0"
+  checksum: 5f39a7b3a011ba8651c6bec22c453b42c58c0fc347b3dce5cfea7d4de4208b1296f1fb4efc66ebb598f805124a07c5b8e3b06766f5211e1deb545bbf889230b0
+  languageName: node
+  linkType: hard
+
 "boundless-arrow-key-navigation@npm:^1.1.0":
   version: 1.1.0
   resolution: "boundless-arrow-key-navigation@npm:1.1.0"
@@ -32538,6 +32545,7 @@ __metadata:
     amplitude-js: ^8.8.0
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.0
+    boring-avatars: 1.7.0
     classnames: ^2.3.1
     codesandbox: ^2.2.3
     color: 4.2.3

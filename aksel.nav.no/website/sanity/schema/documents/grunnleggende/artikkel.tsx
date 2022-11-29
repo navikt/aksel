@@ -25,7 +25,10 @@ export const GrunnleggendeArtikkel = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: grunnleggendeKategorier.map((x) => ({ title: x, value: x })),
+        list: grunnleggendeKategorier.map((x) => ({
+          title: x.title,
+          value: x.value,
+        })),
         layout: "radio",
       },
     }),

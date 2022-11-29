@@ -3,22 +3,9 @@ import { komponentKategorier } from "../../../config";
 
 const views = komponentKategorier.map((kat) =>
   defineField({
-    type: "object",
-    name: `fields_${kat}`,
-    title: kat,
-    fields: [
-      defineField({
-        title: "Tittel",
-        name: `title`,
-        type: "string",
-        validation: (Rule) => Rule.required(),
-      }),
-      defineField({
-        title: `Intro ${kat}`,
-        name: `intro`,
-        type: "riktekst_standard",
-      }),
-    ],
+    title: `Intro ${kat.title}`,
+    name: `intro_${kat.value}`,
+    type: "riktekst_standard",
   })
 );
 

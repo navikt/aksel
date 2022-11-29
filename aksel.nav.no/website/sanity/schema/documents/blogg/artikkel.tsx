@@ -27,7 +27,7 @@ export const Blogg = defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
       options: {
-        list: bloggKategorier.map((x) => ({ title: x, value: x })),
+        list: bloggKategorier.map((x) => ({ title: x.title, value: x.value })),
         layout: "radio",
       },
     }),

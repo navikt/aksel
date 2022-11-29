@@ -51,16 +51,23 @@ export const allArticleDocuments = [
 
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 
-/* Må være lowercase, no space */
-export const komponentKategorier = ["core", "internal"];
-export const grunnleggendeKategorier = ["styling", "staesj", "guider"];
+export const komponentKategorier = [
+  { title: "Core", value: "core" },
+  { title: "Internal", value: "internal" },
+];
+
+export const grunnleggendeKategorier = [
+  { title: "Styling", value: "styling" },
+  { title: "Stæsj", value: "staesj" },
+  { title: "Guider", value: "guider" },
+];
+
 export const monsterKategorier = [];
 
-/* Kan skrives rett ut */
 export const bloggKategorier = [
-  "Nytt fra teamene",
-  "Da vi gjorde dette",
-  "På reise",
+  { title: "Nytt fra teamene", value: "nytt-fra-teamene" },
+  { title: "Da vi gjorde dette", value: "da-vi-gjorde-dette" },
+  { title: "På reise", value: "pa-reise" },
 ];
 
 export const prinsippKategorier = [

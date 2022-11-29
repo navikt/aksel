@@ -5,6 +5,7 @@ import {
   LightBulb,
   Picture,
   System,
+  FileError,
 } from "@navikt/ds-icons";
 import {
   bloggKategorier,
@@ -45,7 +46,12 @@ export const structure = async (S, { currentUser, getClient }) => {
   return S.list()
     .title("Innholdstyper")
     .items([
-      S.documentListItem().schemaType(`editor`).id(editor._id),
+      ...(editor
+        ? [
+            S.documentListItem().schemaType(`editor`).id(editor._id),
+            S.divider(),
+          ]
+        : []),
       S.listItem()
         .title("Prinsipper")
         .icon(LightBulb)
@@ -89,16 +95,17 @@ export const structure = async (S, { currentUser, getClient }) => {
               S.divider(),
               ...grunnleggendeKategorier.map((kat) => {
                 return S.listItem()
-                  .title(kat[0].toUpperCase() + kat.slice(1))
+                  .title(kat.title)
                   .child(
                     S.documentList()
-                      .title(kat)
+                      .title(kat.title)
                       .filter(`_type == 'ds_artikkel' && $kat == kategori`)
-                      .params({ kat })
+                      .params({ kat: kat.value })
                   );
               }),
               S.listItem()
                 .title("Uten kategori")
+                .icon(FileError)
                 .child(
                   S.documentList()
                     .title("Uten kategori")
@@ -120,18 +127,19 @@ export const structure = async (S, { currentUser, getClient }) => {
               S.divider(),
               ...komponentKategorier.map((kat) => {
                 return S.listItem()
-                  .title(kat[0].toUpperCase() + kat.slice(1))
+                  .title(kat.title)
                   .child(
                     S.documentList()
-                      .title(kat)
+                      .title(kat.title)
                       .filter(
                         `_type == 'komponent_artikkel' && $kat == kategori`
                       )
-                      .params({ kat })
+                      .params({ kat: kat.value })
                   );
               }),
               S.listItem()
                 .title("Uten kategori")
+                .icon(FileError)
                 .child(
                   S.documentList()
                     .title("Uten kategori")
@@ -155,16 +163,17 @@ export const structure = async (S, { currentUser, getClient }) => {
               S.divider(),
               ...bloggKategorier.map((kat) => {
                 return S.listItem()
-                  .title(kat)
+                  .title(kat.title)
                   .child(
                     S.documentList()
-                      .title(kat)
+                      .title(kat.value)
                       .filter(`_type == 'aksel_blogg' && $kat == kategori`)
                       .params({ kat })
                   );
               }),
               S.listItem()
                 .title("Uten kategori")
+                .icon(FileError)
                 .child(
                   S.documentList()
                     .title("Uten kategori")
