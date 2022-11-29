@@ -376,7 +376,7 @@ const Page = (props: PageProps): JSX.Element => {
                       ))}
                     </div>
                     {bloggs?.length > 6 && (
-                      <NextLink href="/blogg" passHref>
+                      <NextLink href="/produktbloggen" passHref>
                         <a
                           className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline"
                           href="#"
