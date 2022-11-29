@@ -56,15 +56,16 @@ function App({
         />
         <meta property="og:site_name" content="Aksel" key="ogsitename" />
       </Head>
-      {!router.asPath.startsWith("/eksempler") && (
-        <>
-          <Script src="https://in2.taskanalytics.com/tm.js"></Script>
-          <Script id="task-analytics" nonce="4e1aa203a32e">
-            {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
+      {!router.asPath.startsWith("/eksempler") &&
+        !router.asPath.startsWith("/admin") && (
+          <>
+            <Script src="https://in2.taskanalytics.com/tm.js"></Script>
+            <Script id="task-analytics" nonce="4e1aa203a32e">
+              {`window.TA = window.TA||function(){(TA.q=TA.q||[]).push(arguments);};
           window.TA('start', '03346')`}
-          </Script>
-        </>
-      )}
+            </Script>
+          </>
+        )}
       {pageProps?.preview && <PreviewBanner />}
 
       <Provider>
