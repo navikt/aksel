@@ -25,4 +25,5 @@ export default withDsExample(Example);
 
 export const args = {
   index: 0,
+  desc: "Popover kan kobles til de fleste typer elementer med bruk av ref.",
 };
