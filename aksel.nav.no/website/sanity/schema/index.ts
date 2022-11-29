@@ -41,6 +41,7 @@ export default {
     object.Alert,
     object.Tips,
     object.UnikSidemodul,
+    object.Oppdateringsvarsel,
 
     /* Riktekst */
     object.RiktekstKomponent,

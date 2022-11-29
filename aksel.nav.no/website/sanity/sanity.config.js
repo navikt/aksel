@@ -5,8 +5,9 @@ import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import { structure, defaultDocumentNode } from "./structure";
+import { customPublish } from "./actions/CustomPublishAction";
 import schemas from "./schema";
+import { defaultDocumentNode, structure } from "./structure";
 
 const projectId = "hnbe3yhs";
 
@@ -28,6 +29,7 @@ const sharedConfig = {
       structure,
       defaultDocumentNode,
     }),
+    customPublish(),
   ],
 };
 

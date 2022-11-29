@@ -1,5 +1,5 @@
 import { defineField, defineType } from "sanity";
-import { StringInputSmall, UpdateInfo } from "../custom-components";
+import { StringInputSmall } from "../custom-components";
 
 export const TestDoc = defineType({
   title: "Test",
@@ -8,11 +8,7 @@ export const TestDoc = defineType({
   fields: [
     defineField({
       name: "updateInfo",
-      type: "string",
-      title: " ",
-      components: {
-        field: UpdateInfo,
-      },
+      type: "updateWarning",
     }),
     defineField({
       name: "testInput",
