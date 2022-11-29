@@ -68,7 +68,7 @@ const CreateStatusBadge = (documentId) => {
     props: DocumentBadgeProps
   ): DocumentBadgeDescription | null => {
     const { published } = props;
-    const lastVerified = published?.updateInfo["lastVerified"];
+    const lastVerified = published?.updateInfo?.["lastVerified"];
 
     if (!published || !lastVerified) return;
 
