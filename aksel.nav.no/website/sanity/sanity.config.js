@@ -16,6 +16,11 @@ const sharedConfig = {
   apiVersion: "2021-10-21",
   schema: schemas,
   plugins: [
+    deskTool({
+      title: "DeskStruct",
+      structure,
+      defaultDocumentNode,
+    }),
     media({
       projectId,
       dataset: "production",
@@ -24,11 +29,6 @@ const sharedConfig = {
     visionTool(),
     unsplashImageAsset(),
     table(),
-    deskTool({
-      title: "DeskStruct",
-      structure,
-      defaultDocumentNode,
-    }),
     customPublish(),
   ],
 };
