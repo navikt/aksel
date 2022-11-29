@@ -25,8 +25,8 @@ export const Prinsipp = defineType({
       title: "url",
       name: "slug",
       type: "slug",
-      /* validation: (Rule) =>
-        Rule.required().custom((slug, { document }) => {
+      validation: (Rule) =>
+        Rule.required().custom((slug, { document }: any) => {
           if (!slug || !slug.current)
             return `Må ha noe innhold. Har du husket å velget et prinsipp først?`;
           const maxLength = document?.prinsipp?.hovedside ? 2 : 3;
@@ -51,7 +51,7 @@ export const Prinsipp = defineType({
             return `Siden må være på ${maxLength} nivå`;
           }
           return true;
-        }), */
+        }),
       group: "settings",
       options: {
         source: "heading",
