@@ -6,6 +6,7 @@ import {
   Picture,
   System,
   FileError,
+  SignLanguage,
 } from "@navikt/ds-icons";
 import {
   bloggKategorier,
@@ -32,6 +33,8 @@ const filtered = [
   "blogg_landingsside",
   "prinsipper_landingsside",
   "aksel_prinsipp",
+  "aksel_tema",
+  "godpraksis_landingsside",
 ];
 
 export const structure = async (S, { currentUser, getClient }) => {
@@ -43,6 +46,15 @@ export const structure = async (S, { currentUser, getClient }) => {
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
 
+  /* let tema = await getClient({ apiVersion: "2021-06-07" }).fetch(
+    `*[_type == "aksel_tema" && defined(seksjoner)]{title,seksjoner}`
+  );
+  tema = tema.filter((x) => x?.seksjoner?.length > 0);
+  tema = tema.map((x) => ({
+    title: x.title,
+    sider: x.seksjoner.reduce((b, n) => [...b, ...(n?.sider ?? [])], []),
+  })); */
+
   return S.list()
     .title("Innholdstyper")
     .items([
@@ -52,6 +64,58 @@ export const structure = async (S, { currentUser, getClient }) => {
             S.divider(),
           ]
         : []),
+      S.listItem()
+        .title("God Praksis")
+        .icon(SignLanguage)
+        .child(
+          S.list()
+            .title("God Praksis")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`godpraksis_landingsside`)
+                .id(`godpraksis_landingsside_id1`),
+              /* S.listItem()
+                .title("Artikler")
+                .child(() =>
+                  documentStore.listenQuery(temaQuery).pipe(
+                    map((tema: any) => {
+                      return S.list()
+                        .title("Artikler")
+                        .items([
+                          S.listItem()
+                            .title("Alle artikler")
+                            .child(S.documentTypeList("aksel_artikkel")),
+                          S.listItem()
+                            .title("Uten tema")
+                            .child(
+                              S.documentTypeList("aksel_artikkel").filter(
+                                `_type == "aksel_artikkel" && !defined(tema)`
+                              )
+                            ),
+                          ...tema.map((tag) => {
+                            return S.listItem()
+                              .title(tag.title)
+                              .child(
+                                S.documentList()
+                                  .title(tag.title)
+                                  .filter(
+                                    `_type == 'aksel_artikkel' && $tag in tema[]->title`
+                                  )
+                                  .params({ tag: tag.title })
+                              );
+                          }),
+                        ]);
+                    })
+                  )
+                ), */
+              S.divider(),
+              S.listItem()
+                .title("Temasider")
+                .child(S.documentTypeList("aksel_tema")),
+              S.divider(),
+            ])
+        ),
       S.listItem()
         .title("Prinsipper")
         .icon(LightBulb)

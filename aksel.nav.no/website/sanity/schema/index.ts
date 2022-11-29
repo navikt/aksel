@@ -23,6 +23,7 @@ export default {
     /* God-praksis */
     document.Tema,
     document.GodPraksisArtikkel,
+    document.GodPraksisLandingSide,
 
     /* Blogg */
     document.Blogg,

@@ -11,6 +11,7 @@ export * from "./grunnleggende/artikkel";
 export * from "./grunnleggende/landings-side";
 export * from "./god-praksis/tema";
 export * from "./god-praksis/artikkel";
+export * from "./god-praksis/landings-side";
 export * from "./blogg/artikkel";
 export * from "./blogg/landings-side";
 export * from "./prinsipper/artikkel";
