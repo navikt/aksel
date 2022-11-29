@@ -5,7 +5,9 @@ import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
+import { customPublish } from "./actions/CustomPublishAction";
 import schemas from "./schema";
+import { defaultDocumentNode, structure } from "./structure";
 
 const projectId = "hnbe3yhs";
 
@@ -14,7 +16,11 @@ const sharedConfig = {
   apiVersion: "2021-10-21",
   schema: schemas,
   plugins: [
-    deskTool(),
+    deskTool({
+      title: "DeskStruct",
+      structure,
+      defaultDocumentNode,
+    }),
     media({
       projectId,
       dataset: "production",
@@ -23,6 +29,7 @@ const sharedConfig = {
     visionTool(),
     unsplashImageAsset(),
     table(),
+    customPublish(),
   ],
 };
 

@@ -11,7 +11,7 @@ import {
   titleField,
 } from "@/lib";
 
-const prefix = "blogg/";
+const prefix = "produktbloggen/";
 
 export default {
   title: "Blogg",

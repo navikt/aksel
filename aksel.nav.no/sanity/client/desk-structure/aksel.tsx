@@ -68,7 +68,9 @@ export const akselInnhold = async () => {
                 })
               )
             ),
-          S.listItem().title("Blogg").child(S.documentTypeList("aksel_blogg")),
+          S.listItem()
+            .title("Produktbloggen")
+            .child(S.documentTypeList("aksel_blogg")),
           S.listItem()
             .title("Prinsipper")
             .child(

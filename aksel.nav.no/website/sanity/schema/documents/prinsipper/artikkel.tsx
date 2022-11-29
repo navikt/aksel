@@ -1,22 +1,32 @@
 import { defineField, defineType } from "sanity";
 import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
 import { ingressField } from "../presets/ingress";
 import { SEOFields } from "../presets/seo";
+import { prinsippKategorier } from "../../../config";
 
 const prefix = "prinsipper/";
-
-const prinsipper = [{ title: "Brukeropplevelse", value: "brukeropplevelse" }];
 
 export const Prinsipp = defineType({
   title: "Aksel Prinsipp",
   name: "aksel_prinsipp",
   type: "document",
   groups,
-  ...artikkelPreview,
+  preview: {
+    select: {
+      heading: "heading",
+      prinsipp: "prinsipp",
+    },
+    prepare(selection) {
+      const { heading, prinsipp } = selection;
+      return {
+        title: heading,
+        subtitle: prinsipp?.hovedside ? "Hovedside" : "",
+      };
+    },
+  },
   fields: [
     ...hiddenFields,
     editorField,
@@ -25,8 +35,8 @@ export const Prinsipp = defineType({
       title: "url",
       name: "slug",
       type: "slug",
-      /* validation: (Rule) =>
-        Rule.required().custom((slug, { document }) => {
+      validation: (Rule) =>
+        Rule.required().custom((slug, { document }: any) => {
           if (!slug || !slug.current)
             return `Må ha noe innhold. Har du husket å velget et prinsipp først?`;
           const maxLength = document?.prinsipp?.hovedside ? 2 : 3;
@@ -51,7 +61,7 @@ export const Prinsipp = defineType({
             return `Siden må være på ${maxLength} nivå`;
           }
           return true;
-        }), */
+        }),
       group: "settings",
       options: {
         source: "heading",
@@ -70,7 +80,7 @@ export const Prinsipp = defineType({
               .replace(/å/g, "a")
               .replace(/ø/g, "o")
               // eslint-disable-next-line no-useless-escape
-              .replace(/[&\/\\#,+()$~%.'"¨:*?<>{}]/g, "")
+              .replace(/[&\\#,+()$~%.'"¨:*?<>{}]/g, "")
           );
         },
       },
@@ -87,7 +97,7 @@ export const Prinsipp = defineType({
           name: "prinsippvalg",
           type: "string",
           options: {
-            list: prinsipper,
+            list: prinsippKategorier,
             layout: "radio",
           },
         }),

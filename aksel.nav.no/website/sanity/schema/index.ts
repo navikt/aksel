@@ -14,16 +14,24 @@ export default {
     document.Tokens,
     document.Props,
     document.KomponentArtikkel,
+    document.KomponentLandingSide,
+
+    /* Grunnleggende */
+    document.GrunnleggendeLandingSide,
+    document.GrunnleggendeArtikkel,
 
     /* God-praksis */
     document.Tema,
     document.GodPraksisArtikkel,
+    document.GodPraksisLandingSide,
 
     /* Blogg */
     document.Blogg,
+    document.BloggLandingSide,
 
     /* Prinsipper */
     document.Prinsipp,
+    document.PrinsipperLandingSide,
 
     /* Standalone */
     document.Standalone,
@@ -41,6 +49,7 @@ export default {
     object.Alert,
     object.Tips,
     object.UnikSidemodul,
+    object.Oppdateringsvarsel,
 
     /* Riktekst */
     object.RiktekstKomponent,

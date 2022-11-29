@@ -4,9 +4,11 @@ import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
-import { sanitySlug } from "../presets/slug";
+import { kategoriSlug, sanitySlug } from "../presets/slug";
+import { komponentKategorier } from "../../../config";
 
-const prefix = "designsystem/komponenter/";
+const prefixOld = "designsystem/komponenter/";
+const prefix = "komponenter/";
 
 export const KomponentArtikkel = defineType({
   title: "Komponentartikkel",
@@ -18,7 +20,22 @@ export const KomponentArtikkel = defineType({
     ...hiddenFields,
     editorField,
     titleField,
-    sanitySlug(prefix, 3),
+    defineField({
+      title: "Kategori",
+      name: "kategori",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: komponentKategorier.map((x) => ({
+          title: x.title,
+          value: x.value,
+        })),
+        layout: "radio",
+      },
+    }),
+    sanitySlug(prefixOld, 3),
+    kategoriSlug(prefix),
+
     defineField({
       title: "Metadata",
       name: "status",

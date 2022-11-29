@@ -1,9 +1,6 @@
-import { People } from "@navikt/ds-icons";
 import React from "react";
-/* import profilePage from "../../components/profile/profile-page";
-import { isEditorUnique } from "@/lib";
-import userStore from "part:@sanity/base/user"; */
 import { defineType, defineField } from "sanity";
+import Avatar from "boring-avatars";
 
 export const Editors = defineType({
   title: "Forfattere",
@@ -16,20 +13,21 @@ export const Editors = defineType({
       type: "string",
       validation: (Rule) => Rule.required().error("Må legge til navn"),
     }),
-    /* defineField({
-      title: "Sanity bruker-id",
+    defineField({
+      title: "Sanity bruker-id (dev only)",
       name: "user_id",
       type: "slug",
       validation: (Rule) => Rule.required().error("Må ha Id"),
       options: {
-        isUnique: isEditorUnique,
-        source: async () => {
-          const { id } = await userStore.getUser("me");
-          return id;
+        source: (_, { currentUser }) => {
+          return currentUser.id;
         },
         slugify: (input) => input,
       },
-    }), */
+      readOnly: true,
+      hidden: ({ currentUser }) =>
+        !currentUser.roles.find((x) => x.name === "developer"),
+    }),
     defineField({
       title: "Roller",
       description: "eks: Utvikler, Webanalytiker, uu-spesialist",
@@ -58,11 +56,21 @@ export const Editors = defineType({
     select: {
       title: "title",
     },
-    prepare(selection) {
+    prepare(selection, ...rest) {
       const { title } = selection;
+
       return {
         title,
-        media: () => <People />,
+        subtitle: "Min profilside",
+        media: () => (
+          <Avatar
+            size={100}
+            name={title}
+            square
+            variant="beam"
+            colors={["#D1DAB9", "#92BEA5", "#6F646C", "#671045", "#31233E"]}
+          />
+        ),
       };
     },
   },

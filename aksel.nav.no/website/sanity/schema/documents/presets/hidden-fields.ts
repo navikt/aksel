@@ -1,21 +1,13 @@
 import { defineField } from "sanity";
 
 const publishedAt = defineField({
-  title: "Publiseringsdato",
+  title: "Publiseringsdato (dev only)",
   name: "publishedAt",
   type: "datetime",
   group: "settings",
-  hidden: true,
-  /* hidden: ({ currentUser }) =>
-    !currentUser.roles.find((x) => x.name === "administrator"), */
+  readOnly: true,
+  hidden: ({ currentUser }) =>
+    !currentUser.roles.find((x) => x.name === "developer"),
 });
 
-const lastUpdatedAt = defineField({
-  title: "Sist oppdatert",
-  name: "lastUpdatedAt",
-  type: "datetime",
-  group: "settings",
-  hidden: true,
-});
-
-export const hiddenFields = [publishedAt, lastUpdatedAt];
+export const hiddenFields = [publishedAt];

@@ -20,8 +20,8 @@ const Page = (props: PageProps): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Blogg - Aksel</title>
-        <meta property="og:title" content="Blogg - Aksel" />
+        <title>Produktbloggen - Aksel</title>
+        <meta property="og:title" content="Produktbloggen - Aksel" />
       </Head>
       <div className="bg-gray-50">
         <AkselHeader variant="inngang" />
@@ -38,7 +38,7 @@ const Page = (props: PageProps): JSX.Element => {
                 spacing
                 className="algolia-index-lvl1"
               >
-                Blogg
+                Produktbloggen
               </Heading>
             </div>
           </div>

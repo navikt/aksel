@@ -2,28 +2,29 @@ import { Card, Stack, Text } from "@sanity/ui";
 import { differenceInDays } from "date-fns";
 import { StringFieldProps } from "sanity";
 
-export function UpdateInfo(props: StringFieldProps) {
-  const testDate = new Date("Nov 10 2022");
+type Status = "positive" | "critical" | "caution";
 
-  const content =
-    differenceInDays(new Date(), testDate) < 100
-      ? { tone: "positive", message: "Article is recently updated" }
-      : {
-          tone: "critical",
-          message:
-            "Articlehas not been updated in more than 100 days, might be outdated...",
-        };
+export function UpdateInfo(props: StringFieldProps) {
+  const testDate = new Date("Feb 10 2022");
+  const diff = differenceInDays(new Date(), testDate);
+  const status: Status =
+    diff > 365
+      ? "critical"
+      : diff > 150 && diff <= 365
+      ? "caution"
+      : "positive";
+
+  const messages = {
+    positive: "Article has recently been updated",
+    caution: "Article has not been updated or verified in more than 150 days",
+    critical: "Article ha not been updated or verified in more than a year.",
+  };
 
   return (
     <Stack space={3}>
-      <Card
-        padding={[3, 3, 4]}
-        radius={2}
-        shadow={1}
-        tone={content.tone === "positive" ? "positive" : "critical"}
-      >
+      <Card padding={[3, 3, 4]} radius={2} shadow={1} tone={status}>
         <Text align="center" size={[2, 2, 3]}>
-          {content.message}
+          {messages[status]}
         </Text>
       </Card>
     </Stack>
