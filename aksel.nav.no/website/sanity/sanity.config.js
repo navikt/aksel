@@ -7,7 +7,7 @@ import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
 import { customPublish } from "./actions/CustomPublishAction";
 import schemas from "./schema";
-import { defaultDocumentNode, structure } from "./structure";
+import { /* defaultDocumentNode, */ structure } from "./structure";
 
 const projectId = "hnbe3yhs";
 
@@ -19,7 +19,7 @@ const sharedConfig = {
     deskTool({
       title: "DeskStruct",
       structure,
-      defaultDocumentNode,
+      /* defaultDocumentNode, */
     }),
     media({
       projectId,
