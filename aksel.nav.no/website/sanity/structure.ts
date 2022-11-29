@@ -17,11 +17,19 @@ const filtered = [
   "aksel_standalone",
 ];
 
-export const structure = (S, context) => {
-  console.log(context);
+export const structure = async (S, { currentUser, getClient }) => {
+  const ids = await getClient({ apiVersion: "2021-06-07" })
+    .fetch(`*[_type == "editor"]{
+      _id,
+      user_id
+    }`);
+
+  const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
+
   return S.list()
     .title("Innholdstyper")
     .items([
+      S.documentListItem().schemaType(`editor`).id(editor._id),
       S.listItem()
         .title("Grunnleggende")
         .icon(System)
