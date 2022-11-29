@@ -49,8 +49,13 @@ export const getAkselDocuments = async (
   const documents: any[] | null = await client.fetch(akselDocumentsByType, {
     types:
       source === "all"
-        ? `["aksel_artikkel", "aksel_blogg", "aksel_prinsipp", "aksel_standalone"]`
-        : `["${source}"]`,
+        ? [
+            "aksel_artikkel",
+            "aksel_blogg",
+            "aksel_prinsipp",
+            "aksel_standalone",
+          ]
+        : [source],
   });
   const paths = [];
 
