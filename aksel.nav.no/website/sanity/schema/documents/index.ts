@@ -14,4 +14,5 @@ export * from "./god-praksis/artikkel";
 export * from "./blogg/artikkel";
 export * from "./blogg/landings-side";
 export * from "./prinsipper/artikkel";
+export * from "./prinsipper/landings-side";
 export * from "./standalone-artikkel";

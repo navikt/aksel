@@ -62,3 +62,7 @@ export const bloggKategorier = [
   "Da vi gjorde dette",
   "På reise",
 ];
+
+export const prinsippKategorier = [
+  { title: "Brukeropplevelse", value: "brukeropplevelse" },
+];

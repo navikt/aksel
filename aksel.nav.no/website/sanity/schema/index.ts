@@ -30,6 +30,7 @@ export default {
 
     /* Prinsipper */
     document.Prinsipp,
+    document.PrinsipperLandingSide,
 
     /* Standalone */
     document.Standalone,

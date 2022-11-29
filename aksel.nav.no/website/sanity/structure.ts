@@ -2,6 +2,7 @@ import {
   Baggage,
   EyeScreened,
   Facilitet,
+  LightBulb,
   Picture,
   System,
 } from "@navikt/ds-icons";
@@ -9,6 +10,7 @@ import {
   bloggKategorier,
   grunnleggendeKategorier,
   komponentKategorier,
+  prinsippKategorier,
 } from "./config";
 /* import { WebPreview, JsonView } from './previews' */
 
@@ -27,6 +29,8 @@ const filtered = [
   "aksel_standalone",
   "aksel_blogg",
   "blogg_landingsside",
+  "prinsipper_landingsside",
+  "aksel_prinsipp",
 ];
 
 export const structure = async (S, { currentUser, getClient }) => {
@@ -42,6 +46,35 @@ export const structure = async (S, { currentUser, getClient }) => {
     .title("Innholdstyper")
     .items([
       S.documentListItem().schemaType(`editor`).id(editor._id),
+      S.listItem()
+        .title("Prinsipper")
+        .icon(LightBulb)
+        .child(
+          S.list()
+            .title("Prinsipper")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`prinsipper_landingsside`)
+                .id(`prinsipper_landingsside_id1`),
+              S.divider(),
+              ...prinsippKategorier.map(({ value, title }) =>
+                S.listItem()
+                  .title(title)
+                  .child(
+                    S.documentList()
+                      .title(title)
+                      .filter(
+                        `_type == 'aksel_prinsipp' && $value == prinsipp.prinsippvalg`
+                      )
+                      .params({ value })
+                  )
+              ),
+              S.listItem()
+                .title("Alle artikler")
+                .child(S.documentTypeList("aksel_prinsipp")),
+            ])
+        ),
       S.listItem()
         .title("Grunnleggende")
         .icon(System)

@@ -1,22 +1,32 @@
 import { defineField, defineType } from "sanity";
 import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
 import { ingressField } from "../presets/ingress";
 import { SEOFields } from "../presets/seo";
+import { prinsippKategorier } from "../../../config";
 
 const prefix = "prinsipper/";
-
-const prinsipper = [{ title: "Brukeropplevelse", value: "brukeropplevelse" }];
 
 export const Prinsipp = defineType({
   title: "Aksel Prinsipp",
   name: "aksel_prinsipp",
   type: "document",
   groups,
-  ...artikkelPreview,
+  preview: {
+    select: {
+      heading: "heading",
+      prinsipp: "prinsipp",
+    },
+    prepare(selection) {
+      const { heading, prinsipp } = selection;
+      return {
+        title: heading,
+        subtitle: prinsipp?.hovedside ? "Hovedside" : "",
+      };
+    },
+  },
   fields: [
     ...hiddenFields,
     editorField,
@@ -87,7 +97,7 @@ export const Prinsipp = defineType({
           name: "prinsippvalg",
           type: "string",
           options: {
-            list: prinsipper,
+            list: prinsippKategorier,
             layout: "radio",
           },
         }),
