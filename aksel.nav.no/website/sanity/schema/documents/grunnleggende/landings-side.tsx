@@ -1,6 +1,4 @@
 import { defineField, defineType } from "sanity";
-import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
 import { grunnleggendeKategorier } from "../../../config";
 
 const views = grunnleggendeKategorier.map((kat) =>
@@ -28,8 +26,6 @@ export const GrunnleggendeLandingSide = defineType({
   title: "Landingsside Grunnleggende",
   name: "grunnleggende_landingsside",
   type: "document",
-  groups,
-  ...artikkelPreview,
   fields: [
     defineField({
       title: "Intro",

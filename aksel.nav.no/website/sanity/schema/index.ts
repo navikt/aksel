@@ -26,6 +26,7 @@ export default {
 
     /* Blogg */
     document.Blogg,
+    document.BloggLandingSide,
 
     /* Prinsipper */
     document.Prinsipp,

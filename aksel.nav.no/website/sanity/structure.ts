@@ -1,5 +1,15 @@
-import { EyeScreened, Facilitet, Picture, System } from "@navikt/ds-icons";
-import { grunnleggendeKategorier, komponentKategorier } from "./config";
+import {
+  Baggage,
+  EyeScreened,
+  Facilitet,
+  Picture,
+  System,
+} from "@navikt/ds-icons";
+import {
+  bloggKategorier,
+  grunnleggendeKategorier,
+  komponentKategorier,
+} from "./config";
 /* import { WebPreview, JsonView } from './previews' */
 
 const filtered = [
@@ -15,6 +25,8 @@ const filtered = [
   "kode_eksempler_fil",
   "ds_props",
   "aksel_standalone",
+  "aksel_blogg",
+  "blogg_landingsside",
 ];
 
 export const structure = async (S, { currentUser, getClient }) => {
@@ -93,6 +105,37 @@ export const structure = async (S, { currentUser, getClient }) => {
                     .filter(
                       `_type == 'komponent_artikkel' && !defined(kategori)`
                     )
+                ),
+            ])
+        ),
+      S.listItem()
+        .title("Produktbloggen")
+        .icon(Baggage)
+        .child(
+          S.list()
+            .title("Produktbloggen")
+            .items([
+              S.documentListItem()
+                .title(`Landingsside`)
+                .schemaType(`blogg_landingsside`)
+                .id(`blogg_landingsside_id1`),
+              S.divider(),
+              ...bloggKategorier.map((kat) => {
+                return S.listItem()
+                  .title(kat)
+                  .child(
+                    S.documentList()
+                      .title(kat)
+                      .filter(`_type == 'aksel_blogg' && $kat == kategori`)
+                      .params({ kat })
+                  );
+              }),
+              S.listItem()
+                .title("Uten kategori")
+                .child(
+                  S.documentList()
+                    .title("Uten kategori")
+                    .filter(`_type == 'aksel_blogg' && !defined(kategori)`)
                 ),
             ])
         ),

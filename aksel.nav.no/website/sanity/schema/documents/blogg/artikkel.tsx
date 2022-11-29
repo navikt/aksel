@@ -7,6 +7,7 @@ import { titleField } from "../presets/title-field";
 import { ingressField } from "../presets/ingress";
 import { SEOFields } from "../presets/seo";
 import { sanitySlug } from "../presets/slug";
+import { bloggKategorier } from "../../../config";
 
 const prefix = "blogg/";
 
@@ -20,6 +21,16 @@ export const Blogg = defineType({
     ...hiddenFields,
     editorField,
     titleField,
+    defineField({
+      title: "Kategori",
+      name: "kategori",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: bloggKategorier.map((x) => ({ title: x, value: x })),
+        layout: "radio",
+      },
+    }),
     sanitySlug(prefix, 2),
     ingressField,
     defineField({

@@ -51,6 +51,14 @@ export const allArticleDocuments = [
 
 export const allArticleDocsRef = allArticleDocuments.map((x) => ({ type: x }));
 
+/* Må være lowercase, no space */
 export const komponentKategorier = ["core", "internal"];
 export const grunnleggendeKategorier = ["styling", "staesj", "guider"];
 export const monsterKategorier = [];
+
+/* Kan skrives rett ut */
+export const bloggKategorier = [
+  "Nytt fra teamene",
+  "Da vi gjorde dette",
+  "På reise",
+];
