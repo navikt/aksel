@@ -1,27 +1,47 @@
+import { format } from "date-fns";
 import {
   definePlugin,
   DocumentActionComponent,
   DocumentActionDescription,
   DocumentActionProps,
+  useDocumentOperation,
 } from "sanity";
 
 const includedSchemas: string[] = ["testDoc"];
 
 const createWrappedPublishAction = (publishAction: DocumentActionComponent) => {
-  const wrappedPublish = (
+  const WrappedPublish = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
     const originalPublishDescription = publishAction(props);
+    const { patch, publish } = useDocumentOperation(props.id, props.type);
 
     return (
       originalPublishDescription && {
         ...originalPublishDescription,
         label: "Publish 2.0",
+        onHandle: () => {
+          !props.published &&
+            patch.execute(
+              [
+                {
+                  set: {
+                    updateInfo: {
+                      initialPublish: format(new Date(), "yyyy-MM-dd"),
+                    },
+                  },
+                },
+              ],
+              props
+            );
+          publish.execute();
+          props.onComplete();
+        },
       }
     );
   };
 
-  return wrappedPublish;
+  return WrappedPublish;
 };
 
 export const customPublish = definePlugin({
@@ -29,7 +49,6 @@ export const customPublish = definePlugin({
   document: {
     actions: (prev, { schemaType }) => {
       return prev.map((action) => {
-        console.log(schemaType);
         if (
           includedSchemas.some((e) => e === schemaType) &&
           action.action === "publish"
