@@ -73,13 +73,10 @@ const CreateStatusBadge = (documentId) => {
     if (!published || !lastVerified) return;
 
     const outDated =
-      differenceInMonths(new Date(), new Date(lastVerified)) >= 6
-        ? true
-        : false;
-    console.log(outDated);
+      differenceInMonths(new Date(), new Date("Jan 1 2020")) >= 6;
 
     return {
-      label: outDated ? "Utdatert" : "Oppdatert",
+      label: outDated ? "Må godkjennes" : "Oppdatert",
       title: outDated
         ? "Denne artikkelen har ikke blitt oppdatert/verifisert på over 6 mnd."
         : "Denne artikkelen er oppdatert",
