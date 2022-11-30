@@ -58,8 +58,11 @@ export const publicationFlow = definePlugin({
       }
       return prev;
     },
-    badges: (prev, { documentId }) => {
-      return generateBadges(prev, documentId);
+    badges: (prev, { documentId, schemaType }) => {
+      if (includedSchemas.some((e) => e === schemaType)) {
+        return generateBadges(prev, documentId);
+      }
+      return prev;
     },
   },
 });
