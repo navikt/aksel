@@ -5,7 +5,7 @@ import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import { customPublish } from "./actions/CustomPublishAction";
+import { publicationFlow } from "./custom-plugins";
 import schemas from "./schema";
 import { /* defaultDocumentNode, */ structure } from "./structure";
 
@@ -29,7 +29,7 @@ const sharedConfig = {
     visionTool(),
     unsplashImageAsset(),
     table(),
-    customPublish(),
+    publicationFlow(),
   ],
 };
 
