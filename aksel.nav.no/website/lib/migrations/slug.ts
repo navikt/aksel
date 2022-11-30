@@ -52,10 +52,8 @@ const main = async () => {
       permanent: true,
     });
     console.log({
-      _type: "redirect",
       source: `/${data.old}`,
       destination: `/${data.slug.current}`,
-      permanent: true,
     });
     delete data.old;
     transactionClient.patch(id, (p) =>
