@@ -18,7 +18,7 @@ export const createWrappedPublishAction = (
     return (
       originalPublishDescription && {
         ...originalPublishDescription,
-        label: "Publish 2.0",
+        label: "Publiser",
         onHandle: () => {
           !props.published &&
             patch.execute(
