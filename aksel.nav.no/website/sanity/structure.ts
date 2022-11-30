@@ -15,7 +15,6 @@ import {
   prinsippKategorier,
 } from "./config";
 /* import { WebPreview, JsonView } from './previews' */
-
 const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
@@ -314,9 +313,8 @@ export const structure = async (S, { currentUser, getClient }) => {
       S.view.component(WebPreview).title("Web"),
     ]);
   }
-
   return S.document().views([
     S.view.form(),
-    S.view.component(JsonView).title("JSON"),
+    S.view.component((p) => <Test {...p} form={S.view.form()} />).title("JSON"),
   ]);
 }; */

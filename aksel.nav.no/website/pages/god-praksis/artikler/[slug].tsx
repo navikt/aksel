@@ -7,7 +7,7 @@ import {
 } from "@/lib";
 import { getClient } from "@/sanity-client";
 import React from "react";
-import NotFotfund from "../404";
+import NotFotfund from "../../404";
 
 const Page = (props: {
   slug?: string;
@@ -61,7 +61,7 @@ export const getStaticProps = async ({
   preview?: boolean;
 }): Promise<StaticProps | { notFound: true }> => {
   const page = await getClient().fetch(akselDocumentBySlug, {
-    slug: `artikkel/${slug}`,
+    slug: `god-praksis/artikler/${slug}`,
   });
 
   return {

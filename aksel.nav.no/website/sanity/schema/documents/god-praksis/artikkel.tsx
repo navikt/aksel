@@ -9,7 +9,7 @@ import { SEOFields } from "../presets/seo";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import { sanitySlug } from "../presets/slug";
 
-const prefix = "artikkel/";
+const prefix = "god-praksis/artikler/";
 
 export const GodPraksisArtikkel = defineType({
   title: "Aksel Artikkel",
@@ -21,7 +21,7 @@ export const GodPraksisArtikkel = defineType({
     ...hiddenFields,
     editorField,
     titleField,
-    sanitySlug(prefix, 2),
+    sanitySlug(prefix, 3),
     defineField({
       title: "Tema",
       description: "Legg til de viktigeste temaene",

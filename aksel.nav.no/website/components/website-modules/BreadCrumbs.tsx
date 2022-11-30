@@ -17,8 +17,8 @@ export const BreadCrumbs = ({
   }
 
   return (
-    <NextLink href={href ?? `/tema/${router.query.tema}`} passHref>
-      <a className="group mb-1 flex w-fit items-center justify-start text-deepblue-500 hover:text-deepblue-800 focus:underline focus:outline-none">
+    <NextLink href={href ?? `/god-praksis/${router.query.tema}`} passHref>
+      <a className="text-deepblue-500 hover:text-deepblue-800 group mb-1 flex w-fit items-center justify-start focus:underline focus:outline-none">
         <svg
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,7 @@ export const BreadCrumbs = ({
           <path
             d="M16 9.72266L8 9.72266"
             strokeWidth="1.5"
-            className="hidden stroke-deepblue-500 group-hover:block group-hover:stroke-deepblue-800"
+            className="stroke-deepblue-500 group-hover:stroke-deepblue-800 hidden group-hover:block"
           />
         </svg>
 

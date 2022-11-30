@@ -251,11 +251,15 @@ const Page = (props: PageProps): JSX.Element => {
                 <div className="card-grid-3-1 mt-4">
                   {/* Temakort */}
                   {filteredTemas.slice(0, 7).map((tema) => (
-                    <TemaCard {...tema} key={tema._id} />
+                    <TemaCard
+                      urlPrefix="god-praksis"
+                      {...tema}
+                      key={tema._id}
+                    />
                   ))}
                 </div>
                 {filteredTemas.length > 6 && (
-                  <NextLink href="/tema">
+                  <NextLink href="/god-praksis">
                     <a className="text-text-default hover:text-deepblue-700 mt-6 inline-block underline hover:no-underline">
                       Utforsk alle temaer
                     </a>

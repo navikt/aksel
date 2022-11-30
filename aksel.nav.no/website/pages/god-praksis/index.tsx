@@ -13,7 +13,7 @@ interface PageProps {
   preview: boolean;
 }
 
-const Page = (props: PageProps): JSX.Element => {
+const LandingsSide = (props: PageProps): JSX.Element => {
   const { data } = usePreviewSubscription(akselTema, {
     initialData: props.page,
     enabled: props?.preview,
@@ -27,7 +27,7 @@ const Page = (props: PageProps): JSX.Element => {
         <meta property="og:title" content="Temaer - Aksel" />
         <meta
           name="description"
-          content="Oversikt over alle tilgjengelige tema"
+          content="Oversikt over alle tilgjengelige god praksis temaer"
         />
       </Head>
       <div className="bg-gray-50">
@@ -53,7 +53,12 @@ const Page = (props: PageProps): JSX.Element => {
             <div className="dynamic-wrapper">
               <div className="card-grid-3-1 mt-4">
                 {filteredTemas.map((tema) => (
-                  <TemaCard compact {...tema} key={tema._id} />
+                  <TemaCard
+                    urlPrefix="god-praksis"
+                    compact
+                    {...tema}
+                    key={tema._id}
+                  />
                 ))}
               </div>
             </div>
@@ -75,7 +80,7 @@ export const getStaticProps = async ({
   return {
     props: {
       page: page,
-      slug: "/tema",
+      slug: "/god-praksis",
       preview,
     },
     notFound: !page,
@@ -83,4 +88,4 @@ export const getStaticProps = async ({
   };
 };
 
-export default Page;
+export default LandingsSide;

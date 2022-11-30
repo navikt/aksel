@@ -2,7 +2,6 @@ import {
   defaultDocPreview,
   groups,
   innholdFieldNew,
-  migratedField,
   publishedAtField,
   sanitySlug,
   titleField,
@@ -21,6 +20,5 @@ export default {
     titleField,
     sanitySlug(prefix, 2),
     innholdFieldNew,
-    migratedField,
   ],
 };

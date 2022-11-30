@@ -18,6 +18,7 @@ import cl from "classnames";
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
     slug: string;
+    slug_v2?: string;
     tema: string[];
     contributors?: { title?: string }[];
   }
@@ -35,7 +36,7 @@ interface PageProps {
   preview: boolean;
 }
 
-const Page = (props: PageProps): JSX.Element => {
+const Temaside = (props: PageProps): JSX.Element => {
   const { data } = usePreviewSubscription(akselTemaDocs, {
     initialData: props.page,
     enabled: props?.preview,
@@ -64,7 +65,7 @@ const Page = (props: PageProps): JSX.Element => {
         >
           <div className="relative overflow-x-clip bg-white pt-12">
             <div className="dynamic-wrapper px-4 pb-6">
-              <BreadCrumbs href="/tema" text="Temaer" />
+              <BreadCrumbs href="/god-praksis" text="Temaer" />
               <Heading
                 level="1"
                 size="xlarge"
@@ -106,14 +107,14 @@ const Page = (props: PageProps): JSX.Element => {
                       <Label as="div">
                         {page?.ansvarlig?.title
                           ? abbrName(page?.ansvarlig?.title)
-                          : "placeholder"}
+                          : ""}
                       </Label>
                       {page?.ansvarlig?.roller?.length > 0 ? (
                         <div className="mt-[2px]">
                           {page?.ansvarlig?.roller.join(", ")}
                         </div>
                       ) : (
-                        "placeholder"
+                        ""
                       )}
                     </div>
                   </div>
@@ -207,4 +208,4 @@ export const getStaticProps = async ({
   };
 };
 
-export default Page;
+export default Temaside;

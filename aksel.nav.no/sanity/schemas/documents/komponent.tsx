@@ -3,7 +3,6 @@ import {
   editorField,
   groups,
   innholdFieldNew,
-  migratedField,
   publishedAtField,
   sanitySlug,
   titleField,

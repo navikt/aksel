@@ -526,6 +526,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
+       * Url v2 - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
+        current: string;
+      };
+
+      /**
        * Tema - `Array`
 Legg til de viktigeste temaene
        */

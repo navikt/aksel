@@ -4,7 +4,6 @@ import {
   groups,
   ingressField,
   innholdFieldNew,
-  migratedField,
   publishedAtField,
   relevanteArtiklerField,
   sanitySlug,
@@ -12,7 +11,8 @@ import {
   titleField,
 } from "@/lib";
 
-const prefix = "artikkel/";
+const prefixOld = "artikkel/";
+const prefix = "god-praksis/artikler/";
 
 export default {
   title: "Aksel Artikkel",
@@ -24,7 +24,7 @@ export default {
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefix, 2),
+    sanitySlug(prefix, 3),
     {
       title: "Tema",
       description: "Legg til de viktigeste temaene",
@@ -39,6 +39,5 @@ export default {
     relevanteArtiklerField,
 
     SEOFields,
-    migratedField,
   ],
 };
