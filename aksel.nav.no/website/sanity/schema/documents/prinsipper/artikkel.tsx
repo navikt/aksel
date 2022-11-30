@@ -80,7 +80,7 @@ export const Prinsipp = defineType({
               .replace(/å/g, "a")
               .replace(/ø/g, "o")
               // eslint-disable-next-line no-useless-escape
-              .replace(/[&\\#,+()$~%.'"¨:*?<>{}]/g, "")
+              .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
           );
         },
       },

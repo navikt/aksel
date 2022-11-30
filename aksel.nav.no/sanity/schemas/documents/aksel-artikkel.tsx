@@ -12,7 +12,8 @@ import {
   titleField,
 } from "@/lib";
 
-const prefix = "artikkel/";
+const prefixOld = "artikkel/";
+const prefix = "god-praksis/artikler/";
 
 export default {
   title: "Aksel Artikkel",
@@ -24,7 +25,15 @@ export default {
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefix, 2),
+    sanitySlug(prefixOld, 2),
+    {
+      ...sanitySlug(prefix, 3),
+      name: "slug_v2",
+      title: "Url v2",
+      hidden: ({ currentUser }) =>
+        !currentUser.roles.find((x) => x.name === "developer"),
+      validation: () => null,
+    },
     {
       title: "Tema",
       description: "Legg til de viktigeste temaene",
