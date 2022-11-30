@@ -13,7 +13,10 @@ import {
   grunnleggendeKategorier,
   komponentKategorier,
   prinsippKategorier,
-} from "./config";
+} from "../../config";
+
+import { PanesWithCount } from "./with-count";
+
 /* import { WebPreview, JsonView } from './previews' */
 const filtered = [
   "ds_artikkel",
@@ -36,7 +39,7 @@ const filtered = [
   "godpraksis_landingsside",
 ];
 
-export const structure = async (S, { currentUser, getClient }) => {
+export const structure = async (S, { currentUser, getClient, ...rest }) => {
   const ids = await getClient({ apiVersion: "2021-06-07" })
     .fetch(`*[_type == "editor"]{
       _id,
@@ -156,24 +159,12 @@ export const structure = async (S, { currentUser, getClient }) => {
                 .schemaType(`grunnleggende_landingsside`)
                 .id(`grunnleggende_landingsside_id1`),
               S.divider(),
-              ...grunnleggendeKategorier.map((kat) => {
-                return S.listItem()
-                  .title(kat.title)
-                  .child(
-                    S.documentList()
-                      .title(kat.title)
-                      .filter(`_type == 'ds_artikkel' && $kat == kategori`)
-                      .params({ kat: kat.value })
-                  );
-              }),
-              S.listItem()
-                .title("Uten kategori")
-                .icon(FileError)
-                .child(
-                  S.documentList()
-                    .title("Uten kategori")
-                    .filter(`_type == 'ds_artikkel' && !defined(kategori)`)
-                ),
+              ...(await PanesWithCount(
+                "ds_artikkel",
+                grunnleggendeKategorier,
+                getClient,
+                S
+              )),
             ])
         ),
       S.listItem()
@@ -188,28 +179,12 @@ export const structure = async (S, { currentUser, getClient }) => {
                 .schemaType(`komponent_landingsside`)
                 .id(`komponent_landingsside_id1`),
               S.divider(),
-              ...komponentKategorier.map((kat) => {
-                return S.listItem()
-                  .title(kat.title)
-                  .child(
-                    S.documentList()
-                      .title(kat.title)
-                      .filter(
-                        `_type == 'komponent_artikkel' && $kat == kategori`
-                      )
-                      .params({ kat: kat.value })
-                  );
-              }),
-              S.listItem()
-                .title("Uten kategori")
-                .icon(FileError)
-                .child(
-                  S.documentList()
-                    .title("Uten kategori")
-                    .filter(
-                      `_type == 'komponent_artikkel' && !defined(kategori)`
-                    )
-                ),
+              ...(await PanesWithCount(
+                "komponent_artikkel",
+                komponentKategorier,
+                getClient,
+                S
+              )),
             ])
         ),
       S.listItem()
@@ -224,24 +199,12 @@ export const structure = async (S, { currentUser, getClient }) => {
                 .schemaType(`blogg_landingsside`)
                 .id(`blogg_landingsside_id1`),
               S.divider(),
-              ...bloggKategorier.map((kat) => {
-                return S.listItem()
-                  .title(kat.title)
-                  .child(
-                    S.documentList()
-                      .title(kat.value)
-                      .filter(`_type == 'aksel_blogg' && $kat == kategori`)
-                      .params({ kat })
-                  );
-              }),
-              S.listItem()
-                .title("Uten kategori")
-                .icon(FileError)
-                .child(
-                  S.documentList()
-                    .title("Uten kategori")
-                    .filter(`_type == 'aksel_blogg' && !defined(kategori)`)
-                ),
+              ...(await PanesWithCount(
+                "aksel_blogg",
+                bloggKategorier,
+                getClient,
+                S
+              )),
             ])
         ),
       S.divider(),
