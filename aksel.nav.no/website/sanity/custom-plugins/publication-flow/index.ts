@@ -3,6 +3,7 @@ import {
   createWrappedDeleteAction,
   createWrappedDuplicateAction,
   createWrappedPublishAction,
+  createWrappedRestoreAction,
   createWrappedUnpublishAction,
 } from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
@@ -44,6 +45,12 @@ export const publicationFlow = definePlugin({
           action.action === "duplicate"
         ) {
           return createWrappedDuplicateAction(action);
+        }
+        if (
+          includedSchemas.some((e) => e === schemaType) &&
+          action.action === "restore"
+        ) {
+          return createWrappedRestoreAction(action);
         }
         return action;
       });
