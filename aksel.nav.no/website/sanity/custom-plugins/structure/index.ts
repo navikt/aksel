@@ -4,9 +4,8 @@ import {
   Facilitet,
   LightBulb,
   Picture,
-  System,
-  FileError,
   SignLanguage,
+  System,
 } from "@navikt/ds-icons";
 import {
   bloggKategorier,
@@ -15,6 +14,7 @@ import {
   prinsippKategorier,
 } from "../../config";
 
+import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
 
 /* import { WebPreview, JsonView } from './previews' */
@@ -37,6 +37,7 @@ const filtered = [
   "aksel_prinsipp",
   "aksel_tema",
   "godpraksis_landingsside",
+  "aksel_artikkel",
 ];
 
 export const structure = async (S, { currentUser, getClient, ...rest }) => {
@@ -77,45 +78,8 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
                 .title(`Landingsside`)
                 .schemaType(`godpraksis_landingsside`)
                 .id(`godpraksis_landingsside_id1`),
-              /* S.listItem()
-                .title("Artikler")
-                .child(() =>
-                  documentStore.listenQuery(temaQuery).pipe(
-                    map((tema: any) => {
-                      return S.list()
-                        .title("Artikler")
-                        .items([
-                          S.listItem()
-                            .title("Alle artikler")
-                            .child(S.documentTypeList("aksel_artikkel")),
-                          S.listItem()
-                            .title("Uten tema")
-                            .child(
-                              S.documentTypeList("aksel_artikkel").filter(
-                                `_type == "aksel_artikkel" && !defined(tema)`
-                              )
-                            ),
-                          ...tema.map((tag) => {
-                            return S.listItem()
-                              .title(tag.title)
-                              .child(
-                                S.documentList()
-                                  .title(tag.title)
-                                  .filter(
-                                    `_type == 'aksel_artikkel' && $tag in tema[]->title`
-                                  )
-                                  .params({ tag: tag.title })
-                              );
-                          }),
-                        ]);
-                    })
-                  )
-                ), */
               S.divider(),
-              S.listItem()
-                .title("Temasider")
-                .child(S.documentTypeList("aksel_tema")),
-              S.divider(),
+              ...(await GodPraksisPanes(getClient, S)),
             ])
         ),
       S.listItem()
@@ -263,6 +227,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
             ])
         ),
 
+      S.divider(),
       ...S.documentTypeListItems().filter(
         (listItem) => !filtered.includes(listItem.getId())
       ),
