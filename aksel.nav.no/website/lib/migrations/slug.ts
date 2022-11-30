@@ -27,7 +27,7 @@ const main = async () => {
   docs.forEach((data) => {
     data?.slug?.current &&
     data?.slug?.current.startsWith("artikkel/") &&
-    !data?.slug_v2
+    (!data?.slug_v2 || data?.slug_v2?.current !== data?.slug?.current)
       ? newData.push({
           _id: data._id,
           slug_v2: {
