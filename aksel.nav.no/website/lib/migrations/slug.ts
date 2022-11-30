@@ -25,7 +25,9 @@ const main = async () => {
   const newData = [];
 
   docs.forEach((data) => {
-    data?.slug?.current && data?.slug?.current.startsWith("artikkel/")
+    data?.slug?.current &&
+    data?.slug?.current.startsWith("artikkel/") &&
+    !data?.slug_v2
       ? newData.push({
           _id: data._id,
           slug_v2: {
@@ -47,7 +49,7 @@ const main = async () => {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
-    .then((a) => console.log(`Updated! \n${a}`))
+    .then((a) => console.log(`Updated! \n${JSON.stringify(a, null, 2)}`))
     .catch((e) => console.error(e.message));
 };
 
