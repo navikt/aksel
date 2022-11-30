@@ -60,9 +60,39 @@ const main = async () => {
       p.set({ ...data }).unset(["slug_v2", "isMigrated"])
     );
   }
+  /* transactionClient.create({
+    _type: "redirect",
+    source: `/tema`,
+    destination: `/god-praksis`,
+    permanent: true,
+  });
+  transactionClient.create({
+    _type: "redirect",
+    source: `/tema/innholdsarbeid`,
+    destination: `/god-praksis/innholdsarbeid`,
+    permanent: true,
+  });
+  transactionClient.create({
+    _type: "redirect",
+    source: `/tema/brukerinnsikt`,
+    destination: `/god-praksis/brukerinnsikt`,
+    permanent: true,
+  });
+  transactionClient.create({
+    _type: "redirect",
+    source: `/tema/universell-utforming`,
+    destination: `/god-praksis/universell-utforming`,
+    permanent: true,
+  });
+  transactionClient.create({
+    _type: "redirect",
+    source: `/tema/interne-flater`,
+    destination: `/god-praksis/interne-flater`,
+    permanent: true,
+  }); */
 
   await transactionClient
-    .commit({ autoGenerateArrayKeys: true, dryRun: true })
+    .commit({ autoGenerateArrayKeys: true, dryRun: false })
     .then((a) => console.log(`Updated! \n${JSON.stringify(a, null, 2)}`))
     .catch((e) => console.error(e.message));
 };

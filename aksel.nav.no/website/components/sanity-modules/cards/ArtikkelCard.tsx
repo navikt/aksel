@@ -5,7 +5,6 @@ import { abbrName, dateStr, logNav } from "../..";
 
 export const ArtikkelCard = ({
   slug,
-  slug_v2,
   source,
   heading,
   ingress,
@@ -14,7 +13,6 @@ export const ArtikkelCard = ({
 }: Partial<
   (SanityT.Schema.aksel_artikkel | SanityT.Schema.aksel_blogg) & {
     slug: string;
-    slug_v2?: string;
     tema: string[];
     source?: string;
     contributor: string | null;
@@ -23,7 +21,7 @@ export const ArtikkelCard = ({
   return (
     <NextLink
       href={{
-        pathname: `/${slug_v2 ?? slug}`,
+        pathname: `/${slug}`,
         query: {
           ...(source ? { tema: getTemaSlug(source) } : {}),
         },
