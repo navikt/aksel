@@ -30,7 +30,7 @@ const main = async () => {
     (!data?.slug_v2 || data?.slug_v2?.current !== data?.slug?.current)
       ? newData.push({
           _id: data._id,
-          slug_v2: {
+          slug: {
             _type: "slug",
             current: data.slug.current.replace(
               "artikkel/",
@@ -44,7 +44,7 @@ const main = async () => {
   for (const data of newData) {
     const id = data._id;
     delete data._id;
-    transactionClient.patch(id, (p) => p.set({ ...data }));
+    transactionClient.patch(id, (p) => p.set({ ...data }).unset(["slug_v2"]));
   }
 
   await transactionClient

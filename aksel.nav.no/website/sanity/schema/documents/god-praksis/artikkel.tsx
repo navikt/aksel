@@ -22,15 +22,7 @@ export const GodPraksisArtikkel = defineType({
     ...hiddenFields,
     editorField,
     titleField,
-    sanitySlug(prefixOld, 2),
-    {
-      ...sanitySlug(prefix, 3),
-      name: "slug_v2",
-      title: "Url v2",
-      hidden: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
-      validation: () => null,
-    },
+    sanitySlug(prefix, 3),
     defineField({
       title: "Tema",
       description: "Legg til de viktigeste temaene",
