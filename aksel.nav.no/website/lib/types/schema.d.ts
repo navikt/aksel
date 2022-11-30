@@ -457,11 +457,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       _type: "ds_artikkel";
 
       /**
-       * Migrert riktekst - `Boolean`
-       */
-      isMigrated?: boolean;
-
-      /**
        * Publiseringsdato - `Datetime`
 Synlig bare for admins. Setter publiseringsdato for dokument
        */
@@ -526,14 +521,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
-       * Url v2 - `Slug`
-       */
-      slug_v2?: {
-        _type: "slug_v2";
-        current: string;
-      };
-
-      /**
        * Tema - `Array`
 Legg til de viktigeste temaene
        */
@@ -584,11 +571,6 @@ Anbefalt størrelse er 1200:630px
           hotspot?: Sanity.ImageHotspot;
         };
       };
-
-      /**
-       * Migrert riktekst - `Boolean`
-       */
-      isMigrated?: boolean;
     }
 
     /**
@@ -654,11 +636,6 @@ Anbefalt størrelse er 1200:630px
           hotspot?: Sanity.ImageHotspot;
         };
       };
-
-      /**
-       * Migrert riktekst - `Boolean`
-       */
-      isMigrated?: boolean;
     }
 
     /**
@@ -799,11 +776,6 @@ Anbefalt størrelse er 1200:630px
           hotspot?: Sanity.ImageHotspot;
         };
       };
-
-      /**
-       * Migrert riktekst - `Boolean`
-       */
-      isMigrated?: boolean;
     }
 
     /**
@@ -836,11 +808,6 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
        * Innhold - `RegistryReference`
        */
       content?: riktekst_aksel;
-
-      /**
-       * Migrert riktekst - `Boolean`
-       */
-      isMigrated?: boolean;
     }
 
     type tabell_v2 = {

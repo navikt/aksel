@@ -18,7 +18,6 @@ import cl from "classnames";
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
     slug: string;
-    slug_v2?: string;
     tema: string[];
     contributors?: { title?: string }[];
   }

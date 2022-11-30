@@ -202,11 +202,10 @@ export const akselPrinsippBySlug = `*[slug.current == $slug] | order(_updatedAt 
   }
 }`;
 
-export const akselDocumentBySlug = `*[slug.current == $slug || slug_v2.current == $slug] | order(_updatedAt desc)[0]
+export const akselDocumentBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
 {
   ...,
   "slug": slug.current,
-  "slug_v2": slug_v2.current,
   content[]{
     ...,
     ${deRefs}
@@ -222,7 +221,6 @@ export const akselDocumentBySlug = `*[slug.current == $slug || slug_v2.current =
     _updatedAt,
     publishedAt,
     "slug": slug.current,
-    "slug_v2": slug_v2.current,
     "tema": tema[]->tag,
     ingress,
     "contributor": contributors[0]->title,
@@ -325,7 +323,6 @@ export const akselTemaDocs = `*[_type == "aksel_tema"]{
         _updatedAt,
         publishedAt,
         "slug": slug.current,
-        "slug_v2": slug_v2.current,
         "tema": tema[]->tag,
         ingress,
         "contributor": contributors[0]->title,
@@ -340,7 +337,6 @@ export const akselTemaDocs = `*[_type == "aksel_tema"]{
       _updatedAt,
       publishedAt,
       "slug": slug.current,
-      "slug_v2": slug_v2.current,
       "tema": tema[]->tag,
       ingress,
       "contributor": contributors[0]->title,
