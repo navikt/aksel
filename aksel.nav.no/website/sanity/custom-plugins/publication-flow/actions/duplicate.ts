@@ -11,7 +11,6 @@ export const createWrappedDuplicateAction = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
     const originalDuplicateDescription = duplicateAction(props);
-    console.log(originalDuplicateDescription);
 
     return (
       originalDuplicateDescription && {

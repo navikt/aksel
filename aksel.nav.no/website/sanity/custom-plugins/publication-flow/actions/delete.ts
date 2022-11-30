@@ -11,7 +11,6 @@ export const createWrappedDeleteAction = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
     const originalDeleteDescription = deleteAction(props);
-    console.log(originalDeleteDescription);
 
     return (
       originalDeleteDescription && {

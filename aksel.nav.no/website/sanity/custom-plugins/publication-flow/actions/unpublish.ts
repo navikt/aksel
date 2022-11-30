@@ -11,7 +11,6 @@ export const createWrappedUnpublishAction = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
     const originalUnpublishDescription = unpublishAction(props);
-    console.log(originalUnpublishDescription);
 
     return (
       originalUnpublishDescription && {
