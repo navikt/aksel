@@ -9,7 +9,6 @@ import { SEOFields } from "../presets/seo";
 import { relevanteArtiklerField } from "../presets/relevante-artikler";
 import { sanitySlug } from "../presets/slug";
 
-const prefixOld = "artikkel/";
 const prefix = "god-praksis/artikler/";
 
 export const GodPraksisArtikkel = defineType({

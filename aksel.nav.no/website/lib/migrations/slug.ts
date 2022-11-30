@@ -30,6 +30,7 @@ const main = async () => {
     (!data?.slug_v2 || data?.slug_v2?.current !== data?.slug?.current)
       ? newData.push({
           _id: data._id,
+          old: data.slug.current,
           slug: {
             _type: "slug",
             current: data.slug.current.replace(
@@ -44,7 +45,22 @@ const main = async () => {
   for (const data of newData) {
     const id = data._id;
     delete data._id;
-    transactionClient.patch(id, (p) => p.set({ ...data }).unset(["slug_v2"]));
+    transactionClient.create({
+      _type: "redirect",
+      source: `/${data.old}`,
+      destination: `/${data.slug.current}`,
+      permanent: true,
+    });
+    console.log({
+      _type: "redirect",
+      source: `/${data.old}`,
+      destination: `/${data.slug.current}`,
+      permanent: true,
+    });
+    delete data.old;
+    transactionClient.patch(id, (p) =>
+      p.set({ ...data }).unset(["slug_v2", "isMigrated"])
+    );
   }
 
   await transactionClient

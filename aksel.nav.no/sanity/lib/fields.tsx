@@ -38,14 +38,6 @@ export const publishedAtField = {
     !currentUser.roles.find((x) => x.name === "administrator"),
 };
 
-export const migratedField = {
-  title: "Migrert riktekst",
-  name: "isMigrated",
-  type: "boolean",
-  hidden: true,
-  initialValue: true,
-};
-
 export const titleField = {
   title: "Sidetittel",
   name: "heading",

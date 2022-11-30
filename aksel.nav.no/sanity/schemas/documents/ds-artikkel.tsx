@@ -3,7 +3,6 @@ import {
   editorField,
   groups,
   innholdFieldNew,
-  migratedField,
   publishedAtField,
   sanitySlug,
   titleField,
@@ -18,7 +17,6 @@ export default {
   groups,
   ...defaultDocPreview,
   fields: [
-    migratedField,
     publishedAtField,
     editorField,
     titleField,

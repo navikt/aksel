@@ -4,7 +4,6 @@ import {
   groups,
   ingressField,
   innholdFieldNew,
-  migratedField,
   publishedAtField,
   relevanteArtiklerField,
   sanitySlug,
@@ -40,6 +39,5 @@ export default {
     relevanteArtiklerField,
 
     SEOFields,
-    migratedField,
   ],
 };

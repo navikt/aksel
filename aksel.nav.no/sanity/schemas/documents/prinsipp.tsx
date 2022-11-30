@@ -5,7 +5,6 @@ import {
   ingressField,
   innholdFieldPrinsipp,
   isSlugUnique,
-  migratedField,
   prinsipper,
   publishedAtField,
   SEOFields,
@@ -138,6 +137,5 @@ export default {
     ingressField,
     innholdFieldPrinsipp,
     SEOFields,
-    migratedField,
   ],
 };
