@@ -3,6 +3,7 @@ import { defineField, defineType } from "sanity";
 const limits = [
   "/blogg/",
   "/artikkel/",
+  "/god-praksis/artikler/",
   "/prinsipper/",
   "/designsystem/side/",
   "/designsystem/komponenter/",

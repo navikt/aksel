@@ -26,14 +26,14 @@ const Footer = ({ variant = "ds" }: { variant: "ds" | "aksel" }) => {
             </Heading>
             <BodyShort as="ul" className="mt-5 grid gap-2">
               <li>
-                <NextLink href="/artikkel/om-aksel" passHref>
+                <NextLink href="/god-praksis/artikler/om-aksel" passHref>
                   <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Om Aksel
                   </Link>
                 </NextLink>
               </li>
               <li>
-                <NextLink href="/artikkel/skriv-for-aksel" passHref>
+                <NextLink href="/god-praksis/artikler/skriv-for-aksel" passHref>
                   <Link className="text-text-on-inverted focus:shadow-focus focus:text-text-default focus:bg-blue-200 focus:shadow-blue-200">
                     Skriv for Aksel
                   </Link>

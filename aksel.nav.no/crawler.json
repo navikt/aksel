@@ -7,12 +7,17 @@
       "tags": ["designsystem", "docs"]
     },
     {
-      "url": "https://aksel.nav.no/artikkel/",
+      "url": "https://aksel.nav.no/god-praksis/",
       "tags": ["aksel"],
       "selectors_key": "aksel"
     },
     {
-      "url": "https://aksel.nav.no/blogg/",
+      "url": "https://aksel.nav.no/produktbloggen/",
+      "tags": ["aksel"],
+      "selectors_key": "aksel"
+    },
+    {
+      "url": "https://aksel.nav.no/prinsipper/",
       "tags": ["aksel"],
       "selectors_key": "aksel"
     }
@@ -41,7 +46,8 @@
   "selectors_exclude": [".algolia-ignore-index"],
   "stop_urls": [
     "https://aksel.nav.no/preview",
-    "https://old-design-nav.vercel.app"
+    "https://old-design-nav.vercel.app",
+    "https://aksel.nav.no/eksempler"
   ],
   "sitemap_urls": ["https://aksel.nav.no/api/sitemap"],
   "js_render": true
