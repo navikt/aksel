@@ -10,12 +10,12 @@ export const createWrappedDeleteAction = (
   const WrappedDelete = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
-    const originalPublishDescription = deleteAction(props);
-    console.log(originalPublishDescription);
+    const originalDeleteDescription = deleteAction(props);
+    console.log(originalDeleteDescription);
 
     return (
-      originalPublishDescription && {
-        ...originalPublishDescription,
+      originalDeleteDescription && {
+        ...originalDeleteDescription,
         label: "Slett",
         title: "Sletter dokumentet",
       }

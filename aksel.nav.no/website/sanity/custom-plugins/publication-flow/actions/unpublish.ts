@@ -10,12 +10,12 @@ export const createWrappedUnpublishAction = (
   const WrappedUnpublish = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
-    const originalPublishDescription = unpublishAction(props);
-    console.log(originalPublishDescription);
+    const originalUnpublishDescription = unpublishAction(props);
+    console.log(originalUnpublishDescription);
 
     return (
-      originalPublishDescription && {
-        ...originalPublishDescription,
+      originalUnpublishDescription && {
+        ...originalUnpublishDescription,
         label: "Avpubliser",
         title:
           "Avpubliserer siden slik at den ikke ligger ute på interwebsen lenger",
