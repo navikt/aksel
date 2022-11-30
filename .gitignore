@@ -148,3 +148,4 @@ tmp.json
 /playwright/.cache/
 playwright-report/
 /test-results/
+backup-*.tar.gz
