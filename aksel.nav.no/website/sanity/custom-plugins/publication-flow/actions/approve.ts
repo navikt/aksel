@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import {
   DocumentActionDescription,
   DocumentActionProps,
@@ -8,12 +9,21 @@ export const createWrappedApproveAction = () => {
   const WrappedApprove = (
     props: DocumentActionProps
   ): DocumentActionDescription | null => {
-    const { patch, publish } = useDocumentOperation(props.id, props.type);
+    const { patch } = useDocumentOperation(props.id, props.type);
 
     return {
       label: "Godkjenn innhold",
       onHandle: () => {
-        console.log("APPROVED");
+        patch.execute(
+          [
+            {
+              set: {
+                "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
+              },
+            },
+          ],
+          props.published
+        );
       },
     };
   };
