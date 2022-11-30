@@ -9,11 +9,12 @@ export const TemaCard = ({
   title,
   refCount,
   compact = false,
-}: AkselTemaT & { compact?: boolean }) => {
+  urlPrefix = "tema",
+}: AkselTemaT & { compact?: boolean; urlPrefix?: string }) => {
   return (
-    <NextLink href={`/tema/${getTemaSlug(title)}`} passHref>
+    <NextLink href={`/${urlPrefix}/${getTemaSlug(title)}`} passHref>
       <a
-        className="group relative rounded-r-md rounded-l bg-white shadow transition-colors ease-in-out focus:outline-none focus-visible:shadow-focus sm:shadow-md"
+        className="focus-visible:shadow-focus group relative rounded-r-md rounded-l bg-white shadow transition-colors ease-in-out focus:outline-none sm:shadow-md"
         onClick={(e) =>
           logNav(
             "temakort",

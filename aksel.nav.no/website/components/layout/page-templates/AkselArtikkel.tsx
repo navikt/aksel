@@ -115,7 +115,7 @@ const AkselArtikkelTemplate = ({
                 <span key={title}>
                   <NextLink
                     key={title}
-                    href={`/tema/${getTemaSlug(title)}`}
+                    href={`/god-praksis/${getTemaSlug(title)}`}
                     passHref
                   >
                     <BodyShort

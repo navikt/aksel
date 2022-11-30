@@ -30,7 +30,7 @@ const main = async () => {
           _id: data._id,
           slug_v2: {
             _type: "slug",
-            current: data?.slug?.current.replace(
+            current: data.slug.current.replace(
               "artikkel/",
               "god-praksis/artikler/"
             ),
@@ -39,7 +39,7 @@ const main = async () => {
       : console.log(data.heading);
   });
 
-  /* for (const data of newData) {
+  for (const data of newData) {
     const id = data._id;
     delete data._id;
     transactionClient.patch(id, (p) => p.set({ ...data }));
@@ -47,8 +47,8 @@ const main = async () => {
 
   await transactionClient
     .commit({ autoGenerateArrayKeys: true, dryRun: true })
-    .then(() => console.log(`Updated!`))
-    .catch((e) => console.error(e.message)); */
+    .then((a) => console.log(`Updated! \n${a}`))
+    .catch((e) => console.error(e.message));
 };
 
 main();
