@@ -70,24 +70,29 @@ const CreateStatusBadge = (documentId) => {
     const { published } = props;
     const lastVerified = published?.updateInfo?.["lastVerified"];
 
-    if (!published || !lastVerified) return;
+    if (!published)
+      return {
+        label: "Avpublisert",
+        title: "Siden er ikke publisert på interwebsen",
+        color: "primary",
+      };
 
     const outDated =
-      differenceInMonths(new Date(), new Date("Jan 1 2020")) >= 6;
+      differenceInMonths(new Date(), new Date(lastVerified)) >= 6;
 
     return {
-      label: outDated ? "Må godkjennes" : "Oppdatert",
+      label: outDated ? "Publisert og gammel" : "Publisert",
       title: outDated
-        ? "Denne artikkelen har ikke blitt oppdatert/verifisert på over 6 mnd."
-        : "Denne artikkelen er oppdatert",
-      color: outDated ? "warning" : "success",
+        ? "Innholdet må godkjennes asap!"
+        : "Siden er publisert på interwebsen",
+      color: outDated ? "danger" : "success",
     };
   };
   return WrappedStatusBadge;
 };
 
 const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
-  const defaultBadges = prev.map((badge) => {
+  const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
     return createBadgeComponent(badge);
   });
   return [...defaultBadges, CreateStatusBadge(documentId)];
