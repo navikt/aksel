@@ -1,5 +1,10 @@
-import { definePlugin, DocumentBadgeComponent } from "sanity";
 import {
+  definePlugin,
+  DocumentActionComponent,
+  DocumentBadgeComponent,
+} from "sanity";
+import {
+  createWrappedApproveAction,
   createWrappedDeleteAction,
   createWrappedDiscardChangesAction,
   createWrappedDuplicateAction,
@@ -18,49 +23,40 @@ const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
   return [...defaultBadges, CreateStatusBadge(documentId)];
 };
 
+const getCustomActions = (prev: DocumentActionComponent[]) => {
+  const defaultActions = prev.map((action) => {
+    if (action.action === "publish") {
+      return createWrappedPublishAction(action);
+    }
+    if (action.action === "unpublish") {
+      return createWrappedUnpublishAction(action);
+    }
+    if (action.action === "delete") {
+      return createWrappedDeleteAction(action);
+    }
+    if (action.action === "duplicate") {
+      return createWrappedDuplicateAction(action);
+    }
+    if (action.action === "restore") {
+      return createWrappedRestoreAction(action);
+    }
+    if (action.action === "discardChanges") {
+      return createWrappedDiscardChangesAction(action);
+    }
+    return action;
+  });
+  const customActions = [createWrappedApproveAction()];
+  return [...defaultActions, ...customActions];
+};
+
 export const publicationFlow = definePlugin({
   name: "publication-flow",
   document: {
     actions: (prev, { schemaType }) => {
-      return prev.map((action) => {
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "publish"
-        ) {
-          return createWrappedPublishAction(action);
-        }
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "unpublish"
-        ) {
-          return createWrappedUnpublishAction(action);
-        }
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "delete"
-        ) {
-          return createWrappedDeleteAction(action);
-        }
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "duplicate"
-        ) {
-          return createWrappedDuplicateAction(action);
-        }
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "restore"
-        ) {
-          return createWrappedRestoreAction(action);
-        }
-        if (
-          includedSchemas.some((e) => e === schemaType) &&
-          action.action === "discardChanges"
-        ) {
-          return createWrappedDiscardChangesAction(action);
-        }
-        return action;
-      });
+      if (includedSchemas.some((e) => e === schemaType)) {
+        return getCustomActions(prev);
+      }
+      return prev;
     },
     badges: (prev, { documentId }) => {
       return generateBadges(prev, documentId);
