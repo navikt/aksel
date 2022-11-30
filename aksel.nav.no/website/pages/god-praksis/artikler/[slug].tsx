@@ -15,7 +15,7 @@ const Page = (props: {
   preview: boolean;
 }): JSX.Element => {
   const { data } = usePreviewSubscription(akselDocumentBySlug, {
-    params: { slug: `artikkel/${props.slug}` },
+    params: { slug: `god-praksis/artikler/${props.slug}` },
     initialData: props.page,
     enabled: props?.preview,
   });
@@ -35,7 +35,7 @@ export const getStaticPaths = async (): Promise<{
     paths: await getAkselDocuments("aksel_artikkel").then((paths) =>
       paths.map((slug) => ({
         params: {
-          slug: slug.replace("artikkel/", ""),
+          slug: slug.replace("god-praksis/artikler/", ""),
         },
       }))
     ),

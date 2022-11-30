@@ -13,6 +13,8 @@ import {
   komponentKategorier,
   prinsippKategorier,
 } from "../../config";
+import Iframe from "sanity-plugin-iframe-pane";
+import { getTemaSlug } from "../../../lib/sanity/santiy";
 
 import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
@@ -234,15 +236,52 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
     ]);
 };
 
-/* export const defaultDocumentNode = (S, { schemaType }) => {
-  if (schemaType === "post") {
+const previews = [
+  "aksel_artikkel",
+  "komponent_artikkel",
+  "ds_artikkel",
+  "aksel_blogg",
+  "aksel_prinsipp",
+  "aksel_standalone",
+];
+
+export const resolveProductionUrl = (doc) => {
+  const basePath = "https://aksel.nav.no";
+  const devPath = "http://localhost:3000";
+
+  if (previews.includes(doc._type)) {
+    const slug = doc.slug?.current;
+    const previewUrl = `/preview/${slug}`;
+    if (!slug) {
+      return "";
+    }
+    return process.env.NODE_ENV === "production"
+      ? `${basePath}${previewUrl}`
+      : `${devPath}${previewUrl}`;
+  }
+
+  /* if (doc._type === "aksel_tema") {
+    return process.env.NODE_ENV === "production"
+      ? `${basePath}/preview/god-praksis/${getTemaSlug(doc?.title)}`
+      : `${devPath}/preview/god-praksis/${getTemaSlug(doc?.title)}`;
+  } */
+};
+
+export const defaultDocumentNode = (S, { schemaType }) => {
+  if ([...previews /* , "aksel_tema" */].includes(schemaType)) {
     return S.document().views([
       S.view.form(),
-      S.view.component(WebPreview).title("Web"),
+      S.view
+        .component(Iframe)
+        .options({
+          url: (doc) => resolveProductionUrl(doc),
+          reload: {
+            button: true,
+            revision: true,
+          },
+        })
+        .title("Preview"),
     ]);
   }
-  return S.document().views([
-    S.view.form(),
-    S.view.component((p) => <Test {...p} form={S.view.form()} />).title("JSON"),
-  ]);
-}; */
+  return S.document().views([S.view.form()]);
+};
