@@ -15,7 +15,6 @@ import {
   prinsippKategorier,
 } from "./config";
 /* import { WebPreview, JsonView } from './previews' */
-import { Test } from "./Test";
 const filtered = [
   "ds_artikkel",
   "komponent_artikkel",
