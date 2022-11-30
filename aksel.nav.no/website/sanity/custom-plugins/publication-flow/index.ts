@@ -1,5 +1,8 @@
 import { definePlugin, DocumentBadgeComponent } from "sanity";
-import { createWrappedPublishAction } from "./actions";
+import {
+  createWrappedPublishAction,
+  createWrappedUnpublishAction,
+} from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
 
 const includedSchemas: string[] = ["testDoc"];
@@ -12,7 +15,7 @@ const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
 };
 
 export const publicationFlow = definePlugin({
-  name: "custom-publish-action",
+  name: "publication-flow",
   document: {
     actions: (prev, { schemaType }) => {
       return prev.map((action) => {
@@ -21,6 +24,12 @@ export const publicationFlow = definePlugin({
           action.action === "publish"
         ) {
           return createWrappedPublishAction(action);
+        }
+        if (
+          includedSchemas.some((e) => e === schemaType) &&
+          action.action === "unpublish"
+        ) {
+          return createWrappedUnpublishAction(action);
         }
         return action;
       });
