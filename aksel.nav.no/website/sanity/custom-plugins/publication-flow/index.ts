@@ -1,6 +1,7 @@
 import { definePlugin, DocumentBadgeComponent } from "sanity";
 import {
   createWrappedDeleteAction,
+  createWrappedDiscardChangesAction,
   createWrappedDuplicateAction,
   createWrappedPublishAction,
   createWrappedRestoreAction,
@@ -51,6 +52,12 @@ export const publicationFlow = definePlugin({
           action.action === "restore"
         ) {
           return createWrappedRestoreAction(action);
+        }
+        if (
+          includedSchemas.some((e) => e === schemaType) &&
+          action.action === "discardChanges"
+        ) {
+          return createWrappedDiscardChangesAction(action);
         }
         return action;
       });
