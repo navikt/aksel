@@ -1,11 +1,15 @@
 import React from "react";
 import { defineType, defineField } from "sanity";
 import Avatar from "boring-avatars";
+import { EditorPreview } from "../custom-components/EditorPreview";
 
 export const Editors = defineType({
   title: "Forfattere",
   name: "editor",
   type: "document",
+  components: {
+    preview: EditorPreview,
+  },
   fields: [
     defineField({
       title: "Navn",
@@ -55,8 +59,9 @@ export const Editors = defineType({
   preview: {
     select: {
       title: "title",
+      user_id: "user_id",
     },
-    prepare(selection, ...rest) {
+    prepare(selection) {
       const { title } = selection;
 
       return {
