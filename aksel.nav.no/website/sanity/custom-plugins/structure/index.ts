@@ -1,12 +1,12 @@
+import { Picture } from "@navikt/ds-icons";
 import {
-  Baggage,
-  EyeScreened,
-  Facilitet,
-  LightBulb,
-  Picture,
-  SignLanguage,
-  System,
-} from "@navikt/ds-icons";
+  OkHandIcon,
+  BulbOutlineIcon,
+  TokenIcon,
+  JoystickIcon,
+  BookIcon,
+  AccessDeniedIcon,
+} from "@sanity/icons";
 import {
   bloggKategorier,
   grunnleggendeKategorier,
@@ -14,7 +14,6 @@ import {
   prinsippKategorier,
 } from "../../config";
 import Iframe from "sanity-plugin-iframe-pane";
-import { getTemaSlug } from "../../../lib/sanity/santiy";
 
 import { GodPraksisPanes } from "./god-praksis";
 import { PanesWithCount } from "./with-count";
@@ -51,15 +50,6 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
 
   const editor = ids.find(({ user_id }) => user_id?.current === currentUser.id);
 
-  /* let tema = await getClient({ apiVersion: "2021-06-07" }).fetch(
-    `*[_type == "aksel_tema" && defined(seksjoner)]{title,seksjoner}`
-  );
-  tema = tema.filter((x) => x?.seksjoner?.length > 0);
-  tema = tema.map((x) => ({
-    title: x.title,
-    sider: x.seksjoner.reduce((b, n) => [...b, ...(n?.sider ?? [])], []),
-  })); */
-
   return S.list()
     .title("Innholdstyper")
     .items([
@@ -71,7 +61,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
         : []),
       S.listItem()
         .title("God Praksis")
-        .icon(SignLanguage)
+        .icon(OkHandIcon)
         .child(
           S.list()
             .title("God Praksis")
@@ -86,7 +76,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
         ),
       S.listItem()
         .title("Prinsipper")
-        .icon(LightBulb)
+        .icon(BulbOutlineIcon)
         .child(
           S.list()
             .title("Prinsipper")
@@ -115,7 +105,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
         ),
       S.listItem()
         .title("Grunnleggende")
-        .icon(System)
+        .icon(TokenIcon)
         .child(
           S.list()
             .title("Grunnleggende")
@@ -135,7 +125,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
         ),
       S.listItem()
         .title("Komponenter")
-        .icon(Facilitet)
+        .icon(JoystickIcon)
         .child(
           S.list()
             .title("Komponenter")
@@ -155,7 +145,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
         ),
       S.listItem()
         .title("Produktbloggen")
-        .icon(Baggage)
+        .icon(BookIcon)
         .child(
           S.list()
             .title("Produktbloggen")
@@ -176,7 +166,7 @@ export const structure = async (S, { currentUser, getClient, ...rest }) => {
       S.divider(),
       S.listItem()
         .title("Admin")
-        .icon(EyeScreened)
+        .icon(AccessDeniedIcon)
         .child(
           S.list()
             .title("Admin")

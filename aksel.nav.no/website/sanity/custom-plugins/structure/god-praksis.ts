@@ -7,11 +7,12 @@ export const GodPraksisPanes = async (getClient, S) => {
   let tema = await getClient({ apiVersion: "2021-06-07" }).fetch(
     `*[_type == "aksel_tema" && defined(seksjoner)]{title,seksjoner, _id}`
   );
-  tema = tema.filter((x) => x?.seksjoner?.length > 0);
-  tema = tema.map((x) => ({
-    title: x.title,
-    sider: x.seksjoner.reduce((b, n) => [...b, ...(n?.sider ?? [])], []),
-  }));
+  tema = tema
+    .filter((x) => x?.seksjoner?.length > 0)
+    .map((x) => ({
+      title: x.title,
+      sider: x.seksjoner.reduce((b, n) => [...b, ...(n?.sider ?? [])], []),
+    }));
 
   const usedIds = tema.reduce(
     (a, b) => [...a, ...b.sider.map((c) => c._ref)],
