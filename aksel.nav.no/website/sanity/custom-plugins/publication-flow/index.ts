@@ -8,7 +8,7 @@ import {
   createWrappedDeleteAction,
   createWrappedDiscardChangesAction,
   createWrappedDuplicateAction,
-  createWrappedPublishAction,
+  createWrappedFocusAction,
   createWrappedRestoreAction,
   createWrappedUnpublishAction,
 } from "./actions";
@@ -26,7 +26,7 @@ const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
 const getCustomActions = (prev: DocumentActionComponent[]) => {
   const defaultActions = prev.map((action) => {
     if (action.action === "publish") {
-      return createWrappedPublishAction(action);
+      return createWrappedFocusAction(action);
     }
     if (action.action === "unpublish") {
       return createWrappedUnpublishAction(action);
