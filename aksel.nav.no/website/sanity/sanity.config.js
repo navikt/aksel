@@ -1,16 +1,16 @@
 import { codeInput } from "@sanity/code-input";
 import { table } from "@sanity/table";
 import { visionTool } from "@sanity/vision";
-import { createAuthStore, defineConfig, client } from "sanity";
+import { createAuthStore, defineConfig } from "sanity";
 import { unsplashImageAsset } from "sanity-plugin-asset-source-unsplash";
 import { media } from "sanity-plugin-media";
 import { deskTool } from "sanity/desk";
-import { form } from "./form";
 import {
+  defaultDocumentNode,
   publicationFlow,
   structure,
-  defaultDocumentNode,
 } from "./custom-plugins";
+import { form } from "./form";
 
 import schemas from "./schema";
 
@@ -35,7 +35,9 @@ const sharedConfig = {
     }),
     visionTool(),
     unsplashImageAsset(),
-    publicationFlow(),
+    publicationFlow({
+      includedSchemas: ["testDoc"],
+    }),
   ],
 };
 
