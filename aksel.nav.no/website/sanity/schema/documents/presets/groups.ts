@@ -1,5 +1,3 @@
-import { Settings } from "@navikt/ds-icons";
-
 export const groups = [
   {
     name: "innhold",
@@ -12,7 +10,6 @@ export const groups = [
   {
     name: "settings",
     title: "Innstillinger",
-    icon: Settings,
   },
   {
     name: "lenker",
