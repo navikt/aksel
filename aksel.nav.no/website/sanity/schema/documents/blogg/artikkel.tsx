@@ -19,8 +19,8 @@ export const Blogg = defineType({
   ...artikkelPreview,
   fields: [
     ...hiddenFields,
-    editorField,
     titleField,
+    editorField,
     defineField({
       title: "Kategori",
       name: "kategori",

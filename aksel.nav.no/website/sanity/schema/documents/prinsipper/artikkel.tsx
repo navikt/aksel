@@ -29,8 +29,8 @@ export const Prinsipp = defineType({
   },
   fields: [
     ...hiddenFields,
-    editorField,
     titleField,
+    editorField,
     defineField({
       title: "url",
       name: "slug",

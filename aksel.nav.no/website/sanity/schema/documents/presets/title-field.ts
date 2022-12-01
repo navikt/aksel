@@ -9,7 +9,10 @@ export const titleField = defineField({
   description:
     "Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av siden i URL.",
   validation: (Rule) =>
-    Rule.required()
-      .max(60)
-      .error("Siden bør ha en kort og konsis heading (<h1>)"),
+    Rule.required().max(60).error("Sidetittel kan ikke være over 60 tegn"),
+  options: {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    maxLength: 60,
+  },
 });

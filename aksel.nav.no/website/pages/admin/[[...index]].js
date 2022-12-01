@@ -1,6 +1,6 @@
 import { NextStudio } from "next-sanity/studio";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { workspaceConfig } from "../../sanity/sanity.config";
 
 const StudioPage = () => {
@@ -10,7 +10,17 @@ const StudioPage = () => {
     }
   }, []);
 
-  return <NextStudio config={workspaceConfig} />;
+  const [scheme, setScheme] = useState("light");
+
+  return (
+    <div data-theme={scheme} className="min-h-screen">
+      <NextStudio
+        config={workspaceConfig}
+        scheme={scheme}
+        onSchemeChange={(s) => setScheme(s)}
+      />
+    </div>
+  );
 };
 
 export default StudioPage;

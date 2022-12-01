@@ -18,8 +18,8 @@ export const KomponentArtikkel = defineType({
   ...artikkelPreview,
   fields: [
     ...hiddenFields,
-    editorField,
     titleField,
+    editorField,
     defineField({
       title: "Kategori",
       name: "kategori",

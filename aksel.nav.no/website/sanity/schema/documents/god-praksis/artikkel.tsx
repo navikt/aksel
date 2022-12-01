@@ -19,8 +19,8 @@ export const GodPraksisArtikkel = defineType({
   ...artikkelPreview,
   fields: [
     ...hiddenFields,
-    editorField,
     titleField,
+    editorField,
     sanitySlug(prefix, 3),
     defineField({
       title: "Tema",

@@ -1,2 +1,2 @@
-export * from "./stringInputSmall";
+export * from "./InputWithCounter";
 export * from "./updateInfo";

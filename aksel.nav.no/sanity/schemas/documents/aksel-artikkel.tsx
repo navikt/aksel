@@ -11,7 +11,6 @@ import {
   titleField,
 } from "@/lib";
 
-const prefixOld = "artikkel/";
 const prefix = "god-praksis/artikler/";
 
 export default {
@@ -33,7 +32,6 @@ export default {
       of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
       group: "innhold",
     },
-
     ingressField,
     innholdFieldNew,
     relevanteArtiklerField,
