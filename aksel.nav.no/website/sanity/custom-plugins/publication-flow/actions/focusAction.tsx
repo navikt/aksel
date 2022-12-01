@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionComponent,
@@ -14,6 +14,8 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const originalPublishDescription = action(props);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const lastVerified = props.published?.updateInfo?.["lastVerified"];
+    const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
 
     const verifyContent = () => {
       patch.execute(
@@ -47,6 +49,22 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
               ],
               props
             );
+          publish.execute();
+          props.onComplete();
+        },
+      };
+    }
+    // Update content action
+    if (
+      props.published &&
+      (differenceInMonths(new Date(), new Date(lastVerified)) < 6 ||
+        differenceInMonths(new Date(), new Date(lastVerifiedDraft)) < 6)
+    ) {
+      return {
+        ...originalPublishDescription,
+        label: "Oppdater",
+        tone: "primary",
+        onHandle: () => {
           publish.execute();
           props.onComplete();
         },

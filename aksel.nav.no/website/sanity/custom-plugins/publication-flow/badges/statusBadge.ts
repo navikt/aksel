@@ -5,16 +5,26 @@ export const CreateStatusBadge = (documentId) => {
   const WrappedStatusBadge = (
     props: DocumentBadgeProps
   ): DocumentBadgeDescription | null => {
-    const { published } = props;
-    const lastVerified = published?.updateInfo?.["lastVerified"];
+    const { published, draft } = props;
+    const lastVerified = draft?.updateInfo?.["lastVerified"];
 
-    if (!published)
+    console.log(props);
+
+    if (!published && !!lastVerified) {
       return {
         label: "Avpublisert",
         title: "Siden er ikke publisert på interwebsen",
+        color: "danger",
+      };
+    }
+
+    if (!published) {
+      return {
+        label: "Utkast",
+        title: "Siden er ikke publisert på interwebsen",
         color: "primary",
       };
-
+    }
     const outDated =
       differenceInMonths(new Date(), new Date(lastVerified)) >= 6;
 

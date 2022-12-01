@@ -14,8 +14,6 @@ import {
 } from "./actions";
 import { createBadgeComponent, CreateStatusBadge } from "./badges";
 
-const includedSchemas: string[] = ["testDoc"];
-
 const generateBadges = (prev: DocumentBadgeComponent[], documentId: string) => {
   const defaultBadges = prev.map((badge: DocumentBadgeComponent) => {
     return createBadgeComponent(badge);
@@ -49,20 +47,26 @@ const getCustomActions = (prev: DocumentActionComponent[]) => {
   return [...defaultActions, ...customActions];
 };
 
-export const publicationFlow = definePlugin({
-  name: "publication-flow",
-  document: {
-    actions: (prev, { schemaType }) => {
-      if (includedSchemas.some((e) => e === schemaType)) {
-        return getCustomActions(prev);
-      }
-      return prev;
+interface PublicationFlowOptions {
+  includedSchemas: string[];
+}
+
+export const publicationFlow = definePlugin<PublicationFlowOptions>(
+  ({ includedSchemas }) => ({
+    name: "publication-flow",
+    document: {
+      actions: (prev, { schemaType }) => {
+        if (includedSchemas.some((e) => e === schemaType)) {
+          return getCustomActions(prev);
+        }
+        return prev;
+      },
+      badges: (prev, { documentId, schemaType }) => {
+        if (includedSchemas.some((e) => e === schemaType)) {
+          return generateBadges(prev, documentId);
+        }
+        return prev;
+      },
     },
-    badges: (prev, { documentId, schemaType }) => {
-      if (includedSchemas.some((e) => e === schemaType)) {
-        return generateBadges(prev, documentId);
-      }
-      return prev;
-    },
-  },
-});
+  })
+);
