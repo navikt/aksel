@@ -28,6 +28,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
       );
     };
 
+    // Publish action
     if (!props.published) {
       return {
         ...originalPublishDescription,
@@ -51,11 +52,13 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         },
       };
     } else {
+      // Approve content action
       return {
         label: "Godkjenn innhold",
         onHandle: () => {
           setDialogOpen(true);
         },
+        tone: "positive",
         dialog: dialogOpen && {
           type: "dialog",
           header: "Kvalitetssjekk",
