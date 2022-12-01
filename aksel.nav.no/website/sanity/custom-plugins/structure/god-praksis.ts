@@ -1,5 +1,6 @@
+import { StructureBuilder } from "sanity/desk";
 /* documentStore is in Alpha, so avoid using for now */
-export const GodPraksisPanes = async (getClient, S) => {
+export const GodPraksisPanes = async (getClient, S: StructureBuilder) => {
   let tema = await getClient({ apiVersion: "2021-06-07" }).fetch(
     `*[_type == "aksel_tema" && defined(seksjoner)]{title,seksjoner, _id}`
   );
@@ -48,6 +49,7 @@ export const GodPraksisPanes = async (getClient, S) => {
         S.documentList()
           .title(`Artikler uten tema`)
           .filter(`_type == 'aksel_artikkel' && !defined(tema)`)
+          .menuItemGroups([{ title: "test", id: "testid" }])
       ),
   ];
 };

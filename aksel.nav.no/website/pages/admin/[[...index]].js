@@ -18,6 +18,7 @@ const StudioPage = () => {
         config={workspaceConfig}
         scheme={scheme}
         onSchemeChange={(s) => setScheme(s)}
+        unstable__noFavicons
       />
     </div>
   );

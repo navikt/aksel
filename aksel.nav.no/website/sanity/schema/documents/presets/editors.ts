@@ -1,7 +1,7 @@
 import { defineField } from "sanity";
 
 export const editorField = defineField({
-  title: "Redaktører",
+  title: "Bidragsytere",
   description: "Legg til alle som har bidratt med denne siden!",
   name: "contributors",
   type: "array",

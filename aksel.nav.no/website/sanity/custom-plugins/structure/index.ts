@@ -1,4 +1,5 @@
 import { Picture } from "@navikt/ds-icons";
+import { StructureBuilder } from "sanity/desk";
 import {
   OkHandIcon,
   BulbOutlineIcon,
@@ -41,7 +42,10 @@ const filtered = [
   "aksel_artikkel",
 ];
 
-export const structure = async (S, { currentUser, getClient, ...rest }) => {
+export const structure = async (
+  S: StructureBuilder,
+  { currentUser, getClient, ...rest }
+) => {
   const ids = await getClient({ apiVersion: "2021-06-07" })
     .fetch(`*[_type == "editor"]{
       _id,

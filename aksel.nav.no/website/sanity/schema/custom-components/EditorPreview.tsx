@@ -24,7 +24,8 @@ export function EditorPreview(props) {
     <div className="flex shrink-0 items-center justify-between">
       {props.renderDefault({
         ...props,
-        subtitle: currentUser && currentUser._id === props?._id ? "Deg" : "",
+        subtitle:
+          currentUser && currentUser._id === props?._id ? "Din profil" : "",
       })}
       {editors &&
         editors.length > 0 &&
