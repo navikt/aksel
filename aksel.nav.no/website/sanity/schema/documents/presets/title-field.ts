@@ -6,8 +6,7 @@ export const titleField = defineField({
   name: "heading",
   type: "string",
   group: "innhold",
-  description:
-    "Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av siden i URL.",
+  description: "Bruk en kort og konsis tittel om mulig.",
   validation: (Rule) =>
     Rule.required().max(60).error("Sidetittel kan ikke være over 60 tegn"),
   options: {

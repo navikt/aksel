@@ -40,14 +40,13 @@ export const RelatertInnhold = defineType({
               validation: (Rule) => Rule.required(),
               initialValue: false,
             }),
-            // TODO: allArticleDocsRef fungerer bare med dokument-typer som finnes i schema
-            /* defineField({
+            defineField({
               title: "Lenke til Intern sanity-side",
               name: "intern_lenke",
               type: "reference",
               to: [...allArticleDocsRef],
               hidden: ({ parent }) => !parent?.intern,
-            }), */
+            }),
             defineField({
               title: "Lenke til ekstern side",
               name: "ekstern_link",

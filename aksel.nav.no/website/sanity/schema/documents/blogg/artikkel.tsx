@@ -35,6 +35,8 @@ export const Blogg = defineType({
     ingressField,
     defineField({
       title: "Innhold",
+      description:
+        "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
       type: "riktekst_standard",
       group: "innhold",

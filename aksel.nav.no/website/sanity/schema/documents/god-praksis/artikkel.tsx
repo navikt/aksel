@@ -23,17 +23,19 @@ export const GodPraksisArtikkel = defineType({
     editorField,
     sanitySlug(prefix, 3),
     defineField({
-      title: "Tema",
-      description: "Legg til de viktigeste temaene",
+      title: "Kobling til tema",
+      description:
+        "Gjør det mulig for temaredaktør å vise artikkelen på en temaside",
       name: "tema",
       type: "array",
       of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
       group: "innhold",
     }),
-
     ingressField,
     defineField({
       title: "Innhold",
+      description:
+        "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
       type: "riktekst_standard",
       group: "innhold",

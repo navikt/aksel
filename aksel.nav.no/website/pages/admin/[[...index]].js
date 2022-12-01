@@ -13,7 +13,7 @@ const StudioPage = () => {
   const [scheme, setScheme] = useState("light");
 
   return (
-    <div data-theme={scheme} className="min-h-screen">
+    <div data-theme={scheme} className="h-full min-h-screen">
       <NextStudio
         config={workspaceConfig}
         scheme={scheme}

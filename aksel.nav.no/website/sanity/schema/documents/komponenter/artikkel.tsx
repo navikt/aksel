@@ -76,6 +76,8 @@ export const KomponentArtikkel = defineType({
     }),
     defineField({
       title: "Innhold",
+      description:
+        "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
       group: "innhold",
       type: "riktekst_komponent",

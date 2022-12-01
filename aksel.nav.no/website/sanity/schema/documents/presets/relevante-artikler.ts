@@ -1,9 +1,8 @@
 import { allArticleDocsRef } from "../../../config";
 
 export const relevanteArtiklerField = {
-  title: "Relevante artikler",
-  description:
-    "Legg til relaterte artikler som du tenker er relevant å lese (maks 3)",
+  title: "Relaterte artikler",
+  description: "Legg til artikler det er naturlig å lese etter denne (maks 3)",
   name: "relevante_artikler",
   type: "array",
   group: "innhold",

@@ -35,6 +35,8 @@ export const GrunnleggendeArtikkel = defineType({
     sanitySlug(prefix, 3),
     defineField({
       title: "Innhold",
+      description:
+        "Innholdet i artikkelen er riktekst. Tips: klikk på ikon i høyre hjørne for å skrive i fullskjerm.",
       name: "content",
       type: "riktekst_grunnleggende",
       group: "innhold",

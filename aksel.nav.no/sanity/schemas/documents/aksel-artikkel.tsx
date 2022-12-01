@@ -32,6 +32,7 @@ export default {
       of: [{ type: "reference", to: [{ type: "aksel_tema" }] }],
       group: "innhold",
     },
+
     ingressField,
     innholdFieldNew,
     relevanteArtiklerField,

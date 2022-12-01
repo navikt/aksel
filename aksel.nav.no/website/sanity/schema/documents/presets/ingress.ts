@@ -3,7 +3,8 @@ import { defineField } from "sanity";
 export const ingressField = defineField({
   title: "Ingress",
   name: "ingress",
-  description: "Side, innganger og seo description-tag",
+  description:
+    "Brukes til ingress, card description og seo description-tag. Bør bære konsis og oppsummerende.",
   type: "text",
   group: "innhold",
   rows: 3,
