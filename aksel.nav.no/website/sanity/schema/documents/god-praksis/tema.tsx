@@ -1,11 +1,17 @@
 import { groups } from "../presets/groups";
 import { defineField, defineType } from "sanity";
+import { TemaView } from "../../custom-components/TemaView";
+import { TemaPreview } from "../../custom-components/TemaPreview";
 
 export const Tema = defineType({
   title: "Aksel Tema",
   name: "aksel_tema",
   type: "document",
   groups,
+  components: {
+    preview: TemaPreview,
+    item: TemaPreview,
+  },
   fields: [
     defineField({
       title: "Navn",
@@ -97,6 +103,15 @@ export const Tema = defineType({
           ],
         },
       ],
+    }),
+    defineField({
+      title: "Sider uten seksjon",
+      name: "uten_seksjon",
+      type: "string",
+      group: "innhold",
+      components: {
+        field: TemaView,
+      },
     }),
   ],
 });

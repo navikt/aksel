@@ -61,7 +61,6 @@ export const Editors = defineType({
 
       return {
         title,
-        subtitle: "Min profilside",
         media: () => (
           <Avatar
             size={100}

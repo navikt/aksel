@@ -1,6 +1,7 @@
+import { defineField } from "sanity";
 import { allArticleDocsRef } from "../../../config";
 
-export const relevanteArtiklerField = {
+export const relevanteArtiklerField = defineField({
   title: "Relaterte artikler",
   description: "Legg til artikler det er naturlig å lese etter denne (maks 3)",
   name: "relevante_artikler",
@@ -15,4 +16,4 @@ export const relevanteArtiklerField = {
       to: allArticleDocsRef,
     },
   ],
-};
+});

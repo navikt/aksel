@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 import { groups } from "../presets/groups";
-import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
@@ -16,7 +15,17 @@ export const GodPraksisArtikkel = defineType({
   name: "aksel_artikkel",
   type: "document",
   groups,
-  ...artikkelPreview,
+  preview: {
+    select: {
+      heading: "heading",
+    },
+    prepare(selection) {
+      const { heading } = selection;
+      return {
+        title: heading,
+      };
+    },
+  },
   fields: [
     ...hiddenFields,
     titleField,
