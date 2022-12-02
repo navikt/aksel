@@ -23,12 +23,25 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         [
           {
             set: {
-              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
+              updateInfo: {
+                lastVerified: format(new Date(), "yyyy-MM-dd"),
+              },
             },
           },
         ],
         props.published
       );
+    };
+
+    const updateDialogContent = {
+      description: {
+        pre: "Før du godkjenner innholdet, har du gjort dette?",
+        post: "Artikkelen er over 6mnd gammel og må godkjennes på nytt. Før du godkjenner innholdet, har du gjort dette?",
+      },
+      checks: {
+        pre: "Hovedinnhold",
+        post: "Hovedinnhold",
+      },
     };
 
     // Publish action
@@ -48,7 +61,7 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
               <h3>Publiseringsdialog...</h3>
               <button
                 onClick={() => {
-                  !props.published && verifyContent();
+                  verifyContent();
                   publish.execute();
                   props.onComplete();
                 }}
@@ -76,6 +89,10 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         },
       };
     } else {
+      const verifiedStatus =
+        differenceInMonths(new Date(), new Date(lastVerified)) < 6
+          ? "pre"
+          : "post";
       // Approve content action
       return {
         label: "Godkjenn innhold",
@@ -90,6 +107,10 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           content: (
             <>
               <h3>Godkjenningsdialog...</h3>
+              <p>{updateDialogContent.description[verifiedStatus]}</p>
+              <ul>
+                <li>{updateDialogContent.checks[verifiedStatus]}</li>
+              </ul>
               <button onClick={() => verifyContent()}>Godkjenn</button>
             </>
           ),
