@@ -1,19 +1,15 @@
 import { BloggCard } from "@/components";
 import { AkselHeader, Footer } from "@/layout";
-import { SanityT, akselBloggPosts, usePreviewSubscription } from "@/lib";
+import { SanityT, akselBloggPosts } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
+import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import React from "react";
+import React, { lazy } from "react";
 import NotFotfund from "../404";
 
 const Page = (props: PageProps): JSX.Element => {
-  const { data: page } = usePreviewSubscription(akselBloggPosts, {
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
-  if (!page) {
+  if (!props.bloggposts) {
     return <NotFotfund />;
   }
 
@@ -45,7 +41,7 @@ const Page = (props: PageProps): JSX.Element => {
           <div className="relative px-4 pt-8 pb-24">
             <div className="dynamic-wrapper-2xl w-fit">
               <div className="mt-4 grid gap-2 divide-y divide-gray-300">
-                {page.map((blog) => (
+                {props.bloggposts.map((blog) => (
                   <BloggCard key={blog._id} blog={blog} />
                 ))}
               </div>
@@ -58,6 +54,22 @@ const Page = (props: PageProps): JSX.Element => {
   );
 };
 
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview comp={Page} query={akselBloggPosts} props={props} />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
+
 export type AkselBloggPage = Partial<
   SanityT.Schema.aksel_blogg & {
     slug: string;
@@ -66,7 +78,7 @@ export type AkselBloggPage = Partial<
 >;
 
 interface PageProps {
-  page: AkselBloggPage[];
+  bloggposts: AkselBloggPage[];
   preview: boolean;
 }
 
@@ -81,16 +93,14 @@ export const getStaticProps = async ({
 }: {
   preview?: boolean;
 }): Promise<StaticProps | { notFound: true }> => {
-  const bloggs = await getClient().fetch(akselBloggPosts);
+  const { bloggposts } = await getClient().fetch(akselBloggPosts);
 
   return {
     props: {
-      page: bloggs,
+      bloggposts,
       preview,
     },
-    notFound: !bloggs && !preview,
+    notFound: !bloggposts && !preview,
     revalidate: 60,
   };
 };
-
-export default Page;

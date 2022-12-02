@@ -1,31 +1,47 @@
 import { LayoutPicker } from "@/components";
-import { SanityT, akselBloggBySlug, usePreviewSubscription } from "@/lib";
+import { SanityT, akselBloggBySlug } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { PreviewSuspense } from "next-sanity/preview";
 import { GetServerSideProps } from "next/types";
-import React from "react";
+import React, { lazy } from "react";
 import NotFotfund from "../404";
 
 const Page = (props: {
   slug?: string;
-  page: SanityT.Schema.aksel_blogg;
+  blogg: SanityT.Schema.aksel_blogg;
   preview: boolean;
 }): JSX.Element => {
-  const { data } = usePreviewSubscription(akselBloggBySlug, {
-    params: { slug: `produktbloggen/${props.slug}`, valid: "true" },
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
-  if (!data) {
+  if (!props?.blogg) {
     return <NotFotfund />;
   }
 
-  return <LayoutPicker title="Aksel" data={data} />;
+  return <LayoutPicker title="Aksel" data={props.blogg} />;
 };
+
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={akselBloggBySlug}
+          props={props}
+          params={{ slug: `produktbloggen/${props.slug}`, valid: "true" }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
 
 interface StaticProps {
   props: {
-    page: SanityT.Schema.aksel_blogg;
+    blogg: SanityT.Schema.aksel_blogg;
     slug: string;
     preview: boolean;
     validUser?: boolean;
@@ -38,20 +54,18 @@ export const getServerSideProps: GetServerSideProps = async (
 ): Promise<StaticProps | { notFound: true }> => {
   /* const isValidUser = await isValidated(context); */
 
-  const page = await getClient().fetch(akselBloggBySlug, {
+  const { blogg } = await getClient().fetch(akselBloggBySlug, {
     slug: `produktbloggen/${context.params.slug}`,
     valid: "true" /* `${isValidUser}` */,
   });
 
   return {
     props: {
-      page,
+      blogg,
       slug: context.params.slug as string,
       preview: context.preview ?? false,
       /* validUser: isValidUser, */
     },
-    notFound: !page && !context.preview,
+    notFound: !blogg && !context.preview,
   };
 };
-
-export default Page;

@@ -159,11 +159,13 @@ export const akselTema = `{"temaer": *[_type == "aksel_tema"]{
   "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
 }}`;
 
-export const akselBloggPosts = `*[_type == "aksel_blogg"] | order(_createdAt desc){
-  ...,
-  "slug": slug.current,
-  contributors[]->{
-    title
+export const akselBloggPosts = `{
+  "bloggposts": *[_type == "aksel_blogg"] | order(_createdAt desc){
+    ...,
+    "slug": slug.current,
+    contributors[]->{
+      title
+    }
   }
 }`;
 
@@ -180,50 +182,63 @@ export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
     hovedside->{slug, heading},
     undersider[]->{slug, heading}
   },
-  "bloggs": ${akselBloggPosts},
-  ${akselTema}
+  "bloggs": *[_type == "aksel_blogg"] | order(_createdAt desc){
+    ...,
+    "slug": slug.current,
+    contributors[]->{
+      title
+    }
+  },
+  "temaer": *[_type == "aksel_tema"]{
+    ...,
+    "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
+  }
 }`;
 
 export const akselDocumentsByType = `*[_type in $types]{ _type, _id, 'slug': slug.current }`;
 
-export const akselPrinsippBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  "content": select(
-    $valid == "true" => content[]{
-      ...,
-      ${deRefs}
-    },
-    $valid != "true" => []
-  ),
-  contributors[]->{
-    title
+export const akselPrinsippBySlug = `{
+  "prinsipp": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    "content": select(
+      $valid == "true" => content[]{
+        ...,
+        ${deRefs}
+      },
+      $valid != "true" => []
+    ),
+    contributors[]->{
+      title
+    }
   }
 }`;
 
-export const akselDocumentBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  content[]{
+export const akselDocumentBySlug = `{
+  "page": *[slug.current == $slug] | order(_updatedAt desc)[0]
+  {
     ...,
-    ${deRefs}
-  },
-  tema[]->{title, slug},
-  contributors[]->{
-    title
-  },
-  relevante_artikler[]->{
-    _id,
-    heading,
-    _createdAt,
-    _updatedAt,
-    publishedAt,
     "slug": slug.current,
-    "tema": tema[]->tag,
-    ingress,
-    "contributor": contributors[0]->title,
+    content[]{
+      ...,
+      ${deRefs}
+    },
+    tema[]->{title, slug},
+    contributors[]->{
+      title
+    },
+    relevante_artikler[]->{
+      _id,
+      heading,
+      _createdAt,
+      _updatedAt,
+      publishedAt,
+      "slug": slug.current,
+      "tema": tema[]->tag,
+      ingress,
+      "contributor": contributors[0]->title,
+    }
   }
 }`;
 
@@ -330,18 +345,20 @@ export const akselTemaDocs = `{
   }
 }`;
 
-export const akselBloggBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]
-{
-  ...,
-  "slug": slug.current,
-  "content": select(
-    $valid == "true" => content[]{
-      ...,
-      ${deRefs}
+export const akselBloggBySlug = `{
+  "blogg": *[slug.current == $slug && _type == "aksel_blogg"] | order(_updatedAt desc)[0]
+  {
+    ...,
+    "slug": slug.current,
+    "content": select(
+      $valid == "true" => content[]{
+        ...,
+        ${deRefs}
+      },
+      $valid != "true" => []
+    ),
+    contributors[]->{
+      title
     },
-    $valid != "true" => []
-  ),
-  contributors[]->{
-    title
-  },
+  }
 }`;

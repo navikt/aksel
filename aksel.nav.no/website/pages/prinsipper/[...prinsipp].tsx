@@ -3,32 +3,50 @@ import {
   akselPrinsippBySlug,
   /* isValidated, */
   SanityT,
-  usePreviewSubscription,
 } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { PreviewSuspense } from "next-sanity/preview";
 import { GetServerSideProps } from "next/types";
-import React from "react";
+import React, { lazy } from "react";
 import NotFotfund from "../404";
 
 interface PageProps {
-  page: SanityT.Schema.aksel_prinsipp;
-  prinsipp: string[];
+  prinsipp: SanityT.Schema.aksel_prinsipp;
+  slug: string[];
   preview: boolean;
 }
 
 const Page = (props: PageProps): JSX.Element => {
-  const { data } = usePreviewSubscription(akselPrinsippBySlug, {
-    params: { slug: `prinsipper/${props.prinsipp.join("/")}`, valid: "true" },
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
-  if (!data) {
+  if (!props?.prinsipp) {
     return <NotFotfund />;
   }
 
-  return <LayoutPicker title="Aksel" data={data} />;
+  return <LayoutPicker title="Aksel" data={props.prinsipp} />;
 };
+
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={akselPrinsippBySlug}
+          props={props}
+          params={{
+            slug: `prinsipper/${props.slug.join("/")}`,
+            valid: "true",
+          }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
 
 export const getServerSideProps: GetServerSideProps = async (
   context
@@ -37,19 +55,17 @@ export const getServerSideProps: GetServerSideProps = async (
 
   if (context.params.prinsipp.length > 2) return { notFound: true };
 
-  const page = await getClient().fetch(akselPrinsippBySlug, {
+  const { prinsipp } = await getClient().fetch(akselPrinsippBySlug, {
     slug: `prinsipper/${(context.params.prinsipp as string[]).join("/")}`,
     valid: "true",
   });
 
   return {
     props: {
-      page,
-      prinsipp: context.params.prinsipp,
+      prinsipp,
+      slug: context.params.prinsipp,
       preview: context.preview ?? false,
     },
-    notFound: !page && !context.preview,
+    notFound: !prinsipp && !context.preview,
   };
 };
-
-export default Page;

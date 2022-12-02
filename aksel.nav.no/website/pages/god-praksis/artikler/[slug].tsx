@@ -1,12 +1,8 @@
 import { LayoutPicker } from "@/components";
-import {
-  SanityT,
-  akselDocumentBySlug,
-  getAkselDocuments,
-  usePreviewSubscription,
-} from "@/lib";
+import { SanityT, akselDocumentBySlug, getAkselDocuments } from "@/lib";
 import { getClient } from "@/sanity-client";
-import React from "react";
+import { PreviewSuspense } from "next-sanity/preview";
+import React, { lazy } from "react";
 import NotFotfund from "../../404";
 
 const Page = (props: {
@@ -14,18 +10,35 @@ const Page = (props: {
   page: SanityT.Schema.aksel_artikkel;
   preview: boolean;
 }): JSX.Element => {
-  const { data } = usePreviewSubscription(akselDocumentBySlug, {
-    params: { slug: `god-praksis/artikler/${props.slug}` },
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
-  if (!data) {
+  if (!props?.page) {
     return <NotFotfund />;
   }
 
-  return <LayoutPicker title="Aksel" data={data} />;
+  return <LayoutPicker title="Aksel" data={props.page} />;
 };
+
+const WithPreview = lazy(() => import("../../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={akselDocumentBySlug}
+          props={props}
+          params={{
+            slug: `god-praksis/artikler/${props?.slug}`,
+          }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
 
 export const getStaticPaths = async (): Promise<{
   fallback: string;
@@ -60,7 +73,7 @@ export const getStaticProps = async ({
   params: { slug: string };
   preview?: boolean;
 }): Promise<StaticProps | { notFound: true }> => {
-  const page = await getClient().fetch(akselDocumentBySlug, {
+  const { page } = await getClient().fetch(akselDocumentBySlug, {
     slug: `god-praksis/artikler/${slug}`,
   });
 
@@ -74,5 +87,3 @@ export const getStaticProps = async ({
     revalidate: 60,
   };
 };
-
-export default Page;
