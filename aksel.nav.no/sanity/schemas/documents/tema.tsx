@@ -34,6 +34,12 @@ export default {
       group: "innhold",
     },
     {
+      title: "Hidden",
+      name: "bruk_seksjoner",
+      type: "boolean",
+      hidden: true,
+    },
+    {
       title: "Shortname",
       description: "En mer sanitert visning av tema-navnet i url ene",
       name: "slug",
