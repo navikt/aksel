@@ -6,8 +6,6 @@ import { PreviewSuspense } from "next-sanity/preview";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
-const WithPreview = lazy(() => import("../../components/WithPreview"));
-
 const Page = ({
   page,
   navigation,
@@ -52,6 +50,8 @@ const Page = ({
     </PagePropsContext.Provider>
   );
 };
+
+const WithPreview = lazy(() => import("../../components/WithPreview"));
 
 const Wrapper = (props: any): JSX.Element => {
   if (props?.preview) {

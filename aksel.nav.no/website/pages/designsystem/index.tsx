@@ -5,29 +5,23 @@ import {
   PagePropsContext,
 } from "@/components";
 import { DsHeader, Footer } from "@/layout";
-import {
-  DsFrontPageCardT,
-  dsFrontpageQuery,
-  SanityT,
-  usePreviewSubscription,
-} from "@/lib";
+import { DsFrontPageCardT, dsFrontpageQuery, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
+import { lazy } from "react";
 
-const Page = (props: {
+const Page = ({
+  page,
+  navigation,
+  ...rest
+}: {
   page: SanityT.Schema.ds_frontpage;
   navigation: SanityT.Schema.ds_navigation;
   preview: boolean;
 }): JSX.Element => {
-  const {
-    data: { page, navigation },
-  } = usePreviewSubscription(dsFrontpageQuery, {
-    initialData: props,
-    enabled: props?.preview,
-  });
-
   return (
     <>
       <Head>
@@ -41,7 +35,7 @@ const Page = (props: {
       <PagePropsContext.Provider
         value={{
           pageProps: {
-            ...props,
+            ...rest,
             page,
             navigation,
             activeHeading: null,
@@ -94,6 +88,22 @@ const Page = (props: {
   );
 };
 
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview comp={Page} query={dsFrontpageQuery} />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
+
 export const getStaticProps = async ({
   preview = false,
 }: {
@@ -111,5 +121,3 @@ export const getStaticProps = async ({
     revalidate: 60,
   };
 };
-
-export default Page;
