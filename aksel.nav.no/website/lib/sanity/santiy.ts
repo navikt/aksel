@@ -9,9 +9,6 @@ export function urlFor(source: any) {
   return imageBuilder.image(source);
 }
 
-export const getTemaSlug = (s: string) =>
-  s ? s.toLowerCase().trim().replace(/\s+/g, "-") : null;
-
 export const getAllPages = async (token?: string) => {
   const pages = await getDsPaths(token).then((paths) =>
     paths.map((slugs) => slugs.join("/"))
@@ -27,7 +24,7 @@ export const getAllPages = async (token?: string) => {
     "blogg",
     ...pages,
     ...artikler,
-    ...temaer.map((x) => `tema/${x}`),
+    ...temaer.map((x) => `god-praksis/${x}`),
   ];
 };
 
@@ -102,6 +99,6 @@ export const validateDsPath = (
 
 export const getAkselTema = async (token?: string): Promise<string[]> => {
   const client = token ? noCdnClient(token) : getClient();
-  const tags: string[] = await client.fetch(akselTemaNames);
-  return tags.map(getTemaSlug);
+  const tags: { current: string }[] = await client.fetch(akselTemaNames);
+  return tags.map((x) => x?.current);
 };

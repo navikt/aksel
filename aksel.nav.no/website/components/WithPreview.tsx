@@ -8,13 +8,15 @@ const WithPreview = ({
   comp: Comp,
   query,
   params,
+  props,
 }: {
   comp: ComponentType;
   query: string;
+  props: any;
   params?: any;
 }) => {
   const data = usePreview(null, query, params);
-  return <Comp {...data} />;
+  return <Comp {...props} {...data} />;
 };
 
 export default WithPreview;

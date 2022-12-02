@@ -38,6 +38,30 @@ export const Tema = defineType({
       group: "innhold",
     }),
     defineField({
+      title: "Shortname",
+      description: "En mer sanitert visning av tema-navnet i url ene",
+      name: "slug",
+      type: "slug",
+      group: "innhold",
+      validation: (Rule) => Rule.required().error("Tema må ha en URL"),
+      options: {
+        source: "title",
+        slugify: (s: string) =>
+          s
+            ? s
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, "-")
+                .replace(/-+/gm, "-")
+                .replace(/æ/g, "a")
+                .replace(/å/g, "a")
+                .replace(/ø/g, "o")
+                // eslint-disable-next-line no-useless-escape
+                .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
+            : "",
+      },
+    }),
+    defineField({
       title: "Ansvarlig for tema",
       description: "Legg til redaktør som har forvaltningsansvaret for temaet",
       name: "ansvarlig",

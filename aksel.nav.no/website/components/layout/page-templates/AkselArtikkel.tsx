@@ -1,4 +1,4 @@
-import { getTemaSlug, SanityT, urlFor } from "@/lib";
+import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
@@ -43,7 +43,7 @@ const AkselArtikkelTemplate = ({
           </Heading>
           <div className="card-grid-3-1 mt-6 px-4">
             {data.relevante_artikler.map((x: any) => (
-              <ArtikkelCard {...x} source={x.title} key={x._id} />
+              <ArtikkelCard {...x} key={x._id} />
             ))}
           </div>
         </div>
@@ -111,11 +111,11 @@ const AkselArtikkelTemplate = ({
           </div>
           {hasTema && (
             <div className="mt-8 flex flex-wrap gap-2">
-              {data.tema.map(({ title }: any) => (
+              {data.tema.map(({ title, slug }: any) => (
                 <span key={title}>
                   <NextLink
                     key={title}
-                    href={`/god-praksis/${getTemaSlug(title)}`}
+                    href={`/god-praksis/${slug.current}`}
                     passHref
                   >
                     <BodyShort

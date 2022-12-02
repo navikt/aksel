@@ -10,7 +10,7 @@ const docTypes = [
 
 const akselSpesifics = `
 _type == "aksel_prinsipp" => {"prinsipp": prinsipp.prinsippvalg},
-_type == "aksel_artikkel" => {"tema": tema[]->title}`;
+_type == "aksel_artikkel" => {"tema": tema[]->slug.current}`;
 
 const query = `
 *[_type in $types]{

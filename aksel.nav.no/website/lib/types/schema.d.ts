@@ -661,6 +661,15 @@ Brukes i kort og innganger
       beskrivelse?: riktekst_enkel;
 
       /**
+       * Shortname - `Slug`
+En mer sanitert visning av tema-navnet i url ene
+       */
+      slug?: {
+        _type: "slug";
+        current: string;
+      };
+
+      /**
        * Ansvarlig for tema - `Reference`
 Legg til redaktør som har forvaltningsansvaret for temaet
        */

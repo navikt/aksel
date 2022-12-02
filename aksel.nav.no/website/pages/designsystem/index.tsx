@@ -94,7 +94,7 @@ const Wrapper = (props: any): JSX.Element => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Page {...props} />}>
-        <WithPreview comp={Page} query={dsFrontpageQuery} />
+        <WithPreview comp={Page} query={dsFrontpageQuery} props={props} />
       </PreviewSuspense>
     );
   }

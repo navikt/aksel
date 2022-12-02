@@ -1,19 +1,14 @@
 import { abbrName, ArtikkelCard, BreadCrumbs, Slope } from "@/components";
 import { AkselHeader, Footer } from "@/layout";
-import {
-  SanityT,
-  akselTemaDocs,
-  getAkselTema,
-  getTemaSlug,
-  usePreviewSubscription,
-} from "@/lib";
+import { SanityT, akselTemaDocs, getAkselTema } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { Heading, Label } from "@navikt/ds-react";
 import Head from "next/head";
-import React from "react";
+import React, { lazy } from "react";
 import NotFotfund from "../404";
 import cl from "classnames";
+import { PreviewSuspense } from "next-sanity/preview";
 
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
@@ -30,20 +25,13 @@ export interface AkselTemaPage
 }
 
 interface PageProps {
-  page: AkselTemaPage[];
+  tema: AkselTemaPage;
   slug: string;
   preview: boolean;
 }
 
-const Temaside = (props: PageProps): JSX.Element => {
-  const { data } = usePreviewSubscription(akselTemaDocs, {
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
-  const page = data.find((tema) => getTemaSlug(tema?.title) === props.slug);
-
-  if (!page) {
+const Page = ({ tema: page }: PageProps): JSX.Element => {
+  if (!page || !page.seksjoner || page.seksjoner.length === 0) {
     return <NotFotfund />;
   }
 
@@ -154,7 +142,11 @@ const Temaside = (props: PageProps): JSX.Element => {
                   <div className="card-grid-3-1">
                     {(seksjon.sider as unknown as ArtiklerT[]).map(
                       (x: ArtiklerT) => (
-                        <ArtikkelCard {...x} source={page.title} key={x._id} />
+                        <ArtikkelCard
+                          {...x}
+                          source={page?.slug?.current}
+                          key={x._id}
+                        />
                       )
                     )}
                   </div>
@@ -168,6 +160,29 @@ const Temaside = (props: PageProps): JSX.Element => {
     </>
   );
 };
+
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={akselTemaDocs}
+          props={props}
+          params={{
+            slug: props?.slug,
+          }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
 
 export const getStaticPaths = async () => {
   return {
@@ -189,22 +204,18 @@ export const getStaticProps = async ({
   params: { slug: string };
   preview?: boolean;
 }) => {
-  const temas = await getClient().fetch(akselTemaDocs);
-  const filtered = temas.filter(
-    (x) => x.artikler.length !== 0 || x.seksjoner.length !== 0
-  );
-  const doc = filtered.find((tema) => getTemaSlug(tema?.title) === slug);
+  const { tema } = await getClient().fetch(akselTemaDocs, {
+    slug,
+  });
 
   return {
     props: {
-      page: filtered,
+      tema,
       slug,
       preview,
-      id: doc?._id ?? null,
+      id: tema?._id ?? null,
     },
-    notFound: !doc && !preview,
+    notFound: !tema && !preview,
     revalidate: 60,
   };
 };
-
-export default Temaside;

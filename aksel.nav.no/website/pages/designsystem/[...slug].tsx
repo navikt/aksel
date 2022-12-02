@@ -61,6 +61,7 @@ const Wrapper = (props: any): JSX.Element => {
           comp={Page}
           query={dsSlugQuery}
           params={{ slug: `designsystem/${props.slug.slice(0, 2).join("/")}` }}
+          props={props}
         />
       </PreviewSuspense>
     );

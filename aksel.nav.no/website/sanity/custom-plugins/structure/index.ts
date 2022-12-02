@@ -253,12 +253,6 @@ export const resolveProductionUrl = (doc) => {
       ? `${basePath}${previewUrl}`
       : `${devPath}${previewUrl}`;
   }
-
-  /* if (doc._type === "aksel_tema") {
-    return process.env.NODE_ENV === "production"
-      ? `${basePath}/preview/god-praksis/${getTemaSlug(doc?.title)}`
-      : `${devPath}/preview/god-praksis/${getTemaSlug(doc?.title)}`;
-  } */
 };
 
 export const defaultDocumentNode = (S, { schemaType }) => {

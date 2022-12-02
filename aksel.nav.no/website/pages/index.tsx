@@ -403,7 +403,7 @@ const Page = (props: PageProps): JSX.Element => {
   if (props?.preview) {
     return (
       <PreviewSuspense fallback={<Forside {...props} />}>
-        <WithPreview comp={Forside} query={akselForsideQuery} />
+        <WithPreview comp={Forside} query={akselForsideQuery} props={props} />
       </PreviewSuspense>
     );
   }

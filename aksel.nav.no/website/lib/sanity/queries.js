@@ -210,7 +210,7 @@ export const akselDocumentBySlug = `*[slug.current == $slug] | order(_updatedAt 
     ...,
     ${deRefs}
   },
-  tema[]->{title},
+  tema[]->{title, slug},
   contributors[]->{
     title
   },
@@ -303,13 +303,12 @@ export const dsNavigationQuery = `
 }
 `;
 
-export const akselTemaNames = `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0].title`;
+export const akselTemaNames = `*[_type == "aksel_tema" && count(*[references(^._id)]) > 0].slug`;
 
-export const akselTemaDocs = `*[_type == "aksel_tema"]{
-  ...,
-  "ansvarlig": ansvarlig->{title, roller},
-  bruk_seksjoner == true => {
-    "artikler": [],
+export const akselTemaDocs = `{
+  "tema": *[_type == "aksel_tema" && slug.current == $slug] | order(_updatedAt desc)[0]{
+    ...,
+    "ansvarlig": ansvarlig->{title, roller},
     seksjoner[]{
       ...,
       beskrivelse[]{
@@ -328,21 +327,7 @@ export const akselTemaDocs = `*[_type == "aksel_tema"]{
         "contributor": contributors[0]->title,
       }
     }
-  },
-  bruk_seksjoner != true => {
-    "artikler": *[_type=='aksel_artikkel' && references(^._id) && !(_id in path("drafts.**"))] | order(_createdAt desc){
-      _id,
-      heading,
-      _createdAt,
-      _updatedAt,
-      publishedAt,
-      "slug": slug.current,
-      "tema": tema[]->tag,
-      ingress,
-      "contributor": contributors[0]->title,
-    },
-    "seksjoner": []
-  },
+  }
 }`;
 
 export const akselBloggBySlug = `*[slug.current == $slug] | order(_updatedAt desc)[0]

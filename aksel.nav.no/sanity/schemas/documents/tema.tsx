@@ -11,7 +11,10 @@ export default {
       name: "title",
       type: "string",
       group: "innhold",
-      validation: (Rule) => Rule.required().error("Temaet må ha et navn"),
+      validation: (Rule) =>
+        Rule.required()
+          .warning("Denne endringe påvirker URL")
+          .error("Temaet må ha et navn"),
     },
     {
       title: "Kort Intro/Oppsummering",
@@ -29,6 +32,30 @@ export default {
       name: "beskrivelse",
       type: "riktekst_enkel",
       group: "innhold",
+    },
+    {
+      title: "Shortname",
+      description: "En mer sanitert visning av tema-navnet i url ene",
+      name: "slug",
+      type: "slug",
+      group: "innhold",
+      validation: (Rule) => Rule.required().error("Tema må ha en URL"),
+      options: {
+        source: "title",
+        slugify: (s: string) =>
+          s
+            ? s
+                .toLowerCase()
+                .trim()
+                .replace(/\s+/g, "-")
+                .replace(/-+/gm, "-")
+                .replace(/æ/g, "a")
+                .replace(/å/g, "a")
+                .replace(/ø/g, "o")
+                // eslint-disable-next-line no-useless-escape
+                .replace(/[&\\#!,+()$~%.'"¨:*?<>{}]/g, "")
+            : "",
+      },
     },
     {
       title: "Ansvarlig for tema",
