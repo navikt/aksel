@@ -661,6 +661,11 @@ Brukes i kort og innganger
       beskrivelse?: riktekst_enkel;
 
       /**
+       * Hidden - `Boolean`
+       */
+      bruk_seksjoner?: boolean;
+
+      /**
        * Shortname - `Slug`
 En mer sanitert visning av tema-navnet i url ene
        */
