@@ -1,3 +1,4 @@
+import { Button } from "@navikt/ds-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
@@ -59,15 +60,18 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
           content: (
             <>
               <h3>Publiseringsdialog...</h3>
-              <button
-                onClick={() => {
-                  verifyContent();
-                  publish.execute();
-                  props.onComplete();
-                }}
-              >
-                Godkjenn
-              </button>
+              <div className="flex justify-end gap-4">
+                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button
+                  onClick={() => {
+                    verifyContent();
+                    publish.execute();
+                    props.onComplete();
+                  }}
+                >
+                  Ja, publiser
+                </Button>
+              </div>
             </>
           ),
         },
@@ -111,7 +115,16 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
               <ul>
                 <li>{updateDialogContent.checks[verifiedStatus]}</li>
               </ul>
-              <button onClick={() => verifyContent()}>Godkjenn</button>
+              <div className="flex justify-end gap-4">
+                <Button variant="tertiary">Nei, avbryt</Button>
+                <Button
+                  onClick={() => {
+                    verifyContent();
+                  }}
+                >
+                  Ja, godkjenn
+                </Button>
+              </div>
             </>
           ),
         },

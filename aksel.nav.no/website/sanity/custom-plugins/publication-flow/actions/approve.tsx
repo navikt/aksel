@@ -1,3 +1,4 @@
+import { Button } from "@navikt/ds-react";
 import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
@@ -59,7 +60,16 @@ export const createWrappedApproveAction = () => {
             <ul>
               <li>{updateDialogContent.checks[verifiedStatus]}</li>
             </ul>
-            <button onClick={() => verifyContent()}>Godkjenn</button>
+            <div className="flex justify-end gap-4">
+              <Button variant="tertiary">Nei, avbryt</Button>
+              <Button
+                onClick={() => {
+                  verifyContent();
+                }}
+              >
+                Ja, godkjenn
+              </Button>
+            </div>
           </>
         ),
       },
