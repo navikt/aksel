@@ -1,24 +1,20 @@
 import { TemaCard } from "@/components";
 import { AkselHeader, Footer } from "@/layout";
-import { akselTema, usePreviewSubscription } from "@/lib";
+import { akselTema } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
+import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
-import React from "react";
+import React, { lazy } from "react";
 import { AkselTemaT } from "..";
 
 interface PageProps {
-  page: AkselTemaT[];
+  temaer: AkselTemaT[];
   slug: string;
   preview: boolean;
 }
 
-const LandingsSide = (props: PageProps): JSX.Element => {
-  const { data } = usePreviewSubscription(akselTema, {
-    initialData: props.page,
-    enabled: props?.preview,
-  });
-
+const Page = ({ temaer: data }: PageProps): JSX.Element => {
   const filteredTemas = data.filter((x) => x.refCount > 0);
   return (
     <>
@@ -70,22 +66,36 @@ const LandingsSide = (props: PageProps): JSX.Element => {
   );
 };
 
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview comp={Page} query={akselTema} props={props} />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
+
 export const getStaticProps = async ({
   preview = false,
 }: {
   preview?: boolean;
 }) => {
-  const page = await getClient().fetch(akselTema);
+  const { temaer } = await getClient().fetch(akselTema);
 
   return {
     props: {
-      page: page,
+      temaer,
       slug: "/god-praksis",
       preview,
     },
-    notFound: !page,
+    notFound: !temaer,
     revalidate: 60,
   };
 };
-
-export default LandingsSide;

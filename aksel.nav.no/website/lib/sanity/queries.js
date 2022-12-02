@@ -154,10 +154,10 @@ ${defaultBlock},
 
 export const allDocuments = `*[]{...,'slug': slug.current }`;
 
-export const akselTema = `*[_type == "aksel_tema"]{
+export const akselTema = `{"temaer": *[_type == "aksel_tema"]{
   ...,
   "refCount": count(*[_type == "aksel_artikkel" && !(_id in path("drafts.**")) && references(^._id)])
-}`;
+}}`;
 
 export const akselBloggPosts = `*[_type == "aksel_blogg"] | order(_createdAt desc){
   ...,
@@ -181,7 +181,7 @@ export const akselForsideQuery = `*[_type == "vk_frontpage"][0]{
     undersider[]->{slug, heading}
   },
   "bloggs": ${akselBloggPosts},
-  "temaer": ${akselTema}
+  ${akselTema}
 }`;
 
 export const akselDocumentsByType = `*[_type in $types]{ _type, _id, 'slug': slug.current }`;
