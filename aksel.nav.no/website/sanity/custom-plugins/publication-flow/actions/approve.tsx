@@ -38,8 +38,6 @@ export const createWrappedApproveAction = () => {
       },
     };
 
-    console.log(differenceInMonths(new Date(), new Date(lastVerified)));
-
     const verifiedStatus =
       differenceInMonths(new Date(), new Date(lastVerified)) < 6
         ? "pre"
