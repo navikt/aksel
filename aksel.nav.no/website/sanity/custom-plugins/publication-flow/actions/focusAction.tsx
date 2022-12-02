@@ -13,7 +13,8 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const originalPublishDescription = action(props);
-    const [dialogOpen, setDialogOpen] = useState(false);
+    const [verifyOpen, setVerifyOpen] = useState(false);
+    const [publishOpen, setPublishOpen] = useState(false);
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
     const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
 
@@ -22,12 +23,25 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         [
           {
             set: {
-              "updateInfo.lastVerified": format(new Date(), "yyyy-MM-dd"),
+              updateInfo: {
+                lastVerified: format(new Date(), "yyyy-MM-dd"),
+              },
             },
           },
         ],
         props.published
       );
+    };
+
+    const updateDialogContent = {
+      description: {
+        pre: "Før du godkjenner innholdet, har du gjort dette?",
+        post: "Artikkelen er over 6mnd gammel og må godkjennes på nytt. Før du godkjenner innholdet, har du gjort dette?",
+      },
+      checks: {
+        pre: "Hovedinnhold",
+        post: "Hovedinnhold",
+      },
     };
 
     // Publish action
@@ -36,21 +50,26 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         ...originalPublishDescription,
         label: "Publiser",
         onHandle: () => {
-          !props.published &&
-            patch.execute(
-              [
-                {
-                  set: {
-                    updateInfo: {
-                      lastVerified: format(new Date(), "yyyy-MM-dd"),
-                    },
-                  },
-                },
-              ],
-              props
-            );
-          publish.execute();
-          props.onComplete();
+          setPublishOpen(true);
+        },
+        dialog: publishOpen && {
+          type: "dialog",
+          header: "Kvalitetssjekk",
+          onClose: () => setPublishOpen(false),
+          content: (
+            <>
+              <h3>Publiseringsdialog...</h3>
+              <button
+                onClick={() => {
+                  verifyContent();
+                  publish.execute();
+                  props.onComplete();
+                }}
+              >
+                Godkjenn
+              </button>
+            </>
+          ),
         },
       };
     }
@@ -70,20 +89,28 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         },
       };
     } else {
+      const verifiedStatus =
+        differenceInMonths(new Date(), new Date(lastVerified)) < 6
+          ? "pre"
+          : "post";
       // Approve content action
       return {
         label: "Godkjenn innhold",
         onHandle: () => {
-          setDialogOpen(true);
+          setVerifyOpen(true);
         },
         tone: "positive",
-        dialog: dialogOpen && {
+        dialog: verifyOpen && {
           type: "dialog",
           header: "Kvalitetssjekk",
-          onClose: () => setDialogOpen(false),
+          onClose: () => setVerifyOpen(false),
           content: (
             <>
-              <h3>Har du husket å bla bla bla...</h3>
+              <h3>Godkjenningsdialog...</h3>
+              <p>{updateDialogContent.description[verifiedStatus]}</p>
+              <ul>
+                <li>{updateDialogContent.checks[verifiedStatus]}</li>
+              </ul>
               <button onClick={() => verifyContent()}>Godkjenn</button>
             </>
           ),

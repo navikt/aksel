@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { differenceInMonths, format } from "date-fns";
 import { useState } from "react";
 import {
   DocumentActionDescription,
@@ -12,6 +12,7 @@ export const createWrappedApproveAction = () => {
   ): DocumentActionDescription | null => {
     const { patch } = useDocumentOperation(props.id, props.type);
     const [dialogOpen, setDialogOpen] = useState(false);
+    const lastVerified = props.published?.updateInfo?.["lastVerified"];
 
     const verifyContent = () => {
       patch.execute(
@@ -26,6 +27,22 @@ export const createWrappedApproveAction = () => {
       );
     };
 
+    const updateDialogContent = {
+      description: {
+        pre: "Før du godkjenner innholdet, har du gjort dette?",
+        post: "Artikkelen er over 6mnd gammel og må godkjennes på nytt. Før du godkjenner innholdet, har du gjort dette?",
+      },
+      checks: {
+        pre: "Hovedinnhold",
+        post: "Hovedinnhold",
+      },
+    };
+
+    const verifiedStatus =
+      differenceInMonths(new Date(), new Date(lastVerified)) < 6
+        ? "pre"
+        : "post";
+
     return {
       label: "Godkjenn innhold",
       onHandle: () => {
@@ -37,7 +54,11 @@ export const createWrappedApproveAction = () => {
         onClose: () => setDialogOpen(false),
         content: (
           <>
-            <h3>Har du husket å bla bla bla...</h3>
+            <h3>Godkjenningsdialog...</h3>
+            <p>{updateDialogContent.description[verifiedStatus]}</p>
+            <ul>
+              <li>{updateDialogContent.checks[verifiedStatus]}</li>
+            </ul>
             <button onClick={() => verifyContent()}>Godkjenn</button>
           </>
         ),
