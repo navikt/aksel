@@ -12,8 +12,6 @@ function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
 
   const validUser = useCheckAuth();
 
-  console.log(validUser, idCtx);
-
   return validUser && idCtx?.id ? (
     <>
       <div className="overflow-hidden">

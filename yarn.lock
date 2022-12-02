@@ -5328,7 +5328,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sanity/preview-kit@npm:^1.2.8":
+"@sanity/preview-kit@npm:^1.2.8, @sanity/preview-kit@npm:^1.2.9":
   version: 1.2.9
   resolution: "@sanity/preview-kit@npm:1.2.9"
   dependencies:
@@ -23025,28 +23025,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"next-sanity@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "next-sanity@npm:2.1.0"
+"next-sanity@npm:^3.1.2":
+  version: 3.1.2
+  resolution: "next-sanity@npm:3.1.2"
   dependencies:
     "@sanity/client": ^3.4.1
-    "@sanity/preview-kit": ^1.2.8
+    "@sanity/preview-kit": ^1.2.9
     "@sanity/webhook": ^2.0.0
     groq: ^2.33.2
   peerDependencies:
+    "@sanity/icons": "*"
     "@sanity/types": "*"
-    next: ^12 || ^13
-    react: ^16.3 || ^17 || ^18
+    "@sanity/ui": "*"
+    next: ^13
+    react: ^18
     sanity: "*"
-    styled-components: ^5.2
+    styled-components: "*"
   peerDependenciesMeta:
+    "@sanity/icons":
+      optional: true
     "@sanity/types":
+      optional: true
+    "@sanity/ui":
       optional: true
     sanity:
       optional: true
     styled-components:
       optional: true
-  checksum: 3be6772da4b128512cc32f498272c832235814d3303e0e35bf99edb2ab191406e5a85d9aaa75374b73114e23a64e15a73799a05be708b1c0f3bf3d6e5b1ae0a1
+  checksum: 1efb3a8c0137bfb53defc20bca5a30e6533f2bd648764d606049400e4089fb3cc92f4f70576552fbc48482697bf1af16eac4e7947037c8826c2262fccb072f5b
   languageName: node
   linkType: hard
 
@@ -33375,6 +33381,7 @@ __metadata:
     "@sanity/image-url": 1.0.1
     "@sanity/preview-kit": ^1.2.8
     "@sanity/table": 1.0.0
+    "@sanity/ui": ^1.0.0
     "@sanity/vision": 3.0.0-rc.3
     "@svgr/webpack": ^5.5.0
     "@testing-library/jest-dom": ^5.16.0
@@ -33405,7 +33412,7 @@ __metadata:
     lodash: ^4.17.21
     nanoid: 3.0.0
     next: ^12.2.0
-    next-sanity: ^2.0.0
+    next-sanity: ^3.1.2
     next-transpile-modules: ^9.0.0
     postcss: ^8.4.0
     postcss-import: ^14.1.0
