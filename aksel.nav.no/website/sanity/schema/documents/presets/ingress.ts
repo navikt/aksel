@@ -9,7 +9,9 @@ export const ingressField = defineField({
   group: "innhold",
   rows: 3,
   validation: (Rule) =>
-    Rule.required().max(210).error("Ingressen kan ikke være over 210 tegn"),
+    Rule.required()
+      .max(210)
+      .error("Side må ha en ingress og kortere enn 210 tegn."),
   options: {
     //@ts-ignore
     maxLength: 210,

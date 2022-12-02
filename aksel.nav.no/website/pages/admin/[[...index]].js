@@ -16,9 +16,9 @@ const StudioPage = () => {
     <div data-theme={scheme} className="h-full min-h-screen">
       <NextStudio
         config={workspaceConfig}
-        /* scheme={scheme}
+        scheme={scheme}
         onSchemeChange={(s) => setScheme(s)}
-        unstable__noFavicons */
+        unstable__noFavicons
       />
     </div>
   );
