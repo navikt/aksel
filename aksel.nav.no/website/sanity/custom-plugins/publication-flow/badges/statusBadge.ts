@@ -8,8 +8,6 @@ export const CreateStatusBadge = (documentId) => {
     const { published, draft } = props;
     const lastVerified = draft?.updateInfo?.["lastVerified"];
 
-    console.log(props);
-
     if (!published && !!lastVerified) {
       return {
         label: "Avpublisert",
