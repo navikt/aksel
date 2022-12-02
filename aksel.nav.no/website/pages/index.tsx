@@ -248,11 +248,7 @@ const Forside = ({
                 <div className="card-grid-3-1 mt-4">
                   {/* Temakort */}
                   {filteredTemas.slice(0, 7).map((tema) => (
-                    <TemaCard
-                      urlPrefix="god-praksis"
-                      {...tema}
-                      key={tema._id}
-                    />
+                    <TemaCard {...tema} key={tema._id} />
                   ))}
                 </div>
                 {filteredTemas.length > 6 && (

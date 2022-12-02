@@ -8,11 +8,10 @@ export const TemaCard = ({
   title,
   refCount,
   compact = false,
-  urlPrefix = "tema",
   slug,
 }: AkselTemaT & { compact?: boolean; urlPrefix?: string }) => {
   return (
-    <NextLink href={`/${urlPrefix}/${slug.current}`} passHref>
+    <NextLink href={`/god-praksis/${slug.current}`} passHref>
       <a
         className="focus-visible:shadow-focus group relative rounded-r-md rounded-l bg-white shadow transition-colors ease-in-out focus:outline-none sm:shadow-md"
         onClick={(e) =>

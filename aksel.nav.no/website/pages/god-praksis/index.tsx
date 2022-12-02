@@ -49,12 +49,7 @@ const Page = ({ temaer: data }: PageProps): JSX.Element => {
             <div className="dynamic-wrapper">
               <div className="card-grid-3-1 mt-4">
                 {filteredTemas.map((tema) => (
-                  <TemaCard
-                    urlPrefix="god-praksis"
-                    compact
-                    {...tema}
-                    key={tema._id}
-                  />
+                  <TemaCard compact {...tema} key={tema._id} />
                 ))}
               </div>
             </div>
