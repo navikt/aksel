@@ -8,14 +8,10 @@
     "dev": "yarn workspace website dev",
     "build:next": "yarn workspace website build",
     "serve:next": "yarn workspace website start",
-    "sanity": "yarn workspace sanity start",
-    "sanity:deploy": "yarn workspace sanity deploy",
-    "sanity:backup": "yarn workspace sanity backup",
     "sanity:update": "yarn workspace website update:sanity",
     "test": "yarn workspace website test"
   },
   "workspaces": [
-    "sanity",
     "website"
   ],
   "dependencies": {

@@ -10,7 +10,10 @@
     "build": "sanity build",
     "deploy": "yarn typegen && sanity deploy",
     "backup": "node scripts/backup.js",
-    "typegen": "sanity exec typegen.ts"
+    "typegen": "sanity exec typegen.ts",
+    "sanity:dev": "sanity start",
+    "sanity:deploy": "yarn typegen && sanity deploy",
+    "sanity:backup": "node scripts/backup.js"
   },
   "main": "package.json",
   "keywords": [

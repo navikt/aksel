@@ -24,10 +24,10 @@ jobs:
             ${{ runner.os }}-build-
 
       - name: Install dependencies
-        run: yarn
+        run: cd aksel.nav.no/sanity && yarn
 
       - name: Export dataset
-        run: SANITY_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} yarn workspace aksel.nav.no sanity:backup
+        run: SANITY_TOKEN=${{secrets.SANITY_DATASET_EDITOR_TOKEN}} cd aksel.nav.no/sanity && yarn backup
       - name: Upload GCP bucket
         uses: "google-github-actions/auth@v0"
         with:
