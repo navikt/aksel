@@ -13,7 +13,8 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
   ): DocumentActionDescription | null => {
     const { patch, publish } = useDocumentOperation(props.id, props.type);
     const originalPublishDescription = action(props);
-    const [dialogOpen, setDialogOpen] = useState(false);
+    const [verifyOpen, setVerifyOpen] = useState(false);
+    const [publishOpen, setPublishOpen] = useState(false);
     const lastVerified = props.published?.updateInfo?.["lastVerified"];
     const lastVerifiedDraft = props.draft?.updateInfo?.["lastVerified"];
 
@@ -36,21 +37,26 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
         ...originalPublishDescription,
         label: "Publiser",
         onHandle: () => {
-          !props.published &&
-            patch.execute(
-              [
-                {
-                  set: {
-                    updateInfo: {
-                      lastVerified: format(new Date(), "yyyy-MM-dd"),
-                    },
-                  },
-                },
-              ],
-              props
-            );
-          publish.execute();
-          props.onComplete();
+          setPublishOpen(true);
+        },
+        dialog: publishOpen && {
+          type: "dialog",
+          header: "Kvalitetssjekk",
+          onClose: () => setPublishOpen(false),
+          content: (
+            <>
+              <h3>Publiseringsdialog...</h3>
+              <button
+                onClick={() => {
+                  !props.published && verifyContent();
+                  publish.execute();
+                  props.onComplete();
+                }}
+              >
+                Godkjenn
+              </button>
+            </>
+          ),
         },
       };
     }
@@ -74,16 +80,16 @@ export const createWrappedFocusAction = (action: DocumentActionComponent) => {
       return {
         label: "Godkjenn innhold",
         onHandle: () => {
-          setDialogOpen(true);
+          setVerifyOpen(true);
         },
         tone: "positive",
-        dialog: dialogOpen && {
+        dialog: verifyOpen && {
           type: "dialog",
           header: "Kvalitetssjekk",
-          onClose: () => setDialogOpen(false),
+          onClose: () => setVerifyOpen(false),
           content: (
             <>
-              <h3>Har du husket å bla bla bla...</h3>
+              <h3>Godkjenningsdialog...</h3>
               <button onClick={() => verifyContent()}>Godkjenn</button>
             </>
           ),
