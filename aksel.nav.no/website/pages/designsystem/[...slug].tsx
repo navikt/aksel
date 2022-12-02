@@ -1,29 +1,23 @@
 import { getActiveHeading, LayoutPicker, PagePropsContext } from "@/components";
 import { DsHeader, DsSidebar, Footer } from "@/layout";
-import {
-  SanityT,
-  dsSlugQuery,
-  getDsPaths,
-  usePreviewSubscription,
-  validateDsPath,
-} from "@/lib";
+import { SanityT, dsSlugQuery, getDsPaths, validateDsPath } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { PreviewSuspense } from "next-sanity/preview";
+import { lazy } from "react";
 import NotFotfund from "../404";
 
-const Page = (props: {
+const WithPreview = lazy(() => import("../../components/WithPreview"));
+
+const Page = ({
+  page,
+  navigation,
+  ...rest
+}: {
   slug?: string[];
   page: any;
   navigation: SanityT.Schema.ds_navigation;
   preview: boolean;
 }): JSX.Element => {
-  const {
-    data: { page, navigation },
-  } = usePreviewSubscription(dsSlugQuery, {
-    params: { slug: `designsystem/${props.slug.slice(0, 2).join("/")}` },
-    initialData: props,
-    enabled: props?.preview,
-  });
-
   if (!page) {
     return <NotFotfund />;
   }
@@ -32,7 +26,7 @@ const Page = (props: {
     <PagePropsContext.Provider
       value={{
         pageProps: {
-          ...props,
+          ...rest,
           page: page,
           navigation,
           activeHeading: getActiveHeading(navigation, page?.slug) ?? null,
@@ -59,7 +53,23 @@ const Page = (props: {
   );
 };
 
-export default Page;
+const Wrapper = (props: any): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Page {...props} />}>
+        <WithPreview
+          comp={Page}
+          query={dsSlugQuery}
+          params={{ slug: `designsystem/${props.slug.slice(0, 2).join("/")}` }}
+        />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Page {...props} />;
+};
+
+export default Wrapper;
 
 export const getStaticPaths = async (): Promise<{
   fallback: string;

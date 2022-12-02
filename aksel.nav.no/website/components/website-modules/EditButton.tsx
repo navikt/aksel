@@ -4,13 +4,14 @@
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
 import cl from "classnames";
-import { useCurrentUser } from "lib/sanity/useCurrentUser";
+/* import { useCurrentUser } from "lib/sanity/useCurrentUser"; */
 import { useContext } from "react";
 import { IdContext } from "./utils";
 
 function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
-  const { data } = useCurrentUser();
+  /* const { data } = useCurrentUser(); */
   const idCtx = useContext(IdContext);
+  const data = null;
 
   return data && idCtx?.id ? (
     <>

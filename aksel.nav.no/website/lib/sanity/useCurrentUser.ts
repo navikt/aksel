@@ -1,4 +1,4 @@
-import { createCurrentUserHook } from "next-sanity";
+/* import { createCurrentUserHook } from "next-sanity"; */
 import { config } from "./config";
 
-export const useCurrentUser = createCurrentUserHook(config);
+/* export const useCurrentUser = createCurrentUserHook(config); */

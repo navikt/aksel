@@ -2,14 +2,14 @@
  * https://github.com/navikt/detsombetyrnoe/blob/main/src/components/PreviewBanner.tsx#L17
  */
 import { BodyShort, Button, Detail } from "@navikt/ds-react";
-import { useCurrentUser } from "lib/sanity/useCurrentUser";
+/* import { useCurrentUser } from "lib/sanity/useCurrentUser"; */
 import { useRouter } from "next/router";
 
 function PreviewBanner(): JSX.Element {
   const { asPath } = useRouter();
-  const { data } = useCurrentUser();
-
-  if (data === null) {
+  /* const { data } = useCurrentUser(); */
+  const data = null;
+  /* if (data === null) {
     return (
       <>
         <div className="fixed inset-0 z-[9999] bg-gray-900/70 backdrop-blur-sm" />
@@ -42,7 +42,7 @@ function PreviewBanner(): JSX.Element {
     );
   }
 
-  if (!data) return null;
+  if (!data) return null; */
   return (
     <a
       href={`/api/exit-preview?slug=${asPath}`}

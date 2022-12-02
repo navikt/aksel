@@ -1,20 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import { BloggCard, logNav, TemaCard } from "@/components";
 import { AkselHeader, Footer } from "@/layout";
-import {
-  SanityT,
-  akselForsideQuery,
-  urlFor,
-  usePreviewSubscription,
-} from "@/lib";
+import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
-import { getClient } from "@/sanity-client";
 import { Next } from "@navikt/ds-icons";
 import { BodyLong, Detail, Heading, Link } from "@navikt/ds-react";
 import cl from "classnames";
 import Head from "next/head";
 import NextLink from "next/link";
-import React from "react";
+import { akselForsideQuery } from "@/lib";
+import { PreviewSuspense } from "next-sanity/preview";
+import { lazy } from "react";
+import { getClient } from "@/sanity-client";
 
 const portalkort = [
   {
@@ -161,14 +158,14 @@ const Portaler = () => {
   );
 };
 
-const Page = (props: PageProps): JSX.Element => {
-  const {
-    data: { prinsipp_1, tekster, temaer, bloggs },
-  } = usePreviewSubscription(akselForsideQuery, {
-    initialData: props,
-    enabled: props?.preview,
-  });
+const WithPreview = lazy(() => import("../components/WithPreview"));
 
+const Forside = ({
+  prinsipp_1,
+  tekster,
+  temaer,
+  bloggs,
+}: PageProps): JSX.Element => {
   const hasPrinsipp1 =
     prinsipp_1 &&
     prinsipp_1?.hovedside &&
@@ -400,6 +397,18 @@ const Page = (props: PageProps): JSX.Element => {
       </div>
     </>
   );
+};
+
+const Page = (props: PageProps): JSX.Element => {
+  if (props?.preview) {
+    return (
+      <PreviewSuspense fallback={<Forside {...props} />}>
+        <WithPreview comp={Forside} query={akselForsideQuery} />
+      </PreviewSuspense>
+    );
+  }
+
+  return <Forside {...props} />;
 };
 
 export interface AkselTemaT extends SanityT.Schema.aksel_tema {
