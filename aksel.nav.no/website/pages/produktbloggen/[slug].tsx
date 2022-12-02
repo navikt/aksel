@@ -45,6 +45,7 @@ interface StaticProps {
     slug: string;
     preview: boolean;
     validUser?: boolean;
+    id?: string;
   };
   notFound: boolean;
 }
@@ -64,7 +65,7 @@ export const getServerSideProps: GetServerSideProps = async (
       blogg,
       slug: context.params.slug as string,
       preview: context.preview ?? false,
-      /* validUser: isValidUser, */
+      id: blogg?._id,
     },
     notFound: !blogg && !context.preview,
   };

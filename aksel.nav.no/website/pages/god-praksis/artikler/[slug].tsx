@@ -61,6 +61,7 @@ interface StaticProps {
     page: SanityT.Schema.aksel_artikkel;
     slug: string;
     preview: boolean;
+    id?: string;
   };
   notFound: boolean;
   revalidate: number;
@@ -82,6 +83,7 @@ export const getStaticProps = async ({
       page,
       slug,
       preview,
+      id: page?._id,
     },
     notFound: !page && !preview,
     revalidate: 60,

@@ -4,16 +4,17 @@
 import { Edit } from "@navikt/ds-icons";
 import { Tooltip } from "@navikt/ds-react";
 import cl from "classnames";
-/* import { useCurrentUser } from "lib/sanity/useCurrentUser"; */
 import { useContext } from "react";
-import { IdContext } from "./utils";
+import { IdContext, useCheckAuth } from "./utils";
 
 function EditButton({ variant }: { variant: "ds" | "aksel" }): JSX.Element {
-  /* const { data } = useCurrentUser(); */
   const idCtx = useContext(IdContext);
-  const data = null;
 
-  return data && idCtx?.id ? (
+  const validUser = useCheckAuth();
+
+  console.log(validUser, idCtx);
+
+  return validUser && idCtx?.id ? (
     <>
       <div className="overflow-hidden">
         <Tooltip
