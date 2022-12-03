@@ -3,18 +3,29 @@ import Link from "next/link";
 import { logNav /* Search */ } from "../..";
 import cl from "classnames";
 import { useRouter } from "next/router";
+import { Hamburger } from "components/layout/header/Hamburger";
 
 const LinkElement = ({ name, href }) => {
   const { asPath } = useRouter();
   return (
     <Link href={href} passHref>
       <a
-        className={cl("grid h-full place-items-center rounded px-2", {
-          "bg-surface-action-selected text-text-on-action hover:bg-surface-action-selected-hover focus:shadow-focus-gap":
-            asPath.startsWith(href),
-          "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus":
-            !asPath.startsWith(href),
-        })}
+        className={cl(
+          "grid h-full place-items-center rounded px-2 focus:outline-none",
+          {
+            "bg-surface-action-selected text-text-on-action hover:bg-surface-action-selected-hover focus:shadow-focus-gap":
+              asPath.startsWith(href),
+            "hover:bg-surface-action-subtle-hover focus-visible:shadow-focus":
+              !asPath.startsWith(href),
+          }
+        )}
+        onClick={(e) =>
+          logNav(
+            "header",
+            window.location.pathname,
+            e.currentTarget.getAttribute("href")
+          )
+        }
       >
         {name}
       </a>
@@ -39,17 +50,20 @@ export const Header = () => {
                   e.currentTarget.getAttribute("href")
                 )
               }
-              className="hover:bg-surface-action-subtle-hover focus-visible:shadow-focus grid h-full place-items-center rounded px-2"
+              className="hover:bg-surface-action-subtle-hover focus-visible:shadow-focus grid h-full place-items-center rounded px-2 focus:outline-none"
             >
               <Logo />
               <span className="sr-only">Aksel</span>
             </a>
           </Link>
-          <div className="flex h-full gap-4">
+          <div className="xs:gap-6 hidden h-full gap-4 md:flex">
             <LinkElement name="God praksis" href="/god-praksis" />
             <LinkElement name="Grunnleggende" href="/grunnleggende" />
             <LinkElement name="Komponenter" href="/komponenter" />
             <LinkElement name="Blogg" href="/produktbloggen" />
+          </div>
+          <div className="h-full md:hidden">
+            <Hamburger />
           </div>
         </div>
       </header>

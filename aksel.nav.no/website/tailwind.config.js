@@ -27,7 +27,7 @@ module.exports = {
       },
       spacing: {
         0: 0,
-        header: "3.5rem",
+        header: "2.75rem",
         sidebar: "18rem",
         text: "600px",
       },
@@ -46,11 +46,12 @@ module.exports = {
         "screen-header": "calc(100vh - 3.5rem)",
         ...theme("spacing"),
       }),
-
       boxShadow: {
         "focus-inverted-inset": "inset var(--a-shadow-focus-inverted)",
         "focus-inset": "inset var(--a-shadow-focus)",
         "focus-gap": "0 0 0 1px white, var(--a-shadow-focus)",
+        "focus-gap-inset":
+          "inset 0 0 0 2px var(--a-border-focus), inset 0 0 0 3px white",
         header: "inset 0 -1px 0 rgb(180, 180, 180, 0.1)",
       },
       keyframes: {
