@@ -34,6 +34,7 @@ export const getAkselDocuments = async (
     | "aksel_blogg"
     | "aksel_prinsipp"
     | "aksel_standalone"
+    | "komponent_artikkel"
     | "all",
   token?: string
 ): Promise<string[]> => {
@@ -61,6 +62,26 @@ export const getAkselDocuments = async (
   return paths;
 };
 
+export const getDocumentsTmp = async (
+  source: "komponent_artikkel"
+): Promise<string[]> => {
+  const documents: any[] | null = await getClient().fetch(
+    `*[_type in $types]{ _type, _id, 'slug': slug_v2.current }`,
+    {
+      types: [source],
+    }
+  );
+  const paths = [];
+
+  documents
+    .filter((x) => !x._id.startsWith("drafts."))
+    ?.forEach((page) => {
+      page.slug && paths.push(page.slug);
+    });
+
+  return paths;
+};
+
 export const getDsPaths = async (token?: string): Promise<string[][]> => {
   const client = token ? noCdnClient(token) : getClient();
   const documents: any[] | null = await client.fetch(dsDocuments);
@@ -76,25 +97,6 @@ export const getDsPaths = async (token?: string): Promise<string[][]> => {
     paths.push(slug);
   });
   return paths;
-};
-
-export const validateDsPath = (
-  doc: SanityT.Schema.ds_artikkel | SanityT.Schema.komponent_artikkel,
-  slug: string[]
-) => {
-  if (!doc) return false;
-
-  /* Check for nested pages, ex button/kode */
-  const isLvl2 = slug.length === 3;
-
-  if (slug.length === 2) return true;
-  switch (doc._type) {
-    /* Støtte gamle url-er */
-    case "komponent_artikkel":
-      return slug?.[2] === "kode";
-    default:
-      return false;
-  }
 };
 
 export const getAkselTema = async (token?: string): Promise<string[]> => {

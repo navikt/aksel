@@ -305,6 +305,36 @@ export const dsSlugQuery = `{
   ${dsNavQuery}
 }`;
 
+const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
+  "slug": slug_v2.current,
+  kategori
+}`;
+
+export const komponentQuery = `{
+  "page": *[_type == "komponent_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug_v2.current,
+      linked_package {
+        "title": @->title,
+        "github_link": @->github_link,
+        "status": @->status
+      },
+      intro{
+        ...,
+        body[]{
+          ...,
+        ${deRefs}
+        }
+      },
+      content[]{
+        ...,
+        ${deRefs}
+      },
+  },
+  ${sidebarQuery}
+}`;
+
 export const dsNavigationQuery = `
 *[_type == 'ds_navigation'][0] {
   "headings": headings[]{
