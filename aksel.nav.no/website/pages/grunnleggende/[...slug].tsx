@@ -1,20 +1,20 @@
-import { getActiveHeading, LayoutPicker, PagePropsContext } from "@/components";
-import { DsSidebar, Footer } from "@/layout";
-import { SanityT, dsSlugQuery, getDsPaths } from "@/lib";
+import { LayoutPicker } from "@/components";
+import { Footer } from "@/layout";
+import { getDocumentsTmp, grunnleggendeQuery } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Header } from "components/layout/header/Header";
+import { Sidebar } from "components/layout/sidebar/Sidebar";
 import { PreviewSuspense } from "next-sanity/preview";
 import { lazy } from "react";
 import NotFotfund from "../404";
 
 const Page = ({
   page,
-  navigation,
-  ...rest
+  sidebar,
 }: {
   slug?: string[];
   page: any;
-  navigation: SanityT.Schema.ds_navigation;
+  sidebar: any;
   preview: boolean;
 }): JSX.Element => {
   if (!page) {
@@ -22,20 +22,11 @@ const Page = ({
   }
 
   return (
-    <PagePropsContext.Provider
-      value={{
-        pageProps: {
-          ...rest,
-          page: page,
-          navigation,
-          activeHeading: getActiveHeading(navigation, page?.slug) ?? null,
-        },
-      }}
-    >
+    <>
       <Header />
       <div className="bg-bg-default flex w-full flex-col items-center">
         <div className="flex w-full max-w-screen-2xl">
-          <DsSidebar />
+          <Sidebar kategori="Grunnleggende" links={sidebar} />
           <div className="relative w-full">
             <main
               tabIndex={-1}
@@ -48,7 +39,7 @@ const Page = ({
         </div>
         <Footer variant="ds" />
       </div>
-    </PagePropsContext.Provider>
+    </>
   );
 };
 
@@ -60,8 +51,11 @@ const Wrapper = (props: any): JSX.Element => {
       <PreviewSuspense fallback={<Page {...props} />}>
         <WithPreview
           comp={Page}
-          query={dsSlugQuery}
-          params={{ slug: `designsystem/${props.slug.slice(0, 2).join("/")}` }}
+          query={grunnleggendeQuery}
+          params={{
+            slug: `grunnleggende/${props.slug.slice(0, 2).join("/")}`,
+            type: "ds_artikkel",
+          }}
           props={props}
         />
       </PreviewSuspense>
@@ -78,10 +72,10 @@ export const getStaticPaths = async (): Promise<{
   paths: { params: { slug: string[] } }[];
 }> => {
   return {
-    paths: await getDsPaths().then((paths) =>
+    paths: await getDocumentsTmp("ds_artikkel").then((paths) =>
       paths.map((slug) => ({
         params: {
-          slug: slug.filter((x) => x !== "designsystem"),
+          slug: slug.split("/").filter((x) => x !== "komponenter"),
         },
       }))
     ),
@@ -96,15 +90,16 @@ export const getStaticProps = async ({
   params: { slug: string[] };
   preview?: boolean;
 }) => {
-  const { page, navigation } = await getClient().fetch(dsSlugQuery, {
-    slug: `designsystem/${slug.slice(0, 2).join("/")}`,
+  const { page, sidebar } = await getClient().fetch(grunnleggendeQuery, {
+    slug: `grunnleggende/${slug.slice(0, 2).join("/")}`,
+    type: "ds_artikkel",
   });
 
   return {
     props: {
       page: page,
       slug,
-      navigation: navigation,
+      sidebar,
       preview,
     },
     notFound: !page && !preview,

@@ -10,9 +10,8 @@ export function urlFor(source: any) {
 }
 
 export const getAllPages = async (token?: string) => {
-  const pages = await getDsPaths(token).then((paths) =>
-    paths.map((slugs) => slugs.join("/"))
-  );
+  const komponenter = await getDocumentsTmp("komponent_artikkel", token);
+  const grunnleggende = await getDocumentsTmp("ds_artikkel", token);
 
   const artikler = await getAkselDocuments("all", token);
   const temaer = await getAkselTema(token);
@@ -22,7 +21,8 @@ export const getAllPages = async (token?: string) => {
     "designsystem",
     "tema",
     "blogg",
-    ...pages,
+    ...komponenter,
+    ...grunnleggende,
     ...artikler,
     ...temaer.map((x) => `god-praksis/${x}`),
   ];
@@ -63,9 +63,11 @@ export const getAkselDocuments = async (
 };
 
 export const getDocumentsTmp = async (
-  source: "komponent_artikkel"
+  source: "komponent_artikkel" | "ds_artikkel",
+  token?: string
 ): Promise<string[]> => {
-  const documents: any[] | null = await getClient().fetch(
+  const client = token ? noCdnClient(token) : getClient();
+  const documents: any[] | null = await client.fetch(
     `*[_type in $types]{ _type, _id, 'slug': slug_v2.current }`,
     {
       types: [source],
@@ -79,23 +81,6 @@ export const getDocumentsTmp = async (
       page.slug && paths.push(page.slug);
     });
 
-  return paths;
-};
-
-export const getDsPaths = async (token?: string): Promise<string[][]> => {
-  const client = token ? noCdnClient(token) : getClient();
-  const documents: any[] | null = await client.fetch(dsDocuments);
-  const paths = [];
-
-  const nonDrafts = documents.filter((x) => !x._id.startsWith("drafts."));
-
-  nonDrafts?.forEach((page) => {
-    if (!page.slug) {
-      return null;
-    }
-    const slug = page.slug.split("/");
-    paths.push(slug);
-  });
   return paths;
 };
 

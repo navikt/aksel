@@ -122,7 +122,7 @@ export const Sidebar = ({
   kategori,
   links,
 }: {
-  kategori: "Komponenter";
+  kategori: "Komponenter" | "Grunnleggende";
   links: { heading: string; slug: string; kategori: string; tag?: string }[];
 }) => {
   const sections = useMemo(

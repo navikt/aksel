@@ -8,11 +8,11 @@ const Page = (): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Komponenter</title>
-        <meta property="og:title" content="Komponenter" />
+        <title>Grunnleggende</title>
+        <meta property="og:title" content="Grunnleggende" />
         <meta
           name="description"
-          content="Komponenter fra designsystemet til NAV"
+          content="Grunnelegende deler fra designsystemet til NAV"
         />
       </Head>
       <Header />
@@ -21,7 +21,7 @@ const Page = (): JSX.Element => {
         id="hovedinnhold"
         className="bg-surface relative flex justify-center focus:outline-none"
       >
-        <div className="min-h-screen-header flex w-full">Komponenter</div>
+        <div className="min-h-screen-header flex w-full">Grunnleggende</div>
       </main>
       <Footer variant="aksel" />
     </>
@@ -54,7 +54,7 @@ export const getStaticProps = async ({
   return {
     props: {
       /* page: page, */
-      slug: "/komponenter",
+      slug: "/grunnleggende",
       preview,
     },
     revalidate: 60,

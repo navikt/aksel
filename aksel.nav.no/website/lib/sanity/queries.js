@@ -251,60 +251,6 @@ export const akselEditorById = `*[_id == $id][0]
 
 export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ ..., 'slug': slug.current }`;
 
-const dsNavQuery = `"navigation": *[_type == 'ds_navigation'][0] {
-  "headings": headings[]{
-    ...,
-    link_ref->{_id, slug},
-    menu[]{
-      ...,
-      link->{_id, slug, status},
-    }
-  }
-}`;
-
-export const dsFrontpageQuery = `{
-  "page": *[_id == "frontpage_designsystem"][0]
-  {
-   ...,
-    body[]{
-      ...,
-      ${deRefs}
-    },
-    cards[]{
-      _type == "card" =>{
-        ...,
-        link_ref->{_id, "slug": slug.current}
-      }
-    }
-  },
-  ${dsNavQuery}
-}`;
-
-export const dsSlugQuery = `{
-  "page": *[_type in ["komponent_artikkel", "ds_artikkel"] && slug.current == $slug] | order(_updatedAt desc)[0]
-    {
-      ...,
-      "slug": slug.current,
-      linked_package {
-        "title": @->title,
-        "github_link": @->github_link,
-        "status": @->status
-      },
-      intro{
-        ...,
-        body[]{
-          ...,
-        ${deRefs}
-        }
-      },
-      content[]{
-        ...,
-        ${deRefs}
-      },
-  },
-  ${dsNavQuery}
-}`;
-
 const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,
   "slug": slug_v2.current,
@@ -329,6 +275,19 @@ export const komponentQuery = `{
         ${deRefs}
         }
       },
+      content[]{
+        ...,
+        ${deRefs}
+      },
+  },
+  ${sidebarQuery}
+}`;
+
+export const grunnleggendeQuery = `{
+  "page": *[_type == "ds_artikkel" && slug_v2.current == $slug] | order(_updatedAt desc)[0]
+    {
+      ...,
+      "slug": slug_v2.current,
       content[]{
         ...,
         ${deRefs}

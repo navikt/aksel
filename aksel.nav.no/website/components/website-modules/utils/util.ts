@@ -28,20 +28,6 @@ export function useScrollToHashOnPageLoad(): void {
   }, []);
 }
 
-export const getActiveHeading = (nav: any, slug = "") =>
-  nav?.headings.find((heading) => {
-    if (heading?.menu) {
-      return (
-        heading.menu
-          .filter((x) => x?._type !== "subheading")
-          .find((item) => item?.link?.slug?.current === slug) ??
-        heading?.link_ref?.slug?.current === slug
-      );
-    } else {
-      return heading?.link_ref?.slug?.current === slug;
-    }
-  }) ?? null;
-
 export const removeEmojies = (s: string) =>
   s.replace(
     /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
