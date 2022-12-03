@@ -93,7 +93,7 @@ const serializers = {
         case "h3":
           return (
             <Heading
-              className="algolia-index-lvl3 max-w-text mt-8 scroll-mt-20 focus:outline-none"
+              className="algolia-index-lvl3 max-w-text text-deepblue-800 mt-8 scroll-mt-20 focus:outline-none"
               spacing
               level="3"
               size="medium"
@@ -105,7 +105,7 @@ const serializers = {
         case "h4":
           return (
             <Heading
-              className="algolia-index-lvl4 max-w-text mt-6"
+              className="algolia-index-lvl4 max-w-text text-deepblue-800 mt-6"
               spacing
               level="4"
               size="small"

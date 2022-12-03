@@ -3,6 +3,7 @@ import { Footer } from "@/layout";
 import { getDocumentsTmp, komponentQuery } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Header } from "components/layout/header/Header";
+import { Sidebar } from "components/layout/sidebar/Sidebar";
 import { PreviewSuspense } from "next-sanity/preview";
 import { lazy } from "react";
 import NotFotfund from "../404";
@@ -25,7 +26,7 @@ const Page = ({
       <Header />
       <div className="bg-bg-default flex w-full flex-col items-center">
         <div className="flex w-full max-w-screen-2xl">
-          {/* <DsSidebar /> */}
+          <Sidebar kategori="Komponenter" links={sidebar} />
           <div className="relative w-full">
             <main
               tabIndex={-1}

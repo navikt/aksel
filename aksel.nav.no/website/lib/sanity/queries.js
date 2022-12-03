@@ -306,6 +306,7 @@ export const dsSlugQuery = `{
 }`;
 
 const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
+  heading,
   "slug": slug_v2.current,
   kategori
 }`;
@@ -320,6 +321,7 @@ export const komponentQuery = `{
         "github_link": @->github_link,
         "status": @->status
       },
+      "tag": status.tag,
       intro{
         ...,
         body[]{

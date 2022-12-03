@@ -86,7 +86,7 @@ const AkselArtikkelTemplate = ({
           <Heading
             level="1"
             size="large"
-            className="algolia-index-lvl1 text-deepblue-700 mt-4 md:text-5xl"
+            className="algolia-index-lvl1 text-deepblue-800 mt-4 md:text-5xl"
           >
             {data.heading}
           </Heading>

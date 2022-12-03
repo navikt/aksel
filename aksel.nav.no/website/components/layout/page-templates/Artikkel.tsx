@@ -33,7 +33,7 @@ const ArtikkelTemplate = ({
             size="xlarge"
             level="1"
             spacing
-            className="algolia-index-lvl1"
+            className="algolia-index-lvl1 text-deepblue-800"
           >
             {data.heading}
           </Heading>
