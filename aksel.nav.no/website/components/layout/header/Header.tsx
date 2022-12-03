@@ -56,7 +56,7 @@ export const Header = () => {
               <span className="sr-only">Aksel</span>
             </a>
           </Link>
-          <div className="xs:gap-6 hidden h-full gap-4 md:flex">
+          <div className="hidden h-full gap-4 md:flex">
             <LinkElement name="God praksis" href="/god-praksis" />
             <LinkElement name="Grunnleggende" href="/grunnleggende" />
             <LinkElement name="Komponenter" href="/komponenter" />
