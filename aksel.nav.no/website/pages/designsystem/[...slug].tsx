@@ -1,7 +1,8 @@
 import { getActiveHeading, LayoutPicker, PagePropsContext } from "@/components";
-import { DsHeader, DsSidebar, Footer } from "@/layout";
+import { DsSidebar, Footer } from "@/layout";
 import { SanityT, dsSlugQuery, getDsPaths, validateDsPath } from "@/lib";
 import { getClient } from "@/sanity-client";
+import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
 import { lazy } from "react";
 import NotFotfund from "../404";
@@ -31,7 +32,7 @@ const Page = ({
         },
       }}
     >
-      <DsHeader />
+      <Header />
       <div className="bg-bg-default flex w-full flex-col items-center">
         <div className="flex w-full max-w-screen-2xl">
           <DsSidebar />

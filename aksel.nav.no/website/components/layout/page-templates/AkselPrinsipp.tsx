@@ -2,8 +2,9 @@ import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
 import cl from "classnames";
+import { Header } from "components/layout/header/Header";
 import Head from "next/head";
-import { AkselHeader, Footer } from "..";
+import { Footer } from "..";
 import {
   abbrName,
   Bilde,
@@ -57,7 +58,7 @@ const AkselPrinsippTemplate = ({
           key="ogimage"
         />
       </Head>
-      <AkselHeader variant={mainPage ? "inngang" : "artikkel"} />
+      <Header />
       <main
         tabIndex={-1}
         id="hovedinnhold"

@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { BloggCard, logNav, TemaCard } from "@/components";
-import { AkselHeader, Footer } from "@/layout";
+import { Footer } from "@/layout";
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Next } from "@navikt/ds-icons";
@@ -13,6 +13,7 @@ import { PreviewSuspense } from "next-sanity/preview";
 import { lazy, useEffect, useState } from "react";
 import { getClient } from "@/sanity-client";
 import Snowfall from "react-snowfall";
+import { Header } from "components/layout/header/Header";
 
 const portalkort = [
   {
@@ -216,7 +217,7 @@ const Forside = ({
       </Head>
 
       <div className="bg-deepblue-900">
-        <AkselHeader variant="forside" />
+        <Header />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="bg-deepblue-900 from-deepblue-900 via-deepblue-900/50 to-deepblue-700 relative bg-gradient-to-b px-4 pt-16 pb-24 text-white">
             {xmas && (

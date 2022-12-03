@@ -2,9 +2,9 @@ import { Feedback, TableOfContents } from "@/components";
 import { SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { Heading } from "@navikt/ds-react";
+import { Header } from "components/layout/header/Header";
 import Head from "next/head";
 import Footer from "../footer/Footer";
-import AkselHeader from "../header/AkselHeader";
 
 const AkselStandaloneTemplate = ({
   data,
@@ -28,7 +28,7 @@ const AkselStandaloneTemplate = ({
         />
       </Head>
 
-      <AkselHeader variant="artikkel" />
+      <Header />
       <main
         tabIndex={-1}
         id="hovedinnhold"

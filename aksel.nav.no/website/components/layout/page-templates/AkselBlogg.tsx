@@ -1,11 +1,11 @@
 import { SanityT, urlFor } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { BodyShort, Heading, Ingress, Label } from "@navikt/ds-react";
+import { Header } from "components/layout/header/Header";
 import Head from "next/head";
 
 import { abbrName, dateStr, Feedback, TableOfContents } from "../..";
 import Footer from "../footer/Footer";
-import AkselHeader from "../header/AkselHeader";
 
 const AkselBloggTemplate = ({
   data,
@@ -58,7 +58,7 @@ const AkselBloggTemplate = ({
         />
       </Head>
 
-      <AkselHeader variant="blogg" />
+      <Header />
       <main
         tabIndex={-1}
         id="hovedinnhold"

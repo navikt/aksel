@@ -1,8 +1,9 @@
 import { TemaCard } from "@/components";
-import { AkselHeader, Footer } from "@/layout";
+import { Footer } from "@/layout";
 import { akselTema } from "@/lib";
 import { getClient } from "@/sanity-client";
 import { Heading } from "@navikt/ds-react";
+import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import React, { lazy } from "react";
@@ -27,7 +28,7 @@ const Page = ({ temaer: data }: PageProps): JSX.Element => {
         />
       </Head>
       <div className="bg-gray-50">
-        <AkselHeader variant="inngang" />
+        <Header />
         <main
           tabIndex={-1}
           id="hovedinnhold"

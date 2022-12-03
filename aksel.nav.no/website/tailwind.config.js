@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     /* Flytt ut fra extend og refactor bruk av screen */
     screens: {
-      xs: "564px",
+      xs: "480px",
       sm: "648px",
       md: "768px",
       lg: "1024px",

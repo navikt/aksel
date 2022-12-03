@@ -1,4 +1,5 @@
-import { AkselHeader, Footer } from "@/layout";
+import { Footer } from "@/layout";
+import { Header } from "components/layout/header/Header";
 import React from "react";
 
 export const NoSidebarLayout = ({
@@ -12,13 +13,13 @@ export const NoSidebarLayout = ({
 }) => {
   return (
     <>
-      <AkselHeader variant={variant} />
+      <Header />
       <main
         tabIndex={-1}
         id="hovedinnhold"
         className="aksel-artikkel bg-gray-50 pt-4 focus:outline-none"
       >
-        <div className="mx-auto max-w-aksel px-4 xs:w-[90%]">
+        <div className="max-w-aksel xs:w-[90%] mx-auto px-4">
           <article className="pt-12 pb-16 md:pb-32">{children}</article>
         </div>
         {aside}

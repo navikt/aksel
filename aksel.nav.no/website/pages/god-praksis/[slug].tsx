@@ -1,5 +1,5 @@
 import { abbrName, ArtikkelCard, BreadCrumbs, Slope } from "@/components";
-import { AkselHeader, Footer } from "@/layout";
+import { Footer } from "@/layout";
 import { SanityT, akselTemaDocs, getAkselTema } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
@@ -9,6 +9,7 @@ import React, { lazy } from "react";
 import NotFotfund from "../404";
 import cl from "classnames";
 import { PreviewSuspense } from "next-sanity/preview";
+import { Header } from "components/layout/header/Header";
 
 type ArtiklerT = Partial<
   SanityT.Schema.aksel_artikkel & {
@@ -44,7 +45,7 @@ const Page = ({ tema: page }: PageProps): JSX.Element => {
         <meta property="og:title" content={`${page.title} - Aksel`} />
       </Head>
       <div className="bg-white">
-        <AkselHeader variant="inngang" />
+        <Header />
         <main
           tabIndex={-1}
           id="hovedinnhold"

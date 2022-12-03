@@ -4,11 +4,12 @@ import {
   DsFrontpageIllustration,
   PagePropsContext,
 } from "@/components";
-import { DsHeader, Footer } from "@/layout";
+import { Footer } from "@/layout";
 import { DsFrontPageCardT, dsFrontpageQuery, SanityT } from "@/lib";
 import { SanityBlockContent } from "@/sanity-block";
 import { getClient } from "@/sanity-client";
 import { BodyLong, Heading } from "@navikt/ds-react";
+import { Header } from "components/layout/header/Header";
 import { PreviewSuspense } from "next-sanity/preview";
 import Head from "next/head";
 import { lazy } from "react";
@@ -42,7 +43,7 @@ const Page = ({
           },
         }}
       >
-        <DsHeader />
+        <Header />
 
         <main
           tabIndex={-1}
