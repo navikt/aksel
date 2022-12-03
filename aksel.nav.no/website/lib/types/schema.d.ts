@@ -177,6 +177,11 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
+       * Kategori - `String`
+       */
+      kategori?: "core" | "internal";
+
+      /**
        * Metadata - `Object`
        */
       status?: {
@@ -427,6 +432,11 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
+       * Kategori - `String`
+       */
+      kategori?: "core" | "internal";
+
+      /**
        * Metadata - `Object`
        */
       status?: {
@@ -505,6 +515,11 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
         _type: "slug_v2";
         current: string;
       };
+
+      /**
+       * Kategori - `String`
+       */
+      kategori?: "styling" | "tokens" | "staesj" | "guider";
 
       /**
        * Innhold - `RegistryReference`

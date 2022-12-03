@@ -29,6 +29,24 @@ export default {
         !currentUser.roles.find((x) => x.name === "developer"),
     },
     {
+      title: "Kategori",
+      name: "kategori",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+      options: {
+        list: [
+          { title: "Core", value: "core" },
+          { title: "Internal", value: "internal" },
+        ].map((x) => ({
+          title: x.title,
+          value: x.value,
+        })),
+        layout: "radio",
+      },
+      hidden: ({ currentUser }) =>
+        !currentUser.roles.find((x) => x.name === "developer"),
+    },
+    {
       title: "Metadata",
       name: "status",
       group: "innhold",

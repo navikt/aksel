@@ -19,9 +19,7 @@ const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const transactionClient = noCdnClient(token).transaction();
 
-  const docs = await noCdnClient(token).fetch(
-    `*[_type in ["komponent_artikkel"]]`
-  );
+  const docs = await noCdnClient(token).fetch(`*[_type in ["ds_artikkel"]]`);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const newData = [];
@@ -30,11 +28,12 @@ const main = async () => {
     data?.slug?.current
       ? newData.push({
           _id: data._id,
+          kategori: "styling",
           slug_v2: {
             _type: "slug",
             current: data.slug.current.replace(
-              "artikkel/",
-              "god-praksis/artikler/"
+              "designsystem/side/",
+              "grunnleggende/styling/"
             ),
           },
         })
@@ -45,7 +44,9 @@ const main = async () => {
     const id = data._id;
     delete data._id;
     transactionClient.patch(id, (p) =>
-      p.set({ ...data }).unset(["slug_v2", "isMigrated"])
+      p
+        .set({ ...data })
+        .unset(["metadata_feedback", "isMigrated", "artikkel_type"])
     );
   }
   /* transactionClient.create({
