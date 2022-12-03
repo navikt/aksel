@@ -13,7 +13,6 @@ import { PreviewSuspense } from "next-sanity/preview";
 import { lazy, useEffect, useState } from "react";
 import { getClient } from "@/sanity-client";
 import Snowfall from "react-snowfall";
-import { SantaHat } from "components/assets/SantaHat";
 
 const portalkort = [
   {
@@ -102,7 +101,7 @@ const portalkort = [
   },
 ];
 
-const Portaler = ({ xmas }: { xmas: boolean }) => {
+const Portaler = () => {
   const logPortalCard = (e) =>
     logNav(
       "portal-kort",
@@ -135,9 +134,6 @@ const Portaler = ({ xmas }: { xmas: boolean }) => {
                   className="focus-visible:shadow-focus-inverted group flex items-center gap-2 py-1 focus:outline-none md:w-auto xl:gap-3"
                 >
                   <div className="group-hover:text-deepblue-900 relative grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white">
-                    {y === 0 && xmas && (
-                      <SantaHat className="absolute -top-5 -left-[18px] -rotate-12 scale-x-110" />
-                    )}
                     {x.icon}
                   </div>
                   <div className="pr-8 text-white">
@@ -244,7 +240,7 @@ const Forside = ({
                     <SanityBlockContent blocks={tekster.beskrivelse} />
                   </div>
                 </div>
-                <Portaler xmas={xmas} />
+                <Portaler />
               </div>
             </div>
           </div>
