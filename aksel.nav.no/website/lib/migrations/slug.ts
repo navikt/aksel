@@ -19,19 +19,18 @@ const main = async () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const transactionClient = noCdnClient(token).transaction();
 
-  const docs = await noCdnClient(token).fetch(`*[_type in ["aksel_artikkel"]]`);
+  const docs = await noCdnClient(token).fetch(
+    `*[_type in ["komponent_artikkel"]]`
+  );
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const newData = [];
 
   docs.forEach((data) => {
-    data?.slug?.current &&
-    data?.slug?.current.startsWith("artikkel/") &&
-    (!data?.slug_v2 || data?.slug_v2?.current !== data?.slug?.current)
+    data?.slug?.current
       ? newData.push({
           _id: data._id,
-          old: data.slug.current,
-          slug: {
+          slug_v2: {
             _type: "slug",
             current: data.slug.current.replace(
               "artikkel/",
@@ -45,17 +44,6 @@ const main = async () => {
   for (const data of newData) {
     const id = data._id;
     delete data._id;
-    transactionClient.create({
-      _type: "redirect",
-      source: `/${data.old}`,
-      destination: `/${data.slug.current}`,
-      permanent: true,
-    });
-    console.log({
-      source: `/${data.old}`,
-      destination: `/${data.slug.current}`,
-    });
-    delete data.old;
     transactionClient.patch(id, (p) =>
       p.set({ ...data }).unset(["slug_v2", "isMigrated"])
     );
@@ -65,34 +53,10 @@ const main = async () => {
     source: `/tema`,
     destination: `/god-praksis`,
     permanent: true,
-  });
-  transactionClient.create({
-    _type: "redirect",
-    source: `/tema/innholdsarbeid`,
-    destination: `/god-praksis/innholdsarbeid`,
-    permanent: true,
-  });
-  transactionClient.create({
-    _type: "redirect",
-    source: `/tema/brukerinnsikt`,
-    destination: `/god-praksis/brukerinnsikt`,
-    permanent: true,
-  });
-  transactionClient.create({
-    _type: "redirect",
-    source: `/tema/universell-utforming`,
-    destination: `/god-praksis/universell-utforming`,
-    permanent: true,
-  });
-  transactionClient.create({
-    _type: "redirect",
-    source: `/tema/interne-flater`,
-    destination: `/god-praksis/interne-flater`,
-    permanent: true,
-  }); */
+  });*/
 
   await transactionClient
-    .commit({ autoGenerateArrayKeys: true, dryRun: false })
+    .commit({ autoGenerateArrayKeys: true, dryRun: true })
     .then((a) => console.log(`Updated! \n${JSON.stringify(a, null, 2)}`))
     .catch((e) => console.error(e.message));
 };

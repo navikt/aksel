@@ -7,6 +7,8 @@ if (!sanityToken) {
   throw new Error("Could not find token from SANITY_TOKEN");
 }
 
+console.log(sanityToken);
+
 const client = sanityClient({
   projectId: SanityConfig.api.projectId,
   dataset: SanityConfig.api.dataset,
@@ -45,4 +47,4 @@ const main = async () => {
   });
 };
 
-main();
+/* main(); */

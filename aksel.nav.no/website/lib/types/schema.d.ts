@@ -169,6 +169,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
+       * url (v2) - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
+        current: string;
+      };
+
+      /**
        * Metadata - `Object`
        */
       status?: {
@@ -411,6 +419,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
       };
 
       /**
+       * url (v2) - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
+        current: string;
+      };
+
+      /**
        * Metadata - `Object`
        */
       status?: {
@@ -479,6 +495,14 @@ Bruk en kort og konsis tittel om mulig. Blir satt som `<H1 />` på toppen av sid
        */
       slug?: {
         _type: "slug";
+        current: string;
+      };
+
+      /**
+       * url (v2) - `Slug`
+       */
+      slug_v2?: {
+        _type: "slug_v2";
         current: string;
       };
 
