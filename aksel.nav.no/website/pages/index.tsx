@@ -10,8 +10,10 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { akselForsideQuery } from "@/lib";
 import { PreviewSuspense } from "next-sanity/preview";
-import { lazy } from "react";
+import { lazy, useEffect, useState } from "react";
 import { getClient } from "@/sanity-client";
+import Snowfall from "react-snowfall";
+import { SantaHat } from "components/assets/SantaHat";
 
 const portalkort = [
   {
@@ -100,7 +102,7 @@ const portalkort = [
   },
 ];
 
-const Portaler = () => {
+const Portaler = ({ xmas }: { xmas: boolean }) => {
   const logPortalCard = (e) =>
     logNav(
       "portal-kort",
@@ -132,7 +134,10 @@ const Portaler = () => {
                   onClick={(e) => logPortalCard(e)}
                   className="focus-visible:shadow-focus-inverted group flex items-center gap-2 py-1 focus:outline-none md:w-auto xl:gap-3"
                 >
-                  <div className="group-hover:text-deepblue-900 grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white">
+                  <div className="group-hover:text-deepblue-900 relative grid aspect-square w-12 shrink-0 place-items-center rounded-full bg-blue-400 text-white group-hover:bg-white">
+                    {y === 0 && xmas && (
+                      <SantaHat className="absolute -top-5 -left-[18px] -rotate-12 scale-x-110" />
+                    )}
                     {x.icon}
                   </div>
                   <div className="pr-8 text-white">
@@ -166,6 +171,17 @@ const Forside = ({
   temaer,
   bloggs,
 }: PageProps): JSX.Element => {
+  const [xmas, setXmas] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setXmas(true), 10000);
+
+    return () => {
+      clearTimeout(t);
+      setXmas(false);
+    };
+  }, []);
+
   const hasPrinsipp1 =
     prinsipp_1 &&
     prinsipp_1?.hovedside &&
@@ -207,6 +223,17 @@ const Forside = ({
         <AkselHeader variant="forside" />
         <main tabIndex={-1} id="hovedinnhold" className="focus:outline-none">
           <div className="bg-deepblue-900 from-deepblue-900 via-deepblue-900/50 to-deepblue-700 relative bg-gradient-to-b px-4 pt-16 pb-24 text-white">
+            {xmas && (
+              <div aria-hidden>
+                <Snowfall
+                  color="rgba(230, 241, 248, 0.3)"
+                  speed={[0.2, 1.0]}
+                  snowflakeCount={100}
+                  style={{ height: "120%" }}
+                  radius={[0.5, 2.0]}
+                />
+              </div>
+            )}
             <div className="dynamic-wrapper">
               <div className="gap-6 lg:grid lg:grid-cols-3">
                 <div className="max-w-prose pr-6 lg:col-span-2">
@@ -217,7 +244,7 @@ const Forside = ({
                     <SanityBlockContent blocks={tekster.beskrivelse} />
                   </div>
                 </div>
-                <Portaler />
+                <Portaler xmas={xmas} />
               </div>
             </div>
           </div>

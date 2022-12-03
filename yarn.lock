@@ -23813,6 +23813,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-snowfall@npm:1.2.1":
+  version: 1.2.1
+  resolution: "react-snowfall@npm:1.2.1"
+  dependencies:
+    react-fast-compare: ^3.2.0
+  peerDependencies:
+    react: ^16.8 || 17.x || 18.x
+    react-dom: ^16.8 || 17.x || 18.x
+  checksum: 297ca9846611cbf2e013298def259486e489c9d56918f7b38e67e22e35e7900d3987e44d9115f8ba6e009aa0c6e9aeaf1aeec02b5fd1c7aa82538a94dcb433f6
+  languageName: node
+  linkType: hard
+
 "react-split-pane@npm:^0.1.84":
   version: 0.1.92
   resolution: "react-split-pane@npm:0.1.92"
@@ -28866,6 +28878,7 @@ __metadata:
     react-dom: ^18.0.0
     react-instantsearch-hooks-web: ^6.26.0
     react-modal: 3.15.1
+    react-snowfall: 1.2.1
     sanity: 3.0.0-rc.3
     sanity-codegen: 0.9.8
     sanity-plugin-asset-source-unsplash: ^1.0.0
