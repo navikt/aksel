@@ -20,3 +20,12 @@
   box-shadow: 0 0 0 1px var(--a-border-strong);
   color: var(--a-text-default);
 }
+
+.aksel.ReactModal__Body--open {
+  overflow: hidden;
+  max-height: 100vh;
+}
+
+.header-modal__overlay {
+  @apply bg-surface-backdrop fixed inset-0 grid place-items-center md:hidden;
+}
