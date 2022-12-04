@@ -108,7 +108,6 @@ const DateInput: DateInputType = forwardRef<HTMLInputElement, DateInputProps>(
             autoComplete="off"
             aria-controls={ariaId}
             className={cl(
-              className,
               "navds-date__field-input",
               "navds-text-field__input",
               "navds-body-short",

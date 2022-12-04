@@ -1,5 +1,14 @@
 # @navikt/ds-react
 
+## 2.0.6
+
+### Patch Changes
+
+- DateInput hadde duplikat className satt
+
+- Updated dependencies []:
+  - @navikt/ds-icons@2.0.6
+
 ## 2.0.5
 
 ### Patch Changes
