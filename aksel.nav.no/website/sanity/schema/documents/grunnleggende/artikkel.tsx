@@ -4,10 +4,11 @@ import { artikkelPreview } from "../presets/artikkel-preview";
 import { hiddenFields } from "../presets/hidden-fields";
 import { editorField } from "../presets/editors";
 import { titleField } from "../presets/title-field";
-import { sanitySlug } from "../presets/slug";
+import { kategoriSlug, sanitySlug } from "../presets/slug";
 import { grunnleggendeKategorier } from "../../../config";
 
-const prefix = "designsystem/side/";
+const prefixOld = "designsystem/side/";
+const prefix = "grunnleggende/";
 
 export const GrunnleggendeArtikkel = defineType({
   title: "Ds-Artikkel",
@@ -32,7 +33,8 @@ export const GrunnleggendeArtikkel = defineType({
         layout: "radio",
       },
     }),
-    sanitySlug(prefix, 3),
+    sanitySlug(prefixOld, 3),
+    kategoriSlug(prefix),
     defineField({
       title: "Innhold",
       description:

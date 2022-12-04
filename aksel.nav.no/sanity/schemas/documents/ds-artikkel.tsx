@@ -3,12 +3,14 @@ import {
   editorField,
   groups,
   innholdFieldNew,
+  kategoriSlug,
   publishedAtField,
   sanitySlug,
   titleField,
 } from "@/lib";
 
-const prefix = "designsystem/side/";
+const prefixOld = "designsystem/side/";
+const prefix = "grunnleggende/";
 
 export default {
   title: "Artikkel",
@@ -20,14 +22,8 @@ export default {
     publishedAtField,
     editorField,
     titleField,
-    sanitySlug(prefix, 3),
-    {
-      title: "url (v2)",
-      name: "slug_v2",
-      type: "slug",
-      hidden: ({ currentUser }) =>
-        !currentUser.roles.find((x) => x.name === "developer"),
-    },
+    sanitySlug(prefixOld, 3),
+    kategoriSlug(prefix),
     {
       title: "Kategori",
       name: "kategori",
