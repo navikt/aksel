@@ -25,7 +25,7 @@ const Page = ({
     <>
       <Header />
       <div className="bg-bg-default flex w-full flex-col items-center">
-        <div className="flex w-full max-w-screen-2xl">
+        <div className="flex w-full max-w-screen-xl">
           <Sidebar kategori="Komponenter" links={sidebar} />
           <div className="relative w-full">
             <main

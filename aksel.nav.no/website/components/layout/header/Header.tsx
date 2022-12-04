@@ -33,13 +33,18 @@ const LinkElement = ({ name, href }) => {
   );
 };
 
-export const Header = () => {
+export const Header = ({ blogg = false }: { blogg?: boolean }) => {
   return (
     <>
       <a className="skiplink" href="#hovedinnhold" tabIndex={-1}>
         Hopp til innhold
       </a>
-      <header className="bg-surface-default z-20 flex h-20 items-center">
+      <header
+        className={cl("z-20 flex h-20 items-center", {
+          "bg-surface-warning-subtle": blogg,
+          "bg-surface-default": !blogg,
+        })}
+      >
         <div className="xs:pr-6 xs:pl-4 mx-auto flex h-11 w-full max-w-7xl items-center justify-between pr-4 pl-4">
           <Link href="/" passHref>
             <a

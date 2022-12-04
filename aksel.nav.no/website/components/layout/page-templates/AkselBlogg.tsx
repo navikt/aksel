@@ -58,7 +58,7 @@ const AkselBloggTemplate = ({
         />
       </Head>
 
-      <Header />
+      <Header blogg />
       <main
         tabIndex={-1}
         id="hovedinnhold"

@@ -254,7 +254,8 @@ export const dsDocuments = `*[_type in ["komponent_artikkel", "ds_artikkel"]]{ .
 const sidebarQuery = `"sidebar": *[_type == $type && defined(kategori)] {
   heading,
   "slug": slug_v2.current,
-  kategori
+  kategori,
+  "tag": status.tag,
 }`;
 
 export const komponentQuery = `{
@@ -267,7 +268,6 @@ export const komponentQuery = `{
         "github_link": @->github_link,
         "status": @->status
       },
-      "tag": status.tag,
       intro{
         ...,
         body[]{
